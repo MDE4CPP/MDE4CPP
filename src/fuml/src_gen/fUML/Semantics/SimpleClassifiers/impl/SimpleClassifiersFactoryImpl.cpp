@@ -17,11 +17,11 @@
 #include "fUML/Semantics/SimpleClassifiers/impl/StructuredValueImpl.hpp"
 #include "fUML/Semantics/SimpleClassifiers/impl/UnlimitedNaturalValueImpl.hpp"
 
-#include "fUML/Semantics/SimpleClassifiers/SignalInstance.hpp"
-#include "fUML/Semantics/SimpleClassifiers/FeatureValue.hpp"
-#include "fUML/Semantics/Values/Value.hpp"
-#include "fUML/Semantics/Values/Value.hpp"
-#include "fUML/Semantics/Values/Value.hpp"
+#include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
+#include "fUML/Semantics/Activities/ObjectToken.hpp"
+#include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
+#include "fUML/Semantics/CommonBehavior/ObjectActivation.hpp"
+#include "fUML/Semantics/CommonBehavior/ParameterValue.hpp"
 
 
 using namespace fUML::Semantics::SimpleClassifiers;
@@ -71,22 +71,22 @@ std::shared_ptr<ecore::EObject> SimpleClassifiersFactoryImpl::create(const int m
 				switch(referenceID)
 				{
 					//BooleanValue has value as a containment
-					case  SimpleClassifiersPackage::OBJECTTOKEN_ATTRIBUTE_VALUE:	
+					case  fUML::Semantics::Activities::ActivitiesPackage::OBJECTTOKEN_ATTRIBUTE_VALUE:	
 					{
 						auto castedContainer = std::dynamic_pointer_cast<fUML::Semantics::Activities::ObjectToken>(container);
-						return this->createBooleanValue_as_value_in_fUML::Semantics::Activities::ObjectToken(castedContainer,metaElementID);
+						return this->createBooleanValue_as_value_in_ObjectToken(castedContainer,metaElementID);
 					}
 					//BooleanValue has values as a containment
-					case  SimpleClassifiersPackage::FEATUREVALUE_ATTRIBUTE_VALUES:	
+					case  fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::FEATUREVALUE_ATTRIBUTE_VALUES:	
 					{
 						auto castedContainer = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::FeatureValue>(container);
-						return this->createBooleanValue_as_values_in_fUML::Semantics::SimpleClassifiers::FeatureValue(castedContainer,metaElementID);
+						return this->createBooleanValue_as_values_in_FeatureValue(castedContainer,metaElementID);
 					}
 					//BooleanValue has values as a containment
-					case  SimpleClassifiersPackage::PARAMETERVALUE_ATTRIBUTE_VALUES:	
+					case  fUML::Semantics::CommonBehavior::CommonBehaviorPackage::PARAMETERVALUE_ATTRIBUTE_VALUES:	
 					{
 						auto castedContainer = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::ParameterValue>(container);
-						return this->createBooleanValue_as_values_in_fUML::Semantics::CommonBehavior::ParameterValue(castedContainer,metaElementID);
+						return this->createBooleanValue_as_values_in_ParameterValue(castedContainer,metaElementID);
 					}
 					default:
 						std::cerr << __PRETTY_FUNCTION__ << "ERROR: Reference type not found." << std::endl;
@@ -105,22 +105,22 @@ std::shared_ptr<ecore::EObject> SimpleClassifiersFactoryImpl::create(const int m
 				switch(referenceID)
 				{
 					//DataValue has value as a containment
-					case  SimpleClassifiersPackage::OBJECTTOKEN_ATTRIBUTE_VALUE:	
+					case  fUML::Semantics::Activities::ActivitiesPackage::OBJECTTOKEN_ATTRIBUTE_VALUE:	
 					{
 						auto castedContainer = std::dynamic_pointer_cast<fUML::Semantics::Activities::ObjectToken>(container);
-						return this->createDataValue_as_value_in_fUML::Semantics::Activities::ObjectToken(castedContainer,metaElementID);
+						return this->createDataValue_as_value_in_ObjectToken(castedContainer,metaElementID);
 					}
 					//DataValue has values as a containment
-					case  SimpleClassifiersPackage::FEATUREVALUE_ATTRIBUTE_VALUES:	
+					case  fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::FEATUREVALUE_ATTRIBUTE_VALUES:	
 					{
 						auto castedContainer = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::FeatureValue>(container);
-						return this->createDataValue_as_values_in_fUML::Semantics::SimpleClassifiers::FeatureValue(castedContainer,metaElementID);
+						return this->createDataValue_as_values_in_FeatureValue(castedContainer,metaElementID);
 					}
 					//DataValue has values as a containment
-					case  SimpleClassifiersPackage::PARAMETERVALUE_ATTRIBUTE_VALUES:	
+					case  fUML::Semantics::CommonBehavior::CommonBehaviorPackage::PARAMETERVALUE_ATTRIBUTE_VALUES:	
 					{
 						auto castedContainer = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::ParameterValue>(container);
-						return this->createDataValue_as_values_in_fUML::Semantics::CommonBehavior::ParameterValue(castedContainer,metaElementID);
+						return this->createDataValue_as_values_in_ParameterValue(castedContainer,metaElementID);
 					}
 					default:
 						std::cerr << __PRETTY_FUNCTION__ << "ERROR: Reference type not found." << std::endl;
@@ -139,22 +139,22 @@ std::shared_ptr<ecore::EObject> SimpleClassifiersFactoryImpl::create(const int m
 				switch(referenceID)
 				{
 					//EnumerationValue has value as a containment
-					case  SimpleClassifiersPackage::OBJECTTOKEN_ATTRIBUTE_VALUE:	
+					case  fUML::Semantics::Activities::ActivitiesPackage::OBJECTTOKEN_ATTRIBUTE_VALUE:	
 					{
 						auto castedContainer = std::dynamic_pointer_cast<fUML::Semantics::Activities::ObjectToken>(container);
-						return this->createEnumerationValue_as_value_in_fUML::Semantics::Activities::ObjectToken(castedContainer,metaElementID);
+						return this->createEnumerationValue_as_value_in_ObjectToken(castedContainer,metaElementID);
 					}
 					//EnumerationValue has values as a containment
-					case  SimpleClassifiersPackage::FEATUREVALUE_ATTRIBUTE_VALUES:	
+					case  fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::FEATUREVALUE_ATTRIBUTE_VALUES:	
 					{
 						auto castedContainer = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::FeatureValue>(container);
-						return this->createEnumerationValue_as_values_in_fUML::Semantics::SimpleClassifiers::FeatureValue(castedContainer,metaElementID);
+						return this->createEnumerationValue_as_values_in_FeatureValue(castedContainer,metaElementID);
 					}
 					//EnumerationValue has values as a containment
-					case  SimpleClassifiersPackage::PARAMETERVALUE_ATTRIBUTE_VALUES:	
+					case  fUML::Semantics::CommonBehavior::CommonBehaviorPackage::PARAMETERVALUE_ATTRIBUTE_VALUES:	
 					{
 						auto castedContainer = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::ParameterValue>(container);
-						return this->createEnumerationValue_as_values_in_fUML::Semantics::CommonBehavior::ParameterValue(castedContainer,metaElementID);
+						return this->createEnumerationValue_as_values_in_ParameterValue(castedContainer,metaElementID);
 					}
 					default:
 						std::cerr << __PRETTY_FUNCTION__ << "ERROR: Reference type not found." << std::endl;
@@ -187,22 +187,22 @@ std::shared_ptr<ecore::EObject> SimpleClassifiersFactoryImpl::create(const int m
 				switch(referenceID)
 				{
 					//IntegerValue has value as a containment
-					case  SimpleClassifiersPackage::OBJECTTOKEN_ATTRIBUTE_VALUE:	
+					case  fUML::Semantics::Activities::ActivitiesPackage::OBJECTTOKEN_ATTRIBUTE_VALUE:	
 					{
 						auto castedContainer = std::dynamic_pointer_cast<fUML::Semantics::Activities::ObjectToken>(container);
-						return this->createIntegerValue_as_value_in_fUML::Semantics::Activities::ObjectToken(castedContainer,metaElementID);
+						return this->createIntegerValue_as_value_in_ObjectToken(castedContainer,metaElementID);
 					}
 					//IntegerValue has values as a containment
-					case  SimpleClassifiersPackage::FEATUREVALUE_ATTRIBUTE_VALUES:	
+					case  fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::FEATUREVALUE_ATTRIBUTE_VALUES:	
 					{
 						auto castedContainer = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::FeatureValue>(container);
-						return this->createIntegerValue_as_values_in_fUML::Semantics::SimpleClassifiers::FeatureValue(castedContainer,metaElementID);
+						return this->createIntegerValue_as_values_in_FeatureValue(castedContainer,metaElementID);
 					}
 					//IntegerValue has values as a containment
-					case  SimpleClassifiersPackage::PARAMETERVALUE_ATTRIBUTE_VALUES:	
+					case  fUML::Semantics::CommonBehavior::CommonBehaviorPackage::PARAMETERVALUE_ATTRIBUTE_VALUES:	
 					{
 						auto castedContainer = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::ParameterValue>(container);
-						return this->createIntegerValue_as_values_in_fUML::Semantics::CommonBehavior::ParameterValue(castedContainer,metaElementID);
+						return this->createIntegerValue_as_values_in_ParameterValue(castedContainer,metaElementID);
 					}
 					default:
 						std::cerr << __PRETTY_FUNCTION__ << "ERROR: Reference type not found." << std::endl;
@@ -221,22 +221,22 @@ std::shared_ptr<ecore::EObject> SimpleClassifiersFactoryImpl::create(const int m
 				switch(referenceID)
 				{
 					//RealValue has value as a containment
-					case  SimpleClassifiersPackage::OBJECTTOKEN_ATTRIBUTE_VALUE:	
+					case  fUML::Semantics::Activities::ActivitiesPackage::OBJECTTOKEN_ATTRIBUTE_VALUE:	
 					{
 						auto castedContainer = std::dynamic_pointer_cast<fUML::Semantics::Activities::ObjectToken>(container);
-						return this->createRealValue_as_value_in_fUML::Semantics::Activities::ObjectToken(castedContainer,metaElementID);
+						return this->createRealValue_as_value_in_ObjectToken(castedContainer,metaElementID);
 					}
 					//RealValue has values as a containment
-					case  SimpleClassifiersPackage::FEATUREVALUE_ATTRIBUTE_VALUES:	
+					case  fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::FEATUREVALUE_ATTRIBUTE_VALUES:	
 					{
 						auto castedContainer = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::FeatureValue>(container);
-						return this->createRealValue_as_values_in_fUML::Semantics::SimpleClassifiers::FeatureValue(castedContainer,metaElementID);
+						return this->createRealValue_as_values_in_FeatureValue(castedContainer,metaElementID);
 					}
 					//RealValue has values as a containment
-					case  SimpleClassifiersPackage::PARAMETERVALUE_ATTRIBUTE_VALUES:	
+					case  fUML::Semantics::CommonBehavior::CommonBehaviorPackage::PARAMETERVALUE_ATTRIBUTE_VALUES:	
 					{
 						auto castedContainer = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::ParameterValue>(container);
-						return this->createRealValue_as_values_in_fUML::Semantics::CommonBehavior::ParameterValue(castedContainer,metaElementID);
+						return this->createRealValue_as_values_in_ParameterValue(castedContainer,metaElementID);
 					}
 					default:
 						std::cerr << __PRETTY_FUNCTION__ << "ERROR: Reference type not found." << std::endl;
@@ -255,28 +255,28 @@ std::shared_ptr<ecore::EObject> SimpleClassifiersFactoryImpl::create(const int m
 				switch(referenceID)
 				{
 					//SignalInstance has eventPool as a containment
-					case  SimpleClassifiersPackage::OBJECTACTIVATION_ATTRIBUTE_EVENTPOOL:	
+					case  fUML::Semantics::CommonBehavior::CommonBehaviorPackage::OBJECTACTIVATION_ATTRIBUTE_EVENTPOOL:	
 					{
 						auto castedContainer = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::ObjectActivation>(container);
-						return this->createSignalInstance_as_eventPool_in_fUML::Semantics::CommonBehavior::ObjectActivation(castedContainer,metaElementID);
+						return this->createSignalInstance_as_eventPool_in_ObjectActivation(castedContainer,metaElementID);
 					}
 					//SignalInstance has value as a containment
-					case  SimpleClassifiersPackage::OBJECTTOKEN_ATTRIBUTE_VALUE:	
+					case  fUML::Semantics::Activities::ActivitiesPackage::OBJECTTOKEN_ATTRIBUTE_VALUE:	
 					{
 						auto castedContainer = std::dynamic_pointer_cast<fUML::Semantics::Activities::ObjectToken>(container);
-						return this->createSignalInstance_as_value_in_fUML::Semantics::Activities::ObjectToken(castedContainer,metaElementID);
+						return this->createSignalInstance_as_value_in_ObjectToken(castedContainer,metaElementID);
 					}
 					//SignalInstance has values as a containment
-					case  SimpleClassifiersPackage::FEATUREVALUE_ATTRIBUTE_VALUES:	
+					case  fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::FEATUREVALUE_ATTRIBUTE_VALUES:	
 					{
 						auto castedContainer = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::FeatureValue>(container);
-						return this->createSignalInstance_as_values_in_fUML::Semantics::SimpleClassifiers::FeatureValue(castedContainer,metaElementID);
+						return this->createSignalInstance_as_values_in_FeatureValue(castedContainer,metaElementID);
 					}
 					//SignalInstance has values as a containment
-					case  SimpleClassifiersPackage::PARAMETERVALUE_ATTRIBUTE_VALUES:	
+					case  fUML::Semantics::CommonBehavior::CommonBehaviorPackage::PARAMETERVALUE_ATTRIBUTE_VALUES:	
 					{
 						auto castedContainer = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::ParameterValue>(container);
-						return this->createSignalInstance_as_values_in_fUML::Semantics::CommonBehavior::ParameterValue(castedContainer,metaElementID);
+						return this->createSignalInstance_as_values_in_ParameterValue(castedContainer,metaElementID);
 					}
 					default:
 						std::cerr << __PRETTY_FUNCTION__ << "ERROR: Reference type not found." << std::endl;
@@ -295,22 +295,22 @@ std::shared_ptr<ecore::EObject> SimpleClassifiersFactoryImpl::create(const int m
 				switch(referenceID)
 				{
 					//StringValue has value as a containment
-					case  SimpleClassifiersPackage::OBJECTTOKEN_ATTRIBUTE_VALUE:	
+					case  fUML::Semantics::Activities::ActivitiesPackage::OBJECTTOKEN_ATTRIBUTE_VALUE:	
 					{
 						auto castedContainer = std::dynamic_pointer_cast<fUML::Semantics::Activities::ObjectToken>(container);
-						return this->createStringValue_as_value_in_fUML::Semantics::Activities::ObjectToken(castedContainer,metaElementID);
+						return this->createStringValue_as_value_in_ObjectToken(castedContainer,metaElementID);
 					}
 					//StringValue has values as a containment
-					case  SimpleClassifiersPackage::FEATUREVALUE_ATTRIBUTE_VALUES:	
+					case  fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::FEATUREVALUE_ATTRIBUTE_VALUES:	
 					{
 						auto castedContainer = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::FeatureValue>(container);
-						return this->createStringValue_as_values_in_fUML::Semantics::SimpleClassifiers::FeatureValue(castedContainer,metaElementID);
+						return this->createStringValue_as_values_in_FeatureValue(castedContainer,metaElementID);
 					}
 					//StringValue has values as a containment
-					case  SimpleClassifiersPackage::PARAMETERVALUE_ATTRIBUTE_VALUES:	
+					case  fUML::Semantics::CommonBehavior::CommonBehaviorPackage::PARAMETERVALUE_ATTRIBUTE_VALUES:	
 					{
 						auto castedContainer = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::ParameterValue>(container);
-						return this->createStringValue_as_values_in_fUML::Semantics::CommonBehavior::ParameterValue(castedContainer,metaElementID);
+						return this->createStringValue_as_values_in_ParameterValue(castedContainer,metaElementID);
 					}
 					default:
 						std::cerr << __PRETTY_FUNCTION__ << "ERROR: Reference type not found." << std::endl;
@@ -329,22 +329,22 @@ std::shared_ptr<ecore::EObject> SimpleClassifiersFactoryImpl::create(const int m
 				switch(referenceID)
 				{
 					//UnlimitedNaturalValue has value as a containment
-					case  SimpleClassifiersPackage::OBJECTTOKEN_ATTRIBUTE_VALUE:	
+					case  fUML::Semantics::Activities::ActivitiesPackage::OBJECTTOKEN_ATTRIBUTE_VALUE:	
 					{
 						auto castedContainer = std::dynamic_pointer_cast<fUML::Semantics::Activities::ObjectToken>(container);
-						return this->createUnlimitedNaturalValue_as_value_in_fUML::Semantics::Activities::ObjectToken(castedContainer,metaElementID);
+						return this->createUnlimitedNaturalValue_as_value_in_ObjectToken(castedContainer,metaElementID);
 					}
 					//UnlimitedNaturalValue has values as a containment
-					case  SimpleClassifiersPackage::FEATUREVALUE_ATTRIBUTE_VALUES:	
+					case  fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::FEATUREVALUE_ATTRIBUTE_VALUES:	
 					{
 						auto castedContainer = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::FeatureValue>(container);
-						return this->createUnlimitedNaturalValue_as_values_in_fUML::Semantics::SimpleClassifiers::FeatureValue(castedContainer,metaElementID);
+						return this->createUnlimitedNaturalValue_as_values_in_FeatureValue(castedContainer,metaElementID);
 					}
 					//UnlimitedNaturalValue has values as a containment
-					case  SimpleClassifiersPackage::PARAMETERVALUE_ATTRIBUTE_VALUES:	
+					case  fUML::Semantics::CommonBehavior::CommonBehaviorPackage::PARAMETERVALUE_ATTRIBUTE_VALUES:	
 					{
 						auto castedContainer = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::ParameterValue>(container);
-						return this->createUnlimitedNaturalValue_as_values_in_fUML::Semantics::CommonBehavior::ParameterValue(castedContainer,metaElementID);
+						return this->createUnlimitedNaturalValue_as_values_in_ParameterValue(castedContainer,metaElementID);
 					}
 					default:
 						std::cerr << __PRETTY_FUNCTION__ << "ERROR: Reference type not found." << std::endl;

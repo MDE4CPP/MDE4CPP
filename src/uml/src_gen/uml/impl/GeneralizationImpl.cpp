@@ -101,10 +101,10 @@ GeneralizationImpl& GeneralizationImpl::operator=(const GeneralizationImpl & obj
 	m_isSubstitutable = obj.getIsSubstitutable();
 
 	//copy references with no containment (soft copy)
-	std::shared_ptr<Bag<uml::GeneralizationSet>> _generalizationSet = obj.getGeneralizationSet();
-	m_generalizationSet.reset(new Bag<uml::GeneralizationSet>(*(obj.getGeneralizationSet().get())));
+	m_generalizationSet  = obj.getGeneralizationSet();
 	m_specific  = obj.getSpecific();
 	//Clone references with containment (deep copy)
+	//clone reference 'general'
 	if(obj.getGeneral()!=nullptr)
 	{
 		m_general = std::dynamic_pointer_cast<uml::Classifier>(obj.getGeneral()->copy());
@@ -154,14 +154,11 @@ Getter & Setter for reference general
 */
 std::shared_ptr<uml::Classifier> GeneralizationImpl::getGeneral() const
 {
-//assert(m_general);
     return m_general;
 }
 void GeneralizationImpl::setGeneral(std::shared_ptr<uml::Classifier> _general)
 {
     m_general = _general;
-	
-	
 	
 }
 
@@ -177,7 +174,6 @@ std::shared_ptr<Bag<uml::GeneralizationSet>> GeneralizationImpl::getGeneralizati
 		
 		
 	}
-
     return m_generalizationSet;
 }
 
@@ -188,16 +184,11 @@ Getter & Setter for reference specific
 */
 std::weak_ptr<uml::Classifier> GeneralizationImpl::getSpecific() const
 {
-//assert(m_specific);
     return m_specific;
 }
 void GeneralizationImpl::setSpecific(std::weak_ptr<uml::Classifier> _specific)
 {
     m_specific = _specific;
-	
-	
-	m_owner = this->getSpecific().lock();
-	
 	
 }
 
@@ -251,7 +242,7 @@ std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> GeneralizationImpl::get
 		#endif
 		
 		/*SubsetUnion*/
-		m_source->initSubsetUnion(getRelatedElement());
+		getSource()->initSubsetUnion(getRelatedElement());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value SubsetUnion: " << "m_source - SubsetUnion<uml::Element, uml::Element >(getRelatedElement())" << std::endl;
 		#endif
@@ -271,7 +262,7 @@ std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> GeneralizationImpl::get
 		#endif
 		
 		/*SubsetUnion*/
-		m_target->initSubsetUnion(getRelatedElement());
+		getTarget()->initSubsetUnion(getRelatedElement());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value SubsetUnion: " << "m_target - SubsetUnion<uml::Element, uml::Element >(getRelatedElement())" << std::endl;
 		#endif

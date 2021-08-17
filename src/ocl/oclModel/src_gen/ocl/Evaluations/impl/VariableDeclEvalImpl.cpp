@@ -120,7 +120,6 @@ Getter & Setter for reference initExp
 */
 std::shared_ptr<ocl::Evaluations::OclExpEval> VariableDeclEvalImpl::getInitExp() const
 {
-//assert(m_initExp);
     return m_initExp;
 }
 void VariableDeclEvalImpl::setInitExp(std::shared_ptr<ocl::Evaluations::OclExpEval> _initExp)
@@ -135,7 +134,6 @@ Getter & Setter for reference name
 */
 std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> VariableDeclEvalImpl::getName() const
 {
-//assert(m_name);
     return m_name;
 }
 void VariableDeclEvalImpl::setName(std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> _name)

@@ -183,6 +183,7 @@ IterateExpImpl& IterateExpImpl::operator=(const IterateExpImpl & obj)
 
 	//copy references with no containment (soft copy)
 	//Clone references with containment (deep copy)
+	//clone reference 'result'
 	if(obj.getResult()!=nullptr)
 	{
 		m_result = std::dynamic_pointer_cast<ocl::Expressions::Variable>(obj.getResult()->copy());
@@ -220,7 +221,6 @@ Getter & Setter for reference result
 */
 std::shared_ptr<ocl::Expressions::Variable> IterateExpImpl::getResult() const
 {
-
     return m_result;
 }
 void IterateExpImpl::setResult(std::shared_ptr<ocl::Expressions::Variable> _result)

@@ -102,8 +102,7 @@ ObjectValueImpl& ObjectValueImpl::operator=(const ObjectValueImpl & obj)
 	//Clone Attributes with (deep copy)
 
 	//copy references with no containment (soft copy)
-	std::shared_ptr<Bag<ocl::Values::LocalSnapshot>> _history = obj.getHistory();
-	m_history.reset(new Bag<ocl::Values::LocalSnapshot>(*(obj.getHistory().get())));
+	m_history  = obj.getHistory();
 	m_value  = obj.getValue();
 	//Clone references with containment (deep copy)
 	return *this;
@@ -249,7 +248,6 @@ std::shared_ptr<Bag<ocl::Values::LocalSnapshot>> ObjectValueImpl::getHistory() c
 		
 		
 	}
-
     return m_history;
 }
 
@@ -260,7 +258,6 @@ Getter & Setter for reference value
 */
 std::shared_ptr<ecore::EObject> ObjectValueImpl::getValue() const
 {
-//assert(m_value);
     return m_value;
 }
 void ObjectValueImpl::setValue(std::shared_ptr<ecore::EObject> _value)

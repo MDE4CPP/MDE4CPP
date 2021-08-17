@@ -16,92 +16,107 @@
 #include "ecore/EFactory.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
 
-namespace fUML::Semantics::Actions 
+namespace fUML::Semantics::Activities
 {
-	class ClauseActivation;
-	class Values;
-}
-namespace fUML::Semantics::Activities 
-{
-	class ActivityNodeActivation;
-}
-namespace fUML::Semantics::Values 
-{
-	class Value;
-}
-
-
-namespace fUML::Semantics::Activities 
-{
-	class ActivityEdgeInstance;
-	class ActivityNodeActivation;
 	class ActivityNodeActivationGroup;
-	class Token;
+	class ObjectToken;
 }
-namespace fUML::Semantics::CommonBehavior 
+namespace fUML::Semantics::CommonBehavior
 {
-	class Execution;
+	class ParameterValue;
 }
-namespace fUML::Semantics::StructuredClassifiers 
+namespace fUML::Semantics::SimpleClassifiers
 {
-	class ExtensionalValue;
+	class FeatureValue;
 }
-namespace fUML::Semantics::Values 
+
+
+namespace fUML::Semantics::Actions
 {
-	class Value;
+	class CallActionActivation;
+	class StructuredActivityNodeActivation;
+}
+namespace fUML::Semantics::CommonBehavior
+{
+	class ParameterValue;
+}
+namespace fUML::Semantics::Loci
+{
+	class Locus;
+}
+namespace fUML::Semantics::SimpleClassifiers
+{
+	class FeatureValue;
 }
 
 
 
 
-namespace fUML::Semantics::CommonBehavior 
+namespace fUML::Semantics::Actions
 {
-	class ClassifierBehaviorExecution;
-	class Execution;
+	class CallActionActivation;
+}
+namespace fUML::Semantics::Activities
+{
+	class DecisionNodeActivation;
+	class ObjectToken;
+}
+namespace fUML::Semantics::Loci
+{
+	class Locus;
+}
+namespace fUML::Semantics::SimpleClassifiers
+{
+	class FeatureValue;
+}
+namespace fUML::Semantics::StructuredClassifiers
+{
+	class Object;
+}
+
+
+
+
+namespace fUML::Semantics::Activities
+{
+	class ObjectToken;
+}
+namespace fUML::Semantics::CommonBehavior
+{
 	class ObjectActivation;
 	class ParameterValue;
 }
-namespace fUML::Semantics::StructuredClassifiers 
+
+
+namespace fUML::Semantics::Activities
 {
-	class ExtensionalValue;
+	class ObjectToken;
 }
-namespace fUML::Semantics::Values 
+namespace fUML::Semantics::CommonBehavior
 {
-	class Value;
+	class ParameterValue;
 }
-
-
-namespace fUML::Semantics::Loci 
+namespace fUML::Semantics::Loci
 {
-	class ExecutionFactory;
-	class Executor;
+	class Locus;
 }
-
-
-namespace fUML::Semantics::SimpleClassifiers 
+namespace fUML::Semantics::SimpleClassifiers
 {
 	class FeatureValue;
-	class SignalInstance;
-}
-namespace fUML::Semantics::Values 
-{
-	class Value;
 }
 
 
-namespace fUML::Semantics::StructuredClassifiers 
+namespace fUML::Semantics::Activities
 {
-	class ExtensionalValue;
+	class ObjectToken;
 }
-namespace fUML::Semantics::Values 
+namespace fUML::Semantics::CommonBehavior
 {
-	class Value;
+	class ParameterValue;
 }
-
-
-namespace fUML::Semantics::Values 
+namespace fUML::Semantics::SimpleClassifiers
 {
-	class Value;
+	class FeatureValue;
 }
 
 

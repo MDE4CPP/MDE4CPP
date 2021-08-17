@@ -453,33 +453,33 @@ namespace uml
 			Specifies the kind of aggregation that applies to the Property.
 			<p>From package UML::Classification.</p>
 			*/
-			 
+			
 			uml::AggregationKind m_aggregation = AggregationKind::NONE;
-			 
+			
 			std::string m_default = "";
 			/*!
 			If isComposite is true, the object containing the attribute is a container for the object or value contained in the attribute. This is a derived value, indicating whether the aggregation of the Property is composite or not.
 			<p>From package UML::Classification.</p>
 			*/
-			 
+			
 			bool m_isComposite = false;
 			/*!
 			Specifies whether the Property is derived, i.e., whether its value or values can be computed from other information.
 			<p>From package UML::Classification.</p>
 			*/
-			 
+			
 			bool m_isDerived = false;
 			/*!
 			Specifies whether the property is derived as the union of all of the Properties that are constrained to subset it.
 			<p>From package UML::Classification.</p>
 			*/
-			 
+			
 			bool m_isDerivedUnion = false;
 			/*!
 			True indicates this property can be used to uniquely identify an instance of the containing Class.
 			<p>From package UML::Classification.</p>
 			*/
-			 
+			
 			bool m_isID = false;
 			
 			

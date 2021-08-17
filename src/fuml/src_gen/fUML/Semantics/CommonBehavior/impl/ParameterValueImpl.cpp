@@ -92,21 +92,17 @@ ParameterValueImpl& ParameterValueImpl::operator=(const ParameterValueImpl & obj
 	//copy references with no containment (soft copy)
 	m_parameter  = obj.getParameter();
 	//Clone references with containment (deep copy)
-	std::shared_ptr<Bag<fUML::Semantics::Values::Value>> valuesContainer = getValues();
-	if(nullptr != valuesContainer )
+	//clone reference 'values'
+	std::shared_ptr<Bag<fUML::Semantics::Values::Value>> valuesList = obj.getValues();
+	if(valuesList)
 	{
-		int size = valuesContainer->size();
-		for(int i=0; i<size ; i++)
+		Bag<fUML::Semantics::Values::Value>::iterator valuesIter = valuesList->begin();
+		Bag<fUML::Semantics::Values::Value>::iterator valuesEnd = valuesList->end();
+		while (valuesIter != valuesEnd) 
 		{
-			auto _values=(*valuesContainer)[i];
-			if(nullptr != _values)
-			{
-				valuesContainer->push_back(std::dynamic_pointer_cast<fUML::Semantics::Values::Value>(_values->copy()));
-			}
-			else
-			{
-				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container values."<< std::endl;)
-			}
+			std::shared_ptr<fUML::Semantics::Values::Value> temp = std::dynamic_pointer_cast<fUML::Semantics::Values::Value>((*valuesIter)->copy());
+			getValues()->push_back(temp);
+			valuesIter++;
 		}
 	}
 	else
@@ -168,7 +164,6 @@ Getter & Setter for reference parameter
 */
 std::shared_ptr<uml::Parameter> ParameterValueImpl::getParameter() const
 {
-//assert(m_parameter);
     return m_parameter;
 }
 void ParameterValueImpl::setParameter(std::shared_ptr<uml::Parameter> _parameter)
@@ -189,7 +184,6 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> ParameterValueImpl::getValu
 		
 		
 	}
-
     return m_values;
 }
 

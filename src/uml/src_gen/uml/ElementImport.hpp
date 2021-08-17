@@ -170,13 +170,13 @@ namespace uml
 			Specifies the name that should be added to the importing Namespace in lieu of the name of the imported PackagableElement. The alias must not clash with any other member in the importing Namespace. By default, no alias is used.
 			<p>From package UML::CommonStructure.</p>
 			*/
-			 
+			
 			std::string m_alias = "";
 			/*!
 			Specifies the visibility of the imported PackageableElement within the importingNamespace, i.e., whether the  importedElement will in turn be visible to other Namespaces. If the ElementImport is public, the importedElement will be visible outside the importingNamespace while, if the ElementImport is private, it will not.
 			<p>From package UML::CommonStructure.</p>
 			*/
-			 
+			
 			uml::VisibilityKind m_visibility = VisibilityKind::PUBLIC;
 			
 			

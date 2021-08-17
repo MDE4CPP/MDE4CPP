@@ -113,9 +113,9 @@ namespace ecore
 			//*********************************
 			// Attribute Members
 			//*********************************
-			 
+			
 			std::string m_nsPrefix = "";
-			 
+			
 			std::string m_nsURI = "";
 			
 			

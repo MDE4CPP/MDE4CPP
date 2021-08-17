@@ -101,6 +101,7 @@ PackageMergeImpl& PackageMergeImpl::operator=(const PackageMergeImpl & obj)
 	//copy references with no containment (soft copy)
 	m_receivingPackage  = obj.getReceivingPackage();
 	//Clone references with containment (deep copy)
+	//clone reference 'mergedPackage'
 	if(obj.getMergedPackage()!=nullptr)
 	{
 		m_mergedPackage = std::dynamic_pointer_cast<uml::Package>(obj.getMergedPackage()->copy());
@@ -137,14 +138,11 @@ Getter & Setter for reference mergedPackage
 */
 std::shared_ptr<uml::Package> PackageMergeImpl::getMergedPackage() const
 {
-//assert(m_mergedPackage);
     return m_mergedPackage;
 }
 void PackageMergeImpl::setMergedPackage(std::shared_ptr<uml::Package> _mergedPackage)
 {
     m_mergedPackage = _mergedPackage;
-	
-	
 	
 }
 
@@ -154,16 +152,11 @@ Getter & Setter for reference receivingPackage
 */
 std::weak_ptr<uml::Package> PackageMergeImpl::getReceivingPackage() const
 {
-//assert(m_receivingPackage);
     return m_receivingPackage;
 }
 void PackageMergeImpl::setReceivingPackage(std::weak_ptr<uml::Package> _receivingPackage)
 {
     m_receivingPackage = _receivingPackage;
-	
-	
-	m_owner = this->getReceivingPackage().lock();
-	
 	
 }
 
@@ -217,7 +210,7 @@ std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> PackageMergeImpl::getSo
 		#endif
 		
 		/*SubsetUnion*/
-		m_source->initSubsetUnion(getRelatedElement());
+		getSource()->initSubsetUnion(getRelatedElement());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value SubsetUnion: " << "m_source - SubsetUnion<uml::Element, uml::Element >(getRelatedElement())" << std::endl;
 		#endif
@@ -237,7 +230,7 @@ std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> PackageMergeImpl::getTa
 		#endif
 		
 		/*SubsetUnion*/
-		m_target->initSubsetUnion(getRelatedElement());
+		getTarget()->initSubsetUnion(getRelatedElement());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value SubsetUnion: " << "m_target - SubsetUnion<uml::Element, uml::Element >(getRelatedElement())" << std::endl;
 		#endif

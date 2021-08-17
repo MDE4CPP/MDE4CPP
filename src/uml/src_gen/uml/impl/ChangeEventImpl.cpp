@@ -121,6 +121,7 @@ ChangeEventImpl& ChangeEventImpl::operator=(const ChangeEventImpl & obj)
 
 	//copy references with no containment (soft copy)
 	//Clone references with containment (deep copy)
+	//clone reference 'changeExpression'
 	if(obj.getChangeExpression()!=nullptr)
 	{
 		m_changeExpression = std::dynamic_pointer_cast<uml::ValueSpecification>(obj.getChangeExpression()->copy());
@@ -158,13 +159,11 @@ Getter & Setter for reference changeExpression
 */
 std::shared_ptr<uml::ValueSpecification> ChangeEventImpl::getChangeExpression() const
 {
-//assert(m_changeExpression);
     return m_changeExpression;
 }
 void ChangeEventImpl::setChangeExpression(std::shared_ptr<uml::ValueSpecification> _changeExpression)
 {
     m_changeExpression = _changeExpression;
-	
 	
 }
 

@@ -102,7 +102,7 @@ namespace ocl::Expressions
 			//*********************************
 			// Attribute Members
 			//*********************************
-			 
+			
 			bool m_isPre = false;
 			
 			

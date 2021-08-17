@@ -92,21 +92,17 @@ ETypeParameterImpl& ETypeParameterImpl::operator=(const ETypeParameterImpl & obj
 
 	//copy references with no containment (soft copy)
 	//Clone references with containment (deep copy)
-	std::shared_ptr<Bag<ecore::EGenericType>> eBoundsContainer = getEBounds();
-	if(nullptr != eBoundsContainer )
+	//clone reference 'eBounds'
+	std::shared_ptr<Bag<ecore::EGenericType>> eBoundsList = obj.getEBounds();
+	if(eBoundsList)
 	{
-		int size = eBoundsContainer->size();
-		for(int i=0; i<size ; i++)
+		Bag<ecore::EGenericType>::iterator eBoundsIter = eBoundsList->begin();
+		Bag<ecore::EGenericType>::iterator eBoundsEnd = eBoundsList->end();
+		while (eBoundsIter != eBoundsEnd) 
 		{
-			auto _eBounds=(*eBoundsContainer)[i];
-			if(nullptr != _eBounds)
-			{
-				eBoundsContainer->push_back(std::dynamic_pointer_cast<ecore::EGenericType>(_eBounds->copy()));
-			}
-			else
-			{
-				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container eBounds."<< std::endl;)
-			}
+			std::shared_ptr<ecore::EGenericType> temp = std::dynamic_pointer_cast<ecore::EGenericType>((*eBoundsIter)->copy());
+			getEBounds()->push_back(temp);
+			eBoundsIter++;
 		}
 	}
 	else
@@ -152,7 +148,6 @@ std::shared_ptr<Bag<ecore::EGenericType>> ETypeParameterImpl::getEBounds() const
 		
 		
 	}
-
     return m_eBounds;
 }
 

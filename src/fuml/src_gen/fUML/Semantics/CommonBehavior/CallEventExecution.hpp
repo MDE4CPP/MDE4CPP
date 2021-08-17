@@ -115,7 +115,7 @@ namespace fUML::Semantics::CommonBehavior
 			//*********************************
 			// Attribute Members
 			//*********************************
-			 
+			
 			bool m_callerSuspended = false;
 			
 			

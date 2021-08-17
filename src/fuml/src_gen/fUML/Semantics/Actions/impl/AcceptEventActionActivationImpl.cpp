@@ -200,7 +200,6 @@ Getter & Setter for reference eventAccepter
 */
 std::shared_ptr<fUML::Semantics::Actions::AcceptEventActionEventAccepter> AcceptEventActionActivationImpl::getEventAccepter() const
 {
-
     return m_eventAccepter;
 }
 void AcceptEventActionActivationImpl::setEventAccepter(std::shared_ptr<fUML::Semantics::Actions::AcceptEventActionEventAccepter> _eventAccepter)

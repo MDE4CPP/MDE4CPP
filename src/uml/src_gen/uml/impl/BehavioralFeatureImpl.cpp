@@ -116,47 +116,38 @@ BehavioralFeatureImpl& BehavioralFeatureImpl::operator=(const BehavioralFeatureI
 	m_isAbstract = obj.getIsAbstract();
 
 	//copy references with no containment (soft copy)
-	std::shared_ptr<Bag<uml::Behavior>> _method = obj.getMethod();
-	m_method.reset(new Bag<uml::Behavior>(*(obj.getMethod().get())));
-	std::shared_ptr<Bag<uml::Type>> _raisedException = obj.getRaisedException();
-	m_raisedException.reset(new Bag<uml::Type>(*(obj.getRaisedException().get())));
+	m_method  = obj.getMethod();
+	m_raisedException  = obj.getRaisedException();
 	//Clone references with containment (deep copy)
-	std::shared_ptr<Subset<uml::Parameter, uml::NamedElement>> ownedParameterContainer = getOwnedParameter();
-	if(nullptr != ownedParameterContainer )
+	//clone reference 'ownedParameter'
+	std::shared_ptr<Subset<uml::Parameter, uml::NamedElement>> ownedParameterList = obj.getOwnedParameter();
+	if(ownedParameterList)
 	{
-		int size = ownedParameterContainer->size();
-		for(int i=0; i<size ; i++)
+		Bag<uml::Parameter>::iterator ownedParameterIter = ownedParameterList->begin();
+		Bag<uml::Parameter>::iterator ownedParameterEnd = ownedParameterList->end();
+		while (ownedParameterIter != ownedParameterEnd) 
 		{
-			auto _ownedParameter=(*ownedParameterContainer)[i];
-			if(nullptr != _ownedParameter)
-			{
-				ownedParameterContainer->push_back(std::dynamic_pointer_cast<uml::Parameter>(_ownedParameter->copy()));
-			}
-			else
-			{
-				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container ownedParameter."<< std::endl;)
-			}
+			std::shared_ptr<uml::Parameter> temp = std::dynamic_pointer_cast<uml::Parameter>((*ownedParameterIter)->copy());
+			getOwnedParameter()->push_back(temp);
+			ownedParameterIter++;
 		}
 	}
 	else
 	{
 		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr ownedParameter."<< std::endl;)
 	}
-	std::shared_ptr<Subset<uml::ParameterSet, uml::NamedElement>> ownedParameterSetContainer = getOwnedParameterSet();
-	if(nullptr != ownedParameterSetContainer )
+
+	//clone reference 'ownedParameterSet'
+	std::shared_ptr<Subset<uml::ParameterSet, uml::NamedElement>> ownedParameterSetList = obj.getOwnedParameterSet();
+	if(ownedParameterSetList)
 	{
-		int size = ownedParameterSetContainer->size();
-		for(int i=0; i<size ; i++)
+		Bag<uml::ParameterSet>::iterator ownedParameterSetIter = ownedParameterSetList->begin();
+		Bag<uml::ParameterSet>::iterator ownedParameterSetEnd = ownedParameterSetList->end();
+		while (ownedParameterSetIter != ownedParameterSetEnd) 
 		{
-			auto _ownedParameterSet=(*ownedParameterSetContainer)[i];
-			if(nullptr != _ownedParameterSet)
-			{
-				ownedParameterSetContainer->push_back(std::dynamic_pointer_cast<uml::ParameterSet>(_ownedParameterSet->copy()));
-			}
-			else
-			{
-				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container ownedParameterSet."<< std::endl;)
-			}
+			std::shared_ptr<uml::ParameterSet> temp = std::dynamic_pointer_cast<uml::ParameterSet>((*ownedParameterSetIter)->copy());
+			getOwnedParameterSet()->push_back(temp);
+			ownedParameterSetIter++;
 		}
 	}
 	else
@@ -164,13 +155,13 @@ BehavioralFeatureImpl& BehavioralFeatureImpl::operator=(const BehavioralFeatureI
 		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr ownedParameterSet."<< std::endl;)
 	}
 	/*Subset*/
-	m_ownedParameter->initSubset(getOwnedMember());
+	getOwnedParameter()->initSubset(getOwnedMember());
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Initialising value Subset: " << "m_ownedParameter - Subset<uml::Parameter, uml::NamedElement >(getOwnedMember())" << std::endl;
 	#endif
 	
 	/*Subset*/
-	m_ownedParameterSet->initSubset(getOwnedMember());
+	getOwnedParameterSet()->initSubset(getOwnedMember());
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Initialising value Subset: " << "m_ownedParameterSet - Subset<uml::ParameterSet, uml::NamedElement >(getOwnedMember())" << std::endl;
 	#endif
@@ -263,7 +254,6 @@ std::shared_ptr<Bag<uml::Behavior>> BehavioralFeatureImpl::getMethod() const
 		
 		
 	}
-
     return m_method;
 }
 
@@ -283,13 +273,12 @@ std::shared_ptr<Subset<uml::Parameter, uml::NamedElement>> BehavioralFeatureImpl
 		#endif
 		
 		/*Subset*/
-		m_ownedParameter->initSubset(getOwnedMember());
+		getOwnedParameter()->initSubset(getOwnedMember());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value Subset: " << "m_ownedParameter - Subset<uml::Parameter, uml::NamedElement >(getOwnedMember())" << std::endl;
 		#endif
 		
 	}
-
     return m_ownedParameter;
 }
 
@@ -309,13 +298,12 @@ std::shared_ptr<Subset<uml::ParameterSet, uml::NamedElement>> BehavioralFeatureI
 		#endif
 		
 		/*Subset*/
-		m_ownedParameterSet->initSubset(getOwnedMember());
+		getOwnedParameterSet()->initSubset(getOwnedMember());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value Subset: " << "m_ownedParameterSet - Subset<uml::ParameterSet, uml::NamedElement >(getOwnedMember())" << std::endl;
 		#endif
 		
 	}
-
     return m_ownedParameterSet;
 }
 
@@ -332,7 +320,6 @@ std::shared_ptr<Bag<uml::Type>> BehavioralFeatureImpl::getRaisedException() cons
 		
 		
 	}
-
     return m_raisedException;
 }
 
@@ -371,20 +358,20 @@ std::shared_ptr<Union<uml::Element>> BehavioralFeatureImpl::getOwnedElement() co
 	return m_ownedElement;
 }
 
-std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement>> BehavioralFeatureImpl::getOwnedMember() const
+std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement>> BehavioralFeatureImpl::getOwnedMember() const
 {
 	if(m_ownedMember == nullptr)
 	{
 		/*SubsetUnion*/
-		m_ownedMember.reset(new SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement >());
+		m_ownedMember.reset(new SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement >());
 		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement >()" << std::endl;
+			std::cout << "Initialising shared pointer SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement >()" << std::endl;
 		#endif
 		
 		/*SubsetUnion*/
-		m_ownedMember->initSubsetUnion(getOwnedElement(),getMember());
+		getOwnedMember()->initSubsetUnion(getOwnedElement(), getMember());
 		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement >(getOwnedElement(),getMember())" << std::endl;
+			std::cout << "Initialising value SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement >(getOwnedElement(), getMember())" << std::endl;
 		#endif
 		
 	}

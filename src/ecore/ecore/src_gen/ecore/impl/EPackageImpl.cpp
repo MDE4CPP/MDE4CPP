@@ -105,42 +105,35 @@ EPackageImpl& EPackageImpl::operator=(const EPackageImpl & obj)
 	m_eFactoryInstance  = obj.getEFactoryInstance();
 	m_eSuperPackage  = obj.getESuperPackage();
 	//Clone references with containment (deep copy)
-	std::shared_ptr<Subset<ecore::EClassifier, ecore::EObject>> eClassifiersContainer = getEClassifiers();
-	if(nullptr != eClassifiersContainer )
+	//clone reference 'eClassifiers'
+	std::shared_ptr<Subset<ecore::EClassifier, ecore::EObject>> eClassifiersList = obj.getEClassifiers();
+	if(eClassifiersList)
 	{
-		int size = eClassifiersContainer->size();
-		for(int i=0; i<size ; i++)
+		Bag<ecore::EClassifier>::iterator eClassifiersIter = eClassifiersList->begin();
+		Bag<ecore::EClassifier>::iterator eClassifiersEnd = eClassifiersList->end();
+		while (eClassifiersIter != eClassifiersEnd) 
 		{
-			auto _eClassifiers=(*eClassifiersContainer)[i];
-			if(nullptr != _eClassifiers)
-			{
-				eClassifiersContainer->push_back(std::dynamic_pointer_cast<ecore::EClassifier>(_eClassifiers->copy()));
-			}
-			else
-			{
-				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container eClassifiers."<< std::endl;)
-			}
+			std::shared_ptr<ecore::EClassifier> temp = std::dynamic_pointer_cast<ecore::EClassifier>((*eClassifiersIter)->copy());
+			getEClassifiers()->push_back(temp);
+			eClassifiersIter++;
 		}
 	}
 	else
 	{
 		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr eClassifiers."<< std::endl;)
 	}
-	std::shared_ptr<Bag<ecore::EPackage>> eSubpackagesContainer = getESubpackages();
-	if(nullptr != eSubpackagesContainer )
+
+	//clone reference 'eSubpackages'
+	std::shared_ptr<Bag<ecore::EPackage>> eSubpackagesList = obj.getESubpackages();
+	if(eSubpackagesList)
 	{
-		int size = eSubpackagesContainer->size();
-		for(int i=0; i<size ; i++)
+		Bag<ecore::EPackage>::iterator eSubpackagesIter = eSubpackagesList->begin();
+		Bag<ecore::EPackage>::iterator eSubpackagesEnd = eSubpackagesList->end();
+		while (eSubpackagesIter != eSubpackagesEnd) 
 		{
-			auto _eSubpackages=(*eSubpackagesContainer)[i];
-			if(nullptr != _eSubpackages)
-			{
-				eSubpackagesContainer->push_back(std::dynamic_pointer_cast<ecore::EPackage>(_eSubpackages->copy()));
-			}
-			else
-			{
-				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container eSubpackages."<< std::endl;)
-			}
+			std::shared_ptr<ecore::EPackage> temp = std::dynamic_pointer_cast<ecore::EPackage>((*eSubpackagesIter)->copy());
+			getESubpackages()->push_back(temp);
+			eSubpackagesIter++;
 		}
 	}
 	else
@@ -148,7 +141,7 @@ EPackageImpl& EPackageImpl::operator=(const EPackageImpl & obj)
 		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr eSubpackages."<< std::endl;)
 	}
 	/*Subset*/
-	m_eClassifiers->initSubset(getEContens());
+	getEClassifiers()->initSubset(getEContens());
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Initialising value Subset: " << "m_eClassifiers - Subset<ecore::EClassifier, ecore::EObject >(getEContens())" << std::endl;
 	#endif
@@ -237,13 +230,12 @@ std::shared_ptr<Subset<ecore::EClassifier, ecore::EObject>> EPackageImpl::getECl
 		#endif
 		
 		/*Subset*/
-		m_eClassifiers->initSubset(getEContens());
+		getEClassifiers()->initSubset(getEContens());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value Subset: " << "m_eClassifiers - Subset<ecore::EClassifier, ecore::EObject >(getEContens())" << std::endl;
 		#endif
 		
 	}
-
     return m_eClassifiers;
 }
 
@@ -254,7 +246,6 @@ Getter & Setter for reference eFactoryInstance
 */
 std::shared_ptr<ecore::EFactory> EPackageImpl::getEFactoryInstance() const
 {
-//assert(m_eFactoryInstance);
     return m_eFactoryInstance;
 }
 void EPackageImpl::setEFactoryInstance(std::shared_ptr<ecore::EFactory> _eFactoryInstance)
@@ -275,7 +266,6 @@ std::shared_ptr<Bag<ecore::EPackage>> EPackageImpl::getESubpackages() const
 		
 		
 	}
-
     return m_eSubpackages;
 }
 
@@ -286,7 +276,6 @@ Getter & Setter for reference eSuperPackage
 */
 std::weak_ptr<ecore::EPackage> EPackageImpl::getESuperPackage() const
 {
-
     return m_eSuperPackage;
 }
 

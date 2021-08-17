@@ -168,7 +168,6 @@ Getter & Setter for reference event
 */
 std::shared_ptr<uml::NamedElement> TimeObservationImpl::getEvent() const
 {
-//assert(m_event);
     return m_event;
 }
 void TimeObservationImpl::setEvent(std::shared_ptr<uml::NamedElement> _event)

@@ -97,10 +97,13 @@ MultiplicityElementImpl& MultiplicityElementImpl::operator=(const MultiplicityEl
 
 	//copy references with no containment (soft copy)
 	//Clone references with containment (deep copy)
+	//clone reference 'lowerValue'
 	if(obj.getLowerValue()!=nullptr)
 	{
 		m_lowerValue = std::dynamic_pointer_cast<uml::ValueSpecification>(obj.getLowerValue()->copy());
 	}
+
+	//clone reference 'upperValue'
 	if(obj.getUpperValue()!=nullptr)
 	{
 		m_upperValue = std::dynamic_pointer_cast<uml::ValueSpecification>(obj.getUpperValue()->copy());
@@ -265,13 +268,11 @@ Getter & Setter for reference lowerValue
 */
 std::shared_ptr<uml::ValueSpecification> MultiplicityElementImpl::getLowerValue() const
 {
-
     return m_lowerValue;
 }
 void MultiplicityElementImpl::setLowerValue(std::shared_ptr<uml::ValueSpecification> _lowerValue)
 {
     m_lowerValue = _lowerValue;
-	
 	
 }
 
@@ -281,13 +282,11 @@ Getter & Setter for reference upperValue
 */
 std::shared_ptr<uml::ValueSpecification> MultiplicityElementImpl::getUpperValue() const
 {
-
     return m_upperValue;
 }
 void MultiplicityElementImpl::setUpperValue(std::shared_ptr<uml::ValueSpecification> _upperValue)
 {
     m_upperValue = _upperValue;
-	
 	
 }
 

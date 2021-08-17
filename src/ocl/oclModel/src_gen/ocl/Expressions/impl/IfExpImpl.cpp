@@ -183,14 +183,19 @@ IfExpImpl& IfExpImpl::operator=(const IfExpImpl & obj)
 
 	//copy references with no containment (soft copy)
 	//Clone references with containment (deep copy)
+	//clone reference 'condition'
 	if(obj.getCondition()!=nullptr)
 	{
 		m_condition = std::dynamic_pointer_cast<ocl::Expressions::OclExpression>(obj.getCondition()->copy());
 	}
+
+	//clone reference 'elseExpression'
 	if(obj.getElseExpression()!=nullptr)
 	{
 		m_elseExpression = std::dynamic_pointer_cast<ocl::Expressions::OclExpression>(obj.getElseExpression()->copy());
 	}
+
+	//clone reference 'thenExpression'
 	if(obj.getThenExpression()!=nullptr)
 	{
 		m_thenExpression = std::dynamic_pointer_cast<ocl::Expressions::OclExpression>(obj.getThenExpression()->copy());
@@ -230,7 +235,6 @@ Getter & Setter for reference condition
 */
 std::shared_ptr<ocl::Expressions::OclExpression> IfExpImpl::getCondition() const
 {
-//assert(m_condition);
     return m_condition;
 }
 void IfExpImpl::setCondition(std::shared_ptr<ocl::Expressions::OclExpression> _condition)
@@ -245,7 +249,6 @@ Getter & Setter for reference elseExpression
 */
 std::shared_ptr<ocl::Expressions::OclExpression> IfExpImpl::getElseExpression() const
 {
-//assert(m_elseExpression);
     return m_elseExpression;
 }
 void IfExpImpl::setElseExpression(std::shared_ptr<ocl::Expressions::OclExpression> _elseExpression)
@@ -260,7 +263,6 @@ Getter & Setter for reference thenExpression
 */
 std::shared_ptr<ocl::Expressions::OclExpression> IfExpImpl::getThenExpression() const
 {
-//assert(m_thenExpression);
     return m_thenExpression;
 }
 void IfExpImpl::setThenExpression(std::shared_ptr<ocl::Expressions::OclExpression> _thenExpression)

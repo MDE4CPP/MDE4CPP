@@ -5092,6 +5092,10 @@ std::shared_ptr<ecore::EReference> umlPackageImpl::getOperation_Attribute_interf
 {
 	return m_operation_Attribute_interface;
 }
+std::shared_ptr<ecore::EReference> umlPackageImpl::getOperation_Attribute_ownedParameter() const
+{
+	return m_operation_Attribute_ownedParameter;
+}
 std::shared_ptr<ecore::EReference> umlPackageImpl::getOperation_Attribute_postcondition() const
 {
 	return m_operation_Attribute_postcondition;

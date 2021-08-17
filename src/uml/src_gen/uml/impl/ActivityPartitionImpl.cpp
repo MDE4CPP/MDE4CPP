@@ -135,63 +135,53 @@ ActivityPartitionImpl& ActivityPartitionImpl::operator=(const ActivityPartitionI
 	m_represents  = obj.getRepresents();
 	m_superPartition  = obj.getSuperPartition();
 	//Clone references with containment (deep copy)
-	std::shared_ptr<Subset<uml::ActivityEdge, uml::ActivityEdge>> edgeContainer = getEdge();
-	if(nullptr != edgeContainer )
+	//clone reference 'edge'
+	std::shared_ptr<Subset<uml::ActivityEdge, uml::ActivityEdge>> edgeList = obj.getEdge();
+	if(edgeList)
 	{
-		int size = edgeContainer->size();
-		for(int i=0; i<size ; i++)
+		Bag<uml::ActivityEdge>::iterator edgeIter = edgeList->begin();
+		Bag<uml::ActivityEdge>::iterator edgeEnd = edgeList->end();
+		while (edgeIter != edgeEnd) 
 		{
-			auto _edge=(*edgeContainer)[i];
-			if(nullptr != _edge)
-			{
-				edgeContainer->push_back(std::dynamic_pointer_cast<uml::ActivityEdge>(_edge->copy()));
-			}
-			else
-			{
-				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container edge."<< std::endl;)
-			}
+			std::shared_ptr<uml::ActivityEdge> temp = std::dynamic_pointer_cast<uml::ActivityEdge>((*edgeIter)->copy());
+			getEdge()->push_back(temp);
+			edgeIter++;
 		}
 	}
 	else
 	{
 		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr edge."<< std::endl;)
 	}
-	std::shared_ptr<Subset<uml::ActivityNode, uml::ActivityNode>> nodeContainer = getNode();
-	if(nullptr != nodeContainer )
+
+	//clone reference 'node'
+	std::shared_ptr<Subset<uml::ActivityNode, uml::ActivityNode>> nodeList = obj.getNode();
+	if(nodeList)
 	{
-		int size = nodeContainer->size();
-		for(int i=0; i<size ; i++)
+		Bag<uml::ActivityNode>::iterator nodeIter = nodeList->begin();
+		Bag<uml::ActivityNode>::iterator nodeEnd = nodeList->end();
+		while (nodeIter != nodeEnd) 
 		{
-			auto _node=(*nodeContainer)[i];
-			if(nullptr != _node)
-			{
-				nodeContainer->push_back(std::dynamic_pointer_cast<uml::ActivityNode>(_node->copy()));
-			}
-			else
-			{
-				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container node."<< std::endl;)
-			}
+			std::shared_ptr<uml::ActivityNode> temp = std::dynamic_pointer_cast<uml::ActivityNode>((*nodeIter)->copy());
+			getNode()->push_back(temp);
+			nodeIter++;
 		}
 	}
 	else
 	{
 		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr node."<< std::endl;)
 	}
-	std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup>> subpartitionContainer = getSubpartition();
-	if(nullptr != subpartitionContainer )
+
+	//clone reference 'subpartition'
+	std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup>> subpartitionList = obj.getSubpartition();
+	if(subpartitionList)
 	{
-		int size = subpartitionContainer->size();
-		for(int i=0; i<size ; i++)
+		Bag<uml::ActivityPartition>::iterator subpartitionIter = subpartitionList->begin();
+		Bag<uml::ActivityPartition>::iterator subpartitionEnd = subpartitionList->end();
+		while (subpartitionIter != subpartitionEnd) 
 		{
-			auto _subpartition=(*subpartitionContainer)[i];
-			if(nullptr != _subpartition)
-			{
-				subpartitionContainer->push_back(std::dynamic_pointer_cast<uml::ActivityPartition>(_subpartition->copy()));
-			}
-			else
-			{
-				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container subpartition."<< std::endl;)
-			}
+			std::shared_ptr<uml::ActivityPartition> temp = std::dynamic_pointer_cast<uml::ActivityPartition>((*subpartitionIter)->copy());
+			getSubpartition()->push_back(temp);
+			subpartitionIter++;
 		}
 	}
 	else
@@ -199,7 +189,7 @@ ActivityPartitionImpl& ActivityPartitionImpl::operator=(const ActivityPartitionI
 		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr subpartition."<< std::endl;)
 	}
 	/*Subset*/
-	m_subpartition->initSubset(getSubgroup());
+	getSubpartition()->initSubset(getSubgroup());
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Initialising value Subset: " << "m_subpartition - Subset<uml::ActivityPartition, uml::ActivityGroup >(getSubgroup())" << std::endl;
 	#endif
@@ -295,13 +285,12 @@ std::shared_ptr<Subset<uml::ActivityEdge, uml::ActivityEdge>> ActivityPartitionI
 		#endif
 		
 		/*Subset*/
-		m_edge->initSubset(getContainedEdge());
+		getEdge()->initSubset(getContainedEdge());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value Subset: " << "m_edge - Subset<uml::ActivityEdge, uml::ActivityEdge >(getContainedEdge())" << std::endl;
 		#endif
 		
 	}
-
     return m_edge;
 }
 
@@ -321,13 +310,12 @@ std::shared_ptr<Subset<uml::ActivityNode, uml::ActivityNode>> ActivityPartitionI
 		#endif
 		
 		/*Subset*/
-		m_node->initSubset(getContainedNode());
+		getNode()->initSubset(getContainedNode());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value Subset: " << "m_node - Subset<uml::ActivityNode, uml::ActivityNode >(getContainedNode())" << std::endl;
 		#endif
 		
 	}
-
     return m_node;
 }
 
@@ -338,7 +326,6 @@ Getter & Setter for reference represents
 */
 std::shared_ptr<uml::Element> ActivityPartitionImpl::getRepresents() const
 {
-
     return m_represents;
 }
 void ActivityPartitionImpl::setRepresents(std::shared_ptr<uml::Element> _represents)
@@ -362,13 +349,12 @@ std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup>> ActivityPart
 		#endif
 		
 		/*Subset*/
-		m_subpartition->initSubset(getSubgroup());
+		getSubpartition()->initSubset(getSubgroup());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value Subset: " << "m_subpartition - Subset<uml::ActivityPartition, uml::ActivityGroup >(getSubgroup())" << std::endl;
 		#endif
 		
 	}
-
     return m_subpartition;
 }
 
@@ -379,16 +365,11 @@ Getter & Setter for reference superPartition
 */
 std::weak_ptr<uml::ActivityPartition> ActivityPartitionImpl::getSuperPartition() const
 {
-
     return m_superPartition;
 }
 void ActivityPartitionImpl::setSuperPartition(std::weak_ptr<uml::ActivityPartition> _superPartition)
 {
     m_superPartition = _superPartition;
-	m_superGroup = this->getSuperPartition().lock();
-	m_owner = this->getSuperGroup().lock();
-	
-	
 	
 }
 
@@ -457,7 +438,7 @@ std::shared_ptr<SubsetUnion<uml::ActivityGroup, uml::Element>> ActivityPartition
 		#endif
 		
 		/*SubsetUnion*/
-		m_subgroup->initSubsetUnion(getOwnedElement());
+		getSubgroup()->initSubsetUnion(getOwnedElement());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value SubsetUnion: " << "m_subgroup - SubsetUnion<uml::ActivityGroup, uml::Element >(getOwnedElement())" << std::endl;
 		#endif

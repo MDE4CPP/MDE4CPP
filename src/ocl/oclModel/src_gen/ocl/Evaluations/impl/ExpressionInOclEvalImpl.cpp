@@ -118,7 +118,6 @@ Getter & Setter for reference context
 */
 std::shared_ptr<ocl::Evaluations::OclExpEval> ExpressionInOclEvalImpl::getContext() const
 {
-//assert(m_context);
     return m_context;
 }
 void ExpressionInOclEvalImpl::setContext(std::shared_ptr<ocl::Evaluations::OclExpEval> _context)
@@ -133,7 +132,6 @@ Getter & Setter for reference environment
 */
 std::shared_ptr<ocl::Evaluations::EvalEnvironment> ExpressionInOclEvalImpl::getEnvironment() const
 {
-
     return m_environment;
 }
 void ExpressionInOclEvalImpl::setEnvironment(std::shared_ptr<ocl::Evaluations::EvalEnvironment> _environment)

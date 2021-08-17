@@ -84,8 +84,7 @@ TokenSetImpl& TokenSetImpl::operator=(const TokenSetImpl & obj)
 	//Clone Attributes with (deep copy)
 
 	//copy references with no containment (soft copy)
-	std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> _tokens = obj.getTokens();
-	m_tokens.reset(new Bag<fUML::Semantics::Activities::Token>(*(obj.getTokens().get())));
+	m_tokens  = obj.getTokens();
 	//Clone references with containment (deep copy)
 	return *this;
 }
@@ -125,7 +124,6 @@ std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> TokenSetImpl::getTokens
 		
 		
 	}
-
     return m_tokens;
 }
 

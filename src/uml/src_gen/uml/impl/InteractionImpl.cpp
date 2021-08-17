@@ -195,105 +195,89 @@ InteractionImpl& InteractionImpl::operator=(const InteractionImpl & obj)
 
 	//copy references with no containment (soft copy)
 	//Clone references with containment (deep copy)
-	std::shared_ptr<Subset<uml::Action, uml::Element>> actionContainer = getAction();
-	if(nullptr != actionContainer )
+	//clone reference 'action'
+	std::shared_ptr<Subset<uml::Action, uml::Element>> actionList = obj.getAction();
+	if(actionList)
 	{
-		int size = actionContainer->size();
-		for(int i=0; i<size ; i++)
+		Bag<uml::Action>::iterator actionIter = actionList->begin();
+		Bag<uml::Action>::iterator actionEnd = actionList->end();
+		while (actionIter != actionEnd) 
 		{
-			auto _action=(*actionContainer)[i];
-			if(nullptr != _action)
-			{
-				actionContainer->push_back(std::dynamic_pointer_cast<uml::Action>(_action->copy()));
-			}
-			else
-			{
-				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container action."<< std::endl;)
-			}
+			std::shared_ptr<uml::Action> temp = std::dynamic_pointer_cast<uml::Action>((*actionIter)->copy());
+			getAction()->push_back(temp);
+			actionIter++;
 		}
 	}
 	else
 	{
 		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr action."<< std::endl;)
 	}
-	std::shared_ptr<Subset<uml::Gate, uml::NamedElement>> formalGateContainer = getFormalGate();
-	if(nullptr != formalGateContainer )
+
+	//clone reference 'formalGate'
+	std::shared_ptr<Subset<uml::Gate, uml::NamedElement>> formalGateList = obj.getFormalGate();
+	if(formalGateList)
 	{
-		int size = formalGateContainer->size();
-		for(int i=0; i<size ; i++)
+		Bag<uml::Gate>::iterator formalGateIter = formalGateList->begin();
+		Bag<uml::Gate>::iterator formalGateEnd = formalGateList->end();
+		while (formalGateIter != formalGateEnd) 
 		{
-			auto _formalGate=(*formalGateContainer)[i];
-			if(nullptr != _formalGate)
-			{
-				formalGateContainer->push_back(std::dynamic_pointer_cast<uml::Gate>(_formalGate->copy()));
-			}
-			else
-			{
-				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container formalGate."<< std::endl;)
-			}
+			std::shared_ptr<uml::Gate> temp = std::dynamic_pointer_cast<uml::Gate>((*formalGateIter)->copy());
+			getFormalGate()->push_back(temp);
+			formalGateIter++;
 		}
 	}
 	else
 	{
 		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr formalGate."<< std::endl;)
 	}
-	std::shared_ptr<Subset<uml::InteractionFragment, uml::NamedElement>> fragmentContainer = getFragment();
-	if(nullptr != fragmentContainer )
+
+	//clone reference 'fragment'
+	std::shared_ptr<Subset<uml::InteractionFragment, uml::NamedElement>> fragmentList = obj.getFragment();
+	if(fragmentList)
 	{
-		int size = fragmentContainer->size();
-		for(int i=0; i<size ; i++)
+		Bag<uml::InteractionFragment>::iterator fragmentIter = fragmentList->begin();
+		Bag<uml::InteractionFragment>::iterator fragmentEnd = fragmentList->end();
+		while (fragmentIter != fragmentEnd) 
 		{
-			auto _fragment=(*fragmentContainer)[i];
-			if(nullptr != _fragment)
-			{
-				fragmentContainer->push_back(std::dynamic_pointer_cast<uml::InteractionFragment>(_fragment->copy()));
-			}
-			else
-			{
-				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container fragment."<< std::endl;)
-			}
+			std::shared_ptr<uml::InteractionFragment> temp = std::dynamic_pointer_cast<uml::InteractionFragment>((*fragmentIter)->copy());
+			getFragment()->push_back(temp);
+			fragmentIter++;
 		}
 	}
 	else
 	{
 		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr fragment."<< std::endl;)
 	}
-	std::shared_ptr<Subset<uml::Lifeline, uml::NamedElement>> lifelineContainer = getLifeline();
-	if(nullptr != lifelineContainer )
+
+	//clone reference 'lifeline'
+	std::shared_ptr<Subset<uml::Lifeline, uml::NamedElement>> lifelineList = obj.getLifeline();
+	if(lifelineList)
 	{
-		int size = lifelineContainer->size();
-		for(int i=0; i<size ; i++)
+		Bag<uml::Lifeline>::iterator lifelineIter = lifelineList->begin();
+		Bag<uml::Lifeline>::iterator lifelineEnd = lifelineList->end();
+		while (lifelineIter != lifelineEnd) 
 		{
-			auto _lifeline=(*lifelineContainer)[i];
-			if(nullptr != _lifeline)
-			{
-				lifelineContainer->push_back(std::dynamic_pointer_cast<uml::Lifeline>(_lifeline->copy()));
-			}
-			else
-			{
-				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container lifeline."<< std::endl;)
-			}
+			std::shared_ptr<uml::Lifeline> temp = std::dynamic_pointer_cast<uml::Lifeline>((*lifelineIter)->copy());
+			getLifeline()->push_back(temp);
+			lifelineIter++;
 		}
 	}
 	else
 	{
 		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr lifeline."<< std::endl;)
 	}
-	std::shared_ptr<Subset<uml::Message, uml::NamedElement>> messageContainer = getMessage();
-	if(nullptr != messageContainer )
+
+	//clone reference 'message'
+	std::shared_ptr<Subset<uml::Message, uml::NamedElement>> messageList = obj.getMessage();
+	if(messageList)
 	{
-		int size = messageContainer->size();
-		for(int i=0; i<size ; i++)
+		Bag<uml::Message>::iterator messageIter = messageList->begin();
+		Bag<uml::Message>::iterator messageEnd = messageList->end();
+		while (messageIter != messageEnd) 
 		{
-			auto _message=(*messageContainer)[i];
-			if(nullptr != _message)
-			{
-				messageContainer->push_back(std::dynamic_pointer_cast<uml::Message>(_message->copy()));
-			}
-			else
-			{
-				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container message."<< std::endl;)
-			}
+			std::shared_ptr<uml::Message> temp = std::dynamic_pointer_cast<uml::Message>((*messageIter)->copy());
+			getMessage()->push_back(temp);
+			messageIter++;
 		}
 	}
 	else
@@ -301,31 +285,31 @@ InteractionImpl& InteractionImpl::operator=(const InteractionImpl & obj)
 		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr message."<< std::endl;)
 	}
 	/*Subset*/
-	m_action->initSubset(getOwnedElement());
+	getAction()->initSubset(getOwnedElement());
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Initialising value Subset: " << "m_action - Subset<uml::Action, uml::Element >(getOwnedElement())" << std::endl;
 	#endif
 	
 	/*Subset*/
-	m_formalGate->initSubset(getOwnedMember());
+	getFormalGate()->initSubset(getOwnedMember());
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Initialising value Subset: " << "m_formalGate - Subset<uml::Gate, uml::NamedElement >(getOwnedMember())" << std::endl;
 	#endif
 	
 	/*Subset*/
-	m_fragment->initSubset(getOwnedMember());
+	getFragment()->initSubset(getOwnedMember());
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Initialising value Subset: " << "m_fragment - Subset<uml::InteractionFragment, uml::NamedElement >(getOwnedMember())" << std::endl;
 	#endif
 	
 	/*Subset*/
-	m_lifeline->initSubset(getOwnedMember());
+	getLifeline()->initSubset(getOwnedMember());
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Initialising value Subset: " << "m_lifeline - Subset<uml::Lifeline, uml::NamedElement >(getOwnedMember())" << std::endl;
 	#endif
 	
 	/*Subset*/
-	m_message->initSubset(getOwnedMember());
+	getMessage()->initSubset(getOwnedMember());
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Initialising value Subset: " << "m_message - Subset<uml::Message, uml::NamedElement >(getOwnedMember())" << std::endl;
 	#endif
@@ -376,13 +360,12 @@ std::shared_ptr<Subset<uml::Action, uml::Element>> InteractionImpl::getAction() 
 		#endif
 		
 		/*Subset*/
-		m_action->initSubset(getOwnedElement());
+		getAction()->initSubset(getOwnedElement());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value Subset: " << "m_action - Subset<uml::Action, uml::Element >(getOwnedElement())" << std::endl;
 		#endif
 		
 	}
-
     return m_action;
 }
 
@@ -402,13 +385,12 @@ std::shared_ptr<Subset<uml::Gate, uml::NamedElement>> InteractionImpl::getFormal
 		#endif
 		
 		/*Subset*/
-		m_formalGate->initSubset(getOwnedMember());
+		getFormalGate()->initSubset(getOwnedMember());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value Subset: " << "m_formalGate - Subset<uml::Gate, uml::NamedElement >(getOwnedMember())" << std::endl;
 		#endif
 		
 	}
-
     return m_formalGate;
 }
 
@@ -428,13 +410,12 @@ std::shared_ptr<Subset<uml::InteractionFragment, uml::NamedElement>> Interaction
 		#endif
 		
 		/*Subset*/
-		m_fragment->initSubset(getOwnedMember());
+		getFragment()->initSubset(getOwnedMember());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value Subset: " << "m_fragment - Subset<uml::InteractionFragment, uml::NamedElement >(getOwnedMember())" << std::endl;
 		#endif
 		
 	}
-
     return m_fragment;
 }
 
@@ -454,13 +435,12 @@ std::shared_ptr<Subset<uml::Lifeline, uml::NamedElement>> InteractionImpl::getLi
 		#endif
 		
 		/*Subset*/
-		m_lifeline->initSubset(getOwnedMember());
+		getLifeline()->initSubset(getOwnedMember());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value Subset: " << "m_lifeline - Subset<uml::Lifeline, uml::NamedElement >(getOwnedMember())" << std::endl;
 		#endif
 		
 	}
-
     return m_lifeline;
 }
 
@@ -480,13 +460,12 @@ std::shared_ptr<Subset<uml::Message, uml::NamedElement>> InteractionImpl::getMes
 		#endif
 		
 		/*Subset*/
-		m_message->initSubset(getOwnedMember());
+		getMessage()->initSubset(getOwnedMember());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value Subset: " << "m_message - Subset<uml::Message, uml::NamedElement >(getOwnedMember())" << std::endl;
 		#endif
 		
 	}
-
     return m_message;
 }
 
@@ -506,7 +485,7 @@ std::shared_ptr<SubsetUnion<uml::Property, uml::Feature>> InteractionImpl::getAt
 		#endif
 		
 		/*SubsetUnion*/
-		m_attribute->initSubsetUnion(getFeature());
+		getAttribute()->initSubsetUnion(getFeature());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value SubsetUnion: " << "m_attribute - SubsetUnion<uml::Property, uml::Feature >(getFeature())" << std::endl;
 		#endif
@@ -526,7 +505,7 @@ std::shared_ptr<SubsetUnion<uml::Feature, uml::NamedElement>> InteractionImpl::g
 		#endif
 		
 		/*SubsetUnion*/
-		m_feature->initSubsetUnion(getMember());
+		getFeature()->initSubsetUnion(getMember());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value SubsetUnion: " << "m_feature - SubsetUnion<uml::Feature, uml::NamedElement >(getMember())" << std::endl;
 		#endif
@@ -570,20 +549,20 @@ std::shared_ptr<Union<uml::Element>> InteractionImpl::getOwnedElement() const
 	return m_ownedElement;
 }
 
-std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement>> InteractionImpl::getOwnedMember() const
+std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement>> InteractionImpl::getOwnedMember() const
 {
 	if(m_ownedMember == nullptr)
 	{
 		/*SubsetUnion*/
-		m_ownedMember.reset(new SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement >());
+		m_ownedMember.reset(new SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement >());
 		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement >()" << std::endl;
+			std::cout << "Initialising shared pointer SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement >()" << std::endl;
 		#endif
 		
 		/*SubsetUnion*/
-		m_ownedMember->initSubsetUnion(getOwnedElement(),getMember());
+		getOwnedMember()->initSubsetUnion(getOwnedElement(), getMember());
 		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement >(getOwnedElement(),getMember())" << std::endl;
+			std::cout << "Initialising value SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement >(getOwnedElement(), getMember())" << std::endl;
 		#endif
 		
 	}
@@ -636,7 +615,7 @@ std::shared_ptr<SubsetUnion<uml::ConnectableElement, uml::NamedElement>> Interac
 		#endif
 		
 		/*SubsetUnion*/
-		m_role->initSubsetUnion(getMember());
+		getRole()->initSubsetUnion(getMember());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value SubsetUnion: " << "m_role - SubsetUnion<uml::ConnectableElement, uml::NamedElement >(getMember())" << std::endl;
 		#endif

@@ -93,7 +93,7 @@ namespace ecore
 			//*********************************
 			// Attribute Members
 			//*********************************
-			 
+			
 			bool m_iD = false;
 			
 			

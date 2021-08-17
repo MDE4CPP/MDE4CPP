@@ -21,15 +21,17 @@
 #include "fUML/Semantics/CommonBehavior/impl/ParameterValueImpl.hpp"
 #include "fUML/Semantics/CommonBehavior/impl/SignalEventOccurrenceImpl.hpp"
 
-#include "fUML/Semantics/CommonBehavior/Execution.hpp"
-#include "fUML/Semantics/CommonBehavior/ClassifierBehaviorExecution.hpp"
-#include "fUML/Semantics/CommonBehavior/Execution.hpp"
-#include "fUML/Semantics/StructuredClassifiers/ExtensionalValue.hpp"
-#include "fUML/Semantics/CommonBehavior/ObjectActivation.hpp"
-#include "fUML/Semantics/CommonBehavior/ParameterValue.hpp"
-#include "fUML/Semantics/Values/Value.hpp"
-#include "fUML/Semantics/Values/Value.hpp"
-#include "fUML/Semantics/Values/Value.hpp"
+#include "fUML/Semantics/Actions/ActionsPackage.hpp"
+#include "fUML/Semantics/Actions/CallActionActivation.hpp"
+#include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
+#include "fUML/Semantics/Activities/DecisionNodeActivation.hpp"
+#include "fUML/Semantics/Activities/ObjectToken.hpp"
+#include "fUML/Semantics/Loci/LociPackage.hpp"
+#include "fUML/Semantics/Loci/Locus.hpp"
+#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersPackage.hpp"
+#include "fUML/Semantics/SimpleClassifiers/FeatureValue.hpp"
+#include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
+#include "fUML/Semantics/StructuredClassifiers/Object.hpp"
 
 
 using namespace fUML::Semantics::CommonBehavior;
@@ -88,40 +90,40 @@ std::shared_ptr<ecore::EObject> CommonBehaviorFactoryImpl::create(const int meta
 				switch(referenceID)
 				{
 					//CallEventExecution has callExecutions as a containment
-					case  CommonBehaviorPackage::CALLACTIONACTIVATION_ATTRIBUTE_CALLEXECUTIONS:	
+					case  fUML::Semantics::Actions::ActionsPackage::CALLACTIONACTIVATION_ATTRIBUTE_CALLEXECUTIONS:	
 					{
 						auto castedContainer = std::dynamic_pointer_cast<fUML::Semantics::Actions::CallActionActivation>(container);
-						return this->createCallEventExecution_as_callExecutions_in_fUML::Semantics::Actions::CallActionActivation(castedContainer,metaElementID);
+						return this->createCallEventExecution_as_callExecutions_in_CallActionActivation(castedContainer,metaElementID);
 					}
 					//CallEventExecution has decisionInputExecution as a containment
-					case  CommonBehaviorPackage::DECISIONNODEACTIVATION_ATTRIBUTE_DECISIONINPUTEXECUTION:	
+					case  fUML::Semantics::Activities::ActivitiesPackage::DECISIONNODEACTIVATION_ATTRIBUTE_DECISIONINPUTEXECUTION:	
 					{
 						auto castedContainer = std::dynamic_pointer_cast<fUML::Semantics::Activities::DecisionNodeActivation>(container);
-						return this->createCallEventExecution_as_decisionInputExecution_in_fUML::Semantics::Activities::DecisionNodeActivation(castedContainer,metaElementID);
+						return this->createCallEventExecution_as_decisionInputExecution_in_DecisionNodeActivation(castedContainer,metaElementID);
 					}
 					//CallEventExecution has extensionalValues as a containment
-					case  CommonBehaviorPackage::LOCUS_ATTRIBUTE_EXTENSIONALVALUES:	
+					case  fUML::Semantics::Loci::LociPackage::LOCUS_ATTRIBUTE_EXTENSIONALVALUES:	
 					{
 						auto castedContainer = std::dynamic_pointer_cast<fUML::Semantics::Loci::Locus>(container);
-						return this->createCallEventExecution_as_extensionalValues_in_fUML::Semantics::Loci::Locus(castedContainer,metaElementID);
+						return this->createCallEventExecution_as_extensionalValues_in_Locus(castedContainer,metaElementID);
 					}
 					//CallEventExecution has value as a containment
-					case  CommonBehaviorPackage::OBJECTTOKEN_ATTRIBUTE_VALUE:	
+					case  fUML::Semantics::Activities::ActivitiesPackage::OBJECTTOKEN_ATTRIBUTE_VALUE:	
 					{
 						auto castedContainer = std::dynamic_pointer_cast<fUML::Semantics::Activities::ObjectToken>(container);
-						return this->createCallEventExecution_as_value_in_fUML::Semantics::Activities::ObjectToken(castedContainer,metaElementID);
+						return this->createCallEventExecution_as_value_in_ObjectToken(castedContainer,metaElementID);
 					}
 					//CallEventExecution has values as a containment
-					case  CommonBehaviorPackage::FEATUREVALUE_ATTRIBUTE_VALUES:	
+					case  fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::FEATUREVALUE_ATTRIBUTE_VALUES:	
 					{
 						auto castedContainer = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::FeatureValue>(container);
-						return this->createCallEventExecution_as_values_in_fUML::Semantics::SimpleClassifiers::FeatureValue(castedContainer,metaElementID);
+						return this->createCallEventExecution_as_values_in_FeatureValue(castedContainer,metaElementID);
 					}
 					//CallEventExecution has values as a containment
-					case  CommonBehaviorPackage::PARAMETERVALUE_ATTRIBUTE_VALUES:	
+					case  fUML::Semantics::CommonBehavior::CommonBehaviorPackage::PARAMETERVALUE_ATTRIBUTE_VALUES:	
 					{
 						auto castedContainer = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::ParameterValue>(container);
-						return this->createCallEventExecution_as_values_in_fUML::Semantics::CommonBehavior::ParameterValue(castedContainer,metaElementID);
+						return this->createCallEventExecution_as_values_in_ParameterValue(castedContainer,metaElementID);
 					}
 					default:
 						std::cerr << __PRETTY_FUNCTION__ << "ERROR: Reference type not found." << std::endl;

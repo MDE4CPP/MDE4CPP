@@ -107,7 +107,7 @@ namespace uml
 			<p>From package UML::SimpleClassifiers.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::Property, uml::Property,uml::NamedElement>> getOwnedAttribute() const = 0;
+			virtual std::shared_ptr<Subset<uml::Property, uml::NamedElement, uml::Property>> getOwnedAttribute() const = 0;
 			
 			
 
@@ -125,7 +125,7 @@ namespace uml
 			<p>From package UML::SimpleClassifiers.</p>
 			*/
 			
-			mutable std::shared_ptr<Subset<uml::Property, uml::Property,uml::NamedElement>> m_ownedAttribute;
+			mutable std::shared_ptr<Subset<uml::Property, uml::NamedElement, uml::Property>> m_ownedAttribute;
 
 		public:
 			//*********************************
@@ -161,7 +161,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement>> getOwnedMember() const = 0;/*!
+			virtual std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement>> getOwnedMember() const = 0;/*!
 			The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/

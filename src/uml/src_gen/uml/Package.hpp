@@ -320,7 +320,7 @@ namespace uml
 			Provides an identifier for the package that can be used for many purposes. A URI is the universally unique identification of the package following the IETF URI specification, RFC 2396 http://www.ietf.org/rfc/rfc2396.txt and it must comply with those syntax rules.
 			<p>From package UML::Packages.</p>
 			*/
-			 
+			
 			std::string m_URI = "";
 			
 			
@@ -388,7 +388,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement>> getOwnedMember() const = 0;/*!
+			virtual std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement>> getOwnedMember() const = 0;/*!
 			The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/

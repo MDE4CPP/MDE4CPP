@@ -109,7 +109,7 @@ namespace ocl::Expressions
 			//*********************************
 			// Attribute Members
 			//*********************************
-			 
+			
 			ocl::Expressions::CollectionKind m_kind = CollectionKind::COLLECTION;
 			
 			

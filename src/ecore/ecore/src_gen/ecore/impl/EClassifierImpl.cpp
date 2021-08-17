@@ -105,21 +105,17 @@ EClassifierImpl& EClassifierImpl::operator=(const EClassifierImpl & obj)
 	//copy references with no containment (soft copy)
 	m_ePackage  = obj.getEPackage();
 	//Clone references with containment (deep copy)
-	std::shared_ptr<Bag<ecore::ETypeParameter>> eTypeParametersContainer = getETypeParameters();
-	if(nullptr != eTypeParametersContainer )
+	//clone reference 'eTypeParameters'
+	std::shared_ptr<Bag<ecore::ETypeParameter>> eTypeParametersList = obj.getETypeParameters();
+	if(eTypeParametersList)
 	{
-		int size = eTypeParametersContainer->size();
-		for(int i=0; i<size ; i++)
+		Bag<ecore::ETypeParameter>::iterator eTypeParametersIter = eTypeParametersList->begin();
+		Bag<ecore::ETypeParameter>::iterator eTypeParametersEnd = eTypeParametersList->end();
+		while (eTypeParametersIter != eTypeParametersEnd) 
 		{
-			auto _eTypeParameters=(*eTypeParametersContainer)[i];
-			if(nullptr != _eTypeParameters)
-			{
-				eTypeParametersContainer->push_back(std::dynamic_pointer_cast<ecore::ETypeParameter>(_eTypeParameters->copy()));
-			}
-			else
-			{
-				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container eTypeParameters."<< std::endl;)
-			}
+			std::shared_ptr<ecore::ETypeParameter> temp = std::dynamic_pointer_cast<ecore::ETypeParameter>((*eTypeParametersIter)->copy());
+			getETypeParameters()->push_back(temp);
+			eTypeParametersIter++;
 		}
 	}
 	else
@@ -223,7 +219,6 @@ Getter & Setter for reference ePackage
 */
 std::weak_ptr<ecore::EPackage> EClassifierImpl::getEPackage() const
 {
-
     return m_ePackage;
 }
 
@@ -240,7 +235,6 @@ std::shared_ptr<Bag<ecore::ETypeParameter>> EClassifierImpl::getETypeParameters(
 		
 		
 	}
-
     return m_eTypeParameters;
 }
 

@@ -16,14 +16,14 @@
 #include "ecore/EFactory.hpp"
 #include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersPackage.hpp"
 
-namespace fUML::Semantics::SimpleClassifiers 
+namespace fUML::Semantics::Activities
 {
-	class FeatureValue;
-	class SignalInstance;
+	class ObjectToken;
 }
-namespace fUML::Semantics::Values 
+namespace fUML::Semantics::CommonBehavior
 {
-	class Value;
+	class ObjectActivation;
+	class ParameterValue;
 }
 
 

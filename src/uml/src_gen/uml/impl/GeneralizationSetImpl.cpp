@@ -124,8 +124,7 @@ GeneralizationSetImpl& GeneralizationSetImpl::operator=(const GeneralizationSetI
 	m_isDisjoint = obj.getIsDisjoint();
 
 	//copy references with no containment (soft copy)
-	std::shared_ptr<Bag<uml::Generalization>> _generalization = obj.getGeneralization();
-	m_generalization.reset(new Bag<uml::Generalization>(*(obj.getGeneralization().get())));
+	m_generalization  = obj.getGeneralization();
 	m_powertype  = obj.getPowertype();
 	//Clone references with containment (deep copy)
 	return *this;
@@ -204,7 +203,6 @@ std::shared_ptr<Bag<uml::Generalization>> GeneralizationSetImpl::getGeneralizati
 		
 		
 	}
-
     return m_generalization;
 }
 
@@ -215,7 +213,6 @@ Getter & Setter for reference powertype
 */
 std::shared_ptr<uml::Classifier> GeneralizationSetImpl::getPowertype() const
 {
-
     return m_powertype;
 }
 void GeneralizationSetImpl::setPowertype(std::shared_ptr<uml::Classifier> _powertype)

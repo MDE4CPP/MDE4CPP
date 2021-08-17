@@ -135,10 +135,13 @@ InteractionConstraintImpl& InteractionConstraintImpl::operator=(const Interactio
 
 	//copy references with no containment (soft copy)
 	//Clone references with containment (deep copy)
+	//clone reference 'maxint'
 	if(obj.getMaxint()!=nullptr)
 	{
 		m_maxint = std::dynamic_pointer_cast<uml::ValueSpecification>(obj.getMaxint()->copy());
 	}
+
+	//clone reference 'minint'
 	if(obj.getMinint()!=nullptr)
 	{
 		m_minint = std::dynamic_pointer_cast<uml::ValueSpecification>(obj.getMinint()->copy());
@@ -212,13 +215,11 @@ Getter & Setter for reference maxint
 */
 std::shared_ptr<uml::ValueSpecification> InteractionConstraintImpl::getMaxint() const
 {
-
     return m_maxint;
 }
 void InteractionConstraintImpl::setMaxint(std::shared_ptr<uml::ValueSpecification> _maxint)
 {
     m_maxint = _maxint;
-	
 	
 }
 
@@ -228,13 +229,11 @@ Getter & Setter for reference minint
 */
 std::shared_ptr<uml::ValueSpecification> InteractionConstraintImpl::getMinint() const
 {
-
     return m_minint;
 }
 void InteractionConstraintImpl::setMinint(std::shared_ptr<uml::ValueSpecification> _minint)
 {
     m_minint = _minint;
-	
 	
 }
 

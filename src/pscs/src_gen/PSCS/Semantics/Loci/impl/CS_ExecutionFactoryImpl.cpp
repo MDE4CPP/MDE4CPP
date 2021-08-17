@@ -146,8 +146,7 @@ CS_ExecutionFactoryImpl& CS_ExecutionFactoryImpl::operator=(const CS_ExecutionFa
 	//Clone Attributes with (deep copy)
 
 	//copy references with no containment (soft copy)
-	std::shared_ptr<Bag<uml::Package>> _appliedProfiles = obj.getAppliedProfiles();
-	m_appliedProfiles.reset(new Bag<uml::Package>(*(obj.getAppliedProfiles().get())));
+	m_appliedProfiles  = obj.getAppliedProfiles();
 	//Clone references with containment (deep copy)
 	return *this;
 }
@@ -304,7 +303,6 @@ std::shared_ptr<Bag<uml::Package>> CS_ExecutionFactoryImpl::getAppliedProfiles()
 		
 		
 	}
-
     return m_appliedProfiles;
 }
 

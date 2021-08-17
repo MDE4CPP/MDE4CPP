@@ -91,7 +91,7 @@ namespace fUML::Semantics::SimpleClassifiers
 			//*********************************
 			// Attribute Members
 			//*********************************
-			 
+			
 			double m_value = 0;
 			
 			

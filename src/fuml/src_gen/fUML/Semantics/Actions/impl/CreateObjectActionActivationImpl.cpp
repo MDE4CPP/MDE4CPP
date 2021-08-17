@@ -178,7 +178,6 @@ Getter & Setter for reference createObjectAction
 */
 std::shared_ptr<uml::CreateObjectAction> CreateObjectActionActivationImpl::getCreateObjectAction() const
 {
-//assert(m_createObjectAction);
     return m_createObjectAction;
 }
 void CreateObjectActionActivationImpl::setCreateObjectAction(std::shared_ptr<uml::CreateObjectAction> _createObjectAction)

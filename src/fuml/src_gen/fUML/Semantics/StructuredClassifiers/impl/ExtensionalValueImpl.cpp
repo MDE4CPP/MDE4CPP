@@ -153,7 +153,6 @@ Getter & Setter for reference locus
 */
 std::shared_ptr<fUML::Semantics::Loci::Locus> ExtensionalValueImpl::getLocus() const
 {
-
     return m_locus;
 }
 void ExtensionalValueImpl::setLocus(std::shared_ptr<fUML::Semantics::Loci::Locus> _locus)

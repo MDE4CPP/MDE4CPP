@@ -128,53 +128,41 @@ InformationFlowImpl& InformationFlowImpl::operator=(const InformationFlowImpl & 
 	//Clone Attributes with (deep copy)
 
 	//copy references with no containment (soft copy)
-	std::shared_ptr<Bag<uml::Classifier>> _conveyed = obj.getConveyed();
-	m_conveyed.reset(new Bag<uml::Classifier>(*(obj.getConveyed().get())));
-	std::shared_ptr<Bag<uml::Relationship>> _realization = obj.getRealization();
-	m_realization.reset(new Bag<uml::Relationship>(*(obj.getRealization().get())));
-	std::shared_ptr<Bag<uml::ActivityEdge>> _realizingActivityEdge = obj.getRealizingActivityEdge();
-	m_realizingActivityEdge.reset(new Bag<uml::ActivityEdge>(*(obj.getRealizingActivityEdge().get())));
-	std::shared_ptr<Bag<uml::Connector>> _realizingConnector = obj.getRealizingConnector();
-	m_realizingConnector.reset(new Bag<uml::Connector>(*(obj.getRealizingConnector().get())));
-	std::shared_ptr<Bag<uml::Message>> _realizingMessage = obj.getRealizingMessage();
-	m_realizingMessage.reset(new Bag<uml::Message>(*(obj.getRealizingMessage().get())));
+	m_conveyed  = obj.getConveyed();
+	m_realization  = obj.getRealization();
+	m_realizingActivityEdge  = obj.getRealizingActivityEdge();
+	m_realizingConnector  = obj.getRealizingConnector();
+	m_realizingMessage  = obj.getRealizingMessage();
 	//Clone references with containment (deep copy)
-	std::shared_ptr<Subset<uml::NamedElement, uml::Element>> informationSourceContainer = getInformationSource();
-	if(nullptr != informationSourceContainer )
+	//clone reference 'informationSource'
+	std::shared_ptr<Subset<uml::NamedElement, uml::Element>> informationSourceList = obj.getInformationSource();
+	if(informationSourceList)
 	{
-		int size = informationSourceContainer->size();
-		for(int i=0; i<size ; i++)
+		Bag<uml::NamedElement>::iterator informationSourceIter = informationSourceList->begin();
+		Bag<uml::NamedElement>::iterator informationSourceEnd = informationSourceList->end();
+		while (informationSourceIter != informationSourceEnd) 
 		{
-			auto _informationSource=(*informationSourceContainer)[i];
-			if(nullptr != _informationSource)
-			{
-				informationSourceContainer->push_back(std::dynamic_pointer_cast<uml::NamedElement>(_informationSource->copy()));
-			}
-			else
-			{
-				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container informationSource."<< std::endl;)
-			}
+			std::shared_ptr<uml::NamedElement> temp = std::dynamic_pointer_cast<uml::NamedElement>((*informationSourceIter)->copy());
+			getInformationSource()->push_back(temp);
+			informationSourceIter++;
 		}
 	}
 	else
 	{
 		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr informationSource."<< std::endl;)
 	}
-	std::shared_ptr<Subset<uml::NamedElement, uml::Element>> informationTargetContainer = getInformationTarget();
-	if(nullptr != informationTargetContainer )
+
+	//clone reference 'informationTarget'
+	std::shared_ptr<Subset<uml::NamedElement, uml::Element>> informationTargetList = obj.getInformationTarget();
+	if(informationTargetList)
 	{
-		int size = informationTargetContainer->size();
-		for(int i=0; i<size ; i++)
+		Bag<uml::NamedElement>::iterator informationTargetIter = informationTargetList->begin();
+		Bag<uml::NamedElement>::iterator informationTargetEnd = informationTargetList->end();
+		while (informationTargetIter != informationTargetEnd) 
 		{
-			auto _informationTarget=(*informationTargetContainer)[i];
-			if(nullptr != _informationTarget)
-			{
-				informationTargetContainer->push_back(std::dynamic_pointer_cast<uml::NamedElement>(_informationTarget->copy()));
-			}
-			else
-			{
-				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container informationTarget."<< std::endl;)
-			}
+			std::shared_ptr<uml::NamedElement> temp = std::dynamic_pointer_cast<uml::NamedElement>((*informationTargetIter)->copy());
+			getInformationTarget()->push_back(temp);
+			informationTargetIter++;
 		}
 	}
 	else
@@ -236,7 +224,6 @@ std::shared_ptr<Bag<uml::Classifier>> InformationFlowImpl::getConveyed() const
 		
 		
 	}
-//assert(m_conveyed);
     return m_conveyed;
 }
 
@@ -256,13 +243,12 @@ std::shared_ptr<Subset<uml::NamedElement, uml::Element>> InformationFlowImpl::ge
 		#endif
 		
 		/*Subset*/
-		m_informationSource->initSubset(getSource());
+		getInformationSource()->initSubset(getSource());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value Subset: " << "m_informationSource - Subset<uml::NamedElement, uml::Element >(getSource())" << std::endl;
 		#endif
 		
 	}
-//assert(m_informationSource);
     return m_informationSource;
 }
 
@@ -282,13 +268,12 @@ std::shared_ptr<Subset<uml::NamedElement, uml::Element>> InformationFlowImpl::ge
 		#endif
 		
 		/*Subset*/
-		m_informationTarget->initSubset(getTarget());
+		getInformationTarget()->initSubset(getTarget());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value Subset: " << "m_informationTarget - Subset<uml::NamedElement, uml::Element >(getTarget())" << std::endl;
 		#endif
 		
 	}
-//assert(m_informationTarget);
     return m_informationTarget;
 }
 
@@ -305,7 +290,6 @@ std::shared_ptr<Bag<uml::Relationship>> InformationFlowImpl::getRealization() co
 		
 		
 	}
-
     return m_realization;
 }
 
@@ -322,7 +306,6 @@ std::shared_ptr<Bag<uml::ActivityEdge>> InformationFlowImpl::getRealizingActivit
 		
 		
 	}
-
     return m_realizingActivityEdge;
 }
 
@@ -339,7 +322,6 @@ std::shared_ptr<Bag<uml::Connector>> InformationFlowImpl::getRealizingConnector(
 		
 		
 	}
-
     return m_realizingConnector;
 }
 
@@ -356,7 +338,6 @@ std::shared_ptr<Bag<uml::Message>> InformationFlowImpl::getRealizingMessage() co
 		
 		
 	}
-
     return m_realizingMessage;
 }
 
@@ -416,7 +397,7 @@ std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> InformationFlowImpl::ge
 		#endif
 		
 		/*SubsetUnion*/
-		m_source->initSubsetUnion(getRelatedElement());
+		getSource()->initSubsetUnion(getRelatedElement());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value SubsetUnion: " << "m_source - SubsetUnion<uml::Element, uml::Element >(getRelatedElement())" << std::endl;
 		#endif
@@ -436,7 +417,7 @@ std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> InformationFlowImpl::ge
 		#endif
 		
 		/*SubsetUnion*/
-		m_target->initSubsetUnion(getRelatedElement());
+		getTarget()->initSubsetUnion(getRelatedElement());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value SubsetUnion: " << "m_target - SubsetUnion<uml::Element, uml::Element >(getRelatedElement())" << std::endl;
 		#endif

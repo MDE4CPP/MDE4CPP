@@ -103,9 +103,9 @@ namespace fUML::Semantics::Activities
 			//*********************************
 			// Attribute Members
 			//*********************************
-			 
+			
 			bool m_baseTokenIsWithdrawn = false;
-			 
+			
 			int m_remainingOffersCount = 0;
 			
 			

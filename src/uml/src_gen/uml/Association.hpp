@@ -177,7 +177,7 @@ namespace uml
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			
-			virtual std::shared_ptr<SubsetUnion<uml::Property, uml::Property /*Subset does not reference a union*/,uml::Feature,uml::NamedElement>> getOwnedEnd() const = 0;
+			virtual std::shared_ptr<SubsetUnion<uml::Property, uml::Feature, uml::NamedElement, uml::Property /*Subset does not reference a union*/>> getOwnedEnd() const = 0;
 			
 			
 
@@ -189,7 +189,7 @@ namespace uml
 			Specifies whether the Association is derived from other model elements such as other Associations.
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
-			 
+			
 			bool m_isDerived = false;
 			
 			
@@ -216,7 +216,7 @@ namespace uml
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			
-			mutable std::shared_ptr<SubsetUnion<uml::Property, uml::Property /*Subset does not reference a union*/,uml::Feature,uml::NamedElement>> m_ownedEnd;
+			mutable std::shared_ptr<SubsetUnion<uml::Property, uml::Feature, uml::NamedElement, uml::Property /*Subset does not reference a union*/>> m_ownedEnd;
 
 		public:
 			//*********************************
@@ -247,7 +247,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement>> getOwnedMember() const = 0;/*!
+			virtual std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement>> getOwnedMember() const = 0;/*!
 			The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/

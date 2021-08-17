@@ -185,16 +185,11 @@ Getter & Setter for reference package
 */
 std::weak_ptr<uml::Package> TypeImpl::getPackage() const
 {
-
     return m_package;
 }
 void TypeImpl::setPackage(std::weak_ptr<uml::Package> _package)
 {
     m_package = _package;
-	m_namespace = this->getPackage().lock();
-	m_owner = this->getNamespace().lock();
-	
-	
 	
 }
 

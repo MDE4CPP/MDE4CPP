@@ -204,6 +204,7 @@ ActionInputPinImpl& ActionInputPinImpl::operator=(const ActionInputPinImpl & obj
 
 	//copy references with no containment (soft copy)
 	//Clone references with containment (deep copy)
+	//clone reference 'fromAction'
 	if(obj.getFromAction()!=nullptr)
 	{
 		m_fromAction = std::dynamic_pointer_cast<uml::Action>(obj.getFromAction()->copy());
@@ -258,13 +259,11 @@ Getter & Setter for reference fromAction
 */
 std::shared_ptr<uml::Action> ActionInputPinImpl::getFromAction() const
 {
-//assert(m_fromAction);
     return m_fromAction;
 }
 void ActionInputPinImpl::setFromAction(std::shared_ptr<uml::Action> _fromAction)
 {
     m_fromAction = _fromAction;
-	
 	
 }
 

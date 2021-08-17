@@ -147,7 +147,6 @@ Getter & Setter for reference insertAt
 */
 std::shared_ptr<uml::InputPin> LinkEndCreationDataImpl::getInsertAt() const
 {
-
     return m_insertAt;
 }
 void LinkEndCreationDataImpl::setInsertAt(std::shared_ptr<uml::InputPin> _insertAt)

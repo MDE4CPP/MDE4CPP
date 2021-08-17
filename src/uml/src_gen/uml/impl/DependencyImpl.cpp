@@ -123,42 +123,35 @@ DependencyImpl& DependencyImpl::operator=(const DependencyImpl & obj)
 
 	//copy references with no containment (soft copy)
 	//Clone references with containment (deep copy)
-	std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element>> clientContainer = getClient();
-	if(nullptr != clientContainer )
+	//clone reference 'client'
+	std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element>> clientList = obj.getClient();
+	if(clientList)
 	{
-		int size = clientContainer->size();
-		for(int i=0; i<size ; i++)
+		Bag<uml::NamedElement>::iterator clientIter = clientList->begin();
+		Bag<uml::NamedElement>::iterator clientEnd = clientList->end();
+		while (clientIter != clientEnd) 
 		{
-			auto _client=(*clientContainer)[i];
-			if(nullptr != _client)
-			{
-				clientContainer->push_back(std::dynamic_pointer_cast<uml::NamedElement>(_client->copy()));
-			}
-			else
-			{
-				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container client."<< std::endl;)
-			}
+			std::shared_ptr<uml::NamedElement> temp = std::dynamic_pointer_cast<uml::NamedElement>((*clientIter)->copy());
+			getClient()->push_back(temp);
+			clientIter++;
 		}
 	}
 	else
 	{
 		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr client."<< std::endl;)
 	}
-	std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element>> supplierContainer = getSupplier();
-	if(nullptr != supplierContainer )
+
+	//clone reference 'supplier'
+	std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element>> supplierList = obj.getSupplier();
+	if(supplierList)
 	{
-		int size = supplierContainer->size();
-		for(int i=0; i<size ; i++)
+		Bag<uml::NamedElement>::iterator supplierIter = supplierList->begin();
+		Bag<uml::NamedElement>::iterator supplierEnd = supplierList->end();
+		while (supplierIter != supplierEnd) 
 		{
-			auto _supplier=(*supplierContainer)[i];
-			if(nullptr != _supplier)
-			{
-				supplierContainer->push_back(std::dynamic_pointer_cast<uml::NamedElement>(_supplier->copy()));
-			}
-			else
-			{
-				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container supplier."<< std::endl;)
-			}
+			std::shared_ptr<uml::NamedElement> temp = std::dynamic_pointer_cast<uml::NamedElement>((*supplierIter)->copy());
+			getSupplier()->push_back(temp);
+			supplierIter++;
 		}
 	}
 	else
@@ -206,13 +199,12 @@ std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element>> DependencyImpl::ge
 		#endif
 		
 		/*SubsetUnion*/
-		m_client->initSubsetUnion(getSource());
+		getClient()->initSubsetUnion(getSource());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value SubsetUnion: " << "m_client - SubsetUnion<uml::NamedElement, uml::Element >(getSource())" << std::endl;
 		#endif
 		
 	}
-//assert(m_client);
     return m_client;
 }
 
@@ -232,13 +224,12 @@ std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element>> DependencyImpl::ge
 		#endif
 		
 		/*SubsetUnion*/
-		m_supplier->initSubsetUnion(getTarget());
+		getSupplier()->initSubsetUnion(getTarget());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value SubsetUnion: " << "m_supplier - SubsetUnion<uml::NamedElement, uml::Element >(getTarget())" << std::endl;
 		#endif
 		
 	}
-//assert(m_supplier);
     return m_supplier;
 }
 
@@ -298,7 +289,7 @@ std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> DependencyImpl::getSour
 		#endif
 		
 		/*SubsetUnion*/
-		m_source->initSubsetUnion(getRelatedElement());
+		getSource()->initSubsetUnion(getRelatedElement());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value SubsetUnion: " << "m_source - SubsetUnion<uml::Element, uml::Element >(getRelatedElement())" << std::endl;
 		#endif
@@ -318,7 +309,7 @@ std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> DependencyImpl::getTarg
 		#endif
 		
 		/*SubsetUnion*/
-		m_target->initSubsetUnion(getRelatedElement());
+		getTarget()->initSubsetUnion(getRelatedElement());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value SubsetUnion: " << "m_target - SubsetUnion<uml::Element, uml::Element >(getRelatedElement())" << std::endl;
 		#endif

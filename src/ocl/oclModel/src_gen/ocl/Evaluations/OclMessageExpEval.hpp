@@ -111,7 +111,7 @@ namespace ocl::Evaluations
 			//*********************************
 			// Attribute Members
 			//*********************************
-			 
+			
 			std::string m_name = "";
 			
 			

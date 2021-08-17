@@ -136,7 +136,7 @@ namespace uml
 			The mode in which the ExpansionRegion executes its contents. If parallel, executions are concurrent. If iterative, executions are sequential. If stream, a stream of values flows into a single execution.
 			<p>From package UML::Actions.</p>
 			*/
-			 
+			
 			uml::ExpansionKind m_mode = ExpansionKind::ITERATIVE;
 			
 			
@@ -199,7 +199,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement>> getOwnedMember() const = 0;/*!
+			virtual std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement>> getOwnedMember() const = 0;/*!
 			The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/

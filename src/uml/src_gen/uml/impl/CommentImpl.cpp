@@ -90,8 +90,7 @@ CommentImpl& CommentImpl::operator=(const CommentImpl & obj)
 	m_body = obj.getBody();
 
 	//copy references with no containment (soft copy)
-	std::shared_ptr<Bag<uml::Element>> _annotatedElement = obj.getAnnotatedElement();
-	m_annotatedElement.reset(new Bag<uml::Element>(*(obj.getAnnotatedElement().get())));
+	m_annotatedElement  = obj.getAnnotatedElement();
 	//Clone references with containment (deep copy)
 	return *this;
 }
@@ -144,7 +143,6 @@ std::shared_ptr<Bag<uml::Element>> CommentImpl::getAnnotatedElement() const
 		
 		
 	}
-
     return m_annotatedElement;
 }
 

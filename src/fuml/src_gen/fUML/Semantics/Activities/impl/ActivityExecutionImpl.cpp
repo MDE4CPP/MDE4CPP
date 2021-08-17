@@ -121,6 +121,7 @@ ActivityExecutionImpl& ActivityExecutionImpl::operator=(const ActivityExecutionI
 	//copy references with no containment (soft copy)
 	m_activity  = obj.getActivity();
 	//Clone references with containment (deep copy)
+	//clone reference 'activationGroup'
 	if(obj.getActivationGroup()!=nullptr)
 	{
 		m_activationGroup = std::dynamic_pointer_cast<fUML::Semantics::Activities::ActivityNodeActivationGroup>(obj.getActivationGroup()->copy());
@@ -173,7 +174,7 @@ void ActivityExecutionImpl::execute()
 
 		std::shared_ptr<fUML::Semantics::Activities::ActivityExecution> thisPtr=getThisActivityExecutionPtr();
 
-		std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> newActivationGroup=fUML::Semantics::Activities::ActivitiesFactory::eInstance()->createActivityNodeActivationGroup_in_ActivityExecution(thisPtr);
+		std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> newActivationGroup=fUML::Semantics::Activities::ActivitiesFactory::eInstance()->createActivityNodeActivationGroup_as_activationGroup_in_ActivityExecution(thisPtr);
         std::shared_ptr<Bag<uml::ActivityNode> > nodes = activity->getNode();
 		std::shared_ptr<Bag<uml::ActivityEdge> > edges = activity->getEdge();
 		newActivationGroup->activate(nodes, edges);
@@ -260,7 +261,6 @@ Getter & Setter for reference activationGroup
 */
 std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> ActivityExecutionImpl::getActivationGroup() const
 {
-//assert(m_activationGroup);
     return m_activationGroup;
 }
 void ActivityExecutionImpl::setActivationGroup(std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> _activationGroup)

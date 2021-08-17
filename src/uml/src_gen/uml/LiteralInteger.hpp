@@ -123,7 +123,7 @@ namespace uml
 			The specified Integer value.
 			<p>From package UML::Values.</p>
 			*/
-			 
+			
 			int m_value = 0;
 			
 			

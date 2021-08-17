@@ -249,7 +249,6 @@ Getter & Setter for reference action
 */
 std::weak_ptr<uml::Action> InputPinImpl::getAction() const
 {
-
     return m_action;
 }
 
@@ -260,16 +259,11 @@ Getter & Setter for reference addStructuralFeatureValueAction
 */
 std::weak_ptr<uml::AddStructuralFeatureValueAction> InputPinImpl::getAddStructuralFeatureValueAction() const
 {
-
     return m_addStructuralFeatureValueAction;
 }
 void InputPinImpl::setAddStructuralFeatureValueAction(std::weak_ptr<uml::AddStructuralFeatureValueAction> _addStructuralFeatureValueAction)
 {
     m_addStructuralFeatureValueAction = _addStructuralFeatureValueAction;
-	m_action = this->getAddStructuralFeatureValueAction().lock();
-	m_owner = this->getAction().lock();
-	
-	
 	
 }
 
@@ -279,16 +273,11 @@ Getter & Setter for reference callOperationAction
 */
 std::weak_ptr<uml::CallOperationAction> InputPinImpl::getCallOperationAction() const
 {
-
     return m_callOperationAction;
 }
 void InputPinImpl::setCallOperationAction(std::weak_ptr<uml::CallOperationAction> _callOperationAction)
 {
     m_callOperationAction = _callOperationAction;
-	m_action = this->getCallOperationAction().lock();
-	m_owner = this->getAction().lock();
-	
-	
 	
 }
 
@@ -298,16 +287,11 @@ Getter & Setter for reference destroyObjectAction
 */
 std::weak_ptr<uml::DestroyObjectAction> InputPinImpl::getDestroyObjectAction() const
 {
-
     return m_destroyObjectAction;
 }
 void InputPinImpl::setDestroyObjectAction(std::weak_ptr<uml::DestroyObjectAction> _destroyObjectAction)
 {
     m_destroyObjectAction = _destroyObjectAction;
-	m_action = this->getDestroyObjectAction().lock();
-	m_owner = this->getAction().lock();
-	
-	
 	
 }
 
@@ -317,16 +301,11 @@ Getter & Setter for reference invocationAction
 */
 std::weak_ptr<uml::InvocationAction> InputPinImpl::getInvocationAction() const
 {
-
     return m_invocationAction;
 }
 void InputPinImpl::setInvocationAction(std::weak_ptr<uml::InvocationAction> _invocationAction)
 {
     m_invocationAction = _invocationAction;
-	m_action = this->getInvocationAction().lock();
-	m_owner = this->getAction().lock();
-	
-	
 	
 }
 
@@ -336,16 +315,11 @@ Getter & Setter for reference removeStructuralFeatureValueAction
 */
 std::weak_ptr<uml::RemoveStructuralFeatureValueAction> InputPinImpl::getRemoveStructuralFeatureValueAction() const
 {
-
     return m_removeStructuralFeatureValueAction;
 }
 void InputPinImpl::setRemoveStructuralFeatureValueAction(std::weak_ptr<uml::RemoveStructuralFeatureValueAction> _removeStructuralFeatureValueAction)
 {
     m_removeStructuralFeatureValueAction = _removeStructuralFeatureValueAction;
-	m_action = this->getRemoveStructuralFeatureValueAction().lock();
-	m_owner = this->getAction().lock();
-	
-	
 	
 }
 
@@ -355,16 +329,11 @@ Getter & Setter for reference structuralFeatureAction
 */
 std::weak_ptr<uml::StructuralFeatureAction> InputPinImpl::getStructuralFeatureAction() const
 {
-
     return m_structuralFeatureAction;
 }
 void InputPinImpl::setStructuralFeatureAction(std::weak_ptr<uml::StructuralFeatureAction> _structuralFeatureAction)
 {
     m_structuralFeatureAction = _structuralFeatureAction;
-	m_action = this->getStructuralFeatureAction().lock();
-	m_owner = this->getAction().lock();
-	
-	
 	
 }
 
@@ -374,16 +343,11 @@ Getter & Setter for reference writeStructuralFeatureAction
 */
 std::weak_ptr<uml::WriteStructuralFeatureAction> InputPinImpl::getWriteStructuralFeatureAction() const
 {
-
     return m_writeStructuralFeatureAction;
 }
 void InputPinImpl::setWriteStructuralFeatureAction(std::weak_ptr<uml::WriteStructuralFeatureAction> _writeStructuralFeatureAction)
 {
     m_writeStructuralFeatureAction = _writeStructuralFeatureAction;
-	m_action = this->getWriteStructuralFeatureAction().lock();
-	m_owner = this->getAction().lock();
-	
-	
 	
 }
 

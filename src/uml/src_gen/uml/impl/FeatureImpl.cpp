@@ -103,8 +103,7 @@ FeatureImpl& FeatureImpl::operator=(const FeatureImpl & obj)
 	m_isStatic = obj.getIsStatic();
 
 	//copy references with no containment (soft copy)
-	std::shared_ptr<Union<uml::Classifier>> _featuringClassifier = obj.getFeaturingClassifier();
-	m_featuringClassifier.reset(new Union<uml::Classifier>(*(obj.getFeaturingClassifier().get())));
+	m_featuringClassifier  = obj.getFeaturingClassifier();
 	//Clone references with containment (deep copy)
 	return *this;
 }

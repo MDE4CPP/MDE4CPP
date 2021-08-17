@@ -178,147 +178,125 @@ ActivityImpl& ActivityImpl::operator=(const ActivityImpl & obj)
 
 	//copy references with no containment (soft copy)
 	//Clone references with containment (deep copy)
-	std::shared_ptr<Subset<uml::ActivityEdge, uml::Element>> edgeContainer = getEdge();
-	if(nullptr != edgeContainer )
+	//clone reference 'edge'
+	std::shared_ptr<Subset<uml::ActivityEdge, uml::Element>> edgeList = obj.getEdge();
+	if(edgeList)
 	{
-		int size = edgeContainer->size();
-		for(int i=0; i<size ; i++)
+		Bag<uml::ActivityEdge>::iterator edgeIter = edgeList->begin();
+		Bag<uml::ActivityEdge>::iterator edgeEnd = edgeList->end();
+		while (edgeIter != edgeEnd) 
 		{
-			auto _edge=(*edgeContainer)[i];
-			if(nullptr != _edge)
-			{
-				edgeContainer->push_back(std::dynamic_pointer_cast<uml::ActivityEdge>(_edge->copy()));
-			}
-			else
-			{
-				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container edge."<< std::endl;)
-			}
+			std::shared_ptr<uml::ActivityEdge> temp = std::dynamic_pointer_cast<uml::ActivityEdge>((*edgeIter)->copy());
+			getEdge()->push_back(temp);
+			edgeIter++;
 		}
 	}
 	else
 	{
 		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr edge."<< std::endl;)
 	}
-	std::shared_ptr<SubsetUnion<uml::ActivityNode, uml::Element>> nodeContainer = getNode();
-	if(nullptr != nodeContainer )
+
+	//clone reference 'node'
+	std::shared_ptr<SubsetUnion<uml::ActivityNode, uml::Element>> nodeList = obj.getNode();
+	if(nodeList)
 	{
-		int size = nodeContainer->size();
-		for(int i=0; i<size ; i++)
+		Bag<uml::ActivityNode>::iterator nodeIter = nodeList->begin();
+		Bag<uml::ActivityNode>::iterator nodeEnd = nodeList->end();
+		while (nodeIter != nodeEnd) 
 		{
-			auto _node=(*nodeContainer)[i];
-			if(nullptr != _node)
-			{
-				nodeContainer->push_back(std::dynamic_pointer_cast<uml::ActivityNode>(_node->copy()));
-			}
-			else
-			{
-				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container node."<< std::endl;)
-			}
+			std::shared_ptr<uml::ActivityNode> temp = std::dynamic_pointer_cast<uml::ActivityNode>((*nodeIter)->copy());
+			getNode()->push_back(temp);
+			nodeIter++;
 		}
 	}
 	else
 	{
 		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr node."<< std::endl;)
 	}
-	std::shared_ptr<SubsetUnion<uml::ActivityGroup, uml::ActivityGroup>> ownedGroupContainer = getOwnedGroup();
-	if(nullptr != ownedGroupContainer )
+
+	//clone reference 'ownedGroup'
+	std::shared_ptr<SubsetUnion<uml::ActivityGroup, uml::ActivityGroup>> ownedGroupList = obj.getOwnedGroup();
+	if(ownedGroupList)
 	{
-		int size = ownedGroupContainer->size();
-		for(int i=0; i<size ; i++)
+		Bag<uml::ActivityGroup>::iterator ownedGroupIter = ownedGroupList->begin();
+		Bag<uml::ActivityGroup>::iterator ownedGroupEnd = ownedGroupList->end();
+		while (ownedGroupIter != ownedGroupEnd) 
 		{
-			auto _ownedGroup=(*ownedGroupContainer)[i];
-			if(nullptr != _ownedGroup)
-			{
-				ownedGroupContainer->push_back(std::dynamic_pointer_cast<uml::ActivityGroup>(_ownedGroup->copy()));
-			}
-			else
-			{
-				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container ownedGroup."<< std::endl;)
-			}
+			std::shared_ptr<uml::ActivityGroup> temp = std::dynamic_pointer_cast<uml::ActivityGroup>((*ownedGroupIter)->copy());
+			getOwnedGroup()->push_back(temp);
+			ownedGroupIter++;
 		}
 	}
 	else
 	{
 		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr ownedGroup."<< std::endl;)
 	}
-	std::shared_ptr<Subset<uml::ActivityNode, uml::ActivityNode /*Subset does not reference a union*/>> ownedNodeContainer = getOwnedNode();
-	if(nullptr != ownedNodeContainer )
+
+	//clone reference 'ownedNode'
+	std::shared_ptr<Subset<uml::ActivityNode, uml::ActivityNode /*Subset does not reference a union*/>> ownedNodeList = obj.getOwnedNode();
+	if(ownedNodeList)
 	{
-		int size = ownedNodeContainer->size();
-		for(int i=0; i<size ; i++)
+		Bag<uml::ActivityNode>::iterator ownedNodeIter = ownedNodeList->begin();
+		Bag<uml::ActivityNode>::iterator ownedNodeEnd = ownedNodeList->end();
+		while (ownedNodeIter != ownedNodeEnd) 
 		{
-			auto _ownedNode=(*ownedNodeContainer)[i];
-			if(nullptr != _ownedNode)
-			{
-				ownedNodeContainer->push_back(std::dynamic_pointer_cast<uml::ActivityNode>(_ownedNode->copy()));
-			}
-			else
-			{
-				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container ownedNode."<< std::endl;)
-			}
+			std::shared_ptr<uml::ActivityNode> temp = std::dynamic_pointer_cast<uml::ActivityNode>((*ownedNodeIter)->copy());
+			getOwnedNode()->push_back(temp);
+			ownedNodeIter++;
 		}
 	}
 	else
 	{
 		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr ownedNode."<< std::endl;)
 	}
-	std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup,uml::ActivityGroup /*Subset does not reference a union*/>> partitionContainer = getPartition();
-	if(nullptr != partitionContainer )
+
+	//clone reference 'partition'
+	std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup /*Subset does not reference a union*/, uml::ActivityGroup>> partitionList = obj.getPartition();
+	if(partitionList)
 	{
-		int size = partitionContainer->size();
-		for(int i=0; i<size ; i++)
+		Bag<uml::ActivityPartition>::iterator partitionIter = partitionList->begin();
+		Bag<uml::ActivityPartition>::iterator partitionEnd = partitionList->end();
+		while (partitionIter != partitionEnd) 
 		{
-			auto _partition=(*partitionContainer)[i];
-			if(nullptr != _partition)
-			{
-				partitionContainer->push_back(std::dynamic_pointer_cast<uml::ActivityPartition>(_partition->copy()));
-			}
-			else
-			{
-				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container partition."<< std::endl;)
-			}
+			std::shared_ptr<uml::ActivityPartition> temp = std::dynamic_pointer_cast<uml::ActivityPartition>((*partitionIter)->copy());
+			getPartition()->push_back(temp);
+			partitionIter++;
 		}
 	}
 	else
 	{
 		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr partition."<< std::endl;)
 	}
-	std::shared_ptr<Subset<uml::StructuredActivityNode, uml::ActivityGroup,uml::ActivityNode /*Subset does not reference a union*/>> structuredNodeContainer = getStructuredNode();
-	if(nullptr != structuredNodeContainer )
+
+	//clone reference 'structuredNode'
+	std::shared_ptr<Subset<uml::StructuredActivityNode, uml::ActivityGroup, uml::ActivityNode /*Subset does not reference a union*/>> structuredNodeList = obj.getStructuredNode();
+	if(structuredNodeList)
 	{
-		int size = structuredNodeContainer->size();
-		for(int i=0; i<size ; i++)
+		Bag<uml::StructuredActivityNode>::iterator structuredNodeIter = structuredNodeList->begin();
+		Bag<uml::StructuredActivityNode>::iterator structuredNodeEnd = structuredNodeList->end();
+		while (structuredNodeIter != structuredNodeEnd) 
 		{
-			auto _structuredNode=(*structuredNodeContainer)[i];
-			if(nullptr != _structuredNode)
-			{
-				structuredNodeContainer->push_back(std::dynamic_pointer_cast<uml::StructuredActivityNode>(_structuredNode->copy()));
-			}
-			else
-			{
-				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container structuredNode."<< std::endl;)
-			}
+			std::shared_ptr<uml::StructuredActivityNode> temp = std::dynamic_pointer_cast<uml::StructuredActivityNode>((*structuredNodeIter)->copy());
+			getStructuredNode()->push_back(temp);
+			structuredNodeIter++;
 		}
 	}
 	else
 	{
 		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr structuredNode."<< std::endl;)
 	}
-	std::shared_ptr<Subset<uml::Variable, uml::NamedElement>> variableContainer = getVariable();
-	if(nullptr != variableContainer )
+
+	//clone reference 'variable'
+	std::shared_ptr<Subset<uml::Variable, uml::NamedElement>> variableList = obj.getVariable();
+	if(variableList)
 	{
-		int size = variableContainer->size();
-		for(int i=0; i<size ; i++)
+		Bag<uml::Variable>::iterator variableIter = variableList->begin();
+		Bag<uml::Variable>::iterator variableEnd = variableList->end();
+		while (variableIter != variableEnd) 
 		{
-			auto _variable=(*variableContainer)[i];
-			if(nullptr != _variable)
-			{
-				variableContainer->push_back(std::dynamic_pointer_cast<uml::Variable>(_variable->copy()));
-			}
-			else
-			{
-				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container variable."<< std::endl;)
-			}
+			std::shared_ptr<uml::Variable> temp = std::dynamic_pointer_cast<uml::Variable>((*variableIter)->copy());
+			getVariable()->push_back(temp);
+			variableIter++;
 		}
 	}
 	else
@@ -326,37 +304,37 @@ ActivityImpl& ActivityImpl::operator=(const ActivityImpl & obj)
 		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr variable."<< std::endl;)
 	}
 	/*Subset*/
-	m_edge->initSubset(getOwnedElement());
+	getEdge()->initSubset(getOwnedElement());
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Initialising value Subset: " << "m_edge - Subset<uml::ActivityEdge, uml::Element >(getOwnedElement())" << std::endl;
 	#endif
 	
 	/*SubsetUnion*/
-	m_node->initSubsetUnion(getOwnedElement());
+	getNode()->initSubsetUnion(getOwnedElement());
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Initialising value SubsetUnion: " << "m_node - SubsetUnion<uml::ActivityNode, uml::Element >(getOwnedElement())" << std::endl;
 	#endif
 	
 	/*SubsetUnion*/
-	m_ownedGroup->initSubsetUnion(getGroup());
+	getOwnedGroup()->initSubsetUnion(getGroup());
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Initialising value SubsetUnion: " << "m_ownedGroup - SubsetUnion<uml::ActivityGroup, uml::ActivityGroup >(getGroup())" << std::endl;
 	#endif
 	
 	/*Subset*/
-	m_ownedNode->initSubset(getNode());
+	getOwnedNode()->initSubset(getNode());
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Initialising value Subset: " << "m_ownedNode - Subset<uml::ActivityNode, uml::ActivityNode /*Subset does not reference a union*/ >(getNode())" << std::endl;
 	#endif
 	
 	/*Subset*/
-	m_structuredNode->initSubset(getGroup(),getNode());
+	getStructuredNode()->initSubset(getGroup(), getNode());
 	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Initialising value Subset: " << "m_structuredNode - Subset<uml::StructuredActivityNode, uml::ActivityGroup,uml::ActivityNode /*Subset does not reference a union*/ >(getGroup(),getNode())" << std::endl;
+		std::cout << "Initialising value Subset: " << "m_structuredNode - Subset<uml::StructuredActivityNode, uml::ActivityGroup, uml::ActivityNode /*Subset does not reference a union*/ >(getGroup(), getNode())" << std::endl;
 	#endif
 	
 	/*Subset*/
-	m_variable->initSubset(getOwnedMember());
+	getVariable()->initSubset(getOwnedMember());
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Initialising value Subset: " << "m_variable - Subset<uml::Variable, uml::NamedElement >(getOwnedMember())" << std::endl;
 	#endif
@@ -440,13 +418,12 @@ std::shared_ptr<Subset<uml::ActivityEdge, uml::Element>> ActivityImpl::getEdge()
 		#endif
 		
 		/*Subset*/
-		m_edge->initSubset(getOwnedElement());
+		getEdge()->initSubset(getOwnedElement());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value Subset: " << "m_edge - Subset<uml::ActivityEdge, uml::Element >(getOwnedElement())" << std::endl;
 		#endif
 		
 	}
-
     return m_edge;
 }
 
@@ -473,13 +450,12 @@ std::shared_ptr<SubsetUnion<uml::ActivityNode, uml::Element>> ActivityImpl::getN
 		#endif
 		
 		/*SubsetUnion*/
-		m_node->initSubsetUnion(getOwnedElement());
+		getNode()->initSubsetUnion(getOwnedElement());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value SubsetUnion: " << "m_node - SubsetUnion<uml::ActivityNode, uml::Element >(getOwnedElement())" << std::endl;
 		#endif
 		
 	}
-
     return m_node;
 }
 
@@ -499,13 +475,12 @@ std::shared_ptr<SubsetUnion<uml::ActivityGroup, uml::ActivityGroup>> ActivityImp
 		#endif
 		
 		/*SubsetUnion*/
-		m_ownedGroup->initSubsetUnion(getGroup());
+		getOwnedGroup()->initSubsetUnion(getGroup());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value SubsetUnion: " << "m_ownedGroup - SubsetUnion<uml::ActivityGroup, uml::ActivityGroup >(getGroup())" << std::endl;
 		#endif
 		
 	}
-
     return m_ownedGroup;
 }
 
@@ -525,13 +500,12 @@ std::shared_ptr<Subset<uml::ActivityNode, uml::ActivityNode /*Subset does not re
 		#endif
 		
 		/*Subset*/
-		m_ownedNode->initSubset(getNode());
+		getOwnedNode()->initSubset(getNode());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value Subset: " << "m_ownedNode - Subset<uml::ActivityNode, uml::ActivityNode /*Subset does not reference a union*/ >(getNode())" << std::endl;
 		#endif
 		
 	}
-
     return m_ownedNode;
 }
 
@@ -540,24 +514,23 @@ std::shared_ptr<Subset<uml::ActivityNode, uml::ActivityNode /*Subset does not re
 /*
 Getter & Setter for reference partition
 */
-std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup,uml::ActivityGroup /*Subset does not reference a union*/>> ActivityImpl::getPartition() const
+std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup /*Subset does not reference a union*/, uml::ActivityGroup>> ActivityImpl::getPartition() const
 {
 	if(m_partition == nullptr)
 	{
 		/*Subset*/
-		m_partition.reset(new Subset<uml::ActivityPartition, uml::ActivityGroup,uml::ActivityGroup /*Subset does not reference a union*/ >());
+		m_partition.reset(new Subset<uml::ActivityPartition, uml::ActivityGroup /*Subset does not reference a union*/, uml::ActivityGroup >());
 		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer Subset: " << "m_partition - Subset<uml::ActivityPartition, uml::ActivityGroup,uml::ActivityGroup /*Subset does not reference a union*/ >()" << std::endl;
+			std::cout << "Initialising shared pointer Subset: " << "m_partition - Subset<uml::ActivityPartition, uml::ActivityGroup /*Subset does not reference a union*/, uml::ActivityGroup >()" << std::endl;
 		#endif
 		
 		/*Subset*/
-		m_partition->initSubset(getGroup(),getOwnedGroup());
+		getPartition()->initSubset(getOwnedGroup(), getGroup());
 		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_partition - Subset<uml::ActivityPartition, uml::ActivityGroup,uml::ActivityGroup /*Subset does not reference a union*/ >(getGroup(),getOwnedGroup())" << std::endl;
+			std::cout << "Initialising value Subset: " << "m_partition - Subset<uml::ActivityPartition, uml::ActivityGroup /*Subset does not reference a union*/, uml::ActivityGroup >(getOwnedGroup(), getGroup())" << std::endl;
 		#endif
 		
 	}
-
     return m_partition;
 }
 
@@ -566,24 +539,23 @@ std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup,uml::ActivityG
 /*
 Getter & Setter for reference structuredNode
 */
-std::shared_ptr<Subset<uml::StructuredActivityNode, uml::ActivityGroup,uml::ActivityNode /*Subset does not reference a union*/>> ActivityImpl::getStructuredNode() const
+std::shared_ptr<Subset<uml::StructuredActivityNode, uml::ActivityGroup, uml::ActivityNode /*Subset does not reference a union*/>> ActivityImpl::getStructuredNode() const
 {
 	if(m_structuredNode == nullptr)
 	{
 		/*Subset*/
-		m_structuredNode.reset(new Subset<uml::StructuredActivityNode, uml::ActivityGroup,uml::ActivityNode /*Subset does not reference a union*/ >());
+		m_structuredNode.reset(new Subset<uml::StructuredActivityNode, uml::ActivityGroup, uml::ActivityNode /*Subset does not reference a union*/ >());
 		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer Subset: " << "m_structuredNode - Subset<uml::StructuredActivityNode, uml::ActivityGroup,uml::ActivityNode /*Subset does not reference a union*/ >()" << std::endl;
+			std::cout << "Initialising shared pointer Subset: " << "m_structuredNode - Subset<uml::StructuredActivityNode, uml::ActivityGroup, uml::ActivityNode /*Subset does not reference a union*/ >()" << std::endl;
 		#endif
 		
 		/*Subset*/
-		m_structuredNode->initSubset(getGroup(),getNode());
+		getStructuredNode()->initSubset(getGroup(), getNode());
 		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_structuredNode - Subset<uml::StructuredActivityNode, uml::ActivityGroup,uml::ActivityNode /*Subset does not reference a union*/ >(getGroup(),getNode())" << std::endl;
+			std::cout << "Initialising value Subset: " << "m_structuredNode - Subset<uml::StructuredActivityNode, uml::ActivityGroup, uml::ActivityNode /*Subset does not reference a union*/ >(getGroup(), getNode())" << std::endl;
 		#endif
 		
 	}
-
     return m_structuredNode;
 }
 
@@ -603,13 +575,12 @@ std::shared_ptr<Subset<uml::Variable, uml::NamedElement>> ActivityImpl::getVaria
 		#endif
 		
 		/*Subset*/
-		m_variable->initSubset(getOwnedMember());
+		getVariable()->initSubset(getOwnedMember());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value Subset: " << "m_variable - Subset<uml::Variable, uml::NamedElement >(getOwnedMember())" << std::endl;
 		#endif
 		
 	}
-
     return m_variable;
 }
 
@@ -629,7 +600,7 @@ std::shared_ptr<SubsetUnion<uml::Property, uml::Feature>> ActivityImpl::getAttri
 		#endif
 		
 		/*SubsetUnion*/
-		m_attribute->initSubsetUnion(getFeature());
+		getAttribute()->initSubsetUnion(getFeature());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value SubsetUnion: " << "m_attribute - SubsetUnion<uml::Property, uml::Feature >(getFeature())" << std::endl;
 		#endif
@@ -649,7 +620,7 @@ std::shared_ptr<SubsetUnion<uml::Feature, uml::NamedElement>> ActivityImpl::getF
 		#endif
 		
 		/*SubsetUnion*/
-		m_feature->initSubsetUnion(getMember());
+		getFeature()->initSubsetUnion(getMember());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value SubsetUnion: " << "m_feature - SubsetUnion<uml::Feature, uml::NamedElement >(getMember())" << std::endl;
 		#endif
@@ -669,7 +640,7 @@ std::shared_ptr<SubsetUnion<uml::ActivityGroup, uml::Element>> ActivityImpl::get
 		#endif
 		
 		/*SubsetUnion*/
-		m_group->initSubsetUnion(getOwnedElement());
+		getGroup()->initSubsetUnion(getOwnedElement());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value SubsetUnion: " << "m_group - SubsetUnion<uml::ActivityGroup, uml::Element >(getOwnedElement())" << std::endl;
 		#endif
@@ -713,20 +684,20 @@ std::shared_ptr<Union<uml::Element>> ActivityImpl::getOwnedElement() const
 	return m_ownedElement;
 }
 
-std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement>> ActivityImpl::getOwnedMember() const
+std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement>> ActivityImpl::getOwnedMember() const
 {
 	if(m_ownedMember == nullptr)
 	{
 		/*SubsetUnion*/
-		m_ownedMember.reset(new SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement >());
+		m_ownedMember.reset(new SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement >());
 		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement >()" << std::endl;
+			std::cout << "Initialising shared pointer SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement >()" << std::endl;
 		#endif
 		
 		/*SubsetUnion*/
-		m_ownedMember->initSubsetUnion(getOwnedElement(),getMember());
+		getOwnedMember()->initSubsetUnion(getOwnedElement(), getMember());
 		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement >(getOwnedElement(),getMember())" << std::endl;
+			std::cout << "Initialising value SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement >(getOwnedElement(), getMember())" << std::endl;
 		#endif
 		
 	}
@@ -779,7 +750,7 @@ std::shared_ptr<SubsetUnion<uml::ConnectableElement, uml::NamedElement>> Activit
 		#endif
 		
 		/*SubsetUnion*/
-		m_role->initSubsetUnion(getMember());
+		getRole()->initSubsetUnion(getMember());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value SubsetUnion: " << "m_role - SubsetUnion<uml::ConnectableElement, uml::NamedElement >(getMember())" << std::endl;
 		#endif
@@ -1513,7 +1484,7 @@ void ActivityImpl::resolveReferences(const int featureID, std::vector<std::share
 	{
 		case uml::umlPackage::ACTIVITY_ATTRIBUTE_PARTITION:
 		{
-			std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup,uml::ActivityGroup /*Subset does not reference a union*/>> _partition = getPartition();
+			std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup /*Subset does not reference a union*/, uml::ActivityGroup>> _partition = getPartition();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<uml::ActivityPartition>  _r = std::dynamic_pointer_cast<uml::ActivityPartition>(ref);

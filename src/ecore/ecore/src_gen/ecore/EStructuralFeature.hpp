@@ -126,21 +126,21 @@ namespace ecore
 			//*********************************
 			// Attribute Members
 			//*********************************
-			 
+			
 			bool m_changeable = true;
-			 
+			
 			Any m_defaultValue = nullptr;
-			 
+			
 			std::string m_defaultValueLiteral = "";
-			 
+			
 			bool m_derived = false;
-			 
+			
 			int m_featureID = -1;
-			 
+			
 			bool m_transient = false;
-			 
+			
 			bool m_unsettable = false;
-			 
+			
 			bool m_volatile = false;
 			
 			

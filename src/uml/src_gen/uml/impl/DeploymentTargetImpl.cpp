@@ -103,24 +103,19 @@ DeploymentTargetImpl& DeploymentTargetImpl::operator=(const DeploymentTargetImpl
 	//Clone Attributes with (deep copy)
 
 	//copy references with no containment (soft copy)
-	std::shared_ptr<Bag<uml::PackageableElement>> _deployedElement = obj.getDeployedElement();
-	m_deployedElement.reset(new Bag<uml::PackageableElement>(*(obj.getDeployedElement().get())));
+	m_deployedElement  = obj.getDeployedElement();
 	//Clone references with containment (deep copy)
-	std::shared_ptr<Subset<uml::Deployment, uml::Element>> deploymentContainer = getDeployment();
-	if(nullptr != deploymentContainer )
+	//clone reference 'deployment'
+	std::shared_ptr<Subset<uml::Deployment, uml::Element>> deploymentList = obj.getDeployment();
+	if(deploymentList)
 	{
-		int size = deploymentContainer->size();
-		for(int i=0; i<size ; i++)
+		Bag<uml::Deployment>::iterator deploymentIter = deploymentList->begin();
+		Bag<uml::Deployment>::iterator deploymentEnd = deploymentList->end();
+		while (deploymentIter != deploymentEnd) 
 		{
-			auto _deployment=(*deploymentContainer)[i];
-			if(nullptr != _deployment)
-			{
-				deploymentContainer->push_back(std::dynamic_pointer_cast<uml::Deployment>(_deployment->copy()));
-			}
-			else
-			{
-				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container deployment."<< std::endl;)
-			}
+			std::shared_ptr<uml::Deployment> temp = std::dynamic_pointer_cast<uml::Deployment>((*deploymentIter)->copy());
+			getDeployment()->push_back(temp);
+			deploymentIter++;
 		}
 	}
 	else
@@ -128,7 +123,7 @@ DeploymentTargetImpl& DeploymentTargetImpl::operator=(const DeploymentTargetImpl
 		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr deployment."<< std::endl;)
 	}
 	/*Subset*/
-	m_deployment->initSubset(getOwnedElement());
+	getDeployment()->initSubset(getOwnedElement());
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Initialising value Subset: " << "m_deployment - Subset<uml::Deployment, uml::Element >(getOwnedElement())" << std::endl;
 	#endif
@@ -176,7 +171,6 @@ std::shared_ptr<Bag<uml::PackageableElement>> DeploymentTargetImpl::getDeployedE
 		
 		
 	}
-
     return m_deployedElement;
 }
 
@@ -196,13 +190,12 @@ std::shared_ptr<Subset<uml::Deployment, uml::Element>> DeploymentTargetImpl::get
 		#endif
 		
 		/*Subset*/
-		m_deployment->initSubset(getOwnedElement());
+		getDeployment()->initSubset(getOwnedElement());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value Subset: " << "m_deployment - Subset<uml::Deployment, uml::Element >(getOwnedElement())" << std::endl;
 		#endif
 		
 	}
-
     return m_deployment;
 }
 

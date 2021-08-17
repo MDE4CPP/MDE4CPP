@@ -150,7 +150,6 @@ Getter & Setter for reference type
 */
 std::shared_ptr<uml::PrimitiveType> PrimitiveValueImpl::getType() const
 {
-//assert(m_type);
     return m_type;
 }
 void PrimitiveValueImpl::setType(std::shared_ptr<uml::PrimitiveType> _type)

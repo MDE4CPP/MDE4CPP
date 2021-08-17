@@ -145,7 +145,6 @@ Getter & Setter for reference ePackage
 */
 std::shared_ptr<ecore::EPackage> EFactoryImpl::getEPackage() const
 {
-//assert(m_ePackage);
     return m_ePackage;
 }
 void EFactoryImpl::setEPackage(std::shared_ptr<ecore::EPackage> _ePackage)

@@ -4041,11 +4041,8 @@ void umlPackageImpl::initializeBehavioralFeatureContent()
 		{
 			m_behavioralFeature_Attribute_ownedParameter->setDefaultValueLiteral(defaultValue);
 		}				
-		std::shared_ptr<ecore::EReference>  otherEnd = uml::umlPackage::eInstance()->getParameter_Attribute_operation();
-		if (otherEnd != nullptr)
-	    {
-	   		m_behavioralFeature_Attribute_ownedParameter->setEOpposite(otherEnd);
-	    }
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_behavioralFeature_Attribute_ownedParameterSet->setName("ownedParameterSet");
 	m_behavioralFeature_Attribute_ownedParameterSet->setEType(getParameterSet_Class());
@@ -10745,7 +10742,7 @@ void umlPackageImpl::initializeEncapsulatedClassifierContent()
 	m_encapsulatedClassifier_Attribute_ownedPort->setUnique(true);
 	m_encapsulatedClassifier_Attribute_ownedPort->setDerived(true);
 	m_encapsulatedClassifier_Attribute_ownedPort->setOrdered(false);
-	m_encapsulatedClassifier_Attribute_ownedPort->setContainment(false);
+	m_encapsulatedClassifier_Attribute_ownedPort->setContainment(true);
 	m_encapsulatedClassifier_Attribute_ownedPort->setResolveProxies(true);
 	{
 		std::string defaultValue = "";
@@ -20077,6 +20074,31 @@ void umlPackageImpl::initializeOperationContent()
 	   		m_operation_Attribute_interface->setEOpposite(otherEnd);
 	    }
 	}
+	m_operation_Attribute_ownedParameter->setName("ownedParameter");
+	m_operation_Attribute_ownedParameter->setEType(getParameter_Class());
+	m_operation_Attribute_ownedParameter->setLowerBound(0);
+	m_operation_Attribute_ownedParameter->setUpperBound(-1);
+	m_operation_Attribute_ownedParameter->setTransient(false);
+	m_operation_Attribute_ownedParameter->setVolatile(false);
+	m_operation_Attribute_ownedParameter->setChangeable(true);
+	m_operation_Attribute_ownedParameter->setUnsettable(false);
+	m_operation_Attribute_ownedParameter->setUnique(true);
+	m_operation_Attribute_ownedParameter->setDerived(false);
+	m_operation_Attribute_ownedParameter->setOrdered(true);
+	m_operation_Attribute_ownedParameter->setContainment(true);
+	m_operation_Attribute_ownedParameter->setResolveProxies(true);
+	{
+		std::string defaultValue = "";
+		if (!defaultValue.empty())
+		{
+			m_operation_Attribute_ownedParameter->setDefaultValueLiteral(defaultValue);
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::umlPackage::eInstance()->getParameter_Attribute_operation();
+		if (otherEnd != nullptr)
+	    {
+	   		m_operation_Attribute_ownedParameter->setEOpposite(otherEnd);
+	    }
+	}
 	m_operation_Attribute_postcondition->setName("postcondition");
 	m_operation_Attribute_postcondition->setEType(getConstraint_Class());
 	m_operation_Attribute_postcondition->setLowerBound(0);
@@ -21614,7 +21636,7 @@ void umlPackageImpl::initializeParameterContent()
 		{
 			m_parameter_Attribute_operation->setDefaultValueLiteral(defaultValue);
 		}				
-		std::shared_ptr<ecore::EReference>  otherEnd = uml::umlPackage::eInstance()->getBehavioralFeature_Attribute_ownedParameter();
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::umlPackage::eInstance()->getOperation_Attribute_ownedParameter();
 		if (otherEnd != nullptr)
 	    {
 	   		m_parameter_Attribute_operation->setEOpposite(otherEnd);

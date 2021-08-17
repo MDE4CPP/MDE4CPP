@@ -104,6 +104,7 @@ PackageImportImpl& PackageImportImpl::operator=(const PackageImportImpl & obj)
 	//copy references with no containment (soft copy)
 	m_importingNamespace  = obj.getImportingNamespace();
 	//Clone references with containment (deep copy)
+	//clone reference 'importedPackage'
 	if(obj.getImportedPackage()!=nullptr)
 	{
 		m_importedPackage = std::dynamic_pointer_cast<uml::Package>(obj.getImportedPackage()->copy());
@@ -158,14 +159,11 @@ Getter & Setter for reference importedPackage
 */
 std::shared_ptr<uml::Package> PackageImportImpl::getImportedPackage() const
 {
-//assert(m_importedPackage);
     return m_importedPackage;
 }
 void PackageImportImpl::setImportedPackage(std::shared_ptr<uml::Package> _importedPackage)
 {
     m_importedPackage = _importedPackage;
-	
-	
 	
 }
 
@@ -175,16 +173,11 @@ Getter & Setter for reference importingNamespace
 */
 std::weak_ptr<uml::Namespace> PackageImportImpl::getImportingNamespace() const
 {
-//assert(m_importingNamespace);
     return m_importingNamespace;
 }
 void PackageImportImpl::setImportingNamespace(std::weak_ptr<uml::Namespace> _importingNamespace)
 {
     m_importingNamespace = _importingNamespace;
-	
-	
-	m_owner = this->getImportingNamespace().lock();
-	
 	
 }
 
@@ -238,7 +231,7 @@ std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> PackageImportImpl::getS
 		#endif
 		
 		/*SubsetUnion*/
-		m_source->initSubsetUnion(getRelatedElement());
+		getSource()->initSubsetUnion(getRelatedElement());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value SubsetUnion: " << "m_source - SubsetUnion<uml::Element, uml::Element >(getRelatedElement())" << std::endl;
 		#endif
@@ -258,7 +251,7 @@ std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> PackageImportImpl::getT
 		#endif
 		
 		/*SubsetUnion*/
-		m_target->initSubsetUnion(getRelatedElement());
+		getTarget()->initSubsetUnion(getRelatedElement());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value SubsetUnion: " << "m_target - SubsetUnion<uml::Element, uml::Element >(getRelatedElement())" << std::endl;
 		#endif

@@ -32,11 +32,11 @@
 
 #include <exception> // used in Persistence
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
-#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Values/ValuesFactory.hpp"
+#include "fUML/Semantics/Loci/LociFactory.hpp"
 
 
 #include "ocl/Evaluations/EvalEnvironment.hpp"
@@ -134,7 +134,6 @@ Getter & Setter for reference in
 */
 std::shared_ptr<ocl::Evaluations::OclExpEval> LetExpEvalImpl::getIn() const
 {
-//assert(m_in);
     return m_in;
 }
 void LetExpEvalImpl::setIn(std::shared_ptr<ocl::Evaluations::OclExpEval> _in)
@@ -149,7 +148,6 @@ Getter & Setter for reference initExpression
 */
 std::shared_ptr<ocl::Evaluations::OclExpEval> LetExpEvalImpl::getInitExpression() const
 {
-
     return m_initExpression;
 }
 void LetExpEvalImpl::setInitExpression(std::shared_ptr<ocl::Evaluations::OclExpEval> _initExpression)
@@ -164,7 +162,6 @@ Getter & Setter for reference variable
 */
 std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> LetExpEvalImpl::getVariable() const
 {
-//assert(m_variable);
     return m_variable;
 }
 void LetExpEvalImpl::setVariable(std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> _variable)

@@ -149,7 +149,7 @@ namespace uml
 			Specifies whether existing values of the StructuralFeature should be removed before adding the new value.
 			<p>From package UML::Actions.</p>
 			*/
-			 
+			
 			bool m_isReplaceAll = false;
 			
 			

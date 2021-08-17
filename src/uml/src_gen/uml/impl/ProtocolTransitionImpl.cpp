@@ -122,13 +122,15 @@ ProtocolTransitionImpl& ProtocolTransitionImpl::operator=(const ProtocolTransiti
 	//Clone Attributes with (deep copy)
 
 	//copy references with no containment (soft copy)
-	std::shared_ptr<Bag<uml::Operation>> _referred = obj.getReferred();
-	m_referred.reset(new Bag<uml::Operation>(*(obj.getReferred().get())));
+	m_referred  = obj.getReferred();
 	//Clone references with containment (deep copy)
+	//clone reference 'postCondition'
 	if(obj.getPostCondition()!=nullptr)
 	{
 		m_postCondition = std::dynamic_pointer_cast<uml::Constraint>(obj.getPostCondition()->copy());
 	}
+
+	//clone reference 'preCondition'
 	if(obj.getPreCondition()!=nullptr)
 	{
 		m_preCondition = std::dynamic_pointer_cast<uml::Constraint>(obj.getPreCondition()->copy());
@@ -188,16 +190,11 @@ Getter & Setter for reference postCondition
 */
 std::shared_ptr<uml::Constraint> ProtocolTransitionImpl::getPostCondition() const
 {
-
     return m_postCondition;
 }
 void ProtocolTransitionImpl::setPostCondition(std::shared_ptr<uml::Constraint> _postCondition)
 {
     m_postCondition = _postCondition;
-	
-	
-	
-	
 	
 }
 
@@ -207,31 +204,12 @@ Getter & Setter for reference preCondition
 */
 std::shared_ptr<uml::Constraint> ProtocolTransitionImpl::getPreCondition() const
 {
-
     return m_preCondition;
 }
 void ProtocolTransitionImpl::setPreCondition(std::shared_ptr<uml::Constraint> _preCondition)
 {
     m_preCondition = _preCondition;
-	//additional setter call for redefined reference Transition::guard
-	uml::TransitionImpl::setGuard(_preCondition);
 	
-}
-/*Additional Setter for redefined reference 'Transition::guard'*/
-void ProtocolTransitionImpl::setGuard(std::shared_ptr<uml::Constraint> _guard)
-{
-	std::shared_ptr<uml::Constraint> _preCondition = std::dynamic_pointer_cast<uml::Constraint>(_guard);
-	if(_preCondition)
-	{
-		m_preCondition = _preCondition;
-
-		//additional setter call for redefined reference Transition::guard
-		uml::TransitionImpl::setGuard(_preCondition);
-	}
-	else
-	{
-		std::cerr<<"[ProtocolTransition::setGuard] : Could not set guard because provided guard was not of type 'std::shared_ptr<uml::Constraint>'"<<std::endl;
-	}
 }
 
 
@@ -246,7 +224,6 @@ std::shared_ptr<Bag<uml::Operation>> ProtocolTransitionImpl::getReferred() const
 		
 		
 	}
-
     return m_referred;
 }
 
@@ -290,20 +267,20 @@ std::shared_ptr<Union<uml::Element>> ProtocolTransitionImpl::getOwnedElement() c
 	return m_ownedElement;
 }
 
-std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement>> ProtocolTransitionImpl::getOwnedMember() const
+std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement>> ProtocolTransitionImpl::getOwnedMember() const
 {
 	if(m_ownedMember == nullptr)
 	{
 		/*SubsetUnion*/
-		m_ownedMember.reset(new SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement >());
+		m_ownedMember.reset(new SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement >());
 		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement >()" << std::endl;
+			std::cout << "Initialising shared pointer SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement >()" << std::endl;
 		#endif
 		
 		/*SubsetUnion*/
-		m_ownedMember->initSubsetUnion(getOwnedElement(),getMember());
+		getOwnedMember()->initSubsetUnion(getOwnedElement(), getMember());
 		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement >(getOwnedElement(),getMember())" << std::endl;
+			std::cout << "Initialising value SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement >(getOwnedElement(), getMember())" << std::endl;
 		#endif
 		
 	}

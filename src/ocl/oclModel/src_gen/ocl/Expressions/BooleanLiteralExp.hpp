@@ -103,7 +103,7 @@ namespace ocl::Expressions
 			//*********************************
 			// Attribute Members
 			//*********************************
-			 
+			
 			bool m_booleanSymbol = false;
 			
 			

@@ -134,6 +134,7 @@ AddStructuralFeatureValueActionImpl& AddStructuralFeatureValueActionImpl::operat
 
 	//copy references with no containment (soft copy)
 	//Clone references with containment (deep copy)
+	//clone reference 'insertAt'
 	if(obj.getInsertAt()!=nullptr)
 	{
 		m_insertAt = std::dynamic_pointer_cast<uml::InputPin>(obj.getInsertAt()->copy());
@@ -195,14 +196,11 @@ Getter & Setter for reference insertAt
 */
 std::shared_ptr<uml::InputPin> AddStructuralFeatureValueActionImpl::getInsertAt() const
 {
-
     return m_insertAt;
 }
 void AddStructuralFeatureValueActionImpl::setInsertAt(std::shared_ptr<uml::InputPin> _insertAt)
 {
     m_insertAt = _insertAt;
-	
-	
 	
 }
 
@@ -236,7 +234,7 @@ std::shared_ptr<SubsetUnion<uml::InputPin, uml::Element>> AddStructuralFeatureVa
 		#endif
 		
 		/*SubsetUnion*/
-		m_input->initSubsetUnion(getOwnedElement());
+		getInput()->initSubsetUnion(getOwnedElement());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value SubsetUnion: " << "m_input - SubsetUnion<uml::InputPin, uml::Element >(getOwnedElement())" << std::endl;
 		#endif
@@ -256,7 +254,7 @@ std::shared_ptr<SubsetUnion<uml::OutputPin, uml::Element>> AddStructuralFeatureV
 		#endif
 		
 		/*SubsetUnion*/
-		m_output->initSubsetUnion(getOwnedElement());
+		getOutput()->initSubsetUnion(getOwnedElement());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value SubsetUnion: " << "m_output - SubsetUnion<uml::OutputPin, uml::Element >(getOwnedElement())" << std::endl;
 		#endif

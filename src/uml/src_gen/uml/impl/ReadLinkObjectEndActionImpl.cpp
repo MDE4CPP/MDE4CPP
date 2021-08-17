@@ -134,10 +134,13 @@ ReadLinkObjectEndActionImpl& ReadLinkObjectEndActionImpl::operator=(const ReadLi
 	//copy references with no containment (soft copy)
 	m_end  = obj.getEnd();
 	//Clone references with containment (deep copy)
+	//clone reference 'object'
 	if(obj.getObject()!=nullptr)
 	{
 		m_object = std::dynamic_pointer_cast<uml::InputPin>(obj.getObject()->copy());
 	}
+
+	//clone reference 'result'
 	if(obj.getResult()!=nullptr)
 	{
 		m_result = std::dynamic_pointer_cast<uml::OutputPin>(obj.getResult()->copy());
@@ -217,7 +220,6 @@ Getter & Setter for reference end
 */
 std::shared_ptr<uml::Property> ReadLinkObjectEndActionImpl::getEnd() const
 {
-//assert(m_end);
     return m_end;
 }
 void ReadLinkObjectEndActionImpl::setEnd(std::shared_ptr<uml::Property> _end)
@@ -232,14 +234,11 @@ Getter & Setter for reference object
 */
 std::shared_ptr<uml::InputPin> ReadLinkObjectEndActionImpl::getObject() const
 {
-//assert(m_object);
     return m_object;
 }
 void ReadLinkObjectEndActionImpl::setObject(std::shared_ptr<uml::InputPin> _object)
 {
     m_object = _object;
-	
-	
 	
 }
 
@@ -249,14 +248,11 @@ Getter & Setter for reference result
 */
 std::shared_ptr<uml::OutputPin> ReadLinkObjectEndActionImpl::getResult() const
 {
-//assert(m_result);
     return m_result;
 }
 void ReadLinkObjectEndActionImpl::setResult(std::shared_ptr<uml::OutputPin> _result)
 {
     m_result = _result;
-	
-	
 	
 }
 
@@ -290,7 +286,7 @@ std::shared_ptr<SubsetUnion<uml::InputPin, uml::Element>> ReadLinkObjectEndActio
 		#endif
 		
 		/*SubsetUnion*/
-		m_input->initSubsetUnion(getOwnedElement());
+		getInput()->initSubsetUnion(getOwnedElement());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value SubsetUnion: " << "m_input - SubsetUnion<uml::InputPin, uml::Element >(getOwnedElement())" << std::endl;
 		#endif
@@ -310,7 +306,7 @@ std::shared_ptr<SubsetUnion<uml::OutputPin, uml::Element>> ReadLinkObjectEndActi
 		#endif
 		
 		/*SubsetUnion*/
-		m_output->initSubsetUnion(getOwnedElement());
+		getOutput()->initSubsetUnion(getOwnedElement());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value SubsetUnion: " << "m_output - SubsetUnion<uml::OutputPin, uml::Element >(getOwnedElement())" << std::endl;
 		#endif

@@ -149,14 +149,14 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::ActivityEdge, uml::ActivityEdge,uml::Element>> getEdge() const = 0;
+			virtual std::shared_ptr<Subset<uml::ActivityEdge, uml::ActivityEdge, uml::Element>> getEdge() const = 0;
 			
 			/*!
 			The ActivityNodes immediately contained in the StructuredActivityNode.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::ActivityNode, uml::ActivityNode,uml::Element>> getNode() const = 0;
+			virtual std::shared_ptr<Subset<uml::ActivityNode, uml::ActivityNode, uml::Element>> getNode() const = 0;
 			
 			/*!
 			The InputPins owned by the StructuredActivityNode.
@@ -189,7 +189,7 @@ namespace uml
 			If true, then any object used by an Action within the StructuredActivityNode cannot be accessed by any Action outside the node until the StructuredActivityNode as a whole completes. Any concurrent Actions that would result in accessing such objects are required to have their execution deferred until the completion of the StructuredActivityNode.
 			<p>From package UML::Actions.</p>
 			*/
-			 
+			
 			bool m_mustIsolate = false;
 			
 			
@@ -201,12 +201,12 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			mutable std::shared_ptr<Subset<uml::ActivityEdge, uml::ActivityEdge,uml::Element>> m_edge;/*!
+			mutable std::shared_ptr<Subset<uml::ActivityEdge, uml::ActivityEdge, uml::Element>> m_edge;/*!
 			The ActivityNodes immediately contained in the StructuredActivityNode.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			mutable std::shared_ptr<Subset<uml::ActivityNode, uml::ActivityNode,uml::Element>> m_node;/*!
+			mutable std::shared_ptr<Subset<uml::ActivityNode, uml::ActivityNode, uml::Element>> m_node;/*!
 			The InputPins owned by the StructuredActivityNode.
 			<p>From package UML::Actions.</p>
 			*/
@@ -267,7 +267,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement>> getOwnedMember() const = 0;/*!
+			virtual std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement>> getOwnedMember() const = 0;/*!
 			The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/

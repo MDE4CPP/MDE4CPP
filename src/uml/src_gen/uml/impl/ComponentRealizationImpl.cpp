@@ -133,21 +133,17 @@ ComponentRealizationImpl& ComponentRealizationImpl::operator=(const ComponentRea
 	//copy references with no containment (soft copy)
 	m_abstraction  = obj.getAbstraction();
 	//Clone references with containment (deep copy)
-	std::shared_ptr<Subset<uml::Classifier, uml::NamedElement /*Subset does not reference a union*/>> realizingClassifierContainer = getRealizingClassifier();
-	if(nullptr != realizingClassifierContainer )
+	//clone reference 'realizingClassifier'
+	std::shared_ptr<Subset<uml::Classifier, uml::NamedElement /*Subset does not reference a union*/>> realizingClassifierList = obj.getRealizingClassifier();
+	if(realizingClassifierList)
 	{
-		int size = realizingClassifierContainer->size();
-		for(int i=0; i<size ; i++)
+		Bag<uml::Classifier>::iterator realizingClassifierIter = realizingClassifierList->begin();
+		Bag<uml::Classifier>::iterator realizingClassifierEnd = realizingClassifierList->end();
+		while (realizingClassifierIter != realizingClassifierEnd) 
 		{
-			auto _realizingClassifier=(*realizingClassifierContainer)[i];
-			if(nullptr != _realizingClassifier)
-			{
-				realizingClassifierContainer->push_back(std::dynamic_pointer_cast<uml::Classifier>(_realizingClassifier->copy()));
-			}
-			else
-			{
-				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container realizingClassifier."<< std::endl;)
-			}
+			std::shared_ptr<uml::Classifier> temp = std::dynamic_pointer_cast<uml::Classifier>((*realizingClassifierIter)->copy());
+			getRealizingClassifier()->push_back(temp);
+			realizingClassifierIter++;
 		}
 	}
 	else
@@ -186,17 +182,11 @@ Getter & Setter for reference abstraction
 */
 std::weak_ptr<uml::Component> ComponentRealizationImpl::getAbstraction() const
 {
-
     return m_abstraction;
 }
 void ComponentRealizationImpl::setAbstraction(std::weak_ptr<uml::Component> _abstraction)
 {
     m_abstraction = _abstraction;
-	
-	
-	
-	m_owner = this->getAbstraction().lock();
-	
 	
 }
 
@@ -215,13 +205,12 @@ std::shared_ptr<Subset<uml::Classifier, uml::NamedElement /*Subset does not refe
 		#endif
 		
 		/*Subset*/
-		m_realizingClassifier->initSubset(getClient());
+		getRealizingClassifier()->initSubset(getClient());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value Subset: " << "m_realizingClassifier - Subset<uml::Classifier, uml::NamedElement /*Subset does not reference a union*/ >(getClient())" << std::endl;
 		#endif
 		
 	}
-//assert(m_realizingClassifier);
     return m_realizingClassifier;
 }
 
@@ -281,7 +270,7 @@ std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> ComponentRealizationImp
 		#endif
 		
 		/*SubsetUnion*/
-		m_source->initSubsetUnion(getRelatedElement());
+		getSource()->initSubsetUnion(getRelatedElement());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value SubsetUnion: " << "m_source - SubsetUnion<uml::Element, uml::Element >(getRelatedElement())" << std::endl;
 		#endif
@@ -301,7 +290,7 @@ std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> ComponentRealizationImp
 		#endif
 		
 		/*SubsetUnion*/
-		m_target->initSubsetUnion(getRelatedElement());
+		getTarget()->initSubsetUnion(getRelatedElement());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value SubsetUnion: " << "m_target - SubsetUnion<uml::Element, uml::Element >(getRelatedElement())" << std::endl;
 		#endif

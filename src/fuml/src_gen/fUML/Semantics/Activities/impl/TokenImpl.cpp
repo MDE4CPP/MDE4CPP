@@ -72,6 +72,12 @@ TokenImpl::~TokenImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+TokenImpl::TokenImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivation> par_holder)
+:TokenImpl()
+{
+	m_holder = par_holder;
+}
 
 TokenImpl::TokenImpl(const TokenImpl & obj): TokenImpl()
 {
@@ -206,7 +212,6 @@ Getter & Setter for reference holder
 */
 std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivation> TokenImpl::getHolder() const
 {
-
     return m_holder;
 }
 void TokenImpl::setHolder(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivation> _holder)
@@ -232,6 +237,10 @@ void TokenImpl::setThisTokenPtr(std::weak_ptr<Token> thisTokenPtr)
 }
 std::shared_ptr<ecore::EObject> TokenImpl::eContainer() const
 {
+	if(auto wp = m_holder.lock())
+	{
+		return wp;
+	}
 	return nullptr;
 }
 

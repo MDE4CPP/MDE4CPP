@@ -239,7 +239,6 @@ Getter & Setter for reference selection
 */
 std::shared_ptr<uml::Behavior> ObjectFlowImpl::getSelection() const
 {
-
     return m_selection;
 }
 void ObjectFlowImpl::setSelection(std::shared_ptr<uml::Behavior> _selection)
@@ -254,7 +253,6 @@ Getter & Setter for reference transformation
 */
 std::shared_ptr<uml::Behavior> ObjectFlowImpl::getTransformation() const
 {
-
     return m_transformation;
 }
 void ObjectFlowImpl::setTransformation(std::shared_ptr<uml::Behavior> _transformation)

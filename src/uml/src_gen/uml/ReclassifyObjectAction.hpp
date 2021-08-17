@@ -163,7 +163,7 @@ namespace uml
 			Specifies whether existing Classifiers should be removed before adding the new Classifiers.
 			<p>From package UML::Actions.</p>
 			*/
-			 
+			
 			bool m_isReplaceAll = false;
 			
 			

@@ -89,8 +89,7 @@ TupleValueImpl& TupleValueImpl::operator=(const TupleValueImpl & obj)
 	//Clone Attributes with (deep copy)
 
 	//copy references with no containment (soft copy)
-	std::shared_ptr<Bag<ocl::Values::NameValueBinding>> _elements = obj.getElements();
-	m_elements.reset(new Bag<ocl::Values::NameValueBinding>(*(obj.getElements().get())));
+	m_elements  = obj.getElements();
 	m_model  = obj.getModel();
 	//Clone references with containment (deep copy)
 	return *this;
@@ -175,7 +174,6 @@ std::shared_ptr<Bag<ocl::Values::NameValueBinding>> TupleValueImpl::getElements(
 		
 		
 	}
-
     return m_elements;
 }
 
@@ -186,7 +184,6 @@ Getter & Setter for reference model
 */
 std::shared_ptr<ocl::Types::TupleType> TupleValueImpl::getModel() const
 {
-
     return m_model;
 }
 void TupleValueImpl::setModel(std::shared_ptr<ocl::Types::TupleType> _model)

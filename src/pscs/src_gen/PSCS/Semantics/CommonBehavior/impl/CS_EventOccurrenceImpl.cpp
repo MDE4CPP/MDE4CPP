@@ -232,7 +232,6 @@ Getter & Setter for reference interactionPoint
 */
 std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint> CS_EventOccurrenceImpl::getInteractionPoint() const
 {
-
     return m_interactionPoint;
 }
 void CS_EventOccurrenceImpl::setInteractionPoint(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint> _interactionPoint)
@@ -247,7 +246,6 @@ Getter & Setter for reference onPort
 */
 std::shared_ptr<uml::Port> CS_EventOccurrenceImpl::getOnPort() const
 {
-
     return m_onPort;
 }
 void CS_EventOccurrenceImpl::setOnPort(std::shared_ptr<uml::Port> _onPort)
@@ -262,7 +260,6 @@ Getter & Setter for reference wrappedEventOccurrence
 */
 std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> CS_EventOccurrenceImpl::getWrappedEventOccurrence() const
 {
-
     return m_wrappedEventOccurrence;
 }
 void CS_EventOccurrenceImpl::setWrappedEventOccurrence(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> _wrappedEventOccurrence)

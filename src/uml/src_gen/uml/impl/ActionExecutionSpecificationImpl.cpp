@@ -163,7 +163,6 @@ Getter & Setter for reference action
 */
 std::shared_ptr<uml::Action> ActionExecutionSpecificationImpl::getAction() const
 {
-//assert(m_action);
     return m_action;
 }
 void ActionExecutionSpecificationImpl::setAction(std::shared_ptr<uml::Action> _action)

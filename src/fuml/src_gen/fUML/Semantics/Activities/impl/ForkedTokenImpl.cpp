@@ -69,6 +69,12 @@ ForkedTokenImpl::~ForkedTokenImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+ForkedTokenImpl::ForkedTokenImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivation> par_holder)
+:ForkedTokenImpl()
+{
+	m_holder = par_holder;
+}
 
 ForkedTokenImpl::ForkedTokenImpl(const ForkedTokenImpl & obj): ForkedTokenImpl()
 {
@@ -210,7 +216,6 @@ Getter & Setter for reference baseToken
 */
 std::shared_ptr<fUML::Semantics::Activities::Token> ForkedTokenImpl::getBaseToken() const
 {
-
     return m_baseToken;
 }
 void ForkedTokenImpl::setBaseToken(std::shared_ptr<fUML::Semantics::Activities::Token> _baseToken)
@@ -237,6 +242,10 @@ void ForkedTokenImpl::setThisForkedTokenPtr(std::weak_ptr<ForkedToken> thisForke
 }
 std::shared_ptr<ecore::EObject> ForkedTokenImpl::eContainer() const
 {
+	if(auto wp = m_holder.lock())
+	{
+		return wp;
+	}
 	return nullptr;
 }
 

@@ -175,21 +175,17 @@ ProtocolStateMachineImpl& ProtocolStateMachineImpl::operator=(const ProtocolStat
 
 	//copy references with no containment (soft copy)
 	//Clone references with containment (deep copy)
-	std::shared_ptr<Subset<uml::ProtocolConformance, uml::Element>> conformanceContainer = getConformance();
-	if(nullptr != conformanceContainer )
+	//clone reference 'conformance'
+	std::shared_ptr<Subset<uml::ProtocolConformance, uml::Element>> conformanceList = obj.getConformance();
+	if(conformanceList)
 	{
-		int size = conformanceContainer->size();
-		for(int i=0; i<size ; i++)
+		Bag<uml::ProtocolConformance>::iterator conformanceIter = conformanceList->begin();
+		Bag<uml::ProtocolConformance>::iterator conformanceEnd = conformanceList->end();
+		while (conformanceIter != conformanceEnd) 
 		{
-			auto _conformance=(*conformanceContainer)[i];
-			if(nullptr != _conformance)
-			{
-				conformanceContainer->push_back(std::dynamic_pointer_cast<uml::ProtocolConformance>(_conformance->copy()));
-			}
-			else
-			{
-				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container conformance."<< std::endl;)
-			}
+			std::shared_ptr<uml::ProtocolConformance> temp = std::dynamic_pointer_cast<uml::ProtocolConformance>((*conformanceIter)->copy());
+			getConformance()->push_back(temp);
+			conformanceIter++;
 		}
 	}
 	else
@@ -197,7 +193,7 @@ ProtocolStateMachineImpl& ProtocolStateMachineImpl::operator=(const ProtocolStat
 		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr conformance."<< std::endl;)
 	}
 	/*Subset*/
-	m_conformance->initSubset(getOwnedElement());
+	getConformance()->initSubset(getOwnedElement());
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Initialising value Subset: " << "m_conformance - Subset<uml::ProtocolConformance, uml::Element >(getOwnedElement())" << std::endl;
 	#endif
@@ -260,13 +256,12 @@ std::shared_ptr<Subset<uml::ProtocolConformance, uml::Element>> ProtocolStateMac
 		#endif
 		
 		/*Subset*/
-		m_conformance->initSubset(getOwnedElement());
+		getConformance()->initSubset(getOwnedElement());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value Subset: " << "m_conformance - Subset<uml::ProtocolConformance, uml::Element >(getOwnedElement())" << std::endl;
 		#endif
 		
 	}
-
     return m_conformance;
 }
 
@@ -286,7 +281,7 @@ std::shared_ptr<SubsetUnion<uml::Property, uml::Feature>> ProtocolStateMachineIm
 		#endif
 		
 		/*SubsetUnion*/
-		m_attribute->initSubsetUnion(getFeature());
+		getAttribute()->initSubsetUnion(getFeature());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value SubsetUnion: " << "m_attribute - SubsetUnion<uml::Property, uml::Feature >(getFeature())" << std::endl;
 		#endif
@@ -306,7 +301,7 @@ std::shared_ptr<SubsetUnion<uml::Feature, uml::NamedElement>> ProtocolStateMachi
 		#endif
 		
 		/*SubsetUnion*/
-		m_feature->initSubsetUnion(getMember());
+		getFeature()->initSubsetUnion(getMember());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value SubsetUnion: " << "m_feature - SubsetUnion<uml::Feature, uml::NamedElement >(getMember())" << std::endl;
 		#endif
@@ -350,20 +345,20 @@ std::shared_ptr<Union<uml::Element>> ProtocolStateMachineImpl::getOwnedElement()
 	return m_ownedElement;
 }
 
-std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement>> ProtocolStateMachineImpl::getOwnedMember() const
+std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement>> ProtocolStateMachineImpl::getOwnedMember() const
 {
 	if(m_ownedMember == nullptr)
 	{
 		/*SubsetUnion*/
-		m_ownedMember.reset(new SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement >());
+		m_ownedMember.reset(new SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement >());
 		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement >()" << std::endl;
+			std::cout << "Initialising shared pointer SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement >()" << std::endl;
 		#endif
 		
 		/*SubsetUnion*/
-		m_ownedMember->initSubsetUnion(getOwnedElement(),getMember());
+		getOwnedMember()->initSubsetUnion(getOwnedElement(), getMember());
 		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement >(getOwnedElement(),getMember())" << std::endl;
+			std::cout << "Initialising value SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement >(getOwnedElement(), getMember())" << std::endl;
 		#endif
 		
 	}
@@ -416,7 +411,7 @@ std::shared_ptr<SubsetUnion<uml::ConnectableElement, uml::NamedElement>> Protoco
 		#endif
 		
 		/*SubsetUnion*/
-		m_role->initSubsetUnion(getMember());
+		getRole()->initSubsetUnion(getMember());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value SubsetUnion: " << "m_role - SubsetUnion<uml::ConnectableElement, uml::NamedElement >(getMember())" << std::endl;
 		#endif

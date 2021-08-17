@@ -134,42 +134,35 @@ LinkActionImpl& LinkActionImpl::operator=(const LinkActionImpl & obj)
 
 	//copy references with no containment (soft copy)
 	//Clone references with containment (deep copy)
-	std::shared_ptr<Subset<uml::LinkEndData, uml::Element>> endDataContainer = getEndData();
-	if(nullptr != endDataContainer )
+	//clone reference 'endData'
+	std::shared_ptr<Subset<uml::LinkEndData, uml::Element>> endDataList = obj.getEndData();
+	if(endDataList)
 	{
-		int size = endDataContainer->size();
-		for(int i=0; i<size ; i++)
+		Bag<uml::LinkEndData>::iterator endDataIter = endDataList->begin();
+		Bag<uml::LinkEndData>::iterator endDataEnd = endDataList->end();
+		while (endDataIter != endDataEnd) 
 		{
-			auto _endData=(*endDataContainer)[i];
-			if(nullptr != _endData)
-			{
-				endDataContainer->push_back(std::dynamic_pointer_cast<uml::LinkEndData>(_endData->copy()));
-			}
-			else
-			{
-				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container endData."<< std::endl;)
-			}
+			std::shared_ptr<uml::LinkEndData> temp = std::dynamic_pointer_cast<uml::LinkEndData>((*endDataIter)->copy());
+			getEndData()->push_back(temp);
+			endDataIter++;
 		}
 	}
 	else
 	{
 		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr endData."<< std::endl;)
 	}
-	std::shared_ptr<Subset<uml::InputPin, uml::InputPin>> inputValueContainer = getInputValue();
-	if(nullptr != inputValueContainer )
+
+	//clone reference 'inputValue'
+	std::shared_ptr<Subset<uml::InputPin, uml::InputPin>> inputValueList = obj.getInputValue();
+	if(inputValueList)
 	{
-		int size = inputValueContainer->size();
-		for(int i=0; i<size ; i++)
+		Bag<uml::InputPin>::iterator inputValueIter = inputValueList->begin();
+		Bag<uml::InputPin>::iterator inputValueEnd = inputValueList->end();
+		while (inputValueIter != inputValueEnd) 
 		{
-			auto _inputValue=(*inputValueContainer)[i];
-			if(nullptr != _inputValue)
-			{
-				inputValueContainer->push_back(std::dynamic_pointer_cast<uml::InputPin>(_inputValue->copy()));
-			}
-			else
-			{
-				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container inputValue."<< std::endl;)
-			}
+			std::shared_ptr<uml::InputPin> temp = std::dynamic_pointer_cast<uml::InputPin>((*inputValueIter)->copy());
+			getInputValue()->push_back(temp);
+			inputValueIter++;
 		}
 	}
 	else
@@ -177,13 +170,13 @@ LinkActionImpl& LinkActionImpl::operator=(const LinkActionImpl & obj)
 		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr inputValue."<< std::endl;)
 	}
 	/*Subset*/
-	m_endData->initSubset(getOwnedElement());
+	getEndData()->initSubset(getOwnedElement());
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Initialising value Subset: " << "m_endData - Subset<uml::LinkEndData, uml::Element >(getOwnedElement())" << std::endl;
 	#endif
 	
 	/*Subset*/
-	m_inputValue->initSubset(getInput());
+	getInputValue()->initSubset(getInput());
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Initialising value Subset: " << "m_inputValue - Subset<uml::InputPin, uml::InputPin >(getInput())" << std::endl;
 	#endif
@@ -252,13 +245,12 @@ std::shared_ptr<Subset<uml::LinkEndData, uml::Element>> LinkActionImpl::getEndDa
 		#endif
 		
 		/*Subset*/
-		m_endData->initSubset(getOwnedElement());
+		getEndData()->initSubset(getOwnedElement());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value Subset: " << "m_endData - Subset<uml::LinkEndData, uml::Element >(getOwnedElement())" << std::endl;
 		#endif
 		
 	}
-//assert(m_endData);
     return m_endData;
 }
 
@@ -278,13 +270,12 @@ std::shared_ptr<Subset<uml::InputPin, uml::InputPin>> LinkActionImpl::getInputVa
 		#endif
 		
 		/*Subset*/
-		m_inputValue->initSubset(getInput());
+		getInputValue()->initSubset(getInput());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value Subset: " << "m_inputValue - Subset<uml::InputPin, uml::InputPin >(getInput())" << std::endl;
 		#endif
 		
 	}
-//assert(m_inputValue);
     return m_inputValue;
 }
 
@@ -319,7 +310,7 @@ std::shared_ptr<SubsetUnion<uml::InputPin, uml::Element>> LinkActionImpl::getInp
 		#endif
 		
 		/*SubsetUnion*/
-		m_input->initSubsetUnion(getOwnedElement());
+		getInput()->initSubsetUnion(getOwnedElement());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value SubsetUnion: " << "m_input - SubsetUnion<uml::InputPin, uml::Element >(getOwnedElement())" << std::endl;
 		#endif

@@ -273,31 +273,31 @@ namespace uml
 			A String that represents a value to be used when no argument is supplied for the Parameter.
 			<p>From package UML::Classification.</p>
 			*/
-			 
+			
 			std::string m_default = "";
 			/*!
 			Indicates whether a parameter is being sent into or out of a behavioral element.
 			<p>From package UML::Classification.</p>
 			*/
-			 
+			
 			uml::ParameterDirectionKind m_direction = ParameterDirectionKind::IN;
 			/*!
 			Specifies the effect that executions of the owner of the Parameter have on objects passed in or out of the parameter.
 			<p>From package UML::Classification.</p>
 			*/
-			 
+			
 			uml::ParameterEffectKind m_effect = ParameterEffectKind::CREATE;
 			/*!
 			Tells whether an output parameter may emit a value to the exclusion of the other outputs.
 			<p>From package UML::Classification.</p>
 			*/
-			 
+			
 			bool m_isException = false;
 			/*!
 			Tells whether an input parameter may accept values while its behavior is executing, or whether an output parameter may post values while the behavior is executing.
 			<p>From package UML::Classification.</p>
 			*/
-			 
+			
 			bool m_isStream = false;
 			
 			

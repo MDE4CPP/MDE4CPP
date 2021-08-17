@@ -187,13 +187,13 @@ namespace uml
 			If true, the modeler asserts that the test for at least one Clause of the ConditionalNode will succeed.
 			<p>From package UML::Actions.</p>
 			*/
-			 
+			
 			bool m_isAssured = false;
 			/*!
 			If true, the modeler asserts that the test for at most one Clause of the ConditionalNode will succeed.
 			<p>From package UML::Actions.</p>
 			*/
-			 
+			
 			bool m_isDeterminate = false;
 			
 			
@@ -205,12 +205,7 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			mutable std::shared_ptr<Subset<uml::Clause, uml::Element>> m_clause;/*!
-			The OutputPins that onto which are moved values from the bodyOutputs of the Clause selected for execution.
-			<p>From package UML::Actions.</p>
-			*/
-			
-			mutable std::shared_ptr<Bag<uml::OutputPin>> m_result;
+			mutable std::shared_ptr<Subset<uml::Clause, uml::Element>> m_clause;
 
 		public:
 			//*********************************
@@ -256,7 +251,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement>> getOwnedMember() const = 0;/*!
+			virtual std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement>> getOwnedMember() const = 0;/*!
 			The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/

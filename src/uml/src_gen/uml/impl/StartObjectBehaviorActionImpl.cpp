@@ -134,6 +134,7 @@ StartObjectBehaviorActionImpl& StartObjectBehaviorActionImpl::operator=(const St
 
 	//copy references with no containment (soft copy)
 	//Clone references with containment (deep copy)
+	//clone reference 'object'
 	if(obj.getObject()!=nullptr)
 	{
 		m_object = std::dynamic_pointer_cast<uml::InputPin>(obj.getObject()->copy());
@@ -194,14 +195,11 @@ Getter & Setter for reference object
 */
 std::shared_ptr<uml::InputPin> StartObjectBehaviorActionImpl::getObject() const
 {
-//assert(m_object);
     return m_object;
 }
 void StartObjectBehaviorActionImpl::setObject(std::shared_ptr<uml::InputPin> _object)
 {
     m_object = _object;
-	
-	
 	
 }
 
@@ -235,7 +233,7 @@ std::shared_ptr<SubsetUnion<uml::InputPin, uml::Element>> StartObjectBehaviorAct
 		#endif
 		
 		/*SubsetUnion*/
-		m_input->initSubsetUnion(getOwnedElement());
+		getInput()->initSubsetUnion(getOwnedElement());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value SubsetUnion: " << "m_input - SubsetUnion<uml::InputPin, uml::Element >(getOwnedElement())" << std::endl;
 		#endif
@@ -255,7 +253,7 @@ std::shared_ptr<SubsetUnion<uml::OutputPin, uml::Element>> StartObjectBehaviorAc
 		#endif
 		
 		/*SubsetUnion*/
-		m_output->initSubsetUnion(getOwnedElement());
+		getOutput()->initSubsetUnion(getOwnedElement());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value SubsetUnion: " << "m_output - SubsetUnion<uml::OutputPin, uml::Element >(getOwnedElement())" << std::endl;
 		#endif

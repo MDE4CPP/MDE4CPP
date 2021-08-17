@@ -94,6 +94,7 @@ AnyTypeImpl& AnyTypeImpl::operator=(const AnyTypeImpl & obj)
 
 	//copy references with no containment (soft copy)
 	//Clone references with containment (deep copy)
+	//clone reference 'object'
 	if(obj.getObject()!=nullptr)
 	{
 		m_object = std::dynamic_pointer_cast<ecore::EClassifier>(obj.getObject()->copy());
@@ -131,7 +132,6 @@ Getter & Setter for reference object
 */
 std::shared_ptr<ecore::EClassifier> AnyTypeImpl::getObject() const
 {
-
     return m_object;
 }
 void AnyTypeImpl::setObject(std::shared_ptr<ecore::EClassifier> _object)

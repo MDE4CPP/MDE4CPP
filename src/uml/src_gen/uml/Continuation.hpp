@@ -157,7 +157,7 @@ namespace uml
 			True: when the Continuation is at the end of the enclosing InteractionFragment and False when it is in the beginning.
 			<p>From package UML::Interactions.</p>
 			*/
-			 
+			
 			bool m_setting = true;
 			
 			

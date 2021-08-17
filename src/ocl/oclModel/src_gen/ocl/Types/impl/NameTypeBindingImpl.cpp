@@ -131,7 +131,6 @@ Getter & Setter for reference type
 */
 std::shared_ptr<ecore::EClassifier> NameTypeBindingImpl::getType() const
 {
-
     return m_type;
 }
 void NameTypeBindingImpl::setType(std::shared_ptr<ecore::EClassifier> _type)

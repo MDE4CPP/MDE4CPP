@@ -218,7 +218,6 @@ Getter & Setter for reference referredAssociationClass
 */
 std::shared_ptr<ecore::EReference> AssociationClassCallExpImpl::getReferredAssociationClass() const
 {
-
     return m_referredAssociationClass;
 }
 void AssociationClassCallExpImpl::setReferredAssociationClass(std::shared_ptr<ecore::EReference> _referredAssociationClass)

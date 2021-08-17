@@ -103,8 +103,7 @@ ClassifierTemplateParameterImpl& ClassifierTemplateParameterImpl::operator=(cons
 	m_allowSubstitutable = obj.getAllowSubstitutable();
 
 	//copy references with no containment (soft copy)
-	std::shared_ptr<Bag<uml::Classifier>> _constrainingClassifier = obj.getConstrainingClassifier();
-	m_constrainingClassifier.reset(new Bag<uml::Classifier>(*(obj.getConstrainingClassifier().get())));
+	m_constrainingClassifier  = obj.getConstrainingClassifier();
 	//Clone references with containment (deep copy)
 	return *this;
 }
@@ -192,7 +191,6 @@ std::shared_ptr<Bag<uml::Classifier>> ClassifierTemplateParameterImpl::getConstr
 		
 		
 	}
-
     return m_constrainingClassifier;
 }
 

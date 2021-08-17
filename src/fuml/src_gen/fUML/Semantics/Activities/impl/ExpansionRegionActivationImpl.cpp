@@ -114,12 +114,9 @@ ExpansionRegionActivationImpl& ExpansionRegionActivationImpl::operator=(const Ex
 	m_next = obj.getNext();
 
 	//copy references with no containment (soft copy)
-	std::shared_ptr<Bag<fUML::Semantics::Activities::ExpansionActivationGroup>> _activationGroups = obj.getActivationGroups();
-	m_activationGroups.reset(new Bag<fUML::Semantics::Activities::ExpansionActivationGroup>(*(obj.getActivationGroups().get())));
-	std::shared_ptr<Bag<fUML::Semantics::Activities::TokenSet>> _inputExpansionTokens = obj.getInputExpansionTokens();
-	m_inputExpansionTokens.reset(new Bag<fUML::Semantics::Activities::TokenSet>(*(obj.getInputExpansionTokens().get())));
-	std::shared_ptr<Bag<fUML::Semantics::Activities::TokenSet>> _inputTokens = obj.getInputTokens();
-	m_inputTokens.reset(new Bag<fUML::Semantics::Activities::TokenSet>(*(obj.getInputTokens().get())));
+	m_activationGroups  = obj.getActivationGroups();
+	m_inputExpansionTokens  = obj.getInputExpansionTokens();
+	m_inputTokens  = obj.getInputTokens();
 	//Clone references with containment (deep copy)
 	return *this;
 }
@@ -586,7 +583,6 @@ std::shared_ptr<Bag<fUML::Semantics::Activities::ExpansionActivationGroup>> Expa
 		
 		
 	}
-
     return m_activationGroups;
 }
 
@@ -603,7 +599,6 @@ std::shared_ptr<Bag<fUML::Semantics::Activities::TokenSet>> ExpansionRegionActiv
 		
 		
 	}
-//assert(m_inputExpansionTokens);
     return m_inputExpansionTokens;
 }
 
@@ -620,7 +615,6 @@ std::shared_ptr<Bag<fUML::Semantics::Activities::TokenSet>> ExpansionRegionActiv
 		
 		
 	}
-
     return m_inputTokens;
 }
 

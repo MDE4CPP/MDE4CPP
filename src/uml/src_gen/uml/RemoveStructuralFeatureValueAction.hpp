@@ -146,7 +146,7 @@ namespace uml
 			Specifies whether to remove duplicates of the value in nonunique StructuralFeatures.
 			<p>From package UML::Actions.</p>
 			*/
-			 
+			
 			bool m_isRemoveDuplicates = false;
 			
 			

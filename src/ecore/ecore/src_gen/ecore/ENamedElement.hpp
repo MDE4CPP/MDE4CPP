@@ -86,7 +86,7 @@ namespace ecore
 			//*********************************
 			// Attribute Members
 			//*********************************
-			 
+			
 			std::string m_name = "";
 			
 			

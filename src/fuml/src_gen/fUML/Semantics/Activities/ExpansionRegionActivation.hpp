@@ -127,7 +127,7 @@ namespace fUML::Semantics::Activities
 			//*********************************
 			// Attribute Members
 			//*********************************
-			 
+			
 			int m_next = 0;
 			
 			

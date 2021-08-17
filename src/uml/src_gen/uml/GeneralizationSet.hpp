@@ -157,13 +157,13 @@ namespace uml
 			Indicates (via the associated Generalizations) whether or not the set of specific Classifiers are covering for a particular general classifier. When isCovering is true, every instance of a particular general Classifier is also an instance of at least one of its specific Classifiers for the GeneralizationSet. When isCovering is false, there are one or more instances of the particular general Classifier that are not instances of at least one of its specific Classifiers defined for the GeneralizationSet.
 			<p>From package UML::Classification.</p>
 			*/
-			 
+			
 			bool m_isCovering = false;
 			/*!
 			Indicates whether or not the set of specific Classifiers in a Generalization relationship have instance in common. If isDisjoint is true, the specific Classifiers for a particular GeneralizationSet have no members in common; that is, their intersection is empty. If isDisjoint is false, the specific Classifiers in a particular GeneralizationSet have one or more members in common; that is, their intersection is not empty.
 			<p>From package UML::Classification.</p>
 			*/
-			 
+			
 			bool m_isDisjoint = false;
 			
 			

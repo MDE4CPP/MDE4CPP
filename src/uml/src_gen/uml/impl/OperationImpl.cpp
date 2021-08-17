@@ -166,73 +166,66 @@ OperationImpl& OperationImpl::operator=(const OperationImpl & obj)
 	m_interface  = obj.getInterface();
 	m_type  = obj.getType();
 	//Clone references with containment (deep copy)
+	//clone reference 'bodyCondition'
 	if(obj.getBodyCondition()!=nullptr)
 	{
 		m_bodyCondition = std::dynamic_pointer_cast<uml::Constraint>(obj.getBodyCondition()->copy());
 	}
-	std::shared_ptr<Subset<uml::Constraint, uml::Constraint /*Subset does not reference a union*/>> postconditionContainer = getPostcondition();
-	if(nullptr != postconditionContainer )
+
+	//clone reference 'postcondition'
+	std::shared_ptr<Subset<uml::Constraint, uml::Constraint /*Subset does not reference a union*/>> postconditionList = obj.getPostcondition();
+	if(postconditionList)
 	{
-		int size = postconditionContainer->size();
-		for(int i=0; i<size ; i++)
+		Bag<uml::Constraint>::iterator postconditionIter = postconditionList->begin();
+		Bag<uml::Constraint>::iterator postconditionEnd = postconditionList->end();
+		while (postconditionIter != postconditionEnd) 
 		{
-			auto _postcondition=(*postconditionContainer)[i];
-			if(nullptr != _postcondition)
-			{
-				postconditionContainer->push_back(std::dynamic_pointer_cast<uml::Constraint>(_postcondition->copy()));
-			}
-			else
-			{
-				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container postcondition."<< std::endl;)
-			}
+			std::shared_ptr<uml::Constraint> temp = std::dynamic_pointer_cast<uml::Constraint>((*postconditionIter)->copy());
+			getPostcondition()->push_back(temp);
+			postconditionIter++;
 		}
 	}
 	else
 	{
 		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr postcondition."<< std::endl;)
 	}
-	std::shared_ptr<Subset<uml::Constraint, uml::Constraint /*Subset does not reference a union*/>> preconditionContainer = getPrecondition();
-	if(nullptr != preconditionContainer )
+
+	//clone reference 'precondition'
+	std::shared_ptr<Subset<uml::Constraint, uml::Constraint /*Subset does not reference a union*/>> preconditionList = obj.getPrecondition();
+	if(preconditionList)
 	{
-		int size = preconditionContainer->size();
-		for(int i=0; i<size ; i++)
+		Bag<uml::Constraint>::iterator preconditionIter = preconditionList->begin();
+		Bag<uml::Constraint>::iterator preconditionEnd = preconditionList->end();
+		while (preconditionIter != preconditionEnd) 
 		{
-			auto _precondition=(*preconditionContainer)[i];
-			if(nullptr != _precondition)
-			{
-				preconditionContainer->push_back(std::dynamic_pointer_cast<uml::Constraint>(_precondition->copy()));
-			}
-			else
-			{
-				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container precondition."<< std::endl;)
-			}
+			std::shared_ptr<uml::Constraint> temp = std::dynamic_pointer_cast<uml::Constraint>((*preconditionIter)->copy());
+			getPrecondition()->push_back(temp);
+			preconditionIter++;
 		}
 	}
 	else
 	{
 		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr precondition."<< std::endl;)
 	}
-	std::shared_ptr<Subset<uml::Operation, uml::RedefinableElement>> redefinedOperationContainer = getRedefinedOperation();
-	if(nullptr != redefinedOperationContainer )
+
+	//clone reference 'redefinedOperation'
+	std::shared_ptr<Subset<uml::Operation, uml::RedefinableElement>> redefinedOperationList = obj.getRedefinedOperation();
+	if(redefinedOperationList)
 	{
-		int size = redefinedOperationContainer->size();
-		for(int i=0; i<size ; i++)
+		Bag<uml::Operation>::iterator redefinedOperationIter = redefinedOperationList->begin();
+		Bag<uml::Operation>::iterator redefinedOperationEnd = redefinedOperationList->end();
+		while (redefinedOperationIter != redefinedOperationEnd) 
 		{
-			auto _redefinedOperation=(*redefinedOperationContainer)[i];
-			if(nullptr != _redefinedOperation)
-			{
-				redefinedOperationContainer->push_back(std::dynamic_pointer_cast<uml::Operation>(_redefinedOperation->copy()));
-			}
-			else
-			{
-				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container redefinedOperation."<< std::endl;)
-			}
+			std::shared_ptr<uml::Operation> temp = std::dynamic_pointer_cast<uml::Operation>((*redefinedOperationIter)->copy());
+			getRedefinedOperation()->push_back(temp);
+			redefinedOperationIter++;
 		}
 	}
 	else
 	{
 		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr redefinedOperation."<< std::endl;)
 	}
+	
 	return *this;
 }
 
@@ -449,16 +442,11 @@ Getter & Setter for reference bodyCondition
 */
 std::shared_ptr<uml::Constraint> OperationImpl::getBodyCondition() const
 {
-
     return m_bodyCondition;
 }
 void OperationImpl::setBodyCondition(std::shared_ptr<uml::Constraint> _bodyCondition)
 {
     m_bodyCondition = _bodyCondition;
-	
-	
-	
-	
 	
 }
 
@@ -468,18 +456,11 @@ Getter & Setter for reference class
 */
 std::weak_ptr<uml::Class> OperationImpl::getClass() const
 {
-
     return m_class;
 }
 void OperationImpl::setClass(std::weak_ptr<uml::Class> _class)
 {
     m_class = _class;
-	
-	m_namespace = this->getClass().lock();
-	m_owner = this->getNamespace().lock();
-	
-	
-	
 	
 }
 
@@ -489,18 +470,11 @@ Getter & Setter for reference datatype
 */
 std::weak_ptr<uml::DataType> OperationImpl::getDatatype() const
 {
-
     return m_datatype;
 }
 void OperationImpl::setDatatype(std::weak_ptr<uml::DataType> _datatype)
 {
     m_datatype = _datatype;
-	
-	m_namespace = this->getDatatype().lock();
-	m_owner = this->getNamespace().lock();
-	
-	
-	
 	
 }
 
@@ -510,20 +484,24 @@ Getter & Setter for reference interface
 */
 std::weak_ptr<uml::Interface> OperationImpl::getInterface() const
 {
-
     return m_interface;
 }
 void OperationImpl::setInterface(std::weak_ptr<uml::Interface> _interface)
 {
     m_interface = _interface;
 	
-	m_namespace = this->getInterface().lock();
-	m_owner = this->getNamespace().lock();
-	
-	
-	
-	
 }
+
+
+/*
+Getter & Setter for reference ownedParameter
+*/
+std::shared_ptr<Bag<uml::Parameter>> OperationImpl::getProperty_OwnedParameter() const
+{
+	//Getter call of redefined container reference BehavioralFeature::ownedParameter 
+	return uml::BehavioralFeatureImpl::getOwnedParameter();
+}
+
 
 
 /*
@@ -540,13 +518,12 @@ std::shared_ptr<Subset<uml::Constraint, uml::Constraint /*Subset does not refere
 		#endif
 		
 		/*Subset*/
-		m_postcondition->initSubset(getOwnedRule());
+		getPostcondition()->initSubset(getOwnedRule());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value Subset: " << "m_postcondition - Subset<uml::Constraint, uml::Constraint /*Subset does not reference a union*/ >(getOwnedRule())" << std::endl;
 		#endif
 		
 	}
-
     return m_postcondition;
 }
 
@@ -566,13 +543,12 @@ std::shared_ptr<Subset<uml::Constraint, uml::Constraint /*Subset does not refere
 		#endif
 		
 		/*Subset*/
-		m_precondition->initSubset(getOwnedRule());
+		getPrecondition()->initSubset(getOwnedRule());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value Subset: " << "m_precondition - Subset<uml::Constraint, uml::Constraint /*Subset does not reference a union*/ >(getOwnedRule())" << std::endl;
 		#endif
 		
 	}
-
     return m_precondition;
 }
 
@@ -592,13 +568,12 @@ std::shared_ptr<Subset<uml::Operation, uml::RedefinableElement>> OperationImpl::
 		#endif
 		
 		/*Subset*/
-		m_redefinedOperation->initSubset(getRedefinedElement());
+		getRedefinedOperation()->initSubset(getRedefinedElement());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value Subset: " << "m_redefinedOperation - Subset<uml::Operation, uml::RedefinableElement >(getRedefinedElement())" << std::endl;
 		#endif
 		
 	}
-
     return m_redefinedOperation;
 }
 
@@ -609,7 +584,6 @@ Getter & Setter for reference type
 */
 std::shared_ptr<uml::Type> OperationImpl::getType() const
 {
-
     return m_type;
 }
 
@@ -668,20 +642,20 @@ std::shared_ptr<Union<uml::Element>> OperationImpl::getOwnedElement() const
 	return m_ownedElement;
 }
 
-std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement>> OperationImpl::getOwnedMember() const
+std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement>> OperationImpl::getOwnedMember() const
 {
 	if(m_ownedMember == nullptr)
 	{
 		/*SubsetUnion*/
-		m_ownedMember.reset(new SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement >());
+		m_ownedMember.reset(new SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement >());
 		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement >()" << std::endl;
+			std::cout << "Initialising shared pointer SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement >()" << std::endl;
 		#endif
 		
 		/*SubsetUnion*/
-		m_ownedMember->initSubsetUnion(getOwnedElement(),getMember());
+		getOwnedMember()->initSubsetUnion(getOwnedElement(), getMember());
 		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement >(getOwnedElement(),getMember())" << std::endl;
+			std::cout << "Initialising value SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement >(getOwnedElement(), getMember())" << std::endl;
 		#endif
 		
 	}
@@ -806,6 +780,18 @@ Any OperationImpl::eGet(int featureID, bool resolve, bool coreType) const
 			return eAny(getIsUnique()); //16736
 		case uml::umlPackage::OPERATION_ATTRIBUTE_LOWER:
 			return eAny(getLower()); //16737
+		case uml::umlPackage::OPERATION_ATTRIBUTE_OWNEDPARAMETER:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Parameter>::iterator iter = getProperty_OwnedParameter()->begin();
+			Bag<uml::Parameter>::iterator end = getProperty_OwnedParameter()->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //16743			
+		}
 		case uml::umlPackage::OPERATION_ATTRIBUTE_POSTCONDITION:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
@@ -884,6 +870,8 @@ bool OperationImpl::internalEIsSet(int featureID) const
 			return getIsUnique() != true; //16736
 		case uml::umlPackage::OPERATION_ATTRIBUTE_LOWER:
 			return getLower() != 1; //16737
+		case uml::umlPackage::OPERATION_ATTRIBUTE_OWNEDPARAMETER:
+			return getProperty_OwnedParameter() != nullptr; //16743
 		case uml::umlPackage::OPERATION_ATTRIBUTE_POSTCONDITION:
 			return getPostcondition() != nullptr; //16738
 		case uml::umlPackage::OPERATION_ATTRIBUTE_PRECONDITION:
@@ -950,6 +938,42 @@ bool OperationImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			bool _isQuery = newValue->get<bool>();
 			setIsQuery(_isQuery); //16735
+			return true;
+		}
+		case uml::umlPackage::OPERATION_ATTRIBUTE_OWNEDPARAMETER:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::Parameter>> ownedParameterList(new Bag<uml::Parameter>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				ownedParameterList->add(std::dynamic_pointer_cast<uml::Parameter>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::Parameter>::iterator iterOwnedParameter = getProperty_OwnedParameter()->begin();
+			Bag<uml::Parameter>::iterator endOwnedParameter = getProperty_OwnedParameter()->end();
+			while (iterOwnedParameter != endOwnedParameter)
+			{
+				if (ownedParameterList->find(*iterOwnedParameter) == -1)
+				{
+					getProperty_OwnedParameter()->erase(*iterOwnedParameter);
+				}
+				iterOwnedParameter++;
+			}
+ 
+			iterOwnedParameter = ownedParameterList->begin();
+			endOwnedParameter = ownedParameterList->end();
+			while (iterOwnedParameter != endOwnedParameter)
+			{
+				if (getProperty_OwnedParameter()->find(*iterOwnedParameter) == -1)
+				{
+					getProperty_OwnedParameter()->add(*iterOwnedParameter);
+				}
+				iterOwnedParameter++;			
+			}
 			return true;
 		}
 		case uml::umlPackage::OPERATION_ATTRIBUTE_POSTCONDITION:
@@ -1087,7 +1111,7 @@ Any OperationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sha
   	switch(operationID)
 	{
 		
-		// 16825
+		// 16826
 		case umlPackage::OPERATION_OPERATION_AT_MOST_ONE_RETURN_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -1104,49 +1128,49 @@ Any OperationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sha
 			break;
 		}
 		
-		// 16835
+		// 16836
 		case umlPackage::OPERATION_OPERATION_GETLOWER:
 		{
 			result = eAny(this->getLower());
 			break;
 		}
 		
-		// 16827
+		// 16828
 		case umlPackage::OPERATION_OPERATION_GETRETURNRESULT:
 		{
 			result = eAny(this->getReturnResult());
 			break;
 		}
 		
-		// 16837
+		// 16838
 		case umlPackage::OPERATION_OPERATION_GETTYPE:
 		{
 			result = eAny(this->getType());
 			break;
 		}
 		
-		// 16838
+		// 16839
 		case umlPackage::OPERATION_OPERATION_GETUPPER:
 		{
 			result = eAny(this->getUpper());
 			break;
 		}
 		
-		// 16833
+		// 16834
 		case umlPackage::OPERATION_OPERATION_ISORDERED:
 		{
 			result = eAny(this->isOrdered());
 			break;
 		}
 		
-		// 16834
+		// 16835
 		case umlPackage::OPERATION_OPERATION_ISUNIQUE:
 		{
 			result = eAny(this->isUnique());
 			break;
 		}
 		
-		// 16839
+		// 16840
 		case umlPackage::OPERATION_OPERATION_MATCHES_OPERATION:
 		{
 			//Retrieve input parameter 'comparedOperation'
@@ -1158,7 +1182,7 @@ Any OperationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sha
 			break;
 		}
 		
-		// 16826
+		// 16827
 		case umlPackage::OPERATION_OPERATION_ONLY_BODY_FOR_QUERY_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -1175,14 +1199,14 @@ Any OperationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sha
 			break;
 		}
 		
-		// 16836
+		// 16837
 		case umlPackage::OPERATION_OPERATION_RETURNRESULT:
 		{
 			result = eAny(this->returnResult());
 			break;
 		}
 		
-		// 16828
+		// 16829
 		case umlPackage::OPERATION_OPERATION_SETISORDERED_BOOLEAN:
 		{
 			//Retrieve input parameter 'newIsOrdered'
@@ -1194,7 +1218,7 @@ Any OperationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sha
 			break;
 		}
 		
-		// 16829
+		// 16830
 		case umlPackage::OPERATION_OPERATION_SETISUNIQUE_BOOLEAN:
 		{
 			//Retrieve input parameter 'newIsUnique'
@@ -1206,7 +1230,7 @@ Any OperationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sha
 			break;
 		}
 		
-		// 16830
+		// 16831
 		case umlPackage::OPERATION_OPERATION_SETLOWER_INTEGER:
 		{
 			//Retrieve input parameter 'newLower'
@@ -1218,7 +1242,7 @@ Any OperationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sha
 			break;
 		}
 		
-		// 16831
+		// 16832
 		case umlPackage::OPERATION_OPERATION_SETTYPE_TYPE:
 		{
 			//Retrieve input parameter 'newType'
@@ -1230,7 +1254,7 @@ Any OperationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sha
 			break;
 		}
 		
-		// 16832
+		// 16833
 		case umlPackage::OPERATION_OPERATION_SETUPPER_UNLIMITEDNATURAL:
 		{
 			//Retrieve input parameter 'newUpper'
@@ -1340,6 +1364,28 @@ void OperationImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoa
 void OperationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
 
+	try
+	{
+		if ( nodeName.compare("ownedParameter") == 0 )
+		{
+  			std::string typeName = loadHandler->getCurrentXSITypeName();
+			if (typeName.empty())
+			{
+				typeName = "Parameter";
+			}
+			loadHandler->handleChildContainer<uml::Parameter>(this->getProperty_OwnedParameter());  
+
+			return; 
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
 	//load BasePackage Nodes
 	BehavioralFeatureImpl::loadNode(nodeName, loadHandler);
 	ParameterableElementImpl::loadNode(nodeName, loadHandler);
@@ -1488,6 +1534,13 @@ void OperationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHa
 		saveHandler->addReferences<uml::Constraint>("postcondition", this->getPostcondition());
 		saveHandler->addReferences<uml::Constraint>("precondition", this->getPrecondition());
 		saveHandler->addReferences<uml::Operation>("redefinedOperation", this->getRedefinedOperation());
+		//
+		// Add new tags (from references)
+		//
+		std::shared_ptr<ecore::EClass> metaClass = this->eClass();
+		// Save 'ownedParameter'
+
+		saveHandler->addReferences<uml::Parameter>("ownedParameter", this->getProperty_OwnedParameter());
 	}
 	catch (std::exception& e)
 	{

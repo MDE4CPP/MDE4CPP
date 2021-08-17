@@ -186,7 +186,7 @@ namespace uml
 			Indicates the kind of Connector. This is derived: a Connector with one or more ends connected to a Port which is not on a Part and which is not a behavior port is a delegation; otherwise it is an assembly.
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
-			 
+			
 			uml::ConnectorKind m_kind = ConnectorKind::ASSEMBLY;
 			
 			

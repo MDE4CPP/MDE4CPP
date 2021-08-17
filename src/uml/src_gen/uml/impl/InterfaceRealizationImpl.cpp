@@ -133,6 +133,7 @@ InterfaceRealizationImpl& InterfaceRealizationImpl::operator=(const InterfaceRea
 	//copy references with no containment (soft copy)
 	m_implementingClassifier  = obj.getImplementingClassifier();
 	//Clone references with containment (deep copy)
+	//clone reference 'contract'
 	if(obj.getContract()!=nullptr)
 	{
 		m_contract = std::dynamic_pointer_cast<uml::Interface>(obj.getContract()->copy());
@@ -169,15 +170,11 @@ Getter & Setter for reference contract
 */
 std::shared_ptr<uml::Interface> InterfaceRealizationImpl::getContract() const
 {
-//assert(m_contract);
     return m_contract;
 }
 void InterfaceRealizationImpl::setContract(std::shared_ptr<uml::Interface> _contract)
 {
     m_contract = _contract;
-	
-	
-	
 	
 }
 
@@ -187,17 +184,11 @@ Getter & Setter for reference implementingClassifier
 */
 std::weak_ptr<uml::BehavioredClassifier> InterfaceRealizationImpl::getImplementingClassifier() const
 {
-//assert(m_implementingClassifier);
     return m_implementingClassifier;
 }
 void InterfaceRealizationImpl::setImplementingClassifier(std::weak_ptr<uml::BehavioredClassifier> _implementingClassifier)
 {
     m_implementingClassifier = _implementingClassifier;
-	
-	
-	
-	m_owner = this->getImplementingClassifier().lock();
-	
 	
 }
 
@@ -256,7 +247,7 @@ std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> InterfaceRealizationImp
 		#endif
 		
 		/*SubsetUnion*/
-		m_source->initSubsetUnion(getRelatedElement());
+		getSource()->initSubsetUnion(getRelatedElement());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value SubsetUnion: " << "m_source - SubsetUnion<uml::Element, uml::Element >(getRelatedElement())" << std::endl;
 		#endif
@@ -276,7 +267,7 @@ std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> InterfaceRealizationImp
 		#endif
 		
 		/*SubsetUnion*/
-		m_target->initSubsetUnion(getRelatedElement());
+		getTarget()->initSubsetUnion(getRelatedElement());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value SubsetUnion: " << "m_target - SubsetUnion<uml::Element, uml::Element >(getRelatedElement())" << std::endl;
 		#endif

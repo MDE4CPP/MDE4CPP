@@ -163,21 +163,17 @@ StereotypeImpl& StereotypeImpl::operator=(const StereotypeImpl & obj)
 	//copy references with no containment (soft copy)
 	m_profile  = obj.getProfile();
 	//Clone references with containment (deep copy)
-	std::shared_ptr<Subset<uml::Image, uml::Element>> iconContainer = getIcon();
-	if(nullptr != iconContainer )
+	//clone reference 'icon'
+	std::shared_ptr<Subset<uml::Image, uml::Element>> iconList = obj.getIcon();
+	if(iconList)
 	{
-		int size = iconContainer->size();
-		for(int i=0; i<size ; i++)
+		Bag<uml::Image>::iterator iconIter = iconList->begin();
+		Bag<uml::Image>::iterator iconEnd = iconList->end();
+		while (iconIter != iconEnd) 
 		{
-			auto _icon=(*iconContainer)[i];
-			if(nullptr != _icon)
-			{
-				iconContainer->push_back(std::dynamic_pointer_cast<uml::Image>(_icon->copy()));
-			}
-			else
-			{
-				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container icon."<< std::endl;)
-			}
+			std::shared_ptr<uml::Image> temp = std::dynamic_pointer_cast<uml::Image>((*iconIter)->copy());
+			getIcon()->push_back(temp);
+			iconIter++;
 		}
 	}
 	else
@@ -185,7 +181,7 @@ StereotypeImpl& StereotypeImpl::operator=(const StereotypeImpl & obj)
 		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr icon."<< std::endl;)
 	}
 	/*Subset*/
-	m_icon->initSubset(getOwnedElement());
+	getIcon()->initSubset(getOwnedElement());
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Initialising value Subset: " << "m_icon - Subset<uml::Image, uml::Element >(getOwnedElement())" << std::endl;
 	#endif
@@ -328,13 +324,12 @@ std::shared_ptr<Subset<uml::Image, uml::Element>> StereotypeImpl::getIcon() cons
 		#endif
 		
 		/*Subset*/
-		m_icon->initSubset(getOwnedElement());
+		getIcon()->initSubset(getOwnedElement());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value Subset: " << "m_icon - Subset<uml::Image, uml::Element >(getOwnedElement())" << std::endl;
 		#endif
 		
 	}
-
     return m_icon;
 }
 
@@ -345,7 +340,6 @@ Getter & Setter for reference profile
 */
 std::shared_ptr<uml::Profile> StereotypeImpl::getProfile() const
 {
-//assert(m_profile);
     return m_profile;
 }
 
@@ -365,7 +359,7 @@ std::shared_ptr<SubsetUnion<uml::Property, uml::Feature>> StereotypeImpl::getAtt
 		#endif
 		
 		/*SubsetUnion*/
-		m_attribute->initSubsetUnion(getFeature());
+		getAttribute()->initSubsetUnion(getFeature());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value SubsetUnion: " << "m_attribute - SubsetUnion<uml::Property, uml::Feature >(getFeature())" << std::endl;
 		#endif
@@ -385,7 +379,7 @@ std::shared_ptr<SubsetUnion<uml::Feature, uml::NamedElement>> StereotypeImpl::ge
 		#endif
 		
 		/*SubsetUnion*/
-		m_feature->initSubsetUnion(getMember());
+		getFeature()->initSubsetUnion(getMember());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value SubsetUnion: " << "m_feature - SubsetUnion<uml::Feature, uml::NamedElement >(getMember())" << std::endl;
 		#endif
@@ -429,20 +423,20 @@ std::shared_ptr<Union<uml::Element>> StereotypeImpl::getOwnedElement() const
 	return m_ownedElement;
 }
 
-std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement>> StereotypeImpl::getOwnedMember() const
+std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement>> StereotypeImpl::getOwnedMember() const
 {
 	if(m_ownedMember == nullptr)
 	{
 		/*SubsetUnion*/
-		m_ownedMember.reset(new SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement >());
+		m_ownedMember.reset(new SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement >());
 		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement >()" << std::endl;
+			std::cout << "Initialising shared pointer SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement >()" << std::endl;
 		#endif
 		
 		/*SubsetUnion*/
-		m_ownedMember->initSubsetUnion(getOwnedElement(),getMember());
+		getOwnedMember()->initSubsetUnion(getOwnedElement(), getMember());
 		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement >(getOwnedElement(),getMember())" << std::endl;
+			std::cout << "Initialising value SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement >(getOwnedElement(), getMember())" << std::endl;
 		#endif
 		
 	}
@@ -480,7 +474,7 @@ std::shared_ptr<SubsetUnion<uml::ConnectableElement, uml::NamedElement>> Stereot
 		#endif
 		
 		/*SubsetUnion*/
-		m_role->initSubsetUnion(getMember());
+		getRole()->initSubsetUnion(getMember());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value SubsetUnion: " << "m_role - SubsetUnion<uml::ConnectableElement, uml::NamedElement >(getMember())" << std::endl;
 		#endif

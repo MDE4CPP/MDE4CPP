@@ -133,21 +133,17 @@ InvocationActionImpl& InvocationActionImpl::operator=(const InvocationActionImpl
 	//copy references with no containment (soft copy)
 	m_onPort  = obj.getOnPort();
 	//Clone references with containment (deep copy)
-	std::shared_ptr<SubsetUnion<uml::InputPin, uml::InputPin>> argumentContainer = getArgument();
-	if(nullptr != argumentContainer )
+	//clone reference 'argument'
+	std::shared_ptr<SubsetUnion<uml::InputPin, uml::InputPin>> argumentList = obj.getArgument();
+	if(argumentList)
 	{
-		int size = argumentContainer->size();
-		for(int i=0; i<size ; i++)
+		Bag<uml::InputPin>::iterator argumentIter = argumentList->begin();
+		Bag<uml::InputPin>::iterator argumentEnd = argumentList->end();
+		while (argumentIter != argumentEnd) 
 		{
-			auto _argument=(*argumentContainer)[i];
-			if(nullptr != _argument)
-			{
-				argumentContainer->push_back(std::dynamic_pointer_cast<uml::InputPin>(_argument->copy()));
-			}
-			else
-			{
-				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container argument."<< std::endl;)
-			}
+			std::shared_ptr<uml::InputPin> temp = std::dynamic_pointer_cast<uml::InputPin>((*argumentIter)->copy());
+			getArgument()->push_back(temp);
+			argumentIter++;
 		}
 	}
 	else
@@ -155,7 +151,7 @@ InvocationActionImpl& InvocationActionImpl::operator=(const InvocationActionImpl
 		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr argument."<< std::endl;)
 	}
 	/*SubsetUnion*/
-	m_argument->initSubsetUnion(getInput());
+	getArgument()->initSubsetUnion(getInput());
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Initialising value SubsetUnion: " << "m_argument - SubsetUnion<uml::InputPin, uml::InputPin >(getInput())" << std::endl;
 	#endif
@@ -201,13 +197,12 @@ std::shared_ptr<SubsetUnion<uml::InputPin, uml::InputPin>> InvocationActionImpl:
 		#endif
 		
 		/*SubsetUnion*/
-		m_argument->initSubsetUnion(getInput());
+		getArgument()->initSubsetUnion(getInput());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value SubsetUnion: " << "m_argument - SubsetUnion<uml::InputPin, uml::InputPin >(getInput())" << std::endl;
 		#endif
 		
 	}
-
     return m_argument;
 }
 
@@ -218,7 +213,6 @@ Getter & Setter for reference onPort
 */
 std::shared_ptr<uml::Port> InvocationActionImpl::getOnPort() const
 {
-
     return m_onPort;
 }
 void InvocationActionImpl::setOnPort(std::shared_ptr<uml::Port> _onPort)
@@ -257,7 +251,7 @@ std::shared_ptr<SubsetUnion<uml::InputPin, uml::Element>> InvocationActionImpl::
 		#endif
 		
 		/*SubsetUnion*/
-		m_input->initSubsetUnion(getOwnedElement());
+		getInput()->initSubsetUnion(getOwnedElement());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value SubsetUnion: " << "m_input - SubsetUnion<uml::InputPin, uml::Element >(getOwnedElement())" << std::endl;
 		#endif

@@ -116,6 +116,7 @@ StructuredActivityNodeActivationImpl& StructuredActivityNodeActivationImpl::oper
 
 	//copy references with no containment (soft copy)
 	//Clone references with containment (deep copy)
+	//clone reference 'activationGroup'
 	if(obj.getActivationGroup()!=nullptr)
 	{
 		m_activationGroup = std::dynamic_pointer_cast<fUML::Semantics::Activities::ActivityNodeActivationGroup>(obj.getActivationGroup()->copy());
@@ -374,7 +375,6 @@ Getter & Setter for reference activationGroup
 */
 std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> StructuredActivityNodeActivationImpl::getActivationGroup() const
 {
-//assert(m_activationGroup);
     return m_activationGroup;
 }
 void StructuredActivityNodeActivationImpl::setActivationGroup(std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> _activationGroup)

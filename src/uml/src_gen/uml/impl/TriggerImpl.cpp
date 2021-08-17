@@ -105,8 +105,7 @@ TriggerImpl& TriggerImpl::operator=(const TriggerImpl & obj)
 
 	//copy references with no containment (soft copy)
 	m_event  = obj.getEvent();
-	std::shared_ptr<Bag<uml::Port>> _port = obj.getPort();
-	m_port.reset(new Bag<uml::Port>(*(obj.getPort().get())));
+	m_port  = obj.getPort();
 	//Clone references with containment (deep copy)
 	return *this;
 }
@@ -145,7 +144,6 @@ Getter & Setter for reference event
 */
 std::shared_ptr<uml::Event> TriggerImpl::getEvent() const
 {
-//assert(m_event);
     return m_event;
 }
 void TriggerImpl::setEvent(std::shared_ptr<uml::Event> _event)
@@ -166,7 +164,6 @@ std::shared_ptr<Bag<uml::Port>> TriggerImpl::getPort() const
 		
 		
 	}
-
     return m_port;
 }
 

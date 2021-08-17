@@ -20,19 +20,6 @@ namespace ecore
 {
 	class ecorePackage;
 }
-namespace ecore 
-{
-	class EAnnotation;
-	class EClassifier;
-	class EEnumLiteral;
-	class EGenericType;
-	class EObject;
-	class EOperation;
-	class EPackage;
-	class EParameter;
-	class EStructuralFeature;
-	class ETypeParameter;
-}
 
 
 

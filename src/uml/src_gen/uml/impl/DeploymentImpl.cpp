@@ -132,42 +132,35 @@ DeploymentImpl& DeploymentImpl::operator=(const DeploymentImpl & obj)
 	//copy references with no containment (soft copy)
 	m_location  = obj.getLocation();
 	//Clone references with containment (deep copy)
-	std::shared_ptr<Subset<uml::DeploymentSpecification, uml::Element>> configurationContainer = getConfiguration();
-	if(nullptr != configurationContainer )
+	//clone reference 'configuration'
+	std::shared_ptr<Subset<uml::DeploymentSpecification, uml::Element>> configurationList = obj.getConfiguration();
+	if(configurationList)
 	{
-		int size = configurationContainer->size();
-		for(int i=0; i<size ; i++)
+		Bag<uml::DeploymentSpecification>::iterator configurationIter = configurationList->begin();
+		Bag<uml::DeploymentSpecification>::iterator configurationEnd = configurationList->end();
+		while (configurationIter != configurationEnd) 
 		{
-			auto _configuration=(*configurationContainer)[i];
-			if(nullptr != _configuration)
-			{
-				configurationContainer->push_back(std::dynamic_pointer_cast<uml::DeploymentSpecification>(_configuration->copy()));
-			}
-			else
-			{
-				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container configuration."<< std::endl;)
-			}
+			std::shared_ptr<uml::DeploymentSpecification> temp = std::dynamic_pointer_cast<uml::DeploymentSpecification>((*configurationIter)->copy());
+			getConfiguration()->push_back(temp);
+			configurationIter++;
 		}
 	}
 	else
 	{
 		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr configuration."<< std::endl;)
 	}
-	std::shared_ptr<Subset<uml::DeployedArtifact, uml::NamedElement /*Subset does not reference a union*/>> deployedArtifactContainer = getDeployedArtifact();
-	if(nullptr != deployedArtifactContainer )
+
+	//clone reference 'deployedArtifact'
+	std::shared_ptr<Subset<uml::DeployedArtifact, uml::NamedElement /*Subset does not reference a union*/>> deployedArtifactList = obj.getDeployedArtifact();
+	if(deployedArtifactList)
 	{
-		int size = deployedArtifactContainer->size();
-		for(int i=0; i<size ; i++)
+		Bag<uml::DeployedArtifact>::iterator deployedArtifactIter = deployedArtifactList->begin();
+		Bag<uml::DeployedArtifact>::iterator deployedArtifactEnd = deployedArtifactList->end();
+		while (deployedArtifactIter != deployedArtifactEnd) 
 		{
-			auto _deployedArtifact=(*deployedArtifactContainer)[i];
-			if(nullptr != _deployedArtifact)
-			{
-				deployedArtifactContainer->push_back(std::dynamic_pointer_cast<uml::DeployedArtifact>(_deployedArtifact->copy()));
-			}
-			else
-			{
-				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container deployedArtifact."<< std::endl;)
-			}
+			std::shared_ptr<uml::DeployedArtifact> temp = std::dynamic_pointer_cast<uml::DeployedArtifact>((*deployedArtifactIter)->copy());
+			getDeployedArtifact()->push_back(temp);
+			deployedArtifactIter++;
 		}
 	}
 	else
@@ -175,7 +168,7 @@ DeploymentImpl& DeploymentImpl::operator=(const DeploymentImpl & obj)
 		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr deployedArtifact."<< std::endl;)
 	}
 	/*Subset*/
-	m_configuration->initSubset(getOwnedElement());
+	getConfiguration()->initSubset(getOwnedElement());
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Initialising value Subset: " << "m_configuration - Subset<uml::DeploymentSpecification, uml::Element >(getOwnedElement())" << std::endl;
 	#endif
@@ -221,13 +214,12 @@ std::shared_ptr<Subset<uml::DeploymentSpecification, uml::Element>> DeploymentIm
 		#endif
 		
 		/*Subset*/
-		m_configuration->initSubset(getOwnedElement());
+		getConfiguration()->initSubset(getOwnedElement());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value Subset: " << "m_configuration - Subset<uml::DeploymentSpecification, uml::Element >(getOwnedElement())" << std::endl;
 		#endif
 		
 	}
-
     return m_configuration;
 }
 
@@ -247,13 +239,12 @@ std::shared_ptr<Subset<uml::DeployedArtifact, uml::NamedElement /*Subset does no
 		#endif
 		
 		/*Subset*/
-		m_deployedArtifact->initSubset(getSupplier());
+		getDeployedArtifact()->initSubset(getSupplier());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value Subset: " << "m_deployedArtifact - Subset<uml::DeployedArtifact, uml::NamedElement /*Subset does not reference a union*/ >(getSupplier())" << std::endl;
 		#endif
 		
 	}
-
     return m_deployedArtifact;
 }
 
@@ -264,17 +255,11 @@ Getter & Setter for reference location
 */
 std::weak_ptr<uml::DeploymentTarget> DeploymentImpl::getLocation() const
 {
-//assert(m_location);
     return m_location;
 }
 void DeploymentImpl::setLocation(std::weak_ptr<uml::DeploymentTarget> _location)
 {
     m_location = _location;
-	
-	
-	
-	m_owner = this->getLocation().lock();
-	
 	
 }
 
@@ -333,7 +318,7 @@ std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> DeploymentImpl::getSour
 		#endif
 		
 		/*SubsetUnion*/
-		m_source->initSubsetUnion(getRelatedElement());
+		getSource()->initSubsetUnion(getRelatedElement());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value SubsetUnion: " << "m_source - SubsetUnion<uml::Element, uml::Element >(getRelatedElement())" << std::endl;
 		#endif
@@ -353,7 +338,7 @@ std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> DeploymentImpl::getTarg
 		#endif
 		
 		/*SubsetUnion*/
-		m_target->initSubsetUnion(getRelatedElement());
+		getTarget()->initSubsetUnion(getRelatedElement());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value SubsetUnion: " << "m_target - SubsetUnion<uml::Element, uml::Element >(getRelatedElement())" << std::endl;
 		#endif

@@ -216,7 +216,6 @@ Getter & Setter for reference referredType
 */
 std::shared_ptr<ecore::EClassifier> TypeExpImpl::getReferredType() const
 {
-
     return m_referredType;
 }
 void TypeExpImpl::setReferredType(std::shared_ptr<ecore::EClassifier> _referredType)

@@ -91,35 +91,37 @@ ExpressionInOclImpl& ExpressionInOclImpl::operator=(const ExpressionInOclImpl & 
 
 	//copy references with no containment (soft copy)
 	//Clone references with containment (deep copy)
+	//clone reference 'bodyExpression'
 	if(obj.getBodyExpression()!=nullptr)
 	{
 		m_bodyExpression = std::dynamic_pointer_cast<ocl::Expressions::OclExpression>(obj.getBodyExpression()->copy());
 	}
+
+	//clone reference 'contextVariable'
 	if(obj.getContextVariable()!=nullptr)
 	{
 		m_contextVariable = std::dynamic_pointer_cast<ocl::Expressions::Variable>(obj.getContextVariable()->copy());
 	}
-	std::shared_ptr<Bag<ocl::Expressions::Variable>> parameterVariableContainer = getParameterVariable();
-	if(nullptr != parameterVariableContainer )
+
+	//clone reference 'parameterVariable'
+	std::shared_ptr<Bag<ocl::Expressions::Variable>> parameterVariableList = obj.getParameterVariable();
+	if(parameterVariableList)
 	{
-		int size = parameterVariableContainer->size();
-		for(int i=0; i<size ; i++)
+		Bag<ocl::Expressions::Variable>::iterator parameterVariableIter = parameterVariableList->begin();
+		Bag<ocl::Expressions::Variable>::iterator parameterVariableEnd = parameterVariableList->end();
+		while (parameterVariableIter != parameterVariableEnd) 
 		{
-			auto _parameterVariable=(*parameterVariableContainer)[i];
-			if(nullptr != _parameterVariable)
-			{
-				parameterVariableContainer->push_back(std::dynamic_pointer_cast<ocl::Expressions::Variable>(_parameterVariable->copy()));
-			}
-			else
-			{
-				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container parameterVariable."<< std::endl;)
-			}
+			std::shared_ptr<ocl::Expressions::Variable> temp = std::dynamic_pointer_cast<ocl::Expressions::Variable>((*parameterVariableIter)->copy());
+			getParameterVariable()->push_back(temp);
+			parameterVariableIter++;
 		}
 	}
 	else
 	{
 		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr parameterVariable."<< std::endl;)
 	}
+
+	//clone reference 'resultVariable'
 	if(obj.getResultVariable()!=nullptr)
 	{
 		m_resultVariable = std::dynamic_pointer_cast<ocl::Expressions::Variable>(obj.getResultVariable()->copy());
@@ -160,7 +162,6 @@ Getter & Setter for reference bodyExpression
 */
 std::shared_ptr<ocl::Expressions::OclExpression> ExpressionInOclImpl::getBodyExpression() const
 {
-//assert(m_bodyExpression);
     return m_bodyExpression;
 }
 void ExpressionInOclImpl::setBodyExpression(std::shared_ptr<ocl::Expressions::OclExpression> _bodyExpression)
@@ -175,7 +176,6 @@ Getter & Setter for reference contextVariable
 */
 std::shared_ptr<ocl::Expressions::Variable> ExpressionInOclImpl::getContextVariable() const
 {
-
     return m_contextVariable;
 }
 void ExpressionInOclImpl::setContextVariable(std::shared_ptr<ocl::Expressions::Variable> _contextVariable)
@@ -196,7 +196,6 @@ std::shared_ptr<Bag<ocl::Expressions::Variable>> ExpressionInOclImpl::getParamet
 		
 		
 	}
-
     return m_parameterVariable;
 }
 
@@ -207,7 +206,6 @@ Getter & Setter for reference resultVariable
 */
 std::shared_ptr<ocl::Expressions::Variable> ExpressionInOclImpl::getResultVariable() const
 {
-
     return m_resultVariable;
 }
 void ExpressionInOclImpl::setResultVariable(std::shared_ptr<ocl::Expressions::Variable> _resultVariable)

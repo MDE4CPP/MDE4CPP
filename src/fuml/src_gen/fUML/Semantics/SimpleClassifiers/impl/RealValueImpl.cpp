@@ -166,7 +166,7 @@ std::shared_ptr<uml::ValueSpecification> RealValueImpl::specify()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	std::shared_ptr<uml::LiteralReal> literal = uml::umlFactory::eInstance()->createLiteralReal_in_Namespace(std::shared_ptr<uml::Class>());
+	std::shared_ptr<uml::LiteralReal> literal = uml::umlFactory::eInstance()->createLiteralReal_as_ownedMember_in_Namespace(std::shared_ptr<uml::Class>());
 	literal->setType(this->getType());
     literal->setValue(this->getValue());
     return literal;

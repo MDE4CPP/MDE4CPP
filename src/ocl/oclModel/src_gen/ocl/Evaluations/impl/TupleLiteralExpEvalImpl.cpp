@@ -33,10 +33,10 @@
 
 #include <exception> // used in Persistence
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
-#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Values/ValuesFactory.hpp"
+#include "fUML/Semantics/Loci/LociFactory.hpp"
 
 
 #include "ocl/Evaluations/EvalEnvironment.hpp"
@@ -97,8 +97,7 @@ TupleLiteralExpEvalImpl& TupleLiteralExpEvalImpl::operator=(const TupleLiteralEx
 	//Clone Attributes with (deep copy)
 
 	//copy references with no containment (soft copy)
-	std::shared_ptr<Bag<ocl::Evaluations::VariableDeclEval>> _tuplePart = obj.getTuplePart();
-	m_tuplePart.reset(new Bag<ocl::Evaluations::VariableDeclEval>(*(obj.getTuplePart().get())));
+	m_tuplePart  = obj.getTuplePart();
 	//Clone references with containment (deep copy)
 	return *this;
 }
@@ -138,7 +137,6 @@ std::shared_ptr<Bag<ocl::Evaluations::VariableDeclEval>> TupleLiteralExpEvalImpl
 		
 		
 	}
-
     return m_tuplePart;
 }
 

@@ -123,6 +123,7 @@ DecisionNodeActivationImpl& DecisionNodeActivationImpl::operator=(const Decision
 	//copy references with no containment (soft copy)
 	m_decisionNode  = obj.getDecisionNode();
 	//Clone references with containment (deep copy)
+	//clone reference 'decisionInputExecution'
 	if(obj.getDecisionInputExecution()!=nullptr)
 	{
 		m_decisionInputExecution = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::Execution>(obj.getDecisionInputExecution()->copy());
@@ -456,7 +457,6 @@ Getter & Setter for reference decisionInputExecution
 */
 std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> DecisionNodeActivationImpl::getDecisionInputExecution() const
 {
-//assert(m_decisionInputExecution);
     return m_decisionInputExecution;
 }
 void DecisionNodeActivationImpl::setDecisionInputExecution(std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> _decisionInputExecution)
@@ -471,7 +471,6 @@ Getter & Setter for reference decisionNode
 */
 std::shared_ptr<uml::DecisionNode> DecisionNodeActivationImpl::getDecisionNode() const
 {
-//assert(m_decisionNode);
     return m_decisionNode;
 }
 void DecisionNodeActivationImpl::setDecisionNode(std::shared_ptr<uml::DecisionNode> _decisionNode)

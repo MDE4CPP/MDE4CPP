@@ -132,14 +132,19 @@ TestIdentityActionImpl& TestIdentityActionImpl::operator=(const TestIdentityActi
 
 	//copy references with no containment (soft copy)
 	//Clone references with containment (deep copy)
+	//clone reference 'first'
 	if(obj.getFirst()!=nullptr)
 	{
 		m_first = std::dynamic_pointer_cast<uml::InputPin>(obj.getFirst()->copy());
 	}
+
+	//clone reference 'result'
 	if(obj.getResult()!=nullptr)
 	{
 		m_result = std::dynamic_pointer_cast<uml::OutputPin>(obj.getResult()->copy());
 	}
+
+	//clone reference 'second'
 	if(obj.getSecond()!=nullptr)
 	{
 		m_second = std::dynamic_pointer_cast<uml::InputPin>(obj.getSecond()->copy());
@@ -196,14 +201,11 @@ Getter & Setter for reference first
 */
 std::shared_ptr<uml::InputPin> TestIdentityActionImpl::getFirst() const
 {
-//assert(m_first);
     return m_first;
 }
 void TestIdentityActionImpl::setFirst(std::shared_ptr<uml::InputPin> _first)
 {
     m_first = _first;
-	
-	
 	
 }
 
@@ -213,14 +215,11 @@ Getter & Setter for reference result
 */
 std::shared_ptr<uml::OutputPin> TestIdentityActionImpl::getResult() const
 {
-//assert(m_result);
     return m_result;
 }
 void TestIdentityActionImpl::setResult(std::shared_ptr<uml::OutputPin> _result)
 {
     m_result = _result;
-	
-	
 	
 }
 
@@ -230,14 +229,11 @@ Getter & Setter for reference second
 */
 std::shared_ptr<uml::InputPin> TestIdentityActionImpl::getSecond() const
 {
-//assert(m_second);
     return m_second;
 }
 void TestIdentityActionImpl::setSecond(std::shared_ptr<uml::InputPin> _second)
 {
     m_second = _second;
-	
-	
 	
 }
 
@@ -271,7 +267,7 @@ std::shared_ptr<SubsetUnion<uml::InputPin, uml::Element>> TestIdentityActionImpl
 		#endif
 		
 		/*SubsetUnion*/
-		m_input->initSubsetUnion(getOwnedElement());
+		getInput()->initSubsetUnion(getOwnedElement());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value SubsetUnion: " << "m_input - SubsetUnion<uml::InputPin, uml::Element >(getOwnedElement())" << std::endl;
 		#endif
@@ -291,7 +287,7 @@ std::shared_ptr<SubsetUnion<uml::OutputPin, uml::Element>> TestIdentityActionImp
 		#endif
 		
 		/*SubsetUnion*/
-		m_output->initSubsetUnion(getOwnedElement());
+		getOutput()->initSubsetUnion(getOwnedElement());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value SubsetUnion: " << "m_output - SubsetUnion<uml::OutputPin, uml::Element >(getOwnedElement())" << std::endl;
 		#endif

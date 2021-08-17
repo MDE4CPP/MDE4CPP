@@ -226,13 +226,13 @@ namespace uml
 			Indicates whether the ActivityPartition groups other ActivityPartitions along a dimension.
 			<p>From package UML::Activities.</p>
 			*/
-			 
+			
 			bool m_isDimension = false;
 			/*!
 			Indicates whether the ActivityPartition represents an entity to which the partitioning structure does not apply.
 			<p>From package UML::Activities.</p>
 			*/
-			 
+			
 			bool m_isExternal = false;
 			
 			

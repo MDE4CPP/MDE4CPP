@@ -176,13 +176,13 @@ namespace uml
 			The location where an Artifact is deployed onto a Node. This is typically a 'directory' or 'memory address.'
 			<p>From package UML::Deployments.</p>
 			*/
-			 
+			
 			std::string m_deploymentLocation = "";
 			/*!
 			The location where a component Artifact executes. This may be a local or remote location.
 			<p>From package UML::Deployments.</p>
 			*/
-			 
+			
 			std::string m_executionLocation = "";
 			
 			
@@ -230,7 +230,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement>> getOwnedMember() const = 0;/*!
+			virtual std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement>> getOwnedMember() const = 0;/*!
 			The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/

@@ -130,7 +130,7 @@ namespace uml
 			Specifies whether the existing links emanating from the object on this end should be destroyed before creating a new link.
 			<p>From package UML::Actions.</p>
 			*/
-			 
+			
 			bool m_isReplaceAll = false;
 			
 			

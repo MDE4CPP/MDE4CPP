@@ -32,9 +32,9 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Values/ValuesFactory.hpp"
+#include "fUML/Semantics/Loci/LociFactory.hpp"
 
 
 #include "fUML/Semantics/Values/Evaluation.hpp"
@@ -125,7 +125,6 @@ Getter & Setter for reference element
 */
 std::shared_ptr<fUML::Semantics::Values::Value> CollectionLiteralPartEvalImpl::getElement() const
 {
-//assert(m_element);
     return m_element;
 }
 void CollectionLiteralPartEvalImpl::setElement(std::shared_ptr<fUML::Semantics::Values::Value> _element)

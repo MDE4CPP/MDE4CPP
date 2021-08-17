@@ -105,6 +105,7 @@ ElementImportImpl& ElementImportImpl::operator=(const ElementImportImpl & obj)
 	//copy references with no containment (soft copy)
 	m_importingNamespace  = obj.getImportingNamespace();
 	//Clone references with containment (deep copy)
+	//clone reference 'importedElement'
 	if(obj.getImportedElement()!=nullptr)
 	{
 		m_importedElement = std::dynamic_pointer_cast<uml::PackageableElement>(obj.getImportedElement()->copy());
@@ -185,14 +186,11 @@ Getter & Setter for reference importedElement
 */
 std::shared_ptr<uml::PackageableElement> ElementImportImpl::getImportedElement() const
 {
-//assert(m_importedElement);
     return m_importedElement;
 }
 void ElementImportImpl::setImportedElement(std::shared_ptr<uml::PackageableElement> _importedElement)
 {
     m_importedElement = _importedElement;
-	
-	
 	
 }
 
@@ -202,16 +200,11 @@ Getter & Setter for reference importingNamespace
 */
 std::weak_ptr<uml::Namespace> ElementImportImpl::getImportingNamespace() const
 {
-//assert(m_importingNamespace);
     return m_importingNamespace;
 }
 void ElementImportImpl::setImportingNamespace(std::weak_ptr<uml::Namespace> _importingNamespace)
 {
     m_importingNamespace = _importingNamespace;
-	
-	
-	m_owner = this->getImportingNamespace().lock();
-	
 	
 }
 
@@ -265,7 +258,7 @@ std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> ElementImportImpl::getS
 		#endif
 		
 		/*SubsetUnion*/
-		m_source->initSubsetUnion(getRelatedElement());
+		getSource()->initSubsetUnion(getRelatedElement());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value SubsetUnion: " << "m_source - SubsetUnion<uml::Element, uml::Element >(getRelatedElement())" << std::endl;
 		#endif
@@ -285,7 +278,7 @@ std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> ElementImportImpl::getT
 		#endif
 		
 		/*SubsetUnion*/
-		m_target->initSubsetUnion(getRelatedElement());
+		getTarget()->initSubsetUnion(getRelatedElement());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value SubsetUnion: " << "m_target - SubsetUnion<uml::Element, uml::Element >(getRelatedElement())" << std::endl;
 		#endif

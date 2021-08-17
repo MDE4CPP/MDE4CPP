@@ -183,10 +183,13 @@ LetExpImpl& LetExpImpl::operator=(const LetExpImpl & obj)
 
 	//copy references with no containment (soft copy)
 	//Clone references with containment (deep copy)
+	//clone reference 'in'
 	if(obj.getIn()!=nullptr)
 	{
 		m_in = std::dynamic_pointer_cast<ocl::Expressions::OclExpression>(obj.getIn()->copy());
 	}
+
+	//clone reference 'variable'
 	if(obj.getVariable()!=nullptr)
 	{
 		m_variable = std::dynamic_pointer_cast<ocl::Expressions::Variable>(obj.getVariable()->copy());
@@ -225,7 +228,6 @@ Getter & Setter for reference in
 */
 std::shared_ptr<ocl::Expressions::OclExpression> LetExpImpl::getIn() const
 {
-//assert(m_in);
     return m_in;
 }
 void LetExpImpl::setIn(std::shared_ptr<ocl::Expressions::OclExpression> _in)
@@ -240,7 +242,6 @@ Getter & Setter for reference variable
 */
 std::shared_ptr<ocl::Expressions::Variable> LetExpImpl::getVariable() const
 {
-//assert(m_variable);
     return m_variable;
 }
 void LetExpImpl::setVariable(std::shared_ptr<ocl::Expressions::Variable> _variable)

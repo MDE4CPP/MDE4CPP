@@ -140,9 +140,9 @@ DurationImpl& DurationImpl::operator=(const DurationImpl & obj)
 	//Clone Attributes with (deep copy)
 
 	//copy references with no containment (soft copy)
-	std::shared_ptr<Bag<uml::Observation>> _observation = obj.getObservation();
-	m_observation.reset(new Bag<uml::Observation>(*(obj.getObservation().get())));
+	m_observation  = obj.getObservation();
 	//Clone references with containment (deep copy)
+	//clone reference 'expr'
 	if(obj.getExpr()!=nullptr)
 	{
 		m_expr = std::dynamic_pointer_cast<uml::ValueSpecification>(obj.getExpr()->copy());
@@ -185,13 +185,11 @@ Getter & Setter for reference expr
 */
 std::shared_ptr<uml::ValueSpecification> DurationImpl::getExpr() const
 {
-
     return m_expr;
 }
 void DurationImpl::setExpr(std::shared_ptr<uml::ValueSpecification> _expr)
 {
     m_expr = _expr;
-	
 	
 }
 
@@ -207,7 +205,6 @@ std::shared_ptr<Bag<uml::Observation>> DurationImpl::getObservation() const
 		
 		
 	}
-
     return m_observation;
 }
 

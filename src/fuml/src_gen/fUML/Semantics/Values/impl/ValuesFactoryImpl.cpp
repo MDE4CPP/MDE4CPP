@@ -14,9 +14,12 @@
 #include "fUML/Semantics/Values/impl/LiteralUnlimitedNaturalEvaluationImpl.hpp"
 #include "fUML/Semantics/Values/impl/ValueImpl.hpp"
 
-#include "fUML/Semantics/Values/Value.hpp"
-#include "fUML/Semantics/Values/Value.hpp"
-#include "fUML/Semantics/Values/Value.hpp"
+#include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
+#include "fUML/Semantics/Activities/ObjectToken.hpp"
+#include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
+#include "fUML/Semantics/CommonBehavior/ParameterValue.hpp"
+#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersPackage.hpp"
+#include "fUML/Semantics/SimpleClassifiers/FeatureValue.hpp"
 
 
 using namespace fUML::Semantics::Values;

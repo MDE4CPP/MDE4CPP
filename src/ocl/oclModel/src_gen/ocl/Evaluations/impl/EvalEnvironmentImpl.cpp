@@ -87,8 +87,7 @@ EvalEnvironmentImpl& EvalEnvironmentImpl::operator=(const EvalEnvironmentImpl & 
 	//Clone Attributes with (deep copy)
 
 	//copy references with no containment (soft copy)
-	std::shared_ptr<Bag<ocl::Values::NameValueBinding>> _bindings = obj.getBindings();
-	m_bindings.reset(new Bag<ocl::Values::NameValueBinding>(*(obj.getBindings().get())));
+	m_bindings  = obj.getBindings();
 	//Clone references with containment (deep copy)
 	return *this;
 }
@@ -191,7 +190,6 @@ std::shared_ptr<Bag<ocl::Values::NameValueBinding>> EvalEnvironmentImpl::getBind
 		
 		
 	}
-
     return m_bindings;
 }
 

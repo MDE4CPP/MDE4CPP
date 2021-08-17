@@ -118,47 +118,39 @@ ConnectorImpl& ConnectorImpl::operator=(const ConnectorImpl & obj)
 	m_kind = obj.getKind();
 
 	//copy references with no containment (soft copy)
-	std::shared_ptr<Bag<uml::Behavior>> _contract = obj.getContract();
-	m_contract.reset(new Bag<uml::Behavior>(*(obj.getContract().get())));
+	m_contract  = obj.getContract();
 	m_structuredClassifier  = obj.getStructuredClassifier();
 	m_type  = obj.getType();
 	//Clone references with containment (deep copy)
-	std::shared_ptr<Subset<uml::ConnectorEnd, uml::Element>> endContainer = getEnd();
-	if(nullptr != endContainer )
+	//clone reference 'end'
+	std::shared_ptr<Subset<uml::ConnectorEnd, uml::Element>> endList = obj.getEnd();
+	if(endList)
 	{
-		int size = endContainer->size();
-		for(int i=0; i<size ; i++)
+		Bag<uml::ConnectorEnd>::iterator endIter = endList->begin();
+		Bag<uml::ConnectorEnd>::iterator endEnd = endList->end();
+		while (endIter != endEnd) 
 		{
-			auto _end=(*endContainer)[i];
-			if(nullptr != _end)
-			{
-				endContainer->push_back(std::dynamic_pointer_cast<uml::ConnectorEnd>(_end->copy()));
-			}
-			else
-			{
-				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container end."<< std::endl;)
-			}
+			std::shared_ptr<uml::ConnectorEnd> temp = std::dynamic_pointer_cast<uml::ConnectorEnd>((*endIter)->copy());
+			getEnd()->push_back(temp);
+			endIter++;
 		}
 	}
 	else
 	{
 		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr end."<< std::endl;)
 	}
-	std::shared_ptr<Subset<uml::Connector, uml::RedefinableElement>> redefinedConnectorContainer = getRedefinedConnector();
-	if(nullptr != redefinedConnectorContainer )
+
+	//clone reference 'redefinedConnector'
+	std::shared_ptr<Subset<uml::Connector, uml::RedefinableElement>> redefinedConnectorList = obj.getRedefinedConnector();
+	if(redefinedConnectorList)
 	{
-		int size = redefinedConnectorContainer->size();
-		for(int i=0; i<size ; i++)
+		Bag<uml::Connector>::iterator redefinedConnectorIter = redefinedConnectorList->begin();
+		Bag<uml::Connector>::iterator redefinedConnectorEnd = redefinedConnectorList->end();
+		while (redefinedConnectorIter != redefinedConnectorEnd) 
 		{
-			auto _redefinedConnector=(*redefinedConnectorContainer)[i];
-			if(nullptr != _redefinedConnector)
-			{
-				redefinedConnectorContainer->push_back(std::dynamic_pointer_cast<uml::Connector>(_redefinedConnector->copy()));
-			}
-			else
-			{
-				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container redefinedConnector."<< std::endl;)
-			}
+			std::shared_ptr<uml::Connector> temp = std::dynamic_pointer_cast<uml::Connector>((*redefinedConnectorIter)->copy());
+			getRedefinedConnector()->push_back(temp);
+			redefinedConnectorIter++;
 		}
 	}
 	else
@@ -166,7 +158,7 @@ ConnectorImpl& ConnectorImpl::operator=(const ConnectorImpl & obj)
 		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr redefinedConnector."<< std::endl;)
 	}
 	/*Subset*/
-	m_end->initSubset(getOwnedElement());
+	getEnd()->initSubset(getOwnedElement());
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Initialising value Subset: " << "m_end - Subset<uml::ConnectorEnd, uml::Element >(getOwnedElement())" << std::endl;
 	#endif
@@ -235,7 +227,6 @@ std::shared_ptr<Bag<uml::Behavior>> ConnectorImpl::getContract() const
 		
 		
 	}
-
     return m_contract;
 }
 
@@ -255,13 +246,12 @@ std::shared_ptr<Subset<uml::ConnectorEnd, uml::Element>> ConnectorImpl::getEnd()
 		#endif
 		
 		/*Subset*/
-		m_end->initSubset(getOwnedElement());
+		getEnd()->initSubset(getOwnedElement());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value Subset: " << "m_end - Subset<uml::ConnectorEnd, uml::Element >(getOwnedElement())" << std::endl;
 		#endif
 		
 	}
-//assert(m_end);
     return m_end;
 }
 
@@ -281,13 +271,12 @@ std::shared_ptr<Subset<uml::Connector, uml::RedefinableElement>> ConnectorImpl::
 		#endif
 		
 		/*Subset*/
-		m_redefinedConnector->initSubset(getRedefinedElement());
+		getRedefinedConnector()->initSubset(getRedefinedElement());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value Subset: " << "m_redefinedConnector - Subset<uml::Connector, uml::RedefinableElement >(getRedefinedElement())" << std::endl;
 		#endif
 		
 	}
-
     return m_redefinedConnector;
 }
 
@@ -298,18 +287,11 @@ Getter & Setter for reference structuredClassifier
 */
 std::weak_ptr<uml::StructuredClassifier> ConnectorImpl::getStructuredClassifier() const
 {
-
     return m_structuredClassifier;
 }
 void ConnectorImpl::setStructuredClassifier(std::weak_ptr<uml::StructuredClassifier> _structuredClassifier)
 {
     m_structuredClassifier = _structuredClassifier;
-	
-	m_namespace = this->getStructuredClassifier().lock();
-	m_owner = this->getNamespace().lock();
-	
-	
-	
 	
 }
 
@@ -319,7 +301,6 @@ Getter & Setter for reference type
 */
 std::shared_ptr<uml::Association> ConnectorImpl::getType() const
 {
-
     return m_type;
 }
 void ConnectorImpl::setType(std::shared_ptr<uml::Association> _type)

@@ -130,7 +130,7 @@ namespace uml
 			Specifies whether to destroy duplicates of the value in nonunique Association ends.
 			<p>From package UML::Actions.</p>
 			*/
-			 
+			
 			bool m_isDestroyDuplicates = false;
 			
 			

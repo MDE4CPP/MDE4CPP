@@ -104,11 +104,11 @@ namespace ecore
 			//*********************************
 			// Attribute Members
 			//*********************************
-			 
+			
 			Any m_instance = nullptr;
-			 
+			
 			std::string m_literal = "";
-			 
+			
 			int m_value = 0;
 			
 			

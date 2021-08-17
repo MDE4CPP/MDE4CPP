@@ -92,8 +92,7 @@ OclMessageValueImpl& OclMessageValueImpl::operator=(const OclMessageValueImpl & 
 	m_name = obj.getName();
 
 	//copy references with no containment (soft copy)
-	std::shared_ptr<Bag<ocl::Values::NameValueBinding>> _arguments = obj.getArguments();
-	m_arguments.reset(new Bag<ocl::Values::NameValueBinding>(*(obj.getArguments().get())));
+	m_arguments  = obj.getArguments();
 	m_returnMessage  = obj.getReturnMessage();
 	m_source  = obj.getSource();
 	m_target  = obj.getTarget();
@@ -198,7 +197,6 @@ std::shared_ptr<Bag<ocl::Values::NameValueBinding>> OclMessageValueImpl::getArgu
 		
 		
 	}
-
     return m_arguments;
 }
 
@@ -209,7 +207,6 @@ Getter & Setter for reference returnMessage
 */
 std::shared_ptr<ocl::Values::OclMessageValue> OclMessageValueImpl::getReturnMessage() const
 {
-
     return m_returnMessage;
 }
 void OclMessageValueImpl::setReturnMessage(std::shared_ptr<ocl::Values::OclMessageValue> _returnMessage)
@@ -224,7 +221,6 @@ Getter & Setter for reference source
 */
 std::shared_ptr<ocl::Values::ObjectValue> OclMessageValueImpl::getSource() const
 {
-
     return m_source;
 }
 void OclMessageValueImpl::setSource(std::shared_ptr<ocl::Values::ObjectValue> _source)
@@ -239,7 +235,6 @@ Getter & Setter for reference target
 */
 std::shared_ptr<ocl::Values::ObjectValue> OclMessageValueImpl::getTarget() const
 {
-
     return m_target;
 }
 void OclMessageValueImpl::setTarget(std::shared_ptr<ocl::Values::ObjectValue> _target)

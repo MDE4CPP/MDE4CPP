@@ -104,9 +104,9 @@ namespace ecore
 			//*********************************
 			// Attribute Members
 			//*********************************
-			 
+			
 			std::shared_ptr<std::map < std::string, std::string>> m_details = nullptr;
-			 
+			
 			std::string m_source = "";
 			
 			

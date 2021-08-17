@@ -105,6 +105,7 @@ TemplateParameterSubstitutionImpl& TemplateParameterSubstitutionImpl::operator=(
 	m_formal  = obj.getFormal();
 	m_templateBinding  = obj.getTemplateBinding();
 	//Clone references with containment (deep copy)
+	//clone reference 'ownedActual'
 	if(obj.getOwnedActual()!=nullptr)
 	{
 		m_ownedActual = std::dynamic_pointer_cast<uml::ParameterableElement>(obj.getOwnedActual()->copy());
@@ -147,7 +148,6 @@ Getter & Setter for reference actual
 */
 std::shared_ptr<uml::ParameterableElement> TemplateParameterSubstitutionImpl::getActual() const
 {
-//assert(m_actual);
     return m_actual;
 }
 void TemplateParameterSubstitutionImpl::setActual(std::shared_ptr<uml::ParameterableElement> _actual)
@@ -162,7 +162,6 @@ Getter & Setter for reference formal
 */
 std::shared_ptr<uml::TemplateParameter> TemplateParameterSubstitutionImpl::getFormal() const
 {
-//assert(m_formal);
     return m_formal;
 }
 void TemplateParameterSubstitutionImpl::setFormal(std::shared_ptr<uml::TemplateParameter> _formal)
@@ -177,15 +176,11 @@ Getter & Setter for reference ownedActual
 */
 std::shared_ptr<uml::ParameterableElement> TemplateParameterSubstitutionImpl::getOwnedActual() const
 {
-
     return m_ownedActual;
 }
 void TemplateParameterSubstitutionImpl::setOwnedActual(std::shared_ptr<uml::ParameterableElement> _ownedActual)
 {
     m_ownedActual = _ownedActual;
-	
-	//additional setter call for redefined reference TemplateParameterSubstitution::actual
-	this->setActual(_ownedActual);
 	
 }
 
@@ -195,14 +190,11 @@ Getter & Setter for reference templateBinding
 */
 std::weak_ptr<uml::TemplateBinding> TemplateParameterSubstitutionImpl::getTemplateBinding() const
 {
-//assert(m_templateBinding);
     return m_templateBinding;
 }
 void TemplateParameterSubstitutionImpl::setTemplateBinding(std::weak_ptr<uml::TemplateBinding> _templateBinding)
 {
     m_templateBinding = _templateBinding;
-	m_owner = this->getTemplateBinding().lock();
-	
 	
 }
 

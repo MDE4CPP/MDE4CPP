@@ -216,7 +216,6 @@ Getter & Setter for reference referredVariable
 */
 std::shared_ptr<ocl::Expressions::Variable> VariableExpImpl::getReferredVariable() const
 {
-
     return m_referredVariable;
 }
 void VariableExpImpl::setReferredVariable(std::shared_ptr<ocl::Expressions::Variable> _referredVariable)

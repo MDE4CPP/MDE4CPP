@@ -183,7 +183,6 @@ Getter & Setter for reference removeStructuralFeatureValueAction
 */
 std::shared_ptr<uml::RemoveStructuralFeatureValueAction> RemoveStructuralFeatureValueActivationImpl::getRemoveStructuralFeatureValueAction() const
 {
-//assert(m_removeStructuralFeatureValueAction);
     return m_removeStructuralFeatureValueAction;
 }
 void RemoveStructuralFeatureValueActivationImpl::setRemoveStructuralFeatureValueAction(std::shared_ptr<uml::RemoveStructuralFeatureValueAction> _removeStructuralFeatureValueAction)

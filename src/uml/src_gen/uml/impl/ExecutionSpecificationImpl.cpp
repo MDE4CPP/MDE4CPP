@@ -163,7 +163,6 @@ Getter & Setter for reference finish
 */
 std::shared_ptr<uml::OccurrenceSpecification> ExecutionSpecificationImpl::getFinish() const
 {
-//assert(m_finish);
     return m_finish;
 }
 void ExecutionSpecificationImpl::setFinish(std::shared_ptr<uml::OccurrenceSpecification> _finish)
@@ -178,7 +177,6 @@ Getter & Setter for reference start
 */
 std::shared_ptr<uml::OccurrenceSpecification> ExecutionSpecificationImpl::getStart() const
 {
-//assert(m_start);
     return m_start;
 }
 void ExecutionSpecificationImpl::setStart(std::shared_ptr<uml::OccurrenceSpecification> _start)

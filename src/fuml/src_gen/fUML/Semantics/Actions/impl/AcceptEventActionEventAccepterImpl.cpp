@@ -119,7 +119,6 @@ Getter & Setter for reference actionActivation
 */
 std::shared_ptr<fUML::Semantics::Actions::AcceptEventActionActivation> AcceptEventActionEventAccepterImpl::getActionActivation() const
 {
-//assert(m_actionActivation);
     return m_actionActivation;
 }
 void AcceptEventActionEventAccepterImpl::setActionActivation(std::shared_ptr<fUML::Semantics::Actions::AcceptEventActionActivation> _actionActivation)

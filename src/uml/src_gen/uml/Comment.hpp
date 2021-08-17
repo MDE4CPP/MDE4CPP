@@ -106,7 +106,7 @@ namespace uml
 			Specifies a string that is the comment.
 			<p>From package UML::CommonStructure.</p>
 			*/
-			 
+			
 			std::string m_body = "";
 			
 			

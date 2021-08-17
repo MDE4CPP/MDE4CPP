@@ -158,81 +158,31 @@ LoopNodeImpl& LoopNodeImpl::operator=(const LoopNodeImpl & obj)
 	m_isTestedFirst = obj.getIsTestedFirst();
 
 	//copy references with no containment (soft copy)
-	std::shared_ptr<Bag<uml::OutputPin>> _bodyOutput = obj.getBodyOutput();
-	m_bodyOutput.reset(new Bag<uml::OutputPin>(*(obj.getBodyOutput().get())));
-	std::shared_ptr<Bag<uml::ExecutableNode>> _bodyPart = obj.getBodyPart();
-	m_bodyPart.reset(new Bag<uml::ExecutableNode>(*(obj.getBodyPart().get())));
+	m_bodyOutput  = obj.getBodyOutput();
+	m_bodyPart  = obj.getBodyPart();
 	m_decider  = obj.getDecider();
-	std::shared_ptr<Bag<uml::ExecutableNode>> _setupPart = obj.getSetupPart();
-	m_setupPart.reset(new Bag<uml::ExecutableNode>(*(obj.getSetupPart().get())));
-	std::shared_ptr<Bag<uml::ExecutableNode>> _test = obj.getTest();
-	m_test.reset(new Bag<uml::ExecutableNode>(*(obj.getTest().get())));
+	m_setupPart  = obj.getSetupPart();
+	m_test  = obj.getTest();
 	//Clone references with containment (deep copy)
-	std::shared_ptr<Subset<uml::OutputPin, uml::Element>> loopVariableContainer = getLoopVariable();
-	if(nullptr != loopVariableContainer )
+	//clone reference 'loopVariable'
+	std::shared_ptr<Subset<uml::OutputPin, uml::Element>> loopVariableList = obj.getLoopVariable();
+	if(loopVariableList)
 	{
-		int size = loopVariableContainer->size();
-		for(int i=0; i<size ; i++)
+		Bag<uml::OutputPin>::iterator loopVariableIter = loopVariableList->begin();
+		Bag<uml::OutputPin>::iterator loopVariableEnd = loopVariableList->end();
+		while (loopVariableIter != loopVariableEnd) 
 		{
-			auto _loopVariable=(*loopVariableContainer)[i];
-			if(nullptr != _loopVariable)
-			{
-				loopVariableContainer->push_back(std::dynamic_pointer_cast<uml::OutputPin>(_loopVariable->copy()));
-			}
-			else
-			{
-				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container loopVariable."<< std::endl;)
-			}
+			std::shared_ptr<uml::OutputPin> temp = std::dynamic_pointer_cast<uml::OutputPin>((*loopVariableIter)->copy());
+			getLoopVariable()->push_back(temp);
+			loopVariableIter++;
 		}
 	}
 	else
 	{
 		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr loopVariable."<< std::endl;)
 	}
-	std::shared_ptr<Bag<uml::InputPin>> loopVariableInputContainer = getLoopVariableInput();
-	if(nullptr != loopVariableInputContainer )
-	{
-		int size = loopVariableInputContainer->size();
-		for(int i=0; i<size ; i++)
-		{
-			auto _loopVariableInput=(*loopVariableInputContainer)[i];
-			if(nullptr != _loopVariableInput)
-			{
-				loopVariableInputContainer->push_back(std::dynamic_pointer_cast<uml::InputPin>(_loopVariableInput->copy()));
-			}
-			else
-			{
-				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container loopVariableInput."<< std::endl;)
-			}
-		}
-	}
-	else
-	{
-		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr loopVariableInput."<< std::endl;)
-	}
-	std::shared_ptr<Bag<uml::OutputPin>> resultContainer = getResult();
-	if(nullptr != resultContainer )
-	{
-		int size = resultContainer->size();
-		for(int i=0; i<size ; i++)
-		{
-			auto _result=(*resultContainer)[i];
-			if(nullptr != _result)
-			{
-				resultContainer->push_back(std::dynamic_pointer_cast<uml::OutputPin>(_result->copy()));
-			}
-			else
-			{
-				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container result."<< std::endl;)
-			}
-		}
-	}
-	else
-	{
-		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr result."<< std::endl;)
-	}
 	/*Subset*/
-	m_loopVariable->initSubset(getOwnedElement());
+	getLoopVariable()->initSubset(getOwnedElement());
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Initialising value Subset: " << "m_loopVariable - Subset<uml::OutputPin, uml::Element >(getOwnedElement())" << std::endl;
 	#endif
@@ -343,7 +293,6 @@ std::shared_ptr<Bag<uml::OutputPin>> LoopNodeImpl::getBodyOutput() const
 		
 		
 	}
-
     return m_bodyOutput;
 }
 
@@ -360,7 +309,6 @@ std::shared_ptr<Bag<uml::ExecutableNode>> LoopNodeImpl::getBodyPart() const
 		
 		
 	}
-
     return m_bodyPart;
 }
 
@@ -371,7 +319,6 @@ Getter & Setter for reference decider
 */
 std::shared_ptr<uml::OutputPin> LoopNodeImpl::getDecider() const
 {
-//assert(m_decider);
     return m_decider;
 }
 void LoopNodeImpl::setDecider(std::shared_ptr<uml::OutputPin> _decider)
@@ -395,13 +342,12 @@ std::shared_ptr<Subset<uml::OutputPin, uml::Element>> LoopNodeImpl::getLoopVaria
 		#endif
 		
 		/*Subset*/
-		m_loopVariable->initSubset(getOwnedElement());
+		getLoopVariable()->initSubset(getOwnedElement());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value Subset: " << "m_loopVariable - Subset<uml::OutputPin, uml::Element >(getOwnedElement())" << std::endl;
 		#endif
 		
 	}
-
     return m_loopVariable;
 }
 
@@ -412,14 +358,8 @@ Getter & Setter for reference loopVariableInput
 */
 std::shared_ptr<Bag<uml::InputPin>> LoopNodeImpl::getLoopVariableInput() const
 {
-	if(m_loopVariableInput == nullptr)
-	{
-		m_loopVariableInput.reset(new Bag<uml::InputPin>());
-		
-		
-	}
-
-    return m_loopVariableInput;
+	//Getter call of redefined container reference StructuredActivityNode::structuredNodeInput 
+	return uml::StructuredActivityNodeImpl::getStructuredNodeInput();
 }
 
 
@@ -429,14 +369,8 @@ Getter & Setter for reference result
 */
 std::shared_ptr<Bag<uml::OutputPin>> LoopNodeImpl::getResult() const
 {
-	if(m_result == nullptr)
-	{
-		m_result.reset(new Bag<uml::OutputPin>());
-		
-		
-	}
-
-    return m_result;
+	//Getter call of redefined container reference StructuredActivityNode::structuredNodeOutput 
+	return uml::StructuredActivityNodeImpl::getStructuredNodeOutput();
 }
 
 
@@ -452,7 +386,6 @@ std::shared_ptr<Bag<uml::ExecutableNode>> LoopNodeImpl::getSetupPart() const
 		
 		
 	}
-
     return m_setupPart;
 }
 
@@ -469,7 +402,6 @@ std::shared_ptr<Bag<uml::ExecutableNode>> LoopNodeImpl::getTest() const
 		
 		
 	}
-//assert(m_test);
     return m_test;
 }
 
@@ -534,7 +466,7 @@ std::shared_ptr<SubsetUnion<uml::InputPin, uml::Element>> LoopNodeImpl::getInput
 		#endif
 		
 		/*SubsetUnion*/
-		m_input->initSubsetUnion(getOwnedElement());
+		getInput()->initSubsetUnion(getOwnedElement());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value SubsetUnion: " << "m_input - SubsetUnion<uml::InputPin, uml::Element >(getOwnedElement())" << std::endl;
 		#endif
@@ -569,7 +501,7 @@ std::shared_ptr<SubsetUnion<uml::OutputPin, uml::Element>> LoopNodeImpl::getOutp
 		#endif
 		
 		/*SubsetUnion*/
-		m_output->initSubsetUnion(getOwnedElement());
+		getOutput()->initSubsetUnion(getOwnedElement());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value SubsetUnion: " << "m_output - SubsetUnion<uml::OutputPin, uml::Element >(getOwnedElement())" << std::endl;
 		#endif
@@ -593,20 +525,20 @@ std::shared_ptr<Union<uml::Element>> LoopNodeImpl::getOwnedElement() const
 	return m_ownedElement;
 }
 
-std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement>> LoopNodeImpl::getOwnedMember() const
+std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement>> LoopNodeImpl::getOwnedMember() const
 {
 	if(m_ownedMember == nullptr)
 	{
 		/*SubsetUnion*/
-		m_ownedMember.reset(new SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement >());
+		m_ownedMember.reset(new SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement >());
 		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement >()" << std::endl;
+			std::cout << "Initialising shared pointer SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement >()" << std::endl;
 		#endif
 		
 		/*SubsetUnion*/
-		m_ownedMember->initSubsetUnion(getOwnedElement(),getMember());
+		getOwnedMember()->initSubsetUnion(getOwnedElement(), getMember());
 		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement >(getOwnedElement(),getMember())" << std::endl;
+			std::cout << "Initialising value SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement >(getOwnedElement(), getMember())" << std::endl;
 		#endif
 		
 	}

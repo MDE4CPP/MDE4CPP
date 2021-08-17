@@ -35,6 +35,8 @@ namespace fUML::Semantics::Activities
 			virtual std::shared_ptr<ObjectToken> getThisObjectTokenPtr() const;
 			virtual void setThisObjectTokenPtr(std::weak_ptr<ObjectToken> thisObjectTokenPtr);
 
+			//Additional constructors for the containments back reference
+			ObjectTokenImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivation> par_holder);
 
 		public:
 			//destructor

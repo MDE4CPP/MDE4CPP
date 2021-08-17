@@ -135,42 +135,35 @@ ActionImpl& ActionImpl::operator=(const ActionImpl & obj)
 	//copy references with no containment (soft copy)
 	m_context  = obj.getContext();
 	//Clone references with containment (deep copy)
-	std::shared_ptr<Subset<uml::Constraint, uml::Element>> localPostconditionContainer = getLocalPostcondition();
-	if(nullptr != localPostconditionContainer )
+	//clone reference 'localPostcondition'
+	std::shared_ptr<Subset<uml::Constraint, uml::Element>> localPostconditionList = obj.getLocalPostcondition();
+	if(localPostconditionList)
 	{
-		int size = localPostconditionContainer->size();
-		for(int i=0; i<size ; i++)
+		Bag<uml::Constraint>::iterator localPostconditionIter = localPostconditionList->begin();
+		Bag<uml::Constraint>::iterator localPostconditionEnd = localPostconditionList->end();
+		while (localPostconditionIter != localPostconditionEnd) 
 		{
-			auto _localPostcondition=(*localPostconditionContainer)[i];
-			if(nullptr != _localPostcondition)
-			{
-				localPostconditionContainer->push_back(std::dynamic_pointer_cast<uml::Constraint>(_localPostcondition->copy()));
-			}
-			else
-			{
-				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container localPostcondition."<< std::endl;)
-			}
+			std::shared_ptr<uml::Constraint> temp = std::dynamic_pointer_cast<uml::Constraint>((*localPostconditionIter)->copy());
+			getLocalPostcondition()->push_back(temp);
+			localPostconditionIter++;
 		}
 	}
 	else
 	{
 		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr localPostcondition."<< std::endl;)
 	}
-	std::shared_ptr<Subset<uml::Constraint, uml::Element>> localPreconditionContainer = getLocalPrecondition();
-	if(nullptr != localPreconditionContainer )
+
+	//clone reference 'localPrecondition'
+	std::shared_ptr<Subset<uml::Constraint, uml::Element>> localPreconditionList = obj.getLocalPrecondition();
+	if(localPreconditionList)
 	{
-		int size = localPreconditionContainer->size();
-		for(int i=0; i<size ; i++)
+		Bag<uml::Constraint>::iterator localPreconditionIter = localPreconditionList->begin();
+		Bag<uml::Constraint>::iterator localPreconditionEnd = localPreconditionList->end();
+		while (localPreconditionIter != localPreconditionEnd) 
 		{
-			auto _localPrecondition=(*localPreconditionContainer)[i];
-			if(nullptr != _localPrecondition)
-			{
-				localPreconditionContainer->push_back(std::dynamic_pointer_cast<uml::Constraint>(_localPrecondition->copy()));
-			}
-			else
-			{
-				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container localPrecondition."<< std::endl;)
-			}
+			std::shared_ptr<uml::Constraint> temp = std::dynamic_pointer_cast<uml::Constraint>((*localPreconditionIter)->copy());
+			getLocalPrecondition()->push_back(temp);
+			localPreconditionIter++;
 		}
 	}
 	else
@@ -178,13 +171,13 @@ ActionImpl& ActionImpl::operator=(const ActionImpl & obj)
 		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr localPrecondition."<< std::endl;)
 	}
 	/*Subset*/
-	m_localPostcondition->initSubset(getOwnedElement());
+	getLocalPostcondition()->initSubset(getOwnedElement());
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Initialising value Subset: " << "m_localPostcondition - Subset<uml::Constraint, uml::Element >(getOwnedElement())" << std::endl;
 	#endif
 	
 	/*Subset*/
-	m_localPrecondition->initSubset(getOwnedElement());
+	getLocalPrecondition()->initSubset(getOwnedElement());
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Initialising value Subset: " << "m_localPrecondition - Subset<uml::Constraint, uml::Element >(getOwnedElement())" << std::endl;
 	#endif
@@ -253,7 +246,6 @@ Getter & Setter for reference context
 */
 std::shared_ptr<uml::Classifier> ActionImpl::getContext() const
 {
-
     return m_context;
 }
 
@@ -280,13 +272,12 @@ std::shared_ptr<Subset<uml::Constraint, uml::Element>> ActionImpl::getLocalPostc
 		#endif
 		
 		/*Subset*/
-		m_localPostcondition->initSubset(getOwnedElement());
+		getLocalPostcondition()->initSubset(getOwnedElement());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value Subset: " << "m_localPostcondition - Subset<uml::Constraint, uml::Element >(getOwnedElement())" << std::endl;
 		#endif
 		
 	}
-
     return m_localPostcondition;
 }
 
@@ -306,13 +297,12 @@ std::shared_ptr<Subset<uml::Constraint, uml::Element>> ActionImpl::getLocalPreco
 		#endif
 		
 		/*Subset*/
-		m_localPrecondition->initSubset(getOwnedElement());
+		getLocalPrecondition()->initSubset(getOwnedElement());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value Subset: " << "m_localPrecondition - Subset<uml::Constraint, uml::Element >(getOwnedElement())" << std::endl;
 		#endif
 		
 	}
-
     return m_localPrecondition;
 }
 
@@ -354,7 +344,7 @@ std::shared_ptr<SubsetUnion<uml::InputPin, uml::Element>> ActionImpl::getInput()
 		#endif
 		
 		/*SubsetUnion*/
-		m_input->initSubsetUnion(getOwnedElement());
+		getInput()->initSubsetUnion(getOwnedElement());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value SubsetUnion: " << "m_input - SubsetUnion<uml::InputPin, uml::Element >(getOwnedElement())" << std::endl;
 		#endif
@@ -374,7 +364,7 @@ std::shared_ptr<SubsetUnion<uml::OutputPin, uml::Element>> ActionImpl::getOutput
 		#endif
 		
 		/*SubsetUnion*/
-		m_output->initSubsetUnion(getOwnedElement());
+		getOutput()->initSubsetUnion(getOwnedElement());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value SubsetUnion: " << "m_output - SubsetUnion<uml::OutputPin, uml::Element >(getOwnedElement())" << std::endl;
 		#endif

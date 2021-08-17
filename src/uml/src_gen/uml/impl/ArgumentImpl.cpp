@@ -129,7 +129,6 @@ Getter & Setter for reference value
 */
 std::shared_ptr<uml::Object> ArgumentImpl::getValue() const
 {
-
     return m_value;
 }
 void ArgumentImpl::setValue(std::shared_ptr<uml::Object> _value)

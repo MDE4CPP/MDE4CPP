@@ -221,13 +221,10 @@ ExecutionFactoryImpl& ExecutionFactoryImpl::operator=(const ExecutionFactoryImpl
 	//Clone Attributes with (deep copy)
 
 	//copy references with no containment (soft copy)
-	std::shared_ptr<Bag<uml::PrimitiveType>> _builtInTypes = obj.getBuiltInTypes();
-	m_builtInTypes.reset(new Bag<uml::PrimitiveType>(*(obj.getBuiltInTypes().get())));
+	m_builtInTypes  = obj.getBuiltInTypes();
 	m_locus  = obj.getLocus();
-	std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::OpaqueBehaviorExecution>> _primitiveBehaviorPrototypes = obj.getPrimitiveBehaviorPrototypes();
-	m_primitiveBehaviorPrototypes.reset(new Bag<fUML::Semantics::CommonBehavior::OpaqueBehaviorExecution>(*(obj.getPrimitiveBehaviorPrototypes().get())));
-	std::shared_ptr<Bag<fUML::Semantics::Loci::SemanticStrategy>> _strategies = obj.getStrategies();
-	m_strategies.reset(new Bag<fUML::Semantics::Loci::SemanticStrategy>(*(obj.getStrategies().get())));
+	m_primitiveBehaviorPrototypes  = obj.getPrimitiveBehaviorPrototypes();
+	m_strategies  = obj.getStrategies();
 	//Clone references with containment (deep copy)
 	return *this;
 }
@@ -729,7 +726,6 @@ std::shared_ptr<Bag<uml::PrimitiveType>> ExecutionFactoryImpl::getBuiltInTypes()
 		
 		
 	}
-
     return m_builtInTypes;
 }
 
@@ -740,7 +736,6 @@ Getter & Setter for reference locus
 */
 std::weak_ptr<fUML::Semantics::Loci::Locus> ExecutionFactoryImpl::getLocus() const
 {
-
     return m_locus;
 }
 void ExecutionFactoryImpl::setLocus(std::weak_ptr<fUML::Semantics::Loci::Locus> _locus)
@@ -761,7 +756,6 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::OpaqueBehaviorExecution>> E
 		
 		
 	}
-
     return m_primitiveBehaviorPrototypes;
 }
 
@@ -778,7 +772,6 @@ std::shared_ptr<Bag<fUML::Semantics::Loci::SemanticStrategy>> ExecutionFactoryIm
 		
 		
 	}
-
     return m_strategies;
 }
 

@@ -16,9 +16,17 @@
 #include "ecore/EFactory.hpp"
 #include "fUML/Semantics/Values/ValuesPackage.hpp"
 
-namespace fUML::Semantics::Values 
+namespace fUML::Semantics::Activities
 {
-	class Value;
+	class ObjectToken;
+}
+namespace fUML::Semantics::CommonBehavior
+{
+	class ParameterValue;
+}
+namespace fUML::Semantics::SimpleClassifiers
+{
+	class FeatureValue;
 }
 
 

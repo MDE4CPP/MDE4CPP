@@ -90,10 +90,13 @@ CollectionRangeImpl& CollectionRangeImpl::operator=(const CollectionRangeImpl & 
 
 	//copy references with no containment (soft copy)
 	//Clone references with containment (deep copy)
+	//clone reference 'first'
 	if(obj.getFirst()!=nullptr)
 	{
 		m_first = std::dynamic_pointer_cast<ocl::Expressions::OclExpression>(obj.getFirst()->copy());
 	}
+
+	//clone reference 'last'
 	if(obj.getLast()!=nullptr)
 	{
 		m_last = std::dynamic_pointer_cast<ocl::Expressions::OclExpression>(obj.getLast()->copy());
@@ -132,7 +135,6 @@ Getter & Setter for reference first
 */
 std::shared_ptr<ocl::Expressions::OclExpression> CollectionRangeImpl::getFirst() const
 {
-//assert(m_first);
     return m_first;
 }
 void CollectionRangeImpl::setFirst(std::shared_ptr<ocl::Expressions::OclExpression> _first)
@@ -147,7 +149,6 @@ Getter & Setter for reference last
 */
 std::shared_ptr<ocl::Expressions::OclExpression> CollectionRangeImpl::getLast() const
 {
-//assert(m_last);
     return m_last;
 }
 void CollectionRangeImpl::setLast(std::shared_ptr<ocl::Expressions::OclExpression> _last)

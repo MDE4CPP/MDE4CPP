@@ -244,7 +244,7 @@ namespace uml
 			If true, the test is performed before the first execution of the bodyPart. If false, the bodyPart is executed once before the test is performed.
 			<p>From package UML::Actions.</p>
 			*/
-			 
+			
 			bool m_isTestedFirst = false;
 			
 			
@@ -272,16 +272,6 @@ namespace uml
 			*/
 			
 			mutable std::shared_ptr<Subset<uml::OutputPin, uml::Element>> m_loopVariable;/*!
-			A list of InputPins whose values are moved into the loopVariable Pins before the first iteration of the loop.
-			<p>From package UML::Actions.</p>
-			*/
-			
-			mutable std::shared_ptr<Bag<uml::InputPin>> m_loopVariableInput;/*!
-			A list of OutputPins that receive the loopVariable values after the last iteration of the loop and constitute the output of the LoopNode.
-			<p>From package UML::Actions.</p>
-			*/
-			
-			mutable std::shared_ptr<Bag<uml::OutputPin>> m_result;/*!
 			The set of ExecutableNodes executed before the first iteration of the loop, in order to initialize values or perform other setup computations.
 			<p>From package UML::Actions.</p>
 			*/
@@ -337,7 +327,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement>> getOwnedMember() const = 0;/*!
+			virtual std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement>> getOwnedMember() const = 0;/*!
 			The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/

@@ -160,50 +160,25 @@ ConditionalNodeImpl& ConditionalNodeImpl::operator=(const ConditionalNodeImpl & 
 
 	//copy references with no containment (soft copy)
 	//Clone references with containment (deep copy)
-	std::shared_ptr<Subset<uml::Clause, uml::Element>> clauseContainer = getClause();
-	if(nullptr != clauseContainer )
+	//clone reference 'clause'
+	std::shared_ptr<Subset<uml::Clause, uml::Element>> clauseList = obj.getClause();
+	if(clauseList)
 	{
-		int size = clauseContainer->size();
-		for(int i=0; i<size ; i++)
+		Bag<uml::Clause>::iterator clauseIter = clauseList->begin();
+		Bag<uml::Clause>::iterator clauseEnd = clauseList->end();
+		while (clauseIter != clauseEnd) 
 		{
-			auto _clause=(*clauseContainer)[i];
-			if(nullptr != _clause)
-			{
-				clauseContainer->push_back(std::dynamic_pointer_cast<uml::Clause>(_clause->copy()));
-			}
-			else
-			{
-				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container clause."<< std::endl;)
-			}
+			std::shared_ptr<uml::Clause> temp = std::dynamic_pointer_cast<uml::Clause>((*clauseIter)->copy());
+			getClause()->push_back(temp);
+			clauseIter++;
 		}
 	}
 	else
 	{
 		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr clause."<< std::endl;)
 	}
-	std::shared_ptr<Bag<uml::OutputPin>> resultContainer = getResult();
-	if(nullptr != resultContainer )
-	{
-		int size = resultContainer->size();
-		for(int i=0; i<size ; i++)
-		{
-			auto _result=(*resultContainer)[i];
-			if(nullptr != _result)
-			{
-				resultContainer->push_back(std::dynamic_pointer_cast<uml::OutputPin>(_result->copy()));
-			}
-			else
-			{
-				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container result."<< std::endl;)
-			}
-		}
-	}
-	else
-	{
-		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr result."<< std::endl;)
-	}
 	/*Subset*/
-	m_clause->initSubset(getOwnedElement());
+	getClause()->initSubset(getOwnedElement());
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Initialising value Subset: " << "m_clause - Subset<uml::Clause, uml::Element >(getOwnedElement())" << std::endl;
 	#endif
@@ -312,13 +287,12 @@ std::shared_ptr<Subset<uml::Clause, uml::Element>> ConditionalNodeImpl::getClaus
 		#endif
 		
 		/*Subset*/
-		m_clause->initSubset(getOwnedElement());
+		getClause()->initSubset(getOwnedElement());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value Subset: " << "m_clause - Subset<uml::Clause, uml::Element >(getOwnedElement())" << std::endl;
 		#endif
 		
 	}
-//assert(m_clause);
     return m_clause;
 }
 
@@ -329,14 +303,8 @@ Getter & Setter for reference result
 */
 std::shared_ptr<Bag<uml::OutputPin>> ConditionalNodeImpl::getResult() const
 {
-	if(m_result == nullptr)
-	{
-		m_result.reset(new Bag<uml::OutputPin>());
-		
-		
-	}
-
-    return m_result;
+	//Getter call of redefined container reference StructuredActivityNode::structuredNodeOutput 
+	return uml::StructuredActivityNodeImpl::getStructuredNodeOutput();
 }
 
 
@@ -400,7 +368,7 @@ std::shared_ptr<SubsetUnion<uml::InputPin, uml::Element>> ConditionalNodeImpl::g
 		#endif
 		
 		/*SubsetUnion*/
-		m_input->initSubsetUnion(getOwnedElement());
+		getInput()->initSubsetUnion(getOwnedElement());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value SubsetUnion: " << "m_input - SubsetUnion<uml::InputPin, uml::Element >(getOwnedElement())" << std::endl;
 		#endif
@@ -435,7 +403,7 @@ std::shared_ptr<SubsetUnion<uml::OutputPin, uml::Element>> ConditionalNodeImpl::
 		#endif
 		
 		/*SubsetUnion*/
-		m_output->initSubsetUnion(getOwnedElement());
+		getOutput()->initSubsetUnion(getOwnedElement());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value SubsetUnion: " << "m_output - SubsetUnion<uml::OutputPin, uml::Element >(getOwnedElement())" << std::endl;
 		#endif
@@ -459,20 +427,20 @@ std::shared_ptr<Union<uml::Element>> ConditionalNodeImpl::getOwnedElement() cons
 	return m_ownedElement;
 }
 
-std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement>> ConditionalNodeImpl::getOwnedMember() const
+std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement>> ConditionalNodeImpl::getOwnedMember() const
 {
 	if(m_ownedMember == nullptr)
 	{
 		/*SubsetUnion*/
-		m_ownedMember.reset(new SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement >());
+		m_ownedMember.reset(new SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement >());
 		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement >()" << std::endl;
+			std::cout << "Initialising shared pointer SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement >()" << std::endl;
 		#endif
 		
 		/*SubsetUnion*/
-		m_ownedMember->initSubsetUnion(getOwnedElement(),getMember());
+		getOwnedMember()->initSubsetUnion(getOwnedElement(), getMember());
 		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement >(getOwnedElement(),getMember())" << std::endl;
+			std::cout << "Initialising value SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement >(getOwnedElement(), getMember())" << std::endl;
 		#endif
 		
 	}

@@ -113,7 +113,7 @@ namespace ecore
 			//*********************************
 			// Attribute Members
 			//*********************************
-			 
+			
 			int m_operationID = -1;
 			
 			

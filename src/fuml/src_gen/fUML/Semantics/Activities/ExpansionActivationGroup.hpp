@@ -117,7 +117,7 @@ namespace fUML::Semantics::Activities
 			//*********************************
 			// Attribute Members
 			//*********************************
-			 
+			
 			int m_index = 0;
 			
 			

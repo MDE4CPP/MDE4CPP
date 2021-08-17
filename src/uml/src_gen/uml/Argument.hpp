@@ -95,7 +95,7 @@ namespace uml
 			//*********************************
 			// Attribute Members
 			//*********************************
-			 
+			
 			std::string m_name = "";
 			
 			

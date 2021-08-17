@@ -208,7 +208,6 @@ Getter & Setter for reference locus
 */
 std::weak_ptr<fUML::Semantics::Loci::Locus> ExecutorImpl::getLocus() const
 {
-
     return m_locus;
 }
 void ExecutorImpl::setLocus(std::weak_ptr<fUML::Semantics::Loci::Locus> _locus)

@@ -101,6 +101,7 @@ ProtocolConformanceImpl& ProtocolConformanceImpl::operator=(const ProtocolConfor
 	//copy references with no containment (soft copy)
 	m_specificMachine  = obj.getSpecificMachine();
 	//Clone references with containment (deep copy)
+	//clone reference 'generalMachine'
 	if(obj.getGeneralMachine()!=nullptr)
 	{
 		m_generalMachine = std::dynamic_pointer_cast<uml::ProtocolStateMachine>(obj.getGeneralMachine()->copy());
@@ -137,14 +138,11 @@ Getter & Setter for reference generalMachine
 */
 std::shared_ptr<uml::ProtocolStateMachine> ProtocolConformanceImpl::getGeneralMachine() const
 {
-//assert(m_generalMachine);
     return m_generalMachine;
 }
 void ProtocolConformanceImpl::setGeneralMachine(std::shared_ptr<uml::ProtocolStateMachine> _generalMachine)
 {
     m_generalMachine = _generalMachine;
-	
-	
 	
 }
 
@@ -154,16 +152,11 @@ Getter & Setter for reference specificMachine
 */
 std::weak_ptr<uml::ProtocolStateMachine> ProtocolConformanceImpl::getSpecificMachine() const
 {
-//assert(m_specificMachine);
     return m_specificMachine;
 }
 void ProtocolConformanceImpl::setSpecificMachine(std::weak_ptr<uml::ProtocolStateMachine> _specificMachine)
 {
     m_specificMachine = _specificMachine;
-	
-	
-	m_owner = this->getSpecificMachine().lock();
-	
 	
 }
 
@@ -217,7 +210,7 @@ std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> ProtocolConformanceImpl
 		#endif
 		
 		/*SubsetUnion*/
-		m_source->initSubsetUnion(getRelatedElement());
+		getSource()->initSubsetUnion(getRelatedElement());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value SubsetUnion: " << "m_source - SubsetUnion<uml::Element, uml::Element >(getRelatedElement())" << std::endl;
 		#endif
@@ -237,7 +230,7 @@ std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> ProtocolConformanceImpl
 		#endif
 		
 		/*SubsetUnion*/
-		m_target->initSubsetUnion(getRelatedElement());
+		getTarget()->initSubsetUnion(getRelatedElement());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value SubsetUnion: " << "m_target - SubsetUnion<uml::Element, uml::Element >(getRelatedElement())" << std::endl;
 		#endif

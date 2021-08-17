@@ -222,7 +222,6 @@ Getter & Setter for reference compositeReferent
 */
 std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Object> CS_ReferenceImpl::getCompositeReferent() const
 {
-//assert(m_compositeReferent);
     return m_compositeReferent;
 }
 void CS_ReferenceImpl::setCompositeReferent(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Object> _compositeReferent)

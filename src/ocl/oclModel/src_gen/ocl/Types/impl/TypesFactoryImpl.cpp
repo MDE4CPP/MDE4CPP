@@ -17,8 +17,6 @@
 #include "ocl/Types/impl/TupleTypeImpl.hpp"
 #include "ocl/Types/impl/VoidTypeImpl.hpp"
 
-#include "ecore/EClassifier.hpp"
-#include "ecore/EClassifier.hpp"
 
 
 using namespace ocl::Types;
@@ -71,16 +69,16 @@ std::shared_ptr<ecore::EObject> TypesFactoryImpl::create(const int metaElementID
 				switch(referenceID)
 				{
 					//AnyType has elementType as a containment
-					case  TypesPackage::COLLECTIONTYPE_ATTRIBUTE_ELEMENTTYPE:	
+					case  ocl::Types::TypesPackage::COLLECTIONTYPE_ATTRIBUTE_ELEMENTTYPE:	
 					{
 						auto castedContainer = std::dynamic_pointer_cast<ocl::Types::CollectionType>(container);
-						return this->createAnyType_as_elementType_in_ocl::Types::CollectionType(castedContainer,metaElementID);
+						return this->createAnyType_as_elementType_in_CollectionType(castedContainer,metaElementID);
 					}
 					//AnyType has object as a containment
-					case  TypesPackage::ANYTYPE_ATTRIBUTE_OBJECT:	
+					case  ocl::Types::TypesPackage::ANYTYPE_ATTRIBUTE_OBJECT:	
 					{
 						auto castedContainer = std::dynamic_pointer_cast<ocl::Types::AnyType>(container);
-						return this->createAnyType_as_object_in_ocl::Types::AnyType(castedContainer,metaElementID);
+						return this->createAnyType_as_object_in_AnyType(castedContainer,metaElementID);
 					}
 					default:
 						std::cerr << __PRETTY_FUNCTION__ << "ERROR: Reference type not found." << std::endl;
@@ -99,16 +97,16 @@ std::shared_ptr<ecore::EObject> TypesFactoryImpl::create(const int metaElementID
 				switch(referenceID)
 				{
 					//BagType has elementType as a containment
-					case  TypesPackage::COLLECTIONTYPE_ATTRIBUTE_ELEMENTTYPE:	
+					case  ocl::Types::TypesPackage::COLLECTIONTYPE_ATTRIBUTE_ELEMENTTYPE:	
 					{
 						auto castedContainer = std::dynamic_pointer_cast<ocl::Types::CollectionType>(container);
-						return this->createBagType_as_elementType_in_ocl::Types::CollectionType(castedContainer,metaElementID);
+						return this->createBagType_as_elementType_in_CollectionType(castedContainer,metaElementID);
 					}
 					//BagType has object as a containment
-					case  TypesPackage::ANYTYPE_ATTRIBUTE_OBJECT:	
+					case  ocl::Types::TypesPackage::ANYTYPE_ATTRIBUTE_OBJECT:	
 					{
 						auto castedContainer = std::dynamic_pointer_cast<ocl::Types::AnyType>(container);
-						return this->createBagType_as_object_in_ocl::Types::AnyType(castedContainer,metaElementID);
+						return this->createBagType_as_object_in_AnyType(castedContainer,metaElementID);
 					}
 					default:
 						std::cerr << __PRETTY_FUNCTION__ << "ERROR: Reference type not found." << std::endl;
@@ -127,16 +125,16 @@ std::shared_ptr<ecore::EObject> TypesFactoryImpl::create(const int metaElementID
 				switch(referenceID)
 				{
 					//CollectionType has elementType as a containment
-					case  TypesPackage::COLLECTIONTYPE_ATTRIBUTE_ELEMENTTYPE:	
+					case  ocl::Types::TypesPackage::COLLECTIONTYPE_ATTRIBUTE_ELEMENTTYPE:	
 					{
 						auto castedContainer = std::dynamic_pointer_cast<ocl::Types::CollectionType>(container);
-						return this->createCollectionType_as_elementType_in_ocl::Types::CollectionType(castedContainer,metaElementID);
+						return this->createCollectionType_as_elementType_in_CollectionType(castedContainer,metaElementID);
 					}
 					//CollectionType has object as a containment
-					case  TypesPackage::ANYTYPE_ATTRIBUTE_OBJECT:	
+					case  ocl::Types::TypesPackage::ANYTYPE_ATTRIBUTE_OBJECT:	
 					{
 						auto castedContainer = std::dynamic_pointer_cast<ocl::Types::AnyType>(container);
-						return this->createCollectionType_as_object_in_ocl::Types::AnyType(castedContainer,metaElementID);
+						return this->createCollectionType_as_object_in_AnyType(castedContainer,metaElementID);
 					}
 					default:
 						std::cerr << __PRETTY_FUNCTION__ << "ERROR: Reference type not found." << std::endl;
@@ -155,16 +153,16 @@ std::shared_ptr<ecore::EObject> TypesFactoryImpl::create(const int metaElementID
 				switch(referenceID)
 				{
 					//InvalidType has elementType as a containment
-					case  TypesPackage::COLLECTIONTYPE_ATTRIBUTE_ELEMENTTYPE:	
+					case  ocl::Types::TypesPackage::COLLECTIONTYPE_ATTRIBUTE_ELEMENTTYPE:	
 					{
 						auto castedContainer = std::dynamic_pointer_cast<ocl::Types::CollectionType>(container);
-						return this->createInvalidType_as_elementType_in_ocl::Types::CollectionType(castedContainer,metaElementID);
+						return this->createInvalidType_as_elementType_in_CollectionType(castedContainer,metaElementID);
 					}
 					//InvalidType has object as a containment
-					case  TypesPackage::ANYTYPE_ATTRIBUTE_OBJECT:	
+					case  ocl::Types::TypesPackage::ANYTYPE_ATTRIBUTE_OBJECT:	
 					{
 						auto castedContainer = std::dynamic_pointer_cast<ocl::Types::AnyType>(container);
-						return this->createInvalidType_as_object_in_ocl::Types::AnyType(castedContainer,metaElementID);
+						return this->createInvalidType_as_object_in_AnyType(castedContainer,metaElementID);
 					}
 					default:
 						std::cerr << __PRETTY_FUNCTION__ << "ERROR: Reference type not found." << std::endl;
@@ -183,16 +181,16 @@ std::shared_ptr<ecore::EObject> TypesFactoryImpl::create(const int metaElementID
 				switch(referenceID)
 				{
 					//MessageType has elementType as a containment
-					case  TypesPackage::COLLECTIONTYPE_ATTRIBUTE_ELEMENTTYPE:	
+					case  ocl::Types::TypesPackage::COLLECTIONTYPE_ATTRIBUTE_ELEMENTTYPE:	
 					{
 						auto castedContainer = std::dynamic_pointer_cast<ocl::Types::CollectionType>(container);
-						return this->createMessageType_as_elementType_in_ocl::Types::CollectionType(castedContainer,metaElementID);
+						return this->createMessageType_as_elementType_in_CollectionType(castedContainer,metaElementID);
 					}
 					//MessageType has object as a containment
-					case  TypesPackage::ANYTYPE_ATTRIBUTE_OBJECT:	
+					case  ocl::Types::TypesPackage::ANYTYPE_ATTRIBUTE_OBJECT:	
 					{
 						auto castedContainer = std::dynamic_pointer_cast<ocl::Types::AnyType>(container);
-						return this->createMessageType_as_object_in_ocl::Types::AnyType(castedContainer,metaElementID);
+						return this->createMessageType_as_object_in_AnyType(castedContainer,metaElementID);
 					}
 					default:
 						std::cerr << __PRETTY_FUNCTION__ << "ERROR: Reference type not found." << std::endl;
@@ -217,16 +215,16 @@ std::shared_ptr<ecore::EObject> TypesFactoryImpl::create(const int metaElementID
 				switch(referenceID)
 				{
 					//OrderedSetType has elementType as a containment
-					case  TypesPackage::COLLECTIONTYPE_ATTRIBUTE_ELEMENTTYPE:	
+					case  ocl::Types::TypesPackage::COLLECTIONTYPE_ATTRIBUTE_ELEMENTTYPE:	
 					{
 						auto castedContainer = std::dynamic_pointer_cast<ocl::Types::CollectionType>(container);
-						return this->createOrderedSetType_as_elementType_in_ocl::Types::CollectionType(castedContainer,metaElementID);
+						return this->createOrderedSetType_as_elementType_in_CollectionType(castedContainer,metaElementID);
 					}
 					//OrderedSetType has object as a containment
-					case  TypesPackage::ANYTYPE_ATTRIBUTE_OBJECT:	
+					case  ocl::Types::TypesPackage::ANYTYPE_ATTRIBUTE_OBJECT:	
 					{
 						auto castedContainer = std::dynamic_pointer_cast<ocl::Types::AnyType>(container);
-						return this->createOrderedSetType_as_object_in_ocl::Types::AnyType(castedContainer,metaElementID);
+						return this->createOrderedSetType_as_object_in_AnyType(castedContainer,metaElementID);
 					}
 					default:
 						std::cerr << __PRETTY_FUNCTION__ << "ERROR: Reference type not found." << std::endl;
@@ -245,16 +243,16 @@ std::shared_ptr<ecore::EObject> TypesFactoryImpl::create(const int metaElementID
 				switch(referenceID)
 				{
 					//SequenceType has elementType as a containment
-					case  TypesPackage::COLLECTIONTYPE_ATTRIBUTE_ELEMENTTYPE:	
+					case  ocl::Types::TypesPackage::COLLECTIONTYPE_ATTRIBUTE_ELEMENTTYPE:	
 					{
 						auto castedContainer = std::dynamic_pointer_cast<ocl::Types::CollectionType>(container);
-						return this->createSequenceType_as_elementType_in_ocl::Types::CollectionType(castedContainer,metaElementID);
+						return this->createSequenceType_as_elementType_in_CollectionType(castedContainer,metaElementID);
 					}
 					//SequenceType has object as a containment
-					case  TypesPackage::ANYTYPE_ATTRIBUTE_OBJECT:	
+					case  ocl::Types::TypesPackage::ANYTYPE_ATTRIBUTE_OBJECT:	
 					{
 						auto castedContainer = std::dynamic_pointer_cast<ocl::Types::AnyType>(container);
-						return this->createSequenceType_as_object_in_ocl::Types::AnyType(castedContainer,metaElementID);
+						return this->createSequenceType_as_object_in_AnyType(castedContainer,metaElementID);
 					}
 					default:
 						std::cerr << __PRETTY_FUNCTION__ << "ERROR: Reference type not found." << std::endl;
@@ -273,16 +271,16 @@ std::shared_ptr<ecore::EObject> TypesFactoryImpl::create(const int metaElementID
 				switch(referenceID)
 				{
 					//SetType has elementType as a containment
-					case  TypesPackage::COLLECTIONTYPE_ATTRIBUTE_ELEMENTTYPE:	
+					case  ocl::Types::TypesPackage::COLLECTIONTYPE_ATTRIBUTE_ELEMENTTYPE:	
 					{
 						auto castedContainer = std::dynamic_pointer_cast<ocl::Types::CollectionType>(container);
-						return this->createSetType_as_elementType_in_ocl::Types::CollectionType(castedContainer,metaElementID);
+						return this->createSetType_as_elementType_in_CollectionType(castedContainer,metaElementID);
 					}
 					//SetType has object as a containment
-					case  TypesPackage::ANYTYPE_ATTRIBUTE_OBJECT:	
+					case  ocl::Types::TypesPackage::ANYTYPE_ATTRIBUTE_OBJECT:	
 					{
 						auto castedContainer = std::dynamic_pointer_cast<ocl::Types::AnyType>(container);
-						return this->createSetType_as_object_in_ocl::Types::AnyType(castedContainer,metaElementID);
+						return this->createSetType_as_object_in_AnyType(castedContainer,metaElementID);
 					}
 					default:
 						std::cerr << __PRETTY_FUNCTION__ << "ERROR: Reference type not found." << std::endl;
@@ -301,16 +299,16 @@ std::shared_ptr<ecore::EObject> TypesFactoryImpl::create(const int metaElementID
 				switch(referenceID)
 				{
 					//TemplateParameterType has elementType as a containment
-					case  TypesPackage::COLLECTIONTYPE_ATTRIBUTE_ELEMENTTYPE:	
+					case  ocl::Types::TypesPackage::COLLECTIONTYPE_ATTRIBUTE_ELEMENTTYPE:	
 					{
 						auto castedContainer = std::dynamic_pointer_cast<ocl::Types::CollectionType>(container);
-						return this->createTemplateParameterType_as_elementType_in_ocl::Types::CollectionType(castedContainer,metaElementID);
+						return this->createTemplateParameterType_as_elementType_in_CollectionType(castedContainer,metaElementID);
 					}
 					//TemplateParameterType has object as a containment
-					case  TypesPackage::ANYTYPE_ATTRIBUTE_OBJECT:	
+					case  ocl::Types::TypesPackage::ANYTYPE_ATTRIBUTE_OBJECT:	
 					{
 						auto castedContainer = std::dynamic_pointer_cast<ocl::Types::AnyType>(container);
-						return this->createTemplateParameterType_as_object_in_ocl::Types::AnyType(castedContainer,metaElementID);
+						return this->createTemplateParameterType_as_object_in_AnyType(castedContainer,metaElementID);
 					}
 					default:
 						std::cerr << __PRETTY_FUNCTION__ << "ERROR: Reference type not found." << std::endl;
@@ -329,16 +327,16 @@ std::shared_ptr<ecore::EObject> TypesFactoryImpl::create(const int metaElementID
 				switch(referenceID)
 				{
 					//TupleType has elementType as a containment
-					case  TypesPackage::COLLECTIONTYPE_ATTRIBUTE_ELEMENTTYPE:	
+					case  ocl::Types::TypesPackage::COLLECTIONTYPE_ATTRIBUTE_ELEMENTTYPE:	
 					{
 						auto castedContainer = std::dynamic_pointer_cast<ocl::Types::CollectionType>(container);
-						return this->createTupleType_as_elementType_in_ocl::Types::CollectionType(castedContainer,metaElementID);
+						return this->createTupleType_as_elementType_in_CollectionType(castedContainer,metaElementID);
 					}
 					//TupleType has object as a containment
-					case  TypesPackage::ANYTYPE_ATTRIBUTE_OBJECT:	
+					case  ocl::Types::TypesPackage::ANYTYPE_ATTRIBUTE_OBJECT:	
 					{
 						auto castedContainer = std::dynamic_pointer_cast<ocl::Types::AnyType>(container);
-						return this->createTupleType_as_object_in_ocl::Types::AnyType(castedContainer,metaElementID);
+						return this->createTupleType_as_object_in_AnyType(castedContainer,metaElementID);
 					}
 					default:
 						std::cerr << __PRETTY_FUNCTION__ << "ERROR: Reference type not found." << std::endl;
@@ -357,16 +355,16 @@ std::shared_ptr<ecore::EObject> TypesFactoryImpl::create(const int metaElementID
 				switch(referenceID)
 				{
 					//VoidType has elementType as a containment
-					case  TypesPackage::COLLECTIONTYPE_ATTRIBUTE_ELEMENTTYPE:	
+					case  ocl::Types::TypesPackage::COLLECTIONTYPE_ATTRIBUTE_ELEMENTTYPE:	
 					{
 						auto castedContainer = std::dynamic_pointer_cast<ocl::Types::CollectionType>(container);
-						return this->createVoidType_as_elementType_in_ocl::Types::CollectionType(castedContainer,metaElementID);
+						return this->createVoidType_as_elementType_in_CollectionType(castedContainer,metaElementID);
 					}
 					//VoidType has object as a containment
-					case  TypesPackage::ANYTYPE_ATTRIBUTE_OBJECT:	
+					case  ocl::Types::TypesPackage::ANYTYPE_ATTRIBUTE_OBJECT:	
 					{
 						auto castedContainer = std::dynamic_pointer_cast<ocl::Types::AnyType>(container);
-						return this->createVoidType_as_object_in_ocl::Types::AnyType(castedContainer,metaElementID);
+						return this->createVoidType_as_object_in_AnyType(castedContainer,metaElementID);
 					}
 					default:
 						std::cerr << __PRETTY_FUNCTION__ << "ERROR: Reference type not found." << std::endl;

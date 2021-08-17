@@ -151,16 +151,11 @@ Getter & Setter for reference useCase
 */
 std::weak_ptr<uml::UseCase> ExtensionPointImpl::getUseCase() const
 {
-//assert(m_useCase);
     return m_useCase;
 }
 void ExtensionPointImpl::setUseCase(std::weak_ptr<uml::UseCase> _useCase)
 {
     m_useCase = _useCase;
-	m_namespace = this->getUseCase().lock();
-	m_owner = this->getNamespace().lock();
-	
-	
 	
 }
 

@@ -135,6 +135,7 @@ SendSignalActionImpl& SendSignalActionImpl::operator=(const SendSignalActionImpl
 	//copy references with no containment (soft copy)
 	m_signal  = obj.getSignal();
 	//Clone references with containment (deep copy)
+	//clone reference 'target'
 	if(obj.getTarget()!=nullptr)
 	{
 		m_target = std::dynamic_pointer_cast<uml::InputPin>(obj.getTarget()->copy());
@@ -189,7 +190,6 @@ Getter & Setter for reference signal
 */
 std::shared_ptr<uml::Signal> SendSignalActionImpl::getSignal() const
 {
-//assert(m_signal);
     return m_signal;
 }
 void SendSignalActionImpl::setSignal(std::shared_ptr<uml::Signal> _signal)
@@ -204,14 +204,11 @@ Getter & Setter for reference target
 */
 std::shared_ptr<uml::InputPin> SendSignalActionImpl::getTarget() const
 {
-//assert(m_target);
     return m_target;
 }
 void SendSignalActionImpl::setTarget(std::shared_ptr<uml::InputPin> _target)
 {
     m_target = _target;
-	
-	
 	
 }
 
@@ -245,7 +242,7 @@ std::shared_ptr<SubsetUnion<uml::InputPin, uml::Element>> SendSignalActionImpl::
 		#endif
 		
 		/*SubsetUnion*/
-		m_input->initSubsetUnion(getOwnedElement());
+		getInput()->initSubsetUnion(getOwnedElement());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value SubsetUnion: " << "m_input - SubsetUnion<uml::InputPin, uml::Element >(getOwnedElement())" << std::endl;
 		#endif

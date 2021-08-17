@@ -142,6 +142,7 @@ VariableImpl& VariableImpl::operator=(const VariableImpl & obj)
 	m_value  = obj.getValue();
 	m_varOwner  = obj.getVarOwner();
 	//Clone references with containment (deep copy)
+	//clone reference 'initExpression'
 	if(obj.getInitExpression()!=nullptr)
 	{
 		m_initExpression = std::dynamic_pointer_cast<ocl::Expressions::OclExpression>(obj.getInitExpression()->copy());
@@ -179,7 +180,6 @@ Getter & Setter for reference baseExp
 */
 std::weak_ptr<ocl::Expressions::IterateExp> VariableImpl::getBaseExp() const
 {
-
     return m_baseExp;
 }
 void VariableImpl::setBaseExp(std::weak_ptr<ocl::Expressions::IterateExp> _baseExp)
@@ -194,7 +194,6 @@ Getter & Setter for reference initExpression
 */
 std::shared_ptr<ocl::Expressions::OclExpression> VariableImpl::getInitExpression() const
 {
-
     return m_initExpression;
 }
 void VariableImpl::setInitExpression(std::shared_ptr<ocl::Expressions::OclExpression> _initExpression)
@@ -209,7 +208,6 @@ Getter & Setter for reference loopExp
 */
 std::weak_ptr<ocl::Expressions::LoopExp> VariableImpl::getLoopExp() const
 {
-
     return m_loopExp;
 }
 void VariableImpl::setLoopExp(std::weak_ptr<ocl::Expressions::LoopExp> _loopExp)
@@ -224,7 +222,6 @@ Getter & Setter for reference referringExp
 */
 std::shared_ptr<ocl::Expressions::VariableExp> VariableImpl::getReferringExp() const
 {
-
     return m_referringExp;
 }
 void VariableImpl::setReferringExp(std::shared_ptr<ocl::Expressions::VariableExp> _referringExp)
@@ -239,7 +236,6 @@ Getter & Setter for reference representedParameter
 */
 std::shared_ptr<ecore::EParameter> VariableImpl::getRepresentedParameter() const
 {
-
     return m_representedParameter;
 }
 void VariableImpl::setRepresentedParameter(std::shared_ptr<ecore::EParameter> _representedParameter)
@@ -254,7 +250,6 @@ Getter & Setter for reference resultOwner
 */
 std::weak_ptr<ocl::Expressions::ExpressionInOcl> VariableImpl::getResultOwner() const
 {
-
     return m_resultOwner;
 }
 void VariableImpl::setResultOwner(std::weak_ptr<ocl::Expressions::ExpressionInOcl> _resultOwner)
@@ -269,7 +264,6 @@ Getter & Setter for reference selfOwner
 */
 std::weak_ptr<ocl::Expressions::ExpressionInOcl> VariableImpl::getSelfOwner() const
 {
-
     return m_selfOwner;
 }
 void VariableImpl::setSelfOwner(std::weak_ptr<ocl::Expressions::ExpressionInOcl> _selfOwner)
@@ -284,7 +278,6 @@ Getter & Setter for reference value
 */
 std::shared_ptr<fUML::Semantics::Values::Value> VariableImpl::getValue() const
 {
-
     return m_value;
 }
 void VariableImpl::setValue(std::shared_ptr<fUML::Semantics::Values::Value> _value)
@@ -299,7 +292,6 @@ Getter & Setter for reference varOwner
 */
 std::weak_ptr<ocl::Expressions::ExpressionInOcl> VariableImpl::getVarOwner() const
 {
-
     return m_varOwner;
 }
 void VariableImpl::setVarOwner(std::weak_ptr<ocl::Expressions::ExpressionInOcl> _varOwner)

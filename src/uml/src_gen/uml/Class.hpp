@@ -166,21 +166,21 @@ namespace uml
 			virtual std::shared_ptr<Subset<uml::Classifier, uml::NamedElement>> getNestedClassifier() const = 0;
 			
 			
-			virtual std::shared_ptr<Subset<uml::Property, uml::Property,uml::NamedElement,uml::ConnectableElement>> getClass_OwnedAttribute() const = 0;
+			virtual std::shared_ptr<Subset<uml::Property, uml::ConnectableElement, uml::NamedElement, uml::Property>> getClass_OwnedAttribute() const = 0;
 			
 			/*!
 			The Operations owned by the Class.
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::Operation, uml::Feature,uml::NamedElement>> getOwnedOperation() const = 0;
+			virtual std::shared_ptr<Subset<uml::Operation, uml::Feature, uml::NamedElement>> getOwnedOperation() const = 0;
 			
 			/*!
 			The Receptions owned by the Class.
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::Reception, uml::Feature,uml::NamedElement>> getOwnedReception() const = 0;
+			virtual std::shared_ptr<Subset<uml::Reception, uml::Feature, uml::NamedElement>> getOwnedReception() const = 0;
 			
 			/*!
 			The superclasses of a Class, derived from its Generalizations.
@@ -199,7 +199,7 @@ namespace uml
 			Determines whether an object specified by this Class is active or not. If true, then the owning Class is referred to as an active Class. If false, then such a Class is referred to as a passive Class.
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
-			 
+			
 			bool m_isActive = false;
 			
 			
@@ -216,23 +216,17 @@ namespace uml
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			
-			mutable std::shared_ptr<Subset<uml::Classifier, uml::NamedElement>> m_nestedClassifier;
-			mutable std::shared_ptr<Subset<uml::Property, uml::Property,uml::NamedElement,uml::ConnectableElement>> m_ownedAttribute;/*!
+			mutable std::shared_ptr<Subset<uml::Classifier, uml::NamedElement>> m_nestedClassifier;/*!
 			The Operations owned by the Class.
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			
-			mutable std::shared_ptr<Subset<uml::Operation, uml::Feature,uml::NamedElement>> m_ownedOperation;/*!
+			mutable std::shared_ptr<Subset<uml::Operation, uml::Feature, uml::NamedElement>> m_ownedOperation;/*!
 			The Receptions owned by the Class.
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			
-			mutable std::shared_ptr<Subset<uml::Reception, uml::Feature,uml::NamedElement>> m_ownedReception;/*!
-			The superclasses of a Class, derived from its Generalizations.
-			<p>From package UML::StructuredClassifiers.</p>
-			*/
-			
-			mutable std::shared_ptr<Bag<uml::Class>> m_superClass;
+			mutable std::shared_ptr<Subset<uml::Reception, uml::Feature, uml::NamedElement>> m_ownedReception;
 
 		public:
 			//*********************************
@@ -268,7 +262,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement>> getOwnedMember() const = 0;/*!
+			virtual std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement>> getOwnedMember() const = 0;/*!
 			The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/

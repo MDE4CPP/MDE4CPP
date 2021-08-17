@@ -105,10 +105,8 @@ RedefinableElementImpl& RedefinableElementImpl::operator=(const RedefinableEleme
 	m_isLeaf = obj.getIsLeaf();
 
 	//copy references with no containment (soft copy)
-	std::shared_ptr<Union<uml::RedefinableElement>> _redefinedElement = obj.getRedefinedElement();
-	m_redefinedElement.reset(new Union<uml::RedefinableElement>(*(obj.getRedefinedElement().get())));
-	std::shared_ptr<Union<uml::Classifier>> _redefinitionContext = obj.getRedefinitionContext();
-	m_redefinitionContext.reset(new Union<uml::Classifier>(*(obj.getRedefinitionContext().get())));
+	m_redefinedElement  = obj.getRedefinedElement();
+	m_redefinitionContext  = obj.getRedefinitionContext();
 	//Clone references with containment (deep copy)
 	return *this;
 }

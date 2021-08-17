@@ -101,45 +101,37 @@ ObjectActivationImpl& ObjectActivationImpl::operator=(const ObjectActivationImpl
 
 	//copy references with no containment (soft copy)
 	m_object  = obj.getObject();
-	std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::EventAccepter>> _waitingEventAccepters = obj.getWaitingEventAccepters();
-	m_waitingEventAccepters.reset(new Bag<fUML::Semantics::CommonBehavior::EventAccepter>(*(obj.getWaitingEventAccepters().get())));
+	m_waitingEventAccepters  = obj.getWaitingEventAccepters();
 	//Clone references with containment (deep copy)
-	std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ClassifierBehaviorExecution>> classifierBehaviorExecutionsContainer = getClassifierBehaviorExecutions();
-	if(nullptr != classifierBehaviorExecutionsContainer )
+	//clone reference 'classifierBehaviorExecutions'
+	std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ClassifierBehaviorExecution>> classifierBehaviorExecutionsList = obj.getClassifierBehaviorExecutions();
+	if(classifierBehaviorExecutionsList)
 	{
-		int size = classifierBehaviorExecutionsContainer->size();
-		for(int i=0; i<size ; i++)
+		Bag<fUML::Semantics::CommonBehavior::ClassifierBehaviorExecution>::iterator classifierBehaviorExecutionsIter = classifierBehaviorExecutionsList->begin();
+		Bag<fUML::Semantics::CommonBehavior::ClassifierBehaviorExecution>::iterator classifierBehaviorExecutionsEnd = classifierBehaviorExecutionsList->end();
+		while (classifierBehaviorExecutionsIter != classifierBehaviorExecutionsEnd) 
 		{
-			auto _classifierBehaviorExecutions=(*classifierBehaviorExecutionsContainer)[i];
-			if(nullptr != _classifierBehaviorExecutions)
-			{
-				classifierBehaviorExecutionsContainer->push_back(std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::ClassifierBehaviorExecution>(_classifierBehaviorExecutions->copy()));
-			}
-			else
-			{
-				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container classifierBehaviorExecutions."<< std::endl;)
-			}
+			std::shared_ptr<fUML::Semantics::CommonBehavior::ClassifierBehaviorExecution> temp = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::ClassifierBehaviorExecution>((*classifierBehaviorExecutionsIter)->copy());
+			getClassifierBehaviorExecutions()->push_back(temp);
+			classifierBehaviorExecutionsIter++;
 		}
 	}
 	else
 	{
 		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr classifierBehaviorExecutions."<< std::endl;)
 	}
-	std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::SignalInstance>> eventPoolContainer = getEventPool();
-	if(nullptr != eventPoolContainer )
+
+	//clone reference 'eventPool'
+	std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::SignalInstance>> eventPoolList = obj.getEventPool();
+	if(eventPoolList)
 	{
-		int size = eventPoolContainer->size();
-		for(int i=0; i<size ; i++)
+		Bag<fUML::Semantics::SimpleClassifiers::SignalInstance>::iterator eventPoolIter = eventPoolList->begin();
+		Bag<fUML::Semantics::SimpleClassifiers::SignalInstance>::iterator eventPoolEnd = eventPoolList->end();
+		while (eventPoolIter != eventPoolEnd) 
 		{
-			auto _eventPool=(*eventPoolContainer)[i];
-			if(nullptr != _eventPool)
-			{
-				eventPoolContainer->push_back(std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::SignalInstance>(_eventPool->copy()));
-			}
-			else
-			{
-				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container eventPool."<< std::endl;)
-			}
+			std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance> temp = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::SignalInstance>((*eventPoolIter)->copy());
+			getEventPool()->push_back(temp);
+			eventPoolIter++;
 		}
 	}
 	else
@@ -312,7 +304,6 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ClassifierBehaviorExecution
 		
 		
 	}
-
     return m_classifierBehaviorExecutions;
 }
 
@@ -329,7 +320,6 @@ std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::SignalInstance>> ObjectA
 		
 		
 	}
-
     return m_eventPool;
 }
 
@@ -340,7 +330,6 @@ Getter & Setter for reference object
 */
 std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> ObjectActivationImpl::getObject() const
 {
-//assert(m_object);
     return m_object;
 }
 void ObjectActivationImpl::setObject(std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> _object)
@@ -361,7 +350,6 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::EventAccepter>> ObjectActiv
 		
 		
 	}
-
     return m_waitingEventAccepters;
 }
 

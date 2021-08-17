@@ -100,8 +100,7 @@ ActivityEdgeInstanceImpl& ActivityEdgeInstanceImpl::operator=(const ActivityEdge
 	//copy references with no containment (soft copy)
 	m_edge  = obj.getEdge();
 	m_group  = obj.getGroup();
-	std::shared_ptr<Bag<fUML::Semantics::Activities::Offer>> _offers = obj.getOffers();
-	m_offers.reset(new Bag<fUML::Semantics::Activities::Offer>(*(obj.getOffers().get())));
+	m_offers  = obj.getOffers();
 	m_source  = obj.getSource();
 	m_target  = obj.getTarget();
 	//Clone references with containment (deep copy)
@@ -270,7 +269,6 @@ Getter & Setter for reference edge
 */
 std::shared_ptr<uml::ActivityEdge> ActivityEdgeInstanceImpl::getEdge() const
 {
-
     return m_edge;
 }
 void ActivityEdgeInstanceImpl::setEdge(std::shared_ptr<uml::ActivityEdge> _edge)
@@ -285,7 +283,6 @@ Getter & Setter for reference group
 */
 std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> ActivityEdgeInstanceImpl::getGroup() const
 {
-//assert(m_group);
     return m_group;
 }
 void ActivityEdgeInstanceImpl::setGroup(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> _group)
@@ -306,7 +303,6 @@ std::shared_ptr<Bag<fUML::Semantics::Activities::Offer>> ActivityEdgeInstanceImp
 		
 		
 	}
-
     return m_offers;
 }
 
@@ -317,7 +313,6 @@ Getter & Setter for reference source
 */
 std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivation> ActivityEdgeInstanceImpl::getSource() const
 {
-//assert(m_source);
     return m_source;
 }
 void ActivityEdgeInstanceImpl::setSource(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivation> _source)
@@ -332,7 +327,6 @@ Getter & Setter for reference target
 */
 std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivation> ActivityEdgeInstanceImpl::getTarget() const
 {
-//assert(m_target);
     return m_target;
 }
 void ActivityEdgeInstanceImpl::setTarget(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivation> _target)

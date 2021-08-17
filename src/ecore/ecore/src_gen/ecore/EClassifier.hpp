@@ -114,13 +114,13 @@ namespace ecore
 			//*********************************
 			// Attribute Members
 			//*********************************
-			 
+			
 			Any m_defaultValue = nullptr;
-			 
+			
 			void * m_instanceClass = nullptr;
-			 
+			
 			std::string m_instanceClassName = "";
-			 
+			
 			std::string m_instanceTypeName = "";
 			
 			

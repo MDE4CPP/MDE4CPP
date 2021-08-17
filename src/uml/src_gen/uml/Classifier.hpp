@@ -385,13 +385,13 @@ namespace uml
 			If true, the Classifier can only be instantiated by instantiating one of its specializations. An abstract Classifier is intended to be used by other Classifiers e.g., as the target of Associations or Generalizations.
 			<p>From package UML::Classification.</p>
 			*/
-			 
+			
 			bool m_isAbstract = false;
 			/*!
 			If true, the Classifier cannot be specialized.
 			<p>From package UML::Classification.</p>
 			*/
-			 
+			
 			bool m_isFinalSpecialization = false;
 			
 			
@@ -494,7 +494,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement>> getOwnedMember() const = 0;/*!
+			virtual std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement>> getOwnedMember() const = 0;/*!
 			The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/

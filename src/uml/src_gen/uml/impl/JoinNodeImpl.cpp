@@ -130,6 +130,7 @@ JoinNodeImpl& JoinNodeImpl::operator=(const JoinNodeImpl & obj)
 
 	//copy references with no containment (soft copy)
 	//Clone references with containment (deep copy)
+	//clone reference 'joinSpec'
 	if(obj.getJoinSpec()!=nullptr)
 	{
 		m_joinSpec = std::dynamic_pointer_cast<uml::ValueSpecification>(obj.getJoinSpec()->copy());
@@ -191,13 +192,11 @@ Getter & Setter for reference joinSpec
 */
 std::shared_ptr<uml::ValueSpecification> JoinNodeImpl::getJoinSpec() const
 {
-
     return m_joinSpec;
 }
 void JoinNodeImpl::setJoinSpec(std::shared_ptr<uml::ValueSpecification> _joinSpec)
 {
     m_joinSpec = _joinSpec;
-	
 	
 }
 

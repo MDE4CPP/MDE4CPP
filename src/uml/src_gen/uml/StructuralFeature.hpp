@@ -111,7 +111,7 @@ namespace uml
 			If isReadOnly is true, the StructuralFeature may not be written to after initialization.
 			<p>From package UML::Classification.</p>
 			*/
-			 
+			
 			bool m_isReadOnly = false;
 			
 			

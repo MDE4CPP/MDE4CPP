@@ -181,7 +181,6 @@ Getter & Setter for reference definingPort
 */
 std::shared_ptr<uml::Port> CS_InteractionPointImpl::getDefiningPort() const
 {
-//assert(m_definingPort);
     return m_definingPort;
 }
 void CS_InteractionPointImpl::setDefiningPort(std::shared_ptr<uml::Port> _definingPort)
@@ -196,7 +195,6 @@ Getter & Setter for reference owner
 */
 std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> CS_InteractionPointImpl::getOwner() const
 {
-//assert(m_owner);
     return m_owner;
 }
 void CS_InteractionPointImpl::setOwner(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> _owner)

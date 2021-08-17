@@ -161,16 +161,11 @@ Getter & Setter for reference owningPackage
 */
 std::weak_ptr<uml::Package> PackageableElementImpl::getOwningPackage() const
 {
-
     return m_owningPackage;
 }
 void PackageableElementImpl::setOwningPackage(std::weak_ptr<uml::Package> _owningPackage)
 {
     m_owningPackage = _owningPackage;
-	m_namespace = this->getOwningPackage().lock();
-	m_owner = this->getNamespace().lock();
-	
-	
 	
 }
 

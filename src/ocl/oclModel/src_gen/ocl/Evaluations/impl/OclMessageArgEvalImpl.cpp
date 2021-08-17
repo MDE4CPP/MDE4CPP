@@ -32,9 +32,9 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
 #include "uml/umlFactory.hpp"
+#include "fUML/Semantics/Loci/LociFactory.hpp"
 
 
 #include "fUML/Semantics/Values/Evaluation.hpp"
@@ -128,7 +128,6 @@ Getter & Setter for reference expression
 */
 std::shared_ptr<ocl::Evaluations::OclExpEval> OclMessageArgEvalImpl::getExpression() const
 {
-
     return m_expression;
 }
 void OclMessageArgEvalImpl::setExpression(std::shared_ptr<ocl::Evaluations::OclExpEval> _expression)
@@ -143,7 +142,6 @@ Getter & Setter for reference unspecified
 */
 std::shared_ptr<ocl::Evaluations::UnspecifiedValueExpEval> OclMessageArgEvalImpl::getUnspecified() const
 {
-
     return m_unspecified;
 }
 void OclMessageArgEvalImpl::setUnspecified(std::shared_ptr<ocl::Evaluations::UnspecifiedValueExpEval> _unspecified)
@@ -158,7 +156,6 @@ Getter & Setter for reference variable
 */
 std::shared_ptr<ocl::Evaluations::OclExpEval> OclMessageArgEvalImpl::getVariable() const
 {
-
     return m_variable;
 }
 void OclMessageArgEvalImpl::setVariable(std::shared_ptr<ocl::Evaluations::OclExpEval> _variable)

@@ -103,7 +103,7 @@ namespace ocl::Expressions
 			//*********************************
 			// Attribute Members
 			//*********************************
-			 
+			
 			std::string m_stringSymbol = "";
 			
 			

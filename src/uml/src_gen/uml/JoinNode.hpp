@@ -142,7 +142,7 @@ namespace uml
 			Indicates whether incoming tokens having objects with the same identity are combined into one by the JoinNode.
 			<p>From package UML::Activities.</p>
 			*/
-			 
+			
 			bool m_isCombineDuplicate = true;
 			
 			

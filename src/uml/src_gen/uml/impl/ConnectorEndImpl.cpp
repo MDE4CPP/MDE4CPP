@@ -164,7 +164,6 @@ Getter & Setter for reference connector
 */
 std::weak_ptr<uml::Connector> ConnectorEndImpl::getConnector() const
 {
-//assert(m_connector);
     return m_connector;
 }
 void ConnectorEndImpl::setConnector(std::weak_ptr<uml::Connector> _connector)
@@ -179,7 +178,6 @@ Getter & Setter for reference definingEnd
 */
 std::shared_ptr<uml::Property> ConnectorEndImpl::getDefiningEnd() const
 {
-
     return m_definingEnd;
 }
 
@@ -190,7 +188,6 @@ Getter & Setter for reference partWithPort
 */
 std::shared_ptr<uml::Property> ConnectorEndImpl::getPartWithPort() const
 {
-
     return m_partWithPort;
 }
 void ConnectorEndImpl::setPartWithPort(std::shared_ptr<uml::Property> _partWithPort)
@@ -205,7 +202,6 @@ Getter & Setter for reference role
 */
 std::shared_ptr<uml::ConnectableElement> ConnectorEndImpl::getRole() const
 {
-//assert(m_role);
     return m_role;
 }
 void ConnectorEndImpl::setRole(std::shared_ptr<uml::ConnectableElement> _role)

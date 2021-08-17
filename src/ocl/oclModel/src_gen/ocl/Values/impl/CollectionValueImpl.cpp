@@ -89,8 +89,7 @@ CollectionValueImpl& CollectionValueImpl::operator=(const CollectionValueImpl & 
 	//Clone Attributes with (deep copy)
 
 	//copy references with no containment (soft copy)
-	std::shared_ptr<Bag<ocl::Values::Element>> _elements = obj.getElements();
-	m_elements.reset(new Bag<ocl::Values::Element>(*(obj.getElements().get())));
+	m_elements  = obj.getElements();
 	m_model  = obj.getModel();
 	//Clone references with containment (deep copy)
 	return *this;
@@ -197,7 +196,6 @@ std::shared_ptr<Bag<ocl::Values::Element>> CollectionValueImpl::getElements() co
 		
 		
 	}
-
     return m_elements;
 }
 
@@ -208,7 +206,6 @@ Getter & Setter for reference model
 */
 std::shared_ptr<ocl::Types::CollectionType> CollectionValueImpl::getModel() const
 {
-//assert(m_model);
     return m_model;
 }
 void CollectionValueImpl::setModel(std::shared_ptr<ocl::Types::CollectionType> _model)

@@ -109,9 +109,9 @@ namespace ocl::Values
 			//*********************************
 			// Attribute Members
 			//*********************************
-			 
+			
 			bool m_isPost = false;
-			 
+			
 			bool m_isPre = false;
 			
 			

@@ -16,20 +16,26 @@
 #include "ecore/EFactory.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 
-namespace fUML::Semantics::CommonBehavior 
+namespace fUML::Semantics::Actions
 {
-	class ClassifierBehaviorExecution;
-	class Execution;
-	class ObjectActivation;
-	class ParameterValue;
+	class CallActionActivation;
 }
-namespace fUML::Semantics::StructuredClassifiers 
+namespace fUML::Semantics::Activities
 {
-	class ExtensionalValue;
+	class DecisionNodeActivation;
+	class ObjectToken;
 }
-namespace fUML::Semantics::Values 
+namespace fUML::Semantics::Loci
 {
-	class Value;
+	class Locus;
+}
+namespace fUML::Semantics::SimpleClassifiers
+{
+	class FeatureValue;
+}
+namespace fUML::Semantics::StructuredClassifiers
+{
+	class Object;
 }
 
 

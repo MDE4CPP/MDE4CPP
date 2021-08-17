@@ -118,42 +118,35 @@ RedefinableTemplateSignatureImpl& RedefinableTemplateSignatureImpl::operator=(co
 	//copy references with no containment (soft copy)
 	m_classifier  = obj.getClassifier();
 	//Clone references with containment (deep copy)
-	std::shared_ptr<Subset<uml::RedefinableTemplateSignature, uml::RedefinableElement>> extendedSignatureContainer = getExtendedSignature();
-	if(nullptr != extendedSignatureContainer )
+	//clone reference 'extendedSignature'
+	std::shared_ptr<Subset<uml::RedefinableTemplateSignature, uml::RedefinableElement>> extendedSignatureList = obj.getExtendedSignature();
+	if(extendedSignatureList)
 	{
-		int size = extendedSignatureContainer->size();
-		for(int i=0; i<size ; i++)
+		Bag<uml::RedefinableTemplateSignature>::iterator extendedSignatureIter = extendedSignatureList->begin();
+		Bag<uml::RedefinableTemplateSignature>::iterator extendedSignatureEnd = extendedSignatureList->end();
+		while (extendedSignatureIter != extendedSignatureEnd) 
 		{
-			auto _extendedSignature=(*extendedSignatureContainer)[i];
-			if(nullptr != _extendedSignature)
-			{
-				extendedSignatureContainer->push_back(std::dynamic_pointer_cast<uml::RedefinableTemplateSignature>(_extendedSignature->copy()));
-			}
-			else
-			{
-				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container extendedSignature."<< std::endl;)
-			}
+			std::shared_ptr<uml::RedefinableTemplateSignature> temp = std::dynamic_pointer_cast<uml::RedefinableTemplateSignature>((*extendedSignatureIter)->copy());
+			getExtendedSignature()->push_back(temp);
+			extendedSignatureIter++;
 		}
 	}
 	else
 	{
 		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr extendedSignature."<< std::endl;)
 	}
-	std::shared_ptr<Subset<uml::TemplateParameter, uml::TemplateParameter>> inheritedParameterContainer = getInheritedParameter();
-	if(nullptr != inheritedParameterContainer )
+
+	//clone reference 'inheritedParameter'
+	std::shared_ptr<Subset<uml::TemplateParameter, uml::TemplateParameter>> inheritedParameterList = obj.getInheritedParameter();
+	if(inheritedParameterList)
 	{
-		int size = inheritedParameterContainer->size();
-		for(int i=0; i<size ; i++)
+		Bag<uml::TemplateParameter>::iterator inheritedParameterIter = inheritedParameterList->begin();
+		Bag<uml::TemplateParameter>::iterator inheritedParameterEnd = inheritedParameterList->end();
+		while (inheritedParameterIter != inheritedParameterEnd) 
 		{
-			auto _inheritedParameter=(*inheritedParameterContainer)[i];
-			if(nullptr != _inheritedParameter)
-			{
-				inheritedParameterContainer->push_back(std::dynamic_pointer_cast<uml::TemplateParameter>(_inheritedParameter->copy()));
-			}
-			else
-			{
-				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container inheritedParameter."<< std::endl;)
-			}
+			std::shared_ptr<uml::TemplateParameter> temp = std::dynamic_pointer_cast<uml::TemplateParameter>((*inheritedParameterIter)->copy());
+			getInheritedParameter()->push_back(temp);
+			inheritedParameterIter++;
 		}
 	}
 	else
@@ -203,7 +196,6 @@ Getter & Setter for reference classifier
 */
 std::weak_ptr<uml::Classifier> RedefinableTemplateSignatureImpl::getClassifier() const
 {
-//assert(m_classifier);
     return m_classifier;
 }
 void RedefinableTemplateSignatureImpl::setClassifier(std::weak_ptr<uml::Classifier> _classifier)
@@ -245,13 +237,12 @@ std::shared_ptr<Subset<uml::RedefinableTemplateSignature, uml::RedefinableElemen
 		#endif
 		
 		/*Subset*/
-		m_extendedSignature->initSubset(getRedefinedElement());
+		getExtendedSignature()->initSubset(getRedefinedElement());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value Subset: " << "m_extendedSignature - Subset<uml::RedefinableTemplateSignature, uml::RedefinableElement >(getRedefinedElement())" << std::endl;
 		#endif
 		
 	}
-
     return m_extendedSignature;
 }
 
@@ -271,13 +262,12 @@ std::shared_ptr<Subset<uml::TemplateParameter, uml::TemplateParameter>> Redefina
 		#endif
 		
 		/*Subset*/
-		m_inheritedParameter->initSubset(getParameter());
+		getInheritedParameter()->initSubset(getParameter());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value Subset: " << "m_inheritedParameter - Subset<uml::TemplateParameter, uml::TemplateParameter >(getParameter())" << std::endl;
 		#endif
 		
 	}
-
     return m_inheritedParameter;
 }
 

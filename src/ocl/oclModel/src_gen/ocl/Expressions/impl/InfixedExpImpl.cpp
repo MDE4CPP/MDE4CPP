@@ -216,7 +216,6 @@ Getter & Setter for reference source
 */
 std::shared_ptr<ocl::Expressions::OclExpression> InfixedExpImpl::getSource() const
 {
-
     return m_source;
 }
 void InfixedExpImpl::setSource(std::shared_ptr<ocl::Expressions::OclExpression> _source)

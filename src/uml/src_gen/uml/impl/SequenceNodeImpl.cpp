@@ -157,27 +157,6 @@ SequenceNodeImpl& SequenceNodeImpl::operator=(const SequenceNodeImpl & obj)
 
 	//copy references with no containment (soft copy)
 	//Clone references with containment (deep copy)
-	std::shared_ptr<Bag<uml::ExecutableNode>> executableNodeContainer = getExecutableNode();
-	if(nullptr != executableNodeContainer )
-	{
-		int size = executableNodeContainer->size();
-		for(int i=0; i<size ; i++)
-		{
-			auto _executableNode=(*executableNodeContainer)[i];
-			if(nullptr != _executableNode)
-			{
-				executableNodeContainer->push_back(std::dynamic_pointer_cast<uml::ExecutableNode>(_executableNode->copy()));
-			}
-			else
-			{
-				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container executableNode."<< std::endl;)
-			}
-		}
-	}
-	else
-	{
-		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr executableNode."<< std::endl;)
-	}
 	
 	return *this;
 }
@@ -211,14 +190,23 @@ Getter & Setter for reference executableNode
 */
 std::shared_ptr<Bag<uml::ExecutableNode>> SequenceNodeImpl::getExecutableNode() const
 {
-	if(m_executableNode == nullptr)
-	{
-		m_executableNode.reset(new Bag<uml::ExecutableNode>());
-		
-		
-	}
+	//Cast conversion from redefined container reference StructuredActivityNode::node 
+	std::shared_ptr<Bag<uml::ExecutableNode>> executableNode(new Bag<uml::ExecutableNode>());
 
-    return m_executableNode;
+	Bag<uml::ActivityNode>::iterator iter = uml::StructuredActivityNodeImpl::getNode()->begin();
+	Bag<uml::ActivityNode>::iterator end = uml::StructuredActivityNodeImpl::getNode()->end();
+	
+	while(iter != end)
+	{
+		std::shared_ptr<uml::ExecutableNode> _executableNode = std::dynamic_pointer_cast<uml::ExecutableNode>(*iter);
+		if(_executableNode)
+		{
+			executableNode->add(_executableNode);
+		}
+
+		iter++;
+	}	
+	return executableNode;
 }
 
 
@@ -282,7 +270,7 @@ std::shared_ptr<SubsetUnion<uml::InputPin, uml::Element>> SequenceNodeImpl::getI
 		#endif
 		
 		/*SubsetUnion*/
-		m_input->initSubsetUnion(getOwnedElement());
+		getInput()->initSubsetUnion(getOwnedElement());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value SubsetUnion: " << "m_input - SubsetUnion<uml::InputPin, uml::Element >(getOwnedElement())" << std::endl;
 		#endif
@@ -317,7 +305,7 @@ std::shared_ptr<SubsetUnion<uml::OutputPin, uml::Element>> SequenceNodeImpl::get
 		#endif
 		
 		/*SubsetUnion*/
-		m_output->initSubsetUnion(getOwnedElement());
+		getOutput()->initSubsetUnion(getOwnedElement());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value SubsetUnion: " << "m_output - SubsetUnion<uml::OutputPin, uml::Element >(getOwnedElement())" << std::endl;
 		#endif
@@ -341,20 +329,20 @@ std::shared_ptr<Union<uml::Element>> SequenceNodeImpl::getOwnedElement() const
 	return m_ownedElement;
 }
 
-std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement>> SequenceNodeImpl::getOwnedMember() const
+std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement>> SequenceNodeImpl::getOwnedMember() const
 {
 	if(m_ownedMember == nullptr)
 	{
 		/*SubsetUnion*/
-		m_ownedMember.reset(new SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement >());
+		m_ownedMember.reset(new SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement >());
 		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement >()" << std::endl;
+			std::cout << "Initialising shared pointer SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement >()" << std::endl;
 		#endif
 		
 		/*SubsetUnion*/
-		m_ownedMember->initSubsetUnion(getOwnedElement(),getMember());
+		getOwnedMember()->initSubsetUnion(getOwnedElement(), getMember());
 		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement >(getOwnedElement(),getMember())" << std::endl;
+			std::cout << "Initialising value SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement >(getOwnedElement(), getMember())" << std::endl;
 		#endif
 		
 	}

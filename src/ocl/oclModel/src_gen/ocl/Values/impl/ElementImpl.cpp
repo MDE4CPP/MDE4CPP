@@ -131,7 +131,6 @@ Getter & Setter for reference value
 */
 std::shared_ptr<fUML::Semantics::Values::Value> ElementImpl::getValue() const
 {
-
     return m_value;
 }
 void ElementImpl::setValue(std::shared_ptr<fUML::Semantics::Values::Value> _value)

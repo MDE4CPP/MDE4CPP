@@ -116,13 +116,13 @@ namespace ocl::Values
 			//*********************************
 			// Attribute Members
 			//*********************************
-			 
+			
 			bool m_isAsyncOperation = false;
-			 
+			
 			bool m_isSignal = false;
-			 
+			
 			bool m_isSyncOperation = false;
-			 
+			
 			std::string m_name = "";
 			
 			

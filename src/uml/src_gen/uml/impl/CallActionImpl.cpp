@@ -135,21 +135,17 @@ CallActionImpl& CallActionImpl::operator=(const CallActionImpl & obj)
 
 	//copy references with no containment (soft copy)
 	//Clone references with containment (deep copy)
-	std::shared_ptr<Subset<uml::OutputPin, uml::OutputPin>> resultContainer = getResult();
-	if(nullptr != resultContainer )
+	//clone reference 'result'
+	std::shared_ptr<Subset<uml::OutputPin, uml::OutputPin>> resultList = obj.getResult();
+	if(resultList)
 	{
-		int size = resultContainer->size();
-		for(int i=0; i<size ; i++)
+		Bag<uml::OutputPin>::iterator resultIter = resultList->begin();
+		Bag<uml::OutputPin>::iterator resultEnd = resultList->end();
+		while (resultIter != resultEnd) 
 		{
-			auto _result=(*resultContainer)[i];
-			if(nullptr != _result)
-			{
-				resultContainer->push_back(std::dynamic_pointer_cast<uml::OutputPin>(_result->copy()));
-			}
-			else
-			{
-				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container result."<< std::endl;)
-			}
+			std::shared_ptr<uml::OutputPin> temp = std::dynamic_pointer_cast<uml::OutputPin>((*resultIter)->copy());
+			getResult()->push_back(temp);
+			resultIter++;
 		}
 	}
 	else
@@ -157,7 +153,7 @@ CallActionImpl& CallActionImpl::operator=(const CallActionImpl & obj)
 		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr result."<< std::endl;)
 	}
 	/*Subset*/
-	m_result->initSubset(getOutput());
+	getResult()->initSubset(getOutput());
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Initialising value Subset: " << "m_result - Subset<uml::OutputPin, uml::OutputPin >(getOutput())" << std::endl;
 	#endif
@@ -245,13 +241,12 @@ std::shared_ptr<Subset<uml::OutputPin, uml::OutputPin>> CallActionImpl::getResul
 		#endif
 		
 		/*Subset*/
-		m_result->initSubset(getOutput());
+		getResult()->initSubset(getOutput());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value Subset: " << "m_result - Subset<uml::OutputPin, uml::OutputPin >(getOutput())" << std::endl;
 		#endif
 		
 	}
-
     return m_result;
 }
 
@@ -286,7 +281,7 @@ std::shared_ptr<SubsetUnion<uml::InputPin, uml::Element>> CallActionImpl::getInp
 		#endif
 		
 		/*SubsetUnion*/
-		m_input->initSubsetUnion(getOwnedElement());
+		getInput()->initSubsetUnion(getOwnedElement());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value SubsetUnion: " << "m_input - SubsetUnion<uml::InputPin, uml::Element >(getOwnedElement())" << std::endl;
 		#endif
@@ -306,7 +301,7 @@ std::shared_ptr<SubsetUnion<uml::OutputPin, uml::Element>> CallActionImpl::getOu
 		#endif
 		
 		/*SubsetUnion*/
-		m_output->initSubsetUnion(getOwnedElement());
+		getOutput()->initSubsetUnion(getOwnedElement());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value SubsetUnion: " << "m_output - SubsetUnion<uml::OutputPin, uml::Element >(getOwnedElement())" << std::endl;
 		#endif

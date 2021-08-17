@@ -16,11 +16,6 @@
 #include "ecore/EFactory.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
 
-namespace fUML::Semantics::Loci 
-{
-	class ExecutionFactory;
-	class Executor;
-}
 
 
 

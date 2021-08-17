@@ -31,10 +31,10 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
 #include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Values/ValuesFactory.hpp"
+#include "fUML/Semantics/Loci/LociFactory.hpp"
 
 
 #include "ocl/Evaluations/CollectionLiteralPartEval.hpp"
@@ -126,7 +126,6 @@ Getter & Setter for reference item
 */
 std::shared_ptr<ocl::Evaluations::OclExpEval> CollectionItemEvalImpl::getItem() const
 {
-//assert(m_item);
     return m_item;
 }
 void CollectionItemEvalImpl::setItem(std::shared_ptr<ocl::Evaluations::OclExpEval> _item)

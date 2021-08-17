@@ -86,9 +86,9 @@ namespace ecore
 			//*********************************
 			// Attribute Members
 			//*********************************
-			 
+			
 			std::string m_key = "";
-			 
+			
 			std::string m_value = "";
 			
 			

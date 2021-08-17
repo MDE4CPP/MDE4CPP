@@ -134,10 +134,10 @@ ObjectNodeImpl& ObjectNodeImpl::operator=(const ObjectNodeImpl & obj)
 	m_ordering = obj.getOrdering();
 
 	//copy references with no containment (soft copy)
-	std::shared_ptr<Bag<uml::State>> _inState = obj.getInState();
-	m_inState.reset(new Bag<uml::State>(*(obj.getInState().get())));
+	m_inState  = obj.getInState();
 	m_selection  = obj.getSelection();
 	//Clone references with containment (deep copy)
+	//clone reference 'upperBound'
 	if(obj.getUpperBound()!=nullptr)
 	{
 		m_upperBound = std::dynamic_pointer_cast<uml::ValueSpecification>(obj.getUpperBound()->copy());
@@ -225,7 +225,6 @@ std::shared_ptr<Bag<uml::State>> ObjectNodeImpl::getInState() const
 		
 		
 	}
-
     return m_inState;
 }
 
@@ -236,7 +235,6 @@ Getter & Setter for reference selection
 */
 std::shared_ptr<uml::Behavior> ObjectNodeImpl::getSelection() const
 {
-
     return m_selection;
 }
 void ObjectNodeImpl::setSelection(std::shared_ptr<uml::Behavior> _selection)
@@ -251,13 +249,11 @@ Getter & Setter for reference upperBound
 */
 std::shared_ptr<uml::ValueSpecification> ObjectNodeImpl::getUpperBound() const
 {
-
     return m_upperBound;
 }
 void ObjectNodeImpl::setUpperBound(std::shared_ptr<uml::ValueSpecification> _upperBound)
 {
     m_upperBound = _upperBound;
-	
 	
 }
 

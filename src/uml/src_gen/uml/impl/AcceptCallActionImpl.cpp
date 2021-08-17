@@ -133,6 +133,7 @@ AcceptCallActionImpl& AcceptCallActionImpl::operator=(const AcceptCallActionImpl
 
 	//copy references with no containment (soft copy)
 	//Clone references with containment (deep copy)
+	//clone reference 'returnInformation'
 	if(obj.getReturnInformation()!=nullptr)
 	{
 		m_returnInformation = std::dynamic_pointer_cast<uml::OutputPin>(obj.getReturnInformation()->copy());
@@ -187,14 +188,11 @@ Getter & Setter for reference returnInformation
 */
 std::shared_ptr<uml::OutputPin> AcceptCallActionImpl::getReturnInformation() const
 {
-//assert(m_returnInformation);
     return m_returnInformation;
 }
 void AcceptCallActionImpl::setReturnInformation(std::shared_ptr<uml::OutputPin> _returnInformation)
 {
     m_returnInformation = _returnInformation;
-	
-	
 	
 }
 
@@ -228,7 +226,7 @@ std::shared_ptr<SubsetUnion<uml::OutputPin, uml::Element>> AcceptCallActionImpl:
 		#endif
 		
 		/*SubsetUnion*/
-		m_output->initSubsetUnion(getOwnedElement());
+		getOutput()->initSubsetUnion(getOwnedElement());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value SubsetUnion: " << "m_output - SubsetUnion<uml::OutputPin, uml::Element >(getOwnedElement())" << std::endl;
 		#endif

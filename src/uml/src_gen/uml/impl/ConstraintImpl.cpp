@@ -134,10 +134,10 @@ ConstraintImpl& ConstraintImpl::operator=(const ConstraintImpl & obj)
 	//Clone Attributes with (deep copy)
 
 	//copy references with no containment (soft copy)
-	std::shared_ptr<Bag<uml::Element>> _constrainedElement = obj.getConstrainedElement();
-	m_constrainedElement.reset(new Bag<uml::Element>(*(obj.getConstrainedElement().get())));
+	m_constrainedElement  = obj.getConstrainedElement();
 	m_context  = obj.getContext();
 	//Clone references with containment (deep copy)
+	//clone reference 'specification'
 	if(obj.getSpecification()!=nullptr)
 	{
 		m_specification = std::dynamic_pointer_cast<uml::ValueSpecification>(obj.getSpecification()->copy());
@@ -198,7 +198,6 @@ std::shared_ptr<Bag<uml::Element>> ConstraintImpl::getConstrainedElement() const
 		
 		
 	}
-
     return m_constrainedElement;
 }
 
@@ -209,16 +208,11 @@ Getter & Setter for reference context
 */
 std::weak_ptr<uml::Namespace> ConstraintImpl::getContext() const
 {
-
     return m_context;
 }
 void ConstraintImpl::setContext(std::weak_ptr<uml::Namespace> _context)
 {
     m_context = _context;
-	m_namespace = this->getContext().lock();
-	m_owner = this->getNamespace().lock();
-	
-	
 	
 }
 
@@ -228,13 +222,11 @@ Getter & Setter for reference specification
 */
 std::shared_ptr<uml::ValueSpecification> ConstraintImpl::getSpecification() const
 {
-//assert(m_specification);
     return m_specification;
 }
 void ConstraintImpl::setSpecification(std::shared_ptr<uml::ValueSpecification> _specification)
 {
     m_specification = _specification;
-	
 	
 }
 

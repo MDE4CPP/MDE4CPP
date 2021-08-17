@@ -142,13 +142,13 @@ namespace uml
 			Provides a textual specification of the functionality of the Action, in one or more languages other than UML.
 			<p>From package UML::Actions.</p>
 			*/
-			 
+			
 			mutable std::shared_ptr<Bag<std::string>> m_body; 
 			/*!
 			If provided, a specification of the language used for each of the body Strings.
 			<p>From package UML::Actions.</p>
 			*/
-			 
+			
 			mutable std::shared_ptr<Bag<std::string>> m_language; 
 			
 			

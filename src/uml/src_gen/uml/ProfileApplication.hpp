@@ -148,7 +148,7 @@ namespace uml
 			Specifies that the Profile filtering rules for the metaclasses of the referenced metamodel shall be strictly applied.
 			<p>From package UML::Packages.</p>
 			*/
-			 
+			
 			bool m_isStrict = false;
 			
 			

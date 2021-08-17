@@ -165,7 +165,7 @@ std::shared_ptr<uml::ValueSpecification> BooleanValueImpl::specify()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	std::shared_ptr<uml::LiteralBoolean> literal = uml::umlFactory::eInstance()->createLiteralBoolean_in_Namespace(std::shared_ptr<uml::Class>());    
+	std::shared_ptr<uml::LiteralBoolean> literal = uml::umlFactory::eInstance()->createLiteralBoolean_as_ownedMember_in_Namespace(std::shared_ptr<uml::Class>());    
     literal->setType(this->getType());
     literal->setValue(this->isValue());
     return literal;

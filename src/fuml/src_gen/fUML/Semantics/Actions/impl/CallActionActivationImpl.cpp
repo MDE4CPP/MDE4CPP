@@ -122,21 +122,17 @@ CallActionActivationImpl& CallActionActivationImpl::operator=(const CallActionAc
 	//copy references with no containment (soft copy)
 	m_callAction  = obj.getCallAction();
 	//Clone references with containment (deep copy)
-	std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::Execution>> callExecutionsContainer = getCallExecutions();
-	if(nullptr != callExecutionsContainer )
+	//clone reference 'callExecutions'
+	std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::Execution>> callExecutionsList = obj.getCallExecutions();
+	if(callExecutionsList)
 	{
-		int size = callExecutionsContainer->size();
-		for(int i=0; i<size ; i++)
+		Bag<fUML::Semantics::CommonBehavior::Execution>::iterator callExecutionsIter = callExecutionsList->begin();
+		Bag<fUML::Semantics::CommonBehavior::Execution>::iterator callExecutionsEnd = callExecutionsList->end();
+		while (callExecutionsIter != callExecutionsEnd) 
 		{
-			auto _callExecutions=(*callExecutionsContainer)[i];
-			if(nullptr != _callExecutions)
-			{
-				callExecutionsContainer->push_back(std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::Execution>(_callExecutions->copy()));
-			}
-			else
-			{
-				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container callExecutions."<< std::endl;)
-			}
+			std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> temp = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::Execution>((*callExecutionsIter)->copy());
+			getCallExecutions()->push_back(temp);
+			callExecutionsIter++;
 		}
 	}
 	else
@@ -362,7 +358,6 @@ Getter & Setter for reference callAction
 */
 std::shared_ptr<uml::CallAction> CallActionActivationImpl::getCallAction() const
 {
-//assert(m_callAction);
     return m_callAction;
 }
 void CallActionActivationImpl::setCallAction(std::shared_ptr<uml::CallAction> _callAction)
@@ -417,7 +412,6 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::Execution>> CallActionActiv
 		
 		
 	}
-
     return m_callExecutions;
 }
 

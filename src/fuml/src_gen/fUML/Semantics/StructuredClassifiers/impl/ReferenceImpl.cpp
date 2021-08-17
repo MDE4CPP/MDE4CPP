@@ -278,7 +278,6 @@ Getter & Setter for reference referent
 */
 std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> ReferenceImpl::getReferent() const
 {
-//assert(m_referent);
     return m_referent;
 }
 void ReferenceImpl::setReferent(std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> _referent)

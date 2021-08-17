@@ -100,25 +100,20 @@ TemplateSignatureImpl& TemplateSignatureImpl::operator=(const TemplateSignatureI
 	//Clone Attributes with (deep copy)
 
 	//copy references with no containment (soft copy)
-	std::shared_ptr<Union<uml::TemplateParameter>> _parameter = obj.getParameter();
-	m_parameter.reset(new Union<uml::TemplateParameter>(*(obj.getParameter().get())));
+	m_parameter  = obj.getParameter();
 	m_template  = obj.getTemplate();
 	//Clone references with containment (deep copy)
-	std::shared_ptr<Subset<uml::TemplateParameter, uml::Element,uml::TemplateParameter>> ownedParameterContainer = getOwnedParameter();
-	if(nullptr != ownedParameterContainer )
+	//clone reference 'ownedParameter'
+	std::shared_ptr<Subset<uml::TemplateParameter, uml::Element, uml::TemplateParameter>> ownedParameterList = obj.getOwnedParameter();
+	if(ownedParameterList)
 	{
-		int size = ownedParameterContainer->size();
-		for(int i=0; i<size ; i++)
+		Bag<uml::TemplateParameter>::iterator ownedParameterIter = ownedParameterList->begin();
+		Bag<uml::TemplateParameter>::iterator ownedParameterEnd = ownedParameterList->end();
+		while (ownedParameterIter != ownedParameterEnd) 
 		{
-			auto _ownedParameter=(*ownedParameterContainer)[i];
-			if(nullptr != _ownedParameter)
-			{
-				ownedParameterContainer->push_back(std::dynamic_pointer_cast<uml::TemplateParameter>(_ownedParameter->copy()));
-			}
-			else
-			{
-				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container ownedParameter."<< std::endl;)
-			}
+			std::shared_ptr<uml::TemplateParameter> temp = std::dynamic_pointer_cast<uml::TemplateParameter>((*ownedParameterIter)->copy());
+			getOwnedParameter()->push_back(temp);
+			ownedParameterIter++;
 		}
 	}
 	else
@@ -126,9 +121,9 @@ TemplateSignatureImpl& TemplateSignatureImpl::operator=(const TemplateSignatureI
 		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr ownedParameter."<< std::endl;)
 	}
 	/*Subset*/
-	m_ownedParameter->initSubset(getOwnedElement(),getParameter());
+	getOwnedParameter()->initSubset(getOwnedElement(), getParameter());
 	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Initialising value Subset: " << "m_ownedParameter - Subset<uml::TemplateParameter, uml::Element,uml::TemplateParameter >(getOwnedElement(),getParameter())" << std::endl;
+		std::cout << "Initialising value Subset: " << "m_ownedParameter - Subset<uml::TemplateParameter, uml::Element, uml::TemplateParameter >(getOwnedElement(), getParameter())" << std::endl;
 	#endif
 	
 	return *this;
@@ -172,24 +167,23 @@ bool TemplateSignatureImpl::unique_parameters(Any diagnostics,std::shared_ptr<st
 /*
 Getter & Setter for reference ownedParameter
 */
-std::shared_ptr<Subset<uml::TemplateParameter, uml::Element,uml::TemplateParameter>> TemplateSignatureImpl::getOwnedParameter() const
+std::shared_ptr<Subset<uml::TemplateParameter, uml::Element, uml::TemplateParameter>> TemplateSignatureImpl::getOwnedParameter() const
 {
 	if(m_ownedParameter == nullptr)
 	{
 		/*Subset*/
-		m_ownedParameter.reset(new Subset<uml::TemplateParameter, uml::Element,uml::TemplateParameter >());
+		m_ownedParameter.reset(new Subset<uml::TemplateParameter, uml::Element, uml::TemplateParameter >());
 		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer Subset: " << "m_ownedParameter - Subset<uml::TemplateParameter, uml::Element,uml::TemplateParameter >()" << std::endl;
+			std::cout << "Initialising shared pointer Subset: " << "m_ownedParameter - Subset<uml::TemplateParameter, uml::Element, uml::TemplateParameter >()" << std::endl;
 		#endif
 		
 		/*Subset*/
-		m_ownedParameter->initSubset(getOwnedElement(),getParameter());
+		getOwnedParameter()->initSubset(getOwnedElement(), getParameter());
 		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_ownedParameter - Subset<uml::TemplateParameter, uml::Element,uml::TemplateParameter >(getOwnedElement(),getParameter())" << std::endl;
+			std::cout << "Initialising value Subset: " << "m_ownedParameter - Subset<uml::TemplateParameter, uml::Element, uml::TemplateParameter >(getOwnedElement(), getParameter())" << std::endl;
 		#endif
 		
 	}
-
     return m_ownedParameter;
 }
 
@@ -207,14 +201,11 @@ Getter & Setter for reference template
 */
 std::weak_ptr<uml::TemplateableElement> TemplateSignatureImpl::getTemplate() const
 {
-//assert(m_template);
     return m_template;
 }
 void TemplateSignatureImpl::setTemplate(std::weak_ptr<uml::TemplateableElement> _template)
 {
     m_template = _template;
-	m_owner = this->getTemplate().lock();
-	
 	
 }
 

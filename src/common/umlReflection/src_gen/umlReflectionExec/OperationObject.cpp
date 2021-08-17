@@ -463,7 +463,7 @@ void OperationObject::removeValue(std::shared_ptr<uml::StructuralFeature> featur
 	{
 		if (value == nullptr) // clear mode
 		{
-			m_OperationValue->getOwnedParameter()->clear();
+			m_OperationValue->getProperty_OwnedParameter()->clear();
 		}
 		else
 		{
@@ -473,7 +473,7 @@ void OperationObject::removeValue(std::shared_ptr<uml::StructuralFeature> featur
 			std::shared_ptr<UML::ParameterObject> inputValue = std::dynamic_pointer_cast<UML::ParameterObject>(reference->getReferent());
 			if (inputValue != nullptr)
 			{
-				m_OperationValue->getOwnedParameter()->erase(inputValue->getParameterValue());
+				m_OperationValue->getProperty_OwnedParameter()->erase(inputValue->getParameterValue());
 			}
 		}
 	}
@@ -1018,7 +1018,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> OperationObject::getValues(
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Operation_ownedParameter())
 	{
-		std::shared_ptr<Bag<uml::Parameter>> ownedParameterList = m_OperationValue->getOwnedParameter();
+		std::shared_ptr<Bag<uml::Parameter>> ownedParameterList = m_OperationValue->getProperty_OwnedParameter();
 		Bag<uml::Parameter>::iterator iter = ownedParameterList->begin();
 		Bag<uml::Parameter>::iterator end = ownedParameterList->end();
 		while (iter != end)
@@ -1511,7 +1511,7 @@ void OperationObject::setFeatureValue(std::shared_ptr<uml::StructuralFeature> fe
 	{
 		Bag<fUML::Semantics::Values::Value>::iterator iter = values->begin();
 		Bag<fUML::Semantics::Values::Value>::iterator end = values->end();
-		m_OperationValue->getOwnedParameter()->clear();
+		m_OperationValue->getProperty_OwnedParameter()->clear();
 		while (iter != end)
 		{
 			std::shared_ptr<fUML::Semantics::Values::Value> inputValue = *iter;
@@ -1519,7 +1519,7 @@ void OperationObject::setFeatureValue(std::shared_ptr<uml::StructuralFeature> fe
 			std::shared_ptr<UML::ParameterObject> value = std::dynamic_pointer_cast<UML::ParameterObject>(reference->getReferent());
 			if (value != nullptr)
 			{
-				m_OperationValue->getOwnedParameter()->push_back(value->getParameterValue());
+				m_OperationValue->getProperty_OwnedParameter()->push_back(value->getParameterValue());
 			}
 			
 			iter++;
@@ -1760,7 +1760,7 @@ std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>> Operation
 		{
 			featureValues->add(this->retrieveFeatureValue(property));
 		}
-		if (property == UML::UMLPackage::eInstance()->get_UML_Operation_ownedParameter() && m_OperationValue->getOwnedParameter() != nullptr)
+		if (property == UML::UMLPackage::eInstance()->get_UML_Operation_ownedParameter() && m_OperationValue->getProperty_OwnedParameter() != nullptr)
 		{
 			featureValues->add(this->retrieveFeatureValue(property));
 		}

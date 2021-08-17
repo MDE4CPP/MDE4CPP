@@ -117,7 +117,7 @@ namespace PSCS::Semantics::CommonBehavior
 			//*********************************
 			// Attribute Members
 			//*********************************
-			 
+			
 			bool m_propagationInward = false;
 			
 			

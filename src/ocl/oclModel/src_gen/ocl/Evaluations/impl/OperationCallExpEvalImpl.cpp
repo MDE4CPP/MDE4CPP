@@ -33,11 +33,11 @@
 
 #include <exception> // used in Persistence
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
-#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Values/ValuesFactory.hpp"
+#include "fUML/Semantics/Loci/LociFactory.hpp"
 
 
 #include "ocl/Evaluations/EvalEnvironment.hpp"
@@ -100,8 +100,7 @@ OperationCallExpEvalImpl& OperationCallExpEvalImpl::operator=(const OperationCal
 	//Clone Attributes with (deep copy)
 
 	//copy references with no containment (soft copy)
-	std::shared_ptr<Bag<ocl::Evaluations::OclExpEval>> _arguments = obj.getArguments();
-	m_arguments.reset(new Bag<ocl::Evaluations::OclExpEval>(*(obj.getArguments().get())));
+	m_arguments  = obj.getArguments();
 	m_referredOperation  = obj.getReferredOperation();
 	//Clone references with containment (deep copy)
 	return *this;
@@ -142,7 +141,6 @@ std::shared_ptr<Bag<ocl::Evaluations::OclExpEval>> OperationCallExpEvalImpl::get
 		
 		
 	}
-
     return m_arguments;
 }
 
@@ -153,7 +151,6 @@ Getter & Setter for reference referredOperation
 */
 std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> OperationCallExpEvalImpl::getReferredOperation() const
 {
-//assert(m_referredOperation);
     return m_referredOperation;
 }
 void OperationCallExpEvalImpl::setReferredOperation(std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> _referredOperation)

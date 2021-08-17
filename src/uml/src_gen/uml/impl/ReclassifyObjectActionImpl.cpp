@@ -132,11 +132,10 @@ ReclassifyObjectActionImpl& ReclassifyObjectActionImpl::operator=(const Reclassi
 	m_isReplaceAll = obj.getIsReplaceAll();
 
 	//copy references with no containment (soft copy)
-	std::shared_ptr<Bag<uml::Classifier>> _newClassifier = obj.getNewClassifier();
-	m_newClassifier.reset(new Bag<uml::Classifier>(*(obj.getNewClassifier().get())));
-	std::shared_ptr<Bag<uml::Classifier>> _oldClassifier = obj.getOldClassifier();
-	m_oldClassifier.reset(new Bag<uml::Classifier>(*(obj.getOldClassifier().get())));
+	m_newClassifier  = obj.getNewClassifier();
+	m_oldClassifier  = obj.getOldClassifier();
 	//Clone references with containment (deep copy)
+	//clone reference 'object'
 	if(obj.getObject()!=nullptr)
 	{
 		m_object = std::dynamic_pointer_cast<uml::InputPin>(obj.getObject()->copy());
@@ -210,7 +209,6 @@ std::shared_ptr<Bag<uml::Classifier>> ReclassifyObjectActionImpl::getNewClassifi
 		
 		
 	}
-
     return m_newClassifier;
 }
 
@@ -221,14 +219,11 @@ Getter & Setter for reference object
 */
 std::shared_ptr<uml::InputPin> ReclassifyObjectActionImpl::getObject() const
 {
-//assert(m_object);
     return m_object;
 }
 void ReclassifyObjectActionImpl::setObject(std::shared_ptr<uml::InputPin> _object)
 {
     m_object = _object;
-	
-	
 	
 }
 
@@ -244,7 +239,6 @@ std::shared_ptr<Bag<uml::Classifier>> ReclassifyObjectActionImpl::getOldClassifi
 		
 		
 	}
-
     return m_oldClassifier;
 }
 
@@ -279,7 +273,7 @@ std::shared_ptr<SubsetUnion<uml::InputPin, uml::Element>> ReclassifyObjectAction
 		#endif
 		
 		/*SubsetUnion*/
-		m_input->initSubsetUnion(getOwnedElement());
+		getInput()->initSubsetUnion(getOwnedElement());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value SubsetUnion: " << "m_input - SubsetUnion<uml::InputPin, uml::Element >(getOwnedElement())" << std::endl;
 		#endif

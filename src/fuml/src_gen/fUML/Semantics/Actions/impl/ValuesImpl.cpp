@@ -85,8 +85,7 @@ ValuesImpl& ValuesImpl::operator=(const ValuesImpl & obj)
 	//Clone Attributes with (deep copy)
 
 	//copy references with no containment (soft copy)
-	std::shared_ptr<Bag<fUML::Semantics::Values::Value>> _values = obj.getValues();
-	m_values.reset(new Bag<fUML::Semantics::Values::Value>(*(obj.getValues().get())));
+	m_values  = obj.getValues();
 	//Clone references with containment (deep copy)
 	return *this;
 }
@@ -126,7 +125,6 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> ValuesImpl::getValues() con
 		
 		
 	}
-
     return m_values;
 }
 

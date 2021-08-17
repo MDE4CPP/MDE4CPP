@@ -89,31 +89,31 @@ EGenericTypeImpl& EGenericTypeImpl::operator=(const EGenericTypeImpl & obj)
 	m_eRawType  = obj.getERawType();
 	m_eTypeParameter  = obj.getETypeParameter();
 	//Clone references with containment (deep copy)
+	//clone reference 'eLowerBound'
 	if(obj.getELowerBound()!=nullptr)
 	{
 		m_eLowerBound = std::dynamic_pointer_cast<ecore::EGenericType>(obj.getELowerBound()->copy());
 	}
-	std::shared_ptr<Bag<ecore::EGenericType>> eTypeArgumentsContainer = getETypeArguments();
-	if(nullptr != eTypeArgumentsContainer )
+
+	//clone reference 'eTypeArguments'
+	std::shared_ptr<Bag<ecore::EGenericType>> eTypeArgumentsList = obj.getETypeArguments();
+	if(eTypeArgumentsList)
 	{
-		int size = eTypeArgumentsContainer->size();
-		for(int i=0; i<size ; i++)
+		Bag<ecore::EGenericType>::iterator eTypeArgumentsIter = eTypeArgumentsList->begin();
+		Bag<ecore::EGenericType>::iterator eTypeArgumentsEnd = eTypeArgumentsList->end();
+		while (eTypeArgumentsIter != eTypeArgumentsEnd) 
 		{
-			auto _eTypeArguments=(*eTypeArgumentsContainer)[i];
-			if(nullptr != _eTypeArguments)
-			{
-				eTypeArgumentsContainer->push_back(std::dynamic_pointer_cast<ecore::EGenericType>(_eTypeArguments->copy()));
-			}
-			else
-			{
-				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container eTypeArguments."<< std::endl;)
-			}
+			std::shared_ptr<ecore::EGenericType> temp = std::dynamic_pointer_cast<ecore::EGenericType>((*eTypeArgumentsIter)->copy());
+			getETypeArguments()->push_back(temp);
+			eTypeArgumentsIter++;
 		}
 	}
 	else
 	{
 		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr eTypeArguments."<< std::endl;)
 	}
+
+	//clone reference 'eUpperBound'
 	if(obj.getEUpperBound()!=nullptr)
 	{
 		m_eUpperBound = std::dynamic_pointer_cast<ecore::EGenericType>(obj.getEUpperBound()->copy());
@@ -158,7 +158,6 @@ Getter & Setter for reference eClassifier
 */
 std::shared_ptr<ecore::EClassifier> EGenericTypeImpl::getEClassifier() const
 {
-
     return m_eClassifier;
 }
 void EGenericTypeImpl::setEClassifier(std::shared_ptr<ecore::EClassifier> _eClassifier)
@@ -173,7 +172,6 @@ Getter & Setter for reference eLowerBound
 */
 std::shared_ptr<ecore::EGenericType> EGenericTypeImpl::getELowerBound() const
 {
-
     return m_eLowerBound;
 }
 void EGenericTypeImpl::setELowerBound(std::shared_ptr<ecore::EGenericType> _eLowerBound)
@@ -188,7 +186,6 @@ Getter & Setter for reference eRawType
 */
 std::shared_ptr<ecore::EClassifier> EGenericTypeImpl::getERawType() const
 {
-//assert(m_eRawType);
     return m_eRawType;
 }
 void EGenericTypeImpl::setERawType(std::shared_ptr<ecore::EClassifier> _eRawType)
@@ -209,7 +206,6 @@ std::shared_ptr<Bag<ecore::EGenericType>> EGenericTypeImpl::getETypeArguments() 
 		
 		
 	}
-
     return m_eTypeArguments;
 }
 
@@ -220,7 +216,6 @@ Getter & Setter for reference eTypeParameter
 */
 std::shared_ptr<ecore::ETypeParameter> EGenericTypeImpl::getETypeParameter() const
 {
-
     return m_eTypeParameter;
 }
 void EGenericTypeImpl::setETypeParameter(std::shared_ptr<ecore::ETypeParameter> _eTypeParameter)
@@ -235,7 +230,6 @@ Getter & Setter for reference eUpperBound
 */
 std::shared_ptr<ecore::EGenericType> EGenericTypeImpl::getEUpperBound() const
 {
-
     return m_eUpperBound;
 }
 void EGenericTypeImpl::setEUpperBound(std::shared_ptr<ecore::EGenericType> _eUpperBound)

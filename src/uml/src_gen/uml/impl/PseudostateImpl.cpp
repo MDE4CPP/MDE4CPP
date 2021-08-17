@@ -232,16 +232,11 @@ Getter & Setter for reference state
 */
 std::weak_ptr<uml::State> PseudostateImpl::getState() const
 {
-
     return m_state;
 }
 void PseudostateImpl::setState(std::weak_ptr<uml::State> _state)
 {
     m_state = _state;
-	m_namespace = this->getState().lock();
-	m_owner = this->getNamespace().lock();
-	
-	
 	
 }
 
@@ -251,16 +246,11 @@ Getter & Setter for reference stateMachine
 */
 std::weak_ptr<uml::StateMachine> PseudostateImpl::getStateMachine() const
 {
-
     return m_stateMachine;
 }
 void PseudostateImpl::setStateMachine(std::weak_ptr<uml::StateMachine> _stateMachine)
 {
     m_stateMachine = _stateMachine;
-	m_namespace = this->getStateMachine().lock();
-	m_owner = this->getNamespace().lock();
-	
-	
 	
 }
 

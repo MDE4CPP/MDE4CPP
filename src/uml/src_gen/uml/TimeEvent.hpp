@@ -130,7 +130,7 @@ namespace uml
 			Specifies whether the TimeEvent is specified as an absolute or relative time.
 			<p>From package UML::CommonBehavior.</p>
 			*/
-			 
+			
 			bool m_isRelative = false;
 			
 			

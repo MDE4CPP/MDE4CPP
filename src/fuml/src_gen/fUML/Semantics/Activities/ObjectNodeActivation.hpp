@@ -104,7 +104,7 @@ namespace fUML::Semantics::Activities
 			//*********************************
 			// Attribute Members
 			//*********************************
-			 
+			
 			int m_offeredTokenCount = 0;
 			
 			

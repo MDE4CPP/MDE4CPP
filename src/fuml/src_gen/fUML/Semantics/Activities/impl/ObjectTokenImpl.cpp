@@ -69,6 +69,12 @@ ObjectTokenImpl::~ObjectTokenImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+ObjectTokenImpl::ObjectTokenImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivation> par_holder)
+:ObjectTokenImpl()
+{
+	m_holder = par_holder;
+}
 
 ObjectTokenImpl::ObjectTokenImpl(const ObjectTokenImpl & obj): ObjectTokenImpl()
 {
@@ -89,6 +95,7 @@ ObjectTokenImpl& ObjectTokenImpl::operator=(const ObjectTokenImpl & obj)
 
 	//copy references with no containment (soft copy)
 	//Clone references with containment (deep copy)
+	//clone reference 'value'
 	if(obj.getValue()!=nullptr)
 	{
 		m_value = std::dynamic_pointer_cast<fUML::Semantics::Values::Value>(obj.getValue()->copy());
@@ -155,7 +162,6 @@ Getter & Setter for reference value
 */
 std::shared_ptr<fUML::Semantics::Values::Value> ObjectTokenImpl::getValue() const
 {
-
     return m_value;
 }
 void ObjectTokenImpl::setValue(std::shared_ptr<fUML::Semantics::Values::Value> _value)
@@ -182,6 +188,10 @@ void ObjectTokenImpl::setThisObjectTokenPtr(std::weak_ptr<ObjectToken> thisObjec
 }
 std::shared_ptr<ecore::EObject> ObjectTokenImpl::eContainer() const
 {
+	if(auto wp = m_holder.lock())
+	{
+		return wp;
+	}
 	return nullptr;
 }
 

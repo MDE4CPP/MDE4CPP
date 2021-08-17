@@ -165,7 +165,6 @@ Getter & Setter for reference clause
 */
 std::shared_ptr<uml::Clause> ClauseActivationImpl::getClause() const
 {
-//assert(m_clause);
     return m_clause;
 }
 void ClauseActivationImpl::setClause(std::shared_ptr<uml::Clause> _clause)
@@ -180,7 +179,6 @@ Getter & Setter for reference conditionalNodeActivation
 */
 std::shared_ptr<fUML::Semantics::Actions::ConditionalNodeActivation> ClauseActivationImpl::getConditionalNodeActivation() const
 {
-//assert(m_conditionalNodeActivation);
     return m_conditionalNodeActivation;
 }
 void ClauseActivationImpl::setConditionalNodeActivation(std::shared_ptr<fUML::Semantics::Actions::ConditionalNodeActivation> _conditionalNodeActivation)

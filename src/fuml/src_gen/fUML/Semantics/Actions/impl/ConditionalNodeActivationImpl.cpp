@@ -104,24 +104,19 @@ ConditionalNodeActivationImpl& ConditionalNodeActivationImpl::operator=(const Co
 	//Clone Attributes with (deep copy)
 
 	//copy references with no containment (soft copy)
-	std::shared_ptr<Bag<uml::Clause>> _selectedClauses = obj.getSelectedClauses();
-	m_selectedClauses.reset(new Bag<uml::Clause>(*(obj.getSelectedClauses().get())));
+	m_selectedClauses  = obj.getSelectedClauses();
 	//Clone references with containment (deep copy)
-	std::shared_ptr<Bag<fUML::Semantics::Actions::ClauseActivation>> clauseActivationsContainer = getClauseActivations();
-	if(nullptr != clauseActivationsContainer )
+	//clone reference 'clauseActivations'
+	std::shared_ptr<Bag<fUML::Semantics::Actions::ClauseActivation>> clauseActivationsList = obj.getClauseActivations();
+	if(clauseActivationsList)
 	{
-		int size = clauseActivationsContainer->size();
-		for(int i=0; i<size ; i++)
+		Bag<fUML::Semantics::Actions::ClauseActivation>::iterator clauseActivationsIter = clauseActivationsList->begin();
+		Bag<fUML::Semantics::Actions::ClauseActivation>::iterator clauseActivationsEnd = clauseActivationsList->end();
+		while (clauseActivationsIter != clauseActivationsEnd) 
 		{
-			auto _clauseActivations=(*clauseActivationsContainer)[i];
-			if(nullptr != _clauseActivations)
-			{
-				clauseActivationsContainer->push_back(std::dynamic_pointer_cast<fUML::Semantics::Actions::ClauseActivation>(_clauseActivations->copy()));
-			}
-			else
-			{
-				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container clauseActivations."<< std::endl;)
-			}
+			std::shared_ptr<fUML::Semantics::Actions::ClauseActivation> temp = std::dynamic_pointer_cast<fUML::Semantics::Actions::ClauseActivation>((*clauseActivationsIter)->copy());
+			getClauseActivations()->push_back(temp);
+			clauseActivationsIter++;
 		}
 	}
 	else
@@ -184,7 +179,6 @@ std::shared_ptr<Bag<fUML::Semantics::Actions::ClauseActivation>> ConditionalNode
 		
 		
 	}
-
     return m_clauseActivations;
 }
 
@@ -201,7 +195,6 @@ std::shared_ptr<Bag<uml::Clause>> ConditionalNodeActivationImpl::getSelectedClau
 		
 		
 	}
-
     return m_selectedClauses;
 }
 

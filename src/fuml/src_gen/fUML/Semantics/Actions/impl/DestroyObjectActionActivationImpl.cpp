@@ -261,7 +261,6 @@ Getter & Setter for reference destroyObjectAction
 */
 std::shared_ptr<uml::DestroyObjectAction> DestroyObjectActionActivationImpl::getDestroyObjectAction() const
 {
-//assert(m_destroyObjectAction);
     return m_destroyObjectAction;
 }
 void DestroyObjectActionActivationImpl::setDestroyObjectAction(std::shared_ptr<uml::DestroyObjectAction> _destroyObjectAction)

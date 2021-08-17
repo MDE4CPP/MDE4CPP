@@ -133,7 +133,7 @@ namespace uml
 			Indicates whether the Pin provides data to the Action or just controls how the Action executes.
 			<p>From package UML::Actions.</p>
 			*/
-			 
+			
 			bool m_isControl = false;
 			
 			

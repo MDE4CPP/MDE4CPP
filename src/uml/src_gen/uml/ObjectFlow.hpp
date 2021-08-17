@@ -196,13 +196,13 @@ namespace uml
 			Indicates whether the objects in the ObjectFlow are passed by multicasting.
 			<p>From package UML::Activities.</p>
 			*/
-			 
+			
 			bool m_isMulticast = false;
 			/*!
 			Indicates whether the objects in the ObjectFlow are gathered from respondents to multicasting.
 			<p>From package UML::Activities.</p>
 			*/
-			 
+			
 			bool m_isMultireceive = false;
 			
 			

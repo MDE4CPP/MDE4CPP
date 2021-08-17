@@ -114,21 +114,17 @@ ExecutionImpl& ExecutionImpl::operator=(const ExecutionImpl & obj)
 	m_behavior  = obj.getBehavior();
 	m_context  = obj.getContext();
 	//Clone references with containment (deep copy)
-	std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> parameterValuesContainer = getParameterValues();
-	if(nullptr != parameterValuesContainer )
+	//clone reference 'parameterValues'
+	std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> parameterValuesList = obj.getParameterValues();
+	if(parameterValuesList)
 	{
-		int size = parameterValuesContainer->size();
-		for(int i=0; i<size ; i++)
+		Bag<fUML::Semantics::CommonBehavior::ParameterValue>::iterator parameterValuesIter = parameterValuesList->begin();
+		Bag<fUML::Semantics::CommonBehavior::ParameterValue>::iterator parameterValuesEnd = parameterValuesList->end();
+		while (parameterValuesIter != parameterValuesEnd) 
 		{
-			auto _parameterValues=(*parameterValuesContainer)[i];
-			if(nullptr != _parameterValues)
-			{
-				parameterValuesContainer->push_back(std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::ParameterValue>(_parameterValues->copy()));
-			}
-			else
-			{
-				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container parameterValues."<< std::endl;)
-			}
+			std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> temp = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::ParameterValue>((*parameterValuesIter)->copy());
+			getParameterValues()->push_back(temp);
+			parameterValuesIter++;
 		}
 	}
 	else
@@ -292,7 +288,6 @@ Getter & Setter for reference context
 */
 std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> ExecutionImpl::getContext() const
 {
-//assert(m_context);
     return m_context;
 }
 void ExecutionImpl::setContext(std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> _context)
@@ -313,7 +308,6 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> ExecutionI
 		
 		
 	}
-
     return m_parameterValues;
 }
 

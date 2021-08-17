@@ -183,7 +183,6 @@ Getter & Setter for reference readStructuralFeatureAction
 */
 std::shared_ptr<uml::ReadStructuralFeatureAction> ReadStructuralFeatureActionActivationImpl::getReadStructuralFeatureAction() const
 {
-//assert(m_readStructuralFeatureAction);
     return m_readStructuralFeatureAction;
 }
 void ReadStructuralFeatureActionActivationImpl::setReadStructuralFeatureAction(std::shared_ptr<uml::ReadStructuralFeatureAction> _readStructuralFeatureAction)

@@ -114,7 +114,7 @@ namespace ecore
 			//*********************************
 			// Attribute Members
 			//*********************************
-			 
+			
 			int m_metaElementID = 0;
 			
 			

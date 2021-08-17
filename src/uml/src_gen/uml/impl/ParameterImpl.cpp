@@ -142,9 +142,9 @@ ParameterImpl& ParameterImpl::operator=(const ParameterImpl & obj)
 	//copy references with no containment (soft copy)
 	m_behavior  = obj.getBehavior();
 	m_operation  = obj.getOperation();
-	std::shared_ptr<Bag<uml::ParameterSet>> _parameterSet = obj.getParameterSet();
-	m_parameterSet.reset(new Bag<uml::ParameterSet>(*(obj.getParameterSet().get())));
+	m_parameterSet  = obj.getParameterSet();
 	//Clone references with containment (deep copy)
+	//clone reference 'defaultValue'
 	if(obj.getDefaultValue()!=nullptr)
 	{
 		m_defaultValue = std::dynamic_pointer_cast<uml::ValueSpecification>(obj.getDefaultValue()->copy());
@@ -334,16 +334,11 @@ Getter & Setter for reference behavior
 */
 std::weak_ptr<uml::Behavior> ParameterImpl::getBehavior() const
 {
-
     return m_behavior;
 }
 void ParameterImpl::setBehavior(std::weak_ptr<uml::Behavior> _behavior)
 {
     m_behavior = _behavior;
-	m_namespace = this->getBehavior().lock();
-	m_owner = this->getNamespace().lock();
-	
-	
 	
 }
 
@@ -353,13 +348,11 @@ Getter & Setter for reference defaultValue
 */
 std::shared_ptr<uml::ValueSpecification> ParameterImpl::getDefaultValue() const
 {
-
     return m_defaultValue;
 }
 void ParameterImpl::setDefaultValue(std::shared_ptr<uml::ValueSpecification> _defaultValue)
 {
     m_defaultValue = _defaultValue;
-	
 	
 }
 
@@ -369,7 +362,6 @@ Getter & Setter for reference operation
 */
 std::weak_ptr<uml::Operation> ParameterImpl::getOperation() const
 {
-
     return m_operation;
 }
 
@@ -386,7 +378,6 @@ std::shared_ptr<Bag<uml::ParameterSet>> ParameterImpl::getParameterSet() const
 		
 		
 	}
-
     return m_parameterSet;
 }
 

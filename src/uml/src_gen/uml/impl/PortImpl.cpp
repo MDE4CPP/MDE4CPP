@@ -168,26 +168,20 @@ PortImpl& PortImpl::operator=(const PortImpl & obj)
 
 	//copy references with no containment (soft copy)
 	m_protocol  = obj.getProtocol();
-	std::shared_ptr<Bag<uml::Interface>> _provided = obj.getProvided();
-	m_provided.reset(new Bag<uml::Interface>(*(obj.getProvided().get())));
-	std::shared_ptr<Bag<uml::Interface>> _required = obj.getRequired();
-	m_required.reset(new Bag<uml::Interface>(*(obj.getRequired().get())));
+	m_provided  = obj.getProvided();
+	m_required  = obj.getRequired();
 	//Clone references with containment (deep copy)
-	std::shared_ptr<Subset<uml::Port, uml::Property /*Subset does not reference a union*/>> redefinedPortContainer = getRedefinedPort();
-	if(nullptr != redefinedPortContainer )
+	//clone reference 'redefinedPort'
+	std::shared_ptr<Subset<uml::Port, uml::Property /*Subset does not reference a union*/>> redefinedPortList = obj.getRedefinedPort();
+	if(redefinedPortList)
 	{
-		int size = redefinedPortContainer->size();
-		for(int i=0; i<size ; i++)
+		Bag<uml::Port>::iterator redefinedPortIter = redefinedPortList->begin();
+		Bag<uml::Port>::iterator redefinedPortEnd = redefinedPortList->end();
+		while (redefinedPortIter != redefinedPortEnd) 
 		{
-			auto _redefinedPort=(*redefinedPortContainer)[i];
-			if(nullptr != _redefinedPort)
-			{
-				redefinedPortContainer->push_back(std::dynamic_pointer_cast<uml::Port>(_redefinedPort->copy()));
-			}
-			else
-			{
-				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container redefinedPort."<< std::endl;)
-			}
+			std::shared_ptr<uml::Port> temp = std::dynamic_pointer_cast<uml::Port>((*redefinedPortIter)->copy());
+			getRedefinedPort()->push_back(temp);
+			redefinedPortIter++;
 		}
 	}
 	else
@@ -336,7 +330,6 @@ Getter & Setter for reference protocol
 */
 std::shared_ptr<uml::ProtocolStateMachine> PortImpl::getProtocol() const
 {
-
     return m_protocol;
 }
 void PortImpl::setProtocol(std::shared_ptr<uml::ProtocolStateMachine> _protocol)
@@ -357,7 +350,6 @@ std::shared_ptr<Bag<uml::Interface>> PortImpl::getProvided() const
 		
 		
 	}
-
     return m_provided;
 }
 
@@ -377,13 +369,12 @@ std::shared_ptr<Subset<uml::Port, uml::Property /*Subset does not reference a un
 		#endif
 		
 		/*Subset*/
-		m_redefinedPort->initSubset(getRedefinedProperty());
+		getRedefinedPort()->initSubset(getRedefinedProperty());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value Subset: " << "m_redefinedPort - Subset<uml::Port, uml::Property /*Subset does not reference a union*/ >(getRedefinedProperty())" << std::endl;
 		#endif
 		
 	}
-
     return m_redefinedPort;
 }
 
@@ -400,7 +391,6 @@ std::shared_ptr<Bag<uml::Interface>> PortImpl::getRequired() const
 		
 		
 	}
-
     return m_required;
 }
 

@@ -103,21 +103,17 @@ SlotImpl& SlotImpl::operator=(const SlotImpl & obj)
 	m_definingFeature  = obj.getDefiningFeature();
 	m_owningInstance  = obj.getOwningInstance();
 	//Clone references with containment (deep copy)
-	std::shared_ptr<Subset<uml::ValueSpecification, uml::Element>> valueContainer = getValue();
-	if(nullptr != valueContainer )
+	//clone reference 'value'
+	std::shared_ptr<Subset<uml::ValueSpecification, uml::Element>> valueList = obj.getValue();
+	if(valueList)
 	{
-		int size = valueContainer->size();
-		for(int i=0; i<size ; i++)
+		Bag<uml::ValueSpecification>::iterator valueIter = valueList->begin();
+		Bag<uml::ValueSpecification>::iterator valueEnd = valueList->end();
+		while (valueIter != valueEnd) 
 		{
-			auto _value=(*valueContainer)[i];
-			if(nullptr != _value)
-			{
-				valueContainer->push_back(std::dynamic_pointer_cast<uml::ValueSpecification>(_value->copy()));
-			}
-			else
-			{
-				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container value."<< std::endl;)
-			}
+			std::shared_ptr<uml::ValueSpecification> temp = std::dynamic_pointer_cast<uml::ValueSpecification>((*valueIter)->copy());
+			getValue()->push_back(temp);
+			valueIter++;
 		}
 	}
 	else
@@ -125,7 +121,7 @@ SlotImpl& SlotImpl::operator=(const SlotImpl & obj)
 		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr value."<< std::endl;)
 	}
 	/*Subset*/
-	m_value->initSubset(getOwnedElement());
+	getValue()->initSubset(getOwnedElement());
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Initialising value Subset: " << "m_value - Subset<uml::ValueSpecification, uml::Element >(getOwnedElement())" << std::endl;
 	#endif
@@ -162,7 +158,6 @@ Getter & Setter for reference definingFeature
 */
 std::shared_ptr<uml::StructuralFeature> SlotImpl::getDefiningFeature() const
 {
-//assert(m_definingFeature);
     return m_definingFeature;
 }
 void SlotImpl::setDefiningFeature(std::shared_ptr<uml::StructuralFeature> _definingFeature)
@@ -177,14 +172,11 @@ Getter & Setter for reference owningInstance
 */
 std::weak_ptr<uml::InstanceSpecification> SlotImpl::getOwningInstance() const
 {
-//assert(m_owningInstance);
     return m_owningInstance;
 }
 void SlotImpl::setOwningInstance(std::weak_ptr<uml::InstanceSpecification> _owningInstance)
 {
     m_owningInstance = _owningInstance;
-	m_owner = this->getOwningInstance().lock();
-	
 	
 }
 
@@ -203,13 +195,12 @@ std::shared_ptr<Subset<uml::ValueSpecification, uml::Element>> SlotImpl::getValu
 		#endif
 		
 		/*Subset*/
-		m_value->initSubset(getOwnedElement());
+		getValue()->initSubset(getOwnedElement());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value Subset: " << "m_value - Subset<uml::ValueSpecification, uml::Element >(getOwnedElement())" << std::endl;
 		#endif
 		
 	}
-
     return m_value;
 }
 

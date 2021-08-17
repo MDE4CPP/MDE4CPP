@@ -219,7 +219,6 @@ Getter & Setter for reference referredEnumLiteral
 */
 std::shared_ptr<uml::EnumerationLiteral> EnumLiteralExpImpl::getReferredEnumLiteral() const
 {
-
     return m_referredEnumLiteral;
 }
 void EnumLiteralExpImpl::setReferredEnumLiteral(std::shared_ptr<uml::EnumerationLiteral> _referredEnumLiteral)

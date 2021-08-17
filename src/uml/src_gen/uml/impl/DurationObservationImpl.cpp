@@ -119,21 +119,15 @@ DurationObservationImpl& DurationObservationImpl::operator=(const DurationObserv
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy DurationObservation "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
 	//Clone Attributes with (deep copy)
-	std::shared_ptr<Bag<bool>> firstEventContainer = isFirstEvent();
-	if(nullptr != firstEventContainer )
-	{
-		int size = firstEventContainer->size();
-		for(int i=0; i<size ; i++)
+	std::shared_ptr<Bag<bool>> firstEventList = obj.isFirstEvent();
+	if(firstEventList)
+	{	isFirstEvent().reset(new Bag<bool>());
+		Bag<bool>::iterator firstEventIter = firstEventList->begin();
+		Bag<bool>::iterator firstEventEnd = firstEventList->end();
+		while (firstEventIter != firstEventEnd) 
 		{
-			auto _firstEvent=(*firstEventContainer)[i];	
-			if(nullptr != _firstEvent)
-			{
-				firstEventContainer->push_back(_firstEvent);
-			} 
-			else
-			{
-				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container firstEvent."<< std::endl;)
-			}
+			isFirstEvent()->push_back(*firstEventIter);
+			firstEventIter++;
 		}
 	}
 	else
@@ -142,8 +136,7 @@ DurationObservationImpl& DurationObservationImpl::operator=(const DurationObserv
 	}
 
 	//copy references with no containment (soft copy)
-	std::shared_ptr<Bag<uml::NamedElement>> _event = obj.getEvent();
-	m_event.reset(new Bag<uml::NamedElement>(*(obj.getEvent().get())));
+	m_event  = obj.getEvent();
 	//Clone references with containment (deep copy)
 	return *this;
 }
@@ -201,7 +194,6 @@ std::shared_ptr<Bag<uml::NamedElement>> DurationObservationImpl::getEvent() cons
 		
 		
 	}
-//assert(m_event);
     return m_event;
 }
 

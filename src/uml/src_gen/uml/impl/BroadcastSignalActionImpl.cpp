@@ -184,7 +184,6 @@ Getter & Setter for reference signal
 */
 std::shared_ptr<uml::Signal> BroadcastSignalActionImpl::getSignal() const
 {
-//assert(m_signal);
     return m_signal;
 }
 void BroadcastSignalActionImpl::setSignal(std::shared_ptr<uml::Signal> _signal)
@@ -223,7 +222,7 @@ std::shared_ptr<SubsetUnion<uml::InputPin, uml::Element>> BroadcastSignalActionI
 		#endif
 		
 		/*SubsetUnion*/
-		m_input->initSubsetUnion(getOwnedElement());
+		getInput()->initSubsetUnion(getOwnedElement());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value SubsetUnion: " << "m_input - SubsetUnion<uml::InputPin, uml::Element >(getOwnedElement())" << std::endl;
 		#endif

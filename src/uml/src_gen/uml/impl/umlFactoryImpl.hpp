@@ -1804,7 +1804,8 @@ namespace uml
 			 virtual std::shared_ptr<Parameter> createParameter_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::PARAMETER_CLASS) const ;
 			 virtual std::shared_ptr<Parameter> createParameter_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::PARAMETER_CLASS) const ;
 			 virtual std::shared_ptr<Parameter> createParameter_as_ownedParameter_in_Behavior(std::weak_ptr<uml::Behavior> par_Behavior, const int metaElementID = umlPackage::PARAMETER_CLASS) const ;
-			 virtual std::shared_ptr<Parameter> createParameter_as_ownedParameter_in_BehavioralFeature(std::weak_ptr<uml::Operation> par_BehavioralFeature, const int metaElementID = umlPackage::PARAMETER_CLASS) const ;
+			 virtual std::shared_ptr<Parameter> createParameter_as_ownedParameter_in_Operation(std::weak_ptr<uml::Operation> par_Operation, const int metaElementID = umlPackage::PARAMETER_CLASS) const ;
+			 virtual std::shared_ptr<Parameter> createParameter_as_ownedParameter_in_BehavioralFeature(std::shared_ptr<BehavioralFeature> par_BehavioralFeature, const int metaElementID = umlPackage::PARAMETER_CLASS) const ;
 			 virtual std::shared_ptr<Parameter> createParameter_as_ownedParameteredElement_in_TemplateParameter(std::weak_ptr<uml::TemplateParameter> par_TemplateParameter, const int metaElementID = umlPackage::PARAMETER_CLASS) const ;
 			 virtual std::shared_ptr<ParameterSet> createParameterSet(const int metaElementID = umlPackage::PARAMETERSET_CLASS) const ;
 			 //Add as contained object
@@ -1832,6 +1833,7 @@ namespace uml
 			 virtual std::shared_ptr<Port> createPort_as_ownedEnd_in_Association(std::weak_ptr<uml::Association> par_Association, const int metaElementID = umlPackage::PORT_CLASS) const ;
 			 virtual std::shared_ptr<Port> createPort_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::PORT_CLASS) const ;
 			 virtual std::shared_ptr<Port> createPort_as_ownedParameteredElement_in_TemplateParameter(std::weak_ptr<uml::TemplateParameter> par_TemplateParameter, const int metaElementID = umlPackage::PORT_CLASS) const ;
+			 virtual std::shared_ptr<Port> createPort_as_ownedPort_in_EncapsulatedClassifier(std::shared_ptr<EncapsulatedClassifier> par_EncapsulatedClassifier, const int metaElementID = umlPackage::PORT_CLASS) const ;
 			 virtual std::shared_ptr<Port> createPort_as_qualifier_in_Property(std::weak_ptr<uml::Property> par_Property, const int metaElementID = umlPackage::PORT_CLASS) const ;
 			 virtual std::shared_ptr<PrimitiveType> createPrimitiveType(const int metaElementID = umlPackage::PRIMITIVETYPE_CLASS) const ;
 			 //Add as contained object

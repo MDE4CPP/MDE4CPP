@@ -128,36 +128,33 @@ InstanceSpecificationImpl& InstanceSpecificationImpl::operator=(const InstanceSp
 	//Clone Attributes with (deep copy)
 
 	//copy references with no containment (soft copy)
-	std::shared_ptr<Bag<uml::Classifier>> _classifier = obj.getClassifier();
-	m_classifier.reset(new Bag<uml::Classifier>(*(obj.getClassifier().get())));
+	m_classifier  = obj.getClassifier();
 	//Clone references with containment (deep copy)
-	std::shared_ptr<Subset<uml::Slot, uml::Element>> slotContainer = getSlot();
-	if(nullptr != slotContainer )
+	//clone reference 'slot'
+	std::shared_ptr<Subset<uml::Slot, uml::Element>> slotList = obj.getSlot();
+	if(slotList)
 	{
-		int size = slotContainer->size();
-		for(int i=0; i<size ; i++)
+		Bag<uml::Slot>::iterator slotIter = slotList->begin();
+		Bag<uml::Slot>::iterator slotEnd = slotList->end();
+		while (slotIter != slotEnd) 
 		{
-			auto _slot=(*slotContainer)[i];
-			if(nullptr != _slot)
-			{
-				slotContainer->push_back(std::dynamic_pointer_cast<uml::Slot>(_slot->copy()));
-			}
-			else
-			{
-				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container slot."<< std::endl;)
-			}
+			std::shared_ptr<uml::Slot> temp = std::dynamic_pointer_cast<uml::Slot>((*slotIter)->copy());
+			getSlot()->push_back(temp);
+			slotIter++;
 		}
 	}
 	else
 	{
 		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr slot."<< std::endl;)
 	}
+
+	//clone reference 'specification'
 	if(obj.getSpecification()!=nullptr)
 	{
 		m_specification = std::dynamic_pointer_cast<uml::ValueSpecification>(obj.getSpecification()->copy());
 	}
 	/*Subset*/
-	m_slot->initSubset(getOwnedElement());
+	getSlot()->initSubset(getOwnedElement());
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Initialising value Subset: " << "m_slot - Subset<uml::Slot, uml::Element >(getOwnedElement())" << std::endl;
 	#endif
@@ -224,7 +221,6 @@ std::shared_ptr<Bag<uml::Classifier>> InstanceSpecificationImpl::getClassifier()
 		
 		
 	}
-
     return m_classifier;
 }
 
@@ -244,13 +240,12 @@ std::shared_ptr<Subset<uml::Slot, uml::Element>> InstanceSpecificationImpl::getS
 		#endif
 		
 		/*Subset*/
-		m_slot->initSubset(getOwnedElement());
+		getSlot()->initSubset(getOwnedElement());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value Subset: " << "m_slot - Subset<uml::Slot, uml::Element >(getOwnedElement())" << std::endl;
 		#endif
 		
 	}
-
     return m_slot;
 }
 
@@ -261,13 +256,11 @@ Getter & Setter for reference specification
 */
 std::shared_ptr<uml::ValueSpecification> InstanceSpecificationImpl::getSpecification() const
 {
-
     return m_specification;
 }
 void InstanceSpecificationImpl::setSpecification(std::shared_ptr<uml::ValueSpecification> _specification)
 {
     m_specification = _specification;
-	
 	
 }
 

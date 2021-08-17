@@ -105,31 +105,31 @@ LocusImpl& LocusImpl::operator=(const LocusImpl & obj)
 
 	//copy references with no containment (soft copy)
 	//Clone references with containment (deep copy)
+	//clone reference 'executor'
 	if(obj.getExecutor()!=nullptr)
 	{
 		m_executor = std::dynamic_pointer_cast<fUML::Semantics::Loci::Executor>(obj.getExecutor()->copy());
 	}
-	std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::ExtensionalValue>> extensionalValuesContainer = getExtensionalValues();
-	if(nullptr != extensionalValuesContainer )
+
+	//clone reference 'extensionalValues'
+	std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::ExtensionalValue>> extensionalValuesList = obj.getExtensionalValues();
+	if(extensionalValuesList)
 	{
-		int size = extensionalValuesContainer->size();
-		for(int i=0; i<size ; i++)
+		Bag<fUML::Semantics::StructuredClassifiers::ExtensionalValue>::iterator extensionalValuesIter = extensionalValuesList->begin();
+		Bag<fUML::Semantics::StructuredClassifiers::ExtensionalValue>::iterator extensionalValuesEnd = extensionalValuesList->end();
+		while (extensionalValuesIter != extensionalValuesEnd) 
 		{
-			auto _extensionalValues=(*extensionalValuesContainer)[i];
-			if(nullptr != _extensionalValues)
-			{
-				extensionalValuesContainer->push_back(std::dynamic_pointer_cast<fUML::Semantics::StructuredClassifiers::ExtensionalValue>(_extensionalValues->copy()));
-			}
-			else
-			{
-				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container extensionalValues."<< std::endl;)
-			}
+			std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue> temp = std::dynamic_pointer_cast<fUML::Semantics::StructuredClassifiers::ExtensionalValue>((*extensionalValuesIter)->copy());
+			getExtensionalValues()->push_back(temp);
+			extensionalValuesIter++;
 		}
 	}
 	else
 	{
 		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr extensionalValues."<< std::endl;)
 	}
+
+	//clone reference 'factory'
 	if(obj.getFactory()!=nullptr)
 	{
 		m_factory = std::dynamic_pointer_cast<fUML::Semantics::Loci::ExecutionFactory>(obj.getFactory()->copy());
@@ -279,7 +279,6 @@ Getter & Setter for reference executor
 */
 std::shared_ptr<fUML::Semantics::Loci::Executor> LocusImpl::getExecutor() const
 {
-
     return m_executor;
 }
 void LocusImpl::setExecutor(std::shared_ptr<fUML::Semantics::Loci::Executor> _executor)
@@ -300,7 +299,6 @@ std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::ExtensionalValue>> L
 		
 		
 	}
-
     return m_extensionalValues;
 }
 
@@ -311,7 +309,6 @@ Getter & Setter for reference factory
 */
 std::shared_ptr<fUML::Semantics::Loci::ExecutionFactory> LocusImpl::getFactory() const
 {
-//assert(m_factory);
     return m_factory;
 }
 void LocusImpl::setFactory(std::shared_ptr<fUML::Semantics::Loci::ExecutionFactory> _factory)

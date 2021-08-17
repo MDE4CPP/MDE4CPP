@@ -161,105 +161,89 @@ StructuredActivityNodeImpl& StructuredActivityNodeImpl::operator=(const Structur
 
 	//copy references with no containment (soft copy)
 	//Clone references with containment (deep copy)
-	std::shared_ptr<Subset<uml::ActivityEdge, uml::ActivityEdge,uml::Element>> edgeContainer = getEdge();
-	if(nullptr != edgeContainer )
+	//clone reference 'edge'
+	std::shared_ptr<Subset<uml::ActivityEdge, uml::ActivityEdge, uml::Element>> edgeList = obj.getEdge();
+	if(edgeList)
 	{
-		int size = edgeContainer->size();
-		for(int i=0; i<size ; i++)
+		Bag<uml::ActivityEdge>::iterator edgeIter = edgeList->begin();
+		Bag<uml::ActivityEdge>::iterator edgeEnd = edgeList->end();
+		while (edgeIter != edgeEnd) 
 		{
-			auto _edge=(*edgeContainer)[i];
-			if(nullptr != _edge)
-			{
-				edgeContainer->push_back(std::dynamic_pointer_cast<uml::ActivityEdge>(_edge->copy()));
-			}
-			else
-			{
-				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container edge."<< std::endl;)
-			}
+			std::shared_ptr<uml::ActivityEdge> temp = std::dynamic_pointer_cast<uml::ActivityEdge>((*edgeIter)->copy());
+			getEdge()->push_back(temp);
+			edgeIter++;
 		}
 	}
 	else
 	{
 		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr edge."<< std::endl;)
 	}
-	std::shared_ptr<Subset<uml::ActivityNode, uml::ActivityNode,uml::Element>> nodeContainer = getNode();
-	if(nullptr != nodeContainer )
+
+	//clone reference 'node'
+	std::shared_ptr<Subset<uml::ActivityNode, uml::ActivityNode, uml::Element>> nodeList = obj.getNode();
+	if(nodeList)
 	{
-		int size = nodeContainer->size();
-		for(int i=0; i<size ; i++)
+		Bag<uml::ActivityNode>::iterator nodeIter = nodeList->begin();
+		Bag<uml::ActivityNode>::iterator nodeEnd = nodeList->end();
+		while (nodeIter != nodeEnd) 
 		{
-			auto _node=(*nodeContainer)[i];
-			if(nullptr != _node)
-			{
-				nodeContainer->push_back(std::dynamic_pointer_cast<uml::ActivityNode>(_node->copy()));
-			}
-			else
-			{
-				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container node."<< std::endl;)
-			}
+			std::shared_ptr<uml::ActivityNode> temp = std::dynamic_pointer_cast<uml::ActivityNode>((*nodeIter)->copy());
+			getNode()->push_back(temp);
+			nodeIter++;
 		}
 	}
 	else
 	{
 		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr node."<< std::endl;)
 	}
-	std::shared_ptr<Subset<uml::InputPin, uml::InputPin>> structuredNodeInputContainer = getStructuredNodeInput();
-	if(nullptr != structuredNodeInputContainer )
+
+	//clone reference 'structuredNodeInput'
+	std::shared_ptr<Subset<uml::InputPin, uml::InputPin>> structuredNodeInputList = obj.getStructuredNodeInput();
+	if(structuredNodeInputList)
 	{
-		int size = structuredNodeInputContainer->size();
-		for(int i=0; i<size ; i++)
+		Bag<uml::InputPin>::iterator structuredNodeInputIter = structuredNodeInputList->begin();
+		Bag<uml::InputPin>::iterator structuredNodeInputEnd = structuredNodeInputList->end();
+		while (structuredNodeInputIter != structuredNodeInputEnd) 
 		{
-			auto _structuredNodeInput=(*structuredNodeInputContainer)[i];
-			if(nullptr != _structuredNodeInput)
-			{
-				structuredNodeInputContainer->push_back(std::dynamic_pointer_cast<uml::InputPin>(_structuredNodeInput->copy()));
-			}
-			else
-			{
-				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container structuredNodeInput."<< std::endl;)
-			}
+			std::shared_ptr<uml::InputPin> temp = std::dynamic_pointer_cast<uml::InputPin>((*structuredNodeInputIter)->copy());
+			getStructuredNodeInput()->push_back(temp);
+			structuredNodeInputIter++;
 		}
 	}
 	else
 	{
 		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr structuredNodeInput."<< std::endl;)
 	}
-	std::shared_ptr<Subset<uml::OutputPin, uml::OutputPin>> structuredNodeOutputContainer = getStructuredNodeOutput();
-	if(nullptr != structuredNodeOutputContainer )
+
+	//clone reference 'structuredNodeOutput'
+	std::shared_ptr<Subset<uml::OutputPin, uml::OutputPin>> structuredNodeOutputList = obj.getStructuredNodeOutput();
+	if(structuredNodeOutputList)
 	{
-		int size = structuredNodeOutputContainer->size();
-		for(int i=0; i<size ; i++)
+		Bag<uml::OutputPin>::iterator structuredNodeOutputIter = structuredNodeOutputList->begin();
+		Bag<uml::OutputPin>::iterator structuredNodeOutputEnd = structuredNodeOutputList->end();
+		while (structuredNodeOutputIter != structuredNodeOutputEnd) 
 		{
-			auto _structuredNodeOutput=(*structuredNodeOutputContainer)[i];
-			if(nullptr != _structuredNodeOutput)
-			{
-				structuredNodeOutputContainer->push_back(std::dynamic_pointer_cast<uml::OutputPin>(_structuredNodeOutput->copy()));
-			}
-			else
-			{
-				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container structuredNodeOutput."<< std::endl;)
-			}
+			std::shared_ptr<uml::OutputPin> temp = std::dynamic_pointer_cast<uml::OutputPin>((*structuredNodeOutputIter)->copy());
+			getStructuredNodeOutput()->push_back(temp);
+			structuredNodeOutputIter++;
 		}
 	}
 	else
 	{
 		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr structuredNodeOutput."<< std::endl;)
 	}
-	std::shared_ptr<Subset<uml::Variable, uml::NamedElement>> variableContainer = getVariable();
-	if(nullptr != variableContainer )
+
+	//clone reference 'variable'
+	std::shared_ptr<Subset<uml::Variable, uml::NamedElement>> variableList = obj.getVariable();
+	if(variableList)
 	{
-		int size = variableContainer->size();
-		for(int i=0; i<size ; i++)
+		Bag<uml::Variable>::iterator variableIter = variableList->begin();
+		Bag<uml::Variable>::iterator variableEnd = variableList->end();
+		while (variableIter != variableEnd) 
 		{
-			auto _variable=(*variableContainer)[i];
-			if(nullptr != _variable)
-			{
-				variableContainer->push_back(std::dynamic_pointer_cast<uml::Variable>(_variable->copy()));
-			}
-			else
-			{
-				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container variable."<< std::endl;)
-			}
+			std::shared_ptr<uml::Variable> temp = std::dynamic_pointer_cast<uml::Variable>((*variableIter)->copy());
+			getVariable()->push_back(temp);
+			variableIter++;
 		}
 	}
 	else
@@ -267,31 +251,31 @@ StructuredActivityNodeImpl& StructuredActivityNodeImpl::operator=(const Structur
 		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr variable."<< std::endl;)
 	}
 	/*Subset*/
-	m_edge->initSubset(getContainedEdge(),getOwnedElement());
+	getEdge()->initSubset(getContainedEdge(), getOwnedElement());
 	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Initialising value Subset: " << "m_edge - Subset<uml::ActivityEdge, uml::ActivityEdge,uml::Element >(getContainedEdge(),getOwnedElement())" << std::endl;
+		std::cout << "Initialising value Subset: " << "m_edge - Subset<uml::ActivityEdge, uml::ActivityEdge, uml::Element >(getContainedEdge(), getOwnedElement())" << std::endl;
 	#endif
 	
 	/*Subset*/
-	m_node->initSubset(getContainedNode(),getOwnedElement());
+	getNode()->initSubset(getContainedNode(), getOwnedElement());
 	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Initialising value Subset: " << "m_node - Subset<uml::ActivityNode, uml::ActivityNode,uml::Element >(getContainedNode(),getOwnedElement())" << std::endl;
+		std::cout << "Initialising value Subset: " << "m_node - Subset<uml::ActivityNode, uml::ActivityNode, uml::Element >(getContainedNode(), getOwnedElement())" << std::endl;
 	#endif
 	
 	/*Subset*/
-	m_structuredNodeInput->initSubset(getInput());
+	getStructuredNodeInput()->initSubset(getInput());
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Initialising value Subset: " << "m_structuredNodeInput - Subset<uml::InputPin, uml::InputPin >(getInput())" << std::endl;
 	#endif
 	
 	/*Subset*/
-	m_structuredNodeOutput->initSubset(getOutput());
+	getStructuredNodeOutput()->initSubset(getOutput());
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Initialising value Subset: " << "m_structuredNodeOutput - Subset<uml::OutputPin, uml::OutputPin >(getOutput())" << std::endl;
 	#endif
 	
 	/*Subset*/
-	m_variable->initSubset(getOwnedMember());
+	getVariable()->initSubset(getOwnedMember());
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Initialising value Subset: " << "m_variable - Subset<uml::Variable, uml::NamedElement >(getOwnedMember())" << std::endl;
 	#endif
@@ -368,24 +352,23 @@ std::shared_ptr<Bag<uml::ActivityNode> > StructuredActivityNodeImpl::targetNodes
 /*
 Getter & Setter for reference edge
 */
-std::shared_ptr<Subset<uml::ActivityEdge, uml::ActivityEdge,uml::Element>> StructuredActivityNodeImpl::getEdge() const
+std::shared_ptr<Subset<uml::ActivityEdge, uml::ActivityEdge, uml::Element>> StructuredActivityNodeImpl::getEdge() const
 {
 	if(m_edge == nullptr)
 	{
 		/*Subset*/
-		m_edge.reset(new Subset<uml::ActivityEdge, uml::ActivityEdge,uml::Element >());
+		m_edge.reset(new Subset<uml::ActivityEdge, uml::ActivityEdge, uml::Element >());
 		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer Subset: " << "m_edge - Subset<uml::ActivityEdge, uml::ActivityEdge,uml::Element >()" << std::endl;
+			std::cout << "Initialising shared pointer Subset: " << "m_edge - Subset<uml::ActivityEdge, uml::ActivityEdge, uml::Element >()" << std::endl;
 		#endif
 		
 		/*Subset*/
-		m_edge->initSubset(getContainedEdge(),getOwnedElement());
+		getEdge()->initSubset(getContainedEdge(), getOwnedElement());
 		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_edge - Subset<uml::ActivityEdge, uml::ActivityEdge,uml::Element >(getContainedEdge(),getOwnedElement())" << std::endl;
+			std::cout << "Initialising value Subset: " << "m_edge - Subset<uml::ActivityEdge, uml::ActivityEdge, uml::Element >(getContainedEdge(), getOwnedElement())" << std::endl;
 		#endif
 		
 	}
-
     return m_edge;
 }
 
@@ -394,24 +377,23 @@ std::shared_ptr<Subset<uml::ActivityEdge, uml::ActivityEdge,uml::Element>> Struc
 /*
 Getter & Setter for reference node
 */
-std::shared_ptr<Subset<uml::ActivityNode, uml::ActivityNode,uml::Element>> StructuredActivityNodeImpl::getNode() const
+std::shared_ptr<Subset<uml::ActivityNode, uml::ActivityNode, uml::Element>> StructuredActivityNodeImpl::getNode() const
 {
 	if(m_node == nullptr)
 	{
 		/*Subset*/
-		m_node.reset(new Subset<uml::ActivityNode, uml::ActivityNode,uml::Element >());
+		m_node.reset(new Subset<uml::ActivityNode, uml::ActivityNode, uml::Element >());
 		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer Subset: " << "m_node - Subset<uml::ActivityNode, uml::ActivityNode,uml::Element >()" << std::endl;
+			std::cout << "Initialising shared pointer Subset: " << "m_node - Subset<uml::ActivityNode, uml::ActivityNode, uml::Element >()" << std::endl;
 		#endif
 		
 		/*Subset*/
-		m_node->initSubset(getContainedNode(),getOwnedElement());
+		getNode()->initSubset(getContainedNode(), getOwnedElement());
 		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_node - Subset<uml::ActivityNode, uml::ActivityNode,uml::Element >(getContainedNode(),getOwnedElement())" << std::endl;
+			std::cout << "Initialising value Subset: " << "m_node - Subset<uml::ActivityNode, uml::ActivityNode, uml::Element >(getContainedNode(), getOwnedElement())" << std::endl;
 		#endif
 		
 	}
-
     return m_node;
 }
 
@@ -431,13 +413,12 @@ std::shared_ptr<Subset<uml::InputPin, uml::InputPin>> StructuredActivityNodeImpl
 		#endif
 		
 		/*Subset*/
-		m_structuredNodeInput->initSubset(getInput());
+		getStructuredNodeInput()->initSubset(getInput());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value Subset: " << "m_structuredNodeInput - Subset<uml::InputPin, uml::InputPin >(getInput())" << std::endl;
 		#endif
 		
 	}
-
     return m_structuredNodeInput;
 }
 
@@ -457,13 +438,12 @@ std::shared_ptr<Subset<uml::OutputPin, uml::OutputPin>> StructuredActivityNodeIm
 		#endif
 		
 		/*Subset*/
-		m_structuredNodeOutput->initSubset(getOutput());
+		getStructuredNodeOutput()->initSubset(getOutput());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value Subset: " << "m_structuredNodeOutput - Subset<uml::OutputPin, uml::OutputPin >(getOutput())" << std::endl;
 		#endif
 		
 	}
-
     return m_structuredNodeOutput;
 }
 
@@ -483,13 +463,12 @@ std::shared_ptr<Subset<uml::Variable, uml::NamedElement>> StructuredActivityNode
 		#endif
 		
 		/*Subset*/
-		m_variable->initSubset(getOwnedMember());
+		getVariable()->initSubset(getOwnedMember());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value Subset: " << "m_variable - Subset<uml::Variable, uml::NamedElement >(getOwnedMember())" << std::endl;
 		#endif
 		
 	}
-
     return m_variable;
 }
 
@@ -554,7 +533,7 @@ std::shared_ptr<SubsetUnion<uml::InputPin, uml::Element>> StructuredActivityNode
 		#endif
 		
 		/*SubsetUnion*/
-		m_input->initSubsetUnion(getOwnedElement());
+		getInput()->initSubsetUnion(getOwnedElement());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value SubsetUnion: " << "m_input - SubsetUnion<uml::InputPin, uml::Element >(getOwnedElement())" << std::endl;
 		#endif
@@ -589,7 +568,7 @@ std::shared_ptr<SubsetUnion<uml::OutputPin, uml::Element>> StructuredActivityNod
 		#endif
 		
 		/*SubsetUnion*/
-		m_output->initSubsetUnion(getOwnedElement());
+		getOutput()->initSubsetUnion(getOwnedElement());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value SubsetUnion: " << "m_output - SubsetUnion<uml::OutputPin, uml::Element >(getOwnedElement())" << std::endl;
 		#endif
@@ -613,20 +592,20 @@ std::shared_ptr<Union<uml::Element>> StructuredActivityNodeImpl::getOwnedElement
 	return m_ownedElement;
 }
 
-std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement>> StructuredActivityNodeImpl::getOwnedMember() const
+std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement>> StructuredActivityNodeImpl::getOwnedMember() const
 {
 	if(m_ownedMember == nullptr)
 	{
 		/*SubsetUnion*/
-		m_ownedMember.reset(new SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement >());
+		m_ownedMember.reset(new SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement >());
 		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement >()" << std::endl;
+			std::cout << "Initialising shared pointer SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement >()" << std::endl;
 		#endif
 		
 		/*SubsetUnion*/
-		m_ownedMember->initSubsetUnion(getOwnedElement(),getMember());
+		getOwnedMember()->initSubsetUnion(getOwnedElement(), getMember());
 		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement >(getOwnedElement(),getMember())" << std::endl;
+			std::cout << "Initialising value SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement >(getOwnedElement(), getMember())" << std::endl;
 		#endif
 		
 	}

@@ -168,7 +168,6 @@ Getter & Setter for reference callBehaviorAction
 */
 std::shared_ptr<uml::CallBehaviorAction> CallBehaviorActionActivationImpl::getCallBehaviorAction() const
 {
-//assert(m_callBehaviorAction);
     return m_callBehaviorAction;
 }
 void CallBehaviorActionActivationImpl::setCallBehaviorAction(std::shared_ptr<uml::CallBehaviorAction> _callBehaviorAction)

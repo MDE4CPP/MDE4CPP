@@ -195,8 +195,8 @@ std::shared_ptr<uml::ValueSpecification> StructuredValueImpl::specify()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-		std::shared_ptr<uml::InstanceValue> instanceValue = uml::umlFactory::eInstance()->createInstanceValue_in_Namespace(std::shared_ptr<uml::Class>());
-	std::shared_ptr<uml::InstanceSpecification> instance = uml::umlFactory::eInstance()->createInstanceSpecification_in_Namespace(std::shared_ptr<uml::Class>());
+		std::shared_ptr<uml::InstanceValue> instanceValue = uml::umlFactory::eInstance()->createInstanceValue_as_ownedMember_in_Namespace(std::shared_ptr<uml::Class>());
+	std::shared_ptr<uml::InstanceSpecification> instance = uml::umlFactory::eInstance()->createInstanceSpecification_as_ownedMember_in_Namespace(std::shared_ptr<uml::Class>());
 
     instanceValue->setType(nullptr);
     instanceValue->setInstance(instance);
@@ -210,7 +210,7 @@ std::shared_ptr<uml::ValueSpecification> StructuredValueImpl::specify()
     {
     	std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> featureValue = featureValues->at(i);
 
-    	std::shared_ptr<uml::Slot> slot = uml::umlFactory::eInstance()->createSlot_in_OwningInstance(std::shared_ptr<uml::InstanceSpecification>());
+    	std::shared_ptr<uml::Slot> slot = uml::umlFactory::eInstance()->createSlot_as_slot_in_InstanceSpecification(std::shared_ptr<uml::InstanceSpecification>());
         slot->setDefiningFeature(featureValue->getFeature());
 
         // Debug.println("[specify] feature = " + featureValue.feature.name

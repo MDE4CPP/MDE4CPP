@@ -122,10 +122,8 @@ ActivityGroupImpl& ActivityGroupImpl::operator=(const ActivityGroupImpl & obj)
 	//Clone Attributes with (deep copy)
 
 	//copy references with no containment (soft copy)
-	std::shared_ptr<Union<uml::ActivityEdge>> _containedEdge = obj.getContainedEdge();
-	m_containedEdge.reset(new Union<uml::ActivityEdge>(*(obj.getContainedEdge().get())));
-	std::shared_ptr<Union<uml::ActivityNode>> _containedNode = obj.getContainedNode();
-	m_containedNode.reset(new Union<uml::ActivityNode>(*(obj.getContainedNode().get())));
+	m_containedEdge  = obj.getContainedEdge();
+	m_containedNode  = obj.getContainedNode();
 	m_inActivity  = obj.getInActivity();
 	m_superGroup  = obj.getSuperGroup();
 	//Clone references with containment (deep copy)
@@ -192,14 +190,11 @@ Getter & Setter for reference inActivity
 */
 std::weak_ptr<uml::Activity> ActivityGroupImpl::getInActivity() const
 {
-
     return m_inActivity;
 }
 void ActivityGroupImpl::setInActivity(std::weak_ptr<uml::Activity> _inActivity)
 {
     m_inActivity = _inActivity;
-	m_owner = this->getInActivity().lock();
-	
 	
 }
 
@@ -282,7 +277,7 @@ std::shared_ptr<SubsetUnion<uml::ActivityGroup, uml::Element>> ActivityGroupImpl
 		#endif
 		
 		/*SubsetUnion*/
-		m_subgroup->initSubsetUnion(getOwnedElement());
+		getSubgroup()->initSubsetUnion(getOwnedElement());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value SubsetUnion: " << "m_subgroup - SubsetUnion<uml::ActivityGroup, uml::Element >(getOwnedElement())" << std::endl;
 		#endif

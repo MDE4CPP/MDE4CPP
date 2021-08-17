@@ -115,12 +115,7 @@ namespace uml
 			//*********************************
 			// Reference Members
 			//*********************************
-			/*!
-			The ordered set of ExecutableNodes to be sequenced.
-			<p>From package UML::Actions.</p>
-			*/
 			
-			mutable std::shared_ptr<Bag<uml::ExecutableNode>> m_executableNode;
 
 		public:
 			//*********************************
@@ -166,7 +161,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement>> getOwnedMember() const = 0;/*!
+			virtual std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement>> getOwnedMember() const = 0;/*!
 			The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/

@@ -230,7 +230,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			mutable std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement>> m_ownedMember;/*!
+			mutable std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement>> m_ownedMember;/*!
 			Specifies a set of Constraints owned by this Namespace.
 			<p>From package UML::CommonStructure.</p>
 			*/
@@ -261,7 +261,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement>> getOwnedMember() const = 0;/*!
+			virtual std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement>> getOwnedMember() const = 0;/*!
 			The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/

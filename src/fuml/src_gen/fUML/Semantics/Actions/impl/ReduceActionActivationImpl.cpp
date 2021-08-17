@@ -139,7 +139,6 @@ Getter & Setter for reference currentExecution
 */
 std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> ReduceActionActivationImpl::getCurrentExecution() const
 {
-
     return m_currentExecution;
 }
 void ReduceActionActivationImpl::setCurrentExecution(std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> _currentExecution)

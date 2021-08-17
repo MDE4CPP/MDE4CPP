@@ -130,21 +130,21 @@ namespace uml
 			<p>From package UML::SimpleClassifiers.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::Property, uml::Property,uml::NamedElement>> getOwnedAttribute() const = 0;
+			virtual std::shared_ptr<Subset<uml::Property, uml::NamedElement, uml::Property>> getOwnedAttribute() const = 0;
 			
 			/*!
 			The Operations owned by the Interface.
 			<p>From package UML::SimpleClassifiers.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::Operation, uml::Feature,uml::NamedElement>> getOwnedOperation() const = 0;
+			virtual std::shared_ptr<Subset<uml::Operation, uml::Feature, uml::NamedElement>> getOwnedOperation() const = 0;
 			
 			/*!
 			Receptions that objects providing this Interface are willing to accept.
 			<p>From package UML::SimpleClassifiers.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::Reception, uml::Feature,uml::NamedElement>> getOwnedReception() const = 0;
+			virtual std::shared_ptr<Subset<uml::Reception, uml::Feature, uml::NamedElement>> getOwnedReception() const = 0;
 			
 			/*!
 			References a ProtocolStateMachine specifying the legal sequences of the invocation of the BehavioralFeatures described in the Interface.
@@ -186,17 +186,17 @@ namespace uml
 			<p>From package UML::SimpleClassifiers.</p>
 			*/
 			
-			mutable std::shared_ptr<Subset<uml::Property, uml::Property,uml::NamedElement>> m_ownedAttribute;/*!
+			mutable std::shared_ptr<Subset<uml::Property, uml::NamedElement, uml::Property>> m_ownedAttribute;/*!
 			The Operations owned by the Interface.
 			<p>From package UML::SimpleClassifiers.</p>
 			*/
 			
-			mutable std::shared_ptr<Subset<uml::Operation, uml::Feature,uml::NamedElement>> m_ownedOperation;/*!
+			mutable std::shared_ptr<Subset<uml::Operation, uml::Feature, uml::NamedElement>> m_ownedOperation;/*!
 			Receptions that objects providing this Interface are willing to accept.
 			<p>From package UML::SimpleClassifiers.</p>
 			*/
 			
-			mutable std::shared_ptr<Subset<uml::Reception, uml::Feature,uml::NamedElement>> m_ownedReception;/*!
+			mutable std::shared_ptr<Subset<uml::Reception, uml::Feature, uml::NamedElement>> m_ownedReception;/*!
 			References a ProtocolStateMachine specifying the legal sequences of the invocation of the BehavioralFeatures described in the Interface.
 			<p>From package UML::SimpleClassifiers.</p>
 			*/
@@ -242,7 +242,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement>> getOwnedMember() const = 0;/*!
+			virtual std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement>> getOwnedMember() const = 0;/*!
 			The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/

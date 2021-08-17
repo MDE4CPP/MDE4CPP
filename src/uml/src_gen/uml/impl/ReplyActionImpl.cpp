@@ -134,33 +134,31 @@ ReplyActionImpl& ReplyActionImpl::operator=(const ReplyActionImpl & obj)
 	//copy references with no containment (soft copy)
 	m_replyToCall  = obj.getReplyToCall();
 	//Clone references with containment (deep copy)
-	std::shared_ptr<Subset<uml::InputPin, uml::InputPin>> replyValueContainer = getReplyValue();
-	if(nullptr != replyValueContainer )
+	//clone reference 'replyValue'
+	std::shared_ptr<Subset<uml::InputPin, uml::InputPin>> replyValueList = obj.getReplyValue();
+	if(replyValueList)
 	{
-		int size = replyValueContainer->size();
-		for(int i=0; i<size ; i++)
+		Bag<uml::InputPin>::iterator replyValueIter = replyValueList->begin();
+		Bag<uml::InputPin>::iterator replyValueEnd = replyValueList->end();
+		while (replyValueIter != replyValueEnd) 
 		{
-			auto _replyValue=(*replyValueContainer)[i];
-			if(nullptr != _replyValue)
-			{
-				replyValueContainer->push_back(std::dynamic_pointer_cast<uml::InputPin>(_replyValue->copy()));
-			}
-			else
-			{
-				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container replyValue."<< std::endl;)
-			}
+			std::shared_ptr<uml::InputPin> temp = std::dynamic_pointer_cast<uml::InputPin>((*replyValueIter)->copy());
+			getReplyValue()->push_back(temp);
+			replyValueIter++;
 		}
 	}
 	else
 	{
 		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr replyValue."<< std::endl;)
 	}
+
+	//clone reference 'returnInformation'
 	if(obj.getReturnInformation()!=nullptr)
 	{
 		m_returnInformation = std::dynamic_pointer_cast<uml::InputPin>(obj.getReturnInformation()->copy());
 	}
 	/*Subset*/
-	m_replyValue->initSubset(getInput());
+	getReplyValue()->initSubset(getInput());
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Initialising value Subset: " << "m_replyValue - Subset<uml::InputPin, uml::InputPin >(getInput())" << std::endl;
 	#endif
@@ -209,7 +207,6 @@ Getter & Setter for reference replyToCall
 */
 std::shared_ptr<uml::Trigger> ReplyActionImpl::getReplyToCall() const
 {
-//assert(m_replyToCall);
     return m_replyToCall;
 }
 void ReplyActionImpl::setReplyToCall(std::shared_ptr<uml::Trigger> _replyToCall)
@@ -233,13 +230,12 @@ std::shared_ptr<Subset<uml::InputPin, uml::InputPin>> ReplyActionImpl::getReplyV
 		#endif
 		
 		/*Subset*/
-		m_replyValue->initSubset(getInput());
+		getReplyValue()->initSubset(getInput());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value Subset: " << "m_replyValue - Subset<uml::InputPin, uml::InputPin >(getInput())" << std::endl;
 		#endif
 		
 	}
-
     return m_replyValue;
 }
 
@@ -250,14 +246,11 @@ Getter & Setter for reference returnInformation
 */
 std::shared_ptr<uml::InputPin> ReplyActionImpl::getReturnInformation() const
 {
-//assert(m_returnInformation);
     return m_returnInformation;
 }
 void ReplyActionImpl::setReturnInformation(std::shared_ptr<uml::InputPin> _returnInformation)
 {
     m_returnInformation = _returnInformation;
-	
-	
 	
 }
 
@@ -291,7 +284,7 @@ std::shared_ptr<SubsetUnion<uml::InputPin, uml::Element>> ReplyActionImpl::getIn
 		#endif
 		
 		/*SubsetUnion*/
-		m_input->initSubsetUnion(getOwnedElement());
+		getInput()->initSubsetUnion(getOwnedElement());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value SubsetUnion: " << "m_input - SubsetUnion<uml::InputPin, uml::Element >(getOwnedElement())" << std::endl;
 		#endif

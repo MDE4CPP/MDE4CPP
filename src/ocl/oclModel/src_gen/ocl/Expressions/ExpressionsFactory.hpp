@@ -16,13 +16,6 @@
 #include "ecore/EFactory.hpp"
 #include "ocl/Expressions/ExpressionsPackage.hpp"
 
-namespace ocl::Expressions 
-{
-	class CollectionLiteralPart;
-	class OclExpression;
-	class TupleLiteralPart;
-	class Variable;
-}
 
 
 

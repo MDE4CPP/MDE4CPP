@@ -142,7 +142,7 @@ namespace uml
 			Indicates whether it is possible to further redefine a RedefinableElement. If the value is true, then it is not possible to further redefine the RedefinableElement.
 			<p>From package UML::Classification.</p>
 			*/
-			 
+			
 			bool m_isLeaf = false;
 			
 			

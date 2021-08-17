@@ -105,21 +105,17 @@ CollaborationUseImpl& CollaborationUseImpl::operator=(const CollaborationUseImpl
 	//copy references with no containment (soft copy)
 	m_type  = obj.getType();
 	//Clone references with containment (deep copy)
-	std::shared_ptr<Subset<uml::Dependency, uml::Element>> roleBindingContainer = getRoleBinding();
-	if(nullptr != roleBindingContainer )
+	//clone reference 'roleBinding'
+	std::shared_ptr<Subset<uml::Dependency, uml::Element>> roleBindingList = obj.getRoleBinding();
+	if(roleBindingList)
 	{
-		int size = roleBindingContainer->size();
-		for(int i=0; i<size ; i++)
+		Bag<uml::Dependency>::iterator roleBindingIter = roleBindingList->begin();
+		Bag<uml::Dependency>::iterator roleBindingEnd = roleBindingList->end();
+		while (roleBindingIter != roleBindingEnd) 
 		{
-			auto _roleBinding=(*roleBindingContainer)[i];
-			if(nullptr != _roleBinding)
-			{
-				roleBindingContainer->push_back(std::dynamic_pointer_cast<uml::Dependency>(_roleBinding->copy()));
-			}
-			else
-			{
-				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container roleBinding."<< std::endl;)
-			}
+			std::shared_ptr<uml::Dependency> temp = std::dynamic_pointer_cast<uml::Dependency>((*roleBindingIter)->copy());
+			getRoleBinding()->push_back(temp);
+			roleBindingIter++;
 		}
 	}
 	else
@@ -127,7 +123,7 @@ CollaborationUseImpl& CollaborationUseImpl::operator=(const CollaborationUseImpl
 		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr roleBinding."<< std::endl;)
 	}
 	/*Subset*/
-	m_roleBinding->initSubset(getOwnedElement());
+	getRoleBinding()->initSubset(getOwnedElement());
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Initialising value Subset: " << "m_roleBinding - Subset<uml::Dependency, uml::Element >(getOwnedElement())" << std::endl;
 	#endif
@@ -190,13 +186,12 @@ std::shared_ptr<Subset<uml::Dependency, uml::Element>> CollaborationUseImpl::get
 		#endif
 		
 		/*Subset*/
-		m_roleBinding->initSubset(getOwnedElement());
+		getRoleBinding()->initSubset(getOwnedElement());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value Subset: " << "m_roleBinding - Subset<uml::Dependency, uml::Element >(getOwnedElement())" << std::endl;
 		#endif
 		
 	}
-
     return m_roleBinding;
 }
 
@@ -207,7 +202,6 @@ Getter & Setter for reference type
 */
 std::shared_ptr<uml::Collaboration> CollaborationUseImpl::getType() const
 {
-//assert(m_type);
     return m_type;
 }
 void CollaborationUseImpl::setType(std::shared_ptr<uml::Collaboration> _type)

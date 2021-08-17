@@ -284,13 +284,13 @@ namespace uml
 			The derived kind of the Message (complete, lost, found, or unknown).
 			<p>From package UML::Interactions.</p>
 			*/
-			 
+			
 			uml::MessageKind m_messageKind = MessageKind::UNKNOWN;
 			/*!
 			The sort of communication reflected by the Message.
 			<p>From package UML::Interactions.</p>
 			*/
-			 
+			
 			uml::MessageSort m_messageSort = MessageSort::SYNCHCALL;
 			
 			

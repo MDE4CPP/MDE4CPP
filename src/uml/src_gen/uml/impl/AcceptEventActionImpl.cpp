@@ -134,42 +134,35 @@ AcceptEventActionImpl& AcceptEventActionImpl::operator=(const AcceptEventActionI
 
 	//copy references with no containment (soft copy)
 	//Clone references with containment (deep copy)
-	std::shared_ptr<Subset<uml::OutputPin, uml::OutputPin>> resultContainer = getResult();
-	if(nullptr != resultContainer )
+	//clone reference 'result'
+	std::shared_ptr<Subset<uml::OutputPin, uml::OutputPin>> resultList = obj.getResult();
+	if(resultList)
 	{
-		int size = resultContainer->size();
-		for(int i=0; i<size ; i++)
+		Bag<uml::OutputPin>::iterator resultIter = resultList->begin();
+		Bag<uml::OutputPin>::iterator resultEnd = resultList->end();
+		while (resultIter != resultEnd) 
 		{
-			auto _result=(*resultContainer)[i];
-			if(nullptr != _result)
-			{
-				resultContainer->push_back(std::dynamic_pointer_cast<uml::OutputPin>(_result->copy()));
-			}
-			else
-			{
-				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container result."<< std::endl;)
-			}
+			std::shared_ptr<uml::OutputPin> temp = std::dynamic_pointer_cast<uml::OutputPin>((*resultIter)->copy());
+			getResult()->push_back(temp);
+			resultIter++;
 		}
 	}
 	else
 	{
 		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr result."<< std::endl;)
 	}
-	std::shared_ptr<Subset<uml::Trigger, uml::Element>> triggerContainer = getTrigger();
-	if(nullptr != triggerContainer )
+
+	//clone reference 'trigger'
+	std::shared_ptr<Subset<uml::Trigger, uml::Element>> triggerList = obj.getTrigger();
+	if(triggerList)
 	{
-		int size = triggerContainer->size();
-		for(int i=0; i<size ; i++)
+		Bag<uml::Trigger>::iterator triggerIter = triggerList->begin();
+		Bag<uml::Trigger>::iterator triggerEnd = triggerList->end();
+		while (triggerIter != triggerEnd) 
 		{
-			auto _trigger=(*triggerContainer)[i];
-			if(nullptr != _trigger)
-			{
-				triggerContainer->push_back(std::dynamic_pointer_cast<uml::Trigger>(_trigger->copy()));
-			}
-			else
-			{
-				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container trigger."<< std::endl;)
-			}
+			std::shared_ptr<uml::Trigger> temp = std::dynamic_pointer_cast<uml::Trigger>((*triggerIter)->copy());
+			getTrigger()->push_back(temp);
+			triggerIter++;
 		}
 	}
 	else
@@ -177,13 +170,13 @@ AcceptEventActionImpl& AcceptEventActionImpl::operator=(const AcceptEventActionI
 		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr trigger."<< std::endl;)
 	}
 	/*Subset*/
-	m_result->initSubset(getOutput());
+	getResult()->initSubset(getOutput());
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Initialising value Subset: " << "m_result - Subset<uml::OutputPin, uml::OutputPin >(getOutput())" << std::endl;
 	#endif
 	
 	/*Subset*/
-	m_trigger->initSubset(getOwnedElement());
+	getTrigger()->initSubset(getOwnedElement());
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Initialising value Subset: " << "m_trigger - Subset<uml::Trigger, uml::Element >(getOwnedElement())" << std::endl;
 	#endif
@@ -271,13 +264,12 @@ std::shared_ptr<Subset<uml::OutputPin, uml::OutputPin>> AcceptEventActionImpl::g
 		#endif
 		
 		/*Subset*/
-		m_result->initSubset(getOutput());
+		getResult()->initSubset(getOutput());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value Subset: " << "m_result - Subset<uml::OutputPin, uml::OutputPin >(getOutput())" << std::endl;
 		#endif
 		
 	}
-
     return m_result;
 }
 
@@ -297,13 +289,12 @@ std::shared_ptr<Subset<uml::Trigger, uml::Element>> AcceptEventActionImpl::getTr
 		#endif
 		
 		/*Subset*/
-		m_trigger->initSubset(getOwnedElement());
+		getTrigger()->initSubset(getOwnedElement());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value Subset: " << "m_trigger - Subset<uml::Trigger, uml::Element >(getOwnedElement())" << std::endl;
 		#endif
 		
 	}
-//assert(m_trigger);
     return m_trigger;
 }
 
@@ -338,7 +329,7 @@ std::shared_ptr<SubsetUnion<uml::OutputPin, uml::Element>> AcceptEventActionImpl
 		#endif
 		
 		/*SubsetUnion*/
-		m_output->initSubsetUnion(getOwnedElement());
+		getOutput()->initSubsetUnion(getOwnedElement());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value SubsetUnion: " << "m_output - SubsetUnion<uml::OutputPin, uml::Element >(getOwnedElement())" << std::endl;
 		#endif

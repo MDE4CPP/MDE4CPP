@@ -137,45 +137,37 @@ ActionActivationImpl& ActionActivationImpl::operator=(const ActionActivationImpl
 
 	//copy references with no containment (soft copy)
 	m_action  = obj.getAction();
-	std::shared_ptr<Union<fUML::Semantics::Actions::PinActivation>> _pinActivation = obj.getPinActivation();
-	m_pinActivation.reset(new Union<fUML::Semantics::Actions::PinActivation>(*(obj.getPinActivation().get())));
+	m_pinActivation  = obj.getPinActivation();
 	//Clone references with containment (deep copy)
-	std::shared_ptr<Subset<fUML::Semantics::Actions::InputPinActivation, fUML::Semantics::Actions::PinActivation>> inputPinActivationContainer = getInputPinActivation();
-	if(nullptr != inputPinActivationContainer )
+	//clone reference 'inputPinActivation'
+	std::shared_ptr<Subset<fUML::Semantics::Actions::InputPinActivation, fUML::Semantics::Actions::PinActivation>> inputPinActivationList = obj.getInputPinActivation();
+	if(inputPinActivationList)
 	{
-		int size = inputPinActivationContainer->size();
-		for(int i=0; i<size ; i++)
+		Bag<fUML::Semantics::Actions::InputPinActivation>::iterator inputPinActivationIter = inputPinActivationList->begin();
+		Bag<fUML::Semantics::Actions::InputPinActivation>::iterator inputPinActivationEnd = inputPinActivationList->end();
+		while (inputPinActivationIter != inputPinActivationEnd) 
 		{
-			auto _inputPinActivation=(*inputPinActivationContainer)[i];
-			if(nullptr != _inputPinActivation)
-			{
-				inputPinActivationContainer->push_back(std::dynamic_pointer_cast<fUML::Semantics::Actions::InputPinActivation>(_inputPinActivation->copy()));
-			}
-			else
-			{
-				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container inputPinActivation."<< std::endl;)
-			}
+			std::shared_ptr<fUML::Semantics::Actions::InputPinActivation> temp = std::dynamic_pointer_cast<fUML::Semantics::Actions::InputPinActivation>((*inputPinActivationIter)->copy());
+			getInputPinActivation()->push_back(temp);
+			inputPinActivationIter++;
 		}
 	}
 	else
 	{
 		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr inputPinActivation."<< std::endl;)
 	}
-	std::shared_ptr<Subset<fUML::Semantics::Actions::OutputPinActivation, fUML::Semantics::Actions::PinActivation>> outputPinActivationContainer = getOutputPinActivation();
-	if(nullptr != outputPinActivationContainer )
+
+	//clone reference 'outputPinActivation'
+	std::shared_ptr<Subset<fUML::Semantics::Actions::OutputPinActivation, fUML::Semantics::Actions::PinActivation>> outputPinActivationList = obj.getOutputPinActivation();
+	if(outputPinActivationList)
 	{
-		int size = outputPinActivationContainer->size();
-		for(int i=0; i<size ; i++)
+		Bag<fUML::Semantics::Actions::OutputPinActivation>::iterator outputPinActivationIter = outputPinActivationList->begin();
+		Bag<fUML::Semantics::Actions::OutputPinActivation>::iterator outputPinActivationEnd = outputPinActivationList->end();
+		while (outputPinActivationIter != outputPinActivationEnd) 
 		{
-			auto _outputPinActivation=(*outputPinActivationContainer)[i];
-			if(nullptr != _outputPinActivation)
-			{
-				outputPinActivationContainer->push_back(std::dynamic_pointer_cast<fUML::Semantics::Actions::OutputPinActivation>(_outputPinActivation->copy()));
-			}
-			else
-			{
-				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container outputPinActivation."<< std::endl;)
-			}
+			std::shared_ptr<fUML::Semantics::Actions::OutputPinActivation> temp = std::dynamic_pointer_cast<fUML::Semantics::Actions::OutputPinActivation>((*outputPinActivationIter)->copy());
+			getOutputPinActivation()->push_back(temp);
+			outputPinActivationIter++;
 		}
 	}
 	else
@@ -505,7 +497,7 @@ std::shared_ptr<fUML::Semantics::SimpleClassifiers::BooleanValue> ActionActivati
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	 std::shared_ptr<uml::LiteralBoolean> booleanValue = uml::umlFactory::eInstance()->createLiteralBoolean_in_Namespace(std::shared_ptr<uml::Class>());
+	 std::shared_ptr<uml::LiteralBoolean> booleanValue = uml::umlFactory::eInstance()->createLiteralBoolean_as_ownedMember_in_Namespace(std::shared_ptr<uml::Class>());
     booleanValue->setValue(value);
     return std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::BooleanValue>(this->getExecutionLocus()->getExecutor()->evaluate(booleanValue));
 	//end of body
@@ -727,7 +719,6 @@ Getter & Setter for reference action
 */
 std::shared_ptr<uml::Action> ActionActivationImpl::getAction() const
 {
-//assert(m_action);
     return m_action;
 }
 void ActionActivationImpl::setAction(std::shared_ptr<uml::Action> _action)
@@ -769,13 +760,12 @@ std::shared_ptr<Subset<fUML::Semantics::Actions::InputPinActivation, fUML::Seman
 		#endif
 		
 		/*Subset*/
-		m_inputPinActivation->initSubset(getPinActivation());
+		getInputPinActivation()->initSubset(getPinActivation());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value Subset: " << "m_inputPinActivation - Subset<fUML::Semantics::Actions::InputPinActivation, fUML::Semantics::Actions::PinActivation >(getPinActivation())" << std::endl;
 		#endif
 		
 	}
-
     return m_inputPinActivation;
 }
 
@@ -795,13 +785,12 @@ std::shared_ptr<Subset<fUML::Semantics::Actions::OutputPinActivation, fUML::Sema
 		#endif
 		
 		/*Subset*/
-		m_outputPinActivation->initSubset(getPinActivation());
+		getOutputPinActivation()->initSubset(getPinActivation());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value Subset: " << "m_outputPinActivation - Subset<fUML::Semantics::Actions::OutputPinActivation, fUML::Semantics::Actions::PinActivation >(getPinActivation())" << std::endl;
 		#endif
 		
 	}
-
     return m_outputPinActivation;
 }
 

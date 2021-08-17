@@ -88,7 +88,7 @@ namespace ecore
 			//*********************************
 			// Attribute Members
 			//*********************************
-			 
+			
 			bool m_serializable = true;
 			
 			

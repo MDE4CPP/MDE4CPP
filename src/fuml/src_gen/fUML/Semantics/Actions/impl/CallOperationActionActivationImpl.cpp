@@ -274,7 +274,6 @@ Getter & Setter for reference callOperationAction
 */
 std::shared_ptr<uml::CallOperationAction> CallOperationActionActivationImpl::getCallOperationAction() const
 {
-//assert(m_callOperationAction);
     return m_callOperationAction;
 }
 void CallOperationActionActivationImpl::setCallOperationAction(std::shared_ptr<uml::CallOperationAction> _callOperationAction)

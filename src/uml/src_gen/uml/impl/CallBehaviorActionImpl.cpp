@@ -172,7 +172,6 @@ Getter & Setter for reference behavior
 */
 std::shared_ptr<uml::Behavior> CallBehaviorActionImpl::getBehavior() const
 {
-//assert(m_behavior);
     return m_behavior;
 }
 void CallBehaviorActionImpl::setBehavior(std::shared_ptr<uml::Behavior> _behavior)
@@ -211,7 +210,7 @@ std::shared_ptr<SubsetUnion<uml::InputPin, uml::Element>> CallBehaviorActionImpl
 		#endif
 		
 		/*SubsetUnion*/
-		m_input->initSubsetUnion(getOwnedElement());
+		getInput()->initSubsetUnion(getOwnedElement());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value SubsetUnion: " << "m_input - SubsetUnion<uml::InputPin, uml::Element >(getOwnedElement())" << std::endl;
 		#endif
@@ -231,7 +230,7 @@ std::shared_ptr<SubsetUnion<uml::OutputPin, uml::Element>> CallBehaviorActionImp
 		#endif
 		
 		/*SubsetUnion*/
-		m_output->initSubsetUnion(getOwnedElement());
+		getOutput()->initSubsetUnion(getOwnedElement());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value SubsetUnion: " << "m_output - SubsetUnion<uml::OutputPin, uml::Element >(getOwnedElement())" << std::endl;
 		#endif

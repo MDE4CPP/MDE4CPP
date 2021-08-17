@@ -125,45 +125,37 @@ ActivityNodeActivationGroupImpl& ActivityNodeActivationGroupImpl::operator=(cons
 	//copy references with no containment (soft copy)
 	m_activityExecution  = obj.getActivityExecution();
 	m_containingNodeActivation  = obj.getContainingNodeActivation();
-	std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityNodeActivation>> _suspendedActivations = obj.getSuspendedActivations();
-	m_suspendedActivations.reset(new Bag<fUML::Semantics::Activities::ActivityNodeActivation>(*(obj.getSuspendedActivations().get())));
+	m_suspendedActivations  = obj.getSuspendedActivations();
 	//Clone references with containment (deep copy)
-	std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>> edgeInstancesContainer = getEdgeInstances();
-	if(nullptr != edgeInstancesContainer )
+	//clone reference 'edgeInstances'
+	std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>> edgeInstancesList = obj.getEdgeInstances();
+	if(edgeInstancesList)
 	{
-		int size = edgeInstancesContainer->size();
-		for(int i=0; i<size ; i++)
+		Bag<fUML::Semantics::Activities::ActivityEdgeInstance>::iterator edgeInstancesIter = edgeInstancesList->begin();
+		Bag<fUML::Semantics::Activities::ActivityEdgeInstance>::iterator edgeInstancesEnd = edgeInstancesList->end();
+		while (edgeInstancesIter != edgeInstancesEnd) 
 		{
-			auto _edgeInstances=(*edgeInstancesContainer)[i];
-			if(nullptr != _edgeInstances)
-			{
-				edgeInstancesContainer->push_back(std::dynamic_pointer_cast<fUML::Semantics::Activities::ActivityEdgeInstance>(_edgeInstances->copy()));
-			}
-			else
-			{
-				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container edgeInstances."<< std::endl;)
-			}
+			std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance> temp = std::dynamic_pointer_cast<fUML::Semantics::Activities::ActivityEdgeInstance>((*edgeInstancesIter)->copy());
+			getEdgeInstances()->push_back(temp);
+			edgeInstancesIter++;
 		}
 	}
 	else
 	{
 		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr edgeInstances."<< std::endl;)
 	}
-	std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityNodeActivation>> nodeActivationsContainer = getNodeActivations();
-	if(nullptr != nodeActivationsContainer )
+
+	//clone reference 'nodeActivations'
+	std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityNodeActivation>> nodeActivationsList = obj.getNodeActivations();
+	if(nodeActivationsList)
 	{
-		int size = nodeActivationsContainer->size();
-		for(int i=0; i<size ; i++)
+		Bag<fUML::Semantics::Activities::ActivityNodeActivation>::iterator nodeActivationsIter = nodeActivationsList->begin();
+		Bag<fUML::Semantics::Activities::ActivityNodeActivation>::iterator nodeActivationsEnd = nodeActivationsList->end();
+		while (nodeActivationsIter != nodeActivationsEnd) 
 		{
-			auto _nodeActivations=(*nodeActivationsContainer)[i];
-			if(nullptr != _nodeActivations)
-			{
-				nodeActivationsContainer->push_back(std::dynamic_pointer_cast<fUML::Semantics::Activities::ActivityNodeActivation>(_nodeActivations->copy()));
-			}
-			else
-			{
-				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container nodeActivations."<< std::endl;)
-			}
+			std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> temp = std::dynamic_pointer_cast<fUML::Semantics::Activities::ActivityNodeActivation>((*nodeActivationsIter)->copy());
+			getNodeActivations()->push_back(temp);
+			nodeActivationsIter++;
 		}
 	}
 	else
@@ -613,7 +605,6 @@ Getter & Setter for reference activityExecution
 */
 std::weak_ptr<fUML::Semantics::Activities::ActivityExecution> ActivityNodeActivationGroupImpl::getActivityExecution() const
 {
-
     return m_activityExecution;
 }
 void ActivityNodeActivationGroupImpl::setActivityExecution(std::weak_ptr<fUML::Semantics::Activities::ActivityExecution> _activityExecution)
@@ -628,7 +619,6 @@ Getter & Setter for reference containingNodeActivation
 */
 std::weak_ptr<fUML::Semantics::Actions::StructuredActivityNodeActivation> ActivityNodeActivationGroupImpl::getContainingNodeActivation() const
 {
-
     return m_containingNodeActivation;
 }
 void ActivityNodeActivationGroupImpl::setContainingNodeActivation(std::weak_ptr<fUML::Semantics::Actions::StructuredActivityNodeActivation> _containingNodeActivation)
@@ -649,7 +639,6 @@ std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>> Activity
 		
 		
 	}
-
     return m_edgeInstances;
 }
 
@@ -666,7 +655,6 @@ std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityNodeActivation>> Activi
 		
 		
 	}
-
     return m_nodeActivations;
 }
 
@@ -683,7 +671,6 @@ std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityNodeActivation>> Activi
 		
 		
 	}
-
     return m_suspendedActivations;
 }
 

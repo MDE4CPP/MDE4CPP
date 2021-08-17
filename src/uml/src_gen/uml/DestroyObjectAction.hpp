@@ -155,13 +155,13 @@ namespace uml
 			Specifies whether links in which the object participates are destroyed along with the object.
 			<p>From package UML::Actions.</p>
 			*/
-			 
+			
 			bool m_isDestroyLinks = false;
 			/*!
 			Specifies whether objects owned by the object (via composition) are destroyed along with the object.
 			<p>From package UML::Actions.</p>
 			*/
-			 
+			
 			bool m_isDestroyOwnedObjects = false;
 			
 			

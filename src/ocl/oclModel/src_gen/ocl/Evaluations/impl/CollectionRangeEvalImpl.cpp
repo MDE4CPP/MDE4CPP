@@ -31,10 +31,10 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
 #include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Values/ValuesFactory.hpp"
+#include "fUML/Semantics/Loci/LociFactory.hpp"
 
 
 #include "ocl/Evaluations/CollectionLiteralPartEval.hpp"
@@ -127,7 +127,6 @@ Getter & Setter for reference first
 */
 std::shared_ptr<ocl::Evaluations::OclExpEval> CollectionRangeEvalImpl::getFirst() const
 {
-//assert(m_first);
     return m_first;
 }
 void CollectionRangeEvalImpl::setFirst(std::shared_ptr<ocl::Evaluations::OclExpEval> _first)
@@ -142,7 +141,6 @@ Getter & Setter for reference last
 */
 std::shared_ptr<ocl::Evaluations::OclExpEval> CollectionRangeEvalImpl::getLast() const
 {
-//assert(m_last);
     return m_last;
 }
 void CollectionRangeEvalImpl::setLast(std::shared_ptr<ocl::Evaluations::OclExpEval> _last)

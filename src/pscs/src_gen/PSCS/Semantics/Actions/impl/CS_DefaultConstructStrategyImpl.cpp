@@ -121,25 +121,23 @@ CS_DefaultConstructStrategyImpl& CS_DefaultConstructStrategyImpl::operator=(cons
 	//copy references with no containment (soft copy)
 	m_locus  = obj.getLocus();
 	//Clone references with containment (deep copy)
+	//clone reference 'defaultAssociation'
 	if(obj.getDefaultAssociation()!=nullptr)
 	{
 		m_defaultAssociation = std::dynamic_pointer_cast<uml::Association>(obj.getDefaultAssociation()->copy());
 	}
-	std::shared_ptr<Bag<uml::Class>> generatedRealizingClassesContainer = getGeneratedRealizingClasses();
-	if(nullptr != generatedRealizingClassesContainer )
+
+	//clone reference 'generatedRealizingClasses'
+	std::shared_ptr<Bag<uml::Class>> generatedRealizingClassesList = obj.getGeneratedRealizingClasses();
+	if(generatedRealizingClassesList)
 	{
-		int size = generatedRealizingClassesContainer->size();
-		for(int i=0; i<size ; i++)
+		Bag<uml::Class>::iterator generatedRealizingClassesIter = generatedRealizingClassesList->begin();
+		Bag<uml::Class>::iterator generatedRealizingClassesEnd = generatedRealizingClassesList->end();
+		while (generatedRealizingClassesIter != generatedRealizingClassesEnd) 
 		{
-			auto _generatedRealizingClasses=(*generatedRealizingClassesContainer)[i];
-			if(nullptr != _generatedRealizingClasses)
-			{
-				generatedRealizingClassesContainer->push_back(std::dynamic_pointer_cast<uml::Class>(_generatedRealizingClasses->copy()));
-			}
-			else
-			{
-				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container generatedRealizingClasses."<< std::endl;)
-			}
+			std::shared_ptr<uml::Class> temp = std::dynamic_pointer_cast<uml::Class>((*generatedRealizingClassesIter)->copy());
+			getGeneratedRealizingClasses()->push_back(temp);
+			generatedRealizingClassesIter++;
 		}
 	}
 	else
@@ -652,7 +650,6 @@ Getter & Setter for reference defaultAssociation
 */
 std::shared_ptr<uml::Association> CS_DefaultConstructStrategyImpl::getDefaultAssociation() const
 {
-//assert(m_defaultAssociation);
     return m_defaultAssociation;
 }
 void CS_DefaultConstructStrategyImpl::setDefaultAssociation(std::shared_ptr<uml::Association> _defaultAssociation)
@@ -673,7 +670,6 @@ std::shared_ptr<Bag<uml::Class>> CS_DefaultConstructStrategyImpl::getGeneratedRe
 		
 		
 	}
-
     return m_generatedRealizingClasses;
 }
 
@@ -684,7 +680,6 @@ Getter & Setter for reference locus
 */
 std::shared_ptr<fUML::Semantics::Loci::Locus> CS_DefaultConstructStrategyImpl::getLocus() const
 {
-//assert(m_locus);
     return m_locus;
 }
 void CS_DefaultConstructStrategyImpl::setLocus(std::shared_ptr<fUML::Semantics::Loci::Locus> _locus)

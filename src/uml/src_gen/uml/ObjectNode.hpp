@@ -187,13 +187,13 @@ namespace uml
 			Indicates whether the type of the ObjectNode is to be treated as representing control values that may traverse ControlFlows.
 			<p>From package UML::Activities.</p>
 			*/
-			 
+			
 			bool m_isControlType = false;
 			/*!
 			Indicates how the tokens held by the ObjectNode are ordered for selection to traverse ActivityEdges outgoing from the ObjectNode.
 			<p>From package UML::Activities.</p>
 			*/
-			 
+			
 			uml::ObjectNodeOrderingKind m_ordering = ObjectNodeOrderingKind::FIFO;
 			
 			

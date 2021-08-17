@@ -133,6 +133,7 @@ WriteVariableActionImpl& WriteVariableActionImpl::operator=(const WriteVariableA
 
 	//copy references with no containment (soft copy)
 	//Clone references with containment (deep copy)
+	//clone reference 'value'
 	if(obj.getValue()!=nullptr)
 	{
 		m_value = std::dynamic_pointer_cast<uml::InputPin>(obj.getValue()->copy());
@@ -181,14 +182,11 @@ Getter & Setter for reference value
 */
 std::shared_ptr<uml::InputPin> WriteVariableActionImpl::getValue() const
 {
-
     return m_value;
 }
 void WriteVariableActionImpl::setValue(std::shared_ptr<uml::InputPin> _value)
 {
     m_value = _value;
-	
-	
 	
 }
 
@@ -222,7 +220,7 @@ std::shared_ptr<SubsetUnion<uml::InputPin, uml::Element>> WriteVariableActionImp
 		#endif
 		
 		/*SubsetUnion*/
-		m_input->initSubsetUnion(getOwnedElement());
+		getInput()->initSubsetUnion(getOwnedElement());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value SubsetUnion: " << "m_input - SubsetUnion<uml::InputPin, uml::Element >(getOwnedElement())" << std::endl;
 		#endif

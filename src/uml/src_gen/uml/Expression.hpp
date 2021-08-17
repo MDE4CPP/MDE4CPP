@@ -119,7 +119,7 @@ namespace uml
 			The symbol associated with this node in the expression tree.
 			<p>From package UML::Values.</p>
 			*/
-			 
+			
 			std::string m_symbol = "";
 			
 			

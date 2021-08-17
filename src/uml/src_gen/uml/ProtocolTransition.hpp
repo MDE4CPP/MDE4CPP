@@ -147,13 +147,6 @@ namespace uml
 			*/
 			
 			virtual void setPreCondition(std::shared_ptr<uml::Constraint>) = 0;
-			/*Additional Setter for 'Transition::guard' redefined by reference 'preCondition'*/
-			/*!
-			A guard is a Constraint that provides a fine-grained control over the firing of the Transition. The guard is evaluated when an Event occurrence is dispatched by the StateMachine. If the guard is true at that time, the Transition may be enabled, otherwise, it is disabled. Guards should be pure expressions without side effects. Guard expressions with side effects are ill formed.
-			<p>From package UML::StateMachines.</p>
-			*/
-			
-			virtual void setGuard(std::shared_ptr<uml::Constraint>) = 0;
 			/*!
 			This association refers to the associated Operation. It is derived from the Operation of the CallEvent Trigger when applicable.
 			<p>From package UML::StateMachines.</p>
@@ -213,7 +206,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement>> getOwnedMember() const = 0;/*!
+			virtual std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement>> getOwnedMember() const = 0;/*!
 			The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/

@@ -109,7 +109,7 @@ namespace uml
 			Specifies whether this Feature characterizes individual instances classified by the Classifier (false) or the Classifier itself (true).
 			<p>From package UML::Classification.</p>
 			*/
-			 
+			
 			bool m_isStatic = false;
 			
 			

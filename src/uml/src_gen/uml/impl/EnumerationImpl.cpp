@@ -152,21 +152,17 @@ EnumerationImpl& EnumerationImpl::operator=(const EnumerationImpl & obj)
 
 	//copy references with no containment (soft copy)
 	//Clone references with containment (deep copy)
-	std::shared_ptr<Subset<uml::EnumerationLiteral, uml::NamedElement>> ownedLiteralContainer = getOwnedLiteral();
-	if(nullptr != ownedLiteralContainer )
+	//clone reference 'ownedLiteral'
+	std::shared_ptr<Subset<uml::EnumerationLiteral, uml::NamedElement>> ownedLiteralList = obj.getOwnedLiteral();
+	if(ownedLiteralList)
 	{
-		int size = ownedLiteralContainer->size();
-		for(int i=0; i<size ; i++)
+		Bag<uml::EnumerationLiteral>::iterator ownedLiteralIter = ownedLiteralList->begin();
+		Bag<uml::EnumerationLiteral>::iterator ownedLiteralEnd = ownedLiteralList->end();
+		while (ownedLiteralIter != ownedLiteralEnd) 
 		{
-			auto _ownedLiteral=(*ownedLiteralContainer)[i];
-			if(nullptr != _ownedLiteral)
-			{
-				ownedLiteralContainer->push_back(std::dynamic_pointer_cast<uml::EnumerationLiteral>(_ownedLiteral->copy()));
-			}
-			else
-			{
-				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container ownedLiteral."<< std::endl;)
-			}
+			std::shared_ptr<uml::EnumerationLiteral> temp = std::dynamic_pointer_cast<uml::EnumerationLiteral>((*ownedLiteralIter)->copy());
+			getOwnedLiteral()->push_back(temp);
+			ownedLiteralIter++;
 		}
 	}
 	else
@@ -174,7 +170,7 @@ EnumerationImpl& EnumerationImpl::operator=(const EnumerationImpl & obj)
 		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr ownedLiteral."<< std::endl;)
 	}
 	/*Subset*/
-	m_ownedLiteral->initSubset(getOwnedMember());
+	getOwnedLiteral()->initSubset(getOwnedMember());
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Initialising value Subset: " << "m_ownedLiteral - Subset<uml::EnumerationLiteral, uml::NamedElement >(getOwnedMember())" << std::endl;
 	#endif
@@ -225,13 +221,12 @@ std::shared_ptr<Subset<uml::EnumerationLiteral, uml::NamedElement>> EnumerationI
 		#endif
 		
 		/*Subset*/
-		m_ownedLiteral->initSubset(getOwnedMember());
+		getOwnedLiteral()->initSubset(getOwnedMember());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value Subset: " << "m_ownedLiteral - Subset<uml::EnumerationLiteral, uml::NamedElement >(getOwnedMember())" << std::endl;
 		#endif
 		
 	}
-
     return m_ownedLiteral;
 }
 
@@ -251,7 +246,7 @@ std::shared_ptr<SubsetUnion<uml::Property, uml::Feature>> EnumerationImpl::getAt
 		#endif
 		
 		/*SubsetUnion*/
-		m_attribute->initSubsetUnion(getFeature());
+		getAttribute()->initSubsetUnion(getFeature());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value SubsetUnion: " << "m_attribute - SubsetUnion<uml::Property, uml::Feature >(getFeature())" << std::endl;
 		#endif
@@ -271,7 +266,7 @@ std::shared_ptr<SubsetUnion<uml::Feature, uml::NamedElement>> EnumerationImpl::g
 		#endif
 		
 		/*SubsetUnion*/
-		m_feature->initSubsetUnion(getMember());
+		getFeature()->initSubsetUnion(getMember());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value SubsetUnion: " << "m_feature - SubsetUnion<uml::Feature, uml::NamedElement >(getMember())" << std::endl;
 		#endif
@@ -315,20 +310,20 @@ std::shared_ptr<Union<uml::Element>> EnumerationImpl::getOwnedElement() const
 	return m_ownedElement;
 }
 
-std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement>> EnumerationImpl::getOwnedMember() const
+std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement>> EnumerationImpl::getOwnedMember() const
 {
 	if(m_ownedMember == nullptr)
 	{
 		/*SubsetUnion*/
-		m_ownedMember.reset(new SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement >());
+		m_ownedMember.reset(new SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement >());
 		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement >()" << std::endl;
+			std::cout << "Initialising shared pointer SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement >()" << std::endl;
 		#endif
 		
 		/*SubsetUnion*/
-		m_ownedMember->initSubsetUnion(getOwnedElement(),getMember());
+		getOwnedMember()->initSubsetUnion(getOwnedElement(), getMember());
 		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement >(getOwnedElement(),getMember())" << std::endl;
+			std::cout << "Initialising value SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement >(getOwnedElement(), getMember())" << std::endl;
 		#endif
 		
 	}

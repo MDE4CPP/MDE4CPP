@@ -104,24 +104,19 @@ EAnnotationImpl& EAnnotationImpl::operator=(const EAnnotationImpl & obj)
 
 	//copy references with no containment (soft copy)
 	m_eModelElement  = obj.getEModelElement();
-	std::shared_ptr<Bag<ecore::EObject>> _references = obj.getReferences();
-	m_references.reset(new Bag<ecore::EObject>(*(obj.getReferences().get())));
+	m_references  = obj.getReferences();
 	//Clone references with containment (deep copy)
-	std::shared_ptr<Subset<ecore::EObject, ecore::EObject>> contentsContainer = getContents();
-	if(nullptr != contentsContainer )
+	//clone reference 'contents'
+	std::shared_ptr<Subset<ecore::EObject, ecore::EObject>> contentsList = obj.getContents();
+	if(contentsList)
 	{
-		int size = contentsContainer->size();
-		for(int i=0; i<size ; i++)
+		Bag<ecore::EObject>::iterator contentsIter = contentsList->begin();
+		Bag<ecore::EObject>::iterator contentsEnd = contentsList->end();
+		while (contentsIter != contentsEnd) 
 		{
-			auto _contents=(*contentsContainer)[i];
-			if(nullptr != _contents)
-			{
-				contentsContainer->push_back(std::dynamic_pointer_cast<ecore::EObject>(_contents->copy()));
-			}
-			else
-			{
-				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container contents."<< std::endl;)
-			}
+			std::shared_ptr<ecore::EObject> temp = std::dynamic_pointer_cast<ecore::EObject>((*contentsIter)->copy());
+			getContents()->push_back(temp);
+			contentsIter++;
 		}
 	}
 	else
@@ -129,7 +124,7 @@ EAnnotationImpl& EAnnotationImpl::operator=(const EAnnotationImpl & obj)
 		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr contents."<< std::endl;)
 	}
 	/*Subset*/
-	m_contents->initSubset(getEContens());
+	getContents()->initSubset(getEContens());
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Initialising value Subset: " << "m_contents - Subset<ecore::EObject, ecore::EObject >(getEContens())" << std::endl;
 	#endif
@@ -202,13 +197,12 @@ std::shared_ptr<Subset<ecore::EObject, ecore::EObject>> EAnnotationImpl::getCont
 		#endif
 		
 		/*Subset*/
-		m_contents->initSubset(getEContens());
+		getContents()->initSubset(getEContens());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value Subset: " << "m_contents - Subset<ecore::EObject, ecore::EObject >(getEContens())" << std::endl;
 		#endif
 		
 	}
-
     return m_contents;
 }
 
@@ -219,7 +213,6 @@ Getter & Setter for reference eModelElement
 */
 std::weak_ptr<ecore::EModelElement> EAnnotationImpl::getEModelElement() const
 {
-
     return m_eModelElement;
 }
 void EAnnotationImpl::setEModelElement(std::weak_ptr<ecore::EModelElement> _eModelElement)
@@ -240,7 +233,6 @@ std::shared_ptr<Bag<ecore::EObject>> EAnnotationImpl::getReferences() const
 		
 		
 	}
-
     return m_references;
 }
 

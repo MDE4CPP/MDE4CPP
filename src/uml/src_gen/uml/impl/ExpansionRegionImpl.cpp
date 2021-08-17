@@ -157,10 +157,8 @@ ExpansionRegionImpl& ExpansionRegionImpl::operator=(const ExpansionRegionImpl & 
 	m_mode = obj.getMode();
 
 	//copy references with no containment (soft copy)
-	std::shared_ptr<Bag<uml::ExpansionNode>> _inputElement = obj.getInputElement();
-	m_inputElement.reset(new Bag<uml::ExpansionNode>(*(obj.getInputElement().get())));
-	std::shared_ptr<Bag<uml::ExpansionNode>> _outputElement = obj.getOutputElement();
-	m_outputElement.reset(new Bag<uml::ExpansionNode>(*(obj.getOutputElement().get())));
+	m_inputElement  = obj.getInputElement();
+	m_outputElement  = obj.getOutputElement();
 	//Clone references with containment (deep copy)
 	return *this;
 }
@@ -213,7 +211,6 @@ std::shared_ptr<Bag<uml::ExpansionNode>> ExpansionRegionImpl::getInputElement() 
 		
 		
 	}
-//assert(m_inputElement);
     return m_inputElement;
 }
 
@@ -230,7 +227,6 @@ std::shared_ptr<Bag<uml::ExpansionNode>> ExpansionRegionImpl::getOutputElement()
 		
 		
 	}
-
     return m_outputElement;
 }
 
@@ -295,7 +291,7 @@ std::shared_ptr<SubsetUnion<uml::InputPin, uml::Element>> ExpansionRegionImpl::g
 		#endif
 		
 		/*SubsetUnion*/
-		m_input->initSubsetUnion(getOwnedElement());
+		getInput()->initSubsetUnion(getOwnedElement());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value SubsetUnion: " << "m_input - SubsetUnion<uml::InputPin, uml::Element >(getOwnedElement())" << std::endl;
 		#endif
@@ -330,7 +326,7 @@ std::shared_ptr<SubsetUnion<uml::OutputPin, uml::Element>> ExpansionRegionImpl::
 		#endif
 		
 		/*SubsetUnion*/
-		m_output->initSubsetUnion(getOwnedElement());
+		getOutput()->initSubsetUnion(getOwnedElement());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value SubsetUnion: " << "m_output - SubsetUnion<uml::OutputPin, uml::Element >(getOwnedElement())" << std::endl;
 		#endif
@@ -354,20 +350,20 @@ std::shared_ptr<Union<uml::Element>> ExpansionRegionImpl::getOwnedElement() cons
 	return m_ownedElement;
 }
 
-std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement>> ExpansionRegionImpl::getOwnedMember() const
+std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement>> ExpansionRegionImpl::getOwnedMember() const
 {
 	if(m_ownedMember == nullptr)
 	{
 		/*SubsetUnion*/
-		m_ownedMember.reset(new SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement >());
+		m_ownedMember.reset(new SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement >());
 		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement >()" << std::endl;
+			std::cout << "Initialising shared pointer SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement >()" << std::endl;
 		#endif
 		
 		/*SubsetUnion*/
-		m_ownedMember->initSubsetUnion(getOwnedElement(),getMember());
+		getOwnedMember()->initSubsetUnion(getOwnedElement(), getMember());
 		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement >(getOwnedElement(),getMember())" << std::endl;
+			std::cout << "Initialising value SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement >(getOwnedElement(), getMember())" << std::endl;
 		#endif
 		
 	}

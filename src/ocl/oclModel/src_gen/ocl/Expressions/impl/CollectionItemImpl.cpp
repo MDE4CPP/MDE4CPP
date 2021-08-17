@@ -90,6 +90,7 @@ CollectionItemImpl& CollectionItemImpl::operator=(const CollectionItemImpl & obj
 
 	//copy references with no containment (soft copy)
 	//Clone references with containment (deep copy)
+	//clone reference 'item'
 	if(obj.getItem()!=nullptr)
 	{
 		m_item = std::dynamic_pointer_cast<ocl::Expressions::OclExpression>(obj.getItem()->copy());
@@ -127,7 +128,6 @@ Getter & Setter for reference item
 */
 std::shared_ptr<ocl::Expressions::OclExpression> CollectionItemImpl::getItem() const
 {
-//assert(m_item);
     return m_item;
 }
 void CollectionItemImpl::setItem(std::shared_ptr<ocl::Expressions::OclExpression> _item)

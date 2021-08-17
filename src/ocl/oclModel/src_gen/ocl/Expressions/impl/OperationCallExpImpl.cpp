@@ -186,21 +186,17 @@ OperationCallExpImpl& OperationCallExpImpl::operator=(const OperationCallExpImpl
 	//copy references with no containment (soft copy)
 	m_referredOperation  = obj.getReferredOperation();
 	//Clone references with containment (deep copy)
-	std::shared_ptr<Bag<ocl::Expressions::OclExpression>> argumentContainer = getArgument();
-	if(nullptr != argumentContainer )
+	//clone reference 'argument'
+	std::shared_ptr<Bag<ocl::Expressions::OclExpression>> argumentList = obj.getArgument();
+	if(argumentList)
 	{
-		int size = argumentContainer->size();
-		for(int i=0; i<size ; i++)
+		Bag<ocl::Expressions::OclExpression>::iterator argumentIter = argumentList->begin();
+		Bag<ocl::Expressions::OclExpression>::iterator argumentEnd = argumentList->end();
+		while (argumentIter != argumentEnd) 
 		{
-			auto _argument=(*argumentContainer)[i];
-			if(nullptr != _argument)
-			{
-				argumentContainer->push_back(std::dynamic_pointer_cast<ocl::Expressions::OclExpression>(_argument->copy()));
-			}
-			else
-			{
-				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container argument."<< std::endl;)
-			}
+			std::shared_ptr<ocl::Expressions::OclExpression> temp = std::dynamic_pointer_cast<ocl::Expressions::OclExpression>((*argumentIter)->copy());
+			getArgument()->push_back(temp);
+			argumentIter++;
 		}
 	}
 	else
@@ -246,7 +242,6 @@ std::shared_ptr<Bag<ocl::Expressions::OclExpression>> OperationCallExpImpl::getA
 		
 		
 	}
-
     return m_argument;
 }
 
@@ -257,7 +252,6 @@ Getter & Setter for reference referredOperation
 */
 std::shared_ptr<ecore::EOperation> OperationCallExpImpl::getReferredOperation() const
 {
-
     return m_referredOperation;
 }
 void OperationCallExpImpl::setReferredOperation(std::shared_ptr<ecore::EOperation> _referredOperation)

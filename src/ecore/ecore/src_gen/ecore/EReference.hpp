@@ -109,11 +109,11 @@ namespace ecore
 			//*********************************
 			// Attribute Members
 			//*********************************
-			 
+			
 			bool m_container = false;
-			 
+			
 			bool m_containment = false;
-			 
+			
 			bool m_resolveProxies = true;
 			
 			

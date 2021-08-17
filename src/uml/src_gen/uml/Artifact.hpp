@@ -142,14 +142,14 @@ namespace uml
 			<p>From package UML::Deployments.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::Property, uml::Property,uml::NamedElement>> getOwnedAttribute() const = 0;
+			virtual std::shared_ptr<Subset<uml::Property, uml::NamedElement, uml::Property>> getOwnedAttribute() const = 0;
 			
 			/*!
 			The Operations defined for the Artifact. The association is a specialization of the ownedMember association.
 			<p>From package UML::Deployments.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::Operation, uml::Feature,uml::NamedElement>> getOwnedOperation() const = 0;
+			virtual std::shared_ptr<Subset<uml::Operation, uml::Feature, uml::NamedElement>> getOwnedOperation() const = 0;
 			
 			
 
@@ -161,7 +161,7 @@ namespace uml
 			A concrete name that is used to refer to the Artifact in a physical context. Example: file system name, universal resource locator.
 			<p>From package UML::Deployments.</p>
 			*/
-			 
+			
 			std::string m_fileName = "";
 			
 			
@@ -183,12 +183,12 @@ namespace uml
 			<p>From package UML::Deployments.</p>
 			*/
 			
-			mutable std::shared_ptr<Subset<uml::Property, uml::Property,uml::NamedElement>> m_ownedAttribute;/*!
+			mutable std::shared_ptr<Subset<uml::Property, uml::NamedElement, uml::Property>> m_ownedAttribute;/*!
 			The Operations defined for the Artifact. The association is a specialization of the ownedMember association.
 			<p>From package UML::Deployments.</p>
 			*/
 			
-			mutable std::shared_ptr<Subset<uml::Operation, uml::Feature,uml::NamedElement>> m_ownedOperation;
+			mutable std::shared_ptr<Subset<uml::Operation, uml::Feature, uml::NamedElement>> m_ownedOperation;
 
 		public:
 			//*********************************
@@ -224,7 +224,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement>> getOwnedMember() const = 0;/*!
+			virtual std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement>> getOwnedMember() const = 0;/*!
 			The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/

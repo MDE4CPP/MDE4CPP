@@ -134,6 +134,7 @@ DestroyObjectActionImpl& DestroyObjectActionImpl::operator=(const DestroyObjectA
 
 	//copy references with no containment (soft copy)
 	//Clone references with containment (deep copy)
+	//clone reference 'target'
 	if(obj.getTarget()!=nullptr)
 	{
 		m_target = std::dynamic_pointer_cast<uml::InputPin>(obj.getTarget()->copy());
@@ -209,14 +210,11 @@ Getter & Setter for reference target
 */
 std::shared_ptr<uml::InputPin> DestroyObjectActionImpl::getTarget() const
 {
-//assert(m_target);
     return m_target;
 }
 void DestroyObjectActionImpl::setTarget(std::shared_ptr<uml::InputPin> _target)
 {
     m_target = _target;
-	
-	
 	
 }
 
@@ -250,7 +248,7 @@ std::shared_ptr<SubsetUnion<uml::InputPin, uml::Element>> DestroyObjectActionImp
 		#endif
 		
 		/*SubsetUnion*/
-		m_input->initSubsetUnion(getOwnedElement());
+		getInput()->initSubsetUnion(getOwnedElement());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value SubsetUnion: " << "m_input - SubsetUnion<uml::InputPin, uml::Element >(getOwnedElement())" << std::endl;
 		#endif

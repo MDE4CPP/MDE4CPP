@@ -183,6 +183,7 @@ CallExpImpl& CallExpImpl::operator=(const CallExpImpl & obj)
 
 	//copy references with no containment (soft copy)
 	//Clone references with containment (deep copy)
+	//clone reference 'source'
 	if(obj.getSource()!=nullptr)
 	{
 		m_source = std::dynamic_pointer_cast<ocl::Expressions::OclExpression>(obj.getSource()->copy());
@@ -220,7 +221,6 @@ Getter & Setter for reference source
 */
 std::shared_ptr<ocl::Expressions::OclExpression> CallExpImpl::getSource() const
 {
-
     return m_source;
 }
 void CallExpImpl::setSource(std::shared_ptr<ocl::Expressions::OclExpression> _source)

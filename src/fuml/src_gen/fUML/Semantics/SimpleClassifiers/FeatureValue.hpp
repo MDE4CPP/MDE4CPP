@@ -100,7 +100,7 @@ namespace fUML::Semantics::SimpleClassifiers
 			//*********************************
 			// Attribute Members
 			//*********************************
-			 
+			
 			int m_position = 0;
 			
 			

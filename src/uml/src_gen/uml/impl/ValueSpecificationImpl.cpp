@@ -216,14 +216,11 @@ Getter & Setter for reference owningSlot
 */
 std::weak_ptr<uml::Slot> ValueSpecificationImpl::getOwningSlot() const
 {
-
     return m_owningSlot;
 }
 void ValueSpecificationImpl::setOwningSlot(std::weak_ptr<uml::Slot> _owningSlot)
 {
     m_owningSlot = _owningSlot;
-	m_owner = this->getOwningSlot().lock();
-	
 	
 }
 
@@ -233,14 +230,11 @@ Getter & Setter for reference valueSpecificationAction
 */
 std::weak_ptr<uml::ValueSpecificationAction> ValueSpecificationImpl::getValueSpecificationAction() const
 {
-
     return m_valueSpecificationAction;
 }
 void ValueSpecificationImpl::setValueSpecificationAction(std::weak_ptr<uml::ValueSpecificationAction> _valueSpecificationAction)
 {
     m_valueSpecificationAction = _valueSpecificationAction;
-	m_owner = this->getValueSpecificationAction().lock();
-	
 	
 }
 

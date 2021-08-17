@@ -121,6 +121,7 @@ AbstractionImpl& AbstractionImpl::operator=(const AbstractionImpl & obj)
 
 	//copy references with no containment (soft copy)
 	//Clone references with containment (deep copy)
+	//clone reference 'mapping'
 	if(obj.getMapping()!=nullptr)
 	{
 		m_mapping = std::dynamic_pointer_cast<uml::OpaqueExpression>(obj.getMapping()->copy());
@@ -158,13 +159,11 @@ Getter & Setter for reference mapping
 */
 std::shared_ptr<uml::OpaqueExpression> AbstractionImpl::getMapping() const
 {
-
     return m_mapping;
 }
 void AbstractionImpl::setMapping(std::shared_ptr<uml::OpaqueExpression> _mapping)
 {
     m_mapping = _mapping;
-	
 	
 }
 
@@ -223,7 +222,7 @@ std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> AbstractionImpl::getSou
 		#endif
 		
 		/*SubsetUnion*/
-		m_source->initSubsetUnion(getRelatedElement());
+		getSource()->initSubsetUnion(getRelatedElement());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value SubsetUnion: " << "m_source - SubsetUnion<uml::Element, uml::Element >(getRelatedElement())" << std::endl;
 		#endif
@@ -243,7 +242,7 @@ std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> AbstractionImpl::getTar
 		#endif
 		
 		/*SubsetUnion*/
-		m_target->initSubsetUnion(getRelatedElement());
+		getTarget()->initSubsetUnion(getRelatedElement());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value SubsetUnion: " << "m_target - SubsetUnion<uml::Element, uml::Element >(getRelatedElement())" << std::endl;
 		#endif

@@ -108,10 +108,10 @@ NamedElementImpl& NamedElementImpl::operator=(const NamedElementImpl & obj)
 	m_visibility = obj.getVisibility();
 
 	//copy references with no containment (soft copy)
-	std::shared_ptr<Bag<uml::Dependency>> _clientDependency = obj.getClientDependency();
-	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
+	m_clientDependency  = obj.getClientDependency();
 	m_namespace  = obj.getNamespace();
 	//Clone references with containment (deep copy)
+	//clone reference 'nameExpression'
 	if(obj.getNameExpression()!=nullptr)
 	{
 		m_nameExpression = std::dynamic_pointer_cast<uml::StringExpression>(obj.getNameExpression()->copy());
@@ -306,7 +306,6 @@ std::shared_ptr<Bag<uml::Dependency>> NamedElementImpl::getClientDependency() co
 		
 		
 	}
-
     return m_clientDependency;
 }
 
@@ -317,13 +316,11 @@ Getter & Setter for reference nameExpression
 */
 std::shared_ptr<uml::StringExpression> NamedElementImpl::getNameExpression() const
 {
-
     return m_nameExpression;
 }
 void NamedElementImpl::setNameExpression(std::shared_ptr<uml::StringExpression> _nameExpression)
 {
     m_nameExpression = _nameExpression;
-	
 	
 }
 

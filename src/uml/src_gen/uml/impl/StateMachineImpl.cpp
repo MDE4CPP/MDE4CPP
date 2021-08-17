@@ -174,47 +174,37 @@ StateMachineImpl& StateMachineImpl::operator=(const StateMachineImpl & obj)
 	//Clone Attributes with (deep copy)
 
 	//copy references with no containment (soft copy)
-	std::shared_ptr<Bag<uml::StateMachine>> _extendedStateMachine = obj.getExtendedStateMachine();
-	m_extendedStateMachine.reset(new Bag<uml::StateMachine>(*(obj.getExtendedStateMachine().get())));
-	std::shared_ptr<Bag<uml::State>> _submachineState = obj.getSubmachineState();
-	m_submachineState.reset(new Bag<uml::State>(*(obj.getSubmachineState().get())));
+	m_submachineState  = obj.getSubmachineState();
 	//Clone references with containment (deep copy)
-	std::shared_ptr<Subset<uml::Pseudostate, uml::NamedElement>> connectionPointContainer = getConnectionPoint();
-	if(nullptr != connectionPointContainer )
+	//clone reference 'connectionPoint'
+	std::shared_ptr<Subset<uml::Pseudostate, uml::NamedElement>> connectionPointList = obj.getConnectionPoint();
+	if(connectionPointList)
 	{
-		int size = connectionPointContainer->size();
-		for(int i=0; i<size ; i++)
+		Bag<uml::Pseudostate>::iterator connectionPointIter = connectionPointList->begin();
+		Bag<uml::Pseudostate>::iterator connectionPointEnd = connectionPointList->end();
+		while (connectionPointIter != connectionPointEnd) 
 		{
-			auto _connectionPoint=(*connectionPointContainer)[i];
-			if(nullptr != _connectionPoint)
-			{
-				connectionPointContainer->push_back(std::dynamic_pointer_cast<uml::Pseudostate>(_connectionPoint->copy()));
-			}
-			else
-			{
-				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container connectionPoint."<< std::endl;)
-			}
+			std::shared_ptr<uml::Pseudostate> temp = std::dynamic_pointer_cast<uml::Pseudostate>((*connectionPointIter)->copy());
+			getConnectionPoint()->push_back(temp);
+			connectionPointIter++;
 		}
 	}
 	else
 	{
 		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr connectionPoint."<< std::endl;)
 	}
-	std::shared_ptr<Subset<uml::Region, uml::NamedElement>> regionContainer = getRegion();
-	if(nullptr != regionContainer )
+
+	//clone reference 'region'
+	std::shared_ptr<Subset<uml::Region, uml::NamedElement>> regionList = obj.getRegion();
+	if(regionList)
 	{
-		int size = regionContainer->size();
-		for(int i=0; i<size ; i++)
+		Bag<uml::Region>::iterator regionIter = regionList->begin();
+		Bag<uml::Region>::iterator regionEnd = regionList->end();
+		while (regionIter != regionEnd) 
 		{
-			auto _region=(*regionContainer)[i];
-			if(nullptr != _region)
-			{
-				regionContainer->push_back(std::dynamic_pointer_cast<uml::Region>(_region->copy()));
-			}
-			else
-			{
-				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container region."<< std::endl;)
-			}
+			std::shared_ptr<uml::Region> temp = std::dynamic_pointer_cast<uml::Region>((*regionIter)->copy());
+			getRegion()->push_back(temp);
+			regionIter++;
 		}
 	}
 	else
@@ -222,13 +212,13 @@ StateMachineImpl& StateMachineImpl::operator=(const StateMachineImpl & obj)
 		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr region."<< std::endl;)
 	}
 	/*Subset*/
-	m_connectionPoint->initSubset(getOwnedMember());
+	getConnectionPoint()->initSubset(getOwnedMember());
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Initialising value Subset: " << "m_connectionPoint - Subset<uml::Pseudostate, uml::NamedElement >(getOwnedMember())" << std::endl;
 	#endif
 	
 	/*Subset*/
-	m_region->initSubset(getOwnedMember());
+	getRegion()->initSubset(getOwnedMember());
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Initialising value Subset: " << "m_region - Subset<uml::Region, uml::NamedElement >(getOwnedMember())" << std::endl;
 	#endif
@@ -315,13 +305,12 @@ std::shared_ptr<Subset<uml::Pseudostate, uml::NamedElement>> StateMachineImpl::g
 		#endif
 		
 		/*Subset*/
-		m_connectionPoint->initSubset(getOwnedMember());
+		getConnectionPoint()->initSubset(getOwnedMember());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value Subset: " << "m_connectionPoint - Subset<uml::Pseudostate, uml::NamedElement >(getOwnedMember())" << std::endl;
 		#endif
 		
 	}
-
     return m_connectionPoint;
 }
 
@@ -332,14 +321,23 @@ Getter & Setter for reference extendedStateMachine
 */
 std::shared_ptr<Bag<uml::StateMachine>> StateMachineImpl::getExtendedStateMachine() const
 {
-	if(m_extendedStateMachine == nullptr)
-	{
-		m_extendedStateMachine.reset(new Bag<uml::StateMachine>());
-		
-		
-	}
+	//Cast conversion from redefined container reference Behavior::redefinedBehavior 
+	std::shared_ptr<Bag<uml::StateMachine>> extendedStateMachine(new Bag<uml::StateMachine>());
 
-    return m_extendedStateMachine;
+	Bag<uml::Behavior>::iterator iter = uml::BehaviorImpl::getRedefinedBehavior()->begin();
+	Bag<uml::Behavior>::iterator end = uml::BehaviorImpl::getRedefinedBehavior()->end();
+	
+	while(iter != end)
+	{
+		std::shared_ptr<uml::StateMachine> _stateMachine = std::dynamic_pointer_cast<uml::StateMachine>(*iter);
+		if(_stateMachine)
+		{
+			extendedStateMachine->add(_stateMachine);
+		}
+
+		iter++;
+	}	
+	return extendedStateMachine;
 }
 
 
@@ -358,13 +356,12 @@ std::shared_ptr<Subset<uml::Region, uml::NamedElement>> StateMachineImpl::getReg
 		#endif
 		
 		/*Subset*/
-		m_region->initSubset(getOwnedMember());
+		getRegion()->initSubset(getOwnedMember());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value Subset: " << "m_region - Subset<uml::Region, uml::NamedElement >(getOwnedMember())" << std::endl;
 		#endif
 		
 	}
-//assert(m_region);
     return m_region;
 }
 
@@ -381,7 +378,6 @@ std::shared_ptr<Bag<uml::State>> StateMachineImpl::getSubmachineState() const
 		
 		
 	}
-
     return m_submachineState;
 }
 
@@ -401,7 +397,7 @@ std::shared_ptr<SubsetUnion<uml::Property, uml::Feature>> StateMachineImpl::getA
 		#endif
 		
 		/*SubsetUnion*/
-		m_attribute->initSubsetUnion(getFeature());
+		getAttribute()->initSubsetUnion(getFeature());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value SubsetUnion: " << "m_attribute - SubsetUnion<uml::Property, uml::Feature >(getFeature())" << std::endl;
 		#endif
@@ -421,7 +417,7 @@ std::shared_ptr<SubsetUnion<uml::Feature, uml::NamedElement>> StateMachineImpl::
 		#endif
 		
 		/*SubsetUnion*/
-		m_feature->initSubsetUnion(getMember());
+		getFeature()->initSubsetUnion(getMember());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value SubsetUnion: " << "m_feature - SubsetUnion<uml::Feature, uml::NamedElement >(getMember())" << std::endl;
 		#endif
@@ -465,20 +461,20 @@ std::shared_ptr<Union<uml::Element>> StateMachineImpl::getOwnedElement() const
 	return m_ownedElement;
 }
 
-std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement>> StateMachineImpl::getOwnedMember() const
+std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement>> StateMachineImpl::getOwnedMember() const
 {
 	if(m_ownedMember == nullptr)
 	{
 		/*SubsetUnion*/
-		m_ownedMember.reset(new SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement >());
+		m_ownedMember.reset(new SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement >());
 		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement >()" << std::endl;
+			std::cout << "Initialising shared pointer SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement >()" << std::endl;
 		#endif
 		
 		/*SubsetUnion*/
-		m_ownedMember->initSubsetUnion(getOwnedElement(),getMember());
+		getOwnedMember()->initSubsetUnion(getOwnedElement(), getMember());
 		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement >(getOwnedElement(),getMember())" << std::endl;
+			std::cout << "Initialising value SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement >(getOwnedElement(), getMember())" << std::endl;
 		#endif
 		
 	}
@@ -531,7 +527,7 @@ std::shared_ptr<SubsetUnion<uml::ConnectableElement, uml::NamedElement>> StateMa
 		#endif
 		
 		/*SubsetUnion*/
-		m_role->initSubsetUnion(getMember());
+		getRole()->initSubsetUnion(getMember());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value SubsetUnion: " << "m_role - SubsetUnion<uml::ConnectableElement, uml::NamedElement >(getMember())" << std::endl;
 		#endif

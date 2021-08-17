@@ -123,6 +123,7 @@ TimeEventImpl& TimeEventImpl::operator=(const TimeEventImpl & obj)
 
 	//copy references with no containment (soft copy)
 	//Clone references with containment (deep copy)
+	//clone reference 'when'
 	if(obj.getWhen()!=nullptr)
 	{
 		m_when = std::dynamic_pointer_cast<uml::TimeExpression>(obj.getWhen()->copy());
@@ -178,13 +179,11 @@ Getter & Setter for reference when
 */
 std::shared_ptr<uml::TimeExpression> TimeEventImpl::getWhen() const
 {
-//assert(m_when);
     return m_when;
 }
 void TimeEventImpl::setWhen(std::shared_ptr<uml::TimeExpression> _when)
 {
     m_when = _when;
-	
 	
 }
 

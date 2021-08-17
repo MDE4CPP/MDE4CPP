@@ -184,21 +184,17 @@ TupleLiteralExpImpl& TupleLiteralExpImpl::operator=(const TupleLiteralExpImpl & 
 
 	//copy references with no containment (soft copy)
 	//Clone references with containment (deep copy)
-	std::shared_ptr<Bag<ocl::Expressions::TupleLiteralPart>> partContainer = getPart();
-	if(nullptr != partContainer )
+	//clone reference 'part'
+	std::shared_ptr<Bag<ocl::Expressions::TupleLiteralPart>> partList = obj.getPart();
+	if(partList)
 	{
-		int size = partContainer->size();
-		for(int i=0; i<size ; i++)
+		Bag<ocl::Expressions::TupleLiteralPart>::iterator partIter = partList->begin();
+		Bag<ocl::Expressions::TupleLiteralPart>::iterator partEnd = partList->end();
+		while (partIter != partEnd) 
 		{
-			auto _part=(*partContainer)[i];
-			if(nullptr != _part)
-			{
-				partContainer->push_back(std::dynamic_pointer_cast<ocl::Expressions::TupleLiteralPart>(_part->copy()));
-			}
-			else
-			{
-				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container part."<< std::endl;)
-			}
+			std::shared_ptr<ocl::Expressions::TupleLiteralPart> temp = std::dynamic_pointer_cast<ocl::Expressions::TupleLiteralPart>((*partIter)->copy());
+			getPart()->push_back(temp);
+			partIter++;
 		}
 	}
 	else
@@ -244,7 +240,6 @@ std::shared_ptr<Bag<ocl::Expressions::TupleLiteralPart>> TupleLiteralExpImpl::ge
 		
 		
 	}
-
     return m_part;
 }
 

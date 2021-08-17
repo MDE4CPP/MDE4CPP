@@ -134,60 +134,60 @@ void UML4CPPProfilePackageImpl::createPackagePrimitiveTypes(std::shared_ptr<uml:
 
 void UML4CPPProfilePackageImpl::createPackageStereotypes(std::shared_ptr<uml::Package> uML4CPPProfile, std::shared_ptr<uml::umlFactory> factory)
 {
-	uML4CPPProfile_DoNotGenerate = factory->createStereotype_in_Package(uML4CPPProfile, UML4CPPProfile::UML4CPPProfilePackage::DONOTGENERATE_CLASS);
+	uML4CPPProfile_DoNotGenerate = factory->createStereotype_as_ownedType_in_Package(uML4CPPProfile, UML4CPPProfile::UML4CPPProfilePackage::DONOTGENERATE_CLASS);
 	uML4CPPProfile_DoNotGenerate->setName("DoNotGenerate");
 	uML4CPPProfile_DoNotGenerate->setIsAbstract(false);
-	uML4CPPProfile_DoNotGenerate_base_Element = factory->createProperty_in_Class(uML4CPPProfile_DoNotGenerate);
+	uML4CPPProfile_DoNotGenerate_base_Element = factory->createProperty_as_ownedAttribute_in_Class(uML4CPPProfile_DoNotGenerate);
 	
 
-	uML4CPPProfile_ExternalLibrary = factory->createStereotype_in_Package(uML4CPPProfile, UML4CPPProfile::UML4CPPProfilePackage::EXTERNALLIBRARY_CLASS);
+	uML4CPPProfile_ExternalLibrary = factory->createStereotype_as_ownedType_in_Package(uML4CPPProfile, UML4CPPProfile::UML4CPPProfilePackage::EXTERNALLIBRARY_CLASS);
 	uML4CPPProfile_ExternalLibrary->setName("ExternalLibrary");
 	uML4CPPProfile_ExternalLibrary->setIsAbstract(false);
-	uML4CPPProfile_ExternalLibrary_base_Package = factory->createProperty_in_Class(uML4CPPProfile_ExternalLibrary);uML4CPPProfile_ExternalLibrary_includePath = factory->createProperty_in_Class(uML4CPPProfile_ExternalLibrary);uML4CPPProfile_ExternalLibrary_libraryName = factory->createProperty_in_Class(uML4CPPProfile_ExternalLibrary);uML4CPPProfile_ExternalLibrary_libraryPath = factory->createProperty_in_Class(uML4CPPProfile_ExternalLibrary);
+	uML4CPPProfile_ExternalLibrary_base_Package = factory->createProperty_as_ownedAttribute_in_Class(uML4CPPProfile_ExternalLibrary);uML4CPPProfile_ExternalLibrary_includePath = factory->createProperty_as_ownedAttribute_in_Class(uML4CPPProfile_ExternalLibrary);uML4CPPProfile_ExternalLibrary_libraryName = factory->createProperty_as_ownedAttribute_in_Class(uML4CPPProfile_ExternalLibrary);uML4CPPProfile_ExternalLibrary_libraryPath = factory->createProperty_as_ownedAttribute_in_Class(uML4CPPProfile_ExternalLibrary);
 	
 
-	uML4CPPProfile_GetterName = factory->createStereotype_in_Package(uML4CPPProfile, UML4CPPProfile::UML4CPPProfilePackage::GETTERNAME_CLASS);
+	uML4CPPProfile_GetterName = factory->createStereotype_as_ownedType_in_Package(uML4CPPProfile, UML4CPPProfile::UML4CPPProfilePackage::GETTERNAME_CLASS);
 	uML4CPPProfile_GetterName->setName("GetterName");
 	uML4CPPProfile_GetterName->setIsAbstract(false);
-	uML4CPPProfile_GetterName_base_Property = factory->createProperty_in_Class(uML4CPPProfile_GetterName);uML4CPPProfile_GetterName_getterName = factory->createProperty_in_Class(uML4CPPProfile_GetterName);
+	uML4CPPProfile_GetterName_base_Property = factory->createProperty_as_ownedAttribute_in_Class(uML4CPPProfile_GetterName);uML4CPPProfile_GetterName_getterName = factory->createProperty_as_ownedAttribute_in_Class(uML4CPPProfile_GetterName);
 	
 
-	uML4CPPProfile_MainBehavior = factory->createStereotype_in_Package(uML4CPPProfile, UML4CPPProfile::UML4CPPProfilePackage::MAINBEHAVIOR_CLASS);
+	uML4CPPProfile_MainBehavior = factory->createStereotype_as_ownedType_in_Package(uML4CPPProfile, UML4CPPProfile::UML4CPPProfilePackage::MAINBEHAVIOR_CLASS);
 	uML4CPPProfile_MainBehavior->setName("MainBehavior");
 	uML4CPPProfile_MainBehavior->setIsAbstract(false);
-	uML4CPPProfile_MainBehavior_base_Behavior = factory->createProperty_in_Class(uML4CPPProfile_MainBehavior);
+	uML4CPPProfile_MainBehavior_base_Behavior = factory->createProperty_as_ownedAttribute_in_Class(uML4CPPProfile_MainBehavior);
 	
 
-	uML4CPPProfile_NonExecutable = factory->createStereotype_in_Package(uML4CPPProfile, UML4CPPProfile::UML4CPPProfilePackage::NONEXECUTABLE_CLASS);
+	uML4CPPProfile_NonExecutable = factory->createStereotype_as_ownedType_in_Package(uML4CPPProfile, UML4CPPProfile::UML4CPPProfilePackage::NONEXECUTABLE_CLASS);
 	uML4CPPProfile_NonExecutable->setName("NonExecutable");
 	uML4CPPProfile_NonExecutable->setIsAbstract(false);
-	uML4CPPProfile_NonExecutable_base_NamedElement = factory->createProperty_in_Class(uML4CPPProfile_NonExecutable);
+	uML4CPPProfile_NonExecutable_base_NamedElement = factory->createProperty_as_ownedAttribute_in_Class(uML4CPPProfile_NonExecutable);
 	
 
-	uML4CPPProfile_SetterName = factory->createStereotype_in_Package(uML4CPPProfile, UML4CPPProfile::UML4CPPProfilePackage::SETTERNAME_CLASS);
+	uML4CPPProfile_SetterName = factory->createStereotype_as_ownedType_in_Package(uML4CPPProfile, UML4CPPProfile::UML4CPPProfilePackage::SETTERNAME_CLASS);
 	uML4CPPProfile_SetterName->setName("SetterName");
 	uML4CPPProfile_SetterName->setIsAbstract(false);
-	uML4CPPProfile_SetterName_base_Property = factory->createProperty_in_Class(uML4CPPProfile_SetterName);uML4CPPProfile_SetterName_setterName = factory->createProperty_in_Class(uML4CPPProfile_SetterName);
+	uML4CPPProfile_SetterName_base_Property = factory->createProperty_as_ownedAttribute_in_Class(uML4CPPProfile_SetterName);uML4CPPProfile_SetterName_setterName = factory->createProperty_as_ownedAttribute_in_Class(uML4CPPProfile_SetterName);
 	
 
-	uML4CPPProfile_Singleton = factory->createStereotype_in_Package(uML4CPPProfile, UML4CPPProfile::UML4CPPProfilePackage::SINGLETON_CLASS);
+	uML4CPPProfile_Singleton = factory->createStereotype_as_ownedType_in_Package(uML4CPPProfile, UML4CPPProfile::UML4CPPProfilePackage::SINGLETON_CLASS);
 	uML4CPPProfile_Singleton->setName("Singleton");
 	uML4CPPProfile_Singleton->setIsAbstract(false);
-	uML4CPPProfile_Singleton_base_Class = factory->createProperty_in_Class(uML4CPPProfile_Singleton);
+	uML4CPPProfile_Singleton_base_Class = factory->createProperty_as_ownedAttribute_in_Class(uML4CPPProfile_Singleton);
 	
 
-	uML4CPPProfile_UML4CPPPackage = factory->createStereotype_in_Package(uML4CPPProfile, UML4CPPProfile::UML4CPPProfilePackage::UML4CPPPACKAGE_CLASS);
+	uML4CPPProfile_UML4CPPPackage = factory->createStereotype_as_ownedType_in_Package(uML4CPPProfile, UML4CPPProfile::UML4CPPProfilePackage::UML4CPPPACKAGE_CLASS);
 	uML4CPPProfile_UML4CPPPackage->setName("UML4CPPPackage");
 	uML4CPPProfile_UML4CPPPackage->setIsAbstract(false);
-	uML4CPPProfile_UML4CPPPackage_base_Package = factory->createProperty_in_Class(uML4CPPProfile_UML4CPPPackage);uML4CPPProfile_UML4CPPPackage_eclipseURI = factory->createProperty_in_Class(uML4CPPProfile_UML4CPPPackage);uML4CPPProfile_UML4CPPPackage_ignoreNamespace = factory->createProperty_in_Class(uML4CPPProfile_UML4CPPPackage);uML4CPPProfile_UML4CPPPackage_packageOnly = factory->createProperty_in_Class(uML4CPPProfile_UML4CPPPackage);
+	uML4CPPProfile_UML4CPPPackage_base_Package = factory->createProperty_as_ownedAttribute_in_Class(uML4CPPProfile_UML4CPPPackage);uML4CPPProfile_UML4CPPPackage_eclipseURI = factory->createProperty_as_ownedAttribute_in_Class(uML4CPPProfile_UML4CPPPackage);uML4CPPProfile_UML4CPPPackage_ignoreNamespace = factory->createProperty_as_ownedAttribute_in_Class(uML4CPPProfile_UML4CPPPackage);uML4CPPProfile_UML4CPPPackage_packageOnly = factory->createProperty_as_ownedAttribute_in_Class(uML4CPPProfile_UML4CPPPackage);
 	
 }
 
 void UML4CPPProfilePackageImpl::createPackageValueSpecifications(std::shared_ptr<uml::Package> uML4CPPProfile, std::shared_ptr<uml::umlFactory> factory)
 {
-	uML4CPPProfile_UML4CPPPackage_ignoreNamespace_defaultValue_LiteralBoolean_UML4CPPProfile_UML4CPPPackage_ignoreNamespace = factory->createLiteralBoolean_in_Owner(uML4CPPProfile_UML4CPPPackage_ignoreNamespace);
+	uML4CPPProfile_UML4CPPPackage_ignoreNamespace_defaultValue_LiteralBoolean_UML4CPPProfile_UML4CPPPackage_ignoreNamespace = factory->createLiteralBoolean_as_ownedElement_in_Element(uML4CPPProfile_UML4CPPPackage_ignoreNamespace);
 	
-	uML4CPPProfile_UML4CPPPackage_packageOnly_defaultValue_LiteralBoolean_UML4CPPProfile_UML4CPPPackage_packageOnly = factory->createLiteralBoolean_in_Owner(uML4CPPProfile_UML4CPPPackage_packageOnly);
+	uML4CPPProfile_UML4CPPPackage_packageOnly_defaultValue_LiteralBoolean_UML4CPPProfile_UML4CPPPackage_packageOnly = factory->createLiteralBoolean_as_ownedElement_in_Element(uML4CPPProfile_UML4CPPPackage_packageOnly);
 	
 }
 

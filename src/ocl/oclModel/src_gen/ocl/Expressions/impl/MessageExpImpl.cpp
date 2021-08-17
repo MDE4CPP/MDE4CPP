@@ -186,8 +186,7 @@ MessageExpImpl& MessageExpImpl::operator=(const MessageExpImpl & obj)
 	//Clone Attributes with (deep copy)
 
 	//copy references with no containment (soft copy)
-	std::shared_ptr<Bag<ocl::Expressions::OclExpression>> _argument = obj.getArgument();
-	m_argument.reset(new Bag<ocl::Expressions::OclExpression>(*(obj.getArgument().get())));
+	m_argument  = obj.getArgument();
 	m_calledOperation  = obj.getCalledOperation();
 	m_sentSignal  = obj.getSentSignal();
 	m_target  = obj.getTarget();
@@ -230,7 +229,6 @@ std::shared_ptr<Bag<ocl::Expressions::OclExpression>> MessageExpImpl::getArgumen
 		
 		
 	}
-
     return m_argument;
 }
 
@@ -241,7 +239,6 @@ Getter & Setter for reference calledOperation
 */
 std::shared_ptr<uml::CallOperationAction> MessageExpImpl::getCalledOperation() const
 {
-
     return m_calledOperation;
 }
 void MessageExpImpl::setCalledOperation(std::shared_ptr<uml::CallOperationAction> _calledOperation)
@@ -256,7 +253,6 @@ Getter & Setter for reference sentSignal
 */
 std::shared_ptr<uml::SendSignalAction> MessageExpImpl::getSentSignal() const
 {
-
     return m_sentSignal;
 }
 void MessageExpImpl::setSentSignal(std::shared_ptr<uml::SendSignalAction> _sentSignal)
@@ -271,7 +267,6 @@ Getter & Setter for reference target
 */
 std::shared_ptr<ocl::Expressions::OclExpression> MessageExpImpl::getTarget() const
 {
-
     return m_target;
 }
 void MessageExpImpl::setTarget(std::shared_ptr<ocl::Expressions::OclExpression> _target)

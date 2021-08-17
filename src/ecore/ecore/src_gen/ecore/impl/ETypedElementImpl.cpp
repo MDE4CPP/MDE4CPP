@@ -100,6 +100,7 @@ ETypedElementImpl& ETypedElementImpl::operator=(const ETypedElementImpl & obj)
 	//copy references with no containment (soft copy)
 	m_eType  = obj.getEType();
 	//Clone references with containment (deep copy)
+	//clone reference 'eGenericType'
 	if(obj.getEGenericType()!=nullptr)
 	{
 		m_eGenericType = std::dynamic_pointer_cast<ecore::EGenericType>(obj.getEGenericType()->copy());
@@ -216,7 +217,6 @@ Getter & Setter for reference eGenericType
 */
 std::shared_ptr<ecore::EGenericType> ETypedElementImpl::getEGenericType() const
 {
-
     return m_eGenericType;
 }
 void ETypedElementImpl::setEGenericType(std::shared_ptr<ecore::EGenericType> _eGenericType)
@@ -231,7 +231,6 @@ Getter & Setter for reference eType
 */
 std::shared_ptr<ecore::EClassifier> ETypedElementImpl::getEType() const
 {
-
     return m_eType;
 }
 void ETypedElementImpl::setEType(std::shared_ptr<ecore::EClassifier> _eType)

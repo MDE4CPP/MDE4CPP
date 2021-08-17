@@ -32,17 +32,15 @@
 #include "fUML/Semantics/Activities/impl/TokenImpl.hpp"
 #include "fUML/Semantics/Activities/impl/TokenSetImpl.hpp"
 
-#include "fUML/Semantics/Activities/ActivityNodeActivationGroup.hpp"
-#include "fUML/Semantics/Activities/ActivityNodeActivationGroup.hpp"
-#include "fUML/Semantics/CommonBehavior/Execution.hpp"
-#include "fUML/Semantics/CommonBehavior/Execution.hpp"
-#include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
-#include "fUML/Semantics/StructuredClassifiers/ExtensionalValue.hpp"
-#include "fUML/Semantics/Activities/Token.hpp"
-#include "fUML/Semantics/Activities/ActivityNodeActivation.hpp"
-#include "fUML/Semantics/Values/Value.hpp"
-#include "fUML/Semantics/Values/Value.hpp"
-#include "fUML/Semantics/Values/Value.hpp"
+#include "fUML/Semantics/Actions/ActionsPackage.hpp"
+#include "fUML/Semantics/Actions/CallActionActivation.hpp"
+#include "fUML/Semantics/Actions/StructuredActivityNodeActivation.hpp"
+#include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
+#include "fUML/Semantics/CommonBehavior/ParameterValue.hpp"
+#include "fUML/Semantics/Loci/LociPackage.hpp"
+#include "fUML/Semantics/Loci/Locus.hpp"
+#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersPackage.hpp"
+#include "fUML/Semantics/SimpleClassifiers/FeatureValue.hpp"
 
 
 using namespace fUML::Semantics::Activities;
@@ -120,40 +118,40 @@ std::shared_ptr<ecore::EObject> ActivitiesFactoryImpl::create(const int metaElem
 				switch(referenceID)
 				{
 					//ActivityExecution has callExecutions as a containment
-					case  ActivitiesPackage::CALLACTIONACTIVATION_ATTRIBUTE_CALLEXECUTIONS:	
+					case  fUML::Semantics::Actions::ActionsPackage::CALLACTIONACTIVATION_ATTRIBUTE_CALLEXECUTIONS:	
 					{
 						auto castedContainer = std::dynamic_pointer_cast<fUML::Semantics::Actions::CallActionActivation>(container);
-						return this->createActivityExecution_as_callExecutions_in_fUML::Semantics::Actions::CallActionActivation(castedContainer,metaElementID);
+						return this->createActivityExecution_as_callExecutions_in_CallActionActivation(castedContainer,metaElementID);
 					}
 					//ActivityExecution has decisionInputExecution as a containment
-					case  ActivitiesPackage::DECISIONNODEACTIVATION_ATTRIBUTE_DECISIONINPUTEXECUTION:	
+					case  fUML::Semantics::Activities::ActivitiesPackage::DECISIONNODEACTIVATION_ATTRIBUTE_DECISIONINPUTEXECUTION:	
 					{
 						auto castedContainer = std::dynamic_pointer_cast<fUML::Semantics::Activities::DecisionNodeActivation>(container);
-						return this->createActivityExecution_as_decisionInputExecution_in_fUML::Semantics::Activities::DecisionNodeActivation(castedContainer,metaElementID);
+						return this->createActivityExecution_as_decisionInputExecution_in_DecisionNodeActivation(castedContainer,metaElementID);
 					}
 					//ActivityExecution has extensionalValues as a containment
-					case  ActivitiesPackage::LOCUS_ATTRIBUTE_EXTENSIONALVALUES:	
+					case  fUML::Semantics::Loci::LociPackage::LOCUS_ATTRIBUTE_EXTENSIONALVALUES:	
 					{
 						auto castedContainer = std::dynamic_pointer_cast<fUML::Semantics::Loci::Locus>(container);
-						return this->createActivityExecution_as_extensionalValues_in_fUML::Semantics::Loci::Locus(castedContainer,metaElementID);
+						return this->createActivityExecution_as_extensionalValues_in_Locus(castedContainer,metaElementID);
 					}
 					//ActivityExecution has value as a containment
-					case  ActivitiesPackage::OBJECTTOKEN_ATTRIBUTE_VALUE:	
+					case  fUML::Semantics::Activities::ActivitiesPackage::OBJECTTOKEN_ATTRIBUTE_VALUE:	
 					{
 						auto castedContainer = std::dynamic_pointer_cast<fUML::Semantics::Activities::ObjectToken>(container);
-						return this->createActivityExecution_as_value_in_fUML::Semantics::Activities::ObjectToken(castedContainer,metaElementID);
+						return this->createActivityExecution_as_value_in_ObjectToken(castedContainer,metaElementID);
 					}
 					//ActivityExecution has values as a containment
-					case  ActivitiesPackage::FEATUREVALUE_ATTRIBUTE_VALUES:	
+					case  fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::FEATUREVALUE_ATTRIBUTE_VALUES:	
 					{
 						auto castedContainer = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::FeatureValue>(container);
-						return this->createActivityExecution_as_values_in_fUML::Semantics::SimpleClassifiers::FeatureValue(castedContainer,metaElementID);
+						return this->createActivityExecution_as_values_in_FeatureValue(castedContainer,metaElementID);
 					}
 					//ActivityExecution has values as a containment
-					case  ActivitiesPackage::PARAMETERVALUE_ATTRIBUTE_VALUES:	
+					case  fUML::Semantics::CommonBehavior::CommonBehaviorPackage::PARAMETERVALUE_ATTRIBUTE_VALUES:	
 					{
 						auto castedContainer = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::ParameterValue>(container);
-						return this->createActivityExecution_as_values_in_fUML::Semantics::CommonBehavior::ParameterValue(castedContainer,metaElementID);
+						return this->createActivityExecution_as_values_in_ParameterValue(castedContainer,metaElementID);
 					}
 					default:
 						std::cerr << __PRETTY_FUNCTION__ << "ERROR: Reference type not found." << std::endl;
@@ -186,16 +184,16 @@ std::shared_ptr<ecore::EObject> ActivitiesFactoryImpl::create(const int metaElem
 				switch(referenceID)
 				{
 					//ActivityNodeActivationGroup has activationGroup as a containment
-					case  ActivitiesPackage::STRUCTUREDACTIVITYNODEACTIVATION_ATTRIBUTE_ACTIVATIONGROUP:	
+					case  fUML::Semantics::Actions::ActionsPackage::STRUCTUREDACTIVITYNODEACTIVATION_ATTRIBUTE_ACTIVATIONGROUP:	
 					{
 						auto castedContainer = std::dynamic_pointer_cast<fUML::Semantics::Actions::StructuredActivityNodeActivation>(container);
-						return this->createActivityNodeActivationGroup_as_activationGroup_in_fUML::Semantics::Actions::StructuredActivityNodeActivation(castedContainer,metaElementID);
+						return this->createActivityNodeActivationGroup_as_activationGroup_in_StructuredActivityNodeActivation(castedContainer,metaElementID);
 					}
 					//ActivityNodeActivationGroup has activationGroup as a containment
-					case  ActivitiesPackage::ACTIVITYEXECUTION_ATTRIBUTE_ACTIVATIONGROUP:	
+					case  fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYEXECUTION_ATTRIBUTE_ACTIVATIONGROUP:	
 					{
 						auto castedContainer = std::dynamic_pointer_cast<fUML::Semantics::Activities::ActivityExecution>(container);
-						return this->createActivityNodeActivationGroup_as_activationGroup_in_fUML::Semantics::Activities::ActivityExecution(castedContainer,metaElementID);
+						return this->createActivityNodeActivationGroup_as_activationGroup_in_ActivityExecution(castedContainer,metaElementID);
 					}
 					default:
 						std::cerr << __PRETTY_FUNCTION__ << "ERROR: Reference type not found." << std::endl;
@@ -296,16 +294,16 @@ std::shared_ptr<ecore::EObject> ActivitiesFactoryImpl::create(const int metaElem
 				switch(referenceID)
 				{
 					//ExpansionActivationGroup has activationGroup as a containment
-					case  ActivitiesPackage::STRUCTUREDACTIVITYNODEACTIVATION_ATTRIBUTE_ACTIVATIONGROUP:	
+					case  fUML::Semantics::Actions::ActionsPackage::STRUCTUREDACTIVITYNODEACTIVATION_ATTRIBUTE_ACTIVATIONGROUP:	
 					{
 						auto castedContainer = std::dynamic_pointer_cast<fUML::Semantics::Actions::StructuredActivityNodeActivation>(container);
-						return this->createExpansionActivationGroup_as_activationGroup_in_fUML::Semantics::Actions::StructuredActivityNodeActivation(castedContainer,metaElementID);
+						return this->createExpansionActivationGroup_as_activationGroup_in_StructuredActivityNodeActivation(castedContainer,metaElementID);
 					}
 					//ExpansionActivationGroup has activationGroup as a containment
-					case  ActivitiesPackage::ACTIVITYEXECUTION_ATTRIBUTE_ACTIVATIONGROUP:	
+					case  fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYEXECUTION_ATTRIBUTE_ACTIVATIONGROUP:	
 					{
 						auto castedContainer = std::dynamic_pointer_cast<fUML::Semantics::Activities::ActivityExecution>(container);
-						return this->createExpansionActivationGroup_as_activationGroup_in_fUML::Semantics::Activities::ActivityExecution(castedContainer,metaElementID);
+						return this->createExpansionActivationGroup_as_activationGroup_in_ActivityExecution(castedContainer,metaElementID);
 					}
 					default:
 						std::cerr << __PRETTY_FUNCTION__ << "ERROR: Reference type not found." << std::endl;

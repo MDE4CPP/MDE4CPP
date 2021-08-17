@@ -171,7 +171,7 @@ std::shared_ptr<uml::ValueSpecification> EnumerationValueImpl::specify()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	std::shared_ptr<uml::InstanceValue> instanceValue(uml::umlFactory::eInstance()->createInstanceValue_in_Namespace(std::shared_ptr<uml::Class>()));
+	std::shared_ptr<uml::InstanceValue> instanceValue(uml::umlFactory::eInstance()->createInstanceValue_as_ownedMember_in_Namespace(std::shared_ptr<uml::Class>()));
     //Remark: instance is so defined in the specification, but even there is not used.
     //uml::InstanceSpecification * instance = uml::umlFactory::eInstance()->createInstanceSpecification(std::shared_ptr<uml::Class>());
 
@@ -198,7 +198,6 @@ Getter & Setter for reference literal
 */
 std::shared_ptr<uml::EnumerationLiteral> EnumerationValueImpl::getLiteral() const
 {
-//assert(m_literal);
     return m_literal;
 }
 void EnumerationValueImpl::setLiteral(std::shared_ptr<uml::EnumerationLiteral> _literal)
@@ -213,7 +212,6 @@ Getter & Setter for reference type
 */
 std::shared_ptr<uml::Enumeration> EnumerationValueImpl::getType() const
 {
-//assert(m_type);
     return m_type;
 }
 void EnumerationValueImpl::setType(std::shared_ptr<uml::Enumeration> _type)

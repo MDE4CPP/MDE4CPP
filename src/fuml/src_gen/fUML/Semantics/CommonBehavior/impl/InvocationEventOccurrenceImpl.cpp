@@ -146,7 +146,6 @@ Getter & Setter for reference execution
 */
 std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> InvocationEventOccurrenceImpl::getExecution() const
 {
-//assert(m_execution);
     return m_execution;
 }
 void InvocationEventOccurrenceImpl::setExecution(std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> _execution)

@@ -133,25 +133,23 @@ UnmarshallActionImpl& UnmarshallActionImpl::operator=(const UnmarshallActionImpl
 	//copy references with no containment (soft copy)
 	m_unmarshallType  = obj.getUnmarshallType();
 	//Clone references with containment (deep copy)
+	//clone reference 'object'
 	if(obj.getObject()!=nullptr)
 	{
 		m_object = std::dynamic_pointer_cast<uml::InputPin>(obj.getObject()->copy());
 	}
-	std::shared_ptr<Subset<uml::OutputPin, uml::OutputPin>> resultContainer = getResult();
-	if(nullptr != resultContainer )
+
+	//clone reference 'result'
+	std::shared_ptr<Subset<uml::OutputPin, uml::OutputPin>> resultList = obj.getResult();
+	if(resultList)
 	{
-		int size = resultContainer->size();
-		for(int i=0; i<size ; i++)
+		Bag<uml::OutputPin>::iterator resultIter = resultList->begin();
+		Bag<uml::OutputPin>::iterator resultEnd = resultList->end();
+		while (resultIter != resultEnd) 
 		{
-			auto _result=(*resultContainer)[i];
-			if(nullptr != _result)
-			{
-				resultContainer->push_back(std::dynamic_pointer_cast<uml::OutputPin>(_result->copy()));
-			}
-			else
-			{
-				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container result."<< std::endl;)
-			}
+			std::shared_ptr<uml::OutputPin> temp = std::dynamic_pointer_cast<uml::OutputPin>((*resultIter)->copy());
+			getResult()->push_back(temp);
+			resultIter++;
 		}
 	}
 	else
@@ -160,7 +158,7 @@ UnmarshallActionImpl& UnmarshallActionImpl::operator=(const UnmarshallActionImpl
 	}
 	
 	/*Subset*/
-	m_result->initSubset(getOutput());
+	getResult()->initSubset(getOutput());
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Initialising value Subset: " << "m_result - Subset<uml::OutputPin, uml::OutputPin >(getOutput())" << std::endl;
 	#endif
@@ -226,14 +224,11 @@ Getter & Setter for reference object
 */
 std::shared_ptr<uml::InputPin> UnmarshallActionImpl::getObject() const
 {
-//assert(m_object);
     return m_object;
 }
 void UnmarshallActionImpl::setObject(std::shared_ptr<uml::InputPin> _object)
 {
     m_object = _object;
-	
-	
 	
 }
 
@@ -252,13 +247,12 @@ std::shared_ptr<Subset<uml::OutputPin, uml::OutputPin>> UnmarshallActionImpl::ge
 		#endif
 		
 		/*Subset*/
-		m_result->initSubset(getOutput());
+		getResult()->initSubset(getOutput());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value Subset: " << "m_result - Subset<uml::OutputPin, uml::OutputPin >(getOutput())" << std::endl;
 		#endif
 		
 	}
-//assert(m_result);
     return m_result;
 }
 
@@ -269,7 +263,6 @@ Getter & Setter for reference unmarshallType
 */
 std::shared_ptr<uml::Classifier> UnmarshallActionImpl::getUnmarshallType() const
 {
-//assert(m_unmarshallType);
     return m_unmarshallType;
 }
 void UnmarshallActionImpl::setUnmarshallType(std::shared_ptr<uml::Classifier> _unmarshallType)
@@ -308,7 +301,7 @@ std::shared_ptr<SubsetUnion<uml::InputPin, uml::Element>> UnmarshallActionImpl::
 		#endif
 		
 		/*SubsetUnion*/
-		m_input->initSubsetUnion(getOwnedElement());
+		getInput()->initSubsetUnion(getOwnedElement());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value SubsetUnion: " << "m_input - SubsetUnion<uml::InputPin, uml::Element >(getOwnedElement())" << std::endl;
 		#endif
@@ -328,7 +321,7 @@ std::shared_ptr<SubsetUnion<uml::OutputPin, uml::Element>> UnmarshallActionImpl:
 		#endif
 		
 		/*SubsetUnion*/
-		m_output->initSubsetUnion(getOwnedElement());
+		getOutput()->initSubsetUnion(getOwnedElement());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value SubsetUnion: " << "m_output - SubsetUnion<uml::OutputPin, uml::Element >(getOwnedElement())" << std::endl;
 		#endif

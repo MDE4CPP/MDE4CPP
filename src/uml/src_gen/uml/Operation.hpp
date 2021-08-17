@@ -12,6 +12,7 @@
 #include <memory>
 #include <string>
 // forward declarations
+template<class T> class Bag; 
 template<class T, class ... U> class Subset;
 
 class AnyObject;
@@ -261,6 +262,9 @@ namespace uml
 			*/
 			
 			virtual void setInterface(std::weak_ptr<uml::Interface>) = 0;
+			
+			virtual std::shared_ptr<Bag<uml::Parameter>> getProperty_OwnedParameter() const = 0;
+			
 			/*!
 			An optional set of Constraints specifying the state of the system when the Operation is completed.
 			<p>From package UML::Classification.</p>
@@ -299,31 +303,31 @@ namespace uml
 			Specifies whether the return parameter is ordered or not, if present.  This information is derived from the return result for this Operation.
 			<p>From package UML::Classification.</p>
 			*/
-			 
+			
 			bool m_isOrdered = false;
 			/*!
 			Specifies whether an execution of the BehavioralFeature leaves the state of the system unchanged (isQuery=true) or whether side effects may occur (isQuery=false).
 			<p>From package UML::Classification.</p>
 			*/
-			 
+			
 			bool m_isQuery = false;
 			/*!
 			Specifies whether the return parameter is unique or not, if present. This information is derived from the return result for this Operation.
 			<p>From package UML::Classification.</p>
 			*/
-			 
+			
 			bool m_isUnique = true;
 			/*!
 			Specifies the lower multiplicity of the return parameter, if present. This information is derived from the return result for this Operation.
 			<p>From package UML::Classification.</p>
 			*/
-			 
+			
 			int m_lower = 1;
 			/*!
 			The upper multiplicity of the return parameter, if present. This information is derived from the return result for this Operation.
 			<p>From package UML::Classification.</p>
 			*/
-			 
+			
 			int m_upper = 1;
 			
 			
@@ -401,7 +405,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement>> getOwnedMember() const = 0;/*!
+			virtual std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement>> getOwnedMember() const = 0;/*!
 			The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/

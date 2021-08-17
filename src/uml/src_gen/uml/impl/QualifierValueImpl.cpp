@@ -144,7 +144,6 @@ Getter & Setter for reference qualifier
 */
 std::shared_ptr<uml::Property> QualifierValueImpl::getQualifier() const
 {
-//assert(m_qualifier);
     return m_qualifier;
 }
 void QualifierValueImpl::setQualifier(std::shared_ptr<uml::Property> _qualifier)
@@ -159,7 +158,6 @@ Getter & Setter for reference value
 */
 std::shared_ptr<uml::InputPin> QualifierValueImpl::getValue() const
 {
-//assert(m_value);
     return m_value;
 }
 void QualifierValueImpl::setValue(std::shared_ptr<uml::InputPin> _value)

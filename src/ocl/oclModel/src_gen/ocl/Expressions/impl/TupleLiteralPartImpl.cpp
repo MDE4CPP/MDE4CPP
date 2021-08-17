@@ -89,6 +89,7 @@ TupleLiteralPartImpl& TupleLiteralPartImpl::operator=(const TupleLiteralPartImpl
 
 	//copy references with no containment (soft copy)
 	//Clone references with containment (deep copy)
+	//clone reference 'attribute'
 	if(obj.getAttribute()!=nullptr)
 	{
 		m_attribute = std::dynamic_pointer_cast<ecore::EAttribute>(obj.getAttribute()->copy());
@@ -126,7 +127,6 @@ Getter & Setter for reference attribute
 */
 std::shared_ptr<ecore::EAttribute> TupleLiteralPartImpl::getAttribute() const
 {
-
     return m_attribute;
 }
 void TupleLiteralPartImpl::setAttribute(std::shared_ptr<ecore::EAttribute> _attribute)

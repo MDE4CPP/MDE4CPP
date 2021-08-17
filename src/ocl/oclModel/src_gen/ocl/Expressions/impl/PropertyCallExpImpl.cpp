@@ -217,7 +217,6 @@ Getter & Setter for reference referredProperty
 */
 std::shared_ptr<ecore::EAttribute> PropertyCallExpImpl::getReferredProperty() const
 {
-
     return m_referredProperty;
 }
 void PropertyCallExpImpl::setReferredProperty(std::shared_ptr<ecore::EAttribute> _referredProperty)

@@ -154,7 +154,7 @@ namespace uml
 			Constrains the required relationship between an actual parameter and the parameteredElement for this formal parameter.
 			<p>From package UML::Classification.</p>
 			*/
-			 
+			
 			bool m_allowSubstitutable = true;
 			
 			

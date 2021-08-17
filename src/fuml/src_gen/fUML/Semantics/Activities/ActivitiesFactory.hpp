@@ -16,24 +16,22 @@
 #include "ecore/EFactory.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 
-namespace fUML::Semantics::Activities 
+namespace fUML::Semantics::Actions
 {
-	class ActivityEdgeInstance;
-	class ActivityNodeActivation;
-	class ActivityNodeActivationGroup;
-	class Token;
+	class CallActionActivation;
+	class StructuredActivityNodeActivation;
 }
-namespace fUML::Semantics::CommonBehavior 
+namespace fUML::Semantics::CommonBehavior
 {
-	class Execution;
+	class ParameterValue;
 }
-namespace fUML::Semantics::StructuredClassifiers 
+namespace fUML::Semantics::Loci
 {
-	class ExtensionalValue;
+	class Locus;
 }
-namespace fUML::Semantics::Values 
+namespace fUML::Semantics::SimpleClassifiers
 {
-	class Value;
+	class FeatureValue;
 }
 
 

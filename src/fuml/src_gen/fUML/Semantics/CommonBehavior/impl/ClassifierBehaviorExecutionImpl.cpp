@@ -142,7 +142,6 @@ Getter & Setter for reference classifier
 */
 std::shared_ptr<uml::Class> ClassifierBehaviorExecutionImpl::getClassifier() const
 {
-//assert(m_classifier);
     return m_classifier;
 }
 void ClassifierBehaviorExecutionImpl::setClassifier(std::shared_ptr<uml::Class> _classifier)
@@ -157,7 +156,6 @@ Getter & Setter for reference execution
 */
 std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> ClassifierBehaviorExecutionImpl::getExecution() const
 {
-//assert(m_execution);
     return m_execution;
 }
 void ClassifierBehaviorExecutionImpl::setExecution(std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> _execution)
@@ -172,7 +170,6 @@ Getter & Setter for reference objectActivation
 */
 std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation> ClassifierBehaviorExecutionImpl::getObjectActivation() const
 {
-
     return m_objectActivation;
 }
 void ClassifierBehaviorExecutionImpl::setObjectActivation(std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation> _objectActivation)

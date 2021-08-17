@@ -147,7 +147,6 @@ Getter & Setter for reference destroyAt
 */
 std::shared_ptr<uml::InputPin> LinkEndDestructionDataImpl::getDestroyAt() const
 {
-
     return m_destroyAt;
 }
 void LinkEndDestructionDataImpl::setDestroyAt(std::shared_ptr<uml::InputPin> _destroyAt)

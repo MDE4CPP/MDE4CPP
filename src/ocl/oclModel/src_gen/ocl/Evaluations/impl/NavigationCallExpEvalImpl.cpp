@@ -33,11 +33,11 @@
 
 #include <exception> // used in Persistence
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
-#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Values/ValuesFactory.hpp"
+#include "fUML/Semantics/Loci/LociFactory.hpp"
 
 
 #include "ocl/Evaluations/EvalEnvironment.hpp"
@@ -101,8 +101,7 @@ NavigationCallExpEvalImpl& NavigationCallExpEvalImpl::operator=(const Navigation
 
 	//copy references with no containment (soft copy)
 	m_navigationSource  = obj.getNavigationSource();
-	std::shared_ptr<Bag<ocl::Evaluations::OclExpEval>> _qualifiers = obj.getQualifiers();
-	m_qualifiers.reset(new Bag<ocl::Evaluations::OclExpEval>(*(obj.getQualifiers().get())));
+	m_qualifiers  = obj.getQualifiers();
 	//Clone references with containment (deep copy)
 	return *this;
 }
@@ -136,7 +135,6 @@ Getter & Setter for reference navigationSource
 */
 std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> NavigationCallExpEvalImpl::getNavigationSource() const
 {
-//assert(m_navigationSource);
     return m_navigationSource;
 }
 void NavigationCallExpEvalImpl::setNavigationSource(std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> _navigationSource)
@@ -157,7 +155,6 @@ std::shared_ptr<Bag<ocl::Evaluations::OclExpEval>> NavigationCallExpEvalImpl::ge
 		
 		
 	}
-
     return m_qualifiers;
 }
 

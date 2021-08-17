@@ -155,21 +155,17 @@ CollaborationImpl& CollaborationImpl::operator=(const CollaborationImpl & obj)
 
 	//copy references with no containment (soft copy)
 	//Clone references with containment (deep copy)
-	std::shared_ptr<Subset<uml::ConnectableElement, uml::ConnectableElement>> collaborationRoleContainer = getCollaborationRole();
-	if(nullptr != collaborationRoleContainer )
+	//clone reference 'collaborationRole'
+	std::shared_ptr<Subset<uml::ConnectableElement, uml::ConnectableElement>> collaborationRoleList = obj.getCollaborationRole();
+	if(collaborationRoleList)
 	{
-		int size = collaborationRoleContainer->size();
-		for(int i=0; i<size ; i++)
+		Bag<uml::ConnectableElement>::iterator collaborationRoleIter = collaborationRoleList->begin();
+		Bag<uml::ConnectableElement>::iterator collaborationRoleEnd = collaborationRoleList->end();
+		while (collaborationRoleIter != collaborationRoleEnd) 
 		{
-			auto _collaborationRole=(*collaborationRoleContainer)[i];
-			if(nullptr != _collaborationRole)
-			{
-				collaborationRoleContainer->push_back(std::dynamic_pointer_cast<uml::ConnectableElement>(_collaborationRole->copy()));
-			}
-			else
-			{
-				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container collaborationRole."<< std::endl;)
-			}
+			std::shared_ptr<uml::ConnectableElement> temp = std::dynamic_pointer_cast<uml::ConnectableElement>((*collaborationRoleIter)->copy());
+			getCollaborationRole()->push_back(temp);
+			collaborationRoleIter++;
 		}
 	}
 	else
@@ -217,13 +213,12 @@ std::shared_ptr<Subset<uml::ConnectableElement, uml::ConnectableElement>> Collab
 		#endif
 		
 		/*Subset*/
-		m_collaborationRole->initSubset(getRole());
+		getCollaborationRole()->initSubset(getRole());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value Subset: " << "m_collaborationRole - Subset<uml::ConnectableElement, uml::ConnectableElement >(getRole())" << std::endl;
 		#endif
 		
 	}
-
     return m_collaborationRole;
 }
 
@@ -243,7 +238,7 @@ std::shared_ptr<SubsetUnion<uml::Property, uml::Feature>> CollaborationImpl::get
 		#endif
 		
 		/*SubsetUnion*/
-		m_attribute->initSubsetUnion(getFeature());
+		getAttribute()->initSubsetUnion(getFeature());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value SubsetUnion: " << "m_attribute - SubsetUnion<uml::Property, uml::Feature >(getFeature())" << std::endl;
 		#endif
@@ -263,7 +258,7 @@ std::shared_ptr<SubsetUnion<uml::Feature, uml::NamedElement>> CollaborationImpl:
 		#endif
 		
 		/*SubsetUnion*/
-		m_feature->initSubsetUnion(getMember());
+		getFeature()->initSubsetUnion(getMember());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value SubsetUnion: " << "m_feature - SubsetUnion<uml::Feature, uml::NamedElement >(getMember())" << std::endl;
 		#endif
@@ -307,20 +302,20 @@ std::shared_ptr<Union<uml::Element>> CollaborationImpl::getOwnedElement() const
 	return m_ownedElement;
 }
 
-std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement>> CollaborationImpl::getOwnedMember() const
+std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement>> CollaborationImpl::getOwnedMember() const
 {
 	if(m_ownedMember == nullptr)
 	{
 		/*SubsetUnion*/
-		m_ownedMember.reset(new SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement >());
+		m_ownedMember.reset(new SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement >());
 		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement >()" << std::endl;
+			std::cout << "Initialising shared pointer SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement >()" << std::endl;
 		#endif
 		
 		/*SubsetUnion*/
-		m_ownedMember->initSubsetUnion(getOwnedElement(),getMember());
+		getOwnedMember()->initSubsetUnion(getOwnedElement(), getMember());
 		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement >(getOwnedElement(),getMember())" << std::endl;
+			std::cout << "Initialising value SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement >(getOwnedElement(), getMember())" << std::endl;
 		#endif
 		
 	}
@@ -358,7 +353,7 @@ std::shared_ptr<SubsetUnion<uml::ConnectableElement, uml::NamedElement>> Collabo
 		#endif
 		
 		/*SubsetUnion*/
-		m_role->initSubsetUnion(getMember());
+		getRole()->initSubsetUnion(getMember());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value SubsetUnion: " << "m_role - SubsetUnion<uml::ConnectableElement, uml::NamedElement >(getMember())" << std::endl;
 		#endif

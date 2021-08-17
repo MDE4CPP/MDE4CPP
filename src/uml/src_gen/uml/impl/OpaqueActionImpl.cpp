@@ -129,42 +129,30 @@ OpaqueActionImpl& OpaqueActionImpl::operator=(const OpaqueActionImpl & obj)
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy OpaqueAction "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
 	//Clone Attributes with (deep copy)
-	std::shared_ptr<Bag<std::string>> bodyContainer = getBody();
-	if(nullptr != bodyContainer )
-	{
-		int size = bodyContainer->size();
-		for(int i=0; i<size ; i++)
+	std::shared_ptr<Bag<std::string>> bodyList = obj.getBody();
+	if(bodyList)
+	{	getBody().reset(new Bag<std::string>());
+		Bag<std::string>::iterator bodyIter = bodyList->begin();
+		Bag<std::string>::iterator bodyEnd = bodyList->end();
+		while (bodyIter != bodyEnd) 
 		{
-			auto _body=(*bodyContainer)[i];	
-			if(nullptr != _body)
-			{
-				bodyContainer->push_back(_body);
-			} 
-			else
-			{
-				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container body."<< std::endl;)
-			}
+			getBody()->push_back(*bodyIter);
+			bodyIter++;
 		}
 	}
 	else
 	{
 		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr body."<< std::endl;)
 	}
-	std::shared_ptr<Bag<std::string>> languageContainer = getLanguage();
-	if(nullptr != languageContainer )
-	{
-		int size = languageContainer->size();
-		for(int i=0; i<size ; i++)
+	std::shared_ptr<Bag<std::string>> languageList = obj.getLanguage();
+	if(languageList)
+	{	getLanguage().reset(new Bag<std::string>());
+		Bag<std::string>::iterator languageIter = languageList->begin();
+		Bag<std::string>::iterator languageEnd = languageList->end();
+		while (languageIter != languageEnd) 
 		{
-			auto _language=(*languageContainer)[i];	
-			if(nullptr != _language)
-			{
-				languageContainer->push_back(_language);
-			} 
-			else
-			{
-				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container language."<< std::endl;)
-			}
+			getLanguage()->push_back(*languageIter);
+			languageIter++;
 		}
 	}
 	else
@@ -174,42 +162,35 @@ OpaqueActionImpl& OpaqueActionImpl::operator=(const OpaqueActionImpl & obj)
 
 	//copy references with no containment (soft copy)
 	//Clone references with containment (deep copy)
-	std::shared_ptr<Subset<uml::InputPin, uml::InputPin>> inputValueContainer = getInputValue();
-	if(nullptr != inputValueContainer )
+	//clone reference 'inputValue'
+	std::shared_ptr<Subset<uml::InputPin, uml::InputPin>> inputValueList = obj.getInputValue();
+	if(inputValueList)
 	{
-		int size = inputValueContainer->size();
-		for(int i=0; i<size ; i++)
+		Bag<uml::InputPin>::iterator inputValueIter = inputValueList->begin();
+		Bag<uml::InputPin>::iterator inputValueEnd = inputValueList->end();
+		while (inputValueIter != inputValueEnd) 
 		{
-			auto _inputValue=(*inputValueContainer)[i];
-			if(nullptr != _inputValue)
-			{
-				inputValueContainer->push_back(std::dynamic_pointer_cast<uml::InputPin>(_inputValue->copy()));
-			}
-			else
-			{
-				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container inputValue."<< std::endl;)
-			}
+			std::shared_ptr<uml::InputPin> temp = std::dynamic_pointer_cast<uml::InputPin>((*inputValueIter)->copy());
+			getInputValue()->push_back(temp);
+			inputValueIter++;
 		}
 	}
 	else
 	{
 		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr inputValue."<< std::endl;)
 	}
-	std::shared_ptr<Subset<uml::OutputPin, uml::OutputPin>> outputValueContainer = getOutputValue();
-	if(nullptr != outputValueContainer )
+
+	//clone reference 'outputValue'
+	std::shared_ptr<Subset<uml::OutputPin, uml::OutputPin>> outputValueList = obj.getOutputValue();
+	if(outputValueList)
 	{
-		int size = outputValueContainer->size();
-		for(int i=0; i<size ; i++)
+		Bag<uml::OutputPin>::iterator outputValueIter = outputValueList->begin();
+		Bag<uml::OutputPin>::iterator outputValueEnd = outputValueList->end();
+		while (outputValueIter != outputValueEnd) 
 		{
-			auto _outputValue=(*outputValueContainer)[i];
-			if(nullptr != _outputValue)
-			{
-				outputValueContainer->push_back(std::dynamic_pointer_cast<uml::OutputPin>(_outputValue->copy()));
-			}
-			else
-			{
-				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container outputValue."<< std::endl;)
-			}
+			std::shared_ptr<uml::OutputPin> temp = std::dynamic_pointer_cast<uml::OutputPin>((*outputValueIter)->copy());
+			getOutputValue()->push_back(temp);
+			outputValueIter++;
 		}
 	}
 	else
@@ -217,13 +198,13 @@ OpaqueActionImpl& OpaqueActionImpl::operator=(const OpaqueActionImpl & obj)
 		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr outputValue."<< std::endl;)
 	}
 	/*Subset*/
-	m_inputValue->initSubset(getInput());
+	getInputValue()->initSubset(getInput());
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Initialising value Subset: " << "m_inputValue - Subset<uml::InputPin, uml::InputPin >(getInput())" << std::endl;
 	#endif
 	
 	/*Subset*/
-	m_outputValue->initSubset(getOutput());
+	getOutputValue()->initSubset(getOutput());
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Initialising value Subset: " << "m_outputValue - Subset<uml::OutputPin, uml::OutputPin >(getOutput())" << std::endl;
 	#endif
@@ -301,13 +282,12 @@ std::shared_ptr<Subset<uml::InputPin, uml::InputPin>> OpaqueActionImpl::getInput
 		#endif
 		
 		/*Subset*/
-		m_inputValue->initSubset(getInput());
+		getInputValue()->initSubset(getInput());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value Subset: " << "m_inputValue - Subset<uml::InputPin, uml::InputPin >(getInput())" << std::endl;
 		#endif
 		
 	}
-
     return m_inputValue;
 }
 
@@ -327,13 +307,12 @@ std::shared_ptr<Subset<uml::OutputPin, uml::OutputPin>> OpaqueActionImpl::getOut
 		#endif
 		
 		/*Subset*/
-		m_outputValue->initSubset(getOutput());
+		getOutputValue()->initSubset(getOutput());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value Subset: " << "m_outputValue - Subset<uml::OutputPin, uml::OutputPin >(getOutput())" << std::endl;
 		#endif
 		
 	}
-
     return m_outputValue;
 }
 
@@ -368,7 +347,7 @@ std::shared_ptr<SubsetUnion<uml::InputPin, uml::Element>> OpaqueActionImpl::getI
 		#endif
 		
 		/*SubsetUnion*/
-		m_input->initSubsetUnion(getOwnedElement());
+		getInput()->initSubsetUnion(getOwnedElement());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value SubsetUnion: " << "m_input - SubsetUnion<uml::InputPin, uml::Element >(getOwnedElement())" << std::endl;
 		#endif
@@ -388,7 +367,7 @@ std::shared_ptr<SubsetUnion<uml::OutputPin, uml::Element>> OpaqueActionImpl::get
 		#endif
 		
 		/*SubsetUnion*/
-		m_output->initSubsetUnion(getOwnedElement());
+		getOutput()->initSubsetUnion(getOwnedElement());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value SubsetUnion: " << "m_output - SubsetUnion<uml::OutputPin, uml::Element >(getOwnedElement())" << std::endl;
 		#endif

@@ -166,42 +166,30 @@ OpaqueBehaviorImpl& OpaqueBehaviorImpl::operator=(const OpaqueBehaviorImpl & obj
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy OpaqueBehavior "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
 	//Clone Attributes with (deep copy)
-	std::shared_ptr<Bag<std::string>> bodyContainer = getBody();
-	if(nullptr != bodyContainer )
-	{
-		int size = bodyContainer->size();
-		for(int i=0; i<size ; i++)
+	std::shared_ptr<Bag<std::string>> bodyList = obj.getBody();
+	if(bodyList)
+	{	getBody().reset(new Bag<std::string>());
+		Bag<std::string>::iterator bodyIter = bodyList->begin();
+		Bag<std::string>::iterator bodyEnd = bodyList->end();
+		while (bodyIter != bodyEnd) 
 		{
-			auto _body=(*bodyContainer)[i];	
-			if(nullptr != _body)
-			{
-				bodyContainer->push_back(_body);
-			} 
-			else
-			{
-				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container body."<< std::endl;)
-			}
+			getBody()->push_back(*bodyIter);
+			bodyIter++;
 		}
 	}
 	else
 	{
 		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr body."<< std::endl;)
 	}
-	std::shared_ptr<Bag<std::string>> languageContainer = getLanguage();
-	if(nullptr != languageContainer )
-	{
-		int size = languageContainer->size();
-		for(int i=0; i<size ; i++)
+	std::shared_ptr<Bag<std::string>> languageList = obj.getLanguage();
+	if(languageList)
+	{	getLanguage().reset(new Bag<std::string>());
+		Bag<std::string>::iterator languageIter = languageList->begin();
+		Bag<std::string>::iterator languageEnd = languageList->end();
+		while (languageIter != languageEnd) 
 		{
-			auto _language=(*languageContainer)[i];	
-			if(nullptr != _language)
-			{
-				languageContainer->push_back(_language);
-			} 
-			else
-			{
-				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container language."<< std::endl;)
-			}
+			getLanguage()->push_back(*languageIter);
+			languageIter++;
 		}
 	}
 	else
@@ -280,7 +268,7 @@ std::shared_ptr<SubsetUnion<uml::Property, uml::Feature>> OpaqueBehaviorImpl::ge
 		#endif
 		
 		/*SubsetUnion*/
-		m_attribute->initSubsetUnion(getFeature());
+		getAttribute()->initSubsetUnion(getFeature());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value SubsetUnion: " << "m_attribute - SubsetUnion<uml::Property, uml::Feature >(getFeature())" << std::endl;
 		#endif
@@ -300,7 +288,7 @@ std::shared_ptr<SubsetUnion<uml::Feature, uml::NamedElement>> OpaqueBehaviorImpl
 		#endif
 		
 		/*SubsetUnion*/
-		m_feature->initSubsetUnion(getMember());
+		getFeature()->initSubsetUnion(getMember());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value SubsetUnion: " << "m_feature - SubsetUnion<uml::Feature, uml::NamedElement >(getMember())" << std::endl;
 		#endif
@@ -344,20 +332,20 @@ std::shared_ptr<Union<uml::Element>> OpaqueBehaviorImpl::getOwnedElement() const
 	return m_ownedElement;
 }
 
-std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement>> OpaqueBehaviorImpl::getOwnedMember() const
+std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement>> OpaqueBehaviorImpl::getOwnedMember() const
 {
 	if(m_ownedMember == nullptr)
 	{
 		/*SubsetUnion*/
-		m_ownedMember.reset(new SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement >());
+		m_ownedMember.reset(new SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement >());
 		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement >()" << std::endl;
+			std::cout << "Initialising shared pointer SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement >()" << std::endl;
 		#endif
 		
 		/*SubsetUnion*/
-		m_ownedMember->initSubsetUnion(getOwnedElement(),getMember());
+		getOwnedMember()->initSubsetUnion(getOwnedElement(), getMember());
 		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement >(getOwnedElement(),getMember())" << std::endl;
+			std::cout << "Initialising value SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement >(getOwnedElement(), getMember())" << std::endl;
 		#endif
 		
 	}
@@ -410,7 +398,7 @@ std::shared_ptr<SubsetUnion<uml::ConnectableElement, uml::NamedElement>> OpaqueB
 		#endif
 		
 		/*SubsetUnion*/
-		m_role->initSubsetUnion(getMember());
+		getRole()->initSubsetUnion(getMember());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value SubsetUnion: " << "m_role - SubsetUnion<uml::ConnectableElement, uml::NamedElement >(getMember())" << std::endl;
 		#endif

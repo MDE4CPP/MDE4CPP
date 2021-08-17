@@ -135,7 +135,6 @@ Getter & Setter for reference type
 */
 std::shared_ptr<uml::Signal> SignalInstanceImpl::getType() const
 {
-//assert(m_type);
     return m_type;
 }
 void SignalInstanceImpl::setType(std::shared_ptr<uml::Signal> _type)

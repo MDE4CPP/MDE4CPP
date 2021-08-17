@@ -133,124 +133,121 @@ StateImpl& StateImpl::operator=(const StateImpl & obj)
 	//copy references with no containment (soft copy)
 	m_submachine  = obj.getSubmachine();
 	//Clone references with containment (deep copy)
-	std::shared_ptr<Subset<uml::ConnectionPointReference, uml::NamedElement>> connectionContainer = getConnection();
-	if(nullptr != connectionContainer )
+	//clone reference 'connection'
+	std::shared_ptr<Subset<uml::ConnectionPointReference, uml::NamedElement>> connectionList = obj.getConnection();
+	if(connectionList)
 	{
-		int size = connectionContainer->size();
-		for(int i=0; i<size ; i++)
+		Bag<uml::ConnectionPointReference>::iterator connectionIter = connectionList->begin();
+		Bag<uml::ConnectionPointReference>::iterator connectionEnd = connectionList->end();
+		while (connectionIter != connectionEnd) 
 		{
-			auto _connection=(*connectionContainer)[i];
-			if(nullptr != _connection)
-			{
-				connectionContainer->push_back(std::dynamic_pointer_cast<uml::ConnectionPointReference>(_connection->copy()));
-			}
-			else
-			{
-				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container connection."<< std::endl;)
-			}
+			std::shared_ptr<uml::ConnectionPointReference> temp = std::dynamic_pointer_cast<uml::ConnectionPointReference>((*connectionIter)->copy());
+			getConnection()->push_back(temp);
+			connectionIter++;
 		}
 	}
 	else
 	{
 		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr connection."<< std::endl;)
 	}
-	std::shared_ptr<Subset<uml::Pseudostate, uml::NamedElement>> connectionPointContainer = getConnectionPoint();
-	if(nullptr != connectionPointContainer )
+
+	//clone reference 'connectionPoint'
+	std::shared_ptr<Subset<uml::Pseudostate, uml::NamedElement>> connectionPointList = obj.getConnectionPoint();
+	if(connectionPointList)
 	{
-		int size = connectionPointContainer->size();
-		for(int i=0; i<size ; i++)
+		Bag<uml::Pseudostate>::iterator connectionPointIter = connectionPointList->begin();
+		Bag<uml::Pseudostate>::iterator connectionPointEnd = connectionPointList->end();
+		while (connectionPointIter != connectionPointEnd) 
 		{
-			auto _connectionPoint=(*connectionPointContainer)[i];
-			if(nullptr != _connectionPoint)
-			{
-				connectionPointContainer->push_back(std::dynamic_pointer_cast<uml::Pseudostate>(_connectionPoint->copy()));
-			}
-			else
-			{
-				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container connectionPoint."<< std::endl;)
-			}
+			std::shared_ptr<uml::Pseudostate> temp = std::dynamic_pointer_cast<uml::Pseudostate>((*connectionPointIter)->copy());
+			getConnectionPoint()->push_back(temp);
+			connectionPointIter++;
 		}
 	}
 	else
 	{
 		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr connectionPoint."<< std::endl;)
 	}
-	std::shared_ptr<Subset<uml::Trigger, uml::Element>> deferrableTriggerContainer = getDeferrableTrigger();
-	if(nullptr != deferrableTriggerContainer )
+
+	//clone reference 'deferrableTrigger'
+	std::shared_ptr<Subset<uml::Trigger, uml::Element>> deferrableTriggerList = obj.getDeferrableTrigger();
+	if(deferrableTriggerList)
 	{
-		int size = deferrableTriggerContainer->size();
-		for(int i=0; i<size ; i++)
+		Bag<uml::Trigger>::iterator deferrableTriggerIter = deferrableTriggerList->begin();
+		Bag<uml::Trigger>::iterator deferrableTriggerEnd = deferrableTriggerList->end();
+		while (deferrableTriggerIter != deferrableTriggerEnd) 
 		{
-			auto _deferrableTrigger=(*deferrableTriggerContainer)[i];
-			if(nullptr != _deferrableTrigger)
-			{
-				deferrableTriggerContainer->push_back(std::dynamic_pointer_cast<uml::Trigger>(_deferrableTrigger->copy()));
-			}
-			else
-			{
-				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container deferrableTrigger."<< std::endl;)
-			}
+			std::shared_ptr<uml::Trigger> temp = std::dynamic_pointer_cast<uml::Trigger>((*deferrableTriggerIter)->copy());
+			getDeferrableTrigger()->push_back(temp);
+			deferrableTriggerIter++;
 		}
 	}
 	else
 	{
 		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr deferrableTrigger."<< std::endl;)
 	}
+
+	//clone reference 'doActivity'
 	if(obj.getDoActivity()!=nullptr)
 	{
 		m_doActivity = std::dynamic_pointer_cast<uml::Behavior>(obj.getDoActivity()->copy());
 	}
+
+	//clone reference 'entry'
 	if(obj.getEntry()!=nullptr)
 	{
 		m_entry = std::dynamic_pointer_cast<uml::Behavior>(obj.getEntry()->copy());
 	}
+
+	//clone reference 'exit'
 	if(obj.getExit()!=nullptr)
 	{
 		m_exit = std::dynamic_pointer_cast<uml::Behavior>(obj.getExit()->copy());
 	}
+
+	//clone reference 'redefinedState'
 	if(obj.getRedefinedState()!=nullptr)
 	{
 		m_redefinedState = std::dynamic_pointer_cast<uml::State>(obj.getRedefinedState()->copy());
 	}
-	std::shared_ptr<Subset<uml::Region, uml::NamedElement>> regionContainer = getRegion();
-	if(nullptr != regionContainer )
+
+	//clone reference 'region'
+	std::shared_ptr<Subset<uml::Region, uml::NamedElement>> regionList = obj.getRegion();
+	if(regionList)
 	{
-		int size = regionContainer->size();
-		for(int i=0; i<size ; i++)
+		Bag<uml::Region>::iterator regionIter = regionList->begin();
+		Bag<uml::Region>::iterator regionEnd = regionList->end();
+		while (regionIter != regionEnd) 
 		{
-			auto _region=(*regionContainer)[i];
-			if(nullptr != _region)
-			{
-				regionContainer->push_back(std::dynamic_pointer_cast<uml::Region>(_region->copy()));
-			}
-			else
-			{
-				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container region."<< std::endl;)
-			}
+			std::shared_ptr<uml::Region> temp = std::dynamic_pointer_cast<uml::Region>((*regionIter)->copy());
+			getRegion()->push_back(temp);
+			regionIter++;
 		}
 	}
 	else
 	{
 		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr region."<< std::endl;)
 	}
+
+	//clone reference 'stateInvariant'
 	if(obj.getStateInvariant()!=nullptr)
 	{
 		m_stateInvariant = std::dynamic_pointer_cast<uml::Constraint>(obj.getStateInvariant()->copy());
 	}
 	/*Subset*/
-	m_connection->initSubset(getOwnedMember());
+	getConnection()->initSubset(getOwnedMember());
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Initialising value Subset: " << "m_connection - Subset<uml::ConnectionPointReference, uml::NamedElement >(getOwnedMember())" << std::endl;
 	#endif
 	
 	/*Subset*/
-	m_connectionPoint->initSubset(getOwnedMember());
+	getConnectionPoint()->initSubset(getOwnedMember());
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Initialising value Subset: " << "m_connectionPoint - Subset<uml::Pseudostate, uml::NamedElement >(getOwnedMember())" << std::endl;
 	#endif
 	
 	/*Subset*/
-	m_deferrableTrigger->initSubset(getOwnedElement());
+	getDeferrableTrigger()->initSubset(getOwnedElement());
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Initialising value Subset: " << "m_deferrableTrigger - Subset<uml::Trigger, uml::Element >(getOwnedElement())" << std::endl;
 	#endif
@@ -259,7 +256,7 @@ StateImpl& StateImpl::operator=(const StateImpl & obj)
 	
 	
 	/*Subset*/
-	m_region->initSubset(getOwnedMember());
+	getRegion()->initSubset(getOwnedMember());
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Initialising value Subset: " << "m_region - Subset<uml::Region, uml::NamedElement >(getOwnedMember())" << std::endl;
 	#endif
@@ -403,13 +400,12 @@ std::shared_ptr<Subset<uml::ConnectionPointReference, uml::NamedElement>> StateI
 		#endif
 		
 		/*Subset*/
-		m_connection->initSubset(getOwnedMember());
+		getConnection()->initSubset(getOwnedMember());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value Subset: " << "m_connection - Subset<uml::ConnectionPointReference, uml::NamedElement >(getOwnedMember())" << std::endl;
 		#endif
 		
 	}
-
     return m_connection;
 }
 
@@ -429,13 +425,12 @@ std::shared_ptr<Subset<uml::Pseudostate, uml::NamedElement>> StateImpl::getConne
 		#endif
 		
 		/*Subset*/
-		m_connectionPoint->initSubset(getOwnedMember());
+		getConnectionPoint()->initSubset(getOwnedMember());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value Subset: " << "m_connectionPoint - Subset<uml::Pseudostate, uml::NamedElement >(getOwnedMember())" << std::endl;
 		#endif
 		
 	}
-
     return m_connectionPoint;
 }
 
@@ -455,13 +450,12 @@ std::shared_ptr<Subset<uml::Trigger, uml::Element>> StateImpl::getDeferrableTrig
 		#endif
 		
 		/*Subset*/
-		m_deferrableTrigger->initSubset(getOwnedElement());
+		getDeferrableTrigger()->initSubset(getOwnedElement());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value Subset: " << "m_deferrableTrigger - Subset<uml::Trigger, uml::Element >(getOwnedElement())" << std::endl;
 		#endif
 		
 	}
-
     return m_deferrableTrigger;
 }
 
@@ -472,13 +466,11 @@ Getter & Setter for reference doActivity
 */
 std::shared_ptr<uml::Behavior> StateImpl::getDoActivity() const
 {
-
     return m_doActivity;
 }
 void StateImpl::setDoActivity(std::shared_ptr<uml::Behavior> _doActivity)
 {
     m_doActivity = _doActivity;
-	
 	
 }
 
@@ -488,13 +480,11 @@ Getter & Setter for reference entry
 */
 std::shared_ptr<uml::Behavior> StateImpl::getEntry() const
 {
-
     return m_entry;
 }
 void StateImpl::setEntry(std::shared_ptr<uml::Behavior> _entry)
 {
     m_entry = _entry;
-	
 	
 }
 
@@ -504,13 +494,11 @@ Getter & Setter for reference exit
 */
 std::shared_ptr<uml::Behavior> StateImpl::getExit() const
 {
-
     return m_exit;
 }
 void StateImpl::setExit(std::shared_ptr<uml::Behavior> _exit)
 {
     m_exit = _exit;
-	
 	
 }
 
@@ -520,13 +508,11 @@ Getter & Setter for reference redefinedState
 */
 std::shared_ptr<uml::State> StateImpl::getRedefinedState() const
 {
-
     return m_redefinedState;
 }
 void StateImpl::setRedefinedState(std::shared_ptr<uml::State> _redefinedState)
 {
     m_redefinedState = _redefinedState;
-	
 	
 }
 
@@ -545,13 +531,12 @@ std::shared_ptr<Subset<uml::Region, uml::NamedElement>> StateImpl::getRegion() c
 		#endif
 		
 		/*Subset*/
-		m_region->initSubset(getOwnedMember());
+		getRegion()->initSubset(getOwnedMember());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value Subset: " << "m_region - Subset<uml::Region, uml::NamedElement >(getOwnedMember())" << std::endl;
 		#endif
 		
 	}
-
     return m_region;
 }
 
@@ -562,16 +547,11 @@ Getter & Setter for reference stateInvariant
 */
 std::shared_ptr<uml::Constraint> StateImpl::getStateInvariant() const
 {
-
     return m_stateInvariant;
 }
 void StateImpl::setStateInvariant(std::shared_ptr<uml::Constraint> _stateInvariant)
 {
     m_stateInvariant = _stateInvariant;
-	
-	
-	
-	
 	
 }
 
@@ -581,7 +561,6 @@ Getter & Setter for reference submachine
 */
 std::shared_ptr<uml::StateMachine> StateImpl::getSubmachine() const
 {
-
     return m_submachine;
 }
 void StateImpl::setSubmachine(std::shared_ptr<uml::StateMachine> _submachine)
@@ -629,20 +608,20 @@ std::shared_ptr<Union<uml::Element>> StateImpl::getOwnedElement() const
 	return m_ownedElement;
 }
 
-std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement>> StateImpl::getOwnedMember() const
+std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement>> StateImpl::getOwnedMember() const
 {
 	if(m_ownedMember == nullptr)
 	{
 		/*SubsetUnion*/
-		m_ownedMember.reset(new SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement >());
+		m_ownedMember.reset(new SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement >());
 		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement >()" << std::endl;
+			std::cout << "Initialising shared pointer SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement >()" << std::endl;
 		#endif
 		
 		/*SubsetUnion*/
-		m_ownedMember->initSubsetUnion(getOwnedElement(),getMember());
+		getOwnedMember()->initSubsetUnion(getOwnedElement(), getMember());
 		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement >(getOwnedElement(),getMember())" << std::endl;
+			std::cout << "Initialising value SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement >(getOwnedElement(), getMember())" << std::endl;
 		#endif
 		
 	}

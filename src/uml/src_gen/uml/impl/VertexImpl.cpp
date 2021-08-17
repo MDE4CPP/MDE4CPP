@@ -114,10 +114,8 @@ VertexImpl& VertexImpl::operator=(const VertexImpl & obj)
 
 	//copy references with no containment (soft copy)
 	m_container  = obj.getContainer();
-	std::shared_ptr<Bag<uml::Transition>> _incoming = obj.getIncoming();
-	m_incoming.reset(new Bag<uml::Transition>(*(obj.getIncoming().get())));
-	std::shared_ptr<Bag<uml::Transition>> _outgoing = obj.getOutgoing();
-	m_outgoing.reset(new Bag<uml::Transition>(*(obj.getOutgoing().get())));
+	m_incoming  = obj.getIncoming();
+	m_outgoing  = obj.getOutgoing();
 	//Clone references with containment (deep copy)
 	return *this;
 }
@@ -180,16 +178,11 @@ Getter & Setter for reference container
 */
 std::weak_ptr<uml::Region> VertexImpl::getContainer() const
 {
-
     return m_container;
 }
 void VertexImpl::setContainer(std::weak_ptr<uml::Region> _container)
 {
     m_container = _container;
-	m_namespace = this->getContainer().lock();
-	m_owner = this->getNamespace().lock();
-	
-	
 	
 }
 
@@ -205,7 +198,6 @@ std::shared_ptr<Bag<uml::Transition>> VertexImpl::getIncoming() const
 		
 		
 	}
-
     return m_incoming;
 }
 
@@ -222,7 +214,6 @@ std::shared_ptr<Bag<uml::Transition>> VertexImpl::getOutgoing() const
 		
 		
 	}
-
     return m_outgoing;
 }
 

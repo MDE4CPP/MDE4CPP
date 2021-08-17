@@ -177,7 +177,6 @@ Getter & Setter for reference readSelfAction
 */
 std::shared_ptr<uml::ReadSelfAction> ReadSelfActionActivationImpl::getReadSelfAction() const
 {
-//assert(m_readSelfAction);
     return m_readSelfAction;
 }
 void ReadSelfActionActivationImpl::setReadSelfAction(std::shared_ptr<uml::ReadSelfAction> _readSelfAction)

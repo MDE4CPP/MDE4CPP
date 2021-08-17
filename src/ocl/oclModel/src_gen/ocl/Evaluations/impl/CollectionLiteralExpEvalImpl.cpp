@@ -33,10 +33,10 @@
 
 #include <exception> // used in Persistence
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
-#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Values/ValuesFactory.hpp"
+#include "fUML/Semantics/Loci/LociFactory.hpp"
 
 
 #include "ocl/Evaluations/CollectionLiteralPartEval.hpp"
@@ -97,8 +97,7 @@ CollectionLiteralExpEvalImpl& CollectionLiteralExpEvalImpl::operator=(const Coll
 	//Clone Attributes with (deep copy)
 
 	//copy references with no containment (soft copy)
-	std::shared_ptr<Bag<ocl::Evaluations::CollectionLiteralPartEval>> _parts = obj.getParts();
-	m_parts.reset(new Bag<ocl::Evaluations::CollectionLiteralPartEval>(*(obj.getParts().get())));
+	m_parts  = obj.getParts();
 	//Clone references with containment (deep copy)
 	return *this;
 }
@@ -138,7 +137,6 @@ std::shared_ptr<Bag<ocl::Evaluations::CollectionLiteralPartEval>> CollectionLite
 		
 		
 	}
-
     return m_parts;
 }
 

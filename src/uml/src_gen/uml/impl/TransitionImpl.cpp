@@ -128,33 +128,35 @@ TransitionImpl& TransitionImpl::operator=(const TransitionImpl & obj)
 	m_source  = obj.getSource();
 	m_target  = obj.getTarget();
 	//Clone references with containment (deep copy)
+	//clone reference 'effect'
 	if(obj.getEffect()!=nullptr)
 	{
 		m_effect = std::dynamic_pointer_cast<uml::Behavior>(obj.getEffect()->copy());
 	}
+
+	//clone reference 'guard'
 	if(obj.getGuard()!=nullptr)
 	{
 		m_guard = std::dynamic_pointer_cast<uml::Constraint>(obj.getGuard()->copy());
 	}
+
+	//clone reference 'redefinedTransition'
 	if(obj.getRedefinedTransition()!=nullptr)
 	{
 		m_redefinedTransition = std::dynamic_pointer_cast<uml::Transition>(obj.getRedefinedTransition()->copy());
 	}
-	std::shared_ptr<Subset<uml::Trigger, uml::Element>> triggerContainer = getTrigger();
-	if(nullptr != triggerContainer )
+
+	//clone reference 'trigger'
+	std::shared_ptr<Subset<uml::Trigger, uml::Element>> triggerList = obj.getTrigger();
+	if(triggerList)
 	{
-		int size = triggerContainer->size();
-		for(int i=0; i<size ; i++)
+		Bag<uml::Trigger>::iterator triggerIter = triggerList->begin();
+		Bag<uml::Trigger>::iterator triggerEnd = triggerList->end();
+		while (triggerIter != triggerEnd) 
 		{
-			auto _trigger=(*triggerContainer)[i];
-			if(nullptr != _trigger)
-			{
-				triggerContainer->push_back(std::dynamic_pointer_cast<uml::Trigger>(_trigger->copy()));
-			}
-			else
-			{
-				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container trigger."<< std::endl;)
-			}
+			std::shared_ptr<uml::Trigger> temp = std::dynamic_pointer_cast<uml::Trigger>((*triggerIter)->copy());
+			getTrigger()->push_back(temp);
+			triggerIter++;
 		}
 	}
 	else
@@ -163,7 +165,7 @@ TransitionImpl& TransitionImpl::operator=(const TransitionImpl & obj)
 	}
 	
 	/*Subset*/
-	m_trigger->initSubset(getOwnedElement());
+	getTrigger()->initSubset(getOwnedElement());
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Initialising value Subset: " << "m_trigger - Subset<uml::Trigger, uml::Element >(getOwnedElement())" << std::endl;
 	#endif
@@ -278,16 +280,11 @@ Getter & Setter for reference container
 */
 std::weak_ptr<uml::Region> TransitionImpl::getContainer() const
 {
-//assert(m_container);
     return m_container;
 }
 void TransitionImpl::setContainer(std::weak_ptr<uml::Region> _container)
 {
     m_container = _container;
-	m_namespace = this->getContainer().lock();
-	m_owner = this->getNamespace().lock();
-	
-	
 	
 }
 
@@ -297,13 +294,11 @@ Getter & Setter for reference effect
 */
 std::shared_ptr<uml::Behavior> TransitionImpl::getEffect() const
 {
-
     return m_effect;
 }
 void TransitionImpl::setEffect(std::shared_ptr<uml::Behavior> _effect)
 {
     m_effect = _effect;
-	
 	
 }
 
@@ -313,16 +308,11 @@ Getter & Setter for reference guard
 */
 std::shared_ptr<uml::Constraint> TransitionImpl::getGuard() const
 {
-
     return m_guard;
 }
 void TransitionImpl::setGuard(std::shared_ptr<uml::Constraint> _guard)
 {
     m_guard = _guard;
-	
-	
-	
-	
 	
 }
 
@@ -332,13 +322,11 @@ Getter & Setter for reference redefinedTransition
 */
 std::shared_ptr<uml::Transition> TransitionImpl::getRedefinedTransition() const
 {
-
     return m_redefinedTransition;
 }
 void TransitionImpl::setRedefinedTransition(std::shared_ptr<uml::Transition> _redefinedTransition)
 {
     m_redefinedTransition = _redefinedTransition;
-	
 	
 }
 
@@ -348,7 +336,6 @@ Getter & Setter for reference source
 */
 std::shared_ptr<uml::Vertex> TransitionImpl::getSource() const
 {
-//assert(m_source);
     return m_source;
 }
 void TransitionImpl::setSource(std::shared_ptr<uml::Vertex> _source)
@@ -363,7 +350,6 @@ Getter & Setter for reference target
 */
 std::shared_ptr<uml::Vertex> TransitionImpl::getTarget() const
 {
-//assert(m_target);
     return m_target;
 }
 void TransitionImpl::setTarget(std::shared_ptr<uml::Vertex> _target)
@@ -387,13 +373,12 @@ std::shared_ptr<Subset<uml::Trigger, uml::Element>> TransitionImpl::getTrigger()
 		#endif
 		
 		/*Subset*/
-		m_trigger->initSubset(getOwnedElement());
+		getTrigger()->initSubset(getOwnedElement());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value Subset: " << "m_trigger - Subset<uml::Trigger, uml::Element >(getOwnedElement())" << std::endl;
 		#endif
 		
 	}
-
     return m_trigger;
 }
 
@@ -437,20 +422,20 @@ std::shared_ptr<Union<uml::Element>> TransitionImpl::getOwnedElement() const
 	return m_ownedElement;
 }
 
-std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement>> TransitionImpl::getOwnedMember() const
+std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement>> TransitionImpl::getOwnedMember() const
 {
 	if(m_ownedMember == nullptr)
 	{
 		/*SubsetUnion*/
-		m_ownedMember.reset(new SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement >());
+		m_ownedMember.reset(new SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement >());
 		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement >()" << std::endl;
+			std::cout << "Initialising shared pointer SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement >()" << std::endl;
 		#endif
 		
 		/*SubsetUnion*/
-		m_ownedMember->initSubsetUnion(getOwnedElement(),getMember());
+		getOwnedMember()->initSubsetUnion(getOwnedElement(), getMember());
 		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement >(getOwnedElement(),getMember())" << std::endl;
+			std::cout << "Initialising value SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement >(getOwnedElement(), getMember())" << std::endl;
 		#endif
 		
 	}

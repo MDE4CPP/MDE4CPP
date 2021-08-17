@@ -116,13 +116,15 @@ ExtendImpl& ExtendImpl::operator=(const ExtendImpl & obj)
 
 	//copy references with no containment (soft copy)
 	m_extension  = obj.getExtension();
-	std::shared_ptr<Bag<uml::ExtensionPoint>> _extensionLocation = obj.getExtensionLocation();
-	m_extensionLocation.reset(new Bag<uml::ExtensionPoint>(*(obj.getExtensionLocation().get())));
+	m_extensionLocation  = obj.getExtensionLocation();
 	//Clone references with containment (deep copy)
+	//clone reference 'condition'
 	if(obj.getCondition()!=nullptr)
 	{
 		m_condition = std::dynamic_pointer_cast<uml::Constraint>(obj.getCondition()->copy());
 	}
+
+	//clone reference 'extendedCase'
 	if(obj.getExtendedCase()!=nullptr)
 	{
 		m_extendedCase = std::dynamic_pointer_cast<uml::UseCase>(obj.getExtendedCase()->copy());
@@ -165,13 +167,11 @@ Getter & Setter for reference condition
 */
 std::shared_ptr<uml::Constraint> ExtendImpl::getCondition() const
 {
-
     return m_condition;
 }
 void ExtendImpl::setCondition(std::shared_ptr<uml::Constraint> _condition)
 {
     m_condition = _condition;
-	
 	
 }
 
@@ -181,14 +181,11 @@ Getter & Setter for reference extendedCase
 */
 std::shared_ptr<uml::UseCase> ExtendImpl::getExtendedCase() const
 {
-//assert(m_extendedCase);
     return m_extendedCase;
 }
 void ExtendImpl::setExtendedCase(std::shared_ptr<uml::UseCase> _extendedCase)
 {
     m_extendedCase = _extendedCase;
-	
-	
 	
 }
 
@@ -198,18 +195,11 @@ Getter & Setter for reference extension
 */
 std::weak_ptr<uml::UseCase> ExtendImpl::getExtension() const
 {
-//assert(m_extension);
     return m_extension;
 }
 void ExtendImpl::setExtension(std::weak_ptr<uml::UseCase> _extension)
 {
     m_extension = _extension;
-	
-	
-	m_namespace = this->getExtension().lock();
-	m_owner = this->getNamespace().lock();
-	
-	
 	
 }
 
@@ -225,7 +215,6 @@ std::shared_ptr<Bag<uml::ExtensionPoint>> ExtendImpl::getExtensionLocation() con
 		
 		
 	}
-//assert(m_extensionLocation);
     return m_extensionLocation;
 }
 
@@ -285,7 +274,7 @@ std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> ExtendImpl::getSource()
 		#endif
 		
 		/*SubsetUnion*/
-		m_source->initSubsetUnion(getRelatedElement());
+		getSource()->initSubsetUnion(getRelatedElement());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value SubsetUnion: " << "m_source - SubsetUnion<uml::Element, uml::Element >(getRelatedElement())" << std::endl;
 		#endif
@@ -305,7 +294,7 @@ std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> ExtendImpl::getTarget()
 		#endif
 		
 		/*SubsetUnion*/
-		m_target->initSubsetUnion(getRelatedElement());
+		getTarget()->initSubsetUnion(getRelatedElement());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value SubsetUnion: " << "m_target - SubsetUnion<uml::Element, uml::Element >(getRelatedElement())" << std::endl;
 		#endif

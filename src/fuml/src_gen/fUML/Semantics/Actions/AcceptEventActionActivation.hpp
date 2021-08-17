@@ -117,7 +117,7 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			// Attribute Members
 			//*********************************
-			 
+			
 			bool m_waiting = false;
 			
 			

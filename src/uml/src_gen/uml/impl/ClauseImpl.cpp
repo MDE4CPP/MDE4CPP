@@ -93,17 +93,12 @@ ClauseImpl& ClauseImpl::operator=(const ClauseImpl & obj)
 	//Clone Attributes with (deep copy)
 
 	//copy references with no containment (soft copy)
-	std::shared_ptr<Bag<uml::ExecutableNode>> _body = obj.getBody();
-	m_body.reset(new Bag<uml::ExecutableNode>(*(obj.getBody().get())));
-	std::shared_ptr<Bag<uml::OutputPin>> _bodyOutput = obj.getBodyOutput();
-	m_bodyOutput.reset(new Bag<uml::OutputPin>(*(obj.getBodyOutput().get())));
+	m_body  = obj.getBody();
+	m_bodyOutput  = obj.getBodyOutput();
 	m_decider  = obj.getDecider();
-	std::shared_ptr<Bag<uml::Clause>> _predecessorClause = obj.getPredecessorClause();
-	m_predecessorClause.reset(new Bag<uml::Clause>(*(obj.getPredecessorClause().get())));
-	std::shared_ptr<Bag<uml::Clause>> _successorClause = obj.getSuccessorClause();
-	m_successorClause.reset(new Bag<uml::Clause>(*(obj.getSuccessorClause().get())));
-	std::shared_ptr<Bag<uml::ExecutableNode>> _test = obj.getTest();
-	m_test.reset(new Bag<uml::ExecutableNode>(*(obj.getTest().get())));
+	m_predecessorClause  = obj.getPredecessorClause();
+	m_successorClause  = obj.getSuccessorClause();
+	m_test  = obj.getTest();
 	//Clone references with containment (deep copy)
 	return *this;
 }
@@ -160,7 +155,6 @@ std::shared_ptr<Bag<uml::ExecutableNode>> ClauseImpl::getBody() const
 		
 		
 	}
-
     return m_body;
 }
 
@@ -177,7 +171,6 @@ std::shared_ptr<Bag<uml::OutputPin>> ClauseImpl::getBodyOutput() const
 		
 		
 	}
-
     return m_bodyOutput;
 }
 
@@ -188,7 +181,6 @@ Getter & Setter for reference decider
 */
 std::shared_ptr<uml::OutputPin> ClauseImpl::getDecider() const
 {
-//assert(m_decider);
     return m_decider;
 }
 void ClauseImpl::setDecider(std::shared_ptr<uml::OutputPin> _decider)
@@ -209,7 +201,6 @@ std::shared_ptr<Bag<uml::Clause>> ClauseImpl::getPredecessorClause() const
 		
 		
 	}
-
     return m_predecessorClause;
 }
 
@@ -226,7 +217,6 @@ std::shared_ptr<Bag<uml::Clause>> ClauseImpl::getSuccessorClause() const
 		
 		
 	}
-
     return m_successorClause;
 }
 
@@ -243,7 +233,6 @@ std::shared_ptr<Bag<uml::ExecutableNode>> ClauseImpl::getTest() const
 		
 		
 	}
-//assert(m_test);
     return m_test;
 }
 

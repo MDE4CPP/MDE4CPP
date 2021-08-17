@@ -87,12 +87,9 @@ LocalSnapshotImpl& LocalSnapshotImpl::operator=(const LocalSnapshotImpl & obj)
 	m_isPre = obj.getIsPre();
 
 	//copy references with no containment (soft copy)
-	std::shared_ptr<Bag<ocl::Values::NameValueBinding>> _bindings = obj.getBindings();
-	m_bindings.reset(new Bag<ocl::Values::NameValueBinding>(*(obj.getBindings().get())));
-	std::shared_ptr<Bag<ocl::Values::OclMessageValue>> _inputQ = obj.getInputQ();
-	m_inputQ.reset(new Bag<ocl::Values::OclMessageValue>(*(obj.getInputQ().get())));
-	std::shared_ptr<Bag<ocl::Values::OclMessageValue>> _outputQ = obj.getOutputQ();
-	m_outputQ.reset(new Bag<ocl::Values::OclMessageValue>(*(obj.getOutputQ().get())));
+	m_bindings  = obj.getBindings();
+	m_inputQ  = obj.getInputQ();
+	m_outputQ  = obj.getOutputQ();
 	m_pred  = obj.getPred();
 	m_succ  = obj.getSucc();
 	//Clone references with containment (deep copy)
@@ -161,7 +158,6 @@ std::shared_ptr<Bag<ocl::Values::NameValueBinding>> LocalSnapshotImpl::getBindin
 		
 		
 	}
-
     return m_bindings;
 }
 
@@ -178,7 +174,6 @@ std::shared_ptr<Bag<ocl::Values::OclMessageValue>> LocalSnapshotImpl::getInputQ(
 		
 		
 	}
-
     return m_inputQ;
 }
 
@@ -195,7 +190,6 @@ std::shared_ptr<Bag<ocl::Values::OclMessageValue>> LocalSnapshotImpl::getOutputQ
 		
 		
 	}
-
     return m_outputQ;
 }
 
@@ -206,7 +200,6 @@ Getter & Setter for reference pred
 */
 std::shared_ptr<ocl::Values::LocalSnapshot> LocalSnapshotImpl::getPred() const
 {
-
     return m_pred;
 }
 void LocalSnapshotImpl::setPred(std::shared_ptr<ocl::Values::LocalSnapshot> _pred)
@@ -221,7 +214,6 @@ Getter & Setter for reference succ
 */
 std::shared_ptr<ocl::Values::LocalSnapshot> LocalSnapshotImpl::getSucc() const
 {
-
     return m_succ;
 }
 void LocalSnapshotImpl::setSucc(std::shared_ptr<ocl::Values::LocalSnapshot> _succ)

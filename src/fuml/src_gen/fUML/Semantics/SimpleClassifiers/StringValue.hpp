@@ -91,7 +91,7 @@ namespace fUML::Semantics::SimpleClassifiers
 			//*********************************
 			// Attribute Members
 			//*********************************
-			 
+			
 			std::string m_value = "";
 			
 			

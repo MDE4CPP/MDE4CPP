@@ -131,6 +131,7 @@ RaiseExceptionActionImpl& RaiseExceptionActionImpl::operator=(const RaiseExcepti
 
 	//copy references with no containment (soft copy)
 	//Clone references with containment (deep copy)
+	//clone reference 'exception'
 	if(obj.getException()!=nullptr)
 	{
 		m_exception = std::dynamic_pointer_cast<uml::InputPin>(obj.getException()->copy());
@@ -168,14 +169,11 @@ Getter & Setter for reference exception
 */
 std::shared_ptr<uml::InputPin> RaiseExceptionActionImpl::getException() const
 {
-//assert(m_exception);
     return m_exception;
 }
 void RaiseExceptionActionImpl::setException(std::shared_ptr<uml::InputPin> _exception)
 {
     m_exception = _exception;
-	
-	
 	
 }
 
@@ -209,7 +207,7 @@ std::shared_ptr<SubsetUnion<uml::InputPin, uml::Element>> RaiseExceptionActionIm
 		#endif
 		
 		/*SubsetUnion*/
-		m_input->initSubsetUnion(getOwnedElement());
+		getInput()->initSubsetUnion(getOwnedElement());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value SubsetUnion: " << "m_input - SubsetUnion<uml::InputPin, uml::Element >(getOwnedElement())" << std::endl;
 		#endif

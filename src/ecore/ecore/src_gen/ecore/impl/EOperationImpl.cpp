@@ -105,66 +105,55 @@ EOperationImpl& EOperationImpl::operator=(const EOperationImpl & obj)
 
 	//copy references with no containment (soft copy)
 	m_eContainingClass  = obj.getEContainingClass();
-	std::shared_ptr<Bag<ecore::EClassifier>> _eExceptions = obj.getEExceptions();
-	m_eExceptions.reset(new Bag<ecore::EClassifier>(*(obj.getEExceptions().get())));
+	m_eExceptions  = obj.getEExceptions();
 	//Clone references with containment (deep copy)
-	std::shared_ptr<Bag<ecore::EGenericType>> eGenericExceptionsContainer = getEGenericExceptions();
-	if(nullptr != eGenericExceptionsContainer )
+	//clone reference 'eGenericExceptions'
+	std::shared_ptr<Bag<ecore::EGenericType>> eGenericExceptionsList = obj.getEGenericExceptions();
+	if(eGenericExceptionsList)
 	{
-		int size = eGenericExceptionsContainer->size();
-		for(int i=0; i<size ; i++)
+		Bag<ecore::EGenericType>::iterator eGenericExceptionsIter = eGenericExceptionsList->begin();
+		Bag<ecore::EGenericType>::iterator eGenericExceptionsEnd = eGenericExceptionsList->end();
+		while (eGenericExceptionsIter != eGenericExceptionsEnd) 
 		{
-			auto _eGenericExceptions=(*eGenericExceptionsContainer)[i];
-			if(nullptr != _eGenericExceptions)
-			{
-				eGenericExceptionsContainer->push_back(std::dynamic_pointer_cast<ecore::EGenericType>(_eGenericExceptions->copy()));
-			}
-			else
-			{
-				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container eGenericExceptions."<< std::endl;)
-			}
+			std::shared_ptr<ecore::EGenericType> temp = std::dynamic_pointer_cast<ecore::EGenericType>((*eGenericExceptionsIter)->copy());
+			getEGenericExceptions()->push_back(temp);
+			eGenericExceptionsIter++;
 		}
 	}
 	else
 	{
 		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr eGenericExceptions."<< std::endl;)
 	}
-	std::shared_ptr<Subset<ecore::EParameter, ecore::EObject>> eParametersContainer = getEParameters();
-	if(nullptr != eParametersContainer )
+
+	//clone reference 'eParameters'
+	std::shared_ptr<Subset<ecore::EParameter, ecore::EObject>> eParametersList = obj.getEParameters();
+	if(eParametersList)
 	{
-		int size = eParametersContainer->size();
-		for(int i=0; i<size ; i++)
+		Bag<ecore::EParameter>::iterator eParametersIter = eParametersList->begin();
+		Bag<ecore::EParameter>::iterator eParametersEnd = eParametersList->end();
+		while (eParametersIter != eParametersEnd) 
 		{
-			auto _eParameters=(*eParametersContainer)[i];
-			if(nullptr != _eParameters)
-			{
-				eParametersContainer->push_back(std::dynamic_pointer_cast<ecore::EParameter>(_eParameters->copy()));
-			}
-			else
-			{
-				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container eParameters."<< std::endl;)
-			}
+			std::shared_ptr<ecore::EParameter> temp = std::dynamic_pointer_cast<ecore::EParameter>((*eParametersIter)->copy());
+			getEParameters()->push_back(temp);
+			eParametersIter++;
 		}
 	}
 	else
 	{
 		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr eParameters."<< std::endl;)
 	}
-	std::shared_ptr<Bag<ecore::ETypeParameter>> eTypeParametersContainer = getETypeParameters();
-	if(nullptr != eTypeParametersContainer )
+
+	//clone reference 'eTypeParameters'
+	std::shared_ptr<Bag<ecore::ETypeParameter>> eTypeParametersList = obj.getETypeParameters();
+	if(eTypeParametersList)
 	{
-		int size = eTypeParametersContainer->size();
-		for(int i=0; i<size ; i++)
+		Bag<ecore::ETypeParameter>::iterator eTypeParametersIter = eTypeParametersList->begin();
+		Bag<ecore::ETypeParameter>::iterator eTypeParametersEnd = eTypeParametersList->end();
+		while (eTypeParametersIter != eTypeParametersEnd) 
 		{
-			auto _eTypeParameters=(*eTypeParametersContainer)[i];
-			if(nullptr != _eTypeParameters)
-			{
-				eTypeParametersContainer->push_back(std::dynamic_pointer_cast<ecore::ETypeParameter>(_eTypeParameters->copy()));
-			}
-			else
-			{
-				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container eTypeParameters."<< std::endl;)
-			}
+			std::shared_ptr<ecore::ETypeParameter> temp = std::dynamic_pointer_cast<ecore::ETypeParameter>((*eTypeParametersIter)->copy());
+			getETypeParameters()->push_back(temp);
+			eTypeParametersIter++;
 		}
 	}
 	else
@@ -173,7 +162,7 @@ EOperationImpl& EOperationImpl::operator=(const EOperationImpl & obj)
 	}
 	
 	/*Subset*/
-	m_eParameters->initSubset(getEContens());
+	getEParameters()->initSubset(getEContens());
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Initialising value Subset: " << "m_eParameters - Subset<ecore::EParameter, ecore::EObject >(getEContens())" << std::endl;
 	#endif
@@ -265,7 +254,6 @@ Getter & Setter for reference eContainingClass
 */
 std::weak_ptr<ecore::EClass> EOperationImpl::getEContainingClass() const
 {
-
     return m_eContainingClass;
 }
 
@@ -282,7 +270,6 @@ std::shared_ptr<Bag<ecore::EClassifier>> EOperationImpl::getEExceptions() const
 		
 		
 	}
-
     return m_eExceptions;
 }
 
@@ -299,7 +286,6 @@ std::shared_ptr<Bag<ecore::EGenericType>> EOperationImpl::getEGenericExceptions(
 		
 		
 	}
-
     return m_eGenericExceptions;
 }
 
@@ -319,13 +305,12 @@ std::shared_ptr<Subset<ecore::EParameter, ecore::EObject>> EOperationImpl::getEP
 		#endif
 		
 		/*Subset*/
-		m_eParameters->initSubset(getEContens());
+		getEParameters()->initSubset(getEContens());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value Subset: " << "m_eParameters - Subset<ecore::EParameter, ecore::EObject >(getEContens())" << std::endl;
 		#endif
 		
 	}
-
     return m_eParameters;
 }
 
@@ -342,7 +327,6 @@ std::shared_ptr<Bag<ecore::ETypeParameter>> EOperationImpl::getETypeParameters()
 		
 		
 	}
-
     return m_eTypeParameters;
 }
 

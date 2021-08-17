@@ -111,9 +111,9 @@ ObjectImpl& ObjectImpl::operator=(const ObjectImpl & obj)
 	//Clone Attributes with (deep copy)
 
 	//copy references with no containment (soft copy)
-	std::shared_ptr<Bag<uml::Classifier>> _types = obj.getTypes();
-	m_types.reset(new Bag<uml::Classifier>(*(obj.getTypes().get())));
+	m_types  = obj.getTypes();
 	//Clone references with containment (deep copy)
+	//clone reference 'objectActivation'
 	if(obj.getObjectActivation()!=nullptr)
 	{
 		m_objectActivation = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::ObjectActivation>(obj.getObjectActivation()->copy());
@@ -259,7 +259,6 @@ Getter & Setter for reference objectActivation
 */
 std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation> ObjectImpl::getObjectActivation() const
 {
-
     return m_objectActivation;
 }
 void ObjectImpl::setObjectActivation(std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation> _objectActivation)
@@ -280,7 +279,6 @@ std::shared_ptr<Bag<uml::Classifier>> ObjectImpl::getTypes() const
 		
 		
 	}
-
     return m_types;
 }
 

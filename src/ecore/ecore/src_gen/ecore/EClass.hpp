@@ -152,9 +152,9 @@ namespace ecore
 			//*********************************
 			// Attribute Members
 			//*********************************
-			 
+			
 			bool m_abstract = false;
-			 
+			
 			bool m_interface = false;
 			
 			

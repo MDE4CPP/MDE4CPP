@@ -115,17 +115,17 @@ namespace ecore
 			//*********************************
 			// Attribute Members
 			//*********************************
-			 
+			
 			int m_lowerBound = 0;
-			 
+			
 			bool m_many = false;
-			 
+			
 			bool m_ordered = true;
-			 
+			
 			bool m_required = false;
-			 
+			
 			bool m_unique = true;
-			 
+			
 			int m_upperBound = 1;
 			
 			

@@ -133,6 +133,7 @@ ReadExtentActionImpl& ReadExtentActionImpl::operator=(const ReadExtentActionImpl
 	//copy references with no containment (soft copy)
 	m_classifier  = obj.getClassifier();
 	//Clone references with containment (deep copy)
+	//clone reference 'result'
 	if(obj.getResult()!=nullptr)
 	{
 		m_result = std::dynamic_pointer_cast<uml::OutputPin>(obj.getResult()->copy());
@@ -181,7 +182,6 @@ Getter & Setter for reference classifier
 */
 std::shared_ptr<uml::Classifier> ReadExtentActionImpl::getClassifier() const
 {
-//assert(m_classifier);
     return m_classifier;
 }
 void ReadExtentActionImpl::setClassifier(std::shared_ptr<uml::Classifier> _classifier)
@@ -196,14 +196,11 @@ Getter & Setter for reference result
 */
 std::shared_ptr<uml::OutputPin> ReadExtentActionImpl::getResult() const
 {
-//assert(m_result);
     return m_result;
 }
 void ReadExtentActionImpl::setResult(std::shared_ptr<uml::OutputPin> _result)
 {
     m_result = _result;
-	
-	
 	
 }
 
@@ -237,7 +234,7 @@ std::shared_ptr<SubsetUnion<uml::OutputPin, uml::Element>> ReadExtentActionImpl:
 		#endif
 		
 		/*SubsetUnion*/
-		m_output->initSubsetUnion(getOwnedElement());
+		getOutput()->initSubsetUnion(getOwnedElement());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value SubsetUnion: " << "m_output - SubsetUnion<uml::OutputPin, uml::Element >(getOwnedElement())" << std::endl;
 		#endif

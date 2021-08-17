@@ -154,21 +154,17 @@ StringExpressionImpl& StringExpressionImpl::operator=(const StringExpressionImpl
 	//copy references with no containment (soft copy)
 	m_owningExpression  = obj.getOwningExpression();
 	//Clone references with containment (deep copy)
-	std::shared_ptr<Subset<uml::StringExpression, uml::Element>> subExpressionContainer = getSubExpression();
-	if(nullptr != subExpressionContainer )
+	//clone reference 'subExpression'
+	std::shared_ptr<Subset<uml::StringExpression, uml::Element>> subExpressionList = obj.getSubExpression();
+	if(subExpressionList)
 	{
-		int size = subExpressionContainer->size();
-		for(int i=0; i<size ; i++)
+		Bag<uml::StringExpression>::iterator subExpressionIter = subExpressionList->begin();
+		Bag<uml::StringExpression>::iterator subExpressionEnd = subExpressionList->end();
+		while (subExpressionIter != subExpressionEnd) 
 		{
-			auto _subExpression=(*subExpressionContainer)[i];
-			if(nullptr != _subExpression)
-			{
-				subExpressionContainer->push_back(std::dynamic_pointer_cast<uml::StringExpression>(_subExpression->copy()));
-			}
-			else
-			{
-				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container subExpression."<< std::endl;)
-			}
+			std::shared_ptr<uml::StringExpression> temp = std::dynamic_pointer_cast<uml::StringExpression>((*subExpressionIter)->copy());
+			getSubExpression()->push_back(temp);
+			subExpressionIter++;
 		}
 	}
 	else
@@ -176,7 +172,7 @@ StringExpressionImpl& StringExpressionImpl::operator=(const StringExpressionImpl
 		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr subExpression."<< std::endl;)
 	}
 	/*Subset*/
-	m_subExpression->initSubset(getOwnedElement());
+	getSubExpression()->initSubset(getOwnedElement());
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Initialising value Subset: " << "m_subExpression - Subset<uml::StringExpression, uml::Element >(getOwnedElement())" << std::endl;
 	#endif
@@ -224,14 +220,11 @@ Getter & Setter for reference owningExpression
 */
 std::weak_ptr<uml::StringExpression> StringExpressionImpl::getOwningExpression() const
 {
-
     return m_owningExpression;
 }
 void StringExpressionImpl::setOwningExpression(std::weak_ptr<uml::StringExpression> _owningExpression)
 {
     m_owningExpression = _owningExpression;
-	m_owner = this->getOwningExpression().lock();
-	
 	
 }
 
@@ -250,13 +243,12 @@ std::shared_ptr<Subset<uml::StringExpression, uml::Element>> StringExpressionImp
 		#endif
 		
 		/*Subset*/
-		m_subExpression->initSubset(getOwnedElement());
+		getSubExpression()->initSubset(getOwnedElement());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value Subset: " << "m_subExpression - Subset<uml::StringExpression, uml::Element >(getOwnedElement())" << std::endl;
 		#endif
 		
 	}
-
     return m_subExpression;
 }
 

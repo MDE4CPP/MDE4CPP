@@ -104,21 +104,17 @@ ElementImpl& ElementImpl::operator=(const ElementImpl & obj)
 	//copy references with no containment (soft copy)
 	m_owner  = obj.getOwner();
 	//Clone references with containment (deep copy)
-	std::shared_ptr<Subset<uml::Comment, uml::Element>> ownedCommentContainer = getOwnedComment();
-	if(nullptr != ownedCommentContainer )
+	//clone reference 'ownedComment'
+	std::shared_ptr<Subset<uml::Comment, uml::Element>> ownedCommentList = obj.getOwnedComment();
+	if(ownedCommentList)
 	{
-		int size = ownedCommentContainer->size();
-		for(int i=0; i<size ; i++)
+		Bag<uml::Comment>::iterator ownedCommentIter = ownedCommentList->begin();
+		Bag<uml::Comment>::iterator ownedCommentEnd = ownedCommentList->end();
+		while (ownedCommentIter != ownedCommentEnd) 
 		{
-			auto _ownedComment=(*ownedCommentContainer)[i];
-			if(nullptr != _ownedComment)
-			{
-				ownedCommentContainer->push_back(std::dynamic_pointer_cast<uml::Comment>(_ownedComment->copy()));
-			}
-			else
-			{
-				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container ownedComment."<< std::endl;)
-			}
+			std::shared_ptr<uml::Comment> temp = std::dynamic_pointer_cast<uml::Comment>((*ownedCommentIter)->copy());
+			getOwnedComment()->push_back(temp);
+			ownedCommentIter++;
 		}
 	}
 	else
@@ -126,7 +122,7 @@ ElementImpl& ElementImpl::operator=(const ElementImpl & obj)
 		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr ownedComment."<< std::endl;)
 	}
 	/*Subset*/
-	m_ownedComment->initSubset(getOwnedElement());
+	getOwnedComment()->initSubset(getOwnedElement());
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Initialising value Subset: " << "m_ownedComment - Subset<uml::Comment, uml::Element >(getOwnedElement())" << std::endl;
 	#endif
@@ -440,13 +436,12 @@ std::shared_ptr<Subset<uml::Comment, uml::Element>> ElementImpl::getOwnedComment
 		#endif
 		
 		/*Subset*/
-		m_ownedComment->initSubset(getOwnedElement());
+		getOwnedComment()->initSubset(getOwnedElement());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value Subset: " << "m_ownedComment - Subset<uml::Comment, uml::Element >(getOwnedElement())" << std::endl;
 		#endif
 		
 	}
-
     return m_ownedComment;
 }
 

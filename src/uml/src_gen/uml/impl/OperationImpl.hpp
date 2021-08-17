@@ -204,6 +204,9 @@ namespace uml
 			*/
 			
 			virtual void setInterface(std::weak_ptr<uml::Interface>) ;
+			
+			virtual std::shared_ptr<Bag<uml::Parameter>> getProperty_OwnedParameter() const ;
+			
 			/*!
 			An optional set of Constraints specifying the state of the system when the Operation is completed.
 			<p>From package UML::Classification.</p>
@@ -262,7 +265,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement>> getOwnedMember() const ;/*!
+			virtual std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement>> getOwnedMember() const ;/*!
 			The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/

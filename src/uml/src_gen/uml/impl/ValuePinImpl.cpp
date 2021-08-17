@@ -204,6 +204,7 @@ ValuePinImpl& ValuePinImpl::operator=(const ValuePinImpl & obj)
 
 	//copy references with no containment (soft copy)
 	//Clone references with containment (deep copy)
+	//clone reference 'value'
 	if(obj.getValue()!=nullptr)
 	{
 		m_value = std::dynamic_pointer_cast<uml::ValueSpecification>(obj.getValue()->copy());
@@ -252,13 +253,11 @@ Getter & Setter for reference value
 */
 std::shared_ptr<uml::ValueSpecification> ValuePinImpl::getValue() const
 {
-//assert(m_value);
     return m_value;
 }
 void ValuePinImpl::setValue(std::shared_ptr<uml::ValueSpecification> _value)
 {
     m_value = _value;
-	
 	
 }
 

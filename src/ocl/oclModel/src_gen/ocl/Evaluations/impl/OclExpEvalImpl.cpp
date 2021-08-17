@@ -33,10 +33,10 @@
 
 #include <exception> // used in Persistence
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
-#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Values/ValuesFactory.hpp"
+#include "fUML/Semantics/Loci/LociFactory.hpp"
 
 
 #include "ocl/Evaluations/EvalEnvironment.hpp"
@@ -133,7 +133,6 @@ Getter & Setter for reference beforeEnvironment
 */
 std::shared_ptr<ocl::Evaluations::EvalEnvironment> OclExpEvalImpl::getBeforeEnvironment() const
 {
-
     return m_beforeEnvironment;
 }
 void OclExpEvalImpl::setBeforeEnvironment(std::shared_ptr<ocl::Evaluations::EvalEnvironment> _beforeEnvironment)
@@ -148,7 +147,6 @@ Getter & Setter for reference environment
 */
 std::shared_ptr<ocl::Evaluations::EvalEnvironment> OclExpEvalImpl::getEnvironment() const
 {
-//assert(m_environment);
     return m_environment;
 }
 void OclExpEvalImpl::setEnvironment(std::shared_ptr<ocl::Evaluations::EvalEnvironment> _environment)
@@ -163,7 +161,6 @@ Getter & Setter for reference model
 */
 std::shared_ptr<ocl::Expressions::OclExpression> OclExpEvalImpl::getModel() const
 {
-//assert(m_model);
     return m_model;
 }
 void OclExpEvalImpl::setModel(std::shared_ptr<ocl::Expressions::OclExpression> _model)
@@ -178,7 +175,6 @@ Getter & Setter for reference resultValue
 */
 std::shared_ptr<fUML::Semantics::Values::Value> OclExpEvalImpl::getResultValue() const
 {
-//assert(m_resultValue);
     return m_resultValue;
 }
 void OclExpEvalImpl::setResultValue(std::shared_ptr<fUML::Semantics::Values::Value> _resultValue)

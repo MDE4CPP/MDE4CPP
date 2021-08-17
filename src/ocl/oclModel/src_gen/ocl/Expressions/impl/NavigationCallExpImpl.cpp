@@ -186,21 +186,17 @@ NavigationCallExpImpl& NavigationCallExpImpl::operator=(const NavigationCallExpI
 	//copy references with no containment (soft copy)
 	m_navigationSource  = obj.getNavigationSource();
 	//Clone references with containment (deep copy)
-	std::shared_ptr<Bag<ocl::Expressions::OclExpression>> qualifierContainer = getQualifier();
-	if(nullptr != qualifierContainer )
+	//clone reference 'qualifier'
+	std::shared_ptr<Bag<ocl::Expressions::OclExpression>> qualifierList = obj.getQualifier();
+	if(qualifierList)
 	{
-		int size = qualifierContainer->size();
-		for(int i=0; i<size ; i++)
+		Bag<ocl::Expressions::OclExpression>::iterator qualifierIter = qualifierList->begin();
+		Bag<ocl::Expressions::OclExpression>::iterator qualifierEnd = qualifierList->end();
+		while (qualifierIter != qualifierEnd) 
 		{
-			auto _qualifier=(*qualifierContainer)[i];
-			if(nullptr != _qualifier)
-			{
-				qualifierContainer->push_back(std::dynamic_pointer_cast<ocl::Expressions::OclExpression>(_qualifier->copy()));
-			}
-			else
-			{
-				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container qualifier."<< std::endl;)
-			}
+			std::shared_ptr<ocl::Expressions::OclExpression> temp = std::dynamic_pointer_cast<ocl::Expressions::OclExpression>((*qualifierIter)->copy());
+			getQualifier()->push_back(temp);
+			qualifierIter++;
 		}
 	}
 	else
@@ -240,7 +236,6 @@ Getter & Setter for reference navigationSource
 */
 std::shared_ptr<ecore::EAttribute> NavigationCallExpImpl::getNavigationSource() const
 {
-
     return m_navigationSource;
 }
 void NavigationCallExpImpl::setNavigationSource(std::shared_ptr<ecore::EAttribute> _navigationSource)
@@ -261,7 +256,6 @@ std::shared_ptr<Bag<ocl::Expressions::OclExpression>> NavigationCallExpImpl::get
 		
 		
 	}
-
     return m_qualifier;
 }
 

@@ -90,7 +90,7 @@ namespace ocl::Values
 			//*********************************
 			// Attribute Members
 			//*********************************
-			 
+			
 			int m_indexNr = 0;
 			
 			

@@ -105,8 +105,7 @@ EReferenceImpl& EReferenceImpl::operator=(const EReferenceImpl & obj)
 	m_resolveProxies = obj.isResolveProxies();
 
 	//copy references with no containment (soft copy)
-	std::shared_ptr<Bag<ecore::EAttribute>> _eKeys = obj.getEKeys();
-	m_eKeys.reset(new Bag<ecore::EAttribute>(*(obj.getEKeys().get())));
+	m_eKeys  = obj.getEKeys();
 	m_eOpposite  = obj.getEOpposite();
 	m_eReferenceType  = obj.getEReferenceType();
 	//Clone references with containment (deep copy)
@@ -185,7 +184,6 @@ std::shared_ptr<Bag<ecore::EAttribute>> EReferenceImpl::getEKeys() const
 		
 		
 	}
-
     return m_eKeys;
 }
 
@@ -196,7 +194,6 @@ Getter & Setter for reference eOpposite
 */
 std::shared_ptr<ecore::EReference> EReferenceImpl::getEOpposite() const
 {
-
     return m_eOpposite;
 }
 void EReferenceImpl::setEOpposite(std::shared_ptr<ecore::EReference> _eOpposite)
@@ -211,7 +208,6 @@ Getter & Setter for reference eReferenceType
 */
 std::shared_ptr<ecore::EClass> EReferenceImpl::getEReferenceType() const
 {
-//assert(m_eReferenceType);
     return m_eReferenceType;
 }
 void EReferenceImpl::setEReferenceType(std::shared_ptr<ecore::EClass> _eReferenceType)

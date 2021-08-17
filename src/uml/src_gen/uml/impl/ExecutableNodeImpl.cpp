@@ -127,21 +127,17 @@ ExecutableNodeImpl& ExecutableNodeImpl::operator=(const ExecutableNodeImpl & obj
 
 	//copy references with no containment (soft copy)
 	//Clone references with containment (deep copy)
-	std::shared_ptr<Subset<uml::ExceptionHandler, uml::Element>> handlerContainer = getHandler();
-	if(nullptr != handlerContainer )
+	//clone reference 'handler'
+	std::shared_ptr<Subset<uml::ExceptionHandler, uml::Element>> handlerList = obj.getHandler();
+	if(handlerList)
 	{
-		int size = handlerContainer->size();
-		for(int i=0; i<size ; i++)
+		Bag<uml::ExceptionHandler>::iterator handlerIter = handlerList->begin();
+		Bag<uml::ExceptionHandler>::iterator handlerEnd = handlerList->end();
+		while (handlerIter != handlerEnd) 
 		{
-			auto _handler=(*handlerContainer)[i];
-			if(nullptr != _handler)
-			{
-				handlerContainer->push_back(std::dynamic_pointer_cast<uml::ExceptionHandler>(_handler->copy()));
-			}
-			else
-			{
-				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container handler."<< std::endl;)
-			}
+			std::shared_ptr<uml::ExceptionHandler> temp = std::dynamic_pointer_cast<uml::ExceptionHandler>((*handlerIter)->copy());
+			getHandler()->push_back(temp);
+			handlerIter++;
 		}
 	}
 	else
@@ -149,7 +145,7 @@ ExecutableNodeImpl& ExecutableNodeImpl::operator=(const ExecutableNodeImpl & obj
 		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr handler."<< std::endl;)
 	}
 	/*Subset*/
-	m_handler->initSubset(getOwnedElement());
+	getHandler()->initSubset(getOwnedElement());
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Initialising value Subset: " << "m_handler - Subset<uml::ExceptionHandler, uml::Element >(getOwnedElement())" << std::endl;
 	#endif
@@ -195,13 +191,12 @@ std::shared_ptr<Subset<uml::ExceptionHandler, uml::Element>> ExecutableNodeImpl:
 		#endif
 		
 		/*Subset*/
-		m_handler->initSubset(getOwnedElement());
+		getHandler()->initSubset(getOwnedElement());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value Subset: " << "m_handler - Subset<uml::ExceptionHandler, uml::Element >(getOwnedElement())" << std::endl;
 		#endif
 		
 	}
-
     return m_handler;
 }
 

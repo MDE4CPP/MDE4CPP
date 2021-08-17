@@ -121,10 +121,8 @@ OccurrenceSpecificationImpl& OccurrenceSpecificationImpl::operator=(const Occurr
 	//Clone Attributes with (deep copy)
 
 	//copy references with no containment (soft copy)
-	std::shared_ptr<Bag<uml::GeneralOrdering>> _toAfter = obj.getToAfter();
-	m_toAfter.reset(new Bag<uml::GeneralOrdering>(*(obj.getToAfter().get())));
-	std::shared_ptr<Bag<uml::GeneralOrdering>> _toBefore = obj.getToBefore();
-	m_toBefore.reset(new Bag<uml::GeneralOrdering>(*(obj.getToBefore().get())));
+	m_toAfter  = obj.getToAfter();
+	m_toBefore  = obj.getToBefore();
 	//Clone references with containment (deep copy)
 	return *this;
 }
@@ -171,7 +169,6 @@ std::shared_ptr<Bag<uml::GeneralOrdering>> OccurrenceSpecificationImpl::getToAft
 		
 		
 	}
-
     return m_toAfter;
 }
 
@@ -188,7 +185,6 @@ std::shared_ptr<Bag<uml::GeneralOrdering>> OccurrenceSpecificationImpl::getToBef
 		
 		
 	}
-
     return m_toBefore;
 }
 

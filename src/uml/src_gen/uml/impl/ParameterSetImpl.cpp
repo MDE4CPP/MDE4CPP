@@ -104,24 +104,19 @@ ParameterSetImpl& ParameterSetImpl::operator=(const ParameterSetImpl & obj)
 	//Clone Attributes with (deep copy)
 
 	//copy references with no containment (soft copy)
-	std::shared_ptr<Bag<uml::Parameter>> _parameter = obj.getParameter();
-	m_parameter.reset(new Bag<uml::Parameter>(*(obj.getParameter().get())));
+	m_parameter  = obj.getParameter();
 	//Clone references with containment (deep copy)
-	std::shared_ptr<Subset<uml::Constraint, uml::Element>> conditionContainer = getCondition();
-	if(nullptr != conditionContainer )
+	//clone reference 'condition'
+	std::shared_ptr<Subset<uml::Constraint, uml::Element>> conditionList = obj.getCondition();
+	if(conditionList)
 	{
-		int size = conditionContainer->size();
-		for(int i=0; i<size ; i++)
+		Bag<uml::Constraint>::iterator conditionIter = conditionList->begin();
+		Bag<uml::Constraint>::iterator conditionEnd = conditionList->end();
+		while (conditionIter != conditionEnd) 
 		{
-			auto _condition=(*conditionContainer)[i];
-			if(nullptr != _condition)
-			{
-				conditionContainer->push_back(std::dynamic_pointer_cast<uml::Constraint>(_condition->copy()));
-			}
-			else
-			{
-				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container condition."<< std::endl;)
-			}
+			std::shared_ptr<uml::Constraint> temp = std::dynamic_pointer_cast<uml::Constraint>((*conditionIter)->copy());
+			getCondition()->push_back(temp);
+			conditionIter++;
 		}
 	}
 	else
@@ -129,7 +124,7 @@ ParameterSetImpl& ParameterSetImpl::operator=(const ParameterSetImpl & obj)
 		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr condition."<< std::endl;)
 	}
 	/*Subset*/
-	m_condition->initSubset(getOwnedElement());
+	getCondition()->initSubset(getOwnedElement());
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Initialising value Subset: " << "m_condition - Subset<uml::Constraint, uml::Element >(getOwnedElement())" << std::endl;
 	#endif
@@ -192,13 +187,12 @@ std::shared_ptr<Subset<uml::Constraint, uml::Element>> ParameterSetImpl::getCond
 		#endif
 		
 		/*Subset*/
-		m_condition->initSubset(getOwnedElement());
+		getCondition()->initSubset(getOwnedElement());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value Subset: " << "m_condition - Subset<uml::Constraint, uml::Element >(getOwnedElement())" << std::endl;
 		#endif
 		
 	}
-
     return m_condition;
 }
 
@@ -215,7 +209,6 @@ std::shared_ptr<Bag<uml::Parameter>> ParameterSetImpl::getParameter() const
 		
 		
 	}
-//assert(m_parameter);
     return m_parameter;
 }
 

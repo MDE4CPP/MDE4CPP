@@ -130,33 +130,31 @@ InteractionOperandImpl& InteractionOperandImpl::operator=(const InteractionOpera
 
 	//copy references with no containment (soft copy)
 	//Clone references with containment (deep copy)
-	std::shared_ptr<Subset<uml::InteractionFragment, uml::NamedElement>> fragmentContainer = getFragment();
-	if(nullptr != fragmentContainer )
+	//clone reference 'fragment'
+	std::shared_ptr<Subset<uml::InteractionFragment, uml::NamedElement>> fragmentList = obj.getFragment();
+	if(fragmentList)
 	{
-		int size = fragmentContainer->size();
-		for(int i=0; i<size ; i++)
+		Bag<uml::InteractionFragment>::iterator fragmentIter = fragmentList->begin();
+		Bag<uml::InteractionFragment>::iterator fragmentEnd = fragmentList->end();
+		while (fragmentIter != fragmentEnd) 
 		{
-			auto _fragment=(*fragmentContainer)[i];
-			if(nullptr != _fragment)
-			{
-				fragmentContainer->push_back(std::dynamic_pointer_cast<uml::InteractionFragment>(_fragment->copy()));
-			}
-			else
-			{
-				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container fragment."<< std::endl;)
-			}
+			std::shared_ptr<uml::InteractionFragment> temp = std::dynamic_pointer_cast<uml::InteractionFragment>((*fragmentIter)->copy());
+			getFragment()->push_back(temp);
+			fragmentIter++;
 		}
 	}
 	else
 	{
 		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr fragment."<< std::endl;)
 	}
+
+	//clone reference 'guard'
 	if(obj.getGuard()!=nullptr)
 	{
 		m_guard = std::dynamic_pointer_cast<uml::InteractionConstraint>(obj.getGuard()->copy());
 	}
 	/*Subset*/
-	m_fragment->initSubset(getOwnedMember());
+	getFragment()->initSubset(getOwnedMember());
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Initialising value Subset: " << "m_fragment - Subset<uml::InteractionFragment, uml::NamedElement >(getOwnedMember())" << std::endl;
 	#endif
@@ -214,13 +212,12 @@ std::shared_ptr<Subset<uml::InteractionFragment, uml::NamedElement>> Interaction
 		#endif
 		
 		/*Subset*/
-		m_fragment->initSubset(getOwnedMember());
+		getFragment()->initSubset(getOwnedMember());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value Subset: " << "m_fragment - Subset<uml::InteractionFragment, uml::NamedElement >(getOwnedMember())" << std::endl;
 		#endif
 		
 	}
-
     return m_fragment;
 }
 
@@ -231,13 +228,11 @@ Getter & Setter for reference guard
 */
 std::shared_ptr<uml::InteractionConstraint> InteractionOperandImpl::getGuard() const
 {
-
     return m_guard;
 }
 void InteractionOperandImpl::setGuard(std::shared_ptr<uml::InteractionConstraint> _guard)
 {
     m_guard = _guard;
-	
 	
 }
 
@@ -280,20 +275,20 @@ std::shared_ptr<Union<uml::Element>> InteractionOperandImpl::getOwnedElement() c
 	return m_ownedElement;
 }
 
-std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement>> InteractionOperandImpl::getOwnedMember() const
+std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement>> InteractionOperandImpl::getOwnedMember() const
 {
 	if(m_ownedMember == nullptr)
 	{
 		/*SubsetUnion*/
-		m_ownedMember.reset(new SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement >());
+		m_ownedMember.reset(new SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement >());
 		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement >()" << std::endl;
+			std::cout << "Initialising shared pointer SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement >()" << std::endl;
 		#endif
 		
 		/*SubsetUnion*/
-		m_ownedMember->initSubsetUnion(getOwnedElement(),getMember());
+		getOwnedMember()->initSubsetUnion(getOwnedElement(), getMember());
 		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement >(getOwnedElement(),getMember())" << std::endl;
+			std::cout << "Initialising value SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement >(getOwnedElement(), getMember())" << std::endl;
 		#endif
 		
 	}

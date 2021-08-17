@@ -66,6 +66,12 @@ ControlTokenImpl::~ControlTokenImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+ControlTokenImpl::ControlTokenImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivation> par_holder)
+:ControlTokenImpl()
+{
+	m_holder = par_holder;
+}
 
 ControlTokenImpl::ControlTokenImpl(const ControlTokenImpl & obj): ControlTokenImpl()
 {
@@ -156,6 +162,10 @@ void ControlTokenImpl::setThisControlTokenPtr(std::weak_ptr<ControlToken> thisCo
 }
 std::shared_ptr<ecore::EObject> ControlTokenImpl::eContainer() const
 {
+	if(auto wp = m_holder.lock())
+	{
+		return wp;
+	}
 	return nullptr;
 }
 

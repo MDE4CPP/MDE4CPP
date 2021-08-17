@@ -226,11 +226,6 @@ namespace uml
 			*/
 			
 			mutable std::shared_ptr<Subset<uml::Pseudostate, uml::NamedElement>> m_connectionPoint;/*!
-			The StateMachines of which this is an extension.
-			<p>From package UML::StateMachines.</p>
-			*/
-			
-			mutable std::shared_ptr<Bag<uml::StateMachine>> m_extendedStateMachine;/*!
 			The Regions owned directly by the StateMachine.
 			<p>From package UML::StateMachines.</p>
 			*/
@@ -276,7 +271,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement>> getOwnedMember() const = 0;/*!
+			virtual std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement>> getOwnedMember() const = 0;/*!
 			The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/

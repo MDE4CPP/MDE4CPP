@@ -115,12 +115,12 @@ LifelineImpl& LifelineImpl::operator=(const LifelineImpl & obj)
 	//Clone Attributes with (deep copy)
 
 	//copy references with no containment (soft copy)
-	std::shared_ptr<Bag<uml::InteractionFragment>> _coveredBy = obj.getCoveredBy();
-	m_coveredBy.reset(new Bag<uml::InteractionFragment>(*(obj.getCoveredBy().get())));
+	m_coveredBy  = obj.getCoveredBy();
 	m_decomposedAs  = obj.getDecomposedAs();
 	m_interaction  = obj.getInteraction();
 	m_represents  = obj.getRepresents();
 	//Clone references with containment (deep copy)
+	//clone reference 'selector'
 	if(obj.getSelector()!=nullptr)
 	{
 		m_selector = std::dynamic_pointer_cast<uml::ValueSpecification>(obj.getSelector()->copy());
@@ -187,7 +187,6 @@ std::shared_ptr<Bag<uml::InteractionFragment>> LifelineImpl::getCoveredBy() cons
 		
 		
 	}
-
     return m_coveredBy;
 }
 
@@ -198,7 +197,6 @@ Getter & Setter for reference decomposedAs
 */
 std::shared_ptr<uml::PartDecomposition> LifelineImpl::getDecomposedAs() const
 {
-
     return m_decomposedAs;
 }
 void LifelineImpl::setDecomposedAs(std::shared_ptr<uml::PartDecomposition> _decomposedAs)
@@ -213,16 +211,11 @@ Getter & Setter for reference interaction
 */
 std::weak_ptr<uml::Interaction> LifelineImpl::getInteraction() const
 {
-//assert(m_interaction);
     return m_interaction;
 }
 void LifelineImpl::setInteraction(std::weak_ptr<uml::Interaction> _interaction)
 {
     m_interaction = _interaction;
-	m_namespace = this->getInteraction().lock();
-	m_owner = this->getNamespace().lock();
-	
-	
 	
 }
 
@@ -232,7 +225,6 @@ Getter & Setter for reference represents
 */
 std::shared_ptr<uml::ConnectableElement> LifelineImpl::getRepresents() const
 {
-
     return m_represents;
 }
 void LifelineImpl::setRepresents(std::shared_ptr<uml::ConnectableElement> _represents)
@@ -247,13 +239,11 @@ Getter & Setter for reference selector
 */
 std::shared_ptr<uml::ValueSpecification> LifelineImpl::getSelector() const
 {
-
     return m_selector;
 }
 void LifelineImpl::setSelector(std::shared_ptr<uml::ValueSpecification> _selector)
 {
     m_selector = _selector;
-	
 	
 }
 

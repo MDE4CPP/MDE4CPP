@@ -100,6 +100,7 @@ CollectionTypeImpl& CollectionTypeImpl::operator=(const CollectionTypeImpl & obj
 	//copy references with no containment (soft copy)
 	m_instance  = obj.getInstance();
 	//Clone references with containment (deep copy)
+	//clone reference 'elementType'
 	if(obj.getElementType()!=nullptr)
 	{
 		m_elementType = std::dynamic_pointer_cast<ecore::EClassifier>(obj.getElementType()->copy());
@@ -151,7 +152,6 @@ Getter & Setter for reference elementType
 */
 std::shared_ptr<ecore::EClassifier> CollectionTypeImpl::getElementType() const
 {
-//assert(m_elementType);
     return m_elementType;
 }
 void CollectionTypeImpl::setElementType(std::shared_ptr<ecore::EClassifier> _elementType)
@@ -166,7 +166,6 @@ Getter & Setter for reference instance
 */
 std::shared_ptr<ocl::Values::CollectionValue> CollectionTypeImpl::getInstance() const
 {
-
     return m_instance;
 }
 void CollectionTypeImpl::setInstance(std::shared_ptr<ocl::Values::CollectionValue> _instance)

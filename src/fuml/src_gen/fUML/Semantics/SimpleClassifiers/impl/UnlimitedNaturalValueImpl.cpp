@@ -168,7 +168,7 @@ std::shared_ptr<uml::ValueSpecification> UnlimitedNaturalValueImpl::specify()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	std::shared_ptr<uml::LiteralUnlimitedNatural> literal = uml::umlFactory::eInstance()->createLiteralUnlimitedNatural_in_Namespace(std::shared_ptr<uml::Class>());
+	std::shared_ptr<uml::LiteralUnlimitedNatural> literal = uml::umlFactory::eInstance()->createLiteralUnlimitedNatural_as_ownedMember_in_Namespace(std::shared_ptr<uml::Class>());
     literal->setType(this->getType());
     literal->setValue(this->getValue());
     return literal;

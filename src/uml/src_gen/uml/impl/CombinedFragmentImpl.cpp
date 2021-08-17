@@ -125,42 +125,35 @@ CombinedFragmentImpl& CombinedFragmentImpl::operator=(const CombinedFragmentImpl
 
 	//copy references with no containment (soft copy)
 	//Clone references with containment (deep copy)
-	std::shared_ptr<Subset<uml::Gate, uml::Element>> cfragmentGateContainer = getCfragmentGate();
-	if(nullptr != cfragmentGateContainer )
+	//clone reference 'cfragmentGate'
+	std::shared_ptr<Subset<uml::Gate, uml::Element>> cfragmentGateList = obj.getCfragmentGate();
+	if(cfragmentGateList)
 	{
-		int size = cfragmentGateContainer->size();
-		for(int i=0; i<size ; i++)
+		Bag<uml::Gate>::iterator cfragmentGateIter = cfragmentGateList->begin();
+		Bag<uml::Gate>::iterator cfragmentGateEnd = cfragmentGateList->end();
+		while (cfragmentGateIter != cfragmentGateEnd) 
 		{
-			auto _cfragmentGate=(*cfragmentGateContainer)[i];
-			if(nullptr != _cfragmentGate)
-			{
-				cfragmentGateContainer->push_back(std::dynamic_pointer_cast<uml::Gate>(_cfragmentGate->copy()));
-			}
-			else
-			{
-				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container cfragmentGate."<< std::endl;)
-			}
+			std::shared_ptr<uml::Gate> temp = std::dynamic_pointer_cast<uml::Gate>((*cfragmentGateIter)->copy());
+			getCfragmentGate()->push_back(temp);
+			cfragmentGateIter++;
 		}
 	}
 	else
 	{
 		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr cfragmentGate."<< std::endl;)
 	}
-	std::shared_ptr<Subset<uml::InteractionOperand, uml::Element>> operandContainer = getOperand();
-	if(nullptr != operandContainer )
+
+	//clone reference 'operand'
+	std::shared_ptr<Subset<uml::InteractionOperand, uml::Element>> operandList = obj.getOperand();
+	if(operandList)
 	{
-		int size = operandContainer->size();
-		for(int i=0; i<size ; i++)
+		Bag<uml::InteractionOperand>::iterator operandIter = operandList->begin();
+		Bag<uml::InteractionOperand>::iterator operandEnd = operandList->end();
+		while (operandIter != operandEnd) 
 		{
-			auto _operand=(*operandContainer)[i];
-			if(nullptr != _operand)
-			{
-				operandContainer->push_back(std::dynamic_pointer_cast<uml::InteractionOperand>(_operand->copy()));
-			}
-			else
-			{
-				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container operand."<< std::endl;)
-			}
+			std::shared_ptr<uml::InteractionOperand> temp = std::dynamic_pointer_cast<uml::InteractionOperand>((*operandIter)->copy());
+			getOperand()->push_back(temp);
+			operandIter++;
 		}
 	}
 	else
@@ -168,13 +161,13 @@ CombinedFragmentImpl& CombinedFragmentImpl::operator=(const CombinedFragmentImpl
 		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr operand."<< std::endl;)
 	}
 	/*Subset*/
-	m_cfragmentGate->initSubset(getOwnedElement());
+	getCfragmentGate()->initSubset(getOwnedElement());
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Initialising value Subset: " << "m_cfragmentGate - Subset<uml::Gate, uml::Element >(getOwnedElement())" << std::endl;
 	#endif
 	
 	/*Subset*/
-	m_operand->initSubset(getOwnedElement());
+	getOperand()->initSubset(getOwnedElement());
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Initialising value Subset: " << "m_operand - Subset<uml::InteractionOperand, uml::Element >(getOwnedElement())" << std::endl;
 	#endif
@@ -250,13 +243,12 @@ std::shared_ptr<Subset<uml::Gate, uml::Element>> CombinedFragmentImpl::getCfragm
 		#endif
 		
 		/*Subset*/
-		m_cfragmentGate->initSubset(getOwnedElement());
+		getCfragmentGate()->initSubset(getOwnedElement());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value Subset: " << "m_cfragmentGate - Subset<uml::Gate, uml::Element >(getOwnedElement())" << std::endl;
 		#endif
 		
 	}
-
     return m_cfragmentGate;
 }
 
@@ -276,13 +268,12 @@ std::shared_ptr<Subset<uml::InteractionOperand, uml::Element>> CombinedFragmentI
 		#endif
 		
 		/*Subset*/
-		m_operand->initSubset(getOwnedElement());
+		getOperand()->initSubset(getOwnedElement());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value Subset: " << "m_operand - Subset<uml::InteractionOperand, uml::Element >(getOwnedElement())" << std::endl;
 		#endif
 		
 	}
-//assert(m_operand);
     return m_operand;
 }
 

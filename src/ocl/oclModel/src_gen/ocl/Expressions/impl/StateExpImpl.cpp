@@ -219,7 +219,6 @@ Getter & Setter for reference referredState
 */
 std::shared_ptr<uml::State> StateExpImpl::getReferredState() const
 {
-
     return m_referredState;
 }
 void StateExpImpl::setReferredState(std::shared_ptr<uml::State> _referredState)

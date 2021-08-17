@@ -171,7 +171,6 @@ Getter & Setter for reference variable
 */
 std::shared_ptr<uml::Variable> VariableActionImpl::getVariable() const
 {
-//assert(m_variable);
     return m_variable;
 }
 void VariableActionImpl::setVariable(std::shared_ptr<uml::Variable> _variable)

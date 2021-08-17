@@ -140,21 +140,17 @@ ExpressionImpl& ExpressionImpl::operator=(const ExpressionImpl & obj)
 
 	//copy references with no containment (soft copy)
 	//Clone references with containment (deep copy)
-	std::shared_ptr<Subset<uml::ValueSpecification, uml::Element>> operandContainer = getOperand();
-	if(nullptr != operandContainer )
+	//clone reference 'operand'
+	std::shared_ptr<Subset<uml::ValueSpecification, uml::Element>> operandList = obj.getOperand();
+	if(operandList)
 	{
-		int size = operandContainer->size();
-		for(int i=0; i<size ; i++)
+		Bag<uml::ValueSpecification>::iterator operandIter = operandList->begin();
+		Bag<uml::ValueSpecification>::iterator operandEnd = operandList->end();
+		while (operandIter != operandEnd) 
 		{
-			auto _operand=(*operandContainer)[i];
-			if(nullptr != _operand)
-			{
-				operandContainer->push_back(std::dynamic_pointer_cast<uml::ValueSpecification>(_operand->copy()));
-			}
-			else
-			{
-				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container operand."<< std::endl;)
-			}
+			std::shared_ptr<uml::ValueSpecification> temp = std::dynamic_pointer_cast<uml::ValueSpecification>((*operandIter)->copy());
+			getOperand()->push_back(temp);
+			operandIter++;
 		}
 	}
 	else
@@ -162,7 +158,7 @@ ExpressionImpl& ExpressionImpl::operator=(const ExpressionImpl & obj)
 		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr operand."<< std::endl;)
 	}
 	/*Subset*/
-	m_operand->initSubset(getOwnedElement());
+	getOperand()->initSubset(getOwnedElement());
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Initialising value Subset: " << "m_operand - Subset<uml::ValueSpecification, uml::Element >(getOwnedElement())" << std::endl;
 	#endif
@@ -221,13 +217,12 @@ std::shared_ptr<Subset<uml::ValueSpecification, uml::Element>> ExpressionImpl::g
 		#endif
 		
 		/*Subset*/
-		m_operand->initSubset(getOwnedElement());
+		getOperand()->initSubset(getOwnedElement());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value Subset: " << "m_operand - Subset<uml::ValueSpecification, uml::Element >(getOwnedElement())" << std::endl;
 		#endif
 		
 	}
-
     return m_operand;
 }
 

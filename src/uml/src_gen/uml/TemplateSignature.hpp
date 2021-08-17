@@ -107,7 +107,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::TemplateParameter, uml::Element,uml::TemplateParameter>> getOwnedParameter() const = 0;
+			virtual std::shared_ptr<Subset<uml::TemplateParameter, uml::Element, uml::TemplateParameter>> getOwnedParameter() const = 0;
 			
 			
 			
@@ -139,7 +139,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			mutable std::shared_ptr<Subset<uml::TemplateParameter, uml::Element,uml::TemplateParameter>> m_ownedParameter;/*!
+			mutable std::shared_ptr<Subset<uml::TemplateParameter, uml::Element, uml::TemplateParameter>> m_ownedParameter;/*!
 			The ordered set of all formal TemplateParameters for this TemplateSignature.
 			<p>From package UML::CommonStructure.</p>
 			*/

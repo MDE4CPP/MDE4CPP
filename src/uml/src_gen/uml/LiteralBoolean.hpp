@@ -123,7 +123,7 @@ namespace uml
 			The specified Boolean value.
 			<p>From package UML::Values.</p>
 			*/
-			 
+			
 			bool m_value = false;
 			
 			

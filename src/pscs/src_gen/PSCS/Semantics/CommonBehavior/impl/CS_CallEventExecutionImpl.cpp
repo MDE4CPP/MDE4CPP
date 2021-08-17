@@ -177,7 +177,6 @@ Getter & Setter for reference interactionPoint
 */
 std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint> CS_CallEventExecutionImpl::getInteractionPoint() const
 {
-
     return m_interactionPoint;
 }
 void CS_CallEventExecutionImpl::setInteractionPoint(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint> _interactionPoint)

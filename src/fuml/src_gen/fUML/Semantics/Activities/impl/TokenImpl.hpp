@@ -37,6 +37,8 @@ virtual public Token
 			virtual std::shared_ptr<Token> getThisTokenPtr() const;
 			virtual void setThisTokenPtr(std::weak_ptr<Token> thisTokenPtr);
 
+			//Additional constructors for the containments back reference
+			TokenImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivation> par_holder);
 
 		public:
 			//destructor

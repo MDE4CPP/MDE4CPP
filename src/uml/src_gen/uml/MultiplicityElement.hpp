@@ -233,25 +233,25 @@ namespace uml
 			For a multivalued multiplicity, this attribute specifies whether the values in an instantiation of this MultiplicityElement are sequentially ordered.
 			<p>From package UML::CommonStructure.</p>
 			*/
-			 
+			
 			bool m_isOrdered = false;
 			/*!
 			For a multivalued multiplicity, this attributes specifies whether the values in an instantiation of this MultiplicityElement are unique.
 			<p>From package UML::CommonStructure.</p>
 			*/
-			 
+			
 			bool m_isUnique = true;
 			/*!
 			The lower bound of the multiplicity interval.
 			<p>From package UML::CommonStructure.</p>
 			*/
-			 
+			
 			int m_lower = 1;
 			/*!
 			The upper bound of the multiplicity interval.
 			<p>From package UML::CommonStructure.</p>
 			*/
-			 
+			
 			int m_upper = 1;
 			
 			

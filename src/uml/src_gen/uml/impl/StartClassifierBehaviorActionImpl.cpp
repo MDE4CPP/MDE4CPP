@@ -132,6 +132,7 @@ StartClassifierBehaviorActionImpl& StartClassifierBehaviorActionImpl::operator=(
 
 	//copy references with no containment (soft copy)
 	//Clone references with containment (deep copy)
+	//clone reference 'object'
 	if(obj.getObject()!=nullptr)
 	{
 		m_object = std::dynamic_pointer_cast<uml::InputPin>(obj.getObject()->copy());
@@ -180,14 +181,11 @@ Getter & Setter for reference object
 */
 std::shared_ptr<uml::InputPin> StartClassifierBehaviorActionImpl::getObject() const
 {
-//assert(m_object);
     return m_object;
 }
 void StartClassifierBehaviorActionImpl::setObject(std::shared_ptr<uml::InputPin> _object)
 {
     m_object = _object;
-	
-	
 	
 }
 
@@ -221,7 +219,7 @@ std::shared_ptr<SubsetUnion<uml::InputPin, uml::Element>> StartClassifierBehavio
 		#endif
 		
 		/*SubsetUnion*/
-		m_input->initSubsetUnion(getOwnedElement());
+		getInput()->initSubsetUnion(getOwnedElement());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value SubsetUnion: " << "m_input - SubsetUnion<uml::InputPin, uml::Element >(getOwnedElement())" << std::endl;
 		#endif

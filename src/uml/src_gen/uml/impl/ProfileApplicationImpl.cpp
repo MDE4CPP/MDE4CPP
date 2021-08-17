@@ -107,6 +107,7 @@ ProfileApplicationImpl& ProfileApplicationImpl::operator=(const ProfileApplicati
 	//copy references with no containment (soft copy)
 	m_applyingPackage  = obj.getApplyingPackage();
 	//Clone references with containment (deep copy)
+	//clone reference 'appliedProfile'
 	if(obj.getAppliedProfile()!=nullptr)
 	{
 		m_appliedProfile = std::dynamic_pointer_cast<uml::Profile>(obj.getAppliedProfile()->copy());
@@ -167,14 +168,11 @@ Getter & Setter for reference appliedProfile
 */
 std::shared_ptr<uml::Profile> ProfileApplicationImpl::getAppliedProfile() const
 {
-//assert(m_appliedProfile);
     return m_appliedProfile;
 }
 void ProfileApplicationImpl::setAppliedProfile(std::shared_ptr<uml::Profile> _appliedProfile)
 {
     m_appliedProfile = _appliedProfile;
-	
-	
 	
 }
 
@@ -184,16 +182,11 @@ Getter & Setter for reference applyingPackage
 */
 std::weak_ptr<uml::Package> ProfileApplicationImpl::getApplyingPackage() const
 {
-//assert(m_applyingPackage);
     return m_applyingPackage;
 }
 void ProfileApplicationImpl::setApplyingPackage(std::weak_ptr<uml::Package> _applyingPackage)
 {
     m_applyingPackage = _applyingPackage;
-	
-	
-	m_owner = this->getApplyingPackage().lock();
-	
 	
 }
 
@@ -247,7 +240,7 @@ std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> ProfileApplicationImpl:
 		#endif
 		
 		/*SubsetUnion*/
-		m_source->initSubsetUnion(getRelatedElement());
+		getSource()->initSubsetUnion(getRelatedElement());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value SubsetUnion: " << "m_source - SubsetUnion<uml::Element, uml::Element >(getRelatedElement())" << std::endl;
 		#endif
@@ -267,7 +260,7 @@ std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> ProfileApplicationImpl:
 		#endif
 		
 		/*SubsetUnion*/
-		m_target->initSubsetUnion(getRelatedElement());
+		getTarget()->initSubsetUnion(getRelatedElement());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value SubsetUnion: " << "m_target - SubsetUnion<uml::Element, uml::Element >(getRelatedElement())" << std::endl;
 		#endif

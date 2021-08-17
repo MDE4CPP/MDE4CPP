@@ -151,7 +151,7 @@ namespace uml
 			Specifies the operation which defines the semantics of this combination of InteractionFragments.
 			<p>From package UML::Interactions.</p>
 			*/
-			 
+			
 			uml::InteractionOperatorKind m_interactionOperator = InteractionOperatorKind::SEQ;
 			
 			

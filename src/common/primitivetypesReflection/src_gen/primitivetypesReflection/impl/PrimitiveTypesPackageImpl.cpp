@@ -122,19 +122,19 @@ void PrimitiveTypesPackageImpl::createPackageInterfaces(std::shared_ptr<uml::Pac
 
 void PrimitiveTypesPackageImpl::createPackagePrimitiveTypes(std::shared_ptr<uml::Package> primitiveTypes, std::shared_ptr<uml::umlFactory> factory)
 {
-	primitiveTypes_Boolean = factory->createPrimitiveType_in_Package(primitiveTypes);
+	primitiveTypes_Boolean = factory->createPrimitiveType_as_ownedType_in_Package(primitiveTypes);
 	primitiveTypes_Boolean->setName("Boolean");
 
-	primitiveTypes_Integer = factory->createPrimitiveType_in_Package(primitiveTypes);
+	primitiveTypes_Integer = factory->createPrimitiveType_as_ownedType_in_Package(primitiveTypes);
 	primitiveTypes_Integer->setName("Integer");
 
-	primitiveTypes_Real = factory->createPrimitiveType_in_Package(primitiveTypes);
+	primitiveTypes_Real = factory->createPrimitiveType_as_ownedType_in_Package(primitiveTypes);
 	primitiveTypes_Real->setName("Real");
 
-	primitiveTypes_String = factory->createPrimitiveType_in_Package(primitiveTypes);
+	primitiveTypes_String = factory->createPrimitiveType_as_ownedType_in_Package(primitiveTypes);
 	primitiveTypes_String->setName("String");
 
-	primitiveTypes_UnlimitedNatural = factory->createPrimitiveType_in_Package(primitiveTypes);
+	primitiveTypes_UnlimitedNatural = factory->createPrimitiveType_as_ownedType_in_Package(primitiveTypes);
 	primitiveTypes_UnlimitedNatural->setName("UnlimitedNatural");
 }
 

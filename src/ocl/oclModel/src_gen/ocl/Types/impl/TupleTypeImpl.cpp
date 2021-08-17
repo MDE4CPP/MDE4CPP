@@ -99,8 +99,7 @@ TupleTypeImpl& TupleTypeImpl::operator=(const TupleTypeImpl & obj)
 
 	//copy references with no containment (soft copy)
 	m_instance  = obj.getInstance();
-	std::shared_ptr<Bag<ocl::Types::NameTypeBinding>> _parts = obj.getParts();
-	m_parts.reset(new Bag<ocl::Types::NameTypeBinding>(*(obj.getParts().get())));
+	m_parts  = obj.getParts();
 	//Clone references with containment (deep copy)
 	return *this;
 }
@@ -134,7 +133,6 @@ Getter & Setter for reference instance
 */
 std::shared_ptr<ocl::Values::TupleValue> TupleTypeImpl::getInstance() const
 {
-
     return m_instance;
 }
 void TupleTypeImpl::setInstance(std::shared_ptr<ocl::Values::TupleValue> _instance)
@@ -155,7 +153,6 @@ std::shared_ptr<Bag<ocl::Types::NameTypeBinding>> TupleTypeImpl::getParts() cons
 		
 		
 	}
-
     return m_parts;
 }
 

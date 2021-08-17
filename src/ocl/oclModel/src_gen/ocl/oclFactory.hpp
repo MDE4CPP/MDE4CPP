@@ -22,19 +22,8 @@ namespace ocl
 }
 
 
-namespace ocl::Expressions 
-{
-	class CollectionLiteralPart;
-	class OclExpression;
-	class TupleLiteralPart;
-	class Variable;
-}
 
 
-namespace ecore 
-{
-	class EClassifier;
-}
 
 
 

@@ -132,7 +132,6 @@ Getter & Setter for reference referredOperation
 */
 std::shared_ptr<ecore::EOperation> MessageTypeImpl::getReferredOperation() const
 {
-
     return m_referredOperation;
 }
 void MessageTypeImpl::setReferredOperation(std::shared_ptr<ecore::EOperation> _referredOperation)
@@ -147,7 +146,6 @@ Getter & Setter for reference referredSignal
 */
 std::shared_ptr<uml::Signal> MessageTypeImpl::getReferredSignal() const
 {
-
     return m_referredSignal;
 }
 void MessageTypeImpl::setReferredSignal(std::shared_ptr<uml::Signal> _referredSignal)

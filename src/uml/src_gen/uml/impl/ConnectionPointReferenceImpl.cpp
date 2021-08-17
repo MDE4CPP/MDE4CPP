@@ -122,10 +122,8 @@ ConnectionPointReferenceImpl& ConnectionPointReferenceImpl::operator=(const Conn
 	//Clone Attributes with (deep copy)
 
 	//copy references with no containment (soft copy)
-	std::shared_ptr<Bag<uml::Pseudostate>> _entry = obj.getEntry();
-	m_entry.reset(new Bag<uml::Pseudostate>(*(obj.getEntry().get())));
-	std::shared_ptr<Bag<uml::Pseudostate>> _exit = obj.getExit();
-	m_exit.reset(new Bag<uml::Pseudostate>(*(obj.getExit().get())));
+	m_entry  = obj.getEntry();
+	m_exit  = obj.getExit();
 	m_state  = obj.getState();
 	//Clone references with containment (deep copy)
 	return *this;
@@ -177,7 +175,6 @@ std::shared_ptr<Bag<uml::Pseudostate>> ConnectionPointReferenceImpl::getEntry() 
 		
 		
 	}
-
     return m_entry;
 }
 
@@ -194,7 +191,6 @@ std::shared_ptr<Bag<uml::Pseudostate>> ConnectionPointReferenceImpl::getExit() c
 		
 		
 	}
-
     return m_exit;
 }
 
@@ -205,16 +201,11 @@ Getter & Setter for reference state
 */
 std::weak_ptr<uml::State> ConnectionPointReferenceImpl::getState() const
 {
-
     return m_state;
 }
 void ConnectionPointReferenceImpl::setState(std::weak_ptr<uml::State> _state)
 {
     m_state = _state;
-	m_namespace = this->getState().lock();
-	m_owner = this->getNamespace().lock();
-	
-	
 	
 }
 

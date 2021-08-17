@@ -33,11 +33,11 @@
 
 #include <exception> // used in Persistence
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
-#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Values/ValuesFactory.hpp"
+#include "fUML/Semantics/Loci/LociFactory.hpp"
 
 
 #include "ocl/Evaluations/EvalEnvironment.hpp"
@@ -134,7 +134,6 @@ Getter & Setter for reference referredAssociationClass
 */
 std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> AssociationClassCallExpEvalImpl::getReferredAssociationClass() const
 {
-//assert(m_referredAssociationClass);
     return m_referredAssociationClass;
 }
 void AssociationClassCallExpEvalImpl::setReferredAssociationClass(std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> _referredAssociationClass)

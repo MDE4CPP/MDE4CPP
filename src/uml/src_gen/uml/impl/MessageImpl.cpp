@@ -122,21 +122,17 @@ MessageImpl& MessageImpl::operator=(const MessageImpl & obj)
 	m_sendEvent  = obj.getSendEvent();
 	m_signature  = obj.getSignature();
 	//Clone references with containment (deep copy)
-	std::shared_ptr<Subset<uml::ValueSpecification, uml::Element>> argumentContainer = getArgument();
-	if(nullptr != argumentContainer )
+	//clone reference 'argument'
+	std::shared_ptr<Subset<uml::ValueSpecification, uml::Element>> argumentList = obj.getArgument();
+	if(argumentList)
 	{
-		int size = argumentContainer->size();
-		for(int i=0; i<size ; i++)
+		Bag<uml::ValueSpecification>::iterator argumentIter = argumentList->begin();
+		Bag<uml::ValueSpecification>::iterator argumentEnd = argumentList->end();
+		while (argumentIter != argumentEnd) 
 		{
-			auto _argument=(*argumentContainer)[i];
-			if(nullptr != _argument)
-			{
-				argumentContainer->push_back(std::dynamic_pointer_cast<uml::ValueSpecification>(_argument->copy()));
-			}
-			else
-			{
-				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container argument."<< std::endl;)
-			}
+			std::shared_ptr<uml::ValueSpecification> temp = std::dynamic_pointer_cast<uml::ValueSpecification>((*argumentIter)->copy());
+			getArgument()->push_back(temp);
+			argumentIter++;
 		}
 	}
 	else
@@ -144,7 +140,7 @@ MessageImpl& MessageImpl::operator=(const MessageImpl & obj)
 		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr argument."<< std::endl;)
 	}
 	/*Subset*/
-	m_argument->initSubset(getOwnedElement());
+	getArgument()->initSubset(getOwnedElement());
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Initialising value Subset: " << "m_argument - Subset<uml::ValueSpecification, uml::Element >(getOwnedElement())" << std::endl;
 	#endif
@@ -266,13 +262,12 @@ std::shared_ptr<Subset<uml::ValueSpecification, uml::Element>> MessageImpl::getA
 		#endif
 		
 		/*Subset*/
-		m_argument->initSubset(getOwnedElement());
+		getArgument()->initSubset(getOwnedElement());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value Subset: " << "m_argument - Subset<uml::ValueSpecification, uml::Element >(getOwnedElement())" << std::endl;
 		#endif
 		
 	}
-
     return m_argument;
 }
 
@@ -283,7 +278,6 @@ Getter & Setter for reference connector
 */
 std::shared_ptr<uml::Connector> MessageImpl::getConnector() const
 {
-
     return m_connector;
 }
 void MessageImpl::setConnector(std::shared_ptr<uml::Connector> _connector)
@@ -298,16 +292,11 @@ Getter & Setter for reference interaction
 */
 std::weak_ptr<uml::Interaction> MessageImpl::getInteraction() const
 {
-//assert(m_interaction);
     return m_interaction;
 }
 void MessageImpl::setInteraction(std::weak_ptr<uml::Interaction> _interaction)
 {
     m_interaction = _interaction;
-	m_namespace = this->getInteraction().lock();
-	m_owner = this->getNamespace().lock();
-	
-	
 	
 }
 
@@ -317,7 +306,6 @@ Getter & Setter for reference receiveEvent
 */
 std::shared_ptr<uml::MessageEnd> MessageImpl::getReceiveEvent() const
 {
-
     return m_receiveEvent;
 }
 void MessageImpl::setReceiveEvent(std::shared_ptr<uml::MessageEnd> _receiveEvent)
@@ -332,7 +320,6 @@ Getter & Setter for reference sendEvent
 */
 std::shared_ptr<uml::MessageEnd> MessageImpl::getSendEvent() const
 {
-
     return m_sendEvent;
 }
 void MessageImpl::setSendEvent(std::shared_ptr<uml::MessageEnd> _sendEvent)
@@ -347,7 +334,6 @@ Getter & Setter for reference signature
 */
 std::shared_ptr<uml::NamedElement> MessageImpl::getSignature() const
 {
-
     return m_signature;
 }
 void MessageImpl::setSignature(std::shared_ptr<uml::NamedElement> _signature)

@@ -35,6 +35,8 @@ namespace fUML::Semantics::Activities
 			virtual std::shared_ptr<ControlToken> getThisControlTokenPtr() const;
 			virtual void setThisControlTokenPtr(std::weak_ptr<ControlToken> thisControlTokenPtr);
 
+			//Additional constructors for the containments back reference
+			ControlTokenImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivation> par_holder);
 
 		public:
 			//destructor

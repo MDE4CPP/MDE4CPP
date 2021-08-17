@@ -152,27 +152,29 @@ EncapsulatedClassifierImpl& EncapsulatedClassifierImpl::operator=(const Encapsul
 
 	//copy references with no containment (soft copy)
 	//Clone references with containment (deep copy)
-	std::shared_ptr<Subset<uml::Port, uml::Property /*Subset does not reference a union*/>> ownedPortContainer = getOwnedPort();
-	if(nullptr != ownedPortContainer )
+	//clone reference 'ownedPort'
+	std::shared_ptr<Subset<uml::Port, uml::Property /*Subset does not reference a union*/>> ownedPortList = obj.getOwnedPort();
+	if(ownedPortList)
 	{
-		int size = ownedPortContainer->size();
-		for(int i=0; i<size ; i++)
+		Bag<uml::Port>::iterator ownedPortIter = ownedPortList->begin();
+		Bag<uml::Port>::iterator ownedPortEnd = ownedPortList->end();
+		while (ownedPortIter != ownedPortEnd) 
 		{
-			auto _ownedPort=(*ownedPortContainer)[i];
-			if(nullptr != _ownedPort)
-			{
-				ownedPortContainer->push_back(std::dynamic_pointer_cast<uml::Port>(_ownedPort->copy()));
-			}
-			else
-			{
-				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container ownedPort."<< std::endl;)
-			}
+			std::shared_ptr<uml::Port> temp = std::dynamic_pointer_cast<uml::Port>((*ownedPortIter)->copy());
+			getOwnedPort()->push_back(temp);
+			ownedPortIter++;
 		}
 	}
 	else
 	{
 		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr ownedPort."<< std::endl;)
 	}
+	/*Subset*/
+	getOwnedPort()->initSubset(getOwnedAttribute());
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Initialising value Subset: " << "m_ownedPort - Subset<uml::Port, uml::Property /*Subset does not reference a union*/ >(getOwnedAttribute())" << std::endl;
+	#endif
+	
 	return *this;
 }
 
@@ -219,13 +221,12 @@ std::shared_ptr<Subset<uml::Port, uml::Property /*Subset does not reference a un
 		#endif
 		
 		/*Subset*/
-		m_ownedPort->initSubset(getOwnedAttribute());
+		getOwnedPort()->initSubset(getOwnedAttribute());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value Subset: " << "m_ownedPort - Subset<uml::Port, uml::Property /*Subset does not reference a union*/ >(getOwnedAttribute())" << std::endl;
 		#endif
 		
 	}
-
     return m_ownedPort;
 }
 
@@ -245,7 +246,7 @@ std::shared_ptr<SubsetUnion<uml::Property, uml::Feature>> EncapsulatedClassifier
 		#endif
 		
 		/*SubsetUnion*/
-		m_attribute->initSubsetUnion(getFeature());
+		getAttribute()->initSubsetUnion(getFeature());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value SubsetUnion: " << "m_attribute - SubsetUnion<uml::Property, uml::Feature >(getFeature())" << std::endl;
 		#endif
@@ -265,7 +266,7 @@ std::shared_ptr<SubsetUnion<uml::Feature, uml::NamedElement>> EncapsulatedClassi
 		#endif
 		
 		/*SubsetUnion*/
-		m_feature->initSubsetUnion(getMember());
+		getFeature()->initSubsetUnion(getMember());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value SubsetUnion: " << "m_feature - SubsetUnion<uml::Feature, uml::NamedElement >(getMember())" << std::endl;
 		#endif
@@ -309,20 +310,20 @@ std::shared_ptr<Union<uml::Element>> EncapsulatedClassifierImpl::getOwnedElement
 	return m_ownedElement;
 }
 
-std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement>> EncapsulatedClassifierImpl::getOwnedMember() const
+std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement>> EncapsulatedClassifierImpl::getOwnedMember() const
 {
 	if(m_ownedMember == nullptr)
 	{
 		/*SubsetUnion*/
-		m_ownedMember.reset(new SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement >());
+		m_ownedMember.reset(new SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement >());
 		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement >()" << std::endl;
+			std::cout << "Initialising shared pointer SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement >()" << std::endl;
 		#endif
 		
 		/*SubsetUnion*/
-		m_ownedMember->initSubsetUnion(getOwnedElement(),getMember());
+		getOwnedMember()->initSubsetUnion(getOwnedElement(), getMember());
 		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement >(getOwnedElement(),getMember())" << std::endl;
+			std::cout << "Initialising value SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement >(getOwnedElement(), getMember())" << std::endl;
 		#endif
 		
 	}
@@ -360,7 +361,7 @@ std::shared_ptr<SubsetUnion<uml::ConnectableElement, uml::NamedElement>> Encapsu
 		#endif
 		
 		/*SubsetUnion*/
-		m_role->initSubsetUnion(getMember());
+		getRole()->initSubsetUnion(getMember());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value SubsetUnion: " << "m_role - SubsetUnion<uml::ConnectableElement, uml::NamedElement >(getMember())" << std::endl;
 		#endif
@@ -508,6 +509,28 @@ void EncapsulatedClassifierImpl::loadAttributes(std::shared_ptr<persistence::int
 void EncapsulatedClassifierImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
 
+	try
+	{
+		if ( nodeName.compare("ownedPort") == 0 )
+		{
+  			std::string typeName = loadHandler->getCurrentXSITypeName();
+			if (typeName.empty())
+			{
+				typeName = "Port";
+			}
+			loadHandler->handleChildContainer<uml::Port>(this->getOwnedPort());  
+
+			return; 
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
 	//load BasePackage Nodes
 	StructuredClassifierImpl::loadNode(nodeName, loadHandler);
 }
@@ -554,6 +577,11 @@ void EncapsulatedClassifierImpl::saveContent(std::shared_ptr<persistence::interf
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
+		// Save 'ownedPort'
+		for (std::shared_ptr<uml::Port> ownedPort : *this->getOwnedPort()) 
+		{
+			saveHandler->addReference(ownedPort, "ownedPort", ownedPort->eClass() != package->getPort_Class());
+		}
 	}
 	catch (std::exception& e)
 	{

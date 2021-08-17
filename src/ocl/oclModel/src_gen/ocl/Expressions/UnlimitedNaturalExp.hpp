@@ -103,7 +103,7 @@ namespace ocl::Expressions
 			//*********************************
 			// Attribute Members
 			//*********************************
-			 
+			
 			int m_unlimitedNaturalSymbol = 0;
 			
 			

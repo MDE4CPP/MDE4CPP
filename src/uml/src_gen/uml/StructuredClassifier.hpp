@@ -123,14 +123,14 @@ namespace uml
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			
-			virtual std::shared_ptr<SubsetUnion<uml::Property, uml::Property,uml::NamedElement,uml::ConnectableElement>> getOwnedAttribute() const = 0;
+			virtual std::shared_ptr<SubsetUnion<uml::Property, uml::ConnectableElement, uml::NamedElement, uml::Property>> getOwnedAttribute() const = 0;
 			
 			/*!
 			The connectors owned by the StructuredClassifier.
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::Connector, uml::Feature,uml::NamedElement>> getOwnedConnector() const = 0;
+			virtual std::shared_ptr<Subset<uml::Connector, uml::Feature, uml::NamedElement>> getOwnedConnector() const = 0;
 			
 			/*!
 			The Properties specifying instances that the StructuredClassifier owns by composition. This collection is derived, selecting those owned Properties where isComposite is true.
@@ -157,12 +157,12 @@ namespace uml
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			
-			mutable std::shared_ptr<SubsetUnion<uml::Property, uml::Property,uml::NamedElement,uml::ConnectableElement>> m_ownedAttribute;/*!
+			mutable std::shared_ptr<SubsetUnion<uml::Property, uml::ConnectableElement, uml::NamedElement, uml::Property>> m_ownedAttribute;/*!
 			The connectors owned by the StructuredClassifier.
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			
-			mutable std::shared_ptr<Subset<uml::Connector, uml::Feature,uml::NamedElement>> m_ownedConnector;/*!
+			mutable std::shared_ptr<Subset<uml::Connector, uml::Feature, uml::NamedElement>> m_ownedConnector;/*!
 			The Properties specifying instances that the StructuredClassifier owns by composition. This collection is derived, selecting those owned Properties where isComposite is true.
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
@@ -208,7 +208,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement>> getOwnedMember() const = 0;/*!
+			virtual std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement>> getOwnedMember() const = 0;/*!
 			The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/

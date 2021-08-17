@@ -96,21 +96,17 @@ LinkEndDataImpl& LinkEndDataImpl::operator=(const LinkEndDataImpl & obj)
 	m_end  = obj.getEnd();
 	m_value  = obj.getValue();
 	//Clone references with containment (deep copy)
-	std::shared_ptr<Subset<uml::QualifierValue, uml::Element>> qualifierContainer = getQualifier();
-	if(nullptr != qualifierContainer )
+	//clone reference 'qualifier'
+	std::shared_ptr<Subset<uml::QualifierValue, uml::Element>> qualifierList = obj.getQualifier();
+	if(qualifierList)
 	{
-		int size = qualifierContainer->size();
-		for(int i=0; i<size ; i++)
+		Bag<uml::QualifierValue>::iterator qualifierIter = qualifierList->begin();
+		Bag<uml::QualifierValue>::iterator qualifierEnd = qualifierList->end();
+		while (qualifierIter != qualifierEnd) 
 		{
-			auto _qualifier=(*qualifierContainer)[i];
-			if(nullptr != _qualifier)
-			{
-				qualifierContainer->push_back(std::dynamic_pointer_cast<uml::QualifierValue>(_qualifier->copy()));
-			}
-			else
-			{
-				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container qualifier."<< std::endl;)
-			}
+			std::shared_ptr<uml::QualifierValue> temp = std::dynamic_pointer_cast<uml::QualifierValue>((*qualifierIter)->copy());
+			getQualifier()->push_back(temp);
+			qualifierIter++;
 		}
 	}
 	else
@@ -118,7 +114,7 @@ LinkEndDataImpl& LinkEndDataImpl::operator=(const LinkEndDataImpl & obj)
 		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr qualifier."<< std::endl;)
 	}
 	/*Subset*/
-	m_qualifier->initSubset(getOwnedElement());
+	getQualifier()->initSubset(getOwnedElement());
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Initialising value Subset: " << "m_qualifier - Subset<uml::QualifierValue, uml::Element >(getOwnedElement())" << std::endl;
 	#endif
@@ -190,7 +186,6 @@ Getter & Setter for reference end
 */
 std::shared_ptr<uml::Property> LinkEndDataImpl::getEnd() const
 {
-//assert(m_end);
     return m_end;
 }
 void LinkEndDataImpl::setEnd(std::shared_ptr<uml::Property> _end)
@@ -214,13 +209,12 @@ std::shared_ptr<Subset<uml::QualifierValue, uml::Element>> LinkEndDataImpl::getQ
 		#endif
 		
 		/*Subset*/
-		m_qualifier->initSubset(getOwnedElement());
+		getQualifier()->initSubset(getOwnedElement());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value Subset: " << "m_qualifier - Subset<uml::QualifierValue, uml::Element >(getOwnedElement())" << std::endl;
 		#endif
 		
 	}
-
     return m_qualifier;
 }
 
@@ -231,7 +225,6 @@ Getter & Setter for reference value
 */
 std::shared_ptr<uml::InputPin> LinkEndDataImpl::getValue() const
 {
-
     return m_value;
 }
 void LinkEndDataImpl::setValue(std::shared_ptr<uml::InputPin> _value)

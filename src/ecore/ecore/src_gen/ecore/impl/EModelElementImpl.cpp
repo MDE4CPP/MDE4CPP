@@ -90,21 +90,17 @@ EModelElementImpl& EModelElementImpl::operator=(const EModelElementImpl & obj)
 
 	//copy references with no containment (soft copy)
 	//Clone references with containment (deep copy)
-	std::shared_ptr<Subset<ecore::EAnnotation, ecore::EObject>> eAnnotationsContainer = getEAnnotations();
-	if(nullptr != eAnnotationsContainer )
+	//clone reference 'eAnnotations'
+	std::shared_ptr<Subset<ecore::EAnnotation, ecore::EObject>> eAnnotationsList = obj.getEAnnotations();
+	if(eAnnotationsList)
 	{
-		int size = eAnnotationsContainer->size();
-		for(int i=0; i<size ; i++)
+		Bag<ecore::EAnnotation>::iterator eAnnotationsIter = eAnnotationsList->begin();
+		Bag<ecore::EAnnotation>::iterator eAnnotationsEnd = eAnnotationsList->end();
+		while (eAnnotationsIter != eAnnotationsEnd) 
 		{
-			auto _eAnnotations=(*eAnnotationsContainer)[i];
-			if(nullptr != _eAnnotations)
-			{
-				eAnnotationsContainer->push_back(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy()));
-			}
-			else
-			{
-				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container eAnnotations."<< std::endl;)
-			}
+			std::shared_ptr<ecore::EAnnotation> temp = std::dynamic_pointer_cast<ecore::EAnnotation>((*eAnnotationsIter)->copy());
+			getEAnnotations()->push_back(temp);
+			eAnnotationsIter++;
 		}
 	}
 	else
@@ -112,7 +108,7 @@ EModelElementImpl& EModelElementImpl::operator=(const EModelElementImpl & obj)
 		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr eAnnotations."<< std::endl;)
 	}
 	/*Subset*/
-	m_eAnnotations->initSubset(getEContens());
+	getEAnnotations()->initSubset(getEContens());
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Initialising value Subset: " << "m_eAnnotations - Subset<ecore::EAnnotation, ecore::EObject >(getEContens())" << std::endl;
 	#endif
@@ -172,13 +168,12 @@ std::shared_ptr<Subset<ecore::EAnnotation, ecore::EObject>> EModelElementImpl::g
 		#endif
 		
 		/*Subset*/
-		m_eAnnotations->initSubset(getEContens());
+		getEAnnotations()->initSubset(getEContens());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value Subset: " << "m_eAnnotations - Subset<ecore::EAnnotation, ecore::EObject >(getEContens())" << std::endl;
 		#endif
 		
 	}
-
     return m_eAnnotations;
 }
 

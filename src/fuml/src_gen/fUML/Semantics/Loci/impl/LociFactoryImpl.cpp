@@ -12,8 +12,6 @@
 #include "fUML/Semantics/Loci/impl/SemanticStrategyImpl.hpp"
 #include "fUML/Semantics/Loci/impl/SemanticVisitorImpl.hpp"
 
-#include "fUML/Semantics/Loci/Executor.hpp"
-#include "fUML/Semantics/Loci/ExecutionFactory.hpp"
 
 
 using namespace fUML::Semantics::Loci;

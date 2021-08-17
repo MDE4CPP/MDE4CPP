@@ -131,7 +131,6 @@ Getter & Setter for reference value
 */
 std::shared_ptr<fUML::Semantics::Values::Value> NameValueBindingImpl::getValue() const
 {
-//assert(m_value);
     return m_value;
 }
 void NameValueBindingImpl::setValue(std::shared_ptr<fUML::Semantics::Values::Value> _value)

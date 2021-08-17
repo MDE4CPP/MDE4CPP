@@ -16,10 +16,6 @@
 #include "ecore/EFactory.hpp"
 #include "ocl/Types/TypesPackage.hpp"
 
-namespace ecore 
-{
-	class EClassifier;
-}
 
 
 

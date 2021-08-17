@@ -97,21 +97,17 @@ CompoundValueImpl& CompoundValueImpl::operator=(const CompoundValueImpl & obj)
 
 	//copy references with no containment (soft copy)
 	//Clone references with containment (deep copy)
-	std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>> featureValuesContainer = getFeatureValues();
-	if(nullptr != featureValuesContainer )
+	//clone reference 'featureValues'
+	std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>> featureValuesList = obj.getFeatureValues();
+	if(featureValuesList)
 	{
-		int size = featureValuesContainer->size();
-		for(int i=0; i<size ; i++)
+		Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>::iterator featureValuesIter = featureValuesList->begin();
+		Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>::iterator featureValuesEnd = featureValuesList->end();
+		while (featureValuesIter != featureValuesEnd) 
 		{
-			auto _featureValues=(*featureValuesContainer)[i];
-			if(nullptr != _featureValues)
-			{
-				featureValuesContainer->push_back(std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::FeatureValue>(_featureValues->copy()));
-			}
-			else
-			{
-				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container featureValues."<< std::endl;)
-			}
+			std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> temp = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::FeatureValue>((*featureValuesIter)->copy());
+			getFeatureValues()->push_back(temp);
+			featureValuesIter++;
 		}
 	}
 	else
@@ -308,7 +304,6 @@ std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>> CompoundV
 		
 		
 	}
-
     return m_featureValues;
 }
 

@@ -84,8 +84,7 @@ OfferImpl& OfferImpl::operator=(const OfferImpl & obj)
 	//Clone Attributes with (deep copy)
 
 	//copy references with no containment (soft copy)
-	std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> _offeredTokens = obj.getOfferedTokens();
-	m_offeredTokens.reset(new Bag<fUML::Semantics::Activities::Token>(*(obj.getOfferedTokens().get())));
+	m_offeredTokens  = obj.getOfferedTokens();
 	//Clone references with containment (deep copy)
 	return *this;
 }
@@ -217,7 +216,6 @@ std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> OfferImpl::getOfferedTo
 		
 		
 	}
-
     return m_offeredTokens;
 }
 

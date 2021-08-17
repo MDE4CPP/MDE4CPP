@@ -123,7 +123,7 @@ namespace uml
 			The specified String value.
 			<p>From package UML::Values.</p>
 			*/
-			 
+			
 			std::string m_value = "";
 			
 			

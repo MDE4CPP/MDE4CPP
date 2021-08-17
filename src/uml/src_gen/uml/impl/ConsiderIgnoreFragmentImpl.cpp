@@ -124,8 +124,7 @@ ConsiderIgnoreFragmentImpl& ConsiderIgnoreFragmentImpl::operator=(const Consider
 	//Clone Attributes with (deep copy)
 
 	//copy references with no containment (soft copy)
-	std::shared_ptr<Bag<uml::NamedElement>> _message = obj.getMessage();
-	m_message.reset(new Bag<uml::NamedElement>(*(obj.getMessage().get())));
+	m_message  = obj.getMessage();
 	//Clone references with containment (deep copy)
 	return *this;
 }
@@ -176,7 +175,6 @@ std::shared_ptr<Bag<uml::NamedElement>> ConsiderIgnoreFragmentImpl::getMessage()
 		
 		
 	}
-
     return m_message;
 }
 

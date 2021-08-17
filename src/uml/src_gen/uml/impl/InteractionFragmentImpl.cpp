@@ -121,26 +121,21 @@ InteractionFragmentImpl& InteractionFragmentImpl::operator=(const InteractionFra
 	//Clone Attributes with (deep copy)
 
 	//copy references with no containment (soft copy)
-	std::shared_ptr<Bag<uml::Lifeline>> _covered = obj.getCovered();
-	m_covered.reset(new Bag<uml::Lifeline>(*(obj.getCovered().get())));
+	m_covered  = obj.getCovered();
 	m_enclosingInteraction  = obj.getEnclosingInteraction();
 	m_enclosingOperand  = obj.getEnclosingOperand();
 	//Clone references with containment (deep copy)
-	std::shared_ptr<Subset<uml::GeneralOrdering, uml::Element>> generalOrderingContainer = getGeneralOrdering();
-	if(nullptr != generalOrderingContainer )
+	//clone reference 'generalOrdering'
+	std::shared_ptr<Subset<uml::GeneralOrdering, uml::Element>> generalOrderingList = obj.getGeneralOrdering();
+	if(generalOrderingList)
 	{
-		int size = generalOrderingContainer->size();
-		for(int i=0; i<size ; i++)
+		Bag<uml::GeneralOrdering>::iterator generalOrderingIter = generalOrderingList->begin();
+		Bag<uml::GeneralOrdering>::iterator generalOrderingEnd = generalOrderingList->end();
+		while (generalOrderingIter != generalOrderingEnd) 
 		{
-			auto _generalOrdering=(*generalOrderingContainer)[i];
-			if(nullptr != _generalOrdering)
-			{
-				generalOrderingContainer->push_back(std::dynamic_pointer_cast<uml::GeneralOrdering>(_generalOrdering->copy()));
-			}
-			else
-			{
-				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container generalOrdering."<< std::endl;)
-			}
+			std::shared_ptr<uml::GeneralOrdering> temp = std::dynamic_pointer_cast<uml::GeneralOrdering>((*generalOrderingIter)->copy());
+			getGeneralOrdering()->push_back(temp);
+			generalOrderingIter++;
 		}
 	}
 	else
@@ -148,7 +143,7 @@ InteractionFragmentImpl& InteractionFragmentImpl::operator=(const InteractionFra
 		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr generalOrdering."<< std::endl;)
 	}
 	/*Subset*/
-	m_generalOrdering->initSubset(getOwnedElement());
+	getGeneralOrdering()->initSubset(getOwnedElement());
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Initialising value Subset: " << "m_generalOrdering - Subset<uml::GeneralOrdering, uml::Element >(getOwnedElement())" << std::endl;
 	#endif
@@ -191,7 +186,6 @@ std::shared_ptr<Bag<uml::Lifeline>> InteractionFragmentImpl::getCovered() const
 		
 		
 	}
-
     return m_covered;
 }
 
@@ -202,16 +196,11 @@ Getter & Setter for reference enclosingInteraction
 */
 std::weak_ptr<uml::Interaction> InteractionFragmentImpl::getEnclosingInteraction() const
 {
-
     return m_enclosingInteraction;
 }
 void InteractionFragmentImpl::setEnclosingInteraction(std::weak_ptr<uml::Interaction> _enclosingInteraction)
 {
     m_enclosingInteraction = _enclosingInteraction;
-	m_namespace = this->getEnclosingInteraction().lock();
-	m_owner = this->getNamespace().lock();
-	
-	
 	
 }
 
@@ -221,16 +210,11 @@ Getter & Setter for reference enclosingOperand
 */
 std::weak_ptr<uml::InteractionOperand> InteractionFragmentImpl::getEnclosingOperand() const
 {
-
     return m_enclosingOperand;
 }
 void InteractionFragmentImpl::setEnclosingOperand(std::weak_ptr<uml::InteractionOperand> _enclosingOperand)
 {
     m_enclosingOperand = _enclosingOperand;
-	m_namespace = this->getEnclosingOperand().lock();
-	m_owner = this->getNamespace().lock();
-	
-	
 	
 }
 
@@ -249,13 +233,12 @@ std::shared_ptr<Subset<uml::GeneralOrdering, uml::Element>> InteractionFragmentI
 		#endif
 		
 		/*Subset*/
-		m_generalOrdering->initSubset(getOwnedElement());
+		getGeneralOrdering()->initSubset(getOwnedElement());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value Subset: " << "m_generalOrdering - Subset<uml::GeneralOrdering, uml::Element >(getOwnedElement())" << std::endl;
 		#endif
 		
 	}
-
     return m_generalOrdering;
 }
 

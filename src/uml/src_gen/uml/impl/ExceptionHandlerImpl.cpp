@@ -102,8 +102,7 @@ ExceptionHandlerImpl& ExceptionHandlerImpl::operator=(const ExceptionHandlerImpl
 
 	//copy references with no containment (soft copy)
 	m_exceptionInput  = obj.getExceptionInput();
-	std::shared_ptr<Bag<uml::Classifier>> _exceptionType = obj.getExceptionType();
-	m_exceptionType.reset(new Bag<uml::Classifier>(*(obj.getExceptionType().get())));
+	m_exceptionType  = obj.getExceptionType();
 	m_handlerBody  = obj.getHandlerBody();
 	m_protectedNode  = obj.getProtectedNode();
 	//Clone references with containment (deep copy)
@@ -174,7 +173,6 @@ Getter & Setter for reference exceptionInput
 */
 std::shared_ptr<uml::ObjectNode> ExceptionHandlerImpl::getExceptionInput() const
 {
-//assert(m_exceptionInput);
     return m_exceptionInput;
 }
 void ExceptionHandlerImpl::setExceptionInput(std::shared_ptr<uml::ObjectNode> _exceptionInput)
@@ -195,7 +193,6 @@ std::shared_ptr<Bag<uml::Classifier>> ExceptionHandlerImpl::getExceptionType() c
 		
 		
 	}
-//assert(m_exceptionType);
     return m_exceptionType;
 }
 
@@ -206,7 +203,6 @@ Getter & Setter for reference handlerBody
 */
 std::shared_ptr<uml::ExecutableNode> ExceptionHandlerImpl::getHandlerBody() const
 {
-//assert(m_handlerBody);
     return m_handlerBody;
 }
 void ExceptionHandlerImpl::setHandlerBody(std::shared_ptr<uml::ExecutableNode> _handlerBody)
@@ -221,14 +217,11 @@ Getter & Setter for reference protectedNode
 */
 std::weak_ptr<uml::ExecutableNode> ExceptionHandlerImpl::getProtectedNode() const
 {
-//assert(m_protectedNode);
     return m_protectedNode;
 }
 void ExceptionHandlerImpl::setProtectedNode(std::weak_ptr<uml::ExecutableNode> _protectedNode)
 {
     m_protectedNode = _protectedNode;
-	m_owner = this->getProtectedNode().lock();
-	
 	
 }
 

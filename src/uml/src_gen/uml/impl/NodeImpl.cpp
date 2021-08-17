@@ -163,21 +163,17 @@ NodeImpl& NodeImpl::operator=(const NodeImpl & obj)
 
 	//copy references with no containment (soft copy)
 	//Clone references with containment (deep copy)
-	std::shared_ptr<Subset<uml::Node, uml::NamedElement>> nestedNodeContainer = getNestedNode();
-	if(nullptr != nestedNodeContainer )
+	//clone reference 'nestedNode'
+	std::shared_ptr<Subset<uml::Node, uml::NamedElement>> nestedNodeList = obj.getNestedNode();
+	if(nestedNodeList)
 	{
-		int size = nestedNodeContainer->size();
-		for(int i=0; i<size ; i++)
+		Bag<uml::Node>::iterator nestedNodeIter = nestedNodeList->begin();
+		Bag<uml::Node>::iterator nestedNodeEnd = nestedNodeList->end();
+		while (nestedNodeIter != nestedNodeEnd) 
 		{
-			auto _nestedNode=(*nestedNodeContainer)[i];
-			if(nullptr != _nestedNode)
-			{
-				nestedNodeContainer->push_back(std::dynamic_pointer_cast<uml::Node>(_nestedNode->copy()));
-			}
-			else
-			{
-				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container nestedNode."<< std::endl;)
-			}
+			std::shared_ptr<uml::Node> temp = std::dynamic_pointer_cast<uml::Node>((*nestedNodeIter)->copy());
+			getNestedNode()->push_back(temp);
+			nestedNodeIter++;
 		}
 	}
 	else
@@ -185,7 +181,7 @@ NodeImpl& NodeImpl::operator=(const NodeImpl & obj)
 		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr nestedNode."<< std::endl;)
 	}
 	/*Subset*/
-	m_nestedNode->initSubset(getOwnedMember());
+	getNestedNode()->initSubset(getOwnedMember());
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Initialising value Subset: " << "m_nestedNode - Subset<uml::Node, uml::NamedElement >(getOwnedMember())" << std::endl;
 	#endif
@@ -248,13 +244,12 @@ std::shared_ptr<Subset<uml::Node, uml::NamedElement>> NodeImpl::getNestedNode() 
 		#endif
 		
 		/*Subset*/
-		m_nestedNode->initSubset(getOwnedMember());
+		getNestedNode()->initSubset(getOwnedMember());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value Subset: " << "m_nestedNode - Subset<uml::Node, uml::NamedElement >(getOwnedMember())" << std::endl;
 		#endif
 		
 	}
-
     return m_nestedNode;
 }
 
@@ -274,7 +269,7 @@ std::shared_ptr<SubsetUnion<uml::Property, uml::Feature>> NodeImpl::getAttribute
 		#endif
 		
 		/*SubsetUnion*/
-		m_attribute->initSubsetUnion(getFeature());
+		getAttribute()->initSubsetUnion(getFeature());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value SubsetUnion: " << "m_attribute - SubsetUnion<uml::Property, uml::Feature >(getFeature())" << std::endl;
 		#endif
@@ -294,7 +289,7 @@ std::shared_ptr<SubsetUnion<uml::Feature, uml::NamedElement>> NodeImpl::getFeatu
 		#endif
 		
 		/*SubsetUnion*/
-		m_feature->initSubsetUnion(getMember());
+		getFeature()->initSubsetUnion(getMember());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value SubsetUnion: " << "m_feature - SubsetUnion<uml::Feature, uml::NamedElement >(getMember())" << std::endl;
 		#endif
@@ -338,20 +333,20 @@ std::shared_ptr<Union<uml::Element>> NodeImpl::getOwnedElement() const
 	return m_ownedElement;
 }
 
-std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement>> NodeImpl::getOwnedMember() const
+std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement>> NodeImpl::getOwnedMember() const
 {
 	if(m_ownedMember == nullptr)
 	{
 		/*SubsetUnion*/
-		m_ownedMember.reset(new SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement >());
+		m_ownedMember.reset(new SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement >());
 		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement >()" << std::endl;
+			std::cout << "Initialising shared pointer SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement >()" << std::endl;
 		#endif
 		
 		/*SubsetUnion*/
-		m_ownedMember->initSubsetUnion(getOwnedElement(),getMember());
+		getOwnedMember()->initSubsetUnion(getOwnedElement(), getMember());
 		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement >(getOwnedElement(),getMember())" << std::endl;
+			std::cout << "Initialising value SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement >(getOwnedElement(), getMember())" << std::endl;
 		#endif
 		
 	}
@@ -389,7 +384,7 @@ std::shared_ptr<SubsetUnion<uml::ConnectableElement, uml::NamedElement>> NodeImp
 		#endif
 		
 		/*SubsetUnion*/
-		m_role->initSubsetUnion(getMember());
+		getRole()->initSubsetUnion(getMember());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value SubsetUnion: " << "m_role - SubsetUnion<uml::ConnectableElement, uml::NamedElement >(getMember())" << std::endl;
 		#endif

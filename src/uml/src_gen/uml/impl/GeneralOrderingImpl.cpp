@@ -143,7 +143,6 @@ Getter & Setter for reference after
 */
 std::shared_ptr<uml::OccurrenceSpecification> GeneralOrderingImpl::getAfter() const
 {
-//assert(m_after);
     return m_after;
 }
 void GeneralOrderingImpl::setAfter(std::shared_ptr<uml::OccurrenceSpecification> _after)
@@ -158,7 +157,6 @@ Getter & Setter for reference before
 */
 std::shared_ptr<uml::OccurrenceSpecification> GeneralOrderingImpl::getBefore() const
 {
-//assert(m_before);
     return m_before;
 }
 void GeneralOrderingImpl::setBefore(std::shared_ptr<uml::OccurrenceSpecification> _before)

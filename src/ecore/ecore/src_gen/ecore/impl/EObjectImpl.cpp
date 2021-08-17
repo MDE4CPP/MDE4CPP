@@ -242,7 +242,6 @@ Getter & Setter for reference eContainer
 */
 std::weak_ptr<ecore::EObject> EObjectImpl::getEContainer() const
 {
-
     return m_eContainer;
 }
 void EObjectImpl::setEContainer(std::weak_ptr<ecore::EObject> _eContainer)

@@ -16,13 +16,21 @@
 #include "ecore/EFactory.hpp"
 #include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
 
-namespace fUML::Semantics::StructuredClassifiers 
+namespace fUML::Semantics::Activities
 {
-	class ExtensionalValue;
+	class ObjectToken;
 }
-namespace fUML::Semantics::Values 
+namespace fUML::Semantics::CommonBehavior
 {
-	class Value;
+	class ParameterValue;
+}
+namespace fUML::Semantics::Loci
+{
+	class Locus;
+}
+namespace fUML::Semantics::SimpleClassifiers
+{
+	class FeatureValue;
 }
 
 

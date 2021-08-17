@@ -33,11 +33,11 @@
 
 #include <exception> // used in Persistence
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
-#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Values/ValuesFactory.hpp"
+#include "fUML/Semantics/Loci/LociFactory.hpp"
 
 
 #include "ocl/Evaluations/EvalEnvironment.hpp"
@@ -100,10 +100,8 @@ LoopExpEvalImpl& LoopExpEvalImpl::operator=(const LoopExpEvalImpl & obj)
 	//Clone Attributes with (deep copy)
 
 	//copy references with no containment (soft copy)
-	std::shared_ptr<Bag<ocl::Evaluations::OclExpEval>> _bodyEvals = obj.getBodyEvals();
-	m_bodyEvals.reset(new Bag<ocl::Evaluations::OclExpEval>(*(obj.getBodyEvals().get())));
-	std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::StringValue>> _iterators = obj.getIterators();
-	m_iterators.reset(new Bag<fUML::Semantics::SimpleClassifiers::StringValue>(*(obj.getIterators().get())));
+	m_bodyEvals  = obj.getBodyEvals();
+	m_iterators  = obj.getIterators();
 	//Clone references with containment (deep copy)
 	return *this;
 }
@@ -143,7 +141,6 @@ std::shared_ptr<Bag<ocl::Evaluations::OclExpEval>> LoopExpEvalImpl::getBodyEvals
 		
 		
 	}
-//assert(m_bodyEvals);
     return m_bodyEvals;
 }
 
@@ -160,7 +157,6 @@ std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::StringValue>> LoopExpEva
 		
 		
 	}
-//assert(m_iterators);
     return m_iterators;
 }
 

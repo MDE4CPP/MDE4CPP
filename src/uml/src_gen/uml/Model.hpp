@@ -119,7 +119,7 @@ namespace uml
 			The name of the viewpoint that is expressed by a model (this name may refer to a profile definition).
 			<p>From package UML::Packages.</p>
 			*/
-			 
+			
 			std::string m_viewpoint = "";
 			
 			
@@ -152,7 +152,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement>> getOwnedMember() const = 0;/*!
+			virtual std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement>> getOwnedMember() const = 0;/*!
 			The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/

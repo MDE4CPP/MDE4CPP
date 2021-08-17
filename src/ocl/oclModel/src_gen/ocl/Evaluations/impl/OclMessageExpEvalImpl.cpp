@@ -33,10 +33,10 @@
 
 #include <exception> // used in Persistence
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
-#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Values/ValuesFactory.hpp"
+#include "fUML/Semantics/Loci/LociFactory.hpp"
 
 
 #include "ocl/Evaluations/EvalEnvironment.hpp"
@@ -98,8 +98,7 @@ OclMessageExpEvalImpl& OclMessageExpEvalImpl::operator=(const OclMessageExpEvalI
 	m_name = obj.getName();
 
 	//copy references with no containment (soft copy)
-	std::shared_ptr<Bag<ocl::Evaluations::OclMessageArgEval>> _arguments = obj.getArguments();
-	m_arguments.reset(new Bag<ocl::Evaluations::OclMessageArgEval>(*(obj.getArguments().get())));
+	m_arguments  = obj.getArguments();
 	m_target  = obj.getTarget();
 	//Clone references with containment (deep copy)
 	return *this;
@@ -153,7 +152,6 @@ std::shared_ptr<Bag<ocl::Evaluations::OclMessageArgEval>> OclMessageExpEvalImpl:
 		
 		
 	}
-
     return m_arguments;
 }
 
@@ -164,7 +162,6 @@ Getter & Setter for reference target
 */
 std::shared_ptr<ocl::Evaluations::OclExpEval> OclMessageExpEvalImpl::getTarget() const
 {
-//assert(m_target);
     return m_target;
 }
 void OclMessageExpEvalImpl::setTarget(std::shared_ptr<ocl::Evaluations::OclExpEval> _target)

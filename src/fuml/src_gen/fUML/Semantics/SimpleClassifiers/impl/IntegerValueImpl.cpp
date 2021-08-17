@@ -167,7 +167,7 @@ std::shared_ptr<uml::ValueSpecification> IntegerValueImpl::specify()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	std::shared_ptr<uml::LiteralInteger> literal = uml::umlFactory::eInstance()->createLiteralInteger_in_Namespace(std::shared_ptr<uml::Classifier>());
+	std::shared_ptr<uml::LiteralInteger> literal = uml::umlFactory::eInstance()->createLiteralInteger_as_ownedMember_in_Namespace(std::shared_ptr<uml::Classifier>());
 
     literal->setType(this->getType());
     literal->setValue(this->getValue());

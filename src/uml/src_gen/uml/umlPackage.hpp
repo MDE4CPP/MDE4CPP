@@ -4613,7 +4613,7 @@ namespace uml
 			// Begin Class Operation
 			//Class and Feature IDs 
 			static const long long OPERATION_CLASS = 504486732;
-			static const unsigned int OPERATION_CLASS_FEATURE_COUNT = 43;
+			static const unsigned int OPERATION_CLASS_FEATURE_COUNT = 44;
 			static const unsigned int OPERATION_CLASS_OPERATION_COUNT = 97;
 			static const long long OPERATION_ATTRIBUTE_ISORDERED = 1564524786;
 			static const long long OPERATION_ATTRIBUTE_ISQUERY = 1283758900;
@@ -4625,6 +4625,7 @@ namespace uml
 			static const long long OPERATION_ATTRIBUTE_CLASS = 444025416;
 			static const long long OPERATION_ATTRIBUTE_DATATYPE = 1278462268;
 			static const long long OPERATION_ATTRIBUTE_INTERFACE = 1991081750;
+			static const long long OPERATION_ATTRIBUTE_OWNEDPARAMETER = 459427514;
 			static const long long OPERATION_ATTRIBUTE_POSTCONDITION = 992043551;
 			static const long long OPERATION_ATTRIBUTE_PRECONDITION = 1382468916;
 			static const long long OPERATION_ATTRIBUTE_REDEFINEDOPERATION = 491777724;
@@ -4659,6 +4660,7 @@ namespace uml
 			virtual std::shared_ptr<ecore::EReference> getOperation_Attribute_class() const = 0;
 			virtual std::shared_ptr<ecore::EReference> getOperation_Attribute_datatype() const = 0;
 			virtual std::shared_ptr<ecore::EReference> getOperation_Attribute_interface() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getOperation_Attribute_ownedParameter() const = 0;
 			virtual std::shared_ptr<ecore::EReference> getOperation_Attribute_postcondition() const = 0;
 			virtual std::shared_ptr<ecore::EReference> getOperation_Attribute_precondition() const = 0;
 			virtual std::shared_ptr<ecore::EReference> getOperation_Attribute_redefinedOperation() const = 0;

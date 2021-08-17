@@ -104,10 +104,13 @@ TemplateParameterImpl& TemplateParameterImpl::operator=(const TemplateParameterI
 	m_parameteredElement  = obj.getParameteredElement();
 	m_signature  = obj.getSignature();
 	//Clone references with containment (deep copy)
+	//clone reference 'ownedDefault'
 	if(obj.getOwnedDefault()!=nullptr)
 	{
 		m_ownedDefault = std::dynamic_pointer_cast<uml::ParameterableElement>(obj.getOwnedDefault()->copy());
 	}
+
+	//clone reference 'ownedParameteredElement'
 	if(obj.getOwnedParameteredElement()!=nullptr)
 	{
 		m_ownedParameteredElement = std::dynamic_pointer_cast<uml::ParameterableElement>(obj.getOwnedParameteredElement()->copy());
@@ -151,7 +154,6 @@ Getter & Setter for reference default
 */
 std::shared_ptr<uml::ParameterableElement> TemplateParameterImpl::getDefault() const
 {
-
     return m_default;
 }
 void TemplateParameterImpl::setDefault(std::shared_ptr<uml::ParameterableElement> _default)
@@ -166,15 +168,11 @@ Getter & Setter for reference ownedDefault
 */
 std::shared_ptr<uml::ParameterableElement> TemplateParameterImpl::getOwnedDefault() const
 {
-
     return m_ownedDefault;
 }
 void TemplateParameterImpl::setOwnedDefault(std::shared_ptr<uml::ParameterableElement> _ownedDefault)
 {
     m_ownedDefault = _ownedDefault;
-	
-	//additional setter call for redefined reference TemplateParameter::default
-	this->setDefault(_ownedDefault);
 	
 }
 
@@ -184,15 +182,11 @@ Getter & Setter for reference ownedParameteredElement
 */
 std::shared_ptr<uml::ParameterableElement> TemplateParameterImpl::getOwnedParameteredElement() const
 {
-
     return m_ownedParameteredElement;
 }
 void TemplateParameterImpl::setOwnedParameteredElement(std::shared_ptr<uml::ParameterableElement> _ownedParameteredElement)
 {
     m_ownedParameteredElement = _ownedParameteredElement;
-	
-	//additional setter call for redefined reference TemplateParameter::parameteredElement
-	this->setParameteredElement(_ownedParameteredElement);
 	
 }
 
@@ -202,7 +196,6 @@ Getter & Setter for reference parameteredElement
 */
 std::shared_ptr<uml::ParameterableElement> TemplateParameterImpl::getParameteredElement() const
 {
-//assert(m_parameteredElement);
     return m_parameteredElement;
 }
 void TemplateParameterImpl::setParameteredElement(std::shared_ptr<uml::ParameterableElement> _parameteredElement)
@@ -217,14 +210,11 @@ Getter & Setter for reference signature
 */
 std::weak_ptr<uml::TemplateSignature> TemplateParameterImpl::getSignature() const
 {
-//assert(m_signature);
     return m_signature;
 }
 void TemplateParameterImpl::setSignature(std::weak_ptr<uml::TemplateSignature> _signature)
 {
     m_signature = _signature;
-	m_owner = this->getSignature().lock();
-	
 	
 }
 

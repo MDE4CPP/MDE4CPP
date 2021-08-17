@@ -89,8 +89,7 @@ RelationshipImpl& RelationshipImpl::operator=(const RelationshipImpl & obj)
 	//Clone Attributes with (deep copy)
 
 	//copy references with no containment (soft copy)
-	std::shared_ptr<Union<uml::Element>> _relatedElement = obj.getRelatedElement();
-	m_relatedElement.reset(new Union<uml::Element>(*(obj.getRelatedElement().get())));
+	m_relatedElement  = obj.getRelatedElement();
 	//Clone references with containment (deep copy)
 	return *this;
 }

@@ -160,7 +160,6 @@ Getter & Setter for reference type
 */
 std::shared_ptr<uml::DataType> DataValueImpl::getType() const
 {
-//assert(m_type);
     return m_type;
 }
 void DataValueImpl::setType(std::shared_ptr<uml::DataType> _type)

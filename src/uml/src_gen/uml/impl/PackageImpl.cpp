@@ -156,126 +156,107 @@ PackageImpl& PackageImpl::operator=(const PackageImpl & obj)
 	//copy references with no containment (soft copy)
 	m_nestingPackage  = obj.getNestingPackage();
 	//Clone references with containment (deep copy)
-	std::shared_ptr<Subset<uml::Package, uml::PackageableElement /*Subset does not reference a union*/>> nestedPackageContainer = getNestedPackage();
-	if(nullptr != nestedPackageContainer )
+	//clone reference 'nestedPackage'
+	std::shared_ptr<Subset<uml::Package, uml::PackageableElement /*Subset does not reference a union*/>> nestedPackageList = obj.getNestedPackage();
+	if(nestedPackageList)
 	{
-		int size = nestedPackageContainer->size();
-		for(int i=0; i<size ; i++)
+		Bag<uml::Package>::iterator nestedPackageIter = nestedPackageList->begin();
+		Bag<uml::Package>::iterator nestedPackageEnd = nestedPackageList->end();
+		while (nestedPackageIter != nestedPackageEnd) 
 		{
-			auto _nestedPackage=(*nestedPackageContainer)[i];
-			if(nullptr != _nestedPackage)
-			{
-				nestedPackageContainer->push_back(std::dynamic_pointer_cast<uml::Package>(_nestedPackage->copy()));
-			}
-			else
-			{
-				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container nestedPackage."<< std::endl;)
-			}
+			std::shared_ptr<uml::Package> temp = std::dynamic_pointer_cast<uml::Package>((*nestedPackageIter)->copy());
+			getNestedPackage()->push_back(temp);
+			nestedPackageIter++;
 		}
 	}
 	else
 	{
 		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr nestedPackage."<< std::endl;)
 	}
-	std::shared_ptr<Subset<uml::Stereotype, uml::PackageableElement /*Subset does not reference a union*/>> ownedStereotypeContainer = getOwnedStereotype();
-	if(nullptr != ownedStereotypeContainer )
+
+	//clone reference 'ownedStereotype'
+	std::shared_ptr<Subset<uml::Stereotype, uml::PackageableElement /*Subset does not reference a union*/>> ownedStereotypeList = obj.getOwnedStereotype();
+	if(ownedStereotypeList)
 	{
-		int size = ownedStereotypeContainer->size();
-		for(int i=0; i<size ; i++)
+		Bag<uml::Stereotype>::iterator ownedStereotypeIter = ownedStereotypeList->begin();
+		Bag<uml::Stereotype>::iterator ownedStereotypeEnd = ownedStereotypeList->end();
+		while (ownedStereotypeIter != ownedStereotypeEnd) 
 		{
-			auto _ownedStereotype=(*ownedStereotypeContainer)[i];
-			if(nullptr != _ownedStereotype)
-			{
-				ownedStereotypeContainer->push_back(std::dynamic_pointer_cast<uml::Stereotype>(_ownedStereotype->copy()));
-			}
-			else
-			{
-				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container ownedStereotype."<< std::endl;)
-			}
+			std::shared_ptr<uml::Stereotype> temp = std::dynamic_pointer_cast<uml::Stereotype>((*ownedStereotypeIter)->copy());
+			getOwnedStereotype()->push_back(temp);
+			ownedStereotypeIter++;
 		}
 	}
 	else
 	{
 		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr ownedStereotype."<< std::endl;)
 	}
-	std::shared_ptr<Subset<uml::Type, uml::PackageableElement /*Subset does not reference a union*/>> ownedTypeContainer = getOwnedType();
-	if(nullptr != ownedTypeContainer )
+
+	//clone reference 'ownedType'
+	std::shared_ptr<Subset<uml::Type, uml::PackageableElement /*Subset does not reference a union*/>> ownedTypeList = obj.getOwnedType();
+	if(ownedTypeList)
 	{
-		int size = ownedTypeContainer->size();
-		for(int i=0; i<size ; i++)
+		Bag<uml::Type>::iterator ownedTypeIter = ownedTypeList->begin();
+		Bag<uml::Type>::iterator ownedTypeEnd = ownedTypeList->end();
+		while (ownedTypeIter != ownedTypeEnd) 
 		{
-			auto _ownedType=(*ownedTypeContainer)[i];
-			if(nullptr != _ownedType)
-			{
-				ownedTypeContainer->push_back(std::dynamic_pointer_cast<uml::Type>(_ownedType->copy()));
-			}
-			else
-			{
-				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container ownedType."<< std::endl;)
-			}
+			std::shared_ptr<uml::Type> temp = std::dynamic_pointer_cast<uml::Type>((*ownedTypeIter)->copy());
+			getOwnedType()->push_back(temp);
+			ownedTypeIter++;
 		}
 	}
 	else
 	{
 		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr ownedType."<< std::endl;)
 	}
-	std::shared_ptr<Subset<uml::PackageMerge, uml::Element>> packageMergeContainer = getPackageMerge();
-	if(nullptr != packageMergeContainer )
+
+	//clone reference 'packageMerge'
+	std::shared_ptr<Subset<uml::PackageMerge, uml::Element>> packageMergeList = obj.getPackageMerge();
+	if(packageMergeList)
 	{
-		int size = packageMergeContainer->size();
-		for(int i=0; i<size ; i++)
+		Bag<uml::PackageMerge>::iterator packageMergeIter = packageMergeList->begin();
+		Bag<uml::PackageMerge>::iterator packageMergeEnd = packageMergeList->end();
+		while (packageMergeIter != packageMergeEnd) 
 		{
-			auto _packageMerge=(*packageMergeContainer)[i];
-			if(nullptr != _packageMerge)
-			{
-				packageMergeContainer->push_back(std::dynamic_pointer_cast<uml::PackageMerge>(_packageMerge->copy()));
-			}
-			else
-			{
-				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container packageMerge."<< std::endl;)
-			}
+			std::shared_ptr<uml::PackageMerge> temp = std::dynamic_pointer_cast<uml::PackageMerge>((*packageMergeIter)->copy());
+			getPackageMerge()->push_back(temp);
+			packageMergeIter++;
 		}
 	}
 	else
 	{
 		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr packageMerge."<< std::endl;)
 	}
-	std::shared_ptr<SubsetUnion<uml::PackageableElement, uml::NamedElement>> packagedElementContainer = getPackagedElement();
-	if(nullptr != packagedElementContainer )
+
+	//clone reference 'packagedElement'
+	std::shared_ptr<SubsetUnion<uml::PackageableElement, uml::NamedElement>> packagedElementList = obj.getPackagedElement();
+	if(packagedElementList)
 	{
-		int size = packagedElementContainer->size();
-		for(int i=0; i<size ; i++)
+		Bag<uml::PackageableElement>::iterator packagedElementIter = packagedElementList->begin();
+		Bag<uml::PackageableElement>::iterator packagedElementEnd = packagedElementList->end();
+		while (packagedElementIter != packagedElementEnd) 
 		{
-			auto _packagedElement=(*packagedElementContainer)[i];
-			if(nullptr != _packagedElement)
-			{
-				packagedElementContainer->push_back(std::dynamic_pointer_cast<uml::PackageableElement>(_packagedElement->copy()));
-			}
-			else
-			{
-				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container packagedElement."<< std::endl;)
-			}
+			std::shared_ptr<uml::PackageableElement> temp = std::dynamic_pointer_cast<uml::PackageableElement>((*packagedElementIter)->copy());
+			getPackagedElement()->push_back(temp);
+			packagedElementIter++;
 		}
 	}
 	else
 	{
 		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr packagedElement."<< std::endl;)
 	}
-	std::shared_ptr<Subset<uml::ProfileApplication, uml::Element>> profileApplicationContainer = getProfileApplication();
-	if(nullptr != profileApplicationContainer )
+
+	//clone reference 'profileApplication'
+	std::shared_ptr<Subset<uml::ProfileApplication, uml::Element>> profileApplicationList = obj.getProfileApplication();
+	if(profileApplicationList)
 	{
-		int size = profileApplicationContainer->size();
-		for(int i=0; i<size ; i++)
+		Bag<uml::ProfileApplication>::iterator profileApplicationIter = profileApplicationList->begin();
+		Bag<uml::ProfileApplication>::iterator profileApplicationEnd = profileApplicationList->end();
+		while (profileApplicationIter != profileApplicationEnd) 
 		{
-			auto _profileApplication=(*profileApplicationContainer)[i];
-			if(nullptr != _profileApplication)
-			{
-				profileApplicationContainer->push_back(std::dynamic_pointer_cast<uml::ProfileApplication>(_profileApplication->copy()));
-			}
-			else
-			{
-				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container profileApplication."<< std::endl;)
-			}
+			std::shared_ptr<uml::ProfileApplication> temp = std::dynamic_pointer_cast<uml::ProfileApplication>((*profileApplicationIter)->copy());
+			getProfileApplication()->push_back(temp);
+			profileApplicationIter++;
 		}
 	}
 	else
@@ -283,37 +264,37 @@ PackageImpl& PackageImpl::operator=(const PackageImpl & obj)
 		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr profileApplication."<< std::endl;)
 	}
 	/*Subset*/
-	m_nestedPackage->initSubset(getPackagedElement());
+	getNestedPackage()->initSubset(getPackagedElement());
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Initialising value Subset: " << "m_nestedPackage - Subset<uml::Package, uml::PackageableElement /*Subset does not reference a union*/ >(getPackagedElement())" << std::endl;
 	#endif
 	
 	/*Subset*/
-	m_ownedStereotype->initSubset(getPackagedElement());
+	getOwnedStereotype()->initSubset(getPackagedElement());
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Initialising value Subset: " << "m_ownedStereotype - Subset<uml::Stereotype, uml::PackageableElement /*Subset does not reference a union*/ >(getPackagedElement())" << std::endl;
 	#endif
 	
 	/*Subset*/
-	m_ownedType->initSubset(getPackagedElement());
+	getOwnedType()->initSubset(getPackagedElement());
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Initialising value Subset: " << "m_ownedType - Subset<uml::Type, uml::PackageableElement /*Subset does not reference a union*/ >(getPackagedElement())" << std::endl;
 	#endif
 	
 	/*Subset*/
-	m_packageMerge->initSubset(getOwnedElement());
+	getPackageMerge()->initSubset(getOwnedElement());
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Initialising value Subset: " << "m_packageMerge - Subset<uml::PackageMerge, uml::Element >(getOwnedElement())" << std::endl;
 	#endif
 	
 	/*SubsetUnion*/
-	m_packagedElement->initSubsetUnion(getOwnedMember());
+	getPackagedElement()->initSubsetUnion(getOwnedMember());
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Initialising value SubsetUnion: " << "m_packagedElement - SubsetUnion<uml::PackageableElement, uml::NamedElement >(getOwnedMember())" << std::endl;
 	#endif
 	
 	/*Subset*/
-	m_profileApplication->initSubset(getOwnedElement());
+	getProfileApplication()->initSubset(getOwnedElement());
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Initialising value Subset: " << "m_profileApplication - Subset<uml::ProfileApplication, uml::Element >(getOwnedElement())" << std::endl;
 	#endif
@@ -515,13 +496,12 @@ std::shared_ptr<Subset<uml::Package, uml::PackageableElement /*Subset does not r
 		#endif
 		
 		/*Subset*/
-		m_nestedPackage->initSubset(getPackagedElement());
+		getNestedPackage()->initSubset(getPackagedElement());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value Subset: " << "m_nestedPackage - Subset<uml::Package, uml::PackageableElement /*Subset does not reference a union*/ >(getPackagedElement())" << std::endl;
 		#endif
 		
 	}
-
     return m_nestedPackage;
 }
 
@@ -532,16 +512,11 @@ Getter & Setter for reference nestingPackage
 */
 std::weak_ptr<uml::Package> PackageImpl::getNestingPackage() const
 {
-
     return m_nestingPackage;
 }
 void PackageImpl::setNestingPackage(std::weak_ptr<uml::Package> _nestingPackage)
 {
     m_nestingPackage = _nestingPackage;
-	m_namespace = this->getNestingPackage().lock();
-	m_owner = this->getNamespace().lock();
-	
-	
 	
 }
 
@@ -560,13 +535,12 @@ std::shared_ptr<Subset<uml::Stereotype, uml::PackageableElement /*Subset does no
 		#endif
 		
 		/*Subset*/
-		m_ownedStereotype->initSubset(getPackagedElement());
+		getOwnedStereotype()->initSubset(getPackagedElement());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value Subset: " << "m_ownedStereotype - Subset<uml::Stereotype, uml::PackageableElement /*Subset does not reference a union*/ >(getPackagedElement())" << std::endl;
 		#endif
 		
 	}
-
     return m_ownedStereotype;
 }
 
@@ -586,13 +560,12 @@ std::shared_ptr<Subset<uml::Type, uml::PackageableElement /*Subset does not refe
 		#endif
 		
 		/*Subset*/
-		m_ownedType->initSubset(getPackagedElement());
+		getOwnedType()->initSubset(getPackagedElement());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value Subset: " << "m_ownedType - Subset<uml::Type, uml::PackageableElement /*Subset does not reference a union*/ >(getPackagedElement())" << std::endl;
 		#endif
 		
 	}
-
     return m_ownedType;
 }
 
@@ -612,13 +585,12 @@ std::shared_ptr<Subset<uml::PackageMerge, uml::Element>> PackageImpl::getPackage
 		#endif
 		
 		/*Subset*/
-		m_packageMerge->initSubset(getOwnedElement());
+		getPackageMerge()->initSubset(getOwnedElement());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value Subset: " << "m_packageMerge - Subset<uml::PackageMerge, uml::Element >(getOwnedElement())" << std::endl;
 		#endif
 		
 	}
-
     return m_packageMerge;
 }
 
@@ -638,13 +610,12 @@ std::shared_ptr<SubsetUnion<uml::PackageableElement, uml::NamedElement>> Package
 		#endif
 		
 		/*SubsetUnion*/
-		m_packagedElement->initSubsetUnion(getOwnedMember());
+		getPackagedElement()->initSubsetUnion(getOwnedMember());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value SubsetUnion: " << "m_packagedElement - SubsetUnion<uml::PackageableElement, uml::NamedElement >(getOwnedMember())" << std::endl;
 		#endif
 		
 	}
-
     return m_packagedElement;
 }
 
@@ -664,13 +635,12 @@ std::shared_ptr<Subset<uml::ProfileApplication, uml::Element>> PackageImpl::getP
 		#endif
 		
 		/*Subset*/
-		m_profileApplication->initSubset(getOwnedElement());
+		getProfileApplication()->initSubset(getOwnedElement());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value Subset: " << "m_profileApplication - Subset<uml::ProfileApplication, uml::Element >(getOwnedElement())" << std::endl;
 		#endif
 		
 	}
-
     return m_profileApplication;
 }
 
@@ -714,20 +684,20 @@ std::shared_ptr<Union<uml::Element>> PackageImpl::getOwnedElement() const
 	return m_ownedElement;
 }
 
-std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement>> PackageImpl::getOwnedMember() const
+std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement>> PackageImpl::getOwnedMember() const
 {
 	if(m_ownedMember == nullptr)
 	{
 		/*SubsetUnion*/
-		m_ownedMember.reset(new SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement >());
+		m_ownedMember.reset(new SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement >());
 		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement >()" << std::endl;
+			std::cout << "Initialising shared pointer SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement >()" << std::endl;
 		#endif
 		
 		/*SubsetUnion*/
-		m_ownedMember->initSubsetUnion(getOwnedElement(),getMember());
+		getOwnedMember()->initSubsetUnion(getOwnedElement(), getMember());
 		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement >(getOwnedElement(),getMember())" << std::endl;
+			std::cout << "Initialising value SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement >(getOwnedElement(), getMember())" << std::endl;
 		#endif
 		
 	}

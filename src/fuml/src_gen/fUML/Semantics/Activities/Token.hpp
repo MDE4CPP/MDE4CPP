@@ -62,6 +62,8 @@ namespace fUML::Semantics::Activities
 
 		protected:
 			Token(){}
+			//Additional constructors for the containments back reference
+			Token(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivation> par_holder);
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -100,7 +102,7 @@ namespace fUML::Semantics::Activities
 			//*********************************
 			// Attribute Members
 			//*********************************
-			 
+			
 			bool m_withdrawn = true;
 			
 			

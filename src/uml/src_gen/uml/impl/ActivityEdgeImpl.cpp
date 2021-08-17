@@ -128,59 +128,55 @@ ActivityEdgeImpl& ActivityEdgeImpl::operator=(const ActivityEdgeImpl & obj)
 
 	//copy references with no containment (soft copy)
 	m_activity  = obj.getActivity();
-	std::shared_ptr<Union<uml::ActivityGroup>> _inGroup = obj.getInGroup();
-	m_inGroup.reset(new Union<uml::ActivityGroup>(*(obj.getInGroup().get())));
+	m_inGroup  = obj.getInGroup();
 	m_inStructuredNode  = obj.getInStructuredNode();
 	m_interrupts  = obj.getInterrupts();
 	m_source  = obj.getSource();
 	m_target  = obj.getTarget();
 	//Clone references with containment (deep copy)
+	//clone reference 'guard'
 	if(obj.getGuard()!=nullptr)
 	{
 		m_guard = std::dynamic_pointer_cast<uml::ValueSpecification>(obj.getGuard()->copy());
 	}
-	std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup>> inPartitionContainer = getInPartition();
-	if(nullptr != inPartitionContainer )
+
+	//clone reference 'inPartition'
+	std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup>> inPartitionList = obj.getInPartition();
+	if(inPartitionList)
 	{
-		int size = inPartitionContainer->size();
-		for(int i=0; i<size ; i++)
+		Bag<uml::ActivityPartition>::iterator inPartitionIter = inPartitionList->begin();
+		Bag<uml::ActivityPartition>::iterator inPartitionEnd = inPartitionList->end();
+		while (inPartitionIter != inPartitionEnd) 
 		{
-			auto _inPartition=(*inPartitionContainer)[i];
-			if(nullptr != _inPartition)
-			{
-				inPartitionContainer->push_back(std::dynamic_pointer_cast<uml::ActivityPartition>(_inPartition->copy()));
-			}
-			else
-			{
-				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container inPartition."<< std::endl;)
-			}
+			std::shared_ptr<uml::ActivityPartition> temp = std::dynamic_pointer_cast<uml::ActivityPartition>((*inPartitionIter)->copy());
+			getInPartition()->push_back(temp);
+			inPartitionIter++;
 		}
 	}
 	else
 	{
 		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr inPartition."<< std::endl;)
 	}
-	std::shared_ptr<Subset<uml::ActivityEdge, uml::RedefinableElement>> redefinedEdgeContainer = getRedefinedEdge();
-	if(nullptr != redefinedEdgeContainer )
+
+	//clone reference 'redefinedEdge'
+	std::shared_ptr<Subset<uml::ActivityEdge, uml::RedefinableElement>> redefinedEdgeList = obj.getRedefinedEdge();
+	if(redefinedEdgeList)
 	{
-		int size = redefinedEdgeContainer->size();
-		for(int i=0; i<size ; i++)
+		Bag<uml::ActivityEdge>::iterator redefinedEdgeIter = redefinedEdgeList->begin();
+		Bag<uml::ActivityEdge>::iterator redefinedEdgeEnd = redefinedEdgeList->end();
+		while (redefinedEdgeIter != redefinedEdgeEnd) 
 		{
-			auto _redefinedEdge=(*redefinedEdgeContainer)[i];
-			if(nullptr != _redefinedEdge)
-			{
-				redefinedEdgeContainer->push_back(std::dynamic_pointer_cast<uml::ActivityEdge>(_redefinedEdge->copy()));
-			}
-			else
-			{
-				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container redefinedEdge."<< std::endl;)
-			}
+			std::shared_ptr<uml::ActivityEdge> temp = std::dynamic_pointer_cast<uml::ActivityEdge>((*redefinedEdgeIter)->copy());
+			getRedefinedEdge()->push_back(temp);
+			redefinedEdgeIter++;
 		}
 	}
 	else
 	{
 		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr redefinedEdge."<< std::endl;)
 	}
+
+	//clone reference 'weight'
 	if(obj.getWeight()!=nullptr)
 	{
 		m_weight = std::dynamic_pointer_cast<uml::ValueSpecification>(obj.getWeight()->copy());
@@ -224,14 +220,11 @@ Getter & Setter for reference activity
 */
 std::weak_ptr<uml::Activity> ActivityEdgeImpl::getActivity() const
 {
-
     return m_activity;
 }
 void ActivityEdgeImpl::setActivity(std::weak_ptr<uml::Activity> _activity)
 {
     m_activity = _activity;
-	m_owner = this->getActivity().lock();
-	
 	
 }
 
@@ -241,13 +234,11 @@ Getter & Setter for reference guard
 */
 std::shared_ptr<uml::ValueSpecification> ActivityEdgeImpl::getGuard() const
 {
-
     return m_guard;
 }
 void ActivityEdgeImpl::setGuard(std::shared_ptr<uml::ValueSpecification> _guard)
 {
     m_guard = _guard;
-	
 	
 }
 
@@ -273,13 +264,12 @@ std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup>> ActivityEdge
 		#endif
 		
 		/*Subset*/
-		m_inPartition->initSubset(getInGroup());
+		getInPartition()->initSubset(getInGroup());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value Subset: " << "m_inPartition - Subset<uml::ActivityPartition, uml::ActivityGroup >(getInGroup())" << std::endl;
 		#endif
 		
 	}
-
     return m_inPartition;
 }
 
@@ -290,15 +280,11 @@ Getter & Setter for reference inStructuredNode
 */
 std::weak_ptr<uml::StructuredActivityNode> ActivityEdgeImpl::getInStructuredNode() const
 {
-
     return m_inStructuredNode;
 }
 void ActivityEdgeImpl::setInStructuredNode(std::weak_ptr<uml::StructuredActivityNode> _inStructuredNode)
 {
     m_inStructuredNode = _inStructuredNode;
-	
-	m_owner = this->getInStructuredNode().lock();
-	
 	
 }
 
@@ -308,7 +294,6 @@ Getter & Setter for reference interrupts
 */
 std::shared_ptr<uml::InterruptibleActivityRegion> ActivityEdgeImpl::getInterrupts() const
 {
-
     return m_interrupts;
 }
 void ActivityEdgeImpl::setInterrupts(std::shared_ptr<uml::InterruptibleActivityRegion> _interrupts)
@@ -332,13 +317,12 @@ std::shared_ptr<Subset<uml::ActivityEdge, uml::RedefinableElement>> ActivityEdge
 		#endif
 		
 		/*Subset*/
-		m_redefinedEdge->initSubset(getRedefinedElement());
+		getRedefinedEdge()->initSubset(getRedefinedElement());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value Subset: " << "m_redefinedEdge - Subset<uml::ActivityEdge, uml::RedefinableElement >(getRedefinedElement())" << std::endl;
 		#endif
 		
 	}
-
     return m_redefinedEdge;
 }
 
@@ -349,7 +333,6 @@ Getter & Setter for reference source
 */
 std::shared_ptr<uml::ActivityNode> ActivityEdgeImpl::getSource() const
 {
-//assert(m_source);
     return m_source;
 }
 void ActivityEdgeImpl::setSource(std::shared_ptr<uml::ActivityNode> _source)
@@ -364,7 +347,6 @@ Getter & Setter for reference target
 */
 std::shared_ptr<uml::ActivityNode> ActivityEdgeImpl::getTarget() const
 {
-//assert(m_target);
     return m_target;
 }
 void ActivityEdgeImpl::setTarget(std::shared_ptr<uml::ActivityNode> _target)
@@ -379,13 +361,11 @@ Getter & Setter for reference weight
 */
 std::shared_ptr<uml::ValueSpecification> ActivityEdgeImpl::getWeight() const
 {
-
     return m_weight;
 }
 void ActivityEdgeImpl::setWeight(std::shared_ptr<uml::ValueSpecification> _weight)
 {
     m_weight = _weight;
-	
 	
 }
 

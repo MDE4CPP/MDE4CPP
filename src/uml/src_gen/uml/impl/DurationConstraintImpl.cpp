@@ -132,21 +132,15 @@ DurationConstraintImpl& DurationConstraintImpl::operator=(const DurationConstrai
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy DurationConstraint "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
 	//Clone Attributes with (deep copy)
-	std::shared_ptr<Bag<bool>> firstEventContainer = isFirstEvent();
-	if(nullptr != firstEventContainer )
-	{
-		int size = firstEventContainer->size();
-		for(int i=0; i<size ; i++)
+	std::shared_ptr<Bag<bool>> firstEventList = obj.isFirstEvent();
+	if(firstEventList)
+	{	isFirstEvent().reset(new Bag<bool>());
+		Bag<bool>::iterator firstEventIter = firstEventList->begin();
+		Bag<bool>::iterator firstEventEnd = firstEventList->end();
+		while (firstEventIter != firstEventEnd) 
 		{
-			auto _firstEvent=(*firstEventContainer)[i];	
-			if(nullptr != _firstEvent)
-			{
-				firstEventContainer->push_back(_firstEvent);
-			} 
-			else
-			{
-				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container firstEvent."<< std::endl;)
-			}
+			isFirstEvent()->push_back(*firstEventIter);
+			firstEventIter++;
 		}
 	}
 	else

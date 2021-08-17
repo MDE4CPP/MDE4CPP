@@ -104,21 +104,17 @@ LoopNodeActivationImpl& LoopNodeActivationImpl::operator=(const LoopNodeActivati
 
 	//copy references with no containment (soft copy)
 	//Clone references with containment (deep copy)
-	std::shared_ptr<Bag<fUML::Semantics::Actions::Values>> bodyOutputListsContainer = getBodyOutputLists();
-	if(nullptr != bodyOutputListsContainer )
+	//clone reference 'bodyOutputLists'
+	std::shared_ptr<Bag<fUML::Semantics::Actions::Values>> bodyOutputListsList = obj.getBodyOutputLists();
+	if(bodyOutputListsList)
 	{
-		int size = bodyOutputListsContainer->size();
-		for(int i=0; i<size ; i++)
+		Bag<fUML::Semantics::Actions::Values>::iterator bodyOutputListsIter = bodyOutputListsList->begin();
+		Bag<fUML::Semantics::Actions::Values>::iterator bodyOutputListsEnd = bodyOutputListsList->end();
+		while (bodyOutputListsIter != bodyOutputListsEnd) 
 		{
-			auto _bodyOutputLists=(*bodyOutputListsContainer)[i];
-			if(nullptr != _bodyOutputLists)
-			{
-				bodyOutputListsContainer->push_back(std::dynamic_pointer_cast<fUML::Semantics::Actions::Values>(_bodyOutputLists->copy()));
-			}
-			else
-			{
-				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container bodyOutputLists."<< std::endl;)
-			}
+			std::shared_ptr<fUML::Semantics::Actions::Values> temp = std::dynamic_pointer_cast<fUML::Semantics::Actions::Values>((*bodyOutputListsIter)->copy());
+			getBodyOutputLists()->push_back(temp);
+			bodyOutputListsIter++;
 		}
 	}
 	else
@@ -187,7 +183,6 @@ std::shared_ptr<Bag<fUML::Semantics::Actions::Values>> LoopNodeActivationImpl::g
 		
 		
 	}
-
     return m_bodyOutputLists;
 }
 

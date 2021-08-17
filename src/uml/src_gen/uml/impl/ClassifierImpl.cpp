@@ -163,137 +163,117 @@ ClassifierImpl& ClassifierImpl::operator=(const ClassifierImpl & obj)
 	m_isFinalSpecialization = obj.getIsFinalSpecialization();
 
 	//copy references with no containment (soft copy)
-	std::shared_ptr<Bag<uml::Classifier>> _general = obj.getGeneral();
-	m_general.reset(new Bag<uml::Classifier>(*(obj.getGeneral().get())));
-	std::shared_ptr<Bag<uml::GeneralizationSet>> _powertypeExtent = obj.getPowertypeExtent();
-	m_powertypeExtent.reset(new Bag<uml::GeneralizationSet>(*(obj.getPowertypeExtent().get())));
-	std::shared_ptr<Bag<uml::UseCase>> _useCase = obj.getUseCase();
-	m_useCase.reset(new Bag<uml::UseCase>(*(obj.getUseCase().get())));
+	m_general  = obj.getGeneral();
+	m_powertypeExtent  = obj.getPowertypeExtent();
+	m_useCase  = obj.getUseCase();
 	//Clone references with containment (deep copy)
-	std::shared_ptr<SubsetUnion<uml::CollaborationUse, uml::Element>> collaborationUseContainer = getCollaborationUse();
-	if(nullptr != collaborationUseContainer )
+	//clone reference 'collaborationUse'
+	std::shared_ptr<SubsetUnion<uml::CollaborationUse, uml::Element>> collaborationUseList = obj.getCollaborationUse();
+	if(collaborationUseList)
 	{
-		int size = collaborationUseContainer->size();
-		for(int i=0; i<size ; i++)
+		Bag<uml::CollaborationUse>::iterator collaborationUseIter = collaborationUseList->begin();
+		Bag<uml::CollaborationUse>::iterator collaborationUseEnd = collaborationUseList->end();
+		while (collaborationUseIter != collaborationUseEnd) 
 		{
-			auto _collaborationUse=(*collaborationUseContainer)[i];
-			if(nullptr != _collaborationUse)
-			{
-				collaborationUseContainer->push_back(std::dynamic_pointer_cast<uml::CollaborationUse>(_collaborationUse->copy()));
-			}
-			else
-			{
-				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container collaborationUse."<< std::endl;)
-			}
+			std::shared_ptr<uml::CollaborationUse> temp = std::dynamic_pointer_cast<uml::CollaborationUse>((*collaborationUseIter)->copy());
+			getCollaborationUse()->push_back(temp);
+			collaborationUseIter++;
 		}
 	}
 	else
 	{
 		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr collaborationUse."<< std::endl;)
 	}
-	std::shared_ptr<Subset<uml::Generalization, uml::Element>> generalizationContainer = getGeneralization();
-	if(nullptr != generalizationContainer )
+
+	//clone reference 'generalization'
+	std::shared_ptr<Subset<uml::Generalization, uml::Element>> generalizationList = obj.getGeneralization();
+	if(generalizationList)
 	{
-		int size = generalizationContainer->size();
-		for(int i=0; i<size ; i++)
+		Bag<uml::Generalization>::iterator generalizationIter = generalizationList->begin();
+		Bag<uml::Generalization>::iterator generalizationEnd = generalizationList->end();
+		while (generalizationIter != generalizationEnd) 
 		{
-			auto _generalization=(*generalizationContainer)[i];
-			if(nullptr != _generalization)
-			{
-				generalizationContainer->push_back(std::dynamic_pointer_cast<uml::Generalization>(_generalization->copy()));
-			}
-			else
-			{
-				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container generalization."<< std::endl;)
-			}
+			std::shared_ptr<uml::Generalization> temp = std::dynamic_pointer_cast<uml::Generalization>((*generalizationIter)->copy());
+			getGeneralization()->push_back(temp);
+			generalizationIter++;
 		}
 	}
 	else
 	{
 		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr generalization."<< std::endl;)
 	}
-	std::shared_ptr<Subset<uml::NamedElement, uml::NamedElement>> inheritedMemberContainer = getInheritedMember();
-	if(nullptr != inheritedMemberContainer )
+
+	//clone reference 'inheritedMember'
+	std::shared_ptr<Subset<uml::NamedElement, uml::NamedElement>> inheritedMemberList = obj.getInheritedMember();
+	if(inheritedMemberList)
 	{
-		int size = inheritedMemberContainer->size();
-		for(int i=0; i<size ; i++)
+		Bag<uml::NamedElement>::iterator inheritedMemberIter = inheritedMemberList->begin();
+		Bag<uml::NamedElement>::iterator inheritedMemberEnd = inheritedMemberList->end();
+		while (inheritedMemberIter != inheritedMemberEnd) 
 		{
-			auto _inheritedMember=(*inheritedMemberContainer)[i];
-			if(nullptr != _inheritedMember)
-			{
-				inheritedMemberContainer->push_back(std::dynamic_pointer_cast<uml::NamedElement>(_inheritedMember->copy()));
-			}
-			else
-			{
-				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container inheritedMember."<< std::endl;)
-			}
+			std::shared_ptr<uml::NamedElement> temp = std::dynamic_pointer_cast<uml::NamedElement>((*inheritedMemberIter)->copy());
+			getInheritedMember()->push_back(temp);
+			inheritedMemberIter++;
 		}
 	}
 	else
 	{
 		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr inheritedMember."<< std::endl;)
 	}
-	std::shared_ptr<Subset<uml::UseCase, uml::NamedElement>> ownedUseCaseContainer = getOwnedUseCase();
-	if(nullptr != ownedUseCaseContainer )
+
+	//clone reference 'ownedUseCase'
+	std::shared_ptr<Subset<uml::UseCase, uml::NamedElement>> ownedUseCaseList = obj.getOwnedUseCase();
+	if(ownedUseCaseList)
 	{
-		int size = ownedUseCaseContainer->size();
-		for(int i=0; i<size ; i++)
+		Bag<uml::UseCase>::iterator ownedUseCaseIter = ownedUseCaseList->begin();
+		Bag<uml::UseCase>::iterator ownedUseCaseEnd = ownedUseCaseList->end();
+		while (ownedUseCaseIter != ownedUseCaseEnd) 
 		{
-			auto _ownedUseCase=(*ownedUseCaseContainer)[i];
-			if(nullptr != _ownedUseCase)
-			{
-				ownedUseCaseContainer->push_back(std::dynamic_pointer_cast<uml::UseCase>(_ownedUseCase->copy()));
-			}
-			else
-			{
-				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container ownedUseCase."<< std::endl;)
-			}
+			std::shared_ptr<uml::UseCase> temp = std::dynamic_pointer_cast<uml::UseCase>((*ownedUseCaseIter)->copy());
+			getOwnedUseCase()->push_back(temp);
+			ownedUseCaseIter++;
 		}
 	}
 	else
 	{
 		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr ownedUseCase."<< std::endl;)
 	}
-	std::shared_ptr<SubsetUnion<uml::Classifier, uml::RedefinableElement>> redefinedClassifierContainer = getRedefinedClassifier();
-	if(nullptr != redefinedClassifierContainer )
+
+	//clone reference 'redefinedClassifier'
+	std::shared_ptr<SubsetUnion<uml::Classifier, uml::RedefinableElement>> redefinedClassifierList = obj.getRedefinedClassifier();
+	if(redefinedClassifierList)
 	{
-		int size = redefinedClassifierContainer->size();
-		for(int i=0; i<size ; i++)
+		Bag<uml::Classifier>::iterator redefinedClassifierIter = redefinedClassifierList->begin();
+		Bag<uml::Classifier>::iterator redefinedClassifierEnd = redefinedClassifierList->end();
+		while (redefinedClassifierIter != redefinedClassifierEnd) 
 		{
-			auto _redefinedClassifier=(*redefinedClassifierContainer)[i];
-			if(nullptr != _redefinedClassifier)
-			{
-				redefinedClassifierContainer->push_back(std::dynamic_pointer_cast<uml::Classifier>(_redefinedClassifier->copy()));
-			}
-			else
-			{
-				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container redefinedClassifier."<< std::endl;)
-			}
+			std::shared_ptr<uml::Classifier> temp = std::dynamic_pointer_cast<uml::Classifier>((*redefinedClassifierIter)->copy());
+			getRedefinedClassifier()->push_back(temp);
+			redefinedClassifierIter++;
 		}
 	}
 	else
 	{
 		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr redefinedClassifier."<< std::endl;)
 	}
+
+	//clone reference 'representation'
 	if(obj.getRepresentation()!=nullptr)
 	{
 		m_representation = std::dynamic_pointer_cast<uml::CollaborationUse>(obj.getRepresentation()->copy());
 	}
-	std::shared_ptr<Subset<uml::Substitution, uml::Element>> substitutionContainer = getSubstitution();
-	if(nullptr != substitutionContainer )
+
+	//clone reference 'substitution'
+	std::shared_ptr<Subset<uml::Substitution, uml::Element>> substitutionList = obj.getSubstitution();
+	if(substitutionList)
 	{
-		int size = substitutionContainer->size();
-		for(int i=0; i<size ; i++)
+		Bag<uml::Substitution>::iterator substitutionIter = substitutionList->begin();
+		Bag<uml::Substitution>::iterator substitutionEnd = substitutionList->end();
+		while (substitutionIter != substitutionEnd) 
 		{
-			auto _substitution=(*substitutionContainer)[i];
-			if(nullptr != _substitution)
-			{
-				substitutionContainer->push_back(std::dynamic_pointer_cast<uml::Substitution>(_substitution->copy()));
-			}
-			else
-			{
-				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container substitution."<< std::endl;)
-			}
+			std::shared_ptr<uml::Substitution> temp = std::dynamic_pointer_cast<uml::Substitution>((*substitutionIter)->copy());
+			getSubstitution()->push_back(temp);
+			substitutionIter++;
 		}
 	}
 	else
@@ -301,25 +281,25 @@ ClassifierImpl& ClassifierImpl::operator=(const ClassifierImpl & obj)
 		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr substitution."<< std::endl;)
 	}
 	/*SubsetUnion*/
-	m_collaborationUse->initSubsetUnion(getOwnedElement());
+	getCollaborationUse()->initSubsetUnion(getOwnedElement());
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Initialising value SubsetUnion: " << "m_collaborationUse - SubsetUnion<uml::CollaborationUse, uml::Element >(getOwnedElement())" << std::endl;
 	#endif
 	
 	/*Subset*/
-	m_generalization->initSubset(getOwnedElement());
+	getGeneralization()->initSubset(getOwnedElement());
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Initialising value Subset: " << "m_generalization - Subset<uml::Generalization, uml::Element >(getOwnedElement())" << std::endl;
 	#endif
 	
 	/*Subset*/
-	m_ownedUseCase->initSubset(getOwnedMember());
+	getOwnedUseCase()->initSubset(getOwnedMember());
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Initialising value Subset: " << "m_ownedUseCase - Subset<uml::UseCase, uml::NamedElement >(getOwnedMember())" << std::endl;
 	#endif
 	
 	/*Subset*/
-	m_substitution->initSubset(getOwnedElement());
+	getSubstitution()->initSubset(getOwnedElement());
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Initialising value Subset: " << "m_substitution - Subset<uml::Substitution, uml::Element >(getOwnedElement())" << std::endl;
 	#endif
@@ -694,13 +674,12 @@ std::shared_ptr<SubsetUnion<uml::CollaborationUse, uml::Element>> ClassifierImpl
 		#endif
 		
 		/*SubsetUnion*/
-		m_collaborationUse->initSubsetUnion(getOwnedElement());
+		getCollaborationUse()->initSubsetUnion(getOwnedElement());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value SubsetUnion: " << "m_collaborationUse - SubsetUnion<uml::CollaborationUse, uml::Element >(getOwnedElement())" << std::endl;
 		#endif
 		
 	}
-
     return m_collaborationUse;
 }
 
@@ -724,7 +703,6 @@ std::shared_ptr<Bag<uml::Classifier>> ClassifierImpl::getGeneral() const
 		
 		
 	}
-
     return m_general;
 }
 
@@ -744,13 +722,12 @@ std::shared_ptr<Subset<uml::Generalization, uml::Element>> ClassifierImpl::getGe
 		#endif
 		
 		/*Subset*/
-		m_generalization->initSubset(getOwnedElement());
+		getGeneralization()->initSubset(getOwnedElement());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value Subset: " << "m_generalization - Subset<uml::Generalization, uml::Element >(getOwnedElement())" << std::endl;
 		#endif
 		
 	}
-
     return m_generalization;
 }
 
@@ -770,13 +747,12 @@ std::shared_ptr<Subset<uml::NamedElement, uml::NamedElement>> ClassifierImpl::ge
 		#endif
 		
 		/*Subset*/
-		m_inheritedMember->initSubset(getMember());
+		getInheritedMember()->initSubset(getMember());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value Subset: " << "m_inheritedMember - Subset<uml::NamedElement, uml::NamedElement >(getMember())" << std::endl;
 		#endif
 		
 	}
-
     return m_inheritedMember;
 }
 
@@ -796,13 +772,12 @@ std::shared_ptr<Subset<uml::UseCase, uml::NamedElement>> ClassifierImpl::getOwne
 		#endif
 		
 		/*Subset*/
-		m_ownedUseCase->initSubset(getOwnedMember());
+		getOwnedUseCase()->initSubset(getOwnedMember());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value Subset: " << "m_ownedUseCase - Subset<uml::UseCase, uml::NamedElement >(getOwnedMember())" << std::endl;
 		#endif
 		
 	}
-
     return m_ownedUseCase;
 }
 
@@ -819,7 +794,6 @@ std::shared_ptr<Bag<uml::GeneralizationSet>> ClassifierImpl::getPowertypeExtent(
 		
 		
 	}
-
     return m_powertypeExtent;
 }
 
@@ -839,13 +813,12 @@ std::shared_ptr<SubsetUnion<uml::Classifier, uml::RedefinableElement>> Classifie
 		#endif
 		
 		/*SubsetUnion*/
-		m_redefinedClassifier->initSubsetUnion(getRedefinedElement());
+		getRedefinedClassifier()->initSubsetUnion(getRedefinedElement());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value SubsetUnion: " << "m_redefinedClassifier - SubsetUnion<uml::Classifier, uml::RedefinableElement >(getRedefinedElement())" << std::endl;
 		#endif
 		
 	}
-
     return m_redefinedClassifier;
 }
 
@@ -856,14 +829,11 @@ Getter & Setter for reference representation
 */
 std::shared_ptr<uml::CollaborationUse> ClassifierImpl::getRepresentation() const
 {
-
     return m_representation;
 }
 void ClassifierImpl::setRepresentation(std::shared_ptr<uml::CollaborationUse> _representation)
 {
     m_representation = _representation;
-	
-	
 	
 }
 
@@ -882,13 +852,12 @@ std::shared_ptr<Subset<uml::Substitution, uml::Element>> ClassifierImpl::getSubs
 		#endif
 		
 		/*Subset*/
-		m_substitution->initSubset(getOwnedElement());
+		getSubstitution()->initSubset(getOwnedElement());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value Subset: " << "m_substitution - Subset<uml::Substitution, uml::Element >(getOwnedElement())" << std::endl;
 		#endif
 		
 	}
-
     return m_substitution;
 }
 
@@ -905,7 +874,6 @@ std::shared_ptr<Bag<uml::UseCase>> ClassifierImpl::getUseCase() const
 		
 		
 	}
-
     return m_useCase;
 }
 
@@ -925,7 +893,7 @@ std::shared_ptr<SubsetUnion<uml::Property, uml::Feature>> ClassifierImpl::getAtt
 		#endif
 		
 		/*SubsetUnion*/
-		m_attribute->initSubsetUnion(getFeature());
+		getAttribute()->initSubsetUnion(getFeature());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value SubsetUnion: " << "m_attribute - SubsetUnion<uml::Property, uml::Feature >(getFeature())" << std::endl;
 		#endif
@@ -945,7 +913,7 @@ std::shared_ptr<SubsetUnion<uml::Feature, uml::NamedElement>> ClassifierImpl::ge
 		#endif
 		
 		/*SubsetUnion*/
-		m_feature->initSubsetUnion(getMember());
+		getFeature()->initSubsetUnion(getMember());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value SubsetUnion: " << "m_feature - SubsetUnion<uml::Feature, uml::NamedElement >(getMember())" << std::endl;
 		#endif
@@ -989,20 +957,20 @@ std::shared_ptr<Union<uml::Element>> ClassifierImpl::getOwnedElement() const
 	return m_ownedElement;
 }
 
-std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement>> ClassifierImpl::getOwnedMember() const
+std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement>> ClassifierImpl::getOwnedMember() const
 {
 	if(m_ownedMember == nullptr)
 	{
 		/*SubsetUnion*/
-		m_ownedMember.reset(new SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement >());
+		m_ownedMember.reset(new SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement >());
 		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement >()" << std::endl;
+			std::cout << "Initialising shared pointer SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement >()" << std::endl;
 		#endif
 		
 		/*SubsetUnion*/
-		m_ownedMember->initSubsetUnion(getOwnedElement(),getMember());
+		getOwnedMember()->initSubsetUnion(getOwnedElement(), getMember());
 		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement >(getOwnedElement(),getMember())" << std::endl;
+			std::cout << "Initialising value SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement >(getOwnedElement(), getMember())" << std::endl;
 		#endif
 		
 	}

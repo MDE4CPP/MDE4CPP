@@ -123,6 +123,7 @@ ManifestationImpl& ManifestationImpl::operator=(const ManifestationImpl & obj)
 
 	//copy references with no containment (soft copy)
 	//Clone references with containment (deep copy)
+	//clone reference 'utilizedElement'
 	if(obj.getUtilizedElement()!=nullptr)
 	{
 		m_utilizedElement = std::dynamic_pointer_cast<uml::PackageableElement>(obj.getUtilizedElement()->copy());
@@ -159,15 +160,11 @@ Getter & Setter for reference utilizedElement
 */
 std::shared_ptr<uml::PackageableElement> ManifestationImpl::getUtilizedElement() const
 {
-//assert(m_utilizedElement);
     return m_utilizedElement;
 }
 void ManifestationImpl::setUtilizedElement(std::shared_ptr<uml::PackageableElement> _utilizedElement)
 {
     m_utilizedElement = _utilizedElement;
-	
-	
-	
 	
 }
 
@@ -226,7 +223,7 @@ std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> ManifestationImpl::getS
 		#endif
 		
 		/*SubsetUnion*/
-		m_source->initSubsetUnion(getRelatedElement());
+		getSource()->initSubsetUnion(getRelatedElement());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value SubsetUnion: " << "m_source - SubsetUnion<uml::Element, uml::Element >(getRelatedElement())" << std::endl;
 		#endif
@@ -246,7 +243,7 @@ std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> ManifestationImpl::getT
 		#endif
 		
 		/*SubsetUnion*/
-		m_target->initSubsetUnion(getRelatedElement());
+		getTarget()->initSubsetUnion(getRelatedElement());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value SubsetUnion: " << "m_target - SubsetUnion<uml::Element, uml::Element >(getRelatedElement())" << std::endl;
 		#endif

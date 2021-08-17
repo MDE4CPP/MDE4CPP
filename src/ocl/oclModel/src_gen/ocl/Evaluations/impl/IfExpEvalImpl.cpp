@@ -32,10 +32,10 @@
 
 #include <exception> // used in Persistence
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
-#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Values/ValuesFactory.hpp"
+#include "fUML/Semantics/Loci/LociFactory.hpp"
 
 
 #include "ocl/Evaluations/EvalEnvironment.hpp"
@@ -131,7 +131,6 @@ Getter & Setter for reference condition
 */
 std::shared_ptr<ocl::Evaluations::OclExpEval> IfExpEvalImpl::getCondition() const
 {
-//assert(m_condition);
     return m_condition;
 }
 void IfExpEvalImpl::setCondition(std::shared_ptr<ocl::Evaluations::OclExpEval> _condition)
@@ -146,7 +145,6 @@ Getter & Setter for reference elseExpression
 */
 std::shared_ptr<ocl::Evaluations::OclExpEval> IfExpEvalImpl::getElseExpression() const
 {
-//assert(m_elseExpression);
     return m_elseExpression;
 }
 void IfExpEvalImpl::setElseExpression(std::shared_ptr<ocl::Evaluations::OclExpEval> _elseExpression)
@@ -161,7 +159,6 @@ Getter & Setter for reference thenExpression
 */
 std::shared_ptr<ocl::Evaluations::OclExpEval> IfExpEvalImpl::getThenExpression() const
 {
-//assert(m_thenExpression);
     return m_thenExpression;
 }
 void IfExpEvalImpl::setThenExpression(std::shared_ptr<ocl::Evaluations::OclExpEval> _thenExpression)

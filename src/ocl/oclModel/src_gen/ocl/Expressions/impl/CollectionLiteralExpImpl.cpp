@@ -185,21 +185,17 @@ CollectionLiteralExpImpl& CollectionLiteralExpImpl::operator=(const CollectionLi
 
 	//copy references with no containment (soft copy)
 	//Clone references with containment (deep copy)
-	std::shared_ptr<Bag<ocl::Expressions::CollectionLiteralPart>> partContainer = getPart();
-	if(nullptr != partContainer )
+	//clone reference 'part'
+	std::shared_ptr<Bag<ocl::Expressions::CollectionLiteralPart>> partList = obj.getPart();
+	if(partList)
 	{
-		int size = partContainer->size();
-		for(int i=0; i<size ; i++)
+		Bag<ocl::Expressions::CollectionLiteralPart>::iterator partIter = partList->begin();
+		Bag<ocl::Expressions::CollectionLiteralPart>::iterator partEnd = partList->end();
+		while (partIter != partEnd) 
 		{
-			auto _part=(*partContainer)[i];
-			if(nullptr != _part)
-			{
-				partContainer->push_back(std::dynamic_pointer_cast<ocl::Expressions::CollectionLiteralPart>(_part->copy()));
-			}
-			else
-			{
-				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container part."<< std::endl;)
-			}
+			std::shared_ptr<ocl::Expressions::CollectionLiteralPart> temp = std::dynamic_pointer_cast<ocl::Expressions::CollectionLiteralPart>((*partIter)->copy());
+			getPart()->push_back(temp);
+			partIter++;
 		}
 	}
 	else
@@ -258,7 +254,6 @@ std::shared_ptr<Bag<ocl::Expressions::CollectionLiteralPart>> CollectionLiteralE
 		
 		
 	}
-
     return m_part;
 }
 

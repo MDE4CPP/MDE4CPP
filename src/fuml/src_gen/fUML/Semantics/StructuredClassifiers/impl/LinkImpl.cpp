@@ -252,7 +252,6 @@ Getter & Setter for reference type
 */
 std::shared_ptr<uml::Association> LinkImpl::getType() const
 {
-
     return m_type;
 }
 void LinkImpl::setType(std::shared_ptr<uml::Association> _type)

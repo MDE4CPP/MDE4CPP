@@ -146,7 +146,7 @@ namespace fUML::Semantics::Activities
 			//*********************************
 			// Attribute Members
 			//*********************************
-			 
+			
 			bool m_running = false;
 			
 			

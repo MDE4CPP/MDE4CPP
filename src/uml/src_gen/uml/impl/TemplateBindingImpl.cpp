@@ -104,33 +104,31 @@ TemplateBindingImpl& TemplateBindingImpl::operator=(const TemplateBindingImpl & 
 	//copy references with no containment (soft copy)
 	m_boundElement  = obj.getBoundElement();
 	//Clone references with containment (deep copy)
-	std::shared_ptr<Subset<uml::TemplateParameterSubstitution, uml::Element>> parameterSubstitutionContainer = getParameterSubstitution();
-	if(nullptr != parameterSubstitutionContainer )
+	//clone reference 'parameterSubstitution'
+	std::shared_ptr<Subset<uml::TemplateParameterSubstitution, uml::Element>> parameterSubstitutionList = obj.getParameterSubstitution();
+	if(parameterSubstitutionList)
 	{
-		int size = parameterSubstitutionContainer->size();
-		for(int i=0; i<size ; i++)
+		Bag<uml::TemplateParameterSubstitution>::iterator parameterSubstitutionIter = parameterSubstitutionList->begin();
+		Bag<uml::TemplateParameterSubstitution>::iterator parameterSubstitutionEnd = parameterSubstitutionList->end();
+		while (parameterSubstitutionIter != parameterSubstitutionEnd) 
 		{
-			auto _parameterSubstitution=(*parameterSubstitutionContainer)[i];
-			if(nullptr != _parameterSubstitution)
-			{
-				parameterSubstitutionContainer->push_back(std::dynamic_pointer_cast<uml::TemplateParameterSubstitution>(_parameterSubstitution->copy()));
-			}
-			else
-			{
-				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container parameterSubstitution."<< std::endl;)
-			}
+			std::shared_ptr<uml::TemplateParameterSubstitution> temp = std::dynamic_pointer_cast<uml::TemplateParameterSubstitution>((*parameterSubstitutionIter)->copy());
+			getParameterSubstitution()->push_back(temp);
+			parameterSubstitutionIter++;
 		}
 	}
 	else
 	{
 		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr parameterSubstitution."<< std::endl;)
 	}
+
+	//clone reference 'signature'
 	if(obj.getSignature()!=nullptr)
 	{
 		m_signature = std::dynamic_pointer_cast<uml::TemplateSignature>(obj.getSignature()->copy());
 	}
 	/*Subset*/
-	m_parameterSubstitution->initSubset(getOwnedElement());
+	getParameterSubstitution()->initSubset(getOwnedElement());
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Initialising value Subset: " << "m_parameterSubstitution - Subset<uml::TemplateParameterSubstitution, uml::Element >(getOwnedElement())" << std::endl;
 	#endif
@@ -178,16 +176,11 @@ Getter & Setter for reference boundElement
 */
 std::weak_ptr<uml::TemplateableElement> TemplateBindingImpl::getBoundElement() const
 {
-//assert(m_boundElement);
     return m_boundElement;
 }
 void TemplateBindingImpl::setBoundElement(std::weak_ptr<uml::TemplateableElement> _boundElement)
 {
     m_boundElement = _boundElement;
-	
-	
-	m_owner = this->getBoundElement().lock();
-	
 	
 }
 
@@ -206,13 +199,12 @@ std::shared_ptr<Subset<uml::TemplateParameterSubstitution, uml::Element>> Templa
 		#endif
 		
 		/*Subset*/
-		m_parameterSubstitution->initSubset(getOwnedElement());
+		getParameterSubstitution()->initSubset(getOwnedElement());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value Subset: " << "m_parameterSubstitution - Subset<uml::TemplateParameterSubstitution, uml::Element >(getOwnedElement())" << std::endl;
 		#endif
 		
 	}
-
     return m_parameterSubstitution;
 }
 
@@ -223,14 +215,11 @@ Getter & Setter for reference signature
 */
 std::shared_ptr<uml::TemplateSignature> TemplateBindingImpl::getSignature() const
 {
-//assert(m_signature);
     return m_signature;
 }
 void TemplateBindingImpl::setSignature(std::shared_ptr<uml::TemplateSignature> _signature)
 {
     m_signature = _signature;
-	
-	
 	
 }
 
@@ -284,7 +273,7 @@ std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> TemplateBindingImpl::ge
 		#endif
 		
 		/*SubsetUnion*/
-		m_source->initSubsetUnion(getRelatedElement());
+		getSource()->initSubsetUnion(getRelatedElement());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value SubsetUnion: " << "m_source - SubsetUnion<uml::Element, uml::Element >(getRelatedElement())" << std::endl;
 		#endif
@@ -304,7 +293,7 @@ std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> TemplateBindingImpl::ge
 		#endif
 		
 		/*SubsetUnion*/
-		m_target->initSubsetUnion(getRelatedElement());
+		getTarget()->initSubsetUnion(getRelatedElement());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value SubsetUnion: " << "m_target - SubsetUnion<uml::Element, uml::Element >(getRelatedElement())" << std::endl;
 		#endif

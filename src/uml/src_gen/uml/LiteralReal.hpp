@@ -123,7 +123,7 @@ namespace uml
 			The specified Real value.
 			<p>From package UML::Values.</p>
 			*/
-			 
+			
 			double m_value = 0;
 			
 			

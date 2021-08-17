@@ -101,21 +101,17 @@ EEnumImpl& EEnumImpl::operator=(const EEnumImpl & obj)
 
 	//copy references with no containment (soft copy)
 	//Clone references with containment (deep copy)
-	std::shared_ptr<Subset<ecore::EEnumLiteral, ecore::EObject>> eLiteralsContainer = getELiterals();
-	if(nullptr != eLiteralsContainer )
+	//clone reference 'eLiterals'
+	std::shared_ptr<Subset<ecore::EEnumLiteral, ecore::EObject>> eLiteralsList = obj.getELiterals();
+	if(eLiteralsList)
 	{
-		int size = eLiteralsContainer->size();
-		for(int i=0; i<size ; i++)
+		Bag<ecore::EEnumLiteral>::iterator eLiteralsIter = eLiteralsList->begin();
+		Bag<ecore::EEnumLiteral>::iterator eLiteralsEnd = eLiteralsList->end();
+		while (eLiteralsIter != eLiteralsEnd) 
 		{
-			auto _eLiterals=(*eLiteralsContainer)[i];
-			if(nullptr != _eLiterals)
-			{
-				eLiteralsContainer->push_back(std::dynamic_pointer_cast<ecore::EEnumLiteral>(_eLiterals->copy()));
-			}
-			else
-			{
-				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container eLiterals."<< std::endl;)
-			}
+			std::shared_ptr<ecore::EEnumLiteral> temp = std::dynamic_pointer_cast<ecore::EEnumLiteral>((*eLiteralsIter)->copy());
+			getELiterals()->push_back(temp);
+			eLiteralsIter++;
 		}
 	}
 	else
@@ -123,7 +119,7 @@ EEnumImpl& EEnumImpl::operator=(const EEnumImpl & obj)
 		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr eLiterals."<< std::endl;)
 	}
 	/*Subset*/
-	m_eLiterals->initSubset(getEContens());
+	getELiterals()->initSubset(getEContens());
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Initialising value Subset: " << "m_eLiterals - Subset<ecore::EEnumLiteral, ecore::EObject >(getEContens())" << std::endl;
 	#endif
@@ -214,13 +210,12 @@ std::shared_ptr<Subset<ecore::EEnumLiteral, ecore::EObject>> EEnumImpl::getELite
 		#endif
 		
 		/*Subset*/
-		m_eLiterals->initSubset(getEContens());
+		getELiterals()->initSubset(getEContens());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value Subset: " << "m_eLiterals - Subset<ecore::EEnumLiteral, ecore::EObject >(getEContens())" << std::endl;
 		#endif
 		
 	}
-
     return m_eLiterals;
 }
 

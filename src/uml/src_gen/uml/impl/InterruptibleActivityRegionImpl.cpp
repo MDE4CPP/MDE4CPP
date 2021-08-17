@@ -121,24 +121,19 @@ InterruptibleActivityRegionImpl& InterruptibleActivityRegionImpl::operator=(cons
 	//Clone Attributes with (deep copy)
 
 	//copy references with no containment (soft copy)
-	std::shared_ptr<Bag<uml::ActivityEdge>> _interruptingEdge = obj.getInterruptingEdge();
-	m_interruptingEdge.reset(new Bag<uml::ActivityEdge>(*(obj.getInterruptingEdge().get())));
+	m_interruptingEdge  = obj.getInterruptingEdge();
 	//Clone references with containment (deep copy)
-	std::shared_ptr<Subset<uml::ActivityNode, uml::ActivityNode>> nodeContainer = getNode();
-	if(nullptr != nodeContainer )
+	//clone reference 'node'
+	std::shared_ptr<Subset<uml::ActivityNode, uml::ActivityNode>> nodeList = obj.getNode();
+	if(nodeList)
 	{
-		int size = nodeContainer->size();
-		for(int i=0; i<size ; i++)
+		Bag<uml::ActivityNode>::iterator nodeIter = nodeList->begin();
+		Bag<uml::ActivityNode>::iterator nodeEnd = nodeList->end();
+		while (nodeIter != nodeEnd) 
 		{
-			auto _node=(*nodeContainer)[i];
-			if(nullptr != _node)
-			{
-				nodeContainer->push_back(std::dynamic_pointer_cast<uml::ActivityNode>(_node->copy()));
-			}
-			else
-			{
-				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container node."<< std::endl;)
-			}
+			std::shared_ptr<uml::ActivityNode> temp = std::dynamic_pointer_cast<uml::ActivityNode>((*nodeIter)->copy());
+			getNode()->push_back(temp);
+			nodeIter++;
 		}
 	}
 	else
@@ -188,7 +183,6 @@ std::shared_ptr<Bag<uml::ActivityEdge>> InterruptibleActivityRegionImpl::getInte
 		
 		
 	}
-
     return m_interruptingEdge;
 }
 
@@ -208,13 +202,12 @@ std::shared_ptr<Subset<uml::ActivityNode, uml::ActivityNode>> InterruptibleActiv
 		#endif
 		
 		/*Subset*/
-		m_node->initSubset(getContainedNode());
+		getNode()->initSubset(getContainedNode());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value Subset: " << "m_node - Subset<uml::ActivityNode, uml::ActivityNode >(getContainedNode())" << std::endl;
 		#endif
 		
 	}
-
     return m_node;
 }
 

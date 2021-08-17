@@ -183,25 +183,23 @@ LoopExpImpl& LoopExpImpl::operator=(const LoopExpImpl & obj)
 
 	//copy references with no containment (soft copy)
 	//Clone references with containment (deep copy)
+	//clone reference 'body'
 	if(obj.getBody()!=nullptr)
 	{
 		m_body = std::dynamic_pointer_cast<ocl::Expressions::OclExpression>(obj.getBody()->copy());
 	}
-	std::shared_ptr<Bag<ocl::Expressions::Variable>> iteratorContainer = getIterator();
-	if(nullptr != iteratorContainer )
+
+	//clone reference 'iterator'
+	std::shared_ptr<Bag<ocl::Expressions::Variable>> iteratorList = obj.getIterator();
+	if(iteratorList)
 	{
-		int size = iteratorContainer->size();
-		for(int i=0; i<size ; i++)
+		Bag<ocl::Expressions::Variable>::iterator iteratorIter = iteratorList->begin();
+		Bag<ocl::Expressions::Variable>::iterator iteratorEnd = iteratorList->end();
+		while (iteratorIter != iteratorEnd) 
 		{
-			auto _iterator=(*iteratorContainer)[i];
-			if(nullptr != _iterator)
-			{
-				iteratorContainer->push_back(std::dynamic_pointer_cast<ocl::Expressions::Variable>(_iterator->copy()));
-			}
-			else
-			{
-				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container iterator."<< std::endl;)
-			}
+			std::shared_ptr<ocl::Expressions::Variable> temp = std::dynamic_pointer_cast<ocl::Expressions::Variable>((*iteratorIter)->copy());
+			getIterator()->push_back(temp);
+			iteratorIter++;
 		}
 	}
 	else
@@ -242,7 +240,6 @@ Getter & Setter for reference body
 */
 std::shared_ptr<ocl::Expressions::OclExpression> LoopExpImpl::getBody() const
 {
-//assert(m_body);
     return m_body;
 }
 void LoopExpImpl::setBody(std::shared_ptr<ocl::Expressions::OclExpression> _body)
@@ -263,7 +260,6 @@ std::shared_ptr<Bag<ocl::Expressions::Variable>> LoopExpImpl::getIterator() cons
 		
 		
 	}
-
     return m_iterator;
 }
 

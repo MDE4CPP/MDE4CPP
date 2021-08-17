@@ -35,6 +35,8 @@ namespace fUML::Semantics::Activities
 			virtual std::shared_ptr<ForkedToken> getThisForkedTokenPtr() const;
 			virtual void setThisForkedTokenPtr(std::weak_ptr<ForkedToken> thisForkedTokenPtr);
 
+			//Additional constructors for the containments back reference
+			ForkedTokenImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivation> par_holder);
 
 		public:
 			//destructor

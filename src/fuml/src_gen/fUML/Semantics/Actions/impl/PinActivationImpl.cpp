@@ -198,7 +198,6 @@ Getter & Setter for reference actionActivation
 */
 std::weak_ptr<fUML::Semantics::Actions::ActionActivation> PinActivationImpl::getActionActivation() const
 {
-
     return m_actionActivation;
 }
 void PinActivationImpl::setActionActivation(std::weak_ptr<fUML::Semantics::Actions::ActionActivation> _actionActivation)
@@ -213,7 +212,6 @@ Getter & Setter for reference pin
 */
 std::shared_ptr<uml::Pin> PinActivationImpl::getPin() const
 {
-//assert(m_pin);
     return m_pin;
 }
 void PinActivationImpl::setPin(std::shared_ptr<uml::Pin> _pin)

@@ -90,7 +90,7 @@ namespace ocl::Types
 			//*********************************
 			// Attribute Members
 			//*********************************
-			 
+			
 			std::string m_name = "";
 			
 			

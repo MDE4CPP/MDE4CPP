@@ -128,60 +128,55 @@ InteractionUseImpl& InteractionUseImpl::operator=(const InteractionUseImpl & obj
 	m_refersTo  = obj.getRefersTo();
 	m_returnValueRecipient  = obj.getReturnValueRecipient();
 	//Clone references with containment (deep copy)
-	std::shared_ptr<Subset<uml::Gate, uml::Element>> actualGateContainer = getActualGate();
-	if(nullptr != actualGateContainer )
+	//clone reference 'actualGate'
+	std::shared_ptr<Subset<uml::Gate, uml::Element>> actualGateList = obj.getActualGate();
+	if(actualGateList)
 	{
-		int size = actualGateContainer->size();
-		for(int i=0; i<size ; i++)
+		Bag<uml::Gate>::iterator actualGateIter = actualGateList->begin();
+		Bag<uml::Gate>::iterator actualGateEnd = actualGateList->end();
+		while (actualGateIter != actualGateEnd) 
 		{
-			auto _actualGate=(*actualGateContainer)[i];
-			if(nullptr != _actualGate)
-			{
-				actualGateContainer->push_back(std::dynamic_pointer_cast<uml::Gate>(_actualGate->copy()));
-			}
-			else
-			{
-				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container actualGate."<< std::endl;)
-			}
+			std::shared_ptr<uml::Gate> temp = std::dynamic_pointer_cast<uml::Gate>((*actualGateIter)->copy());
+			getActualGate()->push_back(temp);
+			actualGateIter++;
 		}
 	}
 	else
 	{
 		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr actualGate."<< std::endl;)
 	}
-	std::shared_ptr<Subset<uml::ValueSpecification, uml::Element>> argumentContainer = getArgument();
-	if(nullptr != argumentContainer )
+
+	//clone reference 'argument'
+	std::shared_ptr<Subset<uml::ValueSpecification, uml::Element>> argumentList = obj.getArgument();
+	if(argumentList)
 	{
-		int size = argumentContainer->size();
-		for(int i=0; i<size ; i++)
+		Bag<uml::ValueSpecification>::iterator argumentIter = argumentList->begin();
+		Bag<uml::ValueSpecification>::iterator argumentEnd = argumentList->end();
+		while (argumentIter != argumentEnd) 
 		{
-			auto _argument=(*argumentContainer)[i];
-			if(nullptr != _argument)
-			{
-				argumentContainer->push_back(std::dynamic_pointer_cast<uml::ValueSpecification>(_argument->copy()));
-			}
-			else
-			{
-				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container argument."<< std::endl;)
-			}
+			std::shared_ptr<uml::ValueSpecification> temp = std::dynamic_pointer_cast<uml::ValueSpecification>((*argumentIter)->copy());
+			getArgument()->push_back(temp);
+			argumentIter++;
 		}
 	}
 	else
 	{
 		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr argument."<< std::endl;)
 	}
+
+	//clone reference 'returnValue'
 	if(obj.getReturnValue()!=nullptr)
 	{
 		m_returnValue = std::dynamic_pointer_cast<uml::ValueSpecification>(obj.getReturnValue()->copy());
 	}
 	/*Subset*/
-	m_actualGate->initSubset(getOwnedElement());
+	getActualGate()->initSubset(getOwnedElement());
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Initialising value Subset: " << "m_actualGate - Subset<uml::Gate, uml::Element >(getOwnedElement())" << std::endl;
 	#endif
 	
 	/*Subset*/
-	m_argument->initSubset(getOwnedElement());
+	getArgument()->initSubset(getOwnedElement());
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Initialising value Subset: " << "m_argument - Subset<uml::ValueSpecification, uml::Element >(getOwnedElement())" << std::endl;
 	#endif
@@ -263,13 +258,12 @@ std::shared_ptr<Subset<uml::Gate, uml::Element>> InteractionUseImpl::getActualGa
 		#endif
 		
 		/*Subset*/
-		m_actualGate->initSubset(getOwnedElement());
+		getActualGate()->initSubset(getOwnedElement());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value Subset: " << "m_actualGate - Subset<uml::Gate, uml::Element >(getOwnedElement())" << std::endl;
 		#endif
 		
 	}
-
     return m_actualGate;
 }
 
@@ -289,13 +283,12 @@ std::shared_ptr<Subset<uml::ValueSpecification, uml::Element>> InteractionUseImp
 		#endif
 		
 		/*Subset*/
-		m_argument->initSubset(getOwnedElement());
+		getArgument()->initSubset(getOwnedElement());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value Subset: " << "m_argument - Subset<uml::ValueSpecification, uml::Element >(getOwnedElement())" << std::endl;
 		#endif
 		
 	}
-
     return m_argument;
 }
 
@@ -306,7 +299,6 @@ Getter & Setter for reference refersTo
 */
 std::shared_ptr<uml::Interaction> InteractionUseImpl::getRefersTo() const
 {
-//assert(m_refersTo);
     return m_refersTo;
 }
 void InteractionUseImpl::setRefersTo(std::shared_ptr<uml::Interaction> _refersTo)
@@ -321,13 +313,11 @@ Getter & Setter for reference returnValue
 */
 std::shared_ptr<uml::ValueSpecification> InteractionUseImpl::getReturnValue() const
 {
-
     return m_returnValue;
 }
 void InteractionUseImpl::setReturnValue(std::shared_ptr<uml::ValueSpecification> _returnValue)
 {
     m_returnValue = _returnValue;
-	
 	
 }
 
@@ -337,7 +327,6 @@ Getter & Setter for reference returnValueRecipient
 */
 std::shared_ptr<uml::Property> InteractionUseImpl::getReturnValueRecipient() const
 {
-
     return m_returnValueRecipient;
 }
 void InteractionUseImpl::setReturnValueRecipient(std::shared_ptr<uml::Property> _returnValueRecipient)

@@ -114,6 +114,7 @@ IncludeImpl& IncludeImpl::operator=(const IncludeImpl & obj)
 	//copy references with no containment (soft copy)
 	m_includingCase  = obj.getIncludingCase();
 	//Clone references with containment (deep copy)
+	//clone reference 'addition'
 	if(obj.getAddition()!=nullptr)
 	{
 		m_addition = std::dynamic_pointer_cast<uml::UseCase>(obj.getAddition()->copy());
@@ -150,14 +151,11 @@ Getter & Setter for reference addition
 */
 std::shared_ptr<uml::UseCase> IncludeImpl::getAddition() const
 {
-//assert(m_addition);
     return m_addition;
 }
 void IncludeImpl::setAddition(std::shared_ptr<uml::UseCase> _addition)
 {
     m_addition = _addition;
-	
-	
 	
 }
 
@@ -167,18 +165,11 @@ Getter & Setter for reference includingCase
 */
 std::weak_ptr<uml::UseCase> IncludeImpl::getIncludingCase() const
 {
-//assert(m_includingCase);
     return m_includingCase;
 }
 void IncludeImpl::setIncludingCase(std::weak_ptr<uml::UseCase> _includingCase)
 {
     m_includingCase = _includingCase;
-	
-	
-	m_namespace = this->getIncludingCase().lock();
-	m_owner = this->getNamespace().lock();
-	
-	
 	
 }
 
@@ -237,7 +228,7 @@ std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> IncludeImpl::getSource(
 		#endif
 		
 		/*SubsetUnion*/
-		m_source->initSubsetUnion(getRelatedElement());
+		getSource()->initSubsetUnion(getRelatedElement());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value SubsetUnion: " << "m_source - SubsetUnion<uml::Element, uml::Element >(getRelatedElement())" << std::endl;
 		#endif
@@ -257,7 +248,7 @@ std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> IncludeImpl::getTarget(
 		#endif
 		
 		/*SubsetUnion*/
-		m_target->initSubsetUnion(getRelatedElement());
+		getTarget()->initSubsetUnion(getRelatedElement());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value SubsetUnion: " << "m_target - SubsetUnion<uml::Element, uml::Element >(getRelatedElement())" << std::endl;
 		#endif

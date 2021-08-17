@@ -114,8 +114,7 @@ ConnectableElementImpl& ConnectableElementImpl::operator=(const ConnectableEleme
 	//Clone Attributes with (deep copy)
 
 	//copy references with no containment (soft copy)
-	std::shared_ptr<Bag<uml::ConnectorEnd>> _end = obj.getEnd();
-	m_end.reset(new Bag<uml::ConnectorEnd>(*(obj.getEnd().get())));
+	m_end  = obj.getEnd();
 	//Clone references with containment (deep copy)
 	return *this;
 }
@@ -160,7 +159,6 @@ std::shared_ptr<Bag<uml::ConnectorEnd>> ConnectableElementImpl::getEnd() const
 		
 		
 	}
-
     return m_end;
 }
 

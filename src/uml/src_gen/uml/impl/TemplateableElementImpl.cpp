@@ -93,25 +93,23 @@ TemplateableElementImpl& TemplateableElementImpl::operator=(const TemplateableEl
 
 	//copy references with no containment (soft copy)
 	//Clone references with containment (deep copy)
+	//clone reference 'ownedTemplateSignature'
 	if(obj.getOwnedTemplateSignature()!=nullptr)
 	{
 		m_ownedTemplateSignature = std::dynamic_pointer_cast<uml::TemplateSignature>(obj.getOwnedTemplateSignature()->copy());
 	}
-	std::shared_ptr<Subset<uml::TemplateBinding, uml::Element>> templateBindingContainer = getTemplateBinding();
-	if(nullptr != templateBindingContainer )
+
+	//clone reference 'templateBinding'
+	std::shared_ptr<Subset<uml::TemplateBinding, uml::Element>> templateBindingList = obj.getTemplateBinding();
+	if(templateBindingList)
 	{
-		int size = templateBindingContainer->size();
-		for(int i=0; i<size ; i++)
+		Bag<uml::TemplateBinding>::iterator templateBindingIter = templateBindingList->begin();
+		Bag<uml::TemplateBinding>::iterator templateBindingEnd = templateBindingList->end();
+		while (templateBindingIter != templateBindingEnd) 
 		{
-			auto _templateBinding=(*templateBindingContainer)[i];
-			if(nullptr != _templateBinding)
-			{
-				templateBindingContainer->push_back(std::dynamic_pointer_cast<uml::TemplateBinding>(_templateBinding->copy()));
-			}
-			else
-			{
-				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container templateBinding."<< std::endl;)
-			}
+			std::shared_ptr<uml::TemplateBinding> temp = std::dynamic_pointer_cast<uml::TemplateBinding>((*templateBindingIter)->copy());
+			getTemplateBinding()->push_back(temp);
+			templateBindingIter++;
 		}
 	}
 	else
@@ -120,7 +118,7 @@ TemplateableElementImpl& TemplateableElementImpl::operator=(const TemplateableEl
 	}
 	
 	/*Subset*/
-	m_templateBinding->initSubset(getOwnedElement());
+	getTemplateBinding()->initSubset(getOwnedElement());
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Initialising value Subset: " << "m_templateBinding - Subset<uml::TemplateBinding, uml::Element >(getOwnedElement())" << std::endl;
 	#endif
@@ -168,13 +166,11 @@ Getter & Setter for reference ownedTemplateSignature
 */
 std::shared_ptr<uml::TemplateSignature> TemplateableElementImpl::getOwnedTemplateSignature() const
 {
-
     return m_ownedTemplateSignature;
 }
 void TemplateableElementImpl::setOwnedTemplateSignature(std::shared_ptr<uml::TemplateSignature> _ownedTemplateSignature)
 {
     m_ownedTemplateSignature = _ownedTemplateSignature;
-	
 	
 }
 
@@ -193,13 +189,12 @@ std::shared_ptr<Subset<uml::TemplateBinding, uml::Element>> TemplateableElementI
 		#endif
 		
 		/*Subset*/
-		m_templateBinding->initSubset(getOwnedElement());
+		getTemplateBinding()->initSubset(getOwnedElement());
 		#ifdef SHOW_SUBSET_UNION
 			std::cout << "Initialising value Subset: " << "m_templateBinding - Subset<uml::TemplateBinding, uml::Element >(getOwnedElement())" << std::endl;
 		#endif
 		
 	}
-
     return m_templateBinding;
 }
 
