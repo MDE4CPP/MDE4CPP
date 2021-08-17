@@ -28,7 +28,7 @@
  * generate creation of meta model instance for an InterfaceRealization element
 */]
 [template public generateInterfaceRealizationCreation(anInterfaceRealization : InterfaceRealization)]
-[memberName(anInterfaceRealization)/] = factory->createInterfaceRealization_in_ImplementingClassifier([anInterfaceRealization.owner.oclAsType(NamedElement).memberName()/]);
+[memberName(anInterfaceRealization)/] = factory->createInterfaceRealization_as_interfaceRealization_in_BehavioredClassifier([anInterfaceRealization.owner.oclAsType(NamedElement).memberName()/]);
 [if (not (anInterfaceRealization.owner = anInterfaceRealization.ancestors(Package)->first()))]
 [anInterfaceRealization.ancestors(Package)->first().memberName()/]->getPackagedElement()->push_back([memberName(anInterfaceRealization)/]);
 [/if]

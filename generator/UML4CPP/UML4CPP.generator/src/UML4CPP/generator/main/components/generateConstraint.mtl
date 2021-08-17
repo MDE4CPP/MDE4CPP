@@ -32,12 +32,12 @@
  * - create and initialize OpaqueExpression instance
 */]
 [template public generateConstraintCreation(aConstraint : Constraint)]
-con = factory->createConstraint_in_Context([aConstraint.owner.oclAsType(Class).memberName()/]);
+con = factory->createConstraint_as_ownedRule_in_Namespace([aConstraint.owner.oclAsType(Class).memberName()/]);
 con->setName("[aConstraint.name/]");
 [for (elem : NamedElement | aConstraint.constrainedElement->filter(NamedElement)->asOrderedSet()->sortedBy(myQualifiedName())) separator ('\n')]
 con->getConstrainedElement()->push_back([elem.memberName()/]);[/for]
 
-oe = std::shared_ptr<uml::OpaqueExpression>(uml::umlFactory::eInstance()->createOpaqueExpression_in_Owner([memberName(aConstraint.owner.oclAsType(Class))/]));
+oe = std::shared_ptr<uml::OpaqueExpression>(uml::umlFactory::eInstance()->createOpaqueExpression_as_ownedElement_in_Element([memberName(aConstraint.owner.oclAsType(Class))/]));
 [for (it : String | aConstraint.specification.oclAsType(OpaqueExpression).language) separator ('\n')]
 oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("[it/]")));
 [/for]

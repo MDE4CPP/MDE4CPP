@@ -117,9 +117,9 @@ virtual [aOperation.generateCppType()/] [aOperation.name/]([for (sParameter : Pa
 */]
 [template public generateOperationCreation(aOperation : Operation) post(trim())]
 [if (not aOperation.class.oclIsUndefined())]
-[memberName(aOperation)/] = factory->createOperation_in_Class([memberName(aOperation.class)/]);
+[memberName(aOperation)/] = factory->createOperation_as_ownedOperation_in_Class([memberName(aOperation.class)/]);
 [elseif (not aOperation.interface.oclIsUndefined())]
-[memberName(aOperation)/] = factory->createOperation_in_Interface([memberName(aOperation.interface)/]);
+[memberName(aOperation)/] = factory->createOperation_as_ownedOperation_in_Interface([memberName(aOperation.interface)/]);
 [/if]
 [aOperation.ownedParameter.generateParameterCreation()/]
 [/template]

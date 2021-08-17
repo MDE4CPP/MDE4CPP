@@ -27,9 +27,9 @@
 */]
 [template public generateDependencyCreation(aDependency : Dependency)]
 [if(aDependency.oclIsTypeOf(Usage))]
-[aDependency.memberName()/] = factory->createUsage_in_Namespace([aDependency.namespace.memberName()/]);
+[aDependency.memberName()/] = factory->createUsage_as_ownedMember_in_Namespace([aDependency.namespace.memberName()/]);
 [else]
-[aDependency.memberName()/] = factory->createDependency_in_Namespace([aDependency.namespace.memberName()/]);
+[aDependency.memberName()/] = factory->createDependency_as_ownedMember_in_Namespace([aDependency.namespace.memberName()/]);
 [/if]
 [/template]
 

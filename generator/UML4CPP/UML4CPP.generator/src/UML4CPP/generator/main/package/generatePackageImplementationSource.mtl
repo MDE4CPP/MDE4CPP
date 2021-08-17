@@ -236,7 +236,7 @@ void [packageName/]::createPackageClasses(std::shared_ptr<uml::Package> [aPackag
 	[/for]
 	[for (aConnector : Connector | aClass.ownedConnector->sortedBy(name)) before ('    // '.concat(aClass.name).concat(' connectors\n'))]
 	//[aConnector.name/]
-	[aConnector.memberName()/] = factory->createConnector_in_StructuredClassifier([aClass.memberName()/]);
+	[aConnector.memberName()/] = factory->createConnector_as_ownedConnector_in_StructuredClassifier([aClass.memberName()/]);
 	[aConnector.generateConnectorCreation()/]
 	[/for]
 	[for (anOperation : Operation | aClass.ownedOperation->sortedBy(name)) before ('    // '.concat(aClass.name).concat(' operations\n')) separator('\n')]
@@ -263,7 +263,7 @@ void [packageName/]::createPackageAssociations(std::shared_ptr<uml::Package> [aP
 {
 [for (anAssociation : Association | aPackage.ownedMember->filter(Association)->reject(oclIsTypeOf(AssociationClass))->reject(oclIsTypeOf(Extension))->reject(oclIsTypeOf(CommunicationPath))->asOrderedSet()->sortedBy(myQualifiedName())) separator ('\n    //-------------------------------------------\n')]
 	//[anAssociation.name/]
-	[anAssociation.memberName()/] = factory->createAssociation_in_Package([aPackage.memberName()/]);
+	[anAssociation.memberName()/] = factory->createAssociation_as_ownedType_in_Package([aPackage.memberName()/]);
 [/for]
 }
 

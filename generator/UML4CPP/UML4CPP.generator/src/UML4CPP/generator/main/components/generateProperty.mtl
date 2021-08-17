@@ -185,16 +185,12 @@ void [aClass.name.toUpperFirst()/]Impl::set[compositeOwnerClass.name.toUpperFirs
 [template public generateAttributeCreation(aProperty : Property) post(trim())]
 [if (not aProperty.class.oclIsUndefined())]
 	[if (aProperty.oclIsTypeOf(Property))]
-	[aProperty.memberName()/] = factory->createProperty_in_Class([aProperty.class.memberName()/]);
+	[aProperty.memberName()/] = factory->createProperty_as_ownedAttribute_in_Class([aProperty.class.memberName()/]);
 	[elseif (aProperty.oclIsTypeOf(Port))]
-	[aProperty.memberName()/] = factory->createPort_in_Class([aProperty.class.memberName()/]);
+	[aProperty.memberName()/] = factory->createPort_as_ownedPort_in_EncapsulatedClassifier([aProperty.class.memberName()/]);
 	[/if]
 [else][if (not aProperty.interface.oclIsUndefined())]
-	[if (aProperty.oclIsTypeOf(Property))]
-	[aProperty.memberName()/] = factory->createProperty_in_Interface([aProperty.interface.memberName()/]);
-	[elseif (aProperty.oclIsTypeOf(Port))]
-	[aProperty.memberName()/] = factory->createPort_in_Interface([aProperty.interface.memberName()/]);
-	[/if]
+	[aProperty.memberName()/] = factory->createProperty_as_ownedAttribute_in_Interface([aProperty.interface.memberName()/]);
 [/if][/if]
 [/template]
 

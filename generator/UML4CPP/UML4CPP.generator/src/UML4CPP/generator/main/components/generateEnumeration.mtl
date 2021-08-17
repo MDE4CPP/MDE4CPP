@@ -26,11 +26,11 @@
  * generate creation and initialization of meta model instance for an Enumeration element and its Literal elements
 */]
 [template public generateEnumerationCreation(anEnum : Enumeration)]
-[anEnum.memberName()/] = factory->createEnumeration_in_Namespace([anEnum.owner.oclAsType(Namespace).memberName()/]); // TODO Package, Owner
+[anEnum.memberName()/] = factory->createEnumeration_as_ownedMember_in_Namespace([anEnum.owner.oclAsType(Namespace).memberName()/]); // TODO Package, Owner
 [anEnum.memberName()/]->setName("[anEnum.name/]");
 
 [for (lit : EnumerationLiteral | anEnum.ownedLiteral->asOrderedSet()->sortedBy(myQualifiedName())) ]
-[lit.memberName()/] = factory->createEnumerationLiteral_in_Enumeration([anEnum.memberName()/]);
+[lit.memberName()/] = factory->createEnumerationLiteral_as_ownedLiteral_in_Enumeration([anEnum.memberName()/]);
 [lit.memberName()/]->setName("[lit.name/]");
 [lit.memberName()/]->getClassifier()->push_back([anEnum.memberName()/]);
 [/for]

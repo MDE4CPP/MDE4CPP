@@ -26,7 +26,7 @@
 [import UML4CPP::generator::main::helpers::nameHelper /]
 [import UML4CPP::generator::main::validation::validateModel /]
 
-[query private getOwnerPropertyName(anActivityNode : ActivityNode) : String = if (anActivityNode.owner.oclIsKindOf(Activity)) then 'Activity' else 'InStructuredNode' endif /]
+[query private getOwnerPropertyName(anActivityNode : ActivityNode) : String = if (anActivityNode.owner.oclIsKindOf(Activity)) then 'Activity' else 'StructuredActivityNode' endif /]
 
 [**
  * generate creation of meta model instance for an ActivtiyNode or derived element
@@ -37,7 +37,7 @@
 */]
 [template public generateActivityNodeCreation(anActivityNode : ActivityNode)]
 //ActivityNode [anActivityNode.name /] ([anActivityNode.eClass().name/])
-[anActivityNode.memberName()/] = factory->create[anActivityNode.eClass().name/]_in_[anActivityNode.getOwnerPropertyName()/]([anActivityNode.owner.oclAsType(NamedElement).memberName()/]);
+[anActivityNode.memberName()/] = factory->create[anActivityNode.eClass().name/]_as_node_in_[anActivityNode.getOwnerPropertyName()/]([anActivityNode.owner.oclAsType(NamedElement).memberName()/]);
 [anActivityNode.generateActivityNodeSpecial()/]
 
 [/template]
@@ -50,23 +50,23 @@
 [if (action.object.oclIsUndefined())]
 ['UML4CPP_Generation Error: AddStructuralFeatureValueAction: '.concat(action.name).concat('object pin is undefined.').registerError()/]
 [else]
-	[action.object.memberName()/] = factory->create[action.object.eClass().name/]_in_StructuralFeatureAction([action.object.owner.oclAsType(NamedElement).memberName()/]);
+	[action.object.memberName()/] = factory->create[action.object.eClass().name/]_as_object_in_StructuralFeatureAction([action.object.owner.oclAsType(NamedElement).memberName()/]);
 	[action.memberName()/]->getInput()->push_back([action.object.memberName()/]); // subset/union in not implemented for upper=1
 [/if]
 [if (action.value.oclIsUndefined())]
 ['UML4CPP_Generation Error: AddStructuralFeatureValueAction: '.concat(action.name).concat('value pin is undefined.').registerError()/]
 [else]
-	[action.value.memberName()/] = factory->create[action.value.eClass().name/]_in_WriteStructuralFeatureAction([action.value.owner.oclAsType(NamedElement).memberName()/]);
+	[action.value.memberName()/] = factory->create[action.value.eClass().name/]_as_value_in_WriteStructuralFeatureAction([action.value.owner.oclAsType(NamedElement).memberName()/]);
 	[action.memberName()/]->getInput()->push_back([action.value.memberName()/]); // subset/union in not implemented for upper=1
 [/if]
 [if (action.result.oclIsUndefined())]
 ['UML4CPP_Generation Error: AddStructuralFeatureValueAction: '.concat(action.name).concat('result pin is undefined.').registerError()/]
 [else]
-	[action.result.memberName()/] = factory->create[action.result.eClass().name/]_in_WriteStructuralFeatureAction([action.result.owner.oclAsType(NamedElement).memberName()/]);
+	[action.result.memberName()/] = factory->create[action.result.eClass().name/]_as_result_in_WriteStructuralFeatureAction([action.result.owner.oclAsType(NamedElement).memberName()/]);
 	[action.memberName()/]->getOutput()->push_back([action.result.memberName()/]); // subset/union in not implemented for upper=1
 [/if]
 [if (not action.insertAt.oclIsUndefined())]
-	[action.insertAt.memberName()/] = factory->create[action.insertAt.eClass().name/]_in_AddStructuralFeatureValueAction([action.insertAt.owner.oclAsType(NamedElement).memberName()/]);
+	[action.insertAt.memberName()/] = factory->create[action.insertAt.eClass().name/]_as_insertAt_in_AddStructuralFeatureValueAction([action.insertAt.owner.oclAsType(NamedElement).memberName()/]);
 	[action.memberName()/]->getInput()->push_back([action.insertAt.memberName()/]); // subset/union in not implemented for upper=1
 [/if]
 [/let]
@@ -81,14 +81,14 @@
 [if (resultPin.oclIsUndefined())]
 ['UML4CPP_Generation Error: '.concat(action.eClass().name).concat(': ').concat(action.name).concat('result pin is undefined.').registerError()/]
 [else]
-	[resultPin.memberName()/] = factory->create[resultPin.eClass().name/]_in_CallAction([resultPin.owner.oclAsType(NamedElement).memberName()/]);
+	[resultPin.memberName()/] = factory->create[resultPin.eClass().name/]_as_result_in_CallAction([resultPin.owner.oclAsType(NamedElement).memberName()/]);
 [/if]
 [/for]
 [for (argumentPin : InputPin | action.argument)]
 [if (argumentPin.oclIsUndefined())]
 ['UML4CPP_Generation Error: CallBehaviorAction: '.concat(action.name).concat('argument pin is undefined.').registerError()/]
 [else]
-	[argumentPin.memberName()/] = factory->create[argumentPin.eClass().name/]_in_InvocationAction([argumentPin.owner.oclAsType(NamedElement).memberName()/]);
+	[argumentPin.memberName()/] = factory->create[argumentPin.eClass().name/]_as_argument_in_InvocationAction([argumentPin.owner.oclAsType(NamedElement).memberName()/]);
 [/if]
 [/for]
 [if (anActivityNode.oclIsKindOf(CallOperationAction))]
@@ -96,7 +96,7 @@
 [if (coaction.target.oclIsUndefined())]
 ['UML4CPP_Generation Error: CallOperationAction: '.concat(action.name).concat('target pin is undefined.').registerError()/]
 [else]
-	[coaction.target.memberName()/] = factory->create[coaction.target.eClass().name/]_in_CallOperationAction([coaction.target.owner.oclAsType(NamedElement).memberName()/]);
+	[coaction.target.memberName()/] = factory->create[coaction.target.eClass().name/]_as_target_in_CallOperationAction([coaction.target.owner.oclAsType(NamedElement).memberName()/]);
 	[action.memberName()/]->getInput()->push_back([coaction.target.memberName()/]); // subset/union in not implemented for upper=1
 [/if]
 [/let]
@@ -112,13 +112,13 @@
 [if (action.object.oclIsUndefined())]
 ['UML4CPP_Generation Error: ClearStructuralFeatureAction: '.concat(action.name).concat('object pin is undefined.').registerError()/]
 [else]
-	[action.object.memberName()/] = factory->create[action.object.eClass().name/]_in_StructuralFeatureAction([action.object.owner.oclAsType(NamedElement).memberName()/]);
+	[action.object.memberName()/] = factory->create[action.object.eClass().name/]_as_object_in_StructuralFeatureAction([action.object.owner.oclAsType(NamedElement).memberName()/]);
 	[action.memberName()/]->getInput()->push_back([action.object.memberName()/]); // subset/union in not implemented for upper=1
 [/if]
 [if (action.result.oclIsUndefined())]
 ['UML4CPP_Generation Error: ClearStructuralFeatureAction: '.concat(action.name).concat('result pin is undefined.').registerError()/]
 [else]
-	[action.result.memberName()/] = factory->create[action.result.eClass().name/]_in_ClearStructuralFeatureAction([action.result.owner.oclAsType(NamedElement).memberName()/]);
+	[action.result.memberName()/] = factory->create[action.result.eClass().name/]_as_result_in_ClearStructuralFeatureAction([action.result.owner.oclAsType(NamedElement).memberName()/]);
 	[action.memberName()/]->getOutput()->push_back([action.result.memberName()/]); // subset/union in not implemented for upper=1
 [/if]
 [/let]
@@ -132,7 +132,7 @@
 [if (action.result.oclIsUndefined())]
 ['UML4CPP_Generation Error: CreateObjectAction: '.concat(action.name).concat('result pin is undefined.').registerError()/]
 [else]
-	[action.result.memberName()/] = factory->create[action.result.eClass().name/]_in_CreateObjectAction([action.result.owner.oclAsType(NamedElement).memberName()/]);
+	[action.result.memberName()/] = factory->create[action.result.eClass().name/]_as_result_in_CreateObjectAction([action.result.owner.oclAsType(NamedElement).memberName()/]);
 	[action.memberName()/]->getOutput()->push_back([action.result.memberName()/]); // subset/union in not implemented for upper=1
 [/if]
 [/let]
@@ -146,7 +146,7 @@
 [if (action.target.oclIsUndefined())]
 ['UML4CPP_Generation Error: DestroyObjectAction: '.concat(action.name).concat('target pin is undefined.').registerError()/]
 [else]
-	[action.target.memberName()/] = factory->create[action.target.eClass().name/]_in_DestroyObjectAction([action.target.owner.oclAsType(NamedElement).memberName()/]);
+	[action.target.memberName()/] = factory->create[action.target.eClass().name/]_as_target_in_DestroyObjectAction([action.target.owner.oclAsType(NamedElement).memberName()/]);
 	[action.memberName()/]->getInput()->push_back([action.target.memberName()/]); // subset/union in not implemented for upper=1
 [/if]
 [/let]
@@ -170,7 +170,7 @@
 [if (action.result.oclIsUndefined())]
 ['UML4CPP_Generation Error: ReadSelfAction: '.concat(action.name).concat('result pin is undefined.').registerError()/]
 [else]
-	[action.result.memberName()/] = factory->create[action.result.eClass().name/]_in_ReadSelfAction([action.result.owner.oclAsType(NamedElement).memberName()/]);
+	[action.result.memberName()/] = factory->create[action.result.eClass().name/]_as_result_in_ReadSelfAction([action.result.owner.oclAsType(NamedElement).memberName()/]);
 	[action.memberName()/]->getOutput()->push_back([action.result.memberName()/]); // subset/union in not implemented for upper=1
 [/if]
 [/let]
@@ -184,13 +184,13 @@
 [if (action.object.oclIsUndefined())]
 ['UML4CPP_Generation Error: ReadStructuralFeatureAction: '.concat(action.name).concat('object pin is undefined.').registerError()/]
 [else]
-	[action.object.memberName()/] = factory->create[action.object.eClass().name/]_in_StructuralFeatureAction([action.object.owner.oclAsType(NamedElement).memberName()/]);
+	[action.object.memberName()/] = factory->create[action.object.eClass().name/]_as_object_in_StructuralFeatureAction([action.object.owner.oclAsType(NamedElement).memberName()/]);
 	[action.memberName()/]->getInput()->push_back([action.object.memberName()/]); // subset/union in not implemented for upper=1
 [/if]
 [if (action.result.oclIsUndefined())]
 ['UML4CPP_Generation Error: ReadStructuralFeatureAction: '.concat(action.name).concat('result pin is undefined.').registerError()/]
 [else]
-	[action.result.memberName()/] = factory->create[action.result.eClass().name/]_in_ReadStructuralFeatureAction([action.result.owner.oclAsType(NamedElement).memberName()/]);
+	[action.result.memberName()/] = factory->create[action.result.eClass().name/]_as_result_in_ReadStructuralFeatureAction([action.result.owner.oclAsType(NamedElement).memberName()/]);
 	[action.memberName()/]->getOutput()->push_back([action.result.memberName()/]); // subset/union in not implemented for upper=1
 [/if]
 [/let]
@@ -204,23 +204,23 @@
 [if (action.object.oclIsUndefined())]
 ['UML4CPP_Generation Error: RemoveStructuralFeatureValueAction: '.concat(action.name).concat('object pin is undefined.').registerError()/]
 [else]
-	[action.object.memberName()/] = factory->create[action.object.eClass().name/]_in_StructuralFeatureAction([action.object.owner.oclAsType(NamedElement).memberName()/]);
+	[action.object.memberName()/] = factory->create[action.object.eClass().name/]_as_object_in_StructuralFeatureAction([action.object.owner.oclAsType(NamedElement).memberName()/]);
 	[action.memberName()/]->getInput()->push_back([action.object.memberName()/]); // subset/union in not implemented for upper=1
 [/if]
 [if (action.value.oclIsUndefined())]
 ['UML4CPP_Generation Error: RemoveStructuralFeatureValueAction: '.concat(action.name).concat('value pin is undefined.').registerError()/]
 [else]
-	[action.value.memberName()/] = factory->create[action.value.eClass().name/]_in_WriteStructuralFeatureAction([action.value.owner.oclAsType(NamedElement).memberName()/]);
+	[action.value.memberName()/] = factory->create[action.value.eClass().name/]_as_value_in_WriteStructuralFeatureAction([action.value.owner.oclAsType(NamedElement).memberName()/]);
 	[action.memberName()/]->getInput()->push_back([action.value.memberName()/]); // subset/union in not implemented for upper=1
 [/if]
 [if (action.result.oclIsUndefined())]
 ['UML4CPP_Generation Error: RemoveStructuralFeatureValueAction: '.concat(action.name).concat('result pin is undefined.').registerError()/]
 [else]
-	[action.result.memberName()/] = factory->create[action.result.eClass().name/]_in_WriteStructuralFeatureAction([action.result.owner.oclAsType(NamedElement).memberName()/]);
+	[action.result.memberName()/] = factory->create[action.result.eClass().name/]_as_result_in_WriteStructuralFeatureAction([action.result.owner.oclAsType(NamedElement).memberName()/]);
 	[action.memberName()/]->getOutput()->push_back([action.result.memberName()/]); // subset/union in not implemented for upper=1
 [/if]
 [if (not action.removeAt.oclIsUndefined())]
-	[action.removeAt.memberName()/] = factory->create[action.removeAt.eClass().name/]_in_RemoveStructuralFeatureValueAction([action.removeAt.owner.oclAsType(NamedElement).memberName()/]);
+	[action.removeAt.memberName()/] = factory->create[action.removeAt.eClass().name/]_as_removeAt_in_RemoveStructuralFeatureValueAction([action.removeAt.owner.oclAsType(NamedElement).memberName()/]);
 	[action.memberName()/]->getInput()->push_back([action.removeAt.memberName()/]); // subset/union in not implemented for upper=1
 [/if]
 [/let]
@@ -234,7 +234,7 @@
 [if (action.result.oclIsUndefined())]
 ['UML4CPP_Generation Error: ValueSpecificationAction: '.concat(action.name).concat('result pin is undefined.').registerError()/]
 [else]
-	[action.result.memberName()/] = factory->create[action.result.eClass().name/]_in_ValueSpecificationAction([action.result.owner.oclAsType(NamedElement).memberName()/]);
+	[action.result.memberName()/] = factory->create[action.result.eClass().name/]_as_result_in_ValueSpecificationAction([action.result.owner.oclAsType(NamedElement).memberName()/]);
 	[action.memberName()/]->getOutput()->push_back([action.result.memberName()/]); // subset/union in not implemented for upper=1
 [/if]
 [/let]
@@ -251,10 +251,10 @@
 // no specific generation for this action, generate only input and output pins
 [let action : Action = self.oclAsType(Action)]
 [for (pin : Pin | action.input)]
-	[pin.memberName()/] = factory->create[pin.eClass().name/]_in_Action([pin.owner.oclAsType(NamedElement).memberName()/]);
+	[pin.memberName()/] = factory->create[pin.eClass().name/]_as_input_in_Action([pin.owner.oclAsType(NamedElement).memberName()/]);
 [/for]
 [for (pin : Pin | action.output)]
-	[pin.memberName()/] = factory->create[pin.eClass().name/]_in_Action([pin.owner.oclAsType(NamedElement).memberName()/]);
+	[pin.memberName()/] = factory->create[pin.eClass().name/]_as_output_in_Action([pin.owner.oclAsType(NamedElement).memberName()/]);
 [/for]
 [/let]
 [/template]

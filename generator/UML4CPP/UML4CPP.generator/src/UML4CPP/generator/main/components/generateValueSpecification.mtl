@@ -27,9 +27,9 @@
 */]
 [template public generateValueSpecificationCreation(aValueSpecification : ValueSpecification)]
 [if (aValueSpecification.owner.oclIsKindOf(NamedElement))]
-[aValueSpecification.memberName()/] = factory->create[aValueSpecification.eClass().name/]_in_Owner([aValueSpecification.owner.oclAsType(NamedElement).memberName()/]);
+[aValueSpecification.memberName()/] = factory->create[aValueSpecification.eClass().name/]_as_ownedElement_in_Element([aValueSpecification.owner.oclAsType(NamedElement).memberName()/]);
 [elseif (aValueSpecification.owner.oclIsTypeOf(ConnectorEnd))]
-[aValueSpecification.memberName()/] = factory->create[aValueSpecification.eClass().name/]_in_Owner([aValueSpecification.owner.oclAsType(ConnectorEnd).memberName()/]);
+[aValueSpecification.memberName()/] = factory->create[aValueSpecification.eClass().name/]_as_ownedElement_in_Element([aValueSpecification.owner.oclAsType(ConnectorEnd).memberName()/]);
 [else]
 [/if]
 [/template]

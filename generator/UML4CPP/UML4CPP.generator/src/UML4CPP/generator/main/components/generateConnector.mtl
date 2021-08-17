@@ -11,7 +11,7 @@
 */]
 [template public generateConnectorCreation(aConnector : Connector)]
 [for (aConnectorEnd : ConnectorEnd | aConnector.end)]
-[aConnectorEnd.memberName()/] = factory->createConnectorEnd_in_Connector([aConnector.memberName()/]);
+[aConnectorEnd.memberName()/] = factory->createConnectorEnd_as_end_in_Connector([aConnector.memberName()/]);
 [/for]
 [/template]
 

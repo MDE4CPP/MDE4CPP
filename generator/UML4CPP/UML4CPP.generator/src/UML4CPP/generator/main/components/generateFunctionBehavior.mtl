@@ -32,9 +32,9 @@
 */]
 [template public generateOpaqueBehaviorCreation(aOpaqueBehavior : OpaqueBehavior)]
 [if (aOpaqueBehavior.owner = aOpaqueBehavior._package)]
-[aOpaqueBehavior.memberName()/] = factory->create[if(aOpaqueBehavior.oclIsKindOf(FunctionBehavior))]FunctionBehavior[else]OpaqueBehavior[/if]_in_Package([aOpaqueBehavior._package.memberName()/]);
+[aOpaqueBehavior.memberName()/] = factory->create[if(aOpaqueBehavior.oclIsKindOf(FunctionBehavior))]FunctionBehavior[else]OpaqueBehavior[/if]_as_ownedType_in_Package([aOpaqueBehavior._package.memberName()/]);
 [else]
-[aOpaqueBehavior.memberName()/] = factory->create[if(aOpaqueBehavior.oclIsKindOf(FunctionBehavior))]FunctionBehavior[else]OpaqueBehavior[/if]_in_BehavioredClassifier([aOpaqueBehavior.owner.oclAsType(NamedElement).memberName()/]);
+[aOpaqueBehavior.memberName()/] = factory->create[if(aOpaqueBehavior.oclIsKindOf(FunctionBehavior))]FunctionBehavior[else]OpaqueBehavior[/if]_as_ownedBehavior_in_BehavioredClassifier([aOpaqueBehavior.owner.oclAsType(NamedElement).memberName()/]);
 [/if]
 [for (aParameter : Parameter | aOpaqueBehavior.ownedParameter)]
 [aParameter.generateParameterCreation()/]

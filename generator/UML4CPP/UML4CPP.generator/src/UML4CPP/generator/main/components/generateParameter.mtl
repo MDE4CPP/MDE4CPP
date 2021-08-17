@@ -29,8 +29,8 @@
 */]
 [template public generateParameterCreation(aParameter : Parameter) post(trim())]
 [if(aParameter.owner.oclIsKindOf(Operation))]
-[memberName(aParameter)/] = factory->createParameter_in_Operation([aParameter.owner.oclAsType(NamedElement).memberName()/]);
-[else][memberName(aParameter)/] = factory->createParameter_in_Behavior([aParameter.owner.oclAsType(NamedElement).memberName()/]);
+[memberName(aParameter)/] = factory->createParameter_as_ownedParameter_in_Operation([aParameter.owner.oclAsType(NamedElement).memberName()/]);
+[else][memberName(aParameter)/] = factory->createParameter_as_ownedParameter_in_Behavior([aParameter.owner.oclAsType(NamedElement).memberName()/]);
 [/if]
 [/template]
 

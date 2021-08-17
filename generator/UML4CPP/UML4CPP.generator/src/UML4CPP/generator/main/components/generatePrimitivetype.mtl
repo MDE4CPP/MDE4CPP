@@ -29,6 +29,6 @@
  * - set name
 */]
 [template public generatePrimitiveTypeCreation(aPrimitiveType : PrimitiveType)]
-[aPrimitiveType.memberName()/] = factory->createPrimitiveType_in_Package([aPrimitiveType.ancestors(Package)->first().memberName()/]);
+[aPrimitiveType.memberName()/] = factory->createPrimitiveType_as_ownedType_in_Package([aPrimitiveType.ancestors(Package)->first().memberName()/]);
 [aPrimitiveType.memberName()/]->setName("[aPrimitiveType.name/]");
 [/template]

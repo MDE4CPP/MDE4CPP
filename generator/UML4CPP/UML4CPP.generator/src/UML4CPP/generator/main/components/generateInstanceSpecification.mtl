@@ -27,7 +27,7 @@
  * generate creation of meta model instance for an InstanceSpecification element
 */]
 [template public generateInstanceSpecificationCreation(anInstSpec : InstanceSpecification)]
-[anInstSpec.memberName()/] = factory->createInstanceSpecification_in_Namespace([anInstSpec.owner.oclAsType(NamedElement).memberName()/]); // TODO: set owner
+[anInstSpec.memberName()/] = factory->createInstanceSpecification_as_ownedMember_in_Namespace([anInstSpec.owner.oclAsType(NamedElement).memberName()/]); // TODO: set owner
 [anInstSpec.ancestors(Package)->first().memberName()/]->getPackagedElement()->push_back([anInstSpec.memberName()/]);
 [/template]
 
