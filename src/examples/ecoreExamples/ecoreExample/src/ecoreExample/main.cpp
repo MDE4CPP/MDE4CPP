@@ -26,9 +26,9 @@ int main()
   // Create EPackage instance using Factory-Operation
   std::shared_ptr<EPackage> rootPackage = factory->createEPackage(); // root-Package has no SuperPackage
   // Create EClass instance in root Package using Factory-Operation
-  std::shared_ptr<EClass> c1 = factory->createEClass_in_EPackage(rootPackage);
+  std::shared_ptr<EClass> c1 = factory->createEClass_as_eClassifiers_in_EPackage(rootPackage);
   // Create EAttribute in class using Factory-Operation
-  std::shared_ptr<EAttribute> a1 = factory->createEAttribute_in_EContainingClass(c1);
+  std::shared_ptr<EAttribute> a1 = factory->createEAttribute_as_eStructuralFeatures_in_EClass(c1);
 
   // Set Properties of Ecore-Model Elements
 
@@ -46,7 +46,7 @@ int main()
     if (c2 != nullptr) {
       std::cout << c2->eClass()->getName() << " for c2 created by typed class name" << std::endl;
       c2->setName("c2");
-      std::shared_ptr<EAttribute> a2 = factory->createEAttribute_in_EContainingClass(c2);
+      std::shared_ptr<EAttribute> a2 = factory->createEAttribute_as_eStructuralFeatures_in_EClass(c2);
       a2->setName("a2");
       // Add Class to package
       std::shared_ptr<Bag<ecore::EClassifier> > classifiers = rootPackage->getEClassifiers();
@@ -64,7 +64,7 @@ int main()
       std::cout << c3->eClass()->getName() << " for c3 created by name given by meta class of EClass" << std::endl;
       c3->setName("c3");
       // Add a new Reference
-      std::shared_ptr<EReference> r1 = factory->createEReference_in_EContainingClass(c3);
+      std::shared_ptr<EReference> r1 = factory->createEReference_as_eStructuralFeatures_in_EClass(c3);
       r1->setName("r1");
       r1->setEType(c1);
       // Add Class to package
