@@ -51,11 +51,11 @@ int main()
     std::shared_ptr<uml::Model> p = factory->createModel();
     p->setName("Model");
 
-    std::shared_ptr<uml::Class> c = factory->createClass_in_Package(p);
+    std::shared_ptr<uml::Class> c = factory->createClass_as_ownedType_in_Package(p);
     c->setName("Class1");
 
     //create an operation
-    std::shared_ptr<uml::Operation> o = factory->createOperation_in_Class(c);
+    std::shared_ptr<uml::Operation> o = factory->createOperation_as_ownedOperation_in_Class(c);
     o->setName("do");
 
     //use a string to create a class in a Package
@@ -83,7 +83,7 @@ int main()
 
 
     //create an UML-Objekt (InstanceSpecification) of Class1
-    std::shared_ptr<uml::InstanceSpecification> i = factory->createInstanceSpecification_in_Owner(p);
+    std::shared_ptr<uml::InstanceSpecification> i = factory->createInstanceSpecification_as_ownedElement_in_Element(p);
     i->setName("o");
     std::shared_ptr<Bag<uml::Classifier>> t = i->getClassifier();
     t->push_back(c); //set Type to Class1
