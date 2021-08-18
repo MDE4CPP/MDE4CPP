@@ -151,7 +151,7 @@ std::shared_ptr<[needNamespace(anEPackage, 'EObject')/]> [className/]::create(co
 						[let packageContainingReference : EPackage = aReference.ancestors(EPackage)->first()]
 					case  [packageContainingReference.generateNamespaceDefinition()/]::[packageContainingReference.name/]Package::[aReference.getStaticAttributeIDName()/]:	
 					{
-						auto castedContainer = std::dynamic_pointer_cast<[aReference.eContainingClass.generateTypeClass()/]>(container);
+						auto castedContainer = std::dynamic_pointer_cast<[aReference.eContainingClass.generateTypeClass(false)/]>(container);
 						return this->create[aClass.name/]_as_[aReference.name/]_in_[aReference.eContainingClass.name.toUpperFirst()/](castedContainer,metaElementID);
 					}
 						[/let]
@@ -161,7 +161,7 @@ std::shared_ptr<[needNamespace(anEPackage, 'EObject')/]> [className/]::create(co
 						std::cerr << __PRETTY_FUNCTION__ << "ERROR: Reference type not found." << std::endl;
 				}	
 				[elseif(ref->size()=1)]
-				std::shared_ptr<[ref->first().eContainingClass.generateTypeClass()/]> castedContainer = std::dynamic_pointer_cast<[ref->first().eContainingClass.generateTypeClass()/]>(container);
+				std::shared_ptr<[ref->first().eContainingClass.generateTypeClass()/]> castedContainer = std::dynamic_pointer_cast<[ref->first().eContainingClass.generateTypeClass(false)/]>(container);
 				assert(castedContainer);
 				return std::shared_ptr<[aClass.generateType()/]>(this->create[aClass.name/]_as_[ref->first().name/]_in_[ref->first().eContainingClass.name.toUpperFirst()/](castedContainer,metaElementID));
 				[/if]
@@ -239,8 +239,8 @@ std::shared_ptr<[anEPackage.name.concat('Package')/]> [className/]::get[anEPacka
 std::shared_ptr<[anEClass.generateTypeClass()/]Impl> element(new [anEClass.generateTypeClass()/]Impl());
 [else]
 	[if(currentCompositionToClass.eContainingClass.getCompositionsToClass(anEClass)->select(r : EReference | (not r.eOpposite.oclIsUndefined()) and r.eOpposite.isContainerAttribute())->size() > 1)]
-		[let packageContainingReference : EPackage = currentCompositionToClass.ancestors(EPackage)->first()]
-std::shared_ptr<[anEClass.generateTypeClass()/]Impl> element(new [anEClass.generateTypeClass()/]Impl(par_[currentCompositionToClass.eContainingClass.name/], [packageContainingReference.generateNamespaceDefinition()/]::[packageContainingReference.name/]Package::[currentCompositionToClass.getStaticAttributeIDName()/]));
+		[let packageContainingOppositeReference : EPackage = currentCompositionToClass.eOpposite.ancestors(EPackage)->first()]
+std::shared_ptr<[anEClass.generateTypeClass()/]Impl> element(new [anEClass.generateTypeClass()/]Impl(par_[currentCompositionToClass.eContainingClass.name/], [packageContainingOppositeReference.generateNamespaceDefinition()/]::[packageContainingOppositeReference.name/]Package::[currentCompositionToClass.eOpposite.getStaticAttributeIDName()/]));
 		[/let]
 	[else]
 std::shared_ptr<[anEClass.generateTypeClass()/]Impl> element(new [anEClass.generateTypeClass()/]Impl(par_[currentCompositionToClass.eContainingClass.name/]));
