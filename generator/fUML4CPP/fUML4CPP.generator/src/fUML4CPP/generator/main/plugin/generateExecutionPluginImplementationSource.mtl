@@ -215,18 +215,15 @@ Any [packageName/]::executeActivity(std::shared_ptr<uml::Activity> activity, std
 [/template]
 
 [template public generateExecutionPluginInitialization(aPackage : Package) {locusName : String = aPackage.generateNamespace(false).sanitize() + 'Locus' ;}]
-//initialize execution locus
+//initialize execution Locus
 std::shared_ptr<[locusName/]Impl> locusImpl(new [locusName/]Impl);
 locusImpl->setThisLocusPtr(locusImpl);
 m_locus = locusImpl;
 
-//initialize executor
-std::shared_ptr<PSCS::Semantics::Loci::CS_Executor> m_executor = PSCS::Semantics::Loci::LociFactory::eInstance()->createCS_Executor();
-m_executor->setLocus(m_locus);
-m_locus->setExecutor(m_executor);
-
-std::shared_ptr<PSCS::Semantics::Loci::CS_ExecutionFactory> m_factory = PSCS::Semantics::Loci::LociFactory::eInstance()->createCS_ExecutionFactory_in_Locus(m_locus);
-m_locus->setFactory(m_factory);
+//initialize Executor
+std::shared_ptr<PSCS::Semantics::Loci::CS_Executor> m_executor = PSCS::Semantics::Loci::LociFactory::eInstance()->createCS_Executor_as_executor_in_Locus(m_locus);
+//initialize ExecutionFactory
+std::shared_ptr<PSCS::Semantics::Loci::CS_ExecutionFactory> m_factory = PSCS::Semantics::Loci::LociFactory::eInstance()->createCS_ExecutionFactory_as_factory_in_Locus(m_locus);
 
 //assign ConstructStrategy to execution factory
 m_factory->assignStrategy(PSCS::Semantics::Actions::ActionsFactory::eInstance()->createCS_DefaultConstructStrategy());
@@ -252,7 +249,7 @@ m_factory->assignStrategy(PSCS::Semantics::StructuredClassifiers::StructuredClas
 	[if (rejectClassOperationWithoutMethod())]//[/if][anOperation.generatePackageGetterCall()/]->getMethod()->insert([anOperation.generatePackageGetterCall()/]->getMethod()->begin(), m_[anOperation.getFBPackageElement()/]);
 	[for (aParameter : Parameter | anOperation.ownedParameter)]
 	{	/*creating parameter [aParameter.name/]*/
-		std::shared_ptr<uml::Parameter> [memberName(aParameter)/](uml::umlFactory::eInstance()->createParameter_in_Behavior(m_[anOperation.getFBPackageElement()/]));
+		std::shared_ptr<uml::Parameter> [memberName(aParameter)/](uml::umlFactory::eInstance()->createParameter_as_ownedParameter_in_Behavior(m_[anOperation.getFBPackageElement()/]));
 		[memberName(aParameter)/]->setName("[aParameter.name/]");
 		[memberName(aParameter)/]->setType([if(aParameter.type.getNearestPackage() = aParameter.getNearestPackage())][aParameter.getNearestPackage().generateNamespace(false).concat('::').concat(aParameter.getNearestPackage().name).concat('Package').concat('::eInstance()->')/][/if][aParameter.type.generatePackageGetterCall(aParameter)/]);
 		[memberName(aParameter)/]->setLower([aParameter.lower/]);
