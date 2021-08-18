@@ -89,6 +89,13 @@ m_[aProperty.name/].reset(new Bag<[aProperty.type.transformType()/]>());
 [template public generateAttributeGetterImplementationCpp(aProperty : Property, aClass : Class)]
 [aProperty.generateCppType()/] [aClass.name.toUpperFirst()/]Impl::[aProperty.getterName()/]() const 
 {
+[if (aProperty.upper <> 1)]
+	if(m_[aProperty.name/] == nullptr)
+	{
+		[aProperty.generateContainerPropertyInit()/]
+	}
+[/if]
+
 	return m_[aProperty.name/];
 }
 [/template]

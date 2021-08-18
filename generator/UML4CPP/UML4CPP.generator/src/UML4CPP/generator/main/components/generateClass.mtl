@@ -287,7 +287,7 @@ m_[aProperty.name/].reset(new Union<[aProperty.type.generateCppType(true)/]>());
 	std::cout << "Initialising Union: " << "m_[aProperty.name/] - Union<[aProperty.generateCppType()/]>()" << std::endl;
 #endif
 [else]
-m_[aProperty.name/].reset(new [aProperty.type.generateCppType(true)/]());
+m_[aProperty.name/].reset(new Bag<[aProperty.type.generateCppType(true)/]>());
 [/if]
 [/template]
 

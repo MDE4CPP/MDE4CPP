@@ -32,7 +32,7 @@
 [file (aPackage.generateNamespacePath(false).concat('/impl/').concat(className).concat('.cpp'), false, 'UTF-8')]
 #include "[aPackage.generateNamespacePath(false)/]/impl/[className/].hpp"
 
-#include "abstractDataTypes/Bag.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
 #include "uml/Class.hpp"
 #include <cassert>
 
