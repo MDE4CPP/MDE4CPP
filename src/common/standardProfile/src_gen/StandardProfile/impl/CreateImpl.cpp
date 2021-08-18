@@ -149,6 +149,7 @@ void CreateImpl::setBase_BehavioralFeature(std::weak_ptr<uml::BehavioralFeature>
 }
 std::weak_ptr<uml::BehavioralFeature> CreateImpl::getBase_BehavioralFeature() const 
 {
+
 	return m_base_BehavioralFeature;
 }
 
@@ -159,6 +160,7 @@ void CreateImpl::setBase_Usage(std::weak_ptr<uml::Usage> _base_Usage)
 }
 std::weak_ptr<uml::Usage> CreateImpl::getBase_Usage() const 
 {
+
 	return m_base_Usage;
 }
 

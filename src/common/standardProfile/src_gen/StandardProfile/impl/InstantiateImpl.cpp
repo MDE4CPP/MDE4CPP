@@ -137,6 +137,7 @@ void InstantiateImpl::setBase_Usage(std::weak_ptr<uml::Usage> _base_Usage)
 }
 std::weak_ptr<uml::Usage> InstantiateImpl::getBase_Usage() const 
 {
+
 	return m_base_Usage;
 }
 

@@ -2437,7 +2437,7 @@ std::shared_ptr<ocl::Expressions::AssociationClassCallExp> ExpressionsFactoryImp
 }
 std::shared_ptr<ocl::Expressions::AssociationClassCallExp> ExpressionsFactoryImpl::createAssociationClassCallExp_as_condition_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::AssociationClassCallExpImpl> element(new ocl::Expressions::AssociationClassCallExpImpl(par_IfExp, ocl::Expressions::ExpressionsPackage::IFEXP_ATTRIBUTE_CONDITION));
+	std::shared_ptr<ocl::Expressions::AssociationClassCallExpImpl> element(new ocl::Expressions::AssociationClassCallExpImpl(par_IfExp, ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_IFOWNER));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_IfExp.lock())
 	{
@@ -2450,7 +2450,7 @@ std::shared_ptr<ocl::Expressions::AssociationClassCallExp> ExpressionsFactoryImp
 }
 std::shared_ptr<ocl::Expressions::AssociationClassCallExp> ExpressionsFactoryImpl::createAssociationClassCallExp_as_elseExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::AssociationClassCallExpImpl> element(new ocl::Expressions::AssociationClassCallExpImpl(par_IfExp, ocl::Expressions::ExpressionsPackage::IFEXP_ATTRIBUTE_ELSEEXPRESSION));
+	std::shared_ptr<ocl::Expressions::AssociationClassCallExpImpl> element(new ocl::Expressions::AssociationClassCallExpImpl(par_IfExp, ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_ELSEOWNER));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_IfExp.lock())
 	{
@@ -2463,7 +2463,7 @@ std::shared_ptr<ocl::Expressions::AssociationClassCallExp> ExpressionsFactoryImp
 }
 std::shared_ptr<ocl::Expressions::AssociationClassCallExp> ExpressionsFactoryImpl::createAssociationClassCallExp_as_first_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::AssociationClassCallExpImpl> element(new ocl::Expressions::AssociationClassCallExpImpl(par_CollectionRange, ocl::Expressions::ExpressionsPackage::COLLECTIONRANGE_ATTRIBUTE_FIRST));
+	std::shared_ptr<ocl::Expressions::AssociationClassCallExpImpl> element(new ocl::Expressions::AssociationClassCallExpImpl(par_CollectionRange, ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_FIRSTOWNER));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_CollectionRange.lock())
 	{
@@ -2515,7 +2515,7 @@ std::shared_ptr<ocl::Expressions::AssociationClassCallExp> ExpressionsFactoryImp
 }
 std::shared_ptr<ocl::Expressions::AssociationClassCallExp> ExpressionsFactoryImpl::createAssociationClassCallExp_as_last_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::AssociationClassCallExpImpl> element(new ocl::Expressions::AssociationClassCallExpImpl(par_CollectionRange, ocl::Expressions::ExpressionsPackage::COLLECTIONRANGE_ATTRIBUTE_LAST));
+	std::shared_ptr<ocl::Expressions::AssociationClassCallExpImpl> element(new ocl::Expressions::AssociationClassCallExpImpl(par_CollectionRange, ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_LASTOWNER));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_CollectionRange.lock())
 	{
@@ -2554,7 +2554,7 @@ std::shared_ptr<ocl::Expressions::AssociationClassCallExp> ExpressionsFactoryImp
 }
 std::shared_ptr<ocl::Expressions::AssociationClassCallExp> ExpressionsFactoryImpl::createAssociationClassCallExp_as_thenExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::AssociationClassCallExpImpl> element(new ocl::Expressions::AssociationClassCallExpImpl(par_IfExp, ocl::Expressions::ExpressionsPackage::IFEXP_ATTRIBUTE_THENEXPRESSION));
+	std::shared_ptr<ocl::Expressions::AssociationClassCallExpImpl> element(new ocl::Expressions::AssociationClassCallExpImpl(par_IfExp, ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_THENOWNER));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_IfExp.lock())
 	{
@@ -2613,7 +2613,7 @@ std::shared_ptr<ocl::Expressions::BooleanLiteralExp> ExpressionsFactoryImpl::cre
 }
 std::shared_ptr<ocl::Expressions::BooleanLiteralExp> ExpressionsFactoryImpl::createBooleanLiteralExp_as_condition_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::BooleanLiteralExpImpl> element(new ocl::Expressions::BooleanLiteralExpImpl(par_IfExp, ocl::Expressions::ExpressionsPackage::IFEXP_ATTRIBUTE_CONDITION));
+	std::shared_ptr<ocl::Expressions::BooleanLiteralExpImpl> element(new ocl::Expressions::BooleanLiteralExpImpl(par_IfExp, ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_IFOWNER));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_IfExp.lock())
 	{
@@ -2626,7 +2626,7 @@ std::shared_ptr<ocl::Expressions::BooleanLiteralExp> ExpressionsFactoryImpl::cre
 }
 std::shared_ptr<ocl::Expressions::BooleanLiteralExp> ExpressionsFactoryImpl::createBooleanLiteralExp_as_elseExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::BooleanLiteralExpImpl> element(new ocl::Expressions::BooleanLiteralExpImpl(par_IfExp, ocl::Expressions::ExpressionsPackage::IFEXP_ATTRIBUTE_ELSEEXPRESSION));
+	std::shared_ptr<ocl::Expressions::BooleanLiteralExpImpl> element(new ocl::Expressions::BooleanLiteralExpImpl(par_IfExp, ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_ELSEOWNER));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_IfExp.lock())
 	{
@@ -2639,7 +2639,7 @@ std::shared_ptr<ocl::Expressions::BooleanLiteralExp> ExpressionsFactoryImpl::cre
 }
 std::shared_ptr<ocl::Expressions::BooleanLiteralExp> ExpressionsFactoryImpl::createBooleanLiteralExp_as_first_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::BooleanLiteralExpImpl> element(new ocl::Expressions::BooleanLiteralExpImpl(par_CollectionRange, ocl::Expressions::ExpressionsPackage::COLLECTIONRANGE_ATTRIBUTE_FIRST));
+	std::shared_ptr<ocl::Expressions::BooleanLiteralExpImpl> element(new ocl::Expressions::BooleanLiteralExpImpl(par_CollectionRange, ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_FIRSTOWNER));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_CollectionRange.lock())
 	{
@@ -2691,7 +2691,7 @@ std::shared_ptr<ocl::Expressions::BooleanLiteralExp> ExpressionsFactoryImpl::cre
 }
 std::shared_ptr<ocl::Expressions::BooleanLiteralExp> ExpressionsFactoryImpl::createBooleanLiteralExp_as_last_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::BooleanLiteralExpImpl> element(new ocl::Expressions::BooleanLiteralExpImpl(par_CollectionRange, ocl::Expressions::ExpressionsPackage::COLLECTIONRANGE_ATTRIBUTE_LAST));
+	std::shared_ptr<ocl::Expressions::BooleanLiteralExpImpl> element(new ocl::Expressions::BooleanLiteralExpImpl(par_CollectionRange, ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_LASTOWNER));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_CollectionRange.lock())
 	{
@@ -2730,7 +2730,7 @@ std::shared_ptr<ocl::Expressions::BooleanLiteralExp> ExpressionsFactoryImpl::cre
 }
 std::shared_ptr<ocl::Expressions::BooleanLiteralExp> ExpressionsFactoryImpl::createBooleanLiteralExp_as_thenExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::BooleanLiteralExpImpl> element(new ocl::Expressions::BooleanLiteralExpImpl(par_IfExp, ocl::Expressions::ExpressionsPackage::IFEXP_ATTRIBUTE_THENEXPRESSION));
+	std::shared_ptr<ocl::Expressions::BooleanLiteralExpImpl> element(new ocl::Expressions::BooleanLiteralExpImpl(par_IfExp, ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_THENOWNER));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_IfExp.lock())
 	{
@@ -2809,7 +2809,7 @@ std::shared_ptr<ocl::Expressions::CollectionLiteralExp> ExpressionsFactoryImpl::
 }
 std::shared_ptr<ocl::Expressions::CollectionLiteralExp> ExpressionsFactoryImpl::createCollectionLiteralExp_as_condition_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::CollectionLiteralExpImpl> element(new ocl::Expressions::CollectionLiteralExpImpl(par_IfExp, ocl::Expressions::ExpressionsPackage::IFEXP_ATTRIBUTE_CONDITION));
+	std::shared_ptr<ocl::Expressions::CollectionLiteralExpImpl> element(new ocl::Expressions::CollectionLiteralExpImpl(par_IfExp, ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_IFOWNER));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_IfExp.lock())
 	{
@@ -2822,7 +2822,7 @@ std::shared_ptr<ocl::Expressions::CollectionLiteralExp> ExpressionsFactoryImpl::
 }
 std::shared_ptr<ocl::Expressions::CollectionLiteralExp> ExpressionsFactoryImpl::createCollectionLiteralExp_as_elseExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::CollectionLiteralExpImpl> element(new ocl::Expressions::CollectionLiteralExpImpl(par_IfExp, ocl::Expressions::ExpressionsPackage::IFEXP_ATTRIBUTE_ELSEEXPRESSION));
+	std::shared_ptr<ocl::Expressions::CollectionLiteralExpImpl> element(new ocl::Expressions::CollectionLiteralExpImpl(par_IfExp, ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_ELSEOWNER));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_IfExp.lock())
 	{
@@ -2835,7 +2835,7 @@ std::shared_ptr<ocl::Expressions::CollectionLiteralExp> ExpressionsFactoryImpl::
 }
 std::shared_ptr<ocl::Expressions::CollectionLiteralExp> ExpressionsFactoryImpl::createCollectionLiteralExp_as_first_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::CollectionLiteralExpImpl> element(new ocl::Expressions::CollectionLiteralExpImpl(par_CollectionRange, ocl::Expressions::ExpressionsPackage::COLLECTIONRANGE_ATTRIBUTE_FIRST));
+	std::shared_ptr<ocl::Expressions::CollectionLiteralExpImpl> element(new ocl::Expressions::CollectionLiteralExpImpl(par_CollectionRange, ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_FIRSTOWNER));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_CollectionRange.lock())
 	{
@@ -2887,7 +2887,7 @@ std::shared_ptr<ocl::Expressions::CollectionLiteralExp> ExpressionsFactoryImpl::
 }
 std::shared_ptr<ocl::Expressions::CollectionLiteralExp> ExpressionsFactoryImpl::createCollectionLiteralExp_as_last_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::CollectionLiteralExpImpl> element(new ocl::Expressions::CollectionLiteralExpImpl(par_CollectionRange, ocl::Expressions::ExpressionsPackage::COLLECTIONRANGE_ATTRIBUTE_LAST));
+	std::shared_ptr<ocl::Expressions::CollectionLiteralExpImpl> element(new ocl::Expressions::CollectionLiteralExpImpl(par_CollectionRange, ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_LASTOWNER));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_CollectionRange.lock())
 	{
@@ -2926,7 +2926,7 @@ std::shared_ptr<ocl::Expressions::CollectionLiteralExp> ExpressionsFactoryImpl::
 }
 std::shared_ptr<ocl::Expressions::CollectionLiteralExp> ExpressionsFactoryImpl::createCollectionLiteralExp_as_thenExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::CollectionLiteralExpImpl> element(new ocl::Expressions::CollectionLiteralExpImpl(par_IfExp, ocl::Expressions::ExpressionsPackage::IFEXP_ATTRIBUTE_THENEXPRESSION));
+	std::shared_ptr<ocl::Expressions::CollectionLiteralExpImpl> element(new ocl::Expressions::CollectionLiteralExpImpl(par_IfExp, ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_THENOWNER));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_IfExp.lock())
 	{
@@ -3005,7 +3005,7 @@ std::shared_ptr<ocl::Expressions::EnumLiteralExp> ExpressionsFactoryImpl::create
 }
 std::shared_ptr<ocl::Expressions::EnumLiteralExp> ExpressionsFactoryImpl::createEnumLiteralExp_as_condition_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::EnumLiteralExpImpl> element(new ocl::Expressions::EnumLiteralExpImpl(par_IfExp, ocl::Expressions::ExpressionsPackage::IFEXP_ATTRIBUTE_CONDITION));
+	std::shared_ptr<ocl::Expressions::EnumLiteralExpImpl> element(new ocl::Expressions::EnumLiteralExpImpl(par_IfExp, ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_IFOWNER));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_IfExp.lock())
 	{
@@ -3018,7 +3018,7 @@ std::shared_ptr<ocl::Expressions::EnumLiteralExp> ExpressionsFactoryImpl::create
 }
 std::shared_ptr<ocl::Expressions::EnumLiteralExp> ExpressionsFactoryImpl::createEnumLiteralExp_as_elseExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::EnumLiteralExpImpl> element(new ocl::Expressions::EnumLiteralExpImpl(par_IfExp, ocl::Expressions::ExpressionsPackage::IFEXP_ATTRIBUTE_ELSEEXPRESSION));
+	std::shared_ptr<ocl::Expressions::EnumLiteralExpImpl> element(new ocl::Expressions::EnumLiteralExpImpl(par_IfExp, ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_ELSEOWNER));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_IfExp.lock())
 	{
@@ -3031,7 +3031,7 @@ std::shared_ptr<ocl::Expressions::EnumLiteralExp> ExpressionsFactoryImpl::create
 }
 std::shared_ptr<ocl::Expressions::EnumLiteralExp> ExpressionsFactoryImpl::createEnumLiteralExp_as_first_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::EnumLiteralExpImpl> element(new ocl::Expressions::EnumLiteralExpImpl(par_CollectionRange, ocl::Expressions::ExpressionsPackage::COLLECTIONRANGE_ATTRIBUTE_FIRST));
+	std::shared_ptr<ocl::Expressions::EnumLiteralExpImpl> element(new ocl::Expressions::EnumLiteralExpImpl(par_CollectionRange, ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_FIRSTOWNER));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_CollectionRange.lock())
 	{
@@ -3083,7 +3083,7 @@ std::shared_ptr<ocl::Expressions::EnumLiteralExp> ExpressionsFactoryImpl::create
 }
 std::shared_ptr<ocl::Expressions::EnumLiteralExp> ExpressionsFactoryImpl::createEnumLiteralExp_as_last_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::EnumLiteralExpImpl> element(new ocl::Expressions::EnumLiteralExpImpl(par_CollectionRange, ocl::Expressions::ExpressionsPackage::COLLECTIONRANGE_ATTRIBUTE_LAST));
+	std::shared_ptr<ocl::Expressions::EnumLiteralExpImpl> element(new ocl::Expressions::EnumLiteralExpImpl(par_CollectionRange, ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_LASTOWNER));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_CollectionRange.lock())
 	{
@@ -3122,7 +3122,7 @@ std::shared_ptr<ocl::Expressions::EnumLiteralExp> ExpressionsFactoryImpl::create
 }
 std::shared_ptr<ocl::Expressions::EnumLiteralExp> ExpressionsFactoryImpl::createEnumLiteralExp_as_thenExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::EnumLiteralExpImpl> element(new ocl::Expressions::EnumLiteralExpImpl(par_IfExp, ocl::Expressions::ExpressionsPackage::IFEXP_ATTRIBUTE_THENEXPRESSION));
+	std::shared_ptr<ocl::Expressions::EnumLiteralExpImpl> element(new ocl::Expressions::EnumLiteralExpImpl(par_IfExp, ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_THENOWNER));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_IfExp.lock())
 	{
@@ -3188,7 +3188,7 @@ std::shared_ptr<ocl::Expressions::IfExp> ExpressionsFactoryImpl::createIfExp_as_
 }
 std::shared_ptr<ocl::Expressions::IfExp> ExpressionsFactoryImpl::createIfExp_as_condition_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::IfExpImpl> element(new ocl::Expressions::IfExpImpl(par_IfExp, ocl::Expressions::ExpressionsPackage::IFEXP_ATTRIBUTE_CONDITION));
+	std::shared_ptr<ocl::Expressions::IfExpImpl> element(new ocl::Expressions::IfExpImpl(par_IfExp, ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_IFOWNER));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_IfExp.lock())
 	{
@@ -3201,7 +3201,7 @@ std::shared_ptr<ocl::Expressions::IfExp> ExpressionsFactoryImpl::createIfExp_as_
 }
 std::shared_ptr<ocl::Expressions::IfExp> ExpressionsFactoryImpl::createIfExp_as_elseExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::IfExpImpl> element(new ocl::Expressions::IfExpImpl(par_IfExp, ocl::Expressions::ExpressionsPackage::IFEXP_ATTRIBUTE_ELSEEXPRESSION));
+	std::shared_ptr<ocl::Expressions::IfExpImpl> element(new ocl::Expressions::IfExpImpl(par_IfExp, ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_ELSEOWNER));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_IfExp.lock())
 	{
@@ -3214,7 +3214,7 @@ std::shared_ptr<ocl::Expressions::IfExp> ExpressionsFactoryImpl::createIfExp_as_
 }
 std::shared_ptr<ocl::Expressions::IfExp> ExpressionsFactoryImpl::createIfExp_as_first_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::IfExpImpl> element(new ocl::Expressions::IfExpImpl(par_CollectionRange, ocl::Expressions::ExpressionsPackage::COLLECTIONRANGE_ATTRIBUTE_FIRST));
+	std::shared_ptr<ocl::Expressions::IfExpImpl> element(new ocl::Expressions::IfExpImpl(par_CollectionRange, ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_FIRSTOWNER));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_CollectionRange.lock())
 	{
@@ -3266,7 +3266,7 @@ std::shared_ptr<ocl::Expressions::IfExp> ExpressionsFactoryImpl::createIfExp_as_
 }
 std::shared_ptr<ocl::Expressions::IfExp> ExpressionsFactoryImpl::createIfExp_as_last_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::IfExpImpl> element(new ocl::Expressions::IfExpImpl(par_CollectionRange, ocl::Expressions::ExpressionsPackage::COLLECTIONRANGE_ATTRIBUTE_LAST));
+	std::shared_ptr<ocl::Expressions::IfExpImpl> element(new ocl::Expressions::IfExpImpl(par_CollectionRange, ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_LASTOWNER));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_CollectionRange.lock())
 	{
@@ -3305,7 +3305,7 @@ std::shared_ptr<ocl::Expressions::IfExp> ExpressionsFactoryImpl::createIfExp_as_
 }
 std::shared_ptr<ocl::Expressions::IfExp> ExpressionsFactoryImpl::createIfExp_as_thenExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::IfExpImpl> element(new ocl::Expressions::IfExpImpl(par_IfExp, ocl::Expressions::ExpressionsPackage::IFEXP_ATTRIBUTE_THENEXPRESSION));
+	std::shared_ptr<ocl::Expressions::IfExpImpl> element(new ocl::Expressions::IfExpImpl(par_IfExp, ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_THENOWNER));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_IfExp.lock())
 	{
@@ -3364,7 +3364,7 @@ std::shared_ptr<ocl::Expressions::InfixedExp> ExpressionsFactoryImpl::createInfi
 }
 std::shared_ptr<ocl::Expressions::InfixedExp> ExpressionsFactoryImpl::createInfixedExp_as_condition_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::InfixedExpImpl> element(new ocl::Expressions::InfixedExpImpl(par_IfExp, ocl::Expressions::ExpressionsPackage::IFEXP_ATTRIBUTE_CONDITION));
+	std::shared_ptr<ocl::Expressions::InfixedExpImpl> element(new ocl::Expressions::InfixedExpImpl(par_IfExp, ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_IFOWNER));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_IfExp.lock())
 	{
@@ -3377,7 +3377,7 @@ std::shared_ptr<ocl::Expressions::InfixedExp> ExpressionsFactoryImpl::createInfi
 }
 std::shared_ptr<ocl::Expressions::InfixedExp> ExpressionsFactoryImpl::createInfixedExp_as_elseExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::InfixedExpImpl> element(new ocl::Expressions::InfixedExpImpl(par_IfExp, ocl::Expressions::ExpressionsPackage::IFEXP_ATTRIBUTE_ELSEEXPRESSION));
+	std::shared_ptr<ocl::Expressions::InfixedExpImpl> element(new ocl::Expressions::InfixedExpImpl(par_IfExp, ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_ELSEOWNER));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_IfExp.lock())
 	{
@@ -3390,7 +3390,7 @@ std::shared_ptr<ocl::Expressions::InfixedExp> ExpressionsFactoryImpl::createInfi
 }
 std::shared_ptr<ocl::Expressions::InfixedExp> ExpressionsFactoryImpl::createInfixedExp_as_first_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::InfixedExpImpl> element(new ocl::Expressions::InfixedExpImpl(par_CollectionRange, ocl::Expressions::ExpressionsPackage::COLLECTIONRANGE_ATTRIBUTE_FIRST));
+	std::shared_ptr<ocl::Expressions::InfixedExpImpl> element(new ocl::Expressions::InfixedExpImpl(par_CollectionRange, ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_FIRSTOWNER));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_CollectionRange.lock())
 	{
@@ -3442,7 +3442,7 @@ std::shared_ptr<ocl::Expressions::InfixedExp> ExpressionsFactoryImpl::createInfi
 }
 std::shared_ptr<ocl::Expressions::InfixedExp> ExpressionsFactoryImpl::createInfixedExp_as_last_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::InfixedExpImpl> element(new ocl::Expressions::InfixedExpImpl(par_CollectionRange, ocl::Expressions::ExpressionsPackage::COLLECTIONRANGE_ATTRIBUTE_LAST));
+	std::shared_ptr<ocl::Expressions::InfixedExpImpl> element(new ocl::Expressions::InfixedExpImpl(par_CollectionRange, ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_LASTOWNER));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_CollectionRange.lock())
 	{
@@ -3481,7 +3481,7 @@ std::shared_ptr<ocl::Expressions::InfixedExp> ExpressionsFactoryImpl::createInfi
 }
 std::shared_ptr<ocl::Expressions::InfixedExp> ExpressionsFactoryImpl::createInfixedExp_as_thenExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::InfixedExpImpl> element(new ocl::Expressions::InfixedExpImpl(par_IfExp, ocl::Expressions::ExpressionsPackage::IFEXP_ATTRIBUTE_THENEXPRESSION));
+	std::shared_ptr<ocl::Expressions::InfixedExpImpl> element(new ocl::Expressions::InfixedExpImpl(par_IfExp, ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_THENOWNER));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_IfExp.lock())
 	{
@@ -3540,7 +3540,7 @@ std::shared_ptr<ocl::Expressions::IntegerLiteralExp> ExpressionsFactoryImpl::cre
 }
 std::shared_ptr<ocl::Expressions::IntegerLiteralExp> ExpressionsFactoryImpl::createIntegerLiteralExp_as_condition_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::IntegerLiteralExpImpl> element(new ocl::Expressions::IntegerLiteralExpImpl(par_IfExp, ocl::Expressions::ExpressionsPackage::IFEXP_ATTRIBUTE_CONDITION));
+	std::shared_ptr<ocl::Expressions::IntegerLiteralExpImpl> element(new ocl::Expressions::IntegerLiteralExpImpl(par_IfExp, ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_IFOWNER));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_IfExp.lock())
 	{
@@ -3553,7 +3553,7 @@ std::shared_ptr<ocl::Expressions::IntegerLiteralExp> ExpressionsFactoryImpl::cre
 }
 std::shared_ptr<ocl::Expressions::IntegerLiteralExp> ExpressionsFactoryImpl::createIntegerLiteralExp_as_elseExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::IntegerLiteralExpImpl> element(new ocl::Expressions::IntegerLiteralExpImpl(par_IfExp, ocl::Expressions::ExpressionsPackage::IFEXP_ATTRIBUTE_ELSEEXPRESSION));
+	std::shared_ptr<ocl::Expressions::IntegerLiteralExpImpl> element(new ocl::Expressions::IntegerLiteralExpImpl(par_IfExp, ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_ELSEOWNER));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_IfExp.lock())
 	{
@@ -3566,7 +3566,7 @@ std::shared_ptr<ocl::Expressions::IntegerLiteralExp> ExpressionsFactoryImpl::cre
 }
 std::shared_ptr<ocl::Expressions::IntegerLiteralExp> ExpressionsFactoryImpl::createIntegerLiteralExp_as_first_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::IntegerLiteralExpImpl> element(new ocl::Expressions::IntegerLiteralExpImpl(par_CollectionRange, ocl::Expressions::ExpressionsPackage::COLLECTIONRANGE_ATTRIBUTE_FIRST));
+	std::shared_ptr<ocl::Expressions::IntegerLiteralExpImpl> element(new ocl::Expressions::IntegerLiteralExpImpl(par_CollectionRange, ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_FIRSTOWNER));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_CollectionRange.lock())
 	{
@@ -3618,7 +3618,7 @@ std::shared_ptr<ocl::Expressions::IntegerLiteralExp> ExpressionsFactoryImpl::cre
 }
 std::shared_ptr<ocl::Expressions::IntegerLiteralExp> ExpressionsFactoryImpl::createIntegerLiteralExp_as_last_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::IntegerLiteralExpImpl> element(new ocl::Expressions::IntegerLiteralExpImpl(par_CollectionRange, ocl::Expressions::ExpressionsPackage::COLLECTIONRANGE_ATTRIBUTE_LAST));
+	std::shared_ptr<ocl::Expressions::IntegerLiteralExpImpl> element(new ocl::Expressions::IntegerLiteralExpImpl(par_CollectionRange, ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_LASTOWNER));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_CollectionRange.lock())
 	{
@@ -3657,7 +3657,7 @@ std::shared_ptr<ocl::Expressions::IntegerLiteralExp> ExpressionsFactoryImpl::cre
 }
 std::shared_ptr<ocl::Expressions::IntegerLiteralExp> ExpressionsFactoryImpl::createIntegerLiteralExp_as_thenExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::IntegerLiteralExpImpl> element(new ocl::Expressions::IntegerLiteralExpImpl(par_IfExp, ocl::Expressions::ExpressionsPackage::IFEXP_ATTRIBUTE_THENEXPRESSION));
+	std::shared_ptr<ocl::Expressions::IntegerLiteralExpImpl> element(new ocl::Expressions::IntegerLiteralExpImpl(par_IfExp, ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_THENOWNER));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_IfExp.lock())
 	{
@@ -3716,7 +3716,7 @@ std::shared_ptr<ocl::Expressions::InvalidLiteralExp> ExpressionsFactoryImpl::cre
 }
 std::shared_ptr<ocl::Expressions::InvalidLiteralExp> ExpressionsFactoryImpl::createInvalidLiteralExp_as_condition_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::InvalidLiteralExpImpl> element(new ocl::Expressions::InvalidLiteralExpImpl(par_IfExp, ocl::Expressions::ExpressionsPackage::IFEXP_ATTRIBUTE_CONDITION));
+	std::shared_ptr<ocl::Expressions::InvalidLiteralExpImpl> element(new ocl::Expressions::InvalidLiteralExpImpl(par_IfExp, ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_IFOWNER));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_IfExp.lock())
 	{
@@ -3729,7 +3729,7 @@ std::shared_ptr<ocl::Expressions::InvalidLiteralExp> ExpressionsFactoryImpl::cre
 }
 std::shared_ptr<ocl::Expressions::InvalidLiteralExp> ExpressionsFactoryImpl::createInvalidLiteralExp_as_elseExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::InvalidLiteralExpImpl> element(new ocl::Expressions::InvalidLiteralExpImpl(par_IfExp, ocl::Expressions::ExpressionsPackage::IFEXP_ATTRIBUTE_ELSEEXPRESSION));
+	std::shared_ptr<ocl::Expressions::InvalidLiteralExpImpl> element(new ocl::Expressions::InvalidLiteralExpImpl(par_IfExp, ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_ELSEOWNER));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_IfExp.lock())
 	{
@@ -3742,7 +3742,7 @@ std::shared_ptr<ocl::Expressions::InvalidLiteralExp> ExpressionsFactoryImpl::cre
 }
 std::shared_ptr<ocl::Expressions::InvalidLiteralExp> ExpressionsFactoryImpl::createInvalidLiteralExp_as_first_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::InvalidLiteralExpImpl> element(new ocl::Expressions::InvalidLiteralExpImpl(par_CollectionRange, ocl::Expressions::ExpressionsPackage::COLLECTIONRANGE_ATTRIBUTE_FIRST));
+	std::shared_ptr<ocl::Expressions::InvalidLiteralExpImpl> element(new ocl::Expressions::InvalidLiteralExpImpl(par_CollectionRange, ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_FIRSTOWNER));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_CollectionRange.lock())
 	{
@@ -3794,7 +3794,7 @@ std::shared_ptr<ocl::Expressions::InvalidLiteralExp> ExpressionsFactoryImpl::cre
 }
 std::shared_ptr<ocl::Expressions::InvalidLiteralExp> ExpressionsFactoryImpl::createInvalidLiteralExp_as_last_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::InvalidLiteralExpImpl> element(new ocl::Expressions::InvalidLiteralExpImpl(par_CollectionRange, ocl::Expressions::ExpressionsPackage::COLLECTIONRANGE_ATTRIBUTE_LAST));
+	std::shared_ptr<ocl::Expressions::InvalidLiteralExpImpl> element(new ocl::Expressions::InvalidLiteralExpImpl(par_CollectionRange, ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_LASTOWNER));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_CollectionRange.lock())
 	{
@@ -3833,7 +3833,7 @@ std::shared_ptr<ocl::Expressions::InvalidLiteralExp> ExpressionsFactoryImpl::cre
 }
 std::shared_ptr<ocl::Expressions::InvalidLiteralExp> ExpressionsFactoryImpl::createInvalidLiteralExp_as_thenExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::InvalidLiteralExpImpl> element(new ocl::Expressions::InvalidLiteralExpImpl(par_IfExp, ocl::Expressions::ExpressionsPackage::IFEXP_ATTRIBUTE_THENEXPRESSION));
+	std::shared_ptr<ocl::Expressions::InvalidLiteralExpImpl> element(new ocl::Expressions::InvalidLiteralExpImpl(par_IfExp, ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_THENOWNER));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_IfExp.lock())
 	{
@@ -3892,7 +3892,7 @@ std::shared_ptr<ocl::Expressions::IterateExp> ExpressionsFactoryImpl::createIter
 }
 std::shared_ptr<ocl::Expressions::IterateExp> ExpressionsFactoryImpl::createIterateExp_as_condition_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::IterateExpImpl> element(new ocl::Expressions::IterateExpImpl(par_IfExp, ocl::Expressions::ExpressionsPackage::IFEXP_ATTRIBUTE_CONDITION));
+	std::shared_ptr<ocl::Expressions::IterateExpImpl> element(new ocl::Expressions::IterateExpImpl(par_IfExp, ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_IFOWNER));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_IfExp.lock())
 	{
@@ -3905,7 +3905,7 @@ std::shared_ptr<ocl::Expressions::IterateExp> ExpressionsFactoryImpl::createIter
 }
 std::shared_ptr<ocl::Expressions::IterateExp> ExpressionsFactoryImpl::createIterateExp_as_elseExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::IterateExpImpl> element(new ocl::Expressions::IterateExpImpl(par_IfExp, ocl::Expressions::ExpressionsPackage::IFEXP_ATTRIBUTE_ELSEEXPRESSION));
+	std::shared_ptr<ocl::Expressions::IterateExpImpl> element(new ocl::Expressions::IterateExpImpl(par_IfExp, ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_ELSEOWNER));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_IfExp.lock())
 	{
@@ -3918,7 +3918,7 @@ std::shared_ptr<ocl::Expressions::IterateExp> ExpressionsFactoryImpl::createIter
 }
 std::shared_ptr<ocl::Expressions::IterateExp> ExpressionsFactoryImpl::createIterateExp_as_first_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::IterateExpImpl> element(new ocl::Expressions::IterateExpImpl(par_CollectionRange, ocl::Expressions::ExpressionsPackage::COLLECTIONRANGE_ATTRIBUTE_FIRST));
+	std::shared_ptr<ocl::Expressions::IterateExpImpl> element(new ocl::Expressions::IterateExpImpl(par_CollectionRange, ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_FIRSTOWNER));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_CollectionRange.lock())
 	{
@@ -3970,7 +3970,7 @@ std::shared_ptr<ocl::Expressions::IterateExp> ExpressionsFactoryImpl::createIter
 }
 std::shared_ptr<ocl::Expressions::IterateExp> ExpressionsFactoryImpl::createIterateExp_as_last_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::IterateExpImpl> element(new ocl::Expressions::IterateExpImpl(par_CollectionRange, ocl::Expressions::ExpressionsPackage::COLLECTIONRANGE_ATTRIBUTE_LAST));
+	std::shared_ptr<ocl::Expressions::IterateExpImpl> element(new ocl::Expressions::IterateExpImpl(par_CollectionRange, ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_LASTOWNER));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_CollectionRange.lock())
 	{
@@ -4009,7 +4009,7 @@ std::shared_ptr<ocl::Expressions::IterateExp> ExpressionsFactoryImpl::createIter
 }
 std::shared_ptr<ocl::Expressions::IterateExp> ExpressionsFactoryImpl::createIterateExp_as_thenExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::IterateExpImpl> element(new ocl::Expressions::IterateExpImpl(par_IfExp, ocl::Expressions::ExpressionsPackage::IFEXP_ATTRIBUTE_THENEXPRESSION));
+	std::shared_ptr<ocl::Expressions::IterateExpImpl> element(new ocl::Expressions::IterateExpImpl(par_IfExp, ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_THENOWNER));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_IfExp.lock())
 	{
@@ -4068,7 +4068,7 @@ std::shared_ptr<ocl::Expressions::IteratorExp> ExpressionsFactoryImpl::createIte
 }
 std::shared_ptr<ocl::Expressions::IteratorExp> ExpressionsFactoryImpl::createIteratorExp_as_condition_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::IteratorExpImpl> element(new ocl::Expressions::IteratorExpImpl(par_IfExp, ocl::Expressions::ExpressionsPackage::IFEXP_ATTRIBUTE_CONDITION));
+	std::shared_ptr<ocl::Expressions::IteratorExpImpl> element(new ocl::Expressions::IteratorExpImpl(par_IfExp, ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_IFOWNER));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_IfExp.lock())
 	{
@@ -4081,7 +4081,7 @@ std::shared_ptr<ocl::Expressions::IteratorExp> ExpressionsFactoryImpl::createIte
 }
 std::shared_ptr<ocl::Expressions::IteratorExp> ExpressionsFactoryImpl::createIteratorExp_as_elseExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::IteratorExpImpl> element(new ocl::Expressions::IteratorExpImpl(par_IfExp, ocl::Expressions::ExpressionsPackage::IFEXP_ATTRIBUTE_ELSEEXPRESSION));
+	std::shared_ptr<ocl::Expressions::IteratorExpImpl> element(new ocl::Expressions::IteratorExpImpl(par_IfExp, ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_ELSEOWNER));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_IfExp.lock())
 	{
@@ -4094,7 +4094,7 @@ std::shared_ptr<ocl::Expressions::IteratorExp> ExpressionsFactoryImpl::createIte
 }
 std::shared_ptr<ocl::Expressions::IteratorExp> ExpressionsFactoryImpl::createIteratorExp_as_first_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::IteratorExpImpl> element(new ocl::Expressions::IteratorExpImpl(par_CollectionRange, ocl::Expressions::ExpressionsPackage::COLLECTIONRANGE_ATTRIBUTE_FIRST));
+	std::shared_ptr<ocl::Expressions::IteratorExpImpl> element(new ocl::Expressions::IteratorExpImpl(par_CollectionRange, ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_FIRSTOWNER));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_CollectionRange.lock())
 	{
@@ -4146,7 +4146,7 @@ std::shared_ptr<ocl::Expressions::IteratorExp> ExpressionsFactoryImpl::createIte
 }
 std::shared_ptr<ocl::Expressions::IteratorExp> ExpressionsFactoryImpl::createIteratorExp_as_last_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::IteratorExpImpl> element(new ocl::Expressions::IteratorExpImpl(par_CollectionRange, ocl::Expressions::ExpressionsPackage::COLLECTIONRANGE_ATTRIBUTE_LAST));
+	std::shared_ptr<ocl::Expressions::IteratorExpImpl> element(new ocl::Expressions::IteratorExpImpl(par_CollectionRange, ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_LASTOWNER));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_CollectionRange.lock())
 	{
@@ -4185,7 +4185,7 @@ std::shared_ptr<ocl::Expressions::IteratorExp> ExpressionsFactoryImpl::createIte
 }
 std::shared_ptr<ocl::Expressions::IteratorExp> ExpressionsFactoryImpl::createIteratorExp_as_thenExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::IteratorExpImpl> element(new ocl::Expressions::IteratorExpImpl(par_IfExp, ocl::Expressions::ExpressionsPackage::IFEXP_ATTRIBUTE_THENEXPRESSION));
+	std::shared_ptr<ocl::Expressions::IteratorExpImpl> element(new ocl::Expressions::IteratorExpImpl(par_IfExp, ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_THENOWNER));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_IfExp.lock())
 	{
@@ -4244,7 +4244,7 @@ std::shared_ptr<ocl::Expressions::LetExp> ExpressionsFactoryImpl::createLetExp_a
 }
 std::shared_ptr<ocl::Expressions::LetExp> ExpressionsFactoryImpl::createLetExp_as_condition_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::LetExpImpl> element(new ocl::Expressions::LetExpImpl(par_IfExp, ocl::Expressions::ExpressionsPackage::IFEXP_ATTRIBUTE_CONDITION));
+	std::shared_ptr<ocl::Expressions::LetExpImpl> element(new ocl::Expressions::LetExpImpl(par_IfExp, ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_IFOWNER));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_IfExp.lock())
 	{
@@ -4257,7 +4257,7 @@ std::shared_ptr<ocl::Expressions::LetExp> ExpressionsFactoryImpl::createLetExp_a
 }
 std::shared_ptr<ocl::Expressions::LetExp> ExpressionsFactoryImpl::createLetExp_as_elseExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::LetExpImpl> element(new ocl::Expressions::LetExpImpl(par_IfExp, ocl::Expressions::ExpressionsPackage::IFEXP_ATTRIBUTE_ELSEEXPRESSION));
+	std::shared_ptr<ocl::Expressions::LetExpImpl> element(new ocl::Expressions::LetExpImpl(par_IfExp, ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_ELSEOWNER));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_IfExp.lock())
 	{
@@ -4270,7 +4270,7 @@ std::shared_ptr<ocl::Expressions::LetExp> ExpressionsFactoryImpl::createLetExp_a
 }
 std::shared_ptr<ocl::Expressions::LetExp> ExpressionsFactoryImpl::createLetExp_as_first_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::LetExpImpl> element(new ocl::Expressions::LetExpImpl(par_CollectionRange, ocl::Expressions::ExpressionsPackage::COLLECTIONRANGE_ATTRIBUTE_FIRST));
+	std::shared_ptr<ocl::Expressions::LetExpImpl> element(new ocl::Expressions::LetExpImpl(par_CollectionRange, ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_FIRSTOWNER));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_CollectionRange.lock())
 	{
@@ -4322,7 +4322,7 @@ std::shared_ptr<ocl::Expressions::LetExp> ExpressionsFactoryImpl::createLetExp_a
 }
 std::shared_ptr<ocl::Expressions::LetExp> ExpressionsFactoryImpl::createLetExp_as_last_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::LetExpImpl> element(new ocl::Expressions::LetExpImpl(par_CollectionRange, ocl::Expressions::ExpressionsPackage::COLLECTIONRANGE_ATTRIBUTE_LAST));
+	std::shared_ptr<ocl::Expressions::LetExpImpl> element(new ocl::Expressions::LetExpImpl(par_CollectionRange, ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_LASTOWNER));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_CollectionRange.lock())
 	{
@@ -4361,7 +4361,7 @@ std::shared_ptr<ocl::Expressions::LetExp> ExpressionsFactoryImpl::createLetExp_a
 }
 std::shared_ptr<ocl::Expressions::LetExp> ExpressionsFactoryImpl::createLetExp_as_thenExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::LetExpImpl> element(new ocl::Expressions::LetExpImpl(par_IfExp, ocl::Expressions::ExpressionsPackage::IFEXP_ATTRIBUTE_THENEXPRESSION));
+	std::shared_ptr<ocl::Expressions::LetExpImpl> element(new ocl::Expressions::LetExpImpl(par_IfExp, ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_THENOWNER));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_IfExp.lock())
 	{
@@ -4420,7 +4420,7 @@ std::shared_ptr<ocl::Expressions::MessageExp> ExpressionsFactoryImpl::createMess
 }
 std::shared_ptr<ocl::Expressions::MessageExp> ExpressionsFactoryImpl::createMessageExp_as_condition_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::MessageExpImpl> element(new ocl::Expressions::MessageExpImpl(par_IfExp, ocl::Expressions::ExpressionsPackage::IFEXP_ATTRIBUTE_CONDITION));
+	std::shared_ptr<ocl::Expressions::MessageExpImpl> element(new ocl::Expressions::MessageExpImpl(par_IfExp, ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_IFOWNER));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_IfExp.lock())
 	{
@@ -4433,7 +4433,7 @@ std::shared_ptr<ocl::Expressions::MessageExp> ExpressionsFactoryImpl::createMess
 }
 std::shared_ptr<ocl::Expressions::MessageExp> ExpressionsFactoryImpl::createMessageExp_as_elseExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::MessageExpImpl> element(new ocl::Expressions::MessageExpImpl(par_IfExp, ocl::Expressions::ExpressionsPackage::IFEXP_ATTRIBUTE_ELSEEXPRESSION));
+	std::shared_ptr<ocl::Expressions::MessageExpImpl> element(new ocl::Expressions::MessageExpImpl(par_IfExp, ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_ELSEOWNER));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_IfExp.lock())
 	{
@@ -4446,7 +4446,7 @@ std::shared_ptr<ocl::Expressions::MessageExp> ExpressionsFactoryImpl::createMess
 }
 std::shared_ptr<ocl::Expressions::MessageExp> ExpressionsFactoryImpl::createMessageExp_as_first_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::MessageExpImpl> element(new ocl::Expressions::MessageExpImpl(par_CollectionRange, ocl::Expressions::ExpressionsPackage::COLLECTIONRANGE_ATTRIBUTE_FIRST));
+	std::shared_ptr<ocl::Expressions::MessageExpImpl> element(new ocl::Expressions::MessageExpImpl(par_CollectionRange, ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_FIRSTOWNER));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_CollectionRange.lock())
 	{
@@ -4498,7 +4498,7 @@ std::shared_ptr<ocl::Expressions::MessageExp> ExpressionsFactoryImpl::createMess
 }
 std::shared_ptr<ocl::Expressions::MessageExp> ExpressionsFactoryImpl::createMessageExp_as_last_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::MessageExpImpl> element(new ocl::Expressions::MessageExpImpl(par_CollectionRange, ocl::Expressions::ExpressionsPackage::COLLECTIONRANGE_ATTRIBUTE_LAST));
+	std::shared_ptr<ocl::Expressions::MessageExpImpl> element(new ocl::Expressions::MessageExpImpl(par_CollectionRange, ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_LASTOWNER));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_CollectionRange.lock())
 	{
@@ -4537,7 +4537,7 @@ std::shared_ptr<ocl::Expressions::MessageExp> ExpressionsFactoryImpl::createMess
 }
 std::shared_ptr<ocl::Expressions::MessageExp> ExpressionsFactoryImpl::createMessageExp_as_thenExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::MessageExpImpl> element(new ocl::Expressions::MessageExpImpl(par_IfExp, ocl::Expressions::ExpressionsPackage::IFEXP_ATTRIBUTE_THENEXPRESSION));
+	std::shared_ptr<ocl::Expressions::MessageExpImpl> element(new ocl::Expressions::MessageExpImpl(par_IfExp, ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_THENOWNER));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_IfExp.lock())
 	{
@@ -4596,7 +4596,7 @@ std::shared_ptr<ocl::Expressions::NullLiteralExp> ExpressionsFactoryImpl::create
 }
 std::shared_ptr<ocl::Expressions::NullLiteralExp> ExpressionsFactoryImpl::createNullLiteralExp_as_condition_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::NullLiteralExpImpl> element(new ocl::Expressions::NullLiteralExpImpl(par_IfExp, ocl::Expressions::ExpressionsPackage::IFEXP_ATTRIBUTE_CONDITION));
+	std::shared_ptr<ocl::Expressions::NullLiteralExpImpl> element(new ocl::Expressions::NullLiteralExpImpl(par_IfExp, ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_IFOWNER));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_IfExp.lock())
 	{
@@ -4609,7 +4609,7 @@ std::shared_ptr<ocl::Expressions::NullLiteralExp> ExpressionsFactoryImpl::create
 }
 std::shared_ptr<ocl::Expressions::NullLiteralExp> ExpressionsFactoryImpl::createNullLiteralExp_as_elseExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::NullLiteralExpImpl> element(new ocl::Expressions::NullLiteralExpImpl(par_IfExp, ocl::Expressions::ExpressionsPackage::IFEXP_ATTRIBUTE_ELSEEXPRESSION));
+	std::shared_ptr<ocl::Expressions::NullLiteralExpImpl> element(new ocl::Expressions::NullLiteralExpImpl(par_IfExp, ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_ELSEOWNER));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_IfExp.lock())
 	{
@@ -4622,7 +4622,7 @@ std::shared_ptr<ocl::Expressions::NullLiteralExp> ExpressionsFactoryImpl::create
 }
 std::shared_ptr<ocl::Expressions::NullLiteralExp> ExpressionsFactoryImpl::createNullLiteralExp_as_first_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::NullLiteralExpImpl> element(new ocl::Expressions::NullLiteralExpImpl(par_CollectionRange, ocl::Expressions::ExpressionsPackage::COLLECTIONRANGE_ATTRIBUTE_FIRST));
+	std::shared_ptr<ocl::Expressions::NullLiteralExpImpl> element(new ocl::Expressions::NullLiteralExpImpl(par_CollectionRange, ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_FIRSTOWNER));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_CollectionRange.lock())
 	{
@@ -4674,7 +4674,7 @@ std::shared_ptr<ocl::Expressions::NullLiteralExp> ExpressionsFactoryImpl::create
 }
 std::shared_ptr<ocl::Expressions::NullLiteralExp> ExpressionsFactoryImpl::createNullLiteralExp_as_last_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::NullLiteralExpImpl> element(new ocl::Expressions::NullLiteralExpImpl(par_CollectionRange, ocl::Expressions::ExpressionsPackage::COLLECTIONRANGE_ATTRIBUTE_LAST));
+	std::shared_ptr<ocl::Expressions::NullLiteralExpImpl> element(new ocl::Expressions::NullLiteralExpImpl(par_CollectionRange, ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_LASTOWNER));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_CollectionRange.lock())
 	{
@@ -4713,7 +4713,7 @@ std::shared_ptr<ocl::Expressions::NullLiteralExp> ExpressionsFactoryImpl::create
 }
 std::shared_ptr<ocl::Expressions::NullLiteralExp> ExpressionsFactoryImpl::createNullLiteralExp_as_thenExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::NullLiteralExpImpl> element(new ocl::Expressions::NullLiteralExpImpl(par_IfExp, ocl::Expressions::ExpressionsPackage::IFEXP_ATTRIBUTE_THENEXPRESSION));
+	std::shared_ptr<ocl::Expressions::NullLiteralExpImpl> element(new ocl::Expressions::NullLiteralExpImpl(par_IfExp, ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_THENOWNER));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_IfExp.lock())
 	{
@@ -4772,7 +4772,7 @@ std::shared_ptr<ocl::Expressions::OperationCallExp> ExpressionsFactoryImpl::crea
 }
 std::shared_ptr<ocl::Expressions::OperationCallExp> ExpressionsFactoryImpl::createOperationCallExp_as_condition_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::OperationCallExpImpl> element(new ocl::Expressions::OperationCallExpImpl(par_IfExp, ocl::Expressions::ExpressionsPackage::IFEXP_ATTRIBUTE_CONDITION));
+	std::shared_ptr<ocl::Expressions::OperationCallExpImpl> element(new ocl::Expressions::OperationCallExpImpl(par_IfExp, ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_IFOWNER));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_IfExp.lock())
 	{
@@ -4785,7 +4785,7 @@ std::shared_ptr<ocl::Expressions::OperationCallExp> ExpressionsFactoryImpl::crea
 }
 std::shared_ptr<ocl::Expressions::OperationCallExp> ExpressionsFactoryImpl::createOperationCallExp_as_elseExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::OperationCallExpImpl> element(new ocl::Expressions::OperationCallExpImpl(par_IfExp, ocl::Expressions::ExpressionsPackage::IFEXP_ATTRIBUTE_ELSEEXPRESSION));
+	std::shared_ptr<ocl::Expressions::OperationCallExpImpl> element(new ocl::Expressions::OperationCallExpImpl(par_IfExp, ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_ELSEOWNER));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_IfExp.lock())
 	{
@@ -4798,7 +4798,7 @@ std::shared_ptr<ocl::Expressions::OperationCallExp> ExpressionsFactoryImpl::crea
 }
 std::shared_ptr<ocl::Expressions::OperationCallExp> ExpressionsFactoryImpl::createOperationCallExp_as_first_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::OperationCallExpImpl> element(new ocl::Expressions::OperationCallExpImpl(par_CollectionRange, ocl::Expressions::ExpressionsPackage::COLLECTIONRANGE_ATTRIBUTE_FIRST));
+	std::shared_ptr<ocl::Expressions::OperationCallExpImpl> element(new ocl::Expressions::OperationCallExpImpl(par_CollectionRange, ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_FIRSTOWNER));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_CollectionRange.lock())
 	{
@@ -4850,7 +4850,7 @@ std::shared_ptr<ocl::Expressions::OperationCallExp> ExpressionsFactoryImpl::crea
 }
 std::shared_ptr<ocl::Expressions::OperationCallExp> ExpressionsFactoryImpl::createOperationCallExp_as_last_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::OperationCallExpImpl> element(new ocl::Expressions::OperationCallExpImpl(par_CollectionRange, ocl::Expressions::ExpressionsPackage::COLLECTIONRANGE_ATTRIBUTE_LAST));
+	std::shared_ptr<ocl::Expressions::OperationCallExpImpl> element(new ocl::Expressions::OperationCallExpImpl(par_CollectionRange, ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_LASTOWNER));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_CollectionRange.lock())
 	{
@@ -4889,7 +4889,7 @@ std::shared_ptr<ocl::Expressions::OperationCallExp> ExpressionsFactoryImpl::crea
 }
 std::shared_ptr<ocl::Expressions::OperationCallExp> ExpressionsFactoryImpl::createOperationCallExp_as_thenExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::OperationCallExpImpl> element(new ocl::Expressions::OperationCallExpImpl(par_IfExp, ocl::Expressions::ExpressionsPackage::IFEXP_ATTRIBUTE_THENEXPRESSION));
+	std::shared_ptr<ocl::Expressions::OperationCallExpImpl> element(new ocl::Expressions::OperationCallExpImpl(par_IfExp, ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_THENOWNER));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_IfExp.lock())
 	{
@@ -4948,7 +4948,7 @@ std::shared_ptr<ocl::Expressions::PropertyCallExp> ExpressionsFactoryImpl::creat
 }
 std::shared_ptr<ocl::Expressions::PropertyCallExp> ExpressionsFactoryImpl::createPropertyCallExp_as_condition_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::PropertyCallExpImpl> element(new ocl::Expressions::PropertyCallExpImpl(par_IfExp, ocl::Expressions::ExpressionsPackage::IFEXP_ATTRIBUTE_CONDITION));
+	std::shared_ptr<ocl::Expressions::PropertyCallExpImpl> element(new ocl::Expressions::PropertyCallExpImpl(par_IfExp, ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_IFOWNER));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_IfExp.lock())
 	{
@@ -4961,7 +4961,7 @@ std::shared_ptr<ocl::Expressions::PropertyCallExp> ExpressionsFactoryImpl::creat
 }
 std::shared_ptr<ocl::Expressions::PropertyCallExp> ExpressionsFactoryImpl::createPropertyCallExp_as_elseExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::PropertyCallExpImpl> element(new ocl::Expressions::PropertyCallExpImpl(par_IfExp, ocl::Expressions::ExpressionsPackage::IFEXP_ATTRIBUTE_ELSEEXPRESSION));
+	std::shared_ptr<ocl::Expressions::PropertyCallExpImpl> element(new ocl::Expressions::PropertyCallExpImpl(par_IfExp, ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_ELSEOWNER));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_IfExp.lock())
 	{
@@ -4974,7 +4974,7 @@ std::shared_ptr<ocl::Expressions::PropertyCallExp> ExpressionsFactoryImpl::creat
 }
 std::shared_ptr<ocl::Expressions::PropertyCallExp> ExpressionsFactoryImpl::createPropertyCallExp_as_first_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::PropertyCallExpImpl> element(new ocl::Expressions::PropertyCallExpImpl(par_CollectionRange, ocl::Expressions::ExpressionsPackage::COLLECTIONRANGE_ATTRIBUTE_FIRST));
+	std::shared_ptr<ocl::Expressions::PropertyCallExpImpl> element(new ocl::Expressions::PropertyCallExpImpl(par_CollectionRange, ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_FIRSTOWNER));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_CollectionRange.lock())
 	{
@@ -5026,7 +5026,7 @@ std::shared_ptr<ocl::Expressions::PropertyCallExp> ExpressionsFactoryImpl::creat
 }
 std::shared_ptr<ocl::Expressions::PropertyCallExp> ExpressionsFactoryImpl::createPropertyCallExp_as_last_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::PropertyCallExpImpl> element(new ocl::Expressions::PropertyCallExpImpl(par_CollectionRange, ocl::Expressions::ExpressionsPackage::COLLECTIONRANGE_ATTRIBUTE_LAST));
+	std::shared_ptr<ocl::Expressions::PropertyCallExpImpl> element(new ocl::Expressions::PropertyCallExpImpl(par_CollectionRange, ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_LASTOWNER));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_CollectionRange.lock())
 	{
@@ -5065,7 +5065,7 @@ std::shared_ptr<ocl::Expressions::PropertyCallExp> ExpressionsFactoryImpl::creat
 }
 std::shared_ptr<ocl::Expressions::PropertyCallExp> ExpressionsFactoryImpl::createPropertyCallExp_as_thenExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::PropertyCallExpImpl> element(new ocl::Expressions::PropertyCallExpImpl(par_IfExp, ocl::Expressions::ExpressionsPackage::IFEXP_ATTRIBUTE_THENEXPRESSION));
+	std::shared_ptr<ocl::Expressions::PropertyCallExpImpl> element(new ocl::Expressions::PropertyCallExpImpl(par_IfExp, ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_THENOWNER));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_IfExp.lock())
 	{
@@ -5124,7 +5124,7 @@ std::shared_ptr<ocl::Expressions::RealLiteralExp> ExpressionsFactoryImpl::create
 }
 std::shared_ptr<ocl::Expressions::RealLiteralExp> ExpressionsFactoryImpl::createRealLiteralExp_as_condition_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::RealLiteralExpImpl> element(new ocl::Expressions::RealLiteralExpImpl(par_IfExp, ocl::Expressions::ExpressionsPackage::IFEXP_ATTRIBUTE_CONDITION));
+	std::shared_ptr<ocl::Expressions::RealLiteralExpImpl> element(new ocl::Expressions::RealLiteralExpImpl(par_IfExp, ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_IFOWNER));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_IfExp.lock())
 	{
@@ -5137,7 +5137,7 @@ std::shared_ptr<ocl::Expressions::RealLiteralExp> ExpressionsFactoryImpl::create
 }
 std::shared_ptr<ocl::Expressions::RealLiteralExp> ExpressionsFactoryImpl::createRealLiteralExp_as_elseExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::RealLiteralExpImpl> element(new ocl::Expressions::RealLiteralExpImpl(par_IfExp, ocl::Expressions::ExpressionsPackage::IFEXP_ATTRIBUTE_ELSEEXPRESSION));
+	std::shared_ptr<ocl::Expressions::RealLiteralExpImpl> element(new ocl::Expressions::RealLiteralExpImpl(par_IfExp, ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_ELSEOWNER));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_IfExp.lock())
 	{
@@ -5150,7 +5150,7 @@ std::shared_ptr<ocl::Expressions::RealLiteralExp> ExpressionsFactoryImpl::create
 }
 std::shared_ptr<ocl::Expressions::RealLiteralExp> ExpressionsFactoryImpl::createRealLiteralExp_as_first_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::RealLiteralExpImpl> element(new ocl::Expressions::RealLiteralExpImpl(par_CollectionRange, ocl::Expressions::ExpressionsPackage::COLLECTIONRANGE_ATTRIBUTE_FIRST));
+	std::shared_ptr<ocl::Expressions::RealLiteralExpImpl> element(new ocl::Expressions::RealLiteralExpImpl(par_CollectionRange, ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_FIRSTOWNER));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_CollectionRange.lock())
 	{
@@ -5202,7 +5202,7 @@ std::shared_ptr<ocl::Expressions::RealLiteralExp> ExpressionsFactoryImpl::create
 }
 std::shared_ptr<ocl::Expressions::RealLiteralExp> ExpressionsFactoryImpl::createRealLiteralExp_as_last_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::RealLiteralExpImpl> element(new ocl::Expressions::RealLiteralExpImpl(par_CollectionRange, ocl::Expressions::ExpressionsPackage::COLLECTIONRANGE_ATTRIBUTE_LAST));
+	std::shared_ptr<ocl::Expressions::RealLiteralExpImpl> element(new ocl::Expressions::RealLiteralExpImpl(par_CollectionRange, ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_LASTOWNER));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_CollectionRange.lock())
 	{
@@ -5241,7 +5241,7 @@ std::shared_ptr<ocl::Expressions::RealLiteralExp> ExpressionsFactoryImpl::create
 }
 std::shared_ptr<ocl::Expressions::RealLiteralExp> ExpressionsFactoryImpl::createRealLiteralExp_as_thenExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::RealLiteralExpImpl> element(new ocl::Expressions::RealLiteralExpImpl(par_IfExp, ocl::Expressions::ExpressionsPackage::IFEXP_ATTRIBUTE_THENEXPRESSION));
+	std::shared_ptr<ocl::Expressions::RealLiteralExpImpl> element(new ocl::Expressions::RealLiteralExpImpl(par_IfExp, ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_THENOWNER));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_IfExp.lock())
 	{
@@ -5300,7 +5300,7 @@ std::shared_ptr<ocl::Expressions::StateExp> ExpressionsFactoryImpl::createStateE
 }
 std::shared_ptr<ocl::Expressions::StateExp> ExpressionsFactoryImpl::createStateExp_as_condition_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::StateExpImpl> element(new ocl::Expressions::StateExpImpl(par_IfExp, ocl::Expressions::ExpressionsPackage::IFEXP_ATTRIBUTE_CONDITION));
+	std::shared_ptr<ocl::Expressions::StateExpImpl> element(new ocl::Expressions::StateExpImpl(par_IfExp, ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_IFOWNER));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_IfExp.lock())
 	{
@@ -5313,7 +5313,7 @@ std::shared_ptr<ocl::Expressions::StateExp> ExpressionsFactoryImpl::createStateE
 }
 std::shared_ptr<ocl::Expressions::StateExp> ExpressionsFactoryImpl::createStateExp_as_elseExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::StateExpImpl> element(new ocl::Expressions::StateExpImpl(par_IfExp, ocl::Expressions::ExpressionsPackage::IFEXP_ATTRIBUTE_ELSEEXPRESSION));
+	std::shared_ptr<ocl::Expressions::StateExpImpl> element(new ocl::Expressions::StateExpImpl(par_IfExp, ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_ELSEOWNER));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_IfExp.lock())
 	{
@@ -5326,7 +5326,7 @@ std::shared_ptr<ocl::Expressions::StateExp> ExpressionsFactoryImpl::createStateE
 }
 std::shared_ptr<ocl::Expressions::StateExp> ExpressionsFactoryImpl::createStateExp_as_first_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::StateExpImpl> element(new ocl::Expressions::StateExpImpl(par_CollectionRange, ocl::Expressions::ExpressionsPackage::COLLECTIONRANGE_ATTRIBUTE_FIRST));
+	std::shared_ptr<ocl::Expressions::StateExpImpl> element(new ocl::Expressions::StateExpImpl(par_CollectionRange, ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_FIRSTOWNER));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_CollectionRange.lock())
 	{
@@ -5378,7 +5378,7 @@ std::shared_ptr<ocl::Expressions::StateExp> ExpressionsFactoryImpl::createStateE
 }
 std::shared_ptr<ocl::Expressions::StateExp> ExpressionsFactoryImpl::createStateExp_as_last_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::StateExpImpl> element(new ocl::Expressions::StateExpImpl(par_CollectionRange, ocl::Expressions::ExpressionsPackage::COLLECTIONRANGE_ATTRIBUTE_LAST));
+	std::shared_ptr<ocl::Expressions::StateExpImpl> element(new ocl::Expressions::StateExpImpl(par_CollectionRange, ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_LASTOWNER));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_CollectionRange.lock())
 	{
@@ -5417,7 +5417,7 @@ std::shared_ptr<ocl::Expressions::StateExp> ExpressionsFactoryImpl::createStateE
 }
 std::shared_ptr<ocl::Expressions::StateExp> ExpressionsFactoryImpl::createStateExp_as_thenExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::StateExpImpl> element(new ocl::Expressions::StateExpImpl(par_IfExp, ocl::Expressions::ExpressionsPackage::IFEXP_ATTRIBUTE_THENEXPRESSION));
+	std::shared_ptr<ocl::Expressions::StateExpImpl> element(new ocl::Expressions::StateExpImpl(par_IfExp, ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_THENOWNER));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_IfExp.lock())
 	{
@@ -5476,7 +5476,7 @@ std::shared_ptr<ocl::Expressions::StringLiteralExp> ExpressionsFactoryImpl::crea
 }
 std::shared_ptr<ocl::Expressions::StringLiteralExp> ExpressionsFactoryImpl::createStringLiteralExp_as_condition_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::StringLiteralExpImpl> element(new ocl::Expressions::StringLiteralExpImpl(par_IfExp, ocl::Expressions::ExpressionsPackage::IFEXP_ATTRIBUTE_CONDITION));
+	std::shared_ptr<ocl::Expressions::StringLiteralExpImpl> element(new ocl::Expressions::StringLiteralExpImpl(par_IfExp, ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_IFOWNER));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_IfExp.lock())
 	{
@@ -5489,7 +5489,7 @@ std::shared_ptr<ocl::Expressions::StringLiteralExp> ExpressionsFactoryImpl::crea
 }
 std::shared_ptr<ocl::Expressions::StringLiteralExp> ExpressionsFactoryImpl::createStringLiteralExp_as_elseExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::StringLiteralExpImpl> element(new ocl::Expressions::StringLiteralExpImpl(par_IfExp, ocl::Expressions::ExpressionsPackage::IFEXP_ATTRIBUTE_ELSEEXPRESSION));
+	std::shared_ptr<ocl::Expressions::StringLiteralExpImpl> element(new ocl::Expressions::StringLiteralExpImpl(par_IfExp, ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_ELSEOWNER));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_IfExp.lock())
 	{
@@ -5502,7 +5502,7 @@ std::shared_ptr<ocl::Expressions::StringLiteralExp> ExpressionsFactoryImpl::crea
 }
 std::shared_ptr<ocl::Expressions::StringLiteralExp> ExpressionsFactoryImpl::createStringLiteralExp_as_first_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::StringLiteralExpImpl> element(new ocl::Expressions::StringLiteralExpImpl(par_CollectionRange, ocl::Expressions::ExpressionsPackage::COLLECTIONRANGE_ATTRIBUTE_FIRST));
+	std::shared_ptr<ocl::Expressions::StringLiteralExpImpl> element(new ocl::Expressions::StringLiteralExpImpl(par_CollectionRange, ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_FIRSTOWNER));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_CollectionRange.lock())
 	{
@@ -5554,7 +5554,7 @@ std::shared_ptr<ocl::Expressions::StringLiteralExp> ExpressionsFactoryImpl::crea
 }
 std::shared_ptr<ocl::Expressions::StringLiteralExp> ExpressionsFactoryImpl::createStringLiteralExp_as_last_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::StringLiteralExpImpl> element(new ocl::Expressions::StringLiteralExpImpl(par_CollectionRange, ocl::Expressions::ExpressionsPackage::COLLECTIONRANGE_ATTRIBUTE_LAST));
+	std::shared_ptr<ocl::Expressions::StringLiteralExpImpl> element(new ocl::Expressions::StringLiteralExpImpl(par_CollectionRange, ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_LASTOWNER));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_CollectionRange.lock())
 	{
@@ -5593,7 +5593,7 @@ std::shared_ptr<ocl::Expressions::StringLiteralExp> ExpressionsFactoryImpl::crea
 }
 std::shared_ptr<ocl::Expressions::StringLiteralExp> ExpressionsFactoryImpl::createStringLiteralExp_as_thenExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::StringLiteralExpImpl> element(new ocl::Expressions::StringLiteralExpImpl(par_IfExp, ocl::Expressions::ExpressionsPackage::IFEXP_ATTRIBUTE_THENEXPRESSION));
+	std::shared_ptr<ocl::Expressions::StringLiteralExpImpl> element(new ocl::Expressions::StringLiteralExpImpl(par_IfExp, ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_THENOWNER));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_IfExp.lock())
 	{
@@ -5652,7 +5652,7 @@ std::shared_ptr<ocl::Expressions::TupleLiteralExp> ExpressionsFactoryImpl::creat
 }
 std::shared_ptr<ocl::Expressions::TupleLiteralExp> ExpressionsFactoryImpl::createTupleLiteralExp_as_condition_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::TupleLiteralExpImpl> element(new ocl::Expressions::TupleLiteralExpImpl(par_IfExp, ocl::Expressions::ExpressionsPackage::IFEXP_ATTRIBUTE_CONDITION));
+	std::shared_ptr<ocl::Expressions::TupleLiteralExpImpl> element(new ocl::Expressions::TupleLiteralExpImpl(par_IfExp, ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_IFOWNER));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_IfExp.lock())
 	{
@@ -5665,7 +5665,7 @@ std::shared_ptr<ocl::Expressions::TupleLiteralExp> ExpressionsFactoryImpl::creat
 }
 std::shared_ptr<ocl::Expressions::TupleLiteralExp> ExpressionsFactoryImpl::createTupleLiteralExp_as_elseExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::TupleLiteralExpImpl> element(new ocl::Expressions::TupleLiteralExpImpl(par_IfExp, ocl::Expressions::ExpressionsPackage::IFEXP_ATTRIBUTE_ELSEEXPRESSION));
+	std::shared_ptr<ocl::Expressions::TupleLiteralExpImpl> element(new ocl::Expressions::TupleLiteralExpImpl(par_IfExp, ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_ELSEOWNER));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_IfExp.lock())
 	{
@@ -5678,7 +5678,7 @@ std::shared_ptr<ocl::Expressions::TupleLiteralExp> ExpressionsFactoryImpl::creat
 }
 std::shared_ptr<ocl::Expressions::TupleLiteralExp> ExpressionsFactoryImpl::createTupleLiteralExp_as_first_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::TupleLiteralExpImpl> element(new ocl::Expressions::TupleLiteralExpImpl(par_CollectionRange, ocl::Expressions::ExpressionsPackage::COLLECTIONRANGE_ATTRIBUTE_FIRST));
+	std::shared_ptr<ocl::Expressions::TupleLiteralExpImpl> element(new ocl::Expressions::TupleLiteralExpImpl(par_CollectionRange, ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_FIRSTOWNER));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_CollectionRange.lock())
 	{
@@ -5730,7 +5730,7 @@ std::shared_ptr<ocl::Expressions::TupleLiteralExp> ExpressionsFactoryImpl::creat
 }
 std::shared_ptr<ocl::Expressions::TupleLiteralExp> ExpressionsFactoryImpl::createTupleLiteralExp_as_last_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::TupleLiteralExpImpl> element(new ocl::Expressions::TupleLiteralExpImpl(par_CollectionRange, ocl::Expressions::ExpressionsPackage::COLLECTIONRANGE_ATTRIBUTE_LAST));
+	std::shared_ptr<ocl::Expressions::TupleLiteralExpImpl> element(new ocl::Expressions::TupleLiteralExpImpl(par_CollectionRange, ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_LASTOWNER));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_CollectionRange.lock())
 	{
@@ -5769,7 +5769,7 @@ std::shared_ptr<ocl::Expressions::TupleLiteralExp> ExpressionsFactoryImpl::creat
 }
 std::shared_ptr<ocl::Expressions::TupleLiteralExp> ExpressionsFactoryImpl::createTupleLiteralExp_as_thenExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::TupleLiteralExpImpl> element(new ocl::Expressions::TupleLiteralExpImpl(par_IfExp, ocl::Expressions::ExpressionsPackage::IFEXP_ATTRIBUTE_THENEXPRESSION));
+	std::shared_ptr<ocl::Expressions::TupleLiteralExpImpl> element(new ocl::Expressions::TupleLiteralExpImpl(par_IfExp, ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_THENOWNER));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_IfExp.lock())
 	{
@@ -5848,7 +5848,7 @@ std::shared_ptr<ocl::Expressions::TypeExp> ExpressionsFactoryImpl::createTypeExp
 }
 std::shared_ptr<ocl::Expressions::TypeExp> ExpressionsFactoryImpl::createTypeExp_as_condition_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::TypeExpImpl> element(new ocl::Expressions::TypeExpImpl(par_IfExp, ocl::Expressions::ExpressionsPackage::IFEXP_ATTRIBUTE_CONDITION));
+	std::shared_ptr<ocl::Expressions::TypeExpImpl> element(new ocl::Expressions::TypeExpImpl(par_IfExp, ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_IFOWNER));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_IfExp.lock())
 	{
@@ -5861,7 +5861,7 @@ std::shared_ptr<ocl::Expressions::TypeExp> ExpressionsFactoryImpl::createTypeExp
 }
 std::shared_ptr<ocl::Expressions::TypeExp> ExpressionsFactoryImpl::createTypeExp_as_elseExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::TypeExpImpl> element(new ocl::Expressions::TypeExpImpl(par_IfExp, ocl::Expressions::ExpressionsPackage::IFEXP_ATTRIBUTE_ELSEEXPRESSION));
+	std::shared_ptr<ocl::Expressions::TypeExpImpl> element(new ocl::Expressions::TypeExpImpl(par_IfExp, ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_ELSEOWNER));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_IfExp.lock())
 	{
@@ -5874,7 +5874,7 @@ std::shared_ptr<ocl::Expressions::TypeExp> ExpressionsFactoryImpl::createTypeExp
 }
 std::shared_ptr<ocl::Expressions::TypeExp> ExpressionsFactoryImpl::createTypeExp_as_first_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::TypeExpImpl> element(new ocl::Expressions::TypeExpImpl(par_CollectionRange, ocl::Expressions::ExpressionsPackage::COLLECTIONRANGE_ATTRIBUTE_FIRST));
+	std::shared_ptr<ocl::Expressions::TypeExpImpl> element(new ocl::Expressions::TypeExpImpl(par_CollectionRange, ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_FIRSTOWNER));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_CollectionRange.lock())
 	{
@@ -5926,7 +5926,7 @@ std::shared_ptr<ocl::Expressions::TypeExp> ExpressionsFactoryImpl::createTypeExp
 }
 std::shared_ptr<ocl::Expressions::TypeExp> ExpressionsFactoryImpl::createTypeExp_as_last_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::TypeExpImpl> element(new ocl::Expressions::TypeExpImpl(par_CollectionRange, ocl::Expressions::ExpressionsPackage::COLLECTIONRANGE_ATTRIBUTE_LAST));
+	std::shared_ptr<ocl::Expressions::TypeExpImpl> element(new ocl::Expressions::TypeExpImpl(par_CollectionRange, ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_LASTOWNER));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_CollectionRange.lock())
 	{
@@ -5965,7 +5965,7 @@ std::shared_ptr<ocl::Expressions::TypeExp> ExpressionsFactoryImpl::createTypeExp
 }
 std::shared_ptr<ocl::Expressions::TypeExp> ExpressionsFactoryImpl::createTypeExp_as_thenExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::TypeExpImpl> element(new ocl::Expressions::TypeExpImpl(par_IfExp, ocl::Expressions::ExpressionsPackage::IFEXP_ATTRIBUTE_THENEXPRESSION));
+	std::shared_ptr<ocl::Expressions::TypeExpImpl> element(new ocl::Expressions::TypeExpImpl(par_IfExp, ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_THENOWNER));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_IfExp.lock())
 	{
@@ -6024,7 +6024,7 @@ std::shared_ptr<ocl::Expressions::UnlimitedNaturalExp> ExpressionsFactoryImpl::c
 }
 std::shared_ptr<ocl::Expressions::UnlimitedNaturalExp> ExpressionsFactoryImpl::createUnlimitedNaturalExp_as_condition_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::UnlimitedNaturalExpImpl> element(new ocl::Expressions::UnlimitedNaturalExpImpl(par_IfExp, ocl::Expressions::ExpressionsPackage::IFEXP_ATTRIBUTE_CONDITION));
+	std::shared_ptr<ocl::Expressions::UnlimitedNaturalExpImpl> element(new ocl::Expressions::UnlimitedNaturalExpImpl(par_IfExp, ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_IFOWNER));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_IfExp.lock())
 	{
@@ -6037,7 +6037,7 @@ std::shared_ptr<ocl::Expressions::UnlimitedNaturalExp> ExpressionsFactoryImpl::c
 }
 std::shared_ptr<ocl::Expressions::UnlimitedNaturalExp> ExpressionsFactoryImpl::createUnlimitedNaturalExp_as_elseExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::UnlimitedNaturalExpImpl> element(new ocl::Expressions::UnlimitedNaturalExpImpl(par_IfExp, ocl::Expressions::ExpressionsPackage::IFEXP_ATTRIBUTE_ELSEEXPRESSION));
+	std::shared_ptr<ocl::Expressions::UnlimitedNaturalExpImpl> element(new ocl::Expressions::UnlimitedNaturalExpImpl(par_IfExp, ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_ELSEOWNER));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_IfExp.lock())
 	{
@@ -6050,7 +6050,7 @@ std::shared_ptr<ocl::Expressions::UnlimitedNaturalExp> ExpressionsFactoryImpl::c
 }
 std::shared_ptr<ocl::Expressions::UnlimitedNaturalExp> ExpressionsFactoryImpl::createUnlimitedNaturalExp_as_first_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::UnlimitedNaturalExpImpl> element(new ocl::Expressions::UnlimitedNaturalExpImpl(par_CollectionRange, ocl::Expressions::ExpressionsPackage::COLLECTIONRANGE_ATTRIBUTE_FIRST));
+	std::shared_ptr<ocl::Expressions::UnlimitedNaturalExpImpl> element(new ocl::Expressions::UnlimitedNaturalExpImpl(par_CollectionRange, ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_FIRSTOWNER));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_CollectionRange.lock())
 	{
@@ -6102,7 +6102,7 @@ std::shared_ptr<ocl::Expressions::UnlimitedNaturalExp> ExpressionsFactoryImpl::c
 }
 std::shared_ptr<ocl::Expressions::UnlimitedNaturalExp> ExpressionsFactoryImpl::createUnlimitedNaturalExp_as_last_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::UnlimitedNaturalExpImpl> element(new ocl::Expressions::UnlimitedNaturalExpImpl(par_CollectionRange, ocl::Expressions::ExpressionsPackage::COLLECTIONRANGE_ATTRIBUTE_LAST));
+	std::shared_ptr<ocl::Expressions::UnlimitedNaturalExpImpl> element(new ocl::Expressions::UnlimitedNaturalExpImpl(par_CollectionRange, ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_LASTOWNER));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_CollectionRange.lock())
 	{
@@ -6141,7 +6141,7 @@ std::shared_ptr<ocl::Expressions::UnlimitedNaturalExp> ExpressionsFactoryImpl::c
 }
 std::shared_ptr<ocl::Expressions::UnlimitedNaturalExp> ExpressionsFactoryImpl::createUnlimitedNaturalExp_as_thenExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::UnlimitedNaturalExpImpl> element(new ocl::Expressions::UnlimitedNaturalExpImpl(par_IfExp, ocl::Expressions::ExpressionsPackage::IFEXP_ATTRIBUTE_THENEXPRESSION));
+	std::shared_ptr<ocl::Expressions::UnlimitedNaturalExpImpl> element(new ocl::Expressions::UnlimitedNaturalExpImpl(par_IfExp, ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_THENOWNER));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_IfExp.lock())
 	{
@@ -6200,7 +6200,7 @@ std::shared_ptr<ocl::Expressions::UnspecifiedValueExp> ExpressionsFactoryImpl::c
 }
 std::shared_ptr<ocl::Expressions::UnspecifiedValueExp> ExpressionsFactoryImpl::createUnspecifiedValueExp_as_condition_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::UnspecifiedValueExpImpl> element(new ocl::Expressions::UnspecifiedValueExpImpl(par_IfExp, ocl::Expressions::ExpressionsPackage::IFEXP_ATTRIBUTE_CONDITION));
+	std::shared_ptr<ocl::Expressions::UnspecifiedValueExpImpl> element(new ocl::Expressions::UnspecifiedValueExpImpl(par_IfExp, ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_IFOWNER));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_IfExp.lock())
 	{
@@ -6213,7 +6213,7 @@ std::shared_ptr<ocl::Expressions::UnspecifiedValueExp> ExpressionsFactoryImpl::c
 }
 std::shared_ptr<ocl::Expressions::UnspecifiedValueExp> ExpressionsFactoryImpl::createUnspecifiedValueExp_as_elseExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::UnspecifiedValueExpImpl> element(new ocl::Expressions::UnspecifiedValueExpImpl(par_IfExp, ocl::Expressions::ExpressionsPackage::IFEXP_ATTRIBUTE_ELSEEXPRESSION));
+	std::shared_ptr<ocl::Expressions::UnspecifiedValueExpImpl> element(new ocl::Expressions::UnspecifiedValueExpImpl(par_IfExp, ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_ELSEOWNER));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_IfExp.lock())
 	{
@@ -6226,7 +6226,7 @@ std::shared_ptr<ocl::Expressions::UnspecifiedValueExp> ExpressionsFactoryImpl::c
 }
 std::shared_ptr<ocl::Expressions::UnspecifiedValueExp> ExpressionsFactoryImpl::createUnspecifiedValueExp_as_first_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::UnspecifiedValueExpImpl> element(new ocl::Expressions::UnspecifiedValueExpImpl(par_CollectionRange, ocl::Expressions::ExpressionsPackage::COLLECTIONRANGE_ATTRIBUTE_FIRST));
+	std::shared_ptr<ocl::Expressions::UnspecifiedValueExpImpl> element(new ocl::Expressions::UnspecifiedValueExpImpl(par_CollectionRange, ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_FIRSTOWNER));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_CollectionRange.lock())
 	{
@@ -6278,7 +6278,7 @@ std::shared_ptr<ocl::Expressions::UnspecifiedValueExp> ExpressionsFactoryImpl::c
 }
 std::shared_ptr<ocl::Expressions::UnspecifiedValueExp> ExpressionsFactoryImpl::createUnspecifiedValueExp_as_last_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::UnspecifiedValueExpImpl> element(new ocl::Expressions::UnspecifiedValueExpImpl(par_CollectionRange, ocl::Expressions::ExpressionsPackage::COLLECTIONRANGE_ATTRIBUTE_LAST));
+	std::shared_ptr<ocl::Expressions::UnspecifiedValueExpImpl> element(new ocl::Expressions::UnspecifiedValueExpImpl(par_CollectionRange, ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_LASTOWNER));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_CollectionRange.lock())
 	{
@@ -6317,7 +6317,7 @@ std::shared_ptr<ocl::Expressions::UnspecifiedValueExp> ExpressionsFactoryImpl::c
 }
 std::shared_ptr<ocl::Expressions::UnspecifiedValueExp> ExpressionsFactoryImpl::createUnspecifiedValueExp_as_thenExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::UnspecifiedValueExpImpl> element(new ocl::Expressions::UnspecifiedValueExpImpl(par_IfExp, ocl::Expressions::ExpressionsPackage::IFEXP_ATTRIBUTE_THENEXPRESSION));
+	std::shared_ptr<ocl::Expressions::UnspecifiedValueExpImpl> element(new ocl::Expressions::UnspecifiedValueExpImpl(par_IfExp, ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_THENOWNER));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_IfExp.lock())
 	{
@@ -6337,7 +6337,7 @@ std::shared_ptr<ocl::Expressions::Variable> ExpressionsFactoryImpl::createVariab
 }
 std::shared_ptr<ocl::Expressions::Variable> ExpressionsFactoryImpl::createVariable_as_contextVariable_in_ExpressionInOcl(std::weak_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::VariableImpl> element(new ocl::Expressions::VariableImpl(par_ExpressionInOcl, ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_CONTEXTVARIABLE));
+	std::shared_ptr<ocl::Expressions::VariableImpl> element(new ocl::Expressions::VariableImpl(par_ExpressionInOcl, ocl::Expressions::ExpressionsPackage::VARIABLE_ATTRIBUTE_SELFOWNER));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_ExpressionInOcl.lock())
 	{
@@ -6363,7 +6363,7 @@ std::shared_ptr<ocl::Expressions::Variable> ExpressionsFactoryImpl::createVariab
 }
 std::shared_ptr<ocl::Expressions::Variable> ExpressionsFactoryImpl::createVariable_as_parameterVariable_in_ExpressionInOcl(std::weak_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::VariableImpl> element(new ocl::Expressions::VariableImpl(par_ExpressionInOcl, ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_PARAMETERVARIABLE));
+	std::shared_ptr<ocl::Expressions::VariableImpl> element(new ocl::Expressions::VariableImpl(par_ExpressionInOcl, ocl::Expressions::ExpressionsPackage::VARIABLE_ATTRIBUTE_VAROWNER));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_ExpressionInOcl.lock())
 	{
@@ -6389,7 +6389,7 @@ std::shared_ptr<ocl::Expressions::Variable> ExpressionsFactoryImpl::createVariab
 }
 std::shared_ptr<ocl::Expressions::Variable> ExpressionsFactoryImpl::createVariable_as_resultVariable_in_ExpressionInOcl(std::weak_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::VariableImpl> element(new ocl::Expressions::VariableImpl(par_ExpressionInOcl, ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_RESULTVARIABLE));
+	std::shared_ptr<ocl::Expressions::VariableImpl> element(new ocl::Expressions::VariableImpl(par_ExpressionInOcl, ocl::Expressions::ExpressionsPackage::VARIABLE_ATTRIBUTE_RESULTOWNER));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_ExpressionInOcl.lock())
 	{
@@ -6461,7 +6461,7 @@ std::shared_ptr<ocl::Expressions::VariableExp> ExpressionsFactoryImpl::createVar
 }
 std::shared_ptr<ocl::Expressions::VariableExp> ExpressionsFactoryImpl::createVariableExp_as_condition_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::VariableExpImpl> element(new ocl::Expressions::VariableExpImpl(par_IfExp, ocl::Expressions::ExpressionsPackage::IFEXP_ATTRIBUTE_CONDITION));
+	std::shared_ptr<ocl::Expressions::VariableExpImpl> element(new ocl::Expressions::VariableExpImpl(par_IfExp, ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_IFOWNER));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_IfExp.lock())
 	{
@@ -6474,7 +6474,7 @@ std::shared_ptr<ocl::Expressions::VariableExp> ExpressionsFactoryImpl::createVar
 }
 std::shared_ptr<ocl::Expressions::VariableExp> ExpressionsFactoryImpl::createVariableExp_as_elseExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::VariableExpImpl> element(new ocl::Expressions::VariableExpImpl(par_IfExp, ocl::Expressions::ExpressionsPackage::IFEXP_ATTRIBUTE_ELSEEXPRESSION));
+	std::shared_ptr<ocl::Expressions::VariableExpImpl> element(new ocl::Expressions::VariableExpImpl(par_IfExp, ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_ELSEOWNER));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_IfExp.lock())
 	{
@@ -6487,7 +6487,7 @@ std::shared_ptr<ocl::Expressions::VariableExp> ExpressionsFactoryImpl::createVar
 }
 std::shared_ptr<ocl::Expressions::VariableExp> ExpressionsFactoryImpl::createVariableExp_as_first_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::VariableExpImpl> element(new ocl::Expressions::VariableExpImpl(par_CollectionRange, ocl::Expressions::ExpressionsPackage::COLLECTIONRANGE_ATTRIBUTE_FIRST));
+	std::shared_ptr<ocl::Expressions::VariableExpImpl> element(new ocl::Expressions::VariableExpImpl(par_CollectionRange, ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_FIRSTOWNER));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_CollectionRange.lock())
 	{
@@ -6539,7 +6539,7 @@ std::shared_ptr<ocl::Expressions::VariableExp> ExpressionsFactoryImpl::createVar
 }
 std::shared_ptr<ocl::Expressions::VariableExp> ExpressionsFactoryImpl::createVariableExp_as_last_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::VariableExpImpl> element(new ocl::Expressions::VariableExpImpl(par_CollectionRange, ocl::Expressions::ExpressionsPackage::COLLECTIONRANGE_ATTRIBUTE_LAST));
+	std::shared_ptr<ocl::Expressions::VariableExpImpl> element(new ocl::Expressions::VariableExpImpl(par_CollectionRange, ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_LASTOWNER));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_CollectionRange.lock())
 	{
@@ -6578,7 +6578,7 @@ std::shared_ptr<ocl::Expressions::VariableExp> ExpressionsFactoryImpl::createVar
 }
 std::shared_ptr<ocl::Expressions::VariableExp> ExpressionsFactoryImpl::createVariableExp_as_thenExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::VariableExpImpl> element(new ocl::Expressions::VariableExpImpl(par_IfExp, ocl::Expressions::ExpressionsPackage::IFEXP_ATTRIBUTE_THENEXPRESSION));
+	std::shared_ptr<ocl::Expressions::VariableExpImpl> element(new ocl::Expressions::VariableExpImpl(par_IfExp, ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_THENOWNER));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_IfExp.lock())
 	{

@@ -137,6 +137,7 @@ void DeriveImpl::setBase_Abstraction(std::weak_ptr<uml::Abstraction> _base_Abstr
 }
 std::weak_ptr<uml::Abstraction> DeriveImpl::getBase_Abstraction() const 
 {
+
 	return m_base_Abstraction;
 }
 

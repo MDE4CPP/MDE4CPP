@@ -51,6 +51,7 @@ namespace ocl::Types
 			//Creator functions
 			 virtual std::shared_ptr<ocl::Types::AnyType> createAnyType(const int metaElementID = TypesPackage::ANYTYPE_CLASS) const ;
 			 //Add as contained object
+			 virtual std::shared_ptr<ocl::Types::AnyType> createAnyType_as_eClassifiers_in_EPackage(std::weak_ptr<ecore::EPackage> par_EPackage, const int metaElementID = TypesPackage::ANYTYPE_CLASS) const ;
 			 virtual std::shared_ptr<ocl::Types::AnyType> createAnyType_as_elementType_in_CollectionType(std::shared_ptr<ocl::Types::CollectionType> par_CollectionType, const int metaElementID = TypesPackage::ANYTYPE_CLASS) const ;
 			 virtual std::shared_ptr<ocl::Types::AnyType> createAnyType_as_object_in_AnyType(std::shared_ptr<ocl::Types::AnyType> par_AnyType, const int metaElementID = TypesPackage::ANYTYPE_CLASS) const ;
 			 virtual std::shared_ptr<ocl::Types::BagType> createBagType(const int metaElementID = TypesPackage::BAGTYPE_CLASS) const ;
@@ -59,14 +60,17 @@ namespace ocl::Types
 			 virtual std::shared_ptr<ocl::Types::BagType> createBagType_as_object_in_AnyType(std::shared_ptr<ocl::Types::AnyType> par_AnyType, const int metaElementID = TypesPackage::BAGTYPE_CLASS) const ;
 			 virtual std::shared_ptr<ocl::Types::CollectionType> createCollectionType(const int metaElementID = TypesPackage::COLLECTIONTYPE_CLASS) const ;
 			 //Add as contained object
+			 virtual std::shared_ptr<ocl::Types::CollectionType> createCollectionType_as_eClassifiers_in_EPackage(std::weak_ptr<ecore::EPackage> par_EPackage, const int metaElementID = TypesPackage::COLLECTIONTYPE_CLASS) const ;
 			 virtual std::shared_ptr<ocl::Types::CollectionType> createCollectionType_as_elementType_in_CollectionType(std::shared_ptr<ocl::Types::CollectionType> par_CollectionType, const int metaElementID = TypesPackage::COLLECTIONTYPE_CLASS) const ;
 			 virtual std::shared_ptr<ocl::Types::CollectionType> createCollectionType_as_object_in_AnyType(std::shared_ptr<ocl::Types::AnyType> par_AnyType, const int metaElementID = TypesPackage::COLLECTIONTYPE_CLASS) const ;
 			 virtual std::shared_ptr<ocl::Types::InvalidType> createInvalidType(const int metaElementID = TypesPackage::INVALIDTYPE_CLASS) const ;
 			 //Add as contained object
+			 virtual std::shared_ptr<ocl::Types::InvalidType> createInvalidType_as_eClassifiers_in_EPackage(std::weak_ptr<ecore::EPackage> par_EPackage, const int metaElementID = TypesPackage::INVALIDTYPE_CLASS) const ;
 			 virtual std::shared_ptr<ocl::Types::InvalidType> createInvalidType_as_elementType_in_CollectionType(std::shared_ptr<ocl::Types::CollectionType> par_CollectionType, const int metaElementID = TypesPackage::INVALIDTYPE_CLASS) const ;
 			 virtual std::shared_ptr<ocl::Types::InvalidType> createInvalidType_as_object_in_AnyType(std::shared_ptr<ocl::Types::AnyType> par_AnyType, const int metaElementID = TypesPackage::INVALIDTYPE_CLASS) const ;
 			 virtual std::shared_ptr<ocl::Types::MessageType> createMessageType(const int metaElementID = TypesPackage::MESSAGETYPE_CLASS) const ;
 			 //Add as contained object
+			 virtual std::shared_ptr<ocl::Types::MessageType> createMessageType_as_eClassifiers_in_EPackage(std::weak_ptr<ecore::EPackage> par_EPackage, const int metaElementID = TypesPackage::MESSAGETYPE_CLASS) const ;
 			 virtual std::shared_ptr<ocl::Types::MessageType> createMessageType_as_elementType_in_CollectionType(std::shared_ptr<ocl::Types::CollectionType> par_CollectionType, const int metaElementID = TypesPackage::MESSAGETYPE_CLASS) const ;
 			 virtual std::shared_ptr<ocl::Types::MessageType> createMessageType_as_object_in_AnyType(std::shared_ptr<ocl::Types::AnyType> par_AnyType, const int metaElementID = TypesPackage::MESSAGETYPE_CLASS) const ;
 			 virtual std::shared_ptr<ocl::Types::NameTypeBinding> createNameTypeBinding(const int metaElementID = TypesPackage::NAMETYPEBINDING_CLASS) const ;
@@ -84,14 +88,17 @@ namespace ocl::Types
 			 virtual std::shared_ptr<ocl::Types::SetType> createSetType_as_object_in_AnyType(std::shared_ptr<ocl::Types::AnyType> par_AnyType, const int metaElementID = TypesPackage::SETTYPE_CLASS) const ;
 			 virtual std::shared_ptr<ocl::Types::TemplateParameterType> createTemplateParameterType(const int metaElementID = TypesPackage::TEMPLATEPARAMETERTYPE_CLASS) const ;
 			 //Add as contained object
+			 virtual std::shared_ptr<ocl::Types::TemplateParameterType> createTemplateParameterType_as_eClassifiers_in_EPackage(std::weak_ptr<ecore::EPackage> par_EPackage, const int metaElementID = TypesPackage::TEMPLATEPARAMETERTYPE_CLASS) const ;
 			 virtual std::shared_ptr<ocl::Types::TemplateParameterType> createTemplateParameterType_as_elementType_in_CollectionType(std::shared_ptr<ocl::Types::CollectionType> par_CollectionType, const int metaElementID = TypesPackage::TEMPLATEPARAMETERTYPE_CLASS) const ;
 			 virtual std::shared_ptr<ocl::Types::TemplateParameterType> createTemplateParameterType_as_object_in_AnyType(std::shared_ptr<ocl::Types::AnyType> par_AnyType, const int metaElementID = TypesPackage::TEMPLATEPARAMETERTYPE_CLASS) const ;
 			 virtual std::shared_ptr<ocl::Types::TupleType> createTupleType(const int metaElementID = TypesPackage::TUPLETYPE_CLASS) const ;
 			 //Add as contained object
+			 virtual std::shared_ptr<ocl::Types::TupleType> createTupleType_as_eClassifiers_in_EPackage(std::weak_ptr<ecore::EPackage> par_EPackage, const int metaElementID = TypesPackage::TUPLETYPE_CLASS) const ;
 			 virtual std::shared_ptr<ocl::Types::TupleType> createTupleType_as_elementType_in_CollectionType(std::shared_ptr<ocl::Types::CollectionType> par_CollectionType, const int metaElementID = TypesPackage::TUPLETYPE_CLASS) const ;
 			 virtual std::shared_ptr<ocl::Types::TupleType> createTupleType_as_object_in_AnyType(std::shared_ptr<ocl::Types::AnyType> par_AnyType, const int metaElementID = TypesPackage::TUPLETYPE_CLASS) const ;
 			 virtual std::shared_ptr<ocl::Types::VoidType> createVoidType(const int metaElementID = TypesPackage::VOIDTYPE_CLASS) const ;
 			 //Add as contained object
+			 virtual std::shared_ptr<ocl::Types::VoidType> createVoidType_as_eClassifiers_in_EPackage(std::weak_ptr<ecore::EPackage> par_EPackage, const int metaElementID = TypesPackage::VOIDTYPE_CLASS) const ;
 			 virtual std::shared_ptr<ocl::Types::VoidType> createVoidType_as_elementType_in_CollectionType(std::shared_ptr<ocl::Types::CollectionType> par_CollectionType, const int metaElementID = TypesPackage::VOIDTYPE_CLASS) const ;
 			 virtual std::shared_ptr<ocl::Types::VoidType> createVoidType_as_object_in_AnyType(std::shared_ptr<ocl::Types::AnyType> par_AnyType, const int metaElementID = TypesPackage::VOIDTYPE_CLASS) const ;
 			 

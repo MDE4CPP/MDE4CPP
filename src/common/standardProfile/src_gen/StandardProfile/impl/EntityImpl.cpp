@@ -137,6 +137,7 @@ void EntityImpl::setBase_Component(std::weak_ptr<uml::Component> _base_Component
 }
 std::weak_ptr<uml::Component> EntityImpl::getBase_Component() const 
 {
+
 	return m_base_Component;
 }
 

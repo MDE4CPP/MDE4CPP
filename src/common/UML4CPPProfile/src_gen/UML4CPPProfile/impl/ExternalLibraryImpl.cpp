@@ -158,6 +158,7 @@ void ExternalLibraryImpl::setBase_Package(std::weak_ptr<uml::Package> _base_Pack
 }
 std::weak_ptr<uml::Package> ExternalLibraryImpl::getBase_Package() const 
 {
+
 	return m_base_Package;
 }
 
@@ -168,6 +169,7 @@ void ExternalLibraryImpl::setIncludePath(std::string _includePath)
 }
 std::string ExternalLibraryImpl::getIncludePath() const 
 {
+
 	return m_includePath;
 }
 
@@ -178,6 +180,7 @@ void ExternalLibraryImpl::setLibraryName(std::string _libraryName)
 }
 std::string ExternalLibraryImpl::getLibraryName() const 
 {
+
 	return m_libraryName;
 }
 
@@ -188,6 +191,7 @@ void ExternalLibraryImpl::setLibraryPath(std::string _libraryPath)
 }
 std::string ExternalLibraryImpl::getLibraryPath() const 
 {
+
 	return m_libraryPath;
 }
 

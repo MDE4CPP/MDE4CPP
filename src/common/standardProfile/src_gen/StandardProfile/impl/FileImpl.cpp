@@ -137,6 +137,7 @@ void FileImpl::setBase_Artifact(std::weak_ptr<uml::Artifact> _base_Artifact)
 }
 std::weak_ptr<uml::Artifact> FileImpl::getBase_Artifact() const 
 {
+
 	return m_base_Artifact;
 }
 

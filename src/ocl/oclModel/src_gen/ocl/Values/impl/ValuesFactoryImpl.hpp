@@ -57,14 +57,34 @@ namespace ocl::Values
 			 virtual std::shared_ptr<ocl::Values::LocalSnapshot> createLocalSnapshot(const int metaElementID = ValuesPackage::LOCALSNAPSHOT_CLASS) const ;
 			 virtual std::shared_ptr<ocl::Values::NameValueBinding> createNameValueBinding(const int metaElementID = ValuesPackage::NAMEVALUEBINDING_CLASS) const ;
 			 virtual std::shared_ptr<ocl::Values::ObjectValue> createObjectValue(const int metaElementID = ValuesPackage::OBJECTVALUE_CLASS) const ;
+			 //Add as contained object
+			 virtual std::shared_ptr<ocl::Values::ObjectValue> createObjectValue_as_value_in_ObjectToken(std::shared_ptr<fUML::Semantics::Activities::ObjectToken> par_ObjectToken, const int metaElementID = ValuesPackage::OBJECTVALUE_CLASS) const ;
+			 virtual std::shared_ptr<ocl::Values::ObjectValue> createObjectValue_as_values_in_FeatureValue(std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> par_FeatureValue, const int metaElementID = ValuesPackage::OBJECTVALUE_CLASS) const ;
+			 virtual std::shared_ptr<ocl::Values::ObjectValue> createObjectValue_as_values_in_ParameterValue(std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> par_ParameterValue, const int metaElementID = ValuesPackage::OBJECTVALUE_CLASS) const ;
 			 virtual std::shared_ptr<ocl::Values::OclMessageValue> createOclMessageValue(const int metaElementID = ValuesPackage::OCLMESSAGEVALUE_CLASS) const ;
+			 //Add as contained object
+			 virtual std::shared_ptr<ocl::Values::OclMessageValue> createOclMessageValue_as_value_in_ObjectToken(std::shared_ptr<fUML::Semantics::Activities::ObjectToken> par_ObjectToken, const int metaElementID = ValuesPackage::OCLMESSAGEVALUE_CLASS) const ;
+			 virtual std::shared_ptr<ocl::Values::OclMessageValue> createOclMessageValue_as_values_in_FeatureValue(std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> par_FeatureValue, const int metaElementID = ValuesPackage::OCLMESSAGEVALUE_CLASS) const ;
+			 virtual std::shared_ptr<ocl::Values::OclMessageValue> createOclMessageValue_as_values_in_ParameterValue(std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> par_ParameterValue, const int metaElementID = ValuesPackage::OCLMESSAGEVALUE_CLASS) const ;
 			 virtual std::shared_ptr<ocl::Values::OclVoidValue> createOclVoidValue(const int metaElementID = ValuesPackage::OCLVOIDVALUE_CLASS) const ;
+			 //Add as contained object
+			 virtual std::shared_ptr<ocl::Values::OclVoidValue> createOclVoidValue_as_value_in_ObjectToken(std::shared_ptr<fUML::Semantics::Activities::ObjectToken> par_ObjectToken, const int metaElementID = ValuesPackage::OCLVOIDVALUE_CLASS) const ;
+			 virtual std::shared_ptr<ocl::Values::OclVoidValue> createOclVoidValue_as_values_in_FeatureValue(std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> par_FeatureValue, const int metaElementID = ValuesPackage::OCLVOIDVALUE_CLASS) const ;
+			 virtual std::shared_ptr<ocl::Values::OclVoidValue> createOclVoidValue_as_values_in_ParameterValue(std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> par_ParameterValue, const int metaElementID = ValuesPackage::OCLVOIDVALUE_CLASS) const ;
 			 virtual std::shared_ptr<ocl::Values::OrderedSetTypeValue> createOrderedSetTypeValue(const int metaElementID = ValuesPackage::ORDEREDSETTYPEVALUE_CLASS) const ;
 			 virtual std::shared_ptr<ocl::Values::SequenceTypeValue> createSequenceTypeValue(const int metaElementID = ValuesPackage::SEQUENCETYPEVALUE_CLASS) const ;
 			 virtual std::shared_ptr<ocl::Values::SetTypeValue> createSetTypeValue(const int metaElementID = ValuesPackage::SETTYPEVALUE_CLASS) const ;
 			 virtual std::shared_ptr<ocl::Values::StaticValue> createStaticValue(const int metaElementID = ValuesPackage::STATICVALUE_CLASS) const ;
+			 //Add as contained object
+			 virtual std::shared_ptr<ocl::Values::StaticValue> createStaticValue_as_value_in_ObjectToken(std::shared_ptr<fUML::Semantics::Activities::ObjectToken> par_ObjectToken, const int metaElementID = ValuesPackage::STATICVALUE_CLASS) const ;
+			 virtual std::shared_ptr<ocl::Values::StaticValue> createStaticValue_as_values_in_FeatureValue(std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> par_FeatureValue, const int metaElementID = ValuesPackage::STATICVALUE_CLASS) const ;
+			 virtual std::shared_ptr<ocl::Values::StaticValue> createStaticValue_as_values_in_ParameterValue(std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> par_ParameterValue, const int metaElementID = ValuesPackage::STATICVALUE_CLASS) const ;
 			 virtual std::shared_ptr<ocl::Values::TupleValue> createTupleValue(const int metaElementID = ValuesPackage::TUPLEVALUE_CLASS) const ;
 			 virtual std::shared_ptr<ocl::Values::UndefinedValue> createUndefinedValue(const int metaElementID = ValuesPackage::UNDEFINEDVALUE_CLASS) const ;
+			 //Add as contained object
+			 virtual std::shared_ptr<ocl::Values::UndefinedValue> createUndefinedValue_as_value_in_ObjectToken(std::shared_ptr<fUML::Semantics::Activities::ObjectToken> par_ObjectToken, const int metaElementID = ValuesPackage::UNDEFINEDVALUE_CLASS) const ;
+			 virtual std::shared_ptr<ocl::Values::UndefinedValue> createUndefinedValue_as_values_in_FeatureValue(std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> par_FeatureValue, const int metaElementID = ValuesPackage::UNDEFINEDVALUE_CLASS) const ;
+			 virtual std::shared_ptr<ocl::Values::UndefinedValue> createUndefinedValue_as_values_in_ParameterValue(std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> par_ParameterValue, const int metaElementID = ValuesPackage::UNDEFINEDVALUE_CLASS) const ;
 			 
 
 		private:

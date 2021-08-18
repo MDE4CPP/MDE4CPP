@@ -19,6 +19,12 @@
 #include "ocl/Values/impl/TupleValueImpl.hpp"
 #include "ocl/Values/impl/UndefinedValueImpl.hpp"
 
+#include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
+#include "fUML/Semantics/Activities/ObjectToken.hpp"
+#include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
+#include "fUML/Semantics/CommonBehavior/ParameterValue.hpp"
+#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersPackage.hpp"
+#include "fUML/Semantics/SimpleClassifiers/FeatureValue.hpp"
 
 
 using namespace ocl::Values;
@@ -94,20 +100,104 @@ std::shared_ptr<ecore::EObject> ValuesFactoryImpl::create(const int metaElementI
 		}
 		case ValuesPackage::OBJECTVALUE_CLASS:
 		{
+			if (nullptr == container)
+			{
 				return this->createObjectValue(metaElementID);
-			
+			}
+			else
+			{
+				switch(referenceID)
+				{
+					//ObjectValue has value as a containment
+					case  fUML::Semantics::Activities::ActivitiesPackage::OBJECTTOKEN_ATTRIBUTE_VALUE:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<fUML::Semantics::Activities::ObjectToken>(container);
+						return this->createObjectValue_as_value_in_ObjectToken(castedContainer,metaElementID);
+					}
+					//ObjectValue has values as a containment
+					case  fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::FEATUREVALUE_ATTRIBUTE_VALUES:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::FeatureValue>(container);
+						return this->createObjectValue_as_values_in_FeatureValue(castedContainer,metaElementID);
+					}
+					//ObjectValue has values as a containment
+					case  fUML::Semantics::CommonBehavior::CommonBehaviorPackage::PARAMETERVALUE_ATTRIBUTE_VALUES:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::ParameterValue>(container);
+						return this->createObjectValue_as_values_in_ParameterValue(castedContainer,metaElementID);
+					}
+					default:
+						std::cerr << __PRETTY_FUNCTION__ << "ERROR: Reference type not found." << std::endl;
+				}	
+			}
 			break;
 		}
 		case ValuesPackage::OCLMESSAGEVALUE_CLASS:
 		{
+			if (nullptr == container)
+			{
 				return this->createOclMessageValue(metaElementID);
-			
+			}
+			else
+			{
+				switch(referenceID)
+				{
+					//OclMessageValue has value as a containment
+					case  fUML::Semantics::Activities::ActivitiesPackage::OBJECTTOKEN_ATTRIBUTE_VALUE:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<fUML::Semantics::Activities::ObjectToken>(container);
+						return this->createOclMessageValue_as_value_in_ObjectToken(castedContainer,metaElementID);
+					}
+					//OclMessageValue has values as a containment
+					case  fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::FEATUREVALUE_ATTRIBUTE_VALUES:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::FeatureValue>(container);
+						return this->createOclMessageValue_as_values_in_FeatureValue(castedContainer,metaElementID);
+					}
+					//OclMessageValue has values as a containment
+					case  fUML::Semantics::CommonBehavior::CommonBehaviorPackage::PARAMETERVALUE_ATTRIBUTE_VALUES:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::ParameterValue>(container);
+						return this->createOclMessageValue_as_values_in_ParameterValue(castedContainer,metaElementID);
+					}
+					default:
+						std::cerr << __PRETTY_FUNCTION__ << "ERROR: Reference type not found." << std::endl;
+				}	
+			}
 			break;
 		}
 		case ValuesPackage::OCLVOIDVALUE_CLASS:
 		{
+			if (nullptr == container)
+			{
 				return this->createOclVoidValue(metaElementID);
-			
+			}
+			else
+			{
+				switch(referenceID)
+				{
+					//OclVoidValue has value as a containment
+					case  fUML::Semantics::Activities::ActivitiesPackage::OBJECTTOKEN_ATTRIBUTE_VALUE:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<fUML::Semantics::Activities::ObjectToken>(container);
+						return this->createOclVoidValue_as_value_in_ObjectToken(castedContainer,metaElementID);
+					}
+					//OclVoidValue has values as a containment
+					case  fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::FEATUREVALUE_ATTRIBUTE_VALUES:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::FeatureValue>(container);
+						return this->createOclVoidValue_as_values_in_FeatureValue(castedContainer,metaElementID);
+					}
+					//OclVoidValue has values as a containment
+					case  fUML::Semantics::CommonBehavior::CommonBehaviorPackage::PARAMETERVALUE_ATTRIBUTE_VALUES:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::ParameterValue>(container);
+						return this->createOclVoidValue_as_values_in_ParameterValue(castedContainer,metaElementID);
+					}
+					default:
+						std::cerr << __PRETTY_FUNCTION__ << "ERROR: Reference type not found." << std::endl;
+				}	
+			}
 			break;
 		}
 		case ValuesPackage::ORDEREDSETTYPEVALUE_CLASS:
@@ -130,8 +220,36 @@ std::shared_ptr<ecore::EObject> ValuesFactoryImpl::create(const int metaElementI
 		}
 		case ValuesPackage::STATICVALUE_CLASS:
 		{
+			if (nullptr == container)
+			{
 				return this->createStaticValue(metaElementID);
-			
+			}
+			else
+			{
+				switch(referenceID)
+				{
+					//StaticValue has value as a containment
+					case  fUML::Semantics::Activities::ActivitiesPackage::OBJECTTOKEN_ATTRIBUTE_VALUE:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<fUML::Semantics::Activities::ObjectToken>(container);
+						return this->createStaticValue_as_value_in_ObjectToken(castedContainer,metaElementID);
+					}
+					//StaticValue has values as a containment
+					case  fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::FEATUREVALUE_ATTRIBUTE_VALUES:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::FeatureValue>(container);
+						return this->createStaticValue_as_values_in_FeatureValue(castedContainer,metaElementID);
+					}
+					//StaticValue has values as a containment
+					case  fUML::Semantics::CommonBehavior::CommonBehaviorPackage::PARAMETERVALUE_ATTRIBUTE_VALUES:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::ParameterValue>(container);
+						return this->createStaticValue_as_values_in_ParameterValue(castedContainer,metaElementID);
+					}
+					default:
+						std::cerr << __PRETTY_FUNCTION__ << "ERROR: Reference type not found." << std::endl;
+				}	
+			}
 			break;
 		}
 		case ValuesPackage::TUPLEVALUE_CLASS:
@@ -142,8 +260,36 @@ std::shared_ptr<ecore::EObject> ValuesFactoryImpl::create(const int metaElementI
 		}
 		case ValuesPackage::UNDEFINEDVALUE_CLASS:
 		{
+			if (nullptr == container)
+			{
 				return this->createUndefinedValue(metaElementID);
-			
+			}
+			else
+			{
+				switch(referenceID)
+				{
+					//UndefinedValue has value as a containment
+					case  fUML::Semantics::Activities::ActivitiesPackage::OBJECTTOKEN_ATTRIBUTE_VALUE:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<fUML::Semantics::Activities::ObjectToken>(container);
+						return this->createUndefinedValue_as_value_in_ObjectToken(castedContainer,metaElementID);
+					}
+					//UndefinedValue has values as a containment
+					case  fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::FEATUREVALUE_ATTRIBUTE_VALUES:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::FeatureValue>(container);
+						return this->createUndefinedValue_as_values_in_FeatureValue(castedContainer,metaElementID);
+					}
+					//UndefinedValue has values as a containment
+					case  fUML::Semantics::CommonBehavior::CommonBehaviorPackage::PARAMETERVALUE_ATTRIBUTE_VALUES:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::ParameterValue>(container);
+						return this->createUndefinedValue_as_values_in_ParameterValue(castedContainer,metaElementID);
+					}
+					default:
+						std::cerr << __PRETTY_FUNCTION__ << "ERROR: Reference type not found." << std::endl;
+				}	
+			}
 			break;
 		}
 	default:
@@ -216,6 +362,45 @@ std::shared_ptr<ocl::Values::ObjectValue> ValuesFactoryImpl::createObjectValue(c
 	element->setThisObjectValuePtr(element);
 	return element;
 }
+std::shared_ptr<ocl::Values::ObjectValue> ValuesFactoryImpl::createObjectValue_as_value_in_ObjectToken(std::shared_ptr<fUML::Semantics::Activities::ObjectToken> par_ObjectToken, const int metaElementID) const
+{
+	std::shared_ptr<ocl::Values::ObjectValueImpl> element(new ocl::Values::ObjectValueImpl());
+	element->setMetaElementID(metaElementID);
+	if(nullptr != par_ObjectToken)
+	{
+		par_ObjectToken->setValue(element);
+	
+	}
+	element->setThisObjectValuePtr(element);
+	return element;
+	
+}
+std::shared_ptr<ocl::Values::ObjectValue> ValuesFactoryImpl::createObjectValue_as_values_in_FeatureValue(std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> par_FeatureValue, const int metaElementID) const
+{
+	std::shared_ptr<ocl::Values::ObjectValueImpl> element(new ocl::Values::ObjectValueImpl());
+	element->setMetaElementID(metaElementID);
+	if(nullptr != par_FeatureValue)
+	{
+		par_FeatureValue->getValues()->push_back(element);
+	
+	}
+	element->setThisObjectValuePtr(element);
+	return element;
+	
+}
+std::shared_ptr<ocl::Values::ObjectValue> ValuesFactoryImpl::createObjectValue_as_values_in_ParameterValue(std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> par_ParameterValue, const int metaElementID) const
+{
+	std::shared_ptr<ocl::Values::ObjectValueImpl> element(new ocl::Values::ObjectValueImpl());
+	element->setMetaElementID(metaElementID);
+	if(nullptr != par_ParameterValue)
+	{
+		par_ParameterValue->getValues()->push_back(element);
+	
+	}
+	element->setThisObjectValuePtr(element);
+	return element;
+	
+}
 std::shared_ptr<ocl::Values::OclMessageValue> ValuesFactoryImpl::createOclMessageValue(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<ocl::Values::OclMessageValueImpl> element(new ocl::Values::OclMessageValueImpl());
@@ -223,12 +408,90 @@ std::shared_ptr<ocl::Values::OclMessageValue> ValuesFactoryImpl::createOclMessag
 	element->setThisOclMessageValuePtr(element);
 	return element;
 }
+std::shared_ptr<ocl::Values::OclMessageValue> ValuesFactoryImpl::createOclMessageValue_as_value_in_ObjectToken(std::shared_ptr<fUML::Semantics::Activities::ObjectToken> par_ObjectToken, const int metaElementID) const
+{
+	std::shared_ptr<ocl::Values::OclMessageValueImpl> element(new ocl::Values::OclMessageValueImpl());
+	element->setMetaElementID(metaElementID);
+	if(nullptr != par_ObjectToken)
+	{
+		par_ObjectToken->setValue(element);
+	
+	}
+	element->setThisOclMessageValuePtr(element);
+	return element;
+	
+}
+std::shared_ptr<ocl::Values::OclMessageValue> ValuesFactoryImpl::createOclMessageValue_as_values_in_FeatureValue(std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> par_FeatureValue, const int metaElementID) const
+{
+	std::shared_ptr<ocl::Values::OclMessageValueImpl> element(new ocl::Values::OclMessageValueImpl());
+	element->setMetaElementID(metaElementID);
+	if(nullptr != par_FeatureValue)
+	{
+		par_FeatureValue->getValues()->push_back(element);
+	
+	}
+	element->setThisOclMessageValuePtr(element);
+	return element;
+	
+}
+std::shared_ptr<ocl::Values::OclMessageValue> ValuesFactoryImpl::createOclMessageValue_as_values_in_ParameterValue(std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> par_ParameterValue, const int metaElementID) const
+{
+	std::shared_ptr<ocl::Values::OclMessageValueImpl> element(new ocl::Values::OclMessageValueImpl());
+	element->setMetaElementID(metaElementID);
+	if(nullptr != par_ParameterValue)
+	{
+		par_ParameterValue->getValues()->push_back(element);
+	
+	}
+	element->setThisOclMessageValuePtr(element);
+	return element;
+	
+}
 std::shared_ptr<ocl::Values::OclVoidValue> ValuesFactoryImpl::createOclVoidValue(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<ocl::Values::OclVoidValueImpl> element(new ocl::Values::OclVoidValueImpl());
 	element->setMetaElementID(metaElementID);
 	element->setThisOclVoidValuePtr(element);
 	return element;
+}
+std::shared_ptr<ocl::Values::OclVoidValue> ValuesFactoryImpl::createOclVoidValue_as_value_in_ObjectToken(std::shared_ptr<fUML::Semantics::Activities::ObjectToken> par_ObjectToken, const int metaElementID) const
+{
+	std::shared_ptr<ocl::Values::OclVoidValueImpl> element(new ocl::Values::OclVoidValueImpl());
+	element->setMetaElementID(metaElementID);
+	if(nullptr != par_ObjectToken)
+	{
+		par_ObjectToken->setValue(element);
+	
+	}
+	element->setThisOclVoidValuePtr(element);
+	return element;
+	
+}
+std::shared_ptr<ocl::Values::OclVoidValue> ValuesFactoryImpl::createOclVoidValue_as_values_in_FeatureValue(std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> par_FeatureValue, const int metaElementID) const
+{
+	std::shared_ptr<ocl::Values::OclVoidValueImpl> element(new ocl::Values::OclVoidValueImpl());
+	element->setMetaElementID(metaElementID);
+	if(nullptr != par_FeatureValue)
+	{
+		par_FeatureValue->getValues()->push_back(element);
+	
+	}
+	element->setThisOclVoidValuePtr(element);
+	return element;
+	
+}
+std::shared_ptr<ocl::Values::OclVoidValue> ValuesFactoryImpl::createOclVoidValue_as_values_in_ParameterValue(std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> par_ParameterValue, const int metaElementID) const
+{
+	std::shared_ptr<ocl::Values::OclVoidValueImpl> element(new ocl::Values::OclVoidValueImpl());
+	element->setMetaElementID(metaElementID);
+	if(nullptr != par_ParameterValue)
+	{
+		par_ParameterValue->getValues()->push_back(element);
+	
+	}
+	element->setThisOclVoidValuePtr(element);
+	return element;
+	
 }
 std::shared_ptr<ocl::Values::OrderedSetTypeValue> ValuesFactoryImpl::createOrderedSetTypeValue(const int metaElementID/*=-1*/) const
 {
@@ -258,6 +521,45 @@ std::shared_ptr<ocl::Values::StaticValue> ValuesFactoryImpl::createStaticValue(c
 	element->setThisStaticValuePtr(element);
 	return element;
 }
+std::shared_ptr<ocl::Values::StaticValue> ValuesFactoryImpl::createStaticValue_as_value_in_ObjectToken(std::shared_ptr<fUML::Semantics::Activities::ObjectToken> par_ObjectToken, const int metaElementID) const
+{
+	std::shared_ptr<ocl::Values::StaticValueImpl> element(new ocl::Values::StaticValueImpl());
+	element->setMetaElementID(metaElementID);
+	if(nullptr != par_ObjectToken)
+	{
+		par_ObjectToken->setValue(element);
+	
+	}
+	element->setThisStaticValuePtr(element);
+	return element;
+	
+}
+std::shared_ptr<ocl::Values::StaticValue> ValuesFactoryImpl::createStaticValue_as_values_in_FeatureValue(std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> par_FeatureValue, const int metaElementID) const
+{
+	std::shared_ptr<ocl::Values::StaticValueImpl> element(new ocl::Values::StaticValueImpl());
+	element->setMetaElementID(metaElementID);
+	if(nullptr != par_FeatureValue)
+	{
+		par_FeatureValue->getValues()->push_back(element);
+	
+	}
+	element->setThisStaticValuePtr(element);
+	return element;
+	
+}
+std::shared_ptr<ocl::Values::StaticValue> ValuesFactoryImpl::createStaticValue_as_values_in_ParameterValue(std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> par_ParameterValue, const int metaElementID) const
+{
+	std::shared_ptr<ocl::Values::StaticValueImpl> element(new ocl::Values::StaticValueImpl());
+	element->setMetaElementID(metaElementID);
+	if(nullptr != par_ParameterValue)
+	{
+		par_ParameterValue->getValues()->push_back(element);
+	
+	}
+	element->setThisStaticValuePtr(element);
+	return element;
+	
+}
 std::shared_ptr<ocl::Values::TupleValue> ValuesFactoryImpl::createTupleValue(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<ocl::Values::TupleValueImpl> element(new ocl::Values::TupleValueImpl());
@@ -271,5 +573,44 @@ std::shared_ptr<ocl::Values::UndefinedValue> ValuesFactoryImpl::createUndefinedV
 	element->setMetaElementID(metaElementID);
 	element->setThisUndefinedValuePtr(element);
 	return element;
+}
+std::shared_ptr<ocl::Values::UndefinedValue> ValuesFactoryImpl::createUndefinedValue_as_value_in_ObjectToken(std::shared_ptr<fUML::Semantics::Activities::ObjectToken> par_ObjectToken, const int metaElementID) const
+{
+	std::shared_ptr<ocl::Values::UndefinedValueImpl> element(new ocl::Values::UndefinedValueImpl());
+	element->setMetaElementID(metaElementID);
+	if(nullptr != par_ObjectToken)
+	{
+		par_ObjectToken->setValue(element);
+	
+	}
+	element->setThisUndefinedValuePtr(element);
+	return element;
+	
+}
+std::shared_ptr<ocl::Values::UndefinedValue> ValuesFactoryImpl::createUndefinedValue_as_values_in_FeatureValue(std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> par_FeatureValue, const int metaElementID) const
+{
+	std::shared_ptr<ocl::Values::UndefinedValueImpl> element(new ocl::Values::UndefinedValueImpl());
+	element->setMetaElementID(metaElementID);
+	if(nullptr != par_FeatureValue)
+	{
+		par_FeatureValue->getValues()->push_back(element);
+	
+	}
+	element->setThisUndefinedValuePtr(element);
+	return element;
+	
+}
+std::shared_ptr<ocl::Values::UndefinedValue> ValuesFactoryImpl::createUndefinedValue_as_values_in_ParameterValue(std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> par_ParameterValue, const int metaElementID) const
+{
+	std::shared_ptr<ocl::Values::UndefinedValueImpl> element(new ocl::Values::UndefinedValueImpl());
+	element->setMetaElementID(metaElementID);
+	if(nullptr != par_ParameterValue)
+	{
+		par_ParameterValue->getValues()->push_back(element);
+	
+	}
+	element->setThisUndefinedValuePtr(element);
+	return element;
+	
 }
 

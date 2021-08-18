@@ -137,6 +137,7 @@ void DestroyImpl::setBase_BehavioralFeature(std::weak_ptr<uml::BehavioralFeature
 }
 std::weak_ptr<uml::BehavioralFeature> DestroyImpl::getBase_BehavioralFeature() const 
 {
+
 	return m_base_BehavioralFeature;
 }
 

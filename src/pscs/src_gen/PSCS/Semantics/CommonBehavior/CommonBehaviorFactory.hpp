@@ -16,6 +16,27 @@
 #include "ecore/EFactory.hpp"
 #include "PSCS/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 
+namespace fUML::Semantics::Actions
+{
+	class CallActionActivation;
+}
+namespace fUML::Semantics::Activities
+{
+	class DecisionNodeActivation;
+	class ObjectToken;
+}
+namespace fUML::Semantics::CommonBehavior
+{
+	class ParameterValue;
+}
+namespace fUML::Semantics::Loci
+{
+	class Locus;
+}
+namespace fUML::Semantics::SimpleClassifiers
+{
+	class FeatureValue;
+}
 
 
 
@@ -41,6 +62,13 @@ namespace PSCS::Semantics::CommonBehavior
 			virtual std::shared_ptr<ecore::EObject> create(std::shared_ptr<ecore::EClass> _class, std::shared_ptr<EObject> _container=nullptr, const int referenceID = -1) const = 0;
 
 			virtual std::shared_ptr<PSCS::Semantics::CommonBehavior::CS_CallEventExecution> createCS_CallEventExecution(const int metaElementID = CommonBehaviorPackage::CS_CALLEVENTEXECUTION_CLASS) const = 0;
+			//Add as contained object
+			virtual std::shared_ptr<PSCS::Semantics::CommonBehavior::CS_CallEventExecution> createCS_CallEventExecution_as_callExecutions_in_CallActionActivation(std::shared_ptr<fUML::Semantics::Actions::CallActionActivation> par_CallActionActivation, const int metaElementID = CommonBehaviorPackage::CS_CALLEVENTEXECUTION_CLASS) const = 0;
+			virtual std::shared_ptr<PSCS::Semantics::CommonBehavior::CS_CallEventExecution> createCS_CallEventExecution_as_decisionInputExecution_in_DecisionNodeActivation(std::shared_ptr<fUML::Semantics::Activities::DecisionNodeActivation> par_DecisionNodeActivation, const int metaElementID = CommonBehaviorPackage::CS_CALLEVENTEXECUTION_CLASS) const = 0;
+			virtual std::shared_ptr<PSCS::Semantics::CommonBehavior::CS_CallEventExecution> createCS_CallEventExecution_as_extensionalValues_in_Locus(std::shared_ptr<fUML::Semantics::Loci::Locus> par_Locus, const int metaElementID = CommonBehaviorPackage::CS_CALLEVENTEXECUTION_CLASS) const = 0;
+			virtual std::shared_ptr<PSCS::Semantics::CommonBehavior::CS_CallEventExecution> createCS_CallEventExecution_as_value_in_ObjectToken(std::shared_ptr<fUML::Semantics::Activities::ObjectToken> par_ObjectToken, const int metaElementID = CommonBehaviorPackage::CS_CALLEVENTEXECUTION_CLASS) const = 0;
+			virtual std::shared_ptr<PSCS::Semantics::CommonBehavior::CS_CallEventExecution> createCS_CallEventExecution_as_values_in_FeatureValue(std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> par_FeatureValue, const int metaElementID = CommonBehaviorPackage::CS_CALLEVENTEXECUTION_CLASS) const = 0;
+			virtual std::shared_ptr<PSCS::Semantics::CommonBehavior::CS_CallEventExecution> createCS_CallEventExecution_as_values_in_ParameterValue(std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> par_ParameterValue, const int metaElementID = CommonBehaviorPackage::CS_CALLEVENTEXECUTION_CLASS) const = 0;
 			virtual std::shared_ptr<PSCS::Semantics::CommonBehavior::CS_EventOccurrence> createCS_EventOccurrence(const int metaElementID = CommonBehaviorPackage::CS_EVENTOCCURRENCE_CLASS) const = 0;
 			
 	};

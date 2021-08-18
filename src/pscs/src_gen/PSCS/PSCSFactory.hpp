@@ -20,14 +20,59 @@ namespace PSCS
 {
 	class PSCSPackage;
 }
+namespace fUML::Semantics::Activities
+{
+	class ActivityNodeActivationGroup;
+}
 
 
 
 
+namespace fUML::Semantics::Actions
+{
+	class CallActionActivation;
+}
+namespace fUML::Semantics::Activities
+{
+	class DecisionNodeActivation;
+	class ObjectToken;
+}
+namespace fUML::Semantics::CommonBehavior
+{
+	class ParameterValue;
+}
+namespace fUML::Semantics::Loci
+{
+	class Locus;
+}
+namespace fUML::Semantics::SimpleClassifiers
+{
+	class FeatureValue;
+}
 
 
+namespace fUML::Semantics::Loci
+{
+	class Locus;
+}
 
 
+namespace fUML::Semantics::Activities
+{
+	class ObjectToken;
+}
+namespace fUML::Semantics::CommonBehavior
+{
+	class ParameterValue;
+}
+namespace fUML::Semantics::Loci
+{
+	class Locus;
+}
+namespace fUML::Semantics::SimpleClassifiers
+{
+	class FeatureValue;
+}
 
 
 

@@ -137,6 +137,7 @@ void ImplementImpl::setBase_Component(std::weak_ptr<uml::Component> _base_Compon
 }
 std::weak_ptr<uml::Component> ImplementImpl::getBase_Component() const 
 {
+
 	return m_base_Component;
 }
 

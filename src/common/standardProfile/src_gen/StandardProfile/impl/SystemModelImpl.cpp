@@ -137,6 +137,7 @@ void SystemModelImpl::setBase_Model(std::weak_ptr<uml::Model> _base_Model)
 }
 std::weak_ptr<uml::Model> SystemModelImpl::getBase_Model() const 
 {
+
 	return m_base_Model;
 }
 

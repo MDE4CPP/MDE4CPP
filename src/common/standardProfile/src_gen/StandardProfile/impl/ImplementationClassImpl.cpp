@@ -137,6 +137,7 @@ void ImplementationClassImpl::setBase_Class(std::weak_ptr<uml::Class> _base_Clas
 }
 std::weak_ptr<uml::Class> ImplementationClassImpl::getBase_Class() const 
 {
+
 	return m_base_Class;
 }
 

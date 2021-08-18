@@ -137,6 +137,7 @@ void ServiceImpl::setBase_Component(std::weak_ptr<uml::Component> _base_Componen
 }
 std::weak_ptr<uml::Component> ServiceImpl::getBase_Component() const 
 {
+
 	return m_base_Component;
 }
 

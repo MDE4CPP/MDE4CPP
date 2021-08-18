@@ -24,8 +24,24 @@ namespace ocl
 
 
 
+namespace ecore
+{
+	class EPackage;
+}
 
 
+namespace fUML::Semantics::Activities
+{
+	class ObjectToken;
+}
+namespace fUML::Semantics::CommonBehavior
+{
+	class ParameterValue;
+}
+namespace fUML::Semantics::SimpleClassifiers
+{
+	class FeatureValue;
+}
 
 
 

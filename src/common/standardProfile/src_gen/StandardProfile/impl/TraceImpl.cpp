@@ -137,6 +137,7 @@ void TraceImpl::setBase_Abstraction(std::weak_ptr<uml::Abstraction> _base_Abstra
 }
 std::weak_ptr<uml::Abstraction> TraceImpl::getBase_Abstraction() const 
 {
+
 	return m_base_Abstraction;
 }
 

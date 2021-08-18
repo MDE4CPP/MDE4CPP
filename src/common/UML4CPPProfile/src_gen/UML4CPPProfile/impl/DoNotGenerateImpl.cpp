@@ -137,6 +137,7 @@ void DoNotGenerateImpl::setBase_Element(std::shared_ptr<uml::Element> _base_Elem
 }
 std::shared_ptr<uml::Element> DoNotGenerateImpl::getBase_Element() const 
 {
+
 	return m_base_Element;
 }
 

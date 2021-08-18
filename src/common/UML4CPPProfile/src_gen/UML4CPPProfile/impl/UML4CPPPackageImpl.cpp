@@ -156,6 +156,7 @@ void UML4CPPPackageImpl::setBase_Package(std::weak_ptr<uml::Package> _base_Packa
 }
 std::weak_ptr<uml::Package> UML4CPPPackageImpl::getBase_Package() const 
 {
+
 	return m_base_Package;
 }
 
@@ -166,6 +167,7 @@ void UML4CPPPackageImpl::setEclipseURI(std::string _eclipseURI)
 }
 std::string UML4CPPPackageImpl::getEclipseURI() const 
 {
+
 	return m_eclipseURI;
 }
 
@@ -176,6 +178,7 @@ void UML4CPPPackageImpl::setIgnoreNamespace(bool _ignoreNamespace)
 }
 bool UML4CPPPackageImpl::isIgnoreNamespace() const 
 {
+
 	return m_ignoreNamespace;
 }
 
@@ -186,6 +189,7 @@ void UML4CPPPackageImpl::setPackageOnly(bool _packageOnly)
 }
 bool UML4CPPPackageImpl::isPackageOnly() const 
 {
+
 	return m_packageOnly;
 }
 

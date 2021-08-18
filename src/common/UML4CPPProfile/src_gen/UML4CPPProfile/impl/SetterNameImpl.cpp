@@ -144,6 +144,7 @@ void SetterNameImpl::setBase_Property(std::weak_ptr<uml::Property> _base_Propert
 }
 std::weak_ptr<uml::Property> SetterNameImpl::getBase_Property() const 
 {
+
 	return m_base_Property;
 }
 
@@ -154,6 +155,7 @@ void SetterNameImpl::setSetterName(std::string _setterName)
 }
 std::string SetterNameImpl::getSetterName() const 
 {
+
 	return m_setterName;
 }
 

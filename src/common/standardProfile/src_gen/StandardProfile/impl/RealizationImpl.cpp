@@ -137,6 +137,7 @@ void RealizationImpl::setBase_Classifier(std::weak_ptr<uml::Classifier> _base_Cl
 }
 std::weak_ptr<uml::Classifier> RealizationImpl::getBase_Classifier() const 
 {
+
 	return m_base_Classifier;
 }
 

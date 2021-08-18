@@ -137,6 +137,7 @@ void MainBehaviorImpl::setBase_Behavior(std::weak_ptr<uml::Behavior> _base_Behav
 }
 std::weak_ptr<uml::Behavior> MainBehaviorImpl::getBase_Behavior() const 
 {
+
 	return m_base_Behavior;
 }
 

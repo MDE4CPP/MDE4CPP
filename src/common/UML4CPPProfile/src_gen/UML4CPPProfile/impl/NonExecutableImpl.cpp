@@ -137,6 +137,7 @@ void NonExecutableImpl::setBase_NamedElement(std::weak_ptr<uml::NamedElement> _b
 }
 std::weak_ptr<uml::NamedElement> NonExecutableImpl::getBase_NamedElement() const 
 {
+
 	return m_base_NamedElement;
 }
 

@@ -137,6 +137,7 @@ void SingletonImpl::setBase_Class(std::weak_ptr<uml::Class> _base_Class)
 }
 std::weak_ptr<uml::Class> SingletonImpl::getBase_Class() const 
 {
+
 	return m_base_Class;
 }
 

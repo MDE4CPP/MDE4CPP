@@ -1,6 +1,6 @@
 #include "StandardProfile/impl/StandardProfileFactoryImpl.hpp"
 
-#include "abstractDataTypes/Bag.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
 #include "uml/Class.hpp"
 #include <cassert>
 

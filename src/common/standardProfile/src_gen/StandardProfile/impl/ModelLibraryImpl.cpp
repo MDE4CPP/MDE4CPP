@@ -137,6 +137,7 @@ void ModelLibraryImpl::setBase_Package(std::weak_ptr<uml::Package> _base_Package
 }
 std::weak_ptr<uml::Package> ModelLibraryImpl::getBase_Package() const 
 {
+
 	return m_base_Package;
 }
 

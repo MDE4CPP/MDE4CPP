@@ -137,6 +137,7 @@ void FrameworkImpl::setBase_Package(std::weak_ptr<uml::Package> _base_Package)
 }
 std::weak_ptr<uml::Package> FrameworkImpl::getBase_Package() const 
 {
+
 	return m_base_Package;
 }
 

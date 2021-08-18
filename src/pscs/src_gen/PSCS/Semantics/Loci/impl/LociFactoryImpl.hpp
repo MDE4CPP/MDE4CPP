@@ -41,7 +41,11 @@ namespace PSCS::Semantics::Loci
 
 			//Creator functions
 			 virtual std::shared_ptr<PSCS::Semantics::Loci::CS_ExecutionFactory> createCS_ExecutionFactory(const int metaElementID = LociPackage::CS_EXECUTIONFACTORY_CLASS) const ;
+			 //Add as contained object
+			 virtual std::shared_ptr<PSCS::Semantics::Loci::CS_ExecutionFactory> createCS_ExecutionFactory_as_factory_in_Locus(std::weak_ptr<fUML::Semantics::Loci::Locus> par_Locus, const int metaElementID = LociPackage::CS_EXECUTIONFACTORY_CLASS) const ;
 			 virtual std::shared_ptr<PSCS::Semantics::Loci::CS_Executor> createCS_Executor(const int metaElementID = LociPackage::CS_EXECUTOR_CLASS) const ;
+			 //Add as contained object
+			 virtual std::shared_ptr<PSCS::Semantics::Loci::CS_Executor> createCS_Executor_as_executor_in_Locus(std::weak_ptr<fUML::Semantics::Loci::Locus> par_Locus, const int metaElementID = LociPackage::CS_EXECUTOR_CLASS) const ;
 			 virtual std::shared_ptr<PSCS::Semantics::Loci::CS_Locus> createCS_Locus(const int metaElementID = LociPackage::CS_LOCUS_CLASS) const ;
 			 
 

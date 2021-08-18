@@ -137,6 +137,7 @@ void SpecificationImpl::setBase_Classifier(std::weak_ptr<uml::Classifier> _base_
 }
 std::weak_ptr<uml::Classifier> SpecificationImpl::getBase_Classifier() const 
 {
+
 	return m_base_Classifier;
 }
 

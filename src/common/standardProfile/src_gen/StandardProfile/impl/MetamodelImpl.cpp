@@ -137,6 +137,7 @@ void MetamodelImpl::setBase_Model(std::weak_ptr<uml::Model> _base_Model)
 }
 std::weak_ptr<uml::Model> MetamodelImpl::getBase_Model() const 
 {
+
 	return m_base_Model;
 }
 

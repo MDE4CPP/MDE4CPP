@@ -1,6 +1,6 @@
 #include "UML4CPPProfile/impl/UML4CPPProfileFactoryImpl.hpp"
 
-#include "abstractDataTypes/Bag.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
 #include "uml/Class.hpp"
 #include <cassert>
 

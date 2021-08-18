@@ -144,6 +144,7 @@ void GetterNameImpl::setBase_Property(std::weak_ptr<uml::Property> _base_Propert
 }
 std::weak_ptr<uml::Property> GetterNameImpl::getBase_Property() const 
 {
+
 	return m_base_Property;
 }
 
@@ -154,6 +155,7 @@ void GetterNameImpl::setGetterName(std::string _getterName)
 }
 std::string GetterNameImpl::getGetterName() const 
 {
+
 	return m_getterName;
 }
 
