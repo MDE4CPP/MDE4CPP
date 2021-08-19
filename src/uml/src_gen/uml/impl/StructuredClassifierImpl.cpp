@@ -271,8 +271,10 @@ std::shared_ptr<uml::Property> StructuredClassifierImpl::createOwnedAttribute(st
 
 std::shared_ptr<Bag<uml::Property> > StructuredClassifierImpl::getParts()
 {
-	std::cout << __PRETTY_FUNCTION__  << std::endl;
-	throw "UnsupportedOperationException";
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+		return this->getPart();
+	//end of body
 }
 
 //*********************************
@@ -333,13 +335,25 @@ Getter & Setter for reference part
 */
 std::shared_ptr<Bag<uml::Property>> StructuredClassifierImpl::getPart() const
 {
-	if(m_part == nullptr)
+	//generated from getterBody annotation
+	std::shared_ptr<SubsetUnion<uml::Property, uml::ConnectableElement, uml::NamedElement, uml::Property>> ownedAttribute = this->getOwnedAttribute();
+	std::shared_ptr<Bag<uml::Property>> ownedParts(new Bag<uml::Property>());
+
+	Bag<uml::Property>::iterator ownedAttributeIter = ownedAttribute->begin();
+	Bag<uml::Property>::iterator ownedAttributeEnd = ownedAttribute->end();
+
+	while (ownedAttributeIter != ownedAttributeEnd)
 	{
-		m_part.reset(new Bag<uml::Property>());
-		
-		
+		if((*ownedAttributeIter)->isComposite())
+		{
+			ownedParts->add(*ownedAttributeIter);
+		}
+
+		ownedAttributeIter++;
 	}
-    return m_part;
+
+	return ownedParts;
+	//end of body
 }
 
 

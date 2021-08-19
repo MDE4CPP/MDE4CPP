@@ -222,8 +222,10 @@ std::shared_ptr<ecore::EClass> EncapsulatedClassifierImpl::eStaticClass() const
 //*********************************
 std::shared_ptr<Bag<uml::Port> > EncapsulatedClassifierImpl::getOwnedPorts()
 {
-	std::cout << __PRETTY_FUNCTION__  << std::endl;
-	throw "UnsupportedOperationException";
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+		return this->getOwnedPort();
+	//end of body
 }
 
 //*********************************
@@ -234,22 +236,28 @@ Getter & Setter for reference ownedPort
 */
 std::shared_ptr<Subset<uml::Port, uml::Property /*Subset does not reference a union*/>> EncapsulatedClassifierImpl::getOwnedPort() const
 {
-	if(m_ownedPort == nullptr)
+	//generated from getterBody annotation
+	std::shared_ptr<SubsetUnion<uml::Property, uml::ConnectableElement, uml::NamedElement, uml::Property>> ownedAttribute = this->getOwnedAttribute();
+	std::shared_ptr<Subset<uml::Port, uml::Property>> ownedPort(new Subset<uml::Port, uml::Property>());
+	ownedPort->initSubset(ownedAttribute);
+
+	Bag<uml::Property>::iterator ownedAttributeIter = ownedAttribute->begin();
+	Bag<uml::Property>::iterator ownedAttributeEnd = ownedAttribute->end();
+
+	while (ownedAttributeIter != ownedAttributeEnd)
 	{
-		/*Subset*/
-		m_ownedPort.reset(new Subset<uml::Port, uml::Property /*Subset does not reference a union*/ >());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer Subset: " << "m_ownedPort - Subset<uml::Port, uml::Property /*Subset does not reference a union*/ >()" << std::endl;
-		#endif
-		
-		/*Subset*/
-		getOwnedPort()->initSubset(getOwnedAttribute());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_ownedPort - Subset<uml::Port, uml::Property /*Subset does not reference a union*/ >(getOwnedAttribute())" << std::endl;
-		#endif
-		
+		std::shared_ptr<uml::Port> port = std::dynamic_pointer_cast<uml::Port>(*ownedAttributeIter);
+
+		if(port)
+		{
+			ownedPort->add(port);
+		}
+
+		ownedAttributeIter++;
 	}
-    return m_ownedPort;
+
+	return ownedPort;
+	//end of body
 }
 
 
