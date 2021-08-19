@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Profile xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_0" name="fUML" URI="http://www.tu-ilmenau.de/sse/UML4CPPProfile">
+  <eAnnotations xmi:id="_U9Fv0ADoEeyxWfNTHT_0zQ" source="http://www.eclipse.org/uml2/2.0.0/UML">
+    <contents xmi:type="ecore:EPackage" xmi:id="_U9Fv0QDoEeyxWfNTHT_0zQ" name="fUML" nsURI="http://www.tu-ilmenau.de/sse/UML4CPPProfile" nsPrefix="fUML">
+      <eSubpackages xmi:id="_U9Fv0gDoEeyxWfNTHT_0zQ" name="Semantics" nsURI="http:///fUML/Semantics.ecore" nsPrefix="fUML.Semantics">
+        <eAnnotations xmi:id="_U9Fv0wDoEeyxWfNTHT_0zQ" source="http://www.eclipse.org/uml2/4.0.0/UML" references="_hN4I0ADkEeyxWfNTHT_0zQ"/>
+        <eSubpackages xmi:id="_U9Fv1ADoEeyxWfNTHT_0zQ" name="Loci" nsURI="http:///fUML/Semantics/Loci.ecore" nsPrefix="fUML.Semantics.Loci">
+          <eAnnotations xmi:id="_U9Fv1QDoEeyxWfNTHT_0zQ" source="http://www.eclipse.org/uml2/4.0.0/UML" references="_mgt7cADkEeyxWfNTHT_0zQ"/>
+          <eClassifiers xmi:type="ecore:EClass" xmi:id="_U9Fv1gDoEeyxWfNTHT_0zQ" name="ChoiceStrategy">
+            <eAnnotations xmi:id="_U9Fv1wDoEeyxWfNTHT_0zQ" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_obdJ0ADkEeyxWfNTHT_0zQ"/>
+            <eAnnotations xmi:id="_U9Fv2ADoEeyxWfNTHT_0zQ" source="http://www.eclipse.org/emf/2002/GenModel">
+              <details xmi:id="_U9Fv2QDoEeyxWfNTHT_0zQ" key="documentation" value="This stereotype can be used to indicate that the corresponding class should be inherited from fUML::Semantics::Loci::ChoiceStrategy and as such represent a model-specific ChoiceStrategy.&#xA;A ChoiceStrategy must implement the method &quot;choose(Integer) : Integer&quot; as specified below."/>
+            </eAnnotations>
+            <eOperations xmi:id="_U9Fv2gDoEeyxWfNTHT_0zQ" name="choose" ordered="false" lowerBound="1">
+              <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/uml2/5.0.0/Types#//Integer"/>
+              <eParameters xmi:id="_U9Fv3ADoEeyxWfNTHT_0zQ" name="size" ordered="false" lowerBound="1">
+                <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/uml2/5.0.0/Types#//Integer"/>
+              </eParameters>
+            </eOperations>
+            <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_U9Fv3gDoEeyxWfNTHT_0zQ" name="base_Class" ordered="false" lowerBound="1">
+              <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Class"/>
+            </eStructuralFeatures>
+          </eClassifiers>
+        </eSubpackages>
+      </eSubpackages>
+    </contents>
+  </eAnnotations>
+  <packagedElement xmi:type="uml:Package" xmi:id="_hN4I0ADkEeyxWfNTHT_0zQ" name="Semantics">
+    <packagedElement xmi:type="uml:Package" xmi:id="_mgt7cADkEeyxWfNTHT_0zQ" name="Loci">
+      <packagedElement xmi:type="uml:Stereotype" xmi:id="_obdJ0ADkEeyxWfNTHT_0zQ" name="ChoiceStrategy">
+        <ownedComment xmi:id="_Nuc0UADnEeyxWfNTHT_0zQ" annotatedElement="_obdJ0ADkEeyxWfNTHT_0zQ">
+          <body>This stereotype can be used to indicate that the corresponding class should be inherited from fUML::Semantics::Loci::ChoiceStrategy and as such represent a model-specific ChoiceStrategy.
+A ChoiceStrategy must implement the method &quot;choose(Integer) : Integer&quot; as specified below.</body>
+        </ownedComment>
+        <ownedAttribute xmi:id="_rNsn8ADkEeyxWfNTHT_0zQ" name="base_Class" association="_7hJBQADkEeyxWfNTHT_0zQ">
+          <type xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Class"/>
+        </ownedAttribute>
+        <ownedOperation xmi:id="_Sh7cUADlEeyxWfNTHT_0zQ" name="choose">
+          <ownedParameter xmi:id="_VewZ0ADlEeyxWfNTHT_0zQ" name="size">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+          </ownedParameter>
+          <ownedParameter xmi:id="_gh4JAADlEeyxWfNTHT_0zQ" name="choice" direction="return">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+          </ownedParameter>
+        </ownedOperation>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Extension" xmi:id="_7hJBQADkEeyxWfNTHT_0zQ" name="Class_ChoiceStrategy" memberEnd="_B0q00ADlEeyxWfNTHT_0zQ _rNsn8ADkEeyxWfNTHT_0zQ">
+        <ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="_B0q00ADlEeyxWfNTHT_0zQ" name="extension_ChoiceStrategy" type="_obdJ0ADkEeyxWfNTHT_0zQ" aggregation="composite" association="_7hJBQADkEeyxWfNTHT_0zQ"/>
+      </packagedElement>
+    </packagedElement>
+  </packagedElement>
+</uml:Profile>
