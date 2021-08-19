@@ -27,6 +27,21 @@
 [import UML4CPP::generator::main::helpers::nameHelper /]
 [import UML4CPP::generator::main::helpers::IDHelper /]
 [import UML4CPP::generator::main::components::generateOperation /]
+[import UML4CPP::generator::main::profiles::uml4CPPProfileHelper /]
+[import UML4CPP::generator::main::profiles::strategyHelper /]
+
+[**
+ *  queries wether a Class should/can be generated
+*/]
+[query public isGenerateable(aClass : Class) : Boolean =
+not
+(
+	name.oclIsUndefined() or
+	name = '' or
+	oclIsKindOf(Behavior) or
+	isDoNotGenerate() or
+	isStrategyClass()
+) /]
 
 [** 
  * get all classes that has parts or ports of type aClass (= composite properties; attributes connected to a composition association are rejected)
@@ -89,7 +104,7 @@ static const unsigned int [aClass.getMemberName().toUpperCase()/]_OPERATION_COUN
  * - operation count
 */]
 [template public generateStaticPackageIDs(aPackage : Package)]
-[for (c : Class | aPackage.ownedElement->selectByType(Class)->sortedBy(name)->reject(name.oclIsInvalid() or name = ''))]
+[for (c : Class | aPackage.ownedElement->selectByType(Class)->select(isGenerateable())->sortedBy(name))]
 	[generateStaticClassID(c)/]
 	[comment  Properties of c/]
 	[for (aProperty : Property | c.ownedAttribute) before('//Properties\n')]
