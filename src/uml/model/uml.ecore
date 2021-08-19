@@ -7995,6 +7995,9 @@
       <eAnnotations source="http://www.eclipse.org/uml2/2.0.0/UML">
         <details key="originalName" value="part"/>
       </eAnnotations>
+      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+        <details key="body" value="&#x9;return this->getPart();"/>
+      </eAnnotations>
     </eOperations>
     <eOperations name="allRoles" ordered="false" upperBound="-1" eType="#//ConnectableElement">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -8019,6 +8022,9 @@
         eType="#//Property" changeable="false" volatile="true" transient="true" derived="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="The Properties specifying instances that the StructuredClassifier owns by composition. This collection is derived, selecting those owned Properties where isComposite is true.&#xA;&lt;p>From package UML::StructuredClassifiers.&lt;/p>"/>
+      </eAnnotations>
+      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+        <details key="getterBody" value="&#x9;std::shared_ptr&lt;SubsetUnion&lt;uml::Property, uml::ConnectableElement, uml::NamedElement, uml::Property>> ownedAttribute = this->getOwnedAttribute();&#xA;&#x9;std::shared_ptr&lt;Bag&lt;uml::Property>> ownedParts(new Bag&lt;uml::Property>());&#xA;&#xA;&#x9;Bag&lt;uml::Property>::iterator ownedAttributeIter = ownedAttribute->begin();&#xA;&#x9;Bag&lt;uml::Property>::iterator ownedAttributeEnd = ownedAttribute->end();&#xA;&#xA;&#x9;while (ownedAttributeIter != ownedAttributeEnd)&#xA;&#x9;{&#xA;&#x9;&#x9;if((*ownedAttributeIter)->isComposite())&#xA;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;ownedParts->add(*ownedAttributeIter);&#xA;&#x9;&#x9;}&#xA;&#xA;&#x9;&#x9;ownedAttributeIter++;&#xA;&#x9;}&#xA;&#xA;&#x9;return ownedParts;"/>
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="role" ordered="false" upperBound="-1"
@@ -8718,6 +8724,9 @@
       <eAnnotations source="http://www.eclipse.org/uml2/2.0.0/UML">
         <details key="originalName" value="ownedPort"/>
       </eAnnotations>
+      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+        <details key="body" value="&#x9;return this->getOwnedPort();"/>
+      </eAnnotations>
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedPort" ordered="false"
         upperBound="-1" eType="#//Port" changeable="false" volatile="true" transient="true"
@@ -8726,6 +8735,9 @@
         <details key="documentation" value="The Ports owned by the EncapsulatedClassifier.&#xA;&lt;p>From package UML::StructuredClassifiers.&lt;/p>"/>
       </eAnnotations>
       <eAnnotations source="subsets" references="#//StructuredClassifier/ownedAttribute"/>
+      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+        <details key="getterBody" value="&#x9;std::shared_ptr&lt;SubsetUnion&lt;uml::Property, uml::ConnectableElement, uml::NamedElement, uml::Property>> ownedAttribute = this->getOwnedAttribute();&#xA;&#x9;std::shared_ptr&lt;Subset&lt;uml::Port, uml::Property>> ownedPort(new Subset&lt;uml::Port, uml::Property>());&#xA;&#x9;ownedPort->initSubset(ownedAttribute);&#xA;&#xA;&#x9;Bag&lt;uml::Property>::iterator ownedAttributeIter = ownedAttribute->begin();&#xA;&#x9;Bag&lt;uml::Property>::iterator ownedAttributeEnd = ownedAttribute->end();&#xA;&#xA;&#x9;while (ownedAttributeIter != ownedAttributeEnd)&#xA;&#x9;{&#xA;&#x9;&#x9;std::shared_ptr&lt;uml::Port> port = std::dynamic_pointer_cast&lt;uml::Port>(*ownedAttributeIter);&#xA;&#xA;&#x9;&#x9;if(port)&#xA;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;ownedPort->add(port);&#xA;&#x9;&#x9;}&#xA;&#xA;&#x9;&#x9;ownedAttributeIter++;&#xA;&#x9;}&#xA;&#xA;&#x9;return ownedPort;"/>
+      </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ActivityGroup" abstract="true" eSuperTypes="#//NamedElement">
