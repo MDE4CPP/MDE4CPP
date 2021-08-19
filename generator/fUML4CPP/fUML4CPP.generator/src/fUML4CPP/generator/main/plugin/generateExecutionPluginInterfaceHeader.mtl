@@ -21,7 +21,8 @@
 [import fUML4CPP::generator::main::generateOperationExecution /]
 [import fUML4CPP::generator::main::plugin::generateExecutionPluginImplementationSource /]
 [import fUML4CPP::generator::main::fUMLKeywords /]
-[import UML4CPP::generator::main::helpers::uml4CPPProfileHelper /]
+[import UML4CPP::generator::main::profiles::profileHelper /]
+
 
 [template public generateExecutionPluginInterfaceHeader(aPackage : Package){packageName : String = aPackage.name.concat('ExecPlugin');}]
 [file (aPackage.generateNamespacePath(false).concat('Exec/').concat(packageName).concat('.hpp'), false, 'UTF-8')]

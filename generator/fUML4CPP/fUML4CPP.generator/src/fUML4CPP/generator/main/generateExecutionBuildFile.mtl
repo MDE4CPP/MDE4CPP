@@ -21,7 +21,8 @@
 [import UML4CPP::generator::main::helpers::generalHelper /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
 [import UML4CPP::generator::main::helpers::keywords /]
-[import UML4CPP::generator::main::helpers::uml4CPPProfileHelper /]
+[import UML4CPP::generator::main::profiles::profileHelper /]
+[import UML4CPP::generator::main::profiles::uml4CPPProfileHelper /]
 
 
 [template public generateExecutionBuildFiles(aPackage : Package, packageOnly : Boolean)]

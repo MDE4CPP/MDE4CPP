@@ -23,7 +23,8 @@
 [import UML4CPP::generator::main::helpers::generalHelper /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
 [import UML4CPP::generator::main::helpers::keywords /]
-[import UML4CPP::generator::main::helpers::uml4CPPProfileHelper /]
+[import UML4CPP::generator::main::profiles::profileHelper /]
+[import UML4CPP::generator::main::profiles::uml4CPPProfileHelper /]
 
 [template public generateExecutionPluginImplSource(aPackage : Package) { packageName : String = aPackage.name.concat('ExecPluginImpl'); }]
 [file (aPackage.generateNamespacePath(false).concat('Exec/impl/').concat(packageName).concat('.cpp'), false, 'UTF-8')]
