@@ -194,7 +194,7 @@ void [aClass.name.toUpperFirst()/]Impl::set[compositeOwnerClass.name.toUpperFirs
 	[if (aProperty.oclIsTypeOf(Property))]
 	[aProperty.memberName()/] = factory->createProperty_as_ownedAttribute_in_Class([aProperty.class.memberName()/]);
 	[elseif (aProperty.oclIsTypeOf(Port))]
-	[aProperty.memberName()/] = factory->createPort_as_ownedPort_in_EncapsulatedClassifier([aProperty.class.memberName()/]);
+	[aProperty.memberName()/] = factory->createPort_as_ownedAttribute_in_Class([aProperty.class.memberName()/]);
 	[/if]
 [else][if (not aProperty.interface.oclIsUndefined())]
 	[aProperty.memberName()/] = factory->createProperty_as_ownedAttribute_in_Interface([aProperty.interface.memberName()/]);
