@@ -1,0 +1,8 @@
+[comment encoding = UTF-8 /]
+[module profileHelper('http://www.eclipse.org/uml2/5.0.0/UML')]
+
+
+[** 
+ * queries wether a specific stereotype is applied to an Element by its qualified name 
+*/]
+[query public hasStereotypeApplied(anElement : Element, qualifiedName : String) : Boolean = not anElement.getAppliedStereotype(qualifiedName).oclIsUndefined() /]

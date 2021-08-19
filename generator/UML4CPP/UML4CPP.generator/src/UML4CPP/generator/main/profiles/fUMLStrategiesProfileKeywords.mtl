@@ -1,0 +1,13 @@
+[comment encoding = UTF-8 /]
+[module fUMLStrategiesProfileKeywords('http://www.eclipse.org/uml2/5.0.0/UML')]
+
+
+[**
+ * 	keyword for the name of the fUMLStrategiesProfile 
+*/]
+[query public QN_PROFILE_FUMLSTRATEGIESPROFILE(any : OclAny) : String = 'fUML' /]
+
+[**
+ * 	keyword for the qualified names of the fUMLStrategiesProfile stereotypes
+*/]
+[query public QN_STEREOTYPE_CHOICESTRATEGY(any : OclAny) : String = QN_PROFILE_FUMLSTRATEGIESPROFILE()+'::Semantics::Loci::ChoiceStrategy' /]

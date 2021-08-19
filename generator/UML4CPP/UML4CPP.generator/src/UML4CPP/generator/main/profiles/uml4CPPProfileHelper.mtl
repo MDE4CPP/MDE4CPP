@@ -2,11 +2,7 @@
 [module uml4CPPProfileHelper('http://www.eclipse.org/uml2/5.0.0/UML')]
 
 [import UML4CPP::generator::main::helpers::keywords /]
-
-[** 
- * queries wether a specific stereotype is applied to an Element by its qualified name 
-*/]
-[query public hasStereotypeApplied(anElement : Element, qualifiedName : String) : Boolean = not anElement.getAppliedStereotype(qualifiedName).oclIsUndefined() /]
+[import UML4CPP::generator::main::profiles::profileHelper /]
 
 [**
  * queries for handling of the 'UML4CPPPackage' stereotype

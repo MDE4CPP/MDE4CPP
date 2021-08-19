@@ -1,0 +1,15 @@
+[comment encoding = UTF-8 /]
+[module strategyHelper('http://www.eclipse.org/uml2/5.0.0/UML')]
+[import UML4CPP::generator::main::profiles::profileHelper /]
+[import UML4CPP::generator::main::profiles::fUMLStrategiesProfileKeywords /]
+
+
+[query public isStrategyClass(anElement : Element) : Boolean = 
+	isChoiceStrategy() /]
+
+[**
+ * queries for handling of the 'ChoiceStrategy' stereotype
+*/]
+[query public isChoiceStrategy(anElement : Element) : Boolean = hasStereotypeApplied(QN_STEREOTYPE_CHOICESTRATEGY()) /]
+
+
