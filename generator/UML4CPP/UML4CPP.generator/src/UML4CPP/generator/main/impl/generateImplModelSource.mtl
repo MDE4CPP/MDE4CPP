@@ -22,7 +22,7 @@
 [import UML4CPP::generator::main::helpers::singletonHelper /]
 [import UML4CPP::generator::main::helpers::generalHelper /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
-[import UML4CPP::generator::main::helpers::uml4CPPProfileHelper /]
+[import UML4CPP::generator::main::profiles::uml4CPPProfileHelper /]
 
 [template public generateClassCpp(aClass : Class)  {className : String = aClass.name.toUpperFirst(); }]
 [file  (aClass._package.generateNamespacePath(false).concat('/').concat(className).concat('.cpp'), false, 'UTF-8')]

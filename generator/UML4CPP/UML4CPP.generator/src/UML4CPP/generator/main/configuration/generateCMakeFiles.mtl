@@ -19,11 +19,12 @@
  */]
 [module generateCMakeFiles('http://www.eclipse.org/uml2/5.0.0/UML')]
 
+[import UML4CPP::generator::main::components::generateClass /]
 [import UML4CPP::generator::main::helpers::collectionHelper /]
 [import UML4CPP::generator::main::helpers::generalHelper /]
 [import UML4CPP::generator::main::helpers::keywords /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
-[import UML4CPP::generator::main::helpers::uml4CPPProfileHelper /]
+[import UML4CPP::generator::main::profiles::uml4CPPProfileHelper /]
 
 [template public generateCMakeLists(aPackage : Package, packOnly:Boolean) { packageName : String = aPackage.getPackageName(); }]
 [file (packageName.concat('/').concat('CMakeLists.txt'), false, 'UTF-8')]
@@ -180,7 +181,7 @@ TARGET_LINK_LIBRARIES(${PROJECT_NAME}
 [/template]
 
 [template private generatePackageContents(aPackage : Package, isRoot : Boolean)]
-[for (aClass : Class | aPackage.ownedElement->filter(Class)->select(e|not (e.oclIsKindOf(FunctionBehavior) or e.oclIsKindOf(OpaqueBehavior) or e.oclIsKindOf(Activity)))->sortedBy(myQualifiedName()))]
+[for (aClass : Class | aPackage.ownedElement->filter(Class)->select(isGenerateable())->sortedBy(myQualifiedName()))]
 [if(not isRoot)][aPackage.generateNamespacePathWithoutRoot(false)/]/[/if]impl/[aClass.name.toUpperFirst()/]Impl.cpp
 [if (aClass.isSingleton())]
 [if(not isRoot)][aPackage.generateNamespacePathWithoutRoot(false)/]/[/if][aClass.name.toUpperFirst()/].cpp

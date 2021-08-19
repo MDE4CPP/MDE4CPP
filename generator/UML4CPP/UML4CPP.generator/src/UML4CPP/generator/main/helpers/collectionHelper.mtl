@@ -24,7 +24,7 @@
 [import UML4CPP::generator::main::helpers::nameHelper /]
 [import UML4CPP::generator::main::components::generateClass /]
 [import UML4CPP::generator::main::components::generateStereotype /]
-[import UML4CPP::generator::main::helpers::uml4CPPProfileHelper /]
+[import UML4CPP::generator::main::profiles::uml4CPPProfileHelper /]
 
  
 [**
@@ -48,12 +48,12 @@
 */]
 
 [query private collectModelIncludes(aPackage : Package) : Set(Package) = OrderedSet{
-																		aPackage.member->filter(Class).attribute.type.getNearestPackage(),
-																		aPackage.member->filter(Class).ownedOperation.ownedParameter.type->reject(oclIsUndefined()).getNearestPackage(),
-																		aPackage.member->filter(Class).interfaceRealization.supplier->reject(oclIsUndefined()).getNearestPackage(),
+																		aPackage.member->filter(Class)->select(isGenerateable()).attribute.type.getNearestPackage(),
+																		aPackage.member->filter(Class)->select(isGenerateable()).ownedOperation.ownedParameter.type->reject(oclIsUndefined()).getNearestPackage(),
+																		aPackage.member->filter(Class)->select(isGenerateable()).interfaceRealization.supplier->reject(oclIsUndefined()).getNearestPackage(),
 																		aPackage.allOwnedElements().getGeneratableAppliedStereotypes()._package,
 																		aPackage.getAppliedStereotypes()._package,
-																		aPackage.member->filter(Class).generalization.general->reject(oclIsUndefined()).getNearestPackage(),
+																		aPackage.member->filter(Class)->select(isGenerateable()).generalization.general->reject(oclIsUndefined()).getNearestPackage(),
 																		aPackage.allOwnedElements()->filter(CallBehaviorAction).behavior->reject(oclIsUndefined()).getNearestPackage(),
 																		aPackage.allOwnedElements()->filter(CallOperationAction).operation->reject(oclIsUndefined()).getNearestPackage(),
 																		aPackage.packageImport.importedPackage

@@ -22,7 +22,7 @@
 [import UML4CPP::generator::main::helpers::collectionHelper /]
 [import UML4CPP::generator::main::helpers::generalHelper /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
-[import UML4CPP::generator::main::helpers::uml4CPPProfileHelper /]
+[import UML4CPP::generator::main::profiles::uml4CPPProfileHelper /]
 
 [template public generateGradleFiles(aPackage : Package)]
 [aPackage.generateBasicGradleFile()/]

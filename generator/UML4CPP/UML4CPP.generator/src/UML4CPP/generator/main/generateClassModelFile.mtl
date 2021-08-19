@@ -28,7 +28,7 @@
 [import UML4CPP::generator::main::helpers::singletonHelper /]
 [import UML4CPP::generator::main::validation::validateModel /]
 [import UML4CPP::generator::main::components::generateClass /]
-[import UML4CPP::generator::main::helpers::uml4CPPProfileHelper /]
+[import UML4CPP::generator::main::profiles::uml4CPPProfileHelper /]
 
 [query private includes(aClass : Class) : Set(Type) = Set(Type){aClass.ownedAttribute.type, aClass.ownedOperation.ownedParameter.type, aClass.getCompositeOwners()}->flatten() /]
 

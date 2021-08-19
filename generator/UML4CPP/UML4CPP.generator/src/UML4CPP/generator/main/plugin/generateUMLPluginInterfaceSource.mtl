@@ -21,7 +21,7 @@
 
 [import UML4CPP::generator::main::helpers::generalHelper /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
-[import UML4CPP::generator::main::helpers::uml4CPPProfileHelper /]
+[import UML4CPP::generator::main::profiles::uml4CPPProfileHelper /]
 
 [template public generateUMLPluginInterfaceSource(anPackage : Package) {packageName : String = anPackage.name.concat('Plugin'); }]
 [file  (anPackage.getPackageName().concat('/').concat(packageName).concat('.cpp'), false, 'UTF-8')]

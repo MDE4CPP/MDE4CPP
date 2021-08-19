@@ -42,7 +42,7 @@
 [import UML4CPP::generator::main::helpers::generalHelper /]
 [import UML4CPP::generator::main::helpers::keywords /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
-[import UML4CPP::generator::main::helpers::uml4CPPProfileHelper /]
+[import UML4CPP::generator::main::profiles::uml4CPPProfileHelper /]
 
 
 [query public getAllAppliedStereotypes(aPackage : Package) : Set(Stereotype) = OrderedSet{
@@ -227,7 +227,7 @@ void [packageName/]::createPackageClasses(std::shared_ptr<uml::Package> [aPackag
 	std::shared_ptr<uml::Constraint> con = nullptr;
 	std::shared_ptr<uml::OpaqueExpression> oe = nullptr;
 
-[for (aClass : Class | (aPackage.ownedMember->filter(Class)-aPackage.ownedMember->filter(Stereotype)-aPackage.ownedMember->filter(Behavior))->asOrderedSet()->sortedBy(myQualifiedName())) separator ('\n    //-------------------------------------------\n')]
+[for (aClass : Class | (aPackage.ownedMember->filter(Class)->reject(oclIsKindOf(Stereotype))->select(isGenerateable()))->asOrderedSet()->sortedBy(myQualifiedName())) separator ('\n    //-------------------------------------------\n')]
 	//[aClass.name/]
 	[aClass.generateClassCreation()/]
 	[for (anProperty : Property | aClass.ownedAttribute->sortedBy(name)) before ('    // '.concat(aClass.name).concat(' attributes\n'))]
@@ -391,7 +391,7 @@ void [packageName/]::initializePackageClasses()
 {
 	std::shared_ptr<uml::Generalization> gen = nullptr;
 
-[for (aClass : Class | (aPackage.ownedMember->filter(Class)-aPackage.ownedMember->filter(Stereotype)-aPackage.ownedMember->filter(Behavior))->sortedBy(myQualifiedName())) separator ('\n    //-------------------------------------------\n')]
+[for (aClass : Class | (aPackage.ownedMember->filter(Class)->reject(oclIsKindOf(Stereotype))->select(isGenerateable()))->sortedBy(myQualifiedName())) separator ('\n    //-------------------------------------------\n')]
 	//	class [aClass.name/]
 	[aClass.generateClassInitialization()/]
 	[for (anProperty : Property | aClass.ownedAttribute->sortedBy(name)) before ('    // '.concat(aClass.name).concat(' attributes\n')) after ('\n')]

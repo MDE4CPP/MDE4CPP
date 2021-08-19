@@ -25,7 +25,8 @@
 [import UML4CPP::generator::main::helpers::singletonHelper /]
 [import UML4CPP::generator::main::components::generateClass /]
 [import UML4CPP::generator::main::helpers::collectionHelper /]
-[import UML4CPP::generator::main::helpers::uml4CPPProfileHelper /]
+[import UML4CPP::generator::main::profiles::uml4CPPProfileHelper /]
+[import UML4CPP::generator::main::profiles::strategyHelper /]
 
 [template public generatePackageInterface(aPackage : Package) {packageName : String = aPackage.name.concat('Package');}]
 [file (aPackage.generateNamespacePath(false).concat('/').concat(packageName).concat('.hpp'), false, 'UTF-8')]
@@ -68,7 +69,7 @@ namespace [subPackage.generateNamespace(false)/]
 			static const std::string eNS_PREFIX;
 
 			//getter for the ownedMember
-			[(aPackage.getElementsBelongingToPackage()->filter(NamedElement)-aPackage.getElementsBelongingToPackage()->filter(ValueSpecification))->asOrderedSet()->sortedBy(myQualifiedName()).generatePackageMemberGetter(false)/]
+			[(aPackage.getElementsBelongingToPackage()->filter(NamedElement)-aPackage.getElementsBelongingToPackage()->filter(ValueSpecification))->reject(isStrategyClass())->asOrderedSet()->sortedBy(myQualifiedName()).generatePackageMemberGetter(false)/]
 			[(aPackage.getElementsBelongingToPackage()->filter(ConnectorEnd))->asOrderedSet()->sortedBy(myQualifiedName()).generatePackageMemberGetter(false)/]
 
 			//getter for subPackages

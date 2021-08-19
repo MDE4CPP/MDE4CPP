@@ -28,7 +28,7 @@
 [import UML4CPP::generator::main::helpers::nameHelper /]
 [import UML4CPP::generator::main::helpers::setGetHelper /]
 [import UML4CPP::generator::main::validation::validateModel /]
-[import UML4CPP::generator::main::helpers::uml4CPPProfileHelper /]
+[import UML4CPP::generator::main::profiles::uml4CPPProfileHelper /]
 
 [template public generateImplementationHeader(aClass : Class) {className : String = aClass.name.toUpperFirst().concat('Impl'); aPackage : Package = aClass.ancestors()->filter(Package)->first()}]
 [file (aPackage.generateNamespacePath(false).concat('/impl/').concat(className).concat('.hpp'), false, 'UTF-8')]

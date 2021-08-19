@@ -77,6 +77,7 @@ public class UML4CPPEMtlResourceFactory extends EMtlResourceFactoryImpl {
 		initializeImplEmtls(resourcePathPrefix);
 		initializePackageEmtls(resourcePathPrefix);
 		initializePluginEmtls(resourcePathPrefix);
+		initializeProfilesEmtls(resourcePathPrefix);
 		initializePscsEmtls(resourcePathPrefix);
 		initializeValidationEmtls(resourcePathPrefix);
 	}
@@ -149,8 +150,7 @@ public class UML4CPPEMtlResourceFactory extends EMtlResourceFactoryImpl {
 								"nameHelper",
 								"setGetHelper",
 								"singletonHelper",
-								"IDHelper",
-								"uml4CPPProfileHelper"
+								"IDHelper"
 								};
 		generateFilePathMapData(moduleNames, "helpers", resourcePathPrefix);
 	}
@@ -185,6 +185,16 @@ public class UML4CPPEMtlResourceFactory extends EMtlResourceFactoryImpl {
 								"generateUMLPluginInterfaceSource"
 								};
 		generateFilePathMapData(moduleNames, "plugin", resourcePathPrefix);
+	}
+	
+	private void initializeProfilesEmtls(String resourcePathPrefix)
+	{
+		String[] moduleNames = {"fUMLStrategiesProfileKeywords",
+								"profileHelper",
+								"strategyHelper",
+								"uml4CPPProfileHelper"
+								};
+		generateFilePathMapData(moduleNames, "profiles", resourcePathPrefix);
 	}
 	
     private void initializePscsEmtls(String resourcePathPrefix)

@@ -32,7 +32,7 @@
 [import UML4CPP::generator::main::pscs::generatePropertyInstantiation/]
 [import UML4CPP::generator::main::pscs::generateConnectorPatternsInstantiation/]
 [import UML4CPP::generator::main::pscs::generateDestruction/]
-[import UML4CPP::generator::main::helpers::uml4CPPProfileHelper /]
+[import UML4CPP::generator::main::profiles::uml4CPPProfileHelper /]
 
 [query private includes(aClass : Class)  : Set(Type) = OrderedSet{aClass.member->selectByKind(TypedElement)->select(not type.oclIsUndefined()).type, aClass.ownedOperation.ownedParameter.type, aClass.getAllAttributes().type, aClass.importedMember, aClass.getCompositeOwners()}->flatten() /]
 [query private includes(aInterface : Interface)  : Set(Type) = OrderedSet{aInterface.member->selectByKind(TypedElement)->select(not type.oclIsUndefined()).type, aInterface.ownedOperation.ownedParameter.type}->flatten() /]

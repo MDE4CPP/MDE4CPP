@@ -25,7 +25,7 @@
 [import UML4CPP::generator::main::helpers::generalHelper /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
 [import UML4CPP::generator::main::helpers::singletonHelper /]
-[import UML4CPP::generator::main::helpers::uml4CPPProfileHelper /]
+[import UML4CPP::generator::main::profiles::uml4CPPProfileHelper /]
 
 [template public generateFactoryInterface(aPackage : Package){packageName : String = aPackage.name.concat('Factory');}]
 [file (aPackage.generateNamespacePath(false).concat('/').concat(packageName).concat('.hpp'), false, 'UTF-8')]
@@ -38,7 +38,7 @@
 [for (forwardDeclPackages : Package| aPackage.collectModelClassesForFactoryDeclaration()._package->asSet()) separator ('\n')]
 namespace [forwardDeclPackages.generateNamespace(false)/]
 {
-	[for (aClass : Class | aPackage.collectModelClassesForFactoryDeclaration()->select(_package = forwardDeclPackages))]
+	[for (aClass : Class | aPackage.collectModelClassesForFactoryDeclaration()->select(_package = forwardDeclPackages)->select(isGenerateable()))]
 	class [aClass.name.toUpperFirst()/];
 	[/for]
 }
@@ -64,7 +64,7 @@ namespace [forwardDeclPackages.generateNamespace(false)/]
 			virtual std::shared_ptr<uml::Element> create(const std::shared_ptr<uml::Class> _class,  std::shared_ptr<uml::Element> container= nullptr, const unsigned int referenceID = -1) const = 0;
 			virtual std::shared_ptr<uml::Element> create(const std::string _className,  std::shared_ptr<uml::Element> container= nullptr, const unsigned int referenceID = -1) const = 0;
 
-			[aPackage.collectModelClassesForFactoryFunctions().generateClassCreate(false)/]
+			[aPackage.collectModelClassesForFactoryFunctions()->select(isGenerateable()).generateClassCreate(false)/]
 			//Package
 			virtual std::shared_ptr<[aPackage.name.concat('Package')/]> get[aPackage.name.concat('Package')/]() = 0;
 	};

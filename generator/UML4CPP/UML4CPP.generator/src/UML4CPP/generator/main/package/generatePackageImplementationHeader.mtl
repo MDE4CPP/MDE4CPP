@@ -23,7 +23,8 @@
 [import UML4CPP::generator::main::helpers::generalHelper /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
 [import UML4CPP::generator::main::helpers::collectionHelper /]
-[import UML4CPP::generator::main::helpers::uml4CPPProfileHelper /]
+[import UML4CPP::generator::main::profiles::uml4CPPProfileHelper /]
+[import UML4CPP::generator::main::profiles::strategyHelper /]
 
 [template public generatePackageImplHeader(aPackage : Package) {packageName : String = aPackage.name.concat('PackageImpl');}]
 [file (aPackage.generateNamespacePath(false).concat('/impl/').concat(aPackage.name).concat('PackageImpl.hpp'), false, 'UTF-8')]
@@ -61,7 +62,7 @@ namespace [subPackage.generateNamespace(false)/]
 			virtual ~[packageName/]();
 
 			//getter for the ownedMember
-			[(aPackage.getElementsBelongingToPackage()->filter(NamedElement)-aPackage.getElementsBelongingToPackage()->filter(ValueSpecification))->asOrderedSet()->sortedBy(myQualifiedName()).generatePackageMemberGetter(true)/]
+			[(aPackage.getElementsBelongingToPackage()->filter(NamedElement)-aPackage.getElementsBelongingToPackage()->filter(ValueSpecification))->reject(isStrategyClass())->asOrderedSet()->sortedBy(myQualifiedName()).generatePackageMemberGetter(true)/]
 			[(aPackage.getElementsBelongingToPackage()->filter(ConnectorEnd))->asOrderedSet()->sortedBy(myQualifiedName()).generatePackageMemberGetter(true)/]
 
 			//getter for subPackages
@@ -71,7 +72,7 @@ namespace [subPackage.generateNamespace(false)/]
 
 		private:
 			//private variables for ownedMember of the metamodel package
-			[(aPackage.getElementsBelongingToPackage()->filter(NamedElement))->reject(owner.oclIsKindOf(Slot))->sortedBy(myQualifiedName()).generatePackageMember()/]
+			[(aPackage.getElementsBelongingToPackage()->filter(NamedElement))->reject(owner.oclIsKindOf(Slot))->reject(isStrategyClass())->sortedBy(myQualifiedName()).generatePackageMember()/]
 			[(aPackage.getElementsBelongingToPackage()->filter(ConnectorEnd))->sortedBy(myQualifiedName()).generatePackageMember()/]
 
 			static [aPackage.name.concat('Package')/]* create();

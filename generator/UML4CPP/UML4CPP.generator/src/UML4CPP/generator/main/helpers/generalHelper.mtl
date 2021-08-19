@@ -22,6 +22,9 @@
 [import UML4CPP::generator::main::helpers::keywords /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
 [import UML4CPP::generator::main::validation::validateModel /]
+[import UML4CPP::generator::main::profiles::strategyHelper /]
+
+
 [**
  *  query to generate c++ abstract suffix
 */]
