@@ -39,6 +39,7 @@
 [import UML4CPP::generator::main::helpers::keywords /]
 [import UML4CPP::generator::main::profiles::profileHelper /]
 [import UML4CPP::generator::main::profiles::uml4CPPProfileHelper /]
+[import UML4CPP::generator::main::components::generateClass /]
 
 [template public generateFUML(aPackage : uml::Package)]
 [comment @main/]
@@ -85,12 +86,12 @@
 
 //generate execution classifier
 [if (aPackage.name = keyEcore() or aPackage.name = keyUML())]
-[for (aClassifier : Classifier | aPackage.getClassifiersForObjectClasses()->reject(hasStereotypeApplied(QN_STEREOTYPE_NONEXECUTABLE())))]
+[for (aClassifier : Classifier | aPackage.getClassifiersForObjectClasses()->select(isGenerateable()))]
 [aClassifier.generateMetamodelClassifierObjectHeader(aPackage)/]
 [aClassifier.generateMetamodelClassifierObjectSource(aPackage)/]
 [/for]
 [else]
-[for (aClassifier : Classifier | aPackage.getClassifiersForObjectClasses()->reject(hasStereotypeApplied(QN_STEREOTYPE_NONEXECUTABLE())))]
+[for (aClassifier : Classifier | aPackage.getClassifiersForObjectClasses()->select(isGenerateable()))]
 [aClassifier.generateClassifierObjectHeader(aPackage)/]
 [aClassifier.generateClassifierObjectSource(aPackage)/]
 [/for]
