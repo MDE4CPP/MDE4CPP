@@ -1,0 +1,9 @@
+[comment encoding = UTF-8 /]
+[module generateStrategyHeader('http://www.eclipse.org/uml2/5.0.0/UML')]
+
+
+[template public generateStrategyHeader(aClass : Class)]
+[file (aClass.name, false, 'UTF-8')]
+
+[/file]
+[/template]
