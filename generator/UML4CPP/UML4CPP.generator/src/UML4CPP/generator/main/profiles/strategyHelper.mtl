@@ -12,4 +12,27 @@
 */]
 [query public isChoiceStrategy(anElement : Element) : Boolean = hasStereotypeApplied(QN_STEREOTYPE_CHOICESTRATEGY()) /]
 
+[**
+ * queries for handling of the 'DispatchStrategy' stereotype
+*/]
+[query public isDispatchStrategy(anElement : Element) : Boolean = hasStereotypeApplied(QN_STEREOTYPE_CHOICESTRATEGY()) /]
 
+[**
+ * queries for handling of the 'GetNextEventStrategy' stereotype
+*/]
+[query public isGetNextEventStrategy(anElement : Element) : Boolean = hasStereotypeApplied(QN_STEREOTYPE_CHOICESTRATEGY()) /]
+
+[**
+ * queries for handling of the 'CS_RequestPropagationStrategy' stereotype
+*/]
+[query public isCS_RequestPropagationStrategy(anElement : Element) : Boolean = hasStereotypeApplied(QN_STEREOTYPE_CHOICESTRATEGY()) /]
+
+[**
+ * queries for handling of the 'CS_StructuralFeatureOfInterfaceAccessStrategy' stereotype
+*/]
+[query public isCS_StructuralFeatureOfInterfaceAccessStrategy(anElement : Element) : Boolean = hasStereotypeApplied(QN_STEREOTYPE_CHOICESTRATEGY()) /]
+
+[**
+ * queries for handling of the 'CS_ConstructStrategy' stereotype
+*/]
+[query public isCS_ConstructStrategy(anElement : Element) : Boolean = hasStereotypeApplied(QN_STEREOTYPE_CHOICESTRATEGY()) /]
