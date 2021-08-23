@@ -1,9 +1,24 @@
 [comment encoding = UTF-8 /]
 [module generateStrategyHeader('http://www.eclipse.org/uml2/5.0.0/UML')]
 
+[import UML4CPP::generator::main::helpers::generalHelper /]
+[import UML4CPP::generator::main::helpers::nameHelper /]
+[import UML4CPP::generator::main::profiles::strategyHelper /]
+[import UML4CPP::generator::main::profiles::fUMLStrategiesProfileKeywords /]
 
-[template public generateStrategyHeader(aClass : Class)]
-[file (aClass.name, false, 'UTF-8')]
+[template public generateStrategyHeader(aClass : Class) {
+	aPackage : Package = aClass._package;
+}]
+[file (aPackage.generateNamespacePath(false).concat('Exec/').concat(aClass.name.toUpperFirst()).concat('.hpp'), false, 'UTF-8')]
+[startGuard(aClass)/]
 
+[endGuard(aClass)/]
 [/file]
+[/template]
+
+[template private generateStrategyHeaderIncludes(aClass : Class) ? (aClass.isChoiceStrategy()) {
+	aPackage : Package = aClass._package;
+	strategyStereotype : Stereotype = aClass.getAppliedStereotype(QN_STEREOTYPE_CHOICESTRATEGY());
+}]
+#include"[strategyStereotype.getRootPackage().generateNamespacePath(false)/]/[strategyStereotype.name.toUpperFirst()/].hpp"
 [/template]

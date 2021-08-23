@@ -1,9 +1,13 @@
 [comment encoding = UTF-8 /]
 [module generateStrategySource('http://www.eclipse.org/uml2/5.0.0/UML')]
 
+[import UML4CPP::generator::main::helpers::generalHelper /]
+[import UML4CPP::generator::main::helpers::nameHelper /]
 
-[template public generateStrategySource(aClass : Class)]
-[file (aClass.name, false, 'UTF-8')]
+[template public generateStrategySource(aClass : Class) {
+	aPackage : Package = aClass._package;
+}]
+[file (aPackage.generateNamespacePath(false).concat('Exec/').concat(aClass.name.toUpperFirst()).concat('.cpp'), false, 'UTF-8')]
 
 [/file]
 [/template]

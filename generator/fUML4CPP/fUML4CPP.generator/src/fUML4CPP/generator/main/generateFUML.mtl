@@ -13,33 +13,59 @@
  * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */]
 [module generateFUML('http://www.eclipse.org/uml2/5.0.0/UML')]
-    
+
+[**
+ * fUML4CPP imports
+ */]
+[comment imports for classifier object generation /]
 [import fUML4CPP::generator::main::generateClassifierObjectHeader /]
 [import fUML4CPP::generator::main::generateMetamodelClassifierObjectHeader /]
 [import fUML4CPP::generator::main::generateClassifierObjectSource /]
 [import fUML4CPP::generator::main::generateMetamodelClassifierObjectSource /]
+[comment imports for strategy class generation /]
+[import fUML4CPP::generator::main::strategies::generateStrategyHeader /]
+[import fUML4CPP::generator::main::strategies::generateStrategySource /]
+[comment imports for locus generation /]
 [import fUML4CPP::generator::main::generateModelLocusHeader /]
 [import fUML4CPP::generator::main::generateModelLocusSource /]
-[import fUML4CPP::generator::main::generateExecutionBuildFile /]
+[comment imports for opaque behavior execution generation /]
 [import fUML4CPP::generator::main::generateOpaqueBehaviorExecution /]
 [import fUML4CPP::generator::main::generateOpaqueBehaviorExecutionHeader /]
 [import fUML4CPP::generator::main::generateOpaqueBehaviorExecutionSource /]
+[comment imports for operation execution generation /]
 [import fUML4CPP::generator::main::generateOperationExecution /]
 [import fUML4CPP::generator::main::generateOperationExecutionHeader /]
 [import fUML4CPP::generator::main::generateOperationExecutionSource /]
-[import fUML4CPP::generator::main::parameterHelper /]
+[comment import for execution plugin generation /]
 [import fUML4CPP::generator::main::plugin::generateExecutionPlugin /]
+[comment import for build files generation /]
+[import fUML4CPP::generator::main::generateExecutionBuildFile /]
+[comment imports for helper modules generation /]
 [import fUML4CPP::generator::main::fUMLCollectionHelper /]
 [import fUML4CPP::generator::main::fUMLKeywords /]
+[import fUML4CPP::generator::main::parameterHelper /]
+
+[**
+ * UML4CPP imports
+ */]
+[comment import for main module/]
 [import UML4CPP::generator::main::generate /]
-[import UML4CPP::generator::main::configuration::generateGradleFiles /]
-[import UML4CPP::generator::main::validation::validateModel /]
+[comment import for class-specific queries and templates /]
+[import UML4CPP::generator::main::components::generateClass /]
+[comment imports for helper modules generation /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
 [import UML4CPP::generator::main::helpers::generalHelper /]
 [import UML4CPP::generator::main::helpers::keywords /]
+[comment imports for profile handling /]
 [import UML4CPP::generator::main::profiles::profileHelper /]
 [import UML4CPP::generator::main::profiles::uml4CPPProfileHelper /]
-[import UML4CPP::generator::main::components::generateClass /]
+[import UML4CPP::generator::main::profiles::strategyHelper /]
+[comment import for build files generation /]
+[import UML4CPP::generator::main::configuration::generateGradleFiles /]
+[comment import for model validation /]
+[import UML4CPP::generator::main::validation::validateModel /]
+
+
 
 [template public generateFUML(aPackage : uml::Package)]
 [comment @main/]
@@ -86,16 +112,22 @@
 
 //generate execution classifier
 [if (aPackage.name = keyEcore() or aPackage.name = keyUML())]
-[for (aClassifier : Classifier | aPackage.getClassifiersForObjectClasses()->select(isGenerateable()))]
+[for (aClassifier : Classifier | aPackage.getClassifiersForObjectClasses()->select(isGeneratable()))]
 [aClassifier.generateMetamodelClassifierObjectHeader(aPackage)/]
 [aClassifier.generateMetamodelClassifierObjectSource(aPackage)/]
 [/for]
 [else]
-[for (aClassifier : Classifier | aPackage.getClassifiersForObjectClasses()->select(isGenerateable()))]
+[for (aClassifier : Classifier | aPackage.getClassifiersForObjectClasses()->select(isGeneratable()))]
 [aClassifier.generateClassifierObjectHeader(aPackage)/]
 [aClassifier.generateClassifierObjectSource(aPackage)/]
 [/for]
 [/if]
+
+[comment Generate custom strategy classes /]
+[for (aStrategyClass : Class | aPackage.getPackageClasses()->select(isStrategyClass()))]
+[aStrategyClass.generateStrategyHeader()/]
+[aStrategyClass.generateStrategySource()/]
+[/for]
 
 
 [comment Generate execution plugin, model locus, CMakeLists and Gradle-Files only for root package /]
