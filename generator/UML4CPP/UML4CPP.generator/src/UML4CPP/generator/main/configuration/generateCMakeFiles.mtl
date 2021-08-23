@@ -181,7 +181,7 @@ TARGET_LINK_LIBRARIES(${PROJECT_NAME}
 [/template]
 
 [template private generatePackageContents(aPackage : Package, isRoot : Boolean)]
-[for (aClass : Class | aPackage.ownedElement->filter(Class)->select(isGenerateable())->sortedBy(myQualifiedName()))]
+[for (aClass : Class | aPackage.ownedElement->filter(Class)->select(isGeneratable())->sortedBy(myQualifiedName()))]
 [if(not isRoot)][aPackage.generateNamespacePathWithoutRoot(false)/]/[/if]impl/[aClass.name.toUpperFirst()/]Impl.cpp
 [if (aClass.isSingleton())]
 [if(not isRoot)][aPackage.generateNamespacePathWithoutRoot(false)/]/[/if][aClass.name.toUpperFirst()/].cpp

@@ -37,7 +37,7 @@
 #include <cassert>
 
 [comment  Generate Includes for the Factory/]
-[for (aClass : Class | aPackage.collectModelClassesForFactoryDeclaration()->select(isGenerateable()))]
+[for (aClass : Class | aPackage.collectModelClassesForFactoryDeclaration()->select(isGeneratable()))]
 #include "[aClass.getNearestPackage().generateNamespacePath(false)/]/impl/[aClass.name.toUpperFirst().concat('Impl.hpp')/]"
 [/for]
 
@@ -54,7 +54,7 @@
 [comment  generate standard constructor/]
 [className/]::[className/]()
 {
-	[for (aClass : Class | aPackage.collectModelClassesForFactoryFunctions()->select(isGenerateable()))]
+	[for (aClass : Class | aPackage.collectModelClassesForFactoryFunctions()->select(isGeneratable()))]
 	m_idMap.insert(std::make_pair("[aClass.qualifiedName/]", [aPackage.name/]Package::[aClass.getMemberName().toUpperCase()/]));
 	[/for]
 	[for (aInterface : Interface | aPackage.collectModelInterfacesForFactory())]
@@ -80,7 +80,7 @@ std::shared_ptr<uml::Element> [className/]::create(const unsigned int _metaClass
 {
 	switch(_metaClassId)
 	{
-	[for (aClass : Class | aPackage.collectModelClassesForFactoryFunctions()->select(isGenerateable()))]
+	[for (aClass : Class | aPackage.collectModelClassesForFactoryFunctions()->select(isGeneratable()))]
 	[let compositionsToClass : OrderedSet(Association) = aClass.getCompositionsToClass()]
 		case [aPackage.name/]Package::[aClass.getMemberName().toUpperCase()/]:
 		{
@@ -206,7 +206,7 @@ std::shared_ptr<uml::Element> [className/]::create(std::string _className, std::
     return nullptr;
 }
 
-[for (aClass : Class | aPackage.collectModelClassesForFactoryFunctions()->select(isGenerateable()))]
+[for (aClass : Class | aPackage.collectModelClassesForFactoryFunctions()->select(isGeneratable()))]
 //--------------------------
 //create-Functions for class '[aClass.name/]'
 //--------------------------
@@ -244,7 +244,7 @@ std::shared_ptr<[aClass.generateCppType(true)/]> [className/]::create[aClass.nam
 	[/let]
 [/for]
 
-[for (compositeOwnerClass : Class | aClass.getCompositeOwners()->select(isGenerateable()))] [comment for each class that has composite properties of type aClass/]
+[for (compositeOwnerClass : Class | aClass.getCompositeOwners()->select(isGeneratable()))] [comment for each class that has composite properties of type aClass/]
 [for (compositeProperty : Property | compositeOwnerClass.getCompositePropertiesOfType(aClass))] [comment for each composite property that compositeOwnerClass has/]
 std::shared_ptr<[aClass.generateCppType(true)/]> [className/]::create[aClass.name.toUpperFirst()/]_as_[compositeProperty.name/]_in_[compositeOwnerClass.name.toUpperFirst()/](std::weak_ptr<[compositeOwnerClass.generateCppType(true)/]> par_[compositeOwnerClass.name.toLowerFirst()/], const int metaElementID/*=-1*/) const
 {

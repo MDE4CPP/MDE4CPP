@@ -33,7 +33,7 @@
 [**
  *  queries wether a Class should/can be generated
 */]
-[query public isGenerateable(aClass : Class) : Boolean =
+[query public isGeneratable(aClass : Class) : Boolean =
 not
 (
 	name.oclIsUndefined() or
@@ -104,7 +104,7 @@ static const unsigned int [aClass.getMemberName().toUpperCase()/]_OPERATION_COUN
  * - operation count
 */]
 [template public generateStaticPackageIDs(aPackage : Package)]
-[for (c : Class | aPackage.ownedElement->selectByType(Class)->select(isGenerateable())->sortedBy(name))]
+[for (c : Class | aPackage.ownedElement->selectByType(Class)->select(isGeneratable())->sortedBy(name))]
 	[generateStaticClassID(c)/]
 	[comment  Properties of c/]
 	[for (aProperty : Property | c.ownedAttribute) before('//Properties\n')]

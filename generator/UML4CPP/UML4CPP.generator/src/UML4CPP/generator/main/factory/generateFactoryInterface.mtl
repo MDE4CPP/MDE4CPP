@@ -38,7 +38,7 @@
 [for (forwardDeclPackages : Package| aPackage.collectModelClassesForFactoryDeclaration()._package->asSet()) separator ('\n')]
 namespace [forwardDeclPackages.generateNamespace(false)/]
 {
-	[for (aClass : Class | aPackage.collectModelClassesForFactoryDeclaration()->select(_package = forwardDeclPackages)->select(isGenerateable()))]
+	[for (aClass : Class | aPackage.collectModelClassesForFactoryDeclaration()->select(_package = forwardDeclPackages)->select(isGeneratable()))]
 	class [aClass.name.toUpperFirst()/];
 	[/for]
 }
@@ -64,7 +64,7 @@ namespace [forwardDeclPackages.generateNamespace(false)/]
 			virtual std::shared_ptr<uml::Element> create(const std::shared_ptr<uml::Class> _class,  std::shared_ptr<uml::Element> container= nullptr, const unsigned int referenceID = -1) const = 0;
 			virtual std::shared_ptr<uml::Element> create(const std::string _className,  std::shared_ptr<uml::Element> container= nullptr, const unsigned int referenceID = -1) const = 0;
 
-			[aPackage.collectModelClassesForFactoryFunctions()->select(isGenerateable()).generateClassCreate(false)/]
+			[aPackage.collectModelClassesForFactoryFunctions()->select(isGeneratable()).generateClassCreate(false)/]
 			//Package
 			virtual std::shared_ptr<[aPackage.name.concat('Package')/]> get[aPackage.name.concat('Package')/]() = 0;
 	};

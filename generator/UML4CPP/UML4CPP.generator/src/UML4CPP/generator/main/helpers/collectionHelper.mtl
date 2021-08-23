@@ -48,12 +48,12 @@
 */]
 
 [query private collectModelIncludes(aPackage : Package) : Set(Package) = OrderedSet{
-																		aPackage.member->filter(Class)->select(isGenerateable()).attribute.type.getNearestPackage(),
-																		aPackage.member->filter(Class)->select(isGenerateable()).ownedOperation.ownedParameter.type->reject(oclIsUndefined()).getNearestPackage(),
-																		aPackage.member->filter(Class)->select(isGenerateable()).interfaceRealization.supplier->reject(oclIsUndefined()).getNearestPackage(),
+																		aPackage.member->filter(Class)->select(isGeneratable()).attribute.type.getNearestPackage(),
+																		aPackage.member->filter(Class)->select(isGeneratable()).ownedOperation.ownedParameter.type->reject(oclIsUndefined()).getNearestPackage(),
+																		aPackage.member->filter(Class)->select(isGeneratable()).interfaceRealization.supplier->reject(oclIsUndefined()).getNearestPackage(),
 																		aPackage.allOwnedElements().getGeneratableAppliedStereotypes()._package,
 																		aPackage.getAppliedStereotypes()._package,
-																		aPackage.member->filter(Class)->select(isGenerateable()).generalization.general->reject(oclIsUndefined()).getNearestPackage(),
+																		aPackage.member->filter(Class)->select(isGeneratable()).generalization.general->reject(oclIsUndefined()).getNearestPackage(),
 																		aPackage.allOwnedElements()->filter(CallBehaviorAction).behavior->reject(oclIsUndefined()).getNearestPackage(),
 																		aPackage.allOwnedElements()->filter(CallOperationAction).operation->reject(oclIsUndefined()).getNearestPackage(),
 																		aPackage.packageImport.importedPackage
