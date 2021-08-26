@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:UML4CPPProfile="http://www.tu-ilmenau.de/sse/UML4CPPProfile" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xsi:schemaLocation="http://www.tu-ilmenau.de/sse/UML4CPPProfile ../../UML4CPPProfile/model/UML4CPPProfile.uml#_v75nIfp7EeuavpF89IQaUg">
+  <uml:Profile xmi:id="_0" name="PSCS" URI="http://www.tu-ilmenau.de/sse/UML4CPPProfile">
+    <eAnnotations xmi:id="_LGsZcAV9EeyhaZlTpg_vvA" source="http://www.eclipse.org/uml2/2.0.0/UML">
+      <contents xmi:type="ecore:EPackage" xmi:id="_LGsZcQV9EeyhaZlTpg_vvA" name="PSCS" nsURI="http://www.tu-ilmenau.de/sse/UML4CPPProfile" nsPrefix="PSCS">
+        <eAnnotations xmi:id="_LGsZcgV9EeyhaZlTpg_vvA" source="http://www.eclipse.org/uml2/4.0.0/UML">
+          <references xmi:type="uml:Package" href="../../fUMLStrategiesProfile/model/fUMLStrategiesProfile.uml#_Pp5AcATQEeymYPa0ZS8sUg"/>
+        </eAnnotations>
+        <eClassifiers xmi:type="ecore:EClass" xmi:id="_LGsZcwV9EeyhaZlTpg_vvA" name="fUML_Semantics_StructuredClassifiers_Object">
+          <eAnnotations xmi:id="_LGsZdAV9EeyhaZlTpg_vvA" source="http://www.eclipse.org/uml2/2.0.0/UML">
+            <references xmi:type="uml:Class" href="../../fUMLStrategiesProfile/model/fUMLStrategiesProfile.uml#_DMFmgATREeymYPa0ZS8sUg"/>
+          </eAnnotations>
+        </eClassifiers>
+        <eClassifiers xmi:type="ecore:EClass" xmi:id="_LGsZdQV9EeyhaZlTpg_vvA" name="fUML_Semantics_StructuredClassifiers_Reference">
+          <eAnnotations xmi:id="_LGsZdgV9EeyhaZlTpg_vvA" source="http://www.eclipse.org/uml2/2.0.0/UML">
+            <references xmi:type="uml:Class" href="../../fUMLStrategiesProfile/model/fUMLStrategiesProfile.uml#_Q9EbIAV2EeyhaZlTpg_vvA"/>
+          </eAnnotations>
+        </eClassifiers>
+        <eClassifiers xmi:type="ecore:EClass" xmi:id="_LGsZdwV9EeyhaZlTpg_vvA" name="fUML_Semantics_Loci_SemanticVisitor">
+          <eAnnotations xmi:id="_LGsZeAV9EeyhaZlTpg_vvA" source="http://www.eclipse.org/uml2/2.0.0/UML">
+            <references xmi:type="uml:Class" href="../../fUMLStrategiesProfile/model/fUMLStrategiesProfile.uml#_UwwvMAV2EeyhaZlTpg_vvA"/>
+          </eAnnotations>
+        </eClassifiers>
+        <eClassifiers xmi:type="ecore:EClass" xmi:id="_LGsZeQV9EeyhaZlTpg_vvA" name="fUML_Semantics_SimpleClassifiers_FeatureValue">
+          <eAnnotations xmi:id="_LGsZegV9EeyhaZlTpg_vvA" source="http://www.eclipse.org/uml2/2.0.0/UML">
+            <references xmi:type="uml:Class" href="../../fUMLStrategiesProfile/model/fUMLStrategiesProfile.uml#_NDnycAV4EeyhaZlTpg_vvA"/>
+          </eAnnotations>
+        </eClassifiers>
+        <eClassifiers xmi:type="ecore:EClass" xmi:id="_LGsZewV9EeyhaZlTpg_vvA" name="fUML_Semantics_Values_Value">
+          <eAnnotations xmi:id="_LGsZfAV9EeyhaZlTpg_vvA" source="http://www.eclipse.org/uml2/2.0.0/UML">
+            <references xmi:type="uml:Class" href="../../fUMLStrategiesProfile/model/fUMLStrategiesProfile.uml#_Q9cjsAV4EeyhaZlTpg_vvA"/>
+          </eAnnotations>
+        </eClassifiers>
+        <eSubpackages xmi:id="_LGsZfQV9EeyhaZlTpg_vvA" name="Semantics" nsURI="http:///PSCS/Semantics.ecore" nsPrefix="PSCS.Semantics">
+          <eAnnotations xmi:id="_LGsZfgV9EeyhaZlTpg_vvA" source="http://www.eclipse.org/uml2/4.0.0/UML" references="_hN4I0ADkEeyxWfNTHT_0zQ"/>
+          <eSubpackages xmi:id="_LGsZfwV9EeyhaZlTpg_vvA" name="Actions" nsURI="http:///PSCS/Semantics/Actions.ecore" nsPrefix="PSCS.Semantics.Actions">
+            <eAnnotations xmi:id="_LGsZgAV9EeyhaZlTpg_vvA" source="http://www.eclipse.org/uml2/4.0.0/UML" references="_DxSuoAV8EeyhaZlTpg_vvA"/>
+            <eClassifiers xmi:type="ecore:EClass" xmi:id="_LGsZgQV9EeyhaZlTpg_vvA" name="CS_ConstructStrategy">
+              <eAnnotations xmi:id="_LGsZggV9EeyhaZlTpg_vvA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_MW1oIAV8EeyhaZlTpg_vvA"/>
+              <eAnnotations xmi:id="_LGsZgwV9EeyhaZlTpg_vvA" source="http://www.eclipse.org/emf/2002/GenModel">
+                <details xmi:id="_LGsZhAV9EeyhaZlTpg_vvA" key="documentation" value="This stereotype can be used to indicate that the corresponding class should be inherited from PSCS::Semantics::StructuredClassifiers::CS_ConstructStrategyand as such represent a model-specific CS_ConstructStrategy.&#xA;A CS_ConstructStrategy must implement the operation &quot;construct(uml::Operation, PSCS::Semantics::StructuredClassifiers::CS_Object) : PSCS::Semantics::StructuredClassifiers::Object&quot; as specified below."/>
+              </eAnnotations>
+              <eOperations xmi:id="_LGsZhQV9EeyhaZlTpg_vvA" name="construct" ordered="false" lowerBound="1" eType="_LGsZcwV9EeyhaZlTpg_vvA">
+                <eParameters xmi:id="_LGsZhwV9EeyhaZlTpg_vvA" name="constructor" ordered="false" lowerBound="1">
+                  <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Operation"/>
+                </eParameters>
+                <eParameters xmi:id="_LGsZiQV9EeyhaZlTpg_vvA" name="context" ordered="false" lowerBound="1" eType="_LGsZsAV9EeyhaZlTpg_vvA"/>
+              </eOperations>
+              <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_LGsZiwV9EeyhaZlTpg_vvA" name="base_Class" ordered="false" lowerBound="1">
+                <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Class"/>
+              </eStructuralFeatures>
+            </eClassifiers>
+          </eSubpackages>
+          <eSubpackages xmi:id="_LGsZjQV9EeyhaZlTpg_vvA" name="StructuredClassifiers" nsURI="http:///PSCS/Semantics/StructuredClassifiers.ecore" nsPrefix="PSCS.Semantics.StructuredClassifiers">
+            <eAnnotations xmi:id="_LGsZjgV9EeyhaZlTpg_vvA" source="http://www.eclipse.org/uml2/4.0.0/UML" references="_Pp5AcATQEeymYPa0ZS8sUg"/>
+            <eClassifiers xmi:type="ecore:EClass" xmi:id="_LGsZjwV9EeyhaZlTpg_vvA" name="CS_RequestPropagationStrategy">
+              <eAnnotations xmi:id="_LGsZkAV9EeyhaZlTpg_vvA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_TaKNEATQEeymYPa0ZS8sUg"/>
+              <eAnnotations xmi:id="_LGsZkQV9EeyhaZlTpg_vvA" source="http://www.eclipse.org/emf/2002/GenModel">
+                <details xmi:id="_LGsZkgV9EeyhaZlTpg_vvA" key="documentation" value="This stereotype can be used to indicate that the corresponding class should be inherited from PSCS::Semantics::StructuredClassifiers::CS_RequestPropagationStrategy and as such represent a model-specific CS_RequestPropagationStrategy.&#xA;A CS_RequestPropagationStrategy must implement the operation &quot;select(fUML::Semantics::StructuredClassifiers::Reference [*], fUML::Semantics::Loci::SemanticVisitor) : fUML::Semantics::StructuredClassifiers::Reference [*]&quot; as specified below."/>
+              </eAnnotations>
+              <eOperations xmi:id="_LGsZkwV9EeyhaZlTpg_vvA" name="select" ordered="false" upperBound="-1" eType="_LGsZdQV9EeyhaZlTpg_vvA">
+                <eParameters xmi:id="_LGsZlQV9EeyhaZlTpg_vvA" name="potentialTargets" ordered="false" upperBound="-1" eType="_LGsZdQV9EeyhaZlTpg_vvA"/>
+                <eParameters xmi:id="_LGsZlwV9EeyhaZlTpg_vvA" name="context" ordered="false" lowerBound="1" eType="_LGsZdwV9EeyhaZlTpg_vvA"/>
+              </eOperations>
+              <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_LGsZmQV9EeyhaZlTpg_vvA" name="base_Class" ordered="false" lowerBound="1">
+                <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Class"/>
+              </eStructuralFeatures>
+            </eClassifiers>
+            <eClassifiers xmi:type="ecore:EClass" xmi:id="_LGsZmwV9EeyhaZlTpg_vvA" name="CS_StructuralFeatureOfInterfaceAccessStrategy">
+              <eAnnotations xmi:id="_LGsZnAV9EeyhaZlTpg_vvA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_033ZEAV3EeyhaZlTpg_vvA"/>
+              <eAnnotations xmi:id="_LGsZnQV9EeyhaZlTpg_vvA" source="http://www.eclipse.org/emf/2002/GenModel">
+                <details xmi:id="_LGsZngV9EeyhaZlTpg_vvA" key="documentation" value="This stereotype can be used to indicate that the corresponding class should be inherited from PSCS::Semantics::StructuredClassifiers::CS_StructuralFeatureOfInterfaceAccessStrategy and as such represent a model-specific CS_StructuralFeatureOfInterfaceAccessStrategy.&#xA;A CS_StructuralFeatureOfInterfaceAccessStrategy must implement the operations:&#xA;- &quot;read(PSCS::Semantics::StructuredClassifiers::CS_Object, uml::StructuralFeature) : fUML::Semantics::SimpleClassifiers::FeatureValue&quot; and&#xA;- &quot;wrte(PSCS::Semantics::StructuredClassifiers::CS_Object, uml::StructuralFeature, fUML::Semantics::Values::Value [*], Integer)&quot;&#xA;as specified below."/>
+              </eAnnotations>
+              <eOperations xmi:id="_LGsZnwV9EeyhaZlTpg_vvA" name="read" ordered="false" lowerBound="1" eType="_LGsZeQV9EeyhaZlTpg_vvA">
+                <eParameters xmi:id="_LGsZoQV9EeyhaZlTpg_vvA" name="cs_Object" ordered="false" lowerBound="1" eType="_LGsZsAV9EeyhaZlTpg_vvA"/>
+                <eParameters xmi:id="_LGsZowV9EeyhaZlTpg_vvA" name="feature" ordered="false" lowerBound="1">
+                  <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//StructuralFeature"/>
+                </eParameters>
+              </eOperations>
+              <eOperations xmi:id="_LGsZpQV9EeyhaZlTpg_vvA" name="write" ordered="false" lowerBound="1">
+                <eParameters xmi:id="_LGsZpgV9EeyhaZlTpg_vvA" name="cs_Object" ordered="false" lowerBound="1" eType="_LGsZsAV9EeyhaZlTpg_vvA"/>
+                <eParameters xmi:id="_LGsZqAV9EeyhaZlTpg_vvA" name="feature" ordered="false" lowerBound="1">
+                  <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//StructuralFeature"/>
+                </eParameters>
+                <eParameters xmi:id="_LGsZqgV9EeyhaZlTpg_vvA" name="values" ordered="false" upperBound="-1" eType="_LGsZewV9EeyhaZlTpg_vvA"/>
+                <eParameters xmi:id="_LGsZrAV9EeyhaZlTpg_vvA" name="position" ordered="false" lowerBound="1">
+                  <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/uml2/5.0.0/Types#//Integer"/>
+                </eParameters>
+              </eOperations>
+              <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_LGsZrgV9EeyhaZlTpg_vvA" name="base_Class" ordered="false" lowerBound="1">
+                <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Class"/>
+              </eStructuralFeatures>
+            </eClassifiers>
+            <eClassifiers xmi:type="ecore:EClass" xmi:id="_LGsZsAV9EeyhaZlTpg_vvA" name="CS_Object">
+              <eAnnotations xmi:id="_LGsZsQV9EeyhaZlTpg_vvA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_DMFmgATREeymYPa0ZS8sUg"/>
+            </eClassifiers>
+          </eSubpackages>
+        </eSubpackages>
+      </contents>
+    </eAnnotations>
+    <packagedElement xmi:type="uml:Package" xmi:id="_hN4I0ADkEeyxWfNTHT_0zQ" name="Semantics">
+      <packagedElement xmi:type="uml:Package" xmi:id="_DxSuoAV8EeyhaZlTpg_vvA" name="Actions">
+        <packagedElement xmi:type="uml:Stereotype" xmi:id="_MW1oIAV8EeyhaZlTpg_vvA" name="CS_ConstructStrategy">
+          <ownedComment xmi:id="_MW1oIQV8EeyhaZlTpg_vvA" annotatedElement="_MW1oIAV8EeyhaZlTpg_vvA">
+            <body>This stereotype can be used to indicate that the corresponding class should be inherited from PSCS::Semantics::StructuredClassifiers::CS_ConstructStrategyand as such represent a model-specific CS_ConstructStrategy.
+A CS_ConstructStrategy must implement the operation &quot;construct(uml::Operation, PSCS::Semantics::StructuredClassifiers::CS_Object) : PSCS::Semantics::StructuredClassifiers::Object&quot; as specified below.</body>
+          </ownedComment>
+          <ownedAttribute xmi:id="_MW1oIgV8EeyhaZlTpg_vvA" name="base_Class" association="_MW1oKwV8EeyhaZlTpg_vvA">
+            <type xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Class"/>
+          </ownedAttribute>
+          <ownedOperation xmi:id="_MW1oIwV8EeyhaZlTpg_vvA" name="construct" isAbstract="true">
+            <ownedParameter xmi:id="_MW1oJAV8EeyhaZlTpg_vvA" name="constructor">
+              <type xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Operation"/>
+            </ownedParameter>
+            <ownedParameter xmi:id="_MW1oJwV8EeyhaZlTpg_vvA" name="context" type="_DMFmgATREeymYPa0ZS8sUg"/>
+            <ownedParameter xmi:id="_MW1oKAV8EeyhaZlTpg_vvA" name="constructedObject" direction="return">
+              <type xmi:type="uml:Class" href="../../fUMLStrategiesProfile/model/fUMLStrategiesProfile.uml#_DMFmgATREeymYPa0ZS8sUg"/>
+            </ownedParameter>
+          </ownedOperation>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Extension" xmi:id="_MW1oKwV8EeyhaZlTpg_vvA" name="Class_CS_ConstructStrategy" memberEnd="_MW1oLAV8EeyhaZlTpg_vvA _MW1oIgV8EeyhaZlTpg_vvA">
+          <ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="_MW1oLAV8EeyhaZlTpg_vvA" name="extension_CS_ConstructStrategy" type="_MW1oIAV8EeyhaZlTpg_vvA" aggregation="composite" association="_MW1oKwV8EeyhaZlTpg_vvA"/>
+        </packagedElement>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Package" xmi:id="_Pp5AcATQEeymYPa0ZS8sUg" name="StructuredClassifiers">
+        <packagedElement xmi:type="uml:Stereotype" xmi:id="_TaKNEATQEeymYPa0ZS8sUg" name="CS_RequestPropagationStrategy">
+          <ownedComment xmi:id="_dImy4ATREeymYPa0ZS8sUg" annotatedElement="_TaKNEATQEeymYPa0ZS8sUg">
+            <body>This stereotype can be used to indicate that the corresponding class should be inherited from PSCS::Semantics::StructuredClassifiers::CS_RequestPropagationStrategy and as such represent a model-specific CS_RequestPropagationStrategy.
+A CS_RequestPropagationStrategy must implement the operation &quot;select(fUML::Semantics::StructuredClassifiers::Reference [*], fUML::Semantics::Loci::SemanticVisitor) : fUML::Semantics::StructuredClassifiers::Reference [*]&quot; as specified below.</body>
+          </ownedComment>
+          <ownedAttribute xmi:id="_IjaQgATREeymYPa0ZS8sUg" name="base_Class" association="_BduKwATSEeymYPa0ZS8sUg">
+            <type xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Class"/>
+          </ownedAttribute>
+          <ownedOperation xmi:id="_N0gWsATREeymYPa0ZS8sUg" name="select" isAbstract="true">
+            <ownedParameter xmi:id="_P2ljMATREeymYPa0ZS8sUg" name="potentialTargets">
+              <type xmi:type="uml:Class" href="../../fUMLStrategiesProfile/model/fUMLStrategiesProfile.uml#_Q9EbIAV2EeyhaZlTpg_vvA"/>
+              <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_ION_MAV3EeyhaZlTpg_vvA"/>
+              <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_IhW9oAV3EeyhaZlTpg_vvA" value="*"/>
+            </ownedParameter>
+            <ownedParameter xmi:id="_QRYBwATREeymYPa0ZS8sUg" name="context">
+              <type xmi:type="uml:Class" href="../../fUMLStrategiesProfile/model/fUMLStrategiesProfile.uml#_UwwvMAV2EeyhaZlTpg_vvA"/>
+            </ownedParameter>
+            <ownedParameter xmi:id="_QtA04ATREeymYPa0ZS8sUg" name="selectedTargets" direction="return">
+              <type xmi:type="uml:Class" href="../../fUMLStrategiesProfile/model/fUMLStrategiesProfile.uml#_Q9EbIAV2EeyhaZlTpg_vvA"/>
+              <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_O-hOUAV3EeyhaZlTpg_vvA"/>
+              <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_PNcbIAV3EeyhaZlTpg_vvA" value="*"/>
+            </ownedParameter>
+          </ownedOperation>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Extension" xmi:id="_BduKwATSEeymYPa0ZS8sUg" name="Class_CS_RequestPropagationStrategy" memberEnd="_GXAN4ATSEeymYPa0ZS8sUg _IjaQgATREeymYPa0ZS8sUg">
+          <ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="_GXAN4ATSEeymYPa0ZS8sUg" name="extension_CS_RequestPropagationStrategy" type="_TaKNEATQEeymYPa0ZS8sUg" aggregation="composite" association="_BduKwATSEeymYPa0ZS8sUg"/>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Stereotype" xmi:id="_033ZEAV3EeyhaZlTpg_vvA" name="CS_StructuralFeatureOfInterfaceAccessStrategy">
+          <ownedComment xmi:id="_033ZEQV3EeyhaZlTpg_vvA" annotatedElement="_033ZEAV3EeyhaZlTpg_vvA">
+            <body>This stereotype can be used to indicate that the corresponding class should be inherited from PSCS::Semantics::StructuredClassifiers::CS_StructuralFeatureOfInterfaceAccessStrategy and as such represent a model-specific CS_StructuralFeatureOfInterfaceAccessStrategy.
+A CS_StructuralFeatureOfInterfaceAccessStrategy must implement the operations:
+- &quot;read(PSCS::Semantics::StructuredClassifiers::CS_Object, uml::StructuralFeature) : fUML::Semantics::SimpleClassifiers::FeatureValue&quot; and
+- &quot;wrte(PSCS::Semantics::StructuredClassifiers::CS_Object, uml::StructuralFeature, fUML::Semantics::Values::Value [*], Integer)&quot;
+as specified below.</body>
+          </ownedComment>
+          <ownedAttribute xmi:id="_033ZEgV3EeyhaZlTpg_vvA" name="base_Class" association="_033ZGwV3EeyhaZlTpg_vvA">
+            <type xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Class"/>
+          </ownedAttribute>
+          <ownedOperation xmi:id="_033ZEwV3EeyhaZlTpg_vvA" name="read" isAbstract="true">
+            <ownedParameter xmi:id="_033ZFAV3EeyhaZlTpg_vvA" name="cs_Object" type="_DMFmgATREeymYPa0ZS8sUg"/>
+            <ownedParameter xmi:id="_033ZFwV3EeyhaZlTpg_vvA" name="feature">
+              <type xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#StructuralFeature"/>
+            </ownedParameter>
+            <ownedParameter xmi:id="_033ZGAV3EeyhaZlTpg_vvA" name="matchingFeatureValue" direction="return">
+              <type xmi:type="uml:Class" href="../../fUMLStrategiesProfile/model/fUMLStrategiesProfile.uml#_NDnycAV4EeyhaZlTpg_vvA"/>
+            </ownedParameter>
+          </ownedOperation>
+          <ownedOperation xmi:id="_FQ-VgAV4EeyhaZlTpg_vvA" name="write" isAbstract="true">
+            <ownedParameter xmi:id="_QOGDAAV7EeyhaZlTpg_vvA" name="cs_Object" type="_DMFmgATREeymYPa0ZS8sUg"/>
+            <ownedParameter xmi:id="_QOGDAQV7EeyhaZlTpg_vvA" name="feature">
+              <type xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#StructuralFeature"/>
+            </ownedParameter>
+            <ownedParameter xmi:id="_QOGDAgV7EeyhaZlTpg_vvA" name="values">
+              <type xmi:type="uml:Class" href="../../fUMLStrategiesProfile/model/fUMLStrategiesProfile.uml#_Q9cjsAV4EeyhaZlTpg_vvA"/>
+              <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_SrIGIAV7EeyhaZlTpg_vvA"/>
+              <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_S0BjcAV7EeyhaZlTpg_vvA" value="*"/>
+            </ownedParameter>
+            <ownedParameter xmi:id="_VbCB8AV7EeyhaZlTpg_vvA" name="position">
+              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+            </ownedParameter>
+          </ownedOperation>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Extension" xmi:id="_033ZGwV3EeyhaZlTpg_vvA" name="Class_CS_StructuralFeatureOfInterfaceAccessStrategy" memberEnd="_033ZHAV3EeyhaZlTpg_vvA _033ZEgV3EeyhaZlTpg_vvA">
+          <ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="_033ZHAV3EeyhaZlTpg_vvA" name="extension_CS_StructuralFeatureOfInterfaceAccessStrategy" type="_033ZEAV3EeyhaZlTpg_vvA" aggregation="composite" association="_033ZGwV3EeyhaZlTpg_vvA"/>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Class" xmi:id="_DMFmgATREeymYPa0ZS8sUg" name="CS_Object"/>
+      </packagedElement>
+    </packagedElement>
+    <profileApplication xmi:id="_5JDF8AVtEeyhaZlTpg_vvA">
+      <eAnnotations xmi:id="_5JGJQAVtEeyhaZlTpg_vvA" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="../../UML4CPPProfile/model/UML4CPPProfile.uml#_v75nIfp7EeuavpF89IQaUg"/>
+      </eAnnotations>
+      <appliedProfile href="../../UML4CPPProfile/model/UML4CPPProfile.uml#_0"/>
+    </profileApplication>
+  </uml:Profile>
+  <UML4CPPProfile:DoNotGenerate xmi:id="_8zUYQAVtEeyhaZlTpg_vvA" base_Element="_0"/>
+</xmi:XMI>
