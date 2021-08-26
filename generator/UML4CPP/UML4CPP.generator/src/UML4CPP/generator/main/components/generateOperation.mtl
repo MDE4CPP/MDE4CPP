@@ -42,8 +42,12 @@ virtual [aOperation.generateCppType()/] [aOperation.name/]([for (sParameter : Pa
  * - calling an Activity by fUML execution engine -> if first method is Activity
  * - raise of UnsupportedOperationException -> if no method is defined
 */]
-[template public generateOperationImplementation(aOperation : Operation)]
-[aOperation.generateCppType()/] [aOperation.class.name.toUpperFirst()/]Impl::[aOperation.name/]([for (sParameter : Parameter | aOperation.ownedParameter->select(p :Parameter | not (p.direction = ParameterDirectionKind::return))) separator (',')]
+[template public generateOperationImplementation(anOperation : Operation)]
+[anOperation.generateOperationImplementation(true)/]
+[/template]
+
+[template public generateOperationImplementation(aOperation : Operation, impl : Boolean)]
+[aOperation.generateCppType()/] [aOperation.class.name.toUpperFirst()/][if(impl)]Impl[/if]::[aOperation.name/]([for (sParameter : Parameter | aOperation.ownedParameter->select(p :Parameter | not (p.direction = ParameterDirectionKind::return))) separator (',')]
 [sParameter.generateCppType(true)/] [sParameter.name/][/for])[if (aOperation.isQuery)] const[/if] 
 {
 [if (aOperation.ownedParameter->select(p :Parameter | p.direction = ParameterDirectionKind::return)->notEmpty())]
