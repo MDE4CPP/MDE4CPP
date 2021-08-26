@@ -23,6 +23,8 @@
 [import UML4CPP::generator::main::helpers::keywords /]
 [import UML4CPP::generator::main::profiles::profileHelper /]
 [import UML4CPP::generator::main::profiles::uml4CPPProfileHelper /]
+[import UML4CPP::generator::main::helpers::isGeneratableHelper /]
+[import UML4CPP::generator::main::profiles::strategyHelper /]
 
 
 [template public generateExecutionBuildFiles(aPackage : Package, packageOnly : Boolean)]
@@ -277,17 +279,21 @@ task clean {
 
 [template private generatePackageSourceFilesToCompile(aPackage : Package, packOnly : Boolean, isRoot : Boolean)]
 #ClassifierObject classes for Package [aPackage.generateNamespace(false)/]
-[for (aClassifier : Classifier | getClassifiersForObjectClasses()->reject(hasStereotypeApplied(QN_STEREOTYPE_NONEXECUTABLE()))->sortedBy(name))]
+[for (aClassifier : Classifier | getClassifiersForObjectClasses()->select(isGeneratable())->sortedBy(name))]
 [if(not isRoot)]../[aPackage.generateNamespacePath(false)/]Exec/[/if][aClassifier.name.toUpperFirst()/]Object.cpp
+[/for]
+#Strategy classes for Package [aPackage.generateNamespace(false)/]
+[for (aClass : Class | getPackageClasses()->select(isStrategyClass())->sortedBy(name))]
+[if(not isRoot)]../[aPackage.generateNamespacePath(false)/]Exec/[/if][aClass.name.toUpperFirst()/].cpp
 [/for]
 [if (not packOnly)]
 #OpaqueBehaviorExecution classes for Package [aPackage.generateNamespace(false)/]
-[for (anOpaqueBehavior : OpaqueBehavior | aPackage.getPackageOpaqueBehaviors()->reject(hasStereotypeApplied(QN_STEREOTYPE_NONEXECUTABLE()))->sortedBy(name))]
+[for (anOpaqueBehavior : OpaqueBehavior | aPackage.getPackageOpaqueBehaviors()->reject(isDoNotGenerateElement())->reject(hasStereotypeApplied(QN_STEREOTYPE_NONEXECUTABLE()))->sortedBy(name))]
 [if(not isRoot)]../[aPackage.generateNamespacePath(false)/]Exec/[/if][anOpaqueBehavior.generateOpaqueBehaviorExecutionName()/].cpp
 [/for]
 #OperationExecution classes for Package [aPackage.generateNamespace(false)/]
-[for (anOperation : Operation | aPackage.getPackageOperations()->sortedBy(name))]
-[if(not isRoot)]../[aPackage.generateNamespacePath(false)/]Exec/[/if][anOperation.generateOperationExecutionName()->reject(hasStereotypeApplied(QN_STEREOTYPE_NONEXECUTABLE()))->sortedBy(name)/].cpp
+[for (anOperation : Operation | aPackage.getPackageOperations()->reject(isDoNotGenerateElement())->reject(hasStereotypeApplied(QN_STEREOTYPE_NONEXECUTABLE()))->sortedBy(name))]
+[if(not isRoot)]../[aPackage.generateNamespacePath(false)/]Exec/[/if][anOperation.generateOperationExecutionName()->sortedBy(name)/].cpp
 [/for]
 [/if]
 [for (subPackage : Package | aPackage.ownedElement->filter(Package))]
@@ -333,16 +339,16 @@ TARGET_LINK_LIBRARIES(${PROJECT_NAME}
 [query private buildModeCMakeProperty(debugMode : Boolean) : String = if (debugMode) then 'debug' else 'optimized' endif/]
 
 [query public metaModelIncludes(aPackage : Package) : Set(Package) = OrderedSet{
-																			aPackage.member->filter(Class).attribute.type->reject(oclIsUndefined()).getNearestPackage(),
-																			aPackage.member->filter(Class).ownedOperation.ownedParameter.type->reject(oclIsUndefined()).getNearestPackage(),
-																			aPackage.member->filter(Class).attribute.getAppliedStereotypes().getNearestPackage(), 
-																			aPackage.member->filter(Class).interfaceRealization.supplier.getNearestPackage(), 
-																			aPackage.member->filter(Class).generalization.general.getNearestPackage(), 
+																			aPackage.member->filter(Class)->reject(isDoNotGenerateElement()).attribute.type->reject(oclIsUndefined()).getNearestPackage(),
+																			aPackage.member->filter(Class)->reject(isDoNotGenerateElement()).ownedOperation.ownedParameter.type->reject(oclIsUndefined()).getNearestPackage(),
+																			aPackage.member->filter(Class)->reject(isDoNotGenerateElement()).attribute.getAppliedStereotypes().getNearestPackage(), 
+																			aPackage.member->filter(Class)->reject(isDoNotGenerateElement()).interfaceRealization.supplier.getNearestPackage(), 
+																			aPackage.member->filter(Class)->reject(isDoNotGenerateElement()).generalization.general.getNearestPackage(), 
 																			aPackage.getCallOperationActions().operation.method->reject(oclIsUndefined()).ownedParameter.type->reject(oclIsUndefined()).getNearestPackage(),
 																			aPackage.allOwnedElements()->filter(CallBehaviorAction).behavior->reject(oclIsUndefined()).getNearestPackage(),
 																		    aPackage.allOwnedElements()->filter(CallOperationAction).operation->reject(oclIsUndefined()).getNearestPackage(),
-																			aPackage.packageImport.importedPackage
-																		}->flatten()->reject(oclIsUndefined())->reject(pack : Package | (pack = aPackage) or pack.isReflectionModel() or pack.name = QN_PROFILE_UML4CPPPROFILE()) /]
+																			aPackage.packageImport->reject(isDoNotGenerateElement()).importedPackage
+																		}->flatten()->reject(oclIsUndefined())->reject(pack : Package | (pack = aPackage) or pack.isReflectionModel() or pack.name = QN_PROFILE_UML4CPPPROFILE())->reject(isDoNotGenerate()) /]
 [query public isReflectionModel(aPackage : Package) : Boolean = if ((aPackage.name='UML') or (aPackage.name='Ecore')or (aPackage.name='PrimitiveTypes') or (aPackage.eAllContents()->filter(ecore::EAnnotation)->select(source = 'SDK')->notEmpty())) then true else false endif /]
 [query public metaModelIncludesWithoutReflection(aPackage : Package) : Set(Package) = aPackage.metaModelIncludes()->reject((name = aPackage.name) or (name = 'PrimitiveTypes') or (name = 'UML')or (name = 'Ecore'))/]
 [query public metaModelIncludesReflection(aPackage : Package) : Set(Package) = aPackage.metaModelIncludes()->select((not (name = aPackage.name) or (name = 'PrimitiveTypes') or (name = 'UML')or (name = 'Ecore')))/]

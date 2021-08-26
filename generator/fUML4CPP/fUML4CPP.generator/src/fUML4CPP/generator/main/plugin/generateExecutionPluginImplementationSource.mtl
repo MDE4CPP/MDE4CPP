@@ -25,6 +25,7 @@
 [import UML4CPP::generator::main::helpers::keywords /]
 [import UML4CPP::generator::main::profiles::profileHelper /]
 [import UML4CPP::generator::main::profiles::uml4CPPProfileHelper /]
+[import UML4CPP::generator::main::profiles::strategyHelper /]
 
 [template public generateExecutionPluginImplSource(aPackage : Package) { packageName : String = aPackage.name.concat('ExecPluginImpl'); }]
 [file (aPackage.generateNamespacePath(false).concat('Exec/impl/').concat(packageName).concat('.cpp'), false, 'UTF-8')]
@@ -94,12 +95,12 @@ void [packageName/]::initialize()
 	[generateExecutionPluginInitialization()/]
 
 	[comment create opaque behavior executions for operations /]
-	[for (anOperation : Operation | aPackage.allOwnedElements()->filter(Operation)->addAll(aPackage.getOperationExecutionsCOA())->reject(hasStereotypeApplied(QN_STEREOTYPE_NONEXECUTABLE())))]
+	[for (anOperation : Operation | aPackage.allOwnedElements()->filter(Operation)->addAll(aPackage.getOperationExecutionsCOA())->reject(isDoNotGenerateElement())->reject(hasStereotypeApplied(QN_STEREOTYPE_NONEXECUTABLE())))]
 	[anOperation.generateOpaqueBehaviorForOperationExecution()/]
 	[/for]
 
 	[comment create opaque behavior executions for opaque behaviors in the model that are executed either by a call behavior action or by a desicion node/]
-	[for (anOpaqueBehavior : OpaqueBehavior | aPackage.collectAllExecutedOpaqueBehaviors()->reject(hasStereotypeApplied(QN_STEREOTYPE_NONEXECUTABLE())))]
+	[for (anOpaqueBehavior : OpaqueBehavior | aPackage.collectAllExecutedOpaqueBehaviors()->reject(isDoNotGenerateElement())->reject(hasStereotypeApplied(QN_STEREOTYPE_NONEXECUTABLE())))]
 	[anOpaqueBehavior.generateOpaqueBehaviorExecution()/]
 	[/for]
 	[/if]
@@ -135,19 +136,47 @@ Any [packageName/]::executeActivity(std::shared_ptr<uml::Activity> activity, std
 #include "PSCS/Semantics/Loci/CS_ExecutionFactory.hpp"
 #include "PSCS/Semantics/Loci/CS_Executor.hpp"
 #include "PSCS/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
-#include "PSCS/Semantics/StructuredClassifiers/CS_DispatchOperationOfInterfaceStrategy.hpp"
-#include "PSCS/Semantics/StructuredClassifiers/CS_NameBased_StructuralFeatureOfInterfaceAccessStrategy.hpp"
 #include "PSCS/Semantics/StructuredClassifiers/CS_Reference.hpp"
-#include "PSCS/Semantics/StructuredClassifiers/CS_DefaultRequestPropagationStrategy.hpp"
 #include "PSCS/Semantics/Actions/ActionsFactory.hpp"
-#include "PSCS/Semantics/Actions/CS_DefaultConstructStrategy.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
 #include "fUML/Semantics/CommonBehavior/ParameterValue.hpp"
-#include "fUML/Semantics/Loci/FirstChoiceStrategy.hpp"
-#include "fUML/Semantics/StructuredClassifiers/DispatchStrategy.hpp"
 #include "fUML/Semantics/Values/Value.hpp"
+
+//Semantic Strategy Includes
+[if (aPackage.hasChoiceStrategy())][let choiceStrategy : Class = aPackage.getChoiceStrategy()]
+#include "[choiceStrategy.getNearestPackage().generateNamespacePath(true)/]Exec/[choiceStrategy.name.toUpperFirst()/].hpp"
+[/let][else]
+#include "fUML/Semantics/Loci/FirstChoiceStrategy.hpp"
+[/if]
+[if (aPackage.hasDispatchStrategy())][let dispatchStrategy : Class = aPackage.getDispatchStrategy()]
+#include "[dispatchStrategy.getNearestPackage().generateNamespacePath(true)/]Exec/[dispatchStrategy.name.toUpperFirst()/].hpp"
+[/let][else]
+#include "PSCS/Semantics/StructuredClassifiers/CS_DispatchOperationOfInterfaceStrategy.hpp"
+[/if]
+[if (aPackage.hasGetNextEventStrategy())][let getNextEventStrategy : Class = aPackage.getGetNextEventStrategy()]
+#include "[getNextEventStrategy.getNearestPackage().generateNamespacePath(true)/]Exec/[getNextEventStrategy.name.toUpperFirst()/].hpp"
+[/let][else]
+#include "fUML/Semantics/CommonBehavior/FIFOGetNextEventStrategy.hpp"
+[/if]
+[if (aPackage.hasCS_RequestPropagationStrategy())][let cS_RequestPropagationStrategy : Class = aPackage.getCS_RequestPropagationStrategy()]
+#include "[cS_RequestPropagationStrategy.getNearestPackage().generateNamespacePath(true)/]Exec/[cS_RequestPropagationStrategy.name.toUpperFirst()/].hpp"
+[/let][else]
+#include "PSCS/Semantics/StructuredClassifiers/CS_DefaultRequestPropagationStrategy.hpp"
+[/if]
+[if (aPackage.hasCS_StructuralFeatureOfInterfaceAccessStrategy())][let cS_StructuralFeatureOfInterfaceAccessStrategy : Class = aPackage.getCS_StructuralFeatureOfInterfaceAccessStrategy()]
+#include "[cS_StructuralFeatureOfInterfaceAccessStrategy.getNearestPackage().generateNamespacePath(true)/]Exec/[cS_StructuralFeatureOfInterfaceAccessStrategy.name.toUpperFirst()/].hpp"
+[/let][else]
+#include "PSCS/Semantics/StructuredClassifiers/CS_NameBased_StructuralFeatureOfInterfaceAccessStrategy.hpp"
+[/if]
+[if (aPackage.hasCS_ConstructStrategy())][let cS_ConstructStrategy : Class = aPackage.getCS_ConstructStrategy()]
+#include "[cS_ConstructStrategy.getNearestPackage().generateNamespacePath(true)/]Exec/[cS_ConstructStrategy.name.toUpperFirst()/].hpp"
+[/let][else]
+#include "PSCS/Semantics/Actions/CS_DefaultConstructStrategy.hpp"
+[/if]
+
+//UML includes
 #include "uml/Activity.hpp"
 #include "uml/Enumeration.hpp"
 #include "uml/OpaqueBehavior.hpp"
@@ -193,12 +222,12 @@ Any [packageName/]::executeActivity(std::shared_ptr<uml::Activity> activity, std
 
 //Includes of OpaqueBehaviourExecutions
 [aPackage.allOwnedElements()->filter(CallBehaviorAction).behavior->filter(OpaqueBehavior)
-->addAll(aPackage.allOwnedElements()->filter(DecisionNode).decisionInput->filter(OpaqueBehavior))->reject(hasStereotypeApplied(QN_STEREOTYPE_NONEXECUTABLE()))->asOrderedSet().generateInclude()/]
+->addAll(aPackage.allOwnedElements()->filter(DecisionNode).decisionInput->filter(OpaqueBehavior))->reject(isDoNotGenerateElement())->reject(hasStereotypeApplied(QN_STEREOTYPE_NONEXECUTABLE()))->asOrderedSet().generateInclude()/]
 //Includes of OperationExecutions
-[aPackage.allOwnedElements()->filter(Operation)->addAll(aPackage.getOperationExecutionsCOA())->reject(hasStereotypeApplied(QN_STEREOTYPE_NONEXECUTABLE())).generateInclude()/]
+[aPackage.allOwnedElements()->filter(Operation)->addAll(aPackage.getOperationExecutionsCOA())->reject(isDoNotGenerateElement())->reject(hasStereotypeApplied(QN_STEREOTYPE_NONEXECUTABLE())).generateInclude()/]
 
 //Includes from parameter types of executed Operations and Activities
-[for ( type : Type | aPackage.allOwnedElements()->filter(Operation)->addAll(aPackage.getOperationExecutionsCOA()).ownedParameter.type->asSet()
+[for ( type : Type | aPackage.allOwnedElements()->filter(Operation)->addAll(aPackage.getOperationExecutionsCOA())->reject(isDoNotGenerateElement())->reject(hasStereotypeApplied(QN_STEREOTYPE_NONEXECUTABLE())).ownedParameter.type->asSet()
 	->addAll(aPackage.allOwnedElements()->filter(Activity).ownedParameter.type->asSet())->sortedBy(qualifiedName))]
 [type.generateTypeInclude(type.getNearestPackage(), aPackage)/]
 [/for]
@@ -226,16 +255,49 @@ std::shared_ptr<PSCS::Semantics::Loci::CS_Executor> m_executor = PSCS::Semantics
 //initialize ExecutionFactory
 std::shared_ptr<PSCS::Semantics::Loci::CS_ExecutionFactory> m_factory = PSCS::Semantics::Loci::LociFactory::eInstance()->createCS_ExecutionFactory_as_factory_in_Locus(m_locus);
 
-//assign ConstructStrategy to execution factory
-m_factory->assignStrategy(PSCS::Semantics::Actions::ActionsFactory::eInstance()->createCS_DefaultConstructStrategy());
-//assign ChoiceStrategy to execution factory
+[if (aPackage.hasChoiceStrategy())]
+[aPackage.getChoiceStrategy().generateStrategyAssignment()/]
+[else]
+//assign FirstChoiceStrategy to execution factory
 m_factory->assignStrategy(fUML::Semantics::Loci::LociFactory::eInstance()->createFirstChoiceStrategy());
-//assign DispatchStrategy to execution factory
+[/if]
+[if (aPackage.hasDispatchStrategy())]
+[aPackage.getDispatchStrategy().generateStrategyAssignment()/]
+[else]
+//assign CS_DispatchOperationOfInterfaceStrategy to execution factory
 m_factory->assignStrategy(PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createCS_DispatchOperationOfInterfaceStrategy());
-//assign StructuralFeatureOfInterfaceAccessStrategy to execution factory
-m_factory->assignStrategy(PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createCS_NameBased_StructuralFeatureOfInterfaceAccessStrategy());
-//assign RequestPropagationStrategy to execution factory
+[/if]
+[if (aPackage.hasGetNextEventStrategy())]
+[aPackage.getGetNextEventStrategy().generateStrategyAssignment()/]
+[else]
+//assign FIFOGetNextEventStrategy to execution factory
+m_factory->assignStrategy(fUML::Semantics::CommonBehavior::CommonBehaviorFactory::eInstance()->createFIFOGetNextEventStrategy());
+[/if]
+[if (aPackage.hasCS_RequestPropagationStrategy())]
+[aPackage.getCS_RequestPropagationStrategy().generateStrategyAssignment()/]
+[else]
+//assign CS_DefaultRequestPropagationStrategy to execution factory
 m_factory->assignStrategy(PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createCS_DefaultRequestPropagationStrategy());
+[/if]
+[if (aPackage.hasCS_StructuralFeatureOfInterfaceAccessStrategy())]
+[aPackage.getCS_StructuralFeatureOfInterfaceAccessStrategy().generateStrategyAssignment()/]
+[else]
+//assign CS_NameBased_StructuralFeatureOfInterfaceAccessStrategy to execution factory
+m_factory->assignStrategy(PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createCS_NameBased_StructuralFeatureOfInterfaceAccessStrategy());
+[/if]
+[if (aPackage.hasCS_ConstructStrategy())]
+[aPackage.getCS_ConstructStrategy().generateStrategyAssignment()/]
+[else]
+//assign CS_DefaultConstructStrategy to execution factory
+m_factory->assignStrategy(PSCS::Semantics::Actions::ActionsFactory::eInstance()->createCS_DefaultConstructStrategy());
+[/if]
+[/template]
+
+[template private generateStrategyAssignment(aStrategyClass : Class)]
+//assign [aStrategyClass.name.toUpperFirst()/] to execution factory
+std::shared_ptr<[aStrategyClass.generateNamespaceName(true)/]> [aStrategyClass.name.toLowerFirst()/](new [aStrategyClass.generateNamespaceName(true)/]());
+[aStrategyClass.name.toLowerFirst()/]->setThis[aStrategyClass.name.toUpperFirst()/]Ptr([aStrategyClass.name.toLowerFirst()/]);
+m_factory->assignStrategy([aStrategyClass.name.toLowerFirst()/]);
 [/template]
 
 [template public generateOpaqueBehaviorForOperationExecution(anOperation : Operation)]
@@ -425,9 +487,9 @@ m_locus->setFactory(nullptr);
 
 [query private findPackagesForOpaqueBehaviorExecutions(aPackage : Package) : OrderedSet(Package) = 
 	OrderedSet(Package){
-		aPackage.getCallBehaviorActionsWithOB().behavior->reject(hasStereotypeApplied(QN_STEREOTYPE_NONEXECUTABLE())).getNearestPackage(),
-		aPackage.getOperationExecutionsAll().method->filter(OpaqueBehavior)->reject(hasStereotypeApplied(QN_STEREOTYPE_NONEXECUTABLE())).getNearestPackage(),
-		aPackage.getDecisionNodesWithOB().decisionInput->reject(hasStereotypeApplied(QN_STEREOTYPE_NONEXECUTABLE())).getNearestPackage()
+		aPackage.getCallBehaviorActionsWithOB().behavior->reject(isDoNotGenerateElement())->reject(hasStereotypeApplied(QN_STEREOTYPE_NONEXECUTABLE())).getNearestPackage(),
+		aPackage.getOperationExecutionsAll().method->reject(isDoNotGenerateElement())->filter(OpaqueBehavior)->reject(hasStereotypeApplied(QN_STEREOTYPE_NONEXECUTABLE())).getNearestPackage(),
+		aPackage.getDecisionNodesWithOB().decisionInput->reject(isDoNotGenerateElement())->reject(hasStereotypeApplied(QN_STEREOTYPE_NONEXECUTABLE())).getNearestPackage()
 	}->flatten()->sortedBy(name) /]
 
 

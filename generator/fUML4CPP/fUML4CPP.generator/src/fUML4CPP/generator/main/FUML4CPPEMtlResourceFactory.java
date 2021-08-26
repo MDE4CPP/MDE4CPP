@@ -22,6 +22,7 @@ public class FUML4CPPEMtlResourceFactory extends UML4CPPEMtlResourceFactory {
 		String resourcePathPrefix = "rsrc:fUML4CPP/generator/main/";
 		initalizeGeneralEmtls(resourcePathPrefix);
 		initalizePluginEmtls(resourcePathPrefix);
+		initalizeStrategyEmtls(resourcePathPrefix);
 	}
 	
 	private void initalizeGeneralEmtls(String resourcePathPrefix)
@@ -64,6 +65,14 @@ public class FUML4CPPEMtlResourceFactory extends UML4CPPEMtlResourceFactory {
 								"generateExecutionPluginInterfaceSource"
 								};
 		generateFilePathMapData(ModuleNames, "plugin", resourcePathPrefix);
+	}
+	
+	private void initalizeStrategyEmtls(String resourcePathPrefix)
+	{
+		String[] ModuleNames = {"generateStrategyHeader",
+								"generateStrategySource"
+								};
+		generateFilePathMapData(ModuleNames, "strategies", resourcePathPrefix);
 	}
 }
 

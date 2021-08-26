@@ -3,8 +3,14 @@
 
 [import UML4CPP::generator::main::helpers::generalHelper /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
+[import UML4CPP::generator::main::helpers::keywords /]
 [import UML4CPP::generator::main::profiles::strategyHelper /]
 [import UML4CPP::generator::main::profiles::fUMLStrategiesProfileKeywords /]
+[import UML4CPP::generator::main::profiles::PSCSStrategiesProfileKeywords /]
+[import UML4CPP::generator::main::profiles::uml4CPPProfileHelper /]
+[import UML4CPP::generator::main::validation::validateModel /]
+[import UML4CPP::generator::main::components::generateOperation /]
+[import UML4CPP::generator::main::components::generateProperty /]
 
 [template public generateStrategyHeader(aClass : Class) {
 	aPackage : Package = aClass._package;
@@ -12,13 +18,167 @@
 [file (aPackage.generateNamespacePath(false).concat('Exec/').concat(aClass.name.toUpperFirst()).concat('.hpp'), false, 'UTF-8')]
 [startGuard(aClass)/]
 
+[aClass.generateStrategyHeaderIncludes()/]
+
+[if (not aClass.getNearestPackage().isIgnoreNamespace())]
+namespace [aPackage.generateNamespace(false)/]
+{
+[/if]
+[aClass.generateStrategyHeaderClass()/]
+[if (not aClass.getNearestPackage().isIgnoreNamespace())]}[/if]
 [endGuard(aClass)/]
 [/file]
 [/template]
 
-[template private generateStrategyHeaderIncludes(aClass : Class) ? (aClass.isChoiceStrategy()) {
+
+
+[template private generateStrategyHeaderIncludes(aClass : Class)]
+template<class T> class Bag;
+
+[for (usedType : Type | OrderedSet{aClass.includes()->filter(Interface), aClass.includes()->filter(Class)}->flatten()->sortedBy(myQualifiedName())) before('//Forward declarations for used types\n') separator('\n') after('\n')]
+	[if (usedType.oclIsUndefined() or usedType.name.oclIsUndefined())]
+// undefined  [usedType.eClass().name/] ([usedType.toString()/]) ['class '.concat(aClass.name).concat(': header include failed for undefined ').concat(usedType.eClass().name).concat(' ').concat(usedType.toString()).registerError()/]
+	[else]
+[if (not usedType.getNearestPackage().isIgnoreNamespace())]namespace [usedType._package.generateNamespace(true)/] 
+{
+[/if]
+	class [usedType.name.toUpperFirst()/];
+[if (not usedType.getNearestPackage().isIgnoreNamespace())]}[/if]
+	[/if]
+[/for]
+[for (usedEnum : Enumeration | aClass.includes()->filter(Enumeration)->asOrderedSet()->sortedBy(myQualifiedName())) before('//Includes of used enumerations') after('\n')]
+#include "[usedEnum.getNearestPackage().generateNamespacePath(false)/]/[usedEnum.name.toUpperFirst().concat('.hpp')/]"
+[/for]
+[aClass.generateStrategyHeaderIncludesSpecific()/]
+[/template]
+
+[template private generateStrategyHeaderIncludesSpecific(aClass : Class) ? (aClass.isChoiceStrategy()) {
+	strategyStereotype : Stereotype = aClass.getAppliedStereotype(QN_STEREOTYPE_CHOICESTRATEGY());
+}]
+//Inlude for ChoiceStrategy
+#include"[strategyStereotype._package.generateNamespacePath(false)/]/impl/[strategyStereotype.name.toUpperFirst()/]Impl.hpp"
+[/template]
+
+[template private generateStrategyHeaderIncludesSpecific(aClass : Class) ? (aClass.isDispatchStrategy()) {
+	strategyStereotype : Stereotype = aClass.getAppliedStereotype(QN_STEREOTYPE_DISPATCHSTRATEGY());
+}]
+//Inlude for DispatchStrategy
+#include"[strategyStereotype._package.generateNamespacePath(false)/]/impl/[strategyStereotype.name.toUpperFirst()/]Impl.hpp"
+[/template]
+
+[template private generateStrategyHeaderIncludesSpecific(aClass : Class) ? (aClass.isGetNextEventStrategy()) {
+	strategyStereotype : Stereotype = aClass.getAppliedStereotype(QN_STEREOTYPE_GETNEXTEVENTSTRATEGY());
+}]
+//Inlude for GetNextEventStrategy
+#include"[strategyStereotype._package.generateNamespacePath(false)/]/impl/[strategyStereotype.name.toUpperFirst()/]Impl.hpp"
+[/template]
+
+[template private generateStrategyHeaderIncludesSpecific(aClass : Class) ? (aClass.isCS_RequestPropagationStrategy()) {
+	strategyStereotype : Stereotype = aClass.getAppliedStereotype(QN_STEREOTYPE_CS_REQUESTPROPAGATIONSTRATEGY());
+}]
+//Inlude for CS_RequestPropagationStrategy
+#include"[strategyStereotype._package.generateNamespacePath(false)/]/impl/[strategyStereotype.name.toUpperFirst()/]Impl.hpp"
+[/template]
+
+[template private generateStrategyHeaderIncludesSpecific(aClass : Class) ? (aClass.isCS_StructuralFeatureOfInterfaceAccessStrategy()) {
+	strategyStereotype : Stereotype = aClass.getAppliedStereotype(QN_STEREOTYPE_CS_STRUCTURALFEATUREOFINTERFACEACCESSSTRATEGY());
+}]
+//Inlude for CS_StructuralFeatureOfInterfaceAccessStrategy
+#include"[strategyStereotype._package.generateNamespacePath(false)/]/impl/[strategyStereotype.name.toUpperFirst()/]Impl.hpp"
+[/template]
+
+[template private generateStrategyHeaderIncludesSpecific(aClass : Class) ? (aClass.isCS_ConstructStrategy()) {
+	strategyStereotype : Stereotype = aClass.getAppliedStereotype(QN_STEREOTYPE_CS_CONSTRUCTSTRATEGY());
+}]
+//Inlude for CS_ConstructStrategy
+#include"[strategyStereotype._package.generateNamespacePath(false)/]/impl/[strategyStereotype.name.toUpperFirst()/]Impl.hpp"
+[/template]
+
+
+
+[template private generateStrategyHeaderClass(aClass : Class) ? (aClass.isChoiceStrategy()){
 	aPackage : Package = aClass._package;
 	strategyStereotype : Stereotype = aClass.getAppliedStereotype(QN_STEREOTYPE_CHOICESTRATEGY());
 }]
-#include"[strategyStereotype.getRootPackage().generateNamespacePath(false)/]/[strategyStereotype.name.toUpperFirst()/].hpp"
+	class [aClass.name.toUpperFirst()/] : virtual public [strategyStereotype.generateNamespace(true)/]::[strategyStereotype.name.toUpperFirst()/]Impl
+	{		
+		[aClass.generateStrategyHeaderClassInternal()/]
+	};
 [/template]
+
+[template private generateStrategyHeaderClass(aClass : Class) ? (aClass.isDispatchStrategy()){
+	aPackage : Package = aClass._package;
+	strategyStereotype : Stereotype = aClass.getAppliedStereotype(QN_STEREOTYPE_DISPATCHSTRATEGY());
+}]
+	class [aClass.name.toUpperFirst()/] : virtual public [strategyStereotype.generateNamespace(true)/]::[strategyStereotype.name.toUpperFirst()/]Impl
+	{		
+		[aClass.generateStrategyHeaderClassInternal()/]
+	};
+[/template]
+
+[template private generateStrategyHeaderClass(aClass : Class) ? (aClass.isGetNextEventStrategy()){
+	aPackage : Package = aClass._package;
+	strategyStereotype : Stereotype = aClass.getAppliedStereotype(QN_STEREOTYPE_GETNEXTEVENTSTRATEGY());
+}]
+	class [aClass.name.toUpperFirst()/] : virtual public [strategyStereotype.generateNamespace(true)/]::[strategyStereotype.name.toUpperFirst()/]Impl
+	{		
+		[aClass.generateStrategyHeaderClassInternal()/]
+	};
+[/template]
+
+[template private generateStrategyHeaderClass(aClass : Class) ? (aClass.isCS_RequestPropagationStrategy()){
+	aPackage : Package = aClass._package;
+	strategyStereotype : Stereotype = aClass.getAppliedStereotype(QN_STEREOTYPE_CS_REQUESTPROPAGATIONSTRATEGY());
+}]
+	class [aClass.name.toUpperFirst()/] : virtual public [strategyStereotype.generateNamespace(true)/]::[strategyStereotype.name.toUpperFirst()/]Impl
+	{		
+		[aClass.generateStrategyHeaderClassInternal()/]
+	};
+[/template]
+
+[template private generateStrategyHeaderClass(aClass : Class) ? (aClass.isCS_StructuralFeatureOfInterfaceAccessStrategy()){
+	aPackage : Package = aClass._package;
+	strategyStereotype : Stereotype = aClass.getAppliedStereotype(QN_STEREOTYPE_CS_STRUCTURALFEATUREOFINTERFACEACCESSSTRATEGY());
+}]
+	class [aClass.name.toUpperFirst()/] : virtual public [strategyStereotype.generateNamespace(true)/]::[strategyStereotype.name.toUpperFirst()/]Impl
+	{		
+		[aClass.generateStrategyHeaderClassInternal()/]
+	};
+[/template]
+
+[template private generateStrategyHeaderClass(aClass : Class) ? (aClass.isCS_ConstructStrategy()){
+	aPackage : Package = aClass._package;
+	strategyStereotype : Stereotype = aClass.getAppliedStereotype(QN_STEREOTYPE_CS_CONSTRUCTSTRATEGY());
+}]
+	class [aClass.name.toUpperFirst()/] : virtual public [strategyStereotype.generateNamespace(true)/]::[strategyStereotype.name.toUpperFirst()/]Impl
+	{		
+		[aClass.generateStrategyHeaderClassInternal()/]
+	};
+[/template]
+
+[template private generateStrategyHeaderClassInternal(aClass : Class)]
+public:
+	//constructor
+	[aClass.name.toUpperFirst()/]();
+	//destructor
+	virtual ~[aClass.name.toUpperFirst()/]();
+	virtual void setThis[aClass.name.toUpperFirst()/]Ptr(std::weak_ptr<[aClass.name.toUpperFirst()/]> this[aClass.name.toUpperFirst()/]Ptr);
+
+	//*********************************
+	// Getter Setter
+	//*********************************
+	[aClass.ownedAttribute->sortedBy(name).generateAttributeAccessorsDeclaration(true)/]
+	
+	//*********************************
+	// Operations
+	//*********************************
+	[aClass.ownedOperation->sortedBy(name).generateOperationDecl(true)/]
+	
+protected:
+	//*********************************
+	// Members
+	//*********************************
+	[aClass.ownedAttribute->sortedBy(name).generateAttributeProtectedMember()/]
+[/template]
+
+[query private includes(aClass : Class) : Set(Type) = Set(Type){aClass.ownedAttribute.type, aClass.ownedOperation.ownedParameter.type}->flatten() /]

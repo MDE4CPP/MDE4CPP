@@ -22,6 +22,7 @@
 [import UML4CPP::generator::main::helpers::keywords /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
 [import UML4CPP::generator::main::validation::validateModel /]
+[import UML4CPP::generator::main::profiles::strategyHelper /]
 
 [template public generateOperationExecutionSource(anOperation : Operation, aPackage :Package) {
 	behaviorName : String = anOperation.generateOperationExecutionName(); 
@@ -90,8 +91,10 @@ void [behaviorName/]::setThisExecutionPtr(std::weak_ptr<[behaviorName/]> thisExe
 [/template]
 
 [template private generateIncludes(anOperation : Operation, aPackage : Package)]
+[if (not anOperation.owner.isStrategyClass())]
 #include "[anOperation.owner.getNearestPackage().generateNamespacePath(false)/]/[anOperation.owner.oclAsType(NamedElement).name.toUpperFirst()/].hpp"
 #include "[anOperation.owner.getNearestPackage().generateNamespacePath(false)/]Exec/[anOperation.owner.oclAsType(NamedElement).name.toUpperFirst()/]Object.hpp"
+[/if]
 [for (typePackage : Package | anOperation.ownedParameter.type->asSet()->reject(supportedTypes())._package->asSet()->reject(isReflectionModel())->sortedBy(qualifiedName))]
 #include "[typePackage.generateNamespacePath(false)/]/[typePackage.getPackageName()/]Package.hpp"
 [/for]

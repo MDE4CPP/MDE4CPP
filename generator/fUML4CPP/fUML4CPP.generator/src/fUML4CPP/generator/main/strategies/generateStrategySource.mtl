@@ -3,11 +3,139 @@
 
 [import UML4CPP::generator::main::helpers::generalHelper /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
+[import UML4CPP::generator::main::profiles::strategyHelper /]
+[import UML4CPP::generator::main::profiles::fUMLStrategiesProfileKeywords /]
+[import UML4CPP::generator::main::validation::validateModel /]
+[import UML4CPP::generator::main::profiles::uml4CPPProfileHelper /]
+[import UML4CPP::generator::main::helpers::keywords /]
+[import UML4CPP::generator::main::components::generateProperty /]
+[import UML4CPP::generator::main::components::generateOperation /]
 
 [template public generateStrategySource(aClass : Class) {
 	aPackage : Package = aClass._package;
 }]
 [file (aPackage.generateNamespacePath(false).concat('Exec/').concat(aClass.name.toUpperFirst()).concat('.cpp'), false, 'UTF-8')]
+[aClass.generateStrategySourceIncludes()/]
 
+[aClass.generateStrategySourceClass()/]
 [/file]
 [/template]
+
+[template private generateStrategySourceIncludes(aClass : Class){
+	aPackage : Package = aClass._package;
+}]
+[defineDebugMacro()/]
+
+#include <iostream>
+#include "[aPackage.generateNamespacePath(false)/]Exec/[aClass.name.toUpperFirst()/].hpp"
+
+//Includes from attributes, operation parameters, and imports
+[for (cl : Type | aClass.includes()->sortedBy(myQualifiedName())) ? (oclIsKindOf(Class) or oclIsKindOf(Interface) or oclIsKindOf(Enumeration))]
+[if (cl.oclIsUndefined() or cl.name.oclIsUndefined())]
+// undefined  [cl.eClass().name/] ([cl.toString()/]) ['class '.concat(aClass.name).concat(': header include failed for undefined ').concat(cl.eClass().name).concat(' ').concat(cl.toString()).registerError()/]
+[elseif (cl.getNearestPackage().hasIncludePath())]
+#include "[cl.getNearestPackage().getIncludePath()/]"
+[else]
+#include "[cl.getNearestPackage().generateNamespacePath(true)/]/[cl.name.toUpperFirst()/].hpp"
+[/if]
+[/for]
+[if (aClass.ownedOperation.method->notEmpty())][if(ownedOperation.method->filter(Activity)->notEmpty())]
+//Includes of PluginFramework
+#include "pluginFramework/PluginFramework.hpp"
+#include "pluginFramework/UMLExecutionModelPlugin.hpp"
+[/if][/if]
+[for (aOperation : Operation | aClass.ownedOperation->select(op : Operation | op.method->notEmpty() and op.method->asOrderedSet()->first().oclIsKindOf(OpaqueBehavior) and op.method->asOrderedSet()->first().oclAsType(OpaqueBehavior).language->includes(keyInclude()))->asOrderedSet()->sortedBy(myQualifiedName())) before('//Includes of OpaqueBevaiors') after('\n')]
+[let index : Integer = aOperation.method->asOrderedSet()->first().oclAsType(OpaqueBehavior).language->asOrderedSet()->indexOf(keyInclude())]
+[if (0 < index and index <= aOperation.method->asOrderedSet()->first().oclAsType(OpaqueBehavior)._body->size())]
+//Included from operation "[aOperation.name/]"
+[aOperation.method->asOrderedSet()->first().oclAsType(OpaqueBehavior)._body->asOrderedSet()->at(index)/]
+[/if][/let][/for]
+[for (instVal : InstanceValue | aClass.ownedAttribute.defaultValue->reject(oclIsUndefined())->selectByType(InstanceValue)->reject(type.oclIsUndefined() or type.oclIsKindOf(Enumeration))->sortedBy(myQualifiedName())) before('//Includes from InstanceValues\n')]
+[if (instVal.type.oclIsUndefined() or instVal.type.name.oclIsUndefined())]
+// undefined type of InstanceValue [instVal.qualifiedName/] ([instVal.type.toString()/]) ['class '.concat(aClass.name).concat(': undefined type of InstanceValue ').concat(instVal.qualifiedName).concat(' (').concat(instVal.type.toString()).registerError()/]
+[else]
+#include "[instVal.type._package.generateNamespacePath(false)/]/[instVal.type._package.getPackageName()/]Factory.hpp"
+#include "[instVal.type._package.generateNamespacePath(true)/]/[instVal.type.name/].hpp"
+[/if]
+[/for]
+
+[aClass.generateStrategySourceIncludesSpecific()/]
+[/template]
+
+[template private generateStrategySourceIncludesSpecific(aClass : Class) ? (aClass.isChoiceStrategy()) {
+	aPackage : Package = aClass._package;
+	strategyStereotype : Stereotype = aClass.getAppliedStereotype(QN_STEREOTYPE_CHOICESTRATEGY());
+}]
+//Inludes for ChoiceStrategy
+//No further includes
+[/template]
+
+[template private generateStrategySourceClass(aClass : Class){
+	aPackage : Package = aClass._package;
+}]
+[if (not aPackage.isIgnoreNamespace())]using namespace [aPackage.generateNamespace(false)/];[/if]
+
+//*********************************
+// Constructor / Destructor
+//*********************************
+[aClass.name.toUpperFirst()/]::[aClass.name.toUpperFirst()/]()
+{
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
+	DEBUG_MESSAGE(std::cout<<"[aClass.name.toUpperFirst()/] is created..."<<std::endl;)
+	//***********************************
+}
+
+[aClass.name.toUpperFirst()/]::~[aClass.name.toUpperFirst()/]()
+{
+	DEBUG_MESSAGE(std::cout<<"[aClass.name.toUpperFirst()/] is destroyed..."<<std::endl;)
+}
+
+//*********************************
+// Attribute Setter Getter
+//*********************************
+[for (aAttribute : Property | aClass.ownedAttribute->sortedBy(myQualifiedName())) separator ('\n')]
+[aAttribute.generateAttributeSetterImplementationCpp()/]
+[aAttribute.generateAttributeGetterImplementationCpp()/]
+[/for]
+
+//*********************************
+// Operations
+//*********************************
+[for (aOperation : Operation | aClass.ownedOperation->sortedBy(myQualifiedName())) separator('\n')]
+[aOperation.generateOperationImplementation(false)/]
+[/for]
+
+void [aClass.name.toUpperFirst()/]::setThis[aClass.name.toUpperFirst()/]Ptr(std::weak_ptr<[aClass.name.toUpperFirst()/]> this[aClass.name.toUpperFirst()/]Ptr)
+{
+	[aClass.generateStrategySourceClassThisPtrOperationSpecific()/]
+}
+[/template]
+
+[template private generateStrategySourceClassThisPtrOperationSpecific(aClass : Class) ? (aClass.isChoiceStrategy())]
+setThisChoiceStrategyPtr(this[aClass.name.toUpperFirst()/]Ptr);
+[/template]
+
+[template private generateStrategySourceClassThisPtrOperationSpecific(aClass : Class) ? (aClass.isDispatchStrategy())]
+setThisDispatchStrategyPtr(this[aClass.name.toUpperFirst()/]Ptr);
+[/template]
+
+[template private generateStrategySourceClassThisPtrOperationSpecific(aClass : Class) ? (aClass.isGetNextEventStrategy())]
+setThisGetNextEventStrategyPtr(this[aClass.name.toUpperFirst()/]Ptr);
+[/template]
+
+[template private generateStrategySourceClassThisPtrOperationSpecific(aClass : Class) ? (aClass.isCS_RequestPropagationStrategy())]
+setThisCS_RequestPropagationStrategyPtr(this[aClass.name.toUpperFirst()/]Ptr);
+[/template]
+
+[template private generateStrategySourceClassThisPtrOperationSpecific(aClass : Class) ? (aClass.isCS_StructuralFeatureOfInterfaceAccessStrategy())]
+setThisCS_StructuralFeatureOfInterfaceAccessStrategyPtr(this[aClass.name.toUpperFirst()/]Ptr);
+[/template]
+
+[template private generateStrategySourceClassThisPtrOperationSpecific(aClass : Class) ? (aClass.isCS_ConstructStrategy())]
+setThisCS_ConstructStrategyPtr(this[aClass.name.toUpperFirst()/]Ptr);
+[/template]
+
+
+[query private includes(aClass : Class)  : Set(Type) = OrderedSet{aClass.member->selectByKind(TypedElement)->select(not type.oclIsUndefined()).type, aClass.ownedOperation.ownedParameter.type, aClass.importedMember}->flatten() /]
