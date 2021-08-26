@@ -28,8 +28,8 @@
 [**
  * queries for handling of the 'MainBehavior' stereotype
 */]
-[query public hasMainBehavior(aPackage : Package) : Boolean = aPackage.eAllContents(Behavior)->select(hasStereotypeApplied(QN_STEREOTYPE_MAINBEHAVIOR()))->size() > 0 /]
-[query public getMainBehavior(aPackage : Package) : Behavior = if(hasMainBehavior()) then aPackage.eAllContents(Behavior)->select(hasStereotypeApplied(QN_STEREOTYPE_MAINBEHAVIOR()))->asOrderedSet()->first() else null endif/]
+[query public hasMainBehavior(aPackage : Package) : Boolean = aPackage.eAllContents(Behavior)->select(hasStereotypeApplied(QN_STEREOTYPE_MAINBEHAVIOR()))->reject(isDoNotGenerateElement())->size() > 0 /]
+[query public getMainBehavior(aPackage : Package) : Behavior = if(hasMainBehavior()) then aPackage.eAllContents(Behavior)->select(hasStereotypeApplied(QN_STEREOTYPE_MAINBEHAVIOR()))->reject(isDoNotGenerateElement())->asOrderedSet()->first() else null endif/]
 [query public hasMainActivity(aPackage : Package) : Boolean = if(hasMainBehavior() and getMainBehavior().oclIsKindOf(Activity)) then true else false endif /]
 [query public getMainActivity(aPackage : Package) : Activity = if(hasMainActivity()) then getMainBehavior().oclAsType(Activity) else null endif /]
 [query public hasMainSourceCode(ePackage : Package) : Boolean = true /]
@@ -40,8 +40,17 @@
 [**
  * queries for handling of the 'DoNotGenerate' stereotype
 */]
-[query public isDoNotGenerateElement(anElement : Element) : Boolean = hasStereotypeApplied(QN_STEREOTYPE_DONOTGENERATE()) /]
-[query public isDoNotGenerate(aPackage : Package) : Boolean = if(aPackage.isRootPackage()) then aPackage.isDoNotGenerateElement() else aPackage.getRootPackage().isDoNotGenerate() endif /]
+[query private _isDoNotGenerateElement(anElement : Element) : Boolean = hasStereotypeApplied(QN_STEREOTYPE_DONOTGENERATE()) /]
+[query public isDoNotGenerateElement(anElement : Element) : Boolean = 
+if _isDoNotGenerateElement() 
+then true 
+else 
+	if owner.oclIsUndefined()
+	then false
+	else owner.isDoNotGenerateElement()
+	endif	
+endif /]
+[query public isDoNotGenerate(aPackage : Package) : Boolean = if(aPackage.isRootPackage()) then aPackage.isDoNotGenerateElement() else aPackage.getSuperPackage().isDoNotGenerate() endif /]
 [query public isDoNotGenerate(aClassifier : Classifier) : Boolean = isDoNotGenerateElement() or aClassifier.getNearestPackage().isDoNotGenerate() /]
 [query public isDoNotGenerate(aFeature : Feature) : Boolean = isDoNotGenerateElement() or aFeature.owner.isDoNotGenerateElement() or aFeature.getNearestPackage().isDoNotGenerate() /]
 
