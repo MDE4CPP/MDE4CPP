@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xmi:XMI xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:PSCS.Semantics.StructuredClassifiers="http:///PSCS/Semantics/StructuredClassifiers.ecore" xmlns:UML4CPPProfile="http://www.tu-ilmenau.de/sse/UML4CPPProfile" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xsi:schemaLocation="http:///PSCS/Semantics/StructuredClassifiers.ecore ../../model/PSCSStrategiesProfile.uml#_LGsZjQV9EeyhaZlTpg_vvA http://www.tu-ilmenau.de/sse/UML4CPPProfile ../../../UML4CPPProfile/model/UML4CPPProfile.uml#_v75nIfp7EeuavpF89IQaUg">
+<xmi:XMI xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:PSCS.Semantics.StructuredClassifiers="http:///PSCS/Semantics/StructuredClassifiers.ecore" xmlns:UML4CPPProfile="http://www.tu-ilmenau.de/sse/UML4CPPProfile" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xsi:schemaLocation="http:///PSCS/Semantics/StructuredClassifiers.ecore ../../../../common/PSCSStrategiesProfile/model/PSCSStrategiesProfile.uml#_LGsZjQV9EeyhaZlTpg_vvA http://www.tu-ilmenau.de/sse/UML4CPPProfile ../../../../common/UML4CPPProfile/model/UML4CPPProfile.uml#_v75nIfp7EeuavpF89IQaUg">
   <uml:Model xmi:id="_PmmP8LAqEeert7O7oCVCsA" name="PSCSStrategiesExample">
     <ownedComment xmi:id="_1flQQKDMEeq8Z9IqI9dZbA">
       <body>This test case addresses forwarding of an operation call in presence of multiple delegation links, corresponding to a single connector, expressed between a port and a part.
@@ -139,15 +139,15 @@ std::cout&lt;&lt;&quot;-- End of test case --&quot;&lt;&lt;std::endl;</body>
     <packagedElement xmi:type="uml:Class" xmi:id="_zz_OUAWEEeyhaZlTpg_vvA" name="Randomized_RequestPropagationStrategy">
       <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_gGX-wAWFEeyhaZlTpg_vvA" name="obSelect" specification="_EFfG4AWFEeyhaZlTpg_vvA">
         <ownedParameter xmi:id="_kV8WgAWFEeyhaZlTpg_vvA" name="potentialTargets">
-          <type xmi:type="uml:Class" href="../../../fUMLStrategiesProfile/model/fUMLStrategiesProfile.uml#_Q9EbIAV2EeyhaZlTpg_vvA"/>
+          <type xmi:type="uml:Class" href="../../../../common/fUMLStrategiesProfile/model/fUMLStrategiesProfile.uml#_Q9EbIAV2EeyhaZlTpg_vvA"/>
           <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_kV8WgQWFEeyhaZlTpg_vvA"/>
           <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_kV8WggWFEeyhaZlTpg_vvA" value="*"/>
         </ownedParameter>
         <ownedParameter xmi:id="_kV8WgwWFEeyhaZlTpg_vvA" name="context">
-          <type xmi:type="uml:Class" href="../../../fUMLStrategiesProfile/model/fUMLStrategiesProfile.uml#_UwwvMAV2EeyhaZlTpg_vvA"/>
+          <type xmi:type="uml:Class" href="../../../../common/fUMLStrategiesProfile/model/fUMLStrategiesProfile.uml#_UwwvMAV2EeyhaZlTpg_vvA"/>
         </ownedParameter>
         <ownedParameter xmi:id="_kV8WhAWFEeyhaZlTpg_vvA" name="selectedTargets" direction="return">
-          <type xmi:type="uml:Class" href="../../../fUMLStrategiesProfile/model/fUMLStrategiesProfile.uml#_Q9EbIAV2EeyhaZlTpg_vvA"/>
+          <type xmi:type="uml:Class" href="../../../../common/fUMLStrategiesProfile/model/fUMLStrategiesProfile.uml#_Q9EbIAV2EeyhaZlTpg_vvA"/>
           <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_kV8WhQWFEeyhaZlTpg_vvA"/>
           <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_kV8WhgWFEeyhaZlTpg_vvA" value="*"/>
         </ownedParameter>
@@ -186,15 +186,15 @@ randomNumber = (rand() % upperBound);</body>
       </ownedBehavior>
       <ownedOperation xmi:id="_EFfG4AWFEeyhaZlTpg_vvA" name="select" method="_gGX-wAWFEeyhaZlTpg_vvA">
         <ownedParameter xmi:id="_HkJmIAWFEeyhaZlTpg_vvA" name="potentialTargets">
-          <type xmi:type="uml:Class" href="../../../fUMLStrategiesProfile/model/fUMLStrategiesProfile.uml#_Q9EbIAV2EeyhaZlTpg_vvA"/>
+          <type xmi:type="uml:Class" href="../../../../common/fUMLStrategiesProfile/model/fUMLStrategiesProfile.uml#_Q9EbIAV2EeyhaZlTpg_vvA"/>
           <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_MQjD0AWFEeyhaZlTpg_vvA"/>
           <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_MabYkAWFEeyhaZlTpg_vvA" value="*"/>
         </ownedParameter>
         <ownedParameter xmi:id="_Ioq-MAWFEeyhaZlTpg_vvA" name="context">
-          <type xmi:type="uml:Class" href="../../../fUMLStrategiesProfile/model/fUMLStrategiesProfile.uml#_UwwvMAV2EeyhaZlTpg_vvA"/>
+          <type xmi:type="uml:Class" href="../../../../common/fUMLStrategiesProfile/model/fUMLStrategiesProfile.uml#_UwwvMAV2EeyhaZlTpg_vvA"/>
         </ownedParameter>
         <ownedParameter xmi:id="_JCJ1MAWFEeyhaZlTpg_vvA" name="selectedTargets" direction="return">
-          <type xmi:type="uml:Class" href="../../../fUMLStrategiesProfile/model/fUMLStrategiesProfile.uml#_Q9EbIAV2EeyhaZlTpg_vvA"/>
+          <type xmi:type="uml:Class" href="../../../../common/fUMLStrategiesProfile/model/fUMLStrategiesProfile.uml#_Q9EbIAV2EeyhaZlTpg_vvA"/>
           <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_QZPXgAWFEeyhaZlTpg_vvA"/>
           <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_QhOO0AWFEeyhaZlTpg_vvA" value="*"/>
         </ownedParameter>
@@ -210,15 +210,15 @@ randomNumber = (rand() % upperBound);</body>
     </packagedElement>
     <profileApplication xmi:id="_H2ZdQOMWEeur7cjoMTUC9A">
       <eAnnotations xmi:id="_H2ZdQeMWEeur7cjoMTUC9A" source="http://www.eclipse.org/uml2/2.0.0/UML">
-        <references xmi:type="ecore:EPackage" href="../../../UML4CPPProfile/model/UML4CPPProfile.uml#_v75nIfp7EeuavpF89IQaUg"/>
+        <references xmi:type="ecore:EPackage" href="../../../../common/UML4CPPProfile/model/UML4CPPProfile.uml#_v75nIfp7EeuavpF89IQaUg"/>
       </eAnnotations>
-      <appliedProfile href="../../../UML4CPPProfile/model/UML4CPPProfile.uml#_0"/>
+      <appliedProfile href="../../../../common/UML4CPPProfile/model/UML4CPPProfile.uml#_0"/>
     </profileApplication>
     <profileApplication xmi:id="_6F-JwAWEEeyhaZlTpg_vvA">
       <eAnnotations xmi:id="_6F-w0AWEEeyhaZlTpg_vvA" source="http://www.eclipse.org/uml2/2.0.0/UML">
-        <references xmi:type="ecore:EPackage" href="../../model/PSCSStrategiesProfile.uml#_LGsZcQV9EeyhaZlTpg_vvA"/>
+        <references xmi:type="ecore:EPackage" href="../../../../common/PSCSStrategiesProfile/model/PSCSStrategiesProfile.uml#_LGsZcQV9EeyhaZlTpg_vvA"/>
       </eAnnotations>
-      <appliedProfile href="../../model/PSCSStrategiesProfile.uml#_0"/>
+      <appliedProfile href="../../../../common/PSCSStrategiesProfile/model/PSCSStrategiesProfile.uml#_0"/>
     </profileApplication>
   </uml:Model>
   <UML4CPPProfile:MainBehavior xmi:id="_HsgsAOMXEeur7cjoMTUC9A" base_Behavior="_D2gDwOMXEeur7cjoMTUC9A"/>

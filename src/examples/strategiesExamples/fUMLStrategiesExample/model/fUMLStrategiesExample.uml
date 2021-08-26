@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xmi:XMI xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:UML4CPPProfile="http://www.tu-ilmenau.de/sse/UML4CPPProfile" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:fUML.Semantics.Loci="http:///fUML/Semantics/Loci.ecore" xmlns:fUML.Semantics.StructuredClassifiers="http:///fUML/Semantics/StructuredClassifiers.ecore" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xsi:schemaLocation="http://www.tu-ilmenau.de/sse/UML4CPPProfile ../../../UML4CPPProfile/model/UML4CPPProfile.uml#_v75nIfp7EeuavpF89IQaUg http:///fUML/Semantics/Loci.ecore ../../model/fUMLStrategiesProfile.uml#_LPD3EwTUEeymYPa0ZS8sUg http:///fUML/Semantics/StructuredClassifiers.ecore ../../model/fUMLStrategiesProfile.uml#_LPD3HwTUEeymYPa0ZS8sUg">
+<xmi:XMI xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:UML4CPPProfile="http://www.tu-ilmenau.de/sse/UML4CPPProfile" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:fUML.Semantics.Loci="http:///fUML/Semantics/Loci.ecore" xmlns:fUML.Semantics.StructuredClassifiers="http:///fUML/Semantics/StructuredClassifiers.ecore" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xsi:schemaLocation="http://www.tu-ilmenau.de/sse/UML4CPPProfile ../../../../common/UML4CPPProfile/model/UML4CPPProfile.uml#_v75nIfp7EeuavpF89IQaUg http:///fUML/Semantics/Loci.ecore ../../../../common/fUMLStrategiesProfile/model/fUMLStrategiesProfile.uml#_LPD3EwTUEeymYPa0ZS8sUg http:///fUML/Semantics/StructuredClassifiers.ecore ../../../../common/fUMLStrategiesProfile/model/fUMLStrategiesProfile.uml#_LPD3HwTUEeymYPa0ZS8sUg">
   <uml:Model xmi:id="_9K1YsPAoEemD6KgsJJSfgA" name="fUMLStrategiesExample">
     <packagedElement xmi:type="uml:Class" xmi:id="_KrxOIPApEemD6KgsJJSfgA" name="A">
       <ownedAttribute xmi:id="_89updPArEemD6KgsJJSfgA" name="b" type="_zZdd4PArEemD6KgsJJSfgA" aggregation="composite" association="_89upcPArEemD6KgsJJSfgA">
@@ -175,7 +175,7 @@ choice = size;</body>
     <packagedElement xmi:type="uml:Class" xmi:id="_bqcrcATUEeymYPa0ZS8sUg" name="TestDispatchStrategy">
       <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_mHecQATaEeymYPa0ZS8sUg" name="obRetrieveMethod" specification="_fEa38ATUEeymYPa0ZS8sUg">
         <ownedParameter xmi:id="_ofFz4ATaEeymYPa0ZS8sUg" name="object">
-          <type xmi:type="uml:Class" href="../../model/fUMLStrategiesProfile.uml#_DMFmgATREeymYPa0ZS8sUg"/>
+          <type xmi:type="uml:Class" href="../../../../common/fUMLStrategiesProfile/model/fUMLStrategiesProfile.uml#_DMFmgATREeymYPa0ZS8sUg"/>
         </ownedParameter>
         <ownedParameter xmi:id="_ofFz4QTaEeymYPa0ZS8sUg" name="operation">
           <type xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Operation"/>
@@ -190,7 +190,7 @@ method = fUML::Semantics::StructuredClassifiers::DispatchStrategyImpl::retrieveM
       </ownedBehavior>
       <ownedOperation xmi:id="_fEa38ATUEeymYPa0ZS8sUg" name="retrieveMethod" method="_mHecQATaEeymYPa0ZS8sUg">
         <ownedParameter xmi:id="_gRyC8ATUEeymYPa0ZS8sUg" name="object">
-          <type xmi:type="uml:Class" href="../../model/fUMLStrategiesProfile.uml#_DMFmgATREeymYPa0ZS8sUg"/>
+          <type xmi:type="uml:Class" href="../../../../common/fUMLStrategiesProfile/model/fUMLStrategiesProfile.uml#_DMFmgATREeymYPa0ZS8sUg"/>
         </ownedParameter>
         <ownedParameter xmi:id="_guOuYATUEeymYPa0ZS8sUg" name="operation">
           <type xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Operation"/>
@@ -202,15 +202,15 @@ method = fUML::Semantics::StructuredClassifiers::DispatchStrategyImpl::retrieveM
     </packagedElement>
     <profileApplication xmi:id="_gb73UOMQEeur7cjoMTUC9A">
       <eAnnotations xmi:id="_gb73UeMQEeur7cjoMTUC9A" source="http://www.eclipse.org/uml2/2.0.0/UML">
-        <references xmi:type="ecore:EPackage" href="../../../UML4CPPProfile/model/UML4CPPProfile.uml#_v75nIfp7EeuavpF89IQaUg"/>
+        <references xmi:type="ecore:EPackage" href="../../../../common/UML4CPPProfile/model/UML4CPPProfile.uml#_v75nIfp7EeuavpF89IQaUg"/>
       </eAnnotations>
-      <appliedProfile href="../../../UML4CPPProfile/model/UML4CPPProfile.uml#_0"/>
+      <appliedProfile href="../../../../common/UML4CPPProfile/model/UML4CPPProfile.uml#_0"/>
     </profileApplication>
     <profileApplication xmi:id="_U3l3kATUEeymYPa0ZS8sUg">
       <eAnnotations xmi:id="_U3l3kQTUEeymYPa0ZS8sUg" source="http://www.eclipse.org/uml2/2.0.0/UML">
-        <references xmi:type="ecore:EPackage" href="../../model/fUMLStrategiesProfile.uml#_LPD3EATUEeymYPa0ZS8sUg"/>
+        <references xmi:type="ecore:EPackage" href="../../../../common/fUMLStrategiesProfile/model/fUMLStrategiesProfile.uml#_LPD3EATUEeymYPa0ZS8sUg"/>
       </eAnnotations>
-      <appliedProfile href="../../model/fUMLStrategiesProfile.uml#_0"/>
+      <appliedProfile href="../../../../common/fUMLStrategiesProfile/model/fUMLStrategiesProfile.uml#_0"/>
     </profileApplication>
   </uml:Model>
   <UML4CPPProfile:MainBehavior xmi:id="_iWgGkOMQEeur7cjoMTUC9A" base_Behavior="_aUdykPAvEemD6KgsJJSfgA"/>
