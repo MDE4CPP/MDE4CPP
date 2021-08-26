@@ -25,6 +25,7 @@
 [import UML4CPP::generator::main::components::generateClass /]
 [import UML4CPP::generator::main::components::generateStereotype /]
 [import UML4CPP::generator::main::profiles::uml4CPPProfileHelper /]
+[import UML4CPP::generator::main::helpers::isGeneratableHelper /]
 
  
 [**

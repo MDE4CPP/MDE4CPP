@@ -25,6 +25,7 @@
 [import UML4CPP::generator::main::helpers::generalHelper /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
 [import UML4CPP::generator::main::profiles::uml4CPPProfileHelper /]
+[import UML4CPP::generator::main::helpers::isGeneratableHelper /]
 
 [template public generateFactoryImplHeader(aPackage : Package)]
 [file (aPackage.generateNamespacePath(false).concat('/impl/').concat(aPackage.name).concat('FactoryImpl.hpp'), false, 'UTF-8')]

@@ -1,0 +1,39 @@
+[comment encoding = UTF-8 /]
+[module isGeneratableHelper('http://www.eclipse.org/uml2/5.0.0/UML')]
+
+[import UML4CPP::generator::main::profiles::uml4CPPProfileHelper /]
+[import UML4CPP::generator::main::profiles::strategyHelper /]
+
+[query public isGeneratable(anElement : Element) : Boolean = 
+if isDoNotGenerateElement() then false
+else 
+	if oclIsKindOf(NamedElement) then oclAsType(NamedElement).isGeneratable()
+	else true
+	endif
+endif
+/]
+
+[query private isGeneratable(aNamedElement : NamedElement) : Boolean =  
+if(name.oclIsUndefined() or name = '') then false 
+else 
+	if oclIsKindOf(PackageableElement) then oclAsType(PackageableElement).isGeneratable()
+	else true
+	endif
+endif/]
+
+[query private isGeneratable(aPackageableElement : PackageableElement) : Boolean =  
+if getNearestPackage().isDoNotGenerate() then false
+else
+	if oclIsKindOf(Class) then oclAsType(Class).isGeneratable()
+	else true
+	endif
+endif
+/]
+
+[query private isGeneratable(aClass : Class) : Boolean = 
+if(oclIsKindOf(Behavior) or isStrategyClass()) then false
+else true
+endif/]
+
+
+

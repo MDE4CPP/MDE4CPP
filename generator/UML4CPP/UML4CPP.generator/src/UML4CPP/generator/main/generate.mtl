@@ -30,6 +30,7 @@
 [import UML4CPP::generator::main::helpers::nameHelper /]
 [import UML4CPP::generator::main::profiles::uml4CPPProfileHelper /]
 [import UML4CPP::generator::main::profiles::strategyHelper /]
+[import UML4CPP::generator::main::helpers::isGeneratableHelper /]
 
 [template public generateUML(aPackage : Package)]
 [comment @main/]

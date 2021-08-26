@@ -27,6 +27,7 @@
 [import UML4CPP::generator::main::helpers::generalHelper /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
 [import UML4CPP::generator::main::profiles::uml4CPPProfileHelper /]
+[import UML4CPP::generator::main::helpers::isGeneratableHelper /]
 
 [template public generateFactoryImplSource(aPackage : Package) { className : String = aPackage.name.concat('FactoryImpl'); }]
 [file (aPackage.generateNamespacePath(false).concat('/impl/').concat(className).concat('.cpp'), false, 'UTF-8')]

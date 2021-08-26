@@ -26,6 +26,7 @@
 [import UML4CPP::generator::main::helpers::nameHelper /]
 [import UML4CPP::generator::main::helpers::singletonHelper /]
 [import UML4CPP::generator::main::profiles::uml4CPPProfileHelper /]
+[import UML4CPP::generator::main::helpers::isGeneratableHelper /]
 
 [template public generateFactoryInterface(aPackage : Package){packageName : String = aPackage.name.concat('Factory');}]
 [file (aPackage.generateNamespacePath(false).concat('/').concat(packageName).concat('.hpp'), false, 'UTF-8')]
