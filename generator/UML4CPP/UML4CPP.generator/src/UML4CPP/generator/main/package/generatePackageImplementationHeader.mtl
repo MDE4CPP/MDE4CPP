@@ -62,8 +62,8 @@ namespace [subPackage.generateNamespace(false)/]
 			virtual ~[packageName/]();
 
 			//getter for the ownedMember
-			[(aPackage.getElementsBelongingToPackage()->filter(NamedElement)-aPackage.getElementsBelongingToPackage()->filter(ValueSpecification))->reject(isStrategyClass())->asOrderedSet()->sortedBy(myQualifiedName()).generatePackageMemberGetter(true)/]
-			[(aPackage.getElementsBelongingToPackage()->filter(ConnectorEnd))->asOrderedSet()->sortedBy(myQualifiedName()).generatePackageMemberGetter(true)/]
+			[(aPackage.getElementsBelongingToPackage()->filter(NamedElement)->reject(oclIsKindOf(ValueSpecification)))->reject(isDoNotGenerateElement())->asOrderedSet()->sortedBy(myQualifiedName()).generatePackageMemberGetter(true)/]
+			[(aPackage.getElementsBelongingToPackage()->filter(ConnectorEnd))->reject(isDoNotGenerateElement())->asOrderedSet()->sortedBy(myQualifiedName()).generatePackageMemberGetter(true)/]
 
 			//getter for subPackages
 			[for (subPackage : Package | aPackage.nestedPackage->sortedBy(name))]
@@ -72,8 +72,8 @@ namespace [subPackage.generateNamespace(false)/]
 
 		private:
 			//private variables for ownedMember of the metamodel package
-			[(aPackage.getElementsBelongingToPackage()->filter(NamedElement))->reject(owner.oclIsKindOf(Slot))->reject(isStrategyClass())->sortedBy(myQualifiedName()).generatePackageMember()/]
-			[(aPackage.getElementsBelongingToPackage()->filter(ConnectorEnd))->sortedBy(myQualifiedName()).generatePackageMember()/]
+			[(aPackage.getElementsBelongingToPackage()->filter(NamedElement))->reject(owner.oclIsKindOf(Slot))->reject(isDoNotGenerateElement())->sortedBy(myQualifiedName()).generatePackageMember()/]
+			[(aPackage.getElementsBelongingToPackage()->filter(ConnectorEnd))->reject(isDoNotGenerateElement())->sortedBy(myQualifiedName()).generatePackageMember()/]
 
 			static [aPackage.name.concat('Package')/]* create();
 			static bool isInited;

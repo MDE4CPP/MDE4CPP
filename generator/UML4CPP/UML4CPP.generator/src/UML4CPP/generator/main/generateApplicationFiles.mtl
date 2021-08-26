@@ -60,13 +60,13 @@
 #include "[aPackage.generateNamespacePath(false)/]/[packageName/]Factory.hpp"
 #include "[aPackage.generateNamespacePath(false)/]/[packageName/]Package.hpp"
 
-[for (aClass : Class | aPackage.allOwnedElements()->select(e|e.oclIsKindOf(uml::Class))->select(e|not (e.oclIsKindOf(FunctionBehavior) or e.oclIsKindOf(OpaqueBehavior) or e.oclIsKindOf(Activity))).oclAsType(uml::Class)->sortedBy(name))]
+[for (aClass : Class | aPackage.allOwnedElements()->filter(Class)->reject(oclIsKindOf(Behavior))->reject(isDoNotGenerateElement())->sortedBy(name))]
 #include "[aClass.getNearestPackage().generateNamespacePath(false)/]/[aClass.name.toUpperFirst()/].hpp"
 [/for]
-[for (anInterface : Interface | aPackage.allOwnedElements()->select(e|e.oclIsKindOf(uml::Interface)).oclAsType(uml::Interface)->sortedBy(name))]
+[for (anInterface : Interface | aPackage.allOwnedElements()->filter(Interface)->reject(isDoNotGenerateElement())->sortedBy(name))]
 #include "[anInterface.getNearestPackage().generateNamespacePath(false)/]/[anInterface.name.toUpperFirst()/].hpp"
 [/for]
-[for (anEnumeration : Enumeration | aPackage.ownedMember->filter(Enumeration))]
+[for (anEnumeration : Enumeration | aPackage.ownedMember->filter(Enumeration)->reject(isDoNotGenerateElement()))]
 #include "[anEnumeration.getNearestPackage().generateNamespacePath(false)/]/[anEnumeration.name/].hpp"
 [/for]
 
@@ -132,7 +132,7 @@ int main ()
 [else]
 #include "[mainActivity.getNearestPackage().generateNamespacePath(false)/]/[mainActivity.getNearestPackage().getPackageName()/]Package.hpp"
 [/if]
-[for ( type : Type | mainActivity.ownedParameter.type->asOrderedSet())]
+[for ( type : Type | mainActivity.ownedParameter.type->reject(isDoNotGenerateElement())->asOrderedSet())]
 #include "[type.getNearestPackage().generateNamespacePath(false)/]/[type.name/].hpp"
 [/for]
 #include "pluginFramework/PluginFramework.hpp"

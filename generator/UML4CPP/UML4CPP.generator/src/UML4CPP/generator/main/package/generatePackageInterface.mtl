@@ -69,8 +69,8 @@ namespace [subPackage.generateNamespace(false)/]
 			static const std::string eNS_PREFIX;
 
 			//getter for the ownedMember
-			[(aPackage.getElementsBelongingToPackage()->filter(NamedElement)-aPackage.getElementsBelongingToPackage()->filter(ValueSpecification))->reject(isStrategyClass())->asOrderedSet()->sortedBy(myQualifiedName()).generatePackageMemberGetter(false)/]
-			[(aPackage.getElementsBelongingToPackage()->filter(ConnectorEnd))->asOrderedSet()->sortedBy(myQualifiedName()).generatePackageMemberGetter(false)/]
+			[(aPackage.getElementsBelongingToPackage()->filter(NamedElement)->reject(oclIsKindOf(ValueSpecification)))->reject(isDoNotGenerateElement())->asOrderedSet()->sortedBy(myQualifiedName()).generatePackageMemberGetter(false)/]
+			[(aPackage.getElementsBelongingToPackage()->filter(ConnectorEnd))->reject(isDoNotGenerateElement())->asOrderedSet()->sortedBy(myQualifiedName()).generatePackageMemberGetter(false)/]
 
 			//getter for subPackages
 			[for (subPackage : Package | aPackage.nestedPackage->sortedBy(name))]

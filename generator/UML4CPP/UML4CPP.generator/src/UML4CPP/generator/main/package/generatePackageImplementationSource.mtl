@@ -43,6 +43,7 @@
 [import UML4CPP::generator::main::helpers::keywords /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
 [import UML4CPP::generator::main::profiles::uml4CPPProfileHelper /]
+[import UML4CPP::generator::main::helpers::isGeneratableHelper /]
 
 
 [query public getAllAppliedStereotypes(aPackage : Package) : Set(Stereotype) = OrderedSet{
@@ -227,7 +228,7 @@ void [packageName/]::createPackageClasses(std::shared_ptr<uml::Package> [aPackag
 	std::shared_ptr<uml::Constraint> con = nullptr;
 	std::shared_ptr<uml::OpaqueExpression> oe = nullptr;
 
-[for (aClass : Class | (aPackage.ownedMember->filter(Class)->reject(oclIsKindOf(Stereotype))->select(isGeneratable()))->asOrderedSet()->sortedBy(myQualifiedName())) separator ('\n    //-------------------------------------------\n')]
+[for (aClass : Class | (aPackage.ownedMember->filter(Class)->reject(oclIsKindOf(Stereotype)))->select(isGeneratable())->asOrderedSet()->sortedBy(myQualifiedName())) separator ('\n    //-------------------------------------------\n')]
 	//[aClass.name/]
 	[aClass.generateClassCreation()/]
 	[for (anProperty : Property | aClass.ownedAttribute->sortedBy(name)) before ('    // '.concat(aClass.name).concat(' attributes\n'))]
@@ -326,7 +327,7 @@ void [packageName/]::createPackageStereotypes(std::shared_ptr<uml::Package> [aPa
 
 void [packageName/]::createPackageValueSpecifications(std::shared_ptr<uml::Package> [aPackage.memberName()/], std::shared_ptr<uml::umlFactory> factory)
 {
-[for (aValueSpecification : ValueSpecification | aPackage.getElementsBelongingToPackage()->filter(ValueSpecification)->reject(owner.oclIsKindOf(Slot))->sortedBy(myQualifiedName()))]
+[for (aValueSpecification : ValueSpecification | aPackage.getElementsBelongingToPackage()->filter(ValueSpecification)->reject(owner.oclIsKindOf(Slot))->reject(isDoNotGenerateElement())->sortedBy(myQualifiedName()))]
 	[aValueSpecification.generateValueSpecificationCreation()/]
 [/for]
 }
@@ -391,7 +392,7 @@ void [packageName/]::initializePackageClasses()
 {
 	std::shared_ptr<uml::Generalization> gen = nullptr;
 
-[for (aClass : Class | (aPackage.ownedMember->filter(Class)->reject(oclIsKindOf(Stereotype))->select(isGeneratable()))->sortedBy(myQualifiedName())) separator ('\n    //-------------------------------------------\n')]
+[for (aClass : Class | (aPackage.ownedMember->filter(Class)->reject(oclIsKindOf(Stereotype)))->select(isGeneratable())->sortedBy(myQualifiedName())) separator ('\n    //-------------------------------------------\n')]
 	//	class [aClass.name/]
 	[aClass.generateClassInitialization()/]
 	[for (anProperty : Property | aClass.ownedAttribute->sortedBy(name)) before ('    // '.concat(aClass.name).concat(' attributes\n')) after ('\n')]
@@ -492,14 +493,14 @@ void [packageName/]::initializePackageStereotypes()
 
 void [packageName/]::initializePackageValueSpecifications()
 {
-[for (aValueSpecification : ValueSpecification | aPackage.getElementsBelongingToPackage()->filter(ValueSpecification)->reject(owner.oclIsKindOf(Slot))->sortedBy(myQualifiedName())) separator ('\n')]
+[for (aValueSpecification : ValueSpecification | aPackage.getElementsBelongingToPackage()->filter(ValueSpecification)->reject(owner.oclIsKindOf(Slot))->reject(isDoNotGenerateElement())->sortedBy(myQualifiedName())) separator ('\n')]
 	[aValueSpecification.generateValueSpecificationInitialization()/]
 [/for]
 }
 
 [comment Getter for ownedMember /]
-[(aPackage.getElementsBelongingToPackage()->filter(NamedElement)-aPackage.getElementsBelongingToPackage()->filter(ValueSpecification))->asOrderedSet()->sortedBy(myQualifiedName()).generatePackageMemberGetterImpl()/]
-[(aPackage.getElementsBelongingToPackage()->filter(ConnectorEnd))->asOrderedSet()->sortedBy(myQualifiedName()).generatePackageMemberGetterImpl()/]
+[(aPackage.getElementsBelongingToPackage()->filter(NamedElement)->reject(oclIsKindOf(ValueSpecification)))->reject(isDoNotGenerateElement())->asOrderedSet()->sortedBy(myQualifiedName()).generatePackageMemberGetterImpl()/]
+[(aPackage.getElementsBelongingToPackage()->filter(ConnectorEnd))->reject(isDoNotGenerateElement())->asOrderedSet()->sortedBy(myQualifiedName()).generatePackageMemberGetterImpl()/]
 
 [for (subPackage : Package | aPackage.nestedPackage->sortedBy(name))]
 [subPackage.generateSubPackageGetterImpl(aPackage)/]
