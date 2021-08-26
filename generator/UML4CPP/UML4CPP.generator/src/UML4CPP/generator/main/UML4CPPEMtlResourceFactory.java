@@ -150,7 +150,8 @@ public class UML4CPPEMtlResourceFactory extends EMtlResourceFactoryImpl {
 								"nameHelper",
 								"setGetHelper",
 								"singletonHelper",
-								"IDHelper"
+								"IDHelper",
+								"isGeneratableHelper"
 								};
 		generateFilePathMapData(moduleNames, "helpers", resourcePathPrefix);
 	}
@@ -190,6 +191,7 @@ public class UML4CPPEMtlResourceFactory extends EMtlResourceFactoryImpl {
 	private void initializeProfilesEmtls(String resourcePathPrefix)
 	{
 		String[] moduleNames = {"fUMLStrategiesProfileKeywords",
+								"PSCSStrategiesProfileKeywords",
 								"profileHelper",
 								"strategyHelper",
 								"uml4CPPProfileHelper"
