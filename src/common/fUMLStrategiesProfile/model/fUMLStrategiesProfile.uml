@@ -1,52 +1,186 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<uml:Profile xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_0" name="fUML" URI="http://www.tu-ilmenau.de/sse/UML4CPPProfile">
-  <eAnnotations xmi:id="_U9Fv0ADoEeyxWfNTHT_0zQ" source="http://www.eclipse.org/uml2/2.0.0/UML">
-    <contents xmi:type="ecore:EPackage" xmi:id="_U9Fv0QDoEeyxWfNTHT_0zQ" name="fUML" nsURI="http://www.tu-ilmenau.de/sse/UML4CPPProfile" nsPrefix="fUML">
-      <eSubpackages xmi:id="_U9Fv0gDoEeyxWfNTHT_0zQ" name="Semantics" nsURI="http:///fUML/Semantics.ecore" nsPrefix="fUML.Semantics">
-        <eAnnotations xmi:id="_U9Fv0wDoEeyxWfNTHT_0zQ" source="http://www.eclipse.org/uml2/4.0.0/UML" references="_hN4I0ADkEeyxWfNTHT_0zQ"/>
-        <eSubpackages xmi:id="_U9Fv1ADoEeyxWfNTHT_0zQ" name="Loci" nsURI="http:///fUML/Semantics/Loci.ecore" nsPrefix="fUML.Semantics.Loci">
-          <eAnnotations xmi:id="_U9Fv1QDoEeyxWfNTHT_0zQ" source="http://www.eclipse.org/uml2/4.0.0/UML" references="_mgt7cADkEeyxWfNTHT_0zQ"/>
-          <eClassifiers xmi:type="ecore:EClass" xmi:id="_U9Fv1gDoEeyxWfNTHT_0zQ" name="ChoiceStrategy">
-            <eAnnotations xmi:id="_U9Fv1wDoEeyxWfNTHT_0zQ" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_obdJ0ADkEeyxWfNTHT_0zQ"/>
-            <eAnnotations xmi:id="_U9Fv2ADoEeyxWfNTHT_0zQ" source="http://www.eclipse.org/emf/2002/GenModel">
-              <details xmi:id="_U9Fv2QDoEeyxWfNTHT_0zQ" key="documentation" value="This stereotype can be used to indicate that the corresponding class should be inherited from fUML::Semantics::Loci::ChoiceStrategy and as such represent a model-specific ChoiceStrategy.&#xA;A ChoiceStrategy must implement the method &quot;choose(Integer) : Integer&quot; as specified below."/>
-            </eAnnotations>
-            <eOperations xmi:id="_U9Fv2gDoEeyxWfNTHT_0zQ" name="choose" ordered="false" lowerBound="1">
-              <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/uml2/5.0.0/Types#//Integer"/>
-              <eParameters xmi:id="_U9Fv3ADoEeyxWfNTHT_0zQ" name="size" ordered="false" lowerBound="1">
+<xmi:XMI xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:UML4CPPProfile="http://www.tu-ilmenau.de/sse/UML4CPPProfile" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xsi:schemaLocation="http://www.tu-ilmenau.de/sse/UML4CPPProfile ../../UML4CPPProfile/model/UML4CPPProfile.uml#_v75nIfp7EeuavpF89IQaUg">
+  <uml:Profile xmi:id="_0" name="fUML" URI="http://www.tu-ilmenau.de/sse/UML4CPPProfile">
+    <eAnnotations xmi:id="_LPDQAATUEeymYPa0ZS8sUg" source="http://www.eclipse.org/uml2/2.0.0/UML">
+      <contents xmi:type="ecore:EPackage" xmi:id="_LPD3EATUEeymYPa0ZS8sUg" name="fUML" nsURI="http://www.tu-ilmenau.de/sse/UML4CPPProfile" nsPrefix="fUML">
+        <eSubpackages xmi:id="_LPD3EQTUEeymYPa0ZS8sUg" name="Semantics" nsURI="http:///fUML/Semantics.ecore" nsPrefix="fUML.Semantics">
+          <eAnnotations xmi:id="_LPD3EgTUEeymYPa0ZS8sUg" source="http://www.eclipse.org/uml2/4.0.0/UML" references="_hN4I0ADkEeyxWfNTHT_0zQ"/>
+          <eSubpackages xmi:id="_LPD3EwTUEeymYPa0ZS8sUg" name="Loci" nsURI="http:///fUML/Semantics/Loci.ecore" nsPrefix="fUML.Semantics.Loci">
+            <eAnnotations xmi:id="_LPD3FATUEeymYPa0ZS8sUg" source="http://www.eclipse.org/uml2/4.0.0/UML" references="_mgt7cADkEeyxWfNTHT_0zQ"/>
+            <eClassifiers xmi:type="ecore:EClass" xmi:id="_LPD3FQTUEeymYPa0ZS8sUg" name="ChoiceStrategy">
+              <eAnnotations xmi:id="_LPD3FgTUEeymYPa0ZS8sUg" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_obdJ0ADkEeyxWfNTHT_0zQ"/>
+              <eAnnotations xmi:id="_LPD3FwTUEeymYPa0ZS8sUg" source="http://www.eclipse.org/emf/2002/GenModel">
+                <details xmi:id="_LPD3GATUEeymYPa0ZS8sUg" key="documentation" value="This stereotype can be used to indicate that the corresponding class should be inherited from fUML::Semantics::Loci::ChoiceStrategy and as such represent a model-specific ChoiceStrategy.&#xA;A ChoiceStrategy must implement the operation &quot;choose(Integer) : Integer&quot; as specified below."/>
+              </eAnnotations>
+              <eOperations xmi:id="_LPD3GQTUEeymYPa0ZS8sUg" name="choose" ordered="false" lowerBound="1">
                 <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/uml2/5.0.0/Types#//Integer"/>
-              </eParameters>
-            </eOperations>
-            <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_U9Fv3gDoEeyxWfNTHT_0zQ" name="base_Class" ordered="false" lowerBound="1">
-              <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Class"/>
-            </eStructuralFeatures>
-          </eClassifiers>
+                <eParameters xmi:id="_LPD3GwTUEeymYPa0ZS8sUg" name="size" ordered="false" lowerBound="1">
+                  <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/uml2/5.0.0/Types#//Integer"/>
+                </eParameters>
+              </eOperations>
+              <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_LPD3HQTUEeymYPa0ZS8sUg" name="base_Class" ordered="false" lowerBound="1">
+                <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Class"/>
+              </eStructuralFeatures>
+            </eClassifiers>
+            <eClassifiers xmi:type="ecore:EClass" xmi:id="_ehKSQAV2EeyhaZlTpg_vvA" name="SemanticVisitor">
+              <eAnnotations xmi:id="_ehKSQQV2EeyhaZlTpg_vvA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_UwwvMAV2EeyhaZlTpg_vvA"/>
+            </eClassifiers>
+          </eSubpackages>
+          <eSubpackages xmi:id="_LPD3HwTUEeymYPa0ZS8sUg" name="StructuredClassifiers" nsURI="http:///fUML/Semantics/StructuredClassifiers.ecore" nsPrefix="fUML.Semantics.StructuredClassifiers">
+            <eAnnotations xmi:id="_LPD3IATUEeymYPa0ZS8sUg" source="http://www.eclipse.org/uml2/4.0.0/UML" references="_Pp5AcATQEeymYPa0ZS8sUg"/>
+            <eClassifiers xmi:type="ecore:EClass" xmi:id="_LPD3IQTUEeymYPa0ZS8sUg" name="DispatchStrategy">
+              <eAnnotations xmi:id="_LPD3IgTUEeymYPa0ZS8sUg" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_TaKNEATQEeymYPa0ZS8sUg"/>
+              <eAnnotations xmi:id="_LPD3IwTUEeymYPa0ZS8sUg" source="http://www.eclipse.org/emf/2002/GenModel">
+                <details xmi:id="_LPD3JATUEeymYPa0ZS8sUg" key="documentation" value="This stereotype can be used to indicate that the corresponding class should be inherited from fUML::Semantics::StructuredClassifiers::DispatchStrategy and as such represent a model-specific DispatchStrategy.&#xA;A DispatchStrategy must implement the operation &quot;retrieveMethod(fUML::Semantics::StructuredClassifiers::Object, uml::Operation) : uml::Behavior&quot; as specified below."/>
+              </eAnnotations>
+              <eOperations xmi:id="_LPD3JQTUEeymYPa0ZS8sUg" name="retrieveMethod" ordered="false" lowerBound="1">
+                <eAnnotations xmi:id="_od3lQAVxEeyhaZlTpg_vvA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_LPD3JQTUEeymYPa0ZS8sUg">
+                  <details xmi:id="_7l1UoAVxEeyhaZlTpg_vvA" key="originalName" value="getMethod"/>
+                </eAnnotations>
+                <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Behavior"/>
+                <eParameters xmi:id="_LPD3JwTUEeymYPa0ZS8sUg" name="object" ordered="false" lowerBound="1" eType="_LPD3LQTUEeymYPa0ZS8sUg"/>
+                <eParameters xmi:id="_LPD3KQTUEeymYPa0ZS8sUg" name="operation" ordered="false" lowerBound="1">
+                  <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Operation"/>
+                </eParameters>
+              </eOperations>
+              <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_LPD3KwTUEeymYPa0ZS8sUg" name="base_Class" ordered="false" lowerBound="1">
+                <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Class"/>
+              </eStructuralFeatures>
+            </eClassifiers>
+            <eClassifiers xmi:type="ecore:EClass" xmi:id="_LPD3LQTUEeymYPa0ZS8sUg" name="Object">
+              <eAnnotations xmi:id="_LPD3LgTUEeymYPa0ZS8sUg" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_DMFmgATREeymYPa0ZS8sUg"/>
+            </eClassifiers>
+            <eClassifiers xmi:type="ecore:EClass" xmi:id="_m0v5EAV2EeyhaZlTpg_vvA" name="Reference">
+              <eAnnotations xmi:id="_m0v5EQV2EeyhaZlTpg_vvA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_Q9EbIAV2EeyhaZlTpg_vvA"/>
+            </eClassifiers>
+          </eSubpackages>
+          <eSubpackages xmi:id="_LPD3LwTUEeymYPa0ZS8sUg" name="CommonBehavior" nsURI="http:///fUML/Semantics/CommonBehavior.ecore" nsPrefix="fUML.Semantics.CommonBehavior">
+            <eAnnotations xmi:id="_LPD3MATUEeymYPa0ZS8sUg" source="http://www.eclipse.org/uml2/4.0.0/UML" references="_bZbe0ATSEeymYPa0ZS8sUg"/>
+            <eClassifiers xmi:type="ecore:EClass" xmi:id="_LPD3MQTUEeymYPa0ZS8sUg" name="GetNextEventStrategy">
+              <eAnnotations xmi:id="_LPD3MgTUEeymYPa0ZS8sUg" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_gR97EATSEeymYPa0ZS8sUg"/>
+              <eAnnotations xmi:id="_LPD3MwTUEeymYPa0ZS8sUg" source="http://www.eclipse.org/emf/2002/GenModel">
+                <details xmi:id="_LPD3NATUEeymYPa0ZS8sUg" key="documentation" value="This stereotype can be used to indicate that the corresponding class should be inherited from fUML::Semantics::CommonBehavior::GetNextEventStrategy and as such represent a model-specific GetNextEventStrategy.&#xA;A GetNextEventStrategy must implement the operation &quot;getNextEvent(fUML::Semantics::CommonBehavior::ObjectActivation) : fUML::Semantics::CommonBehavior::EventOccurrence&quot; as specified below."/>
+              </eAnnotations>
+              <eOperations xmi:id="_LPD3NQTUEeymYPa0ZS8sUg" name="retrieveNextEvent" ordered="false" lowerBound="1" eType="_LPD3OwTUEeymYPa0ZS8sUg">
+                <eAnnotations xmi:id="_RUFJwAVyEeyhaZlTpg_vvA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_LPD3NQTUEeymYPa0ZS8sUg">
+                  <details xmi:id="_RUFJwQVyEeyhaZlTpg_vvA" key="originalName" value="getNextEvent"/>
+                </eAnnotations>
+                <eParameters xmi:id="_LPD3NwTUEeymYPa0ZS8sUg" name="objectActivation" ordered="false" lowerBound="1" eType="_LPD3PQTUEeymYPa0ZS8sUg"/>
+              </eOperations>
+              <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_LPD3OQTUEeymYPa0ZS8sUg" name="base_Class" ordered="false" lowerBound="1">
+                <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Class"/>
+              </eStructuralFeatures>
+            </eClassifiers>
+            <eClassifiers xmi:type="ecore:EClass" xmi:id="_LPD3OwTUEeymYPa0ZS8sUg" name="EventOccurrence">
+              <eAnnotations xmi:id="_LPD3PATUEeymYPa0ZS8sUg" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_ufMOwATSEeymYPa0ZS8sUg"/>
+            </eClassifiers>
+            <eClassifiers xmi:type="ecore:EClass" xmi:id="_LPD3PQTUEeymYPa0ZS8sUg" name="ObjectActivation">
+              <eAnnotations xmi:id="_LPD3PgTUEeymYPa0ZS8sUg" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_pjMO0ATSEeymYPa0ZS8sUg"/>
+            </eClassifiers>
+          </eSubpackages>
+          <eSubpackages xmi:id="_TauecAV4EeyhaZlTpg_vvA" name="SimpleClassifiers" nsURI="http:///fUML/Semantics/SimpleClassifiers.ecore" nsPrefix="fUML.Semantics.SimpleClassifiers">
+            <eAnnotations xmi:id="_hUrQ0AV4EeyhaZlTpg_vvA" source="http://www.eclipse.org/uml2/4.0.0/UML" references="_I1asoAV4EeyhaZlTpg_vvA"/>
+            <eClassifiers xmi:type="ecore:EClass" xmi:id="_rN7N4AV4EeyhaZlTpg_vvA" name="FeatureValue">
+              <eAnnotations xmi:id="_rN7N4QV4EeyhaZlTpg_vvA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_NDnycAV4EeyhaZlTpg_vvA"/>
+            </eClassifiers>
+          </eSubpackages>
+          <eSubpackages xmi:id="_dModYAV4EeyhaZlTpg_vvA" name="Values" nsURI="http:///fUML/Semantics/Values.ecore" nsPrefix="fUML.Semantics.Values">
+            <eAnnotations xmi:id="_hiecQAV4EeyhaZlTpg_vvA" source="http://www.eclipse.org/uml2/4.0.0/UML" references="_LcXgwAV4EeyhaZlTpg_vvA"/>
+            <eClassifiers xmi:type="ecore:EClass" xmi:id="_raSO4AV4EeyhaZlTpg_vvA" name="Value">
+              <eAnnotations xmi:id="_raSO4QV4EeyhaZlTpg_vvA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_Q9cjsAV4EeyhaZlTpg_vvA"/>
+            </eClassifiers>
+          </eSubpackages>
         </eSubpackages>
-      </eSubpackages>
-    </contents>
-  </eAnnotations>
-  <packagedElement xmi:type="uml:Package" xmi:id="_hN4I0ADkEeyxWfNTHT_0zQ" name="Semantics">
-    <packagedElement xmi:type="uml:Package" xmi:id="_mgt7cADkEeyxWfNTHT_0zQ" name="Loci">
-      <packagedElement xmi:type="uml:Stereotype" xmi:id="_obdJ0ADkEeyxWfNTHT_0zQ" name="ChoiceStrategy">
-        <ownedComment xmi:id="_Nuc0UADnEeyxWfNTHT_0zQ" annotatedElement="_obdJ0ADkEeyxWfNTHT_0zQ">
-          <body>This stereotype can be used to indicate that the corresponding class should be inherited from fUML::Semantics::Loci::ChoiceStrategy and as such represent a model-specific ChoiceStrategy.
-A ChoiceStrategy must implement the method &quot;choose(Integer) : Integer&quot; as specified below.</body>
-        </ownedComment>
-        <ownedAttribute xmi:id="_rNsn8ADkEeyxWfNTHT_0zQ" name="base_Class" association="_7hJBQADkEeyxWfNTHT_0zQ">
-          <type xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Class"/>
-        </ownedAttribute>
-        <ownedOperation xmi:id="_Sh7cUADlEeyxWfNTHT_0zQ" name="choose">
-          <ownedParameter xmi:id="_VewZ0ADlEeyxWfNTHT_0zQ" name="size">
-            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
-          </ownedParameter>
-          <ownedParameter xmi:id="_gh4JAADlEeyxWfNTHT_0zQ" name="choice" direction="return">
-            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
-          </ownedParameter>
-        </ownedOperation>
+      </contents>
+    </eAnnotations>
+    <packagedElement xmi:type="uml:Package" xmi:id="_hN4I0ADkEeyxWfNTHT_0zQ" name="Semantics">
+      <packagedElement xmi:type="uml:Package" xmi:id="_mgt7cADkEeyxWfNTHT_0zQ" name="Loci">
+        <packagedElement xmi:type="uml:Stereotype" xmi:id="_obdJ0ADkEeyxWfNTHT_0zQ" name="ChoiceStrategy">
+          <ownedComment xmi:id="_Nuc0UADnEeyxWfNTHT_0zQ" annotatedElement="_obdJ0ADkEeyxWfNTHT_0zQ">
+            <body>This stereotype can be used to indicate that the corresponding class should be inherited from fUML::Semantics::Loci::ChoiceStrategy and as such represent a model-specific ChoiceStrategy.
+A ChoiceStrategy must implement the operation &quot;choose(Integer) : Integer&quot; as specified below.</body>
+          </ownedComment>
+          <ownedAttribute xmi:id="_rNsn8ADkEeyxWfNTHT_0zQ" name="base_Class" association="_7hJBQADkEeyxWfNTHT_0zQ">
+            <type xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Class"/>
+          </ownedAttribute>
+          <ownedOperation xmi:id="_Sh7cUADlEeyxWfNTHT_0zQ" name="choose" isAbstract="true">
+            <ownedParameter xmi:id="_VewZ0ADlEeyxWfNTHT_0zQ" name="size">
+              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+            </ownedParameter>
+            <ownedParameter xmi:id="_gh4JAADlEeyxWfNTHT_0zQ" name="choice" direction="return">
+              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+            </ownedParameter>
+          </ownedOperation>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Extension" xmi:id="_7hJBQADkEeyxWfNTHT_0zQ" name="Class_ChoiceStrategy" memberEnd="_B0q00ADlEeyxWfNTHT_0zQ _rNsn8ADkEeyxWfNTHT_0zQ">
+          <ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="_B0q00ADlEeyxWfNTHT_0zQ" name="extension_ChoiceStrategy" type="_obdJ0ADkEeyxWfNTHT_0zQ" aggregation="composite" association="_7hJBQADkEeyxWfNTHT_0zQ"/>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Class" xmi:id="_UwwvMAV2EeyhaZlTpg_vvA" name="SemanticVisitor"/>
       </packagedElement>
-      <packagedElement xmi:type="uml:Extension" xmi:id="_7hJBQADkEeyxWfNTHT_0zQ" name="Class_ChoiceStrategy" memberEnd="_B0q00ADlEeyxWfNTHT_0zQ _rNsn8ADkEeyxWfNTHT_0zQ">
-        <ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="_B0q00ADlEeyxWfNTHT_0zQ" name="extension_ChoiceStrategy" type="_obdJ0ADkEeyxWfNTHT_0zQ" aggregation="composite" association="_7hJBQADkEeyxWfNTHT_0zQ"/>
+      <packagedElement xmi:type="uml:Package" xmi:id="_Pp5AcATQEeymYPa0ZS8sUg" name="StructuredClassifiers">
+        <packagedElement xmi:type="uml:Stereotype" xmi:id="_TaKNEATQEeymYPa0ZS8sUg" name="DispatchStrategy">
+          <ownedComment xmi:id="_dImy4ATREeymYPa0ZS8sUg" annotatedElement="_TaKNEATQEeymYPa0ZS8sUg">
+            <body>This stereotype can be used to indicate that the corresponding class should be inherited from fUML::Semantics::StructuredClassifiers::DispatchStrategy and as such represent a model-specific DispatchStrategy.
+A DispatchStrategy must implement the operation &quot;retrieveMethod(fUML::Semantics::StructuredClassifiers::Object, uml::Operation) : uml::Behavior&quot; as specified below.</body>
+          </ownedComment>
+          <ownedAttribute xmi:id="_IjaQgATREeymYPa0ZS8sUg" name="base_Class" association="_BduKwATSEeymYPa0ZS8sUg">
+            <type xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Class"/>
+          </ownedAttribute>
+          <ownedOperation xmi:id="_N0gWsATREeymYPa0ZS8sUg" name="retrieveMethod" isAbstract="true">
+            <eAnnotations xmi:id="__iW0kAVxEeyhaZlTpg_vvA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_N0gWsATREeymYPa0ZS8sUg">
+              <details xmi:id="_EcE8kAVyEeyhaZlTpg_vvA" key="originalName" value="getMethod"/>
+            </eAnnotations>
+            <ownedParameter xmi:id="_P2ljMATREeymYPa0ZS8sUg" name="object" type="_DMFmgATREeymYPa0ZS8sUg"/>
+            <ownedParameter xmi:id="_QRYBwATREeymYPa0ZS8sUg" name="operation">
+              <type xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Operation"/>
+            </ownedParameter>
+            <ownedParameter xmi:id="_QtA04ATREeymYPa0ZS8sUg" name="method" direction="return">
+              <type xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Behavior"/>
+            </ownedParameter>
+          </ownedOperation>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Extension" xmi:id="_BduKwATSEeymYPa0ZS8sUg" name="Class_DispatchStrategy" memberEnd="_GXAN4ATSEeymYPa0ZS8sUg _IjaQgATREeymYPa0ZS8sUg">
+          <ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="_GXAN4ATSEeymYPa0ZS8sUg" name="extension_DispatchStrategy" type="_TaKNEATQEeymYPa0ZS8sUg" aggregation="composite" association="_BduKwATSEeymYPa0ZS8sUg"/>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Class" xmi:id="_DMFmgATREeymYPa0ZS8sUg" name="Object"/>
+        <packagedElement xmi:type="uml:Class" xmi:id="_Q9EbIAV2EeyhaZlTpg_vvA" name="Reference"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Package" xmi:id="_bZbe0ATSEeymYPa0ZS8sUg" name="CommonBehavior">
+        <packagedElement xmi:type="uml:Stereotype" xmi:id="_gR97EATSEeymYPa0ZS8sUg" name="GetNextEventStrategy">
+          <ownedComment xmi:id="_FHX8kATTEeymYPa0ZS8sUg" annotatedElement="_gR97EATSEeymYPa0ZS8sUg">
+            <body>This stereotype can be used to indicate that the corresponding class should be inherited from fUML::Semantics::CommonBehavior::GetNextEventStrategy and as such represent a model-specific GetNextEventStrategy.
+A GetNextEventStrategy must implement the operation &quot;retrieveNextEvent(fUML::Semantics::CommonBehavior::ObjectActivation) : fUML::Semantics::CommonBehavior::EventOccurrence&quot; as specified below.</body>
+          </ownedComment>
+          <ownedAttribute xmi:id="_xNb9sATSEeymYPa0ZS8sUg" name="base_Class" association="_WI5j4ATTEeymYPa0ZS8sUg">
+            <type xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Class"/>
+          </ownedAttribute>
+          <ownedOperation xmi:id="_2fklsATSEeymYPa0ZS8sUg" name="retrieveNextEvent" isAbstract="true">
+            <eAnnotations xmi:id="_buf6MAVyEeyhaZlTpg_vvA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_2fklsATSEeymYPa0ZS8sUg">
+              <details xmi:id="_buf6MQVyEeyhaZlTpg_vvA" key="originalName" value="getNextEvent"/>
+            </eAnnotations>
+            <ownedParameter xmi:id="_4c3Y0ATSEeymYPa0ZS8sUg" name="objectActivation" type="_pjMO0ATSEeymYPa0ZS8sUg"/>
+            <ownedParameter xmi:id="_44tnUATSEeymYPa0ZS8sUg" name="eventOccurrence" type="_ufMOwATSEeymYPa0ZS8sUg" direction="return"/>
+          </ownedOperation>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Extension" xmi:id="_WI5j4ATTEeymYPa0ZS8sUg" name="Class_GetNextEventStrategy" memberEnd="_ahswIATTEeymYPa0ZS8sUg _xNb9sATSEeymYPa0ZS8sUg">
+          <ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="_ahswIATTEeymYPa0ZS8sUg" name="extension_GetNextEventStrategy" type="_gR97EATSEeymYPa0ZS8sUg" aggregation="composite" association="_WI5j4ATTEeymYPa0ZS8sUg"/>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Class" xmi:id="_pjMO0ATSEeymYPa0ZS8sUg" name="ObjectActivation"/>
+        <packagedElement xmi:type="uml:Class" xmi:id="_ufMOwATSEeymYPa0ZS8sUg" name="EventOccurrence"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Package" xmi:id="_I1asoAV4EeyhaZlTpg_vvA" name="SimpleClassifiers">
+        <packagedElement xmi:type="uml:Class" xmi:id="_NDnycAV4EeyhaZlTpg_vvA" name="FeatureValue"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Package" xmi:id="_LcXgwAV4EeyhaZlTpg_vvA" name="Values">
+        <packagedElement xmi:type="uml:Class" xmi:id="_Q9cjsAV4EeyhaZlTpg_vvA" name="Value"/>
       </packagedElement>
     </packagedElement>
-  </packagedElement>
-</uml:Profile>
+    <profileApplication xmi:id="_5JDF8AVtEeyhaZlTpg_vvA">
+      <eAnnotations xmi:id="_5JGJQAVtEeyhaZlTpg_vvA" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="../../UML4CPPProfile/model/UML4CPPProfile.uml#_v75nIfp7EeuavpF89IQaUg"/>
+      </eAnnotations>
+      <appliedProfile href="../../UML4CPPProfile/model/UML4CPPProfile.uml#_0"/>
+    </profileApplication>
+  </uml:Profile>
+  <UML4CPPProfile:DoNotGenerate xmi:id="_8zUYQAVtEeyhaZlTpg_vvA" base_Element="_0"/>
+</xmi:XMI>
