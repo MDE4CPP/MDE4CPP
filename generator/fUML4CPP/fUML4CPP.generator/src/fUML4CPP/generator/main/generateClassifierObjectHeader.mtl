@@ -69,20 +69,22 @@ namespace [aClassifier.getNearestPackage().generateNamespace(false)/]
 			virtual void setUmlValue(std::shared_ptr<uml::Element>);
 			virtual void [aClassifier.UMLValueSetterName()/](std::shared_ptr<[pointerName/]>);
 			virtual void setThis[className/]Ptr(std::weak_ptr<[className/]> thisObjectPtr);
-			virtual bool equals(std::shared_ptr<fUML::Semantics::Values::Value> otherValue);
+			virtual bool equals(std::shared_ptr<fUML::Semantics::Values::Value>);
 			virtual std::string toString();
 			virtual std::shared_ptr<Bag<PSCS::Semantics::StructuredClassifiers::CS_Object>> getDirectContainers();
 [let attributes : OrderedSet(Property) = aClassifier.getMyAttributes() ]
 [if (attributes->size() > 0)]
-			virtual void removeValue(std::shared_ptr<uml::StructuralFeature> feature, std::shared_ptr<fUML::Semantics::Values::Value> values);
-			virtual std::shared_ptr<Bag<fUML::Semantics::Values::Value>> getValues(std::shared_ptr<uml::StructuralFeature> feature, std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>> featureValues);
-			virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> retrieveFeatureValue(std::shared_ptr<uml::StructuralFeature> feature);
-			virtual void setFeatureValue(std::shared_ptr<uml::StructuralFeature> feature, std::shared_ptr<Bag<fUML::Semantics::Values::Value>> value, int position);
-			virtual void assignFeatureValue(std::shared_ptr<uml::StructuralFeature> feature, std::shared_ptr<Bag<fUML::Semantics::Values::Value>> value, int position);
+			virtual void removeValue(std::shared_ptr<uml::StructuralFeature>, std::shared_ptr<fUML::Semantics::Values::Value>);
+			virtual std::shared_ptr<Bag<fUML::Semantics::Values::Value>> getValues(std::shared_ptr<uml::StructuralFeature>, std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>>);
+			virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> retrieveFeatureValue(std::shared_ptr<uml::StructuralFeature>);
+			virtual void setFeatureValue(std::shared_ptr<uml::StructuralFeature>, std::shared_ptr<Bag<fUML::Semantics::Values::Value>>, int);
+			virtual void assignFeatureValue(std::shared_ptr<uml::StructuralFeature>, std::shared_ptr<Bag<fUML::Semantics::Values::Value>>, int);
 			virtual std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>> retrieveFeatureValues();
 
-			virtual std::shared_ptr<Bag<PSCS::Semantics::StructuredClassifiers::CS_Link>> getLinks(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint> interactionPoint);
-			virtual std::shared_ptr<Bag<fUML::Semantics::Values::Value>> retrieveEndValueAsInteractionPoint(std::shared_ptr<fUML::Semantics::Values::Value> endValue, std::shared_ptr<uml::ConnectorEnd> end);
+			virtual std::shared_ptr<Bag<PSCS::Semantics::StructuredClassifiers::CS_Link>> getLinks(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint>);
+			[comment] Deprecated
+			virtual std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint> convertToInteractionPoint(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference>, std::shared_ptr<uml::Port>);
+			[/comment]
 [/if]
 [/let]
 

@@ -255,6 +255,83 @@ std::shared_ptr<Bag<PSCS::Semantics::StructuredClassifiers::CS_Object>> [classNa
 [if (attributes->size() > 0)]
 std::shared_ptr<Bag<PSCS::Semantics::StructuredClassifiers::CS_Link>> [className/]::getLinks(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint> interactionPoint)
 {
+	std::shared_ptr<uml::Port> definingPort = interactionPoint->getDefiningPort();
+	std::shared_ptr<Bag<PSCS::Semantics::StructuredClassifiers::CS_Link>> allLinks(new Bag<PSCS::Semantics::StructuredClassifiers::CS_Link>());
+	
+[for (aPort : Port | aClassifier.getMyAttributes()->filter(Port))]
+	if(definingPort == [aPort.generatePackageGetterCall()/])
+	{	[comment Find all Connectors that are connected to aPort/]
+		[for (aConnector : Connector | aPackage.allOwnedElements()->filter(Connector)->select(end.role->includes(aPort))->sortedBy(name))]
+		{	
+			[let otherConnectorEnd : ConnectorEnd = aConnector.end->select(role <> aPort)->first()]
+			[let otherDefiningEnd : Property = otherConnectorEnd.definingEnd]
+			//Retrieving connected objects of ConnectorEnd '[aConnector.name/]::end_[aConnector.end->indexOf(otherConnectorEnd)/]' ; DefiningEnd: [otherDefiningEnd.association.name/]::[otherDefiningEnd.name/]
+			std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>> dummyBag(new Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>());
+			std::shared_ptr<Bag<fUML::Semantics::Values::Value>> otherEndValues = interactionPoint->getReferent()->getValues([otherDefiningEnd.generatePackageGetterCall()/], dummyBag);
+
+			std::shared_ptr<Bag<fUML::Semantics::Values::Value>> definingEndValues(new Bag<fUML::Semantics::Values::Value>());
+			definingEndValues->add(interactionPoint);
+
+			unsigned int otherEndValuesSize = otherEndValues->size();
+
+			//Create a new CS_Link for each object
+			for(unsigned int i = 0; i < otherEndValuesSize; i++)
+			{
+				std::shared_ptr<Bag<fUML::Semantics::Values::Value>> temp(new Bag<fUML::Semantics::Values::Value>());
+				
+				[comment If otherConnectorEnds role is a port, all values have to be converted to CS_InteractionPoints /]
+				[if (otherConnectorEnd.role.oclIsKindOf(Port))]
+				[let otherEndPort : Port = otherConnectorEnd.role.oclAsType(Port)]
+				[let otherEndPortType : Classifier = otherEndPort.type]
+				[let otherDefiningEndType : Classifier = otherDefiningEnd.type]
+				[let otherEndPortOwnerType : Class = otherEndPort.class]
+				//Role of other ConnectorEnd '[otherEndPort.name/]' is a Port, so he objects have to be stored inside a CS_InteractionPoint rather than a CS_Reference
+				std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> currentValueAsCS_Reference = std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Reference>(otherEndValues->at(i));
+
+				//Retrieve the port object
+				std::shared_ptr<[otherDefiningEndType.getNearestPackage().generateNamespace(false)/]::[otherDefiningEndType.objectClassName()/]> portObject = std::dynamic_pointer_cast<[otherDefiningEndType.getNearestPackage().generateNamespace(false)/]::[otherDefiningEndType.objectClassName()/]>(currentValueAsCS_Reference->getReferent());
+				//Create and initialize a new object for the ports owner
+				std::shared_ptr<[otherEndPortOwnerType.getNearestPackage().generateNamespace(false)/]::[otherEndPortOwnerType.objectClassName()/]> ownerObject = std::dynamic_pointer_cast<[otherEndPortOwnerType.getNearestPackage().generateNamespace(false)/]::[otherEndPortOwnerType.objectClassName()/]>(this->getLocus()->instantiate([otherEndPortOwnerType.generatePackageGetterCall()/]));
+				std::shared_ptr<[otherEndPortOwnerType.generateCppType(true)/]> ownerUmlValue = [if(otherEndPortType <> otherDefiningEndType)]std::dynamic_pointer_cast<[otherEndPortType.generateCppType(true)/]>(portObject->[otherDefiningEndType.UMLValueGetterName()/]())[else]portObject->[otherDefiningEndType.UMLValueGetterName()/]()[/if]->get[otherEndPortOwnerType.name.toUpperFirst()/]().lock();
+				ownerObject->[otherEndPortOwnerType.UMLValueSetterName()/](ownerUmlValue);
+		
+				//Create CS_Reference to the owner object (required for interaction points)
+				std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> referenceToOwner = PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createCS_Reference();
+				referenceToOwner->setReferent(ownerObject);
+				referenceToOwner->setCompositeReferent(ownerObject);
+		
+				//Create CS_InteractionPoint for port object
+				std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint> portInteractionPoint = PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createCS_InteractionPoint();
+				portInteractionPoint->setOwner(referenceToOwner);
+				portInteractionPoint->setReferent(portObject);
+				portInteractionPoint->setDefiningPort([otherEndPort.generatePackageGetterCall()/]);
+
+				temp->add(portInteractionPoint);
+
+				[/let][/let][/let][/let][else] [comment Else the values can be passed as is/]
+				temp->add(otherEndValues->at(i));
+				[/if]
+
+				//Create and initialize the new CS_Link
+				std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Link> newLink = PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createCS_Link();
+				newLink->setType([aConnector.type.generatePackageGetterCall()/]);
+				newLink->assignFeatureValue([aPort.generatePackageGetterCall()/], definingEndValues, -1);
+				newLink->assignFeatureValue([otherConnectorEnd.role.generatePackageGetterCall()/], temp, -1);
+	
+				allLinks->add(newLink);
+			}
+			[/let][/let]
+		}
+		[/for]
+	}
+[/for]
+
+	return allLinks;
+}
+
+[comment] Deprecated
+std::shared_ptr<Bag<PSCS::Semantics::StructuredClassifiers::CS_Link>> [className/]::getLinks(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint> interactionPoint)
+{
 	std::shared_ptr<Bag<PSCS::Semantics::StructuredClassifiers::CS_Link>> allLinks(new Bag<PSCS::Semantics::StructuredClassifiers::CS_Link>());
 	
 	//Retrieve all metamodel elements
@@ -306,54 +383,82 @@ std::shared_ptr<Bag<PSCS::Semantics::StructuredClassifiers::CS_Link>> [className
 		
 		std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>> dummyBag(new Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>());
 		otherEndValues = interactionPoint->getReferent()->getValues(currentConnector->getType()->getMemberEnd()->at(otherEndIndex), dummyBag);
-			
-		//If other end of connector is a port, the corresponding FeatureValue has to be retrieved as CS_InteractionPoint from its owner
-		//instead of being retrieved from this connector end as just a CS_Reference
-		if(std::dynamic_pointer_cast<uml::Port>(otherEnd->getRole()) != nullptr)
+
+		unsigned int otherEndValuesSize = otherEndValues->size();
+	
+		//For each value of the other end of the connector, create a single link to from interactionPoint to that object
+		for(unsigned int j = 0; j < otherEndValuesSize; j++)
 		{
-			//otherEndValues->at(0) is passed to retrieve the ports owner later on
-			otherEndValues = this->retrieveEndValueAsInteractionPoint(otherEndValues->at(0), otherEnd);
+			std::shared_ptr<Bag<fUML::Semantics::Values::Value>> temp(new Bag<fUML::Semantics::Values::Value>());
+
+			//If other end of connector is a port, the corresponding FeatureValue has to be converted to a valid CS_InteractionPoint
+			std::shared_ptr<uml::Port> roleAsPort = std::dynamic_pointer_cast<uml::Port>(otherEnd->getRole());
+			if(roleAsPort)
+			{
+				std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> currentValueAsReference = std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Reference>(otherEndValues->at(j));
+				temp->add(this->convertToInteractionPoint(currentValueAsReference, roleAsPort));
+			}
+			else
+			{
+				temp->add(otherEndValues->at(j));
+			}
+			
+			//Create and initialize the new link
+			std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Link> newLink = PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createCS_Link();
+			newLink->setType(currentConnector->getType());
+			newLink->assignFeatureValue(newLink->getType()->getMemberEnd()->at(definingEndIndex), definingEndValues, -1);
+			newLink->assignFeatureValue(newLink->getType()->getMemberEnd()->at(otherEndIndex), temp, -1);
+
+			allLinks->add(newLink);
 		}
-			
-		std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Link> newLink = [getPSCSStructuredClassifierFactory()/]->createCS_Link();
-		newLink->setType(currentConnector->getType());
-		newLink->assignFeatureValue(newLink->getType()->getMemberEnd()->at(definingEndIndex), definingEndValues, -1);
-		newLink->assignFeatureValue(newLink->getType()->getMemberEnd()->at(otherEndIndex), otherEndValues, -1);
-			
-		allLinks->add(newLink);
 	}
 	
 	return allLinks;
 }
 
-std::shared_ptr<Bag<fUML::Semantics::Values::Value>> [className/]::retrieveEndValueAsInteractionPoint(std::shared_ptr<fUML::Semantics::Values::Value> endValue, std::shared_ptr<uml::ConnectorEnd> end)
+std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint> [className/]::convertToInteractionPoint(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> cS_Reference, std::shared_ptr<uml::Port> definingPort)
 {
-[let ends : OrderedSet(ConnectorEnd) = aClassifier.getRootPackage().collectOppositeConnectorEndsOfType(aClassifier)]
-[if (ends->size() > 0) ]
-	std::shared_ptr<uml::Class> type = std::dynamic_pointer_cast<uml::Property>(end->getRole())->getClass().lock();
-	std::shared_ptr<uml::Class> portType = std::dynamic_pointer_cast<uml::Class>(end->getRole()->getType());
-	std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> featureValue = nullptr;
+	[let ends : OrderedSet(ConnectorEnd) = aClassifier.getRootPackage().collectOppositeConnectorEndsOfType(aClassifier)]
+		[if (ends->size() > 0) ]
+	std::shared_ptr<uml::Class> ownerType = definingPort->getClass().lock();
+	std::shared_ptr<uml::Class> portType = std::dynamic_pointer_cast<uml::Class>(definingPort->getType());
+	std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint> interactionPoint = nullptr;
 
-[for (end : ConnectorEnd | ends)]
-/*DefiningEnd: [end.definingEnd.association.name/]::[end.definingEnd.name/] */
-[let ownerOfRoleType : Class = end.role.oclAsType(Property).class]
-[let roleType : Classifier = end.role.type]
-[let definingEndType : Classifier = end.definingEnd.type]
-	if(type == [ownerOfRoleType.getModelPackage()/][ownerOfRoleType.generatePackageGetterCall(ownerOfRoleType)/] && portType == [roleType.getModelPackage()/][roleType.generatePackageGetterCall(roleType)/])
+			[for (end : ConnectorEnd | ends)]
+/*ConnectorEnd: [end.owner.oclAsType(Connector).name/]::end[end.owner.oclAsType(Connector).end->indexOf(end)/] ; DefiningEnd: [end.definingEnd.association.name/]::[end.definingEnd.name/] */
+				[let ownerOfRoleType : Class = end.role.oclAsType(Property).class]
+				[let roleType : Classifier = end.role.type]
+				[let definingEndType : Classifier = end.definingEnd.type]
+	if(ownerType == [ownerOfRoleType.getModelPackage()/][ownerOfRoleType.generatePackageGetterCall(ownerOfRoleType)/] && portType == [roleType.getModelPackage()/][roleType.generatePackageGetterCall(roleType)/])
 	{
-		std::shared_ptr<[ownerOfRoleType.getNearestPackage().generateNamespace(false)/]::[ownerOfRoleType.objectClassName()/]> ownerObject = std::dynamic_pointer_cast<[ownerOfRoleType.getNearestPackage().generateNamespace(false)/]::[ownerOfRoleType.objectClassName()/]>(this->getLocus()->instantiate(type));
-		std::shared_ptr<[definingEndType.getNearestPackage().generateNamespace(false)/]::[definingEndType.objectClassName()/]> portObject = std::dynamic_pointer_cast<[definingEndType.getNearestPackage().generateNamespace(false)/]::[definingEndType.objectClassName()/]>(std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Reference>(endValue)->getReferent());
+		//Retrieve the port object
+		std::shared_ptr<[definingEndType.getNearestPackage().generateNamespace(false)/]::[definingEndType.objectClassName()/]> portObject = std::dynamic_pointer_cast<[definingEndType.getNearestPackage().generateNamespace(false)/]::[definingEndType.objectClassName()/]>(cS_Reference->getReferent());
+		//Create and initialize a new object for the ports owner
+		std::shared_ptr<[ownerOfRoleType.getNearestPackage().generateNamespace(false)/]::[ownerOfRoleType.objectClassName()/]> ownerObject = std::dynamic_pointer_cast<[ownerOfRoleType.getNearestPackage().generateNamespace(false)/]::[ownerOfRoleType.objectClassName()/]>(this->getLocus()->instantiate(ownerType));
 		std::shared_ptr<[ownerOfRoleType.generateCppType(true)/]> ownerUmlValue = [if(roleType <> definingEndType)]std::dynamic_pointer_cast<[roleType.generateCppType(true)/]>(portObject->[definingEndType.UMLValueGetterName()/]())[else]portObject->[definingEndType.UMLValueGetterName()/]()[/if]->get[ownerOfRoleType.name.toUpperFirst()/]().lock();
 		ownerObject->[ownerOfRoleType.UMLValueSetterName()/](ownerUmlValue);
-		featureValue = ownerObject->retrieveFeatureValue(std::dynamic_pointer_cast<uml::StructuralFeature>(end->getRole()));
+
+		//Create CS_Reference to the owner object (required for interaction points)
+		std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> referenceToOwner = PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createCS_Reference();
+		referenceToOwner->setReferent(ownerObject);
+		referenceToOwner->setCompositeReferent(ownerObject);
+
+		//Create CS_InteractionPoint for port object
+		interactionPoint = PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createCS_InteractionPoint();
+		interactionPoint->setOwner(referenceToOwner);
+		interactionPoint->setReferent(portObject);
+		interactionPoint->setDefiningPort(definingPort);
+
+		return interactionPoint;
 	}
-[/let][/let][/let]
-[/for]
-	return featureValue->getValues();
-[else]
+				[/let][/let][/let]
+			[/for]
+	return interactionPoint;
+		[else]
 	return nullptr;
 [/if][/let]
 }
+[/comment]
 
 void [className/]::removeValue(std::shared_ptr<uml::StructuralFeature> feature, std::shared_ptr<fUML::Semantics::Values::Value> value)
 {
