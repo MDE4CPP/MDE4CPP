@@ -2,37 +2,55 @@
 [module strategyHelper('http://www.eclipse.org/uml2/5.0.0/UML')]
 [import UML4CPP::generator::main::profiles::profileHelper /]
 [import UML4CPP::generator::main::profiles::fUMLStrategiesProfileKeywords /]
+[import UML4CPP::generator::main::profiles::PSCSStrategiesProfileKeywords /]
 
 
 [query public isStrategyClass(anElement : Element) : Boolean = 
-	isChoiceStrategy() /]
+	isChoiceStrategy() or
+	isDispatchStrategy() or
+	isGetNextEventStrategy() or
+	isCS_RequestPropagationStrategy() or
+	isCS_StructuralFeatureOfInterfaceAccessStrategy() or
+	isCS_ConstructStrategy() /]
 
 [**
  * queries for handling of the 'ChoiceStrategy' stereotype
 */]
 [query public isChoiceStrategy(anElement : Element) : Boolean = hasStereotypeApplied(QN_STEREOTYPE_CHOICESTRATEGY()) /]
+[query public hasChoiceStrategy(aPackage : Package) : Boolean = allOwnedElements()->filter(Class)->select(isChoiceStrategy())->size() > 0 /]
+[query public getChoiceStrategy(aPackage : Package) : Class = if hasChoiceStrategy() then allOwnedElements()->filter(Class)->select(isChoiceStrategy())->asOrderedSet()->first() else null endif /]
 
 [**
  * queries for handling of the 'DispatchStrategy' stereotype
 */]
-[query public isDispatchStrategy(anElement : Element) : Boolean = hasStereotypeApplied(QN_STEREOTYPE_CHOICESTRATEGY()) /]
+[query public isDispatchStrategy(anElement : Element) : Boolean = hasStereotypeApplied(QN_STEREOTYPE_DISPATCHSTRATEGY()) /]
+[query public hasDispatchStrategy(aPackage : Package) : Boolean = allOwnedElements()->filter(Class)->select(isDispatchStrategy())->size() > 0 /]
+[query public getDispatchStrategy(aPackage : Package) : Class = if hasDispatchStrategy() then allOwnedElements()->filter(Class)->select(isDispatchStrategy())->asOrderedSet()->first() else null endif /]
 
 [**
  * queries for handling of the 'GetNextEventStrategy' stereotype
 */]
-[query public isGetNextEventStrategy(anElement : Element) : Boolean = hasStereotypeApplied(QN_STEREOTYPE_CHOICESTRATEGY()) /]
+[query public isGetNextEventStrategy(anElement : Element) : Boolean = hasStereotypeApplied(QN_STEREOTYPE_GETNEXTEVENTSTRATEGY()) /]
+[query public hasGetNextEventStrategy(aPackage : Package) : Boolean = allOwnedElements()->filter(Class)->select(isGetNextEventStrategy())->size() > 0 /]
+[query public getGetNextEventStrategy(aPackage : Package) : Class = if hasGetNextEventStrategy() then allOwnedElements()->filter(Class)->select(isGetNextEventStrategy())->asOrderedSet()->first() else null endif /]
 
 [**
  * queries for handling of the 'CS_RequestPropagationStrategy' stereotype
 */]
-[query public isCS_RequestPropagationStrategy(anElement : Element) : Boolean = hasStereotypeApplied(QN_STEREOTYPE_CHOICESTRATEGY()) /]
+[query public isCS_RequestPropagationStrategy(anElement : Element) : Boolean = hasStereotypeApplied(QN_STEREOTYPE_CS_REQUESTPROPAGATIONSTRATEGY()) /]
+[query public hasCS_RequestPropagationStrategy(aPackage : Package) : Boolean = allOwnedElements()->filter(Class)->select(isCS_RequestPropagationStrategy())->size() > 0 /]
+[query public getCS_RequestPropagationStrategy(aPackage : Package) : Class = if hasCS_RequestPropagationStrategy() then allOwnedElements()->filter(Class)->select(isCS_RequestPropagationStrategy())->asOrderedSet()->first() else null endif /]
 
 [**
  * queries for handling of the 'CS_StructuralFeatureOfInterfaceAccessStrategy' stereotype
 */]
-[query public isCS_StructuralFeatureOfInterfaceAccessStrategy(anElement : Element) : Boolean = hasStereotypeApplied(QN_STEREOTYPE_CHOICESTRATEGY()) /]
+[query public isCS_StructuralFeatureOfInterfaceAccessStrategy(anElement : Element) : Boolean = hasStereotypeApplied(QN_STEREOTYPE_CS_STRUCTURALFEATUREOFINTERFACEACCESSSTRATEGY()) /]
+[query public hasCS_StructuralFeatureOfInterfaceAccessStrategy(aPackage : Package) : Boolean = allOwnedElements()->filter(Class)->select(isCS_StructuralFeatureOfInterfaceAccessStrategy())->size() > 0 /]
+[query public getCS_StructuralFeatureOfInterfaceAccessStrategy(aPackage : Package) : Class = if hasCS_StructuralFeatureOfInterfaceAccessStrategy() then allOwnedElements()->filter(Class)->select(isCS_StructuralFeatureOfInterfaceAccessStrategy())->asOrderedSet()->first() else null endif /]
 
 [**
  * queries for handling of the 'CS_ConstructStrategy' stereotype
 */]
-[query public isCS_ConstructStrategy(anElement : Element) : Boolean = hasStereotypeApplied(QN_STEREOTYPE_CHOICESTRATEGY()) /]
+[query public isCS_ConstructStrategy(anElement : Element) : Boolean = hasStereotypeApplied(QN_STEREOTYPE_CS_CONSTRUCTSTRATEGY()) /]
+[query public hasCS_ConstructStrategy(aPackage : Package) : Boolean = allOwnedElements()->filter(Class)->select(isCS_ConstructStrategy())->size() > 0 /]
+[query public getCS_ConstructStrategy(aPackage : Package) : Class = if hasCS_ConstructStrategy() then allOwnedElements()->filter(Class)->select(isCS_ConstructStrategy())->asOrderedSet()->first() else null endif /]

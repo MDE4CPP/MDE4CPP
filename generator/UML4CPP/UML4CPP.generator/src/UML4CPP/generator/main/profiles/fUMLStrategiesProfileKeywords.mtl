@@ -11,3 +11,5 @@
  * 	keyword for the qualified names of the fUMLStrategiesProfile stereotypes
 */]
 [query public QN_STEREOTYPE_CHOICESTRATEGY(any : OclAny) : String = QN_PROFILE_FUMLSTRATEGIESPROFILE()+'::Semantics::Loci::ChoiceStrategy' /]
+[query public QN_STEREOTYPE_DISPATCHSTRATEGY(any : OclAny) : String = QN_PROFILE_FUMLSTRATEGIESPROFILE()+'::Semantics::StructuredClassifiers::DispatchStrategy' /]
+[query public QN_STEREOTYPE_GETNEXTEVENTSTRATEGY(any : OclAny) : String = QN_PROFILE_FUMLSTRATEGIESPROFILE()+'::Semantics::CommonBehavior::GetNextEventStrategy' /]

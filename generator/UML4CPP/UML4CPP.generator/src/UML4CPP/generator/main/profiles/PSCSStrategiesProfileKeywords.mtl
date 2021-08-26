@@ -1,0 +1,15 @@
+[comment encoding = UTF-8 /]
+[module PSCSStrategiesProfileKeywords('http://www.eclipse.org/uml2/5.0.0/UML')]
+
+
+[**
+ * 	keyword for the name of the PSCSStrategiesProfile 
+*/]
+[query public QN_PROFILE_PSCSSTRATEGIESPROFILE(any : OclAny) : String = 'PSCS' /]
+
+[**
+ * 	keyword for the qualified names of the fUMLStrategiesProfile stereotypes
+*/]
+[query public QN_STEREOTYPE_CS_REQUESTPROPAGATIONSTRATEGY(any : OclAny) : String = QN_PROFILE_PSCSSTRATEGIESPROFILE()+'::Semantics::StructuredClassifiers::CS_RequestPropagationStrategy' /]
+[query public QN_STEREOTYPE_CS_STRUCTURALFEATUREOFINTERFACEACCESSSTRATEGY(any : OclAny) : String = QN_PROFILE_PSCSSTRATEGIESPROFILE()+'::Semantics::StructuredClassifiers::CS_StructuralFeatureOfInterfaceAccessStrategy' /]
+[query public QN_STEREOTYPE_CS_CONSTRUCTSTRATEGY(any : OclAny) : String = QN_PROFILE_PSCSSTRATEGIESPROFILE()+'::Semantics::Actions::CS_ConstructStrategy' /]
