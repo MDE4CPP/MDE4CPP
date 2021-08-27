@@ -6,7 +6,7 @@ Bundle-Version: 1.0.0.qualifier
 Bundle-ClassPath: .
 Bundle-Activator: ecore4CPP.generator.Activator
 Bundle-Vendor: Technische Universität Ilmenau
-Require-Bundle: org.eclipse.core.runtime,
+Require-Bundle: org.eclipse.core.runtime;bundle-version="3.18.0",
  org.eclipse.uml2.uml,
  org.eclipse.emf.ecore;visibility:=reexport,
  org.eclipse.uml2.types;visibility:=reexport,
@@ -29,6 +29,6 @@ Export-Package: ecore4CPP.generator;uses:="org.osgi.framework,org.eclipse.core.r
    org.eclipse.acceleo.engine.service,
    org.eclipse.emf.ecore.resource,
    org.eclipse.acceleo.engine.generation.strategy",
-   ecore4CPP.generator.main.helpers,
-   ecore4CPP.generator.main.validation
+ ecore4CPP.generator.main.helpers,
+ ecore4CPP.generator.main.validation
 Automatic-Module-Name: ecore4CPP.generator

@@ -389,11 +389,11 @@ public class Generate extends AbstractAcceleoGenerator {
              resourceSet.getPackageRegistry().put(UMLPackage.eNS_URI, UMLPackage.eINSTANCE);
         }
 
-        System.out.println();
-        System.out.println("registered packages:");
+        //System.out.println();
+        /*System.out.println("registered packages:");
         for (String nsuri : resourceSet.getPackageRegistry().keySet()) {
 			System.out.println("    " + nsuri);
-		}
+		}*/
     }
 
     /**

@@ -170,7 +170,7 @@ public class Ecore4CPPEMtlResourceFactory extends EMtlResourceFactoryImpl {
 	
 	private void initializeValidationEmtls(String resourcePathPrefix)
 	{
-		String[] moduleNames = {"validateModel"};
+		String[] moduleNames = {"validation"};
 		generateFilePathMapData(moduleNames, "validation", resourcePathPrefix);		
 	}
 

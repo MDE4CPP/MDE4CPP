@@ -161,7 +161,7 @@ std::shared_ptr
     [if (anEClassifier.oclIsKindOf(EEnum))][anEClassifier.generateNamespaceDefinition()/]::[anEClassifier.name/] 
     [else]
 	[if (((anEClassifier.name.oclIsInvalid()) or (anEClassifier.name.oclIsUndefined()) or (anEClassifier.name.size()<=0)))]
-	/*invalid Type*/ void*	[anEClassifier.handleUndefinedElement()/]
+	/*invalid Type*/ void*
 	[else] [anEClassifier.name.replace('java.lang.', '').replace('java.util.','').transformTypeName()/]
 	[/if]
     [/if]

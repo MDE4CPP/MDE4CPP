@@ -1,0 +1,145 @@
+[comment encoding = Cp1252 /]
+[module validation('http://www.eclipse.org/emf/2002/Ecore')/]
+
+
+[template public validateModel(modelRootEPackage : EPackage)]
+[setValidationStatus(true)/]
+[modelRootEPackage.validateEPackage()/]
+[modelRootEPackage.validateEPackageContents()/]
+[/template]
+
+[template private validateEPackageContents(anEPackage : EPackage)]
+[comment Validate contained instances of EClass /]
+[for (containedEClass : EClass | anEPackage.eClassifiers->selectByType(EClass))]
+	[containedEClass.validateEClass()/]
+	[containedEClass.validateEClassContents()/]
+[/for]
+[comment Validate contained instances of EDataType /]
+[for (containedEDataType : EDataType | anEPackage.eClassifiers->selectByType(EDataType))]
+	[containedEDataType.validateEDataType()/]
+[/for]
+[comment Validate contained instances of EEnum /]
+[for (containedEEnum : EEnum | anEPackage.eClassifiers->selectByType(EEnum))]
+	[containedEEnum.validateEEnum()/]
+	[containedEEnum.validateEEnumContents()/]
+[/for]
+[comment Validate contained instances of EPackage /]
+[for (containedEPackage : EPackage | anEPackage.eSubpackages)]
+	[containedEPackage.validateEPackage()/]
+	[containedEPackage.validateEPackageContents()/]
+[/for]
+[/template]
+
+[template private validateEClassContents(anEClass : EClass)]
+[comment Validate contained instances of EAttribute /]
+[for (containedEAttribute : EAttribute | anEClass.eAttributes)]
+	[containedEAttribute.validateEAttribute()/]
+[/for]
+[comment Validate contained instances of EReference /]
+[for (containedEReference : EReference | anEClass.eReferences)]
+	[containedEReference.validateEReference()/]
+[/for]
+[comment Validate contained instances of EOperation /]
+[for (containedEOperation : EOperation | anEClass.eOperations)]
+	[containedEOperation.validateEOperation()/]
+	[containedEOperation.validateEOperationContents()/]
+[/for]
+[/template]
+
+[template private validateEEnumContents(anEEnum : EEnum)]
+[comment Validate contained instances of EEnumLiteral /]
+[for (containedEEnumLiteral : EEnumLiteral | anEEnum.eLiterals)]
+	[containedEEnumLiteral.validateEEnumLiteral()/]
+[/for]
+[/template]
+
+[template private validateEOperationContents(anEOperation : EOperation)]
+[comment Validate contained instances of EParameter /]
+[for (containedEParameter : EParameter | anEOperation.eParameters)]
+	[containedEParameter.validateEParameter()/]
+[/for]
+[/template]
+
+[query public printInfo(arg0 : String) : OclVoid
+	= invoke('ecore4CPP.generator.main.validation.ValidationService', 'printInfo(java.lang.String)', Sequence{arg0})
+/]
+
+[query public printWarning(arg0 : String) : OclVoid
+	= invoke('ecore4CPP.generator.main.validation.ValidationService', 'printWarning(java.lang.String)', Sequence{arg0})
+/]
+
+[query public printError(arg0 : String) : OclVoid
+	= invoke('ecore4CPP.generator.main.validation.ValidationService', 'printError(java.lang.String)', Sequence{arg0})
+/]
+
+[query public disableWarnings(anOclAny: OclAny) : OclVoid
+	= invoke('ecore4CPP.generator.main.validation.ValidationService', 'disableWarnings()', Sequence{})
+/]
+
+[query public enableWarnings(anOclAny: OclAny) : OclVoid
+	= invoke('ecore4CPP.generator.main.validation.ValidationService', 'enableWarnings()', Sequence{})
+/]
+
+[query public errorsExist(anOclAny: OclAny) : Boolean
+	= invoke('ecore4CPP.generator.main.validation.ValidationService', 'errorsExist()', Sequence{})
+/]
+
+[query public warningsExist(anOclAny: OclAny) : Boolean
+	= invoke('ecore4CPP.generator.main.validation.ValidationService', 'warningsExist()', Sequence{})
+/]
+
+[query public getValidationStatus(anOclAny: OclAny) : Boolean
+	= invoke('ecore4CPP.generator.main.validation.ValidationService', 'getValidationStatus()', Sequence{})
+/]
+
+[query public setValidationStatus(arg0 : Boolean) : OclVoid
+	= invoke('ecore4CPP.generator.main.validation.ValidationService', 'setValidationStatus(java.lang.Boolean)', Sequence{arg0})
+/]
+
+[query public printErrors(anOclAny: OclAny) : OclVoid
+	= invoke('ecore4CPP.generator.main.validation.ValidationService', 'printErrors()', Sequence{})
+/]
+
+[query public printWarnings(anOclAny: OclAny) : OclVoid
+	= invoke('ecore4CPP.generator.main.validation.ValidationService', 'printWarnings()', Sequence{})
+/]
+
+[query public closeWithErrorExit(arg0 : Integer) : OclVoid
+	= invoke('ecore4CPP.generator.main.validation.ValidationService', 'closeWithErrorExit(Java.lang.Integer)', Sequence{arg0})
+/]
+
+[query public validateEPackage(arg0 : EPackage) : OclVoid
+	= invoke('ecore4CPP.generator.main.validation.ValidationService', 'validateEPackage(org.eclipse.emf.ecore.EPackage)', Sequence{arg0})
+/]
+
+[query public validateEEnumLiteral(arg0 : EEnumLiteral) : OclVoid
+	= invoke('ecore4CPP.generator.main.validation.ValidationService', 'validateEEnumLiteral(org.eclipse.emf.ecore.EEnumLiteral)', Sequence{arg0})
+/]
+
+[query public validateEOperation(arg0 : EOperation) : OclVoid
+	= invoke('ecore4CPP.generator.main.validation.ValidationService', 'validateEOperation(org.eclipse.emf.ecore.EOperation)', Sequence{arg0})
+/]
+
+[query public validateEParameter(arg0 : EParameter) : OclVoid
+	= invoke('ecore4CPP.generator.main.validation.ValidationService', 'validateEParameter(org.eclipse.emf.ecore.EParameter)', Sequence{arg0})
+/]
+
+[query public validateEReference(arg0 : EReference) : OclVoid
+	= invoke('ecore4CPP.generator.main.validation.ValidationService', 'validateEReference(org.eclipse.emf.ecore.EReference)', Sequence{arg0})
+/]
+
+[query public validateEAttribute(arg0 : EAttribute) : OclVoid
+	= invoke('ecore4CPP.generator.main.validation.ValidationService', 'validateEAttribute(org.eclipse.emf.ecore.EAttribute)', Sequence{arg0})
+/]
+
+[query public validateEDataType(arg0 : EDataType) : OclVoid
+	= invoke('ecore4CPP.generator.main.validation.ValidationService', 'validateEDataType(org.eclipse.emf.ecore.EDataType)', Sequence{arg0})
+/]
+
+[query public validateEEnum(arg0 : EEnum) : OclVoid
+	= invoke('ecore4CPP.generator.main.validation.ValidationService', 'validateEEnum(org.eclipse.emf.ecore.EEnum)', Sequence{arg0})
+/]
+
+[query public validateEClass(arg0 : EClass) : OclVoid
+	= invoke('ecore4CPP.generator.main.validation.ValidationService', 'validateEClass(org.eclipse.emf.ecore.EClass)', Sequence{arg0})
+/]

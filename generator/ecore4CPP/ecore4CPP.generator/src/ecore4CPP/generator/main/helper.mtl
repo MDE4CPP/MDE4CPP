@@ -15,7 +15,6 @@
 [module helper('http://www.eclipse.org/emf/2002/Ecore')]
 
 [import ecore4CPP::generator::main::helpers::keywords /]
-[import ecore4CPP::generator::main::validation::validateModel /]
 
 [**
  * Helper for c++ abstract function sufix
@@ -298,7 +297,3 @@ template<class T> class Union;[/if]
 [query public requiresBag(anEClassifier : EClassifier) : Boolean = if (oclIsUndefined()) then false else (name = 'ETreeIterator' or name = 'EEList') endif/]
 
 [query public generateObjectMonitoring(anEObject : EObject) : Boolean = false/]
-
-[template public handleUndefinedElement(anElement : EModelElement)]
-['ecore4CPP_Generation Error: undefined element found '.concat(anElement.toString()).registerError()/]
-[/template]
