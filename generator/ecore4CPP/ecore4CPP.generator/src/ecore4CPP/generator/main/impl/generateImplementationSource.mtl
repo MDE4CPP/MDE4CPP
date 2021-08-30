@@ -211,7 +211,6 @@ using namespace [aClass.generateNamespaceDefinition()/];
 		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr [att.name/]."<< std::endl;)
 	}
 			[/if]
-		[elseif (att.eType.oclIsUndefined())]// unknown attribute type for [att.name/]
 	[comment]Handling of Templates:
 			If there is an Eore Generic Datatyp it seems to be a Container class. otherwise there exist an copy operation the Ecore Type.
 			only one template parameter are supported (in case of map 2) 
@@ -297,7 +296,6 @@ using namespace [aClass.generateNamespaceDefinition()/];
 		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr [ref.name/]."<< std::endl;)
 	}
 		[/if]
-	[elseif ((ref.eType.oclIsUndefined()) or (not ref.hasSetter()) )]// unknown Reference Type or missing setter for [ref.name/]
 	[comment]Handling of Templates:
 			If it is not an Eore Generic Datatyp(EMap, EEList) and there is an generic Supertype with an Template parameter, then it seems to be a Container class. 
 				A push_back operation has to be implemented for the container class. (not avbailable for instance for array<>). 

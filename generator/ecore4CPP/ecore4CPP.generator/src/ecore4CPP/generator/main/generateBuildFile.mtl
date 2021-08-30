@@ -16,6 +16,7 @@
 
 [import ecore4CPP::generator::main::helper /]
 [import ecore4CPP::generator::main::helpers::keywords /]
+[import ecore4CPP::generator::main::validation::validation /]
 
 [query public metaModelLibraries(anEPackage : EPackage) : Set(EPackage) = OrderedSet{anEPackage.eAllContents().eClass().getRootPackage(),anEPackage.eAllContents(EClass).eAllSuperTypes.getRootPackage(),anEPackage.eAllContents(EStructuralFeature).eType.getRootPackage(),anEPackage.eAllContents(EParameter).eType.getRootPackage()}->flatten()->sortedBy(name) /]
 
@@ -150,6 +151,8 @@ task build[packageName.toUpperFirst()/]() {
 [for (libName : String | aPackage.eAllContents()->filter(EClass)->select(c : EClass | c.hasKey(keyLibrary())).valueKeys(keyLibrary())->asOrderedSet())]
 [if (not (libName.oclIsUndefined() or libName = ''))]
 	dependsOn getRootProject().getTasksByName('build[libName.toUpperFirst()/]', true)
+[else]
+	[printWarning('Dependecy to unknown model detected for ' + aPackage.generateNamespaceDefinition(), 'ecore4CPP.generator.main.generateBuildFile:generateBuildFile')/]
 [/if]
 [/for]
 }
@@ -267,6 +270,8 @@ task compile[packageName.toUpperFirst()/](type: tui.sse.mde4cpp.MDE4CPPCompile) 
 	def [libName/] = getRootProject().getTasksByName('compile[libName.toUpperFirst()/]', true)
 	dependsOn [libName/]
 	inputs.files([libName/].outputs)
+[else]
+	[printWarning('Dependecy to unknown model detected for ' + aPackage.generateNamespaceDefinition(), 'ecore4CPP.generator.main.generateBuildFile:generateBuildFile')/]
 [/if]
 [/for]
 }
@@ -320,6 +325,8 @@ FIND_LIBRARY([pack.name.toUpperCase()/]_[libraryVariableNameSuffix(debugMode)/] 
 [for (libName : String | aPackage.eAllContents()->filter(EClass)->select(not doNotGenerate())->select(c : EClass | c.hasKey(keyLibrary())).valueKeys(keyLibrary())->asOrderedSet())]
 [if (not (libName.oclIsUndefined() or libName = ''))]
 FIND_LIBRARY([libName.toUpperCase()/]_[libraryVariableNameSuffix(debugMode)/] [libName/][libraryNameSuffix(debugMode)/][ending/] ${MDE4CPP_HOME}/application/[folderName/])
+[else]
+	[printWarning('Dependecy to unknown model detected for ' + aPackage.generateNamespaceDefinition(), 'ecore4CPP.generator.main.generateBuildFile:generateCMakeFindLibraryCommand')/]
 [/if]
 [/for]
 [/template]
@@ -332,6 +339,8 @@ TARGET_LINK_LIBRARIES(${PROJECT_NAME}
 [for (libName : String | aPackage.eAllContents()->filter(EClass)->select(not doNotGenerate())->select(c : EClass | c.hasKey(keyLibrary())).valueKeys(keyLibrary())->asOrderedSet())]
 [if (not (libName.oclIsUndefined() or libName = ''))]
 	[buildModeCMakeProperty(debugMode)/] ${[libName.toUpperCase()/]_[libraryVariableNameSuffix(debugMode)/]}
+[else]
+	[printWarning('Dependecy to unknown model detected for ' + aPackage.generateNamespaceDefinition(), 'ecore4CPP.generator.main.generateBuildFile:generateLibraryLinking')/]
 [/if]
 [/for]
 )

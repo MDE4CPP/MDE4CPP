@@ -60,16 +60,16 @@
 [/for]
 [/template]
 
-[query public printInfo(arg0 : String) : OclVoid
-	= invoke('ecore4CPP.generator.main.validation.ValidationService', 'printInfo(java.lang.String)', Sequence{arg0})
+[query public printInfo(arg0 : String, arg1 : String) : OclVoid
+	= invoke('ecore4CPP.generator.main.validation.ValidationService', 'printInfo(java.lang.String, java.lang.String)', Sequence{arg0, arg1})
 /]
 
-[query public printWarning(arg0 : String) : OclVoid
-	= invoke('ecore4CPP.generator.main.validation.ValidationService', 'printWarning(java.lang.String)', Sequence{arg0})
+[query public printWarning(arg0 : String, arg1 : String) : OclVoid
+	= invoke('ecore4CPP.generator.main.validation.ValidationService', 'printWarning(java.lang.String, java.lang.String)', Sequence{arg0, arg1})
 /]
 
-[query public printError(arg0 : String) : OclVoid
-	= invoke('ecore4CPP.generator.main.validation.ValidationService', 'printError(java.lang.String)', Sequence{arg0})
+[query public printError(arg0 : String, arg1 : String) : OclVoid
+	= invoke('ecore4CPP.generator.main.validation.ValidationService', 'printError(java.lang.String, java.lang.String)', Sequence{arg0, arg1})
 /]
 
 [query public disableWarnings(anOclAny: OclAny) : OclVoid

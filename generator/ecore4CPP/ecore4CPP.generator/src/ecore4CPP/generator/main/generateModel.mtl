@@ -39,7 +39,7 @@
 																		,aClass.eOperations.eParameters->select(ordered = isOrdered).eType,aClass.eOperations.eParameters->select(ordered = isOrdered).eType.templateTypeIncludes()
 }->flatten() /]
 
-[template public generateModel(aClass : EClass) ?(not doNotGenerate())]
+[template public generateModel(aClass : EClass)]
 [file (aClass.generateNamespacePath().concat('/').concat(aClass.name.toUpperFirst()).concat('.hpp'), false, 'UTF-8')]
 [startGuard(aClass)/]
 

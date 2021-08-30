@@ -160,10 +160,7 @@ std::shared_ptr
 [elseif (anEClassifier.oclIsKindOf(EDataType))]
     [if (anEClassifier.oclIsKindOf(EEnum))][anEClassifier.generateNamespaceDefinition()/]::[anEClassifier.name/] 
     [else]
-	[if (((anEClassifier.name.oclIsInvalid()) or (anEClassifier.name.oclIsUndefined()) or (anEClassifier.name.size()<=0)))]
-	/*invalid Type*/ void*
-	[else] [anEClassifier.name.replace('java.lang.', '').replace('java.util.','').transformTypeName()/]
-	[/if]
+	[anEClassifier.name.replace('java.lang.', '').replace('java.util.','').transformTypeName()/]
     [/if]
 [elseif (anEClassifier.ePackage.name = 'ecore')]
     [let transformedTypeName:String = anEClassifier.instanceTypeName.transformTypeName()]

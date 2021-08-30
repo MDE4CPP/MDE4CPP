@@ -4,9 +4,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 import org.eclipse.emf.common.EMFPlugin;
@@ -29,10 +28,10 @@ import org.eclipse.emf.ecore.ETypedElement;
  * Provided functionality:<br>
  * <ul>
  *  <li>Model validation</li>
- * 	<li>registering errors</li>
- *  <li>registering warnings</li>
- *  <li>Log errors and warnings</li>
- *  <li>exit java program with error code, if at least one error is registered and generator is running outside of eclipse</li>
+ * 	<li>Registering errors</li>
+ *  <li>Registering warnings</li>
+ *  <li>Log errors, warnings and infos</li>
+ *  <li>Exit java program with error code, if at least one error is registered and generator is running outside of eclipse</li>
  * </ul>
  * Functionality is triggered once at the beginning of the generation process.<br>
  * <br><br> 
@@ -42,14 +41,75 @@ import org.eclipse.emf.ecore.ETypedElement;
  */
 public class ValidationService {
 	
+	/**
+	 * Enumeration to represent different serverity levels of Ecore4CPPMessage objects
+	 *<ul>
+     *	<li>INFO : message represents basic information for the user</li>
+     * 	<li>WARNING : messages warns about a potential error. This does not necessarily abort the generation but it may result in errorneous generation</li>
+     * 	<li>ERROR : messages containing errors during model validation. This should abort generation</li>
+	 * </ul>
+	 */
+	private enum Ecore4CPPMessageServerityLevel
+	{
+		INFO,
+		WARNING,
+		ERROR
+	}
+	
+	private static class Ecore4CPPConsoleManipulator
+	{
+		public static final String ANSI_RESET = "\u001B[0m";
+		public static final String ANSI_RED = "\u001B[31m";
+		public static final String ANSI_GREEN = "\u001B[32m";
+		public static final String ANSI_YELLOW = "\u001B[33m";
+		
+		public static final Map<Ecore4CPPMessageServerityLevel, String> ANSI_MAP = Map.of(
+				Ecore4CPPMessageServerityLevel.INFO, ANSI_GREEN, 
+				Ecore4CPPMessageServerityLevel.WARNING, ANSI_YELLOW,
+				Ecore4CPPMessageServerityLevel.ERROR, ANSI_RED
+				);
+	}
+	
+	/**
+	 * Class that represents a message. Contains info about the severity level of the message, the message itself and potentially the name of the function which created the message
+	 */
+	private class Ecore4CPPMessage
+	{
+		private String m_message, m_callingOperation;
+		private Ecore4CPPMessageServerityLevel m_level;
+		
+		@SuppressWarnings("unused")
+		public Ecore4CPPMessage() 
+		{
+			m_message = m_callingOperation = "";
+			m_level = Ecore4CPPMessageServerityLevel.INFO;
+		}
+		
+		public Ecore4CPPMessage(Ecore4CPPMessageServerityLevel level, String message, String callingOperation)
+		{
+			m_level = level;
+			m_message = message;
+			m_callingOperation = callingOperation;
+		}
+		
+		public void print()
+		{	
+			String printedMessage = "[" + 
+									Ecore4CPPConsoleManipulator.ANSI_MAP.get(m_level) +  m_level.name() + Ecore4CPPConsoleManipulator.ANSI_RESET + 
+									"] :\t" + 
+									m_message + 
+									((m_callingOperation.isEmpty()) ? "" : ("\n\t\t(from " + m_callingOperation + ")"));
+			System.out.println(printedMessage);
+		}
+	}
+
 /**
  * Private member attributes
  */
-		private List<String> errors;
-		private List<String> warnings;
+		private List<Ecore4CPPMessage> errors;
+		private List<Ecore4CPPMessage> warnings;
 		private Boolean validationStatus = false;
 		private Boolean warningsDisabled = false;
-		private Logger logger;
 		
 /**
  * Private utility methods
@@ -58,7 +118,7 @@ public class ValidationService {
 		 * Add {@code message} to internal error list
 		 * @param message String representing error message
 		 */
-		private void registerError(String message)
+		private void registerError(Ecore4CPPMessage message)
 		{
 			errors.add(message);
 		}
@@ -67,7 +127,7 @@ public class ValidationService {
 		 * Add {@code message} to internal warning list
 		 * @param message String representing warning
 		 */
-		private void registerWarning(String message)
+		private void registerWarning(Ecore4CPPMessage message)
 		{
 			warnings.add(message);
 		}
@@ -80,11 +140,8 @@ public class ValidationService {
 		 */
 		public ValidationService() 
 		{
-			errors = new ArrayList<String>();
-			warnings = new ArrayList<String>();
-			
-			logger = Logger.getLogger("ecore4CPPLogger");
-			logger.setLevel(Level.ALL);
+			errors = new ArrayList<Ecore4CPPMessage>();
+			warnings = new ArrayList<Ecore4CPPMessage>();
 		}
 		
 		/**
@@ -123,11 +180,17 @@ public class ValidationService {
 			validationStatus = status;
 		}
 		
+		/**
+		 * Disables the print of warning messages
+		 */
 		public void disableWarnings()
 		{
 			warningsDisabled = true;
 		}
 		
+		/**
+		 * Enables the print of warning messages
+		 */
 		public void enableWarnings()
 		{
 			warningsDisabled = false;
@@ -142,8 +205,8 @@ public class ValidationService {
 			{
 				System.err.println("Validation failed with the following errors:");
 				System.out.println("--------------------------------------------\n");
-				for (String errorMessage : errors) {
-					printError(errorMessage);
+				for (Ecore4CPPMessage errorMessage : errors) {
+					errorMessage.print();
 				}
 			}
 		}
@@ -157,37 +220,49 @@ public class ValidationService {
 			{
 				if(warningsDisabled)
 				{
-					printInfo("Warnings disabled!");
+					printInfo("Warnings disabled!", "");
 				}
 				
 				else {
 				System.out.println("Warnings during validation (NOTE: generation might not work correctly):");
 				System.out.println("-----------------------------------------------------------------------\n");
 
-					for (String warning : warnings) {
-						printWarning(warning);
+					for (Ecore4CPPMessage warningMessage : warnings) {
+						warningMessage.print();
 					}
 				}
 			}
 		}
 		
-		public void printInfo(String message)
+		/**
+		 * Creates and prints a new Info message
+		 */
+		public void printInfo(String message, String callingOperation)
 		{
-			logger.info(message + "\n");
+			Ecore4CPPMessage infoMessage = new Ecore4CPPMessage(Ecore4CPPMessageServerityLevel.INFO, message, callingOperation);
+			infoMessage.print();
 		}
 		
-		public void printWarning(String message)
+		/**
+		 * Creates and prints a new Warning message (if warnings are enabled)
+		 */
+		public void printWarning(String message, String callingOperation)
 		{
 			if(!warningsDisabled)
 			{
-				logger.warning(message + "\n");
+				Ecore4CPPMessage warningMessage = new Ecore4CPPMessage(Ecore4CPPMessageServerityLevel.WARNING, message, callingOperation);
+				warningMessage.print();
 			}
 		}
 		
-		public void printError(String message)
+		/**
+		 * Creates and prints a new Error message
+		 */
+		public void printError(String message,  String callingOperation)
 		{
 			
-			logger.severe(message + "\n");
+			Ecore4CPPMessage errorMessage = new Ecore4CPPMessage(Ecore4CPPMessageServerityLevel.ERROR, message, callingOperation);
+			errorMessage.print();
 		}
 		
 		/**
@@ -206,65 +281,159 @@ public class ValidationService {
 	 * Private validation methods
 	 */
 
+		/**
+		 * Validates properties constrained by metaclass ENamedElement
+		 * This includes:
+		 * 	- check if the 'name' property is set
+		 */
 		private void validateENamedElement(ENamedElement eNamedElement)
 		{
 			if(eNamedElement.getName().isEmpty())
 			{
-				registerError("Undefined 'name' for instance of ENamedElement :\n" + eNamedElement);
+				registerError(new Ecore4CPPMessage(
+						Ecore4CPPMessageServerityLevel.ERROR,
+						"Undefined 'name' for instance of ENamedElement : " + getPrintableName(eNamedElement),
+						this.getClass().getName() + ":validateENamedElement"));
 			}
 		}
 		
+		/**
+		 * Creates a printable String-representation of a NamedElement
+		 * Returns the qualified name of the element if present, or else calls "toString()".
+		 */
+		private String getPrintableName(ENamedElement eNamedElement)
+		{
+			if(eNamedElement.getName().isEmpty())
+			{
+				return eNamedElement.toString();
+			}
+			else
+			{
+				String qualifiedName = "";
+				while(eNamedElement != null)
+				{
+					qualifiedName = eNamedElement.getName() + (qualifiedName.isEmpty() ? "" : "::") + qualifiedName;
+					if(eNamedElement instanceof EClassifier)
+					{
+						eNamedElement = ((EClassifier)eNamedElement).getEPackage();
+					}
+					else if(eNamedElement instanceof EStructuralFeature)
+					{
+						eNamedElement = ((EStructuralFeature)eNamedElement).getEContainingClass();
+					}
+					else if(eNamedElement instanceof EOperation)
+					{
+						eNamedElement = ((EOperation)eNamedElement).getEContainingClass();
+					}
+					else if(eNamedElement instanceof EParameter)
+					{
+						eNamedElement = ((EParameter)eNamedElement).getEOperation();
+					}
+					else if(eNamedElement instanceof EEnumLiteral)
+					{
+						eNamedElement = ((EEnumLiteral)eNamedElement).getEEnum();
+					}
+					else {
+						eNamedElement = null;
+					}
+				}
+				
+				return qualifiedName;
+			}
+		}
+		
+		/**
+		 * Validates properties constrained by metaclass EPackage
+		 * This includes:
+		 * 	- check if the EPackage is null
+		 */
 		public void validateEPackage(EPackage ePackage)
 		{
 			if(ePackage == null)
 			{
-				registerError("Undefined instance of EPackage");
+				registerError(new Ecore4CPPMessage(
+						Ecore4CPPMessageServerityLevel.ERROR,
+						"Undefined instance of EPackage",
+						this.getClass().getName() + ":validateEPackage"));
+				
 				return;
 			}
 			
 			validateENamedElement(ePackage);
 		}
 		
+		/**
+		 * Validates properties constrained by metaclass EEnumLiteral
+		 * This includes:
+		 * 	- check if the EEnumLiteral is null
+		 *  - check if the containing EEnum is null
+		 */
 		public void validateEEnumLiteral(EEnumLiteral eEnumLiteral)
 		{
 			if(eEnumLiteral == null)
-			{
-				registerError("Undefined instance of EEnumLiteral");
+			{			
+				registerError(new Ecore4CPPMessage(
+						Ecore4CPPMessageServerityLevel.ERROR,
+						"Undefined instance of EEnumLiteral",
+						this.getClass().getName() + ":validateEEnumLiteral"));
+				
 				return;
 			}
 			
 			validateENamedElement(eEnumLiteral);
 			
 			if(eEnumLiteral.getEEnum() == null)
-			{
-				registerWarning("Undefined 'eEnum' for instance of EEnumerationLiteral :\n" + eEnumLiteral);
+			{		
+				registerWarning(new Ecore4CPPMessage(
+						Ecore4CPPMessageServerityLevel.WARNING,
+						"Undefined 'eEnum' for instance of EEnumerationLiteral : " + getPrintableName(eEnumLiteral),
+						this.getClass().getName() + ":validateEEnumLiteral"));
 			}
 		}
 		
+		/**
+		 * Validates properties constrained by metaclass ETypedElement
+		 * This includes:
+		 * 	- check if the 'lowerBound' property is greater or equal to 0
+		 *  - check if the 'upperBound' property is valid (not =0 and not <-1)
+		 *  - check if the 'lowerBound' property is smaller than the "upperBound" property (except if upperBound == -1)
+		 */
 		private void validateETypedElement(ETypedElement eTypedElement)
 		{
 			validateENamedElement(eTypedElement);
 			
-			String messageInstanceSuffix = " for instance of ETypedElement :\n" + eTypedElement;
+			String messageInstanceSuffix = " for instance of ETypedElement : " + getPrintableName(eTypedElement);
 			
 			if(eTypedElement.getLowerBound() < 0)
-			{
-				registerError("Invalid 'lowerBound' of " + eTypedElement.getLowerBound() + messageInstanceSuffix);
+			{		
+				registerError(new Ecore4CPPMessage(
+						Ecore4CPPMessageServerityLevel.ERROR,
+						"Invalid 'lowerBound' of " + eTypedElement.getLowerBound() + messageInstanceSuffix,
+						this.getClass().getName() + ":validateETypedElement"));
 			}
 			
 			if(eTypedElement.getUpperBound() == 0 || eTypedElement.getUpperBound() < -1)
-			{
-				registerError("Invalid 'upperBound' of " + eTypedElement.getUpperBound() + messageInstanceSuffix);
+			{			
+				registerError(new Ecore4CPPMessage(
+						Ecore4CPPMessageServerityLevel.ERROR,
+						"Invalid 'upperBound' of " + eTypedElement.getUpperBound() + messageInstanceSuffix,
+						this.getClass().getName() + ":validateETypedElement"));
 			}
 			
 			if((eTypedElement.getUpperBound() > 0) && (eTypedElement.getLowerBound() > eTypedElement.getUpperBound()))
-			{
-				registerError("'lowerBound' of " + eTypedElement.getLowerBound() + " is greater than 'upperBound' of " + eTypedElement.getUpperBound() + messageInstanceSuffix);
+			{				
+				registerError(new Ecore4CPPMessage(
+						Ecore4CPPMessageServerityLevel.ERROR,
+						"'lowerBound' of " + eTypedElement.getLowerBound() + " is greater than 'upperBound' of " + eTypedElement.getUpperBound() + messageInstanceSuffix,
+						this.getClass().getName() + ":validateETypedElement"));
 			}
 			
 			if((eTypedElement.getUpperBound() > 1 || eTypedElement.getUpperBound() == -1) && (eTypedElement.getLowerBound() > 0))
-			{
-				registerWarning("[n..*] or [n..m] multiplicity will be generated as [0..*] multiplicity" + messageInstanceSuffix);
+			{				
+				registerWarning(new Ecore4CPPMessage(
+						Ecore4CPPMessageServerityLevel.WARNING,
+						"[n..*] or [n..m] multiplicity will be generated as [0..*] multiplicity" + messageInstanceSuffix,
+						this.getClass().getName() + ":validateETypedElement"));
 			}
 			
 			/*
@@ -272,12 +441,22 @@ public class ValidationService {
 			 * as EOperations are allowed to be of undefined type (which will be interpreted as 'void' during generation)
 			 */
 		}
-
+		
+		/**
+		 * Validates properties constrained by metaclass EOperation
+		 * This includes:
+		 * 	- check if the the EOperation is null
+		 *  - check if the containing class is null
+		 */
 		public void validateEOperation(EOperation eOperation)
 		{
 			if(eOperation == null)
-			{
-				registerError("Undefined instance of EOperation");
+			{			
+				registerError(new Ecore4CPPMessage(
+						Ecore4CPPMessageServerityLevel.ERROR,
+						"Undefined instance of EOperation",
+						this.getClass().getName() + ":validateEOperation"));
+				
 				return;
 			}
 			
@@ -285,105 +464,182 @@ public class ValidationService {
 			
 			if(eOperation.getEContainingClass() == null) 
 			{
-				registerError("Undefined 'eContainingClass' for instance of EOperation :\n" + eOperation);
+				registerError(new Ecore4CPPMessage(
+						Ecore4CPPMessageServerityLevel.ERROR,
+						"Undefined 'eContainingClass' for instance of EOperation : " + getPrintableName(eOperation),
+						this.getClass().getName() + ":validateEOperation"));
 			}
 		}
 		
+		/**
+		 * Validates properties constrained by metaclass EParameter
+		 * This includes:
+		 * 	- check if the the EParameter is null
+		 *  - check if the containing operation is null
+		 *  - check if the 'eType' property is valid
+		 */
 		public void validateEParameter(EParameter eParameter)
 		{
 			if(eParameter == null)
 			{
-				registerError("Undefined instance of EParameter");
+				registerError(new Ecore4CPPMessage(
+						Ecore4CPPMessageServerityLevel.ERROR,
+						"Undefined instance of EParameter",
+						this.getClass().getName() + ":validateEParameter"));
+
 				return;
 			}
 			
 			validateETypedElement(eParameter);
 			
-			String messageInstanceSuffix = " for instance of EParameter :\n" + eParameter;
+			String messageInstanceSuffix = " for instance of EParameter : " + getPrintableName(eParameter);
 			
 			if(eParameter.getEOperation() == null) 
 			{
-				registerError("Undefined 'eOperation'" + messageInstanceSuffix);
+				registerError(new Ecore4CPPMessage(
+						Ecore4CPPMessageServerityLevel.ERROR,
+						"Undefined 'eOperation'" + messageInstanceSuffix,
+						this.getClass().getName() + ":validateEParameter"));
 			}
 			
 			if(eParameter.getEType() == null)
 			{
-				registerError("Undefined 'eType'" + messageInstanceSuffix);
+				registerError(new Ecore4CPPMessage(
+						Ecore4CPPMessageServerityLevel.ERROR,
+						"Undefined 'eType'" + messageInstanceSuffix,
+						this.getClass().getName() + ":validateEParameter"));
 			}
 		}
 		
+		/**
+		 * Validates properties constrained by metaclass EStructuralFeature
+		 * This includes:
+		 * 	- check if the the EStructuralFeature is null
+		 *  - check if the containing class is null
+		 *  - check if the 'eType' property is valid
+		 */
 		private void validateEStructuralFeature(EStructuralFeature eStructuralFeature)
 		{
 			if(eStructuralFeature == null)
 			{
-				registerError("Undefined instance of EStructuralFeature");
+				registerError(new Ecore4CPPMessage(
+						Ecore4CPPMessageServerityLevel.ERROR,
+						"Undefined instance of EStructuralFeature",
+						this.getClass().getName() + ":validateEStructuralFeature"));
+				
 				return;
 			}
 			
 			validateETypedElement(eStructuralFeature);
 			
-			String messageInstanceSuffix = " for instance of EStructuralFeature :\n" + eStructuralFeature;
+			String messageInstanceSuffix = " for instance of EStructuralFeature : " + getPrintableName(eStructuralFeature);
 			
 			if(eStructuralFeature.getEContainingClass() == null) 
 			{
-				registerError("Undefined 'eContainingClass'" + messageInstanceSuffix);
+				registerError(new Ecore4CPPMessage(
+						Ecore4CPPMessageServerityLevel.ERROR,
+						"Undefined 'eContainingClass'" + messageInstanceSuffix,
+						this.getClass().getName() + ":validateEStructuralFeature"));
 			}
 			
 			if(eStructuralFeature.getEType() == null)
 			{
-				registerError("Undefined 'eType'" + messageInstanceSuffix);
+				registerError(new Ecore4CPPMessage(
+						Ecore4CPPMessageServerityLevel.ERROR,
+						"Undefined 'eType'" + messageInstanceSuffix,
+						this.getClass().getName()+ ":validateEStructuralFeature"));
 			}
 		}
 		
+		/**
+		 * Validates properties constrained by metaclass EReference
+		 * This includes:
+		 * 	- check if the the EReference is null
+		 */
 		public void validateEReference(EReference eReference)
 		{
 			if(eReference == null)
 			{
-				registerError("Undefined instance of EReference");
+				registerError(new Ecore4CPPMessage(
+						Ecore4CPPMessageServerityLevel.ERROR,
+						"Undefined instance of EReference",
+						this.getClass().getName() + ":validateEReference"));
+				
 				return;
 			}
 			
 			validateEStructuralFeature(eReference);
 		}
 		
+		/**
+		 * Validates properties constrained by metaclass EAttribute
+		 * This includes:
+		 * 	- check if the the EAttribute is null
+		 */
 		public void validateEAttribute(EAttribute eAttribute)
 		{
 			if(eAttribute == null)
 			{
-				registerError("Undefined instance of EAttribute");
+				registerError(new Ecore4CPPMessage(
+						Ecore4CPPMessageServerityLevel.ERROR,
+						"Undefined instance of EAttribute",
+						this.getClass().getName() + ":validateEAttribute"));
+				
 				return;
 			}
 			
 			validateEStructuralFeature(eAttribute);
 		}
 		
+		/**
+		 * Validates properties constrained by metaclass EClassifier
+		 */
 		private void validateEClassifier(EClassifier eClassifier)
 		{
 			validateENamedElement(eClassifier);
 		}
 		
+		/**
+		 * Validates properties constrained by metaclass EDataType
+		 * This includes:
+		 * 	- check if the the EDataType is null
+		 */
 		public void validateEDataType(EDataType eDataType)
 		{
 			if(eDataType == null)
 			{
-				registerError("Undefined instance of EDataType");
+				registerError(new Ecore4CPPMessage(
+						Ecore4CPPMessageServerityLevel.ERROR,
+						"Undefined instance of EDataType",
+						this.getClass().getName() + ":validateEDataType"));
+				
 				return;
 			}
 			
 			validateEClassifier(eDataType);
 		}
 		
+		/**
+		 * Validates properties constrained by metaclass EEnum
+		 * This includes:
+		 * 	- check if the EEnum is null
+		 *  - check if the EEnum contains multiple literals with the same names or values
+		 */
 		public void validateEEnum(EEnum eEnum)
 		{
 			if(eEnum == null)
 			{
-				registerError("Undefined instance of EEnum");
+				registerError(new Ecore4CPPMessage(
+						Ecore4CPPMessageServerityLevel.ERROR,
+						"Undefined instance of EEnum",
+						this.getClass().getName() + ":validateEEnum"));
+				
 				return;
 			}
 			
 			validateEClassifier(eEnum);
 			
-			String messageInstanceSuffix = " for instance of EEnum :\n" + eEnum;
+			String messageInstanceSuffix = " for instance of EEnum : " + getPrintableName(eEnum);
 			
 			List<String> eEnumLiteralNames = eEnum.getELiterals().stream().map(EEnumLiteral::getName).collect(Collectors.toList());
 			Set<String> duplicateEEnumLiteralNames = findDuplicates(eEnumLiteralNames);
@@ -392,7 +648,10 @@ public class ValidationService {
 			{
 				for(String duplicateEEnumLiteralName : duplicateEEnumLiteralNames)
 				{
-					registerError("Multiple literals with name '" + duplicateEEnumLiteralName + "'" + messageInstanceSuffix);
+					registerError(new Ecore4CPPMessage(
+							Ecore4CPPMessageServerityLevel.ERROR,
+							"Multiple literals with name '" + duplicateEEnumLiteralName + "'" + messageInstanceSuffix,
+							this.getClass().getName() + ":validateEEnum"));
 				}
 			}
 			
@@ -403,7 +662,10 @@ public class ValidationService {
 			{
 				for(int duplicateEEnumLiteralValue : duplicateEEnumLiteralValues)
 				{
-					registerError("Multiple literals with value '" + duplicateEEnumLiteralValue + "'" + messageInstanceSuffix);
+					registerError(new Ecore4CPPMessage(
+							Ecore4CPPMessageServerityLevel.ERROR,
+							"Multiple literals with value '" + duplicateEEnumLiteralValue + "'" + messageInstanceSuffix,
+							this.getClass().getName() + ":validateEEnum"));
 				}
 			}
 		}
@@ -414,17 +676,28 @@ public class ValidationService {
 			return collection.stream().filter(element -> !uniques.add(element)).collect(Collectors.toSet());
 		}
 		
+		/**
+		 * Validates properties constrained by metaclass EClass
+		 * This includes:
+		 * 	- check if the EClass is null
+		 *  - check if the EClass contains multiple structural features with the same names
+		 *  TODO: Check for "equivalent" operations
+		 */
 		public void validateEClass(EClass eClass)
 		{
 			if(eClass == null)
 			{
-				registerError("Undefined instance of EClass");
+				registerError(new Ecore4CPPMessage(
+						Ecore4CPPMessageServerityLevel.ERROR,
+						"Undefined instance of EClass",
+						this.getClass().getName() + ":validateEClass"));
+				
 				return;
 			}
 			
 			validateEClassifier(eClass);
 			
-			String messageInstanceSuffix = " for instance of EClass :\n" + eClass;
+			String messageInstanceSuffix = " for instance of EClass : " + getPrintableName(eClass);
 			
 			List<String> eStructuralFeatureNames = eClass.getEStructuralFeatures().stream().map(EStructuralFeature::getName).collect(Collectors.toList());
 			Set<String> duplicateEStructuralFeatureNames = findDuplicates(eStructuralFeatureNames);
@@ -433,13 +706,14 @@ public class ValidationService {
 			{
 				for(String duplicateEStructuralFeatureName : duplicateEStructuralFeatureNames)
 				{
-					registerWarning("Multiple structural features with name '" + duplicateEStructuralFeatureName + "'" + messageInstanceSuffix);
+					System.out.println("Test_1");
+					
+					registerError(new Ecore4CPPMessage(
+							Ecore4CPPMessageServerityLevel.ERROR,
+							"Multiple structural features with name '" + duplicateEStructuralFeatureName + "'" + messageInstanceSuffix,
+							this.getClass().getName() + ":validateEClass"));
 				}
 			}
-			
-			/**
-			 * TODO Check operations
-			 */
 		}
 	
 }

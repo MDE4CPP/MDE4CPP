@@ -60,7 +60,7 @@ virtual [anEOperation.generateOperationType()/] [anEOperation.name/]([anEOperati
 
 [template public generateOperationInitialization(anEOperation : EOperation)? ( not hasImplOnly() )]
 [anEOperation.getClassMemberName()/]->setName("[anEOperation.name.toString()/]");
-[if ((anEOperation.eType.oclIsUndefined())or(anEOperation.eType.doNotGenerate()))]
+[if (anEOperation.eType.oclIsUndefined() or anEOperation.eType.doNotGenerate())]
 { [comment external Classes for instance C++ std::map are not generated and has no metamodel informations/]
 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
 	std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
@@ -80,7 +80,7 @@ virtual [anEOperation.generateOperationType()/] [anEOperation.name/]([anEOperati
 {
 	std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation([anEOperation.getClassMemberName()/]);
 	parameter->setName("[anEParameter.name/]");
-[if ((anEParameter.eType.oclIsUndefined())or(anEParameter.eType.doNotGenerate()))]
+[if (anEParameter.eType.doNotGenerate())]
 	{ [comment external Classes for instance C++ std::map are not generated and has no metamodel informations/]
 		std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
 		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);

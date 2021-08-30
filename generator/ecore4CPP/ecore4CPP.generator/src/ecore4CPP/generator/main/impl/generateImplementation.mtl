@@ -23,7 +23,7 @@
  * The documentation of the template generateElement.
  * @param anEClass
  */]
-[template public generateImplementation(aClass : EClass) ?(not doNotGenerate())]
+[template public generateImplementation(aClass : EClass)]
 [aClass.generateImplementationHeader()/]
 [aClass.generateImplementationSource()/]
 [/template]

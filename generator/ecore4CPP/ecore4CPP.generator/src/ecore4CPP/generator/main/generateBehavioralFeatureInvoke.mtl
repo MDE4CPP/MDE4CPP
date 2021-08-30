@@ -34,7 +34,7 @@
 [/template]
 
 
-[template private generateInputParameter(name : String, type : EClassifier, index:Integer) ? (not (name.oclIsUndefined() or type.name.oclIsUndefined()))]
+[template private generateInputParameter(name : String, type : EClassifier, index:Integer)]
 std::shared_ptr<Bag<fUML::Semantics::Values::Value>> [name/]ValueList = inputParameters->at([index/])->getValues();
 [/template]
 [/comment]
