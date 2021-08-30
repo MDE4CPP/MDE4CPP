@@ -51,8 +51,8 @@
 #include "PSCS/PSCSPackage.hpp"
 #include "PSCS/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
-#include "fUML/Semantics/Values/ValuesPackage.hpp"
 #include "PSCS/Semantics/Values/ValuesPackage.hpp"
+#include "fUML/Semantics/Values/ValuesPackage.hpp"
 #include "uml/umlPackage.hpp"
 
 

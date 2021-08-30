@@ -34,8 +34,8 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-#include "PSCS/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
 #include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
+#include "PSCS/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
 
 
