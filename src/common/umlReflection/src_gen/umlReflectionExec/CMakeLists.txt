@@ -270,6 +270,7 @@ SET(SOURCE_FILES
 	WriteLinkActionObject.cpp
 	WriteStructuralFeatureActionObject.cpp
 	WriteVariableActionObject.cpp
+	#Strategy classes for Package UML
 	
 )
 
