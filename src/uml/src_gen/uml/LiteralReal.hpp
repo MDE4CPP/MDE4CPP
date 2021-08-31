@@ -95,7 +95,7 @@ namespace uml
 			 
 			virtual double realValue() = 0;
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			/*!
 			The specified Real value.
@@ -111,7 +111,7 @@ namespace uml
 			virtual void setValue (double _value)= 0;
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			
 

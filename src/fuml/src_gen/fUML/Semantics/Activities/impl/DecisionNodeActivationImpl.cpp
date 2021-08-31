@@ -597,7 +597,7 @@ Any DecisionNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::li
   	switch(operationID)
 	{
 		
-		// 3737
+		// 474512401
 		case ActivitiesPackage::DECISIONNODEACTIVATION_OPERATION_EXECUTEDECISIONINPUTBEHAVIOR_VALUE_VALUE:
 		{
 			//Retrieve input parameter 'inputValue'
@@ -614,7 +614,7 @@ Any DecisionNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::li
 			break;
 		}
 		
-		// 3744
+		// 655526507
 		case ActivitiesPackage::DECISIONNODEACTIVATION_OPERATION_FIRE_TOKEN:
 		{
 			//Retrieve input parameter 'incomingTokens'
@@ -626,21 +626,21 @@ Any DecisionNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::li
 			break;
 		}
 		
-		// 3739
+		// 1439501389
 		case ActivitiesPackage::DECISIONNODEACTIVATION_OPERATION_GETDECISIONINPUTFLOWINSTANCE:
 		{
 			result = eAny(this->getDecisionInputFlowInstance());
 			break;
 		}
 		
-		// 3738
+		// 1462609127
 		case ActivitiesPackage::DECISIONNODEACTIVATION_OPERATION_GETDECISIONINPUTFLOWVALUE:
 		{
 			result = eAny(this->getDecisionInputFlowValue());
 			break;
 		}
 		
-		// 3736
+		// 1833083459
 		case ActivitiesPackage::DECISIONNODEACTIVATION_OPERATION_GETDECISIONVALUES_TOKEN:
 		{
 			//Retrieve input parameter 'incomingTokens'
@@ -652,21 +652,21 @@ Any DecisionNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::li
 			break;
 		}
 		
-		// 3742
+		// 1189277255
 		case ActivitiesPackage::DECISIONNODEACTIVATION_OPERATION_HASOBJECTFLOWINPUT:
 		{
 			result = eAny(this->hasObjectFlowInput());
 			break;
 		}
 		
-		// 3746
+		// 500251013
 		case ActivitiesPackage::DECISIONNODEACTIVATION_OPERATION_ISREADY:
 		{
 			result = eAny(this->isReady());
 			break;
 		}
 		
-		// 3741
+		// 118568537
 		case ActivitiesPackage::DECISIONNODEACTIVATION_OPERATION_REMOVEJOINEDCONTROLTOKENS_TOKEN:
 		{
 			//Retrieve input parameter 'incomingTokens'
@@ -678,21 +678,21 @@ Any DecisionNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::li
 			break;
 		}
 		
-		// 3743
+		// 772920813
 		case ActivitiesPackage::DECISIONNODEACTIVATION_OPERATION_TAKEOFFEREDTOKENS:
 		{
 			result = eAny(this->takeOfferedTokens());
 			break;
 		}
 		
-		// 3745
+		// 92927738
 		case ActivitiesPackage::DECISIONNODEACTIVATION_OPERATION_TERMINATE:
 		{
 			this->terminate();
 			break;
 		}
 		
-		// 3740
+		// 1272277240
 		case ActivitiesPackage::DECISIONNODEACTIVATION_OPERATION_TEST_VALUESPECIFICATION_VALUE:
 		{
 			//Retrieve input parameter 'gaurd'

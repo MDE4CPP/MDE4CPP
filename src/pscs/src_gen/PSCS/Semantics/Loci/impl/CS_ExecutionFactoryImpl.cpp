@@ -72,9 +72,9 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
+#include "uml/umlFactory.hpp"
 
 
 #include "uml/Class.hpp"
@@ -427,7 +427,7 @@ Any CS_ExecutionFactoryImpl::eInvoke(int operationID, std::shared_ptr<std::list 
   	switch(operationID)
 	{
 		
-		// 1418
+		// 305337573
 		case LociPackage::CS_EXECUTIONFACTORY_OPERATION_GETSTEREOTYPEAPPLICATION_CLASS_ELEMENT:
 		{
 			//Retrieve input parameter 'stereotype'
@@ -444,7 +444,7 @@ Any CS_ExecutionFactoryImpl::eInvoke(int operationID, std::shared_ptr<std::list 
 			break;
 		}
 		
-		// 1417
+		// 1716538227
 		case LociPackage::CS_EXECUTIONFACTORY_OPERATION_GETSTEREOTYPECLASS_ESTRING_ESTRING:
 		{
 			//Retrieve input parameter 'profileName'
@@ -461,7 +461,7 @@ Any CS_ExecutionFactoryImpl::eInvoke(int operationID, std::shared_ptr<std::list 
 			break;
 		}
 		
-		// 1416
+		// 689017765
 		case LociPackage::CS_EXECUTIONFACTORY_OPERATION_INSTANTIATEVISITOR_ELEMENT:
 		{
 			//Retrieve input parameter 'element'

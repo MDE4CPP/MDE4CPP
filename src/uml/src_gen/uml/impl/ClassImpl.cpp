@@ -1032,7 +1032,7 @@ Any ClassImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_
   	switch(operationID)
 	{
 		
-		// 3671
+		// 1692428043
 		case umlPackage::CLASS_OPERATION_CREATEOWNEDOPERATION_STRING_TYPE:
 		{
 			//Retrieve input parameter 'name'
@@ -1059,35 +1059,35 @@ Any ClassImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_
 			break;
 		}
 		
-		// 3675
+		// 1306968088
 		case umlPackage::CLASS_OPERATION_GETALLOPERATIONS:
 		{
 			result = eAny(this->getAllOperations());
 			break;
 		}
 		
-		// 3673
+		// 448268741
 		case umlPackage::CLASS_OPERATION_GETEXTENSIONS:
 		{
 			result = eAny(this->getExtensions());
 			break;
 		}
 		
-		// 3674
+		// 313726634
 		case umlPackage::CLASS_OPERATION_GETSUPERCLASSES:
 		{
 			result = eAny(this->getSuperClasses());
 			break;
 		}
 		
-		// 3672
+		// 251508775
 		case umlPackage::CLASS_OPERATION_ISMETACLASS:
 		{
 			result = eAny(this->isMetaclass());
 			break;
 		}
 		
-		// 3670
+		// 1167069382
 		case umlPackage::CLASS_OPERATION_PASSIVE_CLASS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

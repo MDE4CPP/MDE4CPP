@@ -301,14 +301,14 @@ Any LiteralNullImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::s
   	switch(operationID)
 	{
 		
-		// 13981
+		// 1995427709
 		case umlPackage::LITERALNULL_OPERATION_ISCOMPUTABLE:
 		{
 			result = eAny(this->isComputable());
 			break;
 		}
 		
-		// 13982
+		// 1222543064
 		case umlPackage::LITERALNULL_OPERATION_ISNULL:
 		{
 			result = eAny(this->isNull());

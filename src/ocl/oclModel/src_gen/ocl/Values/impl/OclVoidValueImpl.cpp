@@ -193,7 +193,7 @@ Any OclVoidValueImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::
   	switch(operationID)
 	{
 		
-		// 6411
+		// 613975732
 		case ValuesPackage::OCLVOIDVALUE_OPERATION_EQUALS_VALUE:
 		{
 			//Retrieve input parameter 'otherValue'
@@ -205,7 +205,7 @@ Any OclVoidValueImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::
 			break;
 		}
 		
-		// 6410
+		// 1594356317
 		case ValuesPackage::OCLVOIDVALUE_OPERATION_TOSTRING:
 		{
 			result = eAny(this->toString());

@@ -97,7 +97,7 @@ namespace fUML::Semantics::Actions
 			virtual void run() = 0; 
 			virtual void terminate() = 0;
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			 
 			virtual bool isWaiting() const = 0;
@@ -105,7 +105,7 @@ namespace fUML::Semantics::Actions
 			virtual void setWaiting (bool _waiting)= 0;
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			
 			virtual std::shared_ptr<fUML::Semantics::Actions::AcceptEventActionEventAccepter> getEventAccepter() const = 0;

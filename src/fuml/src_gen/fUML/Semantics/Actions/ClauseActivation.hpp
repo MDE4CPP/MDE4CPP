@@ -85,11 +85,11 @@ namespace fUML::Semantics::Actions
 			virtual void runTest() = 0; 
 			virtual void selectBody() = 0;
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			
 			virtual std::shared_ptr<uml::Clause> getClause() const = 0;

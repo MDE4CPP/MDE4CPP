@@ -457,7 +457,7 @@ Any TestIdentityActionImpl::eInvoke(int operationID, std::shared_ptr<std::list <
   	switch(operationID)
 	{
 		
-		// 23596
+		// 936405543
 		case umlPackage::TESTIDENTITYACTION_OPERATION_MULTIPLICITY_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -474,7 +474,7 @@ Any TestIdentityActionImpl::eInvoke(int operationID, std::shared_ptr<std::list <
 			break;
 		}
 		
-		// 23597
+		// 1029204157
 		case umlPackage::TESTIDENTITYACTION_OPERATION_NO_TYPE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -491,7 +491,7 @@ Any TestIdentityActionImpl::eInvoke(int operationID, std::shared_ptr<std::list <
 			break;
 		}
 		
-		// 23598
+		// 327867118
 		case umlPackage::TESTIDENTITYACTION_OPERATION_RESULT_IS_BOOLEAN_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

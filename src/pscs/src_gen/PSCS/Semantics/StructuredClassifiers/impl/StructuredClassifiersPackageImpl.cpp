@@ -5,14 +5,14 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
 #include "ecore/EAnnotation.hpp"
+#include "ecore/EReference.hpp"
+#include "ecore/EEnum.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EDataType.hpp"
-#include "ecore/EEnum.hpp"
-#include "ecore/EEnumLiteral.hpp"
 #include "ecore/EGenericType.hpp"
-#include "ecore/EOperation.hpp"
+#include "ecore/EEnumLiteral.hpp"
 #include "ecore/EParameter.hpp"
-#include "ecore/EReference.hpp"
+#include "ecore/EOperation.hpp"
 #include "ecore/EStringToStringMapEntry.hpp"
 
 //metamodel factory
@@ -282,10 +282,6 @@ std::shared_ptr<ecore::EReference> StructuredClassifiersPackageImpl::getCS_Refer
 std::shared_ptr<ecore::EOperation> StructuredClassifiersPackageImpl::getCS_Reference_Operation__copy() const
 {
 	return m_cS_Reference_Operation__copy;
-}
-std::shared_ptr<ecore::EOperation> StructuredClassifiersPackageImpl::getCS_Reference_Operation_copy() const
-{
-	return m_cS_Reference_Operation_copy;
 }
 std::shared_ptr<ecore::EOperation> StructuredClassifiersPackageImpl::getCS_Reference_Operation_dispatchIn_Operation_CS_InteractionPoint() const
 {

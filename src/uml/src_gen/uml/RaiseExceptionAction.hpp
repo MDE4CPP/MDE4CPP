@@ -90,11 +90,11 @@ namespace uml
 			//*********************************
 			
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			/*!
 			An InputPin whose value becomes the exception object.

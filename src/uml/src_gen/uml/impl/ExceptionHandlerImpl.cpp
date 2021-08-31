@@ -415,7 +415,7 @@ Any ExceptionHandlerImpl::eInvoke(int operationID, std::shared_ptr<std::list < s
   	switch(operationID)
 	{
 		
-		// 8752
+		// 2069883868
 		case umlPackage::EXCEPTIONHANDLER_OPERATION_EDGE_SOURCE_TARGET_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -432,7 +432,7 @@ Any ExceptionHandlerImpl::eInvoke(int operationID, std::shared_ptr<std::list < s
 			break;
 		}
 		
-		// 8754
+		// 246495643
 		case umlPackage::EXCEPTIONHANDLER_OPERATION_EXCEPTION_INPUT_TYPE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -449,7 +449,7 @@ Any ExceptionHandlerImpl::eInvoke(int operationID, std::shared_ptr<std::list < s
 			break;
 		}
 		
-		// 8749
+		// 925333255
 		case umlPackage::EXCEPTIONHANDLER_OPERATION_HANDLER_BODY_EDGES_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -466,7 +466,7 @@ Any ExceptionHandlerImpl::eInvoke(int operationID, std::shared_ptr<std::list < s
 			break;
 		}
 		
-		// 8753
+		// 1200757114
 		case umlPackage::EXCEPTIONHANDLER_OPERATION_HANDLER_BODY_OWNER_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -483,7 +483,7 @@ Any ExceptionHandlerImpl::eInvoke(int operationID, std::shared_ptr<std::list < s
 			break;
 		}
 		
-		// 8751
+		// 2043514136
 		case umlPackage::EXCEPTIONHANDLER_OPERATION_ONE_INPUT_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -500,7 +500,7 @@ Any ExceptionHandlerImpl::eInvoke(int operationID, std::shared_ptr<std::list < s
 			break;
 		}
 		
-		// 8750
+		// 1444145046
 		case umlPackage::EXCEPTIONHANDLER_OPERATION_OUTPUT_PINS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

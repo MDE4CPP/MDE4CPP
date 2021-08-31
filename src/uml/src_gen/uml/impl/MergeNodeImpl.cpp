@@ -301,7 +301,7 @@ Any MergeNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sha
   	switch(operationID)
 	{
 		
-		// 14683
+		// 822782941
 		case umlPackage::MERGENODE_OPERATION_EDGES_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -318,7 +318,7 @@ Any MergeNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sha
 			break;
 		}
 		
-		// 14682
+		// 1562579350
 		case umlPackage::MERGENODE_OPERATION_ONE_OUTGOING_EDGE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

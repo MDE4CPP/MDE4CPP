@@ -90,7 +90,7 @@ namespace uml
 			 
 			virtual bool when_non_negative(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			/*!
 			Specifies whether the TimeEvent is specified as an absolute or relative time.
@@ -106,7 +106,7 @@ namespace uml
 			virtual void setIsRelative (bool _isRelative)= 0;
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			/*!
 			Specifies the time of the TimeEvent.

@@ -91,11 +91,11 @@ namespace uml
 			 
 			virtual bool must_be_compatible(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			/*!
 			The ParameterableElement that is the actual parameter for this TemplateParameterSubstitution.

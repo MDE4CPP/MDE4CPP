@@ -362,14 +362,14 @@ Any TemplateableElementImpl::eInvoke(int operationID, std::shared_ptr<std::list 
   	switch(operationID)
 	{
 		
-		// 23447
+		// 175010214
 		case umlPackage::TEMPLATEABLEELEMENT_OPERATION_ISTEMPLATE:
 		{
 			result = eAny(this->isTemplate());
 			break;
 		}
 		
-		// 23448
+		// 546853023
 		case umlPackage::TEMPLATEABLEELEMENT_OPERATION_PARAMETERABLEELEMENTS:
 		{
 			result = eAny(this->parameterableElements());

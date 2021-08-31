@@ -196,14 +196,14 @@ Any CS_RequestPropagationStrategyImpl::eInvoke(int operationID, std::shared_ptr<
   	switch(operationID)
 	{
 		
-		// 2801
+		// 1845969483
 		case StructuredClassifiersPackage::CS_REQUESTPROPAGATIONSTRATEGY_OPERATION_GETNAME:
 		{
 			result = eAny(this->getName());
 			break;
 		}
 		
-		// 2802
+		// 503944288
 		case StructuredClassifiersPackage::CS_REQUESTPROPAGATIONSTRATEGY_OPERATION_SELECT_REFERENCE_SEMANTICVISITOR:
 		{
 			//Retrieve input parameter 'potentialTargets'

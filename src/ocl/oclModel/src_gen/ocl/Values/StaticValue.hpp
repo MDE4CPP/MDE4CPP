@@ -66,11 +66,11 @@ namespace ocl::Values
 			//*********************************
 			
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			
 

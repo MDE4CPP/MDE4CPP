@@ -75,7 +75,7 @@ namespace fUML::Semantics::SimpleClassifiers
 			virtual std::shared_ptr<uml::ValueSpecification> specify() = 0; 
 			virtual std::string toString() = 0;
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			 
 			virtual int getValue() const = 0;
@@ -83,7 +83,7 @@ namespace fUML::Semantics::SimpleClassifiers
 			virtual void setValue (int _value)= 0;
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			
 

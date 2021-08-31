@@ -331,14 +331,14 @@ Any ForkedTokenImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::s
   	switch(operationID)
 	{
 		
-		// 5915
+		// 252058926
 		case ActivitiesPackage::FORKEDTOKEN_OPERATION__COPY:
 		{
 			result = eAny(this->_copy());
 			break;
 		}
 		
-		// 5911
+		// 1288297071
 		case ActivitiesPackage::FORKEDTOKEN_OPERATION_EQUALS_TOKEN:
 		{
 			//Retrieve input parameter 'otherToken'
@@ -350,21 +350,21 @@ Any ForkedTokenImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::s
 			break;
 		}
 		
-		// 5914
+		// 727492760
 		case ActivitiesPackage::FORKEDTOKEN_OPERATION_GETVALUE:
 		{
 			result = eAny(this->getValue());
 			break;
 		}
 		
-		// 5913
+		// 1584869028
 		case ActivitiesPackage::FORKEDTOKEN_OPERATION_ISCONTROL:
 		{
 			result = eAny(this->isControl());
 			break;
 		}
 		
-		// 5912
+		// 1407760219
 		case ActivitiesPackage::FORKEDTOKEN_OPERATION_WITHDRAW:
 		{
 			this->withdraw();

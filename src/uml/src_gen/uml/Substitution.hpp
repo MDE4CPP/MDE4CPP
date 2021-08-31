@@ -96,11 +96,11 @@ namespace uml
 			//*********************************
 			
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			/*!
 			The contract with which the substituting classifier complies.

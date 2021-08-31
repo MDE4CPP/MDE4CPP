@@ -5,15 +5,15 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
 #include "ecore/EAnnotation.hpp"
-#include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
+#include "ecore/ETypeParameter.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EDataType.hpp"
 #include "ecore/EGenericType.hpp"
-#include "ecore/EOperation.hpp"
+#include "ecore/EAttribute.hpp"
 #include "ecore/EParameter.hpp"
-#include "ecore/EReference.hpp"
+#include "ecore/EOperation.hpp"
 #include "ecore/EStringToStringMapEntry.hpp"
-#include "ecore/ETypeParameter.hpp"
 
 // metametamodel factory
 #include "ecore/ecoreFactory.hpp"
@@ -1573,13 +1573,6 @@ void ecorePackageImpl::initializeEObjectContent()
 	m_eObject_Operation_eClass->setUnique(true);
 	m_eObject_Operation_eClass->setOrdered(true);
 	
-	m_eObject_Operation_eContainer->setName("eContainer");
-	m_eObject_Operation_eContainer->setEType(getEObject_Class());
-	m_eObject_Operation_eContainer->setLowerBound(0);
-	m_eObject_Operation_eContainer->setUpperBound(1);
-	m_eObject_Operation_eContainer->setUnique(true);
-	m_eObject_Operation_eContainer->setOrdered(true);
-	
 	m_eObject_Operation_eContainingFeature->setName("eContainingFeature");
 	m_eObject_Operation_eContainingFeature->setEType(getEStructuralFeature_Class());
 	m_eObject_Operation_eContainingFeature->setLowerBound(0);
@@ -1906,13 +1899,6 @@ void ecorePackageImpl::initializeEOperationContent()
 			//undefined otherEnd
 			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
-	
-	m_eOperation_Operation_getOperationID->setName("getOperationID");
-	m_eOperation_Operation_getOperationID->setEType(getEInt_Class());
-	m_eOperation_Operation_getOperationID->setLowerBound(0);
-	m_eOperation_Operation_getOperationID->setUpperBound(1);
-	m_eOperation_Operation_getOperationID->setUnique(true);
-	m_eOperation_Operation_getOperationID->setOrdered(true);
 	
 	m_eOperation_Operation_isOverrideOf_EOperation->setName("isOverrideOf");
 	m_eOperation_Operation_isOverrideOf_EOperation->setEType(getEBoolean_Class());
@@ -2523,13 +2509,6 @@ void ecorePackageImpl::initializeEStructuralFeatureContent()
 	m_eStructuralFeature_Operation_getContainerClass->setUpperBound(1);
 	m_eStructuralFeature_Operation_getContainerClass->setUnique(true);
 	m_eStructuralFeature_Operation_getContainerClass->setOrdered(true);
-	
-	m_eStructuralFeature_Operation_getFeatureID->setName("getFeatureID");
-	m_eStructuralFeature_Operation_getFeatureID->setEType(getEInt_Class());
-	m_eStructuralFeature_Operation_getFeatureID->setLowerBound(0);
-	m_eStructuralFeature_Operation_getFeatureID->setUpperBound(1);
-	m_eStructuralFeature_Operation_getFeatureID->setUnique(true);
-	m_eStructuralFeature_Operation_getFeatureID->setOrdered(true);
 	
 	
 }

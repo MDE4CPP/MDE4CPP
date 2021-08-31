@@ -124,7 +124,7 @@ namespace uml
 			 
 			virtual bool deployment_target(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			/*!
 			The location where an Artifact is deployed onto a Node. This is typically a 'directory' or 'memory address.'
@@ -152,7 +152,7 @@ namespace uml
 			virtual void setExecutionLocation (std::string _executionLocation)= 0;
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			/*!
 			The deployment with which the DeploymentSpecification is associated.

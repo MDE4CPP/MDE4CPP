@@ -145,7 +145,7 @@ namespace uml
 			 
 			virtual bool value_specification_no_side_effects(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			/*!
 			For a multivalued multiplicity, this attribute specifies whether the values in an instantiation of this MultiplicityElement are sequentially ordered.
@@ -197,7 +197,7 @@ namespace uml
 			virtual void setUpper (int _upper)= 0;
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			/*!
 			The specification of the lower bound for this multiplicity.

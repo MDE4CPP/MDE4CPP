@@ -76,11 +76,11 @@ namespace fUML::Semantics::Activities
 			//*********************************
 			
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			
 

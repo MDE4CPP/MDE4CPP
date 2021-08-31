@@ -91,7 +91,7 @@ namespace uml
 			 
 			virtual bool public_or_private(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			/*!
 			Specifies the visibility of the imported PackageableElements within the importingNamespace, i.e., whether imported Elements will in turn be visible to other Namespaces. If the PackageImport is public, the imported Elements will be visible outside the importingNamespace, while, if the PackageImport is private, they will not.
@@ -107,7 +107,7 @@ namespace uml
 			virtual void setVisibility (uml::VisibilityKind _visibility)= 0;
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			/*!
 			Specifies the Package whose members are imported into a Namespace.

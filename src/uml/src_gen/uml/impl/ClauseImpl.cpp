@@ -587,7 +587,7 @@ Any ClauseImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared
   	switch(operationID)
 	{
 		
-		// 3851
+		// 555602658
 		case umlPackage::CLAUSE_OPERATION_BODY_OUTPUT_PINS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -604,7 +604,7 @@ Any ClauseImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared
 			break;
 		}
 		
-		// 3852
+		// 1781490540
 		case umlPackage::CLAUSE_OPERATION_DECIDER_OUTPUT_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -621,7 +621,7 @@ Any ClauseImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared
 			break;
 		}
 		
-		// 3853
+		// 1862078178
 		case umlPackage::CLAUSE_OPERATION_TEST_AND_BODY_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

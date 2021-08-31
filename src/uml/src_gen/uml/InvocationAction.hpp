@@ -91,11 +91,11 @@ namespace uml
 			//*********************************
 			
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			/*!
 			The InputPins that provide the argument values passed in the invocation request.

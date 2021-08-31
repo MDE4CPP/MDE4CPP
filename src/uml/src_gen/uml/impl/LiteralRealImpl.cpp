@@ -326,14 +326,14 @@ Any LiteralRealImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::s
   	switch(operationID)
 	{
 		
-		// 14082
+		// 1259887142
 		case umlPackage::LITERALREAL_OPERATION_ISCOMPUTABLE:
 		{
 			result = eAny(this->isComputable());
 			break;
 		}
 		
-		// 14083
+		// 998704641
 		case umlPackage::LITERALREAL_OPERATION_REALVALUE:
 		{
 			result = eAny(this->realValue());

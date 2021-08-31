@@ -84,11 +84,11 @@ namespace fUML::Semantics::Actions
 			virtual void fire(std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> incomingTokens) = 0; 
 			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > takeOfferedTokens() = 0;
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			
 			virtual std::weak_ptr<fUML::Semantics::Actions::ActionActivation> getActionActivation() const = 0;

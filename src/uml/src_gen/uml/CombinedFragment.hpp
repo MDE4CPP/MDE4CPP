@@ -109,7 +109,7 @@ namespace uml
 			 
 			virtual bool opt_loop_break_neg(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			/*!
 			Specifies the operation which defines the semantics of this combination of InteractionFragments.
@@ -125,7 +125,7 @@ namespace uml
 			virtual void setInteractionOperator (uml::InteractionOperatorKind _interactionOperator)= 0;
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			/*!
 			Specifies the gates that form the interface between this CombinedFragment and its surroundings

@@ -133,7 +133,7 @@ namespace uml
 			 
 			virtual bool result_no_incoming(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			/*!
 			If true, the modeler asserts that the test for at least one Clause of the ConditionalNode will succeed.
@@ -161,7 +161,7 @@ namespace uml
 			virtual void setIsDeterminate (bool _isDeterminate)= 0;
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			/*!
 			The set of Clauses composing the ConditionalNode.

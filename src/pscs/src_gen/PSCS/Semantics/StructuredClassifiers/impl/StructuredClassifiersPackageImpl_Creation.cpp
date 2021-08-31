@@ -8,14 +8,14 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
 #include "ecore/EAnnotation.hpp"
+#include "ecore/EReference.hpp"
+#include "ecore/EEnum.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EDataType.hpp"
-#include "ecore/EEnum.hpp"
-#include "ecore/EEnumLiteral.hpp"
 #include "ecore/EGenericType.hpp"
-#include "ecore/EOperation.hpp"
+#include "ecore/EEnumLiteral.hpp"
 #include "ecore/EParameter.hpp"
-#include "ecore/EReference.hpp"
+#include "ecore/EOperation.hpp"
 #include "ecore/EStringToStringMapEntry.hpp"
 
 //depending model packages
@@ -139,7 +139,6 @@ void StructuredClassifiersPackageImpl::createCS_ReferenceContent(std::shared_ptr
 	
 	m_cS_Reference_Attribute_compositeReferent = factory->createEReference_as_eStructuralFeatures_in_EClass(m_cS_Reference_Class, CS_REFERENCE_ATTRIBUTE_COMPOSITEREFERENT);
 	m_cS_Reference_Operation__copy = factory->createEOperation_as_eOperations_in_EClass(m_cS_Reference_Class, CS_REFERENCE_OPERATION__COPY);
-	m_cS_Reference_Operation_copy = factory->createEOperation_as_eOperations_in_EClass(m_cS_Reference_Class, CS_REFERENCE_OPERATION_COPY);
 	m_cS_Reference_Operation_dispatchIn_Operation_CS_InteractionPoint = factory->createEOperation_as_eOperations_in_EClass(m_cS_Reference_Class, CS_REFERENCE_OPERATION_DISPATCHIN_OPERATION_CS_INTERACTIONPOINT);
 	m_cS_Reference_Operation_dispatchIn_Operation_Port = factory->createEOperation_as_eOperations_in_EClass(m_cS_Reference_Class, CS_REFERENCE_OPERATION_DISPATCHIN_OPERATION_PORT);
 	m_cS_Reference_Operation_dispatchOut_Operation_Port = factory->createEOperation_as_eOperations_in_EClass(m_cS_Reference_Class, CS_REFERENCE_OPERATION_DISPATCHOUT_OPERATION_PORT);

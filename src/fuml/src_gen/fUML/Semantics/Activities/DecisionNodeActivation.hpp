@@ -98,11 +98,11 @@ namespace fUML::Semantics::Activities
 			virtual void terminate() = 0; 
 			virtual bool test(std::shared_ptr<uml::ValueSpecification> gaurd,std::shared_ptr<fUML::Semantics::Values::Value> value) = 0;
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			
 			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> getDecisionInputExecution() const = 0;

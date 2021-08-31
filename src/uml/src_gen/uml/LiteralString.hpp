@@ -95,7 +95,7 @@ namespace uml
 			 
 			virtual std::string stringValue() = 0;
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			/*!
 			The specified String value.
@@ -111,7 +111,7 @@ namespace uml
 			virtual void setValue (std::string _value)= 0;
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			
 

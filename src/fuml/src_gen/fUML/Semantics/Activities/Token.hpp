@@ -82,7 +82,7 @@ namespace fUML::Semantics::Activities
 			virtual std::shared_ptr<fUML::Semantics::Activities::Token> transfer(std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> holder) = 0; 
 			virtual void withdraw() = 0;
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			 
 			virtual bool isWithdrawn() const = 0;
@@ -90,7 +90,7 @@ namespace fUML::Semantics::Activities
 			virtual void setWithdrawn (bool _withdrawn)= 0;
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			
 			virtual std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivation> getHolder() const = 0;

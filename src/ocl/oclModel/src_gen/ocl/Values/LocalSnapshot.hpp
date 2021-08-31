@@ -72,7 +72,7 @@ namespace ocl::Values
 			//*********************************
 			
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			 
 			virtual bool getIsPost() const = 0;
@@ -84,7 +84,7 @@ namespace ocl::Values
 			virtual void setIsPre (bool _isPre)= 0;
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			
 			virtual std::shared_ptr<Bag<ocl::Values::NameValueBinding>> getBindings() const = 0;

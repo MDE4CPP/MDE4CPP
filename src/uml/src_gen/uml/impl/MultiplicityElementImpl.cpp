@@ -449,7 +449,7 @@ Any MultiplicityElementImpl::eInvoke(int operationID, std::shared_ptr<std::list 
   	switch(operationID)
 	{
 		
-		// 15457
+		// 781962328
 		case umlPackage::MULTIPLICITYELEMENT_OPERATION_COMPATIBLEWITH_MULTIPLICITYELEMENT:
 		{
 			//Retrieve input parameter 'other'
@@ -461,7 +461,7 @@ Any MultiplicityElementImpl::eInvoke(int operationID, std::shared_ptr<std::list 
 			break;
 		}
 		
-		// 15458
+		// 731782748
 		case umlPackage::MULTIPLICITYELEMENT_OPERATION_INCLUDESMULTIPLICITY_MULTIPLICITYELEMENT:
 		{
 			//Retrieve input parameter 'M'
@@ -473,7 +473,7 @@ Any MultiplicityElementImpl::eInvoke(int operationID, std::shared_ptr<std::list 
 			break;
 		}
 		
-		// 15459
+		// 1193521774
 		case umlPackage::MULTIPLICITYELEMENT_OPERATION_IS_INTEGER_UNLIMITEDNATURAL:
 		{
 			//Retrieve input parameter 'lowerbound'
@@ -490,21 +490,21 @@ Any MultiplicityElementImpl::eInvoke(int operationID, std::shared_ptr<std::list 
 			break;
 		}
 		
-		// 15460
+		// 77238747
 		case umlPackage::MULTIPLICITYELEMENT_OPERATION_ISMULTIVALUED:
 		{
 			result = eAny(this->isMultivalued());
 			break;
 		}
 		
-		// 15461
+		// 2138592890
 		case umlPackage::MULTIPLICITYELEMENT_OPERATION_LOWERBOUND:
 		{
 			result = eAny(this->lowerBound());
 			break;
 		}
 		
-		// 15452
+		// 1181781721
 		case umlPackage::MULTIPLICITYELEMENT_OPERATION_LOWER_GE_0_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -521,7 +521,7 @@ Any MultiplicityElementImpl::eInvoke(int operationID, std::shared_ptr<std::list 
 			break;
 		}
 		
-		// 15455
+		// 1564505796
 		case umlPackage::MULTIPLICITYELEMENT_OPERATION_LOWER_IS_INTEGER_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -538,14 +538,14 @@ Any MultiplicityElementImpl::eInvoke(int operationID, std::shared_ptr<std::list 
 			break;
 		}
 		
-		// 15462
+		// 1061985247
 		case umlPackage::MULTIPLICITYELEMENT_OPERATION_UPPERBOUND:
 		{
 			result = eAny(this->upperBound());
 			break;
 		}
 		
-		// 15451
+		// 1059806351
 		case umlPackage::MULTIPLICITYELEMENT_OPERATION_UPPER_GE_LOWER_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -562,7 +562,7 @@ Any MultiplicityElementImpl::eInvoke(int operationID, std::shared_ptr<std::list 
 			break;
 		}
 		
-		// 15456
+		// 1135606767
 		case umlPackage::MULTIPLICITYELEMENT_OPERATION_UPPER_IS_UNLIMITEDNATURAL_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -579,7 +579,7 @@ Any MultiplicityElementImpl::eInvoke(int operationID, std::shared_ptr<std::list 
 			break;
 		}
 		
-		// 15454
+		// 686253068
 		case umlPackage::MULTIPLICITYELEMENT_OPERATION_VALUE_SPECIFICATION_CONSTANT_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -596,7 +596,7 @@ Any MultiplicityElementImpl::eInvoke(int operationID, std::shared_ptr<std::list 
 			break;
 		}
 		
-		// 15453
+		// 190489247
 		case umlPackage::MULTIPLICITYELEMENT_OPERATION_VALUE_SPECIFICATION_NO_SIDE_EFFECTS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

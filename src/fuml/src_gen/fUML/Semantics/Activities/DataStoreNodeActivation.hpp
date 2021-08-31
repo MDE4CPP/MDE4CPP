@@ -78,11 +78,11 @@ namespace fUML::Semantics::Activities
 			virtual void addToken(std::shared_ptr<fUML::Semantics::Activities::Token> token) = 0; 
 			virtual int removeToken(std::shared_ptr<fUML::Semantics::Activities::Token> token) = 0;
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			
 

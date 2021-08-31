@@ -354,7 +354,7 @@ Any PinImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_pt
   	switch(operationID)
 	{
 		
-		// 18110
+		// 633209512
 		case umlPackage::PIN_OPERATION_CONTROL_PINS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -371,7 +371,7 @@ Any PinImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_pt
 			break;
 		}
 		
-		// 18111
+		// 2131680405
 		case umlPackage::PIN_OPERATION_NOT_UNIQUE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

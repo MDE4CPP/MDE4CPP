@@ -266,14 +266,14 @@ Any IntegerValueImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::
   	switch(operationID)
 	{
 		
-		// 6417
+		// 409567895
 		case SimpleClassifiersPackage::INTEGERVALUE_OPERATION__COPY:
 		{
 			result = eAny(this->_copy());
 			break;
 		}
 		
-		// 6415
+		// 1332371302
 		case SimpleClassifiersPackage::INTEGERVALUE_OPERATION_EQUALS_VALUE:
 		{
 			//Retrieve input parameter 'otherValue'
@@ -285,14 +285,14 @@ Any IntegerValueImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::
 			break;
 		}
 		
-		// 6414
+		// 1191658488
 		case SimpleClassifiersPackage::INTEGERVALUE_OPERATION_SPECIFY:
 		{
 			result = eAny(this->specify());
 			break;
 		}
 		
-		// 6416
+		// 1852462258
 		case SimpleClassifiersPackage::INTEGERVALUE_OPERATION_TOSTRING:
 		{
 			result = eAny(this->toString());

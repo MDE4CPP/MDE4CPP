@@ -90,7 +90,7 @@ namespace ocl::Expressions
 			//*********************************
 			
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			 
 			virtual ocl::Expressions::CollectionKind getKind() const = 0;
@@ -98,7 +98,7 @@ namespace ocl::Expressions
 			virtual void setKind (ocl::Expressions::CollectionKind _kind)= 0;
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			
 			virtual std::shared_ptr<Bag<ocl::Expressions::CollectionLiteralPart>> getPart() const = 0;

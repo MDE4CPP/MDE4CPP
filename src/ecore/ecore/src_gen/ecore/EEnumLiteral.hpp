@@ -77,7 +77,7 @@ namespace ecore
 			//*********************************
 			
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			 
 			virtual Any getInstance() const = 0;
@@ -93,7 +93,7 @@ namespace ecore
 			virtual void setValue (int _value)= 0;
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			
 			virtual std::weak_ptr<ecore::EEnum> getEEnum() const = 0;

@@ -448,35 +448,35 @@ Any ExtensionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sha
   	switch(operationID)
 	{
 		
-		// 9868
+		// 210211592
 		case umlPackage::EXTENSION_OPERATION_GETMETACLASS:
 		{
 			result = eAny(this->getMetaclass());
 			break;
 		}
 		
-		// 9865
+		// 1488888961
 		case umlPackage::EXTENSION_OPERATION_GETSTEREOTYPE:
 		{
 			result = eAny(this->getStereotype());
 			break;
 		}
 		
-		// 9866
+		// 969898884
 		case umlPackage::EXTENSION_OPERATION_GETSTEREOTYPEEND:
 		{
 			result = eAny(this->getStereotypeEnd());
 			break;
 		}
 		
-		// 9867
+		// 792186175
 		case umlPackage::EXTENSION_OPERATION_ISREQUIRED:
 		{
 			result = eAny(this->isRequired());
 			break;
 		}
 		
-		// 9864
+		// 1026814326
 		case umlPackage::EXTENSION_OPERATION_IS_BINARY_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -493,14 +493,14 @@ Any ExtensionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sha
 			break;
 		}
 		
-		// 9869
+		// 2105308144
 		case umlPackage::EXTENSION_OPERATION_METACLASSEND:
 		{
 			result = eAny(this->metaclassEnd());
 			break;
 		}
 		
-		// 9863
+		// 1195964610
 		case umlPackage::EXTENSION_OPERATION_NON_OWNED_END_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

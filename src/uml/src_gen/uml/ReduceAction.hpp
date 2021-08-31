@@ -114,7 +114,7 @@ namespace uml
 			 
 			virtual bool reducer_inputs_output(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			/*!
 			Indicates whether the order of the input collection should determine the order in which the reducer Behavior is applied to its elements.
@@ -130,7 +130,7 @@ namespace uml
 			virtual void setIsOrdered (bool _isOrdered)= 0;
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			/*!
 			The InputPin that provides the collection to be reduced.

@@ -46,9 +46,9 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
+#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
 #include "uml/umlFactory.hpp"
 
 
@@ -1085,7 +1085,7 @@ Any CS_ObjectImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sha
   	switch(operationID)
 	{
 		
-		// 2260
+		// 675744236
 		case StructuredClassifiersPackage::CS_OBJECT_OPERATION_CHECKALLPARENTS_CLASSIFIER_CLASSIFIER:
 		{
 			//Retrieve input parameter 'type'
@@ -1102,7 +1102,7 @@ Any CS_ObjectImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sha
 			break;
 		}
 		
-		// 2248
+		// 45445330
 		case StructuredClassifiersPackage::CS_OBJECT_OPERATION_CONTAINS_OBJECT:
 		{
 			//Retrieve input parameter 'object'
@@ -1114,7 +1114,7 @@ Any CS_ObjectImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sha
 			break;
 		}
 		
-		// 2249
+		// 1431652639
 		case StructuredClassifiersPackage::CS_OBJECT_OPERATION_DIRECTLYCONTAINS_OBJECT:
 		{
 			//Retrieve input parameter 'object'
@@ -1126,7 +1126,7 @@ Any CS_ObjectImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sha
 			break;
 		}
 		
-		// 2240
+		// 777512545
 		case StructuredClassifiersPackage::CS_OBJECT_OPERATION_DISPATCHIN_OPERATION_CS_INTERACTIONPOINT:
 		{
 			//Retrieve input parameter 'operation'
@@ -1143,7 +1143,7 @@ Any CS_ObjectImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sha
 			break;
 		}
 		
-		// 2258
+		// 1152505531
 		case StructuredClassifiersPackage::CS_OBJECT_OPERATION_DISPATCHIN_OPERATION_PORT:
 		{
 			//Retrieve input parameter 'operation'
@@ -1160,7 +1160,7 @@ Any CS_ObjectImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sha
 			break;
 		}
 		
-		// 2245
+		// 1641876945
 		case StructuredClassifiersPackage::CS_OBJECT_OPERATION_DISPATCHOUT_OPERATION_CS_INTERACTIONPOINT:
 		{
 			//Retrieve input parameter 'operation'
@@ -1177,7 +1177,7 @@ Any CS_ObjectImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sha
 			break;
 		}
 		
-		// 2256
+		// 41668733
 		case StructuredClassifiersPackage::CS_OBJECT_OPERATION_DISPATCHOUT_OPERATION_PORT:
 		{
 			//Retrieve input parameter 'operation'
@@ -1194,14 +1194,14 @@ Any CS_ObjectImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sha
 			break;
 		}
 		
-		// 2250
+		// 650958250
 		case StructuredClassifiersPackage::CS_OBJECT_OPERATION_GETDIRECTCONTAINERS:
 		{
 			result = eAny(this->getDirectContainers());
 			break;
 		}
 		
-		// 2246
+		// 248898525
 		case StructuredClassifiersPackage::CS_OBJECT_OPERATION_GETFEATUREVALUE_STRUCTURALFEATURE:
 		{
 			//Retrieve input parameter 'feature'
@@ -1213,7 +1213,7 @@ Any CS_ObjectImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sha
 			break;
 		}
 		
-		// 2253
+		// 627106013
 		case StructuredClassifiersPackage::CS_OBJECT_OPERATION_GETLINKKIND_CS_LINK_CS_INTERACTIONPOINT:
 		{
 			//Retrieve input parameter 'link'
@@ -1230,7 +1230,7 @@ Any CS_ObjectImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sha
 			break;
 		}
 		
-		// 2254
+		// 1498478914
 		case StructuredClassifiersPackage::CS_OBJECT_OPERATION_GETLINKS_CS_INTERACTIONPOINT:
 		{
 			//Retrieve input parameter 'interactionPoint'
@@ -1242,7 +1242,7 @@ Any CS_ObjectImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sha
 			break;
 		}
 		
-		// 2255
+		// 779492063
 		case StructuredClassifiersPackage::CS_OBJECT_OPERATION_HASVALUEFORAFEATURE_VALUE:
 		{
 			//Retrieve input parameter 'value'
@@ -1254,7 +1254,7 @@ Any CS_ObjectImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sha
 			break;
 		}
 		
-		// 2261
+		// 77763975
 		case StructuredClassifiersPackage::CS_OBJECT_OPERATION_ISDESCENDANT_INTERFACE_INTERFACE:
 		{
 			//Retrieve input parameter 'contract'
@@ -1271,7 +1271,7 @@ Any CS_ObjectImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sha
 			break;
 		}
 		
-		// 2251
+		// 2007176951
 		case StructuredClassifiersPackage::CS_OBJECT_OPERATION_ISOPERATIONPROVIDED_REFERENCE_OPERATION:
 		{
 			//Retrieve input parameter 'reference'
@@ -1288,7 +1288,7 @@ Any CS_ObjectImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sha
 			break;
 		}
 		
-		// 2252
+		// 1047312041
 		case StructuredClassifiersPackage::CS_OBJECT_OPERATION_ISOPERATIONREQUIRED_REFERENCE_OPERATION:
 		{
 			//Retrieve input parameter 'reference'
@@ -1305,7 +1305,7 @@ Any CS_ObjectImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sha
 			break;
 		}
 		
-		// 2262
+		// 730620868
 		case StructuredClassifiersPackage::CS_OBJECT_OPERATION_REALIZESINTERFACE_CLASS_INTERFACE:
 		{
 			//Retrieve input parameter 'type'
@@ -1322,7 +1322,7 @@ Any CS_ObjectImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sha
 			break;
 		}
 		
-		// 2243
+		// 2102014349
 		case StructuredClassifiersPackage::CS_OBJECT_OPERATION_SELECTTARGETSFORDISPATCHING_CS_LINK_EBOOLEAN:
 		{
 			//Retrieve input parameter 'link'
@@ -1354,7 +1354,7 @@ Any CS_ObjectImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sha
 			break;
 		}
 		
-		// 2242
+		// 479350680
 		case StructuredClassifiersPackage::CS_OBJECT_OPERATION_SELECTTARGETSFORSENDING_CS_LINK_EBOOLEAN:
 		{
 			//Retrieve input parameter 'link'
@@ -1381,7 +1381,7 @@ Any CS_ObjectImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sha
 			break;
 		}
 		
-		// 2241
+		// 2006339749
 		case StructuredClassifiersPackage::CS_OBJECT_OPERATION_SENDIN_EVENTOCCURRENCE_CS_INTERACTIONPOINT:
 		{
 			//Retrieve input parameter 'eventOccurrence'
@@ -1398,7 +1398,7 @@ Any CS_ObjectImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sha
 			break;
 		}
 		
-		// 2259
+		// 1098259212
 		case StructuredClassifiersPackage::CS_OBJECT_OPERATION_SENDIN_EVENTOCCURRENCE_PORT:
 		{
 			//Retrieve input parameter 'eventOccurrence'
@@ -1415,7 +1415,7 @@ Any CS_ObjectImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sha
 			break;
 		}
 		
-		// 2244
+		// 1770140679
 		case StructuredClassifiersPackage::CS_OBJECT_OPERATION_SENDOUT_EVENTOCCURRENCE_CS_INTERACTIONPOINT:
 		{
 			//Retrieve input parameter 'eventOccurrence'
@@ -1432,7 +1432,7 @@ Any CS_ObjectImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sha
 			break;
 		}
 		
-		// 2257
+		// 886512452
 		case StructuredClassifiersPackage::CS_OBJECT_OPERATION_SENDOUT_EVENTOCCURRENCE_PORT:
 		{
 			//Retrieve input parameter 'eventOccurrence'
@@ -1449,7 +1449,7 @@ Any CS_ObjectImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sha
 			break;
 		}
 		
-		// 2247
+		// 225294564
 		case StructuredClassifiersPackage::CS_OBJECT_OPERATION_SETFEATUREVALUE_STRUCTURALFEATURE_EINT:
 		{
 			//Retrieve input parameter 'feature'

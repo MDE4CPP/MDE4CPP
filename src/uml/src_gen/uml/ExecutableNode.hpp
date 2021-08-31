@@ -87,11 +87,11 @@ namespace uml
 			//*********************************
 			
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			/*!
 			A set of ExceptionHandlers that are examined if an exception propagates out of the ExceptionNode.

@@ -15,14 +15,14 @@
 namespace ecore 
 {
 	class EAnnotation;
+	class EReference;
+	class EEnum;
 	class EClass;
 	class EDataType;
-	class EEnum;
-	class EEnumLiteral;
 	class EGenericType;
-	class EOperation;
+	class EEnumLiteral;
 	class EParameter;
-	class EReference;
+	class EOperation;
 	class EStringToStringMapEntry;
 }
 
@@ -237,12 +237,11 @@ namespace PSCS::Semantics::StructuredClassifiers
 			//Class and Feature IDs 
 			static const long long CS_REFERENCE_CLASS = 1875601966;
 			static const unsigned int CS_REFERENCE_CLASS_FEATURE_COUNT = 2;
-			static const unsigned int CS_REFERENCE_CLASS_OPERATION_COUNT = 44;
+			static const unsigned int CS_REFERENCE_CLASS_OPERATION_COUNT = 43;
 			
 			static const long long CS_REFERENCE_ATTRIBUTE_COMPOSITEREFERENT = 1632489384;
 			
 			static const int CS_REFERENCE_OPERATION__COPY = 1526428275;
-			static const int CS_REFERENCE_OPERATION_COPY = 1308198601;
 			static const int CS_REFERENCE_OPERATION_DISPATCHIN_OPERATION_CS_INTERACTIONPOINT = 1274350516;
 			static const int CS_REFERENCE_OPERATION_DISPATCHIN_OPERATION_PORT = 972756179;
 			static const int CS_REFERENCE_OPERATION_DISPATCHOUT_OPERATION_PORT = 638435803;
@@ -259,7 +258,6 @@ namespace PSCS::Semantics::StructuredClassifiers
 			virtual std::shared_ptr<ecore::EReference> getCS_Reference_Attribute_compositeReferent() const = 0;
 			
 			virtual std::shared_ptr<ecore::EOperation> getCS_Reference_Operation__copy() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getCS_Reference_Operation_copy() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getCS_Reference_Operation_dispatchIn_Operation_CS_InteractionPoint() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getCS_Reference_Operation_dispatchIn_Operation_Port() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getCS_Reference_Operation_dispatchOut_Operation_Port() const = 0;

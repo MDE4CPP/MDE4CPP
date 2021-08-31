@@ -114,7 +114,7 @@ namespace uml
 			 
 			virtual std::shared_ptr<uml::Behavior> containingBehavior() = 0;
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			/*!
 			If true, the Action can begin a new, concurrent execution, even if there is already another execution of the Action ongoing. If false, the Action cannot begin a new execution until any previous execution has completed.
@@ -130,7 +130,7 @@ namespace uml
 			virtual void setIsLocallyReentrant (bool _isLocallyReentrant)= 0;
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			/*!
 			The context Classifier of the Behavior that contains this Action, or the Behavior itself if it has no context.

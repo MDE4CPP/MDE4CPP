@@ -133,7 +133,7 @@ namespace uml
 			 
 			virtual bool specialized_end_types(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			/*!
 			Specifies whether the Association is derived from other model elements such as other Associations.
@@ -149,7 +149,7 @@ namespace uml
 			virtual void setIsDerived (bool _isDerived)= 0;
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			/*!
 			The Classifiers that are used as types of the ends of the Association.

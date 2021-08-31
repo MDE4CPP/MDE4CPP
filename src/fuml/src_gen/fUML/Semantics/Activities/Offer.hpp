@@ -76,11 +76,11 @@ namespace fUML::Semantics::Activities
 			virtual void removeWithdrawnTokens() = 0; 
 			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > retrieveOfferedTokens() = 0;
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			
 			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> getOfferedTokens() const = 0;

@@ -33,8 +33,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
+#include "fUML/Semantics/Loci/LociFactory.hpp"
 
 
 #include "fUML/Semantics/SimpleClassifiers/CompoundValue.hpp"
@@ -242,14 +242,14 @@ Any ExtensionalValueImpl::eInvoke(int operationID, std::shared_ptr<std::list < s
   	switch(operationID)
 	{
 		
-		// 5228
+		// 2102774946
 		case StructuredClassifiersPackage::EXTENSIONALVALUE_OPERATION__COPY:
 		{
 			result = eAny(this->_copy());
 			break;
 		}
 		
-		// 5227
+		// 1826522411
 		case StructuredClassifiersPackage::EXTENSIONALVALUE_OPERATION_DESTROY:
 		{
 			this->destroy();

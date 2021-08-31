@@ -483,42 +483,42 @@ Any StructuredActivityNodeActivationImpl::eInvoke(int operationID, std::shared_p
   	switch(operationID)
 	{
 		
-		// 11271
+		// 1463365234
 		case ActionsPackage::STRUCTUREDACTIVITYNODEACTIVATION_OPERATION_COMPLETEACTION:
 		{
 			result = eAny(this->completeAction());
 			break;
 		}
 		
-		// 11267
+		// 1744916571
 		case ActionsPackage::STRUCTUREDACTIVITYNODEACTIVATION_OPERATION_CREATEEDGEINSTANCES:
 		{
 			this->createEdgeInstances();
 			break;
 		}
 		
-		// 11266
+		// 926749067
 		case ActionsPackage::STRUCTUREDACTIVITYNODEACTIVATION_OPERATION_CREATENODEACTIVATIONS:
 		{
 			this->createNodeActivations();
 			break;
 		}
 		
-		// 11263
+		// 1390767454
 		case ActionsPackage::STRUCTUREDACTIVITYNODEACTIVATION_OPERATION_DOACTION:
 		{
 			this->doAction();
 			break;
 		}
 		
-		// 11259
+		// 1423246036
 		case ActionsPackage::STRUCTUREDACTIVITYNODEACTIVATION_OPERATION_DOSTRUCTUREDACTIVITY:
 		{
 			this->doStructuredActivity();
 			break;
 		}
 		
-		// 11265
+		// 1844151899
 		case ActionsPackage::STRUCTUREDACTIVITYNODEACTIVATION_OPERATION_GETNODEACTIVATION_ACTIVITYNODE:
 		{
 			//Retrieve input parameter 'node'
@@ -530,7 +530,7 @@ Any StructuredActivityNodeActivationImpl::eInvoke(int operationID, std::shared_p
 			break;
 		}
 		
-		// 11261
+		// 446682606
 		case ActionsPackage::STRUCTUREDACTIVITYNODEACTIVATION_OPERATION_GETPINVALUES_OUTPUTPIN:
 		{
 			//Retrieve input parameter 'pin'
@@ -542,7 +542,7 @@ Any StructuredActivityNodeActivationImpl::eInvoke(int operationID, std::shared_p
 			break;
 		}
 		
-		// 11269
+		// 1962224717
 		case ActionsPackage::STRUCTUREDACTIVITYNODEACTIVATION_OPERATION_ISSOURCEFOR_ACTIVITYEDGEINSTANCE:
 		{
 			//Retrieve input parameter 'edgeInstance'
@@ -554,14 +554,14 @@ Any StructuredActivityNodeActivationImpl::eInvoke(int operationID, std::shared_p
 			break;
 		}
 		
-		// 11270
+		// 1041207864
 		case ActionsPackage::STRUCTUREDACTIVITYNODEACTIVATION_OPERATION_ISSUSPENDED:
 		{
 			result = eAny(this->isSuspended());
 			break;
 		}
 		
-		// 11260
+		// 888818214
 		case ActionsPackage::STRUCTUREDACTIVITYNODEACTIVATION_OPERATION_MAKEACTIVITYNODELIST_EXECUTABLENODE:
 		{
 			//Retrieve input parameter 'nodes'
@@ -573,7 +573,7 @@ Any StructuredActivityNodeActivationImpl::eInvoke(int operationID, std::shared_p
 			break;
 		}
 		
-		// 11262
+		// 843457855
 		case ActionsPackage::STRUCTUREDACTIVITYNODEACTIVATION_OPERATION_PUTPINVALUES_OUTPUTPIN_VALUE:
 		{
 			//Retrieve input parameter 'pin'
@@ -590,21 +590,21 @@ Any StructuredActivityNodeActivationImpl::eInvoke(int operationID, std::shared_p
 			break;
 		}
 		
-		// 11272
+		// 86337545
 		case ActionsPackage::STRUCTUREDACTIVITYNODEACTIVATION_OPERATION_RESUME:
 		{
 			this->resume();
 			break;
 		}
 		
-		// 11264
+		// 333463071
 		case ActionsPackage::STRUCTUREDACTIVITYNODEACTIVATION_OPERATION_TERMINATE:
 		{
 			this->terminate();
 			break;
 		}
 		
-		// 11268
+		// 354863338
 		case ActionsPackage::STRUCTUREDACTIVITYNODEACTIVATION_OPERATION_TERMINATEALL:
 		{
 			this->terminateAll();

@@ -54,8 +54,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "uml/umlFactory.hpp"
+#include "fUML/Semantics/Loci/LociFactory.hpp"
 
 
 #include "fUML/Semantics/Values/Evaluation.hpp"
@@ -287,7 +287,7 @@ Any InstanceValueEvaluationImpl::eInvoke(int operationID, std::shared_ptr<std::l
   	switch(operationID)
 	{
 		
-		// 6305
+		// 675295782
 		case ClassificationPackage::INSTANCEVALUEEVALUATION_OPERATION_EVALUATE:
 		{
 			result = eAny(this->evaluate());

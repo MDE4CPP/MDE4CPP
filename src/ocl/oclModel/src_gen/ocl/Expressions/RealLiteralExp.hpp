@@ -87,7 +87,7 @@ namespace ocl::Expressions
 			//*********************************
 			
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			 
 			virtual int getRealSymbol() const = 0;
@@ -95,7 +95,7 @@ namespace ocl::Expressions
 			virtual void setRealSymbol (int _realSymbol)= 0;
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			
 

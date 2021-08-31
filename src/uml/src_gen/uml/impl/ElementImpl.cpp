@@ -634,7 +634,7 @@ Any ElementImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::share
   	switch(operationID)
 	{
 		
-		// 8109
+		// 981935188
 		case umlPackage::ELEMENT_OPERATION_ADDKEYWORD_STRING:
 		{
 			//Retrieve input parameter 'keyword'
@@ -646,14 +646,14 @@ Any ElementImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::share
 			break;
 		}
 		
-		// 8141
+		// 455218141
 		case umlPackage::ELEMENT_OPERATION_ALLOWNEDELEMENTS:
 		{
 			result = eAny(this->allOwnedElements());
 			break;
 		}
 		
-		// 8110
+		// 299285478
 		case umlPackage::ELEMENT_OPERATION_APPLYSTEREOTYPE_STEREOTYPE:
 		{
 			//Retrieve input parameter 'stereotype'
@@ -665,14 +665,14 @@ Any ElementImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::share
 			break;
 		}
 		
-		// 8144
+		// 1459493673
 		case umlPackage::ELEMENT_OPERATION_CONTAINER:
 		{
 			result = eAny(this->container());
 			break;
 		}
 		
-		// 8111
+		// 1457675251
 		case umlPackage::ELEMENT_OPERATION_CREATEEANNOTATION_STRING:
 		{
 			//Retrieve input parameter 'source'
@@ -684,14 +684,14 @@ Any ElementImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::share
 			break;
 		}
 		
-		// 8112
+		// 93487040
 		case umlPackage::ELEMENT_OPERATION_DESTROY:
 		{
 			this->destroy();
 			break;
 		}
 		
-		// 8114
+		// 651793437
 		case umlPackage::ELEMENT_OPERATION_GETAPPLICABLESTEREOTYPE_STRING:
 		{
 			//Retrieve input parameter 'qualifiedName'
@@ -703,14 +703,14 @@ Any ElementImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::share
 			break;
 		}
 		
-		// 8115
+		// 1011446320
 		case umlPackage::ELEMENT_OPERATION_GETAPPLICABLESTEREOTYPES:
 		{
 			result = eAny(this->getApplicableStereotypes());
 			break;
 		}
 		
-		// 8116
+		// 1571810387
 		case umlPackage::ELEMENT_OPERATION_GETAPPLIEDSTEREOTYPE_STRING:
 		{
 			//Retrieve input parameter 'qualifiedName'
@@ -722,14 +722,14 @@ Any ElementImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::share
 			break;
 		}
 		
-		// 8117
+		// 155736957
 		case umlPackage::ELEMENT_OPERATION_GETAPPLIEDSTEREOTYPES:
 		{
 			result = eAny(this->getAppliedStereotypes());
 			break;
 		}
 		
-		// 8118
+		// 149940175
 		case umlPackage::ELEMENT_OPERATION_GETAPPLIEDSUBSTEREOTYPE_STEREOTYPE_STRING:
 		{
 			//Retrieve input parameter 'stereotype'
@@ -746,7 +746,7 @@ Any ElementImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::share
 			break;
 		}
 		
-		// 8119
+		// 1130738889
 		case umlPackage::ELEMENT_OPERATION_GETAPPLIEDSUBSTEREOTYPES_STEREOTYPE:
 		{
 			//Retrieve input parameter 'stereotype'
@@ -758,42 +758,42 @@ Any ElementImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::share
 			break;
 		}
 		
-		// 8113
+		// 2138570251
 		case umlPackage::ELEMENT_OPERATION_GETKEYWORDS:
 		{
 			result = eAny(this->getKeywords());
 			break;
 		}
 		
-		// 8143
+		// 1945395495
 		case umlPackage::ELEMENT_OPERATION_GETMETACLASS:
 		{
 			result = eAny(this->getMetaClass());
 			break;
 		}
 		
-		// 8120
+		// 2009272758
 		case umlPackage::ELEMENT_OPERATION_GETMODEL:
 		{
 			result = eAny(this->getModel());
 			break;
 		}
 		
-		// 8121
+		// 1502131220
 		case umlPackage::ELEMENT_OPERATION_GETNEARESTPACKAGE:
 		{
 			result = eAny(this->getNearestPackage());
 			break;
 		}
 		
-		// 8122
+		// 963130115
 		case umlPackage::ELEMENT_OPERATION_GETRELATIONSHIPS:
 		{
 			result = eAny(this->getRelationships());
 			break;
 		}
 		
-		// 8123
+		// 971339746
 		case umlPackage::ELEMENT_OPERATION_GETRELATIONSHIPS_ECLASS:
 		{
 			//Retrieve input parameter 'eClass'
@@ -805,7 +805,7 @@ Any ElementImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::share
 			break;
 		}
 		
-		// 8124
+		// 1323078876
 		case umlPackage::ELEMENT_OPERATION_GETREQUIREDSTEREOTYPE_STRING:
 		{
 			//Retrieve input parameter 'qualifiedName'
@@ -817,21 +817,21 @@ Any ElementImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::share
 			break;
 		}
 		
-		// 8125
+		// 122940153
 		case umlPackage::ELEMENT_OPERATION_GETREQUIREDSTEREOTYPES:
 		{
 			result = eAny(this->getRequiredStereotypes());
 			break;
 		}
 		
-		// 8126
+		// 956933371
 		case umlPackage::ELEMENT_OPERATION_GETSOURCEDIRECTEDRELATIONSHIPS:
 		{
 			result = eAny(this->getSourceDirectedRelationships());
 			break;
 		}
 		
-		// 8127
+		// 1281728223
 		case umlPackage::ELEMENT_OPERATION_GETSOURCEDIRECTEDRELATIONSHIPS_ECLASS:
 		{
 			//Retrieve input parameter 'eClass'
@@ -843,7 +843,7 @@ Any ElementImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::share
 			break;
 		}
 		
-		// 8128
+		// 500999637
 		case umlPackage::ELEMENT_OPERATION_GETSTEREOTYPEAPPLICATION_STEREOTYPE:
 		{
 			//Retrieve input parameter 'stereotype'
@@ -855,21 +855,21 @@ Any ElementImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::share
 			break;
 		}
 		
-		// 8129
+		// 1417613258
 		case umlPackage::ELEMENT_OPERATION_GETSTEREOTYPEAPPLICATIONS:
 		{
 			result = eAny(this->getStereotypeApplications());
 			break;
 		}
 		
-		// 8130
+		// 1252290152
 		case umlPackage::ELEMENT_OPERATION_GETTARGETDIRECTEDRELATIONSHIPS:
 		{
 			result = eAny(this->getTargetDirectedRelationships());
 			break;
 		}
 		
-		// 8131
+		// 1577085004
 		case umlPackage::ELEMENT_OPERATION_GETTARGETDIRECTEDRELATIONSHIPS_ECLASS:
 		{
 			//Retrieve input parameter 'eClass'
@@ -881,7 +881,7 @@ Any ElementImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::share
 			break;
 		}
 		
-		// 8132
+		// 665075189
 		case umlPackage::ELEMENT_OPERATION_GETVALUE_STEREOTYPE_STRING:
 		{
 			//Retrieve input parameter 'stereotype'
@@ -898,7 +898,7 @@ Any ElementImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::share
 			break;
 		}
 		
-		// 8133
+		// 1540083846
 		case umlPackage::ELEMENT_OPERATION_HASKEYWORD_STRING:
 		{
 			//Retrieve input parameter 'keyword'
@@ -910,7 +910,7 @@ Any ElementImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::share
 			break;
 		}
 		
-		// 8134
+		// 1210252195
 		case umlPackage::ELEMENT_OPERATION_HASVALUE_STEREOTYPE_STRING:
 		{
 			//Retrieve input parameter 'stereotype'
@@ -927,7 +927,7 @@ Any ElementImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::share
 			break;
 		}
 		
-		// 8107
+		// 1090226003
 		case umlPackage::ELEMENT_OPERATION_HAS_OWNER_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -944,7 +944,7 @@ Any ElementImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::share
 			break;
 		}
 		
-		// 8135
+		// 1933133241
 		case umlPackage::ELEMENT_OPERATION_ISSTEREOTYPEAPPLICABLE_STEREOTYPE:
 		{
 			//Retrieve input parameter 'stereotype'
@@ -956,7 +956,7 @@ Any ElementImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::share
 			break;
 		}
 		
-		// 8136
+		// 1805585657
 		case umlPackage::ELEMENT_OPERATION_ISSTEREOTYPEAPPLIED_STEREOTYPE:
 		{
 			//Retrieve input parameter 'stereotype'
@@ -968,7 +968,7 @@ Any ElementImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::share
 			break;
 		}
 		
-		// 8137
+		// 1271345105
 		case umlPackage::ELEMENT_OPERATION_ISSTEREOTYPEREQUIRED_STEREOTYPE:
 		{
 			//Retrieve input parameter 'stereotype'
@@ -980,14 +980,14 @@ Any ElementImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::share
 			break;
 		}
 		
-		// 8142
+		// 1357821333
 		case umlPackage::ELEMENT_OPERATION_MUSTBEOWNED:
 		{
 			result = eAny(this->mustBeOwned());
 			break;
 		}
 		
-		// 8108
+		// 498681711
 		case umlPackage::ELEMENT_OPERATION_NOT_OWN_SELF_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -1004,7 +1004,7 @@ Any ElementImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::share
 			break;
 		}
 		
-		// 8138
+		// 1485269804
 		case umlPackage::ELEMENT_OPERATION_REMOVEKEYWORD_STRING:
 		{
 			//Retrieve input parameter 'keyword'
@@ -1016,7 +1016,7 @@ Any ElementImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::share
 			break;
 		}
 		
-		// 8139
+		// 1509057859
 		case umlPackage::ELEMENT_OPERATION_SETVALUE_STEREOTYPE_EJAVAOBJECT:
 		{
 			//Retrieve input parameter 'stereotype'
@@ -1038,7 +1038,7 @@ Any ElementImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::share
 			break;
 		}
 		
-		// 8140
+		// 206371192
 		case umlPackage::ELEMENT_OPERATION_UNAPPLYSTEREOTYPE_STEREOTYPE:
 		{
 			//Retrieve input parameter 'stereotype'

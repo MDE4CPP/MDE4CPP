@@ -5,12 +5,12 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
 #include "ecore/EAnnotation.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EDataType.hpp"
 #include "ecore/EGenericType.hpp"
-#include "ecore/EOperation.hpp"
 #include "ecore/EParameter.hpp"
-#include "ecore/EReference.hpp"
+#include "ecore/EOperation.hpp"
 #include "ecore/EStringToStringMapEntry.hpp"
 
 //metamodel factory
@@ -131,10 +131,6 @@ std::shared_ptr<ecore::EOperation> LociPackageImpl::getExecutionFactory_Operatio
 std::shared_ptr<ecore::EOperation> LociPackageImpl::getExecutionFactory_Operation_getStrategyIndex_EString() const
 {
 	return m_executionFactory_Operation_getStrategyIndex_EString;
-}
-std::shared_ptr<ecore::EOperation> LociPackageImpl::getExecutionFactory_Operation_instantiateOpaqueBehaviorExecution_OpaqueBehavior() const
-{
-	return m_executionFactory_Operation_instantiateOpaqueBehaviorExecution_OpaqueBehavior;
 }
 std::shared_ptr<ecore::EOperation> LociPackageImpl::getExecutionFactory_Operation_instantiateOpaqueBehaviorExecution_Behavior() const
 {

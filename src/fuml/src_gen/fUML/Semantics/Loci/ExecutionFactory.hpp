@@ -106,11 +106,11 @@ namespace fUML::Semantics::Loci
 			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::OpaqueBehaviorExecution> instantiateOpaqueBehaviorExecution(std::shared_ptr<uml::Behavior> behavior) = 0; 
 			virtual std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor> instantiateVisitor(std::shared_ptr<uml::Element> element) = 0;
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			
 			virtual std::shared_ptr<Bag<uml::PrimitiveType>> getBuiltInTypes() const = 0;

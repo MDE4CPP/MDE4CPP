@@ -106,11 +106,11 @@ namespace uml
 			 
 			virtual bool source_and_target(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			/*!
 			The Activity containing the ActivityEdge, if it is directly owned by an Activity.

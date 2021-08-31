@@ -104,11 +104,11 @@ namespace fUML::Semantics::Actions
 			virtual void terminate() = 0; 
 			virtual void terminateAll() = 0;
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			
 			virtual std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> getActivationGroup() const = 0;

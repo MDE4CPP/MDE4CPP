@@ -75,11 +75,11 @@ namespace fUML::Semantics::SimpleClassifiers
 			 
 			virtual std::shared_ptr<fUML::Semantics::Values::Value> _copy() = 0;
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			
 			virtual std::shared_ptr<uml::Signal> getType() const = 0;

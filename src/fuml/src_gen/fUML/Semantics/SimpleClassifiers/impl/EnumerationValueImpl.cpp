@@ -316,14 +316,14 @@ Any EnumerationValueImpl::eInvoke(int operationID, std::shared_ptr<std::list < s
   	switch(operationID)
 	{
 		
-		// 4117
+		// 2039932483
 		case SimpleClassifiersPackage::ENUMERATIONVALUE_OPERATION__COPY:
 		{
 			result = eAny(this->_copy());
 			break;
 		}
 		
-		// 4113
+		// 1509384347
 		case SimpleClassifiersPackage::ENUMERATIONVALUE_OPERATION_EQUALS_VALUE:
 		{
 			//Retrieve input parameter 'otherValue'
@@ -335,28 +335,28 @@ Any EnumerationValueImpl::eInvoke(int operationID, std::shared_ptr<std::list < s
 			break;
 		}
 		
-		// 4116
+		// 850869043
 		case SimpleClassifiersPackage::ENUMERATIONVALUE_OPERATION_GETTYPES:
 		{
 			result = eAny(this->getTypes());
 			break;
 		}
 		
-		// 4114
+		// 873040755
 		case SimpleClassifiersPackage::ENUMERATIONVALUE_OPERATION_NEW_:
 		{
 			result = eAny(this->new_());
 			break;
 		}
 		
-		// 4112
+		// 1719232753
 		case SimpleClassifiersPackage::ENUMERATIONVALUE_OPERATION_SPECIFY:
 		{
 			result = eAny(this->specify());
 			break;
 		}
 		
-		// 4115
+		// 1081001181
 		case SimpleClassifiersPackage::ENUMERATIONVALUE_OPERATION_TOSTRING:
 		{
 			result = eAny(this->toString());

@@ -182,7 +182,7 @@ namespace uml
 			 
 			virtual bool signature_refer_to(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			/*!
 			The derived kind of the Message (complete, lost, found, or unknown).
@@ -205,7 +205,7 @@ namespace uml
 			virtual void setMessageSort (uml::MessageSort _messageSort)= 0;
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			/*!
 			The arguments of the Message.

@@ -78,11 +78,11 @@ namespace ocl::Evaluations
 			//*********************************
 			
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			
 			virtual std::shared_ptr<fUML::Semantics::Values::Value> getElement() const = 0;

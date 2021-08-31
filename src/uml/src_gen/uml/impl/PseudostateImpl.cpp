@@ -410,7 +410,7 @@ Any PseudostateImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::s
   	switch(operationID)
 	{
 		
-		// 18977
+		// 1495555718
 		case umlPackage::PSEUDOSTATE_OPERATION_CHOICE_VERTEX_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -427,7 +427,7 @@ Any PseudostateImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::s
 			break;
 		}
 		
-		// 18983
+		// 80852483
 		case umlPackage::PSEUDOSTATE_OPERATION_FORK_VERTEX_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -444,7 +444,7 @@ Any PseudostateImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::s
 			break;
 		}
 		
-		// 18981
+		// 399889455
 		case umlPackage::PSEUDOSTATE_OPERATION_HISTORY_VERTICES_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -461,7 +461,7 @@ Any PseudostateImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::s
 			break;
 		}
 		
-		// 18982
+		// 542250645
 		case umlPackage::PSEUDOSTATE_OPERATION_INITIAL_VERTEX_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -478,7 +478,7 @@ Any PseudostateImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::s
 			break;
 		}
 		
-		// 18979
+		// 1204202765
 		case umlPackage::PSEUDOSTATE_OPERATION_JOIN_VERTEX_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -495,7 +495,7 @@ Any PseudostateImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::s
 			break;
 		}
 		
-		// 18980
+		// 2121667598
 		case umlPackage::PSEUDOSTATE_OPERATION_JUNCTION_VERTEX_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -512,7 +512,7 @@ Any PseudostateImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::s
 			break;
 		}
 		
-		// 18978
+		// 754555881
 		case umlPackage::PSEUDOSTATE_OPERATION_OUTGOING_FROM_INITIAL_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -529,7 +529,7 @@ Any PseudostateImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::s
 			break;
 		}
 		
-		// 18984
+		// 1123445499
 		case umlPackage::PSEUDOSTATE_OPERATION_TRANSITIONS_INCOMING_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -546,7 +546,7 @@ Any PseudostateImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::s
 			break;
 		}
 		
-		// 18976
+		// 367366800
 		case umlPackage::PSEUDOSTATE_OPERATION_TRANSITIONS_OUTGOING_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

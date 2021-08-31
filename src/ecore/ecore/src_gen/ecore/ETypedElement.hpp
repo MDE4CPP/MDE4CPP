@@ -72,7 +72,7 @@ namespace ecore
 			//*********************************
 			
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			 
 			virtual int getLowerBound() const = 0;
@@ -99,7 +99,7 @@ namespace ecore
 			virtual void setUpperBound (int _upperBound)= 0;
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			
 			virtual std::shared_ptr<ecore::EGenericType> getEGenericType() const = 0;

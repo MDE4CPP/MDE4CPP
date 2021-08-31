@@ -105,7 +105,7 @@ namespace uml
 			 
 			virtual bool not_unique(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			/*!
 			Indicates whether the Pin provides data to the Action or just controls how the Action executes.
@@ -121,7 +121,7 @@ namespace uml
 			virtual void setIsControl (bool _isControl)= 0;
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			
 

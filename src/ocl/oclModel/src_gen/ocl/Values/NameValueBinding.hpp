@@ -70,7 +70,7 @@ namespace ocl::Values
 			//*********************************
 			
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			 
 			virtual std::string getName() const = 0;
@@ -78,7 +78,7 @@ namespace ocl::Values
 			virtual void setName (std::string _name)= 0;
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			
 			virtual std::shared_ptr<fUML::Semantics::Values::Value> getValue() const = 0;

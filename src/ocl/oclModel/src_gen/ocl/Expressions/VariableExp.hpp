@@ -87,11 +87,11 @@ namespace ocl::Expressions
 			//*********************************
 			
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			
 			virtual std::shared_ptr<ocl::Expressions::Variable> getReferredVariable() const = 0;

@@ -84,11 +84,11 @@ namespace fUML::Semantics::CommonBehavior
 			virtual bool matchAny(std::shared_ptr<Bag<uml::Trigger>> triggers) = 0; 
 			virtual void sendTo(std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> target) = 0;
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			
 			virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> getTarget() const = 0;

@@ -376,7 +376,7 @@ Any ExtensionEndImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::
   	switch(operationID)
 	{
 		
-		// 9948
+		// 1897744733
 		case umlPackage::EXTENSIONEND_OPERATION_AGGREGATION_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -393,7 +393,7 @@ Any ExtensionEndImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::
 			break;
 		}
 		
-		// 9947
+		// 1281334886
 		case umlPackage::EXTENSIONEND_OPERATION_MULTIPLICITY_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

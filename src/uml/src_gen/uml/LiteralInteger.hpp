@@ -95,7 +95,7 @@ namespace uml
 			 
 			virtual bool isComputable() = 0;
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			/*!
 			The specified Integer value.
@@ -111,7 +111,7 @@ namespace uml
 			virtual void setValue (int _value)= 0;
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			
 

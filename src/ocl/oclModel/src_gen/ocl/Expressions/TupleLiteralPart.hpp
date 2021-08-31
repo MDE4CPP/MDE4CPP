@@ -73,11 +73,11 @@ namespace ocl::Expressions
 			//*********************************
 			
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			
 			virtual std::shared_ptr<ecore::EAttribute> getAttribute() const = 0;

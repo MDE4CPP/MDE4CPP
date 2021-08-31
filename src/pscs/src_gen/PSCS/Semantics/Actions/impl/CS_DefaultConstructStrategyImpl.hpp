@@ -83,11 +83,8 @@ namespace PSCS::Semantics::Actions
 			//*********************************
 			// Union Getter
 			//*********************************
-			 
-			 
-			//*********************************
-			// Structural Feature Getter/Setter
-			//*********************************
+			
+			
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const ; 
 			
@@ -103,6 +100,9 @@ namespace PSCS::Semantics::Actions
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			
 
+			//*********************************
+			// Structural Feature Getter/Setter
+			//*********************************
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;

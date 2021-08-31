@@ -448,7 +448,7 @@ Any ObjectFlowImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sh
   	switch(operationID)
 	{
 		
-		// 15992
+		// 108756439
 		case umlPackage::OBJECTFLOW_OPERATION_COMPATIBLE_TYPES_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -465,7 +465,7 @@ Any ObjectFlowImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sh
 			break;
 		}
 		
-		// 15988
+		// 500085511
 		case umlPackage::OBJECTFLOW_OPERATION_INPUT_AND_OUTPUT_PARAMETER_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -482,7 +482,7 @@ Any ObjectFlowImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sh
 			break;
 		}
 		
-		// 15995
+		// 1659419022
 		case umlPackage::OBJECTFLOW_OPERATION_IS_MULTICAST_OR_IS_MULTIRECEIVE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -499,7 +499,7 @@ Any ObjectFlowImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sh
 			break;
 		}
 		
-		// 15989
+		// 1274842614
 		case umlPackage::OBJECTFLOW_OPERATION_NO_EXECUTABLE_NODES_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -516,7 +516,7 @@ Any ObjectFlowImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sh
 			break;
 		}
 		
-		// 15993
+		// 1826610676
 		case umlPackage::OBJECTFLOW_OPERATION_SAME_UPPER_BOUNDS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -533,7 +533,7 @@ Any ObjectFlowImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sh
 			break;
 		}
 		
-		// 15991
+		// 1730287836
 		case umlPackage::OBJECTFLOW_OPERATION_SELECTION_BEHAVIOR_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -550,7 +550,7 @@ Any ObjectFlowImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sh
 			break;
 		}
 		
-		// 15994
+		// 179239825
 		case umlPackage::OBJECTFLOW_OPERATION_TARGET_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -567,7 +567,7 @@ Any ObjectFlowImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sh
 			break;
 		}
 		
-		// 15990
+		// 1595389435
 		case umlPackage::OBJECTFLOW_OPERATION_TRANSFORMATION_BEHAVIOR_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

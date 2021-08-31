@@ -79,7 +79,7 @@ namespace fUML::Semantics::Activities
 			virtual bool isControl() = 0; 
 			virtual void withdraw() = 0;
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			 
 			virtual bool isBaseTokenIsWithdrawn() const = 0;
@@ -91,7 +91,7 @@ namespace fUML::Semantics::Activities
 			virtual void setRemainingOffersCount (int _remainingOffersCount)= 0;
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			
 			virtual std::shared_ptr<fUML::Semantics::Activities::Token> getBaseToken() const = 0;

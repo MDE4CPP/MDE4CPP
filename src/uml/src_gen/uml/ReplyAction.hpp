@@ -109,11 +109,11 @@ namespace uml
 			 
 			virtual bool pins_match_parameter(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			/*!
 			The Trigger specifying the Operation whose call is being replied to.

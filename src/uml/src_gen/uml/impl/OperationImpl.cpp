@@ -1159,7 +1159,7 @@ Any OperationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sha
   	switch(operationID)
 	{
 		
-		// 16826
+		// 12386545
 		case umlPackage::OPERATION_OPERATION_AT_MOST_ONE_RETURN_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -1176,49 +1176,49 @@ Any OperationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sha
 			break;
 		}
 		
-		// 16836
+		// 264279180
 		case umlPackage::OPERATION_OPERATION_GETLOWER:
 		{
 			result = eAny(this->getLower());
 			break;
 		}
 		
-		// 16828
+		// 425885811
 		case umlPackage::OPERATION_OPERATION_GETRETURNRESULT:
 		{
 			result = eAny(this->getReturnResult());
 			break;
 		}
 		
-		// 16838
+		// 84668058
 		case umlPackage::OPERATION_OPERATION_GETTYPE:
 		{
 			result = eAny(this->getType());
 			break;
 		}
 		
-		// 16839
+		// 658132292
 		case umlPackage::OPERATION_OPERATION_GETUPPER:
 		{
 			result = eAny(this->getUpper());
 			break;
 		}
 		
-		// 16834
+		// 2046966888
 		case umlPackage::OPERATION_OPERATION_ISORDERED:
 		{
 			result = eAny(this->isOrdered());
 			break;
 		}
 		
-		// 16835
+		// 49097112
 		case umlPackage::OPERATION_OPERATION_ISUNIQUE:
 		{
 			result = eAny(this->isUnique());
 			break;
 		}
 		
-		// 16840
+		// 189559370
 		case umlPackage::OPERATION_OPERATION_MATCHES_OPERATION:
 		{
 			//Retrieve input parameter 'comparedOperation'
@@ -1230,7 +1230,7 @@ Any OperationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sha
 			break;
 		}
 		
-		// 16827
+		// 1181713863
 		case umlPackage::OPERATION_OPERATION_ONLY_BODY_FOR_QUERY_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -1247,14 +1247,14 @@ Any OperationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sha
 			break;
 		}
 		
-		// 16837
+		// 831929813
 		case umlPackage::OPERATION_OPERATION_RETURNRESULT:
 		{
 			result = eAny(this->returnResult());
 			break;
 		}
 		
-		// 16829
+		// 995733814
 		case umlPackage::OPERATION_OPERATION_SETISORDERED_BOOLEAN:
 		{
 			//Retrieve input parameter 'newIsOrdered'
@@ -1266,7 +1266,7 @@ Any OperationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sha
 			break;
 		}
 		
-		// 16830
+		// 1673854407
 		case umlPackage::OPERATION_OPERATION_SETISUNIQUE_BOOLEAN:
 		{
 			//Retrieve input parameter 'newIsUnique'
@@ -1278,7 +1278,7 @@ Any OperationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sha
 			break;
 		}
 		
-		// 16831
+		// 1123488961
 		case umlPackage::OPERATION_OPERATION_SETLOWER_INTEGER:
 		{
 			//Retrieve input parameter 'newLower'
@@ -1290,7 +1290,7 @@ Any OperationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sha
 			break;
 		}
 		
-		// 16832
+		// 1580697963
 		case umlPackage::OPERATION_OPERATION_SETTYPE_TYPE:
 		{
 			//Retrieve input parameter 'newType'
@@ -1302,7 +1302,7 @@ Any OperationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sha
 			break;
 		}
 		
-		// 16833
+		// 1517342073
 		case umlPackage::OPERATION_OPERATION_SETUPPER_UNLIMITEDNATURAL:
 		{
 			//Retrieve input parameter 'newUpper'

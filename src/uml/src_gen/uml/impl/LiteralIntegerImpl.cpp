@@ -326,14 +326,14 @@ Any LiteralIntegerImpl::eInvoke(int operationID, std::shared_ptr<std::list < std
   	switch(operationID)
 	{
 		
-		// 13882
+		// 1304183652
 		case umlPackage::LITERALINTEGER_OPERATION_INTEGERVALUE:
 		{
 			result = eAny(this->integerValue());
 			break;
 		}
 		
-		// 13883
+		// 1573689205
 		case umlPackage::LITERALINTEGER_OPERATION_ISCOMPUTABLE:
 		{
 			result = eAny(this->isComputable());

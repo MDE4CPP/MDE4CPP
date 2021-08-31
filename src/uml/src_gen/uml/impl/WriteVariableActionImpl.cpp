@@ -360,7 +360,7 @@ Any WriteVariableActionImpl::eInvoke(int operationID, std::shared_ptr<std::list 
   	switch(operationID)
 	{
 		
-		// 25897
+		// 438779608
 		case umlPackage::WRITEVARIABLEACTION_OPERATION_MULTIPLICITY_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -377,7 +377,7 @@ Any WriteVariableActionImpl::eInvoke(int operationID, std::shared_ptr<std::list 
 			break;
 		}
 		
-		// 25896
+		// 1745615647
 		case umlPackage::WRITEVARIABLEACTION_OPERATION_VALUE_TYPE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

@@ -1246,7 +1246,7 @@ Any PropertyImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shar
   	switch(operationID)
 	{
 		
-		// 18626
+		// 1056930161
 		case umlPackage::PROPERTY_OPERATION_BINDING_TO_ATTRIBUTE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -1263,7 +1263,7 @@ Any PropertyImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shar
 			break;
 		}
 		
-		// 18628
+		// 1451308280
 		case umlPackage::PROPERTY_OPERATION_DEPLOYMENT_TARGET_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -1280,7 +1280,7 @@ Any PropertyImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shar
 			break;
 		}
 		
-		// 18627
+		// 2088980284
 		case umlPackage::PROPERTY_OPERATION_DERIVED_UNION_IS_DERIVED_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -1297,7 +1297,7 @@ Any PropertyImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shar
 			break;
 		}
 		
-		// 18622
+		// 487748595
 		case umlPackage::PROPERTY_OPERATION_DERIVED_UNION_IS_READ_ONLY_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -1314,49 +1314,49 @@ Any PropertyImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shar
 			break;
 		}
 		
-		// 18645
+		// 1965496207
 		case umlPackage::PROPERTY_OPERATION_GETOPPOSITE:
 		{
 			result = eAny(this->getOpposite());
 			break;
 		}
 		
-		// 18632
+		// 1860005684
 		case umlPackage::PROPERTY_OPERATION_GETOTHEREND:
 		{
 			result = eAny(this->getOtherEnd());
 			break;
 		}
 		
-		// 18642
+		// 1679656582
 		case umlPackage::PROPERTY_OPERATION_ISATTRIBUTE:
 		{
 			result = eAny(this->isAttribute());
 			break;
 		}
 		
-		// 18643
+		// 136444713
 		case umlPackage::PROPERTY_OPERATION_ISCOMPOSITE:
 		{
 			result = eAny(this->isComposite());
 			break;
 		}
 		
-		// 18644
+		// 1815246865
 		case umlPackage::PROPERTY_OPERATION_ISNAVIGABLE:
 		{
 			result = eAny(this->isNavigable());
 			break;
 		}
 		
-		// 18633
+		// 1613101097
 		case umlPackage::PROPERTY_OPERATION_ISSETDEFAULT:
 		{
 			result = eAny(this->isSetDefault());
 			break;
 		}
 		
-		// 18623
+		// 897292100
 		case umlPackage::PROPERTY_OPERATION_MULTIPLICITY_OF_COMPOSITE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -1373,7 +1373,7 @@ Any PropertyImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shar
 			break;
 		}
 		
-		// 18631
+		// 763035670
 		case umlPackage::PROPERTY_OPERATION_QUALIFIED_IS_ASSOCIATION_END_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -1390,7 +1390,7 @@ Any PropertyImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shar
 			break;
 		}
 		
-		// 18624
+		// 1140838564
 		case umlPackage::PROPERTY_OPERATION_REDEFINED_PROPERTY_INHERITED_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -1407,7 +1407,7 @@ Any PropertyImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shar
 			break;
 		}
 		
-		// 18634
+		// 1947611129
 		case umlPackage::PROPERTY_OPERATION_SETBOOLEANDEFAULTVALUE_BOOLEAN:
 		{
 			//Retrieve input parameter 'value'
@@ -1419,7 +1419,7 @@ Any PropertyImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shar
 			break;
 		}
 		
-		// 18635
+		// 635550506
 		case umlPackage::PROPERTY_OPERATION_SETINTEGERDEFAULTVALUE_INTEGER:
 		{
 			//Retrieve input parameter 'value'
@@ -1431,7 +1431,7 @@ Any PropertyImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shar
 			break;
 		}
 		
-		// 18636
+		// 1084890443
 		case umlPackage::PROPERTY_OPERATION_SETISNAVIGABLE_BOOLEAN:
 		{
 			//Retrieve input parameter 'isNavigable'
@@ -1443,14 +1443,14 @@ Any PropertyImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shar
 			break;
 		}
 		
-		// 18637
+		// 1385757410
 		case umlPackage::PROPERTY_OPERATION_SETNULLDEFAULTVALUE:
 		{
 			this->setNullDefaultValue();
 			break;
 		}
 		
-		// 18638
+		// 1503561658
 		case umlPackage::PROPERTY_OPERATION_SETREALDEFAULTVALUE_REAL:
 		{
 			//Retrieve input parameter 'value'
@@ -1462,7 +1462,7 @@ Any PropertyImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shar
 			break;
 		}
 		
-		// 18639
+		// 748800765
 		case umlPackage::PROPERTY_OPERATION_SETSTRINGDEFAULTVALUE_STRING:
 		{
 			//Retrieve input parameter 'value'
@@ -1474,7 +1474,7 @@ Any PropertyImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shar
 			break;
 		}
 		
-		// 18640
+		// 486798804
 		case umlPackage::PROPERTY_OPERATION_SETUNLIMITEDNATURALDEFAULTVALUE_UNLIMITEDNATURAL:
 		{
 			//Retrieve input parameter 'value'
@@ -1486,7 +1486,7 @@ Any PropertyImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shar
 			break;
 		}
 		
-		// 18629
+		// 1501045410
 		case umlPackage::PROPERTY_OPERATION_SUBSETTED_PROPERTY_NAMES_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -1503,14 +1503,14 @@ Any PropertyImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shar
 			break;
 		}
 		
-		// 18646
+		// 124204192
 		case umlPackage::PROPERTY_OPERATION_SUBSETTINGCONTEXT:
 		{
 			result = eAny(this->subsettingContext());
 			break;
 		}
 		
-		// 18621
+		// 236653454
 		case umlPackage::PROPERTY_OPERATION_SUBSETTING_CONTEXT_CONFORMS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -1527,7 +1527,7 @@ Any PropertyImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shar
 			break;
 		}
 		
-		// 18625
+		// 569617743
 		case umlPackage::PROPERTY_OPERATION_SUBSETTING_RULES_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -1544,7 +1544,7 @@ Any PropertyImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shar
 			break;
 		}
 		
-		// 18630
+		// 446766831
 		case umlPackage::PROPERTY_OPERATION_TYPE_OF_OPPOSITE_END_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -1561,7 +1561,7 @@ Any PropertyImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shar
 			break;
 		}
 		
-		// 18641
+		// 1216643635
 		case umlPackage::PROPERTY_OPERATION_UNSETDEFAULT:
 		{
 			this->unsetDefault();

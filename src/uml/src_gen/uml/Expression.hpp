@@ -84,7 +84,7 @@ namespace uml
 			//*********************************
 			
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			/*!
 			The symbol associated with this node in the expression tree.
@@ -100,7 +100,7 @@ namespace uml
 			virtual void setSymbol (std::string _symbol)= 0;
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			/*!
 			Specifies a sequence of operand ValueSpecifications.

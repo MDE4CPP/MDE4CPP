@@ -153,11 +153,11 @@ namespace uml
 			 
 			virtual bool isContainedInState(std::shared_ptr<uml::State> s) = 0;
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			/*!
 			The Region that contains this Vertex.

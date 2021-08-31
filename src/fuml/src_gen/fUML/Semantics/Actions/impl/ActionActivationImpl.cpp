@@ -1089,7 +1089,7 @@ Any ActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list < s
   	switch(operationID)
 	{
 		
-		// 556
+		// 742629207
 		case ActionsPackage::ACTIONACTIVATION_OPERATION_ADDOUTGOINGEDGE_ACTIVITYEDGEINSTANCE:
 		{
 			//Retrieve input parameter 'edge'
@@ -1101,7 +1101,7 @@ Any ActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list < s
 			break;
 		}
 		
-		// 541
+		// 1470350045
 		case ActionsPackage::ACTIONACTIVATION_OPERATION_ADDPINACTIVATION_PINACTIVATION:
 		{
 			//Retrieve input parameter 'pinActivation'
@@ -1113,28 +1113,28 @@ Any ActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list < s
 			break;
 		}
 		
-		// 554
+		// 1326769552
 		case ActionsPackage::ACTIONACTIVATION_OPERATION_COMPLETEACTION:
 		{
 			result = eAny(this->completeAction());
 			break;
 		}
 		
-		// 555
+		// 1517171940
 		case ActionsPackage::ACTIONACTIVATION_OPERATION_CREATENODEACTIVATIONS:
 		{
 			this->createNodeActivations();
 			break;
 		}
 		
-		// 539
+		// 1791647146
 		case ActionsPackage::ACTIONACTIVATION_OPERATION_DOACTION:
 		{
 			this->doAction();
 			break;
 		}
 		
-		// 551
+		// 1802709999
 		case ActionsPackage::ACTIONACTIVATION_OPERATION_FIRE_TOKEN:
 		{
 			//Retrieve input parameter 'incomingTokens'
@@ -1146,7 +1146,7 @@ Any ActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list < s
 			break;
 		}
 		
-		// 545
+		// 2138916189
 		case ActionsPackage::ACTIONACTIVATION_OPERATION_GETTOKENS_INPUTPIN:
 		{
 			//Retrieve input parameter 'pin'
@@ -1158,21 +1158,21 @@ Any ActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list < s
 			break;
 		}
 		
-		// 538
+		// 1010960154
 		case ActionsPackage::ACTIONACTIVATION_OPERATION_ISFIRNG:
 		{
 			result = eAny(this->isFirng());
 			break;
 		}
 		
-		// 553
+		// 1902692005
 		case ActionsPackage::ACTIONACTIVATION_OPERATION_ISREADY:
 		{
 			result = eAny(this->isReady());
 			break;
 		}
 		
-		// 557
+		// 353708760
 		case ActionsPackage::ACTIONACTIVATION_OPERATION_ISSOURCEFOR_ACTIVITYEDGEINSTANCE:
 		{
 			//Retrieve input parameter 'edgeInstance'
@@ -1184,7 +1184,7 @@ Any ActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list < s
 			break;
 		}
 		
-		// 548
+		// 347406919
 		case ActionsPackage::ACTIONACTIVATION_OPERATION_MAKEBOOLEANVALUE_EBOOLEAN:
 		{
 			//Retrieve input parameter 'value'
@@ -1196,7 +1196,7 @@ Any ActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list < s
 			break;
 		}
 		
-		// 543
+		// 1698981854
 		case ActionsPackage::ACTIONACTIVATION_OPERATION_PUTTOKEN_OUTPUTPIN_VALUE:
 		{
 			//Retrieve input parameter 'pin'
@@ -1213,7 +1213,7 @@ Any ActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list < s
 			break;
 		}
 		
-		// 544
+		// 1943011643
 		case ActionsPackage::ACTIONACTIVATION_OPERATION_PUTTOKENS_OUTPUTPIN_VALUE:
 		{
 			//Retrieve input parameter 'pin'
@@ -1230,7 +1230,7 @@ Any ActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list < s
 			break;
 		}
 		
-		// 542
+		// 180803235
 		case ActionsPackage::ACTIONACTIVATION_OPERATION_RETRIEVEPINACTIVATION_PIN:
 		{
 			//Retrieve input parameter 'pin'
@@ -1242,28 +1242,28 @@ Any ActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list < s
 			break;
 		}
 		
-		// 549
+		// 1723642497
 		case ActionsPackage::ACTIONACTIVATION_OPERATION_RUN:
 		{
 			this->run();
 			break;
 		}
 		
-		// 540
+		// 2099243507
 		case ActionsPackage::ACTIONACTIVATION_OPERATION_SENDOFFERS:
 		{
 			this->sendOffers();
 			break;
 		}
 		
-		// 550
+		// 1433380378
 		case ActionsPackage::ACTIONACTIVATION_OPERATION_TAKEOFFEREDTOKENS:
 		{
 			result = eAny(this->takeOfferedTokens());
 			break;
 		}
 		
-		// 546
+		// 260635550
 		case ActionsPackage::ACTIONACTIVATION_OPERATION_TAKETOKENS_INPUTPIN:
 		{
 			//Retrieve input parameter 'pin'
@@ -1275,14 +1275,14 @@ Any ActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list < s
 			break;
 		}
 		
-		// 552
+		// 1477472746
 		case ActionsPackage::ACTIONACTIVATION_OPERATION_TERMINATE:
 		{
 			this->terminate();
 			break;
 		}
 		
-		// 547
+		// 1676355490
 		case ActionsPackage::ACTIONACTIVATION_OPERATION_VALUEPARTICIPATESINLINK_VALUE_LINK:
 		{
 			//Retrieve input parameter 'value'

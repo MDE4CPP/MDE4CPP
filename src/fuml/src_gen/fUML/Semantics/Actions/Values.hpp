@@ -71,11 +71,11 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			
 			virtual std::shared_ptr<Bag<fUML::Semantics::Values::Value>> getValues() const = 0;

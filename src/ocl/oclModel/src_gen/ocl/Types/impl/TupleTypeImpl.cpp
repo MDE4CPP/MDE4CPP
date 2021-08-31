@@ -33,8 +33,8 @@
 
 #include <exception> // used in Persistence
 #include "ecore/ecoreFactory.hpp"
-#include "ocl/Values/ValuesFactory.hpp"
 #include "ocl/Types/TypesFactory.hpp"
+#include "ocl/Values/ValuesFactory.hpp"
 
 
 #include "ecore/EAnnotation.hpp"

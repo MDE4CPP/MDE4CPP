@@ -33,8 +33,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
+#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
 #include "uml/umlFactory.hpp"
 
 
@@ -225,7 +225,7 @@ Any CS_LinkImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::share
   	switch(operationID)
 	{
 		
-		// 1836
+		// 422522157
 		case StructuredClassifiersPackage::CS_LINK_OPERATION_GETFEATURE_VALUE:
 		{
 			//Retrieve input parameter 'value'
@@ -237,7 +237,7 @@ Any CS_LinkImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::share
 			break;
 		}
 		
-		// 1835
+		// 778539952
 		case StructuredClassifiersPackage::CS_LINK_OPERATION_HASVALUEFORAFEATURE_VALUE:
 		{
 			//Retrieve input parameter 'value'

@@ -5,13 +5,13 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
 #include "ecore/EAnnotation.hpp"
-#include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EDataType.hpp"
 #include "ecore/EGenericType.hpp"
-#include "ecore/EOperation.hpp"
+#include "ecore/EAttribute.hpp"
 #include "ecore/EParameter.hpp"
-#include "ecore/EReference.hpp"
+#include "ecore/EOperation.hpp"
 #include "ecore/EStringToStringMapEntry.hpp"
 
 // metametamodel factory
@@ -106,28 +106,6 @@ void CommonBehaviorPackageImpl::initializeCallEventBehaviorContent()
 		}				
 			//undefined otherEnd
 			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
-	}
-	
-	m_callEventBehavior_Operation_assignOperation_Operation->setName("assignOperation");
-	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
-		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
-	   	unknownClass->setName("invalid");
-		unknownClass->setAbstract(true);
-		unknownClass->setInterface(true);
-		m_callEventBehavior_Operation_assignOperation_Operation->setEType(unknownClass);
-	}
-	m_callEventBehavior_Operation_assignOperation_Operation->setLowerBound(0);
-	m_callEventBehavior_Operation_assignOperation_Operation->setUpperBound(1);
-	m_callEventBehavior_Operation_assignOperation_Operation->setUnique(true);
-	m_callEventBehavior_Operation_assignOperation_Operation->setOrdered(true);
-	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_callEventBehavior_Operation_assignOperation_Operation);
-		parameter->setName("operation");
-		parameter->setEType(nullptr);
-		parameter->setLowerBound(0);
-		parameter->setUpperBound(1);
-		parameter->setUnique(true);
-		parameter->setOrdered(true);
 	}
 	
 	
@@ -622,38 +600,6 @@ void CommonBehaviorPackageImpl::initializeClassifierBehaviorInvocationEventAccep
 		parameter->setOrdered(true);
 	}
 	
-	m_classifierBehaviorInvocationEventAccepter_Operation_invokeBehavior_Class_ParameterValue->setName("invokeBehavior");
-	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
-		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
-	   	unknownClass->setName("invalid");
-		unknownClass->setAbstract(true);
-		unknownClass->setInterface(true);
-		m_classifierBehaviorInvocationEventAccepter_Operation_invokeBehavior_Class_ParameterValue->setEType(unknownClass);
-	}
-	m_classifierBehaviorInvocationEventAccepter_Operation_invokeBehavior_Class_ParameterValue->setLowerBound(0);
-	m_classifierBehaviorInvocationEventAccepter_Operation_invokeBehavior_Class_ParameterValue->setUpperBound(1);
-	m_classifierBehaviorInvocationEventAccepter_Operation_invokeBehavior_Class_ParameterValue->setUnique(true);
-	m_classifierBehaviorInvocationEventAccepter_Operation_invokeBehavior_Class_ParameterValue->setOrdered(true);
-	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_classifierBehaviorInvocationEventAccepter_Operation_invokeBehavior_Class_ParameterValue);
-		parameter->setName("classifier");
-		parameter->setEType(nullptr);
-		parameter->setLowerBound(0);
-		parameter->setUpperBound(1);
-		parameter->setUnique(true);
-		parameter->setOrdered(true);
-	}
-	
-	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_classifierBehaviorInvocationEventAccepter_Operation_invokeBehavior_Class_ParameterValue);
-		parameter->setName("inputs");
-		parameter->setEType(nullptr);
-		parameter->setLowerBound(0);
-		parameter->setUpperBound(1);
-		parameter->setUnique(true);
-		parameter->setOrdered(true);
-	}
-	
 	m_classifierBehaviorInvocationEventAccepter_Operation_match_EventOccurrence->setName("match");
 	m_classifierBehaviorInvocationEventAccepter_Operation_match_EventOccurrence->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_classifierBehaviorInvocationEventAccepter_Operation_match_EventOccurrence->setLowerBound(0);
@@ -946,13 +892,6 @@ void CommonBehaviorPackageImpl::initializeExecutionContent()
 	m_execution_Operation_execute->setUpperBound(1);
 	m_execution_Operation_execute->setUnique(true);
 	m_execution_Operation_execute->setOrdered(false);
-	
-	m_execution_Operation_getBehavior->setName("getBehavior");
-	m_execution_Operation_getBehavior->setEType(uml::umlPackage::eInstance()->getBehavior_Class());
-	m_execution_Operation_getBehavior->setLowerBound(1);
-	m_execution_Operation_getBehavior->setUpperBound(1);
-	m_execution_Operation_getBehavior->setUnique(true);
-	m_execution_Operation_getBehavior->setOrdered(false);
 	
 	m_execution_Operation_getOutputParameterValues->setName("getOutputParameterValues");
 	m_execution_Operation_getOutputParameterValues->setEType(getParameterValue_Class());

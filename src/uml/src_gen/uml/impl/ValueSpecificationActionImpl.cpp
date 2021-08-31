@@ -396,7 +396,7 @@ Any ValueSpecificationActionImpl::eInvoke(int operationID, std::shared_ptr<std::
   	switch(operationID)
 	{
 		
-		// 25196
+		// 1309355490
 		case umlPackage::VALUESPECIFICATIONACTION_OPERATION_COMPATIBLE_TYPE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -413,7 +413,7 @@ Any ValueSpecificationActionImpl::eInvoke(int operationID, std::shared_ptr<std::
 			break;
 		}
 		
-		// 25195
+		// 1973662613
 		case umlPackage::VALUESPECIFICATIONACTION_OPERATION_MULTIPLICITY_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

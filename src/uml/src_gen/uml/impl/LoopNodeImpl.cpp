@@ -1045,7 +1045,7 @@ Any LoopNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shar
   	switch(operationID)
 	{
 		
-		// 14543
+		// 2141690272
 		case umlPackage::LOOPNODE_OPERATION_BODY_OUTPUT_PINS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -1062,7 +1062,7 @@ Any LoopNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shar
 			break;
 		}
 		
-		// 14542
+		// 1456712769
 		case umlPackage::LOOPNODE_OPERATION_EXECUTABLE_NODES_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -1079,7 +1079,7 @@ Any LoopNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shar
 			break;
 		}
 		
-		// 14541
+		// 1724786530
 		case umlPackage::LOOPNODE_OPERATION_INPUT_EDGES_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -1096,7 +1096,7 @@ Any LoopNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shar
 			break;
 		}
 		
-		// 14548
+		// 1413799573
 		case umlPackage::LOOPNODE_OPERATION_LOOP_VARIABLE_OUTGOING_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -1113,7 +1113,7 @@ Any LoopNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shar
 			break;
 		}
 		
-		// 14546
+		// 1009662775
 		case umlPackage::LOOPNODE_OPERATION_MATCHING_LOOP_VARIABLES_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -1130,7 +1130,7 @@ Any LoopNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shar
 			break;
 		}
 		
-		// 14545
+		// 1016601316
 		case umlPackage::LOOPNODE_OPERATION_MATCHING_OUTPUT_PINS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -1147,7 +1147,7 @@ Any LoopNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shar
 			break;
 		}
 		
-		// 14547
+		// 518260818
 		case umlPackage::LOOPNODE_OPERATION_MATCHING_RESULT_PINS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -1164,7 +1164,7 @@ Any LoopNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shar
 			break;
 		}
 		
-		// 14540
+		// 328518130
 		case umlPackage::LOOPNODE_OPERATION_RESULT_NO_INCOMING_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -1181,7 +1181,7 @@ Any LoopNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shar
 			break;
 		}
 		
-		// 14544
+		// 942624726
 		case umlPackage::LOOPNODE_OPERATION_SETUP_TEST_AND_BODY_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

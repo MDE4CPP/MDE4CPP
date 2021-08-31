@@ -253,7 +253,7 @@ Any EFactoryImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shar
   	switch(operationID)
 	{
 		
-		// 2323
+		// 776190528
 		case ecorePackage::EFACTORY_OPERATION_CONVERTTOSTRING_EDATATYPE_EJAVAOBJECT:
 		{
 			//Retrieve input parameter 'eDataType'
@@ -270,7 +270,7 @@ Any EFactoryImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shar
 			break;
 		}
 		
-		// 2321
+		// 2062111577
 		case ecorePackage::EFACTORY_OPERATION_CREATE_ECLASS:
 		{
 			//Retrieve input parameter 'eClass'
@@ -282,7 +282,7 @@ Any EFactoryImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shar
 			break;
 		}
 		
-		// 2322
+		// 1793041850
 		case ecorePackage::EFACTORY_OPERATION_CREATEFROMSTRING_EDATATYPE_ESTRING:
 		{
 			//Retrieve input parameter 'eDataType'

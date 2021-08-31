@@ -432,7 +432,7 @@ Any EGenericTypeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::
   	switch(operationID)
 	{
 		
-		// 2806
+		// 1426574931
 		case ecorePackage::EGENERICTYPE_OPERATION_ISINSTANCE_EJAVAOBJECT:
 		{
 			//Retrieve input parameter 'object'

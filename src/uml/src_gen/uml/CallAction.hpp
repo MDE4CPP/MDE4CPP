@@ -130,7 +130,7 @@ namespace uml
 			 
 			virtual bool synchronous_call(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			/*!
 			If true, the call is synchronous and the caller waits for completion of the invoked Behavior. If false, the call is asynchronous and the caller proceeds immediately and cannot receive return values.
@@ -146,7 +146,7 @@ namespace uml
 			virtual void setIsSynchronous (bool _isSynchronous)= 0;
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			/*!
 			The OutputPins on which the reply values from the invocation are placed (if the call is synchronous).

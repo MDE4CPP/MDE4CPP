@@ -312,14 +312,14 @@ Any EnumerationLiteralImpl::eInvoke(int operationID, std::shared_ptr<std::list <
   	switch(operationID)
 	{
 		
-		// 8583
+		// 118208468
 		case umlPackage::ENUMERATIONLITERAL_OPERATION_GETCLASSIFIER:
 		{
 			result = eAny(this->getClassifier());
 			break;
 		}
 		
-		// 8582
+		// 1410424622
 		case umlPackage::ENUMERATIONLITERAL_OPERATION_GETCLASSIFIERS:
 		{
 			result = eAny(this->getClassifiers());

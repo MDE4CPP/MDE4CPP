@@ -500,7 +500,7 @@ Any CallActionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sh
   	switch(operationID)
 	{
 		
-		// 2897
+		// 1200715811
 		case umlPackage::CALLACTION_OPERATION_ARGUMENT_PINS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -517,21 +517,21 @@ Any CallActionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sh
 			break;
 		}
 		
-		// 2900
+		// 1722506140
 		case umlPackage::CALLACTION_OPERATION_INPUTPARAMETERS:
 		{
 			result = eAny(this->inputParameters());
 			break;
 		}
 		
-		// 2901
+		// 138816985
 		case umlPackage::CALLACTION_OPERATION_OUTPUTPARAMETERS:
 		{
 			result = eAny(this->outputParameters());
 			break;
 		}
 		
-		// 2898
+		// 1421824785
 		case umlPackage::CALLACTION_OPERATION_RESULT_PINS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -548,7 +548,7 @@ Any CallActionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sh
 			break;
 		}
 		
-		// 2899
+		// 1233077375
 		case umlPackage::CALLACTION_OPERATION_SYNCHRONOUS_CALL_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

@@ -544,14 +544,14 @@ Any RedefinableTemplateSignatureImpl::eInvoke(int operationID, std::shared_ptr<s
   	switch(operationID)
 	{
 		
-		// 20582
+		// 257289515
 		case umlPackage::REDEFINABLETEMPLATESIGNATURE_OPERATION_GETINHERITEDPARAMETERS:
 		{
 			result = eAny(this->getInheritedParameters());
 			break;
 		}
 		
-		// 20581
+		// 1263440260
 		case umlPackage::REDEFINABLETEMPLATESIGNATURE_OPERATION_REDEFINES_PARENTS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

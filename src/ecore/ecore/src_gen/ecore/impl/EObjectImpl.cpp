@@ -154,8 +154,6 @@ std::shared_ptr<ecore::EClass> EObjectImpl::eClass() const
 	//end of body
 }
 
-
-
 std::shared_ptr<ecore::EStructuralFeature> EObjectImpl::eContainingFeature() const
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
@@ -420,49 +418,49 @@ Any EObjectImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::share
   	switch(operationID)
 	{
 		
-		// 3910
+		// 269186772
 		case ecorePackage::EOBJECT_OPERATION_EALLCONTENTS:
 		{
 			result = eAny(this->eAllContents());
 			break;
 		}
 		
-		// 3903
+		// 1897829605
 		case ecorePackage::EOBJECT_OPERATION_ECLASS:
 		{
 			result = eAny(this->eClass());
 			break;
 		}
 		
-		// 3907
+		// 1314774326
 		case ecorePackage::EOBJECT_OPERATION_ECONTAININGFEATURE:
 		{
 			result = eAny(this->eContainingFeature());
 			break;
 		}
 		
-		// 3908
+		// 1559436300
 		case ecorePackage::EOBJECT_OPERATION_ECONTAINMENTFEATURE:
 		{
 			result = eAny(this->eContainmentFeature());
 			break;
 		}
 		
-		// 3909
+		// 614061473
 		case ecorePackage::EOBJECT_OPERATION_ECONTENTS:
 		{
 			result = eAny(this->eContents());
 			break;
 		}
 		
-		// 3911
+		// 1830400680
 		case ecorePackage::EOBJECT_OPERATION_ECROSSREFERENCES:
 		{
 			result = eAny(this->eCrossReferences());
 			break;
 		}
 		
-		// 3912
+		// 765237638
 		case ecorePackage::EOBJECT_OPERATION_EGET_ESTRUCTURALFEATURE:
 		{
 			//Retrieve input parameter 'feature'
@@ -474,7 +472,7 @@ Any EObjectImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::share
 			break;
 		}
 		
-		// 3913
+		// 728807147
 		case ecorePackage::EOBJECT_OPERATION_EGET_ESTRUCTURALFEATURE_EBOOLEAN:
 		{
 			//Retrieve input parameter 'feature'
@@ -491,7 +489,7 @@ Any EObjectImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::share
 			break;
 		}
 		
-		// 3917
+		// 447398534
 		case ecorePackage::EOBJECT_OPERATION_EINVOKE_EOPERATION_EELIST:
 		{
 			//Retrieve input parameter 'operation'
@@ -508,14 +506,14 @@ Any EObjectImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::share
 			break;
 		}
 		
-		// 3904
+		// 780766387
 		case ecorePackage::EOBJECT_OPERATION_EISPROXY:
 		{
 			result = eAny(this->eIsProxy());
 			break;
 		}
 		
-		// 3915
+		// 527097480
 		case ecorePackage::EOBJECT_OPERATION_EISSET_ESTRUCTURALFEATURE:
 		{
 			//Retrieve input parameter 'feature'
@@ -527,14 +525,14 @@ Any EObjectImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::share
 			break;
 		}
 		
-		// 3905
+		// 281242010
 		case ecorePackage::EOBJECT_OPERATION_ERESOURCE:
 		{
 			result = eAny(this->eResource());
 			break;
 		}
 		
-		// 3914
+		// 921412853
 		case ecorePackage::EOBJECT_OPERATION_ESET_ESTRUCTURALFEATURE_EJAVAOBJECT:
 		{
 			//Retrieve input parameter 'feature'
@@ -551,7 +549,7 @@ Any EObjectImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::share
 			break;
 		}
 		
-		// 3916
+		// 640572767
 		case ecorePackage::EOBJECT_OPERATION_EUNSET_ESTRUCTURALFEATURE:
 		{
 			//Retrieve input parameter 'feature'

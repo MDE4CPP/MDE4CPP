@@ -493,21 +493,21 @@ Any NamedElementImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::
   	switch(operationID)
 	{
 		
-		// 15559
+		// 2032137401
 		case umlPackage::NAMEDELEMENT_OPERATION_ALLNAMESPACES:
 		{
 			result = eAny(this->allNamespaces());
 			break;
 		}
 		
-		// 15560
+		// 1344070418
 		case umlPackage::NAMEDELEMENT_OPERATION_ALLOWNINGPACKAGES:
 		{
 			result = eAny(this->allOwningPackages());
 			break;
 		}
 		
-		// 15554
+		// 859532136
 		case umlPackage::NAMEDELEMENT_OPERATION_CREATEDEPENDENCY_NAMEDELEMENT:
 		{
 			//Retrieve input parameter 'supplier'
@@ -519,7 +519,7 @@ Any NamedElementImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::
 			break;
 		}
 		
-		// 15555
+		// 274373089
 		case umlPackage::NAMEDELEMENT_OPERATION_CREATEUSAGE_NAMEDELEMENT:
 		{
 			//Retrieve input parameter 'supplier'
@@ -531,21 +531,21 @@ Any NamedElementImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::
 			break;
 		}
 		
-		// 15564
+		// 1863743641
 		case umlPackage::NAMEDELEMENT_OPERATION_GETCLIENTDEPENDENCIES:
 		{
 			result = eAny(this->getClientDependencies());
 			break;
 		}
 		
-		// 15556
+		// 1812636995
 		case umlPackage::NAMEDELEMENT_OPERATION_GETLABEL:
 		{
 			result = eAny(this->getLabel());
 			break;
 		}
 		
-		// 15557
+		// 860924116
 		case umlPackage::NAMEDELEMENT_OPERATION_GETLABEL_BOOLEAN:
 		{
 			//Retrieve input parameter 'localize'
@@ -557,21 +557,21 @@ Any NamedElementImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::
 			break;
 		}
 		
-		// 15558
+		// 769066163
 		case umlPackage::NAMEDELEMENT_OPERATION_GETNAMESPACE:
 		{
 			result = eAny(this->getNamespace());
 			break;
 		}
 		
-		// 15562
+		// 646487924
 		case umlPackage::NAMEDELEMENT_OPERATION_GETQUALIFIEDNAME:
 		{
 			result = eAny(this->getQualifiedName());
 			break;
 		}
 		
-		// 15553
+		// 711098709
 		case umlPackage::NAMEDELEMENT_OPERATION_HAS_NO_QUALIFIED_NAME_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -588,7 +588,7 @@ Any NamedElementImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::
 			break;
 		}
 		
-		// 15552
+		// 2097992942
 		case umlPackage::NAMEDELEMENT_OPERATION_HAS_QUALIFIED_NAME_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -605,7 +605,7 @@ Any NamedElementImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::
 			break;
 		}
 		
-		// 15561
+		// 420809074
 		case umlPackage::NAMEDELEMENT_OPERATION_ISDISTINGUISHABLEFROM_NAMEDELEMENT_NAMESPACE:
 		{
 			//Retrieve input parameter 'n'
@@ -622,14 +622,14 @@ Any NamedElementImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::
 			break;
 		}
 		
-		// 15563
+		// 8320228
 		case umlPackage::NAMEDELEMENT_OPERATION_SEPARATOR:
 		{
 			result = eAny(this->separator());
 			break;
 		}
 		
-		// 15551
+		// 405478997
 		case umlPackage::NAMEDELEMENT_OPERATION_VISIBILITY_NEEDS_OWNERSHIP_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

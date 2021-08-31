@@ -256,7 +256,7 @@ namespace uml
 			virtual bool type_of_opposite_end(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0; 
 			virtual void unsetDefault() = 0;
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			/*!
 			Specifies the kind of aggregation that applies to the Property.
@@ -324,7 +324,7 @@ namespace uml
 			virtual void setIsID (bool _isID)= 0;
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			/*!
 			The Association of which this Property is a member, if any.

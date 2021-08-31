@@ -90,7 +90,7 @@ namespace ecore
 			virtual std::shared_ptr<ecore::EOperation> getOverride(std::shared_ptr<ecore::EOperation> operation) const = 0; 
 			virtual bool isSuperTypeOf(std::shared_ptr<ecore::EClass> someClass) const = 0;
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			 
 			virtual bool isAbstract() const = 0;
@@ -102,7 +102,7 @@ namespace ecore
 			virtual void setInterface (bool _interface)= 0;
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			
 			virtual std::shared_ptr<Bag<ecore::EAttribute>> getEAllAttributes() const = 0;

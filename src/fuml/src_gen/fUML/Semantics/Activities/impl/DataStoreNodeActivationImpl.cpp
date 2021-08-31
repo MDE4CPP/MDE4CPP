@@ -231,7 +231,7 @@ Any DataStoreNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::l
   	switch(operationID)
 	{
 		
-		// 3547
+		// 131946306
 		case ActivitiesPackage::DATASTORENODEACTIVATION_OPERATION_ADDTOKEN_TOKEN:
 		{
 			//Retrieve input parameter 'token'
@@ -243,7 +243,7 @@ Any DataStoreNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::l
 			break;
 		}
 		
-		// 3546
+		// 1985388858
 		case ActivitiesPackage::DATASTORENODEACTIVATION_OPERATION_REMOVETOKEN_TOKEN:
 		{
 			//Retrieve input parameter 'token'

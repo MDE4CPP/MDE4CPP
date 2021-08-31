@@ -131,11 +131,11 @@ namespace uml
 			 
 			virtual bool no_association_to_use_case(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			/*!
 			The Extend relationships owned by this UseCase.

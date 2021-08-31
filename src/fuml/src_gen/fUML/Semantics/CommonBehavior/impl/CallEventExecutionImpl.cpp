@@ -39,11 +39,11 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
 #include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
-#include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
 #include "uml/umlFactory.hpp"
+#include "fUML/Semantics/Loci/LociFactory.hpp"
+#include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
 
 
 #include "uml/Behavior.hpp"
@@ -386,70 +386,70 @@ Any CallEventExecutionImpl::eInvoke(int operationID, std::shared_ptr<std::list <
   	switch(operationID)
 	{
 		
-		// 1752
+		// 1363706716
 		case CommonBehaviorPackage::CALLEVENTEXECUTION_OPERATION__COPY:
 		{
 			result = eAny(this->_copy());
 			break;
 		}
 		
-		// 1753
+		// 481630429
 		case CommonBehaviorPackage::CALLEVENTEXECUTION_OPERATION_CREATEEVENTOCCURRENCE:
 		{
 			result = eAny(this->createEventOccurrence());
 			break;
 		}
 		
-		// 1754
+		// 1944613447
 		case CommonBehaviorPackage::CALLEVENTEXECUTION_OPERATION_EXECUTE:
 		{
 			this->execute();
 			break;
 		}
 		
-		// 1755
+		// 1341556238
 		case CommonBehaviorPackage::CALLEVENTEXECUTION_OPERATION_GETINPUTPARAMETERVALUES:
 		{
 			result = eAny(this->getInputParameterValues());
 			break;
 		}
 		
-		// 1756
+		// 1532410324
 		case CommonBehaviorPackage::CALLEVENTEXECUTION_OPERATION_GETOPERATION:
 		{
 			result = eAny(this->getOperation());
 			break;
 		}
 		
-		// 1757
+		// 2007960635
 		case CommonBehaviorPackage::CALLEVENTEXECUTION_OPERATION_ISCALLERSUSPENDED:
 		{
 			result = eAny(this->isCallerSuspended());
 			break;
 		}
 		
-		// 1758
+		// 1000602015
 		case CommonBehaviorPackage::CALLEVENTEXECUTION_OPERATION_MAKECALL:
 		{
 			this->makeCall();
 			break;
 		}
 		
-		// 1759
+		// 166651669
 		case CommonBehaviorPackage::CALLEVENTEXECUTION_OPERATION_NEW_:
 		{
 			result = eAny(this->new_());
 			break;
 		}
 		
-		// 1760
+		// 2117660495
 		case CommonBehaviorPackage::CALLEVENTEXECUTION_OPERATION_RELEASECALLER:
 		{
 			this->releaseCaller();
 			break;
 		}
 		
-		// 1761
+		// 1277368691
 		case CommonBehaviorPackage::CALLEVENTEXECUTION_OPERATION_SETOUTPUTPARAMETERVALUES_PARAMETERVALUE:
 		{
 			//Retrieve input parameter 'parameterValues'
@@ -461,14 +461,14 @@ Any CallEventExecutionImpl::eInvoke(int operationID, std::shared_ptr<std::list <
 			break;
 		}
 		
-		// 1762
+		// 766550033
 		case CommonBehaviorPackage::CALLEVENTEXECUTION_OPERATION_SUSPENDCALLER:
 		{
 			this->suspendCaller();
 			break;
 		}
 		
-		// 1763
+		// 1917959097
 		case CommonBehaviorPackage::CALLEVENTEXECUTION_OPERATION_WAIT_:
 		{
 			this->wait_();

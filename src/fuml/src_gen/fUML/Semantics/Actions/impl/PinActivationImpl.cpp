@@ -338,7 +338,7 @@ Any PinActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std:
   	switch(operationID)
 	{
 		
-		// 8847
+		// 285559969
 		case ActionsPackage::PINACTIVATION_OPERATION_FIRE_TOKEN:
 		{
 			//Retrieve input parameter 'incomingTokens'
@@ -350,7 +350,7 @@ Any PinActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std:
 			break;
 		}
 		
-		// 8848
+		// 2035745770
 		case ActionsPackage::PINACTIVATION_OPERATION_TAKEOFFEREDTOKENS:
 		{
 			result = eAny(this->takeOfferedTokens());

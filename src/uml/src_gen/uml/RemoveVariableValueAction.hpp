@@ -106,7 +106,7 @@ namespace uml
 			 
 			virtual bool removeAt_and_value(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			/*!
 			Specifies whether to remove duplicates of the value in nonunique Variables.
@@ -122,7 +122,7 @@ namespace uml
 			virtual void setIsRemoveDuplicates (bool _isRemoveDuplicates)= 0;
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			/*!
 			An InputPin that provides the position of an existing value to remove in ordered, nonunique Variables. The type of the removeAt InputPin is UnlimitedNatural, but the value cannot be zero or unlimited.

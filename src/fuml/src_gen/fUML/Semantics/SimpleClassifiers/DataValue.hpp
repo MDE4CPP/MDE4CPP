@@ -78,11 +78,11 @@ namespace fUML::Semantics::SimpleClassifiers
 			virtual std::shared_ptr<Bag<uml::Classifier> > getTypes() = 0; 
 			virtual std::shared_ptr<fUML::Semantics::Values::Value> new_() = 0;
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			
 			virtual std::shared_ptr<uml::DataType> getType() const = 0;

@@ -70,7 +70,7 @@ namespace ocl::Values
 			//*********************************
 			
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			 
 			virtual int getIndexNr() const = 0;
@@ -78,7 +78,7 @@ namespace ocl::Values
 			virtual void setIndexNr (int _indexNr)= 0;
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			
 			virtual std::shared_ptr<fUML::Semantics::Values::Value> getValue() const = 0;

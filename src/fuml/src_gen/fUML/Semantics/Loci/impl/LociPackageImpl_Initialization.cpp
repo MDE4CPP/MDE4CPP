@@ -5,12 +5,12 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
 #include "ecore/EAnnotation.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EDataType.hpp"
 #include "ecore/EGenericType.hpp"
-#include "ecore/EOperation.hpp"
 #include "ecore/EParameter.hpp"
-#include "ecore/EReference.hpp"
+#include "ecore/EOperation.hpp"
 #include "ecore/EStringToStringMapEntry.hpp"
 
 // metametamodel factory
@@ -342,22 +342,6 @@ void LociPackageImpl::initializeExecutionFactoryContent()
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_executionFactory_Operation_getStrategyIndex_EString);
 		parameter->setName("name");
 		parameter->setEType(ecore::ecorePackage::eInstance()->getEString_Class());
-		parameter->setLowerBound(0);
-		parameter->setUpperBound(1);
-		parameter->setUnique(true);
-		parameter->setOrdered(true);
-	}
-	
-	m_executionFactory_Operation_instantiateOpaqueBehaviorExecution_OpaqueBehavior->setName("instantiateOpaqueBehaviorExecution");
-	m_executionFactory_Operation_instantiateOpaqueBehaviorExecution_OpaqueBehavior->setEType(fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance()->getOpaqueBehaviorExecution_Class());
-	m_executionFactory_Operation_instantiateOpaqueBehaviorExecution_OpaqueBehavior->setLowerBound(1);
-	m_executionFactory_Operation_instantiateOpaqueBehaviorExecution_OpaqueBehavior->setUpperBound(1);
-	m_executionFactory_Operation_instantiateOpaqueBehaviorExecution_OpaqueBehavior->setUnique(true);
-	m_executionFactory_Operation_instantiateOpaqueBehaviorExecution_OpaqueBehavior->setOrdered(false);
-	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_executionFactory_Operation_instantiateOpaqueBehaviorExecution_OpaqueBehavior);
-		parameter->setName("behavior");
-		parameter->setEType(uml::umlPackage::eInstance()->getOpaqueBehavior_Class());
 		parameter->setLowerBound(0);
 		parameter->setUpperBound(1);
 		parameter->setUnique(true);

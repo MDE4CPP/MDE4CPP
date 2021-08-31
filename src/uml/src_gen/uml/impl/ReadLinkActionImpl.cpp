@@ -405,7 +405,7 @@ Any ReadLinkActionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std
   	switch(operationID)
 	{
 		
-		// 19601
+		// 1004154613
 		case umlPackage::READLINKACTION_OPERATION_COMPATIBLE_MULTIPLICITY_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -422,7 +422,7 @@ Any ReadLinkActionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std
 			break;
 		}
 		
-		// 19604
+		// 501248652
 		case umlPackage::READLINKACTION_OPERATION_NAVIGABLE_OPEN_END_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -439,7 +439,7 @@ Any ReadLinkActionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std
 			break;
 		}
 		
-		// 19603
+		// 111068527
 		case umlPackage::READLINKACTION_OPERATION_ONE_OPEN_END_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -456,14 +456,14 @@ Any ReadLinkActionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std
 			break;
 		}
 		
-		// 19605
+		// 397079616
 		case umlPackage::READLINKACTION_OPERATION_OPENEND:
 		{
 			result = eAny(this->openEnd());
 			break;
 		}
 		
-		// 19600
+		// 1848164464
 		case umlPackage::READLINKACTION_OPERATION_TYPE_AND_ORDERING_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -480,7 +480,7 @@ Any ReadLinkActionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std
 			break;
 		}
 		
-		// 19602
+		// 1775556670
 		case umlPackage::READLINKACTION_OPERATION_VISIBILITY_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

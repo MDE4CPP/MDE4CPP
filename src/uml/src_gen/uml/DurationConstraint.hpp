@@ -96,7 +96,7 @@ namespace uml
 			 
 			virtual bool has_one_or_two_constrainedElements(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			/*!
 			The value of firstEvent[i] is related to constrainedElement[i] (where i is 1 or 2). If firstEvent[i] is true, then the corresponding observation event is the first time instant the execution enters constrainedElement[i]. If firstEvent[i] is false, then the corresponding observation event is the last time instant the execution is within constrainedElement[i].
@@ -107,7 +107,7 @@ namespace uml
 			
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			
 

@@ -410,14 +410,14 @@ Any ElementImportImpl::eInvoke(int operationID, std::shared_ptr<std::list < std:
   	switch(operationID)
 	{
 		
-		// 8254
+		// 991755702
 		case umlPackage::ELEMENTIMPORT_OPERATION_GETNAME:
 		{
 			result = eAny(this->getName());
 			break;
 		}
 		
-		// 8252
+		// 533790703
 		case umlPackage::ELEMENTIMPORT_OPERATION_IMPORTED_ELEMENT_IS_PUBLIC_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -434,7 +434,7 @@ Any ElementImportImpl::eInvoke(int operationID, std::shared_ptr<std::list < std:
 			break;
 		}
 		
-		// 8253
+		// 336841407
 		case umlPackage::ELEMENTIMPORT_OPERATION_VISIBILITY_PUBLIC_OR_PRIVATE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

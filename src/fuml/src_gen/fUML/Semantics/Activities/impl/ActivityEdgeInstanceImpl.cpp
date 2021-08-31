@@ -514,28 +514,28 @@ Any ActivityEdgeInstanceImpl::eInvoke(int operationID, std::shared_ptr<std::list
   	switch(operationID)
 	{
 		
-		// 606
+		// 729654799
 		case ActivitiesPackage::ACTIVITYEDGEINSTANCE_OPERATION_COUNTOFFEREDVALUE:
 		{
 			result = eAny(this->countOfferedValue());
 			break;
 		}
 		
-		// 609
+		// 433302189
 		case ActivitiesPackage::ACTIVITYEDGEINSTANCE_OPERATION_GETOFFEREDTOKENS:
 		{
 			result = eAny(this->getOfferedTokens());
 			break;
 		}
 		
-		// 610
+		// 1690101896
 		case ActivitiesPackage::ACTIVITYEDGEINSTANCE_OPERATION_HASOFFER:
 		{
 			result = eAny(this->hasOffer());
 			break;
 		}
 		
-		// 605
+		// 1208149194
 		case ActivitiesPackage::ACTIVITYEDGEINSTANCE_OPERATION_SENDOFFER_TOKEN:
 		{
 			//Retrieve input parameter 'tokens'
@@ -547,14 +547,14 @@ Any ActivityEdgeInstanceImpl::eInvoke(int operationID, std::shared_ptr<std::list
 			break;
 		}
 		
-		// 607
+		// 1733798230
 		case ActivitiesPackage::ACTIVITYEDGEINSTANCE_OPERATION_TAKEOFFEREDTOKENS:
 		{
 			result = eAny(this->takeOfferedTokens());
 			break;
 		}
 		
-		// 608
+		// 982608933
 		case ActivitiesPackage::ACTIVITYEDGEINSTANCE_OPERATION_TAKEOFFEREDTOKENS_EINT:
 		{
 			//Retrieve input parameter 'maxCount'

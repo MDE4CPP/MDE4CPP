@@ -366,28 +366,28 @@ Any VertexImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared
   	switch(operationID)
 	{
 		
-		// 25468
+		// 1261919053
 		case umlPackage::VERTEX_OPERATION_CONTAININGSTATEMACHINE:
 		{
 			result = eAny(this->containingStateMachine());
 			break;
 		}
 		
-		// 25469
+		// 773358148
 		case umlPackage::VERTEX_OPERATION_GETINCOMINGS:
 		{
 			result = eAny(this->getIncomings());
 			break;
 		}
 		
-		// 25470
+		// 1266036165
 		case umlPackage::VERTEX_OPERATION_GETOUTGOINGS:
 		{
 			result = eAny(this->getOutgoings());
 			break;
 		}
 		
-		// 25472
+		// 846277715
 		case umlPackage::VERTEX_OPERATION_ISCONTAINEDINREGION_REGION:
 		{
 			//Retrieve input parameter 'r'
@@ -399,7 +399,7 @@ Any VertexImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared
 			break;
 		}
 		
-		// 25471
+		// 26280316
 		case umlPackage::VERTEX_OPERATION_ISCONTAINEDINSTATE_STATE:
 		{
 			//Retrieve input parameter 's'

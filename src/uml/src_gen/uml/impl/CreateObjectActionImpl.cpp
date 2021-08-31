@@ -401,7 +401,7 @@ Any CreateObjectActionImpl::eInvoke(int operationID, std::shared_ptr<std::list <
   	switch(operationID)
 	{
 		
-		// 6395
+		// 635180
 		case umlPackage::CREATEOBJECTACTION_OPERATION_CLASSIFIER_NOT_ABSTRACT_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -418,7 +418,7 @@ Any CreateObjectActionImpl::eInvoke(int operationID, std::shared_ptr<std::list <
 			break;
 		}
 		
-		// 6397
+		// 855656155
 		case umlPackage::CREATEOBJECTACTION_OPERATION_CLASSIFIER_NOT_ASSOCIATION_CLASS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -435,7 +435,7 @@ Any CreateObjectActionImpl::eInvoke(int operationID, std::shared_ptr<std::list <
 			break;
 		}
 		
-		// 6396
+		// 353712302
 		case umlPackage::CREATEOBJECTACTION_OPERATION_MULTIPLICITY_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -452,7 +452,7 @@ Any CreateObjectActionImpl::eInvoke(int operationID, std::shared_ptr<std::list <
 			break;
 		}
 		
-		// 6398
+		// 127783180
 		case umlPackage::CREATEOBJECTACTION_OPERATION_SAME_TYPE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

@@ -31,8 +31,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "uml/umlFactory.hpp"
+#include "fUML/Semantics/Loci/LociFactory.hpp"
 
 
 #include "fUML/Semantics/Values/LiteralEvaluation.hpp"
@@ -190,7 +190,7 @@ Any LiteralNullEvaluationImpl::eInvoke(int operationID, std::shared_ptr<std::lis
   	switch(operationID)
 	{
 		
-		// 7306
+		// 507735969
 		case ValuesPackage::LITERALNULLEVALUATION_OPERATION_EVALUATE:
 		{
 			result = eAny(this->evaluate());

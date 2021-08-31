@@ -264,14 +264,14 @@ Any RealValueImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sha
   	switch(operationID)
 	{
 		
-		// 9517
+		// 324500325
 		case SimpleClassifiersPackage::REALVALUE_OPERATION__COPY:
 		{
 			result = eAny(this->_copy());
 			break;
 		}
 		
-		// 9515
+		// 1451150382
 		case SimpleClassifiersPackage::REALVALUE_OPERATION_EQUALS_VALUE:
 		{
 			//Retrieve input parameter 'otherValue'
@@ -283,14 +283,14 @@ Any RealValueImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sha
 			break;
 		}
 		
-		// 9514
+		// 663742132
 		case SimpleClassifiersPackage::REALVALUE_OPERATION_SPECIFY:
 		{
 			result = eAny(this->specify());
 			break;
 		}
 		
-		// 9516
+		// 413538336
 		case SimpleClassifiersPackage::REALVALUE_OPERATION_TOSTRING:
 		{
 			result = eAny(this->toString());

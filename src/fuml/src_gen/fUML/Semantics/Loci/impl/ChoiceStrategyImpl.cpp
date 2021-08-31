@@ -189,7 +189,7 @@ Any ChoiceStrategyImpl::eInvoke(int operationID, std::shared_ptr<std::list < std
   	switch(operationID)
 	{
 		
-		// 2101
+		// 1273166866
 		case LociPackage::CHOICESTRATEGY_OPERATION_CHOOSE_EINT:
 		{
 			//Retrieve input parameter 'size'
@@ -201,7 +201,7 @@ Any ChoiceStrategyImpl::eInvoke(int operationID, std::shared_ptr<std::list < std
 			break;
 		}
 		
-		// 2102
+		// 1727304580
 		case LociPackage::CHOICESTRATEGY_OPERATION_GETNAME:
 		{
 			result = eAny(this->getName());

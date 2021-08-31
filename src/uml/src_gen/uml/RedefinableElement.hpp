@@ -110,7 +110,7 @@ namespace uml
 			 
 			virtual bool redefinition_context_valid(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			/*!
 			Indicates whether it is possible to further redefine a RedefinableElement. If the value is true, then it is not possible to further redefine the RedefinableElement.
@@ -126,7 +126,7 @@ namespace uml
 			virtual void setIsLeaf (bool _isLeaf)= 0;
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			
 			

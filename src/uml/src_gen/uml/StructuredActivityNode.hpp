@@ -126,7 +126,7 @@ namespace uml
 			 
 			virtual std::shared_ptr<Bag<uml::ActivityNode> > targetNodes() = 0;
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			/*!
 			If true, then any object used by an Action within the StructuredActivityNode cannot be accessed by any Action outside the node until the StructuredActivityNode as a whole completes. Any concurrent Actions that would result in accessing such objects are required to have their execution deferred until the completion of the StructuredActivityNode.
@@ -142,7 +142,7 @@ namespace uml
 			virtual void setMustIsolate (bool _mustIsolate)= 0;
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			/*!
 			The ActivityEdges immediately contained in the StructuredActivityNode.

@@ -708,14 +708,14 @@ Any StructuredClassifierImpl::eInvoke(int operationID, std::shared_ptr<std::list
   	switch(operationID)
 	{
 		
-		// 22954
+		// 1479109692
 		case umlPackage::STRUCTUREDCLASSIFIER_OPERATION_ALLROLES:
 		{
 			result = eAny(this->allRoles());
 			break;
 		}
 		
-		// 22952
+		// 1614024577
 		case umlPackage::STRUCTUREDCLASSIFIER_OPERATION_CREATEOWNEDATTRIBUTE_STRING_UNLIMITEDNATURAL:
 		{
 			//Retrieve input parameter 'name'
@@ -742,7 +742,7 @@ Any StructuredClassifierImpl::eInvoke(int operationID, std::shared_ptr<std::list
 			break;
 		}
 		
-		// 22953
+		// 494229350
 		case umlPackage::STRUCTUREDCLASSIFIER_OPERATION_GETPARTS:
 		{
 			result = eAny(this->getParts());

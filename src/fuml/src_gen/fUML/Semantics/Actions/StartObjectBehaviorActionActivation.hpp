@@ -84,11 +84,11 @@ namespace fUML::Semantics::Actions
 			 
 			virtual void doAction() = 0;
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			
 

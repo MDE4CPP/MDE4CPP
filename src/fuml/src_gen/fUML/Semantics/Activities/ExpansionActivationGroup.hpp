@@ -88,7 +88,7 @@ namespace fUML::Semantics::Activities
 			virtual void resume(std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> activation) = 0; 
 			virtual void suspend(std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> activation) = 0;
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			 
 			virtual int getIndex() const = 0;
@@ -96,7 +96,7 @@ namespace fUML::Semantics::Activities
 			virtual void setIndex (int _index)= 0;
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			
 			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::ExpansionNodeActivation>> getGroupInputs() const = 0;

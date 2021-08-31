@@ -354,7 +354,7 @@ Any RedefinableElementImpl::eInvoke(int operationID, std::shared_ptr<std::list <
   	switch(operationID)
 	{
 		
-		// 20471
+		// 1261679630
 		case umlPackage::REDEFINABLEELEMENT_OPERATION_ISCONSISTENTWITH_REDEFINABLEELEMENT:
 		{
 			//Retrieve input parameter 'redefiningElement'
@@ -366,7 +366,7 @@ Any RedefinableElementImpl::eInvoke(int operationID, std::shared_ptr<std::list <
 			break;
 		}
 		
-		// 20472
+		// 723412742
 		case umlPackage::REDEFINABLEELEMENT_OPERATION_ISREDEFINITIONCONTEXTVALID_REDEFINABLEELEMENT:
 		{
 			//Retrieve input parameter 'redefinedElement'
@@ -378,7 +378,7 @@ Any RedefinableElementImpl::eInvoke(int operationID, std::shared_ptr<std::list <
 			break;
 		}
 		
-		// 20469
+		// 1008093363
 		case umlPackage::REDEFINABLEELEMENT_OPERATION_NON_LEAF_REDEFINITION_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -395,7 +395,7 @@ Any RedefinableElementImpl::eInvoke(int operationID, std::shared_ptr<std::list <
 			break;
 		}
 		
-		// 20468
+		// 448655647
 		case umlPackage::REDEFINABLEELEMENT_OPERATION_REDEFINITION_CONSISTENT_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -412,7 +412,7 @@ Any RedefinableElementImpl::eInvoke(int operationID, std::shared_ptr<std::list <
 			break;
 		}
 		
-		// 20470
+		// 701030538
 		case umlPackage::REDEFINABLEELEMENT_OPERATION_REDEFINITION_CONTEXT_VALID_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

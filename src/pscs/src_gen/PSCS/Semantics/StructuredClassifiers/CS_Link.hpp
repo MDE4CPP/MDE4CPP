@@ -81,11 +81,11 @@ namespace PSCS::Semantics::StructuredClassifiers
 			virtual std::shared_ptr<uml::StructuralFeature> getFeature(std::shared_ptr<fUML::Semantics::Values::Value> value) = 0; 
 			virtual bool hasValueForAFeature(std::shared_ptr<fUML::Semantics::Values::Value> value) = 0;
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			
 

@@ -155,7 +155,7 @@ namespace uml
 			 
 			virtual bool setup_test_and_body(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			/*!
 			If true, the test is performed before the first execution of the bodyPart. If false, the bodyPart is executed once before the test is performed.
@@ -171,7 +171,7 @@ namespace uml
 			virtual void setIsTestedFirst (bool _isTestedFirst)= 0;
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			/*!
 			The OutputPins on Actions within the bodyPart, the values of which are moved to the loopVariable OutputPins after the completion of each execution of the bodyPart, before the next iteration of the loop begins or before the loop exits.

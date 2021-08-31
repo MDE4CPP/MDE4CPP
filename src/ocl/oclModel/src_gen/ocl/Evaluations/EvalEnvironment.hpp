@@ -80,11 +80,11 @@ namespace ocl::Evaluations
 			virtual std::shared_ptr<fUML::Semantics::Values::Value> getValueOf(std::string n) = 0; 
 			virtual void replace(std::shared_ptr<ocl::Values::NameValueBinding> n) = 0;
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			
 			virtual std::shared_ptr<Bag<ocl::Values::NameValueBinding>> getBindings() const = 0;

@@ -120,7 +120,7 @@ namespace fUML::Semantics::Actions
 			virtual void terminate() = 0; 
 			virtual bool valueParticipatesInLink(std::shared_ptr<fUML::Semantics::Values::Value> value,std::shared_ptr<fUML::Semantics::StructuredClassifiers::Link> link) = 0;
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			 
 			virtual bool isFiring() const = 0;
@@ -128,7 +128,7 @@ namespace fUML::Semantics::Actions
 			virtual void setFiring (bool _firing)= 0;
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			
 			virtual std::shared_ptr<uml::Action> getAction() const = 0;

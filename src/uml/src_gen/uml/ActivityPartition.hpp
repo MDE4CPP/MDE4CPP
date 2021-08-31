@@ -141,7 +141,7 @@ namespace uml
 			 
 			virtual bool represents_property_and_is_contained(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			/*!
 			Indicates whether the ActivityPartition groups other ActivityPartitions along a dimension.
@@ -169,7 +169,7 @@ namespace uml
 			virtual void setIsExternal (bool _isExternal)= 0;
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			/*!
 			ActivityEdges immediately contained in the ActivityPartition.

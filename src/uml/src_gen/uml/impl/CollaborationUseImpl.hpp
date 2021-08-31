@@ -121,11 +121,8 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element> getOwner() const ; 
-			 
-			//*********************************
-			// Structural Feature Getter/Setter
-			//*********************************
+			virtual std::weak_ptr<uml::Element> getOwner() const ;
+			
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const ; 
 			
@@ -141,6 +138,9 @@ namespace uml
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			
 
+			//*********************************
+			// Structural Feature Getter/Setter
+			//*********************************
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;

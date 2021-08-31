@@ -451,7 +451,7 @@ Any ValuePinImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shar
   	switch(operationID)
 	{
 		
-		// 25023
+		// 1162006079
 		case umlPackage::VALUEPIN_OPERATION_COMPATIBLE_TYPE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -468,7 +468,7 @@ Any ValuePinImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shar
 			break;
 		}
 		
-		// 25022
+		// 2079001629
 		case umlPackage::VALUEPIN_OPERATION_NO_INCOMING_EDGES_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

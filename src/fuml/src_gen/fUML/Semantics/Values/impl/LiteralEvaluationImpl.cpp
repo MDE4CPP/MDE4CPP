@@ -35,8 +35,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "uml/umlFactory.hpp"
+#include "fUML/Semantics/Loci/LociFactory.hpp"
 
 
 #include "fUML/Semantics/Values/Evaluation.hpp"
@@ -201,7 +201,7 @@ Any LiteralEvaluationImpl::eInvoke(int operationID, std::shared_ptr<std::list < 
   	switch(operationID)
 	{
 		
-		// 7105
+		// 1020927880
 		case ValuesPackage::LITERALEVALUATION_OPERATION_GETTYPE_ESTRING:
 		{
 			//Retrieve input parameter 'builtInTypeName'

@@ -68,11 +68,11 @@ namespace fUML::Semantics::Loci
 			virtual void _beginIsolation() = 0; 
 			virtual void _endIsolation() = 0;
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			
 

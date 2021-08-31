@@ -234,8 +234,6 @@ void EOperationImpl::setOperationID(int _operationID)
 //*********************************
 // Operations
 //*********************************
-
-
 bool EOperationImpl::isOverrideOf(std::shared_ptr<ecore::EOperation> someOperation) const
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
@@ -653,7 +651,7 @@ Any EOperationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sh
   	switch(operationID)
 	{
 		
-		// 4036
+		// 861941010
 		case ecorePackage::EOPERATION_OPERATION_ISOVERRIDEOF_EOPERATION:
 		{
 			//Retrieve input parameter 'someOperation'

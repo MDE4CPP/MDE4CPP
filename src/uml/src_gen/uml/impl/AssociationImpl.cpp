@@ -859,7 +859,7 @@ Any AssociationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::s
   	switch(operationID)
 	{
 		
-		// 2257
+		// 1798482022
 		case umlPackage::ASSOCIATION_OPERATION_ASSOCIATION_ENDS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -876,7 +876,7 @@ Any AssociationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::s
 			break;
 		}
 		
-		// 2256
+		// 1486749742
 		case umlPackage::ASSOCIATION_OPERATION_BINARY_ASSOCIATIONS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -893,7 +893,7 @@ Any AssociationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::s
 			break;
 		}
 		
-		// 2258
+		// 2137643093
 		case umlPackage::ASSOCIATION_OPERATION_ENDS_MUST_BE_TYPED_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -910,21 +910,21 @@ Any AssociationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::s
 			break;
 		}
 		
-		// 2260
+		// 855369150
 		case umlPackage::ASSOCIATION_OPERATION_GETENDTYPES:
 		{
 			result = eAny(this->getEndTypes());
 			break;
 		}
 		
-		// 2259
+		// 1275990908
 		case umlPackage::ASSOCIATION_OPERATION_ISBINARY:
 		{
 			result = eAny(this->isBinary());
 			break;
 		}
 		
-		// 2254
+		// 1038022213
 		case umlPackage::ASSOCIATION_OPERATION_SPECIALIZED_END_NUMBER_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -941,7 +941,7 @@ Any AssociationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::s
 			break;
 		}
 		
-		// 2255
+		// 2057384221
 		case umlPackage::ASSOCIATION_OPERATION_SPECIALIZED_END_TYPES_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

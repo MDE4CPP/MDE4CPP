@@ -131,7 +131,7 @@ namespace uml
 			 
 			virtual bool maximum_two_parameter_nodes(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			/*!
 			If true, this Activity must not make any changes to objects. The default is false (an Activity may make nonlocal changes). (This is an assertion, not an executable property. It may be used by an execution engine to optimize model execution. If the assertion is violated by the Activity, then the model is ill-formed.)
@@ -159,7 +159,7 @@ namespace uml
 			virtual void setIsSingleExecution (bool _isSingleExecution)= 0;
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			/*!
 			ActivityEdges expressing flow between the nodes of the Activity.
@@ -188,7 +188,7 @@ namespace uml
 			<p>From package UML::Activities.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup /*Subset does not reference a union*/, uml::ActivityGroup>> getPartition() const = 0;
+			virtual std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup, uml::ActivityGroup /*Subset does not reference a union*/>> getPartition() const = 0;
 			
 			/*!
 			Top-level StructuredActivityNodes in the Activity.
@@ -249,7 +249,7 @@ namespace uml
 			<p>From package UML::Activities.</p>
 			*/
 			
-			mutable std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup /*Subset does not reference a union*/, uml::ActivityGroup>> m_partition;/*!
+			mutable std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup, uml::ActivityGroup /*Subset does not reference a union*/>> m_partition;/*!
 			Top-level StructuredActivityNodes in the Activity.
 			<p>From package UML::Activities.</p>
 			*/

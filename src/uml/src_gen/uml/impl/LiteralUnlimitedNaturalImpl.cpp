@@ -326,14 +326,14 @@ Any LiteralUnlimitedNaturalImpl::eInvoke(int operationID, std::shared_ptr<std::l
   	switch(operationID)
 	{
 		
-		// 14382
+		// 1049705709
 		case umlPackage::LITERALUNLIMITEDNATURAL_OPERATION_ISCOMPUTABLE:
 		{
 			result = eAny(this->isComputable());
 			break;
 		}
 		
-		// 14383
+		// 1389217242
 		case umlPackage::LITERALUNLIMITEDNATURAL_OPERATION_UNLIMITEDVALUE:
 		{
 			result = eAny(this->unlimitedValue());

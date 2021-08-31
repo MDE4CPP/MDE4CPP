@@ -89,11 +89,11 @@ namespace uml
 			 
 			virtual std::shared_ptr<Bag<uml::ConnectorEnd> > getEnds() = 0;
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			/*!
 			A set of ConnectorEnds that attach to this ConnectableElement.

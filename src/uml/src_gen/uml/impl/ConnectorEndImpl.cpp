@@ -352,14 +352,14 @@ Any ConnectorEndImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::
   	switch(operationID)
 	{
 		
-		// 5471
+		// 847443347
 		case umlPackage::CONNECTOREND_OPERATION_GETDEFININGEND:
 		{
 			result = eAny(this->getDefiningEnd());
 			break;
 		}
 		
-		// 5469
+		// 931479953
 		case umlPackage::CONNECTOREND_OPERATION_MULTIPLICITY_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -376,7 +376,7 @@ Any ConnectorEndImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::
 			break;
 		}
 		
-		// 5468
+		// 1300949541
 		case umlPackage::CONNECTOREND_OPERATION_PART_WITH_PORT_EMPTY_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -393,7 +393,7 @@ Any ConnectorEndImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::
 			break;
 		}
 		
-		// 5467
+		// 1121458246
 		case umlPackage::CONNECTOREND_OPERATION_ROLE_AND_PART_WITH_PORT_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -410,7 +410,7 @@ Any ConnectorEndImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::
 			break;
 		}
 		
-		// 5470
+		// 1132520274
 		case umlPackage::CONNECTOREND_OPERATION_SELF_PART_WITH_PORT_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

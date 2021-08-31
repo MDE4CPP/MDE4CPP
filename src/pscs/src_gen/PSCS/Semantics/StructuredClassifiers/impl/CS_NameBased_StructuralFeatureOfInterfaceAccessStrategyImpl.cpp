@@ -233,7 +233,7 @@ Any CS_NameBased_StructuralFeatureOfInterfaceAccessStrategyImpl::eInvoke(int ope
   	switch(operationID)
 	{
 		
-		// 2104
+		// 1849482999
 		case StructuredClassifiersPackage::CS_NAMEBASED_STRUCTURALFEATUREOFINTERFACEACCESSSTRATEGY_OPERATION_READ_CS_OBJECT_STRUCTURALFEATURE:
 		{
 			//Retrieve input parameter 'cs_Object'
@@ -250,7 +250,7 @@ Any CS_NameBased_StructuralFeatureOfInterfaceAccessStrategyImpl::eInvoke(int ope
 			break;
 		}
 		
-		// 2105
+		// 1258662766
 		case StructuredClassifiersPackage::CS_NAMEBASED_STRUCTURALFEATUREOFINTERFACEACCESSSTRATEGY_OPERATION_WRITE_CS_OBJECT_EINT:
 		{
 			//Retrieve input parameter 'cs_Object'

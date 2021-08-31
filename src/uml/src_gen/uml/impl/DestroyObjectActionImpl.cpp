@@ -410,7 +410,7 @@ Any DestroyObjectActionImpl::eInvoke(int operationID, std::shared_ptr<std::list 
   	switch(operationID)
 	{
 		
-		// 7396
+		// 1797058034
 		case umlPackage::DESTROYOBJECTACTION_OPERATION_MULTIPLICITY_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -427,7 +427,7 @@ Any DestroyObjectActionImpl::eInvoke(int operationID, std::shared_ptr<std::list 
 			break;
 		}
 		
-		// 7397
+		// 272933635
 		case umlPackage::DESTROYOBJECTACTION_OPERATION_NO_TYPE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

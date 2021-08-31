@@ -444,7 +444,7 @@ Any InformationItemImpl::eInvoke(int operationID, std::shared_ptr<std::list < st
   	switch(operationID)
 	{
 		
-		// 11550
+		// 1598598328
 		case umlPackage::INFORMATIONITEM_OPERATION_HAS_NO_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -461,7 +461,7 @@ Any InformationItemImpl::eInvoke(int operationID, std::shared_ptr<std::list < st
 			break;
 		}
 		
-		// 11551
+		// 2094046008
 		case umlPackage::INFORMATIONITEM_OPERATION_NOT_INSTANTIABLE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -478,7 +478,7 @@ Any InformationItemImpl::eInvoke(int operationID, std::shared_ptr<std::list < st
 			break;
 		}
 		
-		// 11549
+		// 41648181
 		case umlPackage::INFORMATIONITEM_OPERATION_SOURCES_AND_TARGETS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

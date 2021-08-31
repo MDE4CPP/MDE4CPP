@@ -105,11 +105,11 @@ namespace fUML::Semantics::Activities
 			virtual void suspend(std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> activation) = 0; 
 			virtual void terminateAll() = 0;
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			
 			virtual std::weak_ptr<fUML::Semantics::Activities::ActivityExecution> getActivityExecution() const = 0;

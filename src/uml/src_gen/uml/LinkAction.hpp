@@ -116,11 +116,11 @@ namespace uml
 			 
 			virtual bool same_pins(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			/*!
 			The LinkEndData identifying the values on the ends of the links acting on by this LinkAction.

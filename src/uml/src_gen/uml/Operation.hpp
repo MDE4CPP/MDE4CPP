@@ -168,7 +168,7 @@ namespace uml
 			virtual void setType(std::shared_ptr<uml::Type> newType) = 0; 
 			virtual void setUpper(int newUpper) = 0;
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			/*!
 			Specifies whether the return parameter is ordered or not, if present.  This information is derived from the return result for this Operation.
@@ -212,7 +212,7 @@ namespace uml
 			
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			/*!
 			An optional Constraint on the result values of an invocation of this Operation.

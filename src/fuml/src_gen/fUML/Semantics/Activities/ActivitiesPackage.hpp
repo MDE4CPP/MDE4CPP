@@ -15,13 +15,13 @@
 namespace ecore 
 {
 	class EAnnotation;
-	class EAttribute;
+	class EReference;
 	class EClass;
 	class EDataType;
 	class EGenericType;
-	class EOperation;
+	class EAttribute;
 	class EParameter;
-	class EReference;
+	class EOperation;
 	class EStringToStringMapEntry;
 }
 
@@ -121,7 +121,7 @@ namespace fUML::Semantics::Activities
 			//Class and Feature IDs 
 			static const long long ACTIVITYEXECUTION_CLASS = 750496334;
 			static const unsigned int ACTIVITYEXECUTION_CLASS_FEATURE_COUNT = 9;
-			static const unsigned int ACTIVITYEXECUTION_CLASS_OPERATION_COUNT = 48;
+			static const unsigned int ACTIVITYEXECUTION_CLASS_OPERATION_COUNT = 47;
 			
 			static const long long ACTIVITYEXECUTION_ATTRIBUTE_ACTIVATIONGROUP = 11280750;
 			static const long long ACTIVITYEXECUTION_ATTRIBUTE_ACTIVITY = 1195953016;

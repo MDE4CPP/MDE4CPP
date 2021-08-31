@@ -182,7 +182,7 @@ namespace uml
 			 
 			virtual bool visibility_needs_ownership(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			/*!
 			The name of the NamedElement.
@@ -212,7 +212,7 @@ namespace uml
 			virtual void setVisibility (uml::VisibilityKind _visibility)= 0;
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			/*!
 			Indicates the Dependencies that reference this NamedElement as a client.

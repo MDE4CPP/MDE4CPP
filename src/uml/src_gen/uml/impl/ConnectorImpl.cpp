@@ -669,14 +669,14 @@ Any ConnectorImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sha
   	switch(operationID)
 	{
 		
-		// 5383
+		// 1738876455
 		case umlPackage::CONNECTOR_OPERATION_GETKIND:
 		{
 			result = eAny(this->getKind());
 			break;
 		}
 		
-		// 5382
+		// 1203441862
 		case umlPackage::CONNECTOR_OPERATION_ROLES_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -693,7 +693,7 @@ Any ConnectorImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sha
 			break;
 		}
 		
-		// 5381
+		// 388310687
 		case umlPackage::CONNECTOR_OPERATION_TYPES_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

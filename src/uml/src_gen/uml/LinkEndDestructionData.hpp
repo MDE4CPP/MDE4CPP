@@ -90,7 +90,7 @@ namespace uml
 			 
 			virtual bool destroyAt_pin(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			/*!
 			Specifies whether to destroy duplicates of the value in nonunique Association ends.
@@ -106,7 +106,7 @@ namespace uml
 			virtual void setIsDestroyDuplicates (bool _isDestroyDuplicates)= 0;
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			/*!
 			The InputPin that provides the position of an existing link to be destroyed in an ordered, nonunique Association end. The type of the destroyAt InputPin is UnlimitedNatural, but the value cannot be zero or unlimited.

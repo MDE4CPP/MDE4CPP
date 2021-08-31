@@ -462,7 +462,7 @@ Any LifelineImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shar
   	switch(operationID)
 	{
 		
-		// 13271
+		// 1328915244
 		case umlPackage::LIFELINE_OPERATION_INTERACTION_USES_SHARE_LIFELINE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -479,7 +479,7 @@ Any LifelineImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shar
 			break;
 		}
 		
-		// 13272
+		// 520184878
 		case umlPackage::LIFELINE_OPERATION_SAME_CLASSIFIER_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -496,7 +496,7 @@ Any LifelineImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shar
 			break;
 		}
 		
-		// 13273
+		// 1159498731
 		case umlPackage::LIFELINE_OPERATION_SELECTOR_INT_OR_STRING_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -513,7 +513,7 @@ Any LifelineImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shar
 			break;
 		}
 		
-		// 13270
+		// 1628682169
 		case umlPackage::LIFELINE_OPERATION_SELECTOR_SPECIFIED_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

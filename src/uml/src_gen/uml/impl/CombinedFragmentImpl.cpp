@@ -525,7 +525,7 @@ Any CombinedFragmentImpl::eInvoke(int operationID, std::shared_ptr<std::list < s
   	switch(operationID)
 	{
 		
-		// 4472
+		// 173441283
 		case umlPackage::COMBINEDFRAGMENT_OPERATION_BREAK__EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -542,7 +542,7 @@ Any CombinedFragmentImpl::eInvoke(int operationID, std::shared_ptr<std::list < s
 			break;
 		}
 		
-		// 4473
+		// 1524474821
 		case umlPackage::COMBINEDFRAGMENT_OPERATION_CONSIDER_AND_IGNORE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -559,7 +559,7 @@ Any CombinedFragmentImpl::eInvoke(int operationID, std::shared_ptr<std::list < s
 			break;
 		}
 		
-		// 4474
+		// 2094584575
 		case umlPackage::COMBINEDFRAGMENT_OPERATION_OPT_LOOP_BREAK_NEG_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

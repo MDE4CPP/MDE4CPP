@@ -72,7 +72,7 @@ namespace ocl::Types
 			//*********************************
 			
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			 
 			virtual std::string getSpecification() const = 0;
@@ -80,7 +80,7 @@ namespace ocl::Types
 			virtual void setSpecification (std::string _specification)= 0;
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			
 

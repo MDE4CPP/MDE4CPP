@@ -339,7 +339,7 @@ Any ConsiderIgnoreFragmentImpl::eInvoke(int operationID, std::shared_ptr<std::li
   	switch(operationID)
 	{
 		
-		// 5676
+		// 849186850
 		case umlPackage::CONSIDERIGNOREFRAGMENT_OPERATION_CONSIDER_OR_IGNORE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -356,7 +356,7 @@ Any ConsiderIgnoreFragmentImpl::eInvoke(int operationID, std::shared_ptr<std::li
 			break;
 		}
 		
-		// 5677
+		// 859253303
 		case umlPackage::CONSIDERIGNOREFRAGMENT_OPERATION_TYPE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

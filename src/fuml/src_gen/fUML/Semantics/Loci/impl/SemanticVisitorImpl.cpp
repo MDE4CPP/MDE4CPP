@@ -189,14 +189,14 @@ Any SemanticVisitorImpl::eInvoke(int operationID, std::shared_ptr<std::list < st
   	switch(operationID)
 	{
 		
-		// 10401
+		// 1202559749
 		case LociPackage::SEMANTICVISITOR_OPERATION__BEGINISOLATION:
 		{
 			this->_beginIsolation();
 			break;
 		}
 		
-		// 10400
+		// 1758854823
 		case LociPackage::SEMANTICVISITOR_OPERATION__ENDISOLATION:
 		{
 			this->_endIsolation();

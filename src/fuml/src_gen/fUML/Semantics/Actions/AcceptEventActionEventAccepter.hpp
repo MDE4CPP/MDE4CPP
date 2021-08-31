@@ -70,11 +70,11 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			
 			virtual std::shared_ptr<fUML::Semantics::Actions::AcceptEventActionActivation> getActionActivation() const = 0;

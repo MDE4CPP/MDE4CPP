@@ -724,7 +724,7 @@ Any BehavioralFeatureImpl::eInvoke(int operationID, std::shared_ptr<std::list < 
   	switch(operationID)
 	{
 		
-		// 2600
+		// 506804351
 		case umlPackage::BEHAVIORALFEATURE_OPERATION_ABSTRACT_NO_METHOD_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -741,7 +741,7 @@ Any BehavioralFeatureImpl::eInvoke(int operationID, std::shared_ptr<std::list < 
 			break;
 		}
 		
-		// 2601
+		// 561652659
 		case umlPackage::BEHAVIORALFEATURE_OPERATION_CREATERETURNRESULT_STRING_TYPE:
 		{
 			//Retrieve input parameter 'name'
@@ -758,14 +758,14 @@ Any BehavioralFeatureImpl::eInvoke(int operationID, std::shared_ptr<std::list < 
 			break;
 		}
 		
-		// 2602
+		// 1757399347
 		case umlPackage::BEHAVIORALFEATURE_OPERATION_INPUTPARAMETERS:
 		{
 			result = eAny(this->inputParameters());
 			break;
 		}
 		
-		// 2603
+		// 370844008
 		case umlPackage::BEHAVIORALFEATURE_OPERATION_OUTPUTPARAMETERS:
 		{
 			result = eAny(this->outputParameters());

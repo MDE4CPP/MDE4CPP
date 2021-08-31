@@ -94,11 +94,11 @@ namespace uml
 			 
 			virtual bool type_of_qualifier(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			/*!
 			The qualifier Property for which the value is to be specified.

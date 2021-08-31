@@ -323,7 +323,7 @@ Any TupleValueImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sh
   	switch(operationID)
 	{
 		
-		// 8913
+		// 1507564928
 		case ValuesPackage::TUPLEVALUE_OPERATION_EQUALS_VALUE:
 		{
 			//Retrieve input parameter 'otherValue'
@@ -335,7 +335,7 @@ Any TupleValueImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sh
 			break;
 		}
 		
-		// 8912
+		// 1666165674
 		case ValuesPackage::TUPLEVALUE_OPERATION_TOSTRING:
 		{
 			result = eAny(this->toString());

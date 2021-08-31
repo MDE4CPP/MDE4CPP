@@ -99,7 +99,7 @@ namespace fUML::Semantics::CommonBehavior
 			virtual void suspendCaller() = 0; 
 			virtual void wait_() = 0;
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			 
 			virtual bool getCallerSuspended() const = 0;
@@ -107,7 +107,7 @@ namespace fUML::Semantics::CommonBehavior
 			virtual void setCallerSuspended (bool _callerSuspended)= 0;
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			
 

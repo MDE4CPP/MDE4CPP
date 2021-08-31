@@ -570,21 +570,21 @@ Any CallActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list
   	switch(operationID)
 	{
 		
-		// 1462
+		// 789549435
 		case ActionsPackage::CALLACTIONACTIVATION_OPERATION_DOACTION:
 		{
 			this->doAction();
 			break;
 		}
 		
-		// 1460
+		// 1108060274
 		case ActionsPackage::CALLACTIONACTIVATION_OPERATION_GETCALLEXECUTION:
 		{
 			result = eAny(this->getCallExecution());
 			break;
 		}
 		
-		// 1461
+		// 894035989
 		case ActionsPackage::CALLACTIONACTIVATION_OPERATION_REMOVECALLEXECUTION_EXECUTION:
 		{
 			//Retrieve input parameter 'execution'
@@ -596,7 +596,7 @@ Any CallActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list
 			break;
 		}
 		
-		// 1463
+		// 58283131
 		case ActionsPackage::CALLACTIONACTIVATION_OPERATION_TERMINATE:
 		{
 			this->terminate();

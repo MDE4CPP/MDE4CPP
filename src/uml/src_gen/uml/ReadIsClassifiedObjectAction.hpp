@@ -113,7 +113,7 @@ namespace uml
 			 
 			virtual bool no_type(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			/*!
 			Indicates whether the input object must be directly classified by the given Classifier or whether it may also be an instance of a specialization of the given Classifier.
@@ -129,7 +129,7 @@ namespace uml
 			virtual void setIsDirect (bool _isDirect)= 0;
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			/*!
 			The Classifier against which the classification of the input object is tested.

@@ -335,21 +335,21 @@ Any OfferImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_
   	switch(operationID)
 	{
 		
-		// 8401
+		// 1010430261
 		case ActivitiesPackage::OFFER_OPERATION_COUNTOFFEREDVALES:
 		{
 			result = eAny(this->countOfferedVales());
 			break;
 		}
 		
-		// 8405
+		// 610053038
 		case ActivitiesPackage::OFFER_OPERATION_HASTOKENS:
 		{
 			result = eAny(this->hasTokens());
 			break;
 		}
 		
-		// 8403
+		// 541660047
 		case ActivitiesPackage::OFFER_OPERATION_REMOVEOFFEREDVALUES_EINT:
 		{
 			//Retrieve input parameter 'count'
@@ -361,14 +361,14 @@ Any OfferImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_
 			break;
 		}
 		
-		// 8404
+		// 363104288
 		case ActivitiesPackage::OFFER_OPERATION_REMOVEWITHDRAWNTOKENS:
 		{
 			this->removeWithdrawnTokens();
 			break;
 		}
 		
-		// 8402
+		// 1975591629
 		case ActivitiesPackage::OFFER_OPERATION_RETRIEVEOFFEREDTOKENS:
 		{
 			result = eAny(this->retrieveOfferedTokens());

@@ -314,14 +314,14 @@ Any ReturnInformationImpl::eInvoke(int operationID, std::shared_ptr<std::list < 
   	switch(operationID)
 	{
 		
-		// 10218
+		// 2045103425
 		case ActionsPackage::RETURNINFORMATION_OPERATION__COPY:
 		{
 			result = eAny(this->_copy());
 			break;
 		}
 		
-		// 10212
+		// 1074588088
 		case ActionsPackage::RETURNINFORMATION_OPERATION_EQUALS_VALUE:
 		{
 			//Retrieve input parameter 'otherValue'
@@ -333,28 +333,28 @@ Any ReturnInformationImpl::eInvoke(int operationID, std::shared_ptr<std::list < 
 			break;
 		}
 		
-		// 10211
+		// 455013808
 		case ActionsPackage::RETURNINFORMATION_OPERATION_GETOPERATION:
 		{
 			result = eAny(this->getOperation());
 			break;
 		}
 		
-		// 10213
+		// 904744346
 		case ActionsPackage::RETURNINFORMATION_OPERATION_GETTYPES:
 		{
 			result = eAny(this->getTypes());
 			break;
 		}
 		
-		// 10214
+		// 1466582464
 		case ActionsPackage::RETURNINFORMATION_OPERATION_NEW_:
 		{
 			result = eAny(this->new_());
 			break;
 		}
 		
-		// 10215
+		// 1070285524
 		case ActionsPackage::RETURNINFORMATION_OPERATION_REPLY_PARAMETERVALUE:
 		{
 			//Retrieve input parameter 'outputParameterValues'
@@ -366,14 +366,14 @@ Any ReturnInformationImpl::eInvoke(int operationID, std::shared_ptr<std::list < 
 			break;
 		}
 		
-		// 10216
+		// 364086231
 		case ActionsPackage::RETURNINFORMATION_OPERATION_SPECIFY:
 		{
 			result = eAny(this->specify());
 			break;
 		}
 		
-		// 10217
+		// 352529642
 		case ActionsPackage::RETURNINFORMATION_OPERATION_TOSTRING:
 		{
 			result = eAny(this->toString());

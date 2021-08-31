@@ -5,15 +5,15 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
 #include "ecore/EAnnotation.hpp"
-#include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
+#include "ecore/ETypeParameter.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EDataType.hpp"
 #include "ecore/EGenericType.hpp"
-#include "ecore/EOperation.hpp"
+#include "ecore/EAttribute.hpp"
 #include "ecore/EParameter.hpp"
-#include "ecore/EReference.hpp"
+#include "ecore/EOperation.hpp"
 #include "ecore/EStringToStringMapEntry.hpp"
-#include "ecore/ETypeParameter.hpp"
 
 //metamodel factory
 #include "ecore/ecoreFactory.hpp"
@@ -461,10 +461,6 @@ std::shared_ptr<ecore::EOperation> ecorePackageImpl::getEObject_Operation_eClass
 {
 	return m_eObject_Operation_eClass;
 }
-std::shared_ptr<ecore::EOperation> ecorePackageImpl::getEObject_Operation_eContainer() const
-{
-	return m_eObject_Operation_eContainer;
-}
 std::shared_ptr<ecore::EOperation> ecorePackageImpl::getEObject_Operation_eContainingFeature() const
 {
 	return m_eObject_Operation_eContainingFeature;
@@ -548,10 +544,6 @@ std::shared_ptr<ecore::EReference> ecorePackageImpl::getEOperation_Attribute_eTy
 	return m_eOperation_Attribute_eTypeParameters;
 }
 
-std::shared_ptr<ecore::EOperation> ecorePackageImpl::getEOperation_Operation_getOperationID() const
-{
-	return m_eOperation_Operation_getOperationID;
-}
 std::shared_ptr<ecore::EOperation> ecorePackageImpl::getEOperation_Operation_isOverrideOf_EOperation() const
 {
 	return m_eOperation_Operation_isOverrideOf_EOperation;
@@ -714,10 +706,6 @@ std::shared_ptr<ecore::EReference> ecorePackageImpl::getEStructuralFeature_Attri
 std::shared_ptr<ecore::EOperation> ecorePackageImpl::getEStructuralFeature_Operation_getContainerClass() const
 {
 	return m_eStructuralFeature_Operation_getContainerClass;
-}
-std::shared_ptr<ecore::EOperation> ecorePackageImpl::getEStructuralFeature_Operation_getFeatureID() const
-{
-	return m_eStructuralFeature_Operation_getFeatureID;
 }
 
 // End Class EStructuralFeature

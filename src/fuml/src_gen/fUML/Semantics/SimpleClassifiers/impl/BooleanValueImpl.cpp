@@ -267,14 +267,14 @@ Any BooleanValueImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::
   	switch(operationID)
 	{
 		
-		// 1317
+		// 1222842448
 		case SimpleClassifiersPackage::BOOLEANVALUE_OPERATION__COPY:
 		{
 			result = eAny(this->_copy());
 			break;
 		}
 		
-		// 1315
+		// 2145645855
 		case SimpleClassifiersPackage::BOOLEANVALUE_OPERATION_EQUALS_VALUE:
 		{
 			//Retrieve input parameter 'otherValue'
@@ -286,14 +286,14 @@ Any BooleanValueImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::
 			break;
 		}
 		
-		// 1314
+		// 2004933041
 		case SimpleClassifiersPackage::BOOLEANVALUE_OPERATION_SPECIFY:
 		{
 			result = eAny(this->specify());
 			break;
 		}
 		
-		// 1316
+		// 518253164
 		case SimpleClassifiersPackage::BOOLEANVALUE_OPERATION_TOSTRING:
 		{
 			result = eAny(this->toString());

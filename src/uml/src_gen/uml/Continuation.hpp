@@ -129,7 +129,7 @@ namespace uml
 			 
 			virtual bool same_name(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			/*!
 			True: when the Continuation is at the end of the enclosing InteractionFragment and False when it is in the beginning.
@@ -145,7 +145,7 @@ namespace uml
 			virtual void setSetting (bool _setting)= 0;
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			
 

@@ -98,11 +98,11 @@ namespace fUML::Semantics::Actions
 			virtual std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::Link> > getMatchingLinksForEndValue(std::shared_ptr<uml::Association> association,std::shared_ptr<uml::StructuralFeature> end,std::shared_ptr<fUML::Semantics::Values::Value> oppositeValue,std::shared_ptr<fUML::Semantics::Values::Value> endValue) = 0; 
 			virtual std::shared_ptr<uml::Property> getOppositeEnd(std::shared_ptr<uml::Association> association,std::shared_ptr<uml::StructuralFeature> end) = 0;
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			
 

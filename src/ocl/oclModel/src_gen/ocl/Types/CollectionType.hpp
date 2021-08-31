@@ -77,11 +77,11 @@ namespace ocl::Types
 			 
 			virtual bool kindOf(std::shared_ptr<ocl::Types::CollectionType> coll) = 0;
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			
 			virtual std::shared_ptr<ecore::EClassifier> getElementType() const = 0;

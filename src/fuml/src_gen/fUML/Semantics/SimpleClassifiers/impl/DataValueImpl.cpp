@@ -38,8 +38,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "uml/umlFactory.hpp"
 #include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
+#include "uml/umlFactory.hpp"
 
 
 #include "uml/Classifier.hpp"
@@ -249,21 +249,21 @@ Any DataValueImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sha
   	switch(operationID)
 	{
 		
-		// 3629
+		// 1504394808
 		case SimpleClassifiersPackage::DATAVALUE_OPERATION__COPY:
 		{
 			result = eAny(this->_copy());
 			break;
 		}
 		
-		// 3628
+		// 133859574
 		case SimpleClassifiersPackage::DATAVALUE_OPERATION_GETTYPES:
 		{
 			result = eAny(this->getTypes());
 			break;
 		}
 		
-		// 3627
+		// 2084136138
 		case SimpleClassifiersPackage::DATAVALUE_OPERATION_NEW_:
 		{
 			result = eAny(this->new_());

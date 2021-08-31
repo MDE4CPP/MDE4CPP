@@ -32,8 +32,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
+#include "fUML/Semantics/Loci/LociFactory.hpp"
 
 
 #include "fUML/Semantics/StructuredClassifiers/ExtensionalValue.hpp"
@@ -214,7 +214,7 @@ Any ExtensionalValueListImpl::eInvoke(int operationID, std::shared_ptr<std::list
   	switch(operationID)
 	{
 		
-		// 5330
+		// 935741283
 		case StructuredClassifiersPackage::EXTENSIONALVALUELIST_OPERATION_ADDVALUE_EXTENSIONALVALUE:
 		{
 			//Retrieve input parameter 'value'
@@ -226,7 +226,7 @@ Any ExtensionalValueListImpl::eInvoke(int operationID, std::shared_ptr<std::list
 			break;
 		}
 		
-		// 5331
+		// 160454059
 		case StructuredClassifiersPackage::EXTENSIONALVALUELIST_OPERATION_ADDVALUE_EXTENSIONALVALUE_EINT:
 		{
 			//Retrieve input parameter 'value'
@@ -243,14 +243,14 @@ Any ExtensionalValueListImpl::eInvoke(int operationID, std::shared_ptr<std::list
 			break;
 		}
 		
-		// 5329
+		// 1588146499
 		case StructuredClassifiersPackage::EXTENSIONALVALUELIST_OPERATION_GETVALUE:
 		{
 			result = eAny(this->getValue());
 			break;
 		}
 		
-		// 5333
+		// 1425086792
 		case StructuredClassifiersPackage::EXTENSIONALVALUELIST_OPERATION_REMOVEVALUE_EINT:
 		{
 			//Retrieve input parameter 'i'
@@ -262,7 +262,7 @@ Any ExtensionalValueListImpl::eInvoke(int operationID, std::shared_ptr<std::list
 			break;
 		}
 		
-		// 5332
+		// 950923814
 		case StructuredClassifiersPackage::EXTENSIONALVALUELIST_OPERATION_SETVALUE_EXTENSIONALVALUE_EINT:
 		{
 			//Retrieve input parameter 'value'

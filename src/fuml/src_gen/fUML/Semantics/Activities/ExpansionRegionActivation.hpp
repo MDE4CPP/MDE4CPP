@@ -102,7 +102,7 @@ namespace fUML::Semantics::Activities
 			virtual void terminate() = 0; 
 			virtual void terminateGroup(std::shared_ptr<fUML::Semantics::Activities::ExpansionActivationGroup> activationGroup) = 0;
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			 
 			virtual int getNext() const = 0;
@@ -110,7 +110,7 @@ namespace fUML::Semantics::Activities
 			virtual void setNext (int _next)= 0;
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			
 			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::ExpansionActivationGroup>> getActivationGroups() const = 0;

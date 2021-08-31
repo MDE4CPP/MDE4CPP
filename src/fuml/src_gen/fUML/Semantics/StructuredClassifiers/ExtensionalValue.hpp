@@ -76,11 +76,11 @@ namespace fUML::Semantics::StructuredClassifiers
 			virtual std::shared_ptr<fUML::Semantics::Values::Value> _copy() = 0; 
 			virtual void destroy() = 0;
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			
 			virtual std::shared_ptr<fUML::Semantics::Loci::Locus> getLocus() const = 0;

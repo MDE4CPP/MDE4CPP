@@ -79,11 +79,11 @@ namespace ocl::Values
 			virtual bool find(std::shared_ptr<fUML::Semantics::Values::Value> value) = 0; 
 			virtual std::string toString() = 0;
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			
 			virtual std::shared_ptr<Bag<ocl::Values::Element>> getElements() const = 0;

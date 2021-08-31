@@ -87,11 +87,11 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			
 			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> getCurrentExecution() const = 0;

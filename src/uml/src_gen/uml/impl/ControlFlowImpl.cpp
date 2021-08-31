@@ -295,7 +295,7 @@ Any ControlFlowImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::s
   	switch(operationID)
 	{
 		
-		// 5984
+		// 1247728389
 		case umlPackage::CONTROLFLOW_OPERATION_OBJECT_NODES_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

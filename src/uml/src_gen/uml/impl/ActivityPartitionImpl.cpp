@@ -779,7 +779,7 @@ Any ActivityPartitionImpl::eInvoke(int operationID, std::shared_ptr<std::list < 
   	switch(operationID)
 	{
 		
-		// 1383
+		// 1076567983
 		case umlPackage::ACTIVITYPARTITION_OPERATION_DIMENSION_NOT_CONTAINED_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -796,7 +796,7 @@ Any ActivityPartitionImpl::eInvoke(int operationID, std::shared_ptr<std::list < 
 			break;
 		}
 		
-		// 1380
+		// 639011092
 		case umlPackage::ACTIVITYPARTITION_OPERATION_REPRESENTS_CLASSIFIER_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -813,7 +813,7 @@ Any ActivityPartitionImpl::eInvoke(int operationID, std::shared_ptr<std::list < 
 			break;
 		}
 		
-		// 1382
+		// 511389922
 		case umlPackage::ACTIVITYPARTITION_OPERATION_REPRESENTS_PROPERTY_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -830,7 +830,7 @@ Any ActivityPartitionImpl::eInvoke(int operationID, std::shared_ptr<std::list < 
 			break;
 		}
 		
-		// 1381
+		// 1105654129
 		case umlPackage::ACTIVITYPARTITION_OPERATION_REPRESENTS_PROPERTY_AND_IS_CONTAINED_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

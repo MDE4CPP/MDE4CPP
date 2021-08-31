@@ -315,14 +315,14 @@ Any TokenImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_
   	switch(operationID)
 	{
 		
-		// 11506
+		// 1757807572
 		case ActivitiesPackage::TOKEN_OPERATION__COPY:
 		{
 			result = eAny(this->_copy());
 			break;
 		}
 		
-		// 11504
+		// 1923944023
 		case ActivitiesPackage::TOKEN_OPERATION_EQUALS_TOKEN:
 		{
 			//Retrieve input parameter 'other'
@@ -334,21 +334,21 @@ Any TokenImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_
 			break;
 		}
 		
-		// 11507
+		// 1836665410
 		case ActivitiesPackage::TOKEN_OPERATION_GETVALUE:
 		{
 			result = eAny(this->getValue());
 			break;
 		}
 		
-		// 11505
+		// 2050511719
 		case ActivitiesPackage::TOKEN_OPERATION_ISCONTROL:
 		{
 			result = eAny(this->isControl());
 			break;
 		}
 		
-		// 11502
+		// 1196367815
 		case ActivitiesPackage::TOKEN_OPERATION_TRANSFER_ACTIVITYNODEACTIVATION:
 		{
 			//Retrieve input parameter 'holder'
@@ -360,7 +360,7 @@ Any TokenImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_
 			break;
 		}
 		
-		// 11503
+		// 1727020278
 		case ActivitiesPackage::TOKEN_OPERATION_WITHDRAW:
 		{
 			this->withdraw();

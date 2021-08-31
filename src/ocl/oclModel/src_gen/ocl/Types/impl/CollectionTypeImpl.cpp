@@ -32,8 +32,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "ocl/Values/ValuesFactory.hpp"
 #include "ecore/ecoreFactory.hpp"
+#include "ocl/Values/ValuesFactory.hpp"
 
 
 #include "ocl/Types/CollectionType.hpp"
@@ -274,7 +274,7 @@ Any CollectionTypeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std
   	switch(operationID)
 	{
 		
-		// 2014
+		// 1909894118
 		case TypesPackage::COLLECTIONTYPE_OPERATION_KINDOF_COLLECTIONTYPE:
 		{
 			//Retrieve input parameter 'coll'

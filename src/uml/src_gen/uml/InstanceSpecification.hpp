@@ -111,11 +111,11 @@ namespace uml
 			 
 			virtual bool structural_feature(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			/*!
 			The Classifier or Classifiers of the represented instance. If multiple Classifiers are specified, the instance is classified by all of them.

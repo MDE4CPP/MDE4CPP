@@ -155,11 +155,11 @@ namespace uml
 			 
 			virtual bool selector_specified(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			/*!
 			References the InteractionFragments in which this Lifeline takes part.

@@ -71,7 +71,7 @@ namespace uml
 			//*********************************
 			
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			/*!
 			Specifies a string that is the comment.
@@ -87,7 +87,7 @@ namespace uml
 			virtual void setBody (std::string _body)= 0;
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			/*!
 			References the Element(s) being commented.

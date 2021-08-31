@@ -481,7 +481,7 @@ Any InteractionOperandImpl::eInvoke(int operationID, std::shared_ptr<std::list <
   	switch(operationID)
 	{
 		
-		// 12290
+		// 922629264
 		case umlPackage::INTERACTIONOPERAND_OPERATION_GUARD_CONTAIN_REFERENCES_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -498,7 +498,7 @@ Any InteractionOperandImpl::eInvoke(int operationID, std::shared_ptr<std::list <
 			break;
 		}
 		
-		// 12291
+		// 268236189
 		case umlPackage::INTERACTIONOPERAND_OPERATION_GUARD_DIRECTLY_PRIOR_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

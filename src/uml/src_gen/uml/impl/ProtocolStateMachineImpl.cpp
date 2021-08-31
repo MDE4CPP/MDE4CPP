@@ -574,7 +574,7 @@ Any ProtocolStateMachineImpl::eInvoke(int operationID, std::shared_ptr<std::list
   	switch(operationID)
 	{
 		
-		// 18904
+		// 2140613199
 		case umlPackage::PROTOCOLSTATEMACHINE_OPERATION_DEEP_OR_SHALLOW_HISTORY_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -591,7 +591,7 @@ Any ProtocolStateMachineImpl::eInvoke(int operationID, std::shared_ptr<std::list
 			break;
 		}
 		
-		// 18905
+		// 1716936520
 		case umlPackage::PROTOCOLSTATEMACHINE_OPERATION_ENTRY_EXIT_DO_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -608,7 +608,7 @@ Any ProtocolStateMachineImpl::eInvoke(int operationID, std::shared_ptr<std::list
 			break;
 		}
 		
-		// 18906
+		// 1236567633
 		case umlPackage::PROTOCOLSTATEMACHINE_OPERATION_PROTOCOL_TRANSITIONS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

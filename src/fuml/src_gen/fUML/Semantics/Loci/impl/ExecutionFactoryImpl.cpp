@@ -428,8 +428,6 @@ int ExecutionFactoryImpl::getStrategyIndex(std::string name)
 	//end of body
 }
 
-
-
 std::shared_ptr<fUML::Semantics::CommonBehavior::OpaqueBehaviorExecution> ExecutionFactoryImpl::instantiateOpaqueBehaviorExecution(std::shared_ptr<uml::Behavior> behavior)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
@@ -1010,7 +1008,7 @@ Any ExecutionFactoryImpl::eInvoke(int operationID, std::shared_ptr<std::list < s
   	switch(operationID)
 	{
 		
-		// 4710
+		// 856696871
 		case LociPackage::EXECUTIONFACTORY_OPERATION_ADDBUILTINTYPE_PRIMITIVETYPE:
 		{
 			//Retrieve input parameter 'type'
@@ -1022,7 +1020,7 @@ Any ExecutionFactoryImpl::eInvoke(int operationID, std::shared_ptr<std::list < s
 			break;
 		}
 		
-		// 4709
+		// 1007202968
 		case LociPackage::EXECUTIONFACTORY_OPERATION_ADDPRIMITIVEBEHAVIORPROTOTYPE_OPAQUEBEHAVIOREXECUTION:
 		{
 			//Retrieve input parameter 'execution'
@@ -1034,7 +1032,7 @@ Any ExecutionFactoryImpl::eInvoke(int operationID, std::shared_ptr<std::list < s
 			break;
 		}
 		
-		// 4712
+		// 1797723207
 		case LociPackage::EXECUTIONFACTORY_OPERATION_ASSIGNSTRATEGY_SEMANTICSTRATEGY:
 		{
 			//Retrieve input parameter 'strategy'
@@ -1046,7 +1044,7 @@ Any ExecutionFactoryImpl::eInvoke(int operationID, std::shared_ptr<std::list < s
 			break;
 		}
 		
-		// 4705
+		// 823281622
 		case LociPackage::EXECUTIONFACTORY_OPERATION_CREATEEVALUATION_VALUESPECIFICATION:
 		{
 			//Retrieve input parameter 'specification'
@@ -1058,7 +1056,7 @@ Any ExecutionFactoryImpl::eInvoke(int operationID, std::shared_ptr<std::list < s
 			break;
 		}
 		
-		// 4704
+		// 490726063
 		case LociPackage::EXECUTIONFACTORY_OPERATION_CREATEEXECUTION_BEHAVIOR_OBJECT:
 		{
 			//Retrieve input parameter 'behavior'
@@ -1075,7 +1073,7 @@ Any ExecutionFactoryImpl::eInvoke(int operationID, std::shared_ptr<std::list < s
 			break;
 		}
 		
-		// 4711
+		// 192630283
 		case LociPackage::EXECUTIONFACTORY_OPERATION_GETBUILTINTYPE_ESTRING:
 		{
 			//Retrieve input parameter 'name'
@@ -1087,7 +1085,7 @@ Any ExecutionFactoryImpl::eInvoke(int operationID, std::shared_ptr<std::list < s
 			break;
 		}
 		
-		// 4713
+		// 1451856544
 		case LociPackage::EXECUTIONFACTORY_OPERATION_GETSTRATEGY_ESTRING:
 		{
 			//Retrieve input parameter 'name'
@@ -1099,7 +1097,7 @@ Any ExecutionFactoryImpl::eInvoke(int operationID, std::shared_ptr<std::list < s
 			break;
 		}
 		
-		// 4714
+		// 461389125
 		case LociPackage::EXECUTIONFACTORY_OPERATION_GETSTRATEGYINDEX_ESTRING:
 		{
 			//Retrieve input parameter 'name'
@@ -1111,7 +1109,7 @@ Any ExecutionFactoryImpl::eInvoke(int operationID, std::shared_ptr<std::list < s
 			break;
 		}
 		
-		// 4708
+		// 859316560
 		case LociPackage::EXECUTIONFACTORY_OPERATION_INSTANTIATEOPAQUEBEHAVIOREXECUTION_BEHAVIOR:
 		{
 			//Retrieve input parameter 'behavior'
@@ -1123,7 +1121,7 @@ Any ExecutionFactoryImpl::eInvoke(int operationID, std::shared_ptr<std::list < s
 			break;
 		}
 		
-		// 4706
+		// 1427156490
 		case LociPackage::EXECUTIONFACTORY_OPERATION_INSTANTIATEVISITOR_ELEMENT:
 		{
 			//Retrieve input parameter 'element'

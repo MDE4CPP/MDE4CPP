@@ -144,11 +144,11 @@ namespace uml
 			 
 			virtual int unlimitedValue() = 0;
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			
 			virtual std::weak_ptr<uml::Slot> getOwningSlot() const = 0;

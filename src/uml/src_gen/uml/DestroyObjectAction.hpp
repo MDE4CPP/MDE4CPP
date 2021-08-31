@@ -103,7 +103,7 @@ namespace uml
 			 
 			virtual bool no_type(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			/*!
 			Specifies whether links in which the object participates are destroyed along with the object.
@@ -131,7 +131,7 @@ namespace uml
 			virtual void setIsDestroyOwnedObjects (bool _isDestroyOwnedObjects)= 0;
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			/*!
 			The InputPin providing the object to be destroyed.

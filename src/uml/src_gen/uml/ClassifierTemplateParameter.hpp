@@ -119,7 +119,7 @@ namespace uml
 			 
 			virtual bool parametered_element_no_features(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			/*!
 			Constrains the required relationship between an actual parameter and the parameteredElement for this formal parameter.
@@ -135,7 +135,7 @@ namespace uml
 			virtual void setAllowSubstitutable (bool _allowSubstitutable)= 0;
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			/*!
 			The classifiers that constrain the argument that can be used for the parameter. If the allowSubstitutable attribute is true, then any Classifier that is compatible with this constraining Classifier can be substituted; otherwise, it must be either this Classifier or one of its specializations. If this property is empty, there are no constraints on the Classifier that can be used as an argument.

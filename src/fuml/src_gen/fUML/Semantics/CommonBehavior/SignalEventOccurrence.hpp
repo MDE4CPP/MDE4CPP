@@ -84,11 +84,11 @@ namespace fUML::Semantics::CommonBehavior
 			virtual std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > getParameterValues() = 0; 
 			virtual bool match(std::shared_ptr<uml::Trigger> trigger) = 0;
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			
 			virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance> getSignalInstance() const = 0;

@@ -53,9 +53,9 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
+#include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
-#include "fUML/Semantics/Actions/ActionsFactory.hpp"
 
 
 #include "uml/Action.hpp"
@@ -452,7 +452,7 @@ Any CS_CallOperationActionActivationImpl::eInvoke(int operationID, std::shared_p
   	switch(operationID)
 	{
 		
-		// 571
+		// 777835038
 		case ActionsPackage::CS_CALLOPERATIONACTIONACTIVATION_OPERATION__ISCREATE_OPERATION:
 		{
 			//Retrieve input parameter 'operation'
@@ -464,21 +464,21 @@ Any CS_CallOperationActionActivationImpl::eInvoke(int operationID, std::shared_p
 			break;
 		}
 		
-		// 567
+		// 161083929
 		case ActionsPackage::CS_CALLOPERATIONACTIONACTIVATION_OPERATION_DOACTION:
 		{
 			this->doAction();
 			break;
 		}
 		
-		// 566
+		// 1367520836
 		case ActionsPackage::CS_CALLOPERATIONACTIONACTIVATION_OPERATION_GETCALLEXECUTION:
 		{
 			result = eAny(this->getCallExecution());
 			break;
 		}
 		
-		// 570
+		// 1805833323
 		case ActionsPackage::CS_CALLOPERATIONACTIONACTIVATION_OPERATION_ISCREATE_OPERATION:
 		{
 			//Retrieve input parameter 'operation'
@@ -490,7 +490,7 @@ Any CS_CallOperationActionActivationImpl::eInvoke(int operationID, std::shared_p
 			break;
 		}
 		
-		// 568
+		// 1814316481
 		case ActionsPackage::CS_CALLOPERATIONACTIONACTIVATION_OPERATION_ISOPERATIONPROVIDED_PORT_OPERATION:
 		{
 			//Retrieve input parameter 'port'
@@ -507,7 +507,7 @@ Any CS_CallOperationActionActivationImpl::eInvoke(int operationID, std::shared_p
 			break;
 		}
 		
-		// 569
+		// 1388387072
 		case ActionsPackage::CS_CALLOPERATIONACTIONACTIVATION_OPERATION_ISOPERATIONREQUIRED_PORT_OPERATION:
 		{
 			//Retrieve input parameter 'port'

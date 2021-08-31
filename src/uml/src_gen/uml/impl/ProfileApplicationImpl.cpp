@@ -381,14 +381,14 @@ Any ProfileApplicationImpl::eInvoke(int operationID, std::shared_ptr<std::list <
   	switch(operationID)
 	{
 		
-		// 18451
+		// 1871054573
 		case umlPackage::PROFILEAPPLICATION_OPERATION_GETAPPLIEDDEFINITION:
 		{
 			result = eAny(this->getAppliedDefinition());
 			break;
 		}
 		
-		// 18452
+		// 1978495829
 		case umlPackage::PROFILEAPPLICATION_OPERATION_GETAPPLIEDDEFINITION_NAMEDELEMENT:
 		{
 			//Retrieve input parameter 'namedElement'

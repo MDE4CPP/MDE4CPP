@@ -133,7 +133,7 @@ namespace uml
 			<p>From package UML::Activities.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup /*Subset does not reference a union*/, uml::ActivityGroup>> getPartition() const ;
+			virtual std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup, uml::ActivityGroup /*Subset does not reference a union*/>> getPartition() const ;
 			
 			/*!
 			Top-level StructuredActivityNodes in the Activity.
@@ -209,11 +209,8 @@ namespace uml
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			
-			virtual std::shared_ptr<SubsetUnion<uml::ConnectableElement, uml::NamedElement>> getRole() const ; 
-			 
-			//*********************************
-			// Structural Feature Getter/Setter
-			//*********************************
+			virtual std::shared_ptr<SubsetUnion<uml::ConnectableElement, uml::NamedElement>> getRole() const ;
+			
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const ; 
 			
@@ -229,6 +226,9 @@ namespace uml
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			
 
+			//*********************************
+			// Structural Feature Getter/Setter
+			//*********************************
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;

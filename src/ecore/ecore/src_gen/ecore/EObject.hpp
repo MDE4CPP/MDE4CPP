@@ -92,7 +92,7 @@ namespace ecore
 			virtual void eSet(std::shared_ptr<ecore::EStructuralFeature> feature,Any newValue) = 0; 
 			virtual void eUnset(std::shared_ptr<ecore::EStructuralFeature> feature) const = 0;
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			 
 			virtual int getMetaElementID() const = 0;
@@ -100,7 +100,7 @@ namespace ecore
 			virtual void setMetaElementID (int _metaElementID)= 0;
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			
 			virtual std::weak_ptr<ecore::EObject> getEContainer() const = 0;

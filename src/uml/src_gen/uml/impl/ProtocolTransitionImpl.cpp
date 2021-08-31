@@ -427,7 +427,7 @@ Any ProtocolTransitionImpl::eInvoke(int operationID, std::shared_ptr<std::list <
   	switch(operationID)
 	{
 		
-		// 18915
+		// 222746916
 		case umlPackage::PROTOCOLTRANSITION_OPERATION_ASSOCIATED_ACTIONS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -444,7 +444,7 @@ Any ProtocolTransitionImpl::eInvoke(int operationID, std::shared_ptr<std::list <
 			break;
 		}
 		
-		// 18916
+		// 402420591
 		case umlPackage::PROTOCOLTRANSITION_OPERATION_BELONGS_TO_PSM_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -461,14 +461,14 @@ Any ProtocolTransitionImpl::eInvoke(int operationID, std::shared_ptr<std::list <
 			break;
 		}
 		
-		// 18917
+		// 1380815811
 		case umlPackage::PROTOCOLTRANSITION_OPERATION_GETREFERREDS:
 		{
 			result = eAny(this->getReferreds());
 			break;
 		}
 		
-		// 18914
+		// 1225665035
 		case umlPackage::PROTOCOLTRANSITION_OPERATION_REFERS_TO_OPERATION_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

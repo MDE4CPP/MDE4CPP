@@ -70,11 +70,11 @@ namespace fUML::Semantics::CommonBehavior
 			//*********************************
 			
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			
 			virtual std::shared_ptr<uml::Operation> getOperation() const = 0;

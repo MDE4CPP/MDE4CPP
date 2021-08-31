@@ -366,7 +366,7 @@ Any AcceptCallActionImpl::eInvoke(int operationID, std::shared_ptr<std::list < s
   	switch(operationID)
 	{
 		
-		// 302
+		// 1687719587
 		case umlPackage::ACCEPTCALLACTION_OPERATION_RESULT_PINS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -383,7 +383,7 @@ Any AcceptCallActionImpl::eInvoke(int operationID, std::shared_ptr<std::list < s
 			break;
 		}
 		
-		// 303
+		// 543743192
 		case umlPackage::ACCEPTCALLACTION_OPERATION_TRIGGER_CALL_EVENT_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -400,7 +400,7 @@ Any AcceptCallActionImpl::eInvoke(int operationID, std::shared_ptr<std::list < s
 			break;
 		}
 		
-		// 304
+		// 392805844
 		case umlPackage::ACCEPTCALLACTION_OPERATION_UNMARSHALL_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

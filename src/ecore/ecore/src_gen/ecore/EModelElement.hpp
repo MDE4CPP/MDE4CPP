@@ -72,11 +72,11 @@ namespace ecore
 			 
 			virtual std::shared_ptr<ecore::EAnnotation> getEAnnotation(std::string source) = 0;
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			
 			virtual std::shared_ptr<Subset<ecore::EAnnotation, ecore::EObject>> getEAnnotations() const = 0;

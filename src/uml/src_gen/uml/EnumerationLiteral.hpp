@@ -101,11 +101,11 @@ namespace uml
 			 
 			virtual std::shared_ptr<Bag<uml::Classifier> > getClassifiers() = 0;
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			/*!
 			The Enumeration that this EnumerationLiteral is a member of.

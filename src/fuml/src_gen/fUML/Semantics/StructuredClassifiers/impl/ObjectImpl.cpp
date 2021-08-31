@@ -39,10 +39,10 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
 #include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
 #include "uml/umlFactory.hpp"
+#include "fUML/Semantics/Loci/LociFactory.hpp"
 
 
 #include "uml/Class.hpp"
@@ -414,14 +414,14 @@ Any ObjectImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared
   	switch(operationID)
 	{
 		
-		// 8039
+		// 1873295857
 		case StructuredClassifiersPackage::OBJECT_OPERATION__COPY:
 		{
 			result = eAny(this->_copy());
 			break;
 		}
 		
-		// 8034
+		// 124401504
 		case StructuredClassifiersPackage::OBJECT_OPERATION__REGISTER_EVENTACCEPTER:
 		{
 			//Retrieve input parameter 'accepter'
@@ -433,14 +433,14 @@ Any ObjectImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared
 			break;
 		}
 		
-		// 8037
+		// 317518727
 		case StructuredClassifiersPackage::OBJECT_OPERATION_DESTROY:
 		{
 			this->destroy();
 			break;
 		}
 		
-		// 8032
+		// 961736535
 		case StructuredClassifiersPackage::OBJECT_OPERATION_DISPATCH_OPERATION:
 		{
 			//Retrieve input parameter 'operation'
@@ -452,14 +452,14 @@ Any ObjectImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared
 			break;
 		}
 		
-		// 8036
+		// 387331642
 		case StructuredClassifiersPackage::OBJECT_OPERATION_NEW_:
 		{
 			result = eAny(this->new_());
 			break;
 		}
 		
-		// 8033
+		// 1733005088
 		case StructuredClassifiersPackage::OBJECT_OPERATION_SEND_SIGNALINSTANCE:
 		{
 			//Retrieve input parameter 'signalInstance'
@@ -471,7 +471,7 @@ Any ObjectImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared
 			break;
 		}
 		
-		// 8038
+		// 878633364
 		case StructuredClassifiersPackage::OBJECT_OPERATION_SEND_EVENTOCCURRENCE:
 		{
 			//Retrieve input parameter 'eventOccurrence'
@@ -483,7 +483,7 @@ Any ObjectImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared
 			break;
 		}
 		
-		// 8031
+		// 31089561
 		case StructuredClassifiersPackage::OBJECT_OPERATION_STARTBEHAVIOR_CLASS_PARAMETERVALUE:
 		{
 			//Retrieve input parameter 'classifier'
@@ -500,7 +500,7 @@ Any ObjectImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared
 			break;
 		}
 		
-		// 8035
+		// 1522780229
 		case StructuredClassifiersPackage::OBJECT_OPERATION_UNREGISTER_EVENTACCEPTER:
 		{
 			//Retrieve input parameter 'accepter'

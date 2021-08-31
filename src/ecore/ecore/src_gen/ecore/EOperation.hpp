@@ -83,14 +83,14 @@ namespace ecore
 			 
 			virtual bool isOverrideOf(std::shared_ptr<ecore::EOperation> someOperation) const = 0;
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			 
 			virtual int getOperationID() const = 0;
 			
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			
 			virtual std::weak_ptr<ecore::EClass> getEContainingClass() const = 0;

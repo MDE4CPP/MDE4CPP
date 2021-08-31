@@ -418,7 +418,7 @@ Any GeneralizationSetImpl::eInvoke(int operationID, std::shared_ptr<std::list < 
   	switch(operationID)
 	{
 		
-		// 11075
+		// 2025134361
 		case umlPackage::GENERALIZATIONSET_OPERATION_GENERALIZATION_SAME_CLASSIFIER_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -435,7 +435,7 @@ Any GeneralizationSetImpl::eInvoke(int operationID, std::shared_ptr<std::list < 
 			break;
 		}
 		
-		// 11076
+		// 1048697575
 		case umlPackage::GENERALIZATIONSET_OPERATION_MAPS_TO_GENERALIZATION_SET_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

@@ -88,7 +88,7 @@ namespace fUML::Semantics::Activities
 			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > takeUnofferedTokens() = 0; 
 			virtual void terminate() = 0;
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			 
 			virtual int getOfferedTokenCount() const = 0;
@@ -96,7 +96,7 @@ namespace fUML::Semantics::Activities
 			virtual void setOfferedTokenCount (int _offeredTokenCount)= 0;
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			
 

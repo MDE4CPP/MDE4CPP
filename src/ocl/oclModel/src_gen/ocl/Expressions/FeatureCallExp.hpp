@@ -86,7 +86,7 @@ namespace ocl::Expressions
 			//*********************************
 			
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			 
 			virtual bool getIsPre() const = 0;
@@ -94,7 +94,7 @@ namespace ocl::Expressions
 			virtual void setIsPre (bool _isPre)= 0;
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			
 

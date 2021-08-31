@@ -121,11 +121,11 @@ namespace uml
 			 
 			virtual bool internal_structure(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			/*!
 			The Nodes that are defined (nested) within the Node.

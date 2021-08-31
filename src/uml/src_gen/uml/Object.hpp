@@ -99,11 +99,11 @@ namespace uml
 			virtual void set(std::shared_ptr<uml::Property> property,Any value) = 0; 
 			virtual void unset(std::shared_ptr<uml::Property> property) = 0;
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			
 

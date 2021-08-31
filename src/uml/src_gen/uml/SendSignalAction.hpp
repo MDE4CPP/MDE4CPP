@@ -114,11 +114,11 @@ namespace uml
 			 
 			virtual bool type_target_pin(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			/*!
 			The Signal whose instance is transmitted to the target.

@@ -77,11 +77,11 @@ namespace ecore
 			virtual std::shared_ptr<ecore::EEnumLiteral> getEEnumLiteral(int value) const = 0; 
 			virtual std::shared_ptr<ecore::EEnumLiteral> getEEnumLiteralByLiteral(std::string literal) const = 0;
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			
 			virtual std::shared_ptr<Subset<ecore::EEnumLiteral, ecore::EObject>> getELiterals() const = 0;

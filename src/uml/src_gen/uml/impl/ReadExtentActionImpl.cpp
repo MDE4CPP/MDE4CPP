@@ -389,7 +389,7 @@ Any ReadExtentActionImpl::eInvoke(int operationID, std::shared_ptr<std::list < s
   	switch(operationID)
 	{
 		
-		// 19396
+		// 796840948
 		case umlPackage::READEXTENTACTION_OPERATION_MULTIPLICITY_OF_RESULT_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -406,7 +406,7 @@ Any ReadExtentActionImpl::eInvoke(int operationID, std::shared_ptr<std::list < s
 			break;
 		}
 		
-		// 19395
+		// 163178380
 		case umlPackage::READEXTENTACTION_OPERATION_TYPE_IS_CLASSIFIER_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

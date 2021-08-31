@@ -77,7 +77,7 @@ namespace fUML::Semantics::SimpleClassifiers
 			virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> _copy() = 0; 
 			virtual bool hasEqualValues(std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> other) = 0;
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			 
 			virtual int getPosition() const = 0;
@@ -85,7 +85,7 @@ namespace fUML::Semantics::SimpleClassifiers
 			virtual void setPosition (int _position)= 0;
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			
 			virtual std::shared_ptr<uml::StructuralFeature> getFeature() const = 0;

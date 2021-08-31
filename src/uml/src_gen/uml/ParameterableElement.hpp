@@ -93,11 +93,11 @@ namespace uml
 			 
 			virtual bool isTemplateParameter() = 0;
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			/*!
 			The formal TemplateParameter that owns this ParameterableElement.

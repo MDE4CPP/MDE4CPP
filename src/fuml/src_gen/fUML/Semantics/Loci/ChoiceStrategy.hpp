@@ -68,11 +68,11 @@ namespace fUML::Semantics::Loci
 			virtual int choose(int size) = 0; 
 			virtual std::string getName() = 0;
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			
 

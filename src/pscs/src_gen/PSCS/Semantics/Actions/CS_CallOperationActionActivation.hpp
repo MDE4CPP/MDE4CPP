@@ -97,11 +97,11 @@ namespace PSCS::Semantics::Actions
 			virtual bool isOperationProvided(std::shared_ptr<uml::Port> port,std::shared_ptr<uml::Operation> operation) = 0; 
 			virtual bool isOperationRequired(std::shared_ptr<uml::Port> port,std::shared_ptr<uml::Operation> operation) = 0;
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			
 

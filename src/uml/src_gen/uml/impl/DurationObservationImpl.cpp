@@ -369,7 +369,7 @@ Any DurationObservationImpl::eInvoke(int operationID, std::shared_ptr<std::list 
   	switch(operationID)
 	{
 		
-		// 8073
+		// 254475739
 		case umlPackage::DURATIONOBSERVATION_OPERATION_FIRST_EVENT_MULTIPLICITY_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

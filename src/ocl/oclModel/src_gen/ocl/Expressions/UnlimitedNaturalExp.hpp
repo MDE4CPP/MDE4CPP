@@ -87,7 +87,7 @@ namespace ocl::Expressions
 			//*********************************
 			
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			 
 			virtual int getUnlimitedNaturalSymbol() const = 0;
@@ -95,7 +95,7 @@ namespace ocl::Expressions
 			virtual void setUnlimitedNaturalSymbol (int _unlimitedNaturalSymbol)= 0;
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			
 

@@ -109,7 +109,7 @@ namespace uml
 			 
 			virtual bool multiplicity(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			/*!
 			Specifies whether existing Classifiers should be removed before adding the new Classifiers.
@@ -125,7 +125,7 @@ namespace uml
 			virtual void setIsReplaceAll (bool _isReplaceAll)= 0;
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			/*!
 			A set of Classifiers to be added to the Classifiers of the given object.

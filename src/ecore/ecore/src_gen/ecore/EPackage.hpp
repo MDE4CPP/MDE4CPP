@@ -80,7 +80,7 @@ namespace ecore
 			 
 			virtual std::shared_ptr<ecore::EClassifier> getEClassifier(std::string name) const = 0;
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			 
 			virtual std::string getNsPrefix() const = 0;
@@ -92,7 +92,7 @@ namespace ecore
 			virtual void setNsURI (std::string _nsURI)= 0;
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			
 			virtual std::shared_ptr<Subset<ecore::EClassifier, ecore::EObject>> getEClassifiers() const = 0;

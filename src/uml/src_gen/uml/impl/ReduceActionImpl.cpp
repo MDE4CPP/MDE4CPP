@@ -477,7 +477,7 @@ Any ReduceActionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::
   	switch(operationID)
 	{
 		
-		// 20698
+		// 456887339
 		case umlPackage::REDUCEACTION_OPERATION_INPUT_TYPE_IS_COLLECTION_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -494,7 +494,7 @@ Any ReduceActionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::
 			break;
 		}
 		
-		// 20699
+		// 694994492
 		case umlPackage::REDUCEACTION_OPERATION_OUTPUT_TYPES_ARE_COMPATIBLE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -511,7 +511,7 @@ Any ReduceActionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::
 			break;
 		}
 		
-		// 20697
+		// 1133614067
 		case umlPackage::REDUCEACTION_OPERATION_REDUCER_INPUTS_OUTPUT_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

@@ -564,7 +564,7 @@ Any NodeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_p
   	switch(operationID)
 	{
 		
-		// 15881
+		// 584788215
 		case umlPackage::NODE_OPERATION_CREATECOMMUNICATIONPATH_BOOLEAN_UNLIMITEDNATURAL:
 		{
 			//Retrieve input parameter 'end1IsNavigable'
@@ -626,14 +626,14 @@ Any NodeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_p
 			break;
 		}
 		
-		// 15882
+		// 1487234918
 		case umlPackage::NODE_OPERATION_GETCOMMUNICATIONPATHS:
 		{
 			result = eAny(this->getCommunicationPaths());
 			break;
 		}
 		
-		// 15880
+		// 3509535
 		case umlPackage::NODE_OPERATION_INTERNAL_STRUCTURE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

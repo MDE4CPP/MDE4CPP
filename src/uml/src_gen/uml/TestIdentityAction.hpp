@@ -108,11 +108,11 @@ namespace uml
 			 
 			virtual bool result_is_boolean(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			/*!
 			The InputPin on which the first input object is placed.

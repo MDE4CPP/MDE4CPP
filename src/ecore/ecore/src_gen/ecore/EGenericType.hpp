@@ -75,11 +75,11 @@ namespace ecore
 			 
 			virtual bool isInstance(Any object) const = 0;
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			
 			virtual std::shared_ptr<ecore::EClassifier> getEClassifier() const = 0;

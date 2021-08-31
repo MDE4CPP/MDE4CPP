@@ -88,11 +88,11 @@ namespace uml
 			 
 			virtual std::shared_ptr<Bag<uml::PackageableElement> > getDeployedElements() = 0;
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			/*!
 			The set of elements that are manifested in an Artifact that is involved in Deployment to a DeploymentTarget.

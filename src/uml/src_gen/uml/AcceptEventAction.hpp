@@ -136,7 +136,7 @@ namespace uml
 			 
 			virtual bool unmarshall_signal_events(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			/*!
 			Indicates whether there is a single OutputPin for a SignalEvent occurrence, or multiple OutputPins for attribute values of the instance of the Signal associated with a SignalEvent occurrence.
@@ -152,7 +152,7 @@ namespace uml
 			virtual void setIsUnmarshall (bool _isUnmarshall)= 0;
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			/*!
 			OutputPins holding the values received from an Event occurrence.

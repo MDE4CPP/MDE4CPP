@@ -170,7 +170,7 @@ namespace uml
 			 
 			virtual bool state_is_local(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			/*!
 			Indicates the precise type of the Transition.
@@ -186,7 +186,7 @@ namespace uml
 			virtual void setKind (uml::TransitionKind _kind)= 0;
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			/*!
 			Designates the Region that owns this Transition.

@@ -86,11 +86,11 @@ namespace fUML::Semantics::Actions
 			virtual std::shared_ptr<uml::ValueSpecification> specify() = 0; 
 			virtual std::string toString() = 0;
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			
 			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::CallEventOccurrence> getCallEventOccurrence() const = 0;

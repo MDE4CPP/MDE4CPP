@@ -101,7 +101,7 @@ namespace uml
 			//*********************************
 			
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			/*!
 			Specifies the behavior in one or more languages.
@@ -119,7 +119,7 @@ namespace uml
 			
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			
 

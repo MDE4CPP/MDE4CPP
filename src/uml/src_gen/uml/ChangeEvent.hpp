@@ -82,11 +82,11 @@ namespace uml
 			//*********************************
 			
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			/*!
 			A Boolean-valued ValueSpecification that will result in a ChangeEvent whenever its value changes from false to true.

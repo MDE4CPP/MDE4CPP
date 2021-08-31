@@ -100,11 +100,11 @@ namespace uml
 			 
 			virtual bool region_as_input_or_output(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			/*!
 			The ExpansionRegion for which the ExpansionNode is an input.

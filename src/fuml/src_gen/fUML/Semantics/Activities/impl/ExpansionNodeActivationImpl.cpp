@@ -242,7 +242,7 @@ Any ExpansionNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::l
   	switch(operationID)
 	{
 		
-		// 5046
+		// 1801862850
 		case ActivitiesPackage::EXPANSIONNODEACTIVATION_OPERATION_FIRE_TOKEN:
 		{
 			//Retrieve input parameter 'incomingTokens'
@@ -254,21 +254,21 @@ Any ExpansionNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::l
 			break;
 		}
 		
-		// 5045
+		// 1117119621
 		case ActivitiesPackage::EXPANSIONNODEACTIVATION_OPERATION_GETEXPANSIONREGIONACTIVATION:
 		{
 			result = eAny(this->getExpansionRegionActivation());
 			break;
 		}
 		
-		// 5048
+		// 14712609
 		case ActivitiesPackage::EXPANSIONNODEACTIVATION_OPERATION_ISREADY:
 		{
 			result = eAny(this->isReady());
 			break;
 		}
 		
-		// 5047
+		// 913023797
 		case ActivitiesPackage::EXPANSIONNODEACTIVATION_OPERATION_RECEIVEOFFER:
 		{
 			this->receiveOffer();

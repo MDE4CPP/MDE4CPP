@@ -367,14 +367,14 @@ Any ReferenceImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sha
   	switch(operationID)
 	{
 		
-		// 9934
+		// 379318105
 		case StructuredClassifiersPackage::REFERENCE_OPERATION__COPY:
 		{
 			result = eAny(this->_copy());
 			break;
 		}
 		
-		// 9927
+		// 895585040
 		case StructuredClassifiersPackage::REFERENCE_OPERATION_ASSIGNFEATUREVALUE_STRUCTURALFEATURE_EINT:
 		{
 			//Retrieve input parameter 'feature'
@@ -396,14 +396,14 @@ Any ReferenceImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sha
 			break;
 		}
 		
-		// 9922
+		// 2091249574
 		case StructuredClassifiersPackage::REFERENCE_OPERATION_DESTROY:
 		{
 			this->destroy();
 			break;
 		}
 		
-		// 9920
+		// 391208876
 		case StructuredClassifiersPackage::REFERENCE_OPERATION_DISPATCH_OPERATION:
 		{
 			//Retrieve input parameter 'operation'
@@ -415,7 +415,7 @@ Any ReferenceImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sha
 			break;
 		}
 		
-		// 9923
+		// 2043258442
 		case StructuredClassifiersPackage::REFERENCE_OPERATION_EQUALS_VALUE:
 		{
 			//Retrieve input parameter 'otherValue'
@@ -427,14 +427,14 @@ Any ReferenceImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sha
 			break;
 		}
 		
-		// 9925
+		// 341056213
 		case StructuredClassifiersPackage::REFERENCE_OPERATION_GETTYPES:
 		{
 			result = eAny(this->getTypes());
 			break;
 		}
 		
-		// 9932
+		// 409855785
 		case StructuredClassifiersPackage::REFERENCE_OPERATION_GETVALUES_STRUCTURALFEATURE_FEATUREVALUE:
 		{
 			//Retrieve input parameter 'feature'
@@ -451,14 +451,14 @@ Any ReferenceImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sha
 			break;
 		}
 		
-		// 9924
+		// 1807744549
 		case StructuredClassifiersPackage::REFERENCE_OPERATION_NEW_:
 		{
 			result = eAny(this->new_());
 			break;
 		}
 		
-		// 9933
+		// 359785992
 		case StructuredClassifiersPackage::REFERENCE_OPERATION_REMOVEVALUE_STRUCTURALFEATURE_VALUE:
 		{
 			//Retrieve input parameter 'feature'
@@ -475,7 +475,7 @@ Any ReferenceImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sha
 			break;
 		}
 		
-		// 9926
+		// 252923786
 		case StructuredClassifiersPackage::REFERENCE_OPERATION_RETRIEVEFEATUREVALUE_STRUCTURALFEATURE:
 		{
 			//Retrieve input parameter 'feature'
@@ -487,14 +487,14 @@ Any ReferenceImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sha
 			break;
 		}
 		
-		// 9928
+		// 1383269448
 		case StructuredClassifiersPackage::REFERENCE_OPERATION_RETRIEVEFEATUREVALUES:
 		{
 			result = eAny(this->retrieveFeatureValues());
 			break;
 		}
 		
-		// 9921
+		// 736452414
 		case StructuredClassifiersPackage::REFERENCE_OPERATION_SEND_SIGNALINSTANCE:
 		{
 			//Retrieve input parameter 'signalInstance'
@@ -506,7 +506,7 @@ Any ReferenceImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sha
 			break;
 		}
 		
-		// 9930
+		// 2041193923
 		case StructuredClassifiersPackage::REFERENCE_OPERATION_SEND_EVENTOCCURRENCE:
 		{
 			//Retrieve input parameter 'eventOccurrence'
@@ -518,7 +518,7 @@ Any ReferenceImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sha
 			break;
 		}
 		
-		// 9931
+		// 1476170621
 		case StructuredClassifiersPackage::REFERENCE_OPERATION_SETFEATUREVALUE_STRUCTURALFEATURE_EINT:
 		{
 			//Retrieve input parameter 'feature'
@@ -540,7 +540,7 @@ Any ReferenceImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sha
 			break;
 		}
 		
-		// 9919
+		// 1959081471
 		case StructuredClassifiersPackage::REFERENCE_OPERATION_STARTBEHAVIOR_CLASS_PARAMETERVALUE:
 		{
 			//Retrieve input parameter 'classifier'
@@ -557,7 +557,7 @@ Any ReferenceImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sha
 			break;
 		}
 		
-		// 9929
+		// 1690791699
 		case StructuredClassifiersPackage::REFERENCE_OPERATION_TOSTRING:
 		{
 			result = eAny(this->toString());

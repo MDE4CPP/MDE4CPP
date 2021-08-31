@@ -312,7 +312,7 @@ Any ReceptionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sha
   	switch(operationID)
 	{
 		
-		// 20305
+		// 552397630
 		case umlPackage::RECEPTION_OPERATION_SAME_NAME_AS_SIGNAL_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -329,7 +329,7 @@ Any ReceptionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sha
 			break;
 		}
 		
-		// 20306
+		// 1787249491
 		case umlPackage::RECEPTION_OPERATION_SAME_STRUCTURE_AS_SIGNAL_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

@@ -34,8 +34,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Values/ValuesFactory.hpp"
+#include "uml/umlFactory.hpp"
 
 
 #include "fUML/Semantics/SimpleClassifiers/FeatureValue.hpp"
@@ -407,14 +407,14 @@ Any FeatureValueImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::
   	switch(operationID)
 	{
 		
-		// 5504
+		// 1429289502
 		case SimpleClassifiersPackage::FEATUREVALUE_OPERATION__COPY:
 		{
 			result = eAny(this->_copy());
 			break;
 		}
 		
-		// 5503
+		// 2061713627
 		case SimpleClassifiersPackage::FEATUREVALUE_OPERATION_HASEQUALVALUES_FEATUREVALUE:
 		{
 			//Retrieve input parameter 'other'

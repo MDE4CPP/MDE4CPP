@@ -936,7 +936,7 @@ Any ActivityNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::li
   	switch(operationID)
 	{
 		
-		// 917
+		// 52378121
 		case ActivitiesPackage::ACTIVITYNODEACTIVATION_OPERATION_ADDINCOMINGEDGE_ACTIVITYEDGEINSTANCE:
 		{
 			//Retrieve input parameter 'edge'
@@ -948,7 +948,7 @@ Any ActivityNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::li
 			break;
 		}
 		
-		// 916
+		// 570001578
 		case ActivitiesPackage::ACTIVITYNODEACTIVATION_OPERATION_ADDOUTGOINGEDGE_ACTIVITYEDGEINSTANCE:
 		{
 			//Retrieve input parameter 'edge'
@@ -960,7 +960,7 @@ Any ActivityNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::li
 			break;
 		}
 		
-		// 925
+		// 1812265104
 		case ActivitiesPackage::ACTIVITYNODEACTIVATION_OPERATION_ADDTOKEN_TOKEN:
 		{
 			//Retrieve input parameter 'token'
@@ -972,7 +972,7 @@ Any ActivityNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::li
 			break;
 		}
 		
-		// 927
+		// 1110687853
 		case ActivitiesPackage::ACTIVITYNODEACTIVATION_OPERATION_ADDTOKENS_TOKEN:
 		{
 			//Retrieve input parameter 'tokens'
@@ -984,28 +984,28 @@ Any ActivityNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::li
 			break;
 		}
 		
-		// 929
+		// 294271267
 		case ActivitiesPackage::ACTIVITYNODEACTIVATION_OPERATION_CLEARTOKENS:
 		{
 			this->clearTokens();
 			break;
 		}
 		
-		// 919
+		// 661826812
 		case ActivitiesPackage::ACTIVITYNODEACTIVATION_OPERATION_CREATEEDGEINSTANCES:
 		{
 			this->createEdgeInstances();
 			break;
 		}
 		
-		// 918
+		// 249914126
 		case ActivitiesPackage::ACTIVITYNODEACTIVATION_OPERATION_CREATENODEACTIVATIONS:
 		{
 			this->createNodeActivations();
 			break;
 		}
 		
-		// 911
+		// 1249178361
 		case ActivitiesPackage::ACTIVITYNODEACTIVATION_OPERATION_FIRE_TOKEN:
 		{
 			//Retrieve input parameter 'incomingTokens'
@@ -1017,28 +1017,28 @@ Any ActivityNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::li
 			break;
 		}
 		
-		// 921
+		// 2125708528
 		case ActivitiesPackage::ACTIVITYNODEACTIVATION_OPERATION_GETACTIVITYEXECUTION:
 		{
 			result = eAny(this->getActivityExecution());
 			break;
 		}
 		
-		// 922
+		// 786203858
 		case ActivitiesPackage::ACTIVITYNODEACTIVATION_OPERATION_GETEXECUTIONCONTEXT:
 		{
 			result = eAny(this->getExecutionContext());
 			break;
 		}
 		
-		// 923
+		// 1480581087
 		case ActivitiesPackage::ACTIVITYNODEACTIVATION_OPERATION_GETEXECUTIONLOCUS:
 		{
 			result = eAny(this->getExecutionLocus());
 			break;
 		}
 		
-		// 924
+		// 774473218
 		case ActivitiesPackage::ACTIVITYNODEACTIVATION_OPERATION_GETNODEACTIVATION_ACTIVITYNODE:
 		{
 			//Retrieve input parameter 'node'
@@ -1050,28 +1050,28 @@ Any ActivityNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::li
 			break;
 		}
 		
-		// 915
+		// 858692644
 		case ActivitiesPackage::ACTIVITYNODEACTIVATION_OPERATION_GETRUNNING:
 		{
 			result = eAny(this->getRunning());
 			break;
 		}
 		
-		// 930
+		// 1779350108
 		case ActivitiesPackage::ACTIVITYNODEACTIVATION_OPERATION_GETTOKENS:
 		{
 			result = eAny(this->getTokens());
 			break;
 		}
 		
-		// 914
+		// 1093902867
 		case ActivitiesPackage::ACTIVITYNODEACTIVATION_OPERATION_ISREADY:
 		{
 			result = eAny(this->isReady());
 			break;
 		}
 		
-		// 920
+		// 1423480990
 		case ActivitiesPackage::ACTIVITYNODEACTIVATION_OPERATION_ISSOURCEFOR_ACTIVITYEDGEINSTANCE:
 		{
 			//Retrieve input parameter 'edgeInstances'
@@ -1083,14 +1083,14 @@ Any ActivityNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::li
 			break;
 		}
 		
-		// 909
+		// 2002260441
 		case ActivitiesPackage::ACTIVITYNODEACTIVATION_OPERATION_RECEIVEOFFER:
 		{
 			this->receiveOffer();
 			break;
 		}
 		
-		// 926
+		// 753234615
 		case ActivitiesPackage::ACTIVITYNODEACTIVATION_OPERATION_REMOVETOKEN_TOKEN:
 		{
 			//Retrieve input parameter 'token'
@@ -1102,21 +1102,21 @@ Any ActivityNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::li
 			break;
 		}
 		
-		// 932
+		// 295698417
 		case ActivitiesPackage::ACTIVITYNODEACTIVATION_OPERATION_RESUME:
 		{
 			this->resume();
 			break;
 		}
 		
-		// 908
+		// 603025050
 		case ActivitiesPackage::ACTIVITYNODEACTIVATION_OPERATION_RUN:
 		{
 			this->run();
 			break;
 		}
 		
-		// 912
+		// 839493281
 		case ActivitiesPackage::ACTIVITYNODEACTIVATION_OPERATION_SENDOFFERS_TOKEN:
 		{
 			//Retrieve input parameter 'tokens'
@@ -1128,28 +1128,28 @@ Any ActivityNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::li
 			break;
 		}
 		
-		// 931
+		// 1911522686
 		case ActivitiesPackage::ACTIVITYNODEACTIVATION_OPERATION_SUSPEND:
 		{
 			this->suspend();
 			break;
 		}
 		
-		// 910
+		// 1366572667
 		case ActivitiesPackage::ACTIVITYNODEACTIVATION_OPERATION_TAKEOFFEREDTOKENS:
 		{
 			result = eAny(this->takeOfferedTokens());
 			break;
 		}
 		
-		// 928
+		// 739906654
 		case ActivitiesPackage::ACTIVITYNODEACTIVATION_OPERATION_TAKETOKENS:
 		{
 			result = eAny(this->takeTokens());
 			break;
 		}
 		
-		// 913
+		// 686579592
 		case ActivitiesPackage::ACTIVITYNODEACTIVATION_OPERATION_TERMINATE:
 		{
 			this->terminate();

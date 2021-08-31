@@ -86,11 +86,11 @@ namespace fUML::Semantics::CommonBehavior
 			virtual void releaseCaller() = 0; 
 			virtual void setOutputParameterValues(std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> parameterValues) = 0;
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			
 			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::CallEventExecution> getExecution() const = 0;

@@ -256,7 +256,7 @@ Any JoinNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list <
   	switch(operationID)
 	{
 		
-		// 6734
+		// 1177783705
 		case ActivitiesPackage::JOINNODEACTIVATION_OPERATION_FIRE_TOKEN:
 		{
 			//Retrieve input parameter 'incomingTokens'
@@ -268,7 +268,7 @@ Any JoinNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list <
 			break;
 		}
 		
-		// 6735
+		// 1317433736
 		case ActivitiesPackage::JOINNODEACTIVATION_OPERATION_ISREADY:
 		{
 			result = eAny(this->isReady());

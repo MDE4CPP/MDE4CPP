@@ -86,11 +86,11 @@ namespace fUML::Semantics::StructuredClassifiers
 			virtual std::shared_ptr<Bag<uml::Classifier> > getTypes() const = 0; 
 			virtual bool isMatchingLink(std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue> link,std::shared_ptr<uml::Property> end) = 0;
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			
 			virtual std::shared_ptr<uml::Association> getType() const = 0;

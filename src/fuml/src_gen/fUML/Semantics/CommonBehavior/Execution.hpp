@@ -93,11 +93,11 @@ namespace fUML::Semantics::CommonBehavior
 			virtual void setParameterValue(std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> parameterValue) = 0; 
 			virtual void terminate() = 0;
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			
 			virtual std::shared_ptr<uml::Behavior> getBehavior() const = 0;

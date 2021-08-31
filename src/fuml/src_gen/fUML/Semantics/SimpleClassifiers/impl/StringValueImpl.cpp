@@ -260,14 +260,14 @@ Any StringValueImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::s
   	switch(operationID)
 	{
 		
-		// 11017
+		// 1488860616
 		case SimpleClassifiersPackage::STRINGVALUE_OPERATION__COPY:
 		{
 			result = eAny(this->_copy());
 			break;
 		}
 		
-		// 11015
+		// 857975051
 		case SimpleClassifiersPackage::STRINGVALUE_OPERATION_EQUALS_VALUE:
 		{
 			//Retrieve input parameter 'otherValue'
@@ -279,14 +279,14 @@ Any StringValueImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::s
 			break;
 		}
 		
-		// 11014
+		// 936357211
 		case SimpleClassifiersPackage::STRINGVALUE_OPERATION_SPECIFY:
 		{
 			result = eAny(this->specify());
 			break;
 		}
 		
-		// 11016
+		// 341046816
 		case SimpleClassifiersPackage::STRINGVALUE_OPERATION_TOSTRING:
 		{
 			result = eAny(this->toString());

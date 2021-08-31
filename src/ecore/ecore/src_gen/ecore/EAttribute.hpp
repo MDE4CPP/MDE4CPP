@@ -74,7 +74,7 @@ namespace ecore
 			//*********************************
 			
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			 
 			virtual bool isID() const = 0;
@@ -82,7 +82,7 @@ namespace ecore
 			virtual void setID (bool _iD)= 0;
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			
 			virtual std::shared_ptr<ecore::EDataType> getEAttributeType() const = 0;

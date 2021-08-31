@@ -326,14 +326,14 @@ Any LiteralBooleanImpl::eInvoke(int operationID, std::shared_ptr<std::list < std
   	switch(operationID)
 	{
 		
-		// 13782
+		// 844586416
 		case umlPackage::LITERALBOOLEAN_OPERATION_BOOLEANVALUE:
 		{
 			result = eAny(this->booleanValue());
 			break;
 		}
 		
-		// 13783
+		// 27416872
 		case umlPackage::LITERALBOOLEAN_OPERATION_ISCOMPUTABLE:
 		{
 			result = eAny(this->isComputable());

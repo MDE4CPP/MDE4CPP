@@ -112,11 +112,11 @@ namespace uml
 			 
 			virtual std::shared_ptr<Bag<uml::Interface> > getImplementedInterfaces() = 0;
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			/*!
 			A Behavior that specifies the behavior of the BehavioredClassifier itself.

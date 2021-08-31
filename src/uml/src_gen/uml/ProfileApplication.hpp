@@ -96,7 +96,7 @@ namespace uml
 			 
 			virtual std::shared_ptr<ecore::ENamedElement> getAppliedDefinition(std::shared_ptr<uml::NamedElement> namedElement) = 0;
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			/*!
 			Specifies that the Profile filtering rules for the metaclasses of the referenced metamodel shall be strictly applied.
@@ -112,7 +112,7 @@ namespace uml
 			virtual void setIsStrict (bool _isStrict)= 0;
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			/*!
 			References the Profiles that are applied to a Package through this ProfileApplication.

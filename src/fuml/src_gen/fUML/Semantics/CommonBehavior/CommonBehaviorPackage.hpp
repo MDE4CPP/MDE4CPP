@@ -15,13 +15,13 @@
 namespace ecore 
 {
 	class EAnnotation;
-	class EAttribute;
+	class EReference;
 	class EClass;
 	class EDataType;
 	class EGenericType;
-	class EOperation;
+	class EAttribute;
 	class EParameter;
-	class EReference;
+	class EOperation;
 	class EStringToStringMapEntry;
 }
 
@@ -71,11 +71,10 @@ namespace fUML::Semantics::CommonBehavior
 			//Class and Feature IDs 
 			static const long long CALLEVENTBEHAVIOR_CLASS = 3715801;
 			static const unsigned int CALLEVENTBEHAVIOR_CLASS_FEATURE_COUNT = 1;
-			static const unsigned int CALLEVENTBEHAVIOR_CLASS_OPERATION_COUNT = 1;
+			static const unsigned int CALLEVENTBEHAVIOR_CLASS_OPERATION_COUNT = 0;
 			
 			static const long long CALLEVENTBEHAVIOR_ATTRIBUTE_OPERATION = 715332873;
 			
-			static const int CALLEVENTBEHAVIOR_OPERATION_ASSIGNOPERATION_OPERATION = 1009052402;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getCallEventBehavior_Class() const = 0;
@@ -83,7 +82,6 @@ namespace fUML::Semantics::CommonBehavior
 			
 			virtual std::shared_ptr<ecore::EReference> getCallEventBehavior_Attribute_operation() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getCallEventBehavior_Operation_assignOperation_Operation() const = 0;
 			
 			// End Class CallEventBehavior
 
@@ -92,7 +90,7 @@ namespace fUML::Semantics::CommonBehavior
 			//Class and Feature IDs 
 			static const long long CALLEVENTEXECUTION_CLASS = 1815999052;
 			static const unsigned int CALLEVENTEXECUTION_CLASS_FEATURE_COUNT = 8;
-			static const unsigned int CALLEVENTEXECUTION_CLASS_OPERATION_COUNT = 56;
+			static const unsigned int CALLEVENTEXECUTION_CLASS_OPERATION_COUNT = 55;
 			static const long long CALLEVENTEXECUTION_ATTRIBUTE_CALLERSUSPENDED = 679982988;
 			
 			
@@ -193,14 +191,13 @@ namespace fUML::Semantics::CommonBehavior
 			//Class and Feature IDs 
 			static const long long CLASSIFIERBEHAVIORINVOCATIONEVENTACCEPTER_CLASS = 165051968;
 			static const unsigned int CLASSIFIERBEHAVIORINVOCATIONEVENTACCEPTER_CLASS_FEATURE_COUNT = 3;
-			static const unsigned int CLASSIFIERBEHAVIORINVOCATIONEVENTACCEPTER_CLASS_OPERATION_COUNT = 6;
+			static const unsigned int CLASSIFIERBEHAVIORINVOCATIONEVENTACCEPTER_CLASS_OPERATION_COUNT = 5;
 			
 			static const long long CLASSIFIERBEHAVIORINVOCATIONEVENTACCEPTER_ATTRIBUTE_CLASSIFIER = 2078382975;
 			static const long long CLASSIFIERBEHAVIORINVOCATIONEVENTACCEPTER_ATTRIBUTE_EXECUTION = 718200595;
 			static const long long CLASSIFIERBEHAVIORINVOCATIONEVENTACCEPTER_ATTRIBUTE_OBJECTACTIVATION = 16326952;
 			
 			static const int CLASSIFIERBEHAVIORINVOCATIONEVENTACCEPTER_OPERATION_ACCEPT_EVENTOCCURRENCE = 700456347;
-			static const int CLASSIFIERBEHAVIORINVOCATIONEVENTACCEPTER_OPERATION_INVOKEBEHAVIOR_CLASS_PARAMETERVALUE = 139694963;
 			static const int CLASSIFIERBEHAVIORINVOCATIONEVENTACCEPTER_OPERATION_MATCH_EVENTOCCURRENCE = 621566743;
 			static const int CLASSIFIERBEHAVIORINVOCATIONEVENTACCEPTER_OPERATION_TERMINATE = 1314087765;
 			
@@ -213,7 +210,6 @@ namespace fUML::Semantics::CommonBehavior
 			virtual std::shared_ptr<ecore::EReference> getClassifierBehaviorInvocationEventAccepter_Attribute_objectActivation() const = 0;
 			
 			virtual std::shared_ptr<ecore::EOperation> getClassifierBehaviorInvocationEventAccepter_Operation_accept_EventOccurrence() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getClassifierBehaviorInvocationEventAccepter_Operation_invokeBehavior_Class_ParameterValue() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getClassifierBehaviorInvocationEventAccepter_Operation_match_EventOccurrence() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getClassifierBehaviorInvocationEventAccepter_Operation_terminate() const = 0;
 			
@@ -291,7 +287,7 @@ namespace fUML::Semantics::CommonBehavior
 			//Class and Feature IDs 
 			static const long long EXECUTION_CLASS = 921905715;
 			static const unsigned int EXECUTION_CLASS_FEATURE_COUNT = 7;
-			static const unsigned int EXECUTION_CLASS_OPERATION_COUNT = 44;
+			static const unsigned int EXECUTION_CLASS_OPERATION_COUNT = 43;
 			
 			static const long long EXECUTION_ATTRIBUTE_BEHAVIOR = 106545659;
 			static const long long EXECUTION_ATTRIBUTE_CONTEXT = 646122967;
@@ -299,7 +295,6 @@ namespace fUML::Semantics::CommonBehavior
 			
 			static const int EXECUTION_OPERATION__COPY = 2119596406;
 			static const int EXECUTION_OPERATION_EXECUTE = 650217545;
-			static const int EXECUTION_OPERATION_GETBEHAVIOR = 459308613;
 			static const int EXECUTION_OPERATION_GETOUTPUTPARAMETERVALUES = 990554645;
 			static const int EXECUTION_OPERATION_GETPARAMETERVALUE_PARAMETER = 190986849;
 			static const int EXECUTION_OPERATION_NEW_ = 1338828288;
@@ -316,7 +311,6 @@ namespace fUML::Semantics::CommonBehavior
 			
 			virtual std::shared_ptr<ecore::EOperation> getExecution_Operation__copy() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getExecution_Operation_execute() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getExecution_Operation_getBehavior() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getExecution_Operation_getOutputParameterValues() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getExecution_Operation_getParameterValue_Parameter() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getExecution_Operation_new_() const = 0;
@@ -434,7 +428,7 @@ namespace fUML::Semantics::CommonBehavior
 			//Class and Feature IDs 
 			static const long long OPAQUEBEHAVIOREXECUTION_CLASS = 1247403081;
 			static const unsigned int OPAQUEBEHAVIOREXECUTION_CLASS_FEATURE_COUNT = 7;
-			static const unsigned int OPAQUEBEHAVIOREXECUTION_CLASS_OPERATION_COUNT = 46;
+			static const unsigned int OPAQUEBEHAVIOREXECUTION_CLASS_OPERATION_COUNT = 45;
 			
 			
 			static const int OPAQUEBEHAVIOREXECUTION_OPERATION_DOBODY_PARAMETERVALUE_PARAMETERVALUE = 90990798;

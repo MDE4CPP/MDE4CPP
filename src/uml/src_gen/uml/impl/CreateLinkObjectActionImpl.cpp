@@ -386,7 +386,7 @@ Any CreateLinkObjectActionImpl::eInvoke(int operationID, std::shared_ptr<std::li
   	switch(operationID)
 	{
 		
-		// 6304
+		// 1963606051
 		case umlPackage::CREATELINKOBJECTACTION_OPERATION_ASSOCIATION_CLASS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -403,7 +403,7 @@ Any CreateLinkObjectActionImpl::eInvoke(int operationID, std::shared_ptr<std::li
 			break;
 		}
 		
-		// 6302
+		// 430552770
 		case umlPackage::CREATELINKOBJECTACTION_OPERATION_MULTIPLICITY_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -420,7 +420,7 @@ Any CreateLinkObjectActionImpl::eInvoke(int operationID, std::shared_ptr<std::li
 			break;
 		}
 		
-		// 6303
+		// 91124541
 		case umlPackage::CREATELINKOBJECTACTION_OPERATION_TYPE_OF_RESULT_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

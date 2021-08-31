@@ -238,7 +238,7 @@ namespace uml
 			 
 			virtual std::shared_ptr<Bag<uml::PackageableElement> > visibleMembers() = 0;
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			/*!
 			Provides an identifier for the package that can be used for many purposes. A URI is the universally unique identification of the package following the IETF URI specification, RFC 2396 http://www.ietf.org/rfc/rfc2396.txt and it must comply with those syntax rules.
@@ -254,7 +254,7 @@ namespace uml
 			virtual void setURI (std::string _URI)= 0;
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			/*!
 			References the packaged elements that are Packages.

@@ -373,7 +373,7 @@ Any EEnumImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_
   	switch(operationID)
 	{
 		
-		// 2031
+		// 1917703622
 		case ecorePackage::EENUM_OPERATION_GETEENUMLITERAL_ESTRING:
 		{
 			//Retrieve input parameter 'name'
@@ -385,7 +385,7 @@ Any EEnumImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_
 			break;
 		}
 		
-		// 2032
+		// 1070395435
 		case ecorePackage::EENUM_OPERATION_GETEENUMLITERAL_EINT:
 		{
 			//Retrieve input parameter 'value'
@@ -397,7 +397,7 @@ Any EEnumImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_
 			break;
 		}
 		
-		// 2033
+		// 582537382
 		case ecorePackage::EENUM_OPERATION_GETEENUMLITERALBYLITERAL_ESTRING:
 		{
 			//Retrieve input parameter 'literal'

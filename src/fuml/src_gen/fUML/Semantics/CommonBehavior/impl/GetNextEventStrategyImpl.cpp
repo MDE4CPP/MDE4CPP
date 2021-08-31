@@ -194,14 +194,14 @@ Any GetNextEventStrategyImpl::eInvoke(int operationID, std::shared_ptr<std::list
   	switch(operationID)
 	{
 		
-		// 6002
+		// 905122154
 		case CommonBehaviorPackage::GETNEXTEVENTSTRATEGY_OPERATION_GETNAME:
 		{
 			result = eAny(this->getName());
 			break;
 		}
 		
-		// 6001
+		// 51332097
 		case CommonBehaviorPackage::GETNEXTEVENTSTRATEGY_OPERATION_RETRIEVENEXTEVENT_OBJECTACTIVATION:
 		{
 			//Retrieve input parameter 'objectActivation'

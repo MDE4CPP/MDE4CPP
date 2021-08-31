@@ -360,7 +360,7 @@ Any ReadVariableActionImpl::eInvoke(int operationID, std::shared_ptr<std::list <
   	switch(operationID)
 	{
 		
-		// 20097
+		// 311196748
 		case umlPackage::READVARIABLEACTION_OPERATION_COMPATIBLE_MULTIPLICITY_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -377,7 +377,7 @@ Any ReadVariableActionImpl::eInvoke(int operationID, std::shared_ptr<std::list <
 			break;
 		}
 		
-		// 20096
+		// 862234793
 		case umlPackage::READVARIABLEACTION_OPERATION_TYPE_AND_ORDERING_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

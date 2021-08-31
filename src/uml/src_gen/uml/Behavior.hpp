@@ -161,7 +161,7 @@ namespace uml
 			 
 			virtual bool parameters_match(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			/*!
 			Tells whether the Behavior can be invoked while it is still executing from a previous invocation.
@@ -177,7 +177,7 @@ namespace uml
 			virtual void setIsReentrant (bool _isReentrant)= 0;
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			
 			virtual std::weak_ptr<uml::BehavioredClassifier> getBehavioredClassifier() const = 0;

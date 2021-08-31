@@ -82,11 +82,11 @@ namespace ocl::Evaluations
 			//*********************************
 			
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			
 			virtual std::shared_ptr<ocl::Evaluations::OclExpEval> getFirst() const = 0;

@@ -436,14 +436,14 @@ Any ActivityGroupImpl::eInvoke(int operationID, std::shared_ptr<std::list < std:
   	switch(operationID)
 	{
 		
-		// 1072
+		// 155988317
 		case umlPackage::ACTIVITYGROUP_OPERATION_CONTAININGACTIVITY:
 		{
 			result = eAny(this->containingActivity());
 			break;
 		}
 		
-		// 1070
+		// 662716167
 		case umlPackage::ACTIVITYGROUP_OPERATION_NODES_AND_EDGES_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -460,7 +460,7 @@ Any ActivityGroupImpl::eInvoke(int operationID, std::shared_ptr<std::list < std:
 			break;
 		}
 		
-		// 1071
+		// 1338347221
 		case umlPackage::ACTIVITYGROUP_OPERATION_NOT_CONTAINED_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

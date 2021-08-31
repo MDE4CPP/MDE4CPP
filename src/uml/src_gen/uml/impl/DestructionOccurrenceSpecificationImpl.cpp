@@ -266,7 +266,7 @@ Any DestructionOccurrenceSpecificationImpl::eInvoke(int operationID, std::shared
   	switch(operationID)
 	{
 		
-		// 7478
+		// 2054634562
 		case umlPackage::DESTRUCTIONOCCURRENCESPECIFICATION_OPERATION_NO_OCCURRENCE_SPECIFICATIONS_BELOW_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

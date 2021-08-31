@@ -109,11 +109,11 @@ namespace uml
 			 
 			virtual bool isAccessibleBy(std::shared_ptr<uml::Action> a) = 0;
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			/*!
 			An Activity that owns the Variable.

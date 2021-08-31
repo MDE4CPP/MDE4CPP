@@ -1120,7 +1120,7 @@ Any StateImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_
   	switch(operationID)
 	{
 		
-		// 22116
+		// 1735758508
 		case umlPackage::STATE_OPERATION_COMPOSITE_STATES_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -1137,7 +1137,7 @@ Any StateImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_
 			break;
 		}
 		
-		// 22117
+		// 694309769
 		case umlPackage::STATE_OPERATION_DESTINATIONS_OR_SOURCES_OF_TRANSITIONS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -1154,7 +1154,7 @@ Any StateImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_
 			break;
 		}
 		
-		// 22114
+		// 927974608
 		case umlPackage::STATE_OPERATION_ENTRY_OR_EXIT_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -1171,42 +1171,42 @@ Any StateImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_
 			break;
 		}
 		
-		// 22119
+		// 1887131105
 		case umlPackage::STATE_OPERATION_ISCOMPOSITE:
 		{
 			result = eAny(this->isComposite());
 			break;
 		}
 		
-		// 22120
+		// 1848860248
 		case umlPackage::STATE_OPERATION_ISORTHOGONAL:
 		{
 			result = eAny(this->isOrthogonal());
 			break;
 		}
 		
-		// 22121
+		// 993070579
 		case umlPackage::STATE_OPERATION_ISSIMPLE:
 		{
 			result = eAny(this->isSimple());
 			break;
 		}
 		
-		// 22122
+		// 1954820373
 		case umlPackage::STATE_OPERATION_ISSUBMACHINESTATE:
 		{
 			result = eAny(this->isSubmachineState());
 			break;
 		}
 		
-		// 22123
+		// 871920175
 		case umlPackage::STATE_OPERATION_REDEFINITIONCONTEXT:
 		{
 			result = eAny(this->redefinitionContext());
 			break;
 		}
 		
-		// 22118
+		// 1111971003
 		case umlPackage::STATE_OPERATION_SUBMACHINE_OR_REGIONS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -1223,7 +1223,7 @@ Any StateImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_
 			break;
 		}
 		
-		// 22115
+		// 2047311099
 		case umlPackage::STATE_OPERATION_SUBMACHINE_STATES_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

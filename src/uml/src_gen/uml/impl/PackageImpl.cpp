@@ -1201,14 +1201,14 @@ Any PackageImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::share
   	switch(operationID)
 	{
 		
-		// 17119
+		// 1557820782
 		case umlPackage::PACKAGE_OPERATION_ALLAPPLICABLESTEREOTYPES:
 		{
 			result = eAny(this->allApplicableStereotypes());
 			break;
 		}
 		
-		// 17103
+		// 532857739
 		case umlPackage::PACKAGE_OPERATION_APPLYPROFILE_PROFILE:
 		{
 			//Retrieve input parameter 'profile'
@@ -1220,14 +1220,14 @@ Any PackageImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::share
 			break;
 		}
 		
-		// 17120
+		// 1369083844
 		case umlPackage::PACKAGE_OPERATION_CONTAININGPROFILE:
 		{
 			result = eAny(this->containingProfile());
 			break;
 		}
 		
-		// 17104
+		// 520555000
 		case umlPackage::PACKAGE_OPERATION_CREATEOWNEDCLASS_STRING_BOOLEAN:
 		{
 			//Retrieve input parameter 'name'
@@ -1244,7 +1244,7 @@ Any PackageImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::share
 			break;
 		}
 		
-		// 17105
+		// 588810307
 		case umlPackage::PACKAGE_OPERATION_CREATEOWNEDENUMERATION_STRING:
 		{
 			//Retrieve input parameter 'name'
@@ -1256,7 +1256,7 @@ Any PackageImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::share
 			break;
 		}
 		
-		// 17106
+		// 2141179079
 		case umlPackage::PACKAGE_OPERATION_CREATEOWNEDINTERFACE_STRING:
 		{
 			//Retrieve input parameter 'name'
@@ -1268,7 +1268,7 @@ Any PackageImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::share
 			break;
 		}
 		
-		// 17107
+		// 1204664161
 		case umlPackage::PACKAGE_OPERATION_CREATEOWNEDPRIMITIVETYPE_STRING:
 		{
 			//Retrieve input parameter 'name'
@@ -1280,7 +1280,7 @@ Any PackageImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::share
 			break;
 		}
 		
-		// 17108
+		// 64069774
 		case umlPackage::PACKAGE_OPERATION_CREATEOWNEDSTEREOTYPE_STRING_BOOLEAN:
 		{
 			//Retrieve input parameter 'name'
@@ -1297,7 +1297,7 @@ Any PackageImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::share
 			break;
 		}
 		
-		// 17102
+		// 1451255929
 		case umlPackage::PACKAGE_OPERATION_ELEMENTS_PUBLIC_OR_PRIVATE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -1314,21 +1314,21 @@ Any PackageImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::share
 			break;
 		}
 		
-		// 17109
+		// 1609552989
 		case umlPackage::PACKAGE_OPERATION_GETALLAPPLIEDPROFILES:
 		{
 			result = eAny(this->getAllAppliedProfiles());
 			break;
 		}
 		
-		// 17110
+		// 1816651881
 		case umlPackage::PACKAGE_OPERATION_GETALLPROFILEAPPLICATIONS:
 		{
 			result = eAny(this->getAllProfileApplications());
 			break;
 		}
 		
-		// 17111
+		// 996929944
 		case umlPackage::PACKAGE_OPERATION_GETAPPLIEDPROFILE_STRING:
 		{
 			//Retrieve input parameter 'qualifiedName'
@@ -1340,7 +1340,7 @@ Any PackageImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::share
 			break;
 		}
 		
-		// 17112
+		// 537452639
 		case umlPackage::PACKAGE_OPERATION_GETAPPLIEDPROFILE_STRING_BOOLEAN:
 		{
 			//Retrieve input parameter 'qualifiedName'
@@ -1357,35 +1357,35 @@ Any PackageImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::share
 			break;
 		}
 		
-		// 17113
+		// 619686908
 		case umlPackage::PACKAGE_OPERATION_GETAPPLIEDPROFILES:
 		{
 			result = eAny(this->getAppliedProfiles());
 			break;
 		}
 		
-		// 17122
+		// 1133617509
 		case umlPackage::PACKAGE_OPERATION_GETNESTEDPACKAGES:
 		{
 			result = eAny(this->getNestedPackages());
 			break;
 		}
 		
-		// 17123
+		// 984223651
 		case umlPackage::PACKAGE_OPERATION_GETOWNEDSTEREOTYPES:
 		{
 			result = eAny(this->getOwnedStereotypes());
 			break;
 		}
 		
-		// 17124
+		// 1807861876
 		case umlPackage::PACKAGE_OPERATION_GETOWNEDTYPES:
 		{
 			result = eAny(this->getOwnedTypes());
 			break;
 		}
 		
-		// 17114
+		// 1780891819
 		case umlPackage::PACKAGE_OPERATION_GETPROFILEAPPLICATION_PROFILE:
 		{
 			//Retrieve input parameter 'profile'
@@ -1397,7 +1397,7 @@ Any PackageImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::share
 			break;
 		}
 		
-		// 17115
+		// 1620950971
 		case umlPackage::PACKAGE_OPERATION_GETPROFILEAPPLICATION_PROFILE_BOOLEAN:
 		{
 			//Retrieve input parameter 'profile'
@@ -1414,14 +1414,14 @@ Any PackageImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::share
 			break;
 		}
 		
-		// 17116
+		// 126460786
 		case umlPackage::PACKAGE_OPERATION_ISMODELLIBRARY:
 		{
 			result = eAny(this->isModelLibrary());
 			break;
 		}
 		
-		// 17117
+		// 1688405008
 		case umlPackage::PACKAGE_OPERATION_ISPROFILEAPPLIED_PROFILE:
 		{
 			//Retrieve input parameter 'profile'
@@ -1433,7 +1433,7 @@ Any PackageImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::share
 			break;
 		}
 		
-		// 17121
+		// 1550634476
 		case umlPackage::PACKAGE_OPERATION_MAKESVISIBLE_NAMEDELEMENT:
 		{
 			//Retrieve input parameter 'el'
@@ -1445,7 +1445,7 @@ Any PackageImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::share
 			break;
 		}
 		
-		// 17118
+		// 775995658
 		case umlPackage::PACKAGE_OPERATION_UNAPPLYPROFILE_PROFILE:
 		{
 			//Retrieve input parameter 'profile'
@@ -1457,7 +1457,7 @@ Any PackageImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::share
 			break;
 		}
 		
-		// 17125
+		// 1123478292
 		case umlPackage::PACKAGE_OPERATION_VISIBLEMEMBERS:
 		{
 			result = eAny(this->visibleMembers());

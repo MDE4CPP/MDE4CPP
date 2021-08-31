@@ -85,11 +85,8 @@ virtual public EObject
 			// Union Getter
 			//*********************************
 			
-			virtual std::shared_ptr<Union<ecore::EObject>> getEContens() const ; 
-			 
-			//*********************************
-			// Structural Feature Getter/Setter
-			//*********************************
+			virtual std::shared_ptr<Union<ecore::EObject>> getEContens() const ;
+			
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const ; 
 			
@@ -105,6 +102,9 @@ virtual public EObject
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			
 
+			//*********************************
+			// Structural Feature Getter/Setter
+			//*********************************
 		protected:
 			virtual std::shared_ptr<EClass> eStaticClass() const;
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;

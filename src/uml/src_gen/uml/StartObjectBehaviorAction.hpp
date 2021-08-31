@@ -123,11 +123,11 @@ namespace uml
 			 
 			virtual bool type_of_object(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			/*!
 			An InputPin that holds the object that is either a Behavior to be started or has a classifierBehavior to be started.

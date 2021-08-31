@@ -638,7 +638,7 @@ Any BehavioredClassifierImpl::eInvoke(int operationID, std::shared_ptr<std::list
   	switch(operationID)
 	{
 		
-		// 2751
+		// 1882586927
 		case umlPackage::BEHAVIOREDCLASSIFIER_OPERATION_CLASS_BEHAVIOR_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -655,14 +655,14 @@ Any BehavioredClassifierImpl::eInvoke(int operationID, std::shared_ptr<std::list
 			break;
 		}
 		
-		// 2752
+		// 1253009224
 		case umlPackage::BEHAVIOREDCLASSIFIER_OPERATION_GETALLIMPLEMENTEDINTERFACES:
 		{
 			result = eAny(this->getAllImplementedInterfaces());
 			break;
 		}
 		
-		// 2753
+		// 1944346500
 		case umlPackage::BEHAVIOREDCLASSIFIER_OPERATION_GETIMPLEMENTEDINTERFACES:
 		{
 			result = eAny(this->getImplementedInterfaces());

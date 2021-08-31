@@ -239,14 +239,14 @@ Any PrimitiveValueImpl::eInvoke(int operationID, std::shared_ptr<std::list < std
   	switch(operationID)
 	{
 		
-		// 8912
+		// 1483946573
 		case SimpleClassifiersPackage::PRIMITIVEVALUE_OPERATION__COPY:
 		{
 			result = eAny(this->_copy());
 			break;
 		}
 		
-		// 8911
+		// 1603549944
 		case SimpleClassifiersPackage::PRIMITIVEVALUE_OPERATION_GETTYPES:
 		{
 			result = eAny(this->getTypes());

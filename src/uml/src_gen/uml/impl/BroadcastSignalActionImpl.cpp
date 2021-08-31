@@ -362,7 +362,7 @@ Any BroadcastSignalActionImpl::eInvoke(int operationID, std::shared_ptr<std::lis
   	switch(operationID)
 	{
 		
-		// 2798
+		// 2075676186
 		case umlPackage::BROADCASTSIGNALACTION_OPERATION_NO_ONPORT_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -379,7 +379,7 @@ Any BroadcastSignalActionImpl::eInvoke(int operationID, std::shared_ptr<std::lis
 			break;
 		}
 		
-		// 2796
+		// 1285195715
 		case umlPackage::BROADCASTSIGNALACTION_OPERATION_NUMBER_OF_ARGUMENTS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -396,7 +396,7 @@ Any BroadcastSignalActionImpl::eInvoke(int operationID, std::shared_ptr<std::lis
 			break;
 		}
 		
-		// 2797
+		// 554703156
 		case umlPackage::BROADCASTSIGNALACTION_OPERATION_TYPE_ORDERING_MULTIPLICITY_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

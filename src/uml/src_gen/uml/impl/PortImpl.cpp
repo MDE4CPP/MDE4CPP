@@ -709,21 +709,21 @@ Any PortImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_p
   	switch(operationID)
 	{
 		
-		// 18259
+		// 1253849343
 		case umlPackage::PORT_OPERATION_BASICPROVIDED:
 		{
 			result = eAny(this->basicProvided());
 			break;
 		}
 		
-		// 18260
+		// 1121864045
 		case umlPackage::PORT_OPERATION_BASICREQUIRED:
 		{
 			result = eAny(this->basicRequired());
 			break;
 		}
 		
-		// 18255
+		// 1305438653
 		case umlPackage::PORT_OPERATION_DEFAULT_VALUE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -740,7 +740,7 @@ Any PortImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_p
 			break;
 		}
 		
-		// 18256
+		// 791607261
 		case umlPackage::PORT_OPERATION_ENCAPSULATED_OWNER_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -757,21 +757,21 @@ Any PortImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_p
 			break;
 		}
 		
-		// 18257
+		// 1432885746
 		case umlPackage::PORT_OPERATION_GETPROVIDEDS:
 		{
 			result = eAny(this->getProvideds());
 			break;
 		}
 		
-		// 18258
+		// 1195078911
 		case umlPackage::PORT_OPERATION_GETREQUIREDS:
 		{
 			result = eAny(this->getRequireds());
 			break;
 		}
 		
-		// 18254
+		// 2107947933
 		case umlPackage::PORT_OPERATION_PORT_AGGREGATION_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

@@ -661,7 +661,7 @@ Any ParameterImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sha
   	switch(operationID)
 	{
 		
-		// 17501
+		// 740584078
 		case umlPackage::PARAMETER_OPERATION_CONNECTOR_END_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -678,7 +678,7 @@ Any ParameterImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sha
 			break;
 		}
 		
-		// 17499
+		// 136133503
 		case umlPackage::PARAMETER_OPERATION_IN_AND_OUT_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -695,14 +695,14 @@ Any ParameterImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sha
 			break;
 		}
 		
-		// 17505
+		// 1999374675
 		case umlPackage::PARAMETER_OPERATION_ISSETDEFAULT:
 		{
 			result = eAny(this->isSetDefault());
 			break;
 		}
 		
-		// 17500
+		// 964172832
 		case umlPackage::PARAMETER_OPERATION_NOT_EXCEPTION_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -719,7 +719,7 @@ Any ParameterImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sha
 			break;
 		}
 		
-		// 17504
+		// 305756032
 		case umlPackage::PARAMETER_OPERATION_OBJECT_EFFECT_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -736,7 +736,7 @@ Any ParameterImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sha
 			break;
 		}
 		
-		// 17502
+		// 873949267
 		case umlPackage::PARAMETER_OPERATION_REENTRANT_BEHAVIORS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -753,7 +753,7 @@ Any ParameterImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sha
 			break;
 		}
 		
-		// 17506
+		// 401053548
 		case umlPackage::PARAMETER_OPERATION_SETBOOLEANDEFAULTVALUE_BOOLEAN:
 		{
 			//Retrieve input parameter 'value'
@@ -765,7 +765,7 @@ Any ParameterImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sha
 			break;
 		}
 		
-		// 17507
+		// 1728800880
 		case umlPackage::PARAMETER_OPERATION_SETINTEGERDEFAULTVALUE_INTEGER:
 		{
 			//Retrieve input parameter 'value'
@@ -777,14 +777,14 @@ Any ParameterImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sha
 			break;
 		}
 		
-		// 17508
+		// 687577499
 		case umlPackage::PARAMETER_OPERATION_SETNULLDEFAULTVALUE:
 		{
 			this->setNullDefaultValue();
 			break;
 		}
 		
-		// 17509
+		// 488751702
 		case umlPackage::PARAMETER_OPERATION_SETREALDEFAULTVALUE_REAL:
 		{
 			//Retrieve input parameter 'value'
@@ -796,7 +796,7 @@ Any ParameterImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sha
 			break;
 		}
 		
-		// 17510
+		// 1288613666
 		case umlPackage::PARAMETER_OPERATION_SETSTRINGDEFAULTVALUE_STRING:
 		{
 			//Retrieve input parameter 'value'
@@ -808,7 +808,7 @@ Any ParameterImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sha
 			break;
 		}
 		
-		// 17511
+		// 287411615
 		case umlPackage::PARAMETER_OPERATION_SETUNLIMITEDNATURALDEFAULTVALUE_UNLIMITEDNATURAL:
 		{
 			//Retrieve input parameter 'value'
@@ -820,7 +820,7 @@ Any ParameterImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sha
 			break;
 		}
 		
-		// 17503
+		// 1728894546
 		case umlPackage::PARAMETER_OPERATION_STREAM_AND_EXCEPTION_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -837,7 +837,7 @@ Any ParameterImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sha
 			break;
 		}
 		
-		// 17512
+		// 314482012
 		case umlPackage::PARAMETER_OPERATION_UNSETDEFAULT:
 		{
 			this->unsetDefault();

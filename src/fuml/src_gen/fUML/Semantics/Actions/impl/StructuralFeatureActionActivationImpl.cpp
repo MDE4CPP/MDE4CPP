@@ -318,7 +318,7 @@ Any StructuralFeatureActionActivationImpl::eInvoke(int operationID, std::shared_
   	switch(operationID)
 	{
 		
-		// 11158
+		// 1275297557
 		case ActionsPackage::STRUCTURALFEATUREACTIONACTIVATION_OPERATION_GETASSOCIATION_STRUCTURALFEATURE:
 		{
 			//Retrieve input parameter 'feature'
@@ -330,7 +330,7 @@ Any StructuralFeatureActionActivationImpl::eInvoke(int operationID, std::shared_
 			break;
 		}
 		
-		// 11159
+		// 1331426136
 		case ActionsPackage::STRUCTURALFEATUREACTIONACTIVATION_OPERATION_GETMATCHINGLINKS_ASSOCIATION_VALUE:
 		{
 			//Retrieve input parameter 'association'
@@ -352,7 +352,7 @@ Any StructuralFeatureActionActivationImpl::eInvoke(int operationID, std::shared_
 			break;
 		}
 		
-		// 11161
+		// 1009305296
 		case ActionsPackage::STRUCTURALFEATUREACTIONACTIVATION_OPERATION_GETMATCHINGLINKSFORENDVALUE_ASSOCIATION_VALUE:
 		{
 			//Retrieve input parameter 'association'
@@ -379,7 +379,7 @@ Any StructuralFeatureActionActivationImpl::eInvoke(int operationID, std::shared_
 			break;
 		}
 		
-		// 11160
+		// 1780438725
 		case ActionsPackage::STRUCTURALFEATUREACTIONACTIVATION_OPERATION_GETOPPOSITEEND_ASSOCIATION_STRUCTURALFEATURE:
 		{
 			//Retrieve input parameter 'association'

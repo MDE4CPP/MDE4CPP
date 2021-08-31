@@ -411,14 +411,14 @@ Any LinkEndDataImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::s
   	switch(operationID)
 	{
 		
-		// 13553
+		// 1232620149
 		case umlPackage::LINKENDDATA_OPERATION_ALLPINS:
 		{
 			result = eAny(this->allPins());
 			break;
 		}
 		
-		// 13550
+		// 1213117792
 		case umlPackage::LINKENDDATA_OPERATION_END_OBJECT_INPUT_PIN_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -435,7 +435,7 @@ Any LinkEndDataImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::s
 			break;
 		}
 		
-		// 13549
+		// 1093089992
 		case umlPackage::LINKENDDATA_OPERATION_MULTIPLICITY_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -452,7 +452,7 @@ Any LinkEndDataImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::s
 			break;
 		}
 		
-		// 13551
+		// 781012681
 		case umlPackage::LINKENDDATA_OPERATION_PROPERTY_IS_ASSOCIATION_END_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -469,7 +469,7 @@ Any LinkEndDataImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::s
 			break;
 		}
 		
-		// 13552
+		// 762800978
 		case umlPackage::LINKENDDATA_OPERATION_QUALIFIERS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -486,7 +486,7 @@ Any LinkEndDataImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::s
 			break;
 		}
 		
-		// 13548
+		// 1930031988
 		case umlPackage::LINKENDDATA_OPERATION_SAME_TYPE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

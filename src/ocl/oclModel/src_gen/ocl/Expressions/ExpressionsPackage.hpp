@@ -14,13 +14,13 @@
 
 namespace ecore 
 {
-	class EAttribute;
+	class EReference;
+	class EEnum;
 	class EClass;
 	class EDataType;
-	class EEnum;
-	class EEnumLiteral;
 	class EGenericType;
-	class EReference;
+	class EAttribute;
+	class EEnumLiteral;
 }
 
 namespace ocl::Expressions 

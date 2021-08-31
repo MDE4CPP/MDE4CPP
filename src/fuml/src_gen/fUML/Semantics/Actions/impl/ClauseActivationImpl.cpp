@@ -282,49 +282,49 @@ Any ClauseActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list < s
   	switch(operationID)
 	{
 		
-		// 2606
+		// 1084984079
 		case ActionsPackage::CLAUSEACTIVATION_OPERATION_GETDECISION:
 		{
 			result = eAny(this->getDecision());
 			break;
 		}
 		
-		// 2607
+		// 712913762
 		case ActionsPackage::CLAUSEACTIVATION_OPERATION_GETPREDECESSORS:
 		{
 			result = eAny(this->getPredecessors());
 			break;
 		}
 		
-		// 2608
+		// 970094705
 		case ActionsPackage::CLAUSEACTIVATION_OPERATION_GETSUCCESSORS:
 		{
 			result = eAny(this->getSuccessors());
 			break;
 		}
 		
-		// 2603
+		// 1218269216
 		case ActionsPackage::CLAUSEACTIVATION_OPERATION_ISREADY:
 		{
 			result = eAny(this->isReady());
 			break;
 		}
 		
-		// 2602
+		// 1814524618
 		case ActionsPackage::CLAUSEACTIVATION_OPERATION_RECIEVECONTROL:
 		{
 			this->recieveControl();
 			break;
 		}
 		
-		// 2604
+		// 507684446
 		case ActionsPackage::CLAUSEACTIVATION_OPERATION_RUNTEST:
 		{
 			this->runTest();
 			break;
 		}
 		
-		// 2605
+		// 693250888
 		case ActionsPackage::CLAUSEACTIVATION_OPERATION_SELECTBODY:
 		{
 			this->selectBody();

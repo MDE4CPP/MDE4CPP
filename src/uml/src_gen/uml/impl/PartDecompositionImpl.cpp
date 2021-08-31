@@ -280,7 +280,7 @@ Any PartDecompositionImpl::eInvoke(int operationID, std::shared_ptr<std::list < 
   	switch(operationID)
 	{
 		
-		// 17981
+		// 827444235
 		case umlPackage::PARTDECOMPOSITION_OPERATION_ASSUME_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -297,7 +297,7 @@ Any PartDecompositionImpl::eInvoke(int operationID, std::shared_ptr<std::list < 
 			break;
 		}
 		
-		// 17980
+		// 1212458071
 		case umlPackage::PARTDECOMPOSITION_OPERATION_COMMUTATIVITY_OF_DECOMPOSITION_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -314,7 +314,7 @@ Any PartDecompositionImpl::eInvoke(int operationID, std::shared_ptr<std::list < 
 			break;
 		}
 		
-		// 17982
+		// 808457235
 		case umlPackage::PARTDECOMPOSITION_OPERATION_PARTS_OF_INTERNAL_STRUCTURES_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

@@ -8,12 +8,12 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
 #include "ecore/EAnnotation.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EDataType.hpp"
 #include "ecore/EGenericType.hpp"
-#include "ecore/EOperation.hpp"
 #include "ecore/EParameter.hpp"
-#include "ecore/EReference.hpp"
+#include "ecore/EOperation.hpp"
 #include "ecore/EStringToStringMapEntry.hpp"
 
 //depending model packages
@@ -69,7 +69,6 @@ void LociPackageImpl::createExecutionFactoryContent(std::shared_ptr<ecore::EPack
 	m_executionFactory_Operation_getBuiltInType_EString = factory->createEOperation_as_eOperations_in_EClass(m_executionFactory_Class, EXECUTIONFACTORY_OPERATION_GETBUILTINTYPE_ESTRING);
 	m_executionFactory_Operation_getStrategy_EString = factory->createEOperation_as_eOperations_in_EClass(m_executionFactory_Class, EXECUTIONFACTORY_OPERATION_GETSTRATEGY_ESTRING);
 	m_executionFactory_Operation_getStrategyIndex_EString = factory->createEOperation_as_eOperations_in_EClass(m_executionFactory_Class, EXECUTIONFACTORY_OPERATION_GETSTRATEGYINDEX_ESTRING);
-	m_executionFactory_Operation_instantiateOpaqueBehaviorExecution_OpaqueBehavior = factory->createEOperation_as_eOperations_in_EClass(m_executionFactory_Class, EXECUTIONFACTORY_OPERATION_INSTANTIATEOPAQUEBEHAVIOREXECUTION_OPAQUEBEHAVIOR);
 	m_executionFactory_Operation_instantiateOpaqueBehaviorExecution_Behavior = factory->createEOperation_as_eOperations_in_EClass(m_executionFactory_Class, EXECUTIONFACTORY_OPERATION_INSTANTIATEOPAQUEBEHAVIOREXECUTION_BEHAVIOR);
 	m_executionFactory_Operation_instantiateVisitor_Element = factory->createEOperation_as_eOperations_in_EClass(m_executionFactory_Class, EXECUTIONFACTORY_OPERATION_INSTANTIATEVISITOR_ELEMENT);
 	

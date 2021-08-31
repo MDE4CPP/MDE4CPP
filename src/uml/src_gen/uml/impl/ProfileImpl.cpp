@@ -604,7 +604,7 @@ Any ProfileImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::share
   	switch(operationID)
 	{
 		
-		// 18430
+		// 601455413
 		case umlPackage::PROFILE_OPERATION_CREATE_CLASSIFIER:
 		{
 			//Retrieve input parameter 'classifier'
@@ -616,14 +616,14 @@ Any ProfileImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::share
 			break;
 		}
 		
-		// 18431
+		// 1290863447
 		case umlPackage::PROFILE_OPERATION_DEFINE:
 		{
 			result = eAny(this->define());
 			break;
 		}
 		
-		// 18432
+		// 1039331867
 		case umlPackage::PROFILE_OPERATION_DEFINE_EMAP_EMAP:
 		{
 			//Retrieve input parameter 'options'
@@ -645,14 +645,14 @@ Any ProfileImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::share
 			break;
 		}
 		
-		// 18433
+		// 1362267442
 		case umlPackage::PROFILE_OPERATION_GETDEFINITION:
 		{
 			result = eAny(this->getDefinition());
 			break;
 		}
 		
-		// 18434
+		// 668433302
 		case umlPackage::PROFILE_OPERATION_GETDEFINITION_NAMEDELEMENT:
 		{
 			//Retrieve input parameter 'namedElement'
@@ -664,7 +664,7 @@ Any ProfileImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::share
 			break;
 		}
 		
-		// 18435
+		// 1633691648
 		case umlPackage::PROFILE_OPERATION_GETOWNEDEXTENSIONS_BOOLEAN:
 		{
 			//Retrieve input parameter 'requiredOnly'
@@ -676,28 +676,28 @@ Any ProfileImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::share
 			break;
 		}
 		
-		// 18436
+		// 163141874
 		case umlPackage::PROFILE_OPERATION_GETREFERENCEDMETACLASSES:
 		{
 			result = eAny(this->getReferencedMetaclasses());
 			break;
 		}
 		
-		// 18437
+		// 1875658587
 		case umlPackage::PROFILE_OPERATION_GETREFERENCEDMETAMODELS:
 		{
 			result = eAny(this->getReferencedMetamodels());
 			break;
 		}
 		
-		// 18438
+		// 806963924
 		case umlPackage::PROFILE_OPERATION_ISDEFINED:
 		{
 			result = eAny(this->isDefined());
 			break;
 		}
 		
-		// 18428
+		// 1947780751
 		case umlPackage::PROFILE_OPERATION_METACLASS_REFERENCE_NOT_SPECIALIZED_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -714,7 +714,7 @@ Any ProfileImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::share
 			break;
 		}
 		
-		// 18429
+		// 1497139273
 		case umlPackage::PROFILE_OPERATION_REFERENCES_SAME_METAMODEL_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

@@ -1694,98 +1694,98 @@ Any ClassifierImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sh
   	switch(operationID)
 	{
 		
-		// 3745
+		// 2002439221
 		case umlPackage::CLASSIFIER_OPERATION_ALLATTRIBUTES:
 		{
 			result = eAny(this->allAttributes());
 			break;
 		}
 		
-		// 3731
+		// 1045296212
 		case umlPackage::CLASSIFIER_OPERATION_ALLFEATURES:
 		{
 			result = eAny(this->allFeatures());
 			break;
 		}
 		
-		// 3732
+		// 1019192791
 		case umlPackage::CLASSIFIER_OPERATION_ALLPARENTS:
 		{
 			result = eAny(this->allParents());
 			break;
 		}
 		
-		// 3742
+		// 1304029721
 		case umlPackage::CLASSIFIER_OPERATION_ALLREALIZEDINTERFACES:
 		{
 			result = eAny(this->allRealizedInterfaces());
 			break;
 		}
 		
-		// 3746
+		// 589992607
 		case umlPackage::CLASSIFIER_OPERATION_ALLSLOTTABLEFEATURES:
 		{
 			result = eAny(this->allSlottableFeatures());
 			break;
 		}
 		
-		// 3743
+		// 347634799
 		case umlPackage::CLASSIFIER_OPERATION_ALLUSEDINTERFACES:
 		{
 			result = eAny(this->allUsedInterfaces());
 			break;
 		}
 		
-		// 3740
+		// 689864747
 		case umlPackage::CLASSIFIER_OPERATION_DIRECTLYREALIZEDINTERFACES:
 		{
 			result = eAny(this->directlyRealizedInterfaces());
 			break;
 		}
 		
-		// 3741
+		// 827011971
 		case umlPackage::CLASSIFIER_OPERATION_DIRECTLYUSEDINTERFACES:
 		{
 			result = eAny(this->directlyUsedInterfaces());
 			break;
 		}
 		
-		// 3724
+		// 123729859
 		case umlPackage::CLASSIFIER_OPERATION_GETALLATTRIBUTES:
 		{
 			result = eAny(this->getAllAttributes());
 			break;
 		}
 		
-		// 3725
+		// 1697084588
 		case umlPackage::CLASSIFIER_OPERATION_GETALLOPERATIONS:
 		{
 			result = eAny(this->getAllOperations());
 			break;
 		}
 		
-		// 3726
+		// 1424746899
 		case umlPackage::CLASSIFIER_OPERATION_GETALLUSEDINTERFACES:
 		{
 			result = eAny(this->getAllUsedInterfaces());
 			break;
 		}
 		
-		// 3733
+		// 1243085147
 		case umlPackage::CLASSIFIER_OPERATION_GETGENERALS:
 		{
 			result = eAny(this->getGenerals());
 			break;
 		}
 		
-		// 3737
+		// 1965646606
 		case umlPackage::CLASSIFIER_OPERATION_GETINHERITEDMEMBERS:
 		{
 			result = eAny(this->getInheritedMembers());
 			break;
 		}
 		
-		// 3727
+		// 555558759
 		case umlPackage::CLASSIFIER_OPERATION_GETOPERATION_STRING_TYPE:
 		{
 			//Retrieve input parameter 'name'
@@ -1807,7 +1807,7 @@ Any ClassifierImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sh
 			break;
 		}
 		
-		// 3728
+		// 606711066
 		case umlPackage::CLASSIFIER_OPERATION_GETOPERATION_STRING_BOOLEAN:
 		{
 			//Retrieve input parameter 'name'
@@ -1834,14 +1834,14 @@ Any ClassifierImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sh
 			break;
 		}
 		
-		// 3729
+		// 696829928
 		case umlPackage::CLASSIFIER_OPERATION_GETOPERATIONS:
 		{
 			result = eAny(this->getOperations());
 			break;
 		}
 		
-		// 3747
+		// 1845223945
 		case umlPackage::CLASSIFIER_OPERATION_GETPROPERTYVALUE_STRING:
 		{
 			//Retrieve input parameter 'propertyName'
@@ -1853,14 +1853,14 @@ Any ClassifierImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sh
 			break;
 		}
 		
-		// 3730
+		// 2075757327
 		case umlPackage::CLASSIFIER_OPERATION_GETUSEDINTERFACES:
 		{
 			result = eAny(this->getUsedInterfaces());
 			break;
 		}
 		
-		// 3734
+		// 1565356937
 		case umlPackage::CLASSIFIER_OPERATION_HASVISIBILITYOF_NAMEDELEMENT:
 		{
 			//Retrieve input parameter 'n'
@@ -1872,7 +1872,7 @@ Any ClassifierImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sh
 			break;
 		}
 		
-		// 3735
+		// 254916872
 		case umlPackage::CLASSIFIER_OPERATION_INHERIT_NAMEDELEMENT:
 		{
 			//Retrieve input parameter 'inhs'
@@ -1884,7 +1884,7 @@ Any ClassifierImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sh
 			break;
 		}
 		
-		// 3736
+		// 110806438
 		case umlPackage::CLASSIFIER_OPERATION_INHERITABLEMEMBERS_CLASSIFIER:
 		{
 			//Retrieve input parameter 'c'
@@ -1896,7 +1896,7 @@ Any ClassifierImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sh
 			break;
 		}
 		
-		// 3744
+		// 124497889
 		case umlPackage::CLASSIFIER_OPERATION_ISSUBSTITUTABLEFOR_CLASSIFIER:
 		{
 			//Retrieve input parameter 'contract'
@@ -1908,7 +1908,7 @@ Any ClassifierImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sh
 			break;
 		}
 		
-		// 3721
+		// 1869034110
 		case umlPackage::CLASSIFIER_OPERATION_MAPS_TO_GENERALIZATION_SET_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -1925,7 +1925,7 @@ Any ClassifierImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sh
 			break;
 		}
 		
-		// 3738
+		// 14886310
 		case umlPackage::CLASSIFIER_OPERATION_MAYSPECIALIZETYPE_CLASSIFIER:
 		{
 			//Retrieve input parameter 'c'
@@ -1937,7 +1937,7 @@ Any ClassifierImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sh
 			break;
 		}
 		
-		// 3723
+		// 734141464
 		case umlPackage::CLASSIFIER_OPERATION_NO_CYCLES_IN_GENERALIZATION_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -1954,7 +1954,7 @@ Any ClassifierImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sh
 			break;
 		}
 		
-		// 3722
+		// 992683516
 		case umlPackage::CLASSIFIER_OPERATION_NON_FINAL_PARENTS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -1971,14 +1971,14 @@ Any ClassifierImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sh
 			break;
 		}
 		
-		// 3739
+		// 1040238424
 		case umlPackage::CLASSIFIER_OPERATION_PARENTS:
 		{
 			result = eAny(this->parents());
 			break;
 		}
 		
-		// 3720
+		// 1534446662
 		case umlPackage::CLASSIFIER_OPERATION_SPECIALIZE_TYPE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

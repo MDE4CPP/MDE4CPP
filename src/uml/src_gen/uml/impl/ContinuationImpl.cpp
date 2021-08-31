@@ -302,7 +302,7 @@ Any ContinuationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::
   	switch(operationID)
 	{
 		
-		// 5870
+		// 2040370552
 		case umlPackage::CONTINUATION_OPERATION_FIRST_OR_LAST_INTERACTION_FRAGMENT_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -319,7 +319,7 @@ Any ContinuationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::
 			break;
 		}
 		
-		// 5872
+		// 235492236
 		case umlPackage::CONTINUATION_OPERATION_GLOBAL_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -336,7 +336,7 @@ Any ContinuationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::
 			break;
 		}
 		
-		// 5871
+		// 945404935
 		case umlPackage::CONTINUATION_OPERATION_SAME_NAME_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

@@ -591,7 +591,7 @@ Any AcceptEventActionImpl::eInvoke(int operationID, std::shared_ptr<std::list < 
   	switch(operationID)
 	{
 		
-		// 400
+		// 1819988295
 		case umlPackage::ACCEPTEVENTACTION_OPERATION_CONFORMING_TYPE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -608,7 +608,7 @@ Any AcceptEventActionImpl::eInvoke(int operationID, std::shared_ptr<std::list < 
 			break;
 		}
 		
-		// 397
+		// 1577028175
 		case umlPackage::ACCEPTEVENTACTION_OPERATION_NO_INPUT_PINS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -625,7 +625,7 @@ Any AcceptEventActionImpl::eInvoke(int operationID, std::shared_ptr<std::list < 
 			break;
 		}
 		
-		// 398
+		// 33049259
 		case umlPackage::ACCEPTEVENTACTION_OPERATION_NO_OUTPUT_PINS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -642,7 +642,7 @@ Any AcceptEventActionImpl::eInvoke(int operationID, std::shared_ptr<std::list < 
 			break;
 		}
 		
-		// 396
+		// 361980146
 		case umlPackage::ACCEPTEVENTACTION_OPERATION_ONE_OUTPUT_PIN_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -659,7 +659,7 @@ Any AcceptEventActionImpl::eInvoke(int operationID, std::shared_ptr<std::list < 
 			break;
 		}
 		
-		// 399
+		// 1699791673
 		case umlPackage::ACCEPTEVENTACTION_OPERATION_UNMARSHALL_SIGNAL_EVENTS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

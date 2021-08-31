@@ -770,7 +770,7 @@ Any ComponentImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sha
   	switch(operationID)
 	{
 		
-		// 4883
+		// 1988739931
 		case umlPackage::COMPONENT_OPERATION_CREATEOWNEDCLASS_STRING_BOOLEAN:
 		{
 			//Retrieve input parameter 'name'
@@ -787,7 +787,7 @@ Any ComponentImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sha
 			break;
 		}
 		
-		// 4884
+		// 444369064
 		case umlPackage::COMPONENT_OPERATION_CREATEOWNEDENUMERATION_STRING:
 		{
 			//Retrieve input parameter 'name'
@@ -799,7 +799,7 @@ Any ComponentImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sha
 			break;
 		}
 		
-		// 4885
+		// 1656446202
 		case umlPackage::COMPONENT_OPERATION_CREATEOWNEDINTERFACE_STRING:
 		{
 			//Retrieve input parameter 'name'
@@ -811,7 +811,7 @@ Any ComponentImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sha
 			break;
 		}
 		
-		// 4886
+		// 1653509115
 		case umlPackage::COMPONENT_OPERATION_CREATEOWNEDPRIMITIVETYPE_STRING:
 		{
 			//Retrieve input parameter 'name'
@@ -823,21 +823,21 @@ Any ComponentImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sha
 			break;
 		}
 		
-		// 4887
+		// 108282626
 		case umlPackage::COMPONENT_OPERATION_GETPROVIDEDS:
 		{
 			result = eAny(this->getProvideds());
 			break;
 		}
 		
-		// 4888
+		// 8442330
 		case umlPackage::COMPONENT_OPERATION_GETREQUIREDS:
 		{
 			result = eAny(this->getRequireds());
 			break;
 		}
 		
-		// 4881
+		// 1111918920
 		case umlPackage::COMPONENT_OPERATION_NO_NESTED_CLASSIFIERS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -854,7 +854,7 @@ Any ComponentImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sha
 			break;
 		}
 		
-		// 4882
+		// 415493174
 		case umlPackage::COMPONENT_OPERATION_NO_PACKAGED_ELEMENTS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

@@ -15,13 +15,13 @@
 namespace ecore 
 {
 	class EAnnotation;
-	class EAttribute;
+	class EReference;
 	class EClass;
 	class EDataType;
 	class EGenericType;
-	class EOperation;
+	class EAttribute;
 	class EParameter;
-	class EReference;
+	class EOperation;
 	class EStringToStringMapEntry;
 }
 
@@ -57,7 +57,7 @@ namespace PSCS::Semantics::CommonBehavior
 			//Class and Feature IDs 
 			static const long long CS_CALLEVENTEXECUTION_CLASS = 329007207;
 			static const unsigned int CS_CALLEVENTEXECUTION_CLASS_FEATURE_COUNT = 9;
-			static const unsigned int CS_CALLEVENTEXECUTION_CLASS_OPERATION_COUNT = 59;
+			static const unsigned int CS_CALLEVENTEXECUTION_CLASS_OPERATION_COUNT = 58;
 			
 			static const long long CS_CALLEVENTEXECUTION_ATTRIBUTE_INTERACTIONPOINT = 1605974358;
 			

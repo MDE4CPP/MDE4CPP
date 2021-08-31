@@ -797,14 +797,14 @@ Any UseCaseImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::share
   	switch(operationID)
 	{
 		
-		// 24962
+		// 1800777238
 		case umlPackage::USECASE_OPERATION_ALLINCLUDEDUSECASES:
 		{
 			result = eAny(this->allIncludedUseCases());
 			break;
 		}
 		
-		// 24958
+		// 994037494
 		case umlPackage::USECASE_OPERATION_BINARY_ASSOCIATIONS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -821,7 +821,7 @@ Any UseCaseImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::share
 			break;
 		}
 		
-		// 24960
+		// 774173796
 		case umlPackage::USECASE_OPERATION_CANNOT_INCLUDE_SELF_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -838,7 +838,7 @@ Any UseCaseImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::share
 			break;
 		}
 		
-		// 24961
+		// 1489214321
 		case umlPackage::USECASE_OPERATION_MUST_HAVE_NAME_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -855,7 +855,7 @@ Any UseCaseImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::share
 			break;
 		}
 		
-		// 24959
+		// 1306318580
 		case umlPackage::USECASE_OPERATION_NO_ASSOCIATION_TO_USE_CASE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

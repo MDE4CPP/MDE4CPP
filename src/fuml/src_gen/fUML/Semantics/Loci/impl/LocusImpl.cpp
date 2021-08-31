@@ -466,7 +466,7 @@ Any LocusImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_
   	switch(operationID)
 	{
 		
-		// 7707
+		// 433913546
 		case LociPackage::LOCUS_OPERATION_ADD_EXTENSIONALVALUE:
 		{
 			//Retrieve input parameter 'value'
@@ -478,7 +478,7 @@ Any LocusImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_
 			break;
 		}
 		
-		// 7704
+		// 1235487051
 		case LociPackage::LOCUS_OPERATION_ASSIGNEXECUTOR_EXECUTOR:
 		{
 			//Retrieve input parameter 'executor'
@@ -490,7 +490,7 @@ Any LocusImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_
 			break;
 		}
 		
-		// 7705
+		// 361443955
 		case LociPackage::LOCUS_OPERATION_ASSIGNFACTORY_EXECUTIONFACTORY:
 		{
 			//Retrieve input parameter 'factory'
@@ -502,7 +502,7 @@ Any LocusImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_
 			break;
 		}
 		
-		// 7703
+		// 1626464999
 		case LociPackage::LOCUS_OPERATION_CONFORMS_CLASSIFIER_CLASSIFIER:
 		{
 			//Retrieve input parameter 'type'
@@ -519,7 +519,7 @@ Any LocusImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_
 			break;
 		}
 		
-		// 7709
+		// 1875707887
 		case LociPackage::LOCUS_OPERATION_INSTANTIATE_CLASS:
 		{
 			//Retrieve input parameter 'type'
@@ -531,7 +531,7 @@ Any LocusImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_
 			break;
 		}
 		
-		// 7708
+		// 32081076
 		case LociPackage::LOCUS_OPERATION_REMOVE_EXTENSIONALVALUE:
 		{
 			//Retrieve input parameter 'value'
@@ -543,7 +543,7 @@ Any LocusImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_
 			break;
 		}
 		
-		// 7706
+		// 673387949
 		case LociPackage::LOCUS_OPERATION_RETRIEVEEXTENT_CLASSIFIER:
 		{
 			//Retrieve input parameter 'classifier'

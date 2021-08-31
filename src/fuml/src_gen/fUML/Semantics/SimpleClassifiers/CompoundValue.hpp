@@ -83,11 +83,11 @@ namespace fUML::Semantics::SimpleClassifiers
 			virtual std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue> > retrieveFeatureValues() = 0; 
 			virtual std::string toString() = 0;
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			
 			virtual std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>> getFeatureValues() const = 0;

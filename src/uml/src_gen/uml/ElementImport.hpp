@@ -106,7 +106,7 @@ namespace uml
 			 
 			virtual bool visibility_public_or_private(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			/*!
 			Specifies the name that should be added to the importing Namespace in lieu of the name of the imported PackagableElement. The alias must not clash with any other member in the importing Namespace. By default, no alias is used.
@@ -134,7 +134,7 @@ namespace uml
 			virtual void setVisibility (uml::VisibilityKind _visibility)= 0;
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			/*!
 			Specifies the PackageableElement whose name is to be added to a Namespace.

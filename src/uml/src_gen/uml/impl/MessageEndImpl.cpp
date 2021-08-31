@@ -279,28 +279,28 @@ Any MessageEndImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sh
   	switch(operationID)
 	{
 		
-		// 14869
+		// 767566935
 		case umlPackage::MESSAGEEND_OPERATION_ENCLOSINGFRAGMENT:
 		{
 			result = eAny(this->enclosingFragment());
 			break;
 		}
 		
-		// 14868
+		// 786128866
 		case umlPackage::MESSAGEEND_OPERATION_ISRECEIVE:
 		{
 			result = eAny(this->isReceive());
 			break;
 		}
 		
-		// 14867
+		// 379994457
 		case umlPackage::MESSAGEEND_OPERATION_ISSEND:
 		{
 			result = eAny(this->isSend());
 			break;
 		}
 		
-		// 14866
+		// 1336350422
 		case umlPackage::MESSAGEEND_OPERATION_OPPOSITEEND:
 		{
 			result = eAny(this->oppositeEnd());

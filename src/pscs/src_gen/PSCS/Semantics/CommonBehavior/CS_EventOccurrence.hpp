@@ -89,7 +89,7 @@ namespace PSCS::Semantics::CommonBehavior
 			virtual void sendInTo(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> target,std::shared_ptr<uml::Port> port) = 0; 
 			virtual void sendOutTo(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> target,std::shared_ptr<uml::Port> port) = 0;
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			 
 			virtual bool isPropagationInward() const = 0;
@@ -97,7 +97,7 @@ namespace PSCS::Semantics::CommonBehavior
 			virtual void setPropagationInward (bool _propagationInward)= 0;
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			
 			virtual std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint> getInteractionPoint() const = 0;

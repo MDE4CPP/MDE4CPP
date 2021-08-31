@@ -272,14 +272,14 @@ Any UnlimitedNaturalValueImpl::eInvoke(int operationID, std::shared_ptr<std::lis
   	switch(operationID)
 	{
 		
-		// 11717
+		// 913377262
 		case SimpleClassifiersPackage::UNLIMITEDNATURALVALUE_OPERATION__COPY:
 		{
 			result = eAny(this->_copy());
 			break;
 		}
 		
-		// 11715
+		// 886044238
 		case SimpleClassifiersPackage::UNLIMITEDNATURALVALUE_OPERATION_EQUALS_VALUE:
 		{
 			//Retrieve input parameter 'otherValue'
@@ -291,14 +291,14 @@ Any UnlimitedNaturalValueImpl::eInvoke(int operationID, std::shared_ptr<std::lis
 			break;
 		}
 		
-		// 11714
+		// 519448828
 		case SimpleClassifiersPackage::UNLIMITEDNATURALVALUE_OPERATION_SPECIFY:
 		{
 			result = eAny(this->specify());
 			break;
 		}
 		
-		// 11716
+		// 668784562
 		case SimpleClassifiersPackage::UNLIMITEDNATURALVALUE_OPERATION_TOSTRING:
 		{
 			result = eAny(this->toString());

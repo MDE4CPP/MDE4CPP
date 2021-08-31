@@ -87,7 +87,7 @@ namespace ocl::Expressions
 			//*********************************
 			
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			 
 			virtual std::string getSymbol() const = 0;
@@ -95,7 +95,7 @@ namespace ocl::Expressions
 			virtual void setSymbol (std::string _symbol)= 0;
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			
 

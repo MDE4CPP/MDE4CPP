@@ -292,7 +292,7 @@ Any ParameterableElementImpl::eInvoke(int operationID, std::shared_ptr<std::list
   	switch(operationID)
 	{
 		
-		// 17847
+		// 1783372574
 		case umlPackage::PARAMETERABLEELEMENT_OPERATION_ISCOMPATIBLEWITH_PARAMETERABLEELEMENT:
 		{
 			//Retrieve input parameter 'p'
@@ -304,7 +304,7 @@ Any ParameterableElementImpl::eInvoke(int operationID, std::shared_ptr<std::list
 			break;
 		}
 		
-		// 17848
+		// 414546068
 		case umlPackage::PARAMETERABLEELEMENT_OPERATION_ISTEMPLATEPARAMETER:
 		{
 			result = eAny(this->isTemplateParameter());

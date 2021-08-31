@@ -383,7 +383,7 @@ Any CollaborationUseImpl::eInvoke(int operationID, std::shared_ptr<std::list < s
   	switch(operationID)
 	{
 		
-		// 4367
+		// 123075857
 		case umlPackage::COLLABORATIONUSE_OPERATION_CLIENT_ELEMENTS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -400,7 +400,7 @@ Any CollaborationUseImpl::eInvoke(int operationID, std::shared_ptr<std::list < s
 			break;
 		}
 		
-		// 4369
+		// 851332840
 		case umlPackage::COLLABORATIONUSE_OPERATION_CONNECTORS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -417,7 +417,7 @@ Any CollaborationUseImpl::eInvoke(int operationID, std::shared_ptr<std::list < s
 			break;
 		}
 		
-		// 4368
+		// 1617953717
 		case umlPackage::COLLABORATIONUSE_OPERATION_EVERY_ROLE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

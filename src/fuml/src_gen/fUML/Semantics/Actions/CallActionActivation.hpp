@@ -93,11 +93,11 @@ namespace fUML::Semantics::Actions
 			virtual void removeCallExecution(std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> execution) = 0; 
 			virtual void terminate() = 0;
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			
 			virtual std::shared_ptr<uml::CallAction> getCallAction() const = 0;

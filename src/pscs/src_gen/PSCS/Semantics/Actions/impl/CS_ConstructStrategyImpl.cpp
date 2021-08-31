@@ -198,7 +198,7 @@ Any CS_ConstructStrategyImpl::eInvoke(int operationID, std::shared_ptr<std::list
   	switch(operationID)
 	{
 		
-		// 702
+		// 597739318
 		case ActionsPackage::CS_CONSTRUCTSTRATEGY_OPERATION_CONSTRUCT_OPERATION_CS_OBJECT:
 		{
 			//Retrieve input parameter 'constructor'
@@ -215,7 +215,7 @@ Any CS_ConstructStrategyImpl::eInvoke(int operationID, std::shared_ptr<std::list
 			break;
 		}
 		
-		// 701
+		// 1128538055
 		case ActionsPackage::CS_CONSTRUCTSTRATEGY_OPERATION_GETNAME:
 		{
 			result = eAny(this->getName());

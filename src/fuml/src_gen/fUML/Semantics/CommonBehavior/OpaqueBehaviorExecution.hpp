@@ -87,11 +87,11 @@ namespace fUML::Semantics::CommonBehavior
 			virtual void doBody(std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> inputParameters,std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> outputParameters) = 0; 
 			virtual void execute() = 0;
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			
 

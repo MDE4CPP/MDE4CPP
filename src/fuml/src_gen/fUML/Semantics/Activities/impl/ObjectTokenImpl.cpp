@@ -32,8 +32,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "fUML/Semantics/Values/ValuesFactory.hpp"
+#include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 
 
 #include "fUML/Semantics/Activities/ActivityNodeActivation.hpp"
@@ -255,14 +255,14 @@ Any ObjectTokenImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::s
   	switch(operationID)
 	{
 		
-		// 8311
+		// 2097614011
 		case ActivitiesPackage::OBJECTTOKEN_OPERATION__COPY:
 		{
 			result = eAny(this->_copy());
 			break;
 		}
 		
-		// 8309
+		// 986368509
 		case ActivitiesPackage::OBJECTTOKEN_OPERATION_EQUALS_TOKEN:
 		{
 			//Retrieve input parameter 'other'
@@ -274,7 +274,7 @@ Any ObjectTokenImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::s
 			break;
 		}
 		
-		// 8310
+		// 1282940466
 		case ActivitiesPackage::OBJECTTOKEN_OPERATION_ISCONTROL:
 		{
 			result = eAny(this->isControl());

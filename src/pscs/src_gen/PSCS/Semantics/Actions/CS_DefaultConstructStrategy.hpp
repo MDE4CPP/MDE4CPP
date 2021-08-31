@@ -108,11 +108,11 @@ namespace PSCS::Semantics::Actions
 			virtual bool isArrayPattern(std::shared_ptr<uml::Connector> c) = 0; 
 			virtual bool isStarPattern(std::shared_ptr<uml::Connector> c) = 0;
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			
 			virtual std::shared_ptr<uml::Association> getDefaultAssociation() const = 0;

@@ -447,7 +447,7 @@ Any TemplateSignatureImpl::eInvoke(int operationID, std::shared_ptr<std::list < 
   	switch(operationID)
 	{
 		
-		// 23348
+		// 545793563
 		case umlPackage::TEMPLATESIGNATURE_OPERATION_OWN_ELEMENTS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -464,7 +464,7 @@ Any TemplateSignatureImpl::eInvoke(int operationID, std::shared_ptr<std::list < 
 			break;
 		}
 		
-		// 23349
+		// 1841790268
 		case umlPackage::TEMPLATESIGNATURE_OPERATION_UNIQUE_PARAMETERS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

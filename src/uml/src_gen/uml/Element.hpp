@@ -254,11 +254,11 @@ namespace uml
 			 
 			virtual std::shared_ptr<ecore::EObject> unapplyStereotype(std::shared_ptr<uml::Stereotype> stereotype) = 0;
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			/*!
 			The Comments owned by this Element.

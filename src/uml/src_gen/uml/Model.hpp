@@ -91,7 +91,7 @@ namespace uml
 			 
 			virtual bool isMetamodel() = 0;
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			/*!
 			The name of the viewpoint that is expressed by a model (this name may refer to a profile definition).
@@ -107,7 +107,7 @@ namespace uml
 			virtual void setViewpoint (std::string _viewpoint)= 0;
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			
 

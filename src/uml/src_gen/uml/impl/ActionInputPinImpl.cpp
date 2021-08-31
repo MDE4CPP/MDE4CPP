@@ -457,7 +457,7 @@ Any ActionInputPinImpl::eInvoke(int operationID, std::shared_ptr<std::list < std
   	switch(operationID)
 	{
 		
-		// 722
+		// 637438317
 		case umlPackage::ACTIONINPUTPIN_OPERATION_INPUT_PIN_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -474,7 +474,7 @@ Any ActionInputPinImpl::eInvoke(int operationID, std::shared_ptr<std::list < std
 			break;
 		}
 		
-		// 724
+		// 653463064
 		case umlPackage::ACTIONINPUTPIN_OPERATION_NO_CONTROL_OR_OBJECT_FLOW_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -491,7 +491,7 @@ Any ActionInputPinImpl::eInvoke(int operationID, std::shared_ptr<std::list < std
 			break;
 		}
 		
-		// 723
+		// 2141238809
 		case umlPackage::ACTIONINPUTPIN_OPERATION_ONE_OUTPUT_PIN_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

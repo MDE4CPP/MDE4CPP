@@ -79,11 +79,11 @@ namespace fUML::Semantics::SimpleClassifiers
 			virtual std::shared_ptr<uml::ValueSpecification> specify() = 0; 
 			virtual std::string toString() = 0;
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			
 			virtual std::shared_ptr<uml::EnumerationLiteral> getLiteral() const = 0;

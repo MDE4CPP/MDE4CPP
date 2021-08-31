@@ -81,11 +81,11 @@ namespace ocl::Types
 			//*********************************
 			
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			
 			virtual std::shared_ptr<ocl::Values::TupleValue> getInstance() const = 0;

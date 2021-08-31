@@ -75,7 +75,7 @@ namespace ecore
 			//*********************************
 			
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			 
 			virtual bool isContainer() const = 0;
@@ -90,7 +90,7 @@ namespace ecore
 			virtual void setResolveProxies (bool _resolveProxies)= 0;
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			
 			virtual std::shared_ptr<Bag<ecore::EAttribute>> getEKeys() const = 0;

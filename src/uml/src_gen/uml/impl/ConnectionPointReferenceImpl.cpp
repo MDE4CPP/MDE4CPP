@@ -434,7 +434,7 @@ Any ConnectionPointReferenceImpl::eInvoke(int operationID, std::shared_ptr<std::
   	switch(operationID)
 	{
 		
-		// 5277
+		// 1348223732
 		case umlPackage::CONNECTIONPOINTREFERENCE_OPERATION_ENTRY_PSEUDOSTATES_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -451,7 +451,7 @@ Any ConnectionPointReferenceImpl::eInvoke(int operationID, std::shared_ptr<std::
 			break;
 		}
 		
-		// 5276
+		// 1938887954
 		case umlPackage::CONNECTIONPOINTREFERENCE_OPERATION_EXIT_PSEUDOSTATES_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

@@ -319,7 +319,7 @@ Any AcceptEventActionActivationImpl::eInvoke(int operationID, std::shared_ptr<st
   	switch(operationID)
 	{
 		
-		// 360
+		// 908096905
 		case ActionsPackage::ACCEPTEVENTACTIONACTIVATION_OPERATION_ACCEPT_EVENTOCCURRENCE:
 		{
 			//Retrieve input parameter 'eventOccurrence'
@@ -331,14 +331,14 @@ Any AcceptEventActionActivationImpl::eInvoke(int operationID, std::shared_ptr<st
 			break;
 		}
 		
-		// 362
+		// 2139307330
 		case ActionsPackage::ACCEPTEVENTACTIONACTIVATION_OPERATION_DOACTION:
 		{
 			this->doAction();
 			break;
 		}
 		
-		// 363
+		// 1477585117
 		case ActionsPackage::ACCEPTEVENTACTIONACTIVATION_OPERATION_FIRE_TOKEN:
 		{
 			//Retrieve input parameter 'incomingTokens'
@@ -350,7 +350,7 @@ Any AcceptEventActionActivationImpl::eInvoke(int operationID, std::shared_ptr<st
 			break;
 		}
 		
-		// 364
+		// 640030514
 		case ActionsPackage::ACCEPTEVENTACTIONACTIVATION_OPERATION_INITIALIZE_ACTIVITYNODE_ACTIVITYNODEACTIVATIONGROUP:
 		{
 			//Retrieve input parameter 'node'
@@ -367,14 +367,14 @@ Any AcceptEventActionActivationImpl::eInvoke(int operationID, std::shared_ptr<st
 			break;
 		}
 		
-		// 365
+		// 1247902812
 		case ActionsPackage::ACCEPTEVENTACTIONACTIVATION_OPERATION_ISREADY:
 		{
 			result = eAny(this->isReady());
 			break;
 		}
 		
-		// 361
+		// 1530016891
 		case ActionsPackage::ACCEPTEVENTACTIONACTIVATION_OPERATION_MATCH_EVENTOCCURRENCE:
 		{
 			//Retrieve input parameter 'eventOccurrence'
@@ -386,14 +386,14 @@ Any AcceptEventActionActivationImpl::eInvoke(int operationID, std::shared_ptr<st
 			break;
 		}
 		
-		// 366
+		// 1056616233
 		case ActionsPackage::ACCEPTEVENTACTIONACTIVATION_OPERATION_RUN:
 		{
 			this->run();
 			break;
 		}
 		
-		// 367
+		// 1685607188
 		case ActionsPackage::ACCEPTEVENTACTIONACTIVATION_OPERATION_TERMINATE:
 		{
 			this->terminate();

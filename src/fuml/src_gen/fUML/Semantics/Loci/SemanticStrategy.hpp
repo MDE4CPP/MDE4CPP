@@ -67,11 +67,11 @@ namespace fUML::Semantics::Loci
 			 
 			virtual std::string getName() = 0;
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			
 

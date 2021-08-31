@@ -476,7 +476,7 @@ Any ReadLinkObjectEndActionImpl::eInvoke(int operationID, std::shared_ptr<std::l
   	switch(operationID)
 	{
 		
-		// 19702
+		// 803845092
 		case umlPackage::READLINKOBJECTENDACTION_OPERATION_ASSOCIATION_OF_ASSOCIATION_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -493,7 +493,7 @@ Any ReadLinkObjectEndActionImpl::eInvoke(int operationID, std::shared_ptr<std::l
 			break;
 		}
 		
-		// 19698
+		// 1889550142
 		case umlPackage::READLINKOBJECTENDACTION_OPERATION_ENDS_OF_ASSOCIATION_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -510,7 +510,7 @@ Any ReadLinkObjectEndActionImpl::eInvoke(int operationID, std::shared_ptr<std::l
 			break;
 		}
 		
-		// 19697
+		// 477816159
 		case umlPackage::READLINKOBJECTENDACTION_OPERATION_MULTIPLICITY_OF_OBJECT_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -527,7 +527,7 @@ Any ReadLinkObjectEndActionImpl::eInvoke(int operationID, std::shared_ptr<std::l
 			break;
 		}
 		
-		// 19700
+		// 845997383
 		case umlPackage::READLINKOBJECTENDACTION_OPERATION_MULTIPLICITY_OF_RESULT_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -544,7 +544,7 @@ Any ReadLinkObjectEndActionImpl::eInvoke(int operationID, std::shared_ptr<std::l
 			break;
 		}
 		
-		// 19696
+		// 421180735
 		case umlPackage::READLINKOBJECTENDACTION_OPERATION_PROPERTY_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -561,7 +561,7 @@ Any ReadLinkObjectEndActionImpl::eInvoke(int operationID, std::shared_ptr<std::l
 			break;
 		}
 		
-		// 19701
+		// 1314770600
 		case umlPackage::READLINKOBJECTENDACTION_OPERATION_TYPE_OF_OBJECT_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -578,7 +578,7 @@ Any ReadLinkObjectEndActionImpl::eInvoke(int operationID, std::shared_ptr<std::l
 			break;
 		}
 		
-		// 19699
+		// 2136748102
 		case umlPackage::READLINKOBJECTENDACTION_OPERATION_TYPE_OF_RESULT_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

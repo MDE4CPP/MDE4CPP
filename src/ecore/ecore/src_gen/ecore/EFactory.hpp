@@ -78,11 +78,11 @@ namespace ecore
 			virtual std::shared_ptr<ecore::EObject> create(std::shared_ptr<ecore::EClass> eClass) const = 0; 
 			virtual Any createFromString(std::shared_ptr<ecore::EDataType> eDataType,std::string literalValue) const = 0;
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			
 			virtual std::shared_ptr<ecore::EPackage> getEPackage() const = 0;

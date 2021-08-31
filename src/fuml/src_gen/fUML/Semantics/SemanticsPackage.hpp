@@ -15,14 +15,14 @@
 namespace ecore 
 {
 	class EAnnotation;
-	class EAttribute;
+	class EPackage;
+	class EReference;
 	class EClass;
 	class EDataType;
 	class EGenericType;
-	class EOperation;
-	class EPackage;
+	class EAttribute;
 	class EParameter;
-	class EReference;
+	class EOperation;
 	class EStringToStringMapEntry;
 }
 

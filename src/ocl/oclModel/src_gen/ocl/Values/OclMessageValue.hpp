@@ -73,7 +73,7 @@ namespace ocl::Values
 			 
 			virtual std::string toString() = 0;
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			 
 			virtual bool getIsAsyncOperation() const = 0;
@@ -93,7 +93,7 @@ namespace ocl::Values
 			virtual void setName (std::string _name)= 0;
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			
 			virtual std::shared_ptr<Bag<ocl::Values::NameValueBinding>> getArguments() const = 0;

@@ -47,9 +47,9 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Actions/ActionsFactory.hpp"
+#include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 
 
 #include "uml/Action.hpp"
@@ -416,14 +416,14 @@ Any CS_ClearStructuralFeatureActionActivationImpl::eInvoke(int operationID, std:
   	switch(operationID)
 	{
 		
-		// 663
+		// 425670922
 		case ActionsPackage::CS_CLEARSTRUCTURALFEATUREACTIONACTIVATION_OPERATION_DOACTION:
 		{
 			this->doAction();
 			break;
 		}
 		
-		// 664
+		// 1339765966
 		case ActionsPackage::CS_CLEARSTRUCTURALFEATUREACTIONACTIVATION_OPERATION_GETLINKSTODESTROY_STRUCTUREDVALUE_STRUCTURALFEATURE:
 		{
 			//Retrieve input parameter 'value'
@@ -440,7 +440,7 @@ Any CS_ClearStructuralFeatureActionActivationImpl::eInvoke(int operationID, std:
 			break;
 		}
 		
-		// 665
+		// 1423989550
 		case ActionsPackage::CS_CLEARSTRUCTURALFEATUREACTIONACTIVATION_OPERATION_GETPOTENTIALLINKENDS_CS_REFERENCE_STRUCTURALFEATURE:
 		{
 			//Retrieve input parameter 'context'

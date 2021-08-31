@@ -428,7 +428,7 @@ Any WriteStructuralFeatureActionImpl::eInvoke(int operationID, std::shared_ptr<s
   	switch(operationID)
 	{
 		
-		// 25802
+		// 1698582669
 		case umlPackage::WRITESTRUCTURALFEATUREACTION_OPERATION_MULTIPLICITY_OF_RESULT_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -445,7 +445,7 @@ Any WriteStructuralFeatureActionImpl::eInvoke(int operationID, std::shared_ptr<s
 			break;
 		}
 		
-		// 25804
+		// 2073600200
 		case umlPackage::WRITESTRUCTURALFEATUREACTION_OPERATION_MULTIPLICITY_OF_VALUE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -462,7 +462,7 @@ Any WriteStructuralFeatureActionImpl::eInvoke(int operationID, std::shared_ptr<s
 			break;
 		}
 		
-		// 25805
+		// 1285187754
 		case umlPackage::WRITESTRUCTURALFEATUREACTION_OPERATION_TYPE_OF_RESULT_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -479,7 +479,7 @@ Any WriteStructuralFeatureActionImpl::eInvoke(int operationID, std::shared_ptr<s
 			break;
 		}
 		
-		// 25803
+		// 607994000
 		case umlPackage::WRITESTRUCTURALFEATUREACTION_OPERATION_TYPE_OF_VALUE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

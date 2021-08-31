@@ -789,7 +789,7 @@ Any NamespaceImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sha
   	switch(operationID)
 	{
 		
-		// 15673
+		// 802790798
 		case umlPackage::NAMESPACE_OPERATION_CANNOT_IMPORT_OWNEDMEMBERS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -806,7 +806,7 @@ Any NamespaceImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sha
 			break;
 		}
 		
-		// 15672
+		// 845973580
 		case umlPackage::NAMESPACE_OPERATION_CANNOT_IMPORT_SELF_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -823,7 +823,7 @@ Any NamespaceImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sha
 			break;
 		}
 		
-		// 15674
+		// 86368278
 		case umlPackage::NAMESPACE_OPERATION_CREATEELEMENTIMPORT_PACKAGEABLEELEMENT_VISIBILITYKIND:
 		{
 			//Retrieve input parameter 'element'
@@ -840,7 +840,7 @@ Any NamespaceImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sha
 			break;
 		}
 		
-		// 15675
+		// 1868922656
 		case umlPackage::NAMESPACE_OPERATION_CREATEPACKAGEIMPORT_PACKAGE_VISIBILITYKIND:
 		{
 			//Retrieve input parameter 'package_'
@@ -857,7 +857,7 @@ Any NamespaceImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sha
 			break;
 		}
 		
-		// 15679
+		// 1265638945
 		case umlPackage::NAMESPACE_OPERATION_EXCLUDECOLLISIONS_PACKAGEABLEELEMENT:
 		{
 			//Retrieve input parameter 'imps'
@@ -869,28 +869,28 @@ Any NamespaceImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sha
 			break;
 		}
 		
-		// 15676
+		// 951932827
 		case umlPackage::NAMESPACE_OPERATION_GETIMPORTEDELEMENTS:
 		{
 			result = eAny(this->getImportedElements());
 			break;
 		}
 		
-		// 15682
+		// 94967249
 		case umlPackage::NAMESPACE_OPERATION_GETIMPORTEDMEMBERS:
 		{
 			result = eAny(this->getImportedMembers());
 			break;
 		}
 		
-		// 15677
+		// 152905544
 		case umlPackage::NAMESPACE_OPERATION_GETIMPORTEDPACKAGES:
 		{
 			result = eAny(this->getImportedPackages());
 			break;
 		}
 		
-		// 15680
+		// 479584053
 		case umlPackage::NAMESPACE_OPERATION_GETNAMESOFMEMBER_NAMEDELEMENT:
 		{
 			//Retrieve input parameter 'element'
@@ -902,14 +902,14 @@ Any NamespaceImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sha
 			break;
 		}
 		
-		// 15678
+		// 802350881
 		case umlPackage::NAMESPACE_OPERATION_GETOWNEDMEMBERS:
 		{
 			result = eAny(this->getOwnedMembers());
 			break;
 		}
 		
-		// 15681
+		// 1832013262
 		case umlPackage::NAMESPACE_OPERATION_IMPORTMEMBERS_PACKAGEABLEELEMENT:
 		{
 			//Retrieve input parameter 'imps'
@@ -921,14 +921,14 @@ Any NamespaceImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sha
 			break;
 		}
 		
-		// 15683
+		// 2129502144
 		case umlPackage::NAMESPACE_OPERATION_MEMBERSAREDISTINGUISHABLE:
 		{
 			result = eAny(this->membersAreDistinguishable());
 			break;
 		}
 		
-		// 15671
+		// 2127128654
 		case umlPackage::NAMESPACE_OPERATION_MEMBERS_DISTINGUISHABLE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

@@ -99,11 +99,11 @@ namespace uml
 			 
 			virtual bool type_target_pin(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			/*!
 			The request object, which is transmitted to the target object. The object may be copied in transmission, so identity might not be preserved.

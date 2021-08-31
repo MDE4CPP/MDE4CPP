@@ -323,7 +323,7 @@ Any TypeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_p
   	switch(operationID)
 	{
 		
-		// 24474
+		// 629993373
 		case umlPackage::TYPE_OPERATION_CONFORMSTO_TYPE:
 		{
 			//Retrieve input parameter 'other'
@@ -335,7 +335,7 @@ Any TypeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_p
 			break;
 		}
 		
-		// 24472
+		// 968461441
 		case umlPackage::TYPE_OPERATION_CREATEASSOCIATION_BOOLEAN_UNLIMITEDNATURAL:
 		{
 			//Retrieve input parameter 'end1IsNavigable'
@@ -397,7 +397,7 @@ Any TypeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_p
 			break;
 		}
 		
-		// 24473
+		// 16000238
 		case umlPackage::TYPE_OPERATION_GETASSOCIATIONS:
 		{
 			result = eAny(this->getAssociations());

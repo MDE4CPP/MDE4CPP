@@ -68,11 +68,11 @@ namespace ocl::Values
 			virtual bool equals(std::shared_ptr<fUML::Semantics::Values::Value> otherValue) = 0; 
 			virtual std::string toString() = 0;
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			
 

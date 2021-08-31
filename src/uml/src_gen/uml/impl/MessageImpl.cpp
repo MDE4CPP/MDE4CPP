@@ -600,7 +600,7 @@ Any MessageImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::share
   	switch(operationID)
 	{
 		
-		// 14774
+		// 1899252778
 		case umlPackage::MESSAGE_OPERATION_ARGUMENTS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -617,7 +617,7 @@ Any MessageImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::share
 			break;
 		}
 		
-		// 14775
+		// 558087146
 		case umlPackage::MESSAGE_OPERATION_CANNOT_CROSS_BOUNDARIES_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -634,14 +634,14 @@ Any MessageImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::share
 			break;
 		}
 		
-		// 14781
+		// 1841698888
 		case umlPackage::MESSAGE_OPERATION_GETMESSAGEKIND:
 		{
 			result = eAny(this->getMessageKind());
 			break;
 		}
 		
-		// 14777
+		// 794631385
 		case umlPackage::MESSAGE_OPERATION_OCCURRENCE_SPECIFICATIONS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -658,7 +658,7 @@ Any MessageImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::share
 			break;
 		}
 		
-		// 14773
+		// 1304019371
 		case umlPackage::MESSAGE_OPERATION_SENDING_RECEIVING_MESSAGE_EVENT_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -675,7 +675,7 @@ Any MessageImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::share
 			break;
 		}
 		
-		// 14780
+		// 1755211186
 		case umlPackage::MESSAGE_OPERATION_SIGNATURE_IS_OPERATION_REPLY_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -692,7 +692,7 @@ Any MessageImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::share
 			break;
 		}
 		
-		// 14779
+		// 555346418
 		case umlPackage::MESSAGE_OPERATION_SIGNATURE_IS_OPERATION_REQUEST_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -709,7 +709,7 @@ Any MessageImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::share
 			break;
 		}
 		
-		// 14776
+		// 295075675
 		case umlPackage::MESSAGE_OPERATION_SIGNATURE_IS_SIGNAL_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -726,7 +726,7 @@ Any MessageImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::share
 			break;
 		}
 		
-		// 14778
+		// 1691024653
 		case umlPackage::MESSAGE_OPERATION_SIGNATURE_REFER_TO_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

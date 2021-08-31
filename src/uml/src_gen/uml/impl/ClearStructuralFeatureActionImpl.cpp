@@ -380,7 +380,7 @@ Any ClearStructuralFeatureActionImpl::eInvoke(int operationID, std::shared_ptr<s
   	switch(operationID)
 	{
 		
-		// 4102
+		// 838051871
 		case umlPackage::CLEARSTRUCTURALFEATUREACTION_OPERATION_MULTIPLICITY_OF_RESULT_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -397,7 +397,7 @@ Any ClearStructuralFeatureActionImpl::eInvoke(int operationID, std::shared_ptr<s
 			break;
 		}
 		
-		// 4101
+		// 424656956
 		case umlPackage::CLEARSTRUCTURALFEATUREACTION_OPERATION_TYPE_OF_RESULT_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

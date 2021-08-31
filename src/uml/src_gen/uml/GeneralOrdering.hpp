@@ -87,11 +87,11 @@ namespace uml
 			 
 			virtual bool irreflexive_transitive_closure(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			/*!
 			The OccurrenceSpecification referenced comes after the OccurrenceSpecification referenced by before.

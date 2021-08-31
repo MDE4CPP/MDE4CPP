@@ -46,12 +46,12 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
+#include "uml/umlFactory.hpp"
 #include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
+#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
-#include "uml/umlFactory.hpp"
 
 
 #include "uml/Activity.hpp"
@@ -404,28 +404,28 @@ Any ActivityExecutionImpl::eInvoke(int operationID, std::shared_ptr<std::list < 
   	switch(operationID)
 	{
 		
-		// 756
+		// 268283450
 		case ActivitiesPackage::ACTIVITYEXECUTION_OPERATION__COPY:
 		{
 			result = eAny(this->_copy());
 			break;
 		}
 		
-		// 753
+		// 1727608078
 		case ActivitiesPackage::ACTIVITYEXECUTION_OPERATION_EXECUTE:
 		{
 			this->execute();
 			break;
 		}
 		
-		// 755
+		// 929802882
 		case ActivitiesPackage::ACTIVITYEXECUTION_OPERATION_NEW_:
 		{
 			result = eAny(this->new_());
 			break;
 		}
 		
-		// 754
+		// 679246932
 		case ActivitiesPackage::ACTIVITYEXECUTION_OPERATION_TERMINATE:
 		{
 			this->terminate();

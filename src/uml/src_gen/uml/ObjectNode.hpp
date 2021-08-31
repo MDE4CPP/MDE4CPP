@@ -116,7 +116,7 @@ namespace uml
 			 
 			virtual bool selection_behavior(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			/*!
 			Indicates whether the type of the ObjectNode is to be treated as representing control values that may traverse ControlFlows.
@@ -144,7 +144,7 @@ namespace uml
 			virtual void setOrdering (uml::ObjectNodeOrderingKind _ordering)= 0;
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			/*!
 			The States required to be associated with the values held by tokens on this ObjectNode.

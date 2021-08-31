@@ -524,7 +524,7 @@ Any ReclassifyObjectActionImpl::eInvoke(int operationID, std::shared_ptr<std::li
   	switch(operationID)
 	{
 		
-		// 20398
+		// 1111669922
 		case umlPackage::RECLASSIFYOBJECTACTION_OPERATION_CLASSIFIER_NOT_ABSTRACT_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -541,7 +541,7 @@ Any ReclassifyObjectActionImpl::eInvoke(int operationID, std::shared_ptr<std::li
 			break;
 		}
 		
-		// 20397
+		// 1910336897
 		case umlPackage::RECLASSIFYOBJECTACTION_OPERATION_INPUT_PIN_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -558,7 +558,7 @@ Any ReclassifyObjectActionImpl::eInvoke(int operationID, std::shared_ptr<std::li
 			break;
 		}
 		
-		// 20399
+		// 1719223328
 		case umlPackage::RECLASSIFYOBJECTACTION_OPERATION_MULTIPLICITY_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

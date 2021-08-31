@@ -698,21 +698,21 @@ Any RegionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared
   	switch(operationID)
 	{
 		
-		// 20801
+		// 701066281
 		case umlPackage::REGION_OPERATION_BELONGSTOPSM:
 		{
 			result = eAny(this->belongsToPSM());
 			break;
 		}
 		
-		// 20802
+		// 1752814481
 		case umlPackage::REGION_OPERATION_CONTAININGSTATEMACHINE:
 		{
 			result = eAny(this->containingStateMachine());
 			break;
 		}
 		
-		// 20797
+		// 629096106
 		case umlPackage::REGION_OPERATION_DEEP_HISTORY_VERTEX_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -729,7 +729,7 @@ Any RegionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared
 			break;
 		}
 		
-		// 20800
+		// 709638913
 		case umlPackage::REGION_OPERATION_INITIAL_VERTEX_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -746,7 +746,7 @@ Any RegionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared
 			break;
 		}
 		
-		// 20799
+		// 118469315
 		case umlPackage::REGION_OPERATION_OWNED_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -763,14 +763,14 @@ Any RegionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared
 			break;
 		}
 		
-		// 20803
+		// 2039075134
 		case umlPackage::REGION_OPERATION_REDEFINITIONCONTEXT:
 		{
 			result = eAny(this->redefinitionContext());
 			break;
 		}
 		
-		// 20798
+		// 771598032
 		case umlPackage::REGION_OPERATION_SHALLOW_HISTORY_VERTEX_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

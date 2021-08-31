@@ -458,35 +458,35 @@ Any OpaqueExpressionImpl::eInvoke(int operationID, std::shared_ptr<std::list < s
   	switch(operationID)
 	{
 		
-		// 16691
+		// 1957650327
 		case umlPackage::OPAQUEEXPRESSION_OPERATION_GETRESULT:
 		{
 			result = eAny(this->getResult());
 			break;
 		}
 		
-		// 16688
+		// 649739801
 		case umlPackage::OPAQUEEXPRESSION_OPERATION_ISINTEGRAL:
 		{
 			result = eAny(this->isIntegral());
 			break;
 		}
 		
-		// 16689
+		// 103942961
 		case umlPackage::OPAQUEEXPRESSION_OPERATION_ISNONNEGATIVE:
 		{
 			result = eAny(this->isNonNegative());
 			break;
 		}
 		
-		// 16690
+		// 222077740
 		case umlPackage::OPAQUEEXPRESSION_OPERATION_ISPOSITIVE:
 		{
 			result = eAny(this->isPositive());
 			break;
 		}
 		
-		// 16685
+		// 1898733225
 		case umlPackage::OPAQUEEXPRESSION_OPERATION_LANGUAGE_BODY_SIZE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -503,7 +503,7 @@ Any OpaqueExpressionImpl::eInvoke(int operationID, std::shared_ptr<std::list < s
 			break;
 		}
 		
-		// 16686
+		// 1679688181
 		case umlPackage::OPAQUEEXPRESSION_OPERATION_ONE_RETURN_RESULT_PARAMETER_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -520,7 +520,7 @@ Any OpaqueExpressionImpl::eInvoke(int operationID, std::shared_ptr<std::list < s
 			break;
 		}
 		
-		// 16687
+		// 257815046
 		case umlPackage::OPAQUEEXPRESSION_OPERATION_ONLY_RETURN_RESULT_PARAMETERS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -537,7 +537,7 @@ Any OpaqueExpressionImpl::eInvoke(int operationID, std::shared_ptr<std::list < s
 			break;
 		}
 		
-		// 16692
+		// 1330275204
 		case umlPackage::OPAQUEEXPRESSION_OPERATION_VALUE:
 		{
 			result = eAny(this->value());

@@ -5,14 +5,14 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
 #include "ecore/EAnnotation.hpp"
+#include "ecore/EReference.hpp"
+#include "ecore/EEnum.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EDataType.hpp"
-#include "ecore/EEnum.hpp"
-#include "ecore/EEnumLiteral.hpp"
 #include "ecore/EGenericType.hpp"
-#include "ecore/EOperation.hpp"
+#include "ecore/EEnumLiteral.hpp"
 #include "ecore/EParameter.hpp"
-#include "ecore/EReference.hpp"
+#include "ecore/EOperation.hpp"
 #include "ecore/EStringToStringMapEntry.hpp"
 
 // metametamodel factory
@@ -1097,13 +1097,6 @@ void StructuredClassifiersPackageImpl::initializeCS_ReferenceContent()
 	m_cS_Reference_Operation__copy->setUpperBound(1);
 	m_cS_Reference_Operation__copy->setUnique(true);
 	m_cS_Reference_Operation__copy->setOrdered(true);
-	
-	m_cS_Reference_Operation_copy->setName("copy");
-	m_cS_Reference_Operation_copy->setEType(fUML::Semantics::Values::ValuesPackage::eInstance()->getValue_Class());
-	m_cS_Reference_Operation_copy->setLowerBound(1);
-	m_cS_Reference_Operation_copy->setUpperBound(1);
-	m_cS_Reference_Operation_copy->setUnique(true);
-	m_cS_Reference_Operation_copy->setOrdered(false);
 	
 	m_cS_Reference_Operation_dispatchIn_Operation_CS_InteractionPoint->setName("dispatchIn");
 	m_cS_Reference_Operation_dispatchIn_Operation_CS_InteractionPoint->setEType(fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance()->getExecution_Class());

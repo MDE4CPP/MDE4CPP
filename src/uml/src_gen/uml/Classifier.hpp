@@ -266,7 +266,7 @@ namespace uml
 			 
 			virtual bool specialize_type(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			/*!
 			If true, the Classifier can only be instantiated by instantiating one of its specializations. An abstract Classifier is intended to be used by other Classifiers e.g., as the target of Associations or Generalizations.
@@ -294,7 +294,7 @@ namespace uml
 			virtual void setIsFinalSpecialization (bool _isFinalSpecialization)= 0;
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			
 			

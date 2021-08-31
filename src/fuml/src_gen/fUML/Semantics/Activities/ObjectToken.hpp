@@ -77,11 +77,11 @@ namespace fUML::Semantics::Activities
 			virtual bool equals(std::shared_ptr<fUML::Semantics::Activities::Token> other) = 0; 
 			virtual bool isControl() = 0;
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			
 			virtual std::shared_ptr<fUML::Semantics::Values::Value> getValue() const = 0;

@@ -5,13 +5,13 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
 #include "ecore/EAnnotation.hpp"
-#include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EClass.hpp"
 #include "ecore/EDataType.hpp"
 #include "ecore/EGenericType.hpp"
-#include "ecore/EOperation.hpp"
+#include "ecore/EAttribute.hpp"
 #include "ecore/EParameter.hpp"
-#include "ecore/EReference.hpp"
+#include "ecore/EOperation.hpp"
 #include "ecore/EStringToStringMapEntry.hpp"
 
 //metamodel factory
@@ -71,10 +71,6 @@ std::shared_ptr<ecore::EReference> CommonBehaviorPackageImpl::getCallEventBehavi
 	return m_callEventBehavior_Attribute_operation;
 }
 
-std::shared_ptr<ecore::EOperation> CommonBehaviorPackageImpl::getCallEventBehavior_Operation_assignOperation_Operation() const
-{
-	return m_callEventBehavior_Operation_assignOperation_Operation;
-}
 
 // End Class CallEventBehavior
 
@@ -235,10 +231,6 @@ std::shared_ptr<ecore::EOperation> CommonBehaviorPackageImpl::getClassifierBehav
 {
 	return m_classifierBehaviorInvocationEventAccepter_Operation_accept_EventOccurrence;
 }
-std::shared_ptr<ecore::EOperation> CommonBehaviorPackageImpl::getClassifierBehaviorInvocationEventAccepter_Operation_invokeBehavior_Class_ParameterValue() const
-{
-	return m_classifierBehaviorInvocationEventAccepter_Operation_invokeBehavior_Class_ParameterValue;
-}
 std::shared_ptr<ecore::EOperation> CommonBehaviorPackageImpl::getClassifierBehaviorInvocationEventAccepter_Operation_match_EventOccurrence() const
 {
 	return m_classifierBehaviorInvocationEventAccepter_Operation_match_EventOccurrence;
@@ -342,10 +334,6 @@ std::shared_ptr<ecore::EOperation> CommonBehaviorPackageImpl::getExecution_Opera
 std::shared_ptr<ecore::EOperation> CommonBehaviorPackageImpl::getExecution_Operation_execute() const
 {
 	return m_execution_Operation_execute;
-}
-std::shared_ptr<ecore::EOperation> CommonBehaviorPackageImpl::getExecution_Operation_getBehavior() const
-{
-	return m_execution_Operation_getBehavior;
 }
 std::shared_ptr<ecore::EOperation> CommonBehaviorPackageImpl::getExecution_Operation_getOutputParameterValues() const
 {

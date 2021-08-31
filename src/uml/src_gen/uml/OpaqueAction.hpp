@@ -98,7 +98,7 @@ namespace uml
 			 
 			virtual bool language_body_size(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			/*!
 			Provides a textual specification of the functionality of the Action, in one or more languages other than UML.
@@ -116,7 +116,7 @@ namespace uml
 			
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			/*!
 			The InputPins providing inputs to the OpaqueAction.

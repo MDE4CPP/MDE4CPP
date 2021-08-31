@@ -342,7 +342,7 @@ Any FinalStateImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sh
   	switch(operationID)
 	{
 		
-		// 10427
+		// 859062182
 		case umlPackage::FINALSTATE_OPERATION_CANNOT_REFERENCE_SUBMACHINE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -359,7 +359,7 @@ Any FinalStateImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sh
 			break;
 		}
 		
-		// 10428
+		// 1012688132
 		case umlPackage::FINALSTATE_OPERATION_NO_ENTRY_BEHAVIOR_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -376,7 +376,7 @@ Any FinalStateImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sh
 			break;
 		}
 		
-		// 10424
+		// 259242061
 		case umlPackage::FINALSTATE_OPERATION_NO_EXIT_BEHAVIOR_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -393,7 +393,7 @@ Any FinalStateImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sh
 			break;
 		}
 		
-		// 10425
+		// 2122901800
 		case umlPackage::FINALSTATE_OPERATION_NO_OUTGOING_TRANSITIONS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -410,7 +410,7 @@ Any FinalStateImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sh
 			break;
 		}
 		
-		// 10426
+		// 1553987285
 		case umlPackage::FINALSTATE_OPERATION_NO_REGIONS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -427,7 +427,7 @@ Any FinalStateImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sh
 			break;
 		}
 		
-		// 10429
+		// 756861980
 		case umlPackage::FINALSTATE_OPERATION_NO_STATE_BEHAVIOR_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

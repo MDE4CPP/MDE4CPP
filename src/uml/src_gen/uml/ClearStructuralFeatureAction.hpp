@@ -104,11 +104,11 @@ namespace uml
 			 
 			virtual bool type_of_result(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			/*!
 			The OutputPin on which is put the input object as modified by the ClearStructuralFeatureAction.

@@ -427,14 +427,14 @@ Any EClassifierImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::s
   	switch(operationID)
 	{
 		
-		// 1328
+		// 1232310610
 		case ecorePackage::ECLASSIFIER_OPERATION_GETCLASSIFIERID:
 		{
 			result = eAny(this->getClassifierID());
 			break;
 		}
 		
-		// 1327
+		// 890144981
 		case ecorePackage::ECLASSIFIER_OPERATION_ISINSTANCE_EJAVAOBJECT:
 		{
 			//Retrieve input parameter 'object'

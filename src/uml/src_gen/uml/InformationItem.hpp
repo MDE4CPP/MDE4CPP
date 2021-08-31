@@ -114,11 +114,11 @@ namespace uml
 			 
 			virtual bool sources_and_targets(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			/*!
 			Determines the classifiers that will specify the structure and nature of the information. An information item represents all its represented classifiers.

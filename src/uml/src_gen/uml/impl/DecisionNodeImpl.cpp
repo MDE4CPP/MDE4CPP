@@ -398,7 +398,7 @@ Any DecisionNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::
   	switch(operationID)
 	{
 		
-		// 6686
+		// 1478029581
 		case umlPackage::DECISIONNODE_OPERATION_DECISION_INPUT_FLOW_INCOMING_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -415,7 +415,7 @@ Any DecisionNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::
 			break;
 		}
 		
-		// 6685
+		// 922337066
 		case umlPackage::DECISIONNODE_OPERATION_EDGES_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -432,7 +432,7 @@ Any DecisionNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::
 			break;
 		}
 		
-		// 6689
+		// 369422792
 		case umlPackage::DECISIONNODE_OPERATION_INCOMING_CONTROL_ONE_INPUT_PARAMETER_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -449,7 +449,7 @@ Any DecisionNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::
 			break;
 		}
 		
-		// 6691
+		// 2140105925
 		case umlPackage::DECISIONNODE_OPERATION_INCOMING_OBJECT_ONE_INPUT_PARAMETER_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -466,7 +466,7 @@ Any DecisionNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::
 			break;
 		}
 		
-		// 6688
+		// 397009690
 		case umlPackage::DECISIONNODE_OPERATION_INCOMING_OUTGOING_EDGES_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -483,7 +483,7 @@ Any DecisionNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::
 			break;
 		}
 		
-		// 6690
+		// 1666719950
 		case umlPackage::DECISIONNODE_OPERATION_PARAMETERS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -500,7 +500,7 @@ Any DecisionNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::
 			break;
 		}
 		
-		// 6687
+		// 1310848977
 		case umlPackage::DECISIONNODE_OPERATION_TWO_INPUT_PARAMETERS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -517,7 +517,7 @@ Any DecisionNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::
 			break;
 		}
 		
-		// 6684
+		// 707758549
 		case umlPackage::DECISIONNODE_OPERATION_ZERO_INPUT_PARAMETERS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

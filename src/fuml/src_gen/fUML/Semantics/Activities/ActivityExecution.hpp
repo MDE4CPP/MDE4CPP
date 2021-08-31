@@ -93,11 +93,11 @@ namespace fUML::Semantics::Activities
 			virtual std::shared_ptr<fUML::Semantics::Values::Value> new_() = 0; 
 			virtual void terminate() = 0;
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			
 			virtual std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> getActivationGroup() const = 0;

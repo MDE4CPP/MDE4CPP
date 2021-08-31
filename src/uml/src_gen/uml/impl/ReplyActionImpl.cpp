@@ -502,7 +502,7 @@ Any ReplyActionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::s
   	switch(operationID)
 	{
 		
-		// 21197
+		// 1073826622
 		case umlPackage::REPLYACTION_OPERATION_EVENT_ON_REPLY_TO_CALL_TRIGGER_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -519,7 +519,7 @@ Any ReplyActionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::s
 			break;
 		}
 		
-		// 21196
+		// 347748320
 		case umlPackage::REPLYACTION_OPERATION_PINS_MATCH_PARAMETER_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

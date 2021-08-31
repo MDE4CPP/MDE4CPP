@@ -81,7 +81,7 @@ namespace ecore
 			virtual int getClassifierID() = 0; 
 			virtual bool isInstance(Any object) const = 0;
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			 
 			virtual Any getDefaultValue() const = 0;
@@ -100,7 +100,7 @@ namespace ecore
 			virtual void setInstanceTypeName (std::string _instanceTypeName)= 0;
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			
 			virtual std::weak_ptr<ecore::EPackage> getEPackage() const = 0;

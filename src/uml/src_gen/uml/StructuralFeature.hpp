@@ -83,7 +83,7 @@ namespace uml
 			//*********************************
 			
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			/*!
 			If isReadOnly is true, the StructuralFeature may not be written to after initialization.
@@ -99,7 +99,7 @@ namespace uml
 			virtual void setIsReadOnly (bool _isReadOnly)= 0;
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			
 

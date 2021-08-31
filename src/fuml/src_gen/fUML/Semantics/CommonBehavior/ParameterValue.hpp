@@ -76,11 +76,11 @@ namespace fUML::Semantics::CommonBehavior
 			 
 			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> _copy() = 0;
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			
 			virtual std::shared_ptr<uml::Parameter> getParameter() const = 0;

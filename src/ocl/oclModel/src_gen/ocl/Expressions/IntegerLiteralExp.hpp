@@ -87,7 +87,7 @@ namespace ocl::Expressions
 			//*********************************
 			
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			 
 			virtual int getIntegerSymbol() const = 0;
@@ -95,7 +95,7 @@ namespace ocl::Expressions
 			virtual void setIntegerSymbol (int _integerSymbol)= 0;
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			
 

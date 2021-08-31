@@ -865,28 +865,28 @@ Any ExpansionRegionActivationImpl::eInvoke(int operationID, std::shared_ptr<std:
   	switch(operationID)
 	{
 		
-		// 5162
+		// 1088415189
 		case ActivitiesPackage::EXPANSIONREGIONACTIVATION_OPERATION_DOACTION:
 		{
 			this->doAction();
 			break;
 		}
 		
-		// 5163
+		// 1921844053
 		case ActivitiesPackage::EXPANSIONREGIONACTIVATION_OPERATION_DOOUTPUT:
 		{
 			this->doOutput();
 			break;
 		}
 		
-		// 5164
+		// 1554321336
 		case ActivitiesPackage::EXPANSIONREGIONACTIVATION_OPERATION_DOSTRUCTUREDACTIVITY:
 		{
 			this->doStructuredActivity();
 			break;
 		}
 		
-		// 5165
+		// 148113187
 		case ActivitiesPackage::EXPANSIONREGIONACTIVATION_OPERATION_GETEXPANSIONNODEACTIVATION_EXPANSIONNODE:
 		{
 			//Retrieve input parameter 'node'
@@ -898,21 +898,21 @@ Any ExpansionRegionActivationImpl::eInvoke(int operationID, std::shared_ptr<std:
 			break;
 		}
 		
-		// 5166
+		// 1266640523
 		case ActivitiesPackage::EXPANSIONREGIONACTIVATION_OPERATION_ISSUSPENDED:
 		{
 			result = eAny(this->isSuspended());
 			break;
 		}
 		
-		// 5167
+		// 1919951608
 		case ActivitiesPackage::EXPANSIONREGIONACTIVATION_OPERATION_NUMBEROFVALUES:
 		{
 			result = eAny(this->numberOfValues());
 			break;
 		}
 		
-		// 5168
+		// 740436313
 		case ActivitiesPackage::EXPANSIONREGIONACTIVATION_OPERATION_RESUME_EXPANSIONACTIVATIONGROUP:
 		{
 			//Retrieve input parameter 'activationGroup'
@@ -924,7 +924,7 @@ Any ExpansionRegionActivationImpl::eInvoke(int operationID, std::shared_ptr<std:
 			break;
 		}
 		
-		// 5169
+		// 1225445794
 		case ActivitiesPackage::EXPANSIONREGIONACTIVATION_OPERATION_RUNGROUP_EXPANSIONACTIVATIONGROUP:
 		{
 			//Retrieve input parameter 'activationGroup'
@@ -936,42 +936,42 @@ Any ExpansionRegionActivationImpl::eInvoke(int operationID, std::shared_ptr<std:
 			break;
 		}
 		
-		// 5170
+		// 892067958
 		case ActivitiesPackage::EXPANSIONREGIONACTIVATION_OPERATION_RUNITERATIVE:
 		{
 			this->runIterative();
 			break;
 		}
 		
-		// 5171
+		// 1378819259
 		case ActivitiesPackage::EXPANSIONREGIONACTIVATION_OPERATION_RUNPARALLEL:
 		{
 			this->runParallel();
 			break;
 		}
 		
-		// 5172
+		// 896679763
 		case ActivitiesPackage::EXPANSIONREGIONACTIVATION_OPERATION_SENDOFFERS:
 		{
 			this->sendOffers();
 			break;
 		}
 		
-		// 5173
+		// 1467051328
 		case ActivitiesPackage::EXPANSIONREGIONACTIVATION_OPERATION_TAKEOFFEREDTOKENS:
 		{
 			result = eAny(this->takeOfferedTokens());
 			break;
 		}
 		
-		// 5174
+		// 664627780
 		case ActivitiesPackage::EXPANSIONREGIONACTIVATION_OPERATION_TERMINATE:
 		{
 			this->terminate();
 			break;
 		}
 		
-		// 5175
+		// 1648185759
 		case ActivitiesPackage::EXPANSIONREGIONACTIVATION_OPERATION_TERMINATEGROUP_EXPANSIONACTIVATIONGROUP:
 		{
 			//Retrieve input parameter 'activationGroup'

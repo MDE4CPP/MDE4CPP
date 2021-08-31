@@ -282,14 +282,14 @@ Any ValueImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_
   	switch(operationID)
 	{
 		
-		// 11809
+		// 569532635
 		case ValuesPackage::VALUE_OPERATION__COPY:
 		{
 			result = eAny(this->_copy());
 			break;
 		}
 		
-		// 11808
+		// 1176194197
 		case ValuesPackage::VALUE_OPERATION_CHECKALLPARENTS_CLASSIFIER_CLASSIFIER:
 		{
 			//Retrieve input parameter 'type'
@@ -306,7 +306,7 @@ Any ValueImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_
 			break;
 		}
 		
-		// 11803
+		// 1153535893
 		case ValuesPackage::VALUE_OPERATION_EQUALS_VALUE:
 		{
 			//Retrieve input parameter 'otherValue'
@@ -318,14 +318,14 @@ Any ValueImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_
 			break;
 		}
 		
-		// 11804
+		// 53656869
 		case ValuesPackage::VALUE_OPERATION_GETTYPES:
 		{
 			result = eAny(this->getTypes());
 			break;
 		}
 		
-		// 11805
+		// 157177571
 		case ValuesPackage::VALUE_OPERATION_HASTYPES_CLASSIFIER:
 		{
 			//Retrieve input parameter 'type'
@@ -337,21 +337,21 @@ Any ValueImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_
 			break;
 		}
 		
-		// 11807
+		// 520851197
 		case ValuesPackage::VALUE_OPERATION_OBJECTID:
 		{
 			result = eAny(this->objectId());
 			break;
 		}
 		
-		// 11802
+		// 164025975
 		case ValuesPackage::VALUE_OPERATION_SPECIFY:
 		{
 			result = eAny(this->specify());
 			break;
 		}
 		
-		// 11806
+		// 780447699
 		case ValuesPackage::VALUE_OPERATION_TOSTRING:
 		{
 			result = eAny(this->toString());

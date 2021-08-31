@@ -375,7 +375,7 @@ Any ActorImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_
   	switch(operationID)
 	{
 		
-		// 1554
+		// 818238989
 		case umlPackage::ACTOR_OPERATION_ASSOCIATIONS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -392,7 +392,7 @@ Any ActorImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_
 			break;
 		}
 		
-		// 1555
+		// 1791803587
 		case umlPackage::ACTOR_OPERATION_MUST_HAVE_NAME_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

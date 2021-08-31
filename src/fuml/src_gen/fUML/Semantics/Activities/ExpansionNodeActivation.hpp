@@ -82,11 +82,11 @@ namespace fUML::Semantics::Activities
 			virtual bool isReady() = 0; 
 			virtual void receiveOffer() = 0;
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			
 

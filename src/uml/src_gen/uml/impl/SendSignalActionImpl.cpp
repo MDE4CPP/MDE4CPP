@@ -397,7 +397,7 @@ Any SendSignalActionImpl::eInvoke(int operationID, std::shared_ptr<std::list < s
   	switch(operationID)
 	{
 		
-		// 21398
+		// 1206735679
 		case umlPackage::SENDSIGNALACTION_OPERATION_NUMBER_ORDER_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -414,7 +414,7 @@ Any SendSignalActionImpl::eInvoke(int operationID, std::shared_ptr<std::list < s
 			break;
 		}
 		
-		// 21397
+		// 1247022808
 		case umlPackage::SENDSIGNALACTION_OPERATION_TYPE_ORDERING_MULTIPLICITY_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -431,7 +431,7 @@ Any SendSignalActionImpl::eInvoke(int operationID, std::shared_ptr<std::list < s
 			break;
 		}
 		
-		// 21399
+		// 1927028607
 		case umlPackage::SENDSIGNALACTION_OPERATION_TYPE_TARGET_PIN_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

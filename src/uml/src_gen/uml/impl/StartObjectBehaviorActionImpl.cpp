@@ -393,14 +393,14 @@ Any StartObjectBehaviorActionImpl::eInvoke(int operationID, std::shared_ptr<std:
   	switch(operationID)
 	{
 		
-		// 22006
+		// 1069157764
 		case umlPackage::STARTOBJECTBEHAVIORACTION_OPERATION_BEHAVIOR:
 		{
 			result = eAny(this->behavior());
 			break;
 		}
 		
-		// 22003
+		// 2114618972
 		case umlPackage::STARTOBJECTBEHAVIORACTION_OPERATION_MULTIPLICITY_OF_OBJECT_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -417,7 +417,7 @@ Any StartObjectBehaviorActionImpl::eInvoke(int operationID, std::shared_ptr<std:
 			break;
 		}
 		
-		// 22005
+		// 1307325213
 		case umlPackage::STARTOBJECTBEHAVIORACTION_OPERATION_NO_ONPORT_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -434,7 +434,7 @@ Any StartObjectBehaviorActionImpl::eInvoke(int operationID, std::shared_ptr<std:
 			break;
 		}
 		
-		// 22004
+		// 1625050276
 		case umlPackage::STARTOBJECTBEHAVIORACTION_OPERATION_TYPE_OF_OBJECT_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

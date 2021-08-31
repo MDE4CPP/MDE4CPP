@@ -15,12 +15,12 @@
 namespace ecore 
 {
 	class EAnnotation;
+	class EReference;
 	class EClass;
 	class EDataType;
 	class EGenericType;
-	class EOperation;
 	class EParameter;
-	class EReference;
+	class EOperation;
 	class EStringToStringMapEntry;
 }
 
@@ -82,7 +82,7 @@ namespace fUML::Semantics::Loci
 			//Class and Feature IDs 
 			static const long long EXECUTIONFACTORY_CLASS = 102788675;
 			static const unsigned int EXECUTIONFACTORY_CLASS_FEATURE_COUNT = 4;
-			static const unsigned int EXECUTIONFACTORY_CLASS_OPERATION_COUNT = 11;
+			static const unsigned int EXECUTIONFACTORY_CLASS_OPERATION_COUNT = 10;
 			
 			static const long long EXECUTIONFACTORY_ATTRIBUTE_BUILTINTYPES = 1371486848;
 			static const long long EXECUTIONFACTORY_ATTRIBUTE_LOCUS = 648263615;
@@ -97,7 +97,6 @@ namespace fUML::Semantics::Loci
 			static const int EXECUTIONFACTORY_OPERATION_GETBUILTINTYPE_ESTRING = 192630283;
 			static const int EXECUTIONFACTORY_OPERATION_GETSTRATEGY_ESTRING = 1451856544;
 			static const int EXECUTIONFACTORY_OPERATION_GETSTRATEGYINDEX_ESTRING = 461389125;
-			static const int EXECUTIONFACTORY_OPERATION_INSTANTIATEOPAQUEBEHAVIOREXECUTION_OPAQUEBEHAVIOR = 1760600810;
 			static const int EXECUTIONFACTORY_OPERATION_INSTANTIATEOPAQUEBEHAVIOREXECUTION_BEHAVIOR = 859316560;
 			static const int EXECUTIONFACTORY_OPERATION_INSTANTIATEVISITOR_ELEMENT = 1427156490;
 			
@@ -118,7 +117,6 @@ namespace fUML::Semantics::Loci
 			virtual std::shared_ptr<ecore::EOperation> getExecutionFactory_Operation_getBuiltInType_EString() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getExecutionFactory_Operation_getStrategy_EString() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getExecutionFactory_Operation_getStrategyIndex_EString() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getExecutionFactory_Operation_instantiateOpaqueBehaviorExecution_OpaqueBehavior() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getExecutionFactory_Operation_instantiateOpaqueBehaviorExecution_Behavior() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getExecutionFactory_Operation_instantiateVisitor_Element() const = 0;
 			

@@ -35,9 +35,9 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
 #include "uml/umlFactory.hpp"
+#include "fUML/Semantics/Loci/LociFactory.hpp"
 
 
 #include "uml/Association.hpp"
@@ -341,14 +341,14 @@ Any LinkImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_p
   	switch(operationID)
 	{
 		
-		// 6834
+		// 1029670453
 		case StructuredClassifiersPackage::LINK_OPERATION__COPY:
 		{
 			result = eAny(this->_copy());
 			break;
 		}
 		
-		// 6832
+		// 750371157
 		case StructuredClassifiersPackage::LINK_OPERATION_ADDTO_LOCUS:
 		{
 			//Retrieve input parameter 'locus'
@@ -360,7 +360,7 @@ Any LinkImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_p
 			break;
 		}
 		
-		// 6833
+		// 704042565
 		case StructuredClassifiersPackage::LINK_OPERATION_GETOTHERFEATUREVALUES_EXTENSIONALVALUE_PROPERTY:
 		{
 			//Retrieve input parameter 'extent'
@@ -377,14 +377,14 @@ Any LinkImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_p
 			break;
 		}
 		
-		// 6830
+		// 202529784
 		case StructuredClassifiersPackage::LINK_OPERATION_GETTYPES:
 		{
 			result = eAny(this->getTypes());
 			break;
 		}
 		
-		// 6831
+		// 1155151383
 		case StructuredClassifiersPackage::LINK_OPERATION_ISMATCHINGLINK_EXTENSIONALVALUE_PROPERTY:
 		{
 			//Retrieve input parameter 'link'

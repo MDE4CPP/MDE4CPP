@@ -226,14 +226,14 @@ Any InputPinActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list <
   	switch(operationID)
 	{
 		
-		// 6250
+		// 508191945
 		case ActionsPackage::INPUTPINACTIVATION_OPERATION_ISREADY:
 		{
 			result = eAny(this->isReady());
 			break;
 		}
 		
-		// 6249
+		// 1104040774
 		case ActionsPackage::INPUTPINACTIVATION_OPERATION_RECEIVEOFFER:
 		{
 			this->receiveOffer();

@@ -167,7 +167,7 @@ namespace uml
 			virtual bool stream_and_exception(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0; 
 			virtual void unsetDefault() = 0;
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			/*!
 			A String that represents a value to be used when no argument is supplied for the Parameter.
@@ -231,7 +231,7 @@ namespace uml
 			virtual void setIsStream (bool _isStream)= 0;
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			
 			virtual std::weak_ptr<uml::Behavior> getBehavior() const = 0;

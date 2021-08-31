@@ -79,11 +79,11 @@ namespace fUML::Semantics::Values
 			 
 			virtual std::shared_ptr<fUML::Semantics::Values::Value> evaluate() = 0;
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			
 

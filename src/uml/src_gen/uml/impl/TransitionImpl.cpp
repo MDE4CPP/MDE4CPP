@@ -724,14 +724,14 @@ Any TransitionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sh
   	switch(operationID)
 	{
 		
-		// 24209
+		// 1765667922
 		case umlPackage::TRANSITION_OPERATION_CONTAININGSTATEMACHINE:
 		{
 			result = eAny(this->containingStateMachine());
 			break;
 		}
 		
-		// 24208
+		// 909121488
 		case umlPackage::TRANSITION_OPERATION_FORK_SEGMENT_GUARDS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -748,7 +748,7 @@ Any TransitionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sh
 			break;
 		}
 		
-		// 24205
+		// 1112316898
 		case umlPackage::TRANSITION_OPERATION_FORK_SEGMENT_STATE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -765,7 +765,7 @@ Any TransitionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sh
 			break;
 		}
 		
-		// 24207
+		// 1797542133
 		case umlPackage::TRANSITION_OPERATION_INITIAL_TRANSITION_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -782,7 +782,7 @@ Any TransitionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sh
 			break;
 		}
 		
-		// 24201
+		// 1538095167
 		case umlPackage::TRANSITION_OPERATION_JOIN_SEGMENT_GUARDS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -799,7 +799,7 @@ Any TransitionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sh
 			break;
 		}
 		
-		// 24204
+		// 1741290577
 		case umlPackage::TRANSITION_OPERATION_JOIN_SEGMENT_STATE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -816,7 +816,7 @@ Any TransitionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sh
 			break;
 		}
 		
-		// 24203
+		// 432953338
 		case umlPackage::TRANSITION_OPERATION_OUTGOING_PSEUDOSTATES_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -833,14 +833,14 @@ Any TransitionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sh
 			break;
 		}
 		
-		// 24210
+		// 1971879180
 		case umlPackage::TRANSITION_OPERATION_REDEFINITIONCONTEXT:
 		{
 			result = eAny(this->redefinitionContext());
 			break;
 		}
 		
-		// 24200
+		// 1155164645
 		case umlPackage::TRANSITION_OPERATION_STATE_IS_EXTERNAL_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -857,7 +857,7 @@ Any TransitionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sh
 			break;
 		}
 		
-		// 24202
+		// 1164838571
 		case umlPackage::TRANSITION_OPERATION_STATE_IS_INTERNAL_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -874,7 +874,7 @@ Any TransitionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sh
 			break;
 		}
 		
-		// 24206
+		// 923777817
 		case umlPackage::TRANSITION_OPERATION_STATE_IS_LOCAL_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

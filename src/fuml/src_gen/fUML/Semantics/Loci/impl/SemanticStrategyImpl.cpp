@@ -179,7 +179,7 @@ Any SemanticStrategyImpl::eInvoke(int operationID, std::shared_ptr<std::list < s
   	switch(operationID)
 	{
 		
-		// 10300
+		// 1330583593
 		case LociPackage::SEMANTICSTRATEGY_OPERATION_GETNAME:
 		{
 			result = eAny(this->getName());

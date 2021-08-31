@@ -259,8 +259,6 @@ void * EStructuralFeatureImpl::getContainerClass()
 	throw "UnsupportedOperationException";
 }
 
-
-
 //*********************************
 // References
 //*********************************
@@ -442,7 +440,7 @@ Any EStructuralFeatureImpl::eInvoke(int operationID, std::shared_ptr<std::list <
   	switch(operationID)
 	{
 		
-		// 5039
+		// 172675706
 		case ecorePackage::ESTRUCTURALFEATURE_OPERATION_GETCONTAINERCLASS:
 		{
 			result = eAny(this->getContainerClass());

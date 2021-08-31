@@ -371,7 +371,7 @@ Any ReadSelfActionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std
   	switch(operationID)
 	{
 		
-		// 19894
+		// 1913193802
 		case umlPackage::READSELFACTION_OPERATION_CONTAINED_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -388,7 +388,7 @@ Any ReadSelfActionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std
 			break;
 		}
 		
-		// 19895
+		// 977718197
 		case umlPackage::READSELFACTION_OPERATION_MULTIPLICITY_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -405,7 +405,7 @@ Any ReadSelfActionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std
 			break;
 		}
 		
-		// 19896
+		// 635700599
 		case umlPackage::READSELFACTION_OPERATION_NOT_STATIC_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -422,7 +422,7 @@ Any ReadSelfActionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std
 			break;
 		}
 		
-		// 19897
+		// 100140744
 		case umlPackage::READSELFACTION_OPERATION_TYPE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

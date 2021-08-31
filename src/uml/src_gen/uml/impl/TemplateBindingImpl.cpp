@@ -466,7 +466,7 @@ Any TemplateBindingImpl::eInvoke(int operationID, std::shared_ptr<std::list < st
   	switch(operationID)
 	{
 		
-		// 23052
+		// 654929774
 		case umlPackage::TEMPLATEBINDING_OPERATION_ONE_PARAMETER_SUBSTITUTION_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -483,7 +483,7 @@ Any TemplateBindingImpl::eInvoke(int operationID, std::shared_ptr<std::list < st
 			break;
 		}
 		
-		// 23051
+		// 1000422805
 		case umlPackage::TEMPLATEBINDING_OPERATION_PARAMETER_SUBSTITUTION_FORMAL_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

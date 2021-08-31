@@ -311,7 +311,7 @@ Any GateImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_p
   	switch(operationID)
 	{
 		
-		// 10774
+		// 817896676
 		case umlPackage::GATE_OPERATION_ACTUAL_GATE_DISTINGUISHABLE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -328,7 +328,7 @@ Any GateImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_p
 			break;
 		}
 		
-		// 10770
+		// 1866541178
 		case umlPackage::GATE_OPERATION_ACTUAL_GATE_MATCHED_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -345,7 +345,7 @@ Any GateImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_p
 			break;
 		}
 		
-		// 10773
+		// 1735575897
 		case umlPackage::GATE_OPERATION_FORMAL_GATE_DISTINGUISHABLE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -362,21 +362,21 @@ Any GateImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_p
 			break;
 		}
 		
-		// 10781
+		// 905360939
 		case umlPackage::GATE_OPERATION_GETNAME:
 		{
 			result = eAny(this->getName());
 			break;
 		}
 		
-		// 10783
+		// 993244855
 		case umlPackage::GATE_OPERATION_GETOPERAND:
 		{
 			result = eAny(this->getOperand());
 			break;
 		}
 		
-		// 10776
+		// 1402380378
 		case umlPackage::GATE_OPERATION_INSIDE_CF_GATE_DISTINGUISHABLE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -393,7 +393,7 @@ Any GateImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_p
 			break;
 		}
 		
-		// 10771
+		// 878925963
 		case umlPackage::GATE_OPERATION_INSIDE_CF_MATCHED_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -410,35 +410,35 @@ Any GateImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_p
 			break;
 		}
 		
-		// 10779
+		// 924222367
 		case umlPackage::GATE_OPERATION_ISACTUAL:
 		{
 			result = eAny(this->isActual());
 			break;
 		}
 		
-		// 10780
+		// 1704777756
 		case umlPackage::GATE_OPERATION_ISFORMAL:
 		{
 			result = eAny(this->isFormal());
 			break;
 		}
 		
-		// 10778
+		// 151685589
 		case umlPackage::GATE_OPERATION_ISINSIDECF:
 		{
 			result = eAny(this->isInsideCF());
 			break;
 		}
 		
-		// 10777
+		// 1129018502
 		case umlPackage::GATE_OPERATION_ISOUTSIDECF:
 		{
 			result = eAny(this->isOutsideCF());
 			break;
 		}
 		
-		// 10782
+		// 1973163378
 		case umlPackage::GATE_OPERATION_MATCHES_GATE:
 		{
 			//Retrieve input parameter 'gateToMatch'
@@ -450,7 +450,7 @@ Any GateImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_p
 			break;
 		}
 		
-		// 10775
+		// 963447373
 		case umlPackage::GATE_OPERATION_OUTSIDE_CF_GATE_DISTINGUISHABLE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -467,7 +467,7 @@ Any GateImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_p
 			break;
 		}
 		
-		// 10772
+		// 1137650789
 		case umlPackage::GATE_OPERATION_OUTSIDE_CF_MATCHED_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

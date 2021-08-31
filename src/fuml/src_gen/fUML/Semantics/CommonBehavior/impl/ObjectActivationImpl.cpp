@@ -38,9 +38,9 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
 #include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
+#include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
 
 
 #include "uml/Class.hpp"
@@ -592,7 +592,7 @@ Any ObjectActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list < s
   	switch(operationID)
 	{
 		
-		// 8106
+		// 1087514112
 		case CommonBehaviorPackage::OBJECTACTIVATION_OPERATION__REGISTER_EVENTACCEPTER:
 		{
 			//Retrieve input parameter 'accepter'
@@ -604,7 +604,7 @@ Any ObjectActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list < s
 			break;
 		}
 		
-		// 8112
+		// 711916111
 		case CommonBehaviorPackage::OBJECTACTIVATION_OPERATION__SEND_EJAVAOBJECT:
 		{
 			//Retrieve input parameter 'signal'
@@ -616,28 +616,28 @@ Any ObjectActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list < s
 			break;
 		}
 		
-		// 8111
+		// 1589878255
 		case CommonBehaviorPackage::OBJECTACTIVATION_OPERATION__STARTOBJECTBEHAVIOR:
 		{
 			this->_startObjectBehavior();
 			break;
 		}
 		
-		// 8109
+		// 1966555783
 		case CommonBehaviorPackage::OBJECTACTIVATION_OPERATION_DISPATCHNEXTEVENT:
 		{
 			this->dispatchNextEvent();
 			break;
 		}
 		
-		// 8110
+		// 1375267786
 		case CommonBehaviorPackage::OBJECTACTIVATION_OPERATION_RETRIEVENEXTEVENT:
 		{
 			result = eAny(this->retrieveNextEvent());
 			break;
 		}
 		
-		// 8108
+		// 2081943134
 		case CommonBehaviorPackage::OBJECTACTIVATION_OPERATION_SEND_SIGNALINSTANCE:
 		{
 			//Retrieve input parameter 'signalInstance'
@@ -649,7 +649,7 @@ Any ObjectActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list < s
 			break;
 		}
 		
-		// 8104
+		// 1157088544
 		case CommonBehaviorPackage::OBJECTACTIVATION_OPERATION_STARTBEHAVIOR_CLASS_PARAMETERVALUE:
 		{
 			//Retrieve input parameter 'classifier'
@@ -666,14 +666,14 @@ Any ObjectActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list < s
 			break;
 		}
 		
-		// 8105
+		// 1101851081
 		case CommonBehaviorPackage::OBJECTACTIVATION_OPERATION_STOP:
 		{
 			this->stop();
 			break;
 		}
 		
-		// 8107
+		// 1862281169
 		case CommonBehaviorPackage::OBJECTACTIVATION_OPERATION_UNREGISTER_EVENTACCEPTER:
 		{
 			//Retrieve input parameter 'accepter'

@@ -111,11 +111,11 @@ namespace uml
 			 
 			virtual std::shared_ptr<Bag<uml::Association> > getAssociations() = 0;
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			/*!
 			Specifies the owning Package of this Type, if any.

@@ -408,7 +408,7 @@ Any StructuralFeatureActionImpl::eInvoke(int operationID, std::shared_ptr<std::l
   	switch(operationID)
 	{
 		
-		// 22695
+		// 980879933
 		case umlPackage::STRUCTURALFEATUREACTION_OPERATION_MULTIPLICITY_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -425,7 +425,7 @@ Any StructuralFeatureActionImpl::eInvoke(int operationID, std::shared_ptr<std::l
 			break;
 		}
 		
-		// 22698
+		// 1113147911
 		case umlPackage::STRUCTURALFEATUREACTION_OPERATION_NOT_STATIC_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -442,7 +442,7 @@ Any StructuralFeatureActionImpl::eInvoke(int operationID, std::shared_ptr<std::l
 			break;
 		}
 		
-		// 22696
+		// 2084182676
 		case umlPackage::STRUCTURALFEATUREACTION_OPERATION_OBJECT_TYPE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -459,7 +459,7 @@ Any StructuralFeatureActionImpl::eInvoke(int operationID, std::shared_ptr<std::l
 			break;
 		}
 		
-		// 22699
+		// 355366750
 		case umlPackage::STRUCTURALFEATUREACTION_OPERATION_ONE_FEATURING_CLASSIFIER_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -476,7 +476,7 @@ Any StructuralFeatureActionImpl::eInvoke(int operationID, std::shared_ptr<std::l
 			break;
 		}
 		
-		// 22697
+		// 1005766649
 		case umlPackage::STRUCTURALFEATUREACTION_OPERATION_VISIBILITY_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

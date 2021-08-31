@@ -478,7 +478,7 @@ Any StringExpressionImpl::eInvoke(int operationID, std::shared_ptr<std::list < s
   	switch(operationID)
 	{
 		
-		// 22489
+		// 89087278
 		case umlPackage::STRINGEXPRESSION_OPERATION_OPERANDS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -495,7 +495,7 @@ Any StringExpressionImpl::eInvoke(int operationID, std::shared_ptr<std::list < s
 			break;
 		}
 		
-		// 22490
+		// 550848138
 		case umlPackage::STRINGEXPRESSION_OPERATION_SUBEXPRESSIONS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

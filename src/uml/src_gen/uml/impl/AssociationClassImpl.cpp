@@ -461,7 +461,7 @@ Any AssociationClassImpl::eInvoke(int operationID, std::shared_ptr<std::list < s
   	switch(operationID)
 	{
 		
-		// 2389
+		// 166637851
 		case umlPackage::ASSOCIATIONCLASS_OPERATION_CANNOT_BE_DEFINED_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -478,7 +478,7 @@ Any AssociationClassImpl::eInvoke(int operationID, std::shared_ptr<std::list < s
 			break;
 		}
 		
-		// 2390
+		// 1427500408
 		case umlPackage::ASSOCIATIONCLASS_OPERATION_DISJOINT_ATTRIBUTES_ENDS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

@@ -428,14 +428,14 @@ Any CompoundValueImpl::eInvoke(int operationID, std::shared_ptr<std::list < std:
   	switch(operationID)
 	{
 		
-		// 2925
+		// 931511190
 		case SimpleClassifiersPackage::COMPOUNDVALUE_OPERATION__COPY:
 		{
 			result = eAny(this->_copy());
 			break;
 		}
 		
-		// 2923
+		// 1447778125
 		case SimpleClassifiersPackage::COMPOUNDVALUE_OPERATION_ASSIGNFEATUREVALUE_STRUCTURALFEATURE_EINT:
 		{
 			//Retrieve input parameter 'feature'
@@ -457,7 +457,7 @@ Any CompoundValueImpl::eInvoke(int operationID, std::shared_ptr<std::list < std:
 			break;
 		}
 		
-		// 2920
+		// 447967880
 		case SimpleClassifiersPackage::COMPOUNDVALUE_OPERATION_EQUALS_VALUE:
 		{
 			//Retrieve input parameter 'otherValue'
@@ -469,7 +469,7 @@ Any CompoundValueImpl::eInvoke(int operationID, std::shared_ptr<std::list < std:
 			break;
 		}
 		
-		// 2919
+		// 2123833039
 		case SimpleClassifiersPackage::COMPOUNDVALUE_OPERATION_REMOVEFEATUREVALUES_CLASSIFIER:
 		{
 			//Retrieve input parameter 'classifier'
@@ -481,7 +481,7 @@ Any CompoundValueImpl::eInvoke(int operationID, std::shared_ptr<std::list < std:
 			break;
 		}
 		
-		// 2922
+		// 805116871
 		case SimpleClassifiersPackage::COMPOUNDVALUE_OPERATION_RETRIEVEFEATUREVALUE_STRUCTURALFEATURE:
 		{
 			//Retrieve input parameter 'feature'
@@ -493,14 +493,14 @@ Any CompoundValueImpl::eInvoke(int operationID, std::shared_ptr<std::list < std:
 			break;
 		}
 		
-		// 2924
+		// 1935462533
 		case SimpleClassifiersPackage::COMPOUNDVALUE_OPERATION_RETRIEVEFEATUREVALUES:
 		{
 			result = eAny(this->retrieveFeatureValues());
 			break;
 		}
 		
-		// 2921
+		// 95501137
 		case SimpleClassifiersPackage::COMPOUNDVALUE_OPERATION_TOSTRING:
 		{
 			result = eAny(this->toString());

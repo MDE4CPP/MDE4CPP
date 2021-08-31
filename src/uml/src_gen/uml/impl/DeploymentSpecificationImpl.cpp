@@ -489,7 +489,7 @@ Any DeploymentSpecificationImpl::eInvoke(int operationID, std::shared_ptr<std::l
   	switch(operationID)
 	{
 		
-		// 7159
+		// 1212838527
 		case umlPackage::DEPLOYMENTSPECIFICATION_OPERATION_DEPLOYED_ELEMENTS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -506,7 +506,7 @@ Any DeploymentSpecificationImpl::eInvoke(int operationID, std::shared_ptr<std::l
 			break;
 		}
 		
-		// 7158
+		// 1545768860
 		case umlPackage::DEPLOYMENTSPECIFICATION_OPERATION_DEPLOYMENT_TARGET_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

@@ -421,7 +421,7 @@ Any ParameterSetImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::
   	switch(operationID)
 	{
 		
-		// 17768
+		// 893901939
 		case umlPackage::PARAMETERSET_OPERATION_INPUT_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -438,7 +438,7 @@ Any ParameterSetImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::
 			break;
 		}
 		
-		// 17767
+		// 396663857
 		case umlPackage::PARAMETERSET_OPERATION_SAME_PARAMETERIZED_ENTITY_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -455,7 +455,7 @@ Any ParameterSetImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::
 			break;
 		}
 		
-		// 17769
+		// 1153192792
 		case umlPackage::PARAMETERSET_OPERATION_TWO_PARAMETER_SETS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

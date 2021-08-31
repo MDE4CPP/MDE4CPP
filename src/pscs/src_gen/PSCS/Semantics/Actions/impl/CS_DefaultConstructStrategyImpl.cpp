@@ -838,7 +838,7 @@ Any CS_DefaultConstructStrategyImpl::eInvoke(int operationID, std::shared_ptr<st
   	switch(operationID)
 	{
 		
-		// 1006
+		// 1646320932
 		case ActionsPackage::CS_DEFAULTCONSTRUCTSTRATEGY_OPERATION_ADDSTRUCTURALFEATUREVALUE_CS_REFERENCE_VALUE:
 		{
 			//Retrieve input parameter 'context'
@@ -860,7 +860,7 @@ Any CS_DefaultConstructStrategyImpl::eInvoke(int operationID, std::shared_ptr<st
 			break;
 		}
 		
-		// 1007
+		// 144834873
 		case ActionsPackage::CS_DEFAULTCONSTRUCTSTRATEGY_OPERATION_CANINSTANTIATE_PROPERTY:
 		{
 			//Retrieve input parameter 'p'
@@ -872,7 +872,7 @@ Any CS_DefaultConstructStrategyImpl::eInvoke(int operationID, std::shared_ptr<st
 			break;
 		}
 		
-		// 1019
+		// 819868466
 		case ActionsPackage::CS_DEFAULTCONSTRUCTSTRATEGY_OPERATION_CONSTRUCT_OPERATION_CS_OBJECT:
 		{
 			//Retrieve input parameter 'constructor'
@@ -889,7 +889,7 @@ Any CS_DefaultConstructStrategyImpl::eInvoke(int operationID, std::shared_ptr<st
 			break;
 		}
 		
-		// 1008
+		// 517187992
 		case ActionsPackage::CS_DEFAULTCONSTRUCTSTRATEGY_OPERATION_CONSTRUCTOBJECT_CS_OBJECT_CLASS:
 		{
 			//Retrieve input parameter 'context'
@@ -906,7 +906,7 @@ Any CS_DefaultConstructStrategyImpl::eInvoke(int operationID, std::shared_ptr<st
 			break;
 		}
 		
-		// 1009
+		// 928453684
 		case ActionsPackage::CS_DEFAULTCONSTRUCTSTRATEGY_OPERATION_GENERATEARRAYPATTERN_CS_REFERENCE_CONNECTOR:
 		{
 			//Retrieve input parameter 'context'
@@ -923,7 +923,7 @@ Any CS_DefaultConstructStrategyImpl::eInvoke(int operationID, std::shared_ptr<st
 			break;
 		}
 		
-		// 1018
+		// 567067280
 		case ActionsPackage::CS_DEFAULTCONSTRUCTSTRATEGY_OPERATION_GENERATEREALIZINGCLASS_INTERFACE_ESTRING:
 		{
 			//Retrieve input parameter 'interface_'
@@ -940,7 +940,7 @@ Any CS_DefaultConstructStrategyImpl::eInvoke(int operationID, std::shared_ptr<st
 			break;
 		}
 		
-		// 1010
+		// 1413719551
 		case ActionsPackage::CS_DEFAULTCONSTRUCTSTRATEGY_OPERATION_GENERATESTARPATTERN_CS_REFERENCE_CONNECTOR:
 		{
 			//Retrieve input parameter 'context'
@@ -957,7 +957,7 @@ Any CS_DefaultConstructStrategyImpl::eInvoke(int operationID, std::shared_ptr<st
 			break;
 		}
 		
-		// 1011
+		// 1031700126
 		case ActionsPackage::CS_DEFAULTCONSTRUCTSTRATEGY_OPERATION_GETCARDINALITY_CONNECTOREND:
 		{
 			//Retrieve input parameter 'end'
@@ -969,14 +969,14 @@ Any CS_DefaultConstructStrategyImpl::eInvoke(int operationID, std::shared_ptr<st
 			break;
 		}
 		
-		// 1015
+		// 1689856359
 		case ActionsPackage::CS_DEFAULTCONSTRUCTSTRATEGY_OPERATION_GETDEFAULTASSOCIATION:
 		{
 			result = eAny(this->getDefaultAssociation());
 			break;
 		}
 		
-		// 1017
+		// 637221846
 		case ActionsPackage::CS_DEFAULTCONSTRUCTSTRATEGY_OPERATION_GETREALIZINGCLASS_INTERFACE:
 		{
 			//Retrieve input parameter 'interface_'
@@ -988,7 +988,7 @@ Any CS_DefaultConstructStrategyImpl::eInvoke(int operationID, std::shared_ptr<st
 			break;
 		}
 		
-		// 1012
+		// 1894002496
 		case ActionsPackage::CS_DEFAULTCONSTRUCTSTRATEGY_OPERATION_GETVALUESFROMCONNECTOREND_CS_REFERENCE_CONNECTOREND:
 		{
 			//Retrieve input parameter 'context'
@@ -1005,7 +1005,7 @@ Any CS_DefaultConstructStrategyImpl::eInvoke(int operationID, std::shared_ptr<st
 			break;
 		}
 		
-		// 1016
+		// 1839205058
 		case ActionsPackage::CS_DEFAULTCONSTRUCTSTRATEGY_OPERATION_INSTANTIATEINTERFACE_INTERFACE_LOCUS:
 		{
 			//Retrieve input parameter 'interface'
@@ -1022,7 +1022,7 @@ Any CS_DefaultConstructStrategyImpl::eInvoke(int operationID, std::shared_ptr<st
 			break;
 		}
 		
-		// 1013
+		// 1940370942
 		case ActionsPackage::CS_DEFAULTCONSTRUCTSTRATEGY_OPERATION_ISARRAYPATTERN_CONNECTOR:
 		{
 			//Retrieve input parameter 'c'
@@ -1034,7 +1034,7 @@ Any CS_DefaultConstructStrategyImpl::eInvoke(int operationID, std::shared_ptr<st
 			break;
 		}
 		
-		// 1014
+		// 1094385999
 		case ActionsPackage::CS_DEFAULTCONSTRUCTSTRATEGY_OPERATION_ISSTARPATTERN_CONNECTOR:
 		{
 			//Retrieve input parameter 'c'

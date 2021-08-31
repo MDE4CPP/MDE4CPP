@@ -301,7 +301,7 @@ Any ForkNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shar
   	switch(operationID)
 	{
 		
-		// 10582
+		// 1898705516
 		case umlPackage::FORKNODE_OPERATION_EDGES_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -318,7 +318,7 @@ Any ForkNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shar
 			break;
 		}
 		
-		// 10583
+		// 1885491418
 		case umlPackage::FORKNODE_OPERATION_ONE_INCOMING_EDGE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

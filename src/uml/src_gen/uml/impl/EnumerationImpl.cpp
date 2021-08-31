@@ -499,7 +499,7 @@ Any EnumerationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::s
   	switch(operationID)
 	{
 		
-		// 8553
+		// 36465829
 		case umlPackage::ENUMERATION_OPERATION_IMMUTABLE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

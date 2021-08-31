@@ -246,7 +246,7 @@ Any RedefinitionBasedDispatchStrategyImpl::eInvoke(int operationID, std::shared_
   	switch(operationID)
 	{
 		
-		// 9704
+		// 1256965492
 		case StructuredClassifiersPackage::REDEFINITIONBASEDDISPATCHSTRATEGY_OPERATION_OPERATIONSMATCH_OPERATION_OPERATION:
 		{
 			//Retrieve input parameter 'ownedOperation'
@@ -263,7 +263,7 @@ Any RedefinitionBasedDispatchStrategyImpl::eInvoke(int operationID, std::shared_
 			break;
 		}
 		
-		// 9705
+		// 2137388834
 		case StructuredClassifiersPackage::REDEFINITIONBASEDDISPATCHSTRATEGY_OPERATION_RETRIEVEMETHOD_OBJECT_OPERATION:
 		{
 			//Retrieve input parameter 'object'

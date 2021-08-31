@@ -59,9 +59,9 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Actions/ActionsFactory.hpp"
+#include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 
 
 #include "uml/Action.hpp"
@@ -490,14 +490,14 @@ Any CS_AddStructuralFeatureValueActionActivationImpl::eInvoke(int operationID, s
   	switch(operationID)
 	{
 		
-		// 365
+		// 998058488
 		case ActionsPackage::CS_ADDSTRUCTURALFEATUREVALUEACTIONACTIVATION_OPERATION_DOACTION:
 		{
 			this->doAction();
 			break;
 		}
 		
-		// 366
+		// 494359846
 		case ActionsPackage::CS_ADDSTRUCTURALFEATUREVALUEACTIONACTIVATION_OPERATION_DOACTIONDEFAULT:
 		{
 			this->doActionDefault();

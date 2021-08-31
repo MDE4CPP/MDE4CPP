@@ -371,7 +371,7 @@ Any ObjectNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list
   	switch(operationID)
 	{
 		
-		// 8242
+		// 1979233721
 		case ActivitiesPackage::OBJECTNODEACTIVATION_OPERATION_ADDTOKEN_TOKEN:
 		{
 			//Retrieve input parameter 'token'
@@ -383,35 +383,35 @@ Any ObjectNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list
 			break;
 		}
 		
-		// 8244
+		// 1055175964
 		case ActivitiesPackage::OBJECTNODEACTIVATION_OPERATION_CLEARTOKENS:
 		{
 			this->clearTokens();
 			break;
 		}
 		
-		// 8234
+		// 1194886204
 		case ActivitiesPackage::OBJECTNODEACTIVATION_OPERATION_COUNTOFFEREDVALUES:
 		{
 			result = eAny(this->countOfferedValues());
 			break;
 		}
 		
-		// 8236
+		// 225915978
 		case ActivitiesPackage::OBJECTNODEACTIVATION_OPERATION_COUNTUNOFFEREDTOKENS:
 		{
 			result = eAny(this->countUnofferedTokens());
 			break;
 		}
 		
-		// 8237
+		// 1540483717
 		case ActivitiesPackage::OBJECTNODEACTIVATION_OPERATION_GETUNOFFEREDTOKENS:
 		{
 			result = eAny(this->getUnofferedTokens());
 			break;
 		}
 		
-		// 8243
+		// 265609697
 		case ActivitiesPackage::OBJECTNODEACTIVATION_OPERATION_REMOVETOKEN_TOKEN:
 		{
 			//Retrieve input parameter 'token'
@@ -423,14 +423,14 @@ Any ObjectNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list
 			break;
 		}
 		
-		// 8239
+		// 58376419
 		case ActivitiesPackage::OBJECTNODEACTIVATION_OPERATION_RUN:
 		{
 			this->run();
 			break;
 		}
 		
-		// 8240
+		// 913937355
 		case ActivitiesPackage::OBJECTNODEACTIVATION_OPERATION_SENDOFFERS_TOKEN:
 		{
 			//Retrieve input parameter 'tokens'
@@ -442,21 +442,21 @@ Any ObjectNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list
 			break;
 		}
 		
-		// 8235
+		// 1509347969
 		case ActivitiesPackage::OBJECTNODEACTIVATION_OPERATION_SENDUNOFFEREDTOKENS:
 		{
 			this->sendUnofferedTokens();
 			break;
 		}
 		
-		// 8238
+		// 622563877
 		case ActivitiesPackage::OBJECTNODEACTIVATION_OPERATION_TAKEUNOFFEREDTOKENS:
 		{
 			result = eAny(this->takeUnofferedTokens());
 			break;
 		}
 		
-		// 8241
+		// 2070573113
 		case ActivitiesPackage::OBJECTNODEACTIVATION_OPERATION_TERMINATE:
 		{
 			this->terminate();

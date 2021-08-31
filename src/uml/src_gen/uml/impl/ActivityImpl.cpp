@@ -312,19 +312,19 @@ ActivityImpl& ActivityImpl::operator=(const ActivityImpl & obj)
 	}
 
 	//clone reference 'partition'
-	std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup /*Subset does not reference a union*/, uml::ActivityGroup>> partitionList = obj.getPartition();
+	std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup, uml::ActivityGroup /*Subset does not reference a union*/>> partitionList = obj.getPartition();
 	if(partitionList)
 	{
 		/*Subset*/
-		m_partition.reset(new Subset<uml::ActivityPartition, uml::ActivityGroup /*Subset does not reference a union*/, uml::ActivityGroup >());
+		m_partition.reset(new Subset<uml::ActivityPartition, uml::ActivityGroup, uml::ActivityGroup /*Subset does not reference a union*/ >());
 		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer Subset: " << "m_partition - Subset<uml::ActivityPartition, uml::ActivityGroup /*Subset does not reference a union*/, uml::ActivityGroup >()" << std::endl;
+			std::cout << "Initialising shared pointer Subset: " << "m_partition - Subset<uml::ActivityPartition, uml::ActivityGroup, uml::ActivityGroup /*Subset does not reference a union*/ >()" << std::endl;
 		#endif
 		
 		/*Subset*/
-		getPartition()->initSubset(getOwnedGroup(), getGroup());
+		getPartition()->initSubset(getGroup(), getOwnedGroup());
 		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_partition - Subset<uml::ActivityPartition, uml::ActivityGroup /*Subset does not reference a union*/, uml::ActivityGroup >(getOwnedGroup(), getGroup())" << std::endl;
+			std::cout << "Initialising value Subset: " << "m_partition - Subset<uml::ActivityPartition, uml::ActivityGroup, uml::ActivityGroup /*Subset does not reference a union*/ >(getGroup(), getOwnedGroup())" << std::endl;
 		#endif
 		
 
@@ -614,20 +614,20 @@ std::shared_ptr<Subset<uml::ActivityNode, uml::ActivityNode /*Subset does not re
 /*
 Getter & Setter for reference partition
 */
-std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup /*Subset does not reference a union*/, uml::ActivityGroup>> ActivityImpl::getPartition() const
+std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup, uml::ActivityGroup /*Subset does not reference a union*/>> ActivityImpl::getPartition() const
 {
 	if(m_partition == nullptr)
 	{
 		/*Subset*/
-		m_partition.reset(new Subset<uml::ActivityPartition, uml::ActivityGroup /*Subset does not reference a union*/, uml::ActivityGroup >());
+		m_partition.reset(new Subset<uml::ActivityPartition, uml::ActivityGroup, uml::ActivityGroup /*Subset does not reference a union*/ >());
 		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer Subset: " << "m_partition - Subset<uml::ActivityPartition, uml::ActivityGroup /*Subset does not reference a union*/, uml::ActivityGroup >()" << std::endl;
+			std::cout << "Initialising shared pointer Subset: " << "m_partition - Subset<uml::ActivityPartition, uml::ActivityGroup, uml::ActivityGroup /*Subset does not reference a union*/ >()" << std::endl;
 		#endif
 		
 		/*Subset*/
-		getPartition()->initSubset(getOwnedGroup(), getGroup());
+		getPartition()->initSubset(getGroup(), getOwnedGroup());
 		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_partition - Subset<uml::ActivityPartition, uml::ActivityGroup /*Subset does not reference a union*/, uml::ActivityGroup >(getOwnedGroup(), getGroup())" << std::endl;
+			std::cout << "Initialising value Subset: " << "m_partition - Subset<uml::ActivityPartition, uml::ActivityGroup, uml::ActivityGroup /*Subset does not reference a union*/ >(getGroup(), getOwnedGroup())" << std::endl;
 		#endif
 		
 	}
@@ -1363,7 +1363,7 @@ Any ActivityImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shar
   	switch(operationID)
 	{
 		
-		// 902
+		// 2049966823
 		case umlPackage::ACTIVITY_OPERATION_MAXIMUM_ONE_PARAMETER_NODE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -1380,7 +1380,7 @@ Any ActivityImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shar
 			break;
 		}
 		
-		// 903
+		// 2125630206
 		case umlPackage::ACTIVITY_OPERATION_MAXIMUM_TWO_PARAMETER_NODES_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -1584,7 +1584,7 @@ void ActivityImpl::resolveReferences(const int featureID, std::vector<std::share
 	{
 		case uml::umlPackage::ACTIVITY_ATTRIBUTE_PARTITION:
 		{
-			std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup /*Subset does not reference a union*/, uml::ActivityGroup>> _partition = getPartition();
+			std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup, uml::ActivityGroup /*Subset does not reference a union*/>> _partition = getPartition();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<uml::ActivityPartition>  _r = std::dynamic_pointer_cast<uml::ActivityPartition>(ref);

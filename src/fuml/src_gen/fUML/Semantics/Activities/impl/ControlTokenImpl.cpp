@@ -214,14 +214,14 @@ Any ControlTokenImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::
   	switch(operationID)
 	{
 		
-		// 3210
+		// 186948332
 		case ActivitiesPackage::CONTROLTOKEN_OPERATION__COPY:
 		{
 			result = eAny(this->_copy());
 			break;
 		}
 		
-		// 3208
+		// 1420478842
 		case ActivitiesPackage::CONTROLTOKEN_OPERATION_EQUALS_TOKEN:
 		{
 			//Retrieve input parameter 'other'
@@ -233,7 +233,7 @@ Any ControlTokenImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::
 			break;
 		}
 		
-		// 3209
+		// 2106407034
 		case ActivitiesPackage::CONTROLTOKEN_OPERATION_ISCONTROL:
 		{
 			result = eAny(this->isControl());

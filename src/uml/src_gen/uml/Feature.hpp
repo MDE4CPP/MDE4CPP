@@ -79,7 +79,7 @@ namespace uml
 			//*********************************
 			
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			/*!
 			Specifies whether this Feature characterizes individual instances classified by the Classifier (false) or the Classifier itself (true).
@@ -95,7 +95,7 @@ namespace uml
 			virtual void setIsStatic (bool _isStatic)= 0;
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			
 			

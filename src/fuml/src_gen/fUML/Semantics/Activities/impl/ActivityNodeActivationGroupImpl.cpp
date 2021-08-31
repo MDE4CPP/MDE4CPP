@@ -49,8 +49,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
+#include "fUML/Semantics/Actions/ActionsFactory.hpp"
 
 
 #include "uml/ActivityEdge.hpp"
@@ -937,7 +937,7 @@ Any ActivityNodeActivationGroupImpl::eInvoke(int operationID, std::shared_ptr<st
   	switch(operationID)
 	{
 		
-		// 1007
+		// 281905115
 		case ActivitiesPackage::ACTIVITYNODEACTIVATIONGROUP_OPERATION_ACTIVATE_ACTIVITYNODE_ACTIVITYEDGE:
 		{
 			//Retrieve input parameter 'nodes'
@@ -954,7 +954,7 @@ Any ActivityNodeActivationGroupImpl::eInvoke(int operationID, std::shared_ptr<st
 			break;
 		}
 		
-		// 1015
+		// 1652430233
 		case ActivitiesPackage::ACTIVITYNODEACTIVATIONGROUP_OPERATION_ADDEDGEINSTANCE_ACTIVITYEDGEINSTANCE:
 		{
 			//Retrieve input parameter 'instance'
@@ -966,7 +966,7 @@ Any ActivityNodeActivationGroupImpl::eInvoke(int operationID, std::shared_ptr<st
 			break;
 		}
 		
-		// 1012
+		// 771980353
 		case ActivitiesPackage::ACTIVITYNODEACTIVATIONGROUP_OPERATION_ADDNODEACTIVATION_ACTIVITYNODEACTIVATION:
 		{
 			//Retrieve input parameter 'activation'
@@ -978,7 +978,7 @@ Any ActivityNodeActivationGroupImpl::eInvoke(int operationID, std::shared_ptr<st
 			break;
 		}
 		
-		// 1006
+		// 165124996
 		case ActivitiesPackage::ACTIVITYNODEACTIVATIONGROUP_OPERATION_CHECKINCOMINGEDGES_ACTIVITYEDGEINSTANCE_ACTIVITYNODEACTIVATION:
 		{
 			//Retrieve input parameter 'incomingEdges'
@@ -995,7 +995,7 @@ Any ActivityNodeActivationGroupImpl::eInvoke(int operationID, std::shared_ptr<st
 			break;
 		}
 		
-		// 1014
+		// 1674174742
 		case ActivitiesPackage::ACTIVITYNODEACTIVATIONGROUP_OPERATION_CREATEEDGEINSTANCE_ACTIVITYEDGE:
 		{
 			//Retrieve input parameter 'edges'
@@ -1007,7 +1007,7 @@ Any ActivityNodeActivationGroupImpl::eInvoke(int operationID, std::shared_ptr<st
 			break;
 		}
 		
-		// 1011
+		// 1286625228
 		case ActivitiesPackage::ACTIVITYNODEACTIVATIONGROUP_OPERATION_CREATENODEACTIVATION_ACTIVITYNODE:
 		{
 			//Retrieve input parameter 'node'
@@ -1019,7 +1019,7 @@ Any ActivityNodeActivationGroupImpl::eInvoke(int operationID, std::shared_ptr<st
 			break;
 		}
 		
-		// 1010
+		// 712701800
 		case ActivitiesPackage::ACTIVITYNODEACTIVATIONGROUP_OPERATION_CREATENODEACTIVATIONS_ACTIVITYNODE:
 		{
 			//Retrieve input parameter 'nodes'
@@ -1031,7 +1031,7 @@ Any ActivityNodeActivationGroupImpl::eInvoke(int operationID, std::shared_ptr<st
 			break;
 		}
 		
-		// 1013
+		// 798486402
 		case ActivitiesPackage::ACTIVITYNODEACTIVATIONGROUP_OPERATION_GETNODEACTIVATION_ACTIVITYNODE:
 		{
 			//Retrieve input parameter 'node'
@@ -1043,14 +1043,14 @@ Any ActivityNodeActivationGroupImpl::eInvoke(int operationID, std::shared_ptr<st
 			break;
 		}
 		
-		// 1017
+		// 1246056845
 		case ActivitiesPackage::ACTIVITYNODEACTIVATIONGROUP_OPERATION_GETOUTPUTPARAMETERNODEACTIVATIONS:
 		{
 			result = eAny(this->getOutputParameterNodeActivations());
 			break;
 		}
 		
-		// 1021
+		// 1884986879
 		case ActivitiesPackage::ACTIVITYNODEACTIVATIONGROUP_OPERATION_HASSOURCEFOR_ACTIVITYEDGEINSTANCE:
 		{
 			//Retrieve input parameter 'edgeInstance'
@@ -1062,14 +1062,14 @@ Any ActivityNodeActivationGroupImpl::eInvoke(int operationID, std::shared_ptr<st
 			break;
 		}
 		
-		// 1020
+		// 175132142
 		case ActivitiesPackage::ACTIVITYNODEACTIVATIONGROUP_OPERATION_ISSUSPENDED:
 		{
 			result = eAny(this->isSuspended());
 			break;
 		}
 		
-		// 1018
+		// 1949139574
 		case ActivitiesPackage::ACTIVITYNODEACTIVATIONGROUP_OPERATION_RESUME_ACTIVITYNODEACTIVATION:
 		{
 			//Retrieve input parameter 'activation'
@@ -1081,14 +1081,14 @@ Any ActivityNodeActivationGroupImpl::eInvoke(int operationID, std::shared_ptr<st
 			break;
 		}
 		
-		// 1016
+		// 894742694
 		case ActivitiesPackage::ACTIVITYNODEACTIVATIONGROUP_OPERATION_RETRIEVEACTIVITYEXECUTION:
 		{
 			result = eAny(this->retrieveActivityExecution());
 			break;
 		}
 		
-		// 1005
+		// 1071093417
 		case ActivitiesPackage::ACTIVITYNODEACTIVATIONGROUP_OPERATION_RUN_ACTIVITYNODEACTIVATION:
 		{
 			//Retrieve input parameter 'activations'
@@ -1100,7 +1100,7 @@ Any ActivityNodeActivationGroupImpl::eInvoke(int operationID, std::shared_ptr<st
 			break;
 		}
 		
-		// 1008
+		// 1752071273
 		case ActivitiesPackage::ACTIVITYNODEACTIVATIONGROUP_OPERATION_RUNNODES_ACTIVITYNODE:
 		{
 			//Retrieve input parameter 'nodes'
@@ -1112,7 +1112,7 @@ Any ActivityNodeActivationGroupImpl::eInvoke(int operationID, std::shared_ptr<st
 			break;
 		}
 		
-		// 1019
+		// 259131720
 		case ActivitiesPackage::ACTIVITYNODEACTIVATIONGROUP_OPERATION_SUSPEND_ACTIVITYNODEACTIVATION:
 		{
 			//Retrieve input parameter 'activation'
@@ -1124,7 +1124,7 @@ Any ActivityNodeActivationGroupImpl::eInvoke(int operationID, std::shared_ptr<st
 			break;
 		}
 		
-		// 1009
+		// 2028038520
 		case ActivitiesPackage::ACTIVITYNODEACTIVATIONGROUP_OPERATION_TERMINATEALL:
 		{
 			this->terminateAll();

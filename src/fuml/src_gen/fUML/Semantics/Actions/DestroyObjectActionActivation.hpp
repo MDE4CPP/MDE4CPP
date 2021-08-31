@@ -96,11 +96,11 @@ namespace fUML::Semantics::Actions
 			virtual void doAction() = 0; 
 			virtual bool objectIsComposite(std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> reference,std::shared_ptr<fUML::Semantics::StructuredClassifiers::Link> link) = 0;
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			
 			virtual std::shared_ptr<uml::DestroyObjectAction> getDestroyObjectAction() const = 0;

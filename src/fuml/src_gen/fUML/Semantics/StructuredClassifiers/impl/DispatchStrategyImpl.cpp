@@ -216,7 +216,7 @@ Any DispatchStrategyImpl::eInvoke(int operationID, std::shared_ptr<std::list < s
   	switch(operationID)
 	{
 		
-		// 4001
+		// 399838326
 		case StructuredClassifiersPackage::DISPATCHSTRATEGY_OPERATION_DISPATCH_OBJECT_OPERATION:
 		{
 			//Retrieve input parameter 'object'
@@ -233,14 +233,14 @@ Any DispatchStrategyImpl::eInvoke(int operationID, std::shared_ptr<std::list < s
 			break;
 		}
 		
-		// 4003
+		// 1383879722
 		case StructuredClassifiersPackage::DISPATCHSTRATEGY_OPERATION_GETNAME:
 		{
 			result = eAny(this->getName());
 			break;
 		}
 		
-		// 4002
+		// 240191422
 		case StructuredClassifiersPackage::DISPATCHSTRATEGY_OPERATION_RETRIEVEMETHOD_OBJECT_OPERATION:
 		{
 			//Retrieve input parameter 'object'

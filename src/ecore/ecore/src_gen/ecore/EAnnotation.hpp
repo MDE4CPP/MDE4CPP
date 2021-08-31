@@ -74,7 +74,7 @@ namespace ecore
 			//*********************************
 			
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			 
 			virtual std::shared_ptr<std::map < std::string, std::string>> getDetails() const = 0;
@@ -86,7 +86,7 @@ namespace ecore
 			virtual void setSource (std::string _source)= 0;
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			
 			virtual std::shared_ptr<Subset<ecore::EObject, ecore::EObject>> getContents() const = 0;

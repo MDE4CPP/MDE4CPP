@@ -1248,7 +1248,7 @@ Any EClassImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared
   	switch(operationID)
 	{
 		
-		// 1251
+		// 1526673885
 		case ecorePackage::ECLASS_OPERATION_GETEOPERATION_EINT:
 		{
 			//Retrieve input parameter 'operationID'
@@ -1260,7 +1260,7 @@ Any EClassImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared
 			break;
 		}
 		
-		// 1247
+		// 1143915648
 		case ecorePackage::ECLASS_OPERATION_GETESTRUCTURALFEATURE_EINT:
 		{
 			//Retrieve input parameter 'featureID'
@@ -1272,7 +1272,7 @@ Any EClassImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared
 			break;
 		}
 		
-		// 1249
+		// 927658850
 		case ecorePackage::ECLASS_OPERATION_GETESTRUCTURALFEATURE_ESTRING:
 		{
 			//Retrieve input parameter 'featureName'
@@ -1284,14 +1284,14 @@ Any EClassImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared
 			break;
 		}
 		
-		// 1246
+		// 663421227
 		case ecorePackage::ECLASS_OPERATION_GETFEATURECOUNT:
 		{
 			result = eAny(this->getFeatureCount());
 			break;
 		}
 		
-		// 1248
+		// 118348729
 		case ecorePackage::ECLASS_OPERATION_GETFEATUREID_ESTRUCTURALFEATURE:
 		{
 			//Retrieve input parameter 'feature'
@@ -1303,7 +1303,7 @@ Any EClassImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared
 			break;
 		}
 		
-		// 1254
+		// 1392350498
 		case ecorePackage::ECLASS_OPERATION_GETFEATURETYPE_ESTRUCTURALFEATURE:
 		{
 			//Retrieve input parameter 'feature'
@@ -1315,14 +1315,14 @@ Any EClassImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared
 			break;
 		}
 		
-		// 1250
+		// 2008923785
 		case ecorePackage::ECLASS_OPERATION_GETOPERATIONCOUNT:
 		{
 			result = eAny(this->getOperationCount());
 			break;
 		}
 		
-		// 1252
+		// 88181657
 		case ecorePackage::ECLASS_OPERATION_GETOPERATIONID_EOPERATION:
 		{
 			//Retrieve input parameter 'operation'
@@ -1334,7 +1334,7 @@ Any EClassImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared
 			break;
 		}
 		
-		// 1253
+		// 280340408
 		case ecorePackage::ECLASS_OPERATION_GETOVERRIDE_EOPERATION:
 		{
 			//Retrieve input parameter 'operation'
@@ -1346,7 +1346,7 @@ Any EClassImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared
 			break;
 		}
 		
-		// 1245
+		// 253558657
 		case ecorePackage::ECLASS_OPERATION_ISSUPERTYPEOF_ECLASS:
 		{
 			//Retrieve input parameter 'someClass'

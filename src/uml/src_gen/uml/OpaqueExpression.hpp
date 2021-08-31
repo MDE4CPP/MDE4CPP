@@ -131,7 +131,7 @@ namespace uml
 			 
 			virtual int value() = 0;
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			/*!
 			A textual definition of the behavior of the OpaqueExpression, possibly in multiple languages.
@@ -149,7 +149,7 @@ namespace uml
 			
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			/*!
 			Specifies the behavior of the OpaqueExpression as a UML Behavior.

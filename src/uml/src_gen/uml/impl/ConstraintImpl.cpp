@@ -425,7 +425,7 @@ Any ConstraintImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sh
   	switch(operationID)
 	{
 		
-		// 5774
+		// 383317525
 		case umlPackage::CONSTRAINT_OPERATION_BOOLEAN_VALUE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -442,7 +442,7 @@ Any ConstraintImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sh
 			break;
 		}
 		
-		// 5775
+		// 125849084
 		case umlPackage::CONSTRAINT_OPERATION_NO_SIDE_EFFECTS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -459,7 +459,7 @@ Any ConstraintImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sh
 			break;
 		}
 		
-		// 5776
+		// 454887471
 		case umlPackage::CONSTRAINT_OPERATION_NOT_APPLY_TO_SELF_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

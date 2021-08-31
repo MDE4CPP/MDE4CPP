@@ -33,8 +33,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
+#include "fUML/Semantics/Actions/ActionsFactory.hpp"
 
 
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
@@ -539,14 +539,14 @@ Any ExpansionActivationGroupImpl::eInvoke(int operationID, std::shared_ptr<std::
   	switch(operationID)
 	{
 		
-		// 4927
+		// 143187745
 		case ActivitiesPackage::EXPANSIONACTIVATIONGROUP_OPERATION_GETACTIVITYEXECUTION:
 		{
 			result = eAny(this->getActivityExecution());
 			break;
 		}
 		
-		// 4928
+		// 1924328766
 		case ActivitiesPackage::EXPANSIONACTIVATIONGROUP_OPERATION_GETNODEACTIVATION_ACTIVITYNODE:
 		{
 			//Retrieve input parameter 'node'
@@ -558,7 +558,7 @@ Any ExpansionActivationGroupImpl::eInvoke(int operationID, std::shared_ptr<std::
 			break;
 		}
 		
-		// 4929
+		// 1703655313
 		case ActivitiesPackage::EXPANSIONACTIVATIONGROUP_OPERATION_RESUME_ACTIVITYNODEACTIVATION:
 		{
 			//Retrieve input parameter 'activation'
@@ -570,7 +570,7 @@ Any ExpansionActivationGroupImpl::eInvoke(int operationID, std::shared_ptr<std::
 			break;
 		}
 		
-		// 4930
+		// 908663768
 		case ActivitiesPackage::EXPANSIONACTIVATIONGROUP_OPERATION_SUSPEND_ACTIVITYNODEACTIVATION:
 		{
 			//Retrieve input parameter 'activation'

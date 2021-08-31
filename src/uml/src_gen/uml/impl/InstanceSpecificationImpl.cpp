@@ -540,7 +540,7 @@ Any InstanceSpecificationImpl::eInvoke(int operationID, std::shared_ptr<std::lis
   	switch(operationID)
 	{
 		
-		// 11779
+		// 305091535
 		case umlPackage::INSTANCESPECIFICATION_OPERATION_DEFINING_FEATURE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -557,7 +557,7 @@ Any InstanceSpecificationImpl::eInvoke(int operationID, std::shared_ptr<std::lis
 			break;
 		}
 		
-		// 11777
+		// 2089426612
 		case umlPackage::INSTANCESPECIFICATION_OPERATION_DEPLOYMENT_ARTIFACT_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -574,7 +574,7 @@ Any InstanceSpecificationImpl::eInvoke(int operationID, std::shared_ptr<std::lis
 			break;
 		}
 		
-		// 11780
+		// 1332220925
 		case umlPackage::INSTANCESPECIFICATION_OPERATION_DEPLOYMENT_TARGET_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -591,7 +591,7 @@ Any InstanceSpecificationImpl::eInvoke(int operationID, std::shared_ptr<std::lis
 			break;
 		}
 		
-		// 11778
+		// 1699332849
 		case umlPackage::INSTANCESPECIFICATION_OPERATION_STRUCTURAL_FEATURE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

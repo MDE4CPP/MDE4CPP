@@ -87,11 +87,11 @@ namespace uml
 			 
 			virtual void setCovered(std::shared_ptr<uml::Lifeline> value) = 0;
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			/*!
 			References the GeneralOrderings that specify EventOcurrences that must occur after this OccurrenceSpecification.

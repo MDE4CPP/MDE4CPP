@@ -410,49 +410,49 @@ Any ValueSpecificationImpl::eInvoke(int operationID, std::shared_ptr<std::list <
   	switch(operationID)
 	{
 		
-		// 25074
+		// 1922865696
 		case umlPackage::VALUESPECIFICATION_OPERATION_BOOLEANVALUE:
 		{
 			result = eAny(this->booleanValue());
 			break;
 		}
 		
-		// 25075
+		// 1670693406
 		case umlPackage::VALUESPECIFICATION_OPERATION_INTEGERVALUE:
 		{
 			result = eAny(this->integerValue());
 			break;
 		}
 		
-		// 25076
+		// 1614461825
 		case umlPackage::VALUESPECIFICATION_OPERATION_ISCOMPUTABLE:
 		{
 			result = eAny(this->isComputable());
 			break;
 		}
 		
-		// 25077
+		// 1604304741
 		case umlPackage::VALUESPECIFICATION_OPERATION_ISNULL:
 		{
 			result = eAny(this->isNull());
 			break;
 		}
 		
-		// 25078
+		// 1827075769
 		case umlPackage::VALUESPECIFICATION_OPERATION_REALVALUE:
 		{
 			result = eAny(this->realValue());
 			break;
 		}
 		
-		// 25079
+		// 1605002008
 		case umlPackage::VALUESPECIFICATION_OPERATION_STRINGVALUE:
 		{
 			result = eAny(this->stringValue());
 			break;
 		}
 		
-		// 25080
+		// 1854981431
 		case umlPackage::VALUESPECIFICATION_OPERATION_UNLIMITEDVALUE:
 		{
 			result = eAny(this->unlimitedValue());

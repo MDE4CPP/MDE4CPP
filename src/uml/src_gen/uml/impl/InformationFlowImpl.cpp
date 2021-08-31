@@ -905,7 +905,7 @@ Any InformationFlowImpl::eInvoke(int operationID, std::shared_ptr<std::list < st
   	switch(operationID)
 	{
 		
-		// 11383
+		// 260413641
 		case umlPackage::INFORMATIONFLOW_OPERATION_CONVEY_CLASSIFIERS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -922,7 +922,7 @@ Any InformationFlowImpl::eInvoke(int operationID, std::shared_ptr<std::list < st
 			break;
 		}
 		
-		// 11381
+		// 641047489
 		case umlPackage::INFORMATIONFLOW_OPERATION_MUST_CONFORM_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -939,7 +939,7 @@ Any InformationFlowImpl::eInvoke(int operationID, std::shared_ptr<std::list < st
 			break;
 		}
 		
-		// 11382
+		// 1011309815
 		case umlPackage::INFORMATIONFLOW_OPERATION_SOURCES_AND_TARGETS_KIND_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

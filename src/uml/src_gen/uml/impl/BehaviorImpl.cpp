@@ -1139,7 +1139,7 @@ Any BehaviorImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shar
   	switch(operationID)
 	{
 		
-		// 2489
+		// 612359873
 		case umlPackage::BEHAVIOR_OPERATION_BEHAVIOREDCLASSIFIER_ELEMENT:
 		{
 			//Retrieve input parameter 'from'
@@ -1151,7 +1151,7 @@ Any BehaviorImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shar
 			break;
 		}
 		
-		// 2487
+		// 1483589484
 		case umlPackage::BEHAVIOR_OPERATION_FEATURE_OF_CONTEXT_CLASSIFIER_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -1168,21 +1168,21 @@ Any BehaviorImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shar
 			break;
 		}
 		
-		// 2488
+		// 1834858445
 		case umlPackage::BEHAVIOR_OPERATION_GETCONTEXT:
 		{
 			result = eAny(this->getContext());
 			break;
 		}
 		
-		// 2490
+		// 1386831040
 		case umlPackage::BEHAVIOR_OPERATION_INPUTPARAMETERS:
 		{
 			result = eAny(this->inputParameters());
 			break;
 		}
 		
-		// 2485
+		// 1307543230
 		case umlPackage::BEHAVIOR_OPERATION_MOST_ONE_BEHAVIOR_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -1199,14 +1199,14 @@ Any BehaviorImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shar
 			break;
 		}
 		
-		// 2491
+		// 1208902989
 		case umlPackage::BEHAVIOR_OPERATION_OUTPUTPARAMETERS:
 		{
 			result = eAny(this->outputParameters());
 			break;
 		}
 		
-		// 2486
+		// 1912163781
 		case umlPackage::BEHAVIOR_OPERATION_PARAMETERS_MATCH_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

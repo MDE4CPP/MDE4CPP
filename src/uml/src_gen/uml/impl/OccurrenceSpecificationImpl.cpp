@@ -399,14 +399,14 @@ Any OccurrenceSpecificationImpl::eInvoke(int operationID, std::shared_ptr<std::l
   	switch(operationID)
 	{
 		
-		// 16371
+		// 1100038979
 		case umlPackage::OCCURRENCESPECIFICATION_OPERATION_GETCOVERED:
 		{
 			result = eAny(this->getCovered());
 			break;
 		}
 		
-		// 16372
+		// 1493510619
 		case umlPackage::OCCURRENCESPECIFICATION_OPERATION_SETCOVERED_LIFELINE:
 		{
 			//Retrieve input parameter 'value'

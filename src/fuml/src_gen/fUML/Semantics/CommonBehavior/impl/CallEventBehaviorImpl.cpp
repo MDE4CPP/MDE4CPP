@@ -121,7 +121,6 @@ std::shared_ptr<ecore::EClass> CallEventBehaviorImpl::eStaticClass() const
 // Operations
 //*********************************
 
-
 //*********************************
 // References
 //*********************************

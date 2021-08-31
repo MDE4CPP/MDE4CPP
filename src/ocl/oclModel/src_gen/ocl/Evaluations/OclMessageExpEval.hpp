@@ -88,7 +88,7 @@ namespace ocl::Evaluations
 			//*********************************
 			
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			 
 			virtual std::string getName() const = 0;
@@ -96,7 +96,7 @@ namespace ocl::Evaluations
 			virtual void setName (std::string _name)= 0;
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			
 			virtual std::shared_ptr<Bag<ocl::Evaluations::OclMessageArgEval>> getArguments() const = 0;

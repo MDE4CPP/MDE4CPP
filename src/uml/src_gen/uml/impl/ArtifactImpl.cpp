@@ -890,7 +890,7 @@ Any ArtifactImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shar
   	switch(operationID)
 	{
 		
-		// 2153
+		// 330725447
 		case umlPackage::ARTIFACT_OPERATION_CREATEOWNEDATTRIBUTE_STRING_UNLIMITEDNATURAL:
 		{
 			//Retrieve input parameter 'name'
@@ -917,7 +917,7 @@ Any ArtifactImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shar
 			break;
 		}
 		
-		// 2154
+		// 1664248193
 		case umlPackage::ARTIFACT_OPERATION_CREATEOWNEDOPERATION_STRING_TYPE:
 		{
 			//Retrieve input parameter 'name'

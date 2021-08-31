@@ -15,12 +15,12 @@
 namespace ecore 
 {
 	class EAnnotation;
+	class EReference;
 	class EClass;
 	class EDataType;
 	class EGenericType;
-	class EOperation;
 	class EParameter;
-	class EReference;
+	class EOperation;
 	class EStringToStringMapEntry;
 }
 
@@ -57,7 +57,7 @@ namespace PSCS::Semantics::Loci
 			//Class and Feature IDs 
 			static const long long CS_EXECUTIONFACTORY_CLASS = 1845389668;
 			static const unsigned int CS_EXECUTIONFACTORY_CLASS_FEATURE_COUNT = 5;
-			static const unsigned int CS_EXECUTIONFACTORY_CLASS_OPERATION_COUNT = 14;
+			static const unsigned int CS_EXECUTIONFACTORY_CLASS_OPERATION_COUNT = 13;
 			
 			static const long long CS_EXECUTIONFACTORY_ATTRIBUTE_APPLIEDPROFILES = 167161141;
 			

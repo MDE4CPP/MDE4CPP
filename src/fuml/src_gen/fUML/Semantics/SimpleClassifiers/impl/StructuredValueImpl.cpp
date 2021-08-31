@@ -300,7 +300,7 @@ Any StructuredValueImpl::eInvoke(int operationID, std::shared_ptr<std::list < st
   	switch(operationID)
 	{
 		
-		// 11311
+		// 27390723
 		case SimpleClassifiersPackage::STRUCTUREDVALUE_OPERATION_ASSIGNFEATUREVALUE_STRUCTURALFEATURE_EINT:
 		{
 			//Retrieve input parameter 'feature'
@@ -322,14 +322,14 @@ Any StructuredValueImpl::eInvoke(int operationID, std::shared_ptr<std::list < st
 			break;
 		}
 		
-		// 11313
+		// 54615103
 		case SimpleClassifiersPackage::STRUCTUREDVALUE_OPERATION_CREATEFEATUREVALUES:
 		{
 			this->createFeatureValues();
 			break;
 		}
 		
-		// 11316
+		// 1413512920
 		case SimpleClassifiersPackage::STRUCTUREDVALUE_OPERATION_GETVALUES_STRUCTURALFEATURE_FEATUREVALUE:
 		{
 			//Retrieve input parameter 'feature'
@@ -346,7 +346,7 @@ Any StructuredValueImpl::eInvoke(int operationID, std::shared_ptr<std::list < st
 			break;
 		}
 		
-		// 11317
+		// 353901438
 		case SimpleClassifiersPackage::STRUCTUREDVALUE_OPERATION_REMOVEVALUE_STRUCTURALFEATURE_VALUE:
 		{
 			//Retrieve input parameter 'feature'
@@ -363,7 +363,7 @@ Any StructuredValueImpl::eInvoke(int operationID, std::shared_ptr<std::list < st
 			break;
 		}
 		
-		// 11310
+		// 825675364
 		case SimpleClassifiersPackage::STRUCTUREDVALUE_OPERATION_RETRIEVEFEATUREVALUE_STRUCTURALFEATURE:
 		{
 			//Retrieve input parameter 'feature'
@@ -375,14 +375,14 @@ Any StructuredValueImpl::eInvoke(int operationID, std::shared_ptr<std::list < st
 			break;
 		}
 		
-		// 11312
+		// 1985809656
 		case SimpleClassifiersPackage::STRUCTUREDVALUE_OPERATION_RETRIEVEFEATUREVALUES:
 		{
 			result = eAny(this->retrieveFeatureValues());
 			break;
 		}
 		
-		// 11315
+		// 952199679
 		case SimpleClassifiersPackage::STRUCTUREDVALUE_OPERATION_SETFEATUREVALUE_STRUCTURALFEATURE_EINT:
 		{
 			//Retrieve input parameter 'feature'
@@ -404,7 +404,7 @@ Any StructuredValueImpl::eInvoke(int operationID, std::shared_ptr<std::list < st
 			break;
 		}
 		
-		// 11314
+		// 270389401
 		case SimpleClassifiersPackage::STRUCTUREDVALUE_OPERATION_SPECIFY:
 		{
 			result = eAny(this->specify());

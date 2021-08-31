@@ -72,7 +72,7 @@ namespace ecore
 			//*********************************
 			
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			 
 			virtual bool isSerializable() const = 0;
@@ -80,7 +80,7 @@ namespace ecore
 			virtual void setSerializable (bool _serializable)= 0;
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			
 

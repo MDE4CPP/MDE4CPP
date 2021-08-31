@@ -327,7 +327,7 @@ Any DurationConstraintImpl::eInvoke(int operationID, std::shared_ptr<std::list <
   	switch(operationID)
 	{
 		
-		// 7878
+		// 605050300
 		case umlPackage::DURATIONCONSTRAINT_OPERATION_FIRST_EVENT_MULTIPLICITY_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -344,7 +344,7 @@ Any DurationConstraintImpl::eInvoke(int operationID, std::shared_ptr<std::list <
 			break;
 		}
 		
-		// 7879
+		// 662438263
 		case umlPackage::DURATIONCONSTRAINT_OPERATION_HAS_ONE_OR_TWO_CONSTRAINEDELEMENTS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

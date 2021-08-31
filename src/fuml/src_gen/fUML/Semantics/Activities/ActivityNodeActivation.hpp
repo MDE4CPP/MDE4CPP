@@ -113,7 +113,7 @@ namespace fUML::Semantics::Activities
 			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > takeTokens() = 0; 
 			virtual void terminate() = 0;
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			 
 			virtual bool isRunning() const = 0;
@@ -121,7 +121,7 @@ namespace fUML::Semantics::Activities
 			virtual void setRunning (bool _running)= 0;
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			
 			virtual std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> getGroup() const = 0;

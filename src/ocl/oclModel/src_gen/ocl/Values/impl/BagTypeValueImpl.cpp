@@ -32,8 +32,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "ocl/Types/TypesFactory.hpp"
 #include "ocl/Values/ValuesFactory.hpp"
+#include "ocl/Types/TypesFactory.hpp"
 
 
 #include "ocl/Types/CollectionType.hpp"
@@ -195,7 +195,7 @@ Any BagTypeValueImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::
   	switch(operationID)
 	{
 		
-		// 716
+		// 794069208
 		case ValuesPackage::BAGTYPEVALUE_OPERATION_ADDVALUE_VALUE:
 		{
 			//Retrieve input parameter 'value'

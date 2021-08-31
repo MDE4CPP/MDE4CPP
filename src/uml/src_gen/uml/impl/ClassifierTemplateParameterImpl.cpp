@@ -351,7 +351,7 @@ Any ClassifierTemplateParameterImpl::eInvoke(int operationID, std::shared_ptr<st
   	switch(operationID)
 	{
 		
-		// 3756
+		// 1795975272
 		case umlPackage::CLASSIFIERTEMPLATEPARAMETER_OPERATION_ACTUAL_IS_CLASSIFIER_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -368,7 +368,7 @@ Any ClassifierTemplateParameterImpl::eInvoke(int operationID, std::shared_ptr<st
 			break;
 		}
 		
-		// 3757
+		// 490731306
 		case umlPackage::CLASSIFIERTEMPLATEPARAMETER_OPERATION_CONSTRAINING_CLASSIFIERS_CONSTRAIN_ARGS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -385,7 +385,7 @@ Any ClassifierTemplateParameterImpl::eInvoke(int operationID, std::shared_ptr<st
 			break;
 		}
 		
-		// 3758
+		// 1474478295
 		case umlPackage::CLASSIFIERTEMPLATEPARAMETER_OPERATION_CONSTRAINING_CLASSIFIERS_CONSTRAIN_PARAMETERED_ELEMENT_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -402,7 +402,7 @@ Any ClassifierTemplateParameterImpl::eInvoke(int operationID, std::shared_ptr<st
 			break;
 		}
 		
-		// 3753
+		// 1386595471
 		case umlPackage::CLASSIFIERTEMPLATEPARAMETER_OPERATION_HAS_CONSTRAINING_CLASSIFIER_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -419,7 +419,7 @@ Any ClassifierTemplateParameterImpl::eInvoke(int operationID, std::shared_ptr<st
 			break;
 		}
 		
-		// 3755
+		// 2020869422
 		case umlPackage::CLASSIFIERTEMPLATEPARAMETER_OPERATION_MATCHING_ABSTRACT_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -436,7 +436,7 @@ Any ClassifierTemplateParameterImpl::eInvoke(int operationID, std::shared_ptr<st
 			break;
 		}
 		
-		// 3754
+		// 705070053
 		case umlPackage::CLASSIFIERTEMPLATEPARAMETER_OPERATION_PARAMETERED_ELEMENT_NO_FEATURES_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

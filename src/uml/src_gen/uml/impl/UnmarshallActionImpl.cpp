@@ -539,7 +539,7 @@ Any UnmarshallActionImpl::eInvoke(int operationID, std::shared_ptr<std::list < s
   	switch(operationID)
 	{
 		
-		// 24699
+		// 621569527
 		case umlPackage::UNMARSHALLACTION_OPERATION_MULTIPLICITY_OF_OBJECT_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -556,7 +556,7 @@ Any UnmarshallActionImpl::eInvoke(int operationID, std::shared_ptr<std::list < s
 			break;
 		}
 		
-		// 24697
+		// 1876449113
 		case umlPackage::UNMARSHALLACTION_OPERATION_NUMBER_OF_RESULT_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -573,7 +573,7 @@ Any UnmarshallActionImpl::eInvoke(int operationID, std::shared_ptr<std::list < s
 			break;
 		}
 		
-		// 24700
+		// 1616753275
 		case umlPackage::UNMARSHALLACTION_OPERATION_OBJECT_TYPE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -590,7 +590,7 @@ Any UnmarshallActionImpl::eInvoke(int operationID, std::shared_ptr<std::list < s
 			break;
 		}
 		
-		// 24696
+		// 1250827823
 		case umlPackage::UNMARSHALLACTION_OPERATION_STRUCTURAL_FEATURE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -607,7 +607,7 @@ Any UnmarshallActionImpl::eInvoke(int operationID, std::shared_ptr<std::list < s
 			break;
 		}
 		
-		// 24698
+		// 900645369
 		case umlPackage::UNMARSHALLACTION_OPERATION_TYPE_ORDERING_AND_MULTIPLICITY_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

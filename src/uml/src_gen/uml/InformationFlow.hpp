@@ -118,11 +118,11 @@ namespace uml
 			 
 			virtual bool sources_and_targets_kind(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			/*!
 			Specifies the information items that may circulate on this information flow.

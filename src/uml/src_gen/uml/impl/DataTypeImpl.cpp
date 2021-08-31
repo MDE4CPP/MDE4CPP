@@ -615,7 +615,7 @@ Any DataTypeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shar
   	switch(operationID)
 	{
 		
-		// 6650
+		// 270748778
 		case umlPackage::DATATYPE_OPERATION_CREATEOWNEDATTRIBUTE_STRING_UNLIMITEDNATURAL:
 		{
 			//Retrieve input parameter 'name'
@@ -642,7 +642,7 @@ Any DataTypeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shar
 			break;
 		}
 		
-		// 6651
+		// 1604271524
 		case umlPackage::DATATYPE_OPERATION_CREATEOWNEDOPERATION_STRING_TYPE:
 		{
 			//Retrieve input parameter 'name'

@@ -106,11 +106,11 @@ namespace uml
 			 
 			virtual std::shared_ptr<uml::Activity> containingActivity() = 0;
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			/*!
 			The Activity containing the ActivityNode, if it is directly owned by an Activity.

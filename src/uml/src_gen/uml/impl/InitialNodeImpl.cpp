@@ -301,7 +301,7 @@ Any InitialNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::s
   	switch(operationID)
 	{
 		
-		// 11583
+		// 1281146585
 		case umlPackage::INITIALNODE_OPERATION_CONTROL_EDGES_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -318,7 +318,7 @@ Any InitialNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::s
 			break;
 		}
 		
-		// 11582
+		// 961519650
 		case umlPackage::INITIALNODE_OPERATION_NO_INCOMING_EDGES_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

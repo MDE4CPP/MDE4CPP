@@ -80,7 +80,7 @@ namespace ecore
 			 
 			virtual void * getContainerClass() = 0;
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			 
 			virtual bool isChangeable() const = 0;
@@ -115,7 +115,7 @@ namespace ecore
 			virtual void setVolatile (bool _volatile)= 0;
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			
 			virtual std::weak_ptr<ecore::EClass> getEContainingClass() const = 0;

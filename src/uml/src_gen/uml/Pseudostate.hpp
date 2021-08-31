@@ -161,7 +161,7 @@ namespace uml
 			 
 			virtual bool transitions_outgoing(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			/*!
 			Determines the precise type of the Pseudostate and can be one of: entryPoint, exitPoint, initial, deepHistory, shallowHistory, join, fork, junction, terminate or choice.
@@ -177,7 +177,7 @@ namespace uml
 			virtual void setKind (uml::PseudostateKind _kind)= 0;
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			/*!
 			The State that owns this Pseudostate and in which it appears.

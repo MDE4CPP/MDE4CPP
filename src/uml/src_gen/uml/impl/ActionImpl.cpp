@@ -661,28 +661,28 @@ Any ActionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared
   	switch(operationID)
 	{
 		
-		// 490
+		// 547817094
 		case umlPackage::ACTION_OPERATION_ALLACTIONS:
 		{
 			result = eAny(this->allActions());
 			break;
 		}
 		
-		// 491
+		// 1538297391
 		case umlPackage::ACTION_OPERATION_ALLOWNEDNODES:
 		{
 			result = eAny(this->allOwnedNodes());
 			break;
 		}
 		
-		// 492
+		// 959584979
 		case umlPackage::ACTION_OPERATION_CONTAININGBEHAVIOR:
 		{
 			result = eAny(this->containingBehavior());
 			break;
 		}
 		
-		// 489
+		// 215661939
 		case umlPackage::ACTION_OPERATION_GETCONTEXT:
 		{
 			result = eAny(this->getContext());

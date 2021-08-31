@@ -561,14 +561,14 @@ Any LinkActionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sh
   	switch(operationID)
 	{
 		
-		// 13398
+		// 1086747006
 		case umlPackage::LINKACTION_OPERATION_ASSOCIATION:
 		{
 			result = eAny(this->association());
 			break;
 		}
 		
-		// 13397
+		// 768493780
 		case umlPackage::LINKACTION_OPERATION_NOT_STATIC_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -585,7 +585,7 @@ Any LinkActionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sh
 			break;
 		}
 		
-		// 13396
+		// 1355951104
 		case umlPackage::LINKACTION_OPERATION_SAME_ASSOCIATION_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -602,7 +602,7 @@ Any LinkActionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sh
 			break;
 		}
 		
-		// 13395
+		// 1475541173
 		case umlPackage::LINKACTION_OPERATION_SAME_PINS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

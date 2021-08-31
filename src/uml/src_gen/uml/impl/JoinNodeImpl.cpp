@@ -361,7 +361,7 @@ Any JoinNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shar
   	switch(operationID)
 	{
 		
-		// 13185
+		// 1655982604
 		case umlPackage::JOINNODE_OPERATION_INCOMING_OBJECT_FLOW_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -378,7 +378,7 @@ Any JoinNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shar
 			break;
 		}
 		
-		// 13184
+		// 1727251626
 		case umlPackage::JOINNODE_OPERATION_ONE_OUTGOING_EDGE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

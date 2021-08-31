@@ -109,7 +109,7 @@ namespace uml
 			 
 			virtual bool required_value(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			/*!
 			Specifies whether existing values of the StructuralFeature should be removed before adding the new value.
@@ -125,7 +125,7 @@ namespace uml
 			virtual void setIsReplaceAll (bool _isReplaceAll)= 0;
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			/*!
 			The InputPin that gives the position at which to insert the value in an ordered StructuralFeature. The type of the insertAt InputPin is UnlimitedNatural, but the value cannot be zero. It is omitted for unordered StructuralFeatures.

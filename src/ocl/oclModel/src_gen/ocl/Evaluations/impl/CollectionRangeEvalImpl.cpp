@@ -31,10 +31,10 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "ocl/Evaluations/EvaluationsFactory.hpp"
-#include "fUML/Semantics/Values/ValuesFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
+#include "fUML/Semantics/Values/ValuesFactory.hpp"
 #include "uml/umlFactory.hpp"
+#include "ocl/Evaluations/EvaluationsFactory.hpp"
 
 
 #include "ocl/Evaluations/CollectionLiteralPartEval.hpp"

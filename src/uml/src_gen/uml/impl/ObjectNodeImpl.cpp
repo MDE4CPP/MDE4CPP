@@ -516,7 +516,7 @@ Any ObjectNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sh
   	switch(operationID)
 	{
 		
-		// 16088
+		// 1199944681
 		case umlPackage::OBJECTNODE_OPERATION_INPUT_OUTPUT_PARAMETER_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -533,7 +533,7 @@ Any ObjectNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sh
 			break;
 		}
 		
-		// 16090
+		// 987041183
 		case umlPackage::OBJECTNODE_OPERATION_OBJECT_FLOW_EDGES_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -550,7 +550,7 @@ Any ObjectNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sh
 			break;
 		}
 		
-		// 16089
+		// 1576805400
 		case umlPackage::OBJECTNODE_OPERATION_SELECTION_BEHAVIOR_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

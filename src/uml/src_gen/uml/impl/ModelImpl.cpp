@@ -350,7 +350,7 @@ Any ModelImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_
   	switch(operationID)
 	{
 		
-		// 15427
+		// 632630866
 		case umlPackage::MODEL_OPERATION_ISMETAMODEL:
 		{
 			result = eAny(this->isMetamodel());

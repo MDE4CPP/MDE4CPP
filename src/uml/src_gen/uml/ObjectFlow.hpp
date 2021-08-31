@@ -132,7 +132,7 @@ namespace uml
 			 
 			virtual bool transformation_behavior(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
 			/*!
 			Indicates whether the objects in the ObjectFlow are passed by multicasting.
@@ -160,7 +160,7 @@ namespace uml
 			virtual void setIsMultireceive (bool _isMultireceive)= 0;
 			
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
 			/*!
 			A Behavior used to select tokens from a source ObjectNode.

@@ -403,7 +403,7 @@ Any DestroyObjectActionActivationImpl::eInvoke(int operationID, std::shared_ptr<
   	switch(operationID)
 	{
 		
-		// 3959
+		// 1843594424
 		case ActionsPackage::DESTROYOBJECTACTIONACTIVATION_OPERATION_DESTROYOBJECT_VALUE_EBOOLEAN:
 		{
 			//Retrieve input parameter 'value'
@@ -425,14 +425,14 @@ Any DestroyObjectActionActivationImpl::eInvoke(int operationID, std::shared_ptr<
 			break;
 		}
 		
-		// 3961
+		// 1060442259
 		case ActionsPackage::DESTROYOBJECTACTIONACTIVATION_OPERATION_DOACTION:
 		{
 			this->doAction();
 			break;
 		}
 		
-		// 3960
+		// 1102528616
 		case ActionsPackage::DESTROYOBJECTACTIONACTIVATION_OPERATION_OBJECTISCOMPOSITE_REFERENCE_LINK:
 		{
 			//Retrieve input parameter 'reference'

@@ -1087,7 +1087,7 @@ Any StructuredActivityNodeImpl::eInvoke(int operationID, std::shared_ptr<std::li
   	switch(operationID)
 	{
 		
-		// 22827
+		// 99188554
 		case umlPackage::STRUCTUREDACTIVITYNODE_OPERATION_EDGES_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -1104,7 +1104,7 @@ Any StructuredActivityNodeImpl::eInvoke(int operationID, std::shared_ptr<std::li
 			break;
 		}
 		
-		// 22828
+		// 1066841877
 		case umlPackage::STRUCTUREDACTIVITYNODE_OPERATION_INPUT_PIN_EDGES_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -1121,7 +1121,7 @@ Any StructuredActivityNodeImpl::eInvoke(int operationID, std::shared_ptr<std::li
 			break;
 		}
 		
-		// 22826
+		// 1915068085
 		case umlPackage::STRUCTUREDACTIVITYNODE_OPERATION_OUTPUT_PIN_EDGES_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -1138,14 +1138,14 @@ Any StructuredActivityNodeImpl::eInvoke(int operationID, std::shared_ptr<std::li
 			break;
 		}
 		
-		// 22829
+		// 569554525
 		case umlPackage::STRUCTUREDACTIVITYNODE_OPERATION_SOURCENODES:
 		{
 			result = eAny(this->sourceNodes());
 			break;
 		}
 		
-		// 22830
+		// 585821302
 		case umlPackage::STRUCTUREDACTIVITYNODE_OPERATION_TARGETNODES:
 		{
 			result = eAny(this->targetNodes());

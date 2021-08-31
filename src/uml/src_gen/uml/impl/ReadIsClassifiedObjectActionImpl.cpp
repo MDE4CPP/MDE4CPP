@@ -482,7 +482,7 @@ Any ReadIsClassifiedObjectActionImpl::eInvoke(int operationID, std::shared_ptr<s
   	switch(operationID)
 	{
 		
-		// 19499
+		// 1594582560
 		case umlPackage::READISCLASSIFIEDOBJECTACTION_OPERATION_BOOLEAN_RESULT_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -499,7 +499,7 @@ Any ReadIsClassifiedObjectActionImpl::eInvoke(int operationID, std::shared_ptr<s
 			break;
 		}
 		
-		// 19500
+		// 2021986095
 		case umlPackage::READISCLASSIFIEDOBJECTACTION_OPERATION_MULTIPLICITY_OF_INPUT_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -516,7 +516,7 @@ Any ReadIsClassifiedObjectActionImpl::eInvoke(int operationID, std::shared_ptr<s
 			break;
 		}
 		
-		// 19498
+		// 2130862958
 		case umlPackage::READISCLASSIFIEDOBJECTACTION_OPERATION_MULTIPLICITY_OF_OUTPUT_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -533,7 +533,7 @@ Any ReadIsClassifiedObjectActionImpl::eInvoke(int operationID, std::shared_ptr<s
 			break;
 		}
 		
-		// 19497
+		// 990896155
 		case umlPackage::READISCLASSIFIEDOBJECTACTION_OPERATION_NO_TYPE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
