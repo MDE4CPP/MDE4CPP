@@ -37,7 +37,7 @@
 
 [generateAbstractDataTypesIncludes()/]
 //metametamodel classes
-[for (elements : EClassifier| anEPackage.getMetaMetaModelClasses()) ?(not doNotGenerate())]
+[for (elements : EClassifier| anEPackage.getMetaMetaModelClasses()->reject(doNotGenerateEClassifier()))]
 #include "[elements.ePackage.name/]/[elements.name.toUpperFirst()/].hpp"
 [/for]
 
@@ -45,10 +45,10 @@
 #include "[anEPackage.generateNamespacePath()/]/[anEPackage.name.concat('Factory')/].hpp"
 
 //depending model packages
-[for (pack : EPackage | anEPackage.metaModelIncludes()->select(not doNotGenerate())->asOrderedSet()->sortedBy(name)) ? (not ( pack=anEPackage))]
+[for (pack : EPackage | anEPackage.metaModelIncludes()->reject(doNotGenerateEPackage())->asOrderedSet()->sortedBy(name)) ? (not ( pack=anEPackage))]
 #include "[pack.name/]/[pack.name.concat('Package')/].hpp"
 [/for]
-[for (aSubPackage : EPackage| anEPackage.eSubpackages->selectByKind(EPackage)->select(not doNotGenerate())->sortedBy(name)) separator ('\n')]
+[for (aSubPackage : EPackage| anEPackage.eSubpackages->selectByKind(EPackage)->reject(doNotGenerateEPackage())->sortedBy(name)) separator ('\n')]
 #include "[aSubPackage.getRootPackage().name/]/[aSubPackage.getNamespacePathWithoutRoot()/]impl/[aSubPackage.name.concat('PackageImpl')/].hpp"
 [/for]
 
@@ -88,15 +88,15 @@ void [packageName/]::init(std::shared_ptr<ecore::EPackage> package)
 
 [anEPackage.eSubpackages->sortedBy(name).generateSubPackageGetterImpl(anEPackage)/]
 
-[for (aClass : EClass | anEPackage.eClassifiers->selectByKind(EClass)->select(not doNotGenerate())->asOrderedSet()->sortedBy(name)) separator ('\n')]
+[for (aClass : EClass | anEPackage.eClassifiers->selectByKind(EClass)->reject(doNotGenerateEClassifier())->asOrderedSet()->sortedBy(name)) separator ('\n')]
 // Begin Class [aClass.name.toUpperFirst()/]
 [aClass.generateModelElementGetterImpl(anEPackage)/]
-[aClass.eAttributes->sortedBy(name).generateModelElementGetterImpl(anEPackage)/]
-[aClass.eReferences->sortedBy(name).generateModelElementGetterImpl(anEPackage)/]
-[aClass.eOperations->sortedBy(name).generateModelElementGetterImpl(anEPackage)/]
+[aClass.eAttributes->reject(doNotGenerateEStructuralFeature())->sortedBy(name).generateModelElementGetterImpl(anEPackage)/]
+[aClass.eReferences->reject(doNotGenerateEStructuralFeature())->sortedBy(name).generateModelElementGetterImpl(anEPackage)/]
+[aClass.eOperations->reject(doNotGenerateEOperation())->sortedBy(name).generateModelElementGetterImpl(anEPackage)/]
 // End Class [aClass.name.toUpperFirst()/]
 [/for]
-[anEPackage.eClassifiers->selectByKind(EDataType)->sortedBy(name).generateModelElementGetterImpl(anEPackage)/]
+[anEPackage.eClassifiers->selectByKind(EDataType)->reject(doNotGenerateEClassifier())->sortedBy(name).generateModelElementGetterImpl(anEPackage)/]
 [/file]
 
 [comment] create additional file for create function to reduce comiling time
@@ -111,16 +111,16 @@ void [packageName/]::init(std::shared_ptr<ecore::EPackage> package)
 
 [generateAbstractDataTypesIncludes()/]
 //metametamodel classes
-[for (elements : EClassifier| anEPackage.getMetaMetaModelClasses())]
+[for (elements : EClassifier| anEPackage.getMetaMetaModelClasses()->reject(doNotGenerateEClassifier()))]
 #include "[elements.ePackage.name/]/[elements.name.toUpperFirst()/].hpp"
 [/for]
 
 //depending model packages
-[for (pack : EPackage | anEPackage.metaModelIncludes()->select(not doNotGenerate())->asOrderedSet()->sortedBy(name)) ? (not ( pack=anEPackage))]
+[for (pack : EPackage | anEPackage.metaModelIncludes()->reject(doNotGenerateEPackage())->asOrderedSet()->sortedBy(name)) ? (not ( pack=anEPackage))]
 #include "[pack.name/]/[pack.name.concat('Package')/].hpp"
 [/for]
 //include subpackages 
-[for (aSubPackage : EPackage| anEPackage.eSubpackages->select(not doNotGenerate())->selectByKind(EPackage)->sortedBy(name)) separator ('\n')]
+[for (aSubPackage : EPackage| anEPackage.eSubpackages->reject(doNotGenerateEPackage())->selectByKind(EPackage)->sortedBy(name)) separator ('\n')]
 #include "[aSubPackage.getRootPackage().name/]/[aSubPackage.getNamespacePathWithoutRoot()/]impl/[aSubPackage.name.concat('PackageImpl')/].hpp"
 [/for]
  
@@ -136,25 +136,25 @@ void [packageName/]::createPackageContents(std::shared_ptr<ecore::EPackage> pack
 
 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
 
-[for (aClass : EClass | anEPackage.eClassifiers->selectByKind(EClass)->select(not doNotGenerate())->asOrderedSet()->sortedBy(name))]
+[for (aClass : EClass | anEPackage.eClassifiers->selectByKind(EClass)->reject(doNotGenerateEClassifier())->asOrderedSet()->sortedBy(name))]
 	create[aClass.name.toUpperFirst()/]Content(package, factory);
 [/for]
 
 	createPackageEDataTypes(package, factory);
 
-[for (aSubPackage: EPackage | anEPackage.eSubpackages->sortedBy(name))]
+[for (aSubPackage: EPackage | anEPackage.eSubpackages->reject(doNotGenerateEPackage())->sortedBy(name))]
 	std::dynamic_pointer_cast<[aSubPackage.generateNamespaceDefinition()/]::[aSubPackage.name/]PackageImpl>(get[aSubPackage.getMemberNameUpperFirst()/]Package())->createPackageContents(get[aSubPackage.getMemberNameUpperFirst()/]Package());
 
 [/for]	
 }
 
-[for (aClass : EClass | anEPackage.eClassifiers->selectByKind(EClass)->select(not doNotGenerate())->asOrderedSet()->sortedBy(name)) separator ('\n')]
+[for (aClass : EClass | anEPackage.eClassifiers->selectByKind(EClass)->reject(doNotGenerateEClassifier())->asOrderedSet()->sortedBy(name)) separator ('\n')]
 void [packageName/]::create[aClass.name.toUpperFirst()/]Content(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	[aClass.generateClassCreation()/]
-	[aClass.eAttributes->sortedBy(name).generateAttributeCreation()/]
-	[aClass.eReferences->sortedBy(name).generateReferenceCreation()/]
-	[aClass.eOperations->sortedBy(name).generateOperationCreation()/]
+	[aClass.eAttributes->reject(doNotGenerateEStructuralFeature())->sortedBy(name).generateAttributeCreation()/]
+	[aClass.eReferences->reject(doNotGenerateEStructuralFeature())->sortedBy(name).generateReferenceCreation()/]
+	[aClass.eOperations->reject(doNotGenerateEOperation())->sortedBy(name).generateOperationCreation()/]
 }
 [/for]
 
@@ -173,7 +173,7 @@ void [packageName/]::createPackageEDataTypes(std::shared_ptr<ecore::EPackage> pa
 
 [generateAbstractDataTypesIncludes()/]
 //metametamodel classes
-[for (elements : EClassifier| anEPackage.getMetaMetaModelClasses()) ?(not doNotGenerate())]
+[for (elements : EClassifier| anEPackage.getMetaMetaModelClasses()->reject(doNotGenerateEClassifier()))]
 #include "[elements.ePackage.name/]/[elements.name.toUpperFirst()/].hpp"
 [/for]
 
@@ -181,13 +181,13 @@ void [packageName/]::createPackageEDataTypes(std::shared_ptr<ecore::EPackage> pa
 #include "[anEPackage.eClass().ePackage.name/]/[anEPackage.eClass().ePackage.name.concat('Factory')/].hpp"
 
 //depending model packages
-[for (aSubPackage : EPackage| anEPackage.eSubpackages->selectByKind(EPackage)->select(not doNotGenerate())->sortedBy(name)) separator ('\n')]
+[for (aSubPackage : EPackage| anEPackage.eSubpackages->selectByKind(EPackage)->reject(doNotGenerateEPackage())->sortedBy(name)) separator ('\n')]
 #include "[aSubPackage.getRootPackage().name/]/[aSubPackage.getNamespacePathWithoutRoot()/]impl/[aSubPackage.name.concat('PackageImpl')/].hpp"
 [/for]
 
-[let classifiers: OrderedSet(EClass) = anEPackage.eClassifiers->selectByKind(EClass)->select(not doNotGenerate())]
+[let classifiers: OrderedSet(EClass) = anEPackage.eClassifiers->selectByKind(EClass)->reject(doNotGenerateEClassifier())]
 	[let packageList: OrderedSet(EPackage) = (anEPackage.metaModelIncludes())->union(getClassifierElementTypes(classifiers.eAttributes)->union(getClassifierElementTypes(classifiers.eReferences))->union(getClassifierElementTypes(classifiers.eOperations))->union(classifiers.eSuperTypes.ePackage))->asOrderedSet()->sortedBy(name) ]
-[for (aPackage : EPackage | packageList) ? ((not (aPackage=anEPackage)) and (not doNotGenerate()) )]
+[for (aPackage : EPackage | packageList) ? ((not (aPackage=anEPackage)) and (not doNotGenerateEPackage()) )]
 #include "[aPackage.getRootPackage().name/]/[aPackage .getNamespacePathWithoutRoot()/][aPackage.name.concat('Package')/].hpp"
 [/for]
 	[/let]
@@ -210,33 +210,33 @@ void [packageName/]::initializePackageContents()
 	setNsURI(eNS_URI);
 	
 	// Add supertypes to classes
-	[anEPackage.eClassifiers->selectByKind(EClass)->select(not doNotGenerate())->sortedBy(name).initSuperTypes()/]
+	[anEPackage.eClassifiers->selectByKind(EClass)->reject(doNotGenerateEClassifier())->sortedBy(name).initSuperTypes()/]
 
  	// Initialize classes and features; add operations and parameters
-[for (aClass : EClass | anEPackage.eClassifiers->selectByKind(EClass)->select(not doNotGenerate())->asOrderedSet()->sortedBy(name))]
+[for (aClass : EClass | anEPackage.eClassifiers->selectByKind(EClass)->reject(doNotGenerateEClassifier())->asOrderedSet()->sortedBy(name))]
 	initialize[aClass.name.toUpperFirst()/]Content();
 [/for]
 
 	initializePackageEDataTypes();
 
-[for (aSubPackage: EPackage | anEPackage.eSubpackages->sortedBy(name))]
+[for (aSubPackage: EPackage | anEPackage.eSubpackages->reject(doNotGenerateEPackage())->sortedBy(name))]
 	std::dynamic_pointer_cast<[aSubPackage.generateNamespaceDefinition()/]::[aSubPackage.name/]PackageImpl>(get[aSubPackage.getMemberNameUpperFirst()/]Package())->initializePackageContents();
 [/for]	
 }
 
-[for (aClass : EClass | anEPackage.eClassifiers->selectByKind(EClass)->select(not doNotGenerate())->asOrderedSet()->sortedBy(name)) separator ('\n')]
+[for (aClass : EClass | anEPackage.eClassifiers->selectByKind(EClass)->reject(doNotGenerateEClassifier())->asOrderedSet()->sortedBy(name)) separator ('\n')]
 void [packageName/]::initialize[aClass.name.toUpperFirst()/]Content()
 {
 	[aClass.generateClassInit()/]
-	[aClass.eAttributes->sortedBy(name).generateAttributeInitialization()/]
-	[aClass.eReferences->sortedBy(name).generateReferenceInitialization()/]
-	[aClass.eOperations->sortedBy(name).generateOperationInitialization()/]
+	[aClass.eAttributes->reject(doNotGenerateEStructuralFeature())->sortedBy(name).generateAttributeInitialization()/]
+	[aClass.eReferences->reject(doNotGenerateEStructuralFeature())->sortedBy(name).generateReferenceInitialization()/]
+	[aClass.eOperations->reject(doNotGenerateEOperation())->sortedBy(name).generateOperationInitialization()/]
 }
 [/for]
 
 void [packageName/]::initializePackageEDataTypes()
 {
-	[anEPackage.eClassifiers->selectByKind(EDataType)->sortedBy(name).generateEDatatypeInitialization()/]
+	[anEPackage.eClassifiers->selectByKind(EDataType)->reject(doNotGenerateEClassifier())->sortedBy(name).generateEDatatypeInitialization()/]
 }
 
 [/file]

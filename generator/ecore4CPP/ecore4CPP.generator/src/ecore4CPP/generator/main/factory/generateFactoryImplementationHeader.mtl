@@ -37,7 +37,7 @@
 [/if]
 
 namespace [anEPackage.name/] 
-{[for (elements : EClassifier| OrderedSet{anEPackage.eClassifiers}->flatten()->selectByKind(EClass)->select(not doNotGenerate())->sortedBy(name)) separator ('\n')]
+{[for (elements : EClassifier| OrderedSet{anEPackage.eClassifiers}->flatten()->selectByKind(EClass)->reject(doNotGenerateEClassifier())->sortedBy(name)) separator ('\n')]
 	class [elements.name/];[/for]
 
 }
@@ -63,7 +63,7 @@ namespace [anEPackage.generateNamespaceDefinition()/]
 			virtual std::shared_ptr<[needNamespace(anEPackage, 'EObject')/]> create(std::shared_ptr<[needNamespace(anEPackage, 'EClass')/]> _class, std::shared_ptr<EObject> _container=nullptr, const int referenceID = -1)[if (not generateObjectMonitoring())] const[/if];
 
 			//Creator functions
-			 [anEPackage.eClassifiers->selectByKind(EClass)->select(not doNotGenerate())->sortedBy(name).generateClassCreate(true)/]
+			 [anEPackage.eClassifiers->selectByKind(EClass)->reject(doNotGenerateEClassifier())->sortedBy(name).generateClassCreate(true)/]
 [comment] Package in Factory notwendig???
 			//Package
 			virtual std::shared_ptr<[anEPackage.name/]Package> get[anEPackage.name/]Package() const;

@@ -27,7 +27,7 @@
 namespace [anEEnum.generateNamespaceDefinition()/] 
 {
 	enum [anEEnum.name/] {
-[for (lit : EEnumLiteral | anEEnum.eLiterals->asOrderedSet()->sortedBy(name)) separator (',\n')]
+[for (lit : EEnumLiteral | anEEnum.eLiterals->reject(doNotGenerateEEnumLiteral())->asOrderedSet()->sortedBy(name)) separator (',\n')]
 		[lit.name.toUpperCase()/] = [lit.value.toString()/]
 [/for]
 	};

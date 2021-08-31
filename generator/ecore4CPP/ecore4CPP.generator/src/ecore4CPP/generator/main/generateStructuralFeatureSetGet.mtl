@@ -39,16 +39,16 @@ Any [aClass.name.toUpperFirst().concat('Impl')/]::eGet(int featureID, bool resol
 {
 	switch(featureID)
 	{
-	[for (struct : EStructuralFeature | aClass.eStructuralFeatures->reject(doNotGenerate())->asOrderedSet()->sortedBy(name))]
+	[for (struct : EStructuralFeature | aClass.eStructuralFeatures->reject(doNotGenerateEStructuralFeature())->asOrderedSet()->sortedBy(name))]
 		case [struct.metamodelPackageNameForEstructuralFeture(aClass)/]::[struct.getStaticAttributeIDName()/]:
-[if (struct.eType.oclIsKindOf(EDataType))]
+		[if (struct.eType.oclIsKindOf(EDataType))]
 			return eAny([struct.GetterName()/]()); //[aClass.getMyClassifierID()/][struct.getFeatureID()/]
-[elseif (struct.upperBound = 1)]
+		[elseif (struct.upperBound = 1)]
 			{
 				std::shared_ptr<ecore::EObject> returnValue=[struct.GetterName()/]()[if (struct.oclAsType(EReference).isBackReference())].lock()[/if];
 				return eAny(returnValue); //[aClass.getMyClassifierID()/][struct.getFeatureID()/]
 			}
-[else]
+		[else]
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<[struct.eGenericType.generateCppType(false)/]>::iterator iter = [struct.GetterName()/]()->begin();
@@ -60,25 +60,25 @@ Any [aClass.name.toUpperFirst().concat('Impl')/]::eGet(int featureID, bool resol
 			}
 			return eAny(tempList); //[aClass.getMyClassifierID()/][struct.getFeatureID()/]			
 		}
-[/if]
+		[/if]
 	[/for]
 	}
-[if (aClass.eSuperTypes->isEmpty() and not (aClass.name ='EObject'))]
+[if (aClass.eSuperTypes->reject(doNotGenerateEClassifier())->isEmpty() and not (aClass.name ='EObject'))]
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
-[elseif (aClass.eSuperTypes->size() = 1)]
+[elseif (aClass.eSuperTypes->reject(doNotGenerateEClassifier())->size() = 1)]
 	return [ClassWithNamespace(aClass, aClass.eSuperTypes->first())/]Impl::eGet(featureID, resolve, coreType);
 [else]
 	Any result;
-	[let eClasses : OrderedSet(EClass) = aClass.eSuperTypes->asOrderedSet()->sortedBy(name)]		
-	[for (sClass : EClass | eClasses)]
+	[let eClasses : OrderedSet(EClass) = aClass.eSuperTypes->reject(doNotGenerateEClassifier())->asOrderedSet()->sortedBy(name)]		
+		[for (sClass : EClass | eClasses)]
 	result = [ClassWithNamespace(aClass,sClass)/]Impl::eGet(featureID, resolve, coreType);
-	[if (sClass <> eClasses->last())]
+			[if (sClass <> eClasses->last())]
 	if (result != nullptr && !result->isEmpty())
 	{
 		return result;
 	}
-	[/if]
-	[/for]
+			[/if]
+		[/for]
 	return result;
 	[/let]
 [/if]
@@ -90,30 +90,30 @@ bool [aClass.name.toUpperFirst().concat('Impl')/]::internalEIsSet(int featureID)
 {
 	switch(featureID)
 	{
-	[for (struct : EStructuralFeature | aClass.eStructuralFeatures->reject(doNotGenerate())->asOrderedSet()->sortedBy(name))]
+	[for (struct : EStructuralFeature | aClass.eStructuralFeatures->reject(doNotGenerateEStructuralFeature())->asOrderedSet()->sortedBy(name))]
 		case [struct.metamodelPackageNameForEstructuralFeture(aClass)/]::[struct.getStaticAttributeIDName()/]:
 			return [struct.generateComparison()/]; //[aClass.getMyClassifierID()/][struct.getFeatureID()/]
 	[/for]
 	}
-[if (aClass.eSuperTypes->isEmpty() and not (aClass.name ='EObject'))]
+	[if (aClass.eSuperTypes->reject(doNotGenerateEClassifier())->isEmpty() and not (aClass.name ='EObject'))]
 	return ecore::EObjectImpl::internalEIsSet(featureID);
-[elseif (aClass.eSuperTypes->size() = 1)]
+	[elseif (aClass.eSuperTypes->reject(doNotGenerateEClassifier())->size() = 1)]
 	return [ClassWithNamespace(aClass, aClass.eSuperTypes->first())/]Impl::internalEIsSet(featureID);
-[else]
+	[else]
 	bool result = false;
-	[let eClasses : OrderedSet(EClass) = aClass.eSuperTypes->asOrderedSet()->sortedBy(name)]		
-	[for (sClass : EClass | eClasses)]
+		[let eClasses : OrderedSet(EClass) = aClass.eSuperTypes->reject(doNotGenerateEClassifier())->asOrderedSet()->sortedBy(name)]		
+			[for (sClass : EClass | eClasses)]
 	result = [ClassWithNamespace(aClass,sClass)/]Impl::internalEIsSet(featureID);
-	[if (sClass <> eClasses->last())]
+				[if (sClass <> eClasses->last())]
 	if (result)
 	{
 		return result;
 	}
-	[/if]
-	[/for]
+				[/if]
+			[/for]
 	return result;
-	[/let]
-[/if]
+		[/let]
+	[/if]
 }
 [/template]
 
@@ -122,24 +122,24 @@ bool [aClass.name.toUpperFirst().concat('Impl')/]::eSet(int featureID, Any newVa
 {
 	switch(featureID)
 	{
-[for (struct : EStructuralFeature | aClass.eStructuralFeatures->select(changeable)->reject(doNotGenerate())->asOrderedSet()->sortedBy(name))]
+	[for (struct : EStructuralFeature | aClass.eStructuralFeatures->select(changeable)->reject(doNotGenerateEStructuralFeature())->asOrderedSet()->sortedBy(name))]
 		case [struct.metamodelPackageNameForEstructuralFeture(aClass)/]::[struct.getStaticAttributeIDName()/]:
 		{
 			// BOOST CAST
-[if (struct.eType.oclIsKindOf(EDataType) and struct.upperBound = 1 and struct.eGenericType.eTypeArguments->size() = 0 )]
+		[if (struct.eType.oclIsKindOf(EDataType) and struct.upperBound = 1 and struct.eGenericType.eTypeArguments->size() = 0 )]
 			[struct.generateStructuralFeatureType(false)/] _[struct.name/] = newValue->get<[struct.generateStructuralFeatureType(false)/]>();
 			[struct.SetterName()/](_[struct.name/]); //[aClass.getMyClassifierID()/][struct.getFeatureID()/]
-[elseif (struct.eType.oclIsKindOf(EDataType) and struct.upperBound = 1 and struct.eGenericType.eTypeArguments->size() > 0 )]
+		[elseif (struct.eType.oclIsKindOf(EDataType) and struct.upperBound = 1 and struct.eGenericType.eTypeArguments->size() > 0 )]
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<[struct.generateStructuralFeatureType(false)/]> _[struct.name/] = std::dynamic_pointer_cast<[struct.generateStructuralFeatureType(false)/]>(_temp);
 			[struct.SetterName()/](_[struct.name/]); //[aClass.getMyClassifierID()/][struct.getFeatureID()/]			
-[elseif (struct.eType.oclIsKindOf(EDataType))]
+		[elseif (struct.eType.oclIsKindOf(EDataType))]
 			// nothing to do
-[elseif (struct.upperBound = 1)]
+		[elseif (struct.upperBound = 1)]
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<[struct.generateStructuralFeatureType(false)/]> _[struct.name/] = std::dynamic_pointer_cast<[struct.generateStructuralFeatureType(false)/]>(_temp);
 			[struct.SetterName()/](_[struct.name/]); //[aClass.getMyClassifierID()/][struct.getFeatureID()/]
-[else]
+		[else]
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
 			std::shared_ptr<[struct.generateStructuralFeatureType(false)/]> [struct.name/]List(new [struct.generateStructuralFeatureType(false)/]());
 			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
@@ -171,31 +171,31 @@ bool [aClass.name.toUpperFirst().concat('Impl')/]::eSet(int featureID, Any newVa
 				}
 				iter[struct.name.toUpperFirst()/]++;			
 			}
-[/if]
+		[/if]
 			return true;
 		}
-[/for]
+	[/for]
 	}
 
-[if (aClass.eSuperTypes->isEmpty() and not (aClass.name ='EObject'))]
+	[if (aClass.eSuperTypes->reject(doNotGenerateEClassifier())->isEmpty() and not (aClass.name ='EObject'))]
 	return ecore::EObjectImpl::eSet(featureID, newValue);
-[elseif (aClass.eSuperTypes->size() = 1)]
+	[elseif (aClass.eSuperTypes->reject(doNotGenerateEClassifier())->size() = 1)]
 	return [ClassWithNamespace(aClass, aClass.eSuperTypes->first())/]Impl::eSet(featureID, newValue);
-[else]
+	[else]
 	bool result = false;
-	[let eClasses : OrderedSet(EClass) = aClass.eSuperTypes->asOrderedSet()->sortedBy(name)]		
-	[for (sClass : EClass | eClasses)]
+		[let eClasses : OrderedSet(EClass) = aClass.eSuperTypes->reject(doNotGenerateEClassifier())->asOrderedSet()->sortedBy(name)]		
+		[for (sClass : EClass | eClasses)]
 	result = [ClassWithNamespace(aClass,sClass)/]Impl::eSet(featureID, newValue);
-	[if (sClass <> eClasses->last())]
+			[if (sClass <> eClasses->last())]
 	if (result)
 	{
 		return result;
 	}
-	[/if]
-	[/for]
+			[/if]
+		[/for]
 	return result;
-	[/let]
-[/if]
+		[/let]
+	[/if]
 }
 [/template]
 

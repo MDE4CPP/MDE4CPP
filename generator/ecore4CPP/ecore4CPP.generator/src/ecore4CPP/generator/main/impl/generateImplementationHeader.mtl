@@ -41,10 +41,10 @@
 [if (not (aClass.ePackage = aClass.getRootPackage()))]
 #include "[aClass.getRootPackage().name/]/[aClass.getNamespacePathWithoutRoot()/]impl/[aClass.ePackage.name/]FactoryImpl.hpp"
 [/if]
-[for (aEClass : EClass | aClass.eSuperTypes->asOrderedSet()->sortedBy(name)) separator ('\n')]
+[for (aEClass : EClass | aClass.eSuperTypes->reject(doNotGenerateEClassifier())->asOrderedSet()->sortedBy(name)) separator ('\n')]
 #include "[aEClass.generateNamespacePath()/]/impl/[aEClass.name.toUpperFirst()/]Impl.hpp"[/for]
 
-[if (not(aClass.name='EObject') and (aClass.eSuperTypes->isEmpty()))]
+[if (not(aClass.name='EObject') and (aClass.eSuperTypes->reject(doNotGenerateEClassifier())->isEmpty()))]
 #include "ecore/impl/EModelElementImpl.hpp"
 [/if]
 
@@ -52,8 +52,8 @@
 [comment namespace /]
 namespace [aClass.generateNamespaceDefinition()/] 
 {
-	class [aClass.ePackage.getRootPackage().name.toUpper()/]_API [className/] : [for (sClass : EClass | aClass.eSuperTypes->asOrderedSet()->sortedBy(name)) separator (', ') after (', ')]
-virtual public [ClassWithNamespace(aClass, sClass)/]Impl[/for][if (aClass.eSuperTypes->isEmpty())]
+	class [aClass.ePackage.getRootPackage().name.toUpper()/]_API [className/] : [for (sClass : EClass | aClass.eSuperTypes->reject(doNotGenerateEClassifier())->asOrderedSet()->sortedBy(name)) separator (', ') after (', ')]
+virtual public [ClassWithNamespace(aClass, sClass)/]Impl[/for][if (aClass.eSuperTypes->reject(doNotGenerateEClassifier())->isEmpty())]
 [if (not(aClass.name='EObject'))]virtual public ecore::EModelElementImpl,[/if]
 [/if]virtual public [aClass.name.toUpperFirst()/] 
 	{
@@ -72,16 +72,16 @@ virtual public [ClassWithNamespace(aClass, sClass)/]Impl[/for][if (aClass.eSuper
 			[aClass.generateGetThisPtr()/]
 
 			[let ref:OrderedSet(EReference) = aClass.getAllContainers()]
-			[for(aReference:EReference | ref->sortedBy(name)) ]
+				[for(aReference:EReference | ref->reject(doNotGenerateEStructuralFeature())->sortedBy(name)) ]
 			//Additional constructors for the containments back reference
-	[if(ref->select(eType.name = aReference.eType.name)->size()>1 )]
-			[if(ref->select(eType.name = aReference.eType.name)->asOrderedSet()->sortedBy(name)->first() = aReference)]
+					[if(ref->select(eType.name = aReference.eType.name)->size()>1 )]
+						[if(ref->select(eType.name = aReference.eType.name)->asOrderedSet()->sortedBy(name)->first() = aReference)]
 			[className/]([aReference.generateReferenceType(true)/] par_[aReference.eType.name/], const int reference_id);
-			[/if]
-	[else]
+						[/if]
+					[else]
 			[className/]([aReference.generateReferenceType(true)/] par_[aReference.name/]);
-	[/if]
-			[/for]
+					[/if]
+				[/for]
 			[/let]
 
 		public:
@@ -91,26 +91,23 @@ virtual public [ClassWithNamespace(aClass, sClass)/]Impl[/for][if (aClass.eSuper
 			//*********************************
 			// Operations
 			//*********************************
-			[aClass.eOperations->sortedBy(name).generateOperationDecl(true)/]
+			[aClass.eOperations->reject(doNotGenerateEOperation())->sortedBy(name).generateOperationDeclaration(true)/]
 			
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
-			[aClass.eAttributes->sortedBy(name).generateAttributeAccessorsDecl(true)/]
+			[aClass.eAttributes->reject(doNotGenerateEStructuralFeature())->sortedBy(name).generateAttributeAccessorsDeclaration(true)/]
 			
 			//*********************************
 			// Reference
 			//*********************************
-			[aClass.eReferences->sortedBy(name).generateReferenceDecl(true)/]
+			[aClass.eReferences->reject(doNotGenerateEStructuralFeature())->sortedBy(name).generateReferenceAccessorsDeclaration(true)/]
 			
 			//*********************************
 			// Union Getter
 			//*********************************
-			[aClass.generateUnionGetterDeclaretaion(true)/] 
-			 
-			//*********************************
-			// Structural Feature Getter/Setter
-			//*********************************
+			[aClass.getUnionsReference()->reject(doNotGenerateEStructuralFeature())->sortedBy(name).generateUnionGetterDeclaretaion(true)/]
+			
 
 			[aClass.generateEContainerOperation(true)/] 
 			
@@ -119,6 +116,9 @@ virtual public [ClassWithNamespace(aClass, sClass)/]Impl[/for][if (aClass.eSuper
 			//*********************************
 			[aClass.generatePersistenceDecl(true)/]
 
+			//*********************************
+			// Structural Feature Getter/Setter
+			//*********************************
 		protected:
 			virtual std::shared_ptr<[needNamespace(aClass.ePackage, 'EClass')/]> eStaticClass() const;
 			[aClass.generateeGetDel(true)/]

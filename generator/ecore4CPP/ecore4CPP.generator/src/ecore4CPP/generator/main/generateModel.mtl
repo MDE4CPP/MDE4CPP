@@ -88,37 +88,37 @@ typedef std::shared_ptr<AnyObject> Any;
 [generatePersistenceForwardDeclarations()/]
 
 //Forward Declaration for used types 
-[let includeClasses:Set(EClass) = aClass.includes()->selectByKind(EClass)->select(not oclIsUndefined())->select(not doNotGenerate())->select(c:EClass| (not (c = aClass)) and (not (aClass.eAllSuperTypes)->includes(c)))]
-[if (includeClasses->size()>0)]
-[let includeNameSpaces:OrderedSet(EPackage) = includeClasses.ePackage->asOrderedSet()->sortedBy(name)]
-[if (includeNameSpaces->size()>0)]
-[for (includeNamespace: EPackage | includeNameSpaces)]
+[let includeClasses:Set(EClass) = aClass.includes()->selectByKind(EClass)->select(not oclIsUndefined())->reject(doNotGenerateEClassifier())->select(c:EClass| (not (c = aClass)) and (not (aClass.eAllSuperTypes)->includes(c)))]
+	[if (includeClasses->size()>0)]
+	[let includeNameSpaces:OrderedSet(EPackage) = includeClasses.ePackage->asOrderedSet()->sortedBy(name)]
+		[if (includeNameSpaces->size()>0)]
+			[for (includeNamespace: EPackage | includeNameSpaces)]
 namespace [includeNamespace.generateNamespaceDefinition()/] 
 {
-[for (element : EClassifier| includeClasses->select(includeClass: EClass | includeClass.ePackage = includeNamespace)->asOrderedSet()->sortedBy(name))]
+				[for (element : EClassifier| includeClasses->select(includeClass: EClass | includeClass.ePackage = includeNamespace)->asOrderedSet()->sortedBy(name))]
 	class [element.name/];
-[/for]
+				[/for]
 }
-[/for]
-[/if]
-[/let]
-[/if]
+			[/for]
+		[/if]
+	[/let]
+	[/if]
 [/let]
 
 // namespace macro header include
 #include "[aClass.ePackage.getRootPackage().name/]/[aClass.ePackage.getRootPackage().name/].hpp"
 
 // base class includes
-[for (elements : EClassifier| aClass.eSuperTypes->asOrderedSet()->sortedBy(name))]
+[for (elements : EClassifier| aClass.eSuperTypes->reject(doNotGenerateEClassifier())->asOrderedSet()->sortedBy(name))]
 #include "[elements.generateNamespacePath()/]/[elements.name.toUpperFirst().concat('.hpp')/]"
 [/for]
 
 // enum includes
-[for (elements : EEnum| aClass.includes()->selectByKind(EEnum)->asOrderedSet()->sortedBy(name)) separator ('\n')]
+[for (elements : EEnum| aClass.includes()->selectByKind(EEnum)->reject(doNotGenerateEClassifier())->asOrderedSet()->sortedBy(name)) separator ('\n')]
 #include "[elements.generateNamespacePath()/]/[elements.name.toUpperFirst().concat('.hpp')/]"
 [/for]
 
-[if (aClass.eSuperTypes->isEmpty() and not (aClass.name ='EObject'))]
+[if (aClass.eSuperTypes->reject(doNotGenerateEClassifier())->isEmpty() and not (aClass.name ='EObject'))]
 #include "ecore/EModelElement.hpp"
 [/if]
 
@@ -131,9 +131,9 @@ namespace [includeNamespace.generateNamespaceDefinition()/]
 namespace [aClass.generateNamespaceDefinition()/] 
 {
 	[aClass.generateDocumentation()/]
-	class [aClass.ePackage.getRootPackage().name.toUpper()/]_API [aClass.name.toUpperFirst()/] [if (aClass.eSuperTypes->isEmpty() and not (aClass.name ='EObject'))] : virtual public ecore::EModelElement
+	class [aClass.ePackage.getRootPackage().name.toUpper()/]_API [aClass.name.toUpperFirst()/] [if (aClass.eSuperTypes->reject(doNotGenerateEClassifier())->isEmpty() and not (aClass.name ='EObject'))] : virtual public ecore::EModelElement
 [else]
-[for (sClass : EClass | aClass.eSuperTypes->asOrderedSet()->sortedBy(name)) before (':') separator (',')] virtual public [ClassWithNamespace(aClass,sClass)/][/for]
+[for (sClass : EClass | aClass.eSuperTypes->reject(doNotGenerateEClassifier())->asOrderedSet()->sortedBy(name)) before (':') separator (',')] virtual public [ClassWithNamespace(aClass,sClass)/][/for]
 [/if][if(aClass.hasKey('shared_from_this'))], public std::enable_shared_from_this<[aClass.name.toUpperFirst()/]>[/if]	{
 		public:
  			[aClass.name.toUpperFirst()/](const [aClass.name.toUpperFirst()/] &) {}
@@ -142,16 +142,16 @@ namespace [aClass.generateNamespaceDefinition()/]
 			[aClass.name.toUpperFirst()/](){}
 			[if(aClass.containsContainerAttribute())]
 			[let ref:OrderedSet(EReference) = aClass.getAllContainers()]
-			[for(aReference:EReference | ref->sortedBy(name)) separator('\n')]
+				[for(aReference:EReference | ref->reject(doNotGenerateEStructuralFeature())->sortedBy(name)) separator('\n')]
 			//Additional constructors for the containments back reference
-			[if(ref->select(eType.name = aReference.eType.name)->size()>1 )]
-					[if(ref->select(eType.name = aReference.eType.name)->asOrderedSet()->sortedBy(name)->first() = aReference)]
+					[if(ref->select(eType.name = aReference.eType.name)->size()>1 )]
+						[if(ref->select(eType.name = aReference.eType.name)->asOrderedSet()->sortedBy(name)->first() = aReference)]
 			[aClass.name.toUpperFirst()/]([aReference.generateReferenceType(true)/] par_[aReference.eType.name/], const int reference_id);
-					[/if]
-			[else]
+						[/if]
+					[else]
 			[aClass.name.toUpperFirst()/]([aReference.generateReferenceType(true)/] par_[aReference.name/]);
-			[/if]
-			[/for]
+					[/if]
+				[/for]
 			[/let]
 			[/if]
 
@@ -164,32 +164,32 @@ namespace [aClass.generateNamespaceDefinition()/]
 			//*********************************
 			// Operations
 			//*********************************
-			[aClass.eOperations->sortedBy(name).generateOperationDecl(false)/]
+			[aClass.eOperations->reject(doNotGenerateEOperation())->sortedBy(name).generateOperationDeclaration(false)/]
 			//*********************************
-			// Attributes Getter Setter
+			// Attributes Getter & Setter
 			//*********************************
-			[aClass.eAttributes->sortedBy(name).generateAttributeAccessorsDecl(false)/]
+			[aClass.eAttributes->reject(doNotGenerateEStructuralFeature())->sortedBy(name).generateAttributeAccessorsDeclaration(false)/]
 			//*********************************
-			// Reference
+			// References Getter & Setter
 			//*********************************
-			[aClass.eReferences->sortedBy(name).generateReferenceDecl(false)/]
+			[aClass.eReferences->reject(doNotGenerateEStructuralFeature())->sortedBy(name).generateReferenceAccessorsDeclaration(false)/]
 
 		protected:
 			//*********************************
 			// Attribute Members
 			//*********************************
-			[aClass.eAttributes->reject(isRedefiningContainer())->sortedBy(name).generateAttributeProtectedMember()/]
+			[aClass.eAttributes->reject(isRedefiningContainer())->reject(doNotGenerateEStructuralFeature())->sortedBy(name).generateAttributeProtectedMember()/]
 			
 			//*********************************
 			// Reference Members
 			//*********************************
-			[aClass.eReferences->reject(isRedefiningContainer())->sortedBy(name).generateProtectedReference()/]
+			[aClass.eReferences->reject(isRedefiningContainer())->reject(doNotGenerateEStructuralFeature())->sortedBy(name).generateReferenceProtectedMember()/]
 
 		public:
 			//*********************************
 			// Union Getter
 			//*********************************
-			[aClass.generateUnionGetterDeclaretaion(false)/]
+			[aClass.getUnionsReference()->reject(doNotGenerateEStructuralFeature())->sortedBy(name).generateUnionGetterDeclaretaion(false)/]
 
 			[aClass.generateEContainerOperation(false)/] 
 			

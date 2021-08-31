@@ -23,7 +23,7 @@
 */]
 [template public generateClassCreate(aEClass : EClass,impl : Boolean) ? (aEClass.abstract=false)]
 virtual std::shared_ptr<[aEClass.generateTypeClass()/]> create[aEClass.name/](const int metaElementID = [aEClass.ePackage.name/]Package::[aEClass.getStaticAttributeIDName()/])[if (not generateObjectMonitoring())] const[/if] [abstractSufix(impl)/];
-[let ref:OrderedSet(EReference) = aEClass.getAllCompositionsToClass()]
+[let ref:OrderedSet(EReference) = aEClass.getAllCompositionsToClass()->reject(doNotGenerateEStructuralFeature())]
 	[for(aReference:EReference | ref->sortedBy(name)) before('//Add as contained object\n')]
 		[if not (aReference.oclIsUndefined() or aReference.eContainingClass.oclIsUndefined())]
 			[if (aReference.eOpposite->isEmpty())]
@@ -40,11 +40,11 @@ virtual std::shared_ptr<[aEClass.generateTypeClass()/]> create[aEClass.name/]_as
 virtual std::shared_ptr<ecore::EObject> eContainer() const [abstractSufix(impl)/];
 [/template]
 
-[template public generateEContainerOperationCPP(aClass: EClass)]
+[template public generateEContainerOperationImplementation(aClass: EClass)]
 std::shared_ptr<ecore::EObject> [aClass.name.toUpperFirst()/]Impl::eContainer() const
 {
 [let ref:OrderedSet(EReference) = aClass.getAllContainers()]
-[for(aReference:EReference | ref->sortedBy(name)) separator('\n')]
+[for(aReference:EReference | ref->reject(doNotGenerateEStructuralFeature())->sortedBy(name)) separator('\n')]
 [if(ref->select(eType.name = aReference.eType.name)->size()>1 )]
 	[if(ref->select(eType.name = aReference.eType.name)->asOrderedSet()->sortedBy(name)->first() = aReference)]
 		[for(multipleRef : EReference | ref->select(eType.name = aReference.eType.name)->sortedBy(name))]
@@ -106,8 +106,8 @@ void [aClass.name.toUpperFirst()/]Impl::[generateGetThisPtrPropertySetterName()/
 
 [template public generateStaticClassID(aEClass : EClass)]
 static const long long [aEClass.getStaticAttributeIDName()/] = [aEClass.transformType().generatePolynomialRollingHash()/];
-static const unsigned int [aEClass.getStaticAttributeIDName()/]_FEATURE_COUNT = [aEClass.getFeatureCount()/];
-static const unsigned int [aEClass.getStaticAttributeIDName()/]_OPERATION_COUNT = [aEClass.getOperationCount()/];
+static const unsigned int [aEClass.getStaticAttributeIDName()/]_FEATURE_COUNT = [aEClass.eAllStructuralFeatures->reject(doNotGenerateEStructuralFeature())->size()/];
+static const unsigned int [aEClass.getStaticAttributeIDName()/]_OPERATION_COUNT = [aEClass.eAllOperations->reject(doNotGenerateEOperation())->size()/];
 [/template]
 
 [template public initSuperTypes(aEClass : EClass)]

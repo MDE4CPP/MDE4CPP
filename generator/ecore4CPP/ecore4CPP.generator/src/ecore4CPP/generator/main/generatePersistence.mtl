@@ -106,8 +106,8 @@ void [aClass.name.concat('Impl')/]::load(std::shared_ptr<[generatePersistenceNSP
 
 void [aClass.name.concat('Impl')/]::loadAttributes(std::shared_ptr<[generatePersistenceNSPath(false)/]::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
 {
-[let attrList : OrderedSet(EAttribute) = aClass.eAttributes->select(eAtt: EAttribute|(eAtt.transient = false) and eAtt.upperBound=1)->asOrderedSet()->sortedBy(name)]
-[let refList : OrderedSet(EReference) = aClass.eReferences->select(eRef: EReference|(eRef.containment = false) and (eRef.changeable = true) and (not eRef.isBackReference()))->asOrderedSet()->sortedBy(name)]
+[let attrList : OrderedSet(EAttribute) = aClass.eAttributes->select(eAtt: EAttribute|(eAtt.transient = false) and eAtt.upperBound=1)->reject(doNotGenerateEStructuralFeature())->asOrderedSet()->sortedBy(name)]
+[let refList : OrderedSet(EReference) = aClass.eReferences->select(eRef: EReference|(eRef.containment = false) and (eRef.changeable = true) and (not eRef.isBackReference()))->reject(doNotGenerateEStructuralFeature())->asOrderedSet()->sortedBy(name)]
 [if (attrList->size() > 0 or refList->size() > 0)]
 	try
 	{
@@ -157,7 +157,7 @@ void [aClass.name.concat('Impl')/]::loadAttributes(std::shared_ptr<[generatePers
 		  [elseif (aAttribute.eType.oclIsKindOf(EEnum))]
 			[aAttribute.generateStructuralFeatureType(true)/] value [aAttribute.generateDefaultValue()/];
 			std::string literal = iter->second;
-[for (aLiteral : EEnumLiteral | aAttribute.eType.oclAsType(EEnum).eLiterals) before ('\t\t\t') separator ('\t\t\telse ')]
+[for (aLiteral : EEnumLiteral | aAttribute.eType.oclAsType(EEnum).eLiterals->reject(doNotGenerateEEnumLiteral())) before ('\t\t\t') separator ('\t\t\telse ')]
 if (literal == "[aLiteral.name/]")
 			{
 				value = [aAttribute.eType.name/]::[aLiteral.name.toUpperCase()/];
@@ -204,10 +204,10 @@ if (literal == "[aLiteral.name/]")
 	}
 [/if][/let][/let]
 
-[if (aClass.eSuperTypes->isEmpty() and not (aClass.name ='EObject'))]
+[if (aClass.eSuperTypes->reject(doNotGenerateEClassifier())->isEmpty() and not (aClass.name ='EObject'))]
 	ecore::EObjectImpl::loadAttributes(loadHandler, attr_list);
 [else]
-	[for (sClass : EClass | aClass.eSuperTypes->asOrderedSet()->sortedBy(name))]
+	[for (sClass : EClass | aClass.eSuperTypes->reject(doNotGenerateEClassifier())->asOrderedSet()->sortedBy(name))]
 	[ClassWithNamespace(aClass,sClass)/]Impl::loadAttributes(loadHandler, attr_list);
 	[/for]
 [/if]
@@ -218,7 +218,7 @@ void [aClass.name.concat('Impl')/]::loadNode(std::string nodeName, std::shared_p
 [comment]
 	std::shared_ptr<[aClass.getRootPackage().name/][getPackageAccess(aClass, true)/]::[aClass.ePackage.name/]Factory> modelFactory=[aClass.getRootPackage().name/][getPackageAccess(aClass, true)/]::[aClass.ePackage.name/]Factory::eInstance();
 [/comment]
-[let attrList : OrderedSet(EAttribute) = aClass.eAttributes->select(eAtt: EAttribute|(eAtt.transient = false) and eAtt.upperBound <> 1)->asOrderedSet()->sortedBy(name)]
+[let attrList : OrderedSet(EAttribute) = aClass.eAttributes->select(eAtt: EAttribute|(eAtt.transient = false) and eAtt.upperBound <> 1)->reject(doNotGenerateEStructuralFeature())->asOrderedSet()->sortedBy(name)]
 [if (attrList->size() > 0)]
 	try
 	{
@@ -247,7 +247,7 @@ void [aClass.name.concat('Impl')/]::loadNode(std::string nodeName, std::shared_p
 [/if]
 [/let]
 
-[let refList : OrderedSet(EReference) = aClass.eReferences->select(eRef: EReference|(eRef.containment = true))->sortedBy(name)]
+[let refList : OrderedSet(EReference) = aClass.eReferences->select(eRef: EReference|(eRef.containment = true))->reject(doNotGenerateEStructuralFeature())->sortedBy(name)]
 [if (refList->size() > 0)]
 	try
 	{
@@ -332,12 +332,12 @@ void [aClass.name.concat('Impl')/]::loadNode(std::string nodeName, std::shared_p
 [/if]
 [/let]
 	//load BasePackage Nodes
-[if (aClass.eSuperTypes->isEmpty() and not (aClass.name ='EObject'))]
+[if (aClass.eSuperTypes->reject(doNotGenerateEClassifier())->isEmpty() and not (aClass.name ='EObject'))]
 [comment] Laden der Ecore-Metamodell-Knoten wirklich nötig???
 	ecore::EObjectImpl::loadNode(nodeName, loadHandler, ecore::ecoreFactory::eInstance());
 [/comment]
 [else]
-	[for (sClass : EClass | aClass.eSuperTypes->asOrderedSet()->sortedBy(name))]
+	[for (sClass : EClass | aClass.eSuperTypes->reject(doNotGenerateEClassifier())->asOrderedSet()->sortedBy(name))]
 	[ClassWithNamespace(aClass,sClass)/]Impl::loadNode(nodeName, loadHandler);
 	[/for]
 [/if]
@@ -347,7 +347,7 @@ void [aClass.name.concat('Impl')/]::loadNode(std::string nodeName, std::shared_p
 [template public generatePersistenceResolveReferenceImpl(aClass: EClass)]
 void [aClass.name.concat('Impl')/]::resolveReferences(const int featureID, std::vector<std::shared_ptr<[needNamespace(aClass.ePackage, 'EObject')/]> > references)
 {
-[let refList : OrderedSet(EReference) = aClass.eReferences->select(eRef: EReference|(eRef.containment = false) and (eRef.changeable = true))->asOrderedSet()->sortedBy(name)]
+[let refList : OrderedSet(EReference) = aClass.eReferences->select(eRef: EReference|(eRef.containment = false) and (eRef.changeable = true))->reject(doNotGenerateEStructuralFeature())->asOrderedSet()->sortedBy(name)]
 [if (refList->size() > 0)]
 	switch(featureID)
 	{
@@ -378,10 +378,10 @@ void [aClass.name.concat('Impl')/]::resolveReferences(const int featureID, std::
 	[/for]
 	}
 [/if][/let]
-[if (aClass.eSuperTypes->isEmpty() and not (aClass.name ='EObject'))]
+[if (aClass.eSuperTypes->reject(doNotGenerateEClassifier())->isEmpty() and not (aClass.name ='EObject'))]
 	ecore::EObjectImpl::resolveReferences(featureID, references);
 [else]
-	[for (sClass : EClass | aClass.eSuperTypes->asOrderedSet()->sortedBy(name))]
+	[for (sClass : EClass | aClass.eSuperTypes->reject(doNotGenerateEClassifier())->asOrderedSet()->sortedBy(name))]
 	[ClassWithNamespace(aClass,sClass)/]Impl::resolveReferences(featureID, references);
 	[/for]
 [/if]
@@ -389,12 +389,12 @@ void [aClass.name.concat('Impl')/]::resolveReferences(const int featureID, std::
 [/template]
 
 [template private generateSuperTypesCalling(aClass : EClass, classList : Set(EClass))]
-[for (sClass : EClass | classList->removeAll(classList.eAllSuperTypes)->asOrderedSet()->sortedBy(name))]
+[for (sClass : EClass | classList->removeAll(classList.eAllSuperTypes)->reject(doNotGenerateEClassifier())->asOrderedSet()->sortedBy(name))]
 [ClassWithNamespace(aClass,sClass)/]Impl::saveContent(saveHandler);
 [/for]
 
-[if (classList.eSuperTypes->size() > 0)]
-[aClass.generateSuperTypesCalling(classList.eSuperTypes->asSet())/]
+[if (classList.eSuperTypes->reject(doNotGenerateEClassifier())->size() > 0)]
+[aClass.generateSuperTypesCalling(classList.eSuperTypes->reject(doNotGenerateEClassifier())->asSet())/]
 [else]
 ecore::EObjectImpl::saveContent(saveHandler);
 [/if]
@@ -405,7 +405,7 @@ void [aClass.name.concat('Impl')/]::save(std::shared_ptr<[generatePersistenceNSP
 {
 	saveContent(saveHandler);
 
-	[aClass.generateSuperTypesCalling(aClass.eSuperTypes->asSet())/]
+	[aClass.generateSuperTypesCalling(aClass.eSuperTypes->reject(doNotGenerateEClassifier())->asSet())/]
 }
 
 void [aClass.name.concat('Impl')/]::saveContent(std::shared_ptr<[generatePersistenceNSPath(false)/]::XSaveHandler> saveHandler) const
@@ -413,7 +413,7 @@ void [aClass.name.concat('Impl')/]::saveContent(std::shared_ptr<[generatePersist
 	try
 	{
 		std::shared_ptr<[aClass.getRootPackage().name/][getPackageAccess(aClass, true)/]::[aClass.ePackage.name/]Package> package = [aClass.getRootPackage().name/][getPackageAccess(aClass, true)/]::[aClass.ePackage.name/]Package::eInstance();
-[let refList : OrderedSet(EReference) =  aClass.eReferences->select(eRef: EReference|(eRef.containment = true and eRef.hasSubset() and (not eRef.isSubsetUnion())))->asOrderedSet()->sortedBy(name)]
+[let refList : OrderedSet(EReference) =  aClass.eReferences->select(eRef: EReference|(eRef.containment = true and eRef.hasSubset() and (not eRef.isSubsetUnion())))->reject(doNotGenerateEStructuralFeature())->asOrderedSet()->sortedBy(name)]
 [if (refList->size() > 0)]
 [for (aReference : EReference | refList) separator ('\n')]
 		// Save '[aReference.name/]'
@@ -431,7 +431,7 @@ void [aClass.name.concat('Impl')/]::saveContent(std::shared_ptr<[generatePersist
 		[/if]
 [/for]
 [/if][/let]	
-[let attrList : OrderedSet(EAttribute) = aClass.eAttributes->select(eAtt: EAttribute|(eAtt.transient = false))->asOrderedSet()->sortedBy(name)]
+[let attrList : OrderedSet(EAttribute) = aClass.eAttributes->select(eAtt: EAttribute|(eAtt.transient = false))->reject(doNotGenerateEStructuralFeature())->asOrderedSet()->sortedBy(name)]
 [if (attrList->size() > 0)]
 		// Add attributes
 [for (aAttribute : EAttribute | attrList) separator ('\n')]
@@ -444,7 +444,7 @@ void [aClass.name.concat('Impl')/]::saveContent(std::shared_ptr<[generatePersist
 	[if (aAttribute.eType.oclIsKindOf(EEnum))]
 			[aAttribute.generateStructuralFeatureType(true)/] value = this->[aAttribute.GetterName()/]();
 			std::string literal = "";
-		[for (aLiteral : EEnumLiteral | aAttribute.eType.oclAsType(EEnum).eLiterals) before ('\t\t\t') separator ('\t\t\telse ')]
+		[for (aLiteral : EEnumLiteral | aAttribute.eType.oclAsType(EEnum).eLiterals->reject(doNotGenerateEEnumLiteral())) before ('\t\t\t') separator ('\t\t\telse ')]
 if (value == [aAttribute.eType.name/]::[aLiteral.name.toUpperCase()/])
 			{
 				literal = "[aLiteral.name/]";
@@ -464,7 +464,7 @@ if (value == [aAttribute.eType.name/]::[aLiteral.name.toUpperCase()/])
 		// TODO '[aAttribute.eType/]' Attribute's eType is a EJavaClass or its eClass is not typeof EDataType
   [/if]
 [/for][/if][/let]
-[let refList : OrderedSet(EReference) = aClass.eReferences->select(eRef: EReference|((eRef.containment = false) and (not eRef.isBackReference()) and (eRef.changeable = true)) or eRef.hasAttributeExtention())->asOrderedSet()->sortedBy(name)]
+[let refList : OrderedSet(EReference) = aClass.eReferences->select(eRef: EReference|((eRef.containment = false) and (not eRef.isBackReference()) and (eRef.changeable = true)) or eRef.hasAttributeExtention())->reject(doNotGenerateEStructuralFeature())->asOrderedSet()->sortedBy(name)]
 [if (refList->size() > 0)]
 	// Add references
 [for (aReference : EReference | refList)]
@@ -491,7 +491,7 @@ if (value == [aAttribute.eType.name/]::[aLiteral.name.toUpperCase()/])
 	[else]		saveHandler->addReferences<[aReference.eGenericType.generateCppType(false)/]>("[aReference.name/]", this->[aReference.GetterName()/]());
 	[/if] 
 [/for][/if][/let]
-[let refList : OrderedSet(EReference) = aClass.eReferences->select(eRef: EReference|(eRef.containment = true and not (eRef.hasSubset() and not eRef.isSubsetUnion())))->asOrderedSet()->sortedBy(name)]
+[let refList : OrderedSet(EReference) = aClass.eReferences->select(eRef: EReference|(eRef.containment = true and not (eRef.hasSubset() and not eRef.isSubsetUnion())))->reject(doNotGenerateEStructuralFeature())->asOrderedSet()->sortedBy(name)]
 [if (refList->size() > 0)]
 		//
 		// Add new tags (from references)

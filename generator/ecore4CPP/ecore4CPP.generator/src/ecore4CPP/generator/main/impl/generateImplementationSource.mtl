@@ -53,17 +53,17 @@
 //Forward declaration includes
 [aClass.generatePersitsenceInclude()/]
 
-[for (element : EClassifier| aClass.includes()->selectByKind(EClass)->select(not doNotGenerate())->asOrderedSet()->sortedBy(name))]
+[for (element : EClassifier| aClass.includes()->selectByKind(EClass)->reject(doNotGenerateEClassifier())->asOrderedSet()->sortedBy(name))]
 #include "[element.generateNamespacePath()/]/[element.name.toUpperFirst()/].hpp"
 [/for]
 
 //Factories an Package includes
-[for (anEPackage: EPackage| aClass.ePackage->closure(p|p.eSuperPackage)->asSet() )]
+[for (anEPackage: EPackage| aClass.ePackage->closure(p|p.eSuperPackage)->asSet()->reject(doNotGenerateEPackage()) )]
 #include "[anEPackage.getRootPackage().name/]/[anEPackage.getNamespacePathWithoutRoot()/][anEPackage.name/]Package.hpp"
 [/for]
 [comment] nur f�r saveContent bei saveHandler->addReference() mit Meta-Datentyp-Vergleich n�tig siehe generatePersistence.mtl
 [/comment]
-[for (aPackage : EPackage| aClass.includes()->selectByKind(EClass)->select(not doNotGenerate())->including(aClass).ePackage->asOrderedSet()->sortedBy(name))]
+[for (aPackage : EPackage| aClass.includes()->selectByKind(EClass)->reject(doNotGenerateEClassifier())->including(aClass).ePackage->asOrderedSet()->sortedBy(name))]
 #include "[aPackage.getRootPackage().name/]/[aPackage.getNamespacePathWithoutRoot()/][aPackage.name/]Package.hpp"
 [/for]
 
@@ -92,20 +92,20 @@ using namespace [aClass.generateNamespaceDefinition()/];
 }
 
 [let ref:OrderedSet(EReference) = aClass.getAllContainers()]
-[for(aReference:EReference | ref->sortedBy(name)) separator('\n')]
-[if(ref->select(eType = aReference.eType)->size()>1 )]
-[if(ref->select(eType = aReference.eType)->asOrderedSet()->sortedBy(name)->first() = aReference)]
+	[for(aReference:EReference | ref->reject(doNotGenerateEStructuralFeature())->sortedBy(name)) separator('\n')]
+		[if(ref->select(eType = aReference.eType)->size()>1 )]
+			[if(ref->select(eType = aReference.eType)->asOrderedSet()->sortedBy(name)->first() = aReference)]
 //Additional constructor for the containments back reference
 [className/]::[className/]([aReference.generateReferenceType(true)/] par_[aReference.eType.name/], const int reference_id)
 :[className/]()
 {
 	switch(reference_id)
 	{	
-	[for(multipleRef : EReference | ref->select(eType.name = aReference.eType.name)->sortedBy(name))]
+	[for(multipleRef : EReference | ref->select(eType.name = aReference.eType.name)->reject(doNotGenerateEStructuralFeature())->sortedBy(name))]
 	case [aReference.eContainingClass.ePackage.generateNamespaceDefinition()/]::[aReference.eContainingClass.ePackage.name/]Package::[multipleRef.getStaticAttributeIDName()/]:
 		m_[multipleRef.name/] = par_[aReference.eType.name/];
 		[if (multipleRef.hasSubset() and multipleRef.upperBound = 1)]
-		[for (m : EReference | multipleRef.oclAsType(EReference).Subset()->selectByKind(EReference).oclAsType(EReference)->select(isBackReference())->asOrderedSet())]
+		[for (m : EReference | multipleRef.oclAsType(EReference).Subset()->selectByKind(EReference)->select(isBackReference())->reject(doNotGenerateEStructuralFeature())->asOrderedSet())]
 		m_[m.name/] = par_[aReference.eType.name/];
 		[/for][/if]
 		 return;
@@ -115,20 +115,20 @@ using namespace [aClass.generateNamespaceDefinition()/];
 	}
    
 }
-[/if]
-[else]
+			[/if]
+		[else]
 //Additional constructor for the containments back reference
 [className/]::[className/]([aReference.generateReferenceType(true)/] par_[aReference.name/])
 :[className/]()
 {
 	m_[aReference.name/] = par_[aReference.name/];
 	[if (aReference.hasSubset() and aReference.upperBound = 1)]
-	[for (m : EReference | aReference.oclAsType(EReference).Subset()->selectByKind(EReference).oclAsType(EReference)->select(isBackReference())->asOrderedSet())]
+	[for (m : EReference | aReference.oclAsType(EReference).Subset()->selectByKind(EReference)->select(isBackReference())->reject(doNotGenerateEStructuralFeature())->asOrderedSet())]
 	m_[m.name/] = par_[aReference.name/];
 	[/for][/if]
 }
-[/if]
-[/for]
+		[/if]
+	[/for]
 [/let]
 
 [comment]Don't forget to call the class contructor before initializing the unions and subsets![/comment]
@@ -143,12 +143,12 @@ using namespace [aClass.generateNamespaceDefinition()/];
 
 [className/]& [className/]::operator=(const [className/] & obj)
 {
-	[if (aClass.eSuperTypes->isEmpty() and not(aClass.name='EObject'))]
+	[if (aClass.eSuperTypes->reject(doNotGenerateEClassifier())->isEmpty() and not(aClass.name='EObject'))]
 	//call overloaded =Operator for each base class
 	ecore::EModelElementImpl::operator=(obj);
 	[else]
 	//call overloaded =Operator for each base class
-	[for (sClass : EClass | aClass.eSuperTypes->asOrderedSet())]
+	[for (sClass : EClass | aClass.eSuperTypes->reject(doNotGenerateEClassifier())->asOrderedSet())]
 	[ClassWithNamespace(aClass, sClass)/]Impl::operator=(obj);
 	[/for]
 	[/if]
@@ -168,7 +168,7 @@ using namespace [aClass.generateNamespaceDefinition()/];
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy [aClass.name.toUpperFirst()/] "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
 	//Clone Attributes with (deep copy)
-	[for (att : EAttribute | aClass.eAttributes->reject(isRedefiningContainer())->asOrderedSet()->sortedBy(name))]
+	[for (att : EAttribute | aClass.eAttributes->reject(isRedefiningContainer())->reject(doNotGenerateEStructuralFeature())->asOrderedSet()->sortedBy(name))]
 		[if (not(att.upperBound = 1))] [comment it is a Bag of Elements /]
 			[if (not att.eGenericType.eClassifier.oclIsKindOf(EDataType))] [comment it is an Bag/Subset of non standard Elements /]
 	[att.generateStructuralFeatureType(true)/] [att.name/]Container = obj.[att.GetterName()/]();
@@ -259,10 +259,10 @@ using namespace [aClass.generateNamespaceDefinition()/];
 	[/for]
 
 	//copy references with no containment (soft copy)
-	[for (ref : EReference | aClass.eReferences->select(aRef: EReference | aRef.isBackReference() or (aRef.containment = false and not aRef.hasSubset()))->reject(isRedefiningContainer())->asOrderedSet()->sortedBy(name))]
-	[if (ref.hasGetter())]
+	[for (ref : EReference | aClass.eReferences->select(aRef: EReference | aRef.isBackReference() or (aRef.containment = false and not aRef.hasSubset()))->reject(isRedefiningContainer())->reject(doNotGenerateEStructuralFeature())->asOrderedSet()->sortedBy(name))]
+		[if (ref.hasGetter())]
 	m_[ref.name/]  = obj.[ref.GetterName()/]();
-	[/if]
+		[/if]
 	[/for]
 	[comment]References must be copied in this order:
 	1st Unions
@@ -270,7 +270,7 @@ using namespace [aClass.generateNamespaceDefinition()/];
 	3rd all the rest.
 	[/comment]
 	//Clone references with containment (deep copy)
-	[for (ref : EReference | aClass.eReferences->select(eRef: EReference|(eRef.containment = true or eRef.hasSubset()) and (not eRef.isUnion()) and (not eRef.isBackReference()))->reject(isRedefiningContainer())->asOrderedSet()->sortedBy(name)) separator('\n')]
+	[for (ref : EReference | aClass.eReferences->select(eRef: EReference|(eRef.containment = true or eRef.hasSubset()) and (not eRef.isUnion()) and (not eRef.isBackReference()))->reject(isRedefiningContainer())->reject(doNotGenerateEStructuralFeature())->asOrderedSet()->sortedBy(name)) separator('\n')]
 	//clone reference '[ref.name/]'
 	[if (ref.upperBound <> 1)]
 		[if (ref.hasSetter())]
@@ -386,7 +386,7 @@ using namespace [aClass.generateNamespaceDefinition()/];
 	[else] [comment copy simple attribute/]
 	m_[ref.name/] = obj.[ref.GetterName()/]()->copy();
 	[/if][/for]
-	[for (aReference : EReference | aClass.eReferences->select(eRef: EReference|eRef.containment = true and not eRef.isUnion())->asOrderedSet()->sortedBy(name))]
+	[for (aReference : EReference | aClass.eReferences->select(eRef: EReference|eRef.containment = true and not eRef.isUnion())->reject(doNotGenerateEStructuralFeature())->asOrderedSet()->sortedBy(name))]
 	[aReference.InitReferences()/]
 	[/for]
 	return *this;
@@ -411,21 +411,21 @@ std::shared_ptr<[needNamespace(aClass.ePackage, 'EClass')/]> [className/]::eStat
 //*********************************
 // Attribute Setter Getter
 //*********************************
-[for (aAttribute : EAttribute | aClass.eAttributes->asOrderedSet()->sortedBy(name)) separator ('\n')]
+[for (aAttribute : EAttribute | aClass.eAttributes->reject(doNotGenerateEStructuralFeature())->asOrderedSet()->sortedBy(name)) separator ('\n')]
 [aAttribute.generateAttributeCpp()/]
 [/for]
 
 //*********************************
 // Operations
 //*********************************
-[for (aOperation : EOperation | aClass.eOperations->asOrderedSet()->sortedBy(name)) separator ('\n')]
+[for (aOperation : EOperation | aClass.eOperations->reject(doNotGenerateEOperation())->asOrderedSet()->sortedBy(name)) separator ('\n')]
 [aOperation.generateOperationImplementation()/]
 [/for]
 
 //*********************************
 // References
 //*********************************
-[for (aReference : EReference | aClass.eReferences->asOrderedSet()->sortedBy(name)) separator ('\n')]
+[for (aReference : EReference | aClass.eReferences->reject(doNotGenerateEStructuralFeature())->asOrderedSet()->sortedBy(name)) separator ('\n')]
 [aReference.generateReferenceCpp()/]
 [/for]
 
@@ -435,7 +435,7 @@ std::shared_ptr<[needNamespace(aClass.ePackage, 'EClass')/]> [className/]::eStat
 [aClass.generateUnionGetterCpp()/]
 
 [aClass.generateGetThisPtrCPP()/]
-[aClass.generateEContainerOperationCPP()/]
+[aClass.generateEContainerOperationImplementation()/]
 
 //*********************************
 // Structural Feature Getter/Setter

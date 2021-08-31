@@ -58,7 +58,7 @@ namespace [anEPackage.generateNamespaceDefinition()/]
 			virtual std::shared_ptr<[needNamespace(anEPackage, 'EObject')/]> create(const int classID,  std::shared_ptr<ecore::EObject> container = nullptr, const int referenceID = -1)[if (not generateObjectMonitoring())] const[/if] = 0;
 			virtual std::shared_ptr<[needNamespace(anEPackage, 'EObject')/]> create(std::shared_ptr<[needNamespace(anEPackage, 'EClass')/]> _class, std::shared_ptr<EObject> _container=nullptr, const int referenceID = -1)[if (not generateObjectMonitoring())] const[/if] = 0;
 
-			[anEPackage.eClassifiers->selectByKind(EClass)->select(not doNotGenerate())->sortedBy(name).generateClassCreate(false)/]
+			[anEPackage.eClassifiers->selectByKind(EClass)->reject(doNotGenerateEClassifier())->sortedBy(name).generateClassCreate(false)/]
 [if (generateObjectMonitoring())]
 			virtual void print() = 0;
 			virtual void add(std::shared_ptr<ecore::EObject> obj) = 0;
@@ -76,7 +76,7 @@ namespace [anEPackage.generateNamespaceDefinition()/]
 	class [anEPackage.name.concat('Package')/];
 }
 [/if]
-[for (subPackage : EPackage | anEPackage.eSubpackages->sortedBy(name))]
+[for (subPackage : EPackage | anEPackage.eSubpackages->reject(doNotGenerateEPackage())->sortedBy(name))]
 [subPackage.generateForwardDeclarations()/]
 [/for]
 [comment] Deprecated?
@@ -98,9 +98,9 @@ namespace [includeNamespace.generateNamespaceDefinition()/]
 [/let]
 [/comment]
 [comment Forward declarations for composition container classes /]
-[let packageCompositionContainerClasses : OrderedSet(EClass) = anEPackage.eClassifiers->filter(EClass).getAllCompositionsToClass().eContainingClass->asOrderedSet()]
+[let packageCompositionContainerClasses : OrderedSet(EClass) = anEPackage.eClassifiers->filter(EClass)->reject(doNotGenerateEClassifier()).getAllCompositionsToClass()->reject(doNotGenerateEStructuralFeature()).eContainingClass->asOrderedSet()]
 	[if (packageCompositionContainerClasses->size() > 0)]
-		[for (aForwardDeclaredPackage : EPackage | packageCompositionContainerClasses.ePackage->asOrderedSet()->reject(p : EPackage | p = anEPackage)->sortedBy(name))]
+		[for (aForwardDeclaredPackage : EPackage | packageCompositionContainerClasses.ePackage->asOrderedSet()->reject(p : EPackage | p = anEPackage)->reject(doNotGenerateEPackage())->sortedBy(name))]
 namespace [aForwardDeclaredPackage.generateNamespaceDefinition()/]
 {
 			[for (forwardDeclaredClass : EClass | packageCompositionContainerClasses->select(ePackage = aForwardDeclaredPackage)->asOrderedSet()->sortedBy(name))]

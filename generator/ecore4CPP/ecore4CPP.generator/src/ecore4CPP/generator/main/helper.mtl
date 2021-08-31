@@ -42,6 +42,7 @@
 [query public generateNamespaceDefinition(anEClassifier : EClassifier) : String = if(anEClassifier.oclIsUndefined()) then '' else if(anEClassifier.ePackage.oclIsUndefined()) then '' else anEClassifier.ePackage.getNamespace('::', false) endif endif/]
 [query public generateNamespaceDefinition(anEStructuralFeature : EStructuralFeature) : String = anEStructuralFeature.eContainingClass.generateNamespaceDefinition() + '::' + anEStructuralFeature.eContainingClass.name + '::' + anEStructuralFeature.name/]
 [query public generateNamespaceDefinition(anEOperation : EOperation) : String = anEOperation.eContainingClass.generateNamespaceDefinition() + '::' + anEOperation.eContainingClass.name  + '::' + anEOperation.name/]
+[query public generateNamespaceDefinition(anEParameter : EParameter) : String = anEParameter.eOperation.generateNamespaceDefinition() + '::' + anEParameter.name/]
 [query public generateNamespaceDefinition(anEPackage : EPackage) : String = anEPackage.getNamespace('::', false) /]
 [query public getRootPackage(aEPackage : EPackage) : EPackage = if(eSuperPackage.oclIsUndefined()) then aEPackage else eSuperPackage.getRootPackage() endif /]
 [query public getRootPackage(aEClassifier : EClassifier) : EPackage = if(aEClassifier.ePackage.oclIsUndefined()) then aEClassifier.ePackage else aEClassifier.ePackage.getRootPackage() endif /]
@@ -78,7 +79,14 @@
 [query private isDirectOrIndirectCompositionToClass(aComposition : EReference, anEClass : EClass) : Boolean = aComposition.containment and (aComposition.eReferenceType = anEClass or aComposition.eReferenceType.isSuperTypeOf(anEClass)) /]
 
 [query public hasImplOnly(aModelElement : EModelElement) : Boolean =  aModelElement.hasKey(keyImplOnly())/]
-[query public doNotGenerate(aModelElement : EModelElement) : Boolean =  aModelElement.hasKey(keyDoNotGenerate())/]
+[query public doNotGenerateEModelElement(aModelElement : EModelElement) : Boolean =  aModelElement.hasKey(keyDoNotGenerate())/]
+[query public doNotGenerateEPackage(anEPackage : EPackage) : Boolean = if(anEPackage.doNotGenerateEModelElement()) then true else if(not anEPackage.eSuperPackage.oclIsUndefined()) then anEPackage.eSuperPackage.doNotGenerateEPackage() else false endif endif /]
+[query public doNotGenerateEClassifier(anEClassifier : EClassifier) : Boolean = if(anEClassifier.doNotGenerateEModelElement()) then true else if (not anEClassifier.ePackage.oclIsUndefined()) then anEClassifier.ePackage.doNotGenerateEPackage() else false endif endif /]
+[query public doNotGenerateEStructuralFeature(anEStructuralFeature : EStructuralFeature) : Boolean = anEStructuralFeature.doNotGenerateEModelElement() or anEStructuralFeature.eContainingClass.doNotGenerateEClassifier() /]
+[query public doNotGenerateEOperation(anEOperation : EOperation) : Boolean = anEOperation.doNotGenerateEModelElement() or anEOperation.eContainingClass.doNotGenerateEClassifier() /]
+[query public doNotGenerateEParameter(anEParameter : EParameter) : Boolean = anEParameter.doNotGenerateEModelElement() or anEParameter.eOperation.doNotGenerateEOperation() /]
+[query public doNotGenerateEEnumLiteral(anEEnumLiteral : EEnumLiteral) : Boolean = anEEnumLiteral.doNotGenerateEModelElement() or anEEnumLiteral.eEnum.doNotGenerateEClassifier() /]
+
 [query public hasImplSetterOnly(aModelElement : EModelElement) : Boolean = aModelElement.hasKey(keyImplSetterOnly())/]
 
 [query public SetterName(feature : EStructuralFeature) : String = if hasKey(keySetterName()) then valueKey(keySetterName()) else 'set'.concat(feature.name.toUpperFirst()) endif/]
@@ -255,7 +263,7 @@
 [query public getPackage_eInstance(aClass : EClassifier) : String = aClass.getRootPackage().name.concat(getPackageAccess(aClass, true)).concat('::').concat(aClass.ePackage.name).concat('Package::eInstance()')/]
 
 [template public generateAbstractDataTypesForwardDeclaration(anEClass : EClass)]
-[if (anEClass.eReferences->select(upperBound <> 1 and not hasSubset() and not isUnion())->size() > 0 or anEClass.eOperations.eParameters->select((eType.requiresBag()  or upperBound <> 1) and not doNotGenerate())->size() > 0)]
+[if (anEClass.eReferences->select(upperBound <> 1 and not hasSubset() and not isUnion())->size() > 0 or anEClass.eOperations.eParameters->select((eType.requiresBag()  or upperBound <> 1) and not doNotGenerateEModelElement())->size() > 0)]
 template<class T> class Bag; 
 [/if]
 [if (anEClass.eReferences->select(hasSubset() and not isSubsetUnion())->size() > 0)]
@@ -278,7 +286,7 @@ template<class T> class Union;[/if]
 		[if (anEClass.eAllReferences->select((isUnion() and not isSubsetUnion()) or eOpposite.existsAndIsUnion())->size() > 0)]
 #include "abstractDataTypes/Union.hpp"
 		[else]
-			[if (anEClass.eAllReferences->select(upperBound <> 1 and not hasSubset() and not isUnion())->size() > 0 or anEClass.eAllOperations.eParameters->select((eType.requiresBag()  or upperBound <> 1) and not doNotGenerate())->size() > 0)]
+			[if (anEClass.eAllReferences->select(upperBound <> 1 and not hasSubset() and not isUnion())->size() > 0 or anEClass.eAllOperations.eParameters->select((eType.requiresBag()  or upperBound <> 1) and not doNotGenerateEModelElement())->size() > 0)]
 #include "abstractDataTypes/Bag.hpp"
 			[/if]
 		[/if]

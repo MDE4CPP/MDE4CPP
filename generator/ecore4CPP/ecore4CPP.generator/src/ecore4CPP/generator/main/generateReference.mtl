@@ -19,11 +19,12 @@
 [import ecore4CPP::generator::main::helper /]
 [import ecore4CPP::generator::main::helpers::keywords /]
 [import ecore4CPP::generator::main::helpers::IDHelper /]
+[import ecore4CPP::generator::main::validation::validation /]
 
 [query public hasSetter(anEReference : EReference) : EBoolean = anEReference.changeable and anEReference.upperBound=1 and not hasKey(keyNoSetter()) /]
 [query public hasGetter(anEReference : EReference) : EBoolean = not hasKey(keyNoGetter()) /]
 
-[template public generateReferenceDecl(anEReference : EReference, impl : EBoolean) ? (not doNotGenerate())]
+[template public generateReferenceAccessorsDeclaration(anEReference : EReference, impl : EBoolean)]
 [anEReference.generateReferenceGetterDeclaretaion(impl)/]
 [anEReference.generateReferenceSetterDeclaretaion(impl)/]
 [for (redefinedElement : EObject | anEReference.getAllRedefinedElements())]
@@ -48,7 +49,10 @@ virtual void [anEReference.SetterName()/]([if (not anEReference.eGenericType.eCl
 ) [abstractSufix(impl)/];
 [/template]
 
-[template public generateProtectedReference(anEReference : EReference) ? (not doNotGenerate())]
+[template public generateReferenceProtectedMember(anEReference : EReference)]
+[if (anEReference.eReferenceType.doNotGenerateEClassifier())]
+[printWarning('eReferenceType ' + anEReference.eReferenceType.generateNamespaceDefinition() + '::' + anEReference.eReferenceType.name + ' is configured as doNotGenerate for instance of EReference: ' + anEReference.generateNamespaceDefinition(), 'ecore4CPP::generator::main::generateReference:generateProtectedReference')/]
+[/if]
 [anEReference.generateDocumentation()/]
 [if(hasKey(keyQualify()))][valueKey(keyQualify())/] [/if][if(not (anEReference.upperBound = 1))]mutable [/if][anEReference.generateReferenceType()/] m_[anEReference.name/];
 [/template]
@@ -98,7 +102,7 @@ m_[eReference.name/].reset(new [eReference.generateReferenceType(false)/]());
  * Section for the Reference cpp implementation
 */]
 
-[template public generateReferenceCpp(anEReference : EReference) ? (not doNotGenerate())]
+[template public generateReferenceCpp(anEReference : EReference) ? (not doNotGenerateEModelElement())]
 /*
 Getter & Setter for reference [anEReference.name/]
 */
@@ -237,7 +241,7 @@ void [anEReference.eContainingClass.name.toUpperFirst()/]Impl::[redefinedERefere
 [** Handling of doNotGenerate: if an Attribute has a Type on an external Class, which is not generated, then create a dummy EClass /]
 [template public generateReferenceInitialization(anEReference : EReference)]
 [anEReference.getClassMemberName()/]->setName("[anEReference.name/]");
-[if (anEReference.eGenericType.eClassifier.doNotGenerate())]
+[if (anEReference.eGenericType.eClassifier.doNotGenerateEClassifier())]
 {
 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
 	std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);

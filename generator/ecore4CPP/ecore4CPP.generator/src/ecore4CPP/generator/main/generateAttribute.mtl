@@ -19,6 +19,7 @@
 [import ecore4CPP::generator::main::helper /]
 [import ecore4CPP::generator::main::helpers::keywords /]
 [import ecore4CPP::generator::main::helpers::IDHelper /]
+[import ecore4CPP::generator::main::validation::validation /]
 
 [query public hasSetter(anEAttribute : EAttribute) : Boolean = anEAttribute.changeable and anEAttribute.upperBound = 1 and not hasKey(keyNoSetter())/]
 [query public hasGetter(anEAttribute : EAttribute) : EBoolean = not hasKey(keyNoGetter()) /]
@@ -41,19 +42,22 @@
 [/if]
 [/template]
 
-[template public generateAttributeAccessorsDecl(anEAttribute : EAttribute, impl : Boolean) ? (not doNotGenerate())]
+[template public generateAttributeAccessorsDeclaration(anEAttribute : EAttribute, impl : Boolean)]
 [anEAttribute.generateAttributeGetterDecleration(impl)/]
 [anEAttribute.generateAttributeSetterDecleration(impl)/]
 [for (redefinedElement : EObject | anEAttribute.getAllRedefinedElements())]
-[if (redefinedElement.oclIsKindOf(EAttribute))]
-[let redefinedEAttribute : EAttribute = redefinedElement.oclAsType(EAttribute)]
-[if (redefinedEAttribute.hasSetter() and not (anEAttribute.eContainingClass = redefinedEAttribute.eContainingClass))]
+	[if (redefinedElement.oclIsKindOf(EAttribute))]
+	[let redefinedEAttribute : EAttribute = redefinedElement.oclAsType(EAttribute)]
+		[if (redefinedEAttribute.hasSetter() and not (anEAttribute.eContainingClass = redefinedEAttribute.eContainingClass) and not (redefinedEAttribute.doNotGenerateEStructuralFeature()))]
 /*Additional Setter for '[redefinedEAttribute.eContainingClass.name/]::[redefinedEAttribute.name/]' redefined by attribute '[anEAttribute.name/]'*/
 [redefinedEAttribute.generateAttributeSetterDecleration(impl)/]
 [/if][/let][/if][/for]
 [/template]
 
-[template public generateAttributeProtectedMember(anEAttribute : EAttribute) ? (not doNotGenerate())]
+[template public generateAttributeProtectedMember(anEAttribute : EAttribute)]
+[if (anEAttribute.eAttributeType.doNotGenerateEClassifier())]
+[printWarning('eAttributeType ' + anEAttribute.eAttributeType.generateNamespaceDefinition() + '::' + anEAttribute.eAttributeType.name + ' is configured as doNotGenerate for instance of EAttribute: ' + anEAttribute.generateNamespaceDefinition(), 'ecore4CPP::generator::main::generateAttribute:generateAttributeProtectedMember')/]
+[/if]
 [anEAttribute.generateDocumentation()/]
 [if (anEAttribute.upperBound <> 1)]
 [if(hasKey(keyQualify()))][valueKey(keyQualify())/] [/if]mutable [anEAttribute.generateStructuralFeatureType(true)/] m_[anEAttribute.name/]; 
@@ -80,7 +84,7 @@ virtual void [anEAttribute.SetterName()/] ([anEAttribute.generateStructuralFeatu
  * Section for the Attribute cpp implementation
 */]
 
-[template public generateAttributeCpp(anEAttribute : EAttribute) ? (not doNotGenerate())]
+[template public generateAttributeCpp(anEAttribute : EAttribute)]
 /*
 Getter & Setter for attribute [anEAttribute.name/]
 */
@@ -88,16 +92,16 @@ Getter & Setter for attribute [anEAttribute.name/]
 [anEAttribute.generateAttributeSetterImplementationCpp()/]
 [comment additional setters for redefined attributes are only generated for upperBound=1, since no setters are generated for * multiplicity attributes /]
 [if (anEAttribute.upperBound = 1)]
-[for (redefinedElement : EObject | anEAttribute.getAllRedefinedElements())]
-[if (redefinedElement.oclIsKindOf(EAttribute))]
-[let redefinedEAttribute : EAttribute = redefinedElement.oclAsType(EAttribute)]
-[if(redefinedEAttribute.hasSetter() and not (anEAttribute.eContainingClass = redefinedEAttribute.eContainingClass))]
+	[for (redefinedElement : EObject | anEAttribute.getAllRedefinedElements())]
+		[if (redefinedElement.oclIsKindOf(EAttribute))]
+		[let redefinedEAttribute : EAttribute = redefinedElement.oclAsType(EAttribute)]
+			[if(redefinedEAttribute.hasSetter() and not (anEAttribute.eContainingClass = redefinedEAttribute.eContainingClass) and not (redefinedEAttribute.doNotGenerateEStructuralFeature()))]
 /*Additional Setter for redefined attribute '[redefinedEAttribute.eContainingClass.name/]::[redefinedEAttribute.name/]'*/
 [redefinedEAttribute.generateRedefinedAttributeSetterImplementationCpp(anEAttribute)/]
-[/if]
-[/let]
-[/if]
-[/for]
+			[/if]
+		[/let]
+		[/if]
+	[/for]
 [/if]
 [/template]
 
@@ -111,8 +115,10 @@ Getter & Setter for attribute [anEAttribute.name/]
 [else]
 	[if (anEAttribute.isRedefiningContainer())]
 		[let redefinedContainer : EAttribute = anEAttribute.getDirectlyRedefinedElements()->first().oclAsType(EAttribute)]
+			[if (not redefinedContainer.doNotGenerateEStructuralFeature())]
 	//Getter call of redefined container reference [redefinedContainer.eContainingClass.name/]::[redefinedContainer.name/] 
 	return [if(redefinedContainer.eContainingClass = anEAttribute.eContainingClass)]this->[else][redefinedContainer.eContainingClass.transformType()/]Impl::[/if]get[redefinedContainer.name.toUpperFirst()/]();
+			[/if]
 		[/let]
 	[else]
 		[if (not (anEAttribute.upperBound = 1))]
@@ -143,20 +149,22 @@ void [anEAttribute.eContainingClass.name.toUpperFirst()/]Impl::[anEAttribute.Set
 
 [template private generateRedefinedAttributesSet(anEAttribute : EAttribute)]
 [for (redefinedElement : EObject | anEAttribute.getDirectlyRedefinedElements())]
-[if (redefinedElement.oclIsKindOf(EAttribute))]
-[let redefinedEAttribute : EAttribute = redefinedElement.oclAsType(EAttribute)]
-[if(redefinedEAttribute.hasSetter())]
+	[if (redefinedElement.oclIsKindOf(EAttribute))]
+	[let redefinedEAttribute : EAttribute = redefinedElement.oclAsType(EAttribute)]
+		[if (not (redefinedEAttribute.doNotGenerateEStructuralFeature()))]
+			[if(redefinedEAttribute.hasSetter())]
 //additional setter call for redefined attribute [redefinedEAttribute.eContainingClass.name/]::[redefinedEAttribute.name/]
 [if(redefinedEAttribute.eContainingClass = anEAttribute.eContainingClass)]this->[else][redefinedEAttribute.eContainingClass.transformType()/]Impl::[/if]set[redefinedEAttribute.name.toUpperFirst()/](_[anEAttribute.name/]);
-[else]
-[if (redefinedEAttribute.upperBound = 1)]
+			[else]
+				[if (redefinedEAttribute.upperBound = 1)]
 m_[redefinedEAttribute.name/] = this->[if(anEAttribute.hasGetter())][anEAttribute.GetterName()/]()[else]m_[anEAttribute.name/][/if];
-[/if]
+				[/if]
 [comment recursive call to set possibly redefined attributes of redefinedEAttribute --> would normally be handled by calling the setter of redefinedEAttribute, but we do not have a setter here /]
 [redefinedEAttribute.generateRedefinedAttributesSet()/]
-[/if]
-[/let]
-[/if]
+			[/if]
+		[/if]
+	[/let]
+	[/if]
 [/for]
 [/template]
 
@@ -203,7 +211,7 @@ void [anEAttribute.eContainingClass.name.toUpperFirst()/]Impl::[redefinedEAttrib
 [template public generateAttributeInitialization(anEAttribute : EAttribute)]
 [anEAttribute.getClassMemberName()/] = [anEAttribute.packageGetter()/];
 [anEAttribute.getClassMemberName()/]->setName("[anEAttribute.name/]");
-[if (anEAttribute.eType.doNotGenerate())]
+[if (anEAttribute.eType.doNotGenerateEClassifier())]
 {  [comment external Classes for instance C++ std::map are not generated and has no metamodel informations/]
 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
 	std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);

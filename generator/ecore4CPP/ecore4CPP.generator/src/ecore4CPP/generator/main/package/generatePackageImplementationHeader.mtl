@@ -40,7 +40,7 @@
 
 namespace [anEPackage.generateNamespaceDefinition()/] 
 {
-[for (elements : EClass| anEPackage.eClassifiers->selectByKind(EClass)->select(not doNotGenerate())->sortedBy(name)) separator ('\n')]
+[for (elements : EClass| anEPackage.eClassifiers->selectByKind(EClass)->reject(doNotGenerateEClassifier())->sortedBy(name)) separator ('\n')]
 	class [elements.name/];[/for]
 [for (aSubPackage : EPackage| anEPackage.eSubpackages->selectByKind(EPackage)->sortedBy(name)) separator ('\n')]
 	namespace [aSubPackage.name/] 
@@ -69,26 +69,26 @@ namespace [anEPackage.generateNamespaceDefinition()/]
 		public:
 			virtual ~[anEPackage.name.concat('PackageImpl')/]();
 
-[for (aClass : EClass | anEPackage.eClassifiers->selectByKind(EClass)->select(not doNotGenerate())->asOrderedSet()->sortedBy(name)) separator ('\n')]
+[for (aClass : EClass | anEPackage.eClassifiers->selectByKind(EClass)->reject(doNotGenerateEClassifier())->asOrderedSet()->sortedBy(name)) separator ('\n')]
 			// Begin Class [aClass.name.toUpperFirst()/]
 			//Class and Feature Getter
 			[aClass.generateModelElementGetter(anEPackage, true)/]
-			[aClass.eAttributes->sortedBy(name).generateModelElementGetter(anEPackage, true)/]
-			[aClass.eReferences->sortedBy(name).generateModelElementGetter(anEPackage, true)/]
-			[aClass.eOperations->sortedBy(name).generateModelElementGetter(anEPackage, true)/]
+			[aClass.eAttributes->reject(doNotGenerateEStructuralFeature())->sortedBy(name).generateModelElementGetter(anEPackage, true)/]
+			[aClass.eReferences->reject(doNotGenerateEStructuralFeature())->sortedBy(name).generateModelElementGetter(anEPackage, true)/]
+			[aClass.eOperations->reject(doNotGenerateEOperation())->sortedBy(name).generateModelElementGetter(anEPackage, true)/]
 			// End Class [aClass.name.toUpperFirst()/]
 [/for]
 
-			[anEPackage.eClassifiers->selectByKind(EDataType).generateModelElementGetter(anEPackage, true)/]
+			[anEPackage.eClassifiers->selectByKind(EDataType)->reject(doNotGenerateEClassifier()).generateModelElementGetter(anEPackage, true)/]
 			// SubPackages Getters
-			[anEPackage.eSubpackages->sortedBy(name).generateSubPackageGetter(true)/]
+			[anEPackage.eSubpackages->reject(doNotGenerateEPackage())->sortedBy(name).generateSubPackageGetter(true)/]
 
 		private:
-			[anEPackage.eClassifiers->selectByKind(EClass)->select(not doNotGenerate())->sortedBy(name).generatePrivatePackageMember(anEPackage)/]
-			[anEPackage.eClassifiers->selectByKind(EDataType)->sortedBy(name).generatePrivatePackageMember(anEPackage)/]
-			[anEPackage.eClassifiers->selectByKind(EClass)->select(not doNotGenerate()).eAttributes->sortedBy(name).generatePrivatePackageMember(anEPackage)/]
-			[anEPackage.eClassifiers->selectByKind(EClass)->select(not doNotGenerate()).eReferences->sortedBy(name).generatePrivatePackageMember(anEPackage)/]
-			[anEPackage.eClassifiers->selectByKind(EClass)->select(not doNotGenerate()).eOperations->sortedBy(name).generatePrivatePackageMember(anEPackage)/]
+			[anEPackage.eClassifiers->selectByKind(EClass)->reject(doNotGenerateEClassifier())->sortedBy(name).generatePrivatePackageMember(anEPackage)/]
+			[anEPackage.eClassifiers->selectByKind(EDataType)->reject(doNotGenerateEClassifier())->sortedBy(name).generatePrivatePackageMember(anEPackage)/]
+			[anEPackage.eClassifiers->selectByKind(EClass).eAttributes->reject(doNotGenerateEStructuralFeature())->sortedBy(name).generatePrivatePackageMember(anEPackage)/]
+			[anEPackage.eClassifiers->selectByKind(EClass).eReferences->reject(doNotGenerateEStructuralFeature())->sortedBy(name).generatePrivatePackageMember(anEPackage)/]
+			[anEPackage.eClassifiers->selectByKind(EClass).eOperations->reject(doNotGenerateEOperation())->sortedBy(name).generatePrivatePackageMember(anEPackage)/]
 
 			friend class [anEPackage.name.concat('Package')/];
 
@@ -104,12 +104,12 @@ namespace [anEPackage.generateNamespaceDefinition()/]
 			void initializePackageContents();
 
 		private:
-[for (aClass : EClass | anEPackage.eClassifiers->selectByKind(EClass)->select(not doNotGenerate())->asOrderedSet()->sortedBy(name))]
+[for (aClass : EClass | anEPackage.eClassifiers->selectByKind(EClass)->reject(doNotGenerateEClassifier())->asOrderedSet()->sortedBy(name))]
 			void create[aClass.name.toUpperFirst()/]Content(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
 [/for]
 			void createPackageEDataTypes(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
 
-[for (aClass : EClass | anEPackage.eClassifiers->selectByKind(EClass)->select(not doNotGenerate())->asOrderedSet()->sortedBy(name))]
+[for (aClass : EClass | anEPackage.eClassifiers->selectByKind(EClass)->reject(doNotGenerateEClassifier())->asOrderedSet()->sortedBy(name))]
 			void initialize[aClass.name.toUpperFirst()/]Content();
 [/for]
 			void initializePackageEDataTypes();

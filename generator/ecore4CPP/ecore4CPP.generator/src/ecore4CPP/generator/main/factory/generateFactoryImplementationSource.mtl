@@ -42,7 +42,7 @@ using namespace [anEPackage.generateNamespaceDefinition()/];
 
 [className/]::[className/]()
 {
-	[for (aClass : EClass | anEPackage.eClassifiers->selectByKind(EClass)->select(not doNotGenerate())->asOrderedSet()->sortedBy(name)) ? (aClass.abstract=false)]
+	[for (aClass : EClass | anEPackage.eClassifiers->selectByKind(EClass)->reject(doNotGenerateEClassifier())->asOrderedSet()->sortedBy(name)) ? (aClass.abstract=false)]
 	m_idMap.insert(std::make_pair("[aClass.generateTypeClass()/]", [anEPackage.name/]Package::[aClass.getStaticAttributeIDName()/]));
 	[/for]
 [if (generateObjectMonitoring())]
@@ -128,8 +128,8 @@ std::shared_ptr<[needNamespace(anEPackage, 'EObject')/]> [className/]::create(co
 {
 	switch(metaElementID)
 	{
-	[for (aClass : EClass | anEPackage.eClassifiers->selectByKind(EClass)->select(not doNotGenerate())->asOrderedSet()->sortedBy(name)) ? (aClass.abstract=false)]
-	[let ref:OrderedSet(EReference) = aClass.getAllCompositionsToClass()]
+	[for (aClass : EClass | anEPackage.eClassifiers->selectByKind(EClass)->reject(doNotGenerateEClassifier())->asOrderedSet()->sortedBy(name)) ? (aClass.abstract=false)]
+	[let ref:OrderedSet(EReference) = aClass.getAllCompositionsToClass()->reject(doNotGenerateEStructuralFeature())]
 		case [anEPackage.name/]Package::[aClass.getStaticAttributeIDName()/]:
 		{
 [if(ref->size()>0)]
@@ -198,7 +198,7 @@ std::shared_ptr<[needNamespace(anEPackage, 'EObject')/]> [className/]::create(st
     return nullptr;
 }
 
-[for (aClass : EClass | anEPackage.eClassifiers->selectByKind(EClass)->select(not doNotGenerate())->asOrderedSet()->sortedBy(name)) ? (aClass.abstract=false)]
+[for (aClass : EClass | anEPackage.eClassifiers->selectByKind(EClass)->reject(doNotGenerateEClassifier())->asOrderedSet()->sortedBy(name)) ? (aClass.abstract=false)]
 std::shared_ptr<[aClass.generateTypeClass()/]> [className/]::create[aClass.name/](const int metaElementID/*=-1*/)[if (not generateObjectMonitoring())] const[/if]
 {
 	std::shared_ptr<[aClass.generateTypeClass()/]Impl> element(new [aClass.generateTypeClass()/]Impl());
@@ -209,7 +209,7 @@ std::shared_ptr<[aClass.generateTypeClass()/]> [className/]::create[aClass.name/
 [/if]
 	return element;
 }
-[let allCompositionsToClass : OrderedSet(EReference) = aClass.getAllCompositionsToClass()]
+[let allCompositionsToClass : OrderedSet(EReference) = aClass.getAllCompositionsToClass()->reject(doNotGenerateEStructuralFeature())]
 [for(currentCompositionToClass : EReference | allCompositionsToClass->sortedBy(name))]
 [if not (currentCompositionToClass.oclIsUndefined() or currentCompositionToClass.eContainingClass.oclIsUndefined())]
 	[if (currentCompositionToClass.eOpposite->isEmpty())]
@@ -286,7 +286,7 @@ return element;
 [/template]
 
 [template public generateFactoryImports(anEPackage : EPackage)]
-[for (elements : EClassifier| anEPackage.eClassifiers->selectByKind(EClass)->select(not doNotGenerate())->asOrderedSet()->sortedBy(name))]
+[for (elements : EClassifier| anEPackage.eClassifiers->selectByKind(EClass)->reject(doNotGenerateEClassifier())->asOrderedSet()->sortedBy(name))]
 #include "[elements.generateNamespacePath()/]/impl/[elements.name.toUpperFirst().concat('Impl.hpp')/]"
 [/for]
 [comment] keine Subpackages in Factories --> SubFactories
@@ -302,9 +302,9 @@ return element;
 [/for]
 [/let]
 [/comment]
-[let packageCompositionContainerClasses : OrderedSet(EClass) = anEPackage.eClassifiers->filter(EClass).getAllCompositionsToClass().eContainingClass->asOrderedSet()]
+[let packageCompositionContainerClasses : OrderedSet(EClass) = anEPackage.eClassifiers->filter(EClass)->reject(doNotGenerateEClassifier()).getAllCompositionsToClass()->reject(doNotGenerateEStructuralFeature()).eContainingClass->asOrderedSet()]
 	[if (packageCompositionContainerClasses->size() > 0)]
-		[for (aForwardDeclaredPackage : EPackage | packageCompositionContainerClasses.ePackage->asOrderedSet()->reject(p : EPackage | p = anEPackage)->sortedBy(name))]
+		[for (aForwardDeclaredPackage : EPackage | packageCompositionContainerClasses.ePackage->asOrderedSet()->reject(p : EPackage | p = anEPackage)->reject(doNotGenerateEPackage())->sortedBy(name))]
 #include "[aForwardDeclaredPackage.generateNamespacePath()/]/[aForwardDeclaredPackage.name/]Package.hpp"
 			[for (forwardDeclaredClass : EClass | packageCompositionContainerClasses->select(ePackage = aForwardDeclaredPackage)->asOrderedSet()->sortedBy(name))]
 #include "[forwardDeclaredClass.generateNamespacePath()/]/[forwardDeclaredClass.name.toUpperFirst()/].hpp"

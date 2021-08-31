@@ -19,18 +19,28 @@
 [import ecore4CPP::generator::main::helper /]
 [import ecore4CPP::generator::main::helpers::keywords /]
 [import ecore4CPP::generator::main::helpers::IDHelper /]
+[import ecore4CPP::generator::main::validation::validation /]
 
 [***###########################################################################################
  * Section for creating the EAttribute elements in the model factory
 */]
 
-[template public generateOperationDecl(anEOperation : EOperation, impl: Boolean)]
-[if (((impl or (not hasImplOnly())) and (not (doNotGenerate() or ignore()))))]
+[template public generateOperationDeclaration(anEOperation : EOperation, impl: Boolean)]
+[if (((impl or (not hasImplOnly())) and (not ignore())))]
+[comment "if impl" so the warning message will only be printed once (also in case that anEOperation is ImplOnly) /]
+[if (impl and anEOperation.eType.doNotGenerateEClassifier())]
+[printWarning('eType ' + anEOperation.eType.generateNamespaceDefinition() + '::' + anEOperation.eType.name + ' is configured as doNotGenerate for instance of EOperation: ' + anEOperation.generateNamespaceDefinition(), 'ecore4CPP::generator::main::generateOperation:generateOperationDeclaration')/]
+[/if]
+[if (impl)]
+	[for (anEParameter : EParameter | anEOperation.eParameters->reject(doNotGenerateEParameter())->select(p : EParameter | p.eType.doNotGenerateEClassifier()))]
+[printWarning('eType ' + anEParameter.eType.generateNamespaceDefinition() + '::' + anEParameter.eType.name + ' is configured as doNotGenerate for instance of EParameter: ' + anEParameter.generateNamespaceDefinition(), 'ecore4CPP::generator::main::generateOperation:generateOperationDeclaration')/]
+	[/for]
+[/if]
 [anEOperation.generateDocumentation()/] 
 virtual [anEOperation.generateOperationType()/] [anEOperation.name/]([anEOperation.generateParameterList()/])[if (hasKey(keyConst()))] const[/if] [abstractSufix(impl)/];[/if]
 [/template]
 
-[template public generateOperationImplementation(anEOperation : EOperation) ? (not (ignore() or doNotGenerate()))]
+[template public generateOperationImplementation(anEOperation : EOperation) ? (not (ignore()))]
 [comment[aOperation.generateDokumentation()/] 
 [anEOperation.generateOperationType()/] [anEOperation.eContainingClass.name.toUpperFirst()/]Impl::[anEOperation.name/]([anEOperation.generateParameterList()/])[if (hasKey(keyConst()))] const[/if]
 {
@@ -60,7 +70,7 @@ virtual [anEOperation.generateOperationType()/] [anEOperation.name/]([anEOperati
 
 [template public generateOperationInitialization(anEOperation : EOperation)? ( not hasImplOnly() )]
 [anEOperation.getClassMemberName()/]->setName("[anEOperation.name.toString()/]");
-[if (anEOperation.eType.oclIsUndefined() or anEOperation.eType.doNotGenerate())]
+[if (anEOperation.eType.oclIsUndefined() or anEOperation.eType.doNotGenerateEClassifier())]
 { [comment external Classes for instance C++ std::map are not generated and has no metamodel informations/]
 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
 	std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
@@ -80,7 +90,7 @@ virtual [anEOperation.generateOperationType()/] [anEOperation.name/]([anEOperati
 {
 	std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation([anEOperation.getClassMemberName()/]);
 	parameter->setName("[anEParameter.name/]");
-[if (anEParameter.eType.doNotGenerate())]
+[if (anEParameter.eType.doNotGenerateEClassifier())]
 	{ [comment external Classes for instance C++ std::map are not generated and has no metamodel informations/]
 		std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
 		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
