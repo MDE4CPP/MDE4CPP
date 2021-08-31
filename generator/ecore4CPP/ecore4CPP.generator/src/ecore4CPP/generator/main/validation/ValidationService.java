@@ -30,7 +30,7 @@ import org.eclipse.emf.ecore.ETypedElement;
  *  <li>Model validation</li>
  * 	<li>Registering errors</li>
  *  <li>Registering warnings</li>
- *  <li>Log errors, warnings and infos</li>
+ *  <li>Log errors, warnings and info</li>
  *  <li>Exit java program with error code, if at least one error is registered and generator is running outside of eclipse</li>
  * </ul>
  * Functionality is triggered once at the beginning of the generation process.<br>
@@ -42,10 +42,10 @@ import org.eclipse.emf.ecore.ETypedElement;
 public class ValidationService {
 	
 	/**
-	 * Enumeration to represent different serverity levels of Ecore4CPPMessage objects
+	 * Enumeration to represent different severity levels of Ecore4CPPMessage objects
 	 *<ul>
      *	<li>INFO : message represents basic information for the user</li>
-     * 	<li>WARNING : messages warns about a potential error. This does not necessarily abort the generation but it may result in errorneous generation</li>
+     * 	<li>WARNING : messages warns about a potential error. This does not necessarily abort the generation but it may result in erroneous generation</li>
      * 	<li>ERROR : messages containing errors during model validation. This should abort generation</li>
 	 * </ul>
 	 */
@@ -56,6 +56,9 @@ public class ValidationService {
 		ERROR
 	}
 	
+	/**
+	 * Class that holds constants for manipulating the color of text printed to the console via ANSI escape sequences
+	 */
 	private static class Ecore4CPPConsoleManipulator
 	{
 		public static final String ANSI_RESET = "\u001B[0m";
@@ -360,6 +363,42 @@ public class ValidationService {
 			}
 			
 			validateENamedElement(ePackage);
+			
+			String messageInstanceSuffix = " for instance of EPackage : " + getPrintableName(ePackage);
+			
+			{
+				List<String> eSubPackagesNames = ePackage.getESubpackages().stream().map(EPackage::getName).collect(Collectors.toList());
+				Set<String> duplicateESubPackagesNames = findDuplicates(eSubPackagesNames);
+				
+				if(!duplicateESubPackagesNames.isEmpty())
+				{
+					for(String duplicateESubPackagesName : duplicateESubPackagesNames)
+					{
+						registerWarning(new Ecore4CPPMessage(
+								Ecore4CPPMessageServerityLevel.WARNING,
+								"Multiple sub packages with name '" + duplicateESubPackagesName + "'" + messageInstanceSuffix
+								+ "\n- Generated files might be overridden",
+								this.getClass().getName() + ":validateEPackage"));
+					}
+				}
+			}
+			
+			{
+				List<String> eClassifiersNames = ePackage.getEClassifiers().stream().map(EClassifier::getName).collect(Collectors.toList());
+				Set<String> duplicateEClassifiersNames = findDuplicates(eClassifiersNames);
+				
+				if(!duplicateEClassifiersNames.isEmpty())
+				{
+					for(String duplicateEClassifiersName : duplicateEClassifiersNames)
+					{
+						registerWarning(new Ecore4CPPMessage(
+								Ecore4CPPMessageServerityLevel.WARNING,
+								"Multiple contained classifiers with name '" + duplicateEClassifiersName + "'" + messageInstanceSuffix 
+								+ "\n- Possible naming conflicts\n- Generated files might be overridden",
+								this.getClass().getName() + ":validateEPackage"));
+					}
+				}
+			}
 		}
 		
 		/**
@@ -462,12 +501,31 @@ public class ValidationService {
 			
 			validateETypedElement(eOperation);
 			
+			String messageInstanceSuffix = " for instance of EOperation : " + getPrintableName(eOperation);
+			
 			if(eOperation.getEContainingClass() == null) 
 			{
 				registerError(new Ecore4CPPMessage(
 						Ecore4CPPMessageServerityLevel.ERROR,
-						"Undefined 'eContainingClass' for instance of EOperation : " + getPrintableName(eOperation),
+						"Undefined 'eContainingClass'" + messageInstanceSuffix,
 						this.getClass().getName() + ":validateEOperation"));
+			}
+			
+			{
+				List<String> eParameterNames = eOperation.getEParameters().stream().map(EParameter::getName).collect(Collectors.toList());
+				Set<String> duplicateEParameterNames = findDuplicates(eParameterNames);
+				
+				if(!duplicateEParameterNames.isEmpty())
+				{
+					for(String duplicateEParameterName : duplicateEParameterNames)
+					{
+						registerWarning(new Ecore4CPPMessage(
+								Ecore4CPPMessageServerityLevel.WARNING,
+								"Multiple parameters with name '" + duplicateEParameterName + "'" + messageInstanceSuffix
+								+ "\n- Possible naming conflicts",
+								this.getClass().getName() + ":validateEOperation"));
+					}
+				}
 			}
 		}
 		
@@ -623,7 +681,7 @@ public class ValidationService {
 		 * Validates properties constrained by metaclass EEnum
 		 * This includes:
 		 * 	- check if the EEnum is null
-		 *  - check if the EEnum contains multiple literals with the same names or values
+		 *  - check if the EEnum contains multiple literals with the same names
 		 */
 		public void validateEEnum(EEnum eEnum)
 		{
@@ -641,31 +699,20 @@ public class ValidationService {
 			
 			String messageInstanceSuffix = " for instance of EEnum : " + getPrintableName(eEnum);
 			
-			List<String> eEnumLiteralNames = eEnum.getELiterals().stream().map(EEnumLiteral::getName).collect(Collectors.toList());
-			Set<String> duplicateEEnumLiteralNames = findDuplicates(eEnumLiteralNames);
-			
-			if(!duplicateEEnumLiteralNames.isEmpty())
 			{
-				for(String duplicateEEnumLiteralName : duplicateEEnumLiteralNames)
+				List<String> eEnumLiteralNames = eEnum.getELiterals().stream().map(EEnumLiteral::getName).collect(Collectors.toList());
+				Set<String> duplicateEEnumLiteralNames = findDuplicates(eEnumLiteralNames);
+				
+				if(!duplicateEEnumLiteralNames.isEmpty())
 				{
-					registerError(new Ecore4CPPMessage(
-							Ecore4CPPMessageServerityLevel.ERROR,
-							"Multiple literals with name '" + duplicateEEnumLiteralName + "'" + messageInstanceSuffix,
-							this.getClass().getName() + ":validateEEnum"));
-				}
-			}
-			
-			List<Integer> eEnumLiteralValues = eEnum.getELiterals().stream().map(EEnumLiteral::getValue).collect(Collectors.toList());
-			Set<Integer> duplicateEEnumLiteralValues = findDuplicates(eEnumLiteralValues);
-			
-			if(!duplicateEEnumLiteralValues.isEmpty())
-			{
-				for(int duplicateEEnumLiteralValue : duplicateEEnumLiteralValues)
-				{
-					registerError(new Ecore4CPPMessage(
-							Ecore4CPPMessageServerityLevel.ERROR,
-							"Multiple literals with value '" + duplicateEEnumLiteralValue + "'" + messageInstanceSuffix,
-							this.getClass().getName() + ":validateEEnum"));
+					for(String duplicateEEnumLiteralName : duplicateEEnumLiteralNames)
+					{
+						registerWarning(new Ecore4CPPMessage(
+								Ecore4CPPMessageServerityLevel.WARNING,
+								"Multiple literals with name '" + duplicateEEnumLiteralName + "'" + messageInstanceSuffix
+								+ "\n- Possible naming conflicts",
+								this.getClass().getName() + ":validateEEnum"));
+					}
 				}
 			}
 		}
@@ -706,11 +753,10 @@ public class ValidationService {
 			{
 				for(String duplicateEStructuralFeatureName : duplicateEStructuralFeatureNames)
 				{
-					System.out.println("Test_1");
-					
-					registerError(new Ecore4CPPMessage(
-							Ecore4CPPMessageServerityLevel.ERROR,
-							"Multiple structural features with name '" + duplicateEStructuralFeatureName + "'" + messageInstanceSuffix,
+					registerWarning(new Ecore4CPPMessage(
+							Ecore4CPPMessageServerityLevel.WARNING,
+							"Multiple structural features with name '" + duplicateEStructuralFeatureName + "'" + messageInstanceSuffix
+							+ "\n- Possible naming conflicts",
 							this.getClass().getName() + ":validateEClass"));
 				}
 			}
