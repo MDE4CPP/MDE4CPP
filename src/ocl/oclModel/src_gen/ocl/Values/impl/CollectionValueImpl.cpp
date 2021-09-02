@@ -1,3 +1,4 @@
+
 #include "ocl/Values/impl/CollectionValueImpl.hpp"
 
 #ifdef NDEBUG
@@ -25,7 +26,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -34,7 +34,6 @@
 #include <exception> // used in Persistence
 #include "ocl/Values/ValuesFactory.hpp"
 #include "ocl/Types/TypesFactory.hpp"
-
 
 #include "ocl/Types/CollectionType.hpp"
 #include "ocl/Values/Element.hpp"
@@ -112,15 +111,6 @@ std::shared_ptr<ecore::EObject> CollectionValueImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> CollectionValueImpl::eStaticClass() const
-{
-	return ocl::Values::ValuesPackage::eInstance()->getCollectionValue_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
@@ -192,11 +182,13 @@ return result;
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference elements
-*/
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference elements */
 std::shared_ptr<Bag<ocl::Values::Element>> CollectionValueImpl::getElements() const
 {
 	if(m_elements == nullptr)
@@ -208,11 +200,7 @@ std::shared_ptr<Bag<ocl::Values::Element>> CollectionValueImpl::getElements() co
     return m_elements;
 }
 
-
-
-/*
-Getter & Setter for reference model
-*/
+/* Getter & Setter for reference model */
 std::shared_ptr<ocl::Types::CollectionType> CollectionValueImpl::getModel() const
 {
     return m_model;
@@ -223,182 +211,16 @@ void CollectionValueImpl::setModel(std::shared_ptr<ocl::Types::CollectionType> _
 	
 }
 
-
 //*********************************
 // Union Getter
 //*********************************
 
-
-
-std::shared_ptr<CollectionValue> CollectionValueImpl::getThisCollectionValuePtr() const
-{
-	return m_thisCollectionValuePtr.lock();
-}
-void CollectionValueImpl::setThisCollectionValuePtr(std::weak_ptr<CollectionValue> thisCollectionValuePtr)
-{
-	m_thisCollectionValuePtr = thisCollectionValuePtr;
-	setThisStaticValuePtr(thisCollectionValuePtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> CollectionValueImpl::eContainer() const
 {
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any CollectionValueImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case ocl::Values::ValuesPackage::COLLECTIONVALUE_ATTRIBUTE_ELEMENTS:
-		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<ocl::Values::Element>::iterator iter = getElements()->begin();
-			Bag<ocl::Values::Element>::iterator end = getElements()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //210			
-		}
-		case ocl::Values::ValuesPackage::COLLECTIONVALUE_ATTRIBUTE_MODEL:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getModel();
-				return eAny(returnValue); //211
-			}
-	}
-	return StaticValueImpl::eGet(featureID, resolve, coreType);
-}
-bool CollectionValueImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case ocl::Values::ValuesPackage::COLLECTIONVALUE_ATTRIBUTE_ELEMENTS:
-			return getElements() != nullptr; //210
-		case ocl::Values::ValuesPackage::COLLECTIONVALUE_ATTRIBUTE_MODEL:
-			return getModel() != nullptr; //211
-	}
-	return StaticValueImpl::internalEIsSet(featureID);
-}
-bool CollectionValueImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case ocl::Values::ValuesPackage::COLLECTIONVALUE_ATTRIBUTE_ELEMENTS:
-		{
-			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<ocl::Values::Element>> elementsList(new Bag<ocl::Values::Element>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
-			{
-				elementsList->add(std::dynamic_pointer_cast<ocl::Values::Element>(*iter));
-				iter++;
-			}
-			
-			Bag<ocl::Values::Element>::iterator iterElements = getElements()->begin();
-			Bag<ocl::Values::Element>::iterator endElements = getElements()->end();
-			while (iterElements != endElements)
-			{
-				if (elementsList->find(*iterElements) == -1)
-				{
-					getElements()->erase(*iterElements);
-				}
-				iterElements++;
-			}
- 
-			iterElements = elementsList->begin();
-			endElements = elementsList->end();
-			while (iterElements != endElements)
-			{
-				if (getElements()->find(*iterElements) == -1)
-				{
-					getElements()->add(*iterElements);
-				}
-				iterElements++;			
-			}
-			return true;
-		}
-		case ocl::Values::ValuesPackage::COLLECTIONVALUE_ATTRIBUTE_MODEL:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<ocl::Types::CollectionType> _model = std::dynamic_pointer_cast<ocl::Types::CollectionType>(_temp);
-			setModel(_model); //211
-			return true;
-		}
-	}
-
-	return StaticValueImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any CollectionValueImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-		
-		// 1275818346
-		case ValuesPackage::COLLECTIONVALUE_OPERATION_ADDVALUE_VALUE:
-		{
-			//Retrieve input parameter 'value'
-			//parameter 0
-			std::shared_ptr<fUML::Semantics::Values::Value> incoming_param_value;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_value_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_value = (*incoming_param_value_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::Values::Value> >();
-			result = eAny(this->addValue(incoming_param_value));
-			break;
-		}
-		
-		// 2069036065
-		case ValuesPackage::COLLECTIONVALUE_OPERATION_EQUALS_VALUE:
-		{
-			//Retrieve input parameter 'otherValue'
-			//parameter 0
-			std::shared_ptr<fUML::Semantics::Values::Value> incoming_param_otherValue;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_otherValue_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_otherValue = (*incoming_param_otherValue_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::Values::Value> >();
-			result = eAny(this->equals(incoming_param_otherValue));
-			break;
-		}
-		
-		// 1127442822
-		case ValuesPackage::COLLECTIONVALUE_OPERATION_FIND_VALUE:
-		{
-			//Retrieve input parameter 'value'
-			//parameter 0
-			std::shared_ptr<fUML::Semantics::Values::Value> incoming_param_value;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_value_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_value = (*incoming_param_value_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::Values::Value> >();
-			result = eAny(this->find(incoming_param_value));
-			break;
-		}
-		
-		// 168353461
-		case ValuesPackage::COLLECTIONVALUE_OPERATION_TOSTRING:
-		{
-			result = eAny(this->toString());
-			break;
-		}
-
-		default:
-		{
-			// call superTypes
-			result = StaticValueImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -503,9 +325,6 @@ void CollectionValueImpl::save(std::shared_ptr<persistence::interfaces::XSaveHan
 	fUML::Semantics::Loci::SemanticVisitorImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
 }
 
 void CollectionValueImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -523,3 +342,179 @@ void CollectionValueImpl::saveContent(std::shared_ptr<persistence::interfaces::X
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> CollectionValueImpl::eStaticClass() const
+{
+	return ocl::Values::ValuesPackage::eInstance()->getCollectionValue_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any CollectionValueImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case ocl::Values::ValuesPackage::COLLECTIONVALUE_ATTRIBUTE_ELEMENTS:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<ocl::Values::Element>::iterator iter = getElements()->begin();
+			Bag<ocl::Values::Element>::iterator end = getElements()->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //210			
+		}
+		case ocl::Values::ValuesPackage::COLLECTIONVALUE_ATTRIBUTE_MODEL:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getModel();
+				return eAny(returnValue); //211
+			}
+	}
+	return StaticValueImpl::eGet(featureID, resolve, coreType);
+}
+
+bool CollectionValueImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case ocl::Values::ValuesPackage::COLLECTIONVALUE_ATTRIBUTE_ELEMENTS:
+			return getElements() != nullptr; //210
+		case ocl::Values::ValuesPackage::COLLECTIONVALUE_ATTRIBUTE_MODEL:
+			return getModel() != nullptr; //211
+	}
+	return StaticValueImpl::internalEIsSet(featureID);
+}
+
+bool CollectionValueImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case ocl::Values::ValuesPackage::COLLECTIONVALUE_ATTRIBUTE_ELEMENTS:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<ocl::Values::Element>> elementsList(new Bag<ocl::Values::Element>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				elementsList->add(std::dynamic_pointer_cast<ocl::Values::Element>(*iter));
+				iter++;
+			}
+			
+			Bag<ocl::Values::Element>::iterator iterElements = getElements()->begin();
+			Bag<ocl::Values::Element>::iterator endElements = getElements()->end();
+			while (iterElements != endElements)
+			{
+				if (elementsList->find(*iterElements) == -1)
+				{
+					getElements()->erase(*iterElements);
+				}
+				iterElements++;
+			}
+ 
+			iterElements = elementsList->begin();
+			endElements = elementsList->end();
+			while (iterElements != endElements)
+			{
+				if (getElements()->find(*iterElements) == -1)
+				{
+					getElements()->add(*iterElements);
+				}
+				iterElements++;			
+			}
+			return true;
+		}
+		case ocl::Values::ValuesPackage::COLLECTIONVALUE_ATTRIBUTE_MODEL:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<ocl::Types::CollectionType> _model = std::dynamic_pointer_cast<ocl::Types::CollectionType>(_temp);
+			setModel(_model); //211
+			return true;
+		}
+	}
+
+	return StaticValueImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any CollectionValueImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 1275818346
+		case ValuesPackage::COLLECTIONVALUE_OPERATION_ADDVALUE_VALUE:
+		{
+			//Retrieve input parameter 'value'
+			//parameter 0
+			std::shared_ptr<fUML::Semantics::Values::Value> incoming_param_value;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_value_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_value = (*incoming_param_value_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::Values::Value> >();
+			result = eAny(this->addValue(incoming_param_value));
+			break;
+		}
+		
+		// 2069036065
+		case ValuesPackage::COLLECTIONVALUE_OPERATION_EQUALS_VALUE:
+		{
+			//Retrieve input parameter 'otherValue'
+			//parameter 0
+			std::shared_ptr<fUML::Semantics::Values::Value> incoming_param_otherValue;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_otherValue_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_otherValue = (*incoming_param_otherValue_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::Values::Value> >();
+			result = eAny(this->equals(incoming_param_otherValue));
+			break;
+		}
+		
+		// 1127442822
+		case ValuesPackage::COLLECTIONVALUE_OPERATION_FIND_VALUE:
+		{
+			//Retrieve input parameter 'value'
+			//parameter 0
+			std::shared_ptr<fUML::Semantics::Values::Value> incoming_param_value;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_value_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_value = (*incoming_param_value_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::Values::Value> >();
+			result = eAny(this->find(incoming_param_value));
+			break;
+		}
+		
+		// 168353461
+		case ValuesPackage::COLLECTIONVALUE_OPERATION_TOSTRING:
+		{
+			result = eAny(this->toString());
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = StaticValueImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<CollectionValue> CollectionValueImpl::getThisCollectionValuePtr() const
+{
+	return m_thisCollectionValuePtr.lock();
+}
+void CollectionValueImpl::setThisCollectionValuePtr(std::weak_ptr<CollectionValue> thisCollectionValuePtr)
+{
+	m_thisCollectionValuePtr = thisCollectionValuePtr;
+	setThisStaticValuePtr(thisCollectionValuePtr);
+}

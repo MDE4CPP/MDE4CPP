@@ -1,3 +1,4 @@
+
 #include "uml/impl/IntervalConstraintImpl.hpp"
 
 #ifdef NDEBUG
@@ -25,7 +26,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -33,7 +33,6 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-
 
 #include "uml/Comment.hpp"
 #include "uml/Constraint.hpp"
@@ -154,21 +153,16 @@ std::shared_ptr<ecore::EObject> IntervalConstraintImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> IntervalConstraintImpl::eStaticClass() const
-{
-	return uml::umlPackage::eInstance()->getIntervalConstraint_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
 
 //*********************************
-// References
+// Attribute Getters & Setters
+//*********************************
+
+//*********************************
+// Reference Getters & Setters
 //*********************************
 
 //*********************************
@@ -201,16 +195,9 @@ std::weak_ptr<uml::Element> IntervalConstraintImpl::getOwner() const
 
 
 
-
-std::shared_ptr<IntervalConstraint> IntervalConstraintImpl::getThisIntervalConstraintPtr() const
-{
-	return m_thisIntervalConstraintPtr.lock();
-}
-void IntervalConstraintImpl::setThisIntervalConstraintPtr(std::weak_ptr<IntervalConstraint> thisIntervalConstraintPtr)
-{
-	m_thisIntervalConstraintPtr = thisIntervalConstraintPtr;
-	setThisConstraintPtr(thisIntervalConstraintPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> IntervalConstraintImpl::eContainer() const
 {
 	if(auto wp = m_context.lock())
@@ -238,55 +225,6 @@ std::shared_ptr<ecore::EObject> IntervalConstraintImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any IntervalConstraintImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-	}
-	return ConstraintImpl::eGet(featureID, resolve, coreType);
-}
-bool IntervalConstraintImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-	}
-	return ConstraintImpl::internalEIsSet(featureID);
-}
-bool IntervalConstraintImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-	}
-
-	return ConstraintImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any IntervalConstraintImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-
-		default:
-		{
-			// call superTypes
-			result = ConstraintImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -342,11 +280,6 @@ void IntervalConstraintImpl::save(std::shared_ptr<persistence::interfaces::XSave
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
-	
 }
 
 void IntervalConstraintImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -361,3 +294,71 @@ void IntervalConstraintImpl::saveContent(std::shared_ptr<persistence::interfaces
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> IntervalConstraintImpl::eStaticClass() const
+{
+	return uml::umlPackage::eInstance()->getIntervalConstraint_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any IntervalConstraintImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+	}
+	return ConstraintImpl::eGet(featureID, resolve, coreType);
+}
+
+bool IntervalConstraintImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+	}
+	return ConstraintImpl::internalEIsSet(featureID);
+}
+
+bool IntervalConstraintImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+	}
+
+	return ConstraintImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any IntervalConstraintImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+
+		default:
+		{
+			// call superTypes
+			result = ConstraintImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<IntervalConstraint> IntervalConstraintImpl::getThisIntervalConstraintPtr() const
+{
+	return m_thisIntervalConstraintPtr.lock();
+}
+void IntervalConstraintImpl::setThisIntervalConstraintPtr(std::weak_ptr<IntervalConstraint> thisIntervalConstraintPtr)
+{
+	m_thisIntervalConstraintPtr = thisIntervalConstraintPtr;
+	setThisConstraintPtr(thisIntervalConstraintPtr);
+}

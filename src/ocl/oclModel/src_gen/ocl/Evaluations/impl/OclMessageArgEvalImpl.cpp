@@ -1,3 +1,4 @@
+
 #include "ocl/Evaluations/impl/OclMessageArgEvalImpl.hpp"
 
 #ifdef NDEBUG
@@ -32,10 +33,9 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
 #include "uml/umlFactory.hpp"
-
+#include "fUML/Semantics/Loci/LociFactory.hpp"
 
 #include "fUML/Semantics/Values/Evaluation.hpp"
 #include "fUML/Semantics/Loci/Locus.hpp"
@@ -116,25 +116,18 @@ std::shared_ptr<ecore::EObject> OclMessageArgEvalImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> OclMessageArgEvalImpl::eStaticClass() const
-{
-	return ocl::Evaluations::EvaluationsPackage::eInstance()->getOclMessageArgEval_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference expression
-*/
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference expression */
 std::shared_ptr<ocl::Evaluations::OclExpEval> OclMessageArgEvalImpl::getExpression() const
 {
     return m_expression;
@@ -145,10 +138,7 @@ void OclMessageArgEvalImpl::setExpression(std::shared_ptr<ocl::Evaluations::OclE
 	
 }
 
-
-/*
-Getter & Setter for reference unspecified
-*/
+/* Getter & Setter for reference unspecified */
 std::shared_ptr<ocl::Evaluations::UnspecifiedValueExpEval> OclMessageArgEvalImpl::getUnspecified() const
 {
     return m_unspecified;
@@ -159,10 +149,7 @@ void OclMessageArgEvalImpl::setUnspecified(std::shared_ptr<ocl::Evaluations::Uns
 	
 }
 
-
-/*
-Getter & Setter for reference variable
-*/
+/* Getter & Setter for reference variable */
 std::shared_ptr<ocl::Evaluations::OclExpEval> OclMessageArgEvalImpl::getVariable() const
 {
     return m_variable;
@@ -173,119 +160,16 @@ void OclMessageArgEvalImpl::setVariable(std::shared_ptr<ocl::Evaluations::OclExp
 	
 }
 
-
 //*********************************
 // Union Getter
 //*********************************
 
-
-
-std::shared_ptr<OclMessageArgEval> OclMessageArgEvalImpl::getThisOclMessageArgEvalPtr() const
-{
-	return m_thisOclMessageArgEvalPtr.lock();
-}
-void OclMessageArgEvalImpl::setThisOclMessageArgEvalPtr(std::weak_ptr<OclMessageArgEval> thisOclMessageArgEvalPtr)
-{
-	m_thisOclMessageArgEvalPtr = thisOclMessageArgEvalPtr;
-	setThisEvaluationPtr(thisOclMessageArgEvalPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> OclMessageArgEvalImpl::eContainer() const
 {
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any OclMessageArgEvalImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case ocl::Evaluations::EvaluationsPackage::OCLMESSAGEARGEVAL_ATTRIBUTE_EXPRESSION:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getExpression();
-				return eAny(returnValue); //613
-			}
-		case ocl::Evaluations::EvaluationsPackage::OCLMESSAGEARGEVAL_ATTRIBUTE_UNSPECIFIED:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getUnspecified();
-				return eAny(returnValue); //612
-			}
-		case ocl::Evaluations::EvaluationsPackage::OCLMESSAGEARGEVAL_ATTRIBUTE_VARIABLE:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getVariable();
-				return eAny(returnValue); //614
-			}
-	}
-	return fUML::Semantics::Values::EvaluationImpl::eGet(featureID, resolve, coreType);
-}
-bool OclMessageArgEvalImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case ocl::Evaluations::EvaluationsPackage::OCLMESSAGEARGEVAL_ATTRIBUTE_EXPRESSION:
-			return getExpression() != nullptr; //613
-		case ocl::Evaluations::EvaluationsPackage::OCLMESSAGEARGEVAL_ATTRIBUTE_UNSPECIFIED:
-			return getUnspecified() != nullptr; //612
-		case ocl::Evaluations::EvaluationsPackage::OCLMESSAGEARGEVAL_ATTRIBUTE_VARIABLE:
-			return getVariable() != nullptr; //614
-	}
-	return fUML::Semantics::Values::EvaluationImpl::internalEIsSet(featureID);
-}
-bool OclMessageArgEvalImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case ocl::Evaluations::EvaluationsPackage::OCLMESSAGEARGEVAL_ATTRIBUTE_EXPRESSION:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<ocl::Evaluations::OclExpEval> _expression = std::dynamic_pointer_cast<ocl::Evaluations::OclExpEval>(_temp);
-			setExpression(_expression); //613
-			return true;
-		}
-		case ocl::Evaluations::EvaluationsPackage::OCLMESSAGEARGEVAL_ATTRIBUTE_UNSPECIFIED:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<ocl::Evaluations::UnspecifiedValueExpEval> _unspecified = std::dynamic_pointer_cast<ocl::Evaluations::UnspecifiedValueExpEval>(_temp);
-			setUnspecified(_unspecified); //612
-			return true;
-		}
-		case ocl::Evaluations::EvaluationsPackage::OCLMESSAGEARGEVAL_ATTRIBUTE_VARIABLE:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<ocl::Evaluations::OclExpEval> _variable = std::dynamic_pointer_cast<ocl::Evaluations::OclExpEval>(_temp);
-			setVariable(_variable); //614
-			return true;
-		}
-	}
-
-	return fUML::Semantics::Values::EvaluationImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any OclMessageArgEvalImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-
-		default:
-		{
-			// call superTypes
-			result = fUML::Semantics::Values::EvaluationImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -405,8 +289,6 @@ void OclMessageArgEvalImpl::save(std::shared_ptr<persistence::interfaces::XSaveH
 	fUML::Semantics::Loci::SemanticVisitorImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
 }
 
 void OclMessageArgEvalImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -425,3 +307,116 @@ void OclMessageArgEvalImpl::saveContent(std::shared_ptr<persistence::interfaces:
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> OclMessageArgEvalImpl::eStaticClass() const
+{
+	return ocl::Evaluations::EvaluationsPackage::eInstance()->getOclMessageArgEval_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any OclMessageArgEvalImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case ocl::Evaluations::EvaluationsPackage::OCLMESSAGEARGEVAL_ATTRIBUTE_EXPRESSION:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getExpression();
+				return eAny(returnValue); //613
+			}
+		case ocl::Evaluations::EvaluationsPackage::OCLMESSAGEARGEVAL_ATTRIBUTE_UNSPECIFIED:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getUnspecified();
+				return eAny(returnValue); //612
+			}
+		case ocl::Evaluations::EvaluationsPackage::OCLMESSAGEARGEVAL_ATTRIBUTE_VARIABLE:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getVariable();
+				return eAny(returnValue); //614
+			}
+	}
+	return fUML::Semantics::Values::EvaluationImpl::eGet(featureID, resolve, coreType);
+}
+
+bool OclMessageArgEvalImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case ocl::Evaluations::EvaluationsPackage::OCLMESSAGEARGEVAL_ATTRIBUTE_EXPRESSION:
+			return getExpression() != nullptr; //613
+		case ocl::Evaluations::EvaluationsPackage::OCLMESSAGEARGEVAL_ATTRIBUTE_UNSPECIFIED:
+			return getUnspecified() != nullptr; //612
+		case ocl::Evaluations::EvaluationsPackage::OCLMESSAGEARGEVAL_ATTRIBUTE_VARIABLE:
+			return getVariable() != nullptr; //614
+	}
+	return fUML::Semantics::Values::EvaluationImpl::internalEIsSet(featureID);
+}
+
+bool OclMessageArgEvalImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case ocl::Evaluations::EvaluationsPackage::OCLMESSAGEARGEVAL_ATTRIBUTE_EXPRESSION:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<ocl::Evaluations::OclExpEval> _expression = std::dynamic_pointer_cast<ocl::Evaluations::OclExpEval>(_temp);
+			setExpression(_expression); //613
+			return true;
+		}
+		case ocl::Evaluations::EvaluationsPackage::OCLMESSAGEARGEVAL_ATTRIBUTE_UNSPECIFIED:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<ocl::Evaluations::UnspecifiedValueExpEval> _unspecified = std::dynamic_pointer_cast<ocl::Evaluations::UnspecifiedValueExpEval>(_temp);
+			setUnspecified(_unspecified); //612
+			return true;
+		}
+		case ocl::Evaluations::EvaluationsPackage::OCLMESSAGEARGEVAL_ATTRIBUTE_VARIABLE:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<ocl::Evaluations::OclExpEval> _variable = std::dynamic_pointer_cast<ocl::Evaluations::OclExpEval>(_temp);
+			setVariable(_variable); //614
+			return true;
+		}
+	}
+
+	return fUML::Semantics::Values::EvaluationImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any OclMessageArgEvalImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+
+		default:
+		{
+			// call superTypes
+			result = fUML::Semantics::Values::EvaluationImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<OclMessageArgEval> OclMessageArgEvalImpl::getThisOclMessageArgEvalPtr() const
+{
+	return m_thisOclMessageArgEvalPtr.lock();
+}
+void OclMessageArgEvalImpl::setThisOclMessageArgEvalPtr(std::weak_ptr<OclMessageArgEval> thisOclMessageArgEvalPtr)
+{
+	m_thisOclMessageArgEvalPtr = thisOclMessageArgEvalPtr;
+	setThisEvaluationPtr(thisOclMessageArgEvalPtr);
+}

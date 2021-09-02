@@ -1,3 +1,4 @@
+
 #include "uml/impl/BehavioredClassifierImpl.hpp"
 
 #ifdef NDEBUG
@@ -26,7 +27,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -34,7 +34,6 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-
 
 #include "uml/Behavior.hpp"
 #include "uml/Classifier.hpp"
@@ -251,15 +250,6 @@ std::shared_ptr<ecore::EObject> BehavioredClassifierImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> BehavioredClassifierImpl::eStaticClass() const
-{
-	return uml::umlPackage::eInstance()->getBehavioredClassifier_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
@@ -282,11 +272,13 @@ std::shared_ptr<Bag<uml::Interface> > BehavioredClassifierImpl::getImplementedIn
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference classifierBehavior
-*/
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference classifierBehavior */
 std::shared_ptr<uml::Behavior> BehavioredClassifierImpl::getClassifierBehavior() const
 {
     return m_classifierBehavior;
@@ -297,10 +289,7 @@ void BehavioredClassifierImpl::setClassifierBehavior(std::shared_ptr<uml::Behavi
 	
 }
 
-
-/*
-Getter & Setter for reference interfaceRealization
-*/
+/* Getter & Setter for reference interfaceRealization */
 std::shared_ptr<Subset<uml::InterfaceRealization, uml::Element>> BehavioredClassifierImpl::getInterfaceRealization() const
 {
 	if(m_interfaceRealization == nullptr)
@@ -321,11 +310,7 @@ std::shared_ptr<Subset<uml::InterfaceRealization, uml::Element>> BehavioredClass
     return m_interfaceRealization;
 }
 
-
-
-/*
-Getter & Setter for reference ownedBehavior
-*/
+/* Getter & Setter for reference ownedBehavior */
 std::shared_ptr<SubsetUnion<uml::Behavior, uml::NamedElement>> BehavioredClassifierImpl::getOwnedBehavior() const
 {
 	if(m_ownedBehavior == nullptr)
@@ -345,8 +330,6 @@ std::shared_ptr<SubsetUnion<uml::Behavior, uml::NamedElement>> BehavioredClassif
 	}
     return m_ownedBehavior;
 }
-
-
 
 //*********************************
 // Union Getter
@@ -448,16 +431,9 @@ std::shared_ptr<Union<uml::RedefinableElement>> BehavioredClassifierImpl::getRed
 
 
 
-
-std::shared_ptr<BehavioredClassifier> BehavioredClassifierImpl::getThisBehavioredClassifierPtr() const
-{
-	return m_thisBehavioredClassifierPtr.lock();
-}
-void BehavioredClassifierImpl::setThisBehavioredClassifierPtr(std::weak_ptr<BehavioredClassifier> thisBehavioredClassifierPtr)
-{
-	m_thisBehavioredClassifierPtr = thisBehavioredClassifierPtr;
-	setThisClassifierPtr(thisBehavioredClassifierPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> BehavioredClassifierImpl::eContainer() const
 {
 	if(auto wp = m_namespace.lock())
@@ -485,201 +461,6 @@ std::shared_ptr<ecore::EObject> BehavioredClassifierImpl::eContainer() const
 	}
 
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any BehavioredClassifierImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::BEHAVIOREDCLASSIFIER_ATTRIBUTE_CLASSIFIERBEHAVIOR:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getClassifierBehavior();
-				return eAny(returnValue); //2638
-			}
-		case uml::umlPackage::BEHAVIOREDCLASSIFIER_ATTRIBUTE_INTERFACEREALIZATION:
-		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::InterfaceRealization>::iterator iter = getInterfaceRealization()->begin();
-			Bag<uml::InterfaceRealization>::iterator end = getInterfaceRealization()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //2639			
-		}
-		case uml::umlPackage::BEHAVIOREDCLASSIFIER_ATTRIBUTE_OWNEDBEHAVIOR:
-		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Behavior>::iterator iter = getOwnedBehavior()->begin();
-			Bag<uml::Behavior>::iterator end = getOwnedBehavior()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //2640			
-		}
-	}
-	return ClassifierImpl::eGet(featureID, resolve, coreType);
-}
-bool BehavioredClassifierImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::BEHAVIOREDCLASSIFIER_ATTRIBUTE_CLASSIFIERBEHAVIOR:
-			return getClassifierBehavior() != nullptr; //2638
-		case uml::umlPackage::BEHAVIOREDCLASSIFIER_ATTRIBUTE_INTERFACEREALIZATION:
-			return getInterfaceRealization() != nullptr; //2639
-		case uml::umlPackage::BEHAVIOREDCLASSIFIER_ATTRIBUTE_OWNEDBEHAVIOR:
-			return getOwnedBehavior() != nullptr; //2640
-	}
-	return ClassifierImpl::internalEIsSet(featureID);
-}
-bool BehavioredClassifierImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::BEHAVIOREDCLASSIFIER_ATTRIBUTE_CLASSIFIERBEHAVIOR:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::Behavior> _classifierBehavior = std::dynamic_pointer_cast<uml::Behavior>(_temp);
-			setClassifierBehavior(_classifierBehavior); //2638
-			return true;
-		}
-		case uml::umlPackage::BEHAVIOREDCLASSIFIER_ATTRIBUTE_INTERFACEREALIZATION:
-		{
-			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::InterfaceRealization>> interfaceRealizationList(new Bag<uml::InterfaceRealization>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
-			{
-				interfaceRealizationList->add(std::dynamic_pointer_cast<uml::InterfaceRealization>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::InterfaceRealization>::iterator iterInterfaceRealization = getInterfaceRealization()->begin();
-			Bag<uml::InterfaceRealization>::iterator endInterfaceRealization = getInterfaceRealization()->end();
-			while (iterInterfaceRealization != endInterfaceRealization)
-			{
-				if (interfaceRealizationList->find(*iterInterfaceRealization) == -1)
-				{
-					getInterfaceRealization()->erase(*iterInterfaceRealization);
-				}
-				iterInterfaceRealization++;
-			}
- 
-			iterInterfaceRealization = interfaceRealizationList->begin();
-			endInterfaceRealization = interfaceRealizationList->end();
-			while (iterInterfaceRealization != endInterfaceRealization)
-			{
-				if (getInterfaceRealization()->find(*iterInterfaceRealization) == -1)
-				{
-					getInterfaceRealization()->add(*iterInterfaceRealization);
-				}
-				iterInterfaceRealization++;			
-			}
-			return true;
-		}
-		case uml::umlPackage::BEHAVIOREDCLASSIFIER_ATTRIBUTE_OWNEDBEHAVIOR:
-		{
-			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::Behavior>> ownedBehaviorList(new Bag<uml::Behavior>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
-			{
-				ownedBehaviorList->add(std::dynamic_pointer_cast<uml::Behavior>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::Behavior>::iterator iterOwnedBehavior = getOwnedBehavior()->begin();
-			Bag<uml::Behavior>::iterator endOwnedBehavior = getOwnedBehavior()->end();
-			while (iterOwnedBehavior != endOwnedBehavior)
-			{
-				if (ownedBehaviorList->find(*iterOwnedBehavior) == -1)
-				{
-					getOwnedBehavior()->erase(*iterOwnedBehavior);
-				}
-				iterOwnedBehavior++;
-			}
- 
-			iterOwnedBehavior = ownedBehaviorList->begin();
-			endOwnedBehavior = ownedBehaviorList->end();
-			while (iterOwnedBehavior != endOwnedBehavior)
-			{
-				if (getOwnedBehavior()->find(*iterOwnedBehavior) == -1)
-				{
-					getOwnedBehavior()->add(*iterOwnedBehavior);
-				}
-				iterOwnedBehavior++;			
-			}
-			return true;
-		}
-	}
-
-	return ClassifierImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any BehavioredClassifierImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-		
-		// 1882586927
-		case umlPackage::BEHAVIOREDCLASSIFIER_OPERATION_CLASS_BEHAVIOR_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->class_behavior(incoming_param_diagnostics,incoming_param_context));
-			break;
-		}
-		
-		// 1253009224
-		case umlPackage::BEHAVIOREDCLASSIFIER_OPERATION_GETALLIMPLEMENTEDINTERFACES:
-		{
-			result = eAny(this->getAllImplementedInterfaces());
-			break;
-		}
-		
-		// 1944346500
-		case umlPackage::BEHAVIOREDCLASSIFIER_OPERATION_GETIMPLEMENTEDINTERFACES:
-		{
-			result = eAny(this->getImplementedInterfaces());
-			break;
-		}
-
-		default:
-		{
-			// call superTypes
-			result = ClassifierImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -808,12 +589,6 @@ void BehavioredClassifierImpl::save(std::shared_ptr<persistence::interfaces::XSa
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
-	
-	
 }
 
 void BehavioredClassifierImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -842,3 +617,217 @@ void BehavioredClassifierImpl::saveContent(std::shared_ptr<persistence::interfac
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> BehavioredClassifierImpl::eStaticClass() const
+{
+	return uml::umlPackage::eInstance()->getBehavioredClassifier_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any BehavioredClassifierImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::BEHAVIOREDCLASSIFIER_ATTRIBUTE_CLASSIFIERBEHAVIOR:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getClassifierBehavior();
+				return eAny(returnValue); //2638
+			}
+		case uml::umlPackage::BEHAVIOREDCLASSIFIER_ATTRIBUTE_INTERFACEREALIZATION:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::InterfaceRealization>::iterator iter = getInterfaceRealization()->begin();
+			Bag<uml::InterfaceRealization>::iterator end = getInterfaceRealization()->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //2639			
+		}
+		case uml::umlPackage::BEHAVIOREDCLASSIFIER_ATTRIBUTE_OWNEDBEHAVIOR:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Behavior>::iterator iter = getOwnedBehavior()->begin();
+			Bag<uml::Behavior>::iterator end = getOwnedBehavior()->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //2640			
+		}
+	}
+	return ClassifierImpl::eGet(featureID, resolve, coreType);
+}
+
+bool BehavioredClassifierImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::BEHAVIOREDCLASSIFIER_ATTRIBUTE_CLASSIFIERBEHAVIOR:
+			return getClassifierBehavior() != nullptr; //2638
+		case uml::umlPackage::BEHAVIOREDCLASSIFIER_ATTRIBUTE_INTERFACEREALIZATION:
+			return getInterfaceRealization() != nullptr; //2639
+		case uml::umlPackage::BEHAVIOREDCLASSIFIER_ATTRIBUTE_OWNEDBEHAVIOR:
+			return getOwnedBehavior() != nullptr; //2640
+	}
+	return ClassifierImpl::internalEIsSet(featureID);
+}
+
+bool BehavioredClassifierImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::BEHAVIOREDCLASSIFIER_ATTRIBUTE_CLASSIFIERBEHAVIOR:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::Behavior> _classifierBehavior = std::dynamic_pointer_cast<uml::Behavior>(_temp);
+			setClassifierBehavior(_classifierBehavior); //2638
+			return true;
+		}
+		case uml::umlPackage::BEHAVIOREDCLASSIFIER_ATTRIBUTE_INTERFACEREALIZATION:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::InterfaceRealization>> interfaceRealizationList(new Bag<uml::InterfaceRealization>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				interfaceRealizationList->add(std::dynamic_pointer_cast<uml::InterfaceRealization>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::InterfaceRealization>::iterator iterInterfaceRealization = getInterfaceRealization()->begin();
+			Bag<uml::InterfaceRealization>::iterator endInterfaceRealization = getInterfaceRealization()->end();
+			while (iterInterfaceRealization != endInterfaceRealization)
+			{
+				if (interfaceRealizationList->find(*iterInterfaceRealization) == -1)
+				{
+					getInterfaceRealization()->erase(*iterInterfaceRealization);
+				}
+				iterInterfaceRealization++;
+			}
+ 
+			iterInterfaceRealization = interfaceRealizationList->begin();
+			endInterfaceRealization = interfaceRealizationList->end();
+			while (iterInterfaceRealization != endInterfaceRealization)
+			{
+				if (getInterfaceRealization()->find(*iterInterfaceRealization) == -1)
+				{
+					getInterfaceRealization()->add(*iterInterfaceRealization);
+				}
+				iterInterfaceRealization++;			
+			}
+			return true;
+		}
+		case uml::umlPackage::BEHAVIOREDCLASSIFIER_ATTRIBUTE_OWNEDBEHAVIOR:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::Behavior>> ownedBehaviorList(new Bag<uml::Behavior>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				ownedBehaviorList->add(std::dynamic_pointer_cast<uml::Behavior>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::Behavior>::iterator iterOwnedBehavior = getOwnedBehavior()->begin();
+			Bag<uml::Behavior>::iterator endOwnedBehavior = getOwnedBehavior()->end();
+			while (iterOwnedBehavior != endOwnedBehavior)
+			{
+				if (ownedBehaviorList->find(*iterOwnedBehavior) == -1)
+				{
+					getOwnedBehavior()->erase(*iterOwnedBehavior);
+				}
+				iterOwnedBehavior++;
+			}
+ 
+			iterOwnedBehavior = ownedBehaviorList->begin();
+			endOwnedBehavior = ownedBehaviorList->end();
+			while (iterOwnedBehavior != endOwnedBehavior)
+			{
+				if (getOwnedBehavior()->find(*iterOwnedBehavior) == -1)
+				{
+					getOwnedBehavior()->add(*iterOwnedBehavior);
+				}
+				iterOwnedBehavior++;			
+			}
+			return true;
+		}
+	}
+
+	return ClassifierImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any BehavioredClassifierImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 1882586927
+		case umlPackage::BEHAVIOREDCLASSIFIER_OPERATION_CLASS_BEHAVIOR_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->class_behavior(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+		
+		// 1253009224
+		case umlPackage::BEHAVIOREDCLASSIFIER_OPERATION_GETALLIMPLEMENTEDINTERFACES:
+		{
+			result = eAny(this->getAllImplementedInterfaces());
+			break;
+		}
+		
+		// 1944346500
+		case umlPackage::BEHAVIOREDCLASSIFIER_OPERATION_GETIMPLEMENTEDINTERFACES:
+		{
+			result = eAny(this->getImplementedInterfaces());
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = ClassifierImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<BehavioredClassifier> BehavioredClassifierImpl::getThisBehavioredClassifierPtr() const
+{
+	return m_thisBehavioredClassifierPtr.lock();
+}
+void BehavioredClassifierImpl::setThisBehavioredClassifierPtr(std::weak_ptr<BehavioredClassifier> thisBehavioredClassifierPtr)
+{
+	m_thisBehavioredClassifierPtr = thisBehavioredClassifierPtr;
+	setThisClassifierPtr(thisBehavioredClassifierPtr);
+}

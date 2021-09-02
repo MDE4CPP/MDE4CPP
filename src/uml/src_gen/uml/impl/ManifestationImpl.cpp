@@ -1,3 +1,4 @@
+
 #include "uml/impl/ManifestationImpl.hpp"
 
 #ifdef NDEBUG
@@ -25,7 +26,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -33,7 +33,6 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-
 
 #include "uml/Abstraction.hpp"
 #include "uml/Comment.hpp"
@@ -148,25 +147,18 @@ std::shared_ptr<ecore::EObject> ManifestationImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> ManifestationImpl::eStaticClass() const
-{
-	return uml::umlPackage::eInstance()->getManifestation_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference utilizedElement
-*/
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference utilizedElement */
 std::shared_ptr<uml::PackageableElement> ManifestationImpl::getUtilizedElement() const
 {
     return m_utilizedElement;
@@ -176,7 +168,6 @@ void ManifestationImpl::setUtilizedElement(std::shared_ptr<uml::PackageableEleme
     m_utilizedElement = _utilizedElement;
 	
 }
-
 
 //*********************************
 // Union Getter
@@ -263,16 +254,9 @@ std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> ManifestationImpl::getT
 
 
 
-
-std::shared_ptr<Manifestation> ManifestationImpl::getThisManifestationPtr() const
-{
-	return m_thisManifestationPtr.lock();
-}
-void ManifestationImpl::setThisManifestationPtr(std::weak_ptr<Manifestation> thisManifestationPtr)
-{
-	m_thisManifestationPtr = thisManifestationPtr;
-	setThisAbstractionPtr(thisManifestationPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> ManifestationImpl::eContainer() const
 {
 	if(auto wp = m_namespace.lock())
@@ -295,70 +279,6 @@ std::shared_ptr<ecore::EObject> ManifestationImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any ManifestationImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::MANIFESTATION_ATTRIBUTE_UTILIZEDELEMENT:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getUtilizedElement();
-				return eAny(returnValue); //14518
-			}
-	}
-	return AbstractionImpl::eGet(featureID, resolve, coreType);
-}
-bool ManifestationImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::MANIFESTATION_ATTRIBUTE_UTILIZEDELEMENT:
-			return getUtilizedElement() != nullptr; //14518
-	}
-	return AbstractionImpl::internalEIsSet(featureID);
-}
-bool ManifestationImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::MANIFESTATION_ATTRIBUTE_UTILIZEDELEMENT:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::PackageableElement> _utilizedElement = std::dynamic_pointer_cast<uml::PackageableElement>(_temp);
-			setUtilizedElement(_utilizedElement); //14518
-			return true;
-		}
-	}
-
-	return AbstractionImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any ManifestationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-
-		default:
-		{
-			// call superTypes
-			result = AbstractionImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -451,12 +371,6 @@ void ManifestationImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandl
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
-	
-	
 }
 
 void ManifestationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -473,3 +387,86 @@ void ManifestationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSa
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> ManifestationImpl::eStaticClass() const
+{
+	return uml::umlPackage::eInstance()->getManifestation_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any ManifestationImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::MANIFESTATION_ATTRIBUTE_UTILIZEDELEMENT:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getUtilizedElement();
+				return eAny(returnValue); //14518
+			}
+	}
+	return AbstractionImpl::eGet(featureID, resolve, coreType);
+}
+
+bool ManifestationImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::MANIFESTATION_ATTRIBUTE_UTILIZEDELEMENT:
+			return getUtilizedElement() != nullptr; //14518
+	}
+	return AbstractionImpl::internalEIsSet(featureID);
+}
+
+bool ManifestationImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::MANIFESTATION_ATTRIBUTE_UTILIZEDELEMENT:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::PackageableElement> _utilizedElement = std::dynamic_pointer_cast<uml::PackageableElement>(_temp);
+			setUtilizedElement(_utilizedElement); //14518
+			return true;
+		}
+	}
+
+	return AbstractionImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any ManifestationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+
+		default:
+		{
+			// call superTypes
+			result = AbstractionImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<Manifestation> ManifestationImpl::getThisManifestationPtr() const
+{
+	return m_thisManifestationPtr.lock();
+}
+void ManifestationImpl::setThisManifestationPtr(std::weak_ptr<Manifestation> thisManifestationPtr)
+{
+	m_thisManifestationPtr = thisManifestationPtr;
+	setThisAbstractionPtr(thisManifestationPtr);
+}

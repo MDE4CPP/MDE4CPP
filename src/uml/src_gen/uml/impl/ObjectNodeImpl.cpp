@@ -1,3 +1,4 @@
+
 #include "uml/impl/ObjectNodeImpl.hpp"
 
 #ifdef NDEBUG
@@ -26,7 +27,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -34,7 +34,6 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-
 
 #include "uml/Activity.hpp"
 #include "uml/ActivityEdge.hpp"
@@ -163,42 +162,6 @@ std::shared_ptr<ecore::EObject> ObjectNodeImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> ObjectNodeImpl::eStaticClass() const
-{
-	return uml::umlPackage::eInstance()->getObjectNode_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-/*
-Getter & Setter for attribute isControlType
-*/
-bool ObjectNodeImpl::getIsControlType() const 
-{
-	return m_isControlType;
-}
-void ObjectNodeImpl::setIsControlType(bool _isControlType)
-{
-	m_isControlType = _isControlType;
-	
-} 
-
-
-/*
-Getter & Setter for attribute ordering
-*/
-uml::ObjectNodeOrderingKind ObjectNodeImpl::getOrdering() const 
-{
-	return m_ordering;
-}
-void ObjectNodeImpl::setOrdering(uml::ObjectNodeOrderingKind _ordering)
-{
-	m_ordering = _ordering;
-	
-} 
-
-
 //*********************************
 // Operations
 //*********************************
@@ -221,11 +184,34 @@ bool ObjectNodeImpl::selection_behavior(Any diagnostics,std::shared_ptr<std::map
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference inState
-*/
+/* Getter & Setter for attribute isControlType */
+bool ObjectNodeImpl::getIsControlType() const 
+{
+	return m_isControlType;
+}
+void ObjectNodeImpl::setIsControlType(bool _isControlType)
+{
+	m_isControlType = _isControlType;
+	
+}
+
+/* Getter & Setter for attribute ordering */
+uml::ObjectNodeOrderingKind ObjectNodeImpl::getOrdering() const 
+{
+	return m_ordering;
+}
+void ObjectNodeImpl::setOrdering(uml::ObjectNodeOrderingKind _ordering)
+{
+	m_ordering = _ordering;
+	
+}
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference inState */
 std::shared_ptr<Bag<uml::State>> ObjectNodeImpl::getInState() const
 {
 	if(m_inState == nullptr)
@@ -237,11 +223,7 @@ std::shared_ptr<Bag<uml::State>> ObjectNodeImpl::getInState() const
     return m_inState;
 }
 
-
-
-/*
-Getter & Setter for reference selection
-*/
+/* Getter & Setter for reference selection */
 std::shared_ptr<uml::Behavior> ObjectNodeImpl::getSelection() const
 {
     return m_selection;
@@ -252,10 +234,7 @@ void ObjectNodeImpl::setSelection(std::shared_ptr<uml::Behavior> _selection)
 	
 }
 
-
-/*
-Getter & Setter for reference upperBound
-*/
+/* Getter & Setter for reference upperBound */
 std::shared_ptr<uml::ValueSpecification> ObjectNodeImpl::getUpperBound() const
 {
     return m_upperBound;
@@ -265,7 +244,6 @@ void ObjectNodeImpl::setUpperBound(std::shared_ptr<uml::ValueSpecification> _upp
     m_upperBound = _upperBound;
 	
 }
-
 
 //*********************************
 // Union Getter
@@ -320,19 +298,9 @@ std::shared_ptr<Union<uml::RedefinableElement>> ObjectNodeImpl::getRedefinedElem
 	return m_redefinedElement;
 }
 
-
-
-
-std::shared_ptr<ObjectNode> ObjectNodeImpl::getThisObjectNodePtr() const
-{
-	return m_thisObjectNodePtr.lock();
-}
-void ObjectNodeImpl::setThisObjectNodePtr(std::weak_ptr<ObjectNode> thisObjectNodePtr)
-{
-	m_thisObjectNodePtr = thisObjectNodePtr;
-	setThisActivityNodePtr(thisObjectNodePtr);
-	setThisTypedElementPtr(thisObjectNodePtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> ObjectNodeImpl::eContainer() const
 {
 	if(auto wp = m_activity.lock())
@@ -355,232 +323,6 @@ std::shared_ptr<ecore::EObject> ObjectNodeImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any ObjectNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::OBJECTNODE_ATTRIBUTE_INSTATE:
-		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::State>::iterator iter = getInState()->begin();
-			Bag<uml::State>::iterator end = getInState()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //16021			
-		}
-		case uml::umlPackage::OBJECTNODE_ATTRIBUTE_ISCONTROLTYPE:
-			return eAny(getIsControlType()); //16022
-		case uml::umlPackage::OBJECTNODE_ATTRIBUTE_ORDERING:
-			return eAny(getOrdering()); //16023
-		case uml::umlPackage::OBJECTNODE_ATTRIBUTE_SELECTION:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getSelection();
-				return eAny(returnValue); //16024
-			}
-		case uml::umlPackage::OBJECTNODE_ATTRIBUTE_UPPERBOUND:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getUpperBound();
-				return eAny(returnValue); //16025
-			}
-	}
-	Any result;
-	result = ActivityNodeImpl::eGet(featureID, resolve, coreType);
-	if (result != nullptr && !result->isEmpty())
-	{
-		return result;
-	}
-	result = TypedElementImpl::eGet(featureID, resolve, coreType);
-	return result;
-}
-bool ObjectNodeImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::OBJECTNODE_ATTRIBUTE_INSTATE:
-			return getInState() != nullptr; //16021
-		case uml::umlPackage::OBJECTNODE_ATTRIBUTE_ISCONTROLTYPE:
-			return getIsControlType() != false; //16022
-		case uml::umlPackage::OBJECTNODE_ATTRIBUTE_ORDERING:
-			return m_ordering != ObjectNodeOrderingKind::FIFO;; //16023
-		case uml::umlPackage::OBJECTNODE_ATTRIBUTE_SELECTION:
-			return getSelection() != nullptr; //16024
-		case uml::umlPackage::OBJECTNODE_ATTRIBUTE_UPPERBOUND:
-			return getUpperBound() != nullptr; //16025
-	}
-	bool result = false;
-	result = ActivityNodeImpl::internalEIsSet(featureID);
-	if (result)
-	{
-		return result;
-	}
-	result = TypedElementImpl::internalEIsSet(featureID);
-	return result;
-}
-bool ObjectNodeImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::OBJECTNODE_ATTRIBUTE_INSTATE:
-		{
-			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::State>> inStateList(new Bag<uml::State>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
-			{
-				inStateList->add(std::dynamic_pointer_cast<uml::State>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::State>::iterator iterInState = getInState()->begin();
-			Bag<uml::State>::iterator endInState = getInState()->end();
-			while (iterInState != endInState)
-			{
-				if (inStateList->find(*iterInState) == -1)
-				{
-					getInState()->erase(*iterInState);
-				}
-				iterInState++;
-			}
- 
-			iterInState = inStateList->begin();
-			endInState = inStateList->end();
-			while (iterInState != endInState)
-			{
-				if (getInState()->find(*iterInState) == -1)
-				{
-					getInState()->add(*iterInState);
-				}
-				iterInState++;			
-			}
-			return true;
-		}
-		case uml::umlPackage::OBJECTNODE_ATTRIBUTE_ISCONTROLTYPE:
-		{
-			// BOOST CAST
-			bool _isControlType = newValue->get<bool>();
-			setIsControlType(_isControlType); //16022
-			return true;
-		}
-		case uml::umlPackage::OBJECTNODE_ATTRIBUTE_ORDERING:
-		{
-			// BOOST CAST
-			uml::ObjectNodeOrderingKind _ordering = newValue->get<uml::ObjectNodeOrderingKind>();
-			setOrdering(_ordering); //16023
-			return true;
-		}
-		case uml::umlPackage::OBJECTNODE_ATTRIBUTE_SELECTION:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::Behavior> _selection = std::dynamic_pointer_cast<uml::Behavior>(_temp);
-			setSelection(_selection); //16024
-			return true;
-		}
-		case uml::umlPackage::OBJECTNODE_ATTRIBUTE_UPPERBOUND:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::ValueSpecification> _upperBound = std::dynamic_pointer_cast<uml::ValueSpecification>(_temp);
-			setUpperBound(_upperBound); //16025
-			return true;
-		}
-	}
-
-	bool result = false;
-	result = ActivityNodeImpl::eSet(featureID, newValue);
-	if (result)
-	{
-		return result;
-	}
-	result = TypedElementImpl::eSet(featureID, newValue);
-	return result;
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any ObjectNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-		
-		// 1199944681
-		case umlPackage::OBJECTNODE_OPERATION_INPUT_OUTPUT_PARAMETER_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->input_output_parameter(incoming_param_diagnostics,incoming_param_context));
-			break;
-		}
-		
-		// 987041183
-		case umlPackage::OBJECTNODE_OPERATION_OBJECT_FLOW_EDGES_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->object_flow_edges(incoming_param_diagnostics,incoming_param_context));
-			break;
-		}
-		
-		// 1576805400
-		case umlPackage::OBJECTNODE_OPERATION_SELECTION_BEHAVIOR_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->selection_behavior(incoming_param_diagnostics,incoming_param_context));
-			break;
-		}
-
-		default:
-		{
-			// call superTypes
-			result = TypedElementImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			result = ActivityNodeImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -749,11 +491,6 @@ void ObjectNodeImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler>
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
-	
 }
 
 void ObjectNodeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -805,3 +542,249 @@ void ObjectNodeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> ObjectNodeImpl::eStaticClass() const
+{
+	return uml::umlPackage::eInstance()->getObjectNode_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any ObjectNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::OBJECTNODE_ATTRIBUTE_INSTATE:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::State>::iterator iter = getInState()->begin();
+			Bag<uml::State>::iterator end = getInState()->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //16021			
+		}
+		case uml::umlPackage::OBJECTNODE_ATTRIBUTE_ISCONTROLTYPE:
+			return eAny(getIsControlType()); //16022
+		case uml::umlPackage::OBJECTNODE_ATTRIBUTE_ORDERING:
+			return eAny(getOrdering()); //16023
+		case uml::umlPackage::OBJECTNODE_ATTRIBUTE_SELECTION:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getSelection();
+				return eAny(returnValue); //16024
+			}
+		case uml::umlPackage::OBJECTNODE_ATTRIBUTE_UPPERBOUND:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getUpperBound();
+				return eAny(returnValue); //16025
+			}
+	}
+	Any result;
+	result = ActivityNodeImpl::eGet(featureID, resolve, coreType);
+	if (result != nullptr && !result->isEmpty())
+	{
+		return result;
+	}
+	result = TypedElementImpl::eGet(featureID, resolve, coreType);
+	return result;
+}
+
+bool ObjectNodeImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::OBJECTNODE_ATTRIBUTE_INSTATE:
+			return getInState() != nullptr; //16021
+		case uml::umlPackage::OBJECTNODE_ATTRIBUTE_ISCONTROLTYPE:
+			return getIsControlType() != false; //16022
+		case uml::umlPackage::OBJECTNODE_ATTRIBUTE_ORDERING:
+			return m_ordering != ObjectNodeOrderingKind::FIFO;; //16023
+		case uml::umlPackage::OBJECTNODE_ATTRIBUTE_SELECTION:
+			return getSelection() != nullptr; //16024
+		case uml::umlPackage::OBJECTNODE_ATTRIBUTE_UPPERBOUND:
+			return getUpperBound() != nullptr; //16025
+	}
+	bool result = false;
+	result = ActivityNodeImpl::internalEIsSet(featureID);
+	if (result)
+	{
+		return result;
+	}
+	result = TypedElementImpl::internalEIsSet(featureID);
+	return result;
+}
+
+bool ObjectNodeImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::OBJECTNODE_ATTRIBUTE_INSTATE:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::State>> inStateList(new Bag<uml::State>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				inStateList->add(std::dynamic_pointer_cast<uml::State>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::State>::iterator iterInState = getInState()->begin();
+			Bag<uml::State>::iterator endInState = getInState()->end();
+			while (iterInState != endInState)
+			{
+				if (inStateList->find(*iterInState) == -1)
+				{
+					getInState()->erase(*iterInState);
+				}
+				iterInState++;
+			}
+ 
+			iterInState = inStateList->begin();
+			endInState = inStateList->end();
+			while (iterInState != endInState)
+			{
+				if (getInState()->find(*iterInState) == -1)
+				{
+					getInState()->add(*iterInState);
+				}
+				iterInState++;			
+			}
+			return true;
+		}
+		case uml::umlPackage::OBJECTNODE_ATTRIBUTE_ISCONTROLTYPE:
+		{
+			// BOOST CAST
+			bool _isControlType = newValue->get<bool>();
+			setIsControlType(_isControlType); //16022
+			return true;
+		}
+		case uml::umlPackage::OBJECTNODE_ATTRIBUTE_ORDERING:
+		{
+			// BOOST CAST
+			uml::ObjectNodeOrderingKind _ordering = newValue->get<uml::ObjectNodeOrderingKind>();
+			setOrdering(_ordering); //16023
+			return true;
+		}
+		case uml::umlPackage::OBJECTNODE_ATTRIBUTE_SELECTION:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::Behavior> _selection = std::dynamic_pointer_cast<uml::Behavior>(_temp);
+			setSelection(_selection); //16024
+			return true;
+		}
+		case uml::umlPackage::OBJECTNODE_ATTRIBUTE_UPPERBOUND:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::ValueSpecification> _upperBound = std::dynamic_pointer_cast<uml::ValueSpecification>(_temp);
+			setUpperBound(_upperBound); //16025
+			return true;
+		}
+	}
+
+	bool result = false;
+	result = ActivityNodeImpl::eSet(featureID, newValue);
+	if (result)
+	{
+		return result;
+	}
+	result = TypedElementImpl::eSet(featureID, newValue);
+	return result;
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any ObjectNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 1199944681
+		case umlPackage::OBJECTNODE_OPERATION_INPUT_OUTPUT_PARAMETER_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->input_output_parameter(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+		
+		// 987041183
+		case umlPackage::OBJECTNODE_OPERATION_OBJECT_FLOW_EDGES_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->object_flow_edges(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+		
+		// 1576805400
+		case umlPackage::OBJECTNODE_OPERATION_SELECTION_BEHAVIOR_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->selection_behavior(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = TypedElementImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			result = ActivityNodeImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<ObjectNode> ObjectNodeImpl::getThisObjectNodePtr() const
+{
+	return m_thisObjectNodePtr.lock();
+}
+void ObjectNodeImpl::setThisObjectNodePtr(std::weak_ptr<ObjectNode> thisObjectNodePtr)
+{
+	m_thisObjectNodePtr = thisObjectNodePtr;
+	setThisActivityNodePtr(thisObjectNodePtr);
+	setThisTypedElementPtr(thisObjectNodePtr);
+}

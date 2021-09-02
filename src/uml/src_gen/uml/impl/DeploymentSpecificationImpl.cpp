@@ -1,3 +1,4 @@
+
 #include "uml/impl/DeploymentSpecificationImpl.hpp"
 
 #ifdef NDEBUG
@@ -26,7 +27,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -34,7 +34,6 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-
 
 #include "uml/Artifact.hpp"
 #include "uml/Classifier.hpp"
@@ -184,42 +183,6 @@ std::shared_ptr<ecore::EObject> DeploymentSpecificationImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> DeploymentSpecificationImpl::eStaticClass() const
-{
-	return uml::umlPackage::eInstance()->getDeploymentSpecification_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-/*
-Getter & Setter for attribute deploymentLocation
-*/
-std::string DeploymentSpecificationImpl::getDeploymentLocation() const 
-{
-	return m_deploymentLocation;
-}
-void DeploymentSpecificationImpl::setDeploymentLocation(std::string _deploymentLocation)
-{
-	m_deploymentLocation = _deploymentLocation;
-	
-} 
-
-
-/*
-Getter & Setter for attribute executionLocation
-*/
-std::string DeploymentSpecificationImpl::getExecutionLocation() const 
-{
-	return m_executionLocation;
-}
-void DeploymentSpecificationImpl::setExecutionLocation(std::string _executionLocation)
-{
-	m_executionLocation = _executionLocation;
-	
-} 
-
-
 //*********************************
 // Operations
 //*********************************
@@ -236,11 +199,34 @@ bool DeploymentSpecificationImpl::deployment_target(Any diagnostics,std::shared_
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference deployment
-*/
+/* Getter & Setter for attribute deploymentLocation */
+std::string DeploymentSpecificationImpl::getDeploymentLocation() const 
+{
+	return m_deploymentLocation;
+}
+void DeploymentSpecificationImpl::setDeploymentLocation(std::string _deploymentLocation)
+{
+	m_deploymentLocation = _deploymentLocation;
+	
+}
+
+/* Getter & Setter for attribute executionLocation */
+std::string DeploymentSpecificationImpl::getExecutionLocation() const 
+{
+	return m_executionLocation;
+}
+void DeploymentSpecificationImpl::setExecutionLocation(std::string _executionLocation)
+{
+	m_executionLocation = _executionLocation;
+	
+}
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference deployment */
 std::weak_ptr<uml::Deployment> DeploymentSpecificationImpl::getDeployment() const
 {
     return m_deployment;
@@ -250,7 +236,6 @@ void DeploymentSpecificationImpl::setDeployment(std::weak_ptr<uml::Deployment> _
     m_deployment = _deployment;
 	
 }
-
 
 //*********************************
 // Union Getter
@@ -372,16 +357,9 @@ std::shared_ptr<Union<uml::RedefinableElement>> DeploymentSpecificationImpl::get
 
 
 
-
-std::shared_ptr<DeploymentSpecification> DeploymentSpecificationImpl::getThisDeploymentSpecificationPtr() const
-{
-	return m_thisDeploymentSpecificationPtr.lock();
-}
-void DeploymentSpecificationImpl::setThisDeploymentSpecificationPtr(std::weak_ptr<DeploymentSpecification> thisDeploymentSpecificationPtr)
-{
-	m_thisDeploymentSpecificationPtr = thisDeploymentSpecificationPtr;
-	setThisArtifactPtr(thisDeploymentSpecificationPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> DeploymentSpecificationImpl::eContainer() const
 {
 	if(auto wp = m_deployment.lock())
@@ -414,126 +392,6 @@ std::shared_ptr<ecore::EObject> DeploymentSpecificationImpl::eContainer() const
 	}
 
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any DeploymentSpecificationImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::DEPLOYMENTSPECIFICATION_ATTRIBUTE_DEPLOYMENT:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getDeployment().lock();
-				return eAny(returnValue); //7045
-			}
-		case uml::umlPackage::DEPLOYMENTSPECIFICATION_ATTRIBUTE_DEPLOYMENTLOCATION:
-			return eAny(getDeploymentLocation()); //7043
-		case uml::umlPackage::DEPLOYMENTSPECIFICATION_ATTRIBUTE_EXECUTIONLOCATION:
-			return eAny(getExecutionLocation()); //7044
-	}
-	return ArtifactImpl::eGet(featureID, resolve, coreType);
-}
-bool DeploymentSpecificationImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::DEPLOYMENTSPECIFICATION_ATTRIBUTE_DEPLOYMENT:
-			return getDeployment().lock() != nullptr; //7045
-		case uml::umlPackage::DEPLOYMENTSPECIFICATION_ATTRIBUTE_DEPLOYMENTLOCATION:
-			return getDeploymentLocation() != ""; //7043
-		case uml::umlPackage::DEPLOYMENTSPECIFICATION_ATTRIBUTE_EXECUTIONLOCATION:
-			return getExecutionLocation() != ""; //7044
-	}
-	return ArtifactImpl::internalEIsSet(featureID);
-}
-bool DeploymentSpecificationImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::DEPLOYMENTSPECIFICATION_ATTRIBUTE_DEPLOYMENT:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::Deployment> _deployment = std::dynamic_pointer_cast<uml::Deployment>(_temp);
-			setDeployment(_deployment); //7045
-			return true;
-		}
-		case uml::umlPackage::DEPLOYMENTSPECIFICATION_ATTRIBUTE_DEPLOYMENTLOCATION:
-		{
-			// BOOST CAST
-			std::string _deploymentLocation = newValue->get<std::string>();
-			setDeploymentLocation(_deploymentLocation); //7043
-			return true;
-		}
-		case uml::umlPackage::DEPLOYMENTSPECIFICATION_ATTRIBUTE_EXECUTIONLOCATION:
-		{
-			// BOOST CAST
-			std::string _executionLocation = newValue->get<std::string>();
-			setExecutionLocation(_executionLocation); //7044
-			return true;
-		}
-	}
-
-	return ArtifactImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any DeploymentSpecificationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-		
-		// 1212838527
-		case umlPackage::DEPLOYMENTSPECIFICATION_OPERATION_DEPLOYED_ELEMENTS_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->deployed_elements(incoming_param_diagnostics,incoming_param_context));
-			break;
-		}
-		
-		// 1545768860
-		case umlPackage::DEPLOYMENTSPECIFICATION_OPERATION_DEPLOYMENT_TARGET_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->deployment_target(incoming_param_diagnostics,incoming_param_context));
-			break;
-		}
-
-		default:
-		{
-			// call superTypes
-			result = ArtifactImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -641,13 +499,6 @@ void DeploymentSpecificationImpl::save(std::shared_ptr<persistence::interfaces::
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
-	
-	
-	
 }
 
 void DeploymentSpecificationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -672,3 +523,142 @@ void DeploymentSpecificationImpl::saveContent(std::shared_ptr<persistence::inter
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> DeploymentSpecificationImpl::eStaticClass() const
+{
+	return uml::umlPackage::eInstance()->getDeploymentSpecification_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any DeploymentSpecificationImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::DEPLOYMENTSPECIFICATION_ATTRIBUTE_DEPLOYMENT:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getDeployment().lock();
+				return eAny(returnValue); //7045
+			}
+		case uml::umlPackage::DEPLOYMENTSPECIFICATION_ATTRIBUTE_DEPLOYMENTLOCATION:
+			return eAny(getDeploymentLocation()); //7043
+		case uml::umlPackage::DEPLOYMENTSPECIFICATION_ATTRIBUTE_EXECUTIONLOCATION:
+			return eAny(getExecutionLocation()); //7044
+	}
+	return ArtifactImpl::eGet(featureID, resolve, coreType);
+}
+
+bool DeploymentSpecificationImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::DEPLOYMENTSPECIFICATION_ATTRIBUTE_DEPLOYMENT:
+			return getDeployment().lock() != nullptr; //7045
+		case uml::umlPackage::DEPLOYMENTSPECIFICATION_ATTRIBUTE_DEPLOYMENTLOCATION:
+			return getDeploymentLocation() != ""; //7043
+		case uml::umlPackage::DEPLOYMENTSPECIFICATION_ATTRIBUTE_EXECUTIONLOCATION:
+			return getExecutionLocation() != ""; //7044
+	}
+	return ArtifactImpl::internalEIsSet(featureID);
+}
+
+bool DeploymentSpecificationImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::DEPLOYMENTSPECIFICATION_ATTRIBUTE_DEPLOYMENT:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::Deployment> _deployment = std::dynamic_pointer_cast<uml::Deployment>(_temp);
+			setDeployment(_deployment); //7045
+			return true;
+		}
+		case uml::umlPackage::DEPLOYMENTSPECIFICATION_ATTRIBUTE_DEPLOYMENTLOCATION:
+		{
+			// BOOST CAST
+			std::string _deploymentLocation = newValue->get<std::string>();
+			setDeploymentLocation(_deploymentLocation); //7043
+			return true;
+		}
+		case uml::umlPackage::DEPLOYMENTSPECIFICATION_ATTRIBUTE_EXECUTIONLOCATION:
+		{
+			// BOOST CAST
+			std::string _executionLocation = newValue->get<std::string>();
+			setExecutionLocation(_executionLocation); //7044
+			return true;
+		}
+	}
+
+	return ArtifactImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any DeploymentSpecificationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 1212838527
+		case umlPackage::DEPLOYMENTSPECIFICATION_OPERATION_DEPLOYED_ELEMENTS_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->deployed_elements(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+		
+		// 1545768860
+		case umlPackage::DEPLOYMENTSPECIFICATION_OPERATION_DEPLOYMENT_TARGET_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->deployment_target(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = ArtifactImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<DeploymentSpecification> DeploymentSpecificationImpl::getThisDeploymentSpecificationPtr() const
+{
+	return m_thisDeploymentSpecificationPtr.lock();
+}
+void DeploymentSpecificationImpl::setThisDeploymentSpecificationPtr(std::weak_ptr<DeploymentSpecification> thisDeploymentSpecificationPtr)
+{
+	m_thisDeploymentSpecificationPtr = thisDeploymentSpecificationPtr;
+	setThisArtifactPtr(thisDeploymentSpecificationPtr);
+}

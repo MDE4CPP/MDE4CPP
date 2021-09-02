@@ -1,3 +1,4 @@
+
 #include "uml/impl/ImageImpl.hpp"
 
 #ifdef NDEBUG
@@ -25,7 +26,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -33,7 +33,6 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-
 
 #include "uml/Comment.hpp"
 #include "uml/Element.hpp"
@@ -113,17 +112,14 @@ std::shared_ptr<ecore::EObject> ImageImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> ImageImpl::eStaticClass() const
-{
-	return uml::umlPackage::eInstance()->getImage_Class();
-}
+//*********************************
+// Operations
+//*********************************
 
 //*********************************
-// Attribute Setter Getter
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for attribute content
-*/
+/* Getter & Setter for attribute content */
 std::string ImageImpl::getContent() const 
 {
 	return m_content;
@@ -132,12 +128,9 @@ void ImageImpl::setContent(std::string _content)
 {
 	m_content = _content;
 	
-} 
+}
 
-
-/*
-Getter & Setter for attribute format
-*/
+/* Getter & Setter for attribute format */
 std::string ImageImpl::getFormat() const 
 {
 	return m_format;
@@ -146,12 +139,9 @@ void ImageImpl::setFormat(std::string _format)
 {
 	m_format = _format;
 	
-} 
+}
 
-
-/*
-Getter & Setter for attribute location
-*/
+/* Getter & Setter for attribute location */
 std::string ImageImpl::getLocation() const 
 {
 	return m_location;
@@ -160,15 +150,10 @@ void ImageImpl::setLocation(std::string _location)
 {
 	m_location = _location;
 	
-} 
-
-
-//*********************************
-// Operations
-//*********************************
+}
 
 //*********************************
-// References
+// Reference Getters & Setters
 //*********************************
 
 //*********************************
@@ -189,18 +174,9 @@ std::shared_ptr<Union<uml::Element>> ImageImpl::getOwnedElement() const
 	return m_ownedElement;
 }
 
-
-
-
-std::shared_ptr<Image> ImageImpl::getThisImagePtr() const
-{
-	return m_thisImagePtr.lock();
-}
-void ImageImpl::setThisImagePtr(std::weak_ptr<Image> thisImagePtr)
-{
-	m_thisImagePtr = thisImagePtr;
-	setThisElementPtr(thisImagePtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> ImageImpl::eContainer() const
 {
 	if(auto wp = m_owner.lock())
@@ -208,88 +184,6 @@ std::shared_ptr<ecore::EObject> ImageImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any ImageImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::IMAGE_ATTRIBUTE_CONTENT:
-			return eAny(getContent()); //1113
-		case uml::umlPackage::IMAGE_ATTRIBUTE_FORMAT:
-			return eAny(getFormat()); //1114
-		case uml::umlPackage::IMAGE_ATTRIBUTE_LOCATION:
-			return eAny(getLocation()); //1115
-	}
-	return ElementImpl::eGet(featureID, resolve, coreType);
-}
-bool ImageImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::IMAGE_ATTRIBUTE_CONTENT:
-			return getContent() != ""; //1113
-		case uml::umlPackage::IMAGE_ATTRIBUTE_FORMAT:
-			return getFormat() != ""; //1114
-		case uml::umlPackage::IMAGE_ATTRIBUTE_LOCATION:
-			return getLocation() != ""; //1115
-	}
-	return ElementImpl::internalEIsSet(featureID);
-}
-bool ImageImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::IMAGE_ATTRIBUTE_CONTENT:
-		{
-			// BOOST CAST
-			std::string _content = newValue->get<std::string>();
-			setContent(_content); //1113
-			return true;
-		}
-		case uml::umlPackage::IMAGE_ATTRIBUTE_FORMAT:
-		{
-			// BOOST CAST
-			std::string _format = newValue->get<std::string>();
-			setFormat(_format); //1114
-			return true;
-		}
-		case uml::umlPackage::IMAGE_ATTRIBUTE_LOCATION:
-		{
-			// BOOST CAST
-			std::string _location = newValue->get<std::string>();
-			setLocation(_location); //1115
-			return true;
-		}
-	}
-
-	return ElementImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any ImageImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-
-		default:
-		{
-			// call superTypes
-			result = ElementImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -377,8 +271,6 @@ void ImageImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> save
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
 }
 
 void ImageImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -408,3 +300,104 @@ void ImageImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandle
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> ImageImpl::eStaticClass() const
+{
+	return uml::umlPackage::eInstance()->getImage_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any ImageImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::IMAGE_ATTRIBUTE_CONTENT:
+			return eAny(getContent()); //1113
+		case uml::umlPackage::IMAGE_ATTRIBUTE_FORMAT:
+			return eAny(getFormat()); //1114
+		case uml::umlPackage::IMAGE_ATTRIBUTE_LOCATION:
+			return eAny(getLocation()); //1115
+	}
+	return ElementImpl::eGet(featureID, resolve, coreType);
+}
+
+bool ImageImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::IMAGE_ATTRIBUTE_CONTENT:
+			return getContent() != ""; //1113
+		case uml::umlPackage::IMAGE_ATTRIBUTE_FORMAT:
+			return getFormat() != ""; //1114
+		case uml::umlPackage::IMAGE_ATTRIBUTE_LOCATION:
+			return getLocation() != ""; //1115
+	}
+	return ElementImpl::internalEIsSet(featureID);
+}
+
+bool ImageImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::IMAGE_ATTRIBUTE_CONTENT:
+		{
+			// BOOST CAST
+			std::string _content = newValue->get<std::string>();
+			setContent(_content); //1113
+			return true;
+		}
+		case uml::umlPackage::IMAGE_ATTRIBUTE_FORMAT:
+		{
+			// BOOST CAST
+			std::string _format = newValue->get<std::string>();
+			setFormat(_format); //1114
+			return true;
+		}
+		case uml::umlPackage::IMAGE_ATTRIBUTE_LOCATION:
+		{
+			// BOOST CAST
+			std::string _location = newValue->get<std::string>();
+			setLocation(_location); //1115
+			return true;
+		}
+	}
+
+	return ElementImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any ImageImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+
+		default:
+		{
+			// call superTypes
+			result = ElementImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<Image> ImageImpl::getThisImagePtr() const
+{
+	return m_thisImagePtr.lock();
+}
+void ImageImpl::setThisImagePtr(std::weak_ptr<Image> thisImagePtr)
+{
+	m_thisImagePtr = thisImagePtr;
+	setThisElementPtr(thisImagePtr);
+}

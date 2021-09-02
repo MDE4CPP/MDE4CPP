@@ -90,18 +90,20 @@ namespace uml
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::TemplateParameter> > getInheritedParameters() = 0;/*!
+			virtual std::shared_ptr<Bag<uml::TemplateParameter> > getInheritedParameters() = 0;
+			/*!
 			If any of the parent Classifiers are a template, then the extendedSignature must include the signature of that Classifier.
 			classifier.allParents()->forAll(c | c.ownedTemplateSignature->notEmpty() implies self->closure(extendedSignature)->includes(c.ownedTemplateSignature))
 			*/
 			 
 			virtual bool redefines_parents(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+
 			//*********************************
-			// Attributes Getter & Setter
+			// Attribute Getters & Setters
 			//*********************************
-			
+
 			//*********************************
-			// References Getter & Setter
+			// Reference Getters & Setters
 			//*********************************
 			/*!
 			The Classifier that owns this RedefinableTemplateSignature.
@@ -128,21 +130,63 @@ namespace uml
 			*/
 			
 			virtual std::shared_ptr<Subset<uml::RedefinableTemplateSignature, uml::RedefinableElement>> getExtendedSignature() const = 0;
-			
 			/*!
 			The formal template parameters of the extended signatures.
 			<p>From package UML::Classification.</p>
 			*/
 			
 			virtual std::shared_ptr<Subset<uml::TemplateParameter, uml::TemplateParameter>> getInheritedParameter() const = 0;
+
+			//*********************************
+			// Union Reference Getters
+			//*********************************
+			/*!
+			The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
 			
+			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;
+			/*!
+			The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
 			
+			virtual std::weak_ptr<uml::Element> getOwner() const = 0;
+			/*!
+			The ordered set of all formal TemplateParameters for this TemplateSignature.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
+			virtual std::shared_ptr<Union<uml::TemplateParameter>> getParameter() const = 0;
+			/*!
+			The RedefinableElement that is being redefined by this element.
+			<p>From package UML::Classification.</p>
+			*/
+			
+			virtual std::shared_ptr<Union<uml::RedefinableElement>> getRedefinedElement() const = 0;
+			/*!
+			The contexts that this element may be redefined from.
+			<p>From package UML::Classification.</p>
+			*/
+			
+			virtual std::shared_ptr<Union<uml::Classifier>> getRedefinitionContext() const = 0;
+
+			//*********************************
+			// Container Getter
+			//*********************************
+			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
+
+			//*********************************
+			// Persistence Functions
+			//*********************************
+			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 
 		protected:
 			//*********************************
 			// Attribute Members
 			//*********************************
-			
 			
 			//*********************************
 			// Reference Members
@@ -152,60 +196,19 @@ namespace uml
 			<p>From package UML::Classification.</p>
 			*/
 			
-			std::weak_ptr<uml::Classifier> m_classifier;/*!
+			std::weak_ptr<uml::Classifier> m_classifier;
+			/*!
 			The signatures extended by this RedefinableTemplateSignature.
 			<p>From package UML::Classification.</p>
 			*/
 			
-			mutable std::shared_ptr<Subset<uml::RedefinableTemplateSignature, uml::RedefinableElement>> m_extendedSignature;/*!
+			mutable std::shared_ptr<Subset<uml::RedefinableTemplateSignature, uml::RedefinableElement>> m_extendedSignature;
+			/*!
 			The formal template parameters of the extended signatures.
 			<p>From package UML::Classification.</p>
 			*/
 			
 			mutable std::shared_ptr<Subset<uml::TemplateParameter, uml::TemplateParameter>> m_inheritedParameter;
-
-		public:
-			//*********************************
-			// Union Getter
-			//*********************************
-			/*!
-			The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;/*!
-			The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::weak_ptr<uml::Element> getOwner() const = 0;/*!
-			The ordered set of all formal TemplateParameters for this TemplateSignature.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::TemplateParameter>> getParameter() const = 0;/*!
-			The RedefinableElement that is being redefined by this element.
-			<p>From package UML::Classification.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::RedefinableElement>> getRedefinedElement() const = 0;/*!
-			The contexts that this element may be redefined from.
-			<p>From package UML::Classification.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::Classifier>> getRedefinitionContext() const = 0;
-
-			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
-			
-			//*********************************
-			// Persistence Functions
-			//*********************************
-			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
-			
-			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
-			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
-			
 	};
-
 }
 #endif /* end of include guard: UML_REDEFINABLETEMPLATESIGNATURE_HPP */

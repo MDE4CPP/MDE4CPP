@@ -1,3 +1,4 @@
+
 #include "uml/impl/VariableImpl.hpp"
 
 #ifdef NDEBUG
@@ -25,7 +26,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -33,7 +33,6 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-
 
 #include "uml/Action.hpp"
 #include "uml/Activity.hpp"
@@ -157,15 +156,6 @@ std::shared_ptr<ecore::EObject> VariableImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> VariableImpl::eStaticClass() const
-{
-	return uml::umlPackage::eInstance()->getVariable_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
@@ -176,11 +166,13 @@ bool VariableImpl::isAccessibleBy(std::shared_ptr<uml::Action> a)
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference activityScope
-*/
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference activityScope */
 std::weak_ptr<uml::Activity> VariableImpl::getActivityScope() const
 {
     return m_activityScope;
@@ -191,10 +183,7 @@ void VariableImpl::setActivityScope(std::weak_ptr<uml::Activity> _activityScope)
 	
 }
 
-
-/*
-Getter & Setter for reference scope
-*/
+/* Getter & Setter for reference scope */
 std::weak_ptr<uml::StructuredActivityNode> VariableImpl::getScope() const
 {
     return m_scope;
@@ -204,7 +193,6 @@ void VariableImpl::setScope(std::weak_ptr<uml::StructuredActivityNode> _scope)
     m_scope = _scope;
 	
 }
-
 
 //*********************************
 // Union Getter
@@ -236,17 +224,9 @@ std::weak_ptr<uml::Element> VariableImpl::getOwner() const
 
 
 
-
-std::shared_ptr<Variable> VariableImpl::getThisVariablePtr() const
-{
-	return m_thisVariablePtr.lock();
-}
-void VariableImpl::setThisVariablePtr(std::weak_ptr<Variable> thisVariablePtr)
-{
-	m_thisVariablePtr = thisVariablePtr;
-	setThisConnectableElementPtr(thisVariablePtr);
-	setThisMultiplicityElementPtr(thisVariablePtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> VariableImpl::eContainer() const
 {
 	if(auto wp = m_activityScope.lock())
@@ -274,121 +254,6 @@ std::shared_ptr<ecore::EObject> VariableImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any VariableImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::VARIABLE_ATTRIBUTE_ACTIVITYSCOPE:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getActivityScope().lock();
-				return eAny(returnValue); //25219
-			}
-		case uml::umlPackage::VARIABLE_ATTRIBUTE_SCOPE:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getScope().lock();
-				return eAny(returnValue); //25220
-			}
-	}
-	Any result;
-	result = ConnectableElementImpl::eGet(featureID, resolve, coreType);
-	if (result != nullptr && !result->isEmpty())
-	{
-		return result;
-	}
-	result = MultiplicityElementImpl::eGet(featureID, resolve, coreType);
-	return result;
-}
-bool VariableImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::VARIABLE_ATTRIBUTE_ACTIVITYSCOPE:
-			return getActivityScope().lock() != nullptr; //25219
-		case uml::umlPackage::VARIABLE_ATTRIBUTE_SCOPE:
-			return getScope().lock() != nullptr; //25220
-	}
-	bool result = false;
-	result = ConnectableElementImpl::internalEIsSet(featureID);
-	if (result)
-	{
-		return result;
-	}
-	result = MultiplicityElementImpl::internalEIsSet(featureID);
-	return result;
-}
-bool VariableImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::VARIABLE_ATTRIBUTE_ACTIVITYSCOPE:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::Activity> _activityScope = std::dynamic_pointer_cast<uml::Activity>(_temp);
-			setActivityScope(_activityScope); //25219
-			return true;
-		}
-		case uml::umlPackage::VARIABLE_ATTRIBUTE_SCOPE:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::StructuredActivityNode> _scope = std::dynamic_pointer_cast<uml::StructuredActivityNode>(_temp);
-			setScope(_scope); //25220
-			return true;
-		}
-	}
-
-	bool result = false;
-	result = ConnectableElementImpl::eSet(featureID, newValue);
-	if (result)
-	{
-		return result;
-	}
-	result = MultiplicityElementImpl::eSet(featureID, newValue);
-	return result;
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any VariableImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-		
-		// 1435273110
-		case umlPackage::VARIABLE_OPERATION_ISACCESSIBLEBY_ACTION:
-		{
-			//Retrieve input parameter 'a'
-			//parameter 0
-			std::shared_ptr<uml::Action> incoming_param_a;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_a_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_a = (*incoming_param_a_arguments_citer)->get()->get<std::shared_ptr<uml::Action> >();
-			result = eAny(this->isAccessibleBy(incoming_param_a));
-			break;
-		}
-
-		default:
-		{
-			// call superTypes
-			result = MultiplicityElementImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			result = ConnectableElementImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -474,11 +339,6 @@ void VariableImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> s
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
-	
 }
 
 void VariableImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -493,3 +353,138 @@ void VariableImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> VariableImpl::eStaticClass() const
+{
+	return uml::umlPackage::eInstance()->getVariable_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any VariableImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::VARIABLE_ATTRIBUTE_ACTIVITYSCOPE:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getActivityScope().lock();
+				return eAny(returnValue); //25219
+			}
+		case uml::umlPackage::VARIABLE_ATTRIBUTE_SCOPE:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getScope().lock();
+				return eAny(returnValue); //25220
+			}
+	}
+	Any result;
+	result = ConnectableElementImpl::eGet(featureID, resolve, coreType);
+	if (result != nullptr && !result->isEmpty())
+	{
+		return result;
+	}
+	result = MultiplicityElementImpl::eGet(featureID, resolve, coreType);
+	return result;
+}
+
+bool VariableImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::VARIABLE_ATTRIBUTE_ACTIVITYSCOPE:
+			return getActivityScope().lock() != nullptr; //25219
+		case uml::umlPackage::VARIABLE_ATTRIBUTE_SCOPE:
+			return getScope().lock() != nullptr; //25220
+	}
+	bool result = false;
+	result = ConnectableElementImpl::internalEIsSet(featureID);
+	if (result)
+	{
+		return result;
+	}
+	result = MultiplicityElementImpl::internalEIsSet(featureID);
+	return result;
+}
+
+bool VariableImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::VARIABLE_ATTRIBUTE_ACTIVITYSCOPE:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::Activity> _activityScope = std::dynamic_pointer_cast<uml::Activity>(_temp);
+			setActivityScope(_activityScope); //25219
+			return true;
+		}
+		case uml::umlPackage::VARIABLE_ATTRIBUTE_SCOPE:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::StructuredActivityNode> _scope = std::dynamic_pointer_cast<uml::StructuredActivityNode>(_temp);
+			setScope(_scope); //25220
+			return true;
+		}
+	}
+
+	bool result = false;
+	result = ConnectableElementImpl::eSet(featureID, newValue);
+	if (result)
+	{
+		return result;
+	}
+	result = MultiplicityElementImpl::eSet(featureID, newValue);
+	return result;
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any VariableImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 1435273110
+		case umlPackage::VARIABLE_OPERATION_ISACCESSIBLEBY_ACTION:
+		{
+			//Retrieve input parameter 'a'
+			//parameter 0
+			std::shared_ptr<uml::Action> incoming_param_a;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_a_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_a = (*incoming_param_a_arguments_citer)->get()->get<std::shared_ptr<uml::Action> >();
+			result = eAny(this->isAccessibleBy(incoming_param_a));
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = MultiplicityElementImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			result = ConnectableElementImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<Variable> VariableImpl::getThisVariablePtr() const
+{
+	return m_thisVariablePtr.lock();
+}
+void VariableImpl::setThisVariablePtr(std::weak_ptr<Variable> thisVariablePtr)
+{
+	m_thisVariablePtr = thisVariablePtr;
+	setThisConnectableElementPtr(thisVariablePtr);
+	setThisMultiplicityElementPtr(thisVariablePtr);
+}

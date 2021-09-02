@@ -49,14 +49,16 @@ namespace uml
 			_'body'.oclAsType(Action).allActions().output->includesAll(bodyOutput)
 			*/
 			 
-			virtual bool body_output_pins(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
+			virtual bool body_output_pins(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			/*!
 			The decider Pin must be on an Action in the test section of the Clause and must be of type Boolean with multiplicity 1..1.
 			test.oclAsType(Action).allActions().output->includes(decider) and
 			decider.type = Boolean and
 			decider.is(1,1)
 			*/
 			 
-			virtual bool decider_output(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
+			virtual bool decider_output(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			/*!
 			The test and body parts of a ConditionalNode must be disjoint with each other.
 			test->intersection(_'body')->isEmpty()
 			*/
@@ -64,12 +66,11 @@ namespace uml
 			virtual bool test_and_body(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
-			// Attributes Getter Setter
+			// Attribute Getters & Setters
 			//*********************************
 			
-			
 			//*********************************
-			// Reference
+			// Reference Getters & Setters
 			//*********************************
 			/*!
 			The set of ExecutableNodes that are executed if the test evaluates to true and the Clause is chosen over other Clauses within the ConditionalNode that also have tests that evaluate to true.
@@ -77,14 +78,12 @@ namespace uml
 			*/
 			
 			virtual std::shared_ptr<Bag<uml::ExecutableNode>> getBody() const ;
-			
 			/*!
 			The OutputPins on Actions within the body section whose values are moved to the result OutputPins of the containing ConditionalNode after execution of the body.
 			<p>From package UML::Actions.</p>
 			*/
 			
 			virtual std::shared_ptr<Bag<uml::OutputPin>> getBodyOutput() const ;
-			
 			/*!
 			An OutputPin on an Action in the test section whose Boolean value determines the result of the test.
 			<p>From package UML::Actions.</p>
@@ -103,14 +102,12 @@ namespace uml
 			*/
 			
 			virtual std::shared_ptr<Bag<uml::Clause>> getPredecessorClause() const ;
-			
 			/*!
 			A set of Clauses that may not evaluate their tests unless the test for this Clause evaluates to false.
 			<p>From package UML::Actions.</p>
 			*/
 			
 			virtual std::shared_ptr<Bag<uml::Clause>> getSuccessorClause() const ;
-			
 			/*!
 			The set of ExecutableNodes that are executed in order to provide a test result for the Clause.
 			<p>From package UML::Actions.</p>
@@ -118,10 +115,8 @@ namespace uml
 			
 			virtual std::shared_ptr<Bag<uml::ExecutableNode>> getTest() const ;
 			
-			
-			
 			//*********************************
-			// Union Getter
+			// Union Reference Getters
 			//*********************************
 			/*!
 			The Elements owned by this Element.
@@ -130,7 +125,9 @@ namespace uml
 			
 			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const ;
 			
-
+			//*********************************
+			// Container Getter
+			//*********************************
 			virtual std::shared_ptr<ecore::EObject> eContainer() const ; 
 			
 			//*********************************
@@ -139,20 +136,23 @@ namespace uml
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) ;
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
-			
 			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
-			
 
-			//*********************************
-			// Structural Feature Getter/Setter
-			//*********************************
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+
+			//*********************************
+			// EStructuralFeature Get/Set/IsSet
+			//*********************************
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool internalEIsSet(int featureID) const ;
 			virtual bool eSet(int featureID, Any newValue) ;
+			virtual bool internalEIsSet(int featureID) const ;
+
+			//*********************************
+			// EOperation Invoke
+			//*********************************
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:

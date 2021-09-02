@@ -1,3 +1,4 @@
+
 #include "uml/impl/ReceptionImpl.hpp"
 
 #ifdef NDEBUG
@@ -26,7 +27,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -34,7 +34,6 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-
 
 #include "uml/Behavior.hpp"
 #include "uml/BehavioralFeature.hpp"
@@ -136,15 +135,6 @@ std::shared_ptr<ecore::EObject> ReceptionImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> ReceptionImpl::eStaticClass() const
-{
-	return uml::umlPackage::eInstance()->getReception_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
@@ -161,11 +151,13 @@ bool ReceptionImpl::same_structure_as_signal(Any diagnostics,std::shared_ptr<std
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference signal
-*/
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference signal */
 std::shared_ptr<uml::Signal> ReceptionImpl::getSignal() const
 {
     return m_signal;
@@ -175,7 +167,6 @@ void ReceptionImpl::setSignal(std::shared_ptr<uml::Signal> _signal)
     m_signal = _signal;
 	
 }
-
 
 //*********************************
 // Union Getter
@@ -235,18 +226,9 @@ std::weak_ptr<uml::Element> ReceptionImpl::getOwner() const
 	return m_owner;
 }
 
-
-
-
-std::shared_ptr<Reception> ReceptionImpl::getThisReceptionPtr() const
-{
-	return m_thisReceptionPtr.lock();
-}
-void ReceptionImpl::setThisReceptionPtr(std::weak_ptr<Reception> thisReceptionPtr)
-{
-	m_thisReceptionPtr = thisReceptionPtr;
-	setThisBehavioralFeaturePtr(thisReceptionPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> ReceptionImpl::eContainer() const
 {
 	if(auto wp = m_namespace.lock())
@@ -259,104 +241,6 @@ std::shared_ptr<ecore::EObject> ReceptionImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any ReceptionImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::RECEPTION_ATTRIBUTE_SIGNAL:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getSignal();
-				return eAny(returnValue); //20226
-			}
-	}
-	return BehavioralFeatureImpl::eGet(featureID, resolve, coreType);
-}
-bool ReceptionImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::RECEPTION_ATTRIBUTE_SIGNAL:
-			return getSignal() != nullptr; //20226
-	}
-	return BehavioralFeatureImpl::internalEIsSet(featureID);
-}
-bool ReceptionImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::RECEPTION_ATTRIBUTE_SIGNAL:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::Signal> _signal = std::dynamic_pointer_cast<uml::Signal>(_temp);
-			setSignal(_signal); //20226
-			return true;
-		}
-	}
-
-	return BehavioralFeatureImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any ReceptionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-		
-		// 552397630
-		case umlPackage::RECEPTION_OPERATION_SAME_NAME_AS_SIGNAL_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->same_name_as_signal(incoming_param_diagnostics,incoming_param_context));
-			break;
-		}
-		
-		// 1787249491
-		case umlPackage::RECEPTION_OPERATION_SAME_STRUCTURE_AS_SIGNAL_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->same_structure_as_signal(incoming_param_diagnostics,incoming_param_context));
-			break;
-		}
-
-		default:
-		{
-			// call superTypes
-			result = BehavioralFeatureImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -447,12 +331,6 @@ void ReceptionImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> 
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
-	
-	
 }
 
 void ReceptionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -469,3 +347,120 @@ void ReceptionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHa
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> ReceptionImpl::eStaticClass() const
+{
+	return uml::umlPackage::eInstance()->getReception_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any ReceptionImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::RECEPTION_ATTRIBUTE_SIGNAL:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getSignal();
+				return eAny(returnValue); //20226
+			}
+	}
+	return BehavioralFeatureImpl::eGet(featureID, resolve, coreType);
+}
+
+bool ReceptionImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::RECEPTION_ATTRIBUTE_SIGNAL:
+			return getSignal() != nullptr; //20226
+	}
+	return BehavioralFeatureImpl::internalEIsSet(featureID);
+}
+
+bool ReceptionImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::RECEPTION_ATTRIBUTE_SIGNAL:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::Signal> _signal = std::dynamic_pointer_cast<uml::Signal>(_temp);
+			setSignal(_signal); //20226
+			return true;
+		}
+	}
+
+	return BehavioralFeatureImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any ReceptionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 552397630
+		case umlPackage::RECEPTION_OPERATION_SAME_NAME_AS_SIGNAL_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->same_name_as_signal(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+		
+		// 1787249491
+		case umlPackage::RECEPTION_OPERATION_SAME_STRUCTURE_AS_SIGNAL_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->same_structure_as_signal(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = BehavioralFeatureImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<Reception> ReceptionImpl::getThisReceptionPtr() const
+{
+	return m_thisReceptionPtr.lock();
+}
+void ReceptionImpl::setThisReceptionPtr(std::weak_ptr<Reception> thisReceptionPtr)
+{
+	m_thisReceptionPtr = thisReceptionPtr;
+	setThisBehavioralFeaturePtr(thisReceptionPtr);
+}

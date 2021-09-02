@@ -1,3 +1,4 @@
+
 #include "ecore/impl/EPackageImpl.hpp"
 
 #ifdef NDEBUG
@@ -25,7 +26,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -33,7 +33,6 @@
 
 #include <exception> // used in Persistence
 #include "ecore/ecoreFactory.hpp"
-
 
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClassifier.hpp"
@@ -184,42 +183,6 @@ std::shared_ptr<ecore::EObject> EPackageImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<EClass> EPackageImpl::eStaticClass() const
-{
-	return ecore::ecorePackage::eInstance()->getEPackage_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-/*
-Getter & Setter for attribute nsPrefix
-*/
-std::string EPackageImpl::getNsPrefix() const 
-{
-	return m_nsPrefix;
-}
-void EPackageImpl::setNsPrefix(std::string _nsPrefix)
-{
-	m_nsPrefix = _nsPrefix;
-	
-} 
-
-
-/*
-Getter & Setter for attribute nsURI
-*/
-std::string EPackageImpl::getNsURI() const 
-{
-	return m_nsURI;
-}
-void EPackageImpl::setNsURI(std::string _nsURI)
-{
-	m_nsURI = _nsURI;
-	
-} 
-
-
 //*********************************
 // Operations
 //*********************************
@@ -240,11 +203,34 @@ std::shared_ptr<ecore::EClassifier> EPackageImpl::getEClassifier(std::string nam
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference eClassifiers
-*/
+/* Getter & Setter for attribute nsPrefix */
+std::string EPackageImpl::getNsPrefix() const 
+{
+	return m_nsPrefix;
+}
+void EPackageImpl::setNsPrefix(std::string _nsPrefix)
+{
+	m_nsPrefix = _nsPrefix;
+	
+}
+
+/* Getter & Setter for attribute nsURI */
+std::string EPackageImpl::getNsURI() const 
+{
+	return m_nsURI;
+}
+void EPackageImpl::setNsURI(std::string _nsURI)
+{
+	m_nsURI = _nsURI;
+	
+}
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference eClassifiers */
 std::shared_ptr<Subset<ecore::EClassifier, ecore::EObject>> EPackageImpl::getEClassifiers() const
 {
 	if(m_eClassifiers == nullptr)
@@ -265,11 +251,7 @@ std::shared_ptr<Subset<ecore::EClassifier, ecore::EObject>> EPackageImpl::getECl
     return m_eClassifiers;
 }
 
-
-
-/*
-Getter & Setter for reference eFactoryInstance
-*/
+/* Getter & Setter for reference eFactoryInstance */
 std::shared_ptr<ecore::EFactory> EPackageImpl::getEFactoryInstance() const
 {
     return m_eFactoryInstance;
@@ -280,10 +262,7 @@ void EPackageImpl::setEFactoryInstance(std::shared_ptr<ecore::EFactory> _eFactor
 	
 }
 
-
-/*
-Getter & Setter for reference eSubpackages
-*/
+/* Getter & Setter for reference eSubpackages */
 std::shared_ptr<Bag<ecore::EPackage>> EPackageImpl::getESubpackages() const
 {
 	if(m_eSubpackages == nullptr)
@@ -295,17 +274,11 @@ std::shared_ptr<Bag<ecore::EPackage>> EPackageImpl::getESubpackages() const
     return m_eSubpackages;
 }
 
-
-
-/*
-Getter & Setter for reference eSuperPackage
-*/
+/* Getter & Setter for reference eSuperPackage */
 std::weak_ptr<ecore::EPackage> EPackageImpl::getESuperPackage() const
 {
     return m_eSuperPackage;
 }
-
-
 
 //*********************************
 // Union Getter
@@ -325,18 +298,9 @@ std::shared_ptr<Union<ecore::EObject>> EPackageImpl::getEContens() const
 	return m_eContens;
 }
 
-
-
-
-std::shared_ptr<EPackage> EPackageImpl::getThisEPackagePtr() const
-{
-	return m_thisEPackagePtr.lock();
-}
-void EPackageImpl::setThisEPackagePtr(std::weak_ptr<EPackage> thisEPackagePtr)
-{
-	m_thisEPackagePtr = thisEPackagePtr;
-	setThisENamedElementPtr(thisEPackagePtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> EPackageImpl::eContainer() const
 {
 	if(auto wp = m_eContainer.lock())
@@ -349,211 +313,6 @@ std::shared_ptr<ecore::EObject> EPackageImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any EPackageImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case ecore::ecorePackage::EPACKAGE_ATTRIBUTE_ECLASSIFIERS:
-		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<ecore::EClassifier>::iterator iter = getEClassifiers()->begin();
-			Bag<ecore::EClassifier>::iterator end = getEClassifiers()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //418			
-		}
-		case ecore::ecorePackage::EPACKAGE_ATTRIBUTE_EFACTORYINSTANCE:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getEFactoryInstance();
-				return eAny(returnValue); //417
-			}
-		case ecore::ecorePackage::EPACKAGE_ATTRIBUTE_ESUBPACKAGES:
-		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<ecore::EPackage>::iterator iter = getESubpackages()->begin();
-			Bag<ecore::EPackage>::iterator end = getESubpackages()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //419			
-		}
-		case ecore::ecorePackage::EPACKAGE_ATTRIBUTE_ESUPERPACKAGE:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getESuperPackage().lock();
-				return eAny(returnValue); //4110
-			}
-		case ecore::ecorePackage::EPACKAGE_ATTRIBUTE_NSPREFIX:
-			return eAny(getNsPrefix()); //416
-		case ecore::ecorePackage::EPACKAGE_ATTRIBUTE_NSURI:
-			return eAny(getNsURI()); //415
-	}
-	return ENamedElementImpl::eGet(featureID, resolve, coreType);
-}
-bool EPackageImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case ecore::ecorePackage::EPACKAGE_ATTRIBUTE_ECLASSIFIERS:
-			return getEClassifiers() != nullptr; //418
-		case ecore::ecorePackage::EPACKAGE_ATTRIBUTE_EFACTORYINSTANCE:
-			return getEFactoryInstance() != nullptr; //417
-		case ecore::ecorePackage::EPACKAGE_ATTRIBUTE_ESUBPACKAGES:
-			return getESubpackages() != nullptr; //419
-		case ecore::ecorePackage::EPACKAGE_ATTRIBUTE_ESUPERPACKAGE:
-			return getESuperPackage().lock() != nullptr; //4110
-		case ecore::ecorePackage::EPACKAGE_ATTRIBUTE_NSPREFIX:
-			return getNsPrefix() != ""; //416
-		case ecore::ecorePackage::EPACKAGE_ATTRIBUTE_NSURI:
-			return getNsURI() != ""; //415
-	}
-	return ENamedElementImpl::internalEIsSet(featureID);
-}
-bool EPackageImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case ecore::ecorePackage::EPACKAGE_ATTRIBUTE_ECLASSIFIERS:
-		{
-			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<ecore::EClassifier>> eClassifiersList(new Bag<ecore::EClassifier>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
-			{
-				eClassifiersList->add(std::dynamic_pointer_cast<ecore::EClassifier>(*iter));
-				iter++;
-			}
-			
-			Bag<ecore::EClassifier>::iterator iterEClassifiers = getEClassifiers()->begin();
-			Bag<ecore::EClassifier>::iterator endEClassifiers = getEClassifiers()->end();
-			while (iterEClassifiers != endEClassifiers)
-			{
-				if (eClassifiersList->find(*iterEClassifiers) == -1)
-				{
-					getEClassifiers()->erase(*iterEClassifiers);
-				}
-				iterEClassifiers++;
-			}
- 
-			iterEClassifiers = eClassifiersList->begin();
-			endEClassifiers = eClassifiersList->end();
-			while (iterEClassifiers != endEClassifiers)
-			{
-				if (getEClassifiers()->find(*iterEClassifiers) == -1)
-				{
-					getEClassifiers()->add(*iterEClassifiers);
-				}
-				iterEClassifiers++;			
-			}
-			return true;
-		}
-		case ecore::ecorePackage::EPACKAGE_ATTRIBUTE_EFACTORYINSTANCE:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<ecore::EFactory> _eFactoryInstance = std::dynamic_pointer_cast<ecore::EFactory>(_temp);
-			setEFactoryInstance(_eFactoryInstance); //417
-			return true;
-		}
-		case ecore::ecorePackage::EPACKAGE_ATTRIBUTE_ESUBPACKAGES:
-		{
-			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<ecore::EPackage>> eSubpackagesList(new Bag<ecore::EPackage>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
-			{
-				eSubpackagesList->add(std::dynamic_pointer_cast<ecore::EPackage>(*iter));
-				iter++;
-			}
-			
-			Bag<ecore::EPackage>::iterator iterESubpackages = getESubpackages()->begin();
-			Bag<ecore::EPackage>::iterator endESubpackages = getESubpackages()->end();
-			while (iterESubpackages != endESubpackages)
-			{
-				if (eSubpackagesList->find(*iterESubpackages) == -1)
-				{
-					getESubpackages()->erase(*iterESubpackages);
-				}
-				iterESubpackages++;
-			}
- 
-			iterESubpackages = eSubpackagesList->begin();
-			endESubpackages = eSubpackagesList->end();
-			while (iterESubpackages != endESubpackages)
-			{
-				if (getESubpackages()->find(*iterESubpackages) == -1)
-				{
-					getESubpackages()->add(*iterESubpackages);
-				}
-				iterESubpackages++;			
-			}
-			return true;
-		}
-		case ecore::ecorePackage::EPACKAGE_ATTRIBUTE_NSPREFIX:
-		{
-			// BOOST CAST
-			std::string _nsPrefix = newValue->get<std::string>();
-			setNsPrefix(_nsPrefix); //416
-			return true;
-		}
-		case ecore::ecorePackage::EPACKAGE_ATTRIBUTE_NSURI:
-		{
-			// BOOST CAST
-			std::string _nsURI = newValue->get<std::string>();
-			setNsURI(_nsURI); //415
-			return true;
-		}
-	}
-
-	return ENamedElementImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any EPackageImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-		
-		// 1732523502
-		case ecorePackage::EPACKAGE_OPERATION_GETECLASSIFIER_ESTRING:
-		{
-			//Retrieve input parameter 'name'
-			//parameter 0
-			std::string incoming_param_name;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_name_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_name = (*incoming_param_name_arguments_citer)->get()->get<std::string >();
-			result = eAny(this->getEClassifier(incoming_param_name));
-			break;
-		}
-
-		default:
-		{
-			// call superTypes
-			result = ENamedElementImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -690,9 +449,6 @@ void EPackageImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> s
 	EObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
 }
 
 void EPackageImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -731,3 +487,227 @@ void EPackageImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 	}
 }
 
+
+std::shared_ptr<EClass> EPackageImpl::eStaticClass() const
+{
+	return ecore::ecorePackage::eInstance()->getEPackage_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any EPackageImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case ecore::ecorePackage::EPACKAGE_ATTRIBUTE_ECLASSIFIERS:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<ecore::EClassifier>::iterator iter = getEClassifiers()->begin();
+			Bag<ecore::EClassifier>::iterator end = getEClassifiers()->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //418			
+		}
+		case ecore::ecorePackage::EPACKAGE_ATTRIBUTE_EFACTORYINSTANCE:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getEFactoryInstance();
+				return eAny(returnValue); //417
+			}
+		case ecore::ecorePackage::EPACKAGE_ATTRIBUTE_ESUBPACKAGES:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<ecore::EPackage>::iterator iter = getESubpackages()->begin();
+			Bag<ecore::EPackage>::iterator end = getESubpackages()->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //419			
+		}
+		case ecore::ecorePackage::EPACKAGE_ATTRIBUTE_ESUPERPACKAGE:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getESuperPackage().lock();
+				return eAny(returnValue); //4110
+			}
+		case ecore::ecorePackage::EPACKAGE_ATTRIBUTE_NSPREFIX:
+			return eAny(getNsPrefix()); //416
+		case ecore::ecorePackage::EPACKAGE_ATTRIBUTE_NSURI:
+			return eAny(getNsURI()); //415
+	}
+	return ENamedElementImpl::eGet(featureID, resolve, coreType);
+}
+
+bool EPackageImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case ecore::ecorePackage::EPACKAGE_ATTRIBUTE_ECLASSIFIERS:
+			return getEClassifiers() != nullptr; //418
+		case ecore::ecorePackage::EPACKAGE_ATTRIBUTE_EFACTORYINSTANCE:
+			return getEFactoryInstance() != nullptr; //417
+		case ecore::ecorePackage::EPACKAGE_ATTRIBUTE_ESUBPACKAGES:
+			return getESubpackages() != nullptr; //419
+		case ecore::ecorePackage::EPACKAGE_ATTRIBUTE_ESUPERPACKAGE:
+			return getESuperPackage().lock() != nullptr; //4110
+		case ecore::ecorePackage::EPACKAGE_ATTRIBUTE_NSPREFIX:
+			return getNsPrefix() != ""; //416
+		case ecore::ecorePackage::EPACKAGE_ATTRIBUTE_NSURI:
+			return getNsURI() != ""; //415
+	}
+	return ENamedElementImpl::internalEIsSet(featureID);
+}
+
+bool EPackageImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case ecore::ecorePackage::EPACKAGE_ATTRIBUTE_ECLASSIFIERS:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<ecore::EClassifier>> eClassifiersList(new Bag<ecore::EClassifier>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				eClassifiersList->add(std::dynamic_pointer_cast<ecore::EClassifier>(*iter));
+				iter++;
+			}
+			
+			Bag<ecore::EClassifier>::iterator iterEClassifiers = getEClassifiers()->begin();
+			Bag<ecore::EClassifier>::iterator endEClassifiers = getEClassifiers()->end();
+			while (iterEClassifiers != endEClassifiers)
+			{
+				if (eClassifiersList->find(*iterEClassifiers) == -1)
+				{
+					getEClassifiers()->erase(*iterEClassifiers);
+				}
+				iterEClassifiers++;
+			}
+ 
+			iterEClassifiers = eClassifiersList->begin();
+			endEClassifiers = eClassifiersList->end();
+			while (iterEClassifiers != endEClassifiers)
+			{
+				if (getEClassifiers()->find(*iterEClassifiers) == -1)
+				{
+					getEClassifiers()->add(*iterEClassifiers);
+				}
+				iterEClassifiers++;			
+			}
+			return true;
+		}
+		case ecore::ecorePackage::EPACKAGE_ATTRIBUTE_EFACTORYINSTANCE:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<ecore::EFactory> _eFactoryInstance = std::dynamic_pointer_cast<ecore::EFactory>(_temp);
+			setEFactoryInstance(_eFactoryInstance); //417
+			return true;
+		}
+		case ecore::ecorePackage::EPACKAGE_ATTRIBUTE_ESUBPACKAGES:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<ecore::EPackage>> eSubpackagesList(new Bag<ecore::EPackage>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				eSubpackagesList->add(std::dynamic_pointer_cast<ecore::EPackage>(*iter));
+				iter++;
+			}
+			
+			Bag<ecore::EPackage>::iterator iterESubpackages = getESubpackages()->begin();
+			Bag<ecore::EPackage>::iterator endESubpackages = getESubpackages()->end();
+			while (iterESubpackages != endESubpackages)
+			{
+				if (eSubpackagesList->find(*iterESubpackages) == -1)
+				{
+					getESubpackages()->erase(*iterESubpackages);
+				}
+				iterESubpackages++;
+			}
+ 
+			iterESubpackages = eSubpackagesList->begin();
+			endESubpackages = eSubpackagesList->end();
+			while (iterESubpackages != endESubpackages)
+			{
+				if (getESubpackages()->find(*iterESubpackages) == -1)
+				{
+					getESubpackages()->add(*iterESubpackages);
+				}
+				iterESubpackages++;			
+			}
+			return true;
+		}
+		case ecore::ecorePackage::EPACKAGE_ATTRIBUTE_NSPREFIX:
+		{
+			// BOOST CAST
+			std::string _nsPrefix = newValue->get<std::string>();
+			setNsPrefix(_nsPrefix); //416
+			return true;
+		}
+		case ecore::ecorePackage::EPACKAGE_ATTRIBUTE_NSURI:
+		{
+			// BOOST CAST
+			std::string _nsURI = newValue->get<std::string>();
+			setNsURI(_nsURI); //415
+			return true;
+		}
+	}
+
+	return ENamedElementImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any EPackageImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 1732523502
+		case ecorePackage::EPACKAGE_OPERATION_GETECLASSIFIER_ESTRING:
+		{
+			//Retrieve input parameter 'name'
+			//parameter 0
+			std::string incoming_param_name;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_name_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_name = (*incoming_param_name_arguments_citer)->get()->get<std::string >();
+			result = eAny(this->getEClassifier(incoming_param_name));
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = ENamedElementImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<EPackage> EPackageImpl::getThisEPackagePtr() const
+{
+	return m_thisEPackagePtr.lock();
+}
+void EPackageImpl::setThisEPackagePtr(std::weak_ptr<EPackage> thisEPackagePtr)
+{
+	m_thisEPackagePtr = thisEPackagePtr;
+	setThisENamedElementPtr(thisEPackagePtr);
+}

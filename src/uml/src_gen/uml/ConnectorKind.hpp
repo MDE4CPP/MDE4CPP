@@ -10,8 +10,10 @@
 namespace uml 
 {
 	enum ConnectorKind {
+		
 		ASSEMBLY = 0
 ,
+		
 		DELEGATION = 1
 	};
 }

@@ -103,13 +103,15 @@ namespace uml
 			<p>From package UML::Activities.</p>
 			*/
 			 
-			virtual std::shared_ptr<uml::Activity> containingActivity() = 0;/*!
+			virtual std::shared_ptr<uml::Activity> containingActivity() = 0;
+			/*!
 			All containedNodes and containeEdges of an ActivityGroup must be in the same Activity as the group.
 			containedNode->forAll(activity = self.containingActivity()) and 
 			containedEdge->forAll(activity = self.containingActivity())
 			*/
 			 
-			virtual bool nodes_and_edges(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;/*!
+			virtual bool nodes_and_edges(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			/*!
 			No containedNode or containedEdge of an ActivityGroup may be contained by its subgroups or its superGroups, transitively.
 			subgroup->closure(subgroup).containedNode->excludesAll(containedNode) and
 			superGroup->closure(superGroup).containedNode->excludesAll(containedNode) and 
@@ -118,15 +120,14 @@ namespace uml
 			*/
 			 
 			virtual bool not_contained(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+
 			//*********************************
-			// Attributes Getter & Setter
+			// Attribute Getters & Setters
 			//*********************************
-			
+
 			//*********************************
-			// References Getter & Setter
+			// Reference Getters & Setters
 			//*********************************
-			
-			
 			
 			
 			/*!
@@ -143,15 +144,63 @@ namespace uml
 			virtual void setInActivity(std::weak_ptr<uml::Activity>) = 0;
 			
 			
+
+			//*********************************
+			// Union Reference Getters
+			//*********************************
+			/*!
+			ActivityEdges immediately contained in the ActivityGroup.
+			<p>From package UML::Activities.</p>
+			*/
 			
+			virtual std::shared_ptr<Union<uml::ActivityEdge>> getContainedEdge() const = 0;
+			/*!
+			ActivityNodes immediately contained in the ActivityGroup.
+			<p>From package UML::Activities.</p>
+			*/
 			
+			virtual std::shared_ptr<Union<uml::ActivityNode>> getContainedNode() const = 0;
+			/*!
+			The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
 			
+			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;
+			/*!
+			The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
+			virtual std::weak_ptr<uml::Element> getOwner() const = 0;
+			/*!
+			Other ActivityGroups immediately contained in this ActivityGroup.
+			<p>From package UML::Activities.</p>
+			*/
+			
+			virtual std::shared_ptr<SubsetUnion<uml::ActivityGroup, uml::Element>> getSubgroup() const = 0;
+			/*!
+			The ActivityGroup immediately containing this ActivityGroup, if it is directly owned by another ActivityGroup.
+			<p>From package UML::Activities.</p>
+			*/
+			
+			virtual std::weak_ptr<uml::ActivityGroup> getSuperGroup() const = 0;
+
+			//*********************************
+			// Container Getter
+			//*********************************
+			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
+
+			//*********************************
+			// Persistence Functions
+			//*********************************
+			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 
 		protected:
 			//*********************************
 			// Attribute Members
 			//*********************************
-			
 			
 			//*********************************
 			// Reference Members
@@ -161,75 +210,31 @@ namespace uml
 			<p>From package UML::Activities.</p>
 			*/
 			
-			mutable std::shared_ptr<Union<uml::ActivityEdge>> m_containedEdge;/*!
+			mutable std::shared_ptr<Union<uml::ActivityEdge>> m_containedEdge;
+			/*!
 			ActivityNodes immediately contained in the ActivityGroup.
 			<p>From package UML::Activities.</p>
 			*/
 			
-			mutable std::shared_ptr<Union<uml::ActivityNode>> m_containedNode;/*!
+			mutable std::shared_ptr<Union<uml::ActivityNode>> m_containedNode;
+			/*!
 			The Activity containing the ActivityGroup, if it is directly owned by an Activity.
 			<p>From package UML::Activities.</p>
 			*/
 			
-			std::weak_ptr<uml::Activity> m_inActivity;/*!
+			std::weak_ptr<uml::Activity> m_inActivity;
+			/*!
 			Other ActivityGroups immediately contained in this ActivityGroup.
 			<p>From package UML::Activities.</p>
 			*/
 			
-			mutable std::shared_ptr<SubsetUnion<uml::ActivityGroup, uml::Element>> m_subgroup;/*!
+			mutable std::shared_ptr<SubsetUnion<uml::ActivityGroup, uml::Element>> m_subgroup;
+			/*!
 			The ActivityGroup immediately containing this ActivityGroup, if it is directly owned by another ActivityGroup.
 			<p>From package UML::Activities.</p>
 			*/
 			
 			std::weak_ptr<uml::ActivityGroup> m_superGroup;
-
-		public:
-			//*********************************
-			// Union Getter
-			//*********************************
-			/*!
-			ActivityEdges immediately contained in the ActivityGroup.
-			<p>From package UML::Activities.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::ActivityEdge>> getContainedEdge() const = 0;/*!
-			ActivityNodes immediately contained in the ActivityGroup.
-			<p>From package UML::Activities.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::ActivityNode>> getContainedNode() const = 0;/*!
-			The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;/*!
-			The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::weak_ptr<uml::Element> getOwner() const = 0;/*!
-			Other ActivityGroups immediately contained in this ActivityGroup.
-			<p>From package UML::Activities.</p>
-			*/
-			
-			virtual std::shared_ptr<SubsetUnion<uml::ActivityGroup, uml::Element>> getSubgroup() const = 0;/*!
-			The ActivityGroup immediately containing this ActivityGroup, if it is directly owned by another ActivityGroup.
-			<p>From package UML::Activities.</p>
-			*/
-			
-			virtual std::weak_ptr<uml::ActivityGroup> getSuperGroup() const = 0;
-
-			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
-			
-			//*********************************
-			// Persistence Functions
-			//*********************************
-			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
-			
-			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
-			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
-			
 	};
-
 }
 #endif /* end of include guard: UML_ACTIVITYGROUP_HPP */

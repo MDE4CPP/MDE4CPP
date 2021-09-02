@@ -10,10 +10,13 @@
 namespace uml 
 {
 	enum ExpansionKind {
+		
 		ITERATIVE = 1
 ,
+		
 		PARALLEL = 0
 ,
+		
 		STREAM = 2
 	};
 }

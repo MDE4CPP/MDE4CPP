@@ -1,3 +1,4 @@
+
 #include "ocl/Evaluations/impl/OclMessageExpEvalImpl.hpp"
 
 #ifdef NDEBUG
@@ -25,19 +26,17 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "fUML/Semantics/Values/ValuesFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
 #include "uml/umlFactory.hpp"
+#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
-
 
 #include "ocl/Evaluations/EvalEnvironment.hpp"
 #include "fUML/Semantics/Loci/Locus.hpp"
@@ -121,17 +120,14 @@ std::shared_ptr<ecore::EObject> OclMessageExpEvalImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> OclMessageExpEvalImpl::eStaticClass() const
-{
-	return ocl::Evaluations::EvaluationsPackage::eInstance()->getOclMessageExpEval_Class();
-}
+//*********************************
+// Operations
+//*********************************
 
 //*********************************
-// Attribute Setter Getter
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for attribute name
-*/
+/* Getter & Setter for attribute name */
 std::string OclMessageExpEvalImpl::getName() const 
 {
 	return m_name;
@@ -140,19 +136,12 @@ void OclMessageExpEvalImpl::setName(std::string _name)
 {
 	m_name = _name;
 	
-} 
-
-
-//*********************************
-// Operations
-//*********************************
+}
 
 //*********************************
-// References
+// Reference Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference arguments
-*/
+/* Getter & Setter for reference arguments */
 std::shared_ptr<Bag<ocl::Evaluations::OclMessageArgEval>> OclMessageExpEvalImpl::getArguments() const
 {
 	if(m_arguments == nullptr)
@@ -164,11 +153,7 @@ std::shared_ptr<Bag<ocl::Evaluations::OclMessageArgEval>> OclMessageExpEvalImpl:
     return m_arguments;
 }
 
-
-
-/*
-Getter & Setter for reference target
-*/
+/* Getter & Setter for reference target */
 std::shared_ptr<ocl::Evaluations::OclExpEval> OclMessageExpEvalImpl::getTarget() const
 {
     return m_target;
@@ -179,150 +164,16 @@ void OclMessageExpEvalImpl::setTarget(std::shared_ptr<ocl::Evaluations::OclExpEv
 	
 }
 
-
 //*********************************
 // Union Getter
 //*********************************
 
-
-
-std::shared_ptr<OclMessageExpEval> OclMessageExpEvalImpl::getThisOclMessageExpEvalPtr() const
-{
-	return m_thisOclMessageExpEvalPtr.lock();
-}
-void OclMessageExpEvalImpl::setThisOclMessageExpEvalPtr(std::weak_ptr<OclMessageExpEval> thisOclMessageExpEvalPtr)
-{
-	m_thisOclMessageExpEvalPtr = thisOclMessageExpEvalPtr;
-	setThisOclExpEvalPtr(thisOclMessageExpEvalPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> OclMessageExpEvalImpl::eContainer() const
 {
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any OclMessageExpEvalImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case ocl::Evaluations::EvaluationsPackage::OCLMESSAGEEXPEVAL_ATTRIBUTE_ARGUMENTS:
-		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<ocl::Evaluations::OclMessageArgEval>::iterator iter = getArguments()->begin();
-			Bag<ocl::Evaluations::OclMessageArgEval>::iterator end = getArguments()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //627			
-		}
-		case ocl::Evaluations::EvaluationsPackage::OCLMESSAGEEXPEVAL_ATTRIBUTE_NAME:
-			return eAny(getName()); //628
-		case ocl::Evaluations::EvaluationsPackage::OCLMESSAGEEXPEVAL_ATTRIBUTE_TARGET:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getTarget();
-				return eAny(returnValue); //626
-			}
-	}
-	return OclExpEvalImpl::eGet(featureID, resolve, coreType);
-}
-bool OclMessageExpEvalImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case ocl::Evaluations::EvaluationsPackage::OCLMESSAGEEXPEVAL_ATTRIBUTE_ARGUMENTS:
-			return getArguments() != nullptr; //627
-		case ocl::Evaluations::EvaluationsPackage::OCLMESSAGEEXPEVAL_ATTRIBUTE_NAME:
-			return getName() != ""; //628
-		case ocl::Evaluations::EvaluationsPackage::OCLMESSAGEEXPEVAL_ATTRIBUTE_TARGET:
-			return getTarget() != nullptr; //626
-	}
-	return OclExpEvalImpl::internalEIsSet(featureID);
-}
-bool OclMessageExpEvalImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case ocl::Evaluations::EvaluationsPackage::OCLMESSAGEEXPEVAL_ATTRIBUTE_ARGUMENTS:
-		{
-			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<ocl::Evaluations::OclMessageArgEval>> argumentsList(new Bag<ocl::Evaluations::OclMessageArgEval>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
-			{
-				argumentsList->add(std::dynamic_pointer_cast<ocl::Evaluations::OclMessageArgEval>(*iter));
-				iter++;
-			}
-			
-			Bag<ocl::Evaluations::OclMessageArgEval>::iterator iterArguments = getArguments()->begin();
-			Bag<ocl::Evaluations::OclMessageArgEval>::iterator endArguments = getArguments()->end();
-			while (iterArguments != endArguments)
-			{
-				if (argumentsList->find(*iterArguments) == -1)
-				{
-					getArguments()->erase(*iterArguments);
-				}
-				iterArguments++;
-			}
- 
-			iterArguments = argumentsList->begin();
-			endArguments = argumentsList->end();
-			while (iterArguments != endArguments)
-			{
-				if (getArguments()->find(*iterArguments) == -1)
-				{
-					getArguments()->add(*iterArguments);
-				}
-				iterArguments++;			
-			}
-			return true;
-		}
-		case ocl::Evaluations::EvaluationsPackage::OCLMESSAGEEXPEVAL_ATTRIBUTE_NAME:
-		{
-			// BOOST CAST
-			std::string _name = newValue->get<std::string>();
-			setName(_name); //628
-			return true;
-		}
-		case ocl::Evaluations::EvaluationsPackage::OCLMESSAGEEXPEVAL_ATTRIBUTE_TARGET:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<ocl::Evaluations::OclExpEval> _target = std::dynamic_pointer_cast<ocl::Evaluations::OclExpEval>(_temp);
-			setTarget(_target); //626
-			return true;
-		}
-	}
-
-	return OclExpEvalImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any OclMessageExpEvalImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-
-		default:
-		{
-			// call superTypes
-			result = OclExpEvalImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -436,9 +287,6 @@ void OclMessageExpEvalImpl::save(std::shared_ptr<persistence::interfaces::XSaveH
 	fUML::Semantics::Loci::SemanticVisitorImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
 }
 
 void OclMessageExpEvalImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -461,3 +309,147 @@ void OclMessageExpEvalImpl::saveContent(std::shared_ptr<persistence::interfaces:
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> OclMessageExpEvalImpl::eStaticClass() const
+{
+	return ocl::Evaluations::EvaluationsPackage::eInstance()->getOclMessageExpEval_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any OclMessageExpEvalImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case ocl::Evaluations::EvaluationsPackage::OCLMESSAGEEXPEVAL_ATTRIBUTE_ARGUMENTS:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<ocl::Evaluations::OclMessageArgEval>::iterator iter = getArguments()->begin();
+			Bag<ocl::Evaluations::OclMessageArgEval>::iterator end = getArguments()->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //627			
+		}
+		case ocl::Evaluations::EvaluationsPackage::OCLMESSAGEEXPEVAL_ATTRIBUTE_NAME:
+			return eAny(getName()); //628
+		case ocl::Evaluations::EvaluationsPackage::OCLMESSAGEEXPEVAL_ATTRIBUTE_TARGET:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getTarget();
+				return eAny(returnValue); //626
+			}
+	}
+	return OclExpEvalImpl::eGet(featureID, resolve, coreType);
+}
+
+bool OclMessageExpEvalImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case ocl::Evaluations::EvaluationsPackage::OCLMESSAGEEXPEVAL_ATTRIBUTE_ARGUMENTS:
+			return getArguments() != nullptr; //627
+		case ocl::Evaluations::EvaluationsPackage::OCLMESSAGEEXPEVAL_ATTRIBUTE_NAME:
+			return getName() != ""; //628
+		case ocl::Evaluations::EvaluationsPackage::OCLMESSAGEEXPEVAL_ATTRIBUTE_TARGET:
+			return getTarget() != nullptr; //626
+	}
+	return OclExpEvalImpl::internalEIsSet(featureID);
+}
+
+bool OclMessageExpEvalImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case ocl::Evaluations::EvaluationsPackage::OCLMESSAGEEXPEVAL_ATTRIBUTE_ARGUMENTS:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<ocl::Evaluations::OclMessageArgEval>> argumentsList(new Bag<ocl::Evaluations::OclMessageArgEval>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				argumentsList->add(std::dynamic_pointer_cast<ocl::Evaluations::OclMessageArgEval>(*iter));
+				iter++;
+			}
+			
+			Bag<ocl::Evaluations::OclMessageArgEval>::iterator iterArguments = getArguments()->begin();
+			Bag<ocl::Evaluations::OclMessageArgEval>::iterator endArguments = getArguments()->end();
+			while (iterArguments != endArguments)
+			{
+				if (argumentsList->find(*iterArguments) == -1)
+				{
+					getArguments()->erase(*iterArguments);
+				}
+				iterArguments++;
+			}
+ 
+			iterArguments = argumentsList->begin();
+			endArguments = argumentsList->end();
+			while (iterArguments != endArguments)
+			{
+				if (getArguments()->find(*iterArguments) == -1)
+				{
+					getArguments()->add(*iterArguments);
+				}
+				iterArguments++;			
+			}
+			return true;
+		}
+		case ocl::Evaluations::EvaluationsPackage::OCLMESSAGEEXPEVAL_ATTRIBUTE_NAME:
+		{
+			// BOOST CAST
+			std::string _name = newValue->get<std::string>();
+			setName(_name); //628
+			return true;
+		}
+		case ocl::Evaluations::EvaluationsPackage::OCLMESSAGEEXPEVAL_ATTRIBUTE_TARGET:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<ocl::Evaluations::OclExpEval> _target = std::dynamic_pointer_cast<ocl::Evaluations::OclExpEval>(_temp);
+			setTarget(_target); //626
+			return true;
+		}
+	}
+
+	return OclExpEvalImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any OclMessageExpEvalImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+
+		default:
+		{
+			// call superTypes
+			result = OclExpEvalImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<OclMessageExpEval> OclMessageExpEvalImpl::getThisOclMessageExpEvalPtr() const
+{
+	return m_thisOclMessageExpEvalPtr.lock();
+}
+void OclMessageExpEvalImpl::setThisOclMessageExpEvalPtr(std::weak_ptr<OclMessageExpEval> thisOclMessageExpEvalPtr)
+{
+	m_thisOclMessageExpEvalPtr = thisOclMessageExpEvalPtr;
+	setThisOclExpEvalPtr(thisOclMessageExpEvalPtr);
+}

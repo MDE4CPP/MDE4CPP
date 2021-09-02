@@ -1,3 +1,4 @@
+
 #include "PSCS/Semantics/Actions/impl/CS_DefaultConstructStrategyImpl.hpp"
 
 #ifdef NDEBUG
@@ -51,7 +52,6 @@
 #include <exception> // used in Persistence
 #include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "uml/umlFactory.hpp"
-
 
 #include "uml/Association.hpp"
 #include "PSCS/Semantics/Actions/CS_ConstructStrategy.hpp"
@@ -169,15 +169,6 @@ std::shared_ptr<ecore::EObject> CS_DefaultConstructStrategyImpl::copy() const
 	element->setThisCS_DefaultConstructStrategyPtr(element);
 	return element;
 }
-
-std::shared_ptr<ecore::EClass> CS_DefaultConstructStrategyImpl::eStaticClass() const
-{
-	return PSCS::Semantics::Actions::ActionsPackage::eInstance()->getCS_DefaultConstructStrategy_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
 
 //*********************************
 // Operations
@@ -656,11 +647,13 @@ bool CS_DefaultConstructStrategyImpl::isStarPattern(std::shared_ptr<uml::Connect
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference defaultAssociation
-*/
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference defaultAssociation */
 std::shared_ptr<uml::Association> CS_DefaultConstructStrategyImpl::getDefaultAssociation() const
 {
     return m_defaultAssociation;
@@ -671,10 +664,7 @@ void CS_DefaultConstructStrategyImpl::setDefaultAssociation(std::shared_ptr<uml:
 	
 }
 
-
-/*
-Getter & Setter for reference generatedRealizingClasses
-*/
+/* Getter & Setter for reference generatedRealizingClasses */
 std::shared_ptr<Bag<uml::Class>> CS_DefaultConstructStrategyImpl::getGeneratedRealizingClasses() const
 {
 	if(m_generatedRealizingClasses == nullptr)
@@ -686,11 +676,7 @@ std::shared_ptr<Bag<uml::Class>> CS_DefaultConstructStrategyImpl::getGeneratedRe
     return m_generatedRealizingClasses;
 }
 
-
-
-/*
-Getter & Setter for reference locus
-*/
+/* Getter & Setter for reference locus */
 std::shared_ptr<fUML::Semantics::Loci::Locus> CS_DefaultConstructStrategyImpl::getLocus() const
 {
     return m_locus;
@@ -701,29 +687,167 @@ void CS_DefaultConstructStrategyImpl::setLocus(std::shared_ptr<fUML::Semantics::
 	
 }
 
-
 //*********************************
 // Union Getter
 //*********************************
 
-
-
-std::shared_ptr<CS_DefaultConstructStrategy> CS_DefaultConstructStrategyImpl::getThisCS_DefaultConstructStrategyPtr() const
-{
-	return m_thisCS_DefaultConstructStrategyPtr.lock();
-}
-void CS_DefaultConstructStrategyImpl::setThisCS_DefaultConstructStrategyPtr(std::weak_ptr<CS_DefaultConstructStrategy> thisCS_DefaultConstructStrategyPtr)
-{
-	m_thisCS_DefaultConstructStrategyPtr = thisCS_DefaultConstructStrategyPtr;
-	setThisCS_ConstructStrategyPtr(thisCS_DefaultConstructStrategyPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> CS_DefaultConstructStrategyImpl::eContainer() const
 {
 	return nullptr;
 }
 
 //*********************************
-// Structural Feature Getter/Setter
+// Persistence Functions
+//*********************************
+void CS_DefaultConstructStrategyImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get PSCSFactory
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
+	}
+}		
+
+void CS_DefaultConstructStrategyImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+	try
+	{
+		std::map<std::string, std::string>::const_iterator iter;
+		std::shared_ptr<ecore::EClass> metaClass = this->eClass(); // get MetaClass
+		iter = attr_list.find("locus");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("locus")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	CS_ConstructStrategyImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void CS_DefaultConstructStrategyImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+
+	try
+	{
+		if ( nodeName.compare("defaultAssociation") == 0 )
+		{
+  			std::string typeName = loadHandler->getCurrentXSITypeName();
+			if (typeName.empty())
+			{
+				typeName = "Association";
+			}
+			loadHandler->handleChild(this->getDefaultAssociation()); 
+
+			return; 
+		}
+
+		if ( nodeName.compare("generatedRealizingClasses") == 0 )
+		{
+  			std::string typeName = loadHandler->getCurrentXSITypeName();
+			if (typeName.empty())
+			{
+				typeName = "Class";
+			}
+			loadHandler->handleChildContainer<uml::Class>(this->getGeneratedRealizingClasses());  
+
+			return; 
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+	//load BasePackage Nodes
+	CS_ConstructStrategyImpl::loadNode(nodeName, loadHandler);
+}
+
+void CS_DefaultConstructStrategyImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+{
+	switch(featureID)
+	{
+		case PSCS::Semantics::Actions::ActionsPackage::CS_DEFAULTCONSTRUCTSTRATEGY_ATTRIBUTE_LOCUS:
+		{
+			if (references.size() == 1)
+			{
+				// Cast object to correct type
+				std::shared_ptr<fUML::Semantics::Loci::Locus> _locus = std::dynamic_pointer_cast<fUML::Semantics::Loci::Locus>( references.front() );
+				setLocus(_locus);
+			}
+			
+			return;
+		}
+	}
+	CS_ConstructStrategyImpl::resolveReferences(featureID, references);
+}
+
+void CS_DefaultConstructStrategyImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	CS_ConstructStrategyImpl::saveContent(saveHandler);
+	
+	fUML::Semantics::Loci::SemanticStrategyImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+}
+
+void CS_DefaultConstructStrategyImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<PSCS::Semantics::Actions::ActionsPackage> package = PSCS::Semantics::Actions::ActionsPackage::eInstance();
+	// Add references
+		saveHandler->addReference(this->getLocus(), "locus", getLocus()->eClass() != fUML::Semantics::Loci::LociPackage::eInstance()->getLocus_Class()); 
+		//
+		// Add new tags (from references)
+		//
+		std::shared_ptr<ecore::EClass> metaClass = this->eClass();
+		// Save 'defaultAssociation'
+
+		saveHandler->addReference(this->getDefaultAssociation(), "defaultAssociation", getDefaultAssociation()->eClass() != uml::umlPackage::eInstance()->getAssociation_Class());
+
+		// Save 'generatedRealizingClasses'
+
+		saveHandler->addReferences<uml::Class>("generatedRealizingClasses", this->getGeneratedRealizingClasses());
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+}
+
+
+std::shared_ptr<ecore::EClass> CS_DefaultConstructStrategyImpl::eStaticClass() const
+{
+	return PSCS::Semantics::Actions::ActionsPackage::eInstance()->getCS_DefaultConstructStrategy_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
 //*********************************
 Any CS_DefaultConstructStrategyImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
@@ -754,6 +878,7 @@ Any CS_DefaultConstructStrategyImpl::eGet(int featureID, bool resolve, bool core
 	}
 	return CS_ConstructStrategyImpl::eGet(featureID, resolve, coreType);
 }
+
 bool CS_DefaultConstructStrategyImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
@@ -767,6 +892,7 @@ bool CS_DefaultConstructStrategyImpl::internalEIsSet(int featureID) const
 	}
 	return CS_ConstructStrategyImpl::internalEIsSet(featureID);
 }
+
 bool CS_DefaultConstructStrategyImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
@@ -829,7 +955,7 @@ bool CS_DefaultConstructStrategyImpl::eSet(int featureID, Any newValue)
 }
 
 //*********************************
-// Behavioral Feature
+// EOperation Invoke
 //*********************************
 Any CS_DefaultConstructStrategyImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
 {
@@ -1059,145 +1185,13 @@ Any CS_DefaultConstructStrategyImpl::eInvoke(int operationID, std::shared_ptr<st
 	return result;
 }
 
-//*********************************
-// Persistence Functions
-//*********************************
-void CS_DefaultConstructStrategyImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+
+std::shared_ptr<CS_DefaultConstructStrategy> CS_DefaultConstructStrategyImpl::getThisCS_DefaultConstructStrategyPtr() const
 {
-	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
-	loadAttributes(loadHandler, attr_list);
-
-	//
-	// Create new objects (from references (containment == true))
-	//
-	// get PSCSFactory
-	int numNodes = loadHandler->getNumOfChildNodes();
-	for(int ii = 0; ii < numNodes; ii++)
-	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler);
-	}
-}		
-
-void CS_DefaultConstructStrategyImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
-{
-	try
-	{
-		std::map<std::string, std::string>::const_iterator iter;
-		std::shared_ptr<ecore::EClass> metaClass = this->eClass(); // get MetaClass
-		iter = attr_list.find("locus");
-		if ( iter != attr_list.end() )
-		{
-			// add unresolvedReference to loadHandler's list
-			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("locus")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
-		}
-	}
-	catch (std::exception& e)
-	{
-		std::cout << "| ERROR    | " << e.what() << std::endl;
-	}
-	catch (...) 
-	{
-		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
-	}
-
-	CS_ConstructStrategyImpl::loadAttributes(loadHandler, attr_list);
+	return m_thisCS_DefaultConstructStrategyPtr.lock();
 }
-
-void CS_DefaultConstructStrategyImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+void CS_DefaultConstructStrategyImpl::setThisCS_DefaultConstructStrategyPtr(std::weak_ptr<CS_DefaultConstructStrategy> thisCS_DefaultConstructStrategyPtr)
 {
-
-	try
-	{
-		if ( nodeName.compare("defaultAssociation") == 0 )
-		{
-  			std::string typeName = loadHandler->getCurrentXSITypeName();
-			if (typeName.empty())
-			{
-				typeName = "Association";
-			}
-			loadHandler->handleChild(this->getDefaultAssociation()); 
-
-			return; 
-		}
-
-		if ( nodeName.compare("generatedRealizingClasses") == 0 )
-		{
-  			std::string typeName = loadHandler->getCurrentXSITypeName();
-			if (typeName.empty())
-			{
-				typeName = "Class";
-			}
-			loadHandler->handleChildContainer<uml::Class>(this->getGeneratedRealizingClasses());  
-
-			return; 
-		}
-	}
-	catch (std::exception& e)
-	{
-		std::cout << "| ERROR    | " << e.what() << std::endl;
-	}
-	catch (...) 
-	{
-		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
-	}
-	//load BasePackage Nodes
-	CS_ConstructStrategyImpl::loadNode(nodeName, loadHandler);
+	m_thisCS_DefaultConstructStrategyPtr = thisCS_DefaultConstructStrategyPtr;
+	setThisCS_ConstructStrategyPtr(thisCS_DefaultConstructStrategyPtr);
 }
-
-void CS_DefaultConstructStrategyImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
-{
-	switch(featureID)
-	{
-		case PSCS::Semantics::Actions::ActionsPackage::CS_DEFAULTCONSTRUCTSTRATEGY_ATTRIBUTE_LOCUS:
-		{
-			if (references.size() == 1)
-			{
-				// Cast object to correct type
-				std::shared_ptr<fUML::Semantics::Loci::Locus> _locus = std::dynamic_pointer_cast<fUML::Semantics::Loci::Locus>( references.front() );
-				setLocus(_locus);
-			}
-			
-			return;
-		}
-	}
-	CS_ConstructStrategyImpl::resolveReferences(featureID, references);
-}
-
-void CS_DefaultConstructStrategyImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
-{
-	saveContent(saveHandler);
-
-	CS_ConstructStrategyImpl::saveContent(saveHandler);
-	
-	fUML::Semantics::Loci::SemanticStrategyImpl::saveContent(saveHandler);
-	
-	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-}
-
-void CS_DefaultConstructStrategyImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
-{
-	try
-	{
-		std::shared_ptr<PSCS::Semantics::Actions::ActionsPackage> package = PSCS::Semantics::Actions::ActionsPackage::eInstance();
-	// Add references
-		saveHandler->addReference(this->getLocus(), "locus", getLocus()->eClass() != fUML::Semantics::Loci::LociPackage::eInstance()->getLocus_Class()); 
-		//
-		// Add new tags (from references)
-		//
-		std::shared_ptr<ecore::EClass> metaClass = this->eClass();
-		// Save 'defaultAssociation'
-
-		saveHandler->addReference(this->getDefaultAssociation(), "defaultAssociation", getDefaultAssociation()->eClass() != uml::umlPackage::eInstance()->getAssociation_Class());
-
-		// Save 'generatedRealizingClasses'
-
-		saveHandler->addReferences<uml::Class>("generatedRealizingClasses", this->getGeneratedRealizingClasses());
-	}
-	catch (std::exception& e)
-	{
-		std::cout << "| ERROR    | " << e.what() << std::endl;
-	}
-}
-

@@ -95,14 +95,16 @@ namespace uml
 			endif
 			*/
 			 
-			virtual bool incoming_object_flow(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;/*!
+			virtual bool incoming_object_flow(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			/*!
 			A JoinNode has one outgoing ActivityEdge.
 			outgoing->size() = 1
 			*/
 			 
 			virtual bool one_outgoing_edge(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+
 			//*********************************
-			// Attributes Getter & Setter
+			// Attribute Getters & Setters
 			//*********************************
 			/*!
 			Indicates whether incoming tokens having objects with the same identity are combined into one by the JoinNode.
@@ -116,9 +118,9 @@ namespace uml
 			*/
 			 
 			virtual void setIsCombineDuplicate (bool _isCombineDuplicate)= 0;
-			
+
 			//*********************************
-			// References Getter & Setter
+			// Reference Getters & Setters
 			//*********************************
 			/*!
 			A ValueSpecification giving the condition under which the JoinNode will offer a token on its outgoing ActivityEdge. If no joinSpec is specified, then the JoinNode will offer an outgoing token if tokens are offered on all of its incoming ActivityEdges (an "and" condition).
@@ -132,7 +134,46 @@ namespace uml
 			*/
 			
 			virtual void setJoinSpec(std::shared_ptr<uml::ValueSpecification>) = 0;
+
+			//*********************************
+			// Union Reference Getters
+			//*********************************
+			/*!
+			ActivityGroups containing the ActivityNode.
+			<p>From package UML::Activities.</p>
+			*/
 			
+			virtual std::shared_ptr<Union<uml::ActivityGroup>> getInGroup() const = 0;
+			/*!
+			The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
+			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;
+			/*!
+			The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
+			virtual std::weak_ptr<uml::Element> getOwner() const = 0;
+			/*!
+			The RedefinableElement that is being redefined by this element.
+			<p>From package UML::Classification.</p>
+			*/
+			
+			virtual std::shared_ptr<Union<uml::RedefinableElement>> getRedefinedElement() const = 0;
+
+			//*********************************
+			// Container Getter
+			//*********************************
+			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
+
+			//*********************************
+			// Persistence Functions
+			//*********************************
+			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 
 		protected:
 			//*********************************
@@ -143,8 +184,7 @@ namespace uml
 			<p>From package UML::Activities.</p>
 			*/
 			
-			bool m_isCombineDuplicate = true;
-			
+			bool m_isCombineDuplicate= true;
 			
 			//*********************************
 			// Reference Members
@@ -155,44 +195,6 @@ namespace uml
 			*/
 			
 			std::shared_ptr<uml::ValueSpecification> m_joinSpec;
-
-		public:
-			//*********************************
-			// Union Getter
-			//*********************************
-			/*!
-			ActivityGroups containing the ActivityNode.
-			<p>From package UML::Activities.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::ActivityGroup>> getInGroup() const = 0;/*!
-			The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;/*!
-			The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::weak_ptr<uml::Element> getOwner() const = 0;/*!
-			The RedefinableElement that is being redefined by this element.
-			<p>From package UML::Classification.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::RedefinableElement>> getRedefinedElement() const = 0;
-
-			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
-			
-			//*********************************
-			// Persistence Functions
-			//*********************************
-			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
-			
-			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
-			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
-			
 	};
-
 }
 #endif /* end of include guard: UML_JOINNODE_HPP */

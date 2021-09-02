@@ -1,3 +1,4 @@
+
 #include "uml/impl/DestroyObjectActionImpl.hpp"
 
 #ifdef NDEBUG
@@ -26,7 +27,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -34,7 +34,6 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-
 
 #include "uml/Action.hpp"
 #include "uml/Activity.hpp"
@@ -160,42 +159,6 @@ std::shared_ptr<ecore::EObject> DestroyObjectActionImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> DestroyObjectActionImpl::eStaticClass() const
-{
-	return uml::umlPackage::eInstance()->getDestroyObjectAction_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-/*
-Getter & Setter for attribute isDestroyLinks
-*/
-bool DestroyObjectActionImpl::getIsDestroyLinks() const 
-{
-	return m_isDestroyLinks;
-}
-void DestroyObjectActionImpl::setIsDestroyLinks(bool _isDestroyLinks)
-{
-	m_isDestroyLinks = _isDestroyLinks;
-	
-} 
-
-
-/*
-Getter & Setter for attribute isDestroyOwnedObjects
-*/
-bool DestroyObjectActionImpl::getIsDestroyOwnedObjects() const 
-{
-	return m_isDestroyOwnedObjects;
-}
-void DestroyObjectActionImpl::setIsDestroyOwnedObjects(bool _isDestroyOwnedObjects)
-{
-	m_isDestroyOwnedObjects = _isDestroyOwnedObjects;
-	
-} 
-
-
 //*********************************
 // Operations
 //*********************************
@@ -212,11 +175,34 @@ bool DestroyObjectActionImpl::no_type(Any diagnostics,std::shared_ptr<std::map <
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference target
-*/
+/* Getter & Setter for attribute isDestroyLinks */
+bool DestroyObjectActionImpl::getIsDestroyLinks() const 
+{
+	return m_isDestroyLinks;
+}
+void DestroyObjectActionImpl::setIsDestroyLinks(bool _isDestroyLinks)
+{
+	m_isDestroyLinks = _isDestroyLinks;
+	
+}
+
+/* Getter & Setter for attribute isDestroyOwnedObjects */
+bool DestroyObjectActionImpl::getIsDestroyOwnedObjects() const 
+{
+	return m_isDestroyOwnedObjects;
+}
+void DestroyObjectActionImpl::setIsDestroyOwnedObjects(bool _isDestroyOwnedObjects)
+{
+	m_isDestroyOwnedObjects = _isDestroyOwnedObjects;
+	
+}
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference target */
 std::shared_ptr<uml::InputPin> DestroyObjectActionImpl::getTarget() const
 {
     return m_target;
@@ -226,7 +212,6 @@ void DestroyObjectActionImpl::setTarget(std::shared_ptr<uml::InputPin> _target)
     m_target = _target;
 	
 }
-
 
 //*********************************
 // Union Getter
@@ -301,18 +286,9 @@ std::shared_ptr<Union<uml::RedefinableElement>> DestroyObjectActionImpl::getRede
 	return m_redefinedElement;
 }
 
-
-
-
-std::shared_ptr<DestroyObjectAction> DestroyObjectActionImpl::getThisDestroyObjectActionPtr() const
-{
-	return m_thisDestroyObjectActionPtr.lock();
-}
-void DestroyObjectActionImpl::setThisDestroyObjectActionPtr(std::weak_ptr<DestroyObjectAction> thisDestroyObjectActionPtr)
-{
-	m_thisDestroyObjectActionPtr = thisDestroyObjectActionPtr;
-	setThisActionPtr(thisDestroyObjectActionPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> DestroyObjectActionImpl::eContainer() const
 {
 	if(auto wp = m_activity.lock())
@@ -335,126 +311,6 @@ std::shared_ptr<ecore::EObject> DestroyObjectActionImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any DestroyObjectActionImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::DESTROYOBJECTACTION_ATTRIBUTE_ISDESTROYLINKS:
-			return eAny(getIsDestroyLinks()); //7327
-		case uml::umlPackage::DESTROYOBJECTACTION_ATTRIBUTE_ISDESTROYOWNEDOBJECTS:
-			return eAny(getIsDestroyOwnedObjects()); //7328
-		case uml::umlPackage::DESTROYOBJECTACTION_ATTRIBUTE_TARGET:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getTarget();
-				return eAny(returnValue); //7329
-			}
-	}
-	return ActionImpl::eGet(featureID, resolve, coreType);
-}
-bool DestroyObjectActionImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::DESTROYOBJECTACTION_ATTRIBUTE_ISDESTROYLINKS:
-			return getIsDestroyLinks() != false; //7327
-		case uml::umlPackage::DESTROYOBJECTACTION_ATTRIBUTE_ISDESTROYOWNEDOBJECTS:
-			return getIsDestroyOwnedObjects() != false; //7328
-		case uml::umlPackage::DESTROYOBJECTACTION_ATTRIBUTE_TARGET:
-			return getTarget() != nullptr; //7329
-	}
-	return ActionImpl::internalEIsSet(featureID);
-}
-bool DestroyObjectActionImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::DESTROYOBJECTACTION_ATTRIBUTE_ISDESTROYLINKS:
-		{
-			// BOOST CAST
-			bool _isDestroyLinks = newValue->get<bool>();
-			setIsDestroyLinks(_isDestroyLinks); //7327
-			return true;
-		}
-		case uml::umlPackage::DESTROYOBJECTACTION_ATTRIBUTE_ISDESTROYOWNEDOBJECTS:
-		{
-			// BOOST CAST
-			bool _isDestroyOwnedObjects = newValue->get<bool>();
-			setIsDestroyOwnedObjects(_isDestroyOwnedObjects); //7328
-			return true;
-		}
-		case uml::umlPackage::DESTROYOBJECTACTION_ATTRIBUTE_TARGET:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::InputPin> _target = std::dynamic_pointer_cast<uml::InputPin>(_temp);
-			setTarget(_target); //7329
-			return true;
-		}
-	}
-
-	return ActionImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any DestroyObjectActionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-		
-		// 1797058034
-		case umlPackage::DESTROYOBJECTACTION_OPERATION_MULTIPLICITY_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->multiplicity(incoming_param_diagnostics,incoming_param_context));
-			break;
-		}
-		
-		// 272933635
-		case umlPackage::DESTROYOBJECTACTION_OPERATION_NO_TYPE_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->no_type(incoming_param_diagnostics,incoming_param_context));
-			break;
-		}
-
-		default:
-		{
-			// call superTypes
-			result = ActionImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -565,13 +421,6 @@ void DestroyObjectActionImpl::save(std::shared_ptr<persistence::interfaces::XSav
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
-	
-	
-	
 }
 
 void DestroyObjectActionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -602,3 +451,142 @@ void DestroyObjectActionImpl::saveContent(std::shared_ptr<persistence::interface
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> DestroyObjectActionImpl::eStaticClass() const
+{
+	return uml::umlPackage::eInstance()->getDestroyObjectAction_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any DestroyObjectActionImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::DESTROYOBJECTACTION_ATTRIBUTE_ISDESTROYLINKS:
+			return eAny(getIsDestroyLinks()); //7327
+		case uml::umlPackage::DESTROYOBJECTACTION_ATTRIBUTE_ISDESTROYOWNEDOBJECTS:
+			return eAny(getIsDestroyOwnedObjects()); //7328
+		case uml::umlPackage::DESTROYOBJECTACTION_ATTRIBUTE_TARGET:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getTarget();
+				return eAny(returnValue); //7329
+			}
+	}
+	return ActionImpl::eGet(featureID, resolve, coreType);
+}
+
+bool DestroyObjectActionImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::DESTROYOBJECTACTION_ATTRIBUTE_ISDESTROYLINKS:
+			return getIsDestroyLinks() != false; //7327
+		case uml::umlPackage::DESTROYOBJECTACTION_ATTRIBUTE_ISDESTROYOWNEDOBJECTS:
+			return getIsDestroyOwnedObjects() != false; //7328
+		case uml::umlPackage::DESTROYOBJECTACTION_ATTRIBUTE_TARGET:
+			return getTarget() != nullptr; //7329
+	}
+	return ActionImpl::internalEIsSet(featureID);
+}
+
+bool DestroyObjectActionImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::DESTROYOBJECTACTION_ATTRIBUTE_ISDESTROYLINKS:
+		{
+			// BOOST CAST
+			bool _isDestroyLinks = newValue->get<bool>();
+			setIsDestroyLinks(_isDestroyLinks); //7327
+			return true;
+		}
+		case uml::umlPackage::DESTROYOBJECTACTION_ATTRIBUTE_ISDESTROYOWNEDOBJECTS:
+		{
+			// BOOST CAST
+			bool _isDestroyOwnedObjects = newValue->get<bool>();
+			setIsDestroyOwnedObjects(_isDestroyOwnedObjects); //7328
+			return true;
+		}
+		case uml::umlPackage::DESTROYOBJECTACTION_ATTRIBUTE_TARGET:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::InputPin> _target = std::dynamic_pointer_cast<uml::InputPin>(_temp);
+			setTarget(_target); //7329
+			return true;
+		}
+	}
+
+	return ActionImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any DestroyObjectActionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 1797058034
+		case umlPackage::DESTROYOBJECTACTION_OPERATION_MULTIPLICITY_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->multiplicity(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+		
+		// 272933635
+		case umlPackage::DESTROYOBJECTACTION_OPERATION_NO_TYPE_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->no_type(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = ActionImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<DestroyObjectAction> DestroyObjectActionImpl::getThisDestroyObjectActionPtr() const
+{
+	return m_thisDestroyObjectActionPtr.lock();
+}
+void DestroyObjectActionImpl::setThisDestroyObjectActionPtr(std::weak_ptr<DestroyObjectAction> thisDestroyObjectActionPtr)
+{
+	m_thisDestroyObjectActionPtr = thisDestroyObjectActionPtr;
+	setThisActionPtr(thisDestroyObjectActionPtr);
+}

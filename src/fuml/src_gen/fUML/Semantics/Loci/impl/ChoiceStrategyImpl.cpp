@@ -1,3 +1,4 @@
+
 #include "fUML/Semantics/Loci/impl/ChoiceStrategyImpl.hpp"
 
 #ifdef NDEBUG
@@ -24,14 +25,12 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-
 
 #include "fUML/Semantics/Loci/SemanticStrategy.hpp"
 
@@ -103,15 +102,6 @@ std::shared_ptr<ecore::EObject> ChoiceStrategyImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> ChoiceStrategyImpl::eStaticClass() const
-{
-	return fUML::Semantics::Loci::LociPackage::eInstance()->getChoiceStrategy_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
@@ -130,95 +120,23 @@ std::string ChoiceStrategyImpl::getName()
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
+//*********************************
+
+//*********************************
+// Reference Getters & Setters
 //*********************************
 
 //*********************************
 // Union Getter
 //*********************************
 
-
-
-std::shared_ptr<ChoiceStrategy> ChoiceStrategyImpl::getThisChoiceStrategyPtr() const
-{
-	return m_thisChoiceStrategyPtr.lock();
-}
-void ChoiceStrategyImpl::setThisChoiceStrategyPtr(std::weak_ptr<ChoiceStrategy> thisChoiceStrategyPtr)
-{
-	m_thisChoiceStrategyPtr = thisChoiceStrategyPtr;
-	setThisSemanticStrategyPtr(thisChoiceStrategyPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> ChoiceStrategyImpl::eContainer() const
 {
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any ChoiceStrategyImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-	}
-	return SemanticStrategyImpl::eGet(featureID, resolve, coreType);
-}
-bool ChoiceStrategyImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-	}
-	return SemanticStrategyImpl::internalEIsSet(featureID);
-}
-bool ChoiceStrategyImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-	}
-
-	return SemanticStrategyImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any ChoiceStrategyImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-		
-		// 1273166866
-		case LociPackage::CHOICESTRATEGY_OPERATION_CHOOSE_EINT:
-		{
-			//Retrieve input parameter 'size'
-			//parameter 0
-			int incoming_param_size;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_size_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_size = (*incoming_param_size_arguments_citer)->get()->get<int >();
-			result = eAny(this->choose(incoming_param_size));
-			break;
-		}
-		
-		// 1727304580
-		case LociPackage::CHOICESTRATEGY_OPERATION_GETNAME:
-		{
-			result = eAny(this->getName());
-			break;
-		}
-
-		default:
-		{
-			// call superTypes
-			result = SemanticStrategyImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -265,7 +183,6 @@ void ChoiceStrategyImpl::save(std::shared_ptr<persistence::interfaces::XSaveHand
 	SemanticStrategyImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
 }
 
 void ChoiceStrategyImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -280,3 +197,90 @@ void ChoiceStrategyImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> ChoiceStrategyImpl::eStaticClass() const
+{
+	return fUML::Semantics::Loci::LociPackage::eInstance()->getChoiceStrategy_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any ChoiceStrategyImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+	}
+	return SemanticStrategyImpl::eGet(featureID, resolve, coreType);
+}
+
+bool ChoiceStrategyImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+	}
+	return SemanticStrategyImpl::internalEIsSet(featureID);
+}
+
+bool ChoiceStrategyImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+	}
+
+	return SemanticStrategyImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any ChoiceStrategyImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 1273166866
+		case LociPackage::CHOICESTRATEGY_OPERATION_CHOOSE_EINT:
+		{
+			//Retrieve input parameter 'size'
+			//parameter 0
+			int incoming_param_size;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_size_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_size = (*incoming_param_size_arguments_citer)->get()->get<int >();
+			result = eAny(this->choose(incoming_param_size));
+			break;
+		}
+		
+		// 1727304580
+		case LociPackage::CHOICESTRATEGY_OPERATION_GETNAME:
+		{
+			result = eAny(this->getName());
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = SemanticStrategyImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<ChoiceStrategy> ChoiceStrategyImpl::getThisChoiceStrategyPtr() const
+{
+	return m_thisChoiceStrategyPtr.lock();
+}
+void ChoiceStrategyImpl::setThisChoiceStrategyPtr(std::weak_ptr<ChoiceStrategy> thisChoiceStrategyPtr)
+{
+	m_thisChoiceStrategyPtr = thisChoiceStrategyPtr;
+	setThisSemanticStrategyPtr(thisChoiceStrategyPtr);
+}

@@ -1,3 +1,4 @@
+
 #include "uml/impl/FinalStateImpl.hpp"
 
 #ifdef NDEBUG
@@ -26,7 +27,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -34,7 +34,6 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-
 
 #include "uml/Behavior.hpp"
 #include "uml/Classifier.hpp"
@@ -145,15 +144,6 @@ std::shared_ptr<ecore::EObject> FinalStateImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> FinalStateImpl::eStaticClass() const
-{
-	return uml::umlPackage::eInstance()->getFinalState_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
@@ -194,7 +184,11 @@ bool FinalStateImpl::no_state_behavior(Any diagnostics,std::shared_ptr<std::map 
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
+//*********************************
+
+//*********************************
+// Reference Getters & Setters
 //*********************************
 
 //*********************************
@@ -275,18 +269,9 @@ std::shared_ptr<Union<uml::RedefinableElement>> FinalStateImpl::getRedefinedElem
 	return m_redefinedElement;
 }
 
-
-
-
-std::shared_ptr<FinalState> FinalStateImpl::getThisFinalStatePtr() const
-{
-	return m_thisFinalStatePtr.lock();
-}
-void FinalStateImpl::setThisFinalStatePtr(std::weak_ptr<FinalState> thisFinalStatePtr)
-{
-	m_thisFinalStatePtr = thisFinalStatePtr;
-	setThisStatePtr(thisFinalStatePtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> FinalStateImpl::eContainer() const
 {
 	if(auto wp = m_container.lock())
@@ -307,7 +292,82 @@ std::shared_ptr<ecore::EObject> FinalStateImpl::eContainer() const
 }
 
 //*********************************
-// Structural Feature Getter/Setter
+// Persistence Functions
+//*********************************
+void FinalStateImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get umlFactory
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
+	}
+}		
+
+void FinalStateImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+
+	StateImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void FinalStateImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+
+	//load BasePackage Nodes
+	StateImpl::loadNode(nodeName, loadHandler);
+}
+
+void FinalStateImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+{
+	StateImpl::resolveReferences(featureID, references);
+}
+
+void FinalStateImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	StateImpl::saveContent(saveHandler);
+	
+	NamespaceImpl::saveContent(saveHandler);
+	RedefinableElementImpl::saveContent(saveHandler);
+	VertexImpl::saveContent(saveHandler);
+	
+	NamedElementImpl::saveContent(saveHandler);
+	
+	ElementImpl::saveContent(saveHandler);
+	
+	ObjectImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+}
+
+void FinalStateImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+}
+
+
+std::shared_ptr<ecore::EClass> FinalStateImpl::eStaticClass() const
+{
+	return uml::umlPackage::eInstance()->getFinalState_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
 //*********************************
 Any FinalStateImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
@@ -316,6 +376,7 @@ Any FinalStateImpl::eGet(int featureID, bool resolve, bool coreType) const
 	}
 	return StateImpl::eGet(featureID, resolve, coreType);
 }
+
 bool FinalStateImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
@@ -323,6 +384,7 @@ bool FinalStateImpl::internalEIsSet(int featureID) const
 	}
 	return StateImpl::internalEIsSet(featureID);
 }
+
 bool FinalStateImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
@@ -333,7 +395,7 @@ bool FinalStateImpl::eSet(int featureID, Any newValue)
 }
 
 //*********************************
-// Behavioral Feature
+// EOperation Invoke
 //*********************************
 Any FinalStateImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
 {
@@ -457,76 +519,13 @@ Any FinalStateImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sh
 	return result;
 }
 
-//*********************************
-// Persistence Functions
-//*********************************
-void FinalStateImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+
+std::shared_ptr<FinalState> FinalStateImpl::getThisFinalStatePtr() const
 {
-	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
-	loadAttributes(loadHandler, attr_list);
-
-	//
-	// Create new objects (from references (containment == true))
-	//
-	// get umlFactory
-	int numNodes = loadHandler->getNumOfChildNodes();
-	for(int ii = 0; ii < numNodes; ii++)
-	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler);
-	}
-}		
-
-void FinalStateImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
-{
-
-	StateImpl::loadAttributes(loadHandler, attr_list);
+	return m_thisFinalStatePtr.lock();
 }
-
-void FinalStateImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+void FinalStateImpl::setThisFinalStatePtr(std::weak_ptr<FinalState> thisFinalStatePtr)
 {
-
-	//load BasePackage Nodes
-	StateImpl::loadNode(nodeName, loadHandler);
+	m_thisFinalStatePtr = thisFinalStatePtr;
+	setThisStatePtr(thisFinalStatePtr);
 }
-
-void FinalStateImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
-{
-	StateImpl::resolveReferences(featureID, references);
-}
-
-void FinalStateImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
-{
-	saveContent(saveHandler);
-
-	StateImpl::saveContent(saveHandler);
-	
-	NamespaceImpl::saveContent(saveHandler);
-	RedefinableElementImpl::saveContent(saveHandler);
-	VertexImpl::saveContent(saveHandler);
-	
-	NamedElementImpl::saveContent(saveHandler);
-	
-	ElementImpl::saveContent(saveHandler);
-	
-	ObjectImpl::saveContent(saveHandler);
-	
-	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
-	
-}
-
-void FinalStateImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
-{
-	try
-	{
-		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-	}
-	catch (std::exception& e)
-	{
-		std::cout << "| ERROR    | " << e.what() << std::endl;
-	}
-}
-

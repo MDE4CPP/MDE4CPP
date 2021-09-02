@@ -1,3 +1,4 @@
+
 #include "PSCS/Semantics/CommonBehavior/impl/CS_EventOccurrenceImpl.hpp"
 
 #ifdef NDEBUG
@@ -37,7 +38,6 @@
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
 #include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
 #include "uml/umlFactory.hpp"
-
 
 #include "PSCS/Semantics/StructuredClassifiers/CS_InteractionPoint.hpp"
 #include "PSCS/Semantics/StructuredClassifiers/CS_Reference.hpp"
@@ -122,28 +122,6 @@ std::shared_ptr<ecore::EObject> CS_EventOccurrenceImpl::copy() const
 	element->setThisCS_EventOccurrencePtr(element);
 	return element;
 }
-
-std::shared_ptr<ecore::EClass> CS_EventOccurrenceImpl::eStaticClass() const
-{
-	return PSCS::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance()->getCS_EventOccurrence_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-/*
-Getter & Setter for attribute propagationInward
-*/
-bool CS_EventOccurrenceImpl::isPropagationInward() const 
-{
-	return m_propagationInward;
-}
-void CS_EventOccurrenceImpl::setPropagationInward(bool _propagationInward)
-{
-	m_propagationInward = _propagationInward;
-	
-} 
-
 
 //*********************************
 // Operations
@@ -234,11 +212,23 @@ void CS_EventOccurrenceImpl::sendOutTo(std::shared_ptr<PSCS::Semantics::Structur
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference interactionPoint
-*/
+/* Getter & Setter for attribute propagationInward */
+bool CS_EventOccurrenceImpl::isPropagationInward() const 
+{
+	return m_propagationInward;
+}
+void CS_EventOccurrenceImpl::setPropagationInward(bool _propagationInward)
+{
+	m_propagationInward = _propagationInward;
+	
+}
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference interactionPoint */
 std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint> CS_EventOccurrenceImpl::getInteractionPoint() const
 {
     return m_interactionPoint;
@@ -249,10 +239,7 @@ void CS_EventOccurrenceImpl::setInteractionPoint(std::shared_ptr<PSCS::Semantics
 	
 }
 
-
-/*
-Getter & Setter for reference onPort
-*/
+/* Getter & Setter for reference onPort */
 std::shared_ptr<uml::Port> CS_EventOccurrenceImpl::getOnPort() const
 {
     return m_onPort;
@@ -263,10 +250,7 @@ void CS_EventOccurrenceImpl::setOnPort(std::shared_ptr<uml::Port> _onPort)
 	
 }
 
-
-/*
-Getter & Setter for reference wrappedEventOccurrence
-*/
+/* Getter & Setter for reference wrappedEventOccurrence */
 std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> CS_EventOccurrenceImpl::getWrappedEventOccurrence() const
 {
     return m_wrappedEventOccurrence;
@@ -277,190 +261,16 @@ void CS_EventOccurrenceImpl::setWrappedEventOccurrence(std::shared_ptr<fUML::Sem
 	
 }
 
-
 //*********************************
 // Union Getter
 //*********************************
 
-
-
-std::shared_ptr<CS_EventOccurrence> CS_EventOccurrenceImpl::getThisCS_EventOccurrencePtr() const
-{
-	return m_thisCS_EventOccurrencePtr.lock();
-}
-void CS_EventOccurrenceImpl::setThisCS_EventOccurrencePtr(std::weak_ptr<CS_EventOccurrence> thisCS_EventOccurrencePtr)
-{
-	m_thisCS_EventOccurrencePtr = thisCS_EventOccurrencePtr;
-	setThisEventOccurrencePtr(thisCS_EventOccurrencePtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> CS_EventOccurrenceImpl::eContainer() const
 {
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any CS_EventOccurrenceImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case PSCS::Semantics::CommonBehavior::CommonBehaviorPackage::CS_EVENTOCCURRENCE_ATTRIBUTE_INTERACTIONPOINT:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getInteractionPoint();
-				return eAny(returnValue); //131
-			}
-		case PSCS::Semantics::CommonBehavior::CommonBehaviorPackage::CS_EVENTOCCURRENCE_ATTRIBUTE_ONPORT:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getOnPort();
-				return eAny(returnValue); //134
-			}
-		case PSCS::Semantics::CommonBehavior::CommonBehaviorPackage::CS_EVENTOCCURRENCE_ATTRIBUTE_PROPAGATIONINWARD:
-			return eAny(isPropagationInward()); //133
-		case PSCS::Semantics::CommonBehavior::CommonBehaviorPackage::CS_EVENTOCCURRENCE_ATTRIBUTE_WRAPPEDEVENTOCCURRENCE:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getWrappedEventOccurrence();
-				return eAny(returnValue); //132
-			}
-	}
-	return fUML::Semantics::CommonBehavior::EventOccurrenceImpl::eGet(featureID, resolve, coreType);
-}
-bool CS_EventOccurrenceImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case PSCS::Semantics::CommonBehavior::CommonBehaviorPackage::CS_EVENTOCCURRENCE_ATTRIBUTE_INTERACTIONPOINT:
-			return getInteractionPoint() != nullptr; //131
-		case PSCS::Semantics::CommonBehavior::CommonBehaviorPackage::CS_EVENTOCCURRENCE_ATTRIBUTE_ONPORT:
-			return getOnPort() != nullptr; //134
-		case PSCS::Semantics::CommonBehavior::CommonBehaviorPackage::CS_EVENTOCCURRENCE_ATTRIBUTE_PROPAGATIONINWARD:
-			return isPropagationInward() != false; //133
-		case PSCS::Semantics::CommonBehavior::CommonBehaviorPackage::CS_EVENTOCCURRENCE_ATTRIBUTE_WRAPPEDEVENTOCCURRENCE:
-			return getWrappedEventOccurrence() != nullptr; //132
-	}
-	return fUML::Semantics::CommonBehavior::EventOccurrenceImpl::internalEIsSet(featureID);
-}
-bool CS_EventOccurrenceImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case PSCS::Semantics::CommonBehavior::CommonBehaviorPackage::CS_EVENTOCCURRENCE_ATTRIBUTE_INTERACTIONPOINT:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint> _interactionPoint = std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint>(_temp);
-			setInteractionPoint(_interactionPoint); //131
-			return true;
-		}
-		case PSCS::Semantics::CommonBehavior::CommonBehaviorPackage::CS_EVENTOCCURRENCE_ATTRIBUTE_ONPORT:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::Port> _onPort = std::dynamic_pointer_cast<uml::Port>(_temp);
-			setOnPort(_onPort); //134
-			return true;
-		}
-		case PSCS::Semantics::CommonBehavior::CommonBehaviorPackage::CS_EVENTOCCURRENCE_ATTRIBUTE_PROPAGATIONINWARD:
-		{
-			// BOOST CAST
-			bool _propagationInward = newValue->get<bool>();
-			setPropagationInward(_propagationInward); //133
-			return true;
-		}
-		case PSCS::Semantics::CommonBehavior::CommonBehaviorPackage::CS_EVENTOCCURRENCE_ATTRIBUTE_WRAPPEDEVENTOCCURRENCE:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> _wrappedEventOccurrence = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::EventOccurrence>(_temp);
-			setWrappedEventOccurrence(_wrappedEventOccurrence); //132
-			return true;
-		}
-	}
-
-	return fUML::Semantics::CommonBehavior::EventOccurrenceImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any CS_EventOccurrenceImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-		
-		// 689081980
-		case CommonBehaviorPackage::CS_EVENTOCCURRENCE_OPERATION_DOSEND:
-		{
-			this->doSend();
-			break;
-		}
-		
-		// 2147256668
-		case CommonBehaviorPackage::CS_EVENTOCCURRENCE_OPERATION_GETPARAMETERVALUES:
-		{
-			result = eAny(this->getParameterValues());
-			break;
-		}
-		
-		// 892695871
-		case CommonBehaviorPackage::CS_EVENTOCCURRENCE_OPERATION_MATCH_TRIGGER:
-		{
-			//Retrieve input parameter 'trigger'
-			//parameter 0
-			std::shared_ptr<uml::Trigger> incoming_param_trigger;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_trigger_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_trigger = (*incoming_param_trigger_arguments_citer)->get()->get<std::shared_ptr<uml::Trigger> >();
-			result = eAny(this->match(incoming_param_trigger));
-			break;
-		}
-		
-		// 1017800210
-		case CommonBehaviorPackage::CS_EVENTOCCURRENCE_OPERATION_SENDINTO_CS_REFERENCE_PORT:
-		{
-			//Retrieve input parameter 'target'
-			//parameter 0
-			std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> incoming_param_target;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_target_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_target = (*incoming_param_target_arguments_citer)->get()->get<std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> >();
-			//Retrieve input parameter 'port'
-			//parameter 1
-			std::shared_ptr<uml::Port> incoming_param_port;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_port_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_port = (*incoming_param_port_arguments_citer)->get()->get<std::shared_ptr<uml::Port> >();
-			this->sendInTo(incoming_param_target,incoming_param_port);
-			break;
-		}
-		
-		// 1422750174
-		case CommonBehaviorPackage::CS_EVENTOCCURRENCE_OPERATION_SENDOUTTO_CS_REFERENCE_PORT:
-		{
-			//Retrieve input parameter 'target'
-			//parameter 0
-			std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> incoming_param_target;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_target_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_target = (*incoming_param_target_arguments_citer)->get()->get<std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> >();
-			//Retrieve input parameter 'port'
-			//parameter 1
-			std::shared_ptr<uml::Port> incoming_param_port;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_port_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_port = (*incoming_param_port_arguments_citer)->get()->get<std::shared_ptr<uml::Port> >();
-			this->sendOutTo(incoming_param_target,incoming_param_port);
-			break;
-		}
-
-		default:
-		{
-			// call superTypes
-			result = fUML::Semantics::CommonBehavior::EventOccurrenceImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -587,7 +397,6 @@ void CS_EventOccurrenceImpl::save(std::shared_ptr<persistence::interfaces::XSave
 	fUML::Semantics::CommonBehavior::EventOccurrenceImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
 }
 
 void CS_EventOccurrenceImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -611,3 +420,187 @@ void CS_EventOccurrenceImpl::saveContent(std::shared_ptr<persistence::interfaces
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> CS_EventOccurrenceImpl::eStaticClass() const
+{
+	return PSCS::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance()->getCS_EventOccurrence_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any CS_EventOccurrenceImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case PSCS::Semantics::CommonBehavior::CommonBehaviorPackage::CS_EVENTOCCURRENCE_ATTRIBUTE_INTERACTIONPOINT:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getInteractionPoint();
+				return eAny(returnValue); //131
+			}
+		case PSCS::Semantics::CommonBehavior::CommonBehaviorPackage::CS_EVENTOCCURRENCE_ATTRIBUTE_ONPORT:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getOnPort();
+				return eAny(returnValue); //134
+			}
+		case PSCS::Semantics::CommonBehavior::CommonBehaviorPackage::CS_EVENTOCCURRENCE_ATTRIBUTE_PROPAGATIONINWARD:
+			return eAny(isPropagationInward()); //133
+		case PSCS::Semantics::CommonBehavior::CommonBehaviorPackage::CS_EVENTOCCURRENCE_ATTRIBUTE_WRAPPEDEVENTOCCURRENCE:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getWrappedEventOccurrence();
+				return eAny(returnValue); //132
+			}
+	}
+	return fUML::Semantics::CommonBehavior::EventOccurrenceImpl::eGet(featureID, resolve, coreType);
+}
+
+bool CS_EventOccurrenceImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case PSCS::Semantics::CommonBehavior::CommonBehaviorPackage::CS_EVENTOCCURRENCE_ATTRIBUTE_INTERACTIONPOINT:
+			return getInteractionPoint() != nullptr; //131
+		case PSCS::Semantics::CommonBehavior::CommonBehaviorPackage::CS_EVENTOCCURRENCE_ATTRIBUTE_ONPORT:
+			return getOnPort() != nullptr; //134
+		case PSCS::Semantics::CommonBehavior::CommonBehaviorPackage::CS_EVENTOCCURRENCE_ATTRIBUTE_PROPAGATIONINWARD:
+			return isPropagationInward() != false; //133
+		case PSCS::Semantics::CommonBehavior::CommonBehaviorPackage::CS_EVENTOCCURRENCE_ATTRIBUTE_WRAPPEDEVENTOCCURRENCE:
+			return getWrappedEventOccurrence() != nullptr; //132
+	}
+	return fUML::Semantics::CommonBehavior::EventOccurrenceImpl::internalEIsSet(featureID);
+}
+
+bool CS_EventOccurrenceImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case PSCS::Semantics::CommonBehavior::CommonBehaviorPackage::CS_EVENTOCCURRENCE_ATTRIBUTE_INTERACTIONPOINT:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint> _interactionPoint = std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint>(_temp);
+			setInteractionPoint(_interactionPoint); //131
+			return true;
+		}
+		case PSCS::Semantics::CommonBehavior::CommonBehaviorPackage::CS_EVENTOCCURRENCE_ATTRIBUTE_ONPORT:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::Port> _onPort = std::dynamic_pointer_cast<uml::Port>(_temp);
+			setOnPort(_onPort); //134
+			return true;
+		}
+		case PSCS::Semantics::CommonBehavior::CommonBehaviorPackage::CS_EVENTOCCURRENCE_ATTRIBUTE_PROPAGATIONINWARD:
+		{
+			// BOOST CAST
+			bool _propagationInward = newValue->get<bool>();
+			setPropagationInward(_propagationInward); //133
+			return true;
+		}
+		case PSCS::Semantics::CommonBehavior::CommonBehaviorPackage::CS_EVENTOCCURRENCE_ATTRIBUTE_WRAPPEDEVENTOCCURRENCE:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> _wrappedEventOccurrence = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::EventOccurrence>(_temp);
+			setWrappedEventOccurrence(_wrappedEventOccurrence); //132
+			return true;
+		}
+	}
+
+	return fUML::Semantics::CommonBehavior::EventOccurrenceImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any CS_EventOccurrenceImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 689081980
+		case CommonBehaviorPackage::CS_EVENTOCCURRENCE_OPERATION_DOSEND:
+		{
+			this->doSend();
+			break;
+		}
+		
+		// 2147256668
+		case CommonBehaviorPackage::CS_EVENTOCCURRENCE_OPERATION_GETPARAMETERVALUES:
+		{
+			result = eAny(this->getParameterValues());
+			break;
+		}
+		
+		// 892695871
+		case CommonBehaviorPackage::CS_EVENTOCCURRENCE_OPERATION_MATCH_TRIGGER:
+		{
+			//Retrieve input parameter 'trigger'
+			//parameter 0
+			std::shared_ptr<uml::Trigger> incoming_param_trigger;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_trigger_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_trigger = (*incoming_param_trigger_arguments_citer)->get()->get<std::shared_ptr<uml::Trigger> >();
+			result = eAny(this->match(incoming_param_trigger));
+			break;
+		}
+		
+		// 1017800210
+		case CommonBehaviorPackage::CS_EVENTOCCURRENCE_OPERATION_SENDINTO_CS_REFERENCE_PORT:
+		{
+			//Retrieve input parameter 'target'
+			//parameter 0
+			std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> incoming_param_target;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_target_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_target = (*incoming_param_target_arguments_citer)->get()->get<std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> >();
+			//Retrieve input parameter 'port'
+			//parameter 1
+			std::shared_ptr<uml::Port> incoming_param_port;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_port_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_port = (*incoming_param_port_arguments_citer)->get()->get<std::shared_ptr<uml::Port> >();
+			this->sendInTo(incoming_param_target,incoming_param_port);
+			break;
+		}
+		
+		// 1422750174
+		case CommonBehaviorPackage::CS_EVENTOCCURRENCE_OPERATION_SENDOUTTO_CS_REFERENCE_PORT:
+		{
+			//Retrieve input parameter 'target'
+			//parameter 0
+			std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> incoming_param_target;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_target_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_target = (*incoming_param_target_arguments_citer)->get()->get<std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> >();
+			//Retrieve input parameter 'port'
+			//parameter 1
+			std::shared_ptr<uml::Port> incoming_param_port;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_port_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_port = (*incoming_param_port_arguments_citer)->get()->get<std::shared_ptr<uml::Port> >();
+			this->sendOutTo(incoming_param_target,incoming_param_port);
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = fUML::Semantics::CommonBehavior::EventOccurrenceImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<CS_EventOccurrence> CS_EventOccurrenceImpl::getThisCS_EventOccurrencePtr() const
+{
+	return m_thisCS_EventOccurrencePtr.lock();
+}
+void CS_EventOccurrenceImpl::setThisCS_EventOccurrencePtr(std::weak_ptr<CS_EventOccurrence> thisCS_EventOccurrencePtr)
+{
+	m_thisCS_EventOccurrencePtr = thisCS_EventOccurrencePtr;
+	setThisEventOccurrencePtr(thisCS_EventOccurrencePtr);
+}

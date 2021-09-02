@@ -43,49 +43,41 @@ namespace PSCS::Semantics::Actions
 			//*********************************
 			// Operations
 			//*********************************
-			 
-			virtual void addStructuralFeatureValue(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> context,std::shared_ptr<uml::Property> feature,std::shared_ptr<fUML::Semantics::Values::Value> value) ; 
-			virtual bool canInstantiate(std::shared_ptr<uml::Property> p) ; 
-			virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> construct(std::shared_ptr<uml::Operation> constructor,std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Object> context) ; 
-			virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> constructObject(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Object> context,std::shared_ptr<uml::Class> type) ; 
-			virtual void generateArrayPattern(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> context,std::shared_ptr<uml::Connector> connector) ; 
-			virtual std::shared_ptr<uml::Class> generateRealizingClass(std::shared_ptr<uml::Interface> interface_,std::string className) ; 
-			virtual void generateStarPattern(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> context,std::shared_ptr<uml::Connector> connector) ; 
-			virtual int getCardinality(std::shared_ptr<uml::ConnectorEnd> end) ; 
-			virtual std::shared_ptr<uml::Association> getDefaultAssociation() ; 
-			virtual std::shared_ptr<uml::Class> getRealizingClass(std::shared_ptr<uml::Interface> interface_) ; 
-			virtual std::shared_ptr<Bag<fUML::Semantics::Values::Value> > getValuesFromConnectorEnd(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> context,std::shared_ptr<uml::ConnectorEnd> end) ; 
-			virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> instantiateInterface(std::shared_ptr<uml::Interface> interface,std::shared_ptr<fUML::Semantics::Loci::Locus> locus) ; 
-			virtual bool isArrayPattern(std::shared_ptr<uml::Connector> c) ; 
+			virtual void addStructuralFeatureValue(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> context,std::shared_ptr<uml::Property> feature,std::shared_ptr<fUML::Semantics::Values::Value> value) ;
+			virtual bool canInstantiate(std::shared_ptr<uml::Property> p) ;
+			virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> construct(std::shared_ptr<uml::Operation> constructor,std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Object> context) ;
+			virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> constructObject(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Object> context,std::shared_ptr<uml::Class> type) ;
+			virtual void generateArrayPattern(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> context,std::shared_ptr<uml::Connector> connector) ;
+			virtual std::shared_ptr<uml::Class> generateRealizingClass(std::shared_ptr<uml::Interface> interface_,std::string className) ;
+			virtual void generateStarPattern(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> context,std::shared_ptr<uml::Connector> connector) ;
+			virtual int getCardinality(std::shared_ptr<uml::ConnectorEnd> end) ;
+			virtual std::shared_ptr<uml::Association> getDefaultAssociation() ;
+			virtual std::shared_ptr<uml::Class> getRealizingClass(std::shared_ptr<uml::Interface> interface_) ;
+			virtual std::shared_ptr<Bag<fUML::Semantics::Values::Value> > getValuesFromConnectorEnd(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> context,std::shared_ptr<uml::ConnectorEnd> end) ;
+			virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> instantiateInterface(std::shared_ptr<uml::Interface> interface,std::shared_ptr<fUML::Semantics::Loci::Locus> locus) ;
+			virtual bool isArrayPattern(std::shared_ptr<uml::Connector> c) ;
 			virtual bool isStarPattern(std::shared_ptr<uml::Connector> c) ;
 			
 			//*********************************
-			// Attributes Getter Setter
+			// Attribute Getters & Setters
 			//*********************************
 			
-			
 			//*********************************
-			// Reference
+			// Reference Getters & Setters
 			//*********************************
-			
 			virtual std::shared_ptr<uml::Association> getDefaultAssociation() const ;
-			
 			virtual void setDefaultAssociation(std::shared_ptr<uml::Association>) ;
-			
 			virtual std::shared_ptr<Bag<uml::Class>> getGeneratedRealizingClasses() const ;
-			
-			
 			virtual std::shared_ptr<fUML::Semantics::Loci::Locus> getLocus() const ;
-			
 			virtual void setLocus(std::shared_ptr<fUML::Semantics::Loci::Locus>) ;
 			
+			//*********************************
+			// Union Reference Getters
+			//*********************************
 			
 			//*********************************
-			// Union Getter
+			// Container Getter
 			//*********************************
-			
-			
-
 			virtual std::shared_ptr<ecore::EObject> eContainer() const ; 
 			
 			//*********************************
@@ -94,20 +86,23 @@ namespace PSCS::Semantics::Actions
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) ;
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
-			
 			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
-			
 
-			//*********************************
-			// Structural Feature Getter/Setter
-			//*********************************
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+
+			//*********************************
+			// EStructuralFeature Get/Set/IsSet
+			//*********************************
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool internalEIsSet(int featureID) const ;
 			virtual bool eSet(int featureID, Any newValue) ;
+			virtual bool internalEIsSet(int featureID) const ;
+
+			//*********************************
+			// EOperation Invoke
+			//*********************************
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:

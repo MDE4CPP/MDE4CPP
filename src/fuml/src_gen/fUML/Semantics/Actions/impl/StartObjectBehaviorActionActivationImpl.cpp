@@ -1,3 +1,4 @@
+
 #include "fUML/Semantics/Actions/impl/StartObjectBehaviorActionActivationImpl.hpp"
 
 #ifdef NDEBUG
@@ -44,7 +45,6 @@
 #include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "uml/umlFactory.hpp"
-
 
 #include "uml/Action.hpp"
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
@@ -132,15 +132,6 @@ std::shared_ptr<ecore::EObject> StartObjectBehaviorActionActivationImpl::copy() 
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> StartObjectBehaviorActionActivationImpl::eStaticClass() const
-{
-	return fUML::Semantics::Actions::ActionsPackage::eInstance()->getStartObjectBehaviorActionActivation_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
@@ -210,7 +201,11 @@ void StartObjectBehaviorActionActivationImpl::doAction()
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
+//*********************************
+
+//*********************************
+// Reference Getters & Setters
 //*********************************
 
 //*********************************
@@ -231,18 +226,9 @@ std::shared_ptr<Union<fUML::Semantics::Actions::PinActivation>> StartObjectBehav
 	return m_pinActivation;
 }
 
-
-
-
-std::shared_ptr<StartObjectBehaviorActionActivation> StartObjectBehaviorActionActivationImpl::getThisStartObjectBehaviorActionActivationPtr() const
-{
-	return m_thisStartObjectBehaviorActionActivationPtr.lock();
-}
-void StartObjectBehaviorActionActivationImpl::setThisStartObjectBehaviorActionActivationPtr(std::weak_ptr<StartObjectBehaviorActionActivation> thisStartObjectBehaviorActionActivationPtr)
-{
-	m_thisStartObjectBehaviorActionActivationPtr = thisStartObjectBehaviorActionActivationPtr;
-	setThisInvocationActionActivationPtr(thisStartObjectBehaviorActionActivationPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> StartObjectBehaviorActionActivationImpl::eContainer() const
 {
 	if(auto wp = m_group.lock())
@@ -250,62 +236,6 @@ std::shared_ptr<ecore::EObject> StartObjectBehaviorActionActivationImpl::eContai
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any StartObjectBehaviorActionActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-	}
-	return InvocationActionActivationImpl::eGet(featureID, resolve, coreType);
-}
-bool StartObjectBehaviorActionActivationImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-	}
-	return InvocationActionActivationImpl::internalEIsSet(featureID);
-}
-bool StartObjectBehaviorActionActivationImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-	}
-
-	return InvocationActionActivationImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any StartObjectBehaviorActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-		
-		// 964472741
-		case ActionsPackage::STARTOBJECTBEHAVIORACTIONACTIVATION_OPERATION_DOACTION:
-		{
-			this->doAction();
-			break;
-		}
-
-		default:
-		{
-			// call superTypes
-			result = InvocationActionActivationImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -358,10 +288,6 @@ void StartObjectBehaviorActionActivationImpl::save(std::shared_ptr<persistence::
 	fUML::Semantics::Loci::SemanticVisitorImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
 }
 
 void StartObjectBehaviorActionActivationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -376,3 +302,78 @@ void StartObjectBehaviorActionActivationImpl::saveContent(std::shared_ptr<persis
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> StartObjectBehaviorActionActivationImpl::eStaticClass() const
+{
+	return fUML::Semantics::Actions::ActionsPackage::eInstance()->getStartObjectBehaviorActionActivation_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any StartObjectBehaviorActionActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+	}
+	return InvocationActionActivationImpl::eGet(featureID, resolve, coreType);
+}
+
+bool StartObjectBehaviorActionActivationImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+	}
+	return InvocationActionActivationImpl::internalEIsSet(featureID);
+}
+
+bool StartObjectBehaviorActionActivationImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+	}
+
+	return InvocationActionActivationImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any StartObjectBehaviorActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 964472741
+		case ActionsPackage::STARTOBJECTBEHAVIORACTIONACTIVATION_OPERATION_DOACTION:
+		{
+			this->doAction();
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = InvocationActionActivationImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<StartObjectBehaviorActionActivation> StartObjectBehaviorActionActivationImpl::getThisStartObjectBehaviorActionActivationPtr() const
+{
+	return m_thisStartObjectBehaviorActionActivationPtr.lock();
+}
+void StartObjectBehaviorActionActivationImpl::setThisStartObjectBehaviorActionActivationPtr(std::weak_ptr<StartObjectBehaviorActionActivation> thisStartObjectBehaviorActionActivationPtr)
+{
+	m_thisStartObjectBehaviorActionActivationPtr = thisStartObjectBehaviorActionActivationPtr;
+	setThisInvocationActionActivationPtr(thisStartObjectBehaviorActionActivationPtr);
+}

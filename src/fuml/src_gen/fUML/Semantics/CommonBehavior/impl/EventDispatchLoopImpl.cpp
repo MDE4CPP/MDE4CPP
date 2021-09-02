@@ -1,3 +1,4 @@
+
 #include "fUML/Semantics/CommonBehavior/impl/EventDispatchLoopImpl.hpp"
 
 #ifdef NDEBUG
@@ -24,14 +25,12 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-
 
 
 //Factories an Package includes
@@ -102,89 +101,28 @@ std::shared_ptr<ecore::EObject> EventDispatchLoopImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> EventDispatchLoopImpl::eStaticClass() const
-{
-	return fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance()->getEventDispatchLoop_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
 
 //*********************************
-// References
+// Attribute Getters & Setters
+//*********************************
+
+//*********************************
+// Reference Getters & Setters
 //*********************************
 
 //*********************************
 // Union Getter
 //*********************************
 
-
-
-std::shared_ptr<EventDispatchLoop> EventDispatchLoopImpl::getThisEventDispatchLoopPtr() const
-{
-	return m_thisEventDispatchLoopPtr.lock();
-}
-void EventDispatchLoopImpl::setThisEventDispatchLoopPtr(std::weak_ptr<EventDispatchLoop> thisEventDispatchLoopPtr)
-{
-	m_thisEventDispatchLoopPtr = thisEventDispatchLoopPtr;
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> EventDispatchLoopImpl::eContainer() const
 {
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any EventDispatchLoopImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-	}
-	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
-}
-bool EventDispatchLoopImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-	}
-	return ecore::EObjectImpl::internalEIsSet(featureID);
-}
-bool EventDispatchLoopImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-	}
-
-	return ecore::EObjectImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any EventDispatchLoopImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-
-		default:
-		{
-			// call superTypes
-			result = ecore::EModelElementImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -227,9 +165,7 @@ void EventDispatchLoopImpl::save(std::shared_ptr<persistence::interfaces::XSaveH
 {
 	saveContent(saveHandler);
 
-	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
 }
 
 void EventDispatchLoopImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -244,3 +180,70 @@ void EventDispatchLoopImpl::saveContent(std::shared_ptr<persistence::interfaces:
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> EventDispatchLoopImpl::eStaticClass() const
+{
+	return fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance()->getEventDispatchLoop_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any EventDispatchLoopImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+	}
+	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
+}
+
+bool EventDispatchLoopImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+	}
+	return ecore::EObjectImpl::internalEIsSet(featureID);
+}
+
+bool EventDispatchLoopImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+	}
+
+	return ecore::EObjectImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any EventDispatchLoopImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+
+		default:
+		{
+			// call superTypes
+			result = ecore::EModelElementImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<EventDispatchLoop> EventDispatchLoopImpl::getThisEventDispatchLoopPtr() const
+{
+	return m_thisEventDispatchLoopPtr.lock();
+}
+void EventDispatchLoopImpl::setThisEventDispatchLoopPtr(std::weak_ptr<EventDispatchLoop> thisEventDispatchLoopPtr)
+{
+	m_thisEventDispatchLoopPtr = thisEventDispatchLoopPtr;
+}

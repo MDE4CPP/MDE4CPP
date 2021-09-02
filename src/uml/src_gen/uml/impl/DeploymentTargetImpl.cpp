@@ -1,3 +1,4 @@
+
 #include "uml/impl/DeploymentTargetImpl.hpp"
 
 #ifdef NDEBUG
@@ -25,7 +26,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -33,7 +33,6 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-
 
 #include "uml/Comment.hpp"
 #include "uml/Dependency.hpp"
@@ -161,15 +160,6 @@ std::shared_ptr<ecore::EObject> DeploymentTargetImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> DeploymentTargetImpl::eStaticClass() const
-{
-	return uml::umlPackage::eInstance()->getDeploymentTarget_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
@@ -180,11 +170,13 @@ std::shared_ptr<Bag<uml::PackageableElement> > DeploymentTargetImpl::getDeployed
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference deployedElement
-*/
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference deployedElement */
 std::shared_ptr<Bag<uml::PackageableElement>> DeploymentTargetImpl::getDeployedElement() const
 {
 	if(m_deployedElement == nullptr)
@@ -196,11 +188,7 @@ std::shared_ptr<Bag<uml::PackageableElement>> DeploymentTargetImpl::getDeployedE
     return m_deployedElement;
 }
 
-
-
-/*
-Getter & Setter for reference deployment
-*/
+/* Getter & Setter for reference deployment */
 std::shared_ptr<Subset<uml::Deployment, uml::Element>> DeploymentTargetImpl::getDeployment() const
 {
 	if(m_deployment == nullptr)
@@ -220,8 +208,6 @@ std::shared_ptr<Subset<uml::Deployment, uml::Element>> DeploymentTargetImpl::get
 	}
     return m_deployment;
 }
-
-
 
 //*********************************
 // Union Getter
@@ -246,18 +232,9 @@ std::weak_ptr<uml::Element> DeploymentTargetImpl::getOwner() const
 	return m_owner;
 }
 
-
-
-
-std::shared_ptr<DeploymentTarget> DeploymentTargetImpl::getThisDeploymentTargetPtr() const
-{
-	return m_thisDeploymentTargetPtr.lock();
-}
-void DeploymentTargetImpl::setThisDeploymentTargetPtr(std::weak_ptr<DeploymentTarget> thisDeploymentTargetPtr)
-{
-	m_thisDeploymentTargetPtr = thisDeploymentTargetPtr;
-	setThisNamedElementPtr(thisDeploymentTargetPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> DeploymentTargetImpl::eContainer() const
 {
 	if(auto wp = m_namespace.lock())
@@ -270,126 +247,6 @@ std::shared_ptr<ecore::EObject> DeploymentTargetImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any DeploymentTargetImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::DEPLOYMENTTARGET_ATTRIBUTE_DEPLOYEDELEMENT:
-		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::PackageableElement>::iterator iter = getDeployedElement()->begin();
-			Bag<uml::PackageableElement>::iterator end = getDeployedElement()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //719			
-		}
-		case uml::umlPackage::DEPLOYMENTTARGET_ATTRIBUTE_DEPLOYMENT:
-		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Deployment>::iterator iter = getDeployment()->begin();
-			Bag<uml::Deployment>::iterator end = getDeployment()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //7110			
-		}
-	}
-	return NamedElementImpl::eGet(featureID, resolve, coreType);
-}
-bool DeploymentTargetImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::DEPLOYMENTTARGET_ATTRIBUTE_DEPLOYEDELEMENT:
-			return getDeployedElement() != nullptr; //719
-		case uml::umlPackage::DEPLOYMENTTARGET_ATTRIBUTE_DEPLOYMENT:
-			return getDeployment() != nullptr; //7110
-	}
-	return NamedElementImpl::internalEIsSet(featureID);
-}
-bool DeploymentTargetImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::DEPLOYMENTTARGET_ATTRIBUTE_DEPLOYMENT:
-		{
-			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::Deployment>> deploymentList(new Bag<uml::Deployment>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
-			{
-				deploymentList->add(std::dynamic_pointer_cast<uml::Deployment>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::Deployment>::iterator iterDeployment = getDeployment()->begin();
-			Bag<uml::Deployment>::iterator endDeployment = getDeployment()->end();
-			while (iterDeployment != endDeployment)
-			{
-				if (deploymentList->find(*iterDeployment) == -1)
-				{
-					getDeployment()->erase(*iterDeployment);
-				}
-				iterDeployment++;
-			}
- 
-			iterDeployment = deploymentList->begin();
-			endDeployment = deploymentList->end();
-			while (iterDeployment != endDeployment)
-			{
-				if (getDeployment()->find(*iterDeployment) == -1)
-				{
-					getDeployment()->add(*iterDeployment);
-				}
-				iterDeployment++;			
-			}
-			return true;
-		}
-	}
-
-	return NamedElementImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any DeploymentTargetImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-		
-		// 2114329514
-		case umlPackage::DEPLOYMENTTARGET_OPERATION_GETDEPLOYEDELEMENTS:
-		{
-			result = eAny(this->getDeployedElements());
-			break;
-		}
-
-		default:
-		{
-			// call superTypes
-			result = NamedElementImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -462,9 +319,6 @@ void DeploymentTargetImpl::save(std::shared_ptr<persistence::interfaces::XSaveHa
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
 }
 
 void DeploymentTargetImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -484,3 +338,142 @@ void DeploymentTargetImpl::saveContent(std::shared_ptr<persistence::interfaces::
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> DeploymentTargetImpl::eStaticClass() const
+{
+	return uml::umlPackage::eInstance()->getDeploymentTarget_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any DeploymentTargetImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::DEPLOYMENTTARGET_ATTRIBUTE_DEPLOYEDELEMENT:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::PackageableElement>::iterator iter = getDeployedElement()->begin();
+			Bag<uml::PackageableElement>::iterator end = getDeployedElement()->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //719			
+		}
+		case uml::umlPackage::DEPLOYMENTTARGET_ATTRIBUTE_DEPLOYMENT:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Deployment>::iterator iter = getDeployment()->begin();
+			Bag<uml::Deployment>::iterator end = getDeployment()->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //7110			
+		}
+	}
+	return NamedElementImpl::eGet(featureID, resolve, coreType);
+}
+
+bool DeploymentTargetImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::DEPLOYMENTTARGET_ATTRIBUTE_DEPLOYEDELEMENT:
+			return getDeployedElement() != nullptr; //719
+		case uml::umlPackage::DEPLOYMENTTARGET_ATTRIBUTE_DEPLOYMENT:
+			return getDeployment() != nullptr; //7110
+	}
+	return NamedElementImpl::internalEIsSet(featureID);
+}
+
+bool DeploymentTargetImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::DEPLOYMENTTARGET_ATTRIBUTE_DEPLOYMENT:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::Deployment>> deploymentList(new Bag<uml::Deployment>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				deploymentList->add(std::dynamic_pointer_cast<uml::Deployment>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::Deployment>::iterator iterDeployment = getDeployment()->begin();
+			Bag<uml::Deployment>::iterator endDeployment = getDeployment()->end();
+			while (iterDeployment != endDeployment)
+			{
+				if (deploymentList->find(*iterDeployment) == -1)
+				{
+					getDeployment()->erase(*iterDeployment);
+				}
+				iterDeployment++;
+			}
+ 
+			iterDeployment = deploymentList->begin();
+			endDeployment = deploymentList->end();
+			while (iterDeployment != endDeployment)
+			{
+				if (getDeployment()->find(*iterDeployment) == -1)
+				{
+					getDeployment()->add(*iterDeployment);
+				}
+				iterDeployment++;			
+			}
+			return true;
+		}
+	}
+
+	return NamedElementImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any DeploymentTargetImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 2114329514
+		case umlPackage::DEPLOYMENTTARGET_OPERATION_GETDEPLOYEDELEMENTS:
+		{
+			result = eAny(this->getDeployedElements());
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = NamedElementImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<DeploymentTarget> DeploymentTargetImpl::getThisDeploymentTargetPtr() const
+{
+	return m_thisDeploymentTargetPtr.lock();
+}
+void DeploymentTargetImpl::setThisDeploymentTargetPtr(std::weak_ptr<DeploymentTarget> thisDeploymentTargetPtr)
+{
+	m_thisDeploymentTargetPtr = thisDeploymentTargetPtr;
+	setThisNamedElementPtr(thisDeploymentTargetPtr);
+}

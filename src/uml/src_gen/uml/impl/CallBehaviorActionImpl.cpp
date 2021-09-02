@@ -1,3 +1,4 @@
+
 #include "uml/impl/CallBehaviorActionImpl.hpp"
 
 #ifdef NDEBUG
@@ -26,7 +27,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -34,7 +34,6 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-
 
 #include "uml/Activity.hpp"
 #include "uml/ActivityEdge.hpp"
@@ -155,15 +154,6 @@ std::shared_ptr<ecore::EObject> CallBehaviorActionImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> CallBehaviorActionImpl::eStaticClass() const
-{
-	return uml::umlPackage::eInstance()->getCallBehaviorAction_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
@@ -174,11 +164,13 @@ bool CallBehaviorActionImpl::no_onport(Any diagnostics,std::shared_ptr<std::map 
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference behavior
-*/
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference behavior */
 std::shared_ptr<uml::Behavior> CallBehaviorActionImpl::getBehavior() const
 {
     return m_behavior;
@@ -188,7 +180,6 @@ void CallBehaviorActionImpl::setBehavior(std::shared_ptr<uml::Behavior> _behavio
     m_behavior = _behavior;
 	
 }
-
 
 //*********************************
 // Union Getter
@@ -283,18 +274,9 @@ std::shared_ptr<Union<uml::RedefinableElement>> CallBehaviorActionImpl::getRedef
 	return m_redefinedElement;
 }
 
-
-
-
-std::shared_ptr<CallBehaviorAction> CallBehaviorActionImpl::getThisCallBehaviorActionPtr() const
-{
-	return m_thisCallBehaviorActionPtr.lock();
-}
-void CallBehaviorActionImpl::setThisCallBehaviorActionPtr(std::weak_ptr<CallBehaviorAction> thisCallBehaviorActionPtr)
-{
-	m_thisCallBehaviorActionPtr = thisCallBehaviorActionPtr;
-	setThisCallActionPtr(thisCallBehaviorActionPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> CallBehaviorActionImpl::eContainer() const
 {
 	if(auto wp = m_activity.lock())
@@ -317,87 +299,6 @@ std::shared_ptr<ecore::EObject> CallBehaviorActionImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any CallBehaviorActionImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::CALLBEHAVIORACTION_ATTRIBUTE_BEHAVIOR:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getBehavior();
-				return eAny(returnValue); //2931
-			}
-	}
-	return CallActionImpl::eGet(featureID, resolve, coreType);
-}
-bool CallBehaviorActionImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::CALLBEHAVIORACTION_ATTRIBUTE_BEHAVIOR:
-			return getBehavior() != nullptr; //2931
-	}
-	return CallActionImpl::internalEIsSet(featureID);
-}
-bool CallBehaviorActionImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::CALLBEHAVIORACTION_ATTRIBUTE_BEHAVIOR:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::Behavior> _behavior = std::dynamic_pointer_cast<uml::Behavior>(_temp);
-			setBehavior(_behavior); //2931
-			return true;
-		}
-	}
-
-	return CallActionImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any CallBehaviorActionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-		
-		// 1974091371
-		case umlPackage::CALLBEHAVIORACTION_OPERATION_NO_ONPORT_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->no_onport(incoming_param_diagnostics,incoming_param_context));
-			break;
-		}
-
-		default:
-		{
-			// call superTypes
-			result = CallActionImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -493,15 +394,6 @@ void CallBehaviorActionImpl::save(std::shared_ptr<persistence::interfaces::XSave
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
-	
-	
-	
-	
-	
 }
 
 void CallBehaviorActionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -518,3 +410,103 @@ void CallBehaviorActionImpl::saveContent(std::shared_ptr<persistence::interfaces
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> CallBehaviorActionImpl::eStaticClass() const
+{
+	return uml::umlPackage::eInstance()->getCallBehaviorAction_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any CallBehaviorActionImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::CALLBEHAVIORACTION_ATTRIBUTE_BEHAVIOR:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getBehavior();
+				return eAny(returnValue); //2931
+			}
+	}
+	return CallActionImpl::eGet(featureID, resolve, coreType);
+}
+
+bool CallBehaviorActionImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::CALLBEHAVIORACTION_ATTRIBUTE_BEHAVIOR:
+			return getBehavior() != nullptr; //2931
+	}
+	return CallActionImpl::internalEIsSet(featureID);
+}
+
+bool CallBehaviorActionImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::CALLBEHAVIORACTION_ATTRIBUTE_BEHAVIOR:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::Behavior> _behavior = std::dynamic_pointer_cast<uml::Behavior>(_temp);
+			setBehavior(_behavior); //2931
+			return true;
+		}
+	}
+
+	return CallActionImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any CallBehaviorActionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 1974091371
+		case umlPackage::CALLBEHAVIORACTION_OPERATION_NO_ONPORT_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->no_onport(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = CallActionImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<CallBehaviorAction> CallBehaviorActionImpl::getThisCallBehaviorActionPtr() const
+{
+	return m_thisCallBehaviorActionPtr.lock();
+}
+void CallBehaviorActionImpl::setThisCallBehaviorActionPtr(std::weak_ptr<CallBehaviorAction> thisCallBehaviorActionPtr)
+{
+	m_thisCallBehaviorActionPtr = thisCallBehaviorActionPtr;
+	setThisCallActionPtr(thisCallBehaviorActionPtr);
+}

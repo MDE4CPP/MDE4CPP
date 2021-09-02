@@ -1,3 +1,4 @@
+
 #include "uml/impl/LiteralIntegerImpl.hpp"
 
 #ifdef NDEBUG
@@ -25,7 +26,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -33,7 +33,6 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-
 
 #include "uml/Comment.hpp"
 #include "uml/Dependency.hpp"
@@ -160,28 +159,6 @@ std::shared_ptr<ecore::EObject> LiteralIntegerImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> LiteralIntegerImpl::eStaticClass() const
-{
-	return uml::umlPackage::eInstance()->getLiteralInteger_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-/*
-Getter & Setter for attribute value
-*/
-int LiteralIntegerImpl::getValue() const 
-{
-	return m_value;
-}
-void LiteralIntegerImpl::setValue(int _value)
-{
-	m_value = _value;
-	
-} 
-
-
 //*********************************
 // Operations
 //*********************************
@@ -202,7 +179,21 @@ bool LiteralIntegerImpl::isComputable()
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
+//*********************************
+/* Getter & Setter for attribute value */
+int LiteralIntegerImpl::getValue() const 
+{
+	return m_value;
+}
+void LiteralIntegerImpl::setValue(int _value)
+{
+	m_value = _value;
+	
+}
+
+//*********************************
+// Reference Getters & Setters
 //*********************************
 
 //*********************************
@@ -235,16 +226,9 @@ std::weak_ptr<uml::Element> LiteralIntegerImpl::getOwner() const
 
 
 
-
-std::shared_ptr<LiteralInteger> LiteralIntegerImpl::getThisLiteralIntegerPtr() const
-{
-	return m_thisLiteralIntegerPtr.lock();
-}
-void LiteralIntegerImpl::setThisLiteralIntegerPtr(std::weak_ptr<LiteralInteger> thisLiteralIntegerPtr)
-{
-	m_thisLiteralIntegerPtr = thisLiteralIntegerPtr;
-	setThisLiteralSpecificationPtr(thisLiteralIntegerPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> LiteralIntegerImpl::eContainer() const
 {
 	if(auto wp = m_namespace.lock())
@@ -277,80 +261,6 @@ std::shared_ptr<ecore::EObject> LiteralIntegerImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any LiteralIntegerImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::LITERALINTEGER_ATTRIBUTE_VALUE:
-			return eAny(getValue()); //13815
-	}
-	return LiteralSpecificationImpl::eGet(featureID, resolve, coreType);
-}
-bool LiteralIntegerImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::LITERALINTEGER_ATTRIBUTE_VALUE:
-			return getValue() != 0; //13815
-	}
-	return LiteralSpecificationImpl::internalEIsSet(featureID);
-}
-bool LiteralIntegerImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::LITERALINTEGER_ATTRIBUTE_VALUE:
-		{
-			// BOOST CAST
-			int _value = newValue->get<int>();
-			setValue(_value); //13815
-			return true;
-		}
-	}
-
-	return LiteralSpecificationImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any LiteralIntegerImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-		
-		// 1304183652
-		case umlPackage::LITERALINTEGER_OPERATION_INTEGERVALUE:
-		{
-			result = eAny(this->integerValue());
-			break;
-		}
-		
-		// 1573689205
-		case umlPackage::LITERALINTEGER_OPERATION_ISCOMPUTABLE:
-		{
-			result = eAny(this->isComputable());
-			break;
-		}
-
-		default:
-		{
-			// call superTypes
-			result = LiteralSpecificationImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -430,12 +340,6 @@ void LiteralIntegerImpl::save(std::shared_ptr<persistence::interfaces::XSaveHand
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
-	
-	
 }
 
 void LiteralIntegerImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -455,3 +359,96 @@ void LiteralIntegerImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> LiteralIntegerImpl::eStaticClass() const
+{
+	return uml::umlPackage::eInstance()->getLiteralInteger_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any LiteralIntegerImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::LITERALINTEGER_ATTRIBUTE_VALUE:
+			return eAny(getValue()); //13815
+	}
+	return LiteralSpecificationImpl::eGet(featureID, resolve, coreType);
+}
+
+bool LiteralIntegerImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::LITERALINTEGER_ATTRIBUTE_VALUE:
+			return getValue() != 0; //13815
+	}
+	return LiteralSpecificationImpl::internalEIsSet(featureID);
+}
+
+bool LiteralIntegerImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::LITERALINTEGER_ATTRIBUTE_VALUE:
+		{
+			// BOOST CAST
+			int _value = newValue->get<int>();
+			setValue(_value); //13815
+			return true;
+		}
+	}
+
+	return LiteralSpecificationImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any LiteralIntegerImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 1304183652
+		case umlPackage::LITERALINTEGER_OPERATION_INTEGERVALUE:
+		{
+			result = eAny(this->integerValue());
+			break;
+		}
+		
+		// 1573689205
+		case umlPackage::LITERALINTEGER_OPERATION_ISCOMPUTABLE:
+		{
+			result = eAny(this->isComputable());
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = LiteralSpecificationImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<LiteralInteger> LiteralIntegerImpl::getThisLiteralIntegerPtr() const
+{
+	return m_thisLiteralIntegerPtr.lock();
+}
+void LiteralIntegerImpl::setThisLiteralIntegerPtr(std::weak_ptr<LiteralInteger> thisLiteralIntegerPtr)
+{
+	m_thisLiteralIntegerPtr = thisLiteralIntegerPtr;
+	setThisLiteralSpecificationPtr(thisLiteralIntegerPtr);
+}

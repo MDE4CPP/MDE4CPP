@@ -1,3 +1,4 @@
+
 #include "fUML/Semantics/StructuredClassifiers/impl/ReferenceImpl.hpp"
 
 #ifdef NDEBUG
@@ -36,7 +37,6 @@
 
 #include <exception> // used in Persistence
 #include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
-
 
 #include "uml/Class.hpp"
 #include "uml/Classifier.hpp"
@@ -123,15 +123,6 @@ std::shared_ptr<ecore::EObject> ReferenceImpl::copy() const
 	element->setThisReferencePtr(element);
 	return element;
 }
-
-std::shared_ptr<ecore::EClass> ReferenceImpl::eStaticClass() const
-{
-	return fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::eInstance()->getReference_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
 
 //*********************************
 // Operations
@@ -280,11 +271,13 @@ std::string ReferenceImpl::toString()
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference referent
-*/
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference referent */
 std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> ReferenceImpl::getReferent() const
 {
     return m_referent;
@@ -295,29 +288,124 @@ void ReferenceImpl::setReferent(std::shared_ptr<fUML::Semantics::StructuredClass
 	
 }
 
-
 //*********************************
 // Union Getter
 //*********************************
 
-
-
-std::shared_ptr<Reference> ReferenceImpl::getThisReferencePtr() const
-{
-	return m_thisReferencePtr.lock();
-}
-void ReferenceImpl::setThisReferencePtr(std::weak_ptr<Reference> thisReferencePtr)
-{
-	m_thisReferencePtr = thisReferencePtr;
-	setThisStructuredValuePtr(thisReferencePtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> ReferenceImpl::eContainer() const
 {
 	return nullptr;
 }
 
 //*********************************
-// Structural Feature Getter/Setter
+// Persistence Functions
+//*********************************
+void ReferenceImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get fUMLFactory
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
+	}
+}		
+
+void ReferenceImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+	try
+	{
+		std::map<std::string, std::string>::const_iterator iter;
+		std::shared_ptr<ecore::EClass> metaClass = this->eClass(); // get MetaClass
+		iter = attr_list.find("referent");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("referent")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	fUML::Semantics::SimpleClassifiers::StructuredValueImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void ReferenceImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+
+	//load BasePackage Nodes
+	fUML::Semantics::SimpleClassifiers::StructuredValueImpl::loadNode(nodeName, loadHandler);
+}
+
+void ReferenceImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+{
+	switch(featureID)
+	{
+		case fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::REFERENCE_ATTRIBUTE_REFERENT:
+		{
+			if (references.size() == 1)
+			{
+				// Cast object to correct type
+				std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> _referent = std::dynamic_pointer_cast<fUML::Semantics::StructuredClassifiers::Object>( references.front() );
+				setReferent(_referent);
+			}
+			
+			return;
+		}
+	}
+	fUML::Semantics::SimpleClassifiers::StructuredValueImpl::resolveReferences(featureID, references);
+}
+
+void ReferenceImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	fUML::Semantics::SimpleClassifiers::StructuredValueImpl::saveContent(saveHandler);
+	
+	fUML::Semantics::Values::ValueImpl::saveContent(saveHandler);
+	
+	fUML::Semantics::Loci::SemanticVisitorImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+}
+
+void ReferenceImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage> package = fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::eInstance();
+	// Add references
+		saveHandler->addReference(this->getReferent(), "referent", getReferent()->eClass() != fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::eInstance()->getObject_Class()); 
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+}
+
+
+std::shared_ptr<ecore::EClass> ReferenceImpl::eStaticClass() const
+{
+	return fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::eInstance()->getReference_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
 //*********************************
 Any ReferenceImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
@@ -331,6 +419,7 @@ Any ReferenceImpl::eGet(int featureID, bool resolve, bool coreType) const
 	}
 	return fUML::Semantics::SimpleClassifiers::StructuredValueImpl::eGet(featureID, resolve, coreType);
 }
+
 bool ReferenceImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
@@ -340,6 +429,7 @@ bool ReferenceImpl::internalEIsSet(int featureID) const
 	}
 	return fUML::Semantics::SimpleClassifiers::StructuredValueImpl::internalEIsSet(featureID);
 }
+
 bool ReferenceImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
@@ -358,7 +448,7 @@ bool ReferenceImpl::eSet(int featureID, Any newValue)
 }
 
 //*********************************
-// Behavioral Feature
+// EOperation Invoke
 //*********************************
 Any ReferenceImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
 {
@@ -577,103 +667,13 @@ Any ReferenceImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sha
 	return result;
 }
 
-//*********************************
-// Persistence Functions
-//*********************************
-void ReferenceImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+
+std::shared_ptr<Reference> ReferenceImpl::getThisReferencePtr() const
 {
-	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
-	loadAttributes(loadHandler, attr_list);
-
-	//
-	// Create new objects (from references (containment == true))
-	//
-	// get fUMLFactory
-	int numNodes = loadHandler->getNumOfChildNodes();
-	for(int ii = 0; ii < numNodes; ii++)
-	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler);
-	}
-}		
-
-void ReferenceImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
-{
-	try
-	{
-		std::map<std::string, std::string>::const_iterator iter;
-		std::shared_ptr<ecore::EClass> metaClass = this->eClass(); // get MetaClass
-		iter = attr_list.find("referent");
-		if ( iter != attr_list.end() )
-		{
-			// add unresolvedReference to loadHandler's list
-			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("referent")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
-		}
-	}
-	catch (std::exception& e)
-	{
-		std::cout << "| ERROR    | " << e.what() << std::endl;
-	}
-	catch (...) 
-	{
-		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
-	}
-
-	fUML::Semantics::SimpleClassifiers::StructuredValueImpl::loadAttributes(loadHandler, attr_list);
+	return m_thisReferencePtr.lock();
 }
-
-void ReferenceImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+void ReferenceImpl::setThisReferencePtr(std::weak_ptr<Reference> thisReferencePtr)
 {
-
-	//load BasePackage Nodes
-	fUML::Semantics::SimpleClassifiers::StructuredValueImpl::loadNode(nodeName, loadHandler);
+	m_thisReferencePtr = thisReferencePtr;
+	setThisStructuredValuePtr(thisReferencePtr);
 }
-
-void ReferenceImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
-{
-	switch(featureID)
-	{
-		case fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::REFERENCE_ATTRIBUTE_REFERENT:
-		{
-			if (references.size() == 1)
-			{
-				// Cast object to correct type
-				std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> _referent = std::dynamic_pointer_cast<fUML::Semantics::StructuredClassifiers::Object>( references.front() );
-				setReferent(_referent);
-			}
-			
-			return;
-		}
-	}
-	fUML::Semantics::SimpleClassifiers::StructuredValueImpl::resolveReferences(featureID, references);
-}
-
-void ReferenceImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
-{
-	saveContent(saveHandler);
-
-	fUML::Semantics::SimpleClassifiers::StructuredValueImpl::saveContent(saveHandler);
-	
-	fUML::Semantics::Values::ValueImpl::saveContent(saveHandler);
-	
-	fUML::Semantics::Loci::SemanticVisitorImpl::saveContent(saveHandler);
-	
-	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-}
-
-void ReferenceImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
-{
-	try
-	{
-		std::shared_ptr<fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage> package = fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::eInstance();
-	// Add references
-		saveHandler->addReference(this->getReferent(), "referent", getReferent()->eClass() != fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::eInstance()->getObject_Class()); 
-	}
-	catch (std::exception& e)
-	{
-		std::cout << "| ERROR    | " << e.what() << std::endl;
-	}
-}
-

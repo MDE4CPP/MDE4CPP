@@ -45,9 +45,7 @@ namespace uml
 // namespace macro header include
 #include "fUML/fUML.hpp"
 
-// base class includes
 
-// enum includes
 
 #include "ecore/EModelElement.hpp"
 
@@ -73,54 +71,45 @@ namespace fUML::Semantics::CommonBehavior
 			//*********************************
 			// Operations
 			//*********************************
-			 
 			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> _copy() = 0;
+
 			//*********************************
-			// Attributes Getter & Setter
+			// Attribute Getters & Setters
 			//*********************************
-			
+
 			//*********************************
-			// References Getter & Setter
+			// Reference Getters & Setters
 			//*********************************
-			
 			virtual std::shared_ptr<uml::Parameter> getParameter() const = 0;
-			
 			virtual void setParameter(std::shared_ptr<uml::Parameter>) = 0;
-			
 			virtual std::shared_ptr<Bag<fUML::Semantics::Values::Value>> getValues() const = 0;
-			
-			
+
+			//*********************************
+			// Union Reference Getters
+			//*********************************
+
+			//*********************************
+			// Container Getter
+			//*********************************
+			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
+
+			//*********************************
+			// Persistence Functions
+			//*********************************
+			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 
 		protected:
 			//*********************************
 			// Attribute Members
 			//*********************************
 			
-			
 			//*********************************
 			// Reference Members
 			//*********************************
-			
 			std::shared_ptr<uml::Parameter> m_parameter;
 			mutable std::shared_ptr<Bag<fUML::Semantics::Values::Value>> m_values;
-
-		public:
-			//*********************************
-			// Union Getter
-			//*********************************
-			
-
-			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
-			
-			//*********************************
-			// Persistence Functions
-			//*********************************
-			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
-			
-			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
-			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
-			
 	};
-
 }
 #endif /* end of include guard: FUML_SEMANTICS_COMMONBEHAVIOR_PARAMETERVALUE_HPP */

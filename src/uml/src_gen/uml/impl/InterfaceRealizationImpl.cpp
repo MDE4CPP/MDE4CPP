@@ -1,3 +1,4 @@
+
 #include "uml/impl/InterfaceRealizationImpl.hpp"
 
 #ifdef NDEBUG
@@ -25,7 +26,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -33,7 +33,6 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-
 
 #include "uml/BehavioredClassifier.hpp"
 #include "uml/Comment.hpp"
@@ -158,25 +157,18 @@ std::shared_ptr<ecore::EObject> InterfaceRealizationImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> InterfaceRealizationImpl::eStaticClass() const
-{
-	return uml::umlPackage::eInstance()->getInterfaceRealization_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference contract
-*/
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference contract */
 std::shared_ptr<uml::Interface> InterfaceRealizationImpl::getContract() const
 {
     return m_contract;
@@ -187,10 +179,7 @@ void InterfaceRealizationImpl::setContract(std::shared_ptr<uml::Interface> _cont
 	
 }
 
-
-/*
-Getter & Setter for reference implementingClassifier
-*/
+/* Getter & Setter for reference implementingClassifier */
 std::weak_ptr<uml::BehavioredClassifier> InterfaceRealizationImpl::getImplementingClassifier() const
 {
     return m_implementingClassifier;
@@ -201,10 +190,11 @@ void InterfaceRealizationImpl::setImplementingClassifier(std::weak_ptr<uml::Beha
 	
 }
 
-
 //*********************************
 // Union Getter
 //*********************************
+
+
 std::weak_ptr<uml::Namespace> InterfaceRealizationImpl::getNamespace() const
 {
 	return m_namespace;
@@ -287,16 +277,9 @@ std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> InterfaceRealizationImp
 
 
 
-
-std::shared_ptr<InterfaceRealization> InterfaceRealizationImpl::getThisInterfaceRealizationPtr() const
-{
-	return m_thisInterfaceRealizationPtr.lock();
-}
-void InterfaceRealizationImpl::setThisInterfaceRealizationPtr(std::weak_ptr<InterfaceRealization> thisInterfaceRealizationPtr)
-{
-	m_thisInterfaceRealizationPtr = thisInterfaceRealizationPtr;
-	setThisRealizationPtr(thisInterfaceRealizationPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> InterfaceRealizationImpl::eContainer() const
 {
 	if(auto wp = m_implementingClassifier.lock())
@@ -324,85 +307,6 @@ std::shared_ptr<ecore::EObject> InterfaceRealizationImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any InterfaceRealizationImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::INTERFACEREALIZATION_ATTRIBUTE_CONTRACT:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getContract();
-				return eAny(returnValue); //12618
-			}
-		case uml::umlPackage::INTERFACEREALIZATION_ATTRIBUTE_IMPLEMENTINGCLASSIFIER:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getImplementingClassifier().lock();
-				return eAny(returnValue); //12619
-			}
-	}
-	return RealizationImpl::eGet(featureID, resolve, coreType);
-}
-bool InterfaceRealizationImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::INTERFACEREALIZATION_ATTRIBUTE_CONTRACT:
-			return getContract() != nullptr; //12618
-		case uml::umlPackage::INTERFACEREALIZATION_ATTRIBUTE_IMPLEMENTINGCLASSIFIER:
-			return getImplementingClassifier().lock() != nullptr; //12619
-	}
-	return RealizationImpl::internalEIsSet(featureID);
-}
-bool InterfaceRealizationImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::INTERFACEREALIZATION_ATTRIBUTE_CONTRACT:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::Interface> _contract = std::dynamic_pointer_cast<uml::Interface>(_temp);
-			setContract(_contract); //12618
-			return true;
-		}
-		case uml::umlPackage::INTERFACEREALIZATION_ATTRIBUTE_IMPLEMENTINGCLASSIFIER:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::BehavioredClassifier> _implementingClassifier = std::dynamic_pointer_cast<uml::BehavioredClassifier>(_temp);
-			setImplementingClassifier(_implementingClassifier); //12619
-			return true;
-		}
-	}
-
-	return RealizationImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any InterfaceRealizationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-
-		default:
-		{
-			// call superTypes
-			result = RealizationImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -509,13 +413,6 @@ void InterfaceRealizationImpl::save(std::shared_ptr<persistence::interfaces::XSa
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
-	
-	
-	
 }
 
 void InterfaceRealizationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -532,3 +429,101 @@ void InterfaceRealizationImpl::saveContent(std::shared_ptr<persistence::interfac
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> InterfaceRealizationImpl::eStaticClass() const
+{
+	return uml::umlPackage::eInstance()->getInterfaceRealization_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any InterfaceRealizationImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::INTERFACEREALIZATION_ATTRIBUTE_CONTRACT:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getContract();
+				return eAny(returnValue); //12618
+			}
+		case uml::umlPackage::INTERFACEREALIZATION_ATTRIBUTE_IMPLEMENTINGCLASSIFIER:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getImplementingClassifier().lock();
+				return eAny(returnValue); //12619
+			}
+	}
+	return RealizationImpl::eGet(featureID, resolve, coreType);
+}
+
+bool InterfaceRealizationImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::INTERFACEREALIZATION_ATTRIBUTE_CONTRACT:
+			return getContract() != nullptr; //12618
+		case uml::umlPackage::INTERFACEREALIZATION_ATTRIBUTE_IMPLEMENTINGCLASSIFIER:
+			return getImplementingClassifier().lock() != nullptr; //12619
+	}
+	return RealizationImpl::internalEIsSet(featureID);
+}
+
+bool InterfaceRealizationImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::INTERFACEREALIZATION_ATTRIBUTE_CONTRACT:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::Interface> _contract = std::dynamic_pointer_cast<uml::Interface>(_temp);
+			setContract(_contract); //12618
+			return true;
+		}
+		case uml::umlPackage::INTERFACEREALIZATION_ATTRIBUTE_IMPLEMENTINGCLASSIFIER:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::BehavioredClassifier> _implementingClassifier = std::dynamic_pointer_cast<uml::BehavioredClassifier>(_temp);
+			setImplementingClassifier(_implementingClassifier); //12619
+			return true;
+		}
+	}
+
+	return RealizationImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any InterfaceRealizationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+
+		default:
+		{
+			// call superTypes
+			result = RealizationImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<InterfaceRealization> InterfaceRealizationImpl::getThisInterfaceRealizationPtr() const
+{
+	return m_thisInterfaceRealizationPtr.lock();
+}
+void InterfaceRealizationImpl::setThisInterfaceRealizationPtr(std::weak_ptr<InterfaceRealization> thisInterfaceRealizationPtr)
+{
+	m_thisInterfaceRealizationPtr = thisInterfaceRealizationPtr;
+	setThisRealizationPtr(thisInterfaceRealizationPtr);
+}

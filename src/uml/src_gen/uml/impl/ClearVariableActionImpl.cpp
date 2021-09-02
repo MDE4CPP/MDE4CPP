@@ -1,3 +1,4 @@
+
 #include "uml/impl/ClearVariableActionImpl.hpp"
 
 #ifdef NDEBUG
@@ -25,7 +26,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -33,7 +33,6 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-
 
 #include "uml/Activity.hpp"
 #include "uml/ActivityEdge.hpp"
@@ -152,21 +151,16 @@ std::shared_ptr<ecore::EObject> ClearVariableActionImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> ClearVariableActionImpl::eStaticClass() const
-{
-	return uml::umlPackage::eInstance()->getClearVariableAction_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
 
 //*********************************
-// References
+// Attribute Getters & Setters
+//*********************************
+
+//*********************************
+// Reference Getters & Setters
 //*********************************
 
 //*********************************
@@ -222,18 +216,9 @@ std::shared_ptr<Union<uml::RedefinableElement>> ClearVariableActionImpl::getRede
 	return m_redefinedElement;
 }
 
-
-
-
-std::shared_ptr<ClearVariableAction> ClearVariableActionImpl::getThisClearVariableActionPtr() const
-{
-	return m_thisClearVariableActionPtr.lock();
-}
-void ClearVariableActionImpl::setThisClearVariableActionPtr(std::weak_ptr<ClearVariableAction> thisClearVariableActionPtr)
-{
-	m_thisClearVariableActionPtr = thisClearVariableActionPtr;
-	setThisVariableActionPtr(thisClearVariableActionPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> ClearVariableActionImpl::eContainer() const
 {
 	if(auto wp = m_activity.lock())
@@ -256,55 +241,6 @@ std::shared_ptr<ecore::EObject> ClearVariableActionImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any ClearVariableActionImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-	}
-	return VariableActionImpl::eGet(featureID, resolve, coreType);
-}
-bool ClearVariableActionImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-	}
-	return VariableActionImpl::internalEIsSet(featureID);
-}
-bool ClearVariableActionImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-	}
-
-	return VariableActionImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any ClearVariableActionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-
-		default:
-		{
-			// call superTypes
-			result = VariableActionImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -365,14 +301,6 @@ void ClearVariableActionImpl::save(std::shared_ptr<persistence::interfaces::XSav
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
-	
-	
-	
-	
 }
 
 void ClearVariableActionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -387,3 +315,71 @@ void ClearVariableActionImpl::saveContent(std::shared_ptr<persistence::interface
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> ClearVariableActionImpl::eStaticClass() const
+{
+	return uml::umlPackage::eInstance()->getClearVariableAction_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any ClearVariableActionImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+	}
+	return VariableActionImpl::eGet(featureID, resolve, coreType);
+}
+
+bool ClearVariableActionImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+	}
+	return VariableActionImpl::internalEIsSet(featureID);
+}
+
+bool ClearVariableActionImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+	}
+
+	return VariableActionImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any ClearVariableActionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+
+		default:
+		{
+			// call superTypes
+			result = VariableActionImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<ClearVariableAction> ClearVariableActionImpl::getThisClearVariableActionPtr() const
+{
+	return m_thisClearVariableActionPtr.lock();
+}
+void ClearVariableActionImpl::setThisClearVariableActionPtr(std::weak_ptr<ClearVariableAction> thisClearVariableActionPtr)
+{
+	m_thisClearVariableActionPtr = thisClearVariableActionPtr;
+	setThisVariableActionPtr(thisClearVariableActionPtr);
+}

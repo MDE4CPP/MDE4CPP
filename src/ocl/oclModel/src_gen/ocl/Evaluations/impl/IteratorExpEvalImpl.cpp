@@ -1,3 +1,4 @@
+
 #include "ocl/Evaluations/impl/IteratorExpEvalImpl.hpp"
 
 #ifdef NDEBUG
@@ -25,20 +26,18 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "fUML/Semantics/Values/ValuesFactory.hpp"
-#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
 #include "uml/umlFactory.hpp"
+#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
+#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
-
 
 #include "ocl/Evaluations/EvalEnvironment.hpp"
 #include "fUML/Semantics/Loci/Locus.hpp"
@@ -121,90 +120,28 @@ std::shared_ptr<ecore::EObject> IteratorExpEvalImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> IteratorExpEvalImpl::eStaticClass() const
-{
-	return ocl::Evaluations::EvaluationsPackage::eInstance()->getIteratorExpEval_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
 
 //*********************************
-// References
+// Attribute Getters & Setters
+//*********************************
+
+//*********************************
+// Reference Getters & Setters
 //*********************************
 
 //*********************************
 // Union Getter
 //*********************************
 
-
-
-std::shared_ptr<IteratorExpEval> IteratorExpEvalImpl::getThisIteratorExpEvalPtr() const
-{
-	return m_thisIteratorExpEvalPtr.lock();
-}
-void IteratorExpEvalImpl::setThisIteratorExpEvalPtr(std::weak_ptr<IteratorExpEval> thisIteratorExpEvalPtr)
-{
-	m_thisIteratorExpEvalPtr = thisIteratorExpEvalPtr;
-	setThisLoopExpEvalPtr(thisIteratorExpEvalPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> IteratorExpEvalImpl::eContainer() const
 {
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any IteratorExpEvalImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-	}
-	return LoopExpEvalImpl::eGet(featureID, resolve, coreType);
-}
-bool IteratorExpEvalImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-	}
-	return LoopExpEvalImpl::internalEIsSet(featureID);
-}
-bool IteratorExpEvalImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-	}
-
-	return LoopExpEvalImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any IteratorExpEvalImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-
-		default:
-		{
-			// call superTypes
-			result = LoopExpEvalImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -259,11 +196,6 @@ void IteratorExpEvalImpl::save(std::shared_ptr<persistence::interfaces::XSaveHan
 	fUML::Semantics::Loci::SemanticVisitorImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
-	
 }
 
 void IteratorExpEvalImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -278,3 +210,71 @@ void IteratorExpEvalImpl::saveContent(std::shared_ptr<persistence::interfaces::X
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> IteratorExpEvalImpl::eStaticClass() const
+{
+	return ocl::Evaluations::EvaluationsPackage::eInstance()->getIteratorExpEval_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any IteratorExpEvalImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+	}
+	return LoopExpEvalImpl::eGet(featureID, resolve, coreType);
+}
+
+bool IteratorExpEvalImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+	}
+	return LoopExpEvalImpl::internalEIsSet(featureID);
+}
+
+bool IteratorExpEvalImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+	}
+
+	return LoopExpEvalImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any IteratorExpEvalImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+
+		default:
+		{
+			// call superTypes
+			result = LoopExpEvalImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<IteratorExpEval> IteratorExpEvalImpl::getThisIteratorExpEvalPtr() const
+{
+	return m_thisIteratorExpEvalPtr.lock();
+}
+void IteratorExpEvalImpl::setThisIteratorExpEvalPtr(std::weak_ptr<IteratorExpEval> thisIteratorExpEvalPtr)
+{
+	m_thisIteratorExpEvalPtr = thisIteratorExpEvalPtr;
+	setThisLoopExpEvalPtr(thisIteratorExpEvalPtr);
+}

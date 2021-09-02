@@ -1,3 +1,4 @@
+
 #include "fUML/Semantics/Actions/impl/ReplyActionActivationImpl.hpp"
 
 #ifdef NDEBUG
@@ -41,7 +42,6 @@
 #include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "uml/umlFactory.hpp"
-
 
 #include "uml/Action.hpp"
 #include "fUML/Semantics/Actions/ActionActivation.hpp"
@@ -129,15 +129,6 @@ std::shared_ptr<ecore::EObject> ReplyActionActivationImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> ReplyActionActivationImpl::eStaticClass() const
-{
-	return fUML::Semantics::Actions::ActionsPackage::eInstance()->getReplyActionActivation_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
@@ -179,7 +170,11 @@ if((std::dynamic_pointer_cast<uml::CallEvent>(replyToCall->getEvent()) != nullpt
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
+//*********************************
+
+//*********************************
+// Reference Getters & Setters
 //*********************************
 
 //*********************************
@@ -200,18 +195,9 @@ std::shared_ptr<Union<fUML::Semantics::Actions::PinActivation>> ReplyActionActiv
 	return m_pinActivation;
 }
 
-
-
-
-std::shared_ptr<ReplyActionActivation> ReplyActionActivationImpl::getThisReplyActionActivationPtr() const
-{
-	return m_thisReplyActionActivationPtr.lock();
-}
-void ReplyActionActivationImpl::setThisReplyActionActivationPtr(std::weak_ptr<ReplyActionActivation> thisReplyActionActivationPtr)
-{
-	m_thisReplyActionActivationPtr = thisReplyActionActivationPtr;
-	setThisActionActivationPtr(thisReplyActionActivationPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> ReplyActionActivationImpl::eContainer() const
 {
 	if(auto wp = m_group.lock())
@@ -219,62 +205,6 @@ std::shared_ptr<ecore::EObject> ReplyActionActivationImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any ReplyActionActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-	}
-	return ActionActivationImpl::eGet(featureID, resolve, coreType);
-}
-bool ReplyActionActivationImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-	}
-	return ActionActivationImpl::internalEIsSet(featureID);
-}
-bool ReplyActionActivationImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-	}
-
-	return ActionActivationImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any ReplyActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-		
-		// 563900863
-		case ActionsPackage::REPLYACTIONACTIVATION_OPERATION_DOACTION:
-		{
-			this->doAction();
-			break;
-		}
-
-		default:
-		{
-			// call superTypes
-			result = ActionActivationImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -325,9 +255,6 @@ void ReplyActionActivationImpl::save(std::shared_ptr<persistence::interfaces::XS
 	fUML::Semantics::Loci::SemanticVisitorImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
 }
 
 void ReplyActionActivationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -342,3 +269,78 @@ void ReplyActionActivationImpl::saveContent(std::shared_ptr<persistence::interfa
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> ReplyActionActivationImpl::eStaticClass() const
+{
+	return fUML::Semantics::Actions::ActionsPackage::eInstance()->getReplyActionActivation_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any ReplyActionActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+	}
+	return ActionActivationImpl::eGet(featureID, resolve, coreType);
+}
+
+bool ReplyActionActivationImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+	}
+	return ActionActivationImpl::internalEIsSet(featureID);
+}
+
+bool ReplyActionActivationImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+	}
+
+	return ActionActivationImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any ReplyActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 563900863
+		case ActionsPackage::REPLYACTIONACTIVATION_OPERATION_DOACTION:
+		{
+			this->doAction();
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = ActionActivationImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<ReplyActionActivation> ReplyActionActivationImpl::getThisReplyActionActivationPtr() const
+{
+	return m_thisReplyActionActivationPtr.lock();
+}
+void ReplyActionActivationImpl::setThisReplyActionActivationPtr(std::weak_ptr<ReplyActionActivation> thisReplyActionActivationPtr)
+{
+	m_thisReplyActionActivationPtr = thisReplyActionActivationPtr;
+	setThisActionActivationPtr(thisReplyActionActivationPtr);
+}

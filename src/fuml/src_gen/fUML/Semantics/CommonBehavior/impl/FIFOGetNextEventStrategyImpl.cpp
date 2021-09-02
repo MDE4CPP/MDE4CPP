@@ -1,3 +1,4 @@
+
 #include "fUML/Semantics/CommonBehavior/impl/FIFOGetNextEventStrategyImpl.hpp"
 
 #ifdef NDEBUG
@@ -24,14 +25,12 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-
 
 #include "fUML/Semantics/CommonBehavior/GetNextEventStrategy.hpp"
 
@@ -103,90 +102,28 @@ std::shared_ptr<ecore::EObject> FIFOGetNextEventStrategyImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> FIFOGetNextEventStrategyImpl::eStaticClass() const
-{
-	return fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance()->getFIFOGetNextEventStrategy_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
 
 //*********************************
-// References
+// Attribute Getters & Setters
+//*********************************
+
+//*********************************
+// Reference Getters & Setters
 //*********************************
 
 //*********************************
 // Union Getter
 //*********************************
 
-
-
-std::shared_ptr<FIFOGetNextEventStrategy> FIFOGetNextEventStrategyImpl::getThisFIFOGetNextEventStrategyPtr() const
-{
-	return m_thisFIFOGetNextEventStrategyPtr.lock();
-}
-void FIFOGetNextEventStrategyImpl::setThisFIFOGetNextEventStrategyPtr(std::weak_ptr<FIFOGetNextEventStrategy> thisFIFOGetNextEventStrategyPtr)
-{
-	m_thisFIFOGetNextEventStrategyPtr = thisFIFOGetNextEventStrategyPtr;
-	setThisGetNextEventStrategyPtr(thisFIFOGetNextEventStrategyPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> FIFOGetNextEventStrategyImpl::eContainer() const
 {
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any FIFOGetNextEventStrategyImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-	}
-	return GetNextEventStrategyImpl::eGet(featureID, resolve, coreType);
-}
-bool FIFOGetNextEventStrategyImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-	}
-	return GetNextEventStrategyImpl::internalEIsSet(featureID);
-}
-bool FIFOGetNextEventStrategyImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-	}
-
-	return GetNextEventStrategyImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any FIFOGetNextEventStrategyImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-
-		default:
-		{
-			// call superTypes
-			result = GetNextEventStrategyImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -235,8 +172,6 @@ void FIFOGetNextEventStrategyImpl::save(std::shared_ptr<persistence::interfaces:
 	fUML::Semantics::Loci::SemanticStrategyImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
 }
 
 void FIFOGetNextEventStrategyImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -251,3 +186,71 @@ void FIFOGetNextEventStrategyImpl::saveContent(std::shared_ptr<persistence::inte
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> FIFOGetNextEventStrategyImpl::eStaticClass() const
+{
+	return fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance()->getFIFOGetNextEventStrategy_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any FIFOGetNextEventStrategyImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+	}
+	return GetNextEventStrategyImpl::eGet(featureID, resolve, coreType);
+}
+
+bool FIFOGetNextEventStrategyImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+	}
+	return GetNextEventStrategyImpl::internalEIsSet(featureID);
+}
+
+bool FIFOGetNextEventStrategyImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+	}
+
+	return GetNextEventStrategyImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any FIFOGetNextEventStrategyImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+
+		default:
+		{
+			// call superTypes
+			result = GetNextEventStrategyImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<FIFOGetNextEventStrategy> FIFOGetNextEventStrategyImpl::getThisFIFOGetNextEventStrategyPtr() const
+{
+	return m_thisFIFOGetNextEventStrategyPtr.lock();
+}
+void FIFOGetNextEventStrategyImpl::setThisFIFOGetNextEventStrategyPtr(std::weak_ptr<FIFOGetNextEventStrategy> thisFIFOGetNextEventStrategyPtr)
+{
+	m_thisFIFOGetNextEventStrategyPtr = thisFIFOGetNextEventStrategyPtr;
+	setThisGetNextEventStrategyPtr(thisFIFOGetNextEventStrategyPtr);
+}

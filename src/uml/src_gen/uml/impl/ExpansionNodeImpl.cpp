@@ -1,3 +1,4 @@
+
 #include "uml/impl/ExpansionNodeImpl.hpp"
 
 #ifdef NDEBUG
@@ -26,7 +27,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -34,7 +34,6 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-
 
 #include "uml/Activity.hpp"
 #include "uml/ActivityEdge.hpp"
@@ -155,15 +154,6 @@ std::shared_ptr<ecore::EObject> ExpansionNodeImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> ExpansionNodeImpl::eStaticClass() const
-{
-	return uml::umlPackage::eInstance()->getExpansionNode_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
@@ -174,11 +164,13 @@ bool ExpansionNodeImpl::region_as_input_or_output(Any diagnostics,std::shared_pt
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference regionAsInput
-*/
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference regionAsInput */
 std::shared_ptr<uml::ExpansionRegion> ExpansionNodeImpl::getRegionAsInput() const
 {
     return m_regionAsInput;
@@ -189,10 +181,7 @@ void ExpansionNodeImpl::setRegionAsInput(std::shared_ptr<uml::ExpansionRegion> _
 	
 }
 
-
-/*
-Getter & Setter for reference regionAsOutput
-*/
+/* Getter & Setter for reference regionAsOutput */
 std::shared_ptr<uml::ExpansionRegion> ExpansionNodeImpl::getRegionAsOutput() const
 {
     return m_regionAsOutput;
@@ -202,7 +191,6 @@ void ExpansionNodeImpl::setRegionAsOutput(std::shared_ptr<uml::ExpansionRegion> 
     m_regionAsOutput = _regionAsOutput;
 	
 }
-
 
 //*********************************
 // Union Getter
@@ -257,18 +245,9 @@ std::shared_ptr<Union<uml::RedefinableElement>> ExpansionNodeImpl::getRedefinedE
 	return m_redefinedElement;
 }
 
-
-
-
-std::shared_ptr<ExpansionNode> ExpansionNodeImpl::getThisExpansionNodePtr() const
-{
-	return m_thisExpansionNodePtr.lock();
-}
-void ExpansionNodeImpl::setThisExpansionNodePtr(std::weak_ptr<ExpansionNode> thisExpansionNodePtr)
-{
-	m_thisExpansionNodePtr = thisExpansionNodePtr;
-	setThisObjectNodePtr(thisExpansionNodePtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> ExpansionNodeImpl::eContainer() const
 {
 	if(auto wp = m_activity.lock())
@@ -291,102 +270,6 @@ std::shared_ptr<ecore::EObject> ExpansionNodeImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any ExpansionNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::EXPANSIONNODE_ATTRIBUTE_REGIONASINPUT:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getRegionAsInput();
-				return eAny(returnValue); //9326
-			}
-		case uml::umlPackage::EXPANSIONNODE_ATTRIBUTE_REGIONASOUTPUT:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getRegionAsOutput();
-				return eAny(returnValue); //9327
-			}
-	}
-	return ObjectNodeImpl::eGet(featureID, resolve, coreType);
-}
-bool ExpansionNodeImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::EXPANSIONNODE_ATTRIBUTE_REGIONASINPUT:
-			return getRegionAsInput() != nullptr; //9326
-		case uml::umlPackage::EXPANSIONNODE_ATTRIBUTE_REGIONASOUTPUT:
-			return getRegionAsOutput() != nullptr; //9327
-	}
-	return ObjectNodeImpl::internalEIsSet(featureID);
-}
-bool ExpansionNodeImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::EXPANSIONNODE_ATTRIBUTE_REGIONASINPUT:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::ExpansionRegion> _regionAsInput = std::dynamic_pointer_cast<uml::ExpansionRegion>(_temp);
-			setRegionAsInput(_regionAsInput); //9326
-			return true;
-		}
-		case uml::umlPackage::EXPANSIONNODE_ATTRIBUTE_REGIONASOUTPUT:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::ExpansionRegion> _regionAsOutput = std::dynamic_pointer_cast<uml::ExpansionRegion>(_temp);
-			setRegionAsOutput(_regionAsOutput); //9327
-			return true;
-		}
-	}
-
-	return ObjectNodeImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any ExpansionNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-		
-		// 1386125979
-		case umlPackage::EXPANSIONNODE_OPERATION_REGION_AS_INPUT_OR_OUTPUT_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->region_as_input_or_output(incoming_param_diagnostics,incoming_param_context));
-			break;
-		}
-
-		default:
-		{
-			// call superTypes
-			result = ObjectNodeImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -496,12 +379,6 @@ void ExpansionNodeImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandl
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
-	
-	
 }
 
 void ExpansionNodeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -519,3 +396,118 @@ void ExpansionNodeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSa
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> ExpansionNodeImpl::eStaticClass() const
+{
+	return uml::umlPackage::eInstance()->getExpansionNode_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any ExpansionNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::EXPANSIONNODE_ATTRIBUTE_REGIONASINPUT:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getRegionAsInput();
+				return eAny(returnValue); //9326
+			}
+		case uml::umlPackage::EXPANSIONNODE_ATTRIBUTE_REGIONASOUTPUT:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getRegionAsOutput();
+				return eAny(returnValue); //9327
+			}
+	}
+	return ObjectNodeImpl::eGet(featureID, resolve, coreType);
+}
+
+bool ExpansionNodeImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::EXPANSIONNODE_ATTRIBUTE_REGIONASINPUT:
+			return getRegionAsInput() != nullptr; //9326
+		case uml::umlPackage::EXPANSIONNODE_ATTRIBUTE_REGIONASOUTPUT:
+			return getRegionAsOutput() != nullptr; //9327
+	}
+	return ObjectNodeImpl::internalEIsSet(featureID);
+}
+
+bool ExpansionNodeImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::EXPANSIONNODE_ATTRIBUTE_REGIONASINPUT:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::ExpansionRegion> _regionAsInput = std::dynamic_pointer_cast<uml::ExpansionRegion>(_temp);
+			setRegionAsInput(_regionAsInput); //9326
+			return true;
+		}
+		case uml::umlPackage::EXPANSIONNODE_ATTRIBUTE_REGIONASOUTPUT:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::ExpansionRegion> _regionAsOutput = std::dynamic_pointer_cast<uml::ExpansionRegion>(_temp);
+			setRegionAsOutput(_regionAsOutput); //9327
+			return true;
+		}
+	}
+
+	return ObjectNodeImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any ExpansionNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 1386125979
+		case umlPackage::EXPANSIONNODE_OPERATION_REGION_AS_INPUT_OR_OUTPUT_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->region_as_input_or_output(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = ObjectNodeImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<ExpansionNode> ExpansionNodeImpl::getThisExpansionNodePtr() const
+{
+	return m_thisExpansionNodePtr.lock();
+}
+void ExpansionNodeImpl::setThisExpansionNodePtr(std::weak_ptr<ExpansionNode> thisExpansionNodePtr)
+{
+	m_thisExpansionNodePtr = thisExpansionNodePtr;
+	setThisObjectNodePtr(thisExpansionNodePtr);
+}

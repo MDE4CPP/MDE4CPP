@@ -1,3 +1,4 @@
+
 #include "ecore/impl/EStringToStringMapEntryImpl.hpp"
 
 #ifdef NDEBUG
@@ -24,14 +25,12 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-
 
 
 //Factories an Package includes
@@ -102,17 +101,14 @@ std::shared_ptr<ecore::EObject> EStringToStringMapEntryImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<EClass> EStringToStringMapEntryImpl::eStaticClass() const
-{
-	return ecore::ecorePackage::eInstance()->getEStringToStringMapEntry_Class();
-}
+//*********************************
+// Operations
+//*********************************
 
 //*********************************
-// Attribute Setter Getter
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for attribute key
-*/
+/* Getter & Setter for attribute key */
 std::string EStringToStringMapEntryImpl::getKey() const 
 {
 	return m_key;
@@ -121,12 +117,9 @@ void EStringToStringMapEntryImpl::setKey(std::string _key)
 {
 	m_key = _key;
 	
-} 
+}
 
-
-/*
-Getter & Setter for attribute value
-*/
+/* Getter & Setter for attribute value */
 std::string EStringToStringMapEntryImpl::getValue() const 
 {
 	return m_value;
@@ -135,105 +128,22 @@ void EStringToStringMapEntryImpl::setValue(std::string _value)
 {
 	m_value = _value;
 	
-} 
-
-
-//*********************************
-// Operations
-//*********************************
+}
 
 //*********************************
-// References
+// Reference Getters & Setters
 //*********************************
 
 //*********************************
 // Union Getter
 //*********************************
 
-
-
-std::shared_ptr<EStringToStringMapEntry> EStringToStringMapEntryImpl::getThisEStringToStringMapEntryPtr() const
-{
-	return m_thisEStringToStringMapEntryPtr.lock();
-}
-void EStringToStringMapEntryImpl::setThisEStringToStringMapEntryPtr(std::weak_ptr<EStringToStringMapEntry> thisEStringToStringMapEntryPtr)
-{
-	m_thisEStringToStringMapEntryPtr = thisEStringToStringMapEntryPtr;
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> EStringToStringMapEntryImpl::eContainer() const
 {
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any EStringToStringMapEntryImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case ecore::ecorePackage::ESTRINGTOSTRINGMAPENTRY_ATTRIBUTE_KEY:
-			return eAny(getKey()); //490
-		case ecore::ecorePackage::ESTRINGTOSTRINGMAPENTRY_ATTRIBUTE_VALUE:
-			return eAny(getValue()); //491
-	}
-	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
-}
-bool EStringToStringMapEntryImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case ecore::ecorePackage::ESTRINGTOSTRINGMAPENTRY_ATTRIBUTE_KEY:
-			return getKey() != ""; //490
-		case ecore::ecorePackage::ESTRINGTOSTRINGMAPENTRY_ATTRIBUTE_VALUE:
-			return getValue() != ""; //491
-	}
-	return ecore::EObjectImpl::internalEIsSet(featureID);
-}
-bool EStringToStringMapEntryImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case ecore::ecorePackage::ESTRINGTOSTRINGMAPENTRY_ATTRIBUTE_KEY:
-		{
-			// BOOST CAST
-			std::string _key = newValue->get<std::string>();
-			setKey(_key); //490
-			return true;
-		}
-		case ecore::ecorePackage::ESTRINGTOSTRINGMAPENTRY_ATTRIBUTE_VALUE:
-		{
-			// BOOST CAST
-			std::string _value = newValue->get<std::string>();
-			setValue(_value); //491
-			return true;
-		}
-	}
-
-	return ecore::EObjectImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any EStringToStringMapEntryImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-
-		default:
-		{
-			// call superTypes
-			result = ecore::EModelElementImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -306,9 +216,7 @@ void EStringToStringMapEntryImpl::save(std::shared_ptr<persistence::interfaces::
 {
 	saveContent(saveHandler);
 
-	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
 }
 
 void EStringToStringMapEntryImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -333,3 +241,92 @@ void EStringToStringMapEntryImpl::saveContent(std::shared_ptr<persistence::inter
 	}
 }
 
+
+std::shared_ptr<EClass> EStringToStringMapEntryImpl::eStaticClass() const
+{
+	return ecore::ecorePackage::eInstance()->getEStringToStringMapEntry_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any EStringToStringMapEntryImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case ecore::ecorePackage::ESTRINGTOSTRINGMAPENTRY_ATTRIBUTE_KEY:
+			return eAny(getKey()); //490
+		case ecore::ecorePackage::ESTRINGTOSTRINGMAPENTRY_ATTRIBUTE_VALUE:
+			return eAny(getValue()); //491
+	}
+	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
+}
+
+bool EStringToStringMapEntryImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case ecore::ecorePackage::ESTRINGTOSTRINGMAPENTRY_ATTRIBUTE_KEY:
+			return getKey() != ""; //490
+		case ecore::ecorePackage::ESTRINGTOSTRINGMAPENTRY_ATTRIBUTE_VALUE:
+			return getValue() != ""; //491
+	}
+	return ecore::EObjectImpl::internalEIsSet(featureID);
+}
+
+bool EStringToStringMapEntryImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case ecore::ecorePackage::ESTRINGTOSTRINGMAPENTRY_ATTRIBUTE_KEY:
+		{
+			// BOOST CAST
+			std::string _key = newValue->get<std::string>();
+			setKey(_key); //490
+			return true;
+		}
+		case ecore::ecorePackage::ESTRINGTOSTRINGMAPENTRY_ATTRIBUTE_VALUE:
+		{
+			// BOOST CAST
+			std::string _value = newValue->get<std::string>();
+			setValue(_value); //491
+			return true;
+		}
+	}
+
+	return ecore::EObjectImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any EStringToStringMapEntryImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+
+		default:
+		{
+			// call superTypes
+			result = ecore::EModelElementImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<EStringToStringMapEntry> EStringToStringMapEntryImpl::getThisEStringToStringMapEntryPtr() const
+{
+	return m_thisEStringToStringMapEntryPtr.lock();
+}
+void EStringToStringMapEntryImpl::setThisEStringToStringMapEntryPtr(std::weak_ptr<EStringToStringMapEntry> thisEStringToStringMapEntryPtr)
+{
+	m_thisEStringToStringMapEntryPtr = thisEStringToStringMapEntryPtr;
+}

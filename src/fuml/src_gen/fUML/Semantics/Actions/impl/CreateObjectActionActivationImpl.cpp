@@ -1,3 +1,4 @@
+
 #include "fUML/Semantics/Actions/impl/CreateObjectActionActivationImpl.hpp"
 
 #ifdef NDEBUG
@@ -40,7 +41,6 @@
 #include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "uml/umlFactory.hpp"
-
 
 #include "uml/Action.hpp"
 #include "fUML/Semantics/Actions/ActionActivation.hpp"
@@ -130,15 +130,6 @@ std::shared_ptr<ecore::EObject> CreateObjectActionActivationImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> CreateObjectActionActivationImpl::eStaticClass() const
-{
-	return fUML::Semantics::Actions::ActionsPackage::eInstance()->getCreateObjectActionActivation_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
@@ -180,11 +171,13 @@ else
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference createObjectAction
-*/
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference createObjectAction */
 std::shared_ptr<uml::CreateObjectAction> CreateObjectActionActivationImpl::getCreateObjectAction() const
 {
     return m_createObjectAction;
@@ -194,7 +187,6 @@ void CreateObjectActionActivationImpl::setCreateObjectAction(std::shared_ptr<uml
     m_createObjectAction = _createObjectAction;
 	//additional setter call for redefined reference ActionActivation::action
 	fUML::Semantics::Actions::ActionActivationImpl::setAction(_createObjectAction);
-	
 }
 /*Additional Setter for redefined reference 'ActionActivation::action'*/
 void CreateObjectActionActivationImpl::setAction(std::shared_ptr<uml::Action> _action)
@@ -229,7 +221,6 @@ void CreateObjectActionActivationImpl::setNode(std::shared_ptr<uml::ActivityNode
 	}
 }
 
-
 //*********************************
 // Union Getter
 //*********************************
@@ -248,18 +239,9 @@ std::shared_ptr<Union<fUML::Semantics::Actions::PinActivation>> CreateObjectActi
 	return m_pinActivation;
 }
 
-
-
-
-std::shared_ptr<CreateObjectActionActivation> CreateObjectActionActivationImpl::getThisCreateObjectActionActivationPtr() const
-{
-	return m_thisCreateObjectActionActivationPtr.lock();
-}
-void CreateObjectActionActivationImpl::setThisCreateObjectActionActivationPtr(std::weak_ptr<CreateObjectActionActivation> thisCreateObjectActionActivationPtr)
-{
-	m_thisCreateObjectActionActivationPtr = thisCreateObjectActionActivationPtr;
-	setThisActionActivationPtr(thisCreateObjectActionActivationPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> CreateObjectActionActivationImpl::eContainer() const
 {
 	if(auto wp = m_group.lock())
@@ -267,77 +249,6 @@ std::shared_ptr<ecore::EObject> CreateObjectActionActivationImpl::eContainer() c
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any CreateObjectActionActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case fUML::Semantics::Actions::ActionsPackage::CREATEOBJECTACTIONACTIVATION_ATTRIBUTE_CREATEOBJECTACTION:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getCreateObjectAction();
-				return eAny(returnValue); //3411
-			}
-	}
-	return ActionActivationImpl::eGet(featureID, resolve, coreType);
-}
-bool CreateObjectActionActivationImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case fUML::Semantics::Actions::ActionsPackage::CREATEOBJECTACTIONACTIVATION_ATTRIBUTE_CREATEOBJECTACTION:
-			return getCreateObjectAction() != nullptr; //3411
-	}
-	return ActionActivationImpl::internalEIsSet(featureID);
-}
-bool CreateObjectActionActivationImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case fUML::Semantics::Actions::ActionsPackage::CREATEOBJECTACTIONACTIVATION_ATTRIBUTE_CREATEOBJECTACTION:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::CreateObjectAction> _createObjectAction = std::dynamic_pointer_cast<uml::CreateObjectAction>(_temp);
-			setCreateObjectAction(_createObjectAction); //3411
-			return true;
-		}
-	}
-
-	return ActionActivationImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any CreateObjectActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-		
-		// 1970915943
-		case ActionsPackage::CREATEOBJECTACTIONACTIVATION_OPERATION_DOACTION:
-		{
-			this->doAction();
-			break;
-		}
-
-		default:
-		{
-			// call superTypes
-			result = ActionActivationImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -421,9 +332,6 @@ void CreateObjectActionActivationImpl::save(std::shared_ptr<persistence::interfa
 	fUML::Semantics::Loci::SemanticVisitorImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
 }
 
 void CreateObjectActionActivationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -440,3 +348,93 @@ void CreateObjectActionActivationImpl::saveContent(std::shared_ptr<persistence::
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> CreateObjectActionActivationImpl::eStaticClass() const
+{
+	return fUML::Semantics::Actions::ActionsPackage::eInstance()->getCreateObjectActionActivation_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any CreateObjectActionActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case fUML::Semantics::Actions::ActionsPackage::CREATEOBJECTACTIONACTIVATION_ATTRIBUTE_CREATEOBJECTACTION:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getCreateObjectAction();
+				return eAny(returnValue); //3411
+			}
+	}
+	return ActionActivationImpl::eGet(featureID, resolve, coreType);
+}
+
+bool CreateObjectActionActivationImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case fUML::Semantics::Actions::ActionsPackage::CREATEOBJECTACTIONACTIVATION_ATTRIBUTE_CREATEOBJECTACTION:
+			return getCreateObjectAction() != nullptr; //3411
+	}
+	return ActionActivationImpl::internalEIsSet(featureID);
+}
+
+bool CreateObjectActionActivationImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case fUML::Semantics::Actions::ActionsPackage::CREATEOBJECTACTIONACTIVATION_ATTRIBUTE_CREATEOBJECTACTION:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::CreateObjectAction> _createObjectAction = std::dynamic_pointer_cast<uml::CreateObjectAction>(_temp);
+			setCreateObjectAction(_createObjectAction); //3411
+			return true;
+		}
+	}
+
+	return ActionActivationImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any CreateObjectActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 1970915943
+		case ActionsPackage::CREATEOBJECTACTIONACTIVATION_OPERATION_DOACTION:
+		{
+			this->doAction();
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = ActionActivationImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<CreateObjectActionActivation> CreateObjectActionActivationImpl::getThisCreateObjectActionActivationPtr() const
+{
+	return m_thisCreateObjectActionActivationPtr.lock();
+}
+void CreateObjectActionActivationImpl::setThisCreateObjectActionActivationPtr(std::weak_ptr<CreateObjectActionActivation> thisCreateObjectActionActivationPtr)
+{
+	m_thisCreateObjectActionActivationPtr = thisCreateObjectActionActivationPtr;
+	setThisActionActivationPtr(thisCreateObjectActionActivationPtr);
+}

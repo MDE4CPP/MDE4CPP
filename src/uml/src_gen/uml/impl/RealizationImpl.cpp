@@ -1,3 +1,4 @@
+
 #include "uml/impl/RealizationImpl.hpp"
 
 #ifdef NDEBUG
@@ -25,7 +26,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -33,7 +33,6 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-
 
 #include "uml/Abstraction.hpp"
 #include "uml/Comment.hpp"
@@ -142,21 +141,16 @@ std::shared_ptr<ecore::EObject> RealizationImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> RealizationImpl::eStaticClass() const
-{
-	return uml::umlPackage::eInstance()->getRealization_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
 
 //*********************************
-// References
+// Attribute Getters & Setters
+//*********************************
+
+//*********************************
+// Reference Getters & Setters
 //*********************************
 
 //*********************************
@@ -244,16 +238,9 @@ std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> RealizationImpl::getTar
 
 
 
-
-std::shared_ptr<Realization> RealizationImpl::getThisRealizationPtr() const
-{
-	return m_thisRealizationPtr.lock();
-}
-void RealizationImpl::setThisRealizationPtr(std::weak_ptr<Realization> thisRealizationPtr)
-{
-	m_thisRealizationPtr = thisRealizationPtr;
-	setThisAbstractionPtr(thisRealizationPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> RealizationImpl::eContainer() const
 {
 	if(auto wp = m_namespace.lock())
@@ -276,55 +263,6 @@ std::shared_ptr<ecore::EObject> RealizationImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any RealizationImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-	}
-	return AbstractionImpl::eGet(featureID, resolve, coreType);
-}
-bool RealizationImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-	}
-	return AbstractionImpl::internalEIsSet(featureID);
-}
-bool RealizationImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-	}
-
-	return AbstractionImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any RealizationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-
-		default:
-		{
-			// call superTypes
-			result = AbstractionImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -384,12 +322,6 @@ void RealizationImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
-	
-	
 }
 
 void RealizationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -404,3 +336,71 @@ void RealizationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> RealizationImpl::eStaticClass() const
+{
+	return uml::umlPackage::eInstance()->getRealization_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any RealizationImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+	}
+	return AbstractionImpl::eGet(featureID, resolve, coreType);
+}
+
+bool RealizationImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+	}
+	return AbstractionImpl::internalEIsSet(featureID);
+}
+
+bool RealizationImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+	}
+
+	return AbstractionImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any RealizationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+
+		default:
+		{
+			// call superTypes
+			result = AbstractionImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<Realization> RealizationImpl::getThisRealizationPtr() const
+{
+	return m_thisRealizationPtr.lock();
+}
+void RealizationImpl::setThisRealizationPtr(std::weak_ptr<Realization> thisRealizationPtr)
+{
+	m_thisRealizationPtr = thisRealizationPtr;
+	setThisAbstractionPtr(thisRealizationPtr);
+}

@@ -51,32 +51,38 @@ namespace uml
 			//*********************************
 			// Operations
 			//*********************************
+			
 			/*!
 			Retrieves the stereotype that extends a metaclass through this extension.
 			*/
 			 
-			virtual std::shared_ptr<uml::Stereotype> getStereotype() ;/*!
+			virtual std::shared_ptr<uml::Stereotype> getStereotype() ;
+			/*!
 			Retrieves the extension end that is typed by a stereotype (as opposed to a metaclass).
 			*/
 			 
-			virtual std::shared_ptr<uml::Property> getStereotypeEnd() ;/*!
+			virtual std::shared_ptr<uml::Property> getStereotypeEnd() ;
+			/*!
 			The query isRequired() is true if the owned end has a multiplicity with the lower bound of 1.
 			result = (ownedEnd.lowerBound() = 1)
 			<p>From package UML::Packages.</p>
 			*/
 			 
-			virtual bool isRequired() ;/*!
+			virtual bool isRequired() ;
+			/*!
 			An Extension is binary, i.e., it has only two memberEnds.
 			memberEnd->size() = 2
 			*/
 			 
-			virtual bool is_binary(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
+			virtual bool is_binary(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			/*!
 			The query metaclassEnd() returns the Property that is typed by a metaclass (as opposed to a stereotype).
 			result = (memberEnd->reject(p | ownedEnd->includes(p.oclAsType(ExtensionEnd)))->any(true))
 			<p>From package UML::Packages.</p>
 			*/
 			 
-			virtual std::shared_ptr<uml::Property> metaclassEnd() ;/*!
+			virtual std::shared_ptr<uml::Property> metaclassEnd() ;
+			/*!
 			The non-owned end of an Extension is typed by a Class.
 			metaclassEnd()->notEmpty() and metaclassEnd().type.oclIsKindOf(Class)
 			*/
@@ -84,7 +90,7 @@ namespace uml
 			virtual bool non_owned_end(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
-			// Attributes Getter Setter
+			// Attribute Getters & Setters
 			//*********************************
 			/*!
 			Indicates whether an instance of the extending stereotype must be created when an instance of the extended class is created. The attribute value is derived from the value of the lower property of the ExtensionEnd referenced by Extension::ownedEnd; a lower value of 1 means that isRequired is true, but otherwise it is false. Since the default value of ExtensionEnd::lower is 0, the default value of isRequired is false.
@@ -93,10 +99,8 @@ namespace uml
 			 
 			virtual bool getIsRequired() const ;
 			
-			
-			
 			//*********************************
-			// Reference
+			// Reference Getters & Setters
 			//*********************************
 			/*!
 			References the Class that is extended through an Extension. The property is derived from the type of the memberEnd that is not the ownedEnd.
@@ -105,54 +109,63 @@ namespace uml
 			
 			virtual std::shared_ptr<uml::Class> getMetaclass() const ;
 			
-			
-			
 			//*********************************
-			// Union Getter
+			// Union Reference Getters
 			//*********************************
 			/*!
 			Specifies each Feature directly defined in the classifier. Note that there may be members of the Classifier that are of the type Feature but are not included, e.g., inherited features.
 			<p>From package UML::Classification.</p>
 			*/
 			
-			virtual std::shared_ptr<SubsetUnion<uml::Feature, uml::NamedElement>> getFeature() const ;/*!
+			virtual std::shared_ptr<SubsetUnion<uml::Feature, uml::NamedElement>> getFeature() const ;
+			/*!
 			A collection of NamedElements identifiable within the Namespace, either by being owned or by being introduced by importing or inheritance.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::shared_ptr<Union<uml::NamedElement>> getMember() const ;/*!
+			virtual std::shared_ptr<Union<uml::NamedElement>> getMember() const ;
+			
+			/*!
 			Specifies the Namespace that owns the NamedElement.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Namespace> getNamespace() const ;/*!
+			virtual std::weak_ptr<uml::Namespace> getNamespace() const ;
+			/*!
 			The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const ;/*!
+			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const ;
+			/*!
 			A collection of NamedElements owned by the Namespace.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement>> getOwnedMember() const ;/*!
+			virtual std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement>> getOwnedMember() const ;
+			/*!
 			The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element> getOwner() const ;/*!
+			virtual std::weak_ptr<uml::Element> getOwner() const ;
+			/*!
 			The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p>
 			*/
 			
-			virtual std::shared_ptr<Union<uml::RedefinableElement>> getRedefinedElement() const ;/*!
+			virtual std::shared_ptr<Union<uml::RedefinableElement>> getRedefinedElement() const ;
+			/*!
 			Specifies the elements related by the Relationship.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
 			virtual std::shared_ptr<Union<uml::Element>> getRelatedElement() const ;
 			
-
+			
+			//*********************************
+			// Container Getter
+			//*********************************
 			virtual std::shared_ptr<ecore::EObject> eContainer() const ; 
 			
 			//*********************************
@@ -161,20 +174,23 @@ namespace uml
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) ;
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
-			
 			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
-			
 
-			//*********************************
-			// Structural Feature Getter/Setter
-			//*********************************
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+
+			//*********************************
+			// EStructuralFeature Get/Set/IsSet
+			//*********************************
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool internalEIsSet(int featureID) const ;
 			virtual bool eSet(int featureID, Any newValue) ;
+			virtual bool internalEIsSet(int featureID) const ;
+
+			//*********************************
+			// EOperation Invoke
+			//*********************************
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:

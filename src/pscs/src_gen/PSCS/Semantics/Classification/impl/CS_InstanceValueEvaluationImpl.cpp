@@ -1,3 +1,4 @@
+
 #include "PSCS/Semantics/Classification/impl/CS_InstanceValueEvaluationImpl.hpp"
 
 #ifdef NDEBUG
@@ -53,7 +54,6 @@
 #include <exception> // used in Persistence
 #include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "uml/umlFactory.hpp"
-
 
 #include "fUML/Semantics/Classification/InstanceValueEvaluation.hpp"
 #include "fUML/Semantics/Loci/Locus.hpp"
@@ -131,15 +131,6 @@ std::shared_ptr<ecore::EObject> CS_InstanceValueEvaluationImpl::copy() const
 	element->setThisCS_InstanceValueEvaluationPtr(element);
 	return element;
 }
-
-std::shared_ptr<ecore::EClass> CS_InstanceValueEvaluationImpl::eStaticClass() const
-{
-	return PSCS::Semantics::Classification::ClassificationPackage::eInstance()->getCS_InstanceValueEvaluation_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
 
 //*********************************
 // Operations
@@ -249,83 +240,23 @@ return value;
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
+//*********************************
+
+//*********************************
+// Reference Getters & Setters
 //*********************************
 
 //*********************************
 // Union Getter
 //*********************************
 
-
-
-std::shared_ptr<CS_InstanceValueEvaluation> CS_InstanceValueEvaluationImpl::getThisCS_InstanceValueEvaluationPtr() const
-{
-	return m_thisCS_InstanceValueEvaluationPtr.lock();
-}
-void CS_InstanceValueEvaluationImpl::setThisCS_InstanceValueEvaluationPtr(std::weak_ptr<CS_InstanceValueEvaluation> thisCS_InstanceValueEvaluationPtr)
-{
-	m_thisCS_InstanceValueEvaluationPtr = thisCS_InstanceValueEvaluationPtr;
-	setThisInstanceValueEvaluationPtr(thisCS_InstanceValueEvaluationPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> CS_InstanceValueEvaluationImpl::eContainer() const
 {
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any CS_InstanceValueEvaluationImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-	}
-	return fUML::Semantics::Classification::InstanceValueEvaluationImpl::eGet(featureID, resolve, coreType);
-}
-bool CS_InstanceValueEvaluationImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-	}
-	return fUML::Semantics::Classification::InstanceValueEvaluationImpl::internalEIsSet(featureID);
-}
-bool CS_InstanceValueEvaluationImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-	}
-
-	return fUML::Semantics::Classification::InstanceValueEvaluationImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any CS_InstanceValueEvaluationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-		
-		// 71521778
-		case ClassificationPackage::CS_INSTANCEVALUEEVALUATION_OPERATION_EVALUATE:
-		{
-			result = eAny(this->evaluate());
-			break;
-		}
-
-		default:
-		{
-			// call superTypes
-			result = fUML::Semantics::Classification::InstanceValueEvaluationImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -376,9 +307,6 @@ void CS_InstanceValueEvaluationImpl::save(std::shared_ptr<persistence::interface
 	fUML::Semantics::Loci::SemanticVisitorImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
 }
 
 void CS_InstanceValueEvaluationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -393,3 +321,78 @@ void CS_InstanceValueEvaluationImpl::saveContent(std::shared_ptr<persistence::in
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> CS_InstanceValueEvaluationImpl::eStaticClass() const
+{
+	return PSCS::Semantics::Classification::ClassificationPackage::eInstance()->getCS_InstanceValueEvaluation_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any CS_InstanceValueEvaluationImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+	}
+	return fUML::Semantics::Classification::InstanceValueEvaluationImpl::eGet(featureID, resolve, coreType);
+}
+
+bool CS_InstanceValueEvaluationImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+	}
+	return fUML::Semantics::Classification::InstanceValueEvaluationImpl::internalEIsSet(featureID);
+}
+
+bool CS_InstanceValueEvaluationImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+	}
+
+	return fUML::Semantics::Classification::InstanceValueEvaluationImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any CS_InstanceValueEvaluationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 71521778
+		case ClassificationPackage::CS_INSTANCEVALUEEVALUATION_OPERATION_EVALUATE:
+		{
+			result = eAny(this->evaluate());
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = fUML::Semantics::Classification::InstanceValueEvaluationImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<CS_InstanceValueEvaluation> CS_InstanceValueEvaluationImpl::getThisCS_InstanceValueEvaluationPtr() const
+{
+	return m_thisCS_InstanceValueEvaluationPtr.lock();
+}
+void CS_InstanceValueEvaluationImpl::setThisCS_InstanceValueEvaluationPtr(std::weak_ptr<CS_InstanceValueEvaluation> thisCS_InstanceValueEvaluationPtr)
+{
+	m_thisCS_InstanceValueEvaluationPtr = thisCS_InstanceValueEvaluationPtr;
+	setThisInstanceValueEvaluationPtr(thisCS_InstanceValueEvaluationPtr);
+}

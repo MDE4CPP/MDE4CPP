@@ -1,3 +1,4 @@
+
 #include "uml/impl/ClauseImpl.hpp"
 
 #ifdef NDEBUG
@@ -26,7 +27,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -34,7 +34,6 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-
 
 #include "uml/Clause.hpp"
 #include "uml/Comment.hpp"
@@ -120,15 +119,6 @@ std::shared_ptr<ecore::EObject> ClauseImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> ClauseImpl::eStaticClass() const
-{
-	return uml::umlPackage::eInstance()->getClause_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
@@ -151,11 +141,13 @@ bool ClauseImpl::test_and_body(Any diagnostics,std::shared_ptr<std::map < Any, A
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference body
-*/
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference body */
 std::shared_ptr<Bag<uml::ExecutableNode>> ClauseImpl::getBody() const
 {
 	if(m_body == nullptr)
@@ -167,11 +159,7 @@ std::shared_ptr<Bag<uml::ExecutableNode>> ClauseImpl::getBody() const
     return m_body;
 }
 
-
-
-/*
-Getter & Setter for reference bodyOutput
-*/
+/* Getter & Setter for reference bodyOutput */
 std::shared_ptr<Bag<uml::OutputPin>> ClauseImpl::getBodyOutput() const
 {
 	if(m_bodyOutput == nullptr)
@@ -183,11 +171,7 @@ std::shared_ptr<Bag<uml::OutputPin>> ClauseImpl::getBodyOutput() const
     return m_bodyOutput;
 }
 
-
-
-/*
-Getter & Setter for reference decider
-*/
+/* Getter & Setter for reference decider */
 std::shared_ptr<uml::OutputPin> ClauseImpl::getDecider() const
 {
     return m_decider;
@@ -198,10 +182,7 @@ void ClauseImpl::setDecider(std::shared_ptr<uml::OutputPin> _decider)
 	
 }
 
-
-/*
-Getter & Setter for reference predecessorClause
-*/
+/* Getter & Setter for reference predecessorClause */
 std::shared_ptr<Bag<uml::Clause>> ClauseImpl::getPredecessorClause() const
 {
 	if(m_predecessorClause == nullptr)
@@ -213,11 +194,7 @@ std::shared_ptr<Bag<uml::Clause>> ClauseImpl::getPredecessorClause() const
     return m_predecessorClause;
 }
 
-
-
-/*
-Getter & Setter for reference successorClause
-*/
+/* Getter & Setter for reference successorClause */
 std::shared_ptr<Bag<uml::Clause>> ClauseImpl::getSuccessorClause() const
 {
 	if(m_successorClause == nullptr)
@@ -229,11 +206,7 @@ std::shared_ptr<Bag<uml::Clause>> ClauseImpl::getSuccessorClause() const
     return m_successorClause;
 }
 
-
-
-/*
-Getter & Setter for reference test
-*/
+/* Getter & Setter for reference test */
 std::shared_ptr<Bag<uml::ExecutableNode>> ClauseImpl::getTest() const
 {
 	if(m_test == nullptr)
@@ -244,8 +217,6 @@ std::shared_ptr<Bag<uml::ExecutableNode>> ClauseImpl::getTest() const
 	}
     return m_test;
 }
-
-
 
 //*********************************
 // Union Getter
@@ -265,18 +236,9 @@ std::shared_ptr<Union<uml::Element>> ClauseImpl::getOwnedElement() const
 	return m_ownedElement;
 }
 
-
-
-
-std::shared_ptr<Clause> ClauseImpl::getThisClausePtr() const
-{
-	return m_thisClausePtr.lock();
-}
-void ClauseImpl::setThisClausePtr(std::weak_ptr<Clause> thisClausePtr)
-{
-	m_thisClausePtr = thisClausePtr;
-	setThisElementPtr(thisClausePtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> ClauseImpl::eContainer() const
 {
 	if(auto wp = m_owner.lock())
@@ -287,7 +249,219 @@ std::shared_ptr<ecore::EObject> ClauseImpl::eContainer() const
 }
 
 //*********************************
-// Structural Feature Getter/Setter
+// Persistence Functions
+//*********************************
+void ClauseImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get umlFactory
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
+	}
+}		
+
+void ClauseImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+	try
+	{
+		std::map<std::string, std::string>::const_iterator iter;
+		std::shared_ptr<ecore::EClass> metaClass = this->eClass(); // get MetaClass
+		iter = attr_list.find("body");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("body")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+
+		iter = attr_list.find("bodyOutput");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("bodyOutput")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+
+		iter = attr_list.find("decider");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("decider")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+
+		iter = attr_list.find("predecessorClause");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("predecessorClause")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+
+		iter = attr_list.find("successorClause");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("successorClause")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+
+		iter = attr_list.find("test");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("test")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	ElementImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void ClauseImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+
+	//load BasePackage Nodes
+	ElementImpl::loadNode(nodeName, loadHandler);
+}
+
+void ClauseImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::CLAUSE_ATTRIBUTE_BODY:
+		{
+			std::shared_ptr<Bag<uml::ExecutableNode>> _body = getBody();
+			for(std::shared_ptr<ecore::EObject> ref : references)
+			{
+				std::shared_ptr<uml::ExecutableNode>  _r = std::dynamic_pointer_cast<uml::ExecutableNode>(ref);
+				if (_r != nullptr)
+				{
+					_body->push_back(_r);
+				}
+			}
+			return;
+		}
+
+		case uml::umlPackage::CLAUSE_ATTRIBUTE_BODYOUTPUT:
+		{
+			std::shared_ptr<Bag<uml::OutputPin>> _bodyOutput = getBodyOutput();
+			for(std::shared_ptr<ecore::EObject> ref : references)
+			{
+				std::shared_ptr<uml::OutputPin>  _r = std::dynamic_pointer_cast<uml::OutputPin>(ref);
+				if (_r != nullptr)
+				{
+					_bodyOutput->push_back(_r);
+				}
+			}
+			return;
+		}
+
+		case uml::umlPackage::CLAUSE_ATTRIBUTE_DECIDER:
+		{
+			if (references.size() == 1)
+			{
+				// Cast object to correct type
+				std::shared_ptr<uml::OutputPin> _decider = std::dynamic_pointer_cast<uml::OutputPin>( references.front() );
+				setDecider(_decider);
+			}
+			
+			return;
+		}
+
+		case uml::umlPackage::CLAUSE_ATTRIBUTE_PREDECESSORCLAUSE:
+		{
+			std::shared_ptr<Bag<uml::Clause>> _predecessorClause = getPredecessorClause();
+			for(std::shared_ptr<ecore::EObject> ref : references)
+			{
+				std::shared_ptr<uml::Clause>  _r = std::dynamic_pointer_cast<uml::Clause>(ref);
+				if (_r != nullptr)
+				{
+					_predecessorClause->push_back(_r);
+				}
+			}
+			return;
+		}
+
+		case uml::umlPackage::CLAUSE_ATTRIBUTE_SUCCESSORCLAUSE:
+		{
+			std::shared_ptr<Bag<uml::Clause>> _successorClause = getSuccessorClause();
+			for(std::shared_ptr<ecore::EObject> ref : references)
+			{
+				std::shared_ptr<uml::Clause>  _r = std::dynamic_pointer_cast<uml::Clause>(ref);
+				if (_r != nullptr)
+				{
+					_successorClause->push_back(_r);
+				}
+			}
+			return;
+		}
+
+		case uml::umlPackage::CLAUSE_ATTRIBUTE_TEST:
+		{
+			std::shared_ptr<Bag<uml::ExecutableNode>> _test = getTest();
+			for(std::shared_ptr<ecore::EObject> ref : references)
+			{
+				std::shared_ptr<uml::ExecutableNode>  _r = std::dynamic_pointer_cast<uml::ExecutableNode>(ref);
+				if (_r != nullptr)
+				{
+					_test->push_back(_r);
+				}
+			}
+			return;
+		}
+	}
+	ElementImpl::resolveReferences(featureID, references);
+}
+
+void ClauseImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	ElementImpl::saveContent(saveHandler);
+	
+	ObjectImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+}
+
+void ClauseImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
+	// Add references
+		saveHandler->addReferences<uml::ExecutableNode>("body", this->getBody());
+		saveHandler->addReferences<uml::OutputPin>("bodyOutput", this->getBodyOutput());
+		saveHandler->addReference(this->getDecider(), "decider", getDecider()->eClass() != uml::umlPackage::eInstance()->getOutputPin_Class()); 
+		saveHandler->addReferences<uml::Clause>("predecessorClause", this->getPredecessorClause());
+		saveHandler->addReferences<uml::Clause>("successorClause", this->getSuccessorClause());
+		saveHandler->addReferences<uml::ExecutableNode>("test", this->getTest());
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+}
+
+
+std::shared_ptr<ecore::EClass> ClauseImpl::eStaticClass() const
+{
+	return uml::umlPackage::eInstance()->getClause_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
 //*********************************
 Any ClauseImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
@@ -361,6 +535,7 @@ Any ClauseImpl::eGet(int featureID, bool resolve, bool coreType) const
 	}
 	return ElementImpl::eGet(featureID, resolve, coreType);
 }
+
 bool ClauseImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
@@ -380,6 +555,7 @@ bool ClauseImpl::internalEIsSet(int featureID) const
 	}
 	return ElementImpl::internalEIsSet(featureID);
 }
+
 bool ClauseImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
@@ -578,7 +754,7 @@ bool ClauseImpl::eSet(int featureID, Any newValue)
 }
 
 //*********************************
-// Behavioral Feature
+// EOperation Invoke
 //*********************************
 Any ClauseImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
 {
@@ -651,210 +827,13 @@ Any ClauseImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared
 	return result;
 }
 
-//*********************************
-// Persistence Functions
-//*********************************
-void ClauseImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+
+std::shared_ptr<Clause> ClauseImpl::getThisClausePtr() const
 {
-	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
-	loadAttributes(loadHandler, attr_list);
-
-	//
-	// Create new objects (from references (containment == true))
-	//
-	// get umlFactory
-	int numNodes = loadHandler->getNumOfChildNodes();
-	for(int ii = 0; ii < numNodes; ii++)
-	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler);
-	}
-}		
-
-void ClauseImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
-{
-	try
-	{
-		std::map<std::string, std::string>::const_iterator iter;
-		std::shared_ptr<ecore::EClass> metaClass = this->eClass(); // get MetaClass
-		iter = attr_list.find("body");
-		if ( iter != attr_list.end() )
-		{
-			// add unresolvedReference to loadHandler's list
-			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("body")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
-		}
-
-		iter = attr_list.find("bodyOutput");
-		if ( iter != attr_list.end() )
-		{
-			// add unresolvedReference to loadHandler's list
-			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("bodyOutput")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
-		}
-
-		iter = attr_list.find("decider");
-		if ( iter != attr_list.end() )
-		{
-			// add unresolvedReference to loadHandler's list
-			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("decider")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
-		}
-
-		iter = attr_list.find("predecessorClause");
-		if ( iter != attr_list.end() )
-		{
-			// add unresolvedReference to loadHandler's list
-			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("predecessorClause")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
-		}
-
-		iter = attr_list.find("successorClause");
-		if ( iter != attr_list.end() )
-		{
-			// add unresolvedReference to loadHandler's list
-			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("successorClause")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
-		}
-
-		iter = attr_list.find("test");
-		if ( iter != attr_list.end() )
-		{
-			// add unresolvedReference to loadHandler's list
-			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("test")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
-		}
-	}
-	catch (std::exception& e)
-	{
-		std::cout << "| ERROR    | " << e.what() << std::endl;
-	}
-	catch (...) 
-	{
-		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
-	}
-
-	ElementImpl::loadAttributes(loadHandler, attr_list);
+	return m_thisClausePtr.lock();
 }
-
-void ClauseImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+void ClauseImpl::setThisClausePtr(std::weak_ptr<Clause> thisClausePtr)
 {
-
-	//load BasePackage Nodes
-	ElementImpl::loadNode(nodeName, loadHandler);
+	m_thisClausePtr = thisClausePtr;
+	setThisElementPtr(thisClausePtr);
 }
-
-void ClauseImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::CLAUSE_ATTRIBUTE_BODY:
-		{
-			std::shared_ptr<Bag<uml::ExecutableNode>> _body = getBody();
-			for(std::shared_ptr<ecore::EObject> ref : references)
-			{
-				std::shared_ptr<uml::ExecutableNode>  _r = std::dynamic_pointer_cast<uml::ExecutableNode>(ref);
-				if (_r != nullptr)
-				{
-					_body->push_back(_r);
-				}
-			}
-			return;
-		}
-
-		case uml::umlPackage::CLAUSE_ATTRIBUTE_BODYOUTPUT:
-		{
-			std::shared_ptr<Bag<uml::OutputPin>> _bodyOutput = getBodyOutput();
-			for(std::shared_ptr<ecore::EObject> ref : references)
-			{
-				std::shared_ptr<uml::OutputPin>  _r = std::dynamic_pointer_cast<uml::OutputPin>(ref);
-				if (_r != nullptr)
-				{
-					_bodyOutput->push_back(_r);
-				}
-			}
-			return;
-		}
-
-		case uml::umlPackage::CLAUSE_ATTRIBUTE_DECIDER:
-		{
-			if (references.size() == 1)
-			{
-				// Cast object to correct type
-				std::shared_ptr<uml::OutputPin> _decider = std::dynamic_pointer_cast<uml::OutputPin>( references.front() );
-				setDecider(_decider);
-			}
-			
-			return;
-		}
-
-		case uml::umlPackage::CLAUSE_ATTRIBUTE_PREDECESSORCLAUSE:
-		{
-			std::shared_ptr<Bag<uml::Clause>> _predecessorClause = getPredecessorClause();
-			for(std::shared_ptr<ecore::EObject> ref : references)
-			{
-				std::shared_ptr<uml::Clause>  _r = std::dynamic_pointer_cast<uml::Clause>(ref);
-				if (_r != nullptr)
-				{
-					_predecessorClause->push_back(_r);
-				}
-			}
-			return;
-		}
-
-		case uml::umlPackage::CLAUSE_ATTRIBUTE_SUCCESSORCLAUSE:
-		{
-			std::shared_ptr<Bag<uml::Clause>> _successorClause = getSuccessorClause();
-			for(std::shared_ptr<ecore::EObject> ref : references)
-			{
-				std::shared_ptr<uml::Clause>  _r = std::dynamic_pointer_cast<uml::Clause>(ref);
-				if (_r != nullptr)
-				{
-					_successorClause->push_back(_r);
-				}
-			}
-			return;
-		}
-
-		case uml::umlPackage::CLAUSE_ATTRIBUTE_TEST:
-		{
-			std::shared_ptr<Bag<uml::ExecutableNode>> _test = getTest();
-			for(std::shared_ptr<ecore::EObject> ref : references)
-			{
-				std::shared_ptr<uml::ExecutableNode>  _r = std::dynamic_pointer_cast<uml::ExecutableNode>(ref);
-				if (_r != nullptr)
-				{
-					_test->push_back(_r);
-				}
-			}
-			return;
-		}
-	}
-	ElementImpl::resolveReferences(featureID, references);
-}
-
-void ClauseImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
-{
-	saveContent(saveHandler);
-
-	ElementImpl::saveContent(saveHandler);
-	
-	ObjectImpl::saveContent(saveHandler);
-	
-	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-}
-
-void ClauseImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
-{
-	try
-	{
-		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-	// Add references
-		saveHandler->addReferences<uml::ExecutableNode>("body", this->getBody());
-		saveHandler->addReferences<uml::OutputPin>("bodyOutput", this->getBodyOutput());
-		saveHandler->addReference(this->getDecider(), "decider", getDecider()->eClass() != uml::umlPackage::eInstance()->getOutputPin_Class()); 
-		saveHandler->addReferences<uml::Clause>("predecessorClause", this->getPredecessorClause());
-		saveHandler->addReferences<uml::Clause>("successorClause", this->getSuccessorClause());
-		saveHandler->addReferences<uml::ExecutableNode>("test", this->getTest());
-	}
-	catch (std::exception& e)
-	{
-		std::cout << "| ERROR    | " << e.what() << std::endl;
-	}
-}
-

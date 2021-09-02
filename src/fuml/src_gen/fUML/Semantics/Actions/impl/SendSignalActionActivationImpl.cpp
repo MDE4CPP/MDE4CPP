@@ -1,3 +1,4 @@
+
 #include "fUML/Semantics/Actions/impl/SendSignalActionActivationImpl.hpp"
 
 #ifdef NDEBUG
@@ -25,7 +26,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -35,7 +35,6 @@
 #include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "uml/umlFactory.hpp"
-
 
 #include "uml/Action.hpp"
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
@@ -123,15 +122,6 @@ std::shared_ptr<ecore::EObject> SendSignalActionActivationImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> SendSignalActionActivationImpl::eStaticClass() const
-{
-	return fUML::Semantics::Actions::ActionsPackage::eInstance()->getSendSignalActionActivation_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
@@ -142,7 +132,11 @@ void SendSignalActionActivationImpl::doAction()
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
+//*********************************
+
+//*********************************
+// Reference Getters & Setters
 //*********************************
 
 //*********************************
@@ -163,18 +157,9 @@ std::shared_ptr<Union<fUML::Semantics::Actions::PinActivation>> SendSignalAction
 	return m_pinActivation;
 }
 
-
-
-
-std::shared_ptr<SendSignalActionActivation> SendSignalActionActivationImpl::getThisSendSignalActionActivationPtr() const
-{
-	return m_thisSendSignalActionActivationPtr.lock();
-}
-void SendSignalActionActivationImpl::setThisSendSignalActionActivationPtr(std::weak_ptr<SendSignalActionActivation> thisSendSignalActionActivationPtr)
-{
-	m_thisSendSignalActionActivationPtr = thisSendSignalActionActivationPtr;
-	setThisInvocationActionActivationPtr(thisSendSignalActionActivationPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> SendSignalActionActivationImpl::eContainer() const
 {
 	if(auto wp = m_group.lock())
@@ -182,62 +167,6 @@ std::shared_ptr<ecore::EObject> SendSignalActionActivationImpl::eContainer() con
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any SendSignalActionActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-	}
-	return InvocationActionActivationImpl::eGet(featureID, resolve, coreType);
-}
-bool SendSignalActionActivationImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-	}
-	return InvocationActionActivationImpl::internalEIsSet(featureID);
-}
-bool SendSignalActionActivationImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-	}
-
-	return InvocationActionActivationImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any SendSignalActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-		
-		// 1497979288
-		case ActionsPackage::SENDSIGNALACTIONACTIVATION_OPERATION_DOACTION:
-		{
-			this->doAction();
-			break;
-		}
-
-		default:
-		{
-			// call superTypes
-			result = InvocationActionActivationImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -290,10 +219,6 @@ void SendSignalActionActivationImpl::save(std::shared_ptr<persistence::interface
 	fUML::Semantics::Loci::SemanticVisitorImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
 }
 
 void SendSignalActionActivationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -308,3 +233,78 @@ void SendSignalActionActivationImpl::saveContent(std::shared_ptr<persistence::in
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> SendSignalActionActivationImpl::eStaticClass() const
+{
+	return fUML::Semantics::Actions::ActionsPackage::eInstance()->getSendSignalActionActivation_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any SendSignalActionActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+	}
+	return InvocationActionActivationImpl::eGet(featureID, resolve, coreType);
+}
+
+bool SendSignalActionActivationImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+	}
+	return InvocationActionActivationImpl::internalEIsSet(featureID);
+}
+
+bool SendSignalActionActivationImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+	}
+
+	return InvocationActionActivationImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any SendSignalActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 1497979288
+		case ActionsPackage::SENDSIGNALACTIONACTIVATION_OPERATION_DOACTION:
+		{
+			this->doAction();
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = InvocationActionActivationImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<SendSignalActionActivation> SendSignalActionActivationImpl::getThisSendSignalActionActivationPtr() const
+{
+	return m_thisSendSignalActionActivationPtr.lock();
+}
+void SendSignalActionActivationImpl::setThisSendSignalActionActivationPtr(std::weak_ptr<SendSignalActionActivation> thisSendSignalActionActivationPtr)
+{
+	m_thisSendSignalActionActivationPtr = thisSendSignalActionActivationPtr;
+	setThisInvocationActionActivationPtr(thisSendSignalActionActivationPtr);
+}

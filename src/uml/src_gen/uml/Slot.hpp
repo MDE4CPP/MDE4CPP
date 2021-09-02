@@ -47,7 +47,6 @@ namespace uml
 // base class includes
 #include "uml/Element.hpp"
 
-// enum includes
 
 
 
@@ -81,13 +80,13 @@ namespace uml
 			//*********************************
 			// Operations
 			//*********************************
-			
+
 			//*********************************
-			// Attributes Getter & Setter
+			// Attribute Getters & Setters
 			//*********************************
-			
+
 			//*********************************
-			// References Getter & Setter
+			// Reference Getters & Setters
 			//*********************************
 			/*!
 			The StructuralFeature that specifies the values that may be held by the Slot.
@@ -119,14 +118,39 @@ namespace uml
 			*/
 			
 			virtual std::shared_ptr<Subset<uml::ValueSpecification, uml::Element>> getValue() const = 0;
+
+			//*********************************
+			// Union Reference Getters
+			//*********************************
+			/*!
+			The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
 			
+			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;
+			/*!
+			The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
 			
+			virtual std::weak_ptr<uml::Element> getOwner() const = 0;
+
+			//*********************************
+			// Container Getter
+			//*********************************
+			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
+
+			//*********************************
+			// Persistence Functions
+			//*********************************
+			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 
 		protected:
 			//*********************************
 			// Attribute Members
 			//*********************************
-			
 			
 			//*********************************
 			// Reference Members
@@ -136,45 +160,19 @@ namespace uml
 			<p>From package UML::Classification.</p>
 			*/
 			
-			std::shared_ptr<uml::StructuralFeature> m_definingFeature;/*!
+			std::shared_ptr<uml::StructuralFeature> m_definingFeature;
+			/*!
 			The InstanceSpecification that owns this Slot.
 			<p>From package UML::Classification.</p>
 			*/
 			
-			std::weak_ptr<uml::InstanceSpecification> m_owningInstance;/*!
+			std::weak_ptr<uml::InstanceSpecification> m_owningInstance;
+			/*!
 			The value or values held by the Slot.
 			<p>From package UML::Classification.</p>
 			*/
 			
 			mutable std::shared_ptr<Subset<uml::ValueSpecification, uml::Element>> m_value;
-
-		public:
-			//*********************************
-			// Union Getter
-			//*********************************
-			/*!
-			The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;/*!
-			The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::weak_ptr<uml::Element> getOwner() const = 0;
-
-			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
-			
-			//*********************************
-			// Persistence Functions
-			//*********************************
-			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
-			
-			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
-			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
-			
 	};
-
 }
 #endif /* end of include guard: UML_SLOT_HPP */

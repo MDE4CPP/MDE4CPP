@@ -1,3 +1,4 @@
+
 #include "ocl/Expressions/impl/IteratorExpImpl.hpp"
 
 #ifdef NDEBUG
@@ -25,7 +26,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -35,7 +35,6 @@
 #include "ecore/ecoreFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
-
 
 #include "ocl/Expressions/CallExp.hpp"
 #include "ocl/Expressions/CollectionRange.hpp"
@@ -203,38 +202,25 @@ std::shared_ptr<ecore::EObject> IteratorExpImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> IteratorExpImpl::eStaticClass() const
-{
-	return ocl::Expressions::ExpressionsPackage::eInstance()->getIteratorExp_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
 
 //*********************************
-// References
+// Attribute Getters & Setters
+//*********************************
+
+//*********************************
+// Reference Getters & Setters
 //*********************************
 
 //*********************************
 // Union Getter
 //*********************************
 
-
-
-std::shared_ptr<IteratorExp> IteratorExpImpl::getThisIteratorExpPtr() const
-{
-	return m_thisIteratorExpPtr.lock();
-}
-void IteratorExpImpl::setThisIteratorExpPtr(std::weak_ptr<IteratorExp> thisIteratorExpPtr)
-{
-	m_thisIteratorExpPtr = thisIteratorExpPtr;
-	setThisLoopExpPtr(thisIteratorExpPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> IteratorExpImpl::eContainer() const
 {
 	if(auto wp = m_appliedElement.lock())
@@ -295,55 +281,6 @@ std::shared_ptr<ecore::EObject> IteratorExpImpl::eContainer() const
 }
 
 //*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any IteratorExpImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-	}
-	return LoopExpImpl::eGet(featureID, resolve, coreType);
-}
-bool IteratorExpImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-	}
-	return LoopExpImpl::internalEIsSet(featureID);
-}
-bool IteratorExpImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-	}
-
-	return LoopExpImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any IteratorExpImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-
-		default:
-		{
-			// call superTypes
-			result = LoopExpImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
-}
-
-//*********************************
 // Persistence Functions
 //*********************************
 void IteratorExpImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
@@ -397,12 +334,6 @@ void IteratorExpImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler
 	ecore::EModelElementImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
-	
-	
 }
 
 void IteratorExpImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -417,3 +348,71 @@ void IteratorExpImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> IteratorExpImpl::eStaticClass() const
+{
+	return ocl::Expressions::ExpressionsPackage::eInstance()->getIteratorExp_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any IteratorExpImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+	}
+	return LoopExpImpl::eGet(featureID, resolve, coreType);
+}
+
+bool IteratorExpImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+	}
+	return LoopExpImpl::internalEIsSet(featureID);
+}
+
+bool IteratorExpImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+	}
+
+	return LoopExpImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any IteratorExpImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+
+		default:
+		{
+			// call superTypes
+			result = LoopExpImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<IteratorExp> IteratorExpImpl::getThisIteratorExpPtr() const
+{
+	return m_thisIteratorExpPtr.lock();
+}
+void IteratorExpImpl::setThisIteratorExpPtr(std::weak_ptr<IteratorExp> thisIteratorExpPtr)
+{
+	m_thisIteratorExpPtr = thisIteratorExpPtr;
+	setThisLoopExpPtr(thisIteratorExpPtr);
+}

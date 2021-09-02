@@ -1,3 +1,4 @@
+
 #include "uml/impl/StereotypeImpl.hpp"
 
 #ifdef NDEBUG
@@ -26,7 +27,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -34,7 +34,6 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-
 
 #include "uml/Behavior.hpp"
 #include "uml/Class.hpp"
@@ -219,15 +218,6 @@ std::shared_ptr<ecore::EObject> StereotypeImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> StereotypeImpl::eStaticClass() const
-{
-	return uml::umlPackage::eInstance()->getStereotype_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
@@ -330,11 +320,13 @@ bool StereotypeImpl::name_not_clash(Any diagnostics,std::shared_ptr<std::map < A
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference icon
-*/
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference icon */
 std::shared_ptr<Subset<uml::Image, uml::Element>> StereotypeImpl::getIcon() const
 {
 	if(m_icon == nullptr)
@@ -355,17 +347,11 @@ std::shared_ptr<Subset<uml::Image, uml::Element>> StereotypeImpl::getIcon() cons
     return m_icon;
 }
 
-
-
-/*
-Getter & Setter for reference profile
-*/
+/* Getter & Setter for reference profile */
 std::shared_ptr<uml::Profile> StereotypeImpl::getProfile() const
 {
     return m_profile;
 }
-
-
 
 //*********************************
 // Union Getter
@@ -507,16 +493,9 @@ std::shared_ptr<SubsetUnion<uml::ConnectableElement, uml::NamedElement>> Stereot
 
 
 
-
-std::shared_ptr<Stereotype> StereotypeImpl::getThisStereotypePtr() const
-{
-	return m_thisStereotypePtr.lock();
-}
-void StereotypeImpl::setThisStereotypePtr(std::weak_ptr<Stereotype> thisStereotypePtr)
-{
-	m_thisStereotypePtr = thisStereotypePtr;
-	setThisClassPtr(thisStereotypePtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> StereotypeImpl::eContainer() const
 {
 	if(auto wp = m_namespace.lock())
@@ -547,7 +526,120 @@ std::shared_ptr<ecore::EObject> StereotypeImpl::eContainer() const
 }
 
 //*********************************
-// Structural Feature Getter/Setter
+// Persistence Functions
+//*********************************
+void StereotypeImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get umlFactory
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
+	}
+}		
+
+void StereotypeImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+
+	ClassImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void StereotypeImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+
+	try
+	{
+		if ( nodeName.compare("icon") == 0 )
+		{
+  			std::string typeName = loadHandler->getCurrentXSITypeName();
+			if (typeName.empty())
+			{
+				typeName = "Image";
+			}
+			loadHandler->handleChildContainer<uml::Image>(this->getIcon());  
+
+			return; 
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+	//load BasePackage Nodes
+	ClassImpl::loadNode(nodeName, loadHandler);
+}
+
+void StereotypeImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+{
+	ClassImpl::resolveReferences(featureID, references);
+}
+
+void StereotypeImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	ClassImpl::saveContent(saveHandler);
+	
+	BehavioredClassifierImpl::saveContent(saveHandler);
+	EncapsulatedClassifierImpl::saveContent(saveHandler);
+	
+	StructuredClassifierImpl::saveContent(saveHandler);
+	
+	ClassifierImpl::saveContent(saveHandler);
+	
+	NamespaceImpl::saveContent(saveHandler);
+	RedefinableElementImpl::saveContent(saveHandler);
+	TemplateableElementImpl::saveContent(saveHandler);
+	TypeImpl::saveContent(saveHandler);
+	
+	PackageableElementImpl::saveContent(saveHandler);
+	
+	NamedElementImpl::saveContent(saveHandler);
+	ParameterableElementImpl::saveContent(saveHandler);
+	
+	ElementImpl::saveContent(saveHandler);
+	
+	ObjectImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+}
+
+void StereotypeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
+		// Save 'icon'
+		for (std::shared_ptr<uml::Image> icon : *this->getIcon()) 
+		{
+			saveHandler->addReference(icon, "icon", icon->eClass() != package->getImage_Class());
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+}
+
+
+std::shared_ptr<ecore::EClass> StereotypeImpl::eStaticClass() const
+{
+	return uml::umlPackage::eInstance()->getStereotype_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
 //*********************************
 Any StereotypeImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
@@ -573,6 +665,7 @@ Any StereotypeImpl::eGet(int featureID, bool resolve, bool coreType) const
 	}
 	return ClassImpl::eGet(featureID, resolve, coreType);
 }
+
 bool StereotypeImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
@@ -584,6 +677,7 @@ bool StereotypeImpl::internalEIsSet(int featureID) const
 	}
 	return ClassImpl::internalEIsSet(featureID);
 }
+
 bool StereotypeImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
@@ -630,7 +724,7 @@ bool StereotypeImpl::eSet(int featureID, Any newValue)
 }
 
 //*********************************
-// Behavioral Feature
+// EOperation Invoke
 //*********************************
 Any StereotypeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
 {
@@ -871,118 +965,13 @@ Any StereotypeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sh
 	return result;
 }
 
-//*********************************
-// Persistence Functions
-//*********************************
-void StereotypeImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+
+std::shared_ptr<Stereotype> StereotypeImpl::getThisStereotypePtr() const
 {
-	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
-	loadAttributes(loadHandler, attr_list);
-
-	//
-	// Create new objects (from references (containment == true))
-	//
-	// get umlFactory
-	int numNodes = loadHandler->getNumOfChildNodes();
-	for(int ii = 0; ii < numNodes; ii++)
-	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler);
-	}
-}		
-
-void StereotypeImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
-{
-
-	ClassImpl::loadAttributes(loadHandler, attr_list);
+	return m_thisStereotypePtr.lock();
 }
-
-void StereotypeImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+void StereotypeImpl::setThisStereotypePtr(std::weak_ptr<Stereotype> thisStereotypePtr)
 {
-
-	try
-	{
-		if ( nodeName.compare("icon") == 0 )
-		{
-  			std::string typeName = loadHandler->getCurrentXSITypeName();
-			if (typeName.empty())
-			{
-				typeName = "Image";
-			}
-			loadHandler->handleChildContainer<uml::Image>(this->getIcon());  
-
-			return; 
-		}
-	}
-	catch (std::exception& e)
-	{
-		std::cout << "| ERROR    | " << e.what() << std::endl;
-	}
-	catch (...) 
-	{
-		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
-	}
-	//load BasePackage Nodes
-	ClassImpl::loadNode(nodeName, loadHandler);
+	m_thisStereotypePtr = thisStereotypePtr;
+	setThisClassPtr(thisStereotypePtr);
 }
-
-void StereotypeImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
-{
-	ClassImpl::resolveReferences(featureID, references);
-}
-
-void StereotypeImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
-{
-	saveContent(saveHandler);
-
-	ClassImpl::saveContent(saveHandler);
-	
-	BehavioredClassifierImpl::saveContent(saveHandler);
-	EncapsulatedClassifierImpl::saveContent(saveHandler);
-	
-	StructuredClassifierImpl::saveContent(saveHandler);
-	
-	ClassifierImpl::saveContent(saveHandler);
-	
-	NamespaceImpl::saveContent(saveHandler);
-	RedefinableElementImpl::saveContent(saveHandler);
-	TemplateableElementImpl::saveContent(saveHandler);
-	TypeImpl::saveContent(saveHandler);
-	
-	PackageableElementImpl::saveContent(saveHandler);
-	
-	NamedElementImpl::saveContent(saveHandler);
-	ParameterableElementImpl::saveContent(saveHandler);
-	
-	ElementImpl::saveContent(saveHandler);
-	
-	ObjectImpl::saveContent(saveHandler);
-	
-	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
-	
-	
-	
-	
-	
-}
-
-void StereotypeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
-{
-	try
-	{
-		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-		// Save 'icon'
-		for (std::shared_ptr<uml::Image> icon : *this->getIcon()) 
-		{
-			saveHandler->addReference(icon, "icon", icon->eClass() != package->getImage_Class());
-		}
-	}
-	catch (std::exception& e)
-	{
-		std::cout << "| ERROR    | " << e.what() << std::endl;
-	}
-}
-

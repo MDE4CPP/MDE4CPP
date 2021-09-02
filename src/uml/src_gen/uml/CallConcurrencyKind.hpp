@@ -10,10 +10,13 @@
 namespace uml 
 {
 	enum CallConcurrencyKind {
+		
 		CONCURRENT = 2
 ,
+		
 		GUARDED = 1
 ,
+		
 		SEQUENTIAL = 0
 	};
 }

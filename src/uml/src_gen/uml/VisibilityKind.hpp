@@ -10,12 +10,16 @@
 namespace uml 
 {
 	enum VisibilityKind {
+		
 		PACKAGE = 3
 ,
+		
 		PRIVATE = 1
 ,
+		
 		PROTECTED = 2
 ,
+		
 		PUBLIC = 0
 	};
 }

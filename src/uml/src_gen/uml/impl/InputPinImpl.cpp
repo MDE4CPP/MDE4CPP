@@ -1,3 +1,4 @@
+
 #include "uml/impl/InputPinImpl.hpp"
 
 #ifdef NDEBUG
@@ -26,7 +27,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -34,7 +34,6 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-
 
 #include "uml/Action.hpp"
 #include "uml/Activity.hpp"
@@ -232,15 +231,6 @@ std::shared_ptr<ecore::EObject> InputPinImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> InputPinImpl::eStaticClass() const
-{
-	return uml::umlPackage::eInstance()->getInputPin_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
@@ -251,21 +241,19 @@ bool InputPinImpl::outgoing_edges_structured_only(Any diagnostics,std::shared_pt
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference action
-*/
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference action */
 std::weak_ptr<uml::Action> InputPinImpl::getAction() const
 {
     return m_action;
 }
 
-
-
-/*
-Getter & Setter for reference addStructuralFeatureValueAction
-*/
+/* Getter & Setter for reference addStructuralFeatureValueAction */
 std::weak_ptr<uml::AddStructuralFeatureValueAction> InputPinImpl::getAddStructuralFeatureValueAction() const
 {
     return m_addStructuralFeatureValueAction;
@@ -276,10 +264,7 @@ void InputPinImpl::setAddStructuralFeatureValueAction(std::weak_ptr<uml::AddStru
 	
 }
 
-
-/*
-Getter & Setter for reference callOperationAction
-*/
+/* Getter & Setter for reference callOperationAction */
 std::weak_ptr<uml::CallOperationAction> InputPinImpl::getCallOperationAction() const
 {
     return m_callOperationAction;
@@ -290,10 +275,7 @@ void InputPinImpl::setCallOperationAction(std::weak_ptr<uml::CallOperationAction
 	
 }
 
-
-/*
-Getter & Setter for reference destroyObjectAction
-*/
+/* Getter & Setter for reference destroyObjectAction */
 std::weak_ptr<uml::DestroyObjectAction> InputPinImpl::getDestroyObjectAction() const
 {
     return m_destroyObjectAction;
@@ -304,10 +286,7 @@ void InputPinImpl::setDestroyObjectAction(std::weak_ptr<uml::DestroyObjectAction
 	
 }
 
-
-/*
-Getter & Setter for reference invocationAction
-*/
+/* Getter & Setter for reference invocationAction */
 std::weak_ptr<uml::InvocationAction> InputPinImpl::getInvocationAction() const
 {
     return m_invocationAction;
@@ -318,10 +297,7 @@ void InputPinImpl::setInvocationAction(std::weak_ptr<uml::InvocationAction> _inv
 	
 }
 
-
-/*
-Getter & Setter for reference removeStructuralFeatureValueAction
-*/
+/* Getter & Setter for reference removeStructuralFeatureValueAction */
 std::weak_ptr<uml::RemoveStructuralFeatureValueAction> InputPinImpl::getRemoveStructuralFeatureValueAction() const
 {
     return m_removeStructuralFeatureValueAction;
@@ -332,10 +308,7 @@ void InputPinImpl::setRemoveStructuralFeatureValueAction(std::weak_ptr<uml::Remo
 	
 }
 
-
-/*
-Getter & Setter for reference structuralFeatureAction
-*/
+/* Getter & Setter for reference structuralFeatureAction */
 std::weak_ptr<uml::StructuralFeatureAction> InputPinImpl::getStructuralFeatureAction() const
 {
     return m_structuralFeatureAction;
@@ -346,10 +319,7 @@ void InputPinImpl::setStructuralFeatureAction(std::weak_ptr<uml::StructuralFeatu
 	
 }
 
-
-/*
-Getter & Setter for reference writeStructuralFeatureAction
-*/
+/* Getter & Setter for reference writeStructuralFeatureAction */
 std::weak_ptr<uml::WriteStructuralFeatureAction> InputPinImpl::getWriteStructuralFeatureAction() const
 {
     return m_writeStructuralFeatureAction;
@@ -359,7 +329,6 @@ void InputPinImpl::setWriteStructuralFeatureAction(std::weak_ptr<uml::WriteStruc
     m_writeStructuralFeatureAction = _writeStructuralFeatureAction;
 	
 }
-
 
 //*********************************
 // Union Getter
@@ -414,18 +383,9 @@ std::shared_ptr<Union<uml::RedefinableElement>> InputPinImpl::getRedefinedElemen
 	return m_redefinedElement;
 }
 
-
-
-
-std::shared_ptr<InputPin> InputPinImpl::getThisInputPinPtr() const
-{
-	return m_thisInputPinPtr.lock();
-}
-void InputPinImpl::setThisInputPinPtr(std::weak_ptr<InputPin> thisInputPinPtr)
-{
-	m_thisInputPinPtr = thisInputPinPtr;
-	setThisPinPtr(thisInputPinPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> InputPinImpl::eContainer() const
 {
 	if(auto wp = m_action.lock())
@@ -488,184 +448,6 @@ std::shared_ptr<ecore::EObject> InputPinImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any InputPinImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::INPUTPIN_ATTRIBUTE_ACTION:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getAction().lock();
-				return eAny(returnValue); //11636
-			}
-		case uml::umlPackage::INPUTPIN_ATTRIBUTE_ADDSTRUCTURALFEATUREVALUEACTION:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getAddStructuralFeatureValueAction().lock();
-				return eAny(returnValue); //11638
-			}
-		case uml::umlPackage::INPUTPIN_ATTRIBUTE_CALLOPERATIONACTION:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getCallOperationAction().lock();
-				return eAny(returnValue); //11634
-			}
-		case uml::umlPackage::INPUTPIN_ATTRIBUTE_DESTROYOBJECTACTION:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getDestroyObjectAction().lock();
-				return eAny(returnValue); //11639
-			}
-		case uml::umlPackage::INPUTPIN_ATTRIBUTE_INVOCATIONACTION:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getInvocationAction().lock();
-				return eAny(returnValue); //11635
-			}
-		case uml::umlPackage::INPUTPIN_ATTRIBUTE_REMOVESTRUCTURALFEATUREVALUEACTION:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getRemoveStructuralFeatureValueAction().lock();
-				return eAny(returnValue); //11640
-			}
-		case uml::umlPackage::INPUTPIN_ATTRIBUTE_STRUCTURALFEATUREACTION:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getStructuralFeatureAction().lock();
-				return eAny(returnValue); //11633
-			}
-		case uml::umlPackage::INPUTPIN_ATTRIBUTE_WRITESTRUCTURALFEATUREACTION:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getWriteStructuralFeatureAction().lock();
-				return eAny(returnValue); //11637
-			}
-	}
-	return PinImpl::eGet(featureID, resolve, coreType);
-}
-bool InputPinImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::INPUTPIN_ATTRIBUTE_ACTION:
-			return getAction().lock() != nullptr; //11636
-		case uml::umlPackage::INPUTPIN_ATTRIBUTE_ADDSTRUCTURALFEATUREVALUEACTION:
-			return getAddStructuralFeatureValueAction().lock() != nullptr; //11638
-		case uml::umlPackage::INPUTPIN_ATTRIBUTE_CALLOPERATIONACTION:
-			return getCallOperationAction().lock() != nullptr; //11634
-		case uml::umlPackage::INPUTPIN_ATTRIBUTE_DESTROYOBJECTACTION:
-			return getDestroyObjectAction().lock() != nullptr; //11639
-		case uml::umlPackage::INPUTPIN_ATTRIBUTE_INVOCATIONACTION:
-			return getInvocationAction().lock() != nullptr; //11635
-		case uml::umlPackage::INPUTPIN_ATTRIBUTE_REMOVESTRUCTURALFEATUREVALUEACTION:
-			return getRemoveStructuralFeatureValueAction().lock() != nullptr; //11640
-		case uml::umlPackage::INPUTPIN_ATTRIBUTE_STRUCTURALFEATUREACTION:
-			return getStructuralFeatureAction().lock() != nullptr; //11633
-		case uml::umlPackage::INPUTPIN_ATTRIBUTE_WRITESTRUCTURALFEATUREACTION:
-			return getWriteStructuralFeatureAction().lock() != nullptr; //11637
-	}
-	return PinImpl::internalEIsSet(featureID);
-}
-bool InputPinImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::INPUTPIN_ATTRIBUTE_ADDSTRUCTURALFEATUREVALUEACTION:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::AddStructuralFeatureValueAction> _addStructuralFeatureValueAction = std::dynamic_pointer_cast<uml::AddStructuralFeatureValueAction>(_temp);
-			setAddStructuralFeatureValueAction(_addStructuralFeatureValueAction); //11638
-			return true;
-		}
-		case uml::umlPackage::INPUTPIN_ATTRIBUTE_CALLOPERATIONACTION:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::CallOperationAction> _callOperationAction = std::dynamic_pointer_cast<uml::CallOperationAction>(_temp);
-			setCallOperationAction(_callOperationAction); //11634
-			return true;
-		}
-		case uml::umlPackage::INPUTPIN_ATTRIBUTE_DESTROYOBJECTACTION:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::DestroyObjectAction> _destroyObjectAction = std::dynamic_pointer_cast<uml::DestroyObjectAction>(_temp);
-			setDestroyObjectAction(_destroyObjectAction); //11639
-			return true;
-		}
-		case uml::umlPackage::INPUTPIN_ATTRIBUTE_INVOCATIONACTION:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::InvocationAction> _invocationAction = std::dynamic_pointer_cast<uml::InvocationAction>(_temp);
-			setInvocationAction(_invocationAction); //11635
-			return true;
-		}
-		case uml::umlPackage::INPUTPIN_ATTRIBUTE_REMOVESTRUCTURALFEATUREVALUEACTION:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::RemoveStructuralFeatureValueAction> _removeStructuralFeatureValueAction = std::dynamic_pointer_cast<uml::RemoveStructuralFeatureValueAction>(_temp);
-			setRemoveStructuralFeatureValueAction(_removeStructuralFeatureValueAction); //11640
-			return true;
-		}
-		case uml::umlPackage::INPUTPIN_ATTRIBUTE_STRUCTURALFEATUREACTION:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::StructuralFeatureAction> _structuralFeatureAction = std::dynamic_pointer_cast<uml::StructuralFeatureAction>(_temp);
-			setStructuralFeatureAction(_structuralFeatureAction); //11633
-			return true;
-		}
-		case uml::umlPackage::INPUTPIN_ATTRIBUTE_WRITESTRUCTURALFEATUREACTION:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::WriteStructuralFeatureAction> _writeStructuralFeatureAction = std::dynamic_pointer_cast<uml::WriteStructuralFeatureAction>(_temp);
-			setWriteStructuralFeatureAction(_writeStructuralFeatureAction); //11637
-			return true;
-		}
-	}
-
-	return PinImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any InputPinImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-		
-		// 2026004074
-		case umlPackage::INPUTPIN_OPERATION_OUTGOING_EDGES_STRUCTURED_ONLY_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->outgoing_edges_structured_only(incoming_param_diagnostics,incoming_param_context));
-			break;
-		}
-
-		default:
-		{
-			// call superTypes
-			result = PinImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -812,13 +594,6 @@ void InputPinImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> s
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
-	
-	
-	
 }
 
 void InputPinImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -833,3 +608,200 @@ void InputPinImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> InputPinImpl::eStaticClass() const
+{
+	return uml::umlPackage::eInstance()->getInputPin_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any InputPinImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::INPUTPIN_ATTRIBUTE_ACTION:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getAction().lock();
+				return eAny(returnValue); //11636
+			}
+		case uml::umlPackage::INPUTPIN_ATTRIBUTE_ADDSTRUCTURALFEATUREVALUEACTION:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getAddStructuralFeatureValueAction().lock();
+				return eAny(returnValue); //11638
+			}
+		case uml::umlPackage::INPUTPIN_ATTRIBUTE_CALLOPERATIONACTION:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getCallOperationAction().lock();
+				return eAny(returnValue); //11634
+			}
+		case uml::umlPackage::INPUTPIN_ATTRIBUTE_DESTROYOBJECTACTION:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getDestroyObjectAction().lock();
+				return eAny(returnValue); //11639
+			}
+		case uml::umlPackage::INPUTPIN_ATTRIBUTE_INVOCATIONACTION:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getInvocationAction().lock();
+				return eAny(returnValue); //11635
+			}
+		case uml::umlPackage::INPUTPIN_ATTRIBUTE_REMOVESTRUCTURALFEATUREVALUEACTION:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getRemoveStructuralFeatureValueAction().lock();
+				return eAny(returnValue); //11640
+			}
+		case uml::umlPackage::INPUTPIN_ATTRIBUTE_STRUCTURALFEATUREACTION:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getStructuralFeatureAction().lock();
+				return eAny(returnValue); //11633
+			}
+		case uml::umlPackage::INPUTPIN_ATTRIBUTE_WRITESTRUCTURALFEATUREACTION:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getWriteStructuralFeatureAction().lock();
+				return eAny(returnValue); //11637
+			}
+	}
+	return PinImpl::eGet(featureID, resolve, coreType);
+}
+
+bool InputPinImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::INPUTPIN_ATTRIBUTE_ACTION:
+			return getAction().lock() != nullptr; //11636
+		case uml::umlPackage::INPUTPIN_ATTRIBUTE_ADDSTRUCTURALFEATUREVALUEACTION:
+			return getAddStructuralFeatureValueAction().lock() != nullptr; //11638
+		case uml::umlPackage::INPUTPIN_ATTRIBUTE_CALLOPERATIONACTION:
+			return getCallOperationAction().lock() != nullptr; //11634
+		case uml::umlPackage::INPUTPIN_ATTRIBUTE_DESTROYOBJECTACTION:
+			return getDestroyObjectAction().lock() != nullptr; //11639
+		case uml::umlPackage::INPUTPIN_ATTRIBUTE_INVOCATIONACTION:
+			return getInvocationAction().lock() != nullptr; //11635
+		case uml::umlPackage::INPUTPIN_ATTRIBUTE_REMOVESTRUCTURALFEATUREVALUEACTION:
+			return getRemoveStructuralFeatureValueAction().lock() != nullptr; //11640
+		case uml::umlPackage::INPUTPIN_ATTRIBUTE_STRUCTURALFEATUREACTION:
+			return getStructuralFeatureAction().lock() != nullptr; //11633
+		case uml::umlPackage::INPUTPIN_ATTRIBUTE_WRITESTRUCTURALFEATUREACTION:
+			return getWriteStructuralFeatureAction().lock() != nullptr; //11637
+	}
+	return PinImpl::internalEIsSet(featureID);
+}
+
+bool InputPinImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::INPUTPIN_ATTRIBUTE_ADDSTRUCTURALFEATUREVALUEACTION:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::AddStructuralFeatureValueAction> _addStructuralFeatureValueAction = std::dynamic_pointer_cast<uml::AddStructuralFeatureValueAction>(_temp);
+			setAddStructuralFeatureValueAction(_addStructuralFeatureValueAction); //11638
+			return true;
+		}
+		case uml::umlPackage::INPUTPIN_ATTRIBUTE_CALLOPERATIONACTION:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::CallOperationAction> _callOperationAction = std::dynamic_pointer_cast<uml::CallOperationAction>(_temp);
+			setCallOperationAction(_callOperationAction); //11634
+			return true;
+		}
+		case uml::umlPackage::INPUTPIN_ATTRIBUTE_DESTROYOBJECTACTION:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::DestroyObjectAction> _destroyObjectAction = std::dynamic_pointer_cast<uml::DestroyObjectAction>(_temp);
+			setDestroyObjectAction(_destroyObjectAction); //11639
+			return true;
+		}
+		case uml::umlPackage::INPUTPIN_ATTRIBUTE_INVOCATIONACTION:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::InvocationAction> _invocationAction = std::dynamic_pointer_cast<uml::InvocationAction>(_temp);
+			setInvocationAction(_invocationAction); //11635
+			return true;
+		}
+		case uml::umlPackage::INPUTPIN_ATTRIBUTE_REMOVESTRUCTURALFEATUREVALUEACTION:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::RemoveStructuralFeatureValueAction> _removeStructuralFeatureValueAction = std::dynamic_pointer_cast<uml::RemoveStructuralFeatureValueAction>(_temp);
+			setRemoveStructuralFeatureValueAction(_removeStructuralFeatureValueAction); //11640
+			return true;
+		}
+		case uml::umlPackage::INPUTPIN_ATTRIBUTE_STRUCTURALFEATUREACTION:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::StructuralFeatureAction> _structuralFeatureAction = std::dynamic_pointer_cast<uml::StructuralFeatureAction>(_temp);
+			setStructuralFeatureAction(_structuralFeatureAction); //11633
+			return true;
+		}
+		case uml::umlPackage::INPUTPIN_ATTRIBUTE_WRITESTRUCTURALFEATUREACTION:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::WriteStructuralFeatureAction> _writeStructuralFeatureAction = std::dynamic_pointer_cast<uml::WriteStructuralFeatureAction>(_temp);
+			setWriteStructuralFeatureAction(_writeStructuralFeatureAction); //11637
+			return true;
+		}
+	}
+
+	return PinImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any InputPinImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 2026004074
+		case umlPackage::INPUTPIN_OPERATION_OUTGOING_EDGES_STRUCTURED_ONLY_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->outgoing_edges_structured_only(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = PinImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<InputPin> InputPinImpl::getThisInputPinPtr() const
+{
+	return m_thisInputPinPtr.lock();
+}
+void InputPinImpl::setThisInputPinPtr(std::weak_ptr<InputPin> thisInputPinPtr)
+{
+	m_thisInputPinPtr = thisInputPinPtr;
+	setThisPinPtr(thisInputPinPtr);
+}

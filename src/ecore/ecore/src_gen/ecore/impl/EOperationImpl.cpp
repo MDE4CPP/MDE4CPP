@@ -1,3 +1,4 @@
+
 #include "ecore/impl/EOperationImpl.hpp"
 
 #ifdef NDEBUG
@@ -25,7 +26,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -33,7 +33,6 @@
 
 #include <exception> // used in Persistence
 #include "ecore/ecoreFactory.hpp"
-
 
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -209,31 +208,11 @@ std::shared_ptr<ecore::EObject> EOperationImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<EClass> EOperationImpl::eStaticClass() const
-{
-	return ecore::ecorePackage::eInstance()->getEOperation_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-/*
-Getter & Setter for attribute operationID
-*/
-int EOperationImpl::getOperationID() const 
-{
-	return m_operationID;
-}
-void EOperationImpl::setOperationID(int _operationID)
-{
-	m_operationID = _operationID;
-	
-} 
-
-
 //*********************************
 // Operations
 //*********************************
+
+
 bool EOperationImpl::isOverrideOf(std::shared_ptr<ecore::EOperation> someOperation) const
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
@@ -275,21 +254,29 @@ bool EOperationImpl::isOverrideOf(std::shared_ptr<ecore::EOperation> someOperati
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference eContainingClass
-*/
+/* Getter & Setter for attribute operationID */
+int EOperationImpl::getOperationID() const 
+{
+	return m_operationID;
+}
+void EOperationImpl::setOperationID(int _operationID)
+{
+	m_operationID = _operationID;
+	
+}
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference eContainingClass */
 std::weak_ptr<ecore::EClass> EOperationImpl::getEContainingClass() const
 {
     return m_eContainingClass;
 }
 
-
-
-/*
-Getter & Setter for reference eExceptions
-*/
+/* Getter & Setter for reference eExceptions */
 std::shared_ptr<Bag<ecore::EClassifier>> EOperationImpl::getEExceptions() const
 {
 	if(m_eExceptions == nullptr)
@@ -301,11 +288,7 @@ std::shared_ptr<Bag<ecore::EClassifier>> EOperationImpl::getEExceptions() const
     return m_eExceptions;
 }
 
-
-
-/*
-Getter & Setter for reference eGenericExceptions
-*/
+/* Getter & Setter for reference eGenericExceptions */
 std::shared_ptr<Bag<ecore::EGenericType>> EOperationImpl::getEGenericExceptions() const
 {
 	if(m_eGenericExceptions == nullptr)
@@ -317,11 +300,7 @@ std::shared_ptr<Bag<ecore::EGenericType>> EOperationImpl::getEGenericExceptions(
     return m_eGenericExceptions;
 }
 
-
-
-/*
-Getter & Setter for reference eParameters
-*/
+/* Getter & Setter for reference eParameters */
 std::shared_ptr<Subset<ecore::EParameter, ecore::EObject>> EOperationImpl::getEParameters() const
 {
 	if(m_eParameters == nullptr)
@@ -342,11 +321,7 @@ std::shared_ptr<Subset<ecore::EParameter, ecore::EObject>> EOperationImpl::getEP
     return m_eParameters;
 }
 
-
-
-/*
-Getter & Setter for reference eTypeParameters
-*/
+/* Getter & Setter for reference eTypeParameters */
 std::shared_ptr<Bag<ecore::ETypeParameter>> EOperationImpl::getETypeParameters() const
 {
 	if(m_eTypeParameters == nullptr)
@@ -357,8 +332,6 @@ std::shared_ptr<Bag<ecore::ETypeParameter>> EOperationImpl::getETypeParameters()
 	}
     return m_eTypeParameters;
 }
-
-
 
 //*********************************
 // Union Getter
@@ -378,18 +351,9 @@ std::shared_ptr<Union<ecore::EObject>> EOperationImpl::getEContens() const
 	return m_eContens;
 }
 
-
-
-
-std::shared_ptr<EOperation> EOperationImpl::getThisEOperationPtr() const
-{
-	return m_thisEOperationPtr.lock();
-}
-void EOperationImpl::setThisEOperationPtr(std::weak_ptr<EOperation> thisEOperationPtr)
-{
-	m_thisEOperationPtr = thisEOperationPtr;
-	setThisETypedElementPtr(thisEOperationPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> EOperationImpl::eContainer() const
 {
 	if(auto wp = m_eContainer.lock())
@@ -405,7 +369,191 @@ std::shared_ptr<ecore::EObject> EOperationImpl::eContainer() const
 }
 
 //*********************************
-// Structural Feature Getter/Setter
+// Persistence Functions
+//*********************************
+void EOperationImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get ecoreFactory
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
+	}
+}		
+
+void EOperationImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+	try
+	{
+		std::map<std::string, std::string>::const_iterator iter;
+	
+		iter = attr_list.find("operationID");
+		if ( iter != attr_list.end() )
+		{
+			// this attribute is a 'int'
+			int value;
+			std::istringstream ( iter->second ) >> value;
+			this->setOperationID(value);
+		}
+		std::shared_ptr<EClass> metaClass = this->eClass(); // get MetaClass
+		iter = attr_list.find("eExceptions");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("eExceptions")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	ETypedElementImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void EOperationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+
+	try
+	{
+		if ( nodeName.compare("eGenericExceptions") == 0 )
+		{
+  			std::string typeName = loadHandler->getCurrentXSITypeName();
+			if (typeName.empty())
+			{
+				typeName = "EGenericType";
+			}
+			loadHandler->handleChildContainer<ecore::EGenericType>(this->getEGenericExceptions());  
+
+			return; 
+		}
+
+		if ( nodeName.compare("eParameters") == 0 )
+		{
+  			std::string typeName = loadHandler->getCurrentXSITypeName();
+			if (typeName.empty())
+			{
+				typeName = "EParameter";
+			}
+			loadHandler->handleChildContainer<ecore::EParameter>(this->getEParameters());  
+
+			return; 
+		}
+
+		if ( nodeName.compare("eTypeParameters") == 0 )
+		{
+  			std::string typeName = loadHandler->getCurrentXSITypeName();
+			if (typeName.empty())
+			{
+				typeName = "ETypeParameter";
+			}
+			loadHandler->handleChildContainer<ecore::ETypeParameter>(this->getETypeParameters());  
+
+			return; 
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+	//load BasePackage Nodes
+	ETypedElementImpl::loadNode(nodeName, loadHandler);
+}
+
+void EOperationImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<EObject> > references)
+{
+	switch(featureID)
+	{
+		case ecore::ecorePackage::EOPERATION_ATTRIBUTE_EEXCEPTIONS:
+		{
+			std::shared_ptr<Bag<ecore::EClassifier>> _eExceptions = getEExceptions();
+			for(std::shared_ptr<ecore::EObject> ref : references)
+			{
+				std::shared_ptr<ecore::EClassifier>  _r = std::dynamic_pointer_cast<ecore::EClassifier>(ref);
+				if (_r != nullptr)
+				{
+					_eExceptions->push_back(_r);
+				}
+			}
+			return;
+		}
+	}
+	ETypedElementImpl::resolveReferences(featureID, references);
+}
+
+void EOperationImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	ETypedElementImpl::saveContent(saveHandler);
+	
+	ENamedElementImpl::saveContent(saveHandler);
+	
+	EModelElementImpl::saveContent(saveHandler);
+	
+	EObjectImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+}
+
+void EOperationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<ecore::ecorePackage> package = ecore::ecorePackage::eInstance();
+		// Save 'eParameters'
+		for (std::shared_ptr<ecore::EParameter> eParameters : *this->getEParameters()) 
+		{
+			saveHandler->addReference(eParameters, "eParameters", eParameters->eClass() != package->getEParameter_Class());
+		}
+		// Add attributes
+		if ( this->eIsSet(package->getEOperation_Attribute_operationID()) )
+		{
+			saveHandler->addAttribute("operationID", this->getOperationID());
+		}
+	// Add references
+		saveHandler->addReferences<ecore::EClassifier>("eExceptions", this->getEExceptions());
+		//
+		// Add new tags (from references)
+		//
+		std::shared_ptr<EClass> metaClass = this->eClass();
+		// Save 'eGenericExceptions'
+
+		saveHandler->addReferences<ecore::EGenericType>("eGenericExceptions", this->getEGenericExceptions());
+
+		// Save 'eTypeParameters'
+
+		saveHandler->addReferences<ecore::ETypeParameter>("eTypeParameters", this->getETypeParameters());
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+}
+
+
+std::shared_ptr<EClass> EOperationImpl::eStaticClass() const
+{
+	return ecore::ecorePackage::eInstance()->getEOperation_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
 //*********************************
 Any EOperationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
@@ -469,6 +617,7 @@ Any EOperationImpl::eGet(int featureID, bool resolve, bool coreType) const
 	}
 	return ETypedElementImpl::eGet(featureID, resolve, coreType);
 }
+
 bool EOperationImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
@@ -488,6 +637,7 @@ bool EOperationImpl::internalEIsSet(int featureID) const
 	}
 	return ETypedElementImpl::internalEIsSet(featureID);
 }
+
 bool EOperationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
@@ -642,7 +792,7 @@ bool EOperationImpl::eSet(int featureID, Any newValue)
 }
 
 //*********************************
-// Behavioral Feature
+// EOperation Invoke
 //*********************************
 Any EOperationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
 {
@@ -676,184 +826,13 @@ Any EOperationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sh
 	return result;
 }
 
-//*********************************
-// Persistence Functions
-//*********************************
-void EOperationImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+
+std::shared_ptr<EOperation> EOperationImpl::getThisEOperationPtr() const
 {
-	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
-	loadAttributes(loadHandler, attr_list);
-
-	//
-	// Create new objects (from references (containment == true))
-	//
-	// get ecoreFactory
-	int numNodes = loadHandler->getNumOfChildNodes();
-	for(int ii = 0; ii < numNodes; ii++)
-	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler);
-	}
-}		
-
-void EOperationImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
-{
-	try
-	{
-		std::map<std::string, std::string>::const_iterator iter;
-	
-		iter = attr_list.find("operationID");
-		if ( iter != attr_list.end() )
-		{
-			// this attribute is a 'int'
-			int value;
-			std::istringstream ( iter->second ) >> value;
-			this->setOperationID(value);
-		}
-		std::shared_ptr<EClass> metaClass = this->eClass(); // get MetaClass
-		iter = attr_list.find("eExceptions");
-		if ( iter != attr_list.end() )
-		{
-			// add unresolvedReference to loadHandler's list
-			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("eExceptions")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
-		}
-	}
-	catch (std::exception& e)
-	{
-		std::cout << "| ERROR    | " << e.what() << std::endl;
-	}
-	catch (...) 
-	{
-		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
-	}
-
-	ETypedElementImpl::loadAttributes(loadHandler, attr_list);
+	return m_thisEOperationPtr.lock();
 }
-
-void EOperationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+void EOperationImpl::setThisEOperationPtr(std::weak_ptr<EOperation> thisEOperationPtr)
 {
-
-	try
-	{
-		if ( nodeName.compare("eGenericExceptions") == 0 )
-		{
-  			std::string typeName = loadHandler->getCurrentXSITypeName();
-			if (typeName.empty())
-			{
-				typeName = "EGenericType";
-			}
-			loadHandler->handleChildContainer<ecore::EGenericType>(this->getEGenericExceptions());  
-
-			return; 
-		}
-
-		if ( nodeName.compare("eParameters") == 0 )
-		{
-  			std::string typeName = loadHandler->getCurrentXSITypeName();
-			if (typeName.empty())
-			{
-				typeName = "EParameter";
-			}
-			loadHandler->handleChildContainer<ecore::EParameter>(this->getEParameters());  
-
-			return; 
-		}
-
-		if ( nodeName.compare("eTypeParameters") == 0 )
-		{
-  			std::string typeName = loadHandler->getCurrentXSITypeName();
-			if (typeName.empty())
-			{
-				typeName = "ETypeParameter";
-			}
-			loadHandler->handleChildContainer<ecore::ETypeParameter>(this->getETypeParameters());  
-
-			return; 
-		}
-	}
-	catch (std::exception& e)
-	{
-		std::cout << "| ERROR    | " << e.what() << std::endl;
-	}
-	catch (...) 
-	{
-		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
-	}
-	//load BasePackage Nodes
-	ETypedElementImpl::loadNode(nodeName, loadHandler);
+	m_thisEOperationPtr = thisEOperationPtr;
+	setThisETypedElementPtr(thisEOperationPtr);
 }
-
-void EOperationImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<EObject> > references)
-{
-	switch(featureID)
-	{
-		case ecore::ecorePackage::EOPERATION_ATTRIBUTE_EEXCEPTIONS:
-		{
-			std::shared_ptr<Bag<ecore::EClassifier>> _eExceptions = getEExceptions();
-			for(std::shared_ptr<ecore::EObject> ref : references)
-			{
-				std::shared_ptr<ecore::EClassifier>  _r = std::dynamic_pointer_cast<ecore::EClassifier>(ref);
-				if (_r != nullptr)
-				{
-					_eExceptions->push_back(_r);
-				}
-			}
-			return;
-		}
-	}
-	ETypedElementImpl::resolveReferences(featureID, references);
-}
-
-void EOperationImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
-{
-	saveContent(saveHandler);
-
-	ETypedElementImpl::saveContent(saveHandler);
-	
-	ENamedElementImpl::saveContent(saveHandler);
-	
-	EModelElementImpl::saveContent(saveHandler);
-	
-	EObjectImpl::saveContent(saveHandler);
-	
-	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
-}
-
-void EOperationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
-{
-	try
-	{
-		std::shared_ptr<ecore::ecorePackage> package = ecore::ecorePackage::eInstance();
-		// Save 'eParameters'
-		for (std::shared_ptr<ecore::EParameter> eParameters : *this->getEParameters()) 
-		{
-			saveHandler->addReference(eParameters, "eParameters", eParameters->eClass() != package->getEParameter_Class());
-		}
-		// Add attributes
-		if ( this->eIsSet(package->getEOperation_Attribute_operationID()) )
-		{
-			saveHandler->addAttribute("operationID", this->getOperationID());
-		}
-	// Add references
-		saveHandler->addReferences<ecore::EClassifier>("eExceptions", this->getEExceptions());
-		//
-		// Add new tags (from references)
-		//
-		std::shared_ptr<EClass> metaClass = this->eClass();
-		// Save 'eGenericExceptions'
-
-		saveHandler->addReferences<ecore::EGenericType>("eGenericExceptions", this->getEGenericExceptions());
-
-		// Save 'eTypeParameters'
-
-		saveHandler->addReferences<ecore::ETypeParameter>("eTypeParameters", this->getETypeParameters());
-	}
-	catch (std::exception& e)
-	{
-		std::cout << "| ERROR    | " << e.what() << std::endl;
-	}
-}
-

@@ -1,3 +1,4 @@
+
 #include "fUML/Semantics/SimpleClassifiers/impl/EnumerationValueImpl.hpp"
 
 #ifdef NDEBUG
@@ -39,7 +40,6 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-
 
 #include "uml/Classifier.hpp"
 #include "uml/Enumeration.hpp"
@@ -119,15 +119,6 @@ std::shared_ptr<ecore::EObject> EnumerationValueImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> EnumerationValueImpl::eStaticClass() const
-{
-	return fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::eInstance()->getEnumerationValue_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
@@ -200,11 +191,13 @@ std::string EnumerationValueImpl::toString()
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference literal
-*/
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference literal */
 std::shared_ptr<uml::EnumerationLiteral> EnumerationValueImpl::getLiteral() const
 {
     return m_literal;
@@ -215,10 +208,7 @@ void EnumerationValueImpl::setLiteral(std::shared_ptr<uml::EnumerationLiteral> _
 	
 }
 
-
-/*
-Getter & Setter for reference type
-*/
+/* Getter & Setter for reference type */
 std::shared_ptr<uml::Enumeration> EnumerationValueImpl::getType() const
 {
     return m_type;
@@ -229,151 +219,16 @@ void EnumerationValueImpl::setType(std::shared_ptr<uml::Enumeration> _type)
 	
 }
 
-
 //*********************************
 // Union Getter
 //*********************************
 
-
-
-std::shared_ptr<EnumerationValue> EnumerationValueImpl::getThisEnumerationValuePtr() const
-{
-	return m_thisEnumerationValuePtr.lock();
-}
-void EnumerationValueImpl::setThisEnumerationValuePtr(std::weak_ptr<EnumerationValue> thisEnumerationValuePtr)
-{
-	m_thisEnumerationValuePtr = thisEnumerationValuePtr;
-	setThisValuePtr(thisEnumerationValuePtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> EnumerationValueImpl::eContainer() const
 {
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any EnumerationValueImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::ENUMERATIONVALUE_ATTRIBUTE_LITERAL:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getLiteral();
-				return eAny(returnValue); //410
-			}
-		case fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::ENUMERATIONVALUE_ATTRIBUTE_TYPE:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getType();
-				return eAny(returnValue); //411
-			}
-	}
-	return fUML::Semantics::Values::ValueImpl::eGet(featureID, resolve, coreType);
-}
-bool EnumerationValueImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::ENUMERATIONVALUE_ATTRIBUTE_LITERAL:
-			return getLiteral() != nullptr; //410
-		case fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::ENUMERATIONVALUE_ATTRIBUTE_TYPE:
-			return getType() != nullptr; //411
-	}
-	return fUML::Semantics::Values::ValueImpl::internalEIsSet(featureID);
-}
-bool EnumerationValueImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::ENUMERATIONVALUE_ATTRIBUTE_LITERAL:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::EnumerationLiteral> _literal = std::dynamic_pointer_cast<uml::EnumerationLiteral>(_temp);
-			setLiteral(_literal); //410
-			return true;
-		}
-		case fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::ENUMERATIONVALUE_ATTRIBUTE_TYPE:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::Enumeration> _type = std::dynamic_pointer_cast<uml::Enumeration>(_temp);
-			setType(_type); //411
-			return true;
-		}
-	}
-
-	return fUML::Semantics::Values::ValueImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any EnumerationValueImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-		
-		// 2039932483
-		case SimpleClassifiersPackage::ENUMERATIONVALUE_OPERATION__COPY:
-		{
-			result = eAny(this->_copy());
-			break;
-		}
-		
-		// 1509384347
-		case SimpleClassifiersPackage::ENUMERATIONVALUE_OPERATION_EQUALS_VALUE:
-		{
-			//Retrieve input parameter 'otherValue'
-			//parameter 0
-			std::shared_ptr<fUML::Semantics::Values::Value> incoming_param_otherValue;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_otherValue_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_otherValue = (*incoming_param_otherValue_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::Values::Value> >();
-			result = eAny(this->equals(incoming_param_otherValue));
-			break;
-		}
-		
-		// 850869043
-		case SimpleClassifiersPackage::ENUMERATIONVALUE_OPERATION_GETTYPES:
-		{
-			result = eAny(this->getTypes());
-			break;
-		}
-		
-		// 873040755
-		case SimpleClassifiersPackage::ENUMERATIONVALUE_OPERATION_NEW_:
-		{
-			result = eAny(this->new_());
-			break;
-		}
-		
-		// 1719232753
-		case SimpleClassifiersPackage::ENUMERATIONVALUE_OPERATION_SPECIFY:
-		{
-			result = eAny(this->specify());
-			break;
-		}
-		
-		// 1081001181
-		case SimpleClassifiersPackage::ENUMERATIONVALUE_OPERATION_TOSTRING:
-		{
-			result = eAny(this->toString());
-			break;
-		}
-
-		default:
-		{
-			// call superTypes
-			result = fUML::Semantics::Values::ValueImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -474,8 +329,6 @@ void EnumerationValueImpl::save(std::shared_ptr<persistence::interfaces::XSaveHa
 	fUML::Semantics::Loci::SemanticVisitorImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
 }
 
 void EnumerationValueImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -493,3 +346,148 @@ void EnumerationValueImpl::saveContent(std::shared_ptr<persistence::interfaces::
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> EnumerationValueImpl::eStaticClass() const
+{
+	return fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::eInstance()->getEnumerationValue_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any EnumerationValueImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::ENUMERATIONVALUE_ATTRIBUTE_LITERAL:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getLiteral();
+				return eAny(returnValue); //410
+			}
+		case fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::ENUMERATIONVALUE_ATTRIBUTE_TYPE:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getType();
+				return eAny(returnValue); //411
+			}
+	}
+	return fUML::Semantics::Values::ValueImpl::eGet(featureID, resolve, coreType);
+}
+
+bool EnumerationValueImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::ENUMERATIONVALUE_ATTRIBUTE_LITERAL:
+			return getLiteral() != nullptr; //410
+		case fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::ENUMERATIONVALUE_ATTRIBUTE_TYPE:
+			return getType() != nullptr; //411
+	}
+	return fUML::Semantics::Values::ValueImpl::internalEIsSet(featureID);
+}
+
+bool EnumerationValueImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::ENUMERATIONVALUE_ATTRIBUTE_LITERAL:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::EnumerationLiteral> _literal = std::dynamic_pointer_cast<uml::EnumerationLiteral>(_temp);
+			setLiteral(_literal); //410
+			return true;
+		}
+		case fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::ENUMERATIONVALUE_ATTRIBUTE_TYPE:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::Enumeration> _type = std::dynamic_pointer_cast<uml::Enumeration>(_temp);
+			setType(_type); //411
+			return true;
+		}
+	}
+
+	return fUML::Semantics::Values::ValueImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any EnumerationValueImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 2039932483
+		case SimpleClassifiersPackage::ENUMERATIONVALUE_OPERATION__COPY:
+		{
+			result = eAny(this->_copy());
+			break;
+		}
+		
+		// 1509384347
+		case SimpleClassifiersPackage::ENUMERATIONVALUE_OPERATION_EQUALS_VALUE:
+		{
+			//Retrieve input parameter 'otherValue'
+			//parameter 0
+			std::shared_ptr<fUML::Semantics::Values::Value> incoming_param_otherValue;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_otherValue_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_otherValue = (*incoming_param_otherValue_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::Values::Value> >();
+			result = eAny(this->equals(incoming_param_otherValue));
+			break;
+		}
+		
+		// 850869043
+		case SimpleClassifiersPackage::ENUMERATIONVALUE_OPERATION_GETTYPES:
+		{
+			result = eAny(this->getTypes());
+			break;
+		}
+		
+		// 873040755
+		case SimpleClassifiersPackage::ENUMERATIONVALUE_OPERATION_NEW_:
+		{
+			result = eAny(this->new_());
+			break;
+		}
+		
+		// 1719232753
+		case SimpleClassifiersPackage::ENUMERATIONVALUE_OPERATION_SPECIFY:
+		{
+			result = eAny(this->specify());
+			break;
+		}
+		
+		// 1081001181
+		case SimpleClassifiersPackage::ENUMERATIONVALUE_OPERATION_TOSTRING:
+		{
+			result = eAny(this->toString());
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = fUML::Semantics::Values::ValueImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<EnumerationValue> EnumerationValueImpl::getThisEnumerationValuePtr() const
+{
+	return m_thisEnumerationValuePtr.lock();
+}
+void EnumerationValueImpl::setThisEnumerationValuePtr(std::weak_ptr<EnumerationValue> thisEnumerationValuePtr)
+{
+	m_thisEnumerationValuePtr = thisEnumerationValuePtr;
+	setThisValuePtr(thisEnumerationValuePtr);
+}

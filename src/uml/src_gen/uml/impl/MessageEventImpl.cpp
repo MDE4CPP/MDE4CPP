@@ -1,3 +1,4 @@
+
 #include "uml/impl/MessageEventImpl.hpp"
 
 #ifdef NDEBUG
@@ -25,7 +26,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -33,7 +33,6 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-
 
 #include "uml/Comment.hpp"
 #include "uml/Dependency.hpp"
@@ -140,21 +139,16 @@ std::shared_ptr<ecore::EObject> MessageEventImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> MessageEventImpl::eStaticClass() const
-{
-	return uml::umlPackage::eInstance()->getMessageEvent_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
 
 //*********************************
-// References
+// Attribute Getters & Setters
+//*********************************
+
+//*********************************
+// Reference Getters & Setters
 //*********************************
 
 //*********************************
@@ -187,16 +181,9 @@ std::weak_ptr<uml::Element> MessageEventImpl::getOwner() const
 
 
 
-
-std::shared_ptr<MessageEvent> MessageEventImpl::getThisMessageEventPtr() const
-{
-	return m_thisMessageEventPtr.lock();
-}
-void MessageEventImpl::setThisMessageEventPtr(std::weak_ptr<MessageEvent> thisMessageEventPtr)
-{
-	m_thisMessageEventPtr = thisMessageEventPtr;
-	setThisEventPtr(thisMessageEventPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> MessageEventImpl::eContainer() const
 {
 	if(auto wp = m_namespace.lock())
@@ -219,55 +206,6 @@ std::shared_ptr<ecore::EObject> MessageEventImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any MessageEventImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-	}
-	return EventImpl::eGet(featureID, resolve, coreType);
-}
-bool MessageEventImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-	}
-	return EventImpl::internalEIsSet(featureID);
-}
-bool MessageEventImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-	}
-
-	return EventImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any MessageEventImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-
-		default:
-		{
-			// call superTypes
-			result = EventImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -323,11 +261,6 @@ void MessageEventImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandle
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
-	
 }
 
 void MessageEventImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -342,3 +275,71 @@ void MessageEventImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> MessageEventImpl::eStaticClass() const
+{
+	return uml::umlPackage::eInstance()->getMessageEvent_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any MessageEventImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+	}
+	return EventImpl::eGet(featureID, resolve, coreType);
+}
+
+bool MessageEventImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+	}
+	return EventImpl::internalEIsSet(featureID);
+}
+
+bool MessageEventImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+	}
+
+	return EventImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any MessageEventImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+
+		default:
+		{
+			// call superTypes
+			result = EventImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<MessageEvent> MessageEventImpl::getThisMessageEventPtr() const
+{
+	return m_thisMessageEventPtr.lock();
+}
+void MessageEventImpl::setThisMessageEventPtr(std::weak_ptr<MessageEvent> thisMessageEventPtr)
+{
+	m_thisMessageEventPtr = thisMessageEventPtr;
+	setThisEventPtr(thisMessageEventPtr);
+}

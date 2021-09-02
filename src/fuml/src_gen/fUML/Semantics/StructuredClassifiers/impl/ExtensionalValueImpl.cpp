@@ -1,3 +1,4 @@
+
 #include "fUML/Semantics/StructuredClassifiers/impl/ExtensionalValueImpl.hpp"
 
 #ifdef NDEBUG
@@ -35,7 +36,6 @@
 #include <exception> // used in Persistence
 #include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
-
 
 #include "fUML/Semantics/SimpleClassifiers/CompoundValue.hpp"
 #include "fUML/Semantics/SimpleClassifiers/FeatureValue.hpp"
@@ -114,15 +114,6 @@ std::shared_ptr<ecore::EObject> ExtensionalValueImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> ExtensionalValueImpl::eStaticClass() const
-{
-	return fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::eInstance()->getExtensionalValue_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
@@ -155,11 +146,13 @@ void ExtensionalValueImpl::destroy()
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference locus
-*/
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference locus */
 std::shared_ptr<fUML::Semantics::Loci::Locus> ExtensionalValueImpl::getLocus() const
 {
     return m_locus;
@@ -170,103 +163,16 @@ void ExtensionalValueImpl::setLocus(std::shared_ptr<fUML::Semantics::Loci::Locus
 	
 }
 
-
 //*********************************
 // Union Getter
 //*********************************
 
-
-
-std::shared_ptr<ExtensionalValue> ExtensionalValueImpl::getThisExtensionalValuePtr() const
-{
-	return m_thisExtensionalValuePtr.lock();
-}
-void ExtensionalValueImpl::setThisExtensionalValuePtr(std::weak_ptr<ExtensionalValue> thisExtensionalValuePtr)
-{
-	m_thisExtensionalValuePtr = thisExtensionalValuePtr;
-	setThisCompoundValuePtr(thisExtensionalValuePtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> ExtensionalValueImpl::eContainer() const
 {
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any ExtensionalValueImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::EXTENSIONALVALUE_ATTRIBUTE_LOCUS:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getLocus();
-				return eAny(returnValue); //521
-			}
-	}
-	return fUML::Semantics::SimpleClassifiers::CompoundValueImpl::eGet(featureID, resolve, coreType);
-}
-bool ExtensionalValueImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::EXTENSIONALVALUE_ATTRIBUTE_LOCUS:
-			return getLocus() != nullptr; //521
-	}
-	return fUML::Semantics::SimpleClassifiers::CompoundValueImpl::internalEIsSet(featureID);
-}
-bool ExtensionalValueImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::EXTENSIONALVALUE_ATTRIBUTE_LOCUS:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<fUML::Semantics::Loci::Locus> _locus = std::dynamic_pointer_cast<fUML::Semantics::Loci::Locus>(_temp);
-			setLocus(_locus); //521
-			return true;
-		}
-	}
-
-	return fUML::Semantics::SimpleClassifiers::CompoundValueImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any ExtensionalValueImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-		
-		// 2102774946
-		case StructuredClassifiersPackage::EXTENSIONALVALUE_OPERATION__COPY:
-		{
-			result = eAny(this->_copy());
-			break;
-		}
-		
-		// 1826522411
-		case StructuredClassifiersPackage::EXTENSIONALVALUE_OPERATION_DESTROY:
-		{
-			this->destroy();
-			break;
-		}
-
-		default:
-		{
-			// call superTypes
-			result = fUML::Semantics::SimpleClassifiers::CompoundValueImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -352,10 +258,6 @@ void ExtensionalValueImpl::save(std::shared_ptr<persistence::interfaces::XSaveHa
 	fUML::Semantics::Loci::SemanticVisitorImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
 }
 
 void ExtensionalValueImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -372,3 +274,100 @@ void ExtensionalValueImpl::saveContent(std::shared_ptr<persistence::interfaces::
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> ExtensionalValueImpl::eStaticClass() const
+{
+	return fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::eInstance()->getExtensionalValue_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any ExtensionalValueImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::EXTENSIONALVALUE_ATTRIBUTE_LOCUS:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getLocus();
+				return eAny(returnValue); //521
+			}
+	}
+	return fUML::Semantics::SimpleClassifiers::CompoundValueImpl::eGet(featureID, resolve, coreType);
+}
+
+bool ExtensionalValueImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::EXTENSIONALVALUE_ATTRIBUTE_LOCUS:
+			return getLocus() != nullptr; //521
+	}
+	return fUML::Semantics::SimpleClassifiers::CompoundValueImpl::internalEIsSet(featureID);
+}
+
+bool ExtensionalValueImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::EXTENSIONALVALUE_ATTRIBUTE_LOCUS:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<fUML::Semantics::Loci::Locus> _locus = std::dynamic_pointer_cast<fUML::Semantics::Loci::Locus>(_temp);
+			setLocus(_locus); //521
+			return true;
+		}
+	}
+
+	return fUML::Semantics::SimpleClassifiers::CompoundValueImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any ExtensionalValueImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 2102774946
+		case StructuredClassifiersPackage::EXTENSIONALVALUE_OPERATION__COPY:
+		{
+			result = eAny(this->_copy());
+			break;
+		}
+		
+		// 1826522411
+		case StructuredClassifiersPackage::EXTENSIONALVALUE_OPERATION_DESTROY:
+		{
+			this->destroy();
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = fUML::Semantics::SimpleClassifiers::CompoundValueImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<ExtensionalValue> ExtensionalValueImpl::getThisExtensionalValuePtr() const
+{
+	return m_thisExtensionalValuePtr.lock();
+}
+void ExtensionalValueImpl::setThisExtensionalValuePtr(std::weak_ptr<ExtensionalValue> thisExtensionalValuePtr)
+{
+	m_thisExtensionalValuePtr = thisExtensionalValuePtr;
+	setThisCompoundValuePtr(thisExtensionalValuePtr);
+}

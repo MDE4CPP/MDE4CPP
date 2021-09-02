@@ -1,3 +1,4 @@
+
 #include "ocl/Expressions/impl/IntegerLiteralExpImpl.hpp"
 
 #ifdef NDEBUG
@@ -25,7 +26,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -35,7 +35,6 @@
 #include "ecore/ecoreFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
-
 
 #include "ocl/Expressions/CallExp.hpp"
 #include "ocl/Expressions/CollectionRange.hpp"
@@ -204,17 +203,14 @@ std::shared_ptr<ecore::EObject> IntegerLiteralExpImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> IntegerLiteralExpImpl::eStaticClass() const
-{
-	return ocl::Expressions::ExpressionsPackage::eInstance()->getIntegerLiteralExp_Class();
-}
+//*********************************
+// Operations
+//*********************************
 
 //*********************************
-// Attribute Setter Getter
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for attribute integerSymbol
-*/
+/* Getter & Setter for attribute integerSymbol */
 int IntegerLiteralExpImpl::getIntegerSymbol() const 
 {
 	return m_integerSymbol;
@@ -223,32 +219,19 @@ void IntegerLiteralExpImpl::setIntegerSymbol(int _integerSymbol)
 {
 	m_integerSymbol = _integerSymbol;
 	
-} 
-
-
-//*********************************
-// Operations
-//*********************************
+}
 
 //*********************************
-// References
+// Reference Getters & Setters
 //*********************************
 
 //*********************************
 // Union Getter
 //*********************************
 
-
-
-std::shared_ptr<IntegerLiteralExp> IntegerLiteralExpImpl::getThisIntegerLiteralExpPtr() const
-{
-	return m_thisIntegerLiteralExpPtr.lock();
-}
-void IntegerLiteralExpImpl::setThisIntegerLiteralExpPtr(std::weak_ptr<IntegerLiteralExp> thisIntegerLiteralExpPtr)
-{
-	m_thisIntegerLiteralExpPtr = thisIntegerLiteralExpPtr;
-	setThisNumericLiteralExpPtr(thisIntegerLiteralExpPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> IntegerLiteralExpImpl::eContainer() const
 {
 	if(auto wp = m_appliedElement.lock())
@@ -306,66 +289,6 @@ std::shared_ptr<ecore::EObject> IntegerLiteralExpImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any IntegerLiteralExpImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case ocl::Expressions::ExpressionsPackage::INTEGERLITERALEXP_ATTRIBUTE_INTEGERSYMBOL:
-			return eAny(getIntegerSymbol()); //3323
-	}
-	return NumericLiteralExpImpl::eGet(featureID, resolve, coreType);
-}
-bool IntegerLiteralExpImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case ocl::Expressions::ExpressionsPackage::INTEGERLITERALEXP_ATTRIBUTE_INTEGERSYMBOL:
-			return getIntegerSymbol() != 0; //3323
-	}
-	return NumericLiteralExpImpl::internalEIsSet(featureID);
-}
-bool IntegerLiteralExpImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case ocl::Expressions::ExpressionsPackage::INTEGERLITERALEXP_ATTRIBUTE_INTEGERSYMBOL:
-		{
-			// BOOST CAST
-			int _integerSymbol = newValue->get<int>();
-			setIntegerSymbol(_integerSymbol); //3323
-			return true;
-		}
-	}
-
-	return NumericLiteralExpImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any IntegerLiteralExpImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-
-		default:
-		{
-			// call superTypes
-			result = NumericLiteralExpImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -445,13 +368,6 @@ void IntegerLiteralExpImpl::save(std::shared_ptr<persistence::interfaces::XSaveH
 	ecore::EModelElementImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
-	
-	
-	
 }
 
 void IntegerLiteralExpImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -471,3 +387,82 @@ void IntegerLiteralExpImpl::saveContent(std::shared_ptr<persistence::interfaces:
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> IntegerLiteralExpImpl::eStaticClass() const
+{
+	return ocl::Expressions::ExpressionsPackage::eInstance()->getIntegerLiteralExp_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any IntegerLiteralExpImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case ocl::Expressions::ExpressionsPackage::INTEGERLITERALEXP_ATTRIBUTE_INTEGERSYMBOL:
+			return eAny(getIntegerSymbol()); //3323
+	}
+	return NumericLiteralExpImpl::eGet(featureID, resolve, coreType);
+}
+
+bool IntegerLiteralExpImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case ocl::Expressions::ExpressionsPackage::INTEGERLITERALEXP_ATTRIBUTE_INTEGERSYMBOL:
+			return getIntegerSymbol() != 0; //3323
+	}
+	return NumericLiteralExpImpl::internalEIsSet(featureID);
+}
+
+bool IntegerLiteralExpImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case ocl::Expressions::ExpressionsPackage::INTEGERLITERALEXP_ATTRIBUTE_INTEGERSYMBOL:
+		{
+			// BOOST CAST
+			int _integerSymbol = newValue->get<int>();
+			setIntegerSymbol(_integerSymbol); //3323
+			return true;
+		}
+	}
+
+	return NumericLiteralExpImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any IntegerLiteralExpImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+
+		default:
+		{
+			// call superTypes
+			result = NumericLiteralExpImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<IntegerLiteralExp> IntegerLiteralExpImpl::getThisIntegerLiteralExpPtr() const
+{
+	return m_thisIntegerLiteralExpPtr.lock();
+}
+void IntegerLiteralExpImpl::setThisIntegerLiteralExpPtr(std::weak_ptr<IntegerLiteralExp> thisIntegerLiteralExpPtr)
+{
+	m_thisIntegerLiteralExpPtr = thisIntegerLiteralExpPtr;
+	setThisNumericLiteralExpPtr(thisIntegerLiteralExpPtr);
+}

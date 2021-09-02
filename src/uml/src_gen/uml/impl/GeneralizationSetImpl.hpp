@@ -55,7 +55,8 @@ namespace uml
 			generalization->collect(general)->asSet()->size() <= 1
 			*/
 			 
-			virtual bool generalization_same_classifier(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
+			virtual bool generalization_same_classifier(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			/*!
 			The Classifier that maps to a GeneralizationSet may neither be a specific nor a general Classifier in any of the Generalization relationships defined for that GeneralizationSet. In other words, a power type may not be an instance of itself nor may its instances be its subclasses.
 			powertype <> null implies generalization->forAll( gen | 
 			    not (gen.general = powertype) and not gen.general.allParents()->includes(powertype) and not (gen.specific = powertype) and not powertype.allParents()->includes(gen.specific)
@@ -65,7 +66,7 @@ namespace uml
 			virtual bool maps_to_generalization_set(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
-			// Attributes Getter Setter
+			// Attribute Getters & Setters
 			//*********************************
 			/*!
 			Indicates (via the associated Generalizations) whether or not the set of specific Classifiers are covering for a particular general classifier. When isCovering is true, every instance of a particular general Classifier is also an instance of at least one of its specific Classifiers for the GeneralizationSet. When isCovering is false, there are one or more instances of the particular general Classifier that are not instances of at least one of its specific Classifiers defined for the GeneralizationSet.
@@ -92,9 +93,8 @@ namespace uml
 			 
 			virtual void setIsDisjoint (bool _isDisjoint);
 			
-			
 			//*********************************
-			// Reference
+			// Reference Getters & Setters
 			//*********************************
 			/*!
 			Designates the instances of Generalization that are members of this GeneralizationSet.
@@ -102,7 +102,6 @@ namespace uml
 			*/
 			
 			virtual std::shared_ptr<Bag<uml::Generalization>> getGeneralization() const ;
-			
 			/*!
 			Designates the Classifier that is defined as the power type for the associated GeneralizationSet, if there is one.
 			<p>From package UML::Classification.</p>
@@ -116,28 +115,32 @@ namespace uml
 			
 			virtual void setPowertype(std::shared_ptr<uml::Classifier>) ;
 			
-			
 			//*********************************
-			// Union Getter
+			// Union Reference Getters
 			//*********************************
 			/*!
 			Specifies the Namespace that owns the NamedElement.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Namespace> getNamespace() const ;/*!
+			virtual std::weak_ptr<uml::Namespace> getNamespace() const ;
+			/*!
 			The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const ;/*!
+			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const ;
+			/*!
 			The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
 			virtual std::weak_ptr<uml::Element> getOwner() const ;
 			
-
+			
+			//*********************************
+			// Container Getter
+			//*********************************
 			virtual std::shared_ptr<ecore::EObject> eContainer() const ; 
 			
 			//*********************************
@@ -146,20 +149,23 @@ namespace uml
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) ;
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
-			
 			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
-			
 
-			//*********************************
-			// Structural Feature Getter/Setter
-			//*********************************
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+
+			//*********************************
+			// EStructuralFeature Get/Set/IsSet
+			//*********************************
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool internalEIsSet(int featureID) const ;
 			virtual bool eSet(int featureID, Any newValue) ;
+			virtual bool internalEIsSet(int featureID) const ;
+
+			//*********************************
+			// EOperation Invoke
+			//*********************************
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:

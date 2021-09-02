@@ -1,3 +1,4 @@
+
 #include "uml/impl/ControlNodeImpl.hpp"
 
 #ifdef NDEBUG
@@ -25,7 +26,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -33,7 +33,6 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-
 
 #include "uml/Activity.hpp"
 #include "uml/ActivityEdge.hpp"
@@ -146,21 +145,16 @@ std::shared_ptr<ecore::EObject> ControlNodeImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> ControlNodeImpl::eStaticClass() const
-{
-	return uml::umlPackage::eInstance()->getControlNode_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
 
 //*********************************
-// References
+// Attribute Getters & Setters
+//*********************************
+
+//*********************************
+// Reference Getters & Setters
 //*********************************
 
 //*********************************
@@ -216,18 +210,9 @@ std::shared_ptr<Union<uml::RedefinableElement>> ControlNodeImpl::getRedefinedEle
 	return m_redefinedElement;
 }
 
-
-
-
-std::shared_ptr<ControlNode> ControlNodeImpl::getThisControlNodePtr() const
-{
-	return m_thisControlNodePtr.lock();
-}
-void ControlNodeImpl::setThisControlNodePtr(std::weak_ptr<ControlNode> thisControlNodePtr)
-{
-	m_thisControlNodePtr = thisControlNodePtr;
-	setThisActivityNodePtr(thisControlNodePtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> ControlNodeImpl::eContainer() const
 {
 	if(auto wp = m_activity.lock())
@@ -250,55 +235,6 @@ std::shared_ptr<ecore::EObject> ControlNodeImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any ControlNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-	}
-	return ActivityNodeImpl::eGet(featureID, resolve, coreType);
-}
-bool ControlNodeImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-	}
-	return ActivityNodeImpl::internalEIsSet(featureID);
-}
-bool ControlNodeImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-	}
-
-	return ActivityNodeImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any ControlNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-
-		default:
-		{
-			// call superTypes
-			result = ActivityNodeImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -353,11 +289,6 @@ void ControlNodeImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
-	
 }
 
 void ControlNodeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -372,3 +303,71 @@ void ControlNodeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> ControlNodeImpl::eStaticClass() const
+{
+	return uml::umlPackage::eInstance()->getControlNode_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any ControlNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+	}
+	return ActivityNodeImpl::eGet(featureID, resolve, coreType);
+}
+
+bool ControlNodeImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+	}
+	return ActivityNodeImpl::internalEIsSet(featureID);
+}
+
+bool ControlNodeImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+	}
+
+	return ActivityNodeImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any ControlNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+
+		default:
+		{
+			// call superTypes
+			result = ActivityNodeImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<ControlNode> ControlNodeImpl::getThisControlNodePtr() const
+{
+	return m_thisControlNodePtr.lock();
+}
+void ControlNodeImpl::setThisControlNodePtr(std::weak_ptr<ControlNode> thisControlNodePtr)
+{
+	m_thisControlNodePtr = thisControlNodePtr;
+	setThisActivityNodePtr(thisControlNodePtr);
+}

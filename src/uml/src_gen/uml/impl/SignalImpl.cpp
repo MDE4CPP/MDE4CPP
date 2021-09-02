@@ -1,3 +1,4 @@
+
 #include "uml/impl/SignalImpl.hpp"
 
 #ifdef NDEBUG
@@ -25,7 +26,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -33,7 +33,6 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-
 
 #include "uml/Classifier.hpp"
 #include "uml/CollaborationUse.hpp"
@@ -205,15 +204,6 @@ std::shared_ptr<ecore::EObject> SignalImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> SignalImpl::eStaticClass() const
-{
-	return uml::umlPackage::eInstance()->getSignal_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
@@ -224,11 +214,13 @@ std::shared_ptr<uml::Property> SignalImpl::createOwnedAttribute(std::string name
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference ownedAttribute
-*/
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference ownedAttribute */
 std::shared_ptr<Subset<uml::Property, uml::NamedElement, uml::Property>> SignalImpl::getOwnedAttribute() const
 {
 	if(m_ownedAttribute == nullptr)
@@ -248,8 +240,6 @@ std::shared_ptr<Subset<uml::Property, uml::NamedElement, uml::Property>> SignalI
 	}
     return m_ownedAttribute;
 }
-
-
 
 //*********************************
 // Union Getter
@@ -371,16 +361,9 @@ std::shared_ptr<Union<uml::RedefinableElement>> SignalImpl::getRedefinedElement(
 
 
 
-
-std::shared_ptr<Signal> SignalImpl::getThisSignalPtr() const
-{
-	return m_thisSignalPtr.lock();
-}
-void SignalImpl::setThisSignalPtr(std::weak_ptr<Signal> thisSignalPtr)
-{
-	m_thisSignalPtr = thisSignalPtr;
-	setThisClassifierPtr(thisSignalPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> SignalImpl::eContainer() const
 {
 	if(auto wp = m_namespace.lock())
@@ -408,132 +391,6 @@ std::shared_ptr<ecore::EObject> SignalImpl::eContainer() const
 	}
 
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any SignalImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::SIGNAL_ATTRIBUTE_OWNEDATTRIBUTE:
-		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Property>::iterator iter = getOwnedAttribute()->begin();
-			Bag<uml::Property>::iterator end = getOwnedAttribute()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //21538			
-		}
-	}
-	return ClassifierImpl::eGet(featureID, resolve, coreType);
-}
-bool SignalImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::SIGNAL_ATTRIBUTE_OWNEDATTRIBUTE:
-			return getOwnedAttribute() != nullptr; //21538
-	}
-	return ClassifierImpl::internalEIsSet(featureID);
-}
-bool SignalImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::SIGNAL_ATTRIBUTE_OWNEDATTRIBUTE:
-		{
-			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::Property>> ownedAttributeList(new Bag<uml::Property>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
-			{
-				ownedAttributeList->add(std::dynamic_pointer_cast<uml::Property>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::Property>::iterator iterOwnedAttribute = getOwnedAttribute()->begin();
-			Bag<uml::Property>::iterator endOwnedAttribute = getOwnedAttribute()->end();
-			while (iterOwnedAttribute != endOwnedAttribute)
-			{
-				if (ownedAttributeList->find(*iterOwnedAttribute) == -1)
-				{
-					getOwnedAttribute()->erase(*iterOwnedAttribute);
-				}
-				iterOwnedAttribute++;
-			}
- 
-			iterOwnedAttribute = ownedAttributeList->begin();
-			endOwnedAttribute = ownedAttributeList->end();
-			while (iterOwnedAttribute != endOwnedAttribute)
-			{
-				if (getOwnedAttribute()->find(*iterOwnedAttribute) == -1)
-				{
-					getOwnedAttribute()->add(*iterOwnedAttribute);
-				}
-				iterOwnedAttribute++;			
-			}
-			return true;
-		}
-	}
-
-	return ClassifierImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any SignalImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-		
-		// 1210890242
-		case umlPackage::SIGNAL_OPERATION_CREATEOWNEDATTRIBUTE_STRING_UNLIMITEDNATURAL:
-		{
-			//Retrieve input parameter 'name'
-			//parameter 0
-			std::string incoming_param_name;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_name_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_name = (*incoming_param_name_arguments_citer)->get()->get<std::string >();
-			//Retrieve input parameter 'type'
-			//parameter 1
-			std::shared_ptr<uml::Type> incoming_param_type;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_type_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_type = (*incoming_param_type_arguments_citer)->get()->get<std::shared_ptr<uml::Type> >();
-			//Retrieve input parameter 'lower'
-			//parameter 2
-			int incoming_param_lower;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_lower_arguments_citer = std::next(arguments->begin(), 2);
-			incoming_param_lower = (*incoming_param_lower_arguments_citer)->get()->get<int >();
-			//Retrieve input parameter 'upper'
-			//parameter 3
-			int incoming_param_upper;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_upper_arguments_citer = std::next(arguments->begin(), 3);
-			incoming_param_upper = (*incoming_param_upper_arguments_citer)->get()->get<int >();
-			result = eAny(this->createOwnedAttribute(incoming_param_name,incoming_param_type,incoming_param_lower,incoming_param_upper));
-			break;
-		}
-
-		default:
-		{
-			// call superTypes
-			result = ClassifierImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -616,12 +473,6 @@ void SignalImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> sav
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
-	
-	
 }
 
 void SignalImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -641,3 +492,148 @@ void SignalImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandl
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> SignalImpl::eStaticClass() const
+{
+	return uml::umlPackage::eInstance()->getSignal_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any SignalImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::SIGNAL_ATTRIBUTE_OWNEDATTRIBUTE:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Property>::iterator iter = getOwnedAttribute()->begin();
+			Bag<uml::Property>::iterator end = getOwnedAttribute()->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //21538			
+		}
+	}
+	return ClassifierImpl::eGet(featureID, resolve, coreType);
+}
+
+bool SignalImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::SIGNAL_ATTRIBUTE_OWNEDATTRIBUTE:
+			return getOwnedAttribute() != nullptr; //21538
+	}
+	return ClassifierImpl::internalEIsSet(featureID);
+}
+
+bool SignalImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::SIGNAL_ATTRIBUTE_OWNEDATTRIBUTE:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::Property>> ownedAttributeList(new Bag<uml::Property>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				ownedAttributeList->add(std::dynamic_pointer_cast<uml::Property>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::Property>::iterator iterOwnedAttribute = getOwnedAttribute()->begin();
+			Bag<uml::Property>::iterator endOwnedAttribute = getOwnedAttribute()->end();
+			while (iterOwnedAttribute != endOwnedAttribute)
+			{
+				if (ownedAttributeList->find(*iterOwnedAttribute) == -1)
+				{
+					getOwnedAttribute()->erase(*iterOwnedAttribute);
+				}
+				iterOwnedAttribute++;
+			}
+ 
+			iterOwnedAttribute = ownedAttributeList->begin();
+			endOwnedAttribute = ownedAttributeList->end();
+			while (iterOwnedAttribute != endOwnedAttribute)
+			{
+				if (getOwnedAttribute()->find(*iterOwnedAttribute) == -1)
+				{
+					getOwnedAttribute()->add(*iterOwnedAttribute);
+				}
+				iterOwnedAttribute++;			
+			}
+			return true;
+		}
+	}
+
+	return ClassifierImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any SignalImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 1210890242
+		case umlPackage::SIGNAL_OPERATION_CREATEOWNEDATTRIBUTE_STRING_UNLIMITEDNATURAL:
+		{
+			//Retrieve input parameter 'name'
+			//parameter 0
+			std::string incoming_param_name;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_name_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_name = (*incoming_param_name_arguments_citer)->get()->get<std::string >();
+			//Retrieve input parameter 'type'
+			//parameter 1
+			std::shared_ptr<uml::Type> incoming_param_type;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_type_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_type = (*incoming_param_type_arguments_citer)->get()->get<std::shared_ptr<uml::Type> >();
+			//Retrieve input parameter 'lower'
+			//parameter 2
+			int incoming_param_lower;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_lower_arguments_citer = std::next(arguments->begin(), 2);
+			incoming_param_lower = (*incoming_param_lower_arguments_citer)->get()->get<int >();
+			//Retrieve input parameter 'upper'
+			//parameter 3
+			int incoming_param_upper;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_upper_arguments_citer = std::next(arguments->begin(), 3);
+			incoming_param_upper = (*incoming_param_upper_arguments_citer)->get()->get<int >();
+			result = eAny(this->createOwnedAttribute(incoming_param_name,incoming_param_type,incoming_param_lower,incoming_param_upper));
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = ClassifierImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<Signal> SignalImpl::getThisSignalPtr() const
+{
+	return m_thisSignalPtr.lock();
+}
+void SignalImpl::setThisSignalPtr(std::weak_ptr<Signal> thisSignalPtr)
+{
+	m_thisSignalPtr = thisSignalPtr;
+	setThisClassifierPtr(thisSignalPtr);
+}

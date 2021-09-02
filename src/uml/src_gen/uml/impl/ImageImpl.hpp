@@ -45,9 +45,8 @@ namespace uml
 			// Operations
 			//*********************************
 			
-			
 			//*********************************
-			// Attributes Getter Setter
+			// Attribute Getters & Setters
 			//*********************************
 			/*!
 			This contains the serialization of the image according to the format. The value could represent a bitmap, image such as a GIF file, or drawing 'instructions' using a standard such as Scalable Vector Graphic (SVG) (which is XML based).
@@ -86,14 +85,12 @@ namespace uml
 			 
 			virtual void setLocation (std::string _location);
 			
+			//*********************************
+			// Reference Getters & Setters
+			//*********************************
 			
 			//*********************************
-			// Reference
-			//*********************************
-			
-			
-			//*********************************
-			// Union Getter
+			// Union Reference Getters
 			//*********************************
 			/*!
 			The Elements owned by this Element.
@@ -102,7 +99,9 @@ namespace uml
 			
 			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const ;
 			
-
+			//*********************************
+			// Container Getter
+			//*********************************
 			virtual std::shared_ptr<ecore::EObject> eContainer() const ; 
 			
 			//*********************************
@@ -111,20 +110,23 @@ namespace uml
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) ;
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
-			
 			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
-			
 
-			//*********************************
-			// Structural Feature Getter/Setter
-			//*********************************
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+
+			//*********************************
+			// EStructuralFeature Get/Set/IsSet
+			//*********************************
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool internalEIsSet(int featureID) const ;
 			virtual bool eSet(int featureID, Any newValue) ;
+			virtual bool internalEIsSet(int featureID) const ;
+
+			//*********************************
+			// EOperation Invoke
+			//*********************************
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:

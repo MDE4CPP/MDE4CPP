@@ -1,3 +1,4 @@
+
 #include "ocl/Evaluations/impl/EvalNameSpaceImpl.hpp"
 
 #ifdef NDEBUG
@@ -32,9 +33,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "uml/umlFactory.hpp"
-
+#include "fUML/Semantics/Loci/LociFactory.hpp"
 
 #include "fUML/Semantics/Values/Evaluation.hpp"
 #include "fUML/Semantics/Loci/Locus.hpp"
@@ -110,90 +110,28 @@ std::shared_ptr<ecore::EObject> EvalNameSpaceImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> EvalNameSpaceImpl::eStaticClass() const
-{
-	return ocl::Evaluations::EvaluationsPackage::eInstance()->getEvalNameSpace_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
 
 //*********************************
-// References
+// Attribute Getters & Setters
+//*********************************
+
+//*********************************
+// Reference Getters & Setters
 //*********************************
 
 //*********************************
 // Union Getter
 //*********************************
 
-
-
-std::shared_ptr<EvalNameSpace> EvalNameSpaceImpl::getThisEvalNameSpacePtr() const
-{
-	return m_thisEvalNameSpacePtr.lock();
-}
-void EvalNameSpaceImpl::setThisEvalNameSpacePtr(std::weak_ptr<EvalNameSpace> thisEvalNameSpacePtr)
-{
-	m_thisEvalNameSpacePtr = thisEvalNameSpacePtr;
-	setThisEvaluationPtr(thisEvalNameSpacePtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> EvalNameSpaceImpl::eContainer() const
 {
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any EvalNameSpaceImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-	}
-	return fUML::Semantics::Values::EvaluationImpl::eGet(featureID, resolve, coreType);
-}
-bool EvalNameSpaceImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-	}
-	return fUML::Semantics::Values::EvaluationImpl::internalEIsSet(featureID);
-}
-bool EvalNameSpaceImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-	}
-
-	return fUML::Semantics::Values::EvaluationImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any EvalNameSpaceImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-
-		default:
-		{
-			// call superTypes
-			result = fUML::Semantics::Values::EvaluationImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -242,8 +180,6 @@ void EvalNameSpaceImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandl
 	fUML::Semantics::Loci::SemanticVisitorImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
 }
 
 void EvalNameSpaceImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -258,3 +194,71 @@ void EvalNameSpaceImpl::saveContent(std::shared_ptr<persistence::interfaces::XSa
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> EvalNameSpaceImpl::eStaticClass() const
+{
+	return ocl::Evaluations::EvaluationsPackage::eInstance()->getEvalNameSpace_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any EvalNameSpaceImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+	}
+	return fUML::Semantics::Values::EvaluationImpl::eGet(featureID, resolve, coreType);
+}
+
+bool EvalNameSpaceImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+	}
+	return fUML::Semantics::Values::EvaluationImpl::internalEIsSet(featureID);
+}
+
+bool EvalNameSpaceImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+	}
+
+	return fUML::Semantics::Values::EvaluationImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any EvalNameSpaceImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+
+		default:
+		{
+			// call superTypes
+			result = fUML::Semantics::Values::EvaluationImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<EvalNameSpace> EvalNameSpaceImpl::getThisEvalNameSpacePtr() const
+{
+	return m_thisEvalNameSpacePtr.lock();
+}
+void EvalNameSpaceImpl::setThisEvalNameSpacePtr(std::weak_ptr<EvalNameSpace> thisEvalNameSpacePtr)
+{
+	m_thisEvalNameSpacePtr = thisEvalNameSpacePtr;
+	setThisEvaluationPtr(thisEvalNameSpacePtr);
+}

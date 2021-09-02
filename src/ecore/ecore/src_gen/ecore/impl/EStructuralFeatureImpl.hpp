@@ -46,61 +46,42 @@ namespace ecore
 			//*********************************
 			// Operations
 			//*********************************
-			 
 			virtual void * getContainerClass() ;
 			
+			
 			//*********************************
-			// Attributes Getter Setter
+			// Attribute Getters & Setters
 			//*********************************
-			 
 			virtual bool isChangeable() const ;
-			 
 			virtual void setChangeable (bool _changeable);
-			 
 			virtual Any getDefaultValue() const ;
-			 
 			virtual void setDefaultValue (Any _defaultValue);
-			 
 			virtual std::string getDefaultValueLiteral() const ;
-			 
 			virtual void setDefaultValueLiteral (std::string _defaultValueLiteral);
-			 
 			virtual bool isDerived() const ;
-			 
 			virtual void setDerived (bool _derived);
-			 
 			virtual int getFeatureID() const ;
-			 
 			virtual void setFeatureID (int _featureID);
-			 
 			virtual bool isTransient() const ;
-			 
 			virtual void setTransient (bool _transient);
-			 
 			virtual bool isUnsettable() const ;
-			 
 			virtual void setUnsettable (bool _unsettable);
-			 
 			virtual bool isVolatile() const ;
-			 
 			virtual void setVolatile (bool _volatile);
 			
-			
 			//*********************************
-			// Reference
+			// Reference Getters & Setters
 			//*********************************
-			
 			virtual std::weak_ptr<ecore::EClass> getEContainingClass() const ;
 			
-			
-			
 			//*********************************
-			// Union Getter
+			// Union Reference Getters
 			//*********************************
-			
 			virtual std::shared_ptr<Union<ecore::EObject>> getEContens() const ;
 			
-
+			//*********************************
+			// Container Getter
+			//*********************************
 			virtual std::shared_ptr<ecore::EObject> eContainer() const ; 
 			
 			//*********************************
@@ -109,20 +90,23 @@ namespace ecore
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) ;
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
-			
 			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
-			
 
-			//*********************************
-			// Structural Feature Getter/Setter
-			//*********************************
 		protected:
 			virtual std::shared_ptr<EClass> eStaticClass() const;
+
+			//*********************************
+			// EStructuralFeature Get/Set/IsSet
+			//*********************************
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool internalEIsSet(int featureID) const ;
 			virtual bool eSet(int featureID, Any newValue) ;
+			virtual bool internalEIsSet(int featureID) const ;
+
+			//*********************************
+			// EOperation Invoke
+			//*********************************
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:

@@ -1,3 +1,4 @@
+
 #include "uml/impl/LiteralNullImpl.hpp"
 
 #ifdef NDEBUG
@@ -25,7 +26,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -33,7 +33,6 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-
 
 #include "uml/Comment.hpp"
 #include "uml/Dependency.hpp"
@@ -159,15 +158,6 @@ std::shared_ptr<ecore::EObject> LiteralNullImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> LiteralNullImpl::eStaticClass() const
-{
-	return uml::umlPackage::eInstance()->getLiteralNull_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
@@ -188,7 +178,11 @@ bool LiteralNullImpl::isNull()
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
+//*********************************
+
+//*********************************
+// Reference Getters & Setters
 //*********************************
 
 //*********************************
@@ -221,16 +215,9 @@ std::weak_ptr<uml::Element> LiteralNullImpl::getOwner() const
 
 
 
-
-std::shared_ptr<LiteralNull> LiteralNullImpl::getThisLiteralNullPtr() const
-{
-	return m_thisLiteralNullPtr.lock();
-}
-void LiteralNullImpl::setThisLiteralNullPtr(std::weak_ptr<LiteralNull> thisLiteralNullPtr)
-{
-	m_thisLiteralNullPtr = thisLiteralNullPtr;
-	setThisLiteralSpecificationPtr(thisLiteralNullPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> LiteralNullImpl::eContainer() const
 {
 	if(auto wp = m_namespace.lock())
@@ -263,69 +250,6 @@ std::shared_ptr<ecore::EObject> LiteralNullImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any LiteralNullImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-	}
-	return LiteralSpecificationImpl::eGet(featureID, resolve, coreType);
-}
-bool LiteralNullImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-	}
-	return LiteralSpecificationImpl::internalEIsSet(featureID);
-}
-bool LiteralNullImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-	}
-
-	return LiteralSpecificationImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any LiteralNullImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-		
-		// 1995427709
-		case umlPackage::LITERALNULL_OPERATION_ISCOMPUTABLE:
-		{
-			result = eAny(this->isComputable());
-			break;
-		}
-		
-		// 1222543064
-		case umlPackage::LITERALNULL_OPERATION_ISNULL:
-		{
-			result = eAny(this->isNull());
-			break;
-		}
-
-		default:
-		{
-			// call superTypes
-			result = LiteralSpecificationImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -384,12 +308,6 @@ void LiteralNullImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
-	
-	
 }
 
 void LiteralNullImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -404,3 +322,85 @@ void LiteralNullImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> LiteralNullImpl::eStaticClass() const
+{
+	return uml::umlPackage::eInstance()->getLiteralNull_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any LiteralNullImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+	}
+	return LiteralSpecificationImpl::eGet(featureID, resolve, coreType);
+}
+
+bool LiteralNullImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+	}
+	return LiteralSpecificationImpl::internalEIsSet(featureID);
+}
+
+bool LiteralNullImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+	}
+
+	return LiteralSpecificationImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any LiteralNullImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 1995427709
+		case umlPackage::LITERALNULL_OPERATION_ISCOMPUTABLE:
+		{
+			result = eAny(this->isComputable());
+			break;
+		}
+		
+		// 1222543064
+		case umlPackage::LITERALNULL_OPERATION_ISNULL:
+		{
+			result = eAny(this->isNull());
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = LiteralSpecificationImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<LiteralNull> LiteralNullImpl::getThisLiteralNullPtr() const
+{
+	return m_thisLiteralNullPtr.lock();
+}
+void LiteralNullImpl::setThisLiteralNullPtr(std::weak_ptr<LiteralNull> thisLiteralNullPtr)
+{
+	m_thisLiteralNullPtr = thisLiteralNullPtr;
+	setThisLiteralSpecificationPtr(thisLiteralNullPtr);
+}

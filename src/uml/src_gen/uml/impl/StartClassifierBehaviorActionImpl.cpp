@@ -1,3 +1,4 @@
+
 #include "uml/impl/StartClassifierBehaviorActionImpl.hpp"
 
 #ifdef NDEBUG
@@ -26,7 +27,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -34,7 +34,6 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-
 
 #include "uml/Action.hpp"
 #include "uml/Activity.hpp"
@@ -158,15 +157,6 @@ std::shared_ptr<ecore::EObject> StartClassifierBehaviorActionImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> StartClassifierBehaviorActionImpl::eStaticClass() const
-{
-	return uml::umlPackage::eInstance()->getStartClassifierBehaviorAction_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
@@ -183,11 +173,13 @@ bool StartClassifierBehaviorActionImpl::type_has_classifier(Any diagnostics,std:
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference object
-*/
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference object */
 std::shared_ptr<uml::InputPin> StartClassifierBehaviorActionImpl::getObject() const
 {
     return m_object;
@@ -197,7 +189,6 @@ void StartClassifierBehaviorActionImpl::setObject(std::shared_ptr<uml::InputPin>
     m_object = _object;
 	
 }
-
 
 //*********************************
 // Union Getter
@@ -272,18 +263,9 @@ std::shared_ptr<Union<uml::RedefinableElement>> StartClassifierBehaviorActionImp
 	return m_redefinedElement;
 }
 
-
-
-
-std::shared_ptr<StartClassifierBehaviorAction> StartClassifierBehaviorActionImpl::getThisStartClassifierBehaviorActionPtr() const
-{
-	return m_thisStartClassifierBehaviorActionPtr.lock();
-}
-void StartClassifierBehaviorActionImpl::setThisStartClassifierBehaviorActionPtr(std::weak_ptr<StartClassifierBehaviorAction> thisStartClassifierBehaviorActionPtr)
-{
-	m_thisStartClassifierBehaviorActionPtr = thisStartClassifierBehaviorActionPtr;
-	setThisActionPtr(thisStartClassifierBehaviorActionPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> StartClassifierBehaviorActionImpl::eContainer() const
 {
 	if(auto wp = m_activity.lock())
@@ -306,104 +288,6 @@ std::shared_ptr<ecore::EObject> StartClassifierBehaviorActionImpl::eContainer() 
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any StartClassifierBehaviorActionImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::STARTCLASSIFIERBEHAVIORACTION_ATTRIBUTE_OBJECT:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getObject();
-				return eAny(returnValue); //21827
-			}
-	}
-	return ActionImpl::eGet(featureID, resolve, coreType);
-}
-bool StartClassifierBehaviorActionImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::STARTCLASSIFIERBEHAVIORACTION_ATTRIBUTE_OBJECT:
-			return getObject() != nullptr; //21827
-	}
-	return ActionImpl::internalEIsSet(featureID);
-}
-bool StartClassifierBehaviorActionImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::STARTCLASSIFIERBEHAVIORACTION_ATTRIBUTE_OBJECT:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::InputPin> _object = std::dynamic_pointer_cast<uml::InputPin>(_temp);
-			setObject(_object); //21827
-			return true;
-		}
-	}
-
-	return ActionImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any StartClassifierBehaviorActionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-		
-		// 1094899512
-		case umlPackage::STARTCLASSIFIERBEHAVIORACTION_OPERATION_MULTIPLICITY_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->multiplicity(incoming_param_diagnostics,incoming_param_context));
-			break;
-		}
-		
-		// 1109650331
-		case umlPackage::STARTCLASSIFIERBEHAVIORACTION_OPERATION_TYPE_HAS_CLASSIFIER_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->type_has_classifier(incoming_param_diagnostics,incoming_param_context));
-			break;
-		}
-
-		default:
-		{
-			// call superTypes
-			result = ActionImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -484,13 +368,6 @@ void StartClassifierBehaviorActionImpl::save(std::shared_ptr<persistence::interf
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
-	
-	
-	
 }
 
 void StartClassifierBehaviorActionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -511,3 +388,120 @@ void StartClassifierBehaviorActionImpl::saveContent(std::shared_ptr<persistence:
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> StartClassifierBehaviorActionImpl::eStaticClass() const
+{
+	return uml::umlPackage::eInstance()->getStartClassifierBehaviorAction_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any StartClassifierBehaviorActionImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::STARTCLASSIFIERBEHAVIORACTION_ATTRIBUTE_OBJECT:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getObject();
+				return eAny(returnValue); //21827
+			}
+	}
+	return ActionImpl::eGet(featureID, resolve, coreType);
+}
+
+bool StartClassifierBehaviorActionImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::STARTCLASSIFIERBEHAVIORACTION_ATTRIBUTE_OBJECT:
+			return getObject() != nullptr; //21827
+	}
+	return ActionImpl::internalEIsSet(featureID);
+}
+
+bool StartClassifierBehaviorActionImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::STARTCLASSIFIERBEHAVIORACTION_ATTRIBUTE_OBJECT:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::InputPin> _object = std::dynamic_pointer_cast<uml::InputPin>(_temp);
+			setObject(_object); //21827
+			return true;
+		}
+	}
+
+	return ActionImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any StartClassifierBehaviorActionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 1094899512
+		case umlPackage::STARTCLASSIFIERBEHAVIORACTION_OPERATION_MULTIPLICITY_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->multiplicity(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+		
+		// 1109650331
+		case umlPackage::STARTCLASSIFIERBEHAVIORACTION_OPERATION_TYPE_HAS_CLASSIFIER_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->type_has_classifier(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = ActionImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<StartClassifierBehaviorAction> StartClassifierBehaviorActionImpl::getThisStartClassifierBehaviorActionPtr() const
+{
+	return m_thisStartClassifierBehaviorActionPtr.lock();
+}
+void StartClassifierBehaviorActionImpl::setThisStartClassifierBehaviorActionPtr(std::weak_ptr<StartClassifierBehaviorAction> thisStartClassifierBehaviorActionPtr)
+{
+	m_thisStartClassifierBehaviorActionPtr = thisStartClassifierBehaviorActionPtr;
+	setThisActionPtr(thisStartClassifierBehaviorActionPtr);
+}

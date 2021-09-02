@@ -1,3 +1,4 @@
+
 #include "uml/impl/PackageableElementImpl.hpp"
 
 #ifdef NDEBUG
@@ -26,7 +27,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -34,7 +34,6 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-
 
 #include "uml/Comment.hpp"
 #include "uml/Dependency.hpp"
@@ -144,15 +143,6 @@ std::shared_ptr<ecore::EObject> PackageableElementImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> PackageableElementImpl::eStaticClass() const
-{
-	return uml::umlPackage::eInstance()->getPackageableElement_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
@@ -163,11 +153,13 @@ bool PackageableElementImpl::namespace_needs_visibility(Any diagnostics,std::sha
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference owningPackage
-*/
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference owningPackage */
 std::weak_ptr<uml::Package> PackageableElementImpl::getOwningPackage() const
 {
     return m_owningPackage;
@@ -177,7 +169,6 @@ void PackageableElementImpl::setOwningPackage(std::weak_ptr<uml::Package> _ownin
     m_owningPackage = _owningPackage;
 	
 }
-
 
 //*********************************
 // Union Getter
@@ -209,17 +200,9 @@ std::weak_ptr<uml::Element> PackageableElementImpl::getOwner() const
 
 
 
-
-std::shared_ptr<PackageableElement> PackageableElementImpl::getThisPackageableElementPtr() const
-{
-	return m_thisPackageableElementPtr.lock();
-}
-void PackageableElementImpl::setThisPackageableElementPtr(std::weak_ptr<PackageableElement> thisPackageableElementPtr)
-{
-	m_thisPackageableElementPtr = thisPackageableElementPtr;
-	setThisNamedElementPtr(thisPackageableElementPtr);
-	setThisParameterableElementPtr(thisPackageableElementPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> PackageableElementImpl::eContainer() const
 {
 	if(auto wp = m_namespace.lock())
@@ -242,111 +225,6 @@ std::shared_ptr<ecore::EObject> PackageableElementImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any PackageableElementImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getOwningPackage().lock();
-				return eAny(returnValue); //17311
-			}
-	}
-	Any result;
-	result = NamedElementImpl::eGet(featureID, resolve, coreType);
-	if (result != nullptr && !result->isEmpty())
-	{
-		return result;
-	}
-	result = ParameterableElementImpl::eGet(featureID, resolve, coreType);
-	return result;
-}
-bool PackageableElementImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE:
-			return getOwningPackage().lock() != nullptr; //17311
-	}
-	bool result = false;
-	result = NamedElementImpl::internalEIsSet(featureID);
-	if (result)
-	{
-		return result;
-	}
-	result = ParameterableElementImpl::internalEIsSet(featureID);
-	return result;
-}
-bool PackageableElementImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::Package> _owningPackage = std::dynamic_pointer_cast<uml::Package>(_temp);
-			setOwningPackage(_owningPackage); //17311
-			return true;
-		}
-	}
-
-	bool result = false;
-	result = NamedElementImpl::eSet(featureID, newValue);
-	if (result)
-	{
-		return result;
-	}
-	result = ParameterableElementImpl::eSet(featureID, newValue);
-	return result;
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any PackageableElementImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-		
-		// 911284147
-		case umlPackage::PACKAGEABLEELEMENT_OPERATION_NAMESPACE_NEEDS_VISIBILITY_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->namespace_needs_visibility(incoming_param_diagnostics,incoming_param_context));
-			break;
-		}
-
-		default:
-		{
-			// call superTypes
-			result = ParameterableElementImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			result = NamedElementImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -415,9 +293,6 @@ void PackageableElementImpl::save(std::shared_ptr<persistence::interfaces::XSave
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
 }
 
 void PackageableElementImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -432,3 +307,128 @@ void PackageableElementImpl::saveContent(std::shared_ptr<persistence::interfaces
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> PackageableElementImpl::eStaticClass() const
+{
+	return uml::umlPackage::eInstance()->getPackageableElement_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any PackageableElementImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getOwningPackage().lock();
+				return eAny(returnValue); //17311
+			}
+	}
+	Any result;
+	result = NamedElementImpl::eGet(featureID, resolve, coreType);
+	if (result != nullptr && !result->isEmpty())
+	{
+		return result;
+	}
+	result = ParameterableElementImpl::eGet(featureID, resolve, coreType);
+	return result;
+}
+
+bool PackageableElementImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE:
+			return getOwningPackage().lock() != nullptr; //17311
+	}
+	bool result = false;
+	result = NamedElementImpl::internalEIsSet(featureID);
+	if (result)
+	{
+		return result;
+	}
+	result = ParameterableElementImpl::internalEIsSet(featureID);
+	return result;
+}
+
+bool PackageableElementImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::Package> _owningPackage = std::dynamic_pointer_cast<uml::Package>(_temp);
+			setOwningPackage(_owningPackage); //17311
+			return true;
+		}
+	}
+
+	bool result = false;
+	result = NamedElementImpl::eSet(featureID, newValue);
+	if (result)
+	{
+		return result;
+	}
+	result = ParameterableElementImpl::eSet(featureID, newValue);
+	return result;
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any PackageableElementImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 911284147
+		case umlPackage::PACKAGEABLEELEMENT_OPERATION_NAMESPACE_NEEDS_VISIBILITY_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->namespace_needs_visibility(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = ParameterableElementImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			result = NamedElementImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<PackageableElement> PackageableElementImpl::getThisPackageableElementPtr() const
+{
+	return m_thisPackageableElementPtr.lock();
+}
+void PackageableElementImpl::setThisPackageableElementPtr(std::weak_ptr<PackageableElement> thisPackageableElementPtr)
+{
+	m_thisPackageableElementPtr = thisPackageableElementPtr;
+	setThisNamedElementPtr(thisPackageableElementPtr);
+	setThisParameterableElementPtr(thisPackageableElementPtr);
+}

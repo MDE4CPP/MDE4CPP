@@ -1,3 +1,4 @@
+
 #include "uml/impl/StateMachineImpl.hpp"
 
 #ifdef NDEBUG
@@ -26,7 +27,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -34,7 +34,6 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-
 
 #include "uml/Behavior.hpp"
 #include "uml/BehavioralFeature.hpp"
@@ -269,15 +268,6 @@ std::shared_ptr<ecore::EObject> StateMachineImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> StateMachineImpl::eStaticClass() const
-{
-	return uml::umlPackage::eInstance()->getStateMachine_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
@@ -324,11 +314,13 @@ bool StateMachineImpl::method(Any diagnostics,std::shared_ptr<std::map < Any, An
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference connectionPoint
-*/
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference connectionPoint */
 std::shared_ptr<Subset<uml::Pseudostate, uml::NamedElement>> StateMachineImpl::getConnectionPoint() const
 {
 	if(m_connectionPoint == nullptr)
@@ -349,11 +341,7 @@ std::shared_ptr<Subset<uml::Pseudostate, uml::NamedElement>> StateMachineImpl::g
     return m_connectionPoint;
 }
 
-
-
-/*
-Getter & Setter for reference extendedStateMachine
-*/
+/* Getter & Setter for reference extendedStateMachine */
 std::shared_ptr<Bag<uml::StateMachine>> StateMachineImpl::getExtendedStateMachine() const
 {
 	//Cast conversion from redefined container reference Behavior::redefinedBehavior 
@@ -375,11 +363,7 @@ std::shared_ptr<Bag<uml::StateMachine>> StateMachineImpl::getExtendedStateMachin
 	return extendedStateMachine;
 }
 
-
-
-/*
-Getter & Setter for reference region
-*/
+/* Getter & Setter for reference region */
 std::shared_ptr<Subset<uml::Region, uml::NamedElement>> StateMachineImpl::getRegion() const
 {
 	if(m_region == nullptr)
@@ -400,11 +384,7 @@ std::shared_ptr<Subset<uml::Region, uml::NamedElement>> StateMachineImpl::getReg
     return m_region;
 }
 
-
-
-/*
-Getter & Setter for reference submachineState
-*/
+/* Getter & Setter for reference submachineState */
 std::shared_ptr<Bag<uml::State>> StateMachineImpl::getSubmachineState() const
 {
 	if(m_submachineState == nullptr)
@@ -415,8 +395,6 @@ std::shared_ptr<Bag<uml::State>> StateMachineImpl::getSubmachineState() const
 	}
     return m_submachineState;
 }
-
-
 
 //*********************************
 // Union Getter
@@ -573,16 +551,9 @@ std::shared_ptr<SubsetUnion<uml::ConnectableElement, uml::NamedElement>> StateMa
 
 
 
-
-std::shared_ptr<StateMachine> StateMachineImpl::getThisStateMachinePtr() const
-{
-	return m_thisStateMachinePtr.lock();
-}
-void StateMachineImpl::setThisStateMachinePtr(std::weak_ptr<StateMachine> thisStateMachinePtr)
-{
-	m_thisStateMachinePtr = thisStateMachinePtr;
-	setThisBehaviorPtr(thisStateMachinePtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> StateMachineImpl::eContainer() const
 {
 	if(auto wp = m_behavioredClassifier.lock())
@@ -615,374 +586,6 @@ std::shared_ptr<ecore::EObject> StateMachineImpl::eContainer() const
 	}
 
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any StateMachineImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::STATEMACHINE_ATTRIBUTE_CONNECTIONPOINT:
-		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Pseudostate>::iterator iter = getConnectionPoint()->begin();
-			Bag<uml::Pseudostate>::iterator end = getConnectionPoint()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //22262			
-		}
-		case uml::umlPackage::STATEMACHINE_ATTRIBUTE_EXTENDEDSTATEMACHINE:
-		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::StateMachine>::iterator iter = getExtendedStateMachine()->begin();
-			Bag<uml::StateMachine>::iterator end = getExtendedStateMachine()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //22265			
-		}
-		case uml::umlPackage::STATEMACHINE_ATTRIBUTE_REGION:
-		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Region>::iterator iter = getRegion()->begin();
-			Bag<uml::Region>::iterator end = getRegion()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //22264			
-		}
-		case uml::umlPackage::STATEMACHINE_ATTRIBUTE_SUBMACHINESTATE:
-		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::State>::iterator iter = getSubmachineState()->begin();
-			Bag<uml::State>::iterator end = getSubmachineState()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //22263			
-		}
-	}
-	return BehaviorImpl::eGet(featureID, resolve, coreType);
-}
-bool StateMachineImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::STATEMACHINE_ATTRIBUTE_CONNECTIONPOINT:
-			return getConnectionPoint() != nullptr; //22262
-		case uml::umlPackage::STATEMACHINE_ATTRIBUTE_EXTENDEDSTATEMACHINE:
-			return getExtendedStateMachine() != nullptr; //22265
-		case uml::umlPackage::STATEMACHINE_ATTRIBUTE_REGION:
-			return getRegion() != nullptr; //22264
-		case uml::umlPackage::STATEMACHINE_ATTRIBUTE_SUBMACHINESTATE:
-			return getSubmachineState() != nullptr; //22263
-	}
-	return BehaviorImpl::internalEIsSet(featureID);
-}
-bool StateMachineImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::STATEMACHINE_ATTRIBUTE_CONNECTIONPOINT:
-		{
-			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::Pseudostate>> connectionPointList(new Bag<uml::Pseudostate>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
-			{
-				connectionPointList->add(std::dynamic_pointer_cast<uml::Pseudostate>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::Pseudostate>::iterator iterConnectionPoint = getConnectionPoint()->begin();
-			Bag<uml::Pseudostate>::iterator endConnectionPoint = getConnectionPoint()->end();
-			while (iterConnectionPoint != endConnectionPoint)
-			{
-				if (connectionPointList->find(*iterConnectionPoint) == -1)
-				{
-					getConnectionPoint()->erase(*iterConnectionPoint);
-				}
-				iterConnectionPoint++;
-			}
- 
-			iterConnectionPoint = connectionPointList->begin();
-			endConnectionPoint = connectionPointList->end();
-			while (iterConnectionPoint != endConnectionPoint)
-			{
-				if (getConnectionPoint()->find(*iterConnectionPoint) == -1)
-				{
-					getConnectionPoint()->add(*iterConnectionPoint);
-				}
-				iterConnectionPoint++;			
-			}
-			return true;
-		}
-		case uml::umlPackage::STATEMACHINE_ATTRIBUTE_EXTENDEDSTATEMACHINE:
-		{
-			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::StateMachine>> extendedStateMachineList(new Bag<uml::StateMachine>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
-			{
-				extendedStateMachineList->add(std::dynamic_pointer_cast<uml::StateMachine>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::StateMachine>::iterator iterExtendedStateMachine = getExtendedStateMachine()->begin();
-			Bag<uml::StateMachine>::iterator endExtendedStateMachine = getExtendedStateMachine()->end();
-			while (iterExtendedStateMachine != endExtendedStateMachine)
-			{
-				if (extendedStateMachineList->find(*iterExtendedStateMachine) == -1)
-				{
-					getExtendedStateMachine()->erase(*iterExtendedStateMachine);
-				}
-				iterExtendedStateMachine++;
-			}
- 
-			iterExtendedStateMachine = extendedStateMachineList->begin();
-			endExtendedStateMachine = extendedStateMachineList->end();
-			while (iterExtendedStateMachine != endExtendedStateMachine)
-			{
-				if (getExtendedStateMachine()->find(*iterExtendedStateMachine) == -1)
-				{
-					getExtendedStateMachine()->add(*iterExtendedStateMachine);
-				}
-				iterExtendedStateMachine++;			
-			}
-			return true;
-		}
-		case uml::umlPackage::STATEMACHINE_ATTRIBUTE_REGION:
-		{
-			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::Region>> regionList(new Bag<uml::Region>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
-			{
-				regionList->add(std::dynamic_pointer_cast<uml::Region>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::Region>::iterator iterRegion = getRegion()->begin();
-			Bag<uml::Region>::iterator endRegion = getRegion()->end();
-			while (iterRegion != endRegion)
-			{
-				if (regionList->find(*iterRegion) == -1)
-				{
-					getRegion()->erase(*iterRegion);
-				}
-				iterRegion++;
-			}
- 
-			iterRegion = regionList->begin();
-			endRegion = regionList->end();
-			while (iterRegion != endRegion)
-			{
-				if (getRegion()->find(*iterRegion) == -1)
-				{
-					getRegion()->add(*iterRegion);
-				}
-				iterRegion++;			
-			}
-			return true;
-		}
-		case uml::umlPackage::STATEMACHINE_ATTRIBUTE_SUBMACHINESTATE:
-		{
-			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::State>> submachineStateList(new Bag<uml::State>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
-			{
-				submachineStateList->add(std::dynamic_pointer_cast<uml::State>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::State>::iterator iterSubmachineState = getSubmachineState()->begin();
-			Bag<uml::State>::iterator endSubmachineState = getSubmachineState()->end();
-			while (iterSubmachineState != endSubmachineState)
-			{
-				if (submachineStateList->find(*iterSubmachineState) == -1)
-				{
-					getSubmachineState()->erase(*iterSubmachineState);
-				}
-				iterSubmachineState++;
-			}
- 
-			iterSubmachineState = submachineStateList->begin();
-			endSubmachineState = submachineStateList->end();
-			while (iterSubmachineState != endSubmachineState)
-			{
-				if (getSubmachineState()->find(*iterSubmachineState) == -1)
-				{
-					getSubmachineState()->add(*iterSubmachineState);
-				}
-				iterSubmachineState++;			
-			}
-			return true;
-		}
-	}
-
-	return BehaviorImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any StateMachineImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-		
-		// 475472255
-		case umlPackage::STATEMACHINE_OPERATION_LCA_VERTEX_VERTEX:
-		{
-			//Retrieve input parameter 's1'
-			//parameter 0
-			std::shared_ptr<uml::Vertex> incoming_param_s1;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_s1_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_s1 = (*incoming_param_s1_arguments_citer)->get()->get<std::shared_ptr<uml::Vertex> >();
-			//Retrieve input parameter 's2'
-			//parameter 1
-			std::shared_ptr<uml::Vertex> incoming_param_s2;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_s2_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_s2 = (*incoming_param_s2_arguments_citer)->get()->get<std::shared_ptr<uml::Vertex> >();
-			result = eAny(this->LCA(incoming_param_s1,incoming_param_s2));
-			break;
-		}
-		
-		// 296092779
-		case umlPackage::STATEMACHINE_OPERATION_LCASTATE_VERTEX_VERTEX:
-		{
-			//Retrieve input parameter 'v1'
-			//parameter 0
-			std::shared_ptr<uml::Vertex> incoming_param_v1;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_v1_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_v1 = (*incoming_param_v1_arguments_citer)->get()->get<std::shared_ptr<uml::Vertex> >();
-			//Retrieve input parameter 'v2'
-			//parameter 1
-			std::shared_ptr<uml::Vertex> incoming_param_v2;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_v2_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_v2 = (*incoming_param_v2_arguments_citer)->get()->get<std::shared_ptr<uml::Vertex> >();
-			result = eAny(this->LCAState(incoming_param_v1,incoming_param_v2));
-			break;
-		}
-		
-		// 235532453
-		case umlPackage::STATEMACHINE_OPERATION_ANCESTOR_VERTEX_VERTEX:
-		{
-			//Retrieve input parameter 's1'
-			//parameter 0
-			std::shared_ptr<uml::Vertex> incoming_param_s1;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_s1_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_s1 = (*incoming_param_s1_arguments_citer)->get()->get<std::shared_ptr<uml::Vertex> >();
-			//Retrieve input parameter 's2'
-			//parameter 1
-			std::shared_ptr<uml::Vertex> incoming_param_s2;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_s2_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_s2 = (*incoming_param_s2_arguments_citer)->get()->get<std::shared_ptr<uml::Vertex> >();
-			result = eAny(this->ancestor(incoming_param_s1,incoming_param_s2));
-			break;
-		}
-		
-		// 2045587773
-		case umlPackage::STATEMACHINE_OPERATION_CLASSIFIER_CONTEXT_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->classifier_context(incoming_param_diagnostics,incoming_param_context));
-			break;
-		}
-		
-		// 378768249
-		case umlPackage::STATEMACHINE_OPERATION_CONNECTION_POINTS_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->connection_points(incoming_param_diagnostics,incoming_param_context));
-			break;
-		}
-		
-		// 1332478160
-		case umlPackage::STATEMACHINE_OPERATION_CONTEXT_CLASSIFIER_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->context_classifier(incoming_param_diagnostics,incoming_param_context));
-			break;
-		}
-		
-		// 1154910431
-		case umlPackage::STATEMACHINE_OPERATION_METHOD_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->method(incoming_param_diagnostics,incoming_param_context));
-			break;
-		}
-
-		default:
-		{
-			// call superTypes
-			result = BehaviorImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -1142,16 +745,6 @@ void StateMachineImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandle
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 }
 
 void StateMachineImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -1180,3 +773,390 @@ void StateMachineImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> StateMachineImpl::eStaticClass() const
+{
+	return uml::umlPackage::eInstance()->getStateMachine_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any StateMachineImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::STATEMACHINE_ATTRIBUTE_CONNECTIONPOINT:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Pseudostate>::iterator iter = getConnectionPoint()->begin();
+			Bag<uml::Pseudostate>::iterator end = getConnectionPoint()->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //22262			
+		}
+		case uml::umlPackage::STATEMACHINE_ATTRIBUTE_EXTENDEDSTATEMACHINE:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::StateMachine>::iterator iter = getExtendedStateMachine()->begin();
+			Bag<uml::StateMachine>::iterator end = getExtendedStateMachine()->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //22265			
+		}
+		case uml::umlPackage::STATEMACHINE_ATTRIBUTE_REGION:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Region>::iterator iter = getRegion()->begin();
+			Bag<uml::Region>::iterator end = getRegion()->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //22264			
+		}
+		case uml::umlPackage::STATEMACHINE_ATTRIBUTE_SUBMACHINESTATE:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::State>::iterator iter = getSubmachineState()->begin();
+			Bag<uml::State>::iterator end = getSubmachineState()->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //22263			
+		}
+	}
+	return BehaviorImpl::eGet(featureID, resolve, coreType);
+}
+
+bool StateMachineImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::STATEMACHINE_ATTRIBUTE_CONNECTIONPOINT:
+			return getConnectionPoint() != nullptr; //22262
+		case uml::umlPackage::STATEMACHINE_ATTRIBUTE_EXTENDEDSTATEMACHINE:
+			return getExtendedStateMachine() != nullptr; //22265
+		case uml::umlPackage::STATEMACHINE_ATTRIBUTE_REGION:
+			return getRegion() != nullptr; //22264
+		case uml::umlPackage::STATEMACHINE_ATTRIBUTE_SUBMACHINESTATE:
+			return getSubmachineState() != nullptr; //22263
+	}
+	return BehaviorImpl::internalEIsSet(featureID);
+}
+
+bool StateMachineImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::STATEMACHINE_ATTRIBUTE_CONNECTIONPOINT:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::Pseudostate>> connectionPointList(new Bag<uml::Pseudostate>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				connectionPointList->add(std::dynamic_pointer_cast<uml::Pseudostate>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::Pseudostate>::iterator iterConnectionPoint = getConnectionPoint()->begin();
+			Bag<uml::Pseudostate>::iterator endConnectionPoint = getConnectionPoint()->end();
+			while (iterConnectionPoint != endConnectionPoint)
+			{
+				if (connectionPointList->find(*iterConnectionPoint) == -1)
+				{
+					getConnectionPoint()->erase(*iterConnectionPoint);
+				}
+				iterConnectionPoint++;
+			}
+ 
+			iterConnectionPoint = connectionPointList->begin();
+			endConnectionPoint = connectionPointList->end();
+			while (iterConnectionPoint != endConnectionPoint)
+			{
+				if (getConnectionPoint()->find(*iterConnectionPoint) == -1)
+				{
+					getConnectionPoint()->add(*iterConnectionPoint);
+				}
+				iterConnectionPoint++;			
+			}
+			return true;
+		}
+		case uml::umlPackage::STATEMACHINE_ATTRIBUTE_EXTENDEDSTATEMACHINE:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::StateMachine>> extendedStateMachineList(new Bag<uml::StateMachine>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				extendedStateMachineList->add(std::dynamic_pointer_cast<uml::StateMachine>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::StateMachine>::iterator iterExtendedStateMachine = getExtendedStateMachine()->begin();
+			Bag<uml::StateMachine>::iterator endExtendedStateMachine = getExtendedStateMachine()->end();
+			while (iterExtendedStateMachine != endExtendedStateMachine)
+			{
+				if (extendedStateMachineList->find(*iterExtendedStateMachine) == -1)
+				{
+					getExtendedStateMachine()->erase(*iterExtendedStateMachine);
+				}
+				iterExtendedStateMachine++;
+			}
+ 
+			iterExtendedStateMachine = extendedStateMachineList->begin();
+			endExtendedStateMachine = extendedStateMachineList->end();
+			while (iterExtendedStateMachine != endExtendedStateMachine)
+			{
+				if (getExtendedStateMachine()->find(*iterExtendedStateMachine) == -1)
+				{
+					getExtendedStateMachine()->add(*iterExtendedStateMachine);
+				}
+				iterExtendedStateMachine++;			
+			}
+			return true;
+		}
+		case uml::umlPackage::STATEMACHINE_ATTRIBUTE_REGION:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::Region>> regionList(new Bag<uml::Region>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				regionList->add(std::dynamic_pointer_cast<uml::Region>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::Region>::iterator iterRegion = getRegion()->begin();
+			Bag<uml::Region>::iterator endRegion = getRegion()->end();
+			while (iterRegion != endRegion)
+			{
+				if (regionList->find(*iterRegion) == -1)
+				{
+					getRegion()->erase(*iterRegion);
+				}
+				iterRegion++;
+			}
+ 
+			iterRegion = regionList->begin();
+			endRegion = regionList->end();
+			while (iterRegion != endRegion)
+			{
+				if (getRegion()->find(*iterRegion) == -1)
+				{
+					getRegion()->add(*iterRegion);
+				}
+				iterRegion++;			
+			}
+			return true;
+		}
+		case uml::umlPackage::STATEMACHINE_ATTRIBUTE_SUBMACHINESTATE:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::State>> submachineStateList(new Bag<uml::State>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				submachineStateList->add(std::dynamic_pointer_cast<uml::State>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::State>::iterator iterSubmachineState = getSubmachineState()->begin();
+			Bag<uml::State>::iterator endSubmachineState = getSubmachineState()->end();
+			while (iterSubmachineState != endSubmachineState)
+			{
+				if (submachineStateList->find(*iterSubmachineState) == -1)
+				{
+					getSubmachineState()->erase(*iterSubmachineState);
+				}
+				iterSubmachineState++;
+			}
+ 
+			iterSubmachineState = submachineStateList->begin();
+			endSubmachineState = submachineStateList->end();
+			while (iterSubmachineState != endSubmachineState)
+			{
+				if (getSubmachineState()->find(*iterSubmachineState) == -1)
+				{
+					getSubmachineState()->add(*iterSubmachineState);
+				}
+				iterSubmachineState++;			
+			}
+			return true;
+		}
+	}
+
+	return BehaviorImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any StateMachineImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 475472255
+		case umlPackage::STATEMACHINE_OPERATION_LCA_VERTEX_VERTEX:
+		{
+			//Retrieve input parameter 's1'
+			//parameter 0
+			std::shared_ptr<uml::Vertex> incoming_param_s1;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_s1_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_s1 = (*incoming_param_s1_arguments_citer)->get()->get<std::shared_ptr<uml::Vertex> >();
+			//Retrieve input parameter 's2'
+			//parameter 1
+			std::shared_ptr<uml::Vertex> incoming_param_s2;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_s2_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_s2 = (*incoming_param_s2_arguments_citer)->get()->get<std::shared_ptr<uml::Vertex> >();
+			result = eAny(this->LCA(incoming_param_s1,incoming_param_s2));
+			break;
+		}
+		
+		// 296092779
+		case umlPackage::STATEMACHINE_OPERATION_LCASTATE_VERTEX_VERTEX:
+		{
+			//Retrieve input parameter 'v1'
+			//parameter 0
+			std::shared_ptr<uml::Vertex> incoming_param_v1;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_v1_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_v1 = (*incoming_param_v1_arguments_citer)->get()->get<std::shared_ptr<uml::Vertex> >();
+			//Retrieve input parameter 'v2'
+			//parameter 1
+			std::shared_ptr<uml::Vertex> incoming_param_v2;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_v2_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_v2 = (*incoming_param_v2_arguments_citer)->get()->get<std::shared_ptr<uml::Vertex> >();
+			result = eAny(this->LCAState(incoming_param_v1,incoming_param_v2));
+			break;
+		}
+		
+		// 235532453
+		case umlPackage::STATEMACHINE_OPERATION_ANCESTOR_VERTEX_VERTEX:
+		{
+			//Retrieve input parameter 's1'
+			//parameter 0
+			std::shared_ptr<uml::Vertex> incoming_param_s1;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_s1_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_s1 = (*incoming_param_s1_arguments_citer)->get()->get<std::shared_ptr<uml::Vertex> >();
+			//Retrieve input parameter 's2'
+			//parameter 1
+			std::shared_ptr<uml::Vertex> incoming_param_s2;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_s2_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_s2 = (*incoming_param_s2_arguments_citer)->get()->get<std::shared_ptr<uml::Vertex> >();
+			result = eAny(this->ancestor(incoming_param_s1,incoming_param_s2));
+			break;
+		}
+		
+		// 2045587773
+		case umlPackage::STATEMACHINE_OPERATION_CLASSIFIER_CONTEXT_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->classifier_context(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+		
+		// 378768249
+		case umlPackage::STATEMACHINE_OPERATION_CONNECTION_POINTS_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->connection_points(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+		
+		// 1332478160
+		case umlPackage::STATEMACHINE_OPERATION_CONTEXT_CLASSIFIER_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->context_classifier(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+		
+		// 1154910431
+		case umlPackage::STATEMACHINE_OPERATION_METHOD_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->method(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = BehaviorImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<StateMachine> StateMachineImpl::getThisStateMachinePtr() const
+{
+	return m_thisStateMachinePtr.lock();
+}
+void StateMachineImpl::setThisStateMachinePtr(std::weak_ptr<StateMachine> thisStateMachinePtr)
+{
+	m_thisStateMachinePtr = thisStateMachinePtr;
+	setThisBehaviorPtr(thisStateMachinePtr);
+}

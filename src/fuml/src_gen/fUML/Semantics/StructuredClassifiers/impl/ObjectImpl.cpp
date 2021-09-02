@@ -1,3 +1,4 @@
+
 #include "fUML/Semantics/StructuredClassifiers/impl/ObjectImpl.hpp"
 
 #ifdef NDEBUG
@@ -43,7 +44,6 @@
 #include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
 #include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
-
 
 #include "uml/Class.hpp"
 #include "uml/Classifier.hpp"
@@ -138,15 +138,6 @@ std::shared_ptr<ecore::EObject> ObjectImpl::copy() const
 	element->setThisObjectPtr(element);
 	return element;
 }
-
-std::shared_ptr<ecore::EClass> ObjectImpl::eStaticClass() const
-{
-	return fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::eInstance()->getObject_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
 
 //*********************************
 // Operations
@@ -261,11 +252,13 @@ void ObjectImpl::unregister(std::shared_ptr<fUML::Semantics::CommonBehavior::Eve
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference objectActivation
-*/
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference objectActivation */
 std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation> ObjectImpl::getObjectActivation() const
 {
     return m_objectActivation;
@@ -276,10 +269,7 @@ void ObjectImpl::setObjectActivation(std::shared_ptr<fUML::Semantics::CommonBeha
 	
 }
 
-
-/*
-Getter & Setter for reference types
-*/
+/* Getter & Setter for reference types */
 std::shared_ptr<Bag<uml::Classifier>> ObjectImpl::getTypes() const
 {
 	if(m_types == nullptr)
@@ -291,30 +281,159 @@ std::shared_ptr<Bag<uml::Classifier>> ObjectImpl::getTypes() const
     return m_types;
 }
 
-
-
 //*********************************
 // Union Getter
 //*********************************
 
-
-
-std::shared_ptr<Object> ObjectImpl::getThisObjectPtr() const
-{
-	return m_thisObjectPtr.lock();
-}
-void ObjectImpl::setThisObjectPtr(std::weak_ptr<Object> thisObjectPtr)
-{
-	m_thisObjectPtr = thisObjectPtr;
-	setThisExtensionalValuePtr(thisObjectPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> ObjectImpl::eContainer() const
 {
 	return nullptr;
 }
 
 //*********************************
-// Structural Feature Getter/Setter
+// Persistence Functions
+//*********************************
+void ObjectImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get fUMLFactory
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
+	}
+}		
+
+void ObjectImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+	try
+	{
+		std::map<std::string, std::string>::const_iterator iter;
+		std::shared_ptr<ecore::EClass> metaClass = this->eClass(); // get MetaClass
+		iter = attr_list.find("types");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("types")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	ExtensionalValueImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void ObjectImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+
+	try
+	{
+		if ( nodeName.compare("objectActivation") == 0 )
+		{
+  			std::string typeName = loadHandler->getCurrentXSITypeName();
+			if (typeName.empty())
+			{
+				typeName = "ObjectActivation";
+			}
+			loadHandler->handleChild(this->getObjectActivation()); 
+
+			return; 
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+	//load BasePackage Nodes
+	ExtensionalValueImpl::loadNode(nodeName, loadHandler);
+}
+
+void ObjectImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+{
+	switch(featureID)
+	{
+		case fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::OBJECT_ATTRIBUTE_TYPES:
+		{
+			std::shared_ptr<Bag<uml::Classifier>> _types = getTypes();
+			for(std::shared_ptr<ecore::EObject> ref : references)
+			{
+				std::shared_ptr<uml::Classifier>  _r = std::dynamic_pointer_cast<uml::Classifier>(ref);
+				if (_r != nullptr)
+				{
+					_types->push_back(_r);
+				}
+			}
+			return;
+		}
+	}
+	ExtensionalValueImpl::resolveReferences(featureID, references);
+}
+
+void ObjectImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	ExtensionalValueImpl::saveContent(saveHandler);
+	
+	fUML::Semantics::SimpleClassifiers::CompoundValueImpl::saveContent(saveHandler);
+	
+	fUML::Semantics::SimpleClassifiers::StructuredValueImpl::saveContent(saveHandler);
+	
+	fUML::Semantics::Values::ValueImpl::saveContent(saveHandler);
+	
+	fUML::Semantics::Loci::SemanticVisitorImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+}
+
+void ObjectImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage> package = fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::eInstance();
+	// Add references
+		saveHandler->addReferences<uml::Classifier>("types", this->getTypes());
+		//
+		// Add new tags (from references)
+		//
+		std::shared_ptr<ecore::EClass> metaClass = this->eClass();
+		// Save 'objectActivation'
+
+		saveHandler->addReference(this->getObjectActivation(), "objectActivation", getObjectActivation()->eClass() != fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance()->getObjectActivation_Class());
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+}
+
+
+std::shared_ptr<ecore::EClass> ObjectImpl::eStaticClass() const
+{
+	return fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::eInstance()->getObject_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
 //*********************************
 Any ObjectImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
@@ -340,6 +459,7 @@ Any ObjectImpl::eGet(int featureID, bool resolve, bool coreType) const
 	}
 	return ExtensionalValueImpl::eGet(featureID, resolve, coreType);
 }
+
 bool ObjectImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
@@ -351,6 +471,7 @@ bool ObjectImpl::internalEIsSet(int featureID) const
 	}
 	return ExtensionalValueImpl::internalEIsSet(featureID);
 }
+
 bool ObjectImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
@@ -405,7 +526,7 @@ bool ObjectImpl::eSet(int featureID, Any newValue)
 }
 
 //*********************************
-// Behavioral Feature
+// EOperation Invoke
 //*********************************
 Any ObjectImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
 {
@@ -525,140 +646,13 @@ Any ObjectImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared
 	return result;
 }
 
-//*********************************
-// Persistence Functions
-//*********************************
-void ObjectImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+
+std::shared_ptr<Object> ObjectImpl::getThisObjectPtr() const
 {
-	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
-	loadAttributes(loadHandler, attr_list);
-
-	//
-	// Create new objects (from references (containment == true))
-	//
-	// get fUMLFactory
-	int numNodes = loadHandler->getNumOfChildNodes();
-	for(int ii = 0; ii < numNodes; ii++)
-	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler);
-	}
-}		
-
-void ObjectImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
-{
-	try
-	{
-		std::map<std::string, std::string>::const_iterator iter;
-		std::shared_ptr<ecore::EClass> metaClass = this->eClass(); // get MetaClass
-		iter = attr_list.find("types");
-		if ( iter != attr_list.end() )
-		{
-			// add unresolvedReference to loadHandler's list
-			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("types")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
-		}
-	}
-	catch (std::exception& e)
-	{
-		std::cout << "| ERROR    | " << e.what() << std::endl;
-	}
-	catch (...) 
-	{
-		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
-	}
-
-	ExtensionalValueImpl::loadAttributes(loadHandler, attr_list);
+	return m_thisObjectPtr.lock();
 }
-
-void ObjectImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+void ObjectImpl::setThisObjectPtr(std::weak_ptr<Object> thisObjectPtr)
 {
-
-	try
-	{
-		if ( nodeName.compare("objectActivation") == 0 )
-		{
-  			std::string typeName = loadHandler->getCurrentXSITypeName();
-			if (typeName.empty())
-			{
-				typeName = "ObjectActivation";
-			}
-			loadHandler->handleChild(this->getObjectActivation()); 
-
-			return; 
-		}
-	}
-	catch (std::exception& e)
-	{
-		std::cout << "| ERROR    | " << e.what() << std::endl;
-	}
-	catch (...) 
-	{
-		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
-	}
-	//load BasePackage Nodes
-	ExtensionalValueImpl::loadNode(nodeName, loadHandler);
+	m_thisObjectPtr = thisObjectPtr;
+	setThisExtensionalValuePtr(thisObjectPtr);
 }
-
-void ObjectImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
-{
-	switch(featureID)
-	{
-		case fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::OBJECT_ATTRIBUTE_TYPES:
-		{
-			std::shared_ptr<Bag<uml::Classifier>> _types = getTypes();
-			for(std::shared_ptr<ecore::EObject> ref : references)
-			{
-				std::shared_ptr<uml::Classifier>  _r = std::dynamic_pointer_cast<uml::Classifier>(ref);
-				if (_r != nullptr)
-				{
-					_types->push_back(_r);
-				}
-			}
-			return;
-		}
-	}
-	ExtensionalValueImpl::resolveReferences(featureID, references);
-}
-
-void ObjectImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
-{
-	saveContent(saveHandler);
-
-	ExtensionalValueImpl::saveContent(saveHandler);
-	
-	fUML::Semantics::SimpleClassifiers::CompoundValueImpl::saveContent(saveHandler);
-	
-	fUML::Semantics::SimpleClassifiers::StructuredValueImpl::saveContent(saveHandler);
-	
-	fUML::Semantics::Values::ValueImpl::saveContent(saveHandler);
-	
-	fUML::Semantics::Loci::SemanticVisitorImpl::saveContent(saveHandler);
-	
-	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
-	
-}
-
-void ObjectImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
-{
-	try
-	{
-		std::shared_ptr<fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage> package = fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::eInstance();
-	// Add references
-		saveHandler->addReferences<uml::Classifier>("types", this->getTypes());
-		//
-		// Add new tags (from references)
-		//
-		std::shared_ptr<ecore::EClass> metaClass = this->eClass();
-		// Save 'objectActivation'
-
-		saveHandler->addReference(this->getObjectActivation(), "objectActivation", getObjectActivation()->eClass() != fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance()->getObjectActivation_Class());
-	}
-	catch (std::exception& e)
-	{
-		std::cout << "| ERROR    | " << e.what() << std::endl;
-	}
-}
-

@@ -1,3 +1,4 @@
+
 #include "uml/impl/ExecutionSpecificationImpl.hpp"
 
 #ifdef NDEBUG
@@ -26,7 +27,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -34,7 +34,6 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-
 
 #include "uml/Comment.hpp"
 #include "uml/Dependency.hpp"
@@ -146,15 +145,6 @@ std::shared_ptr<ecore::EObject> ExecutionSpecificationImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> ExecutionSpecificationImpl::eStaticClass() const
-{
-	return uml::umlPackage::eInstance()->getExecutionSpecification_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
@@ -165,11 +155,13 @@ bool ExecutionSpecificationImpl::same_lifeline(Any diagnostics,std::shared_ptr<s
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference finish
-*/
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference finish */
 std::shared_ptr<uml::OccurrenceSpecification> ExecutionSpecificationImpl::getFinish() const
 {
     return m_finish;
@@ -180,10 +172,7 @@ void ExecutionSpecificationImpl::setFinish(std::shared_ptr<uml::OccurrenceSpecif
 	
 }
 
-
-/*
-Getter & Setter for reference start
-*/
+/* Getter & Setter for reference start */
 std::shared_ptr<uml::OccurrenceSpecification> ExecutionSpecificationImpl::getStart() const
 {
     return m_start;
@@ -193,7 +182,6 @@ void ExecutionSpecificationImpl::setStart(std::shared_ptr<uml::OccurrenceSpecifi
     m_start = _start;
 	
 }
-
 
 //*********************************
 // Union Getter
@@ -223,18 +211,9 @@ std::weak_ptr<uml::Element> ExecutionSpecificationImpl::getOwner() const
 	return m_owner;
 }
 
-
-
-
-std::shared_ptr<ExecutionSpecification> ExecutionSpecificationImpl::getThisExecutionSpecificationPtr() const
-{
-	return m_thisExecutionSpecificationPtr.lock();
-}
-void ExecutionSpecificationImpl::setThisExecutionSpecificationPtr(std::weak_ptr<ExecutionSpecification> thisExecutionSpecificationPtr)
-{
-	m_thisExecutionSpecificationPtr = thisExecutionSpecificationPtr;
-	setThisInteractionFragmentPtr(thisExecutionSpecificationPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> ExecutionSpecificationImpl::eContainer() const
 {
 	if(auto wp = m_enclosingInteraction.lock())
@@ -257,102 +236,6 @@ std::shared_ptr<ecore::EObject> ExecutionSpecificationImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any ExecutionSpecificationImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::EXECUTIONSPECIFICATION_ATTRIBUTE_FINISH:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getFinish();
-				return eAny(returnValue); //9113
-			}
-		case uml::umlPackage::EXECUTIONSPECIFICATION_ATTRIBUTE_START:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getStart();
-				return eAny(returnValue); //9114
-			}
-	}
-	return InteractionFragmentImpl::eGet(featureID, resolve, coreType);
-}
-bool ExecutionSpecificationImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::EXECUTIONSPECIFICATION_ATTRIBUTE_FINISH:
-			return getFinish() != nullptr; //9113
-		case uml::umlPackage::EXECUTIONSPECIFICATION_ATTRIBUTE_START:
-			return getStart() != nullptr; //9114
-	}
-	return InteractionFragmentImpl::internalEIsSet(featureID);
-}
-bool ExecutionSpecificationImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::EXECUTIONSPECIFICATION_ATTRIBUTE_FINISH:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::OccurrenceSpecification> _finish = std::dynamic_pointer_cast<uml::OccurrenceSpecification>(_temp);
-			setFinish(_finish); //9113
-			return true;
-		}
-		case uml::umlPackage::EXECUTIONSPECIFICATION_ATTRIBUTE_START:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::OccurrenceSpecification> _start = std::dynamic_pointer_cast<uml::OccurrenceSpecification>(_temp);
-			setStart(_start); //9114
-			return true;
-		}
-	}
-
-	return InteractionFragmentImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any ExecutionSpecificationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-		
-		// 1601243580
-		case umlPackage::EXECUTIONSPECIFICATION_OPERATION_SAME_LIFELINE_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->same_lifeline(incoming_param_diagnostics,incoming_param_context));
-			break;
-		}
-
-		default:
-		{
-			// call superTypes
-			result = InteractionFragmentImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -457,10 +340,6 @@ void ExecutionSpecificationImpl::save(std::shared_ptr<persistence::interfaces::X
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
 }
 
 void ExecutionSpecificationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -478,3 +357,118 @@ void ExecutionSpecificationImpl::saveContent(std::shared_ptr<persistence::interf
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> ExecutionSpecificationImpl::eStaticClass() const
+{
+	return uml::umlPackage::eInstance()->getExecutionSpecification_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any ExecutionSpecificationImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::EXECUTIONSPECIFICATION_ATTRIBUTE_FINISH:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getFinish();
+				return eAny(returnValue); //9113
+			}
+		case uml::umlPackage::EXECUTIONSPECIFICATION_ATTRIBUTE_START:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getStart();
+				return eAny(returnValue); //9114
+			}
+	}
+	return InteractionFragmentImpl::eGet(featureID, resolve, coreType);
+}
+
+bool ExecutionSpecificationImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::EXECUTIONSPECIFICATION_ATTRIBUTE_FINISH:
+			return getFinish() != nullptr; //9113
+		case uml::umlPackage::EXECUTIONSPECIFICATION_ATTRIBUTE_START:
+			return getStart() != nullptr; //9114
+	}
+	return InteractionFragmentImpl::internalEIsSet(featureID);
+}
+
+bool ExecutionSpecificationImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::EXECUTIONSPECIFICATION_ATTRIBUTE_FINISH:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::OccurrenceSpecification> _finish = std::dynamic_pointer_cast<uml::OccurrenceSpecification>(_temp);
+			setFinish(_finish); //9113
+			return true;
+		}
+		case uml::umlPackage::EXECUTIONSPECIFICATION_ATTRIBUTE_START:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::OccurrenceSpecification> _start = std::dynamic_pointer_cast<uml::OccurrenceSpecification>(_temp);
+			setStart(_start); //9114
+			return true;
+		}
+	}
+
+	return InteractionFragmentImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any ExecutionSpecificationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 1601243580
+		case umlPackage::EXECUTIONSPECIFICATION_OPERATION_SAME_LIFELINE_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->same_lifeline(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = InteractionFragmentImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<ExecutionSpecification> ExecutionSpecificationImpl::getThisExecutionSpecificationPtr() const
+{
+	return m_thisExecutionSpecificationPtr.lock();
+}
+void ExecutionSpecificationImpl::setThisExecutionSpecificationPtr(std::weak_ptr<ExecutionSpecification> thisExecutionSpecificationPtr)
+{
+	m_thisExecutionSpecificationPtr = thisExecutionSpecificationPtr;
+	setThisInteractionFragmentPtr(thisExecutionSpecificationPtr);
+}

@@ -1,3 +1,4 @@
+
 #include "fUML/Semantics/Actions/impl/AcceptCallActionActivationImpl.hpp"
 
 #ifdef NDEBUG
@@ -25,7 +26,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -35,7 +35,6 @@
 #include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "uml/umlFactory.hpp"
-
 
 #include "fUML/Semantics/Actions/AcceptEventActionActivation.hpp"
 #include "fUML/Semantics/Actions/AcceptEventActionEventAccepter.hpp"
@@ -126,15 +125,6 @@ std::shared_ptr<ecore::EObject> AcceptCallActionActivationImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> AcceptCallActionActivationImpl::eStaticClass() const
-{
-	return fUML::Semantics::Actions::ActionsPackage::eInstance()->getAcceptCallActionActivation_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
@@ -145,7 +135,11 @@ void AcceptCallActionActivationImpl::accept(std::shared_ptr<fUML::Semantics::Com
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
+//*********************************
+
+//*********************************
+// Reference Getters & Setters
 //*********************************
 
 //*********************************
@@ -166,18 +160,9 @@ std::shared_ptr<Union<fUML::Semantics::Actions::PinActivation>> AcceptCallAction
 	return m_pinActivation;
 }
 
-
-
-
-std::shared_ptr<AcceptCallActionActivation> AcceptCallActionActivationImpl::getThisAcceptCallActionActivationPtr() const
-{
-	return m_thisAcceptCallActionActivationPtr.lock();
-}
-void AcceptCallActionActivationImpl::setThisAcceptCallActionActivationPtr(std::weak_ptr<AcceptCallActionActivation> thisAcceptCallActionActivationPtr)
-{
-	m_thisAcceptCallActionActivationPtr = thisAcceptCallActionActivationPtr;
-	setThisAcceptEventActionActivationPtr(thisAcceptCallActionActivationPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> AcceptCallActionActivationImpl::eContainer() const
 {
 	if(auto wp = m_group.lock())
@@ -185,67 +170,6 @@ std::shared_ptr<ecore::EObject> AcceptCallActionActivationImpl::eContainer() con
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any AcceptCallActionActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-	}
-	return AcceptEventActionActivationImpl::eGet(featureID, resolve, coreType);
-}
-bool AcceptCallActionActivationImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-	}
-	return AcceptEventActionActivationImpl::internalEIsSet(featureID);
-}
-bool AcceptCallActionActivationImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-	}
-
-	return AcceptEventActionActivationImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any AcceptCallActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-		
-		// 168434213
-		case ActionsPackage::ACCEPTCALLACTIONACTIVATION_OPERATION_ACCEPT_EVENTOCCURRENCE:
-		{
-			//Retrieve input parameter 'eventOccurrence'
-			//parameter 0
-			std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> incoming_param_eventOccurrence;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_eventOccurrence_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_eventOccurrence = (*incoming_param_eventOccurrence_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> >();
-			this->accept(incoming_param_eventOccurrence);
-			break;
-		}
-
-		default:
-		{
-			// call superTypes
-			result = AcceptEventActionActivationImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -298,10 +222,6 @@ void AcceptCallActionActivationImpl::save(std::shared_ptr<persistence::interface
 	fUML::Semantics::Loci::SemanticVisitorImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
 }
 
 void AcceptCallActionActivationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -316,3 +236,83 @@ void AcceptCallActionActivationImpl::saveContent(std::shared_ptr<persistence::in
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> AcceptCallActionActivationImpl::eStaticClass() const
+{
+	return fUML::Semantics::Actions::ActionsPackage::eInstance()->getAcceptCallActionActivation_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any AcceptCallActionActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+	}
+	return AcceptEventActionActivationImpl::eGet(featureID, resolve, coreType);
+}
+
+bool AcceptCallActionActivationImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+	}
+	return AcceptEventActionActivationImpl::internalEIsSet(featureID);
+}
+
+bool AcceptCallActionActivationImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+	}
+
+	return AcceptEventActionActivationImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any AcceptCallActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 168434213
+		case ActionsPackage::ACCEPTCALLACTIONACTIVATION_OPERATION_ACCEPT_EVENTOCCURRENCE:
+		{
+			//Retrieve input parameter 'eventOccurrence'
+			//parameter 0
+			std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> incoming_param_eventOccurrence;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_eventOccurrence_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_eventOccurrence = (*incoming_param_eventOccurrence_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> >();
+			this->accept(incoming_param_eventOccurrence);
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = AcceptEventActionActivationImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<AcceptCallActionActivation> AcceptCallActionActivationImpl::getThisAcceptCallActionActivationPtr() const
+{
+	return m_thisAcceptCallActionActivationPtr.lock();
+}
+void AcceptCallActionActivationImpl::setThisAcceptCallActionActivationPtr(std::weak_ptr<AcceptCallActionActivation> thisAcceptCallActionActivationPtr)
+{
+	m_thisAcceptCallActionActivationPtr = thisAcceptCallActionActivationPtr;
+	setThisAcceptEventActionActivationPtr(thisAcceptCallActionActivationPtr);
+}

@@ -48,7 +48,6 @@ namespace ecore
 // base class includes
 #include "fUML/Semantics/Values/Value.hpp"
 
-// enum includes
 
 
 
@@ -73,55 +72,46 @@ namespace ocl::Values
 			//*********************************
 			// Operations
 			//*********************************
-			 
-			virtual bool equals(std::shared_ptr<fUML::Semantics::Values::Value> otherValue) = 0; 
+			virtual bool equals(std::shared_ptr<fUML::Semantics::Values::Value> otherValue) = 0;
 			virtual std::string toString() = 0;
+
 			//*********************************
-			// Attributes Getter & Setter
+			// Attribute Getters & Setters
 			//*********************************
-			
+
 			//*********************************
-			// References Getter & Setter
+			// Reference Getters & Setters
 			//*********************************
-			
 			virtual std::shared_ptr<Bag<ocl::Values::LocalSnapshot>> getHistory() const = 0;
-			
-			
 			virtual std::shared_ptr<ecore::EObject> getValue() const = 0;
-			
 			virtual void setValue(std::shared_ptr<ecore::EObject>) = 0;
-			
+
+			//*********************************
+			// Union Reference Getters
+			//*********************************
+
+			//*********************************
+			// Container Getter
+			//*********************************
+			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
+
+			//*********************************
+			// Persistence Functions
+			//*********************************
+			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 
 		protected:
 			//*********************************
 			// Attribute Members
 			//*********************************
 			
-			
 			//*********************************
 			// Reference Members
 			//*********************************
-			
 			mutable std::shared_ptr<Bag<ocl::Values::LocalSnapshot>> m_history;
 			std::shared_ptr<ecore::EObject> m_value;
-
-		public:
-			//*********************************
-			// Union Getter
-			//*********************************
-			
-
-			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
-			
-			//*********************************
-			// Persistence Functions
-			//*********************************
-			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
-			
-			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
-			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
-			
 	};
-
 }
 #endif /* end of include guard: OCL_VALUES_OBJECTVALUE_HPP */

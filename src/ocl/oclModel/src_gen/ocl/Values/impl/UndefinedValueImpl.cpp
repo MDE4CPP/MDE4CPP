@@ -1,3 +1,4 @@
+
 #include "ocl/Values/impl/UndefinedValueImpl.hpp"
 
 #ifdef NDEBUG
@@ -32,7 +33,6 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-
 
 #include "fUML/Semantics/Values/Value.hpp"
 
@@ -104,15 +104,6 @@ std::shared_ptr<ecore::EObject> UndefinedValueImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> UndefinedValueImpl::eStaticClass() const
-{
-	return ocl::Values::ValuesPackage::eInstance()->getUndefinedValue_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
@@ -134,95 +125,23 @@ std::string UndefinedValueImpl::toString()
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
+//*********************************
+
+//*********************************
+// Reference Getters & Setters
 //*********************************
 
 //*********************************
 // Union Getter
 //*********************************
 
-
-
-std::shared_ptr<UndefinedValue> UndefinedValueImpl::getThisUndefinedValuePtr() const
-{
-	return m_thisUndefinedValuePtr.lock();
-}
-void UndefinedValueImpl::setThisUndefinedValuePtr(std::weak_ptr<UndefinedValue> thisUndefinedValuePtr)
-{
-	m_thisUndefinedValuePtr = thisUndefinedValuePtr;
-	setThisValuePtr(thisUndefinedValuePtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> UndefinedValueImpl::eContainer() const
 {
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any UndefinedValueImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-	}
-	return fUML::Semantics::Values::ValueImpl::eGet(featureID, resolve, coreType);
-}
-bool UndefinedValueImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-	}
-	return fUML::Semantics::Values::ValueImpl::internalEIsSet(featureID);
-}
-bool UndefinedValueImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-	}
-
-	return fUML::Semantics::Values::ValueImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any UndefinedValueImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-		
-		// 1032526186
-		case ValuesPackage::UNDEFINEDVALUE_OPERATION_EQUALS_VALUE:
-		{
-			//Retrieve input parameter 'otherValue'
-			//parameter 0
-			std::shared_ptr<fUML::Semantics::Values::Value> incoming_param_otherValue;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_otherValue_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_otherValue = (*incoming_param_otherValue_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::Values::Value> >();
-			result = eAny(this->equals(incoming_param_otherValue));
-			break;
-		}
-		
-		// 1847553997
-		case ValuesPackage::UNDEFINEDVALUE_OPERATION_TOSTRING:
-		{
-			result = eAny(this->toString());
-			break;
-		}
-
-		default:
-		{
-			// call superTypes
-			result = fUML::Semantics::Values::ValueImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -271,8 +190,6 @@ void UndefinedValueImpl::save(std::shared_ptr<persistence::interfaces::XSaveHand
 	fUML::Semantics::Loci::SemanticVisitorImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
 }
 
 void UndefinedValueImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -287,3 +204,90 @@ void UndefinedValueImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> UndefinedValueImpl::eStaticClass() const
+{
+	return ocl::Values::ValuesPackage::eInstance()->getUndefinedValue_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any UndefinedValueImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+	}
+	return fUML::Semantics::Values::ValueImpl::eGet(featureID, resolve, coreType);
+}
+
+bool UndefinedValueImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+	}
+	return fUML::Semantics::Values::ValueImpl::internalEIsSet(featureID);
+}
+
+bool UndefinedValueImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+	}
+
+	return fUML::Semantics::Values::ValueImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any UndefinedValueImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 1032526186
+		case ValuesPackage::UNDEFINEDVALUE_OPERATION_EQUALS_VALUE:
+		{
+			//Retrieve input parameter 'otherValue'
+			//parameter 0
+			std::shared_ptr<fUML::Semantics::Values::Value> incoming_param_otherValue;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_otherValue_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_otherValue = (*incoming_param_otherValue_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::Values::Value> >();
+			result = eAny(this->equals(incoming_param_otherValue));
+			break;
+		}
+		
+		// 1847553997
+		case ValuesPackage::UNDEFINEDVALUE_OPERATION_TOSTRING:
+		{
+			result = eAny(this->toString());
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = fUML::Semantics::Values::ValueImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<UndefinedValue> UndefinedValueImpl::getThisUndefinedValuePtr() const
+{
+	return m_thisUndefinedValuePtr.lock();
+}
+void UndefinedValueImpl::setThisUndefinedValuePtr(std::weak_ptr<UndefinedValue> thisUndefinedValuePtr)
+{
+	m_thisUndefinedValuePtr = thisUndefinedValuePtr;
+	setThisValuePtr(thisUndefinedValuePtr);
+}

@@ -1,3 +1,4 @@
+
 #include "uml/impl/AssociationImpl.hpp"
 
 #ifdef NDEBUG
@@ -26,7 +27,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -34,7 +34,6 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-
 
 #include "uml/Classifier.hpp"
 #include "uml/CollaborationUse.hpp"
@@ -302,28 +301,6 @@ std::shared_ptr<ecore::EObject> AssociationImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> AssociationImpl::eStaticClass() const
-{
-	return uml::umlPackage::eInstance()->getAssociation_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-/*
-Getter & Setter for attribute isDerived
-*/
-bool AssociationImpl::getIsDerived() const 
-{
-	return m_isDerived;
-}
-void AssociationImpl::setIsDerived(bool _isDerived)
-{
-	m_isDerived = _isDerived;
-	
-} 
-
-
 //*********************************
 // Operations
 //*********************************
@@ -370,11 +347,23 @@ bool AssociationImpl::specialized_end_types(Any diagnostics,std::shared_ptr<std:
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference endType
-*/
+/* Getter & Setter for attribute isDerived */
+bool AssociationImpl::getIsDerived() const 
+{
+	return m_isDerived;
+}
+void AssociationImpl::setIsDerived(bool _isDerived)
+{
+	m_isDerived = _isDerived;
+	
+}
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference endType */
 std::shared_ptr<Subset<uml::Type, uml::Element>> AssociationImpl::getEndType() const
 {
 	if(m_endType == nullptr)
@@ -395,11 +384,7 @@ std::shared_ptr<Subset<uml::Type, uml::Element>> AssociationImpl::getEndType() c
     return m_endType;
 }
 
-
-
-/*
-Getter & Setter for reference memberEnd
-*/
+/* Getter & Setter for reference memberEnd */
 std::shared_ptr<SubsetUnion<uml::Property, uml::NamedElement>> AssociationImpl::getMemberEnd() const
 {
 	if(m_memberEnd == nullptr)
@@ -420,11 +405,7 @@ std::shared_ptr<SubsetUnion<uml::Property, uml::NamedElement>> AssociationImpl::
     return m_memberEnd;
 }
 
-
-
-/*
-Getter & Setter for reference navigableOwnedEnd
-*/
+/* Getter & Setter for reference navigableOwnedEnd */
 std::shared_ptr<Subset<uml::Property, uml::Property /*Subset does not reference a union*/>> AssociationImpl::getNavigableOwnedEnd() const
 {
 	if(m_navigableOwnedEnd == nullptr)
@@ -445,11 +426,7 @@ std::shared_ptr<Subset<uml::Property, uml::Property /*Subset does not reference 
     return m_navigableOwnedEnd;
 }
 
-
-
-/*
-Getter & Setter for reference ownedEnd
-*/
+/* Getter & Setter for reference ownedEnd */
 std::shared_ptr<SubsetUnion<uml::Property, uml::Feature, uml::NamedElement, uml::Property /*Subset does not reference a union*/>> AssociationImpl::getOwnedEnd() const
 {
 	if(m_ownedEnd == nullptr)
@@ -469,8 +446,6 @@ std::shared_ptr<SubsetUnion<uml::Property, uml::Feature, uml::NamedElement, uml:
 	}
     return m_ownedEnd;
 }
-
-
 
 //*********************************
 // Union Getter
@@ -509,6 +484,8 @@ std::shared_ptr<Union<uml::NamedElement>> AssociationImpl::getMember() const
 	}
 	return m_member;
 }
+
+
 
 std::weak_ptr<uml::Namespace> AssociationImpl::getNamespace() const
 {
@@ -587,17 +564,9 @@ std::shared_ptr<Union<uml::Element>> AssociationImpl::getRelatedElement() const
 
 
 
-
-std::shared_ptr<Association> AssociationImpl::getThisAssociationPtr() const
-{
-	return m_thisAssociationPtr.lock();
-}
-void AssociationImpl::setThisAssociationPtr(std::weak_ptr<Association> thisAssociationPtr)
-{
-	m_thisAssociationPtr = thisAssociationPtr;
-	setThisClassifierPtr(thisAssociationPtr);
-	setThisRelationshipPtr(thisAssociationPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> AssociationImpl::eContainer() const
 {
 	if(auto wp = m_namespace.lock())
@@ -625,353 +594,6 @@ std::shared_ptr<ecore::EObject> AssociationImpl::eContainer() const
 	}
 
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any AssociationImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::ASSOCIATION_ATTRIBUTE_ENDTYPE:
-		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Type>::iterator iter = getEndType()->begin();
-			Bag<uml::Type>::iterator end = getEndType()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //2139			
-		}
-		case uml::umlPackage::ASSOCIATION_ATTRIBUTE_ISDERIVED:
-			return eAny(getIsDerived()); //2140
-		case uml::umlPackage::ASSOCIATION_ATTRIBUTE_MEMBEREND:
-		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Property>::iterator iter = getMemberEnd()->begin();
-			Bag<uml::Property>::iterator end = getMemberEnd()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //2141			
-		}
-		case uml::umlPackage::ASSOCIATION_ATTRIBUTE_NAVIGABLEOWNEDEND:
-		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Property>::iterator iter = getNavigableOwnedEnd()->begin();
-			Bag<uml::Property>::iterator end = getNavigableOwnedEnd()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //2143			
-		}
-		case uml::umlPackage::ASSOCIATION_ATTRIBUTE_OWNEDEND:
-		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Property>::iterator iter = getOwnedEnd()->begin();
-			Bag<uml::Property>::iterator end = getOwnedEnd()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //2142			
-		}
-	}
-	Any result;
-	result = ClassifierImpl::eGet(featureID, resolve, coreType);
-	if (result != nullptr && !result->isEmpty())
-	{
-		return result;
-	}
-	result = RelationshipImpl::eGet(featureID, resolve, coreType);
-	return result;
-}
-bool AssociationImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::ASSOCIATION_ATTRIBUTE_ENDTYPE:
-			return getEndType() != nullptr; //2139
-		case uml::umlPackage::ASSOCIATION_ATTRIBUTE_ISDERIVED:
-			return getIsDerived() != false; //2140
-		case uml::umlPackage::ASSOCIATION_ATTRIBUTE_MEMBEREND:
-			return getMemberEnd() != nullptr; //2141
-		case uml::umlPackage::ASSOCIATION_ATTRIBUTE_NAVIGABLEOWNEDEND:
-			return getNavigableOwnedEnd() != nullptr; //2143
-		case uml::umlPackage::ASSOCIATION_ATTRIBUTE_OWNEDEND:
-			return getOwnedEnd() != nullptr; //2142
-	}
-	bool result = false;
-	result = ClassifierImpl::internalEIsSet(featureID);
-	if (result)
-	{
-		return result;
-	}
-	result = RelationshipImpl::internalEIsSet(featureID);
-	return result;
-}
-bool AssociationImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::ASSOCIATION_ATTRIBUTE_ISDERIVED:
-		{
-			// BOOST CAST
-			bool _isDerived = newValue->get<bool>();
-			setIsDerived(_isDerived); //2140
-			return true;
-		}
-		case uml::umlPackage::ASSOCIATION_ATTRIBUTE_MEMBEREND:
-		{
-			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::Property>> memberEndList(new Bag<uml::Property>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
-			{
-				memberEndList->add(std::dynamic_pointer_cast<uml::Property>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::Property>::iterator iterMemberEnd = getMemberEnd()->begin();
-			Bag<uml::Property>::iterator endMemberEnd = getMemberEnd()->end();
-			while (iterMemberEnd != endMemberEnd)
-			{
-				if (memberEndList->find(*iterMemberEnd) == -1)
-				{
-					getMemberEnd()->erase(*iterMemberEnd);
-				}
-				iterMemberEnd++;
-			}
- 
-			iterMemberEnd = memberEndList->begin();
-			endMemberEnd = memberEndList->end();
-			while (iterMemberEnd != endMemberEnd)
-			{
-				if (getMemberEnd()->find(*iterMemberEnd) == -1)
-				{
-					getMemberEnd()->add(*iterMemberEnd);
-				}
-				iterMemberEnd++;			
-			}
-			return true;
-		}
-		case uml::umlPackage::ASSOCIATION_ATTRIBUTE_NAVIGABLEOWNEDEND:
-		{
-			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::Property>> navigableOwnedEndList(new Bag<uml::Property>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
-			{
-				navigableOwnedEndList->add(std::dynamic_pointer_cast<uml::Property>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::Property>::iterator iterNavigableOwnedEnd = getNavigableOwnedEnd()->begin();
-			Bag<uml::Property>::iterator endNavigableOwnedEnd = getNavigableOwnedEnd()->end();
-			while (iterNavigableOwnedEnd != endNavigableOwnedEnd)
-			{
-				if (navigableOwnedEndList->find(*iterNavigableOwnedEnd) == -1)
-				{
-					getNavigableOwnedEnd()->erase(*iterNavigableOwnedEnd);
-				}
-				iterNavigableOwnedEnd++;
-			}
- 
-			iterNavigableOwnedEnd = navigableOwnedEndList->begin();
-			endNavigableOwnedEnd = navigableOwnedEndList->end();
-			while (iterNavigableOwnedEnd != endNavigableOwnedEnd)
-			{
-				if (getNavigableOwnedEnd()->find(*iterNavigableOwnedEnd) == -1)
-				{
-					getNavigableOwnedEnd()->add(*iterNavigableOwnedEnd);
-				}
-				iterNavigableOwnedEnd++;			
-			}
-			return true;
-		}
-		case uml::umlPackage::ASSOCIATION_ATTRIBUTE_OWNEDEND:
-		{
-			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::Property>> ownedEndList(new Bag<uml::Property>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
-			{
-				ownedEndList->add(std::dynamic_pointer_cast<uml::Property>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::Property>::iterator iterOwnedEnd = getOwnedEnd()->begin();
-			Bag<uml::Property>::iterator endOwnedEnd = getOwnedEnd()->end();
-			while (iterOwnedEnd != endOwnedEnd)
-			{
-				if (ownedEndList->find(*iterOwnedEnd) == -1)
-				{
-					getOwnedEnd()->erase(*iterOwnedEnd);
-				}
-				iterOwnedEnd++;
-			}
- 
-			iterOwnedEnd = ownedEndList->begin();
-			endOwnedEnd = ownedEndList->end();
-			while (iterOwnedEnd != endOwnedEnd)
-			{
-				if (getOwnedEnd()->find(*iterOwnedEnd) == -1)
-				{
-					getOwnedEnd()->add(*iterOwnedEnd);
-				}
-				iterOwnedEnd++;			
-			}
-			return true;
-		}
-	}
-
-	bool result = false;
-	result = ClassifierImpl::eSet(featureID, newValue);
-	if (result)
-	{
-		return result;
-	}
-	result = RelationshipImpl::eSet(featureID, newValue);
-	return result;
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any AssociationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-		
-		// 1798482022
-		case umlPackage::ASSOCIATION_OPERATION_ASSOCIATION_ENDS_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->association_ends(incoming_param_diagnostics,incoming_param_context));
-			break;
-		}
-		
-		// 1486749742
-		case umlPackage::ASSOCIATION_OPERATION_BINARY_ASSOCIATIONS_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->binary_associations(incoming_param_diagnostics,incoming_param_context));
-			break;
-		}
-		
-		// 2137643093
-		case umlPackage::ASSOCIATION_OPERATION_ENDS_MUST_BE_TYPED_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->ends_must_be_typed(incoming_param_diagnostics,incoming_param_context));
-			break;
-		}
-		
-		// 855369150
-		case umlPackage::ASSOCIATION_OPERATION_GETENDTYPES:
-		{
-			result = eAny(this->getEndTypes());
-			break;
-		}
-		
-		// 1275990908
-		case umlPackage::ASSOCIATION_OPERATION_ISBINARY:
-		{
-			result = eAny(this->isBinary());
-			break;
-		}
-		
-		// 1038022213
-		case umlPackage::ASSOCIATION_OPERATION_SPECIALIZED_END_NUMBER_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->specialized_end_number(incoming_param_diagnostics,incoming_param_context));
-			break;
-		}
-		
-		// 2057384221
-		case umlPackage::ASSOCIATION_OPERATION_SPECIALIZED_END_TYPES_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->specialized_end_types(incoming_param_diagnostics,incoming_param_context));
-			break;
-		}
-
-		default:
-		{
-			// call superTypes
-			result = RelationshipImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			result = ClassifierImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -1123,12 +745,6 @@ void AssociationImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
-	
-	
 }
 
 void AssociationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -1158,3 +774,370 @@ void AssociationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> AssociationImpl::eStaticClass() const
+{
+	return uml::umlPackage::eInstance()->getAssociation_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any AssociationImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::ASSOCIATION_ATTRIBUTE_ENDTYPE:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Type>::iterator iter = getEndType()->begin();
+			Bag<uml::Type>::iterator end = getEndType()->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //2139			
+		}
+		case uml::umlPackage::ASSOCIATION_ATTRIBUTE_ISDERIVED:
+			return eAny(getIsDerived()); //2140
+		case uml::umlPackage::ASSOCIATION_ATTRIBUTE_MEMBEREND:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Property>::iterator iter = getMemberEnd()->begin();
+			Bag<uml::Property>::iterator end = getMemberEnd()->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //2141			
+		}
+		case uml::umlPackage::ASSOCIATION_ATTRIBUTE_NAVIGABLEOWNEDEND:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Property>::iterator iter = getNavigableOwnedEnd()->begin();
+			Bag<uml::Property>::iterator end = getNavigableOwnedEnd()->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //2143			
+		}
+		case uml::umlPackage::ASSOCIATION_ATTRIBUTE_OWNEDEND:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Property>::iterator iter = getOwnedEnd()->begin();
+			Bag<uml::Property>::iterator end = getOwnedEnd()->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //2142			
+		}
+	}
+	Any result;
+	result = ClassifierImpl::eGet(featureID, resolve, coreType);
+	if (result != nullptr && !result->isEmpty())
+	{
+		return result;
+	}
+	result = RelationshipImpl::eGet(featureID, resolve, coreType);
+	return result;
+}
+
+bool AssociationImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::ASSOCIATION_ATTRIBUTE_ENDTYPE:
+			return getEndType() != nullptr; //2139
+		case uml::umlPackage::ASSOCIATION_ATTRIBUTE_ISDERIVED:
+			return getIsDerived() != false; //2140
+		case uml::umlPackage::ASSOCIATION_ATTRIBUTE_MEMBEREND:
+			return getMemberEnd() != nullptr; //2141
+		case uml::umlPackage::ASSOCIATION_ATTRIBUTE_NAVIGABLEOWNEDEND:
+			return getNavigableOwnedEnd() != nullptr; //2143
+		case uml::umlPackage::ASSOCIATION_ATTRIBUTE_OWNEDEND:
+			return getOwnedEnd() != nullptr; //2142
+	}
+	bool result = false;
+	result = ClassifierImpl::internalEIsSet(featureID);
+	if (result)
+	{
+		return result;
+	}
+	result = RelationshipImpl::internalEIsSet(featureID);
+	return result;
+}
+
+bool AssociationImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::ASSOCIATION_ATTRIBUTE_ISDERIVED:
+		{
+			// BOOST CAST
+			bool _isDerived = newValue->get<bool>();
+			setIsDerived(_isDerived); //2140
+			return true;
+		}
+		case uml::umlPackage::ASSOCIATION_ATTRIBUTE_MEMBEREND:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::Property>> memberEndList(new Bag<uml::Property>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				memberEndList->add(std::dynamic_pointer_cast<uml::Property>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::Property>::iterator iterMemberEnd = getMemberEnd()->begin();
+			Bag<uml::Property>::iterator endMemberEnd = getMemberEnd()->end();
+			while (iterMemberEnd != endMemberEnd)
+			{
+				if (memberEndList->find(*iterMemberEnd) == -1)
+				{
+					getMemberEnd()->erase(*iterMemberEnd);
+				}
+				iterMemberEnd++;
+			}
+ 
+			iterMemberEnd = memberEndList->begin();
+			endMemberEnd = memberEndList->end();
+			while (iterMemberEnd != endMemberEnd)
+			{
+				if (getMemberEnd()->find(*iterMemberEnd) == -1)
+				{
+					getMemberEnd()->add(*iterMemberEnd);
+				}
+				iterMemberEnd++;			
+			}
+			return true;
+		}
+		case uml::umlPackage::ASSOCIATION_ATTRIBUTE_NAVIGABLEOWNEDEND:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::Property>> navigableOwnedEndList(new Bag<uml::Property>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				navigableOwnedEndList->add(std::dynamic_pointer_cast<uml::Property>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::Property>::iterator iterNavigableOwnedEnd = getNavigableOwnedEnd()->begin();
+			Bag<uml::Property>::iterator endNavigableOwnedEnd = getNavigableOwnedEnd()->end();
+			while (iterNavigableOwnedEnd != endNavigableOwnedEnd)
+			{
+				if (navigableOwnedEndList->find(*iterNavigableOwnedEnd) == -1)
+				{
+					getNavigableOwnedEnd()->erase(*iterNavigableOwnedEnd);
+				}
+				iterNavigableOwnedEnd++;
+			}
+ 
+			iterNavigableOwnedEnd = navigableOwnedEndList->begin();
+			endNavigableOwnedEnd = navigableOwnedEndList->end();
+			while (iterNavigableOwnedEnd != endNavigableOwnedEnd)
+			{
+				if (getNavigableOwnedEnd()->find(*iterNavigableOwnedEnd) == -1)
+				{
+					getNavigableOwnedEnd()->add(*iterNavigableOwnedEnd);
+				}
+				iterNavigableOwnedEnd++;			
+			}
+			return true;
+		}
+		case uml::umlPackage::ASSOCIATION_ATTRIBUTE_OWNEDEND:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::Property>> ownedEndList(new Bag<uml::Property>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				ownedEndList->add(std::dynamic_pointer_cast<uml::Property>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::Property>::iterator iterOwnedEnd = getOwnedEnd()->begin();
+			Bag<uml::Property>::iterator endOwnedEnd = getOwnedEnd()->end();
+			while (iterOwnedEnd != endOwnedEnd)
+			{
+				if (ownedEndList->find(*iterOwnedEnd) == -1)
+				{
+					getOwnedEnd()->erase(*iterOwnedEnd);
+				}
+				iterOwnedEnd++;
+			}
+ 
+			iterOwnedEnd = ownedEndList->begin();
+			endOwnedEnd = ownedEndList->end();
+			while (iterOwnedEnd != endOwnedEnd)
+			{
+				if (getOwnedEnd()->find(*iterOwnedEnd) == -1)
+				{
+					getOwnedEnd()->add(*iterOwnedEnd);
+				}
+				iterOwnedEnd++;			
+			}
+			return true;
+		}
+	}
+
+	bool result = false;
+	result = ClassifierImpl::eSet(featureID, newValue);
+	if (result)
+	{
+		return result;
+	}
+	result = RelationshipImpl::eSet(featureID, newValue);
+	return result;
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any AssociationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 1798482022
+		case umlPackage::ASSOCIATION_OPERATION_ASSOCIATION_ENDS_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->association_ends(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+		
+		// 1486749742
+		case umlPackage::ASSOCIATION_OPERATION_BINARY_ASSOCIATIONS_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->binary_associations(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+		
+		// 2137643093
+		case umlPackage::ASSOCIATION_OPERATION_ENDS_MUST_BE_TYPED_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->ends_must_be_typed(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+		
+		// 855369150
+		case umlPackage::ASSOCIATION_OPERATION_GETENDTYPES:
+		{
+			result = eAny(this->getEndTypes());
+			break;
+		}
+		
+		// 1275990908
+		case umlPackage::ASSOCIATION_OPERATION_ISBINARY:
+		{
+			result = eAny(this->isBinary());
+			break;
+		}
+		
+		// 1038022213
+		case umlPackage::ASSOCIATION_OPERATION_SPECIALIZED_END_NUMBER_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->specialized_end_number(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+		
+		// 2057384221
+		case umlPackage::ASSOCIATION_OPERATION_SPECIALIZED_END_TYPES_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->specialized_end_types(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = RelationshipImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			result = ClassifierImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<Association> AssociationImpl::getThisAssociationPtr() const
+{
+	return m_thisAssociationPtr.lock();
+}
+void AssociationImpl::setThisAssociationPtr(std::weak_ptr<Association> thisAssociationPtr)
+{
+	m_thisAssociationPtr = thisAssociationPtr;
+	setThisClassifierPtr(thisAssociationPtr);
+	setThisRelationshipPtr(thisAssociationPtr);
+}

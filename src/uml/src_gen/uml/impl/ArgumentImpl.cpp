@@ -1,3 +1,4 @@
+
 #include "uml/impl/ArgumentImpl.hpp"
 
 #ifdef NDEBUG
@@ -24,7 +25,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -32,7 +32,6 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-
 
 #include "uml/Object.hpp"
 
@@ -104,17 +103,14 @@ std::shared_ptr<ecore::EObject> ArgumentImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> ArgumentImpl::eStaticClass() const
-{
-	return uml::umlPackage::eInstance()->getArgument_Class();
-}
+//*********************************
+// Operations
+//*********************************
 
 //*********************************
-// Attribute Setter Getter
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for attribute name
-*/
+/* Getter & Setter for attribute name */
 std::string ArgumentImpl::getName() const 
 {
 	return m_name;
@@ -123,19 +119,12 @@ void ArgumentImpl::setName(std::string _name)
 {
 	m_name = _name;
 	
-} 
-
-
-//*********************************
-// Operations
-//*********************************
+}
 
 //*********************************
-// References
+// Reference Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference value
-*/
+/* Getter & Setter for reference value */
 std::shared_ptr<uml::Object> ArgumentImpl::getValue() const
 {
     return m_value;
@@ -146,99 +135,16 @@ void ArgumentImpl::setValue(std::shared_ptr<uml::Object> _value)
 	
 }
 
-
 //*********************************
 // Union Getter
 //*********************************
 
-
-
-std::shared_ptr<Argument> ArgumentImpl::getThisArgumentPtr() const
-{
-	return m_thisArgumentPtr.lock();
-}
-void ArgumentImpl::setThisArgumentPtr(std::weak_ptr<Argument> thisArgumentPtr)
-{
-	m_thisArgumentPtr = thisArgumentPtr;
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> ArgumentImpl::eContainer() const
 {
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any ArgumentImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::ARGUMENT_ATTRIBUTE_NAME:
-			return eAny(getName()); //190
-		case uml::umlPackage::ARGUMENT_ATTRIBUTE_VALUE:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getValue();
-				return eAny(returnValue); //191
-			}
-	}
-	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
-}
-bool ArgumentImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::ARGUMENT_ATTRIBUTE_NAME:
-			return getName() != ""; //190
-		case uml::umlPackage::ARGUMENT_ATTRIBUTE_VALUE:
-			return getValue() != nullptr; //191
-	}
-	return ecore::EObjectImpl::internalEIsSet(featureID);
-}
-bool ArgumentImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::ARGUMENT_ATTRIBUTE_NAME:
-		{
-			// BOOST CAST
-			std::string _name = newValue->get<std::string>();
-			setName(_name); //190
-			return true;
-		}
-		case uml::umlPackage::ARGUMENT_ATTRIBUTE_VALUE:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::Object> _value = std::dynamic_pointer_cast<uml::Object>(_temp);
-			setValue(_value); //191
-			return true;
-		}
-	}
-
-	return ecore::EObjectImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any ArgumentImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-
-		default:
-		{
-			// call superTypes
-			result = ecore::EModelElementImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -323,9 +229,7 @@ void ArgumentImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> s
 {
 	saveContent(saveHandler);
 
-	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
 }
 
 void ArgumentImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -347,3 +251,96 @@ void ArgumentImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> ArgumentImpl::eStaticClass() const
+{
+	return uml::umlPackage::eInstance()->getArgument_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any ArgumentImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::ARGUMENT_ATTRIBUTE_NAME:
+			return eAny(getName()); //190
+		case uml::umlPackage::ARGUMENT_ATTRIBUTE_VALUE:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getValue();
+				return eAny(returnValue); //191
+			}
+	}
+	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
+}
+
+bool ArgumentImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::ARGUMENT_ATTRIBUTE_NAME:
+			return getName() != ""; //190
+		case uml::umlPackage::ARGUMENT_ATTRIBUTE_VALUE:
+			return getValue() != nullptr; //191
+	}
+	return ecore::EObjectImpl::internalEIsSet(featureID);
+}
+
+bool ArgumentImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::ARGUMENT_ATTRIBUTE_NAME:
+		{
+			// BOOST CAST
+			std::string _name = newValue->get<std::string>();
+			setName(_name); //190
+			return true;
+		}
+		case uml::umlPackage::ARGUMENT_ATTRIBUTE_VALUE:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::Object> _value = std::dynamic_pointer_cast<uml::Object>(_temp);
+			setValue(_value); //191
+			return true;
+		}
+	}
+
+	return ecore::EObjectImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any ArgumentImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+
+		default:
+		{
+			// call superTypes
+			result = ecore::EModelElementImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<Argument> ArgumentImpl::getThisArgumentPtr() const
+{
+	return m_thisArgumentPtr.lock();
+}
+void ArgumentImpl::setThisArgumentPtr(std::weak_ptr<Argument> thisArgumentPtr)
+{
+	m_thisArgumentPtr = thisArgumentPtr;
+}

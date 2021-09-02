@@ -49,7 +49,6 @@ namespace uml
 // base class includes
 #include "uml/LinkEndData.hpp"
 
-// enum includes
 
 
 
@@ -89,8 +88,9 @@ namespace uml
 			*/
 			 
 			virtual bool insertAt_pin(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+
 			//*********************************
-			// Attributes Getter & Setter
+			// Attribute Getters & Setters
 			//*********************************
 			/*!
 			Specifies whether the existing links emanating from the object on this end should be destroyed before creating a new link.
@@ -104,9 +104,9 @@ namespace uml
 			*/
 			 
 			virtual void setIsReplaceAll (bool _isReplaceAll)= 0;
-			
+
 			//*********************************
-			// References Getter & Setter
+			// Reference Getters & Setters
 			//*********************************
 			/*!
 			For ordered Association ends, the InputPin that provides the position where the new link should be inserted or where an existing link should be moved to. The type of the insertAt InputPin is UnlimitedNatural, but the input cannot be zero. It is omitted for Association ends that are not ordered.
@@ -120,7 +120,28 @@ namespace uml
 			*/
 			
 			virtual void setInsertAt(std::shared_ptr<uml::InputPin>) = 0;
+
+			//*********************************
+			// Union Reference Getters
+			//*********************************
+			/*!
+			The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
 			
+			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;
+
+			//*********************************
+			// Container Getter
+			//*********************************
+			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
+
+			//*********************************
+			// Persistence Functions
+			//*********************************
+			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 
 		protected:
 			//*********************************
@@ -131,8 +152,7 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			bool m_isReplaceAll = false;
-			
+			bool m_isReplaceAll= false;
 			
 			//*********************************
 			// Reference Members
@@ -143,29 +163,6 @@ namespace uml
 			*/
 			
 			std::shared_ptr<uml::InputPin> m_insertAt;
-
-		public:
-			//*********************************
-			// Union Getter
-			//*********************************
-			/*!
-			The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;
-
-			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
-			
-			//*********************************
-			// Persistence Functions
-			//*********************************
-			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
-			
-			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
-			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
-			
 	};
-
 }
 #endif /* end of include guard: UML_LINKENDCREATIONDATA_HPP */

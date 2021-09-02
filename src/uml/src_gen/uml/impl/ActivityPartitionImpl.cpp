@@ -1,3 +1,4 @@
+
 #include "uml/impl/ActivityPartitionImpl.hpp"
 
 #ifdef NDEBUG
@@ -26,7 +27,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -34,7 +34,6 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-
 
 #include "uml/Activity.hpp"
 #include "uml/ActivityEdge.hpp"
@@ -253,42 +252,6 @@ std::shared_ptr<ecore::EObject> ActivityPartitionImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> ActivityPartitionImpl::eStaticClass() const
-{
-	return uml::umlPackage::eInstance()->getActivityPartition_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-/*
-Getter & Setter for attribute isDimension
-*/
-bool ActivityPartitionImpl::getIsDimension() const 
-{
-	return m_isDimension;
-}
-void ActivityPartitionImpl::setIsDimension(bool _isDimension)
-{
-	m_isDimension = _isDimension;
-	
-} 
-
-
-/*
-Getter & Setter for attribute isExternal
-*/
-bool ActivityPartitionImpl::getIsExternal() const 
-{
-	return m_isExternal;
-}
-void ActivityPartitionImpl::setIsExternal(bool _isExternal)
-{
-	m_isExternal = _isExternal;
-	
-} 
-
-
 //*********************************
 // Operations
 //*********************************
@@ -317,11 +280,34 @@ bool ActivityPartitionImpl::represents_property_and_is_contained(Any diagnostics
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference edge
-*/
+/* Getter & Setter for attribute isDimension */
+bool ActivityPartitionImpl::getIsDimension() const 
+{
+	return m_isDimension;
+}
+void ActivityPartitionImpl::setIsDimension(bool _isDimension)
+{
+	m_isDimension = _isDimension;
+	
+}
+
+/* Getter & Setter for attribute isExternal */
+bool ActivityPartitionImpl::getIsExternal() const 
+{
+	return m_isExternal;
+}
+void ActivityPartitionImpl::setIsExternal(bool _isExternal)
+{
+	m_isExternal = _isExternal;
+	
+}
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference edge */
 std::shared_ptr<Subset<uml::ActivityEdge, uml::ActivityEdge>> ActivityPartitionImpl::getEdge() const
 {
 	if(m_edge == nullptr)
@@ -342,11 +328,7 @@ std::shared_ptr<Subset<uml::ActivityEdge, uml::ActivityEdge>> ActivityPartitionI
     return m_edge;
 }
 
-
-
-/*
-Getter & Setter for reference node
-*/
+/* Getter & Setter for reference node */
 std::shared_ptr<Subset<uml::ActivityNode, uml::ActivityNode>> ActivityPartitionImpl::getNode() const
 {
 	if(m_node == nullptr)
@@ -367,11 +349,7 @@ std::shared_ptr<Subset<uml::ActivityNode, uml::ActivityNode>> ActivityPartitionI
     return m_node;
 }
 
-
-
-/*
-Getter & Setter for reference represents
-*/
+/* Getter & Setter for reference represents */
 std::shared_ptr<uml::Element> ActivityPartitionImpl::getRepresents() const
 {
     return m_represents;
@@ -382,10 +360,7 @@ void ActivityPartitionImpl::setRepresents(std::shared_ptr<uml::Element> _represe
 	
 }
 
-
-/*
-Getter & Setter for reference subpartition
-*/
+/* Getter & Setter for reference subpartition */
 std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup>> ActivityPartitionImpl::getSubpartition() const
 {
 	if(m_subpartition == nullptr)
@@ -406,11 +381,7 @@ std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup>> ActivityPart
     return m_subpartition;
 }
 
-
-
-/*
-Getter & Setter for reference superPartition
-*/
+/* Getter & Setter for reference superPartition */
 std::weak_ptr<uml::ActivityPartition> ActivityPartitionImpl::getSuperPartition() const
 {
     return m_superPartition;
@@ -420,7 +391,6 @@ void ActivityPartitionImpl::setSuperPartition(std::weak_ptr<uml::ActivityPartiti
     m_superPartition = _superPartition;
 	
 }
-
 
 //*********************************
 // Union Getter
@@ -500,18 +470,9 @@ std::weak_ptr<uml::ActivityGroup> ActivityPartitionImpl::getSuperGroup() const
 	return m_superGroup;
 }
 
-
-
-
-std::shared_ptr<ActivityPartition> ActivityPartitionImpl::getThisActivityPartitionPtr() const
-{
-	return m_thisActivityPartitionPtr.lock();
-}
-void ActivityPartitionImpl::setThisActivityPartitionPtr(std::weak_ptr<ActivityPartition> thisActivityPartitionPtr)
-{
-	m_thisActivityPartitionPtr = thisActivityPartitionPtr;
-	setThisActivityGroupPtr(thisActivityPartitionPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> ActivityPartitionImpl::eContainer() const
 {
 	if(auto wp = m_inActivity.lock())
@@ -539,325 +500,6 @@ std::shared_ptr<ecore::EObject> ActivityPartitionImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any ActivityPartitionImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::ACTIVITYPARTITION_ATTRIBUTE_EDGE:
-		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::ActivityEdge>::iterator iter = getEdge()->begin();
-			Bag<uml::ActivityEdge>::iterator end = getEdge()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //1320			
-		}
-		case uml::umlPackage::ACTIVITYPARTITION_ATTRIBUTE_ISDIMENSION:
-			return eAny(getIsDimension()); //1314
-		case uml::umlPackage::ACTIVITYPARTITION_ATTRIBUTE_ISEXTERNAL:
-			return eAny(getIsExternal()); //1315
-		case uml::umlPackage::ACTIVITYPARTITION_ATTRIBUTE_NODE:
-		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::ActivityNode>::iterator iter = getNode()->begin();
-			Bag<uml::ActivityNode>::iterator end = getNode()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //1316			
-		}
-		case uml::umlPackage::ACTIVITYPARTITION_ATTRIBUTE_REPRESENTS:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getRepresents();
-				return eAny(returnValue); //1317
-			}
-		case uml::umlPackage::ACTIVITYPARTITION_ATTRIBUTE_SUBPARTITION:
-		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::ActivityPartition>::iterator iter = getSubpartition()->begin();
-			Bag<uml::ActivityPartition>::iterator end = getSubpartition()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //1318			
-		}
-		case uml::umlPackage::ACTIVITYPARTITION_ATTRIBUTE_SUPERPARTITION:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getSuperPartition().lock();
-				return eAny(returnValue); //1319
-			}
-	}
-	return ActivityGroupImpl::eGet(featureID, resolve, coreType);
-}
-bool ActivityPartitionImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::ACTIVITYPARTITION_ATTRIBUTE_EDGE:
-			return getEdge() != nullptr; //1320
-		case uml::umlPackage::ACTIVITYPARTITION_ATTRIBUTE_ISDIMENSION:
-			return getIsDimension() != false; //1314
-		case uml::umlPackage::ACTIVITYPARTITION_ATTRIBUTE_ISEXTERNAL:
-			return getIsExternal() != false; //1315
-		case uml::umlPackage::ACTIVITYPARTITION_ATTRIBUTE_NODE:
-			return getNode() != nullptr; //1316
-		case uml::umlPackage::ACTIVITYPARTITION_ATTRIBUTE_REPRESENTS:
-			return getRepresents() != nullptr; //1317
-		case uml::umlPackage::ACTIVITYPARTITION_ATTRIBUTE_SUBPARTITION:
-			return getSubpartition() != nullptr; //1318
-		case uml::umlPackage::ACTIVITYPARTITION_ATTRIBUTE_SUPERPARTITION:
-			return getSuperPartition().lock() != nullptr; //1319
-	}
-	return ActivityGroupImpl::internalEIsSet(featureID);
-}
-bool ActivityPartitionImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::ACTIVITYPARTITION_ATTRIBUTE_EDGE:
-		{
-			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::ActivityEdge>> edgeList(new Bag<uml::ActivityEdge>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
-			{
-				edgeList->add(std::dynamic_pointer_cast<uml::ActivityEdge>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::ActivityEdge>::iterator iterEdge = getEdge()->begin();
-			Bag<uml::ActivityEdge>::iterator endEdge = getEdge()->end();
-			while (iterEdge != endEdge)
-			{
-				if (edgeList->find(*iterEdge) == -1)
-				{
-					getEdge()->erase(*iterEdge);
-				}
-				iterEdge++;
-			}
- 
-			iterEdge = edgeList->begin();
-			endEdge = edgeList->end();
-			while (iterEdge != endEdge)
-			{
-				if (getEdge()->find(*iterEdge) == -1)
-				{
-					getEdge()->add(*iterEdge);
-				}
-				iterEdge++;			
-			}
-			return true;
-		}
-		case uml::umlPackage::ACTIVITYPARTITION_ATTRIBUTE_ISDIMENSION:
-		{
-			// BOOST CAST
-			bool _isDimension = newValue->get<bool>();
-			setIsDimension(_isDimension); //1314
-			return true;
-		}
-		case uml::umlPackage::ACTIVITYPARTITION_ATTRIBUTE_ISEXTERNAL:
-		{
-			// BOOST CAST
-			bool _isExternal = newValue->get<bool>();
-			setIsExternal(_isExternal); //1315
-			return true;
-		}
-		case uml::umlPackage::ACTIVITYPARTITION_ATTRIBUTE_NODE:
-		{
-			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::ActivityNode>> nodeList(new Bag<uml::ActivityNode>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
-			{
-				nodeList->add(std::dynamic_pointer_cast<uml::ActivityNode>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::ActivityNode>::iterator iterNode = getNode()->begin();
-			Bag<uml::ActivityNode>::iterator endNode = getNode()->end();
-			while (iterNode != endNode)
-			{
-				if (nodeList->find(*iterNode) == -1)
-				{
-					getNode()->erase(*iterNode);
-				}
-				iterNode++;
-			}
- 
-			iterNode = nodeList->begin();
-			endNode = nodeList->end();
-			while (iterNode != endNode)
-			{
-				if (getNode()->find(*iterNode) == -1)
-				{
-					getNode()->add(*iterNode);
-				}
-				iterNode++;			
-			}
-			return true;
-		}
-		case uml::umlPackage::ACTIVITYPARTITION_ATTRIBUTE_REPRESENTS:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::Element> _represents = std::dynamic_pointer_cast<uml::Element>(_temp);
-			setRepresents(_represents); //1317
-			return true;
-		}
-		case uml::umlPackage::ACTIVITYPARTITION_ATTRIBUTE_SUBPARTITION:
-		{
-			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::ActivityPartition>> subpartitionList(new Bag<uml::ActivityPartition>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
-			{
-				subpartitionList->add(std::dynamic_pointer_cast<uml::ActivityPartition>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::ActivityPartition>::iterator iterSubpartition = getSubpartition()->begin();
-			Bag<uml::ActivityPartition>::iterator endSubpartition = getSubpartition()->end();
-			while (iterSubpartition != endSubpartition)
-			{
-				if (subpartitionList->find(*iterSubpartition) == -1)
-				{
-					getSubpartition()->erase(*iterSubpartition);
-				}
-				iterSubpartition++;
-			}
- 
-			iterSubpartition = subpartitionList->begin();
-			endSubpartition = subpartitionList->end();
-			while (iterSubpartition != endSubpartition)
-			{
-				if (getSubpartition()->find(*iterSubpartition) == -1)
-				{
-					getSubpartition()->add(*iterSubpartition);
-				}
-				iterSubpartition++;			
-			}
-			return true;
-		}
-		case uml::umlPackage::ACTIVITYPARTITION_ATTRIBUTE_SUPERPARTITION:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::ActivityPartition> _superPartition = std::dynamic_pointer_cast<uml::ActivityPartition>(_temp);
-			setSuperPartition(_superPartition); //1319
-			return true;
-		}
-	}
-
-	return ActivityGroupImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any ActivityPartitionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-		
-		// 1076567983
-		case umlPackage::ACTIVITYPARTITION_OPERATION_DIMENSION_NOT_CONTAINED_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->dimension_not_contained(incoming_param_diagnostics,incoming_param_context));
-			break;
-		}
-		
-		// 639011092
-		case umlPackage::ACTIVITYPARTITION_OPERATION_REPRESENTS_CLASSIFIER_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->represents_classifier(incoming_param_diagnostics,incoming_param_context));
-			break;
-		}
-		
-		// 511389922
-		case umlPackage::ACTIVITYPARTITION_OPERATION_REPRESENTS_PROPERTY_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->represents_property(incoming_param_diagnostics,incoming_param_context));
-			break;
-		}
-		
-		// 1105654129
-		case umlPackage::ACTIVITYPARTITION_OPERATION_REPRESENTS_PROPERTY_AND_IS_CONTAINED_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->represents_property_and_is_contained(incoming_param_diagnostics,incoming_param_context));
-			break;
-		}
-
-		default:
-		{
-			// call superTypes
-			result = ActivityGroupImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -1037,10 +679,6 @@ void ActivityPartitionImpl::save(std::shared_ptr<persistence::interfaces::XSaveH
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
 }
 
 void ActivityPartitionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -1074,3 +712,341 @@ void ActivityPartitionImpl::saveContent(std::shared_ptr<persistence::interfaces:
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> ActivityPartitionImpl::eStaticClass() const
+{
+	return uml::umlPackage::eInstance()->getActivityPartition_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any ActivityPartitionImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::ACTIVITYPARTITION_ATTRIBUTE_EDGE:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::ActivityEdge>::iterator iter = getEdge()->begin();
+			Bag<uml::ActivityEdge>::iterator end = getEdge()->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //1320			
+		}
+		case uml::umlPackage::ACTIVITYPARTITION_ATTRIBUTE_ISDIMENSION:
+			return eAny(getIsDimension()); //1314
+		case uml::umlPackage::ACTIVITYPARTITION_ATTRIBUTE_ISEXTERNAL:
+			return eAny(getIsExternal()); //1315
+		case uml::umlPackage::ACTIVITYPARTITION_ATTRIBUTE_NODE:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::ActivityNode>::iterator iter = getNode()->begin();
+			Bag<uml::ActivityNode>::iterator end = getNode()->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //1316			
+		}
+		case uml::umlPackage::ACTIVITYPARTITION_ATTRIBUTE_REPRESENTS:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getRepresents();
+				return eAny(returnValue); //1317
+			}
+		case uml::umlPackage::ACTIVITYPARTITION_ATTRIBUTE_SUBPARTITION:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::ActivityPartition>::iterator iter = getSubpartition()->begin();
+			Bag<uml::ActivityPartition>::iterator end = getSubpartition()->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //1318			
+		}
+		case uml::umlPackage::ACTIVITYPARTITION_ATTRIBUTE_SUPERPARTITION:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getSuperPartition().lock();
+				return eAny(returnValue); //1319
+			}
+	}
+	return ActivityGroupImpl::eGet(featureID, resolve, coreType);
+}
+
+bool ActivityPartitionImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::ACTIVITYPARTITION_ATTRIBUTE_EDGE:
+			return getEdge() != nullptr; //1320
+		case uml::umlPackage::ACTIVITYPARTITION_ATTRIBUTE_ISDIMENSION:
+			return getIsDimension() != false; //1314
+		case uml::umlPackage::ACTIVITYPARTITION_ATTRIBUTE_ISEXTERNAL:
+			return getIsExternal() != false; //1315
+		case uml::umlPackage::ACTIVITYPARTITION_ATTRIBUTE_NODE:
+			return getNode() != nullptr; //1316
+		case uml::umlPackage::ACTIVITYPARTITION_ATTRIBUTE_REPRESENTS:
+			return getRepresents() != nullptr; //1317
+		case uml::umlPackage::ACTIVITYPARTITION_ATTRIBUTE_SUBPARTITION:
+			return getSubpartition() != nullptr; //1318
+		case uml::umlPackage::ACTIVITYPARTITION_ATTRIBUTE_SUPERPARTITION:
+			return getSuperPartition().lock() != nullptr; //1319
+	}
+	return ActivityGroupImpl::internalEIsSet(featureID);
+}
+
+bool ActivityPartitionImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::ACTIVITYPARTITION_ATTRIBUTE_EDGE:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::ActivityEdge>> edgeList(new Bag<uml::ActivityEdge>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				edgeList->add(std::dynamic_pointer_cast<uml::ActivityEdge>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::ActivityEdge>::iterator iterEdge = getEdge()->begin();
+			Bag<uml::ActivityEdge>::iterator endEdge = getEdge()->end();
+			while (iterEdge != endEdge)
+			{
+				if (edgeList->find(*iterEdge) == -1)
+				{
+					getEdge()->erase(*iterEdge);
+				}
+				iterEdge++;
+			}
+ 
+			iterEdge = edgeList->begin();
+			endEdge = edgeList->end();
+			while (iterEdge != endEdge)
+			{
+				if (getEdge()->find(*iterEdge) == -1)
+				{
+					getEdge()->add(*iterEdge);
+				}
+				iterEdge++;			
+			}
+			return true;
+		}
+		case uml::umlPackage::ACTIVITYPARTITION_ATTRIBUTE_ISDIMENSION:
+		{
+			// BOOST CAST
+			bool _isDimension = newValue->get<bool>();
+			setIsDimension(_isDimension); //1314
+			return true;
+		}
+		case uml::umlPackage::ACTIVITYPARTITION_ATTRIBUTE_ISEXTERNAL:
+		{
+			// BOOST CAST
+			bool _isExternal = newValue->get<bool>();
+			setIsExternal(_isExternal); //1315
+			return true;
+		}
+		case uml::umlPackage::ACTIVITYPARTITION_ATTRIBUTE_NODE:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::ActivityNode>> nodeList(new Bag<uml::ActivityNode>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				nodeList->add(std::dynamic_pointer_cast<uml::ActivityNode>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::ActivityNode>::iterator iterNode = getNode()->begin();
+			Bag<uml::ActivityNode>::iterator endNode = getNode()->end();
+			while (iterNode != endNode)
+			{
+				if (nodeList->find(*iterNode) == -1)
+				{
+					getNode()->erase(*iterNode);
+				}
+				iterNode++;
+			}
+ 
+			iterNode = nodeList->begin();
+			endNode = nodeList->end();
+			while (iterNode != endNode)
+			{
+				if (getNode()->find(*iterNode) == -1)
+				{
+					getNode()->add(*iterNode);
+				}
+				iterNode++;			
+			}
+			return true;
+		}
+		case uml::umlPackage::ACTIVITYPARTITION_ATTRIBUTE_REPRESENTS:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::Element> _represents = std::dynamic_pointer_cast<uml::Element>(_temp);
+			setRepresents(_represents); //1317
+			return true;
+		}
+		case uml::umlPackage::ACTIVITYPARTITION_ATTRIBUTE_SUBPARTITION:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::ActivityPartition>> subpartitionList(new Bag<uml::ActivityPartition>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				subpartitionList->add(std::dynamic_pointer_cast<uml::ActivityPartition>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::ActivityPartition>::iterator iterSubpartition = getSubpartition()->begin();
+			Bag<uml::ActivityPartition>::iterator endSubpartition = getSubpartition()->end();
+			while (iterSubpartition != endSubpartition)
+			{
+				if (subpartitionList->find(*iterSubpartition) == -1)
+				{
+					getSubpartition()->erase(*iterSubpartition);
+				}
+				iterSubpartition++;
+			}
+ 
+			iterSubpartition = subpartitionList->begin();
+			endSubpartition = subpartitionList->end();
+			while (iterSubpartition != endSubpartition)
+			{
+				if (getSubpartition()->find(*iterSubpartition) == -1)
+				{
+					getSubpartition()->add(*iterSubpartition);
+				}
+				iterSubpartition++;			
+			}
+			return true;
+		}
+		case uml::umlPackage::ACTIVITYPARTITION_ATTRIBUTE_SUPERPARTITION:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::ActivityPartition> _superPartition = std::dynamic_pointer_cast<uml::ActivityPartition>(_temp);
+			setSuperPartition(_superPartition); //1319
+			return true;
+		}
+	}
+
+	return ActivityGroupImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any ActivityPartitionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 1076567983
+		case umlPackage::ACTIVITYPARTITION_OPERATION_DIMENSION_NOT_CONTAINED_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->dimension_not_contained(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+		
+		// 639011092
+		case umlPackage::ACTIVITYPARTITION_OPERATION_REPRESENTS_CLASSIFIER_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->represents_classifier(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+		
+		// 511389922
+		case umlPackage::ACTIVITYPARTITION_OPERATION_REPRESENTS_PROPERTY_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->represents_property(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+		
+		// 1105654129
+		case umlPackage::ACTIVITYPARTITION_OPERATION_REPRESENTS_PROPERTY_AND_IS_CONTAINED_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->represents_property_and_is_contained(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = ActivityGroupImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<ActivityPartition> ActivityPartitionImpl::getThisActivityPartitionPtr() const
+{
+	return m_thisActivityPartitionPtr.lock();
+}
+void ActivityPartitionImpl::setThisActivityPartitionPtr(std::weak_ptr<ActivityPartition> thisActivityPartitionPtr)
+{
+	m_thisActivityPartitionPtr = thisActivityPartitionPtr;
+	setThisActivityGroupPtr(thisActivityPartitionPtr);
+}

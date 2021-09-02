@@ -1,3 +1,4 @@
+
 #include "ocl/Values/impl/ObjectValueImpl.hpp"
 
 #ifdef NDEBUG
@@ -48,7 +49,6 @@
 #include <exception> // used in Persistence
 #include "ecore/ecoreFactory.hpp"
 #include "ocl/Values/ValuesFactory.hpp"
-
 
 #include "ecore/EObject.hpp"
 #include "ocl/Values/LocalSnapshot.hpp"
@@ -124,15 +124,6 @@ std::shared_ptr<ecore::EObject> ObjectValueImpl::copy() const
 	element->setThisObjectValuePtr(element);
 	return element;
 }
-
-std::shared_ptr<ecore::EClass> ObjectValueImpl::eStaticClass() const
-{
-	return ocl::Values::ValuesPackage::eInstance()->getObjectValue_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
 
 //*********************************
 // Operations
@@ -244,11 +235,13 @@ std::string ObjectValueImpl::toString()
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference history
-*/
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference history */
 std::shared_ptr<Bag<ocl::Values::LocalSnapshot>> ObjectValueImpl::getHistory() const
 {
 	if(m_history == nullptr)
@@ -260,11 +253,7 @@ std::shared_ptr<Bag<ocl::Values::LocalSnapshot>> ObjectValueImpl::getHistory() c
     return m_history;
 }
 
-
-
-/*
-Getter & Setter for reference value
-*/
+/* Getter & Setter for reference value */
 std::shared_ptr<ecore::EObject> ObjectValueImpl::getValue() const
 {
     return m_value;
@@ -275,158 +264,16 @@ void ObjectValueImpl::setValue(std::shared_ptr<ecore::EObject> _value)
 	
 }
 
-
 //*********************************
 // Union Getter
 //*********************************
 
-
-
-std::shared_ptr<ObjectValue> ObjectValueImpl::getThisObjectValuePtr() const
-{
-	return m_thisObjectValuePtr.lock();
-}
-void ObjectValueImpl::setThisObjectValuePtr(std::weak_ptr<ObjectValue> thisObjectValuePtr)
-{
-	m_thisObjectValuePtr = thisObjectValuePtr;
-	setThisValuePtr(thisObjectValuePtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> ObjectValueImpl::eContainer() const
 {
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any ObjectValueImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case ocl::Values::ValuesPackage::OBJECTVALUE_ATTRIBUTE_HISTORY:
-		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<ocl::Values::LocalSnapshot>::iterator iter = getHistory()->begin();
-			Bag<ocl::Values::LocalSnapshot>::iterator end = getHistory()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //580			
-		}
-		case ocl::Values::ValuesPackage::OBJECTVALUE_ATTRIBUTE_VALUE:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getValue();
-				return eAny(returnValue); //581
-			}
-	}
-	return fUML::Semantics::Values::ValueImpl::eGet(featureID, resolve, coreType);
-}
-bool ObjectValueImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case ocl::Values::ValuesPackage::OBJECTVALUE_ATTRIBUTE_HISTORY:
-			return getHistory() != nullptr; //580
-		case ocl::Values::ValuesPackage::OBJECTVALUE_ATTRIBUTE_VALUE:
-			return getValue() != nullptr; //581
-	}
-	return fUML::Semantics::Values::ValueImpl::internalEIsSet(featureID);
-}
-bool ObjectValueImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case ocl::Values::ValuesPackage::OBJECTVALUE_ATTRIBUTE_HISTORY:
-		{
-			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<ocl::Values::LocalSnapshot>> historyList(new Bag<ocl::Values::LocalSnapshot>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
-			{
-				historyList->add(std::dynamic_pointer_cast<ocl::Values::LocalSnapshot>(*iter));
-				iter++;
-			}
-			
-			Bag<ocl::Values::LocalSnapshot>::iterator iterHistory = getHistory()->begin();
-			Bag<ocl::Values::LocalSnapshot>::iterator endHistory = getHistory()->end();
-			while (iterHistory != endHistory)
-			{
-				if (historyList->find(*iterHistory) == -1)
-				{
-					getHistory()->erase(*iterHistory);
-				}
-				iterHistory++;
-			}
- 
-			iterHistory = historyList->begin();
-			endHistory = historyList->end();
-			while (iterHistory != endHistory)
-			{
-				if (getHistory()->find(*iterHistory) == -1)
-				{
-					getHistory()->add(*iterHistory);
-				}
-				iterHistory++;			
-			}
-			return true;
-		}
-		case ocl::Values::ValuesPackage::OBJECTVALUE_ATTRIBUTE_VALUE:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<ecore::EObject> _value = std::dynamic_pointer_cast<ecore::EObject>(_temp);
-			setValue(_value); //581
-			return true;
-		}
-	}
-
-	return fUML::Semantics::Values::ValueImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any ObjectValueImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-		
-		// 1285091917
-		case ValuesPackage::OBJECTVALUE_OPERATION_EQUALS_VALUE:
-		{
-			//Retrieve input parameter 'otherValue'
-			//parameter 0
-			std::shared_ptr<fUML::Semantics::Values::Value> incoming_param_otherValue;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_otherValue_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_otherValue = (*incoming_param_otherValue_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::Values::Value> >();
-			result = eAny(this->equals(incoming_param_otherValue));
-			break;
-		}
-		
-		// 1100996867
-		case ValuesPackage::OBJECTVALUE_OPERATION_TOSTRING:
-		{
-			result = eAny(this->toString());
-			break;
-		}
-
-		default:
-		{
-			// call superTypes
-			result = fUML::Semantics::Values::ValueImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -529,8 +376,6 @@ void ObjectValueImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler
 	fUML::Semantics::Loci::SemanticVisitorImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
 }
 
 void ObjectValueImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -548,3 +393,155 @@ void ObjectValueImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> ObjectValueImpl::eStaticClass() const
+{
+	return ocl::Values::ValuesPackage::eInstance()->getObjectValue_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any ObjectValueImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case ocl::Values::ValuesPackage::OBJECTVALUE_ATTRIBUTE_HISTORY:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<ocl::Values::LocalSnapshot>::iterator iter = getHistory()->begin();
+			Bag<ocl::Values::LocalSnapshot>::iterator end = getHistory()->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //580			
+		}
+		case ocl::Values::ValuesPackage::OBJECTVALUE_ATTRIBUTE_VALUE:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getValue();
+				return eAny(returnValue); //581
+			}
+	}
+	return fUML::Semantics::Values::ValueImpl::eGet(featureID, resolve, coreType);
+}
+
+bool ObjectValueImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case ocl::Values::ValuesPackage::OBJECTVALUE_ATTRIBUTE_HISTORY:
+			return getHistory() != nullptr; //580
+		case ocl::Values::ValuesPackage::OBJECTVALUE_ATTRIBUTE_VALUE:
+			return getValue() != nullptr; //581
+	}
+	return fUML::Semantics::Values::ValueImpl::internalEIsSet(featureID);
+}
+
+bool ObjectValueImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case ocl::Values::ValuesPackage::OBJECTVALUE_ATTRIBUTE_HISTORY:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<ocl::Values::LocalSnapshot>> historyList(new Bag<ocl::Values::LocalSnapshot>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				historyList->add(std::dynamic_pointer_cast<ocl::Values::LocalSnapshot>(*iter));
+				iter++;
+			}
+			
+			Bag<ocl::Values::LocalSnapshot>::iterator iterHistory = getHistory()->begin();
+			Bag<ocl::Values::LocalSnapshot>::iterator endHistory = getHistory()->end();
+			while (iterHistory != endHistory)
+			{
+				if (historyList->find(*iterHistory) == -1)
+				{
+					getHistory()->erase(*iterHistory);
+				}
+				iterHistory++;
+			}
+ 
+			iterHistory = historyList->begin();
+			endHistory = historyList->end();
+			while (iterHistory != endHistory)
+			{
+				if (getHistory()->find(*iterHistory) == -1)
+				{
+					getHistory()->add(*iterHistory);
+				}
+				iterHistory++;			
+			}
+			return true;
+		}
+		case ocl::Values::ValuesPackage::OBJECTVALUE_ATTRIBUTE_VALUE:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<ecore::EObject> _value = std::dynamic_pointer_cast<ecore::EObject>(_temp);
+			setValue(_value); //581
+			return true;
+		}
+	}
+
+	return fUML::Semantics::Values::ValueImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any ObjectValueImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 1285091917
+		case ValuesPackage::OBJECTVALUE_OPERATION_EQUALS_VALUE:
+		{
+			//Retrieve input parameter 'otherValue'
+			//parameter 0
+			std::shared_ptr<fUML::Semantics::Values::Value> incoming_param_otherValue;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_otherValue_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_otherValue = (*incoming_param_otherValue_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::Values::Value> >();
+			result = eAny(this->equals(incoming_param_otherValue));
+			break;
+		}
+		
+		// 1100996867
+		case ValuesPackage::OBJECTVALUE_OPERATION_TOSTRING:
+		{
+			result = eAny(this->toString());
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = fUML::Semantics::Values::ValueImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<ObjectValue> ObjectValueImpl::getThisObjectValuePtr() const
+{
+	return m_thisObjectValuePtr.lock();
+}
+void ObjectValueImpl::setThisObjectValuePtr(std::weak_ptr<ObjectValue> thisObjectValuePtr)
+{
+	m_thisObjectValuePtr = thisObjectValuePtr;
+	setThisValuePtr(thisObjectValuePtr);
+}

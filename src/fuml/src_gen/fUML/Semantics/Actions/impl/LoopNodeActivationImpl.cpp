@@ -1,3 +1,4 @@
+
 #include "fUML/Semantics/Actions/impl/LoopNodeActivationImpl.hpp"
 
 #ifdef NDEBUG
@@ -25,7 +26,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -35,7 +35,6 @@
 #include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "uml/umlFactory.hpp"
-
 
 #include "uml/Action.hpp"
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
@@ -146,15 +145,6 @@ std::shared_ptr<ecore::EObject> LoopNodeActivationImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> LoopNodeActivationImpl::eStaticClass() const
-{
-	return fUML::Semantics::Actions::ActionsPackage::eInstance()->getLoopNodeActivation_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
@@ -183,11 +173,13 @@ bool LoopNodeActivationImpl::runTest()
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference bodyOutputLists
-*/
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference bodyOutputLists */
 std::shared_ptr<Bag<fUML::Semantics::Actions::Values>> LoopNodeActivationImpl::getBodyOutputLists() const
 {
 	if(m_bodyOutputLists == nullptr)
@@ -198,8 +190,6 @@ std::shared_ptr<Bag<fUML::Semantics::Actions::Values>> LoopNodeActivationImpl::g
 	}
     return m_bodyOutputLists;
 }
-
-
 
 //*********************************
 // Union Getter
@@ -219,18 +209,9 @@ std::shared_ptr<Union<fUML::Semantics::Actions::PinActivation>> LoopNodeActivati
 	return m_pinActivation;
 }
 
-
-
-
-std::shared_ptr<LoopNodeActivation> LoopNodeActivationImpl::getThisLoopNodeActivationPtr() const
-{
-	return m_thisLoopNodeActivationPtr.lock();
-}
-void LoopNodeActivationImpl::setThisLoopNodeActivationPtr(std::weak_ptr<LoopNodeActivation> thisLoopNodeActivationPtr)
-{
-	m_thisLoopNodeActivationPtr = thisLoopNodeActivationPtr;
-	setThisStructuredActivityNodeActivationPtr(thisLoopNodeActivationPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> LoopNodeActivationImpl::eContainer() const
 {
 	if(auto wp = m_group.lock())
@@ -238,133 +219,6 @@ std::shared_ptr<ecore::EObject> LoopNodeActivationImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any LoopNodeActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case fUML::Semantics::Actions::ActionsPackage::LOOPNODEACTIVATION_ATTRIBUTE_BODYOUTPUTLISTS:
-		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<fUML::Semantics::Actions::Values>::iterator iter = getBodyOutputLists()->begin();
-			Bag<fUML::Semantics::Actions::Values>::iterator end = getBodyOutputLists()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //7812			
-		}
-	}
-	return StructuredActivityNodeActivationImpl::eGet(featureID, resolve, coreType);
-}
-bool LoopNodeActivationImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case fUML::Semantics::Actions::ActionsPackage::LOOPNODEACTIVATION_ATTRIBUTE_BODYOUTPUTLISTS:
-			return getBodyOutputLists() != nullptr; //7812
-	}
-	return StructuredActivityNodeActivationImpl::internalEIsSet(featureID);
-}
-bool LoopNodeActivationImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case fUML::Semantics::Actions::ActionsPackage::LOOPNODEACTIVATION_ATTRIBUTE_BODYOUTPUTLISTS:
-		{
-			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<fUML::Semantics::Actions::Values>> bodyOutputListsList(new Bag<fUML::Semantics::Actions::Values>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
-			{
-				bodyOutputListsList->add(std::dynamic_pointer_cast<fUML::Semantics::Actions::Values>(*iter));
-				iter++;
-			}
-			
-			Bag<fUML::Semantics::Actions::Values>::iterator iterBodyOutputLists = getBodyOutputLists()->begin();
-			Bag<fUML::Semantics::Actions::Values>::iterator endBodyOutputLists = getBodyOutputLists()->end();
-			while (iterBodyOutputLists != endBodyOutputLists)
-			{
-				if (bodyOutputListsList->find(*iterBodyOutputLists) == -1)
-				{
-					getBodyOutputLists()->erase(*iterBodyOutputLists);
-				}
-				iterBodyOutputLists++;
-			}
- 
-			iterBodyOutputLists = bodyOutputListsList->begin();
-			endBodyOutputLists = bodyOutputListsList->end();
-			while (iterBodyOutputLists != endBodyOutputLists)
-			{
-				if (getBodyOutputLists()->find(*iterBodyOutputLists) == -1)
-				{
-					getBodyOutputLists()->add(*iterBodyOutputLists);
-				}
-				iterBodyOutputLists++;			
-			}
-			return true;
-		}
-	}
-
-	return StructuredActivityNodeActivationImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any LoopNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-		
-		// 1597416642
-		case ActionsPackage::LOOPNODEACTIVATION_OPERATION_MAKELOOPVARIABLELIST:
-		{
-			result = eAny(this->makeLoopVariableList());
-			break;
-		}
-		
-		// 563107466
-		case ActionsPackage::LOOPNODEACTIVATION_OPERATION_RUNBODY:
-		{
-			this->runBody();
-			break;
-		}
-		
-		// 1175069894
-		case ActionsPackage::LOOPNODEACTIVATION_OPERATION_RUNLOOPVARIABLES:
-		{
-			this->runLoopVariables();
-			break;
-		}
-		
-		// 1241885508
-		case ActionsPackage::LOOPNODEACTIVATION_OPERATION_RUNTEST:
-		{
-			result = eAny(this->runTest());
-			break;
-		}
-
-		default:
-		{
-			// call superTypes
-			result = StructuredActivityNodeActivationImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -439,10 +293,6 @@ void LoopNodeActivationImpl::save(std::shared_ptr<persistence::interfaces::XSave
 	fUML::Semantics::Loci::SemanticVisitorImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
 }
 
 void LoopNodeActivationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -464,3 +314,149 @@ void LoopNodeActivationImpl::saveContent(std::shared_ptr<persistence::interfaces
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> LoopNodeActivationImpl::eStaticClass() const
+{
+	return fUML::Semantics::Actions::ActionsPackage::eInstance()->getLoopNodeActivation_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any LoopNodeActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case fUML::Semantics::Actions::ActionsPackage::LOOPNODEACTIVATION_ATTRIBUTE_BODYOUTPUTLISTS:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<fUML::Semantics::Actions::Values>::iterator iter = getBodyOutputLists()->begin();
+			Bag<fUML::Semantics::Actions::Values>::iterator end = getBodyOutputLists()->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //7812			
+		}
+	}
+	return StructuredActivityNodeActivationImpl::eGet(featureID, resolve, coreType);
+}
+
+bool LoopNodeActivationImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case fUML::Semantics::Actions::ActionsPackage::LOOPNODEACTIVATION_ATTRIBUTE_BODYOUTPUTLISTS:
+			return getBodyOutputLists() != nullptr; //7812
+	}
+	return StructuredActivityNodeActivationImpl::internalEIsSet(featureID);
+}
+
+bool LoopNodeActivationImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case fUML::Semantics::Actions::ActionsPackage::LOOPNODEACTIVATION_ATTRIBUTE_BODYOUTPUTLISTS:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<fUML::Semantics::Actions::Values>> bodyOutputListsList(new Bag<fUML::Semantics::Actions::Values>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				bodyOutputListsList->add(std::dynamic_pointer_cast<fUML::Semantics::Actions::Values>(*iter));
+				iter++;
+			}
+			
+			Bag<fUML::Semantics::Actions::Values>::iterator iterBodyOutputLists = getBodyOutputLists()->begin();
+			Bag<fUML::Semantics::Actions::Values>::iterator endBodyOutputLists = getBodyOutputLists()->end();
+			while (iterBodyOutputLists != endBodyOutputLists)
+			{
+				if (bodyOutputListsList->find(*iterBodyOutputLists) == -1)
+				{
+					getBodyOutputLists()->erase(*iterBodyOutputLists);
+				}
+				iterBodyOutputLists++;
+			}
+ 
+			iterBodyOutputLists = bodyOutputListsList->begin();
+			endBodyOutputLists = bodyOutputListsList->end();
+			while (iterBodyOutputLists != endBodyOutputLists)
+			{
+				if (getBodyOutputLists()->find(*iterBodyOutputLists) == -1)
+				{
+					getBodyOutputLists()->add(*iterBodyOutputLists);
+				}
+				iterBodyOutputLists++;			
+			}
+			return true;
+		}
+	}
+
+	return StructuredActivityNodeActivationImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any LoopNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 1597416642
+		case ActionsPackage::LOOPNODEACTIVATION_OPERATION_MAKELOOPVARIABLELIST:
+		{
+			result = eAny(this->makeLoopVariableList());
+			break;
+		}
+		
+		// 563107466
+		case ActionsPackage::LOOPNODEACTIVATION_OPERATION_RUNBODY:
+		{
+			this->runBody();
+			break;
+		}
+		
+		// 1175069894
+		case ActionsPackage::LOOPNODEACTIVATION_OPERATION_RUNLOOPVARIABLES:
+		{
+			this->runLoopVariables();
+			break;
+		}
+		
+		// 1241885508
+		case ActionsPackage::LOOPNODEACTIVATION_OPERATION_RUNTEST:
+		{
+			result = eAny(this->runTest());
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = StructuredActivityNodeActivationImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<LoopNodeActivation> LoopNodeActivationImpl::getThisLoopNodeActivationPtr() const
+{
+	return m_thisLoopNodeActivationPtr.lock();
+}
+void LoopNodeActivationImpl::setThisLoopNodeActivationPtr(std::weak_ptr<LoopNodeActivation> thisLoopNodeActivationPtr)
+{
+	m_thisLoopNodeActivationPtr = thisLoopNodeActivationPtr;
+	setThisStructuredActivityNodeActivationPtr(thisLoopNodeActivationPtr);
+}

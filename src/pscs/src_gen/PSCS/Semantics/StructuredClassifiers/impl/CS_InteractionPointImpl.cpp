@@ -1,3 +1,4 @@
+
 #include "PSCS/Semantics/StructuredClassifiers/impl/CS_InteractionPointImpl.hpp"
 
 #ifdef NDEBUG
@@ -37,7 +38,6 @@
 #include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
 #include "uml/umlFactory.hpp"
 #include "PSCS/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
-
 
 #include "PSCS/Semantics/StructuredClassifiers/CS_Reference.hpp"
 #include "uml/Class.hpp"
@@ -123,15 +123,6 @@ std::shared_ptr<ecore::EObject> CS_InteractionPointImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> CS_InteractionPointImpl::eStaticClass() const
-{
-	return PSCS::Semantics::StructuredClassifiers::StructuredClassifiersPackage::eInstance()->getCS_InteractionPoint_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
@@ -183,11 +174,13 @@ void CS_InteractionPointImpl::startBehavior(std::shared_ptr<uml::Class> classifi
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference definingPort
-*/
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference definingPort */
 std::shared_ptr<uml::Port> CS_InteractionPointImpl::getDefiningPort() const
 {
     return m_definingPort;
@@ -198,10 +191,7 @@ void CS_InteractionPointImpl::setDefiningPort(std::shared_ptr<uml::Port> _defini
 	
 }
 
-
-/*
-Getter & Setter for reference owner
-*/
+/* Getter & Setter for reference owner */
 std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> CS_InteractionPointImpl::getOwner() const
 {
     return m_owner;
@@ -212,162 +202,16 @@ void CS_InteractionPointImpl::setOwner(std::shared_ptr<PSCS::Semantics::Structur
 	
 }
 
-
 //*********************************
 // Union Getter
 //*********************************
 
-
-
-std::shared_ptr<CS_InteractionPoint> CS_InteractionPointImpl::getThisCS_InteractionPointPtr() const
-{
-	return m_thisCS_InteractionPointPtr.lock();
-}
-void CS_InteractionPointImpl::setThisCS_InteractionPointPtr(std::weak_ptr<CS_InteractionPoint> thisCS_InteractionPointPtr)
-{
-	m_thisCS_InteractionPointPtr = thisCS_InteractionPointPtr;
-	setThisReferencePtr(thisCS_InteractionPointPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> CS_InteractionPointImpl::eContainer() const
 {
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any CS_InteractionPointImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case PSCS::Semantics::StructuredClassifiers::StructuredClassifiersPackage::CS_INTERACTIONPOINT_ATTRIBUTE_DEFININGPORT:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getDefiningPort();
-				return eAny(returnValue); //172
-			}
-		case PSCS::Semantics::StructuredClassifiers::StructuredClassifiersPackage::CS_INTERACTIONPOINT_ATTRIBUTE_OWNER:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getOwner();
-				return eAny(returnValue); //171
-			}
-	}
-	return fUML::Semantics::StructuredClassifiers::ReferenceImpl::eGet(featureID, resolve, coreType);
-}
-bool CS_InteractionPointImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case PSCS::Semantics::StructuredClassifiers::StructuredClassifiersPackage::CS_INTERACTIONPOINT_ATTRIBUTE_DEFININGPORT:
-			return getDefiningPort() != nullptr; //172
-		case PSCS::Semantics::StructuredClassifiers::StructuredClassifiersPackage::CS_INTERACTIONPOINT_ATTRIBUTE_OWNER:
-			return getOwner() != nullptr; //171
-	}
-	return fUML::Semantics::StructuredClassifiers::ReferenceImpl::internalEIsSet(featureID);
-}
-bool CS_InteractionPointImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case PSCS::Semantics::StructuredClassifiers::StructuredClassifiersPackage::CS_INTERACTIONPOINT_ATTRIBUTE_DEFININGPORT:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::Port> _definingPort = std::dynamic_pointer_cast<uml::Port>(_temp);
-			setDefiningPort(_definingPort); //172
-			return true;
-		}
-		case PSCS::Semantics::StructuredClassifiers::StructuredClassifiersPackage::CS_INTERACTIONPOINT_ATTRIBUTE_OWNER:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> _owner = std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Reference>(_temp);
-			setOwner(_owner); //171
-			return true;
-		}
-	}
-
-	return fUML::Semantics::StructuredClassifiers::ReferenceImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any CS_InteractionPointImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-		
-		// 1730410848
-		case StructuredClassifiersPackage::CS_INTERACTIONPOINT_OPERATION_CHECKALLPARENTS_CLASSIFIER_CLASSIFIER:
-		{
-			//Retrieve input parameter 'type'
-			//parameter 0
-			std::shared_ptr<uml::Classifier> incoming_param_type;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_type_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_type = (*incoming_param_type_arguments_citer)->get()->get<std::shared_ptr<uml::Classifier> >();
-			//Retrieve input parameter 'classifier'
-			//parameter 1
-			std::shared_ptr<uml::Classifier> incoming_param_classifier;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_classifier_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_classifier = (*incoming_param_classifier_arguments_citer)->get()->get<std::shared_ptr<uml::Classifier> >();
-			result = eAny(this->checkAllParents(incoming_param_type,incoming_param_classifier));
-			break;
-		}
-		
-		// 889946605
-		case StructuredClassifiersPackage::CS_INTERACTIONPOINT_OPERATION_DISPATCH_OPERATION:
-		{
-			//Retrieve input parameter 'operation'
-			//parameter 0
-			std::shared_ptr<uml::Operation> incoming_param_operation;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_operation_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_operation = (*incoming_param_operation_arguments_citer)->get()->get<std::shared_ptr<uml::Operation> >();
-			result = eAny(this->dispatch(incoming_param_operation));
-			break;
-		}
-		
-		// 1091927057
-		case StructuredClassifiersPackage::CS_INTERACTIONPOINT_OPERATION_SEND_EVENTOCCURRENCE:
-		{
-			//Retrieve input parameter 'eventOccurrence'
-			//parameter 0
-			std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> incoming_param_eventOccurrence;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_eventOccurrence_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_eventOccurrence = (*incoming_param_eventOccurrence_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> >();
-			this->send(incoming_param_eventOccurrence);
-			break;
-		}
-		
-		// 986944862
-		case StructuredClassifiersPackage::CS_INTERACTIONPOINT_OPERATION_STARTBEHAVIOR_CLASS_PARAMETERVALUE:
-		{
-			//Retrieve input parameter 'classifier'
-			//parameter 0
-			std::shared_ptr<uml::Class> incoming_param_classifier;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_classifier_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_classifier = (*incoming_param_classifier_arguments_citer)->get()->get<std::shared_ptr<uml::Class> >();
-			//Retrieve input parameter 'inputs'
-			//parameter 1
-			std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> incoming_param_inputs;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_inputs_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_inputs = (*incoming_param_inputs_arguments_citer)->get()->get<std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> >();
-			this->startBehavior(incoming_param_classifier,incoming_param_inputs);
-			break;
-		}
-
-		default:
-		{
-			// call superTypes
-			result = fUML::Semantics::StructuredClassifiers::ReferenceImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -472,10 +316,6 @@ void CS_InteractionPointImpl::save(std::shared_ptr<persistence::interfaces::XSav
 	fUML::Semantics::Loci::SemanticVisitorImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
 }
 
 void CS_InteractionPointImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -493,3 +333,159 @@ void CS_InteractionPointImpl::saveContent(std::shared_ptr<persistence::interface
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> CS_InteractionPointImpl::eStaticClass() const
+{
+	return PSCS::Semantics::StructuredClassifiers::StructuredClassifiersPackage::eInstance()->getCS_InteractionPoint_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any CS_InteractionPointImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case PSCS::Semantics::StructuredClassifiers::StructuredClassifiersPackage::CS_INTERACTIONPOINT_ATTRIBUTE_DEFININGPORT:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getDefiningPort();
+				return eAny(returnValue); //172
+			}
+		case PSCS::Semantics::StructuredClassifiers::StructuredClassifiersPackage::CS_INTERACTIONPOINT_ATTRIBUTE_OWNER:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getOwner();
+				return eAny(returnValue); //171
+			}
+	}
+	return fUML::Semantics::StructuredClassifiers::ReferenceImpl::eGet(featureID, resolve, coreType);
+}
+
+bool CS_InteractionPointImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case PSCS::Semantics::StructuredClassifiers::StructuredClassifiersPackage::CS_INTERACTIONPOINT_ATTRIBUTE_DEFININGPORT:
+			return getDefiningPort() != nullptr; //172
+		case PSCS::Semantics::StructuredClassifiers::StructuredClassifiersPackage::CS_INTERACTIONPOINT_ATTRIBUTE_OWNER:
+			return getOwner() != nullptr; //171
+	}
+	return fUML::Semantics::StructuredClassifiers::ReferenceImpl::internalEIsSet(featureID);
+}
+
+bool CS_InteractionPointImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case PSCS::Semantics::StructuredClassifiers::StructuredClassifiersPackage::CS_INTERACTIONPOINT_ATTRIBUTE_DEFININGPORT:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::Port> _definingPort = std::dynamic_pointer_cast<uml::Port>(_temp);
+			setDefiningPort(_definingPort); //172
+			return true;
+		}
+		case PSCS::Semantics::StructuredClassifiers::StructuredClassifiersPackage::CS_INTERACTIONPOINT_ATTRIBUTE_OWNER:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> _owner = std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Reference>(_temp);
+			setOwner(_owner); //171
+			return true;
+		}
+	}
+
+	return fUML::Semantics::StructuredClassifiers::ReferenceImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any CS_InteractionPointImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 1730410848
+		case StructuredClassifiersPackage::CS_INTERACTIONPOINT_OPERATION_CHECKALLPARENTS_CLASSIFIER_CLASSIFIER:
+		{
+			//Retrieve input parameter 'type'
+			//parameter 0
+			std::shared_ptr<uml::Classifier> incoming_param_type;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_type_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_type = (*incoming_param_type_arguments_citer)->get()->get<std::shared_ptr<uml::Classifier> >();
+			//Retrieve input parameter 'classifier'
+			//parameter 1
+			std::shared_ptr<uml::Classifier> incoming_param_classifier;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_classifier_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_classifier = (*incoming_param_classifier_arguments_citer)->get()->get<std::shared_ptr<uml::Classifier> >();
+			result = eAny(this->checkAllParents(incoming_param_type,incoming_param_classifier));
+			break;
+		}
+		
+		// 889946605
+		case StructuredClassifiersPackage::CS_INTERACTIONPOINT_OPERATION_DISPATCH_OPERATION:
+		{
+			//Retrieve input parameter 'operation'
+			//parameter 0
+			std::shared_ptr<uml::Operation> incoming_param_operation;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_operation_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_operation = (*incoming_param_operation_arguments_citer)->get()->get<std::shared_ptr<uml::Operation> >();
+			result = eAny(this->dispatch(incoming_param_operation));
+			break;
+		}
+		
+		// 1091927057
+		case StructuredClassifiersPackage::CS_INTERACTIONPOINT_OPERATION_SEND_EVENTOCCURRENCE:
+		{
+			//Retrieve input parameter 'eventOccurrence'
+			//parameter 0
+			std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> incoming_param_eventOccurrence;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_eventOccurrence_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_eventOccurrence = (*incoming_param_eventOccurrence_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> >();
+			this->send(incoming_param_eventOccurrence);
+			break;
+		}
+		
+		// 986944862
+		case StructuredClassifiersPackage::CS_INTERACTIONPOINT_OPERATION_STARTBEHAVIOR_CLASS_PARAMETERVALUE:
+		{
+			//Retrieve input parameter 'classifier'
+			//parameter 0
+			std::shared_ptr<uml::Class> incoming_param_classifier;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_classifier_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_classifier = (*incoming_param_classifier_arguments_citer)->get()->get<std::shared_ptr<uml::Class> >();
+			//Retrieve input parameter 'inputs'
+			//parameter 1
+			std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> incoming_param_inputs;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_inputs_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_inputs = (*incoming_param_inputs_arguments_citer)->get()->get<std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> >();
+			this->startBehavior(incoming_param_classifier,incoming_param_inputs);
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = fUML::Semantics::StructuredClassifiers::ReferenceImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<CS_InteractionPoint> CS_InteractionPointImpl::getThisCS_InteractionPointPtr() const
+{
+	return m_thisCS_InteractionPointPtr.lock();
+}
+void CS_InteractionPointImpl::setThisCS_InteractionPointPtr(std::weak_ptr<CS_InteractionPoint> thisCS_InteractionPointPtr)
+{
+	m_thisCS_InteractionPointPtr = thisCS_InteractionPointPtr;
+	setThisReferencePtr(thisCS_InteractionPointPtr);
+}

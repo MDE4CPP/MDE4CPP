@@ -1,3 +1,4 @@
+
 #include "fUML/Semantics/Actions/impl/ReadStructuralFeatureActionActivationImpl.hpp"
 
 #ifdef NDEBUG
@@ -44,7 +45,6 @@
 #include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "uml/umlFactory.hpp"
-
 
 #include "uml/Action.hpp"
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
@@ -134,15 +134,6 @@ std::shared_ptr<ecore::EObject> ReadStructuralFeatureActionActivationImpl::copy(
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> ReadStructuralFeatureActionActivationImpl::eStaticClass() const
-{
-	return fUML::Semantics::Actions::ActionsPackage::eInstance()->getReadStructuralFeatureActionActivation_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
@@ -185,11 +176,13 @@ void ReadStructuralFeatureActionActivationImpl::doAction()
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference readStructuralFeatureAction
-*/
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference readStructuralFeatureAction */
 std::shared_ptr<uml::ReadStructuralFeatureAction> ReadStructuralFeatureActionActivationImpl::getReadStructuralFeatureAction() const
 {
     return m_readStructuralFeatureAction;
@@ -199,7 +192,6 @@ void ReadStructuralFeatureActionActivationImpl::setReadStructuralFeatureAction(s
     m_readStructuralFeatureAction = _readStructuralFeatureAction;
 	//additional setter call for redefined reference ActionActivation::action
 	fUML::Semantics::Actions::ActionActivationImpl::setAction(_readStructuralFeatureAction);
-	
 }
 /*Additional Setter for redefined reference 'ActionActivation::action'*/
 void ReadStructuralFeatureActionActivationImpl::setAction(std::shared_ptr<uml::Action> _action)
@@ -234,7 +226,6 @@ void ReadStructuralFeatureActionActivationImpl::setNode(std::shared_ptr<uml::Act
 	}
 }
 
-
 //*********************************
 // Union Getter
 //*********************************
@@ -253,18 +244,9 @@ std::shared_ptr<Union<fUML::Semantics::Actions::PinActivation>> ReadStructuralFe
 	return m_pinActivation;
 }
 
-
-
-
-std::shared_ptr<ReadStructuralFeatureActionActivation> ReadStructuralFeatureActionActivationImpl::getThisReadStructuralFeatureActionActivationPtr() const
-{
-	return m_thisReadStructuralFeatureActionActivationPtr.lock();
-}
-void ReadStructuralFeatureActionActivationImpl::setThisReadStructuralFeatureActionActivationPtr(std::weak_ptr<ReadStructuralFeatureActionActivation> thisReadStructuralFeatureActionActivationPtr)
-{
-	m_thisReadStructuralFeatureActionActivationPtr = thisReadStructuralFeatureActionActivationPtr;
-	setThisStructuralFeatureActionActivationPtr(thisReadStructuralFeatureActionActivationPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> ReadStructuralFeatureActionActivationImpl::eContainer() const
 {
 	if(auto wp = m_group.lock())
@@ -272,77 +254,6 @@ std::shared_ptr<ecore::EObject> ReadStructuralFeatureActionActivationImpl::eCont
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any ReadStructuralFeatureActionActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case fUML::Semantics::Actions::ActionsPackage::READSTRUCTURALFEATUREACTIONACTIVATION_ATTRIBUTE_READSTRUCTURALFEATUREACTION:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getReadStructuralFeatureAction();
-				return eAny(returnValue); //9411
-			}
-	}
-	return StructuralFeatureActionActivationImpl::eGet(featureID, resolve, coreType);
-}
-bool ReadStructuralFeatureActionActivationImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case fUML::Semantics::Actions::ActionsPackage::READSTRUCTURALFEATUREACTIONACTIVATION_ATTRIBUTE_READSTRUCTURALFEATUREACTION:
-			return getReadStructuralFeatureAction() != nullptr; //9411
-	}
-	return StructuralFeatureActionActivationImpl::internalEIsSet(featureID);
-}
-bool ReadStructuralFeatureActionActivationImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case fUML::Semantics::Actions::ActionsPackage::READSTRUCTURALFEATUREACTIONACTIVATION_ATTRIBUTE_READSTRUCTURALFEATUREACTION:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::ReadStructuralFeatureAction> _readStructuralFeatureAction = std::dynamic_pointer_cast<uml::ReadStructuralFeatureAction>(_temp);
-			setReadStructuralFeatureAction(_readStructuralFeatureAction); //9411
-			return true;
-		}
-	}
-
-	return StructuralFeatureActionActivationImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any ReadStructuralFeatureActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-		
-		// 1837829447
-		case ActionsPackage::READSTRUCTURALFEATUREACTIONACTIVATION_OPERATION_DOACTION:
-		{
-			this->doAction();
-			break;
-		}
-
-		default:
-		{
-			// call superTypes
-			result = StructuralFeatureActionActivationImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -428,10 +339,6 @@ void ReadStructuralFeatureActionActivationImpl::save(std::shared_ptr<persistence
 	fUML::Semantics::Loci::SemanticVisitorImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
 }
 
 void ReadStructuralFeatureActionActivationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -448,3 +355,93 @@ void ReadStructuralFeatureActionActivationImpl::saveContent(std::shared_ptr<pers
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> ReadStructuralFeatureActionActivationImpl::eStaticClass() const
+{
+	return fUML::Semantics::Actions::ActionsPackage::eInstance()->getReadStructuralFeatureActionActivation_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any ReadStructuralFeatureActionActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case fUML::Semantics::Actions::ActionsPackage::READSTRUCTURALFEATUREACTIONACTIVATION_ATTRIBUTE_READSTRUCTURALFEATUREACTION:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getReadStructuralFeatureAction();
+				return eAny(returnValue); //9411
+			}
+	}
+	return StructuralFeatureActionActivationImpl::eGet(featureID, resolve, coreType);
+}
+
+bool ReadStructuralFeatureActionActivationImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case fUML::Semantics::Actions::ActionsPackage::READSTRUCTURALFEATUREACTIONACTIVATION_ATTRIBUTE_READSTRUCTURALFEATUREACTION:
+			return getReadStructuralFeatureAction() != nullptr; //9411
+	}
+	return StructuralFeatureActionActivationImpl::internalEIsSet(featureID);
+}
+
+bool ReadStructuralFeatureActionActivationImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case fUML::Semantics::Actions::ActionsPackage::READSTRUCTURALFEATUREACTIONACTIVATION_ATTRIBUTE_READSTRUCTURALFEATUREACTION:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::ReadStructuralFeatureAction> _readStructuralFeatureAction = std::dynamic_pointer_cast<uml::ReadStructuralFeatureAction>(_temp);
+			setReadStructuralFeatureAction(_readStructuralFeatureAction); //9411
+			return true;
+		}
+	}
+
+	return StructuralFeatureActionActivationImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any ReadStructuralFeatureActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 1837829447
+		case ActionsPackage::READSTRUCTURALFEATUREACTIONACTIVATION_OPERATION_DOACTION:
+		{
+			this->doAction();
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = StructuralFeatureActionActivationImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<ReadStructuralFeatureActionActivation> ReadStructuralFeatureActionActivationImpl::getThisReadStructuralFeatureActionActivationPtr() const
+{
+	return m_thisReadStructuralFeatureActionActivationPtr.lock();
+}
+void ReadStructuralFeatureActionActivationImpl::setThisReadStructuralFeatureActionActivationPtr(std::weak_ptr<ReadStructuralFeatureActionActivation> thisReadStructuralFeatureActionActivationPtr)
+{
+	m_thisReadStructuralFeatureActionActivationPtr = thisReadStructuralFeatureActionActivationPtr;
+	setThisStructuralFeatureActionActivationPtr(thisReadStructuralFeatureActionActivationPtr);
+}

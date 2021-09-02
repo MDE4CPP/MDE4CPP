@@ -57,7 +57,6 @@ namespace uml
 // base class includes
 #include "fUML/Semantics/Actions/WriteStructuralFeatureActionActivation.hpp"
 
-// enum includes
 
 
 
@@ -82,57 +81,48 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			// Operations
 			//*********************************
-			 
 			virtual void doAction() = 0;
+
 			//*********************************
-			// Attributes Getter & Setter
+			// Attribute Getters & Setters
 			//*********************************
-			
+
 			//*********************************
-			// References Getter & Setter
+			// Reference Getters & Setters
 			//*********************************
-			
 			virtual std::shared_ptr<uml::AddStructuralFeatureValueAction> getAddStructuralFeatureValueAction() const = 0;
-			
 			virtual void setAddStructuralFeatureValueAction(std::shared_ptr<uml::AddStructuralFeatureValueAction>) = 0;
 			/*Additional Setter for 'ActionActivation::action' redefined by reference 'addStructuralFeatureValueAction'*/
-			
 			virtual void setAction(std::shared_ptr<uml::Action>) = 0;
 			/*Additional Setter for 'ActivityNodeActivation::node' redefined by reference 'addStructuralFeatureValueAction'*/
-			
 			virtual void setNode(std::shared_ptr<uml::ActivityNode>) = 0;
-			
+
+			//*********************************
+			// Union Reference Getters
+			//*********************************
+			virtual std::shared_ptr<Union<fUML::Semantics::Actions::PinActivation>> getPinActivation() const = 0;
+
+			//*********************************
+			// Container Getter
+			//*********************************
+			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
+
+			//*********************************
+			// Persistence Functions
+			//*********************************
+			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 
 		protected:
 			//*********************************
 			// Attribute Members
 			//*********************************
 			
-			
 			//*********************************
 			// Reference Members
 			//*********************************
-			
 			std::shared_ptr<uml::AddStructuralFeatureValueAction> m_addStructuralFeatureValueAction;
-
-		public:
-			//*********************************
-			// Union Getter
-			//*********************************
-			
-			virtual std::shared_ptr<Union<fUML::Semantics::Actions::PinActivation>> getPinActivation() const = 0;
-
-			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
-			
-			//*********************************
-			// Persistence Functions
-			//*********************************
-			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
-			
-			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
-			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
-			
 	};
-
 }
 #endif /* end of include guard: FUML_SEMANTICS_ACTIONS_ADDSTRUCTURALFEATUREVALUEACTIONACTIVATION_HPP */

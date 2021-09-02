@@ -47,7 +47,6 @@ namespace ecore
 // base class includes
 #include "ecore/ETypedElement.hpp"
 
-// enum includes
 
 
 
@@ -77,97 +76,67 @@ namespace ecore
 			//*********************************
 			// Operations
 			//*********************************
-			 
 			virtual void * getContainerClass() = 0;
+			
+
 			//*********************************
-			// Attributes Getter & Setter
+			// Attribute Getters & Setters
 			//*********************************
-			 
 			virtual bool isChangeable() const = 0;
-			 
 			virtual void setChangeable (bool _changeable)= 0;
-			 
 			virtual Any getDefaultValue() const = 0;
-			 
 			virtual void setDefaultValue (Any _defaultValue)= 0;
-			 
 			virtual std::string getDefaultValueLiteral() const = 0;
-			 
 			virtual void setDefaultValueLiteral (std::string _defaultValueLiteral)= 0;
-			 
 			virtual bool isDerived() const = 0;
-			 
 			virtual void setDerived (bool _derived)= 0;
-			 
 			virtual int getFeatureID() const = 0;
-			
-			 
 			virtual bool isTransient() const = 0;
-			 
 			virtual void setTransient (bool _transient)= 0;
-			 
 			virtual bool isUnsettable() const = 0;
-			 
 			virtual void setUnsettable (bool _unsettable)= 0;
-			 
 			virtual bool isVolatile() const = 0;
-			 
 			virtual void setVolatile (bool _volatile)= 0;
-			
+
 			//*********************************
-			// References Getter & Setter
+			// Reference Getters & Setters
 			//*********************************
-			
 			virtual std::weak_ptr<ecore::EClass> getEContainingClass() const = 0;
-			
-			
+
+			//*********************************
+			// Union Reference Getters
+			//*********************************
+			virtual std::shared_ptr<Union<ecore::EObject>> getEContens() const = 0;
+
+			//*********************************
+			// Container Getter
+			//*********************************
+			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
+
+			//*********************************
+			// Persistence Functions
+			//*********************************
+			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<EObject> > references) = 0;
+			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 
 		protected:
 			//*********************************
 			// Attribute Members
 			//*********************************
-			
-			bool m_changeable = true;
-			
-			Any m_defaultValue = nullptr;
-			
-			std::string m_defaultValueLiteral = "";
-			
-			bool m_derived = false;
-			
-			int m_featureID = -1;
-			
-			bool m_transient = false;
-			
-			bool m_unsettable = false;
-			
-			bool m_volatile = false;
-			
+			bool m_changeable= true;
+			Any m_defaultValue= nullptr;
+			std::string m_defaultValueLiteral= "";
+			bool m_derived= false;
+			int m_featureID= -1;
+			bool m_transient= false;
+			bool m_unsettable= false;
+			bool m_volatile= false;
 			
 			//*********************************
 			// Reference Members
 			//*********************************
-			
 			std::weak_ptr<ecore::EClass> m_eContainingClass;
-
-		public:
-			//*********************************
-			// Union Getter
-			//*********************************
-			
-			virtual std::shared_ptr<Union<ecore::EObject>> getEContens() const = 0;
-
-			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
-			
-			//*********************************
-			// Persistence Functions
-			//*********************************
-			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
-			
-			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<EObject> > references) = 0;
-			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
-			
 	};
-
 }
 #endif /* end of include guard: ECORE_ESTRUCTURALFEATURE_HPP */

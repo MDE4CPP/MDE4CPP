@@ -1,3 +1,4 @@
+
 #include "fUML/Semantics/CommonBehavior/impl/ClassifierBehaviorInvocationEventAccepterImpl.hpp"
 
 #ifdef NDEBUG
@@ -38,7 +39,6 @@
 #include <exception> // used in Persistence
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
 #include "uml/umlFactory.hpp"
-
 
 #include "uml/Class.hpp"
 #include "fUML/Semantics/CommonBehavior/EventAccepter.hpp"
@@ -119,15 +119,6 @@ std::shared_ptr<ecore::EObject> ClassifierBehaviorInvocationEventAccepterImpl::c
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> ClassifierBehaviorInvocationEventAccepterImpl::eStaticClass() const
-{
-	return fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance()->getClassifierBehaviorInvocationEventAccepter_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
@@ -144,6 +135,8 @@ if(std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::InvocationEventOcc
 }
 	//end of body
 }
+
+
 
 bool ClassifierBehaviorInvocationEventAccepterImpl::match(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> eventOccurrence)
 {
@@ -181,11 +174,13 @@ if(this->getExecution() != this->getObjectActivation()->getObject())
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference classifier
-*/
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference classifier */
 std::shared_ptr<uml::Class> ClassifierBehaviorInvocationEventAccepterImpl::getClassifier() const
 {
     return m_classifier;
@@ -196,10 +191,7 @@ void ClassifierBehaviorInvocationEventAccepterImpl::setClassifier(std::shared_pt
 	
 }
 
-
-/*
-Getter & Setter for reference execution
-*/
+/* Getter & Setter for reference execution */
 std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> ClassifierBehaviorInvocationEventAccepterImpl::getExecution() const
 {
     return m_execution;
@@ -210,10 +202,7 @@ void ClassifierBehaviorInvocationEventAccepterImpl::setExecution(std::shared_ptr
 	
 }
 
-
-/*
-Getter & Setter for reference objectActivation
-*/
+/* Getter & Setter for reference objectActivation */
 std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation> ClassifierBehaviorInvocationEventAccepterImpl::getObjectActivation() const
 {
     return m_objectActivation;
@@ -224,150 +213,16 @@ void ClassifierBehaviorInvocationEventAccepterImpl::setObjectActivation(std::sha
 	
 }
 
-
 //*********************************
 // Union Getter
 //*********************************
 
-
-
-std::shared_ptr<ClassifierBehaviorInvocationEventAccepter> ClassifierBehaviorInvocationEventAccepterImpl::getThisClassifierBehaviorInvocationEventAccepterPtr() const
-{
-	return m_thisClassifierBehaviorInvocationEventAccepterPtr.lock();
-}
-void ClassifierBehaviorInvocationEventAccepterImpl::setThisClassifierBehaviorInvocationEventAccepterPtr(std::weak_ptr<ClassifierBehaviorInvocationEventAccepter> thisClassifierBehaviorInvocationEventAccepterPtr)
-{
-	m_thisClassifierBehaviorInvocationEventAccepterPtr = thisClassifierBehaviorInvocationEventAccepterPtr;
-	setThisEventAccepterPtr(thisClassifierBehaviorInvocationEventAccepterPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> ClassifierBehaviorInvocationEventAccepterImpl::eContainer() const
 {
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any ClassifierBehaviorInvocationEventAccepterImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::CLASSIFIERBEHAVIORINVOCATIONEVENTACCEPTER_ATTRIBUTE_CLASSIFIER:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getClassifier();
-				return eAny(returnValue); //250
-			}
-		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::CLASSIFIERBEHAVIORINVOCATIONEVENTACCEPTER_ATTRIBUTE_EXECUTION:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getExecution();
-				return eAny(returnValue); //251
-			}
-		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::CLASSIFIERBEHAVIORINVOCATIONEVENTACCEPTER_ATTRIBUTE_OBJECTACTIVATION:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getObjectActivation();
-				return eAny(returnValue); //252
-			}
-	}
-	return EventAccepterImpl::eGet(featureID, resolve, coreType);
-}
-bool ClassifierBehaviorInvocationEventAccepterImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::CLASSIFIERBEHAVIORINVOCATIONEVENTACCEPTER_ATTRIBUTE_CLASSIFIER:
-			return getClassifier() != nullptr; //250
-		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::CLASSIFIERBEHAVIORINVOCATIONEVENTACCEPTER_ATTRIBUTE_EXECUTION:
-			return getExecution() != nullptr; //251
-		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::CLASSIFIERBEHAVIORINVOCATIONEVENTACCEPTER_ATTRIBUTE_OBJECTACTIVATION:
-			return getObjectActivation() != nullptr; //252
-	}
-	return EventAccepterImpl::internalEIsSet(featureID);
-}
-bool ClassifierBehaviorInvocationEventAccepterImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::CLASSIFIERBEHAVIORINVOCATIONEVENTACCEPTER_ATTRIBUTE_CLASSIFIER:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::Class> _classifier = std::dynamic_pointer_cast<uml::Class>(_temp);
-			setClassifier(_classifier); //250
-			return true;
-		}
-		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::CLASSIFIERBEHAVIORINVOCATIONEVENTACCEPTER_ATTRIBUTE_EXECUTION:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> _execution = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::Execution>(_temp);
-			setExecution(_execution); //251
-			return true;
-		}
-		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::CLASSIFIERBEHAVIORINVOCATIONEVENTACCEPTER_ATTRIBUTE_OBJECTACTIVATION:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation> _objectActivation = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::ObjectActivation>(_temp);
-			setObjectActivation(_objectActivation); //252
-			return true;
-		}
-	}
-
-	return EventAccepterImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any ClassifierBehaviorInvocationEventAccepterImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-		
-		// 700456347
-		case CommonBehaviorPackage::CLASSIFIERBEHAVIORINVOCATIONEVENTACCEPTER_OPERATION_ACCEPT_EVENTOCCURRENCE:
-		{
-			//Retrieve input parameter 'eventOccurrence'
-			//parameter 0
-			std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> incoming_param_eventOccurrence;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_eventOccurrence_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_eventOccurrence = (*incoming_param_eventOccurrence_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> >();
-			this->accept(incoming_param_eventOccurrence);
-			break;
-		}
-		
-		// 621566743
-		case CommonBehaviorPackage::CLASSIFIERBEHAVIORINVOCATIONEVENTACCEPTER_OPERATION_MATCH_EVENTOCCURRENCE:
-		{
-			//Retrieve input parameter 'eventOccurrence'
-			//parameter 0
-			std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> incoming_param_eventOccurrence;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_eventOccurrence_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_eventOccurrence = (*incoming_param_eventOccurrence_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> >();
-			result = eAny(this->match(incoming_param_eventOccurrence));
-			break;
-		}
-		
-		// 1314087765
-		case CommonBehaviorPackage::CLASSIFIERBEHAVIORINVOCATIONEVENTACCEPTER_OPERATION_TERMINATE:
-		{
-			this->terminate();
-			break;
-		}
-
-		default:
-		{
-			// call superTypes
-			result = EventAccepterImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -485,7 +340,6 @@ void ClassifierBehaviorInvocationEventAccepterImpl::save(std::shared_ptr<persist
 	EventAccepterImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
 }
 
 void ClassifierBehaviorInvocationEventAccepterImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -504,3 +358,147 @@ void ClassifierBehaviorInvocationEventAccepterImpl::saveContent(std::shared_ptr<
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> ClassifierBehaviorInvocationEventAccepterImpl::eStaticClass() const
+{
+	return fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance()->getClassifierBehaviorInvocationEventAccepter_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any ClassifierBehaviorInvocationEventAccepterImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::CLASSIFIERBEHAVIORINVOCATIONEVENTACCEPTER_ATTRIBUTE_CLASSIFIER:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getClassifier();
+				return eAny(returnValue); //250
+			}
+		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::CLASSIFIERBEHAVIORINVOCATIONEVENTACCEPTER_ATTRIBUTE_EXECUTION:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getExecution();
+				return eAny(returnValue); //251
+			}
+		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::CLASSIFIERBEHAVIORINVOCATIONEVENTACCEPTER_ATTRIBUTE_OBJECTACTIVATION:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getObjectActivation();
+				return eAny(returnValue); //252
+			}
+	}
+	return EventAccepterImpl::eGet(featureID, resolve, coreType);
+}
+
+bool ClassifierBehaviorInvocationEventAccepterImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::CLASSIFIERBEHAVIORINVOCATIONEVENTACCEPTER_ATTRIBUTE_CLASSIFIER:
+			return getClassifier() != nullptr; //250
+		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::CLASSIFIERBEHAVIORINVOCATIONEVENTACCEPTER_ATTRIBUTE_EXECUTION:
+			return getExecution() != nullptr; //251
+		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::CLASSIFIERBEHAVIORINVOCATIONEVENTACCEPTER_ATTRIBUTE_OBJECTACTIVATION:
+			return getObjectActivation() != nullptr; //252
+	}
+	return EventAccepterImpl::internalEIsSet(featureID);
+}
+
+bool ClassifierBehaviorInvocationEventAccepterImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::CLASSIFIERBEHAVIORINVOCATIONEVENTACCEPTER_ATTRIBUTE_CLASSIFIER:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::Class> _classifier = std::dynamic_pointer_cast<uml::Class>(_temp);
+			setClassifier(_classifier); //250
+			return true;
+		}
+		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::CLASSIFIERBEHAVIORINVOCATIONEVENTACCEPTER_ATTRIBUTE_EXECUTION:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> _execution = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::Execution>(_temp);
+			setExecution(_execution); //251
+			return true;
+		}
+		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::CLASSIFIERBEHAVIORINVOCATIONEVENTACCEPTER_ATTRIBUTE_OBJECTACTIVATION:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation> _objectActivation = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::ObjectActivation>(_temp);
+			setObjectActivation(_objectActivation); //252
+			return true;
+		}
+	}
+
+	return EventAccepterImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any ClassifierBehaviorInvocationEventAccepterImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 700456347
+		case CommonBehaviorPackage::CLASSIFIERBEHAVIORINVOCATIONEVENTACCEPTER_OPERATION_ACCEPT_EVENTOCCURRENCE:
+		{
+			//Retrieve input parameter 'eventOccurrence'
+			//parameter 0
+			std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> incoming_param_eventOccurrence;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_eventOccurrence_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_eventOccurrence = (*incoming_param_eventOccurrence_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> >();
+			this->accept(incoming_param_eventOccurrence);
+			break;
+		}
+		
+		// 621566743
+		case CommonBehaviorPackage::CLASSIFIERBEHAVIORINVOCATIONEVENTACCEPTER_OPERATION_MATCH_EVENTOCCURRENCE:
+		{
+			//Retrieve input parameter 'eventOccurrence'
+			//parameter 0
+			std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> incoming_param_eventOccurrence;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_eventOccurrence_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_eventOccurrence = (*incoming_param_eventOccurrence_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> >();
+			result = eAny(this->match(incoming_param_eventOccurrence));
+			break;
+		}
+		
+		// 1314087765
+		case CommonBehaviorPackage::CLASSIFIERBEHAVIORINVOCATIONEVENTACCEPTER_OPERATION_TERMINATE:
+		{
+			this->terminate();
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = EventAccepterImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<ClassifierBehaviorInvocationEventAccepter> ClassifierBehaviorInvocationEventAccepterImpl::getThisClassifierBehaviorInvocationEventAccepterPtr() const
+{
+	return m_thisClassifierBehaviorInvocationEventAccepterPtr.lock();
+}
+void ClassifierBehaviorInvocationEventAccepterImpl::setThisClassifierBehaviorInvocationEventAccepterPtr(std::weak_ptr<ClassifierBehaviorInvocationEventAccepter> thisClassifierBehaviorInvocationEventAccepterPtr)
+{
+	m_thisClassifierBehaviorInvocationEventAccepterPtr = thisClassifierBehaviorInvocationEventAccepterPtr;
+	setThisEventAccepterPtr(thisClassifierBehaviorInvocationEventAccepterPtr);
+}

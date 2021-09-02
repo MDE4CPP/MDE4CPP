@@ -1,3 +1,4 @@
+
 #include "ocl/Expressions/impl/PrimitiveLiteralExpImpl.hpp"
 
 #ifdef NDEBUG
@@ -25,7 +26,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -35,7 +35,6 @@
 #include "ecore/ecoreFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
-
 
 #include "ocl/Expressions/CallExp.hpp"
 #include "ocl/Expressions/CollectionRange.hpp"
@@ -204,17 +203,14 @@ std::shared_ptr<ecore::EObject> PrimitiveLiteralExpImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> PrimitiveLiteralExpImpl::eStaticClass() const
-{
-	return ocl::Expressions::ExpressionsPackage::eInstance()->getPrimitiveLiteralExp_Class();
-}
+//*********************************
+// Operations
+//*********************************
 
 //*********************************
-// Attribute Setter Getter
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for attribute symbol
-*/
+/* Getter & Setter for attribute symbol */
 std::string PrimitiveLiteralExpImpl::getSymbol() const 
 {
 	return m_symbol;
@@ -223,32 +219,19 @@ void PrimitiveLiteralExpImpl::setSymbol(std::string _symbol)
 {
 	m_symbol = _symbol;
 	
-} 
-
-
-//*********************************
-// Operations
-//*********************************
+}
 
 //*********************************
-// References
+// Reference Getters & Setters
 //*********************************
 
 //*********************************
 // Union Getter
 //*********************************
 
-
-
-std::shared_ptr<PrimitiveLiteralExp> PrimitiveLiteralExpImpl::getThisPrimitiveLiteralExpPtr() const
-{
-	return m_thisPrimitiveLiteralExpPtr.lock();
-}
-void PrimitiveLiteralExpImpl::setThisPrimitiveLiteralExpPtr(std::weak_ptr<PrimitiveLiteralExp> thisPrimitiveLiteralExpPtr)
-{
-	m_thisPrimitiveLiteralExpPtr = thisPrimitiveLiteralExpPtr;
-	setThisLiteralExpPtr(thisPrimitiveLiteralExpPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> PrimitiveLiteralExpImpl::eContainer() const
 {
 	if(auto wp = m_appliedElement.lock())
@@ -306,66 +289,6 @@ std::shared_ptr<ecore::EObject> PrimitiveLiteralExpImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any PrimitiveLiteralExpImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case ocl::Expressions::ExpressionsPackage::PRIMITIVELITERALEXP_ATTRIBUTE_SYMBOL:
-			return eAny(getSymbol()); //6922
-	}
-	return LiteralExpImpl::eGet(featureID, resolve, coreType);
-}
-bool PrimitiveLiteralExpImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case ocl::Expressions::ExpressionsPackage::PRIMITIVELITERALEXP_ATTRIBUTE_SYMBOL:
-			return getSymbol() != ""; //6922
-	}
-	return LiteralExpImpl::internalEIsSet(featureID);
-}
-bool PrimitiveLiteralExpImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case ocl::Expressions::ExpressionsPackage::PRIMITIVELITERALEXP_ATTRIBUTE_SYMBOL:
-		{
-			// BOOST CAST
-			std::string _symbol = newValue->get<std::string>();
-			setSymbol(_symbol); //6922
-			return true;
-		}
-	}
-
-	return LiteralExpImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any PrimitiveLiteralExpImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-
-		default:
-		{
-			// call superTypes
-			result = LiteralExpImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -441,11 +364,6 @@ void PrimitiveLiteralExpImpl::save(std::shared_ptr<persistence::interfaces::XSav
 	ecore::EModelElementImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
-	
 }
 
 void PrimitiveLiteralExpImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -465,3 +383,82 @@ void PrimitiveLiteralExpImpl::saveContent(std::shared_ptr<persistence::interface
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> PrimitiveLiteralExpImpl::eStaticClass() const
+{
+	return ocl::Expressions::ExpressionsPackage::eInstance()->getPrimitiveLiteralExp_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any PrimitiveLiteralExpImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case ocl::Expressions::ExpressionsPackage::PRIMITIVELITERALEXP_ATTRIBUTE_SYMBOL:
+			return eAny(getSymbol()); //6922
+	}
+	return LiteralExpImpl::eGet(featureID, resolve, coreType);
+}
+
+bool PrimitiveLiteralExpImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case ocl::Expressions::ExpressionsPackage::PRIMITIVELITERALEXP_ATTRIBUTE_SYMBOL:
+			return getSymbol() != ""; //6922
+	}
+	return LiteralExpImpl::internalEIsSet(featureID);
+}
+
+bool PrimitiveLiteralExpImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case ocl::Expressions::ExpressionsPackage::PRIMITIVELITERALEXP_ATTRIBUTE_SYMBOL:
+		{
+			// BOOST CAST
+			std::string _symbol = newValue->get<std::string>();
+			setSymbol(_symbol); //6922
+			return true;
+		}
+	}
+
+	return LiteralExpImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any PrimitiveLiteralExpImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+
+		default:
+		{
+			// call superTypes
+			result = LiteralExpImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<PrimitiveLiteralExp> PrimitiveLiteralExpImpl::getThisPrimitiveLiteralExpPtr() const
+{
+	return m_thisPrimitiveLiteralExpPtr.lock();
+}
+void PrimitiveLiteralExpImpl::setThisPrimitiveLiteralExpPtr(std::weak_ptr<PrimitiveLiteralExp> thisPrimitiveLiteralExpPtr)
+{
+	m_thisPrimitiveLiteralExpPtr = thisPrimitiveLiteralExpPtr;
+	setThisLiteralExpPtr(thisPrimitiveLiteralExpPtr);
+}

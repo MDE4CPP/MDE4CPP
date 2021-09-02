@@ -1,3 +1,4 @@
+
 #include "uml/impl/UseCaseImpl.hpp"
 
 #ifdef NDEBUG
@@ -26,7 +27,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -34,7 +34,6 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-
 
 #include "uml/Behavior.hpp"
 #include "uml/BehavioredClassifier.hpp"
@@ -286,15 +285,6 @@ std::shared_ptr<ecore::EObject> UseCaseImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> UseCaseImpl::eStaticClass() const
-{
-	return uml::umlPackage::eInstance()->getUseCase_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
@@ -329,11 +319,13 @@ bool UseCaseImpl::no_association_to_use_case(Any diagnostics,std::shared_ptr<std
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference extend
-*/
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference extend */
 std::shared_ptr<Subset<uml::Extend, uml::NamedElement>> UseCaseImpl::getExtend() const
 {
 	if(m_extend == nullptr)
@@ -354,11 +346,7 @@ std::shared_ptr<Subset<uml::Extend, uml::NamedElement>> UseCaseImpl::getExtend()
     return m_extend;
 }
 
-
-
-/*
-Getter & Setter for reference extensionPoint
-*/
+/* Getter & Setter for reference extensionPoint */
 std::shared_ptr<Subset<uml::ExtensionPoint, uml::NamedElement>> UseCaseImpl::getExtensionPoint() const
 {
 	if(m_extensionPoint == nullptr)
@@ -379,11 +367,7 @@ std::shared_ptr<Subset<uml::ExtensionPoint, uml::NamedElement>> UseCaseImpl::get
     return m_extensionPoint;
 }
 
-
-
-/*
-Getter & Setter for reference include
-*/
+/* Getter & Setter for reference include */
 std::shared_ptr<Subset<uml::Include, uml::NamedElement>> UseCaseImpl::getInclude() const
 {
 	if(m_include == nullptr)
@@ -404,11 +388,7 @@ std::shared_ptr<Subset<uml::Include, uml::NamedElement>> UseCaseImpl::getInclude
     return m_include;
 }
 
-
-
-/*
-Getter & Setter for reference subject
-*/
+/* Getter & Setter for reference subject */
 std::shared_ptr<Bag<uml::Classifier>> UseCaseImpl::getSubject() const
 {
 	if(m_subject == nullptr)
@@ -419,8 +399,6 @@ std::shared_ptr<Bag<uml::Classifier>> UseCaseImpl::getSubject() const
 	}
     return m_subject;
 }
-
-
 
 //*********************************
 // Union Getter
@@ -522,16 +500,9 @@ std::shared_ptr<Union<uml::RedefinableElement>> UseCaseImpl::getRedefinedElement
 
 
 
-
-std::shared_ptr<UseCase> UseCaseImpl::getThisUseCasePtr() const
-{
-	return m_thisUseCasePtr.lock();
-}
-void UseCaseImpl::setThisUseCasePtr(std::weak_ptr<UseCase> thisUseCasePtr)
-{
-	m_thisUseCasePtr = thisUseCasePtr;
-	setThisBehavioredClassifierPtr(thisUseCasePtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> UseCaseImpl::eContainer() const
 {
 	if(auto wp = m_namespace.lock())
@@ -562,7 +533,188 @@ std::shared_ptr<ecore::EObject> UseCaseImpl::eContainer() const
 }
 
 //*********************************
-// Structural Feature Getter/Setter
+// Persistence Functions
+//*********************************
+void UseCaseImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get umlFactory
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
+	}
+}		
+
+void UseCaseImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+	try
+	{
+		std::map<std::string, std::string>::const_iterator iter;
+		std::shared_ptr<ecore::EClass> metaClass = this->eClass(); // get MetaClass
+		iter = attr_list.find("subject");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("subject")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	BehavioredClassifierImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void UseCaseImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+
+	try
+	{
+		if ( nodeName.compare("extend") == 0 )
+		{
+  			std::string typeName = loadHandler->getCurrentXSITypeName();
+			if (typeName.empty())
+			{
+				typeName = "Extend";
+			}
+			loadHandler->handleChildContainer<uml::Extend>(this->getExtend());  
+
+			return; 
+		}
+
+		if ( nodeName.compare("extensionPoint") == 0 )
+		{
+  			std::string typeName = loadHandler->getCurrentXSITypeName();
+			if (typeName.empty())
+			{
+				typeName = "ExtensionPoint";
+			}
+			loadHandler->handleChildContainer<uml::ExtensionPoint>(this->getExtensionPoint());  
+
+			return; 
+		}
+
+		if ( nodeName.compare("include") == 0 )
+		{
+  			std::string typeName = loadHandler->getCurrentXSITypeName();
+			if (typeName.empty())
+			{
+				typeName = "Include";
+			}
+			loadHandler->handleChildContainer<uml::Include>(this->getInclude());  
+
+			return; 
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+	//load BasePackage Nodes
+	BehavioredClassifierImpl::loadNode(nodeName, loadHandler);
+}
+
+void UseCaseImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::USECASE_ATTRIBUTE_SUBJECT:
+		{
+			std::shared_ptr<Bag<uml::Classifier>> _subject = getSubject();
+			for(std::shared_ptr<ecore::EObject> ref : references)
+			{
+				std::shared_ptr<uml::Classifier>  _r = std::dynamic_pointer_cast<uml::Classifier>(ref);
+				if (_r != nullptr)
+				{
+					_subject->push_back(_r);
+				}
+			}
+			return;
+		}
+	}
+	BehavioredClassifierImpl::resolveReferences(featureID, references);
+}
+
+void UseCaseImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	BehavioredClassifierImpl::saveContent(saveHandler);
+	
+	ClassifierImpl::saveContent(saveHandler);
+	
+	NamespaceImpl::saveContent(saveHandler);
+	RedefinableElementImpl::saveContent(saveHandler);
+	TemplateableElementImpl::saveContent(saveHandler);
+	TypeImpl::saveContent(saveHandler);
+	
+	PackageableElementImpl::saveContent(saveHandler);
+	
+	NamedElementImpl::saveContent(saveHandler);
+	ParameterableElementImpl::saveContent(saveHandler);
+	
+	ElementImpl::saveContent(saveHandler);
+	
+	ObjectImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+}
+
+void UseCaseImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
+		// Save 'extend'
+		for (std::shared_ptr<uml::Extend> extend : *this->getExtend()) 
+		{
+			saveHandler->addReference(extend, "extend", extend->eClass() != package->getExtend_Class());
+		}
+
+		// Save 'extensionPoint'
+		for (std::shared_ptr<uml::ExtensionPoint> extensionPoint : *this->getExtensionPoint()) 
+		{
+			saveHandler->addReference(extensionPoint, "extensionPoint", extensionPoint->eClass() != package->getExtensionPoint_Class());
+		}
+
+		// Save 'include'
+		for (std::shared_ptr<uml::Include> include : *this->getInclude()) 
+		{
+			saveHandler->addReference(include, "include", include->eClass() != package->getInclude_Class());
+		}
+	// Add references
+		saveHandler->addReferences<uml::Classifier>("subject", this->getSubject());
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+}
+
+
+std::shared_ptr<ecore::EClass> UseCaseImpl::eStaticClass() const
+{
+	return uml::umlPackage::eInstance()->getUseCase_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
 //*********************************
 Any UseCaseImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
@@ -619,6 +771,7 @@ Any UseCaseImpl::eGet(int featureID, bool resolve, bool coreType) const
 	}
 	return BehavioredClassifierImpl::eGet(featureID, resolve, coreType);
 }
+
 bool UseCaseImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
@@ -634,6 +787,7 @@ bool UseCaseImpl::internalEIsSet(int featureID) const
 	}
 	return BehavioredClassifierImpl::internalEIsSet(featureID);
 }
+
 bool UseCaseImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
@@ -788,7 +942,7 @@ bool UseCaseImpl::eSet(int featureID, Any newValue)
 }
 
 //*********************************
-// Behavioral Feature
+// EOperation Invoke
 //*********************************
 Any UseCaseImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
 {
@@ -885,184 +1039,13 @@ Any UseCaseImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::share
 	return result;
 }
 
-//*********************************
-// Persistence Functions
-//*********************************
-void UseCaseImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+
+std::shared_ptr<UseCase> UseCaseImpl::getThisUseCasePtr() const
 {
-	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
-	loadAttributes(loadHandler, attr_list);
-
-	//
-	// Create new objects (from references (containment == true))
-	//
-	// get umlFactory
-	int numNodes = loadHandler->getNumOfChildNodes();
-	for(int ii = 0; ii < numNodes; ii++)
-	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler);
-	}
-}		
-
-void UseCaseImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
-{
-	try
-	{
-		std::map<std::string, std::string>::const_iterator iter;
-		std::shared_ptr<ecore::EClass> metaClass = this->eClass(); // get MetaClass
-		iter = attr_list.find("subject");
-		if ( iter != attr_list.end() )
-		{
-			// add unresolvedReference to loadHandler's list
-			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("subject")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
-		}
-	}
-	catch (std::exception& e)
-	{
-		std::cout << "| ERROR    | " << e.what() << std::endl;
-	}
-	catch (...) 
-	{
-		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
-	}
-
-	BehavioredClassifierImpl::loadAttributes(loadHandler, attr_list);
+	return m_thisUseCasePtr.lock();
 }
-
-void UseCaseImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+void UseCaseImpl::setThisUseCasePtr(std::weak_ptr<UseCase> thisUseCasePtr)
 {
-
-	try
-	{
-		if ( nodeName.compare("extend") == 0 )
-		{
-  			std::string typeName = loadHandler->getCurrentXSITypeName();
-			if (typeName.empty())
-			{
-				typeName = "Extend";
-			}
-			loadHandler->handleChildContainer<uml::Extend>(this->getExtend());  
-
-			return; 
-		}
-
-		if ( nodeName.compare("extensionPoint") == 0 )
-		{
-  			std::string typeName = loadHandler->getCurrentXSITypeName();
-			if (typeName.empty())
-			{
-				typeName = "ExtensionPoint";
-			}
-			loadHandler->handleChildContainer<uml::ExtensionPoint>(this->getExtensionPoint());  
-
-			return; 
-		}
-
-		if ( nodeName.compare("include") == 0 )
-		{
-  			std::string typeName = loadHandler->getCurrentXSITypeName();
-			if (typeName.empty())
-			{
-				typeName = "Include";
-			}
-			loadHandler->handleChildContainer<uml::Include>(this->getInclude());  
-
-			return; 
-		}
-	}
-	catch (std::exception& e)
-	{
-		std::cout << "| ERROR    | " << e.what() << std::endl;
-	}
-	catch (...) 
-	{
-		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
-	}
-	//load BasePackage Nodes
-	BehavioredClassifierImpl::loadNode(nodeName, loadHandler);
+	m_thisUseCasePtr = thisUseCasePtr;
+	setThisBehavioredClassifierPtr(thisUseCasePtr);
 }
-
-void UseCaseImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::USECASE_ATTRIBUTE_SUBJECT:
-		{
-			std::shared_ptr<Bag<uml::Classifier>> _subject = getSubject();
-			for(std::shared_ptr<ecore::EObject> ref : references)
-			{
-				std::shared_ptr<uml::Classifier>  _r = std::dynamic_pointer_cast<uml::Classifier>(ref);
-				if (_r != nullptr)
-				{
-					_subject->push_back(_r);
-				}
-			}
-			return;
-		}
-	}
-	BehavioredClassifierImpl::resolveReferences(featureID, references);
-}
-
-void UseCaseImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
-{
-	saveContent(saveHandler);
-
-	BehavioredClassifierImpl::saveContent(saveHandler);
-	
-	ClassifierImpl::saveContent(saveHandler);
-	
-	NamespaceImpl::saveContent(saveHandler);
-	RedefinableElementImpl::saveContent(saveHandler);
-	TemplateableElementImpl::saveContent(saveHandler);
-	TypeImpl::saveContent(saveHandler);
-	
-	PackageableElementImpl::saveContent(saveHandler);
-	
-	NamedElementImpl::saveContent(saveHandler);
-	ParameterableElementImpl::saveContent(saveHandler);
-	
-	ElementImpl::saveContent(saveHandler);
-	
-	ObjectImpl::saveContent(saveHandler);
-	
-	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
-	
-	
-	
-}
-
-void UseCaseImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
-{
-	try
-	{
-		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-		// Save 'extend'
-		for (std::shared_ptr<uml::Extend> extend : *this->getExtend()) 
-		{
-			saveHandler->addReference(extend, "extend", extend->eClass() != package->getExtend_Class());
-		}
-
-		// Save 'extensionPoint'
-		for (std::shared_ptr<uml::ExtensionPoint> extensionPoint : *this->getExtensionPoint()) 
-		{
-			saveHandler->addReference(extensionPoint, "extensionPoint", extensionPoint->eClass() != package->getExtensionPoint_Class());
-		}
-
-		// Save 'include'
-		for (std::shared_ptr<uml::Include> include : *this->getInclude()) 
-		{
-			saveHandler->addReference(include, "include", include->eClass() != package->getInclude_Class());
-		}
-	// Add references
-		saveHandler->addReferences<uml::Classifier>("subject", this->getSubject());
-	}
-	catch (std::exception& e)
-	{
-		std::cout << "| ERROR    | " << e.what() << std::endl;
-	}
-}
-

@@ -1,3 +1,4 @@
+
 #include "uml/impl/OpaqueActionImpl.hpp"
 
 #ifdef NDEBUG
@@ -26,7 +27,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -34,7 +34,6 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-
 
 #include "uml/Action.hpp"
 #include "uml/Activity.hpp"
@@ -257,42 +256,6 @@ std::shared_ptr<ecore::EObject> OpaqueActionImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> OpaqueActionImpl::eStaticClass() const
-{
-	return uml::umlPackage::eInstance()->getOpaqueAction_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-/*
-Getter & Setter for attribute body
-*/
-std::shared_ptr<Bag<std::string>> OpaqueActionImpl::getBody() const 
-{
-	if(m_body == nullptr)
-	{
-		m_body.reset(new Bag<std::string>());
-	}
-	return m_body;
-}
-
-
-
-/*
-Getter & Setter for attribute language
-*/
-std::shared_ptr<Bag<std::string>> OpaqueActionImpl::getLanguage() const 
-{
-	if(m_language == nullptr)
-	{
-		m_language.reset(new Bag<std::string>());
-	}
-	return m_language;
-}
-
-
-
 //*********************************
 // Operations
 //*********************************
@@ -303,11 +266,32 @@ bool OpaqueActionImpl::language_body_size(Any diagnostics,std::shared_ptr<std::m
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference inputValue
-*/
+/* Getter & Setter for attribute body */
+std::shared_ptr<Bag<std::string>> OpaqueActionImpl::getBody() const 
+{
+	if(m_body == nullptr)
+	{
+		m_body.reset(new Bag<std::string>());
+	}
+	return m_body;
+}
+
+/* Getter & Setter for attribute language */
+std::shared_ptr<Bag<std::string>> OpaqueActionImpl::getLanguage() const 
+{
+	if(m_language == nullptr)
+	{
+		m_language.reset(new Bag<std::string>());
+	}
+	return m_language;
+}
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference inputValue */
 std::shared_ptr<Subset<uml::InputPin, uml::InputPin>> OpaqueActionImpl::getInputValue() const
 {
 	if(m_inputValue == nullptr)
@@ -328,11 +312,7 @@ std::shared_ptr<Subset<uml::InputPin, uml::InputPin>> OpaqueActionImpl::getInput
     return m_inputValue;
 }
 
-
-
-/*
-Getter & Setter for reference outputValue
-*/
+/* Getter & Setter for reference outputValue */
 std::shared_ptr<Subset<uml::OutputPin, uml::OutputPin>> OpaqueActionImpl::getOutputValue() const
 {
 	if(m_outputValue == nullptr)
@@ -352,8 +332,6 @@ std::shared_ptr<Subset<uml::OutputPin, uml::OutputPin>> OpaqueActionImpl::getOut
 	}
     return m_outputValue;
 }
-
-
 
 //*********************************
 // Union Getter
@@ -448,18 +426,9 @@ std::shared_ptr<Union<uml::RedefinableElement>> OpaqueActionImpl::getRedefinedEl
 	return m_redefinedElement;
 }
 
-
-
-
-std::shared_ptr<OpaqueAction> OpaqueActionImpl::getThisOpaqueActionPtr() const
-{
-	return m_thisOpaqueActionPtr.lock();
-}
-void OpaqueActionImpl::setThisOpaqueActionPtr(std::weak_ptr<OpaqueAction> thisOpaqueActionPtr)
-{
-	m_thisOpaqueActionPtr = thisOpaqueActionPtr;
-	setThisActionPtr(thisOpaqueActionPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> OpaqueActionImpl::eContainer() const
 {
 	if(auto wp = m_activity.lock())
@@ -482,192 +451,6 @@ std::shared_ptr<ecore::EObject> OpaqueActionImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any OpaqueActionImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::OPAQUEACTION_ATTRIBUTE_BODY:
-			return eAny(getBody()); //16427
-		case uml::umlPackage::OPAQUEACTION_ATTRIBUTE_INPUTVALUE:
-		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::InputPin>::iterator iter = getInputValue()->begin();
-			Bag<uml::InputPin>::iterator end = getInputValue()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //16428			
-		}
-		case uml::umlPackage::OPAQUEACTION_ATTRIBUTE_LANGUAGE:
-			return eAny(getLanguage()); //16429
-		case uml::umlPackage::OPAQUEACTION_ATTRIBUTE_OUTPUTVALUE:
-		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::OutputPin>::iterator iter = getOutputValue()->begin();
-			Bag<uml::OutputPin>::iterator end = getOutputValue()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //16430			
-		}
-	}
-	return ActionImpl::eGet(featureID, resolve, coreType);
-}
-bool OpaqueActionImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::OPAQUEACTION_ATTRIBUTE_BODY:
-			return !getBody()->empty(); //16427
-		case uml::umlPackage::OPAQUEACTION_ATTRIBUTE_INPUTVALUE:
-			return getInputValue() != nullptr; //16428
-		case uml::umlPackage::OPAQUEACTION_ATTRIBUTE_LANGUAGE:
-			return !getLanguage()->empty(); //16429
-		case uml::umlPackage::OPAQUEACTION_ATTRIBUTE_OUTPUTVALUE:
-			return getOutputValue() != nullptr; //16430
-	}
-	return ActionImpl::internalEIsSet(featureID);
-}
-bool OpaqueActionImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::OPAQUEACTION_ATTRIBUTE_BODY:
-		{
-			// BOOST CAST
-			// nothing to do
-			return true;
-		}
-		case uml::umlPackage::OPAQUEACTION_ATTRIBUTE_INPUTVALUE:
-		{
-			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::InputPin>> inputValueList(new Bag<uml::InputPin>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
-			{
-				inputValueList->add(std::dynamic_pointer_cast<uml::InputPin>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::InputPin>::iterator iterInputValue = getInputValue()->begin();
-			Bag<uml::InputPin>::iterator endInputValue = getInputValue()->end();
-			while (iterInputValue != endInputValue)
-			{
-				if (inputValueList->find(*iterInputValue) == -1)
-				{
-					getInputValue()->erase(*iterInputValue);
-				}
-				iterInputValue++;
-			}
- 
-			iterInputValue = inputValueList->begin();
-			endInputValue = inputValueList->end();
-			while (iterInputValue != endInputValue)
-			{
-				if (getInputValue()->find(*iterInputValue) == -1)
-				{
-					getInputValue()->add(*iterInputValue);
-				}
-				iterInputValue++;			
-			}
-			return true;
-		}
-		case uml::umlPackage::OPAQUEACTION_ATTRIBUTE_LANGUAGE:
-		{
-			// BOOST CAST
-			// nothing to do
-			return true;
-		}
-		case uml::umlPackage::OPAQUEACTION_ATTRIBUTE_OUTPUTVALUE:
-		{
-			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::OutputPin>> outputValueList(new Bag<uml::OutputPin>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
-			{
-				outputValueList->add(std::dynamic_pointer_cast<uml::OutputPin>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::OutputPin>::iterator iterOutputValue = getOutputValue()->begin();
-			Bag<uml::OutputPin>::iterator endOutputValue = getOutputValue()->end();
-			while (iterOutputValue != endOutputValue)
-			{
-				if (outputValueList->find(*iterOutputValue) == -1)
-				{
-					getOutputValue()->erase(*iterOutputValue);
-				}
-				iterOutputValue++;
-			}
- 
-			iterOutputValue = outputValueList->begin();
-			endOutputValue = outputValueList->end();
-			while (iterOutputValue != endOutputValue)
-			{
-				if (getOutputValue()->find(*iterOutputValue) == -1)
-				{
-					getOutputValue()->add(*iterOutputValue);
-				}
-				iterOutputValue++;			
-			}
-			return true;
-		}
-	}
-
-	return ActionImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any OpaqueActionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-		
-		// 2072708409
-		case umlPackage::OPAQUEACTION_OPERATION_LANGUAGE_BODY_SIZE_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->language_body_size(incoming_param_diagnostics,incoming_param_context));
-			break;
-		}
-
-		default:
-		{
-			// call superTypes
-			result = ActionImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -786,13 +569,6 @@ void OpaqueActionImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandle
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
-	
-	
-	
 }
 
 void OpaqueActionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -834,3 +610,208 @@ void OpaqueActionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> OpaqueActionImpl::eStaticClass() const
+{
+	return uml::umlPackage::eInstance()->getOpaqueAction_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any OpaqueActionImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::OPAQUEACTION_ATTRIBUTE_BODY:
+			return eAny(getBody()); //16427
+		case uml::umlPackage::OPAQUEACTION_ATTRIBUTE_INPUTVALUE:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::InputPin>::iterator iter = getInputValue()->begin();
+			Bag<uml::InputPin>::iterator end = getInputValue()->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //16428			
+		}
+		case uml::umlPackage::OPAQUEACTION_ATTRIBUTE_LANGUAGE:
+			return eAny(getLanguage()); //16429
+		case uml::umlPackage::OPAQUEACTION_ATTRIBUTE_OUTPUTVALUE:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::OutputPin>::iterator iter = getOutputValue()->begin();
+			Bag<uml::OutputPin>::iterator end = getOutputValue()->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //16430			
+		}
+	}
+	return ActionImpl::eGet(featureID, resolve, coreType);
+}
+
+bool OpaqueActionImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::OPAQUEACTION_ATTRIBUTE_BODY:
+			return !getBody()->empty(); //16427
+		case uml::umlPackage::OPAQUEACTION_ATTRIBUTE_INPUTVALUE:
+			return getInputValue() != nullptr; //16428
+		case uml::umlPackage::OPAQUEACTION_ATTRIBUTE_LANGUAGE:
+			return !getLanguage()->empty(); //16429
+		case uml::umlPackage::OPAQUEACTION_ATTRIBUTE_OUTPUTVALUE:
+			return getOutputValue() != nullptr; //16430
+	}
+	return ActionImpl::internalEIsSet(featureID);
+}
+
+bool OpaqueActionImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::OPAQUEACTION_ATTRIBUTE_BODY:
+		{
+			// BOOST CAST
+			// nothing to do
+			return true;
+		}
+		case uml::umlPackage::OPAQUEACTION_ATTRIBUTE_INPUTVALUE:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::InputPin>> inputValueList(new Bag<uml::InputPin>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				inputValueList->add(std::dynamic_pointer_cast<uml::InputPin>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::InputPin>::iterator iterInputValue = getInputValue()->begin();
+			Bag<uml::InputPin>::iterator endInputValue = getInputValue()->end();
+			while (iterInputValue != endInputValue)
+			{
+				if (inputValueList->find(*iterInputValue) == -1)
+				{
+					getInputValue()->erase(*iterInputValue);
+				}
+				iterInputValue++;
+			}
+ 
+			iterInputValue = inputValueList->begin();
+			endInputValue = inputValueList->end();
+			while (iterInputValue != endInputValue)
+			{
+				if (getInputValue()->find(*iterInputValue) == -1)
+				{
+					getInputValue()->add(*iterInputValue);
+				}
+				iterInputValue++;			
+			}
+			return true;
+		}
+		case uml::umlPackage::OPAQUEACTION_ATTRIBUTE_LANGUAGE:
+		{
+			// BOOST CAST
+			// nothing to do
+			return true;
+		}
+		case uml::umlPackage::OPAQUEACTION_ATTRIBUTE_OUTPUTVALUE:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::OutputPin>> outputValueList(new Bag<uml::OutputPin>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				outputValueList->add(std::dynamic_pointer_cast<uml::OutputPin>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::OutputPin>::iterator iterOutputValue = getOutputValue()->begin();
+			Bag<uml::OutputPin>::iterator endOutputValue = getOutputValue()->end();
+			while (iterOutputValue != endOutputValue)
+			{
+				if (outputValueList->find(*iterOutputValue) == -1)
+				{
+					getOutputValue()->erase(*iterOutputValue);
+				}
+				iterOutputValue++;
+			}
+ 
+			iterOutputValue = outputValueList->begin();
+			endOutputValue = outputValueList->end();
+			while (iterOutputValue != endOutputValue)
+			{
+				if (getOutputValue()->find(*iterOutputValue) == -1)
+				{
+					getOutputValue()->add(*iterOutputValue);
+				}
+				iterOutputValue++;			
+			}
+			return true;
+		}
+	}
+
+	return ActionImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any OpaqueActionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 2072708409
+		case umlPackage::OPAQUEACTION_OPERATION_LANGUAGE_BODY_SIZE_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->language_body_size(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = ActionImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<OpaqueAction> OpaqueActionImpl::getThisOpaqueActionPtr() const
+{
+	return m_thisOpaqueActionPtr.lock();
+}
+void OpaqueActionImpl::setThisOpaqueActionPtr(std::weak_ptr<OpaqueAction> thisOpaqueActionPtr)
+{
+	m_thisOpaqueActionPtr = thisOpaqueActionPtr;
+	setThisActionPtr(thisOpaqueActionPtr);
+}

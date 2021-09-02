@@ -52,7 +52,8 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			 
-			virtual bool isCompatibleWith(std::shared_ptr<uml::ParameterableElement> p) ;/*!
+			virtual bool isCompatibleWith(std::shared_ptr<uml::ParameterableElement> p) ;
+			/*!
 			The query isTemplateParameter() determines if this ParameterableElement is exposed as a formal TemplateParameter.
 			result = (templateParameter->notEmpty())
 			<p>From package UML::CommonStructure.</p>
@@ -61,12 +62,11 @@ namespace uml
 			virtual bool isTemplateParameter() ;
 			
 			//*********************************
-			// Attributes Getter Setter
+			// Attribute Getters & Setters
 			//*********************************
 			
-			
 			//*********************************
-			// Reference
+			// Reference Getters & Setters
 			//*********************************
 			/*!
 			The formal TemplateParameter that owns this ParameterableElement.
@@ -93,23 +93,26 @@ namespace uml
 			
 			virtual void setTemplateParameter(std::shared_ptr<uml::TemplateParameter>) ;
 			
-			
 			//*********************************
-			// Union Getter
+			// Union Reference Getters
 			//*********************************
 			/*!
 			The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const ;/*!
+			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const ;
+			/*!
 			The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
 			virtual std::weak_ptr<uml::Element> getOwner() const ;
 			
-
+			
+			//*********************************
+			// Container Getter
+			//*********************************
 			virtual std::shared_ptr<ecore::EObject> eContainer() const ; 
 			
 			//*********************************
@@ -118,20 +121,23 @@ namespace uml
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) ;
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
-			
 			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
-			
 
-			//*********************************
-			// Structural Feature Getter/Setter
-			//*********************************
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+
+			//*********************************
+			// EStructuralFeature Get/Set/IsSet
+			//*********************************
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool internalEIsSet(int featureID) const ;
 			virtual bool eSet(int featureID, Any newValue) ;
+			virtual bool internalEIsSet(int featureID) const ;
+
+			//*********************************
+			// EOperation Invoke
+			//*********************************
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:

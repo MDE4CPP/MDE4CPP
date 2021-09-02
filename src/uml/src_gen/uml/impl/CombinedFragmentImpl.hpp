@@ -57,12 +57,14 @@ namespace uml
 			   enclosingOperand.oclAsType(InteractionFragment)->asSet()).covered->asSet() = self.covered->asSet()
 			*/
 			 
-			virtual bool break_(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
+			virtual bool break_(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			/*!
 			The interaction operators 'consider' and 'ignore' can only be used for the ConsiderIgnoreFragment subtype of CombinedFragment
 			((interactionOperator = InteractionOperatorKind::consider) or (interactionOperator =  InteractionOperatorKind::ignore)) implies oclIsKindOf(ConsiderIgnoreFragment)
 			*/
 			 
-			virtual bool consider_and_ignore(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
+			virtual bool consider_and_ignore(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			/*!
 			If the interactionOperator is opt, loop, break, assert or neg, there must be exactly one operand.
 			(interactionOperator =  InteractionOperatorKind::opt or interactionOperator = InteractionOperatorKind::loop or
 			interactionOperator = InteractionOperatorKind::break or interactionOperator = InteractionOperatorKind::assert or
@@ -73,7 +75,7 @@ namespace uml
 			virtual bool opt_loop_break_neg(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
-			// Attributes Getter Setter
+			// Attribute Getters & Setters
 			//*********************************
 			/*!
 			Specifies the operation which defines the semantics of this combination of InteractionFragments.
@@ -88,9 +90,8 @@ namespace uml
 			 
 			virtual void setInteractionOperator (uml::InteractionOperatorKind _interactionOperator);
 			
-			
 			//*********************************
-			// Reference
+			// Reference Getters & Setters
 			//*********************************
 			/*!
 			Specifies the gates that form the interface between this CombinedFragment and its surroundings
@@ -98,7 +99,6 @@ namespace uml
 			*/
 			
 			virtual std::shared_ptr<Subset<uml::Gate, uml::Element>> getCfragmentGate() const ;
-			
 			/*!
 			The set of operands of the combined fragment.
 			<p>From package UML::Interactions.</p>
@@ -106,29 +106,31 @@ namespace uml
 			
 			virtual std::shared_ptr<Subset<uml::InteractionOperand, uml::Element>> getOperand() const ;
 			
-			
-			
 			//*********************************
-			// Union Getter
+			// Union Reference Getters
 			//*********************************
 			/*!
 			Specifies the Namespace that owns the NamedElement.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Namespace> getNamespace() const ;/*!
+			virtual std::weak_ptr<uml::Namespace> getNamespace() const ;
+			/*!
 			The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const ;/*!
+			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const ;
+			/*!
 			The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
 			virtual std::weak_ptr<uml::Element> getOwner() const ;
 			
-
+			//*********************************
+			// Container Getter
+			//*********************************
 			virtual std::shared_ptr<ecore::EObject> eContainer() const ; 
 			
 			//*********************************
@@ -137,20 +139,23 @@ namespace uml
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) ;
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
-			
 			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
-			
 
-			//*********************************
-			// Structural Feature Getter/Setter
-			//*********************************
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+
+			//*********************************
+			// EStructuralFeature Get/Set/IsSet
+			//*********************************
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool internalEIsSet(int featureID) const ;
 			virtual bool eSet(int featureID, Any newValue) ;
+			virtual bool internalEIsSet(int featureID) const ;
+
+			//*********************************
+			// EOperation Invoke
+			//*********************************
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:

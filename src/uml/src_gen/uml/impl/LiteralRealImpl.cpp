@@ -1,3 +1,4 @@
+
 #include "uml/impl/LiteralRealImpl.hpp"
 
 #ifdef NDEBUG
@@ -25,7 +26,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -33,7 +33,6 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-
 
 #include "uml/Comment.hpp"
 #include "uml/Dependency.hpp"
@@ -160,28 +159,6 @@ std::shared_ptr<ecore::EObject> LiteralRealImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> LiteralRealImpl::eStaticClass() const
-{
-	return uml::umlPackage::eInstance()->getLiteralReal_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-/*
-Getter & Setter for attribute value
-*/
-double LiteralRealImpl::getValue() const 
-{
-	return m_value;
-}
-void LiteralRealImpl::setValue(double _value)
-{
-	m_value = _value;
-	
-} 
-
-
 //*********************************
 // Operations
 //*********************************
@@ -202,7 +179,21 @@ double LiteralRealImpl::realValue()
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
+//*********************************
+/* Getter & Setter for attribute value */
+double LiteralRealImpl::getValue() const 
+{
+	return m_value;
+}
+void LiteralRealImpl::setValue(double _value)
+{
+	m_value = _value;
+	
+}
+
+//*********************************
+// Reference Getters & Setters
 //*********************************
 
 //*********************************
@@ -235,16 +226,9 @@ std::weak_ptr<uml::Element> LiteralRealImpl::getOwner() const
 
 
 
-
-std::shared_ptr<LiteralReal> LiteralRealImpl::getThisLiteralRealPtr() const
-{
-	return m_thisLiteralRealPtr.lock();
-}
-void LiteralRealImpl::setThisLiteralRealPtr(std::weak_ptr<LiteralReal> thisLiteralRealPtr)
-{
-	m_thisLiteralRealPtr = thisLiteralRealPtr;
-	setThisLiteralSpecificationPtr(thisLiteralRealPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> LiteralRealImpl::eContainer() const
 {
 	if(auto wp = m_namespace.lock())
@@ -277,80 +261,6 @@ std::shared_ptr<ecore::EObject> LiteralRealImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any LiteralRealImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::LITERALREAL_ATTRIBUTE_VALUE:
-			return eAny(getValue()); //14015
-	}
-	return LiteralSpecificationImpl::eGet(featureID, resolve, coreType);
-}
-bool LiteralRealImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::LITERALREAL_ATTRIBUTE_VALUE:
-			return getValue() != 0; //14015
-	}
-	return LiteralSpecificationImpl::internalEIsSet(featureID);
-}
-bool LiteralRealImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::LITERALREAL_ATTRIBUTE_VALUE:
-		{
-			// BOOST CAST
-			double _value = newValue->get<double>();
-			setValue(_value); //14015
-			return true;
-		}
-	}
-
-	return LiteralSpecificationImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any LiteralRealImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-		
-		// 1259887142
-		case umlPackage::LITERALREAL_OPERATION_ISCOMPUTABLE:
-		{
-			result = eAny(this->isComputable());
-			break;
-		}
-		
-		// 998704641
-		case umlPackage::LITERALREAL_OPERATION_REALVALUE:
-		{
-			result = eAny(this->realValue());
-			break;
-		}
-
-		default:
-		{
-			// call superTypes
-			result = LiteralSpecificationImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -430,12 +340,6 @@ void LiteralRealImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
-	
-	
 }
 
 void LiteralRealImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -455,3 +359,96 @@ void LiteralRealImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> LiteralRealImpl::eStaticClass() const
+{
+	return uml::umlPackage::eInstance()->getLiteralReal_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any LiteralRealImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::LITERALREAL_ATTRIBUTE_VALUE:
+			return eAny(getValue()); //14015
+	}
+	return LiteralSpecificationImpl::eGet(featureID, resolve, coreType);
+}
+
+bool LiteralRealImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::LITERALREAL_ATTRIBUTE_VALUE:
+			return getValue() != 0; //14015
+	}
+	return LiteralSpecificationImpl::internalEIsSet(featureID);
+}
+
+bool LiteralRealImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::LITERALREAL_ATTRIBUTE_VALUE:
+		{
+			// BOOST CAST
+			double _value = newValue->get<double>();
+			setValue(_value); //14015
+			return true;
+		}
+	}
+
+	return LiteralSpecificationImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any LiteralRealImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 1259887142
+		case umlPackage::LITERALREAL_OPERATION_ISCOMPUTABLE:
+		{
+			result = eAny(this->isComputable());
+			break;
+		}
+		
+		// 998704641
+		case umlPackage::LITERALREAL_OPERATION_REALVALUE:
+		{
+			result = eAny(this->realValue());
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = LiteralSpecificationImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<LiteralReal> LiteralRealImpl::getThisLiteralRealPtr() const
+{
+	return m_thisLiteralRealPtr.lock();
+}
+void LiteralRealImpl::setThisLiteralRealPtr(std::weak_ptr<LiteralReal> thisLiteralRealPtr)
+{
+	m_thisLiteralRealPtr = thisLiteralRealPtr;
+	setThisLiteralSpecificationPtr(thisLiteralRealPtr);
+}

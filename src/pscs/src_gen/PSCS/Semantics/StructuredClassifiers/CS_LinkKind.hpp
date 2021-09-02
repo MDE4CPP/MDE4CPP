@@ -10,10 +10,13 @@
 namespace PSCS::Semantics::StructuredClassifiers 
 {
 	enum CS_LinkKind {
+		
 		NONE = 2
 ,
+		
 		TOENVIRONMENT = 0
 ,
+		
 		TOINTERNAL = 1
 	};
 }

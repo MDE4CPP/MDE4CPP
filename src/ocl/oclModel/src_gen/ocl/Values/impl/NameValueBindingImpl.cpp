@@ -1,3 +1,4 @@
+
 #include "ocl/Values/impl/NameValueBindingImpl.hpp"
 
 #ifdef NDEBUG
@@ -24,7 +25,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -32,7 +32,6 @@
 
 #include <exception> // used in Persistence
 #include "fUML/Semantics/Values/ValuesFactory.hpp"
-
 
 #include "fUML/Semantics/Values/Value.hpp"
 
@@ -106,17 +105,14 @@ std::shared_ptr<ecore::EObject> NameValueBindingImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> NameValueBindingImpl::eStaticClass() const
-{
-	return ocl::Values::ValuesPackage::eInstance()->getNameValueBinding_Class();
-}
+//*********************************
+// Operations
+//*********************************
 
 //*********************************
-// Attribute Setter Getter
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for attribute name
-*/
+/* Getter & Setter for attribute name */
 std::string NameValueBindingImpl::getName() const 
 {
 	return m_name;
@@ -125,19 +121,12 @@ void NameValueBindingImpl::setName(std::string _name)
 {
 	m_name = _name;
 	
-} 
-
-
-//*********************************
-// Operations
-//*********************************
+}
 
 //*********************************
-// References
+// Reference Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference value
-*/
+/* Getter & Setter for reference value */
 std::shared_ptr<fUML::Semantics::Values::Value> NameValueBindingImpl::getValue() const
 {
     return m_value;
@@ -148,99 +137,16 @@ void NameValueBindingImpl::setValue(std::shared_ptr<fUML::Semantics::Values::Val
 	
 }
 
-
 //*********************************
 // Union Getter
 //*********************************
 
-
-
-std::shared_ptr<NameValueBinding> NameValueBindingImpl::getThisNameValueBindingPtr() const
-{
-	return m_thisNameValueBindingPtr.lock();
-}
-void NameValueBindingImpl::setThisNameValueBindingPtr(std::weak_ptr<NameValueBinding> thisNameValueBindingPtr)
-{
-	m_thisNameValueBindingPtr = thisNameValueBindingPtr;
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> NameValueBindingImpl::eContainer() const
 {
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any NameValueBindingImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case ocl::Values::ValuesPackage::NAMEVALUEBINDING_ATTRIBUTE_NAME:
-			return eAny(getName()); //520
-		case ocl::Values::ValuesPackage::NAMEVALUEBINDING_ATTRIBUTE_VALUE:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getValue();
-				return eAny(returnValue); //521
-			}
-	}
-	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
-}
-bool NameValueBindingImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case ocl::Values::ValuesPackage::NAMEVALUEBINDING_ATTRIBUTE_NAME:
-			return getName() != ""; //520
-		case ocl::Values::ValuesPackage::NAMEVALUEBINDING_ATTRIBUTE_VALUE:
-			return getValue() != nullptr; //521
-	}
-	return ecore::EObjectImpl::internalEIsSet(featureID);
-}
-bool NameValueBindingImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case ocl::Values::ValuesPackage::NAMEVALUEBINDING_ATTRIBUTE_NAME:
-		{
-			// BOOST CAST
-			std::string _name = newValue->get<std::string>();
-			setName(_name); //520
-			return true;
-		}
-		case ocl::Values::ValuesPackage::NAMEVALUEBINDING_ATTRIBUTE_VALUE:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<fUML::Semantics::Values::Value> _value = std::dynamic_pointer_cast<fUML::Semantics::Values::Value>(_temp);
-			setValue(_value); //521
-			return true;
-		}
-	}
-
-	return ecore::EObjectImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any NameValueBindingImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-
-		default:
-		{
-			// call superTypes
-			result = ecore::EModelElementImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -325,9 +231,7 @@ void NameValueBindingImpl::save(std::shared_ptr<persistence::interfaces::XSaveHa
 {
 	saveContent(saveHandler);
 
-	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
 }
 
 void NameValueBindingImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -349,3 +253,96 @@ void NameValueBindingImpl::saveContent(std::shared_ptr<persistence::interfaces::
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> NameValueBindingImpl::eStaticClass() const
+{
+	return ocl::Values::ValuesPackage::eInstance()->getNameValueBinding_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any NameValueBindingImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case ocl::Values::ValuesPackage::NAMEVALUEBINDING_ATTRIBUTE_NAME:
+			return eAny(getName()); //520
+		case ocl::Values::ValuesPackage::NAMEVALUEBINDING_ATTRIBUTE_VALUE:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getValue();
+				return eAny(returnValue); //521
+			}
+	}
+	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
+}
+
+bool NameValueBindingImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case ocl::Values::ValuesPackage::NAMEVALUEBINDING_ATTRIBUTE_NAME:
+			return getName() != ""; //520
+		case ocl::Values::ValuesPackage::NAMEVALUEBINDING_ATTRIBUTE_VALUE:
+			return getValue() != nullptr; //521
+	}
+	return ecore::EObjectImpl::internalEIsSet(featureID);
+}
+
+bool NameValueBindingImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case ocl::Values::ValuesPackage::NAMEVALUEBINDING_ATTRIBUTE_NAME:
+		{
+			// BOOST CAST
+			std::string _name = newValue->get<std::string>();
+			setName(_name); //520
+			return true;
+		}
+		case ocl::Values::ValuesPackage::NAMEVALUEBINDING_ATTRIBUTE_VALUE:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<fUML::Semantics::Values::Value> _value = std::dynamic_pointer_cast<fUML::Semantics::Values::Value>(_temp);
+			setValue(_value); //521
+			return true;
+		}
+	}
+
+	return ecore::EObjectImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any NameValueBindingImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+
+		default:
+		{
+			// call superTypes
+			result = ecore::EModelElementImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<NameValueBinding> NameValueBindingImpl::getThisNameValueBindingPtr() const
+{
+	return m_thisNameValueBindingPtr.lock();
+}
+void NameValueBindingImpl::setThisNameValueBindingPtr(std::weak_ptr<NameValueBinding> thisNameValueBindingPtr)
+{
+	m_thisNameValueBindingPtr = thisNameValueBindingPtr;
+}

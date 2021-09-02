@@ -1,3 +1,4 @@
+
 #include "fUML/Semantics/Actions/impl/ReduceActionActivationImpl.hpp"
 
 #ifdef NDEBUG
@@ -25,7 +26,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -36,7 +36,6 @@
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "uml/umlFactory.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
-
 
 #include "uml/Action.hpp"
 #include "fUML/Semantics/Actions/ActionActivation.hpp"
@@ -127,25 +126,18 @@ std::shared_ptr<ecore::EObject> ReduceActionActivationImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> ReduceActionActivationImpl::eStaticClass() const
-{
-	return fUML::Semantics::Actions::ActionsPackage::eInstance()->getReduceActionActivation_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference currentExecution
-*/
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference currentExecution */
 std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> ReduceActionActivationImpl::getCurrentExecution() const
 {
     return m_currentExecution;
@@ -155,7 +147,6 @@ void ReduceActionActivationImpl::setCurrentExecution(std::shared_ptr<fUML::Seman
     m_currentExecution = _currentExecution;
 	
 }
-
 
 //*********************************
 // Union Getter
@@ -175,18 +166,9 @@ std::shared_ptr<Union<fUML::Semantics::Actions::PinActivation>> ReduceActionActi
 	return m_pinActivation;
 }
 
-
-
-
-std::shared_ptr<ReduceActionActivation> ReduceActionActivationImpl::getThisReduceActionActivationPtr() const
-{
-	return m_thisReduceActionActivationPtr.lock();
-}
-void ReduceActionActivationImpl::setThisReduceActionActivationPtr(std::weak_ptr<ReduceActionActivation> thisReduceActionActivationPtr)
-{
-	m_thisReduceActionActivationPtr = thisReduceActionActivationPtr;
-	setThisActionActivationPtr(thisReduceActionActivationPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> ReduceActionActivationImpl::eContainer() const
 {
 	if(auto wp = m_group.lock())
@@ -194,70 +176,6 @@ std::shared_ptr<ecore::EObject> ReduceActionActivationImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any ReduceActionActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case fUML::Semantics::Actions::ActionsPackage::REDUCEACTIONACTIVATION_ATTRIBUTE_CURRENTEXECUTION:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getCurrentExecution();
-				return eAny(returnValue); //9811
-			}
-	}
-	return ActionActivationImpl::eGet(featureID, resolve, coreType);
-}
-bool ReduceActionActivationImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case fUML::Semantics::Actions::ActionsPackage::REDUCEACTIONACTIVATION_ATTRIBUTE_CURRENTEXECUTION:
-			return getCurrentExecution() != nullptr; //9811
-	}
-	return ActionActivationImpl::internalEIsSet(featureID);
-}
-bool ReduceActionActivationImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case fUML::Semantics::Actions::ActionsPackage::REDUCEACTIONACTIVATION_ATTRIBUTE_CURRENTEXECUTION:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> _currentExecution = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::Execution>(_temp);
-			setCurrentExecution(_currentExecution); //9811
-			return true;
-		}
-	}
-
-	return ActionActivationImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any ReduceActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-
-		default:
-		{
-			// call superTypes
-			result = ActionActivationImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -341,9 +259,6 @@ void ReduceActionActivationImpl::save(std::shared_ptr<persistence::interfaces::X
 	fUML::Semantics::Loci::SemanticVisitorImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
 }
 
 void ReduceActionActivationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -360,3 +275,86 @@ void ReduceActionActivationImpl::saveContent(std::shared_ptr<persistence::interf
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> ReduceActionActivationImpl::eStaticClass() const
+{
+	return fUML::Semantics::Actions::ActionsPackage::eInstance()->getReduceActionActivation_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any ReduceActionActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case fUML::Semantics::Actions::ActionsPackage::REDUCEACTIONACTIVATION_ATTRIBUTE_CURRENTEXECUTION:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getCurrentExecution();
+				return eAny(returnValue); //9811
+			}
+	}
+	return ActionActivationImpl::eGet(featureID, resolve, coreType);
+}
+
+bool ReduceActionActivationImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case fUML::Semantics::Actions::ActionsPackage::REDUCEACTIONACTIVATION_ATTRIBUTE_CURRENTEXECUTION:
+			return getCurrentExecution() != nullptr; //9811
+	}
+	return ActionActivationImpl::internalEIsSet(featureID);
+}
+
+bool ReduceActionActivationImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case fUML::Semantics::Actions::ActionsPackage::REDUCEACTIONACTIVATION_ATTRIBUTE_CURRENTEXECUTION:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> _currentExecution = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::Execution>(_temp);
+			setCurrentExecution(_currentExecution); //9811
+			return true;
+		}
+	}
+
+	return ActionActivationImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any ReduceActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+
+		default:
+		{
+			// call superTypes
+			result = ActionActivationImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<ReduceActionActivation> ReduceActionActivationImpl::getThisReduceActionActivationPtr() const
+{
+	return m_thisReduceActionActivationPtr.lock();
+}
+void ReduceActionActivationImpl::setThisReduceActionActivationPtr(std::weak_ptr<ReduceActionActivation> thisReduceActionActivationPtr)
+{
+	m_thisReduceActionActivationPtr = thisReduceActionActivationPtr;
+	setThisActionActivationPtr(thisReduceActionActivationPtr);
+}

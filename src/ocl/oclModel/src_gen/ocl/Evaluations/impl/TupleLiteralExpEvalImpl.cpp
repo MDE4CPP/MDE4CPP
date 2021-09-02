@@ -1,3 +1,4 @@
+
 #include "ocl/Evaluations/impl/TupleLiteralExpEvalImpl.hpp"
 
 #ifdef NDEBUG
@@ -25,19 +26,17 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "fUML/Semantics/Values/ValuesFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
 #include "uml/umlFactory.hpp"
+#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
-
 
 #include "ocl/Evaluations/EvalEnvironment.hpp"
 #include "ocl/Evaluations/LiteralExpEval.hpp"
@@ -119,25 +118,18 @@ std::shared_ptr<ecore::EObject> TupleLiteralExpEvalImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> TupleLiteralExpEvalImpl::eStaticClass() const
-{
-	return ocl::Evaluations::EvaluationsPackage::eInstance()->getTupleLiteralExpEval_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference tuplePart
-*/
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference tuplePart */
 std::shared_ptr<Bag<ocl::Evaluations::VariableDeclEval>> TupleLiteralExpEvalImpl::getTuplePart() const
 {
 	if(m_tuplePart == nullptr)
@@ -149,125 +141,16 @@ std::shared_ptr<Bag<ocl::Evaluations::VariableDeclEval>> TupleLiteralExpEvalImpl
     return m_tuplePart;
 }
 
-
-
 //*********************************
 // Union Getter
 //*********************************
 
-
-
-std::shared_ptr<TupleLiteralExpEval> TupleLiteralExpEvalImpl::getThisTupleLiteralExpEvalPtr() const
-{
-	return m_thisTupleLiteralExpEvalPtr.lock();
-}
-void TupleLiteralExpEvalImpl::setThisTupleLiteralExpEvalPtr(std::weak_ptr<TupleLiteralExpEval> thisTupleLiteralExpEvalPtr)
-{
-	m_thisTupleLiteralExpEvalPtr = thisTupleLiteralExpEvalPtr;
-	setThisLiteralExpEvalPtr(thisTupleLiteralExpEvalPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> TupleLiteralExpEvalImpl::eContainer() const
 {
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any TupleLiteralExpEvalImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case ocl::Evaluations::EvaluationsPackage::TUPLELITERALEXPEVAL_ATTRIBUTE_TUPLEPART:
-		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<ocl::Evaluations::VariableDeclEval>::iterator iter = getTuplePart()->begin();
-			Bag<ocl::Evaluations::VariableDeclEval>::iterator end = getTuplePart()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //856			
-		}
-	}
-	return LiteralExpEvalImpl::eGet(featureID, resolve, coreType);
-}
-bool TupleLiteralExpEvalImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case ocl::Evaluations::EvaluationsPackage::TUPLELITERALEXPEVAL_ATTRIBUTE_TUPLEPART:
-			return getTuplePart() != nullptr; //856
-	}
-	return LiteralExpEvalImpl::internalEIsSet(featureID);
-}
-bool TupleLiteralExpEvalImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case ocl::Evaluations::EvaluationsPackage::TUPLELITERALEXPEVAL_ATTRIBUTE_TUPLEPART:
-		{
-			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<ocl::Evaluations::VariableDeclEval>> tuplePartList(new Bag<ocl::Evaluations::VariableDeclEval>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
-			{
-				tuplePartList->add(std::dynamic_pointer_cast<ocl::Evaluations::VariableDeclEval>(*iter));
-				iter++;
-			}
-			
-			Bag<ocl::Evaluations::VariableDeclEval>::iterator iterTuplePart = getTuplePart()->begin();
-			Bag<ocl::Evaluations::VariableDeclEval>::iterator endTuplePart = getTuplePart()->end();
-			while (iterTuplePart != endTuplePart)
-			{
-				if (tuplePartList->find(*iterTuplePart) == -1)
-				{
-					getTuplePart()->erase(*iterTuplePart);
-				}
-				iterTuplePart++;
-			}
- 
-			iterTuplePart = tuplePartList->begin();
-			endTuplePart = tuplePartList->end();
-			while (iterTuplePart != endTuplePart)
-			{
-				if (getTuplePart()->find(*iterTuplePart) == -1)
-				{
-					getTuplePart()->add(*iterTuplePart);
-				}
-				iterTuplePart++;			
-			}
-			return true;
-		}
-	}
-
-	return LiteralExpEvalImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any TupleLiteralExpEvalImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-
-		default:
-		{
-			// call superTypes
-			result = LiteralExpEvalImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -355,10 +238,6 @@ void TupleLiteralExpEvalImpl::save(std::shared_ptr<persistence::interfaces::XSav
 	fUML::Semantics::Loci::SemanticVisitorImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
 }
 
 void TupleLiteralExpEvalImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -375,3 +254,121 @@ void TupleLiteralExpEvalImpl::saveContent(std::shared_ptr<persistence::interface
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> TupleLiteralExpEvalImpl::eStaticClass() const
+{
+	return ocl::Evaluations::EvaluationsPackage::eInstance()->getTupleLiteralExpEval_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any TupleLiteralExpEvalImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case ocl::Evaluations::EvaluationsPackage::TUPLELITERALEXPEVAL_ATTRIBUTE_TUPLEPART:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<ocl::Evaluations::VariableDeclEval>::iterator iter = getTuplePart()->begin();
+			Bag<ocl::Evaluations::VariableDeclEval>::iterator end = getTuplePart()->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //856			
+		}
+	}
+	return LiteralExpEvalImpl::eGet(featureID, resolve, coreType);
+}
+
+bool TupleLiteralExpEvalImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case ocl::Evaluations::EvaluationsPackage::TUPLELITERALEXPEVAL_ATTRIBUTE_TUPLEPART:
+			return getTuplePart() != nullptr; //856
+	}
+	return LiteralExpEvalImpl::internalEIsSet(featureID);
+}
+
+bool TupleLiteralExpEvalImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case ocl::Evaluations::EvaluationsPackage::TUPLELITERALEXPEVAL_ATTRIBUTE_TUPLEPART:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<ocl::Evaluations::VariableDeclEval>> tuplePartList(new Bag<ocl::Evaluations::VariableDeclEval>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				tuplePartList->add(std::dynamic_pointer_cast<ocl::Evaluations::VariableDeclEval>(*iter));
+				iter++;
+			}
+			
+			Bag<ocl::Evaluations::VariableDeclEval>::iterator iterTuplePart = getTuplePart()->begin();
+			Bag<ocl::Evaluations::VariableDeclEval>::iterator endTuplePart = getTuplePart()->end();
+			while (iterTuplePart != endTuplePart)
+			{
+				if (tuplePartList->find(*iterTuplePart) == -1)
+				{
+					getTuplePart()->erase(*iterTuplePart);
+				}
+				iterTuplePart++;
+			}
+ 
+			iterTuplePart = tuplePartList->begin();
+			endTuplePart = tuplePartList->end();
+			while (iterTuplePart != endTuplePart)
+			{
+				if (getTuplePart()->find(*iterTuplePart) == -1)
+				{
+					getTuplePart()->add(*iterTuplePart);
+				}
+				iterTuplePart++;			
+			}
+			return true;
+		}
+	}
+
+	return LiteralExpEvalImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any TupleLiteralExpEvalImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+
+		default:
+		{
+			// call superTypes
+			result = LiteralExpEvalImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<TupleLiteralExpEval> TupleLiteralExpEvalImpl::getThisTupleLiteralExpEvalPtr() const
+{
+	return m_thisTupleLiteralExpEvalPtr.lock();
+}
+void TupleLiteralExpEvalImpl::setThisTupleLiteralExpEvalPtr(std::weak_ptr<TupleLiteralExpEval> thisTupleLiteralExpEvalPtr)
+{
+	m_thisTupleLiteralExpEvalPtr = thisTupleLiteralExpEvalPtr;
+	setThisLiteralExpEvalPtr(thisTupleLiteralExpEvalPtr);
+}

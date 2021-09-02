@@ -1,3 +1,4 @@
+
 #include "ocl/Expressions/impl/NullLiteralExpImpl.hpp"
 
 #ifdef NDEBUG
@@ -25,7 +26,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -35,7 +35,6 @@
 #include "ecore/ecoreFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
-
 
 #include "ocl/Expressions/CallExp.hpp"
 #include "ocl/Expressions/CollectionRange.hpp"
@@ -203,38 +202,25 @@ std::shared_ptr<ecore::EObject> NullLiteralExpImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> NullLiteralExpImpl::eStaticClass() const
-{
-	return ocl::Expressions::ExpressionsPackage::eInstance()->getNullLiteralExp_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
 
 //*********************************
-// References
+// Attribute Getters & Setters
+//*********************************
+
+//*********************************
+// Reference Getters & Setters
 //*********************************
 
 //*********************************
 // Union Getter
 //*********************************
 
-
-
-std::shared_ptr<NullLiteralExp> NullLiteralExpImpl::getThisNullLiteralExpPtr() const
-{
-	return m_thisNullLiteralExpPtr.lock();
-}
-void NullLiteralExpImpl::setThisNullLiteralExpPtr(std::weak_ptr<NullLiteralExp> thisNullLiteralExpPtr)
-{
-	m_thisNullLiteralExpPtr = thisNullLiteralExpPtr;
-	setThisPrimitiveLiteralExpPtr(thisNullLiteralExpPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> NullLiteralExpImpl::eContainer() const
 {
 	if(auto wp = m_appliedElement.lock())
@@ -295,55 +281,6 @@ std::shared_ptr<ecore::EObject> NullLiteralExpImpl::eContainer() const
 }
 
 //*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any NullLiteralExpImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-	}
-	return PrimitiveLiteralExpImpl::eGet(featureID, resolve, coreType);
-}
-bool NullLiteralExpImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-	}
-	return PrimitiveLiteralExpImpl::internalEIsSet(featureID);
-}
-bool NullLiteralExpImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-	}
-
-	return PrimitiveLiteralExpImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any NullLiteralExpImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-
-		default:
-		{
-			// call superTypes
-			result = PrimitiveLiteralExpImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
-}
-
-//*********************************
 // Persistence Functions
 //*********************************
 void NullLiteralExpImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
@@ -397,12 +334,6 @@ void NullLiteralExpImpl::save(std::shared_ptr<persistence::interfaces::XSaveHand
 	ecore::EModelElementImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
-	
-	
 }
 
 void NullLiteralExpImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -417,3 +348,71 @@ void NullLiteralExpImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> NullLiteralExpImpl::eStaticClass() const
+{
+	return ocl::Expressions::ExpressionsPackage::eInstance()->getNullLiteralExp_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any NullLiteralExpImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+	}
+	return PrimitiveLiteralExpImpl::eGet(featureID, resolve, coreType);
+}
+
+bool NullLiteralExpImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+	}
+	return PrimitiveLiteralExpImpl::internalEIsSet(featureID);
+}
+
+bool NullLiteralExpImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+	}
+
+	return PrimitiveLiteralExpImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any NullLiteralExpImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+
+		default:
+		{
+			// call superTypes
+			result = PrimitiveLiteralExpImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<NullLiteralExp> NullLiteralExpImpl::getThisNullLiteralExpPtr() const
+{
+	return m_thisNullLiteralExpPtr.lock();
+}
+void NullLiteralExpImpl::setThisNullLiteralExpPtr(std::weak_ptr<NullLiteralExp> thisNullLiteralExpPtr)
+{
+	m_thisNullLiteralExpPtr = thisNullLiteralExpPtr;
+	setThisPrimitiveLiteralExpPtr(thisNullLiteralExpPtr);
+}

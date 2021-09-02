@@ -1,3 +1,4 @@
+
 #include "ocl/Expressions/impl/IterateExpImpl.hpp"
 
 #ifdef NDEBUG
@@ -25,7 +26,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -35,7 +35,6 @@
 #include "ecore/ecoreFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
-
 
 #include "ocl/Expressions/CallExp.hpp"
 #include "ocl/Expressions/CollectionRange.hpp"
@@ -209,25 +208,18 @@ std::shared_ptr<ecore::EObject> IterateExpImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> IterateExpImpl::eStaticClass() const
-{
-	return ocl::Expressions::ExpressionsPackage::eInstance()->getIterateExp_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference result
-*/
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference result */
 std::shared_ptr<ocl::Expressions::Variable> IterateExpImpl::getResult() const
 {
     return m_result;
@@ -238,22 +230,13 @@ void IterateExpImpl::setResult(std::shared_ptr<ocl::Expressions::Variable> _resu
 	
 }
 
-
 //*********************************
 // Union Getter
 //*********************************
 
-
-
-std::shared_ptr<IterateExp> IterateExpImpl::getThisIterateExpPtr() const
-{
-	return m_thisIterateExpPtr.lock();
-}
-void IterateExpImpl::setThisIterateExpPtr(std::weak_ptr<IterateExp> thisIterateExpPtr)
-{
-	m_thisIterateExpPtr = thisIterateExpPtr;
-	setThisLoopExpPtr(thisIterateExpPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> IterateExpImpl::eContainer() const
 {
 	if(auto wp = m_appliedElement.lock())
@@ -311,70 +294,6 @@ std::shared_ptr<ecore::EObject> IterateExpImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any IterateExpImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case ocl::Expressions::ExpressionsPackage::ITERATEEXP_ATTRIBUTE_RESULT:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getResult();
-				return eAny(returnValue); //3725
-			}
-	}
-	return LoopExpImpl::eGet(featureID, resolve, coreType);
-}
-bool IterateExpImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case ocl::Expressions::ExpressionsPackage::ITERATEEXP_ATTRIBUTE_RESULT:
-			return getResult() != nullptr; //3725
-	}
-	return LoopExpImpl::internalEIsSet(featureID);
-}
-bool IterateExpImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case ocl::Expressions::ExpressionsPackage::ITERATEEXP_ATTRIBUTE_RESULT:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<ocl::Expressions::Variable> _result = std::dynamic_pointer_cast<ocl::Expressions::Variable>(_temp);
-			setResult(_result); //3725
-			return true;
-		}
-	}
-
-	return LoopExpImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any IterateExpImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-
-		default:
-		{
-			// call superTypes
-			result = LoopExpImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -453,12 +372,6 @@ void IterateExpImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler>
 	ecore::EModelElementImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
-	
-	
 }
 
 void IterateExpImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -480,3 +393,86 @@ void IterateExpImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> IterateExpImpl::eStaticClass() const
+{
+	return ocl::Expressions::ExpressionsPackage::eInstance()->getIterateExp_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any IterateExpImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case ocl::Expressions::ExpressionsPackage::ITERATEEXP_ATTRIBUTE_RESULT:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getResult();
+				return eAny(returnValue); //3725
+			}
+	}
+	return LoopExpImpl::eGet(featureID, resolve, coreType);
+}
+
+bool IterateExpImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case ocl::Expressions::ExpressionsPackage::ITERATEEXP_ATTRIBUTE_RESULT:
+			return getResult() != nullptr; //3725
+	}
+	return LoopExpImpl::internalEIsSet(featureID);
+}
+
+bool IterateExpImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case ocl::Expressions::ExpressionsPackage::ITERATEEXP_ATTRIBUTE_RESULT:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<ocl::Expressions::Variable> _result = std::dynamic_pointer_cast<ocl::Expressions::Variable>(_temp);
+			setResult(_result); //3725
+			return true;
+		}
+	}
+
+	return LoopExpImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any IterateExpImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+
+		default:
+		{
+			// call superTypes
+			result = LoopExpImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<IterateExp> IterateExpImpl::getThisIterateExpPtr() const
+{
+	return m_thisIterateExpPtr.lock();
+}
+void IterateExpImpl::setThisIterateExpPtr(std::weak_ptr<IterateExp> thisIterateExpPtr)
+{
+	m_thisIterateExpPtr = thisIterateExpPtr;
+	setThisLoopExpPtr(thisIterateExpPtr);
+}

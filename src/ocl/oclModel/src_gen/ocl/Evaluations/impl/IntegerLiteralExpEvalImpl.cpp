@@ -1,3 +1,4 @@
+
 #include "ocl/Evaluations/impl/IntegerLiteralExpEvalImpl.hpp"
 
 #ifdef NDEBUG
@@ -32,12 +33,11 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "fUML/Semantics/Values/ValuesFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
 #include "uml/umlFactory.hpp"
+#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
-
 
 #include "ocl/Evaluations/EvalEnvironment.hpp"
 #include "fUML/Semantics/Values/LiteralIntegerEvaluation.hpp"
@@ -119,115 +119,28 @@ std::shared_ptr<ecore::EObject> IntegerLiteralExpEvalImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> IntegerLiteralExpEvalImpl::eStaticClass() const
-{
-	return ocl::Evaluations::EvaluationsPackage::eInstance()->getIntegerLiteralExpEval_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
 
 //*********************************
-// References
+// Attribute Getters & Setters
+//*********************************
+
+//*********************************
+// Reference Getters & Setters
 //*********************************
 
 //*********************************
 // Union Getter
 //*********************************
 
-
-
-std::shared_ptr<IntegerLiteralExpEval> IntegerLiteralExpEvalImpl::getThisIntegerLiteralExpEvalPtr() const
-{
-	return m_thisIntegerLiteralExpEvalPtr.lock();
-}
-void IntegerLiteralExpEvalImpl::setThisIntegerLiteralExpEvalPtr(std::weak_ptr<IntegerLiteralExpEval> thisIntegerLiteralExpEvalPtr)
-{
-	m_thisIntegerLiteralExpEvalPtr = thisIntegerLiteralExpEvalPtr;
-	setThisLiteralIntegerEvaluationPtr(thisIntegerLiteralExpEvalPtr);
-	setThisNumericLiteralExpEvalPtr(thisIntegerLiteralExpEvalPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> IntegerLiteralExpEvalImpl::eContainer() const
 {
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any IntegerLiteralExpEvalImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-	}
-	Any result;
-	result = fUML::Semantics::Values::LiteralIntegerEvaluationImpl::eGet(featureID, resolve, coreType);
-	if (result != nullptr && !result->isEmpty())
-	{
-		return result;
-	}
-	result = NumericLiteralExpEvalImpl::eGet(featureID, resolve, coreType);
-	return result;
-}
-bool IntegerLiteralExpEvalImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-	}
-	bool result = false;
-	result = fUML::Semantics::Values::LiteralIntegerEvaluationImpl::internalEIsSet(featureID);
-	if (result)
-	{
-		return result;
-	}
-	result = NumericLiteralExpEvalImpl::internalEIsSet(featureID);
-	return result;
-}
-bool IntegerLiteralExpEvalImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-	}
-
-	bool result = false;
-	result = fUML::Semantics::Values::LiteralIntegerEvaluationImpl::eSet(featureID, newValue);
-	if (result)
-	{
-		return result;
-	}
-	result = NumericLiteralExpEvalImpl::eSet(featureID, newValue);
-	return result;
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any IntegerLiteralExpEvalImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-
-		default:
-		{
-			// call superTypes
-			result = fUML::Semantics::Values::LiteralIntegerEvaluationImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			result = NumericLiteralExpEvalImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -289,12 +202,6 @@ void IntegerLiteralExpEvalImpl::save(std::shared_ptr<persistence::interfaces::XS
 	fUML::Semantics::Loci::SemanticVisitorImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
-	
-	
 }
 
 void IntegerLiteralExpEvalImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -309,3 +216,96 @@ void IntegerLiteralExpEvalImpl::saveContent(std::shared_ptr<persistence::interfa
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> IntegerLiteralExpEvalImpl::eStaticClass() const
+{
+	return ocl::Evaluations::EvaluationsPackage::eInstance()->getIntegerLiteralExpEval_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any IntegerLiteralExpEvalImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+	}
+	Any result;
+	result = fUML::Semantics::Values::LiteralIntegerEvaluationImpl::eGet(featureID, resolve, coreType);
+	if (result != nullptr && !result->isEmpty())
+	{
+		return result;
+	}
+	result = NumericLiteralExpEvalImpl::eGet(featureID, resolve, coreType);
+	return result;
+}
+
+bool IntegerLiteralExpEvalImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+	}
+	bool result = false;
+	result = fUML::Semantics::Values::LiteralIntegerEvaluationImpl::internalEIsSet(featureID);
+	if (result)
+	{
+		return result;
+	}
+	result = NumericLiteralExpEvalImpl::internalEIsSet(featureID);
+	return result;
+}
+
+bool IntegerLiteralExpEvalImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+	}
+
+	bool result = false;
+	result = fUML::Semantics::Values::LiteralIntegerEvaluationImpl::eSet(featureID, newValue);
+	if (result)
+	{
+		return result;
+	}
+	result = NumericLiteralExpEvalImpl::eSet(featureID, newValue);
+	return result;
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any IntegerLiteralExpEvalImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+
+		default:
+		{
+			// call superTypes
+			result = fUML::Semantics::Values::LiteralIntegerEvaluationImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			result = NumericLiteralExpEvalImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<IntegerLiteralExpEval> IntegerLiteralExpEvalImpl::getThisIntegerLiteralExpEvalPtr() const
+{
+	return m_thisIntegerLiteralExpEvalPtr.lock();
+}
+void IntegerLiteralExpEvalImpl::setThisIntegerLiteralExpEvalPtr(std::weak_ptr<IntegerLiteralExpEval> thisIntegerLiteralExpEvalPtr)
+{
+	m_thisIntegerLiteralExpEvalPtr = thisIntegerLiteralExpEvalPtr;
+	setThisLiteralIntegerEvaluationPtr(thisIntegerLiteralExpEvalPtr);
+	setThisNumericLiteralExpEvalPtr(thisIntegerLiteralExpEvalPtr);
+}

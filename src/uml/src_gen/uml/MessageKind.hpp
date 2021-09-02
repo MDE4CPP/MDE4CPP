@@ -10,12 +10,16 @@
 namespace uml 
 {
 	enum MessageKind {
+		
 		COMPLETE = 0
 ,
+		
 		FOUND = 2
 ,
+		
 		LOST = 1
 ,
+		
 		UNKNOWN = 3
 	};
 }

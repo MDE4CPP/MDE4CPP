@@ -1,3 +1,4 @@
+
 #include "ocl/Evaluations/impl/AssociationClassCallExpEvalImpl.hpp"
 
 #ifdef NDEBUG
@@ -25,20 +26,18 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "fUML/Semantics/Values/ValuesFactory.hpp"
-#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
 #include "uml/umlFactory.hpp"
+#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
+#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
-
 
 #include "ocl/Evaluations/EvalEnvironment.hpp"
 #include "fUML/Semantics/Loci/Locus.hpp"
@@ -122,25 +121,18 @@ std::shared_ptr<ecore::EObject> AssociationClassCallExpEvalImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> AssociationClassCallExpEvalImpl::eStaticClass() const
-{
-	return ocl::Evaluations::EvaluationsPackage::eInstance()->getAssociationClassCallExpEval_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference referredAssociationClass
-*/
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference referredAssociationClass */
 std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> AssociationClassCallExpEvalImpl::getReferredAssociationClass() const
 {
     return m_referredAssociationClass;
@@ -151,89 +143,16 @@ void AssociationClassCallExpEvalImpl::setReferredAssociationClass(std::shared_pt
 	
 }
 
-
 //*********************************
 // Union Getter
 //*********************************
 
-
-
-std::shared_ptr<AssociationClassCallExpEval> AssociationClassCallExpEvalImpl::getThisAssociationClassCallExpEvalPtr() const
-{
-	return m_thisAssociationClassCallExpEvalPtr.lock();
-}
-void AssociationClassCallExpEvalImpl::setThisAssociationClassCallExpEvalPtr(std::weak_ptr<AssociationClassCallExpEval> thisAssociationClassCallExpEvalPtr)
-{
-	m_thisAssociationClassCallExpEvalPtr = thisAssociationClassCallExpEvalPtr;
-	setThisNavigationCallExpEvalPtr(thisAssociationClassCallExpEvalPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> AssociationClassCallExpEvalImpl::eContainer() const
 {
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any AssociationClassCallExpEvalImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case ocl::Evaluations::EvaluationsPackage::ASSOCIATIONCLASSCALLEXPEVAL_ATTRIBUTE_REFERREDASSOCIATIONCLASS:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getReferredAssociationClass();
-				return eAny(returnValue); //39
-			}
-	}
-	return NavigationCallExpEvalImpl::eGet(featureID, resolve, coreType);
-}
-bool AssociationClassCallExpEvalImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case ocl::Evaluations::EvaluationsPackage::ASSOCIATIONCLASSCALLEXPEVAL_ATTRIBUTE_REFERREDASSOCIATIONCLASS:
-			return getReferredAssociationClass() != nullptr; //39
-	}
-	return NavigationCallExpEvalImpl::internalEIsSet(featureID);
-}
-bool AssociationClassCallExpEvalImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case ocl::Evaluations::EvaluationsPackage::ASSOCIATIONCLASSCALLEXPEVAL_ATTRIBUTE_REFERREDASSOCIATIONCLASS:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> _referredAssociationClass = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::StringValue>(_temp);
-			setReferredAssociationClass(_referredAssociationClass); //39
-			return true;
-		}
-	}
-
-	return NavigationCallExpEvalImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any AssociationClassCallExpEvalImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-
-		default:
-		{
-			// call superTypes
-			result = NavigationCallExpEvalImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -323,12 +242,6 @@ void AssociationClassCallExpEvalImpl::save(std::shared_ptr<persistence::interfac
 	fUML::Semantics::Loci::SemanticVisitorImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
-	
-	
 }
 
 void AssociationClassCallExpEvalImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -345,3 +258,86 @@ void AssociationClassCallExpEvalImpl::saveContent(std::shared_ptr<persistence::i
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> AssociationClassCallExpEvalImpl::eStaticClass() const
+{
+	return ocl::Evaluations::EvaluationsPackage::eInstance()->getAssociationClassCallExpEval_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any AssociationClassCallExpEvalImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case ocl::Evaluations::EvaluationsPackage::ASSOCIATIONCLASSCALLEXPEVAL_ATTRIBUTE_REFERREDASSOCIATIONCLASS:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getReferredAssociationClass();
+				return eAny(returnValue); //39
+			}
+	}
+	return NavigationCallExpEvalImpl::eGet(featureID, resolve, coreType);
+}
+
+bool AssociationClassCallExpEvalImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case ocl::Evaluations::EvaluationsPackage::ASSOCIATIONCLASSCALLEXPEVAL_ATTRIBUTE_REFERREDASSOCIATIONCLASS:
+			return getReferredAssociationClass() != nullptr; //39
+	}
+	return NavigationCallExpEvalImpl::internalEIsSet(featureID);
+}
+
+bool AssociationClassCallExpEvalImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case ocl::Evaluations::EvaluationsPackage::ASSOCIATIONCLASSCALLEXPEVAL_ATTRIBUTE_REFERREDASSOCIATIONCLASS:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> _referredAssociationClass = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::StringValue>(_temp);
+			setReferredAssociationClass(_referredAssociationClass); //39
+			return true;
+		}
+	}
+
+	return NavigationCallExpEvalImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any AssociationClassCallExpEvalImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+
+		default:
+		{
+			// call superTypes
+			result = NavigationCallExpEvalImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<AssociationClassCallExpEval> AssociationClassCallExpEvalImpl::getThisAssociationClassCallExpEvalPtr() const
+{
+	return m_thisAssociationClassCallExpEvalPtr.lock();
+}
+void AssociationClassCallExpEvalImpl::setThisAssociationClassCallExpEvalPtr(std::weak_ptr<AssociationClassCallExpEval> thisAssociationClassCallExpEvalPtr)
+{
+	m_thisAssociationClassCallExpEvalPtr = thisAssociationClassCallExpEvalPtr;
+	setThisNavigationCallExpEvalPtr(thisAssociationClassCallExpEvalPtr);
+}

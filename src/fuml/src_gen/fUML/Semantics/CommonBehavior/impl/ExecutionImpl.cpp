@@ -1,3 +1,4 @@
+
 #include "fUML/Semantics/CommonBehavior/impl/ExecutionImpl.hpp"
 
 #ifdef NDEBUG
@@ -47,7 +48,6 @@
 #include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
-
 
 #include "uml/Behavior.hpp"
 #include "uml/Classifier.hpp"
@@ -156,15 +156,6 @@ std::shared_ptr<ecore::EObject> ExecutionImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> ExecutionImpl::eStaticClass() const
-{
-	return fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance()->getExecution_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
@@ -198,6 +189,8 @@ void ExecutionImpl::execute()
 	
 	//end of body
 }
+
+
 
 std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > ExecutionImpl::getOutputParameterValues()
 {
@@ -271,11 +264,13 @@ void ExecutionImpl::terminate()
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference behavior
-*/
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference behavior */
 std::shared_ptr<uml::Behavior> ExecutionImpl::getBehavior() const
 {
 	//generated from getterBody annotation
@@ -293,10 +288,7 @@ void ExecutionImpl::setBehavior(std::shared_ptr<uml::Behavior> _behavior)
 	
 }
 
-
-/*
-Getter & Setter for reference context
-*/
+/* Getter & Setter for reference context */
 std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> ExecutionImpl::getContext() const
 {
     return m_context;
@@ -307,10 +299,7 @@ void ExecutionImpl::setContext(std::shared_ptr<fUML::Semantics::StructuredClassi
 	
 }
 
-
-/*
-Getter & Setter for reference parameterValues
-*/
+/* Getter & Setter for reference parameterValues */
 std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> ExecutionImpl::getParameterValues() const
 {
 	if(m_parameterValues == nullptr)
@@ -322,214 +311,16 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> ExecutionI
     return m_parameterValues;
 }
 
-
-
 //*********************************
 // Union Getter
 //*********************************
 
-
-
-std::shared_ptr<Execution> ExecutionImpl::getThisExecutionPtr() const
-{
-	return m_thisExecutionPtr.lock();
-}
-void ExecutionImpl::setThisExecutionPtr(std::weak_ptr<Execution> thisExecutionPtr)
-{
-	m_thisExecutionPtr = thisExecutionPtr;
-	setThisObjectPtr(thisExecutionPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> ExecutionImpl::eContainer() const
 {
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any ExecutionImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::EXECUTION_ATTRIBUTE_BEHAVIOR:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getBehavior();
-				return eAny(returnValue); //466
-			}
-		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::EXECUTION_ATTRIBUTE_CONTEXT:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getContext();
-				return eAny(returnValue); //464
-			}
-		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::EXECUTION_ATTRIBUTE_PARAMETERVALUES:
-		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<fUML::Semantics::CommonBehavior::ParameterValue>::iterator iter = getParameterValues()->begin();
-			Bag<fUML::Semantics::CommonBehavior::ParameterValue>::iterator end = getParameterValues()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //465			
-		}
-	}
-	return fUML::Semantics::StructuredClassifiers::ObjectImpl::eGet(featureID, resolve, coreType);
-}
-bool ExecutionImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::EXECUTION_ATTRIBUTE_BEHAVIOR:
-			return getBehavior() != nullptr; //466
-		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::EXECUTION_ATTRIBUTE_CONTEXT:
-			return getContext() != nullptr; //464
-		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::EXECUTION_ATTRIBUTE_PARAMETERVALUES:
-			return getParameterValues() != nullptr; //465
-	}
-	return fUML::Semantics::StructuredClassifiers::ObjectImpl::internalEIsSet(featureID);
-}
-bool ExecutionImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::EXECUTION_ATTRIBUTE_BEHAVIOR:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::Behavior> _behavior = std::dynamic_pointer_cast<uml::Behavior>(_temp);
-			setBehavior(_behavior); //466
-			return true;
-		}
-		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::EXECUTION_ATTRIBUTE_CONTEXT:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> _context = std::dynamic_pointer_cast<fUML::Semantics::StructuredClassifiers::Object>(_temp);
-			setContext(_context); //464
-			return true;
-		}
-		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::EXECUTION_ATTRIBUTE_PARAMETERVALUES:
-		{
-			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> parameterValuesList(new Bag<fUML::Semantics::CommonBehavior::ParameterValue>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
-			{
-				parameterValuesList->add(std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::ParameterValue>(*iter));
-				iter++;
-			}
-			
-			Bag<fUML::Semantics::CommonBehavior::ParameterValue>::iterator iterParameterValues = getParameterValues()->begin();
-			Bag<fUML::Semantics::CommonBehavior::ParameterValue>::iterator endParameterValues = getParameterValues()->end();
-			while (iterParameterValues != endParameterValues)
-			{
-				if (parameterValuesList->find(*iterParameterValues) == -1)
-				{
-					getParameterValues()->erase(*iterParameterValues);
-				}
-				iterParameterValues++;
-			}
- 
-			iterParameterValues = parameterValuesList->begin();
-			endParameterValues = parameterValuesList->end();
-			while (iterParameterValues != endParameterValues)
-			{
-				if (getParameterValues()->find(*iterParameterValues) == -1)
-				{
-					getParameterValues()->add(*iterParameterValues);
-				}
-				iterParameterValues++;			
-			}
-			return true;
-		}
-	}
-
-	return fUML::Semantics::StructuredClassifiers::ObjectImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any ExecutionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-		
-		// 2119596406
-		case CommonBehaviorPackage::EXECUTION_OPERATION__COPY:
-		{
-			result = eAny(this->_copy());
-			break;
-		}
-		
-		// 650217545
-		case CommonBehaviorPackage::EXECUTION_OPERATION_EXECUTE:
-		{
-			this->execute();
-			break;
-		}
-		
-		// 990554645
-		case CommonBehaviorPackage::EXECUTION_OPERATION_GETOUTPUTPARAMETERVALUES:
-		{
-			result = eAny(this->getOutputParameterValues());
-			break;
-		}
-		
-		// 190986849
-		case CommonBehaviorPackage::EXECUTION_OPERATION_GETPARAMETERVALUE_PARAMETER:
-		{
-			//Retrieve input parameter 'parameter'
-			//parameter 0
-			std::shared_ptr<uml::Parameter> incoming_param_parameter;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_parameter_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_parameter = (*incoming_param_parameter_arguments_citer)->get()->get<std::shared_ptr<uml::Parameter> >();
-			result = eAny(this->getParameterValue(incoming_param_parameter));
-			break;
-		}
-		
-		// 1338828288
-		case CommonBehaviorPackage::EXECUTION_OPERATION_NEW_:
-		{
-			result = eAny(this->new_());
-			break;
-		}
-		
-		// 680977365
-		case CommonBehaviorPackage::EXECUTION_OPERATION_SETPARAMETERVALUE_PARAMETERVALUE:
-		{
-			//Retrieve input parameter 'parameterValue'
-			//parameter 0
-			std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> incoming_param_parameterValue;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_parameterValue_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_parameterValue = (*incoming_param_parameterValue_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> >();
-			this->setParameterValue(incoming_param_parameterValue);
-			break;
-		}
-		
-		// 938662950
-		case CommonBehaviorPackage::EXECUTION_OPERATION_TERMINATE:
-		{
-			this->terminate();
-			break;
-		}
-
-		default:
-		{
-			// call superTypes
-			result = fUML::Semantics::StructuredClassifiers::ObjectImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -660,12 +451,6 @@ void ExecutionImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> 
 	fUML::Semantics::Loci::SemanticVisitorImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
-	
-	
 }
 
 void ExecutionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -690,3 +475,210 @@ void ExecutionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHa
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> ExecutionImpl::eStaticClass() const
+{
+	return fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance()->getExecution_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any ExecutionImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::EXECUTION_ATTRIBUTE_BEHAVIOR:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getBehavior();
+				return eAny(returnValue); //466
+			}
+		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::EXECUTION_ATTRIBUTE_CONTEXT:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getContext();
+				return eAny(returnValue); //464
+			}
+		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::EXECUTION_ATTRIBUTE_PARAMETERVALUES:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<fUML::Semantics::CommonBehavior::ParameterValue>::iterator iter = getParameterValues()->begin();
+			Bag<fUML::Semantics::CommonBehavior::ParameterValue>::iterator end = getParameterValues()->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //465			
+		}
+	}
+	return fUML::Semantics::StructuredClassifiers::ObjectImpl::eGet(featureID, resolve, coreType);
+}
+
+bool ExecutionImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::EXECUTION_ATTRIBUTE_BEHAVIOR:
+			return getBehavior() != nullptr; //466
+		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::EXECUTION_ATTRIBUTE_CONTEXT:
+			return getContext() != nullptr; //464
+		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::EXECUTION_ATTRIBUTE_PARAMETERVALUES:
+			return getParameterValues() != nullptr; //465
+	}
+	return fUML::Semantics::StructuredClassifiers::ObjectImpl::internalEIsSet(featureID);
+}
+
+bool ExecutionImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::EXECUTION_ATTRIBUTE_BEHAVIOR:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::Behavior> _behavior = std::dynamic_pointer_cast<uml::Behavior>(_temp);
+			setBehavior(_behavior); //466
+			return true;
+		}
+		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::EXECUTION_ATTRIBUTE_CONTEXT:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> _context = std::dynamic_pointer_cast<fUML::Semantics::StructuredClassifiers::Object>(_temp);
+			setContext(_context); //464
+			return true;
+		}
+		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::EXECUTION_ATTRIBUTE_PARAMETERVALUES:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> parameterValuesList(new Bag<fUML::Semantics::CommonBehavior::ParameterValue>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				parameterValuesList->add(std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::ParameterValue>(*iter));
+				iter++;
+			}
+			
+			Bag<fUML::Semantics::CommonBehavior::ParameterValue>::iterator iterParameterValues = getParameterValues()->begin();
+			Bag<fUML::Semantics::CommonBehavior::ParameterValue>::iterator endParameterValues = getParameterValues()->end();
+			while (iterParameterValues != endParameterValues)
+			{
+				if (parameterValuesList->find(*iterParameterValues) == -1)
+				{
+					getParameterValues()->erase(*iterParameterValues);
+				}
+				iterParameterValues++;
+			}
+ 
+			iterParameterValues = parameterValuesList->begin();
+			endParameterValues = parameterValuesList->end();
+			while (iterParameterValues != endParameterValues)
+			{
+				if (getParameterValues()->find(*iterParameterValues) == -1)
+				{
+					getParameterValues()->add(*iterParameterValues);
+				}
+				iterParameterValues++;			
+			}
+			return true;
+		}
+	}
+
+	return fUML::Semantics::StructuredClassifiers::ObjectImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any ExecutionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 2119596406
+		case CommonBehaviorPackage::EXECUTION_OPERATION__COPY:
+		{
+			result = eAny(this->_copy());
+			break;
+		}
+		
+		// 650217545
+		case CommonBehaviorPackage::EXECUTION_OPERATION_EXECUTE:
+		{
+			this->execute();
+			break;
+		}
+		
+		// 990554645
+		case CommonBehaviorPackage::EXECUTION_OPERATION_GETOUTPUTPARAMETERVALUES:
+		{
+			result = eAny(this->getOutputParameterValues());
+			break;
+		}
+		
+		// 190986849
+		case CommonBehaviorPackage::EXECUTION_OPERATION_GETPARAMETERVALUE_PARAMETER:
+		{
+			//Retrieve input parameter 'parameter'
+			//parameter 0
+			std::shared_ptr<uml::Parameter> incoming_param_parameter;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_parameter_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_parameter = (*incoming_param_parameter_arguments_citer)->get()->get<std::shared_ptr<uml::Parameter> >();
+			result = eAny(this->getParameterValue(incoming_param_parameter));
+			break;
+		}
+		
+		// 1338828288
+		case CommonBehaviorPackage::EXECUTION_OPERATION_NEW_:
+		{
+			result = eAny(this->new_());
+			break;
+		}
+		
+		// 680977365
+		case CommonBehaviorPackage::EXECUTION_OPERATION_SETPARAMETERVALUE_PARAMETERVALUE:
+		{
+			//Retrieve input parameter 'parameterValue'
+			//parameter 0
+			std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> incoming_param_parameterValue;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_parameterValue_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_parameterValue = (*incoming_param_parameterValue_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> >();
+			this->setParameterValue(incoming_param_parameterValue);
+			break;
+		}
+		
+		// 938662950
+		case CommonBehaviorPackage::EXECUTION_OPERATION_TERMINATE:
+		{
+			this->terminate();
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = fUML::Semantics::StructuredClassifiers::ObjectImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<Execution> ExecutionImpl::getThisExecutionPtr() const
+{
+	return m_thisExecutionPtr.lock();
+}
+void ExecutionImpl::setThisExecutionPtr(std::weak_ptr<Execution> thisExecutionPtr)
+{
+	m_thisExecutionPtr = thisExecutionPtr;
+	setThisObjectPtr(thisExecutionPtr);
+}

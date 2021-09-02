@@ -1,3 +1,4 @@
+
 #include "uml/impl/ConnectionPointReferenceImpl.hpp"
 
 #ifdef NDEBUG
@@ -26,7 +27,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -34,7 +34,6 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-
 
 #include "uml/Comment.hpp"
 #include "uml/Dependency.hpp"
@@ -146,15 +145,6 @@ std::shared_ptr<ecore::EObject> ConnectionPointReferenceImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> ConnectionPointReferenceImpl::eStaticClass() const
-{
-	return uml::umlPackage::eInstance()->getConnectionPointReference_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
@@ -171,11 +161,13 @@ bool ConnectionPointReferenceImpl::exit_pseudostates(Any diagnostics,std::shared
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference entry
-*/
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference entry */
 std::shared_ptr<Bag<uml::Pseudostate>> ConnectionPointReferenceImpl::getEntry() const
 {
 	if(m_entry == nullptr)
@@ -187,11 +179,7 @@ std::shared_ptr<Bag<uml::Pseudostate>> ConnectionPointReferenceImpl::getEntry() 
     return m_entry;
 }
 
-
-
-/*
-Getter & Setter for reference exit
-*/
+/* Getter & Setter for reference exit */
 std::shared_ptr<Bag<uml::Pseudostate>> ConnectionPointReferenceImpl::getExit() const
 {
 	if(m_exit == nullptr)
@@ -203,11 +191,7 @@ std::shared_ptr<Bag<uml::Pseudostate>> ConnectionPointReferenceImpl::getExit() c
     return m_exit;
 }
 
-
-
-/*
-Getter & Setter for reference state
-*/
+/* Getter & Setter for reference state */
 std::weak_ptr<uml::State> ConnectionPointReferenceImpl::getState() const
 {
     return m_state;
@@ -217,7 +201,6 @@ void ConnectionPointReferenceImpl::setState(std::weak_ptr<uml::State> _state)
     m_state = _state;
 	
 }
-
 
 //*********************************
 // Union Getter
@@ -247,18 +230,9 @@ std::weak_ptr<uml::Element> ConnectionPointReferenceImpl::getOwner() const
 	return m_owner;
 }
 
-
-
-
-std::shared_ptr<ConnectionPointReference> ConnectionPointReferenceImpl::getThisConnectionPointReferencePtr() const
-{
-	return m_thisConnectionPointReferencePtr.lock();
-}
-void ConnectionPointReferenceImpl::setThisConnectionPointReferencePtr(std::weak_ptr<ConnectionPointReference> thisConnectionPointReferencePtr)
-{
-	m_thisConnectionPointReferencePtr = thisConnectionPointReferencePtr;
-	setThisVertexPtr(thisConnectionPointReferencePtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> ConnectionPointReferenceImpl::eContainer() const
 {
 	if(auto wp = m_container.lock())
@@ -281,204 +255,6 @@ std::shared_ptr<ecore::EObject> ConnectionPointReferenceImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any ConnectionPointReferenceImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::CONNECTIONPOINTREFERENCE_ATTRIBUTE_ENTRY:
-		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Pseudostate>::iterator iter = getEntry()->begin();
-			Bag<uml::Pseudostate>::iterator end = getEntry()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //5212			
-		}
-		case uml::umlPackage::CONNECTIONPOINTREFERENCE_ATTRIBUTE_EXIT:
-		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Pseudostate>::iterator iter = getExit()->begin();
-			Bag<uml::Pseudostate>::iterator end = getExit()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //5213			
-		}
-		case uml::umlPackage::CONNECTIONPOINTREFERENCE_ATTRIBUTE_STATE:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getState().lock();
-				return eAny(returnValue); //5214
-			}
-	}
-	return VertexImpl::eGet(featureID, resolve, coreType);
-}
-bool ConnectionPointReferenceImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::CONNECTIONPOINTREFERENCE_ATTRIBUTE_ENTRY:
-			return getEntry() != nullptr; //5212
-		case uml::umlPackage::CONNECTIONPOINTREFERENCE_ATTRIBUTE_EXIT:
-			return getExit() != nullptr; //5213
-		case uml::umlPackage::CONNECTIONPOINTREFERENCE_ATTRIBUTE_STATE:
-			return getState().lock() != nullptr; //5214
-	}
-	return VertexImpl::internalEIsSet(featureID);
-}
-bool ConnectionPointReferenceImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::CONNECTIONPOINTREFERENCE_ATTRIBUTE_ENTRY:
-		{
-			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::Pseudostate>> entryList(new Bag<uml::Pseudostate>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
-			{
-				entryList->add(std::dynamic_pointer_cast<uml::Pseudostate>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::Pseudostate>::iterator iterEntry = getEntry()->begin();
-			Bag<uml::Pseudostate>::iterator endEntry = getEntry()->end();
-			while (iterEntry != endEntry)
-			{
-				if (entryList->find(*iterEntry) == -1)
-				{
-					getEntry()->erase(*iterEntry);
-				}
-				iterEntry++;
-			}
- 
-			iterEntry = entryList->begin();
-			endEntry = entryList->end();
-			while (iterEntry != endEntry)
-			{
-				if (getEntry()->find(*iterEntry) == -1)
-				{
-					getEntry()->add(*iterEntry);
-				}
-				iterEntry++;			
-			}
-			return true;
-		}
-		case uml::umlPackage::CONNECTIONPOINTREFERENCE_ATTRIBUTE_EXIT:
-		{
-			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::Pseudostate>> exitList(new Bag<uml::Pseudostate>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
-			{
-				exitList->add(std::dynamic_pointer_cast<uml::Pseudostate>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::Pseudostate>::iterator iterExit = getExit()->begin();
-			Bag<uml::Pseudostate>::iterator endExit = getExit()->end();
-			while (iterExit != endExit)
-			{
-				if (exitList->find(*iterExit) == -1)
-				{
-					getExit()->erase(*iterExit);
-				}
-				iterExit++;
-			}
- 
-			iterExit = exitList->begin();
-			endExit = exitList->end();
-			while (iterExit != endExit)
-			{
-				if (getExit()->find(*iterExit) == -1)
-				{
-					getExit()->add(*iterExit);
-				}
-				iterExit++;			
-			}
-			return true;
-		}
-		case uml::umlPackage::CONNECTIONPOINTREFERENCE_ATTRIBUTE_STATE:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::State> _state = std::dynamic_pointer_cast<uml::State>(_temp);
-			setState(_state); //5214
-			return true;
-		}
-	}
-
-	return VertexImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any ConnectionPointReferenceImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-		
-		// 1348223732
-		case umlPackage::CONNECTIONPOINTREFERENCE_OPERATION_ENTRY_PSEUDOSTATES_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->entry_pseudostates(incoming_param_diagnostics,incoming_param_context));
-			break;
-		}
-		
-		// 1938887954
-		case umlPackage::CONNECTIONPOINTREFERENCE_OPERATION_EXIT_PSEUDOSTATES_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->exit_pseudostates(incoming_param_diagnostics,incoming_param_context));
-			break;
-		}
-
-		default:
-		{
-			// call superTypes
-			result = VertexImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -599,10 +375,6 @@ void ConnectionPointReferenceImpl::save(std::shared_ptr<persistence::interfaces:
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
 }
 
 void ConnectionPointReferenceImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -620,3 +392,220 @@ void ConnectionPointReferenceImpl::saveContent(std::shared_ptr<persistence::inte
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> ConnectionPointReferenceImpl::eStaticClass() const
+{
+	return uml::umlPackage::eInstance()->getConnectionPointReference_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any ConnectionPointReferenceImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::CONNECTIONPOINTREFERENCE_ATTRIBUTE_ENTRY:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Pseudostate>::iterator iter = getEntry()->begin();
+			Bag<uml::Pseudostate>::iterator end = getEntry()->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //5212			
+		}
+		case uml::umlPackage::CONNECTIONPOINTREFERENCE_ATTRIBUTE_EXIT:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Pseudostate>::iterator iter = getExit()->begin();
+			Bag<uml::Pseudostate>::iterator end = getExit()->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //5213			
+		}
+		case uml::umlPackage::CONNECTIONPOINTREFERENCE_ATTRIBUTE_STATE:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getState().lock();
+				return eAny(returnValue); //5214
+			}
+	}
+	return VertexImpl::eGet(featureID, resolve, coreType);
+}
+
+bool ConnectionPointReferenceImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::CONNECTIONPOINTREFERENCE_ATTRIBUTE_ENTRY:
+			return getEntry() != nullptr; //5212
+		case uml::umlPackage::CONNECTIONPOINTREFERENCE_ATTRIBUTE_EXIT:
+			return getExit() != nullptr; //5213
+		case uml::umlPackage::CONNECTIONPOINTREFERENCE_ATTRIBUTE_STATE:
+			return getState().lock() != nullptr; //5214
+	}
+	return VertexImpl::internalEIsSet(featureID);
+}
+
+bool ConnectionPointReferenceImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::CONNECTIONPOINTREFERENCE_ATTRIBUTE_ENTRY:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::Pseudostate>> entryList(new Bag<uml::Pseudostate>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				entryList->add(std::dynamic_pointer_cast<uml::Pseudostate>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::Pseudostate>::iterator iterEntry = getEntry()->begin();
+			Bag<uml::Pseudostate>::iterator endEntry = getEntry()->end();
+			while (iterEntry != endEntry)
+			{
+				if (entryList->find(*iterEntry) == -1)
+				{
+					getEntry()->erase(*iterEntry);
+				}
+				iterEntry++;
+			}
+ 
+			iterEntry = entryList->begin();
+			endEntry = entryList->end();
+			while (iterEntry != endEntry)
+			{
+				if (getEntry()->find(*iterEntry) == -1)
+				{
+					getEntry()->add(*iterEntry);
+				}
+				iterEntry++;			
+			}
+			return true;
+		}
+		case uml::umlPackage::CONNECTIONPOINTREFERENCE_ATTRIBUTE_EXIT:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::Pseudostate>> exitList(new Bag<uml::Pseudostate>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				exitList->add(std::dynamic_pointer_cast<uml::Pseudostate>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::Pseudostate>::iterator iterExit = getExit()->begin();
+			Bag<uml::Pseudostate>::iterator endExit = getExit()->end();
+			while (iterExit != endExit)
+			{
+				if (exitList->find(*iterExit) == -1)
+				{
+					getExit()->erase(*iterExit);
+				}
+				iterExit++;
+			}
+ 
+			iterExit = exitList->begin();
+			endExit = exitList->end();
+			while (iterExit != endExit)
+			{
+				if (getExit()->find(*iterExit) == -1)
+				{
+					getExit()->add(*iterExit);
+				}
+				iterExit++;			
+			}
+			return true;
+		}
+		case uml::umlPackage::CONNECTIONPOINTREFERENCE_ATTRIBUTE_STATE:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::State> _state = std::dynamic_pointer_cast<uml::State>(_temp);
+			setState(_state); //5214
+			return true;
+		}
+	}
+
+	return VertexImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any ConnectionPointReferenceImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 1348223732
+		case umlPackage::CONNECTIONPOINTREFERENCE_OPERATION_ENTRY_PSEUDOSTATES_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->entry_pseudostates(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+		
+		// 1938887954
+		case umlPackage::CONNECTIONPOINTREFERENCE_OPERATION_EXIT_PSEUDOSTATES_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->exit_pseudostates(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = VertexImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<ConnectionPointReference> ConnectionPointReferenceImpl::getThisConnectionPointReferencePtr() const
+{
+	return m_thisConnectionPointReferencePtr.lock();
+}
+void ConnectionPointReferenceImpl::setThisConnectionPointReferencePtr(std::weak_ptr<ConnectionPointReference> thisConnectionPointReferencePtr)
+{
+	m_thisConnectionPointReferencePtr = thisConnectionPointReferencePtr;
+	setThisVertexPtr(thisConnectionPointReferencePtr);
+}

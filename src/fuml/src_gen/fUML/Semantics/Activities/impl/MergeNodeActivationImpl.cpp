@@ -1,3 +1,4 @@
+
 #include "fUML/Semantics/Activities/impl/MergeNodeActivationImpl.hpp"
 
 #ifdef NDEBUG
@@ -25,7 +26,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -34,7 +34,6 @@
 #include <exception> // used in Persistence
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "uml/umlFactory.hpp"
-
 
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
 #include "uml/ActivityNode.hpp"
@@ -117,38 +116,25 @@ std::shared_ptr<ecore::EObject> MergeNodeActivationImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> MergeNodeActivationImpl::eStaticClass() const
-{
-	return fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getMergeNodeActivation_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
 
 //*********************************
-// References
+// Attribute Getters & Setters
+//*********************************
+
+//*********************************
+// Reference Getters & Setters
 //*********************************
 
 //*********************************
 // Union Getter
 //*********************************
 
-
-
-std::shared_ptr<MergeNodeActivation> MergeNodeActivationImpl::getThisMergeNodeActivationPtr() const
-{
-	return m_thisMergeNodeActivationPtr.lock();
-}
-void MergeNodeActivationImpl::setThisMergeNodeActivationPtr(std::weak_ptr<MergeNodeActivation> thisMergeNodeActivationPtr)
-{
-	m_thisMergeNodeActivationPtr = thisMergeNodeActivationPtr;
-	setThisControlNodeActivationPtr(thisMergeNodeActivationPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> MergeNodeActivationImpl::eContainer() const
 {
 	if(auto wp = m_group.lock())
@@ -156,55 +142,6 @@ std::shared_ptr<ecore::EObject> MergeNodeActivationImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any MergeNodeActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-	}
-	return ControlNodeActivationImpl::eGet(featureID, resolve, coreType);
-}
-bool MergeNodeActivationImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-	}
-	return ControlNodeActivationImpl::internalEIsSet(featureID);
-}
-bool MergeNodeActivationImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-	}
-
-	return ControlNodeActivationImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any MergeNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-
-		default:
-		{
-			// call superTypes
-			result = ControlNodeActivationImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -255,9 +192,6 @@ void MergeNodeActivationImpl::save(std::shared_ptr<persistence::interfaces::XSav
 	fUML::Semantics::Loci::SemanticVisitorImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
 }
 
 void MergeNodeActivationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -272,3 +206,71 @@ void MergeNodeActivationImpl::saveContent(std::shared_ptr<persistence::interface
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> MergeNodeActivationImpl::eStaticClass() const
+{
+	return fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getMergeNodeActivation_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any MergeNodeActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+	}
+	return ControlNodeActivationImpl::eGet(featureID, resolve, coreType);
+}
+
+bool MergeNodeActivationImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+	}
+	return ControlNodeActivationImpl::internalEIsSet(featureID);
+}
+
+bool MergeNodeActivationImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+	}
+
+	return ControlNodeActivationImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any MergeNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+
+		default:
+		{
+			// call superTypes
+			result = ControlNodeActivationImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<MergeNodeActivation> MergeNodeActivationImpl::getThisMergeNodeActivationPtr() const
+{
+	return m_thisMergeNodeActivationPtr.lock();
+}
+void MergeNodeActivationImpl::setThisMergeNodeActivationPtr(std::weak_ptr<MergeNodeActivation> thisMergeNodeActivationPtr)
+{
+	m_thisMergeNodeActivationPtr = thisMergeNodeActivationPtr;
+	setThisControlNodeActivationPtr(thisMergeNodeActivationPtr);
+}

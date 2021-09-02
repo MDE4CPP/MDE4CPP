@@ -1,3 +1,4 @@
+
 #include "uml/impl/RaiseExceptionActionImpl.hpp"
 
 #ifdef NDEBUG
@@ -25,7 +26,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -33,7 +33,6 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-
 
 #include "uml/Action.hpp"
 #include "uml/Activity.hpp"
@@ -157,25 +156,18 @@ std::shared_ptr<ecore::EObject> RaiseExceptionActionImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> RaiseExceptionActionImpl::eStaticClass() const
-{
-	return uml::umlPackage::eInstance()->getRaiseExceptionAction_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference exception
-*/
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference exception */
 std::shared_ptr<uml::InputPin> RaiseExceptionActionImpl::getException() const
 {
     return m_exception;
@@ -185,7 +177,6 @@ void RaiseExceptionActionImpl::setException(std::shared_ptr<uml::InputPin> _exce
     m_exception = _exception;
 	
 }
-
 
 //*********************************
 // Union Getter
@@ -260,18 +251,9 @@ std::shared_ptr<Union<uml::RedefinableElement>> RaiseExceptionActionImpl::getRed
 	return m_redefinedElement;
 }
 
-
-
-
-std::shared_ptr<RaiseExceptionAction> RaiseExceptionActionImpl::getThisRaiseExceptionActionPtr() const
-{
-	return m_thisRaiseExceptionActionPtr.lock();
-}
-void RaiseExceptionActionImpl::setThisRaiseExceptionActionPtr(std::weak_ptr<RaiseExceptionAction> thisRaiseExceptionActionPtr)
-{
-	m_thisRaiseExceptionActionPtr = thisRaiseExceptionActionPtr;
-	setThisActionPtr(thisRaiseExceptionActionPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> RaiseExceptionActionImpl::eContainer() const
 {
 	if(auto wp = m_activity.lock())
@@ -294,70 +276,6 @@ std::shared_ptr<ecore::EObject> RaiseExceptionActionImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any RaiseExceptionActionImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::RAISEEXCEPTIONACTION_ATTRIBUTE_EXCEPTION:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getException();
-				return eAny(returnValue); //19227
-			}
-	}
-	return ActionImpl::eGet(featureID, resolve, coreType);
-}
-bool RaiseExceptionActionImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::RAISEEXCEPTIONACTION_ATTRIBUTE_EXCEPTION:
-			return getException() != nullptr; //19227
-	}
-	return ActionImpl::internalEIsSet(featureID);
-}
-bool RaiseExceptionActionImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::RAISEEXCEPTIONACTION_ATTRIBUTE_EXCEPTION:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::InputPin> _exception = std::dynamic_pointer_cast<uml::InputPin>(_temp);
-			setException(_exception); //19227
-			return true;
-		}
-	}
-
-	return ActionImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any RaiseExceptionActionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-
-		default:
-		{
-			// call superTypes
-			result = ActionImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -438,13 +356,6 @@ void RaiseExceptionActionImpl::save(std::shared_ptr<persistence::interfaces::XSa
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
-	
-	
-	
 }
 
 void RaiseExceptionActionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -465,3 +376,86 @@ void RaiseExceptionActionImpl::saveContent(std::shared_ptr<persistence::interfac
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> RaiseExceptionActionImpl::eStaticClass() const
+{
+	return uml::umlPackage::eInstance()->getRaiseExceptionAction_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any RaiseExceptionActionImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::RAISEEXCEPTIONACTION_ATTRIBUTE_EXCEPTION:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getException();
+				return eAny(returnValue); //19227
+			}
+	}
+	return ActionImpl::eGet(featureID, resolve, coreType);
+}
+
+bool RaiseExceptionActionImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::RAISEEXCEPTIONACTION_ATTRIBUTE_EXCEPTION:
+			return getException() != nullptr; //19227
+	}
+	return ActionImpl::internalEIsSet(featureID);
+}
+
+bool RaiseExceptionActionImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::RAISEEXCEPTIONACTION_ATTRIBUTE_EXCEPTION:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::InputPin> _exception = std::dynamic_pointer_cast<uml::InputPin>(_temp);
+			setException(_exception); //19227
+			return true;
+		}
+	}
+
+	return ActionImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any RaiseExceptionActionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+
+		default:
+		{
+			// call superTypes
+			result = ActionImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<RaiseExceptionAction> RaiseExceptionActionImpl::getThisRaiseExceptionActionPtr() const
+{
+	return m_thisRaiseExceptionActionPtr.lock();
+}
+void RaiseExceptionActionImpl::setThisRaiseExceptionActionPtr(std::weak_ptr<RaiseExceptionAction> thisRaiseExceptionActionPtr)
+{
+	m_thisRaiseExceptionActionPtr = thisRaiseExceptionActionPtr;
+	setThisActionPtr(thisRaiseExceptionActionPtr);
+}

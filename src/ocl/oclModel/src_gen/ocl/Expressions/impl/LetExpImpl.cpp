@@ -1,3 +1,4 @@
+
 #include "ocl/Expressions/impl/LetExpImpl.hpp"
 
 #ifdef NDEBUG
@@ -25,7 +26,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -35,7 +35,6 @@
 #include "ecore/ecoreFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
-
 
 #include "ocl/Expressions/CallExp.hpp"
 #include "ocl/Expressions/CollectionRange.hpp"
@@ -216,25 +215,18 @@ std::shared_ptr<ecore::EObject> LetExpImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> LetExpImpl::eStaticClass() const
-{
-	return ocl::Expressions::ExpressionsPackage::eInstance()->getLetExp_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference in
-*/
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference in */
 std::shared_ptr<ocl::Expressions::OclExpression> LetExpImpl::getIn() const
 {
     return m_in;
@@ -245,10 +237,7 @@ void LetExpImpl::setIn(std::shared_ptr<ocl::Expressions::OclExpression> _in)
 	
 }
 
-
-/*
-Getter & Setter for reference variable
-*/
+/* Getter & Setter for reference variable */
 std::shared_ptr<ocl::Expressions::Variable> LetExpImpl::getVariable() const
 {
     return m_variable;
@@ -259,22 +248,13 @@ void LetExpImpl::setVariable(std::shared_ptr<ocl::Expressions::Variable> _variab
 	
 }
 
-
 //*********************************
 // Union Getter
 //*********************************
 
-
-
-std::shared_ptr<LetExp> LetExpImpl::getThisLetExpPtr() const
-{
-	return m_thisLetExpPtr.lock();
-}
-void LetExpImpl::setThisLetExpPtr(std::weak_ptr<LetExp> thisLetExpPtr)
-{
-	m_thisLetExpPtr = thisLetExpPtr;
-	setThisOclExpressionPtr(thisLetExpPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> LetExpImpl::eContainer() const
 {
 	if(auto wp = m_appliedElement.lock())
@@ -332,85 +312,6 @@ std::shared_ptr<ecore::EObject> LetExpImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any LetExpImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case ocl::Expressions::ExpressionsPackage::LETEXP_ATTRIBUTE_IN:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getIn();
-				return eAny(returnValue); //4122
-			}
-		case ocl::Expressions::ExpressionsPackage::LETEXP_ATTRIBUTE_VARIABLE:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getVariable();
-				return eAny(returnValue); //4123
-			}
-	}
-	return OclExpressionImpl::eGet(featureID, resolve, coreType);
-}
-bool LetExpImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case ocl::Expressions::ExpressionsPackage::LETEXP_ATTRIBUTE_IN:
-			return getIn() != nullptr; //4122
-		case ocl::Expressions::ExpressionsPackage::LETEXP_ATTRIBUTE_VARIABLE:
-			return getVariable() != nullptr; //4123
-	}
-	return OclExpressionImpl::internalEIsSet(featureID);
-}
-bool LetExpImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case ocl::Expressions::ExpressionsPackage::LETEXP_ATTRIBUTE_IN:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<ocl::Expressions::OclExpression> _in = std::dynamic_pointer_cast<ocl::Expressions::OclExpression>(_temp);
-			setIn(_in); //4122
-			return true;
-		}
-		case ocl::Expressions::ExpressionsPackage::LETEXP_ATTRIBUTE_VARIABLE:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<ocl::Expressions::Variable> _variable = std::dynamic_pointer_cast<ocl::Expressions::Variable>(_temp);
-			setVariable(_variable); //4123
-			return true;
-		}
-	}
-
-	return OclExpressionImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any LetExpImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-
-		default:
-		{
-			// call superTypes
-			result = OclExpressionImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -498,10 +399,6 @@ void LetExpImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> sav
 	ecore::EModelElementImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
 }
 
 void LetExpImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -527,3 +424,101 @@ void LetExpImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandl
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> LetExpImpl::eStaticClass() const
+{
+	return ocl::Expressions::ExpressionsPackage::eInstance()->getLetExp_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any LetExpImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case ocl::Expressions::ExpressionsPackage::LETEXP_ATTRIBUTE_IN:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getIn();
+				return eAny(returnValue); //4122
+			}
+		case ocl::Expressions::ExpressionsPackage::LETEXP_ATTRIBUTE_VARIABLE:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getVariable();
+				return eAny(returnValue); //4123
+			}
+	}
+	return OclExpressionImpl::eGet(featureID, resolve, coreType);
+}
+
+bool LetExpImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case ocl::Expressions::ExpressionsPackage::LETEXP_ATTRIBUTE_IN:
+			return getIn() != nullptr; //4122
+		case ocl::Expressions::ExpressionsPackage::LETEXP_ATTRIBUTE_VARIABLE:
+			return getVariable() != nullptr; //4123
+	}
+	return OclExpressionImpl::internalEIsSet(featureID);
+}
+
+bool LetExpImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case ocl::Expressions::ExpressionsPackage::LETEXP_ATTRIBUTE_IN:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<ocl::Expressions::OclExpression> _in = std::dynamic_pointer_cast<ocl::Expressions::OclExpression>(_temp);
+			setIn(_in); //4122
+			return true;
+		}
+		case ocl::Expressions::ExpressionsPackage::LETEXP_ATTRIBUTE_VARIABLE:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<ocl::Expressions::Variable> _variable = std::dynamic_pointer_cast<ocl::Expressions::Variable>(_temp);
+			setVariable(_variable); //4123
+			return true;
+		}
+	}
+
+	return OclExpressionImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any LetExpImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+
+		default:
+		{
+			// call superTypes
+			result = OclExpressionImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<LetExp> LetExpImpl::getThisLetExpPtr() const
+{
+	return m_thisLetExpPtr.lock();
+}
+void LetExpImpl::setThisLetExpPtr(std::weak_ptr<LetExp> thisLetExpPtr)
+{
+	m_thisLetExpPtr = thisLetExpPtr;
+	setThisOclExpressionPtr(thisLetExpPtr);
+}

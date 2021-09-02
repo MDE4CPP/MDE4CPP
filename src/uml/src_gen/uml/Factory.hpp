@@ -44,7 +44,6 @@ namespace uml
 // base class includes
 #include "uml/Element.hpp"
 
-// enum includes
 
 
 
@@ -83,29 +82,17 @@ namespace uml
 			*/
 			 
 			virtual std::shared_ptr<uml::Element> create(std::shared_ptr<uml::Class> metaClass) = 0;
-			//*********************************
-			// Attributes Getter & Setter
-			//*********************************
-			
-			//*********************************
-			// References Getter & Setter
-			//*********************************
-			
 
-		protected:
 			//*********************************
-			// Attribute Members
+			// Attribute Getters & Setters
 			//*********************************
-			
-			
-			//*********************************
-			// Reference Members
-			//*********************************
-			
 
-		public:
 			//*********************************
-			// Union Getter
+			// Reference Getters & Setters
+			//*********************************
+
+			//*********************************
+			// Union Reference Getters
 			//*********************************
 			/*!
 			The Elements owned by this Element.
@@ -114,17 +101,26 @@ namespace uml
 			
 			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;
 
+			//*********************************
+			// Container Getter
+			//*********************************
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
-			
+
 			//*********************************
 			// Persistence Functions
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
-			
 			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
-			
-	};
 
+		protected:
+			//*********************************
+			// Attribute Members
+			//*********************************
+			
+			//*********************************
+			// Reference Members
+			//*********************************
+	};
 }
 #endif /* end of include guard: UML_FACTORY_HPP */

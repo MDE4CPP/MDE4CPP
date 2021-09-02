@@ -1,3 +1,4 @@
+
 #include "fUML/Semantics/Values/impl/LiteralStringEvaluationImpl.hpp"
 
 #ifdef NDEBUG
@@ -37,7 +38,6 @@
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
-
 
 #include "fUML/Semantics/Values/LiteralEvaluation.hpp"
 #include "fUML/Semantics/Loci/Locus.hpp"
@@ -114,15 +114,6 @@ std::shared_ptr<ecore::EObject> LiteralStringEvaluationImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> LiteralStringEvaluationImpl::eStaticClass() const
-{
-	return fUML::Semantics::Values::ValuesPackage::eInstance()->getLiteralStringEvaluation_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
@@ -138,83 +129,23 @@ std::shared_ptr<fUML::Semantics::Values::Value> LiteralStringEvaluationImpl::eva
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
+//*********************************
+
+//*********************************
+// Reference Getters & Setters
 //*********************************
 
 //*********************************
 // Union Getter
 //*********************************
 
-
-
-std::shared_ptr<LiteralStringEvaluation> LiteralStringEvaluationImpl::getThisLiteralStringEvaluationPtr() const
-{
-	return m_thisLiteralStringEvaluationPtr.lock();
-}
-void LiteralStringEvaluationImpl::setThisLiteralStringEvaluationPtr(std::weak_ptr<LiteralStringEvaluation> thisLiteralStringEvaluationPtr)
-{
-	m_thisLiteralStringEvaluationPtr = thisLiteralStringEvaluationPtr;
-	setThisLiteralEvaluationPtr(thisLiteralStringEvaluationPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> LiteralStringEvaluationImpl::eContainer() const
 {
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any LiteralStringEvaluationImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-	}
-	return LiteralEvaluationImpl::eGet(featureID, resolve, coreType);
-}
-bool LiteralStringEvaluationImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-	}
-	return LiteralEvaluationImpl::internalEIsSet(featureID);
-}
-bool LiteralStringEvaluationImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-	}
-
-	return LiteralEvaluationImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any LiteralStringEvaluationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-		
-		// 970736967
-		case ValuesPackage::LITERALSTRINGEVALUATION_OPERATION_EVALUATE:
-		{
-			result = eAny(this->evaluate());
-			break;
-		}
-
-		default:
-		{
-			// call superTypes
-			result = LiteralEvaluationImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -265,9 +196,6 @@ void LiteralStringEvaluationImpl::save(std::shared_ptr<persistence::interfaces::
 	fUML::Semantics::Loci::SemanticVisitorImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
 }
 
 void LiteralStringEvaluationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -282,3 +210,78 @@ void LiteralStringEvaluationImpl::saveContent(std::shared_ptr<persistence::inter
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> LiteralStringEvaluationImpl::eStaticClass() const
+{
+	return fUML::Semantics::Values::ValuesPackage::eInstance()->getLiteralStringEvaluation_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any LiteralStringEvaluationImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+	}
+	return LiteralEvaluationImpl::eGet(featureID, resolve, coreType);
+}
+
+bool LiteralStringEvaluationImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+	}
+	return LiteralEvaluationImpl::internalEIsSet(featureID);
+}
+
+bool LiteralStringEvaluationImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+	}
+
+	return LiteralEvaluationImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any LiteralStringEvaluationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 970736967
+		case ValuesPackage::LITERALSTRINGEVALUATION_OPERATION_EVALUATE:
+		{
+			result = eAny(this->evaluate());
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = LiteralEvaluationImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<LiteralStringEvaluation> LiteralStringEvaluationImpl::getThisLiteralStringEvaluationPtr() const
+{
+	return m_thisLiteralStringEvaluationPtr.lock();
+}
+void LiteralStringEvaluationImpl::setThisLiteralStringEvaluationPtr(std::weak_ptr<LiteralStringEvaluation> thisLiteralStringEvaluationPtr)
+{
+	m_thisLiteralStringEvaluationPtr = thisLiteralStringEvaluationPtr;
+	setThisLiteralEvaluationPtr(thisLiteralStringEvaluationPtr);
+}

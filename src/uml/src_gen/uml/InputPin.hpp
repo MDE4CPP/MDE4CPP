@@ -72,7 +72,6 @@ namespace uml
 
 // enum includes
 #include "uml/ObjectNodeOrderingKind.hpp"
-
 #include "uml/VisibilityKind.hpp"
 
 
@@ -146,56 +145,78 @@ namespace uml
 			*/
 			 
 			virtual bool outgoing_edges_structured_only(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+
 			//*********************************
-			// Attributes Getter & Setter
+			// Attribute Getters & Setters
 			//*********************************
-			
+
 			//*********************************
-			// References Getter & Setter
+			// Reference Getters & Setters
 			//*********************************
-			
 			virtual std::weak_ptr<uml::Action> getAction() const = 0;
-			
-			
 			virtual std::weak_ptr<uml::AddStructuralFeatureValueAction> getAddStructuralFeatureValueAction() const = 0;
-			
 			virtual void setAddStructuralFeatureValueAction(std::weak_ptr<uml::AddStructuralFeatureValueAction>) = 0;
-			
 			virtual std::weak_ptr<uml::CallOperationAction> getCallOperationAction() const = 0;
-			
 			virtual void setCallOperationAction(std::weak_ptr<uml::CallOperationAction>) = 0;
-			
 			virtual std::weak_ptr<uml::DestroyObjectAction> getDestroyObjectAction() const = 0;
-			
 			virtual void setDestroyObjectAction(std::weak_ptr<uml::DestroyObjectAction>) = 0;
-			
 			virtual std::weak_ptr<uml::InvocationAction> getInvocationAction() const = 0;
-			
 			virtual void setInvocationAction(std::weak_ptr<uml::InvocationAction>) = 0;
-			
 			virtual std::weak_ptr<uml::RemoveStructuralFeatureValueAction> getRemoveStructuralFeatureValueAction() const = 0;
-			
 			virtual void setRemoveStructuralFeatureValueAction(std::weak_ptr<uml::RemoveStructuralFeatureValueAction>) = 0;
-			
 			virtual std::weak_ptr<uml::StructuralFeatureAction> getStructuralFeatureAction() const = 0;
-			
 			virtual void setStructuralFeatureAction(std::weak_ptr<uml::StructuralFeatureAction>) = 0;
-			
 			virtual std::weak_ptr<uml::WriteStructuralFeatureAction> getWriteStructuralFeatureAction() const = 0;
-			
 			virtual void setWriteStructuralFeatureAction(std::weak_ptr<uml::WriteStructuralFeatureAction>) = 0;
+
+			//*********************************
+			// Union Reference Getters
+			//*********************************
+			/*!
+			ActivityGroups containing the ActivityNode.
+			<p>From package UML::Activities.</p>
+			*/
 			
+			virtual std::shared_ptr<Union<uml::ActivityGroup>> getInGroup() const = 0;
+			/*!
+			The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
+			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;
+			/*!
+			The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
+			virtual std::weak_ptr<uml::Element> getOwner() const = 0;
+			/*!
+			The RedefinableElement that is being redefined by this element.
+			<p>From package UML::Classification.</p>
+			*/
+			
+			virtual std::shared_ptr<Union<uml::RedefinableElement>> getRedefinedElement() const = 0;
+
+			//*********************************
+			// Container Getter
+			//*********************************
+			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
+
+			//*********************************
+			// Persistence Functions
+			//*********************************
+			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 
 		protected:
 			//*********************************
 			// Attribute Members
 			//*********************************
 			
-			
 			//*********************************
 			// Reference Members
 			//*********************************
-			
 			std::weak_ptr<uml::Action> m_action;
 			std::weak_ptr<uml::AddStructuralFeatureValueAction> m_addStructuralFeatureValueAction;
 			std::weak_ptr<uml::CallOperationAction> m_callOperationAction;
@@ -204,44 +225,6 @@ namespace uml
 			std::weak_ptr<uml::RemoveStructuralFeatureValueAction> m_removeStructuralFeatureValueAction;
 			std::weak_ptr<uml::StructuralFeatureAction> m_structuralFeatureAction;
 			std::weak_ptr<uml::WriteStructuralFeatureAction> m_writeStructuralFeatureAction;
-
-		public:
-			//*********************************
-			// Union Getter
-			//*********************************
-			/*!
-			ActivityGroups containing the ActivityNode.
-			<p>From package UML::Activities.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::ActivityGroup>> getInGroup() const = 0;/*!
-			The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;/*!
-			The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::weak_ptr<uml::Element> getOwner() const = 0;/*!
-			The RedefinableElement that is being redefined by this element.
-			<p>From package UML::Classification.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::RedefinableElement>> getRedefinedElement() const = 0;
-
-			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
-			
-			//*********************************
-			// Persistence Functions
-			//*********************************
-			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
-			
-			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
-			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
-			
 	};
-
 }
 #endif /* end of include guard: UML_INPUTPIN_HPP */

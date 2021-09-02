@@ -1,3 +1,4 @@
+
 #include "uml/impl/OpaqueBehaviorImpl.hpp"
 
 #ifdef NDEBUG
@@ -25,7 +26,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -33,7 +33,6 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-
 
 #include "uml/Behavior.hpp"
 #include "uml/BehavioralFeature.hpp"
@@ -221,17 +220,14 @@ std::shared_ptr<ecore::EObject> OpaqueBehaviorImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> OpaqueBehaviorImpl::eStaticClass() const
-{
-	return uml::umlPackage::eInstance()->getOpaqueBehavior_Class();
-}
+//*********************************
+// Operations
+//*********************************
 
 //*********************************
-// Attribute Setter Getter
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for attribute body
-*/
+/* Getter & Setter for attribute body */
 std::shared_ptr<Bag<std::string>> OpaqueBehaviorImpl::getBody() const 
 {
 	if(m_body == nullptr)
@@ -241,11 +237,7 @@ std::shared_ptr<Bag<std::string>> OpaqueBehaviorImpl::getBody() const
 	return m_body;
 }
 
-
-
-/*
-Getter & Setter for attribute language
-*/
+/* Getter & Setter for attribute language */
 std::shared_ptr<Bag<std::string>> OpaqueBehaviorImpl::getLanguage() const 
 {
 	if(m_language == nullptr)
@@ -255,14 +247,8 @@ std::shared_ptr<Bag<std::string>> OpaqueBehaviorImpl::getLanguage() const
 	return m_language;
 }
 
-
-
 //*********************************
-// Operations
-//*********************************
-
-//*********************************
-// References
+// Reference Getters & Setters
 //*********************************
 
 //*********************************
@@ -420,16 +406,9 @@ std::shared_ptr<SubsetUnion<uml::ConnectableElement, uml::NamedElement>> OpaqueB
 
 
 
-
-std::shared_ptr<OpaqueBehavior> OpaqueBehaviorImpl::getThisOpaqueBehaviorPtr() const
-{
-	return m_thisOpaqueBehaviorPtr.lock();
-}
-void OpaqueBehaviorImpl::setThisOpaqueBehaviorPtr(std::weak_ptr<OpaqueBehavior> thisOpaqueBehaviorPtr)
-{
-	m_thisOpaqueBehaviorPtr = thisOpaqueBehaviorPtr;
-	setThisBehaviorPtr(thisOpaqueBehaviorPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> OpaqueBehaviorImpl::eContainer() const
 {
 	if(auto wp = m_behavioredClassifier.lock())
@@ -462,75 +441,6 @@ std::shared_ptr<ecore::EObject> OpaqueBehaviorImpl::eContainer() const
 	}
 
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any OpaqueBehaviorImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::OPAQUEBEHAVIOR_ATTRIBUTE_BODY:
-			return eAny(getBody()); //16562
-		case uml::umlPackage::OPAQUEBEHAVIOR_ATTRIBUTE_LANGUAGE:
-			return eAny(getLanguage()); //16563
-	}
-	return BehaviorImpl::eGet(featureID, resolve, coreType);
-}
-bool OpaqueBehaviorImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::OPAQUEBEHAVIOR_ATTRIBUTE_BODY:
-			return !getBody()->empty(); //16562
-		case uml::umlPackage::OPAQUEBEHAVIOR_ATTRIBUTE_LANGUAGE:
-			return !getLanguage()->empty(); //16563
-	}
-	return BehaviorImpl::internalEIsSet(featureID);
-}
-bool OpaqueBehaviorImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::OPAQUEBEHAVIOR_ATTRIBUTE_BODY:
-		{
-			// BOOST CAST
-			// nothing to do
-			return true;
-		}
-		case uml::umlPackage::OPAQUEBEHAVIOR_ATTRIBUTE_LANGUAGE:
-		{
-			// BOOST CAST
-			// nothing to do
-			return true;
-		}
-	}
-
-	return BehaviorImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any OpaqueBehaviorImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-
-		default:
-		{
-			// call superTypes
-			result = BehaviorImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -626,16 +536,6 @@ void OpaqueBehaviorImpl::save(std::shared_ptr<persistence::interfaces::XSaveHand
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 }
 
 void OpaqueBehaviorImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -666,3 +566,91 @@ void OpaqueBehaviorImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> OpaqueBehaviorImpl::eStaticClass() const
+{
+	return uml::umlPackage::eInstance()->getOpaqueBehavior_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any OpaqueBehaviorImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::OPAQUEBEHAVIOR_ATTRIBUTE_BODY:
+			return eAny(getBody()); //16562
+		case uml::umlPackage::OPAQUEBEHAVIOR_ATTRIBUTE_LANGUAGE:
+			return eAny(getLanguage()); //16563
+	}
+	return BehaviorImpl::eGet(featureID, resolve, coreType);
+}
+
+bool OpaqueBehaviorImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::OPAQUEBEHAVIOR_ATTRIBUTE_BODY:
+			return !getBody()->empty(); //16562
+		case uml::umlPackage::OPAQUEBEHAVIOR_ATTRIBUTE_LANGUAGE:
+			return !getLanguage()->empty(); //16563
+	}
+	return BehaviorImpl::internalEIsSet(featureID);
+}
+
+bool OpaqueBehaviorImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::OPAQUEBEHAVIOR_ATTRIBUTE_BODY:
+		{
+			// BOOST CAST
+			// nothing to do
+			return true;
+		}
+		case uml::umlPackage::OPAQUEBEHAVIOR_ATTRIBUTE_LANGUAGE:
+		{
+			// BOOST CAST
+			// nothing to do
+			return true;
+		}
+	}
+
+	return BehaviorImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any OpaqueBehaviorImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+
+		default:
+		{
+			// call superTypes
+			result = BehaviorImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<OpaqueBehavior> OpaqueBehaviorImpl::getThisOpaqueBehaviorPtr() const
+{
+	return m_thisOpaqueBehaviorPtr.lock();
+}
+void OpaqueBehaviorImpl::setThisOpaqueBehaviorPtr(std::weak_ptr<OpaqueBehavior> thisOpaqueBehaviorPtr)
+{
+	m_thisOpaqueBehaviorPtr = thisOpaqueBehaviorPtr;
+	setThisBehaviorPtr(thisOpaqueBehaviorPtr);
+}

@@ -1,3 +1,4 @@
+
 #include "uml/impl/ReduceActionImpl.hpp"
 
 #ifdef NDEBUG
@@ -26,7 +27,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -34,7 +34,6 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-
 
 #include "uml/Action.hpp"
 #include "uml/Activity.hpp"
@@ -168,28 +167,6 @@ std::shared_ptr<ecore::EObject> ReduceActionImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> ReduceActionImpl::eStaticClass() const
-{
-	return uml::umlPackage::eInstance()->getReduceAction_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-/*
-Getter & Setter for attribute isOrdered
-*/
-bool ReduceActionImpl::getIsOrdered() const 
-{
-	return m_isOrdered;
-}
-void ReduceActionImpl::setIsOrdered(bool _isOrdered)
-{
-	m_isOrdered = _isOrdered;
-	
-} 
-
-
 //*********************************
 // Operations
 //*********************************
@@ -212,11 +189,23 @@ bool ReduceActionImpl::reducer_inputs_output(Any diagnostics,std::shared_ptr<std
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference collection
-*/
+/* Getter & Setter for attribute isOrdered */
+bool ReduceActionImpl::getIsOrdered() const 
+{
+	return m_isOrdered;
+}
+void ReduceActionImpl::setIsOrdered(bool _isOrdered)
+{
+	m_isOrdered = _isOrdered;
+	
+}
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference collection */
 std::shared_ptr<uml::InputPin> ReduceActionImpl::getCollection() const
 {
     return m_collection;
@@ -227,10 +216,7 @@ void ReduceActionImpl::setCollection(std::shared_ptr<uml::InputPin> _collection)
 	
 }
 
-
-/*
-Getter & Setter for reference reducer
-*/
+/* Getter & Setter for reference reducer */
 std::shared_ptr<uml::Behavior> ReduceActionImpl::getReducer() const
 {
     return m_reducer;
@@ -241,10 +227,7 @@ void ReduceActionImpl::setReducer(std::shared_ptr<uml::Behavior> _reducer)
 	
 }
 
-
-/*
-Getter & Setter for reference result
-*/
+/* Getter & Setter for reference result */
 std::shared_ptr<uml::OutputPin> ReduceActionImpl::getResult() const
 {
     return m_result;
@@ -254,7 +237,6 @@ void ReduceActionImpl::setResult(std::shared_ptr<uml::OutputPin> _result)
     m_result = _result;
 	
 }
-
 
 //*********************************
 // Union Getter
@@ -349,18 +331,9 @@ std::shared_ptr<Union<uml::RedefinableElement>> ReduceActionImpl::getRedefinedEl
 	return m_redefinedElement;
 }
 
-
-
-
-std::shared_ptr<ReduceAction> ReduceActionImpl::getThisReduceActionPtr() const
-{
-	return m_thisReduceActionPtr.lock();
-}
-void ReduceActionImpl::setThisReduceActionPtr(std::weak_ptr<ReduceAction> thisReduceActionPtr)
-{
-	m_thisReduceActionPtr = thisReduceActionPtr;
-	setThisActionPtr(thisReduceActionPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> ReduceActionImpl::eContainer() const
 {
 	if(auto wp = m_activity.lock())
@@ -383,162 +356,6 @@ std::shared_ptr<ecore::EObject> ReduceActionImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any ReduceActionImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::REDUCEACTION_ATTRIBUTE_COLLECTION:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getCollection();
-				return eAny(returnValue); //20627
-			}
-		case uml::umlPackage::REDUCEACTION_ATTRIBUTE_ISORDERED:
-			return eAny(getIsOrdered()); //20628
-		case uml::umlPackage::REDUCEACTION_ATTRIBUTE_REDUCER:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getReducer();
-				return eAny(returnValue); //20629
-			}
-		case uml::umlPackage::REDUCEACTION_ATTRIBUTE_RESULT:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getResult();
-				return eAny(returnValue); //20630
-			}
-	}
-	return ActionImpl::eGet(featureID, resolve, coreType);
-}
-bool ReduceActionImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::REDUCEACTION_ATTRIBUTE_COLLECTION:
-			return getCollection() != nullptr; //20627
-		case uml::umlPackage::REDUCEACTION_ATTRIBUTE_ISORDERED:
-			return getIsOrdered() != false; //20628
-		case uml::umlPackage::REDUCEACTION_ATTRIBUTE_REDUCER:
-			return getReducer() != nullptr; //20629
-		case uml::umlPackage::REDUCEACTION_ATTRIBUTE_RESULT:
-			return getResult() != nullptr; //20630
-	}
-	return ActionImpl::internalEIsSet(featureID);
-}
-bool ReduceActionImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::REDUCEACTION_ATTRIBUTE_COLLECTION:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::InputPin> _collection = std::dynamic_pointer_cast<uml::InputPin>(_temp);
-			setCollection(_collection); //20627
-			return true;
-		}
-		case uml::umlPackage::REDUCEACTION_ATTRIBUTE_ISORDERED:
-		{
-			// BOOST CAST
-			bool _isOrdered = newValue->get<bool>();
-			setIsOrdered(_isOrdered); //20628
-			return true;
-		}
-		case uml::umlPackage::REDUCEACTION_ATTRIBUTE_REDUCER:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::Behavior> _reducer = std::dynamic_pointer_cast<uml::Behavior>(_temp);
-			setReducer(_reducer); //20629
-			return true;
-		}
-		case uml::umlPackage::REDUCEACTION_ATTRIBUTE_RESULT:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::OutputPin> _result = std::dynamic_pointer_cast<uml::OutputPin>(_temp);
-			setResult(_result); //20630
-			return true;
-		}
-	}
-
-	return ActionImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any ReduceActionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-		
-		// 456887339
-		case umlPackage::REDUCEACTION_OPERATION_INPUT_TYPE_IS_COLLECTION_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->input_type_is_collection(incoming_param_diagnostics,incoming_param_context));
-			break;
-		}
-		
-		// 694994492
-		case umlPackage::REDUCEACTION_OPERATION_OUTPUT_TYPES_ARE_COMPATIBLE_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->output_types_are_compatible(incoming_param_diagnostics,incoming_param_context));
-			break;
-		}
-		
-		// 1133614067
-		case umlPackage::REDUCEACTION_OPERATION_REDUCER_INPUTS_OUTPUT_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->reducer_inputs_output(incoming_param_diagnostics,incoming_param_context));
-			break;
-		}
-
-		default:
-		{
-			// call superTypes
-			result = ActionImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -673,13 +490,6 @@ void ReduceActionImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandle
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
-	
-	
-	
 }
 
 void ReduceActionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -714,3 +524,178 @@ void ReduceActionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> ReduceActionImpl::eStaticClass() const
+{
+	return uml::umlPackage::eInstance()->getReduceAction_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any ReduceActionImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::REDUCEACTION_ATTRIBUTE_COLLECTION:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getCollection();
+				return eAny(returnValue); //20627
+			}
+		case uml::umlPackage::REDUCEACTION_ATTRIBUTE_ISORDERED:
+			return eAny(getIsOrdered()); //20628
+		case uml::umlPackage::REDUCEACTION_ATTRIBUTE_REDUCER:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getReducer();
+				return eAny(returnValue); //20629
+			}
+		case uml::umlPackage::REDUCEACTION_ATTRIBUTE_RESULT:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getResult();
+				return eAny(returnValue); //20630
+			}
+	}
+	return ActionImpl::eGet(featureID, resolve, coreType);
+}
+
+bool ReduceActionImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::REDUCEACTION_ATTRIBUTE_COLLECTION:
+			return getCollection() != nullptr; //20627
+		case uml::umlPackage::REDUCEACTION_ATTRIBUTE_ISORDERED:
+			return getIsOrdered() != false; //20628
+		case uml::umlPackage::REDUCEACTION_ATTRIBUTE_REDUCER:
+			return getReducer() != nullptr; //20629
+		case uml::umlPackage::REDUCEACTION_ATTRIBUTE_RESULT:
+			return getResult() != nullptr; //20630
+	}
+	return ActionImpl::internalEIsSet(featureID);
+}
+
+bool ReduceActionImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::REDUCEACTION_ATTRIBUTE_COLLECTION:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::InputPin> _collection = std::dynamic_pointer_cast<uml::InputPin>(_temp);
+			setCollection(_collection); //20627
+			return true;
+		}
+		case uml::umlPackage::REDUCEACTION_ATTRIBUTE_ISORDERED:
+		{
+			// BOOST CAST
+			bool _isOrdered = newValue->get<bool>();
+			setIsOrdered(_isOrdered); //20628
+			return true;
+		}
+		case uml::umlPackage::REDUCEACTION_ATTRIBUTE_REDUCER:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::Behavior> _reducer = std::dynamic_pointer_cast<uml::Behavior>(_temp);
+			setReducer(_reducer); //20629
+			return true;
+		}
+		case uml::umlPackage::REDUCEACTION_ATTRIBUTE_RESULT:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::OutputPin> _result = std::dynamic_pointer_cast<uml::OutputPin>(_temp);
+			setResult(_result); //20630
+			return true;
+		}
+	}
+
+	return ActionImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any ReduceActionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 456887339
+		case umlPackage::REDUCEACTION_OPERATION_INPUT_TYPE_IS_COLLECTION_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->input_type_is_collection(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+		
+		// 694994492
+		case umlPackage::REDUCEACTION_OPERATION_OUTPUT_TYPES_ARE_COMPATIBLE_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->output_types_are_compatible(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+		
+		// 1133614067
+		case umlPackage::REDUCEACTION_OPERATION_REDUCER_INPUTS_OUTPUT_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->reducer_inputs_output(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = ActionImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<ReduceAction> ReduceActionImpl::getThisReduceActionPtr() const
+{
+	return m_thisReduceActionPtr.lock();
+}
+void ReduceActionImpl::setThisReduceActionPtr(std::weak_ptr<ReduceAction> thisReduceActionPtr)
+{
+	m_thisReduceActionPtr = thisReduceActionPtr;
+	setThisActionPtr(thisReduceActionPtr);
+}

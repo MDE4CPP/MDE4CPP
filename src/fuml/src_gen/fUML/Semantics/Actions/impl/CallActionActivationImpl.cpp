@@ -1,3 +1,4 @@
+
 #include "fUML/Semantics/Actions/impl/CallActionActivationImpl.hpp"
 
 #ifdef NDEBUG
@@ -50,7 +51,6 @@
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "uml/umlFactory.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
-
 
 #include "uml/Action.hpp"
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
@@ -163,15 +163,6 @@ std::shared_ptr<ecore::EObject> CallActionActivationImpl::copy() const
 	element->setThisCallActionActivationPtr(element);
 	return element;
 }
-
-std::shared_ptr<ecore::EClass> CallActionActivationImpl::eStaticClass() const
-{
-	return fUML::Semantics::Actions::ActionsPackage::eInstance()->getCallActionActivation_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
 
 //*********************************
 // Operations
@@ -364,11 +355,13 @@ void CallActionActivationImpl::terminate()
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference callAction
-*/
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference callAction */
 std::shared_ptr<uml::CallAction> CallActionActivationImpl::getCallAction() const
 {
     return m_callAction;
@@ -378,7 +371,6 @@ void CallActionActivationImpl::setCallAction(std::shared_ptr<uml::CallAction> _c
     m_callAction = _callAction;
 	//additional setter call for redefined reference ActionActivation::action
 	fUML::Semantics::Actions::ActionActivationImpl::setAction(_callAction);
-	
 }
 /*Additional Setter for redefined reference 'ActionActivation::action'*/
 void CallActionActivationImpl::setAction(std::shared_ptr<uml::Action> _action)
@@ -413,10 +405,7 @@ void CallActionActivationImpl::setNode(std::shared_ptr<uml::ActivityNode> _node)
 	}
 }
 
-
-/*
-Getter & Setter for reference callExecutions
-*/
+/* Getter & Setter for reference callExecutions */
 std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::Execution>> CallActionActivationImpl::getCallExecutions() const
 {
 	if(m_callExecutions == nullptr)
@@ -427,8 +416,6 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::Execution>> CallActionActiv
 	}
     return m_callExecutions;
 }
-
-
 
 //*********************************
 // Union Getter
@@ -448,18 +435,9 @@ std::shared_ptr<Union<fUML::Semantics::Actions::PinActivation>> CallActionActiva
 	return m_pinActivation;
 }
 
-
-
-
-std::shared_ptr<CallActionActivation> CallActionActivationImpl::getThisCallActionActivationPtr() const
-{
-	return m_thisCallActionActivationPtr.lock();
-}
-void CallActionActivationImpl::setThisCallActionActivationPtr(std::weak_ptr<CallActionActivation> thisCallActionActivationPtr)
-{
-	m_thisCallActionActivationPtr = thisCallActionActivationPtr;
-	setThisInvocationActionActivationPtr(thisCallActionActivationPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> CallActionActivationImpl::eContainer() const
 {
 	if(auto wp = m_group.lock())
@@ -467,153 +445,6 @@ std::shared_ptr<ecore::EObject> CallActionActivationImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any CallActionActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case fUML::Semantics::Actions::ActionsPackage::CALLACTIONACTIVATION_ATTRIBUTE_CALLACTION:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getCallAction();
-				return eAny(returnValue); //1412
-			}
-		case fUML::Semantics::Actions::ActionsPackage::CALLACTIONACTIVATION_ATTRIBUTE_CALLEXECUTIONS:
-		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<fUML::Semantics::CommonBehavior::Execution>::iterator iter = getCallExecutions()->begin();
-			Bag<fUML::Semantics::CommonBehavior::Execution>::iterator end = getCallExecutions()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //1411			
-		}
-	}
-	return InvocationActionActivationImpl::eGet(featureID, resolve, coreType);
-}
-bool CallActionActivationImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case fUML::Semantics::Actions::ActionsPackage::CALLACTIONACTIVATION_ATTRIBUTE_CALLACTION:
-			return getCallAction() != nullptr; //1412
-		case fUML::Semantics::Actions::ActionsPackage::CALLACTIONACTIVATION_ATTRIBUTE_CALLEXECUTIONS:
-			return getCallExecutions() != nullptr; //1411
-	}
-	return InvocationActionActivationImpl::internalEIsSet(featureID);
-}
-bool CallActionActivationImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case fUML::Semantics::Actions::ActionsPackage::CALLACTIONACTIVATION_ATTRIBUTE_CALLACTION:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::CallAction> _callAction = std::dynamic_pointer_cast<uml::CallAction>(_temp);
-			setCallAction(_callAction); //1412
-			return true;
-		}
-		case fUML::Semantics::Actions::ActionsPackage::CALLACTIONACTIVATION_ATTRIBUTE_CALLEXECUTIONS:
-		{
-			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::Execution>> callExecutionsList(new Bag<fUML::Semantics::CommonBehavior::Execution>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
-			{
-				callExecutionsList->add(std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::Execution>(*iter));
-				iter++;
-			}
-			
-			Bag<fUML::Semantics::CommonBehavior::Execution>::iterator iterCallExecutions = getCallExecutions()->begin();
-			Bag<fUML::Semantics::CommonBehavior::Execution>::iterator endCallExecutions = getCallExecutions()->end();
-			while (iterCallExecutions != endCallExecutions)
-			{
-				if (callExecutionsList->find(*iterCallExecutions) == -1)
-				{
-					getCallExecutions()->erase(*iterCallExecutions);
-				}
-				iterCallExecutions++;
-			}
- 
-			iterCallExecutions = callExecutionsList->begin();
-			endCallExecutions = callExecutionsList->end();
-			while (iterCallExecutions != endCallExecutions)
-			{
-				if (getCallExecutions()->find(*iterCallExecutions) == -1)
-				{
-					getCallExecutions()->add(*iterCallExecutions);
-				}
-				iterCallExecutions++;			
-			}
-			return true;
-		}
-	}
-
-	return InvocationActionActivationImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any CallActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-		
-		// 789549435
-		case ActionsPackage::CALLACTIONACTIVATION_OPERATION_DOACTION:
-		{
-			this->doAction();
-			break;
-		}
-		
-		// 1108060274
-		case ActionsPackage::CALLACTIONACTIVATION_OPERATION_GETCALLEXECUTION:
-		{
-			result = eAny(this->getCallExecution());
-			break;
-		}
-		
-		// 894035989
-		case ActionsPackage::CALLACTIONACTIVATION_OPERATION_REMOVECALLEXECUTION_EXECUTION:
-		{
-			//Retrieve input parameter 'execution'
-			//parameter 0
-			std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> incoming_param_execution;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_execution_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_execution = (*incoming_param_execution_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> >();
-			this->removeCallExecution(incoming_param_execution);
-			break;
-		}
-		
-		// 58283131
-		case ActionsPackage::CALLACTIONACTIVATION_OPERATION_TERMINATE:
-		{
-			this->terminate();
-			break;
-		}
-
-		default:
-		{
-			// call superTypes
-			result = InvocationActionActivationImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -722,10 +553,6 @@ void CallActionActivationImpl::save(std::shared_ptr<persistence::interfaces::XSa
 	fUML::Semantics::Loci::SemanticVisitorImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
 }
 
 void CallActionActivationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -749,3 +576,169 @@ void CallActionActivationImpl::saveContent(std::shared_ptr<persistence::interfac
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> CallActionActivationImpl::eStaticClass() const
+{
+	return fUML::Semantics::Actions::ActionsPackage::eInstance()->getCallActionActivation_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any CallActionActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case fUML::Semantics::Actions::ActionsPackage::CALLACTIONACTIVATION_ATTRIBUTE_CALLACTION:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getCallAction();
+				return eAny(returnValue); //1412
+			}
+		case fUML::Semantics::Actions::ActionsPackage::CALLACTIONACTIVATION_ATTRIBUTE_CALLEXECUTIONS:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<fUML::Semantics::CommonBehavior::Execution>::iterator iter = getCallExecutions()->begin();
+			Bag<fUML::Semantics::CommonBehavior::Execution>::iterator end = getCallExecutions()->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //1411			
+		}
+	}
+	return InvocationActionActivationImpl::eGet(featureID, resolve, coreType);
+}
+
+bool CallActionActivationImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case fUML::Semantics::Actions::ActionsPackage::CALLACTIONACTIVATION_ATTRIBUTE_CALLACTION:
+			return getCallAction() != nullptr; //1412
+		case fUML::Semantics::Actions::ActionsPackage::CALLACTIONACTIVATION_ATTRIBUTE_CALLEXECUTIONS:
+			return getCallExecutions() != nullptr; //1411
+	}
+	return InvocationActionActivationImpl::internalEIsSet(featureID);
+}
+
+bool CallActionActivationImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case fUML::Semantics::Actions::ActionsPackage::CALLACTIONACTIVATION_ATTRIBUTE_CALLACTION:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::CallAction> _callAction = std::dynamic_pointer_cast<uml::CallAction>(_temp);
+			setCallAction(_callAction); //1412
+			return true;
+		}
+		case fUML::Semantics::Actions::ActionsPackage::CALLACTIONACTIVATION_ATTRIBUTE_CALLEXECUTIONS:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::Execution>> callExecutionsList(new Bag<fUML::Semantics::CommonBehavior::Execution>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				callExecutionsList->add(std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::Execution>(*iter));
+				iter++;
+			}
+			
+			Bag<fUML::Semantics::CommonBehavior::Execution>::iterator iterCallExecutions = getCallExecutions()->begin();
+			Bag<fUML::Semantics::CommonBehavior::Execution>::iterator endCallExecutions = getCallExecutions()->end();
+			while (iterCallExecutions != endCallExecutions)
+			{
+				if (callExecutionsList->find(*iterCallExecutions) == -1)
+				{
+					getCallExecutions()->erase(*iterCallExecutions);
+				}
+				iterCallExecutions++;
+			}
+ 
+			iterCallExecutions = callExecutionsList->begin();
+			endCallExecutions = callExecutionsList->end();
+			while (iterCallExecutions != endCallExecutions)
+			{
+				if (getCallExecutions()->find(*iterCallExecutions) == -1)
+				{
+					getCallExecutions()->add(*iterCallExecutions);
+				}
+				iterCallExecutions++;			
+			}
+			return true;
+		}
+	}
+
+	return InvocationActionActivationImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any CallActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 789549435
+		case ActionsPackage::CALLACTIONACTIVATION_OPERATION_DOACTION:
+		{
+			this->doAction();
+			break;
+		}
+		
+		// 1108060274
+		case ActionsPackage::CALLACTIONACTIVATION_OPERATION_GETCALLEXECUTION:
+		{
+			result = eAny(this->getCallExecution());
+			break;
+		}
+		
+		// 894035989
+		case ActionsPackage::CALLACTIONACTIVATION_OPERATION_REMOVECALLEXECUTION_EXECUTION:
+		{
+			//Retrieve input parameter 'execution'
+			//parameter 0
+			std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> incoming_param_execution;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_execution_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_execution = (*incoming_param_execution_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> >();
+			this->removeCallExecution(incoming_param_execution);
+			break;
+		}
+		
+		// 58283131
+		case ActionsPackage::CALLACTIONACTIVATION_OPERATION_TERMINATE:
+		{
+			this->terminate();
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = InvocationActionActivationImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<CallActionActivation> CallActionActivationImpl::getThisCallActionActivationPtr() const
+{
+	return m_thisCallActionActivationPtr.lock();
+}
+void CallActionActivationImpl::setThisCallActionActivationPtr(std::weak_ptr<CallActionActivation> thisCallActionActivationPtr)
+{
+	m_thisCallActionActivationPtr = thisCallActionActivationPtr;
+	setThisInvocationActionActivationPtr(thisCallActionActivationPtr);
+}

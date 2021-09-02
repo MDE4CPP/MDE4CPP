@@ -44,9 +44,7 @@ namespace fUML::Semantics::Values
 // namespace macro header include
 #include "fUML/fUML.hpp"
 
-// base class includes
 
-// enum includes
 
 #include "ecore/EModelElement.hpp"
 
@@ -74,61 +72,51 @@ namespace fUML::Semantics::Activities
 			//*********************************
 			// Operations
 			//*********************************
-			 
-			virtual std::shared_ptr<fUML::Semantics::Activities::Token> _copy() = 0; 
-			virtual bool equals(std::shared_ptr<fUML::Semantics::Activities::Token> other) = 0; 
-			virtual std::shared_ptr<fUML::Semantics::Values::Value> getValue() const = 0; 
-			virtual bool isControl() = 0; 
-			virtual std::shared_ptr<fUML::Semantics::Activities::Token> transfer(std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> holder) = 0; 
+			virtual std::shared_ptr<fUML::Semantics::Activities::Token> _copy() = 0;
+			virtual bool equals(std::shared_ptr<fUML::Semantics::Activities::Token> other) = 0;
+			virtual std::shared_ptr<fUML::Semantics::Values::Value> getValue() const = 0;
+			virtual bool isControl() = 0;
+			virtual std::shared_ptr<fUML::Semantics::Activities::Token> transfer(std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> holder) = 0;
 			virtual void withdraw() = 0;
+
 			//*********************************
-			// Attributes Getter & Setter
+			// Attribute Getters & Setters
 			//*********************************
-			 
 			virtual bool isWithdrawn() const = 0;
-			 
 			virtual void setWithdrawn (bool _withdrawn)= 0;
-			
+
 			//*********************************
-			// References Getter & Setter
+			// Reference Getters & Setters
 			//*********************************
-			
 			virtual std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivation> getHolder() const = 0;
-			
 			virtual void setHolder(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivation>) = 0;
-			
+
+			//*********************************
+			// Union Reference Getters
+			//*********************************
+
+			//*********************************
+			// Container Getter
+			//*********************************
+			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
+
+			//*********************************
+			// Persistence Functions
+			//*********************************
+			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 
 		protected:
 			//*********************************
 			// Attribute Members
 			//*********************************
-			
-			bool m_withdrawn = true;
-			
+			bool m_withdrawn= true;
 			
 			//*********************************
 			// Reference Members
 			//*********************************
-			
 			std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivation> m_holder;
-
-		public:
-			//*********************************
-			// Union Getter
-			//*********************************
-			
-
-			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
-			
-			//*********************************
-			// Persistence Functions
-			//*********************************
-			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
-			
-			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
-			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
-			
 	};
-
 }
 #endif /* end of include guard: FUML_SEMANTICS_ACTIVITIES_TOKEN_HPP */

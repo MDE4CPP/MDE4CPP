@@ -1,3 +1,4 @@
+
 #include "ocl/Evaluations/impl/CollectionRangeEvalImpl.hpp"
 
 #ifdef NDEBUG
@@ -24,18 +25,16 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "fUML/Semantics/Values/ValuesFactory.hpp"
 #include "uml/umlFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
-
+#include "fUML/Semantics/Loci/LociFactory.hpp"
 
 #include "ocl/Evaluations/CollectionLiteralPartEval.hpp"
 #include "fUML/Semantics/Loci/Locus.hpp"
@@ -115,25 +114,18 @@ std::shared_ptr<ecore::EObject> CollectionRangeEvalImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> CollectionRangeEvalImpl::eStaticClass() const
-{
-	return ocl::Evaluations::EvaluationsPackage::eInstance()->getCollectionRangeEval_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference first
-*/
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference first */
 std::shared_ptr<ocl::Evaluations::OclExpEval> CollectionRangeEvalImpl::getFirst() const
 {
     return m_first;
@@ -144,10 +136,7 @@ void CollectionRangeEvalImpl::setFirst(std::shared_ptr<ocl::Evaluations::OclExpE
 	
 }
 
-
-/*
-Getter & Setter for reference last
-*/
+/* Getter & Setter for reference last */
 std::shared_ptr<ocl::Evaluations::OclExpEval> CollectionRangeEvalImpl::getLast() const
 {
     return m_last;
@@ -158,104 +147,16 @@ void CollectionRangeEvalImpl::setLast(std::shared_ptr<ocl::Evaluations::OclExpEv
 	
 }
 
-
 //*********************************
 // Union Getter
 //*********************************
 
-
-
-std::shared_ptr<CollectionRangeEval> CollectionRangeEvalImpl::getThisCollectionRangeEvalPtr() const
-{
-	return m_thisCollectionRangeEvalPtr.lock();
-}
-void CollectionRangeEvalImpl::setThisCollectionRangeEvalPtr(std::weak_ptr<CollectionRangeEval> thisCollectionRangeEvalPtr)
-{
-	m_thisCollectionRangeEvalPtr = thisCollectionRangeEvalPtr;
-	setThisCollectionLiteralPartEvalPtr(thisCollectionRangeEvalPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> CollectionRangeEvalImpl::eContainer() const
 {
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any CollectionRangeEvalImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case ocl::Evaluations::EvaluationsPackage::COLLECTIONRANGEEVAL_ATTRIBUTE_FIRST:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getFirst();
-				return eAny(returnValue); //193
-			}
-		case ocl::Evaluations::EvaluationsPackage::COLLECTIONRANGEEVAL_ATTRIBUTE_LAST:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getLast();
-				return eAny(returnValue); //194
-			}
-	}
-	return CollectionLiteralPartEvalImpl::eGet(featureID, resolve, coreType);
-}
-bool CollectionRangeEvalImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case ocl::Evaluations::EvaluationsPackage::COLLECTIONRANGEEVAL_ATTRIBUTE_FIRST:
-			return getFirst() != nullptr; //193
-		case ocl::Evaluations::EvaluationsPackage::COLLECTIONRANGEEVAL_ATTRIBUTE_LAST:
-			return getLast() != nullptr; //194
-	}
-	return CollectionLiteralPartEvalImpl::internalEIsSet(featureID);
-}
-bool CollectionRangeEvalImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case ocl::Evaluations::EvaluationsPackage::COLLECTIONRANGEEVAL_ATTRIBUTE_FIRST:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<ocl::Evaluations::OclExpEval> _first = std::dynamic_pointer_cast<ocl::Evaluations::OclExpEval>(_temp);
-			setFirst(_first); //193
-			return true;
-		}
-		case ocl::Evaluations::EvaluationsPackage::COLLECTIONRANGEEVAL_ATTRIBUTE_LAST:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<ocl::Evaluations::OclExpEval> _last = std::dynamic_pointer_cast<ocl::Evaluations::OclExpEval>(_temp);
-			setLast(_last); //194
-			return true;
-		}
-	}
-
-	return CollectionLiteralPartEvalImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any CollectionRangeEvalImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-
-		default:
-		{
-			// call superTypes
-			result = CollectionLiteralPartEvalImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -358,9 +259,6 @@ void CollectionRangeEvalImpl::save(std::shared_ptr<persistence::interfaces::XSav
 	fUML::Semantics::Loci::SemanticVisitorImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
 }
 
 void CollectionRangeEvalImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -378,3 +276,101 @@ void CollectionRangeEvalImpl::saveContent(std::shared_ptr<persistence::interface
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> CollectionRangeEvalImpl::eStaticClass() const
+{
+	return ocl::Evaluations::EvaluationsPackage::eInstance()->getCollectionRangeEval_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any CollectionRangeEvalImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case ocl::Evaluations::EvaluationsPackage::COLLECTIONRANGEEVAL_ATTRIBUTE_FIRST:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getFirst();
+				return eAny(returnValue); //193
+			}
+		case ocl::Evaluations::EvaluationsPackage::COLLECTIONRANGEEVAL_ATTRIBUTE_LAST:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getLast();
+				return eAny(returnValue); //194
+			}
+	}
+	return CollectionLiteralPartEvalImpl::eGet(featureID, resolve, coreType);
+}
+
+bool CollectionRangeEvalImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case ocl::Evaluations::EvaluationsPackage::COLLECTIONRANGEEVAL_ATTRIBUTE_FIRST:
+			return getFirst() != nullptr; //193
+		case ocl::Evaluations::EvaluationsPackage::COLLECTIONRANGEEVAL_ATTRIBUTE_LAST:
+			return getLast() != nullptr; //194
+	}
+	return CollectionLiteralPartEvalImpl::internalEIsSet(featureID);
+}
+
+bool CollectionRangeEvalImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case ocl::Evaluations::EvaluationsPackage::COLLECTIONRANGEEVAL_ATTRIBUTE_FIRST:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<ocl::Evaluations::OclExpEval> _first = std::dynamic_pointer_cast<ocl::Evaluations::OclExpEval>(_temp);
+			setFirst(_first); //193
+			return true;
+		}
+		case ocl::Evaluations::EvaluationsPackage::COLLECTIONRANGEEVAL_ATTRIBUTE_LAST:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<ocl::Evaluations::OclExpEval> _last = std::dynamic_pointer_cast<ocl::Evaluations::OclExpEval>(_temp);
+			setLast(_last); //194
+			return true;
+		}
+	}
+
+	return CollectionLiteralPartEvalImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any CollectionRangeEvalImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+
+		default:
+		{
+			// call superTypes
+			result = CollectionLiteralPartEvalImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<CollectionRangeEval> CollectionRangeEvalImpl::getThisCollectionRangeEvalPtr() const
+{
+	return m_thisCollectionRangeEvalPtr.lock();
+}
+void CollectionRangeEvalImpl::setThisCollectionRangeEvalPtr(std::weak_ptr<CollectionRangeEval> thisCollectionRangeEvalPtr)
+{
+	m_thisCollectionRangeEvalPtr = thisCollectionRangeEvalPtr;
+	setThisCollectionLiteralPartEvalPtr(thisCollectionRangeEvalPtr);
+}

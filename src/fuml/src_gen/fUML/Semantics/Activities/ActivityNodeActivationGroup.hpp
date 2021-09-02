@@ -53,9 +53,7 @@ namespace uml
 // namespace macro header include
 #include "fUML/fUML.hpp"
 
-// base class includes
 
-// enum includes
 
 #include "ecore/EModelElement.hpp"
 
@@ -86,83 +84,68 @@ namespace fUML::Semantics::Activities
 			//*********************************
 			// Operations
 			//*********************************
-			 
-			virtual void activate(std::shared_ptr<Bag<uml::ActivityNode>> nodes,std::shared_ptr<Bag<uml::ActivityEdge>> edges) = 0; 
-			virtual void addEdgeInstance(std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance> instance) = 0; 
-			virtual void addNodeActivation(std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> activation) = 0; 
-			virtual bool checkIncomingEdges(std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>> incomingEdges,std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityNodeActivation>> activations) = 0; 
-			virtual void createEdgeInstance(std::shared_ptr<Bag<uml::ActivityEdge>> edges) = 0; 
-			virtual std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> createNodeActivation(std::shared_ptr<uml::ActivityNode> node) = 0; 
-			virtual void createNodeActivations(std::shared_ptr<Bag<uml::ActivityNode>> nodes) = 0; 
-			virtual std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> getNodeActivation(std::shared_ptr<uml::ActivityNode> node) = 0; 
-			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityParameterNodeActivation> > getOutputParameterNodeActivations() = 0; 
-			virtual bool hasSourceFor(std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance> edgeInstance) = 0; 
-			virtual bool isSuspended() = 0; 
-			virtual void resume(std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> activation) = 0; 
-			virtual std::shared_ptr<fUML::Semantics::Activities::ActivityExecution> retrieveActivityExecution() = 0; 
-			virtual void run(std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityNodeActivation>> activations) = 0; 
-			virtual void runNodes(std::shared_ptr<Bag<uml::ActivityNode>> nodes) = 0; 
-			virtual void suspend(std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> activation) = 0; 
+			virtual void activate(std::shared_ptr<Bag<uml::ActivityNode>> nodes,std::shared_ptr<Bag<uml::ActivityEdge>> edges) = 0;
+			virtual void addEdgeInstance(std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance> instance) = 0;
+			virtual void addNodeActivation(std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> activation) = 0;
+			virtual bool checkIncomingEdges(std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>> incomingEdges,std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityNodeActivation>> activations) = 0;
+			virtual void createEdgeInstance(std::shared_ptr<Bag<uml::ActivityEdge>> edges) = 0;
+			virtual std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> createNodeActivation(std::shared_ptr<uml::ActivityNode> node) = 0;
+			virtual void createNodeActivations(std::shared_ptr<Bag<uml::ActivityNode>> nodes) = 0;
+			virtual std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> getNodeActivation(std::shared_ptr<uml::ActivityNode> node) = 0;
+			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityParameterNodeActivation> > getOutputParameterNodeActivations() = 0;
+			virtual bool hasSourceFor(std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance> edgeInstance) = 0;
+			virtual bool isSuspended() = 0;
+			virtual void resume(std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> activation) = 0;
+			virtual std::shared_ptr<fUML::Semantics::Activities::ActivityExecution> retrieveActivityExecution() = 0;
+			virtual void run(std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityNodeActivation>> activations) = 0;
+			virtual void runNodes(std::shared_ptr<Bag<uml::ActivityNode>> nodes) = 0;
+			virtual void suspend(std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> activation) = 0;
 			virtual void terminateAll() = 0;
+
 			//*********************************
-			// Attributes Getter & Setter
+			// Attribute Getters & Setters
 			//*********************************
-			
+
 			//*********************************
-			// References Getter & Setter
+			// Reference Getters & Setters
 			//*********************************
-			
 			virtual std::weak_ptr<fUML::Semantics::Activities::ActivityExecution> getActivityExecution() const = 0;
-			
 			virtual void setActivityExecution(std::weak_ptr<fUML::Semantics::Activities::ActivityExecution>) = 0;
-			
 			virtual std::weak_ptr<fUML::Semantics::Actions::StructuredActivityNodeActivation> getContainingNodeActivation() const = 0;
-			
 			virtual void setContainingNodeActivation(std::weak_ptr<fUML::Semantics::Actions::StructuredActivityNodeActivation>) = 0;
-			
 			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>> getEdgeInstances() const = 0;
-			
-			
 			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityNodeActivation>> getNodeActivations() const = 0;
-			
-			
 			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityNodeActivation>> getSuspendedActivations() const = 0;
-			
-			
+
+			//*********************************
+			// Union Reference Getters
+			//*********************************
+
+			//*********************************
+			// Container Getter
+			//*********************************
+			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
+
+			//*********************************
+			// Persistence Functions
+			//*********************************
+			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 
 		protected:
 			//*********************************
 			// Attribute Members
 			//*********************************
 			
-			
 			//*********************************
 			// Reference Members
 			//*********************************
-			
 			std::weak_ptr<fUML::Semantics::Activities::ActivityExecution> m_activityExecution;
 			std::weak_ptr<fUML::Semantics::Actions::StructuredActivityNodeActivation> m_containingNodeActivation;
 			mutable std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>> m_edgeInstances;
 			mutable std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityNodeActivation>> m_nodeActivations;
 			mutable std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityNodeActivation>> m_suspendedActivations;
-
-		public:
-			//*********************************
-			// Union Getter
-			//*********************************
-			
-
-			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
-			
-			//*********************************
-			// Persistence Functions
-			//*********************************
-			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
-			
-			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
-			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
-			
 	};
-
 }
 #endif /* end of include guard: FUML_SEMANTICS_ACTIVITIES_ACTIVITYNODEACTIVATIONGROUP_HPP */

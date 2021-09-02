@@ -1,3 +1,4 @@
+
 #include "ocl/Evaluations/impl/RealLiteralExpEvalImpl.hpp"
 
 #ifdef NDEBUG
@@ -32,12 +33,11 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "fUML/Semantics/Values/ValuesFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
 #include "uml/umlFactory.hpp"
+#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
-
 
 #include "ocl/Evaluations/EvalEnvironment.hpp"
 #include "fUML/Semantics/Values/LiteralRealEvaluation.hpp"
@@ -119,115 +119,28 @@ std::shared_ptr<ecore::EObject> RealLiteralExpEvalImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> RealLiteralExpEvalImpl::eStaticClass() const
-{
-	return ocl::Evaluations::EvaluationsPackage::eInstance()->getRealLiteralExpEval_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
 
 //*********************************
-// References
+// Attribute Getters & Setters
+//*********************************
+
+//*********************************
+// Reference Getters & Setters
 //*********************************
 
 //*********************************
 // Union Getter
 //*********************************
 
-
-
-std::shared_ptr<RealLiteralExpEval> RealLiteralExpEvalImpl::getThisRealLiteralExpEvalPtr() const
-{
-	return m_thisRealLiteralExpEvalPtr.lock();
-}
-void RealLiteralExpEvalImpl::setThisRealLiteralExpEvalPtr(std::weak_ptr<RealLiteralExpEval> thisRealLiteralExpEvalPtr)
-{
-	m_thisRealLiteralExpEvalPtr = thisRealLiteralExpEvalPtr;
-	setThisLiteralRealEvaluationPtr(thisRealLiteralExpEvalPtr);
-	setThisNumericLiteralExpEvalPtr(thisRealLiteralExpEvalPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> RealLiteralExpEvalImpl::eContainer() const
 {
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any RealLiteralExpEvalImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-	}
-	Any result;
-	result = fUML::Semantics::Values::LiteralRealEvaluationImpl::eGet(featureID, resolve, coreType);
-	if (result != nullptr && !result->isEmpty())
-	{
-		return result;
-	}
-	result = NumericLiteralExpEvalImpl::eGet(featureID, resolve, coreType);
-	return result;
-}
-bool RealLiteralExpEvalImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-	}
-	bool result = false;
-	result = fUML::Semantics::Values::LiteralRealEvaluationImpl::internalEIsSet(featureID);
-	if (result)
-	{
-		return result;
-	}
-	result = NumericLiteralExpEvalImpl::internalEIsSet(featureID);
-	return result;
-}
-bool RealLiteralExpEvalImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-	}
-
-	bool result = false;
-	result = fUML::Semantics::Values::LiteralRealEvaluationImpl::eSet(featureID, newValue);
-	if (result)
-	{
-		return result;
-	}
-	result = NumericLiteralExpEvalImpl::eSet(featureID, newValue);
-	return result;
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any RealLiteralExpEvalImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-
-		default:
-		{
-			// call superTypes
-			result = fUML::Semantics::Values::LiteralRealEvaluationImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			result = NumericLiteralExpEvalImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -289,12 +202,6 @@ void RealLiteralExpEvalImpl::save(std::shared_ptr<persistence::interfaces::XSave
 	fUML::Semantics::Loci::SemanticVisitorImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
-	
-	
 }
 
 void RealLiteralExpEvalImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -309,3 +216,96 @@ void RealLiteralExpEvalImpl::saveContent(std::shared_ptr<persistence::interfaces
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> RealLiteralExpEvalImpl::eStaticClass() const
+{
+	return ocl::Evaluations::EvaluationsPackage::eInstance()->getRealLiteralExpEval_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any RealLiteralExpEvalImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+	}
+	Any result;
+	result = fUML::Semantics::Values::LiteralRealEvaluationImpl::eGet(featureID, resolve, coreType);
+	if (result != nullptr && !result->isEmpty())
+	{
+		return result;
+	}
+	result = NumericLiteralExpEvalImpl::eGet(featureID, resolve, coreType);
+	return result;
+}
+
+bool RealLiteralExpEvalImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+	}
+	bool result = false;
+	result = fUML::Semantics::Values::LiteralRealEvaluationImpl::internalEIsSet(featureID);
+	if (result)
+	{
+		return result;
+	}
+	result = NumericLiteralExpEvalImpl::internalEIsSet(featureID);
+	return result;
+}
+
+bool RealLiteralExpEvalImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+	}
+
+	bool result = false;
+	result = fUML::Semantics::Values::LiteralRealEvaluationImpl::eSet(featureID, newValue);
+	if (result)
+	{
+		return result;
+	}
+	result = NumericLiteralExpEvalImpl::eSet(featureID, newValue);
+	return result;
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any RealLiteralExpEvalImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+
+		default:
+		{
+			// call superTypes
+			result = fUML::Semantics::Values::LiteralRealEvaluationImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			result = NumericLiteralExpEvalImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<RealLiteralExpEval> RealLiteralExpEvalImpl::getThisRealLiteralExpEvalPtr() const
+{
+	return m_thisRealLiteralExpEvalPtr.lock();
+}
+void RealLiteralExpEvalImpl::setThisRealLiteralExpEvalPtr(std::weak_ptr<RealLiteralExpEval> thisRealLiteralExpEvalPtr)
+{
+	m_thisRealLiteralExpEvalPtr = thisRealLiteralExpEvalPtr;
+	setThisLiteralRealEvaluationPtr(thisRealLiteralExpEvalPtr);
+	setThisNumericLiteralExpEvalPtr(thisRealLiteralExpEvalPtr);
+}

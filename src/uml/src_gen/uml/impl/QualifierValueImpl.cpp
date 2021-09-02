@@ -1,3 +1,4 @@
+
 #include "uml/impl/QualifierValueImpl.hpp"
 
 #ifdef NDEBUG
@@ -26,7 +27,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -34,7 +34,6 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-
 
 #include "uml/Comment.hpp"
 #include "uml/Element.hpp"
@@ -115,15 +114,6 @@ std::shared_ptr<ecore::EObject> QualifierValueImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> QualifierValueImpl::eStaticClass() const
-{
-	return uml::umlPackage::eInstance()->getQualifierValue_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
@@ -146,11 +136,13 @@ bool QualifierValueImpl::type_of_qualifier(Any diagnostics,std::shared_ptr<std::
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference qualifier
-*/
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference qualifier */
 std::shared_ptr<uml::Property> QualifierValueImpl::getQualifier() const
 {
     return m_qualifier;
@@ -161,10 +153,7 @@ void QualifierValueImpl::setQualifier(std::shared_ptr<uml::Property> _qualifier)
 	
 }
 
-
-/*
-Getter & Setter for reference value
-*/
+/* Getter & Setter for reference value */
 std::shared_ptr<uml::InputPin> QualifierValueImpl::getValue() const
 {
     return m_value;
@@ -174,7 +163,6 @@ void QualifierValueImpl::setValue(std::shared_ptr<uml::InputPin> _value)
     m_value = _value;
 	
 }
-
 
 //*********************************
 // Union Getter
@@ -194,18 +182,9 @@ std::shared_ptr<Union<uml::Element>> QualifierValueImpl::getOwnedElement() const
 	return m_ownedElement;
 }
 
-
-
-
-std::shared_ptr<QualifierValue> QualifierValueImpl::getThisQualifierValuePtr() const
-{
-	return m_thisQualifierValuePtr.lock();
-}
-void QualifierValueImpl::setThisQualifierValuePtr(std::weak_ptr<QualifierValue> thisQualifierValuePtr)
-{
-	m_thisQualifierValuePtr = thisQualifierValuePtr;
-	setThisElementPtr(thisQualifierValuePtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> QualifierValueImpl::eContainer() const
 {
 	if(auto wp = m_owner.lock())
@@ -213,136 +192,6 @@ std::shared_ptr<ecore::EObject> QualifierValueImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any QualifierValueImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::QUALIFIERVALUE_ATTRIBUTE_QUALIFIER:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getQualifier();
-				return eAny(returnValue); //1913
-			}
-		case uml::umlPackage::QUALIFIERVALUE_ATTRIBUTE_VALUE:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getValue();
-				return eAny(returnValue); //1914
-			}
-	}
-	return ElementImpl::eGet(featureID, resolve, coreType);
-}
-bool QualifierValueImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::QUALIFIERVALUE_ATTRIBUTE_QUALIFIER:
-			return getQualifier() != nullptr; //1913
-		case uml::umlPackage::QUALIFIERVALUE_ATTRIBUTE_VALUE:
-			return getValue() != nullptr; //1914
-	}
-	return ElementImpl::internalEIsSet(featureID);
-}
-bool QualifierValueImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::QUALIFIERVALUE_ATTRIBUTE_QUALIFIER:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::Property> _qualifier = std::dynamic_pointer_cast<uml::Property>(_temp);
-			setQualifier(_qualifier); //1913
-			return true;
-		}
-		case uml::umlPackage::QUALIFIERVALUE_ATTRIBUTE_VALUE:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::InputPin> _value = std::dynamic_pointer_cast<uml::InputPin>(_temp);
-			setValue(_value); //1914
-			return true;
-		}
-	}
-
-	return ElementImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any QualifierValueImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-		
-		// 1678485092
-		case umlPackage::QUALIFIERVALUE_OPERATION_MULTIPLICITY_OF_QUALIFIER_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->multiplicity_of_qualifier(incoming_param_diagnostics,incoming_param_context));
-			break;
-		}
-		
-		// 2009884538
-		case umlPackage::QUALIFIERVALUE_OPERATION_QUALIFIER_ATTRIBUTE_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->qualifier_attribute(incoming_param_diagnostics,incoming_param_context));
-			break;
-		}
-		
-		// 868153665
-		case umlPackage::QUALIFIERVALUE_OPERATION_TYPE_OF_QUALIFIER_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->type_of_qualifier(incoming_param_diagnostics,incoming_param_context));
-			break;
-		}
-
-		default:
-		{
-			// call superTypes
-			result = ElementImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -443,8 +292,6 @@ void QualifierValueImpl::save(std::shared_ptr<persistence::interfaces::XSaveHand
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
 }
 
 void QualifierValueImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -462,3 +309,152 @@ void QualifierValueImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> QualifierValueImpl::eStaticClass() const
+{
+	return uml::umlPackage::eInstance()->getQualifierValue_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any QualifierValueImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::QUALIFIERVALUE_ATTRIBUTE_QUALIFIER:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getQualifier();
+				return eAny(returnValue); //1913
+			}
+		case uml::umlPackage::QUALIFIERVALUE_ATTRIBUTE_VALUE:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getValue();
+				return eAny(returnValue); //1914
+			}
+	}
+	return ElementImpl::eGet(featureID, resolve, coreType);
+}
+
+bool QualifierValueImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::QUALIFIERVALUE_ATTRIBUTE_QUALIFIER:
+			return getQualifier() != nullptr; //1913
+		case uml::umlPackage::QUALIFIERVALUE_ATTRIBUTE_VALUE:
+			return getValue() != nullptr; //1914
+	}
+	return ElementImpl::internalEIsSet(featureID);
+}
+
+bool QualifierValueImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::QUALIFIERVALUE_ATTRIBUTE_QUALIFIER:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::Property> _qualifier = std::dynamic_pointer_cast<uml::Property>(_temp);
+			setQualifier(_qualifier); //1913
+			return true;
+		}
+		case uml::umlPackage::QUALIFIERVALUE_ATTRIBUTE_VALUE:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::InputPin> _value = std::dynamic_pointer_cast<uml::InputPin>(_temp);
+			setValue(_value); //1914
+			return true;
+		}
+	}
+
+	return ElementImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any QualifierValueImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 1678485092
+		case umlPackage::QUALIFIERVALUE_OPERATION_MULTIPLICITY_OF_QUALIFIER_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->multiplicity_of_qualifier(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+		
+		// 2009884538
+		case umlPackage::QUALIFIERVALUE_OPERATION_QUALIFIER_ATTRIBUTE_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->qualifier_attribute(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+		
+		// 868153665
+		case umlPackage::QUALIFIERVALUE_OPERATION_TYPE_OF_QUALIFIER_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->type_of_qualifier(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = ElementImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<QualifierValue> QualifierValueImpl::getThisQualifierValuePtr() const
+{
+	return m_thisQualifierValuePtr.lock();
+}
+void QualifierValueImpl::setThisQualifierValuePtr(std::weak_ptr<QualifierValue> thisQualifierValuePtr)
+{
+	m_thisQualifierValuePtr = thisQualifierValuePtr;
+	setThisElementPtr(thisQualifierValuePtr);
+}

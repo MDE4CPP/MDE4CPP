@@ -81,17 +81,19 @@ namespace uml
 			//*********************************
 			// Operations
 			//*********************************
+			
 			/*!
 			Sets the Lifeline on which the OccurrenceSpecification appears.
 			*/
 			 
 			virtual void setCovered(std::shared_ptr<uml::Lifeline> value) = 0;
+
 			//*********************************
-			// Attributes Getter & Setter
+			// Attribute Getters & Setters
 			//*********************************
-			
+
 			//*********************************
-			// References Getter & Setter
+			// Reference Getters & Setters
 			//*********************************
 			/*!
 			References the GeneralOrderings that specify EventOcurrences that must occur after this OccurrenceSpecification.
@@ -99,21 +101,51 @@ namespace uml
 			*/
 			
 			virtual std::shared_ptr<Bag<uml::GeneralOrdering>> getToAfter() const = 0;
-			
 			/*!
 			References the GeneralOrderings that specify EventOcurrences that must occur before this OccurrenceSpecification.
 			<p>From package UML::Interactions.</p>
 			*/
 			
 			virtual std::shared_ptr<Bag<uml::GeneralOrdering>> getToBefore() const = 0;
+
+			//*********************************
+			// Union Reference Getters
+			//*********************************
+			/*!
+			Specifies the Namespace that owns the NamedElement.
+			<p>From package UML::CommonStructure.</p>
+			*/
 			
+			virtual std::weak_ptr<uml::Namespace> getNamespace() const = 0;
+			/*!
+			The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
 			
+			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;
+			/*!
+			The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
+			virtual std::weak_ptr<uml::Element> getOwner() const = 0;
+
+			//*********************************
+			// Container Getter
+			//*********************************
+			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
+
+			//*********************************
+			// Persistence Functions
+			//*********************************
+			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 
 		protected:
 			//*********************************
 			// Attribute Members
 			//*********************************
-			
 			
 			//*********************************
 			// Reference Members
@@ -123,45 +155,13 @@ namespace uml
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			mutable std::shared_ptr<Bag<uml::GeneralOrdering>> m_toAfter;/*!
+			mutable std::shared_ptr<Bag<uml::GeneralOrdering>> m_toAfter;
+			/*!
 			References the GeneralOrderings that specify EventOcurrences that must occur before this OccurrenceSpecification.
 			<p>From package UML::Interactions.</p>
 			*/
 			
 			mutable std::shared_ptr<Bag<uml::GeneralOrdering>> m_toBefore;
-
-		public:
-			//*********************************
-			// Union Getter
-			//*********************************
-			/*!
-			Specifies the Namespace that owns the NamedElement.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::weak_ptr<uml::Namespace> getNamespace() const = 0;/*!
-			The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;/*!
-			The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::weak_ptr<uml::Element> getOwner() const = 0;
-
-			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
-			
-			//*********************************
-			// Persistence Functions
-			//*********************************
-			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
-			
-			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
-			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
-			
 	};
-
 }
 #endif /* end of include guard: UML_OCCURRENCESPECIFICATION_HPP */

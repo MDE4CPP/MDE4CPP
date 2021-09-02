@@ -1,3 +1,4 @@
+
 #include "fUML/Semantics/SimpleClassifiers/impl/SignalInstanceImpl.hpp"
 
 #ifdef NDEBUG
@@ -25,7 +26,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -34,7 +34,6 @@
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
 #include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
-
 
 #include "fUML/Semantics/SimpleClassifiers/CompoundValue.hpp"
 #include "fUML/Semantics/SimpleClassifiers/FeatureValue.hpp"
@@ -112,15 +111,6 @@ std::shared_ptr<ecore::EObject> SignalInstanceImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> SignalInstanceImpl::eStaticClass() const
-{
-	return fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::eInstance()->getSignalInstance_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
@@ -137,11 +127,13 @@ return newValue;
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference type
-*/
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference type */
 std::shared_ptr<uml::Signal> SignalInstanceImpl::getType() const
 {
     return m_type;
@@ -152,96 +144,16 @@ void SignalInstanceImpl::setType(std::shared_ptr<uml::Signal> _type)
 	
 }
 
-
 //*********************************
 // Union Getter
 //*********************************
 
-
-
-std::shared_ptr<SignalInstance> SignalInstanceImpl::getThisSignalInstancePtr() const
-{
-	return m_thisSignalInstancePtr.lock();
-}
-void SignalInstanceImpl::setThisSignalInstancePtr(std::weak_ptr<SignalInstance> thisSignalInstancePtr)
-{
-	m_thisSignalInstancePtr = thisSignalInstancePtr;
-	setThisCompoundValuePtr(thisSignalInstancePtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> SignalInstanceImpl::eContainer() const
 {
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any SignalInstanceImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::SIGNALINSTANCE_ATTRIBUTE_TYPE:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getType();
-				return eAny(returnValue); //1071
-			}
-	}
-	return CompoundValueImpl::eGet(featureID, resolve, coreType);
-}
-bool SignalInstanceImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::SIGNALINSTANCE_ATTRIBUTE_TYPE:
-			return getType() != nullptr; //1071
-	}
-	return CompoundValueImpl::internalEIsSet(featureID);
-}
-bool SignalInstanceImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::SIGNALINSTANCE_ATTRIBUTE_TYPE:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::Signal> _type = std::dynamic_pointer_cast<uml::Signal>(_temp);
-			setType(_type); //1071
-			return true;
-		}
-	}
-
-	return CompoundValueImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any SignalInstanceImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-		
-		// 1643457429
-		case SimpleClassifiersPackage::SIGNALINSTANCE_OPERATION__COPY:
-		{
-			result = eAny(this->_copy());
-			break;
-		}
-
-		default:
-		{
-			// call superTypes
-			result = CompoundValueImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -327,10 +239,6 @@ void SignalInstanceImpl::save(std::shared_ptr<persistence::interfaces::XSaveHand
 	fUML::Semantics::Loci::SemanticVisitorImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
 }
 
 void SignalInstanceImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -347,3 +255,93 @@ void SignalInstanceImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> SignalInstanceImpl::eStaticClass() const
+{
+	return fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::eInstance()->getSignalInstance_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any SignalInstanceImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::SIGNALINSTANCE_ATTRIBUTE_TYPE:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getType();
+				return eAny(returnValue); //1071
+			}
+	}
+	return CompoundValueImpl::eGet(featureID, resolve, coreType);
+}
+
+bool SignalInstanceImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::SIGNALINSTANCE_ATTRIBUTE_TYPE:
+			return getType() != nullptr; //1071
+	}
+	return CompoundValueImpl::internalEIsSet(featureID);
+}
+
+bool SignalInstanceImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::SIGNALINSTANCE_ATTRIBUTE_TYPE:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::Signal> _type = std::dynamic_pointer_cast<uml::Signal>(_temp);
+			setType(_type); //1071
+			return true;
+		}
+	}
+
+	return CompoundValueImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any SignalInstanceImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 1643457429
+		case SimpleClassifiersPackage::SIGNALINSTANCE_OPERATION__COPY:
+		{
+			result = eAny(this->_copy());
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = CompoundValueImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<SignalInstance> SignalInstanceImpl::getThisSignalInstancePtr() const
+{
+	return m_thisSignalInstancePtr.lock();
+}
+void SignalInstanceImpl::setThisSignalInstancePtr(std::weak_ptr<SignalInstance> thisSignalInstancePtr)
+{
+	m_thisSignalInstancePtr = thisSignalInstancePtr;
+	setThisCompoundValuePtr(thisSignalInstancePtr);
+}

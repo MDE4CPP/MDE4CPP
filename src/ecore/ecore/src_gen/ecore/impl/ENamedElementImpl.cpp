@@ -1,3 +1,4 @@
+
 #include "ecore/impl/ENamedElementImpl.hpp"
 
 #ifdef NDEBUG
@@ -25,7 +26,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -33,7 +33,6 @@
 
 #include <exception> // used in Persistence
 #include "ecore/ecoreFactory.hpp"
-
 
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EModelElement.hpp"
@@ -112,17 +111,14 @@ std::shared_ptr<ecore::EObject> ENamedElementImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<EClass> ENamedElementImpl::eStaticClass() const
-{
-	return ecore::ecorePackage::eInstance()->getENamedElement_Class();
-}
+//*********************************
+// Operations
+//*********************************
 
 //*********************************
-// Attribute Setter Getter
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for attribute name
-*/
+/* Getter & Setter for attribute name */
 std::string ENamedElementImpl::getName() const 
 {
 	return m_name;
@@ -131,15 +127,10 @@ void ENamedElementImpl::setName(std::string _name)
 {
 	m_name = _name;
 	
-} 
-
-
-//*********************************
-// Operations
-//*********************************
+}
 
 //*********************************
-// References
+// Reference Getters & Setters
 //*********************************
 
 //*********************************
@@ -160,18 +151,9 @@ std::shared_ptr<Union<ecore::EObject>> ENamedElementImpl::getEContens() const
 	return m_eContens;
 }
 
-
-
-
-std::shared_ptr<ENamedElement> ENamedElementImpl::getThisENamedElementPtr() const
-{
-	return m_thisENamedElementPtr.lock();
-}
-void ENamedElementImpl::setThisENamedElementPtr(std::weak_ptr<ENamedElement> thisENamedElementPtr)
-{
-	m_thisENamedElementPtr = thisENamedElementPtr;
-	setThisEModelElementPtr(thisENamedElementPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> ENamedElementImpl::eContainer() const
 {
 	if(auto wp = m_eContainer.lock())
@@ -179,66 +161,6 @@ std::shared_ptr<ecore::EObject> ENamedElementImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any ENamedElementImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case ecore::ecorePackage::ENAMEDELEMENT_ATTRIBUTE_NAME:
-			return eAny(getName()); //384
-	}
-	return EModelElementImpl::eGet(featureID, resolve, coreType);
-}
-bool ENamedElementImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case ecore::ecorePackage::ENAMEDELEMENT_ATTRIBUTE_NAME:
-			return getName() != ""; //384
-	}
-	return EModelElementImpl::internalEIsSet(featureID);
-}
-bool ENamedElementImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case ecore::ecorePackage::ENAMEDELEMENT_ATTRIBUTE_NAME:
-		{
-			// BOOST CAST
-			std::string _name = newValue->get<std::string>();
-			setName(_name); //384
-			return true;
-		}
-	}
-
-	return EModelElementImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any ENamedElementImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-
-		default:
-		{
-			// call superTypes
-			result = EModelElementImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -308,8 +230,6 @@ void ENamedElementImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandl
 	EObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
 }
 
 void ENamedElementImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -329,3 +249,82 @@ void ENamedElementImpl::saveContent(std::shared_ptr<persistence::interfaces::XSa
 	}
 }
 
+
+std::shared_ptr<EClass> ENamedElementImpl::eStaticClass() const
+{
+	return ecore::ecorePackage::eInstance()->getENamedElement_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any ENamedElementImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case ecore::ecorePackage::ENAMEDELEMENT_ATTRIBUTE_NAME:
+			return eAny(getName()); //384
+	}
+	return EModelElementImpl::eGet(featureID, resolve, coreType);
+}
+
+bool ENamedElementImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case ecore::ecorePackage::ENAMEDELEMENT_ATTRIBUTE_NAME:
+			return getName() != ""; //384
+	}
+	return EModelElementImpl::internalEIsSet(featureID);
+}
+
+bool ENamedElementImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case ecore::ecorePackage::ENAMEDELEMENT_ATTRIBUTE_NAME:
+		{
+			// BOOST CAST
+			std::string _name = newValue->get<std::string>();
+			setName(_name); //384
+			return true;
+		}
+	}
+
+	return EModelElementImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any ENamedElementImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+
+		default:
+		{
+			// call superTypes
+			result = EModelElementImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<ENamedElement> ENamedElementImpl::getThisENamedElementPtr() const
+{
+	return m_thisENamedElementPtr.lock();
+}
+void ENamedElementImpl::setThisENamedElementPtr(std::weak_ptr<ENamedElement> thisENamedElementPtr)
+{
+	m_thisENamedElementPtr = thisENamedElementPtr;
+	setThisEModelElementPtr(thisENamedElementPtr);
+}

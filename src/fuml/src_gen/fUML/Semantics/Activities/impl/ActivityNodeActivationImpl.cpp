@@ -1,3 +1,4 @@
+
 #include "fUML/Semantics/Activities/impl/ActivityNodeActivationImpl.hpp"
 
 #ifdef NDEBUG
@@ -39,7 +40,6 @@
 #include <exception> // used in Persistence
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "uml/umlFactory.hpp"
-
 
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
 #include "fUML/Semantics/Activities/ActivityExecution.hpp"
@@ -154,28 +154,6 @@ std::shared_ptr<ecore::EObject> ActivityNodeActivationImpl::copy() const
 	element->setThisActivityNodeActivationPtr(element);
 	return element;
 }
-
-std::shared_ptr<ecore::EClass> ActivityNodeActivationImpl::eStaticClass() const
-{
-	return fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getActivityNodeActivation_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-/*
-Getter & Setter for attribute running
-*/
-bool ActivityNodeActivationImpl::isRunning() const 
-{
-	return m_running;
-}
-void ActivityNodeActivationImpl::setRunning(bool _running)
-{
-	m_running = _running;
-	
-} 
-
 
 //*********************************
 // Operations
@@ -607,11 +585,23 @@ this->setRunning(false);
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference group
-*/
+/* Getter & Setter for attribute running */
+bool ActivityNodeActivationImpl::isRunning() const 
+{
+	return m_running;
+}
+void ActivityNodeActivationImpl::setRunning(bool _running)
+{
+	m_running = _running;
+	
+}
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference group */
 std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> ActivityNodeActivationImpl::getGroup() const
 {
     return m_group;
@@ -622,10 +612,7 @@ void ActivityNodeActivationImpl::setGroup(std::weak_ptr<fUML::Semantics::Activit
 	
 }
 
-
-/*
-Getter & Setter for reference heldTokens
-*/
+/* Getter & Setter for reference heldTokens */
 std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> ActivityNodeActivationImpl::getHeldTokens() const
 {
 	if(m_heldTokens == nullptr)
@@ -637,11 +624,7 @@ std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> ActivityNodeActivationI
     return m_heldTokens;
 }
 
-
-
-/*
-Getter & Setter for reference incomingEdges
-*/
+/* Getter & Setter for reference incomingEdges */
 std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>> ActivityNodeActivationImpl::getIncomingEdges() const
 {
 	if(m_incomingEdges == nullptr)
@@ -653,11 +636,7 @@ std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>> Activity
     return m_incomingEdges;
 }
 
-
-
-/*
-Getter & Setter for reference node
-*/
+/* Getter & Setter for reference node */
 std::shared_ptr<uml::ActivityNode> ActivityNodeActivationImpl::getNode() const
 {
     return m_node;
@@ -668,10 +647,7 @@ void ActivityNodeActivationImpl::setNode(std::shared_ptr<uml::ActivityNode> _nod
 	
 }
 
-
-/*
-Getter & Setter for reference outgoingEdges
-*/
+/* Getter & Setter for reference outgoingEdges */
 std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>> ActivityNodeActivationImpl::getOutgoingEdges() const
 {
 	if(m_outgoingEdges == nullptr)
@@ -683,23 +659,13 @@ std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>> Activity
     return m_outgoingEdges;
 }
 
-
-
 //*********************************
 // Union Getter
 //*********************************
 
-
-
-std::shared_ptr<ActivityNodeActivation> ActivityNodeActivationImpl::getThisActivityNodeActivationPtr() const
-{
-	return m_thisActivityNodeActivationPtr.lock();
-}
-void ActivityNodeActivationImpl::setThisActivityNodeActivationPtr(std::weak_ptr<ActivityNodeActivation> thisActivityNodeActivationPtr)
-{
-	m_thisActivityNodeActivationPtr = thisActivityNodeActivationPtr;
-	setThisSemanticVisitorPtr(thisActivityNodeActivationPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> ActivityNodeActivationImpl::eContainer() const
 {
 	if(auto wp = m_group.lock())
@@ -710,7 +676,207 @@ std::shared_ptr<ecore::EObject> ActivityNodeActivationImpl::eContainer() const
 }
 
 //*********************************
-// Structural Feature Getter/Setter
+// Persistence Functions
+//*********************************
+void ActivityNodeActivationImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get fUMLFactory
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
+	}
+}		
+
+void ActivityNodeActivationImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+	try
+	{
+		std::map<std::string, std::string>::const_iterator iter;
+	
+		iter = attr_list.find("running");
+		if ( iter != attr_list.end() )
+		{
+			// this attribute is a 'bool'
+			bool value;
+			std::istringstream(iter->second) >> std::boolalpha >> value;
+			this->setRunning(value);
+		}
+		std::shared_ptr<ecore::EClass> metaClass = this->eClass(); // get MetaClass
+		iter = attr_list.find("incomingEdges");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("incomingEdges")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+
+		iter = attr_list.find("node");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("node")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+
+		iter = attr_list.find("outgoingEdges");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("outgoingEdges")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	fUML::Semantics::Loci::SemanticVisitorImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void ActivityNodeActivationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+
+	try
+	{
+		if ( nodeName.compare("heldTokens") == 0 )
+		{
+  			std::string typeName = loadHandler->getCurrentXSITypeName();
+			if (typeName.empty())
+			{
+				std::cout << "| WARNING    | type if an eClassifiers node it empty" << std::endl;
+				return; // no type name given and reference type is abstract
+			}
+			loadHandler->handleChildContainer<fUML::Semantics::Activities::Token>(this->getHeldTokens());  
+
+			return; 
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+	//load BasePackage Nodes
+	fUML::Semantics::Loci::SemanticVisitorImpl::loadNode(nodeName, loadHandler);
+}
+
+void ActivityNodeActivationImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+{
+	switch(featureID)
+	{
+		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYNODEACTIVATION_ATTRIBUTE_GROUP:
+		{
+			if (references.size() == 1)
+			{
+				// Cast object to correct type
+				std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> _group = std::dynamic_pointer_cast<fUML::Semantics::Activities::ActivityNodeActivationGroup>( references.front() );
+				setGroup(_group);
+			}
+			
+			return;
+		}
+
+		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYNODEACTIVATION_ATTRIBUTE_INCOMINGEDGES:
+		{
+			std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>> _incomingEdges = getIncomingEdges();
+			for(std::shared_ptr<ecore::EObject> ref : references)
+			{
+				std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance>  _r = std::dynamic_pointer_cast<fUML::Semantics::Activities::ActivityEdgeInstance>(ref);
+				if (_r != nullptr)
+				{
+					_incomingEdges->push_back(_r);
+				}
+			}
+			return;
+		}
+
+		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYNODEACTIVATION_ATTRIBUTE_NODE:
+		{
+			if (references.size() == 1)
+			{
+				// Cast object to correct type
+				std::shared_ptr<uml::ActivityNode> _node = std::dynamic_pointer_cast<uml::ActivityNode>( references.front() );
+				setNode(_node);
+			}
+			
+			return;
+		}
+
+		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYNODEACTIVATION_ATTRIBUTE_OUTGOINGEDGES:
+		{
+			std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>> _outgoingEdges = getOutgoingEdges();
+			for(std::shared_ptr<ecore::EObject> ref : references)
+			{
+				std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance>  _r = std::dynamic_pointer_cast<fUML::Semantics::Activities::ActivityEdgeInstance>(ref);
+				if (_r != nullptr)
+				{
+					_outgoingEdges->push_back(_r);
+				}
+			}
+			return;
+		}
+	}
+	fUML::Semantics::Loci::SemanticVisitorImpl::resolveReferences(featureID, references);
+}
+
+void ActivityNodeActivationImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	fUML::Semantics::Loci::SemanticVisitorImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+}
+
+void ActivityNodeActivationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<fUML::Semantics::Activities::ActivitiesPackage> package = fUML::Semantics::Activities::ActivitiesPackage::eInstance();
+		// Add attributes
+		if ( this->eIsSet(package->getActivityNodeActivation_Attribute_running()) )
+		{
+			saveHandler->addAttribute("running", this->isRunning());
+		}
+	// Add references
+		saveHandler->addReferences<fUML::Semantics::Activities::ActivityEdgeInstance>("incomingEdges", this->getIncomingEdges());
+		saveHandler->addReference(this->getNode(), "node", getNode()->eClass() != uml::umlPackage::eInstance()->getActivityNode_Class()); 
+		saveHandler->addReferences<fUML::Semantics::Activities::ActivityEdgeInstance>("outgoingEdges", this->getOutgoingEdges());
+		//
+		// Add new tags (from references)
+		//
+		std::shared_ptr<ecore::EClass> metaClass = this->eClass();
+		// Save 'heldTokens'
+
+		saveHandler->addReferences<fUML::Semantics::Activities::Token>("heldTokens", this->getHeldTokens());
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+}
+
+
+std::shared_ptr<ecore::EClass> ActivityNodeActivationImpl::eStaticClass() const
+{
+	return fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getActivityNodeActivation_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
 //*********************************
 Any ActivityNodeActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
@@ -767,6 +933,7 @@ Any ActivityNodeActivationImpl::eGet(int featureID, bool resolve, bool coreType)
 	}
 	return fUML::Semantics::Loci::SemanticVisitorImpl::eGet(featureID, resolve, coreType);
 }
+
 bool ActivityNodeActivationImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
@@ -786,6 +953,7 @@ bool ActivityNodeActivationImpl::internalEIsSet(int featureID) const
 	}
 	return fUML::Semantics::Loci::SemanticVisitorImpl::internalEIsSet(featureID);
 }
+
 bool ActivityNodeActivationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
@@ -927,7 +1095,7 @@ bool ActivityNodeActivationImpl::eSet(int featureID, Any newValue)
 }
 
 //*********************************
-// Behavioral Feature
+// EOperation Invoke
 //*********************************
 Any ActivityNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
 {
@@ -1169,197 +1337,13 @@ Any ActivityNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::li
 	return result;
 }
 
-//*********************************
-// Persistence Functions
-//*********************************
-void ActivityNodeActivationImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+
+std::shared_ptr<ActivityNodeActivation> ActivityNodeActivationImpl::getThisActivityNodeActivationPtr() const
 {
-	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
-	loadAttributes(loadHandler, attr_list);
-
-	//
-	// Create new objects (from references (containment == true))
-	//
-	// get fUMLFactory
-	int numNodes = loadHandler->getNumOfChildNodes();
-	for(int ii = 0; ii < numNodes; ii++)
-	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler);
-	}
-}		
-
-void ActivityNodeActivationImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
-{
-	try
-	{
-		std::map<std::string, std::string>::const_iterator iter;
-	
-		iter = attr_list.find("running");
-		if ( iter != attr_list.end() )
-		{
-			// this attribute is a 'bool'
-			bool value;
-			std::istringstream(iter->second) >> std::boolalpha >> value;
-			this->setRunning(value);
-		}
-		std::shared_ptr<ecore::EClass> metaClass = this->eClass(); // get MetaClass
-		iter = attr_list.find("incomingEdges");
-		if ( iter != attr_list.end() )
-		{
-			// add unresolvedReference to loadHandler's list
-			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("incomingEdges")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
-		}
-
-		iter = attr_list.find("node");
-		if ( iter != attr_list.end() )
-		{
-			// add unresolvedReference to loadHandler's list
-			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("node")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
-		}
-
-		iter = attr_list.find("outgoingEdges");
-		if ( iter != attr_list.end() )
-		{
-			// add unresolvedReference to loadHandler's list
-			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("outgoingEdges")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
-		}
-	}
-	catch (std::exception& e)
-	{
-		std::cout << "| ERROR    | " << e.what() << std::endl;
-	}
-	catch (...) 
-	{
-		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
-	}
-
-	fUML::Semantics::Loci::SemanticVisitorImpl::loadAttributes(loadHandler, attr_list);
+	return m_thisActivityNodeActivationPtr.lock();
 }
-
-void ActivityNodeActivationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+void ActivityNodeActivationImpl::setThisActivityNodeActivationPtr(std::weak_ptr<ActivityNodeActivation> thisActivityNodeActivationPtr)
 {
-
-	try
-	{
-		if ( nodeName.compare("heldTokens") == 0 )
-		{
-  			std::string typeName = loadHandler->getCurrentXSITypeName();
-			if (typeName.empty())
-			{
-				std::cout << "| WARNING    | type if an eClassifiers node it empty" << std::endl;
-				return; // no type name given and reference type is abstract
-			}
-			loadHandler->handleChildContainer<fUML::Semantics::Activities::Token>(this->getHeldTokens());  
-
-			return; 
-		}
-	}
-	catch (std::exception& e)
-	{
-		std::cout << "| ERROR    | " << e.what() << std::endl;
-	}
-	catch (...) 
-	{
-		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
-	}
-	//load BasePackage Nodes
-	fUML::Semantics::Loci::SemanticVisitorImpl::loadNode(nodeName, loadHandler);
+	m_thisActivityNodeActivationPtr = thisActivityNodeActivationPtr;
+	setThisSemanticVisitorPtr(thisActivityNodeActivationPtr);
 }
-
-void ActivityNodeActivationImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
-{
-	switch(featureID)
-	{
-		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYNODEACTIVATION_ATTRIBUTE_GROUP:
-		{
-			if (references.size() == 1)
-			{
-				// Cast object to correct type
-				std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> _group = std::dynamic_pointer_cast<fUML::Semantics::Activities::ActivityNodeActivationGroup>( references.front() );
-				setGroup(_group);
-			}
-			
-			return;
-		}
-
-		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYNODEACTIVATION_ATTRIBUTE_INCOMINGEDGES:
-		{
-			std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>> _incomingEdges = getIncomingEdges();
-			for(std::shared_ptr<ecore::EObject> ref : references)
-			{
-				std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance>  _r = std::dynamic_pointer_cast<fUML::Semantics::Activities::ActivityEdgeInstance>(ref);
-				if (_r != nullptr)
-				{
-					_incomingEdges->push_back(_r);
-				}
-			}
-			return;
-		}
-
-		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYNODEACTIVATION_ATTRIBUTE_NODE:
-		{
-			if (references.size() == 1)
-			{
-				// Cast object to correct type
-				std::shared_ptr<uml::ActivityNode> _node = std::dynamic_pointer_cast<uml::ActivityNode>( references.front() );
-				setNode(_node);
-			}
-			
-			return;
-		}
-
-		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYNODEACTIVATION_ATTRIBUTE_OUTGOINGEDGES:
-		{
-			std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>> _outgoingEdges = getOutgoingEdges();
-			for(std::shared_ptr<ecore::EObject> ref : references)
-			{
-				std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance>  _r = std::dynamic_pointer_cast<fUML::Semantics::Activities::ActivityEdgeInstance>(ref);
-				if (_r != nullptr)
-				{
-					_outgoingEdges->push_back(_r);
-				}
-			}
-			return;
-		}
-	}
-	fUML::Semantics::Loci::SemanticVisitorImpl::resolveReferences(featureID, references);
-}
-
-void ActivityNodeActivationImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
-{
-	saveContent(saveHandler);
-
-	fUML::Semantics::Loci::SemanticVisitorImpl::saveContent(saveHandler);
-	
-	ecore::EObjectImpl::saveContent(saveHandler);
-	
-}
-
-void ActivityNodeActivationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
-{
-	try
-	{
-		std::shared_ptr<fUML::Semantics::Activities::ActivitiesPackage> package = fUML::Semantics::Activities::ActivitiesPackage::eInstance();
-		// Add attributes
-		if ( this->eIsSet(package->getActivityNodeActivation_Attribute_running()) )
-		{
-			saveHandler->addAttribute("running", this->isRunning());
-		}
-	// Add references
-		saveHandler->addReferences<fUML::Semantics::Activities::ActivityEdgeInstance>("incomingEdges", this->getIncomingEdges());
-		saveHandler->addReference(this->getNode(), "node", getNode()->eClass() != uml::umlPackage::eInstance()->getActivityNode_Class()); 
-		saveHandler->addReferences<fUML::Semantics::Activities::ActivityEdgeInstance>("outgoingEdges", this->getOutgoingEdges());
-		//
-		// Add new tags (from references)
-		//
-		std::shared_ptr<ecore::EClass> metaClass = this->eClass();
-		// Save 'heldTokens'
-
-		saveHandler->addReferences<fUML::Semantics::Activities::Token>("heldTokens", this->getHeldTokens());
-	}
-	catch (std::exception& e)
-	{
-		std::cout << "| ERROR    | " << e.what() << std::endl;
-	}
-}
-

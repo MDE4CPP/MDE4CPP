@@ -71,14 +71,16 @@ namespace uml
 			fromAction.input->forAll(oclIsKindOf(ActionInputPin))
 			*/
 			 
-			virtual bool input_pin(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
+			virtual bool input_pin(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			/*!
 			The fromAction of an ActionInputPin cannot have ActivityEdges coming into or out of it or its Pins.
 			fromAction.incoming->union(outgoing)->isEmpty() and
 			fromAction.input.incoming->isEmpty() and
 			fromAction.output.outgoing->isEmpty()
 			*/
 			 
-			virtual bool no_control_or_object_flow(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
+			virtual bool no_control_or_object_flow(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			/*!
 			The fromAction of an ActionInputPin must have exactly one OutputPin.
 			fromAction.output->size() = 1
 			*/
@@ -86,12 +88,11 @@ namespace uml
 			virtual bool one_output_pin(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
-			// Attributes Getter Setter
+			// Attribute Getters & Setters
 			//*********************************
 			
-			
 			//*********************************
-			// Reference
+			// Reference Getters & Setters
 			//*********************************
 			/*!
 			The Action used to provide the values of the ActionInputPin.
@@ -106,33 +107,37 @@ namespace uml
 			
 			virtual void setFromAction(std::shared_ptr<uml::Action>) ;
 			
-			
 			//*********************************
-			// Union Getter
+			// Union Reference Getters
 			//*********************************
 			/*!
 			ActivityGroups containing the ActivityNode.
 			<p>From package UML::Activities.</p>
 			*/
 			
-			virtual std::shared_ptr<Union<uml::ActivityGroup>> getInGroup() const ;/*!
+			virtual std::shared_ptr<Union<uml::ActivityGroup>> getInGroup() const ;
+			/*!
 			The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const ;/*!
+			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const ;
+			/*!
 			The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element> getOwner() const ;/*!
+			virtual std::weak_ptr<uml::Element> getOwner() const ;
+			/*!
 			The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p>
 			*/
 			
 			virtual std::shared_ptr<Union<uml::RedefinableElement>> getRedefinedElement() const ;
 			
-
+			//*********************************
+			// Container Getter
+			//*********************************
 			virtual std::shared_ptr<ecore::EObject> eContainer() const ; 
 			
 			//*********************************
@@ -141,20 +146,23 @@ namespace uml
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) ;
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
-			
 			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
-			
 
-			//*********************************
-			// Structural Feature Getter/Setter
-			//*********************************
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+
+			//*********************************
+			// EStructuralFeature Get/Set/IsSet
+			//*********************************
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool internalEIsSet(int featureID) const ;
 			virtual bool eSet(int featureID, Any newValue) ;
+			virtual bool internalEIsSet(int featureID) const ;
+
+			//*********************************
+			// EOperation Invoke
+			//*********************************
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:

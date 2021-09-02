@@ -1,3 +1,4 @@
+
 #include "fUML/Semantics/Activities/impl/ExpansionRegionActivationImpl.hpp"
 
 #ifdef NDEBUG
@@ -42,7 +43,6 @@
 #include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "uml/umlFactory.hpp"
-
 
 #include "uml/Action.hpp"
 #include "fUML/Semantics/Actions/ActionActivation.hpp"
@@ -137,28 +137,6 @@ std::shared_ptr<ecore::EObject> ExpansionRegionActivationImpl::copy() const
 	element->setThisExpansionRegionActivationPtr(element);
 	return element;
 }
-
-std::shared_ptr<ecore::EClass> ExpansionRegionActivationImpl::eStaticClass() const
-{
-	return fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getExpansionRegionActivation_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-/*
-Getter & Setter for attribute next
-*/
-int ExpansionRegionActivationImpl::getNext() const 
-{
-	return m_next;
-}
-void ExpansionRegionActivationImpl::setNext(int _next)
-{
-	m_next = _next;
-	
-} 
-
 
 //*********************************
 // Operations
@@ -579,11 +557,23 @@ void ExpansionRegionActivationImpl::terminateGroup(std::shared_ptr<fUML::Semanti
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference activationGroups
-*/
+/* Getter & Setter for attribute next */
+int ExpansionRegionActivationImpl::getNext() const 
+{
+	return m_next;
+}
+void ExpansionRegionActivationImpl::setNext(int _next)
+{
+	m_next = _next;
+	
+}
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference activationGroups */
 std::shared_ptr<Bag<fUML::Semantics::Activities::ExpansionActivationGroup>> ExpansionRegionActivationImpl::getActivationGroups() const
 {
 	if(m_activationGroups == nullptr)
@@ -595,11 +585,7 @@ std::shared_ptr<Bag<fUML::Semantics::Activities::ExpansionActivationGroup>> Expa
     return m_activationGroups;
 }
 
-
-
-/*
-Getter & Setter for reference inputExpansionTokens
-*/
+/* Getter & Setter for reference inputExpansionTokens */
 std::shared_ptr<Bag<fUML::Semantics::Activities::TokenSet>> ExpansionRegionActivationImpl::getInputExpansionTokens() const
 {
 	if(m_inputExpansionTokens == nullptr)
@@ -611,11 +597,7 @@ std::shared_ptr<Bag<fUML::Semantics::Activities::TokenSet>> ExpansionRegionActiv
     return m_inputExpansionTokens;
 }
 
-
-
-/*
-Getter & Setter for reference inputTokens
-*/
+/* Getter & Setter for reference inputTokens */
 std::shared_ptr<Bag<fUML::Semantics::Activities::TokenSet>> ExpansionRegionActivationImpl::getInputTokens() const
 {
 	if(m_inputTokens == nullptr)
@@ -626,8 +608,6 @@ std::shared_ptr<Bag<fUML::Semantics::Activities::TokenSet>> ExpansionRegionActiv
 	}
     return m_inputTokens;
 }
-
-
 
 //*********************************
 // Union Getter
@@ -647,18 +627,9 @@ std::shared_ptr<Union<fUML::Semantics::Actions::PinActivation>> ExpansionRegionA
 	return m_pinActivation;
 }
 
-
-
-
-std::shared_ptr<ExpansionRegionActivation> ExpansionRegionActivationImpl::getThisExpansionRegionActivationPtr() const
-{
-	return m_thisExpansionRegionActivationPtr.lock();
-}
-void ExpansionRegionActivationImpl::setThisExpansionRegionActivationPtr(std::weak_ptr<ExpansionRegionActivation> thisExpansionRegionActivationPtr)
-{
-	m_thisExpansionRegionActivationPtr = thisExpansionRegionActivationPtr;
-	setThisActionActivationPtr(thisExpansionRegionActivationPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> ExpansionRegionActivationImpl::eContainer() const
 {
 	if(auto wp = m_group.lock())
@@ -669,7 +640,171 @@ std::shared_ptr<ecore::EObject> ExpansionRegionActivationImpl::eContainer() cons
 }
 
 //*********************************
-// Structural Feature Getter/Setter
+// Persistence Functions
+//*********************************
+void ExpansionRegionActivationImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get fUMLFactory
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
+	}
+}		
+
+void ExpansionRegionActivationImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+	try
+	{
+		std::map<std::string, std::string>::const_iterator iter;
+	
+		iter = attr_list.find("next");
+		if ( iter != attr_list.end() )
+		{
+			// this attribute is a 'int'
+			int value;
+			std::istringstream ( iter->second ) >> value;
+			this->setNext(value);
+		}
+		std::shared_ptr<ecore::EClass> metaClass = this->eClass(); // get MetaClass
+		iter = attr_list.find("activationGroups");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("activationGroups")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+
+		iter = attr_list.find("inputExpansionTokens");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("inputExpansionTokens")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+
+		iter = attr_list.find("inputTokens");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("inputTokens")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	fUML::Semantics::Actions::ActionActivationImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void ExpansionRegionActivationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+
+	//load BasePackage Nodes
+	fUML::Semantics::Actions::ActionActivationImpl::loadNode(nodeName, loadHandler);
+}
+
+void ExpansionRegionActivationImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+{
+	switch(featureID)
+	{
+		case fUML::Semantics::Activities::ActivitiesPackage::EXPANSIONREGIONACTIVATION_ATTRIBUTE_ACTIVATIONGROUPS:
+		{
+			std::shared_ptr<Bag<fUML::Semantics::Activities::ExpansionActivationGroup>> _activationGroups = getActivationGroups();
+			for(std::shared_ptr<ecore::EObject> ref : references)
+			{
+				std::shared_ptr<fUML::Semantics::Activities::ExpansionActivationGroup>  _r = std::dynamic_pointer_cast<fUML::Semantics::Activities::ExpansionActivationGroup>(ref);
+				if (_r != nullptr)
+				{
+					_activationGroups->push_back(_r);
+				}
+			}
+			return;
+		}
+
+		case fUML::Semantics::Activities::ActivitiesPackage::EXPANSIONREGIONACTIVATION_ATTRIBUTE_INPUTEXPANSIONTOKENS:
+		{
+			std::shared_ptr<Bag<fUML::Semantics::Activities::TokenSet>> _inputExpansionTokens = getInputExpansionTokens();
+			for(std::shared_ptr<ecore::EObject> ref : references)
+			{
+				std::shared_ptr<fUML::Semantics::Activities::TokenSet>  _r = std::dynamic_pointer_cast<fUML::Semantics::Activities::TokenSet>(ref);
+				if (_r != nullptr)
+				{
+					_inputExpansionTokens->push_back(_r);
+				}
+			}
+			return;
+		}
+
+		case fUML::Semantics::Activities::ActivitiesPackage::EXPANSIONREGIONACTIVATION_ATTRIBUTE_INPUTTOKENS:
+		{
+			std::shared_ptr<Bag<fUML::Semantics::Activities::TokenSet>> _inputTokens = getInputTokens();
+			for(std::shared_ptr<ecore::EObject> ref : references)
+			{
+				std::shared_ptr<fUML::Semantics::Activities::TokenSet>  _r = std::dynamic_pointer_cast<fUML::Semantics::Activities::TokenSet>(ref);
+				if (_r != nullptr)
+				{
+					_inputTokens->push_back(_r);
+				}
+			}
+			return;
+		}
+	}
+	fUML::Semantics::Actions::ActionActivationImpl::resolveReferences(featureID, references);
+}
+
+void ExpansionRegionActivationImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	fUML::Semantics::Actions::ActionActivationImpl::saveContent(saveHandler);
+	
+	ActivityNodeActivationImpl::saveContent(saveHandler);
+	
+	fUML::Semantics::Loci::SemanticVisitorImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+}
+
+void ExpansionRegionActivationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<fUML::Semantics::Activities::ActivitiesPackage> package = fUML::Semantics::Activities::ActivitiesPackage::eInstance();
+		// Add attributes
+		if ( this->eIsSet(package->getExpansionRegionActivation_Attribute_next()) )
+		{
+			saveHandler->addAttribute("next", this->getNext());
+		}
+	// Add references
+		saveHandler->addReferences<fUML::Semantics::Activities::ExpansionActivationGroup>("activationGroups", this->getActivationGroups());
+		saveHandler->addReferences<fUML::Semantics::Activities::TokenSet>("inputExpansionTokens", this->getInputExpansionTokens());
+		saveHandler->addReferences<fUML::Semantics::Activities::TokenSet>("inputTokens", this->getInputTokens());
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+}
+
+
+std::shared_ptr<ecore::EClass> ExpansionRegionActivationImpl::eStaticClass() const
+{
+	return fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getExpansionRegionActivation_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
 //*********************************
 Any ExpansionRegionActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
@@ -716,6 +851,7 @@ Any ExpansionRegionActivationImpl::eGet(int featureID, bool resolve, bool coreTy
 	}
 	return fUML::Semantics::Actions::ActionActivationImpl::eGet(featureID, resolve, coreType);
 }
+
 bool ExpansionRegionActivationImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
@@ -731,6 +867,7 @@ bool ExpansionRegionActivationImpl::internalEIsSet(int featureID) const
 	}
 	return fUML::Semantics::Actions::ActionActivationImpl::internalEIsSet(featureID);
 }
+
 bool ExpansionRegionActivationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
@@ -856,7 +993,7 @@ bool ExpansionRegionActivationImpl::eSet(int featureID, Any newValue)
 }
 
 //*********************************
-// Behavioral Feature
+// EOperation Invoke
 //*********************************
 Any ExpansionRegionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
 {
@@ -996,163 +1133,13 @@ Any ExpansionRegionActivationImpl::eInvoke(int operationID, std::shared_ptr<std:
 	return result;
 }
 
-//*********************************
-// Persistence Functions
-//*********************************
-void ExpansionRegionActivationImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+
+std::shared_ptr<ExpansionRegionActivation> ExpansionRegionActivationImpl::getThisExpansionRegionActivationPtr() const
 {
-	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
-	loadAttributes(loadHandler, attr_list);
-
-	//
-	// Create new objects (from references (containment == true))
-	//
-	// get fUMLFactory
-	int numNodes = loadHandler->getNumOfChildNodes();
-	for(int ii = 0; ii < numNodes; ii++)
-	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler);
-	}
-}		
-
-void ExpansionRegionActivationImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
-{
-	try
-	{
-		std::map<std::string, std::string>::const_iterator iter;
-	
-		iter = attr_list.find("next");
-		if ( iter != attr_list.end() )
-		{
-			// this attribute is a 'int'
-			int value;
-			std::istringstream ( iter->second ) >> value;
-			this->setNext(value);
-		}
-		std::shared_ptr<ecore::EClass> metaClass = this->eClass(); // get MetaClass
-		iter = attr_list.find("activationGroups");
-		if ( iter != attr_list.end() )
-		{
-			// add unresolvedReference to loadHandler's list
-			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("activationGroups")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
-		}
-
-		iter = attr_list.find("inputExpansionTokens");
-		if ( iter != attr_list.end() )
-		{
-			// add unresolvedReference to loadHandler's list
-			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("inputExpansionTokens")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
-		}
-
-		iter = attr_list.find("inputTokens");
-		if ( iter != attr_list.end() )
-		{
-			// add unresolvedReference to loadHandler's list
-			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("inputTokens")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
-		}
-	}
-	catch (std::exception& e)
-	{
-		std::cout << "| ERROR    | " << e.what() << std::endl;
-	}
-	catch (...) 
-	{
-		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
-	}
-
-	fUML::Semantics::Actions::ActionActivationImpl::loadAttributes(loadHandler, attr_list);
+	return m_thisExpansionRegionActivationPtr.lock();
 }
-
-void ExpansionRegionActivationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+void ExpansionRegionActivationImpl::setThisExpansionRegionActivationPtr(std::weak_ptr<ExpansionRegionActivation> thisExpansionRegionActivationPtr)
 {
-
-	//load BasePackage Nodes
-	fUML::Semantics::Actions::ActionActivationImpl::loadNode(nodeName, loadHandler);
+	m_thisExpansionRegionActivationPtr = thisExpansionRegionActivationPtr;
+	setThisActionActivationPtr(thisExpansionRegionActivationPtr);
 }
-
-void ExpansionRegionActivationImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
-{
-	switch(featureID)
-	{
-		case fUML::Semantics::Activities::ActivitiesPackage::EXPANSIONREGIONACTIVATION_ATTRIBUTE_ACTIVATIONGROUPS:
-		{
-			std::shared_ptr<Bag<fUML::Semantics::Activities::ExpansionActivationGroup>> _activationGroups = getActivationGroups();
-			for(std::shared_ptr<ecore::EObject> ref : references)
-			{
-				std::shared_ptr<fUML::Semantics::Activities::ExpansionActivationGroup>  _r = std::dynamic_pointer_cast<fUML::Semantics::Activities::ExpansionActivationGroup>(ref);
-				if (_r != nullptr)
-				{
-					_activationGroups->push_back(_r);
-				}
-			}
-			return;
-		}
-
-		case fUML::Semantics::Activities::ActivitiesPackage::EXPANSIONREGIONACTIVATION_ATTRIBUTE_INPUTEXPANSIONTOKENS:
-		{
-			std::shared_ptr<Bag<fUML::Semantics::Activities::TokenSet>> _inputExpansionTokens = getInputExpansionTokens();
-			for(std::shared_ptr<ecore::EObject> ref : references)
-			{
-				std::shared_ptr<fUML::Semantics::Activities::TokenSet>  _r = std::dynamic_pointer_cast<fUML::Semantics::Activities::TokenSet>(ref);
-				if (_r != nullptr)
-				{
-					_inputExpansionTokens->push_back(_r);
-				}
-			}
-			return;
-		}
-
-		case fUML::Semantics::Activities::ActivitiesPackage::EXPANSIONREGIONACTIVATION_ATTRIBUTE_INPUTTOKENS:
-		{
-			std::shared_ptr<Bag<fUML::Semantics::Activities::TokenSet>> _inputTokens = getInputTokens();
-			for(std::shared_ptr<ecore::EObject> ref : references)
-			{
-				std::shared_ptr<fUML::Semantics::Activities::TokenSet>  _r = std::dynamic_pointer_cast<fUML::Semantics::Activities::TokenSet>(ref);
-				if (_r != nullptr)
-				{
-					_inputTokens->push_back(_r);
-				}
-			}
-			return;
-		}
-	}
-	fUML::Semantics::Actions::ActionActivationImpl::resolveReferences(featureID, references);
-}
-
-void ExpansionRegionActivationImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
-{
-	saveContent(saveHandler);
-
-	fUML::Semantics::Actions::ActionActivationImpl::saveContent(saveHandler);
-	
-	ActivityNodeActivationImpl::saveContent(saveHandler);
-	
-	fUML::Semantics::Loci::SemanticVisitorImpl::saveContent(saveHandler);
-	
-	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-}
-
-void ExpansionRegionActivationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
-{
-	try
-	{
-		std::shared_ptr<fUML::Semantics::Activities::ActivitiesPackage> package = fUML::Semantics::Activities::ActivitiesPackage::eInstance();
-		// Add attributes
-		if ( this->eIsSet(package->getExpansionRegionActivation_Attribute_next()) )
-		{
-			saveHandler->addAttribute("next", this->getNext());
-		}
-	// Add references
-		saveHandler->addReferences<fUML::Semantics::Activities::ExpansionActivationGroup>("activationGroups", this->getActivationGroups());
-		saveHandler->addReferences<fUML::Semantics::Activities::TokenSet>("inputExpansionTokens", this->getInputExpansionTokens());
-		saveHandler->addReferences<fUML::Semantics::Activities::TokenSet>("inputTokens", this->getInputTokens());
-	}
-	catch (std::exception& e)
-	{
-		std::cout << "| ERROR    | " << e.what() << std::endl;
-	}
-}
-

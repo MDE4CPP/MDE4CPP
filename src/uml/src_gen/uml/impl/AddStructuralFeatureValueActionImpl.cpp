@@ -1,3 +1,4 @@
+
 #include "uml/impl/AddStructuralFeatureValueActionImpl.hpp"
 
 #ifdef NDEBUG
@@ -26,7 +27,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -34,7 +34,6 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-
 
 #include "uml/Activity.hpp"
 #include "uml/ActivityEdge.hpp"
@@ -160,28 +159,6 @@ std::shared_ptr<ecore::EObject> AddStructuralFeatureValueActionImpl::copy() cons
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> AddStructuralFeatureValueActionImpl::eStaticClass() const
-{
-	return uml::umlPackage::eInstance()->getAddStructuralFeatureValueAction_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-/*
-Getter & Setter for attribute isReplaceAll
-*/
-bool AddStructuralFeatureValueActionImpl::getIsReplaceAll() const 
-{
-	return m_isReplaceAll;
-}
-void AddStructuralFeatureValueActionImpl::setIsReplaceAll(bool _isReplaceAll)
-{
-	m_isReplaceAll = _isReplaceAll;
-	
-} 
-
-
 //*********************************
 // Operations
 //*********************************
@@ -198,11 +175,23 @@ bool AddStructuralFeatureValueActionImpl::required_value(Any diagnostics,std::sh
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference insertAt
-*/
+/* Getter & Setter for attribute isReplaceAll */
+bool AddStructuralFeatureValueActionImpl::getIsReplaceAll() const 
+{
+	return m_isReplaceAll;
+}
+void AddStructuralFeatureValueActionImpl::setIsReplaceAll(bool _isReplaceAll)
+{
+	m_isReplaceAll = _isReplaceAll;
+	
+}
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference insertAt */
 std::shared_ptr<uml::InputPin> AddStructuralFeatureValueActionImpl::getInsertAt() const
 {
     return m_insertAt;
@@ -212,7 +201,6 @@ void AddStructuralFeatureValueActionImpl::setInsertAt(std::shared_ptr<uml::Input
     m_insertAt = _insertAt;
 	
 }
-
 
 //*********************************
 // Union Getter
@@ -307,18 +295,9 @@ std::shared_ptr<Union<uml::RedefinableElement>> AddStructuralFeatureValueActionI
 	return m_redefinedElement;
 }
 
-
-
-
-std::shared_ptr<AddStructuralFeatureValueAction> AddStructuralFeatureValueActionImpl::getThisAddStructuralFeatureValueActionPtr() const
-{
-	return m_thisAddStructuralFeatureValueActionPtr.lock();
-}
-void AddStructuralFeatureValueActionImpl::setThisAddStructuralFeatureValueActionPtr(std::weak_ptr<AddStructuralFeatureValueAction> thisAddStructuralFeatureValueActionPtr)
-{
-	m_thisAddStructuralFeatureValueActionPtr = thisAddStructuralFeatureValueActionPtr;
-	setThisWriteStructuralFeatureActionPtr(thisAddStructuralFeatureValueActionPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> AddStructuralFeatureValueActionImpl::eContainer() const
 {
 	if(auto wp = m_activity.lock())
@@ -341,115 +320,6 @@ std::shared_ptr<ecore::EObject> AddStructuralFeatureValueActionImpl::eContainer(
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any AddStructuralFeatureValueActionImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::ADDSTRUCTURALFEATUREVALUEACTION_ATTRIBUTE_INSERTAT:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getInsertAt();
-				return eAny(returnValue); //1531
-			}
-		case uml::umlPackage::ADDSTRUCTURALFEATUREVALUEACTION_ATTRIBUTE_ISREPLACEALL:
-			return eAny(getIsReplaceAll()); //1532
-	}
-	return WriteStructuralFeatureActionImpl::eGet(featureID, resolve, coreType);
-}
-bool AddStructuralFeatureValueActionImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::ADDSTRUCTURALFEATUREVALUEACTION_ATTRIBUTE_INSERTAT:
-			return getInsertAt() != nullptr; //1531
-		case uml::umlPackage::ADDSTRUCTURALFEATUREVALUEACTION_ATTRIBUTE_ISREPLACEALL:
-			return getIsReplaceAll() != false; //1532
-	}
-	return WriteStructuralFeatureActionImpl::internalEIsSet(featureID);
-}
-bool AddStructuralFeatureValueActionImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::ADDSTRUCTURALFEATUREVALUEACTION_ATTRIBUTE_INSERTAT:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::InputPin> _insertAt = std::dynamic_pointer_cast<uml::InputPin>(_temp);
-			setInsertAt(_insertAt); //1531
-			return true;
-		}
-		case uml::umlPackage::ADDSTRUCTURALFEATUREVALUEACTION_ATTRIBUTE_ISREPLACEALL:
-		{
-			// BOOST CAST
-			bool _isReplaceAll = newValue->get<bool>();
-			setIsReplaceAll(_isReplaceAll); //1532
-			return true;
-		}
-	}
-
-	return WriteStructuralFeatureActionImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any AddStructuralFeatureValueActionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-		
-		// 1640724037
-		case umlPackage::ADDSTRUCTURALFEATUREVALUEACTION_OPERATION_INSERTAT_PIN_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->insertAt_pin(incoming_param_diagnostics,incoming_param_context));
-			break;
-		}
-		
-		// 1001714799
-		case umlPackage::ADDSTRUCTURALFEATUREVALUEACTION_OPERATION_REQUIRED_VALUE_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->required_value(incoming_param_diagnostics,incoming_param_context));
-			break;
-		}
-
-		default:
-		{
-			// call superTypes
-			result = WriteStructuralFeatureActionImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -555,15 +425,6 @@ void AddStructuralFeatureValueActionImpl::save(std::shared_ptr<persistence::inte
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
-	
-	
-	
-	
-	
 }
 
 void AddStructuralFeatureValueActionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -589,3 +450,131 @@ void AddStructuralFeatureValueActionImpl::saveContent(std::shared_ptr<persistenc
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> AddStructuralFeatureValueActionImpl::eStaticClass() const
+{
+	return uml::umlPackage::eInstance()->getAddStructuralFeatureValueAction_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any AddStructuralFeatureValueActionImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::ADDSTRUCTURALFEATUREVALUEACTION_ATTRIBUTE_INSERTAT:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getInsertAt();
+				return eAny(returnValue); //1531
+			}
+		case uml::umlPackage::ADDSTRUCTURALFEATUREVALUEACTION_ATTRIBUTE_ISREPLACEALL:
+			return eAny(getIsReplaceAll()); //1532
+	}
+	return WriteStructuralFeatureActionImpl::eGet(featureID, resolve, coreType);
+}
+
+bool AddStructuralFeatureValueActionImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::ADDSTRUCTURALFEATUREVALUEACTION_ATTRIBUTE_INSERTAT:
+			return getInsertAt() != nullptr; //1531
+		case uml::umlPackage::ADDSTRUCTURALFEATUREVALUEACTION_ATTRIBUTE_ISREPLACEALL:
+			return getIsReplaceAll() != false; //1532
+	}
+	return WriteStructuralFeatureActionImpl::internalEIsSet(featureID);
+}
+
+bool AddStructuralFeatureValueActionImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::ADDSTRUCTURALFEATUREVALUEACTION_ATTRIBUTE_INSERTAT:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::InputPin> _insertAt = std::dynamic_pointer_cast<uml::InputPin>(_temp);
+			setInsertAt(_insertAt); //1531
+			return true;
+		}
+		case uml::umlPackage::ADDSTRUCTURALFEATUREVALUEACTION_ATTRIBUTE_ISREPLACEALL:
+		{
+			// BOOST CAST
+			bool _isReplaceAll = newValue->get<bool>();
+			setIsReplaceAll(_isReplaceAll); //1532
+			return true;
+		}
+	}
+
+	return WriteStructuralFeatureActionImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any AddStructuralFeatureValueActionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 1640724037
+		case umlPackage::ADDSTRUCTURALFEATUREVALUEACTION_OPERATION_INSERTAT_PIN_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->insertAt_pin(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+		
+		// 1001714799
+		case umlPackage::ADDSTRUCTURALFEATUREVALUEACTION_OPERATION_REQUIRED_VALUE_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->required_value(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = WriteStructuralFeatureActionImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<AddStructuralFeatureValueAction> AddStructuralFeatureValueActionImpl::getThisAddStructuralFeatureValueActionPtr() const
+{
+	return m_thisAddStructuralFeatureValueActionPtr.lock();
+}
+void AddStructuralFeatureValueActionImpl::setThisAddStructuralFeatureValueActionPtr(std::weak_ptr<AddStructuralFeatureValueAction> thisAddStructuralFeatureValueActionPtr)
+{
+	m_thisAddStructuralFeatureValueActionPtr = thisAddStructuralFeatureValueActionPtr;
+	setThisWriteStructuralFeatureActionPtr(thisAddStructuralFeatureValueActionPtr);
+}

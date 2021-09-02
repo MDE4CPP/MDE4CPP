@@ -1,3 +1,4 @@
+
 #include "ocl/Evaluations/impl/LiteralExpEvalImpl.hpp"
 
 #ifdef NDEBUG
@@ -24,19 +25,17 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "fUML/Semantics/Values/ValuesFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
 #include "uml/umlFactory.hpp"
+#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
-
 
 #include "ocl/Evaluations/EvalEnvironment.hpp"
 #include "fUML/Semantics/Loci/Locus.hpp"
@@ -116,90 +115,28 @@ std::shared_ptr<ecore::EObject> LiteralExpEvalImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> LiteralExpEvalImpl::eStaticClass() const
-{
-	return ocl::Evaluations::EvaluationsPackage::eInstance()->getLiteralExpEval_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
 
 //*********************************
-// References
+// Attribute Getters & Setters
+//*********************************
+
+//*********************************
+// Reference Getters & Setters
 //*********************************
 
 //*********************************
 // Union Getter
 //*********************************
 
-
-
-std::shared_ptr<LiteralExpEval> LiteralExpEvalImpl::getThisLiteralExpEvalPtr() const
-{
-	return m_thisLiteralExpEvalPtr.lock();
-}
-void LiteralExpEvalImpl::setThisLiteralExpEvalPtr(std::weak_ptr<LiteralExpEval> thisLiteralExpEvalPtr)
-{
-	m_thisLiteralExpEvalPtr = thisLiteralExpEvalPtr;
-	setThisOclExpEvalPtr(thisLiteralExpEvalPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> LiteralExpEvalImpl::eContainer() const
 {
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any LiteralExpEvalImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-	}
-	return OclExpEvalImpl::eGet(featureID, resolve, coreType);
-}
-bool LiteralExpEvalImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-	}
-	return OclExpEvalImpl::internalEIsSet(featureID);
-}
-bool LiteralExpEvalImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-	}
-
-	return OclExpEvalImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any LiteralExpEvalImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-
-		default:
-		{
-			// call superTypes
-			result = OclExpEvalImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -250,9 +187,6 @@ void LiteralExpEvalImpl::save(std::shared_ptr<persistence::interfaces::XSaveHand
 	fUML::Semantics::Loci::SemanticVisitorImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
 }
 
 void LiteralExpEvalImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -267,3 +201,71 @@ void LiteralExpEvalImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> LiteralExpEvalImpl::eStaticClass() const
+{
+	return ocl::Evaluations::EvaluationsPackage::eInstance()->getLiteralExpEval_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any LiteralExpEvalImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+	}
+	return OclExpEvalImpl::eGet(featureID, resolve, coreType);
+}
+
+bool LiteralExpEvalImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+	}
+	return OclExpEvalImpl::internalEIsSet(featureID);
+}
+
+bool LiteralExpEvalImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+	}
+
+	return OclExpEvalImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any LiteralExpEvalImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+
+		default:
+		{
+			// call superTypes
+			result = OclExpEvalImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<LiteralExpEval> LiteralExpEvalImpl::getThisLiteralExpEvalPtr() const
+{
+	return m_thisLiteralExpEvalPtr.lock();
+}
+void LiteralExpEvalImpl::setThisLiteralExpEvalPtr(std::weak_ptr<LiteralExpEval> thisLiteralExpEvalPtr)
+{
+	m_thisLiteralExpEvalPtr = thisLiteralExpEvalPtr;
+	setThisOclExpEvalPtr(thisLiteralExpEvalPtr);
+}

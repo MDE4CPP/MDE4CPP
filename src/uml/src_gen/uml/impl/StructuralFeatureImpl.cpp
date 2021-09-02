@@ -1,3 +1,4 @@
+
 #include "uml/impl/StructuralFeatureImpl.hpp"
 
 #ifdef NDEBUG
@@ -25,7 +26,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -33,7 +33,6 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-
 
 #include "uml/Classifier.hpp"
 #include "uml/Comment.hpp"
@@ -131,17 +130,14 @@ std::shared_ptr<ecore::EObject> StructuralFeatureImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> StructuralFeatureImpl::eStaticClass() const
-{
-	return uml::umlPackage::eInstance()->getStructuralFeature_Class();
-}
+//*********************************
+// Operations
+//*********************************
 
 //*********************************
-// Attribute Setter Getter
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for attribute isReadOnly
-*/
+/* Getter & Setter for attribute isReadOnly */
 bool StructuralFeatureImpl::getIsReadOnly() const 
 {
 	return m_isReadOnly;
@@ -150,15 +146,10 @@ void StructuralFeatureImpl::setIsReadOnly(bool _isReadOnly)
 {
 	m_isReadOnly = _isReadOnly;
 	
-} 
-
-
-//*********************************
-// Operations
-//*********************************
+}
 
 //*********************************
-// References
+// Reference Getters & Setters
 //*********************************
 
 //*********************************
@@ -184,20 +175,9 @@ std::weak_ptr<uml::Element> StructuralFeatureImpl::getOwner() const
 	return m_owner;
 }
 
-
-
-
-std::shared_ptr<StructuralFeature> StructuralFeatureImpl::getThisStructuralFeaturePtr() const
-{
-	return m_thisStructuralFeaturePtr.lock();
-}
-void StructuralFeatureImpl::setThisStructuralFeaturePtr(std::weak_ptr<StructuralFeature> thisStructuralFeaturePtr)
-{
-	m_thisStructuralFeaturePtr = thisStructuralFeaturePtr;
-	setThisFeaturePtr(thisStructuralFeaturePtr);
-	setThisMultiplicityElementPtr(thisStructuralFeaturePtr);
-	setThisTypedElementPtr(thisStructuralFeaturePtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> StructuralFeatureImpl::eContainer() const
 {
 	if(auto wp = m_namespace.lock())
@@ -210,108 +190,6 @@ std::shared_ptr<ecore::EObject> StructuralFeatureImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any StructuralFeatureImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::STRUCTURALFEATURE_ATTRIBUTE_ISREADONLY:
-			return eAny(getIsReadOnly()); //22521
-	}
-	Any result;
-	result = FeatureImpl::eGet(featureID, resolve, coreType);
-	if (result != nullptr && !result->isEmpty())
-	{
-		return result;
-	}
-	result = MultiplicityElementImpl::eGet(featureID, resolve, coreType);
-	if (result != nullptr && !result->isEmpty())
-	{
-		return result;
-	}
-	result = TypedElementImpl::eGet(featureID, resolve, coreType);
-	return result;
-}
-bool StructuralFeatureImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::STRUCTURALFEATURE_ATTRIBUTE_ISREADONLY:
-			return getIsReadOnly() != false; //22521
-	}
-	bool result = false;
-	result = FeatureImpl::internalEIsSet(featureID);
-	if (result)
-	{
-		return result;
-	}
-	result = MultiplicityElementImpl::internalEIsSet(featureID);
-	if (result)
-	{
-		return result;
-	}
-	result = TypedElementImpl::internalEIsSet(featureID);
-	return result;
-}
-bool StructuralFeatureImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::STRUCTURALFEATURE_ATTRIBUTE_ISREADONLY:
-		{
-			// BOOST CAST
-			bool _isReadOnly = newValue->get<bool>();
-			setIsReadOnly(_isReadOnly); //22521
-			return true;
-		}
-	}
-
-	bool result = false;
-	result = FeatureImpl::eSet(featureID, newValue);
-	if (result)
-	{
-		return result;
-	}
-	result = MultiplicityElementImpl::eSet(featureID, newValue);
-	if (result)
-	{
-		return result;
-	}
-	result = TypedElementImpl::eSet(featureID, newValue);
-	return result;
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any StructuralFeatureImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-
-		default:
-		{
-			// call superTypes
-			result = MultiplicityElementImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			result = TypedElementImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			result = FeatureImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -395,11 +273,6 @@ void StructuralFeatureImpl::save(std::shared_ptr<persistence::interfaces::XSaveH
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
-	
 }
 
 void StructuralFeatureImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -419,3 +292,126 @@ void StructuralFeatureImpl::saveContent(std::shared_ptr<persistence::interfaces:
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> StructuralFeatureImpl::eStaticClass() const
+{
+	return uml::umlPackage::eInstance()->getStructuralFeature_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any StructuralFeatureImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::STRUCTURALFEATURE_ATTRIBUTE_ISREADONLY:
+			return eAny(getIsReadOnly()); //22521
+	}
+	Any result;
+	result = FeatureImpl::eGet(featureID, resolve, coreType);
+	if (result != nullptr && !result->isEmpty())
+	{
+		return result;
+	}
+	result = MultiplicityElementImpl::eGet(featureID, resolve, coreType);
+	if (result != nullptr && !result->isEmpty())
+	{
+		return result;
+	}
+	result = TypedElementImpl::eGet(featureID, resolve, coreType);
+	return result;
+}
+
+bool StructuralFeatureImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::STRUCTURALFEATURE_ATTRIBUTE_ISREADONLY:
+			return getIsReadOnly() != false; //22521
+	}
+	bool result = false;
+	result = FeatureImpl::internalEIsSet(featureID);
+	if (result)
+	{
+		return result;
+	}
+	result = MultiplicityElementImpl::internalEIsSet(featureID);
+	if (result)
+	{
+		return result;
+	}
+	result = TypedElementImpl::internalEIsSet(featureID);
+	return result;
+}
+
+bool StructuralFeatureImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::STRUCTURALFEATURE_ATTRIBUTE_ISREADONLY:
+		{
+			// BOOST CAST
+			bool _isReadOnly = newValue->get<bool>();
+			setIsReadOnly(_isReadOnly); //22521
+			return true;
+		}
+	}
+
+	bool result = false;
+	result = FeatureImpl::eSet(featureID, newValue);
+	if (result)
+	{
+		return result;
+	}
+	result = MultiplicityElementImpl::eSet(featureID, newValue);
+	if (result)
+	{
+		return result;
+	}
+	result = TypedElementImpl::eSet(featureID, newValue);
+	return result;
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any StructuralFeatureImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+
+		default:
+		{
+			// call superTypes
+			result = MultiplicityElementImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			result = TypedElementImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			result = FeatureImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<StructuralFeature> StructuralFeatureImpl::getThisStructuralFeaturePtr() const
+{
+	return m_thisStructuralFeaturePtr.lock();
+}
+void StructuralFeatureImpl::setThisStructuralFeaturePtr(std::weak_ptr<StructuralFeature> thisStructuralFeaturePtr)
+{
+	m_thisStructuralFeaturePtr = thisStructuralFeaturePtr;
+	setThisFeaturePtr(thisStructuralFeaturePtr);
+	setThisMultiplicityElementPtr(thisStructuralFeaturePtr);
+	setThisTypedElementPtr(thisStructuralFeaturePtr);
+}

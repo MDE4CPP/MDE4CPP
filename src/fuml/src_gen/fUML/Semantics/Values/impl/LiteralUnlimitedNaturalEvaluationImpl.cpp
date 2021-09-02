@@ -1,3 +1,4 @@
+
 #include "fUML/Semantics/Values/impl/LiteralUnlimitedNaturalEvaluationImpl.hpp"
 
 #ifdef NDEBUG
@@ -37,7 +38,6 @@
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
-
 
 #include "fUML/Semantics/Values/LiteralEvaluation.hpp"
 #include "fUML/Semantics/Loci/Locus.hpp"
@@ -114,15 +114,6 @@ std::shared_ptr<ecore::EObject> LiteralUnlimitedNaturalEvaluationImpl::copy() co
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> LiteralUnlimitedNaturalEvaluationImpl::eStaticClass() const
-{
-	return fUML::Semantics::Values::ValuesPackage::eInstance()->getLiteralUnlimitedNaturalEvaluation_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
@@ -138,83 +129,23 @@ std::shared_ptr<fUML::Semantics::Values::Value> LiteralUnlimitedNaturalEvaluatio
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
+//*********************************
+
+//*********************************
+// Reference Getters & Setters
 //*********************************
 
 //*********************************
 // Union Getter
 //*********************************
 
-
-
-std::shared_ptr<LiteralUnlimitedNaturalEvaluation> LiteralUnlimitedNaturalEvaluationImpl::getThisLiteralUnlimitedNaturalEvaluationPtr() const
-{
-	return m_thisLiteralUnlimitedNaturalEvaluationPtr.lock();
-}
-void LiteralUnlimitedNaturalEvaluationImpl::setThisLiteralUnlimitedNaturalEvaluationPtr(std::weak_ptr<LiteralUnlimitedNaturalEvaluation> thisLiteralUnlimitedNaturalEvaluationPtr)
-{
-	m_thisLiteralUnlimitedNaturalEvaluationPtr = thisLiteralUnlimitedNaturalEvaluationPtr;
-	setThisLiteralEvaluationPtr(thisLiteralUnlimitedNaturalEvaluationPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> LiteralUnlimitedNaturalEvaluationImpl::eContainer() const
 {
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any LiteralUnlimitedNaturalEvaluationImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-	}
-	return LiteralEvaluationImpl::eGet(featureID, resolve, coreType);
-}
-bool LiteralUnlimitedNaturalEvaluationImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-	}
-	return LiteralEvaluationImpl::internalEIsSet(featureID);
-}
-bool LiteralUnlimitedNaturalEvaluationImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-	}
-
-	return LiteralEvaluationImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any LiteralUnlimitedNaturalEvaluationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-		
-		// 1159124191
-		case ValuesPackage::LITERALUNLIMITEDNATURALEVALUATION_OPERATION_EVALUATE:
-		{
-			result = eAny(this->evaluate());
-			break;
-		}
-
-		default:
-		{
-			// call superTypes
-			result = LiteralEvaluationImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -265,9 +196,6 @@ void LiteralUnlimitedNaturalEvaluationImpl::save(std::shared_ptr<persistence::in
 	fUML::Semantics::Loci::SemanticVisitorImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
 }
 
 void LiteralUnlimitedNaturalEvaluationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -282,3 +210,78 @@ void LiteralUnlimitedNaturalEvaluationImpl::saveContent(std::shared_ptr<persiste
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> LiteralUnlimitedNaturalEvaluationImpl::eStaticClass() const
+{
+	return fUML::Semantics::Values::ValuesPackage::eInstance()->getLiteralUnlimitedNaturalEvaluation_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any LiteralUnlimitedNaturalEvaluationImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+	}
+	return LiteralEvaluationImpl::eGet(featureID, resolve, coreType);
+}
+
+bool LiteralUnlimitedNaturalEvaluationImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+	}
+	return LiteralEvaluationImpl::internalEIsSet(featureID);
+}
+
+bool LiteralUnlimitedNaturalEvaluationImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+	}
+
+	return LiteralEvaluationImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any LiteralUnlimitedNaturalEvaluationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 1159124191
+		case ValuesPackage::LITERALUNLIMITEDNATURALEVALUATION_OPERATION_EVALUATE:
+		{
+			result = eAny(this->evaluate());
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = LiteralEvaluationImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<LiteralUnlimitedNaturalEvaluation> LiteralUnlimitedNaturalEvaluationImpl::getThisLiteralUnlimitedNaturalEvaluationPtr() const
+{
+	return m_thisLiteralUnlimitedNaturalEvaluationPtr.lock();
+}
+void LiteralUnlimitedNaturalEvaluationImpl::setThisLiteralUnlimitedNaturalEvaluationPtr(std::weak_ptr<LiteralUnlimitedNaturalEvaluation> thisLiteralUnlimitedNaturalEvaluationPtr)
+{
+	m_thisLiteralUnlimitedNaturalEvaluationPtr = thisLiteralUnlimitedNaturalEvaluationPtr;
+	setThisLiteralEvaluationPtr(thisLiteralUnlimitedNaturalEvaluationPtr);
+}

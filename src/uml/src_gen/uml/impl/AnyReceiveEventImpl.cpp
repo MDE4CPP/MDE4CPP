@@ -1,3 +1,4 @@
+
 #include "uml/impl/AnyReceiveEventImpl.hpp"
 
 #ifdef NDEBUG
@@ -25,7 +26,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -33,7 +33,6 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-
 
 #include "uml/Comment.hpp"
 #include "uml/Dependency.hpp"
@@ -140,21 +139,16 @@ std::shared_ptr<ecore::EObject> AnyReceiveEventImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> AnyReceiveEventImpl::eStaticClass() const
-{
-	return uml::umlPackage::eInstance()->getAnyReceiveEvent_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
 
 //*********************************
-// References
+// Attribute Getters & Setters
+//*********************************
+
+//*********************************
+// Reference Getters & Setters
 //*********************************
 
 //*********************************
@@ -187,16 +181,9 @@ std::weak_ptr<uml::Element> AnyReceiveEventImpl::getOwner() const
 
 
 
-
-std::shared_ptr<AnyReceiveEvent> AnyReceiveEventImpl::getThisAnyReceiveEventPtr() const
-{
-	return m_thisAnyReceiveEventPtr.lock();
-}
-void AnyReceiveEventImpl::setThisAnyReceiveEventPtr(std::weak_ptr<AnyReceiveEvent> thisAnyReceiveEventPtr)
-{
-	m_thisAnyReceiveEventPtr = thisAnyReceiveEventPtr;
-	setThisMessageEventPtr(thisAnyReceiveEventPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> AnyReceiveEventImpl::eContainer() const
 {
 	if(auto wp = m_namespace.lock())
@@ -219,55 +206,6 @@ std::shared_ptr<ecore::EObject> AnyReceiveEventImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any AnyReceiveEventImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-	}
-	return MessageEventImpl::eGet(featureID, resolve, coreType);
-}
-bool AnyReceiveEventImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-	}
-	return MessageEventImpl::internalEIsSet(featureID);
-}
-bool AnyReceiveEventImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-	}
-
-	return MessageEventImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any AnyReceiveEventImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-
-		default:
-		{
-			// call superTypes
-			result = MessageEventImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -325,12 +263,6 @@ void AnyReceiveEventImpl::save(std::shared_ptr<persistence::interfaces::XSaveHan
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
-	
-	
 }
 
 void AnyReceiveEventImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -345,3 +277,71 @@ void AnyReceiveEventImpl::saveContent(std::shared_ptr<persistence::interfaces::X
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> AnyReceiveEventImpl::eStaticClass() const
+{
+	return uml::umlPackage::eInstance()->getAnyReceiveEvent_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any AnyReceiveEventImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+	}
+	return MessageEventImpl::eGet(featureID, resolve, coreType);
+}
+
+bool AnyReceiveEventImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+	}
+	return MessageEventImpl::internalEIsSet(featureID);
+}
+
+bool AnyReceiveEventImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+	}
+
+	return MessageEventImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any AnyReceiveEventImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+
+		default:
+		{
+			// call superTypes
+			result = MessageEventImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<AnyReceiveEvent> AnyReceiveEventImpl::getThisAnyReceiveEventPtr() const
+{
+	return m_thisAnyReceiveEventPtr.lock();
+}
+void AnyReceiveEventImpl::setThisAnyReceiveEventPtr(std::weak_ptr<AnyReceiveEvent> thisAnyReceiveEventPtr)
+{
+	m_thisAnyReceiveEventPtr = thisAnyReceiveEventPtr;
+	setThisMessageEventPtr(thisAnyReceiveEventPtr);
+}

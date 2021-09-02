@@ -102,12 +102,14 @@ namespace uml
 					 trigger.event.oclAsType(SignalEvent).signal->forAll(s | s.conformsTo(type)))
 			*/
 			 
-			virtual bool conforming_type(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;/*!
+			virtual bool conforming_type(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			/*!
 			AcceptEventActions may have no input pins.
 			input->size() = 0
 			*/
 			 
-			virtual bool no_input_pins(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;/*!
+			virtual bool no_input_pins(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			/*!
 			There are no OutputPins if the trigger events are only ChangeEvents and/or CallEvents when this action is an instance of AcceptEventAction and not an instance of a descendant of AcceptEventAction (such as AcceptCallAction).
 			(self.oclIsTypeOf(AcceptEventAction) and
 			   (trigger->forAll(event.oclIsKindOf(ChangeEvent) or  
@@ -115,13 +117,15 @@ namespace uml
 			implies output->size() = 0
 			*/
 			 
-			virtual bool no_output_pins(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;/*!
+			virtual bool no_output_pins(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			/*!
 			If isUnmarshall=false and any of the triggers are for SignalEvents or TimeEvents, there must be exactly one result OutputPin with multiplicity 1..1.
 			not isUnmarshall and trigger->exists(event.oclIsKindOf(SignalEvent) or event.oclIsKindOf(TimeEvent)) implies 
 				output->size() = 1 and output->first().is(1,1)
 			*/
 			 
-			virtual bool one_output_pin(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;/*!
+			virtual bool one_output_pin(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			/*!
 			If isUnmarshall is true (and this is not an AcceptCallAction), there must be exactly one trigger, which is for a SignalEvent. The number of result output pins must be the same as the number of attributes of the signal. The type and ordering of each result output pin must be the same as the corresponding attribute of the signal. The multiplicity of each result output pin must be compatible with the multiplicity of the corresponding attribute.
 			isUnmarshall and self.oclIsTypeOf(AcceptEventAction) implies
 				trigger->size()=1 and
@@ -135,8 +139,9 @@ namespace uml
 			*/
 			 
 			virtual bool unmarshall_signal_events(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+
 			//*********************************
-			// Attributes Getter & Setter
+			// Attribute Getters & Setters
 			//*********************************
 			/*!
 			Indicates whether there is a single OutputPin for a SignalEvent occurrence, or multiple OutputPins for attribute values of the instance of the Signal associated with a SignalEvent occurrence.
@@ -150,9 +155,9 @@ namespace uml
 			*/
 			 
 			virtual void setIsUnmarshall (bool _isUnmarshall)= 0;
-			
+
 			//*********************************
-			// References Getter & Setter
+			// Reference Getters & Setters
 			//*********************************
 			/*!
 			OutputPins holding the values received from an Event occurrence.
@@ -160,15 +165,58 @@ namespace uml
 			*/
 			
 			virtual std::shared_ptr<Subset<uml::OutputPin, uml::OutputPin>> getResult() const = 0;
-			
 			/*!
 			The Triggers specifying the Events of which the AcceptEventAction waits for occurrences.
 			<p>From package UML::Actions.</p>
 			*/
 			
 			virtual std::shared_ptr<Subset<uml::Trigger, uml::Element>> getTrigger() const = 0;
+
+			//*********************************
+			// Union Reference Getters
+			//*********************************
+			/*!
+			ActivityGroups containing the ActivityNode.
+			<p>From package UML::Activities.</p>
+			*/
 			
+			virtual std::shared_ptr<Union<uml::ActivityGroup>> getInGroup() const = 0;
+			/*!
+			The ordered set of OutputPins representing outputs from the Action.
+			<p>From package UML::Actions.</p>
+			*/
 			
+			virtual std::shared_ptr<SubsetUnion<uml::OutputPin, uml::Element>> getOutput() const = 0;
+			/*!
+			The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
+			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;
+			/*!
+			The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
+			virtual std::weak_ptr<uml::Element> getOwner() const = 0;
+			/*!
+			The RedefinableElement that is being redefined by this element.
+			<p>From package UML::Classification.</p>
+			*/
+			
+			virtual std::shared_ptr<Union<uml::RedefinableElement>> getRedefinedElement() const = 0;
+
+			//*********************************
+			// Container Getter
+			//*********************************
+			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
+
+			//*********************************
+			// Persistence Functions
+			//*********************************
+			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 
 		protected:
 			//*********************************
@@ -179,8 +227,7 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			bool m_isUnmarshall = false;
-			
+			bool m_isUnmarshall= false;
 			
 			//*********************************
 			// Reference Members
@@ -190,55 +237,13 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			mutable std::shared_ptr<Subset<uml::OutputPin, uml::OutputPin>> m_result;/*!
+			mutable std::shared_ptr<Subset<uml::OutputPin, uml::OutputPin>> m_result;
+			/*!
 			The Triggers specifying the Events of which the AcceptEventAction waits for occurrences.
 			<p>From package UML::Actions.</p>
 			*/
 			
 			mutable std::shared_ptr<Subset<uml::Trigger, uml::Element>> m_trigger;
-
-		public:
-			//*********************************
-			// Union Getter
-			//*********************************
-			/*!
-			ActivityGroups containing the ActivityNode.
-			<p>From package UML::Activities.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::ActivityGroup>> getInGroup() const = 0;/*!
-			The ordered set of OutputPins representing outputs from the Action.
-			<p>From package UML::Actions.</p>
-			*/
-			
-			virtual std::shared_ptr<SubsetUnion<uml::OutputPin, uml::Element>> getOutput() const = 0;/*!
-			The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;/*!
-			The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::weak_ptr<uml::Element> getOwner() const = 0;/*!
-			The RedefinableElement that is being redefined by this element.
-			<p>From package UML::Classification.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::RedefinableElement>> getRedefinedElement() const = 0;
-
-			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
-			
-			//*********************************
-			// Persistence Functions
-			//*********************************
-			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
-			
-			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
-			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
-			
 	};
-
 }
 #endif /* end of include guard: UML_ACCEPTEVENTACTION_HPP */

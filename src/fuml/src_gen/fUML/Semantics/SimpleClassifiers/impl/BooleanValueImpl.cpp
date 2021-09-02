@@ -1,3 +1,4 @@
+
 #include "fUML/Semantics/SimpleClassifiers/impl/BooleanValueImpl.hpp"
 
 #ifdef NDEBUG
@@ -38,7 +39,6 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-
 
 #include "uml/PrimitiveType.hpp"
 #include "fUML/Semantics/SimpleClassifiers/PrimitiveValue.hpp"
@@ -116,28 +116,6 @@ std::shared_ptr<ecore::EObject> BooleanValueImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> BooleanValueImpl::eStaticClass() const
-{
-	return fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::eInstance()->getBooleanValue_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-/*
-Getter & Setter for attribute value
-*/
-bool BooleanValueImpl::isValue() const 
-{
-	return m_value;
-}
-void BooleanValueImpl::setValue(bool _value)
-{
-	m_value = _value;
-	
-} 
-
-
 //*********************************
 // Operations
 //*********************************
@@ -197,120 +175,33 @@ std::string BooleanValueImpl::toString()
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
+//*********************************
+/* Getter & Setter for attribute value */
+bool BooleanValueImpl::isValue() const 
+{
+	return m_value;
+}
+void BooleanValueImpl::setValue(bool _value)
+{
+	m_value = _value;
+	
+}
+
+//*********************************
+// Reference Getters & Setters
 //*********************************
 
 //*********************************
 // Union Getter
 //*********************************
 
-
-
-std::shared_ptr<BooleanValue> BooleanValueImpl::getThisBooleanValuePtr() const
-{
-	return m_thisBooleanValuePtr.lock();
-}
-void BooleanValueImpl::setThisBooleanValuePtr(std::weak_ptr<BooleanValue> thisBooleanValuePtr)
-{
-	m_thisBooleanValuePtr = thisBooleanValuePtr;
-	setThisPrimitiveValuePtr(thisBooleanValuePtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> BooleanValueImpl::eContainer() const
 {
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any BooleanValueImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::BOOLEANVALUE_ATTRIBUTE_VALUE:
-			return eAny(isValue()); //131
-	}
-	return PrimitiveValueImpl::eGet(featureID, resolve, coreType);
-}
-bool BooleanValueImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::BOOLEANVALUE_ATTRIBUTE_VALUE:
-			return isValue() != false; //131
-	}
-	return PrimitiveValueImpl::internalEIsSet(featureID);
-}
-bool BooleanValueImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::BOOLEANVALUE_ATTRIBUTE_VALUE:
-		{
-			// BOOST CAST
-			bool _value = newValue->get<bool>();
-			setValue(_value); //131
-			return true;
-		}
-	}
-
-	return PrimitiveValueImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any BooleanValueImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-		
-		// 1222842448
-		case SimpleClassifiersPackage::BOOLEANVALUE_OPERATION__COPY:
-		{
-			result = eAny(this->_copy());
-			break;
-		}
-		
-		// 2145645855
-		case SimpleClassifiersPackage::BOOLEANVALUE_OPERATION_EQUALS_VALUE:
-		{
-			//Retrieve input parameter 'otherValue'
-			//parameter 0
-			std::shared_ptr<fUML::Semantics::Values::Value> incoming_param_otherValue;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_otherValue_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_otherValue = (*incoming_param_otherValue_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::Values::Value> >();
-			result = eAny(this->equals(incoming_param_otherValue));
-			break;
-		}
-		
-		// 2004933041
-		case SimpleClassifiersPackage::BOOLEANVALUE_OPERATION_SPECIFY:
-		{
-			result = eAny(this->specify());
-			break;
-		}
-		
-		// 518253164
-		case SimpleClassifiersPackage::BOOLEANVALUE_OPERATION_TOSTRING:
-		{
-			result = eAny(this->toString());
-			break;
-		}
-
-		default:
-		{
-			// call superTypes
-			result = PrimitiveValueImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -382,9 +273,6 @@ void BooleanValueImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandle
 	fUML::Semantics::Loci::SemanticVisitorImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
 }
 
 void BooleanValueImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -404,3 +292,115 @@ void BooleanValueImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> BooleanValueImpl::eStaticClass() const
+{
+	return fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::eInstance()->getBooleanValue_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any BooleanValueImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::BOOLEANVALUE_ATTRIBUTE_VALUE:
+			return eAny(isValue()); //131
+	}
+	return PrimitiveValueImpl::eGet(featureID, resolve, coreType);
+}
+
+bool BooleanValueImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::BOOLEANVALUE_ATTRIBUTE_VALUE:
+			return isValue() != false; //131
+	}
+	return PrimitiveValueImpl::internalEIsSet(featureID);
+}
+
+bool BooleanValueImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::BOOLEANVALUE_ATTRIBUTE_VALUE:
+		{
+			// BOOST CAST
+			bool _value = newValue->get<bool>();
+			setValue(_value); //131
+			return true;
+		}
+	}
+
+	return PrimitiveValueImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any BooleanValueImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 1222842448
+		case SimpleClassifiersPackage::BOOLEANVALUE_OPERATION__COPY:
+		{
+			result = eAny(this->_copy());
+			break;
+		}
+		
+		// 2145645855
+		case SimpleClassifiersPackage::BOOLEANVALUE_OPERATION_EQUALS_VALUE:
+		{
+			//Retrieve input parameter 'otherValue'
+			//parameter 0
+			std::shared_ptr<fUML::Semantics::Values::Value> incoming_param_otherValue;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_otherValue_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_otherValue = (*incoming_param_otherValue_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::Values::Value> >();
+			result = eAny(this->equals(incoming_param_otherValue));
+			break;
+		}
+		
+		// 2004933041
+		case SimpleClassifiersPackage::BOOLEANVALUE_OPERATION_SPECIFY:
+		{
+			result = eAny(this->specify());
+			break;
+		}
+		
+		// 518253164
+		case SimpleClassifiersPackage::BOOLEANVALUE_OPERATION_TOSTRING:
+		{
+			result = eAny(this->toString());
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = PrimitiveValueImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<BooleanValue> BooleanValueImpl::getThisBooleanValuePtr() const
+{
+	return m_thisBooleanValuePtr.lock();
+}
+void BooleanValueImpl::setThisBooleanValuePtr(std::weak_ptr<BooleanValue> thisBooleanValuePtr)
+{
+	m_thisBooleanValuePtr = thisBooleanValuePtr;
+	setThisPrimitiveValuePtr(thisBooleanValuePtr);
+}

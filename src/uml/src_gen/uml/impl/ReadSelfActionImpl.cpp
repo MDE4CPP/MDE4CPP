@@ -1,3 +1,4 @@
+
 #include "uml/impl/ReadSelfActionImpl.hpp"
 
 #ifdef NDEBUG
@@ -26,7 +27,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -34,7 +34,6 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-
 
 #include "uml/Action.hpp"
 #include "uml/Activity.hpp"
@@ -158,15 +157,6 @@ std::shared_ptr<ecore::EObject> ReadSelfActionImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> ReadSelfActionImpl::eStaticClass() const
-{
-	return uml::umlPackage::eInstance()->getReadSelfAction_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
@@ -195,11 +185,13 @@ bool ReadSelfActionImpl::type(Any diagnostics,std::shared_ptr<std::map < Any, An
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference result
-*/
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference result */
 std::shared_ptr<uml::OutputPin> ReadSelfActionImpl::getResult() const
 {
     return m_result;
@@ -209,7 +201,6 @@ void ReadSelfActionImpl::setResult(std::shared_ptr<uml::OutputPin> _result)
     m_result = _result;
 	
 }
-
 
 //*********************************
 // Union Getter
@@ -284,18 +275,9 @@ std::shared_ptr<Union<uml::RedefinableElement>> ReadSelfActionImpl::getRedefined
 	return m_redefinedElement;
 }
 
-
-
-
-std::shared_ptr<ReadSelfAction> ReadSelfActionImpl::getThisReadSelfActionPtr() const
-{
-	return m_thisReadSelfActionPtr.lock();
-}
-void ReadSelfActionImpl::setThisReadSelfActionPtr(std::weak_ptr<ReadSelfAction> thisReadSelfActionPtr)
-{
-	m_thisReadSelfActionPtr = thisReadSelfActionPtr;
-	setThisActionPtr(thisReadSelfActionPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> ReadSelfActionImpl::eContainer() const
 {
 	if(auto wp = m_activity.lock())
@@ -321,7 +303,112 @@ std::shared_ptr<ecore::EObject> ReadSelfActionImpl::eContainer() const
 }
 
 //*********************************
-// Structural Feature Getter/Setter
+// Persistence Functions
+//*********************************
+void ReadSelfActionImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get umlFactory
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
+	}
+}		
+
+void ReadSelfActionImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+
+	ActionImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void ReadSelfActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+
+	try
+	{
+		if ( nodeName.compare("result") == 0 )
+		{
+  			std::string typeName = loadHandler->getCurrentXSITypeName();
+			if (typeName.empty())
+			{
+				typeName = "OutputPin";
+			}
+			loadHandler->handleChild(this->getResult()); 
+
+			return; 
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+	//load BasePackage Nodes
+	ActionImpl::loadNode(nodeName, loadHandler);
+}
+
+void ReadSelfActionImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+{
+	ActionImpl::resolveReferences(featureID, references);
+}
+
+void ReadSelfActionImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	ActionImpl::saveContent(saveHandler);
+	
+	ExecutableNodeImpl::saveContent(saveHandler);
+	
+	ActivityNodeImpl::saveContent(saveHandler);
+	
+	RedefinableElementImpl::saveContent(saveHandler);
+	
+	NamedElementImpl::saveContent(saveHandler);
+	
+	ElementImpl::saveContent(saveHandler);
+	
+	ObjectImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+}
+
+void ReadSelfActionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
+		// Save 'result'
+		std::shared_ptr<uml::OutputPin> result = this->getResult();
+		if (result != nullptr)
+		{
+			saveHandler->addReference(result, "result", result->eClass() != package->getOutputPin_Class());
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+}
+
+
+std::shared_ptr<ecore::EClass> ReadSelfActionImpl::eStaticClass() const
+{
+	return uml::umlPackage::eInstance()->getReadSelfAction_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
 //*********************************
 Any ReadSelfActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
@@ -335,6 +422,7 @@ Any ReadSelfActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
 }
+
 bool ReadSelfActionImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
@@ -344,6 +432,7 @@ bool ReadSelfActionImpl::internalEIsSet(int featureID) const
 	}
 	return ActionImpl::internalEIsSet(featureID);
 }
+
 bool ReadSelfActionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
@@ -362,7 +451,7 @@ bool ReadSelfActionImpl::eSet(int featureID, Any newValue)
 }
 
 //*********************************
-// Behavioral Feature
+// EOperation Invoke
 //*********************************
 Any ReadSelfActionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
 {
@@ -452,108 +541,13 @@ Any ReadSelfActionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std
 	return result;
 }
 
-//*********************************
-// Persistence Functions
-//*********************************
-void ReadSelfActionImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+
+std::shared_ptr<ReadSelfAction> ReadSelfActionImpl::getThisReadSelfActionPtr() const
 {
-	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
-	loadAttributes(loadHandler, attr_list);
-
-	//
-	// Create new objects (from references (containment == true))
-	//
-	// get umlFactory
-	int numNodes = loadHandler->getNumOfChildNodes();
-	for(int ii = 0; ii < numNodes; ii++)
-	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler);
-	}
-}		
-
-void ReadSelfActionImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
-{
-
-	ActionImpl::loadAttributes(loadHandler, attr_list);
+	return m_thisReadSelfActionPtr.lock();
 }
-
-void ReadSelfActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+void ReadSelfActionImpl::setThisReadSelfActionPtr(std::weak_ptr<ReadSelfAction> thisReadSelfActionPtr)
 {
-
-	try
-	{
-		if ( nodeName.compare("result") == 0 )
-		{
-  			std::string typeName = loadHandler->getCurrentXSITypeName();
-			if (typeName.empty())
-			{
-				typeName = "OutputPin";
-			}
-			loadHandler->handleChild(this->getResult()); 
-
-			return; 
-		}
-	}
-	catch (std::exception& e)
-	{
-		std::cout << "| ERROR    | " << e.what() << std::endl;
-	}
-	catch (...) 
-	{
-		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
-	}
-	//load BasePackage Nodes
-	ActionImpl::loadNode(nodeName, loadHandler);
+	m_thisReadSelfActionPtr = thisReadSelfActionPtr;
+	setThisActionPtr(thisReadSelfActionPtr);
 }
-
-void ReadSelfActionImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
-{
-	ActionImpl::resolveReferences(featureID, references);
-}
-
-void ReadSelfActionImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
-{
-	saveContent(saveHandler);
-
-	ActionImpl::saveContent(saveHandler);
-	
-	ExecutableNodeImpl::saveContent(saveHandler);
-	
-	ActivityNodeImpl::saveContent(saveHandler);
-	
-	RedefinableElementImpl::saveContent(saveHandler);
-	
-	NamedElementImpl::saveContent(saveHandler);
-	
-	ElementImpl::saveContent(saveHandler);
-	
-	ObjectImpl::saveContent(saveHandler);
-	
-	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
-	
-	
-	
-}
-
-void ReadSelfActionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
-{
-	try
-	{
-		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-		// Save 'result'
-		std::shared_ptr<uml::OutputPin> result = this->getResult();
-		if (result != nullptr)
-		{
-			saveHandler->addReference(result, "result", result->eClass() != package->getOutputPin_Class());
-		}
-	}
-	catch (std::exception& e)
-	{
-		std::cout << "| ERROR    | " << e.what() << std::endl;
-	}
-}
-

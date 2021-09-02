@@ -1,3 +1,4 @@
+
 #include "ocl/Expressions/impl/CollectionRangeImpl.hpp"
 
 #ifdef NDEBUG
@@ -25,7 +26,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -34,7 +34,6 @@
 #include <exception> // used in Persistence
 #include "ecore/ecoreFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
-
 
 #include "ocl/Expressions/CollectionLiteralPart.hpp"
 #include "ecore/EAnnotation.hpp"
@@ -123,25 +122,18 @@ std::shared_ptr<ecore::EObject> CollectionRangeImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> CollectionRangeImpl::eStaticClass() const
-{
-	return ocl::Expressions::ExpressionsPackage::eInstance()->getCollectionRange_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference first
-*/
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference first */
 std::shared_ptr<ocl::Expressions::OclExpression> CollectionRangeImpl::getFirst() const
 {
     return m_first;
@@ -152,10 +144,7 @@ void CollectionRangeImpl::setFirst(std::shared_ptr<ocl::Expressions::OclExpressi
 	
 }
 
-
-/*
-Getter & Setter for reference last
-*/
+/* Getter & Setter for reference last */
 std::shared_ptr<ocl::Expressions::OclExpression> CollectionRangeImpl::getLast() const
 {
     return m_last;
@@ -166,104 +155,16 @@ void CollectionRangeImpl::setLast(std::shared_ptr<ocl::Expressions::OclExpressio
 	
 }
 
-
 //*********************************
 // Union Getter
 //*********************************
 
-
-
-std::shared_ptr<CollectionRange> CollectionRangeImpl::getThisCollectionRangePtr() const
-{
-	return m_thisCollectionRangePtr.lock();
-}
-void CollectionRangeImpl::setThisCollectionRangePtr(std::weak_ptr<CollectionRange> thisCollectionRangePtr)
-{
-	m_thisCollectionRangePtr = thisCollectionRangePtr;
-	setThisCollectionLiteralPartPtr(thisCollectionRangePtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> CollectionRangeImpl::eContainer() const
 {
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any CollectionRangeImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case ocl::Expressions::ExpressionsPackage::COLLECTIONRANGE_ATTRIBUTE_FIRST:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getFirst();
-				return eAny(returnValue); //1810
-			}
-		case ocl::Expressions::ExpressionsPackage::COLLECTIONRANGE_ATTRIBUTE_LAST:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getLast();
-				return eAny(returnValue); //1811
-			}
-	}
-	return CollectionLiteralPartImpl::eGet(featureID, resolve, coreType);
-}
-bool CollectionRangeImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case ocl::Expressions::ExpressionsPackage::COLLECTIONRANGE_ATTRIBUTE_FIRST:
-			return getFirst() != nullptr; //1810
-		case ocl::Expressions::ExpressionsPackage::COLLECTIONRANGE_ATTRIBUTE_LAST:
-			return getLast() != nullptr; //1811
-	}
-	return CollectionLiteralPartImpl::internalEIsSet(featureID);
-}
-bool CollectionRangeImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case ocl::Expressions::ExpressionsPackage::COLLECTIONRANGE_ATTRIBUTE_FIRST:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<ocl::Expressions::OclExpression> _first = std::dynamic_pointer_cast<ocl::Expressions::OclExpression>(_temp);
-			setFirst(_first); //1810
-			return true;
-		}
-		case ocl::Expressions::ExpressionsPackage::COLLECTIONRANGE_ATTRIBUTE_LAST:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<ocl::Expressions::OclExpression> _last = std::dynamic_pointer_cast<ocl::Expressions::OclExpression>(_temp);
-			setLast(_last); //1811
-			return true;
-		}
-	}
-
-	return CollectionLiteralPartImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any CollectionRangeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-
-		default:
-		{
-			// call superTypes
-			result = CollectionLiteralPartImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -352,10 +253,6 @@ void CollectionRangeImpl::save(std::shared_ptr<persistence::interfaces::XSaveHan
 	ecore::EModelElementImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
 }
 
 void CollectionRangeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -381,3 +278,101 @@ void CollectionRangeImpl::saveContent(std::shared_ptr<persistence::interfaces::X
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> CollectionRangeImpl::eStaticClass() const
+{
+	return ocl::Expressions::ExpressionsPackage::eInstance()->getCollectionRange_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any CollectionRangeImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case ocl::Expressions::ExpressionsPackage::COLLECTIONRANGE_ATTRIBUTE_FIRST:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getFirst();
+				return eAny(returnValue); //1810
+			}
+		case ocl::Expressions::ExpressionsPackage::COLLECTIONRANGE_ATTRIBUTE_LAST:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getLast();
+				return eAny(returnValue); //1811
+			}
+	}
+	return CollectionLiteralPartImpl::eGet(featureID, resolve, coreType);
+}
+
+bool CollectionRangeImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case ocl::Expressions::ExpressionsPackage::COLLECTIONRANGE_ATTRIBUTE_FIRST:
+			return getFirst() != nullptr; //1810
+		case ocl::Expressions::ExpressionsPackage::COLLECTIONRANGE_ATTRIBUTE_LAST:
+			return getLast() != nullptr; //1811
+	}
+	return CollectionLiteralPartImpl::internalEIsSet(featureID);
+}
+
+bool CollectionRangeImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case ocl::Expressions::ExpressionsPackage::COLLECTIONRANGE_ATTRIBUTE_FIRST:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<ocl::Expressions::OclExpression> _first = std::dynamic_pointer_cast<ocl::Expressions::OclExpression>(_temp);
+			setFirst(_first); //1810
+			return true;
+		}
+		case ocl::Expressions::ExpressionsPackage::COLLECTIONRANGE_ATTRIBUTE_LAST:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<ocl::Expressions::OclExpression> _last = std::dynamic_pointer_cast<ocl::Expressions::OclExpression>(_temp);
+			setLast(_last); //1811
+			return true;
+		}
+	}
+
+	return CollectionLiteralPartImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any CollectionRangeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+
+		default:
+		{
+			// call superTypes
+			result = CollectionLiteralPartImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<CollectionRange> CollectionRangeImpl::getThisCollectionRangePtr() const
+{
+	return m_thisCollectionRangePtr.lock();
+}
+void CollectionRangeImpl::setThisCollectionRangePtr(std::weak_ptr<CollectionRange> thisCollectionRangePtr)
+{
+	m_thisCollectionRangePtr = thisCollectionRangePtr;
+	setThisCollectionLiteralPartPtr(thisCollectionRangePtr);
+}

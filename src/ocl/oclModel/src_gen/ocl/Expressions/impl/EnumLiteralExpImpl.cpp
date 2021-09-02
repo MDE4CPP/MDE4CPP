@@ -1,3 +1,4 @@
+
 #include "ocl/Expressions/impl/EnumLiteralExpImpl.hpp"
 
 #ifdef NDEBUG
@@ -25,7 +26,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -36,7 +36,6 @@
 #include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "uml/umlFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
-
 
 #include "ocl/Expressions/CallExp.hpp"
 #include "ocl/Expressions/CollectionRange.hpp"
@@ -207,25 +206,18 @@ std::shared_ptr<ecore::EObject> EnumLiteralExpImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> EnumLiteralExpImpl::eStaticClass() const
-{
-	return ocl::Expressions::ExpressionsPackage::eInstance()->getEnumLiteralExp_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference referredEnumLiteral
-*/
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference referredEnumLiteral */
 std::shared_ptr<uml::EnumerationLiteral> EnumLiteralExpImpl::getReferredEnumLiteral() const
 {
     return m_referredEnumLiteral;
@@ -236,22 +228,13 @@ void EnumLiteralExpImpl::setReferredEnumLiteral(std::shared_ptr<uml::Enumeration
 	
 }
 
-
 //*********************************
 // Union Getter
 //*********************************
 
-
-
-std::shared_ptr<EnumLiteralExp> EnumLiteralExpImpl::getThisEnumLiteralExpPtr() const
-{
-	return m_thisEnumLiteralExpPtr.lock();
-}
-void EnumLiteralExpImpl::setThisEnumLiteralExpPtr(std::weak_ptr<EnumLiteralExp> thisEnumLiteralExpPtr)
-{
-	m_thisEnumLiteralExpPtr = thisEnumLiteralExpPtr;
-	setThisLiteralExpPtr(thisEnumLiteralExpPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> EnumLiteralExpImpl::eContainer() const
 {
 	if(auto wp = m_appliedElement.lock())
@@ -309,70 +292,6 @@ std::shared_ptr<ecore::EObject> EnumLiteralExpImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any EnumLiteralExpImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case ocl::Expressions::ExpressionsPackage::ENUMLITERALEXP_ATTRIBUTE_REFERREDENUMLITERAL:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getReferredEnumLiteral();
-				return eAny(returnValue); //2322
-			}
-	}
-	return LiteralExpImpl::eGet(featureID, resolve, coreType);
-}
-bool EnumLiteralExpImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case ocl::Expressions::ExpressionsPackage::ENUMLITERALEXP_ATTRIBUTE_REFERREDENUMLITERAL:
-			return getReferredEnumLiteral() != nullptr; //2322
-	}
-	return LiteralExpImpl::internalEIsSet(featureID);
-}
-bool EnumLiteralExpImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case ocl::Expressions::ExpressionsPackage::ENUMLITERALEXP_ATTRIBUTE_REFERREDENUMLITERAL:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::EnumerationLiteral> _referredEnumLiteral = std::dynamic_pointer_cast<uml::EnumerationLiteral>(_temp);
-			setReferredEnumLiteral(_referredEnumLiteral); //2322
-			return true;
-		}
-	}
-
-	return LiteralExpImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any EnumLiteralExpImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-
-		default:
-		{
-			// call superTypes
-			result = LiteralExpImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -460,11 +379,6 @@ void EnumLiteralExpImpl::save(std::shared_ptr<persistence::interfaces::XSaveHand
 	ecore::EModelElementImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
-	
 }
 
 void EnumLiteralExpImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -481,3 +395,86 @@ void EnumLiteralExpImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> EnumLiteralExpImpl::eStaticClass() const
+{
+	return ocl::Expressions::ExpressionsPackage::eInstance()->getEnumLiteralExp_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any EnumLiteralExpImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case ocl::Expressions::ExpressionsPackage::ENUMLITERALEXP_ATTRIBUTE_REFERREDENUMLITERAL:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getReferredEnumLiteral();
+				return eAny(returnValue); //2322
+			}
+	}
+	return LiteralExpImpl::eGet(featureID, resolve, coreType);
+}
+
+bool EnumLiteralExpImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case ocl::Expressions::ExpressionsPackage::ENUMLITERALEXP_ATTRIBUTE_REFERREDENUMLITERAL:
+			return getReferredEnumLiteral() != nullptr; //2322
+	}
+	return LiteralExpImpl::internalEIsSet(featureID);
+}
+
+bool EnumLiteralExpImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case ocl::Expressions::ExpressionsPackage::ENUMLITERALEXP_ATTRIBUTE_REFERREDENUMLITERAL:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::EnumerationLiteral> _referredEnumLiteral = std::dynamic_pointer_cast<uml::EnumerationLiteral>(_temp);
+			setReferredEnumLiteral(_referredEnumLiteral); //2322
+			return true;
+		}
+	}
+
+	return LiteralExpImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any EnumLiteralExpImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+
+		default:
+		{
+			// call superTypes
+			result = LiteralExpImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<EnumLiteralExp> EnumLiteralExpImpl::getThisEnumLiteralExpPtr() const
+{
+	return m_thisEnumLiteralExpPtr.lock();
+}
+void EnumLiteralExpImpl::setThisEnumLiteralExpPtr(std::weak_ptr<EnumLiteralExp> thisEnumLiteralExpPtr)
+{
+	m_thisEnumLiteralExpPtr = thisEnumLiteralExpPtr;
+	setThisLiteralExpPtr(thisEnumLiteralExpPtr);
+}

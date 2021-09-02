@@ -60,7 +60,6 @@ namespace uml
 // base class includes
 #include "fUML/Semantics/CommonBehavior/Execution.hpp"
 
-// enum includes
 
 
 
@@ -85,62 +84,54 @@ namespace fUML::Semantics::CommonBehavior
 			//*********************************
 			// Operations
 			//*********************************
-			 
-			virtual std::shared_ptr<fUML::Semantics::Values::Value> _copy() = 0; 
-			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> createEventOccurrence() = 0; 
-			virtual void execute() = 0; 
-			virtual std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > getInputParameterValues() = 0; 
-			virtual std::shared_ptr<uml::Operation> getOperation() = 0; 
-			virtual bool isCallerSuspended() = 0; 
-			virtual void makeCall() = 0; 
-			virtual std::shared_ptr<fUML::Semantics::Values::Value> new_() = 0; 
-			virtual void releaseCaller() = 0; 
-			virtual void setOutputParameterValues(std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> parameterValues) = 0; 
-			virtual void suspendCaller() = 0; 
+			virtual std::shared_ptr<fUML::Semantics::Values::Value> _copy() = 0;
+			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> createEventOccurrence() = 0;
+			virtual void execute() = 0;
+			virtual std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > getInputParameterValues() = 0;
+			virtual std::shared_ptr<uml::Operation> getOperation() = 0;
+			virtual bool isCallerSuspended() = 0;
+			virtual void makeCall() = 0;
+			virtual std::shared_ptr<fUML::Semantics::Values::Value> new_() = 0;
+			virtual void releaseCaller() = 0;
+			virtual void setOutputParameterValues(std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> parameterValues) = 0;
+			virtual void suspendCaller() = 0;
 			virtual void wait_() = 0;
+
 			//*********************************
-			// Attributes Getter & Setter
+			// Attribute Getters & Setters
 			//*********************************
-			 
 			virtual bool getCallerSuspended() const = 0;
-			 
 			virtual void setCallerSuspended (bool _callerSuspended)= 0;
-			
+
 			//*********************************
-			// References Getter & Setter
+			// Reference Getters & Setters
 			//*********************************
-			
+
+			//*********************************
+			// Union Reference Getters
+			//*********************************
+
+			//*********************************
+			// Container Getter
+			//*********************************
+			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
+
+			//*********************************
+			// Persistence Functions
+			//*********************************
+			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 
 		protected:
 			//*********************************
 			// Attribute Members
 			//*********************************
-			
-			bool m_callerSuspended = false;
-			
+			bool m_callerSuspended= false;
 			
 			//*********************************
 			// Reference Members
 			//*********************************
-			
-
-		public:
-			//*********************************
-			// Union Getter
-			//*********************************
-			
-
-			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
-			
-			//*********************************
-			// Persistence Functions
-			//*********************************
-			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
-			
-			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
-			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
-			
 	};
-
 }
 #endif /* end of include guard: FUML_SEMANTICS_COMMONBEHAVIOR_CALLEVENTEXECUTION_HPP */

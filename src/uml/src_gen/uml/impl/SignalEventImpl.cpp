@@ -1,3 +1,4 @@
+
 #include "uml/impl/SignalEventImpl.hpp"
 
 #ifdef NDEBUG
@@ -25,7 +26,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -33,7 +33,6 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-
 
 #include "uml/Comment.hpp"
 #include "uml/Dependency.hpp"
@@ -142,25 +141,18 @@ std::shared_ptr<ecore::EObject> SignalEventImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> SignalEventImpl::eStaticClass() const
-{
-	return uml::umlPackage::eInstance()->getSignalEvent_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference signal
-*/
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference signal */
 std::shared_ptr<uml::Signal> SignalEventImpl::getSignal() const
 {
     return m_signal;
@@ -170,7 +162,6 @@ void SignalEventImpl::setSignal(std::shared_ptr<uml::Signal> _signal)
     m_signal = _signal;
 	
 }
-
 
 //*********************************
 // Union Getter
@@ -202,16 +193,9 @@ std::weak_ptr<uml::Element> SignalEventImpl::getOwner() const
 
 
 
-
-std::shared_ptr<SignalEvent> SignalEventImpl::getThisSignalEventPtr() const
-{
-	return m_thisSignalEventPtr.lock();
-}
-void SignalEventImpl::setThisSignalEventPtr(std::weak_ptr<SignalEvent> thisSignalEventPtr)
-{
-	m_thisSignalEventPtr = thisSignalEventPtr;
-	setThisMessageEventPtr(thisSignalEventPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> SignalEventImpl::eContainer() const
 {
 	if(auto wp = m_namespace.lock())
@@ -234,70 +218,6 @@ std::shared_ptr<ecore::EObject> SignalEventImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any SignalEventImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::SIGNALEVENT_ATTRIBUTE_SIGNAL:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getSignal();
-				return eAny(returnValue); //21612
-			}
-	}
-	return MessageEventImpl::eGet(featureID, resolve, coreType);
-}
-bool SignalEventImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::SIGNALEVENT_ATTRIBUTE_SIGNAL:
-			return getSignal() != nullptr; //21612
-	}
-	return MessageEventImpl::internalEIsSet(featureID);
-}
-bool SignalEventImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::SIGNALEVENT_ATTRIBUTE_SIGNAL:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::Signal> _signal = std::dynamic_pointer_cast<uml::Signal>(_temp);
-			setSignal(_signal); //21612
-			return true;
-		}
-	}
-
-	return MessageEventImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any SignalEventImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-
-		default:
-		{
-			// call superTypes
-			result = MessageEventImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -388,12 +308,6 @@ void SignalEventImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
-	
-	
 }
 
 void SignalEventImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -410,3 +324,86 @@ void SignalEventImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> SignalEventImpl::eStaticClass() const
+{
+	return uml::umlPackage::eInstance()->getSignalEvent_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any SignalEventImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::SIGNALEVENT_ATTRIBUTE_SIGNAL:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getSignal();
+				return eAny(returnValue); //21612
+			}
+	}
+	return MessageEventImpl::eGet(featureID, resolve, coreType);
+}
+
+bool SignalEventImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::SIGNALEVENT_ATTRIBUTE_SIGNAL:
+			return getSignal() != nullptr; //21612
+	}
+	return MessageEventImpl::internalEIsSet(featureID);
+}
+
+bool SignalEventImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::SIGNALEVENT_ATTRIBUTE_SIGNAL:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::Signal> _signal = std::dynamic_pointer_cast<uml::Signal>(_temp);
+			setSignal(_signal); //21612
+			return true;
+		}
+	}
+
+	return MessageEventImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any SignalEventImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+
+		default:
+		{
+			// call superTypes
+			result = MessageEventImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<SignalEvent> SignalEventImpl::getThisSignalEventPtr() const
+{
+	return m_thisSignalEventPtr.lock();
+}
+void SignalEventImpl::setThisSignalEventPtr(std::weak_ptr<SignalEvent> thisSignalEventPtr)
+{
+	m_thisSignalEventPtr = thisSignalEventPtr;
+	setThisMessageEventPtr(thisSignalEventPtr);
+}

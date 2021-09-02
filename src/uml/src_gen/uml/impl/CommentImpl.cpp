@@ -1,3 +1,4 @@
+
 #include "uml/impl/CommentImpl.hpp"
 
 #ifdef NDEBUG
@@ -25,7 +26,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -33,7 +33,6 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-
 
 #include "uml/Comment.hpp"
 #include "uml/Element.hpp"
@@ -112,17 +111,14 @@ std::shared_ptr<ecore::EObject> CommentImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> CommentImpl::eStaticClass() const
-{
-	return uml::umlPackage::eInstance()->getComment_Class();
-}
+//*********************************
+// Operations
+//*********************************
 
 //*********************************
-// Attribute Setter Getter
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for attribute body
-*/
+/* Getter & Setter for attribute body */
 std::string CommentImpl::getBody() const 
 {
 	return m_body;
@@ -131,19 +127,12 @@ void CommentImpl::setBody(std::string _body)
 {
 	m_body = _body;
 	
-} 
-
-
-//*********************************
-// Operations
-//*********************************
+}
 
 //*********************************
-// References
+// Reference Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference annotatedElement
-*/
+/* Getter & Setter for reference annotatedElement */
 std::shared_ptr<Bag<uml::Element>> CommentImpl::getAnnotatedElement() const
 {
 	if(m_annotatedElement == nullptr)
@@ -154,8 +143,6 @@ std::shared_ptr<Bag<uml::Element>> CommentImpl::getAnnotatedElement() const
 	}
     return m_annotatedElement;
 }
-
-
 
 //*********************************
 // Union Getter
@@ -175,18 +162,9 @@ std::shared_ptr<Union<uml::Element>> CommentImpl::getOwnedElement() const
 	return m_ownedElement;
 }
 
-
-
-
-std::shared_ptr<Comment> CommentImpl::getThisCommentPtr() const
-{
-	return m_thisCommentPtr.lock();
-}
-void CommentImpl::setThisCommentPtr(std::weak_ptr<Comment> thisCommentPtr)
-{
-	m_thisCommentPtr = thisCommentPtr;
-	setThisElementPtr(thisCommentPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> CommentImpl::eContainer() const
 {
 	if(auto wp = m_owner.lock())
@@ -194,116 +172,6 @@ std::shared_ptr<ecore::EObject> CommentImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any CommentImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::COMMENT_ATTRIBUTE_ANNOTATEDELEMENT:
-		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Element>::iterator iter = getAnnotatedElement()->begin();
-			Bag<uml::Element>::iterator end = getAnnotatedElement()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //453			
-		}
-		case uml::umlPackage::COMMENT_ATTRIBUTE_BODY:
-			return eAny(getBody()); //454
-	}
-	return ElementImpl::eGet(featureID, resolve, coreType);
-}
-bool CommentImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::COMMENT_ATTRIBUTE_ANNOTATEDELEMENT:
-			return getAnnotatedElement() != nullptr; //453
-		case uml::umlPackage::COMMENT_ATTRIBUTE_BODY:
-			return getBody() != ""; //454
-	}
-	return ElementImpl::internalEIsSet(featureID);
-}
-bool CommentImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::COMMENT_ATTRIBUTE_ANNOTATEDELEMENT:
-		{
-			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::Element>> annotatedElementList(new Bag<uml::Element>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
-			{
-				annotatedElementList->add(std::dynamic_pointer_cast<uml::Element>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::Element>::iterator iterAnnotatedElement = getAnnotatedElement()->begin();
-			Bag<uml::Element>::iterator endAnnotatedElement = getAnnotatedElement()->end();
-			while (iterAnnotatedElement != endAnnotatedElement)
-			{
-				if (annotatedElementList->find(*iterAnnotatedElement) == -1)
-				{
-					getAnnotatedElement()->erase(*iterAnnotatedElement);
-				}
-				iterAnnotatedElement++;
-			}
- 
-			iterAnnotatedElement = annotatedElementList->begin();
-			endAnnotatedElement = annotatedElementList->end();
-			while (iterAnnotatedElement != endAnnotatedElement)
-			{
-				if (getAnnotatedElement()->find(*iterAnnotatedElement) == -1)
-				{
-					getAnnotatedElement()->add(*iterAnnotatedElement);
-				}
-				iterAnnotatedElement++;			
-			}
-			return true;
-		}
-		case uml::umlPackage::COMMENT_ATTRIBUTE_BODY:
-		{
-			// BOOST CAST
-			std::string _body = newValue->get<std::string>();
-			setBody(_body); //454
-			return true;
-		}
-	}
-
-	return ElementImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any CommentImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-
-		default:
-		{
-			// call superTypes
-			result = ElementImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -396,8 +264,6 @@ void CommentImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> sa
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
 }
 
 void CommentImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -419,3 +285,132 @@ void CommentImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHand
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> CommentImpl::eStaticClass() const
+{
+	return uml::umlPackage::eInstance()->getComment_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any CommentImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::COMMENT_ATTRIBUTE_ANNOTATEDELEMENT:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Element>::iterator iter = getAnnotatedElement()->begin();
+			Bag<uml::Element>::iterator end = getAnnotatedElement()->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //453			
+		}
+		case uml::umlPackage::COMMENT_ATTRIBUTE_BODY:
+			return eAny(getBody()); //454
+	}
+	return ElementImpl::eGet(featureID, resolve, coreType);
+}
+
+bool CommentImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::COMMENT_ATTRIBUTE_ANNOTATEDELEMENT:
+			return getAnnotatedElement() != nullptr; //453
+		case uml::umlPackage::COMMENT_ATTRIBUTE_BODY:
+			return getBody() != ""; //454
+	}
+	return ElementImpl::internalEIsSet(featureID);
+}
+
+bool CommentImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::COMMENT_ATTRIBUTE_ANNOTATEDELEMENT:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::Element>> annotatedElementList(new Bag<uml::Element>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				annotatedElementList->add(std::dynamic_pointer_cast<uml::Element>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::Element>::iterator iterAnnotatedElement = getAnnotatedElement()->begin();
+			Bag<uml::Element>::iterator endAnnotatedElement = getAnnotatedElement()->end();
+			while (iterAnnotatedElement != endAnnotatedElement)
+			{
+				if (annotatedElementList->find(*iterAnnotatedElement) == -1)
+				{
+					getAnnotatedElement()->erase(*iterAnnotatedElement);
+				}
+				iterAnnotatedElement++;
+			}
+ 
+			iterAnnotatedElement = annotatedElementList->begin();
+			endAnnotatedElement = annotatedElementList->end();
+			while (iterAnnotatedElement != endAnnotatedElement)
+			{
+				if (getAnnotatedElement()->find(*iterAnnotatedElement) == -1)
+				{
+					getAnnotatedElement()->add(*iterAnnotatedElement);
+				}
+				iterAnnotatedElement++;			
+			}
+			return true;
+		}
+		case uml::umlPackage::COMMENT_ATTRIBUTE_BODY:
+		{
+			// BOOST CAST
+			std::string _body = newValue->get<std::string>();
+			setBody(_body); //454
+			return true;
+		}
+	}
+
+	return ElementImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any CommentImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+
+		default:
+		{
+			// call superTypes
+			result = ElementImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<Comment> CommentImpl::getThisCommentPtr() const
+{
+	return m_thisCommentPtr.lock();
+}
+void CommentImpl::setThisCommentPtr(std::weak_ptr<Comment> thisCommentPtr)
+{
+	m_thisCommentPtr = thisCommentPtr;
+	setThisElementPtr(thisCommentPtr);
+}

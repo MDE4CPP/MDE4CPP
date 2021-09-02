@@ -1,3 +1,4 @@
+
 #include "ocl/Types/impl/NameTypeBindingImpl.hpp"
 
 #ifdef NDEBUG
@@ -24,7 +25,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -32,7 +32,6 @@
 
 #include <exception> // used in Persistence
 #include "ecore/ecoreFactory.hpp"
-
 
 #include "ecore/EClassifier.hpp"
 
@@ -106,17 +105,14 @@ std::shared_ptr<ecore::EObject> NameTypeBindingImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> NameTypeBindingImpl::eStaticClass() const
-{
-	return ocl::Types::TypesPackage::eInstance()->getNameTypeBinding_Class();
-}
+//*********************************
+// Operations
+//*********************************
 
 //*********************************
-// Attribute Setter Getter
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for attribute name
-*/
+/* Getter & Setter for attribute name */
 std::string NameTypeBindingImpl::getName() const 
 {
 	return m_name;
@@ -125,19 +121,12 @@ void NameTypeBindingImpl::setName(std::string _name)
 {
 	m_name = _name;
 	
-} 
-
-
-//*********************************
-// Operations
-//*********************************
+}
 
 //*********************************
-// References
+// Reference Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference type
-*/
+/* Getter & Setter for reference type */
 std::shared_ptr<ecore::EClassifier> NameTypeBindingImpl::getType() const
 {
     return m_type;
@@ -148,99 +137,16 @@ void NameTypeBindingImpl::setType(std::shared_ptr<ecore::EClassifier> _type)
 	
 }
 
-
 //*********************************
 // Union Getter
 //*********************************
 
-
-
-std::shared_ptr<NameTypeBinding> NameTypeBindingImpl::getThisNameTypeBindingPtr() const
-{
-	return m_thisNameTypeBindingPtr.lock();
-}
-void NameTypeBindingImpl::setThisNameTypeBindingPtr(std::weak_ptr<NameTypeBinding> thisNameTypeBindingPtr)
-{
-	m_thisNameTypeBindingPtr = thisNameTypeBindingPtr;
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> NameTypeBindingImpl::eContainer() const
 {
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any NameTypeBindingImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case ocl::Types::TypesPackage::NAMETYPEBINDING_ATTRIBUTE_NAME:
-			return eAny(getName()); //510
-		case ocl::Types::TypesPackage::NAMETYPEBINDING_ATTRIBUTE_TYPE:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getType();
-				return eAny(returnValue); //511
-			}
-	}
-	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
-}
-bool NameTypeBindingImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case ocl::Types::TypesPackage::NAMETYPEBINDING_ATTRIBUTE_NAME:
-			return getName() != ""; //510
-		case ocl::Types::TypesPackage::NAMETYPEBINDING_ATTRIBUTE_TYPE:
-			return getType() != nullptr; //511
-	}
-	return ecore::EObjectImpl::internalEIsSet(featureID);
-}
-bool NameTypeBindingImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case ocl::Types::TypesPackage::NAMETYPEBINDING_ATTRIBUTE_NAME:
-		{
-			// BOOST CAST
-			std::string _name = newValue->get<std::string>();
-			setName(_name); //510
-			return true;
-		}
-		case ocl::Types::TypesPackage::NAMETYPEBINDING_ATTRIBUTE_TYPE:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<ecore::EClassifier> _type = std::dynamic_pointer_cast<ecore::EClassifier>(_temp);
-			setType(_type); //511
-			return true;
-		}
-	}
-
-	return ecore::EObjectImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any NameTypeBindingImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-
-		default:
-		{
-			// call superTypes
-			result = ecore::EModelElementImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -325,9 +231,7 @@ void NameTypeBindingImpl::save(std::shared_ptr<persistence::interfaces::XSaveHan
 {
 	saveContent(saveHandler);
 
-	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
 }
 
 void NameTypeBindingImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -349,3 +253,96 @@ void NameTypeBindingImpl::saveContent(std::shared_ptr<persistence::interfaces::X
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> NameTypeBindingImpl::eStaticClass() const
+{
+	return ocl::Types::TypesPackage::eInstance()->getNameTypeBinding_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any NameTypeBindingImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case ocl::Types::TypesPackage::NAMETYPEBINDING_ATTRIBUTE_NAME:
+			return eAny(getName()); //510
+		case ocl::Types::TypesPackage::NAMETYPEBINDING_ATTRIBUTE_TYPE:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getType();
+				return eAny(returnValue); //511
+			}
+	}
+	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
+}
+
+bool NameTypeBindingImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case ocl::Types::TypesPackage::NAMETYPEBINDING_ATTRIBUTE_NAME:
+			return getName() != ""; //510
+		case ocl::Types::TypesPackage::NAMETYPEBINDING_ATTRIBUTE_TYPE:
+			return getType() != nullptr; //511
+	}
+	return ecore::EObjectImpl::internalEIsSet(featureID);
+}
+
+bool NameTypeBindingImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case ocl::Types::TypesPackage::NAMETYPEBINDING_ATTRIBUTE_NAME:
+		{
+			// BOOST CAST
+			std::string _name = newValue->get<std::string>();
+			setName(_name); //510
+			return true;
+		}
+		case ocl::Types::TypesPackage::NAMETYPEBINDING_ATTRIBUTE_TYPE:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<ecore::EClassifier> _type = std::dynamic_pointer_cast<ecore::EClassifier>(_temp);
+			setType(_type); //511
+			return true;
+		}
+	}
+
+	return ecore::EObjectImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any NameTypeBindingImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+
+		default:
+		{
+			// call superTypes
+			result = ecore::EModelElementImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<NameTypeBinding> NameTypeBindingImpl::getThisNameTypeBindingPtr() const
+{
+	return m_thisNameTypeBindingPtr.lock();
+}
+void NameTypeBindingImpl::setThisNameTypeBindingPtr(std::weak_ptr<NameTypeBinding> thisNameTypeBindingPtr)
+{
+	m_thisNameTypeBindingPtr = thisNameTypeBindingPtr;
+}

@@ -60,7 +60,6 @@ namespace ecore
 // base class includes
 #include "ecore/ETypedElement.hpp"
 
-// enum includes
 
 
 
@@ -114,74 +113,63 @@ namespace ocl::Expressions
 			//*********************************
 			// Operations
 			//*********************************
-			
+
 			//*********************************
-			// Attributes Getter & Setter
+			// Attribute Getters & Setters
 			//*********************************
-			
+
 			//*********************************
-			// References Getter & Setter
+			// Reference Getters & Setters
 			//*********************************
-			
 			virtual std::weak_ptr<ocl::Expressions::CallExp> getAppliedElement() const = 0;
-			
 			virtual void setAppliedElement(std::weak_ptr<ocl::Expressions::CallExp>) = 0;
-			
 			virtual std::weak_ptr<ocl::Expressions::IfExp> getElseOwner() const = 0;
-			
 			virtual void setElseOwner(std::weak_ptr<ocl::Expressions::IfExp>) = 0;
-			
 			virtual std::weak_ptr<ocl::Expressions::CollectionRange> getFirstOwner() const = 0;
-			
 			virtual void setFirstOwner(std::weak_ptr<ocl::Expressions::CollectionRange>) = 0;
-			
 			virtual std::weak_ptr<ocl::Expressions::IfExp> getIfOwner() const = 0;
-			
 			virtual void setIfOwner(std::weak_ptr<ocl::Expressions::IfExp>) = 0;
-			
 			virtual std::weak_ptr<ocl::Expressions::Variable> getInitializedElement() const = 0;
-			
 			virtual void setInitializedElement(std::weak_ptr<ocl::Expressions::Variable>) = 0;
-			
 			virtual std::shared_ptr<ocl::Evaluations::OclExpEval> getInstance() const = 0;
-			
 			virtual void setInstance(std::shared_ptr<ocl::Evaluations::OclExpEval>) = 0;
-			
 			virtual std::weak_ptr<ocl::Expressions::CollectionRange> getLastOwner() const = 0;
-			
 			virtual void setLastOwner(std::weak_ptr<ocl::Expressions::CollectionRange>) = 0;
-			
 			virtual std::weak_ptr<ocl::Expressions::LoopExp> getLoopBodyOwner() const = 0;
-			
 			virtual void setLoopBodyOwner(std::weak_ptr<ocl::Expressions::LoopExp>) = 0;
-			
 			virtual std::weak_ptr<ocl::Expressions::OperationCallExp> getParentCall() const = 0;
-			
 			virtual void setParentCall(std::weak_ptr<ocl::Expressions::OperationCallExp>) = 0;
-			
 			virtual std::weak_ptr<ocl::Expressions::NavigationCallExp> getParentNav() const = 0;
-			
 			virtual void setParentNav(std::weak_ptr<ocl::Expressions::NavigationCallExp>) = 0;
-			
 			virtual std::weak_ptr<ocl::Expressions::IfExp> getThenOwner() const = 0;
-			
 			virtual void setThenOwner(std::weak_ptr<ocl::Expressions::IfExp>) = 0;
-			
 			virtual std::weak_ptr<ocl::Expressions::ExpressionInOcl> getTopExpression() const = 0;
-			
 			virtual void setTopExpression(std::weak_ptr<ocl::Expressions::ExpressionInOcl>) = 0;
-			
+
+			//*********************************
+			// Union Reference Getters
+			//*********************************
+
+			//*********************************
+			// Container Getter
+			//*********************************
+			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
+
+			//*********************************
+			// Persistence Functions
+			//*********************************
+			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 
 		protected:
 			//*********************************
 			// Attribute Members
 			//*********************************
 			
-			
 			//*********************************
 			// Reference Members
 			//*********************************
-			
 			std::weak_ptr<ocl::Expressions::CallExp> m_appliedElement;
 			std::weak_ptr<ocl::Expressions::IfExp> m_elseOwner;
 			std::weak_ptr<ocl::Expressions::CollectionRange> m_firstOwner;
@@ -194,24 +182,6 @@ namespace ocl::Expressions
 			std::weak_ptr<ocl::Expressions::NavigationCallExp> m_parentNav;
 			std::weak_ptr<ocl::Expressions::IfExp> m_thenOwner;
 			std::weak_ptr<ocl::Expressions::ExpressionInOcl> m_topExpression;
-
-		public:
-			//*********************************
-			// Union Getter
-			//*********************************
-			
-
-			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
-			
-			//*********************************
-			// Persistence Functions
-			//*********************************
-			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
-			
-			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
-			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
-			
 	};
-
 }
 #endif /* end of include guard: OCL_EXPRESSIONS_OCLEXPRESSION_HPP */

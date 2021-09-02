@@ -67,7 +67,6 @@ namespace uml
 // base class includes
 #include "PSCS/Semantics/Actions/CS_ConstructStrategy.hpp"
 
-// enum includes
 
 
 
@@ -92,72 +91,61 @@ namespace PSCS::Semantics::Actions
 			//*********************************
 			// Operations
 			//*********************************
-			 
-			virtual void addStructuralFeatureValue(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> context,std::shared_ptr<uml::Property> feature,std::shared_ptr<fUML::Semantics::Values::Value> value) = 0; 
-			virtual bool canInstantiate(std::shared_ptr<uml::Property> p) = 0; 
-			virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> construct(std::shared_ptr<uml::Operation> constructor,std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Object> context) = 0; 
-			virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> constructObject(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Object> context,std::shared_ptr<uml::Class> type) = 0; 
-			virtual void generateArrayPattern(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> context,std::shared_ptr<uml::Connector> connector) = 0; 
-			virtual std::shared_ptr<uml::Class> generateRealizingClass(std::shared_ptr<uml::Interface> interface_,std::string className) = 0; 
-			virtual void generateStarPattern(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> context,std::shared_ptr<uml::Connector> connector) = 0; 
-			virtual int getCardinality(std::shared_ptr<uml::ConnectorEnd> end) = 0; 
-			virtual std::shared_ptr<uml::Association> getDefaultAssociation() = 0; 
-			virtual std::shared_ptr<uml::Class> getRealizingClass(std::shared_ptr<uml::Interface> interface_) = 0; 
-			virtual std::shared_ptr<Bag<fUML::Semantics::Values::Value> > getValuesFromConnectorEnd(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> context,std::shared_ptr<uml::ConnectorEnd> end) = 0; 
-			virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> instantiateInterface(std::shared_ptr<uml::Interface> interface,std::shared_ptr<fUML::Semantics::Loci::Locus> locus) = 0; 
-			virtual bool isArrayPattern(std::shared_ptr<uml::Connector> c) = 0; 
+			virtual void addStructuralFeatureValue(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> context,std::shared_ptr<uml::Property> feature,std::shared_ptr<fUML::Semantics::Values::Value> value) = 0;
+			virtual bool canInstantiate(std::shared_ptr<uml::Property> p) = 0;
+			virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> construct(std::shared_ptr<uml::Operation> constructor,std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Object> context) = 0;
+			virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> constructObject(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Object> context,std::shared_ptr<uml::Class> type) = 0;
+			virtual void generateArrayPattern(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> context,std::shared_ptr<uml::Connector> connector) = 0;
+			virtual std::shared_ptr<uml::Class> generateRealizingClass(std::shared_ptr<uml::Interface> interface_,std::string className) = 0;
+			virtual void generateStarPattern(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> context,std::shared_ptr<uml::Connector> connector) = 0;
+			virtual int getCardinality(std::shared_ptr<uml::ConnectorEnd> end) = 0;
+			virtual std::shared_ptr<uml::Association> getDefaultAssociation() = 0;
+			virtual std::shared_ptr<uml::Class> getRealizingClass(std::shared_ptr<uml::Interface> interface_) = 0;
+			virtual std::shared_ptr<Bag<fUML::Semantics::Values::Value> > getValuesFromConnectorEnd(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> context,std::shared_ptr<uml::ConnectorEnd> end) = 0;
+			virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> instantiateInterface(std::shared_ptr<uml::Interface> interface,std::shared_ptr<fUML::Semantics::Loci::Locus> locus) = 0;
+			virtual bool isArrayPattern(std::shared_ptr<uml::Connector> c) = 0;
 			virtual bool isStarPattern(std::shared_ptr<uml::Connector> c) = 0;
+
 			//*********************************
-			// Attributes Getter & Setter
+			// Attribute Getters & Setters
 			//*********************************
-			
+
 			//*********************************
-			// References Getter & Setter
+			// Reference Getters & Setters
 			//*********************************
-			
 			virtual std::shared_ptr<uml::Association> getDefaultAssociation() const = 0;
-			
 			virtual void setDefaultAssociation(std::shared_ptr<uml::Association>) = 0;
-			
 			virtual std::shared_ptr<Bag<uml::Class>> getGeneratedRealizingClasses() const = 0;
-			
-			
 			virtual std::shared_ptr<fUML::Semantics::Loci::Locus> getLocus() const = 0;
-			
 			virtual void setLocus(std::shared_ptr<fUML::Semantics::Loci::Locus>) = 0;
-			
+
+			//*********************************
+			// Union Reference Getters
+			//*********************************
+
+			//*********************************
+			// Container Getter
+			//*********************************
+			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
+
+			//*********************************
+			// Persistence Functions
+			//*********************************
+			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 
 		protected:
 			//*********************************
 			// Attribute Members
 			//*********************************
 			
-			
 			//*********************************
 			// Reference Members
 			//*********************************
-			
 			std::shared_ptr<uml::Association> m_defaultAssociation;
 			mutable std::shared_ptr<Bag<uml::Class>> m_generatedRealizingClasses;
 			std::shared_ptr<fUML::Semantics::Loci::Locus> m_locus;
-
-		public:
-			//*********************************
-			// Union Getter
-			//*********************************
-			
-
-			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
-			
-			//*********************************
-			// Persistence Functions
-			//*********************************
-			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
-			
-			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
-			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
-			
 	};
-
 }
 #endif /* end of include guard: PSCS_SEMANTICS_ACTIONS_CS_DEFAULTCONSTRUCTSTRATEGY_HPP */

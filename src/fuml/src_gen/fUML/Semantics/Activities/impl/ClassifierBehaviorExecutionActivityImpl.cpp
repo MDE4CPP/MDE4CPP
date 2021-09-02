@@ -1,3 +1,4 @@
+
 #include "fUML/Semantics/Activities/impl/ClassifierBehaviorExecutionActivityImpl.hpp"
 
 #ifdef NDEBUG
@@ -24,14 +25,12 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-
 
 
 //Factories an Package includes
@@ -102,89 +101,28 @@ std::shared_ptr<ecore::EObject> ClassifierBehaviorExecutionActivityImpl::copy() 
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> ClassifierBehaviorExecutionActivityImpl::eStaticClass() const
-{
-	return fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getClassifierBehaviorExecutionActivity_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
 
 //*********************************
-// References
+// Attribute Getters & Setters
+//*********************************
+
+//*********************************
+// Reference Getters & Setters
 //*********************************
 
 //*********************************
 // Union Getter
 //*********************************
 
-
-
-std::shared_ptr<ClassifierBehaviorExecutionActivity> ClassifierBehaviorExecutionActivityImpl::getThisClassifierBehaviorExecutionActivityPtr() const
-{
-	return m_thisClassifierBehaviorExecutionActivityPtr.lock();
-}
-void ClassifierBehaviorExecutionActivityImpl::setThisClassifierBehaviorExecutionActivityPtr(std::weak_ptr<ClassifierBehaviorExecutionActivity> thisClassifierBehaviorExecutionActivityPtr)
-{
-	m_thisClassifierBehaviorExecutionActivityPtr = thisClassifierBehaviorExecutionActivityPtr;
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> ClassifierBehaviorExecutionActivityImpl::eContainer() const
 {
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any ClassifierBehaviorExecutionActivityImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-	}
-	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
-}
-bool ClassifierBehaviorExecutionActivityImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-	}
-	return ecore::EObjectImpl::internalEIsSet(featureID);
-}
-bool ClassifierBehaviorExecutionActivityImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-	}
-
-	return ecore::EObjectImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any ClassifierBehaviorExecutionActivityImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-
-		default:
-		{
-			// call superTypes
-			result = ecore::EModelElementImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -227,9 +165,7 @@ void ClassifierBehaviorExecutionActivityImpl::save(std::shared_ptr<persistence::
 {
 	saveContent(saveHandler);
 
-	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
 }
 
 void ClassifierBehaviorExecutionActivityImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -244,3 +180,70 @@ void ClassifierBehaviorExecutionActivityImpl::saveContent(std::shared_ptr<persis
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> ClassifierBehaviorExecutionActivityImpl::eStaticClass() const
+{
+	return fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getClassifierBehaviorExecutionActivity_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any ClassifierBehaviorExecutionActivityImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+	}
+	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
+}
+
+bool ClassifierBehaviorExecutionActivityImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+	}
+	return ecore::EObjectImpl::internalEIsSet(featureID);
+}
+
+bool ClassifierBehaviorExecutionActivityImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+	}
+
+	return ecore::EObjectImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any ClassifierBehaviorExecutionActivityImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+
+		default:
+		{
+			// call superTypes
+			result = ecore::EModelElementImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<ClassifierBehaviorExecutionActivity> ClassifierBehaviorExecutionActivityImpl::getThisClassifierBehaviorExecutionActivityPtr() const
+{
+	return m_thisClassifierBehaviorExecutionActivityPtr.lock();
+}
+void ClassifierBehaviorExecutionActivityImpl::setThisClassifierBehaviorExecutionActivityPtr(std::weak_ptr<ClassifierBehaviorExecutionActivity> thisClassifierBehaviorExecutionActivityPtr)
+{
+	m_thisClassifierBehaviorExecutionActivityPtr = thisClassifierBehaviorExecutionActivityPtr;
+}

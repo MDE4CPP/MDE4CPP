@@ -1,3 +1,4 @@
+
 #include "uml/impl/ObjectFlowImpl.hpp"
 
 #ifdef NDEBUG
@@ -26,7 +27,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -34,7 +34,6 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-
 
 #include "uml/Activity.hpp"
 #include "uml/ActivityEdge.hpp"
@@ -153,42 +152,6 @@ std::shared_ptr<ecore::EObject> ObjectFlowImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> ObjectFlowImpl::eStaticClass() const
-{
-	return uml::umlPackage::eInstance()->getObjectFlow_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-/*
-Getter & Setter for attribute isMulticast
-*/
-bool ObjectFlowImpl::getIsMulticast() const 
-{
-	return m_isMulticast;
-}
-void ObjectFlowImpl::setIsMulticast(bool _isMulticast)
-{
-	m_isMulticast = _isMulticast;
-	
-} 
-
-
-/*
-Getter & Setter for attribute isMultireceive
-*/
-bool ObjectFlowImpl::getIsMultireceive() const 
-{
-	return m_isMultireceive;
-}
-void ObjectFlowImpl::setIsMultireceive(bool _isMultireceive)
-{
-	m_isMultireceive = _isMultireceive;
-	
-} 
-
-
 //*********************************
 // Operations
 //*********************************
@@ -241,11 +204,34 @@ bool ObjectFlowImpl::transformation_behavior(Any diagnostics,std::shared_ptr<std
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference selection
-*/
+/* Getter & Setter for attribute isMulticast */
+bool ObjectFlowImpl::getIsMulticast() const 
+{
+	return m_isMulticast;
+}
+void ObjectFlowImpl::setIsMulticast(bool _isMulticast)
+{
+	m_isMulticast = _isMulticast;
+	
+}
+
+/* Getter & Setter for attribute isMultireceive */
+bool ObjectFlowImpl::getIsMultireceive() const 
+{
+	return m_isMultireceive;
+}
+void ObjectFlowImpl::setIsMultireceive(bool _isMultireceive)
+{
+	m_isMultireceive = _isMultireceive;
+	
+}
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference selection */
 std::shared_ptr<uml::Behavior> ObjectFlowImpl::getSelection() const
 {
     return m_selection;
@@ -256,10 +242,7 @@ void ObjectFlowImpl::setSelection(std::shared_ptr<uml::Behavior> _selection)
 	
 }
 
-
-/*
-Getter & Setter for reference transformation
-*/
+/* Getter & Setter for reference transformation */
 std::shared_ptr<uml::Behavior> ObjectFlowImpl::getTransformation() const
 {
     return m_transformation;
@@ -269,7 +252,6 @@ void ObjectFlowImpl::setTransformation(std::shared_ptr<uml::Behavior> _transform
     m_transformation = _transformation;
 	
 }
-
 
 //*********************************
 // Union Getter
@@ -324,18 +306,9 @@ std::shared_ptr<Union<uml::RedefinableElement>> ObjectFlowImpl::getRedefinedElem
 	return m_redefinedElement;
 }
 
-
-
-
-std::shared_ptr<ObjectFlow> ObjectFlowImpl::getThisObjectFlowPtr() const
-{
-	return m_thisObjectFlowPtr.lock();
-}
-void ObjectFlowImpl::setThisObjectFlowPtr(std::weak_ptr<ObjectFlow> thisObjectFlowPtr)
-{
-	m_thisObjectFlowPtr = thisObjectFlowPtr;
-	setThisActivityEdgePtr(thisObjectFlowPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> ObjectFlowImpl::eContainer() const
 {
 	if(auto wp = m_activity.lock())
@@ -361,7 +334,163 @@ std::shared_ptr<ecore::EObject> ObjectFlowImpl::eContainer() const
 }
 
 //*********************************
-// Structural Feature Getter/Setter
+// Persistence Functions
+//*********************************
+void ObjectFlowImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get umlFactory
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
+	}
+}		
+
+void ObjectFlowImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+	try
+	{
+		std::map<std::string, std::string>::const_iterator iter;
+	
+		iter = attr_list.find("isMulticast");
+		if ( iter != attr_list.end() )
+		{
+			// this attribute is a 'bool'
+			bool value;
+			std::istringstream(iter->second) >> std::boolalpha >> value;
+			this->setIsMulticast(value);
+		}
+
+		iter = attr_list.find("isMultireceive");
+		if ( iter != attr_list.end() )
+		{
+			// this attribute is a 'bool'
+			bool value;
+			std::istringstream(iter->second) >> std::boolalpha >> value;
+			this->setIsMultireceive(value);
+		}
+		std::shared_ptr<ecore::EClass> metaClass = this->eClass(); // get MetaClass
+		iter = attr_list.find("selection");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("selection")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+
+		iter = attr_list.find("transformation");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("transformation")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	ActivityEdgeImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void ObjectFlowImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+
+	//load BasePackage Nodes
+	ActivityEdgeImpl::loadNode(nodeName, loadHandler);
+}
+
+void ObjectFlowImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::OBJECTFLOW_ATTRIBUTE_SELECTION:
+		{
+			if (references.size() == 1)
+			{
+				// Cast object to correct type
+				std::shared_ptr<uml::Behavior> _selection = std::dynamic_pointer_cast<uml::Behavior>( references.front() );
+				setSelection(_selection);
+			}
+			
+			return;
+		}
+
+		case uml::umlPackage::OBJECTFLOW_ATTRIBUTE_TRANSFORMATION:
+		{
+			if (references.size() == 1)
+			{
+				// Cast object to correct type
+				std::shared_ptr<uml::Behavior> _transformation = std::dynamic_pointer_cast<uml::Behavior>( references.front() );
+				setTransformation(_transformation);
+			}
+			
+			return;
+		}
+	}
+	ActivityEdgeImpl::resolveReferences(featureID, references);
+}
+
+void ObjectFlowImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	ActivityEdgeImpl::saveContent(saveHandler);
+	
+	RedefinableElementImpl::saveContent(saveHandler);
+	
+	NamedElementImpl::saveContent(saveHandler);
+	
+	ElementImpl::saveContent(saveHandler);
+	
+	ObjectImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+}
+
+void ObjectFlowImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
+		// Add attributes
+		if ( this->eIsSet(package->getObjectFlow_Attribute_isMulticast()) )
+		{
+			saveHandler->addAttribute("isMulticast", this->getIsMulticast());
+		}
+
+		if ( this->eIsSet(package->getObjectFlow_Attribute_isMultireceive()) )
+		{
+			saveHandler->addAttribute("isMultireceive", this->getIsMultireceive());
+		}
+	// Add references
+		saveHandler->addReference(this->getSelection(), "selection", getSelection()->eClass() != uml::umlPackage::eInstance()->getBehavior_Class()); 
+		saveHandler->addReference(this->getTransformation(), "transformation", getTransformation()->eClass() != uml::umlPackage::eInstance()->getBehavior_Class()); 
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+}
+
+
+std::shared_ptr<ecore::EClass> ObjectFlowImpl::eStaticClass() const
+{
+	return uml::umlPackage::eInstance()->getObjectFlow_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
 //*********************************
 Any ObjectFlowImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
@@ -384,6 +513,7 @@ Any ObjectFlowImpl::eGet(int featureID, bool resolve, bool coreType) const
 	}
 	return ActivityEdgeImpl::eGet(featureID, resolve, coreType);
 }
+
 bool ObjectFlowImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
@@ -399,6 +529,7 @@ bool ObjectFlowImpl::internalEIsSet(int featureID) const
 	}
 	return ActivityEdgeImpl::internalEIsSet(featureID);
 }
+
 bool ObjectFlowImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
@@ -439,7 +570,7 @@ bool ObjectFlowImpl::eSet(int featureID, Any newValue)
 }
 
 //*********************************
-// Behavioral Feature
+// EOperation Invoke
 //*********************************
 Any ObjectFlowImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
 {
@@ -597,157 +728,13 @@ Any ObjectFlowImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sh
 	return result;
 }
 
-//*********************************
-// Persistence Functions
-//*********************************
-void ObjectFlowImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+
+std::shared_ptr<ObjectFlow> ObjectFlowImpl::getThisObjectFlowPtr() const
 {
-	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
-	loadAttributes(loadHandler, attr_list);
-
-	//
-	// Create new objects (from references (containment == true))
-	//
-	// get umlFactory
-	int numNodes = loadHandler->getNumOfChildNodes();
-	for(int ii = 0; ii < numNodes; ii++)
-	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler);
-	}
-}		
-
-void ObjectFlowImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
-{
-	try
-	{
-		std::map<std::string, std::string>::const_iterator iter;
-	
-		iter = attr_list.find("isMulticast");
-		if ( iter != attr_list.end() )
-		{
-			// this attribute is a 'bool'
-			bool value;
-			std::istringstream(iter->second) >> std::boolalpha >> value;
-			this->setIsMulticast(value);
-		}
-
-		iter = attr_list.find("isMultireceive");
-		if ( iter != attr_list.end() )
-		{
-			// this attribute is a 'bool'
-			bool value;
-			std::istringstream(iter->second) >> std::boolalpha >> value;
-			this->setIsMultireceive(value);
-		}
-		std::shared_ptr<ecore::EClass> metaClass = this->eClass(); // get MetaClass
-		iter = attr_list.find("selection");
-		if ( iter != attr_list.end() )
-		{
-			// add unresolvedReference to loadHandler's list
-			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("selection")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
-		}
-
-		iter = attr_list.find("transformation");
-		if ( iter != attr_list.end() )
-		{
-			// add unresolvedReference to loadHandler's list
-			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("transformation")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
-		}
-	}
-	catch (std::exception& e)
-	{
-		std::cout << "| ERROR    | " << e.what() << std::endl;
-	}
-	catch (...) 
-	{
-		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
-	}
-
-	ActivityEdgeImpl::loadAttributes(loadHandler, attr_list);
+	return m_thisObjectFlowPtr.lock();
 }
-
-void ObjectFlowImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+void ObjectFlowImpl::setThisObjectFlowPtr(std::weak_ptr<ObjectFlow> thisObjectFlowPtr)
 {
-
-	//load BasePackage Nodes
-	ActivityEdgeImpl::loadNode(nodeName, loadHandler);
+	m_thisObjectFlowPtr = thisObjectFlowPtr;
+	setThisActivityEdgePtr(thisObjectFlowPtr);
 }
-
-void ObjectFlowImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::OBJECTFLOW_ATTRIBUTE_SELECTION:
-		{
-			if (references.size() == 1)
-			{
-				// Cast object to correct type
-				std::shared_ptr<uml::Behavior> _selection = std::dynamic_pointer_cast<uml::Behavior>( references.front() );
-				setSelection(_selection);
-			}
-			
-			return;
-		}
-
-		case uml::umlPackage::OBJECTFLOW_ATTRIBUTE_TRANSFORMATION:
-		{
-			if (references.size() == 1)
-			{
-				// Cast object to correct type
-				std::shared_ptr<uml::Behavior> _transformation = std::dynamic_pointer_cast<uml::Behavior>( references.front() );
-				setTransformation(_transformation);
-			}
-			
-			return;
-		}
-	}
-	ActivityEdgeImpl::resolveReferences(featureID, references);
-}
-
-void ObjectFlowImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
-{
-	saveContent(saveHandler);
-
-	ActivityEdgeImpl::saveContent(saveHandler);
-	
-	RedefinableElementImpl::saveContent(saveHandler);
-	
-	NamedElementImpl::saveContent(saveHandler);
-	
-	ElementImpl::saveContent(saveHandler);
-	
-	ObjectImpl::saveContent(saveHandler);
-	
-	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
-	
-}
-
-void ObjectFlowImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
-{
-	try
-	{
-		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-		// Add attributes
-		if ( this->eIsSet(package->getObjectFlow_Attribute_isMulticast()) )
-		{
-			saveHandler->addAttribute("isMulticast", this->getIsMulticast());
-		}
-
-		if ( this->eIsSet(package->getObjectFlow_Attribute_isMultireceive()) )
-		{
-			saveHandler->addAttribute("isMultireceive", this->getIsMultireceive());
-		}
-	// Add references
-		saveHandler->addReference(this->getSelection(), "selection", getSelection()->eClass() != uml::umlPackage::eInstance()->getBehavior_Class()); 
-		saveHandler->addReference(this->getTransformation(), "transformation", getTransformation()->eClass() != uml::umlPackage::eInstance()->getBehavior_Class()); 
-	}
-	catch (std::exception& e)
-	{
-		std::cout << "| ERROR    | " << e.what() << std::endl;
-	}
-}
-

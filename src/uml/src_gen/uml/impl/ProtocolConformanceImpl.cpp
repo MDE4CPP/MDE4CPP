@@ -1,3 +1,4 @@
+
 #include "uml/impl/ProtocolConformanceImpl.hpp"
 
 #ifdef NDEBUG
@@ -25,7 +26,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -33,7 +33,6 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-
 
 #include "uml/Comment.hpp"
 #include "uml/DirectedRelationship.hpp"
@@ -126,25 +125,18 @@ std::shared_ptr<ecore::EObject> ProtocolConformanceImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> ProtocolConformanceImpl::eStaticClass() const
-{
-	return uml::umlPackage::eInstance()->getProtocolConformance_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference generalMachine
-*/
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference generalMachine */
 std::shared_ptr<uml::ProtocolStateMachine> ProtocolConformanceImpl::getGeneralMachine() const
 {
     return m_generalMachine;
@@ -155,10 +147,7 @@ void ProtocolConformanceImpl::setGeneralMachine(std::shared_ptr<uml::ProtocolSta
 	
 }
 
-
-/*
-Getter & Setter for reference specificMachine
-*/
+/* Getter & Setter for reference specificMachine */
 std::weak_ptr<uml::ProtocolStateMachine> ProtocolConformanceImpl::getSpecificMachine() const
 {
     return m_specificMachine;
@@ -168,7 +157,6 @@ void ProtocolConformanceImpl::setSpecificMachine(std::weak_ptr<uml::ProtocolStat
     m_specificMachine = _specificMachine;
 	
 }
-
 
 //*********************************
 // Union Getter
@@ -248,18 +236,9 @@ std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> ProtocolConformanceImpl
 	return m_target;
 }
 
-
-
-
-std::shared_ptr<ProtocolConformance> ProtocolConformanceImpl::getThisProtocolConformancePtr() const
-{
-	return m_thisProtocolConformancePtr.lock();
-}
-void ProtocolConformanceImpl::setThisProtocolConformancePtr(std::weak_ptr<ProtocolConformance> thisProtocolConformancePtr)
-{
-	m_thisProtocolConformancePtr = thisProtocolConformancePtr;
-	setThisDirectedRelationshipPtr(thisProtocolConformancePtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> ProtocolConformanceImpl::eContainer() const
 {
 	if(auto wp = m_owner.lock())
@@ -272,85 +251,6 @@ std::shared_ptr<ecore::EObject> ProtocolConformanceImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any ProtocolConformanceImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::PROTOCOLCONFORMANCE_ATTRIBUTE_GENERALMACHINE:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getGeneralMachine();
-				return eAny(returnValue); //1866
-			}
-		case uml::umlPackage::PROTOCOLCONFORMANCE_ATTRIBUTE_SPECIFICMACHINE:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getSpecificMachine().lock();
-				return eAny(returnValue); //1867
-			}
-	}
-	return DirectedRelationshipImpl::eGet(featureID, resolve, coreType);
-}
-bool ProtocolConformanceImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::PROTOCOLCONFORMANCE_ATTRIBUTE_GENERALMACHINE:
-			return getGeneralMachine() != nullptr; //1866
-		case uml::umlPackage::PROTOCOLCONFORMANCE_ATTRIBUTE_SPECIFICMACHINE:
-			return getSpecificMachine().lock() != nullptr; //1867
-	}
-	return DirectedRelationshipImpl::internalEIsSet(featureID);
-}
-bool ProtocolConformanceImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::PROTOCOLCONFORMANCE_ATTRIBUTE_GENERALMACHINE:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::ProtocolStateMachine> _generalMachine = std::dynamic_pointer_cast<uml::ProtocolStateMachine>(_temp);
-			setGeneralMachine(_generalMachine); //1866
-			return true;
-		}
-		case uml::umlPackage::PROTOCOLCONFORMANCE_ATTRIBUTE_SPECIFICMACHINE:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::ProtocolStateMachine> _specificMachine = std::dynamic_pointer_cast<uml::ProtocolStateMachine>(_temp);
-			setSpecificMachine(_specificMachine); //1867
-			return true;
-		}
-	}
-
-	return DirectedRelationshipImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any ProtocolConformanceImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-
-		default:
-		{
-			// call superTypes
-			result = DirectedRelationshipImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -448,10 +348,6 @@ void ProtocolConformanceImpl::save(std::shared_ptr<persistence::interfaces::XSav
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
 }
 
 void ProtocolConformanceImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -468,3 +364,101 @@ void ProtocolConformanceImpl::saveContent(std::shared_ptr<persistence::interface
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> ProtocolConformanceImpl::eStaticClass() const
+{
+	return uml::umlPackage::eInstance()->getProtocolConformance_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any ProtocolConformanceImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::PROTOCOLCONFORMANCE_ATTRIBUTE_GENERALMACHINE:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getGeneralMachine();
+				return eAny(returnValue); //1866
+			}
+		case uml::umlPackage::PROTOCOLCONFORMANCE_ATTRIBUTE_SPECIFICMACHINE:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getSpecificMachine().lock();
+				return eAny(returnValue); //1867
+			}
+	}
+	return DirectedRelationshipImpl::eGet(featureID, resolve, coreType);
+}
+
+bool ProtocolConformanceImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::PROTOCOLCONFORMANCE_ATTRIBUTE_GENERALMACHINE:
+			return getGeneralMachine() != nullptr; //1866
+		case uml::umlPackage::PROTOCOLCONFORMANCE_ATTRIBUTE_SPECIFICMACHINE:
+			return getSpecificMachine().lock() != nullptr; //1867
+	}
+	return DirectedRelationshipImpl::internalEIsSet(featureID);
+}
+
+bool ProtocolConformanceImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::PROTOCOLCONFORMANCE_ATTRIBUTE_GENERALMACHINE:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::ProtocolStateMachine> _generalMachine = std::dynamic_pointer_cast<uml::ProtocolStateMachine>(_temp);
+			setGeneralMachine(_generalMachine); //1866
+			return true;
+		}
+		case uml::umlPackage::PROTOCOLCONFORMANCE_ATTRIBUTE_SPECIFICMACHINE:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::ProtocolStateMachine> _specificMachine = std::dynamic_pointer_cast<uml::ProtocolStateMachine>(_temp);
+			setSpecificMachine(_specificMachine); //1867
+			return true;
+		}
+	}
+
+	return DirectedRelationshipImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any ProtocolConformanceImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+
+		default:
+		{
+			// call superTypes
+			result = DirectedRelationshipImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<ProtocolConformance> ProtocolConformanceImpl::getThisProtocolConformancePtr() const
+{
+	return m_thisProtocolConformancePtr.lock();
+}
+void ProtocolConformanceImpl::setThisProtocolConformancePtr(std::weak_ptr<ProtocolConformance> thisProtocolConformancePtr)
+{
+	m_thisProtocolConformancePtr = thisProtocolConformancePtr;
+	setThisDirectedRelationshipPtr(thisProtocolConformancePtr);
+}

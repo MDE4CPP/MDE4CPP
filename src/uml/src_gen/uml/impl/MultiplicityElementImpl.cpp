@@ -1,3 +1,4 @@
+
 #include "uml/impl/MultiplicityElementImpl.hpp"
 
 #ifdef NDEBUG
@@ -26,7 +27,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -34,7 +34,6 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-
 
 #include "uml/Comment.hpp"
 #include "uml/Element.hpp"
@@ -130,70 +129,6 @@ std::shared_ptr<ecore::EObject> MultiplicityElementImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> MultiplicityElementImpl::eStaticClass() const
-{
-	return uml::umlPackage::eInstance()->getMultiplicityElement_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-/*
-Getter & Setter for attribute isOrdered
-*/
-bool MultiplicityElementImpl::getIsOrdered() const 
-{
-	return m_isOrdered;
-}
-void MultiplicityElementImpl::setIsOrdered(bool _isOrdered)
-{
-	m_isOrdered = _isOrdered;
-	
-} 
-
-
-/*
-Getter & Setter for attribute isUnique
-*/
-bool MultiplicityElementImpl::getIsUnique() const 
-{
-	return m_isUnique;
-}
-void MultiplicityElementImpl::setIsUnique(bool _isUnique)
-{
-	m_isUnique = _isUnique;
-	
-} 
-
-
-/*
-Getter & Setter for attribute lower
-*/
-int MultiplicityElementImpl::getLower() const 
-{
-	return m_lower;
-}
-void MultiplicityElementImpl::setLower(int _lower)
-{
-	m_lower = _lower;
-	
-} 
-
-
-/*
-Getter & Setter for attribute upper
-*/
-int MultiplicityElementImpl::getUpper() const 
-{
-	return m_upper;
-}
-void MultiplicityElementImpl::setUpper(int _upper)
-{
-	m_upper = _upper;
-	
-} 
-
-
 //*********************************
 // Operations
 //*********************************
@@ -270,11 +205,56 @@ bool MultiplicityElementImpl::value_specification_no_side_effects(Any diagnostic
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference lowerValue
-*/
+/* Getter & Setter for attribute isOrdered */
+bool MultiplicityElementImpl::getIsOrdered() const 
+{
+	return m_isOrdered;
+}
+void MultiplicityElementImpl::setIsOrdered(bool _isOrdered)
+{
+	m_isOrdered = _isOrdered;
+	
+}
+
+/* Getter & Setter for attribute isUnique */
+bool MultiplicityElementImpl::getIsUnique() const 
+{
+	return m_isUnique;
+}
+void MultiplicityElementImpl::setIsUnique(bool _isUnique)
+{
+	m_isUnique = _isUnique;
+	
+}
+
+/* Getter & Setter for attribute lower */
+int MultiplicityElementImpl::getLower() const 
+{
+	return m_lower;
+}
+void MultiplicityElementImpl::setLower(int _lower)
+{
+	m_lower = _lower;
+	
+}
+
+/* Getter & Setter for attribute upper */
+int MultiplicityElementImpl::getUpper() const 
+{
+	return m_upper;
+}
+void MultiplicityElementImpl::setUpper(int _upper)
+{
+	m_upper = _upper;
+	
+}
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference lowerValue */
 std::shared_ptr<uml::ValueSpecification> MultiplicityElementImpl::getLowerValue() const
 {
     return m_lowerValue;
@@ -285,10 +265,7 @@ void MultiplicityElementImpl::setLowerValue(std::shared_ptr<uml::ValueSpecificat
 	
 }
 
-
-/*
-Getter & Setter for reference upperValue
-*/
+/* Getter & Setter for reference upperValue */
 std::shared_ptr<uml::ValueSpecification> MultiplicityElementImpl::getUpperValue() const
 {
     return m_upperValue;
@@ -298,7 +275,6 @@ void MultiplicityElementImpl::setUpperValue(std::shared_ptr<uml::ValueSpecificat
     m_upperValue = _upperValue;
 	
 }
-
 
 //*********************************
 // Union Getter
@@ -318,18 +294,9 @@ std::shared_ptr<Union<uml::Element>> MultiplicityElementImpl::getOwnedElement() 
 	return m_ownedElement;
 }
 
-
-
-
-std::shared_ptr<MultiplicityElement> MultiplicityElementImpl::getThisMultiplicityElementPtr() const
-{
-	return m_thisMultiplicityElementPtr.lock();
-}
-void MultiplicityElementImpl::setThisMultiplicityElementPtr(std::weak_ptr<MultiplicityElement> thisMultiplicityElementPtr)
-{
-	m_thisMultiplicityElementPtr = thisMultiplicityElementPtr;
-	setThisElementPtr(thisMultiplicityElementPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> MultiplicityElementImpl::eContainer() const
 {
 	if(auto wp = m_owner.lock())
@@ -340,7 +307,163 @@ std::shared_ptr<ecore::EObject> MultiplicityElementImpl::eContainer() const
 }
 
 //*********************************
-// Structural Feature Getter/Setter
+// Persistence Functions
+//*********************************
+void MultiplicityElementImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get umlFactory
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
+	}
+}		
+
+void MultiplicityElementImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+	try
+	{
+		std::map<std::string, std::string>::const_iterator iter;
+	
+		iter = attr_list.find("isOrdered");
+		if ( iter != attr_list.end() )
+		{
+			// this attribute is a 'bool'
+			bool value;
+			std::istringstream(iter->second) >> std::boolalpha >> value;
+			this->setIsOrdered(value);
+		}
+
+		iter = attr_list.find("isUnique");
+		if ( iter != attr_list.end() )
+		{
+			// this attribute is a 'bool'
+			bool value;
+			std::istringstream(iter->second) >> std::boolalpha >> value;
+			this->setIsUnique(value);
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	ElementImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void MultiplicityElementImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+
+	try
+	{
+		if ( nodeName.compare("lowerValue") == 0 )
+		{
+  			std::string typeName = loadHandler->getCurrentXSITypeName();
+			if (typeName.empty())
+			{
+				std::cout << "| WARNING    | type if an eClassifiers node it empty" << std::endl;
+				return; // no type name given and reference type is abstract
+			}
+			loadHandler->handleChild(this->getLowerValue()); 
+
+			return; 
+		}
+
+		if ( nodeName.compare("upperValue") == 0 )
+		{
+  			std::string typeName = loadHandler->getCurrentXSITypeName();
+			if (typeName.empty())
+			{
+				std::cout << "| WARNING    | type if an eClassifiers node it empty" << std::endl;
+				return; // no type name given and reference type is abstract
+			}
+			loadHandler->handleChild(this->getUpperValue()); 
+
+			return; 
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+	//load BasePackage Nodes
+	ElementImpl::loadNode(nodeName, loadHandler);
+}
+
+void MultiplicityElementImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+{
+	ElementImpl::resolveReferences(featureID, references);
+}
+
+void MultiplicityElementImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	ElementImpl::saveContent(saveHandler);
+	
+	ObjectImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+}
+
+void MultiplicityElementImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
+		// Save 'lowerValue'
+		std::shared_ptr<uml::ValueSpecification> lowerValue = this->getLowerValue();
+		if (lowerValue != nullptr)
+		{
+			saveHandler->addReference(lowerValue, "lowerValue", lowerValue->eClass() != package->getValueSpecification_Class());
+		}
+
+		// Save 'upperValue'
+		std::shared_ptr<uml::ValueSpecification> upperValue = this->getUpperValue();
+		if (upperValue != nullptr)
+		{
+			saveHandler->addReference(upperValue, "upperValue", upperValue->eClass() != package->getValueSpecification_Class());
+		}
+		// Add attributes
+		if ( this->eIsSet(package->getMultiplicityElement_Attribute_isOrdered()) )
+		{
+			saveHandler->addAttribute("isOrdered", this->getIsOrdered());
+		}
+
+		if ( this->eIsSet(package->getMultiplicityElement_Attribute_isUnique()) )
+		{
+			saveHandler->addAttribute("isUnique", this->getIsUnique());
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+}
+
+
+std::shared_ptr<ecore::EClass> MultiplicityElementImpl::eStaticClass() const
+{
+	return uml::umlPackage::eInstance()->getMultiplicityElement_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
 //*********************************
 Any MultiplicityElementImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
@@ -367,6 +490,7 @@ Any MultiplicityElementImpl::eGet(int featureID, bool resolve, bool coreType) co
 	}
 	return ElementImpl::eGet(featureID, resolve, coreType);
 }
+
 bool MultiplicityElementImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
@@ -386,6 +510,7 @@ bool MultiplicityElementImpl::internalEIsSet(int featureID) const
 	}
 	return ElementImpl::internalEIsSet(featureID);
 }
+
 bool MultiplicityElementImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
@@ -440,7 +565,7 @@ bool MultiplicityElementImpl::eSet(int featureID, Any newValue)
 }
 
 //*********************************
-// Behavioral Feature
+// EOperation Invoke
 //*********************************
 Any MultiplicityElementImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
 {
@@ -626,154 +751,13 @@ Any MultiplicityElementImpl::eInvoke(int operationID, std::shared_ptr<std::list 
 	return result;
 }
 
-//*********************************
-// Persistence Functions
-//*********************************
-void MultiplicityElementImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+
+std::shared_ptr<MultiplicityElement> MultiplicityElementImpl::getThisMultiplicityElementPtr() const
 {
-	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
-	loadAttributes(loadHandler, attr_list);
-
-	//
-	// Create new objects (from references (containment == true))
-	//
-	// get umlFactory
-	int numNodes = loadHandler->getNumOfChildNodes();
-	for(int ii = 0; ii < numNodes; ii++)
-	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler);
-	}
-}		
-
-void MultiplicityElementImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
-{
-	try
-	{
-		std::map<std::string, std::string>::const_iterator iter;
-	
-		iter = attr_list.find("isOrdered");
-		if ( iter != attr_list.end() )
-		{
-			// this attribute is a 'bool'
-			bool value;
-			std::istringstream(iter->second) >> std::boolalpha >> value;
-			this->setIsOrdered(value);
-		}
-
-		iter = attr_list.find("isUnique");
-		if ( iter != attr_list.end() )
-		{
-			// this attribute is a 'bool'
-			bool value;
-			std::istringstream(iter->second) >> std::boolalpha >> value;
-			this->setIsUnique(value);
-		}
-	}
-	catch (std::exception& e)
-	{
-		std::cout << "| ERROR    | " << e.what() << std::endl;
-	}
-	catch (...) 
-	{
-		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
-	}
-
-	ElementImpl::loadAttributes(loadHandler, attr_list);
+	return m_thisMultiplicityElementPtr.lock();
 }
-
-void MultiplicityElementImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+void MultiplicityElementImpl::setThisMultiplicityElementPtr(std::weak_ptr<MultiplicityElement> thisMultiplicityElementPtr)
 {
-
-	try
-	{
-		if ( nodeName.compare("lowerValue") == 0 )
-		{
-  			std::string typeName = loadHandler->getCurrentXSITypeName();
-			if (typeName.empty())
-			{
-				std::cout << "| WARNING    | type if an eClassifiers node it empty" << std::endl;
-				return; // no type name given and reference type is abstract
-			}
-			loadHandler->handleChild(this->getLowerValue()); 
-
-			return; 
-		}
-
-		if ( nodeName.compare("upperValue") == 0 )
-		{
-  			std::string typeName = loadHandler->getCurrentXSITypeName();
-			if (typeName.empty())
-			{
-				std::cout << "| WARNING    | type if an eClassifiers node it empty" << std::endl;
-				return; // no type name given and reference type is abstract
-			}
-			loadHandler->handleChild(this->getUpperValue()); 
-
-			return; 
-		}
-	}
-	catch (std::exception& e)
-	{
-		std::cout << "| ERROR    | " << e.what() << std::endl;
-	}
-	catch (...) 
-	{
-		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
-	}
-	//load BasePackage Nodes
-	ElementImpl::loadNode(nodeName, loadHandler);
+	m_thisMultiplicityElementPtr = thisMultiplicityElementPtr;
+	setThisElementPtr(thisMultiplicityElementPtr);
 }
-
-void MultiplicityElementImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
-{
-	ElementImpl::resolveReferences(featureID, references);
-}
-
-void MultiplicityElementImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
-{
-	saveContent(saveHandler);
-
-	ElementImpl::saveContent(saveHandler);
-	
-	ObjectImpl::saveContent(saveHandler);
-	
-	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-}
-
-void MultiplicityElementImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
-{
-	try
-	{
-		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-		// Save 'lowerValue'
-		std::shared_ptr<uml::ValueSpecification> lowerValue = this->getLowerValue();
-		if (lowerValue != nullptr)
-		{
-			saveHandler->addReference(lowerValue, "lowerValue", lowerValue->eClass() != package->getValueSpecification_Class());
-		}
-
-		// Save 'upperValue'
-		std::shared_ptr<uml::ValueSpecification> upperValue = this->getUpperValue();
-		if (upperValue != nullptr)
-		{
-			saveHandler->addReference(upperValue, "upperValue", upperValue->eClass() != package->getValueSpecification_Class());
-		}
-		// Add attributes
-		if ( this->eIsSet(package->getMultiplicityElement_Attribute_isOrdered()) )
-		{
-			saveHandler->addAttribute("isOrdered", this->getIsOrdered());
-		}
-
-		if ( this->eIsSet(package->getMultiplicityElement_Attribute_isUnique()) )
-		{
-			saveHandler->addAttribute("isUnique", this->getIsUnique());
-		}
-	}
-	catch (std::exception& e)
-	{
-		std::cout << "| ERROR    | " << e.what() << std::endl;
-	}
-}
-

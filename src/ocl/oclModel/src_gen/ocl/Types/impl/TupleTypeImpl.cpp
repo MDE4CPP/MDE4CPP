@@ -1,3 +1,4 @@
+
 #include "ocl/Types/impl/TupleTypeImpl.hpp"
 
 #ifdef NDEBUG
@@ -25,7 +26,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -35,7 +35,6 @@
 #include "ecore/ecoreFactory.hpp"
 #include "ocl/Types/TypesFactory.hpp"
 #include "ocl/Values/ValuesFactory.hpp"
-
 
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EDataType.hpp"
@@ -121,25 +120,18 @@ std::shared_ptr<ecore::EObject> TupleTypeImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> TupleTypeImpl::eStaticClass() const
-{
-	return ocl::Types::TypesPackage::eInstance()->getTupleType_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference instance
-*/
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference instance */
 std::shared_ptr<ocl::Values::TupleValue> TupleTypeImpl::getInstance() const
 {
     return m_instance;
@@ -150,10 +142,7 @@ void TupleTypeImpl::setInstance(std::shared_ptr<ocl::Values::TupleValue> _instan
 	
 }
 
-
-/*
-Getter & Setter for reference parts
-*/
+/* Getter & Setter for reference parts */
 std::shared_ptr<Bag<ocl::Types::NameTypeBinding>> TupleTypeImpl::getParts() const
 {
 	if(m_parts == nullptr)
@@ -165,23 +154,13 @@ std::shared_ptr<Bag<ocl::Types::NameTypeBinding>> TupleTypeImpl::getParts() cons
     return m_parts;
 }
 
-
-
 //*********************************
 // Union Getter
 //*********************************
 
-
-
-std::shared_ptr<TupleType> TupleTypeImpl::getThisTupleTypePtr() const
-{
-	return m_thisTupleTypePtr.lock();
-}
-void TupleTypeImpl::setThisTupleTypePtr(std::weak_ptr<TupleType> thisTupleTypePtr)
-{
-	m_thisTupleTypePtr = thisTupleTypePtr;
-	setThisEDataTypePtr(thisTupleTypePtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> TupleTypeImpl::eContainer() const
 {
 	if(auto wp = m_ePackage.lock())
@@ -189,120 +168,6 @@ std::shared_ptr<ecore::EObject> TupleTypeImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any TupleTypeImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case ocl::Types::TypesPackage::TUPLETYPE_ATTRIBUTE_INSTANCE:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getInstance();
-				return eAny(returnValue); //889
-			}
-		case ocl::Types::TypesPackage::TUPLETYPE_ATTRIBUTE_PARTS:
-		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<ocl::Types::NameTypeBinding>::iterator iter = getParts()->begin();
-			Bag<ocl::Types::NameTypeBinding>::iterator end = getParts()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //8810			
-		}
-	}
-	return ecore::EDataTypeImpl::eGet(featureID, resolve, coreType);
-}
-bool TupleTypeImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case ocl::Types::TypesPackage::TUPLETYPE_ATTRIBUTE_INSTANCE:
-			return getInstance() != nullptr; //889
-		case ocl::Types::TypesPackage::TUPLETYPE_ATTRIBUTE_PARTS:
-			return getParts() != nullptr; //8810
-	}
-	return ecore::EDataTypeImpl::internalEIsSet(featureID);
-}
-bool TupleTypeImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case ocl::Types::TypesPackage::TUPLETYPE_ATTRIBUTE_INSTANCE:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<ocl::Values::TupleValue> _instance = std::dynamic_pointer_cast<ocl::Values::TupleValue>(_temp);
-			setInstance(_instance); //889
-			return true;
-		}
-		case ocl::Types::TypesPackage::TUPLETYPE_ATTRIBUTE_PARTS:
-		{
-			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<ocl::Types::NameTypeBinding>> partsList(new Bag<ocl::Types::NameTypeBinding>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
-			{
-				partsList->add(std::dynamic_pointer_cast<ocl::Types::NameTypeBinding>(*iter));
-				iter++;
-			}
-			
-			Bag<ocl::Types::NameTypeBinding>::iterator iterParts = getParts()->begin();
-			Bag<ocl::Types::NameTypeBinding>::iterator endParts = getParts()->end();
-			while (iterParts != endParts)
-			{
-				if (partsList->find(*iterParts) == -1)
-				{
-					getParts()->erase(*iterParts);
-				}
-				iterParts++;
-			}
- 
-			iterParts = partsList->begin();
-			endParts = partsList->end();
-			while (iterParts != endParts)
-			{
-				if (getParts()->find(*iterParts) == -1)
-				{
-					getParts()->add(*iterParts);
-				}
-				iterParts++;			
-			}
-			return true;
-		}
-	}
-
-	return ecore::EDataTypeImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any TupleTypeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-
-		default:
-		{
-			// call superTypes
-			result = ecore::EDataTypeImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -409,10 +274,6 @@ void TupleTypeImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> 
 	ecore::EModelElementImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
 }
 
 void TupleTypeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -430,3 +291,136 @@ void TupleTypeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHa
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> TupleTypeImpl::eStaticClass() const
+{
+	return ocl::Types::TypesPackage::eInstance()->getTupleType_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any TupleTypeImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case ocl::Types::TypesPackage::TUPLETYPE_ATTRIBUTE_INSTANCE:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getInstance();
+				return eAny(returnValue); //889
+			}
+		case ocl::Types::TypesPackage::TUPLETYPE_ATTRIBUTE_PARTS:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<ocl::Types::NameTypeBinding>::iterator iter = getParts()->begin();
+			Bag<ocl::Types::NameTypeBinding>::iterator end = getParts()->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //8810			
+		}
+	}
+	return ecore::EDataTypeImpl::eGet(featureID, resolve, coreType);
+}
+
+bool TupleTypeImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case ocl::Types::TypesPackage::TUPLETYPE_ATTRIBUTE_INSTANCE:
+			return getInstance() != nullptr; //889
+		case ocl::Types::TypesPackage::TUPLETYPE_ATTRIBUTE_PARTS:
+			return getParts() != nullptr; //8810
+	}
+	return ecore::EDataTypeImpl::internalEIsSet(featureID);
+}
+
+bool TupleTypeImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case ocl::Types::TypesPackage::TUPLETYPE_ATTRIBUTE_INSTANCE:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<ocl::Values::TupleValue> _instance = std::dynamic_pointer_cast<ocl::Values::TupleValue>(_temp);
+			setInstance(_instance); //889
+			return true;
+		}
+		case ocl::Types::TypesPackage::TUPLETYPE_ATTRIBUTE_PARTS:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<ocl::Types::NameTypeBinding>> partsList(new Bag<ocl::Types::NameTypeBinding>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				partsList->add(std::dynamic_pointer_cast<ocl::Types::NameTypeBinding>(*iter));
+				iter++;
+			}
+			
+			Bag<ocl::Types::NameTypeBinding>::iterator iterParts = getParts()->begin();
+			Bag<ocl::Types::NameTypeBinding>::iterator endParts = getParts()->end();
+			while (iterParts != endParts)
+			{
+				if (partsList->find(*iterParts) == -1)
+				{
+					getParts()->erase(*iterParts);
+				}
+				iterParts++;
+			}
+ 
+			iterParts = partsList->begin();
+			endParts = partsList->end();
+			while (iterParts != endParts)
+			{
+				if (getParts()->find(*iterParts) == -1)
+				{
+					getParts()->add(*iterParts);
+				}
+				iterParts++;			
+			}
+			return true;
+		}
+	}
+
+	return ecore::EDataTypeImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any TupleTypeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+
+		default:
+		{
+			// call superTypes
+			result = ecore::EDataTypeImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<TupleType> TupleTypeImpl::getThisTupleTypePtr() const
+{
+	return m_thisTupleTypePtr.lock();
+}
+void TupleTypeImpl::setThisTupleTypePtr(std::weak_ptr<TupleType> thisTupleTypePtr)
+{
+	m_thisTupleTypePtr = thisTupleTypePtr;
+	setThisEDataTypePtr(thisTupleTypePtr);
+}

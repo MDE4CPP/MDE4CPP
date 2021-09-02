@@ -1,3 +1,4 @@
+
 #include "uml/impl/ExtendImpl.hpp"
 
 #ifdef NDEBUG
@@ -26,7 +27,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -34,7 +34,6 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-
 
 #include "uml/Comment.hpp"
 #include "uml/Constraint.hpp"
@@ -150,15 +149,6 @@ std::shared_ptr<ecore::EObject> ExtendImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> ExtendImpl::eStaticClass() const
-{
-	return uml::umlPackage::eInstance()->getExtend_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
@@ -169,11 +159,13 @@ bool ExtendImpl::extension_points(Any diagnostics,std::shared_ptr<std::map < Any
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference condition
-*/
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference condition */
 std::shared_ptr<uml::Constraint> ExtendImpl::getCondition() const
 {
     return m_condition;
@@ -184,10 +176,7 @@ void ExtendImpl::setCondition(std::shared_ptr<uml::Constraint> _condition)
 	
 }
 
-
-/*
-Getter & Setter for reference extendedCase
-*/
+/* Getter & Setter for reference extendedCase */
 std::shared_ptr<uml::UseCase> ExtendImpl::getExtendedCase() const
 {
     return m_extendedCase;
@@ -198,10 +187,7 @@ void ExtendImpl::setExtendedCase(std::shared_ptr<uml::UseCase> _extendedCase)
 	
 }
 
-
-/*
-Getter & Setter for reference extension
-*/
+/* Getter & Setter for reference extension */
 std::weak_ptr<uml::UseCase> ExtendImpl::getExtension() const
 {
     return m_extension;
@@ -212,10 +198,7 @@ void ExtendImpl::setExtension(std::weak_ptr<uml::UseCase> _extension)
 	
 }
 
-
-/*
-Getter & Setter for reference extensionLocation
-*/
+/* Getter & Setter for reference extensionLocation */
 std::shared_ptr<Bag<uml::ExtensionPoint>> ExtendImpl::getExtensionLocation() const
 {
 	if(m_extensionLocation == nullptr)
@@ -226,8 +209,6 @@ std::shared_ptr<Bag<uml::ExtensionPoint>> ExtendImpl::getExtensionLocation() con
 	}
     return m_extensionLocation;
 }
-
-
 
 //*********************************
 // Union Getter
@@ -312,19 +293,9 @@ std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> ExtendImpl::getTarget()
 	return m_target;
 }
 
-
-
-
-std::shared_ptr<Extend> ExtendImpl::getThisExtendPtr() const
-{
-	return m_thisExtendPtr.lock();
-}
-void ExtendImpl::setThisExtendPtr(std::weak_ptr<Extend> thisExtendPtr)
-{
-	m_thisExtendPtr = thisExtendPtr;
-	setThisDirectedRelationshipPtr(thisExtendPtr);
-	setThisNamedElementPtr(thisExtendPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> ExtendImpl::eContainer() const
 {
 	if(auto wp = m_extension.lock())
@@ -342,191 +313,6 @@ std::shared_ptr<ecore::EObject> ExtendImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any ExtendImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::EXTEND_ATTRIBUTE_CONDITION:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getCondition();
-				return eAny(returnValue); //9612
-			}
-		case uml::umlPackage::EXTEND_ATTRIBUTE_EXTENDEDCASE:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getExtendedCase();
-				return eAny(returnValue); //9613
-			}
-		case uml::umlPackage::EXTEND_ATTRIBUTE_EXTENSION:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getExtension().lock();
-				return eAny(returnValue); //9615
-			}
-		case uml::umlPackage::EXTEND_ATTRIBUTE_EXTENSIONLOCATION:
-		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::ExtensionPoint>::iterator iter = getExtensionLocation()->begin();
-			Bag<uml::ExtensionPoint>::iterator end = getExtensionLocation()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //9614			
-		}
-	}
-	Any result;
-	result = DirectedRelationshipImpl::eGet(featureID, resolve, coreType);
-	if (result != nullptr && !result->isEmpty())
-	{
-		return result;
-	}
-	result = NamedElementImpl::eGet(featureID, resolve, coreType);
-	return result;
-}
-bool ExtendImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::EXTEND_ATTRIBUTE_CONDITION:
-			return getCondition() != nullptr; //9612
-		case uml::umlPackage::EXTEND_ATTRIBUTE_EXTENDEDCASE:
-			return getExtendedCase() != nullptr; //9613
-		case uml::umlPackage::EXTEND_ATTRIBUTE_EXTENSION:
-			return getExtension().lock() != nullptr; //9615
-		case uml::umlPackage::EXTEND_ATTRIBUTE_EXTENSIONLOCATION:
-			return getExtensionLocation() != nullptr; //9614
-	}
-	bool result = false;
-	result = DirectedRelationshipImpl::internalEIsSet(featureID);
-	if (result)
-	{
-		return result;
-	}
-	result = NamedElementImpl::internalEIsSet(featureID);
-	return result;
-}
-bool ExtendImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::EXTEND_ATTRIBUTE_CONDITION:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::Constraint> _condition = std::dynamic_pointer_cast<uml::Constraint>(_temp);
-			setCondition(_condition); //9612
-			return true;
-		}
-		case uml::umlPackage::EXTEND_ATTRIBUTE_EXTENDEDCASE:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::UseCase> _extendedCase = std::dynamic_pointer_cast<uml::UseCase>(_temp);
-			setExtendedCase(_extendedCase); //9613
-			return true;
-		}
-		case uml::umlPackage::EXTEND_ATTRIBUTE_EXTENSION:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::UseCase> _extension = std::dynamic_pointer_cast<uml::UseCase>(_temp);
-			setExtension(_extension); //9615
-			return true;
-		}
-		case uml::umlPackage::EXTEND_ATTRIBUTE_EXTENSIONLOCATION:
-		{
-			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::ExtensionPoint>> extensionLocationList(new Bag<uml::ExtensionPoint>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
-			{
-				extensionLocationList->add(std::dynamic_pointer_cast<uml::ExtensionPoint>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::ExtensionPoint>::iterator iterExtensionLocation = getExtensionLocation()->begin();
-			Bag<uml::ExtensionPoint>::iterator endExtensionLocation = getExtensionLocation()->end();
-			while (iterExtensionLocation != endExtensionLocation)
-			{
-				if (extensionLocationList->find(*iterExtensionLocation) == -1)
-				{
-					getExtensionLocation()->erase(*iterExtensionLocation);
-				}
-				iterExtensionLocation++;
-			}
- 
-			iterExtensionLocation = extensionLocationList->begin();
-			endExtensionLocation = extensionLocationList->end();
-			while (iterExtensionLocation != endExtensionLocation)
-			{
-				if (getExtensionLocation()->find(*iterExtensionLocation) == -1)
-				{
-					getExtensionLocation()->add(*iterExtensionLocation);
-				}
-				iterExtensionLocation++;			
-			}
-			return true;
-		}
-	}
-
-	bool result = false;
-	result = DirectedRelationshipImpl::eSet(featureID, newValue);
-	if (result)
-	{
-		return result;
-	}
-	result = NamedElementImpl::eSet(featureID, newValue);
-	return result;
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any ExtendImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-		
-		// 1884789013
-		case umlPackage::EXTEND_OPERATION_EXTENSION_POINTS_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->extension_points(incoming_param_diagnostics,incoming_param_context));
-			break;
-		}
-
-		default:
-		{
-			// call superTypes
-			result = DirectedRelationshipImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			result = NamedElementImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -671,10 +457,6 @@ void ExtendImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> sav
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
 }
 
 void ExtendImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -698,3 +480,208 @@ void ExtendImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandl
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> ExtendImpl::eStaticClass() const
+{
+	return uml::umlPackage::eInstance()->getExtend_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any ExtendImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::EXTEND_ATTRIBUTE_CONDITION:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getCondition();
+				return eAny(returnValue); //9612
+			}
+		case uml::umlPackage::EXTEND_ATTRIBUTE_EXTENDEDCASE:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getExtendedCase();
+				return eAny(returnValue); //9613
+			}
+		case uml::umlPackage::EXTEND_ATTRIBUTE_EXTENSION:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getExtension().lock();
+				return eAny(returnValue); //9615
+			}
+		case uml::umlPackage::EXTEND_ATTRIBUTE_EXTENSIONLOCATION:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::ExtensionPoint>::iterator iter = getExtensionLocation()->begin();
+			Bag<uml::ExtensionPoint>::iterator end = getExtensionLocation()->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //9614			
+		}
+	}
+	Any result;
+	result = DirectedRelationshipImpl::eGet(featureID, resolve, coreType);
+	if (result != nullptr && !result->isEmpty())
+	{
+		return result;
+	}
+	result = NamedElementImpl::eGet(featureID, resolve, coreType);
+	return result;
+}
+
+bool ExtendImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::EXTEND_ATTRIBUTE_CONDITION:
+			return getCondition() != nullptr; //9612
+		case uml::umlPackage::EXTEND_ATTRIBUTE_EXTENDEDCASE:
+			return getExtendedCase() != nullptr; //9613
+		case uml::umlPackage::EXTEND_ATTRIBUTE_EXTENSION:
+			return getExtension().lock() != nullptr; //9615
+		case uml::umlPackage::EXTEND_ATTRIBUTE_EXTENSIONLOCATION:
+			return getExtensionLocation() != nullptr; //9614
+	}
+	bool result = false;
+	result = DirectedRelationshipImpl::internalEIsSet(featureID);
+	if (result)
+	{
+		return result;
+	}
+	result = NamedElementImpl::internalEIsSet(featureID);
+	return result;
+}
+
+bool ExtendImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::EXTEND_ATTRIBUTE_CONDITION:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::Constraint> _condition = std::dynamic_pointer_cast<uml::Constraint>(_temp);
+			setCondition(_condition); //9612
+			return true;
+		}
+		case uml::umlPackage::EXTEND_ATTRIBUTE_EXTENDEDCASE:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::UseCase> _extendedCase = std::dynamic_pointer_cast<uml::UseCase>(_temp);
+			setExtendedCase(_extendedCase); //9613
+			return true;
+		}
+		case uml::umlPackage::EXTEND_ATTRIBUTE_EXTENSION:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::UseCase> _extension = std::dynamic_pointer_cast<uml::UseCase>(_temp);
+			setExtension(_extension); //9615
+			return true;
+		}
+		case uml::umlPackage::EXTEND_ATTRIBUTE_EXTENSIONLOCATION:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::ExtensionPoint>> extensionLocationList(new Bag<uml::ExtensionPoint>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				extensionLocationList->add(std::dynamic_pointer_cast<uml::ExtensionPoint>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::ExtensionPoint>::iterator iterExtensionLocation = getExtensionLocation()->begin();
+			Bag<uml::ExtensionPoint>::iterator endExtensionLocation = getExtensionLocation()->end();
+			while (iterExtensionLocation != endExtensionLocation)
+			{
+				if (extensionLocationList->find(*iterExtensionLocation) == -1)
+				{
+					getExtensionLocation()->erase(*iterExtensionLocation);
+				}
+				iterExtensionLocation++;
+			}
+ 
+			iterExtensionLocation = extensionLocationList->begin();
+			endExtensionLocation = extensionLocationList->end();
+			while (iterExtensionLocation != endExtensionLocation)
+			{
+				if (getExtensionLocation()->find(*iterExtensionLocation) == -1)
+				{
+					getExtensionLocation()->add(*iterExtensionLocation);
+				}
+				iterExtensionLocation++;			
+			}
+			return true;
+		}
+	}
+
+	bool result = false;
+	result = DirectedRelationshipImpl::eSet(featureID, newValue);
+	if (result)
+	{
+		return result;
+	}
+	result = NamedElementImpl::eSet(featureID, newValue);
+	return result;
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any ExtendImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 1884789013
+		case umlPackage::EXTEND_OPERATION_EXTENSION_POINTS_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->extension_points(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = DirectedRelationshipImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			result = NamedElementImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<Extend> ExtendImpl::getThisExtendPtr() const
+{
+	return m_thisExtendPtr.lock();
+}
+void ExtendImpl::setThisExtendPtr(std::weak_ptr<Extend> thisExtendPtr)
+{
+	m_thisExtendPtr = thisExtendPtr;
+	setThisDirectedRelationshipPtr(thisExtendPtr);
+	setThisNamedElementPtr(thisExtendPtr);
+}

@@ -1,3 +1,4 @@
+
 #include "uml/impl/CombinedFragmentImpl.hpp"
 
 #ifdef NDEBUG
@@ -26,7 +27,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -34,7 +34,6 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-
 
 #include "uml/Comment.hpp"
 #include "uml/Dependency.hpp"
@@ -218,28 +217,6 @@ std::shared_ptr<ecore::EObject> CombinedFragmentImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> CombinedFragmentImpl::eStaticClass() const
-{
-	return uml::umlPackage::eInstance()->getCombinedFragment_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-/*
-Getter & Setter for attribute interactionOperator
-*/
-uml::InteractionOperatorKind CombinedFragmentImpl::getInteractionOperator() const 
-{
-	return m_interactionOperator;
-}
-void CombinedFragmentImpl::setInteractionOperator(uml::InteractionOperatorKind _interactionOperator)
-{
-	m_interactionOperator = _interactionOperator;
-	
-} 
-
-
 //*********************************
 // Operations
 //*********************************
@@ -262,11 +239,23 @@ bool CombinedFragmentImpl::opt_loop_break_neg(Any diagnostics,std::shared_ptr<st
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference cfragmentGate
-*/
+/* Getter & Setter for attribute interactionOperator */
+uml::InteractionOperatorKind CombinedFragmentImpl::getInteractionOperator() const 
+{
+	return m_interactionOperator;
+}
+void CombinedFragmentImpl::setInteractionOperator(uml::InteractionOperatorKind _interactionOperator)
+{
+	m_interactionOperator = _interactionOperator;
+	
+}
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference cfragmentGate */
 std::shared_ptr<Subset<uml::Gate, uml::Element>> CombinedFragmentImpl::getCfragmentGate() const
 {
 	if(m_cfragmentGate == nullptr)
@@ -287,11 +276,7 @@ std::shared_ptr<Subset<uml::Gate, uml::Element>> CombinedFragmentImpl::getCfragm
     return m_cfragmentGate;
 }
 
-
-
-/*
-Getter & Setter for reference operand
-*/
+/* Getter & Setter for reference operand */
 std::shared_ptr<Subset<uml::InteractionOperand, uml::Element>> CombinedFragmentImpl::getOperand() const
 {
 	if(m_operand == nullptr)
@@ -311,8 +296,6 @@ std::shared_ptr<Subset<uml::InteractionOperand, uml::Element>> CombinedFragmentI
 	}
     return m_operand;
 }
-
-
 
 //*********************************
 // Union Getter
@@ -342,18 +325,9 @@ std::weak_ptr<uml::Element> CombinedFragmentImpl::getOwner() const
 	return m_owner;
 }
 
-
-
-
-std::shared_ptr<CombinedFragment> CombinedFragmentImpl::getThisCombinedFragmentPtr() const
-{
-	return m_thisCombinedFragmentPtr.lock();
-}
-void CombinedFragmentImpl::setThisCombinedFragmentPtr(std::weak_ptr<CombinedFragment> thisCombinedFragmentPtr)
-{
-	m_thisCombinedFragmentPtr = thisCombinedFragmentPtr;
-	setThisInteractionFragmentPtr(thisCombinedFragmentPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> CombinedFragmentImpl::eContainer() const
 {
 	if(auto wp = m_enclosingInteraction.lock())
@@ -376,217 +350,6 @@ std::shared_ptr<ecore::EObject> CombinedFragmentImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any CombinedFragmentImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::COMBINEDFRAGMENT_ATTRIBUTE_CFRAGMENTGATE:
-		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Gate>::iterator iter = getCfragmentGate()->begin();
-			Bag<uml::Gate>::iterator end = getCfragmentGate()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //4413			
-		}
-		case uml::umlPackage::COMBINEDFRAGMENT_ATTRIBUTE_INTERACTIONOPERATOR:
-			return eAny(getInteractionOperator()); //4414
-		case uml::umlPackage::COMBINEDFRAGMENT_ATTRIBUTE_OPERAND:
-		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::InteractionOperand>::iterator iter = getOperand()->begin();
-			Bag<uml::InteractionOperand>::iterator end = getOperand()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //4415			
-		}
-	}
-	return InteractionFragmentImpl::eGet(featureID, resolve, coreType);
-}
-bool CombinedFragmentImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::COMBINEDFRAGMENT_ATTRIBUTE_CFRAGMENTGATE:
-			return getCfragmentGate() != nullptr; //4413
-		case uml::umlPackage::COMBINEDFRAGMENT_ATTRIBUTE_INTERACTIONOPERATOR:
-			return m_interactionOperator != InteractionOperatorKind::SEQ;; //4414
-		case uml::umlPackage::COMBINEDFRAGMENT_ATTRIBUTE_OPERAND:
-			return getOperand() != nullptr; //4415
-	}
-	return InteractionFragmentImpl::internalEIsSet(featureID);
-}
-bool CombinedFragmentImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::COMBINEDFRAGMENT_ATTRIBUTE_CFRAGMENTGATE:
-		{
-			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::Gate>> cfragmentGateList(new Bag<uml::Gate>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
-			{
-				cfragmentGateList->add(std::dynamic_pointer_cast<uml::Gate>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::Gate>::iterator iterCfragmentGate = getCfragmentGate()->begin();
-			Bag<uml::Gate>::iterator endCfragmentGate = getCfragmentGate()->end();
-			while (iterCfragmentGate != endCfragmentGate)
-			{
-				if (cfragmentGateList->find(*iterCfragmentGate) == -1)
-				{
-					getCfragmentGate()->erase(*iterCfragmentGate);
-				}
-				iterCfragmentGate++;
-			}
- 
-			iterCfragmentGate = cfragmentGateList->begin();
-			endCfragmentGate = cfragmentGateList->end();
-			while (iterCfragmentGate != endCfragmentGate)
-			{
-				if (getCfragmentGate()->find(*iterCfragmentGate) == -1)
-				{
-					getCfragmentGate()->add(*iterCfragmentGate);
-				}
-				iterCfragmentGate++;			
-			}
-			return true;
-		}
-		case uml::umlPackage::COMBINEDFRAGMENT_ATTRIBUTE_INTERACTIONOPERATOR:
-		{
-			// BOOST CAST
-			uml::InteractionOperatorKind _interactionOperator = newValue->get<uml::InteractionOperatorKind>();
-			setInteractionOperator(_interactionOperator); //4414
-			return true;
-		}
-		case uml::umlPackage::COMBINEDFRAGMENT_ATTRIBUTE_OPERAND:
-		{
-			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::InteractionOperand>> operandList(new Bag<uml::InteractionOperand>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
-			{
-				operandList->add(std::dynamic_pointer_cast<uml::InteractionOperand>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::InteractionOperand>::iterator iterOperand = getOperand()->begin();
-			Bag<uml::InteractionOperand>::iterator endOperand = getOperand()->end();
-			while (iterOperand != endOperand)
-			{
-				if (operandList->find(*iterOperand) == -1)
-				{
-					getOperand()->erase(*iterOperand);
-				}
-				iterOperand++;
-			}
- 
-			iterOperand = operandList->begin();
-			endOperand = operandList->end();
-			while (iterOperand != endOperand)
-			{
-				if (getOperand()->find(*iterOperand) == -1)
-				{
-					getOperand()->add(*iterOperand);
-				}
-				iterOperand++;			
-			}
-			return true;
-		}
-	}
-
-	return InteractionFragmentImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any CombinedFragmentImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-		
-		// 173441283
-		case umlPackage::COMBINEDFRAGMENT_OPERATION_BREAK__EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->break_(incoming_param_diagnostics,incoming_param_context));
-			break;
-		}
-		
-		// 1524474821
-		case umlPackage::COMBINEDFRAGMENT_OPERATION_CONSIDER_AND_IGNORE_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->consider_and_ignore(incoming_param_diagnostics,incoming_param_context));
-			break;
-		}
-		
-		// 2094584575
-		case umlPackage::COMBINEDFRAGMENT_OPERATION_OPT_LOOP_BREAK_NEG_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->opt_loop_break_neg(incoming_param_diagnostics,incoming_param_context));
-			break;
-		}
-
-		default:
-		{
-			// call superTypes
-			result = InteractionFragmentImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -741,10 +504,6 @@ void CombinedFragmentImpl::save(std::shared_ptr<persistence::interfaces::XSaveHa
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
 }
 
 void CombinedFragmentImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -825,3 +584,233 @@ void CombinedFragmentImpl::saveContent(std::shared_ptr<persistence::interfaces::
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> CombinedFragmentImpl::eStaticClass() const
+{
+	return uml::umlPackage::eInstance()->getCombinedFragment_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any CombinedFragmentImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::COMBINEDFRAGMENT_ATTRIBUTE_CFRAGMENTGATE:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Gate>::iterator iter = getCfragmentGate()->begin();
+			Bag<uml::Gate>::iterator end = getCfragmentGate()->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //4413			
+		}
+		case uml::umlPackage::COMBINEDFRAGMENT_ATTRIBUTE_INTERACTIONOPERATOR:
+			return eAny(getInteractionOperator()); //4414
+		case uml::umlPackage::COMBINEDFRAGMENT_ATTRIBUTE_OPERAND:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::InteractionOperand>::iterator iter = getOperand()->begin();
+			Bag<uml::InteractionOperand>::iterator end = getOperand()->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //4415			
+		}
+	}
+	return InteractionFragmentImpl::eGet(featureID, resolve, coreType);
+}
+
+bool CombinedFragmentImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::COMBINEDFRAGMENT_ATTRIBUTE_CFRAGMENTGATE:
+			return getCfragmentGate() != nullptr; //4413
+		case uml::umlPackage::COMBINEDFRAGMENT_ATTRIBUTE_INTERACTIONOPERATOR:
+			return m_interactionOperator != InteractionOperatorKind::SEQ;; //4414
+		case uml::umlPackage::COMBINEDFRAGMENT_ATTRIBUTE_OPERAND:
+			return getOperand() != nullptr; //4415
+	}
+	return InteractionFragmentImpl::internalEIsSet(featureID);
+}
+
+bool CombinedFragmentImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::COMBINEDFRAGMENT_ATTRIBUTE_CFRAGMENTGATE:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::Gate>> cfragmentGateList(new Bag<uml::Gate>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				cfragmentGateList->add(std::dynamic_pointer_cast<uml::Gate>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::Gate>::iterator iterCfragmentGate = getCfragmentGate()->begin();
+			Bag<uml::Gate>::iterator endCfragmentGate = getCfragmentGate()->end();
+			while (iterCfragmentGate != endCfragmentGate)
+			{
+				if (cfragmentGateList->find(*iterCfragmentGate) == -1)
+				{
+					getCfragmentGate()->erase(*iterCfragmentGate);
+				}
+				iterCfragmentGate++;
+			}
+ 
+			iterCfragmentGate = cfragmentGateList->begin();
+			endCfragmentGate = cfragmentGateList->end();
+			while (iterCfragmentGate != endCfragmentGate)
+			{
+				if (getCfragmentGate()->find(*iterCfragmentGate) == -1)
+				{
+					getCfragmentGate()->add(*iterCfragmentGate);
+				}
+				iterCfragmentGate++;			
+			}
+			return true;
+		}
+		case uml::umlPackage::COMBINEDFRAGMENT_ATTRIBUTE_INTERACTIONOPERATOR:
+		{
+			// BOOST CAST
+			uml::InteractionOperatorKind _interactionOperator = newValue->get<uml::InteractionOperatorKind>();
+			setInteractionOperator(_interactionOperator); //4414
+			return true;
+		}
+		case uml::umlPackage::COMBINEDFRAGMENT_ATTRIBUTE_OPERAND:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::InteractionOperand>> operandList(new Bag<uml::InteractionOperand>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				operandList->add(std::dynamic_pointer_cast<uml::InteractionOperand>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::InteractionOperand>::iterator iterOperand = getOperand()->begin();
+			Bag<uml::InteractionOperand>::iterator endOperand = getOperand()->end();
+			while (iterOperand != endOperand)
+			{
+				if (operandList->find(*iterOperand) == -1)
+				{
+					getOperand()->erase(*iterOperand);
+				}
+				iterOperand++;
+			}
+ 
+			iterOperand = operandList->begin();
+			endOperand = operandList->end();
+			while (iterOperand != endOperand)
+			{
+				if (getOperand()->find(*iterOperand) == -1)
+				{
+					getOperand()->add(*iterOperand);
+				}
+				iterOperand++;			
+			}
+			return true;
+		}
+	}
+
+	return InteractionFragmentImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any CombinedFragmentImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 173441283
+		case umlPackage::COMBINEDFRAGMENT_OPERATION_BREAK__EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->break_(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+		
+		// 1524474821
+		case umlPackage::COMBINEDFRAGMENT_OPERATION_CONSIDER_AND_IGNORE_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->consider_and_ignore(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+		
+		// 2094584575
+		case umlPackage::COMBINEDFRAGMENT_OPERATION_OPT_LOOP_BREAK_NEG_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->opt_loop_break_neg(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = InteractionFragmentImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<CombinedFragment> CombinedFragmentImpl::getThisCombinedFragmentPtr() const
+{
+	return m_thisCombinedFragmentPtr.lock();
+}
+void CombinedFragmentImpl::setThisCombinedFragmentPtr(std::weak_ptr<CombinedFragment> thisCombinedFragmentPtr)
+{
+	m_thisCombinedFragmentPtr = thisCombinedFragmentPtr;
+	setThisInteractionFragmentPtr(thisCombinedFragmentPtr);
+}

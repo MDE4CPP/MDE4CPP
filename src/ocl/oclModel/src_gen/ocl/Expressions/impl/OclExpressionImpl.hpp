@@ -63,71 +63,45 @@ namespace ocl::Expressions
 			// Operations
 			//*********************************
 			
-			
 			//*********************************
-			// Attributes Getter Setter
-			//*********************************
-			
-			
-			//*********************************
-			// Reference
+			// Attribute Getters & Setters
 			//*********************************
 			
+			//*********************************
+			// Reference Getters & Setters
+			//*********************************
 			virtual std::weak_ptr<ocl::Expressions::CallExp> getAppliedElement() const ;
-			
 			virtual void setAppliedElement(std::weak_ptr<ocl::Expressions::CallExp>) ;
-			
 			virtual std::weak_ptr<ocl::Expressions::IfExp> getElseOwner() const ;
-			
 			virtual void setElseOwner(std::weak_ptr<ocl::Expressions::IfExp>) ;
-			
 			virtual std::weak_ptr<ocl::Expressions::CollectionRange> getFirstOwner() const ;
-			
 			virtual void setFirstOwner(std::weak_ptr<ocl::Expressions::CollectionRange>) ;
-			
 			virtual std::weak_ptr<ocl::Expressions::IfExp> getIfOwner() const ;
-			
 			virtual void setIfOwner(std::weak_ptr<ocl::Expressions::IfExp>) ;
-			
 			virtual std::weak_ptr<ocl::Expressions::Variable> getInitializedElement() const ;
-			
 			virtual void setInitializedElement(std::weak_ptr<ocl::Expressions::Variable>) ;
-			
 			virtual std::shared_ptr<ocl::Evaluations::OclExpEval> getInstance() const ;
-			
 			virtual void setInstance(std::shared_ptr<ocl::Evaluations::OclExpEval>) ;
-			
 			virtual std::weak_ptr<ocl::Expressions::CollectionRange> getLastOwner() const ;
-			
 			virtual void setLastOwner(std::weak_ptr<ocl::Expressions::CollectionRange>) ;
-			
 			virtual std::weak_ptr<ocl::Expressions::LoopExp> getLoopBodyOwner() const ;
-			
 			virtual void setLoopBodyOwner(std::weak_ptr<ocl::Expressions::LoopExp>) ;
-			
 			virtual std::weak_ptr<ocl::Expressions::OperationCallExp> getParentCall() const ;
-			
 			virtual void setParentCall(std::weak_ptr<ocl::Expressions::OperationCallExp>) ;
-			
 			virtual std::weak_ptr<ocl::Expressions::NavigationCallExp> getParentNav() const ;
-			
 			virtual void setParentNav(std::weak_ptr<ocl::Expressions::NavigationCallExp>) ;
-			
 			virtual std::weak_ptr<ocl::Expressions::IfExp> getThenOwner() const ;
-			
 			virtual void setThenOwner(std::weak_ptr<ocl::Expressions::IfExp>) ;
-			
 			virtual std::weak_ptr<ocl::Expressions::ExpressionInOcl> getTopExpression() const ;
-			
 			virtual void setTopExpression(std::weak_ptr<ocl::Expressions::ExpressionInOcl>) ;
 			
+			//*********************************
+			// Union Reference Getters
+			//*********************************
 			
 			//*********************************
-			// Union Getter
+			// Container Getter
 			//*********************************
-			
-			
-
 			virtual std::shared_ptr<ecore::EObject> eContainer() const ; 
 			
 			//*********************************
@@ -136,20 +110,23 @@ namespace ocl::Expressions
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) ;
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
-			
 			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
-			
 
-			//*********************************
-			// Structural Feature Getter/Setter
-			//*********************************
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+
+			//*********************************
+			// EStructuralFeature Get/Set/IsSet
+			//*********************************
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool internalEIsSet(int featureID) const ;
 			virtual bool eSet(int featureID, Any newValue) ;
+			virtual bool internalEIsSet(int featureID) const ;
+
+			//*********************************
+			// EOperation Invoke
+			//*********************************
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:

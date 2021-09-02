@@ -1,3 +1,4 @@
+
 #include "ecore/impl/EObjectImpl.hpp"
 
 #ifdef NDEBUG
@@ -26,7 +27,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -34,7 +34,6 @@
 
 #include <exception> // used in Persistence
 #include "ecore/ecoreFactory.hpp"
-
 
 #include "ecore/EClass.hpp"
 #include "ecore/EObject.hpp"
@@ -115,28 +114,6 @@ std::shared_ptr<ecore::EObject> EObjectImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<EClass> EObjectImpl::eStaticClass() const
-{
-	return ecore::ecorePackage::eInstance()->getEObject_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-/*
-Getter & Setter for attribute metaElementID
-*/
-int EObjectImpl::getMetaElementID() const 
-{
-	return m_metaElementID;
-}
-void EObjectImpl::setMetaElementID(int _metaElementID)
-{
-	m_metaElementID = _metaElementID;
-	
-} 
-
-
 //*********************************
 // Operations
 //*********************************
@@ -153,6 +130,8 @@ std::shared_ptr<ecore::EClass> EObjectImpl::eClass() const
 	return this->eStaticClass();
 	//end of body
 }
+
+
 
 std::shared_ptr<ecore::EStructuralFeature> EObjectImpl::eContainingFeature() const
 {
@@ -242,11 +221,23 @@ void EObjectImpl::eUnset(std::shared_ptr<ecore::EStructuralFeature> feature) con
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference eContainer
-*/
+/* Getter & Setter for attribute metaElementID */
+int EObjectImpl::getMetaElementID() const 
+{
+	return m_metaElementID;
+}
+void EObjectImpl::setMetaElementID(int _metaElementID)
+{
+	m_metaElementID = _metaElementID;
+	
+}
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference eContainer */
 std::weak_ptr<ecore::EObject> EObjectImpl::getEContainer() const
 {
     return m_eContainer;
@@ -257,13 +248,7 @@ void EObjectImpl::setEContainer(std::weak_ptr<ecore::EObject> _eContainer)
 	
 }
 
-
-/*
-Getter & Setter for reference eContens
-*/
-
-
-
+/* Getter & Setter for reference eContens */
 
 //*********************************
 // Union Getter
@@ -283,17 +268,9 @@ std::shared_ptr<Union<ecore::EObject>> EObjectImpl::getEContens() const
 	return m_eContens;
 }
 
-
-
-
-std::shared_ptr<EObject> EObjectImpl::getThisEObjectPtr() const
-{
-	return m_thisEObjectPtr.lock();
-}
-void EObjectImpl::setThisEObjectPtr(std::weak_ptr<EObject> thisEObjectPtr)
-{
-	m_thisEObjectPtr = thisEObjectPtr;
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> EObjectImpl::eContainer() const
 {
 	if(auto wp = m_eContainer.lock())
@@ -304,7 +281,136 @@ std::shared_ptr<ecore::EObject> EObjectImpl::eContainer() const
 }
 
 //*********************************
-// Structural Feature Getter/Setter
+// Persistence Functions
+//*********************************
+void EObjectImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get ecoreFactory
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
+	}
+}		
+
+void EObjectImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+	try
+	{
+		std::map<std::string, std::string>::const_iterator iter;
+	
+		iter = attr_list.find("metaElementID");
+		if ( iter != attr_list.end() )
+		{
+			// this attribute is a 'int'
+			int value;
+			std::istringstream ( iter->second ) >> value;
+			this->setMetaElementID(value);
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+}
+
+void EObjectImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+
+	try
+	{
+		if ( nodeName.compare("eContens") == 0 )
+		{
+  			std::string typeName = loadHandler->getCurrentXSITypeName();
+			if (typeName.empty())
+			{
+				typeName = "EObject";
+			}
+			loadHandler->handleChildContainer<ecore::EObject>(this->getEContens());  
+
+			return; 
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+	//load BasePackage Nodes
+}
+
+void EObjectImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<EObject> > references)
+{
+	switch(featureID)
+	{
+		case ecore::ecorePackage::EOBJECT_ATTRIBUTE_ECONTAINER:
+		{
+			if (references.size() == 1)
+			{
+				// Cast object to correct type
+				std::shared_ptr<ecore::EObject> _eContainer = std::dynamic_pointer_cast<ecore::EObject>( references.front() );
+				setEContainer(_eContainer);
+			}
+			
+			return;
+		}
+	}
+}
+
+void EObjectImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	ecore::EObjectImpl::saveContent(saveHandler);
+}
+
+void EObjectImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<ecore::ecorePackage> package = ecore::ecorePackage::eInstance();
+		// Add attributes
+		if ( this->eIsSet(package->getEObject_Attribute_metaElementID()) )
+		{
+			saveHandler->addAttribute("metaElementID", this->getMetaElementID());
+		}
+		//
+		// Add new tags (from references)
+		//
+		std::shared_ptr<EClass> metaClass = this->eClass();
+		// Save 'eContens'
+
+		saveHandler->addReferences<ecore::EObject>("eContens", this->getEContens());
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+}
+
+
+std::shared_ptr<EClass> EObjectImpl::eStaticClass() const
+{
+	return ecore::ecorePackage::eInstance()->getEObject_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
 //*********************************
 Any EObjectImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
@@ -333,6 +439,7 @@ Any EObjectImpl::eGet(int featureID, bool resolve, bool coreType) const
 	Any result;
 	return result;
 }
+
 bool EObjectImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
@@ -347,6 +454,7 @@ bool EObjectImpl::internalEIsSet(int featureID) const
 	bool result = false;
 	return result;
 }
+
 bool EObjectImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
@@ -409,7 +517,7 @@ bool EObjectImpl::eSet(int featureID, Any newValue)
 }
 
 //*********************************
-// Behavioral Feature
+// EOperation Invoke
 //*********************************
 Any EObjectImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
 {
@@ -571,127 +679,12 @@ Any EObjectImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::share
 	return result;
 }
 
-//*********************************
-// Persistence Functions
-//*********************************
-void EObjectImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+
+std::shared_ptr<EObject> EObjectImpl::getThisEObjectPtr() const
 {
-	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
-	loadAttributes(loadHandler, attr_list);
-
-	//
-	// Create new objects (from references (containment == true))
-	//
-	// get ecoreFactory
-	int numNodes = loadHandler->getNumOfChildNodes();
-	for(int ii = 0; ii < numNodes; ii++)
-	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler);
-	}
-}		
-
-void EObjectImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
-{
-	try
-	{
-		std::map<std::string, std::string>::const_iterator iter;
-	
-		iter = attr_list.find("metaElementID");
-		if ( iter != attr_list.end() )
-		{
-			// this attribute is a 'int'
-			int value;
-			std::istringstream ( iter->second ) >> value;
-			this->setMetaElementID(value);
-		}
-	}
-	catch (std::exception& e)
-	{
-		std::cout << "| ERROR    | " << e.what() << std::endl;
-	}
-	catch (...) 
-	{
-		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
-	}
-
+	return m_thisEObjectPtr.lock();
 }
-
-void EObjectImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+void EObjectImpl::setThisEObjectPtr(std::weak_ptr<EObject> thisEObjectPtr)
 {
-
-	try
-	{
-		if ( nodeName.compare("eContens") == 0 )
-		{
-  			std::string typeName = loadHandler->getCurrentXSITypeName();
-			if (typeName.empty())
-			{
-				typeName = "EObject";
-			}
-			loadHandler->handleChildContainer<ecore::EObject>(this->getEContens());  
-
-			return; 
-		}
-	}
-	catch (std::exception& e)
-	{
-		std::cout << "| ERROR    | " << e.what() << std::endl;
-	}
-	catch (...) 
-	{
-		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
-	}
-	//load BasePackage Nodes
+	m_thisEObjectPtr = thisEObjectPtr;
 }
-
-void EObjectImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<EObject> > references)
-{
-	switch(featureID)
-	{
-		case ecore::ecorePackage::EOBJECT_ATTRIBUTE_ECONTAINER:
-		{
-			if (references.size() == 1)
-			{
-				// Cast object to correct type
-				std::shared_ptr<ecore::EObject> _eContainer = std::dynamic_pointer_cast<ecore::EObject>( references.front() );
-				setEContainer(_eContainer);
-			}
-			
-			return;
-		}
-	}
-}
-
-void EObjectImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
-{
-	saveContent(saveHandler);
-
-	
-	ecore::EObjectImpl::saveContent(saveHandler);
-	
-}
-
-void EObjectImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
-{
-	try
-	{
-		std::shared_ptr<ecore::ecorePackage> package = ecore::ecorePackage::eInstance();
-		// Add attributes
-		if ( this->eIsSet(package->getEObject_Attribute_metaElementID()) )
-		{
-			saveHandler->addAttribute("metaElementID", this->getMetaElementID());
-		}
-		//
-		// Add new tags (from references)
-		//
-		std::shared_ptr<EClass> metaClass = this->eClass();
-		// Save 'eContens'
-
-		saveHandler->addReferences<ecore::EObject>("eContens", this->getEContens());
-	}
-	catch (std::exception& e)
-	{
-		std::cout << "| ERROR    | " << e.what() << std::endl;
-	}
-}
-

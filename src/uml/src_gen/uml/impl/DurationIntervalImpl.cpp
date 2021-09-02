@@ -1,3 +1,4 @@
+
 #include "uml/impl/DurationIntervalImpl.hpp"
 
 #ifdef NDEBUG
@@ -25,7 +26,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -33,7 +33,6 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-
 
 #include "uml/Comment.hpp"
 #include "uml/Dependency.hpp"
@@ -160,21 +159,16 @@ std::shared_ptr<ecore::EObject> DurationIntervalImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> DurationIntervalImpl::eStaticClass() const
-{
-	return uml::umlPackage::eInstance()->getDurationInterval_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
 
 //*********************************
-// References
+// Attribute Getters & Setters
+//*********************************
+
+//*********************************
+// Reference Getters & Setters
 //*********************************
 
 //*********************************
@@ -207,16 +201,9 @@ std::weak_ptr<uml::Element> DurationIntervalImpl::getOwner() const
 
 
 
-
-std::shared_ptr<DurationInterval> DurationIntervalImpl::getThisDurationIntervalPtr() const
-{
-	return m_thisDurationIntervalPtr.lock();
-}
-void DurationIntervalImpl::setThisDurationIntervalPtr(std::weak_ptr<DurationInterval> thisDurationIntervalPtr)
-{
-	m_thisDurationIntervalPtr = thisDurationIntervalPtr;
-	setThisIntervalPtr(thisDurationIntervalPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> DurationIntervalImpl::eContainer() const
 {
 	if(auto wp = m_namespace.lock())
@@ -249,55 +236,6 @@ std::shared_ptr<ecore::EObject> DurationIntervalImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any DurationIntervalImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-	}
-	return IntervalImpl::eGet(featureID, resolve, coreType);
-}
-bool DurationIntervalImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-	}
-	return IntervalImpl::internalEIsSet(featureID);
-}
-bool DurationIntervalImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-	}
-
-	return IntervalImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any DurationIntervalImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-
-		default:
-		{
-			// call superTypes
-			result = IntervalImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -356,12 +294,6 @@ void DurationIntervalImpl::save(std::shared_ptr<persistence::interfaces::XSaveHa
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
-	
-	
 }
 
 void DurationIntervalImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -376,3 +308,71 @@ void DurationIntervalImpl::saveContent(std::shared_ptr<persistence::interfaces::
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> DurationIntervalImpl::eStaticClass() const
+{
+	return uml::umlPackage::eInstance()->getDurationInterval_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any DurationIntervalImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+	}
+	return IntervalImpl::eGet(featureID, resolve, coreType);
+}
+
+bool DurationIntervalImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+	}
+	return IntervalImpl::internalEIsSet(featureID);
+}
+
+bool DurationIntervalImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+	}
+
+	return IntervalImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any DurationIntervalImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+
+		default:
+		{
+			// call superTypes
+			result = IntervalImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<DurationInterval> DurationIntervalImpl::getThisDurationIntervalPtr() const
+{
+	return m_thisDurationIntervalPtr.lock();
+}
+void DurationIntervalImpl::setThisDurationIntervalPtr(std::weak_ptr<DurationInterval> thisDurationIntervalPtr)
+{
+	m_thisDurationIntervalPtr = thisDurationIntervalPtr;
+	setThisIntervalPtr(thisDurationIntervalPtr);
+}

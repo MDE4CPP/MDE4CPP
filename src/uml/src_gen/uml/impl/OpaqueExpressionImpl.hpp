@@ -54,43 +54,50 @@ namespace uml
 			//*********************************
 			// Operations
 			//*********************************
+			
 			/*!
 			The query isIntegral() tells whether an expression is intended to produce an Integer.
 			result = (false)
 			<p>From package UML::Values.</p>
 			*/
 			 
-			virtual bool isIntegral() ;/*!
+			virtual bool isIntegral() ;
+			/*!
 			The query isNonNegative() tells whether an integer expression has a non-negative value.
 			self.isIntegral()
 			result = (false)
 			<p>From package UML::Values.</p>
 			*/
 			 
-			virtual bool isNonNegative() ;/*!
+			virtual bool isNonNegative() ;
+			/*!
 			The query isPositive() tells whether an integer expression has a positive value.
 			result = (false)
 			self.isIntegral()
 			<p>From package UML::Values.</p>
 			*/
 			 
-			virtual bool isPositive() ;/*!
+			virtual bool isPositive() ;
+			/*!
 			If the language attribute is not empty, then the size of the body and language arrays must be the same.
 			language->notEmpty() implies (_'body'->size() = language->size())
 			*/
 			 
-			virtual bool language_body_size(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
+			virtual bool language_body_size(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			/*!
 			The behavior must have exactly one return result parameter.
 			behavior <> null implies
 			   behavior.ownedParameter->select(direction=ParameterDirectionKind::return)->size() = 1
 			*/
 			 
-			virtual bool one_return_result_parameter(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
+			virtual bool one_return_result_parameter(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			/*!
 			The behavior may only have return result parameters.
 			behavior <> null implies behavior.ownedParameter->select(direction<>ParameterDirectionKind::return)->isEmpty()
 			*/
 			 
-			virtual bool only_return_result_parameters(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
+			virtual bool only_return_result_parameters(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			/*!
 			The query value() gives an integer value for an expression intended to produce one.
 			self.isIntegral()
 			result = (0)
@@ -100,7 +107,7 @@ namespace uml
 			virtual int value() ;
 			
 			//*********************************
-			// Attributes Getter Setter
+			// Attribute Getters & Setters
 			//*********************************
 			/*!
 			A textual definition of the behavior of the OpaqueExpression, possibly in multiple languages.
@@ -108,7 +115,6 @@ namespace uml
 			*/
 			 
 			virtual std::shared_ptr<Bag<std::string>> getBody() const ;
-			
 			/*!
 			Specifies the languages used to express the textual bodies of the OpaqueExpression.  Languages are matched to body Strings by order. The interpretation of the body depends on the languages. If the languages are unspecified, they may be implicit from the expression body or the context.
 			<p>From package UML::Values.</p>
@@ -116,10 +122,8 @@ namespace uml
 			 
 			virtual std::shared_ptr<Bag<std::string>> getLanguage() const ;
 			
-			
-			
 			//*********************************
-			// Reference
+			// Reference Getters & Setters
 			//*********************************
 			/*!
 			Specifies the behavior of the OpaqueExpression as a UML Behavior.
@@ -140,29 +144,32 @@ namespace uml
 			
 			virtual std::shared_ptr<uml::Parameter> getResult() const ;
 			
-			
-			
 			//*********************************
-			// Union Getter
+			// Union Reference Getters
 			//*********************************
 			/*!
 			Specifies the Namespace that owns the NamedElement.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Namespace> getNamespace() const ;/*!
+			virtual std::weak_ptr<uml::Namespace> getNamespace() const ;
+			/*!
 			The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const ;/*!
+			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const ;
+			/*!
 			The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
 			virtual std::weak_ptr<uml::Element> getOwner() const ;
 			
-
+			
+			//*********************************
+			// Container Getter
+			//*********************************
 			virtual std::shared_ptr<ecore::EObject> eContainer() const ; 
 			
 			//*********************************
@@ -171,20 +178,23 @@ namespace uml
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) ;
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
-			
 			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
-			
 
-			//*********************************
-			// Structural Feature Getter/Setter
-			//*********************************
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+
+			//*********************************
+			// EStructuralFeature Get/Set/IsSet
+			//*********************************
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool internalEIsSet(int featureID) const ;
 			virtual bool eSet(int featureID, Any newValue) ;
+			virtual bool internalEIsSet(int featureID) const ;
+
+			//*********************************
+			// EOperation Invoke
+			//*********************************
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:

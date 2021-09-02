@@ -1,3 +1,4 @@
+
 #include "uml/impl/GeneralOrderingImpl.hpp"
 
 #ifdef NDEBUG
@@ -26,7 +27,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -34,7 +34,6 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-
 
 #include "uml/Comment.hpp"
 #include "uml/Dependency.hpp"
@@ -126,15 +125,6 @@ std::shared_ptr<ecore::EObject> GeneralOrderingImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> GeneralOrderingImpl::eStaticClass() const
-{
-	return uml::umlPackage::eInstance()->getGeneralOrdering_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
@@ -145,11 +135,13 @@ bool GeneralOrderingImpl::irreflexive_transitive_closure(Any diagnostics,std::sh
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference after
-*/
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference after */
 std::shared_ptr<uml::OccurrenceSpecification> GeneralOrderingImpl::getAfter() const
 {
     return m_after;
@@ -160,10 +152,7 @@ void GeneralOrderingImpl::setAfter(std::shared_ptr<uml::OccurrenceSpecification>
 	
 }
 
-
-/*
-Getter & Setter for reference before
-*/
+/* Getter & Setter for reference before */
 std::shared_ptr<uml::OccurrenceSpecification> GeneralOrderingImpl::getBefore() const
 {
     return m_before;
@@ -173,7 +162,6 @@ void GeneralOrderingImpl::setBefore(std::shared_ptr<uml::OccurrenceSpecification
     m_before = _before;
 	
 }
-
 
 //*********************************
 // Union Getter
@@ -198,18 +186,9 @@ std::weak_ptr<uml::Element> GeneralOrderingImpl::getOwner() const
 	return m_owner;
 }
 
-
-
-
-std::shared_ptr<GeneralOrdering> GeneralOrderingImpl::getThisGeneralOrderingPtr() const
-{
-	return m_thisGeneralOrderingPtr.lock();
-}
-void GeneralOrderingImpl::setThisGeneralOrderingPtr(std::weak_ptr<GeneralOrdering> thisGeneralOrderingPtr)
-{
-	m_thisGeneralOrderingPtr = thisGeneralOrderingPtr;
-	setThisNamedElementPtr(thisGeneralOrderingPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> GeneralOrderingImpl::eContainer() const
 {
 	if(auto wp = m_namespace.lock())
@@ -222,102 +201,6 @@ std::shared_ptr<ecore::EObject> GeneralOrderingImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any GeneralOrderingImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::GENERALORDERING_ATTRIBUTE_AFTER:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getAfter();
-				return eAny(returnValue); //1089
-			}
-		case uml::umlPackage::GENERALORDERING_ATTRIBUTE_BEFORE:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getBefore();
-				return eAny(returnValue); //10810
-			}
-	}
-	return NamedElementImpl::eGet(featureID, resolve, coreType);
-}
-bool GeneralOrderingImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::GENERALORDERING_ATTRIBUTE_AFTER:
-			return getAfter() != nullptr; //1089
-		case uml::umlPackage::GENERALORDERING_ATTRIBUTE_BEFORE:
-			return getBefore() != nullptr; //10810
-	}
-	return NamedElementImpl::internalEIsSet(featureID);
-}
-bool GeneralOrderingImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::GENERALORDERING_ATTRIBUTE_AFTER:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::OccurrenceSpecification> _after = std::dynamic_pointer_cast<uml::OccurrenceSpecification>(_temp);
-			setAfter(_after); //1089
-			return true;
-		}
-		case uml::umlPackage::GENERALORDERING_ATTRIBUTE_BEFORE:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::OccurrenceSpecification> _before = std::dynamic_pointer_cast<uml::OccurrenceSpecification>(_temp);
-			setBefore(_before); //10810
-			return true;
-		}
-	}
-
-	return NamedElementImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any GeneralOrderingImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-		
-		// 1443676012
-		case umlPackage::GENERALORDERING_OPERATION_IRREFLEXIVE_TRANSITIVE_CLOSURE_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->irreflexive_transitive_closure(incoming_param_diagnostics,incoming_param_context));
-			break;
-		}
-
-		default:
-		{
-			// call superTypes
-			result = NamedElementImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -420,9 +303,6 @@ void GeneralOrderingImpl::save(std::shared_ptr<persistence::interfaces::XSaveHan
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
 }
 
 void GeneralOrderingImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -440,3 +320,118 @@ void GeneralOrderingImpl::saveContent(std::shared_ptr<persistence::interfaces::X
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> GeneralOrderingImpl::eStaticClass() const
+{
+	return uml::umlPackage::eInstance()->getGeneralOrdering_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any GeneralOrderingImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::GENERALORDERING_ATTRIBUTE_AFTER:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getAfter();
+				return eAny(returnValue); //1089
+			}
+		case uml::umlPackage::GENERALORDERING_ATTRIBUTE_BEFORE:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getBefore();
+				return eAny(returnValue); //10810
+			}
+	}
+	return NamedElementImpl::eGet(featureID, resolve, coreType);
+}
+
+bool GeneralOrderingImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::GENERALORDERING_ATTRIBUTE_AFTER:
+			return getAfter() != nullptr; //1089
+		case uml::umlPackage::GENERALORDERING_ATTRIBUTE_BEFORE:
+			return getBefore() != nullptr; //10810
+	}
+	return NamedElementImpl::internalEIsSet(featureID);
+}
+
+bool GeneralOrderingImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::GENERALORDERING_ATTRIBUTE_AFTER:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::OccurrenceSpecification> _after = std::dynamic_pointer_cast<uml::OccurrenceSpecification>(_temp);
+			setAfter(_after); //1089
+			return true;
+		}
+		case uml::umlPackage::GENERALORDERING_ATTRIBUTE_BEFORE:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::OccurrenceSpecification> _before = std::dynamic_pointer_cast<uml::OccurrenceSpecification>(_temp);
+			setBefore(_before); //10810
+			return true;
+		}
+	}
+
+	return NamedElementImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any GeneralOrderingImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 1443676012
+		case umlPackage::GENERALORDERING_OPERATION_IRREFLEXIVE_TRANSITIVE_CLOSURE_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->irreflexive_transitive_closure(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = NamedElementImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<GeneralOrdering> GeneralOrderingImpl::getThisGeneralOrderingPtr() const
+{
+	return m_thisGeneralOrderingPtr.lock();
+}
+void GeneralOrderingImpl::setThisGeneralOrderingPtr(std::weak_ptr<GeneralOrdering> thisGeneralOrderingPtr)
+{
+	m_thisGeneralOrderingPtr = thisGeneralOrderingPtr;
+	setThisNamedElementPtr(thisGeneralOrderingPtr);
+}

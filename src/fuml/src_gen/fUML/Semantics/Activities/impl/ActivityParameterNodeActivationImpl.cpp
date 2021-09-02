@@ -1,3 +1,4 @@
+
 #include "fUML/Semantics/Activities/impl/ActivityParameterNodeActivationImpl.hpp"
 
 #ifdef NDEBUG
@@ -41,7 +42,6 @@
 #include <exception> // used in Persistence
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "uml/umlFactory.hpp"
-
 
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
 #include "uml/ActivityNode.hpp"
@@ -124,15 +124,6 @@ std::shared_ptr<ecore::EObject> ActivityParameterNodeActivationImpl::copy() cons
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> ActivityParameterNodeActivationImpl::eStaticClass() const
-{
-	return fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getActivityParameterNodeActivation_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
@@ -188,24 +179,20 @@ void ActivityParameterNodeActivationImpl::fire(std::shared_ptr<Bag<fUML::Semanti
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
+//*********************************
+
+//*********************************
+// Reference Getters & Setters
 //*********************************
 
 //*********************************
 // Union Getter
 //*********************************
 
-
-
-std::shared_ptr<ActivityParameterNodeActivation> ActivityParameterNodeActivationImpl::getThisActivityParameterNodeActivationPtr() const
-{
-	return m_thisActivityParameterNodeActivationPtr.lock();
-}
-void ActivityParameterNodeActivationImpl::setThisActivityParameterNodeActivationPtr(std::weak_ptr<ActivityParameterNodeActivation> thisActivityParameterNodeActivationPtr)
-{
-	m_thisActivityParameterNodeActivationPtr = thisActivityParameterNodeActivationPtr;
-	setThisObjectNodeActivationPtr(thisActivityParameterNodeActivationPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> ActivityParameterNodeActivationImpl::eContainer() const
 {
 	if(auto wp = m_group.lock())
@@ -213,74 +200,6 @@ std::shared_ptr<ecore::EObject> ActivityParameterNodeActivationImpl::eContainer(
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any ActivityParameterNodeActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-	}
-	return ObjectNodeActivationImpl::eGet(featureID, resolve, coreType);
-}
-bool ActivityParameterNodeActivationImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-	}
-	return ObjectNodeActivationImpl::internalEIsSet(featureID);
-}
-bool ActivityParameterNodeActivationImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-	}
-
-	return ObjectNodeActivationImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any ActivityParameterNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-		
-		// 1135371975
-		case ActivitiesPackage::ACTIVITYPARAMETERNODEACTIVATION_OPERATION_CLEARTOKENS:
-		{
-			this->clearTokens();
-			break;
-		}
-		
-		// 1889603308
-		case ActivitiesPackage::ACTIVITYPARAMETERNODEACTIVATION_OPERATION_FIRE_TOKEN:
-		{
-			//Retrieve input parameter 'incomingTokens'
-			//parameter 0
-			std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> incoming_param_incomingTokens;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_incomingTokens_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_incomingTokens = (*incoming_param_incomingTokens_arguments_citer)->get()->get<std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> >();
-			this->fire(incoming_param_incomingTokens);
-			break;
-		}
-
-		default:
-		{
-			// call superTypes
-			result = ObjectNodeActivationImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -331,9 +250,6 @@ void ActivityParameterNodeActivationImpl::save(std::shared_ptr<persistence::inte
 	fUML::Semantics::Loci::SemanticVisitorImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
 }
 
 void ActivityParameterNodeActivationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -348,3 +264,90 @@ void ActivityParameterNodeActivationImpl::saveContent(std::shared_ptr<persistenc
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> ActivityParameterNodeActivationImpl::eStaticClass() const
+{
+	return fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getActivityParameterNodeActivation_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any ActivityParameterNodeActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+	}
+	return ObjectNodeActivationImpl::eGet(featureID, resolve, coreType);
+}
+
+bool ActivityParameterNodeActivationImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+	}
+	return ObjectNodeActivationImpl::internalEIsSet(featureID);
+}
+
+bool ActivityParameterNodeActivationImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+	}
+
+	return ObjectNodeActivationImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any ActivityParameterNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 1135371975
+		case ActivitiesPackage::ACTIVITYPARAMETERNODEACTIVATION_OPERATION_CLEARTOKENS:
+		{
+			this->clearTokens();
+			break;
+		}
+		
+		// 1889603308
+		case ActivitiesPackage::ACTIVITYPARAMETERNODEACTIVATION_OPERATION_FIRE_TOKEN:
+		{
+			//Retrieve input parameter 'incomingTokens'
+			//parameter 0
+			std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> incoming_param_incomingTokens;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_incomingTokens_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_incomingTokens = (*incoming_param_incomingTokens_arguments_citer)->get()->get<std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> >();
+			this->fire(incoming_param_incomingTokens);
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = ObjectNodeActivationImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<ActivityParameterNodeActivation> ActivityParameterNodeActivationImpl::getThisActivityParameterNodeActivationPtr() const
+{
+	return m_thisActivityParameterNodeActivationPtr.lock();
+}
+void ActivityParameterNodeActivationImpl::setThisActivityParameterNodeActivationPtr(std::weak_ptr<ActivityParameterNodeActivation> thisActivityParameterNodeActivationPtr)
+{
+	m_thisActivityParameterNodeActivationPtr = thisActivityParameterNodeActivationPtr;
+	setThisObjectNodeActivationPtr(thisActivityParameterNodeActivationPtr);
+}

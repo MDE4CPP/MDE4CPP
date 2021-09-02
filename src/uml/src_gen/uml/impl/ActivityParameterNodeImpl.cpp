@@ -1,3 +1,4 @@
+
 #include "uml/impl/ActivityParameterNodeImpl.hpp"
 
 #ifdef NDEBUG
@@ -26,7 +27,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -34,7 +34,6 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-
 
 #include "uml/Activity.hpp"
 #include "uml/ActivityEdge.hpp"
@@ -154,15 +153,6 @@ std::shared_ptr<ecore::EObject> ActivityParameterNodeImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> ActivityParameterNodeImpl::eStaticClass() const
-{
-	return uml::umlPackage::eInstance()->getActivityParameterNode_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
@@ -197,11 +187,13 @@ bool ActivityParameterNodeImpl::same_type(Any diagnostics,std::shared_ptr<std::m
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference parameter
-*/
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference parameter */
 std::shared_ptr<uml::Parameter> ActivityParameterNodeImpl::getParameter() const
 {
     return m_parameter;
@@ -211,7 +203,6 @@ void ActivityParameterNodeImpl::setParameter(std::shared_ptr<uml::Parameter> _pa
     m_parameter = _parameter;
 	
 }
-
 
 //*********************************
 // Union Getter
@@ -266,18 +257,9 @@ std::shared_ptr<Union<uml::RedefinableElement>> ActivityParameterNodeImpl::getRe
 	return m_redefinedElement;
 }
 
-
-
-
-std::shared_ptr<ActivityParameterNode> ActivityParameterNodeImpl::getThisActivityParameterNodePtr() const
-{
-	return m_thisActivityParameterNodePtr.lock();
-}
-void ActivityParameterNodeImpl::setThisActivityParameterNodePtr(std::weak_ptr<ActivityParameterNode> thisActivityParameterNodePtr)
-{
-	m_thisActivityParameterNodePtr = thisActivityParameterNodePtr;
-	setThisObjectNodePtr(thisActivityParameterNodePtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> ActivityParameterNodeImpl::eContainer() const
 {
 	if(auto wp = m_activity.lock())
@@ -303,7 +285,118 @@ std::shared_ptr<ecore::EObject> ActivityParameterNodeImpl::eContainer() const
 }
 
 //*********************************
-// Structural Feature Getter/Setter
+// Persistence Functions
+//*********************************
+void ActivityParameterNodeImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get umlFactory
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
+	}
+}		
+
+void ActivityParameterNodeImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+	try
+	{
+		std::map<std::string, std::string>::const_iterator iter;
+		std::shared_ptr<ecore::EClass> metaClass = this->eClass(); // get MetaClass
+		iter = attr_list.find("parameter");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("parameter")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	ObjectNodeImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void ActivityParameterNodeImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+
+	//load BasePackage Nodes
+	ObjectNodeImpl::loadNode(nodeName, loadHandler);
+}
+
+void ActivityParameterNodeImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::ACTIVITYPARAMETERNODE_ATTRIBUTE_PARAMETER:
+		{
+			if (references.size() == 1)
+			{
+				// Cast object to correct type
+				std::shared_ptr<uml::Parameter> _parameter = std::dynamic_pointer_cast<uml::Parameter>( references.front() );
+				setParameter(_parameter);
+			}
+			
+			return;
+		}
+	}
+	ObjectNodeImpl::resolveReferences(featureID, references);
+}
+
+void ActivityParameterNodeImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	ObjectNodeImpl::saveContent(saveHandler);
+	
+	ActivityNodeImpl::saveContent(saveHandler);
+	TypedElementImpl::saveContent(saveHandler);
+	
+	RedefinableElementImpl::saveContent(saveHandler);
+	
+	NamedElementImpl::saveContent(saveHandler);
+	
+	ElementImpl::saveContent(saveHandler);
+	
+	ObjectImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+}
+
+void ActivityParameterNodeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
+	// Add references
+		saveHandler->addReference(this->getParameter(), "parameter", getParameter()->eClass() != uml::umlPackage::eInstance()->getParameter_Class()); 
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+}
+
+
+std::shared_ptr<ecore::EClass> ActivityParameterNodeImpl::eStaticClass() const
+{
+	return uml::umlPackage::eInstance()->getActivityParameterNode_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
 //*********************************
 Any ActivityParameterNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
@@ -317,6 +410,7 @@ Any ActivityParameterNodeImpl::eGet(int featureID, bool resolve, bool coreType) 
 	}
 	return ObjectNodeImpl::eGet(featureID, resolve, coreType);
 }
+
 bool ActivityParameterNodeImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
@@ -326,6 +420,7 @@ bool ActivityParameterNodeImpl::internalEIsSet(int featureID) const
 	}
 	return ObjectNodeImpl::internalEIsSet(featureID);
 }
+
 bool ActivityParameterNodeImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
@@ -344,7 +439,7 @@ bool ActivityParameterNodeImpl::eSet(int featureID, Any newValue)
 }
 
 //*********************************
-// Behavioral Feature
+// EOperation Invoke
 //*********************************
 Any ActivityParameterNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
 {
@@ -451,113 +546,13 @@ Any ActivityParameterNodeImpl::eInvoke(int operationID, std::shared_ptr<std::lis
 	return result;
 }
 
-//*********************************
-// Persistence Functions
-//*********************************
-void ActivityParameterNodeImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+
+std::shared_ptr<ActivityParameterNode> ActivityParameterNodeImpl::getThisActivityParameterNodePtr() const
 {
-	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
-	loadAttributes(loadHandler, attr_list);
-
-	//
-	// Create new objects (from references (containment == true))
-	//
-	// get umlFactory
-	int numNodes = loadHandler->getNumOfChildNodes();
-	for(int ii = 0; ii < numNodes; ii++)
-	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler);
-	}
-}		
-
-void ActivityParameterNodeImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
-{
-	try
-	{
-		std::map<std::string, std::string>::const_iterator iter;
-		std::shared_ptr<ecore::EClass> metaClass = this->eClass(); // get MetaClass
-		iter = attr_list.find("parameter");
-		if ( iter != attr_list.end() )
-		{
-			// add unresolvedReference to loadHandler's list
-			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("parameter")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
-		}
-	}
-	catch (std::exception& e)
-	{
-		std::cout << "| ERROR    | " << e.what() << std::endl;
-	}
-	catch (...) 
-	{
-		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
-	}
-
-	ObjectNodeImpl::loadAttributes(loadHandler, attr_list);
+	return m_thisActivityParameterNodePtr.lock();
 }
-
-void ActivityParameterNodeImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+void ActivityParameterNodeImpl::setThisActivityParameterNodePtr(std::weak_ptr<ActivityParameterNode> thisActivityParameterNodePtr)
 {
-
-	//load BasePackage Nodes
-	ObjectNodeImpl::loadNode(nodeName, loadHandler);
+	m_thisActivityParameterNodePtr = thisActivityParameterNodePtr;
+	setThisObjectNodePtr(thisActivityParameterNodePtr);
 }
-
-void ActivityParameterNodeImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::ACTIVITYPARAMETERNODE_ATTRIBUTE_PARAMETER:
-		{
-			if (references.size() == 1)
-			{
-				// Cast object to correct type
-				std::shared_ptr<uml::Parameter> _parameter = std::dynamic_pointer_cast<uml::Parameter>( references.front() );
-				setParameter(_parameter);
-			}
-			
-			return;
-		}
-	}
-	ObjectNodeImpl::resolveReferences(featureID, references);
-}
-
-void ActivityParameterNodeImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
-{
-	saveContent(saveHandler);
-
-	ObjectNodeImpl::saveContent(saveHandler);
-	
-	ActivityNodeImpl::saveContent(saveHandler);
-	TypedElementImpl::saveContent(saveHandler);
-	
-	RedefinableElementImpl::saveContent(saveHandler);
-	
-	NamedElementImpl::saveContent(saveHandler);
-	
-	ElementImpl::saveContent(saveHandler);
-	
-	ObjectImpl::saveContent(saveHandler);
-	
-	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
-	
-	
-}
-
-void ActivityParameterNodeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
-{
-	try
-	{
-		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-	// Add references
-		saveHandler->addReference(this->getParameter(), "parameter", getParameter()->eClass() != uml::umlPackage::eInstance()->getParameter_Class()); 
-	}
-	catch (std::exception& e)
-	{
-		std::cout << "| ERROR    | " << e.what() << std::endl;
-	}
-}
-

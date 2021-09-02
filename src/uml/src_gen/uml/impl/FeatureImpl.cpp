@@ -1,3 +1,4 @@
+
 #include "uml/impl/FeatureImpl.hpp"
 
 #ifdef NDEBUG
@@ -25,7 +26,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -33,7 +33,6 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-
 
 #include "uml/Classifier.hpp"
 #include "uml/Comment.hpp"
@@ -125,17 +124,14 @@ std::shared_ptr<ecore::EObject> FeatureImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> FeatureImpl::eStaticClass() const
-{
-	return uml::umlPackage::eInstance()->getFeature_Class();
-}
+//*********************************
+// Operations
+//*********************************
 
 //*********************************
-// Attribute Setter Getter
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for attribute isStatic
-*/
+/* Getter & Setter for attribute isStatic */
 bool FeatureImpl::getIsStatic() const 
 {
 	return m_isStatic;
@@ -144,22 +140,12 @@ void FeatureImpl::setIsStatic(bool _isStatic)
 {
 	m_isStatic = _isStatic;
 	
-} 
-
-
-//*********************************
-// Operations
-//*********************************
+}
 
 //*********************************
-// References
+// Reference Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference featuringClassifier
-*/
-
-
-
+/* Getter & Setter for reference featuringClassifier */
 
 //*********************************
 // Union Getter
@@ -199,18 +185,9 @@ std::weak_ptr<uml::Element> FeatureImpl::getOwner() const
 	return m_owner;
 }
 
-
-
-
-std::shared_ptr<Feature> FeatureImpl::getThisFeaturePtr() const
-{
-	return m_thisFeaturePtr.lock();
-}
-void FeatureImpl::setThisFeaturePtr(std::weak_ptr<Feature> thisFeaturePtr)
-{
-	m_thisFeaturePtr = thisFeaturePtr;
-	setThisRedefinableElementPtr(thisFeaturePtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> FeatureImpl::eContainer() const
 {
 	if(auto wp = m_namespace.lock())
@@ -223,80 +200,6 @@ std::shared_ptr<ecore::EObject> FeatureImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any FeatureImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::FEATURE_ATTRIBUTE_FEATURINGCLASSIFIER:
-		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Classifier>::iterator iter = getFeaturingClassifier()->begin();
-			Bag<uml::Classifier>::iterator end = getFeaturingClassifier()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //10112			
-		}
-		case uml::umlPackage::FEATURE_ATTRIBUTE_ISSTATIC:
-			return eAny(getIsStatic()); //10113
-	}
-	return RedefinableElementImpl::eGet(featureID, resolve, coreType);
-}
-bool FeatureImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::FEATURE_ATTRIBUTE_FEATURINGCLASSIFIER:
-			return getFeaturingClassifier() != nullptr; //10112
-		case uml::umlPackage::FEATURE_ATTRIBUTE_ISSTATIC:
-			return getIsStatic() != false; //10113
-	}
-	return RedefinableElementImpl::internalEIsSet(featureID);
-}
-bool FeatureImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::FEATURE_ATTRIBUTE_ISSTATIC:
-		{
-			// BOOST CAST
-			bool _isStatic = newValue->get<bool>();
-			setIsStatic(_isStatic); //10113
-			return true;
-		}
-	}
-
-	return RedefinableElementImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any FeatureImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-
-		default:
-		{
-			// call superTypes
-			result = RedefinableElementImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -370,10 +273,6 @@ void FeatureImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> sa
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
 }
 
 void FeatureImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -393,3 +292,96 @@ void FeatureImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHand
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> FeatureImpl::eStaticClass() const
+{
+	return uml::umlPackage::eInstance()->getFeature_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any FeatureImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::FEATURE_ATTRIBUTE_FEATURINGCLASSIFIER:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Classifier>::iterator iter = getFeaturingClassifier()->begin();
+			Bag<uml::Classifier>::iterator end = getFeaturingClassifier()->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //10112			
+		}
+		case uml::umlPackage::FEATURE_ATTRIBUTE_ISSTATIC:
+			return eAny(getIsStatic()); //10113
+	}
+	return RedefinableElementImpl::eGet(featureID, resolve, coreType);
+}
+
+bool FeatureImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::FEATURE_ATTRIBUTE_FEATURINGCLASSIFIER:
+			return getFeaturingClassifier() != nullptr; //10112
+		case uml::umlPackage::FEATURE_ATTRIBUTE_ISSTATIC:
+			return getIsStatic() != false; //10113
+	}
+	return RedefinableElementImpl::internalEIsSet(featureID);
+}
+
+bool FeatureImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::FEATURE_ATTRIBUTE_ISSTATIC:
+		{
+			// BOOST CAST
+			bool _isStatic = newValue->get<bool>();
+			setIsStatic(_isStatic); //10113
+			return true;
+		}
+	}
+
+	return RedefinableElementImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any FeatureImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+
+		default:
+		{
+			// call superTypes
+			result = RedefinableElementImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<Feature> FeatureImpl::getThisFeaturePtr() const
+{
+	return m_thisFeaturePtr.lock();
+}
+void FeatureImpl::setThisFeaturePtr(std::weak_ptr<Feature> thisFeaturePtr)
+{
+	m_thisFeaturePtr = thisFeaturePtr;
+	setThisRedefinableElementPtr(thisFeaturePtr);
+}

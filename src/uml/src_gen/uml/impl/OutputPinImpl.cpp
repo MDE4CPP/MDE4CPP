@@ -1,3 +1,4 @@
+
 #include "uml/impl/OutputPinImpl.hpp"
 
 #ifdef NDEBUG
@@ -26,7 +27,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -34,7 +34,6 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-
 
 #include "uml/Action.hpp"
 #include "uml/Activity.hpp"
@@ -232,15 +231,6 @@ std::shared_ptr<ecore::EObject> OutputPinImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> OutputPinImpl::eStaticClass() const
-{
-	return uml::umlPackage::eInstance()->getOutputPin_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
@@ -251,21 +241,19 @@ bool OutputPinImpl::incoming_edges_structured_only(Any diagnostics,std::shared_p
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference action
-*/
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference action */
 std::weak_ptr<uml::Action> OutputPinImpl::getAction() const
 {
     return m_action;
 }
 
-
-
-/*
-Getter & Setter for reference callAction
-*/
+/* Getter & Setter for reference callAction */
 std::weak_ptr<uml::CallAction> OutputPinImpl::getCallAction() const
 {
     return m_callAction;
@@ -276,10 +264,7 @@ void OutputPinImpl::setCallAction(std::weak_ptr<uml::CallAction> _callAction)
 	
 }
 
-
-/*
-Getter & Setter for reference clearStructuralFeatureAction
-*/
+/* Getter & Setter for reference clearStructuralFeatureAction */
 std::weak_ptr<uml::ClearStructuralFeatureAction> OutputPinImpl::getClearStructuralFeatureAction() const
 {
     return m_clearStructuralFeatureAction;
@@ -290,10 +275,7 @@ void OutputPinImpl::setClearStructuralFeatureAction(std::weak_ptr<uml::ClearStru
 	
 }
 
-
-/*
-Getter & Setter for reference createObjectAction
-*/
+/* Getter & Setter for reference createObjectAction */
 std::weak_ptr<uml::CreateObjectAction> OutputPinImpl::getCreateObjectAction() const
 {
     return m_createObjectAction;
@@ -304,10 +286,7 @@ void OutputPinImpl::setCreateObjectAction(std::weak_ptr<uml::CreateObjectAction>
 	
 }
 
-
-/*
-Getter & Setter for reference readSelfAction
-*/
+/* Getter & Setter for reference readSelfAction */
 std::weak_ptr<uml::ReadSelfAction> OutputPinImpl::getReadSelfAction() const
 {
     return m_readSelfAction;
@@ -318,10 +297,7 @@ void OutputPinImpl::setReadSelfAction(std::weak_ptr<uml::ReadSelfAction> _readSe
 	
 }
 
-
-/*
-Getter & Setter for reference readStructuralFeatureAction
-*/
+/* Getter & Setter for reference readStructuralFeatureAction */
 std::weak_ptr<uml::ReadStructuralFeatureAction> OutputPinImpl::getReadStructuralFeatureAction() const
 {
     return m_readStructuralFeatureAction;
@@ -332,10 +308,7 @@ void OutputPinImpl::setReadStructuralFeatureAction(std::weak_ptr<uml::ReadStruct
 	
 }
 
-
-/*
-Getter & Setter for reference valueSpecificationAction
-*/
+/* Getter & Setter for reference valueSpecificationAction */
 std::weak_ptr<uml::ValueSpecificationAction> OutputPinImpl::getValueSpecificationAction() const
 {
     return m_valueSpecificationAction;
@@ -346,10 +319,7 @@ void OutputPinImpl::setValueSpecificationAction(std::weak_ptr<uml::ValueSpecific
 	
 }
 
-
-/*
-Getter & Setter for reference writeStructuralFeatureAction
-*/
+/* Getter & Setter for reference writeStructuralFeatureAction */
 std::weak_ptr<uml::WriteStructuralFeatureAction> OutputPinImpl::getWriteStructuralFeatureAction() const
 {
     return m_writeStructuralFeatureAction;
@@ -359,7 +329,6 @@ void OutputPinImpl::setWriteStructuralFeatureAction(std::weak_ptr<uml::WriteStru
     m_writeStructuralFeatureAction = _writeStructuralFeatureAction;
 	
 }
-
 
 //*********************************
 // Union Getter
@@ -414,18 +383,9 @@ std::shared_ptr<Union<uml::RedefinableElement>> OutputPinImpl::getRedefinedEleme
 	return m_redefinedElement;
 }
 
-
-
-
-std::shared_ptr<OutputPin> OutputPinImpl::getThisOutputPinPtr() const
-{
-	return m_thisOutputPinPtr.lock();
-}
-void OutputPinImpl::setThisOutputPinPtr(std::weak_ptr<OutputPin> thisOutputPinPtr)
-{
-	m_thisOutputPinPtr = thisOutputPinPtr;
-	setThisPinPtr(thisOutputPinPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> OutputPinImpl::eContainer() const
 {
 	if(auto wp = m_action.lock())
@@ -488,184 +448,6 @@ std::shared_ptr<ecore::EObject> OutputPinImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any OutputPinImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::OUTPUTPIN_ATTRIBUTE_ACTION:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getAction().lock();
-				return eAny(returnValue); //16934
-			}
-		case uml::umlPackage::OUTPUTPIN_ATTRIBUTE_CALLACTION:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getCallAction().lock();
-				return eAny(returnValue); //16933
-			}
-		case uml::umlPackage::OUTPUTPIN_ATTRIBUTE_CLEARSTRUCTURALFEATUREACTION:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getClearStructuralFeatureAction().lock();
-				return eAny(returnValue); //16938
-			}
-		case uml::umlPackage::OUTPUTPIN_ATTRIBUTE_CREATEOBJECTACTION:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getCreateObjectAction().lock();
-				return eAny(returnValue); //16940
-			}
-		case uml::umlPackage::OUTPUTPIN_ATTRIBUTE_READSELFACTION:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getReadSelfAction().lock();
-				return eAny(returnValue); //16939
-			}
-		case uml::umlPackage::OUTPUTPIN_ATTRIBUTE_READSTRUCTURALFEATUREACTION:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getReadStructuralFeatureAction().lock();
-				return eAny(returnValue); //16937
-			}
-		case uml::umlPackage::OUTPUTPIN_ATTRIBUTE_VALUESPECIFICATIONACTION:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getValueSpecificationAction().lock();
-				return eAny(returnValue); //16935
-			}
-		case uml::umlPackage::OUTPUTPIN_ATTRIBUTE_WRITESTRUCTURALFEATUREACTION:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getWriteStructuralFeatureAction().lock();
-				return eAny(returnValue); //16936
-			}
-	}
-	return PinImpl::eGet(featureID, resolve, coreType);
-}
-bool OutputPinImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::OUTPUTPIN_ATTRIBUTE_ACTION:
-			return getAction().lock() != nullptr; //16934
-		case uml::umlPackage::OUTPUTPIN_ATTRIBUTE_CALLACTION:
-			return getCallAction().lock() != nullptr; //16933
-		case uml::umlPackage::OUTPUTPIN_ATTRIBUTE_CLEARSTRUCTURALFEATUREACTION:
-			return getClearStructuralFeatureAction().lock() != nullptr; //16938
-		case uml::umlPackage::OUTPUTPIN_ATTRIBUTE_CREATEOBJECTACTION:
-			return getCreateObjectAction().lock() != nullptr; //16940
-		case uml::umlPackage::OUTPUTPIN_ATTRIBUTE_READSELFACTION:
-			return getReadSelfAction().lock() != nullptr; //16939
-		case uml::umlPackage::OUTPUTPIN_ATTRIBUTE_READSTRUCTURALFEATUREACTION:
-			return getReadStructuralFeatureAction().lock() != nullptr; //16937
-		case uml::umlPackage::OUTPUTPIN_ATTRIBUTE_VALUESPECIFICATIONACTION:
-			return getValueSpecificationAction().lock() != nullptr; //16935
-		case uml::umlPackage::OUTPUTPIN_ATTRIBUTE_WRITESTRUCTURALFEATUREACTION:
-			return getWriteStructuralFeatureAction().lock() != nullptr; //16936
-	}
-	return PinImpl::internalEIsSet(featureID);
-}
-bool OutputPinImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::OUTPUTPIN_ATTRIBUTE_CALLACTION:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::CallAction> _callAction = std::dynamic_pointer_cast<uml::CallAction>(_temp);
-			setCallAction(_callAction); //16933
-			return true;
-		}
-		case uml::umlPackage::OUTPUTPIN_ATTRIBUTE_CLEARSTRUCTURALFEATUREACTION:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::ClearStructuralFeatureAction> _clearStructuralFeatureAction = std::dynamic_pointer_cast<uml::ClearStructuralFeatureAction>(_temp);
-			setClearStructuralFeatureAction(_clearStructuralFeatureAction); //16938
-			return true;
-		}
-		case uml::umlPackage::OUTPUTPIN_ATTRIBUTE_CREATEOBJECTACTION:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::CreateObjectAction> _createObjectAction = std::dynamic_pointer_cast<uml::CreateObjectAction>(_temp);
-			setCreateObjectAction(_createObjectAction); //16940
-			return true;
-		}
-		case uml::umlPackage::OUTPUTPIN_ATTRIBUTE_READSELFACTION:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::ReadSelfAction> _readSelfAction = std::dynamic_pointer_cast<uml::ReadSelfAction>(_temp);
-			setReadSelfAction(_readSelfAction); //16939
-			return true;
-		}
-		case uml::umlPackage::OUTPUTPIN_ATTRIBUTE_READSTRUCTURALFEATUREACTION:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::ReadStructuralFeatureAction> _readStructuralFeatureAction = std::dynamic_pointer_cast<uml::ReadStructuralFeatureAction>(_temp);
-			setReadStructuralFeatureAction(_readStructuralFeatureAction); //16937
-			return true;
-		}
-		case uml::umlPackage::OUTPUTPIN_ATTRIBUTE_VALUESPECIFICATIONACTION:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::ValueSpecificationAction> _valueSpecificationAction = std::dynamic_pointer_cast<uml::ValueSpecificationAction>(_temp);
-			setValueSpecificationAction(_valueSpecificationAction); //16935
-			return true;
-		}
-		case uml::umlPackage::OUTPUTPIN_ATTRIBUTE_WRITESTRUCTURALFEATUREACTION:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::WriteStructuralFeatureAction> _writeStructuralFeatureAction = std::dynamic_pointer_cast<uml::WriteStructuralFeatureAction>(_temp);
-			setWriteStructuralFeatureAction(_writeStructuralFeatureAction); //16936
-			return true;
-		}
-	}
-
-	return PinImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any OutputPinImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-		
-		// 195902860
-		case umlPackage::OUTPUTPIN_OPERATION_INCOMING_EDGES_STRUCTURED_ONLY_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->incoming_edges_structured_only(incoming_param_diagnostics,incoming_param_context));
-			break;
-		}
-
-		default:
-		{
-			// call superTypes
-			result = PinImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -812,13 +594,6 @@ void OutputPinImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> 
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
-	
-	
-	
 }
 
 void OutputPinImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -833,3 +608,200 @@ void OutputPinImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHa
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> OutputPinImpl::eStaticClass() const
+{
+	return uml::umlPackage::eInstance()->getOutputPin_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any OutputPinImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::OUTPUTPIN_ATTRIBUTE_ACTION:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getAction().lock();
+				return eAny(returnValue); //16934
+			}
+		case uml::umlPackage::OUTPUTPIN_ATTRIBUTE_CALLACTION:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getCallAction().lock();
+				return eAny(returnValue); //16933
+			}
+		case uml::umlPackage::OUTPUTPIN_ATTRIBUTE_CLEARSTRUCTURALFEATUREACTION:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getClearStructuralFeatureAction().lock();
+				return eAny(returnValue); //16938
+			}
+		case uml::umlPackage::OUTPUTPIN_ATTRIBUTE_CREATEOBJECTACTION:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getCreateObjectAction().lock();
+				return eAny(returnValue); //16940
+			}
+		case uml::umlPackage::OUTPUTPIN_ATTRIBUTE_READSELFACTION:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getReadSelfAction().lock();
+				return eAny(returnValue); //16939
+			}
+		case uml::umlPackage::OUTPUTPIN_ATTRIBUTE_READSTRUCTURALFEATUREACTION:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getReadStructuralFeatureAction().lock();
+				return eAny(returnValue); //16937
+			}
+		case uml::umlPackage::OUTPUTPIN_ATTRIBUTE_VALUESPECIFICATIONACTION:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getValueSpecificationAction().lock();
+				return eAny(returnValue); //16935
+			}
+		case uml::umlPackage::OUTPUTPIN_ATTRIBUTE_WRITESTRUCTURALFEATUREACTION:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getWriteStructuralFeatureAction().lock();
+				return eAny(returnValue); //16936
+			}
+	}
+	return PinImpl::eGet(featureID, resolve, coreType);
+}
+
+bool OutputPinImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::OUTPUTPIN_ATTRIBUTE_ACTION:
+			return getAction().lock() != nullptr; //16934
+		case uml::umlPackage::OUTPUTPIN_ATTRIBUTE_CALLACTION:
+			return getCallAction().lock() != nullptr; //16933
+		case uml::umlPackage::OUTPUTPIN_ATTRIBUTE_CLEARSTRUCTURALFEATUREACTION:
+			return getClearStructuralFeatureAction().lock() != nullptr; //16938
+		case uml::umlPackage::OUTPUTPIN_ATTRIBUTE_CREATEOBJECTACTION:
+			return getCreateObjectAction().lock() != nullptr; //16940
+		case uml::umlPackage::OUTPUTPIN_ATTRIBUTE_READSELFACTION:
+			return getReadSelfAction().lock() != nullptr; //16939
+		case uml::umlPackage::OUTPUTPIN_ATTRIBUTE_READSTRUCTURALFEATUREACTION:
+			return getReadStructuralFeatureAction().lock() != nullptr; //16937
+		case uml::umlPackage::OUTPUTPIN_ATTRIBUTE_VALUESPECIFICATIONACTION:
+			return getValueSpecificationAction().lock() != nullptr; //16935
+		case uml::umlPackage::OUTPUTPIN_ATTRIBUTE_WRITESTRUCTURALFEATUREACTION:
+			return getWriteStructuralFeatureAction().lock() != nullptr; //16936
+	}
+	return PinImpl::internalEIsSet(featureID);
+}
+
+bool OutputPinImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::OUTPUTPIN_ATTRIBUTE_CALLACTION:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::CallAction> _callAction = std::dynamic_pointer_cast<uml::CallAction>(_temp);
+			setCallAction(_callAction); //16933
+			return true;
+		}
+		case uml::umlPackage::OUTPUTPIN_ATTRIBUTE_CLEARSTRUCTURALFEATUREACTION:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::ClearStructuralFeatureAction> _clearStructuralFeatureAction = std::dynamic_pointer_cast<uml::ClearStructuralFeatureAction>(_temp);
+			setClearStructuralFeatureAction(_clearStructuralFeatureAction); //16938
+			return true;
+		}
+		case uml::umlPackage::OUTPUTPIN_ATTRIBUTE_CREATEOBJECTACTION:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::CreateObjectAction> _createObjectAction = std::dynamic_pointer_cast<uml::CreateObjectAction>(_temp);
+			setCreateObjectAction(_createObjectAction); //16940
+			return true;
+		}
+		case uml::umlPackage::OUTPUTPIN_ATTRIBUTE_READSELFACTION:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::ReadSelfAction> _readSelfAction = std::dynamic_pointer_cast<uml::ReadSelfAction>(_temp);
+			setReadSelfAction(_readSelfAction); //16939
+			return true;
+		}
+		case uml::umlPackage::OUTPUTPIN_ATTRIBUTE_READSTRUCTURALFEATUREACTION:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::ReadStructuralFeatureAction> _readStructuralFeatureAction = std::dynamic_pointer_cast<uml::ReadStructuralFeatureAction>(_temp);
+			setReadStructuralFeatureAction(_readStructuralFeatureAction); //16937
+			return true;
+		}
+		case uml::umlPackage::OUTPUTPIN_ATTRIBUTE_VALUESPECIFICATIONACTION:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::ValueSpecificationAction> _valueSpecificationAction = std::dynamic_pointer_cast<uml::ValueSpecificationAction>(_temp);
+			setValueSpecificationAction(_valueSpecificationAction); //16935
+			return true;
+		}
+		case uml::umlPackage::OUTPUTPIN_ATTRIBUTE_WRITESTRUCTURALFEATUREACTION:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::WriteStructuralFeatureAction> _writeStructuralFeatureAction = std::dynamic_pointer_cast<uml::WriteStructuralFeatureAction>(_temp);
+			setWriteStructuralFeatureAction(_writeStructuralFeatureAction); //16936
+			return true;
+		}
+	}
+
+	return PinImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any OutputPinImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 195902860
+		case umlPackage::OUTPUTPIN_OPERATION_INCOMING_EDGES_STRUCTURED_ONLY_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->incoming_edges_structured_only(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = PinImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<OutputPin> OutputPinImpl::getThisOutputPinPtr() const
+{
+	return m_thisOutputPinPtr.lock();
+}
+void OutputPinImpl::setThisOutputPinPtr(std::weak_ptr<OutputPin> thisOutputPinPtr)
+{
+	m_thisOutputPinPtr = thisOutputPinPtr;
+	setThisPinPtr(thisOutputPinPtr);
+}

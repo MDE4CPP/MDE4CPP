@@ -1,3 +1,4 @@
+
 #include "uml/impl/ReplyActionImpl.hpp"
 
 #ifdef NDEBUG
@@ -26,7 +27,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -34,7 +34,6 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-
 
 #include "uml/Action.hpp"
 #include "uml/Activity.hpp"
@@ -197,15 +196,6 @@ std::shared_ptr<ecore::EObject> ReplyActionImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> ReplyActionImpl::eStaticClass() const
-{
-	return uml::umlPackage::eInstance()->getReplyAction_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
@@ -222,11 +212,13 @@ bool ReplyActionImpl::pins_match_parameter(Any diagnostics,std::shared_ptr<std::
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference replyToCall
-*/
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference replyToCall */
 std::shared_ptr<uml::Trigger> ReplyActionImpl::getReplyToCall() const
 {
     return m_replyToCall;
@@ -237,10 +229,7 @@ void ReplyActionImpl::setReplyToCall(std::shared_ptr<uml::Trigger> _replyToCall)
 	
 }
 
-
-/*
-Getter & Setter for reference replyValue
-*/
+/* Getter & Setter for reference replyValue */
 std::shared_ptr<Subset<uml::InputPin, uml::InputPin>> ReplyActionImpl::getReplyValue() const
 {
 	if(m_replyValue == nullptr)
@@ -261,11 +250,7 @@ std::shared_ptr<Subset<uml::InputPin, uml::InputPin>> ReplyActionImpl::getReplyV
     return m_replyValue;
 }
 
-
-
-/*
-Getter & Setter for reference returnInformation
-*/
+/* Getter & Setter for reference returnInformation */
 std::shared_ptr<uml::InputPin> ReplyActionImpl::getReturnInformation() const
 {
     return m_returnInformation;
@@ -275,7 +260,6 @@ void ReplyActionImpl::setReturnInformation(std::shared_ptr<uml::InputPin> _retur
     m_returnInformation = _returnInformation;
 	
 }
-
 
 //*********************************
 // Union Getter
@@ -350,18 +334,9 @@ std::shared_ptr<Union<uml::RedefinableElement>> ReplyActionImpl::getRedefinedEle
 	return m_redefinedElement;
 }
 
-
-
-
-std::shared_ptr<ReplyAction> ReplyActionImpl::getThisReplyActionPtr() const
-{
-	return m_thisReplyActionPtr.lock();
-}
-void ReplyActionImpl::setThisReplyActionPtr(std::weak_ptr<ReplyAction> thisReplyActionPtr)
-{
-	m_thisReplyActionPtr = thisReplyActionPtr;
-	setThisActionPtr(thisReplyActionPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> ReplyActionImpl::eContainer() const
 {
 	if(auto wp = m_activity.lock())
@@ -384,169 +359,6 @@ std::shared_ptr<ecore::EObject> ReplyActionImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any ReplyActionImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::REPLYACTION_ATTRIBUTE_REPLYTOCALL:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getReplyToCall();
-				return eAny(returnValue); //21127
-			}
-		case uml::umlPackage::REPLYACTION_ATTRIBUTE_REPLYVALUE:
-		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::InputPin>::iterator iter = getReplyValue()->begin();
-			Bag<uml::InputPin>::iterator end = getReplyValue()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //21128			
-		}
-		case uml::umlPackage::REPLYACTION_ATTRIBUTE_RETURNINFORMATION:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getReturnInformation();
-				return eAny(returnValue); //21129
-			}
-	}
-	return ActionImpl::eGet(featureID, resolve, coreType);
-}
-bool ReplyActionImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::REPLYACTION_ATTRIBUTE_REPLYTOCALL:
-			return getReplyToCall() != nullptr; //21127
-		case uml::umlPackage::REPLYACTION_ATTRIBUTE_REPLYVALUE:
-			return getReplyValue() != nullptr; //21128
-		case uml::umlPackage::REPLYACTION_ATTRIBUTE_RETURNINFORMATION:
-			return getReturnInformation() != nullptr; //21129
-	}
-	return ActionImpl::internalEIsSet(featureID);
-}
-bool ReplyActionImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::REPLYACTION_ATTRIBUTE_REPLYTOCALL:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::Trigger> _replyToCall = std::dynamic_pointer_cast<uml::Trigger>(_temp);
-			setReplyToCall(_replyToCall); //21127
-			return true;
-		}
-		case uml::umlPackage::REPLYACTION_ATTRIBUTE_REPLYVALUE:
-		{
-			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::InputPin>> replyValueList(new Bag<uml::InputPin>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
-			{
-				replyValueList->add(std::dynamic_pointer_cast<uml::InputPin>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::InputPin>::iterator iterReplyValue = getReplyValue()->begin();
-			Bag<uml::InputPin>::iterator endReplyValue = getReplyValue()->end();
-			while (iterReplyValue != endReplyValue)
-			{
-				if (replyValueList->find(*iterReplyValue) == -1)
-				{
-					getReplyValue()->erase(*iterReplyValue);
-				}
-				iterReplyValue++;
-			}
- 
-			iterReplyValue = replyValueList->begin();
-			endReplyValue = replyValueList->end();
-			while (iterReplyValue != endReplyValue)
-			{
-				if (getReplyValue()->find(*iterReplyValue) == -1)
-				{
-					getReplyValue()->add(*iterReplyValue);
-				}
-				iterReplyValue++;			
-			}
-			return true;
-		}
-		case uml::umlPackage::REPLYACTION_ATTRIBUTE_RETURNINFORMATION:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::InputPin> _returnInformation = std::dynamic_pointer_cast<uml::InputPin>(_temp);
-			setReturnInformation(_returnInformation); //21129
-			return true;
-		}
-	}
-
-	return ActionImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any ReplyActionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-		
-		// 1073826622
-		case umlPackage::REPLYACTION_OPERATION_EVENT_ON_REPLY_TO_CALL_TRIGGER_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->event_on_reply_to_call_trigger(incoming_param_diagnostics,incoming_param_context));
-			break;
-		}
-		
-		// 347748320
-		case umlPackage::REPLYACTION_OPERATION_PINS_MATCH_PARAMETER_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->pins_match_parameter(incoming_param_diagnostics,incoming_param_context));
-			break;
-		}
-
-		default:
-		{
-			// call superTypes
-			result = ActionImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -672,13 +484,6 @@ void ReplyActionImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
-	
-	
-	
 }
 
 void ReplyActionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -707,3 +512,185 @@ void ReplyActionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> ReplyActionImpl::eStaticClass() const
+{
+	return uml::umlPackage::eInstance()->getReplyAction_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any ReplyActionImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::REPLYACTION_ATTRIBUTE_REPLYTOCALL:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getReplyToCall();
+				return eAny(returnValue); //21127
+			}
+		case uml::umlPackage::REPLYACTION_ATTRIBUTE_REPLYVALUE:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::InputPin>::iterator iter = getReplyValue()->begin();
+			Bag<uml::InputPin>::iterator end = getReplyValue()->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //21128			
+		}
+		case uml::umlPackage::REPLYACTION_ATTRIBUTE_RETURNINFORMATION:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getReturnInformation();
+				return eAny(returnValue); //21129
+			}
+	}
+	return ActionImpl::eGet(featureID, resolve, coreType);
+}
+
+bool ReplyActionImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::REPLYACTION_ATTRIBUTE_REPLYTOCALL:
+			return getReplyToCall() != nullptr; //21127
+		case uml::umlPackage::REPLYACTION_ATTRIBUTE_REPLYVALUE:
+			return getReplyValue() != nullptr; //21128
+		case uml::umlPackage::REPLYACTION_ATTRIBUTE_RETURNINFORMATION:
+			return getReturnInformation() != nullptr; //21129
+	}
+	return ActionImpl::internalEIsSet(featureID);
+}
+
+bool ReplyActionImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::REPLYACTION_ATTRIBUTE_REPLYTOCALL:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::Trigger> _replyToCall = std::dynamic_pointer_cast<uml::Trigger>(_temp);
+			setReplyToCall(_replyToCall); //21127
+			return true;
+		}
+		case uml::umlPackage::REPLYACTION_ATTRIBUTE_REPLYVALUE:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::InputPin>> replyValueList(new Bag<uml::InputPin>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				replyValueList->add(std::dynamic_pointer_cast<uml::InputPin>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::InputPin>::iterator iterReplyValue = getReplyValue()->begin();
+			Bag<uml::InputPin>::iterator endReplyValue = getReplyValue()->end();
+			while (iterReplyValue != endReplyValue)
+			{
+				if (replyValueList->find(*iterReplyValue) == -1)
+				{
+					getReplyValue()->erase(*iterReplyValue);
+				}
+				iterReplyValue++;
+			}
+ 
+			iterReplyValue = replyValueList->begin();
+			endReplyValue = replyValueList->end();
+			while (iterReplyValue != endReplyValue)
+			{
+				if (getReplyValue()->find(*iterReplyValue) == -1)
+				{
+					getReplyValue()->add(*iterReplyValue);
+				}
+				iterReplyValue++;			
+			}
+			return true;
+		}
+		case uml::umlPackage::REPLYACTION_ATTRIBUTE_RETURNINFORMATION:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::InputPin> _returnInformation = std::dynamic_pointer_cast<uml::InputPin>(_temp);
+			setReturnInformation(_returnInformation); //21129
+			return true;
+		}
+	}
+
+	return ActionImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any ReplyActionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 1073826622
+		case umlPackage::REPLYACTION_OPERATION_EVENT_ON_REPLY_TO_CALL_TRIGGER_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->event_on_reply_to_call_trigger(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+		
+		// 347748320
+		case umlPackage::REPLYACTION_OPERATION_PINS_MATCH_PARAMETER_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->pins_match_parameter(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = ActionImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<ReplyAction> ReplyActionImpl::getThisReplyActionPtr() const
+{
+	return m_thisReplyActionPtr.lock();
+}
+void ReplyActionImpl::setThisReplyActionPtr(std::weak_ptr<ReplyAction> thisReplyActionPtr)
+{
+	m_thisReplyActionPtr = thisReplyActionPtr;
+	setThisActionPtr(thisReplyActionPtr);
+}

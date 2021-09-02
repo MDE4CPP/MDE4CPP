@@ -1,3 +1,4 @@
+
 #include "uml/impl/DecisionNodeImpl.hpp"
 
 #ifdef NDEBUG
@@ -26,7 +27,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -34,7 +34,6 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-
 
 #include "uml/Activity.hpp"
 #include "uml/ActivityEdge.hpp"
@@ -152,15 +151,6 @@ std::shared_ptr<ecore::EObject> DecisionNodeImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> DecisionNodeImpl::eStaticClass() const
-{
-	return uml::umlPackage::eInstance()->getDecisionNode_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
@@ -213,11 +203,13 @@ bool DecisionNodeImpl::zero_input_parameters(Any diagnostics,std::shared_ptr<std
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference decisionInput
-*/
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference decisionInput */
 std::shared_ptr<uml::Behavior> DecisionNodeImpl::getDecisionInput() const
 {
     return m_decisionInput;
@@ -228,10 +220,7 @@ void DecisionNodeImpl::setDecisionInput(std::shared_ptr<uml::Behavior> _decision
 	
 }
 
-
-/*
-Getter & Setter for reference decisionInputFlow
-*/
+/* Getter & Setter for reference decisionInputFlow */
 std::shared_ptr<uml::ObjectFlow> DecisionNodeImpl::getDecisionInputFlow() const
 {
     return m_decisionInputFlow;
@@ -241,7 +230,6 @@ void DecisionNodeImpl::setDecisionInputFlow(std::shared_ptr<uml::ObjectFlow> _de
     m_decisionInputFlow = _decisionInputFlow;
 	
 }
-
 
 //*********************************
 // Union Getter
@@ -296,18 +284,9 @@ std::shared_ptr<Union<uml::RedefinableElement>> DecisionNodeImpl::getRedefinedEl
 	return m_redefinedElement;
 }
 
-
-
-
-std::shared_ptr<DecisionNode> DecisionNodeImpl::getThisDecisionNodePtr() const
-{
-	return m_thisDecisionNodePtr.lock();
-}
-void DecisionNodeImpl::setThisDecisionNodePtr(std::weak_ptr<DecisionNode> thisDecisionNodePtr)
-{
-	m_thisDecisionNodePtr = thisDecisionNodePtr;
-	setThisControlNodePtr(thisDecisionNodePtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> DecisionNodeImpl::eContainer() const
 {
 	if(auto wp = m_activity.lock())
@@ -333,7 +312,137 @@ std::shared_ptr<ecore::EObject> DecisionNodeImpl::eContainer() const
 }
 
 //*********************************
-// Structural Feature Getter/Setter
+// Persistence Functions
+//*********************************
+void DecisionNodeImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get umlFactory
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
+	}
+}		
+
+void DecisionNodeImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+	try
+	{
+		std::map<std::string, std::string>::const_iterator iter;
+		std::shared_ptr<ecore::EClass> metaClass = this->eClass(); // get MetaClass
+		iter = attr_list.find("decisionInput");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("decisionInput")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+
+		iter = attr_list.find("decisionInputFlow");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("decisionInputFlow")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	ControlNodeImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void DecisionNodeImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+
+	//load BasePackage Nodes
+	ControlNodeImpl::loadNode(nodeName, loadHandler);
+}
+
+void DecisionNodeImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::DECISIONNODE_ATTRIBUTE_DECISIONINPUT:
+		{
+			if (references.size() == 1)
+			{
+				// Cast object to correct type
+				std::shared_ptr<uml::Behavior> _decisionInput = std::dynamic_pointer_cast<uml::Behavior>( references.front() );
+				setDecisionInput(_decisionInput);
+			}
+			
+			return;
+		}
+
+		case uml::umlPackage::DECISIONNODE_ATTRIBUTE_DECISIONINPUTFLOW:
+		{
+			if (references.size() == 1)
+			{
+				// Cast object to correct type
+				std::shared_ptr<uml::ObjectFlow> _decisionInputFlow = std::dynamic_pointer_cast<uml::ObjectFlow>( references.front() );
+				setDecisionInputFlow(_decisionInputFlow);
+			}
+			
+			return;
+		}
+	}
+	ControlNodeImpl::resolveReferences(featureID, references);
+}
+
+void DecisionNodeImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	ControlNodeImpl::saveContent(saveHandler);
+	
+	ActivityNodeImpl::saveContent(saveHandler);
+	
+	RedefinableElementImpl::saveContent(saveHandler);
+	
+	NamedElementImpl::saveContent(saveHandler);
+	
+	ElementImpl::saveContent(saveHandler);
+	
+	ObjectImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+}
+
+void DecisionNodeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
+	// Add references
+		saveHandler->addReference(this->getDecisionInput(), "decisionInput", getDecisionInput()->eClass() != uml::umlPackage::eInstance()->getBehavior_Class()); 
+		saveHandler->addReference(this->getDecisionInputFlow(), "decisionInputFlow", getDecisionInputFlow()->eClass() != uml::umlPackage::eInstance()->getObjectFlow_Class()); 
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+}
+
+
+std::shared_ptr<ecore::EClass> DecisionNodeImpl::eStaticClass() const
+{
+	return uml::umlPackage::eInstance()->getDecisionNode_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
 //*********************************
 Any DecisionNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
@@ -352,6 +461,7 @@ Any DecisionNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 	}
 	return ControlNodeImpl::eGet(featureID, resolve, coreType);
 }
+
 bool DecisionNodeImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
@@ -363,6 +473,7 @@ bool DecisionNodeImpl::internalEIsSet(int featureID) const
 	}
 	return ControlNodeImpl::internalEIsSet(featureID);
 }
+
 bool DecisionNodeImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
@@ -389,7 +500,7 @@ bool DecisionNodeImpl::eSet(int featureID, Any newValue)
 }
 
 //*********************************
-// Behavioral Feature
+// EOperation Invoke
 //*********************************
 Any DecisionNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
 {
@@ -547,132 +658,13 @@ Any DecisionNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::
 	return result;
 }
 
-//*********************************
-// Persistence Functions
-//*********************************
-void DecisionNodeImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+
+std::shared_ptr<DecisionNode> DecisionNodeImpl::getThisDecisionNodePtr() const
 {
-	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
-	loadAttributes(loadHandler, attr_list);
-
-	//
-	// Create new objects (from references (containment == true))
-	//
-	// get umlFactory
-	int numNodes = loadHandler->getNumOfChildNodes();
-	for(int ii = 0; ii < numNodes; ii++)
-	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler);
-	}
-}		
-
-void DecisionNodeImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
-{
-	try
-	{
-		std::map<std::string, std::string>::const_iterator iter;
-		std::shared_ptr<ecore::EClass> metaClass = this->eClass(); // get MetaClass
-		iter = attr_list.find("decisionInput");
-		if ( iter != attr_list.end() )
-		{
-			// add unresolvedReference to loadHandler's list
-			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("decisionInput")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
-		}
-
-		iter = attr_list.find("decisionInputFlow");
-		if ( iter != attr_list.end() )
-		{
-			// add unresolvedReference to loadHandler's list
-			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("decisionInputFlow")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
-		}
-	}
-	catch (std::exception& e)
-	{
-		std::cout << "| ERROR    | " << e.what() << std::endl;
-	}
-	catch (...) 
-	{
-		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
-	}
-
-	ControlNodeImpl::loadAttributes(loadHandler, attr_list);
+	return m_thisDecisionNodePtr.lock();
 }
-
-void DecisionNodeImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+void DecisionNodeImpl::setThisDecisionNodePtr(std::weak_ptr<DecisionNode> thisDecisionNodePtr)
 {
-
-	//load BasePackage Nodes
-	ControlNodeImpl::loadNode(nodeName, loadHandler);
+	m_thisDecisionNodePtr = thisDecisionNodePtr;
+	setThisControlNodePtr(thisDecisionNodePtr);
 }
-
-void DecisionNodeImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::DECISIONNODE_ATTRIBUTE_DECISIONINPUT:
-		{
-			if (references.size() == 1)
-			{
-				// Cast object to correct type
-				std::shared_ptr<uml::Behavior> _decisionInput = std::dynamic_pointer_cast<uml::Behavior>( references.front() );
-				setDecisionInput(_decisionInput);
-			}
-			
-			return;
-		}
-
-		case uml::umlPackage::DECISIONNODE_ATTRIBUTE_DECISIONINPUTFLOW:
-		{
-			if (references.size() == 1)
-			{
-				// Cast object to correct type
-				std::shared_ptr<uml::ObjectFlow> _decisionInputFlow = std::dynamic_pointer_cast<uml::ObjectFlow>( references.front() );
-				setDecisionInputFlow(_decisionInputFlow);
-			}
-			
-			return;
-		}
-	}
-	ControlNodeImpl::resolveReferences(featureID, references);
-}
-
-void DecisionNodeImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
-{
-	saveContent(saveHandler);
-
-	ControlNodeImpl::saveContent(saveHandler);
-	
-	ActivityNodeImpl::saveContent(saveHandler);
-	
-	RedefinableElementImpl::saveContent(saveHandler);
-	
-	NamedElementImpl::saveContent(saveHandler);
-	
-	ElementImpl::saveContent(saveHandler);
-	
-	ObjectImpl::saveContent(saveHandler);
-	
-	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
-	
-	
-}
-
-void DecisionNodeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
-{
-	try
-	{
-		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-	// Add references
-		saveHandler->addReference(this->getDecisionInput(), "decisionInput", getDecisionInput()->eClass() != uml::umlPackage::eInstance()->getBehavior_Class()); 
-		saveHandler->addReference(this->getDecisionInputFlow(), "decisionInputFlow", getDecisionInputFlow()->eClass() != uml::umlPackage::eInstance()->getObjectFlow_Class()); 
-	}
-	catch (std::exception& e)
-	{
-		std::cout << "| ERROR    | " << e.what() << std::endl;
-	}
-}
-

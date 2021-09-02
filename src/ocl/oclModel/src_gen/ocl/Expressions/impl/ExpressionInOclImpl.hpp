@@ -44,38 +44,28 @@ namespace ocl::Expressions
 			// Operations
 			//*********************************
 			
-			
 			//*********************************
-			// Attributes Getter Setter
-			//*********************************
-			
-			
-			//*********************************
-			// Reference
+			// Attribute Getters & Setters
 			//*********************************
 			
+			//*********************************
+			// Reference Getters & Setters
+			//*********************************
 			virtual std::shared_ptr<ocl::Expressions::OclExpression> getBodyExpression() const ;
-			
 			virtual void setBodyExpression(std::shared_ptr<ocl::Expressions::OclExpression>) ;
-			
 			virtual std::shared_ptr<ocl::Expressions::Variable> getContextVariable() const ;
-			
 			virtual void setContextVariable(std::shared_ptr<ocl::Expressions::Variable>) ;
-			
 			virtual std::shared_ptr<Bag<ocl::Expressions::Variable>> getParameterVariable() const ;
-			
-			
 			virtual std::shared_ptr<ocl::Expressions::Variable> getResultVariable() const ;
-			
 			virtual void setResultVariable(std::shared_ptr<ocl::Expressions::Variable>) ;
 			
+			//*********************************
+			// Union Reference Getters
+			//*********************************
 			
 			//*********************************
-			// Union Getter
+			// Container Getter
 			//*********************************
-			
-			
-
 			virtual std::shared_ptr<ecore::EObject> eContainer() const ; 
 			
 			//*********************************
@@ -84,20 +74,23 @@ namespace ocl::Expressions
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) ;
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
-			
 			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
-			
 
-			//*********************************
-			// Structural Feature Getter/Setter
-			//*********************************
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+
+			//*********************************
+			// EStructuralFeature Get/Set/IsSet
+			//*********************************
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool internalEIsSet(int featureID) const ;
 			virtual bool eSet(int featureID, Any newValue) ;
+			virtual bool internalEIsSet(int featureID) const ;
+
+			//*********************************
+			// EOperation Invoke
+			//*********************************
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:

@@ -1,3 +1,4 @@
+
 #include "ocl/Expressions/impl/CollectionLiteralPartImpl.hpp"
 
 #ifdef NDEBUG
@@ -25,7 +26,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -33,7 +33,6 @@
 
 #include <exception> // used in Persistence
 #include "ecore/ecoreFactory.hpp"
-
 
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClassifier.hpp"
@@ -108,90 +107,28 @@ std::shared_ptr<ecore::EObject> CollectionLiteralPartImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> CollectionLiteralPartImpl::eStaticClass() const
-{
-	return ocl::Expressions::ExpressionsPackage::eInstance()->getCollectionLiteralPart_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
 
 //*********************************
-// References
+// Attribute Getters & Setters
+//*********************************
+
+//*********************************
+// Reference Getters & Setters
 //*********************************
 
 //*********************************
 // Union Getter
 //*********************************
 
-
-
-std::shared_ptr<CollectionLiteralPart> CollectionLiteralPartImpl::getThisCollectionLiteralPartPtr() const
-{
-	return m_thisCollectionLiteralPartPtr.lock();
-}
-void CollectionLiteralPartImpl::setThisCollectionLiteralPartPtr(std::weak_ptr<CollectionLiteralPart> thisCollectionLiteralPartPtr)
-{
-	m_thisCollectionLiteralPartPtr = thisCollectionLiteralPartPtr;
-	setThisETypedElementPtr(thisCollectionLiteralPartPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> CollectionLiteralPartImpl::eContainer() const
 {
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any CollectionLiteralPartImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-	}
-	return ecore::ETypedElementImpl::eGet(featureID, resolve, coreType);
-}
-bool CollectionLiteralPartImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-	}
-	return ecore::ETypedElementImpl::internalEIsSet(featureID);
-}
-bool CollectionLiteralPartImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-	}
-
-	return ecore::ETypedElementImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any CollectionLiteralPartImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-
-		default:
-		{
-			// call superTypes
-			result = ecore::ETypedElementImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -242,9 +179,6 @@ void CollectionLiteralPartImpl::save(std::shared_ptr<persistence::interfaces::XS
 	ecore::EModelElementImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
 }
 
 void CollectionLiteralPartImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -259,3 +193,71 @@ void CollectionLiteralPartImpl::saveContent(std::shared_ptr<persistence::interfa
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> CollectionLiteralPartImpl::eStaticClass() const
+{
+	return ocl::Expressions::ExpressionsPackage::eInstance()->getCollectionLiteralPart_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any CollectionLiteralPartImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+	}
+	return ecore::ETypedElementImpl::eGet(featureID, resolve, coreType);
+}
+
+bool CollectionLiteralPartImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+	}
+	return ecore::ETypedElementImpl::internalEIsSet(featureID);
+}
+
+bool CollectionLiteralPartImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+	}
+
+	return ecore::ETypedElementImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any CollectionLiteralPartImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+
+		default:
+		{
+			// call superTypes
+			result = ecore::ETypedElementImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<CollectionLiteralPart> CollectionLiteralPartImpl::getThisCollectionLiteralPartPtr() const
+{
+	return m_thisCollectionLiteralPartPtr.lock();
+}
+void CollectionLiteralPartImpl::setThisCollectionLiteralPartPtr(std::weak_ptr<CollectionLiteralPart> thisCollectionLiteralPartPtr)
+{
+	m_thisCollectionLiteralPartPtr = thisCollectionLiteralPartPtr;
+	setThisETypedElementPtr(thisCollectionLiteralPartPtr);
+}

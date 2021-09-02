@@ -1,3 +1,4 @@
+
 #include "fUML/Semantics/SimpleClassifiers/impl/DataValueImpl.hpp"
 
 #ifdef NDEBUG
@@ -40,7 +41,6 @@
 #include <exception> // used in Persistence
 #include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
 #include "uml/umlFactory.hpp"
-
 
 #include "uml/Classifier.hpp"
 #include "fUML/Semantics/SimpleClassifiers/CompoundValue.hpp"
@@ -119,15 +119,6 @@ std::shared_ptr<ecore::EObject> DataValueImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> DataValueImpl::eStaticClass() const
-{
-	return fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::eInstance()->getDataValue_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
@@ -162,11 +153,13 @@ std::shared_ptr<fUML::Semantics::Values::Value> DataValueImpl::new_()
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference type
-*/
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference type */
 std::shared_ptr<uml::DataType> DataValueImpl::getType() const
 {
     return m_type;
@@ -177,110 +170,16 @@ void DataValueImpl::setType(std::shared_ptr<uml::DataType> _type)
 	
 }
 
-
 //*********************************
 // Union Getter
 //*********************************
 
-
-
-std::shared_ptr<DataValue> DataValueImpl::getThisDataValuePtr() const
-{
-	return m_thisDataValuePtr.lock();
-}
-void DataValueImpl::setThisDataValuePtr(std::weak_ptr<DataValue> thisDataValuePtr)
-{
-	m_thisDataValuePtr = thisDataValuePtr;
-	setThisCompoundValuePtr(thisDataValuePtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> DataValueImpl::eContainer() const
 {
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any DataValueImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::DATAVALUE_ATTRIBUTE_TYPE:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getType();
-				return eAny(returnValue); //361
-			}
-	}
-	return CompoundValueImpl::eGet(featureID, resolve, coreType);
-}
-bool DataValueImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::DATAVALUE_ATTRIBUTE_TYPE:
-			return getType() != nullptr; //361
-	}
-	return CompoundValueImpl::internalEIsSet(featureID);
-}
-bool DataValueImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::DATAVALUE_ATTRIBUTE_TYPE:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::DataType> _type = std::dynamic_pointer_cast<uml::DataType>(_temp);
-			setType(_type); //361
-			return true;
-		}
-	}
-
-	return CompoundValueImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any DataValueImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-		
-		// 1504394808
-		case SimpleClassifiersPackage::DATAVALUE_OPERATION__COPY:
-		{
-			result = eAny(this->_copy());
-			break;
-		}
-		
-		// 133859574
-		case SimpleClassifiersPackage::DATAVALUE_OPERATION_GETTYPES:
-		{
-			result = eAny(this->getTypes());
-			break;
-		}
-		
-		// 2084136138
-		case SimpleClassifiersPackage::DATAVALUE_OPERATION_NEW_:
-		{
-			result = eAny(this->new_());
-			break;
-		}
-
-		default:
-		{
-			// call superTypes
-			result = CompoundValueImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -366,10 +265,6 @@ void DataValueImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> 
 	fUML::Semantics::Loci::SemanticVisitorImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
 }
 
 void DataValueImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -386,3 +281,107 @@ void DataValueImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHa
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> DataValueImpl::eStaticClass() const
+{
+	return fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::eInstance()->getDataValue_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any DataValueImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::DATAVALUE_ATTRIBUTE_TYPE:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getType();
+				return eAny(returnValue); //361
+			}
+	}
+	return CompoundValueImpl::eGet(featureID, resolve, coreType);
+}
+
+bool DataValueImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::DATAVALUE_ATTRIBUTE_TYPE:
+			return getType() != nullptr; //361
+	}
+	return CompoundValueImpl::internalEIsSet(featureID);
+}
+
+bool DataValueImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::DATAVALUE_ATTRIBUTE_TYPE:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::DataType> _type = std::dynamic_pointer_cast<uml::DataType>(_temp);
+			setType(_type); //361
+			return true;
+		}
+	}
+
+	return CompoundValueImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any DataValueImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 1504394808
+		case SimpleClassifiersPackage::DATAVALUE_OPERATION__COPY:
+		{
+			result = eAny(this->_copy());
+			break;
+		}
+		
+		// 133859574
+		case SimpleClassifiersPackage::DATAVALUE_OPERATION_GETTYPES:
+		{
+			result = eAny(this->getTypes());
+			break;
+		}
+		
+		// 2084136138
+		case SimpleClassifiersPackage::DATAVALUE_OPERATION_NEW_:
+		{
+			result = eAny(this->new_());
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = CompoundValueImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<DataValue> DataValueImpl::getThisDataValuePtr() const
+{
+	return m_thisDataValuePtr.lock();
+}
+void DataValueImpl::setThisDataValuePtr(std::weak_ptr<DataValue> thisDataValuePtr)
+{
+	m_thisDataValuePtr = thisDataValuePtr;
+	setThisCompoundValuePtr(thisDataValuePtr);
+}

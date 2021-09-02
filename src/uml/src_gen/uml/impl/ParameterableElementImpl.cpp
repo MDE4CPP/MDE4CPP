@@ -1,3 +1,4 @@
+
 #include "uml/impl/ParameterableElementImpl.hpp"
 
 #ifdef NDEBUG
@@ -25,7 +26,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -33,7 +33,6 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-
 
 #include "uml/Comment.hpp"
 #include "uml/Element.hpp"
@@ -122,15 +121,6 @@ std::shared_ptr<ecore::EObject> ParameterableElementImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> ParameterableElementImpl::eStaticClass() const
-{
-	return uml::umlPackage::eInstance()->getParameterableElement_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
@@ -147,11 +137,13 @@ bool ParameterableElementImpl::isTemplateParameter()
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference owningTemplateParameter
-*/
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference owningTemplateParameter */
 std::weak_ptr<uml::TemplateParameter> ParameterableElementImpl::getOwningTemplateParameter() const
 {
     return m_owningTemplateParameter;
@@ -162,10 +154,7 @@ void ParameterableElementImpl::setOwningTemplateParameter(std::weak_ptr<uml::Tem
 	
 }
 
-
-/*
-Getter & Setter for reference templateParameter
-*/
+/* Getter & Setter for reference templateParameter */
 std::shared_ptr<uml::TemplateParameter> ParameterableElementImpl::getTemplateParameter() const
 {
     return m_templateParameter;
@@ -175,7 +164,6 @@ void ParameterableElementImpl::setTemplateParameter(std::shared_ptr<uml::Templat
     m_templateParameter = _templateParameter;
 	
 }
-
 
 //*********************************
 // Union Getter
@@ -202,16 +190,9 @@ std::weak_ptr<uml::Element> ParameterableElementImpl::getOwner() const
 
 
 
-
-std::shared_ptr<ParameterableElement> ParameterableElementImpl::getThisParameterableElementPtr() const
-{
-	return m_thisParameterableElementPtr.lock();
-}
-void ParameterableElementImpl::setThisParameterableElementPtr(std::weak_ptr<ParameterableElement> thisParameterableElementPtr)
-{
-	m_thisParameterableElementPtr = thisParameterableElementPtr;
-	setThisElementPtr(thisParameterableElementPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> ParameterableElementImpl::eContainer() const
 {
 	if(auto wp = m_owner.lock())
@@ -224,104 +205,6 @@ std::shared_ptr<ecore::EObject> ParameterableElementImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any ParameterableElementImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::PARAMETERABLEELEMENT_ATTRIBUTE_OWNINGTEMPLATEPARAMETER:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getOwningTemplateParameter().lock();
-				return eAny(returnValue); //1783
-			}
-		case uml::umlPackage::PARAMETERABLEELEMENT_ATTRIBUTE_TEMPLATEPARAMETER:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getTemplateParameter();
-				return eAny(returnValue); //1784
-			}
-	}
-	return ElementImpl::eGet(featureID, resolve, coreType);
-}
-bool ParameterableElementImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::PARAMETERABLEELEMENT_ATTRIBUTE_OWNINGTEMPLATEPARAMETER:
-			return getOwningTemplateParameter().lock() != nullptr; //1783
-		case uml::umlPackage::PARAMETERABLEELEMENT_ATTRIBUTE_TEMPLATEPARAMETER:
-			return getTemplateParameter() != nullptr; //1784
-	}
-	return ElementImpl::internalEIsSet(featureID);
-}
-bool ParameterableElementImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::PARAMETERABLEELEMENT_ATTRIBUTE_OWNINGTEMPLATEPARAMETER:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::TemplateParameter> _owningTemplateParameter = std::dynamic_pointer_cast<uml::TemplateParameter>(_temp);
-			setOwningTemplateParameter(_owningTemplateParameter); //1783
-			return true;
-		}
-		case uml::umlPackage::PARAMETERABLEELEMENT_ATTRIBUTE_TEMPLATEPARAMETER:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::TemplateParameter> _templateParameter = std::dynamic_pointer_cast<uml::TemplateParameter>(_temp);
-			setTemplateParameter(_templateParameter); //1784
-			return true;
-		}
-	}
-
-	return ElementImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any ParameterableElementImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-		
-		// 1783372574
-		case umlPackage::PARAMETERABLEELEMENT_OPERATION_ISCOMPATIBLEWITH_PARAMETERABLEELEMENT:
-		{
-			//Retrieve input parameter 'p'
-			//parameter 0
-			std::shared_ptr<uml::ParameterableElement> incoming_param_p;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_p_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_p = (*incoming_param_p_arguments_citer)->get()->get<std::shared_ptr<uml::ParameterableElement> >();
-			result = eAny(this->isCompatibleWith(incoming_param_p));
-			break;
-		}
-		
-		// 414546068
-		case umlPackage::PARAMETERABLEELEMENT_OPERATION_ISTEMPLATEPARAMETER:
-		{
-			result = eAny(this->isTemplateParameter());
-			break;
-		}
-
-		default:
-		{
-			// call superTypes
-			result = ElementImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -415,8 +298,6 @@ void ParameterableElementImpl::save(std::shared_ptr<persistence::interfaces::XSa
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
 }
 
 void ParameterableElementImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -433,3 +314,120 @@ void ParameterableElementImpl::saveContent(std::shared_ptr<persistence::interfac
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> ParameterableElementImpl::eStaticClass() const
+{
+	return uml::umlPackage::eInstance()->getParameterableElement_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any ParameterableElementImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::PARAMETERABLEELEMENT_ATTRIBUTE_OWNINGTEMPLATEPARAMETER:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getOwningTemplateParameter().lock();
+				return eAny(returnValue); //1783
+			}
+		case uml::umlPackage::PARAMETERABLEELEMENT_ATTRIBUTE_TEMPLATEPARAMETER:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getTemplateParameter();
+				return eAny(returnValue); //1784
+			}
+	}
+	return ElementImpl::eGet(featureID, resolve, coreType);
+}
+
+bool ParameterableElementImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::PARAMETERABLEELEMENT_ATTRIBUTE_OWNINGTEMPLATEPARAMETER:
+			return getOwningTemplateParameter().lock() != nullptr; //1783
+		case uml::umlPackage::PARAMETERABLEELEMENT_ATTRIBUTE_TEMPLATEPARAMETER:
+			return getTemplateParameter() != nullptr; //1784
+	}
+	return ElementImpl::internalEIsSet(featureID);
+}
+
+bool ParameterableElementImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::PARAMETERABLEELEMENT_ATTRIBUTE_OWNINGTEMPLATEPARAMETER:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::TemplateParameter> _owningTemplateParameter = std::dynamic_pointer_cast<uml::TemplateParameter>(_temp);
+			setOwningTemplateParameter(_owningTemplateParameter); //1783
+			return true;
+		}
+		case uml::umlPackage::PARAMETERABLEELEMENT_ATTRIBUTE_TEMPLATEPARAMETER:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::TemplateParameter> _templateParameter = std::dynamic_pointer_cast<uml::TemplateParameter>(_temp);
+			setTemplateParameter(_templateParameter); //1784
+			return true;
+		}
+	}
+
+	return ElementImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any ParameterableElementImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 1783372574
+		case umlPackage::PARAMETERABLEELEMENT_OPERATION_ISCOMPATIBLEWITH_PARAMETERABLEELEMENT:
+		{
+			//Retrieve input parameter 'p'
+			//parameter 0
+			std::shared_ptr<uml::ParameterableElement> incoming_param_p;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_p_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_p = (*incoming_param_p_arguments_citer)->get()->get<std::shared_ptr<uml::ParameterableElement> >();
+			result = eAny(this->isCompatibleWith(incoming_param_p));
+			break;
+		}
+		
+		// 414546068
+		case umlPackage::PARAMETERABLEELEMENT_OPERATION_ISTEMPLATEPARAMETER:
+		{
+			result = eAny(this->isTemplateParameter());
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = ElementImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<ParameterableElement> ParameterableElementImpl::getThisParameterableElementPtr() const
+{
+	return m_thisParameterableElementPtr.lock();
+}
+void ParameterableElementImpl::setThisParameterableElementPtr(std::weak_ptr<ParameterableElement> thisParameterableElementPtr)
+{
+	m_thisParameterableElementPtr = thisParameterableElementPtr;
+	setThisElementPtr(thisParameterableElementPtr);
+}

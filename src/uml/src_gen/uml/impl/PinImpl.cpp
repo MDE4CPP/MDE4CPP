@@ -1,3 +1,4 @@
+
 #include "uml/impl/PinImpl.hpp"
 
 #ifdef NDEBUG
@@ -26,7 +27,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -34,7 +34,6 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-
 
 #include "uml/Activity.hpp"
 #include "uml/ActivityEdge.hpp"
@@ -155,28 +154,6 @@ std::shared_ptr<ecore::EObject> PinImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> PinImpl::eStaticClass() const
-{
-	return uml::umlPackage::eInstance()->getPin_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-/*
-Getter & Setter for attribute isControl
-*/
-bool PinImpl::getIsControl() const 
-{
-	return m_isControl;
-}
-void PinImpl::setIsControl(bool _isControl)
-{
-	m_isControl = _isControl;
-	
-} 
-
-
 //*********************************
 // Operations
 //*********************************
@@ -193,7 +170,21 @@ bool PinImpl::not_unique(Any diagnostics,std::shared_ptr<std::map < Any, Any>> c
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
+//*********************************
+/* Getter & Setter for attribute isControl */
+bool PinImpl::getIsControl() const 
+{
+	return m_isControl;
+}
+void PinImpl::setIsControl(bool _isControl)
+{
+	m_isControl = _isControl;
+	
+}
+
+//*********************************
+// Reference Getters & Setters
 //*********************************
 
 //*********************************
@@ -249,19 +240,9 @@ std::shared_ptr<Union<uml::RedefinableElement>> PinImpl::getRedefinedElement() c
 	return m_redefinedElement;
 }
 
-
-
-
-std::shared_ptr<Pin> PinImpl::getThisPinPtr() const
-{
-	return m_thisPinPtr.lock();
-}
-void PinImpl::setThisPinPtr(std::weak_ptr<Pin> thisPinPtr)
-{
-	m_thisPinPtr = thisPinPtr;
-	setThisMultiplicityElementPtr(thisPinPtr);
-	setThisObjectNodePtr(thisPinPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> PinImpl::eContainer() const
 {
 	if(auto wp = m_activity.lock())
@@ -284,124 +265,6 @@ std::shared_ptr<ecore::EObject> PinImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any PinImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::PIN_ATTRIBUTE_ISCONTROL:
-			return eAny(getIsControl()); //18032
-	}
-	Any result;
-	result = MultiplicityElementImpl::eGet(featureID, resolve, coreType);
-	if (result != nullptr && !result->isEmpty())
-	{
-		return result;
-	}
-	result = ObjectNodeImpl::eGet(featureID, resolve, coreType);
-	return result;
-}
-bool PinImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::PIN_ATTRIBUTE_ISCONTROL:
-			return getIsControl() != false; //18032
-	}
-	bool result = false;
-	result = MultiplicityElementImpl::internalEIsSet(featureID);
-	if (result)
-	{
-		return result;
-	}
-	result = ObjectNodeImpl::internalEIsSet(featureID);
-	return result;
-}
-bool PinImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::PIN_ATTRIBUTE_ISCONTROL:
-		{
-			// BOOST CAST
-			bool _isControl = newValue->get<bool>();
-			setIsControl(_isControl); //18032
-			return true;
-		}
-	}
-
-	bool result = false;
-	result = MultiplicityElementImpl::eSet(featureID, newValue);
-	if (result)
-	{
-		return result;
-	}
-	result = ObjectNodeImpl::eSet(featureID, newValue);
-	return result;
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any PinImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-		
-		// 633209512
-		case umlPackage::PIN_OPERATION_CONTROL_PINS_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->control_pins(incoming_param_diagnostics,incoming_param_context));
-			break;
-		}
-		
-		// 2131680405
-		case umlPackage::PIN_OPERATION_NOT_UNIQUE_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->not_unique(incoming_param_diagnostics,incoming_param_context));
-			break;
-		}
-
-		default:
-		{
-			// call superTypes
-			result = MultiplicityElementImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			result = ObjectNodeImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -484,12 +347,6 @@ void PinImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHa
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
-	
-	
 }
 
 void PinImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -509,3 +366,141 @@ void PinImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler>
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> PinImpl::eStaticClass() const
+{
+	return uml::umlPackage::eInstance()->getPin_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any PinImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::PIN_ATTRIBUTE_ISCONTROL:
+			return eAny(getIsControl()); //18032
+	}
+	Any result;
+	result = MultiplicityElementImpl::eGet(featureID, resolve, coreType);
+	if (result != nullptr && !result->isEmpty())
+	{
+		return result;
+	}
+	result = ObjectNodeImpl::eGet(featureID, resolve, coreType);
+	return result;
+}
+
+bool PinImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::PIN_ATTRIBUTE_ISCONTROL:
+			return getIsControl() != false; //18032
+	}
+	bool result = false;
+	result = MultiplicityElementImpl::internalEIsSet(featureID);
+	if (result)
+	{
+		return result;
+	}
+	result = ObjectNodeImpl::internalEIsSet(featureID);
+	return result;
+}
+
+bool PinImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::PIN_ATTRIBUTE_ISCONTROL:
+		{
+			// BOOST CAST
+			bool _isControl = newValue->get<bool>();
+			setIsControl(_isControl); //18032
+			return true;
+		}
+	}
+
+	bool result = false;
+	result = MultiplicityElementImpl::eSet(featureID, newValue);
+	if (result)
+	{
+		return result;
+	}
+	result = ObjectNodeImpl::eSet(featureID, newValue);
+	return result;
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any PinImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 633209512
+		case umlPackage::PIN_OPERATION_CONTROL_PINS_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->control_pins(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+		
+		// 2131680405
+		case umlPackage::PIN_OPERATION_NOT_UNIQUE_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->not_unique(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = MultiplicityElementImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			result = ObjectNodeImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<Pin> PinImpl::getThisPinPtr() const
+{
+	return m_thisPinPtr.lock();
+}
+void PinImpl::setThisPinPtr(std::weak_ptr<Pin> thisPinPtr)
+{
+	m_thisPinPtr = thisPinPtr;
+	setThisMultiplicityElementPtr(thisPinPtr);
+	setThisObjectNodePtr(thisPinPtr);
+}

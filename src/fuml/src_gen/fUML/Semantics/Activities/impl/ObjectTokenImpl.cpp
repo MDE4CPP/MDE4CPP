@@ -1,3 +1,4 @@
+
 #include "fUML/Semantics/Activities/impl/ObjectTokenImpl.hpp"
 
 #ifdef NDEBUG
@@ -34,7 +35,6 @@
 #include <exception> // used in Persistence
 #include "fUML/Semantics/Values/ValuesFactory.hpp"
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
-
 
 #include "fUML/Semantics/Activities/ActivityNodeActivation.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
@@ -121,15 +121,6 @@ std::shared_ptr<ecore::EObject> ObjectTokenImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> ObjectTokenImpl::eStaticClass() const
-{
-	return fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getObjectToken_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
@@ -164,11 +155,13 @@ bool ObjectTokenImpl::isControl()
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference value
-*/
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference value */
 std::shared_ptr<fUML::Semantics::Values::Value> ObjectTokenImpl::getValue() const
 {
     return m_value;
@@ -179,22 +172,13 @@ void ObjectTokenImpl::setValue(std::shared_ptr<fUML::Semantics::Values::Value> _
 	
 }
 
-
 //*********************************
 // Union Getter
 //*********************************
 
-
-
-std::shared_ptr<ObjectToken> ObjectTokenImpl::getThisObjectTokenPtr() const
-{
-	return m_thisObjectTokenPtr.lock();
-}
-void ObjectTokenImpl::setThisObjectTokenPtr(std::weak_ptr<ObjectToken> thisObjectTokenPtr)
-{
-	m_thisObjectTokenPtr = thisObjectTokenPtr;
-	setThisTokenPtr(thisObjectTokenPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> ObjectTokenImpl::eContainer() const
 {
 	if(auto wp = m_holder.lock())
@@ -202,96 +186,6 @@ std::shared_ptr<ecore::EObject> ObjectTokenImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any ObjectTokenImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case fUML::Semantics::Activities::ActivitiesPackage::OBJECTTOKEN_ATTRIBUTE_VALUE:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getValue();
-				return eAny(returnValue); //832
-			}
-	}
-	return TokenImpl::eGet(featureID, resolve, coreType);
-}
-bool ObjectTokenImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case fUML::Semantics::Activities::ActivitiesPackage::OBJECTTOKEN_ATTRIBUTE_VALUE:
-			return getValue() != nullptr; //832
-	}
-	return TokenImpl::internalEIsSet(featureID);
-}
-bool ObjectTokenImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case fUML::Semantics::Activities::ActivitiesPackage::OBJECTTOKEN_ATTRIBUTE_VALUE:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<fUML::Semantics::Values::Value> _value = std::dynamic_pointer_cast<fUML::Semantics::Values::Value>(_temp);
-			setValue(_value); //832
-			return true;
-		}
-	}
-
-	return TokenImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any ObjectTokenImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-		
-		// 2097614011
-		case ActivitiesPackage::OBJECTTOKEN_OPERATION__COPY:
-		{
-			result = eAny(this->_copy());
-			break;
-		}
-		
-		// 986368509
-		case ActivitiesPackage::OBJECTTOKEN_OPERATION_EQUALS_TOKEN:
-		{
-			//Retrieve input parameter 'other'
-			//parameter 0
-			std::shared_ptr<fUML::Semantics::Activities::Token> incoming_param_other;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_other_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_other = (*incoming_param_other_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::Activities::Token> >();
-			result = eAny(this->equals(incoming_param_other));
-			break;
-		}
-		
-		// 1282940466
-		case ActivitiesPackage::OBJECTTOKEN_OPERATION_ISCONTROL:
-		{
-			result = eAny(this->isControl());
-			break;
-		}
-
-		default:
-		{
-			// call superTypes
-			result = TokenImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -361,7 +255,6 @@ void ObjectTokenImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler
 	TokenImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
 }
 
 void ObjectTokenImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -383,3 +276,112 @@ void ObjectTokenImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> ObjectTokenImpl::eStaticClass() const
+{
+	return fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getObjectToken_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any ObjectTokenImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case fUML::Semantics::Activities::ActivitiesPackage::OBJECTTOKEN_ATTRIBUTE_VALUE:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getValue();
+				return eAny(returnValue); //832
+			}
+	}
+	return TokenImpl::eGet(featureID, resolve, coreType);
+}
+
+bool ObjectTokenImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case fUML::Semantics::Activities::ActivitiesPackage::OBJECTTOKEN_ATTRIBUTE_VALUE:
+			return getValue() != nullptr; //832
+	}
+	return TokenImpl::internalEIsSet(featureID);
+}
+
+bool ObjectTokenImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case fUML::Semantics::Activities::ActivitiesPackage::OBJECTTOKEN_ATTRIBUTE_VALUE:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<fUML::Semantics::Values::Value> _value = std::dynamic_pointer_cast<fUML::Semantics::Values::Value>(_temp);
+			setValue(_value); //832
+			return true;
+		}
+	}
+
+	return TokenImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any ObjectTokenImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 2097614011
+		case ActivitiesPackage::OBJECTTOKEN_OPERATION__COPY:
+		{
+			result = eAny(this->_copy());
+			break;
+		}
+		
+		// 986368509
+		case ActivitiesPackage::OBJECTTOKEN_OPERATION_EQUALS_TOKEN:
+		{
+			//Retrieve input parameter 'other'
+			//parameter 0
+			std::shared_ptr<fUML::Semantics::Activities::Token> incoming_param_other;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_other_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_other = (*incoming_param_other_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::Activities::Token> >();
+			result = eAny(this->equals(incoming_param_other));
+			break;
+		}
+		
+		// 1282940466
+		case ActivitiesPackage::OBJECTTOKEN_OPERATION_ISCONTROL:
+		{
+			result = eAny(this->isControl());
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = TokenImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<ObjectToken> ObjectTokenImpl::getThisObjectTokenPtr() const
+{
+	return m_thisObjectTokenPtr.lock();
+}
+void ObjectTokenImpl::setThisObjectTokenPtr(std::weak_ptr<ObjectToken> thisObjectTokenPtr)
+{
+	m_thisObjectTokenPtr = thisObjectTokenPtr;
+	setThisTokenPtr(thisObjectTokenPtr);
+}

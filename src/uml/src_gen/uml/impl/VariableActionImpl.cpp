@@ -1,3 +1,4 @@
+
 #include "uml/impl/VariableActionImpl.hpp"
 
 #ifdef NDEBUG
@@ -26,7 +27,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -34,7 +34,6 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-
 
 #include "uml/Action.hpp"
 #include "uml/Activity.hpp"
@@ -154,15 +153,6 @@ std::shared_ptr<ecore::EObject> VariableActionImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> VariableActionImpl::eStaticClass() const
-{
-	return uml::umlPackage::eInstance()->getVariableAction_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
@@ -173,11 +163,13 @@ bool VariableActionImpl::scope_of_variable(Any diagnostics,std::shared_ptr<std::
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference variable
-*/
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference variable */
 std::shared_ptr<uml::Variable> VariableActionImpl::getVariable() const
 {
     return m_variable;
@@ -187,7 +179,6 @@ void VariableActionImpl::setVariable(std::shared_ptr<uml::Variable> _variable)
     m_variable = _variable;
 	
 }
-
 
 //*********************************
 // Union Getter
@@ -242,18 +233,9 @@ std::shared_ptr<Union<uml::RedefinableElement>> VariableActionImpl::getRedefined
 	return m_redefinedElement;
 }
 
-
-
-
-std::shared_ptr<VariableAction> VariableActionImpl::getThisVariableActionPtr() const
-{
-	return m_thisVariableActionPtr.lock();
-}
-void VariableActionImpl::setThisVariableActionPtr(std::weak_ptr<VariableAction> thisVariableActionPtr)
-{
-	m_thisVariableActionPtr = thisVariableActionPtr;
-	setThisActionPtr(thisVariableActionPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> VariableActionImpl::eContainer() const
 {
 	if(auto wp = m_activity.lock())
@@ -276,87 +258,6 @@ std::shared_ptr<ecore::EObject> VariableActionImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any VariableActionImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::VARIABLEACTION_ATTRIBUTE_VARIABLE:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getVariable();
-				return eAny(returnValue); //25327
-			}
-	}
-	return ActionImpl::eGet(featureID, resolve, coreType);
-}
-bool VariableActionImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::VARIABLEACTION_ATTRIBUTE_VARIABLE:
-			return getVariable() != nullptr; //25327
-	}
-	return ActionImpl::internalEIsSet(featureID);
-}
-bool VariableActionImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::VARIABLEACTION_ATTRIBUTE_VARIABLE:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::Variable> _variable = std::dynamic_pointer_cast<uml::Variable>(_temp);
-			setVariable(_variable); //25327
-			return true;
-		}
-	}
-
-	return ActionImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any VariableActionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-		
-		// 405545884
-		case umlPackage::VARIABLEACTION_OPERATION_SCOPE_OF_VARIABLE_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->scope_of_variable(incoming_param_diagnostics,incoming_param_context));
-			break;
-		}
-
-		default:
-		{
-			// call superTypes
-			result = ActionImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -448,13 +349,6 @@ void VariableActionImpl::save(std::shared_ptr<persistence::interfaces::XSaveHand
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
-	
-	
-	
 }
 
 void VariableActionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -471,3 +365,103 @@ void VariableActionImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> VariableActionImpl::eStaticClass() const
+{
+	return uml::umlPackage::eInstance()->getVariableAction_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any VariableActionImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::VARIABLEACTION_ATTRIBUTE_VARIABLE:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getVariable();
+				return eAny(returnValue); //25327
+			}
+	}
+	return ActionImpl::eGet(featureID, resolve, coreType);
+}
+
+bool VariableActionImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::VARIABLEACTION_ATTRIBUTE_VARIABLE:
+			return getVariable() != nullptr; //25327
+	}
+	return ActionImpl::internalEIsSet(featureID);
+}
+
+bool VariableActionImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::VARIABLEACTION_ATTRIBUTE_VARIABLE:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::Variable> _variable = std::dynamic_pointer_cast<uml::Variable>(_temp);
+			setVariable(_variable); //25327
+			return true;
+		}
+	}
+
+	return ActionImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any VariableActionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 405545884
+		case umlPackage::VARIABLEACTION_OPERATION_SCOPE_OF_VARIABLE_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->scope_of_variable(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = ActionImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<VariableAction> VariableActionImpl::getThisVariableActionPtr() const
+{
+	return m_thisVariableActionPtr.lock();
+}
+void VariableActionImpl::setThisVariableActionPtr(std::weak_ptr<VariableAction> thisVariableActionPtr)
+{
+	m_thisVariableActionPtr = thisVariableActionPtr;
+	setThisActionPtr(thisVariableActionPtr);
+}

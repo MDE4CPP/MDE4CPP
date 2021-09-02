@@ -1,3 +1,4 @@
+
 #include "ocl/Values/impl/StaticValueImpl.hpp"
 
 #ifdef NDEBUG
@@ -32,7 +33,6 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-
 
 #include "fUML/Semantics/Values/Value.hpp"
 
@@ -104,90 +104,28 @@ std::shared_ptr<ecore::EObject> StaticValueImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> StaticValueImpl::eStaticClass() const
-{
-	return ocl::Values::ValuesPackage::eInstance()->getStaticValue_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
 
 //*********************************
-// References
+// Attribute Getters & Setters
+//*********************************
+
+//*********************************
+// Reference Getters & Setters
 //*********************************
 
 //*********************************
 // Union Getter
 //*********************************
 
-
-
-std::shared_ptr<StaticValue> StaticValueImpl::getThisStaticValuePtr() const
-{
-	return m_thisStaticValuePtr.lock();
-}
-void StaticValueImpl::setThisStaticValuePtr(std::weak_ptr<StaticValue> thisStaticValuePtr)
-{
-	m_thisStaticValuePtr = thisStaticValuePtr;
-	setThisValuePtr(thisStaticValuePtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> StaticValueImpl::eContainer() const
 {
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any StaticValueImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-	}
-	return fUML::Semantics::Values::ValueImpl::eGet(featureID, resolve, coreType);
-}
-bool StaticValueImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-	}
-	return fUML::Semantics::Values::ValueImpl::internalEIsSet(featureID);
-}
-bool StaticValueImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-	}
-
-	return fUML::Semantics::Values::ValueImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any StaticValueImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-
-		default:
-		{
-			// call superTypes
-			result = fUML::Semantics::Values::ValueImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -236,8 +174,6 @@ void StaticValueImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler
 	fUML::Semantics::Loci::SemanticVisitorImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
 }
 
 void StaticValueImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -252,3 +188,71 @@ void StaticValueImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> StaticValueImpl::eStaticClass() const
+{
+	return ocl::Values::ValuesPackage::eInstance()->getStaticValue_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any StaticValueImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+	}
+	return fUML::Semantics::Values::ValueImpl::eGet(featureID, resolve, coreType);
+}
+
+bool StaticValueImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+	}
+	return fUML::Semantics::Values::ValueImpl::internalEIsSet(featureID);
+}
+
+bool StaticValueImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+	}
+
+	return fUML::Semantics::Values::ValueImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any StaticValueImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+
+		default:
+		{
+			// call superTypes
+			result = fUML::Semantics::Values::ValueImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<StaticValue> StaticValueImpl::getThisStaticValuePtr() const
+{
+	return m_thisStaticValuePtr.lock();
+}
+void StaticValueImpl::setThisStaticValuePtr(std::weak_ptr<StaticValue> thisStaticValuePtr)
+{
+	m_thisStaticValuePtr = thisStaticValuePtr;
+	setThisValuePtr(thisStaticValuePtr);
+}

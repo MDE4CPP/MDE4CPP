@@ -1,3 +1,4 @@
+
 #include "ocl/Expressions/impl/TupleLiteralPartImpl.hpp"
 
 #ifdef NDEBUG
@@ -25,7 +26,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -33,7 +33,6 @@
 
 #include <exception> // used in Persistence
 #include "ecore/ecoreFactory.hpp"
-
 
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EAttribute.hpp"
@@ -115,25 +114,18 @@ std::shared_ptr<ecore::EObject> TupleLiteralPartImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> TupleLiteralPartImpl::eStaticClass() const
-{
-	return ocl::Expressions::ExpressionsPackage::eInstance()->getTupleLiteralPart_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference attribute
-*/
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference attribute */
 std::shared_ptr<ecore::EAttribute> TupleLiteralPartImpl::getAttribute() const
 {
     return m_attribute;
@@ -144,89 +136,16 @@ void TupleLiteralPartImpl::setAttribute(std::shared_ptr<ecore::EAttribute> _attr
 	
 }
 
-
 //*********************************
 // Union Getter
 //*********************************
 
-
-
-std::shared_ptr<TupleLiteralPart> TupleLiteralPartImpl::getThisTupleLiteralPartPtr() const
-{
-	return m_thisTupleLiteralPartPtr.lock();
-}
-void TupleLiteralPartImpl::setThisTupleLiteralPartPtr(std::weak_ptr<TupleLiteralPart> thisTupleLiteralPartPtr)
-{
-	m_thisTupleLiteralPartPtr = thisTupleLiteralPartPtr;
-	setThisETypedElementPtr(thisTupleLiteralPartPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> TupleLiteralPartImpl::eContainer() const
 {
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any TupleLiteralPartImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case ocl::Expressions::ExpressionsPackage::TUPLELITERALPART_ATTRIBUTE_ATTRIBUTE:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getAttribute();
-				return eAny(returnValue); //8710
-			}
-	}
-	return ecore::ETypedElementImpl::eGet(featureID, resolve, coreType);
-}
-bool TupleLiteralPartImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case ocl::Expressions::ExpressionsPackage::TUPLELITERALPART_ATTRIBUTE_ATTRIBUTE:
-			return getAttribute() != nullptr; //8710
-	}
-	return ecore::ETypedElementImpl::internalEIsSet(featureID);
-}
-bool TupleLiteralPartImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case ocl::Expressions::ExpressionsPackage::TUPLELITERALPART_ATTRIBUTE_ATTRIBUTE:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<ecore::EAttribute> _attribute = std::dynamic_pointer_cast<ecore::EAttribute>(_temp);
-			setAttribute(_attribute); //8710
-			return true;
-		}
-	}
-
-	return ecore::ETypedElementImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any TupleLiteralPartImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-
-		default:
-		{
-			// call superTypes
-			result = ecore::ETypedElementImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -299,9 +218,6 @@ void TupleLiteralPartImpl::save(std::shared_ptr<persistence::interfaces::XSaveHa
 	ecore::EModelElementImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
 }
 
 void TupleLiteralPartImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -323,3 +239,86 @@ void TupleLiteralPartImpl::saveContent(std::shared_ptr<persistence::interfaces::
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> TupleLiteralPartImpl::eStaticClass() const
+{
+	return ocl::Expressions::ExpressionsPackage::eInstance()->getTupleLiteralPart_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any TupleLiteralPartImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case ocl::Expressions::ExpressionsPackage::TUPLELITERALPART_ATTRIBUTE_ATTRIBUTE:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getAttribute();
+				return eAny(returnValue); //8710
+			}
+	}
+	return ecore::ETypedElementImpl::eGet(featureID, resolve, coreType);
+}
+
+bool TupleLiteralPartImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case ocl::Expressions::ExpressionsPackage::TUPLELITERALPART_ATTRIBUTE_ATTRIBUTE:
+			return getAttribute() != nullptr; //8710
+	}
+	return ecore::ETypedElementImpl::internalEIsSet(featureID);
+}
+
+bool TupleLiteralPartImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case ocl::Expressions::ExpressionsPackage::TUPLELITERALPART_ATTRIBUTE_ATTRIBUTE:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<ecore::EAttribute> _attribute = std::dynamic_pointer_cast<ecore::EAttribute>(_temp);
+			setAttribute(_attribute); //8710
+			return true;
+		}
+	}
+
+	return ecore::ETypedElementImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any TupleLiteralPartImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+
+		default:
+		{
+			// call superTypes
+			result = ecore::ETypedElementImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<TupleLiteralPart> TupleLiteralPartImpl::getThisTupleLiteralPartPtr() const
+{
+	return m_thisTupleLiteralPartPtr.lock();
+}
+void TupleLiteralPartImpl::setThisTupleLiteralPartPtr(std::weak_ptr<TupleLiteralPart> thisTupleLiteralPartPtr)
+{
+	m_thisTupleLiteralPartPtr = thisTupleLiteralPartPtr;
+	setThisETypedElementPtr(thisTupleLiteralPartPtr);
+}

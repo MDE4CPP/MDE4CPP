@@ -1,3 +1,4 @@
+
 #include "uml/impl/InteractionConstraintImpl.hpp"
 
 #ifdef NDEBUG
@@ -26,7 +27,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -34,7 +34,6 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-
 
 #include "uml/Comment.hpp"
 #include "uml/Constraint.hpp"
@@ -168,15 +167,6 @@ std::shared_ptr<ecore::EObject> InteractionConstraintImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> InteractionConstraintImpl::eStaticClass() const
-{
-	return uml::umlPackage::eInstance()->getInteractionConstraint_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
@@ -217,11 +207,13 @@ bool InteractionConstraintImpl::minint_non_negative(Any diagnostics,std::shared_
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference maxint
-*/
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference maxint */
 std::shared_ptr<uml::ValueSpecification> InteractionConstraintImpl::getMaxint() const
 {
     return m_maxint;
@@ -232,10 +224,7 @@ void InteractionConstraintImpl::setMaxint(std::shared_ptr<uml::ValueSpecificatio
 	
 }
 
-
-/*
-Getter & Setter for reference minint
-*/
+/* Getter & Setter for reference minint */
 std::shared_ptr<uml::ValueSpecification> InteractionConstraintImpl::getMinint() const
 {
     return m_minint;
@@ -245,7 +234,6 @@ void InteractionConstraintImpl::setMinint(std::shared_ptr<uml::ValueSpecificatio
     m_minint = _minint;
 	
 }
-
 
 //*********************************
 // Union Getter
@@ -277,16 +265,9 @@ std::weak_ptr<uml::Element> InteractionConstraintImpl::getOwner() const
 
 
 
-
-std::shared_ptr<InteractionConstraint> InteractionConstraintImpl::getThisInteractionConstraintPtr() const
-{
-	return m_thisInteractionConstraintPtr.lock();
-}
-void InteractionConstraintImpl::setThisInteractionConstraintPtr(std::weak_ptr<InteractionConstraint> thisInteractionConstraintPtr)
-{
-	m_thisInteractionConstraintPtr = thisInteractionConstraintPtr;
-	setThisConstraintPtr(thisInteractionConstraintPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> InteractionConstraintImpl::eContainer() const
 {
 	if(auto wp = m_context.lock())
@@ -317,7 +298,130 @@ std::shared_ptr<ecore::EObject> InteractionConstraintImpl::eContainer() const
 }
 
 //*********************************
-// Structural Feature Getter/Setter
+// Persistence Functions
+//*********************************
+void InteractionConstraintImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get umlFactory
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
+	}
+}		
+
+void InteractionConstraintImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+
+	ConstraintImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void InteractionConstraintImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+
+	try
+	{
+		if ( nodeName.compare("maxint") == 0 )
+		{
+  			std::string typeName = loadHandler->getCurrentXSITypeName();
+			if (typeName.empty())
+			{
+				std::cout << "| WARNING    | type if an eClassifiers node it empty" << std::endl;
+				return; // no type name given and reference type is abstract
+			}
+			loadHandler->handleChild(this->getMaxint()); 
+
+			return; 
+		}
+
+		if ( nodeName.compare("minint") == 0 )
+		{
+  			std::string typeName = loadHandler->getCurrentXSITypeName();
+			if (typeName.empty())
+			{
+				std::cout << "| WARNING    | type if an eClassifiers node it empty" << std::endl;
+				return; // no type name given and reference type is abstract
+			}
+			loadHandler->handleChild(this->getMinint()); 
+
+			return; 
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+	//load BasePackage Nodes
+	ConstraintImpl::loadNode(nodeName, loadHandler);
+}
+
+void InteractionConstraintImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+{
+	ConstraintImpl::resolveReferences(featureID, references);
+}
+
+void InteractionConstraintImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	ConstraintImpl::saveContent(saveHandler);
+	
+	PackageableElementImpl::saveContent(saveHandler);
+	
+	NamedElementImpl::saveContent(saveHandler);
+	ParameterableElementImpl::saveContent(saveHandler);
+	
+	ElementImpl::saveContent(saveHandler);
+	
+	ObjectImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+}
+
+void InteractionConstraintImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
+		// Save 'maxint'
+		std::shared_ptr<uml::ValueSpecification> maxint = this->getMaxint();
+		if (maxint != nullptr)
+		{
+			saveHandler->addReference(maxint, "maxint", maxint->eClass() != package->getValueSpecification_Class());
+		}
+
+		// Save 'minint'
+		std::shared_ptr<uml::ValueSpecification> minint = this->getMinint();
+		if (minint != nullptr)
+		{
+			saveHandler->addReference(minint, "minint", minint->eClass() != package->getValueSpecification_Class());
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+}
+
+
+std::shared_ptr<ecore::EClass> InteractionConstraintImpl::eStaticClass() const
+{
+	return uml::umlPackage::eInstance()->getInteractionConstraint_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
 //*********************************
 Any InteractionConstraintImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
@@ -336,6 +440,7 @@ Any InteractionConstraintImpl::eGet(int featureID, bool resolve, bool coreType) 
 	}
 	return ConstraintImpl::eGet(featureID, resolve, coreType);
 }
+
 bool InteractionConstraintImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
@@ -347,6 +452,7 @@ bool InteractionConstraintImpl::internalEIsSet(int featureID) const
 	}
 	return ConstraintImpl::internalEIsSet(featureID);
 }
+
 bool InteractionConstraintImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
@@ -373,7 +479,7 @@ bool InteractionConstraintImpl::eSet(int featureID, Any newValue)
 }
 
 //*********************************
-// Behavioral Feature
+// EOperation Invoke
 //*********************************
 Any InteractionConstraintImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
 {
@@ -497,124 +603,13 @@ Any InteractionConstraintImpl::eInvoke(int operationID, std::shared_ptr<std::lis
 	return result;
 }
 
-//*********************************
-// Persistence Functions
-//*********************************
-void InteractionConstraintImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+
+std::shared_ptr<InteractionConstraint> InteractionConstraintImpl::getThisInteractionConstraintPtr() const
 {
-	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
-	loadAttributes(loadHandler, attr_list);
-
-	//
-	// Create new objects (from references (containment == true))
-	//
-	// get umlFactory
-	int numNodes = loadHandler->getNumOfChildNodes();
-	for(int ii = 0; ii < numNodes; ii++)
-	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler);
-	}
-}		
-
-void InteractionConstraintImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
-{
-
-	ConstraintImpl::loadAttributes(loadHandler, attr_list);
+	return m_thisInteractionConstraintPtr.lock();
 }
-
-void InteractionConstraintImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+void InteractionConstraintImpl::setThisInteractionConstraintPtr(std::weak_ptr<InteractionConstraint> thisInteractionConstraintPtr)
 {
-
-	try
-	{
-		if ( nodeName.compare("maxint") == 0 )
-		{
-  			std::string typeName = loadHandler->getCurrentXSITypeName();
-			if (typeName.empty())
-			{
-				std::cout << "| WARNING    | type if an eClassifiers node it empty" << std::endl;
-				return; // no type name given and reference type is abstract
-			}
-			loadHandler->handleChild(this->getMaxint()); 
-
-			return; 
-		}
-
-		if ( nodeName.compare("minint") == 0 )
-		{
-  			std::string typeName = loadHandler->getCurrentXSITypeName();
-			if (typeName.empty())
-			{
-				std::cout << "| WARNING    | type if an eClassifiers node it empty" << std::endl;
-				return; // no type name given and reference type is abstract
-			}
-			loadHandler->handleChild(this->getMinint()); 
-
-			return; 
-		}
-	}
-	catch (std::exception& e)
-	{
-		std::cout << "| ERROR    | " << e.what() << std::endl;
-	}
-	catch (...) 
-	{
-		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
-	}
-	//load BasePackage Nodes
-	ConstraintImpl::loadNode(nodeName, loadHandler);
+	m_thisInteractionConstraintPtr = thisInteractionConstraintPtr;
+	setThisConstraintPtr(thisInteractionConstraintPtr);
 }
-
-void InteractionConstraintImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
-{
-	ConstraintImpl::resolveReferences(featureID, references);
-}
-
-void InteractionConstraintImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
-{
-	saveContent(saveHandler);
-
-	ConstraintImpl::saveContent(saveHandler);
-	
-	PackageableElementImpl::saveContent(saveHandler);
-	
-	NamedElementImpl::saveContent(saveHandler);
-	ParameterableElementImpl::saveContent(saveHandler);
-	
-	ElementImpl::saveContent(saveHandler);
-	
-	ObjectImpl::saveContent(saveHandler);
-	
-	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
-	
-}
-
-void InteractionConstraintImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
-{
-	try
-	{
-		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-		// Save 'maxint'
-		std::shared_ptr<uml::ValueSpecification> maxint = this->getMaxint();
-		if (maxint != nullptr)
-		{
-			saveHandler->addReference(maxint, "maxint", maxint->eClass() != package->getValueSpecification_Class());
-		}
-
-		// Save 'minint'
-		std::shared_ptr<uml::ValueSpecification> minint = this->getMinint();
-		if (minint != nullptr)
-		{
-			saveHandler->addReference(minint, "minint", minint->eClass() != package->getValueSpecification_Class());
-		}
-	}
-	catch (std::exception& e)
-	{
-		std::cout << "| ERROR    | " << e.what() << std::endl;
-	}
-}
-

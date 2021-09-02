@@ -1,3 +1,4 @@
+
 #include "uml/impl/TimeIntervalImpl.hpp"
 
 #ifdef NDEBUG
@@ -25,7 +26,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -33,7 +33,6 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-
 
 #include "uml/Comment.hpp"
 #include "uml/Dependency.hpp"
@@ -160,21 +159,16 @@ std::shared_ptr<ecore::EObject> TimeIntervalImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> TimeIntervalImpl::eStaticClass() const
-{
-	return uml::umlPackage::eInstance()->getTimeInterval_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
 
 //*********************************
-// References
+// Attribute Getters & Setters
+//*********************************
+
+//*********************************
+// Reference Getters & Setters
 //*********************************
 
 //*********************************
@@ -207,16 +201,9 @@ std::weak_ptr<uml::Element> TimeIntervalImpl::getOwner() const
 
 
 
-
-std::shared_ptr<TimeInterval> TimeIntervalImpl::getThisTimeIntervalPtr() const
-{
-	return m_thisTimeIntervalPtr.lock();
-}
-void TimeIntervalImpl::setThisTimeIntervalPtr(std::weak_ptr<TimeInterval> thisTimeIntervalPtr)
-{
-	m_thisTimeIntervalPtr = thisTimeIntervalPtr;
-	setThisIntervalPtr(thisTimeIntervalPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> TimeIntervalImpl::eContainer() const
 {
 	if(auto wp = m_namespace.lock())
@@ -249,55 +236,6 @@ std::shared_ptr<ecore::EObject> TimeIntervalImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any TimeIntervalImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-	}
-	return IntervalImpl::eGet(featureID, resolve, coreType);
-}
-bool TimeIntervalImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-	}
-	return IntervalImpl::internalEIsSet(featureID);
-}
-bool TimeIntervalImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-	}
-
-	return IntervalImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any TimeIntervalImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-
-		default:
-		{
-			// call superTypes
-			result = IntervalImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -356,12 +294,6 @@ void TimeIntervalImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandle
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
-	
-	
 }
 
 void TimeIntervalImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -376,3 +308,71 @@ void TimeIntervalImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> TimeIntervalImpl::eStaticClass() const
+{
+	return uml::umlPackage::eInstance()->getTimeInterval_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any TimeIntervalImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+	}
+	return IntervalImpl::eGet(featureID, resolve, coreType);
+}
+
+bool TimeIntervalImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+	}
+	return IntervalImpl::internalEIsSet(featureID);
+}
+
+bool TimeIntervalImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+	}
+
+	return IntervalImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any TimeIntervalImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+
+		default:
+		{
+			// call superTypes
+			result = IntervalImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<TimeInterval> TimeIntervalImpl::getThisTimeIntervalPtr() const
+{
+	return m_thisTimeIntervalPtr.lock();
+}
+void TimeIntervalImpl::setThisTimeIntervalPtr(std::weak_ptr<TimeInterval> thisTimeIntervalPtr)
+{
+	m_thisTimeIntervalPtr = thisTimeIntervalPtr;
+	setThisIntervalPtr(thisTimeIntervalPtr);
+}

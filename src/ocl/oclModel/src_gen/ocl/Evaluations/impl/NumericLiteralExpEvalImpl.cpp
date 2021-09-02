@@ -1,3 +1,4 @@
+
 #include "ocl/Evaluations/impl/NumericLiteralExpEvalImpl.hpp"
 
 #ifdef NDEBUG
@@ -24,19 +25,17 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "fUML/Semantics/Values/ValuesFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
 #include "uml/umlFactory.hpp"
+#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
-
 
 #include "ocl/Evaluations/EvalEnvironment.hpp"
 #include "fUML/Semantics/Loci/Locus.hpp"
@@ -116,90 +115,28 @@ std::shared_ptr<ecore::EObject> NumericLiteralExpEvalImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> NumericLiteralExpEvalImpl::eStaticClass() const
-{
-	return ocl::Evaluations::EvaluationsPackage::eInstance()->getNumericLiteralExpEval_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
 
 //*********************************
-// References
+// Attribute Getters & Setters
+//*********************************
+
+//*********************************
+// Reference Getters & Setters
 //*********************************
 
 //*********************************
 // Union Getter
 //*********************************
 
-
-
-std::shared_ptr<NumericLiteralExpEval> NumericLiteralExpEvalImpl::getThisNumericLiteralExpEvalPtr() const
-{
-	return m_thisNumericLiteralExpEvalPtr.lock();
-}
-void NumericLiteralExpEvalImpl::setThisNumericLiteralExpEvalPtr(std::weak_ptr<NumericLiteralExpEval> thisNumericLiteralExpEvalPtr)
-{
-	m_thisNumericLiteralExpEvalPtr = thisNumericLiteralExpEvalPtr;
-	setThisPrimitiveLiteralExpEvalPtr(thisNumericLiteralExpEvalPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> NumericLiteralExpEvalImpl::eContainer() const
 {
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any NumericLiteralExpEvalImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-	}
-	return PrimitiveLiteralExpEvalImpl::eGet(featureID, resolve, coreType);
-}
-bool NumericLiteralExpEvalImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-	}
-	return PrimitiveLiteralExpEvalImpl::internalEIsSet(featureID);
-}
-bool NumericLiteralExpEvalImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-	}
-
-	return PrimitiveLiteralExpEvalImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any NumericLiteralExpEvalImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-
-		default:
-		{
-			// call superTypes
-			result = PrimitiveLiteralExpEvalImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -254,11 +191,6 @@ void NumericLiteralExpEvalImpl::save(std::shared_ptr<persistence::interfaces::XS
 	fUML::Semantics::Loci::SemanticVisitorImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
-	
 }
 
 void NumericLiteralExpEvalImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -273,3 +205,71 @@ void NumericLiteralExpEvalImpl::saveContent(std::shared_ptr<persistence::interfa
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> NumericLiteralExpEvalImpl::eStaticClass() const
+{
+	return ocl::Evaluations::EvaluationsPackage::eInstance()->getNumericLiteralExpEval_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any NumericLiteralExpEvalImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+	}
+	return PrimitiveLiteralExpEvalImpl::eGet(featureID, resolve, coreType);
+}
+
+bool NumericLiteralExpEvalImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+	}
+	return PrimitiveLiteralExpEvalImpl::internalEIsSet(featureID);
+}
+
+bool NumericLiteralExpEvalImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+	}
+
+	return PrimitiveLiteralExpEvalImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any NumericLiteralExpEvalImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+
+		default:
+		{
+			// call superTypes
+			result = PrimitiveLiteralExpEvalImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<NumericLiteralExpEval> NumericLiteralExpEvalImpl::getThisNumericLiteralExpEvalPtr() const
+{
+	return m_thisNumericLiteralExpEvalPtr.lock();
+}
+void NumericLiteralExpEvalImpl::setThisNumericLiteralExpEvalPtr(std::weak_ptr<NumericLiteralExpEval> thisNumericLiteralExpEvalPtr)
+{
+	m_thisNumericLiteralExpEvalPtr = thisNumericLiteralExpEvalPtr;
+	setThisPrimitiveLiteralExpEvalPtr(thisNumericLiteralExpEvalPtr);
+}

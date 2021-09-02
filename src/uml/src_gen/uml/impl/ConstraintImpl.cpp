@@ -1,3 +1,4 @@
+
 #include "uml/impl/ConstraintImpl.hpp"
 
 #ifdef NDEBUG
@@ -26,7 +27,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -34,7 +34,6 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-
 
 #include "uml/Comment.hpp"
 #include "uml/Dependency.hpp"
@@ -163,15 +162,6 @@ std::shared_ptr<ecore::EObject> ConstraintImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> ConstraintImpl::eStaticClass() const
-{
-	return uml::umlPackage::eInstance()->getConstraint_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
@@ -194,11 +184,13 @@ bool ConstraintImpl::not_apply_to_self(Any diagnostics,std::shared_ptr<std::map 
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference constrainedElement
-*/
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference constrainedElement */
 std::shared_ptr<Bag<uml::Element>> ConstraintImpl::getConstrainedElement() const
 {
 	if(m_constrainedElement == nullptr)
@@ -210,11 +202,7 @@ std::shared_ptr<Bag<uml::Element>> ConstraintImpl::getConstrainedElement() const
     return m_constrainedElement;
 }
 
-
-
-/*
-Getter & Setter for reference context
-*/
+/* Getter & Setter for reference context */
 std::weak_ptr<uml::Namespace> ConstraintImpl::getContext() const
 {
     return m_context;
@@ -225,10 +213,7 @@ void ConstraintImpl::setContext(std::weak_ptr<uml::Namespace> _context)
 	
 }
 
-
-/*
-Getter & Setter for reference specification
-*/
+/* Getter & Setter for reference specification */
 std::shared_ptr<uml::ValueSpecification> ConstraintImpl::getSpecification() const
 {
     return m_specification;
@@ -238,7 +223,6 @@ void ConstraintImpl::setSpecification(std::shared_ptr<uml::ValueSpecification> _
     m_specification = _specification;
 	
 }
-
 
 //*********************************
 // Union Getter
@@ -270,16 +254,9 @@ std::weak_ptr<uml::Element> ConstraintImpl::getOwner() const
 
 
 
-
-std::shared_ptr<Constraint> ConstraintImpl::getThisConstraintPtr() const
-{
-	return m_thisConstraintPtr.lock();
-}
-void ConstraintImpl::setThisConstraintPtr(std::weak_ptr<Constraint> thisConstraintPtr)
-{
-	m_thisConstraintPtr = thisConstraintPtr;
-	setThisPackageableElementPtr(thisConstraintPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> ConstraintImpl::eContainer() const
 {
 	if(auto wp = m_context.lock())
@@ -307,186 +284,6 @@ std::shared_ptr<ecore::EObject> ConstraintImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any ConstraintImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::CONSTRAINT_ATTRIBUTE_CONSTRAINEDELEMENT:
-		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Element>::iterator iter = getConstrainedElement()->begin();
-			Bag<uml::Element>::iterator end = getConstrainedElement()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //5712			
-		}
-		case uml::umlPackage::CONSTRAINT_ATTRIBUTE_CONTEXT:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getContext().lock();
-				return eAny(returnValue); //5713
-			}
-		case uml::umlPackage::CONSTRAINT_ATTRIBUTE_SPECIFICATION:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getSpecification();
-				return eAny(returnValue); //5714
-			}
-	}
-	return PackageableElementImpl::eGet(featureID, resolve, coreType);
-}
-bool ConstraintImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::CONSTRAINT_ATTRIBUTE_CONSTRAINEDELEMENT:
-			return getConstrainedElement() != nullptr; //5712
-		case uml::umlPackage::CONSTRAINT_ATTRIBUTE_CONTEXT:
-			return getContext().lock() != nullptr; //5713
-		case uml::umlPackage::CONSTRAINT_ATTRIBUTE_SPECIFICATION:
-			return getSpecification() != nullptr; //5714
-	}
-	return PackageableElementImpl::internalEIsSet(featureID);
-}
-bool ConstraintImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::CONSTRAINT_ATTRIBUTE_CONSTRAINEDELEMENT:
-		{
-			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::Element>> constrainedElementList(new Bag<uml::Element>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
-			{
-				constrainedElementList->add(std::dynamic_pointer_cast<uml::Element>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::Element>::iterator iterConstrainedElement = getConstrainedElement()->begin();
-			Bag<uml::Element>::iterator endConstrainedElement = getConstrainedElement()->end();
-			while (iterConstrainedElement != endConstrainedElement)
-			{
-				if (constrainedElementList->find(*iterConstrainedElement) == -1)
-				{
-					getConstrainedElement()->erase(*iterConstrainedElement);
-				}
-				iterConstrainedElement++;
-			}
- 
-			iterConstrainedElement = constrainedElementList->begin();
-			endConstrainedElement = constrainedElementList->end();
-			while (iterConstrainedElement != endConstrainedElement)
-			{
-				if (getConstrainedElement()->find(*iterConstrainedElement) == -1)
-				{
-					getConstrainedElement()->add(*iterConstrainedElement);
-				}
-				iterConstrainedElement++;			
-			}
-			return true;
-		}
-		case uml::umlPackage::CONSTRAINT_ATTRIBUTE_CONTEXT:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::Namespace> _context = std::dynamic_pointer_cast<uml::Namespace>(_temp);
-			setContext(_context); //5713
-			return true;
-		}
-		case uml::umlPackage::CONSTRAINT_ATTRIBUTE_SPECIFICATION:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::ValueSpecification> _specification = std::dynamic_pointer_cast<uml::ValueSpecification>(_temp);
-			setSpecification(_specification); //5714
-			return true;
-		}
-	}
-
-	return PackageableElementImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any ConstraintImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-		
-		// 383317525
-		case umlPackage::CONSTRAINT_OPERATION_BOOLEAN_VALUE_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->boolean_value(incoming_param_diagnostics,incoming_param_context));
-			break;
-		}
-		
-		// 125849084
-		case umlPackage::CONSTRAINT_OPERATION_NO_SIDE_EFFECTS_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->no_side_effects(incoming_param_diagnostics,incoming_param_context));
-			break;
-		}
-		
-		// 454887471
-		case umlPackage::CONSTRAINT_OPERATION_NOT_APPLY_TO_SELF_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->not_apply_to_self(incoming_param_diagnostics,incoming_param_context));
-			break;
-		}
-
-		default:
-		{
-			// call superTypes
-			result = PackageableElementImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -610,10 +407,6 @@ void ConstraintImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler>
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
 }
 
 void ConstraintImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -636,3 +429,202 @@ void ConstraintImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> ConstraintImpl::eStaticClass() const
+{
+	return uml::umlPackage::eInstance()->getConstraint_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any ConstraintImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::CONSTRAINT_ATTRIBUTE_CONSTRAINEDELEMENT:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Element>::iterator iter = getConstrainedElement()->begin();
+			Bag<uml::Element>::iterator end = getConstrainedElement()->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //5712			
+		}
+		case uml::umlPackage::CONSTRAINT_ATTRIBUTE_CONTEXT:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getContext().lock();
+				return eAny(returnValue); //5713
+			}
+		case uml::umlPackage::CONSTRAINT_ATTRIBUTE_SPECIFICATION:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getSpecification();
+				return eAny(returnValue); //5714
+			}
+	}
+	return PackageableElementImpl::eGet(featureID, resolve, coreType);
+}
+
+bool ConstraintImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::CONSTRAINT_ATTRIBUTE_CONSTRAINEDELEMENT:
+			return getConstrainedElement() != nullptr; //5712
+		case uml::umlPackage::CONSTRAINT_ATTRIBUTE_CONTEXT:
+			return getContext().lock() != nullptr; //5713
+		case uml::umlPackage::CONSTRAINT_ATTRIBUTE_SPECIFICATION:
+			return getSpecification() != nullptr; //5714
+	}
+	return PackageableElementImpl::internalEIsSet(featureID);
+}
+
+bool ConstraintImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::CONSTRAINT_ATTRIBUTE_CONSTRAINEDELEMENT:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::Element>> constrainedElementList(new Bag<uml::Element>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				constrainedElementList->add(std::dynamic_pointer_cast<uml::Element>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::Element>::iterator iterConstrainedElement = getConstrainedElement()->begin();
+			Bag<uml::Element>::iterator endConstrainedElement = getConstrainedElement()->end();
+			while (iterConstrainedElement != endConstrainedElement)
+			{
+				if (constrainedElementList->find(*iterConstrainedElement) == -1)
+				{
+					getConstrainedElement()->erase(*iterConstrainedElement);
+				}
+				iterConstrainedElement++;
+			}
+ 
+			iterConstrainedElement = constrainedElementList->begin();
+			endConstrainedElement = constrainedElementList->end();
+			while (iterConstrainedElement != endConstrainedElement)
+			{
+				if (getConstrainedElement()->find(*iterConstrainedElement) == -1)
+				{
+					getConstrainedElement()->add(*iterConstrainedElement);
+				}
+				iterConstrainedElement++;			
+			}
+			return true;
+		}
+		case uml::umlPackage::CONSTRAINT_ATTRIBUTE_CONTEXT:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::Namespace> _context = std::dynamic_pointer_cast<uml::Namespace>(_temp);
+			setContext(_context); //5713
+			return true;
+		}
+		case uml::umlPackage::CONSTRAINT_ATTRIBUTE_SPECIFICATION:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::ValueSpecification> _specification = std::dynamic_pointer_cast<uml::ValueSpecification>(_temp);
+			setSpecification(_specification); //5714
+			return true;
+		}
+	}
+
+	return PackageableElementImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any ConstraintImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 383317525
+		case umlPackage::CONSTRAINT_OPERATION_BOOLEAN_VALUE_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->boolean_value(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+		
+		// 125849084
+		case umlPackage::CONSTRAINT_OPERATION_NO_SIDE_EFFECTS_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->no_side_effects(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+		
+		// 454887471
+		case umlPackage::CONSTRAINT_OPERATION_NOT_APPLY_TO_SELF_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->not_apply_to_self(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = PackageableElementImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<Constraint> ConstraintImpl::getThisConstraintPtr() const
+{
+	return m_thisConstraintPtr.lock();
+}
+void ConstraintImpl::setThisConstraintPtr(std::weak_ptr<Constraint> thisConstraintPtr)
+{
+	m_thisConstraintPtr = thisConstraintPtr;
+	setThisPackageableElementPtr(thisConstraintPtr);
+}

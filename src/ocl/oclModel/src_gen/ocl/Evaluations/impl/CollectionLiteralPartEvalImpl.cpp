@@ -1,3 +1,4 @@
+
 #include "ocl/Evaluations/impl/CollectionLiteralPartEvalImpl.hpp"
 
 #ifdef NDEBUG
@@ -32,10 +33,9 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "fUML/Semantics/Values/ValuesFactory.hpp"
 #include "uml/umlFactory.hpp"
-
+#include "fUML/Semantics/Loci/LociFactory.hpp"
 
 #include "fUML/Semantics/Values/Evaluation.hpp"
 #include "fUML/Semantics/Loci/Locus.hpp"
@@ -113,25 +113,18 @@ std::shared_ptr<ecore::EObject> CollectionLiteralPartEvalImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> CollectionLiteralPartEvalImpl::eStaticClass() const
-{
-	return ocl::Evaluations::EvaluationsPackage::eInstance()->getCollectionLiteralPartEval_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference element
-*/
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference element */
 std::shared_ptr<fUML::Semantics::Values::Value> CollectionLiteralPartEvalImpl::getElement() const
 {
     return m_element;
@@ -142,89 +135,16 @@ void CollectionLiteralPartEvalImpl::setElement(std::shared_ptr<fUML::Semantics::
 	
 }
 
-
 //*********************************
 // Union Getter
 //*********************************
 
-
-
-std::shared_ptr<CollectionLiteralPartEval> CollectionLiteralPartEvalImpl::getThisCollectionLiteralPartEvalPtr() const
-{
-	return m_thisCollectionLiteralPartEvalPtr.lock();
-}
-void CollectionLiteralPartEvalImpl::setThisCollectionLiteralPartEvalPtr(std::weak_ptr<CollectionLiteralPartEval> thisCollectionLiteralPartEvalPtr)
-{
-	m_thisCollectionLiteralPartEvalPtr = thisCollectionLiteralPartEvalPtr;
-	setThisEvaluationPtr(thisCollectionLiteralPartEvalPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> CollectionLiteralPartEvalImpl::eContainer() const
 {
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any CollectionLiteralPartEvalImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case ocl::Evaluations::EvaluationsPackage::COLLECTIONLITERALPARTEVAL_ATTRIBUTE_ELEMENT:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getElement();
-				return eAny(returnValue); //172
-			}
-	}
-	return fUML::Semantics::Values::EvaluationImpl::eGet(featureID, resolve, coreType);
-}
-bool CollectionLiteralPartEvalImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case ocl::Evaluations::EvaluationsPackage::COLLECTIONLITERALPARTEVAL_ATTRIBUTE_ELEMENT:
-			return getElement() != nullptr; //172
-	}
-	return fUML::Semantics::Values::EvaluationImpl::internalEIsSet(featureID);
-}
-bool CollectionLiteralPartEvalImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case ocl::Evaluations::EvaluationsPackage::COLLECTIONLITERALPARTEVAL_ATTRIBUTE_ELEMENT:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<fUML::Semantics::Values::Value> _element = std::dynamic_pointer_cast<fUML::Semantics::Values::Value>(_temp);
-			setElement(_element); //172
-			return true;
-		}
-	}
-
-	return fUML::Semantics::Values::EvaluationImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any CollectionLiteralPartEvalImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-
-		default:
-		{
-			// call superTypes
-			result = fUML::Semantics::Values::EvaluationImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -306,8 +226,6 @@ void CollectionLiteralPartEvalImpl::save(std::shared_ptr<persistence::interfaces
 	fUML::Semantics::Loci::SemanticVisitorImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
 }
 
 void CollectionLiteralPartEvalImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -324,3 +242,86 @@ void CollectionLiteralPartEvalImpl::saveContent(std::shared_ptr<persistence::int
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> CollectionLiteralPartEvalImpl::eStaticClass() const
+{
+	return ocl::Evaluations::EvaluationsPackage::eInstance()->getCollectionLiteralPartEval_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any CollectionLiteralPartEvalImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case ocl::Evaluations::EvaluationsPackage::COLLECTIONLITERALPARTEVAL_ATTRIBUTE_ELEMENT:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getElement();
+				return eAny(returnValue); //172
+			}
+	}
+	return fUML::Semantics::Values::EvaluationImpl::eGet(featureID, resolve, coreType);
+}
+
+bool CollectionLiteralPartEvalImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case ocl::Evaluations::EvaluationsPackage::COLLECTIONLITERALPARTEVAL_ATTRIBUTE_ELEMENT:
+			return getElement() != nullptr; //172
+	}
+	return fUML::Semantics::Values::EvaluationImpl::internalEIsSet(featureID);
+}
+
+bool CollectionLiteralPartEvalImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case ocl::Evaluations::EvaluationsPackage::COLLECTIONLITERALPARTEVAL_ATTRIBUTE_ELEMENT:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<fUML::Semantics::Values::Value> _element = std::dynamic_pointer_cast<fUML::Semantics::Values::Value>(_temp);
+			setElement(_element); //172
+			return true;
+		}
+	}
+
+	return fUML::Semantics::Values::EvaluationImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any CollectionLiteralPartEvalImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+
+		default:
+		{
+			// call superTypes
+			result = fUML::Semantics::Values::EvaluationImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<CollectionLiteralPartEval> CollectionLiteralPartEvalImpl::getThisCollectionLiteralPartEvalPtr() const
+{
+	return m_thisCollectionLiteralPartEvalPtr.lock();
+}
+void CollectionLiteralPartEvalImpl::setThisCollectionLiteralPartEvalPtr(std::weak_ptr<CollectionLiteralPartEval> thisCollectionLiteralPartEvalPtr)
+{
+	m_thisCollectionLiteralPartEvalPtr = thisCollectionLiteralPartEvalPtr;
+	setThisEvaluationPtr(thisCollectionLiteralPartEvalPtr);
+}

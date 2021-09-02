@@ -1,3 +1,4 @@
+
 #include "uml/impl/ExtensionImpl.hpp"
 
 #ifdef NDEBUG
@@ -26,7 +27,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -34,7 +34,6 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-
 
 #include "uml/Association.hpp"
 #include "uml/Class.hpp"
@@ -175,24 +174,6 @@ std::shared_ptr<ecore::EObject> ExtensionImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> ExtensionImpl::eStaticClass() const
-{
-	return uml::umlPackage::eInstance()->getExtension_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-/*
-Getter & Setter for attribute isRequired
-*/
-bool ExtensionImpl::getIsRequired() const 
-{
-	return m_isRequired;
-}
-
-
-
 //*********************************
 // Operations
 //*********************************
@@ -235,17 +216,22 @@ bool ExtensionImpl::non_owned_end(Any diagnostics,std::shared_ptr<std::map < Any
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference metaclass
-*/
+/* Getter & Setter for attribute isRequired */
+bool ExtensionImpl::getIsRequired() const 
+{
+	return m_isRequired;
+}
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference metaclass */
 std::shared_ptr<uml::Class> ExtensionImpl::getMetaclass() const
 {
     return m_metaclass;
 }
-
-
 
 //*********************************
 // Union Getter
@@ -284,6 +270,8 @@ std::shared_ptr<Union<uml::NamedElement>> ExtensionImpl::getMember() const
 	}
 	return m_member;
 }
+
+
 
 std::weak_ptr<uml::Namespace> ExtensionImpl::getNamespace() const
 {
@@ -362,16 +350,9 @@ std::shared_ptr<Union<uml::Element>> ExtensionImpl::getRelatedElement() const
 
 
 
-
-std::shared_ptr<Extension> ExtensionImpl::getThisExtensionPtr() const
-{
-	return m_thisExtensionPtr.lock();
-}
-void ExtensionImpl::setThisExtensionPtr(std::weak_ptr<Extension> thisExtensionPtr)
-{
-	m_thisExtensionPtr = thisExtensionPtr;
-	setThisAssociationPtr(thisExtensionPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> ExtensionImpl::eContainer() const
 {
 	if(auto wp = m_namespace.lock())
@@ -402,7 +383,89 @@ std::shared_ptr<ecore::EObject> ExtensionImpl::eContainer() const
 }
 
 //*********************************
-// Structural Feature Getter/Setter
+// Persistence Functions
+//*********************************
+void ExtensionImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get umlFactory
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
+	}
+}		
+
+void ExtensionImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+
+	AssociationImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void ExtensionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+
+	//load BasePackage Nodes
+	AssociationImpl::loadNode(nodeName, loadHandler);
+}
+
+void ExtensionImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+{
+	AssociationImpl::resolveReferences(featureID, references);
+}
+
+void ExtensionImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	AssociationImpl::saveContent(saveHandler);
+	
+	ClassifierImpl::saveContent(saveHandler);
+	RelationshipImpl::saveContent(saveHandler);
+	
+	NamespaceImpl::saveContent(saveHandler);
+	RedefinableElementImpl::saveContent(saveHandler);
+	TemplateableElementImpl::saveContent(saveHandler);
+	TypeImpl::saveContent(saveHandler);
+	
+	PackageableElementImpl::saveContent(saveHandler);
+	
+	NamedElementImpl::saveContent(saveHandler);
+	ParameterableElementImpl::saveContent(saveHandler);
+	
+	ElementImpl::saveContent(saveHandler);
+	
+	ObjectImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+}
+
+void ExtensionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+}
+
+
+std::shared_ptr<ecore::EClass> ExtensionImpl::eStaticClass() const
+{
+	return uml::umlPackage::eInstance()->getExtension_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
 //*********************************
 Any ExtensionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
@@ -418,6 +481,7 @@ Any ExtensionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	}
 	return AssociationImpl::eGet(featureID, resolve, coreType);
 }
+
 bool ExtensionImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
@@ -429,6 +493,7 @@ bool ExtensionImpl::internalEIsSet(int featureID) const
 	}
 	return AssociationImpl::internalEIsSet(featureID);
 }
+
 bool ExtensionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
@@ -439,7 +504,7 @@ bool ExtensionImpl::eSet(int featureID, Any newValue)
 }
 
 //*********************************
-// Behavioral Feature
+// EOperation Invoke
 //*********************************
 Any ExtensionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
 {
@@ -530,85 +595,13 @@ Any ExtensionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sha
 	return result;
 }
 
-//*********************************
-// Persistence Functions
-//*********************************
-void ExtensionImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+
+std::shared_ptr<Extension> ExtensionImpl::getThisExtensionPtr() const
 {
-	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
-	loadAttributes(loadHandler, attr_list);
-
-	//
-	// Create new objects (from references (containment == true))
-	//
-	// get umlFactory
-	int numNodes = loadHandler->getNumOfChildNodes();
-	for(int ii = 0; ii < numNodes; ii++)
-	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler);
-	}
-}		
-
-void ExtensionImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
-{
-
-	AssociationImpl::loadAttributes(loadHandler, attr_list);
+	return m_thisExtensionPtr.lock();
 }
-
-void ExtensionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+void ExtensionImpl::setThisExtensionPtr(std::weak_ptr<Extension> thisExtensionPtr)
 {
-
-	//load BasePackage Nodes
-	AssociationImpl::loadNode(nodeName, loadHandler);
+	m_thisExtensionPtr = thisExtensionPtr;
+	setThisAssociationPtr(thisExtensionPtr);
 }
-
-void ExtensionImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
-{
-	AssociationImpl::resolveReferences(featureID, references);
-}
-
-void ExtensionImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
-{
-	saveContent(saveHandler);
-
-	AssociationImpl::saveContent(saveHandler);
-	
-	ClassifierImpl::saveContent(saveHandler);
-	RelationshipImpl::saveContent(saveHandler);
-	
-	NamespaceImpl::saveContent(saveHandler);
-	RedefinableElementImpl::saveContent(saveHandler);
-	TemplateableElementImpl::saveContent(saveHandler);
-	TypeImpl::saveContent(saveHandler);
-	
-	PackageableElementImpl::saveContent(saveHandler);
-	
-	NamedElementImpl::saveContent(saveHandler);
-	ParameterableElementImpl::saveContent(saveHandler);
-	
-	ElementImpl::saveContent(saveHandler);
-	
-	ObjectImpl::saveContent(saveHandler);
-	
-	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
-	
-	
-	
-}
-
-void ExtensionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
-{
-	try
-	{
-		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-	}
-	catch (std::exception& e)
-	{
-		std::cout << "| ERROR    | " << e.what() << std::endl;
-	}
-}
-

@@ -1,3 +1,4 @@
+
 #include "fUML/Semantics/SimpleClassifiers/impl/StringValueImpl.hpp"
 
 #ifdef NDEBUG
@@ -38,7 +39,6 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-
 
 #include "uml/PrimitiveType.hpp"
 #include "fUML/Semantics/SimpleClassifiers/PrimitiveValue.hpp"
@@ -116,28 +116,6 @@ std::shared_ptr<ecore::EObject> StringValueImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> StringValueImpl::eStaticClass() const
-{
-	return fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::eInstance()->getStringValue_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-/*
-Getter & Setter for attribute value
-*/
-std::string StringValueImpl::getValue() const 
-{
-	return m_value;
-}
-void StringValueImpl::setValue(std::string _value)
-{
-	m_value = _value;
-	
-} 
-
-
 //*********************************
 // Operations
 //*********************************
@@ -190,120 +168,33 @@ std::string StringValueImpl::toString()
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
+//*********************************
+/* Getter & Setter for attribute value */
+std::string StringValueImpl::getValue() const 
+{
+	return m_value;
+}
+void StringValueImpl::setValue(std::string _value)
+{
+	m_value = _value;
+	
+}
+
+//*********************************
+// Reference Getters & Setters
 //*********************************
 
 //*********************************
 // Union Getter
 //*********************************
 
-
-
-std::shared_ptr<StringValue> StringValueImpl::getThisStringValuePtr() const
-{
-	return m_thisStringValuePtr.lock();
-}
-void StringValueImpl::setThisStringValuePtr(std::weak_ptr<StringValue> thisStringValuePtr)
-{
-	m_thisStringValuePtr = thisStringValuePtr;
-	setThisPrimitiveValuePtr(thisStringValuePtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> StringValueImpl::eContainer() const
 {
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any StringValueImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::STRINGVALUE_ATTRIBUTE_VALUE:
-			return eAny(getValue()); //1101
-	}
-	return PrimitiveValueImpl::eGet(featureID, resolve, coreType);
-}
-bool StringValueImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::STRINGVALUE_ATTRIBUTE_VALUE:
-			return getValue() != ""; //1101
-	}
-	return PrimitiveValueImpl::internalEIsSet(featureID);
-}
-bool StringValueImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::STRINGVALUE_ATTRIBUTE_VALUE:
-		{
-			// BOOST CAST
-			std::string _value = newValue->get<std::string>();
-			setValue(_value); //1101
-			return true;
-		}
-	}
-
-	return PrimitiveValueImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any StringValueImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-		
-		// 1488860616
-		case SimpleClassifiersPackage::STRINGVALUE_OPERATION__COPY:
-		{
-			result = eAny(this->_copy());
-			break;
-		}
-		
-		// 857975051
-		case SimpleClassifiersPackage::STRINGVALUE_OPERATION_EQUALS_VALUE:
-		{
-			//Retrieve input parameter 'otherValue'
-			//parameter 0
-			std::shared_ptr<fUML::Semantics::Values::Value> incoming_param_otherValue;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_otherValue_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_otherValue = (*incoming_param_otherValue_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::Values::Value> >();
-			result = eAny(this->equals(incoming_param_otherValue));
-			break;
-		}
-		
-		// 936357211
-		case SimpleClassifiersPackage::STRINGVALUE_OPERATION_SPECIFY:
-		{
-			result = eAny(this->specify());
-			break;
-		}
-		
-		// 341046816
-		case SimpleClassifiersPackage::STRINGVALUE_OPERATION_TOSTRING:
-		{
-			result = eAny(this->toString());
-			break;
-		}
-
-		default:
-		{
-			// call superTypes
-			result = PrimitiveValueImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -375,9 +266,6 @@ void StringValueImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler
 	fUML::Semantics::Loci::SemanticVisitorImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
 }
 
 void StringValueImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -397,3 +285,115 @@ void StringValueImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> StringValueImpl::eStaticClass() const
+{
+	return fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::eInstance()->getStringValue_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any StringValueImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::STRINGVALUE_ATTRIBUTE_VALUE:
+			return eAny(getValue()); //1101
+	}
+	return PrimitiveValueImpl::eGet(featureID, resolve, coreType);
+}
+
+bool StringValueImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::STRINGVALUE_ATTRIBUTE_VALUE:
+			return getValue() != ""; //1101
+	}
+	return PrimitiveValueImpl::internalEIsSet(featureID);
+}
+
+bool StringValueImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::STRINGVALUE_ATTRIBUTE_VALUE:
+		{
+			// BOOST CAST
+			std::string _value = newValue->get<std::string>();
+			setValue(_value); //1101
+			return true;
+		}
+	}
+
+	return PrimitiveValueImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any StringValueImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 1488860616
+		case SimpleClassifiersPackage::STRINGVALUE_OPERATION__COPY:
+		{
+			result = eAny(this->_copy());
+			break;
+		}
+		
+		// 857975051
+		case SimpleClassifiersPackage::STRINGVALUE_OPERATION_EQUALS_VALUE:
+		{
+			//Retrieve input parameter 'otherValue'
+			//parameter 0
+			std::shared_ptr<fUML::Semantics::Values::Value> incoming_param_otherValue;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_otherValue_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_otherValue = (*incoming_param_otherValue_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::Values::Value> >();
+			result = eAny(this->equals(incoming_param_otherValue));
+			break;
+		}
+		
+		// 936357211
+		case SimpleClassifiersPackage::STRINGVALUE_OPERATION_SPECIFY:
+		{
+			result = eAny(this->specify());
+			break;
+		}
+		
+		// 341046816
+		case SimpleClassifiersPackage::STRINGVALUE_OPERATION_TOSTRING:
+		{
+			result = eAny(this->toString());
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = PrimitiveValueImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<StringValue> StringValueImpl::getThisStringValuePtr() const
+{
+	return m_thisStringValuePtr.lock();
+}
+void StringValueImpl::setThisStringValuePtr(std::weak_ptr<StringValue> thisStringValuePtr)
+{
+	m_thisStringValuePtr = thisStringValuePtr;
+	setThisPrimitiveValuePtr(thisStringValuePtr);
+}

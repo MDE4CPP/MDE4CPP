@@ -1,3 +1,4 @@
+
 #include "ecore/impl/EParameterImpl.hpp"
 
 #ifdef NDEBUG
@@ -25,7 +26,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -33,7 +33,6 @@
 
 #include <exception> // used in Persistence
 #include "ecore/ecoreFactory.hpp"
-
 
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClassifier.hpp"
@@ -122,31 +121,22 @@ std::shared_ptr<ecore::EObject> EParameterImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<EClass> EParameterImpl::eStaticClass() const
-{
-	return ecore::ecorePackage::eInstance()->getEParameter_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference eOperation
-*/
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference eOperation */
 std::weak_ptr<ecore::EOperation> EParameterImpl::getEOperation() const
 {
     return m_eOperation;
 }
-
-
 
 //*********************************
 // Union Getter
@@ -166,18 +156,9 @@ std::shared_ptr<Union<ecore::EObject>> EParameterImpl::getEContens() const
 	return m_eContens;
 }
 
-
-
-
-std::shared_ptr<EParameter> EParameterImpl::getThisEParameterPtr() const
-{
-	return m_thisEParameterPtr.lock();
-}
-void EParameterImpl::setThisEParameterPtr(std::weak_ptr<EParameter> thisEParameterPtr)
-{
-	m_thisEParameterPtr = thisEParameterPtr;
-	setThisETypedElementPtr(thisEParameterPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> EParameterImpl::eContainer() const
 {
 	if(auto wp = m_eContainer.lock())
@@ -190,62 +171,6 @@ std::shared_ptr<ecore::EObject> EParameterImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any EParameterImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case ecore::ecorePackage::EPARAMETER_ATTRIBUTE_EOPERATION:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getEOperation().lock();
-				return eAny(returnValue); //4213
-			}
-	}
-	return ETypedElementImpl::eGet(featureID, resolve, coreType);
-}
-bool EParameterImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case ecore::ecorePackage::EPARAMETER_ATTRIBUTE_EOPERATION:
-			return getEOperation().lock() != nullptr; //4213
-	}
-	return ETypedElementImpl::internalEIsSet(featureID);
-}
-bool EParameterImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-	}
-
-	return ETypedElementImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any EParameterImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-
-		default:
-		{
-			// call superTypes
-			result = ETypedElementImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -298,10 +223,6 @@ void EParameterImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler>
 	EObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
 }
 
 void EParameterImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -316,3 +237,78 @@ void EParameterImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 	}
 }
 
+
+std::shared_ptr<EClass> EParameterImpl::eStaticClass() const
+{
+	return ecore::ecorePackage::eInstance()->getEParameter_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any EParameterImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case ecore::ecorePackage::EPARAMETER_ATTRIBUTE_EOPERATION:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getEOperation().lock();
+				return eAny(returnValue); //4213
+			}
+	}
+	return ETypedElementImpl::eGet(featureID, resolve, coreType);
+}
+
+bool EParameterImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case ecore::ecorePackage::EPARAMETER_ATTRIBUTE_EOPERATION:
+			return getEOperation().lock() != nullptr; //4213
+	}
+	return ETypedElementImpl::internalEIsSet(featureID);
+}
+
+bool EParameterImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+	}
+
+	return ETypedElementImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any EParameterImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+
+		default:
+		{
+			// call superTypes
+			result = ETypedElementImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<EParameter> EParameterImpl::getThisEParameterPtr() const
+{
+	return m_thisEParameterPtr.lock();
+}
+void EParameterImpl::setThisEParameterPtr(std::weak_ptr<EParameter> thisEParameterPtr)
+{
+	m_thisEParameterPtr = thisEParameterPtr;
+	setThisETypedElementPtr(thisEParameterPtr);
+}

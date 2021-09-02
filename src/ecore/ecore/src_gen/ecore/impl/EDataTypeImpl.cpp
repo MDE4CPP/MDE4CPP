@@ -1,3 +1,4 @@
+
 #include "ecore/impl/EDataTypeImpl.hpp"
 
 #ifdef NDEBUG
@@ -25,7 +26,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -33,7 +33,6 @@
 
 #include <exception> // used in Persistence
 #include "ecore/ecoreFactory.hpp"
-
 
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClassifier.hpp"
@@ -121,17 +120,14 @@ std::shared_ptr<ecore::EObject> EDataTypeImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<EClass> EDataTypeImpl::eStaticClass() const
-{
-	return ecore::ecorePackage::eInstance()->getEDataType_Class();
-}
+//*********************************
+// Operations
+//*********************************
 
 //*********************************
-// Attribute Setter Getter
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for attribute serializable
-*/
+/* Getter & Setter for attribute serializable */
 bool EDataTypeImpl::isSerializable() const 
 {
 	return m_serializable;
@@ -140,15 +136,10 @@ void EDataTypeImpl::setSerializable(bool _serializable)
 {
 	m_serializable = _serializable;
 	
-} 
-
-
-//*********************************
-// Operations
-//*********************************
+}
 
 //*********************************
-// References
+// Reference Getters & Setters
 //*********************************
 
 //*********************************
@@ -169,18 +160,9 @@ std::shared_ptr<Union<ecore::EObject>> EDataTypeImpl::getEContens() const
 	return m_eContens;
 }
 
-
-
-
-std::shared_ptr<EDataType> EDataTypeImpl::getThisEDataTypePtr() const
-{
-	return m_thisEDataTypePtr.lock();
-}
-void EDataTypeImpl::setThisEDataTypePtr(std::weak_ptr<EDataType> thisEDataTypePtr)
-{
-	m_thisEDataTypePtr = thisEDataTypePtr;
-	setThisEClassifierPtr(thisEDataTypePtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> EDataTypeImpl::eContainer() const
 {
 	if(auto wp = m_eContainer.lock())
@@ -193,66 +175,6 @@ std::shared_ptr<ecore::EObject> EDataTypeImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any EDataTypeImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case ecore::ecorePackage::EDATATYPE_ATTRIBUTE_SERIALIZABLE:
-			return eAny(isSerializable()); //1411
-	}
-	return EClassifierImpl::eGet(featureID, resolve, coreType);
-}
-bool EDataTypeImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case ecore::ecorePackage::EDATATYPE_ATTRIBUTE_SERIALIZABLE:
-			return isSerializable() != true; //1411
-	}
-	return EClassifierImpl::internalEIsSet(featureID);
-}
-bool EDataTypeImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case ecore::ecorePackage::EDATATYPE_ATTRIBUTE_SERIALIZABLE:
-		{
-			// BOOST CAST
-			bool _serializable = newValue->get<bool>();
-			setSerializable(_serializable); //1411
-			return true;
-		}
-	}
-
-	return EClassifierImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any EDataTypeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-
-		default:
-		{
-			// call superTypes
-			result = EClassifierImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -326,10 +248,6 @@ void EDataTypeImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> 
 	EObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
 }
 
 void EDataTypeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -349,3 +267,82 @@ void EDataTypeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHa
 	}
 }
 
+
+std::shared_ptr<EClass> EDataTypeImpl::eStaticClass() const
+{
+	return ecore::ecorePackage::eInstance()->getEDataType_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any EDataTypeImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case ecore::ecorePackage::EDATATYPE_ATTRIBUTE_SERIALIZABLE:
+			return eAny(isSerializable()); //1411
+	}
+	return EClassifierImpl::eGet(featureID, resolve, coreType);
+}
+
+bool EDataTypeImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case ecore::ecorePackage::EDATATYPE_ATTRIBUTE_SERIALIZABLE:
+			return isSerializable() != true; //1411
+	}
+	return EClassifierImpl::internalEIsSet(featureID);
+}
+
+bool EDataTypeImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case ecore::ecorePackage::EDATATYPE_ATTRIBUTE_SERIALIZABLE:
+		{
+			// BOOST CAST
+			bool _serializable = newValue->get<bool>();
+			setSerializable(_serializable); //1411
+			return true;
+		}
+	}
+
+	return EClassifierImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any EDataTypeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+
+		default:
+		{
+			// call superTypes
+			result = EClassifierImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<EDataType> EDataTypeImpl::getThisEDataTypePtr() const
+{
+	return m_thisEDataTypePtr.lock();
+}
+void EDataTypeImpl::setThisEDataTypePtr(std::weak_ptr<EDataType> thisEDataTypePtr)
+{
+	m_thisEDataTypePtr = thisEDataTypePtr;
+	setThisEClassifierPtr(thisEDataTypePtr);
+}

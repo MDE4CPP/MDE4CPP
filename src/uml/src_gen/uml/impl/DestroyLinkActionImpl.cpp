@@ -1,3 +1,4 @@
+
 #include "uml/impl/DestroyLinkActionImpl.hpp"
 
 #ifdef NDEBUG
@@ -25,7 +26,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -33,7 +33,6 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-
 
 #include "uml/Activity.hpp"
 #include "uml/ActivityEdge.hpp"
@@ -152,21 +151,16 @@ std::shared_ptr<ecore::EObject> DestroyLinkActionImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> DestroyLinkActionImpl::eStaticClass() const
-{
-	return uml::umlPackage::eInstance()->getDestroyLinkAction_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
 
 //*********************************
-// References
+// Attribute Getters & Setters
+//*********************************
+
+//*********************************
+// Reference Getters & Setters
 //*********************************
 
 //*********************************
@@ -242,18 +236,9 @@ std::shared_ptr<Union<uml::RedefinableElement>> DestroyLinkActionImpl::getRedefi
 	return m_redefinedElement;
 }
 
-
-
-
-std::shared_ptr<DestroyLinkAction> DestroyLinkActionImpl::getThisDestroyLinkActionPtr() const
-{
-	return m_thisDestroyLinkActionPtr.lock();
-}
-void DestroyLinkActionImpl::setThisDestroyLinkActionPtr(std::weak_ptr<DestroyLinkAction> thisDestroyLinkActionPtr)
-{
-	m_thisDestroyLinkActionPtr = thisDestroyLinkActionPtr;
-	setThisWriteLinkActionPtr(thisDestroyLinkActionPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> DestroyLinkActionImpl::eContainer() const
 {
 	if(auto wp = m_activity.lock())
@@ -276,55 +261,6 @@ std::shared_ptr<ecore::EObject> DestroyLinkActionImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any DestroyLinkActionImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-	}
-	return WriteLinkActionImpl::eGet(featureID, resolve, coreType);
-}
-bool DestroyLinkActionImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-	}
-	return WriteLinkActionImpl::internalEIsSet(featureID);
-}
-bool DestroyLinkActionImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-	}
-
-	return WriteLinkActionImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any DestroyLinkActionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-
-		default:
-		{
-			// call superTypes
-			result = WriteLinkActionImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -387,15 +323,6 @@ void DestroyLinkActionImpl::save(std::shared_ptr<persistence::interfaces::XSaveH
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
-	
-	
-	
-	
-	
 }
 
 void DestroyLinkActionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -410,3 +337,71 @@ void DestroyLinkActionImpl::saveContent(std::shared_ptr<persistence::interfaces:
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> DestroyLinkActionImpl::eStaticClass() const
+{
+	return uml::umlPackage::eInstance()->getDestroyLinkAction_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any DestroyLinkActionImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+	}
+	return WriteLinkActionImpl::eGet(featureID, resolve, coreType);
+}
+
+bool DestroyLinkActionImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+	}
+	return WriteLinkActionImpl::internalEIsSet(featureID);
+}
+
+bool DestroyLinkActionImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+	}
+
+	return WriteLinkActionImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any DestroyLinkActionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+
+		default:
+		{
+			// call superTypes
+			result = WriteLinkActionImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<DestroyLinkAction> DestroyLinkActionImpl::getThisDestroyLinkActionPtr() const
+{
+	return m_thisDestroyLinkActionPtr.lock();
+}
+void DestroyLinkActionImpl::setThisDestroyLinkActionPtr(std::weak_ptr<DestroyLinkAction> thisDestroyLinkActionPtr)
+{
+	m_thisDestroyLinkActionPtr = thisDestroyLinkActionPtr;
+	setThisWriteLinkActionPtr(thisDestroyLinkActionPtr);
+}

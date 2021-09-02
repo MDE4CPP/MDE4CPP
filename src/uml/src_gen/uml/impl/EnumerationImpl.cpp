@@ -1,3 +1,4 @@
+
 #include "uml/impl/EnumerationImpl.hpp"
 
 #ifdef NDEBUG
@@ -26,7 +27,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -34,7 +34,6 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-
 
 #include "uml/Classifier.hpp"
 #include "uml/CollaborationUse.hpp"
@@ -208,15 +207,6 @@ std::shared_ptr<ecore::EObject> EnumerationImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> EnumerationImpl::eStaticClass() const
-{
-	return uml::umlPackage::eInstance()->getEnumeration_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
@@ -227,11 +217,13 @@ bool EnumerationImpl::immutable(Any diagnostics,std::shared_ptr<std::map < Any, 
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference ownedLiteral
-*/
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference ownedLiteral */
 std::shared_ptr<Subset<uml::EnumerationLiteral, uml::NamedElement>> EnumerationImpl::getOwnedLiteral() const
 {
 	if(m_ownedLiteral == nullptr)
@@ -251,8 +243,6 @@ std::shared_ptr<Subset<uml::EnumerationLiteral, uml::NamedElement>> EnumerationI
 	}
     return m_ownedLiteral;
 }
-
-
 
 //*********************************
 // Union Getter
@@ -374,16 +364,9 @@ std::shared_ptr<Union<uml::RedefinableElement>> EnumerationImpl::getRedefinedEle
 
 
 
-
-std::shared_ptr<Enumeration> EnumerationImpl::getThisEnumerationPtr() const
-{
-	return m_thisEnumerationPtr.lock();
-}
-void EnumerationImpl::setThisEnumerationPtr(std::weak_ptr<Enumeration> thisEnumerationPtr)
-{
-	m_thisEnumerationPtr = thisEnumerationPtr;
-	setThisDataTypePtr(thisEnumerationPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> EnumerationImpl::eContainer() const
 {
 	if(auto wp = m_namespace.lock())
@@ -411,122 +394,6 @@ std::shared_ptr<ecore::EObject> EnumerationImpl::eContainer() const
 	}
 
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any EnumerationImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::ENUMERATION_ATTRIBUTE_OWNEDLITERAL:
-		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::EnumerationLiteral>::iterator iter = getOwnedLiteral()->begin();
-			Bag<uml::EnumerationLiteral>::iterator end = getOwnedLiteral()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //8440			
-		}
-	}
-	return DataTypeImpl::eGet(featureID, resolve, coreType);
-}
-bool EnumerationImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::ENUMERATION_ATTRIBUTE_OWNEDLITERAL:
-			return getOwnedLiteral() != nullptr; //8440
-	}
-	return DataTypeImpl::internalEIsSet(featureID);
-}
-bool EnumerationImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::ENUMERATION_ATTRIBUTE_OWNEDLITERAL:
-		{
-			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::EnumerationLiteral>> ownedLiteralList(new Bag<uml::EnumerationLiteral>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
-			{
-				ownedLiteralList->add(std::dynamic_pointer_cast<uml::EnumerationLiteral>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::EnumerationLiteral>::iterator iterOwnedLiteral = getOwnedLiteral()->begin();
-			Bag<uml::EnumerationLiteral>::iterator endOwnedLiteral = getOwnedLiteral()->end();
-			while (iterOwnedLiteral != endOwnedLiteral)
-			{
-				if (ownedLiteralList->find(*iterOwnedLiteral) == -1)
-				{
-					getOwnedLiteral()->erase(*iterOwnedLiteral);
-				}
-				iterOwnedLiteral++;
-			}
- 
-			iterOwnedLiteral = ownedLiteralList->begin();
-			endOwnedLiteral = ownedLiteralList->end();
-			while (iterOwnedLiteral != endOwnedLiteral)
-			{
-				if (getOwnedLiteral()->find(*iterOwnedLiteral) == -1)
-				{
-					getOwnedLiteral()->add(*iterOwnedLiteral);
-				}
-				iterOwnedLiteral++;			
-			}
-			return true;
-		}
-	}
-
-	return DataTypeImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any EnumerationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-		
-		// 36465829
-		case umlPackage::ENUMERATION_OPERATION_IMMUTABLE_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->immutable(incoming_param_diagnostics,incoming_param_context));
-			break;
-		}
-
-		default:
-		{
-			// call superTypes
-			result = DataTypeImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -611,13 +478,6 @@ void EnumerationImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
-	
-	
-	
 }
 
 void EnumerationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -637,3 +497,138 @@ void EnumerationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> EnumerationImpl::eStaticClass() const
+{
+	return uml::umlPackage::eInstance()->getEnumeration_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any EnumerationImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::ENUMERATION_ATTRIBUTE_OWNEDLITERAL:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::EnumerationLiteral>::iterator iter = getOwnedLiteral()->begin();
+			Bag<uml::EnumerationLiteral>::iterator end = getOwnedLiteral()->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //8440			
+		}
+	}
+	return DataTypeImpl::eGet(featureID, resolve, coreType);
+}
+
+bool EnumerationImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::ENUMERATION_ATTRIBUTE_OWNEDLITERAL:
+			return getOwnedLiteral() != nullptr; //8440
+	}
+	return DataTypeImpl::internalEIsSet(featureID);
+}
+
+bool EnumerationImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::ENUMERATION_ATTRIBUTE_OWNEDLITERAL:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::EnumerationLiteral>> ownedLiteralList(new Bag<uml::EnumerationLiteral>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				ownedLiteralList->add(std::dynamic_pointer_cast<uml::EnumerationLiteral>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::EnumerationLiteral>::iterator iterOwnedLiteral = getOwnedLiteral()->begin();
+			Bag<uml::EnumerationLiteral>::iterator endOwnedLiteral = getOwnedLiteral()->end();
+			while (iterOwnedLiteral != endOwnedLiteral)
+			{
+				if (ownedLiteralList->find(*iterOwnedLiteral) == -1)
+				{
+					getOwnedLiteral()->erase(*iterOwnedLiteral);
+				}
+				iterOwnedLiteral++;
+			}
+ 
+			iterOwnedLiteral = ownedLiteralList->begin();
+			endOwnedLiteral = ownedLiteralList->end();
+			while (iterOwnedLiteral != endOwnedLiteral)
+			{
+				if (getOwnedLiteral()->find(*iterOwnedLiteral) == -1)
+				{
+					getOwnedLiteral()->add(*iterOwnedLiteral);
+				}
+				iterOwnedLiteral++;			
+			}
+			return true;
+		}
+	}
+
+	return DataTypeImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any EnumerationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 36465829
+		case umlPackage::ENUMERATION_OPERATION_IMMUTABLE_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->immutable(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = DataTypeImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<Enumeration> EnumerationImpl::getThisEnumerationPtr() const
+{
+	return m_thisEnumerationPtr.lock();
+}
+void EnumerationImpl::setThisEnumerationPtr(std::weak_ptr<Enumeration> thisEnumerationPtr)
+{
+	m_thisEnumerationPtr = thisEnumerationPtr;
+	setThisDataTypePtr(thisEnumerationPtr);
+}

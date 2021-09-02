@@ -1,3 +1,4 @@
+
 #include "fUML/Semantics/Actions/impl/ReadExtentActionActivationImpl.hpp"
 
 #ifdef NDEBUG
@@ -25,7 +26,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -35,7 +35,6 @@
 #include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "uml/umlFactory.hpp"
-
 
 #include "uml/Action.hpp"
 #include "fUML/Semantics/Actions/ActionActivation.hpp"
@@ -123,21 +122,16 @@ std::shared_ptr<ecore::EObject> ReadExtentActionActivationImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> ReadExtentActionActivationImpl::eStaticClass() const
-{
-	return fUML::Semantics::Actions::ActionsPackage::eInstance()->getReadExtentActionActivation_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
 
 //*********************************
-// References
+// Attribute Getters & Setters
+//*********************************
+
+//*********************************
+// Reference Getters & Setters
 //*********************************
 
 //*********************************
@@ -158,18 +152,9 @@ std::shared_ptr<Union<fUML::Semantics::Actions::PinActivation>> ReadExtentAction
 	return m_pinActivation;
 }
 
-
-
-
-std::shared_ptr<ReadExtentActionActivation> ReadExtentActionActivationImpl::getThisReadExtentActionActivationPtr() const
-{
-	return m_thisReadExtentActionActivationPtr.lock();
-}
-void ReadExtentActionActivationImpl::setThisReadExtentActionActivationPtr(std::weak_ptr<ReadExtentActionActivation> thisReadExtentActionActivationPtr)
-{
-	m_thisReadExtentActionActivationPtr = thisReadExtentActionActivationPtr;
-	setThisActionActivationPtr(thisReadExtentActionActivationPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> ReadExtentActionActivationImpl::eContainer() const
 {
 	if(auto wp = m_group.lock())
@@ -177,55 +162,6 @@ std::shared_ptr<ecore::EObject> ReadExtentActionActivationImpl::eContainer() con
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any ReadExtentActionActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-	}
-	return ActionActivationImpl::eGet(featureID, resolve, coreType);
-}
-bool ReadExtentActionActivationImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-	}
-	return ActionActivationImpl::internalEIsSet(featureID);
-}
-bool ReadExtentActionActivationImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-	}
-
-	return ActionActivationImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any ReadExtentActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-
-		default:
-		{
-			// call superTypes
-			result = ActionActivationImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -276,9 +212,6 @@ void ReadExtentActionActivationImpl::save(std::shared_ptr<persistence::interface
 	fUML::Semantics::Loci::SemanticVisitorImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
 }
 
 void ReadExtentActionActivationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -293,3 +226,71 @@ void ReadExtentActionActivationImpl::saveContent(std::shared_ptr<persistence::in
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> ReadExtentActionActivationImpl::eStaticClass() const
+{
+	return fUML::Semantics::Actions::ActionsPackage::eInstance()->getReadExtentActionActivation_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any ReadExtentActionActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+	}
+	return ActionActivationImpl::eGet(featureID, resolve, coreType);
+}
+
+bool ReadExtentActionActivationImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+	}
+	return ActionActivationImpl::internalEIsSet(featureID);
+}
+
+bool ReadExtentActionActivationImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+	}
+
+	return ActionActivationImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any ReadExtentActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+
+		default:
+		{
+			// call superTypes
+			result = ActionActivationImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<ReadExtentActionActivation> ReadExtentActionActivationImpl::getThisReadExtentActionActivationPtr() const
+{
+	return m_thisReadExtentActionActivationPtr.lock();
+}
+void ReadExtentActionActivationImpl::setThisReadExtentActionActivationPtr(std::weak_ptr<ReadExtentActionActivation> thisReadExtentActionActivationPtr)
+{
+	m_thisReadExtentActionActivationPtr = thisReadExtentActionActivationPtr;
+	setThisActionActivationPtr(thisReadExtentActionActivationPtr);
+}

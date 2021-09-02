@@ -1,3 +1,4 @@
+
 #include "fUML/Semantics/Values/impl/EvaluationImpl.hpp"
 
 #ifdef NDEBUG
@@ -24,7 +25,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -33,7 +33,6 @@
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
-
 
 #include "fUML/Semantics/Loci/Locus.hpp"
 #include "fUML/Semantics/Loci/SemanticVisitor.hpp"
@@ -112,15 +111,6 @@ std::shared_ptr<ecore::EObject> EvaluationImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> EvaluationImpl::eStaticClass() const
-{
-	return fUML::Semantics::Values::ValuesPackage::eInstance()->getEvaluation_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
@@ -131,11 +121,13 @@ std::shared_ptr<fUML::Semantics::Values::Value> EvaluationImpl::evaluate()
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference locus
-*/
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference locus */
 std::shared_ptr<fUML::Semantics::Loci::Locus> EvaluationImpl::getLocus() const
 {
     return m_locus;
@@ -146,10 +138,7 @@ void EvaluationImpl::setLocus(std::shared_ptr<fUML::Semantics::Loci::Locus> _loc
 	
 }
 
-
-/*
-Getter & Setter for reference specification
-*/
+/* Getter & Setter for reference specification */
 std::shared_ptr<uml::ValueSpecification> EvaluationImpl::getSpecification() const
 {
     return m_specification;
@@ -160,111 +149,16 @@ void EvaluationImpl::setSpecification(std::shared_ptr<uml::ValueSpecification> _
 	
 }
 
-
 //*********************************
 // Union Getter
 //*********************************
 
-
-
-std::shared_ptr<Evaluation> EvaluationImpl::getThisEvaluationPtr() const
-{
-	return m_thisEvaluationPtr.lock();
-}
-void EvaluationImpl::setThisEvaluationPtr(std::weak_ptr<Evaluation> thisEvaluationPtr)
-{
-	m_thisEvaluationPtr = thisEvaluationPtr;
-	setThisSemanticVisitorPtr(thisEvaluationPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> EvaluationImpl::eContainer() const
 {
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any EvaluationImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case fUML::Semantics::Values::ValuesPackage::EVALUATION_ATTRIBUTE_LOCUS:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getLocus();
-				return eAny(returnValue); //421
-			}
-		case fUML::Semantics::Values::ValuesPackage::EVALUATION_ATTRIBUTE_SPECIFICATION:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getSpecification();
-				return eAny(returnValue); //420
-			}
-	}
-	return fUML::Semantics::Loci::SemanticVisitorImpl::eGet(featureID, resolve, coreType);
-}
-bool EvaluationImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case fUML::Semantics::Values::ValuesPackage::EVALUATION_ATTRIBUTE_LOCUS:
-			return getLocus() != nullptr; //421
-		case fUML::Semantics::Values::ValuesPackage::EVALUATION_ATTRIBUTE_SPECIFICATION:
-			return getSpecification() != nullptr; //420
-	}
-	return fUML::Semantics::Loci::SemanticVisitorImpl::internalEIsSet(featureID);
-}
-bool EvaluationImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case fUML::Semantics::Values::ValuesPackage::EVALUATION_ATTRIBUTE_LOCUS:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<fUML::Semantics::Loci::Locus> _locus = std::dynamic_pointer_cast<fUML::Semantics::Loci::Locus>(_temp);
-			setLocus(_locus); //421
-			return true;
-		}
-		case fUML::Semantics::Values::ValuesPackage::EVALUATION_ATTRIBUTE_SPECIFICATION:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::ValueSpecification> _specification = std::dynamic_pointer_cast<uml::ValueSpecification>(_temp);
-			setSpecification(_specification); //420
-			return true;
-		}
-	}
-
-	return fUML::Semantics::Loci::SemanticVisitorImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any EvaluationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-		
-		// 1899572768
-		case ValuesPackage::EVALUATION_OPERATION_EVALUATE:
-		{
-			result = eAny(this->evaluate());
-			break;
-		}
-
-		default:
-		{
-			// call superTypes
-			result = fUML::Semantics::Loci::SemanticVisitorImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -363,7 +257,6 @@ void EvaluationImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler>
 	fUML::Semantics::Loci::SemanticVisitorImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
 }
 
 void EvaluationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -381,3 +274,108 @@ void EvaluationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> EvaluationImpl::eStaticClass() const
+{
+	return fUML::Semantics::Values::ValuesPackage::eInstance()->getEvaluation_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any EvaluationImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case fUML::Semantics::Values::ValuesPackage::EVALUATION_ATTRIBUTE_LOCUS:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getLocus();
+				return eAny(returnValue); //421
+			}
+		case fUML::Semantics::Values::ValuesPackage::EVALUATION_ATTRIBUTE_SPECIFICATION:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getSpecification();
+				return eAny(returnValue); //420
+			}
+	}
+	return fUML::Semantics::Loci::SemanticVisitorImpl::eGet(featureID, resolve, coreType);
+}
+
+bool EvaluationImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case fUML::Semantics::Values::ValuesPackage::EVALUATION_ATTRIBUTE_LOCUS:
+			return getLocus() != nullptr; //421
+		case fUML::Semantics::Values::ValuesPackage::EVALUATION_ATTRIBUTE_SPECIFICATION:
+			return getSpecification() != nullptr; //420
+	}
+	return fUML::Semantics::Loci::SemanticVisitorImpl::internalEIsSet(featureID);
+}
+
+bool EvaluationImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case fUML::Semantics::Values::ValuesPackage::EVALUATION_ATTRIBUTE_LOCUS:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<fUML::Semantics::Loci::Locus> _locus = std::dynamic_pointer_cast<fUML::Semantics::Loci::Locus>(_temp);
+			setLocus(_locus); //421
+			return true;
+		}
+		case fUML::Semantics::Values::ValuesPackage::EVALUATION_ATTRIBUTE_SPECIFICATION:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::ValueSpecification> _specification = std::dynamic_pointer_cast<uml::ValueSpecification>(_temp);
+			setSpecification(_specification); //420
+			return true;
+		}
+	}
+
+	return fUML::Semantics::Loci::SemanticVisitorImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any EvaluationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 1899572768
+		case ValuesPackage::EVALUATION_OPERATION_EVALUATE:
+		{
+			result = eAny(this->evaluate());
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = fUML::Semantics::Loci::SemanticVisitorImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<Evaluation> EvaluationImpl::getThisEvaluationPtr() const
+{
+	return m_thisEvaluationPtr.lock();
+}
+void EvaluationImpl::setThisEvaluationPtr(std::weak_ptr<Evaluation> thisEvaluationPtr)
+{
+	m_thisEvaluationPtr = thisEvaluationPtr;
+	setThisSemanticVisitorPtr(thisEvaluationPtr);
+}

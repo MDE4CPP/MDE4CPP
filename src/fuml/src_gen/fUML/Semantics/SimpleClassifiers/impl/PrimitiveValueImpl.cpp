@@ -1,3 +1,4 @@
+
 #include "fUML/Semantics/SimpleClassifiers/impl/PrimitiveValueImpl.hpp"
 
 #ifdef NDEBUG
@@ -36,7 +37,6 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-
 
 #include "uml/Classifier.hpp"
 #include "uml/PrimitiveType.hpp"
@@ -113,15 +113,6 @@ std::shared_ptr<ecore::EObject> PrimitiveValueImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> PrimitiveValueImpl::eStaticClass() const
-{
-	return fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::eInstance()->getPrimitiveValue_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
@@ -152,11 +143,13 @@ std::shared_ptr<Bag<uml::Classifier> > PrimitiveValueImpl::getTypes()
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference type
-*/
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference type */
 std::shared_ptr<uml::PrimitiveType> PrimitiveValueImpl::getType() const
 {
     return m_type;
@@ -167,103 +160,16 @@ void PrimitiveValueImpl::setType(std::shared_ptr<uml::PrimitiveType> _type)
 	
 }
 
-
 //*********************************
 // Union Getter
 //*********************************
 
-
-
-std::shared_ptr<PrimitiveValue> PrimitiveValueImpl::getThisPrimitiveValuePtr() const
-{
-	return m_thisPrimitiveValuePtr.lock();
-}
-void PrimitiveValueImpl::setThisPrimitiveValuePtr(std::weak_ptr<PrimitiveValue> thisPrimitiveValuePtr)
-{
-	m_thisPrimitiveValuePtr = thisPrimitiveValuePtr;
-	setThisValuePtr(thisPrimitiveValuePtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> PrimitiveValueImpl::eContainer() const
 {
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any PrimitiveValueImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::PRIMITIVEVALUE_ATTRIBUTE_TYPE:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getType();
-				return eAny(returnValue); //890
-			}
-	}
-	return fUML::Semantics::Values::ValueImpl::eGet(featureID, resolve, coreType);
-}
-bool PrimitiveValueImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::PRIMITIVEVALUE_ATTRIBUTE_TYPE:
-			return getType() != nullptr; //890
-	}
-	return fUML::Semantics::Values::ValueImpl::internalEIsSet(featureID);
-}
-bool PrimitiveValueImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::PRIMITIVEVALUE_ATTRIBUTE_TYPE:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::PrimitiveType> _type = std::dynamic_pointer_cast<uml::PrimitiveType>(_temp);
-			setType(_type); //890
-			return true;
-		}
-	}
-
-	return fUML::Semantics::Values::ValueImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any PrimitiveValueImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-		
-		// 1483946573
-		case SimpleClassifiersPackage::PRIMITIVEVALUE_OPERATION__COPY:
-		{
-			result = eAny(this->_copy());
-			break;
-		}
-		
-		// 1603549944
-		case SimpleClassifiersPackage::PRIMITIVEVALUE_OPERATION_GETTYPES:
-		{
-			result = eAny(this->getTypes());
-			break;
-		}
-
-		default:
-		{
-			// call superTypes
-			result = fUML::Semantics::Values::ValueImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -345,8 +251,6 @@ void PrimitiveValueImpl::save(std::shared_ptr<persistence::interfaces::XSaveHand
 	fUML::Semantics::Loci::SemanticVisitorImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
 }
 
 void PrimitiveValueImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -363,3 +267,100 @@ void PrimitiveValueImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> PrimitiveValueImpl::eStaticClass() const
+{
+	return fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::eInstance()->getPrimitiveValue_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any PrimitiveValueImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::PRIMITIVEVALUE_ATTRIBUTE_TYPE:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getType();
+				return eAny(returnValue); //890
+			}
+	}
+	return fUML::Semantics::Values::ValueImpl::eGet(featureID, resolve, coreType);
+}
+
+bool PrimitiveValueImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::PRIMITIVEVALUE_ATTRIBUTE_TYPE:
+			return getType() != nullptr; //890
+	}
+	return fUML::Semantics::Values::ValueImpl::internalEIsSet(featureID);
+}
+
+bool PrimitiveValueImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::PRIMITIVEVALUE_ATTRIBUTE_TYPE:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::PrimitiveType> _type = std::dynamic_pointer_cast<uml::PrimitiveType>(_temp);
+			setType(_type); //890
+			return true;
+		}
+	}
+
+	return fUML::Semantics::Values::ValueImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any PrimitiveValueImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 1483946573
+		case SimpleClassifiersPackage::PRIMITIVEVALUE_OPERATION__COPY:
+		{
+			result = eAny(this->_copy());
+			break;
+		}
+		
+		// 1603549944
+		case SimpleClassifiersPackage::PRIMITIVEVALUE_OPERATION_GETTYPES:
+		{
+			result = eAny(this->getTypes());
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = fUML::Semantics::Values::ValueImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<PrimitiveValue> PrimitiveValueImpl::getThisPrimitiveValuePtr() const
+{
+	return m_thisPrimitiveValuePtr.lock();
+}
+void PrimitiveValueImpl::setThisPrimitiveValuePtr(std::weak_ptr<PrimitiveValue> thisPrimitiveValuePtr)
+{
+	m_thisPrimitiveValuePtr = thisPrimitiveValuePtr;
+	setThisValuePtr(thisPrimitiveValuePtr);
+}

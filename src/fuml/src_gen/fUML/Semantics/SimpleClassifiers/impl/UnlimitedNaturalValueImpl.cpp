@@ -1,3 +1,4 @@
+
 #include "fUML/Semantics/SimpleClassifiers/impl/UnlimitedNaturalValueImpl.hpp"
 
 #ifdef NDEBUG
@@ -40,7 +41,6 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-
 
 #include "uml/PrimitiveType.hpp"
 #include "fUML/Semantics/SimpleClassifiers/PrimitiveValue.hpp"
@@ -118,28 +118,6 @@ std::shared_ptr<ecore::EObject> UnlimitedNaturalValueImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> UnlimitedNaturalValueImpl::eStaticClass() const
-{
-	return fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::eInstance()->getUnlimitedNaturalValue_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-/*
-Getter & Setter for attribute value
-*/
-int UnlimitedNaturalValueImpl::getValue() const 
-{
-	return m_value;
-}
-void UnlimitedNaturalValueImpl::setValue(int _value)
-{
-	m_value = _value;
-	
-} 
-
-
 //*********************************
 // Operations
 //*********************************
@@ -202,120 +180,33 @@ std::string UnlimitedNaturalValueImpl::toString()
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
+//*********************************
+/* Getter & Setter for attribute value */
+int UnlimitedNaturalValueImpl::getValue() const 
+{
+	return m_value;
+}
+void UnlimitedNaturalValueImpl::setValue(int _value)
+{
+	m_value = _value;
+	
+}
+
+//*********************************
+// Reference Getters & Setters
 //*********************************
 
 //*********************************
 // Union Getter
 //*********************************
 
-
-
-std::shared_ptr<UnlimitedNaturalValue> UnlimitedNaturalValueImpl::getThisUnlimitedNaturalValuePtr() const
-{
-	return m_thisUnlimitedNaturalValuePtr.lock();
-}
-void UnlimitedNaturalValueImpl::setThisUnlimitedNaturalValuePtr(std::weak_ptr<UnlimitedNaturalValue> thisUnlimitedNaturalValuePtr)
-{
-	m_thisUnlimitedNaturalValuePtr = thisUnlimitedNaturalValuePtr;
-	setThisPrimitiveValuePtr(thisUnlimitedNaturalValuePtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> UnlimitedNaturalValueImpl::eContainer() const
 {
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any UnlimitedNaturalValueImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::UNLIMITEDNATURALVALUE_ATTRIBUTE_VALUE:
-			return eAny(getValue()); //1171
-	}
-	return PrimitiveValueImpl::eGet(featureID, resolve, coreType);
-}
-bool UnlimitedNaturalValueImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::UNLIMITEDNATURALVALUE_ATTRIBUTE_VALUE:
-			return getValue() != 0; //1171
-	}
-	return PrimitiveValueImpl::internalEIsSet(featureID);
-}
-bool UnlimitedNaturalValueImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::UNLIMITEDNATURALVALUE_ATTRIBUTE_VALUE:
-		{
-			// BOOST CAST
-			int _value = newValue->get<int>();
-			setValue(_value); //1171
-			return true;
-		}
-	}
-
-	return PrimitiveValueImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any UnlimitedNaturalValueImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-		
-		// 913377262
-		case SimpleClassifiersPackage::UNLIMITEDNATURALVALUE_OPERATION__COPY:
-		{
-			result = eAny(this->_copy());
-			break;
-		}
-		
-		// 886044238
-		case SimpleClassifiersPackage::UNLIMITEDNATURALVALUE_OPERATION_EQUALS_VALUE:
-		{
-			//Retrieve input parameter 'otherValue'
-			//parameter 0
-			std::shared_ptr<fUML::Semantics::Values::Value> incoming_param_otherValue;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_otherValue_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_otherValue = (*incoming_param_otherValue_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::Values::Value> >();
-			result = eAny(this->equals(incoming_param_otherValue));
-			break;
-		}
-		
-		// 519448828
-		case SimpleClassifiersPackage::UNLIMITEDNATURALVALUE_OPERATION_SPECIFY:
-		{
-			result = eAny(this->specify());
-			break;
-		}
-		
-		// 668784562
-		case SimpleClassifiersPackage::UNLIMITEDNATURALVALUE_OPERATION_TOSTRING:
-		{
-			result = eAny(this->toString());
-			break;
-		}
-
-		default:
-		{
-			// call superTypes
-			result = PrimitiveValueImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -387,9 +278,6 @@ void UnlimitedNaturalValueImpl::save(std::shared_ptr<persistence::interfaces::XS
 	fUML::Semantics::Loci::SemanticVisitorImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
 }
 
 void UnlimitedNaturalValueImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -409,3 +297,115 @@ void UnlimitedNaturalValueImpl::saveContent(std::shared_ptr<persistence::interfa
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> UnlimitedNaturalValueImpl::eStaticClass() const
+{
+	return fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::eInstance()->getUnlimitedNaturalValue_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any UnlimitedNaturalValueImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::UNLIMITEDNATURALVALUE_ATTRIBUTE_VALUE:
+			return eAny(getValue()); //1171
+	}
+	return PrimitiveValueImpl::eGet(featureID, resolve, coreType);
+}
+
+bool UnlimitedNaturalValueImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::UNLIMITEDNATURALVALUE_ATTRIBUTE_VALUE:
+			return getValue() != 0; //1171
+	}
+	return PrimitiveValueImpl::internalEIsSet(featureID);
+}
+
+bool UnlimitedNaturalValueImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::UNLIMITEDNATURALVALUE_ATTRIBUTE_VALUE:
+		{
+			// BOOST CAST
+			int _value = newValue->get<int>();
+			setValue(_value); //1171
+			return true;
+		}
+	}
+
+	return PrimitiveValueImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any UnlimitedNaturalValueImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 913377262
+		case SimpleClassifiersPackage::UNLIMITEDNATURALVALUE_OPERATION__COPY:
+		{
+			result = eAny(this->_copy());
+			break;
+		}
+		
+		// 886044238
+		case SimpleClassifiersPackage::UNLIMITEDNATURALVALUE_OPERATION_EQUALS_VALUE:
+		{
+			//Retrieve input parameter 'otherValue'
+			//parameter 0
+			std::shared_ptr<fUML::Semantics::Values::Value> incoming_param_otherValue;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_otherValue_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_otherValue = (*incoming_param_otherValue_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::Values::Value> >();
+			result = eAny(this->equals(incoming_param_otherValue));
+			break;
+		}
+		
+		// 519448828
+		case SimpleClassifiersPackage::UNLIMITEDNATURALVALUE_OPERATION_SPECIFY:
+		{
+			result = eAny(this->specify());
+			break;
+		}
+		
+		// 668784562
+		case SimpleClassifiersPackage::UNLIMITEDNATURALVALUE_OPERATION_TOSTRING:
+		{
+			result = eAny(this->toString());
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = PrimitiveValueImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<UnlimitedNaturalValue> UnlimitedNaturalValueImpl::getThisUnlimitedNaturalValuePtr() const
+{
+	return m_thisUnlimitedNaturalValuePtr.lock();
+}
+void UnlimitedNaturalValueImpl::setThisUnlimitedNaturalValuePtr(std::weak_ptr<UnlimitedNaturalValue> thisUnlimitedNaturalValuePtr)
+{
+	m_thisUnlimitedNaturalValuePtr = thisUnlimitedNaturalValuePtr;
+	setThisPrimitiveValuePtr(thisUnlimitedNaturalValuePtr);
+}

@@ -1,3 +1,4 @@
+
 #include "fUML/Semantics/StructuredClassifiers/impl/ExtensionalValueListImpl.hpp"
 
 #ifdef NDEBUG
@@ -25,7 +26,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -34,7 +34,6 @@
 #include <exception> // used in Persistence
 #include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
-
 
 #include "fUML/Semantics/StructuredClassifiers/ExtensionalValue.hpp"
 #include "fUML/Semantics/SimpleClassifiers/FeatureValue.hpp"
@@ -112,15 +111,6 @@ std::shared_ptr<ecore::EObject> ExtensionalValueListImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> ExtensionalValueListImpl::eStaticClass() const
-{
-	return fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::eInstance()->getExtensionalValueList_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
@@ -155,31 +145,100 @@ std::shared_ptr<fUML::Semantics::Values::Value> ExtensionalValueListImpl::setVal
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
+//*********************************
+
+//*********************************
+// Reference Getters & Setters
 //*********************************
 
 //*********************************
 // Union Getter
 //*********************************
 
-
-
-std::shared_ptr<ExtensionalValueList> ExtensionalValueListImpl::getThisExtensionalValueListPtr() const
-{
-	return m_thisExtensionalValueListPtr.lock();
-}
-void ExtensionalValueListImpl::setThisExtensionalValueListPtr(std::weak_ptr<ExtensionalValueList> thisExtensionalValueListPtr)
-{
-	m_thisExtensionalValueListPtr = thisExtensionalValueListPtr;
-	setThisExtensionalValuePtr(thisExtensionalValueListPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> ExtensionalValueListImpl::eContainer() const
 {
 	return nullptr;
 }
 
 //*********************************
-// Structural Feature Getter/Setter
+// Persistence Functions
+//*********************************
+void ExtensionalValueListImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get fUMLFactory
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
+	}
+}		
+
+void ExtensionalValueListImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+
+	ExtensionalValueImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void ExtensionalValueListImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+
+	//load BasePackage Nodes
+	ExtensionalValueImpl::loadNode(nodeName, loadHandler);
+}
+
+void ExtensionalValueListImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+{
+	ExtensionalValueImpl::resolveReferences(featureID, references);
+}
+
+void ExtensionalValueListImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	ExtensionalValueImpl::saveContent(saveHandler);
+	
+	fUML::Semantics::SimpleClassifiers::CompoundValueImpl::saveContent(saveHandler);
+	
+	fUML::Semantics::SimpleClassifiers::StructuredValueImpl::saveContent(saveHandler);
+	
+	fUML::Semantics::Values::ValueImpl::saveContent(saveHandler);
+	
+	fUML::Semantics::Loci::SemanticVisitorImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+}
+
+void ExtensionalValueListImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage> package = fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::eInstance();
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+}
+
+
+std::shared_ptr<ecore::EClass> ExtensionalValueListImpl::eStaticClass() const
+{
+	return fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::eInstance()->getExtensionalValueList_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
 //*********************************
 Any ExtensionalValueListImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
@@ -188,6 +247,7 @@ Any ExtensionalValueListImpl::eGet(int featureID, bool resolve, bool coreType) c
 	}
 	return ExtensionalValueImpl::eGet(featureID, resolve, coreType);
 }
+
 bool ExtensionalValueListImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
@@ -195,6 +255,7 @@ bool ExtensionalValueListImpl::internalEIsSet(int featureID) const
 	}
 	return ExtensionalValueImpl::internalEIsSet(featureID);
 }
+
 bool ExtensionalValueListImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
@@ -205,7 +266,7 @@ bool ExtensionalValueListImpl::eSet(int featureID, Any newValue)
 }
 
 //*********************************
-// Behavioral Feature
+// EOperation Invoke
 //*********************************
 Any ExtensionalValueListImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
 {
@@ -292,74 +353,13 @@ Any ExtensionalValueListImpl::eInvoke(int operationID, std::shared_ptr<std::list
 	return result;
 }
 
-//*********************************
-// Persistence Functions
-//*********************************
-void ExtensionalValueListImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+
+std::shared_ptr<ExtensionalValueList> ExtensionalValueListImpl::getThisExtensionalValueListPtr() const
 {
-	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
-	loadAttributes(loadHandler, attr_list);
-
-	//
-	// Create new objects (from references (containment == true))
-	//
-	// get fUMLFactory
-	int numNodes = loadHandler->getNumOfChildNodes();
-	for(int ii = 0; ii < numNodes; ii++)
-	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler);
-	}
-}		
-
-void ExtensionalValueListImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
-{
-
-	ExtensionalValueImpl::loadAttributes(loadHandler, attr_list);
+	return m_thisExtensionalValueListPtr.lock();
 }
-
-void ExtensionalValueListImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+void ExtensionalValueListImpl::setThisExtensionalValueListPtr(std::weak_ptr<ExtensionalValueList> thisExtensionalValueListPtr)
 {
-
-	//load BasePackage Nodes
-	ExtensionalValueImpl::loadNode(nodeName, loadHandler);
+	m_thisExtensionalValueListPtr = thisExtensionalValueListPtr;
+	setThisExtensionalValuePtr(thisExtensionalValueListPtr);
 }
-
-void ExtensionalValueListImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
-{
-	ExtensionalValueImpl::resolveReferences(featureID, references);
-}
-
-void ExtensionalValueListImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
-{
-	saveContent(saveHandler);
-
-	ExtensionalValueImpl::saveContent(saveHandler);
-	
-	fUML::Semantics::SimpleClassifiers::CompoundValueImpl::saveContent(saveHandler);
-	
-	fUML::Semantics::SimpleClassifiers::StructuredValueImpl::saveContent(saveHandler);
-	
-	fUML::Semantics::Values::ValueImpl::saveContent(saveHandler);
-	
-	fUML::Semantics::Loci::SemanticVisitorImpl::saveContent(saveHandler);
-	
-	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
-	
-}
-
-void ExtensionalValueListImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
-{
-	try
-	{
-		std::shared_ptr<fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage> package = fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::eInstance();
-	}
-	catch (std::exception& e)
-	{
-		std::cout << "| ERROR    | " << e.what() << std::endl;
-	}
-}
-

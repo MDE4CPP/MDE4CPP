@@ -1,3 +1,4 @@
+
 #include "uml/impl/ReadExtentActionImpl.hpp"
 
 #ifdef NDEBUG
@@ -26,7 +27,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -34,7 +34,6 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-
 
 #include "uml/Action.hpp"
 #include "uml/Activity.hpp"
@@ -159,15 +158,6 @@ std::shared_ptr<ecore::EObject> ReadExtentActionImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> ReadExtentActionImpl::eStaticClass() const
-{
-	return uml::umlPackage::eInstance()->getReadExtentAction_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
@@ -184,11 +174,13 @@ bool ReadExtentActionImpl::type_is_classifier(Any diagnostics,std::shared_ptr<st
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference classifier
-*/
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference classifier */
 std::shared_ptr<uml::Classifier> ReadExtentActionImpl::getClassifier() const
 {
     return m_classifier;
@@ -199,10 +191,7 @@ void ReadExtentActionImpl::setClassifier(std::shared_ptr<uml::Classifier> _class
 	
 }
 
-
-/*
-Getter & Setter for reference result
-*/
+/* Getter & Setter for reference result */
 std::shared_ptr<uml::OutputPin> ReadExtentActionImpl::getResult() const
 {
     return m_result;
@@ -212,7 +201,6 @@ void ReadExtentActionImpl::setResult(std::shared_ptr<uml::OutputPin> _result)
     m_result = _result;
 	
 }
-
 
 //*********************************
 // Union Getter
@@ -287,18 +275,9 @@ std::shared_ptr<Union<uml::RedefinableElement>> ReadExtentActionImpl::getRedefin
 	return m_redefinedElement;
 }
 
-
-
-
-std::shared_ptr<ReadExtentAction> ReadExtentActionImpl::getThisReadExtentActionPtr() const
-{
-	return m_thisReadExtentActionPtr.lock();
-}
-void ReadExtentActionImpl::setThisReadExtentActionPtr(std::weak_ptr<ReadExtentAction> thisReadExtentActionPtr)
-{
-	m_thisReadExtentActionPtr = thisReadExtentActionPtr;
-	setThisActionPtr(thisReadExtentActionPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> ReadExtentActionImpl::eContainer() const
 {
 	if(auto wp = m_activity.lock())
@@ -321,119 +300,6 @@ std::shared_ptr<ecore::EObject> ReadExtentActionImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any ReadExtentActionImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::READEXTENTACTION_ATTRIBUTE_CLASSIFIER:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getClassifier();
-				return eAny(returnValue); //19327
-			}
-		case uml::umlPackage::READEXTENTACTION_ATTRIBUTE_RESULT:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getResult();
-				return eAny(returnValue); //19328
-			}
-	}
-	return ActionImpl::eGet(featureID, resolve, coreType);
-}
-bool ReadExtentActionImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::READEXTENTACTION_ATTRIBUTE_CLASSIFIER:
-			return getClassifier() != nullptr; //19327
-		case uml::umlPackage::READEXTENTACTION_ATTRIBUTE_RESULT:
-			return getResult() != nullptr; //19328
-	}
-	return ActionImpl::internalEIsSet(featureID);
-}
-bool ReadExtentActionImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::READEXTENTACTION_ATTRIBUTE_CLASSIFIER:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::Classifier> _classifier = std::dynamic_pointer_cast<uml::Classifier>(_temp);
-			setClassifier(_classifier); //19327
-			return true;
-		}
-		case uml::umlPackage::READEXTENTACTION_ATTRIBUTE_RESULT:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::OutputPin> _result = std::dynamic_pointer_cast<uml::OutputPin>(_temp);
-			setResult(_result); //19328
-			return true;
-		}
-	}
-
-	return ActionImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any ReadExtentActionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-		
-		// 796840948
-		case umlPackage::READEXTENTACTION_OPERATION_MULTIPLICITY_OF_RESULT_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->multiplicity_of_result(incoming_param_diagnostics,incoming_param_context));
-			break;
-		}
-		
-		// 163178380
-		case umlPackage::READEXTENTACTION_OPERATION_TYPE_IS_CLASSIFIER_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->type_is_classifier(incoming_param_diagnostics,incoming_param_context));
-			break;
-		}
-
-		default:
-		{
-			// call superTypes
-			result = ActionImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -547,13 +413,6 @@ void ReadExtentActionImpl::save(std::shared_ptr<persistence::interfaces::XSaveHa
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
-	
-	
-	
 }
 
 void ReadExtentActionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -576,3 +435,135 @@ void ReadExtentActionImpl::saveContent(std::shared_ptr<persistence::interfaces::
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> ReadExtentActionImpl::eStaticClass() const
+{
+	return uml::umlPackage::eInstance()->getReadExtentAction_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any ReadExtentActionImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::READEXTENTACTION_ATTRIBUTE_CLASSIFIER:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getClassifier();
+				return eAny(returnValue); //19327
+			}
+		case uml::umlPackage::READEXTENTACTION_ATTRIBUTE_RESULT:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getResult();
+				return eAny(returnValue); //19328
+			}
+	}
+	return ActionImpl::eGet(featureID, resolve, coreType);
+}
+
+bool ReadExtentActionImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::READEXTENTACTION_ATTRIBUTE_CLASSIFIER:
+			return getClassifier() != nullptr; //19327
+		case uml::umlPackage::READEXTENTACTION_ATTRIBUTE_RESULT:
+			return getResult() != nullptr; //19328
+	}
+	return ActionImpl::internalEIsSet(featureID);
+}
+
+bool ReadExtentActionImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::READEXTENTACTION_ATTRIBUTE_CLASSIFIER:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::Classifier> _classifier = std::dynamic_pointer_cast<uml::Classifier>(_temp);
+			setClassifier(_classifier); //19327
+			return true;
+		}
+		case uml::umlPackage::READEXTENTACTION_ATTRIBUTE_RESULT:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::OutputPin> _result = std::dynamic_pointer_cast<uml::OutputPin>(_temp);
+			setResult(_result); //19328
+			return true;
+		}
+	}
+
+	return ActionImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any ReadExtentActionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 796840948
+		case umlPackage::READEXTENTACTION_OPERATION_MULTIPLICITY_OF_RESULT_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->multiplicity_of_result(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+		
+		// 163178380
+		case umlPackage::READEXTENTACTION_OPERATION_TYPE_IS_CLASSIFIER_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->type_is_classifier(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = ActionImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<ReadExtentAction> ReadExtentActionImpl::getThisReadExtentActionPtr() const
+{
+	return m_thisReadExtentActionPtr.lock();
+}
+void ReadExtentActionImpl::setThisReadExtentActionPtr(std::weak_ptr<ReadExtentAction> thisReadExtentActionPtr)
+{
+	m_thisReadExtentActionPtr = thisReadExtentActionPtr;
+	setThisActionPtr(thisReadExtentActionPtr);
+}

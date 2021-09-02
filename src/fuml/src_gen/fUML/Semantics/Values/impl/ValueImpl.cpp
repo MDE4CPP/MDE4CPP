@@ -1,3 +1,4 @@
+
 #include "fUML/Semantics/Values/impl/ValueImpl.hpp"
 
 #ifdef NDEBUG
@@ -33,7 +34,6 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-
 
 #include "uml/Classifier.hpp"
 #include "fUML/Semantics/Loci/SemanticVisitor.hpp"
@@ -109,15 +109,6 @@ std::shared_ptr<ecore::EObject> ValueImpl::copy() const
 	element->setThisValuePtr(element);
 	return element;
 }
-
-std::shared_ptr<ecore::EClass> ValueImpl::eStaticClass() const
-{
-	return fUML::Semantics::Values::ValuesPackage::eInstance()->getValue_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
 
 //*********************************
 // Operations
@@ -223,31 +214,92 @@ std::string ValueImpl::toString()
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
+//*********************************
+
+//*********************************
+// Reference Getters & Setters
 //*********************************
 
 //*********************************
 // Union Getter
 //*********************************
 
-
-
-std::shared_ptr<Value> ValueImpl::getThisValuePtr() const
-{
-	return m_thisValuePtr.lock();
-}
-void ValueImpl::setThisValuePtr(std::weak_ptr<Value> thisValuePtr)
-{
-	m_thisValuePtr = thisValuePtr;
-	setThisSemanticVisitorPtr(thisValuePtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> ValueImpl::eContainer() const
 {
 	return nullptr;
 }
 
 //*********************************
-// Structural Feature Getter/Setter
+// Persistence Functions
+//*********************************
+void ValueImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get fUMLFactory
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
+	}
+}		
+
+void ValueImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+
+	fUML::Semantics::Loci::SemanticVisitorImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void ValueImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+
+	//load BasePackage Nodes
+	fUML::Semantics::Loci::SemanticVisitorImpl::loadNode(nodeName, loadHandler);
+}
+
+void ValueImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+{
+	fUML::Semantics::Loci::SemanticVisitorImpl::resolveReferences(featureID, references);
+}
+
+void ValueImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	fUML::Semantics::Loci::SemanticVisitorImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+}
+
+void ValueImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<fUML::Semantics::Values::ValuesPackage> package = fUML::Semantics::Values::ValuesPackage::eInstance();
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+}
+
+
+std::shared_ptr<ecore::EClass> ValueImpl::eStaticClass() const
+{
+	return fUML::Semantics::Values::ValuesPackage::eInstance()->getValue_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
 //*********************************
 Any ValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
@@ -256,6 +308,7 @@ Any ValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 	}
 	return fUML::Semantics::Loci::SemanticVisitorImpl::eGet(featureID, resolve, coreType);
 }
+
 bool ValueImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
@@ -263,6 +316,7 @@ bool ValueImpl::internalEIsSet(int featureID) const
 	}
 	return fUML::Semantics::Loci::SemanticVisitorImpl::internalEIsSet(featureID);
 }
+
 bool ValueImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
@@ -273,7 +327,7 @@ bool ValueImpl::eSet(int featureID, Any newValue)
 }
 
 //*********************************
-// Behavioral Feature
+// EOperation Invoke
 //*********************************
 Any ValueImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
 {
@@ -371,62 +425,13 @@ Any ValueImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_
 	return result;
 }
 
-//*********************************
-// Persistence Functions
-//*********************************
-void ValueImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+
+std::shared_ptr<Value> ValueImpl::getThisValuePtr() const
 {
-	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
-	loadAttributes(loadHandler, attr_list);
-
-	//
-	// Create new objects (from references (containment == true))
-	//
-	// get fUMLFactory
-	int numNodes = loadHandler->getNumOfChildNodes();
-	for(int ii = 0; ii < numNodes; ii++)
-	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler);
-	}
-}		
-
-void ValueImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
-{
-
-	fUML::Semantics::Loci::SemanticVisitorImpl::loadAttributes(loadHandler, attr_list);
+	return m_thisValuePtr.lock();
 }
-
-void ValueImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+void ValueImpl::setThisValuePtr(std::weak_ptr<Value> thisValuePtr)
 {
-
-	//load BasePackage Nodes
-	fUML::Semantics::Loci::SemanticVisitorImpl::loadNode(nodeName, loadHandler);
+	m_thisValuePtr = thisValuePtr;
+	setThisSemanticVisitorPtr(thisValuePtr);
 }
-
-void ValueImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
-{
-	fUML::Semantics::Loci::SemanticVisitorImpl::resolveReferences(featureID, references);
-}
-
-void ValueImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
-{
-	saveContent(saveHandler);
-
-	fUML::Semantics::Loci::SemanticVisitorImpl::saveContent(saveHandler);
-	
-	ecore::EObjectImpl::saveContent(saveHandler);
-	
-}
-
-void ValueImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
-{
-	try
-	{
-		std::shared_ptr<fUML::Semantics::Values::ValuesPackage> package = fUML::Semantics::Values::ValuesPackage::eInstance();
-	}
-	catch (std::exception& e)
-	{
-		std::cout << "| ERROR    | " << e.what() << std::endl;
-	}
-}
-

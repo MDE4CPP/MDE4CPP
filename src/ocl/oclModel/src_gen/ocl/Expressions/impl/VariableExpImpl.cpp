@@ -1,3 +1,4 @@
+
 #include "ocl/Expressions/impl/VariableExpImpl.hpp"
 
 #ifdef NDEBUG
@@ -25,7 +26,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -35,7 +35,6 @@
 #include "ecore/ecoreFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
-
 
 #include "ocl/Expressions/CallExp.hpp"
 #include "ocl/Expressions/CollectionRange.hpp"
@@ -204,25 +203,18 @@ std::shared_ptr<ecore::EObject> VariableExpImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> VariableExpImpl::eStaticClass() const
-{
-	return ocl::Expressions::ExpressionsPackage::eInstance()->getVariableExp_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference referredVariable
-*/
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference referredVariable */
 std::shared_ptr<ocl::Expressions::Variable> VariableExpImpl::getReferredVariable() const
 {
     return m_referredVariable;
@@ -233,22 +225,13 @@ void VariableExpImpl::setReferredVariable(std::shared_ptr<ocl::Expressions::Vari
 	
 }
 
-
 //*********************************
 // Union Getter
 //*********************************
 
-
-
-std::shared_ptr<VariableExp> VariableExpImpl::getThisVariableExpPtr() const
-{
-	return m_thisVariableExpPtr.lock();
-}
-void VariableExpImpl::setThisVariableExpPtr(std::weak_ptr<VariableExp> thisVariableExpPtr)
-{
-	m_thisVariableExpPtr = thisVariableExpPtr;
-	setThisOclExpressionPtr(thisVariableExpPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> VariableExpImpl::eContainer() const
 {
 	if(auto wp = m_appliedElement.lock())
@@ -306,70 +289,6 @@ std::shared_ptr<ecore::EObject> VariableExpImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any VariableExpImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case ocl::Expressions::ExpressionsPackage::VARIABLEEXP_ATTRIBUTE_REFERREDVARIABLE:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getReferredVariable();
-				return eAny(returnValue); //9822
-			}
-	}
-	return OclExpressionImpl::eGet(featureID, resolve, coreType);
-}
-bool VariableExpImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case ocl::Expressions::ExpressionsPackage::VARIABLEEXP_ATTRIBUTE_REFERREDVARIABLE:
-			return getReferredVariable() != nullptr; //9822
-	}
-	return OclExpressionImpl::internalEIsSet(featureID);
-}
-bool VariableExpImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case ocl::Expressions::ExpressionsPackage::VARIABLEEXP_ATTRIBUTE_REFERREDVARIABLE:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<ocl::Expressions::Variable> _referredVariable = std::dynamic_pointer_cast<ocl::Expressions::Variable>(_temp);
-			setReferredVariable(_referredVariable); //9822
-			return true;
-		}
-	}
-
-	return OclExpressionImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any VariableExpImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-
-		default:
-		{
-			// call superTypes
-			result = OclExpressionImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -455,10 +374,6 @@ void VariableExpImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler
 	ecore::EModelElementImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
 }
 
 void VariableExpImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -475,3 +390,86 @@ void VariableExpImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> VariableExpImpl::eStaticClass() const
+{
+	return ocl::Expressions::ExpressionsPackage::eInstance()->getVariableExp_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any VariableExpImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case ocl::Expressions::ExpressionsPackage::VARIABLEEXP_ATTRIBUTE_REFERREDVARIABLE:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getReferredVariable();
+				return eAny(returnValue); //9822
+			}
+	}
+	return OclExpressionImpl::eGet(featureID, resolve, coreType);
+}
+
+bool VariableExpImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case ocl::Expressions::ExpressionsPackage::VARIABLEEXP_ATTRIBUTE_REFERREDVARIABLE:
+			return getReferredVariable() != nullptr; //9822
+	}
+	return OclExpressionImpl::internalEIsSet(featureID);
+}
+
+bool VariableExpImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case ocl::Expressions::ExpressionsPackage::VARIABLEEXP_ATTRIBUTE_REFERREDVARIABLE:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<ocl::Expressions::Variable> _referredVariable = std::dynamic_pointer_cast<ocl::Expressions::Variable>(_temp);
+			setReferredVariable(_referredVariable); //9822
+			return true;
+		}
+	}
+
+	return OclExpressionImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any VariableExpImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+
+		default:
+		{
+			// call superTypes
+			result = OclExpressionImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<VariableExp> VariableExpImpl::getThisVariableExpPtr() const
+{
+	return m_thisVariableExpPtr.lock();
+}
+void VariableExpImpl::setThisVariableExpPtr(std::weak_ptr<VariableExp> thisVariableExpPtr)
+{
+	m_thisVariableExpPtr = thisVariableExpPtr;
+	setThisOclExpressionPtr(thisVariableExpPtr);
+}

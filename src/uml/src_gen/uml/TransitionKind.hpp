@@ -10,10 +10,13 @@
 namespace uml 
 {
 	enum TransitionKind {
+		
 		EXTERNAL = 2
 ,
+		
 		INTERNAL = 0
 ,
+		
 		LOCAL = 1
 	};
 }

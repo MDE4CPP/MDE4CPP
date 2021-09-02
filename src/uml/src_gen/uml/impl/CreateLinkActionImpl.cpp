@@ -1,3 +1,4 @@
+
 #include "uml/impl/CreateLinkActionImpl.hpp"
 
 #ifdef NDEBUG
@@ -26,7 +27,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -34,7 +34,6 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-
 
 #include "uml/Activity.hpp"
 #include "uml/ActivityEdge.hpp"
@@ -153,15 +152,6 @@ std::shared_ptr<ecore::EObject> CreateLinkActionImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> CreateLinkActionImpl::eStaticClass() const
-{
-	return uml::umlPackage::eInstance()->getCreateLinkAction_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
@@ -172,7 +162,11 @@ bool CreateLinkActionImpl::association_not_abstract(Any diagnostics,std::shared_
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
+//*********************************
+
+//*********************************
+// Reference Getters & Setters
 //*********************************
 
 //*********************************
@@ -248,18 +242,9 @@ std::shared_ptr<Union<uml::RedefinableElement>> CreateLinkActionImpl::getRedefin
 	return m_redefinedElement;
 }
 
-
-
-
-std::shared_ptr<CreateLinkAction> CreateLinkActionImpl::getThisCreateLinkActionPtr() const
-{
-	return m_thisCreateLinkActionPtr.lock();
-}
-void CreateLinkActionImpl::setThisCreateLinkActionPtr(std::weak_ptr<CreateLinkAction> thisCreateLinkActionPtr)
-{
-	m_thisCreateLinkActionPtr = thisCreateLinkActionPtr;
-	setThisWriteLinkActionPtr(thisCreateLinkActionPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> CreateLinkActionImpl::eContainer() const
 {
 	if(auto wp = m_activity.lock())
@@ -282,72 +267,6 @@ std::shared_ptr<ecore::EObject> CreateLinkActionImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any CreateLinkActionImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-	}
-	return WriteLinkActionImpl::eGet(featureID, resolve, coreType);
-}
-bool CreateLinkActionImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-	}
-	return WriteLinkActionImpl::internalEIsSet(featureID);
-}
-bool CreateLinkActionImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-	}
-
-	return WriteLinkActionImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any CreateLinkActionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-		
-		// 1852135634
-		case umlPackage::CREATELINKACTION_OPERATION_ASSOCIATION_NOT_ABSTRACT_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->association_not_abstract(incoming_param_diagnostics,incoming_param_context));
-			break;
-		}
-
-		default:
-		{
-			// call superTypes
-			result = WriteLinkActionImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -410,15 +329,6 @@ void CreateLinkActionImpl::save(std::shared_ptr<persistence::interfaces::XSaveHa
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
-	
-	
-	
-	
-	
 }
 
 void CreateLinkActionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -433,3 +343,88 @@ void CreateLinkActionImpl::saveContent(std::shared_ptr<persistence::interfaces::
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> CreateLinkActionImpl::eStaticClass() const
+{
+	return uml::umlPackage::eInstance()->getCreateLinkAction_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any CreateLinkActionImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+	}
+	return WriteLinkActionImpl::eGet(featureID, resolve, coreType);
+}
+
+bool CreateLinkActionImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+	}
+	return WriteLinkActionImpl::internalEIsSet(featureID);
+}
+
+bool CreateLinkActionImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+	}
+
+	return WriteLinkActionImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any CreateLinkActionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 1852135634
+		case umlPackage::CREATELINKACTION_OPERATION_ASSOCIATION_NOT_ABSTRACT_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->association_not_abstract(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = WriteLinkActionImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<CreateLinkAction> CreateLinkActionImpl::getThisCreateLinkActionPtr() const
+{
+	return m_thisCreateLinkActionPtr.lock();
+}
+void CreateLinkActionImpl::setThisCreateLinkActionPtr(std::weak_ptr<CreateLinkAction> thisCreateLinkActionPtr)
+{
+	m_thisCreateLinkActionPtr = thisCreateLinkActionPtr;
+	setThisWriteLinkActionPtr(thisCreateLinkActionPtr);
+}

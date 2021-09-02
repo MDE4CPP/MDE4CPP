@@ -52,59 +52,39 @@ namespace ocl::Expressions
 			// Operations
 			//*********************************
 			
-			
 			//*********************************
-			// Attributes Getter Setter
-			//*********************************
-			
-			
-			//*********************************
-			// Reference
+			// Attribute Getters & Setters
 			//*********************************
 			
+			//*********************************
+			// Reference Getters & Setters
+			//*********************************
 			virtual std::weak_ptr<ocl::Expressions::IterateExp> getBaseExp() const ;
-			
 			virtual void setBaseExp(std::weak_ptr<ocl::Expressions::IterateExp>) ;
-			
 			virtual std::shared_ptr<ocl::Expressions::OclExpression> getInitExpression() const ;
-			
 			virtual void setInitExpression(std::shared_ptr<ocl::Expressions::OclExpression>) ;
-			
 			virtual std::weak_ptr<ocl::Expressions::LoopExp> getLoopExp() const ;
-			
 			virtual void setLoopExp(std::weak_ptr<ocl::Expressions::LoopExp>) ;
-			
 			virtual std::shared_ptr<ocl::Expressions::VariableExp> getReferringExp() const ;
-			
 			virtual void setReferringExp(std::shared_ptr<ocl::Expressions::VariableExp>) ;
-			
 			virtual std::shared_ptr<ecore::EParameter> getRepresentedParameter() const ;
-			
 			virtual void setRepresentedParameter(std::shared_ptr<ecore::EParameter>) ;
-			
 			virtual std::weak_ptr<ocl::Expressions::ExpressionInOcl> getResultOwner() const ;
-			
 			virtual void setResultOwner(std::weak_ptr<ocl::Expressions::ExpressionInOcl>) ;
-			
 			virtual std::weak_ptr<ocl::Expressions::ExpressionInOcl> getSelfOwner() const ;
-			
 			virtual void setSelfOwner(std::weak_ptr<ocl::Expressions::ExpressionInOcl>) ;
-			
 			virtual std::shared_ptr<fUML::Semantics::Values::Value> getValue() const ;
-			
 			virtual void setValue(std::shared_ptr<fUML::Semantics::Values::Value>) ;
-			
 			virtual std::weak_ptr<ocl::Expressions::ExpressionInOcl> getVarOwner() const ;
-			
 			virtual void setVarOwner(std::weak_ptr<ocl::Expressions::ExpressionInOcl>) ;
 			
+			//*********************************
+			// Union Reference Getters
+			//*********************************
 			
 			//*********************************
-			// Union Getter
+			// Container Getter
 			//*********************************
-			
-			
-
 			virtual std::shared_ptr<ecore::EObject> eContainer() const ; 
 			
 			//*********************************
@@ -113,20 +93,23 @@ namespace ocl::Expressions
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) ;
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
-			
 			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
-			
 
-			//*********************************
-			// Structural Feature Getter/Setter
-			//*********************************
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+
+			//*********************************
+			// EStructuralFeature Get/Set/IsSet
+			//*********************************
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool internalEIsSet(int featureID) const ;
 			virtual bool eSet(int featureID, Any newValue) ;
+			virtual bool internalEIsSet(int featureID) const ;
+
+			//*********************************
+			// EOperation Invoke
+			//*********************************
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:

@@ -1,3 +1,4 @@
+
 #include "fUML/Semantics/CommonBehavior/impl/ParameterValueImpl.hpp"
 
 #ifdef NDEBUG
@@ -35,7 +36,6 @@
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Values/ValuesFactory.hpp"
-
 
 #include "uml/Parameter.hpp"
 #include "fUML/Semantics/CommonBehavior/ParameterValue.hpp"
@@ -134,15 +134,6 @@ std::shared_ptr<ecore::EObject> ParameterValueImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> ParameterValueImpl::eStaticClass() const
-{
-	return fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance()->getParameterValue_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
@@ -170,11 +161,13 @@ return newValue;
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference parameter
-*/
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference parameter */
 std::shared_ptr<uml::Parameter> ParameterValueImpl::getParameter() const
 {
     return m_parameter;
@@ -185,10 +178,7 @@ void ParameterValueImpl::setParameter(std::shared_ptr<uml::Parameter> _parameter
 	
 }
 
-
-/*
-Getter & Setter for reference values
-*/
+/* Getter & Setter for reference values */
 std::shared_ptr<Bag<fUML::Semantics::Values::Value>> ParameterValueImpl::getValues() const
 {
 	if(m_values == nullptr)
@@ -200,146 +190,16 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> ParameterValueImpl::getValu
     return m_values;
 }
 
-
-
 //*********************************
 // Union Getter
 //*********************************
 
-
-
-std::shared_ptr<ParameterValue> ParameterValueImpl::getThisParameterValuePtr() const
-{
-	return m_thisParameterValuePtr.lock();
-}
-void ParameterValueImpl::setThisParameterValuePtr(std::weak_ptr<ParameterValue> thisParameterValuePtr)
-{
-	m_thisParameterValuePtr = thisParameterValuePtr;
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> ParameterValueImpl::eContainer() const
 {
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any ParameterValueImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::PARAMETERVALUE_ATTRIBUTE_PARAMETER:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getParameter();
-				return eAny(returnValue); //870
-			}
-		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::PARAMETERVALUE_ATTRIBUTE_VALUES:
-		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<fUML::Semantics::Values::Value>::iterator iter = getValues()->begin();
-			Bag<fUML::Semantics::Values::Value>::iterator end = getValues()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //871			
-		}
-	}
-	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
-}
-bool ParameterValueImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::PARAMETERVALUE_ATTRIBUTE_PARAMETER:
-			return getParameter() != nullptr; //870
-		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::PARAMETERVALUE_ATTRIBUTE_VALUES:
-			return getValues() != nullptr; //871
-	}
-	return ecore::EObjectImpl::internalEIsSet(featureID);
-}
-bool ParameterValueImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::PARAMETERVALUE_ATTRIBUTE_PARAMETER:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::Parameter> _parameter = std::dynamic_pointer_cast<uml::Parameter>(_temp);
-			setParameter(_parameter); //870
-			return true;
-		}
-		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::PARAMETERVALUE_ATTRIBUTE_VALUES:
-		{
-			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<fUML::Semantics::Values::Value>> valuesList(new Bag<fUML::Semantics::Values::Value>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
-			{
-				valuesList->add(std::dynamic_pointer_cast<fUML::Semantics::Values::Value>(*iter));
-				iter++;
-			}
-			
-			Bag<fUML::Semantics::Values::Value>::iterator iterValues = getValues()->begin();
-			Bag<fUML::Semantics::Values::Value>::iterator endValues = getValues()->end();
-			while (iterValues != endValues)
-			{
-				if (valuesList->find(*iterValues) == -1)
-				{
-					getValues()->erase(*iterValues);
-				}
-				iterValues++;
-			}
- 
-			iterValues = valuesList->begin();
-			endValues = valuesList->end();
-			while (iterValues != endValues)
-			{
-				if (getValues()->find(*iterValues) == -1)
-				{
-					getValues()->add(*iterValues);
-				}
-				iterValues++;			
-			}
-			return true;
-		}
-	}
-
-	return ecore::EObjectImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any ParameterValueImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-		
-		// 1957074675
-		case CommonBehaviorPackage::PARAMETERVALUE_OPERATION__COPY:
-		{
-			result = eAny(this->_copy());
-			break;
-		}
-
-		default:
-		{
-			// call superTypes
-			result = ecore::EModelElementImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -438,9 +298,7 @@ void ParameterValueImpl::save(std::shared_ptr<persistence::interfaces::XSaveHand
 {
 	saveContent(saveHandler);
 
-	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
 }
 
 void ParameterValueImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -464,3 +322,142 @@ void ParameterValueImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> ParameterValueImpl::eStaticClass() const
+{
+	return fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance()->getParameterValue_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any ParameterValueImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::PARAMETERVALUE_ATTRIBUTE_PARAMETER:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getParameter();
+				return eAny(returnValue); //870
+			}
+		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::PARAMETERVALUE_ATTRIBUTE_VALUES:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<fUML::Semantics::Values::Value>::iterator iter = getValues()->begin();
+			Bag<fUML::Semantics::Values::Value>::iterator end = getValues()->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //871			
+		}
+	}
+	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
+}
+
+bool ParameterValueImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::PARAMETERVALUE_ATTRIBUTE_PARAMETER:
+			return getParameter() != nullptr; //870
+		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::PARAMETERVALUE_ATTRIBUTE_VALUES:
+			return getValues() != nullptr; //871
+	}
+	return ecore::EObjectImpl::internalEIsSet(featureID);
+}
+
+bool ParameterValueImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::PARAMETERVALUE_ATTRIBUTE_PARAMETER:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::Parameter> _parameter = std::dynamic_pointer_cast<uml::Parameter>(_temp);
+			setParameter(_parameter); //870
+			return true;
+		}
+		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::PARAMETERVALUE_ATTRIBUTE_VALUES:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<fUML::Semantics::Values::Value>> valuesList(new Bag<fUML::Semantics::Values::Value>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				valuesList->add(std::dynamic_pointer_cast<fUML::Semantics::Values::Value>(*iter));
+				iter++;
+			}
+			
+			Bag<fUML::Semantics::Values::Value>::iterator iterValues = getValues()->begin();
+			Bag<fUML::Semantics::Values::Value>::iterator endValues = getValues()->end();
+			while (iterValues != endValues)
+			{
+				if (valuesList->find(*iterValues) == -1)
+				{
+					getValues()->erase(*iterValues);
+				}
+				iterValues++;
+			}
+ 
+			iterValues = valuesList->begin();
+			endValues = valuesList->end();
+			while (iterValues != endValues)
+			{
+				if (getValues()->find(*iterValues) == -1)
+				{
+					getValues()->add(*iterValues);
+				}
+				iterValues++;			
+			}
+			return true;
+		}
+	}
+
+	return ecore::EObjectImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any ParameterValueImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 1957074675
+		case CommonBehaviorPackage::PARAMETERVALUE_OPERATION__COPY:
+		{
+			result = eAny(this->_copy());
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = ecore::EModelElementImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<ParameterValue> ParameterValueImpl::getThisParameterValuePtr() const
+{
+	return m_thisParameterValuePtr.lock();
+}
+void ParameterValueImpl::setThisParameterValuePtr(std::weak_ptr<ParameterValue> thisParameterValuePtr)
+{
+	m_thisParameterValuePtr = thisParameterValuePtr;
+}

@@ -1,3 +1,4 @@
+
 #include "uml/impl/PackageImportImpl.hpp"
 
 #ifdef NDEBUG
@@ -26,7 +27,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -34,7 +34,6 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-
 
 #include "uml/Comment.hpp"
 #include "uml/DirectedRelationship.hpp"
@@ -129,28 +128,6 @@ std::shared_ptr<ecore::EObject> PackageImportImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> PackageImportImpl::eStaticClass() const
-{
-	return uml::umlPackage::eInstance()->getPackageImport_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-/*
-Getter & Setter for attribute visibility
-*/
-uml::VisibilityKind PackageImportImpl::getVisibility() const 
-{
-	return m_visibility;
-}
-void PackageImportImpl::setVisibility(uml::VisibilityKind _visibility)
-{
-	m_visibility = _visibility;
-	
-} 
-
-
 //*********************************
 // Operations
 //*********************************
@@ -161,11 +138,23 @@ bool PackageImportImpl::public_or_private(Any diagnostics,std::shared_ptr<std::m
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference importedPackage
-*/
+/* Getter & Setter for attribute visibility */
+uml::VisibilityKind PackageImportImpl::getVisibility() const 
+{
+	return m_visibility;
+}
+void PackageImportImpl::setVisibility(uml::VisibilityKind _visibility)
+{
+	m_visibility = _visibility;
+	
+}
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference importedPackage */
 std::shared_ptr<uml::Package> PackageImportImpl::getImportedPackage() const
 {
     return m_importedPackage;
@@ -176,10 +165,7 @@ void PackageImportImpl::setImportedPackage(std::shared_ptr<uml::Package> _import
 	
 }
 
-
-/*
-Getter & Setter for reference importingNamespace
-*/
+/* Getter & Setter for reference importingNamespace */
 std::weak_ptr<uml::Namespace> PackageImportImpl::getImportingNamespace() const
 {
     return m_importingNamespace;
@@ -189,7 +175,6 @@ void PackageImportImpl::setImportingNamespace(std::weak_ptr<uml::Namespace> _imp
     m_importingNamespace = _importingNamespace;
 	
 }
-
 
 //*********************************
 // Union Getter
@@ -269,18 +254,9 @@ std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> PackageImportImpl::getT
 	return m_target;
 }
 
-
-
-
-std::shared_ptr<PackageImport> PackageImportImpl::getThisPackageImportPtr() const
-{
-	return m_thisPackageImportPtr.lock();
-}
-void PackageImportImpl::setThisPackageImportPtr(std::weak_ptr<PackageImport> thisPackageImportPtr)
-{
-	m_thisPackageImportPtr = thisPackageImportPtr;
-	setThisDirectedRelationshipPtr(thisPackageImportPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> PackageImportImpl::eContainer() const
 {
 	if(auto wp = m_importingNamespace.lock())
@@ -293,113 +269,6 @@ std::shared_ptr<ecore::EObject> PackageImportImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any PackageImportImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::PACKAGEIMPORT_ATTRIBUTE_IMPORTEDPACKAGE:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getImportedPackage();
-				return eAny(returnValue); //1716
-			}
-		case uml::umlPackage::PACKAGEIMPORT_ATTRIBUTE_IMPORTINGNAMESPACE:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getImportingNamespace().lock();
-				return eAny(returnValue); //1717
-			}
-		case uml::umlPackage::PACKAGEIMPORT_ATTRIBUTE_VISIBILITY:
-			return eAny(getVisibility()); //1718
-	}
-	return DirectedRelationshipImpl::eGet(featureID, resolve, coreType);
-}
-bool PackageImportImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::PACKAGEIMPORT_ATTRIBUTE_IMPORTEDPACKAGE:
-			return getImportedPackage() != nullptr; //1716
-		case uml::umlPackage::PACKAGEIMPORT_ATTRIBUTE_IMPORTINGNAMESPACE:
-			return getImportingNamespace().lock() != nullptr; //1717
-		case uml::umlPackage::PACKAGEIMPORT_ATTRIBUTE_VISIBILITY:
-			return m_visibility != VisibilityKind::PUBLIC;; //1718
-	}
-	return DirectedRelationshipImpl::internalEIsSet(featureID);
-}
-bool PackageImportImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::PACKAGEIMPORT_ATTRIBUTE_IMPORTEDPACKAGE:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::Package> _importedPackage = std::dynamic_pointer_cast<uml::Package>(_temp);
-			setImportedPackage(_importedPackage); //1716
-			return true;
-		}
-		case uml::umlPackage::PACKAGEIMPORT_ATTRIBUTE_IMPORTINGNAMESPACE:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::Namespace> _importingNamespace = std::dynamic_pointer_cast<uml::Namespace>(_temp);
-			setImportingNamespace(_importingNamespace); //1717
-			return true;
-		}
-		case uml::umlPackage::PACKAGEIMPORT_ATTRIBUTE_VISIBILITY:
-		{
-			// BOOST CAST
-			uml::VisibilityKind _visibility = newValue->get<uml::VisibilityKind>();
-			setVisibility(_visibility); //1718
-			return true;
-		}
-	}
-
-	return DirectedRelationshipImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any PackageImportImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-		
-		// 216730500
-		case umlPackage::PACKAGEIMPORT_OPERATION_PUBLIC_OR_PRIVATE_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->public_or_private(incoming_param_diagnostics,incoming_param_context));
-			break;
-		}
-
-		default:
-		{
-			// call superTypes
-			result = DirectedRelationshipImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -521,10 +390,6 @@ void PackageImportImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandl
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
 }
 
 void PackageImportImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -564,3 +429,129 @@ void PackageImportImpl::saveContent(std::shared_ptr<persistence::interfaces::XSa
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> PackageImportImpl::eStaticClass() const
+{
+	return uml::umlPackage::eInstance()->getPackageImport_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any PackageImportImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::PACKAGEIMPORT_ATTRIBUTE_IMPORTEDPACKAGE:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getImportedPackage();
+				return eAny(returnValue); //1716
+			}
+		case uml::umlPackage::PACKAGEIMPORT_ATTRIBUTE_IMPORTINGNAMESPACE:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getImportingNamespace().lock();
+				return eAny(returnValue); //1717
+			}
+		case uml::umlPackage::PACKAGEIMPORT_ATTRIBUTE_VISIBILITY:
+			return eAny(getVisibility()); //1718
+	}
+	return DirectedRelationshipImpl::eGet(featureID, resolve, coreType);
+}
+
+bool PackageImportImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::PACKAGEIMPORT_ATTRIBUTE_IMPORTEDPACKAGE:
+			return getImportedPackage() != nullptr; //1716
+		case uml::umlPackage::PACKAGEIMPORT_ATTRIBUTE_IMPORTINGNAMESPACE:
+			return getImportingNamespace().lock() != nullptr; //1717
+		case uml::umlPackage::PACKAGEIMPORT_ATTRIBUTE_VISIBILITY:
+			return m_visibility != VisibilityKind::PUBLIC;; //1718
+	}
+	return DirectedRelationshipImpl::internalEIsSet(featureID);
+}
+
+bool PackageImportImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::PACKAGEIMPORT_ATTRIBUTE_IMPORTEDPACKAGE:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::Package> _importedPackage = std::dynamic_pointer_cast<uml::Package>(_temp);
+			setImportedPackage(_importedPackage); //1716
+			return true;
+		}
+		case uml::umlPackage::PACKAGEIMPORT_ATTRIBUTE_IMPORTINGNAMESPACE:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::Namespace> _importingNamespace = std::dynamic_pointer_cast<uml::Namespace>(_temp);
+			setImportingNamespace(_importingNamespace); //1717
+			return true;
+		}
+		case uml::umlPackage::PACKAGEIMPORT_ATTRIBUTE_VISIBILITY:
+		{
+			// BOOST CAST
+			uml::VisibilityKind _visibility = newValue->get<uml::VisibilityKind>();
+			setVisibility(_visibility); //1718
+			return true;
+		}
+	}
+
+	return DirectedRelationshipImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any PackageImportImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 216730500
+		case umlPackage::PACKAGEIMPORT_OPERATION_PUBLIC_OR_PRIVATE_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->public_or_private(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = DirectedRelationshipImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<PackageImport> PackageImportImpl::getThisPackageImportPtr() const
+{
+	return m_thisPackageImportPtr.lock();
+}
+void PackageImportImpl::setThisPackageImportPtr(std::weak_ptr<PackageImport> thisPackageImportPtr)
+{
+	m_thisPackageImportPtr = thisPackageImportPtr;
+	setThisDirectedRelationshipPtr(thisPackageImportPtr);
+}

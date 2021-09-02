@@ -1,3 +1,4 @@
+
 #include "uml/impl/StateInvariantImpl.hpp"
 
 #ifdef NDEBUG
@@ -25,7 +26,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -33,7 +33,6 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-
 
 #include "uml/Comment.hpp"
 #include "uml/Constraint.hpp"
@@ -149,25 +148,18 @@ std::shared_ptr<ecore::EObject> StateInvariantImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> StateInvariantImpl::eStaticClass() const
-{
-	return uml::umlPackage::eInstance()->getStateInvariant_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference invariant
-*/
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference invariant */
 std::shared_ptr<uml::Constraint> StateInvariantImpl::getInvariant() const
 {
     return m_invariant;
@@ -177,7 +169,6 @@ void StateInvariantImpl::setInvariant(std::shared_ptr<uml::Constraint> _invarian
     m_invariant = _invariant;
 	
 }
-
 
 //*********************************
 // Union Getter
@@ -207,18 +198,9 @@ std::weak_ptr<uml::Element> StateInvariantImpl::getOwner() const
 	return m_owner;
 }
 
-
-
-
-std::shared_ptr<StateInvariant> StateInvariantImpl::getThisStateInvariantPtr() const
-{
-	return m_thisStateInvariantPtr.lock();
-}
-void StateInvariantImpl::setThisStateInvariantPtr(std::weak_ptr<StateInvariant> thisStateInvariantPtr)
-{
-	m_thisStateInvariantPtr = thisStateInvariantPtr;
-	setThisInteractionFragmentPtr(thisStateInvariantPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> StateInvariantImpl::eContainer() const
 {
 	if(auto wp = m_enclosingInteraction.lock())
@@ -241,70 +223,6 @@ std::shared_ptr<ecore::EObject> StateInvariantImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any StateInvariantImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::STATEINVARIANT_ATTRIBUTE_INVARIANT:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getInvariant();
-				return eAny(returnValue); //22113
-			}
-	}
-	return InteractionFragmentImpl::eGet(featureID, resolve, coreType);
-}
-bool StateInvariantImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::STATEINVARIANT_ATTRIBUTE_INVARIANT:
-			return getInvariant() != nullptr; //22113
-	}
-	return InteractionFragmentImpl::internalEIsSet(featureID);
-}
-bool StateInvariantImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::STATEINVARIANT_ATTRIBUTE_INVARIANT:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::Constraint> _invariant = std::dynamic_pointer_cast<uml::Constraint>(_temp);
-			setInvariant(_invariant); //22113
-			return true;
-		}
-	}
-
-	return InteractionFragmentImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any StateInvariantImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-
-		default:
-		{
-			// call superTypes
-			result = InteractionFragmentImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -379,10 +297,6 @@ void StateInvariantImpl::save(std::shared_ptr<persistence::interfaces::XSaveHand
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
 }
 
 void StateInvariantImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -403,3 +317,86 @@ void StateInvariantImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> StateInvariantImpl::eStaticClass() const
+{
+	return uml::umlPackage::eInstance()->getStateInvariant_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any StateInvariantImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::STATEINVARIANT_ATTRIBUTE_INVARIANT:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getInvariant();
+				return eAny(returnValue); //22113
+			}
+	}
+	return InteractionFragmentImpl::eGet(featureID, resolve, coreType);
+}
+
+bool StateInvariantImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::STATEINVARIANT_ATTRIBUTE_INVARIANT:
+			return getInvariant() != nullptr; //22113
+	}
+	return InteractionFragmentImpl::internalEIsSet(featureID);
+}
+
+bool StateInvariantImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::STATEINVARIANT_ATTRIBUTE_INVARIANT:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::Constraint> _invariant = std::dynamic_pointer_cast<uml::Constraint>(_temp);
+			setInvariant(_invariant); //22113
+			return true;
+		}
+	}
+
+	return InteractionFragmentImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any StateInvariantImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+
+		default:
+		{
+			// call superTypes
+			result = InteractionFragmentImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<StateInvariant> StateInvariantImpl::getThisStateInvariantPtr() const
+{
+	return m_thisStateInvariantPtr.lock();
+}
+void StateInvariantImpl::setThisStateInvariantPtr(std::weak_ptr<StateInvariant> thisStateInvariantPtr)
+{
+	m_thisStateInvariantPtr = thisStateInvariantPtr;
+	setThisInteractionFragmentPtr(thisStateInvariantPtr);
+}

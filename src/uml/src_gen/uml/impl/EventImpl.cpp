@@ -1,3 +1,4 @@
+
 #include "uml/impl/EventImpl.hpp"
 
 #ifdef NDEBUG
@@ -25,7 +26,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -33,7 +33,6 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-
 
 #include "uml/Comment.hpp"
 #include "uml/Dependency.hpp"
@@ -140,21 +139,16 @@ std::shared_ptr<ecore::EObject> EventImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> EventImpl::eStaticClass() const
-{
-	return uml::umlPackage::eInstance()->getEvent_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
 
 //*********************************
-// References
+// Attribute Getters & Setters
+//*********************************
+
+//*********************************
+// Reference Getters & Setters
 //*********************************
 
 //*********************************
@@ -187,16 +181,9 @@ std::weak_ptr<uml::Element> EventImpl::getOwner() const
 
 
 
-
-std::shared_ptr<Event> EventImpl::getThisEventPtr() const
-{
-	return m_thisEventPtr.lock();
-}
-void EventImpl::setThisEventPtr(std::weak_ptr<Event> thisEventPtr)
-{
-	m_thisEventPtr = thisEventPtr;
-	setThisPackageableElementPtr(thisEventPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> EventImpl::eContainer() const
 {
 	if(auto wp = m_namespace.lock())
@@ -219,55 +206,6 @@ std::shared_ptr<ecore::EObject> EventImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any EventImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-	}
-	return PackageableElementImpl::eGet(featureID, resolve, coreType);
-}
-bool EventImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-	}
-	return PackageableElementImpl::internalEIsSet(featureID);
-}
-bool EventImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-	}
-
-	return PackageableElementImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any EventImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-
-		default:
-		{
-			// call superTypes
-			result = PackageableElementImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -321,10 +259,6 @@ void EventImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> save
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
 }
 
 void EventImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -339,3 +273,71 @@ void EventImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandle
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> EventImpl::eStaticClass() const
+{
+	return uml::umlPackage::eInstance()->getEvent_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any EventImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+	}
+	return PackageableElementImpl::eGet(featureID, resolve, coreType);
+}
+
+bool EventImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+	}
+	return PackageableElementImpl::internalEIsSet(featureID);
+}
+
+bool EventImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+	}
+
+	return PackageableElementImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any EventImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+
+		default:
+		{
+			// call superTypes
+			result = PackageableElementImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<Event> EventImpl::getThisEventPtr() const
+{
+	return m_thisEventPtr.lock();
+}
+void EventImpl::setThisEventPtr(std::weak_ptr<Event> thisEventPtr)
+{
+	m_thisEventPtr = thisEventPtr;
+	setThisPackageableElementPtr(thisEventPtr);
+}

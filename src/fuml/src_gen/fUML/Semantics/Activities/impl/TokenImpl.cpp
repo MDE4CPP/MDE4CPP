@@ -1,3 +1,4 @@
+
 #include "fUML/Semantics/Activities/impl/TokenImpl.hpp"
 
 #ifdef NDEBUG
@@ -37,7 +38,6 @@
 
 #include <exception> // used in Persistence
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
-
 
 #include "fUML/Semantics/Activities/ActivityNodeActivation.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
@@ -120,28 +120,6 @@ std::shared_ptr<ecore::EObject> TokenImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> TokenImpl::eStaticClass() const
-{
-	return fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getToken_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-/*
-Getter & Setter for attribute withdrawn
-*/
-bool TokenImpl::isWithdrawn() const 
-{
-	return m_withdrawn;
-}
-void TokenImpl::setWithdrawn(bool _withdrawn)
-{
-	m_withdrawn = _withdrawn;
-	
-} 
-
-
 //*********************************
 // Operations
 //*********************************
@@ -214,11 +192,23 @@ void TokenImpl::withdraw()
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference holder
-*/
+/* Getter & Setter for attribute withdrawn */
+bool TokenImpl::isWithdrawn() const 
+{
+	return m_withdrawn;
+}
+void TokenImpl::setWithdrawn(bool _withdrawn)
+{
+	m_withdrawn = _withdrawn;
+	
+}
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference holder */
 std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivation> TokenImpl::getHolder() const
 {
     return m_holder;
@@ -229,21 +219,13 @@ void TokenImpl::setHolder(std::weak_ptr<fUML::Semantics::Activities::ActivityNod
 	
 }
 
-
 //*********************************
 // Union Getter
 //*********************************
 
-
-
-std::shared_ptr<Token> TokenImpl::getThisTokenPtr() const
-{
-	return m_thisTokenPtr.lock();
-}
-void TokenImpl::setThisTokenPtr(std::weak_ptr<Token> thisTokenPtr)
-{
-	m_thisTokenPtr = thisTokenPtr;
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> TokenImpl::eContainer() const
 {
 	if(auto wp = m_holder.lock())
@@ -251,133 +233,6 @@ std::shared_ptr<ecore::EObject> TokenImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any TokenImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case fUML::Semantics::Activities::ActivitiesPackage::TOKEN_ATTRIBUTE_HOLDER:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getHolder().lock();
-				return eAny(returnValue); //1150
-			}
-		case fUML::Semantics::Activities::ActivitiesPackage::TOKEN_ATTRIBUTE_WITHDRAWN:
-			return eAny(isWithdrawn()); //1151
-	}
-	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
-}
-bool TokenImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case fUML::Semantics::Activities::ActivitiesPackage::TOKEN_ATTRIBUTE_HOLDER:
-			return getHolder().lock() != nullptr; //1150
-		case fUML::Semantics::Activities::ActivitiesPackage::TOKEN_ATTRIBUTE_WITHDRAWN:
-			return isWithdrawn() != true; //1151
-	}
-	return ecore::EObjectImpl::internalEIsSet(featureID);
-}
-bool TokenImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case fUML::Semantics::Activities::ActivitiesPackage::TOKEN_ATTRIBUTE_HOLDER:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> _holder = std::dynamic_pointer_cast<fUML::Semantics::Activities::ActivityNodeActivation>(_temp);
-			setHolder(_holder); //1150
-			return true;
-		}
-		case fUML::Semantics::Activities::ActivitiesPackage::TOKEN_ATTRIBUTE_WITHDRAWN:
-		{
-			// BOOST CAST
-			bool _withdrawn = newValue->get<bool>();
-			setWithdrawn(_withdrawn); //1151
-			return true;
-		}
-	}
-
-	return ecore::EObjectImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any TokenImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-		
-		// 1757807572
-		case ActivitiesPackage::TOKEN_OPERATION__COPY:
-		{
-			result = eAny(this->_copy());
-			break;
-		}
-		
-		// 1923944023
-		case ActivitiesPackage::TOKEN_OPERATION_EQUALS_TOKEN:
-		{
-			//Retrieve input parameter 'other'
-			//parameter 0
-			std::shared_ptr<fUML::Semantics::Activities::Token> incoming_param_other;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_other_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_other = (*incoming_param_other_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::Activities::Token> >();
-			result = eAny(this->equals(incoming_param_other));
-			break;
-		}
-		
-		// 1836665410
-		case ActivitiesPackage::TOKEN_OPERATION_GETVALUE:
-		{
-			result = eAny(this->getValue());
-			break;
-		}
-		
-		// 2050511719
-		case ActivitiesPackage::TOKEN_OPERATION_ISCONTROL:
-		{
-			result = eAny(this->isControl());
-			break;
-		}
-		
-		// 1196367815
-		case ActivitiesPackage::TOKEN_OPERATION_TRANSFER_ACTIVITYNODEACTIVATION:
-		{
-			//Retrieve input parameter 'holder'
-			//parameter 0
-			std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> incoming_param_holder;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_holder_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_holder = (*incoming_param_holder_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> >();
-			result = eAny(this->transfer(incoming_param_holder));
-			break;
-		}
-		
-		// 1727020278
-		case ActivitiesPackage::TOKEN_OPERATION_WITHDRAW:
-		{
-			this->withdraw();
-			break;
-		}
-
-		default:
-		{
-			// call superTypes
-			result = ecore::EModelElementImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -455,9 +310,7 @@ void TokenImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> save
 {
 	saveContent(saveHandler);
 
-	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
 }
 
 void TokenImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -477,3 +330,148 @@ void TokenImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandle
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> TokenImpl::eStaticClass() const
+{
+	return fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getToken_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any TokenImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case fUML::Semantics::Activities::ActivitiesPackage::TOKEN_ATTRIBUTE_HOLDER:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getHolder().lock();
+				return eAny(returnValue); //1150
+			}
+		case fUML::Semantics::Activities::ActivitiesPackage::TOKEN_ATTRIBUTE_WITHDRAWN:
+			return eAny(isWithdrawn()); //1151
+	}
+	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
+}
+
+bool TokenImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case fUML::Semantics::Activities::ActivitiesPackage::TOKEN_ATTRIBUTE_HOLDER:
+			return getHolder().lock() != nullptr; //1150
+		case fUML::Semantics::Activities::ActivitiesPackage::TOKEN_ATTRIBUTE_WITHDRAWN:
+			return isWithdrawn() != true; //1151
+	}
+	return ecore::EObjectImpl::internalEIsSet(featureID);
+}
+
+bool TokenImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case fUML::Semantics::Activities::ActivitiesPackage::TOKEN_ATTRIBUTE_HOLDER:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> _holder = std::dynamic_pointer_cast<fUML::Semantics::Activities::ActivityNodeActivation>(_temp);
+			setHolder(_holder); //1150
+			return true;
+		}
+		case fUML::Semantics::Activities::ActivitiesPackage::TOKEN_ATTRIBUTE_WITHDRAWN:
+		{
+			// BOOST CAST
+			bool _withdrawn = newValue->get<bool>();
+			setWithdrawn(_withdrawn); //1151
+			return true;
+		}
+	}
+
+	return ecore::EObjectImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any TokenImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 1757807572
+		case ActivitiesPackage::TOKEN_OPERATION__COPY:
+		{
+			result = eAny(this->_copy());
+			break;
+		}
+		
+		// 1923944023
+		case ActivitiesPackage::TOKEN_OPERATION_EQUALS_TOKEN:
+		{
+			//Retrieve input parameter 'other'
+			//parameter 0
+			std::shared_ptr<fUML::Semantics::Activities::Token> incoming_param_other;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_other_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_other = (*incoming_param_other_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::Activities::Token> >();
+			result = eAny(this->equals(incoming_param_other));
+			break;
+		}
+		
+		// 1836665410
+		case ActivitiesPackage::TOKEN_OPERATION_GETVALUE:
+		{
+			result = eAny(this->getValue());
+			break;
+		}
+		
+		// 2050511719
+		case ActivitiesPackage::TOKEN_OPERATION_ISCONTROL:
+		{
+			result = eAny(this->isControl());
+			break;
+		}
+		
+		// 1196367815
+		case ActivitiesPackage::TOKEN_OPERATION_TRANSFER_ACTIVITYNODEACTIVATION:
+		{
+			//Retrieve input parameter 'holder'
+			//parameter 0
+			std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> incoming_param_holder;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_holder_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_holder = (*incoming_param_holder_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> >();
+			result = eAny(this->transfer(incoming_param_holder));
+			break;
+		}
+		
+		// 1727020278
+		case ActivitiesPackage::TOKEN_OPERATION_WITHDRAW:
+		{
+			this->withdraw();
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = ecore::EModelElementImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<Token> TokenImpl::getThisTokenPtr() const
+{
+	return m_thisTokenPtr.lock();
+}
+void TokenImpl::setThisTokenPtr(std::weak_ptr<Token> thisTokenPtr)
+{
+	m_thisTokenPtr = thisTokenPtr;
+}

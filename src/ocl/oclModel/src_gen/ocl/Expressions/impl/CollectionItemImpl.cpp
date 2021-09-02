@@ -1,3 +1,4 @@
+
 #include "ocl/Expressions/impl/CollectionItemImpl.hpp"
 
 #ifdef NDEBUG
@@ -25,7 +26,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -34,7 +34,6 @@
 #include <exception> // used in Persistence
 #include "ecore/ecoreFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
-
 
 #include "ocl/Expressions/CollectionLiteralPart.hpp"
 #include "ecore/EAnnotation.hpp"
@@ -116,25 +115,18 @@ std::shared_ptr<ecore::EObject> CollectionItemImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> CollectionItemImpl::eStaticClass() const
-{
-	return ocl::Expressions::ExpressionsPackage::eInstance()->getCollectionItem_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference item
-*/
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference item */
 std::shared_ptr<ocl::Expressions::OclExpression> CollectionItemImpl::getItem() const
 {
     return m_item;
@@ -145,89 +137,16 @@ void CollectionItemImpl::setItem(std::shared_ptr<ocl::Expressions::OclExpression
 	
 }
 
-
 //*********************************
 // Union Getter
 //*********************************
 
-
-
-std::shared_ptr<CollectionItem> CollectionItemImpl::getThisCollectionItemPtr() const
-{
-	return m_thisCollectionItemPtr.lock();
-}
-void CollectionItemImpl::setThisCollectionItemPtr(std::weak_ptr<CollectionItem> thisCollectionItemPtr)
-{
-	m_thisCollectionItemPtr = thisCollectionItemPtr;
-	setThisCollectionLiteralPartPtr(thisCollectionItemPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> CollectionItemImpl::eContainer() const
 {
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any CollectionItemImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case ocl::Expressions::ExpressionsPackage::COLLECTIONITEM_ATTRIBUTE_ITEM:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getItem();
-				return eAny(returnValue); //1110
-			}
-	}
-	return CollectionLiteralPartImpl::eGet(featureID, resolve, coreType);
-}
-bool CollectionItemImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case ocl::Expressions::ExpressionsPackage::COLLECTIONITEM_ATTRIBUTE_ITEM:
-			return getItem() != nullptr; //1110
-	}
-	return CollectionLiteralPartImpl::internalEIsSet(featureID);
-}
-bool CollectionItemImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case ocl::Expressions::ExpressionsPackage::COLLECTIONITEM_ATTRIBUTE_ITEM:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<ocl::Expressions::OclExpression> _item = std::dynamic_pointer_cast<ocl::Expressions::OclExpression>(_temp);
-			setItem(_item); //1110
-			return true;
-		}
-	}
-
-	return CollectionLiteralPartImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any CollectionItemImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-
-		default:
-		{
-			// call superTypes
-			result = CollectionLiteralPartImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -303,10 +222,6 @@ void CollectionItemImpl::save(std::shared_ptr<persistence::interfaces::XSaveHand
 	ecore::EModelElementImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
 }
 
 void CollectionItemImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -328,3 +243,86 @@ void CollectionItemImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> CollectionItemImpl::eStaticClass() const
+{
+	return ocl::Expressions::ExpressionsPackage::eInstance()->getCollectionItem_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any CollectionItemImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case ocl::Expressions::ExpressionsPackage::COLLECTIONITEM_ATTRIBUTE_ITEM:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getItem();
+				return eAny(returnValue); //1110
+			}
+	}
+	return CollectionLiteralPartImpl::eGet(featureID, resolve, coreType);
+}
+
+bool CollectionItemImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case ocl::Expressions::ExpressionsPackage::COLLECTIONITEM_ATTRIBUTE_ITEM:
+			return getItem() != nullptr; //1110
+	}
+	return CollectionLiteralPartImpl::internalEIsSet(featureID);
+}
+
+bool CollectionItemImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case ocl::Expressions::ExpressionsPackage::COLLECTIONITEM_ATTRIBUTE_ITEM:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<ocl::Expressions::OclExpression> _item = std::dynamic_pointer_cast<ocl::Expressions::OclExpression>(_temp);
+			setItem(_item); //1110
+			return true;
+		}
+	}
+
+	return CollectionLiteralPartImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any CollectionItemImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+
+		default:
+		{
+			// call superTypes
+			result = CollectionLiteralPartImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<CollectionItem> CollectionItemImpl::getThisCollectionItemPtr() const
+{
+	return m_thisCollectionItemPtr.lock();
+}
+void CollectionItemImpl::setThisCollectionItemPtr(std::weak_ptr<CollectionItem> thisCollectionItemPtr)
+{
+	m_thisCollectionItemPtr = thisCollectionItemPtr;
+	setThisCollectionLiteralPartPtr(thisCollectionItemPtr);
+}

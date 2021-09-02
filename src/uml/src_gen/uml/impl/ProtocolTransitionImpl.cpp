@@ -1,3 +1,4 @@
+
 #include "uml/impl/ProtocolTransitionImpl.hpp"
 
 #ifdef NDEBUG
@@ -26,7 +27,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -34,7 +34,6 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-
 
 #include "uml/Behavior.hpp"
 #include "uml/Classifier.hpp"
@@ -155,15 +154,6 @@ std::shared_ptr<ecore::EObject> ProtocolTransitionImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> ProtocolTransitionImpl::eStaticClass() const
-{
-	return uml::umlPackage::eInstance()->getProtocolTransition_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
@@ -192,11 +182,13 @@ bool ProtocolTransitionImpl::refers_to_operation(Any diagnostics,std::shared_ptr
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference postCondition
-*/
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference postCondition */
 std::shared_ptr<uml::Constraint> ProtocolTransitionImpl::getPostCondition() const
 {
     return m_postCondition;
@@ -207,10 +199,7 @@ void ProtocolTransitionImpl::setPostCondition(std::shared_ptr<uml::Constraint> _
 	
 }
 
-
-/*
-Getter & Setter for reference preCondition
-*/
+/* Getter & Setter for reference preCondition */
 std::shared_ptr<uml::Constraint> ProtocolTransitionImpl::getPreCondition() const
 {
     return m_preCondition;
@@ -221,10 +210,7 @@ void ProtocolTransitionImpl::setPreCondition(std::shared_ptr<uml::Constraint> _p
 	
 }
 
-
-/*
-Getter & Setter for reference referred
-*/
+/* Getter & Setter for reference referred */
 std::shared_ptr<Bag<uml::Operation>> ProtocolTransitionImpl::getReferred() const
 {
 	if(m_referred == nullptr)
@@ -235,8 +221,6 @@ std::shared_ptr<Bag<uml::Operation>> ProtocolTransitionImpl::getReferred() const
 	}
     return m_referred;
 }
-
-
 
 //*********************************
 // Union Getter
@@ -316,18 +300,9 @@ std::shared_ptr<Union<uml::RedefinableElement>> ProtocolTransitionImpl::getRedef
 	return m_redefinedElement;
 }
 
-
-
-
-std::shared_ptr<ProtocolTransition> ProtocolTransitionImpl::getThisProtocolTransitionPtr() const
-{
-	return m_thisProtocolTransitionPtr.lock();
-}
-void ProtocolTransitionImpl::setThisProtocolTransitionPtr(std::weak_ptr<ProtocolTransition> thisProtocolTransitionPtr)
-{
-	m_thisProtocolTransitionPtr = thisProtocolTransitionPtr;
-	setThisTransitionPtr(thisProtocolTransitionPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> ProtocolTransitionImpl::eContainer() const
 {
 	if(auto wp = m_container.lock())
@@ -345,157 +320,6 @@ std::shared_ptr<ecore::EObject> ProtocolTransitionImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any ProtocolTransitionImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::PROTOCOLTRANSITION_ATTRIBUTE_POSTCONDITION:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getPostCondition();
-				return eAny(returnValue); //18826
-			}
-		case uml::umlPackage::PROTOCOLTRANSITION_ATTRIBUTE_PRECONDITION:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getPreCondition();
-				return eAny(returnValue); //18827
-			}
-		case uml::umlPackage::PROTOCOLTRANSITION_ATTRIBUTE_REFERRED:
-		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Operation>::iterator iter = getReferred()->begin();
-			Bag<uml::Operation>::iterator end = getReferred()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //18828			
-		}
-	}
-	return TransitionImpl::eGet(featureID, resolve, coreType);
-}
-bool ProtocolTransitionImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::PROTOCOLTRANSITION_ATTRIBUTE_POSTCONDITION:
-			return getPostCondition() != nullptr; //18826
-		case uml::umlPackage::PROTOCOLTRANSITION_ATTRIBUTE_PRECONDITION:
-			return getPreCondition() != nullptr; //18827
-		case uml::umlPackage::PROTOCOLTRANSITION_ATTRIBUTE_REFERRED:
-			return getReferred() != nullptr; //18828
-	}
-	return TransitionImpl::internalEIsSet(featureID);
-}
-bool ProtocolTransitionImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::PROTOCOLTRANSITION_ATTRIBUTE_POSTCONDITION:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::Constraint> _postCondition = std::dynamic_pointer_cast<uml::Constraint>(_temp);
-			setPostCondition(_postCondition); //18826
-			return true;
-		}
-		case uml::umlPackage::PROTOCOLTRANSITION_ATTRIBUTE_PRECONDITION:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::Constraint> _preCondition = std::dynamic_pointer_cast<uml::Constraint>(_temp);
-			setPreCondition(_preCondition); //18827
-			return true;
-		}
-	}
-
-	return TransitionImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any ProtocolTransitionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-		
-		// 222746916
-		case umlPackage::PROTOCOLTRANSITION_OPERATION_ASSOCIATED_ACTIONS_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->associated_actions(incoming_param_diagnostics,incoming_param_context));
-			break;
-		}
-		
-		// 402420591
-		case umlPackage::PROTOCOLTRANSITION_OPERATION_BELONGS_TO_PSM_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->belongs_to_psm(incoming_param_diagnostics,incoming_param_context));
-			break;
-		}
-		
-		// 1380815811
-		case umlPackage::PROTOCOLTRANSITION_OPERATION_GETREFERREDS:
-		{
-			result = eAny(this->getReferreds());
-			break;
-		}
-		
-		// 1225665035
-		case umlPackage::PROTOCOLTRANSITION_OPERATION_REFERS_TO_OPERATION_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->refers_to_operation(incoming_param_diagnostics,incoming_param_context));
-			break;
-		}
-
-		default:
-		{
-			// call superTypes
-			result = TransitionImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -603,11 +427,6 @@ void ProtocolTransitionImpl::save(std::shared_ptr<persistence::interfaces::XSave
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
-	
 }
 
 void ProtocolTransitionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -625,3 +444,173 @@ void ProtocolTransitionImpl::saveContent(std::shared_ptr<persistence::interfaces
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> ProtocolTransitionImpl::eStaticClass() const
+{
+	return uml::umlPackage::eInstance()->getProtocolTransition_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any ProtocolTransitionImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::PROTOCOLTRANSITION_ATTRIBUTE_POSTCONDITION:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getPostCondition();
+				return eAny(returnValue); //18826
+			}
+		case uml::umlPackage::PROTOCOLTRANSITION_ATTRIBUTE_PRECONDITION:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getPreCondition();
+				return eAny(returnValue); //18827
+			}
+		case uml::umlPackage::PROTOCOLTRANSITION_ATTRIBUTE_REFERRED:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Operation>::iterator iter = getReferred()->begin();
+			Bag<uml::Operation>::iterator end = getReferred()->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //18828			
+		}
+	}
+	return TransitionImpl::eGet(featureID, resolve, coreType);
+}
+
+bool ProtocolTransitionImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::PROTOCOLTRANSITION_ATTRIBUTE_POSTCONDITION:
+			return getPostCondition() != nullptr; //18826
+		case uml::umlPackage::PROTOCOLTRANSITION_ATTRIBUTE_PRECONDITION:
+			return getPreCondition() != nullptr; //18827
+		case uml::umlPackage::PROTOCOLTRANSITION_ATTRIBUTE_REFERRED:
+			return getReferred() != nullptr; //18828
+	}
+	return TransitionImpl::internalEIsSet(featureID);
+}
+
+bool ProtocolTransitionImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::PROTOCOLTRANSITION_ATTRIBUTE_POSTCONDITION:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::Constraint> _postCondition = std::dynamic_pointer_cast<uml::Constraint>(_temp);
+			setPostCondition(_postCondition); //18826
+			return true;
+		}
+		case uml::umlPackage::PROTOCOLTRANSITION_ATTRIBUTE_PRECONDITION:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::Constraint> _preCondition = std::dynamic_pointer_cast<uml::Constraint>(_temp);
+			setPreCondition(_preCondition); //18827
+			return true;
+		}
+	}
+
+	return TransitionImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any ProtocolTransitionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 222746916
+		case umlPackage::PROTOCOLTRANSITION_OPERATION_ASSOCIATED_ACTIONS_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->associated_actions(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+		
+		// 402420591
+		case umlPackage::PROTOCOLTRANSITION_OPERATION_BELONGS_TO_PSM_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->belongs_to_psm(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+		
+		// 1380815811
+		case umlPackage::PROTOCOLTRANSITION_OPERATION_GETREFERREDS:
+		{
+			result = eAny(this->getReferreds());
+			break;
+		}
+		
+		// 1225665035
+		case umlPackage::PROTOCOLTRANSITION_OPERATION_REFERS_TO_OPERATION_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->refers_to_operation(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = TransitionImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<ProtocolTransition> ProtocolTransitionImpl::getThisProtocolTransitionPtr() const
+{
+	return m_thisProtocolTransitionPtr.lock();
+}
+void ProtocolTransitionImpl::setThisProtocolTransitionPtr(std::weak_ptr<ProtocolTransition> thisProtocolTransitionPtr)
+{
+	m_thisProtocolTransitionPtr = thisProtocolTransitionPtr;
+	setThisTransitionPtr(thisProtocolTransitionPtr);
+}

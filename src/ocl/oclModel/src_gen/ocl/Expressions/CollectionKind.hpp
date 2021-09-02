@@ -10,14 +10,19 @@
 namespace ocl::Expressions 
 {
 	enum CollectionKind {
+		
 		BAG = 3
 ,
+		
 		COLLECTION = 0
 ,
+		
 		ORDEREDSET = 2
 ,
+		
 		SEQUENCE = 4
 ,
+		
 		SET = 1
 	};
 }

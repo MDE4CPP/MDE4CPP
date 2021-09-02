@@ -1,3 +1,4 @@
+
 #include "uml/impl/ConditionalNodeImpl.hpp"
 
 #ifdef NDEBUG
@@ -26,7 +27,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -34,7 +34,6 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-
 
 #include "uml/Activity.hpp"
 #include "uml/ActivityEdge.hpp"
@@ -217,42 +216,6 @@ std::shared_ptr<ecore::EObject> ConditionalNodeImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> ConditionalNodeImpl::eStaticClass() const
-{
-	return uml::umlPackage::eInstance()->getConditionalNode_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-/*
-Getter & Setter for attribute isAssured
-*/
-bool ConditionalNodeImpl::getIsAssured() const 
-{
-	return m_isAssured;
-}
-void ConditionalNodeImpl::setIsAssured(bool _isAssured)
-{
-	m_isAssured = _isAssured;
-	
-} 
-
-
-/*
-Getter & Setter for attribute isDeterminate
-*/
-bool ConditionalNodeImpl::getIsDeterminate() const 
-{
-	return m_isDeterminate;
-}
-void ConditionalNodeImpl::setIsDeterminate(bool _isDeterminate)
-{
-	m_isDeterminate = _isDeterminate;
-	
-} 
-
-
 //*********************************
 // Operations
 //*********************************
@@ -293,11 +256,34 @@ bool ConditionalNodeImpl::result_no_incoming(Any diagnostics,std::shared_ptr<std
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference clause
-*/
+/* Getter & Setter for attribute isAssured */
+bool ConditionalNodeImpl::getIsAssured() const 
+{
+	return m_isAssured;
+}
+void ConditionalNodeImpl::setIsAssured(bool _isAssured)
+{
+	m_isAssured = _isAssured;
+	
+}
+
+/* Getter & Setter for attribute isDeterminate */
+bool ConditionalNodeImpl::getIsDeterminate() const 
+{
+	return m_isDeterminate;
+}
+void ConditionalNodeImpl::setIsDeterminate(bool _isDeterminate)
+{
+	m_isDeterminate = _isDeterminate;
+	
+}
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference clause */
 std::shared_ptr<Subset<uml::Clause, uml::Element>> ConditionalNodeImpl::getClause() const
 {
 	if(m_clause == nullptr)
@@ -318,18 +304,12 @@ std::shared_ptr<Subset<uml::Clause, uml::Element>> ConditionalNodeImpl::getClaus
     return m_clause;
 }
 
-
-
-/*
-Getter & Setter for reference result
-*/
+/* Getter & Setter for reference result */
 std::shared_ptr<Bag<uml::OutputPin>> ConditionalNodeImpl::getResult() const
 {
 	//Getter call of redefined container reference StructuredActivityNode::structuredNodeOutput 
 	return uml::StructuredActivityNodeImpl::getStructuredNodeOutput();
 }
-
-
 
 //*********************************
 // Union Getter
@@ -489,18 +469,9 @@ std::shared_ptr<Union<uml::RedefinableElement>> ConditionalNodeImpl::getRedefine
 	return m_redefinedElement;
 }
 
-
-
-
-std::shared_ptr<ConditionalNode> ConditionalNodeImpl::getThisConditionalNodePtr() const
-{
-	return m_thisConditionalNodePtr.lock();
-}
-void ConditionalNodeImpl::setThisConditionalNodePtr(std::weak_ptr<ConditionalNode> thisConditionalNodePtr)
-{
-	m_thisConditionalNodePtr = thisConditionalNodePtr;
-	setThisStructuredActivityNodePtr(thisConditionalNodePtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> ConditionalNodeImpl::eContainer() const
 {
 	if(auto wp = m_activity.lock())
@@ -533,279 +504,6 @@ std::shared_ptr<ecore::EObject> ConditionalNodeImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any ConditionalNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::CONDITIONALNODE_ATTRIBUTE_CLAUSE:
-		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Clause>::iterator iter = getClause()->begin();
-			Bag<uml::Clause>::iterator end = getClause()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //4944			
-		}
-		case uml::umlPackage::CONDITIONALNODE_ATTRIBUTE_ISASSURED:
-			return eAny(getIsAssured()); //4945
-		case uml::umlPackage::CONDITIONALNODE_ATTRIBUTE_ISDETERMINATE:
-			return eAny(getIsDeterminate()); //4946
-		case uml::umlPackage::CONDITIONALNODE_ATTRIBUTE_RESULT:
-		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::OutputPin>::iterator iter = getResult()->begin();
-			Bag<uml::OutputPin>::iterator end = getResult()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //4947			
-		}
-	}
-	return StructuredActivityNodeImpl::eGet(featureID, resolve, coreType);
-}
-bool ConditionalNodeImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::CONDITIONALNODE_ATTRIBUTE_CLAUSE:
-			return getClause() != nullptr; //4944
-		case uml::umlPackage::CONDITIONALNODE_ATTRIBUTE_ISASSURED:
-			return getIsAssured() != false; //4945
-		case uml::umlPackage::CONDITIONALNODE_ATTRIBUTE_ISDETERMINATE:
-			return getIsDeterminate() != false; //4946
-		case uml::umlPackage::CONDITIONALNODE_ATTRIBUTE_RESULT:
-			return getResult() != nullptr; //4947
-	}
-	return StructuredActivityNodeImpl::internalEIsSet(featureID);
-}
-bool ConditionalNodeImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::CONDITIONALNODE_ATTRIBUTE_CLAUSE:
-		{
-			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::Clause>> clauseList(new Bag<uml::Clause>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
-			{
-				clauseList->add(std::dynamic_pointer_cast<uml::Clause>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::Clause>::iterator iterClause = getClause()->begin();
-			Bag<uml::Clause>::iterator endClause = getClause()->end();
-			while (iterClause != endClause)
-			{
-				if (clauseList->find(*iterClause) == -1)
-				{
-					getClause()->erase(*iterClause);
-				}
-				iterClause++;
-			}
- 
-			iterClause = clauseList->begin();
-			endClause = clauseList->end();
-			while (iterClause != endClause)
-			{
-				if (getClause()->find(*iterClause) == -1)
-				{
-					getClause()->add(*iterClause);
-				}
-				iterClause++;			
-			}
-			return true;
-		}
-		case uml::umlPackage::CONDITIONALNODE_ATTRIBUTE_ISASSURED:
-		{
-			// BOOST CAST
-			bool _isAssured = newValue->get<bool>();
-			setIsAssured(_isAssured); //4945
-			return true;
-		}
-		case uml::umlPackage::CONDITIONALNODE_ATTRIBUTE_ISDETERMINATE:
-		{
-			// BOOST CAST
-			bool _isDeterminate = newValue->get<bool>();
-			setIsDeterminate(_isDeterminate); //4946
-			return true;
-		}
-		case uml::umlPackage::CONDITIONALNODE_ATTRIBUTE_RESULT:
-		{
-			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::OutputPin>> resultList(new Bag<uml::OutputPin>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
-			{
-				resultList->add(std::dynamic_pointer_cast<uml::OutputPin>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::OutputPin>::iterator iterResult = getResult()->begin();
-			Bag<uml::OutputPin>::iterator endResult = getResult()->end();
-			while (iterResult != endResult)
-			{
-				if (resultList->find(*iterResult) == -1)
-				{
-					getResult()->erase(*iterResult);
-				}
-				iterResult++;
-			}
- 
-			iterResult = resultList->begin();
-			endResult = resultList->end();
-			while (iterResult != endResult)
-			{
-				if (getResult()->find(*iterResult) == -1)
-				{
-					getResult()->add(*iterResult);
-				}
-				iterResult++;			
-			}
-			return true;
-		}
-	}
-
-	return StructuredActivityNodeImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any ConditionalNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-		
-		// 1185762341
-		case umlPackage::CONDITIONALNODE_OPERATION_CLAUSE_NO_PREDECESSOR_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->clause_no_predecessor(incoming_param_diagnostics,incoming_param_context));
-			break;
-		}
-		
-		// 1505479442
-		case umlPackage::CONDITIONALNODE_OPERATION_EXECUTABLE_NODES_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->executable_nodes(incoming_param_diagnostics,incoming_param_context));
-			break;
-		}
-		
-		// 1811715719
-		case umlPackage::CONDITIONALNODE_OPERATION_MATCHING_OUTPUT_PINS_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->matching_output_pins(incoming_param_diagnostics,incoming_param_context));
-			break;
-		}
-		
-		// 8643008
-		case umlPackage::CONDITIONALNODE_OPERATION_NO_INPUT_PINS_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->no_input_pins(incoming_param_diagnostics,incoming_param_context));
-			break;
-		}
-		
-		// 837476677
-		case umlPackage::CONDITIONALNODE_OPERATION_ONE_CLAUSE_WITH_EXECUTABLE_NODE_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->one_clause_with_executable_node(incoming_param_diagnostics,incoming_param_context));
-			break;
-		}
-		
-		// 1958196833
-		case umlPackage::CONDITIONALNODE_OPERATION_RESULT_NO_INCOMING_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->result_no_incoming(incoming_param_diagnostics,incoming_param_context));
-			break;
-		}
-
-		default:
-		{
-			// call superTypes
-			result = StructuredActivityNodeImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -932,14 +630,6 @@ void ConditionalNodeImpl::save(std::shared_ptr<persistence::interfaces::XSaveHan
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
-	
-	
-	
-	
 }
 
 void ConditionalNodeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -976,3 +666,295 @@ void ConditionalNodeImpl::saveContent(std::shared_ptr<persistence::interfaces::X
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> ConditionalNodeImpl::eStaticClass() const
+{
+	return uml::umlPackage::eInstance()->getConditionalNode_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any ConditionalNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::CONDITIONALNODE_ATTRIBUTE_CLAUSE:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Clause>::iterator iter = getClause()->begin();
+			Bag<uml::Clause>::iterator end = getClause()->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //4944			
+		}
+		case uml::umlPackage::CONDITIONALNODE_ATTRIBUTE_ISASSURED:
+			return eAny(getIsAssured()); //4945
+		case uml::umlPackage::CONDITIONALNODE_ATTRIBUTE_ISDETERMINATE:
+			return eAny(getIsDeterminate()); //4946
+		case uml::umlPackage::CONDITIONALNODE_ATTRIBUTE_RESULT:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::OutputPin>::iterator iter = getResult()->begin();
+			Bag<uml::OutputPin>::iterator end = getResult()->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //4947			
+		}
+	}
+	return StructuredActivityNodeImpl::eGet(featureID, resolve, coreType);
+}
+
+bool ConditionalNodeImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::CONDITIONALNODE_ATTRIBUTE_CLAUSE:
+			return getClause() != nullptr; //4944
+		case uml::umlPackage::CONDITIONALNODE_ATTRIBUTE_ISASSURED:
+			return getIsAssured() != false; //4945
+		case uml::umlPackage::CONDITIONALNODE_ATTRIBUTE_ISDETERMINATE:
+			return getIsDeterminate() != false; //4946
+		case uml::umlPackage::CONDITIONALNODE_ATTRIBUTE_RESULT:
+			return getResult() != nullptr; //4947
+	}
+	return StructuredActivityNodeImpl::internalEIsSet(featureID);
+}
+
+bool ConditionalNodeImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::CONDITIONALNODE_ATTRIBUTE_CLAUSE:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::Clause>> clauseList(new Bag<uml::Clause>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				clauseList->add(std::dynamic_pointer_cast<uml::Clause>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::Clause>::iterator iterClause = getClause()->begin();
+			Bag<uml::Clause>::iterator endClause = getClause()->end();
+			while (iterClause != endClause)
+			{
+				if (clauseList->find(*iterClause) == -1)
+				{
+					getClause()->erase(*iterClause);
+				}
+				iterClause++;
+			}
+ 
+			iterClause = clauseList->begin();
+			endClause = clauseList->end();
+			while (iterClause != endClause)
+			{
+				if (getClause()->find(*iterClause) == -1)
+				{
+					getClause()->add(*iterClause);
+				}
+				iterClause++;			
+			}
+			return true;
+		}
+		case uml::umlPackage::CONDITIONALNODE_ATTRIBUTE_ISASSURED:
+		{
+			// BOOST CAST
+			bool _isAssured = newValue->get<bool>();
+			setIsAssured(_isAssured); //4945
+			return true;
+		}
+		case uml::umlPackage::CONDITIONALNODE_ATTRIBUTE_ISDETERMINATE:
+		{
+			// BOOST CAST
+			bool _isDeterminate = newValue->get<bool>();
+			setIsDeterminate(_isDeterminate); //4946
+			return true;
+		}
+		case uml::umlPackage::CONDITIONALNODE_ATTRIBUTE_RESULT:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::OutputPin>> resultList(new Bag<uml::OutputPin>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				resultList->add(std::dynamic_pointer_cast<uml::OutputPin>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::OutputPin>::iterator iterResult = getResult()->begin();
+			Bag<uml::OutputPin>::iterator endResult = getResult()->end();
+			while (iterResult != endResult)
+			{
+				if (resultList->find(*iterResult) == -1)
+				{
+					getResult()->erase(*iterResult);
+				}
+				iterResult++;
+			}
+ 
+			iterResult = resultList->begin();
+			endResult = resultList->end();
+			while (iterResult != endResult)
+			{
+				if (getResult()->find(*iterResult) == -1)
+				{
+					getResult()->add(*iterResult);
+				}
+				iterResult++;			
+			}
+			return true;
+		}
+	}
+
+	return StructuredActivityNodeImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any ConditionalNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 1185762341
+		case umlPackage::CONDITIONALNODE_OPERATION_CLAUSE_NO_PREDECESSOR_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->clause_no_predecessor(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+		
+		// 1505479442
+		case umlPackage::CONDITIONALNODE_OPERATION_EXECUTABLE_NODES_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->executable_nodes(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+		
+		// 1811715719
+		case umlPackage::CONDITIONALNODE_OPERATION_MATCHING_OUTPUT_PINS_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->matching_output_pins(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+		
+		// 8643008
+		case umlPackage::CONDITIONALNODE_OPERATION_NO_INPUT_PINS_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->no_input_pins(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+		
+		// 837476677
+		case umlPackage::CONDITIONALNODE_OPERATION_ONE_CLAUSE_WITH_EXECUTABLE_NODE_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->one_clause_with_executable_node(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+		
+		// 1958196833
+		case umlPackage::CONDITIONALNODE_OPERATION_RESULT_NO_INCOMING_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->result_no_incoming(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = StructuredActivityNodeImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<ConditionalNode> ConditionalNodeImpl::getThisConditionalNodePtr() const
+{
+	return m_thisConditionalNodePtr.lock();
+}
+void ConditionalNodeImpl::setThisConditionalNodePtr(std::weak_ptr<ConditionalNode> thisConditionalNodePtr)
+{
+	m_thisConditionalNodePtr = thisConditionalNodePtr;
+	setThisStructuredActivityNodePtr(thisConditionalNodePtr);
+}

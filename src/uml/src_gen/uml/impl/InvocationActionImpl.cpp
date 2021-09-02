@@ -1,3 +1,4 @@
+
 #include "uml/impl/InvocationActionImpl.hpp"
 
 #ifdef NDEBUG
@@ -25,7 +26,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -33,7 +33,6 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-
 
 #include "uml/Action.hpp"
 #include "uml/Activity.hpp"
@@ -189,25 +188,18 @@ std::shared_ptr<ecore::EObject> InvocationActionImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> InvocationActionImpl::eStaticClass() const
-{
-	return uml::umlPackage::eInstance()->getInvocationAction_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference argument
-*/
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference argument */
 std::shared_ptr<SubsetUnion<uml::InputPin, uml::InputPin>> InvocationActionImpl::getArgument() const
 {
 	if(m_argument == nullptr)
@@ -228,11 +220,7 @@ std::shared_ptr<SubsetUnion<uml::InputPin, uml::InputPin>> InvocationActionImpl:
     return m_argument;
 }
 
-
-
-/*
-Getter & Setter for reference onPort
-*/
+/* Getter & Setter for reference onPort */
 std::shared_ptr<uml::Port> InvocationActionImpl::getOnPort() const
 {
     return m_onPort;
@@ -242,7 +230,6 @@ void InvocationActionImpl::setOnPort(std::shared_ptr<uml::Port> _onPort)
     m_onPort = _onPort;
 	
 }
-
 
 //*********************************
 // Union Getter
@@ -317,18 +304,9 @@ std::shared_ptr<Union<uml::RedefinableElement>> InvocationActionImpl::getRedefin
 	return m_redefinedElement;
 }
 
-
-
-
-std::shared_ptr<InvocationAction> InvocationActionImpl::getThisInvocationActionPtr() const
-{
-	return m_thisInvocationActionPtr.lock();
-}
-void InvocationActionImpl::setThisInvocationActionPtr(std::weak_ptr<InvocationAction> thisInvocationActionPtr)
-{
-	m_thisInvocationActionPtr = thisInvocationActionPtr;
-	setThisActionPtr(thisInvocationActionPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> InvocationActionImpl::eContainer() const
 {
 	if(auto wp = m_activity.lock())
@@ -351,120 +329,6 @@ std::shared_ptr<ecore::EObject> InvocationActionImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any InvocationActionImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::INVOCATIONACTION_ATTRIBUTE_ARGUMENT:
-		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::InputPin>::iterator iter = getArgument()->begin();
-			Bag<uml::InputPin>::iterator end = getArgument()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //13027			
-		}
-		case uml::umlPackage::INVOCATIONACTION_ATTRIBUTE_ONPORT:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getOnPort();
-				return eAny(returnValue); //13028
-			}
-	}
-	return ActionImpl::eGet(featureID, resolve, coreType);
-}
-bool InvocationActionImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::INVOCATIONACTION_ATTRIBUTE_ARGUMENT:
-			return getArgument() != nullptr; //13027
-		case uml::umlPackage::INVOCATIONACTION_ATTRIBUTE_ONPORT:
-			return getOnPort() != nullptr; //13028
-	}
-	return ActionImpl::internalEIsSet(featureID);
-}
-bool InvocationActionImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::INVOCATIONACTION_ATTRIBUTE_ARGUMENT:
-		{
-			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::InputPin>> argumentList(new Bag<uml::InputPin>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
-			{
-				argumentList->add(std::dynamic_pointer_cast<uml::InputPin>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::InputPin>::iterator iterArgument = getArgument()->begin();
-			Bag<uml::InputPin>::iterator endArgument = getArgument()->end();
-			while (iterArgument != endArgument)
-			{
-				if (argumentList->find(*iterArgument) == -1)
-				{
-					getArgument()->erase(*iterArgument);
-				}
-				iterArgument++;
-			}
- 
-			iterArgument = argumentList->begin();
-			endArgument = argumentList->end();
-			while (iterArgument != endArgument)
-			{
-				if (getArgument()->find(*iterArgument) == -1)
-				{
-					getArgument()->add(*iterArgument);
-				}
-				iterArgument++;			
-			}
-			return true;
-		}
-		case uml::umlPackage::INVOCATIONACTION_ATTRIBUTE_ONPORT:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::Port> _onPort = std::dynamic_pointer_cast<uml::Port>(_temp);
-			setOnPort(_onPort); //13028
-			return true;
-		}
-	}
-
-	return ActionImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any InvocationActionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-
-		default:
-		{
-			// call superTypes
-			result = ActionImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -578,13 +442,6 @@ void InvocationActionImpl::save(std::shared_ptr<persistence::interfaces::XSaveHa
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
-	
-	
-	
 }
 
 void InvocationActionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -608,3 +465,136 @@ void InvocationActionImpl::saveContent(std::shared_ptr<persistence::interfaces::
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> InvocationActionImpl::eStaticClass() const
+{
+	return uml::umlPackage::eInstance()->getInvocationAction_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any InvocationActionImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::INVOCATIONACTION_ATTRIBUTE_ARGUMENT:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::InputPin>::iterator iter = getArgument()->begin();
+			Bag<uml::InputPin>::iterator end = getArgument()->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //13027			
+		}
+		case uml::umlPackage::INVOCATIONACTION_ATTRIBUTE_ONPORT:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getOnPort();
+				return eAny(returnValue); //13028
+			}
+	}
+	return ActionImpl::eGet(featureID, resolve, coreType);
+}
+
+bool InvocationActionImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::INVOCATIONACTION_ATTRIBUTE_ARGUMENT:
+			return getArgument() != nullptr; //13027
+		case uml::umlPackage::INVOCATIONACTION_ATTRIBUTE_ONPORT:
+			return getOnPort() != nullptr; //13028
+	}
+	return ActionImpl::internalEIsSet(featureID);
+}
+
+bool InvocationActionImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::INVOCATIONACTION_ATTRIBUTE_ARGUMENT:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::InputPin>> argumentList(new Bag<uml::InputPin>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				argumentList->add(std::dynamic_pointer_cast<uml::InputPin>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::InputPin>::iterator iterArgument = getArgument()->begin();
+			Bag<uml::InputPin>::iterator endArgument = getArgument()->end();
+			while (iterArgument != endArgument)
+			{
+				if (argumentList->find(*iterArgument) == -1)
+				{
+					getArgument()->erase(*iterArgument);
+				}
+				iterArgument++;
+			}
+ 
+			iterArgument = argumentList->begin();
+			endArgument = argumentList->end();
+			while (iterArgument != endArgument)
+			{
+				if (getArgument()->find(*iterArgument) == -1)
+				{
+					getArgument()->add(*iterArgument);
+				}
+				iterArgument++;			
+			}
+			return true;
+		}
+		case uml::umlPackage::INVOCATIONACTION_ATTRIBUTE_ONPORT:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::Port> _onPort = std::dynamic_pointer_cast<uml::Port>(_temp);
+			setOnPort(_onPort); //13028
+			return true;
+		}
+	}
+
+	return ActionImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any InvocationActionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+
+		default:
+		{
+			// call superTypes
+			result = ActionImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<InvocationAction> InvocationActionImpl::getThisInvocationActionPtr() const
+{
+	return m_thisInvocationActionPtr.lock();
+}
+void InvocationActionImpl::setThisInvocationActionPtr(std::weak_ptr<InvocationAction> thisInvocationActionPtr)
+{
+	m_thisInvocationActionPtr = thisInvocationActionPtr;
+	setThisActionPtr(thisInvocationActionPtr);
+}

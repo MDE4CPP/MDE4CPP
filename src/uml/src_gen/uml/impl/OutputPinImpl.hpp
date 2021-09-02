@@ -77,72 +77,59 @@ namespace uml
 			virtual bool incoming_edges_structured_only(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
-			// Attributes Getter Setter
+			// Attribute Getters & Setters
 			//*********************************
 			
-			
 			//*********************************
-			// Reference
+			// Reference Getters & Setters
 			//*********************************
-			
 			virtual std::weak_ptr<uml::Action> getAction() const ;
-			
-			
 			virtual std::weak_ptr<uml::CallAction> getCallAction() const ;
-			
 			virtual void setCallAction(std::weak_ptr<uml::CallAction>) ;
-			
 			virtual std::weak_ptr<uml::ClearStructuralFeatureAction> getClearStructuralFeatureAction() const ;
-			
 			virtual void setClearStructuralFeatureAction(std::weak_ptr<uml::ClearStructuralFeatureAction>) ;
-			
 			virtual std::weak_ptr<uml::CreateObjectAction> getCreateObjectAction() const ;
-			
 			virtual void setCreateObjectAction(std::weak_ptr<uml::CreateObjectAction>) ;
-			
 			virtual std::weak_ptr<uml::ReadSelfAction> getReadSelfAction() const ;
-			
 			virtual void setReadSelfAction(std::weak_ptr<uml::ReadSelfAction>) ;
-			
 			virtual std::weak_ptr<uml::ReadStructuralFeatureAction> getReadStructuralFeatureAction() const ;
-			
 			virtual void setReadStructuralFeatureAction(std::weak_ptr<uml::ReadStructuralFeatureAction>) ;
-			
 			virtual std::weak_ptr<uml::ValueSpecificationAction> getValueSpecificationAction() const ;
-			
 			virtual void setValueSpecificationAction(std::weak_ptr<uml::ValueSpecificationAction>) ;
-			
 			virtual std::weak_ptr<uml::WriteStructuralFeatureAction> getWriteStructuralFeatureAction() const ;
-			
 			virtual void setWriteStructuralFeatureAction(std::weak_ptr<uml::WriteStructuralFeatureAction>) ;
 			
-			
 			//*********************************
-			// Union Getter
+			// Union Reference Getters
 			//*********************************
 			/*!
 			ActivityGroups containing the ActivityNode.
 			<p>From package UML::Activities.</p>
 			*/
 			
-			virtual std::shared_ptr<Union<uml::ActivityGroup>> getInGroup() const ;/*!
+			virtual std::shared_ptr<Union<uml::ActivityGroup>> getInGroup() const ;
+			/*!
 			The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const ;/*!
+			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const ;
+			/*!
 			The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element> getOwner() const ;/*!
+			virtual std::weak_ptr<uml::Element> getOwner() const ;
+			/*!
 			The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p>
 			*/
 			
 			virtual std::shared_ptr<Union<uml::RedefinableElement>> getRedefinedElement() const ;
 			
-
+			//*********************************
+			// Container Getter
+			//*********************************
 			virtual std::shared_ptr<ecore::EObject> eContainer() const ; 
 			
 			//*********************************
@@ -151,20 +138,23 @@ namespace uml
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) ;
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
-			
 			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
-			
 
-			//*********************************
-			// Structural Feature Getter/Setter
-			//*********************************
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+
+			//*********************************
+			// EStructuralFeature Get/Set/IsSet
+			//*********************************
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool internalEIsSet(int featureID) const ;
 			virtual bool eSet(int featureID, Any newValue) ;
+			virtual bool internalEIsSet(int featureID) const ;
+
+			//*********************************
+			// EOperation Invoke
+			//*********************************
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:

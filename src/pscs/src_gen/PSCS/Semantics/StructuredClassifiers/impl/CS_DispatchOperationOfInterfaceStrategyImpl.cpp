@@ -1,3 +1,4 @@
+
 #include "PSCS/Semantics/StructuredClassifiers/impl/CS_DispatchOperationOfInterfaceStrategyImpl.hpp"
 
 #ifdef NDEBUG
@@ -37,7 +38,6 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-
 
 #include "uml/Operation.hpp"
 #include "fUML/Semantics/StructuredClassifiers/RedefinitionBasedDispatchStrategy.hpp"
@@ -112,15 +112,6 @@ std::shared_ptr<ecore::EObject> CS_DispatchOperationOfInterfaceStrategyImpl::cop
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> CS_DispatchOperationOfInterfaceStrategyImpl::eStaticClass() const
-{
-	return PSCS::Semantics::StructuredClassifiers::StructuredClassifiersPackage::eInstance()->getCS_DispatchOperationOfInterfaceStrategy_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
@@ -156,93 +147,23 @@ bool CS_DispatchOperationOfInterfaceStrategyImpl::operationsMatch(std::shared_pt
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
+//*********************************
+
+//*********************************
+// Reference Getters & Setters
 //*********************************
 
 //*********************************
 // Union Getter
 //*********************************
 
-
-
-std::shared_ptr<CS_DispatchOperationOfInterfaceStrategy> CS_DispatchOperationOfInterfaceStrategyImpl::getThisCS_DispatchOperationOfInterfaceStrategyPtr() const
-{
-	return m_thisCS_DispatchOperationOfInterfaceStrategyPtr.lock();
-}
-void CS_DispatchOperationOfInterfaceStrategyImpl::setThisCS_DispatchOperationOfInterfaceStrategyPtr(std::weak_ptr<CS_DispatchOperationOfInterfaceStrategy> thisCS_DispatchOperationOfInterfaceStrategyPtr)
-{
-	m_thisCS_DispatchOperationOfInterfaceStrategyPtr = thisCS_DispatchOperationOfInterfaceStrategyPtr;
-	setThisRedefinitionBasedDispatchStrategyPtr(thisCS_DispatchOperationOfInterfaceStrategyPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> CS_DispatchOperationOfInterfaceStrategyImpl::eContainer() const
 {
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any CS_DispatchOperationOfInterfaceStrategyImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-	}
-	return fUML::Semantics::StructuredClassifiers::RedefinitionBasedDispatchStrategyImpl::eGet(featureID, resolve, coreType);
-}
-bool CS_DispatchOperationOfInterfaceStrategyImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-	}
-	return fUML::Semantics::StructuredClassifiers::RedefinitionBasedDispatchStrategyImpl::internalEIsSet(featureID);
-}
-bool CS_DispatchOperationOfInterfaceStrategyImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-	}
-
-	return fUML::Semantics::StructuredClassifiers::RedefinitionBasedDispatchStrategyImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any CS_DispatchOperationOfInterfaceStrategyImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-		
-		// 153818444
-		case StructuredClassifiersPackage::CS_DISPATCHOPERATIONOFINTERFACESTRATEGY_OPERATION_OPERATIONSMATCH_OPERATION_OPERATION:
-		{
-			//Retrieve input parameter 'ownedOperation'
-			//parameter 0
-			std::shared_ptr<uml::Operation> incoming_param_ownedOperation;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_ownedOperation_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_ownedOperation = (*incoming_param_ownedOperation_arguments_citer)->get()->get<std::shared_ptr<uml::Operation> >();
-			//Retrieve input parameter 'baseOperation'
-			//parameter 1
-			std::shared_ptr<uml::Operation> incoming_param_baseOperation;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_baseOperation_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_baseOperation = (*incoming_param_baseOperation_arguments_citer)->get()->get<std::shared_ptr<uml::Operation> >();
-			result = eAny(this->operationsMatch(incoming_param_ownedOperation,incoming_param_baseOperation));
-			break;
-		}
-
-		default:
-		{
-			// call superTypes
-			result = fUML::Semantics::StructuredClassifiers::RedefinitionBasedDispatchStrategyImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -293,9 +214,6 @@ void CS_DispatchOperationOfInterfaceStrategyImpl::save(std::shared_ptr<persisten
 	fUML::Semantics::Loci::SemanticStrategyImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
 }
 
 void CS_DispatchOperationOfInterfaceStrategyImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -310,3 +228,88 @@ void CS_DispatchOperationOfInterfaceStrategyImpl::saveContent(std::shared_ptr<pe
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> CS_DispatchOperationOfInterfaceStrategyImpl::eStaticClass() const
+{
+	return PSCS::Semantics::StructuredClassifiers::StructuredClassifiersPackage::eInstance()->getCS_DispatchOperationOfInterfaceStrategy_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any CS_DispatchOperationOfInterfaceStrategyImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+	}
+	return fUML::Semantics::StructuredClassifiers::RedefinitionBasedDispatchStrategyImpl::eGet(featureID, resolve, coreType);
+}
+
+bool CS_DispatchOperationOfInterfaceStrategyImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+	}
+	return fUML::Semantics::StructuredClassifiers::RedefinitionBasedDispatchStrategyImpl::internalEIsSet(featureID);
+}
+
+bool CS_DispatchOperationOfInterfaceStrategyImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+	}
+
+	return fUML::Semantics::StructuredClassifiers::RedefinitionBasedDispatchStrategyImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any CS_DispatchOperationOfInterfaceStrategyImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 153818444
+		case StructuredClassifiersPackage::CS_DISPATCHOPERATIONOFINTERFACESTRATEGY_OPERATION_OPERATIONSMATCH_OPERATION_OPERATION:
+		{
+			//Retrieve input parameter 'ownedOperation'
+			//parameter 0
+			std::shared_ptr<uml::Operation> incoming_param_ownedOperation;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_ownedOperation_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_ownedOperation = (*incoming_param_ownedOperation_arguments_citer)->get()->get<std::shared_ptr<uml::Operation> >();
+			//Retrieve input parameter 'baseOperation'
+			//parameter 1
+			std::shared_ptr<uml::Operation> incoming_param_baseOperation;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_baseOperation_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_baseOperation = (*incoming_param_baseOperation_arguments_citer)->get()->get<std::shared_ptr<uml::Operation> >();
+			result = eAny(this->operationsMatch(incoming_param_ownedOperation,incoming_param_baseOperation));
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = fUML::Semantics::StructuredClassifiers::RedefinitionBasedDispatchStrategyImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<CS_DispatchOperationOfInterfaceStrategy> CS_DispatchOperationOfInterfaceStrategyImpl::getThisCS_DispatchOperationOfInterfaceStrategyPtr() const
+{
+	return m_thisCS_DispatchOperationOfInterfaceStrategyPtr.lock();
+}
+void CS_DispatchOperationOfInterfaceStrategyImpl::setThisCS_DispatchOperationOfInterfaceStrategyPtr(std::weak_ptr<CS_DispatchOperationOfInterfaceStrategy> thisCS_DispatchOperationOfInterfaceStrategyPtr)
+{
+	m_thisCS_DispatchOperationOfInterfaceStrategyPtr = thisCS_DispatchOperationOfInterfaceStrategyPtr;
+	setThisRedefinitionBasedDispatchStrategyPtr(thisCS_DispatchOperationOfInterfaceStrategyPtr);
+}

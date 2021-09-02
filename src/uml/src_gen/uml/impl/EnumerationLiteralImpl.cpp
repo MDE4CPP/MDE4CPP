@@ -1,3 +1,4 @@
+
 #include "uml/impl/EnumerationLiteralImpl.hpp"
 
 #ifdef NDEBUG
@@ -25,7 +26,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -33,7 +33,6 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-
 
 #include "uml/Classifier.hpp"
 #include "uml/Comment.hpp"
@@ -155,15 +154,6 @@ std::shared_ptr<ecore::EObject> EnumerationLiteralImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> EnumerationLiteralImpl::eStaticClass() const
-{
-	return uml::umlPackage::eInstance()->getEnumerationLiteral_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
@@ -176,11 +166,13 @@ std::shared_ptr<Bag<uml::Classifier> > EnumerationLiteralImpl::getClassifiers()
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference enumeration
-*/
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference enumeration */
 std::weak_ptr<uml::Enumeration> EnumerationLiteralImpl::getEnumeration() const
 {
     return m_enumeration;
@@ -190,7 +182,6 @@ void EnumerationLiteralImpl::setEnumeration(std::weak_ptr<uml::Enumeration> _enu
     m_enumeration = _enumeration;
 	
 }
-
 
 //*********************************
 // Union Getter
@@ -222,16 +213,9 @@ std::weak_ptr<uml::Element> EnumerationLiteralImpl::getOwner() const
 
 
 
-
-std::shared_ptr<EnumerationLiteral> EnumerationLiteralImpl::getThisEnumerationLiteralPtr() const
-{
-	return m_thisEnumerationLiteralPtr.lock();
-}
-void EnumerationLiteralImpl::setThisEnumerationLiteralPtr(std::weak_ptr<EnumerationLiteral> thisEnumerationLiteralPtr)
-{
-	m_thisEnumerationLiteralPtr = thisEnumerationLiteralPtr;
-	setThisInstanceSpecificationPtr(thisEnumerationLiteralPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> EnumerationLiteralImpl::eContainer() const
 {
 	if(auto wp = m_enumeration.lock())
@@ -259,84 +243,6 @@ std::shared_ptr<ecore::EObject> EnumerationLiteralImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any EnumerationLiteralImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::ENUMERATIONLITERAL_ATTRIBUTE_ENUMERATION:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getEnumeration().lock();
-				return eAny(returnValue); //8517
-			}
-	}
-	return InstanceSpecificationImpl::eGet(featureID, resolve, coreType);
-}
-bool EnumerationLiteralImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::ENUMERATIONLITERAL_ATTRIBUTE_ENUMERATION:
-			return getEnumeration().lock() != nullptr; //8517
-	}
-	return InstanceSpecificationImpl::internalEIsSet(featureID);
-}
-bool EnumerationLiteralImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::ENUMERATIONLITERAL_ATTRIBUTE_ENUMERATION:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::Enumeration> _enumeration = std::dynamic_pointer_cast<uml::Enumeration>(_temp);
-			setEnumeration(_enumeration); //8517
-			return true;
-		}
-	}
-
-	return InstanceSpecificationImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any EnumerationLiteralImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-		
-		// 118208468
-		case umlPackage::ENUMERATIONLITERAL_OPERATION_GETCLASSIFIER:
-		{
-			result = eAny(this->getClassifier());
-			break;
-		}
-		
-		// 1410424622
-		case umlPackage::ENUMERATIONLITERAL_OPERATION_GETCLASSIFIERS:
-		{
-			result = eAny(this->getClassifiers());
-			break;
-		}
-
-		default:
-		{
-			// call superTypes
-			result = InstanceSpecificationImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -408,11 +314,6 @@ void EnumerationLiteralImpl::save(std::shared_ptr<persistence::interfaces::XSave
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
-	
 }
 
 void EnumerationLiteralImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -427,3 +328,100 @@ void EnumerationLiteralImpl::saveContent(std::shared_ptr<persistence::interfaces
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> EnumerationLiteralImpl::eStaticClass() const
+{
+	return uml::umlPackage::eInstance()->getEnumerationLiteral_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any EnumerationLiteralImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::ENUMERATIONLITERAL_ATTRIBUTE_ENUMERATION:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getEnumeration().lock();
+				return eAny(returnValue); //8517
+			}
+	}
+	return InstanceSpecificationImpl::eGet(featureID, resolve, coreType);
+}
+
+bool EnumerationLiteralImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::ENUMERATIONLITERAL_ATTRIBUTE_ENUMERATION:
+			return getEnumeration().lock() != nullptr; //8517
+	}
+	return InstanceSpecificationImpl::internalEIsSet(featureID);
+}
+
+bool EnumerationLiteralImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::ENUMERATIONLITERAL_ATTRIBUTE_ENUMERATION:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::Enumeration> _enumeration = std::dynamic_pointer_cast<uml::Enumeration>(_temp);
+			setEnumeration(_enumeration); //8517
+			return true;
+		}
+	}
+
+	return InstanceSpecificationImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any EnumerationLiteralImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 118208468
+		case umlPackage::ENUMERATIONLITERAL_OPERATION_GETCLASSIFIER:
+		{
+			result = eAny(this->getClassifier());
+			break;
+		}
+		
+		// 1410424622
+		case umlPackage::ENUMERATIONLITERAL_OPERATION_GETCLASSIFIERS:
+		{
+			result = eAny(this->getClassifiers());
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = InstanceSpecificationImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<EnumerationLiteral> EnumerationLiteralImpl::getThisEnumerationLiteralPtr() const
+{
+	return m_thisEnumerationLiteralPtr.lock();
+}
+void EnumerationLiteralImpl::setThisEnumerationLiteralPtr(std::weak_ptr<EnumerationLiteral> thisEnumerationLiteralPtr)
+{
+	m_thisEnumerationLiteralPtr = thisEnumerationLiteralPtr;
+	setThisInstanceSpecificationPtr(thisEnumerationLiteralPtr);
+}

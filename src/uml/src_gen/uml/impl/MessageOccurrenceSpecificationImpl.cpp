@@ -1,3 +1,4 @@
+
 #include "uml/impl/MessageOccurrenceSpecificationImpl.hpp"
 
 #ifdef NDEBUG
@@ -25,7 +26,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -33,7 +33,6 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-
 
 #include "uml/Comment.hpp"
 #include "uml/Dependency.hpp"
@@ -145,21 +144,16 @@ std::shared_ptr<ecore::EObject> MessageOccurrenceSpecificationImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> MessageOccurrenceSpecificationImpl::eStaticClass() const
-{
-	return uml::umlPackage::eInstance()->getMessageOccurrenceSpecification_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
 
 //*********************************
-// References
+// Attribute Getters & Setters
+//*********************************
+
+//*********************************
+// Reference Getters & Setters
 //*********************************
 
 //*********************************
@@ -190,19 +184,9 @@ std::weak_ptr<uml::Element> MessageOccurrenceSpecificationImpl::getOwner() const
 	return m_owner;
 }
 
-
-
-
-std::shared_ptr<MessageOccurrenceSpecification> MessageOccurrenceSpecificationImpl::getThisMessageOccurrenceSpecificationPtr() const
-{
-	return m_thisMessageOccurrenceSpecificationPtr.lock();
-}
-void MessageOccurrenceSpecificationImpl::setThisMessageOccurrenceSpecificationPtr(std::weak_ptr<MessageOccurrenceSpecification> thisMessageOccurrenceSpecificationPtr)
-{
-	m_thisMessageOccurrenceSpecificationPtr = thisMessageOccurrenceSpecificationPtr;
-	setThisMessageEndPtr(thisMessageOccurrenceSpecificationPtr);
-	setThisOccurrenceSpecificationPtr(thisMessageOccurrenceSpecificationPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> MessageOccurrenceSpecificationImpl::eContainer() const
 {
 	if(auto wp = m_enclosingInteraction.lock())
@@ -225,79 +209,6 @@ std::shared_ptr<ecore::EObject> MessageOccurrenceSpecificationImpl::eContainer()
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any MessageOccurrenceSpecificationImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-	}
-	Any result;
-	result = MessageEndImpl::eGet(featureID, resolve, coreType);
-	if (result != nullptr && !result->isEmpty())
-	{
-		return result;
-	}
-	result = OccurrenceSpecificationImpl::eGet(featureID, resolve, coreType);
-	return result;
-}
-bool MessageOccurrenceSpecificationImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-	}
-	bool result = false;
-	result = MessageEndImpl::internalEIsSet(featureID);
-	if (result)
-	{
-		return result;
-	}
-	result = OccurrenceSpecificationImpl::internalEIsSet(featureID);
-	return result;
-}
-bool MessageOccurrenceSpecificationImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-	}
-
-	bool result = false;
-	result = MessageEndImpl::eSet(featureID, newValue);
-	if (result)
-	{
-		return result;
-	}
-	result = OccurrenceSpecificationImpl::eSet(featureID, newValue);
-	return result;
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any MessageOccurrenceSpecificationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-
-		default:
-		{
-			// call superTypes
-			result = MessageEndImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			result = OccurrenceSpecificationImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -356,11 +267,6 @@ void MessageOccurrenceSpecificationImpl::save(std::shared_ptr<persistence::inter
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
-	
 }
 
 void MessageOccurrenceSpecificationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -375,3 +281,96 @@ void MessageOccurrenceSpecificationImpl::saveContent(std::shared_ptr<persistence
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> MessageOccurrenceSpecificationImpl::eStaticClass() const
+{
+	return uml::umlPackage::eInstance()->getMessageOccurrenceSpecification_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any MessageOccurrenceSpecificationImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+	}
+	Any result;
+	result = MessageEndImpl::eGet(featureID, resolve, coreType);
+	if (result != nullptr && !result->isEmpty())
+	{
+		return result;
+	}
+	result = OccurrenceSpecificationImpl::eGet(featureID, resolve, coreType);
+	return result;
+}
+
+bool MessageOccurrenceSpecificationImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+	}
+	bool result = false;
+	result = MessageEndImpl::internalEIsSet(featureID);
+	if (result)
+	{
+		return result;
+	}
+	result = OccurrenceSpecificationImpl::internalEIsSet(featureID);
+	return result;
+}
+
+bool MessageOccurrenceSpecificationImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+	}
+
+	bool result = false;
+	result = MessageEndImpl::eSet(featureID, newValue);
+	if (result)
+	{
+		return result;
+	}
+	result = OccurrenceSpecificationImpl::eSet(featureID, newValue);
+	return result;
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any MessageOccurrenceSpecificationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+
+		default:
+		{
+			// call superTypes
+			result = MessageEndImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			result = OccurrenceSpecificationImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<MessageOccurrenceSpecification> MessageOccurrenceSpecificationImpl::getThisMessageOccurrenceSpecificationPtr() const
+{
+	return m_thisMessageOccurrenceSpecificationPtr.lock();
+}
+void MessageOccurrenceSpecificationImpl::setThisMessageOccurrenceSpecificationPtr(std::weak_ptr<MessageOccurrenceSpecification> thisMessageOccurrenceSpecificationPtr)
+{
+	m_thisMessageOccurrenceSpecificationPtr = thisMessageOccurrenceSpecificationPtr;
+	setThisMessageEndPtr(thisMessageOccurrenceSpecificationPtr);
+	setThisOccurrenceSpecificationPtr(thisMessageOccurrenceSpecificationPtr);
+}

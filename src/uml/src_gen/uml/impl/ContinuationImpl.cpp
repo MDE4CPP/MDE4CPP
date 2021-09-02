@@ -1,3 +1,4 @@
+
 #include "uml/impl/ContinuationImpl.hpp"
 
 #ifdef NDEBUG
@@ -26,7 +27,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -34,7 +34,6 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-
 
 #include "uml/Comment.hpp"
 #include "uml/Dependency.hpp"
@@ -144,28 +143,6 @@ std::shared_ptr<ecore::EObject> ContinuationImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> ContinuationImpl::eStaticClass() const
-{
-	return uml::umlPackage::eInstance()->getContinuation_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-/*
-Getter & Setter for attribute setting
-*/
-bool ContinuationImpl::getSetting() const 
-{
-	return m_setting;
-}
-void ContinuationImpl::setSetting(bool _setting)
-{
-	m_setting = _setting;
-	
-} 
-
-
 //*********************************
 // Operations
 //*********************************
@@ -188,7 +165,21 @@ bool ContinuationImpl::same_name(Any diagnostics,std::shared_ptr<std::map < Any,
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
+//*********************************
+/* Getter & Setter for attribute setting */
+bool ContinuationImpl::getSetting() const 
+{
+	return m_setting;
+}
+void ContinuationImpl::setSetting(bool _setting)
+{
+	m_setting = _setting;
+	
+}
+
+//*********************************
+// Reference Getters & Setters
 //*********************************
 
 //*********************************
@@ -219,18 +210,9 @@ std::weak_ptr<uml::Element> ContinuationImpl::getOwner() const
 	return m_owner;
 }
 
-
-
-
-std::shared_ptr<Continuation> ContinuationImpl::getThisContinuationPtr() const
-{
-	return m_thisContinuationPtr.lock();
-}
-void ContinuationImpl::setThisContinuationPtr(std::weak_ptr<Continuation> thisContinuationPtr)
-{
-	m_thisContinuationPtr = thisContinuationPtr;
-	setThisInteractionFragmentPtr(thisContinuationPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> ContinuationImpl::eContainer() const
 {
 	if(auto wp = m_enclosingInteraction.lock())
@@ -253,117 +235,6 @@ std::shared_ptr<ecore::EObject> ContinuationImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any ContinuationImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::CONTINUATION_ATTRIBUTE_SETTING:
-			return eAny(getSetting()); //5813
-	}
-	return InteractionFragmentImpl::eGet(featureID, resolve, coreType);
-}
-bool ContinuationImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::CONTINUATION_ATTRIBUTE_SETTING:
-			return getSetting() != true; //5813
-	}
-	return InteractionFragmentImpl::internalEIsSet(featureID);
-}
-bool ContinuationImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::CONTINUATION_ATTRIBUTE_SETTING:
-		{
-			// BOOST CAST
-			bool _setting = newValue->get<bool>();
-			setSetting(_setting); //5813
-			return true;
-		}
-	}
-
-	return InteractionFragmentImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any ContinuationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-		
-		// 2040370552
-		case umlPackage::CONTINUATION_OPERATION_FIRST_OR_LAST_INTERACTION_FRAGMENT_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->first_or_last_interaction_fragment(incoming_param_diagnostics,incoming_param_context));
-			break;
-		}
-		
-		// 235492236
-		case umlPackage::CONTINUATION_OPERATION_GLOBAL_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->global(incoming_param_diagnostics,incoming_param_context));
-			break;
-		}
-		
-		// 945404935
-		case umlPackage::CONTINUATION_OPERATION_SAME_NAME_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->same_name(incoming_param_diagnostics,incoming_param_context));
-			break;
-		}
-
-		default:
-		{
-			// call superTypes
-			result = InteractionFragmentImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -437,10 +308,6 @@ void ContinuationImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandle
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
 }
 
 void ContinuationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -460,3 +327,133 @@ void ContinuationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> ContinuationImpl::eStaticClass() const
+{
+	return uml::umlPackage::eInstance()->getContinuation_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any ContinuationImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::CONTINUATION_ATTRIBUTE_SETTING:
+			return eAny(getSetting()); //5813
+	}
+	return InteractionFragmentImpl::eGet(featureID, resolve, coreType);
+}
+
+bool ContinuationImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::CONTINUATION_ATTRIBUTE_SETTING:
+			return getSetting() != true; //5813
+	}
+	return InteractionFragmentImpl::internalEIsSet(featureID);
+}
+
+bool ContinuationImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::CONTINUATION_ATTRIBUTE_SETTING:
+		{
+			// BOOST CAST
+			bool _setting = newValue->get<bool>();
+			setSetting(_setting); //5813
+			return true;
+		}
+	}
+
+	return InteractionFragmentImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any ContinuationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 2040370552
+		case umlPackage::CONTINUATION_OPERATION_FIRST_OR_LAST_INTERACTION_FRAGMENT_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->first_or_last_interaction_fragment(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+		
+		// 235492236
+		case umlPackage::CONTINUATION_OPERATION_GLOBAL_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->global(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+		
+		// 945404935
+		case umlPackage::CONTINUATION_OPERATION_SAME_NAME_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->same_name(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = InteractionFragmentImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<Continuation> ContinuationImpl::getThisContinuationPtr() const
+{
+	return m_thisContinuationPtr.lock();
+}
+void ContinuationImpl::setThisContinuationPtr(std::weak_ptr<Continuation> thisContinuationPtr)
+{
+	m_thisContinuationPtr = thisContinuationPtr;
+	setThisInteractionFragmentPtr(thisContinuationPtr);
+}

@@ -1,3 +1,4 @@
+
 #include "PSCS/Semantics/Actions/impl/CS_AcceptEventActionActivationImpl.hpp"
 
 #ifdef NDEBUG
@@ -38,7 +39,6 @@
 #include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
-
 
 #include "fUML/Semantics/Actions/AcceptEventActionActivation.hpp"
 #include "fUML/Semantics/Actions/AcceptEventActionEventAccepter.hpp"
@@ -130,15 +130,6 @@ std::shared_ptr<ecore::EObject> CS_AcceptEventActionActivationImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> CS_AcceptEventActionActivationImpl::eStaticClass() const
-{
-	return PSCS::Semantics::Actions::ActionsPackage::eInstance()->getCS_AcceptEventActionActivation_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
@@ -159,7 +150,11 @@ void CS_AcceptEventActionActivationImpl::accept(std::shared_ptr<fUML::Semantics:
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
+//*********************************
+
+//*********************************
+// Reference Getters & Setters
 //*********************************
 
 //*********************************
@@ -180,18 +175,9 @@ std::shared_ptr<Union<fUML::Semantics::Actions::PinActivation>> CS_AcceptEventAc
 	return m_pinActivation;
 }
 
-
-
-
-std::shared_ptr<CS_AcceptEventActionActivation> CS_AcceptEventActionActivationImpl::getThisCS_AcceptEventActionActivationPtr() const
-{
-	return m_thisCS_AcceptEventActionActivationPtr.lock();
-}
-void CS_AcceptEventActionActivationImpl::setThisCS_AcceptEventActionActivationPtr(std::weak_ptr<CS_AcceptEventActionActivation> thisCS_AcceptEventActionActivationPtr)
-{
-	m_thisCS_AcceptEventActionActivationPtr = thisCS_AcceptEventActionActivationPtr;
-	setThisAcceptEventActionActivationPtr(thisCS_AcceptEventActionActivationPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> CS_AcceptEventActionActivationImpl::eContainer() const
 {
 	if(auto wp = m_group.lock())
@@ -199,67 +185,6 @@ std::shared_ptr<ecore::EObject> CS_AcceptEventActionActivationImpl::eContainer()
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any CS_AcceptEventActionActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-	}
-	return fUML::Semantics::Actions::AcceptEventActionActivationImpl::eGet(featureID, resolve, coreType);
-}
-bool CS_AcceptEventActionActivationImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-	}
-	return fUML::Semantics::Actions::AcceptEventActionActivationImpl::internalEIsSet(featureID);
-}
-bool CS_AcceptEventActionActivationImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-	}
-
-	return fUML::Semantics::Actions::AcceptEventActionActivationImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any CS_AcceptEventActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-		
-		// 2123318986
-		case ActionsPackage::CS_ACCEPTEVENTACTIONACTIVATION_OPERATION_ACCEPT_EVENTOCCURRENCE:
-		{
-			//Retrieve input parameter 'eventOccurrence'
-			//parameter 0
-			std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> incoming_param_eventOccurrence;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_eventOccurrence_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_eventOccurrence = (*incoming_param_eventOccurrence_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> >();
-			this->accept(incoming_param_eventOccurrence);
-			break;
-		}
-
-		default:
-		{
-			// call superTypes
-			result = fUML::Semantics::Actions::AcceptEventActionActivationImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -312,10 +237,6 @@ void CS_AcceptEventActionActivationImpl::save(std::shared_ptr<persistence::inter
 	fUML::Semantics::Loci::SemanticVisitorImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
 }
 
 void CS_AcceptEventActionActivationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -330,3 +251,83 @@ void CS_AcceptEventActionActivationImpl::saveContent(std::shared_ptr<persistence
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> CS_AcceptEventActionActivationImpl::eStaticClass() const
+{
+	return PSCS::Semantics::Actions::ActionsPackage::eInstance()->getCS_AcceptEventActionActivation_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any CS_AcceptEventActionActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+	}
+	return fUML::Semantics::Actions::AcceptEventActionActivationImpl::eGet(featureID, resolve, coreType);
+}
+
+bool CS_AcceptEventActionActivationImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+	}
+	return fUML::Semantics::Actions::AcceptEventActionActivationImpl::internalEIsSet(featureID);
+}
+
+bool CS_AcceptEventActionActivationImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+	}
+
+	return fUML::Semantics::Actions::AcceptEventActionActivationImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any CS_AcceptEventActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 2123318986
+		case ActionsPackage::CS_ACCEPTEVENTACTIONACTIVATION_OPERATION_ACCEPT_EVENTOCCURRENCE:
+		{
+			//Retrieve input parameter 'eventOccurrence'
+			//parameter 0
+			std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> incoming_param_eventOccurrence;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_eventOccurrence_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_eventOccurrence = (*incoming_param_eventOccurrence_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> >();
+			this->accept(incoming_param_eventOccurrence);
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = fUML::Semantics::Actions::AcceptEventActionActivationImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<CS_AcceptEventActionActivation> CS_AcceptEventActionActivationImpl::getThisCS_AcceptEventActionActivationPtr() const
+{
+	return m_thisCS_AcceptEventActionActivationPtr.lock();
+}
+void CS_AcceptEventActionActivationImpl::setThisCS_AcceptEventActionActivationPtr(std::weak_ptr<CS_AcceptEventActionActivation> thisCS_AcceptEventActionActivationPtr)
+{
+	m_thisCS_AcceptEventActionActivationPtr = thisCS_AcceptEventActionActivationPtr;
+	setThisAcceptEventActionActivationPtr(thisCS_AcceptEventActionActivationPtr);
+}

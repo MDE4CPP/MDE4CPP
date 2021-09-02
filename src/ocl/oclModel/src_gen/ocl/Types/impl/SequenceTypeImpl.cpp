@@ -1,3 +1,4 @@
+
 #include "ocl/Types/impl/SequenceTypeImpl.hpp"
 
 #ifdef NDEBUG
@@ -25,7 +26,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -34,7 +34,6 @@
 #include <exception> // used in Persistence
 #include "ecore/ecoreFactory.hpp"
 #include "ocl/Values/ValuesFactory.hpp"
-
 
 #include "ocl/Types/CollectionType.hpp"
 #include "ocl/Values/CollectionValue.hpp"
@@ -118,38 +117,25 @@ std::shared_ptr<ecore::EObject> SequenceTypeImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> SequenceTypeImpl::eStaticClass() const
-{
-	return ocl::Types::TypesPackage::eInstance()->getSequenceType_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
 
 //*********************************
-// References
+// Attribute Getters & Setters
+//*********************************
+
+//*********************************
+// Reference Getters & Setters
 //*********************************
 
 //*********************************
 // Union Getter
 //*********************************
 
-
-
-std::shared_ptr<SequenceType> SequenceTypeImpl::getThisSequenceTypePtr() const
-{
-	return m_thisSequenceTypePtr.lock();
-}
-void SequenceTypeImpl::setThisSequenceTypePtr(std::weak_ptr<SequenceType> thisSequenceTypePtr)
-{
-	m_thisSequenceTypePtr = thisSequenceTypePtr;
-	setThisCollectionTypePtr(thisSequenceTypePtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> SequenceTypeImpl::eContainer() const
 {
 	if(auto wp = m_ePackage.lock())
@@ -157,55 +143,6 @@ std::shared_ptr<ecore::EObject> SequenceTypeImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any SequenceTypeImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-	}
-	return CollectionTypeImpl::eGet(featureID, resolve, coreType);
-}
-bool SequenceTypeImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-	}
-	return CollectionTypeImpl::internalEIsSet(featureID);
-}
-bool SequenceTypeImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-	}
-
-	return CollectionTypeImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any SequenceTypeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-
-		default:
-		{
-			// call superTypes
-			result = CollectionTypeImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -260,11 +197,6 @@ void SequenceTypeImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandle
 	ecore::EModelElementImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
-	
 }
 
 void SequenceTypeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -279,3 +211,71 @@ void SequenceTypeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> SequenceTypeImpl::eStaticClass() const
+{
+	return ocl::Types::TypesPackage::eInstance()->getSequenceType_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any SequenceTypeImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+	}
+	return CollectionTypeImpl::eGet(featureID, resolve, coreType);
+}
+
+bool SequenceTypeImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+	}
+	return CollectionTypeImpl::internalEIsSet(featureID);
+}
+
+bool SequenceTypeImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+	}
+
+	return CollectionTypeImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any SequenceTypeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+
+		default:
+		{
+			// call superTypes
+			result = CollectionTypeImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<SequenceType> SequenceTypeImpl::getThisSequenceTypePtr() const
+{
+	return m_thisSequenceTypePtr.lock();
+}
+void SequenceTypeImpl::setThisSequenceTypePtr(std::weak_ptr<SequenceType> thisSequenceTypePtr)
+{
+	m_thisSequenceTypePtr = thisSequenceTypePtr;
+	setThisCollectionTypePtr(thisSequenceTypePtr);
+}

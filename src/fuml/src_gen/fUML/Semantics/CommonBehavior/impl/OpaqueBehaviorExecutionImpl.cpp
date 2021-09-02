@@ -1,3 +1,4 @@
+
 #include "fUML/Semantics/CommonBehavior/impl/OpaqueBehaviorExecutionImpl.hpp"
 
 #ifdef NDEBUG
@@ -43,7 +44,6 @@
 #include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
-
 
 #include "uml/Behavior.hpp"
 #include "uml/Classifier.hpp"
@@ -126,15 +126,6 @@ std::shared_ptr<ecore::EObject> OpaqueBehaviorExecutionImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> OpaqueBehaviorExecutionImpl::eStaticClass() const
-{
-	return fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance()->getOpaqueBehaviorExecution_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
@@ -196,100 +187,23 @@ void OpaqueBehaviorExecutionImpl::execute()
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
+//*********************************
+
+//*********************************
+// Reference Getters & Setters
 //*********************************
 
 //*********************************
 // Union Getter
 //*********************************
 
-
-
-std::shared_ptr<OpaqueBehaviorExecution> OpaqueBehaviorExecutionImpl::getThisOpaqueBehaviorExecutionPtr() const
-{
-	return m_thisOpaqueBehaviorExecutionPtr.lock();
-}
-void OpaqueBehaviorExecutionImpl::setThisOpaqueBehaviorExecutionPtr(std::weak_ptr<OpaqueBehaviorExecution> thisOpaqueBehaviorExecutionPtr)
-{
-	m_thisOpaqueBehaviorExecutionPtr = thisOpaqueBehaviorExecutionPtr;
-	setThisExecutionPtr(thisOpaqueBehaviorExecutionPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> OpaqueBehaviorExecutionImpl::eContainer() const
 {
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any OpaqueBehaviorExecutionImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-	}
-	return ExecutionImpl::eGet(featureID, resolve, coreType);
-}
-bool OpaqueBehaviorExecutionImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-	}
-	return ExecutionImpl::internalEIsSet(featureID);
-}
-bool OpaqueBehaviorExecutionImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-	}
-
-	return ExecutionImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any OpaqueBehaviorExecutionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-		
-		// 90990798
-		case CommonBehaviorPackage::OPAQUEBEHAVIOREXECUTION_OPERATION_DOBODY_PARAMETERVALUE_PARAMETERVALUE:
-		{
-			//Retrieve input parameter 'inputParameters'
-			//parameter 0
-			std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> incoming_param_inputParameters;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_inputParameters_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_inputParameters = (*incoming_param_inputParameters_arguments_citer)->get()->get<std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> >();
-			//Retrieve input parameter 'outputParameters'
-			//parameter 1
-			std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> incoming_param_outputParameters;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_outputParameters_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_outputParameters = (*incoming_param_outputParameters_arguments_citer)->get()->get<std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> >();
-			this->doBody(incoming_param_inputParameters,incoming_param_outputParameters);
-			break;
-		}
-		
-		// 249216936
-		case CommonBehaviorPackage::OPAQUEBEHAVIOREXECUTION_OPERATION_EXECUTE:
-		{
-			this->execute();
-			break;
-		}
-
-		default:
-		{
-			// call superTypes
-			result = ExecutionImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -348,13 +262,6 @@ void OpaqueBehaviorExecutionImpl::save(std::shared_ptr<persistence::interfaces::
 	fUML::Semantics::Loci::SemanticVisitorImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
-	
-	
-	
 }
 
 void OpaqueBehaviorExecutionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -369,3 +276,95 @@ void OpaqueBehaviorExecutionImpl::saveContent(std::shared_ptr<persistence::inter
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> OpaqueBehaviorExecutionImpl::eStaticClass() const
+{
+	return fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance()->getOpaqueBehaviorExecution_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any OpaqueBehaviorExecutionImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+	}
+	return ExecutionImpl::eGet(featureID, resolve, coreType);
+}
+
+bool OpaqueBehaviorExecutionImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+	}
+	return ExecutionImpl::internalEIsSet(featureID);
+}
+
+bool OpaqueBehaviorExecutionImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+	}
+
+	return ExecutionImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any OpaqueBehaviorExecutionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 90990798
+		case CommonBehaviorPackage::OPAQUEBEHAVIOREXECUTION_OPERATION_DOBODY_PARAMETERVALUE_PARAMETERVALUE:
+		{
+			//Retrieve input parameter 'inputParameters'
+			//parameter 0
+			std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> incoming_param_inputParameters;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_inputParameters_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_inputParameters = (*incoming_param_inputParameters_arguments_citer)->get()->get<std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> >();
+			//Retrieve input parameter 'outputParameters'
+			//parameter 1
+			std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> incoming_param_outputParameters;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_outputParameters_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_outputParameters = (*incoming_param_outputParameters_arguments_citer)->get()->get<std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> >();
+			this->doBody(incoming_param_inputParameters,incoming_param_outputParameters);
+			break;
+		}
+		
+		// 249216936
+		case CommonBehaviorPackage::OPAQUEBEHAVIOREXECUTION_OPERATION_EXECUTE:
+		{
+			this->execute();
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = ExecutionImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<OpaqueBehaviorExecution> OpaqueBehaviorExecutionImpl::getThisOpaqueBehaviorExecutionPtr() const
+{
+	return m_thisOpaqueBehaviorExecutionPtr.lock();
+}
+void OpaqueBehaviorExecutionImpl::setThisOpaqueBehaviorExecutionPtr(std::weak_ptr<OpaqueBehaviorExecution> thisOpaqueBehaviorExecutionPtr)
+{
+	m_thisOpaqueBehaviorExecutionPtr = thisOpaqueBehaviorExecutionPtr;
+	setThisExecutionPtr(thisOpaqueBehaviorExecutionPtr);
+}

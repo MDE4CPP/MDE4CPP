@@ -1,3 +1,4 @@
+
 #include "fUML/Semantics/Activities/impl/ControlTokenImpl.hpp"
 
 #ifdef NDEBUG
@@ -33,7 +34,6 @@
 
 #include <exception> // used in Persistence
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
-
 
 #include "fUML/Semantics/Activities/ActivityNodeActivation.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
@@ -112,15 +112,6 @@ std::shared_ptr<ecore::EObject> ControlTokenImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> ControlTokenImpl::eStaticClass() const
-{
-	return fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getControlToken_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
@@ -151,24 +142,20 @@ bool ControlTokenImpl::isControl()
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
+//*********************************
+
+//*********************************
+// Reference Getters & Setters
 //*********************************
 
 //*********************************
 // Union Getter
 //*********************************
 
-
-
-std::shared_ptr<ControlToken> ControlTokenImpl::getThisControlTokenPtr() const
-{
-	return m_thisControlTokenPtr.lock();
-}
-void ControlTokenImpl::setThisControlTokenPtr(std::weak_ptr<ControlToken> thisControlTokenPtr)
-{
-	m_thisControlTokenPtr = thisControlTokenPtr;
-	setThisTokenPtr(thisControlTokenPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> ControlTokenImpl::eContainer() const
 {
 	if(auto wp = m_holder.lock())
@@ -179,7 +166,72 @@ std::shared_ptr<ecore::EObject> ControlTokenImpl::eContainer() const
 }
 
 //*********************************
-// Structural Feature Getter/Setter
+// Persistence Functions
+//*********************************
+void ControlTokenImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get fUMLFactory
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
+	}
+}		
+
+void ControlTokenImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+
+	TokenImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void ControlTokenImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+
+	//load BasePackage Nodes
+	TokenImpl::loadNode(nodeName, loadHandler);
+}
+
+void ControlTokenImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+{
+	TokenImpl::resolveReferences(featureID, references);
+}
+
+void ControlTokenImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	TokenImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+}
+
+void ControlTokenImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<fUML::Semantics::Activities::ActivitiesPackage> package = fUML::Semantics::Activities::ActivitiesPackage::eInstance();
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+}
+
+
+std::shared_ptr<ecore::EClass> ControlTokenImpl::eStaticClass() const
+{
+	return fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getControlToken_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
 //*********************************
 Any ControlTokenImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
@@ -188,6 +240,7 @@ Any ControlTokenImpl::eGet(int featureID, bool resolve, bool coreType) const
 	}
 	return TokenImpl::eGet(featureID, resolve, coreType);
 }
+
 bool ControlTokenImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
@@ -195,6 +248,7 @@ bool ControlTokenImpl::internalEIsSet(int featureID) const
 	}
 	return TokenImpl::internalEIsSet(featureID);
 }
+
 bool ControlTokenImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
@@ -205,7 +259,7 @@ bool ControlTokenImpl::eSet(int featureID, Any newValue)
 }
 
 //*********************************
-// Behavioral Feature
+// EOperation Invoke
 //*********************************
 Any ControlTokenImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
 {
@@ -253,62 +307,13 @@ Any ControlTokenImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::
 	return result;
 }
 
-//*********************************
-// Persistence Functions
-//*********************************
-void ControlTokenImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+
+std::shared_ptr<ControlToken> ControlTokenImpl::getThisControlTokenPtr() const
 {
-	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
-	loadAttributes(loadHandler, attr_list);
-
-	//
-	// Create new objects (from references (containment == true))
-	//
-	// get fUMLFactory
-	int numNodes = loadHandler->getNumOfChildNodes();
-	for(int ii = 0; ii < numNodes; ii++)
-	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler);
-	}
-}		
-
-void ControlTokenImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
-{
-
-	TokenImpl::loadAttributes(loadHandler, attr_list);
+	return m_thisControlTokenPtr.lock();
 }
-
-void ControlTokenImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+void ControlTokenImpl::setThisControlTokenPtr(std::weak_ptr<ControlToken> thisControlTokenPtr)
 {
-
-	//load BasePackage Nodes
-	TokenImpl::loadNode(nodeName, loadHandler);
+	m_thisControlTokenPtr = thisControlTokenPtr;
+	setThisTokenPtr(thisControlTokenPtr);
 }
-
-void ControlTokenImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
-{
-	TokenImpl::resolveReferences(featureID, references);
-}
-
-void ControlTokenImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
-{
-	saveContent(saveHandler);
-
-	TokenImpl::saveContent(saveHandler);
-	
-	ecore::EObjectImpl::saveContent(saveHandler);
-	
-}
-
-void ControlTokenImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
-{
-	try
-	{
-		std::shared_ptr<fUML::Semantics::Activities::ActivitiesPackage> package = fUML::Semantics::Activities::ActivitiesPackage::eInstance();
-	}
-	catch (std::exception& e)
-	{
-		std::cout << "| ERROR    | " << e.what() << std::endl;
-	}
-}
-

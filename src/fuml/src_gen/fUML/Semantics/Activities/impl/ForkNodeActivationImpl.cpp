@@ -1,3 +1,4 @@
+
 #include "fUML/Semantics/Activities/impl/ForkNodeActivationImpl.hpp"
 
 #ifdef NDEBUG
@@ -37,7 +38,6 @@
 #include <exception> // used in Persistence
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "uml/umlFactory.hpp"
-
 
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
 #include "uml/ActivityNode.hpp"
@@ -120,15 +120,6 @@ std::shared_ptr<ecore::EObject> ForkNodeActivationImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> ForkNodeActivationImpl::eStaticClass() const
-{
-	return fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getForkNodeActivation_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
@@ -189,24 +180,20 @@ void ForkNodeActivationImpl::terminate()
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
+//*********************************
+
+//*********************************
+// Reference Getters & Setters
 //*********************************
 
 //*********************************
 // Union Getter
 //*********************************
 
-
-
-std::shared_ptr<ForkNodeActivation> ForkNodeActivationImpl::getThisForkNodeActivationPtr() const
-{
-	return m_thisForkNodeActivationPtr.lock();
-}
-void ForkNodeActivationImpl::setThisForkNodeActivationPtr(std::weak_ptr<ForkNodeActivation> thisForkNodeActivationPtr)
-{
-	m_thisForkNodeActivationPtr = thisForkNodeActivationPtr;
-	setThisControlNodeActivationPtr(thisForkNodeActivationPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> ForkNodeActivationImpl::eContainer() const
 {
 	if(auto wp = m_group.lock())
@@ -214,74 +201,6 @@ std::shared_ptr<ecore::EObject> ForkNodeActivationImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any ForkNodeActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-	}
-	return ControlNodeActivationImpl::eGet(featureID, resolve, coreType);
-}
-bool ForkNodeActivationImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-	}
-	return ControlNodeActivationImpl::internalEIsSet(featureID);
-}
-bool ForkNodeActivationImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-	}
-
-	return ControlNodeActivationImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any ForkNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-		
-		// 1337885932
-		case ActivitiesPackage::FORKNODEACTIVATION_OPERATION_FIRE_TOKEN:
-		{
-			//Retrieve input parameter 'incomingTokens'
-			//parameter 0
-			std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> incoming_param_incomingTokens;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_incomingTokens_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_incomingTokens = (*incoming_param_incomingTokens_arguments_citer)->get()->get<std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> >();
-			this->fire(incoming_param_incomingTokens);
-			break;
-		}
-		
-		// 1661037681
-		case ActivitiesPackage::FORKNODEACTIVATION_OPERATION_TERMINATE:
-		{
-			this->terminate();
-			break;
-		}
-
-		default:
-		{
-			// call superTypes
-			result = ControlNodeActivationImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -332,9 +251,6 @@ void ForkNodeActivationImpl::save(std::shared_ptr<persistence::interfaces::XSave
 	fUML::Semantics::Loci::SemanticVisitorImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
 }
 
 void ForkNodeActivationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -349,3 +265,90 @@ void ForkNodeActivationImpl::saveContent(std::shared_ptr<persistence::interfaces
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> ForkNodeActivationImpl::eStaticClass() const
+{
+	return fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getForkNodeActivation_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any ForkNodeActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+	}
+	return ControlNodeActivationImpl::eGet(featureID, resolve, coreType);
+}
+
+bool ForkNodeActivationImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+	}
+	return ControlNodeActivationImpl::internalEIsSet(featureID);
+}
+
+bool ForkNodeActivationImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+	}
+
+	return ControlNodeActivationImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any ForkNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 1337885932
+		case ActivitiesPackage::FORKNODEACTIVATION_OPERATION_FIRE_TOKEN:
+		{
+			//Retrieve input parameter 'incomingTokens'
+			//parameter 0
+			std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> incoming_param_incomingTokens;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_incomingTokens_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_incomingTokens = (*incoming_param_incomingTokens_arguments_citer)->get()->get<std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> >();
+			this->fire(incoming_param_incomingTokens);
+			break;
+		}
+		
+		// 1661037681
+		case ActivitiesPackage::FORKNODEACTIVATION_OPERATION_TERMINATE:
+		{
+			this->terminate();
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = ControlNodeActivationImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<ForkNodeActivation> ForkNodeActivationImpl::getThisForkNodeActivationPtr() const
+{
+	return m_thisForkNodeActivationPtr.lock();
+}
+void ForkNodeActivationImpl::setThisForkNodeActivationPtr(std::weak_ptr<ForkNodeActivation> thisForkNodeActivationPtr)
+{
+	m_thisForkNodeActivationPtr = thisForkNodeActivationPtr;
+	setThisControlNodeActivationPtr(thisForkNodeActivationPtr);
+}

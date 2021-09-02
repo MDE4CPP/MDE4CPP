@@ -1,3 +1,4 @@
+
 #include "fUML/Semantics/Actions/impl/ClauseActivationImpl.hpp"
 
 #ifdef NDEBUG
@@ -24,7 +25,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -33,7 +33,6 @@
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Actions/ActionsFactory.hpp"
-
 
 #include "fUML/Semantics/SimpleClassifiers/BooleanValue.hpp"
 #include "uml/Clause.hpp"
@@ -112,15 +111,6 @@ std::shared_ptr<ecore::EObject> ClauseActivationImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> ClauseActivationImpl::eStaticClass() const
-{
-	return fUML::Semantics::Actions::ActionsPackage::eInstance()->getClauseActivation_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
@@ -167,11 +157,13 @@ void ClauseActivationImpl::selectBody()
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference clause
-*/
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference clause */
 std::shared_ptr<uml::Clause> ClauseActivationImpl::getClause() const
 {
     return m_clause;
@@ -182,10 +174,7 @@ void ClauseActivationImpl::setClause(std::shared_ptr<uml::Clause> _clause)
 	
 }
 
-
-/*
-Getter & Setter for reference conditionalNodeActivation
-*/
+/* Getter & Setter for reference conditionalNodeActivation */
 std::shared_ptr<fUML::Semantics::Actions::ConditionalNodeActivation> ClauseActivationImpl::getConditionalNodeActivation() const
 {
     return m_conditionalNodeActivation;
@@ -196,152 +185,16 @@ void ClauseActivationImpl::setConditionalNodeActivation(std::shared_ptr<fUML::Se
 	
 }
 
-
 //*********************************
 // Union Getter
 //*********************************
 
-
-
-std::shared_ptr<ClauseActivation> ClauseActivationImpl::getThisClauseActivationPtr() const
-{
-	return m_thisClauseActivationPtr.lock();
-}
-void ClauseActivationImpl::setThisClauseActivationPtr(std::weak_ptr<ClauseActivation> thisClauseActivationPtr)
-{
-	m_thisClauseActivationPtr = thisClauseActivationPtr;
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> ClauseActivationImpl::eContainer() const
 {
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any ClauseActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case fUML::Semantics::Actions::ActionsPackage::CLAUSEACTIVATION_ATTRIBUTE_CLAUSE:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getClause();
-				return eAny(returnValue); //260
-			}
-		case fUML::Semantics::Actions::ActionsPackage::CLAUSEACTIVATION_ATTRIBUTE_CONDITIONALNODEACTIVATION:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getConditionalNodeActivation();
-				return eAny(returnValue); //261
-			}
-	}
-	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
-}
-bool ClauseActivationImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case fUML::Semantics::Actions::ActionsPackage::CLAUSEACTIVATION_ATTRIBUTE_CLAUSE:
-			return getClause() != nullptr; //260
-		case fUML::Semantics::Actions::ActionsPackage::CLAUSEACTIVATION_ATTRIBUTE_CONDITIONALNODEACTIVATION:
-			return getConditionalNodeActivation() != nullptr; //261
-	}
-	return ecore::EObjectImpl::internalEIsSet(featureID);
-}
-bool ClauseActivationImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case fUML::Semantics::Actions::ActionsPackage::CLAUSEACTIVATION_ATTRIBUTE_CLAUSE:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::Clause> _clause = std::dynamic_pointer_cast<uml::Clause>(_temp);
-			setClause(_clause); //260
-			return true;
-		}
-		case fUML::Semantics::Actions::ActionsPackage::CLAUSEACTIVATION_ATTRIBUTE_CONDITIONALNODEACTIVATION:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<fUML::Semantics::Actions::ConditionalNodeActivation> _conditionalNodeActivation = std::dynamic_pointer_cast<fUML::Semantics::Actions::ConditionalNodeActivation>(_temp);
-			setConditionalNodeActivation(_conditionalNodeActivation); //261
-			return true;
-		}
-	}
-
-	return ecore::EObjectImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any ClauseActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-		
-		// 1084984079
-		case ActionsPackage::CLAUSEACTIVATION_OPERATION_GETDECISION:
-		{
-			result = eAny(this->getDecision());
-			break;
-		}
-		
-		// 712913762
-		case ActionsPackage::CLAUSEACTIVATION_OPERATION_GETPREDECESSORS:
-		{
-			result = eAny(this->getPredecessors());
-			break;
-		}
-		
-		// 970094705
-		case ActionsPackage::CLAUSEACTIVATION_OPERATION_GETSUCCESSORS:
-		{
-			result = eAny(this->getSuccessors());
-			break;
-		}
-		
-		// 1218269216
-		case ActionsPackage::CLAUSEACTIVATION_OPERATION_ISREADY:
-		{
-			result = eAny(this->isReady());
-			break;
-		}
-		
-		// 1814524618
-		case ActionsPackage::CLAUSEACTIVATION_OPERATION_RECIEVECONTROL:
-		{
-			this->recieveControl();
-			break;
-		}
-		
-		// 507684446
-		case ActionsPackage::CLAUSEACTIVATION_OPERATION_RUNTEST:
-		{
-			this->runTest();
-			break;
-		}
-		
-		// 693250888
-		case ActionsPackage::CLAUSEACTIVATION_OPERATION_SELECTBODY:
-		{
-			this->selectBody();
-			break;
-		}
-
-		default:
-		{
-			// call superTypes
-			result = ecore::EModelElementImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -436,9 +289,7 @@ void ClauseActivationImpl::save(std::shared_ptr<persistence::interfaces::XSaveHa
 {
 	saveContent(saveHandler);
 
-	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
 }
 
 void ClauseActivationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -456,3 +307,149 @@ void ClauseActivationImpl::saveContent(std::shared_ptr<persistence::interfaces::
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> ClauseActivationImpl::eStaticClass() const
+{
+	return fUML::Semantics::Actions::ActionsPackage::eInstance()->getClauseActivation_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any ClauseActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case fUML::Semantics::Actions::ActionsPackage::CLAUSEACTIVATION_ATTRIBUTE_CLAUSE:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getClause();
+				return eAny(returnValue); //260
+			}
+		case fUML::Semantics::Actions::ActionsPackage::CLAUSEACTIVATION_ATTRIBUTE_CONDITIONALNODEACTIVATION:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getConditionalNodeActivation();
+				return eAny(returnValue); //261
+			}
+	}
+	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
+}
+
+bool ClauseActivationImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case fUML::Semantics::Actions::ActionsPackage::CLAUSEACTIVATION_ATTRIBUTE_CLAUSE:
+			return getClause() != nullptr; //260
+		case fUML::Semantics::Actions::ActionsPackage::CLAUSEACTIVATION_ATTRIBUTE_CONDITIONALNODEACTIVATION:
+			return getConditionalNodeActivation() != nullptr; //261
+	}
+	return ecore::EObjectImpl::internalEIsSet(featureID);
+}
+
+bool ClauseActivationImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case fUML::Semantics::Actions::ActionsPackage::CLAUSEACTIVATION_ATTRIBUTE_CLAUSE:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::Clause> _clause = std::dynamic_pointer_cast<uml::Clause>(_temp);
+			setClause(_clause); //260
+			return true;
+		}
+		case fUML::Semantics::Actions::ActionsPackage::CLAUSEACTIVATION_ATTRIBUTE_CONDITIONALNODEACTIVATION:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<fUML::Semantics::Actions::ConditionalNodeActivation> _conditionalNodeActivation = std::dynamic_pointer_cast<fUML::Semantics::Actions::ConditionalNodeActivation>(_temp);
+			setConditionalNodeActivation(_conditionalNodeActivation); //261
+			return true;
+		}
+	}
+
+	return ecore::EObjectImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any ClauseActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 1084984079
+		case ActionsPackage::CLAUSEACTIVATION_OPERATION_GETDECISION:
+		{
+			result = eAny(this->getDecision());
+			break;
+		}
+		
+		// 712913762
+		case ActionsPackage::CLAUSEACTIVATION_OPERATION_GETPREDECESSORS:
+		{
+			result = eAny(this->getPredecessors());
+			break;
+		}
+		
+		// 970094705
+		case ActionsPackage::CLAUSEACTIVATION_OPERATION_GETSUCCESSORS:
+		{
+			result = eAny(this->getSuccessors());
+			break;
+		}
+		
+		// 1218269216
+		case ActionsPackage::CLAUSEACTIVATION_OPERATION_ISREADY:
+		{
+			result = eAny(this->isReady());
+			break;
+		}
+		
+		// 1814524618
+		case ActionsPackage::CLAUSEACTIVATION_OPERATION_RECIEVECONTROL:
+		{
+			this->recieveControl();
+			break;
+		}
+		
+		// 507684446
+		case ActionsPackage::CLAUSEACTIVATION_OPERATION_RUNTEST:
+		{
+			this->runTest();
+			break;
+		}
+		
+		// 693250888
+		case ActionsPackage::CLAUSEACTIVATION_OPERATION_SELECTBODY:
+		{
+			this->selectBody();
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = ecore::EModelElementImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<ClauseActivation> ClauseActivationImpl::getThisClauseActivationPtr() const
+{
+	return m_thisClauseActivationPtr.lock();
+}
+void ClauseActivationImpl::setThisClauseActivationPtr(std::weak_ptr<ClauseActivation> thisClauseActivationPtr)
+{
+	m_thisClauseActivationPtr = thisClauseActivationPtr;
+}

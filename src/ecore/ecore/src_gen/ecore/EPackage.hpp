@@ -47,7 +47,6 @@ namespace ecore
 // base class includes
 #include "ecore/ENamedElement.hpp"
 
-// enum includes
 
 
 
@@ -77,75 +76,56 @@ namespace ecore
 			//*********************************
 			// Operations
 			//*********************************
-			 
 			virtual std::shared_ptr<ecore::EClassifier> getEClassifier(std::string name) const = 0;
+
 			//*********************************
-			// Attributes Getter & Setter
+			// Attribute Getters & Setters
 			//*********************************
-			 
 			virtual std::string getNsPrefix() const = 0;
-			 
 			virtual void setNsPrefix (std::string _nsPrefix)= 0;
-			 
 			virtual std::string getNsURI() const = 0;
-			 
 			virtual void setNsURI (std::string _nsURI)= 0;
-			
+
 			//*********************************
-			// References Getter & Setter
+			// Reference Getters & Setters
 			//*********************************
-			
 			virtual std::shared_ptr<Subset<ecore::EClassifier, ecore::EObject>> getEClassifiers() const = 0;
-			
-			
 			virtual std::shared_ptr<ecore::EFactory> getEFactoryInstance() const = 0;
-			
 			virtual void setEFactoryInstance(std::shared_ptr<ecore::EFactory>) = 0;
-			
 			virtual std::shared_ptr<Bag<ecore::EPackage>> getESubpackages() const = 0;
-			
-			
 			virtual std::weak_ptr<ecore::EPackage> getESuperPackage() const = 0;
-			
-			
+
+			//*********************************
+			// Union Reference Getters
+			//*********************************
+			virtual std::shared_ptr<Union<ecore::EObject>> getEContens() const = 0;
+
+			//*********************************
+			// Container Getter
+			//*********************************
+			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
+
+			//*********************************
+			// Persistence Functions
+			//*********************************
+			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<EObject> > references) = 0;
+			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 
 		protected:
 			//*********************************
 			// Attribute Members
 			//*********************************
-			
-			std::string m_nsPrefix = "";
-			
-			std::string m_nsURI = "";
-			
+			std::string m_nsPrefix= "";
+			std::string m_nsURI= "";
 			
 			//*********************************
 			// Reference Members
 			//*********************************
-			
 			mutable std::shared_ptr<Subset<ecore::EClassifier, ecore::EObject>> m_eClassifiers;
 			std::shared_ptr<ecore::EFactory> m_eFactoryInstance;
 			mutable std::shared_ptr<Bag<ecore::EPackage>> m_eSubpackages;
 			std::weak_ptr<ecore::EPackage> m_eSuperPackage;
-
-		public:
-			//*********************************
-			// Union Getter
-			//*********************************
-			
-			virtual std::shared_ptr<Union<ecore::EObject>> getEContens() const = 0;
-
-			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
-			
-			//*********************************
-			// Persistence Functions
-			//*********************************
-			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
-			
-			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<EObject> > references) = 0;
-			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
-			
 	};
-
 }
 #endif /* end of include guard: ECORE_EPACKAGE_HPP */

@@ -1,3 +1,4 @@
+
 #include "uml/impl/CollaborationImpl.hpp"
 
 #ifdef NDEBUG
@@ -25,7 +26,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -33,7 +33,6 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-
 
 #include "uml/Behavior.hpp"
 #include "uml/BehavioredClassifier.hpp"
@@ -205,25 +204,18 @@ std::shared_ptr<ecore::EObject> CollaborationImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> CollaborationImpl::eStaticClass() const
-{
-	return uml::umlPackage::eInstance()->getCollaboration_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference collaborationRole
-*/
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference collaborationRole */
 std::shared_ptr<Subset<uml::ConnectableElement, uml::ConnectableElement>> CollaborationImpl::getCollaborationRole() const
 {
 	if(m_collaborationRole == nullptr)
@@ -243,8 +235,6 @@ std::shared_ptr<Subset<uml::ConnectableElement, uml::ConnectableElement>> Collab
 	}
     return m_collaborationRole;
 }
-
-
 
 //*********************************
 // Union Getter
@@ -386,17 +376,9 @@ std::shared_ptr<SubsetUnion<uml::ConnectableElement, uml::NamedElement>> Collabo
 
 
 
-
-std::shared_ptr<Collaboration> CollaborationImpl::getThisCollaborationPtr() const
-{
-	return m_thisCollaborationPtr.lock();
-}
-void CollaborationImpl::setThisCollaborationPtr(std::weak_ptr<Collaboration> thisCollaborationPtr)
-{
-	m_thisCollaborationPtr = thisCollaborationPtr;
-	setThisBehavioredClassifierPtr(thisCollaborationPtr);
-	setThisStructuredClassifierPtr(thisCollaborationPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> CollaborationImpl::eContainer() const
 {
 	if(auto wp = m_namespace.lock())
@@ -424,129 +406,6 @@ std::shared_ptr<ecore::EObject> CollaborationImpl::eContainer() const
 	}
 
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any CollaborationImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::COLLABORATION_ATTRIBUTE_COLLABORATIONROLE:
-		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::ConnectableElement>::iterator iter = getCollaborationRole()->begin();
-			Bag<uml::ConnectableElement>::iterator end = getCollaborationRole()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //4245			
-		}
-	}
-	Any result;
-	result = BehavioredClassifierImpl::eGet(featureID, resolve, coreType);
-	if (result != nullptr && !result->isEmpty())
-	{
-		return result;
-	}
-	result = StructuredClassifierImpl::eGet(featureID, resolve, coreType);
-	return result;
-}
-bool CollaborationImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::COLLABORATION_ATTRIBUTE_COLLABORATIONROLE:
-			return getCollaborationRole() != nullptr; //4245
-	}
-	bool result = false;
-	result = BehavioredClassifierImpl::internalEIsSet(featureID);
-	if (result)
-	{
-		return result;
-	}
-	result = StructuredClassifierImpl::internalEIsSet(featureID);
-	return result;
-}
-bool CollaborationImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::COLLABORATION_ATTRIBUTE_COLLABORATIONROLE:
-		{
-			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::ConnectableElement>> collaborationRoleList(new Bag<uml::ConnectableElement>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
-			{
-				collaborationRoleList->add(std::dynamic_pointer_cast<uml::ConnectableElement>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::ConnectableElement>::iterator iterCollaborationRole = getCollaborationRole()->begin();
-			Bag<uml::ConnectableElement>::iterator endCollaborationRole = getCollaborationRole()->end();
-			while (iterCollaborationRole != endCollaborationRole)
-			{
-				if (collaborationRoleList->find(*iterCollaborationRole) == -1)
-				{
-					getCollaborationRole()->erase(*iterCollaborationRole);
-				}
-				iterCollaborationRole++;
-			}
- 
-			iterCollaborationRole = collaborationRoleList->begin();
-			endCollaborationRole = collaborationRoleList->end();
-			while (iterCollaborationRole != endCollaborationRole)
-			{
-				if (getCollaborationRole()->find(*iterCollaborationRole) == -1)
-				{
-					getCollaborationRole()->add(*iterCollaborationRole);
-				}
-				iterCollaborationRole++;			
-			}
-			return true;
-		}
-	}
-
-	bool result = false;
-	result = BehavioredClassifierImpl::eSet(featureID, newValue);
-	if (result)
-	{
-		return result;
-	}
-	result = StructuredClassifierImpl::eSet(featureID, newValue);
-	return result;
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any CollaborationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-
-		default:
-		{
-			// call superTypes
-			result = BehavioredClassifierImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			result = StructuredClassifierImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -648,13 +507,6 @@ void CollaborationImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandl
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
-	
-	
-	
 }
 
 void CollaborationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -671,3 +523,146 @@ void CollaborationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSa
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> CollaborationImpl::eStaticClass() const
+{
+	return uml::umlPackage::eInstance()->getCollaboration_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any CollaborationImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::COLLABORATION_ATTRIBUTE_COLLABORATIONROLE:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::ConnectableElement>::iterator iter = getCollaborationRole()->begin();
+			Bag<uml::ConnectableElement>::iterator end = getCollaborationRole()->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //4245			
+		}
+	}
+	Any result;
+	result = BehavioredClassifierImpl::eGet(featureID, resolve, coreType);
+	if (result != nullptr && !result->isEmpty())
+	{
+		return result;
+	}
+	result = StructuredClassifierImpl::eGet(featureID, resolve, coreType);
+	return result;
+}
+
+bool CollaborationImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::COLLABORATION_ATTRIBUTE_COLLABORATIONROLE:
+			return getCollaborationRole() != nullptr; //4245
+	}
+	bool result = false;
+	result = BehavioredClassifierImpl::internalEIsSet(featureID);
+	if (result)
+	{
+		return result;
+	}
+	result = StructuredClassifierImpl::internalEIsSet(featureID);
+	return result;
+}
+
+bool CollaborationImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::COLLABORATION_ATTRIBUTE_COLLABORATIONROLE:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::ConnectableElement>> collaborationRoleList(new Bag<uml::ConnectableElement>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				collaborationRoleList->add(std::dynamic_pointer_cast<uml::ConnectableElement>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::ConnectableElement>::iterator iterCollaborationRole = getCollaborationRole()->begin();
+			Bag<uml::ConnectableElement>::iterator endCollaborationRole = getCollaborationRole()->end();
+			while (iterCollaborationRole != endCollaborationRole)
+			{
+				if (collaborationRoleList->find(*iterCollaborationRole) == -1)
+				{
+					getCollaborationRole()->erase(*iterCollaborationRole);
+				}
+				iterCollaborationRole++;
+			}
+ 
+			iterCollaborationRole = collaborationRoleList->begin();
+			endCollaborationRole = collaborationRoleList->end();
+			while (iterCollaborationRole != endCollaborationRole)
+			{
+				if (getCollaborationRole()->find(*iterCollaborationRole) == -1)
+				{
+					getCollaborationRole()->add(*iterCollaborationRole);
+				}
+				iterCollaborationRole++;			
+			}
+			return true;
+		}
+	}
+
+	bool result = false;
+	result = BehavioredClassifierImpl::eSet(featureID, newValue);
+	if (result)
+	{
+		return result;
+	}
+	result = StructuredClassifierImpl::eSet(featureID, newValue);
+	return result;
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any CollaborationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+
+		default:
+		{
+			// call superTypes
+			result = BehavioredClassifierImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			result = StructuredClassifierImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<Collaboration> CollaborationImpl::getThisCollaborationPtr() const
+{
+	return m_thisCollaborationPtr.lock();
+}
+void CollaborationImpl::setThisCollaborationPtr(std::weak_ptr<Collaboration> thisCollaborationPtr)
+{
+	m_thisCollaborationPtr = thisCollaborationPtr;
+	setThisBehavioredClassifierPtr(thisCollaborationPtr);
+	setThisStructuredClassifierPtr(thisCollaborationPtr);
+}

@@ -1,3 +1,4 @@
+
 #include "uml/impl/JoinNodeImpl.hpp"
 
 #ifdef NDEBUG
@@ -26,7 +27,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -34,7 +34,6 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-
 
 #include "uml/Activity.hpp"
 #include "uml/ActivityEdge.hpp"
@@ -156,28 +155,6 @@ std::shared_ptr<ecore::EObject> JoinNodeImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> JoinNodeImpl::eStaticClass() const
-{
-	return uml::umlPackage::eInstance()->getJoinNode_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-/*
-Getter & Setter for attribute isCombineDuplicate
-*/
-bool JoinNodeImpl::getIsCombineDuplicate() const 
-{
-	return m_isCombineDuplicate;
-}
-void JoinNodeImpl::setIsCombineDuplicate(bool _isCombineDuplicate)
-{
-	m_isCombineDuplicate = _isCombineDuplicate;
-	
-} 
-
-
 //*********************************
 // Operations
 //*********************************
@@ -194,11 +171,23 @@ bool JoinNodeImpl::one_outgoing_edge(Any diagnostics,std::shared_ptr<std::map < 
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference joinSpec
-*/
+/* Getter & Setter for attribute isCombineDuplicate */
+bool JoinNodeImpl::getIsCombineDuplicate() const 
+{
+	return m_isCombineDuplicate;
+}
+void JoinNodeImpl::setIsCombineDuplicate(bool _isCombineDuplicate)
+{
+	m_isCombineDuplicate = _isCombineDuplicate;
+	
+}
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference joinSpec */
 std::shared_ptr<uml::ValueSpecification> JoinNodeImpl::getJoinSpec() const
 {
     return m_joinSpec;
@@ -208,7 +197,6 @@ void JoinNodeImpl::setJoinSpec(std::shared_ptr<uml::ValueSpecification> _joinSpe
     m_joinSpec = _joinSpec;
 	
 }
-
 
 //*********************************
 // Union Getter
@@ -263,18 +251,9 @@ std::shared_ptr<Union<uml::RedefinableElement>> JoinNodeImpl::getRedefinedElemen
 	return m_redefinedElement;
 }
 
-
-
-
-std::shared_ptr<JoinNode> JoinNodeImpl::getThisJoinNodePtr() const
-{
-	return m_thisJoinNodePtr.lock();
-}
-void JoinNodeImpl::setThisJoinNodePtr(std::weak_ptr<JoinNode> thisJoinNodePtr)
-{
-	m_thisJoinNodePtr = thisJoinNodePtr;
-	setThisControlNodePtr(thisJoinNodePtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> JoinNodeImpl::eContainer() const
 {
 	if(auto wp = m_activity.lock())
@@ -297,115 +276,6 @@ std::shared_ptr<ecore::EObject> JoinNodeImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any JoinNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::JOINNODE_ATTRIBUTE_ISCOMBINEDUPLICATE:
-			return eAny(getIsCombineDuplicate()); //13120
-		case uml::umlPackage::JOINNODE_ATTRIBUTE_JOINSPEC:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getJoinSpec();
-				return eAny(returnValue); //13121
-			}
-	}
-	return ControlNodeImpl::eGet(featureID, resolve, coreType);
-}
-bool JoinNodeImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::JOINNODE_ATTRIBUTE_ISCOMBINEDUPLICATE:
-			return getIsCombineDuplicate() != true; //13120
-		case uml::umlPackage::JOINNODE_ATTRIBUTE_JOINSPEC:
-			return getJoinSpec() != nullptr; //13121
-	}
-	return ControlNodeImpl::internalEIsSet(featureID);
-}
-bool JoinNodeImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::JOINNODE_ATTRIBUTE_ISCOMBINEDUPLICATE:
-		{
-			// BOOST CAST
-			bool _isCombineDuplicate = newValue->get<bool>();
-			setIsCombineDuplicate(_isCombineDuplicate); //13120
-			return true;
-		}
-		case uml::umlPackage::JOINNODE_ATTRIBUTE_JOINSPEC:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::ValueSpecification> _joinSpec = std::dynamic_pointer_cast<uml::ValueSpecification>(_temp);
-			setJoinSpec(_joinSpec); //13121
-			return true;
-		}
-	}
-
-	return ControlNodeImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any JoinNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-		
-		// 1655982604
-		case umlPackage::JOINNODE_OPERATION_INCOMING_OBJECT_FLOW_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->incoming_object_flow(incoming_param_diagnostics,incoming_param_context));
-			break;
-		}
-		
-		// 1727251626
-		case umlPackage::JOINNODE_OPERATION_ONE_OUTGOING_EDGE_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->one_outgoing_edge(incoming_param_diagnostics,incoming_param_context));
-			break;
-		}
-
-		default:
-		{
-			// call superTypes
-			result = ControlNodeImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -506,12 +376,6 @@ void JoinNodeImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> s
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
-	
-	
 }
 
 void JoinNodeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -537,3 +401,131 @@ void JoinNodeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> JoinNodeImpl::eStaticClass() const
+{
+	return uml::umlPackage::eInstance()->getJoinNode_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any JoinNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::JOINNODE_ATTRIBUTE_ISCOMBINEDUPLICATE:
+			return eAny(getIsCombineDuplicate()); //13120
+		case uml::umlPackage::JOINNODE_ATTRIBUTE_JOINSPEC:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getJoinSpec();
+				return eAny(returnValue); //13121
+			}
+	}
+	return ControlNodeImpl::eGet(featureID, resolve, coreType);
+}
+
+bool JoinNodeImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::JOINNODE_ATTRIBUTE_ISCOMBINEDUPLICATE:
+			return getIsCombineDuplicate() != true; //13120
+		case uml::umlPackage::JOINNODE_ATTRIBUTE_JOINSPEC:
+			return getJoinSpec() != nullptr; //13121
+	}
+	return ControlNodeImpl::internalEIsSet(featureID);
+}
+
+bool JoinNodeImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::JOINNODE_ATTRIBUTE_ISCOMBINEDUPLICATE:
+		{
+			// BOOST CAST
+			bool _isCombineDuplicate = newValue->get<bool>();
+			setIsCombineDuplicate(_isCombineDuplicate); //13120
+			return true;
+		}
+		case uml::umlPackage::JOINNODE_ATTRIBUTE_JOINSPEC:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::ValueSpecification> _joinSpec = std::dynamic_pointer_cast<uml::ValueSpecification>(_temp);
+			setJoinSpec(_joinSpec); //13121
+			return true;
+		}
+	}
+
+	return ControlNodeImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any JoinNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 1655982604
+		case umlPackage::JOINNODE_OPERATION_INCOMING_OBJECT_FLOW_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->incoming_object_flow(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+		
+		// 1727251626
+		case umlPackage::JOINNODE_OPERATION_ONE_OUTGOING_EDGE_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->one_outgoing_edge(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = ControlNodeImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<JoinNode> JoinNodeImpl::getThisJoinNodePtr() const
+{
+	return m_thisJoinNodePtr.lock();
+}
+void JoinNodeImpl::setThisJoinNodePtr(std::weak_ptr<JoinNode> thisJoinNodePtr)
+{
+	m_thisJoinNodePtr = thisJoinNodePtr;
+	setThisControlNodePtr(thisJoinNodePtr);
+}

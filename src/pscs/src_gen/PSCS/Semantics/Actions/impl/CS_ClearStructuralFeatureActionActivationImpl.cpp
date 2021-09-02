@@ -1,3 +1,4 @@
+
 #include "PSCS/Semantics/Actions/impl/CS_ClearStructuralFeatureActionActivationImpl.hpp"
 
 #ifdef NDEBUG
@@ -50,7 +51,6 @@
 #include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
-
 
 #include "uml/Action.hpp"
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
@@ -146,15 +146,6 @@ std::shared_ptr<ecore::EObject> CS_ClearStructuralFeatureActionActivationImpl::c
 	element->setThisCS_ClearStructuralFeatureActionActivationPtr(element);
 	return element;
 }
-
-std::shared_ptr<ecore::EClass> CS_ClearStructuralFeatureActionActivationImpl::eStaticClass() const
-{
-	return PSCS::Semantics::Actions::ActionsPackage::eInstance()->getCS_ClearStructuralFeatureActionActivation_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
 
 //*********************************
 // Operations
@@ -338,7 +329,11 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value> > CS_ClearStructuralFeatureA
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
+//*********************************
+
+//*********************************
+// Reference Getters & Setters
 //*********************************
 
 //*********************************
@@ -359,18 +354,9 @@ std::shared_ptr<Union<fUML::Semantics::Actions::PinActivation>> CS_ClearStructur
 	return m_pinActivation;
 }
 
-
-
-
-std::shared_ptr<CS_ClearStructuralFeatureActionActivation> CS_ClearStructuralFeatureActionActivationImpl::getThisCS_ClearStructuralFeatureActionActivationPtr() const
-{
-	return m_thisCS_ClearStructuralFeatureActionActivationPtr.lock();
-}
-void CS_ClearStructuralFeatureActionActivationImpl::setThisCS_ClearStructuralFeatureActionActivationPtr(std::weak_ptr<CS_ClearStructuralFeatureActionActivation> thisCS_ClearStructuralFeatureActionActivationPtr)
-{
-	m_thisCS_ClearStructuralFeatureActionActivationPtr = thisCS_ClearStructuralFeatureActionActivationPtr;
-	setThisClearStructuralFeatureActionActivationPtr(thisCS_ClearStructuralFeatureActionActivationPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> CS_ClearStructuralFeatureActionActivationImpl::eContainer() const
 {
 	if(auto wp = m_group.lock())
@@ -381,7 +367,80 @@ std::shared_ptr<ecore::EObject> CS_ClearStructuralFeatureActionActivationImpl::e
 }
 
 //*********************************
-// Structural Feature Getter/Setter
+// Persistence Functions
+//*********************************
+void CS_ClearStructuralFeatureActionActivationImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get PSCSFactory
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
+	}
+}		
+
+void CS_ClearStructuralFeatureActionActivationImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+
+	fUML::Semantics::Actions::ClearStructuralFeatureActionActivationImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void CS_ClearStructuralFeatureActionActivationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+
+	//load BasePackage Nodes
+	fUML::Semantics::Actions::ClearStructuralFeatureActionActivationImpl::loadNode(nodeName, loadHandler);
+}
+
+void CS_ClearStructuralFeatureActionActivationImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+{
+	fUML::Semantics::Actions::ClearStructuralFeatureActionActivationImpl::resolveReferences(featureID, references);
+}
+
+void CS_ClearStructuralFeatureActionActivationImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	fUML::Semantics::Actions::ClearStructuralFeatureActionActivationImpl::saveContent(saveHandler);
+	
+	fUML::Semantics::Actions::StructuralFeatureActionActivationImpl::saveContent(saveHandler);
+	
+	fUML::Semantics::Actions::ActionActivationImpl::saveContent(saveHandler);
+	
+	fUML::Semantics::Activities::ActivityNodeActivationImpl::saveContent(saveHandler);
+	
+	fUML::Semantics::Loci::SemanticVisitorImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+}
+
+void CS_ClearStructuralFeatureActionActivationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<PSCS::Semantics::Actions::ActionsPackage> package = PSCS::Semantics::Actions::ActionsPackage::eInstance();
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+}
+
+
+std::shared_ptr<ecore::EClass> CS_ClearStructuralFeatureActionActivationImpl::eStaticClass() const
+{
+	return PSCS::Semantics::Actions::ActionsPackage::eInstance()->getCS_ClearStructuralFeatureActionActivation_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
 //*********************************
 Any CS_ClearStructuralFeatureActionActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
@@ -390,6 +449,7 @@ Any CS_ClearStructuralFeatureActionActivationImpl::eGet(int featureID, bool reso
 	}
 	return fUML::Semantics::Actions::ClearStructuralFeatureActionActivationImpl::eGet(featureID, resolve, coreType);
 }
+
 bool CS_ClearStructuralFeatureActionActivationImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
@@ -397,6 +457,7 @@ bool CS_ClearStructuralFeatureActionActivationImpl::internalEIsSet(int featureID
 	}
 	return fUML::Semantics::Actions::ClearStructuralFeatureActionActivationImpl::internalEIsSet(featureID);
 }
+
 bool CS_ClearStructuralFeatureActionActivationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
@@ -407,7 +468,7 @@ bool CS_ClearStructuralFeatureActionActivationImpl::eSet(int featureID, Any newV
 }
 
 //*********************************
-// Behavioral Feature
+// EOperation Invoke
 //*********************************
 Any CS_ClearStructuralFeatureActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
 {
@@ -470,74 +531,13 @@ Any CS_ClearStructuralFeatureActionActivationImpl::eInvoke(int operationID, std:
 	return result;
 }
 
-//*********************************
-// Persistence Functions
-//*********************************
-void CS_ClearStructuralFeatureActionActivationImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+
+std::shared_ptr<CS_ClearStructuralFeatureActionActivation> CS_ClearStructuralFeatureActionActivationImpl::getThisCS_ClearStructuralFeatureActionActivationPtr() const
 {
-	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
-	loadAttributes(loadHandler, attr_list);
-
-	//
-	// Create new objects (from references (containment == true))
-	//
-	// get PSCSFactory
-	int numNodes = loadHandler->getNumOfChildNodes();
-	for(int ii = 0; ii < numNodes; ii++)
-	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler);
-	}
-}		
-
-void CS_ClearStructuralFeatureActionActivationImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
-{
-
-	fUML::Semantics::Actions::ClearStructuralFeatureActionActivationImpl::loadAttributes(loadHandler, attr_list);
+	return m_thisCS_ClearStructuralFeatureActionActivationPtr.lock();
 }
-
-void CS_ClearStructuralFeatureActionActivationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+void CS_ClearStructuralFeatureActionActivationImpl::setThisCS_ClearStructuralFeatureActionActivationPtr(std::weak_ptr<CS_ClearStructuralFeatureActionActivation> thisCS_ClearStructuralFeatureActionActivationPtr)
 {
-
-	//load BasePackage Nodes
-	fUML::Semantics::Actions::ClearStructuralFeatureActionActivationImpl::loadNode(nodeName, loadHandler);
+	m_thisCS_ClearStructuralFeatureActionActivationPtr = thisCS_ClearStructuralFeatureActionActivationPtr;
+	setThisClearStructuralFeatureActionActivationPtr(thisCS_ClearStructuralFeatureActionActivationPtr);
 }
-
-void CS_ClearStructuralFeatureActionActivationImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
-{
-	fUML::Semantics::Actions::ClearStructuralFeatureActionActivationImpl::resolveReferences(featureID, references);
-}
-
-void CS_ClearStructuralFeatureActionActivationImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
-{
-	saveContent(saveHandler);
-
-	fUML::Semantics::Actions::ClearStructuralFeatureActionActivationImpl::saveContent(saveHandler);
-	
-	fUML::Semantics::Actions::StructuralFeatureActionActivationImpl::saveContent(saveHandler);
-	
-	fUML::Semantics::Actions::ActionActivationImpl::saveContent(saveHandler);
-	
-	fUML::Semantics::Activities::ActivityNodeActivationImpl::saveContent(saveHandler);
-	
-	fUML::Semantics::Loci::SemanticVisitorImpl::saveContent(saveHandler);
-	
-	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
-	
-}
-
-void CS_ClearStructuralFeatureActionActivationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
-{
-	try
-	{
-		std::shared_ptr<PSCS::Semantics::Actions::ActionsPackage> package = PSCS::Semantics::Actions::ActionsPackage::eInstance();
-	}
-	catch (std::exception& e)
-	{
-		std::cout << "| ERROR    | " << e.what() << std::endl;
-	}
-}
-

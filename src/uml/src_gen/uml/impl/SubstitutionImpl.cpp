@@ -1,3 +1,4 @@
+
 #include "uml/impl/SubstitutionImpl.hpp"
 
 #ifdef NDEBUG
@@ -25,7 +26,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -33,7 +33,6 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-
 
 #include "uml/Classifier.hpp"
 #include "uml/Comment.hpp"
@@ -157,25 +156,18 @@ std::shared_ptr<ecore::EObject> SubstitutionImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> SubstitutionImpl::eStaticClass() const
-{
-	return uml::umlPackage::eInstance()->getSubstitution_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference contract
-*/
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference contract */
 std::shared_ptr<uml::Classifier> SubstitutionImpl::getContract() const
 {
     return m_contract;
@@ -186,10 +178,7 @@ void SubstitutionImpl::setContract(std::shared_ptr<uml::Classifier> _contract)
 	
 }
 
-
-/*
-Getter & Setter for reference substitutingClassifier
-*/
+/* Getter & Setter for reference substitutingClassifier */
 std::weak_ptr<uml::Classifier> SubstitutionImpl::getSubstitutingClassifier() const
 {
     return m_substitutingClassifier;
@@ -200,10 +189,11 @@ void SubstitutionImpl::setSubstitutingClassifier(std::weak_ptr<uml::Classifier> 
 	
 }
 
-
 //*********************************
 // Union Getter
 //*********************************
+
+
 std::weak_ptr<uml::Namespace> SubstitutionImpl::getNamespace() const
 {
 	return m_namespace;
@@ -286,16 +276,9 @@ std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> SubstitutionImpl::getTa
 
 
 
-
-std::shared_ptr<Substitution> SubstitutionImpl::getThisSubstitutionPtr() const
-{
-	return m_thisSubstitutionPtr.lock();
-}
-void SubstitutionImpl::setThisSubstitutionPtr(std::weak_ptr<Substitution> thisSubstitutionPtr)
-{
-	m_thisSubstitutionPtr = thisSubstitutionPtr;
-	setThisRealizationPtr(thisSubstitutionPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> SubstitutionImpl::eContainer() const
 {
 	if(auto wp = m_namespace.lock())
@@ -323,85 +306,6 @@ std::shared_ptr<ecore::EObject> SubstitutionImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any SubstitutionImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::SUBSTITUTION_ATTRIBUTE_CONTRACT:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getContract();
-				return eAny(returnValue); //22918
-			}
-		case uml::umlPackage::SUBSTITUTION_ATTRIBUTE_SUBSTITUTINGCLASSIFIER:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getSubstitutingClassifier().lock();
-				return eAny(returnValue); //22919
-			}
-	}
-	return RealizationImpl::eGet(featureID, resolve, coreType);
-}
-bool SubstitutionImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::SUBSTITUTION_ATTRIBUTE_CONTRACT:
-			return getContract() != nullptr; //22918
-		case uml::umlPackage::SUBSTITUTION_ATTRIBUTE_SUBSTITUTINGCLASSIFIER:
-			return getSubstitutingClassifier().lock() != nullptr; //22919
-	}
-	return RealizationImpl::internalEIsSet(featureID);
-}
-bool SubstitutionImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::SUBSTITUTION_ATTRIBUTE_CONTRACT:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::Classifier> _contract = std::dynamic_pointer_cast<uml::Classifier>(_temp);
-			setContract(_contract); //22918
-			return true;
-		}
-		case uml::umlPackage::SUBSTITUTION_ATTRIBUTE_SUBSTITUTINGCLASSIFIER:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::Classifier> _substitutingClassifier = std::dynamic_pointer_cast<uml::Classifier>(_temp);
-			setSubstitutingClassifier(_substitutingClassifier); //22919
-			return true;
-		}
-	}
-
-	return RealizationImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any SubstitutionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-
-		default:
-		{
-			// call superTypes
-			result = RealizationImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -508,13 +412,6 @@ void SubstitutionImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandle
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
-	
-	
-	
 }
 
 void SubstitutionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -531,3 +428,101 @@ void SubstitutionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> SubstitutionImpl::eStaticClass() const
+{
+	return uml::umlPackage::eInstance()->getSubstitution_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any SubstitutionImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::SUBSTITUTION_ATTRIBUTE_CONTRACT:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getContract();
+				return eAny(returnValue); //22918
+			}
+		case uml::umlPackage::SUBSTITUTION_ATTRIBUTE_SUBSTITUTINGCLASSIFIER:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getSubstitutingClassifier().lock();
+				return eAny(returnValue); //22919
+			}
+	}
+	return RealizationImpl::eGet(featureID, resolve, coreType);
+}
+
+bool SubstitutionImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::SUBSTITUTION_ATTRIBUTE_CONTRACT:
+			return getContract() != nullptr; //22918
+		case uml::umlPackage::SUBSTITUTION_ATTRIBUTE_SUBSTITUTINGCLASSIFIER:
+			return getSubstitutingClassifier().lock() != nullptr; //22919
+	}
+	return RealizationImpl::internalEIsSet(featureID);
+}
+
+bool SubstitutionImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::SUBSTITUTION_ATTRIBUTE_CONTRACT:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::Classifier> _contract = std::dynamic_pointer_cast<uml::Classifier>(_temp);
+			setContract(_contract); //22918
+			return true;
+		}
+		case uml::umlPackage::SUBSTITUTION_ATTRIBUTE_SUBSTITUTINGCLASSIFIER:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::Classifier> _substitutingClassifier = std::dynamic_pointer_cast<uml::Classifier>(_temp);
+			setSubstitutingClassifier(_substitutingClassifier); //22919
+			return true;
+		}
+	}
+
+	return RealizationImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any SubstitutionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+
+		default:
+		{
+			// call superTypes
+			result = RealizationImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<Substitution> SubstitutionImpl::getThisSubstitutionPtr() const
+{
+	return m_thisSubstitutionPtr.lock();
+}
+void SubstitutionImpl::setThisSubstitutionPtr(std::weak_ptr<Substitution> thisSubstitutionPtr)
+{
+	m_thisSubstitutionPtr = thisSubstitutionPtr;
+	setThisRealizationPtr(thisSubstitutionPtr);
+}

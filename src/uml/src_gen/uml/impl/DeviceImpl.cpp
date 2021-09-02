@@ -1,3 +1,4 @@
+
 #include "uml/impl/DeviceImpl.hpp"
 
 #ifdef NDEBUG
@@ -25,7 +26,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -33,7 +33,6 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-
 
 #include "uml/Behavior.hpp"
 #include "uml/Class.hpp"
@@ -179,21 +178,16 @@ std::shared_ptr<ecore::EObject> DeviceImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> DeviceImpl::eStaticClass() const
-{
-	return uml::umlPackage::eInstance()->getDevice_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
 
 //*********************************
-// References
+// Attribute Getters & Setters
+//*********************************
+
+//*********************************
+// Reference Getters & Setters
 //*********************************
 
 //*********************************
@@ -336,16 +330,9 @@ std::shared_ptr<SubsetUnion<uml::ConnectableElement, uml::NamedElement>> DeviceI
 
 
 
-
-std::shared_ptr<Device> DeviceImpl::getThisDevicePtr() const
-{
-	return m_thisDevicePtr.lock();
-}
-void DeviceImpl::setThisDevicePtr(std::weak_ptr<Device> thisDevicePtr)
-{
-	m_thisDevicePtr = thisDevicePtr;
-	setThisNodePtr(thisDevicePtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> DeviceImpl::eContainer() const
 {
 	if(auto wp = m_namespace.lock())
@@ -373,55 +360,6 @@ std::shared_ptr<ecore::EObject> DeviceImpl::eContainer() const
 	}
 
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any DeviceImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-	}
-	return NodeImpl::eGet(featureID, resolve, coreType);
-}
-bool DeviceImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-	}
-	return NodeImpl::internalEIsSet(featureID);
-}
-bool DeviceImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-	}
-
-	return NodeImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any DeviceImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-
-		default:
-		{
-			// call superTypes
-			result = NodeImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -492,16 +430,6 @@ void DeviceImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> sav
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 }
 
 void DeviceImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -516,3 +444,71 @@ void DeviceImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandl
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> DeviceImpl::eStaticClass() const
+{
+	return uml::umlPackage::eInstance()->getDevice_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any DeviceImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+	}
+	return NodeImpl::eGet(featureID, resolve, coreType);
+}
+
+bool DeviceImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+	}
+	return NodeImpl::internalEIsSet(featureID);
+}
+
+bool DeviceImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+	}
+
+	return NodeImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any DeviceImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+
+		default:
+		{
+			// call superTypes
+			result = NodeImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<Device> DeviceImpl::getThisDevicePtr() const
+{
+	return m_thisDevicePtr.lock();
+}
+void DeviceImpl::setThisDevicePtr(std::weak_ptr<Device> thisDevicePtr)
+{
+	m_thisDevicePtr = thisDevicePtr;
+	setThisNodePtr(thisDevicePtr);
+}

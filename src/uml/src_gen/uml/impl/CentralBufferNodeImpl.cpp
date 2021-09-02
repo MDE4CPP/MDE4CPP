@@ -1,3 +1,4 @@
+
 #include "uml/impl/CentralBufferNodeImpl.hpp"
 
 #ifdef NDEBUG
@@ -25,7 +26,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -33,7 +33,6 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-
 
 #include "uml/Activity.hpp"
 #include "uml/ActivityEdge.hpp"
@@ -151,21 +150,16 @@ std::shared_ptr<ecore::EObject> CentralBufferNodeImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> CentralBufferNodeImpl::eStaticClass() const
-{
-	return uml::umlPackage::eInstance()->getCentralBufferNode_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
 
 //*********************************
-// References
+// Attribute Getters & Setters
+//*********************************
+
+//*********************************
+// Reference Getters & Setters
 //*********************************
 
 //*********************************
@@ -221,18 +215,9 @@ std::shared_ptr<Union<uml::RedefinableElement>> CentralBufferNodeImpl::getRedefi
 	return m_redefinedElement;
 }
 
-
-
-
-std::shared_ptr<CentralBufferNode> CentralBufferNodeImpl::getThisCentralBufferNodePtr() const
-{
-	return m_thisCentralBufferNodePtr.lock();
-}
-void CentralBufferNodeImpl::setThisCentralBufferNodePtr(std::weak_ptr<CentralBufferNode> thisCentralBufferNodePtr)
-{
-	m_thisCentralBufferNodePtr = thisCentralBufferNodePtr;
-	setThisObjectNodePtr(thisCentralBufferNodePtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> CentralBufferNodeImpl::eContainer() const
 {
 	if(auto wp = m_activity.lock())
@@ -255,55 +240,6 @@ std::shared_ptr<ecore::EObject> CentralBufferNodeImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any CentralBufferNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-	}
-	return ObjectNodeImpl::eGet(featureID, resolve, coreType);
-}
-bool CentralBufferNodeImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-	}
-	return ObjectNodeImpl::internalEIsSet(featureID);
-}
-bool CentralBufferNodeImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-	}
-
-	return ObjectNodeImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any CentralBufferNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-
-		default:
-		{
-			// call superTypes
-			result = ObjectNodeImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -361,12 +297,6 @@ void CentralBufferNodeImpl::save(std::shared_ptr<persistence::interfaces::XSaveH
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
-	
-	
 }
 
 void CentralBufferNodeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -381,3 +311,71 @@ void CentralBufferNodeImpl::saveContent(std::shared_ptr<persistence::interfaces:
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> CentralBufferNodeImpl::eStaticClass() const
+{
+	return uml::umlPackage::eInstance()->getCentralBufferNode_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any CentralBufferNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+	}
+	return ObjectNodeImpl::eGet(featureID, resolve, coreType);
+}
+
+bool CentralBufferNodeImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+	}
+	return ObjectNodeImpl::internalEIsSet(featureID);
+}
+
+bool CentralBufferNodeImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+	}
+
+	return ObjectNodeImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any CentralBufferNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+
+		default:
+		{
+			// call superTypes
+			result = ObjectNodeImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<CentralBufferNode> CentralBufferNodeImpl::getThisCentralBufferNodePtr() const
+{
+	return m_thisCentralBufferNodePtr.lock();
+}
+void CentralBufferNodeImpl::setThisCentralBufferNodePtr(std::weak_ptr<CentralBufferNode> thisCentralBufferNodePtr)
+{
+	m_thisCentralBufferNodePtr = thisCentralBufferNodePtr;
+	setThisObjectNodePtr(thisCentralBufferNodePtr);
+}

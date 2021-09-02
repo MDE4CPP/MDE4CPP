@@ -10,12 +10,16 @@
 namespace uml 
 {
 	enum ParameterEffectKind {
+		
 		CREATE = 0
 ,
+		
 		DELETE = 3
 ,
+		
 		READ = 1
 ,
+		
 		UPDATE = 2
 	};
 }

@@ -1,3 +1,4 @@
+
 #include "ocl/Evaluations/impl/PropertyCallExpEvalImpl.hpp"
 
 #ifdef NDEBUG
@@ -24,19 +25,17 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "fUML/Semantics/Values/ValuesFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
 #include "uml/umlFactory.hpp"
+#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
-
 
 #include "ocl/Evaluations/EvalEnvironment.hpp"
 #include "fUML/Semantics/Loci/Locus.hpp"
@@ -117,25 +116,18 @@ std::shared_ptr<ecore::EObject> PropertyCallExpEvalImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> PropertyCallExpEvalImpl::eStaticClass() const
-{
-	return ocl::Evaluations::EvaluationsPackage::eInstance()->getPropertyCallExpEval_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference source
-*/
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference source */
 std::shared_ptr<ocl::Evaluations::OclExpEval> PropertyCallExpEvalImpl::getSource() const
 {
     return m_source;
@@ -146,89 +138,16 @@ void PropertyCallExpEvalImpl::setSource(std::shared_ptr<ocl::Evaluations::OclExp
 	
 }
 
-
 //*********************************
 // Union Getter
 //*********************************
 
-
-
-std::shared_ptr<PropertyCallExpEval> PropertyCallExpEvalImpl::getThisPropertyCallExpEvalPtr() const
-{
-	return m_thisPropertyCallExpEvalPtr.lock();
-}
-void PropertyCallExpEvalImpl::setThisPropertyCallExpEvalPtr(std::weak_ptr<PropertyCallExpEval> thisPropertyCallExpEvalPtr)
-{
-	m_thisPropertyCallExpEvalPtr = thisPropertyCallExpEvalPtr;
-	setThisOclExpEvalPtr(thisPropertyCallExpEvalPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> PropertyCallExpEvalImpl::eContainer() const
 {
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any PropertyCallExpEvalImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case ocl::Evaluations::EvaluationsPackage::PROPERTYCALLEXPEVAL_ATTRIBUTE_SOURCE:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getSource();
-				return eAny(returnValue); //726
-			}
-	}
-	return OclExpEvalImpl::eGet(featureID, resolve, coreType);
-}
-bool PropertyCallExpEvalImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case ocl::Evaluations::EvaluationsPackage::PROPERTYCALLEXPEVAL_ATTRIBUTE_SOURCE:
-			return getSource() != nullptr; //726
-	}
-	return OclExpEvalImpl::internalEIsSet(featureID);
-}
-bool PropertyCallExpEvalImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case ocl::Evaluations::EvaluationsPackage::PROPERTYCALLEXPEVAL_ATTRIBUTE_SOURCE:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<ocl::Evaluations::OclExpEval> _source = std::dynamic_pointer_cast<ocl::Evaluations::OclExpEval>(_temp);
-			setSource(_source); //726
-			return true;
-		}
-	}
-
-	return OclExpEvalImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any PropertyCallExpEvalImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-
-		default:
-		{
-			// call superTypes
-			result = OclExpEvalImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -312,9 +231,6 @@ void PropertyCallExpEvalImpl::save(std::shared_ptr<persistence::interfaces::XSav
 	fUML::Semantics::Loci::SemanticVisitorImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
 }
 
 void PropertyCallExpEvalImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -331,3 +247,86 @@ void PropertyCallExpEvalImpl::saveContent(std::shared_ptr<persistence::interface
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> PropertyCallExpEvalImpl::eStaticClass() const
+{
+	return ocl::Evaluations::EvaluationsPackage::eInstance()->getPropertyCallExpEval_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any PropertyCallExpEvalImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case ocl::Evaluations::EvaluationsPackage::PROPERTYCALLEXPEVAL_ATTRIBUTE_SOURCE:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getSource();
+				return eAny(returnValue); //726
+			}
+	}
+	return OclExpEvalImpl::eGet(featureID, resolve, coreType);
+}
+
+bool PropertyCallExpEvalImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case ocl::Evaluations::EvaluationsPackage::PROPERTYCALLEXPEVAL_ATTRIBUTE_SOURCE:
+			return getSource() != nullptr; //726
+	}
+	return OclExpEvalImpl::internalEIsSet(featureID);
+}
+
+bool PropertyCallExpEvalImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case ocl::Evaluations::EvaluationsPackage::PROPERTYCALLEXPEVAL_ATTRIBUTE_SOURCE:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<ocl::Evaluations::OclExpEval> _source = std::dynamic_pointer_cast<ocl::Evaluations::OclExpEval>(_temp);
+			setSource(_source); //726
+			return true;
+		}
+	}
+
+	return OclExpEvalImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any PropertyCallExpEvalImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+
+		default:
+		{
+			// call superTypes
+			result = OclExpEvalImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<PropertyCallExpEval> PropertyCallExpEvalImpl::getThisPropertyCallExpEvalPtr() const
+{
+	return m_thisPropertyCallExpEvalPtr.lock();
+}
+void PropertyCallExpEvalImpl::setThisPropertyCallExpEvalPtr(std::weak_ptr<PropertyCallExpEval> thisPropertyCallExpEvalPtr)
+{
+	m_thisPropertyCallExpEvalPtr = thisPropertyCallExpEvalPtr;
+	setThisOclExpEvalPtr(thisPropertyCallExpEvalPtr);
+}

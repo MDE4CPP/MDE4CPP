@@ -1,3 +1,4 @@
+
 #include "uml/impl/ActivityFinalNodeImpl.hpp"
 
 #ifdef NDEBUG
@@ -25,7 +26,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -33,7 +33,6 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-
 
 #include "uml/Activity.hpp"
 #include "uml/ActivityEdge.hpp"
@@ -147,21 +146,16 @@ std::shared_ptr<ecore::EObject> ActivityFinalNodeImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> ActivityFinalNodeImpl::eStaticClass() const
-{
-	return uml::umlPackage::eInstance()->getActivityFinalNode_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
 
 //*********************************
-// References
+// Attribute Getters & Setters
+//*********************************
+
+//*********************************
+// Reference Getters & Setters
 //*********************************
 
 //*********************************
@@ -217,18 +211,9 @@ std::shared_ptr<Union<uml::RedefinableElement>> ActivityFinalNodeImpl::getRedefi
 	return m_redefinedElement;
 }
 
-
-
-
-std::shared_ptr<ActivityFinalNode> ActivityFinalNodeImpl::getThisActivityFinalNodePtr() const
-{
-	return m_thisActivityFinalNodePtr.lock();
-}
-void ActivityFinalNodeImpl::setThisActivityFinalNodePtr(std::weak_ptr<ActivityFinalNode> thisActivityFinalNodePtr)
-{
-	m_thisActivityFinalNodePtr = thisActivityFinalNodePtr;
-	setThisFinalNodePtr(thisActivityFinalNodePtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> ActivityFinalNodeImpl::eContainer() const
 {
 	if(auto wp = m_activity.lock())
@@ -251,55 +236,6 @@ std::shared_ptr<ecore::EObject> ActivityFinalNodeImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any ActivityFinalNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-	}
-	return FinalNodeImpl::eGet(featureID, resolve, coreType);
-}
-bool ActivityFinalNodeImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-	}
-	return FinalNodeImpl::internalEIsSet(featureID);
-}
-bool ActivityFinalNodeImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-	}
-
-	return FinalNodeImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any ActivityFinalNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-
-		default:
-		{
-			// call superTypes
-			result = FinalNodeImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -358,13 +294,6 @@ void ActivityFinalNodeImpl::save(std::shared_ptr<persistence::interfaces::XSaveH
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
-	
-	
-	
 }
 
 void ActivityFinalNodeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -379,3 +308,71 @@ void ActivityFinalNodeImpl::saveContent(std::shared_ptr<persistence::interfaces:
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> ActivityFinalNodeImpl::eStaticClass() const
+{
+	return uml::umlPackage::eInstance()->getActivityFinalNode_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any ActivityFinalNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+	}
+	return FinalNodeImpl::eGet(featureID, resolve, coreType);
+}
+
+bool ActivityFinalNodeImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+	}
+	return FinalNodeImpl::internalEIsSet(featureID);
+}
+
+bool ActivityFinalNodeImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+	}
+
+	return FinalNodeImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any ActivityFinalNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+
+		default:
+		{
+			// call superTypes
+			result = FinalNodeImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<ActivityFinalNode> ActivityFinalNodeImpl::getThisActivityFinalNodePtr() const
+{
+	return m_thisActivityFinalNodePtr.lock();
+}
+void ActivityFinalNodeImpl::setThisActivityFinalNodePtr(std::weak_ptr<ActivityFinalNode> thisActivityFinalNodePtr)
+{
+	m_thisActivityFinalNodePtr = thisActivityFinalNodePtr;
+	setThisFinalNodePtr(thisActivityFinalNodePtr);
+}

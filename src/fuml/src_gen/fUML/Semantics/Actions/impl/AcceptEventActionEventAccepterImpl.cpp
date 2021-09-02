@@ -1,3 +1,4 @@
+
 #include "fUML/Semantics/Actions/impl/AcceptEventActionEventAccepterImpl.hpp"
 
 #ifdef NDEBUG
@@ -24,7 +25,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -32,7 +32,6 @@
 
 #include <exception> // used in Persistence
 #include "fUML/Semantics/Actions/ActionsFactory.hpp"
-
 
 #include "fUML/Semantics/Actions/AcceptEventActionActivation.hpp"
 #include "fUML/Semantics/CommonBehavior/EventAccepter.hpp"
@@ -107,25 +106,18 @@ std::shared_ptr<ecore::EObject> AcceptEventActionEventAccepterImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> AcceptEventActionEventAccepterImpl::eStaticClass() const
-{
-	return fUML::Semantics::Actions::ActionsPackage::eInstance()->getAcceptEventActionEventAccepter_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference actionActivation
-*/
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference actionActivation */
 std::shared_ptr<fUML::Semantics::Actions::AcceptEventActionActivation> AcceptEventActionEventAccepterImpl::getActionActivation() const
 {
     return m_actionActivation;
@@ -136,89 +128,16 @@ void AcceptEventActionEventAccepterImpl::setActionActivation(std::shared_ptr<fUM
 	
 }
 
-
 //*********************************
 // Union Getter
 //*********************************
 
-
-
-std::shared_ptr<AcceptEventActionEventAccepter> AcceptEventActionEventAccepterImpl::getThisAcceptEventActionEventAccepterPtr() const
-{
-	return m_thisAcceptEventActionEventAccepterPtr.lock();
-}
-void AcceptEventActionEventAccepterImpl::setThisAcceptEventActionEventAccepterPtr(std::weak_ptr<AcceptEventActionEventAccepter> thisAcceptEventActionEventAccepterPtr)
-{
-	m_thisAcceptEventActionEventAccepterPtr = thisAcceptEventActionEventAccepterPtr;
-	setThisEventAccepterPtr(thisAcceptEventActionEventAccepterPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> AcceptEventActionEventAccepterImpl::eContainer() const
 {
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any AcceptEventActionEventAccepterImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case fUML::Semantics::Actions::ActionsPackage::ACCEPTEVENTACTIONEVENTACCEPTER_ATTRIBUTE_ACTIONACTIVATION:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getActionActivation();
-				return eAny(returnValue); //40
-			}
-	}
-	return fUML::Semantics::CommonBehavior::EventAccepterImpl::eGet(featureID, resolve, coreType);
-}
-bool AcceptEventActionEventAccepterImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case fUML::Semantics::Actions::ActionsPackage::ACCEPTEVENTACTIONEVENTACCEPTER_ATTRIBUTE_ACTIONACTIVATION:
-			return getActionActivation() != nullptr; //40
-	}
-	return fUML::Semantics::CommonBehavior::EventAccepterImpl::internalEIsSet(featureID);
-}
-bool AcceptEventActionEventAccepterImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case fUML::Semantics::Actions::ActionsPackage::ACCEPTEVENTACTIONEVENTACCEPTER_ATTRIBUTE_ACTIONACTIVATION:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<fUML::Semantics::Actions::AcceptEventActionActivation> _actionActivation = std::dynamic_pointer_cast<fUML::Semantics::Actions::AcceptEventActionActivation>(_temp);
-			setActionActivation(_actionActivation); //40
-			return true;
-		}
-	}
-
-	return fUML::Semantics::CommonBehavior::EventAccepterImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any AcceptEventActionEventAccepterImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-
-		default:
-		{
-			// call superTypes
-			result = fUML::Semantics::CommonBehavior::EventAccepterImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -298,7 +217,6 @@ void AcceptEventActionEventAccepterImpl::save(std::shared_ptr<persistence::inter
 	fUML::Semantics::CommonBehavior::EventAccepterImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
 }
 
 void AcceptEventActionEventAccepterImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -315,3 +233,86 @@ void AcceptEventActionEventAccepterImpl::saveContent(std::shared_ptr<persistence
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> AcceptEventActionEventAccepterImpl::eStaticClass() const
+{
+	return fUML::Semantics::Actions::ActionsPackage::eInstance()->getAcceptEventActionEventAccepter_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any AcceptEventActionEventAccepterImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case fUML::Semantics::Actions::ActionsPackage::ACCEPTEVENTACTIONEVENTACCEPTER_ATTRIBUTE_ACTIONACTIVATION:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getActionActivation();
+				return eAny(returnValue); //40
+			}
+	}
+	return fUML::Semantics::CommonBehavior::EventAccepterImpl::eGet(featureID, resolve, coreType);
+}
+
+bool AcceptEventActionEventAccepterImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case fUML::Semantics::Actions::ActionsPackage::ACCEPTEVENTACTIONEVENTACCEPTER_ATTRIBUTE_ACTIONACTIVATION:
+			return getActionActivation() != nullptr; //40
+	}
+	return fUML::Semantics::CommonBehavior::EventAccepterImpl::internalEIsSet(featureID);
+}
+
+bool AcceptEventActionEventAccepterImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case fUML::Semantics::Actions::ActionsPackage::ACCEPTEVENTACTIONEVENTACCEPTER_ATTRIBUTE_ACTIONACTIVATION:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<fUML::Semantics::Actions::AcceptEventActionActivation> _actionActivation = std::dynamic_pointer_cast<fUML::Semantics::Actions::AcceptEventActionActivation>(_temp);
+			setActionActivation(_actionActivation); //40
+			return true;
+		}
+	}
+
+	return fUML::Semantics::CommonBehavior::EventAccepterImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any AcceptEventActionEventAccepterImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+
+		default:
+		{
+			// call superTypes
+			result = fUML::Semantics::CommonBehavior::EventAccepterImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<AcceptEventActionEventAccepter> AcceptEventActionEventAccepterImpl::getThisAcceptEventActionEventAccepterPtr() const
+{
+	return m_thisAcceptEventActionEventAccepterPtr.lock();
+}
+void AcceptEventActionEventAccepterImpl::setThisAcceptEventActionEventAccepterPtr(std::weak_ptr<AcceptEventActionEventAccepter> thisAcceptEventActionEventAccepterPtr)
+{
+	m_thisAcceptEventActionEventAccepterPtr = thisAcceptEventActionEventAccepterPtr;
+	setThisEventAccepterPtr(thisAcceptEventActionEventAccepterPtr);
+}

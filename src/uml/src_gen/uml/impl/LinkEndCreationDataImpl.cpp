@@ -1,3 +1,4 @@
+
 #include "uml/impl/LinkEndCreationDataImpl.hpp"
 
 #ifdef NDEBUG
@@ -26,7 +27,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -34,7 +34,6 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-
 
 #include "uml/Comment.hpp"
 #include "uml/Element.hpp"
@@ -117,28 +116,6 @@ std::shared_ptr<ecore::EObject> LinkEndCreationDataImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> LinkEndCreationDataImpl::eStaticClass() const
-{
-	return uml::umlPackage::eInstance()->getLinkEndCreationData_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-/*
-Getter & Setter for attribute isReplaceAll
-*/
-bool LinkEndCreationDataImpl::getIsReplaceAll() const 
-{
-	return m_isReplaceAll;
-}
-void LinkEndCreationDataImpl::setIsReplaceAll(bool _isReplaceAll)
-{
-	m_isReplaceAll = _isReplaceAll;
-	
-} 
-
-
 //*********************************
 // Operations
 //*********************************
@@ -149,11 +126,23 @@ bool LinkEndCreationDataImpl::insertAt_pin(Any diagnostics,std::shared_ptr<std::
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference insertAt
-*/
+/* Getter & Setter for attribute isReplaceAll */
+bool LinkEndCreationDataImpl::getIsReplaceAll() const 
+{
+	return m_isReplaceAll;
+}
+void LinkEndCreationDataImpl::setIsReplaceAll(bool _isReplaceAll)
+{
+	m_isReplaceAll = _isReplaceAll;
+	
+}
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference insertAt */
 std::shared_ptr<uml::InputPin> LinkEndCreationDataImpl::getInsertAt() const
 {
     return m_insertAt;
@@ -163,7 +152,6 @@ void LinkEndCreationDataImpl::setInsertAt(std::shared_ptr<uml::InputPin> _insert
     m_insertAt = _insertAt;
 	
 }
-
 
 //*********************************
 // Union Getter
@@ -183,18 +171,9 @@ std::shared_ptr<Union<uml::Element>> LinkEndCreationDataImpl::getOwnedElement() 
 	return m_ownedElement;
 }
 
-
-
-
-std::shared_ptr<LinkEndCreationData> LinkEndCreationDataImpl::getThisLinkEndCreationDataPtr() const
-{
-	return m_thisLinkEndCreationDataPtr.lock();
-}
-void LinkEndCreationDataImpl::setThisLinkEndCreationDataPtr(std::weak_ptr<LinkEndCreationData> thisLinkEndCreationDataPtr)
-{
-	m_thisLinkEndCreationDataPtr = thisLinkEndCreationDataPtr;
-	setThisLinkEndDataPtr(thisLinkEndCreationDataPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> LinkEndCreationDataImpl::eContainer() const
 {
 	if(auto wp = m_owner.lock())
@@ -202,98 +181,6 @@ std::shared_ptr<ecore::EObject> LinkEndCreationDataImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any LinkEndCreationDataImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::LINKENDCREATIONDATA_ATTRIBUTE_INSERTAT:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getInsertAt();
-				return eAny(returnValue); //1346
-			}
-		case uml::umlPackage::LINKENDCREATIONDATA_ATTRIBUTE_ISREPLACEALL:
-			return eAny(getIsReplaceAll()); //1347
-	}
-	return LinkEndDataImpl::eGet(featureID, resolve, coreType);
-}
-bool LinkEndCreationDataImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::LINKENDCREATIONDATA_ATTRIBUTE_INSERTAT:
-			return getInsertAt() != nullptr; //1346
-		case uml::umlPackage::LINKENDCREATIONDATA_ATTRIBUTE_ISREPLACEALL:
-			return getIsReplaceAll() != false; //1347
-	}
-	return LinkEndDataImpl::internalEIsSet(featureID);
-}
-bool LinkEndCreationDataImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::LINKENDCREATIONDATA_ATTRIBUTE_INSERTAT:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::InputPin> _insertAt = std::dynamic_pointer_cast<uml::InputPin>(_temp);
-			setInsertAt(_insertAt); //1346
-			return true;
-		}
-		case uml::umlPackage::LINKENDCREATIONDATA_ATTRIBUTE_ISREPLACEALL:
-		{
-			// BOOST CAST
-			bool _isReplaceAll = newValue->get<bool>();
-			setIsReplaceAll(_isReplaceAll); //1347
-			return true;
-		}
-	}
-
-	return LinkEndDataImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any LinkEndCreationDataImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-		
-		// 632771740
-		case umlPackage::LINKENDCREATIONDATA_OPERATION_INSERTAT_PIN_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->insertAt_pin(incoming_param_diagnostics,incoming_param_context));
-			break;
-		}
-
-		default:
-		{
-			// call superTypes
-			result = LinkEndDataImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -386,9 +273,6 @@ void LinkEndCreationDataImpl::save(std::shared_ptr<persistence::interfaces::XSav
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
 }
 
 void LinkEndCreationDataImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -410,3 +294,114 @@ void LinkEndCreationDataImpl::saveContent(std::shared_ptr<persistence::interface
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> LinkEndCreationDataImpl::eStaticClass() const
+{
+	return uml::umlPackage::eInstance()->getLinkEndCreationData_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any LinkEndCreationDataImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::LINKENDCREATIONDATA_ATTRIBUTE_INSERTAT:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getInsertAt();
+				return eAny(returnValue); //1346
+			}
+		case uml::umlPackage::LINKENDCREATIONDATA_ATTRIBUTE_ISREPLACEALL:
+			return eAny(getIsReplaceAll()); //1347
+	}
+	return LinkEndDataImpl::eGet(featureID, resolve, coreType);
+}
+
+bool LinkEndCreationDataImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::LINKENDCREATIONDATA_ATTRIBUTE_INSERTAT:
+			return getInsertAt() != nullptr; //1346
+		case uml::umlPackage::LINKENDCREATIONDATA_ATTRIBUTE_ISREPLACEALL:
+			return getIsReplaceAll() != false; //1347
+	}
+	return LinkEndDataImpl::internalEIsSet(featureID);
+}
+
+bool LinkEndCreationDataImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::LINKENDCREATIONDATA_ATTRIBUTE_INSERTAT:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::InputPin> _insertAt = std::dynamic_pointer_cast<uml::InputPin>(_temp);
+			setInsertAt(_insertAt); //1346
+			return true;
+		}
+		case uml::umlPackage::LINKENDCREATIONDATA_ATTRIBUTE_ISREPLACEALL:
+		{
+			// BOOST CAST
+			bool _isReplaceAll = newValue->get<bool>();
+			setIsReplaceAll(_isReplaceAll); //1347
+			return true;
+		}
+	}
+
+	return LinkEndDataImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any LinkEndCreationDataImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 632771740
+		case umlPackage::LINKENDCREATIONDATA_OPERATION_INSERTAT_PIN_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->insertAt_pin(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = LinkEndDataImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<LinkEndCreationData> LinkEndCreationDataImpl::getThisLinkEndCreationDataPtr() const
+{
+	return m_thisLinkEndCreationDataPtr.lock();
+}
+void LinkEndCreationDataImpl::setThisLinkEndCreationDataPtr(std::weak_ptr<LinkEndCreationData> thisLinkEndCreationDataPtr)
+{
+	m_thisLinkEndCreationDataPtr = thisLinkEndCreationDataPtr;
+	setThisLinkEndDataPtr(thisLinkEndCreationDataPtr);
+}

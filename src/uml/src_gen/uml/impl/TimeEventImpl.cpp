@@ -1,3 +1,4 @@
+
 #include "uml/impl/TimeEventImpl.hpp"
 
 #ifdef NDEBUG
@@ -26,7 +27,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -34,7 +34,6 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-
 
 #include "uml/Comment.hpp"
 #include "uml/Dependency.hpp"
@@ -149,28 +148,6 @@ std::shared_ptr<ecore::EObject> TimeEventImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> TimeEventImpl::eStaticClass() const
-{
-	return uml::umlPackage::eInstance()->getTimeEvent_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-/*
-Getter & Setter for attribute isRelative
-*/
-bool TimeEventImpl::getIsRelative() const 
-{
-	return m_isRelative;
-}
-void TimeEventImpl::setIsRelative(bool _isRelative)
-{
-	m_isRelative = _isRelative;
-	
-} 
-
-
 //*********************************
 // Operations
 //*********************************
@@ -181,11 +158,23 @@ bool TimeEventImpl::when_non_negative(Any diagnostics,std::shared_ptr<std::map <
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference when
-*/
+/* Getter & Setter for attribute isRelative */
+bool TimeEventImpl::getIsRelative() const 
+{
+	return m_isRelative;
+}
+void TimeEventImpl::setIsRelative(bool _isRelative)
+{
+	m_isRelative = _isRelative;
+	
+}
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference when */
 std::shared_ptr<uml::TimeExpression> TimeEventImpl::getWhen() const
 {
     return m_when;
@@ -195,7 +184,6 @@ void TimeEventImpl::setWhen(std::shared_ptr<uml::TimeExpression> _when)
     m_when = _when;
 	
 }
-
 
 //*********************************
 // Union Getter
@@ -227,16 +215,9 @@ std::weak_ptr<uml::Element> TimeEventImpl::getOwner() const
 
 
 
-
-std::shared_ptr<TimeEvent> TimeEventImpl::getThisTimeEventPtr() const
-{
-	return m_thisTimeEventPtr.lock();
-}
-void TimeEventImpl::setThisTimeEventPtr(std::weak_ptr<TimeEvent> thisTimeEventPtr)
-{
-	m_thisTimeEventPtr = thisTimeEventPtr;
-	setThisEventPtr(thisTimeEventPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> TimeEventImpl::eContainer() const
 {
 	if(auto wp = m_namespace.lock())
@@ -259,98 +240,6 @@ std::shared_ptr<ecore::EObject> TimeEventImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any TimeEventImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::TIMEEVENT_ATTRIBUTE_ISRELATIVE:
-			return eAny(getIsRelative()); //23712
-		case uml::umlPackage::TIMEEVENT_ATTRIBUTE_WHEN:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getWhen();
-				return eAny(returnValue); //23713
-			}
-	}
-	return EventImpl::eGet(featureID, resolve, coreType);
-}
-bool TimeEventImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::TIMEEVENT_ATTRIBUTE_ISRELATIVE:
-			return getIsRelative() != false; //23712
-		case uml::umlPackage::TIMEEVENT_ATTRIBUTE_WHEN:
-			return getWhen() != nullptr; //23713
-	}
-	return EventImpl::internalEIsSet(featureID);
-}
-bool TimeEventImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::TIMEEVENT_ATTRIBUTE_ISRELATIVE:
-		{
-			// BOOST CAST
-			bool _isRelative = newValue->get<bool>();
-			setIsRelative(_isRelative); //23712
-			return true;
-		}
-		case uml::umlPackage::TIMEEVENT_ATTRIBUTE_WHEN:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::TimeExpression> _when = std::dynamic_pointer_cast<uml::TimeExpression>(_temp);
-			setWhen(_when); //23713
-			return true;
-		}
-	}
-
-	return EventImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any TimeEventImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-		
-		// 368076727
-		case umlPackage::TIMEEVENT_OPERATION_WHEN_NON_NEGATIVE_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->when_non_negative(incoming_param_diagnostics,incoming_param_context));
-			break;
-		}
-
-		default:
-		{
-			// call superTypes
-			result = EventImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -449,11 +338,6 @@ void TimeEventImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> 
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
-	
 }
 
 void TimeEventImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -479,3 +363,114 @@ void TimeEventImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHa
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> TimeEventImpl::eStaticClass() const
+{
+	return uml::umlPackage::eInstance()->getTimeEvent_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any TimeEventImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::TIMEEVENT_ATTRIBUTE_ISRELATIVE:
+			return eAny(getIsRelative()); //23712
+		case uml::umlPackage::TIMEEVENT_ATTRIBUTE_WHEN:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getWhen();
+				return eAny(returnValue); //23713
+			}
+	}
+	return EventImpl::eGet(featureID, resolve, coreType);
+}
+
+bool TimeEventImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::TIMEEVENT_ATTRIBUTE_ISRELATIVE:
+			return getIsRelative() != false; //23712
+		case uml::umlPackage::TIMEEVENT_ATTRIBUTE_WHEN:
+			return getWhen() != nullptr; //23713
+	}
+	return EventImpl::internalEIsSet(featureID);
+}
+
+bool TimeEventImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::TIMEEVENT_ATTRIBUTE_ISRELATIVE:
+		{
+			// BOOST CAST
+			bool _isRelative = newValue->get<bool>();
+			setIsRelative(_isRelative); //23712
+			return true;
+		}
+		case uml::umlPackage::TIMEEVENT_ATTRIBUTE_WHEN:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::TimeExpression> _when = std::dynamic_pointer_cast<uml::TimeExpression>(_temp);
+			setWhen(_when); //23713
+			return true;
+		}
+	}
+
+	return EventImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any TimeEventImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 368076727
+		case umlPackage::TIMEEVENT_OPERATION_WHEN_NON_NEGATIVE_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->when_non_negative(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = EventImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<TimeEvent> TimeEventImpl::getThisTimeEventPtr() const
+{
+	return m_thisTimeEventPtr.lock();
+}
+void TimeEventImpl::setThisTimeEventPtr(std::weak_ptr<TimeEvent> thisTimeEventPtr)
+{
+	m_thisTimeEventPtr = thisTimeEventPtr;
+	setThisEventPtr(thisTimeEventPtr);
+}

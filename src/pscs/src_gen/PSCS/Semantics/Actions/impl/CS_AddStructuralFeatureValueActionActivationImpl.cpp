@@ -1,3 +1,4 @@
+
 #include "PSCS/Semantics/Actions/impl/CS_AddStructuralFeatureValueActionActivationImpl.hpp"
 
 #ifdef NDEBUG
@@ -62,7 +63,6 @@
 #include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
-
 
 #include "uml/Action.hpp"
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
@@ -151,15 +151,6 @@ std::shared_ptr<ecore::EObject> CS_AddStructuralFeatureValueActionActivationImpl
 	element->setThisCS_AddStructuralFeatureValueActionActivationPtr(element);
 	return element;
 }
-
-std::shared_ptr<ecore::EClass> CS_AddStructuralFeatureValueActionActivationImpl::eStaticClass() const
-{
-	return PSCS::Semantics::Actions::ActionsPackage::eInstance()->getCS_AddStructuralFeatureValueActionActivation_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
 
 //*********************************
 // Operations
@@ -412,7 +403,11 @@ void CS_AddStructuralFeatureValueActionActivationImpl::doActionDefault()
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
+//*********************************
+
+//*********************************
+// Reference Getters & Setters
 //*********************************
 
 //*********************************
@@ -433,18 +428,9 @@ std::shared_ptr<Union<fUML::Semantics::Actions::PinActivation>> CS_AddStructural
 	return m_pinActivation;
 }
 
-
-
-
-std::shared_ptr<CS_AddStructuralFeatureValueActionActivation> CS_AddStructuralFeatureValueActionActivationImpl::getThisCS_AddStructuralFeatureValueActionActivationPtr() const
-{
-	return m_thisCS_AddStructuralFeatureValueActionActivationPtr.lock();
-}
-void CS_AddStructuralFeatureValueActionActivationImpl::setThisCS_AddStructuralFeatureValueActionActivationPtr(std::weak_ptr<CS_AddStructuralFeatureValueActionActivation> thisCS_AddStructuralFeatureValueActionActivationPtr)
-{
-	m_thisCS_AddStructuralFeatureValueActionActivationPtr = thisCS_AddStructuralFeatureValueActionActivationPtr;
-	setThisAddStructuralFeatureValueActionActivationPtr(thisCS_AddStructuralFeatureValueActionActivationPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> CS_AddStructuralFeatureValueActionActivationImpl::eContainer() const
 {
 	if(auto wp = m_group.lock())
@@ -452,69 +438,6 @@ std::shared_ptr<ecore::EObject> CS_AddStructuralFeatureValueActionActivationImpl
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any CS_AddStructuralFeatureValueActionActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-	}
-	return fUML::Semantics::Actions::AddStructuralFeatureValueActionActivationImpl::eGet(featureID, resolve, coreType);
-}
-bool CS_AddStructuralFeatureValueActionActivationImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-	}
-	return fUML::Semantics::Actions::AddStructuralFeatureValueActionActivationImpl::internalEIsSet(featureID);
-}
-bool CS_AddStructuralFeatureValueActionActivationImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-	}
-
-	return fUML::Semantics::Actions::AddStructuralFeatureValueActionActivationImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any CS_AddStructuralFeatureValueActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-		
-		// 998058488
-		case ActionsPackage::CS_ADDSTRUCTURALFEATUREVALUEACTIONACTIVATION_OPERATION_DOACTION:
-		{
-			this->doAction();
-			break;
-		}
-		
-		// 494359846
-		case ActionsPackage::CS_ADDSTRUCTURALFEATUREVALUEACTIONACTIVATION_OPERATION_DOACTIONDEFAULT:
-		{
-			this->doActionDefault();
-			break;
-		}
-
-		default:
-		{
-			// call superTypes
-			result = fUML::Semantics::Actions::AddStructuralFeatureValueActionActivationImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -571,12 +494,6 @@ void CS_AddStructuralFeatureValueActionActivationImpl::save(std::shared_ptr<pers
 	fUML::Semantics::Loci::SemanticVisitorImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
-	
-	
 }
 
 void CS_AddStructuralFeatureValueActionActivationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -591,3 +508,85 @@ void CS_AddStructuralFeatureValueActionActivationImpl::saveContent(std::shared_p
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> CS_AddStructuralFeatureValueActionActivationImpl::eStaticClass() const
+{
+	return PSCS::Semantics::Actions::ActionsPackage::eInstance()->getCS_AddStructuralFeatureValueActionActivation_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any CS_AddStructuralFeatureValueActionActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+	}
+	return fUML::Semantics::Actions::AddStructuralFeatureValueActionActivationImpl::eGet(featureID, resolve, coreType);
+}
+
+bool CS_AddStructuralFeatureValueActionActivationImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+	}
+	return fUML::Semantics::Actions::AddStructuralFeatureValueActionActivationImpl::internalEIsSet(featureID);
+}
+
+bool CS_AddStructuralFeatureValueActionActivationImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+	}
+
+	return fUML::Semantics::Actions::AddStructuralFeatureValueActionActivationImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any CS_AddStructuralFeatureValueActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 998058488
+		case ActionsPackage::CS_ADDSTRUCTURALFEATUREVALUEACTIONACTIVATION_OPERATION_DOACTION:
+		{
+			this->doAction();
+			break;
+		}
+		
+		// 494359846
+		case ActionsPackage::CS_ADDSTRUCTURALFEATUREVALUEACTIONACTIVATION_OPERATION_DOACTIONDEFAULT:
+		{
+			this->doActionDefault();
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = fUML::Semantics::Actions::AddStructuralFeatureValueActionActivationImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<CS_AddStructuralFeatureValueActionActivation> CS_AddStructuralFeatureValueActionActivationImpl::getThisCS_AddStructuralFeatureValueActionActivationPtr() const
+{
+	return m_thisCS_AddStructuralFeatureValueActionActivationPtr.lock();
+}
+void CS_AddStructuralFeatureValueActionActivationImpl::setThisCS_AddStructuralFeatureValueActionActivationPtr(std::weak_ptr<CS_AddStructuralFeatureValueActionActivation> thisCS_AddStructuralFeatureValueActionActivationPtr)
+{
+	m_thisCS_AddStructuralFeatureValueActionActivationPtr = thisCS_AddStructuralFeatureValueActionActivationPtr;
+	setThisAddStructuralFeatureValueActionActivationPtr(thisCS_AddStructuralFeatureValueActionActivationPtr);
+}

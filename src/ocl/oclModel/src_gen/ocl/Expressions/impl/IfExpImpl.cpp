@@ -1,3 +1,4 @@
+
 #include "ocl/Expressions/impl/IfExpImpl.hpp"
 
 #ifdef NDEBUG
@@ -25,7 +26,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -35,7 +35,6 @@
 #include "ecore/ecoreFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
-
 
 #include "ocl/Expressions/CallExp.hpp"
 #include "ocl/Expressions/CollectionRange.hpp"
@@ -223,25 +222,18 @@ std::shared_ptr<ecore::EObject> IfExpImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> IfExpImpl::eStaticClass() const
-{
-	return ocl::Expressions::ExpressionsPackage::eInstance()->getIfExp_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference condition
-*/
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference condition */
 std::shared_ptr<ocl::Expressions::OclExpression> IfExpImpl::getCondition() const
 {
     return m_condition;
@@ -252,10 +244,7 @@ void IfExpImpl::setCondition(std::shared_ptr<ocl::Expressions::OclExpression> _c
 	
 }
 
-
-/*
-Getter & Setter for reference elseExpression
-*/
+/* Getter & Setter for reference elseExpression */
 std::shared_ptr<ocl::Expressions::OclExpression> IfExpImpl::getElseExpression() const
 {
     return m_elseExpression;
@@ -266,10 +255,7 @@ void IfExpImpl::setElseExpression(std::shared_ptr<ocl::Expressions::OclExpressio
 	
 }
 
-
-/*
-Getter & Setter for reference thenExpression
-*/
+/* Getter & Setter for reference thenExpression */
 std::shared_ptr<ocl::Expressions::OclExpression> IfExpImpl::getThenExpression() const
 {
     return m_thenExpression;
@@ -280,22 +266,13 @@ void IfExpImpl::setThenExpression(std::shared_ptr<ocl::Expressions::OclExpressio
 	
 }
 
-
 //*********************************
 // Union Getter
 //*********************************
 
-
-
-std::shared_ptr<IfExp> IfExpImpl::getThisIfExpPtr() const
-{
-	return m_thisIfExpPtr.lock();
-}
-void IfExpImpl::setThisIfExpPtr(std::weak_ptr<IfExp> thisIfExpPtr)
-{
-	m_thisIfExpPtr = thisIfExpPtr;
-	setThisOclExpressionPtr(thisIfExpPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> IfExpImpl::eContainer() const
 {
 	if(auto wp = m_appliedElement.lock())
@@ -353,100 +330,6 @@ std::shared_ptr<ecore::EObject> IfExpImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any IfExpImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case ocl::Expressions::ExpressionsPackage::IFEXP_ATTRIBUTE_CONDITION:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getCondition();
-				return eAny(returnValue); //3022
-			}
-		case ocl::Expressions::ExpressionsPackage::IFEXP_ATTRIBUTE_ELSEEXPRESSION:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getElseExpression();
-				return eAny(returnValue); //3024
-			}
-		case ocl::Expressions::ExpressionsPackage::IFEXP_ATTRIBUTE_THENEXPRESSION:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getThenExpression();
-				return eAny(returnValue); //3023
-			}
-	}
-	return OclExpressionImpl::eGet(featureID, resolve, coreType);
-}
-bool IfExpImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case ocl::Expressions::ExpressionsPackage::IFEXP_ATTRIBUTE_CONDITION:
-			return getCondition() != nullptr; //3022
-		case ocl::Expressions::ExpressionsPackage::IFEXP_ATTRIBUTE_ELSEEXPRESSION:
-			return getElseExpression() != nullptr; //3024
-		case ocl::Expressions::ExpressionsPackage::IFEXP_ATTRIBUTE_THENEXPRESSION:
-			return getThenExpression() != nullptr; //3023
-	}
-	return OclExpressionImpl::internalEIsSet(featureID);
-}
-bool IfExpImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case ocl::Expressions::ExpressionsPackage::IFEXP_ATTRIBUTE_CONDITION:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<ocl::Expressions::OclExpression> _condition = std::dynamic_pointer_cast<ocl::Expressions::OclExpression>(_temp);
-			setCondition(_condition); //3022
-			return true;
-		}
-		case ocl::Expressions::ExpressionsPackage::IFEXP_ATTRIBUTE_ELSEEXPRESSION:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<ocl::Expressions::OclExpression> _elseExpression = std::dynamic_pointer_cast<ocl::Expressions::OclExpression>(_temp);
-			setElseExpression(_elseExpression); //3024
-			return true;
-		}
-		case ocl::Expressions::ExpressionsPackage::IFEXP_ATTRIBUTE_THENEXPRESSION:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<ocl::Expressions::OclExpression> _thenExpression = std::dynamic_pointer_cast<ocl::Expressions::OclExpression>(_temp);
-			setThenExpression(_thenExpression); //3023
-			return true;
-		}
-	}
-
-	return OclExpressionImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any IfExpImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-
-		default:
-		{
-			// call superTypes
-			result = OclExpressionImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -548,10 +431,6 @@ void IfExpImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> save
 	ecore::EModelElementImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
 }
 
 void IfExpImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -581,3 +460,116 @@ void IfExpImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandle
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> IfExpImpl::eStaticClass() const
+{
+	return ocl::Expressions::ExpressionsPackage::eInstance()->getIfExp_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any IfExpImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case ocl::Expressions::ExpressionsPackage::IFEXP_ATTRIBUTE_CONDITION:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getCondition();
+				return eAny(returnValue); //3022
+			}
+		case ocl::Expressions::ExpressionsPackage::IFEXP_ATTRIBUTE_ELSEEXPRESSION:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getElseExpression();
+				return eAny(returnValue); //3024
+			}
+		case ocl::Expressions::ExpressionsPackage::IFEXP_ATTRIBUTE_THENEXPRESSION:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getThenExpression();
+				return eAny(returnValue); //3023
+			}
+	}
+	return OclExpressionImpl::eGet(featureID, resolve, coreType);
+}
+
+bool IfExpImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case ocl::Expressions::ExpressionsPackage::IFEXP_ATTRIBUTE_CONDITION:
+			return getCondition() != nullptr; //3022
+		case ocl::Expressions::ExpressionsPackage::IFEXP_ATTRIBUTE_ELSEEXPRESSION:
+			return getElseExpression() != nullptr; //3024
+		case ocl::Expressions::ExpressionsPackage::IFEXP_ATTRIBUTE_THENEXPRESSION:
+			return getThenExpression() != nullptr; //3023
+	}
+	return OclExpressionImpl::internalEIsSet(featureID);
+}
+
+bool IfExpImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case ocl::Expressions::ExpressionsPackage::IFEXP_ATTRIBUTE_CONDITION:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<ocl::Expressions::OclExpression> _condition = std::dynamic_pointer_cast<ocl::Expressions::OclExpression>(_temp);
+			setCondition(_condition); //3022
+			return true;
+		}
+		case ocl::Expressions::ExpressionsPackage::IFEXP_ATTRIBUTE_ELSEEXPRESSION:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<ocl::Expressions::OclExpression> _elseExpression = std::dynamic_pointer_cast<ocl::Expressions::OclExpression>(_temp);
+			setElseExpression(_elseExpression); //3024
+			return true;
+		}
+		case ocl::Expressions::ExpressionsPackage::IFEXP_ATTRIBUTE_THENEXPRESSION:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<ocl::Expressions::OclExpression> _thenExpression = std::dynamic_pointer_cast<ocl::Expressions::OclExpression>(_temp);
+			setThenExpression(_thenExpression); //3023
+			return true;
+		}
+	}
+
+	return OclExpressionImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any IfExpImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+
+		default:
+		{
+			// call superTypes
+			result = OclExpressionImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<IfExp> IfExpImpl::getThisIfExpPtr() const
+{
+	return m_thisIfExpPtr.lock();
+}
+void IfExpImpl::setThisIfExpPtr(std::weak_ptr<IfExp> thisIfExpPtr)
+{
+	m_thisIfExpPtr = thisIfExpPtr;
+	setThisOclExpressionPtr(thisIfExpPtr);
+}

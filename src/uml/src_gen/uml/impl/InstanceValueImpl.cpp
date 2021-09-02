@@ -1,3 +1,4 @@
+
 #include "uml/impl/InstanceValueImpl.hpp"
 
 #ifdef NDEBUG
@@ -25,7 +26,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -33,7 +33,6 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-
 
 #include "uml/Comment.hpp"
 #include "uml/Dependency.hpp"
@@ -161,25 +160,18 @@ std::shared_ptr<ecore::EObject> InstanceValueImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> InstanceValueImpl::eStaticClass() const
-{
-	return uml::umlPackage::eInstance()->getInstanceValue_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference instance
-*/
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference instance */
 std::shared_ptr<uml::InstanceSpecification> InstanceValueImpl::getInstance() const
 {
     return m_instance;
@@ -189,7 +181,6 @@ void InstanceValueImpl::setInstance(std::shared_ptr<uml::InstanceSpecification> 
     m_instance = _instance;
 	
 }
-
 
 //*********************************
 // Union Getter
@@ -221,16 +212,9 @@ std::weak_ptr<uml::Element> InstanceValueImpl::getOwner() const
 
 
 
-
-std::shared_ptr<InstanceValue> InstanceValueImpl::getThisInstanceValuePtr() const
-{
-	return m_thisInstanceValuePtr.lock();
-}
-void InstanceValueImpl::setThisInstanceValuePtr(std::weak_ptr<InstanceValue> thisInstanceValuePtr)
-{
-	m_thisInstanceValuePtr = thisInstanceValuePtr;
-	setThisValueSpecificationPtr(thisInstanceValuePtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> InstanceValueImpl::eContainer() const
 {
 	if(auto wp = m_namespace.lock())
@@ -263,70 +247,6 @@ std::shared_ptr<ecore::EObject> InstanceValueImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any InstanceValueImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::INSTANCEVALUE_ATTRIBUTE_INSTANCE:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getInstance();
-				return eAny(returnValue); //11815
-			}
-	}
-	return ValueSpecificationImpl::eGet(featureID, resolve, coreType);
-}
-bool InstanceValueImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::INSTANCEVALUE_ATTRIBUTE_INSTANCE:
-			return getInstance() != nullptr; //11815
-	}
-	return ValueSpecificationImpl::internalEIsSet(featureID);
-}
-bool InstanceValueImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::INSTANCEVALUE_ATTRIBUTE_INSTANCE:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::InstanceSpecification> _instance = std::dynamic_pointer_cast<uml::InstanceSpecification>(_temp);
-			setInstance(_instance); //11815
-			return true;
-		}
-	}
-
-	return ValueSpecificationImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any InstanceValueImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-
-		default:
-		{
-			// call superTypes
-			result = ValueSpecificationImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -416,11 +336,6 @@ void InstanceValueImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandl
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
-	
 }
 
 void InstanceValueImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -437,3 +352,86 @@ void InstanceValueImpl::saveContent(std::shared_ptr<persistence::interfaces::XSa
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> InstanceValueImpl::eStaticClass() const
+{
+	return uml::umlPackage::eInstance()->getInstanceValue_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any InstanceValueImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::INSTANCEVALUE_ATTRIBUTE_INSTANCE:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getInstance();
+				return eAny(returnValue); //11815
+			}
+	}
+	return ValueSpecificationImpl::eGet(featureID, resolve, coreType);
+}
+
+bool InstanceValueImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::INSTANCEVALUE_ATTRIBUTE_INSTANCE:
+			return getInstance() != nullptr; //11815
+	}
+	return ValueSpecificationImpl::internalEIsSet(featureID);
+}
+
+bool InstanceValueImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::INSTANCEVALUE_ATTRIBUTE_INSTANCE:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::InstanceSpecification> _instance = std::dynamic_pointer_cast<uml::InstanceSpecification>(_temp);
+			setInstance(_instance); //11815
+			return true;
+		}
+	}
+
+	return ValueSpecificationImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any InstanceValueImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+
+		default:
+		{
+			// call superTypes
+			result = ValueSpecificationImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<InstanceValue> InstanceValueImpl::getThisInstanceValuePtr() const
+{
+	return m_thisInstanceValuePtr.lock();
+}
+void InstanceValueImpl::setThisInstanceValuePtr(std::weak_ptr<InstanceValue> thisInstanceValuePtr)
+{
+	m_thisInstanceValuePtr = thisInstanceValuePtr;
+	setThisValueSpecificationPtr(thisInstanceValuePtr);
+}

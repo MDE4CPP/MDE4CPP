@@ -1,3 +1,4 @@
+
 #include "fUML/Semantics/Actions/impl/ValueSpecificationActionActivationImpl.hpp"
 
 #ifdef NDEBUG
@@ -39,7 +40,6 @@
 #include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "uml/umlFactory.hpp"
-
 
 #include "uml/Action.hpp"
 #include "fUML/Semantics/Actions/ActionActivation.hpp"
@@ -127,15 +127,6 @@ std::shared_ptr<ecore::EObject> ValueSpecificationActionActivationImpl::copy() c
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> ValueSpecificationActionActivationImpl::eStaticClass() const
-{
-	return fUML::Semantics::Actions::ActionsPackage::eInstance()->getValueSpecificationActionActivation_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
@@ -158,7 +149,11 @@ void ValueSpecificationActionActivationImpl::doAction()
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
+//*********************************
+
+//*********************************
+// Reference Getters & Setters
 //*********************************
 
 //*********************************
@@ -179,18 +174,9 @@ std::shared_ptr<Union<fUML::Semantics::Actions::PinActivation>> ValueSpecificati
 	return m_pinActivation;
 }
 
-
-
-
-std::shared_ptr<ValueSpecificationActionActivation> ValueSpecificationActionActivationImpl::getThisValueSpecificationActionActivationPtr() const
-{
-	return m_thisValueSpecificationActionActivationPtr.lock();
-}
-void ValueSpecificationActionActivationImpl::setThisValueSpecificationActionActivationPtr(std::weak_ptr<ValueSpecificationActionActivation> thisValueSpecificationActionActivationPtr)
-{
-	m_thisValueSpecificationActionActivationPtr = thisValueSpecificationActionActivationPtr;
-	setThisActionActivationPtr(thisValueSpecificationActionActivationPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> ValueSpecificationActionActivationImpl::eContainer() const
 {
 	if(auto wp = m_group.lock())
@@ -198,62 +184,6 @@ std::shared_ptr<ecore::EObject> ValueSpecificationActionActivationImpl::eContain
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any ValueSpecificationActionActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-	}
-	return ActionActivationImpl::eGet(featureID, resolve, coreType);
-}
-bool ValueSpecificationActionActivationImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-	}
-	return ActionActivationImpl::internalEIsSet(featureID);
-}
-bool ValueSpecificationActionActivationImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-	}
-
-	return ActionActivationImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any ValueSpecificationActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-		
-		// 37357803
-		case ActionsPackage::VALUESPECIFICATIONACTIONACTIVATION_OPERATION_DOACTION:
-		{
-			this->doAction();
-			break;
-		}
-
-		default:
-		{
-			// call superTypes
-			result = ActionActivationImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -304,9 +234,6 @@ void ValueSpecificationActionActivationImpl::save(std::shared_ptr<persistence::i
 	fUML::Semantics::Loci::SemanticVisitorImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
 }
 
 void ValueSpecificationActionActivationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -321,3 +248,78 @@ void ValueSpecificationActionActivationImpl::saveContent(std::shared_ptr<persist
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> ValueSpecificationActionActivationImpl::eStaticClass() const
+{
+	return fUML::Semantics::Actions::ActionsPackage::eInstance()->getValueSpecificationActionActivation_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any ValueSpecificationActionActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+	}
+	return ActionActivationImpl::eGet(featureID, resolve, coreType);
+}
+
+bool ValueSpecificationActionActivationImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+	}
+	return ActionActivationImpl::internalEIsSet(featureID);
+}
+
+bool ValueSpecificationActionActivationImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+	}
+
+	return ActionActivationImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any ValueSpecificationActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 37357803
+		case ActionsPackage::VALUESPECIFICATIONACTIONACTIVATION_OPERATION_DOACTION:
+		{
+			this->doAction();
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = ActionActivationImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<ValueSpecificationActionActivation> ValueSpecificationActionActivationImpl::getThisValueSpecificationActionActivationPtr() const
+{
+	return m_thisValueSpecificationActionActivationPtr.lock();
+}
+void ValueSpecificationActionActivationImpl::setThisValueSpecificationActionActivationPtr(std::weak_ptr<ValueSpecificationActionActivation> thisValueSpecificationActionActivationPtr)
+{
+	m_thisValueSpecificationActionActivationPtr = thisValueSpecificationActionActivationPtr;
+	setThisActionActivationPtr(thisValueSpecificationActionActivationPtr);
+}

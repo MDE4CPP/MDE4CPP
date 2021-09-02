@@ -1,3 +1,4 @@
+
 #include "ocl/Expressions/impl/InfixedExpImpl.hpp"
 
 #ifdef NDEBUG
@@ -25,7 +26,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -35,7 +35,6 @@
 #include "ecore/ecoreFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
-
 
 #include "ocl/Expressions/CallExp.hpp"
 #include "ocl/Expressions/CollectionRange.hpp"
@@ -204,25 +203,18 @@ std::shared_ptr<ecore::EObject> InfixedExpImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> InfixedExpImpl::eStaticClass() const
-{
-	return ocl::Expressions::ExpressionsPackage::eInstance()->getInfixedExp_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference source
-*/
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference source */
 std::shared_ptr<ocl::Expressions::OclExpression> InfixedExpImpl::getSource() const
 {
     return m_source;
@@ -233,22 +225,13 @@ void InfixedExpImpl::setSource(std::shared_ptr<ocl::Expressions::OclExpression> 
 	
 }
 
-
 //*********************************
 // Union Getter
 //*********************************
 
-
-
-std::shared_ptr<InfixedExp> InfixedExpImpl::getThisInfixedExpPtr() const
-{
-	return m_thisInfixedExpPtr.lock();
-}
-void InfixedExpImpl::setThisInfixedExpPtr(std::weak_ptr<InfixedExp> thisInfixedExpPtr)
-{
-	m_thisInfixedExpPtr = thisInfixedExpPtr;
-	setThisOclExpressionPtr(thisInfixedExpPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> InfixedExpImpl::eContainer() const
 {
 	if(auto wp = m_appliedElement.lock())
@@ -306,70 +289,6 @@ std::shared_ptr<ecore::EObject> InfixedExpImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any InfixedExpImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case ocl::Expressions::ExpressionsPackage::INFIXEDEXP_ATTRIBUTE_SOURCE:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getSource();
-				return eAny(returnValue); //3222
-			}
-	}
-	return OclExpressionImpl::eGet(featureID, resolve, coreType);
-}
-bool InfixedExpImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case ocl::Expressions::ExpressionsPackage::INFIXEDEXP_ATTRIBUTE_SOURCE:
-			return getSource() != nullptr; //3222
-	}
-	return OclExpressionImpl::internalEIsSet(featureID);
-}
-bool InfixedExpImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case ocl::Expressions::ExpressionsPackage::INFIXEDEXP_ATTRIBUTE_SOURCE:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<ocl::Expressions::OclExpression> _source = std::dynamic_pointer_cast<ocl::Expressions::OclExpression>(_temp);
-			setSource(_source); //3222
-			return true;
-		}
-	}
-
-	return OclExpressionImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any InfixedExpImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-
-		default:
-		{
-			// call superTypes
-			result = OclExpressionImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -455,10 +374,6 @@ void InfixedExpImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler>
 	ecore::EModelElementImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
 }
 
 void InfixedExpImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -475,3 +390,86 @@ void InfixedExpImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> InfixedExpImpl::eStaticClass() const
+{
+	return ocl::Expressions::ExpressionsPackage::eInstance()->getInfixedExp_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any InfixedExpImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case ocl::Expressions::ExpressionsPackage::INFIXEDEXP_ATTRIBUTE_SOURCE:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getSource();
+				return eAny(returnValue); //3222
+			}
+	}
+	return OclExpressionImpl::eGet(featureID, resolve, coreType);
+}
+
+bool InfixedExpImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case ocl::Expressions::ExpressionsPackage::INFIXEDEXP_ATTRIBUTE_SOURCE:
+			return getSource() != nullptr; //3222
+	}
+	return OclExpressionImpl::internalEIsSet(featureID);
+}
+
+bool InfixedExpImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case ocl::Expressions::ExpressionsPackage::INFIXEDEXP_ATTRIBUTE_SOURCE:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<ocl::Expressions::OclExpression> _source = std::dynamic_pointer_cast<ocl::Expressions::OclExpression>(_temp);
+			setSource(_source); //3222
+			return true;
+		}
+	}
+
+	return OclExpressionImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any InfixedExpImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+
+		default:
+		{
+			// call superTypes
+			result = OclExpressionImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<InfixedExp> InfixedExpImpl::getThisInfixedExpPtr() const
+{
+	return m_thisInfixedExpPtr.lock();
+}
+void InfixedExpImpl::setThisInfixedExpPtr(std::weak_ptr<InfixedExp> thisInfixedExpPtr)
+{
+	m_thisInfixedExpPtr = thisInfixedExpPtr;
+	setThisOclExpressionPtr(thisInfixedExpPtr);
+}

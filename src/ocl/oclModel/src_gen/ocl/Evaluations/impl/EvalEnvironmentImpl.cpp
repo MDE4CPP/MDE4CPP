@@ -1,3 +1,4 @@
+
 #include "ocl/Evaluations/impl/EvalEnvironmentImpl.hpp"
 
 #ifdef NDEBUG
@@ -34,7 +35,6 @@
 
 #include <exception> // used in Persistence
 #include "ocl/Values/ValuesFactory.hpp"
-
 
 #include "ocl/Values/NameValueBinding.hpp"
 #include "fUML/Semantics/Values/Value.hpp"
@@ -109,15 +109,6 @@ std::shared_ptr<ecore::EObject> EvalEnvironmentImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> EvalEnvironmentImpl::eStaticClass() const
-{
-	return ocl::Evaluations::EvaluationsPackage::eInstance()->getEvalEnvironment_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
@@ -186,11 +177,13 @@ if(nvb != nullptr)
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference bindings
-*/
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference bindings */
 std::shared_ptr<Bag<ocl::Values::NameValueBinding>> EvalEnvironmentImpl::getBindings() const
 {
 	if(m_bindings == nullptr)
@@ -202,29 +195,119 @@ std::shared_ptr<Bag<ocl::Values::NameValueBinding>> EvalEnvironmentImpl::getBind
     return m_bindings;
 }
 
-
-
 //*********************************
 // Union Getter
 //*********************************
 
-
-
-std::shared_ptr<EvalEnvironment> EvalEnvironmentImpl::getThisEvalEnvironmentPtr() const
-{
-	return m_thisEvalEnvironmentPtr.lock();
-}
-void EvalEnvironmentImpl::setThisEvalEnvironmentPtr(std::weak_ptr<EvalEnvironment> thisEvalEnvironmentPtr)
-{
-	m_thisEvalEnvironmentPtr = thisEvalEnvironmentPtr;
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> EvalEnvironmentImpl::eContainer() const
 {
 	return nullptr;
 }
 
 //*********************************
-// Structural Feature Getter/Setter
+// Persistence Functions
+//*********************************
+void EvalEnvironmentImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get oclFactory
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
+	}
+}		
+
+void EvalEnvironmentImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+	try
+	{
+		std::map<std::string, std::string>::const_iterator iter;
+		std::shared_ptr<ecore::EClass> metaClass = this->eClass(); // get MetaClass
+		iter = attr_list.find("bindings");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("bindings")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	ecore::EObjectImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void EvalEnvironmentImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+
+	//load BasePackage Nodes
+}
+
+void EvalEnvironmentImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+{
+	switch(featureID)
+	{
+		case ocl::Evaluations::EvaluationsPackage::EVALENVIRONMENT_ATTRIBUTE_BINDINGS:
+		{
+			std::shared_ptr<Bag<ocl::Values::NameValueBinding>> _bindings = getBindings();
+			for(std::shared_ptr<ecore::EObject> ref : references)
+			{
+				std::shared_ptr<ocl::Values::NameValueBinding>  _r = std::dynamic_pointer_cast<ocl::Values::NameValueBinding>(ref);
+				if (_r != nullptr)
+				{
+					_bindings->push_back(_r);
+				}
+			}
+			return;
+		}
+	}
+	ecore::EObjectImpl::resolveReferences(featureID, references);
+}
+
+void EvalEnvironmentImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	ecore::EObjectImpl::saveContent(saveHandler);
+}
+
+void EvalEnvironmentImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<ocl::Evaluations::EvaluationsPackage> package = ocl::Evaluations::EvaluationsPackage::eInstance();
+	// Add references
+		saveHandler->addReferences<ocl::Values::NameValueBinding>("bindings", this->getBindings());
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+}
+
+
+std::shared_ptr<ecore::EClass> EvalEnvironmentImpl::eStaticClass() const
+{
+	return ocl::Evaluations::EvaluationsPackage::eInstance()->getEvalEnvironment_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
 //*********************************
 Any EvalEnvironmentImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
@@ -245,6 +328,7 @@ Any EvalEnvironmentImpl::eGet(int featureID, bool resolve, bool coreType) const
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
 }
+
 bool EvalEnvironmentImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
@@ -254,6 +338,7 @@ bool EvalEnvironmentImpl::internalEIsSet(int featureID) const
 	}
 	return ecore::EObjectImpl::internalEIsSet(featureID);
 }
+
 bool EvalEnvironmentImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
@@ -300,7 +385,7 @@ bool EvalEnvironmentImpl::eSet(int featureID, Any newValue)
 }
 
 //*********************************
-// Behavioral Feature
+// EOperation Invoke
 //*********************************
 Any EvalEnvironmentImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
 {
@@ -382,97 +467,12 @@ Any EvalEnvironmentImpl::eInvoke(int operationID, std::shared_ptr<std::list < st
 	return result;
 }
 
-//*********************************
-// Persistence Functions
-//*********************************
-void EvalEnvironmentImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+
+std::shared_ptr<EvalEnvironment> EvalEnvironmentImpl::getThisEvalEnvironmentPtr() const
 {
-	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
-	loadAttributes(loadHandler, attr_list);
-
-	//
-	// Create new objects (from references (containment == true))
-	//
-	// get oclFactory
-	int numNodes = loadHandler->getNumOfChildNodes();
-	for(int ii = 0; ii < numNodes; ii++)
-	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler);
-	}
-}		
-
-void EvalEnvironmentImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
-{
-	try
-	{
-		std::map<std::string, std::string>::const_iterator iter;
-		std::shared_ptr<ecore::EClass> metaClass = this->eClass(); // get MetaClass
-		iter = attr_list.find("bindings");
-		if ( iter != attr_list.end() )
-		{
-			// add unresolvedReference to loadHandler's list
-			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("bindings")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
-		}
-	}
-	catch (std::exception& e)
-	{
-		std::cout << "| ERROR    | " << e.what() << std::endl;
-	}
-	catch (...) 
-	{
-		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
-	}
-
-	ecore::EObjectImpl::loadAttributes(loadHandler, attr_list);
+	return m_thisEvalEnvironmentPtr.lock();
 }
-
-void EvalEnvironmentImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+void EvalEnvironmentImpl::setThisEvalEnvironmentPtr(std::weak_ptr<EvalEnvironment> thisEvalEnvironmentPtr)
 {
-
-	//load BasePackage Nodes
+	m_thisEvalEnvironmentPtr = thisEvalEnvironmentPtr;
 }
-
-void EvalEnvironmentImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
-{
-	switch(featureID)
-	{
-		case ocl::Evaluations::EvaluationsPackage::EVALENVIRONMENT_ATTRIBUTE_BINDINGS:
-		{
-			std::shared_ptr<Bag<ocl::Values::NameValueBinding>> _bindings = getBindings();
-			for(std::shared_ptr<ecore::EObject> ref : references)
-			{
-				std::shared_ptr<ocl::Values::NameValueBinding>  _r = std::dynamic_pointer_cast<ocl::Values::NameValueBinding>(ref);
-				if (_r != nullptr)
-				{
-					_bindings->push_back(_r);
-				}
-			}
-			return;
-		}
-	}
-	ecore::EObjectImpl::resolveReferences(featureID, references);
-}
-
-void EvalEnvironmentImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
-{
-	saveContent(saveHandler);
-
-	
-	ecore::EObjectImpl::saveContent(saveHandler);
-	
-}
-
-void EvalEnvironmentImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
-{
-	try
-	{
-		std::shared_ptr<ocl::Evaluations::EvaluationsPackage> package = ocl::Evaluations::EvaluationsPackage::eInstance();
-	// Add references
-		saveHandler->addReferences<ocl::Values::NameValueBinding>("bindings", this->getBindings());
-	}
-	catch (std::exception& e)
-	{
-		std::cout << "| ERROR    | " << e.what() << std::endl;
-	}
-}
-

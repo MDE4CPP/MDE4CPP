@@ -1,3 +1,4 @@
+
 #include "ecore/impl/ETypeParameterImpl.hpp"
 
 #ifdef NDEBUG
@@ -25,7 +26,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -33,7 +33,6 @@
 
 #include <exception> // used in Persistence
 #include "ecore/ecoreFactory.hpp"
-
 
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EGenericType.hpp"
@@ -134,25 +133,18 @@ std::shared_ptr<ecore::EObject> ETypeParameterImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<EClass> ETypeParameterImpl::eStaticClass() const
-{
-	return ecore::ecorePackage::eInstance()->getETypeParameter_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference eBounds
-*/
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference eBounds */
 std::shared_ptr<Bag<ecore::EGenericType>> ETypeParameterImpl::getEBounds() const
 {
 	if(m_eBounds == nullptr)
@@ -163,8 +155,6 @@ std::shared_ptr<Bag<ecore::EGenericType>> ETypeParameterImpl::getEBounds() const
 	}
     return m_eBounds;
 }
-
-
 
 //*********************************
 // Union Getter
@@ -184,18 +174,9 @@ std::shared_ptr<Union<ecore::EObject>> ETypeParameterImpl::getEContens() const
 	return m_eContens;
 }
 
-
-
-
-std::shared_ptr<ETypeParameter> ETypeParameterImpl::getThisETypeParameterPtr() const
-{
-	return m_thisETypeParameterPtr.lock();
-}
-void ETypeParameterImpl::setThisETypeParameterPtr(std::weak_ptr<ETypeParameter> thisETypeParameterPtr)
-{
-	m_thisETypeParameterPtr = thisETypeParameterPtr;
-	setThisENamedElementPtr(thisETypeParameterPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> ETypeParameterImpl::eContainer() const
 {
 	if(auto wp = m_eContainer.lock())
@@ -203,105 +184,6 @@ std::shared_ptr<ecore::EObject> ETypeParameterImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any ETypeParameterImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case ecore::ecorePackage::ETYPEPARAMETER_ATTRIBUTE_EBOUNDS:
-		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<ecore::EGenericType>::iterator iter = getEBounds()->begin();
-			Bag<ecore::EGenericType>::iterator end = getEBounds()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //525			
-		}
-	}
-	return ENamedElementImpl::eGet(featureID, resolve, coreType);
-}
-bool ETypeParameterImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case ecore::ecorePackage::ETYPEPARAMETER_ATTRIBUTE_EBOUNDS:
-			return getEBounds() != nullptr; //525
-	}
-	return ENamedElementImpl::internalEIsSet(featureID);
-}
-bool ETypeParameterImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case ecore::ecorePackage::ETYPEPARAMETER_ATTRIBUTE_EBOUNDS:
-		{
-			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<ecore::EGenericType>> eBoundsList(new Bag<ecore::EGenericType>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
-			{
-				eBoundsList->add(std::dynamic_pointer_cast<ecore::EGenericType>(*iter));
-				iter++;
-			}
-			
-			Bag<ecore::EGenericType>::iterator iterEBounds = getEBounds()->begin();
-			Bag<ecore::EGenericType>::iterator endEBounds = getEBounds()->end();
-			while (iterEBounds != endEBounds)
-			{
-				if (eBoundsList->find(*iterEBounds) == -1)
-				{
-					getEBounds()->erase(*iterEBounds);
-				}
-				iterEBounds++;
-			}
- 
-			iterEBounds = eBoundsList->begin();
-			endEBounds = eBoundsList->end();
-			while (iterEBounds != endEBounds)
-			{
-				if (getEBounds()->find(*iterEBounds) == -1)
-				{
-					getEBounds()->add(*iterEBounds);
-				}
-				iterEBounds++;			
-			}
-			return true;
-		}
-	}
-
-	return ENamedElementImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any ETypeParameterImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-
-		default:
-		{
-			// call superTypes
-			result = ENamedElementImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -374,9 +256,6 @@ void ETypeParameterImpl::save(std::shared_ptr<persistence::interfaces::XSaveHand
 	EObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
 }
 
 void ETypeParameterImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -398,3 +277,121 @@ void ETypeParameterImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 	}
 }
 
+
+std::shared_ptr<EClass> ETypeParameterImpl::eStaticClass() const
+{
+	return ecore::ecorePackage::eInstance()->getETypeParameter_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any ETypeParameterImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case ecore::ecorePackage::ETYPEPARAMETER_ATTRIBUTE_EBOUNDS:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<ecore::EGenericType>::iterator iter = getEBounds()->begin();
+			Bag<ecore::EGenericType>::iterator end = getEBounds()->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //525			
+		}
+	}
+	return ENamedElementImpl::eGet(featureID, resolve, coreType);
+}
+
+bool ETypeParameterImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case ecore::ecorePackage::ETYPEPARAMETER_ATTRIBUTE_EBOUNDS:
+			return getEBounds() != nullptr; //525
+	}
+	return ENamedElementImpl::internalEIsSet(featureID);
+}
+
+bool ETypeParameterImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case ecore::ecorePackage::ETYPEPARAMETER_ATTRIBUTE_EBOUNDS:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<ecore::EGenericType>> eBoundsList(new Bag<ecore::EGenericType>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				eBoundsList->add(std::dynamic_pointer_cast<ecore::EGenericType>(*iter));
+				iter++;
+			}
+			
+			Bag<ecore::EGenericType>::iterator iterEBounds = getEBounds()->begin();
+			Bag<ecore::EGenericType>::iterator endEBounds = getEBounds()->end();
+			while (iterEBounds != endEBounds)
+			{
+				if (eBoundsList->find(*iterEBounds) == -1)
+				{
+					getEBounds()->erase(*iterEBounds);
+				}
+				iterEBounds++;
+			}
+ 
+			iterEBounds = eBoundsList->begin();
+			endEBounds = eBoundsList->end();
+			while (iterEBounds != endEBounds)
+			{
+				if (getEBounds()->find(*iterEBounds) == -1)
+				{
+					getEBounds()->add(*iterEBounds);
+				}
+				iterEBounds++;			
+			}
+			return true;
+		}
+	}
+
+	return ENamedElementImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any ETypeParameterImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+
+		default:
+		{
+			// call superTypes
+			result = ENamedElementImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<ETypeParameter> ETypeParameterImpl::getThisETypeParameterPtr() const
+{
+	return m_thisETypeParameterPtr.lock();
+}
+void ETypeParameterImpl::setThisETypeParameterPtr(std::weak_ptr<ETypeParameter> thisETypeParameterPtr)
+{
+	m_thisETypeParameterPtr = thisETypeParameterPtr;
+	setThisENamedElementPtr(thisETypeParameterPtr);
+}

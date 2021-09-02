@@ -1,3 +1,4 @@
+
 #include "fUML/Semantics/Activities/impl/ActivityExecutionImpl.hpp"
 
 #ifdef NDEBUG
@@ -52,7 +53,6 @@
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
-
 
 #include "uml/Activity.hpp"
 #include "fUML/Semantics/Activities/ActivityNodeActivationGroup.hpp"
@@ -146,15 +146,6 @@ std::shared_ptr<ecore::EObject> ActivityExecutionImpl::copy() const
 	element->setThisActivityExecutionPtr(element);
 	return element;
 }
-
-std::shared_ptr<ecore::EClass> ActivityExecutionImpl::eStaticClass() const
-{
-	return fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getActivityExecution_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
 
 //*********************************
 // Operations
@@ -263,11 +254,13 @@ void ActivityExecutionImpl::terminate()
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference activationGroup
-*/
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference activationGroup */
 std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> ActivityExecutionImpl::getActivationGroup() const
 {
     return m_activationGroup;
@@ -278,10 +271,7 @@ void ActivityExecutionImpl::setActivationGroup(std::shared_ptr<fUML::Semantics::
 	
 }
 
-
-/*
-Getter & Setter for reference activity
-*/
+/* Getter & Setter for reference activity */
 std::shared_ptr<uml::Activity> ActivityExecutionImpl::getActivity() const
 {
 	//generated from getterBody annotation
@@ -298,7 +288,6 @@ void ActivityExecutionImpl::setActivity(std::shared_ptr<uml::Activity> _activity
     m_activity = _activity;
 	//additional setter call for redefined reference Execution::behavior
 	fUML::Semantics::CommonBehavior::ExecutionImpl::setBehavior(_activity);
-	
 }
 /*Additional Setter for redefined reference 'Execution::behavior'*/
 void ActivityExecutionImpl::setBehavior(std::shared_ptr<uml::Behavior> _behavior)
@@ -317,132 +306,16 @@ void ActivityExecutionImpl::setBehavior(std::shared_ptr<uml::Behavior> _behavior
 	}
 }
 
-
 //*********************************
 // Union Getter
 //*********************************
 
-
-
-std::shared_ptr<ActivityExecution> ActivityExecutionImpl::getThisActivityExecutionPtr() const
-{
-	return m_thisActivityExecutionPtr.lock();
-}
-void ActivityExecutionImpl::setThisActivityExecutionPtr(std::weak_ptr<ActivityExecution> thisActivityExecutionPtr)
-{
-	m_thisActivityExecutionPtr = thisActivityExecutionPtr;
-	setThisExecutionPtr(thisActivityExecutionPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> ActivityExecutionImpl::eContainer() const
 {
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any ActivityExecutionImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYEXECUTION_ATTRIBUTE_ACTIVATIONGROUP:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getActivationGroup();
-				return eAny(returnValue); //77
-			}
-		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYEXECUTION_ATTRIBUTE_ACTIVITY:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getActivity();
-				return eAny(returnValue); //78
-			}
-	}
-	return fUML::Semantics::CommonBehavior::ExecutionImpl::eGet(featureID, resolve, coreType);
-}
-bool ActivityExecutionImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYEXECUTION_ATTRIBUTE_ACTIVATIONGROUP:
-			return getActivationGroup() != nullptr; //77
-		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYEXECUTION_ATTRIBUTE_ACTIVITY:
-			return getActivity() != nullptr; //78
-	}
-	return fUML::Semantics::CommonBehavior::ExecutionImpl::internalEIsSet(featureID);
-}
-bool ActivityExecutionImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYEXECUTION_ATTRIBUTE_ACTIVATIONGROUP:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> _activationGroup = std::dynamic_pointer_cast<fUML::Semantics::Activities::ActivityNodeActivationGroup>(_temp);
-			setActivationGroup(_activationGroup); //77
-			return true;
-		}
-		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYEXECUTION_ATTRIBUTE_ACTIVITY:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::Activity> _activity = std::dynamic_pointer_cast<uml::Activity>(_temp);
-			setActivity(_activity); //78
-			return true;
-		}
-	}
-
-	return fUML::Semantics::CommonBehavior::ExecutionImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any ActivityExecutionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-		
-		// 268283450
-		case ActivitiesPackage::ACTIVITYEXECUTION_OPERATION__COPY:
-		{
-			result = eAny(this->_copy());
-			break;
-		}
-		
-		// 1727608078
-		case ActivitiesPackage::ACTIVITYEXECUTION_OPERATION_EXECUTE:
-		{
-			this->execute();
-			break;
-		}
-		
-		// 929802882
-		case ActivitiesPackage::ACTIVITYEXECUTION_OPERATION_NEW_:
-		{
-			result = eAny(this->new_());
-			break;
-		}
-		
-		// 679246932
-		case ActivitiesPackage::ACTIVITYEXECUTION_OPERATION_TERMINATE:
-		{
-			this->terminate();
-			break;
-		}
-
-		default:
-		{
-			// call superTypes
-			result = fUML::Semantics::CommonBehavior::ExecutionImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -556,13 +429,6 @@ void ActivityExecutionImpl::save(std::shared_ptr<persistence::interfaces::XSaveH
 	fUML::Semantics::Loci::SemanticVisitorImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
-	
-	
-	
 }
 
 void ActivityExecutionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -586,3 +452,129 @@ void ActivityExecutionImpl::saveContent(std::shared_ptr<persistence::interfaces:
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> ActivityExecutionImpl::eStaticClass() const
+{
+	return fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getActivityExecution_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any ActivityExecutionImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYEXECUTION_ATTRIBUTE_ACTIVATIONGROUP:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getActivationGroup();
+				return eAny(returnValue); //77
+			}
+		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYEXECUTION_ATTRIBUTE_ACTIVITY:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getActivity();
+				return eAny(returnValue); //78
+			}
+	}
+	return fUML::Semantics::CommonBehavior::ExecutionImpl::eGet(featureID, resolve, coreType);
+}
+
+bool ActivityExecutionImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYEXECUTION_ATTRIBUTE_ACTIVATIONGROUP:
+			return getActivationGroup() != nullptr; //77
+		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYEXECUTION_ATTRIBUTE_ACTIVITY:
+			return getActivity() != nullptr; //78
+	}
+	return fUML::Semantics::CommonBehavior::ExecutionImpl::internalEIsSet(featureID);
+}
+
+bool ActivityExecutionImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYEXECUTION_ATTRIBUTE_ACTIVATIONGROUP:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> _activationGroup = std::dynamic_pointer_cast<fUML::Semantics::Activities::ActivityNodeActivationGroup>(_temp);
+			setActivationGroup(_activationGroup); //77
+			return true;
+		}
+		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYEXECUTION_ATTRIBUTE_ACTIVITY:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::Activity> _activity = std::dynamic_pointer_cast<uml::Activity>(_temp);
+			setActivity(_activity); //78
+			return true;
+		}
+	}
+
+	return fUML::Semantics::CommonBehavior::ExecutionImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any ActivityExecutionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 268283450
+		case ActivitiesPackage::ACTIVITYEXECUTION_OPERATION__COPY:
+		{
+			result = eAny(this->_copy());
+			break;
+		}
+		
+		// 1727608078
+		case ActivitiesPackage::ACTIVITYEXECUTION_OPERATION_EXECUTE:
+		{
+			this->execute();
+			break;
+		}
+		
+		// 929802882
+		case ActivitiesPackage::ACTIVITYEXECUTION_OPERATION_NEW_:
+		{
+			result = eAny(this->new_());
+			break;
+		}
+		
+		// 679246932
+		case ActivitiesPackage::ACTIVITYEXECUTION_OPERATION_TERMINATE:
+		{
+			this->terminate();
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = fUML::Semantics::CommonBehavior::ExecutionImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<ActivityExecution> ActivityExecutionImpl::getThisActivityExecutionPtr() const
+{
+	return m_thisActivityExecutionPtr.lock();
+}
+void ActivityExecutionImpl::setThisActivityExecutionPtr(std::weak_ptr<ActivityExecution> thisActivityExecutionPtr)
+{
+	m_thisActivityExecutionPtr = thisActivityExecutionPtr;
+	setThisExecutionPtr(thisActivityExecutionPtr);
+}

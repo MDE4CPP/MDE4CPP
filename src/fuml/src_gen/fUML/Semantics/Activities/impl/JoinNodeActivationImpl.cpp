@@ -1,3 +1,4 @@
+
 #include "fUML/Semantics/Activities/impl/JoinNodeActivationImpl.hpp"
 
 #ifdef NDEBUG
@@ -36,7 +37,6 @@
 #include <exception> // used in Persistence
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "uml/umlFactory.hpp"
-
 
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
 #include "uml/ActivityNode.hpp"
@@ -119,15 +119,6 @@ std::shared_ptr<ecore::EObject> JoinNodeActivationImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> JoinNodeActivationImpl::eStaticClass() const
-{
-	return fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getJoinNodeActivation_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
@@ -193,24 +184,20 @@ bool JoinNodeActivationImpl::isReady()
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
+//*********************************
+
+//*********************************
+// Reference Getters & Setters
 //*********************************
 
 //*********************************
 // Union Getter
 //*********************************
 
-
-
-std::shared_ptr<JoinNodeActivation> JoinNodeActivationImpl::getThisJoinNodeActivationPtr() const
-{
-	return m_thisJoinNodeActivationPtr.lock();
-}
-void JoinNodeActivationImpl::setThisJoinNodeActivationPtr(std::weak_ptr<JoinNodeActivation> thisJoinNodeActivationPtr)
-{
-	m_thisJoinNodeActivationPtr = thisJoinNodeActivationPtr;
-	setThisControlNodeActivationPtr(thisJoinNodeActivationPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> JoinNodeActivationImpl::eContainer() const
 {
 	if(auto wp = m_group.lock())
@@ -218,74 +205,6 @@ std::shared_ptr<ecore::EObject> JoinNodeActivationImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any JoinNodeActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-	}
-	return ControlNodeActivationImpl::eGet(featureID, resolve, coreType);
-}
-bool JoinNodeActivationImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-	}
-	return ControlNodeActivationImpl::internalEIsSet(featureID);
-}
-bool JoinNodeActivationImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-	}
-
-	return ControlNodeActivationImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any JoinNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-		
-		// 1177783705
-		case ActivitiesPackage::JOINNODEACTIVATION_OPERATION_FIRE_TOKEN:
-		{
-			//Retrieve input parameter 'incomingTokens'
-			//parameter 0
-			std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> incoming_param_incomingTokens;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_incomingTokens_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_incomingTokens = (*incoming_param_incomingTokens_arguments_citer)->get()->get<std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> >();
-			this->fire(incoming_param_incomingTokens);
-			break;
-		}
-		
-		// 1317433736
-		case ActivitiesPackage::JOINNODEACTIVATION_OPERATION_ISREADY:
-		{
-			result = eAny(this->isReady());
-			break;
-		}
-
-		default:
-		{
-			// call superTypes
-			result = ControlNodeActivationImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -336,9 +255,6 @@ void JoinNodeActivationImpl::save(std::shared_ptr<persistence::interfaces::XSave
 	fUML::Semantics::Loci::SemanticVisitorImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
 }
 
 void JoinNodeActivationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -353,3 +269,90 @@ void JoinNodeActivationImpl::saveContent(std::shared_ptr<persistence::interfaces
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> JoinNodeActivationImpl::eStaticClass() const
+{
+	return fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getJoinNodeActivation_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any JoinNodeActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+	}
+	return ControlNodeActivationImpl::eGet(featureID, resolve, coreType);
+}
+
+bool JoinNodeActivationImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+	}
+	return ControlNodeActivationImpl::internalEIsSet(featureID);
+}
+
+bool JoinNodeActivationImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+	}
+
+	return ControlNodeActivationImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any JoinNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 1177783705
+		case ActivitiesPackage::JOINNODEACTIVATION_OPERATION_FIRE_TOKEN:
+		{
+			//Retrieve input parameter 'incomingTokens'
+			//parameter 0
+			std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> incoming_param_incomingTokens;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_incomingTokens_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_incomingTokens = (*incoming_param_incomingTokens_arguments_citer)->get()->get<std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> >();
+			this->fire(incoming_param_incomingTokens);
+			break;
+		}
+		
+		// 1317433736
+		case ActivitiesPackage::JOINNODEACTIVATION_OPERATION_ISREADY:
+		{
+			result = eAny(this->isReady());
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = ControlNodeActivationImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<JoinNodeActivation> JoinNodeActivationImpl::getThisJoinNodeActivationPtr() const
+{
+	return m_thisJoinNodeActivationPtr.lock();
+}
+void JoinNodeActivationImpl::setThisJoinNodeActivationPtr(std::weak_ptr<JoinNodeActivation> thisJoinNodeActivationPtr)
+{
+	m_thisJoinNodeActivationPtr = thisJoinNodeActivationPtr;
+	setThisControlNodeActivationPtr(thisJoinNodeActivationPtr);
+}

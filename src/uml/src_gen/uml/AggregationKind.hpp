@@ -10,10 +10,13 @@
 namespace uml 
 {
 	enum AggregationKind {
+		
 		COMPOSITE = 2
 ,
+		
 		NONE = 0
 ,
+		
 		SHARED = 1
 	};
 }

@@ -1,3 +1,4 @@
+
 #include "PSCS/Semantics/Actions/impl/CS_ReadSelfActionActivationImpl.hpp"
 
 #ifdef NDEBUG
@@ -41,7 +42,6 @@
 #include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
-
 
 #include "uml/Action.hpp"
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
@@ -131,15 +131,6 @@ std::shared_ptr<ecore::EObject> CS_ReadSelfActionActivationImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> CS_ReadSelfActionActivationImpl::eStaticClass() const
-{
-	return PSCS::Semantics::Actions::ActionsPackage::eInstance()->getCS_ReadSelfActionActivation_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
@@ -170,7 +161,11 @@ void CS_ReadSelfActionActivationImpl::doAction()
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
+//*********************************
+
+//*********************************
+// Reference Getters & Setters
 //*********************************
 
 //*********************************
@@ -191,18 +186,9 @@ std::shared_ptr<Union<fUML::Semantics::Actions::PinActivation>> CS_ReadSelfActio
 	return m_pinActivation;
 }
 
-
-
-
-std::shared_ptr<CS_ReadSelfActionActivation> CS_ReadSelfActionActivationImpl::getThisCS_ReadSelfActionActivationPtr() const
-{
-	return m_thisCS_ReadSelfActionActivationPtr.lock();
-}
-void CS_ReadSelfActionActivationImpl::setThisCS_ReadSelfActionActivationPtr(std::weak_ptr<CS_ReadSelfActionActivation> thisCS_ReadSelfActionActivationPtr)
-{
-	m_thisCS_ReadSelfActionActivationPtr = thisCS_ReadSelfActionActivationPtr;
-	setThisReadSelfActionActivationPtr(thisCS_ReadSelfActionActivationPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> CS_ReadSelfActionActivationImpl::eContainer() const
 {
 	if(auto wp = m_group.lock())
@@ -210,62 +196,6 @@ std::shared_ptr<ecore::EObject> CS_ReadSelfActionActivationImpl::eContainer() co
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any CS_ReadSelfActionActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-	}
-	return fUML::Semantics::Actions::ReadSelfActionActivationImpl::eGet(featureID, resolve, coreType);
-}
-bool CS_ReadSelfActionActivationImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-	}
-	return fUML::Semantics::Actions::ReadSelfActionActivationImpl::internalEIsSet(featureID);
-}
-bool CS_ReadSelfActionActivationImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-	}
-
-	return fUML::Semantics::Actions::ReadSelfActionActivationImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any CS_ReadSelfActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-		
-		// 1482151985
-		case ActionsPackage::CS_READSELFACTIONACTIVATION_OPERATION_DOACTION:
-		{
-			this->doAction();
-			break;
-		}
-
-		default:
-		{
-			// call superTypes
-			result = fUML::Semantics::Actions::ReadSelfActionActivationImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -318,10 +248,6 @@ void CS_ReadSelfActionActivationImpl::save(std::shared_ptr<persistence::interfac
 	fUML::Semantics::Loci::SemanticVisitorImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
 }
 
 void CS_ReadSelfActionActivationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -336,3 +262,78 @@ void CS_ReadSelfActionActivationImpl::saveContent(std::shared_ptr<persistence::i
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> CS_ReadSelfActionActivationImpl::eStaticClass() const
+{
+	return PSCS::Semantics::Actions::ActionsPackage::eInstance()->getCS_ReadSelfActionActivation_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any CS_ReadSelfActionActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+	}
+	return fUML::Semantics::Actions::ReadSelfActionActivationImpl::eGet(featureID, resolve, coreType);
+}
+
+bool CS_ReadSelfActionActivationImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+	}
+	return fUML::Semantics::Actions::ReadSelfActionActivationImpl::internalEIsSet(featureID);
+}
+
+bool CS_ReadSelfActionActivationImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+	}
+
+	return fUML::Semantics::Actions::ReadSelfActionActivationImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any CS_ReadSelfActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 1482151985
+		case ActionsPackage::CS_READSELFACTIONACTIVATION_OPERATION_DOACTION:
+		{
+			this->doAction();
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = fUML::Semantics::Actions::ReadSelfActionActivationImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<CS_ReadSelfActionActivation> CS_ReadSelfActionActivationImpl::getThisCS_ReadSelfActionActivationPtr() const
+{
+	return m_thisCS_ReadSelfActionActivationPtr.lock();
+}
+void CS_ReadSelfActionActivationImpl::setThisCS_ReadSelfActionActivationPtr(std::weak_ptr<CS_ReadSelfActionActivation> thisCS_ReadSelfActionActivationPtr)
+{
+	m_thisCS_ReadSelfActionActivationPtr = thisCS_ReadSelfActionActivationPtr;
+	setThisReadSelfActionActivationPtr(thisCS_ReadSelfActionActivationPtr);
+}

@@ -1,3 +1,4 @@
+
 #include "uml/impl/OperationImpl.hpp"
 
 #ifdef NDEBUG
@@ -26,7 +27,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -34,7 +34,6 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-
 
 #include "uml/Behavior.hpp"
 #include "uml/BehavioralFeature.hpp"
@@ -285,68 +284,6 @@ std::shared_ptr<ecore::EObject> OperationImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> OperationImpl::eStaticClass() const
-{
-	return uml::umlPackage::eInstance()->getOperation_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-/*
-Getter & Setter for attribute isOrdered
-*/
-bool OperationImpl::getIsOrdered() const 
-{
-	return m_isOrdered;
-}
-
-
-
-/*
-Getter & Setter for attribute isQuery
-*/
-bool OperationImpl::getIsQuery() const 
-{
-	return m_isQuery;
-}
-void OperationImpl::setIsQuery(bool _isQuery)
-{
-	m_isQuery = _isQuery;
-	
-} 
-
-
-/*
-Getter & Setter for attribute isUnique
-*/
-bool OperationImpl::getIsUnique() const 
-{
-	return m_isUnique;
-}
-
-
-
-/*
-Getter & Setter for attribute lower
-*/
-int OperationImpl::getLower() const 
-{
-	return m_lower;
-}
-
-
-
-/*
-Getter & Setter for attribute upper
-*/
-int OperationImpl::getUpper() const 
-{
-	return m_upper;
-}
-
-
-
 //*********************************
 // Operations
 //*********************************
@@ -483,11 +420,47 @@ void OperationImpl::setUpper(int newUpper)
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference bodyCondition
-*/
+/* Getter & Setter for attribute isOrdered */
+bool OperationImpl::getIsOrdered() const 
+{
+	return m_isOrdered;
+}
+
+/* Getter & Setter for attribute isQuery */
+bool OperationImpl::getIsQuery() const 
+{
+	return m_isQuery;
+}
+void OperationImpl::setIsQuery(bool _isQuery)
+{
+	m_isQuery = _isQuery;
+	
+}
+
+/* Getter & Setter for attribute isUnique */
+bool OperationImpl::getIsUnique() const 
+{
+	return m_isUnique;
+}
+
+/* Getter & Setter for attribute lower */
+int OperationImpl::getLower() const 
+{
+	return m_lower;
+}
+
+/* Getter & Setter for attribute upper */
+int OperationImpl::getUpper() const 
+{
+	return m_upper;
+}
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference bodyCondition */
 std::shared_ptr<uml::Constraint> OperationImpl::getBodyCondition() const
 {
     return m_bodyCondition;
@@ -498,10 +471,7 @@ void OperationImpl::setBodyCondition(std::shared_ptr<uml::Constraint> _bodyCondi
 	
 }
 
-
-/*
-Getter & Setter for reference class
-*/
+/* Getter & Setter for reference class */
 std::weak_ptr<uml::Class> OperationImpl::getClass() const
 {
     return m_class;
@@ -512,10 +482,7 @@ void OperationImpl::setClass(std::weak_ptr<uml::Class> _class)
 	
 }
 
-
-/*
-Getter & Setter for reference datatype
-*/
+/* Getter & Setter for reference datatype */
 std::weak_ptr<uml::DataType> OperationImpl::getDatatype() const
 {
     return m_datatype;
@@ -526,10 +493,7 @@ void OperationImpl::setDatatype(std::weak_ptr<uml::DataType> _datatype)
 	
 }
 
-
-/*
-Getter & Setter for reference interface
-*/
+/* Getter & Setter for reference interface */
 std::weak_ptr<uml::Interface> OperationImpl::getInterface() const
 {
     return m_interface;
@@ -540,21 +504,14 @@ void OperationImpl::setInterface(std::weak_ptr<uml::Interface> _interface)
 	
 }
 
-
-/*
-Getter & Setter for reference ownedParameter
-*/
+/* Getter & Setter for reference ownedParameter */
 std::shared_ptr<Bag<uml::Parameter>> OperationImpl::getProperty_OwnedParameter() const
 {
 	//Getter call of redefined container reference BehavioralFeature::ownedParameter 
 	return uml::BehavioralFeatureImpl::getOwnedParameter();
 }
 
-
-
-/*
-Getter & Setter for reference postcondition
-*/
+/* Getter & Setter for reference postcondition */
 std::shared_ptr<Subset<uml::Constraint, uml::Constraint /*Subset does not reference a union*/>> OperationImpl::getPostcondition() const
 {
 	if(m_postcondition == nullptr)
@@ -575,11 +532,7 @@ std::shared_ptr<Subset<uml::Constraint, uml::Constraint /*Subset does not refere
     return m_postcondition;
 }
 
-
-
-/*
-Getter & Setter for reference precondition
-*/
+/* Getter & Setter for reference precondition */
 std::shared_ptr<Subset<uml::Constraint, uml::Constraint /*Subset does not reference a union*/>> OperationImpl::getPrecondition() const
 {
 	if(m_precondition == nullptr)
@@ -600,11 +553,7 @@ std::shared_ptr<Subset<uml::Constraint, uml::Constraint /*Subset does not refere
     return m_precondition;
 }
 
-
-
-/*
-Getter & Setter for reference redefinedOperation
-*/
+/* Getter & Setter for reference redefinedOperation */
 std::shared_ptr<Subset<uml::Operation, uml::RedefinableElement>> OperationImpl::getRedefinedOperation() const
 {
 	if(m_redefinedOperation == nullptr)
@@ -625,17 +574,11 @@ std::shared_ptr<Subset<uml::Operation, uml::RedefinableElement>> OperationImpl::
     return m_redefinedOperation;
 }
 
-
-
-/*
-Getter & Setter for reference type
-*/
+/* Getter & Setter for reference type */
 std::shared_ptr<uml::Type> OperationImpl::getType() const
 {
     return m_type;
 }
-
-
 
 //*********************************
 // Union Getter
@@ -747,18 +690,9 @@ std::shared_ptr<Union<uml::Classifier>> OperationImpl::getRedefinitionContext() 
 
 
 
-
-std::shared_ptr<Operation> OperationImpl::getThisOperationPtr() const
-{
-	return m_thisOperationPtr.lock();
-}
-void OperationImpl::setThisOperationPtr(std::weak_ptr<Operation> thisOperationPtr)
-{
-	m_thisOperationPtr = thisOperationPtr;
-	setThisBehavioralFeaturePtr(thisOperationPtr);
-	setThisParameterableElementPtr(thisOperationPtr);
-	setThisTemplateableElementPtr(thisOperationPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> OperationImpl::eContainer() const
 {
 	if(auto wp = m_class.lock())
@@ -791,546 +725,6 @@ std::shared_ptr<ecore::EObject> OperationImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any OperationImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::OPERATION_ATTRIBUTE_BODYCONDITION:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getBodyCondition();
-				return eAny(returnValue); //16730
-			}
-		case uml::umlPackage::OPERATION_ATTRIBUTE_CLASS:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getClass().lock();
-				return eAny(returnValue); //16731
-			}
-		case uml::umlPackage::OPERATION_ATTRIBUTE_DATATYPE:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getDatatype().lock();
-				return eAny(returnValue); //16732
-			}
-		case uml::umlPackage::OPERATION_ATTRIBUTE_INTERFACE:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getInterface().lock();
-				return eAny(returnValue); //16733
-			}
-		case uml::umlPackage::OPERATION_ATTRIBUTE_ISORDERED:
-			return eAny(getIsOrdered()); //16734
-		case uml::umlPackage::OPERATION_ATTRIBUTE_ISQUERY:
-			return eAny(getIsQuery()); //16735
-		case uml::umlPackage::OPERATION_ATTRIBUTE_ISUNIQUE:
-			return eAny(getIsUnique()); //16736
-		case uml::umlPackage::OPERATION_ATTRIBUTE_LOWER:
-			return eAny(getLower()); //16737
-		case uml::umlPackage::OPERATION_ATTRIBUTE_OWNEDPARAMETER:
-		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Parameter>::iterator iter = getProperty_OwnedParameter()->begin();
-			Bag<uml::Parameter>::iterator end = getProperty_OwnedParameter()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //16743			
-		}
-		case uml::umlPackage::OPERATION_ATTRIBUTE_POSTCONDITION:
-		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Constraint>::iterator iter = getPostcondition()->begin();
-			Bag<uml::Constraint>::iterator end = getPostcondition()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //16738			
-		}
-		case uml::umlPackage::OPERATION_ATTRIBUTE_PRECONDITION:
-		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Constraint>::iterator iter = getPrecondition()->begin();
-			Bag<uml::Constraint>::iterator end = getPrecondition()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //16739			
-		}
-		case uml::umlPackage::OPERATION_ATTRIBUTE_REDEFINEDOPERATION:
-		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Operation>::iterator iter = getRedefinedOperation()->begin();
-			Bag<uml::Operation>::iterator end = getRedefinedOperation()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //16740			
-		}
-		case uml::umlPackage::OPERATION_ATTRIBUTE_TYPE:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getType();
-				return eAny(returnValue); //16741
-			}
-		case uml::umlPackage::OPERATION_ATTRIBUTE_UPPER:
-			return eAny(getUpper()); //16742
-	}
-	Any result;
-	result = BehavioralFeatureImpl::eGet(featureID, resolve, coreType);
-	if (result != nullptr && !result->isEmpty())
-	{
-		return result;
-	}
-	result = ParameterableElementImpl::eGet(featureID, resolve, coreType);
-	if (result != nullptr && !result->isEmpty())
-	{
-		return result;
-	}
-	result = TemplateableElementImpl::eGet(featureID, resolve, coreType);
-	return result;
-}
-bool OperationImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::OPERATION_ATTRIBUTE_BODYCONDITION:
-			return getBodyCondition() != nullptr; //16730
-		case uml::umlPackage::OPERATION_ATTRIBUTE_CLASS:
-			return getClass().lock() != nullptr; //16731
-		case uml::umlPackage::OPERATION_ATTRIBUTE_DATATYPE:
-			return getDatatype().lock() != nullptr; //16732
-		case uml::umlPackage::OPERATION_ATTRIBUTE_INTERFACE:
-			return getInterface().lock() != nullptr; //16733
-		case uml::umlPackage::OPERATION_ATTRIBUTE_ISORDERED:
-			return getIsOrdered() != false; //16734
-		case uml::umlPackage::OPERATION_ATTRIBUTE_ISQUERY:
-			return getIsQuery() != false; //16735
-		case uml::umlPackage::OPERATION_ATTRIBUTE_ISUNIQUE:
-			return getIsUnique() != true; //16736
-		case uml::umlPackage::OPERATION_ATTRIBUTE_LOWER:
-			return getLower() != 1; //16737
-		case uml::umlPackage::OPERATION_ATTRIBUTE_OWNEDPARAMETER:
-			return getProperty_OwnedParameter() != nullptr; //16743
-		case uml::umlPackage::OPERATION_ATTRIBUTE_POSTCONDITION:
-			return getPostcondition() != nullptr; //16738
-		case uml::umlPackage::OPERATION_ATTRIBUTE_PRECONDITION:
-			return getPrecondition() != nullptr; //16739
-		case uml::umlPackage::OPERATION_ATTRIBUTE_REDEFINEDOPERATION:
-			return getRedefinedOperation() != nullptr; //16740
-		case uml::umlPackage::OPERATION_ATTRIBUTE_TYPE:
-			return getType() != nullptr; //16741
-		case uml::umlPackage::OPERATION_ATTRIBUTE_UPPER:
-			return getUpper() != 1; //16742
-	}
-	bool result = false;
-	result = BehavioralFeatureImpl::internalEIsSet(featureID);
-	if (result)
-	{
-		return result;
-	}
-	result = ParameterableElementImpl::internalEIsSet(featureID);
-	if (result)
-	{
-		return result;
-	}
-	result = TemplateableElementImpl::internalEIsSet(featureID);
-	return result;
-}
-bool OperationImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::OPERATION_ATTRIBUTE_BODYCONDITION:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::Constraint> _bodyCondition = std::dynamic_pointer_cast<uml::Constraint>(_temp);
-			setBodyCondition(_bodyCondition); //16730
-			return true;
-		}
-		case uml::umlPackage::OPERATION_ATTRIBUTE_CLASS:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::Class> _class = std::dynamic_pointer_cast<uml::Class>(_temp);
-			setClass(_class); //16731
-			return true;
-		}
-		case uml::umlPackage::OPERATION_ATTRIBUTE_DATATYPE:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::DataType> _datatype = std::dynamic_pointer_cast<uml::DataType>(_temp);
-			setDatatype(_datatype); //16732
-			return true;
-		}
-		case uml::umlPackage::OPERATION_ATTRIBUTE_INTERFACE:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::Interface> _interface = std::dynamic_pointer_cast<uml::Interface>(_temp);
-			setInterface(_interface); //16733
-			return true;
-		}
-		case uml::umlPackage::OPERATION_ATTRIBUTE_ISQUERY:
-		{
-			// BOOST CAST
-			bool _isQuery = newValue->get<bool>();
-			setIsQuery(_isQuery); //16735
-			return true;
-		}
-		case uml::umlPackage::OPERATION_ATTRIBUTE_OWNEDPARAMETER:
-		{
-			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::Parameter>> ownedParameterList(new Bag<uml::Parameter>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
-			{
-				ownedParameterList->add(std::dynamic_pointer_cast<uml::Parameter>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::Parameter>::iterator iterOwnedParameter = getProperty_OwnedParameter()->begin();
-			Bag<uml::Parameter>::iterator endOwnedParameter = getProperty_OwnedParameter()->end();
-			while (iterOwnedParameter != endOwnedParameter)
-			{
-				if (ownedParameterList->find(*iterOwnedParameter) == -1)
-				{
-					getProperty_OwnedParameter()->erase(*iterOwnedParameter);
-				}
-				iterOwnedParameter++;
-			}
- 
-			iterOwnedParameter = ownedParameterList->begin();
-			endOwnedParameter = ownedParameterList->end();
-			while (iterOwnedParameter != endOwnedParameter)
-			{
-				if (getProperty_OwnedParameter()->find(*iterOwnedParameter) == -1)
-				{
-					getProperty_OwnedParameter()->add(*iterOwnedParameter);
-				}
-				iterOwnedParameter++;			
-			}
-			return true;
-		}
-		case uml::umlPackage::OPERATION_ATTRIBUTE_POSTCONDITION:
-		{
-			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::Constraint>> postconditionList(new Bag<uml::Constraint>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
-			{
-				postconditionList->add(std::dynamic_pointer_cast<uml::Constraint>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::Constraint>::iterator iterPostcondition = getPostcondition()->begin();
-			Bag<uml::Constraint>::iterator endPostcondition = getPostcondition()->end();
-			while (iterPostcondition != endPostcondition)
-			{
-				if (postconditionList->find(*iterPostcondition) == -1)
-				{
-					getPostcondition()->erase(*iterPostcondition);
-				}
-				iterPostcondition++;
-			}
- 
-			iterPostcondition = postconditionList->begin();
-			endPostcondition = postconditionList->end();
-			while (iterPostcondition != endPostcondition)
-			{
-				if (getPostcondition()->find(*iterPostcondition) == -1)
-				{
-					getPostcondition()->add(*iterPostcondition);
-				}
-				iterPostcondition++;			
-			}
-			return true;
-		}
-		case uml::umlPackage::OPERATION_ATTRIBUTE_PRECONDITION:
-		{
-			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::Constraint>> preconditionList(new Bag<uml::Constraint>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
-			{
-				preconditionList->add(std::dynamic_pointer_cast<uml::Constraint>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::Constraint>::iterator iterPrecondition = getPrecondition()->begin();
-			Bag<uml::Constraint>::iterator endPrecondition = getPrecondition()->end();
-			while (iterPrecondition != endPrecondition)
-			{
-				if (preconditionList->find(*iterPrecondition) == -1)
-				{
-					getPrecondition()->erase(*iterPrecondition);
-				}
-				iterPrecondition++;
-			}
- 
-			iterPrecondition = preconditionList->begin();
-			endPrecondition = preconditionList->end();
-			while (iterPrecondition != endPrecondition)
-			{
-				if (getPrecondition()->find(*iterPrecondition) == -1)
-				{
-					getPrecondition()->add(*iterPrecondition);
-				}
-				iterPrecondition++;			
-			}
-			return true;
-		}
-		case uml::umlPackage::OPERATION_ATTRIBUTE_REDEFINEDOPERATION:
-		{
-			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::Operation>> redefinedOperationList(new Bag<uml::Operation>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
-			{
-				redefinedOperationList->add(std::dynamic_pointer_cast<uml::Operation>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::Operation>::iterator iterRedefinedOperation = getRedefinedOperation()->begin();
-			Bag<uml::Operation>::iterator endRedefinedOperation = getRedefinedOperation()->end();
-			while (iterRedefinedOperation != endRedefinedOperation)
-			{
-				if (redefinedOperationList->find(*iterRedefinedOperation) == -1)
-				{
-					getRedefinedOperation()->erase(*iterRedefinedOperation);
-				}
-				iterRedefinedOperation++;
-			}
- 
-			iterRedefinedOperation = redefinedOperationList->begin();
-			endRedefinedOperation = redefinedOperationList->end();
-			while (iterRedefinedOperation != endRedefinedOperation)
-			{
-				if (getRedefinedOperation()->find(*iterRedefinedOperation) == -1)
-				{
-					getRedefinedOperation()->add(*iterRedefinedOperation);
-				}
-				iterRedefinedOperation++;			
-			}
-			return true;
-		}
-	}
-
-	bool result = false;
-	result = BehavioralFeatureImpl::eSet(featureID, newValue);
-	if (result)
-	{
-		return result;
-	}
-	result = ParameterableElementImpl::eSet(featureID, newValue);
-	if (result)
-	{
-		return result;
-	}
-	result = TemplateableElementImpl::eSet(featureID, newValue);
-	return result;
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any OperationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-		
-		// 12386545
-		case umlPackage::OPERATION_OPERATION_AT_MOST_ONE_RETURN_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->at_most_one_return(incoming_param_diagnostics,incoming_param_context));
-			break;
-		}
-		
-		// 264279180
-		case umlPackage::OPERATION_OPERATION_GETLOWER:
-		{
-			result = eAny(this->getLower());
-			break;
-		}
-		
-		// 425885811
-		case umlPackage::OPERATION_OPERATION_GETRETURNRESULT:
-		{
-			result = eAny(this->getReturnResult());
-			break;
-		}
-		
-		// 84668058
-		case umlPackage::OPERATION_OPERATION_GETTYPE:
-		{
-			result = eAny(this->getType());
-			break;
-		}
-		
-		// 658132292
-		case umlPackage::OPERATION_OPERATION_GETUPPER:
-		{
-			result = eAny(this->getUpper());
-			break;
-		}
-		
-		// 2046966888
-		case umlPackage::OPERATION_OPERATION_ISORDERED:
-		{
-			result = eAny(this->isOrdered());
-			break;
-		}
-		
-		// 49097112
-		case umlPackage::OPERATION_OPERATION_ISUNIQUE:
-		{
-			result = eAny(this->isUnique());
-			break;
-		}
-		
-		// 189559370
-		case umlPackage::OPERATION_OPERATION_MATCHES_OPERATION:
-		{
-			//Retrieve input parameter 'comparedOperation'
-			//parameter 0
-			std::shared_ptr<uml::Operation> incoming_param_comparedOperation;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_comparedOperation_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_comparedOperation = (*incoming_param_comparedOperation_arguments_citer)->get()->get<std::shared_ptr<uml::Operation> >();
-			result = eAny(this->matches(incoming_param_comparedOperation));
-			break;
-		}
-		
-		// 1181713863
-		case umlPackage::OPERATION_OPERATION_ONLY_BODY_FOR_QUERY_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->only_body_for_query(incoming_param_diagnostics,incoming_param_context));
-			break;
-		}
-		
-		// 831929813
-		case umlPackage::OPERATION_OPERATION_RETURNRESULT:
-		{
-			result = eAny(this->returnResult());
-			break;
-		}
-		
-		// 995733814
-		case umlPackage::OPERATION_OPERATION_SETISORDERED_BOOLEAN:
-		{
-			//Retrieve input parameter 'newIsOrdered'
-			//parameter 0
-			bool incoming_param_newIsOrdered;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_newIsOrdered_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_newIsOrdered = (*incoming_param_newIsOrdered_arguments_citer)->get()->get<bool >();
-			this->setIsOrdered(incoming_param_newIsOrdered);
-			break;
-		}
-		
-		// 1673854407
-		case umlPackage::OPERATION_OPERATION_SETISUNIQUE_BOOLEAN:
-		{
-			//Retrieve input parameter 'newIsUnique'
-			//parameter 0
-			bool incoming_param_newIsUnique;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_newIsUnique_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_newIsUnique = (*incoming_param_newIsUnique_arguments_citer)->get()->get<bool >();
-			this->setIsUnique(incoming_param_newIsUnique);
-			break;
-		}
-		
-		// 1123488961
-		case umlPackage::OPERATION_OPERATION_SETLOWER_INTEGER:
-		{
-			//Retrieve input parameter 'newLower'
-			//parameter 0
-			int incoming_param_newLower;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_newLower_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_newLower = (*incoming_param_newLower_arguments_citer)->get()->get<int >();
-			this->setLower(incoming_param_newLower);
-			break;
-		}
-		
-		// 1580697963
-		case umlPackage::OPERATION_OPERATION_SETTYPE_TYPE:
-		{
-			//Retrieve input parameter 'newType'
-			//parameter 0
-			std::shared_ptr<uml::Type> incoming_param_newType;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_newType_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_newType = (*incoming_param_newType_arguments_citer)->get()->get<std::shared_ptr<uml::Type> >();
-			this->setType(incoming_param_newType);
-			break;
-		}
-		
-		// 1517342073
-		case umlPackage::OPERATION_OPERATION_SETUPPER_UNLIMITEDNATURAL:
-		{
-			//Retrieve input parameter 'newUpper'
-			//parameter 0
-			int incoming_param_newUpper;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_newUpper_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_newUpper = (*incoming_param_newUpper_arguments_citer)->get()->get<int >();
-			this->setUpper(incoming_param_newUpper);
-			break;
-		}
-
-		default:
-		{
-			// call superTypes
-			result = TemplateableElementImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			result = ParameterableElementImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			result = BehavioralFeatureImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -1559,12 +953,6 @@ void OperationImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> 
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
-	
-	
 }
 
 void OperationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -1596,3 +984,564 @@ void OperationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHa
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> OperationImpl::eStaticClass() const
+{
+	return uml::umlPackage::eInstance()->getOperation_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any OperationImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::OPERATION_ATTRIBUTE_BODYCONDITION:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getBodyCondition();
+				return eAny(returnValue); //16730
+			}
+		case uml::umlPackage::OPERATION_ATTRIBUTE_CLASS:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getClass().lock();
+				return eAny(returnValue); //16731
+			}
+		case uml::umlPackage::OPERATION_ATTRIBUTE_DATATYPE:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getDatatype().lock();
+				return eAny(returnValue); //16732
+			}
+		case uml::umlPackage::OPERATION_ATTRIBUTE_INTERFACE:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getInterface().lock();
+				return eAny(returnValue); //16733
+			}
+		case uml::umlPackage::OPERATION_ATTRIBUTE_ISORDERED:
+			return eAny(getIsOrdered()); //16734
+		case uml::umlPackage::OPERATION_ATTRIBUTE_ISQUERY:
+			return eAny(getIsQuery()); //16735
+		case uml::umlPackage::OPERATION_ATTRIBUTE_ISUNIQUE:
+			return eAny(getIsUnique()); //16736
+		case uml::umlPackage::OPERATION_ATTRIBUTE_LOWER:
+			return eAny(getLower()); //16737
+		case uml::umlPackage::OPERATION_ATTRIBUTE_OWNEDPARAMETER:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Parameter>::iterator iter = getProperty_OwnedParameter()->begin();
+			Bag<uml::Parameter>::iterator end = getProperty_OwnedParameter()->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //16743			
+		}
+		case uml::umlPackage::OPERATION_ATTRIBUTE_POSTCONDITION:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Constraint>::iterator iter = getPostcondition()->begin();
+			Bag<uml::Constraint>::iterator end = getPostcondition()->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //16738			
+		}
+		case uml::umlPackage::OPERATION_ATTRIBUTE_PRECONDITION:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Constraint>::iterator iter = getPrecondition()->begin();
+			Bag<uml::Constraint>::iterator end = getPrecondition()->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //16739			
+		}
+		case uml::umlPackage::OPERATION_ATTRIBUTE_REDEFINEDOPERATION:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Operation>::iterator iter = getRedefinedOperation()->begin();
+			Bag<uml::Operation>::iterator end = getRedefinedOperation()->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //16740			
+		}
+		case uml::umlPackage::OPERATION_ATTRIBUTE_TYPE:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getType();
+				return eAny(returnValue); //16741
+			}
+		case uml::umlPackage::OPERATION_ATTRIBUTE_UPPER:
+			return eAny(getUpper()); //16742
+	}
+	Any result;
+	result = BehavioralFeatureImpl::eGet(featureID, resolve, coreType);
+	if (result != nullptr && !result->isEmpty())
+	{
+		return result;
+	}
+	result = ParameterableElementImpl::eGet(featureID, resolve, coreType);
+	if (result != nullptr && !result->isEmpty())
+	{
+		return result;
+	}
+	result = TemplateableElementImpl::eGet(featureID, resolve, coreType);
+	return result;
+}
+
+bool OperationImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::OPERATION_ATTRIBUTE_BODYCONDITION:
+			return getBodyCondition() != nullptr; //16730
+		case uml::umlPackage::OPERATION_ATTRIBUTE_CLASS:
+			return getClass().lock() != nullptr; //16731
+		case uml::umlPackage::OPERATION_ATTRIBUTE_DATATYPE:
+			return getDatatype().lock() != nullptr; //16732
+		case uml::umlPackage::OPERATION_ATTRIBUTE_INTERFACE:
+			return getInterface().lock() != nullptr; //16733
+		case uml::umlPackage::OPERATION_ATTRIBUTE_ISORDERED:
+			return getIsOrdered() != false; //16734
+		case uml::umlPackage::OPERATION_ATTRIBUTE_ISQUERY:
+			return getIsQuery() != false; //16735
+		case uml::umlPackage::OPERATION_ATTRIBUTE_ISUNIQUE:
+			return getIsUnique() != true; //16736
+		case uml::umlPackage::OPERATION_ATTRIBUTE_LOWER:
+			return getLower() != 1; //16737
+		case uml::umlPackage::OPERATION_ATTRIBUTE_OWNEDPARAMETER:
+			return getProperty_OwnedParameter() != nullptr; //16743
+		case uml::umlPackage::OPERATION_ATTRIBUTE_POSTCONDITION:
+			return getPostcondition() != nullptr; //16738
+		case uml::umlPackage::OPERATION_ATTRIBUTE_PRECONDITION:
+			return getPrecondition() != nullptr; //16739
+		case uml::umlPackage::OPERATION_ATTRIBUTE_REDEFINEDOPERATION:
+			return getRedefinedOperation() != nullptr; //16740
+		case uml::umlPackage::OPERATION_ATTRIBUTE_TYPE:
+			return getType() != nullptr; //16741
+		case uml::umlPackage::OPERATION_ATTRIBUTE_UPPER:
+			return getUpper() != 1; //16742
+	}
+	bool result = false;
+	result = BehavioralFeatureImpl::internalEIsSet(featureID);
+	if (result)
+	{
+		return result;
+	}
+	result = ParameterableElementImpl::internalEIsSet(featureID);
+	if (result)
+	{
+		return result;
+	}
+	result = TemplateableElementImpl::internalEIsSet(featureID);
+	return result;
+}
+
+bool OperationImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::OPERATION_ATTRIBUTE_BODYCONDITION:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::Constraint> _bodyCondition = std::dynamic_pointer_cast<uml::Constraint>(_temp);
+			setBodyCondition(_bodyCondition); //16730
+			return true;
+		}
+		case uml::umlPackage::OPERATION_ATTRIBUTE_CLASS:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::Class> _class = std::dynamic_pointer_cast<uml::Class>(_temp);
+			setClass(_class); //16731
+			return true;
+		}
+		case uml::umlPackage::OPERATION_ATTRIBUTE_DATATYPE:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::DataType> _datatype = std::dynamic_pointer_cast<uml::DataType>(_temp);
+			setDatatype(_datatype); //16732
+			return true;
+		}
+		case uml::umlPackage::OPERATION_ATTRIBUTE_INTERFACE:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::Interface> _interface = std::dynamic_pointer_cast<uml::Interface>(_temp);
+			setInterface(_interface); //16733
+			return true;
+		}
+		case uml::umlPackage::OPERATION_ATTRIBUTE_ISQUERY:
+		{
+			// BOOST CAST
+			bool _isQuery = newValue->get<bool>();
+			setIsQuery(_isQuery); //16735
+			return true;
+		}
+		case uml::umlPackage::OPERATION_ATTRIBUTE_OWNEDPARAMETER:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::Parameter>> ownedParameterList(new Bag<uml::Parameter>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				ownedParameterList->add(std::dynamic_pointer_cast<uml::Parameter>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::Parameter>::iterator iterOwnedParameter = getProperty_OwnedParameter()->begin();
+			Bag<uml::Parameter>::iterator endOwnedParameter = getProperty_OwnedParameter()->end();
+			while (iterOwnedParameter != endOwnedParameter)
+			{
+				if (ownedParameterList->find(*iterOwnedParameter) == -1)
+				{
+					getProperty_OwnedParameter()->erase(*iterOwnedParameter);
+				}
+				iterOwnedParameter++;
+			}
+ 
+			iterOwnedParameter = ownedParameterList->begin();
+			endOwnedParameter = ownedParameterList->end();
+			while (iterOwnedParameter != endOwnedParameter)
+			{
+				if (getProperty_OwnedParameter()->find(*iterOwnedParameter) == -1)
+				{
+					getProperty_OwnedParameter()->add(*iterOwnedParameter);
+				}
+				iterOwnedParameter++;			
+			}
+			return true;
+		}
+		case uml::umlPackage::OPERATION_ATTRIBUTE_POSTCONDITION:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::Constraint>> postconditionList(new Bag<uml::Constraint>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				postconditionList->add(std::dynamic_pointer_cast<uml::Constraint>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::Constraint>::iterator iterPostcondition = getPostcondition()->begin();
+			Bag<uml::Constraint>::iterator endPostcondition = getPostcondition()->end();
+			while (iterPostcondition != endPostcondition)
+			{
+				if (postconditionList->find(*iterPostcondition) == -1)
+				{
+					getPostcondition()->erase(*iterPostcondition);
+				}
+				iterPostcondition++;
+			}
+ 
+			iterPostcondition = postconditionList->begin();
+			endPostcondition = postconditionList->end();
+			while (iterPostcondition != endPostcondition)
+			{
+				if (getPostcondition()->find(*iterPostcondition) == -1)
+				{
+					getPostcondition()->add(*iterPostcondition);
+				}
+				iterPostcondition++;			
+			}
+			return true;
+		}
+		case uml::umlPackage::OPERATION_ATTRIBUTE_PRECONDITION:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::Constraint>> preconditionList(new Bag<uml::Constraint>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				preconditionList->add(std::dynamic_pointer_cast<uml::Constraint>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::Constraint>::iterator iterPrecondition = getPrecondition()->begin();
+			Bag<uml::Constraint>::iterator endPrecondition = getPrecondition()->end();
+			while (iterPrecondition != endPrecondition)
+			{
+				if (preconditionList->find(*iterPrecondition) == -1)
+				{
+					getPrecondition()->erase(*iterPrecondition);
+				}
+				iterPrecondition++;
+			}
+ 
+			iterPrecondition = preconditionList->begin();
+			endPrecondition = preconditionList->end();
+			while (iterPrecondition != endPrecondition)
+			{
+				if (getPrecondition()->find(*iterPrecondition) == -1)
+				{
+					getPrecondition()->add(*iterPrecondition);
+				}
+				iterPrecondition++;			
+			}
+			return true;
+		}
+		case uml::umlPackage::OPERATION_ATTRIBUTE_REDEFINEDOPERATION:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::Operation>> redefinedOperationList(new Bag<uml::Operation>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				redefinedOperationList->add(std::dynamic_pointer_cast<uml::Operation>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::Operation>::iterator iterRedefinedOperation = getRedefinedOperation()->begin();
+			Bag<uml::Operation>::iterator endRedefinedOperation = getRedefinedOperation()->end();
+			while (iterRedefinedOperation != endRedefinedOperation)
+			{
+				if (redefinedOperationList->find(*iterRedefinedOperation) == -1)
+				{
+					getRedefinedOperation()->erase(*iterRedefinedOperation);
+				}
+				iterRedefinedOperation++;
+			}
+ 
+			iterRedefinedOperation = redefinedOperationList->begin();
+			endRedefinedOperation = redefinedOperationList->end();
+			while (iterRedefinedOperation != endRedefinedOperation)
+			{
+				if (getRedefinedOperation()->find(*iterRedefinedOperation) == -1)
+				{
+					getRedefinedOperation()->add(*iterRedefinedOperation);
+				}
+				iterRedefinedOperation++;			
+			}
+			return true;
+		}
+	}
+
+	bool result = false;
+	result = BehavioralFeatureImpl::eSet(featureID, newValue);
+	if (result)
+	{
+		return result;
+	}
+	result = ParameterableElementImpl::eSet(featureID, newValue);
+	if (result)
+	{
+		return result;
+	}
+	result = TemplateableElementImpl::eSet(featureID, newValue);
+	return result;
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any OperationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 12386545
+		case umlPackage::OPERATION_OPERATION_AT_MOST_ONE_RETURN_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->at_most_one_return(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+		
+		// 264279180
+		case umlPackage::OPERATION_OPERATION_GETLOWER:
+		{
+			result = eAny(this->getLower());
+			break;
+		}
+		
+		// 425885811
+		case umlPackage::OPERATION_OPERATION_GETRETURNRESULT:
+		{
+			result = eAny(this->getReturnResult());
+			break;
+		}
+		
+		// 84668058
+		case umlPackage::OPERATION_OPERATION_GETTYPE:
+		{
+			result = eAny(this->getType());
+			break;
+		}
+		
+		// 658132292
+		case umlPackage::OPERATION_OPERATION_GETUPPER:
+		{
+			result = eAny(this->getUpper());
+			break;
+		}
+		
+		// 2046966888
+		case umlPackage::OPERATION_OPERATION_ISORDERED:
+		{
+			result = eAny(this->isOrdered());
+			break;
+		}
+		
+		// 49097112
+		case umlPackage::OPERATION_OPERATION_ISUNIQUE:
+		{
+			result = eAny(this->isUnique());
+			break;
+		}
+		
+		// 189559370
+		case umlPackage::OPERATION_OPERATION_MATCHES_OPERATION:
+		{
+			//Retrieve input parameter 'comparedOperation'
+			//parameter 0
+			std::shared_ptr<uml::Operation> incoming_param_comparedOperation;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_comparedOperation_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_comparedOperation = (*incoming_param_comparedOperation_arguments_citer)->get()->get<std::shared_ptr<uml::Operation> >();
+			result = eAny(this->matches(incoming_param_comparedOperation));
+			break;
+		}
+		
+		// 1181713863
+		case umlPackage::OPERATION_OPERATION_ONLY_BODY_FOR_QUERY_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->only_body_for_query(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+		
+		// 831929813
+		case umlPackage::OPERATION_OPERATION_RETURNRESULT:
+		{
+			result = eAny(this->returnResult());
+			break;
+		}
+		
+		// 995733814
+		case umlPackage::OPERATION_OPERATION_SETISORDERED_BOOLEAN:
+		{
+			//Retrieve input parameter 'newIsOrdered'
+			//parameter 0
+			bool incoming_param_newIsOrdered;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_newIsOrdered_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_newIsOrdered = (*incoming_param_newIsOrdered_arguments_citer)->get()->get<bool >();
+			this->setIsOrdered(incoming_param_newIsOrdered);
+			break;
+		}
+		
+		// 1673854407
+		case umlPackage::OPERATION_OPERATION_SETISUNIQUE_BOOLEAN:
+		{
+			//Retrieve input parameter 'newIsUnique'
+			//parameter 0
+			bool incoming_param_newIsUnique;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_newIsUnique_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_newIsUnique = (*incoming_param_newIsUnique_arguments_citer)->get()->get<bool >();
+			this->setIsUnique(incoming_param_newIsUnique);
+			break;
+		}
+		
+		// 1123488961
+		case umlPackage::OPERATION_OPERATION_SETLOWER_INTEGER:
+		{
+			//Retrieve input parameter 'newLower'
+			//parameter 0
+			int incoming_param_newLower;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_newLower_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_newLower = (*incoming_param_newLower_arguments_citer)->get()->get<int >();
+			this->setLower(incoming_param_newLower);
+			break;
+		}
+		
+		// 1580697963
+		case umlPackage::OPERATION_OPERATION_SETTYPE_TYPE:
+		{
+			//Retrieve input parameter 'newType'
+			//parameter 0
+			std::shared_ptr<uml::Type> incoming_param_newType;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_newType_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_newType = (*incoming_param_newType_arguments_citer)->get()->get<std::shared_ptr<uml::Type> >();
+			this->setType(incoming_param_newType);
+			break;
+		}
+		
+		// 1517342073
+		case umlPackage::OPERATION_OPERATION_SETUPPER_UNLIMITEDNATURAL:
+		{
+			//Retrieve input parameter 'newUpper'
+			//parameter 0
+			int incoming_param_newUpper;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_newUpper_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_newUpper = (*incoming_param_newUpper_arguments_citer)->get()->get<int >();
+			this->setUpper(incoming_param_newUpper);
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = TemplateableElementImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			result = ParameterableElementImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			result = BehavioralFeatureImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<Operation> OperationImpl::getThisOperationPtr() const
+{
+	return m_thisOperationPtr.lock();
+}
+void OperationImpl::setThisOperationPtr(std::weak_ptr<Operation> thisOperationPtr)
+{
+	m_thisOperationPtr = thisOperationPtr;
+	setThisBehavioralFeaturePtr(thisOperationPtr);
+	setThisParameterableElementPtr(thisOperationPtr);
+	setThisTemplateableElementPtr(thisOperationPtr);
+}

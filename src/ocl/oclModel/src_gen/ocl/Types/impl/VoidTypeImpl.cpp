@@ -1,3 +1,4 @@
+
 #include "ocl/Types/impl/VoidTypeImpl.hpp"
 
 #ifdef NDEBUG
@@ -25,7 +26,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -33,7 +33,6 @@
 
 #include <exception> // used in Persistence
 #include "ecore/ecoreFactory.hpp"
-
 
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClassifier.hpp"
@@ -114,38 +113,25 @@ std::shared_ptr<ecore::EObject> VoidTypeImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> VoidTypeImpl::eStaticClass() const
-{
-	return ocl::Types::TypesPackage::eInstance()->getVoidType_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
 
 //*********************************
-// References
+// Attribute Getters & Setters
+//*********************************
+
+//*********************************
+// Reference Getters & Setters
 //*********************************
 
 //*********************************
 // Union Getter
 //*********************************
 
-
-
-std::shared_ptr<VoidType> VoidTypeImpl::getThisVoidTypePtr() const
-{
-	return m_thisVoidTypePtr.lock();
-}
-void VoidTypeImpl::setThisVoidTypePtr(std::weak_ptr<VoidType> thisVoidTypePtr)
-{
-	m_thisVoidTypePtr = thisVoidTypePtr;
-	setThisEClassifierPtr(thisVoidTypePtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> VoidTypeImpl::eContainer() const
 {
 	if(auto wp = m_ePackage.lock())
@@ -153,55 +139,6 @@ std::shared_ptr<ecore::EObject> VoidTypeImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any VoidTypeImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-	}
-	return ecore::EClassifierImpl::eGet(featureID, resolve, coreType);
-}
-bool VoidTypeImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-	}
-	return ecore::EClassifierImpl::internalEIsSet(featureID);
-}
-bool VoidTypeImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-	}
-
-	return ecore::EClassifierImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any VoidTypeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-
-		default:
-		{
-			// call superTypes
-			result = ecore::EClassifierImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -252,9 +189,6 @@ void VoidTypeImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> s
 	ecore::EModelElementImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
 }
 
 void VoidTypeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -269,3 +203,71 @@ void VoidTypeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> VoidTypeImpl::eStaticClass() const
+{
+	return ocl::Types::TypesPackage::eInstance()->getVoidType_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any VoidTypeImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+	}
+	return ecore::EClassifierImpl::eGet(featureID, resolve, coreType);
+}
+
+bool VoidTypeImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+	}
+	return ecore::EClassifierImpl::internalEIsSet(featureID);
+}
+
+bool VoidTypeImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+	}
+
+	return ecore::EClassifierImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any VoidTypeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+
+		default:
+		{
+			// call superTypes
+			result = ecore::EClassifierImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<VoidType> VoidTypeImpl::getThisVoidTypePtr() const
+{
+	return m_thisVoidTypePtr.lock();
+}
+void VoidTypeImpl::setThisVoidTypePtr(std::weak_ptr<VoidType> thisVoidTypePtr)
+{
+	m_thisVoidTypePtr = thisVoidTypePtr;
+	setThisEClassifierPtr(thisVoidTypePtr);
+}

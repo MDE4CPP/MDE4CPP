@@ -93,13 +93,13 @@ namespace uml
 			//*********************************
 			// Operations
 			//*********************************
-			
+
 			//*********************************
-			// Attributes Getter & Setter
+			// Attribute Getters & Setters
 			//*********************************
-			
+
 			//*********************************
-			// References Getter & Setter
+			// Reference Getters & Setters
 			//*********************************
 			/*!
 			References the Lifelines that the InteractionFragment involves.
@@ -107,7 +107,6 @@ namespace uml
 			*/
 			
 			virtual std::shared_ptr<Bag<uml::Lifeline>> getCovered() const = 0;
-			
 			/*!
 			The Interaction enclosing this InteractionFragment.
 			<p>From package UML::Interactions.</p>
@@ -138,14 +137,45 @@ namespace uml
 			*/
 			
 			virtual std::shared_ptr<Subset<uml::GeneralOrdering, uml::Element>> getGeneralOrdering() const = 0;
+
+			//*********************************
+			// Union Reference Getters
+			//*********************************
+			/*!
+			Specifies the Namespace that owns the NamedElement.
+			<p>From package UML::CommonStructure.</p>
+			*/
 			
+			virtual std::weak_ptr<uml::Namespace> getNamespace() const = 0;
+			/*!
+			The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
 			
+			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;
+			/*!
+			The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
+			virtual std::weak_ptr<uml::Element> getOwner() const = 0;
+
+			//*********************************
+			// Container Getter
+			//*********************************
+			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
+
+			//*********************************
+			// Persistence Functions
+			//*********************************
+			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 
 		protected:
 			//*********************************
 			// Attribute Members
 			//*********************************
-			
 			
 			//*********************************
 			// Reference Members
@@ -155,55 +185,25 @@ namespace uml
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			mutable std::shared_ptr<Bag<uml::Lifeline>> m_covered;/*!
+			mutable std::shared_ptr<Bag<uml::Lifeline>> m_covered;
+			/*!
 			The Interaction enclosing this InteractionFragment.
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			std::weak_ptr<uml::Interaction> m_enclosingInteraction;/*!
+			std::weak_ptr<uml::Interaction> m_enclosingInteraction;
+			/*!
 			The operand enclosing this InteractionFragment (they may nest recursively).
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			std::weak_ptr<uml::InteractionOperand> m_enclosingOperand;/*!
+			std::weak_ptr<uml::InteractionOperand> m_enclosingOperand;
+			/*!
 			The general ordering relationships contained in this fragment.
 			<p>From package UML::Interactions.</p>
 			*/
 			
 			mutable std::shared_ptr<Subset<uml::GeneralOrdering, uml::Element>> m_generalOrdering;
-
-		public:
-			//*********************************
-			// Union Getter
-			//*********************************
-			/*!
-			Specifies the Namespace that owns the NamedElement.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::weak_ptr<uml::Namespace> getNamespace() const = 0;/*!
-			The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;/*!
-			The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::weak_ptr<uml::Element> getOwner() const = 0;
-
-			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
-			
-			//*********************************
-			// Persistence Functions
-			//*********************************
-			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
-			
-			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
-			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
-			
 	};
-
 }
 #endif /* end of include guard: UML_INTERACTIONFRAGMENT_HPP */

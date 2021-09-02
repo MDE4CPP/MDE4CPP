@@ -50,27 +50,32 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::InputPin> > allPins() ;/*!
+			virtual std::shared_ptr<Bag<uml::InputPin> > allPins() ;
+			/*!
 			The value InputPin is not also the qualifier value InputPin.
 			value->excludesAll(qualifier.value)
 			*/
 			 
-			virtual bool end_object_input_pin(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
+			virtual bool end_object_input_pin(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			/*!
 			The multiplicity of the value InputPin must be 1..1.
 			value<>null implies value.is(1,1)
 			*/
 			 
-			virtual bool multiplicity(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
+			virtual bool multiplicity(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			/*!
 			The Property must be an Association memberEnd.
 			end.association <> null
 			*/
 			 
-			virtual bool property_is_association_end(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
+			virtual bool property_is_association_end(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			/*!
 			The qualifiers must be qualifiers of the Association end.
 			end.qualifier->includesAll(qualifier.qualifier)
 			*/
 			 
-			virtual bool qualifiers(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
+			virtual bool qualifiers(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			/*!
 			The type of the value InputPin conforms to the type of the Association end.
 			value<>null implies value.type.conformsTo(end.type)
 			*/
@@ -78,12 +83,11 @@ namespace uml
 			virtual bool same_type(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
-			// Attributes Getter Setter
+			// Attribute Getters & Setters
 			//*********************************
 			
-			
 			//*********************************
-			// Reference
+			// Reference Getters & Setters
 			//*********************************
 			/*!
 			The Association end for which this LinkEndData specifies values.
@@ -103,7 +107,6 @@ namespace uml
 			*/
 			
 			virtual std::shared_ptr<Subset<uml::QualifierValue, uml::Element>> getQualifier() const ;
-			
 			/*!
 			The InputPin that provides the specified value for the given end. This InputPin is omitted if the LinkEndData specifies the "open" end for a ReadLinkAction.
 			<p>From package UML::Actions.</p>
@@ -117,9 +120,8 @@ namespace uml
 			
 			virtual void setValue(std::shared_ptr<uml::InputPin>) ;
 			
-			
 			//*********************************
-			// Union Getter
+			// Union Reference Getters
 			//*********************************
 			/*!
 			The Elements owned by this Element.
@@ -128,7 +130,9 @@ namespace uml
 			
 			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const ;
 			
-
+			//*********************************
+			// Container Getter
+			//*********************************
 			virtual std::shared_ptr<ecore::EObject> eContainer() const ; 
 			
 			//*********************************
@@ -137,20 +141,23 @@ namespace uml
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) ;
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
-			
 			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
-			
 
-			//*********************************
-			// Structural Feature Getter/Setter
-			//*********************************
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+
+			//*********************************
+			// EStructuralFeature Get/Set/IsSet
+			//*********************************
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool internalEIsSet(int featureID) const ;
 			virtual bool eSet(int featureID, Any newValue) ;
+			virtual bool internalEIsSet(int featureID) const ;
+
+			//*********************************
+			// EOperation Invoke
+			//*********************************
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:

@@ -1,3 +1,4 @@
+
 #include "ocl/Expressions/impl/NavigationCallExpImpl.hpp"
 
 #ifdef NDEBUG
@@ -25,7 +26,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -35,7 +35,6 @@
 #include "ecore/ecoreFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
-
 
 #include "ocl/Expressions/CallExp.hpp"
 #include "ocl/Expressions/CollectionRange.hpp"
@@ -228,25 +227,18 @@ std::shared_ptr<ecore::EObject> NavigationCallExpImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> NavigationCallExpImpl::eStaticClass() const
-{
-	return ocl::Expressions::ExpressionsPackage::eInstance()->getNavigationCallExp_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference navigationSource
-*/
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference navigationSource */
 std::shared_ptr<ecore::EAttribute> NavigationCallExpImpl::getNavigationSource() const
 {
     return m_navigationSource;
@@ -257,10 +249,7 @@ void NavigationCallExpImpl::setNavigationSource(std::shared_ptr<ecore::EAttribut
 	
 }
 
-
-/*
-Getter & Setter for reference qualifier
-*/
+/* Getter & Setter for reference qualifier */
 std::shared_ptr<Bag<ocl::Expressions::OclExpression>> NavigationCallExpImpl::getQualifier() const
 {
 	if(m_qualifier == nullptr)
@@ -272,23 +261,13 @@ std::shared_ptr<Bag<ocl::Expressions::OclExpression>> NavigationCallExpImpl::get
     return m_qualifier;
 }
 
-
-
 //*********************************
 // Union Getter
 //*********************************
 
-
-
-std::shared_ptr<NavigationCallExp> NavigationCallExpImpl::getThisNavigationCallExpPtr() const
-{
-	return m_thisNavigationCallExpPtr.lock();
-}
-void NavigationCallExpImpl::setThisNavigationCallExpPtr(std::weak_ptr<NavigationCallExp> thisNavigationCallExpPtr)
-{
-	m_thisNavigationCallExpPtr = thisNavigationCallExpPtr;
-	setThisFeatureCallExpPtr(thisNavigationCallExpPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> NavigationCallExpImpl::eContainer() const
 {
 	if(auto wp = m_appliedElement.lock())
@@ -346,120 +325,6 @@ std::shared_ptr<ecore::EObject> NavigationCallExpImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any NavigationCallExpImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case ocl::Expressions::ExpressionsPackage::NAVIGATIONCALLEXP_ATTRIBUTE_NAVIGATIONSOURCE:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getNavigationSource();
-				return eAny(returnValue); //5325
-			}
-		case ocl::Expressions::ExpressionsPackage::NAVIGATIONCALLEXP_ATTRIBUTE_QUALIFIER:
-		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<ocl::Expressions::OclExpression>::iterator iter = getQualifier()->begin();
-			Bag<ocl::Expressions::OclExpression>::iterator end = getQualifier()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //5324			
-		}
-	}
-	return FeatureCallExpImpl::eGet(featureID, resolve, coreType);
-}
-bool NavigationCallExpImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case ocl::Expressions::ExpressionsPackage::NAVIGATIONCALLEXP_ATTRIBUTE_NAVIGATIONSOURCE:
-			return getNavigationSource() != nullptr; //5325
-		case ocl::Expressions::ExpressionsPackage::NAVIGATIONCALLEXP_ATTRIBUTE_QUALIFIER:
-			return getQualifier() != nullptr; //5324
-	}
-	return FeatureCallExpImpl::internalEIsSet(featureID);
-}
-bool NavigationCallExpImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case ocl::Expressions::ExpressionsPackage::NAVIGATIONCALLEXP_ATTRIBUTE_NAVIGATIONSOURCE:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<ecore::EAttribute> _navigationSource = std::dynamic_pointer_cast<ecore::EAttribute>(_temp);
-			setNavigationSource(_navigationSource); //5325
-			return true;
-		}
-		case ocl::Expressions::ExpressionsPackage::NAVIGATIONCALLEXP_ATTRIBUTE_QUALIFIER:
-		{
-			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<ocl::Expressions::OclExpression>> qualifierList(new Bag<ocl::Expressions::OclExpression>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
-			{
-				qualifierList->add(std::dynamic_pointer_cast<ocl::Expressions::OclExpression>(*iter));
-				iter++;
-			}
-			
-			Bag<ocl::Expressions::OclExpression>::iterator iterQualifier = getQualifier()->begin();
-			Bag<ocl::Expressions::OclExpression>::iterator endQualifier = getQualifier()->end();
-			while (iterQualifier != endQualifier)
-			{
-				if (qualifierList->find(*iterQualifier) == -1)
-				{
-					getQualifier()->erase(*iterQualifier);
-				}
-				iterQualifier++;
-			}
- 
-			iterQualifier = qualifierList->begin();
-			endQualifier = qualifierList->end();
-			while (iterQualifier != endQualifier)
-			{
-				if (getQualifier()->find(*iterQualifier) == -1)
-				{
-					getQualifier()->add(*iterQualifier);
-				}
-				iterQualifier++;			
-			}
-			return true;
-		}
-	}
-
-	return FeatureCallExpImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any NavigationCallExpImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-
-		default:
-		{
-			// call superTypes
-			result = FeatureCallExpImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -572,12 +437,6 @@ void NavigationCallExpImpl::save(std::shared_ptr<persistence::interfaces::XSaveH
 	ecore::EModelElementImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
-	
-	
 }
 
 void NavigationCallExpImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -601,3 +460,136 @@ void NavigationCallExpImpl::saveContent(std::shared_ptr<persistence::interfaces:
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> NavigationCallExpImpl::eStaticClass() const
+{
+	return ocl::Expressions::ExpressionsPackage::eInstance()->getNavigationCallExp_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any NavigationCallExpImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case ocl::Expressions::ExpressionsPackage::NAVIGATIONCALLEXP_ATTRIBUTE_NAVIGATIONSOURCE:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getNavigationSource();
+				return eAny(returnValue); //5325
+			}
+		case ocl::Expressions::ExpressionsPackage::NAVIGATIONCALLEXP_ATTRIBUTE_QUALIFIER:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<ocl::Expressions::OclExpression>::iterator iter = getQualifier()->begin();
+			Bag<ocl::Expressions::OclExpression>::iterator end = getQualifier()->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //5324			
+		}
+	}
+	return FeatureCallExpImpl::eGet(featureID, resolve, coreType);
+}
+
+bool NavigationCallExpImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case ocl::Expressions::ExpressionsPackage::NAVIGATIONCALLEXP_ATTRIBUTE_NAVIGATIONSOURCE:
+			return getNavigationSource() != nullptr; //5325
+		case ocl::Expressions::ExpressionsPackage::NAVIGATIONCALLEXP_ATTRIBUTE_QUALIFIER:
+			return getQualifier() != nullptr; //5324
+	}
+	return FeatureCallExpImpl::internalEIsSet(featureID);
+}
+
+bool NavigationCallExpImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case ocl::Expressions::ExpressionsPackage::NAVIGATIONCALLEXP_ATTRIBUTE_NAVIGATIONSOURCE:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<ecore::EAttribute> _navigationSource = std::dynamic_pointer_cast<ecore::EAttribute>(_temp);
+			setNavigationSource(_navigationSource); //5325
+			return true;
+		}
+		case ocl::Expressions::ExpressionsPackage::NAVIGATIONCALLEXP_ATTRIBUTE_QUALIFIER:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<ocl::Expressions::OclExpression>> qualifierList(new Bag<ocl::Expressions::OclExpression>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				qualifierList->add(std::dynamic_pointer_cast<ocl::Expressions::OclExpression>(*iter));
+				iter++;
+			}
+			
+			Bag<ocl::Expressions::OclExpression>::iterator iterQualifier = getQualifier()->begin();
+			Bag<ocl::Expressions::OclExpression>::iterator endQualifier = getQualifier()->end();
+			while (iterQualifier != endQualifier)
+			{
+				if (qualifierList->find(*iterQualifier) == -1)
+				{
+					getQualifier()->erase(*iterQualifier);
+				}
+				iterQualifier++;
+			}
+ 
+			iterQualifier = qualifierList->begin();
+			endQualifier = qualifierList->end();
+			while (iterQualifier != endQualifier)
+			{
+				if (getQualifier()->find(*iterQualifier) == -1)
+				{
+					getQualifier()->add(*iterQualifier);
+				}
+				iterQualifier++;			
+			}
+			return true;
+		}
+	}
+
+	return FeatureCallExpImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any NavigationCallExpImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+
+		default:
+		{
+			// call superTypes
+			result = FeatureCallExpImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<NavigationCallExp> NavigationCallExpImpl::getThisNavigationCallExpPtr() const
+{
+	return m_thisNavigationCallExpPtr.lock();
+}
+void NavigationCallExpImpl::setThisNavigationCallExpPtr(std::weak_ptr<NavigationCallExp> thisNavigationCallExpPtr)
+{
+	m_thisNavigationCallExpPtr = thisNavigationCallExpPtr;
+	setThisFeatureCallExpPtr(thisNavigationCallExpPtr);
+}

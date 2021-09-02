@@ -1,3 +1,4 @@
+
 #include "uml/impl/RemoveVariableValueActionImpl.hpp"
 
 #ifdef NDEBUG
@@ -26,7 +27,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -34,7 +34,6 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-
 
 #include "uml/Activity.hpp"
 #include "uml/ActivityEdge.hpp"
@@ -160,28 +159,6 @@ std::shared_ptr<ecore::EObject> RemoveVariableValueActionImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> RemoveVariableValueActionImpl::eStaticClass() const
-{
-	return uml::umlPackage::eInstance()->getRemoveVariableValueAction_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-/*
-Getter & Setter for attribute isRemoveDuplicates
-*/
-bool RemoveVariableValueActionImpl::getIsRemoveDuplicates() const 
-{
-	return m_isRemoveDuplicates;
-}
-void RemoveVariableValueActionImpl::setIsRemoveDuplicates(bool _isRemoveDuplicates)
-{
-	m_isRemoveDuplicates = _isRemoveDuplicates;
-	
-} 
-
-
 //*********************************
 // Operations
 //*********************************
@@ -192,11 +169,23 @@ bool RemoveVariableValueActionImpl::removeAt_and_value(Any diagnostics,std::shar
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference removeAt
-*/
+/* Getter & Setter for attribute isRemoveDuplicates */
+bool RemoveVariableValueActionImpl::getIsRemoveDuplicates() const 
+{
+	return m_isRemoveDuplicates;
+}
+void RemoveVariableValueActionImpl::setIsRemoveDuplicates(bool _isRemoveDuplicates)
+{
+	m_isRemoveDuplicates = _isRemoveDuplicates;
+	
+}
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference removeAt */
 std::shared_ptr<uml::InputPin> RemoveVariableValueActionImpl::getRemoveAt() const
 {
     return m_removeAt;
@@ -206,7 +195,6 @@ void RemoveVariableValueActionImpl::setRemoveAt(std::shared_ptr<uml::InputPin> _
     m_removeAt = _removeAt;
 	
 }
-
 
 //*********************************
 // Union Getter
@@ -281,18 +269,9 @@ std::shared_ptr<Union<uml::RedefinableElement>> RemoveVariableValueActionImpl::g
 	return m_redefinedElement;
 }
 
-
-
-
-std::shared_ptr<RemoveVariableValueAction> RemoveVariableValueActionImpl::getThisRemoveVariableValueActionPtr() const
-{
-	return m_thisRemoveVariableValueActionPtr.lock();
-}
-void RemoveVariableValueActionImpl::setThisRemoveVariableValueActionPtr(std::weak_ptr<RemoveVariableValueAction> thisRemoveVariableValueActionPtr)
-{
-	m_thisRemoveVariableValueActionPtr = thisRemoveVariableValueActionPtr;
-	setThisWriteVariableActionPtr(thisRemoveVariableValueActionPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> RemoveVariableValueActionImpl::eContainer() const
 {
 	if(auto wp = m_activity.lock())
@@ -315,98 +294,6 @@ std::shared_ptr<ecore::EObject> RemoveVariableValueActionImpl::eContainer() cons
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any RemoveVariableValueActionImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::REMOVEVARIABLEVALUEACTION_ATTRIBUTE_ISREMOVEDUPLICATES:
-			return eAny(getIsRemoveDuplicates()); //21029
-		case uml::umlPackage::REMOVEVARIABLEVALUEACTION_ATTRIBUTE_REMOVEAT:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getRemoveAt();
-				return eAny(returnValue); //21030
-			}
-	}
-	return WriteVariableActionImpl::eGet(featureID, resolve, coreType);
-}
-bool RemoveVariableValueActionImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::REMOVEVARIABLEVALUEACTION_ATTRIBUTE_ISREMOVEDUPLICATES:
-			return getIsRemoveDuplicates() != false; //21029
-		case uml::umlPackage::REMOVEVARIABLEVALUEACTION_ATTRIBUTE_REMOVEAT:
-			return getRemoveAt() != nullptr; //21030
-	}
-	return WriteVariableActionImpl::internalEIsSet(featureID);
-}
-bool RemoveVariableValueActionImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::REMOVEVARIABLEVALUEACTION_ATTRIBUTE_ISREMOVEDUPLICATES:
-		{
-			// BOOST CAST
-			bool _isRemoveDuplicates = newValue->get<bool>();
-			setIsRemoveDuplicates(_isRemoveDuplicates); //21029
-			return true;
-		}
-		case uml::umlPackage::REMOVEVARIABLEVALUEACTION_ATTRIBUTE_REMOVEAT:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::InputPin> _removeAt = std::dynamic_pointer_cast<uml::InputPin>(_temp);
-			setRemoveAt(_removeAt); //21030
-			return true;
-		}
-	}
-
-	return WriteVariableActionImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any RemoveVariableValueActionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-		
-		// 212395563
-		case umlPackage::REMOVEVARIABLEVALUEACTION_OPERATION_REMOVEAT_AND_VALUE_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->removeAt_and_value(incoming_param_diagnostics,incoming_param_context));
-			break;
-		}
-
-		default:
-		{
-			// call superTypes
-			result = WriteVariableActionImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -512,15 +399,6 @@ void RemoveVariableValueActionImpl::save(std::shared_ptr<persistence::interfaces
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
-	
-	
-	
-	
-	
 }
 
 void RemoveVariableValueActionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -546,3 +424,114 @@ void RemoveVariableValueActionImpl::saveContent(std::shared_ptr<persistence::int
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> RemoveVariableValueActionImpl::eStaticClass() const
+{
+	return uml::umlPackage::eInstance()->getRemoveVariableValueAction_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any RemoveVariableValueActionImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::REMOVEVARIABLEVALUEACTION_ATTRIBUTE_ISREMOVEDUPLICATES:
+			return eAny(getIsRemoveDuplicates()); //21029
+		case uml::umlPackage::REMOVEVARIABLEVALUEACTION_ATTRIBUTE_REMOVEAT:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getRemoveAt();
+				return eAny(returnValue); //21030
+			}
+	}
+	return WriteVariableActionImpl::eGet(featureID, resolve, coreType);
+}
+
+bool RemoveVariableValueActionImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::REMOVEVARIABLEVALUEACTION_ATTRIBUTE_ISREMOVEDUPLICATES:
+			return getIsRemoveDuplicates() != false; //21029
+		case uml::umlPackage::REMOVEVARIABLEVALUEACTION_ATTRIBUTE_REMOVEAT:
+			return getRemoveAt() != nullptr; //21030
+	}
+	return WriteVariableActionImpl::internalEIsSet(featureID);
+}
+
+bool RemoveVariableValueActionImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::REMOVEVARIABLEVALUEACTION_ATTRIBUTE_ISREMOVEDUPLICATES:
+		{
+			// BOOST CAST
+			bool _isRemoveDuplicates = newValue->get<bool>();
+			setIsRemoveDuplicates(_isRemoveDuplicates); //21029
+			return true;
+		}
+		case uml::umlPackage::REMOVEVARIABLEVALUEACTION_ATTRIBUTE_REMOVEAT:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::InputPin> _removeAt = std::dynamic_pointer_cast<uml::InputPin>(_temp);
+			setRemoveAt(_removeAt); //21030
+			return true;
+		}
+	}
+
+	return WriteVariableActionImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any RemoveVariableValueActionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 212395563
+		case umlPackage::REMOVEVARIABLEVALUEACTION_OPERATION_REMOVEAT_AND_VALUE_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->removeAt_and_value(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = WriteVariableActionImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<RemoveVariableValueAction> RemoveVariableValueActionImpl::getThisRemoveVariableValueActionPtr() const
+{
+	return m_thisRemoveVariableValueActionPtr.lock();
+}
+void RemoveVariableValueActionImpl::setThisRemoveVariableValueActionPtr(std::weak_ptr<RemoveVariableValueAction> thisRemoveVariableValueActionPtr)
+{
+	m_thisRemoveVariableValueActionPtr = thisRemoveVariableValueActionPtr;
+	setThisWriteVariableActionPtr(thisRemoveVariableValueActionPtr);
+}

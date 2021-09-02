@@ -1,3 +1,4 @@
+
 #include "uml/impl/PackageMergeImpl.hpp"
 
 #ifdef NDEBUG
@@ -25,7 +26,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -33,7 +33,6 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-
 
 #include "uml/Comment.hpp"
 #include "uml/DirectedRelationship.hpp"
@@ -126,25 +125,18 @@ std::shared_ptr<ecore::EObject> PackageMergeImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> PackageMergeImpl::eStaticClass() const
-{
-	return uml::umlPackage::eInstance()->getPackageMerge_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference mergedPackage
-*/
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference mergedPackage */
 std::shared_ptr<uml::Package> PackageMergeImpl::getMergedPackage() const
 {
     return m_mergedPackage;
@@ -155,10 +147,7 @@ void PackageMergeImpl::setMergedPackage(std::shared_ptr<uml::Package> _mergedPac
 	
 }
 
-
-/*
-Getter & Setter for reference receivingPackage
-*/
+/* Getter & Setter for reference receivingPackage */
 std::weak_ptr<uml::Package> PackageMergeImpl::getReceivingPackage() const
 {
     return m_receivingPackage;
@@ -168,7 +157,6 @@ void PackageMergeImpl::setReceivingPackage(std::weak_ptr<uml::Package> _receivin
     m_receivingPackage = _receivingPackage;
 	
 }
-
 
 //*********************************
 // Union Getter
@@ -248,18 +236,9 @@ std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> PackageMergeImpl::getTa
 	return m_target;
 }
 
-
-
-
-std::shared_ptr<PackageMerge> PackageMergeImpl::getThisPackageMergePtr() const
-{
-	return m_thisPackageMergePtr.lock();
-}
-void PackageMergeImpl::setThisPackageMergePtr(std::weak_ptr<PackageMerge> thisPackageMergePtr)
-{
-	m_thisPackageMergePtr = thisPackageMergePtr;
-	setThisDirectedRelationshipPtr(thisPackageMergePtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> PackageMergeImpl::eContainer() const
 {
 	if(auto wp = m_owner.lock())
@@ -272,85 +251,6 @@ std::shared_ptr<ecore::EObject> PackageMergeImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any PackageMergeImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::PACKAGEMERGE_ATTRIBUTE_MERGEDPACKAGE:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getMergedPackage();
-				return eAny(returnValue); //1726
-			}
-		case uml::umlPackage::PACKAGEMERGE_ATTRIBUTE_RECEIVINGPACKAGE:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getReceivingPackage().lock();
-				return eAny(returnValue); //1727
-			}
-	}
-	return DirectedRelationshipImpl::eGet(featureID, resolve, coreType);
-}
-bool PackageMergeImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::PACKAGEMERGE_ATTRIBUTE_MERGEDPACKAGE:
-			return getMergedPackage() != nullptr; //1726
-		case uml::umlPackage::PACKAGEMERGE_ATTRIBUTE_RECEIVINGPACKAGE:
-			return getReceivingPackage().lock() != nullptr; //1727
-	}
-	return DirectedRelationshipImpl::internalEIsSet(featureID);
-}
-bool PackageMergeImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::PACKAGEMERGE_ATTRIBUTE_MERGEDPACKAGE:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::Package> _mergedPackage = std::dynamic_pointer_cast<uml::Package>(_temp);
-			setMergedPackage(_mergedPackage); //1726
-			return true;
-		}
-		case uml::umlPackage::PACKAGEMERGE_ATTRIBUTE_RECEIVINGPACKAGE:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::Package> _receivingPackage = std::dynamic_pointer_cast<uml::Package>(_temp);
-			setReceivingPackage(_receivingPackage); //1727
-			return true;
-		}
-	}
-
-	return DirectedRelationshipImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any PackageMergeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-
-		default:
-		{
-			// call superTypes
-			result = DirectedRelationshipImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -448,10 +348,6 @@ void PackageMergeImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandle
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
 }
 
 void PackageMergeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -468,3 +364,101 @@ void PackageMergeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> PackageMergeImpl::eStaticClass() const
+{
+	return uml::umlPackage::eInstance()->getPackageMerge_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any PackageMergeImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::PACKAGEMERGE_ATTRIBUTE_MERGEDPACKAGE:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getMergedPackage();
+				return eAny(returnValue); //1726
+			}
+		case uml::umlPackage::PACKAGEMERGE_ATTRIBUTE_RECEIVINGPACKAGE:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getReceivingPackage().lock();
+				return eAny(returnValue); //1727
+			}
+	}
+	return DirectedRelationshipImpl::eGet(featureID, resolve, coreType);
+}
+
+bool PackageMergeImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::PACKAGEMERGE_ATTRIBUTE_MERGEDPACKAGE:
+			return getMergedPackage() != nullptr; //1726
+		case uml::umlPackage::PACKAGEMERGE_ATTRIBUTE_RECEIVINGPACKAGE:
+			return getReceivingPackage().lock() != nullptr; //1727
+	}
+	return DirectedRelationshipImpl::internalEIsSet(featureID);
+}
+
+bool PackageMergeImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::PACKAGEMERGE_ATTRIBUTE_MERGEDPACKAGE:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::Package> _mergedPackage = std::dynamic_pointer_cast<uml::Package>(_temp);
+			setMergedPackage(_mergedPackage); //1726
+			return true;
+		}
+		case uml::umlPackage::PACKAGEMERGE_ATTRIBUTE_RECEIVINGPACKAGE:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::Package> _receivingPackage = std::dynamic_pointer_cast<uml::Package>(_temp);
+			setReceivingPackage(_receivingPackage); //1727
+			return true;
+		}
+	}
+
+	return DirectedRelationshipImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any PackageMergeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+
+		default:
+		{
+			// call superTypes
+			result = DirectedRelationshipImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<PackageMerge> PackageMergeImpl::getThisPackageMergePtr() const
+{
+	return m_thisPackageMergePtr.lock();
+}
+void PackageMergeImpl::setThisPackageMergePtr(std::weak_ptr<PackageMerge> thisPackageMergePtr)
+{
+	m_thisPackageMergePtr = thisPackageMergePtr;
+	setThisDirectedRelationshipPtr(thisPackageMergePtr);
+}

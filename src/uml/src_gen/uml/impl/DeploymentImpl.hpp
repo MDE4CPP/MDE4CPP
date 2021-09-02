@@ -53,14 +53,12 @@ namespace uml
 			// Operations
 			//*********************************
 			
+			//*********************************
+			// Attribute Getters & Setters
+			//*********************************
 			
 			//*********************************
-			// Attributes Getter Setter
-			//*********************************
-			
-			
-			//*********************************
-			// Reference
+			// Reference Getters & Setters
 			//*********************************
 			/*!
 			The specification of properties that parameterize the deployment and execution of one or more Artifacts.
@@ -68,14 +66,12 @@ namespace uml
 			*/
 			
 			virtual std::shared_ptr<Subset<uml::DeploymentSpecification, uml::Element>> getConfiguration() const ;
-			
 			/*!
 			The Artifacts that are deployed onto a Node. This association specializes the supplier association.
 			<p>From package UML::Deployments.</p>
 			*/
 			
 			virtual std::shared_ptr<Subset<uml::DeployedArtifact, uml::NamedElement /*Subset does not reference a union*/>> getDeployedArtifact() const ;
-			
 			/*!
 			The DeployedTarget which is the target of a Deployment.
 			<p>From package UML::Deployments.</p>
@@ -89,43 +85,51 @@ namespace uml
 			
 			virtual void setLocation(std::weak_ptr<uml::DeploymentTarget>) ;
 			
+			//*********************************
+			// Union Reference Getters
+			//*********************************
 			
-			//*********************************
-			// Union Getter
-			//*********************************
 			/*!
 			Specifies the Namespace that owns the NamedElement.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Namespace> getNamespace() const ;/*!
+			virtual std::weak_ptr<uml::Namespace> getNamespace() const ;
+			/*!
 			The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const ;/*!
+			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const ;
+			/*!
 			The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element> getOwner() const ;/*!
+			virtual std::weak_ptr<uml::Element> getOwner() const ;
+			/*!
 			Specifies the elements related by the Relationship.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::shared_ptr<Union<uml::Element>> getRelatedElement() const ;/*!
+			virtual std::shared_ptr<Union<uml::Element>> getRelatedElement() const ;
+			/*!
 			Specifies the source Element(s) of the DirectedRelationship.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> getSource() const ;/*!
+			virtual std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> getSource() const ;
+			/*!
 			Specifies the target Element(s) of the DirectedRelationship.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
 			virtual std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> getTarget() const ;
 			
-
+			
+			//*********************************
+			// Container Getter
+			//*********************************
 			virtual std::shared_ptr<ecore::EObject> eContainer() const ; 
 			
 			//*********************************
@@ -134,20 +138,23 @@ namespace uml
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) ;
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
-			
 			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
-			
 
-			//*********************************
-			// Structural Feature Getter/Setter
-			//*********************************
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+
+			//*********************************
+			// EStructuralFeature Get/Set/IsSet
+			//*********************************
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool internalEIsSet(int featureID) const ;
 			virtual bool eSet(int featureID, Any newValue) ;
+			virtual bool internalEIsSet(int featureID) const ;
+
+			//*********************************
+			// EOperation Invoke
+			//*********************************
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:

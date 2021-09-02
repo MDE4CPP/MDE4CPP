@@ -94,11 +94,13 @@ namespace uml
 			  or oclIsKindOf(InformationItem) or oclIsKindOf(Signal) or oclIsKindOf(Component))
 			*/
 			 
-			virtual bool convey_classifiers(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;/*!
+			virtual bool convey_classifiers(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			/*!
 			The sources and targets of the information flow must conform to the sources and targets or conversely the targets and sources of the realization relationships.
 			*/
 			 
-			virtual bool must_conform(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;/*!
+			virtual bool must_conform(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			/*!
 			The sources and targets of the information flow can only be one of the following kind: Actor, Node, UseCase, Artifact, Class, Component, Port, Property, Interface, Package, ActivityNode, ActivityPartition,
 			Behavior and InstanceSpecification except when its classifier is a relationship (i.e. it represents a link).
 			(self.informationSource->forAll( sis |
@@ -117,12 +119,13 @@ namespace uml
 			*/
 			 
 			virtual bool sources_and_targets_kind(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+
 			//*********************************
-			// Attributes Getter & Setter
+			// Attribute Getters & Setters
 			//*********************************
-			
+
 			//*********************************
-			// References Getter & Setter
+			// Reference Getters & Setters
 			//*********************************
 			/*!
 			Specifies the information items that may circulate on this information flow.
@@ -130,56 +133,100 @@ namespace uml
 			*/
 			
 			virtual std::shared_ptr<Bag<uml::Classifier>> getConveyed() const = 0;
-			
 			/*!
 			Defines from which source the conveyed InformationItems are initiated.
 			<p>From package UML::InformationFlows.</p>
 			*/
 			
 			virtual std::shared_ptr<Subset<uml::NamedElement, uml::Element>> getInformationSource() const = 0;
-			
 			/*!
 			Defines to which target the conveyed InformationItems are directed.
 			<p>From package UML::InformationFlows.</p>
 			*/
 			
 			virtual std::shared_ptr<Subset<uml::NamedElement, uml::Element>> getInformationTarget() const = 0;
-			
 			/*!
 			Determines which Relationship will realize the specified flow.
 			<p>From package UML::InformationFlows.</p>
 			*/
 			
 			virtual std::shared_ptr<Bag<uml::Relationship>> getRealization() const = 0;
-			
 			/*!
 			Determines which ActivityEdges will realize the specified flow.
 			<p>From package UML::InformationFlows.</p>
 			*/
 			
 			virtual std::shared_ptr<Bag<uml::ActivityEdge>> getRealizingActivityEdge() const = 0;
-			
 			/*!
 			Determines which Connectors will realize the specified flow.
 			<p>From package UML::InformationFlows.</p>
 			*/
 			
 			virtual std::shared_ptr<Bag<uml::Connector>> getRealizingConnector() const = 0;
-			
 			/*!
 			Determines which Messages will realize the specified flow.
 			<p>From package UML::InformationFlows.</p>
 			*/
 			
 			virtual std::shared_ptr<Bag<uml::Message>> getRealizingMessage() const = 0;
+
+			//*********************************
+			// Union Reference Getters
+			//*********************************
+			/*!
+			Specifies the Namespace that owns the NamedElement.
+			<p>From package UML::CommonStructure.</p>
+			*/
 			
+			virtual std::weak_ptr<uml::Namespace> getNamespace() const = 0;
+			/*!
+			The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
 			
+			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;
+			/*!
+			The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
+			virtual std::weak_ptr<uml::Element> getOwner() const = 0;
+			/*!
+			Specifies the elements related by the Relationship.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
+			virtual std::shared_ptr<Union<uml::Element>> getRelatedElement() const = 0;
+			/*!
+			Specifies the source Element(s) of the DirectedRelationship.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
+			virtual std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> getSource() const = 0;
+			/*!
+			Specifies the target Element(s) of the DirectedRelationship.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
+			virtual std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> getTarget() const = 0;
+			
+
+			//*********************************
+			// Container Getter
+			//*********************************
+			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
+
+			//*********************************
+			// Persistence Functions
+			//*********************************
+			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 
 		protected:
 			//*********************************
 			// Attribute Members
 			//*********************************
-			
 			
 			//*********************************
 			// Reference Members
@@ -189,85 +236,43 @@ namespace uml
 			<p>From package UML::InformationFlows.</p>
 			*/
 			
-			mutable std::shared_ptr<Bag<uml::Classifier>> m_conveyed;/*!
+			mutable std::shared_ptr<Bag<uml::Classifier>> m_conveyed;
+			/*!
 			Defines from which source the conveyed InformationItems are initiated.
 			<p>From package UML::InformationFlows.</p>
 			*/
 			
-			mutable std::shared_ptr<Subset<uml::NamedElement, uml::Element>> m_informationSource;/*!
+			mutable std::shared_ptr<Subset<uml::NamedElement, uml::Element>> m_informationSource;
+			/*!
 			Defines to which target the conveyed InformationItems are directed.
 			<p>From package UML::InformationFlows.</p>
 			*/
 			
-			mutable std::shared_ptr<Subset<uml::NamedElement, uml::Element>> m_informationTarget;/*!
+			mutable std::shared_ptr<Subset<uml::NamedElement, uml::Element>> m_informationTarget;
+			/*!
 			Determines which Relationship will realize the specified flow.
 			<p>From package UML::InformationFlows.</p>
 			*/
 			
-			mutable std::shared_ptr<Bag<uml::Relationship>> m_realization;/*!
+			mutable std::shared_ptr<Bag<uml::Relationship>> m_realization;
+			/*!
 			Determines which ActivityEdges will realize the specified flow.
 			<p>From package UML::InformationFlows.</p>
 			*/
 			
-			mutable std::shared_ptr<Bag<uml::ActivityEdge>> m_realizingActivityEdge;/*!
+			mutable std::shared_ptr<Bag<uml::ActivityEdge>> m_realizingActivityEdge;
+			/*!
 			Determines which Connectors will realize the specified flow.
 			<p>From package UML::InformationFlows.</p>
 			*/
 			
-			mutable std::shared_ptr<Bag<uml::Connector>> m_realizingConnector;/*!
+			mutable std::shared_ptr<Bag<uml::Connector>> m_realizingConnector;
+			/*!
 			Determines which Messages will realize the specified flow.
 			<p>From package UML::InformationFlows.</p>
 			*/
 			
 			mutable std::shared_ptr<Bag<uml::Message>> m_realizingMessage;
-
-		public:
-			//*********************************
-			// Union Getter
-			//*********************************
-			/*!
-			Specifies the Namespace that owns the NamedElement.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::weak_ptr<uml::Namespace> getNamespace() const = 0;/*!
-			The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;/*!
-			The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::weak_ptr<uml::Element> getOwner() const = 0;/*!
-			Specifies the elements related by the Relationship.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::Element>> getRelatedElement() const = 0;/*!
-			Specifies the source Element(s) of the DirectedRelationship.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> getSource() const = 0;/*!
-			Specifies the target Element(s) of the DirectedRelationship.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> getTarget() const = 0;
-
-			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
-			
-			//*********************************
-			// Persistence Functions
-			//*********************************
-			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
-			
-			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
-			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
-			
 	};
-
 }
 #endif /* end of include guard: UML_INFORMATIONFLOW_HPP */

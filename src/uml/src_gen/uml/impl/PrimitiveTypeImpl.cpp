@@ -1,3 +1,4 @@
+
 #include "uml/impl/PrimitiveTypeImpl.hpp"
 
 #ifdef NDEBUG
@@ -25,7 +26,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -33,7 +33,6 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-
 
 #include "uml/Classifier.hpp"
 #include "uml/CollaborationUse.hpp"
@@ -170,21 +169,16 @@ std::shared_ptr<ecore::EObject> PrimitiveTypeImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> PrimitiveTypeImpl::eStaticClass() const
-{
-	return uml::umlPackage::eInstance()->getPrimitiveType_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
 
 //*********************************
-// References
+// Attribute Getters & Setters
+//*********************************
+
+//*********************************
+// Reference Getters & Setters
 //*********************************
 
 //*********************************
@@ -307,16 +301,9 @@ std::shared_ptr<Union<uml::RedefinableElement>> PrimitiveTypeImpl::getRedefinedE
 
 
 
-
-std::shared_ptr<PrimitiveType> PrimitiveTypeImpl::getThisPrimitiveTypePtr() const
-{
-	return m_thisPrimitiveTypePtr.lock();
-}
-void PrimitiveTypeImpl::setThisPrimitiveTypePtr(std::weak_ptr<PrimitiveType> thisPrimitiveTypePtr)
-{
-	m_thisPrimitiveTypePtr = thisPrimitiveTypePtr;
-	setThisDataTypePtr(thisPrimitiveTypePtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> PrimitiveTypeImpl::eContainer() const
 {
 	if(auto wp = m_namespace.lock())
@@ -344,55 +331,6 @@ std::shared_ptr<ecore::EObject> PrimitiveTypeImpl::eContainer() const
 	}
 
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any PrimitiveTypeImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-	}
-	return DataTypeImpl::eGet(featureID, resolve, coreType);
-}
-bool PrimitiveTypeImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-	}
-	return DataTypeImpl::internalEIsSet(featureID);
-}
-bool PrimitiveTypeImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-	}
-
-	return DataTypeImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any PrimitiveTypeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-
-		default:
-		{
-			// call superTypes
-			result = DataTypeImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -455,13 +393,6 @@ void PrimitiveTypeImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandl
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
-	
-	
-	
 }
 
 void PrimitiveTypeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -476,3 +407,71 @@ void PrimitiveTypeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSa
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> PrimitiveTypeImpl::eStaticClass() const
+{
+	return uml::umlPackage::eInstance()->getPrimitiveType_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any PrimitiveTypeImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+	}
+	return DataTypeImpl::eGet(featureID, resolve, coreType);
+}
+
+bool PrimitiveTypeImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+	}
+	return DataTypeImpl::internalEIsSet(featureID);
+}
+
+bool PrimitiveTypeImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+	}
+
+	return DataTypeImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any PrimitiveTypeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+
+		default:
+		{
+			// call superTypes
+			result = DataTypeImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<PrimitiveType> PrimitiveTypeImpl::getThisPrimitiveTypePtr() const
+{
+	return m_thisPrimitiveTypePtr.lock();
+}
+void PrimitiveTypeImpl::setThisPrimitiveTypePtr(std::weak_ptr<PrimitiveType> thisPrimitiveTypePtr)
+{
+	m_thisPrimitiveTypePtr = thisPrimitiveTypePtr;
+	setThisDataTypePtr(thisPrimitiveTypePtr);
+}

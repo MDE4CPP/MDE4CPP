@@ -1,3 +1,4 @@
+
 #include "uml/impl/GeneralizationImpl.hpp"
 
 #ifdef NDEBUG
@@ -25,7 +26,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -33,7 +33,6 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-
 
 #include "uml/Classifier.hpp"
 #include "uml/Comment.hpp"
@@ -129,17 +128,14 @@ std::shared_ptr<ecore::EObject> GeneralizationImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> GeneralizationImpl::eStaticClass() const
-{
-	return uml::umlPackage::eInstance()->getGeneralization_Class();
-}
+//*********************************
+// Operations
+//*********************************
 
 //*********************************
-// Attribute Setter Getter
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for attribute isSubstitutable
-*/
+/* Getter & Setter for attribute isSubstitutable */
 bool GeneralizationImpl::getIsSubstitutable() const 
 {
 	return m_isSubstitutable;
@@ -148,19 +144,12 @@ void GeneralizationImpl::setIsSubstitutable(bool _isSubstitutable)
 {
 	m_isSubstitutable = _isSubstitutable;
 	
-} 
-
-
-//*********************************
-// Operations
-//*********************************
+}
 
 //*********************************
-// References
+// Reference Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference general
-*/
+/* Getter & Setter for reference general */
 std::shared_ptr<uml::Classifier> GeneralizationImpl::getGeneral() const
 {
     return m_general;
@@ -171,10 +160,7 @@ void GeneralizationImpl::setGeneral(std::shared_ptr<uml::Classifier> _general)
 	
 }
 
-
-/*
-Getter & Setter for reference generalizationSet
-*/
+/* Getter & Setter for reference generalizationSet */
 std::shared_ptr<Bag<uml::GeneralizationSet>> GeneralizationImpl::getGeneralizationSet() const
 {
 	if(m_generalizationSet == nullptr)
@@ -186,11 +172,7 @@ std::shared_ptr<Bag<uml::GeneralizationSet>> GeneralizationImpl::getGeneralizati
     return m_generalizationSet;
 }
 
-
-
-/*
-Getter & Setter for reference specific
-*/
+/* Getter & Setter for reference specific */
 std::weak_ptr<uml::Classifier> GeneralizationImpl::getSpecific() const
 {
     return m_specific;
@@ -200,7 +182,6 @@ void GeneralizationImpl::setSpecific(std::weak_ptr<uml::Classifier> _specific)
     m_specific = _specific;
 	
 }
-
 
 //*********************************
 // Union Getter
@@ -280,18 +261,9 @@ std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> GeneralizationImpl::get
 	return m_target;
 }
 
-
-
-
-std::shared_ptr<Generalization> GeneralizationImpl::getThisGeneralizationPtr() const
-{
-	return m_thisGeneralizationPtr.lock();
-}
-void GeneralizationImpl::setThisGeneralizationPtr(std::weak_ptr<Generalization> thisGeneralizationPtr)
-{
-	m_thisGeneralizationPtr = thisGeneralizationPtr;
-	setThisDirectedRelationshipPtr(thisGeneralizationPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> GeneralizationImpl::eContainer() const
 {
 	if(auto wp = m_owner.lock())
@@ -304,146 +276,6 @@ std::shared_ptr<ecore::EObject> GeneralizationImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any GeneralizationImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::GENERALIZATION_ATTRIBUTE_GENERAL:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getGeneral();
-				return eAny(returnValue); //1096
-			}
-		case uml::umlPackage::GENERALIZATION_ATTRIBUTE_GENERALIZATIONSET:
-		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::GeneralizationSet>::iterator iter = getGeneralizationSet()->begin();
-			Bag<uml::GeneralizationSet>::iterator end = getGeneralizationSet()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //1097			
-		}
-		case uml::umlPackage::GENERALIZATION_ATTRIBUTE_ISSUBSTITUTABLE:
-			return eAny(getIsSubstitutable()); //1098
-		case uml::umlPackage::GENERALIZATION_ATTRIBUTE_SPECIFIC:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getSpecific().lock();
-				return eAny(returnValue); //1099
-			}
-	}
-	return DirectedRelationshipImpl::eGet(featureID, resolve, coreType);
-}
-bool GeneralizationImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::GENERALIZATION_ATTRIBUTE_GENERAL:
-			return getGeneral() != nullptr; //1096
-		case uml::umlPackage::GENERALIZATION_ATTRIBUTE_GENERALIZATIONSET:
-			return getGeneralizationSet() != nullptr; //1097
-		case uml::umlPackage::GENERALIZATION_ATTRIBUTE_ISSUBSTITUTABLE:
-			return getIsSubstitutable() != true; //1098
-		case uml::umlPackage::GENERALIZATION_ATTRIBUTE_SPECIFIC:
-			return getSpecific().lock() != nullptr; //1099
-	}
-	return DirectedRelationshipImpl::internalEIsSet(featureID);
-}
-bool GeneralizationImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::GENERALIZATION_ATTRIBUTE_GENERAL:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::Classifier> _general = std::dynamic_pointer_cast<uml::Classifier>(_temp);
-			setGeneral(_general); //1096
-			return true;
-		}
-		case uml::umlPackage::GENERALIZATION_ATTRIBUTE_GENERALIZATIONSET:
-		{
-			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::GeneralizationSet>> generalizationSetList(new Bag<uml::GeneralizationSet>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
-			{
-				generalizationSetList->add(std::dynamic_pointer_cast<uml::GeneralizationSet>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::GeneralizationSet>::iterator iterGeneralizationSet = getGeneralizationSet()->begin();
-			Bag<uml::GeneralizationSet>::iterator endGeneralizationSet = getGeneralizationSet()->end();
-			while (iterGeneralizationSet != endGeneralizationSet)
-			{
-				if (generalizationSetList->find(*iterGeneralizationSet) == -1)
-				{
-					getGeneralizationSet()->erase(*iterGeneralizationSet);
-				}
-				iterGeneralizationSet++;
-			}
- 
-			iterGeneralizationSet = generalizationSetList->begin();
-			endGeneralizationSet = generalizationSetList->end();
-			while (iterGeneralizationSet != endGeneralizationSet)
-			{
-				if (getGeneralizationSet()->find(*iterGeneralizationSet) == -1)
-				{
-					getGeneralizationSet()->add(*iterGeneralizationSet);
-				}
-				iterGeneralizationSet++;			
-			}
-			return true;
-		}
-		case uml::umlPackage::GENERALIZATION_ATTRIBUTE_ISSUBSTITUTABLE:
-		{
-			// BOOST CAST
-			bool _isSubstitutable = newValue->get<bool>();
-			setIsSubstitutable(_isSubstitutable); //1098
-			return true;
-		}
-		case uml::umlPackage::GENERALIZATION_ATTRIBUTE_SPECIFIC:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::Classifier> _specific = std::dynamic_pointer_cast<uml::Classifier>(_temp);
-			setSpecific(_specific); //1099
-			return true;
-		}
-	}
-
-	return DirectedRelationshipImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any GeneralizationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-
-		default:
-		{
-			// call superTypes
-			result = DirectedRelationshipImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -571,10 +403,6 @@ void GeneralizationImpl::save(std::shared_ptr<persistence::interfaces::XSaveHand
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
 }
 
 void GeneralizationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -597,3 +425,162 @@ void GeneralizationImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> GeneralizationImpl::eStaticClass() const
+{
+	return uml::umlPackage::eInstance()->getGeneralization_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any GeneralizationImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::GENERALIZATION_ATTRIBUTE_GENERAL:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getGeneral();
+				return eAny(returnValue); //1096
+			}
+		case uml::umlPackage::GENERALIZATION_ATTRIBUTE_GENERALIZATIONSET:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::GeneralizationSet>::iterator iter = getGeneralizationSet()->begin();
+			Bag<uml::GeneralizationSet>::iterator end = getGeneralizationSet()->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //1097			
+		}
+		case uml::umlPackage::GENERALIZATION_ATTRIBUTE_ISSUBSTITUTABLE:
+			return eAny(getIsSubstitutable()); //1098
+		case uml::umlPackage::GENERALIZATION_ATTRIBUTE_SPECIFIC:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getSpecific().lock();
+				return eAny(returnValue); //1099
+			}
+	}
+	return DirectedRelationshipImpl::eGet(featureID, resolve, coreType);
+}
+
+bool GeneralizationImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::GENERALIZATION_ATTRIBUTE_GENERAL:
+			return getGeneral() != nullptr; //1096
+		case uml::umlPackage::GENERALIZATION_ATTRIBUTE_GENERALIZATIONSET:
+			return getGeneralizationSet() != nullptr; //1097
+		case uml::umlPackage::GENERALIZATION_ATTRIBUTE_ISSUBSTITUTABLE:
+			return getIsSubstitutable() != true; //1098
+		case uml::umlPackage::GENERALIZATION_ATTRIBUTE_SPECIFIC:
+			return getSpecific().lock() != nullptr; //1099
+	}
+	return DirectedRelationshipImpl::internalEIsSet(featureID);
+}
+
+bool GeneralizationImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::GENERALIZATION_ATTRIBUTE_GENERAL:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::Classifier> _general = std::dynamic_pointer_cast<uml::Classifier>(_temp);
+			setGeneral(_general); //1096
+			return true;
+		}
+		case uml::umlPackage::GENERALIZATION_ATTRIBUTE_GENERALIZATIONSET:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::GeneralizationSet>> generalizationSetList(new Bag<uml::GeneralizationSet>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				generalizationSetList->add(std::dynamic_pointer_cast<uml::GeneralizationSet>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::GeneralizationSet>::iterator iterGeneralizationSet = getGeneralizationSet()->begin();
+			Bag<uml::GeneralizationSet>::iterator endGeneralizationSet = getGeneralizationSet()->end();
+			while (iterGeneralizationSet != endGeneralizationSet)
+			{
+				if (generalizationSetList->find(*iterGeneralizationSet) == -1)
+				{
+					getGeneralizationSet()->erase(*iterGeneralizationSet);
+				}
+				iterGeneralizationSet++;
+			}
+ 
+			iterGeneralizationSet = generalizationSetList->begin();
+			endGeneralizationSet = generalizationSetList->end();
+			while (iterGeneralizationSet != endGeneralizationSet)
+			{
+				if (getGeneralizationSet()->find(*iterGeneralizationSet) == -1)
+				{
+					getGeneralizationSet()->add(*iterGeneralizationSet);
+				}
+				iterGeneralizationSet++;			
+			}
+			return true;
+		}
+		case uml::umlPackage::GENERALIZATION_ATTRIBUTE_ISSUBSTITUTABLE:
+		{
+			// BOOST CAST
+			bool _isSubstitutable = newValue->get<bool>();
+			setIsSubstitutable(_isSubstitutable); //1098
+			return true;
+		}
+		case uml::umlPackage::GENERALIZATION_ATTRIBUTE_SPECIFIC:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::Classifier> _specific = std::dynamic_pointer_cast<uml::Classifier>(_temp);
+			setSpecific(_specific); //1099
+			return true;
+		}
+	}
+
+	return DirectedRelationshipImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any GeneralizationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+
+		default:
+		{
+			// call superTypes
+			result = DirectedRelationshipImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<Generalization> GeneralizationImpl::getThisGeneralizationPtr() const
+{
+	return m_thisGeneralizationPtr.lock();
+}
+void GeneralizationImpl::setThisGeneralizationPtr(std::weak_ptr<Generalization> thisGeneralizationPtr)
+{
+	m_thisGeneralizationPtr = thisGeneralizationPtr;
+	setThisDirectedRelationshipPtr(thisGeneralizationPtr);
+}

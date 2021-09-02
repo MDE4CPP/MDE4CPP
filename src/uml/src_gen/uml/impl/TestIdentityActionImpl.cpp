@@ -1,3 +1,4 @@
+
 #include "uml/impl/TestIdentityActionImpl.hpp"
 
 #ifdef NDEBUG
@@ -26,7 +27,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -34,7 +34,6 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-
 
 #include "uml/Action.hpp"
 #include "uml/Activity.hpp"
@@ -172,15 +171,6 @@ std::shared_ptr<ecore::EObject> TestIdentityActionImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> TestIdentityActionImpl::eStaticClass() const
-{
-	return uml::umlPackage::eInstance()->getTestIdentityAction_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
@@ -203,11 +193,13 @@ bool TestIdentityActionImpl::result_is_boolean(Any diagnostics,std::shared_ptr<s
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference first
-*/
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference first */
 std::shared_ptr<uml::InputPin> TestIdentityActionImpl::getFirst() const
 {
     return m_first;
@@ -218,10 +210,7 @@ void TestIdentityActionImpl::setFirst(std::shared_ptr<uml::InputPin> _first)
 	
 }
 
-
-/*
-Getter & Setter for reference result
-*/
+/* Getter & Setter for reference result */
 std::shared_ptr<uml::OutputPin> TestIdentityActionImpl::getResult() const
 {
     return m_result;
@@ -232,10 +221,7 @@ void TestIdentityActionImpl::setResult(std::shared_ptr<uml::OutputPin> _result)
 	
 }
 
-
-/*
-Getter & Setter for reference second
-*/
+/* Getter & Setter for reference second */
 std::shared_ptr<uml::InputPin> TestIdentityActionImpl::getSecond() const
 {
     return m_second;
@@ -245,7 +231,6 @@ void TestIdentityActionImpl::setSecond(std::shared_ptr<uml::InputPin> _second)
     m_second = _second;
 	
 }
-
 
 //*********************************
 // Union Getter
@@ -340,18 +325,9 @@ std::shared_ptr<Union<uml::RedefinableElement>> TestIdentityActionImpl::getRedef
 	return m_redefinedElement;
 }
 
-
-
-
-std::shared_ptr<TestIdentityAction> TestIdentityActionImpl::getThisTestIdentityActionPtr() const
-{
-	return m_thisTestIdentityActionPtr.lock();
-}
-void TestIdentityActionImpl::setThisTestIdentityActionPtr(std::weak_ptr<TestIdentityAction> thisTestIdentityActionPtr)
-{
-	m_thisTestIdentityActionPtr = thisTestIdentityActionPtr;
-	setThisActionPtr(thisTestIdentityActionPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> TestIdentityActionImpl::eContainer() const
 {
 	if(auto wp = m_activity.lock())
@@ -374,151 +350,6 @@ std::shared_ptr<ecore::EObject> TestIdentityActionImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any TestIdentityActionImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::TESTIDENTITYACTION_ATTRIBUTE_FIRST:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getFirst();
-				return eAny(returnValue); //23527
-			}
-		case uml::umlPackage::TESTIDENTITYACTION_ATTRIBUTE_RESULT:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getResult();
-				return eAny(returnValue); //23528
-			}
-		case uml::umlPackage::TESTIDENTITYACTION_ATTRIBUTE_SECOND:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getSecond();
-				return eAny(returnValue); //23529
-			}
-	}
-	return ActionImpl::eGet(featureID, resolve, coreType);
-}
-bool TestIdentityActionImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::TESTIDENTITYACTION_ATTRIBUTE_FIRST:
-			return getFirst() != nullptr; //23527
-		case uml::umlPackage::TESTIDENTITYACTION_ATTRIBUTE_RESULT:
-			return getResult() != nullptr; //23528
-		case uml::umlPackage::TESTIDENTITYACTION_ATTRIBUTE_SECOND:
-			return getSecond() != nullptr; //23529
-	}
-	return ActionImpl::internalEIsSet(featureID);
-}
-bool TestIdentityActionImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::TESTIDENTITYACTION_ATTRIBUTE_FIRST:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::InputPin> _first = std::dynamic_pointer_cast<uml::InputPin>(_temp);
-			setFirst(_first); //23527
-			return true;
-		}
-		case uml::umlPackage::TESTIDENTITYACTION_ATTRIBUTE_RESULT:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::OutputPin> _result = std::dynamic_pointer_cast<uml::OutputPin>(_temp);
-			setResult(_result); //23528
-			return true;
-		}
-		case uml::umlPackage::TESTIDENTITYACTION_ATTRIBUTE_SECOND:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::InputPin> _second = std::dynamic_pointer_cast<uml::InputPin>(_temp);
-			setSecond(_second); //23529
-			return true;
-		}
-	}
-
-	return ActionImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any TestIdentityActionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-		
-		// 936405543
-		case umlPackage::TESTIDENTITYACTION_OPERATION_MULTIPLICITY_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->multiplicity(incoming_param_diagnostics,incoming_param_context));
-			break;
-		}
-		
-		// 1029204157
-		case umlPackage::TESTIDENTITYACTION_OPERATION_NO_TYPE_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->no_type(incoming_param_diagnostics,incoming_param_context));
-			break;
-		}
-		
-		// 327867118
-		case umlPackage::TESTIDENTITYACTION_OPERATION_RESULT_IS_BOOLEAN_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->result_is_boolean(incoming_param_diagnostics,incoming_param_context));
-			break;
-		}
-
-		default:
-		{
-			// call superTypes
-			result = ActionImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -623,13 +454,6 @@ void TestIdentityActionImpl::save(std::shared_ptr<persistence::interfaces::XSave
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
-	
-	
-	
 }
 
 void TestIdentityActionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -664,3 +488,167 @@ void TestIdentityActionImpl::saveContent(std::shared_ptr<persistence::interfaces
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> TestIdentityActionImpl::eStaticClass() const
+{
+	return uml::umlPackage::eInstance()->getTestIdentityAction_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any TestIdentityActionImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::TESTIDENTITYACTION_ATTRIBUTE_FIRST:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getFirst();
+				return eAny(returnValue); //23527
+			}
+		case uml::umlPackage::TESTIDENTITYACTION_ATTRIBUTE_RESULT:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getResult();
+				return eAny(returnValue); //23528
+			}
+		case uml::umlPackage::TESTIDENTITYACTION_ATTRIBUTE_SECOND:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getSecond();
+				return eAny(returnValue); //23529
+			}
+	}
+	return ActionImpl::eGet(featureID, resolve, coreType);
+}
+
+bool TestIdentityActionImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::TESTIDENTITYACTION_ATTRIBUTE_FIRST:
+			return getFirst() != nullptr; //23527
+		case uml::umlPackage::TESTIDENTITYACTION_ATTRIBUTE_RESULT:
+			return getResult() != nullptr; //23528
+		case uml::umlPackage::TESTIDENTITYACTION_ATTRIBUTE_SECOND:
+			return getSecond() != nullptr; //23529
+	}
+	return ActionImpl::internalEIsSet(featureID);
+}
+
+bool TestIdentityActionImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::TESTIDENTITYACTION_ATTRIBUTE_FIRST:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::InputPin> _first = std::dynamic_pointer_cast<uml::InputPin>(_temp);
+			setFirst(_first); //23527
+			return true;
+		}
+		case uml::umlPackage::TESTIDENTITYACTION_ATTRIBUTE_RESULT:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::OutputPin> _result = std::dynamic_pointer_cast<uml::OutputPin>(_temp);
+			setResult(_result); //23528
+			return true;
+		}
+		case uml::umlPackage::TESTIDENTITYACTION_ATTRIBUTE_SECOND:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::InputPin> _second = std::dynamic_pointer_cast<uml::InputPin>(_temp);
+			setSecond(_second); //23529
+			return true;
+		}
+	}
+
+	return ActionImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any TestIdentityActionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 936405543
+		case umlPackage::TESTIDENTITYACTION_OPERATION_MULTIPLICITY_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->multiplicity(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+		
+		// 1029204157
+		case umlPackage::TESTIDENTITYACTION_OPERATION_NO_TYPE_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->no_type(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+		
+		// 327867118
+		case umlPackage::TESTIDENTITYACTION_OPERATION_RESULT_IS_BOOLEAN_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->result_is_boolean(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = ActionImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<TestIdentityAction> TestIdentityActionImpl::getThisTestIdentityActionPtr() const
+{
+	return m_thisTestIdentityActionPtr.lock();
+}
+void TestIdentityActionImpl::setThisTestIdentityActionPtr(std::weak_ptr<TestIdentityAction> thisTestIdentityActionPtr)
+{
+	m_thisTestIdentityActionPtr = thisTestIdentityActionPtr;
+	setThisActionPtr(thisTestIdentityActionPtr);
+}

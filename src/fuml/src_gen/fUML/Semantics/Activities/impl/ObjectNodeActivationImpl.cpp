@@ -1,3 +1,4 @@
+
 #include "fUML/Semantics/Activities/impl/ObjectNodeActivationImpl.hpp"
 
 #ifdef NDEBUG
@@ -37,7 +38,6 @@
 #include <exception> // used in Persistence
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "uml/umlFactory.hpp"
-
 
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
 #include "uml/ActivityNode.hpp"
@@ -120,28 +120,6 @@ std::shared_ptr<ecore::EObject> ObjectNodeActivationImpl::copy() const
 	element->setThisObjectNodeActivationPtr(element);
 	return element;
 }
-
-std::shared_ptr<ecore::EClass> ObjectNodeActivationImpl::eStaticClass() const
-{
-	return fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getObjectNodeActivation_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-/*
-Getter & Setter for attribute offeredTokenCount
-*/
-int ObjectNodeActivationImpl::getOfferedTokenCount() const 
-{
-	return m_offeredTokenCount;
-}
-void ObjectNodeActivationImpl::setOfferedTokenCount(int _offeredTokenCount)
-{
-	m_offeredTokenCount = _offeredTokenCount;
-	
-} 
-
 
 //*********************************
 // Operations
@@ -297,24 +275,30 @@ this->clearTokens();
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
+//*********************************
+/* Getter & Setter for attribute offeredTokenCount */
+int ObjectNodeActivationImpl::getOfferedTokenCount() const 
+{
+	return m_offeredTokenCount;
+}
+void ObjectNodeActivationImpl::setOfferedTokenCount(int _offeredTokenCount)
+{
+	m_offeredTokenCount = _offeredTokenCount;
+	
+}
+
+//*********************************
+// Reference Getters & Setters
 //*********************************
 
 //*********************************
 // Union Getter
 //*********************************
 
-
-
-std::shared_ptr<ObjectNodeActivation> ObjectNodeActivationImpl::getThisObjectNodeActivationPtr() const
-{
-	return m_thisObjectNodeActivationPtr.lock();
-}
-void ObjectNodeActivationImpl::setThisObjectNodeActivationPtr(std::weak_ptr<ObjectNodeActivation> thisObjectNodeActivationPtr)
-{
-	m_thisObjectNodeActivationPtr = thisObjectNodeActivationPtr;
-	setThisActivityNodeActivationPtr(thisObjectNodeActivationPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> ObjectNodeActivationImpl::eContainer() const
 {
 	if(auto wp = m_group.lock())
@@ -325,7 +309,100 @@ std::shared_ptr<ecore::EObject> ObjectNodeActivationImpl::eContainer() const
 }
 
 //*********************************
-// Structural Feature Getter/Setter
+// Persistence Functions
+//*********************************
+void ObjectNodeActivationImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get fUMLFactory
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
+	}
+}		
+
+void ObjectNodeActivationImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+	try
+	{
+		std::map<std::string, std::string>::const_iterator iter;
+	
+		iter = attr_list.find("offeredTokenCount");
+		if ( iter != attr_list.end() )
+		{
+			// this attribute is a 'int'
+			int value;
+			std::istringstream ( iter->second ) >> value;
+			this->setOfferedTokenCount(value);
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	ActivityNodeActivationImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void ObjectNodeActivationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+
+	//load BasePackage Nodes
+	ActivityNodeActivationImpl::loadNode(nodeName, loadHandler);
+}
+
+void ObjectNodeActivationImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+{
+	ActivityNodeActivationImpl::resolveReferences(featureID, references);
+}
+
+void ObjectNodeActivationImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	ActivityNodeActivationImpl::saveContent(saveHandler);
+	
+	fUML::Semantics::Loci::SemanticVisitorImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+}
+
+void ObjectNodeActivationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<fUML::Semantics::Activities::ActivitiesPackage> package = fUML::Semantics::Activities::ActivitiesPackage::eInstance();
+		// Add attributes
+		if ( this->eIsSet(package->getObjectNodeActivation_Attribute_offeredTokenCount()) )
+		{
+			saveHandler->addAttribute("offeredTokenCount", this->getOfferedTokenCount());
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+}
+
+
+std::shared_ptr<ecore::EClass> ObjectNodeActivationImpl::eStaticClass() const
+{
+	return fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getObjectNodeActivation_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
 //*********************************
 Any ObjectNodeActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
@@ -336,6 +413,7 @@ Any ObjectNodeActivationImpl::eGet(int featureID, bool resolve, bool coreType) c
 	}
 	return ActivityNodeActivationImpl::eGet(featureID, resolve, coreType);
 }
+
 bool ObjectNodeActivationImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
@@ -345,6 +423,7 @@ bool ObjectNodeActivationImpl::internalEIsSet(int featureID) const
 	}
 	return ActivityNodeActivationImpl::internalEIsSet(featureID);
 }
+
 bool ObjectNodeActivationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
@@ -362,7 +441,7 @@ bool ObjectNodeActivationImpl::eSet(int featureID, Any newValue)
 }
 
 //*********************************
-// Behavioral Feature
+// EOperation Invoke
 //*********************************
 Any ObjectNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
 {
@@ -476,91 +555,13 @@ Any ObjectNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list
 	return result;
 }
 
-//*********************************
-// Persistence Functions
-//*********************************
-void ObjectNodeActivationImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+
+std::shared_ptr<ObjectNodeActivation> ObjectNodeActivationImpl::getThisObjectNodeActivationPtr() const
 {
-	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
-	loadAttributes(loadHandler, attr_list);
-
-	//
-	// Create new objects (from references (containment == true))
-	//
-	// get fUMLFactory
-	int numNodes = loadHandler->getNumOfChildNodes();
-	for(int ii = 0; ii < numNodes; ii++)
-	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler);
-	}
-}		
-
-void ObjectNodeActivationImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
-{
-	try
-	{
-		std::map<std::string, std::string>::const_iterator iter;
-	
-		iter = attr_list.find("offeredTokenCount");
-		if ( iter != attr_list.end() )
-		{
-			// this attribute is a 'int'
-			int value;
-			std::istringstream ( iter->second ) >> value;
-			this->setOfferedTokenCount(value);
-		}
-	}
-	catch (std::exception& e)
-	{
-		std::cout << "| ERROR    | " << e.what() << std::endl;
-	}
-	catch (...) 
-	{
-		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
-	}
-
-	ActivityNodeActivationImpl::loadAttributes(loadHandler, attr_list);
+	return m_thisObjectNodeActivationPtr.lock();
 }
-
-void ObjectNodeActivationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+void ObjectNodeActivationImpl::setThisObjectNodeActivationPtr(std::weak_ptr<ObjectNodeActivation> thisObjectNodeActivationPtr)
 {
-
-	//load BasePackage Nodes
-	ActivityNodeActivationImpl::loadNode(nodeName, loadHandler);
+	m_thisObjectNodeActivationPtr = thisObjectNodeActivationPtr;
+	setThisActivityNodeActivationPtr(thisObjectNodeActivationPtr);
 }
-
-void ObjectNodeActivationImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
-{
-	ActivityNodeActivationImpl::resolveReferences(featureID, references);
-}
-
-void ObjectNodeActivationImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
-{
-	saveContent(saveHandler);
-
-	ActivityNodeActivationImpl::saveContent(saveHandler);
-	
-	fUML::Semantics::Loci::SemanticVisitorImpl::saveContent(saveHandler);
-	
-	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-}
-
-void ObjectNodeActivationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
-{
-	try
-	{
-		std::shared_ptr<fUML::Semantics::Activities::ActivitiesPackage> package = fUML::Semantics::Activities::ActivitiesPackage::eInstance();
-		// Add attributes
-		if ( this->eIsSet(package->getObjectNodeActivation_Attribute_offeredTokenCount()) )
-		{
-			saveHandler->addAttribute("offeredTokenCount", this->getOfferedTokenCount());
-		}
-	}
-	catch (std::exception& e)
-	{
-		std::cout << "| ERROR    | " << e.what() << std::endl;
-	}
-}
-

@@ -1,3 +1,4 @@
+
 #include "uml/impl/DestructionOccurrenceSpecificationImpl.hpp"
 
 #ifdef NDEBUG
@@ -26,7 +27,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -34,7 +34,6 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-
 
 #include "uml/Comment.hpp"
 #include "uml/Dependency.hpp"
@@ -144,15 +143,6 @@ std::shared_ptr<ecore::EObject> DestructionOccurrenceSpecificationImpl::copy() c
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> DestructionOccurrenceSpecificationImpl::eStaticClass() const
-{
-	return uml::umlPackage::eInstance()->getDestructionOccurrenceSpecification_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
@@ -163,7 +153,11 @@ bool DestructionOccurrenceSpecificationImpl::no_occurrence_specifications_below(
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
+//*********************************
+
+//*********************************
+// Reference Getters & Setters
 //*********************************
 
 //*********************************
@@ -194,18 +188,9 @@ std::weak_ptr<uml::Element> DestructionOccurrenceSpecificationImpl::getOwner() c
 	return m_owner;
 }
 
-
-
-
-std::shared_ptr<DestructionOccurrenceSpecification> DestructionOccurrenceSpecificationImpl::getThisDestructionOccurrenceSpecificationPtr() const
-{
-	return m_thisDestructionOccurrenceSpecificationPtr.lock();
-}
-void DestructionOccurrenceSpecificationImpl::setThisDestructionOccurrenceSpecificationPtr(std::weak_ptr<DestructionOccurrenceSpecification> thisDestructionOccurrenceSpecificationPtr)
-{
-	m_thisDestructionOccurrenceSpecificationPtr = thisDestructionOccurrenceSpecificationPtr;
-	setThisMessageOccurrenceSpecificationPtr(thisDestructionOccurrenceSpecificationPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> DestructionOccurrenceSpecificationImpl::eContainer() const
 {
 	if(auto wp = m_enclosingInteraction.lock())
@@ -228,72 +213,6 @@ std::shared_ptr<ecore::EObject> DestructionOccurrenceSpecificationImpl::eContain
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any DestructionOccurrenceSpecificationImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-	}
-	return MessageOccurrenceSpecificationImpl::eGet(featureID, resolve, coreType);
-}
-bool DestructionOccurrenceSpecificationImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-	}
-	return MessageOccurrenceSpecificationImpl::internalEIsSet(featureID);
-}
-bool DestructionOccurrenceSpecificationImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-	}
-
-	return MessageOccurrenceSpecificationImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any DestructionOccurrenceSpecificationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-		
-		// 2054634562
-		case umlPackage::DESTRUCTIONOCCURRENCESPECIFICATION_OPERATION_NO_OCCURRENCE_SPECIFICATIONS_BELOW_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->no_occurrence_specifications_below(incoming_param_diagnostics,incoming_param_context));
-			break;
-		}
-
-		default:
-		{
-			// call superTypes
-			result = MessageOccurrenceSpecificationImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -351,12 +270,6 @@ void DestructionOccurrenceSpecificationImpl::save(std::shared_ptr<persistence::i
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
-	
-	
 }
 
 void DestructionOccurrenceSpecificationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -371,3 +284,88 @@ void DestructionOccurrenceSpecificationImpl::saveContent(std::shared_ptr<persist
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> DestructionOccurrenceSpecificationImpl::eStaticClass() const
+{
+	return uml::umlPackage::eInstance()->getDestructionOccurrenceSpecification_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any DestructionOccurrenceSpecificationImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+	}
+	return MessageOccurrenceSpecificationImpl::eGet(featureID, resolve, coreType);
+}
+
+bool DestructionOccurrenceSpecificationImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+	}
+	return MessageOccurrenceSpecificationImpl::internalEIsSet(featureID);
+}
+
+bool DestructionOccurrenceSpecificationImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+	}
+
+	return MessageOccurrenceSpecificationImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any DestructionOccurrenceSpecificationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 2054634562
+		case umlPackage::DESTRUCTIONOCCURRENCESPECIFICATION_OPERATION_NO_OCCURRENCE_SPECIFICATIONS_BELOW_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->no_occurrence_specifications_below(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = MessageOccurrenceSpecificationImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<DestructionOccurrenceSpecification> DestructionOccurrenceSpecificationImpl::getThisDestructionOccurrenceSpecificationPtr() const
+{
+	return m_thisDestructionOccurrenceSpecificationPtr.lock();
+}
+void DestructionOccurrenceSpecificationImpl::setThisDestructionOccurrenceSpecificationPtr(std::weak_ptr<DestructionOccurrenceSpecification> thisDestructionOccurrenceSpecificationPtr)
+{
+	m_thisDestructionOccurrenceSpecificationPtr = thisDestructionOccurrenceSpecificationPtr;
+	setThisMessageOccurrenceSpecificationPtr(thisDestructionOccurrenceSpecificationPtr);
+}

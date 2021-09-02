@@ -1,3 +1,4 @@
+
 #include "PSCS/Semantics/StructuredClassifiers/impl/CS_DefaultRequestPropagationStrategyImpl.hpp"
 
 #ifdef NDEBUG
@@ -33,7 +34,6 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-
 
 #include "PSCS/Semantics/StructuredClassifiers/CS_RequestPropagationStrategy.hpp"
 #include "fUML/Semantics/StructuredClassifiers/Reference.hpp"
@@ -109,15 +109,6 @@ std::shared_ptr<ecore::EObject> CS_DefaultRequestPropagationStrategyImpl::copy()
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> CS_DefaultRequestPropagationStrategyImpl::eStaticClass() const
-{
-	return PSCS::Semantics::StructuredClassifiers::StructuredClassifiersPackage::eInstance()->getCS_DefaultRequestPropagationStrategy_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
@@ -143,93 +134,23 @@ std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::Reference> > CS_Defa
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
+//*********************************
+
+//*********************************
+// Reference Getters & Setters
 //*********************************
 
 //*********************************
 // Union Getter
 //*********************************
 
-
-
-std::shared_ptr<CS_DefaultRequestPropagationStrategy> CS_DefaultRequestPropagationStrategyImpl::getThisCS_DefaultRequestPropagationStrategyPtr() const
-{
-	return m_thisCS_DefaultRequestPropagationStrategyPtr.lock();
-}
-void CS_DefaultRequestPropagationStrategyImpl::setThisCS_DefaultRequestPropagationStrategyPtr(std::weak_ptr<CS_DefaultRequestPropagationStrategy> thisCS_DefaultRequestPropagationStrategyPtr)
-{
-	m_thisCS_DefaultRequestPropagationStrategyPtr = thisCS_DefaultRequestPropagationStrategyPtr;
-	setThisCS_RequestPropagationStrategyPtr(thisCS_DefaultRequestPropagationStrategyPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> CS_DefaultRequestPropagationStrategyImpl::eContainer() const
 {
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any CS_DefaultRequestPropagationStrategyImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-	}
-	return CS_RequestPropagationStrategyImpl::eGet(featureID, resolve, coreType);
-}
-bool CS_DefaultRequestPropagationStrategyImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-	}
-	return CS_RequestPropagationStrategyImpl::internalEIsSet(featureID);
-}
-bool CS_DefaultRequestPropagationStrategyImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-	}
-
-	return CS_RequestPropagationStrategyImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any CS_DefaultRequestPropagationStrategyImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-		
-		// 295025139
-		case StructuredClassifiersPackage::CS_DEFAULTREQUESTPROPAGATIONSTRATEGY_OPERATION_SELECT_REFERENCE_SEMANTICVISITOR:
-		{
-			//Retrieve input parameter 'potentialTargets'
-			//parameter 0
-			std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::Reference>> incoming_param_potentialTargets;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_potentialTargets_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_potentialTargets = (*incoming_param_potentialTargets_arguments_citer)->get()->get<std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::Reference>> >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor> >();
-			result = eAny(this->select(incoming_param_potentialTargets,incoming_param_context));
-			break;
-		}
-
-		default:
-		{
-			// call superTypes
-			result = CS_RequestPropagationStrategyImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -278,8 +199,6 @@ void CS_DefaultRequestPropagationStrategyImpl::save(std::shared_ptr<persistence:
 	fUML::Semantics::Loci::SemanticStrategyImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
 }
 
 void CS_DefaultRequestPropagationStrategyImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -294,3 +213,88 @@ void CS_DefaultRequestPropagationStrategyImpl::saveContent(std::shared_ptr<persi
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> CS_DefaultRequestPropagationStrategyImpl::eStaticClass() const
+{
+	return PSCS::Semantics::StructuredClassifiers::StructuredClassifiersPackage::eInstance()->getCS_DefaultRequestPropagationStrategy_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any CS_DefaultRequestPropagationStrategyImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+	}
+	return CS_RequestPropagationStrategyImpl::eGet(featureID, resolve, coreType);
+}
+
+bool CS_DefaultRequestPropagationStrategyImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+	}
+	return CS_RequestPropagationStrategyImpl::internalEIsSet(featureID);
+}
+
+bool CS_DefaultRequestPropagationStrategyImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+	}
+
+	return CS_RequestPropagationStrategyImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any CS_DefaultRequestPropagationStrategyImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 295025139
+		case StructuredClassifiersPackage::CS_DEFAULTREQUESTPROPAGATIONSTRATEGY_OPERATION_SELECT_REFERENCE_SEMANTICVISITOR:
+		{
+			//Retrieve input parameter 'potentialTargets'
+			//parameter 0
+			std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::Reference>> incoming_param_potentialTargets;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_potentialTargets_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_potentialTargets = (*incoming_param_potentialTargets_arguments_citer)->get()->get<std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::Reference>> >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor> >();
+			result = eAny(this->select(incoming_param_potentialTargets,incoming_param_context));
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = CS_RequestPropagationStrategyImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<CS_DefaultRequestPropagationStrategy> CS_DefaultRequestPropagationStrategyImpl::getThisCS_DefaultRequestPropagationStrategyPtr() const
+{
+	return m_thisCS_DefaultRequestPropagationStrategyPtr.lock();
+}
+void CS_DefaultRequestPropagationStrategyImpl::setThisCS_DefaultRequestPropagationStrategyPtr(std::weak_ptr<CS_DefaultRequestPropagationStrategy> thisCS_DefaultRequestPropagationStrategyPtr)
+{
+	m_thisCS_DefaultRequestPropagationStrategyPtr = thisCS_DefaultRequestPropagationStrategyPtr;
+	setThisCS_RequestPropagationStrategyPtr(thisCS_DefaultRequestPropagationStrategyPtr);
+}

@@ -65,7 +65,6 @@ namespace uml
 
 // enum includes
 #include "uml/ObjectNodeOrderingKind.hpp"
-
 #include "uml/VisibilityKind.hpp"
 
 
@@ -104,19 +103,22 @@ namespace uml
 					selection.inputParameters()->forAll(p | self.type.conformsTo(p.type))
 			*/
 			 
-			virtual bool input_output_parameter(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;/*!
+			virtual bool input_output_parameter(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			/*!
 			If isControlType=false, the ActivityEdges incoming to or outgoing from an ObjectNode must all be ObjectFlows.
 			(not isControlType) implies incoming->union(outgoing)->forAll(oclIsKindOf(ObjectFlow))
 			*/
 			 
-			virtual bool object_flow_edges(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;/*!
+			virtual bool object_flow_edges(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			/*!
 			If an ObjectNode has a selection Behavior, then the ordering of the object node is ordered, and vice versa.
 			(selection<>null) = (ordering=ObjectNodeOrderingKind::ordered)
 			*/
 			 
 			virtual bool selection_behavior(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+
 			//*********************************
-			// Attributes Getter & Setter
+			// Attribute Getters & Setters
 			//*********************************
 			/*!
 			Indicates whether the type of the ObjectNode is to be treated as representing control values that may traverse ControlFlows.
@@ -142,9 +144,9 @@ namespace uml
 			*/
 			 
 			virtual void setOrdering (uml::ObjectNodeOrderingKind _ordering)= 0;
-			
+
 			//*********************************
-			// References Getter & Setter
+			// Reference Getters & Setters
 			//*********************************
 			/*!
 			The States required to be associated with the values held by tokens on this ObjectNode.
@@ -152,7 +154,6 @@ namespace uml
 			*/
 			
 			virtual std::shared_ptr<Bag<uml::State>> getInState() const = 0;
-			
 			/*!
 			A Behavior used to select tokens to be offered on outgoing ActivityEdges.
 			<p>From package UML::Activities.</p>
@@ -177,7 +178,46 @@ namespace uml
 			*/
 			
 			virtual void setUpperBound(std::shared_ptr<uml::ValueSpecification>) = 0;
+
+			//*********************************
+			// Union Reference Getters
+			//*********************************
+			/*!
+			ActivityGroups containing the ActivityNode.
+			<p>From package UML::Activities.</p>
+			*/
 			
+			virtual std::shared_ptr<Union<uml::ActivityGroup>> getInGroup() const = 0;
+			/*!
+			The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
+			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;
+			/*!
+			The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
+			virtual std::weak_ptr<uml::Element> getOwner() const = 0;
+			/*!
+			The RedefinableElement that is being redefined by this element.
+			<p>From package UML::Classification.</p>
+			*/
+			
+			virtual std::shared_ptr<Union<uml::RedefinableElement>> getRedefinedElement() const = 0;
+
+			//*********************************
+			// Container Getter
+			//*********************************
+			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
+
+			//*********************************
+			// Persistence Functions
+			//*********************************
+			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 
 		protected:
 			//*********************************
@@ -188,14 +228,13 @@ namespace uml
 			<p>From package UML::Activities.</p>
 			*/
 			
-			bool m_isControlType = false;
+			bool m_isControlType= false;
 			/*!
 			Indicates how the tokens held by the ObjectNode are ordered for selection to traverse ActivityEdges outgoing from the ObjectNode.
 			<p>From package UML::Activities.</p>
 			*/
 			
-			uml::ObjectNodeOrderingKind m_ordering = ObjectNodeOrderingKind::FIFO;
-			
+			uml::ObjectNodeOrderingKind m_ordering= ObjectNodeOrderingKind::FIFO;
 			
 			//*********************************
 			// Reference Members
@@ -205,55 +244,19 @@ namespace uml
 			<p>From package UML::Activities.</p>
 			*/
 			
-			mutable std::shared_ptr<Bag<uml::State>> m_inState;/*!
+			mutable std::shared_ptr<Bag<uml::State>> m_inState;
+			/*!
 			A Behavior used to select tokens to be offered on outgoing ActivityEdges.
 			<p>From package UML::Activities.</p>
 			*/
 			
-			std::shared_ptr<uml::Behavior> m_selection;/*!
+			std::shared_ptr<uml::Behavior> m_selection;
+			/*!
 			The maximum number of tokens that may be held by this ObjectNode. Tokens cannot flow into the ObjectNode if the upperBound is reached. If no upperBound is specified, then there is no limit on how many tokens the ObjectNode can hold.
 			<p>From package UML::Activities.</p>
 			*/
 			
 			std::shared_ptr<uml::ValueSpecification> m_upperBound;
-
-		public:
-			//*********************************
-			// Union Getter
-			//*********************************
-			/*!
-			ActivityGroups containing the ActivityNode.
-			<p>From package UML::Activities.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::ActivityGroup>> getInGroup() const = 0;/*!
-			The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;/*!
-			The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::weak_ptr<uml::Element> getOwner() const = 0;/*!
-			The RedefinableElement that is being redefined by this element.
-			<p>From package UML::Classification.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::RedefinableElement>> getRedefinedElement() const = 0;
-
-			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
-			
-			//*********************************
-			// Persistence Functions
-			//*********************************
-			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
-			
-			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
-			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
-			
 	};
-
 }
 #endif /* end of include guard: UML_OBJECTNODE_HPP */

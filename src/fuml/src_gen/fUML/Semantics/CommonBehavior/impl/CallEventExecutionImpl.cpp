@@ -1,3 +1,4 @@
+
 #include "fUML/Semantics/CommonBehavior/impl/CallEventExecutionImpl.hpp"
 
 #ifdef NDEBUG
@@ -44,7 +45,6 @@
 #include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
-
 
 #include "uml/Behavior.hpp"
 #include "uml/Classifier.hpp"
@@ -131,28 +131,6 @@ std::shared_ptr<ecore::EObject> CallEventExecutionImpl::copy() const
 	element->setThisCallEventExecutionPtr(element);
 	return element;
 }
-
-std::shared_ptr<ecore::EClass> CallEventExecutionImpl::eStaticClass() const
-{
-	return fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance()->getCallEventExecution_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-/*
-Getter & Setter for attribute callerSuspended
-*/
-bool CallEventExecutionImpl::getCallerSuspended() const 
-{
-	return m_callerSuspended;
-}
-void CallEventExecutionImpl::setCallerSuspended(bool _callerSuspended)
-{
-	m_callerSuspended = _callerSuspended;
-	
-} 
-
 
 //*********************************
 // Operations
@@ -316,31 +294,140 @@ void CallEventExecutionImpl::wait_()
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
+//*********************************
+/* Getter & Setter for attribute callerSuspended */
+bool CallEventExecutionImpl::getCallerSuspended() const 
+{
+	return m_callerSuspended;
+}
+void CallEventExecutionImpl::setCallerSuspended(bool _callerSuspended)
+{
+	m_callerSuspended = _callerSuspended;
+	
+}
+
+//*********************************
+// Reference Getters & Setters
 //*********************************
 
 //*********************************
 // Union Getter
 //*********************************
 
-
-
-std::shared_ptr<CallEventExecution> CallEventExecutionImpl::getThisCallEventExecutionPtr() const
-{
-	return m_thisCallEventExecutionPtr.lock();
-}
-void CallEventExecutionImpl::setThisCallEventExecutionPtr(std::weak_ptr<CallEventExecution> thisCallEventExecutionPtr)
-{
-	m_thisCallEventExecutionPtr = thisCallEventExecutionPtr;
-	setThisExecutionPtr(thisCallEventExecutionPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> CallEventExecutionImpl::eContainer() const
 {
 	return nullptr;
 }
 
 //*********************************
-// Structural Feature Getter/Setter
+// Persistence Functions
+//*********************************
+void CallEventExecutionImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get fUMLFactory
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
+	}
+}		
+
+void CallEventExecutionImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+	try
+	{
+		std::map<std::string, std::string>::const_iterator iter;
+	
+		iter = attr_list.find("callerSuspended");
+		if ( iter != attr_list.end() )
+		{
+			// this attribute is a 'bool'
+			bool value;
+			std::istringstream(iter->second) >> std::boolalpha >> value;
+			this->setCallerSuspended(value);
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	ExecutionImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void CallEventExecutionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+
+	//load BasePackage Nodes
+	ExecutionImpl::loadNode(nodeName, loadHandler);
+}
+
+void CallEventExecutionImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+{
+	ExecutionImpl::resolveReferences(featureID, references);
+}
+
+void CallEventExecutionImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	ExecutionImpl::saveContent(saveHandler);
+	
+	fUML::Semantics::StructuredClassifiers::ObjectImpl::saveContent(saveHandler);
+	
+	fUML::Semantics::StructuredClassifiers::ExtensionalValueImpl::saveContent(saveHandler);
+	
+	fUML::Semantics::SimpleClassifiers::CompoundValueImpl::saveContent(saveHandler);
+	
+	fUML::Semantics::SimpleClassifiers::StructuredValueImpl::saveContent(saveHandler);
+	
+	fUML::Semantics::Values::ValueImpl::saveContent(saveHandler);
+	
+	fUML::Semantics::Loci::SemanticVisitorImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+}
+
+void CallEventExecutionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<fUML::Semantics::CommonBehavior::CommonBehaviorPackage> package = fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance();
+		// Add attributes
+		if ( this->eIsSet(package->getCallEventExecution_Attribute_callerSuspended()) )
+		{
+			saveHandler->addAttribute("callerSuspended", this->getCallerSuspended());
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+}
+
+
+std::shared_ptr<ecore::EClass> CallEventExecutionImpl::eStaticClass() const
+{
+	return fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance()->getCallEventExecution_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
 //*********************************
 Any CallEventExecutionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
@@ -351,6 +438,7 @@ Any CallEventExecutionImpl::eGet(int featureID, bool resolve, bool coreType) con
 	}
 	return ExecutionImpl::eGet(featureID, resolve, coreType);
 }
+
 bool CallEventExecutionImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
@@ -360,6 +448,7 @@ bool CallEventExecutionImpl::internalEIsSet(int featureID) const
 	}
 	return ExecutionImpl::internalEIsSet(featureID);
 }
+
 bool CallEventExecutionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
@@ -377,7 +466,7 @@ bool CallEventExecutionImpl::eSet(int featureID, Any newValue)
 }
 
 //*********************************
-// Behavioral Feature
+// EOperation Invoke
 //*********************************
 Any CallEventExecutionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
 {
@@ -488,106 +577,13 @@ Any CallEventExecutionImpl::eInvoke(int operationID, std::shared_ptr<std::list <
 	return result;
 }
 
-//*********************************
-// Persistence Functions
-//*********************************
-void CallEventExecutionImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+
+std::shared_ptr<CallEventExecution> CallEventExecutionImpl::getThisCallEventExecutionPtr() const
 {
-	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
-	loadAttributes(loadHandler, attr_list);
-
-	//
-	// Create new objects (from references (containment == true))
-	//
-	// get fUMLFactory
-	int numNodes = loadHandler->getNumOfChildNodes();
-	for(int ii = 0; ii < numNodes; ii++)
-	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler);
-	}
-}		
-
-void CallEventExecutionImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
-{
-	try
-	{
-		std::map<std::string, std::string>::const_iterator iter;
-	
-		iter = attr_list.find("callerSuspended");
-		if ( iter != attr_list.end() )
-		{
-			// this attribute is a 'bool'
-			bool value;
-			std::istringstream(iter->second) >> std::boolalpha >> value;
-			this->setCallerSuspended(value);
-		}
-	}
-	catch (std::exception& e)
-	{
-		std::cout << "| ERROR    | " << e.what() << std::endl;
-	}
-	catch (...) 
-	{
-		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
-	}
-
-	ExecutionImpl::loadAttributes(loadHandler, attr_list);
+	return m_thisCallEventExecutionPtr.lock();
 }
-
-void CallEventExecutionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+void CallEventExecutionImpl::setThisCallEventExecutionPtr(std::weak_ptr<CallEventExecution> thisCallEventExecutionPtr)
 {
-
-	//load BasePackage Nodes
-	ExecutionImpl::loadNode(nodeName, loadHandler);
+	m_thisCallEventExecutionPtr = thisCallEventExecutionPtr;
+	setThisExecutionPtr(thisCallEventExecutionPtr);
 }
-
-void CallEventExecutionImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
-{
-	ExecutionImpl::resolveReferences(featureID, references);
-}
-
-void CallEventExecutionImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
-{
-	saveContent(saveHandler);
-
-	ExecutionImpl::saveContent(saveHandler);
-	
-	fUML::Semantics::StructuredClassifiers::ObjectImpl::saveContent(saveHandler);
-	
-	fUML::Semantics::StructuredClassifiers::ExtensionalValueImpl::saveContent(saveHandler);
-	
-	fUML::Semantics::SimpleClassifiers::CompoundValueImpl::saveContent(saveHandler);
-	
-	fUML::Semantics::SimpleClassifiers::StructuredValueImpl::saveContent(saveHandler);
-	
-	fUML::Semantics::Values::ValueImpl::saveContent(saveHandler);
-	
-	fUML::Semantics::Loci::SemanticVisitorImpl::saveContent(saveHandler);
-	
-	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
-	
-	
-	
-}
-
-void CallEventExecutionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
-{
-	try
-	{
-		std::shared_ptr<fUML::Semantics::CommonBehavior::CommonBehaviorPackage> package = fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance();
-		// Add attributes
-		if ( this->eIsSet(package->getCallEventExecution_Attribute_callerSuspended()) )
-		{
-			saveHandler->addAttribute("callerSuspended", this->getCallerSuspended());
-		}
-	}
-	catch (std::exception& e)
-	{
-		std::cout << "| ERROR    | " << e.what() << std::endl;
-	}
-}
-

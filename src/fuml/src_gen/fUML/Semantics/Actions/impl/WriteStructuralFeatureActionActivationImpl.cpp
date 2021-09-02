@@ -1,3 +1,4 @@
+
 #include "fUML/Semantics/Actions/impl/WriteStructuralFeatureActionActivationImpl.hpp"
 
 #ifdef NDEBUG
@@ -25,7 +26,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -35,7 +35,6 @@
 #include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "uml/umlFactory.hpp"
-
 
 #include "uml/Action.hpp"
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
@@ -125,15 +124,6 @@ std::shared_ptr<ecore::EObject> WriteStructuralFeatureActionActivationImpl::copy
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> WriteStructuralFeatureActionActivationImpl::eStaticClass() const
-{
-	return fUML::Semantics::Actions::ActionsPackage::eInstance()->getWriteStructuralFeatureActionActivation_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
@@ -161,7 +151,11 @@ return i-1;
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
+//*********************************
+
+//*********************************
+// Reference Getters & Setters
 //*********************************
 
 //*********************************
@@ -182,18 +176,9 @@ std::shared_ptr<Union<fUML::Semantics::Actions::PinActivation>> WriteStructuralF
 	return m_pinActivation;
 }
 
-
-
-
-std::shared_ptr<WriteStructuralFeatureActionActivation> WriteStructuralFeatureActionActivationImpl::getThisWriteStructuralFeatureActionActivationPtr() const
-{
-	return m_thisWriteStructuralFeatureActionActivationPtr.lock();
-}
-void WriteStructuralFeatureActionActivationImpl::setThisWriteStructuralFeatureActionActivationPtr(std::weak_ptr<WriteStructuralFeatureActionActivation> thisWriteStructuralFeatureActionActivationPtr)
-{
-	m_thisWriteStructuralFeatureActionActivationPtr = thisWriteStructuralFeatureActionActivationPtr;
-	setThisStructuralFeatureActionActivationPtr(thisWriteStructuralFeatureActionActivationPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> WriteStructuralFeatureActionActivationImpl::eContainer() const
 {
 	if(auto wp = m_group.lock())
@@ -201,77 +186,6 @@ std::shared_ptr<ecore::EObject> WriteStructuralFeatureActionActivationImpl::eCon
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any WriteStructuralFeatureActionActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-	}
-	return StructuralFeatureActionActivationImpl::eGet(featureID, resolve, coreType);
-}
-bool WriteStructuralFeatureActionActivationImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-	}
-	return StructuralFeatureActionActivationImpl::internalEIsSet(featureID);
-}
-bool WriteStructuralFeatureActionActivationImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-	}
-
-	return StructuralFeatureActionActivationImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any WriteStructuralFeatureActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-		
-		// 665074260
-		case ActionsPackage::WRITESTRUCTURALFEATUREACTIONACTIVATION_OPERATION_POSITION_VALUE_EINT:
-		{
-			//Retrieve input parameter 'value'
-			//parameter 0
-			std::shared_ptr<fUML::Semantics::Values::Value> incoming_param_value;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_value_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_value = (*incoming_param_value_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::Values::Value> >();
-			//Retrieve input parameter 'list'
-			//parameter 1
-			std::shared_ptr<Bag<fUML::Semantics::Values::Value>> incoming_param_list;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_list_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_list = (*incoming_param_list_arguments_citer)->get()->get<std::shared_ptr<Bag<fUML::Semantics::Values::Value>> >();
-			//Retrieve input parameter 'startAt'
-			//parameter 2
-			int incoming_param_startAt;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_startAt_arguments_citer = std::next(arguments->begin(), 2);
-			incoming_param_startAt = (*incoming_param_startAt_arguments_citer)->get()->get<int >();
-			result = eAny(this->position(incoming_param_value,incoming_param_list,incoming_param_startAt));
-			break;
-		}
-
-		default:
-		{
-			// call superTypes
-			result = StructuralFeatureActionActivationImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -324,10 +238,6 @@ void WriteStructuralFeatureActionActivationImpl::save(std::shared_ptr<persistenc
 	fUML::Semantics::Loci::SemanticVisitorImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
 }
 
 void WriteStructuralFeatureActionActivationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -342,3 +252,93 @@ void WriteStructuralFeatureActionActivationImpl::saveContent(std::shared_ptr<per
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> WriteStructuralFeatureActionActivationImpl::eStaticClass() const
+{
+	return fUML::Semantics::Actions::ActionsPackage::eInstance()->getWriteStructuralFeatureActionActivation_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any WriteStructuralFeatureActionActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+	}
+	return StructuralFeatureActionActivationImpl::eGet(featureID, resolve, coreType);
+}
+
+bool WriteStructuralFeatureActionActivationImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+	}
+	return StructuralFeatureActionActivationImpl::internalEIsSet(featureID);
+}
+
+bool WriteStructuralFeatureActionActivationImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+	}
+
+	return StructuralFeatureActionActivationImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any WriteStructuralFeatureActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 665074260
+		case ActionsPackage::WRITESTRUCTURALFEATUREACTIONACTIVATION_OPERATION_POSITION_VALUE_EINT:
+		{
+			//Retrieve input parameter 'value'
+			//parameter 0
+			std::shared_ptr<fUML::Semantics::Values::Value> incoming_param_value;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_value_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_value = (*incoming_param_value_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::Values::Value> >();
+			//Retrieve input parameter 'list'
+			//parameter 1
+			std::shared_ptr<Bag<fUML::Semantics::Values::Value>> incoming_param_list;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_list_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_list = (*incoming_param_list_arguments_citer)->get()->get<std::shared_ptr<Bag<fUML::Semantics::Values::Value>> >();
+			//Retrieve input parameter 'startAt'
+			//parameter 2
+			int incoming_param_startAt;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_startAt_arguments_citer = std::next(arguments->begin(), 2);
+			incoming_param_startAt = (*incoming_param_startAt_arguments_citer)->get()->get<int >();
+			result = eAny(this->position(incoming_param_value,incoming_param_list,incoming_param_startAt));
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = StructuralFeatureActionActivationImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<WriteStructuralFeatureActionActivation> WriteStructuralFeatureActionActivationImpl::getThisWriteStructuralFeatureActionActivationPtr() const
+{
+	return m_thisWriteStructuralFeatureActionActivationPtr.lock();
+}
+void WriteStructuralFeatureActionActivationImpl::setThisWriteStructuralFeatureActionActivationPtr(std::weak_ptr<WriteStructuralFeatureActionActivation> thisWriteStructuralFeatureActionActivationPtr)
+{
+	m_thisWriteStructuralFeatureActionActivationPtr = thisWriteStructuralFeatureActionActivationPtr;
+	setThisStructuralFeatureActionActivationPtr(thisWriteStructuralFeatureActionActivationPtr);
+}

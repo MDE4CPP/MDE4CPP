@@ -1,3 +1,4 @@
+
 #include "uml/impl/MessageImpl.hpp"
 
 #ifdef NDEBUG
@@ -26,7 +27,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -34,7 +34,6 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-
 
 #include "uml/Comment.hpp"
 #include "uml/Connector.hpp"
@@ -178,38 +177,6 @@ std::shared_ptr<ecore::EObject> MessageImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> MessageImpl::eStaticClass() const
-{
-	return uml::umlPackage::eInstance()->getMessage_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-/*
-Getter & Setter for attribute messageKind
-*/
-uml::MessageKind MessageImpl::getMessageKind() const 
-{
-	return m_messageKind;
-}
-
-
-
-/*
-Getter & Setter for attribute messageSort
-*/
-uml::MessageSort MessageImpl::getMessageSort() const 
-{
-	return m_messageSort;
-}
-void MessageImpl::setMessageSort(uml::MessageSort _messageSort)
-{
-	m_messageSort = _messageSort;
-	
-} 
-
-
 //*********************************
 // Operations
 //*********************************
@@ -268,11 +235,29 @@ bool MessageImpl::signature_refer_to(Any diagnostics,std::shared_ptr<std::map < 
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference argument
-*/
+/* Getter & Setter for attribute messageKind */
+uml::MessageKind MessageImpl::getMessageKind() const 
+{
+	return m_messageKind;
+}
+
+/* Getter & Setter for attribute messageSort */
+uml::MessageSort MessageImpl::getMessageSort() const 
+{
+	return m_messageSort;
+}
+void MessageImpl::setMessageSort(uml::MessageSort _messageSort)
+{
+	m_messageSort = _messageSort;
+	
+}
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference argument */
 std::shared_ptr<Subset<uml::ValueSpecification, uml::Element>> MessageImpl::getArgument() const
 {
 	if(m_argument == nullptr)
@@ -293,11 +278,7 @@ std::shared_ptr<Subset<uml::ValueSpecification, uml::Element>> MessageImpl::getA
     return m_argument;
 }
 
-
-
-/*
-Getter & Setter for reference connector
-*/
+/* Getter & Setter for reference connector */
 std::shared_ptr<uml::Connector> MessageImpl::getConnector() const
 {
     return m_connector;
@@ -308,10 +289,7 @@ void MessageImpl::setConnector(std::shared_ptr<uml::Connector> _connector)
 	
 }
 
-
-/*
-Getter & Setter for reference interaction
-*/
+/* Getter & Setter for reference interaction */
 std::weak_ptr<uml::Interaction> MessageImpl::getInteraction() const
 {
     return m_interaction;
@@ -322,10 +300,7 @@ void MessageImpl::setInteraction(std::weak_ptr<uml::Interaction> _interaction)
 	
 }
 
-
-/*
-Getter & Setter for reference receiveEvent
-*/
+/* Getter & Setter for reference receiveEvent */
 std::shared_ptr<uml::MessageEnd> MessageImpl::getReceiveEvent() const
 {
     return m_receiveEvent;
@@ -336,10 +311,7 @@ void MessageImpl::setReceiveEvent(std::shared_ptr<uml::MessageEnd> _receiveEvent
 	
 }
 
-
-/*
-Getter & Setter for reference sendEvent
-*/
+/* Getter & Setter for reference sendEvent */
 std::shared_ptr<uml::MessageEnd> MessageImpl::getSendEvent() const
 {
     return m_sendEvent;
@@ -350,10 +322,7 @@ void MessageImpl::setSendEvent(std::shared_ptr<uml::MessageEnd> _sendEvent)
 	
 }
 
-
-/*
-Getter & Setter for reference signature
-*/
+/* Getter & Setter for reference signature */
 std::shared_ptr<uml::NamedElement> MessageImpl::getSignature() const
 {
     return m_signature;
@@ -363,7 +332,6 @@ void MessageImpl::setSignature(std::shared_ptr<uml::NamedElement> _signature)
     m_signature = _signature;
 	
 }
-
 
 //*********************************
 // Union Getter
@@ -393,18 +361,9 @@ std::weak_ptr<uml::Element> MessageImpl::getOwner() const
 	return m_owner;
 }
 
-
-
-
-std::shared_ptr<Message> MessageImpl::getThisMessagePtr() const
-{
-	return m_thisMessagePtr.lock();
-}
-void MessageImpl::setThisMessagePtr(std::weak_ptr<Message> thisMessagePtr)
-{
-	m_thisMessagePtr = thisMessagePtr;
-	setThisNamedElementPtr(thisMessagePtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> MessageImpl::eContainer() const
 {
 	if(auto wp = m_interaction.lock())
@@ -422,338 +381,6 @@ std::shared_ptr<ecore::EObject> MessageImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any MessageImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::MESSAGE_ATTRIBUTE_ARGUMENT:
-		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::ValueSpecification>::iterator iter = getArgument()->begin();
-			Bag<uml::ValueSpecification>::iterator end = getArgument()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //1479			
-		}
-		case uml::umlPackage::MESSAGE_ATTRIBUTE_CONNECTOR:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getConnector();
-				return eAny(returnValue); //14710
-			}
-		case uml::umlPackage::MESSAGE_ATTRIBUTE_INTERACTION:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getInteraction().lock();
-				return eAny(returnValue); //14711
-			}
-		case uml::umlPackage::MESSAGE_ATTRIBUTE_MESSAGEKIND:
-			return eAny(getMessageKind()); //14712
-		case uml::umlPackage::MESSAGE_ATTRIBUTE_MESSAGESORT:
-			return eAny(getMessageSort()); //14713
-		case uml::umlPackage::MESSAGE_ATTRIBUTE_RECEIVEEVENT:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getReceiveEvent();
-				return eAny(returnValue); //14714
-			}
-		case uml::umlPackage::MESSAGE_ATTRIBUTE_SENDEVENT:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getSendEvent();
-				return eAny(returnValue); //14715
-			}
-		case uml::umlPackage::MESSAGE_ATTRIBUTE_SIGNATURE:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getSignature();
-				return eAny(returnValue); //14716
-			}
-	}
-	return NamedElementImpl::eGet(featureID, resolve, coreType);
-}
-bool MessageImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::MESSAGE_ATTRIBUTE_ARGUMENT:
-			return getArgument() != nullptr; //1479
-		case uml::umlPackage::MESSAGE_ATTRIBUTE_CONNECTOR:
-			return getConnector() != nullptr; //14710
-		case uml::umlPackage::MESSAGE_ATTRIBUTE_INTERACTION:
-			return getInteraction().lock() != nullptr; //14711
-		case uml::umlPackage::MESSAGE_ATTRIBUTE_MESSAGEKIND:
-			return m_messageKind != MessageKind::UNKNOWN;; //14712
-		case uml::umlPackage::MESSAGE_ATTRIBUTE_MESSAGESORT:
-			return m_messageSort != MessageSort::SYNCHCALL;; //14713
-		case uml::umlPackage::MESSAGE_ATTRIBUTE_RECEIVEEVENT:
-			return getReceiveEvent() != nullptr; //14714
-		case uml::umlPackage::MESSAGE_ATTRIBUTE_SENDEVENT:
-			return getSendEvent() != nullptr; //14715
-		case uml::umlPackage::MESSAGE_ATTRIBUTE_SIGNATURE:
-			return getSignature() != nullptr; //14716
-	}
-	return NamedElementImpl::internalEIsSet(featureID);
-}
-bool MessageImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::MESSAGE_ATTRIBUTE_ARGUMENT:
-		{
-			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::ValueSpecification>> argumentList(new Bag<uml::ValueSpecification>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
-			{
-				argumentList->add(std::dynamic_pointer_cast<uml::ValueSpecification>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::ValueSpecification>::iterator iterArgument = getArgument()->begin();
-			Bag<uml::ValueSpecification>::iterator endArgument = getArgument()->end();
-			while (iterArgument != endArgument)
-			{
-				if (argumentList->find(*iterArgument) == -1)
-				{
-					getArgument()->erase(*iterArgument);
-				}
-				iterArgument++;
-			}
- 
-			iterArgument = argumentList->begin();
-			endArgument = argumentList->end();
-			while (iterArgument != endArgument)
-			{
-				if (getArgument()->find(*iterArgument) == -1)
-				{
-					getArgument()->add(*iterArgument);
-				}
-				iterArgument++;			
-			}
-			return true;
-		}
-		case uml::umlPackage::MESSAGE_ATTRIBUTE_CONNECTOR:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::Connector> _connector = std::dynamic_pointer_cast<uml::Connector>(_temp);
-			setConnector(_connector); //14710
-			return true;
-		}
-		case uml::umlPackage::MESSAGE_ATTRIBUTE_INTERACTION:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::Interaction> _interaction = std::dynamic_pointer_cast<uml::Interaction>(_temp);
-			setInteraction(_interaction); //14711
-			return true;
-		}
-		case uml::umlPackage::MESSAGE_ATTRIBUTE_MESSAGESORT:
-		{
-			// BOOST CAST
-			uml::MessageSort _messageSort = newValue->get<uml::MessageSort>();
-			setMessageSort(_messageSort); //14713
-			return true;
-		}
-		case uml::umlPackage::MESSAGE_ATTRIBUTE_RECEIVEEVENT:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::MessageEnd> _receiveEvent = std::dynamic_pointer_cast<uml::MessageEnd>(_temp);
-			setReceiveEvent(_receiveEvent); //14714
-			return true;
-		}
-		case uml::umlPackage::MESSAGE_ATTRIBUTE_SENDEVENT:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::MessageEnd> _sendEvent = std::dynamic_pointer_cast<uml::MessageEnd>(_temp);
-			setSendEvent(_sendEvent); //14715
-			return true;
-		}
-		case uml::umlPackage::MESSAGE_ATTRIBUTE_SIGNATURE:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::NamedElement> _signature = std::dynamic_pointer_cast<uml::NamedElement>(_temp);
-			setSignature(_signature); //14716
-			return true;
-		}
-	}
-
-	return NamedElementImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any MessageImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-		
-		// 1899252778
-		case umlPackage::MESSAGE_OPERATION_ARGUMENTS_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->arguments(incoming_param_diagnostics,incoming_param_context));
-			break;
-		}
-		
-		// 558087146
-		case umlPackage::MESSAGE_OPERATION_CANNOT_CROSS_BOUNDARIES_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->cannot_cross_boundaries(incoming_param_diagnostics,incoming_param_context));
-			break;
-		}
-		
-		// 1841698888
-		case umlPackage::MESSAGE_OPERATION_GETMESSAGEKIND:
-		{
-			result = eAny(this->getMessageKind());
-			break;
-		}
-		
-		// 794631385
-		case umlPackage::MESSAGE_OPERATION_OCCURRENCE_SPECIFICATIONS_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->occurrence_specifications(incoming_param_diagnostics,incoming_param_context));
-			break;
-		}
-		
-		// 1304019371
-		case umlPackage::MESSAGE_OPERATION_SENDING_RECEIVING_MESSAGE_EVENT_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->sending_receiving_message_event(incoming_param_diagnostics,incoming_param_context));
-			break;
-		}
-		
-		// 1755211186
-		case umlPackage::MESSAGE_OPERATION_SIGNATURE_IS_OPERATION_REPLY_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->signature_is_operation_reply(incoming_param_diagnostics,incoming_param_context));
-			break;
-		}
-		
-		// 555346418
-		case umlPackage::MESSAGE_OPERATION_SIGNATURE_IS_OPERATION_REQUEST_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->signature_is_operation_request(incoming_param_diagnostics,incoming_param_context));
-			break;
-		}
-		
-		// 295075675
-		case umlPackage::MESSAGE_OPERATION_SIGNATURE_IS_SIGNAL_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->signature_is_signal(incoming_param_diagnostics,incoming_param_context));
-			break;
-		}
-		
-		// 1691024653
-		case umlPackage::MESSAGE_OPERATION_SIGNATURE_REFER_TO_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->signature_refer_to(incoming_param_diagnostics,incoming_param_context));
-			break;
-		}
-
-		default:
-		{
-			// call superTypes
-			result = NamedElementImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -961,9 +588,6 @@ void MessageImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> sa
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
 }
 
 void MessageImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -1019,3 +643,354 @@ void MessageImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHand
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> MessageImpl::eStaticClass() const
+{
+	return uml::umlPackage::eInstance()->getMessage_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any MessageImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::MESSAGE_ATTRIBUTE_ARGUMENT:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::ValueSpecification>::iterator iter = getArgument()->begin();
+			Bag<uml::ValueSpecification>::iterator end = getArgument()->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //1479			
+		}
+		case uml::umlPackage::MESSAGE_ATTRIBUTE_CONNECTOR:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getConnector();
+				return eAny(returnValue); //14710
+			}
+		case uml::umlPackage::MESSAGE_ATTRIBUTE_INTERACTION:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getInteraction().lock();
+				return eAny(returnValue); //14711
+			}
+		case uml::umlPackage::MESSAGE_ATTRIBUTE_MESSAGEKIND:
+			return eAny(getMessageKind()); //14712
+		case uml::umlPackage::MESSAGE_ATTRIBUTE_MESSAGESORT:
+			return eAny(getMessageSort()); //14713
+		case uml::umlPackage::MESSAGE_ATTRIBUTE_RECEIVEEVENT:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getReceiveEvent();
+				return eAny(returnValue); //14714
+			}
+		case uml::umlPackage::MESSAGE_ATTRIBUTE_SENDEVENT:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getSendEvent();
+				return eAny(returnValue); //14715
+			}
+		case uml::umlPackage::MESSAGE_ATTRIBUTE_SIGNATURE:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getSignature();
+				return eAny(returnValue); //14716
+			}
+	}
+	return NamedElementImpl::eGet(featureID, resolve, coreType);
+}
+
+bool MessageImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::MESSAGE_ATTRIBUTE_ARGUMENT:
+			return getArgument() != nullptr; //1479
+		case uml::umlPackage::MESSAGE_ATTRIBUTE_CONNECTOR:
+			return getConnector() != nullptr; //14710
+		case uml::umlPackage::MESSAGE_ATTRIBUTE_INTERACTION:
+			return getInteraction().lock() != nullptr; //14711
+		case uml::umlPackage::MESSAGE_ATTRIBUTE_MESSAGEKIND:
+			return m_messageKind != MessageKind::UNKNOWN;; //14712
+		case uml::umlPackage::MESSAGE_ATTRIBUTE_MESSAGESORT:
+			return m_messageSort != MessageSort::SYNCHCALL;; //14713
+		case uml::umlPackage::MESSAGE_ATTRIBUTE_RECEIVEEVENT:
+			return getReceiveEvent() != nullptr; //14714
+		case uml::umlPackage::MESSAGE_ATTRIBUTE_SENDEVENT:
+			return getSendEvent() != nullptr; //14715
+		case uml::umlPackage::MESSAGE_ATTRIBUTE_SIGNATURE:
+			return getSignature() != nullptr; //14716
+	}
+	return NamedElementImpl::internalEIsSet(featureID);
+}
+
+bool MessageImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::MESSAGE_ATTRIBUTE_ARGUMENT:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::ValueSpecification>> argumentList(new Bag<uml::ValueSpecification>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				argumentList->add(std::dynamic_pointer_cast<uml::ValueSpecification>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::ValueSpecification>::iterator iterArgument = getArgument()->begin();
+			Bag<uml::ValueSpecification>::iterator endArgument = getArgument()->end();
+			while (iterArgument != endArgument)
+			{
+				if (argumentList->find(*iterArgument) == -1)
+				{
+					getArgument()->erase(*iterArgument);
+				}
+				iterArgument++;
+			}
+ 
+			iterArgument = argumentList->begin();
+			endArgument = argumentList->end();
+			while (iterArgument != endArgument)
+			{
+				if (getArgument()->find(*iterArgument) == -1)
+				{
+					getArgument()->add(*iterArgument);
+				}
+				iterArgument++;			
+			}
+			return true;
+		}
+		case uml::umlPackage::MESSAGE_ATTRIBUTE_CONNECTOR:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::Connector> _connector = std::dynamic_pointer_cast<uml::Connector>(_temp);
+			setConnector(_connector); //14710
+			return true;
+		}
+		case uml::umlPackage::MESSAGE_ATTRIBUTE_INTERACTION:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::Interaction> _interaction = std::dynamic_pointer_cast<uml::Interaction>(_temp);
+			setInteraction(_interaction); //14711
+			return true;
+		}
+		case uml::umlPackage::MESSAGE_ATTRIBUTE_MESSAGESORT:
+		{
+			// BOOST CAST
+			uml::MessageSort _messageSort = newValue->get<uml::MessageSort>();
+			setMessageSort(_messageSort); //14713
+			return true;
+		}
+		case uml::umlPackage::MESSAGE_ATTRIBUTE_RECEIVEEVENT:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::MessageEnd> _receiveEvent = std::dynamic_pointer_cast<uml::MessageEnd>(_temp);
+			setReceiveEvent(_receiveEvent); //14714
+			return true;
+		}
+		case uml::umlPackage::MESSAGE_ATTRIBUTE_SENDEVENT:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::MessageEnd> _sendEvent = std::dynamic_pointer_cast<uml::MessageEnd>(_temp);
+			setSendEvent(_sendEvent); //14715
+			return true;
+		}
+		case uml::umlPackage::MESSAGE_ATTRIBUTE_SIGNATURE:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::NamedElement> _signature = std::dynamic_pointer_cast<uml::NamedElement>(_temp);
+			setSignature(_signature); //14716
+			return true;
+		}
+	}
+
+	return NamedElementImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any MessageImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 1899252778
+		case umlPackage::MESSAGE_OPERATION_ARGUMENTS_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->arguments(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+		
+		// 558087146
+		case umlPackage::MESSAGE_OPERATION_CANNOT_CROSS_BOUNDARIES_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->cannot_cross_boundaries(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+		
+		// 1841698888
+		case umlPackage::MESSAGE_OPERATION_GETMESSAGEKIND:
+		{
+			result = eAny(this->getMessageKind());
+			break;
+		}
+		
+		// 794631385
+		case umlPackage::MESSAGE_OPERATION_OCCURRENCE_SPECIFICATIONS_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->occurrence_specifications(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+		
+		// 1304019371
+		case umlPackage::MESSAGE_OPERATION_SENDING_RECEIVING_MESSAGE_EVENT_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->sending_receiving_message_event(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+		
+		// 1755211186
+		case umlPackage::MESSAGE_OPERATION_SIGNATURE_IS_OPERATION_REPLY_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->signature_is_operation_reply(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+		
+		// 555346418
+		case umlPackage::MESSAGE_OPERATION_SIGNATURE_IS_OPERATION_REQUEST_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->signature_is_operation_request(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+		
+		// 295075675
+		case umlPackage::MESSAGE_OPERATION_SIGNATURE_IS_SIGNAL_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->signature_is_signal(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+		
+		// 1691024653
+		case umlPackage::MESSAGE_OPERATION_SIGNATURE_REFER_TO_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->signature_refer_to(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = NamedElementImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<Message> MessageImpl::getThisMessagePtr() const
+{
+	return m_thisMessagePtr.lock();
+}
+void MessageImpl::setThisMessagePtr(std::weak_ptr<Message> thisMessagePtr)
+{
+	m_thisMessagePtr = thisMessagePtr;
+	setThisNamedElementPtr(thisMessagePtr);
+}

@@ -1,3 +1,4 @@
+
 #include "fUML/Semantics/Actions/impl/WriteLinkActionActivationImpl.hpp"
 
 #ifdef NDEBUG
@@ -25,7 +26,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -35,7 +35,6 @@
 #include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "uml/umlFactory.hpp"
-
 
 #include "uml/Action.hpp"
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
@@ -123,21 +122,16 @@ std::shared_ptr<ecore::EObject> WriteLinkActionActivationImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> WriteLinkActionActivationImpl::eStaticClass() const
-{
-	return fUML::Semantics::Actions::ActionsPackage::eInstance()->getWriteLinkActionActivation_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
 
 //*********************************
-// References
+// Attribute Getters & Setters
+//*********************************
+
+//*********************************
+// Reference Getters & Setters
 //*********************************
 
 //*********************************
@@ -158,18 +152,9 @@ std::shared_ptr<Union<fUML::Semantics::Actions::PinActivation>> WriteLinkActionA
 	return m_pinActivation;
 }
 
-
-
-
-std::shared_ptr<WriteLinkActionActivation> WriteLinkActionActivationImpl::getThisWriteLinkActionActivationPtr() const
-{
-	return m_thisWriteLinkActionActivationPtr.lock();
-}
-void WriteLinkActionActivationImpl::setThisWriteLinkActionActivationPtr(std::weak_ptr<WriteLinkActionActivation> thisWriteLinkActionActivationPtr)
-{
-	m_thisWriteLinkActionActivationPtr = thisWriteLinkActionActivationPtr;
-	setThisLinkActionActivationPtr(thisWriteLinkActionActivationPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> WriteLinkActionActivationImpl::eContainer() const
 {
 	if(auto wp = m_group.lock())
@@ -177,55 +162,6 @@ std::shared_ptr<ecore::EObject> WriteLinkActionActivationImpl::eContainer() cons
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any WriteLinkActionActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-	}
-	return LinkActionActivationImpl::eGet(featureID, resolve, coreType);
-}
-bool WriteLinkActionActivationImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-	}
-	return LinkActionActivationImpl::internalEIsSet(featureID);
-}
-bool WriteLinkActionActivationImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-	}
-
-	return LinkActionActivationImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any WriteLinkActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-
-		default:
-		{
-			// call superTypes
-			result = LinkActionActivationImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -278,10 +214,6 @@ void WriteLinkActionActivationImpl::save(std::shared_ptr<persistence::interfaces
 	fUML::Semantics::Loci::SemanticVisitorImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
 }
 
 void WriteLinkActionActivationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -296,3 +228,71 @@ void WriteLinkActionActivationImpl::saveContent(std::shared_ptr<persistence::int
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> WriteLinkActionActivationImpl::eStaticClass() const
+{
+	return fUML::Semantics::Actions::ActionsPackage::eInstance()->getWriteLinkActionActivation_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any WriteLinkActionActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+	}
+	return LinkActionActivationImpl::eGet(featureID, resolve, coreType);
+}
+
+bool WriteLinkActionActivationImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+	}
+	return LinkActionActivationImpl::internalEIsSet(featureID);
+}
+
+bool WriteLinkActionActivationImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+	}
+
+	return LinkActionActivationImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any WriteLinkActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+
+		default:
+		{
+			// call superTypes
+			result = LinkActionActivationImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<WriteLinkActionActivation> WriteLinkActionActivationImpl::getThisWriteLinkActionActivationPtr() const
+{
+	return m_thisWriteLinkActionActivationPtr.lock();
+}
+void WriteLinkActionActivationImpl::setThisWriteLinkActionActivationPtr(std::weak_ptr<WriteLinkActionActivation> thisWriteLinkActionActivationPtr)
+{
+	m_thisWriteLinkActionActivationPtr = thisWriteLinkActionActivationPtr;
+	setThisLinkActionActivationPtr(thisWriteLinkActionActivationPtr);
+}

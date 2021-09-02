@@ -10,12 +10,16 @@
 namespace uml 
 {
 	enum ObjectNodeOrderingKind {
+		
 		FIFO = 3
 ,
+		
 		LIFO = 2
 ,
+		
 		ORDERED = 1
 ,
+		
 		UNORDERED = 0
 	};
 }

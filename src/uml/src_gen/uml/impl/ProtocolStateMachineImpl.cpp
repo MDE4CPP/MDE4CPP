@@ -1,3 +1,4 @@
+
 #include "uml/impl/ProtocolStateMachineImpl.hpp"
 
 #ifdef NDEBUG
@@ -26,7 +27,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -34,7 +34,6 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-
 
 #include "uml/Behavior.hpp"
 #include "uml/BehavioralFeature.hpp"
@@ -231,15 +230,6 @@ std::shared_ptr<ecore::EObject> ProtocolStateMachineImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> ProtocolStateMachineImpl::eStaticClass() const
-{
-	return uml::umlPackage::eInstance()->getProtocolStateMachine_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
@@ -262,11 +252,13 @@ bool ProtocolStateMachineImpl::protocol_transitions(Any diagnostics,std::shared_
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference conformance
-*/
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference conformance */
 std::shared_ptr<Subset<uml::ProtocolConformance, uml::Element>> ProtocolStateMachineImpl::getConformance() const
 {
 	if(m_conformance == nullptr)
@@ -286,8 +278,6 @@ std::shared_ptr<Subset<uml::ProtocolConformance, uml::Element>> ProtocolStateMac
 	}
     return m_conformance;
 }
-
-
 
 //*********************************
 // Union Getter
@@ -444,16 +434,9 @@ std::shared_ptr<SubsetUnion<uml::ConnectableElement, uml::NamedElement>> Protoco
 
 
 
-
-std::shared_ptr<ProtocolStateMachine> ProtocolStateMachineImpl::getThisProtocolStateMachinePtr() const
-{
-	return m_thisProtocolStateMachinePtr.lock();
-}
-void ProtocolStateMachineImpl::setThisProtocolStateMachinePtr(std::weak_ptr<ProtocolStateMachine> thisProtocolStateMachinePtr)
-{
-	m_thisProtocolStateMachinePtr = thisProtocolStateMachinePtr;
-	setThisStateMachinePtr(thisProtocolStateMachinePtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> ProtocolStateMachineImpl::eContainer() const
 {
 	if(auto wp = m_behavioredClassifier.lock())
@@ -486,156 +469,6 @@ std::shared_ptr<ecore::EObject> ProtocolStateMachineImpl::eContainer() const
 	}
 
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any ProtocolStateMachineImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::PROTOCOLSTATEMACHINE_ATTRIBUTE_CONFORMANCE:
-		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::ProtocolConformance>::iterator iter = getConformance()->begin();
-			Bag<uml::ProtocolConformance>::iterator end = getConformance()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //18766			
-		}
-	}
-	return StateMachineImpl::eGet(featureID, resolve, coreType);
-}
-bool ProtocolStateMachineImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::PROTOCOLSTATEMACHINE_ATTRIBUTE_CONFORMANCE:
-			return getConformance() != nullptr; //18766
-	}
-	return StateMachineImpl::internalEIsSet(featureID);
-}
-bool ProtocolStateMachineImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::PROTOCOLSTATEMACHINE_ATTRIBUTE_CONFORMANCE:
-		{
-			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::ProtocolConformance>> conformanceList(new Bag<uml::ProtocolConformance>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
-			{
-				conformanceList->add(std::dynamic_pointer_cast<uml::ProtocolConformance>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::ProtocolConformance>::iterator iterConformance = getConformance()->begin();
-			Bag<uml::ProtocolConformance>::iterator endConformance = getConformance()->end();
-			while (iterConformance != endConformance)
-			{
-				if (conformanceList->find(*iterConformance) == -1)
-				{
-					getConformance()->erase(*iterConformance);
-				}
-				iterConformance++;
-			}
- 
-			iterConformance = conformanceList->begin();
-			endConformance = conformanceList->end();
-			while (iterConformance != endConformance)
-			{
-				if (getConformance()->find(*iterConformance) == -1)
-				{
-					getConformance()->add(*iterConformance);
-				}
-				iterConformance++;			
-			}
-			return true;
-		}
-	}
-
-	return StateMachineImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any ProtocolStateMachineImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-		
-		// 2140613199
-		case umlPackage::PROTOCOLSTATEMACHINE_OPERATION_DEEP_OR_SHALLOW_HISTORY_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->deep_or_shallow_history(incoming_param_diagnostics,incoming_param_context));
-			break;
-		}
-		
-		// 1716936520
-		case umlPackage::PROTOCOLSTATEMACHINE_OPERATION_ENTRY_EXIT_DO_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->entry_exit_do(incoming_param_diagnostics,incoming_param_context));
-			break;
-		}
-		
-		// 1236567633
-		case umlPackage::PROTOCOLSTATEMACHINE_OPERATION_PROTOCOL_TRANSITIONS_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->protocol_transitions(incoming_param_diagnostics,incoming_param_context));
-			break;
-		}
-
-		default:
-		{
-			// call superTypes
-			result = StateMachineImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -729,17 +562,6 @@ void ProtocolStateMachineImpl::save(std::shared_ptr<persistence::interfaces::XSa
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 }
 
 void ProtocolStateMachineImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -759,3 +581,172 @@ void ProtocolStateMachineImpl::saveContent(std::shared_ptr<persistence::interfac
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> ProtocolStateMachineImpl::eStaticClass() const
+{
+	return uml::umlPackage::eInstance()->getProtocolStateMachine_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any ProtocolStateMachineImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::PROTOCOLSTATEMACHINE_ATTRIBUTE_CONFORMANCE:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::ProtocolConformance>::iterator iter = getConformance()->begin();
+			Bag<uml::ProtocolConformance>::iterator end = getConformance()->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //18766			
+		}
+	}
+	return StateMachineImpl::eGet(featureID, resolve, coreType);
+}
+
+bool ProtocolStateMachineImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::PROTOCOLSTATEMACHINE_ATTRIBUTE_CONFORMANCE:
+			return getConformance() != nullptr; //18766
+	}
+	return StateMachineImpl::internalEIsSet(featureID);
+}
+
+bool ProtocolStateMachineImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::PROTOCOLSTATEMACHINE_ATTRIBUTE_CONFORMANCE:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::ProtocolConformance>> conformanceList(new Bag<uml::ProtocolConformance>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				conformanceList->add(std::dynamic_pointer_cast<uml::ProtocolConformance>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::ProtocolConformance>::iterator iterConformance = getConformance()->begin();
+			Bag<uml::ProtocolConformance>::iterator endConformance = getConformance()->end();
+			while (iterConformance != endConformance)
+			{
+				if (conformanceList->find(*iterConformance) == -1)
+				{
+					getConformance()->erase(*iterConformance);
+				}
+				iterConformance++;
+			}
+ 
+			iterConformance = conformanceList->begin();
+			endConformance = conformanceList->end();
+			while (iterConformance != endConformance)
+			{
+				if (getConformance()->find(*iterConformance) == -1)
+				{
+					getConformance()->add(*iterConformance);
+				}
+				iterConformance++;			
+			}
+			return true;
+		}
+	}
+
+	return StateMachineImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any ProtocolStateMachineImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 2140613199
+		case umlPackage::PROTOCOLSTATEMACHINE_OPERATION_DEEP_OR_SHALLOW_HISTORY_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->deep_or_shallow_history(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+		
+		// 1716936520
+		case umlPackage::PROTOCOLSTATEMACHINE_OPERATION_ENTRY_EXIT_DO_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->entry_exit_do(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+		
+		// 1236567633
+		case umlPackage::PROTOCOLSTATEMACHINE_OPERATION_PROTOCOL_TRANSITIONS_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->protocol_transitions(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = StateMachineImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<ProtocolStateMachine> ProtocolStateMachineImpl::getThisProtocolStateMachinePtr() const
+{
+	return m_thisProtocolStateMachinePtr.lock();
+}
+void ProtocolStateMachineImpl::setThisProtocolStateMachinePtr(std::weak_ptr<ProtocolStateMachine> thisProtocolStateMachinePtr)
+{
+	m_thisProtocolStateMachinePtr = thisProtocolStateMachinePtr;
+	setThisStateMachinePtr(thisProtocolStateMachinePtr);
+}

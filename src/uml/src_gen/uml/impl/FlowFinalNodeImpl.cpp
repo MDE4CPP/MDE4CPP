@@ -1,3 +1,4 @@
+
 #include "uml/impl/FlowFinalNodeImpl.hpp"
 
 #ifdef NDEBUG
@@ -25,7 +26,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -33,7 +33,6 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-
 
 #include "uml/Activity.hpp"
 #include "uml/ActivityEdge.hpp"
@@ -147,21 +146,16 @@ std::shared_ptr<ecore::EObject> FlowFinalNodeImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> FlowFinalNodeImpl::eStaticClass() const
-{
-	return uml::umlPackage::eInstance()->getFlowFinalNode_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
 
 //*********************************
-// References
+// Attribute Getters & Setters
+//*********************************
+
+//*********************************
+// Reference Getters & Setters
 //*********************************
 
 //*********************************
@@ -217,18 +211,9 @@ std::shared_ptr<Union<uml::RedefinableElement>> FlowFinalNodeImpl::getRedefinedE
 	return m_redefinedElement;
 }
 
-
-
-
-std::shared_ptr<FlowFinalNode> FlowFinalNodeImpl::getThisFlowFinalNodePtr() const
-{
-	return m_thisFlowFinalNodePtr.lock();
-}
-void FlowFinalNodeImpl::setThisFlowFinalNodePtr(std::weak_ptr<FlowFinalNode> thisFlowFinalNodePtr)
-{
-	m_thisFlowFinalNodePtr = thisFlowFinalNodePtr;
-	setThisFinalNodePtr(thisFlowFinalNodePtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> FlowFinalNodeImpl::eContainer() const
 {
 	if(auto wp = m_activity.lock())
@@ -251,55 +236,6 @@ std::shared_ptr<ecore::EObject> FlowFinalNodeImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any FlowFinalNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-	}
-	return FinalNodeImpl::eGet(featureID, resolve, coreType);
-}
-bool FlowFinalNodeImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-	}
-	return FinalNodeImpl::internalEIsSet(featureID);
-}
-bool FlowFinalNodeImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-	}
-
-	return FinalNodeImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any FlowFinalNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-
-		default:
-		{
-			// call superTypes
-			result = FinalNodeImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -358,13 +294,6 @@ void FlowFinalNodeImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandl
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
-	
-	
-	
 }
 
 void FlowFinalNodeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -379,3 +308,71 @@ void FlowFinalNodeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSa
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> FlowFinalNodeImpl::eStaticClass() const
+{
+	return uml::umlPackage::eInstance()->getFlowFinalNode_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any FlowFinalNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+	}
+	return FinalNodeImpl::eGet(featureID, resolve, coreType);
+}
+
+bool FlowFinalNodeImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+	}
+	return FinalNodeImpl::internalEIsSet(featureID);
+}
+
+bool FlowFinalNodeImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+	}
+
+	return FinalNodeImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any FlowFinalNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+
+		default:
+		{
+			// call superTypes
+			result = FinalNodeImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<FlowFinalNode> FlowFinalNodeImpl::getThisFlowFinalNodePtr() const
+{
+	return m_thisFlowFinalNodePtr.lock();
+}
+void FlowFinalNodeImpl::setThisFlowFinalNodePtr(std::weak_ptr<FlowFinalNode> thisFlowFinalNodePtr)
+{
+	m_thisFlowFinalNodePtr = thisFlowFinalNodePtr;
+	setThisFinalNodePtr(thisFlowFinalNodePtr);
+}

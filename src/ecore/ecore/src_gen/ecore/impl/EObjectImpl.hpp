@@ -45,49 +45,43 @@ virtual public EObject
 			//*********************************
 			// Operations
 			//*********************************
-			 
-			virtual std::shared_ptr<Bag < ecore::EObject>> eAllContents() const ; 
-			virtual std::shared_ptr<ecore::EClass> eClass() const ; 
-			virtual std::shared_ptr<ecore::EStructuralFeature> eContainingFeature() const ; 
-			virtual std::shared_ptr<ecore::EReference> eContainmentFeature() const ; 
-			virtual std::shared_ptr<std::list < ecore::EObject>> eContents() const ; 
-			virtual std::shared_ptr<std::list < ecore::EObject>> eCrossReferences() const ; 
-			virtual Any eGet(std::shared_ptr<ecore::EStructuralFeature> feature) const ; 
-			virtual Any eGet(std::shared_ptr<ecore::EStructuralFeature> feature,bool resolve) const ; 
-			virtual Any eInvoke(std::shared_ptr<ecore::EOperation> operation,std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ; 
-			virtual bool eIsProxy() const ; 
-			virtual bool eIsSet(std::shared_ptr<ecore::EStructuralFeature> feature) const ; 
-			virtual int eResource() const ; 
-			virtual void eSet(std::shared_ptr<ecore::EStructuralFeature> feature,Any newValue) ; 
+			virtual std::shared_ptr<Bag < ecore::EObject>> eAllContents() const ;
+			virtual std::shared_ptr<ecore::EClass> eClass() const ;
+			
+			virtual std::shared_ptr<ecore::EStructuralFeature> eContainingFeature() const ;
+			virtual std::shared_ptr<ecore::EReference> eContainmentFeature() const ;
+			virtual std::shared_ptr<std::list < ecore::EObject>> eContents() const ;
+			virtual std::shared_ptr<std::list < ecore::EObject>> eCrossReferences() const ;
+			virtual Any eGet(std::shared_ptr<ecore::EStructuralFeature> feature) const ;
+			virtual Any eGet(std::shared_ptr<ecore::EStructuralFeature> feature,bool resolve) const ;
+			virtual Any eInvoke(std::shared_ptr<ecore::EOperation> operation,std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
+			virtual bool eIsProxy() const ;
+			virtual bool eIsSet(std::shared_ptr<ecore::EStructuralFeature> feature) const ;
+			virtual int eResource() const ;
+			virtual void eSet(std::shared_ptr<ecore::EStructuralFeature> feature,Any newValue) ;
 			virtual void eUnset(std::shared_ptr<ecore::EStructuralFeature> feature) const ;
 			
 			//*********************************
-			// Attributes Getter Setter
+			// Attribute Getters & Setters
 			//*********************************
-			 
 			virtual int getMetaElementID() const ;
-			 
 			virtual void setMetaElementID (int _metaElementID);
 			
-			
 			//*********************************
-			// Reference
+			// Reference Getters & Setters
 			//*********************************
-			
 			virtual std::weak_ptr<ecore::EObject> getEContainer() const ;
-			
 			virtual void setEContainer(std::weak_ptr<ecore::EObject>) ;
 			
 			
-			
-			
 			//*********************************
-			// Union Getter
+			// Union Reference Getters
 			//*********************************
-			
 			virtual std::shared_ptr<Union<ecore::EObject>> getEContens() const ;
 			
-
+			//*********************************
+			// Container Getter
+			//*********************************
 			virtual std::shared_ptr<ecore::EObject> eContainer() const ; 
 			
 			//*********************************
@@ -96,20 +90,23 @@ virtual public EObject
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) ;
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
-			
 			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
-			
 
-			//*********************************
-			// Structural Feature Getter/Setter
-			//*********************************
 		protected:
 			virtual std::shared_ptr<EClass> eStaticClass() const;
+
+			//*********************************
+			// EStructuralFeature Get/Set/IsSet
+			//*********************************
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool internalEIsSet(int featureID) const ;
 			virtual bool eSet(int featureID, Any newValue) ;
+			virtual bool internalEIsSet(int featureID) const ;
+
+			//*********************************
+			// EOperation Invoke
+			//*********************************
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:

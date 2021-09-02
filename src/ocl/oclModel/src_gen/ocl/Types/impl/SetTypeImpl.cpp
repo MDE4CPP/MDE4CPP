@@ -1,3 +1,4 @@
+
 #include "ocl/Types/impl/SetTypeImpl.hpp"
 
 #ifdef NDEBUG
@@ -25,7 +26,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -34,7 +34,6 @@
 #include <exception> // used in Persistence
 #include "ecore/ecoreFactory.hpp"
 #include "ocl/Values/ValuesFactory.hpp"
-
 
 #include "ocl/Types/CollectionType.hpp"
 #include "ocl/Values/CollectionValue.hpp"
@@ -118,38 +117,25 @@ std::shared_ptr<ecore::EObject> SetTypeImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> SetTypeImpl::eStaticClass() const
-{
-	return ocl::Types::TypesPackage::eInstance()->getSetType_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
 
 //*********************************
-// References
+// Attribute Getters & Setters
+//*********************************
+
+//*********************************
+// Reference Getters & Setters
 //*********************************
 
 //*********************************
 // Union Getter
 //*********************************
 
-
-
-std::shared_ptr<SetType> SetTypeImpl::getThisSetTypePtr() const
-{
-	return m_thisSetTypePtr.lock();
-}
-void SetTypeImpl::setThisSetTypePtr(std::weak_ptr<SetType> thisSetTypePtr)
-{
-	m_thisSetTypePtr = thisSetTypePtr;
-	setThisCollectionTypePtr(thisSetTypePtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> SetTypeImpl::eContainer() const
 {
 	if(auto wp = m_ePackage.lock())
@@ -157,55 +143,6 @@ std::shared_ptr<ecore::EObject> SetTypeImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any SetTypeImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-	}
-	return CollectionTypeImpl::eGet(featureID, resolve, coreType);
-}
-bool SetTypeImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-	}
-	return CollectionTypeImpl::internalEIsSet(featureID);
-}
-bool SetTypeImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-	}
-
-	return CollectionTypeImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any SetTypeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-
-		default:
-		{
-			// call superTypes
-			result = CollectionTypeImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -260,11 +197,6 @@ void SetTypeImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> sa
 	ecore::EModelElementImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
-	
 }
 
 void SetTypeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -279,3 +211,71 @@ void SetTypeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHand
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> SetTypeImpl::eStaticClass() const
+{
+	return ocl::Types::TypesPackage::eInstance()->getSetType_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any SetTypeImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+	}
+	return CollectionTypeImpl::eGet(featureID, resolve, coreType);
+}
+
+bool SetTypeImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+	}
+	return CollectionTypeImpl::internalEIsSet(featureID);
+}
+
+bool SetTypeImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+	}
+
+	return CollectionTypeImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any SetTypeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+
+		default:
+		{
+			// call superTypes
+			result = CollectionTypeImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<SetType> SetTypeImpl::getThisSetTypePtr() const
+{
+	return m_thisSetTypePtr.lock();
+}
+void SetTypeImpl::setThisSetTypePtr(std::weak_ptr<SetType> thisSetTypePtr)
+{
+	m_thisSetTypePtr = thisSetTypePtr;
+	setThisCollectionTypePtr(thisSetTypePtr);
+}

@@ -69,19 +69,22 @@ namespace uml
 			<p>From package UML::StateMachines.</p>
 			*/
 			 
-			virtual std::shared_ptr<uml::StateMachine> containingStateMachine() ;/*!
+			virtual std::shared_ptr<uml::StateMachine> containingStateMachine() ;
+			/*!
 			Derivation for Vertex::/incoming.
 			result = (Transition.allInstances()->select(target=self))
 			<p>From package UML::StateMachines.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::Transition> > getIncomings() ;/*!
+			virtual std::shared_ptr<Bag<uml::Transition> > getIncomings() ;
+			/*!
 			Derivation for Vertex::/outgoing
 			result = (Transition.allInstances()->select(source=self))
 			<p>From package UML::StateMachines.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::Transition> > getOutgoings() ;/*!
+			virtual std::shared_ptr<Bag<uml::Transition> > getOutgoings() ;
+			/*!
 			This utility query returns true if the Vertex is contained in the Region r (input argument).
 			result = (if (container = r) then
 				true
@@ -95,7 +98,8 @@ namespace uml
 			<p>From package UML::StateMachines.</p>
 			*/
 			 
-			virtual bool isContainedInRegion(std::shared_ptr<uml::Region> r) ;/*!
+			virtual bool isContainedInRegion(std::shared_ptr<uml::Region> r) ;
+			/*!
 			This utility operation returns true if the Vertex is contained in the State s (input argument).
 			result = (if not s.isComposite() or container->isEmpty() then
 				false
@@ -112,12 +116,11 @@ namespace uml
 			virtual bool isContainedInState(std::shared_ptr<uml::State> s) ;
 			
 			//*********************************
-			// Attributes Getter Setter
+			// Attribute Getters & Setters
 			//*********************************
 			
-			
 			//*********************************
-			// Reference
+			// Reference Getters & Setters
 			//*********************************
 			/*!
 			The Region that contains this Vertex.
@@ -137,7 +140,6 @@ namespace uml
 			*/
 			
 			virtual std::shared_ptr<Bag<uml::Transition>> getIncoming() const ;
-			
 			/*!
 			Specifies the Transitions departing from this Vertex.
 			<p>From package UML::StateMachines.</p>
@@ -145,29 +147,31 @@ namespace uml
 			
 			virtual std::shared_ptr<Bag<uml::Transition>> getOutgoing() const ;
 			
-			
-			
 			//*********************************
-			// Union Getter
+			// Union Reference Getters
 			//*********************************
 			/*!
 			Specifies the Namespace that owns the NamedElement.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Namespace> getNamespace() const ;/*!
+			virtual std::weak_ptr<uml::Namespace> getNamespace() const ;
+			/*!
 			The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const ;/*!
+			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const ;
+			/*!
 			The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
 			virtual std::weak_ptr<uml::Element> getOwner() const ;
 			
-
+			//*********************************
+			// Container Getter
+			//*********************************
 			virtual std::shared_ptr<ecore::EObject> eContainer() const ; 
 			
 			//*********************************
@@ -176,20 +180,23 @@ namespace uml
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) ;
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
-			
 			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
-			
 
-			//*********************************
-			// Structural Feature Getter/Setter
-			//*********************************
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+
+			//*********************************
+			// EStructuralFeature Get/Set/IsSet
+			//*********************************
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool internalEIsSet(int featureID) const ;
 			virtual bool eSet(int featureID, Any newValue) ;
+			virtual bool internalEIsSet(int featureID) const ;
+
+			//*********************************
+			// EOperation Invoke
+			//*********************************
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:

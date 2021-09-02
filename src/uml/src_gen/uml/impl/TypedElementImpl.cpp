@@ -1,3 +1,4 @@
+
 #include "uml/impl/TypedElementImpl.hpp"
 
 #ifdef NDEBUG
@@ -25,7 +26,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -33,7 +33,6 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-
 
 #include "uml/Comment.hpp"
 #include "uml/Dependency.hpp"
@@ -124,25 +123,18 @@ std::shared_ptr<ecore::EObject> TypedElementImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> TypedElementImpl::eStaticClass() const
-{
-	return uml::umlPackage::eInstance()->getTypedElement_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference type
-*/
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference type */
 std::shared_ptr<uml::Type> TypedElementImpl::getType() const
 {
     return m_type;
@@ -152,7 +144,6 @@ void TypedElementImpl::setType(std::shared_ptr<uml::Type> _type)
     m_type = _type;
 	
 }
-
 
 //*********************************
 // Union Getter
@@ -177,18 +168,9 @@ std::weak_ptr<uml::Element> TypedElementImpl::getOwner() const
 	return m_owner;
 }
 
-
-
-
-std::shared_ptr<TypedElement> TypedElementImpl::getThisTypedElementPtr() const
-{
-	return m_thisTypedElementPtr.lock();
-}
-void TypedElementImpl::setThisTypedElementPtr(std::weak_ptr<TypedElement> thisTypedElementPtr)
-{
-	m_thisTypedElementPtr = thisTypedElementPtr;
-	setThisNamedElementPtr(thisTypedElementPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> TypedElementImpl::eContainer() const
 {
 	if(auto wp = m_namespace.lock())
@@ -201,70 +183,6 @@ std::shared_ptr<ecore::EObject> TypedElementImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any TypedElementImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::TYPEDELEMENT_ATTRIBUTE_TYPE:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getType();
-				return eAny(returnValue); //2459
-			}
-	}
-	return NamedElementImpl::eGet(featureID, resolve, coreType);
-}
-bool TypedElementImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::TYPEDELEMENT_ATTRIBUTE_TYPE:
-			return getType() != nullptr; //2459
-	}
-	return NamedElementImpl::internalEIsSet(featureID);
-}
-bool TypedElementImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::TYPEDELEMENT_ATTRIBUTE_TYPE:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::Type> _type = std::dynamic_pointer_cast<uml::Type>(_temp);
-			setType(_type); //2459
-			return true;
-		}
-	}
-
-	return NamedElementImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any TypedElementImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-
-		default:
-		{
-			// call superTypes
-			result = NamedElementImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -356,9 +274,6 @@ void TypedElementImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandle
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
 }
 
 void TypedElementImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -375,3 +290,86 @@ void TypedElementImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> TypedElementImpl::eStaticClass() const
+{
+	return uml::umlPackage::eInstance()->getTypedElement_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any TypedElementImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::TYPEDELEMENT_ATTRIBUTE_TYPE:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getType();
+				return eAny(returnValue); //2459
+			}
+	}
+	return NamedElementImpl::eGet(featureID, resolve, coreType);
+}
+
+bool TypedElementImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::TYPEDELEMENT_ATTRIBUTE_TYPE:
+			return getType() != nullptr; //2459
+	}
+	return NamedElementImpl::internalEIsSet(featureID);
+}
+
+bool TypedElementImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::TYPEDELEMENT_ATTRIBUTE_TYPE:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::Type> _type = std::dynamic_pointer_cast<uml::Type>(_temp);
+			setType(_type); //2459
+			return true;
+		}
+	}
+
+	return NamedElementImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any TypedElementImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+
+		default:
+		{
+			// call superTypes
+			result = NamedElementImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<TypedElement> TypedElementImpl::getThisTypedElementPtr() const
+{
+	return m_thisTypedElementPtr.lock();
+}
+void TypedElementImpl::setThisTypedElementPtr(std::weak_ptr<TypedElement> thisTypedElementPtr)
+{
+	m_thisTypedElementPtr = thisTypedElementPtr;
+	setThisNamedElementPtr(thisTypedElementPtr);
+}

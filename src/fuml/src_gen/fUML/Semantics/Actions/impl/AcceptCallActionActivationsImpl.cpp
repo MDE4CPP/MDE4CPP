@@ -1,3 +1,4 @@
+
 #include "fUML/Semantics/Actions/impl/AcceptCallActionActivationsImpl.hpp"
 
 #ifdef NDEBUG
@@ -24,14 +25,12 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-
 
 
 //Factories an Package includes
@@ -102,89 +101,28 @@ std::shared_ptr<ecore::EObject> AcceptCallActionActivationsImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> AcceptCallActionActivationsImpl::eStaticClass() const
-{
-	return fUML::Semantics::Actions::ActionsPackage::eInstance()->getAcceptCallActionActivations_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
 
 //*********************************
-// References
+// Attribute Getters & Setters
+//*********************************
+
+//*********************************
+// Reference Getters & Setters
 //*********************************
 
 //*********************************
 // Union Getter
 //*********************************
 
-
-
-std::shared_ptr<AcceptCallActionActivations> AcceptCallActionActivationsImpl::getThisAcceptCallActionActivationsPtr() const
-{
-	return m_thisAcceptCallActionActivationsPtr.lock();
-}
-void AcceptCallActionActivationsImpl::setThisAcceptCallActionActivationsPtr(std::weak_ptr<AcceptCallActionActivations> thisAcceptCallActionActivationsPtr)
-{
-	m_thisAcceptCallActionActivationsPtr = thisAcceptCallActionActivationsPtr;
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> AcceptCallActionActivationsImpl::eContainer() const
 {
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any AcceptCallActionActivationsImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-	}
-	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
-}
-bool AcceptCallActionActivationsImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-	}
-	return ecore::EObjectImpl::internalEIsSet(featureID);
-}
-bool AcceptCallActionActivationsImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-	}
-
-	return ecore::EObjectImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any AcceptCallActionActivationsImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-
-		default:
-		{
-			// call superTypes
-			result = ecore::EModelElementImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -227,9 +165,7 @@ void AcceptCallActionActivationsImpl::save(std::shared_ptr<persistence::interfac
 {
 	saveContent(saveHandler);
 
-	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
 }
 
 void AcceptCallActionActivationsImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -244,3 +180,70 @@ void AcceptCallActionActivationsImpl::saveContent(std::shared_ptr<persistence::i
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> AcceptCallActionActivationsImpl::eStaticClass() const
+{
+	return fUML::Semantics::Actions::ActionsPackage::eInstance()->getAcceptCallActionActivations_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any AcceptCallActionActivationsImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+	}
+	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
+}
+
+bool AcceptCallActionActivationsImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+	}
+	return ecore::EObjectImpl::internalEIsSet(featureID);
+}
+
+bool AcceptCallActionActivationsImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+	}
+
+	return ecore::EObjectImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any AcceptCallActionActivationsImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+
+		default:
+		{
+			// call superTypes
+			result = ecore::EModelElementImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<AcceptCallActionActivations> AcceptCallActionActivationsImpl::getThisAcceptCallActionActivationsPtr() const
+{
+	return m_thisAcceptCallActionActivationsPtr.lock();
+}
+void AcceptCallActionActivationsImpl::setThisAcceptCallActionActivationsPtr(std::weak_ptr<AcceptCallActionActivations> thisAcceptCallActionActivationsPtr)
+{
+	m_thisAcceptCallActionActivationsPtr = thisAcceptCallActionActivationsPtr;
+}

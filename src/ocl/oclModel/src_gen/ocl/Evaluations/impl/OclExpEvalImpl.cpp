@@ -1,3 +1,4 @@
+
 #include "ocl/Evaluations/impl/OclExpEvalImpl.hpp"
 
 #ifdef NDEBUG
@@ -32,12 +33,11 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "fUML/Semantics/Values/ValuesFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
 #include "uml/umlFactory.hpp"
+#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
-
 
 #include "ocl/Evaluations/EvalEnvironment.hpp"
 #include "fUML/Semantics/Values/Evaluation.hpp"
@@ -121,25 +121,18 @@ std::shared_ptr<ecore::EObject> OclExpEvalImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> OclExpEvalImpl::eStaticClass() const
-{
-	return ocl::Evaluations::EvaluationsPackage::eInstance()->getOclExpEval_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference beforeEnvironment
-*/
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference beforeEnvironment */
 std::shared_ptr<ocl::Evaluations::EvalEnvironment> OclExpEvalImpl::getBeforeEnvironment() const
 {
     return m_beforeEnvironment;
@@ -150,10 +143,7 @@ void OclExpEvalImpl::setBeforeEnvironment(std::shared_ptr<ocl::Evaluations::Eval
 	
 }
 
-
-/*
-Getter & Setter for reference environment
-*/
+/* Getter & Setter for reference environment */
 std::shared_ptr<ocl::Evaluations::EvalEnvironment> OclExpEvalImpl::getEnvironment() const
 {
     return m_environment;
@@ -164,10 +154,7 @@ void OclExpEvalImpl::setEnvironment(std::shared_ptr<ocl::Evaluations::EvalEnviro
 	
 }
 
-
-/*
-Getter & Setter for reference model
-*/
+/* Getter & Setter for reference model */
 std::shared_ptr<ocl::Expressions::OclExpression> OclExpEvalImpl::getModel() const
 {
     return m_model;
@@ -178,10 +165,7 @@ void OclExpEvalImpl::setModel(std::shared_ptr<ocl::Expressions::OclExpression> _
 	
 }
 
-
-/*
-Getter & Setter for reference resultValue
-*/
+/* Getter & Setter for reference resultValue */
 std::shared_ptr<fUML::Semantics::Values::Value> OclExpEvalImpl::getResultValue() const
 {
     return m_resultValue;
@@ -192,134 +176,16 @@ void OclExpEvalImpl::setResultValue(std::shared_ptr<fUML::Semantics::Values::Val
 	
 }
 
-
 //*********************************
 // Union Getter
 //*********************************
 
-
-
-std::shared_ptr<OclExpEval> OclExpEvalImpl::getThisOclExpEvalPtr() const
-{
-	return m_thisOclExpEvalPtr.lock();
-}
-void OclExpEvalImpl::setThisOclExpEvalPtr(std::weak_ptr<OclExpEval> thisOclExpEvalPtr)
-{
-	m_thisOclExpEvalPtr = thisOclExpEvalPtr;
-	setThisEvaluationPtr(thisOclExpEvalPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> OclExpEvalImpl::eContainer() const
 {
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any OclExpEvalImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case ocl::Evaluations::EvaluationsPackage::OCLEXPEVAL_ATTRIBUTE_BEFOREENVIRONMENT:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getBeforeEnvironment();
-				return eAny(returnValue); //593
-			}
-		case ocl::Evaluations::EvaluationsPackage::OCLEXPEVAL_ATTRIBUTE_ENVIRONMENT:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getEnvironment();
-				return eAny(returnValue); //592
-			}
-		case ocl::Evaluations::EvaluationsPackage::OCLEXPEVAL_ATTRIBUTE_MODEL:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getModel();
-				return eAny(returnValue); //595
-			}
-		case ocl::Evaluations::EvaluationsPackage::OCLEXPEVAL_ATTRIBUTE_RESULTVALUE:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getResultValue();
-				return eAny(returnValue); //594
-			}
-	}
-	return fUML::Semantics::Values::EvaluationImpl::eGet(featureID, resolve, coreType);
-}
-bool OclExpEvalImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case ocl::Evaluations::EvaluationsPackage::OCLEXPEVAL_ATTRIBUTE_BEFOREENVIRONMENT:
-			return getBeforeEnvironment() != nullptr; //593
-		case ocl::Evaluations::EvaluationsPackage::OCLEXPEVAL_ATTRIBUTE_ENVIRONMENT:
-			return getEnvironment() != nullptr; //592
-		case ocl::Evaluations::EvaluationsPackage::OCLEXPEVAL_ATTRIBUTE_MODEL:
-			return getModel() != nullptr; //595
-		case ocl::Evaluations::EvaluationsPackage::OCLEXPEVAL_ATTRIBUTE_RESULTVALUE:
-			return getResultValue() != nullptr; //594
-	}
-	return fUML::Semantics::Values::EvaluationImpl::internalEIsSet(featureID);
-}
-bool OclExpEvalImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case ocl::Evaluations::EvaluationsPackage::OCLEXPEVAL_ATTRIBUTE_BEFOREENVIRONMENT:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<ocl::Evaluations::EvalEnvironment> _beforeEnvironment = std::dynamic_pointer_cast<ocl::Evaluations::EvalEnvironment>(_temp);
-			setBeforeEnvironment(_beforeEnvironment); //593
-			return true;
-		}
-		case ocl::Evaluations::EvaluationsPackage::OCLEXPEVAL_ATTRIBUTE_ENVIRONMENT:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<ocl::Evaluations::EvalEnvironment> _environment = std::dynamic_pointer_cast<ocl::Evaluations::EvalEnvironment>(_temp);
-			setEnvironment(_environment); //592
-			return true;
-		}
-		case ocl::Evaluations::EvaluationsPackage::OCLEXPEVAL_ATTRIBUTE_MODEL:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<ocl::Expressions::OclExpression> _model = std::dynamic_pointer_cast<ocl::Expressions::OclExpression>(_temp);
-			setModel(_model); //595
-			return true;
-		}
-		case ocl::Evaluations::EvaluationsPackage::OCLEXPEVAL_ATTRIBUTE_RESULTVALUE:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<fUML::Semantics::Values::Value> _resultValue = std::dynamic_pointer_cast<fUML::Semantics::Values::Value>(_temp);
-			setResultValue(_resultValue); //594
-			return true;
-		}
-	}
-
-	return fUML::Semantics::Values::EvaluationImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any OclExpEvalImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-
-		default:
-		{
-			// call superTypes
-			result = fUML::Semantics::Values::EvaluationImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -458,8 +324,6 @@ void OclExpEvalImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler>
 	fUML::Semantics::Loci::SemanticVisitorImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
 }
 
 void OclExpEvalImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -479,3 +343,131 @@ void OclExpEvalImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> OclExpEvalImpl::eStaticClass() const
+{
+	return ocl::Evaluations::EvaluationsPackage::eInstance()->getOclExpEval_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any OclExpEvalImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case ocl::Evaluations::EvaluationsPackage::OCLEXPEVAL_ATTRIBUTE_BEFOREENVIRONMENT:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getBeforeEnvironment();
+				return eAny(returnValue); //593
+			}
+		case ocl::Evaluations::EvaluationsPackage::OCLEXPEVAL_ATTRIBUTE_ENVIRONMENT:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getEnvironment();
+				return eAny(returnValue); //592
+			}
+		case ocl::Evaluations::EvaluationsPackage::OCLEXPEVAL_ATTRIBUTE_MODEL:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getModel();
+				return eAny(returnValue); //595
+			}
+		case ocl::Evaluations::EvaluationsPackage::OCLEXPEVAL_ATTRIBUTE_RESULTVALUE:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getResultValue();
+				return eAny(returnValue); //594
+			}
+	}
+	return fUML::Semantics::Values::EvaluationImpl::eGet(featureID, resolve, coreType);
+}
+
+bool OclExpEvalImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case ocl::Evaluations::EvaluationsPackage::OCLEXPEVAL_ATTRIBUTE_BEFOREENVIRONMENT:
+			return getBeforeEnvironment() != nullptr; //593
+		case ocl::Evaluations::EvaluationsPackage::OCLEXPEVAL_ATTRIBUTE_ENVIRONMENT:
+			return getEnvironment() != nullptr; //592
+		case ocl::Evaluations::EvaluationsPackage::OCLEXPEVAL_ATTRIBUTE_MODEL:
+			return getModel() != nullptr; //595
+		case ocl::Evaluations::EvaluationsPackage::OCLEXPEVAL_ATTRIBUTE_RESULTVALUE:
+			return getResultValue() != nullptr; //594
+	}
+	return fUML::Semantics::Values::EvaluationImpl::internalEIsSet(featureID);
+}
+
+bool OclExpEvalImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case ocl::Evaluations::EvaluationsPackage::OCLEXPEVAL_ATTRIBUTE_BEFOREENVIRONMENT:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<ocl::Evaluations::EvalEnvironment> _beforeEnvironment = std::dynamic_pointer_cast<ocl::Evaluations::EvalEnvironment>(_temp);
+			setBeforeEnvironment(_beforeEnvironment); //593
+			return true;
+		}
+		case ocl::Evaluations::EvaluationsPackage::OCLEXPEVAL_ATTRIBUTE_ENVIRONMENT:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<ocl::Evaluations::EvalEnvironment> _environment = std::dynamic_pointer_cast<ocl::Evaluations::EvalEnvironment>(_temp);
+			setEnvironment(_environment); //592
+			return true;
+		}
+		case ocl::Evaluations::EvaluationsPackage::OCLEXPEVAL_ATTRIBUTE_MODEL:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<ocl::Expressions::OclExpression> _model = std::dynamic_pointer_cast<ocl::Expressions::OclExpression>(_temp);
+			setModel(_model); //595
+			return true;
+		}
+		case ocl::Evaluations::EvaluationsPackage::OCLEXPEVAL_ATTRIBUTE_RESULTVALUE:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<fUML::Semantics::Values::Value> _resultValue = std::dynamic_pointer_cast<fUML::Semantics::Values::Value>(_temp);
+			setResultValue(_resultValue); //594
+			return true;
+		}
+	}
+
+	return fUML::Semantics::Values::EvaluationImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any OclExpEvalImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+
+		default:
+		{
+			// call superTypes
+			result = fUML::Semantics::Values::EvaluationImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<OclExpEval> OclExpEvalImpl::getThisOclExpEvalPtr() const
+{
+	return m_thisOclExpEvalPtr.lock();
+}
+void OclExpEvalImpl::setThisOclExpEvalPtr(std::weak_ptr<OclExpEval> thisOclExpEvalPtr)
+{
+	m_thisOclExpEvalPtr = thisOclExpEvalPtr;
+	setThisEvaluationPtr(thisOclExpEvalPtr);
+}

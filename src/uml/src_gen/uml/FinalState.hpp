@@ -95,99 +95,106 @@ namespace uml
 			submachine->isEmpty()
 			*/
 			 
-			virtual bool cannot_reference_submachine(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;/*!
+			virtual bool cannot_reference_submachine(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			/*!
 			A FinalState has no entry Behavior.
 			entry->isEmpty()
 			*/
 			 
-			virtual bool no_entry_behavior(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;/*!
+			virtual bool no_entry_behavior(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			/*!
 			A FinalState has no exit Behavior.
 			exit->isEmpty()
 			*/
 			 
-			virtual bool no_exit_behavior(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;/*!
+			virtual bool no_exit_behavior(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			/*!
 			A FinalState cannot have any outgoing Transitions.
 			outgoing->size() = 0
 			*/
 			 
-			virtual bool no_outgoing_transitions(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;/*!
+			virtual bool no_outgoing_transitions(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			/*!
 			A FinalState cannot have Regions.
 			region->size() = 0
 			*/
 			 
-			virtual bool no_regions(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;/*!
+			virtual bool no_regions(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			/*!
 			A FinalState has no state (doActivity) Behavior.
 			doActivity->isEmpty()
 			*/
 			 
 			virtual bool no_state_behavior(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
-			//*********************************
-			// Attributes Getter & Setter
-			//*********************************
-			
-			//*********************************
-			// References Getter & Setter
-			//*********************************
-			
 
-		protected:
 			//*********************************
-			// Attribute Members
+			// Attribute Getters & Setters
 			//*********************************
-			
-			
-			//*********************************
-			// Reference Members
-			//*********************************
-			
 
-		public:
 			//*********************************
-			// Union Getter
+			// Reference Getters & Setters
+			//*********************************
+
+			//*********************************
+			// Union Reference Getters
 			//*********************************
 			/*!
 			A collection of NamedElements identifiable within the Namespace, either by being owned or by being introduced by importing or inheritance.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::shared_ptr<Union<uml::NamedElement>> getMember() const = 0;/*!
+			virtual std::shared_ptr<Union<uml::NamedElement>> getMember() const = 0;
+			/*!
 			Specifies the Namespace that owns the NamedElement.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Namespace> getNamespace() const = 0;/*!
+			virtual std::weak_ptr<uml::Namespace> getNamespace() const = 0;
+			/*!
 			The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;/*!
+			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;
+			/*!
 			A collection of NamedElements owned by the Namespace.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement>> getOwnedMember() const = 0;/*!
+			virtual std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement>> getOwnedMember() const = 0;
+			/*!
 			The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element> getOwner() const = 0;/*!
+			virtual std::weak_ptr<uml::Element> getOwner() const = 0;
+			/*!
 			The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p>
 			*/
 			
 			virtual std::shared_ptr<Union<uml::RedefinableElement>> getRedefinedElement() const = 0;
 
+			//*********************************
+			// Container Getter
+			//*********************************
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
-			
+
 			//*********************************
 			// Persistence Functions
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
-			
 			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
-			
-	};
 
+		protected:
+			//*********************************
+			// Attribute Members
+			//*********************************
+			
+			//*********************************
+			// Reference Members
+			//*********************************
+	};
 }
 #endif /* end of include guard: UML_FINALSTATE_HPP */

@@ -1,3 +1,4 @@
+
 #include "PSCS/Semantics/Actions/impl/CS_RemoveStructuralFeatureValueActionActivationImpl.hpp"
 
 #ifdef NDEBUG
@@ -53,7 +54,6 @@
 #include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
-
 
 #include "uml/Action.hpp"
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
@@ -150,15 +150,6 @@ std::shared_ptr<ecore::EObject> CS_RemoveStructuralFeatureValueActionActivationI
 	element->setThisCS_RemoveStructuralFeatureValueActionActivationPtr(element);
 	return element;
 }
-
-std::shared_ptr<ecore::EClass> CS_RemoveStructuralFeatureValueActionActivationImpl::eStaticClass() const
-{
-	return PSCS::Semantics::Actions::ActionsPackage::eInstance()->getCS_RemoveStructuralFeatureValueActionActivation_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
 
 //*********************************
 // Operations
@@ -419,7 +410,11 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value> > CS_RemoveStructuralFeature
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
+//*********************************
+
+//*********************************
+// Reference Getters & Setters
 //*********************************
 
 //*********************************
@@ -440,18 +435,9 @@ std::shared_ptr<Union<fUML::Semantics::Actions::PinActivation>> CS_RemoveStructu
 	return m_pinActivation;
 }
 
-
-
-
-std::shared_ptr<CS_RemoveStructuralFeatureValueActionActivation> CS_RemoveStructuralFeatureValueActionActivationImpl::getThisCS_RemoveStructuralFeatureValueActionActivationPtr() const
-{
-	return m_thisCS_RemoveStructuralFeatureValueActionActivationPtr.lock();
-}
-void CS_RemoveStructuralFeatureValueActionActivationImpl::setThisCS_RemoveStructuralFeatureValueActionActivationPtr(std::weak_ptr<CS_RemoveStructuralFeatureValueActionActivation> thisCS_RemoveStructuralFeatureValueActionActivationPtr)
-{
-	m_thisCS_RemoveStructuralFeatureValueActionActivationPtr = thisCS_RemoveStructuralFeatureValueActionActivationPtr;
-	setThisRemoveStructuralFeatureValueActivationPtr(thisCS_RemoveStructuralFeatureValueActionActivationPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> CS_RemoveStructuralFeatureValueActionActivationImpl::eContainer() const
 {
 	if(auto wp = m_group.lock())
@@ -462,7 +448,82 @@ std::shared_ptr<ecore::EObject> CS_RemoveStructuralFeatureValueActionActivationI
 }
 
 //*********************************
-// Structural Feature Getter/Setter
+// Persistence Functions
+//*********************************
+void CS_RemoveStructuralFeatureValueActionActivationImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get PSCSFactory
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
+	}
+}		
+
+void CS_RemoveStructuralFeatureValueActionActivationImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+
+	fUML::Semantics::Actions::RemoveStructuralFeatureValueActivationImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void CS_RemoveStructuralFeatureValueActionActivationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+
+	//load BasePackage Nodes
+	fUML::Semantics::Actions::RemoveStructuralFeatureValueActivationImpl::loadNode(nodeName, loadHandler);
+}
+
+void CS_RemoveStructuralFeatureValueActionActivationImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+{
+	fUML::Semantics::Actions::RemoveStructuralFeatureValueActivationImpl::resolveReferences(featureID, references);
+}
+
+void CS_RemoveStructuralFeatureValueActionActivationImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	fUML::Semantics::Actions::RemoveStructuralFeatureValueActivationImpl::saveContent(saveHandler);
+	
+	fUML::Semantics::Actions::WriteStructuralFeatureActionActivationImpl::saveContent(saveHandler);
+	
+	fUML::Semantics::Actions::StructuralFeatureActionActivationImpl::saveContent(saveHandler);
+	
+	fUML::Semantics::Actions::ActionActivationImpl::saveContent(saveHandler);
+	
+	fUML::Semantics::Activities::ActivityNodeActivationImpl::saveContent(saveHandler);
+	
+	fUML::Semantics::Loci::SemanticVisitorImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+}
+
+void CS_RemoveStructuralFeatureValueActionActivationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<PSCS::Semantics::Actions::ActionsPackage> package = PSCS::Semantics::Actions::ActionsPackage::eInstance();
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+}
+
+
+std::shared_ptr<ecore::EClass> CS_RemoveStructuralFeatureValueActionActivationImpl::eStaticClass() const
+{
+	return PSCS::Semantics::Actions::ActionsPackage::eInstance()->getCS_RemoveStructuralFeatureValueActionActivation_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
 //*********************************
 Any CS_RemoveStructuralFeatureValueActionActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
@@ -471,6 +532,7 @@ Any CS_RemoveStructuralFeatureValueActionActivationImpl::eGet(int featureID, boo
 	}
 	return fUML::Semantics::Actions::RemoveStructuralFeatureValueActivationImpl::eGet(featureID, resolve, coreType);
 }
+
 bool CS_RemoveStructuralFeatureValueActionActivationImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
@@ -478,6 +540,7 @@ bool CS_RemoveStructuralFeatureValueActionActivationImpl::internalEIsSet(int fea
 	}
 	return fUML::Semantics::Actions::RemoveStructuralFeatureValueActivationImpl::internalEIsSet(featureID);
 }
+
 bool CS_RemoveStructuralFeatureValueActionActivationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
@@ -488,7 +551,7 @@ bool CS_RemoveStructuralFeatureValueActionActivationImpl::eSet(int featureID, An
 }
 
 //*********************************
-// Behavioral Feature
+// EOperation Invoke
 //*********************************
 Any CS_RemoveStructuralFeatureValueActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
 {
@@ -556,77 +619,13 @@ Any CS_RemoveStructuralFeatureValueActionActivationImpl::eInvoke(int operationID
 	return result;
 }
 
-//*********************************
-// Persistence Functions
-//*********************************
-void CS_RemoveStructuralFeatureValueActionActivationImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+
+std::shared_ptr<CS_RemoveStructuralFeatureValueActionActivation> CS_RemoveStructuralFeatureValueActionActivationImpl::getThisCS_RemoveStructuralFeatureValueActionActivationPtr() const
 {
-	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
-	loadAttributes(loadHandler, attr_list);
-
-	//
-	// Create new objects (from references (containment == true))
-	//
-	// get PSCSFactory
-	int numNodes = loadHandler->getNumOfChildNodes();
-	for(int ii = 0; ii < numNodes; ii++)
-	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler);
-	}
-}		
-
-void CS_RemoveStructuralFeatureValueActionActivationImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
-{
-
-	fUML::Semantics::Actions::RemoveStructuralFeatureValueActivationImpl::loadAttributes(loadHandler, attr_list);
+	return m_thisCS_RemoveStructuralFeatureValueActionActivationPtr.lock();
 }
-
-void CS_RemoveStructuralFeatureValueActionActivationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+void CS_RemoveStructuralFeatureValueActionActivationImpl::setThisCS_RemoveStructuralFeatureValueActionActivationPtr(std::weak_ptr<CS_RemoveStructuralFeatureValueActionActivation> thisCS_RemoveStructuralFeatureValueActionActivationPtr)
 {
-
-	//load BasePackage Nodes
-	fUML::Semantics::Actions::RemoveStructuralFeatureValueActivationImpl::loadNode(nodeName, loadHandler);
+	m_thisCS_RemoveStructuralFeatureValueActionActivationPtr = thisCS_RemoveStructuralFeatureValueActionActivationPtr;
+	setThisRemoveStructuralFeatureValueActivationPtr(thisCS_RemoveStructuralFeatureValueActionActivationPtr);
 }
-
-void CS_RemoveStructuralFeatureValueActionActivationImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
-{
-	fUML::Semantics::Actions::RemoveStructuralFeatureValueActivationImpl::resolveReferences(featureID, references);
-}
-
-void CS_RemoveStructuralFeatureValueActionActivationImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
-{
-	saveContent(saveHandler);
-
-	fUML::Semantics::Actions::RemoveStructuralFeatureValueActivationImpl::saveContent(saveHandler);
-	
-	fUML::Semantics::Actions::WriteStructuralFeatureActionActivationImpl::saveContent(saveHandler);
-	
-	fUML::Semantics::Actions::StructuralFeatureActionActivationImpl::saveContent(saveHandler);
-	
-	fUML::Semantics::Actions::ActionActivationImpl::saveContent(saveHandler);
-	
-	fUML::Semantics::Activities::ActivityNodeActivationImpl::saveContent(saveHandler);
-	
-	fUML::Semantics::Loci::SemanticVisitorImpl::saveContent(saveHandler);
-	
-	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
-	
-	
-}
-
-void CS_RemoveStructuralFeatureValueActionActivationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
-{
-	try
-	{
-		std::shared_ptr<PSCS::Semantics::Actions::ActionsPackage> package = PSCS::Semantics::Actions::ActionsPackage::eInstance();
-	}
-	catch (std::exception& e)
-	{
-		std::cout << "| ERROR    | " << e.what() << std::endl;
-	}
-}
-

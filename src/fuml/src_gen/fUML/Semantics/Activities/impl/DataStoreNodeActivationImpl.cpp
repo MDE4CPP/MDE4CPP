@@ -1,3 +1,4 @@
+
 #include "fUML/Semantics/Activities/impl/DataStoreNodeActivationImpl.hpp"
 
 #ifdef NDEBUG
@@ -35,7 +36,6 @@
 #include <exception> // used in Persistence
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "uml/umlFactory.hpp"
-
 
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
 #include "uml/ActivityNode.hpp"
@@ -118,15 +118,6 @@ std::shared_ptr<ecore::EObject> DataStoreNodeActivationImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> DataStoreNodeActivationImpl::eStaticClass() const
-{
-	return fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getDataStoreNodeActivation_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
@@ -168,24 +159,20 @@ int DataStoreNodeActivationImpl::removeToken(std::shared_ptr<fUML::Semantics::Ac
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
+//*********************************
+
+//*********************************
+// Reference Getters & Setters
 //*********************************
 
 //*********************************
 // Union Getter
 //*********************************
 
-
-
-std::shared_ptr<DataStoreNodeActivation> DataStoreNodeActivationImpl::getThisDataStoreNodeActivationPtr() const
-{
-	return m_thisDataStoreNodeActivationPtr.lock();
-}
-void DataStoreNodeActivationImpl::setThisDataStoreNodeActivationPtr(std::weak_ptr<DataStoreNodeActivation> thisDataStoreNodeActivationPtr)
-{
-	m_thisDataStoreNodeActivationPtr = thisDataStoreNodeActivationPtr;
-	setThisCentralBufferNodeActivationPtr(thisDataStoreNodeActivationPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> DataStoreNodeActivationImpl::eContainer() const
 {
 	if(auto wp = m_group.lock())
@@ -193,79 +180,6 @@ std::shared_ptr<ecore::EObject> DataStoreNodeActivationImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any DataStoreNodeActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-	}
-	return CentralBufferNodeActivationImpl::eGet(featureID, resolve, coreType);
-}
-bool DataStoreNodeActivationImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-	}
-	return CentralBufferNodeActivationImpl::internalEIsSet(featureID);
-}
-bool DataStoreNodeActivationImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-	}
-
-	return CentralBufferNodeActivationImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any DataStoreNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-		
-		// 131946306
-		case ActivitiesPackage::DATASTORENODEACTIVATION_OPERATION_ADDTOKEN_TOKEN:
-		{
-			//Retrieve input parameter 'token'
-			//parameter 0
-			std::shared_ptr<fUML::Semantics::Activities::Token> incoming_param_token;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_token_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_token = (*incoming_param_token_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::Activities::Token> >();
-			this->addToken(incoming_param_token);
-			break;
-		}
-		
-		// 1985388858
-		case ActivitiesPackage::DATASTORENODEACTIVATION_OPERATION_REMOVETOKEN_TOKEN:
-		{
-			//Retrieve input parameter 'token'
-			//parameter 0
-			std::shared_ptr<fUML::Semantics::Activities::Token> incoming_param_token;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_token_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_token = (*incoming_param_token_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::Activities::Token> >();
-			result = eAny(this->removeToken(incoming_param_token));
-			break;
-		}
-
-		default:
-		{
-			// call superTypes
-			result = CentralBufferNodeActivationImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -318,10 +232,6 @@ void DataStoreNodeActivationImpl::save(std::shared_ptr<persistence::interfaces::
 	fUML::Semantics::Loci::SemanticVisitorImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
 }
 
 void DataStoreNodeActivationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -336,3 +246,95 @@ void DataStoreNodeActivationImpl::saveContent(std::shared_ptr<persistence::inter
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> DataStoreNodeActivationImpl::eStaticClass() const
+{
+	return fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getDataStoreNodeActivation_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any DataStoreNodeActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+	}
+	return CentralBufferNodeActivationImpl::eGet(featureID, resolve, coreType);
+}
+
+bool DataStoreNodeActivationImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+	}
+	return CentralBufferNodeActivationImpl::internalEIsSet(featureID);
+}
+
+bool DataStoreNodeActivationImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+	}
+
+	return CentralBufferNodeActivationImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any DataStoreNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 131946306
+		case ActivitiesPackage::DATASTORENODEACTIVATION_OPERATION_ADDTOKEN_TOKEN:
+		{
+			//Retrieve input parameter 'token'
+			//parameter 0
+			std::shared_ptr<fUML::Semantics::Activities::Token> incoming_param_token;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_token_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_token = (*incoming_param_token_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::Activities::Token> >();
+			this->addToken(incoming_param_token);
+			break;
+		}
+		
+		// 1985388858
+		case ActivitiesPackage::DATASTORENODEACTIVATION_OPERATION_REMOVETOKEN_TOKEN:
+		{
+			//Retrieve input parameter 'token'
+			//parameter 0
+			std::shared_ptr<fUML::Semantics::Activities::Token> incoming_param_token;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_token_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_token = (*incoming_param_token_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::Activities::Token> >();
+			result = eAny(this->removeToken(incoming_param_token));
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = CentralBufferNodeActivationImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<DataStoreNodeActivation> DataStoreNodeActivationImpl::getThisDataStoreNodeActivationPtr() const
+{
+	return m_thisDataStoreNodeActivationPtr.lock();
+}
+void DataStoreNodeActivationImpl::setThisDataStoreNodeActivationPtr(std::weak_ptr<DataStoreNodeActivation> thisDataStoreNodeActivationPtr)
+{
+	m_thisDataStoreNodeActivationPtr = thisDataStoreNodeActivationPtr;
+	setThisCentralBufferNodeActivationPtr(thisDataStoreNodeActivationPtr);
+}

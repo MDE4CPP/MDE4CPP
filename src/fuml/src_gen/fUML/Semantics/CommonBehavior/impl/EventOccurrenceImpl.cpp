@@ -1,3 +1,4 @@
+
 #include "fUML/Semantics/CommonBehavior/impl/EventOccurrenceImpl.hpp"
 
 #ifdef NDEBUG
@@ -25,7 +26,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -33,7 +33,6 @@
 
 #include <exception> // used in Persistence
 #include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
-
 
 #include "fUML/Semantics/CommonBehavior/ParameterValue.hpp"
 #include "fUML/Semantics/StructuredClassifiers/Reference.hpp"
@@ -110,15 +109,6 @@ std::shared_ptr<ecore::EObject> EventOccurrenceImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> EventOccurrenceImpl::eStaticClass() const
-{
-	return fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance()->getEventOccurrence_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
@@ -153,11 +143,13 @@ void EventOccurrenceImpl::sendTo(std::shared_ptr<fUML::Semantics::StructuredClas
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference target
-*/
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference target */
 std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> EventOccurrenceImpl::getTarget() const
 {
     return m_target;
@@ -168,138 +160,16 @@ void EventOccurrenceImpl::setTarget(std::shared_ptr<fUML::Semantics::StructuredC
 	
 }
 
-
 //*********************************
 // Union Getter
 //*********************************
 
-
-
-std::shared_ptr<EventOccurrence> EventOccurrenceImpl::getThisEventOccurrencePtr() const
-{
-	return m_thisEventOccurrencePtr.lock();
-}
-void EventOccurrenceImpl::setThisEventOccurrencePtr(std::weak_ptr<EventOccurrence> thisEventOccurrencePtr)
-{
-	m_thisEventOccurrencePtr = thisEventOccurrencePtr;
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> EventOccurrenceImpl::eContainer() const
 {
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any EventOccurrenceImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::EVENTOCCURRENCE_ATTRIBUTE_TARGET:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getTarget();
-				return eAny(returnValue); //450
-			}
-	}
-	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
-}
-bool EventOccurrenceImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::EVENTOCCURRENCE_ATTRIBUTE_TARGET:
-			return getTarget() != nullptr; //450
-	}
-	return ecore::EObjectImpl::internalEIsSet(featureID);
-}
-bool EventOccurrenceImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::EVENTOCCURRENCE_ATTRIBUTE_TARGET:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> _target = std::dynamic_pointer_cast<fUML::Semantics::StructuredClassifiers::Reference>(_temp);
-			setTarget(_target); //450
-			return true;
-		}
-	}
-
-	return ecore::EObjectImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any EventOccurrenceImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-		
-		// 1163016542
-		case CommonBehaviorPackage::EVENTOCCURRENCE_OPERATION_DOSEND:
-		{
-			this->doSend();
-			break;
-		}
-		
-		// 1434655027
-		case CommonBehaviorPackage::EVENTOCCURRENCE_OPERATION_GETPARAMETERVALUES:
-		{
-			result = eAny(this->getParameterValues());
-			break;
-		}
-		
-		// 2115413211
-		case CommonBehaviorPackage::EVENTOCCURRENCE_OPERATION_MATCH_TRIGGER:
-		{
-			//Retrieve input parameter 'trigger'
-			//parameter 0
-			std::shared_ptr<uml::Trigger> incoming_param_trigger;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_trigger_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_trigger = (*incoming_param_trigger_arguments_citer)->get()->get<std::shared_ptr<uml::Trigger> >();
-			result = eAny(this->match(incoming_param_trigger));
-			break;
-		}
-		
-		// 168437065
-		case CommonBehaviorPackage::EVENTOCCURRENCE_OPERATION_MATCHANY_TRIGGER:
-		{
-			//Retrieve input parameter 'triggers'
-			//parameter 0
-			std::shared_ptr<Bag<uml::Trigger>> incoming_param_triggers;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_triggers_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_triggers = (*incoming_param_triggers_arguments_citer)->get()->get<std::shared_ptr<Bag<uml::Trigger>> >();
-			result = eAny(this->matchAny(incoming_param_triggers));
-			break;
-		}
-		
-		// 1224118753
-		case CommonBehaviorPackage::EVENTOCCURRENCE_OPERATION_SENDTO_REFERENCE:
-		{
-			//Retrieve input parameter 'target'
-			//parameter 0
-			std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> incoming_param_target;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_target_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_target = (*incoming_param_target_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> >();
-			this->sendTo(incoming_param_target);
-			break;
-		}
-
-		default:
-		{
-			// call superTypes
-			result = ecore::EModelElementImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -375,9 +245,7 @@ void EventOccurrenceImpl::save(std::shared_ptr<persistence::interfaces::XSaveHan
 {
 	saveContent(saveHandler);
 
-	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
 }
 
 void EventOccurrenceImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -394,3 +262,135 @@ void EventOccurrenceImpl::saveContent(std::shared_ptr<persistence::interfaces::X
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> EventOccurrenceImpl::eStaticClass() const
+{
+	return fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance()->getEventOccurrence_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any EventOccurrenceImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::EVENTOCCURRENCE_ATTRIBUTE_TARGET:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getTarget();
+				return eAny(returnValue); //450
+			}
+	}
+	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
+}
+
+bool EventOccurrenceImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::EVENTOCCURRENCE_ATTRIBUTE_TARGET:
+			return getTarget() != nullptr; //450
+	}
+	return ecore::EObjectImpl::internalEIsSet(featureID);
+}
+
+bool EventOccurrenceImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::EVENTOCCURRENCE_ATTRIBUTE_TARGET:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> _target = std::dynamic_pointer_cast<fUML::Semantics::StructuredClassifiers::Reference>(_temp);
+			setTarget(_target); //450
+			return true;
+		}
+	}
+
+	return ecore::EObjectImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any EventOccurrenceImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 1163016542
+		case CommonBehaviorPackage::EVENTOCCURRENCE_OPERATION_DOSEND:
+		{
+			this->doSend();
+			break;
+		}
+		
+		// 1434655027
+		case CommonBehaviorPackage::EVENTOCCURRENCE_OPERATION_GETPARAMETERVALUES:
+		{
+			result = eAny(this->getParameterValues());
+			break;
+		}
+		
+		// 2115413211
+		case CommonBehaviorPackage::EVENTOCCURRENCE_OPERATION_MATCH_TRIGGER:
+		{
+			//Retrieve input parameter 'trigger'
+			//parameter 0
+			std::shared_ptr<uml::Trigger> incoming_param_trigger;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_trigger_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_trigger = (*incoming_param_trigger_arguments_citer)->get()->get<std::shared_ptr<uml::Trigger> >();
+			result = eAny(this->match(incoming_param_trigger));
+			break;
+		}
+		
+		// 168437065
+		case CommonBehaviorPackage::EVENTOCCURRENCE_OPERATION_MATCHANY_TRIGGER:
+		{
+			//Retrieve input parameter 'triggers'
+			//parameter 0
+			std::shared_ptr<Bag<uml::Trigger>> incoming_param_triggers;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_triggers_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_triggers = (*incoming_param_triggers_arguments_citer)->get()->get<std::shared_ptr<Bag<uml::Trigger>> >();
+			result = eAny(this->matchAny(incoming_param_triggers));
+			break;
+		}
+		
+		// 1224118753
+		case CommonBehaviorPackage::EVENTOCCURRENCE_OPERATION_SENDTO_REFERENCE:
+		{
+			//Retrieve input parameter 'target'
+			//parameter 0
+			std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> incoming_param_target;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_target_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_target = (*incoming_param_target_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> >();
+			this->sendTo(incoming_param_target);
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = ecore::EModelElementImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<EventOccurrence> EventOccurrenceImpl::getThisEventOccurrencePtr() const
+{
+	return m_thisEventOccurrencePtr.lock();
+}
+void EventOccurrenceImpl::setThisEventOccurrencePtr(std::weak_ptr<EventOccurrence> thisEventOccurrencePtr)
+{
+	m_thisEventOccurrencePtr = thisEventOccurrencePtr;
+}

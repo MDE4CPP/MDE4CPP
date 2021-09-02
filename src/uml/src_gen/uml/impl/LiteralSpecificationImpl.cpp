@@ -1,3 +1,4 @@
+
 #include "uml/impl/LiteralSpecificationImpl.hpp"
 
 #ifdef NDEBUG
@@ -25,7 +26,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -33,7 +33,6 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-
 
 #include "uml/Comment.hpp"
 #include "uml/Dependency.hpp"
@@ -159,21 +158,16 @@ std::shared_ptr<ecore::EObject> LiteralSpecificationImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> LiteralSpecificationImpl::eStaticClass() const
-{
-	return uml::umlPackage::eInstance()->getLiteralSpecification_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
 
 //*********************************
-// References
+// Attribute Getters & Setters
+//*********************************
+
+//*********************************
+// Reference Getters & Setters
 //*********************************
 
 //*********************************
@@ -206,16 +200,9 @@ std::weak_ptr<uml::Element> LiteralSpecificationImpl::getOwner() const
 
 
 
-
-std::shared_ptr<LiteralSpecification> LiteralSpecificationImpl::getThisLiteralSpecificationPtr() const
-{
-	return m_thisLiteralSpecificationPtr.lock();
-}
-void LiteralSpecificationImpl::setThisLiteralSpecificationPtr(std::weak_ptr<LiteralSpecification> thisLiteralSpecificationPtr)
-{
-	m_thisLiteralSpecificationPtr = thisLiteralSpecificationPtr;
-	setThisValueSpecificationPtr(thisLiteralSpecificationPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> LiteralSpecificationImpl::eContainer() const
 {
 	if(auto wp = m_namespace.lock())
@@ -248,55 +235,6 @@ std::shared_ptr<ecore::EObject> LiteralSpecificationImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any LiteralSpecificationImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-	}
-	return ValueSpecificationImpl::eGet(featureID, resolve, coreType);
-}
-bool LiteralSpecificationImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-	}
-	return ValueSpecificationImpl::internalEIsSet(featureID);
-}
-bool LiteralSpecificationImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-	}
-
-	return ValueSpecificationImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any LiteralSpecificationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-
-		default:
-		{
-			// call superTypes
-			result = ValueSpecificationImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -353,11 +291,6 @@ void LiteralSpecificationImpl::save(std::shared_ptr<persistence::interfaces::XSa
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
-	
 }
 
 void LiteralSpecificationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -372,3 +305,71 @@ void LiteralSpecificationImpl::saveContent(std::shared_ptr<persistence::interfac
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> LiteralSpecificationImpl::eStaticClass() const
+{
+	return uml::umlPackage::eInstance()->getLiteralSpecification_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any LiteralSpecificationImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+	}
+	return ValueSpecificationImpl::eGet(featureID, resolve, coreType);
+}
+
+bool LiteralSpecificationImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+	}
+	return ValueSpecificationImpl::internalEIsSet(featureID);
+}
+
+bool LiteralSpecificationImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+	}
+
+	return ValueSpecificationImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any LiteralSpecificationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+
+		default:
+		{
+			// call superTypes
+			result = ValueSpecificationImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<LiteralSpecification> LiteralSpecificationImpl::getThisLiteralSpecificationPtr() const
+{
+	return m_thisLiteralSpecificationPtr.lock();
+}
+void LiteralSpecificationImpl::setThisLiteralSpecificationPtr(std::weak_ptr<LiteralSpecification> thisLiteralSpecificationPtr)
+{
+	m_thisLiteralSpecificationPtr = thisLiteralSpecificationPtr;
+	setThisValueSpecificationPtr(thisLiteralSpecificationPtr);
+}

@@ -1,3 +1,4 @@
+
 #include "PSCS/Semantics/Actions/impl/CS_CreateObjectActionActivationImpl.hpp"
 
 #ifdef NDEBUG
@@ -47,7 +48,6 @@
 #include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
-
 
 #include "uml/Action.hpp"
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
@@ -137,15 +137,6 @@ std::shared_ptr<ecore::EObject> CS_CreateObjectActionActivationImpl::copy() cons
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> CS_CreateObjectActionActivationImpl::eStaticClass() const
-{
-	return PSCS::Semantics::Actions::ActionsPackage::eInstance()->getCS_CreateObjectActionActivation_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
@@ -182,7 +173,11 @@ void CS_CreateObjectActionActivationImpl::doAction()
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
+//*********************************
+
+//*********************************
+// Reference Getters & Setters
 //*********************************
 
 //*********************************
@@ -203,18 +198,9 @@ std::shared_ptr<Union<fUML::Semantics::Actions::PinActivation>> CS_CreateObjectA
 	return m_pinActivation;
 }
 
-
-
-
-std::shared_ptr<CS_CreateObjectActionActivation> CS_CreateObjectActionActivationImpl::getThisCS_CreateObjectActionActivationPtr() const
-{
-	return m_thisCS_CreateObjectActionActivationPtr.lock();
-}
-void CS_CreateObjectActionActivationImpl::setThisCS_CreateObjectActionActivationPtr(std::weak_ptr<CS_CreateObjectActionActivation> thisCS_CreateObjectActionActivationPtr)
-{
-	m_thisCS_CreateObjectActionActivationPtr = thisCS_CreateObjectActionActivationPtr;
-	setThisCreateObjectActionActivationPtr(thisCS_CreateObjectActionActivationPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> CS_CreateObjectActionActivationImpl::eContainer() const
 {
 	if(auto wp = m_group.lock())
@@ -222,62 +208,6 @@ std::shared_ptr<ecore::EObject> CS_CreateObjectActionActivationImpl::eContainer(
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any CS_CreateObjectActionActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-	}
-	return fUML::Semantics::Actions::CreateObjectActionActivationImpl::eGet(featureID, resolve, coreType);
-}
-bool CS_CreateObjectActionActivationImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-	}
-	return fUML::Semantics::Actions::CreateObjectActionActivationImpl::internalEIsSet(featureID);
-}
-bool CS_CreateObjectActionActivationImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-	}
-
-	return fUML::Semantics::Actions::CreateObjectActionActivationImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any CS_CreateObjectActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-		
-		// 543161058
-		case ActionsPackage::CS_CREATEOBJECTACTIONACTIVATION_OPERATION_DOACTION:
-		{
-			this->doAction();
-			break;
-		}
-
-		default:
-		{
-			// call superTypes
-			result = fUML::Semantics::Actions::CreateObjectActionActivationImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -330,10 +260,6 @@ void CS_CreateObjectActionActivationImpl::save(std::shared_ptr<persistence::inte
 	fUML::Semantics::Loci::SemanticVisitorImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
 }
 
 void CS_CreateObjectActionActivationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -348,3 +274,78 @@ void CS_CreateObjectActionActivationImpl::saveContent(std::shared_ptr<persistenc
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> CS_CreateObjectActionActivationImpl::eStaticClass() const
+{
+	return PSCS::Semantics::Actions::ActionsPackage::eInstance()->getCS_CreateObjectActionActivation_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any CS_CreateObjectActionActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+	}
+	return fUML::Semantics::Actions::CreateObjectActionActivationImpl::eGet(featureID, resolve, coreType);
+}
+
+bool CS_CreateObjectActionActivationImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+	}
+	return fUML::Semantics::Actions::CreateObjectActionActivationImpl::internalEIsSet(featureID);
+}
+
+bool CS_CreateObjectActionActivationImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+	}
+
+	return fUML::Semantics::Actions::CreateObjectActionActivationImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any CS_CreateObjectActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 543161058
+		case ActionsPackage::CS_CREATEOBJECTACTIONACTIVATION_OPERATION_DOACTION:
+		{
+			this->doAction();
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = fUML::Semantics::Actions::CreateObjectActionActivationImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<CS_CreateObjectActionActivation> CS_CreateObjectActionActivationImpl::getThisCS_CreateObjectActionActivationPtr() const
+{
+	return m_thisCS_CreateObjectActionActivationPtr.lock();
+}
+void CS_CreateObjectActionActivationImpl::setThisCS_CreateObjectActionActivationPtr(std::weak_ptr<CS_CreateObjectActionActivation> thisCS_CreateObjectActionActivationPtr)
+{
+	m_thisCS_CreateObjectActionActivationPtr = thisCS_CreateObjectActionActivationPtr;
+	setThisCreateObjectActionActivationPtr(thisCS_CreateObjectActionActivationPtr);
+}

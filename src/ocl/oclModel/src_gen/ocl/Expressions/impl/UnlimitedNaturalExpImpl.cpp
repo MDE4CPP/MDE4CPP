@@ -1,3 +1,4 @@
+
 #include "ocl/Expressions/impl/UnlimitedNaturalExpImpl.hpp"
 
 #ifdef NDEBUG
@@ -25,7 +26,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -35,7 +35,6 @@
 #include "ecore/ecoreFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
-
 
 #include "ocl/Expressions/CallExp.hpp"
 #include "ocl/Expressions/CollectionRange.hpp"
@@ -204,17 +203,14 @@ std::shared_ptr<ecore::EObject> UnlimitedNaturalExpImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> UnlimitedNaturalExpImpl::eStaticClass() const
-{
-	return ocl::Expressions::ExpressionsPackage::eInstance()->getUnlimitedNaturalExp_Class();
-}
+//*********************************
+// Operations
+//*********************************
 
 //*********************************
-// Attribute Setter Getter
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for attribute unlimitedNaturalSymbol
-*/
+/* Getter & Setter for attribute unlimitedNaturalSymbol */
 int UnlimitedNaturalExpImpl::getUnlimitedNaturalSymbol() const 
 {
 	return m_unlimitedNaturalSymbol;
@@ -223,32 +219,19 @@ void UnlimitedNaturalExpImpl::setUnlimitedNaturalSymbol(int _unlimitedNaturalSym
 {
 	m_unlimitedNaturalSymbol = _unlimitedNaturalSymbol;
 	
-} 
-
-
-//*********************************
-// Operations
-//*********************************
+}
 
 //*********************************
-// References
+// Reference Getters & Setters
 //*********************************
 
 //*********************************
 // Union Getter
 //*********************************
 
-
-
-std::shared_ptr<UnlimitedNaturalExp> UnlimitedNaturalExpImpl::getThisUnlimitedNaturalExpPtr() const
-{
-	return m_thisUnlimitedNaturalExpPtr.lock();
-}
-void UnlimitedNaturalExpImpl::setThisUnlimitedNaturalExpPtr(std::weak_ptr<UnlimitedNaturalExp> thisUnlimitedNaturalExpPtr)
-{
-	m_thisUnlimitedNaturalExpPtr = thisUnlimitedNaturalExpPtr;
-	setThisNumericLiteralExpPtr(thisUnlimitedNaturalExpPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> UnlimitedNaturalExpImpl::eContainer() const
 {
 	if(auto wp = m_appliedElement.lock())
@@ -306,66 +289,6 @@ std::shared_ptr<ecore::EObject> UnlimitedNaturalExpImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any UnlimitedNaturalExpImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case ocl::Expressions::ExpressionsPackage::UNLIMITEDNATURALEXP_ATTRIBUTE_UNLIMITEDNATURALSYMBOL:
-			return eAny(getUnlimitedNaturalSymbol()); //9223
-	}
-	return NumericLiteralExpImpl::eGet(featureID, resolve, coreType);
-}
-bool UnlimitedNaturalExpImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case ocl::Expressions::ExpressionsPackage::UNLIMITEDNATURALEXP_ATTRIBUTE_UNLIMITEDNATURALSYMBOL:
-			return getUnlimitedNaturalSymbol() != 0; //9223
-	}
-	return NumericLiteralExpImpl::internalEIsSet(featureID);
-}
-bool UnlimitedNaturalExpImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case ocl::Expressions::ExpressionsPackage::UNLIMITEDNATURALEXP_ATTRIBUTE_UNLIMITEDNATURALSYMBOL:
-		{
-			// BOOST CAST
-			int _unlimitedNaturalSymbol = newValue->get<int>();
-			setUnlimitedNaturalSymbol(_unlimitedNaturalSymbol); //9223
-			return true;
-		}
-	}
-
-	return NumericLiteralExpImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any UnlimitedNaturalExpImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-
-		default:
-		{
-			// call superTypes
-			result = NumericLiteralExpImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -445,13 +368,6 @@ void UnlimitedNaturalExpImpl::save(std::shared_ptr<persistence::interfaces::XSav
 	ecore::EModelElementImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
-	
-	
-	
 }
 
 void UnlimitedNaturalExpImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -471,3 +387,82 @@ void UnlimitedNaturalExpImpl::saveContent(std::shared_ptr<persistence::interface
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> UnlimitedNaturalExpImpl::eStaticClass() const
+{
+	return ocl::Expressions::ExpressionsPackage::eInstance()->getUnlimitedNaturalExp_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any UnlimitedNaturalExpImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case ocl::Expressions::ExpressionsPackage::UNLIMITEDNATURALEXP_ATTRIBUTE_UNLIMITEDNATURALSYMBOL:
+			return eAny(getUnlimitedNaturalSymbol()); //9223
+	}
+	return NumericLiteralExpImpl::eGet(featureID, resolve, coreType);
+}
+
+bool UnlimitedNaturalExpImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case ocl::Expressions::ExpressionsPackage::UNLIMITEDNATURALEXP_ATTRIBUTE_UNLIMITEDNATURALSYMBOL:
+			return getUnlimitedNaturalSymbol() != 0; //9223
+	}
+	return NumericLiteralExpImpl::internalEIsSet(featureID);
+}
+
+bool UnlimitedNaturalExpImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case ocl::Expressions::ExpressionsPackage::UNLIMITEDNATURALEXP_ATTRIBUTE_UNLIMITEDNATURALSYMBOL:
+		{
+			// BOOST CAST
+			int _unlimitedNaturalSymbol = newValue->get<int>();
+			setUnlimitedNaturalSymbol(_unlimitedNaturalSymbol); //9223
+			return true;
+		}
+	}
+
+	return NumericLiteralExpImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any UnlimitedNaturalExpImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+
+		default:
+		{
+			// call superTypes
+			result = NumericLiteralExpImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<UnlimitedNaturalExp> UnlimitedNaturalExpImpl::getThisUnlimitedNaturalExpPtr() const
+{
+	return m_thisUnlimitedNaturalExpPtr.lock();
+}
+void UnlimitedNaturalExpImpl::setThisUnlimitedNaturalExpPtr(std::weak_ptr<UnlimitedNaturalExp> thisUnlimitedNaturalExpPtr)
+{
+	m_thisUnlimitedNaturalExpPtr = thisUnlimitedNaturalExpPtr;
+	setThisNumericLiteralExpPtr(thisUnlimitedNaturalExpPtr);
+}

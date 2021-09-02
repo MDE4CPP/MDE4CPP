@@ -1,3 +1,4 @@
+
 #include "ocl/Evaluations/impl/CollectionItemEvalImpl.hpp"
 
 #ifdef NDEBUG
@@ -24,18 +25,16 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "fUML/Semantics/Values/ValuesFactory.hpp"
 #include "uml/umlFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
-
+#include "fUML/Semantics/Loci/LociFactory.hpp"
 
 #include "ocl/Evaluations/CollectionLiteralPartEval.hpp"
 #include "fUML/Semantics/Loci/Locus.hpp"
@@ -114,25 +113,18 @@ std::shared_ptr<ecore::EObject> CollectionItemEvalImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> CollectionItemEvalImpl::eStaticClass() const
-{
-	return ocl::Evaluations::EvaluationsPackage::eInstance()->getCollectionItemEval_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference item
-*/
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference item */
 std::shared_ptr<ocl::Evaluations::OclExpEval> CollectionItemEvalImpl::getItem() const
 {
     return m_item;
@@ -143,89 +135,16 @@ void CollectionItemEvalImpl::setItem(std::shared_ptr<ocl::Evaluations::OclExpEva
 	
 }
 
-
 //*********************************
 // Union Getter
 //*********************************
 
-
-
-std::shared_ptr<CollectionItemEval> CollectionItemEvalImpl::getThisCollectionItemEvalPtr() const
-{
-	return m_thisCollectionItemEvalPtr.lock();
-}
-void CollectionItemEvalImpl::setThisCollectionItemEvalPtr(std::weak_ptr<CollectionItemEval> thisCollectionItemEvalPtr)
-{
-	m_thisCollectionItemEvalPtr = thisCollectionItemEvalPtr;
-	setThisCollectionLiteralPartEvalPtr(thisCollectionItemEvalPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> CollectionItemEvalImpl::eContainer() const
 {
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any CollectionItemEvalImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case ocl::Evaluations::EvaluationsPackage::COLLECTIONITEMEVAL_ATTRIBUTE_ITEM:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getItem();
-				return eAny(returnValue); //123
-			}
-	}
-	return CollectionLiteralPartEvalImpl::eGet(featureID, resolve, coreType);
-}
-bool CollectionItemEvalImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case ocl::Evaluations::EvaluationsPackage::COLLECTIONITEMEVAL_ATTRIBUTE_ITEM:
-			return getItem() != nullptr; //123
-	}
-	return CollectionLiteralPartEvalImpl::internalEIsSet(featureID);
-}
-bool CollectionItemEvalImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case ocl::Evaluations::EvaluationsPackage::COLLECTIONITEMEVAL_ATTRIBUTE_ITEM:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<ocl::Evaluations::OclExpEval> _item = std::dynamic_pointer_cast<ocl::Evaluations::OclExpEval>(_temp);
-			setItem(_item); //123
-			return true;
-		}
-	}
-
-	return CollectionLiteralPartEvalImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any CollectionItemEvalImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-
-		default:
-		{
-			// call superTypes
-			result = CollectionLiteralPartEvalImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -309,9 +228,6 @@ void CollectionItemEvalImpl::save(std::shared_ptr<persistence::interfaces::XSave
 	fUML::Semantics::Loci::SemanticVisitorImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
 }
 
 void CollectionItemEvalImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -328,3 +244,86 @@ void CollectionItemEvalImpl::saveContent(std::shared_ptr<persistence::interfaces
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> CollectionItemEvalImpl::eStaticClass() const
+{
+	return ocl::Evaluations::EvaluationsPackage::eInstance()->getCollectionItemEval_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any CollectionItemEvalImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case ocl::Evaluations::EvaluationsPackage::COLLECTIONITEMEVAL_ATTRIBUTE_ITEM:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getItem();
+				return eAny(returnValue); //123
+			}
+	}
+	return CollectionLiteralPartEvalImpl::eGet(featureID, resolve, coreType);
+}
+
+bool CollectionItemEvalImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case ocl::Evaluations::EvaluationsPackage::COLLECTIONITEMEVAL_ATTRIBUTE_ITEM:
+			return getItem() != nullptr; //123
+	}
+	return CollectionLiteralPartEvalImpl::internalEIsSet(featureID);
+}
+
+bool CollectionItemEvalImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case ocl::Evaluations::EvaluationsPackage::COLLECTIONITEMEVAL_ATTRIBUTE_ITEM:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<ocl::Evaluations::OclExpEval> _item = std::dynamic_pointer_cast<ocl::Evaluations::OclExpEval>(_temp);
+			setItem(_item); //123
+			return true;
+		}
+	}
+
+	return CollectionLiteralPartEvalImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any CollectionItemEvalImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+
+		default:
+		{
+			// call superTypes
+			result = CollectionLiteralPartEvalImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<CollectionItemEval> CollectionItemEvalImpl::getThisCollectionItemEvalPtr() const
+{
+	return m_thisCollectionItemEvalPtr.lock();
+}
+void CollectionItemEvalImpl::setThisCollectionItemEvalPtr(std::weak_ptr<CollectionItemEval> thisCollectionItemEvalPtr)
+{
+	m_thisCollectionItemEvalPtr = thisCollectionItemEvalPtr;
+	setThisCollectionLiteralPartEvalPtr(thisCollectionItemEvalPtr);
+}

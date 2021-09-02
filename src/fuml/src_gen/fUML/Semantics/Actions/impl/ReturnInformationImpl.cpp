@@ -1,3 +1,4 @@
+
 #include "fUML/Semantics/Actions/impl/ReturnInformationImpl.hpp"
 
 #ifdef NDEBUG
@@ -34,7 +35,6 @@
 
 #include <exception> // used in Persistence
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
-
 
 #include "fUML/Semantics/CommonBehavior/CallEventOccurrence.hpp"
 #include "uml/Classifier.hpp"
@@ -114,15 +114,6 @@ std::shared_ptr<ecore::EObject> ReturnInformationImpl::copy() const
 	element->setThisReturnInformationPtr(element);
 	return element;
 }
-
-std::shared_ptr<ecore::EClass> ReturnInformationImpl::eStaticClass() const
-{
-	return fUML::Semantics::Actions::ActionsPackage::eInstance()->getReturnInformation_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
 
 //*********************************
 // Operations
@@ -227,11 +218,13 @@ std::string ReturnInformationImpl::toString()
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference callEventOccurrence
-*/
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference callEventOccurrence */
 std::shared_ptr<fUML::Semantics::CommonBehavior::CallEventOccurrence> ReturnInformationImpl::getCallEventOccurrence() const
 {
     return m_callEventOccurrence;
@@ -242,29 +235,122 @@ void ReturnInformationImpl::setCallEventOccurrence(std::shared_ptr<fUML::Semanti
 	
 }
 
-
 //*********************************
 // Union Getter
 //*********************************
 
-
-
-std::shared_ptr<ReturnInformation> ReturnInformationImpl::getThisReturnInformationPtr() const
-{
-	return m_thisReturnInformationPtr.lock();
-}
-void ReturnInformationImpl::setThisReturnInformationPtr(std::weak_ptr<ReturnInformation> thisReturnInformationPtr)
-{
-	m_thisReturnInformationPtr = thisReturnInformationPtr;
-	setThisValuePtr(thisReturnInformationPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> ReturnInformationImpl::eContainer() const
 {
 	return nullptr;
 }
 
 //*********************************
-// Structural Feature Getter/Setter
+// Persistence Functions
+//*********************************
+void ReturnInformationImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get fUMLFactory
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
+	}
+}		
+
+void ReturnInformationImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+	try
+	{
+		std::map<std::string, std::string>::const_iterator iter;
+		std::shared_ptr<ecore::EClass> metaClass = this->eClass(); // get MetaClass
+		iter = attr_list.find("callEventOccurrence");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("callEventOccurrence")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	fUML::Semantics::Values::ValueImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void ReturnInformationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+
+	//load BasePackage Nodes
+	fUML::Semantics::Values::ValueImpl::loadNode(nodeName, loadHandler);
+}
+
+void ReturnInformationImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+{
+	switch(featureID)
+	{
+		case fUML::Semantics::Actions::ActionsPackage::RETURNINFORMATION_ATTRIBUTE_CALLEVENTOCCURRENCE:
+		{
+			if (references.size() == 1)
+			{
+				// Cast object to correct type
+				std::shared_ptr<fUML::Semantics::CommonBehavior::CallEventOccurrence> _callEventOccurrence = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::CallEventOccurrence>( references.front() );
+				setCallEventOccurrence(_callEventOccurrence);
+			}
+			
+			return;
+		}
+	}
+	fUML::Semantics::Values::ValueImpl::resolveReferences(featureID, references);
+}
+
+void ReturnInformationImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	fUML::Semantics::Values::ValueImpl::saveContent(saveHandler);
+	
+	fUML::Semantics::Loci::SemanticVisitorImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+}
+
+void ReturnInformationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<fUML::Semantics::Actions::ActionsPackage> package = fUML::Semantics::Actions::ActionsPackage::eInstance();
+	// Add references
+		saveHandler->addReference(this->getCallEventOccurrence(), "callEventOccurrence", getCallEventOccurrence()->eClass() != fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance()->getCallEventOccurrence_Class()); 
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+}
+
+
+std::shared_ptr<ecore::EClass> ReturnInformationImpl::eStaticClass() const
+{
+	return fUML::Semantics::Actions::ActionsPackage::eInstance()->getReturnInformation_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
 //*********************************
 Any ReturnInformationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
@@ -278,6 +364,7 @@ Any ReturnInformationImpl::eGet(int featureID, bool resolve, bool coreType) cons
 	}
 	return fUML::Semantics::Values::ValueImpl::eGet(featureID, resolve, coreType);
 }
+
 bool ReturnInformationImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
@@ -287,6 +374,7 @@ bool ReturnInformationImpl::internalEIsSet(int featureID) const
 	}
 	return fUML::Semantics::Values::ValueImpl::internalEIsSet(featureID);
 }
+
 bool ReturnInformationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
@@ -305,7 +393,7 @@ bool ReturnInformationImpl::eSet(int featureID, Any newValue)
 }
 
 //*********************************
-// Behavioral Feature
+// EOperation Invoke
 //*********************************
 Any ReturnInformationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
 {
@@ -393,100 +481,13 @@ Any ReturnInformationImpl::eInvoke(int operationID, std::shared_ptr<std::list < 
 	return result;
 }
 
-//*********************************
-// Persistence Functions
-//*********************************
-void ReturnInformationImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+
+std::shared_ptr<ReturnInformation> ReturnInformationImpl::getThisReturnInformationPtr() const
 {
-	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
-	loadAttributes(loadHandler, attr_list);
-
-	//
-	// Create new objects (from references (containment == true))
-	//
-	// get fUMLFactory
-	int numNodes = loadHandler->getNumOfChildNodes();
-	for(int ii = 0; ii < numNodes; ii++)
-	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler);
-	}
-}		
-
-void ReturnInformationImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
-{
-	try
-	{
-		std::map<std::string, std::string>::const_iterator iter;
-		std::shared_ptr<ecore::EClass> metaClass = this->eClass(); // get MetaClass
-		iter = attr_list.find("callEventOccurrence");
-		if ( iter != attr_list.end() )
-		{
-			// add unresolvedReference to loadHandler's list
-			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("callEventOccurrence")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
-		}
-	}
-	catch (std::exception& e)
-	{
-		std::cout << "| ERROR    | " << e.what() << std::endl;
-	}
-	catch (...) 
-	{
-		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
-	}
-
-	fUML::Semantics::Values::ValueImpl::loadAttributes(loadHandler, attr_list);
+	return m_thisReturnInformationPtr.lock();
 }
-
-void ReturnInformationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+void ReturnInformationImpl::setThisReturnInformationPtr(std::weak_ptr<ReturnInformation> thisReturnInformationPtr)
 {
-
-	//load BasePackage Nodes
-	fUML::Semantics::Values::ValueImpl::loadNode(nodeName, loadHandler);
+	m_thisReturnInformationPtr = thisReturnInformationPtr;
+	setThisValuePtr(thisReturnInformationPtr);
 }
-
-void ReturnInformationImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
-{
-	switch(featureID)
-	{
-		case fUML::Semantics::Actions::ActionsPackage::RETURNINFORMATION_ATTRIBUTE_CALLEVENTOCCURRENCE:
-		{
-			if (references.size() == 1)
-			{
-				// Cast object to correct type
-				std::shared_ptr<fUML::Semantics::CommonBehavior::CallEventOccurrence> _callEventOccurrence = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::CallEventOccurrence>( references.front() );
-				setCallEventOccurrence(_callEventOccurrence);
-			}
-			
-			return;
-		}
-	}
-	fUML::Semantics::Values::ValueImpl::resolveReferences(featureID, references);
-}
-
-void ReturnInformationImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
-{
-	saveContent(saveHandler);
-
-	fUML::Semantics::Values::ValueImpl::saveContent(saveHandler);
-	
-	fUML::Semantics::Loci::SemanticVisitorImpl::saveContent(saveHandler);
-	
-	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-}
-
-void ReturnInformationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
-{
-	try
-	{
-		std::shared_ptr<fUML::Semantics::Actions::ActionsPackage> package = fUML::Semantics::Actions::ActionsPackage::eInstance();
-	// Add references
-		saveHandler->addReference(this->getCallEventOccurrence(), "callEventOccurrence", getCallEventOccurrence()->eClass() != fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance()->getCallEventOccurrence_Class()); 
-	}
-	catch (std::exception& e)
-	{
-		std::cout << "| ERROR    | " << e.what() << std::endl;
-	}
-}
-

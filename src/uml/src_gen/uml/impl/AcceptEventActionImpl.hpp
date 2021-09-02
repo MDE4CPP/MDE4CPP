@@ -60,12 +60,14 @@ namespace uml
 					 trigger.event.oclAsType(SignalEvent).signal->forAll(s | s.conformsTo(type)))
 			*/
 			 
-			virtual bool conforming_type(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
+			virtual bool conforming_type(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			/*!
 			AcceptEventActions may have no input pins.
 			input->size() = 0
 			*/
 			 
-			virtual bool no_input_pins(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
+			virtual bool no_input_pins(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			/*!
 			There are no OutputPins if the trigger events are only ChangeEvents and/or CallEvents when this action is an instance of AcceptEventAction and not an instance of a descendant of AcceptEventAction (such as AcceptCallAction).
 			(self.oclIsTypeOf(AcceptEventAction) and
 			   (trigger->forAll(event.oclIsKindOf(ChangeEvent) or  
@@ -73,13 +75,15 @@ namespace uml
 			implies output->size() = 0
 			*/
 			 
-			virtual bool no_output_pins(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
+			virtual bool no_output_pins(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			/*!
 			If isUnmarshall=false and any of the triggers are for SignalEvents or TimeEvents, there must be exactly one result OutputPin with multiplicity 1..1.
 			not isUnmarshall and trigger->exists(event.oclIsKindOf(SignalEvent) or event.oclIsKindOf(TimeEvent)) implies 
 				output->size() = 1 and output->first().is(1,1)
 			*/
 			 
-			virtual bool one_output_pin(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
+			virtual bool one_output_pin(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			/*!
 			If isUnmarshall is true (and this is not an AcceptCallAction), there must be exactly one trigger, which is for a SignalEvent. The number of result output pins must be the same as the number of attributes of the signal. The type and ordering of each result output pin must be the same as the corresponding attribute of the signal. The multiplicity of each result output pin must be compatible with the multiplicity of the corresponding attribute.
 			isUnmarshall and self.oclIsTypeOf(AcceptEventAction) implies
 				trigger->size()=1 and
@@ -95,7 +99,7 @@ namespace uml
 			virtual bool unmarshall_signal_events(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
-			// Attributes Getter Setter
+			// Attribute Getters & Setters
 			//*********************************
 			/*!
 			Indicates whether there is a single OutputPin for a SignalEvent occurrence, or multiple OutputPins for attribute values of the instance of the Signal associated with a SignalEvent occurrence.
@@ -110,9 +114,8 @@ namespace uml
 			 
 			virtual void setIsUnmarshall (bool _isUnmarshall);
 			
-			
 			//*********************************
-			// Reference
+			// Reference Getters & Setters
 			//*********************************
 			/*!
 			OutputPins holding the values received from an Event occurrence.
@@ -120,7 +123,6 @@ namespace uml
 			*/
 			
 			virtual std::shared_ptr<Subset<uml::OutputPin, uml::OutputPin>> getResult() const ;
-			
 			/*!
 			The Triggers specifying the Events of which the AcceptEventAction waits for occurrences.
 			<p>From package UML::Actions.</p>
@@ -128,39 +130,43 @@ namespace uml
 			
 			virtual std::shared_ptr<Subset<uml::Trigger, uml::Element>> getTrigger() const ;
 			
-			
-			
 			//*********************************
-			// Union Getter
+			// Union Reference Getters
 			//*********************************
 			/*!
 			ActivityGroups containing the ActivityNode.
 			<p>From package UML::Activities.</p>
 			*/
 			
-			virtual std::shared_ptr<Union<uml::ActivityGroup>> getInGroup() const ;/*!
+			virtual std::shared_ptr<Union<uml::ActivityGroup>> getInGroup() const ;
+			/*!
 			The ordered set of OutputPins representing outputs from the Action.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<SubsetUnion<uml::OutputPin, uml::Element>> getOutput() const ;/*!
+			virtual std::shared_ptr<SubsetUnion<uml::OutputPin, uml::Element>> getOutput() const ;
+			/*!
 			The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const ;/*!
+			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const ;
+			/*!
 			The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element> getOwner() const ;/*!
+			virtual std::weak_ptr<uml::Element> getOwner() const ;
+			/*!
 			The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p>
 			*/
 			
 			virtual std::shared_ptr<Union<uml::RedefinableElement>> getRedefinedElement() const ;
 			
-
+			//*********************************
+			// Container Getter
+			//*********************************
 			virtual std::shared_ptr<ecore::EObject> eContainer() const ; 
 			
 			//*********************************
@@ -169,20 +175,23 @@ namespace uml
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) ;
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
-			
 			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
-			
 
-			//*********************************
-			// Structural Feature Getter/Setter
-			//*********************************
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+
+			//*********************************
+			// EStructuralFeature Get/Set/IsSet
+			//*********************************
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool internalEIsSet(int featureID) const ;
 			virtual bool eSet(int featureID, Any newValue) ;
+			virtual bool internalEIsSet(int featureID) const ;
+
+			//*********************************
+			// EOperation Invoke
+			//*********************************
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:

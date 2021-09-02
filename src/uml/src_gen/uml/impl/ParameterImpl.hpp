@@ -58,63 +58,74 @@ namespace uml
 			end->notEmpty() implies collaboration->notEmpty()
 			*/
 			 
-			virtual bool connector_end(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
+			virtual bool connector_end(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			/*!
 			Only in and inout Parameters may have a delete effect. Only out, inout, and return Parameters may have a create effect.
 			(effect = ParameterEffectKind::delete implies (direction = ParameterDirectionKind::_'in' or direction = ParameterDirectionKind::inout))
 			and
 			(effect = ParameterEffectKind::create implies (direction = ParameterDirectionKind::out or direction = ParameterDirectionKind::inout or direction = ParameterDirectionKind::return))
 			*/
 			 
-			virtual bool in_and_out(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ; 
-			virtual bool isSetDefault() ;/*!
+			virtual bool in_and_out(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool isSetDefault() ;
+			/*!
 			An input Parameter cannot be an exception.
 			isException implies (direction <> ParameterDirectionKind::_'in' and direction <> ParameterDirectionKind::inout)
 			*/
 			 
-			virtual bool not_exception(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
+			virtual bool not_exception(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			/*!
 			Parameters typed by DataTypes cannot have an effect.
 			(type.oclIsKindOf(DataType)) implies (effect = null)
 			*/
 			 
-			virtual bool object_effect(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
+			virtual bool object_effect(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			/*!
 			Reentrant behaviors cannot have stream Parameters.
 			(isStream and behavior <> null) implies not behavior.isReentrant
 			*/
 			 
-			virtual bool reentrant_behaviors(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
+			virtual bool reentrant_behaviors(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			/*!
 			Sets the default value for this parameter to the specified Boolean value.
 			*/
 			 
-			virtual void setBooleanDefaultValue(bool value) ;/*!
+			virtual void setBooleanDefaultValue(bool value) ;
+			/*!
 			Sets the default value for this parameter to the specified integer value.
 			*/
 			 
-			virtual void setIntegerDefaultValue(int value) ;/*!
+			virtual void setIntegerDefaultValue(int value) ;
+			/*!
 			Sets the default value for this parameter to the null value.
 			*/
 			 
-			virtual void setNullDefaultValue() ;/*!
+			virtual void setNullDefaultValue() ;
+			/*!
 			Sets the default value for this parameter to the specified real value.
 			*/
 			 
-			virtual void setRealDefaultValue(double value) ;/*!
+			virtual void setRealDefaultValue(double value) ;
+			/*!
 			Sets the default value for this parameter to the specified string value.
 			*/
 			 
-			virtual void setStringDefaultValue(std::string value) ;/*!
+			virtual void setStringDefaultValue(std::string value) ;
+			/*!
 			Sets the default value for this parameter to the specified unlimited natural value.
 			*/
 			 
-			virtual void setUnlimitedNaturalDefaultValue(int value) ;/*!
+			virtual void setUnlimitedNaturalDefaultValue(int value) ;
+			/*!
 			A Parameter cannot be a stream and exception at the same time.
 			not (isException and isStream)
 			*/
 			 
-			virtual bool stream_and_exception(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ; 
+			virtual bool stream_and_exception(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
 			virtual void unsetDefault() ;
 			
 			//*********************************
-			// Attributes Getter Setter
+			// Attribute Getters & Setters
 			//*********************************
 			/*!
 			A String that represents a value to be used when no argument is supplied for the Parameter.
@@ -177,13 +188,10 @@ namespace uml
 			 
 			virtual void setIsStream (bool _isStream);
 			
-			
 			//*********************************
-			// Reference
+			// Reference Getters & Setters
 			//*********************************
-			
 			virtual std::weak_ptr<uml::Behavior> getBehavior() const ;
-			
 			virtual void setBehavior(std::weak_ptr<uml::Behavior>) ;
 			/*!
 			Specifies a ValueSpecification that represents a value to be used when no argument is supplied for the Parameter.
@@ -203,7 +211,6 @@ namespace uml
 			*/
 			
 			virtual std::weak_ptr<uml::Operation> getOperation() const ;
-			
 			/*!
 			The ParameterSets containing the parameter. See ParameterSet.
 			<p>From package UML::Classification.</p>
@@ -211,29 +218,32 @@ namespace uml
 			
 			virtual std::shared_ptr<Bag<uml::ParameterSet>> getParameterSet() const ;
 			
-			
-			
 			//*********************************
-			// Union Getter
+			// Union Reference Getters
 			//*********************************
 			/*!
 			Specifies the Namespace that owns the NamedElement.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Namespace> getNamespace() const ;/*!
+			virtual std::weak_ptr<uml::Namespace> getNamespace() const ;
+			/*!
 			The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const ;/*!
+			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const ;
+			/*!
 			The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
 			virtual std::weak_ptr<uml::Element> getOwner() const ;
 			
-
+			
+			//*********************************
+			// Container Getter
+			//*********************************
 			virtual std::shared_ptr<ecore::EObject> eContainer() const ; 
 			
 			//*********************************
@@ -242,20 +252,23 @@ namespace uml
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) ;
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
-			
 			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
-			
 
-			//*********************************
-			// Structural Feature Getter/Setter
-			//*********************************
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+
+			//*********************************
+			// EStructuralFeature Get/Set/IsSet
+			//*********************************
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool internalEIsSet(int featureID) const ;
 			virtual bool eSet(int featureID, Any newValue) ;
+			virtual bool internalEIsSet(int featureID) const ;
+
+			//*********************************
+			// EOperation Invoke
+			//*********************************
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:

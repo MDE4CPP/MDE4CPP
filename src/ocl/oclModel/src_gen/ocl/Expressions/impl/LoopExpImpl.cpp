@@ -1,3 +1,4 @@
+
 #include "ocl/Expressions/impl/LoopExpImpl.hpp"
 
 #ifdef NDEBUG
@@ -25,7 +26,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -35,7 +35,6 @@
 #include "ecore/ecoreFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
-
 
 #include "ocl/Expressions/CallExp.hpp"
 #include "ocl/Expressions/CollectionRange.hpp"
@@ -232,25 +231,18 @@ std::shared_ptr<ecore::EObject> LoopExpImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> LoopExpImpl::eStaticClass() const
-{
-	return ocl::Expressions::ExpressionsPackage::eInstance()->getLoopExp_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference body
-*/
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference body */
 std::shared_ptr<ocl::Expressions::OclExpression> LoopExpImpl::getBody() const
 {
     return m_body;
@@ -261,10 +253,7 @@ void LoopExpImpl::setBody(std::shared_ptr<ocl::Expressions::OclExpression> _body
 	
 }
 
-
-/*
-Getter & Setter for reference iterator
-*/
+/* Getter & Setter for reference iterator */
 std::shared_ptr<Bag<ocl::Expressions::Variable>> LoopExpImpl::getIterator() const
 {
 	if(m_iterator == nullptr)
@@ -276,23 +265,13 @@ std::shared_ptr<Bag<ocl::Expressions::Variable>> LoopExpImpl::getIterator() cons
     return m_iterator;
 }
 
-
-
 //*********************************
 // Union Getter
 //*********************************
 
-
-
-std::shared_ptr<LoopExp> LoopExpImpl::getThisLoopExpPtr() const
-{
-	return m_thisLoopExpPtr.lock();
-}
-void LoopExpImpl::setThisLoopExpPtr(std::weak_ptr<LoopExp> thisLoopExpPtr)
-{
-	m_thisLoopExpPtr = thisLoopExpPtr;
-	setThisCallExpPtr(thisLoopExpPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> LoopExpImpl::eContainer() const
 {
 	if(auto wp = m_appliedElement.lock())
@@ -350,120 +329,6 @@ std::shared_ptr<ecore::EObject> LoopExpImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any LoopExpImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case ocl::Expressions::ExpressionsPackage::LOOPEXP_ATTRIBUTE_BODY:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getBody();
-				return eAny(returnValue); //4623
-			}
-		case ocl::Expressions::ExpressionsPackage::LOOPEXP_ATTRIBUTE_ITERATOR:
-		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<ocl::Expressions::Variable>::iterator iter = getIterator()->begin();
-			Bag<ocl::Expressions::Variable>::iterator end = getIterator()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //4624			
-		}
-	}
-	return CallExpImpl::eGet(featureID, resolve, coreType);
-}
-bool LoopExpImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case ocl::Expressions::ExpressionsPackage::LOOPEXP_ATTRIBUTE_BODY:
-			return getBody() != nullptr; //4623
-		case ocl::Expressions::ExpressionsPackage::LOOPEXP_ATTRIBUTE_ITERATOR:
-			return getIterator() != nullptr; //4624
-	}
-	return CallExpImpl::internalEIsSet(featureID);
-}
-bool LoopExpImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case ocl::Expressions::ExpressionsPackage::LOOPEXP_ATTRIBUTE_BODY:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<ocl::Expressions::OclExpression> _body = std::dynamic_pointer_cast<ocl::Expressions::OclExpression>(_temp);
-			setBody(_body); //4623
-			return true;
-		}
-		case ocl::Expressions::ExpressionsPackage::LOOPEXP_ATTRIBUTE_ITERATOR:
-		{
-			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<ocl::Expressions::Variable>> iteratorList(new Bag<ocl::Expressions::Variable>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
-			{
-				iteratorList->add(std::dynamic_pointer_cast<ocl::Expressions::Variable>(*iter));
-				iter++;
-			}
-			
-			Bag<ocl::Expressions::Variable>::iterator iterIterator = getIterator()->begin();
-			Bag<ocl::Expressions::Variable>::iterator endIterator = getIterator()->end();
-			while (iterIterator != endIterator)
-			{
-				if (iteratorList->find(*iterIterator) == -1)
-				{
-					getIterator()->erase(*iterIterator);
-				}
-				iterIterator++;
-			}
- 
-			iterIterator = iteratorList->begin();
-			endIterator = iteratorList->end();
-			while (iterIterator != endIterator)
-			{
-				if (getIterator()->find(*iterIterator) == -1)
-				{
-					getIterator()->add(*iterIterator);
-				}
-				iterIterator++;			
-			}
-			return true;
-		}
-	}
-
-	return CallExpImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any LoopExpImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-
-		default:
-		{
-			// call superTypes
-			result = CallExpImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -553,11 +418,6 @@ void LoopExpImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> sa
 	ecore::EModelElementImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
-	
 }
 
 void LoopExpImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -583,3 +443,136 @@ void LoopExpImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHand
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> LoopExpImpl::eStaticClass() const
+{
+	return ocl::Expressions::ExpressionsPackage::eInstance()->getLoopExp_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any LoopExpImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case ocl::Expressions::ExpressionsPackage::LOOPEXP_ATTRIBUTE_BODY:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getBody();
+				return eAny(returnValue); //4623
+			}
+		case ocl::Expressions::ExpressionsPackage::LOOPEXP_ATTRIBUTE_ITERATOR:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<ocl::Expressions::Variable>::iterator iter = getIterator()->begin();
+			Bag<ocl::Expressions::Variable>::iterator end = getIterator()->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //4624			
+		}
+	}
+	return CallExpImpl::eGet(featureID, resolve, coreType);
+}
+
+bool LoopExpImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case ocl::Expressions::ExpressionsPackage::LOOPEXP_ATTRIBUTE_BODY:
+			return getBody() != nullptr; //4623
+		case ocl::Expressions::ExpressionsPackage::LOOPEXP_ATTRIBUTE_ITERATOR:
+			return getIterator() != nullptr; //4624
+	}
+	return CallExpImpl::internalEIsSet(featureID);
+}
+
+bool LoopExpImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case ocl::Expressions::ExpressionsPackage::LOOPEXP_ATTRIBUTE_BODY:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<ocl::Expressions::OclExpression> _body = std::dynamic_pointer_cast<ocl::Expressions::OclExpression>(_temp);
+			setBody(_body); //4623
+			return true;
+		}
+		case ocl::Expressions::ExpressionsPackage::LOOPEXP_ATTRIBUTE_ITERATOR:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<ocl::Expressions::Variable>> iteratorList(new Bag<ocl::Expressions::Variable>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				iteratorList->add(std::dynamic_pointer_cast<ocl::Expressions::Variable>(*iter));
+				iter++;
+			}
+			
+			Bag<ocl::Expressions::Variable>::iterator iterIterator = getIterator()->begin();
+			Bag<ocl::Expressions::Variable>::iterator endIterator = getIterator()->end();
+			while (iterIterator != endIterator)
+			{
+				if (iteratorList->find(*iterIterator) == -1)
+				{
+					getIterator()->erase(*iterIterator);
+				}
+				iterIterator++;
+			}
+ 
+			iterIterator = iteratorList->begin();
+			endIterator = iteratorList->end();
+			while (iterIterator != endIterator)
+			{
+				if (getIterator()->find(*iterIterator) == -1)
+				{
+					getIterator()->add(*iterIterator);
+				}
+				iterIterator++;			
+			}
+			return true;
+		}
+	}
+
+	return CallExpImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any LoopExpImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+
+		default:
+		{
+			// call superTypes
+			result = CallExpImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<LoopExp> LoopExpImpl::getThisLoopExpPtr() const
+{
+	return m_thisLoopExpPtr.lock();
+}
+void LoopExpImpl::setThisLoopExpPtr(std::weak_ptr<LoopExp> thisLoopExpPtr)
+{
+	m_thisLoopExpPtr = thisLoopExpPtr;
+	setThisCallExpPtr(thisLoopExpPtr);
+}

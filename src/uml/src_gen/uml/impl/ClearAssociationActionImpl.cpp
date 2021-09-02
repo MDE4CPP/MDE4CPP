@@ -1,3 +1,4 @@
+
 #include "uml/impl/ClearAssociationActionImpl.hpp"
 
 #ifdef NDEBUG
@@ -26,7 +27,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -34,7 +34,6 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-
 
 #include "uml/Action.hpp"
 #include "uml/Activity.hpp"
@@ -160,15 +159,6 @@ std::shared_ptr<ecore::EObject> ClearAssociationActionImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> ClearAssociationActionImpl::eStaticClass() const
-{
-	return uml::umlPackage::eInstance()->getClearAssociationAction_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
@@ -185,11 +175,13 @@ bool ClearAssociationActionImpl::same_type(Any diagnostics,std::shared_ptr<std::
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference association
-*/
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference association */
 std::shared_ptr<uml::Association> ClearAssociationActionImpl::getAssociation() const
 {
     return m_association;
@@ -200,10 +192,7 @@ void ClearAssociationActionImpl::setAssociation(std::shared_ptr<uml::Association
 	
 }
 
-
-/*
-Getter & Setter for reference object
-*/
+/* Getter & Setter for reference object */
 std::shared_ptr<uml::InputPin> ClearAssociationActionImpl::getObject() const
 {
     return m_object;
@@ -213,7 +202,6 @@ void ClearAssociationActionImpl::setObject(std::shared_ptr<uml::InputPin> _objec
     m_object = _object;
 	
 }
-
 
 //*********************************
 // Union Getter
@@ -288,18 +276,9 @@ std::shared_ptr<Union<uml::RedefinableElement>> ClearAssociationActionImpl::getR
 	return m_redefinedElement;
 }
 
-
-
-
-std::shared_ptr<ClearAssociationAction> ClearAssociationActionImpl::getThisClearAssociationActionPtr() const
-{
-	return m_thisClearAssociationActionPtr.lock();
-}
-void ClearAssociationActionImpl::setThisClearAssociationActionPtr(std::weak_ptr<ClearAssociationAction> thisClearAssociationActionPtr)
-{
-	m_thisClearAssociationActionPtr = thisClearAssociationActionPtr;
-	setThisActionPtr(thisClearAssociationActionPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> ClearAssociationActionImpl::eContainer() const
 {
 	if(auto wp = m_activity.lock())
@@ -322,119 +301,6 @@ std::shared_ptr<ecore::EObject> ClearAssociationActionImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any ClearAssociationActionImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::CLEARASSOCIATIONACTION_ATTRIBUTE_ASSOCIATION:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getAssociation();
-				return eAny(returnValue); //3927
-			}
-		case uml::umlPackage::CLEARASSOCIATIONACTION_ATTRIBUTE_OBJECT:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getObject();
-				return eAny(returnValue); //3928
-			}
-	}
-	return ActionImpl::eGet(featureID, resolve, coreType);
-}
-bool ClearAssociationActionImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::CLEARASSOCIATIONACTION_ATTRIBUTE_ASSOCIATION:
-			return getAssociation() != nullptr; //3927
-		case uml::umlPackage::CLEARASSOCIATIONACTION_ATTRIBUTE_OBJECT:
-			return getObject() != nullptr; //3928
-	}
-	return ActionImpl::internalEIsSet(featureID);
-}
-bool ClearAssociationActionImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::CLEARASSOCIATIONACTION_ATTRIBUTE_ASSOCIATION:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::Association> _association = std::dynamic_pointer_cast<uml::Association>(_temp);
-			setAssociation(_association); //3927
-			return true;
-		}
-		case uml::umlPackage::CLEARASSOCIATIONACTION_ATTRIBUTE_OBJECT:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::InputPin> _object = std::dynamic_pointer_cast<uml::InputPin>(_temp);
-			setObject(_object); //3928
-			return true;
-		}
-	}
-
-	return ActionImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any ClearAssociationActionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-		
-		// 819319273
-		case umlPackage::CLEARASSOCIATIONACTION_OPERATION_MULTIPLICITY_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->multiplicity(incoming_param_diagnostics,incoming_param_context));
-			break;
-		}
-		
-		// 1974715701
-		case umlPackage::CLEARASSOCIATIONACTION_OPERATION_SAME_TYPE_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->same_type(incoming_param_diagnostics,incoming_param_context));
-			break;
-		}
-
-		default:
-		{
-			// call superTypes
-			result = ActionImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -548,13 +414,6 @@ void ClearAssociationActionImpl::save(std::shared_ptr<persistence::interfaces::X
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
-	
-	
-	
 }
 
 void ClearAssociationActionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -577,3 +436,135 @@ void ClearAssociationActionImpl::saveContent(std::shared_ptr<persistence::interf
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> ClearAssociationActionImpl::eStaticClass() const
+{
+	return uml::umlPackage::eInstance()->getClearAssociationAction_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any ClearAssociationActionImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::CLEARASSOCIATIONACTION_ATTRIBUTE_ASSOCIATION:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getAssociation();
+				return eAny(returnValue); //3927
+			}
+		case uml::umlPackage::CLEARASSOCIATIONACTION_ATTRIBUTE_OBJECT:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getObject();
+				return eAny(returnValue); //3928
+			}
+	}
+	return ActionImpl::eGet(featureID, resolve, coreType);
+}
+
+bool ClearAssociationActionImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::CLEARASSOCIATIONACTION_ATTRIBUTE_ASSOCIATION:
+			return getAssociation() != nullptr; //3927
+		case uml::umlPackage::CLEARASSOCIATIONACTION_ATTRIBUTE_OBJECT:
+			return getObject() != nullptr; //3928
+	}
+	return ActionImpl::internalEIsSet(featureID);
+}
+
+bool ClearAssociationActionImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::CLEARASSOCIATIONACTION_ATTRIBUTE_ASSOCIATION:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::Association> _association = std::dynamic_pointer_cast<uml::Association>(_temp);
+			setAssociation(_association); //3927
+			return true;
+		}
+		case uml::umlPackage::CLEARASSOCIATIONACTION_ATTRIBUTE_OBJECT:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::InputPin> _object = std::dynamic_pointer_cast<uml::InputPin>(_temp);
+			setObject(_object); //3928
+			return true;
+		}
+	}
+
+	return ActionImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any ClearAssociationActionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 819319273
+		case umlPackage::CLEARASSOCIATIONACTION_OPERATION_MULTIPLICITY_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->multiplicity(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+		
+		// 1974715701
+		case umlPackage::CLEARASSOCIATIONACTION_OPERATION_SAME_TYPE_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->same_type(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = ActionImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<ClearAssociationAction> ClearAssociationActionImpl::getThisClearAssociationActionPtr() const
+{
+	return m_thisClearAssociationActionPtr.lock();
+}
+void ClearAssociationActionImpl::setThisClearAssociationActionPtr(std::weak_ptr<ClearAssociationAction> thisClearAssociationActionPtr)
+{
+	m_thisClearAssociationActionPtr = thisClearAssociationActionPtr;
+	setThisActionPtr(thisClearAssociationActionPtr);
+}

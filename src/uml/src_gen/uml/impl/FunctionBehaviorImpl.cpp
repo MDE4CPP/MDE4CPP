@@ -1,3 +1,4 @@
+
 #include "uml/impl/FunctionBehaviorImpl.hpp"
 
 #ifdef NDEBUG
@@ -26,7 +27,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -34,7 +34,6 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-
 
 #include "uml/Behavior.hpp"
 #include "uml/BehavioralFeature.hpp"
@@ -192,15 +191,6 @@ std::shared_ptr<ecore::EObject> FunctionBehaviorImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> FunctionBehaviorImpl::eStaticClass() const
-{
-	return uml::umlPackage::eInstance()->getFunctionBehavior_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
@@ -223,7 +213,11 @@ bool FunctionBehaviorImpl::types_of_parameters(Any diagnostics,std::shared_ptr<s
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
+//*********************************
+
+//*********************************
+// Reference Getters & Setters
 //*********************************
 
 //*********************************
@@ -381,16 +375,9 @@ std::shared_ptr<SubsetUnion<uml::ConnectableElement, uml::NamedElement>> Functio
 
 
 
-
-std::shared_ptr<FunctionBehavior> FunctionBehaviorImpl::getThisFunctionBehaviorPtr() const
-{
-	return m_thisFunctionBehaviorPtr.lock();
-}
-void FunctionBehaviorImpl::setThisFunctionBehaviorPtr(std::weak_ptr<FunctionBehavior> thisFunctionBehaviorPtr)
-{
-	m_thisFunctionBehaviorPtr = thisFunctionBehaviorPtr;
-	setThisOpaqueBehaviorPtr(thisFunctionBehaviorPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> FunctionBehaviorImpl::eContainer() const
 {
 	if(auto wp = m_behavioredClassifier.lock())
@@ -423,101 +410,6 @@ std::shared_ptr<ecore::EObject> FunctionBehaviorImpl::eContainer() const
 	}
 
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any FunctionBehaviorImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-	}
-	return OpaqueBehaviorImpl::eGet(featureID, resolve, coreType);
-}
-bool FunctionBehaviorImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-	}
-	return OpaqueBehaviorImpl::internalEIsSet(featureID);
-}
-bool FunctionBehaviorImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-	}
-
-	return OpaqueBehaviorImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any FunctionBehaviorImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-		
-		// 534549777
-		case umlPackage::FUNCTIONBEHAVIOR_OPERATION_HASALLDATATYPEATTRIBUTES_DATATYPE:
-		{
-			//Retrieve input parameter 'd'
-			//parameter 0
-			std::shared_ptr<uml::DataType> incoming_param_d;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_d_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_d = (*incoming_param_d_arguments_citer)->get()->get<std::shared_ptr<uml::DataType> >();
-			result = eAny(this->hasAllDataTypeAttributes(incoming_param_d));
-			break;
-		}
-		
-		// 1588666836
-		case umlPackage::FUNCTIONBEHAVIOR_OPERATION_ONE_OUTPUT_PARAMETER_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->one_output_parameter(incoming_param_diagnostics,incoming_param_context));
-			break;
-		}
-		
-		// 719673523
-		case umlPackage::FUNCTIONBEHAVIOR_OPERATION_TYPES_OF_PARAMETERS_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->types_of_parameters(incoming_param_diagnostics,incoming_param_context));
-			break;
-		}
-
-		default:
-		{
-			// call superTypes
-			result = OpaqueBehaviorImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -589,17 +481,6 @@ void FunctionBehaviorImpl::save(std::shared_ptr<persistence::interfaces::XSaveHa
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 }
 
 void FunctionBehaviorImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -614,3 +495,117 @@ void FunctionBehaviorImpl::saveContent(std::shared_ptr<persistence::interfaces::
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> FunctionBehaviorImpl::eStaticClass() const
+{
+	return uml::umlPackage::eInstance()->getFunctionBehavior_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any FunctionBehaviorImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+	}
+	return OpaqueBehaviorImpl::eGet(featureID, resolve, coreType);
+}
+
+bool FunctionBehaviorImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+	}
+	return OpaqueBehaviorImpl::internalEIsSet(featureID);
+}
+
+bool FunctionBehaviorImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+	}
+
+	return OpaqueBehaviorImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any FunctionBehaviorImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 534549777
+		case umlPackage::FUNCTIONBEHAVIOR_OPERATION_HASALLDATATYPEATTRIBUTES_DATATYPE:
+		{
+			//Retrieve input parameter 'd'
+			//parameter 0
+			std::shared_ptr<uml::DataType> incoming_param_d;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_d_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_d = (*incoming_param_d_arguments_citer)->get()->get<std::shared_ptr<uml::DataType> >();
+			result = eAny(this->hasAllDataTypeAttributes(incoming_param_d));
+			break;
+		}
+		
+		// 1588666836
+		case umlPackage::FUNCTIONBEHAVIOR_OPERATION_ONE_OUTPUT_PARAMETER_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->one_output_parameter(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+		
+		// 719673523
+		case umlPackage::FUNCTIONBEHAVIOR_OPERATION_TYPES_OF_PARAMETERS_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->types_of_parameters(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = OpaqueBehaviorImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<FunctionBehavior> FunctionBehaviorImpl::getThisFunctionBehaviorPtr() const
+{
+	return m_thisFunctionBehaviorPtr.lock();
+}
+void FunctionBehaviorImpl::setThisFunctionBehaviorPtr(std::weak_ptr<FunctionBehavior> thisFunctionBehaviorPtr)
+{
+	m_thisFunctionBehaviorPtr = thisFunctionBehaviorPtr;
+	setThisOpaqueBehaviorPtr(thisFunctionBehaviorPtr);
+}

@@ -1,3 +1,4 @@
+
 #include "PSCS/Semantics/CommonBehavior/impl/CS_CallEventExecutionImpl.hpp"
 
 #ifdef NDEBUG
@@ -34,13 +35,12 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
+#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "PSCS/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
 #include "uml/umlFactory.hpp"
 #include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
-#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
-
 
 #include "uml/Behavior.hpp"
 #include "PSCS/Semantics/StructuredClassifiers/CS_InteractionPoint.hpp"
@@ -130,15 +130,6 @@ std::shared_ptr<ecore::EObject> CS_CallEventExecutionImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> CS_CallEventExecutionImpl::eStaticClass() const
-{
-	return PSCS::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance()->getCS_CallEventExecution_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
@@ -179,11 +170,13 @@ return PSCS::Semantics::CommonBehavior::CommonBehaviorFactory::eInstance()->crea
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference interactionPoint
-*/
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference interactionPoint */
 std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint> CS_CallEventExecutionImpl::getInteractionPoint() const
 {
     return m_interactionPoint;
@@ -194,110 +187,16 @@ void CS_CallEventExecutionImpl::setInteractionPoint(std::shared_ptr<PSCS::Semant
 	
 }
 
-
 //*********************************
 // Union Getter
 //*********************************
 
-
-
-std::shared_ptr<CS_CallEventExecution> CS_CallEventExecutionImpl::getThisCS_CallEventExecutionPtr() const
-{
-	return m_thisCS_CallEventExecutionPtr.lock();
-}
-void CS_CallEventExecutionImpl::setThisCS_CallEventExecutionPtr(std::weak_ptr<CS_CallEventExecution> thisCS_CallEventExecutionPtr)
-{
-	m_thisCS_CallEventExecutionPtr = thisCS_CallEventExecutionPtr;
-	setThisCallEventExecutionPtr(thisCS_CallEventExecutionPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> CS_CallEventExecutionImpl::eContainer() const
 {
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any CS_CallEventExecutionImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case PSCS::Semantics::CommonBehavior::CommonBehaviorPackage::CS_CALLEVENTEXECUTION_ATTRIBUTE_INTERACTIONPOINT:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getInteractionPoint();
-				return eAny(returnValue); //48
-			}
-	}
-	return fUML::Semantics::CommonBehavior::CallEventExecutionImpl::eGet(featureID, resolve, coreType);
-}
-bool CS_CallEventExecutionImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case PSCS::Semantics::CommonBehavior::CommonBehaviorPackage::CS_CALLEVENTEXECUTION_ATTRIBUTE_INTERACTIONPOINT:
-			return getInteractionPoint() != nullptr; //48
-	}
-	return fUML::Semantics::CommonBehavior::CallEventExecutionImpl::internalEIsSet(featureID);
-}
-bool CS_CallEventExecutionImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case PSCS::Semantics::CommonBehavior::CommonBehaviorPackage::CS_CALLEVENTEXECUTION_ATTRIBUTE_INTERACTIONPOINT:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint> _interactionPoint = std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint>(_temp);
-			setInteractionPoint(_interactionPoint); //48
-			return true;
-		}
-	}
-
-	return fUML::Semantics::CommonBehavior::CallEventExecutionImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any CS_CallEventExecutionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-		
-		// 900135867
-		case CommonBehaviorPackage::CS_CALLEVENTEXECUTION_OPERATION__COPY:
-		{
-			result = eAny(this->_copy());
-			break;
-		}
-		
-		// 801253865
-		case CommonBehaviorPackage::CS_CALLEVENTEXECUTION_OPERATION_CREATEEVENTOCCURRENCE:
-		{
-			result = eAny(this->createEventOccurrence());
-			break;
-		}
-		
-		// 161317237
-		case CommonBehaviorPackage::CS_CALLEVENTEXECUTION_OPERATION_NEW_:
-		{
-			result = eAny(this->new_());
-			break;
-		}
-
-		default:
-		{
-			// call superTypes
-			result = fUML::Semantics::CommonBehavior::CallEventExecutionImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -391,14 +290,6 @@ void CS_CallEventExecutionImpl::save(std::shared_ptr<persistence::interfaces::XS
 	fUML::Semantics::Loci::SemanticVisitorImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
-	
-	
-	
-	
 }
 
 void CS_CallEventExecutionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -415,3 +306,107 @@ void CS_CallEventExecutionImpl::saveContent(std::shared_ptr<persistence::interfa
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> CS_CallEventExecutionImpl::eStaticClass() const
+{
+	return PSCS::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance()->getCS_CallEventExecution_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any CS_CallEventExecutionImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case PSCS::Semantics::CommonBehavior::CommonBehaviorPackage::CS_CALLEVENTEXECUTION_ATTRIBUTE_INTERACTIONPOINT:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getInteractionPoint();
+				return eAny(returnValue); //48
+			}
+	}
+	return fUML::Semantics::CommonBehavior::CallEventExecutionImpl::eGet(featureID, resolve, coreType);
+}
+
+bool CS_CallEventExecutionImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case PSCS::Semantics::CommonBehavior::CommonBehaviorPackage::CS_CALLEVENTEXECUTION_ATTRIBUTE_INTERACTIONPOINT:
+			return getInteractionPoint() != nullptr; //48
+	}
+	return fUML::Semantics::CommonBehavior::CallEventExecutionImpl::internalEIsSet(featureID);
+}
+
+bool CS_CallEventExecutionImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case PSCS::Semantics::CommonBehavior::CommonBehaviorPackage::CS_CALLEVENTEXECUTION_ATTRIBUTE_INTERACTIONPOINT:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint> _interactionPoint = std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint>(_temp);
+			setInteractionPoint(_interactionPoint); //48
+			return true;
+		}
+	}
+
+	return fUML::Semantics::CommonBehavior::CallEventExecutionImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any CS_CallEventExecutionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 900135867
+		case CommonBehaviorPackage::CS_CALLEVENTEXECUTION_OPERATION__COPY:
+		{
+			result = eAny(this->_copy());
+			break;
+		}
+		
+		// 801253865
+		case CommonBehaviorPackage::CS_CALLEVENTEXECUTION_OPERATION_CREATEEVENTOCCURRENCE:
+		{
+			result = eAny(this->createEventOccurrence());
+			break;
+		}
+		
+		// 161317237
+		case CommonBehaviorPackage::CS_CALLEVENTEXECUTION_OPERATION_NEW_:
+		{
+			result = eAny(this->new_());
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = fUML::Semantics::CommonBehavior::CallEventExecutionImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<CS_CallEventExecution> CS_CallEventExecutionImpl::getThisCS_CallEventExecutionPtr() const
+{
+	return m_thisCS_CallEventExecutionPtr.lock();
+}
+void CS_CallEventExecutionImpl::setThisCS_CallEventExecutionPtr(std::weak_ptr<CS_CallEventExecution> thisCS_CallEventExecutionPtr)
+{
+	m_thisCS_CallEventExecutionPtr = thisCS_CallEventExecutionPtr;
+	setThisCallEventExecutionPtr(thisCS_CallEventExecutionPtr);
+}

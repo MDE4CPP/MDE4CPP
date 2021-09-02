@@ -1,3 +1,4 @@
+
 #include "uml/impl/DependencyImpl.hpp"
 
 #ifdef NDEBUG
@@ -25,7 +26,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -33,7 +33,6 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-
 
 #include "uml/Comment.hpp"
 #include "uml/Dependency.hpp"
@@ -204,25 +203,18 @@ std::shared_ptr<ecore::EObject> DependencyImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> DependencyImpl::eStaticClass() const
-{
-	return uml::umlPackage::eInstance()->getDependency_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference client
-*/
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference client */
 std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element>> DependencyImpl::getClient() const
 {
 	if(m_client == nullptr)
@@ -243,11 +235,7 @@ std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element>> DependencyImpl::ge
     return m_client;
 }
 
-
-
-/*
-Getter & Setter for reference supplier
-*/
+/* Getter & Setter for reference supplier */
 std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element>> DependencyImpl::getSupplier() const
 {
 	if(m_supplier == nullptr)
@@ -267,8 +255,6 @@ std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element>> DependencyImpl::ge
 	}
     return m_supplier;
 }
-
-
 
 //*********************************
 // Union Getter
@@ -355,17 +341,9 @@ std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> DependencyImpl::getTarg
 
 
 
-
-std::shared_ptr<Dependency> DependencyImpl::getThisDependencyPtr() const
-{
-	return m_thisDependencyPtr.lock();
-}
-void DependencyImpl::setThisDependencyPtr(std::weak_ptr<Dependency> thisDependencyPtr)
-{
-	m_thisDependencyPtr = thisDependencyPtr;
-	setThisDirectedRelationshipPtr(thisDependencyPtr);
-	setThisPackageableElementPtr(thisDependencyPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> DependencyImpl::eContainer() const
 {
 	if(auto wp = m_namespace.lock())
@@ -388,179 +366,6 @@ std::shared_ptr<ecore::EObject> DependencyImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any DependencyImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::DEPENDENCY_ATTRIBUTE_CLIENT:
-		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::NamedElement>::iterator iter = getClient()->begin();
-			Bag<uml::NamedElement>::iterator end = getClient()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //6715			
-		}
-		case uml::umlPackage::DEPENDENCY_ATTRIBUTE_SUPPLIER:
-		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::NamedElement>::iterator iter = getSupplier()->begin();
-			Bag<uml::NamedElement>::iterator end = getSupplier()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //6716			
-		}
-	}
-	Any result;
-	result = DirectedRelationshipImpl::eGet(featureID, resolve, coreType);
-	if (result != nullptr && !result->isEmpty())
-	{
-		return result;
-	}
-	result = PackageableElementImpl::eGet(featureID, resolve, coreType);
-	return result;
-}
-bool DependencyImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::DEPENDENCY_ATTRIBUTE_CLIENT:
-			return getClient() != nullptr; //6715
-		case uml::umlPackage::DEPENDENCY_ATTRIBUTE_SUPPLIER:
-			return getSupplier() != nullptr; //6716
-	}
-	bool result = false;
-	result = DirectedRelationshipImpl::internalEIsSet(featureID);
-	if (result)
-	{
-		return result;
-	}
-	result = PackageableElementImpl::internalEIsSet(featureID);
-	return result;
-}
-bool DependencyImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::DEPENDENCY_ATTRIBUTE_CLIENT:
-		{
-			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::NamedElement>> clientList(new Bag<uml::NamedElement>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
-			{
-				clientList->add(std::dynamic_pointer_cast<uml::NamedElement>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::NamedElement>::iterator iterClient = getClient()->begin();
-			Bag<uml::NamedElement>::iterator endClient = getClient()->end();
-			while (iterClient != endClient)
-			{
-				if (clientList->find(*iterClient) == -1)
-				{
-					getClient()->erase(*iterClient);
-				}
-				iterClient++;
-			}
- 
-			iterClient = clientList->begin();
-			endClient = clientList->end();
-			while (iterClient != endClient)
-			{
-				if (getClient()->find(*iterClient) == -1)
-				{
-					getClient()->add(*iterClient);
-				}
-				iterClient++;			
-			}
-			return true;
-		}
-		case uml::umlPackage::DEPENDENCY_ATTRIBUTE_SUPPLIER:
-		{
-			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::NamedElement>> supplierList(new Bag<uml::NamedElement>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
-			{
-				supplierList->add(std::dynamic_pointer_cast<uml::NamedElement>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::NamedElement>::iterator iterSupplier = getSupplier()->begin();
-			Bag<uml::NamedElement>::iterator endSupplier = getSupplier()->end();
-			while (iterSupplier != endSupplier)
-			{
-				if (supplierList->find(*iterSupplier) == -1)
-				{
-					getSupplier()->erase(*iterSupplier);
-				}
-				iterSupplier++;
-			}
- 
-			iterSupplier = supplierList->begin();
-			endSupplier = supplierList->end();
-			while (iterSupplier != endSupplier)
-			{
-				if (getSupplier()->find(*iterSupplier) == -1)
-				{
-					getSupplier()->add(*iterSupplier);
-				}
-				iterSupplier++;			
-			}
-			return true;
-		}
-	}
-
-	bool result = false;
-	result = DirectedRelationshipImpl::eSet(featureID, newValue);
-	if (result)
-	{
-		return result;
-	}
-	result = PackageableElementImpl::eSet(featureID, newValue);
-	return result;
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any DependencyImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-
-		default:
-		{
-			// call superTypes
-			result = DirectedRelationshipImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			result = PackageableElementImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -675,10 +480,6 @@ void DependencyImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler>
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
 }
 
 void DependencyImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -696,3 +497,196 @@ void DependencyImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> DependencyImpl::eStaticClass() const
+{
+	return uml::umlPackage::eInstance()->getDependency_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any DependencyImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::DEPENDENCY_ATTRIBUTE_CLIENT:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::NamedElement>::iterator iter = getClient()->begin();
+			Bag<uml::NamedElement>::iterator end = getClient()->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //6715			
+		}
+		case uml::umlPackage::DEPENDENCY_ATTRIBUTE_SUPPLIER:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::NamedElement>::iterator iter = getSupplier()->begin();
+			Bag<uml::NamedElement>::iterator end = getSupplier()->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //6716			
+		}
+	}
+	Any result;
+	result = DirectedRelationshipImpl::eGet(featureID, resolve, coreType);
+	if (result != nullptr && !result->isEmpty())
+	{
+		return result;
+	}
+	result = PackageableElementImpl::eGet(featureID, resolve, coreType);
+	return result;
+}
+
+bool DependencyImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::DEPENDENCY_ATTRIBUTE_CLIENT:
+			return getClient() != nullptr; //6715
+		case uml::umlPackage::DEPENDENCY_ATTRIBUTE_SUPPLIER:
+			return getSupplier() != nullptr; //6716
+	}
+	bool result = false;
+	result = DirectedRelationshipImpl::internalEIsSet(featureID);
+	if (result)
+	{
+		return result;
+	}
+	result = PackageableElementImpl::internalEIsSet(featureID);
+	return result;
+}
+
+bool DependencyImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::DEPENDENCY_ATTRIBUTE_CLIENT:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::NamedElement>> clientList(new Bag<uml::NamedElement>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				clientList->add(std::dynamic_pointer_cast<uml::NamedElement>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::NamedElement>::iterator iterClient = getClient()->begin();
+			Bag<uml::NamedElement>::iterator endClient = getClient()->end();
+			while (iterClient != endClient)
+			{
+				if (clientList->find(*iterClient) == -1)
+				{
+					getClient()->erase(*iterClient);
+				}
+				iterClient++;
+			}
+ 
+			iterClient = clientList->begin();
+			endClient = clientList->end();
+			while (iterClient != endClient)
+			{
+				if (getClient()->find(*iterClient) == -1)
+				{
+					getClient()->add(*iterClient);
+				}
+				iterClient++;			
+			}
+			return true;
+		}
+		case uml::umlPackage::DEPENDENCY_ATTRIBUTE_SUPPLIER:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::NamedElement>> supplierList(new Bag<uml::NamedElement>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				supplierList->add(std::dynamic_pointer_cast<uml::NamedElement>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::NamedElement>::iterator iterSupplier = getSupplier()->begin();
+			Bag<uml::NamedElement>::iterator endSupplier = getSupplier()->end();
+			while (iterSupplier != endSupplier)
+			{
+				if (supplierList->find(*iterSupplier) == -1)
+				{
+					getSupplier()->erase(*iterSupplier);
+				}
+				iterSupplier++;
+			}
+ 
+			iterSupplier = supplierList->begin();
+			endSupplier = supplierList->end();
+			while (iterSupplier != endSupplier)
+			{
+				if (getSupplier()->find(*iterSupplier) == -1)
+				{
+					getSupplier()->add(*iterSupplier);
+				}
+				iterSupplier++;			
+			}
+			return true;
+		}
+	}
+
+	bool result = false;
+	result = DirectedRelationshipImpl::eSet(featureID, newValue);
+	if (result)
+	{
+		return result;
+	}
+	result = PackageableElementImpl::eSet(featureID, newValue);
+	return result;
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any DependencyImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+
+		default:
+		{
+			// call superTypes
+			result = DirectedRelationshipImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			result = PackageableElementImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<Dependency> DependencyImpl::getThisDependencyPtr() const
+{
+	return m_thisDependencyPtr.lock();
+}
+void DependencyImpl::setThisDependencyPtr(std::weak_ptr<Dependency> thisDependencyPtr)
+{
+	m_thisDependencyPtr = thisDependencyPtr;
+	setThisDirectedRelationshipPtr(thisDependencyPtr);
+	setThisPackageableElementPtr(thisDependencyPtr);
+}

@@ -1,3 +1,4 @@
+
 #include "uml/impl/PortImpl.hpp"
 
 #ifdef NDEBUG
@@ -26,7 +27,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -34,7 +34,6 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-
 
 #include "uml/Association.hpp"
 #include "uml/Class.hpp"
@@ -221,56 +220,6 @@ std::shared_ptr<ecore::EObject> PortImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> PortImpl::eStaticClass() const
-{
-	return uml::umlPackage::eInstance()->getPort_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-/*
-Getter & Setter for attribute isBehavior
-*/
-bool PortImpl::getIsBehavior() const 
-{
-	return m_isBehavior;
-}
-void PortImpl::setIsBehavior(bool _isBehavior)
-{
-	m_isBehavior = _isBehavior;
-	
-} 
-
-
-/*
-Getter & Setter for attribute isConjugated
-*/
-bool PortImpl::getIsConjugated() const 
-{
-	return m_isConjugated;
-}
-void PortImpl::setIsConjugated(bool _isConjugated)
-{
-	m_isConjugated = _isConjugated;
-	
-} 
-
-
-/*
-Getter & Setter for attribute isService
-*/
-bool PortImpl::getIsService() const 
-{
-	return m_isService;
-}
-void PortImpl::setIsService(bool _isService)
-{
-	m_isService = _isService;
-	
-} 
-
-
 //*********************************
 // Operations
 //*********************************
@@ -345,11 +294,45 @@ bool PortImpl::port_aggregation(Any diagnostics,std::shared_ptr<std::map < Any, 
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference protocol
-*/
+/* Getter & Setter for attribute isBehavior */
+bool PortImpl::getIsBehavior() const 
+{
+	return m_isBehavior;
+}
+void PortImpl::setIsBehavior(bool _isBehavior)
+{
+	m_isBehavior = _isBehavior;
+	
+}
+
+/* Getter & Setter for attribute isConjugated */
+bool PortImpl::getIsConjugated() const 
+{
+	return m_isConjugated;
+}
+void PortImpl::setIsConjugated(bool _isConjugated)
+{
+	m_isConjugated = _isConjugated;
+	
+}
+
+/* Getter & Setter for attribute isService */
+bool PortImpl::getIsService() const 
+{
+	return m_isService;
+}
+void PortImpl::setIsService(bool _isService)
+{
+	m_isService = _isService;
+	
+}
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference protocol */
 std::shared_ptr<uml::ProtocolStateMachine> PortImpl::getProtocol() const
 {
     return m_protocol;
@@ -360,10 +343,7 @@ void PortImpl::setProtocol(std::shared_ptr<uml::ProtocolStateMachine> _protocol)
 	
 }
 
-
-/*
-Getter & Setter for reference provided
-*/
+/* Getter & Setter for reference provided */
 std::shared_ptr<Bag<uml::Interface>> PortImpl::getProvided() const
 {
 	if(m_provided == nullptr)
@@ -375,11 +355,7 @@ std::shared_ptr<Bag<uml::Interface>> PortImpl::getProvided() const
     return m_provided;
 }
 
-
-
-/*
-Getter & Setter for reference redefinedPort
-*/
+/* Getter & Setter for reference redefinedPort */
 std::shared_ptr<Subset<uml::Port, uml::Property /*Subset does not reference a union*/>> PortImpl::getRedefinedPort() const
 {
 	if(m_redefinedPort == nullptr)
@@ -400,11 +376,7 @@ std::shared_ptr<Subset<uml::Port, uml::Property /*Subset does not reference a un
     return m_redefinedPort;
 }
 
-
-
-/*
-Getter & Setter for reference required
-*/
+/* Getter & Setter for reference required */
 std::shared_ptr<Bag<uml::Interface>> PortImpl::getRequired() const
 {
 	if(m_required == nullptr)
@@ -416,11 +388,11 @@ std::shared_ptr<Bag<uml::Interface>> PortImpl::getRequired() const
     return m_required;
 }
 
-
-
 //*********************************
 // Union Getter
 //*********************************
+
+
 std::shared_ptr<Union<uml::Classifier>> PortImpl::getFeaturingClassifier() const
 {
 	if(m_featuringClassifier == nullptr)
@@ -493,16 +465,9 @@ std::shared_ptr<Union<uml::Classifier>> PortImpl::getRedefinitionContext() const
 
 
 
-
-std::shared_ptr<Port> PortImpl::getThisPortPtr() const
-{
-	return m_thisPortPtr.lock();
-}
-void PortImpl::setThisPortPtr(std::weak_ptr<Port> thisPortPtr)
-{
-	m_thisPortPtr = thisPortPtr;
-	setThisPropertyPtr(thisPortPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> PortImpl::eContainer() const
 {
 	if(auto wp = m_associationEnd.lock())
@@ -545,260 +510,6 @@ std::shared_ptr<ecore::EObject> PortImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any PortImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::PORT_ATTRIBUTE_ISBEHAVIOR:
-			return eAny(getIsBehavior()); //18144
-		case uml::umlPackage::PORT_ATTRIBUTE_ISCONJUGATED:
-			return eAny(getIsConjugated()); //18145
-		case uml::umlPackage::PORT_ATTRIBUTE_ISSERVICE:
-			return eAny(getIsService()); //18146
-		case uml::umlPackage::PORT_ATTRIBUTE_PROTOCOL:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getProtocol();
-				return eAny(returnValue); //18147
-			}
-		case uml::umlPackage::PORT_ATTRIBUTE_PROVIDED:
-		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Interface>::iterator iter = getProvided()->begin();
-			Bag<uml::Interface>::iterator end = getProvided()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //18148			
-		}
-		case uml::umlPackage::PORT_ATTRIBUTE_REDEFINEDPORT:
-		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Port>::iterator iter = getRedefinedPort()->begin();
-			Bag<uml::Port>::iterator end = getRedefinedPort()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //18149			
-		}
-		case uml::umlPackage::PORT_ATTRIBUTE_REQUIRED:
-		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Interface>::iterator iter = getRequired()->begin();
-			Bag<uml::Interface>::iterator end = getRequired()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //18150			
-		}
-	}
-	return PropertyImpl::eGet(featureID, resolve, coreType);
-}
-bool PortImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::PORT_ATTRIBUTE_ISBEHAVIOR:
-			return getIsBehavior() != false; //18144
-		case uml::umlPackage::PORT_ATTRIBUTE_ISCONJUGATED:
-			return getIsConjugated() != false; //18145
-		case uml::umlPackage::PORT_ATTRIBUTE_ISSERVICE:
-			return getIsService() != true; //18146
-		case uml::umlPackage::PORT_ATTRIBUTE_PROTOCOL:
-			return getProtocol() != nullptr; //18147
-		case uml::umlPackage::PORT_ATTRIBUTE_PROVIDED:
-			return getProvided() != nullptr; //18148
-		case uml::umlPackage::PORT_ATTRIBUTE_REDEFINEDPORT:
-			return getRedefinedPort() != nullptr; //18149
-		case uml::umlPackage::PORT_ATTRIBUTE_REQUIRED:
-			return getRequired() != nullptr; //18150
-	}
-	return PropertyImpl::internalEIsSet(featureID);
-}
-bool PortImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::PORT_ATTRIBUTE_ISBEHAVIOR:
-		{
-			// BOOST CAST
-			bool _isBehavior = newValue->get<bool>();
-			setIsBehavior(_isBehavior); //18144
-			return true;
-		}
-		case uml::umlPackage::PORT_ATTRIBUTE_ISCONJUGATED:
-		{
-			// BOOST CAST
-			bool _isConjugated = newValue->get<bool>();
-			setIsConjugated(_isConjugated); //18145
-			return true;
-		}
-		case uml::umlPackage::PORT_ATTRIBUTE_ISSERVICE:
-		{
-			// BOOST CAST
-			bool _isService = newValue->get<bool>();
-			setIsService(_isService); //18146
-			return true;
-		}
-		case uml::umlPackage::PORT_ATTRIBUTE_PROTOCOL:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::ProtocolStateMachine> _protocol = std::dynamic_pointer_cast<uml::ProtocolStateMachine>(_temp);
-			setProtocol(_protocol); //18147
-			return true;
-		}
-		case uml::umlPackage::PORT_ATTRIBUTE_REDEFINEDPORT:
-		{
-			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::Port>> redefinedPortList(new Bag<uml::Port>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
-			{
-				redefinedPortList->add(std::dynamic_pointer_cast<uml::Port>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::Port>::iterator iterRedefinedPort = getRedefinedPort()->begin();
-			Bag<uml::Port>::iterator endRedefinedPort = getRedefinedPort()->end();
-			while (iterRedefinedPort != endRedefinedPort)
-			{
-				if (redefinedPortList->find(*iterRedefinedPort) == -1)
-				{
-					getRedefinedPort()->erase(*iterRedefinedPort);
-				}
-				iterRedefinedPort++;
-			}
- 
-			iterRedefinedPort = redefinedPortList->begin();
-			endRedefinedPort = redefinedPortList->end();
-			while (iterRedefinedPort != endRedefinedPort)
-			{
-				if (getRedefinedPort()->find(*iterRedefinedPort) == -1)
-				{
-					getRedefinedPort()->add(*iterRedefinedPort);
-				}
-				iterRedefinedPort++;			
-			}
-			return true;
-		}
-	}
-
-	return PropertyImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any PortImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-		
-		// 1253849343
-		case umlPackage::PORT_OPERATION_BASICPROVIDED:
-		{
-			result = eAny(this->basicProvided());
-			break;
-		}
-		
-		// 1121864045
-		case umlPackage::PORT_OPERATION_BASICREQUIRED:
-		{
-			result = eAny(this->basicRequired());
-			break;
-		}
-		
-		// 1305438653
-		case umlPackage::PORT_OPERATION_DEFAULT_VALUE_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->default_value(incoming_param_diagnostics,incoming_param_context));
-			break;
-		}
-		
-		// 791607261
-		case umlPackage::PORT_OPERATION_ENCAPSULATED_OWNER_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->encapsulated_owner(incoming_param_diagnostics,incoming_param_context));
-			break;
-		}
-		
-		// 1432885746
-		case umlPackage::PORT_OPERATION_GETPROVIDEDS:
-		{
-			result = eAny(this->getProvideds());
-			break;
-		}
-		
-		// 1195078911
-		case umlPackage::PORT_OPERATION_GETREQUIREDS:
-		{
-			result = eAny(this->getRequireds());
-			break;
-		}
-		
-		// 2107947933
-		case umlPackage::PORT_OPERATION_PORT_AGGREGATION_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->port_aggregation(incoming_param_diagnostics,incoming_param_context));
-			break;
-		}
-
-		default:
-		{
-			// call superTypes
-			result = PropertyImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -943,13 +654,6 @@ void PortImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveH
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
-	
-	
-	
 }
 
 void PortImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -982,3 +686,276 @@ void PortImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> PortImpl::eStaticClass() const
+{
+	return uml::umlPackage::eInstance()->getPort_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any PortImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::PORT_ATTRIBUTE_ISBEHAVIOR:
+			return eAny(getIsBehavior()); //18144
+		case uml::umlPackage::PORT_ATTRIBUTE_ISCONJUGATED:
+			return eAny(getIsConjugated()); //18145
+		case uml::umlPackage::PORT_ATTRIBUTE_ISSERVICE:
+			return eAny(getIsService()); //18146
+		case uml::umlPackage::PORT_ATTRIBUTE_PROTOCOL:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getProtocol();
+				return eAny(returnValue); //18147
+			}
+		case uml::umlPackage::PORT_ATTRIBUTE_PROVIDED:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Interface>::iterator iter = getProvided()->begin();
+			Bag<uml::Interface>::iterator end = getProvided()->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //18148			
+		}
+		case uml::umlPackage::PORT_ATTRIBUTE_REDEFINEDPORT:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Port>::iterator iter = getRedefinedPort()->begin();
+			Bag<uml::Port>::iterator end = getRedefinedPort()->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //18149			
+		}
+		case uml::umlPackage::PORT_ATTRIBUTE_REQUIRED:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Interface>::iterator iter = getRequired()->begin();
+			Bag<uml::Interface>::iterator end = getRequired()->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //18150			
+		}
+	}
+	return PropertyImpl::eGet(featureID, resolve, coreType);
+}
+
+bool PortImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::PORT_ATTRIBUTE_ISBEHAVIOR:
+			return getIsBehavior() != false; //18144
+		case uml::umlPackage::PORT_ATTRIBUTE_ISCONJUGATED:
+			return getIsConjugated() != false; //18145
+		case uml::umlPackage::PORT_ATTRIBUTE_ISSERVICE:
+			return getIsService() != true; //18146
+		case uml::umlPackage::PORT_ATTRIBUTE_PROTOCOL:
+			return getProtocol() != nullptr; //18147
+		case uml::umlPackage::PORT_ATTRIBUTE_PROVIDED:
+			return getProvided() != nullptr; //18148
+		case uml::umlPackage::PORT_ATTRIBUTE_REDEFINEDPORT:
+			return getRedefinedPort() != nullptr; //18149
+		case uml::umlPackage::PORT_ATTRIBUTE_REQUIRED:
+			return getRequired() != nullptr; //18150
+	}
+	return PropertyImpl::internalEIsSet(featureID);
+}
+
+bool PortImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::PORT_ATTRIBUTE_ISBEHAVIOR:
+		{
+			// BOOST CAST
+			bool _isBehavior = newValue->get<bool>();
+			setIsBehavior(_isBehavior); //18144
+			return true;
+		}
+		case uml::umlPackage::PORT_ATTRIBUTE_ISCONJUGATED:
+		{
+			// BOOST CAST
+			bool _isConjugated = newValue->get<bool>();
+			setIsConjugated(_isConjugated); //18145
+			return true;
+		}
+		case uml::umlPackage::PORT_ATTRIBUTE_ISSERVICE:
+		{
+			// BOOST CAST
+			bool _isService = newValue->get<bool>();
+			setIsService(_isService); //18146
+			return true;
+		}
+		case uml::umlPackage::PORT_ATTRIBUTE_PROTOCOL:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::ProtocolStateMachine> _protocol = std::dynamic_pointer_cast<uml::ProtocolStateMachine>(_temp);
+			setProtocol(_protocol); //18147
+			return true;
+		}
+		case uml::umlPackage::PORT_ATTRIBUTE_REDEFINEDPORT:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::Port>> redefinedPortList(new Bag<uml::Port>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				redefinedPortList->add(std::dynamic_pointer_cast<uml::Port>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::Port>::iterator iterRedefinedPort = getRedefinedPort()->begin();
+			Bag<uml::Port>::iterator endRedefinedPort = getRedefinedPort()->end();
+			while (iterRedefinedPort != endRedefinedPort)
+			{
+				if (redefinedPortList->find(*iterRedefinedPort) == -1)
+				{
+					getRedefinedPort()->erase(*iterRedefinedPort);
+				}
+				iterRedefinedPort++;
+			}
+ 
+			iterRedefinedPort = redefinedPortList->begin();
+			endRedefinedPort = redefinedPortList->end();
+			while (iterRedefinedPort != endRedefinedPort)
+			{
+				if (getRedefinedPort()->find(*iterRedefinedPort) == -1)
+				{
+					getRedefinedPort()->add(*iterRedefinedPort);
+				}
+				iterRedefinedPort++;			
+			}
+			return true;
+		}
+	}
+
+	return PropertyImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any PortImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 1253849343
+		case umlPackage::PORT_OPERATION_BASICPROVIDED:
+		{
+			result = eAny(this->basicProvided());
+			break;
+		}
+		
+		// 1121864045
+		case umlPackage::PORT_OPERATION_BASICREQUIRED:
+		{
+			result = eAny(this->basicRequired());
+			break;
+		}
+		
+		// 1305438653
+		case umlPackage::PORT_OPERATION_DEFAULT_VALUE_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->default_value(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+		
+		// 791607261
+		case umlPackage::PORT_OPERATION_ENCAPSULATED_OWNER_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->encapsulated_owner(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+		
+		// 1432885746
+		case umlPackage::PORT_OPERATION_GETPROVIDEDS:
+		{
+			result = eAny(this->getProvideds());
+			break;
+		}
+		
+		// 1195078911
+		case umlPackage::PORT_OPERATION_GETREQUIREDS:
+		{
+			result = eAny(this->getRequireds());
+			break;
+		}
+		
+		// 2107947933
+		case umlPackage::PORT_OPERATION_PORT_AGGREGATION_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->port_aggregation(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = PropertyImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<Port> PortImpl::getThisPortPtr() const
+{
+	return m_thisPortPtr.lock();
+}
+void PortImpl::setThisPortPtr(std::weak_ptr<Port> thisPortPtr)
+{
+	m_thisPortPtr = thisPortPtr;
+	setThisPropertyPtr(thisPortPtr);
+}

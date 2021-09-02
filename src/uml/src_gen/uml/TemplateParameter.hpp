@@ -49,7 +49,6 @@ namespace uml
 // base class includes
 #include "uml/Element.hpp"
 
-// enum includes
 
 
 
@@ -89,12 +88,13 @@ namespace uml
 			*/
 			 
 			virtual bool must_be_compatible(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+
 			//*********************************
-			// Attributes Getter & Setter
+			// Attribute Getters & Setters
 			//*********************************
-			
+
 			//*********************************
-			// References Getter & Setter
+			// Reference Getters & Setters
 			//*********************************
 			/*!
 			The ParameterableElement that is the default for this formal TemplateParameter.
@@ -156,13 +156,41 @@ namespace uml
 			*/
 			
 			virtual void setSignature(std::weak_ptr<uml::TemplateSignature>) = 0;
+
+			//*********************************
+			// Union Reference Getters
+			//*********************************
 			
+			/*!
+			The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
+			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;
+			/*!
+			The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
+			virtual std::weak_ptr<uml::Element> getOwner() const = 0;
+			
+
+			//*********************************
+			// Container Getter
+			//*********************************
+			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
+
+			//*********************************
+			// Persistence Functions
+			//*********************************
+			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 
 		protected:
 			//*********************************
 			// Attribute Members
 			//*********************************
-			
 			
 			//*********************************
 			// Reference Members
@@ -172,55 +200,31 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			std::shared_ptr<uml::ParameterableElement> m_default;/*!
+			std::shared_ptr<uml::ParameterableElement> m_default;
+			/*!
 			The ParameterableElement that is owned by this TemplateParameter for the purpose of providing a default.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			std::shared_ptr<uml::ParameterableElement> m_ownedDefault;/*!
+			std::shared_ptr<uml::ParameterableElement> m_ownedDefault;
+			/*!
 			The ParameterableElement that is owned by this TemplateParameter for the purpose of exposing it as the parameteredElement.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			std::shared_ptr<uml::ParameterableElement> m_ownedParameteredElement;/*!
+			std::shared_ptr<uml::ParameterableElement> m_ownedParameteredElement;
+			/*!
 			The ParameterableElement exposed by this TemplateParameter.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			std::shared_ptr<uml::ParameterableElement> m_parameteredElement;/*!
+			std::shared_ptr<uml::ParameterableElement> m_parameteredElement;
+			/*!
 			The TemplateSignature that owns this TemplateParameter.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
 			std::weak_ptr<uml::TemplateSignature> m_signature;
-
-		public:
-			//*********************************
-			// Union Getter
-			//*********************************
-			/*!
-			The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;/*!
-			The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::weak_ptr<uml::Element> getOwner() const = 0;
-
-			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
-			
-			//*********************************
-			// Persistence Functions
-			//*********************************
-			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
-			
-			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
-			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
-			
 	};
-
 }
 #endif /* end of include guard: UML_TEMPLATEPARAMETER_HPP */

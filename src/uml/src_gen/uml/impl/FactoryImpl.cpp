@@ -1,3 +1,4 @@
+
 #include "uml/impl/FactoryImpl.hpp"
 
 #ifdef NDEBUG
@@ -25,7 +26,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -33,7 +33,6 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-
 
 #include "uml/Class.hpp"
 #include "uml/Comment.hpp"
@@ -111,15 +110,6 @@ std::shared_ptr<ecore::EObject> FactoryImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> FactoryImpl::eStaticClass() const
-{
-	return uml::umlPackage::eInstance()->getFactory_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
@@ -130,7 +120,11 @@ std::shared_ptr<uml::Element> FactoryImpl::create(std::shared_ptr<uml::Class> me
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
+//*********************************
+
+//*********************************
+// Reference Getters & Setters
 //*********************************
 
 //*********************************
@@ -151,18 +145,9 @@ std::shared_ptr<Union<uml::Element>> FactoryImpl::getOwnedElement() const
 	return m_ownedElement;
 }
 
-
-
-
-std::shared_ptr<Factory> FactoryImpl::getThisFactoryPtr() const
-{
-	return m_thisFactoryPtr.lock();
-}
-void FactoryImpl::setThisFactoryPtr(std::weak_ptr<Factory> thisFactoryPtr)
-{
-	m_thisFactoryPtr = thisFactoryPtr;
-	setThisElementPtr(thisFactoryPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> FactoryImpl::eContainer() const
 {
 	if(auto wp = m_owner.lock())
@@ -170,67 +155,6 @@ std::shared_ptr<ecore::EObject> FactoryImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any FactoryImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-	}
-	return ElementImpl::eGet(featureID, resolve, coreType);
-}
-bool FactoryImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-	}
-	return ElementImpl::internalEIsSet(featureID);
-}
-bool FactoryImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-	}
-
-	return ElementImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any FactoryImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-		
-		// 486892436
-		case umlPackage::FACTORY_OPERATION_CREATE_CLASS:
-		{
-			//Retrieve input parameter 'metaClass'
-			//parameter 0
-			std::shared_ptr<uml::Class> incoming_param_metaClass;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_metaClass_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_metaClass = (*incoming_param_metaClass_arguments_citer)->get()->get<std::shared_ptr<uml::Class> >();
-			result = eAny(this->create(incoming_param_metaClass));
-			break;
-		}
-
-		default:
-		{
-			// call superTypes
-			result = ElementImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -279,8 +203,6 @@ void FactoryImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> sa
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
 }
 
 void FactoryImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -295,3 +217,83 @@ void FactoryImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHand
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> FactoryImpl::eStaticClass() const
+{
+	return uml::umlPackage::eInstance()->getFactory_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any FactoryImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+	}
+	return ElementImpl::eGet(featureID, resolve, coreType);
+}
+
+bool FactoryImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+	}
+	return ElementImpl::internalEIsSet(featureID);
+}
+
+bool FactoryImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+	}
+
+	return ElementImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any FactoryImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 486892436
+		case umlPackage::FACTORY_OPERATION_CREATE_CLASS:
+		{
+			//Retrieve input parameter 'metaClass'
+			//parameter 0
+			std::shared_ptr<uml::Class> incoming_param_metaClass;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_metaClass_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_metaClass = (*incoming_param_metaClass_arguments_citer)->get()->get<std::shared_ptr<uml::Class> >();
+			result = eAny(this->create(incoming_param_metaClass));
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = ElementImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<Factory> FactoryImpl::getThisFactoryPtr() const
+{
+	return m_thisFactoryPtr.lock();
+}
+void FactoryImpl::setThisFactoryPtr(std::weak_ptr<Factory> thisFactoryPtr)
+{
+	m_thisFactoryPtr = thisFactoryPtr;
+	setThisElementPtr(thisFactoryPtr);
+}

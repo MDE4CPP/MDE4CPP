@@ -1,3 +1,4 @@
+
 #include "ocl/Evaluations/impl/IterateExpEvalImpl.hpp"
 
 #ifdef NDEBUG
@@ -25,20 +26,18 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "fUML/Semantics/Values/ValuesFactory.hpp"
-#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
 #include "uml/umlFactory.hpp"
+#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
+#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
-
 
 #include "ocl/Evaluations/EvalEnvironment.hpp"
 #include "fUML/Semantics/Loci/Locus.hpp"
@@ -123,25 +122,18 @@ std::shared_ptr<ecore::EObject> IterateExpEvalImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> IterateExpEvalImpl::eStaticClass() const
-{
-	return ocl::Evaluations::EvaluationsPackage::eInstance()->getIterateExpEval_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference result
-*/
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference result */
 std::shared_ptr<ocl::Evaluations::VariableDeclEval> IterateExpEvalImpl::getResult() const
 {
     return m_result;
@@ -152,89 +144,16 @@ void IterateExpEvalImpl::setResult(std::shared_ptr<ocl::Evaluations::VariableDec
 	
 }
 
-
 //*********************************
 // Union Getter
 //*********************************
 
-
-
-std::shared_ptr<IterateExpEval> IterateExpEvalImpl::getThisIterateExpEvalPtr() const
-{
-	return m_thisIterateExpEvalPtr.lock();
-}
-void IterateExpEvalImpl::setThisIterateExpEvalPtr(std::weak_ptr<IterateExpEval> thisIterateExpEvalPtr)
-{
-	m_thisIterateExpEvalPtr = thisIterateExpEvalPtr;
-	setThisLoopExpEvalPtr(thisIterateExpEvalPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> IterateExpEvalImpl::eContainer() const
 {
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any IterateExpEvalImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case ocl::Evaluations::EvaluationsPackage::ITERATEEXPEVAL_ATTRIBUTE_RESULT:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getResult();
-				return eAny(returnValue); //389
-			}
-	}
-	return LoopExpEvalImpl::eGet(featureID, resolve, coreType);
-}
-bool IterateExpEvalImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case ocl::Evaluations::EvaluationsPackage::ITERATEEXPEVAL_ATTRIBUTE_RESULT:
-			return getResult() != nullptr; //389
-	}
-	return LoopExpEvalImpl::internalEIsSet(featureID);
-}
-bool IterateExpEvalImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case ocl::Evaluations::EvaluationsPackage::ITERATEEXPEVAL_ATTRIBUTE_RESULT:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<ocl::Evaluations::VariableDeclEval> _result = std::dynamic_pointer_cast<ocl::Evaluations::VariableDeclEval>(_temp);
-			setResult(_result); //389
-			return true;
-		}
-	}
-
-	return LoopExpEvalImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any IterateExpEvalImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-
-		default:
-		{
-			// call superTypes
-			result = LoopExpEvalImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -322,11 +241,6 @@ void IterateExpEvalImpl::save(std::shared_ptr<persistence::interfaces::XSaveHand
 	fUML::Semantics::Loci::SemanticVisitorImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
-	
 }
 
 void IterateExpEvalImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -343,3 +257,86 @@ void IterateExpEvalImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> IterateExpEvalImpl::eStaticClass() const
+{
+	return ocl::Evaluations::EvaluationsPackage::eInstance()->getIterateExpEval_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any IterateExpEvalImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case ocl::Evaluations::EvaluationsPackage::ITERATEEXPEVAL_ATTRIBUTE_RESULT:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getResult();
+				return eAny(returnValue); //389
+			}
+	}
+	return LoopExpEvalImpl::eGet(featureID, resolve, coreType);
+}
+
+bool IterateExpEvalImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case ocl::Evaluations::EvaluationsPackage::ITERATEEXPEVAL_ATTRIBUTE_RESULT:
+			return getResult() != nullptr; //389
+	}
+	return LoopExpEvalImpl::internalEIsSet(featureID);
+}
+
+bool IterateExpEvalImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case ocl::Evaluations::EvaluationsPackage::ITERATEEXPEVAL_ATTRIBUTE_RESULT:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<ocl::Evaluations::VariableDeclEval> _result = std::dynamic_pointer_cast<ocl::Evaluations::VariableDeclEval>(_temp);
+			setResult(_result); //389
+			return true;
+		}
+	}
+
+	return LoopExpEvalImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any IterateExpEvalImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+
+		default:
+		{
+			// call superTypes
+			result = LoopExpEvalImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<IterateExpEval> IterateExpEvalImpl::getThisIterateExpEvalPtr() const
+{
+	return m_thisIterateExpEvalPtr.lock();
+}
+void IterateExpEvalImpl::setThisIterateExpEvalPtr(std::weak_ptr<IterateExpEval> thisIterateExpEvalPtr)
+{
+	m_thisIterateExpEvalPtr = thisIterateExpEvalPtr;
+	setThisLoopExpEvalPtr(thisIterateExpEvalPtr);
+}

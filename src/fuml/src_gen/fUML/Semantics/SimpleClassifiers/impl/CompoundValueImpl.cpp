@@ -1,3 +1,4 @@
+
 #include "fUML/Semantics/SimpleClassifiers/impl/CompoundValueImpl.hpp"
 
 #ifdef NDEBUG
@@ -39,7 +40,6 @@
 
 #include <exception> // used in Persistence
 #include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
-
 
 #include "uml/Classifier.hpp"
 #include "fUML/Semantics/SimpleClassifiers/FeatureValue.hpp"
@@ -138,15 +138,6 @@ std::shared_ptr<ecore::EObject> CompoundValueImpl::copy() const
 	element->setThisCompoundValuePtr(element);
 	return element;
 }
-
-std::shared_ptr<ecore::EClass> CompoundValueImpl::eStaticClass() const
-{
-	return fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::eInstance()->getCompoundValue_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
 
 //*********************************
 // Operations
@@ -304,11 +295,13 @@ std::string CompoundValueImpl::toString()
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference featureValues
-*/
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference featureValues */
 std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>> CompoundValueImpl::getFeatureValues() const
 {
 	if(m_featureValues == nullptr)
@@ -320,30 +313,118 @@ std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>> CompoundV
     return m_featureValues;
 }
 
-
-
 //*********************************
 // Union Getter
 //*********************************
 
-
-
-std::shared_ptr<CompoundValue> CompoundValueImpl::getThisCompoundValuePtr() const
-{
-	return m_thisCompoundValuePtr.lock();
-}
-void CompoundValueImpl::setThisCompoundValuePtr(std::weak_ptr<CompoundValue> thisCompoundValuePtr)
-{
-	m_thisCompoundValuePtr = thisCompoundValuePtr;
-	setThisStructuredValuePtr(thisCompoundValuePtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> CompoundValueImpl::eContainer() const
 {
 	return nullptr;
 }
 
 //*********************************
-// Structural Feature Getter/Setter
+// Persistence Functions
+//*********************************
+void CompoundValueImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get fUMLFactory
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
+	}
+}		
+
+void CompoundValueImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+
+	StructuredValueImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void CompoundValueImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+
+	try
+	{
+		if ( nodeName.compare("featureValues") == 0 )
+		{
+  			std::string typeName = loadHandler->getCurrentXSITypeName();
+			if (typeName.empty())
+			{
+				typeName = "FeatureValue";
+			}
+			loadHandler->handleChildContainer<fUML::Semantics::SimpleClassifiers::FeatureValue>(this->getFeatureValues());  
+
+			return; 
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+	//load BasePackage Nodes
+	StructuredValueImpl::loadNode(nodeName, loadHandler);
+}
+
+void CompoundValueImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+{
+	StructuredValueImpl::resolveReferences(featureID, references);
+}
+
+void CompoundValueImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	StructuredValueImpl::saveContent(saveHandler);
+	
+	fUML::Semantics::Values::ValueImpl::saveContent(saveHandler);
+	
+	fUML::Semantics::Loci::SemanticVisitorImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+}
+
+void CompoundValueImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage> package = fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::eInstance();
+		//
+		// Add new tags (from references)
+		//
+		std::shared_ptr<ecore::EClass> metaClass = this->eClass();
+		// Save 'featureValues'
+
+		saveHandler->addReferences<fUML::Semantics::SimpleClassifiers::FeatureValue>("featureValues", this->getFeatureValues());
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+}
+
+
+std::shared_ptr<ecore::EClass> CompoundValueImpl::eStaticClass() const
+{
+	return fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::eInstance()->getCompoundValue_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
 //*********************************
 Any CompoundValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
@@ -364,6 +445,7 @@ Any CompoundValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 	}
 	return StructuredValueImpl::eGet(featureID, resolve, coreType);
 }
+
 bool CompoundValueImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
@@ -373,6 +455,7 @@ bool CompoundValueImpl::internalEIsSet(int featureID) const
 	}
 	return StructuredValueImpl::internalEIsSet(featureID);
 }
+
 bool CompoundValueImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
@@ -419,7 +502,7 @@ bool CompoundValueImpl::eSet(int featureID, Any newValue)
 }
 
 //*********************************
-// Behavioral Feature
+// EOperation Invoke
 //*********************************
 Any CompoundValueImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
 {
@@ -520,97 +603,13 @@ Any CompoundValueImpl::eInvoke(int operationID, std::shared_ptr<std::list < std:
 	return result;
 }
 
-//*********************************
-// Persistence Functions
-//*********************************
-void CompoundValueImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+
+std::shared_ptr<CompoundValue> CompoundValueImpl::getThisCompoundValuePtr() const
 {
-	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
-	loadAttributes(loadHandler, attr_list);
-
-	//
-	// Create new objects (from references (containment == true))
-	//
-	// get fUMLFactory
-	int numNodes = loadHandler->getNumOfChildNodes();
-	for(int ii = 0; ii < numNodes; ii++)
-	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler);
-	}
-}		
-
-void CompoundValueImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
-{
-
-	StructuredValueImpl::loadAttributes(loadHandler, attr_list);
+	return m_thisCompoundValuePtr.lock();
 }
-
-void CompoundValueImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+void CompoundValueImpl::setThisCompoundValuePtr(std::weak_ptr<CompoundValue> thisCompoundValuePtr)
 {
-
-	try
-	{
-		if ( nodeName.compare("featureValues") == 0 )
-		{
-  			std::string typeName = loadHandler->getCurrentXSITypeName();
-			if (typeName.empty())
-			{
-				typeName = "FeatureValue";
-			}
-			loadHandler->handleChildContainer<fUML::Semantics::SimpleClassifiers::FeatureValue>(this->getFeatureValues());  
-
-			return; 
-		}
-	}
-	catch (std::exception& e)
-	{
-		std::cout << "| ERROR    | " << e.what() << std::endl;
-	}
-	catch (...) 
-	{
-		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
-	}
-	//load BasePackage Nodes
-	StructuredValueImpl::loadNode(nodeName, loadHandler);
+	m_thisCompoundValuePtr = thisCompoundValuePtr;
+	setThisStructuredValuePtr(thisCompoundValuePtr);
 }
-
-void CompoundValueImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
-{
-	StructuredValueImpl::resolveReferences(featureID, references);
-}
-
-void CompoundValueImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
-{
-	saveContent(saveHandler);
-
-	StructuredValueImpl::saveContent(saveHandler);
-	
-	fUML::Semantics::Values::ValueImpl::saveContent(saveHandler);
-	
-	fUML::Semantics::Loci::SemanticVisitorImpl::saveContent(saveHandler);
-	
-	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-}
-
-void CompoundValueImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
-{
-	try
-	{
-		std::shared_ptr<fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage> package = fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::eInstance();
-		//
-		// Add new tags (from references)
-		//
-		std::shared_ptr<ecore::EClass> metaClass = this->eClass();
-		// Save 'featureValues'
-
-		saveHandler->addReferences<fUML::Semantics::SimpleClassifiers::FeatureValue>("featureValues", this->getFeatureValues());
-	}
-	catch (std::exception& e)
-	{
-		std::cout << "| ERROR    | " << e.what() << std::endl;
-	}
-}
-

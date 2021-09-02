@@ -49,7 +49,6 @@ namespace uml
 // base class includes
 #include "uml/LinkEndData.hpp"
 
-// enum includes
 
 
 
@@ -89,8 +88,9 @@ namespace uml
 			*/
 			 
 			virtual bool destroyAt_pin(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+
 			//*********************************
-			// Attributes Getter & Setter
+			// Attribute Getters & Setters
 			//*********************************
 			/*!
 			Specifies whether to destroy duplicates of the value in nonunique Association ends.
@@ -104,9 +104,9 @@ namespace uml
 			*/
 			 
 			virtual void setIsDestroyDuplicates (bool _isDestroyDuplicates)= 0;
-			
+
 			//*********************************
-			// References Getter & Setter
+			// Reference Getters & Setters
 			//*********************************
 			/*!
 			The InputPin that provides the position of an existing link to be destroyed in an ordered, nonunique Association end. The type of the destroyAt InputPin is UnlimitedNatural, but the value cannot be zero or unlimited.
@@ -120,7 +120,28 @@ namespace uml
 			*/
 			
 			virtual void setDestroyAt(std::shared_ptr<uml::InputPin>) = 0;
+
+			//*********************************
+			// Union Reference Getters
+			//*********************************
+			/*!
+			The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
 			
+			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;
+
+			//*********************************
+			// Container Getter
+			//*********************************
+			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
+
+			//*********************************
+			// Persistence Functions
+			//*********************************
+			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 
 		protected:
 			//*********************************
@@ -131,8 +152,7 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			bool m_isDestroyDuplicates = false;
-			
+			bool m_isDestroyDuplicates= false;
 			
 			//*********************************
 			// Reference Members
@@ -143,29 +163,6 @@ namespace uml
 			*/
 			
 			std::shared_ptr<uml::InputPin> m_destroyAt;
-
-		public:
-			//*********************************
-			// Union Getter
-			//*********************************
-			/*!
-			The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;
-
-			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
-			
-			//*********************************
-			// Persistence Functions
-			//*********************************
-			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
-			
-			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
-			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
-			
 	};
-
 }
 #endif /* end of include guard: UML_LINKENDDESTRUCTIONDATA_HPP */

@@ -1,3 +1,4 @@
+
 #include "uml/impl/ReadLinkObjectEndQualifierActionImpl.hpp"
 
 #ifdef NDEBUG
@@ -26,7 +27,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -34,7 +34,6 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-
 
 #include "uml/Action.hpp"
 #include "uml/Activity.hpp"
@@ -167,15 +166,6 @@ std::shared_ptr<ecore::EObject> ReadLinkObjectEndQualifierActionImpl::copy() con
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> ReadLinkObjectEndQualifierActionImpl::eStaticClass() const
-{
-	return uml::umlPackage::eInstance()->getReadLinkObjectEndQualifierAction_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
@@ -228,11 +218,13 @@ bool ReadLinkObjectEndQualifierActionImpl::type_of_object(Any diagnostics,std::s
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference object
-*/
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference object */
 std::shared_ptr<uml::InputPin> ReadLinkObjectEndQualifierActionImpl::getObject() const
 {
     return m_object;
@@ -243,10 +235,7 @@ void ReadLinkObjectEndQualifierActionImpl::setObject(std::shared_ptr<uml::InputP
 	
 }
 
-
-/*
-Getter & Setter for reference qualifier
-*/
+/* Getter & Setter for reference qualifier */
 std::shared_ptr<uml::Property> ReadLinkObjectEndQualifierActionImpl::getQualifier() const
 {
     return m_qualifier;
@@ -257,10 +246,7 @@ void ReadLinkObjectEndQualifierActionImpl::setQualifier(std::shared_ptr<uml::Pro
 	
 }
 
-
-/*
-Getter & Setter for reference result
-*/
+/* Getter & Setter for reference result */
 std::shared_ptr<uml::OutputPin> ReadLinkObjectEndQualifierActionImpl::getResult() const
 {
     return m_result;
@@ -270,7 +256,6 @@ void ReadLinkObjectEndQualifierActionImpl::setResult(std::shared_ptr<uml::Output
     m_result = _result;
 	
 }
-
 
 //*********************************
 // Union Getter
@@ -365,18 +350,9 @@ std::shared_ptr<Union<uml::RedefinableElement>> ReadLinkObjectEndQualifierAction
 	return m_redefinedElement;
 }
 
-
-
-
-std::shared_ptr<ReadLinkObjectEndQualifierAction> ReadLinkObjectEndQualifierActionImpl::getThisReadLinkObjectEndQualifierActionPtr() const
-{
-	return m_thisReadLinkObjectEndQualifierActionPtr.lock();
-}
-void ReadLinkObjectEndQualifierActionImpl::setThisReadLinkObjectEndQualifierActionPtr(std::weak_ptr<ReadLinkObjectEndQualifierAction> thisReadLinkObjectEndQualifierActionPtr)
-{
-	m_thisReadLinkObjectEndQualifierActionPtr = thisReadLinkObjectEndQualifierActionPtr;
-	setThisActionPtr(thisReadLinkObjectEndQualifierActionPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> ReadLinkObjectEndQualifierActionImpl::eContainer() const
 {
 	if(auto wp = m_activity.lock())
@@ -402,7 +378,166 @@ std::shared_ptr<ecore::EObject> ReadLinkObjectEndQualifierActionImpl::eContainer
 }
 
 //*********************************
-// Structural Feature Getter/Setter
+// Persistence Functions
+//*********************************
+void ReadLinkObjectEndQualifierActionImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get umlFactory
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
+	}
+}		
+
+void ReadLinkObjectEndQualifierActionImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+	try
+	{
+		std::map<std::string, std::string>::const_iterator iter;
+		std::shared_ptr<ecore::EClass> metaClass = this->eClass(); // get MetaClass
+		iter = attr_list.find("qualifier");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("qualifier")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	ActionImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void ReadLinkObjectEndQualifierActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+
+	try
+	{
+		if ( nodeName.compare("object") == 0 )
+		{
+  			std::string typeName = loadHandler->getCurrentXSITypeName();
+			if (typeName.empty())
+			{
+				typeName = "InputPin";
+			}
+			loadHandler->handleChild(this->getObject()); 
+
+			return; 
+		}
+
+		if ( nodeName.compare("result") == 0 )
+		{
+  			std::string typeName = loadHandler->getCurrentXSITypeName();
+			if (typeName.empty())
+			{
+				typeName = "OutputPin";
+			}
+			loadHandler->handleChild(this->getResult()); 
+
+			return; 
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+	//load BasePackage Nodes
+	ActionImpl::loadNode(nodeName, loadHandler);
+}
+
+void ReadLinkObjectEndQualifierActionImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::READLINKOBJECTENDQUALIFIERACTION_ATTRIBUTE_QUALIFIER:
+		{
+			if (references.size() == 1)
+			{
+				// Cast object to correct type
+				std::shared_ptr<uml::Property> _qualifier = std::dynamic_pointer_cast<uml::Property>( references.front() );
+				setQualifier(_qualifier);
+			}
+			
+			return;
+		}
+	}
+	ActionImpl::resolveReferences(featureID, references);
+}
+
+void ReadLinkObjectEndQualifierActionImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	ActionImpl::saveContent(saveHandler);
+	
+	ExecutableNodeImpl::saveContent(saveHandler);
+	
+	ActivityNodeImpl::saveContent(saveHandler);
+	
+	RedefinableElementImpl::saveContent(saveHandler);
+	
+	NamedElementImpl::saveContent(saveHandler);
+	
+	ElementImpl::saveContent(saveHandler);
+	
+	ObjectImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+}
+
+void ReadLinkObjectEndQualifierActionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
+		// Save 'object'
+		std::shared_ptr<uml::InputPin> object = this->getObject();
+		if (object != nullptr)
+		{
+			saveHandler->addReference(object, "object", object->eClass() != package->getInputPin_Class());
+		}
+
+		// Save 'result'
+		std::shared_ptr<uml::OutputPin> result = this->getResult();
+		if (result != nullptr)
+		{
+			saveHandler->addReference(result, "result", result->eClass() != package->getOutputPin_Class());
+		}
+	// Add references
+		saveHandler->addReference(this->getQualifier(), "qualifier", getQualifier()->eClass() != uml::umlPackage::eInstance()->getProperty_Class()); 
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+}
+
+
+std::shared_ptr<ecore::EClass> ReadLinkObjectEndQualifierActionImpl::eStaticClass() const
+{
+	return uml::umlPackage::eInstance()->getReadLinkObjectEndQualifierAction_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
 //*********************************
 Any ReadLinkObjectEndQualifierActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
@@ -426,6 +561,7 @@ Any ReadLinkObjectEndQualifierActionImpl::eGet(int featureID, bool resolve, bool
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
 }
+
 bool ReadLinkObjectEndQualifierActionImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
@@ -439,6 +575,7 @@ bool ReadLinkObjectEndQualifierActionImpl::internalEIsSet(int featureID) const
 	}
 	return ActionImpl::internalEIsSet(featureID);
 }
+
 bool ReadLinkObjectEndQualifierActionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
@@ -473,7 +610,7 @@ bool ReadLinkObjectEndQualifierActionImpl::eSet(int featureID, Any newValue)
 }
 
 //*********************************
-// Behavioral Feature
+// EOperation Invoke
 //*********************************
 Any ReadLinkObjectEndQualifierActionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
 {
@@ -631,162 +768,13 @@ Any ReadLinkObjectEndQualifierActionImpl::eInvoke(int operationID, std::shared_p
 	return result;
 }
 
-//*********************************
-// Persistence Functions
-//*********************************
-void ReadLinkObjectEndQualifierActionImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+
+std::shared_ptr<ReadLinkObjectEndQualifierAction> ReadLinkObjectEndQualifierActionImpl::getThisReadLinkObjectEndQualifierActionPtr() const
 {
-	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
-	loadAttributes(loadHandler, attr_list);
-
-	//
-	// Create new objects (from references (containment == true))
-	//
-	// get umlFactory
-	int numNodes = loadHandler->getNumOfChildNodes();
-	for(int ii = 0; ii < numNodes; ii++)
-	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler);
-	}
-}		
-
-void ReadLinkObjectEndQualifierActionImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
-{
-	try
-	{
-		std::map<std::string, std::string>::const_iterator iter;
-		std::shared_ptr<ecore::EClass> metaClass = this->eClass(); // get MetaClass
-		iter = attr_list.find("qualifier");
-		if ( iter != attr_list.end() )
-		{
-			// add unresolvedReference to loadHandler's list
-			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("qualifier")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
-		}
-	}
-	catch (std::exception& e)
-	{
-		std::cout << "| ERROR    | " << e.what() << std::endl;
-	}
-	catch (...) 
-	{
-		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
-	}
-
-	ActionImpl::loadAttributes(loadHandler, attr_list);
+	return m_thisReadLinkObjectEndQualifierActionPtr.lock();
 }
-
-void ReadLinkObjectEndQualifierActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+void ReadLinkObjectEndQualifierActionImpl::setThisReadLinkObjectEndQualifierActionPtr(std::weak_ptr<ReadLinkObjectEndQualifierAction> thisReadLinkObjectEndQualifierActionPtr)
 {
-
-	try
-	{
-		if ( nodeName.compare("object") == 0 )
-		{
-  			std::string typeName = loadHandler->getCurrentXSITypeName();
-			if (typeName.empty())
-			{
-				typeName = "InputPin";
-			}
-			loadHandler->handleChild(this->getObject()); 
-
-			return; 
-		}
-
-		if ( nodeName.compare("result") == 0 )
-		{
-  			std::string typeName = loadHandler->getCurrentXSITypeName();
-			if (typeName.empty())
-			{
-				typeName = "OutputPin";
-			}
-			loadHandler->handleChild(this->getResult()); 
-
-			return; 
-		}
-	}
-	catch (std::exception& e)
-	{
-		std::cout << "| ERROR    | " << e.what() << std::endl;
-	}
-	catch (...) 
-	{
-		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
-	}
-	//load BasePackage Nodes
-	ActionImpl::loadNode(nodeName, loadHandler);
+	m_thisReadLinkObjectEndQualifierActionPtr = thisReadLinkObjectEndQualifierActionPtr;
+	setThisActionPtr(thisReadLinkObjectEndQualifierActionPtr);
 }
-
-void ReadLinkObjectEndQualifierActionImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::READLINKOBJECTENDQUALIFIERACTION_ATTRIBUTE_QUALIFIER:
-		{
-			if (references.size() == 1)
-			{
-				// Cast object to correct type
-				std::shared_ptr<uml::Property> _qualifier = std::dynamic_pointer_cast<uml::Property>( references.front() );
-				setQualifier(_qualifier);
-			}
-			
-			return;
-		}
-	}
-	ActionImpl::resolveReferences(featureID, references);
-}
-
-void ReadLinkObjectEndQualifierActionImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
-{
-	saveContent(saveHandler);
-
-	ActionImpl::saveContent(saveHandler);
-	
-	ExecutableNodeImpl::saveContent(saveHandler);
-	
-	ActivityNodeImpl::saveContent(saveHandler);
-	
-	RedefinableElementImpl::saveContent(saveHandler);
-	
-	NamedElementImpl::saveContent(saveHandler);
-	
-	ElementImpl::saveContent(saveHandler);
-	
-	ObjectImpl::saveContent(saveHandler);
-	
-	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
-	
-	
-	
-}
-
-void ReadLinkObjectEndQualifierActionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
-{
-	try
-	{
-		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-		// Save 'object'
-		std::shared_ptr<uml::InputPin> object = this->getObject();
-		if (object != nullptr)
-		{
-			saveHandler->addReference(object, "object", object->eClass() != package->getInputPin_Class());
-		}
-
-		// Save 'result'
-		std::shared_ptr<uml::OutputPin> result = this->getResult();
-		if (result != nullptr)
-		{
-			saveHandler->addReference(result, "result", result->eClass() != package->getOutputPin_Class());
-		}
-	// Add references
-		saveHandler->addReference(this->getQualifier(), "qualifier", getQualifier()->eClass() != uml::umlPackage::eInstance()->getProperty_Class()); 
-	}
-	catch (std::exception& e)
-	{
-		std::cout << "| ERROR    | " << e.what() << std::endl;
-	}
-}
-

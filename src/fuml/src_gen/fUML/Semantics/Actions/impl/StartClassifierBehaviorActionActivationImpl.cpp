@@ -1,3 +1,4 @@
+
 #include "fUML/Semantics/Actions/impl/StartClassifierBehaviorActionActivationImpl.hpp"
 
 #ifdef NDEBUG
@@ -40,7 +41,6 @@
 #include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "uml/umlFactory.hpp"
-
 
 #include "uml/Action.hpp"
 #include "fUML/Semantics/Actions/ActionActivation.hpp"
@@ -128,15 +128,6 @@ std::shared_ptr<ecore::EObject> StartClassifierBehaviorActionActivationImpl::cop
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> StartClassifierBehaviorActionActivationImpl::eStaticClass() const
-{
-	return fUML::Semantics::Actions::ActionsPackage::eInstance()->getStartClassifierBehaviorActionActivation_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
@@ -173,7 +164,11 @@ void StartClassifierBehaviorActionActivationImpl::doAction()
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
+//*********************************
+
+//*********************************
+// Reference Getters & Setters
 //*********************************
 
 //*********************************
@@ -194,18 +189,9 @@ std::shared_ptr<Union<fUML::Semantics::Actions::PinActivation>> StartClassifierB
 	return m_pinActivation;
 }
 
-
-
-
-std::shared_ptr<StartClassifierBehaviorActionActivation> StartClassifierBehaviorActionActivationImpl::getThisStartClassifierBehaviorActionActivationPtr() const
-{
-	return m_thisStartClassifierBehaviorActionActivationPtr.lock();
-}
-void StartClassifierBehaviorActionActivationImpl::setThisStartClassifierBehaviorActionActivationPtr(std::weak_ptr<StartClassifierBehaviorActionActivation> thisStartClassifierBehaviorActionActivationPtr)
-{
-	m_thisStartClassifierBehaviorActionActivationPtr = thisStartClassifierBehaviorActionActivationPtr;
-	setThisActionActivationPtr(thisStartClassifierBehaviorActionActivationPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> StartClassifierBehaviorActionActivationImpl::eContainer() const
 {
 	if(auto wp = m_group.lock())
@@ -213,62 +199,6 @@ std::shared_ptr<ecore::EObject> StartClassifierBehaviorActionActivationImpl::eCo
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any StartClassifierBehaviorActionActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-	}
-	return ActionActivationImpl::eGet(featureID, resolve, coreType);
-}
-bool StartClassifierBehaviorActionActivationImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-	}
-	return ActionActivationImpl::internalEIsSet(featureID);
-}
-bool StartClassifierBehaviorActionActivationImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-	}
-
-	return ActionActivationImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any StartClassifierBehaviorActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-		
-		// 271588955
-		case ActionsPackage::STARTCLASSIFIERBEHAVIORACTIONACTIVATION_OPERATION_DOACTION:
-		{
-			this->doAction();
-			break;
-		}
-
-		default:
-		{
-			// call superTypes
-			result = ActionActivationImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -319,9 +249,6 @@ void StartClassifierBehaviorActionActivationImpl::save(std::shared_ptr<persisten
 	fUML::Semantics::Loci::SemanticVisitorImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
 }
 
 void StartClassifierBehaviorActionActivationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -336,3 +263,78 @@ void StartClassifierBehaviorActionActivationImpl::saveContent(std::shared_ptr<pe
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> StartClassifierBehaviorActionActivationImpl::eStaticClass() const
+{
+	return fUML::Semantics::Actions::ActionsPackage::eInstance()->getStartClassifierBehaviorActionActivation_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any StartClassifierBehaviorActionActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+	}
+	return ActionActivationImpl::eGet(featureID, resolve, coreType);
+}
+
+bool StartClassifierBehaviorActionActivationImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+	}
+	return ActionActivationImpl::internalEIsSet(featureID);
+}
+
+bool StartClassifierBehaviorActionActivationImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+	}
+
+	return ActionActivationImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any StartClassifierBehaviorActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 271588955
+		case ActionsPackage::STARTCLASSIFIERBEHAVIORACTIONACTIVATION_OPERATION_DOACTION:
+		{
+			this->doAction();
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = ActionActivationImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<StartClassifierBehaviorActionActivation> StartClassifierBehaviorActionActivationImpl::getThisStartClassifierBehaviorActionActivationPtr() const
+{
+	return m_thisStartClassifierBehaviorActionActivationPtr.lock();
+}
+void StartClassifierBehaviorActionActivationImpl::setThisStartClassifierBehaviorActionActivationPtr(std::weak_ptr<StartClassifierBehaviorActionActivation> thisStartClassifierBehaviorActionActivationPtr)
+{
+	m_thisStartClassifierBehaviorActionActivationPtr = thisStartClassifierBehaviorActionActivationPtr;
+	setThisActionActivationPtr(thisStartClassifierBehaviorActionActivationPtr);
+}

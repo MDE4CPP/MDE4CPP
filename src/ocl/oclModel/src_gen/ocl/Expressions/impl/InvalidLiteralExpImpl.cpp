@@ -1,3 +1,4 @@
+
 #include "ocl/Expressions/impl/InvalidLiteralExpImpl.hpp"
 
 #ifdef NDEBUG
@@ -25,7 +26,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -35,7 +35,6 @@
 #include "ecore/ecoreFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
-
 
 #include "ocl/Expressions/CallExp.hpp"
 #include "ocl/Expressions/CollectionRange.hpp"
@@ -203,38 +202,25 @@ std::shared_ptr<ecore::EObject> InvalidLiteralExpImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> InvalidLiteralExpImpl::eStaticClass() const
-{
-	return ocl::Expressions::ExpressionsPackage::eInstance()->getInvalidLiteralExp_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
 
 //*********************************
-// References
+// Attribute Getters & Setters
+//*********************************
+
+//*********************************
+// Reference Getters & Setters
 //*********************************
 
 //*********************************
 // Union Getter
 //*********************************
 
-
-
-std::shared_ptr<InvalidLiteralExp> InvalidLiteralExpImpl::getThisInvalidLiteralExpPtr() const
-{
-	return m_thisInvalidLiteralExpPtr.lock();
-}
-void InvalidLiteralExpImpl::setThisInvalidLiteralExpPtr(std::weak_ptr<InvalidLiteralExp> thisInvalidLiteralExpPtr)
-{
-	m_thisInvalidLiteralExpPtr = thisInvalidLiteralExpPtr;
-	setThisLiteralExpPtr(thisInvalidLiteralExpPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> InvalidLiteralExpImpl::eContainer() const
 {
 	if(auto wp = m_appliedElement.lock())
@@ -295,55 +281,6 @@ std::shared_ptr<ecore::EObject> InvalidLiteralExpImpl::eContainer() const
 }
 
 //*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any InvalidLiteralExpImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-	}
-	return LiteralExpImpl::eGet(featureID, resolve, coreType);
-}
-bool InvalidLiteralExpImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-	}
-	return LiteralExpImpl::internalEIsSet(featureID);
-}
-bool InvalidLiteralExpImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-	}
-
-	return LiteralExpImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any InvalidLiteralExpImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-
-		default:
-		{
-			// call superTypes
-			result = LiteralExpImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
-}
-
-//*********************************
 // Persistence Functions
 //*********************************
 void InvalidLiteralExpImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
@@ -395,11 +332,6 @@ void InvalidLiteralExpImpl::save(std::shared_ptr<persistence::interfaces::XSaveH
 	ecore::EModelElementImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
-	
 }
 
 void InvalidLiteralExpImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -414,3 +346,71 @@ void InvalidLiteralExpImpl::saveContent(std::shared_ptr<persistence::interfaces:
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> InvalidLiteralExpImpl::eStaticClass() const
+{
+	return ocl::Expressions::ExpressionsPackage::eInstance()->getInvalidLiteralExp_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any InvalidLiteralExpImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+	}
+	return LiteralExpImpl::eGet(featureID, resolve, coreType);
+}
+
+bool InvalidLiteralExpImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+	}
+	return LiteralExpImpl::internalEIsSet(featureID);
+}
+
+bool InvalidLiteralExpImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+	}
+
+	return LiteralExpImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any InvalidLiteralExpImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+
+		default:
+		{
+			// call superTypes
+			result = LiteralExpImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<InvalidLiteralExp> InvalidLiteralExpImpl::getThisInvalidLiteralExpPtr() const
+{
+	return m_thisInvalidLiteralExpPtr.lock();
+}
+void InvalidLiteralExpImpl::setThisInvalidLiteralExpPtr(std::weak_ptr<InvalidLiteralExp> thisInvalidLiteralExpPtr)
+{
+	m_thisInvalidLiteralExpPtr = thisInvalidLiteralExpPtr;
+	setThisLiteralExpPtr(thisInvalidLiteralExpPtr);
+}

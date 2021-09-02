@@ -1,3 +1,4 @@
+
 #include "ecore/impl/EAttributeImpl.hpp"
 
 #ifdef NDEBUG
@@ -25,7 +26,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -33,7 +33,6 @@
 
 #include <exception> // used in Persistence
 #include "ecore/ecoreFactory.hpp"
-
 
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -124,17 +123,14 @@ std::shared_ptr<ecore::EObject> EAttributeImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<EClass> EAttributeImpl::eStaticClass() const
-{
-	return ecore::ecorePackage::eInstance()->getEAttribute_Class();
-}
+//*********************************
+// Operations
+//*********************************
 
 //*********************************
-// Attribute Setter Getter
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for attribute iD
-*/
+/* Getter & Setter for attribute iD */
 bool EAttributeImpl::isID() const 
 {
 	return m_iD;
@@ -143,25 +139,16 @@ void EAttributeImpl::setID(bool _iD)
 {
 	m_iD = _iD;
 	
-} 
-
-
-//*********************************
-// Operations
-//*********************************
+}
 
 //*********************************
-// References
+// Reference Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference eAttributeType
-*/
+/* Getter & Setter for reference eAttributeType */
 std::shared_ptr<ecore::EDataType> EAttributeImpl::getEAttributeType() const
 {
     return m_eAttributeType;
 }
-
-
 
 //*********************************
 // Union Getter
@@ -181,18 +168,9 @@ std::shared_ptr<Union<ecore::EObject>> EAttributeImpl::getEContens() const
 	return m_eContens;
 }
 
-
-
-
-std::shared_ptr<EAttribute> EAttributeImpl::getThisEAttributePtr() const
-{
-	return m_thisEAttributePtr.lock();
-}
-void EAttributeImpl::setThisEAttributePtr(std::weak_ptr<EAttribute> thisEAttributePtr)
-{
-	m_thisEAttributePtr = thisEAttributePtr;
-	setThisEStructuralFeaturePtr(thisEAttributePtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> EAttributeImpl::eContainer() const
 {
 	if(auto wp = m_eContainer.lock())
@@ -205,73 +183,6 @@ std::shared_ptr<ecore::EObject> EAttributeImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any EAttributeImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case ecore::ecorePackage::EATTRIBUTE_ATTRIBUTE_EATTRIBUTETYPE:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getEAttributeType();
-				return eAny(returnValue); //223
-			}
-		case ecore::ecorePackage::EATTRIBUTE_ATTRIBUTE_ID:
-			return eAny(isID()); //222
-	}
-	return EStructuralFeatureImpl::eGet(featureID, resolve, coreType);
-}
-bool EAttributeImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case ecore::ecorePackage::EATTRIBUTE_ATTRIBUTE_EATTRIBUTETYPE:
-			return getEAttributeType() != nullptr; //223
-		case ecore::ecorePackage::EATTRIBUTE_ATTRIBUTE_ID:
-			return isID() != false; //222
-	}
-	return EStructuralFeatureImpl::internalEIsSet(featureID);
-}
-bool EAttributeImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case ecore::ecorePackage::EATTRIBUTE_ATTRIBUTE_ID:
-		{
-			// BOOST CAST
-			bool _iD = newValue->get<bool>();
-			setID(_iD); //222
-			return true;
-		}
-	}
-
-	return EStructuralFeatureImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any EAttributeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-
-		default:
-		{
-			// call superTypes
-			result = EStructuralFeatureImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -347,11 +258,6 @@ void EAttributeImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler>
 	EObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
-	
 }
 
 void EAttributeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -371,3 +277,89 @@ void EAttributeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 	}
 }
 
+
+std::shared_ptr<EClass> EAttributeImpl::eStaticClass() const
+{
+	return ecore::ecorePackage::eInstance()->getEAttribute_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any EAttributeImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case ecore::ecorePackage::EATTRIBUTE_ATTRIBUTE_EATTRIBUTETYPE:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getEAttributeType();
+				return eAny(returnValue); //223
+			}
+		case ecore::ecorePackage::EATTRIBUTE_ATTRIBUTE_ID:
+			return eAny(isID()); //222
+	}
+	return EStructuralFeatureImpl::eGet(featureID, resolve, coreType);
+}
+
+bool EAttributeImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case ecore::ecorePackage::EATTRIBUTE_ATTRIBUTE_EATTRIBUTETYPE:
+			return getEAttributeType() != nullptr; //223
+		case ecore::ecorePackage::EATTRIBUTE_ATTRIBUTE_ID:
+			return isID() != false; //222
+	}
+	return EStructuralFeatureImpl::internalEIsSet(featureID);
+}
+
+bool EAttributeImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case ecore::ecorePackage::EATTRIBUTE_ATTRIBUTE_ID:
+		{
+			// BOOST CAST
+			bool _iD = newValue->get<bool>();
+			setID(_iD); //222
+			return true;
+		}
+	}
+
+	return EStructuralFeatureImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any EAttributeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+
+		default:
+		{
+			// call superTypes
+			result = EStructuralFeatureImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<EAttribute> EAttributeImpl::getThisEAttributePtr() const
+{
+	return m_thisEAttributePtr.lock();
+}
+void EAttributeImpl::setThisEAttributePtr(std::weak_ptr<EAttribute> thisEAttributePtr)
+{
+	m_thisEAttributePtr = thisEAttributePtr;
+	setThisEStructuralFeaturePtr(thisEAttributePtr);
+}

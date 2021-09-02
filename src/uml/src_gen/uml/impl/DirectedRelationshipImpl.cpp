@@ -1,3 +1,4 @@
+
 #include "uml/impl/DirectedRelationshipImpl.hpp"
 
 #ifdef NDEBUG
@@ -25,7 +26,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -33,7 +33,6 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-
 
 #include "uml/Comment.hpp"
 #include "uml/Element.hpp"
@@ -111,35 +110,20 @@ std::shared_ptr<ecore::EObject> DirectedRelationshipImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> DirectedRelationshipImpl::eStaticClass() const
-{
-	return uml::umlPackage::eInstance()->getDirectedRelationship_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference source
-*/
 
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference source */
 
-
-
-/*
-Getter & Setter for reference target
-*/
-
-
-
+/* Getter & Setter for reference target */
 
 //*********************************
 // Union Getter
@@ -214,18 +198,9 @@ std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> DirectedRelationshipImp
 	return m_target;
 }
 
-
-
-
-std::shared_ptr<DirectedRelationship> DirectedRelationshipImpl::getThisDirectedRelationshipPtr() const
-{
-	return m_thisDirectedRelationshipPtr.lock();
-}
-void DirectedRelationshipImpl::setThisDirectedRelationshipPtr(std::weak_ptr<DirectedRelationship> thisDirectedRelationshipPtr)
-{
-	m_thisDirectedRelationshipPtr = thisDirectedRelationshipPtr;
-	setThisRelationshipPtr(thisDirectedRelationshipPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> DirectedRelationshipImpl::eContainer() const
 {
 	if(auto wp = m_owner.lock())
@@ -233,83 +208,6 @@ std::shared_ptr<ecore::EObject> DirectedRelationshipImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any DirectedRelationshipImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::DIRECTEDRELATIONSHIP_ATTRIBUTE_SOURCE:
-		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Element>::iterator iter = getSource()->begin();
-			Bag<uml::Element>::iterator end = getSource()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //764			
-		}
-		case uml::umlPackage::DIRECTEDRELATIONSHIP_ATTRIBUTE_TARGET:
-		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Element>::iterator iter = getTarget()->begin();
-			Bag<uml::Element>::iterator end = getTarget()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //765			
-		}
-	}
-	return RelationshipImpl::eGet(featureID, resolve, coreType);
-}
-bool DirectedRelationshipImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::DIRECTEDRELATIONSHIP_ATTRIBUTE_SOURCE:
-			return getSource() != nullptr; //764
-		case uml::umlPackage::DIRECTEDRELATIONSHIP_ATTRIBUTE_TARGET:
-			return getTarget() != nullptr; //765
-	}
-	return RelationshipImpl::internalEIsSet(featureID);
-}
-bool DirectedRelationshipImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-	}
-
-	return RelationshipImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any DirectedRelationshipImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-
-		default:
-		{
-			// call superTypes
-			result = RelationshipImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -360,9 +258,6 @@ void DirectedRelationshipImpl::save(std::shared_ptr<persistence::interfaces::XSa
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
 }
 
 void DirectedRelationshipImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -377,3 +272,99 @@ void DirectedRelationshipImpl::saveContent(std::shared_ptr<persistence::interfac
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> DirectedRelationshipImpl::eStaticClass() const
+{
+	return uml::umlPackage::eInstance()->getDirectedRelationship_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any DirectedRelationshipImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::DIRECTEDRELATIONSHIP_ATTRIBUTE_SOURCE:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Element>::iterator iter = getSource()->begin();
+			Bag<uml::Element>::iterator end = getSource()->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //764			
+		}
+		case uml::umlPackage::DIRECTEDRELATIONSHIP_ATTRIBUTE_TARGET:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Element>::iterator iter = getTarget()->begin();
+			Bag<uml::Element>::iterator end = getTarget()->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //765			
+		}
+	}
+	return RelationshipImpl::eGet(featureID, resolve, coreType);
+}
+
+bool DirectedRelationshipImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::DIRECTEDRELATIONSHIP_ATTRIBUTE_SOURCE:
+			return getSource() != nullptr; //764
+		case uml::umlPackage::DIRECTEDRELATIONSHIP_ATTRIBUTE_TARGET:
+			return getTarget() != nullptr; //765
+	}
+	return RelationshipImpl::internalEIsSet(featureID);
+}
+
+bool DirectedRelationshipImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+	}
+
+	return RelationshipImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any DirectedRelationshipImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+
+		default:
+		{
+			// call superTypes
+			result = RelationshipImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<DirectedRelationship> DirectedRelationshipImpl::getThisDirectedRelationshipPtr() const
+{
+	return m_thisDirectedRelationshipPtr.lock();
+}
+void DirectedRelationshipImpl::setThisDirectedRelationshipPtr(std::weak_ptr<DirectedRelationship> thisDirectedRelationshipPtr)
+{
+	m_thisDirectedRelationshipPtr = thisDirectedRelationshipPtr;
+	setThisRelationshipPtr(thisDirectedRelationshipPtr);
+}

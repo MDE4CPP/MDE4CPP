@@ -1,3 +1,4 @@
+
 #include "PSCS/Semantics/Loci/impl/CS_ExecutorImpl.hpp"
 
 #ifdef NDEBUG
@@ -39,7 +40,6 @@
 
 #include <exception> // used in Persistence
 #include "fUML/Semantics/Loci/LociFactory.hpp"
-
 
 #include "uml/Class.hpp"
 #include "fUML/Semantics/Loci/Executor.hpp"
@@ -125,15 +125,6 @@ std::shared_ptr<ecore::EObject> CS_ExecutorImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> CS_ExecutorImpl::eStaticClass() const
-{
-	return PSCS::Semantics::Loci::LociPackage::eInstance()->getCS_Executor_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
@@ -170,24 +161,20 @@ std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> CS_ExecutorIm
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
+//*********************************
+
+//*********************************
+// Reference Getters & Setters
 //*********************************
 
 //*********************************
 // Union Getter
 //*********************************
 
-
-
-std::shared_ptr<CS_Executor> CS_ExecutorImpl::getThisCS_ExecutorPtr() const
-{
-	return m_thisCS_ExecutorPtr.lock();
-}
-void CS_ExecutorImpl::setThisCS_ExecutorPtr(std::weak_ptr<CS_Executor> thisCS_ExecutorPtr)
-{
-	m_thisCS_ExecutorPtr = thisCS_ExecutorPtr;
-	setThisExecutorPtr(thisCS_ExecutorPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> CS_ExecutorImpl::eContainer() const
 {
 	if(auto wp = m_locus.lock())
@@ -195,72 +182,6 @@ std::shared_ptr<ecore::EObject> CS_ExecutorImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any CS_ExecutorImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-	}
-	return fUML::Semantics::Loci::ExecutorImpl::eGet(featureID, resolve, coreType);
-}
-bool CS_ExecutorImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-	}
-	return fUML::Semantics::Loci::ExecutorImpl::internalEIsSet(featureID);
-}
-bool CS_ExecutorImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-	}
-
-	return fUML::Semantics::Loci::ExecutorImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any CS_ExecutorImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-		
-		// 1767369396
-		case LociPackage::CS_EXECUTOR_OPERATION_START_CLASS_PARAMETERVALUE:
-		{
-			//Retrieve input parameter 'type'
-			//parameter 0
-			std::shared_ptr<uml::Class> incoming_param_type;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_type_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_type = (*incoming_param_type_arguments_citer)->get()->get<std::shared_ptr<uml::Class> >();
-			//Retrieve input parameter 'inputs'
-			//parameter 1
-			std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> incoming_param_inputs;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_inputs_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_inputs = (*incoming_param_inputs_arguments_citer)->get()->get<std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> >();
-			result = eAny(this->start(incoming_param_type,incoming_param_inputs));
-			break;
-		}
-
-		default:
-		{
-			// call superTypes
-			result = fUML::Semantics::Loci::ExecutorImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -307,7 +228,6 @@ void CS_ExecutorImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler
 	fUML::Semantics::Loci::ExecutorImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
 }
 
 void CS_ExecutorImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -322,3 +242,88 @@ void CS_ExecutorImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> CS_ExecutorImpl::eStaticClass() const
+{
+	return PSCS::Semantics::Loci::LociPackage::eInstance()->getCS_Executor_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any CS_ExecutorImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+	}
+	return fUML::Semantics::Loci::ExecutorImpl::eGet(featureID, resolve, coreType);
+}
+
+bool CS_ExecutorImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+	}
+	return fUML::Semantics::Loci::ExecutorImpl::internalEIsSet(featureID);
+}
+
+bool CS_ExecutorImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+	}
+
+	return fUML::Semantics::Loci::ExecutorImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any CS_ExecutorImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 1767369396
+		case LociPackage::CS_EXECUTOR_OPERATION_START_CLASS_PARAMETERVALUE:
+		{
+			//Retrieve input parameter 'type'
+			//parameter 0
+			std::shared_ptr<uml::Class> incoming_param_type;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_type_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_type = (*incoming_param_type_arguments_citer)->get()->get<std::shared_ptr<uml::Class> >();
+			//Retrieve input parameter 'inputs'
+			//parameter 1
+			std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> incoming_param_inputs;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_inputs_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_inputs = (*incoming_param_inputs_arguments_citer)->get()->get<std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> >();
+			result = eAny(this->start(incoming_param_type,incoming_param_inputs));
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = fUML::Semantics::Loci::ExecutorImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<CS_Executor> CS_ExecutorImpl::getThisCS_ExecutorPtr() const
+{
+	return m_thisCS_ExecutorPtr.lock();
+}
+void CS_ExecutorImpl::setThisCS_ExecutorPtr(std::weak_ptr<CS_Executor> thisCS_ExecutorPtr)
+{
+	m_thisCS_ExecutorPtr = thisCS_ExecutorPtr;
+	setThisExecutorPtr(thisCS_ExecutorPtr);
+}

@@ -1,3 +1,4 @@
+
 #include "fUML/Semantics/SimpleClassifiers/impl/FeatureValueImpl.hpp"
 
 #ifdef NDEBUG
@@ -36,7 +37,6 @@
 #include <exception> // used in Persistence
 #include "fUML/Semantics/Values/ValuesFactory.hpp"
 #include "uml/umlFactory.hpp"
-
 
 #include "fUML/Semantics/SimpleClassifiers/FeatureValue.hpp"
 #include "uml/StructuralFeature.hpp"
@@ -136,28 +136,6 @@ std::shared_ptr<ecore::EObject> FeatureValueImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> FeatureValueImpl::eStaticClass() const
-{
-	return fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::eInstance()->getFeatureValue_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-/*
-Getter & Setter for attribute position
-*/
-int FeatureValueImpl::getPosition() const 
-{
-	return m_position;
-}
-void FeatureValueImpl::setPosition(int _position)
-{
-	m_position = _position;
-	
-} 
-
-
 //*********************************
 // Operations
 //*********************************
@@ -244,11 +222,23 @@ bool FeatureValueImpl::hasEqualValues(std::shared_ptr<fUML::Semantics::SimpleCla
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference feature
-*/
+/* Getter & Setter for attribute position */
+int FeatureValueImpl::getPosition() const 
+{
+	return m_position;
+}
+void FeatureValueImpl::setPosition(int _position)
+{
+	m_position = _position;
+	
+}
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference feature */
 std::shared_ptr<uml::StructuralFeature> FeatureValueImpl::getFeature() const
 {
     return m_feature;
@@ -259,10 +249,7 @@ void FeatureValueImpl::setFeature(std::shared_ptr<uml::StructuralFeature> _featu
 	
 }
 
-
-/*
-Getter & Setter for reference values
-*/
+/* Getter & Setter for reference values */
 std::shared_ptr<Bag<fUML::Semantics::Values::Value>> FeatureValueImpl::getValues() const
 {
 	if(m_values == nullptr)
@@ -274,169 +261,16 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> FeatureValueImpl::getValues
     return m_values;
 }
 
-
-
 //*********************************
 // Union Getter
 //*********************************
 
-
-
-std::shared_ptr<FeatureValue> FeatureValueImpl::getThisFeatureValuePtr() const
-{
-	return m_thisFeatureValuePtr.lock();
-}
-void FeatureValueImpl::setThisFeatureValuePtr(std::weak_ptr<FeatureValue> thisFeatureValuePtr)
-{
-	m_thisFeatureValuePtr = thisFeatureValuePtr;
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> FeatureValueImpl::eContainer() const
 {
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any FeatureValueImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::FEATUREVALUE_ATTRIBUTE_FEATURE:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getFeature();
-				return eAny(returnValue); //552
-			}
-		case fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::FEATUREVALUE_ATTRIBUTE_POSITION:
-			return eAny(getPosition()); //551
-		case fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::FEATUREVALUE_ATTRIBUTE_VALUES:
-		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<fUML::Semantics::Values::Value>::iterator iter = getValues()->begin();
-			Bag<fUML::Semantics::Values::Value>::iterator end = getValues()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //550			
-		}
-	}
-	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
-}
-bool FeatureValueImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::FEATUREVALUE_ATTRIBUTE_FEATURE:
-			return getFeature() != nullptr; //552
-		case fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::FEATUREVALUE_ATTRIBUTE_POSITION:
-			return getPosition() != 0; //551
-		case fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::FEATUREVALUE_ATTRIBUTE_VALUES:
-			return getValues() != nullptr; //550
-	}
-	return ecore::EObjectImpl::internalEIsSet(featureID);
-}
-bool FeatureValueImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::FEATUREVALUE_ATTRIBUTE_FEATURE:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::StructuralFeature> _feature = std::dynamic_pointer_cast<uml::StructuralFeature>(_temp);
-			setFeature(_feature); //552
-			return true;
-		}
-		case fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::FEATUREVALUE_ATTRIBUTE_POSITION:
-		{
-			// BOOST CAST
-			int _position = newValue->get<int>();
-			setPosition(_position); //551
-			return true;
-		}
-		case fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::FEATUREVALUE_ATTRIBUTE_VALUES:
-		{
-			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<fUML::Semantics::Values::Value>> valuesList(new Bag<fUML::Semantics::Values::Value>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
-			{
-				valuesList->add(std::dynamic_pointer_cast<fUML::Semantics::Values::Value>(*iter));
-				iter++;
-			}
-			
-			Bag<fUML::Semantics::Values::Value>::iterator iterValues = getValues()->begin();
-			Bag<fUML::Semantics::Values::Value>::iterator endValues = getValues()->end();
-			while (iterValues != endValues)
-			{
-				if (valuesList->find(*iterValues) == -1)
-				{
-					getValues()->erase(*iterValues);
-				}
-				iterValues++;
-			}
- 
-			iterValues = valuesList->begin();
-			endValues = valuesList->end();
-			while (iterValues != endValues)
-			{
-				if (getValues()->find(*iterValues) == -1)
-				{
-					getValues()->add(*iterValues);
-				}
-				iterValues++;			
-			}
-			return true;
-		}
-	}
-
-	return ecore::EObjectImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any FeatureValueImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-		
-		// 1429289502
-		case SimpleClassifiersPackage::FEATUREVALUE_OPERATION__COPY:
-		{
-			result = eAny(this->_copy());
-			break;
-		}
-		
-		// 2061713627
-		case SimpleClassifiersPackage::FEATUREVALUE_OPERATION_HASEQUALVALUES_FEATUREVALUE:
-		{
-			//Retrieve input parameter 'other'
-			//parameter 0
-			std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> incoming_param_other;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_other_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_other = (*incoming_param_other_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> >();
-			result = eAny(this->hasEqualValues(incoming_param_other));
-			break;
-		}
-
-		default:
-		{
-			// call superTypes
-			result = ecore::EModelElementImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -544,9 +378,7 @@ void FeatureValueImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandle
 {
 	saveContent(saveHandler);
 
-	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
 }
 
 void FeatureValueImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -575,3 +407,165 @@ void FeatureValueImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> FeatureValueImpl::eStaticClass() const
+{
+	return fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::eInstance()->getFeatureValue_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any FeatureValueImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::FEATUREVALUE_ATTRIBUTE_FEATURE:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getFeature();
+				return eAny(returnValue); //552
+			}
+		case fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::FEATUREVALUE_ATTRIBUTE_POSITION:
+			return eAny(getPosition()); //551
+		case fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::FEATUREVALUE_ATTRIBUTE_VALUES:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<fUML::Semantics::Values::Value>::iterator iter = getValues()->begin();
+			Bag<fUML::Semantics::Values::Value>::iterator end = getValues()->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //550			
+		}
+	}
+	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
+}
+
+bool FeatureValueImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::FEATUREVALUE_ATTRIBUTE_FEATURE:
+			return getFeature() != nullptr; //552
+		case fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::FEATUREVALUE_ATTRIBUTE_POSITION:
+			return getPosition() != 0; //551
+		case fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::FEATUREVALUE_ATTRIBUTE_VALUES:
+			return getValues() != nullptr; //550
+	}
+	return ecore::EObjectImpl::internalEIsSet(featureID);
+}
+
+bool FeatureValueImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::FEATUREVALUE_ATTRIBUTE_FEATURE:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::StructuralFeature> _feature = std::dynamic_pointer_cast<uml::StructuralFeature>(_temp);
+			setFeature(_feature); //552
+			return true;
+		}
+		case fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::FEATUREVALUE_ATTRIBUTE_POSITION:
+		{
+			// BOOST CAST
+			int _position = newValue->get<int>();
+			setPosition(_position); //551
+			return true;
+		}
+		case fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::FEATUREVALUE_ATTRIBUTE_VALUES:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<fUML::Semantics::Values::Value>> valuesList(new Bag<fUML::Semantics::Values::Value>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				valuesList->add(std::dynamic_pointer_cast<fUML::Semantics::Values::Value>(*iter));
+				iter++;
+			}
+			
+			Bag<fUML::Semantics::Values::Value>::iterator iterValues = getValues()->begin();
+			Bag<fUML::Semantics::Values::Value>::iterator endValues = getValues()->end();
+			while (iterValues != endValues)
+			{
+				if (valuesList->find(*iterValues) == -1)
+				{
+					getValues()->erase(*iterValues);
+				}
+				iterValues++;
+			}
+ 
+			iterValues = valuesList->begin();
+			endValues = valuesList->end();
+			while (iterValues != endValues)
+			{
+				if (getValues()->find(*iterValues) == -1)
+				{
+					getValues()->add(*iterValues);
+				}
+				iterValues++;			
+			}
+			return true;
+		}
+	}
+
+	return ecore::EObjectImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any FeatureValueImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 1429289502
+		case SimpleClassifiersPackage::FEATUREVALUE_OPERATION__COPY:
+		{
+			result = eAny(this->_copy());
+			break;
+		}
+		
+		// 2061713627
+		case SimpleClassifiersPackage::FEATUREVALUE_OPERATION_HASEQUALVALUES_FEATUREVALUE:
+		{
+			//Retrieve input parameter 'other'
+			//parameter 0
+			std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> incoming_param_other;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_other_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_other = (*incoming_param_other_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> >();
+			result = eAny(this->hasEqualValues(incoming_param_other));
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = ecore::EModelElementImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<FeatureValue> FeatureValueImpl::getThisFeatureValuePtr() const
+{
+	return m_thisFeatureValuePtr.lock();
+}
+void FeatureValueImpl::setThisFeatureValuePtr(std::weak_ptr<FeatureValue> thisFeatureValuePtr)
+{
+	m_thisFeatureValuePtr = thisFeatureValuePtr;
+}

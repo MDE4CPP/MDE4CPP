@@ -1,3 +1,4 @@
+
 #include "ocl/Evaluations/impl/LoopExpEvalImpl.hpp"
 
 #ifdef NDEBUG
@@ -25,20 +26,18 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "fUML/Semantics/Values/ValuesFactory.hpp"
-#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
 #include "uml/umlFactory.hpp"
+#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
+#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
-
 
 #include "ocl/Evaluations/EvalEnvironment.hpp"
 #include "fUML/Semantics/Loci/Locus.hpp"
@@ -123,25 +122,18 @@ std::shared_ptr<ecore::EObject> LoopExpEvalImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> LoopExpEvalImpl::eStaticClass() const
-{
-	return ocl::Evaluations::EvaluationsPackage::eInstance()->getLoopExpEval_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference bodyEvals
-*/
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference bodyEvals */
 std::shared_ptr<Bag<ocl::Evaluations::OclExpEval>> LoopExpEvalImpl::getBodyEvals() const
 {
 	if(m_bodyEvals == nullptr)
@@ -153,11 +145,7 @@ std::shared_ptr<Bag<ocl::Evaluations::OclExpEval>> LoopExpEvalImpl::getBodyEvals
     return m_bodyEvals;
 }
 
-
-
-/*
-Getter & Setter for reference iterators
-*/
+/* Getter & Setter for reference iterators */
 std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::StringValue>> LoopExpEvalImpl::getIterators() const
 {
 	if(m_iterators == nullptr)
@@ -169,175 +157,16 @@ std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::StringValue>> LoopExpEva
     return m_iterators;
 }
 
-
-
 //*********************************
 // Union Getter
 //*********************************
 
-
-
-std::shared_ptr<LoopExpEval> LoopExpEvalImpl::getThisLoopExpEvalPtr() const
-{
-	return m_thisLoopExpEvalPtr.lock();
-}
-void LoopExpEvalImpl::setThisLoopExpEvalPtr(std::weak_ptr<LoopExpEval> thisLoopExpEvalPtr)
-{
-	m_thisLoopExpEvalPtr = thisLoopExpEvalPtr;
-	setThisPropertyCallExpEvalPtr(thisLoopExpEvalPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> LoopExpEvalImpl::eContainer() const
 {
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any LoopExpEvalImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case ocl::Evaluations::EvaluationsPackage::LOOPEXPEVAL_ATTRIBUTE_BODYEVALS:
-		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<ocl::Evaluations::OclExpEval>::iterator iter = getBodyEvals()->begin();
-			Bag<ocl::Evaluations::OclExpEval>::iterator end = getBodyEvals()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //477			
-		}
-		case ocl::Evaluations::EvaluationsPackage::LOOPEXPEVAL_ATTRIBUTE_ITERATORS:
-		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<fUML::Semantics::SimpleClassifiers::StringValue>::iterator iter = getIterators()->begin();
-			Bag<fUML::Semantics::SimpleClassifiers::StringValue>::iterator end = getIterators()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //478			
-		}
-	}
-	return PropertyCallExpEvalImpl::eGet(featureID, resolve, coreType);
-}
-bool LoopExpEvalImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case ocl::Evaluations::EvaluationsPackage::LOOPEXPEVAL_ATTRIBUTE_BODYEVALS:
-			return getBodyEvals() != nullptr; //477
-		case ocl::Evaluations::EvaluationsPackage::LOOPEXPEVAL_ATTRIBUTE_ITERATORS:
-			return getIterators() != nullptr; //478
-	}
-	return PropertyCallExpEvalImpl::internalEIsSet(featureID);
-}
-bool LoopExpEvalImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case ocl::Evaluations::EvaluationsPackage::LOOPEXPEVAL_ATTRIBUTE_BODYEVALS:
-		{
-			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<ocl::Evaluations::OclExpEval>> bodyEvalsList(new Bag<ocl::Evaluations::OclExpEval>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
-			{
-				bodyEvalsList->add(std::dynamic_pointer_cast<ocl::Evaluations::OclExpEval>(*iter));
-				iter++;
-			}
-			
-			Bag<ocl::Evaluations::OclExpEval>::iterator iterBodyEvals = getBodyEvals()->begin();
-			Bag<ocl::Evaluations::OclExpEval>::iterator endBodyEvals = getBodyEvals()->end();
-			while (iterBodyEvals != endBodyEvals)
-			{
-				if (bodyEvalsList->find(*iterBodyEvals) == -1)
-				{
-					getBodyEvals()->erase(*iterBodyEvals);
-				}
-				iterBodyEvals++;
-			}
- 
-			iterBodyEvals = bodyEvalsList->begin();
-			endBodyEvals = bodyEvalsList->end();
-			while (iterBodyEvals != endBodyEvals)
-			{
-				if (getBodyEvals()->find(*iterBodyEvals) == -1)
-				{
-					getBodyEvals()->add(*iterBodyEvals);
-				}
-				iterBodyEvals++;			
-			}
-			return true;
-		}
-		case ocl::Evaluations::EvaluationsPackage::LOOPEXPEVAL_ATTRIBUTE_ITERATORS:
-		{
-			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::StringValue>> iteratorsList(new Bag<fUML::Semantics::SimpleClassifiers::StringValue>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
-			{
-				iteratorsList->add(std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::StringValue>(*iter));
-				iter++;
-			}
-			
-			Bag<fUML::Semantics::SimpleClassifiers::StringValue>::iterator iterIterators = getIterators()->begin();
-			Bag<fUML::Semantics::SimpleClassifiers::StringValue>::iterator endIterators = getIterators()->end();
-			while (iterIterators != endIterators)
-			{
-				if (iteratorsList->find(*iterIterators) == -1)
-				{
-					getIterators()->erase(*iterIterators);
-				}
-				iterIterators++;
-			}
- 
-			iterIterators = iteratorsList->begin();
-			endIterators = iteratorsList->end();
-			while (iterIterators != endIterators)
-			{
-				if (getIterators()->find(*iterIterators) == -1)
-				{
-					getIterators()->add(*iterIterators);
-				}
-				iterIterators++;			
-			}
-			return true;
-		}
-	}
-
-	return PropertyCallExpEvalImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any LoopExpEvalImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-
-		default:
-		{
-			// call superTypes
-			result = PropertyCallExpEvalImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -446,10 +275,6 @@ void LoopExpEvalImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler
 	fUML::Semantics::Loci::SemanticVisitorImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
 }
 
 void LoopExpEvalImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -467,3 +292,171 @@ void LoopExpEvalImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> LoopExpEvalImpl::eStaticClass() const
+{
+	return ocl::Evaluations::EvaluationsPackage::eInstance()->getLoopExpEval_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any LoopExpEvalImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case ocl::Evaluations::EvaluationsPackage::LOOPEXPEVAL_ATTRIBUTE_BODYEVALS:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<ocl::Evaluations::OclExpEval>::iterator iter = getBodyEvals()->begin();
+			Bag<ocl::Evaluations::OclExpEval>::iterator end = getBodyEvals()->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //477			
+		}
+		case ocl::Evaluations::EvaluationsPackage::LOOPEXPEVAL_ATTRIBUTE_ITERATORS:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<fUML::Semantics::SimpleClassifiers::StringValue>::iterator iter = getIterators()->begin();
+			Bag<fUML::Semantics::SimpleClassifiers::StringValue>::iterator end = getIterators()->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //478			
+		}
+	}
+	return PropertyCallExpEvalImpl::eGet(featureID, resolve, coreType);
+}
+
+bool LoopExpEvalImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case ocl::Evaluations::EvaluationsPackage::LOOPEXPEVAL_ATTRIBUTE_BODYEVALS:
+			return getBodyEvals() != nullptr; //477
+		case ocl::Evaluations::EvaluationsPackage::LOOPEXPEVAL_ATTRIBUTE_ITERATORS:
+			return getIterators() != nullptr; //478
+	}
+	return PropertyCallExpEvalImpl::internalEIsSet(featureID);
+}
+
+bool LoopExpEvalImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case ocl::Evaluations::EvaluationsPackage::LOOPEXPEVAL_ATTRIBUTE_BODYEVALS:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<ocl::Evaluations::OclExpEval>> bodyEvalsList(new Bag<ocl::Evaluations::OclExpEval>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				bodyEvalsList->add(std::dynamic_pointer_cast<ocl::Evaluations::OclExpEval>(*iter));
+				iter++;
+			}
+			
+			Bag<ocl::Evaluations::OclExpEval>::iterator iterBodyEvals = getBodyEvals()->begin();
+			Bag<ocl::Evaluations::OclExpEval>::iterator endBodyEvals = getBodyEvals()->end();
+			while (iterBodyEvals != endBodyEvals)
+			{
+				if (bodyEvalsList->find(*iterBodyEvals) == -1)
+				{
+					getBodyEvals()->erase(*iterBodyEvals);
+				}
+				iterBodyEvals++;
+			}
+ 
+			iterBodyEvals = bodyEvalsList->begin();
+			endBodyEvals = bodyEvalsList->end();
+			while (iterBodyEvals != endBodyEvals)
+			{
+				if (getBodyEvals()->find(*iterBodyEvals) == -1)
+				{
+					getBodyEvals()->add(*iterBodyEvals);
+				}
+				iterBodyEvals++;			
+			}
+			return true;
+		}
+		case ocl::Evaluations::EvaluationsPackage::LOOPEXPEVAL_ATTRIBUTE_ITERATORS:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::StringValue>> iteratorsList(new Bag<fUML::Semantics::SimpleClassifiers::StringValue>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				iteratorsList->add(std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::StringValue>(*iter));
+				iter++;
+			}
+			
+			Bag<fUML::Semantics::SimpleClassifiers::StringValue>::iterator iterIterators = getIterators()->begin();
+			Bag<fUML::Semantics::SimpleClassifiers::StringValue>::iterator endIterators = getIterators()->end();
+			while (iterIterators != endIterators)
+			{
+				if (iteratorsList->find(*iterIterators) == -1)
+				{
+					getIterators()->erase(*iterIterators);
+				}
+				iterIterators++;
+			}
+ 
+			iterIterators = iteratorsList->begin();
+			endIterators = iteratorsList->end();
+			while (iterIterators != endIterators)
+			{
+				if (getIterators()->find(*iterIterators) == -1)
+				{
+					getIterators()->add(*iterIterators);
+				}
+				iterIterators++;			
+			}
+			return true;
+		}
+	}
+
+	return PropertyCallExpEvalImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any LoopExpEvalImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+
+		default:
+		{
+			// call superTypes
+			result = PropertyCallExpEvalImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<LoopExpEval> LoopExpEvalImpl::getThisLoopExpEvalPtr() const
+{
+	return m_thisLoopExpEvalPtr.lock();
+}
+void LoopExpEvalImpl::setThisLoopExpEvalPtr(std::weak_ptr<LoopExpEval> thisLoopExpEvalPtr)
+{
+	m_thisLoopExpEvalPtr = thisLoopExpEvalPtr;
+	setThisPropertyCallExpEvalPtr(thisLoopExpEvalPtr);
+}

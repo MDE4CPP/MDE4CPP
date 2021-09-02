@@ -1,3 +1,4 @@
+
 #include "PSCS/Semantics/Actions/impl/CS_ConstructStrategyImpl.hpp"
 
 #ifdef NDEBUG
@@ -32,7 +33,6 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-
 
 #include "PSCS/Semantics/StructuredClassifiers/CS_Object.hpp"
 #include "fUML/Semantics/StructuredClassifiers/Object.hpp"
@@ -111,15 +111,6 @@ std::shared_ptr<ecore::EObject> CS_ConstructStrategyImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> CS_ConstructStrategyImpl::eStaticClass() const
-{
-	return PSCS::Semantics::Actions::ActionsPackage::eInstance()->getCS_ConstructStrategy_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
@@ -139,100 +130,23 @@ std::string CS_ConstructStrategyImpl::getName()
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
+//*********************************
+
+//*********************************
+// Reference Getters & Setters
 //*********************************
 
 //*********************************
 // Union Getter
 //*********************************
 
-
-
-std::shared_ptr<CS_ConstructStrategy> CS_ConstructStrategyImpl::getThisCS_ConstructStrategyPtr() const
-{
-	return m_thisCS_ConstructStrategyPtr.lock();
-}
-void CS_ConstructStrategyImpl::setThisCS_ConstructStrategyPtr(std::weak_ptr<CS_ConstructStrategy> thisCS_ConstructStrategyPtr)
-{
-	m_thisCS_ConstructStrategyPtr = thisCS_ConstructStrategyPtr;
-	setThisSemanticStrategyPtr(thisCS_ConstructStrategyPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> CS_ConstructStrategyImpl::eContainer() const
 {
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any CS_ConstructStrategyImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-	}
-	return fUML::Semantics::Loci::SemanticStrategyImpl::eGet(featureID, resolve, coreType);
-}
-bool CS_ConstructStrategyImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-	}
-	return fUML::Semantics::Loci::SemanticStrategyImpl::internalEIsSet(featureID);
-}
-bool CS_ConstructStrategyImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-	}
-
-	return fUML::Semantics::Loci::SemanticStrategyImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any CS_ConstructStrategyImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-		
-		// 597739318
-		case ActionsPackage::CS_CONSTRUCTSTRATEGY_OPERATION_CONSTRUCT_OPERATION_CS_OBJECT:
-		{
-			//Retrieve input parameter 'constructor'
-			//parameter 0
-			std::shared_ptr<uml::Operation> incoming_param_constructor;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_constructor_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_constructor = (*incoming_param_constructor_arguments_citer)->get()->get<std::shared_ptr<uml::Operation> >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Object> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Object> >();
-			result = eAny(this->construct(incoming_param_constructor,incoming_param_context));
-			break;
-		}
-		
-		// 1128538055
-		case ActionsPackage::CS_CONSTRUCTSTRATEGY_OPERATION_GETNAME:
-		{
-			result = eAny(this->getName());
-			break;
-		}
-
-		default:
-		{
-			// call superTypes
-			result = fUML::Semantics::Loci::SemanticStrategyImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -279,7 +193,6 @@ void CS_ConstructStrategyImpl::save(std::shared_ptr<persistence::interfaces::XSa
 	fUML::Semantics::Loci::SemanticStrategyImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
 }
 
 void CS_ConstructStrategyImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -294,3 +207,95 @@ void CS_ConstructStrategyImpl::saveContent(std::shared_ptr<persistence::interfac
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> CS_ConstructStrategyImpl::eStaticClass() const
+{
+	return PSCS::Semantics::Actions::ActionsPackage::eInstance()->getCS_ConstructStrategy_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any CS_ConstructStrategyImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+	}
+	return fUML::Semantics::Loci::SemanticStrategyImpl::eGet(featureID, resolve, coreType);
+}
+
+bool CS_ConstructStrategyImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+	}
+	return fUML::Semantics::Loci::SemanticStrategyImpl::internalEIsSet(featureID);
+}
+
+bool CS_ConstructStrategyImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+	}
+
+	return fUML::Semantics::Loci::SemanticStrategyImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any CS_ConstructStrategyImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 597739318
+		case ActionsPackage::CS_CONSTRUCTSTRATEGY_OPERATION_CONSTRUCT_OPERATION_CS_OBJECT:
+		{
+			//Retrieve input parameter 'constructor'
+			//parameter 0
+			std::shared_ptr<uml::Operation> incoming_param_constructor;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_constructor_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_constructor = (*incoming_param_constructor_arguments_citer)->get()->get<std::shared_ptr<uml::Operation> >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Object> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Object> >();
+			result = eAny(this->construct(incoming_param_constructor,incoming_param_context));
+			break;
+		}
+		
+		// 1128538055
+		case ActionsPackage::CS_CONSTRUCTSTRATEGY_OPERATION_GETNAME:
+		{
+			result = eAny(this->getName());
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = fUML::Semantics::Loci::SemanticStrategyImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<CS_ConstructStrategy> CS_ConstructStrategyImpl::getThisCS_ConstructStrategyPtr() const
+{
+	return m_thisCS_ConstructStrategyPtr.lock();
+}
+void CS_ConstructStrategyImpl::setThisCS_ConstructStrategyPtr(std::weak_ptr<CS_ConstructStrategy> thisCS_ConstructStrategyPtr)
+{
+	m_thisCS_ConstructStrategyPtr = thisCS_ConstructStrategyPtr;
+	setThisSemanticStrategyPtr(thisCS_ConstructStrategyPtr);
+}

@@ -1,3 +1,4 @@
+
 #include "uml/impl/ExpansionRegionImpl.hpp"
 
 #ifdef NDEBUG
@@ -25,7 +26,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -33,7 +33,6 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-
 
 #include "uml/Activity.hpp"
 #include "uml/ActivityEdge.hpp"
@@ -180,17 +179,14 @@ std::shared_ptr<ecore::EObject> ExpansionRegionImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> ExpansionRegionImpl::eStaticClass() const
-{
-	return uml::umlPackage::eInstance()->getExpansionRegion_Class();
-}
+//*********************************
+// Operations
+//*********************************
 
 //*********************************
-// Attribute Setter Getter
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for attribute mode
-*/
+/* Getter & Setter for attribute mode */
 uml::ExpansionKind ExpansionRegionImpl::getMode() const 
 {
 	return m_mode;
@@ -199,19 +195,12 @@ void ExpansionRegionImpl::setMode(uml::ExpansionKind _mode)
 {
 	m_mode = _mode;
 	
-} 
-
-
-//*********************************
-// Operations
-//*********************************
+}
 
 //*********************************
-// References
+// Reference Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference inputElement
-*/
+/* Getter & Setter for reference inputElement */
 std::shared_ptr<Bag<uml::ExpansionNode>> ExpansionRegionImpl::getInputElement() const
 {
 	if(m_inputElement == nullptr)
@@ -223,11 +212,7 @@ std::shared_ptr<Bag<uml::ExpansionNode>> ExpansionRegionImpl::getInputElement() 
     return m_inputElement;
 }
 
-
-
-/*
-Getter & Setter for reference outputElement
-*/
+/* Getter & Setter for reference outputElement */
 std::shared_ptr<Bag<uml::ExpansionNode>> ExpansionRegionImpl::getOutputElement() const
 {
 	if(m_outputElement == nullptr)
@@ -238,8 +223,6 @@ std::shared_ptr<Bag<uml::ExpansionNode>> ExpansionRegionImpl::getOutputElement()
 	}
     return m_outputElement;
 }
-
-
 
 //*********************************
 // Union Getter
@@ -399,18 +382,9 @@ std::shared_ptr<Union<uml::RedefinableElement>> ExpansionRegionImpl::getRedefine
 	return m_redefinedElement;
 }
 
-
-
-
-std::shared_ptr<ExpansionRegion> ExpansionRegionImpl::getThisExpansionRegionPtr() const
-{
-	return m_thisExpansionRegionPtr.lock();
-}
-void ExpansionRegionImpl::setThisExpansionRegionPtr(std::weak_ptr<ExpansionRegion> thisExpansionRegionPtr)
-{
-	m_thisExpansionRegionPtr = thisExpansionRegionPtr;
-	setThisStructuredActivityNodePtr(thisExpansionRegionPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> ExpansionRegionImpl::eContainer() const
 {
 	if(auto wp = m_activity.lock())
@@ -443,166 +417,6 @@ std::shared_ptr<ecore::EObject> ExpansionRegionImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any ExpansionRegionImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::EXPANSIONREGION_ATTRIBUTE_INPUTELEMENT:
-		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::ExpansionNode>::iterator iter = getInputElement()->begin();
-			Bag<uml::ExpansionNode>::iterator end = getInputElement()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //9446			
-		}
-		case uml::umlPackage::EXPANSIONREGION_ATTRIBUTE_MODE:
-			return eAny(getMode()); //9444
-		case uml::umlPackage::EXPANSIONREGION_ATTRIBUTE_OUTPUTELEMENT:
-		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::ExpansionNode>::iterator iter = getOutputElement()->begin();
-			Bag<uml::ExpansionNode>::iterator end = getOutputElement()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //9445			
-		}
-	}
-	return StructuredActivityNodeImpl::eGet(featureID, resolve, coreType);
-}
-bool ExpansionRegionImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::EXPANSIONREGION_ATTRIBUTE_INPUTELEMENT:
-			return getInputElement() != nullptr; //9446
-		case uml::umlPackage::EXPANSIONREGION_ATTRIBUTE_MODE:
-			return m_mode != ExpansionKind::ITERATIVE;; //9444
-		case uml::umlPackage::EXPANSIONREGION_ATTRIBUTE_OUTPUTELEMENT:
-			return getOutputElement() != nullptr; //9445
-	}
-	return StructuredActivityNodeImpl::internalEIsSet(featureID);
-}
-bool ExpansionRegionImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::EXPANSIONREGION_ATTRIBUTE_INPUTELEMENT:
-		{
-			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::ExpansionNode>> inputElementList(new Bag<uml::ExpansionNode>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
-			{
-				inputElementList->add(std::dynamic_pointer_cast<uml::ExpansionNode>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::ExpansionNode>::iterator iterInputElement = getInputElement()->begin();
-			Bag<uml::ExpansionNode>::iterator endInputElement = getInputElement()->end();
-			while (iterInputElement != endInputElement)
-			{
-				if (inputElementList->find(*iterInputElement) == -1)
-				{
-					getInputElement()->erase(*iterInputElement);
-				}
-				iterInputElement++;
-			}
- 
-			iterInputElement = inputElementList->begin();
-			endInputElement = inputElementList->end();
-			while (iterInputElement != endInputElement)
-			{
-				if (getInputElement()->find(*iterInputElement) == -1)
-				{
-					getInputElement()->add(*iterInputElement);
-				}
-				iterInputElement++;			
-			}
-			return true;
-		}
-		case uml::umlPackage::EXPANSIONREGION_ATTRIBUTE_MODE:
-		{
-			// BOOST CAST
-			uml::ExpansionKind _mode = newValue->get<uml::ExpansionKind>();
-			setMode(_mode); //9444
-			return true;
-		}
-		case uml::umlPackage::EXPANSIONREGION_ATTRIBUTE_OUTPUTELEMENT:
-		{
-			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::ExpansionNode>> outputElementList(new Bag<uml::ExpansionNode>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
-			{
-				outputElementList->add(std::dynamic_pointer_cast<uml::ExpansionNode>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::ExpansionNode>::iterator iterOutputElement = getOutputElement()->begin();
-			Bag<uml::ExpansionNode>::iterator endOutputElement = getOutputElement()->end();
-			while (iterOutputElement != endOutputElement)
-			{
-				if (outputElementList->find(*iterOutputElement) == -1)
-				{
-					getOutputElement()->erase(*iterOutputElement);
-				}
-				iterOutputElement++;
-			}
- 
-			iterOutputElement = outputElementList->begin();
-			endOutputElement = outputElementList->end();
-			while (iterOutputElement != endOutputElement)
-			{
-				if (getOutputElement()->find(*iterOutputElement) == -1)
-				{
-					getOutputElement()->add(*iterOutputElement);
-				}
-				iterOutputElement++;			
-			}
-			return true;
-		}
-	}
-
-	return StructuredActivityNodeImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any ExpansionRegionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-
-		default:
-		{
-			// call superTypes
-			result = StructuredActivityNodeImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -741,14 +555,6 @@ void ExpansionRegionImpl::save(std::shared_ptr<persistence::interfaces::XSaveHan
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
-	
-	
-	
-	
 }
 
 void ExpansionRegionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -785,3 +591,182 @@ void ExpansionRegionImpl::saveContent(std::shared_ptr<persistence::interfaces::X
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> ExpansionRegionImpl::eStaticClass() const
+{
+	return uml::umlPackage::eInstance()->getExpansionRegion_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any ExpansionRegionImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::EXPANSIONREGION_ATTRIBUTE_INPUTELEMENT:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::ExpansionNode>::iterator iter = getInputElement()->begin();
+			Bag<uml::ExpansionNode>::iterator end = getInputElement()->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //9446			
+		}
+		case uml::umlPackage::EXPANSIONREGION_ATTRIBUTE_MODE:
+			return eAny(getMode()); //9444
+		case uml::umlPackage::EXPANSIONREGION_ATTRIBUTE_OUTPUTELEMENT:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::ExpansionNode>::iterator iter = getOutputElement()->begin();
+			Bag<uml::ExpansionNode>::iterator end = getOutputElement()->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //9445			
+		}
+	}
+	return StructuredActivityNodeImpl::eGet(featureID, resolve, coreType);
+}
+
+bool ExpansionRegionImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::EXPANSIONREGION_ATTRIBUTE_INPUTELEMENT:
+			return getInputElement() != nullptr; //9446
+		case uml::umlPackage::EXPANSIONREGION_ATTRIBUTE_MODE:
+			return m_mode != ExpansionKind::ITERATIVE;; //9444
+		case uml::umlPackage::EXPANSIONREGION_ATTRIBUTE_OUTPUTELEMENT:
+			return getOutputElement() != nullptr; //9445
+	}
+	return StructuredActivityNodeImpl::internalEIsSet(featureID);
+}
+
+bool ExpansionRegionImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::EXPANSIONREGION_ATTRIBUTE_INPUTELEMENT:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::ExpansionNode>> inputElementList(new Bag<uml::ExpansionNode>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				inputElementList->add(std::dynamic_pointer_cast<uml::ExpansionNode>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::ExpansionNode>::iterator iterInputElement = getInputElement()->begin();
+			Bag<uml::ExpansionNode>::iterator endInputElement = getInputElement()->end();
+			while (iterInputElement != endInputElement)
+			{
+				if (inputElementList->find(*iterInputElement) == -1)
+				{
+					getInputElement()->erase(*iterInputElement);
+				}
+				iterInputElement++;
+			}
+ 
+			iterInputElement = inputElementList->begin();
+			endInputElement = inputElementList->end();
+			while (iterInputElement != endInputElement)
+			{
+				if (getInputElement()->find(*iterInputElement) == -1)
+				{
+					getInputElement()->add(*iterInputElement);
+				}
+				iterInputElement++;			
+			}
+			return true;
+		}
+		case uml::umlPackage::EXPANSIONREGION_ATTRIBUTE_MODE:
+		{
+			// BOOST CAST
+			uml::ExpansionKind _mode = newValue->get<uml::ExpansionKind>();
+			setMode(_mode); //9444
+			return true;
+		}
+		case uml::umlPackage::EXPANSIONREGION_ATTRIBUTE_OUTPUTELEMENT:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::ExpansionNode>> outputElementList(new Bag<uml::ExpansionNode>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				outputElementList->add(std::dynamic_pointer_cast<uml::ExpansionNode>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::ExpansionNode>::iterator iterOutputElement = getOutputElement()->begin();
+			Bag<uml::ExpansionNode>::iterator endOutputElement = getOutputElement()->end();
+			while (iterOutputElement != endOutputElement)
+			{
+				if (outputElementList->find(*iterOutputElement) == -1)
+				{
+					getOutputElement()->erase(*iterOutputElement);
+				}
+				iterOutputElement++;
+			}
+ 
+			iterOutputElement = outputElementList->begin();
+			endOutputElement = outputElementList->end();
+			while (iterOutputElement != endOutputElement)
+			{
+				if (getOutputElement()->find(*iterOutputElement) == -1)
+				{
+					getOutputElement()->add(*iterOutputElement);
+				}
+				iterOutputElement++;			
+			}
+			return true;
+		}
+	}
+
+	return StructuredActivityNodeImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any ExpansionRegionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+
+		default:
+		{
+			// call superTypes
+			result = StructuredActivityNodeImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<ExpansionRegion> ExpansionRegionImpl::getThisExpansionRegionPtr() const
+{
+	return m_thisExpansionRegionPtr.lock();
+}
+void ExpansionRegionImpl::setThisExpansionRegionPtr(std::weak_ptr<ExpansionRegion> thisExpansionRegionPtr)
+{
+	m_thisExpansionRegionPtr = thisExpansionRegionPtr;
+	setThisStructuredActivityNodePtr(thisExpansionRegionPtr);
+}

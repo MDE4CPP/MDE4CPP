@@ -1,3 +1,4 @@
+
 #include "ocl/Values/impl/BagTypeValueImpl.hpp"
 
 #ifdef NDEBUG
@@ -25,7 +26,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -34,7 +34,6 @@
 #include <exception> // used in Persistence
 #include "ocl/Values/ValuesFactory.hpp"
 #include "ocl/Types/TypesFactory.hpp"
-
 
 #include "ocl/Types/CollectionType.hpp"
 #include "ocl/Values/CollectionValue.hpp"
@@ -110,15 +109,6 @@ std::shared_ptr<ecore::EObject> BagTypeValueImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> BagTypeValueImpl::eStaticClass() const
-{
-	return ocl::Values::ValuesPackage::eInstance()->getBagTypeValue_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
@@ -136,88 +126,23 @@ return true;
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
+//*********************************
+
+//*********************************
+// Reference Getters & Setters
 //*********************************
 
 //*********************************
 // Union Getter
 //*********************************
 
-
-
-std::shared_ptr<BagTypeValue> BagTypeValueImpl::getThisBagTypeValuePtr() const
-{
-	return m_thisBagTypeValuePtr.lock();
-}
-void BagTypeValueImpl::setThisBagTypeValuePtr(std::weak_ptr<BagTypeValue> thisBagTypeValuePtr)
-{
-	m_thisBagTypeValuePtr = thisBagTypeValuePtr;
-	setThisCollectionValuePtr(thisBagTypeValuePtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> BagTypeValueImpl::eContainer() const
 {
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any BagTypeValueImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-	}
-	return CollectionValueImpl::eGet(featureID, resolve, coreType);
-}
-bool BagTypeValueImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-	}
-	return CollectionValueImpl::internalEIsSet(featureID);
-}
-bool BagTypeValueImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-	}
-
-	return CollectionValueImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any BagTypeValueImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-		
-		// 794069208
-		case ValuesPackage::BAGTYPEVALUE_OPERATION_ADDVALUE_VALUE:
-		{
-			//Retrieve input parameter 'value'
-			//parameter 0
-			std::shared_ptr<fUML::Semantics::Values::Value> incoming_param_value;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_value_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_value = (*incoming_param_value_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::Values::Value> >();
-			result = eAny(this->addValue(incoming_param_value));
-			break;
-		}
-
-		default:
-		{
-			// call superTypes
-			result = CollectionValueImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -270,10 +195,6 @@ void BagTypeValueImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandle
 	fUML::Semantics::Loci::SemanticVisitorImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
 }
 
 void BagTypeValueImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -288,3 +209,83 @@ void BagTypeValueImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> BagTypeValueImpl::eStaticClass() const
+{
+	return ocl::Values::ValuesPackage::eInstance()->getBagTypeValue_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any BagTypeValueImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+	}
+	return CollectionValueImpl::eGet(featureID, resolve, coreType);
+}
+
+bool BagTypeValueImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+	}
+	return CollectionValueImpl::internalEIsSet(featureID);
+}
+
+bool BagTypeValueImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+	}
+
+	return CollectionValueImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any BagTypeValueImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 794069208
+		case ValuesPackage::BAGTYPEVALUE_OPERATION_ADDVALUE_VALUE:
+		{
+			//Retrieve input parameter 'value'
+			//parameter 0
+			std::shared_ptr<fUML::Semantics::Values::Value> incoming_param_value;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_value_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_value = (*incoming_param_value_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::Values::Value> >();
+			result = eAny(this->addValue(incoming_param_value));
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = CollectionValueImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<BagTypeValue> BagTypeValueImpl::getThisBagTypeValuePtr() const
+{
+	return m_thisBagTypeValuePtr.lock();
+}
+void BagTypeValueImpl::setThisBagTypeValuePtr(std::weak_ptr<BagTypeValue> thisBagTypeValuePtr)
+{
+	m_thisBagTypeValuePtr = thisBagTypeValuePtr;
+	setThisCollectionValuePtr(thisBagTypeValuePtr);
+}

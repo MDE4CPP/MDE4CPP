@@ -1,3 +1,4 @@
+
 #include "ocl/Evaluations/impl/VariableDeclEvalImpl.hpp"
 
 #ifdef NDEBUG
@@ -24,16 +25,14 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
-
+#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
 
 #include "ocl/Evaluations/OclExpEval.hpp"
 #include "fUML/Semantics/SimpleClassifiers/StringValue.hpp"
@@ -108,25 +107,18 @@ std::shared_ptr<ecore::EObject> VariableDeclEvalImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> VariableDeclEvalImpl::eStaticClass() const
-{
-	return ocl::Evaluations::EvaluationsPackage::eInstance()->getVariableDeclEval_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference initExp
-*/
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference initExp */
 std::shared_ptr<ocl::Evaluations::OclExpEval> VariableDeclEvalImpl::getInitExp() const
 {
     return m_initExp;
@@ -137,10 +129,7 @@ void VariableDeclEvalImpl::setInitExp(std::shared_ptr<ocl::Evaluations::OclExpEv
 	
 }
 
-
-/*
-Getter & Setter for reference name
-*/
+/* Getter & Setter for reference name */
 std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> VariableDeclEvalImpl::getName() const
 {
     return m_name;
@@ -151,103 +140,16 @@ void VariableDeclEvalImpl::setName(std::shared_ptr<fUML::Semantics::SimpleClassi
 	
 }
 
-
 //*********************************
 // Union Getter
 //*********************************
 
-
-
-std::shared_ptr<VariableDeclEval> VariableDeclEvalImpl::getThisVariableDeclEvalPtr() const
-{
-	return m_thisVariableDeclEvalPtr.lock();
-}
-void VariableDeclEvalImpl::setThisVariableDeclEvalPtr(std::weak_ptr<VariableDeclEval> thisVariableDeclEvalPtr)
-{
-	m_thisVariableDeclEvalPtr = thisVariableDeclEvalPtr;
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> VariableDeclEvalImpl::eContainer() const
 {
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any VariableDeclEvalImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case ocl::Evaluations::EvaluationsPackage::VARIABLEDECLEVAL_ATTRIBUTE_INITEXP:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getInitExp();
-				return eAny(returnValue); //970
-			}
-		case ocl::Evaluations::EvaluationsPackage::VARIABLEDECLEVAL_ATTRIBUTE_NAME:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getName();
-				return eAny(returnValue); //971
-			}
-	}
-	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
-}
-bool VariableDeclEvalImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case ocl::Evaluations::EvaluationsPackage::VARIABLEDECLEVAL_ATTRIBUTE_INITEXP:
-			return getInitExp() != nullptr; //970
-		case ocl::Evaluations::EvaluationsPackage::VARIABLEDECLEVAL_ATTRIBUTE_NAME:
-			return getName() != nullptr; //971
-	}
-	return ecore::EObjectImpl::internalEIsSet(featureID);
-}
-bool VariableDeclEvalImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case ocl::Evaluations::EvaluationsPackage::VARIABLEDECLEVAL_ATTRIBUTE_INITEXP:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<ocl::Evaluations::OclExpEval> _initExp = std::dynamic_pointer_cast<ocl::Evaluations::OclExpEval>(_temp);
-			setInitExp(_initExp); //970
-			return true;
-		}
-		case ocl::Evaluations::EvaluationsPackage::VARIABLEDECLEVAL_ATTRIBUTE_NAME:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> _name = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::StringValue>(_temp);
-			setName(_name); //971
-			return true;
-		}
-	}
-
-	return ecore::EObjectImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any VariableDeclEvalImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-
-		default:
-		{
-			// call superTypes
-			result = ecore::EModelElementImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -342,9 +244,7 @@ void VariableDeclEvalImpl::save(std::shared_ptr<persistence::interfaces::XSaveHa
 {
 	saveContent(saveHandler);
 
-	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
 }
 
 void VariableDeclEvalImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -362,3 +262,100 @@ void VariableDeclEvalImpl::saveContent(std::shared_ptr<persistence::interfaces::
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> VariableDeclEvalImpl::eStaticClass() const
+{
+	return ocl::Evaluations::EvaluationsPackage::eInstance()->getVariableDeclEval_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any VariableDeclEvalImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case ocl::Evaluations::EvaluationsPackage::VARIABLEDECLEVAL_ATTRIBUTE_INITEXP:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getInitExp();
+				return eAny(returnValue); //970
+			}
+		case ocl::Evaluations::EvaluationsPackage::VARIABLEDECLEVAL_ATTRIBUTE_NAME:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getName();
+				return eAny(returnValue); //971
+			}
+	}
+	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
+}
+
+bool VariableDeclEvalImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case ocl::Evaluations::EvaluationsPackage::VARIABLEDECLEVAL_ATTRIBUTE_INITEXP:
+			return getInitExp() != nullptr; //970
+		case ocl::Evaluations::EvaluationsPackage::VARIABLEDECLEVAL_ATTRIBUTE_NAME:
+			return getName() != nullptr; //971
+	}
+	return ecore::EObjectImpl::internalEIsSet(featureID);
+}
+
+bool VariableDeclEvalImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case ocl::Evaluations::EvaluationsPackage::VARIABLEDECLEVAL_ATTRIBUTE_INITEXP:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<ocl::Evaluations::OclExpEval> _initExp = std::dynamic_pointer_cast<ocl::Evaluations::OclExpEval>(_temp);
+			setInitExp(_initExp); //970
+			return true;
+		}
+		case ocl::Evaluations::EvaluationsPackage::VARIABLEDECLEVAL_ATTRIBUTE_NAME:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> _name = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::StringValue>(_temp);
+			setName(_name); //971
+			return true;
+		}
+	}
+
+	return ecore::EObjectImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any VariableDeclEvalImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+
+		default:
+		{
+			// call superTypes
+			result = ecore::EModelElementImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<VariableDeclEval> VariableDeclEvalImpl::getThisVariableDeclEvalPtr() const
+{
+	return m_thisVariableDeclEvalPtr.lock();
+}
+void VariableDeclEvalImpl::setThisVariableDeclEvalPtr(std::weak_ptr<VariableDeclEval> thisVariableDeclEvalPtr)
+{
+	m_thisVariableDeclEvalPtr = thisVariableDeclEvalPtr;
+}

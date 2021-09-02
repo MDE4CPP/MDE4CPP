@@ -1,3 +1,4 @@
+
 #include "fUML/Semantics/Activities/impl/TokenSetImpl.hpp"
 
 #ifdef NDEBUG
@@ -25,7 +26,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -33,7 +33,6 @@
 
 #include <exception> // used in Persistence
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
-
 
 #include "fUML/Semantics/Activities/Token.hpp"
 
@@ -106,25 +105,18 @@ std::shared_ptr<ecore::EObject> TokenSetImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> TokenSetImpl::eStaticClass() const
-{
-	return fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getTokenSet_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference tokens
-*/
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference tokens */
 std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> TokenSetImpl::getTokens() const
 {
 	if(m_tokens == nullptr)
@@ -136,124 +128,16 @@ std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> TokenSetImpl::getTokens
     return m_tokens;
 }
 
-
-
 //*********************************
 // Union Getter
 //*********************************
 
-
-
-std::shared_ptr<TokenSet> TokenSetImpl::getThisTokenSetPtr() const
-{
-	return m_thisTokenSetPtr.lock();
-}
-void TokenSetImpl::setThisTokenSetPtr(std::weak_ptr<TokenSet> thisTokenSetPtr)
-{
-	m_thisTokenSetPtr = thisTokenSetPtr;
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> TokenSetImpl::eContainer() const
 {
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any TokenSetImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case fUML::Semantics::Activities::ActivitiesPackage::TOKENSET_ATTRIBUTE_TOKENS:
-		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<fUML::Semantics::Activities::Token>::iterator iter = getTokens()->begin();
-			Bag<fUML::Semantics::Activities::Token>::iterator end = getTokens()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //1160			
-		}
-	}
-	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
-}
-bool TokenSetImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case fUML::Semantics::Activities::ActivitiesPackage::TOKENSET_ATTRIBUTE_TOKENS:
-			return getTokens() != nullptr; //1160
-	}
-	return ecore::EObjectImpl::internalEIsSet(featureID);
-}
-bool TokenSetImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case fUML::Semantics::Activities::ActivitiesPackage::TOKENSET_ATTRIBUTE_TOKENS:
-		{
-			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> tokensList(new Bag<fUML::Semantics::Activities::Token>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
-			{
-				tokensList->add(std::dynamic_pointer_cast<fUML::Semantics::Activities::Token>(*iter));
-				iter++;
-			}
-			
-			Bag<fUML::Semantics::Activities::Token>::iterator iterTokens = getTokens()->begin();
-			Bag<fUML::Semantics::Activities::Token>::iterator endTokens = getTokens()->end();
-			while (iterTokens != endTokens)
-			{
-				if (tokensList->find(*iterTokens) == -1)
-				{
-					getTokens()->erase(*iterTokens);
-				}
-				iterTokens++;
-			}
- 
-			iterTokens = tokensList->begin();
-			endTokens = tokensList->end();
-			while (iterTokens != endTokens)
-			{
-				if (getTokens()->find(*iterTokens) == -1)
-				{
-					getTokens()->add(*iterTokens);
-				}
-				iterTokens++;			
-			}
-			return true;
-		}
-	}
-
-	return ecore::EObjectImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any TokenSetImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-
-		default:
-		{
-			// call superTypes
-			result = ecore::EModelElementImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -331,9 +215,7 @@ void TokenSetImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> s
 {
 	saveContent(saveHandler);
 
-	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
 }
 
 void TokenSetImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -350,3 +232,120 @@ void TokenSetImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> TokenSetImpl::eStaticClass() const
+{
+	return fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getTokenSet_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any TokenSetImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case fUML::Semantics::Activities::ActivitiesPackage::TOKENSET_ATTRIBUTE_TOKENS:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<fUML::Semantics::Activities::Token>::iterator iter = getTokens()->begin();
+			Bag<fUML::Semantics::Activities::Token>::iterator end = getTokens()->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //1160			
+		}
+	}
+	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
+}
+
+bool TokenSetImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case fUML::Semantics::Activities::ActivitiesPackage::TOKENSET_ATTRIBUTE_TOKENS:
+			return getTokens() != nullptr; //1160
+	}
+	return ecore::EObjectImpl::internalEIsSet(featureID);
+}
+
+bool TokenSetImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case fUML::Semantics::Activities::ActivitiesPackage::TOKENSET_ATTRIBUTE_TOKENS:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> tokensList(new Bag<fUML::Semantics::Activities::Token>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				tokensList->add(std::dynamic_pointer_cast<fUML::Semantics::Activities::Token>(*iter));
+				iter++;
+			}
+			
+			Bag<fUML::Semantics::Activities::Token>::iterator iterTokens = getTokens()->begin();
+			Bag<fUML::Semantics::Activities::Token>::iterator endTokens = getTokens()->end();
+			while (iterTokens != endTokens)
+			{
+				if (tokensList->find(*iterTokens) == -1)
+				{
+					getTokens()->erase(*iterTokens);
+				}
+				iterTokens++;
+			}
+ 
+			iterTokens = tokensList->begin();
+			endTokens = tokensList->end();
+			while (iterTokens != endTokens)
+			{
+				if (getTokens()->find(*iterTokens) == -1)
+				{
+					getTokens()->add(*iterTokens);
+				}
+				iterTokens++;			
+			}
+			return true;
+		}
+	}
+
+	return ecore::EObjectImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any TokenSetImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+
+		default:
+		{
+			// call superTypes
+			result = ecore::EModelElementImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<TokenSet> TokenSetImpl::getThisTokenSetPtr() const
+{
+	return m_thisTokenSetPtr.lock();
+}
+void TokenSetImpl::setThisTokenSetPtr(std::weak_ptr<TokenSet> thisTokenSetPtr)
+{
+	m_thisTokenSetPtr = thisTokenSetPtr;
+}

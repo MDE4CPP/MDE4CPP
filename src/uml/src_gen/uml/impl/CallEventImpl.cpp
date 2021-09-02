@@ -1,3 +1,4 @@
+
 #include "uml/impl/CallEventImpl.hpp"
 
 #ifdef NDEBUG
@@ -25,7 +26,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -33,7 +33,6 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-
 
 #include "uml/Comment.hpp"
 #include "uml/Dependency.hpp"
@@ -142,25 +141,18 @@ std::shared_ptr<ecore::EObject> CallEventImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> CallEventImpl::eStaticClass() const
-{
-	return uml::umlPackage::eInstance()->getCallEvent_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference operation
-*/
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference operation */
 std::shared_ptr<uml::Operation> CallEventImpl::getOperation() const
 {
     return m_operation;
@@ -170,7 +162,6 @@ void CallEventImpl::setOperation(std::shared_ptr<uml::Operation> _operation)
     m_operation = _operation;
 	
 }
-
 
 //*********************************
 // Union Getter
@@ -202,16 +193,9 @@ std::weak_ptr<uml::Element> CallEventImpl::getOwner() const
 
 
 
-
-std::shared_ptr<CallEvent> CallEventImpl::getThisCallEventPtr() const
-{
-	return m_thisCallEventPtr.lock();
-}
-void CallEventImpl::setThisCallEventPtr(std::weak_ptr<CallEvent> thisCallEventPtr)
-{
-	m_thisCallEventPtr = thisCallEventPtr;
-	setThisMessageEventPtr(thisCallEventPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> CallEventImpl::eContainer() const
 {
 	if(auto wp = m_namespace.lock())
@@ -234,70 +218,6 @@ std::shared_ptr<ecore::EObject> CallEventImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any CallEventImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::CALLEVENT_ATTRIBUTE_OPERATION:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getOperation();
-				return eAny(returnValue); //3112
-			}
-	}
-	return MessageEventImpl::eGet(featureID, resolve, coreType);
-}
-bool CallEventImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::CALLEVENT_ATTRIBUTE_OPERATION:
-			return getOperation() != nullptr; //3112
-	}
-	return MessageEventImpl::internalEIsSet(featureID);
-}
-bool CallEventImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::CALLEVENT_ATTRIBUTE_OPERATION:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::Operation> _operation = std::dynamic_pointer_cast<uml::Operation>(_temp);
-			setOperation(_operation); //3112
-			return true;
-		}
-	}
-
-	return MessageEventImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any CallEventImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-
-		default:
-		{
-			// call superTypes
-			result = MessageEventImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -388,12 +308,6 @@ void CallEventImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> 
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
-	
-	
 }
 
 void CallEventImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -410,3 +324,86 @@ void CallEventImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHa
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> CallEventImpl::eStaticClass() const
+{
+	return uml::umlPackage::eInstance()->getCallEvent_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any CallEventImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::CALLEVENT_ATTRIBUTE_OPERATION:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getOperation();
+				return eAny(returnValue); //3112
+			}
+	}
+	return MessageEventImpl::eGet(featureID, resolve, coreType);
+}
+
+bool CallEventImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::CALLEVENT_ATTRIBUTE_OPERATION:
+			return getOperation() != nullptr; //3112
+	}
+	return MessageEventImpl::internalEIsSet(featureID);
+}
+
+bool CallEventImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::CALLEVENT_ATTRIBUTE_OPERATION:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::Operation> _operation = std::dynamic_pointer_cast<uml::Operation>(_temp);
+			setOperation(_operation); //3112
+			return true;
+		}
+	}
+
+	return MessageEventImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any CallEventImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+
+		default:
+		{
+			// call superTypes
+			result = MessageEventImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<CallEvent> CallEventImpl::getThisCallEventPtr() const
+{
+	return m_thisCallEventPtr.lock();
+}
+void CallEventImpl::setThisCallEventPtr(std::weak_ptr<CallEvent> thisCallEventPtr)
+{
+	m_thisCallEventPtr = thisCallEventPtr;
+	setThisMessageEventPtr(thisCallEventPtr);
+}

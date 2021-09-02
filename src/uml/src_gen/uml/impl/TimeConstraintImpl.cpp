@@ -1,3 +1,4 @@
+
 #include "uml/impl/TimeConstraintImpl.hpp"
 
 #ifdef NDEBUG
@@ -26,7 +27,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -34,7 +34,6 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-
 
 #include "uml/Comment.hpp"
 #include "uml/Dependency.hpp"
@@ -156,28 +155,6 @@ std::shared_ptr<ecore::EObject> TimeConstraintImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> TimeConstraintImpl::eStaticClass() const
-{
-	return uml::umlPackage::eInstance()->getTimeConstraint_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-/*
-Getter & Setter for attribute firstEvent
-*/
-bool TimeConstraintImpl::getFirstEvent() const 
-{
-	return m_firstEvent;
-}
-void TimeConstraintImpl::setFirstEvent(bool _firstEvent)
-{
-	m_firstEvent = _firstEvent;
-	
-} 
-
-
 //*********************************
 // Operations
 //*********************************
@@ -188,7 +165,21 @@ bool TimeConstraintImpl::has_one_constrainedElement(Any diagnostics,std::shared_
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
+//*********************************
+/* Getter & Setter for attribute firstEvent */
+bool TimeConstraintImpl::getFirstEvent() const 
+{
+	return m_firstEvent;
+}
+void TimeConstraintImpl::setFirstEvent(bool _firstEvent)
+{
+	m_firstEvent = _firstEvent;
+	
+}
+
+//*********************************
+// Reference Getters & Setters
 //*********************************
 
 //*********************************
@@ -221,16 +212,9 @@ std::weak_ptr<uml::Element> TimeConstraintImpl::getOwner() const
 
 
 
-
-std::shared_ptr<TimeConstraint> TimeConstraintImpl::getThisTimeConstraintPtr() const
-{
-	return m_thisTimeConstraintPtr.lock();
-}
-void TimeConstraintImpl::setThisTimeConstraintPtr(std::weak_ptr<TimeConstraint> thisTimeConstraintPtr)
-{
-	m_thisTimeConstraintPtr = thisTimeConstraintPtr;
-	setThisIntervalConstraintPtr(thisTimeConstraintPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> TimeConstraintImpl::eContainer() const
 {
 	if(auto wp = m_context.lock())
@@ -258,83 +242,6 @@ std::shared_ptr<ecore::EObject> TimeConstraintImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any TimeConstraintImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::TIMECONSTRAINT_ATTRIBUTE_FIRSTEVENT:
-			return eAny(getFirstEvent()); //23615
-	}
-	return IntervalConstraintImpl::eGet(featureID, resolve, coreType);
-}
-bool TimeConstraintImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::TIMECONSTRAINT_ATTRIBUTE_FIRSTEVENT:
-			return getFirstEvent() != true; //23615
-	}
-	return IntervalConstraintImpl::internalEIsSet(featureID);
-}
-bool TimeConstraintImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::TIMECONSTRAINT_ATTRIBUTE_FIRSTEVENT:
-		{
-			// BOOST CAST
-			bool _firstEvent = newValue->get<bool>();
-			setFirstEvent(_firstEvent); //23615
-			return true;
-		}
-	}
-
-	return IntervalConstraintImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any TimeConstraintImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-		
-		// 161108299
-		case umlPackage::TIMECONSTRAINT_OPERATION_HAS_ONE_CONSTRAINEDELEMENT_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->has_one_constrainedElement(incoming_param_diagnostics,incoming_param_context));
-			break;
-		}
-
-		default:
-		{
-			// call superTypes
-			result = IntervalConstraintImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -413,12 +320,6 @@ void TimeConstraintImpl::save(std::shared_ptr<persistence::interfaces::XSaveHand
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
-	
-	
 }
 
 void TimeConstraintImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -438,3 +339,99 @@ void TimeConstraintImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> TimeConstraintImpl::eStaticClass() const
+{
+	return uml::umlPackage::eInstance()->getTimeConstraint_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any TimeConstraintImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::TIMECONSTRAINT_ATTRIBUTE_FIRSTEVENT:
+			return eAny(getFirstEvent()); //23615
+	}
+	return IntervalConstraintImpl::eGet(featureID, resolve, coreType);
+}
+
+bool TimeConstraintImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::TIMECONSTRAINT_ATTRIBUTE_FIRSTEVENT:
+			return getFirstEvent() != true; //23615
+	}
+	return IntervalConstraintImpl::internalEIsSet(featureID);
+}
+
+bool TimeConstraintImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::TIMECONSTRAINT_ATTRIBUTE_FIRSTEVENT:
+		{
+			// BOOST CAST
+			bool _firstEvent = newValue->get<bool>();
+			setFirstEvent(_firstEvent); //23615
+			return true;
+		}
+	}
+
+	return IntervalConstraintImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any TimeConstraintImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 161108299
+		case umlPackage::TIMECONSTRAINT_OPERATION_HAS_ONE_CONSTRAINEDELEMENT_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->has_one_constrainedElement(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = IntervalConstraintImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<TimeConstraint> TimeConstraintImpl::getThisTimeConstraintPtr() const
+{
+	return m_thisTimeConstraintPtr.lock();
+}
+void TimeConstraintImpl::setThisTimeConstraintPtr(std::weak_ptr<TimeConstraint> thisTimeConstraintPtr)
+{
+	m_thisTimeConstraintPtr = thisTimeConstraintPtr;
+	setThisIntervalConstraintPtr(thisTimeConstraintPtr);
+}

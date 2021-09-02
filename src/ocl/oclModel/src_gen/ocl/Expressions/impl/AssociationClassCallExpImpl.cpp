@@ -1,3 +1,4 @@
+
 #include "ocl/Expressions/impl/AssociationClassCallExpImpl.hpp"
 
 #ifdef NDEBUG
@@ -25,7 +26,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -35,7 +35,6 @@
 #include "ecore/ecoreFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
-
 
 #include "ocl/Expressions/CallExp.hpp"
 #include "ocl/Expressions/CollectionRange.hpp"
@@ -206,25 +205,18 @@ std::shared_ptr<ecore::EObject> AssociationClassCallExpImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> AssociationClassCallExpImpl::eStaticClass() const
-{
-	return ocl::Expressions::ExpressionsPackage::eInstance()->getAssociationClassCallExp_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference referredAssociationClass
-*/
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference referredAssociationClass */
 std::shared_ptr<ecore::EReference> AssociationClassCallExpImpl::getReferredAssociationClass() const
 {
     return m_referredAssociationClass;
@@ -235,22 +227,13 @@ void AssociationClassCallExpImpl::setReferredAssociationClass(std::shared_ptr<ec
 	
 }
 
-
 //*********************************
 // Union Getter
 //*********************************
 
-
-
-std::shared_ptr<AssociationClassCallExp> AssociationClassCallExpImpl::getThisAssociationClassCallExpPtr() const
-{
-	return m_thisAssociationClassCallExpPtr.lock();
-}
-void AssociationClassCallExpImpl::setThisAssociationClassCallExpPtr(std::weak_ptr<AssociationClassCallExp> thisAssociationClassCallExpPtr)
-{
-	m_thisAssociationClassCallExpPtr = thisAssociationClassCallExpPtr;
-	setThisNavigationCallExpPtr(thisAssociationClassCallExpPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> AssociationClassCallExpImpl::eContainer() const
 {
 	if(auto wp = m_appliedElement.lock())
@@ -308,70 +291,6 @@ std::shared_ptr<ecore::EObject> AssociationClassCallExpImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any AssociationClassCallExpImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case ocl::Expressions::ExpressionsPackage::ASSOCIATIONCLASSCALLEXP_ATTRIBUTE_REFERREDASSOCIATIONCLASS:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getReferredAssociationClass();
-				return eAny(returnValue); //226
-			}
-	}
-	return NavigationCallExpImpl::eGet(featureID, resolve, coreType);
-}
-bool AssociationClassCallExpImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case ocl::Expressions::ExpressionsPackage::ASSOCIATIONCLASSCALLEXP_ATTRIBUTE_REFERREDASSOCIATIONCLASS:
-			return getReferredAssociationClass() != nullptr; //226
-	}
-	return NavigationCallExpImpl::internalEIsSet(featureID);
-}
-bool AssociationClassCallExpImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case ocl::Expressions::ExpressionsPackage::ASSOCIATIONCLASSCALLEXP_ATTRIBUTE_REFERREDASSOCIATIONCLASS:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<ecore::EReference> _referredAssociationClass = std::dynamic_pointer_cast<ecore::EReference>(_temp);
-			setReferredAssociationClass(_referredAssociationClass); //226
-			return true;
-		}
-	}
-
-	return NavigationCallExpImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any AssociationClassCallExpImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-
-		default:
-		{
-			// call superTypes
-			result = NavigationCallExpImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -463,13 +382,6 @@ void AssociationClassCallExpImpl::save(std::shared_ptr<persistence::interfaces::
 	ecore::EModelElementImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
-	
-	
-	
 }
 
 void AssociationClassCallExpImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -486,3 +398,86 @@ void AssociationClassCallExpImpl::saveContent(std::shared_ptr<persistence::inter
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> AssociationClassCallExpImpl::eStaticClass() const
+{
+	return ocl::Expressions::ExpressionsPackage::eInstance()->getAssociationClassCallExp_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any AssociationClassCallExpImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case ocl::Expressions::ExpressionsPackage::ASSOCIATIONCLASSCALLEXP_ATTRIBUTE_REFERREDASSOCIATIONCLASS:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getReferredAssociationClass();
+				return eAny(returnValue); //226
+			}
+	}
+	return NavigationCallExpImpl::eGet(featureID, resolve, coreType);
+}
+
+bool AssociationClassCallExpImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case ocl::Expressions::ExpressionsPackage::ASSOCIATIONCLASSCALLEXP_ATTRIBUTE_REFERREDASSOCIATIONCLASS:
+			return getReferredAssociationClass() != nullptr; //226
+	}
+	return NavigationCallExpImpl::internalEIsSet(featureID);
+}
+
+bool AssociationClassCallExpImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case ocl::Expressions::ExpressionsPackage::ASSOCIATIONCLASSCALLEXP_ATTRIBUTE_REFERREDASSOCIATIONCLASS:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<ecore::EReference> _referredAssociationClass = std::dynamic_pointer_cast<ecore::EReference>(_temp);
+			setReferredAssociationClass(_referredAssociationClass); //226
+			return true;
+		}
+	}
+
+	return NavigationCallExpImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any AssociationClassCallExpImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+
+		default:
+		{
+			// call superTypes
+			result = NavigationCallExpImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<AssociationClassCallExp> AssociationClassCallExpImpl::getThisAssociationClassCallExpPtr() const
+{
+	return m_thisAssociationClassCallExpPtr.lock();
+}
+void AssociationClassCallExpImpl::setThisAssociationClassCallExpPtr(std::weak_ptr<AssociationClassCallExp> thisAssociationClassCallExpPtr)
+{
+	m_thisAssociationClassCallExpPtr = thisAssociationClassCallExpPtr;
+	setThisNavigationCallExpPtr(thisAssociationClassCallExpPtr);
+}

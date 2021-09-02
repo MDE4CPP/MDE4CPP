@@ -1,3 +1,4 @@
+
 #include "ocl/Types/impl/InvalidTypeImpl.hpp"
 
 #ifdef NDEBUG
@@ -25,7 +26,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -33,7 +33,6 @@
 
 #include <exception> // used in Persistence
 #include "ecore/ecoreFactory.hpp"
-
 
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClassifier.hpp"
@@ -114,38 +113,25 @@ std::shared_ptr<ecore::EObject> InvalidTypeImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> InvalidTypeImpl::eStaticClass() const
-{
-	return ocl::Types::TypesPackage::eInstance()->getInvalidType_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
 
 //*********************************
-// References
+// Attribute Getters & Setters
+//*********************************
+
+//*********************************
+// Reference Getters & Setters
 //*********************************
 
 //*********************************
 // Union Getter
 //*********************************
 
-
-
-std::shared_ptr<InvalidType> InvalidTypeImpl::getThisInvalidTypePtr() const
-{
-	return m_thisInvalidTypePtr.lock();
-}
-void InvalidTypeImpl::setThisInvalidTypePtr(std::weak_ptr<InvalidType> thisInvalidTypePtr)
-{
-	m_thisInvalidTypePtr = thisInvalidTypePtr;
-	setThisEClassifierPtr(thisInvalidTypePtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> InvalidTypeImpl::eContainer() const
 {
 	if(auto wp = m_ePackage.lock())
@@ -153,55 +139,6 @@ std::shared_ptr<ecore::EObject> InvalidTypeImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any InvalidTypeImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-	}
-	return ecore::EClassifierImpl::eGet(featureID, resolve, coreType);
-}
-bool InvalidTypeImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-	}
-	return ecore::EClassifierImpl::internalEIsSet(featureID);
-}
-bool InvalidTypeImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-	}
-
-	return ecore::EClassifierImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any InvalidTypeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-
-		default:
-		{
-			// call superTypes
-			result = ecore::EClassifierImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -252,9 +189,6 @@ void InvalidTypeImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler
 	ecore::EModelElementImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
 }
 
 void InvalidTypeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -269,3 +203,71 @@ void InvalidTypeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> InvalidTypeImpl::eStaticClass() const
+{
+	return ocl::Types::TypesPackage::eInstance()->getInvalidType_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any InvalidTypeImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+	}
+	return ecore::EClassifierImpl::eGet(featureID, resolve, coreType);
+}
+
+bool InvalidTypeImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+	}
+	return ecore::EClassifierImpl::internalEIsSet(featureID);
+}
+
+bool InvalidTypeImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+	}
+
+	return ecore::EClassifierImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any InvalidTypeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+
+		default:
+		{
+			// call superTypes
+			result = ecore::EClassifierImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<InvalidType> InvalidTypeImpl::getThisInvalidTypePtr() const
+{
+	return m_thisInvalidTypePtr.lock();
+}
+void InvalidTypeImpl::setThisInvalidTypePtr(std::weak_ptr<InvalidType> thisInvalidTypePtr)
+{
+	m_thisInvalidTypePtr = thisInvalidTypePtr;
+	setThisEClassifierPtr(thisInvalidTypePtr);
+}

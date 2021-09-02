@@ -1,3 +1,4 @@
+
 #include "uml/impl/StringExpressionImpl.hpp"
 
 #ifdef NDEBUG
@@ -26,7 +27,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -34,7 +34,6 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-
 
 #include "uml/Comment.hpp"
 #include "uml/Dependency.hpp"
@@ -210,15 +209,6 @@ std::shared_ptr<ecore::EObject> StringExpressionImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> StringExpressionImpl::eStaticClass() const
-{
-	return uml::umlPackage::eInstance()->getStringExpression_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
@@ -235,11 +225,13 @@ bool StringExpressionImpl::subexpressions(Any diagnostics,std::shared_ptr<std::m
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference owningExpression
-*/
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference owningExpression */
 std::weak_ptr<uml::StringExpression> StringExpressionImpl::getOwningExpression() const
 {
     return m_owningExpression;
@@ -250,10 +242,7 @@ void StringExpressionImpl::setOwningExpression(std::weak_ptr<uml::StringExpressi
 	
 }
 
-
-/*
-Getter & Setter for reference subExpression
-*/
+/* Getter & Setter for reference subExpression */
 std::shared_ptr<Subset<uml::StringExpression, uml::Element>> StringExpressionImpl::getSubExpression() const
 {
 	if(m_subExpression == nullptr)
@@ -273,8 +262,6 @@ std::shared_ptr<Subset<uml::StringExpression, uml::Element>> StringExpressionImp
 	}
     return m_subExpression;
 }
-
-
 
 //*********************************
 // Union Getter
@@ -306,17 +293,9 @@ std::weak_ptr<uml::Element> StringExpressionImpl::getOwner() const
 
 
 
-
-std::shared_ptr<StringExpression> StringExpressionImpl::getThisStringExpressionPtr() const
-{
-	return m_thisStringExpressionPtr.lock();
-}
-void StringExpressionImpl::setThisStringExpressionPtr(std::weak_ptr<StringExpression> thisStringExpressionPtr)
-{
-	m_thisStringExpressionPtr = thisStringExpressionPtr;
-	setThisExpressionPtr(thisStringExpressionPtr);
-	setThisTemplateableElementPtr(thisStringExpressionPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> StringExpressionImpl::eContainer() const
 {
 	if(auto wp = m_namespace.lock())
@@ -354,178 +333,6 @@ std::shared_ptr<ecore::EObject> StringExpressionImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any StringExpressionImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::STRINGEXPRESSION_ATTRIBUTE_OWNINGEXPRESSION:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getOwningExpression().lock();
-				return eAny(returnValue); //22419
-			}
-		case uml::umlPackage::STRINGEXPRESSION_ATTRIBUTE_SUBEXPRESSION:
-		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::StringExpression>::iterator iter = getSubExpression()->begin();
-			Bag<uml::StringExpression>::iterator end = getSubExpression()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //22420			
-		}
-	}
-	Any result;
-	result = ExpressionImpl::eGet(featureID, resolve, coreType);
-	if (result != nullptr && !result->isEmpty())
-	{
-		return result;
-	}
-	result = TemplateableElementImpl::eGet(featureID, resolve, coreType);
-	return result;
-}
-bool StringExpressionImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::STRINGEXPRESSION_ATTRIBUTE_OWNINGEXPRESSION:
-			return getOwningExpression().lock() != nullptr; //22419
-		case uml::umlPackage::STRINGEXPRESSION_ATTRIBUTE_SUBEXPRESSION:
-			return getSubExpression() != nullptr; //22420
-	}
-	bool result = false;
-	result = ExpressionImpl::internalEIsSet(featureID);
-	if (result)
-	{
-		return result;
-	}
-	result = TemplateableElementImpl::internalEIsSet(featureID);
-	return result;
-}
-bool StringExpressionImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::STRINGEXPRESSION_ATTRIBUTE_OWNINGEXPRESSION:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::StringExpression> _owningExpression = std::dynamic_pointer_cast<uml::StringExpression>(_temp);
-			setOwningExpression(_owningExpression); //22419
-			return true;
-		}
-		case uml::umlPackage::STRINGEXPRESSION_ATTRIBUTE_SUBEXPRESSION:
-		{
-			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::StringExpression>> subExpressionList(new Bag<uml::StringExpression>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
-			{
-				subExpressionList->add(std::dynamic_pointer_cast<uml::StringExpression>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::StringExpression>::iterator iterSubExpression = getSubExpression()->begin();
-			Bag<uml::StringExpression>::iterator endSubExpression = getSubExpression()->end();
-			while (iterSubExpression != endSubExpression)
-			{
-				if (subExpressionList->find(*iterSubExpression) == -1)
-				{
-					getSubExpression()->erase(*iterSubExpression);
-				}
-				iterSubExpression++;
-			}
- 
-			iterSubExpression = subExpressionList->begin();
-			endSubExpression = subExpressionList->end();
-			while (iterSubExpression != endSubExpression)
-			{
-				if (getSubExpression()->find(*iterSubExpression) == -1)
-				{
-					getSubExpression()->add(*iterSubExpression);
-				}
-				iterSubExpression++;			
-			}
-			return true;
-		}
-	}
-
-	bool result = false;
-	result = ExpressionImpl::eSet(featureID, newValue);
-	if (result)
-	{
-		return result;
-	}
-	result = TemplateableElementImpl::eSet(featureID, newValue);
-	return result;
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any StringExpressionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-		
-		// 89087278
-		case umlPackage::STRINGEXPRESSION_OPERATION_OPERANDS_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->operands(incoming_param_diagnostics,incoming_param_context));
-			break;
-		}
-		
-		// 550848138
-		case umlPackage::STRINGEXPRESSION_OPERATION_SUBEXPRESSIONS_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->subexpressions(incoming_param_diagnostics,incoming_param_context));
-			break;
-		}
-
-		default:
-		{
-			// call superTypes
-			result = TemplateableElementImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			result = ExpressionImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -624,12 +431,6 @@ void StringExpressionImpl::save(std::shared_ptr<persistence::interfaces::XSaveHa
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
-	
-	
 }
 
 void StringExpressionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -649,3 +450,195 @@ void StringExpressionImpl::saveContent(std::shared_ptr<persistence::interfaces::
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> StringExpressionImpl::eStaticClass() const
+{
+	return uml::umlPackage::eInstance()->getStringExpression_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any StringExpressionImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::STRINGEXPRESSION_ATTRIBUTE_OWNINGEXPRESSION:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getOwningExpression().lock();
+				return eAny(returnValue); //22419
+			}
+		case uml::umlPackage::STRINGEXPRESSION_ATTRIBUTE_SUBEXPRESSION:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::StringExpression>::iterator iter = getSubExpression()->begin();
+			Bag<uml::StringExpression>::iterator end = getSubExpression()->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //22420			
+		}
+	}
+	Any result;
+	result = ExpressionImpl::eGet(featureID, resolve, coreType);
+	if (result != nullptr && !result->isEmpty())
+	{
+		return result;
+	}
+	result = TemplateableElementImpl::eGet(featureID, resolve, coreType);
+	return result;
+}
+
+bool StringExpressionImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::STRINGEXPRESSION_ATTRIBUTE_OWNINGEXPRESSION:
+			return getOwningExpression().lock() != nullptr; //22419
+		case uml::umlPackage::STRINGEXPRESSION_ATTRIBUTE_SUBEXPRESSION:
+			return getSubExpression() != nullptr; //22420
+	}
+	bool result = false;
+	result = ExpressionImpl::internalEIsSet(featureID);
+	if (result)
+	{
+		return result;
+	}
+	result = TemplateableElementImpl::internalEIsSet(featureID);
+	return result;
+}
+
+bool StringExpressionImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::STRINGEXPRESSION_ATTRIBUTE_OWNINGEXPRESSION:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::StringExpression> _owningExpression = std::dynamic_pointer_cast<uml::StringExpression>(_temp);
+			setOwningExpression(_owningExpression); //22419
+			return true;
+		}
+		case uml::umlPackage::STRINGEXPRESSION_ATTRIBUTE_SUBEXPRESSION:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::StringExpression>> subExpressionList(new Bag<uml::StringExpression>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				subExpressionList->add(std::dynamic_pointer_cast<uml::StringExpression>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::StringExpression>::iterator iterSubExpression = getSubExpression()->begin();
+			Bag<uml::StringExpression>::iterator endSubExpression = getSubExpression()->end();
+			while (iterSubExpression != endSubExpression)
+			{
+				if (subExpressionList->find(*iterSubExpression) == -1)
+				{
+					getSubExpression()->erase(*iterSubExpression);
+				}
+				iterSubExpression++;
+			}
+ 
+			iterSubExpression = subExpressionList->begin();
+			endSubExpression = subExpressionList->end();
+			while (iterSubExpression != endSubExpression)
+			{
+				if (getSubExpression()->find(*iterSubExpression) == -1)
+				{
+					getSubExpression()->add(*iterSubExpression);
+				}
+				iterSubExpression++;			
+			}
+			return true;
+		}
+	}
+
+	bool result = false;
+	result = ExpressionImpl::eSet(featureID, newValue);
+	if (result)
+	{
+		return result;
+	}
+	result = TemplateableElementImpl::eSet(featureID, newValue);
+	return result;
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any StringExpressionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 89087278
+		case umlPackage::STRINGEXPRESSION_OPERATION_OPERANDS_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->operands(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+		
+		// 550848138
+		case umlPackage::STRINGEXPRESSION_OPERATION_SUBEXPRESSIONS_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->subexpressions(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = TemplateableElementImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			result = ExpressionImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<StringExpression> StringExpressionImpl::getThisStringExpressionPtr() const
+{
+	return m_thisStringExpressionPtr.lock();
+}
+void StringExpressionImpl::setThisStringExpressionPtr(std::weak_ptr<StringExpression> thisStringExpressionPtr)
+{
+	m_thisStringExpressionPtr = thisStringExpressionPtr;
+	setThisExpressionPtr(thisStringExpressionPtr);
+	setThisTemplateableElementPtr(thisStringExpressionPtr);
+}

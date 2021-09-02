@@ -57,7 +57,6 @@ namespace uml
 
 // enum includes
 #include "uml/InteractionOperatorKind.hpp"
-
 #include "uml/VisibilityKind.hpp"
 
 
@@ -94,12 +93,14 @@ namespace uml
 			   enclosingOperand.oclAsType(InteractionFragment)->asSet()).covered->asSet() = self.covered->asSet()
 			*/
 			 
-			virtual bool break_(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;/*!
+			virtual bool break_(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			/*!
 			The interaction operators 'consider' and 'ignore' can only be used for the ConsiderIgnoreFragment subtype of CombinedFragment
 			((interactionOperator = InteractionOperatorKind::consider) or (interactionOperator =  InteractionOperatorKind::ignore)) implies oclIsKindOf(ConsiderIgnoreFragment)
 			*/
 			 
-			virtual bool consider_and_ignore(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;/*!
+			virtual bool consider_and_ignore(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			/*!
 			If the interactionOperator is opt, loop, break, assert or neg, there must be exactly one operand.
 			(interactionOperator =  InteractionOperatorKind::opt or interactionOperator = InteractionOperatorKind::loop or
 			interactionOperator = InteractionOperatorKind::break or interactionOperator = InteractionOperatorKind::assert or
@@ -108,8 +109,9 @@ namespace uml
 			*/
 			 
 			virtual bool opt_loop_break_neg(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+
 			//*********************************
-			// Attributes Getter & Setter
+			// Attribute Getters & Setters
 			//*********************************
 			/*!
 			Specifies the operation which defines the semantics of this combination of InteractionFragments.
@@ -123,9 +125,9 @@ namespace uml
 			*/
 			 
 			virtual void setInteractionOperator (uml::InteractionOperatorKind _interactionOperator)= 0;
-			
+
 			//*********************************
-			// References Getter & Setter
+			// Reference Getters & Setters
 			//*********************************
 			/*!
 			Specifies the gates that form the interface between this CombinedFragment and its surroundings
@@ -133,15 +135,46 @@ namespace uml
 			*/
 			
 			virtual std::shared_ptr<Subset<uml::Gate, uml::Element>> getCfragmentGate() const = 0;
-			
 			/*!
 			The set of operands of the combined fragment.
 			<p>From package UML::Interactions.</p>
 			*/
 			
 			virtual std::shared_ptr<Subset<uml::InteractionOperand, uml::Element>> getOperand() const = 0;
+
+			//*********************************
+			// Union Reference Getters
+			//*********************************
+			/*!
+			Specifies the Namespace that owns the NamedElement.
+			<p>From package UML::CommonStructure.</p>
+			*/
 			
+			virtual std::weak_ptr<uml::Namespace> getNamespace() const = 0;
+			/*!
+			The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
 			
+			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;
+			/*!
+			The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
+			virtual std::weak_ptr<uml::Element> getOwner() const = 0;
+
+			//*********************************
+			// Container Getter
+			//*********************************
+			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
+
+			//*********************************
+			// Persistence Functions
+			//*********************************
+			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 
 		protected:
 			//*********************************
@@ -152,8 +185,7 @@ namespace uml
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			uml::InteractionOperatorKind m_interactionOperator = InteractionOperatorKind::SEQ;
-			
+			uml::InteractionOperatorKind m_interactionOperator= InteractionOperatorKind::SEQ;
 			
 			//*********************************
 			// Reference Members
@@ -163,45 +195,13 @@ namespace uml
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			mutable std::shared_ptr<Subset<uml::Gate, uml::Element>> m_cfragmentGate;/*!
+			mutable std::shared_ptr<Subset<uml::Gate, uml::Element>> m_cfragmentGate;
+			/*!
 			The set of operands of the combined fragment.
 			<p>From package UML::Interactions.</p>
 			*/
 			
 			mutable std::shared_ptr<Subset<uml::InteractionOperand, uml::Element>> m_operand;
-
-		public:
-			//*********************************
-			// Union Getter
-			//*********************************
-			/*!
-			Specifies the Namespace that owns the NamedElement.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::weak_ptr<uml::Namespace> getNamespace() const = 0;/*!
-			The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;/*!
-			The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			
-			virtual std::weak_ptr<uml::Element> getOwner() const = 0;
-
-			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
-			
-			//*********************************
-			// Persistence Functions
-			//*********************************
-			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
-			
-			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
-			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
-			
 	};
-
 }
 #endif /* end of include guard: UML_COMBINEDFRAGMENT_HPP */

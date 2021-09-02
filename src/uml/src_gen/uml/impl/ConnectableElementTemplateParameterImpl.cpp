@@ -1,3 +1,4 @@
+
 #include "uml/impl/ConnectableElementTemplateParameterImpl.hpp"
 
 #ifdef NDEBUG
@@ -25,7 +26,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -33,7 +33,6 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-
 
 #include "uml/Comment.hpp"
 #include "uml/Element.hpp"
@@ -121,26 +120,23 @@ std::shared_ptr<ecore::EObject> ConnectableElementTemplateParameterImpl::copy() 
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> ConnectableElementTemplateParameterImpl::eStaticClass() const
-{
-	return uml::umlPackage::eInstance()->getConnectableElementTemplateParameter_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
 
 //*********************************
-// References
+// Attribute Getters & Setters
+//*********************************
+
+//*********************************
+// Reference Getters & Setters
 //*********************************
 
 //*********************************
 // Union Getter
 //*********************************
+
+
 std::shared_ptr<Union<uml::Element>> ConnectableElementTemplateParameterImpl::getOwnedElement() const
 {
 	if(m_ownedElement == nullptr)
@@ -163,16 +159,9 @@ std::weak_ptr<uml::Element> ConnectableElementTemplateParameterImpl::getOwner() 
 
 
 
-
-std::shared_ptr<ConnectableElementTemplateParameter> ConnectableElementTemplateParameterImpl::getThisConnectableElementTemplateParameterPtr() const
-{
-	return m_thisConnectableElementTemplateParameterPtr.lock();
-}
-void ConnectableElementTemplateParameterImpl::setThisConnectableElementTemplateParameterPtr(std::weak_ptr<ConnectableElementTemplateParameter> thisConnectableElementTemplateParameterPtr)
-{
-	m_thisConnectableElementTemplateParameterPtr = thisConnectableElementTemplateParameterPtr;
-	setThisTemplateParameterPtr(thisConnectableElementTemplateParameterPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> ConnectableElementTemplateParameterImpl::eContainer() const
 {
 	if(auto wp = m_owner.lock())
@@ -185,55 +174,6 @@ std::shared_ptr<ecore::EObject> ConnectableElementTemplateParameterImpl::eContai
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any ConnectableElementTemplateParameterImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-	}
-	return TemplateParameterImpl::eGet(featureID, resolve, coreType);
-}
-bool ConnectableElementTemplateParameterImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-	}
-	return TemplateParameterImpl::internalEIsSet(featureID);
-}
-bool ConnectableElementTemplateParameterImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-	}
-
-	return TemplateParameterImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any ConnectableElementTemplateParameterImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-
-		default:
-		{
-			// call superTypes
-			result = TemplateParameterImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -284,9 +224,6 @@ void ConnectableElementTemplateParameterImpl::save(std::shared_ptr<persistence::
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
 }
 
 void ConnectableElementTemplateParameterImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -301,3 +238,71 @@ void ConnectableElementTemplateParameterImpl::saveContent(std::shared_ptr<persis
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> ConnectableElementTemplateParameterImpl::eStaticClass() const
+{
+	return uml::umlPackage::eInstance()->getConnectableElementTemplateParameter_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any ConnectableElementTemplateParameterImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+	}
+	return TemplateParameterImpl::eGet(featureID, resolve, coreType);
+}
+
+bool ConnectableElementTemplateParameterImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+	}
+	return TemplateParameterImpl::internalEIsSet(featureID);
+}
+
+bool ConnectableElementTemplateParameterImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+	}
+
+	return TemplateParameterImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any ConnectableElementTemplateParameterImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+
+		default:
+		{
+			// call superTypes
+			result = TemplateParameterImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<ConnectableElementTemplateParameter> ConnectableElementTemplateParameterImpl::getThisConnectableElementTemplateParameterPtr() const
+{
+	return m_thisConnectableElementTemplateParameterPtr.lock();
+}
+void ConnectableElementTemplateParameterImpl::setThisConnectableElementTemplateParameterPtr(std::weak_ptr<ConnectableElementTemplateParameter> thisConnectableElementTemplateParameterPtr)
+{
+	m_thisConnectableElementTemplateParameterPtr = thisConnectableElementTemplateParameterPtr;
+	setThisTemplateParameterPtr(thisConnectableElementTemplateParameterPtr);
+}

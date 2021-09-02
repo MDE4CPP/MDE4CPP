@@ -1,3 +1,4 @@
+
 #include "uml/impl/ConnectableElementImpl.hpp"
 
 #ifdef NDEBUG
@@ -25,7 +26,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -33,7 +33,6 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-
 
 #include "uml/Comment.hpp"
 #include "uml/ConnectorEnd.hpp"
@@ -136,15 +135,6 @@ std::shared_ptr<ecore::EObject> ConnectableElementImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> ConnectableElementImpl::eStaticClass() const
-{
-	return uml::umlPackage::eInstance()->getConnectableElement_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
@@ -155,11 +145,13 @@ std::shared_ptr<Bag<uml::ConnectorEnd> > ConnectableElementImpl::getEnds()
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference end
-*/
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference end */
 std::shared_ptr<Bag<uml::ConnectorEnd>> ConnectableElementImpl::getEnd() const
 {
 	if(m_end == nullptr)
@@ -170,8 +162,6 @@ std::shared_ptr<Bag<uml::ConnectorEnd>> ConnectableElementImpl::getEnd() const
 	}
     return m_end;
 }
-
-
 
 //*********************************
 // Union Getter
@@ -198,17 +188,9 @@ std::weak_ptr<uml::Element> ConnectableElementImpl::getOwner() const
 
 
 
-
-std::shared_ptr<ConnectableElement> ConnectableElementImpl::getThisConnectableElementPtr() const
-{
-	return m_thisConnectableElementPtr.lock();
-}
-void ConnectableElementImpl::setThisConnectableElementPtr(std::weak_ptr<ConnectableElement> thisConnectableElementPtr)
-{
-	m_thisConnectableElementPtr = thisConnectableElementPtr;
-	setThisParameterableElementPtr(thisConnectableElementPtr);
-	setThisTypedElementPtr(thisConnectableElementPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> ConnectableElementImpl::eContainer() const
 {
 	if(auto wp = m_namespace.lock())
@@ -226,100 +208,6 @@ std::shared_ptr<ecore::EObject> ConnectableElementImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any ConnectableElementImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::CONNECTABLEELEMENT_ATTRIBUTE_END:
-		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::ConnectorEnd>::iterator iter = getEnd()->begin();
-			Bag<uml::ConnectorEnd>::iterator end = getEnd()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //5012			
-		}
-	}
-	Any result;
-	result = ParameterableElementImpl::eGet(featureID, resolve, coreType);
-	if (result != nullptr && !result->isEmpty())
-	{
-		return result;
-	}
-	result = TypedElementImpl::eGet(featureID, resolve, coreType);
-	return result;
-}
-bool ConnectableElementImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::CONNECTABLEELEMENT_ATTRIBUTE_END:
-			return getEnd() != nullptr; //5012
-	}
-	bool result = false;
-	result = ParameterableElementImpl::internalEIsSet(featureID);
-	if (result)
-	{
-		return result;
-	}
-	result = TypedElementImpl::internalEIsSet(featureID);
-	return result;
-}
-bool ConnectableElementImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-	}
-
-	bool result = false;
-	result = ParameterableElementImpl::eSet(featureID, newValue);
-	if (result)
-	{
-		return result;
-	}
-	result = TypedElementImpl::eSet(featureID, newValue);
-	return result;
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any ConnectableElementImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-		
-		// 241976055
-		case umlPackage::CONNECTABLEELEMENT_OPERATION_GETENDS:
-		{
-			result = eAny(this->getEnds());
-			break;
-		}
-
-		default:
-		{
-			// call superTypes
-			result = ParameterableElementImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			result = TypedElementImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -376,10 +264,6 @@ void ConnectableElementImpl::save(std::shared_ptr<persistence::interfaces::XSave
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
 }
 
 void ConnectableElementImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -394,3 +278,117 @@ void ConnectableElementImpl::saveContent(std::shared_ptr<persistence::interfaces
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> ConnectableElementImpl::eStaticClass() const
+{
+	return uml::umlPackage::eInstance()->getConnectableElement_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any ConnectableElementImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::CONNECTABLEELEMENT_ATTRIBUTE_END:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::ConnectorEnd>::iterator iter = getEnd()->begin();
+			Bag<uml::ConnectorEnd>::iterator end = getEnd()->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //5012			
+		}
+	}
+	Any result;
+	result = ParameterableElementImpl::eGet(featureID, resolve, coreType);
+	if (result != nullptr && !result->isEmpty())
+	{
+		return result;
+	}
+	result = TypedElementImpl::eGet(featureID, resolve, coreType);
+	return result;
+}
+
+bool ConnectableElementImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::CONNECTABLEELEMENT_ATTRIBUTE_END:
+			return getEnd() != nullptr; //5012
+	}
+	bool result = false;
+	result = ParameterableElementImpl::internalEIsSet(featureID);
+	if (result)
+	{
+		return result;
+	}
+	result = TypedElementImpl::internalEIsSet(featureID);
+	return result;
+}
+
+bool ConnectableElementImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+	}
+
+	bool result = false;
+	result = ParameterableElementImpl::eSet(featureID, newValue);
+	if (result)
+	{
+		return result;
+	}
+	result = TypedElementImpl::eSet(featureID, newValue);
+	return result;
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any ConnectableElementImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 241976055
+		case umlPackage::CONNECTABLEELEMENT_OPERATION_GETENDS:
+		{
+			result = eAny(this->getEnds());
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = ParameterableElementImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			result = TypedElementImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<ConnectableElement> ConnectableElementImpl::getThisConnectableElementPtr() const
+{
+	return m_thisConnectableElementPtr.lock();
+}
+void ConnectableElementImpl::setThisConnectableElementPtr(std::weak_ptr<ConnectableElement> thisConnectableElementPtr)
+{
+	m_thisConnectableElementPtr = thisConnectableElementPtr;
+	setThisParameterableElementPtr(thisConnectableElementPtr);
+	setThisTypedElementPtr(thisConnectableElementPtr);
+}

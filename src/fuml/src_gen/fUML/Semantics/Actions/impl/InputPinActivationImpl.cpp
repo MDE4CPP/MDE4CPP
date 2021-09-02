@@ -1,3 +1,4 @@
+
 #include "fUML/Semantics/Actions/impl/InputPinActivationImpl.hpp"
 
 #ifdef NDEBUG
@@ -37,7 +38,6 @@
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Actions/ActionsFactory.hpp"
-
 
 #include "fUML/Semantics/Actions/ActionActivation.hpp"
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
@@ -123,15 +123,6 @@ std::shared_ptr<ecore::EObject> InputPinActivationImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> InputPinActivationImpl::eStaticClass() const
-{
-	return fUML::Semantics::Actions::ActionsPackage::eInstance()->getInputPinActivation_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
@@ -163,24 +154,20 @@ void InputPinActivationImpl::receiveOffer()
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
+//*********************************
+
+//*********************************
+// Reference Getters & Setters
 //*********************************
 
 //*********************************
 // Union Getter
 //*********************************
 
-
-
-std::shared_ptr<InputPinActivation> InputPinActivationImpl::getThisInputPinActivationPtr() const
-{
-	return m_thisInputPinActivationPtr.lock();
-}
-void InputPinActivationImpl::setThisInputPinActivationPtr(std::weak_ptr<InputPinActivation> thisInputPinActivationPtr)
-{
-	m_thisInputPinActivationPtr = thisInputPinActivationPtr;
-	setThisPinActivationPtr(thisInputPinActivationPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> InputPinActivationImpl::eContainer() const
 {
 	if(auto wp = m_group.lock())
@@ -188,69 +175,6 @@ std::shared_ptr<ecore::EObject> InputPinActivationImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any InputPinActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-	}
-	return PinActivationImpl::eGet(featureID, resolve, coreType);
-}
-bool InputPinActivationImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-	}
-	return PinActivationImpl::internalEIsSet(featureID);
-}
-bool InputPinActivationImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-	}
-
-	return PinActivationImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any InputPinActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-		
-		// 508191945
-		case ActionsPackage::INPUTPINACTIVATION_OPERATION_ISREADY:
-		{
-			result = eAny(this->isReady());
-			break;
-		}
-		
-		// 1104040774
-		case ActionsPackage::INPUTPINACTIVATION_OPERATION_RECEIVEOFFER:
-		{
-			this->receiveOffer();
-			break;
-		}
-
-		default:
-		{
-			// call superTypes
-			result = PinActivationImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -303,10 +227,6 @@ void InputPinActivationImpl::save(std::shared_ptr<persistence::interfaces::XSave
 	fUML::Semantics::Loci::SemanticVisitorImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
 }
 
 void InputPinActivationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -321,3 +241,85 @@ void InputPinActivationImpl::saveContent(std::shared_ptr<persistence::interfaces
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> InputPinActivationImpl::eStaticClass() const
+{
+	return fUML::Semantics::Actions::ActionsPackage::eInstance()->getInputPinActivation_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any InputPinActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+	}
+	return PinActivationImpl::eGet(featureID, resolve, coreType);
+}
+
+bool InputPinActivationImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+	}
+	return PinActivationImpl::internalEIsSet(featureID);
+}
+
+bool InputPinActivationImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+	}
+
+	return PinActivationImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any InputPinActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 508191945
+		case ActionsPackage::INPUTPINACTIVATION_OPERATION_ISREADY:
+		{
+			result = eAny(this->isReady());
+			break;
+		}
+		
+		// 1104040774
+		case ActionsPackage::INPUTPINACTIVATION_OPERATION_RECEIVEOFFER:
+		{
+			this->receiveOffer();
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = PinActivationImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<InputPinActivation> InputPinActivationImpl::getThisInputPinActivationPtr() const
+{
+	return m_thisInputPinActivationPtr.lock();
+}
+void InputPinActivationImpl::setThisInputPinActivationPtr(std::weak_ptr<InputPinActivation> thisInputPinActivationPtr)
+{
+	m_thisInputPinActivationPtr = thisInputPinActivationPtr;
+	setThisPinActivationPtr(thisInputPinActivationPtr);
+}

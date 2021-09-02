@@ -1,3 +1,4 @@
+
 #include "uml/impl/ClearStructuralFeatureActionImpl.hpp"
 
 #ifdef NDEBUG
@@ -26,7 +27,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -34,7 +34,6 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-
 
 #include "uml/Activity.hpp"
 #include "uml/ActivityEdge.hpp"
@@ -159,15 +158,6 @@ std::shared_ptr<ecore::EObject> ClearStructuralFeatureActionImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> ClearStructuralFeatureActionImpl::eStaticClass() const
-{
-	return uml::umlPackage::eInstance()->getClearStructuralFeatureAction_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
@@ -184,11 +174,13 @@ bool ClearStructuralFeatureActionImpl::type_of_result(Any diagnostics,std::share
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference result
-*/
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference result */
 std::shared_ptr<uml::OutputPin> ClearStructuralFeatureActionImpl::getResult() const
 {
     return m_result;
@@ -198,7 +190,6 @@ void ClearStructuralFeatureActionImpl::setResult(std::shared_ptr<uml::OutputPin>
     m_result = _result;
 	
 }
-
 
 //*********************************
 // Union Getter
@@ -293,18 +284,9 @@ std::shared_ptr<Union<uml::RedefinableElement>> ClearStructuralFeatureActionImpl
 	return m_redefinedElement;
 }
 
-
-
-
-std::shared_ptr<ClearStructuralFeatureAction> ClearStructuralFeatureActionImpl::getThisClearStructuralFeatureActionPtr() const
-{
-	return m_thisClearStructuralFeatureActionPtr.lock();
-}
-void ClearStructuralFeatureActionImpl::setThisClearStructuralFeatureActionPtr(std::weak_ptr<ClearStructuralFeatureAction> thisClearStructuralFeatureActionPtr)
-{
-	m_thisClearStructuralFeatureActionPtr = thisClearStructuralFeatureActionPtr;
-	setThisStructuralFeatureActionPtr(thisClearStructuralFeatureActionPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> ClearStructuralFeatureActionImpl::eContainer() const
 {
 	if(auto wp = m_activity.lock())
@@ -327,104 +309,6 @@ std::shared_ptr<ecore::EObject> ClearStructuralFeatureActionImpl::eContainer() c
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any ClearStructuralFeatureActionImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::CLEARSTRUCTURALFEATUREACTION_ATTRIBUTE_RESULT:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getResult();
-				return eAny(returnValue); //4029
-			}
-	}
-	return StructuralFeatureActionImpl::eGet(featureID, resolve, coreType);
-}
-bool ClearStructuralFeatureActionImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::CLEARSTRUCTURALFEATUREACTION_ATTRIBUTE_RESULT:
-			return getResult() != nullptr; //4029
-	}
-	return StructuralFeatureActionImpl::internalEIsSet(featureID);
-}
-bool ClearStructuralFeatureActionImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::CLEARSTRUCTURALFEATUREACTION_ATTRIBUTE_RESULT:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::OutputPin> _result = std::dynamic_pointer_cast<uml::OutputPin>(_temp);
-			setResult(_result); //4029
-			return true;
-		}
-	}
-
-	return StructuralFeatureActionImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any ClearStructuralFeatureActionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-		
-		// 838051871
-		case umlPackage::CLEARSTRUCTURALFEATUREACTION_OPERATION_MULTIPLICITY_OF_RESULT_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->multiplicity_of_result(incoming_param_diagnostics,incoming_param_context));
-			break;
-		}
-		
-		// 424656956
-		case umlPackage::CLEARSTRUCTURALFEATUREACTION_OPERATION_TYPE_OF_RESULT_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->type_of_result(incoming_param_diagnostics,incoming_param_context));
-			break;
-		}
-
-		default:
-		{
-			// call superTypes
-			result = StructuralFeatureActionImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -507,14 +391,6 @@ void ClearStructuralFeatureActionImpl::save(std::shared_ptr<persistence::interfa
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
-	
-	
-	
-	
 }
 
 void ClearStructuralFeatureActionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -535,3 +411,120 @@ void ClearStructuralFeatureActionImpl::saveContent(std::shared_ptr<persistence::
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> ClearStructuralFeatureActionImpl::eStaticClass() const
+{
+	return uml::umlPackage::eInstance()->getClearStructuralFeatureAction_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any ClearStructuralFeatureActionImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::CLEARSTRUCTURALFEATUREACTION_ATTRIBUTE_RESULT:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getResult();
+				return eAny(returnValue); //4029
+			}
+	}
+	return StructuralFeatureActionImpl::eGet(featureID, resolve, coreType);
+}
+
+bool ClearStructuralFeatureActionImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::CLEARSTRUCTURALFEATUREACTION_ATTRIBUTE_RESULT:
+			return getResult() != nullptr; //4029
+	}
+	return StructuralFeatureActionImpl::internalEIsSet(featureID);
+}
+
+bool ClearStructuralFeatureActionImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::CLEARSTRUCTURALFEATUREACTION_ATTRIBUTE_RESULT:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::OutputPin> _result = std::dynamic_pointer_cast<uml::OutputPin>(_temp);
+			setResult(_result); //4029
+			return true;
+		}
+	}
+
+	return StructuralFeatureActionImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any ClearStructuralFeatureActionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 838051871
+		case umlPackage::CLEARSTRUCTURALFEATUREACTION_OPERATION_MULTIPLICITY_OF_RESULT_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->multiplicity_of_result(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+		
+		// 424656956
+		case umlPackage::CLEARSTRUCTURALFEATUREACTION_OPERATION_TYPE_OF_RESULT_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->type_of_result(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = StructuralFeatureActionImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<ClearStructuralFeatureAction> ClearStructuralFeatureActionImpl::getThisClearStructuralFeatureActionPtr() const
+{
+	return m_thisClearStructuralFeatureActionPtr.lock();
+}
+void ClearStructuralFeatureActionImpl::setThisClearStructuralFeatureActionPtr(std::weak_ptr<ClearStructuralFeatureAction> thisClearStructuralFeatureActionPtr)
+{
+	m_thisClearStructuralFeatureActionPtr = thisClearStructuralFeatureActionPtr;
+	setThisStructuralFeatureActionPtr(thisClearStructuralFeatureActionPtr);
+}

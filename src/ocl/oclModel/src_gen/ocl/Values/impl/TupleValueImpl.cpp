@@ -1,3 +1,4 @@
+
 #include "ocl/Values/impl/TupleValueImpl.hpp"
 
 #ifdef NDEBUG
@@ -25,7 +26,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -34,7 +34,6 @@
 #include <exception> // used in Persistence
 #include "ocl/Types/TypesFactory.hpp"
 #include "ocl/Values/ValuesFactory.hpp"
-
 
 #include "ocl/Values/NameValueBinding.hpp"
 #include "ocl/Values/StaticValue.hpp"
@@ -112,15 +111,6 @@ std::shared_ptr<ecore::EObject> TupleValueImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> TupleValueImpl::eStaticClass() const
-{
-	return ocl::Values::ValuesPackage::eInstance()->getTupleValue_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
@@ -170,11 +160,13 @@ return result;
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference elements
-*/
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference elements */
 std::shared_ptr<Bag<ocl::Values::NameValueBinding>> TupleValueImpl::getElements() const
 {
 	if(m_elements == nullptr)
@@ -186,11 +178,7 @@ std::shared_ptr<Bag<ocl::Values::NameValueBinding>> TupleValueImpl::getElements(
     return m_elements;
 }
 
-
-
-/*
-Getter & Setter for reference model
-*/
+/* Getter & Setter for reference model */
 std::shared_ptr<ocl::Types::TupleType> TupleValueImpl::getModel() const
 {
     return m_model;
@@ -201,158 +189,16 @@ void TupleValueImpl::setModel(std::shared_ptr<ocl::Types::TupleType> _model)
 	
 }
 
-
 //*********************************
 // Union Getter
 //*********************************
 
-
-
-std::shared_ptr<TupleValue> TupleValueImpl::getThisTupleValuePtr() const
-{
-	return m_thisTupleValuePtr.lock();
-}
-void TupleValueImpl::setThisTupleValuePtr(std::weak_ptr<TupleValue> thisTupleValuePtr)
-{
-	m_thisTupleValuePtr = thisTupleValuePtr;
-	setThisStaticValuePtr(thisTupleValuePtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> TupleValueImpl::eContainer() const
 {
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any TupleValueImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case ocl::Values::ValuesPackage::TUPLEVALUE_ATTRIBUTE_ELEMENTS:
-		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<ocl::Values::NameValueBinding>::iterator iter = getElements()->begin();
-			Bag<ocl::Values::NameValueBinding>::iterator end = getElements()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //890			
-		}
-		case ocl::Values::ValuesPackage::TUPLEVALUE_ATTRIBUTE_MODEL:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getModel();
-				return eAny(returnValue); //891
-			}
-	}
-	return StaticValueImpl::eGet(featureID, resolve, coreType);
-}
-bool TupleValueImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case ocl::Values::ValuesPackage::TUPLEVALUE_ATTRIBUTE_ELEMENTS:
-			return getElements() != nullptr; //890
-		case ocl::Values::ValuesPackage::TUPLEVALUE_ATTRIBUTE_MODEL:
-			return getModel() != nullptr; //891
-	}
-	return StaticValueImpl::internalEIsSet(featureID);
-}
-bool TupleValueImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case ocl::Values::ValuesPackage::TUPLEVALUE_ATTRIBUTE_ELEMENTS:
-		{
-			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<ocl::Values::NameValueBinding>> elementsList(new Bag<ocl::Values::NameValueBinding>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
-			{
-				elementsList->add(std::dynamic_pointer_cast<ocl::Values::NameValueBinding>(*iter));
-				iter++;
-			}
-			
-			Bag<ocl::Values::NameValueBinding>::iterator iterElements = getElements()->begin();
-			Bag<ocl::Values::NameValueBinding>::iterator endElements = getElements()->end();
-			while (iterElements != endElements)
-			{
-				if (elementsList->find(*iterElements) == -1)
-				{
-					getElements()->erase(*iterElements);
-				}
-				iterElements++;
-			}
- 
-			iterElements = elementsList->begin();
-			endElements = elementsList->end();
-			while (iterElements != endElements)
-			{
-				if (getElements()->find(*iterElements) == -1)
-				{
-					getElements()->add(*iterElements);
-				}
-				iterElements++;			
-			}
-			return true;
-		}
-		case ocl::Values::ValuesPackage::TUPLEVALUE_ATTRIBUTE_MODEL:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<ocl::Types::TupleType> _model = std::dynamic_pointer_cast<ocl::Types::TupleType>(_temp);
-			setModel(_model); //891
-			return true;
-		}
-	}
-
-	return StaticValueImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any TupleValueImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-		
-		// 1507564928
-		case ValuesPackage::TUPLEVALUE_OPERATION_EQUALS_VALUE:
-		{
-			//Retrieve input parameter 'otherValue'
-			//parameter 0
-			std::shared_ptr<fUML::Semantics::Values::Value> incoming_param_otherValue;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_otherValue_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_otherValue = (*incoming_param_otherValue_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::Values::Value> >();
-			result = eAny(this->equals(incoming_param_otherValue));
-			break;
-		}
-		
-		// 1666165674
-		case ValuesPackage::TUPLEVALUE_OPERATION_TOSTRING:
-		{
-			result = eAny(this->toString());
-			break;
-		}
-
-		default:
-		{
-			// call superTypes
-			result = StaticValueImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -457,9 +303,6 @@ void TupleValueImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler>
 	fUML::Semantics::Loci::SemanticVisitorImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
 }
 
 void TupleValueImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -477,3 +320,155 @@ void TupleValueImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> TupleValueImpl::eStaticClass() const
+{
+	return ocl::Values::ValuesPackage::eInstance()->getTupleValue_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any TupleValueImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case ocl::Values::ValuesPackage::TUPLEVALUE_ATTRIBUTE_ELEMENTS:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<ocl::Values::NameValueBinding>::iterator iter = getElements()->begin();
+			Bag<ocl::Values::NameValueBinding>::iterator end = getElements()->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //890			
+		}
+		case ocl::Values::ValuesPackage::TUPLEVALUE_ATTRIBUTE_MODEL:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getModel();
+				return eAny(returnValue); //891
+			}
+	}
+	return StaticValueImpl::eGet(featureID, resolve, coreType);
+}
+
+bool TupleValueImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case ocl::Values::ValuesPackage::TUPLEVALUE_ATTRIBUTE_ELEMENTS:
+			return getElements() != nullptr; //890
+		case ocl::Values::ValuesPackage::TUPLEVALUE_ATTRIBUTE_MODEL:
+			return getModel() != nullptr; //891
+	}
+	return StaticValueImpl::internalEIsSet(featureID);
+}
+
+bool TupleValueImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case ocl::Values::ValuesPackage::TUPLEVALUE_ATTRIBUTE_ELEMENTS:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<ocl::Values::NameValueBinding>> elementsList(new Bag<ocl::Values::NameValueBinding>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				elementsList->add(std::dynamic_pointer_cast<ocl::Values::NameValueBinding>(*iter));
+				iter++;
+			}
+			
+			Bag<ocl::Values::NameValueBinding>::iterator iterElements = getElements()->begin();
+			Bag<ocl::Values::NameValueBinding>::iterator endElements = getElements()->end();
+			while (iterElements != endElements)
+			{
+				if (elementsList->find(*iterElements) == -1)
+				{
+					getElements()->erase(*iterElements);
+				}
+				iterElements++;
+			}
+ 
+			iterElements = elementsList->begin();
+			endElements = elementsList->end();
+			while (iterElements != endElements)
+			{
+				if (getElements()->find(*iterElements) == -1)
+				{
+					getElements()->add(*iterElements);
+				}
+				iterElements++;			
+			}
+			return true;
+		}
+		case ocl::Values::ValuesPackage::TUPLEVALUE_ATTRIBUTE_MODEL:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<ocl::Types::TupleType> _model = std::dynamic_pointer_cast<ocl::Types::TupleType>(_temp);
+			setModel(_model); //891
+			return true;
+		}
+	}
+
+	return StaticValueImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any TupleValueImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 1507564928
+		case ValuesPackage::TUPLEVALUE_OPERATION_EQUALS_VALUE:
+		{
+			//Retrieve input parameter 'otherValue'
+			//parameter 0
+			std::shared_ptr<fUML::Semantics::Values::Value> incoming_param_otherValue;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_otherValue_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_otherValue = (*incoming_param_otherValue_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::Values::Value> >();
+			result = eAny(this->equals(incoming_param_otherValue));
+			break;
+		}
+		
+		// 1666165674
+		case ValuesPackage::TUPLEVALUE_OPERATION_TOSTRING:
+		{
+			result = eAny(this->toString());
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = StaticValueImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<TupleValue> TupleValueImpl::getThisTupleValuePtr() const
+{
+	return m_thisTupleValuePtr.lock();
+}
+void TupleValueImpl::setThisTupleValuePtr(std::weak_ptr<TupleValue> thisTupleValuePtr)
+{
+	m_thisTupleValuePtr = thisTupleValuePtr;
+	setThisStaticValuePtr(thisTupleValuePtr);
+}

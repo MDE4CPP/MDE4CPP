@@ -1,3 +1,4 @@
+
 #include "PSCS/Semantics/StructuredClassifiers/impl/CS_NameBased_StructuralFeatureOfInterfaceAccessStrategyImpl.hpp"
 
 #ifdef NDEBUG
@@ -33,7 +34,6 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-
 
 #include "PSCS/Semantics/StructuredClassifiers/CS_Object.hpp"
 #include "PSCS/Semantics/StructuredClassifiers/CS_StructuralFeatureOfInterfaceAccessStrategy.hpp"
@@ -112,15 +112,6 @@ std::shared_ptr<ecore::EObject> CS_NameBased_StructuralFeatureOfInterfaceAccessS
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> CS_NameBased_StructuralFeatureOfInterfaceAccessStrategyImpl::eStaticClass() const
-{
-	return PSCS::Semantics::StructuredClassifiers::StructuredClassifiersPackage::eInstance()->getCS_NameBased_StructuralFeatureOfInterfaceAccessStrategy_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
@@ -174,31 +165,94 @@ void CS_NameBased_StructuralFeatureOfInterfaceAccessStrategyImpl::write(std::sha
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
+//*********************************
+
+//*********************************
+// Reference Getters & Setters
 //*********************************
 
 //*********************************
 // Union Getter
 //*********************************
 
-
-
-std::shared_ptr<CS_NameBased_StructuralFeatureOfInterfaceAccessStrategy> CS_NameBased_StructuralFeatureOfInterfaceAccessStrategyImpl::getThisCS_NameBased_StructuralFeatureOfInterfaceAccessStrategyPtr() const
-{
-	return m_thisCS_NameBased_StructuralFeatureOfInterfaceAccessStrategyPtr.lock();
-}
-void CS_NameBased_StructuralFeatureOfInterfaceAccessStrategyImpl::setThisCS_NameBased_StructuralFeatureOfInterfaceAccessStrategyPtr(std::weak_ptr<CS_NameBased_StructuralFeatureOfInterfaceAccessStrategy> thisCS_NameBased_StructuralFeatureOfInterfaceAccessStrategyPtr)
-{
-	m_thisCS_NameBased_StructuralFeatureOfInterfaceAccessStrategyPtr = thisCS_NameBased_StructuralFeatureOfInterfaceAccessStrategyPtr;
-	setThisCS_StructuralFeatureOfInterfaceAccessStrategyPtr(thisCS_NameBased_StructuralFeatureOfInterfaceAccessStrategyPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> CS_NameBased_StructuralFeatureOfInterfaceAccessStrategyImpl::eContainer() const
 {
 	return nullptr;
 }
 
 //*********************************
-// Structural Feature Getter/Setter
+// Persistence Functions
+//*********************************
+void CS_NameBased_StructuralFeatureOfInterfaceAccessStrategyImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get PSCSFactory
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
+	}
+}		
+
+void CS_NameBased_StructuralFeatureOfInterfaceAccessStrategyImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+
+	CS_StructuralFeatureOfInterfaceAccessStrategyImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void CS_NameBased_StructuralFeatureOfInterfaceAccessStrategyImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+
+	//load BasePackage Nodes
+	CS_StructuralFeatureOfInterfaceAccessStrategyImpl::loadNode(nodeName, loadHandler);
+}
+
+void CS_NameBased_StructuralFeatureOfInterfaceAccessStrategyImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+{
+	CS_StructuralFeatureOfInterfaceAccessStrategyImpl::resolveReferences(featureID, references);
+}
+
+void CS_NameBased_StructuralFeatureOfInterfaceAccessStrategyImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	CS_StructuralFeatureOfInterfaceAccessStrategyImpl::saveContent(saveHandler);
+	
+	fUML::Semantics::Loci::SemanticStrategyImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+}
+
+void CS_NameBased_StructuralFeatureOfInterfaceAccessStrategyImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<PSCS::Semantics::StructuredClassifiers::StructuredClassifiersPackage> package = PSCS::Semantics::StructuredClassifiers::StructuredClassifiersPackage::eInstance();
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+}
+
+
+std::shared_ptr<ecore::EClass> CS_NameBased_StructuralFeatureOfInterfaceAccessStrategyImpl::eStaticClass() const
+{
+	return PSCS::Semantics::StructuredClassifiers::StructuredClassifiersPackage::eInstance()->getCS_NameBased_StructuralFeatureOfInterfaceAccessStrategy_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
 //*********************************
 Any CS_NameBased_StructuralFeatureOfInterfaceAccessStrategyImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
@@ -207,6 +261,7 @@ Any CS_NameBased_StructuralFeatureOfInterfaceAccessStrategyImpl::eGet(int featur
 	}
 	return CS_StructuralFeatureOfInterfaceAccessStrategyImpl::eGet(featureID, resolve, coreType);
 }
+
 bool CS_NameBased_StructuralFeatureOfInterfaceAccessStrategyImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
@@ -214,6 +269,7 @@ bool CS_NameBased_StructuralFeatureOfInterfaceAccessStrategyImpl::internalEIsSet
 	}
 	return CS_StructuralFeatureOfInterfaceAccessStrategyImpl::internalEIsSet(featureID);
 }
+
 bool CS_NameBased_StructuralFeatureOfInterfaceAccessStrategyImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
@@ -224,7 +280,7 @@ bool CS_NameBased_StructuralFeatureOfInterfaceAccessStrategyImpl::eSet(int featu
 }
 
 //*********************************
-// Behavioral Feature
+// EOperation Invoke
 //*********************************
 Any CS_NameBased_StructuralFeatureOfInterfaceAccessStrategyImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
 {
@@ -290,65 +346,13 @@ Any CS_NameBased_StructuralFeatureOfInterfaceAccessStrategyImpl::eInvoke(int ope
 	return result;
 }
 
-//*********************************
-// Persistence Functions
-//*********************************
-void CS_NameBased_StructuralFeatureOfInterfaceAccessStrategyImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+
+std::shared_ptr<CS_NameBased_StructuralFeatureOfInterfaceAccessStrategy> CS_NameBased_StructuralFeatureOfInterfaceAccessStrategyImpl::getThisCS_NameBased_StructuralFeatureOfInterfaceAccessStrategyPtr() const
 {
-	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
-	loadAttributes(loadHandler, attr_list);
-
-	//
-	// Create new objects (from references (containment == true))
-	//
-	// get PSCSFactory
-	int numNodes = loadHandler->getNumOfChildNodes();
-	for(int ii = 0; ii < numNodes; ii++)
-	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler);
-	}
-}		
-
-void CS_NameBased_StructuralFeatureOfInterfaceAccessStrategyImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
-{
-
-	CS_StructuralFeatureOfInterfaceAccessStrategyImpl::loadAttributes(loadHandler, attr_list);
+	return m_thisCS_NameBased_StructuralFeatureOfInterfaceAccessStrategyPtr.lock();
 }
-
-void CS_NameBased_StructuralFeatureOfInterfaceAccessStrategyImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+void CS_NameBased_StructuralFeatureOfInterfaceAccessStrategyImpl::setThisCS_NameBased_StructuralFeatureOfInterfaceAccessStrategyPtr(std::weak_ptr<CS_NameBased_StructuralFeatureOfInterfaceAccessStrategy> thisCS_NameBased_StructuralFeatureOfInterfaceAccessStrategyPtr)
 {
-
-	//load BasePackage Nodes
-	CS_StructuralFeatureOfInterfaceAccessStrategyImpl::loadNode(nodeName, loadHandler);
+	m_thisCS_NameBased_StructuralFeatureOfInterfaceAccessStrategyPtr = thisCS_NameBased_StructuralFeatureOfInterfaceAccessStrategyPtr;
+	setThisCS_StructuralFeatureOfInterfaceAccessStrategyPtr(thisCS_NameBased_StructuralFeatureOfInterfaceAccessStrategyPtr);
 }
-
-void CS_NameBased_StructuralFeatureOfInterfaceAccessStrategyImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
-{
-	CS_StructuralFeatureOfInterfaceAccessStrategyImpl::resolveReferences(featureID, references);
-}
-
-void CS_NameBased_StructuralFeatureOfInterfaceAccessStrategyImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
-{
-	saveContent(saveHandler);
-
-	CS_StructuralFeatureOfInterfaceAccessStrategyImpl::saveContent(saveHandler);
-	
-	fUML::Semantics::Loci::SemanticStrategyImpl::saveContent(saveHandler);
-	
-	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-}
-
-void CS_NameBased_StructuralFeatureOfInterfaceAccessStrategyImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
-{
-	try
-	{
-		std::shared_ptr<PSCS::Semantics::StructuredClassifiers::StructuredClassifiersPackage> package = PSCS::Semantics::StructuredClassifiers::StructuredClassifiersPackage::eInstance();
-	}
-	catch (std::exception& e)
-	{
-		std::cout << "| ERROR    | " << e.what() << std::endl;
-	}
-}
-

@@ -1,3 +1,4 @@
+
 #include "uml/impl/BehaviorExecutionSpecificationImpl.hpp"
 
 #ifdef NDEBUG
@@ -25,7 +26,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -33,7 +33,6 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-
 
 #include "uml/Behavior.hpp"
 #include "uml/Comment.hpp"
@@ -145,25 +144,18 @@ std::shared_ptr<ecore::EObject> BehaviorExecutionSpecificationImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> BehaviorExecutionSpecificationImpl::eStaticClass() const
-{
-	return uml::umlPackage::eInstance()->getBehaviorExecutionSpecification_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference behavior
-*/
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference behavior */
 std::shared_ptr<uml::Behavior> BehaviorExecutionSpecificationImpl::getBehavior() const
 {
     return m_behavior;
@@ -173,7 +165,6 @@ void BehaviorExecutionSpecificationImpl::setBehavior(std::shared_ptr<uml::Behavi
     m_behavior = _behavior;
 	
 }
-
 
 //*********************************
 // Union Getter
@@ -203,18 +194,9 @@ std::weak_ptr<uml::Element> BehaviorExecutionSpecificationImpl::getOwner() const
 	return m_owner;
 }
 
-
-
-
-std::shared_ptr<BehaviorExecutionSpecification> BehaviorExecutionSpecificationImpl::getThisBehaviorExecutionSpecificationPtr() const
-{
-	return m_thisBehaviorExecutionSpecificationPtr.lock();
-}
-void BehaviorExecutionSpecificationImpl::setThisBehaviorExecutionSpecificationPtr(std::weak_ptr<BehaviorExecutionSpecification> thisBehaviorExecutionSpecificationPtr)
-{
-	m_thisBehaviorExecutionSpecificationPtr = thisBehaviorExecutionSpecificationPtr;
-	setThisExecutionSpecificationPtr(thisBehaviorExecutionSpecificationPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> BehaviorExecutionSpecificationImpl::eContainer() const
 {
 	if(auto wp = m_enclosingInteraction.lock())
@@ -237,70 +219,6 @@ std::shared_ptr<ecore::EObject> BehaviorExecutionSpecificationImpl::eContainer()
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any BehaviorExecutionSpecificationImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::BEHAVIOREXECUTIONSPECIFICATION_ATTRIBUTE_BEHAVIOR:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getBehavior();
-				return eAny(returnValue); //2415
-			}
-	}
-	return ExecutionSpecificationImpl::eGet(featureID, resolve, coreType);
-}
-bool BehaviorExecutionSpecificationImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::BEHAVIOREXECUTIONSPECIFICATION_ATTRIBUTE_BEHAVIOR:
-			return getBehavior() != nullptr; //2415
-	}
-	return ExecutionSpecificationImpl::internalEIsSet(featureID);
-}
-bool BehaviorExecutionSpecificationImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::BEHAVIOREXECUTIONSPECIFICATION_ATTRIBUTE_BEHAVIOR:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::Behavior> _behavior = std::dynamic_pointer_cast<uml::Behavior>(_temp);
-			setBehavior(_behavior); //2415
-			return true;
-		}
-	}
-
-	return ExecutionSpecificationImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any BehaviorExecutionSpecificationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-
-		default:
-		{
-			// call superTypes
-			result = ExecutionSpecificationImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -388,11 +306,6 @@ void BehaviorExecutionSpecificationImpl::save(std::shared_ptr<persistence::inter
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
-	
 }
 
 void BehaviorExecutionSpecificationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -409,3 +322,86 @@ void BehaviorExecutionSpecificationImpl::saveContent(std::shared_ptr<persistence
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> BehaviorExecutionSpecificationImpl::eStaticClass() const
+{
+	return uml::umlPackage::eInstance()->getBehaviorExecutionSpecification_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any BehaviorExecutionSpecificationImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::BEHAVIOREXECUTIONSPECIFICATION_ATTRIBUTE_BEHAVIOR:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getBehavior();
+				return eAny(returnValue); //2415
+			}
+	}
+	return ExecutionSpecificationImpl::eGet(featureID, resolve, coreType);
+}
+
+bool BehaviorExecutionSpecificationImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::BEHAVIOREXECUTIONSPECIFICATION_ATTRIBUTE_BEHAVIOR:
+			return getBehavior() != nullptr; //2415
+	}
+	return ExecutionSpecificationImpl::internalEIsSet(featureID);
+}
+
+bool BehaviorExecutionSpecificationImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::BEHAVIOREXECUTIONSPECIFICATION_ATTRIBUTE_BEHAVIOR:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::Behavior> _behavior = std::dynamic_pointer_cast<uml::Behavior>(_temp);
+			setBehavior(_behavior); //2415
+			return true;
+		}
+	}
+
+	return ExecutionSpecificationImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any BehaviorExecutionSpecificationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+
+		default:
+		{
+			// call superTypes
+			result = ExecutionSpecificationImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<BehaviorExecutionSpecification> BehaviorExecutionSpecificationImpl::getThisBehaviorExecutionSpecificationPtr() const
+{
+	return m_thisBehaviorExecutionSpecificationPtr.lock();
+}
+void BehaviorExecutionSpecificationImpl::setThisBehaviorExecutionSpecificationPtr(std::weak_ptr<BehaviorExecutionSpecification> thisBehaviorExecutionSpecificationPtr)
+{
+	m_thisBehaviorExecutionSpecificationPtr = thisBehaviorExecutionSpecificationPtr;
+	setThisExecutionSpecificationPtr(thisBehaviorExecutionSpecificationPtr);
+}

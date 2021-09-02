@@ -1,3 +1,4 @@
+
 #include "ocl/Values/impl/ElementImpl.hpp"
 
 #ifdef NDEBUG
@@ -24,7 +25,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -32,7 +32,6 @@
 
 #include <exception> // used in Persistence
 #include "fUML/Semantics/Values/ValuesFactory.hpp"
-
 
 #include "fUML/Semantics/Values/Value.hpp"
 
@@ -106,17 +105,14 @@ std::shared_ptr<ecore::EObject> ElementImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> ElementImpl::eStaticClass() const
-{
-	return ocl::Values::ValuesPackage::eInstance()->getElement_Class();
-}
+//*********************************
+// Operations
+//*********************************
 
 //*********************************
-// Attribute Setter Getter
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for attribute indexNr
-*/
+/* Getter & Setter for attribute indexNr */
 int ElementImpl::getIndexNr() const 
 {
 	return m_indexNr;
@@ -125,19 +121,12 @@ void ElementImpl::setIndexNr(int _indexNr)
 {
 	m_indexNr = _indexNr;
 	
-} 
-
-
-//*********************************
-// Operations
-//*********************************
+}
 
 //*********************************
-// References
+// Reference Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference value
-*/
+/* Getter & Setter for reference value */
 std::shared_ptr<fUML::Semantics::Values::Value> ElementImpl::getValue() const
 {
     return m_value;
@@ -148,99 +137,16 @@ void ElementImpl::setValue(std::shared_ptr<fUML::Semantics::Values::Value> _valu
 	
 }
 
-
 //*********************************
 // Union Getter
 //*********************************
 
-
-
-std::shared_ptr<Element> ElementImpl::getThisElementPtr() const
-{
-	return m_thisElementPtr.lock();
-}
-void ElementImpl::setThisElementPtr(std::weak_ptr<Element> thisElementPtr)
-{
-	m_thisElementPtr = thisElementPtr;
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> ElementImpl::eContainer() const
 {
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any ElementImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case ocl::Values::ValuesPackage::ELEMENT_ATTRIBUTE_INDEXNR:
-			return eAny(getIndexNr()); //220
-		case ocl::Values::ValuesPackage::ELEMENT_ATTRIBUTE_VALUE:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getValue();
-				return eAny(returnValue); //221
-			}
-	}
-	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
-}
-bool ElementImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case ocl::Values::ValuesPackage::ELEMENT_ATTRIBUTE_INDEXNR:
-			return getIndexNr() != 0; //220
-		case ocl::Values::ValuesPackage::ELEMENT_ATTRIBUTE_VALUE:
-			return getValue() != nullptr; //221
-	}
-	return ecore::EObjectImpl::internalEIsSet(featureID);
-}
-bool ElementImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case ocl::Values::ValuesPackage::ELEMENT_ATTRIBUTE_INDEXNR:
-		{
-			// BOOST CAST
-			int _indexNr = newValue->get<int>();
-			setIndexNr(_indexNr); //220
-			return true;
-		}
-		case ocl::Values::ValuesPackage::ELEMENT_ATTRIBUTE_VALUE:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<fUML::Semantics::Values::Value> _value = std::dynamic_pointer_cast<fUML::Semantics::Values::Value>(_temp);
-			setValue(_value); //221
-			return true;
-		}
-	}
-
-	return ecore::EObjectImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any ElementImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-
-		default:
-		{
-			// call superTypes
-			result = ecore::EModelElementImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -325,9 +231,7 @@ void ElementImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> sa
 {
 	saveContent(saveHandler);
 
-	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
 }
 
 void ElementImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -349,3 +253,96 @@ void ElementImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHand
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> ElementImpl::eStaticClass() const
+{
+	return ocl::Values::ValuesPackage::eInstance()->getElement_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any ElementImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case ocl::Values::ValuesPackage::ELEMENT_ATTRIBUTE_INDEXNR:
+			return eAny(getIndexNr()); //220
+		case ocl::Values::ValuesPackage::ELEMENT_ATTRIBUTE_VALUE:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getValue();
+				return eAny(returnValue); //221
+			}
+	}
+	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
+}
+
+bool ElementImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case ocl::Values::ValuesPackage::ELEMENT_ATTRIBUTE_INDEXNR:
+			return getIndexNr() != 0; //220
+		case ocl::Values::ValuesPackage::ELEMENT_ATTRIBUTE_VALUE:
+			return getValue() != nullptr; //221
+	}
+	return ecore::EObjectImpl::internalEIsSet(featureID);
+}
+
+bool ElementImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case ocl::Values::ValuesPackage::ELEMENT_ATTRIBUTE_INDEXNR:
+		{
+			// BOOST CAST
+			int _indexNr = newValue->get<int>();
+			setIndexNr(_indexNr); //220
+			return true;
+		}
+		case ocl::Values::ValuesPackage::ELEMENT_ATTRIBUTE_VALUE:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<fUML::Semantics::Values::Value> _value = std::dynamic_pointer_cast<fUML::Semantics::Values::Value>(_temp);
+			setValue(_value); //221
+			return true;
+		}
+	}
+
+	return ecore::EObjectImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any ElementImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+
+		default:
+		{
+			// call superTypes
+			result = ecore::EModelElementImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<Element> ElementImpl::getThisElementPtr() const
+{
+	return m_thisElementPtr.lock();
+}
+void ElementImpl::setThisElementPtr(std::weak_ptr<Element> thisElementPtr)
+{
+	m_thisElementPtr = thisElementPtr;
+}

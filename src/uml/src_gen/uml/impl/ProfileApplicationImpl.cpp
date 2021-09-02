@@ -1,3 +1,4 @@
+
 #include "uml/impl/ProfileApplicationImpl.hpp"
 
 #ifdef NDEBUG
@@ -25,7 +26,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -33,7 +33,6 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-
 
 #include "uml/Comment.hpp"
 #include "uml/DirectedRelationship.hpp"
@@ -132,28 +131,6 @@ std::shared_ptr<ecore::EObject> ProfileApplicationImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> ProfileApplicationImpl::eStaticClass() const
-{
-	return uml::umlPackage::eInstance()->getProfileApplication_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-/*
-Getter & Setter for attribute isStrict
-*/
-bool ProfileApplicationImpl::getIsStrict() const 
-{
-	return m_isStrict;
-}
-void ProfileApplicationImpl::setIsStrict(bool _isStrict)
-{
-	m_isStrict = _isStrict;
-	
-} 
-
-
 //*********************************
 // Operations
 //*********************************
@@ -170,11 +147,23 @@ std::shared_ptr<ecore::ENamedElement> ProfileApplicationImpl::getAppliedDefiniti
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference appliedProfile
-*/
+/* Getter & Setter for attribute isStrict */
+bool ProfileApplicationImpl::getIsStrict() const 
+{
+	return m_isStrict;
+}
+void ProfileApplicationImpl::setIsStrict(bool _isStrict)
+{
+	m_isStrict = _isStrict;
+	
+}
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference appliedProfile */
 std::shared_ptr<uml::Profile> ProfileApplicationImpl::getAppliedProfile() const
 {
     return m_appliedProfile;
@@ -185,10 +174,7 @@ void ProfileApplicationImpl::setAppliedProfile(std::shared_ptr<uml::Profile> _ap
 	
 }
 
-
-/*
-Getter & Setter for reference applyingPackage
-*/
+/* Getter & Setter for reference applyingPackage */
 std::weak_ptr<uml::Package> ProfileApplicationImpl::getApplyingPackage() const
 {
     return m_applyingPackage;
@@ -198,7 +184,6 @@ void ProfileApplicationImpl::setApplyingPackage(std::weak_ptr<uml::Package> _app
     m_applyingPackage = _applyingPackage;
 	
 }
-
 
 //*********************************
 // Union Getter
@@ -278,18 +263,9 @@ std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> ProfileApplicationImpl:
 	return m_target;
 }
 
-
-
-
-std::shared_ptr<ProfileApplication> ProfileApplicationImpl::getThisProfileApplicationPtr() const
-{
-	return m_thisProfileApplicationPtr.lock();
-}
-void ProfileApplicationImpl::setThisProfileApplicationPtr(std::weak_ptr<ProfileApplication> thisProfileApplicationPtr)
-{
-	m_thisProfileApplicationPtr = thisProfileApplicationPtr;
-	setThisDirectedRelationshipPtr(thisProfileApplicationPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> ProfileApplicationImpl::eContainer() const
 {
 	if(auto wp = m_applyingPackage.lock())
@@ -302,115 +278,6 @@ std::shared_ptr<ecore::EObject> ProfileApplicationImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any ProfileApplicationImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::PROFILEAPPLICATION_ATTRIBUTE_APPLIEDPROFILE:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getAppliedProfile();
-				return eAny(returnValue); //1846
-			}
-		case uml::umlPackage::PROFILEAPPLICATION_ATTRIBUTE_APPLYINGPACKAGE:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getApplyingPackage().lock();
-				return eAny(returnValue); //1848
-			}
-		case uml::umlPackage::PROFILEAPPLICATION_ATTRIBUTE_ISSTRICT:
-			return eAny(getIsStrict()); //1847
-	}
-	return DirectedRelationshipImpl::eGet(featureID, resolve, coreType);
-}
-bool ProfileApplicationImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::PROFILEAPPLICATION_ATTRIBUTE_APPLIEDPROFILE:
-			return getAppliedProfile() != nullptr; //1846
-		case uml::umlPackage::PROFILEAPPLICATION_ATTRIBUTE_APPLYINGPACKAGE:
-			return getApplyingPackage().lock() != nullptr; //1848
-		case uml::umlPackage::PROFILEAPPLICATION_ATTRIBUTE_ISSTRICT:
-			return getIsStrict() != false; //1847
-	}
-	return DirectedRelationshipImpl::internalEIsSet(featureID);
-}
-bool ProfileApplicationImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::PROFILEAPPLICATION_ATTRIBUTE_APPLIEDPROFILE:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::Profile> _appliedProfile = std::dynamic_pointer_cast<uml::Profile>(_temp);
-			setAppliedProfile(_appliedProfile); //1846
-			return true;
-		}
-		case uml::umlPackage::PROFILEAPPLICATION_ATTRIBUTE_APPLYINGPACKAGE:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::Package> _applyingPackage = std::dynamic_pointer_cast<uml::Package>(_temp);
-			setApplyingPackage(_applyingPackage); //1848
-			return true;
-		}
-		case uml::umlPackage::PROFILEAPPLICATION_ATTRIBUTE_ISSTRICT:
-		{
-			// BOOST CAST
-			bool _isStrict = newValue->get<bool>();
-			setIsStrict(_isStrict); //1847
-			return true;
-		}
-	}
-
-	return DirectedRelationshipImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any ProfileApplicationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-		
-		// 1871054573
-		case umlPackage::PROFILEAPPLICATION_OPERATION_GETAPPLIEDDEFINITION:
-		{
-			result = eAny(this->getAppliedDefinition());
-			break;
-		}
-		
-		// 1978495829
-		case umlPackage::PROFILEAPPLICATION_OPERATION_GETAPPLIEDDEFINITION_NAMEDELEMENT:
-		{
-			//Retrieve input parameter 'namedElement'
-			//parameter 0
-			std::shared_ptr<uml::NamedElement> incoming_param_namedElement;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_namedElement_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_namedElement = (*incoming_param_namedElement_arguments_citer)->get()->get<std::shared_ptr<uml::NamedElement> >();
-			result = eAny(this->getAppliedDefinition(incoming_param_namedElement));
-			break;
-		}
-
-		default:
-		{
-			// call superTypes
-			result = DirectedRelationshipImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -517,10 +384,6 @@ void ProfileApplicationImpl::save(std::shared_ptr<persistence::interfaces::XSave
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
 }
 
 void ProfileApplicationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -542,3 +405,131 @@ void ProfileApplicationImpl::saveContent(std::shared_ptr<persistence::interfaces
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> ProfileApplicationImpl::eStaticClass() const
+{
+	return uml::umlPackage::eInstance()->getProfileApplication_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any ProfileApplicationImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::PROFILEAPPLICATION_ATTRIBUTE_APPLIEDPROFILE:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getAppliedProfile();
+				return eAny(returnValue); //1846
+			}
+		case uml::umlPackage::PROFILEAPPLICATION_ATTRIBUTE_APPLYINGPACKAGE:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getApplyingPackage().lock();
+				return eAny(returnValue); //1848
+			}
+		case uml::umlPackage::PROFILEAPPLICATION_ATTRIBUTE_ISSTRICT:
+			return eAny(getIsStrict()); //1847
+	}
+	return DirectedRelationshipImpl::eGet(featureID, resolve, coreType);
+}
+
+bool ProfileApplicationImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::PROFILEAPPLICATION_ATTRIBUTE_APPLIEDPROFILE:
+			return getAppliedProfile() != nullptr; //1846
+		case uml::umlPackage::PROFILEAPPLICATION_ATTRIBUTE_APPLYINGPACKAGE:
+			return getApplyingPackage().lock() != nullptr; //1848
+		case uml::umlPackage::PROFILEAPPLICATION_ATTRIBUTE_ISSTRICT:
+			return getIsStrict() != false; //1847
+	}
+	return DirectedRelationshipImpl::internalEIsSet(featureID);
+}
+
+bool ProfileApplicationImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::PROFILEAPPLICATION_ATTRIBUTE_APPLIEDPROFILE:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::Profile> _appliedProfile = std::dynamic_pointer_cast<uml::Profile>(_temp);
+			setAppliedProfile(_appliedProfile); //1846
+			return true;
+		}
+		case uml::umlPackage::PROFILEAPPLICATION_ATTRIBUTE_APPLYINGPACKAGE:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::Package> _applyingPackage = std::dynamic_pointer_cast<uml::Package>(_temp);
+			setApplyingPackage(_applyingPackage); //1848
+			return true;
+		}
+		case uml::umlPackage::PROFILEAPPLICATION_ATTRIBUTE_ISSTRICT:
+		{
+			// BOOST CAST
+			bool _isStrict = newValue->get<bool>();
+			setIsStrict(_isStrict); //1847
+			return true;
+		}
+	}
+
+	return DirectedRelationshipImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any ProfileApplicationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 1871054573
+		case umlPackage::PROFILEAPPLICATION_OPERATION_GETAPPLIEDDEFINITION:
+		{
+			result = eAny(this->getAppliedDefinition());
+			break;
+		}
+		
+		// 1978495829
+		case umlPackage::PROFILEAPPLICATION_OPERATION_GETAPPLIEDDEFINITION_NAMEDELEMENT:
+		{
+			//Retrieve input parameter 'namedElement'
+			//parameter 0
+			std::shared_ptr<uml::NamedElement> incoming_param_namedElement;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_namedElement_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_namedElement = (*incoming_param_namedElement_arguments_citer)->get()->get<std::shared_ptr<uml::NamedElement> >();
+			result = eAny(this->getAppliedDefinition(incoming_param_namedElement));
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = DirectedRelationshipImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<ProfileApplication> ProfileApplicationImpl::getThisProfileApplicationPtr() const
+{
+	return m_thisProfileApplicationPtr.lock();
+}
+void ProfileApplicationImpl::setThisProfileApplicationPtr(std::weak_ptr<ProfileApplication> thisProfileApplicationPtr)
+{
+	m_thisProfileApplicationPtr = thisProfileApplicationPtr;
+	setThisDirectedRelationshipPtr(thisProfileApplicationPtr);
+}

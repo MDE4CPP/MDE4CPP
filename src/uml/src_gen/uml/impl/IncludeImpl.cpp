@@ -1,3 +1,4 @@
+
 #include "uml/impl/IncludeImpl.hpp"
 
 #ifdef NDEBUG
@@ -25,7 +26,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -33,7 +33,6 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-
 
 #include "uml/Comment.hpp"
 #include "uml/Dependency.hpp"
@@ -139,25 +138,18 @@ std::shared_ptr<ecore::EObject> IncludeImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> IncludeImpl::eStaticClass() const
-{
-	return uml::umlPackage::eInstance()->getInclude_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference addition
-*/
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference addition */
 std::shared_ptr<uml::UseCase> IncludeImpl::getAddition() const
 {
     return m_addition;
@@ -168,10 +160,7 @@ void IncludeImpl::setAddition(std::shared_ptr<uml::UseCase> _addition)
 	
 }
 
-
-/*
-Getter & Setter for reference includingCase
-*/
+/* Getter & Setter for reference includingCase */
 std::weak_ptr<uml::UseCase> IncludeImpl::getIncludingCase() const
 {
     return m_includingCase;
@@ -181,7 +170,6 @@ void IncludeImpl::setIncludingCase(std::weak_ptr<uml::UseCase> _includingCase)
     m_includingCase = _includingCase;
 	
 }
-
 
 //*********************************
 // Union Getter
@@ -266,19 +254,9 @@ std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> IncludeImpl::getTarget(
 	return m_target;
 }
 
-
-
-
-std::shared_ptr<Include> IncludeImpl::getThisIncludePtr() const
-{
-	return m_thisIncludePtr.lock();
-}
-void IncludeImpl::setThisIncludePtr(std::weak_ptr<Include> thisIncludePtr)
-{
-	m_thisIncludePtr = thisIncludePtr;
-	setThisDirectedRelationshipPtr(thisIncludePtr);
-	setThisNamedElementPtr(thisIncludePtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> IncludeImpl::eContainer() const
 {
 	if(auto wp = m_includingCase.lock())
@@ -296,109 +274,6 @@ std::shared_ptr<ecore::EObject> IncludeImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any IncludeImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::INCLUDE_ATTRIBUTE_ADDITION:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getAddition();
-				return eAny(returnValue); //11212
-			}
-		case uml::umlPackage::INCLUDE_ATTRIBUTE_INCLUDINGCASE:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getIncludingCase().lock();
-				return eAny(returnValue); //11213
-			}
-	}
-	Any result;
-	result = DirectedRelationshipImpl::eGet(featureID, resolve, coreType);
-	if (result != nullptr && !result->isEmpty())
-	{
-		return result;
-	}
-	result = NamedElementImpl::eGet(featureID, resolve, coreType);
-	return result;
-}
-bool IncludeImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::INCLUDE_ATTRIBUTE_ADDITION:
-			return getAddition() != nullptr; //11212
-		case uml::umlPackage::INCLUDE_ATTRIBUTE_INCLUDINGCASE:
-			return getIncludingCase().lock() != nullptr; //11213
-	}
-	bool result = false;
-	result = DirectedRelationshipImpl::internalEIsSet(featureID);
-	if (result)
-	{
-		return result;
-	}
-	result = NamedElementImpl::internalEIsSet(featureID);
-	return result;
-}
-bool IncludeImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::INCLUDE_ATTRIBUTE_ADDITION:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::UseCase> _addition = std::dynamic_pointer_cast<uml::UseCase>(_temp);
-			setAddition(_addition); //11212
-			return true;
-		}
-		case uml::umlPackage::INCLUDE_ATTRIBUTE_INCLUDINGCASE:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::UseCase> _includingCase = std::dynamic_pointer_cast<uml::UseCase>(_temp);
-			setIncludingCase(_includingCase); //11213
-			return true;
-		}
-	}
-
-	bool result = false;
-	result = DirectedRelationshipImpl::eSet(featureID, newValue);
-	if (result)
-	{
-		return result;
-	}
-	result = NamedElementImpl::eSet(featureID, newValue);
-	return result;
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any IncludeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-
-		default:
-		{
-			// call superTypes
-			result = DirectedRelationshipImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			result = NamedElementImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -500,10 +375,6 @@ void IncludeImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> sa
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
 }
 
 void IncludeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -520,3 +391,126 @@ void IncludeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHand
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> IncludeImpl::eStaticClass() const
+{
+	return uml::umlPackage::eInstance()->getInclude_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any IncludeImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::INCLUDE_ATTRIBUTE_ADDITION:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getAddition();
+				return eAny(returnValue); //11212
+			}
+		case uml::umlPackage::INCLUDE_ATTRIBUTE_INCLUDINGCASE:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getIncludingCase().lock();
+				return eAny(returnValue); //11213
+			}
+	}
+	Any result;
+	result = DirectedRelationshipImpl::eGet(featureID, resolve, coreType);
+	if (result != nullptr && !result->isEmpty())
+	{
+		return result;
+	}
+	result = NamedElementImpl::eGet(featureID, resolve, coreType);
+	return result;
+}
+
+bool IncludeImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::INCLUDE_ATTRIBUTE_ADDITION:
+			return getAddition() != nullptr; //11212
+		case uml::umlPackage::INCLUDE_ATTRIBUTE_INCLUDINGCASE:
+			return getIncludingCase().lock() != nullptr; //11213
+	}
+	bool result = false;
+	result = DirectedRelationshipImpl::internalEIsSet(featureID);
+	if (result)
+	{
+		return result;
+	}
+	result = NamedElementImpl::internalEIsSet(featureID);
+	return result;
+}
+
+bool IncludeImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::INCLUDE_ATTRIBUTE_ADDITION:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::UseCase> _addition = std::dynamic_pointer_cast<uml::UseCase>(_temp);
+			setAddition(_addition); //11212
+			return true;
+		}
+		case uml::umlPackage::INCLUDE_ATTRIBUTE_INCLUDINGCASE:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::UseCase> _includingCase = std::dynamic_pointer_cast<uml::UseCase>(_temp);
+			setIncludingCase(_includingCase); //11213
+			return true;
+		}
+	}
+
+	bool result = false;
+	result = DirectedRelationshipImpl::eSet(featureID, newValue);
+	if (result)
+	{
+		return result;
+	}
+	result = NamedElementImpl::eSet(featureID, newValue);
+	return result;
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any IncludeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+
+		default:
+		{
+			// call superTypes
+			result = DirectedRelationshipImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			result = NamedElementImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<Include> IncludeImpl::getThisIncludePtr() const
+{
+	return m_thisIncludePtr.lock();
+}
+void IncludeImpl::setThisIncludePtr(std::weak_ptr<Include> thisIncludePtr)
+{
+	m_thisIncludePtr = thisIncludePtr;
+	setThisDirectedRelationshipPtr(thisIncludePtr);
+	setThisNamedElementPtr(thisIncludePtr);
+}

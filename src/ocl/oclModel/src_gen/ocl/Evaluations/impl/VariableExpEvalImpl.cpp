@@ -1,3 +1,4 @@
+
 #include "ocl/Evaluations/impl/VariableExpEvalImpl.hpp"
 
 #ifdef NDEBUG
@@ -24,20 +25,18 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "fUML/Semantics/Values/ValuesFactory.hpp"
-#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
 #include "uml/umlFactory.hpp"
+#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
+#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
-
 
 #include "ocl/Evaluations/EvalEnvironment.hpp"
 #include "fUML/Semantics/Loci/Locus.hpp"
@@ -120,25 +119,18 @@ std::shared_ptr<ecore::EObject> VariableExpEvalImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> VariableExpEvalImpl::eStaticClass() const
-{
-	return ocl::Evaluations::EvaluationsPackage::eInstance()->getVariableExpEval_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference referredVariable
-*/
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference referredVariable */
 std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> VariableExpEvalImpl::getReferredVariable() const
 {
     return m_referredVariable;
@@ -149,89 +141,16 @@ void VariableExpEvalImpl::setReferredVariable(std::shared_ptr<fUML::Semantics::S
 	
 }
 
-
 //*********************************
 // Union Getter
 //*********************************
 
-
-
-std::shared_ptr<VariableExpEval> VariableExpEvalImpl::getThisVariableExpEvalPtr() const
-{
-	return m_thisVariableExpEvalPtr.lock();
-}
-void VariableExpEvalImpl::setThisVariableExpEvalPtr(std::weak_ptr<VariableExpEval> thisVariableExpEvalPtr)
-{
-	m_thisVariableExpEvalPtr = thisVariableExpEvalPtr;
-	setThisOclExpEvalPtr(thisVariableExpEvalPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> VariableExpEvalImpl::eContainer() const
 {
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any VariableExpEvalImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case ocl::Evaluations::EvaluationsPackage::VARIABLEEXPEVAL_ATTRIBUTE_REFERREDVARIABLE:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getReferredVariable();
-				return eAny(returnValue); //996
-			}
-	}
-	return OclExpEvalImpl::eGet(featureID, resolve, coreType);
-}
-bool VariableExpEvalImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case ocl::Evaluations::EvaluationsPackage::VARIABLEEXPEVAL_ATTRIBUTE_REFERREDVARIABLE:
-			return getReferredVariable() != nullptr; //996
-	}
-	return OclExpEvalImpl::internalEIsSet(featureID);
-}
-bool VariableExpEvalImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case ocl::Evaluations::EvaluationsPackage::VARIABLEEXPEVAL_ATTRIBUTE_REFERREDVARIABLE:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> _referredVariable = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::StringValue>(_temp);
-			setReferredVariable(_referredVariable); //996
-			return true;
-		}
-	}
-
-	return OclExpEvalImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any VariableExpEvalImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-
-		default:
-		{
-			// call superTypes
-			result = OclExpEvalImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -315,9 +234,6 @@ void VariableExpEvalImpl::save(std::shared_ptr<persistence::interfaces::XSaveHan
 	fUML::Semantics::Loci::SemanticVisitorImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
 }
 
 void VariableExpEvalImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -334,3 +250,86 @@ void VariableExpEvalImpl::saveContent(std::shared_ptr<persistence::interfaces::X
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> VariableExpEvalImpl::eStaticClass() const
+{
+	return ocl::Evaluations::EvaluationsPackage::eInstance()->getVariableExpEval_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any VariableExpEvalImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case ocl::Evaluations::EvaluationsPackage::VARIABLEEXPEVAL_ATTRIBUTE_REFERREDVARIABLE:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getReferredVariable();
+				return eAny(returnValue); //996
+			}
+	}
+	return OclExpEvalImpl::eGet(featureID, resolve, coreType);
+}
+
+bool VariableExpEvalImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case ocl::Evaluations::EvaluationsPackage::VARIABLEEXPEVAL_ATTRIBUTE_REFERREDVARIABLE:
+			return getReferredVariable() != nullptr; //996
+	}
+	return OclExpEvalImpl::internalEIsSet(featureID);
+}
+
+bool VariableExpEvalImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case ocl::Evaluations::EvaluationsPackage::VARIABLEEXPEVAL_ATTRIBUTE_REFERREDVARIABLE:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> _referredVariable = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::StringValue>(_temp);
+			setReferredVariable(_referredVariable); //996
+			return true;
+		}
+	}
+
+	return OclExpEvalImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any VariableExpEvalImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+
+		default:
+		{
+			// call superTypes
+			result = OclExpEvalImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<VariableExpEval> VariableExpEvalImpl::getThisVariableExpEvalPtr() const
+{
+	return m_thisVariableExpEvalPtr.lock();
+}
+void VariableExpEvalImpl::setThisVariableExpEvalPtr(std::weak_ptr<VariableExpEval> thisVariableExpEvalPtr)
+{
+	m_thisVariableExpEvalPtr = thisVariableExpEvalPtr;
+	setThisOclExpEvalPtr(thisVariableExpEvalPtr);
+}

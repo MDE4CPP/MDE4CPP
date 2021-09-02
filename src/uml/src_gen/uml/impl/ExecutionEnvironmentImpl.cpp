@@ -1,3 +1,4 @@
+
 #include "uml/impl/ExecutionEnvironmentImpl.hpp"
 
 #ifdef NDEBUG
@@ -25,7 +26,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -33,7 +33,6 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-
 
 #include "uml/Behavior.hpp"
 #include "uml/Class.hpp"
@@ -179,21 +178,16 @@ std::shared_ptr<ecore::EObject> ExecutionEnvironmentImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> ExecutionEnvironmentImpl::eStaticClass() const
-{
-	return uml::umlPackage::eInstance()->getExecutionEnvironment_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
 
 //*********************************
-// References
+// Attribute Getters & Setters
+//*********************************
+
+//*********************************
+// Reference Getters & Setters
 //*********************************
 
 //*********************************
@@ -336,16 +330,9 @@ std::shared_ptr<SubsetUnion<uml::ConnectableElement, uml::NamedElement>> Executi
 
 
 
-
-std::shared_ptr<ExecutionEnvironment> ExecutionEnvironmentImpl::getThisExecutionEnvironmentPtr() const
-{
-	return m_thisExecutionEnvironmentPtr.lock();
-}
-void ExecutionEnvironmentImpl::setThisExecutionEnvironmentPtr(std::weak_ptr<ExecutionEnvironment> thisExecutionEnvironmentPtr)
-{
-	m_thisExecutionEnvironmentPtr = thisExecutionEnvironmentPtr;
-	setThisNodePtr(thisExecutionEnvironmentPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> ExecutionEnvironmentImpl::eContainer() const
 {
 	if(auto wp = m_namespace.lock())
@@ -373,55 +360,6 @@ std::shared_ptr<ecore::EObject> ExecutionEnvironmentImpl::eContainer() const
 	}
 
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any ExecutionEnvironmentImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-	}
-	return NodeImpl::eGet(featureID, resolve, coreType);
-}
-bool ExecutionEnvironmentImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-	}
-	return NodeImpl::internalEIsSet(featureID);
-}
-bool ExecutionEnvironmentImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-	}
-
-	return NodeImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any ExecutionEnvironmentImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-
-		default:
-		{
-			// call superTypes
-			result = NodeImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -492,16 +430,6 @@ void ExecutionEnvironmentImpl::save(std::shared_ptr<persistence::interfaces::XSa
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 }
 
 void ExecutionEnvironmentImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -516,3 +444,71 @@ void ExecutionEnvironmentImpl::saveContent(std::shared_ptr<persistence::interfac
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> ExecutionEnvironmentImpl::eStaticClass() const
+{
+	return uml::umlPackage::eInstance()->getExecutionEnvironment_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any ExecutionEnvironmentImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+	}
+	return NodeImpl::eGet(featureID, resolve, coreType);
+}
+
+bool ExecutionEnvironmentImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+	}
+	return NodeImpl::internalEIsSet(featureID);
+}
+
+bool ExecutionEnvironmentImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+	}
+
+	return NodeImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any ExecutionEnvironmentImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+
+		default:
+		{
+			// call superTypes
+			result = NodeImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<ExecutionEnvironment> ExecutionEnvironmentImpl::getThisExecutionEnvironmentPtr() const
+{
+	return m_thisExecutionEnvironmentPtr.lock();
+}
+void ExecutionEnvironmentImpl::setThisExecutionEnvironmentPtr(std::weak_ptr<ExecutionEnvironment> thisExecutionEnvironmentPtr)
+{
+	m_thisExecutionEnvironmentPtr = thisExecutionEnvironmentPtr;
+	setThisNodePtr(thisExecutionEnvironmentPtr);
+}

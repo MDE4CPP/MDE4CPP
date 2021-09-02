@@ -1,3 +1,4 @@
+
 #include "ocl/Expressions/impl/FeatureCallExpImpl.hpp"
 
 #ifdef NDEBUG
@@ -25,7 +26,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -35,7 +35,6 @@
 #include "ecore/ecoreFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
-
 
 #include "ocl/Expressions/CallExp.hpp"
 #include "ocl/Expressions/CollectionRange.hpp"
@@ -204,17 +203,14 @@ std::shared_ptr<ecore::EObject> FeatureCallExpImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> FeatureCallExpImpl::eStaticClass() const
-{
-	return ocl::Expressions::ExpressionsPackage::eInstance()->getFeatureCallExp_Class();
-}
+//*********************************
+// Operations
+//*********************************
 
 //*********************************
-// Attribute Setter Getter
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for attribute isPre
-*/
+/* Getter & Setter for attribute isPre */
 bool FeatureCallExpImpl::getIsPre() const 
 {
 	return m_isPre;
@@ -223,32 +219,19 @@ void FeatureCallExpImpl::setIsPre(bool _isPre)
 {
 	m_isPre = _isPre;
 	
-} 
-
-
-//*********************************
-// Operations
-//*********************************
+}
 
 //*********************************
-// References
+// Reference Getters & Setters
 //*********************************
 
 //*********************************
 // Union Getter
 //*********************************
 
-
-
-std::shared_ptr<FeatureCallExp> FeatureCallExpImpl::getThisFeatureCallExpPtr() const
-{
-	return m_thisFeatureCallExpPtr.lock();
-}
-void FeatureCallExpImpl::setThisFeatureCallExpPtr(std::weak_ptr<FeatureCallExp> thisFeatureCallExpPtr)
-{
-	m_thisFeatureCallExpPtr = thisFeatureCallExpPtr;
-	setThisCallExpPtr(thisFeatureCallExpPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> FeatureCallExpImpl::eContainer() const
 {
 	if(auto wp = m_appliedElement.lock())
@@ -306,66 +289,6 @@ std::shared_ptr<ecore::EObject> FeatureCallExpImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any FeatureCallExpImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case ocl::Expressions::ExpressionsPackage::FEATURECALLEXP_ATTRIBUTE_ISPRE:
-			return eAny(getIsPre()); //2923
-	}
-	return CallExpImpl::eGet(featureID, resolve, coreType);
-}
-bool FeatureCallExpImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case ocl::Expressions::ExpressionsPackage::FEATURECALLEXP_ATTRIBUTE_ISPRE:
-			return getIsPre() != false; //2923
-	}
-	return CallExpImpl::internalEIsSet(featureID);
-}
-bool FeatureCallExpImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case ocl::Expressions::ExpressionsPackage::FEATURECALLEXP_ATTRIBUTE_ISPRE:
-		{
-			// BOOST CAST
-			bool _isPre = newValue->get<bool>();
-			setIsPre(_isPre); //2923
-			return true;
-		}
-	}
-
-	return CallExpImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any FeatureCallExpImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-
-		default:
-		{
-			// call superTypes
-			result = CallExpImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -441,11 +364,6 @@ void FeatureCallExpImpl::save(std::shared_ptr<persistence::interfaces::XSaveHand
 	ecore::EModelElementImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
-	
 }
 
 void FeatureCallExpImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -465,3 +383,82 @@ void FeatureCallExpImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> FeatureCallExpImpl::eStaticClass() const
+{
+	return ocl::Expressions::ExpressionsPackage::eInstance()->getFeatureCallExp_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any FeatureCallExpImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case ocl::Expressions::ExpressionsPackage::FEATURECALLEXP_ATTRIBUTE_ISPRE:
+			return eAny(getIsPre()); //2923
+	}
+	return CallExpImpl::eGet(featureID, resolve, coreType);
+}
+
+bool FeatureCallExpImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case ocl::Expressions::ExpressionsPackage::FEATURECALLEXP_ATTRIBUTE_ISPRE:
+			return getIsPre() != false; //2923
+	}
+	return CallExpImpl::internalEIsSet(featureID);
+}
+
+bool FeatureCallExpImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case ocl::Expressions::ExpressionsPackage::FEATURECALLEXP_ATTRIBUTE_ISPRE:
+		{
+			// BOOST CAST
+			bool _isPre = newValue->get<bool>();
+			setIsPre(_isPre); //2923
+			return true;
+		}
+	}
+
+	return CallExpImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any FeatureCallExpImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+
+		default:
+		{
+			// call superTypes
+			result = CallExpImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<FeatureCallExp> FeatureCallExpImpl::getThisFeatureCallExpPtr() const
+{
+	return m_thisFeatureCallExpPtr.lock();
+}
+void FeatureCallExpImpl::setThisFeatureCallExpPtr(std::weak_ptr<FeatureCallExp> thisFeatureCallExpPtr)
+{
+	m_thisFeatureCallExpPtr = thisFeatureCallExpPtr;
+	setThisCallExpPtr(thisFeatureCallExpPtr);
+}

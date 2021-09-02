@@ -58,7 +58,8 @@ namespace uml
 			   ((peerFragments->first() = self) or  (peerFragments->last() = self)))
 			*/
 			 
-			virtual bool first_or_last_interaction_fragment(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
+			virtual bool first_or_last_interaction_fragment(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			/*!
 			Continuations are always global in the enclosing InteractionFragment e.g., it always covers all Lifelines covered by the enclosing InteractionOperator.
 			enclosingOperand->notEmpty() and
 			  let operandLifelines : Set(Lifeline) =  enclosingOperand.covered in 
@@ -66,7 +67,8 @@ namespace uml
 			    operandLifelines->forAll(ol :Lifeline |self.covered->includes(ol)))
 			*/
 			 
-			virtual bool global(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
+			virtual bool global(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			/*!
 			Across all Interaction instances having the same context value, every Lifeline instance covered by a Continuation (self) must be common with one covered Lifeline instance of all other Continuation instances with the same name as self, and every Lifeline instance covered by a Continuation instance with the same name as self must be common with one covered Lifeline instance of self. Lifeline instances are common if they have the same selector and represents associationEnd values.
 			enclosingOperand.combinedFragment->notEmpty() and
 			let parentInteraction : Set(Interaction) = 
@@ -97,7 +99,7 @@ namespace uml
 			virtual bool same_name(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
-			// Attributes Getter Setter
+			// Attribute Getters & Setters
 			//*********************************
 			/*!
 			True: when the Continuation is at the end of the enclosing InteractionFragment and False when it is in the beginning.
@@ -112,33 +114,35 @@ namespace uml
 			 
 			virtual void setSetting (bool _setting);
 			
+			//*********************************
+			// Reference Getters & Setters
+			//*********************************
 			
 			//*********************************
-			// Reference
-			//*********************************
-			
-			
-			//*********************************
-			// Union Getter
+			// Union Reference Getters
 			//*********************************
 			/*!
 			Specifies the Namespace that owns the NamedElement.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Namespace> getNamespace() const ;/*!
+			virtual std::weak_ptr<uml::Namespace> getNamespace() const ;
+			/*!
 			The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const ;/*!
+			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const ;
+			/*!
 			The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
 			virtual std::weak_ptr<uml::Element> getOwner() const ;
 			
-
+			//*********************************
+			// Container Getter
+			//*********************************
 			virtual std::shared_ptr<ecore::EObject> eContainer() const ; 
 			
 			//*********************************
@@ -147,20 +151,23 @@ namespace uml
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) ;
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
-			
 			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
-			
 
-			//*********************************
-			// Structural Feature Getter/Setter
-			//*********************************
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+
+			//*********************************
+			// EStructuralFeature Get/Set/IsSet
+			//*********************************
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool internalEIsSet(int featureID) const ;
 			virtual bool eSet(int featureID, Any newValue) ;
+			virtual bool internalEIsSet(int featureID) const ;
+
+			//*********************************
+			// EOperation Invoke
+			//*********************************
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:

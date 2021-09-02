@@ -1,3 +1,4 @@
+
 #include "fUML/Semantics/CommonBehavior/impl/CallEventOccurrenceImpl.hpp"
 
 #ifdef NDEBUG
@@ -37,7 +38,6 @@
 #include <exception> // used in Persistence
 #include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
-
 
 #include "fUML/Semantics/CommonBehavior/CallEventExecution.hpp"
 #include "fUML/Semantics/CommonBehavior/EventOccurrence.hpp"
@@ -117,15 +117,6 @@ std::shared_ptr<ecore::EObject> CallEventOccurrenceImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> CallEventOccurrenceImpl::eStaticClass() const
-{
-	return fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance()->getCallEventOccurrence_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
@@ -176,11 +167,13 @@ void CallEventOccurrenceImpl::setOutputParameterValues(std::shared_ptr<Bag<fUML:
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference execution
-*/
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference execution */
 std::shared_ptr<fUML::Semantics::CommonBehavior::CallEventExecution> CallEventOccurrenceImpl::getExecution() const
 {
     return m_execution;
@@ -191,134 +184,16 @@ void CallEventOccurrenceImpl::setExecution(std::shared_ptr<fUML::Semantics::Comm
 	
 }
 
-
 //*********************************
 // Union Getter
 //*********************************
 
-
-
-std::shared_ptr<CallEventOccurrence> CallEventOccurrenceImpl::getThisCallEventOccurrencePtr() const
-{
-	return m_thisCallEventOccurrencePtr.lock();
-}
-void CallEventOccurrenceImpl::setThisCallEventOccurrencePtr(std::weak_ptr<CallEventOccurrence> thisCallEventOccurrencePtr)
-{
-	m_thisCallEventOccurrencePtr = thisCallEventOccurrencePtr;
-	setThisEventOccurrencePtr(thisCallEventOccurrencePtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> CallEventOccurrenceImpl::eContainer() const
 {
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any CallEventOccurrenceImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::CALLEVENTOCCURRENCE_ATTRIBUTE_EXECUTION:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getExecution();
-				return eAny(returnValue); //181
-			}
-	}
-	return EventOccurrenceImpl::eGet(featureID, resolve, coreType);
-}
-bool CallEventOccurrenceImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::CALLEVENTOCCURRENCE_ATTRIBUTE_EXECUTION:
-			return getExecution() != nullptr; //181
-	}
-	return EventOccurrenceImpl::internalEIsSet(featureID);
-}
-bool CallEventOccurrenceImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::CALLEVENTOCCURRENCE_ATTRIBUTE_EXECUTION:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<fUML::Semantics::CommonBehavior::CallEventExecution> _execution = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::CallEventExecution>(_temp);
-			setExecution(_execution); //181
-			return true;
-		}
-	}
-
-	return EventOccurrenceImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any CallEventOccurrenceImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-		
-		// 1654121439
-		case CommonBehaviorPackage::CALLEVENTOCCURRENCE_OPERATION_GETOPERATION:
-		{
-			result = eAny(this->getOperation());
-			break;
-		}
-		
-		// 1038563063
-		case CommonBehaviorPackage::CALLEVENTOCCURRENCE_OPERATION_GETPARAMETERVALUES:
-		{
-			result = eAny(this->getParameterValues());
-			break;
-		}
-		
-		// 1118833879
-		case CommonBehaviorPackage::CALLEVENTOCCURRENCE_OPERATION_MATCH_TRIGGER:
-		{
-			//Retrieve input parameter 'trigger'
-			//parameter 0
-			std::shared_ptr<uml::Trigger> incoming_param_trigger;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_trigger_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_trigger = (*incoming_param_trigger_arguments_citer)->get()->get<std::shared_ptr<uml::Trigger> >();
-			result = eAny(this->match(incoming_param_trigger));
-			break;
-		}
-		
-		// 460125797
-		case CommonBehaviorPackage::CALLEVENTOCCURRENCE_OPERATION_RELEASECALLER:
-		{
-			this->releaseCaller();
-			break;
-		}
-		
-		// 1021816772
-		case CommonBehaviorPackage::CALLEVENTOCCURRENCE_OPERATION_SETOUTPUTPARAMETERVALUES_PARAMETERVALUE:
-		{
-			//Retrieve input parameter 'parameterValues'
-			//parameter 0
-			std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> incoming_param_parameterValues;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_parameterValues_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_parameterValues = (*incoming_param_parameterValues_arguments_citer)->get()->get<std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> >();
-			this->setOutputParameterValues(incoming_param_parameterValues);
-			break;
-		}
-
-		default:
-		{
-			// call superTypes
-			result = EventOccurrenceImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -398,7 +273,6 @@ void CallEventOccurrenceImpl::save(std::shared_ptr<persistence::interfaces::XSav
 	EventOccurrenceImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
 }
 
 void CallEventOccurrenceImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -415,3 +289,131 @@ void CallEventOccurrenceImpl::saveContent(std::shared_ptr<persistence::interface
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> CallEventOccurrenceImpl::eStaticClass() const
+{
+	return fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance()->getCallEventOccurrence_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any CallEventOccurrenceImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::CALLEVENTOCCURRENCE_ATTRIBUTE_EXECUTION:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getExecution();
+				return eAny(returnValue); //181
+			}
+	}
+	return EventOccurrenceImpl::eGet(featureID, resolve, coreType);
+}
+
+bool CallEventOccurrenceImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::CALLEVENTOCCURRENCE_ATTRIBUTE_EXECUTION:
+			return getExecution() != nullptr; //181
+	}
+	return EventOccurrenceImpl::internalEIsSet(featureID);
+}
+
+bool CallEventOccurrenceImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::CALLEVENTOCCURRENCE_ATTRIBUTE_EXECUTION:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<fUML::Semantics::CommonBehavior::CallEventExecution> _execution = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::CallEventExecution>(_temp);
+			setExecution(_execution); //181
+			return true;
+		}
+	}
+
+	return EventOccurrenceImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any CallEventOccurrenceImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 1654121439
+		case CommonBehaviorPackage::CALLEVENTOCCURRENCE_OPERATION_GETOPERATION:
+		{
+			result = eAny(this->getOperation());
+			break;
+		}
+		
+		// 1038563063
+		case CommonBehaviorPackage::CALLEVENTOCCURRENCE_OPERATION_GETPARAMETERVALUES:
+		{
+			result = eAny(this->getParameterValues());
+			break;
+		}
+		
+		// 1118833879
+		case CommonBehaviorPackage::CALLEVENTOCCURRENCE_OPERATION_MATCH_TRIGGER:
+		{
+			//Retrieve input parameter 'trigger'
+			//parameter 0
+			std::shared_ptr<uml::Trigger> incoming_param_trigger;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_trigger_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_trigger = (*incoming_param_trigger_arguments_citer)->get()->get<std::shared_ptr<uml::Trigger> >();
+			result = eAny(this->match(incoming_param_trigger));
+			break;
+		}
+		
+		// 460125797
+		case CommonBehaviorPackage::CALLEVENTOCCURRENCE_OPERATION_RELEASECALLER:
+		{
+			this->releaseCaller();
+			break;
+		}
+		
+		// 1021816772
+		case CommonBehaviorPackage::CALLEVENTOCCURRENCE_OPERATION_SETOUTPUTPARAMETERVALUES_PARAMETERVALUE:
+		{
+			//Retrieve input parameter 'parameterValues'
+			//parameter 0
+			std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> incoming_param_parameterValues;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_parameterValues_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_parameterValues = (*incoming_param_parameterValues_arguments_citer)->get()->get<std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> >();
+			this->setOutputParameterValues(incoming_param_parameterValues);
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = EventOccurrenceImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<CallEventOccurrence> CallEventOccurrenceImpl::getThisCallEventOccurrencePtr() const
+{
+	return m_thisCallEventOccurrencePtr.lock();
+}
+void CallEventOccurrenceImpl::setThisCallEventOccurrencePtr(std::weak_ptr<CallEventOccurrence> thisCallEventOccurrencePtr)
+{
+	m_thisCallEventOccurrencePtr = thisCallEventOccurrencePtr;
+	setThisEventOccurrencePtr(thisCallEventOccurrencePtr);
+}

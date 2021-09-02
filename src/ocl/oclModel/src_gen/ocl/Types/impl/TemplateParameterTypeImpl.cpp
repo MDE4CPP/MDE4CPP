@@ -1,3 +1,4 @@
+
 #include "ocl/Types/impl/TemplateParameterTypeImpl.hpp"
 
 #ifdef NDEBUG
@@ -25,7 +26,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -33,7 +33,6 @@
 
 #include <exception> // used in Persistence
 #include "ecore/ecoreFactory.hpp"
-
 
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClassifier.hpp"
@@ -115,17 +114,14 @@ std::shared_ptr<ecore::EObject> TemplateParameterTypeImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> TemplateParameterTypeImpl::eStaticClass() const
-{
-	return ocl::Types::TypesPackage::eInstance()->getTemplateParameterType_Class();
-}
+//*********************************
+// Operations
+//*********************************
 
 //*********************************
-// Attribute Setter Getter
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for attribute specification
-*/
+/* Getter & Setter for attribute specification */
 std::string TemplateParameterTypeImpl::getSpecification() const 
 {
 	return m_specification;
@@ -134,32 +130,19 @@ void TemplateParameterTypeImpl::setSpecification(std::string _specification)
 {
 	m_specification = _specification;
 	
-} 
-
-
-//*********************************
-// Operations
-//*********************************
+}
 
 //*********************************
-// References
+// Reference Getters & Setters
 //*********************************
 
 //*********************************
 // Union Getter
 //*********************************
 
-
-
-std::shared_ptr<TemplateParameterType> TemplateParameterTypeImpl::getThisTemplateParameterTypePtr() const
-{
-	return m_thisTemplateParameterTypePtr.lock();
-}
-void TemplateParameterTypeImpl::setThisTemplateParameterTypePtr(std::weak_ptr<TemplateParameterType> thisTemplateParameterTypePtr)
-{
-	m_thisTemplateParameterTypePtr = thisTemplateParameterTypePtr;
-	setThisEClassifierPtr(thisTemplateParameterTypePtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> TemplateParameterTypeImpl::eContainer() const
 {
 	if(auto wp = m_ePackage.lock())
@@ -167,66 +150,6 @@ std::shared_ptr<ecore::EObject> TemplateParameterTypeImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any TemplateParameterTypeImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case ocl::Types::TypesPackage::TEMPLATEPARAMETERTYPE_ATTRIBUTE_SPECIFICATION:
-			return eAny(getSpecification()); //838
-	}
-	return ecore::EClassifierImpl::eGet(featureID, resolve, coreType);
-}
-bool TemplateParameterTypeImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case ocl::Types::TypesPackage::TEMPLATEPARAMETERTYPE_ATTRIBUTE_SPECIFICATION:
-			return getSpecification() != ""; //838
-	}
-	return ecore::EClassifierImpl::internalEIsSet(featureID);
-}
-bool TemplateParameterTypeImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case ocl::Types::TypesPackage::TEMPLATEPARAMETERTYPE_ATTRIBUTE_SPECIFICATION:
-		{
-			// BOOST CAST
-			std::string _specification = newValue->get<std::string>();
-			setSpecification(_specification); //838
-			return true;
-		}
-	}
-
-	return ecore::EClassifierImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any TemplateParameterTypeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-
-		default:
-		{
-			// call superTypes
-			result = ecore::EClassifierImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -298,9 +221,6 @@ void TemplateParameterTypeImpl::save(std::shared_ptr<persistence::interfaces::XS
 	ecore::EModelElementImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
 }
 
 void TemplateParameterTypeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -320,3 +240,82 @@ void TemplateParameterTypeImpl::saveContent(std::shared_ptr<persistence::interfa
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> TemplateParameterTypeImpl::eStaticClass() const
+{
+	return ocl::Types::TypesPackage::eInstance()->getTemplateParameterType_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any TemplateParameterTypeImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case ocl::Types::TypesPackage::TEMPLATEPARAMETERTYPE_ATTRIBUTE_SPECIFICATION:
+			return eAny(getSpecification()); //838
+	}
+	return ecore::EClassifierImpl::eGet(featureID, resolve, coreType);
+}
+
+bool TemplateParameterTypeImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case ocl::Types::TypesPackage::TEMPLATEPARAMETERTYPE_ATTRIBUTE_SPECIFICATION:
+			return getSpecification() != ""; //838
+	}
+	return ecore::EClassifierImpl::internalEIsSet(featureID);
+}
+
+bool TemplateParameterTypeImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case ocl::Types::TypesPackage::TEMPLATEPARAMETERTYPE_ATTRIBUTE_SPECIFICATION:
+		{
+			// BOOST CAST
+			std::string _specification = newValue->get<std::string>();
+			setSpecification(_specification); //838
+			return true;
+		}
+	}
+
+	return ecore::EClassifierImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any TemplateParameterTypeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+
+		default:
+		{
+			// call superTypes
+			result = ecore::EClassifierImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<TemplateParameterType> TemplateParameterTypeImpl::getThisTemplateParameterTypePtr() const
+{
+	return m_thisTemplateParameterTypePtr.lock();
+}
+void TemplateParameterTypeImpl::setThisTemplateParameterTypePtr(std::weak_ptr<TemplateParameterType> thisTemplateParameterTypePtr)
+{
+	m_thisTemplateParameterTypePtr = thisTemplateParameterTypePtr;
+	setThisEClassifierPtr(thisTemplateParameterTypePtr);
+}

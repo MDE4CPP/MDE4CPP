@@ -1,3 +1,4 @@
+
 #include "ocl/Types/impl/MessageTypeImpl.hpp"
 
 #ifdef NDEBUG
@@ -25,7 +26,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -34,7 +34,6 @@
 #include <exception> // used in Persistence
 #include "ecore/ecoreFactory.hpp"
 #include "uml/umlFactory.hpp"
-
 
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClassifier.hpp"
@@ -120,25 +119,18 @@ std::shared_ptr<ecore::EObject> MessageTypeImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> MessageTypeImpl::eStaticClass() const
-{
-	return ocl::Types::TypesPackage::eInstance()->getMessageType_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference referredOperation
-*/
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference referredOperation */
 std::shared_ptr<ecore::EOperation> MessageTypeImpl::getReferredOperation() const
 {
     return m_referredOperation;
@@ -149,10 +141,7 @@ void MessageTypeImpl::setReferredOperation(std::shared_ptr<ecore::EOperation> _r
 	
 }
 
-
-/*
-Getter & Setter for reference referredSignal
-*/
+/* Getter & Setter for reference referredSignal */
 std::shared_ptr<uml::Signal> MessageTypeImpl::getReferredSignal() const
 {
     return m_referredSignal;
@@ -163,22 +152,13 @@ void MessageTypeImpl::setReferredSignal(std::shared_ptr<uml::Signal> _referredSi
 	
 }
 
-
 //*********************************
 // Union Getter
 //*********************************
 
-
-
-std::shared_ptr<MessageType> MessageTypeImpl::getThisMessageTypePtr() const
-{
-	return m_thisMessageTypePtr.lock();
-}
-void MessageTypeImpl::setThisMessageTypePtr(std::weak_ptr<MessageType> thisMessageTypePtr)
-{
-	m_thisMessageTypePtr = thisMessageTypePtr;
-	setThisEClassifierPtr(thisMessageTypePtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> MessageTypeImpl::eContainer() const
 {
 	if(auto wp = m_ePackage.lock())
@@ -186,85 +166,6 @@ std::shared_ptr<ecore::EObject> MessageTypeImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any MessageTypeImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case ocl::Types::TypesPackage::MESSAGETYPE_ATTRIBUTE_REFERREDOPERATION:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getReferredOperation();
-				return eAny(returnValue); //498
-			}
-		case ocl::Types::TypesPackage::MESSAGETYPE_ATTRIBUTE_REFERREDSIGNAL:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getReferredSignal();
-				return eAny(returnValue); //499
-			}
-	}
-	return ecore::EClassifierImpl::eGet(featureID, resolve, coreType);
-}
-bool MessageTypeImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case ocl::Types::TypesPackage::MESSAGETYPE_ATTRIBUTE_REFERREDOPERATION:
-			return getReferredOperation() != nullptr; //498
-		case ocl::Types::TypesPackage::MESSAGETYPE_ATTRIBUTE_REFERREDSIGNAL:
-			return getReferredSignal() != nullptr; //499
-	}
-	return ecore::EClassifierImpl::internalEIsSet(featureID);
-}
-bool MessageTypeImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case ocl::Types::TypesPackage::MESSAGETYPE_ATTRIBUTE_REFERREDOPERATION:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<ecore::EOperation> _referredOperation = std::dynamic_pointer_cast<ecore::EOperation>(_temp);
-			setReferredOperation(_referredOperation); //498
-			return true;
-		}
-		case ocl::Types::TypesPackage::MESSAGETYPE_ATTRIBUTE_REFERREDSIGNAL:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::Signal> _referredSignal = std::dynamic_pointer_cast<uml::Signal>(_temp);
-			setReferredSignal(_referredSignal); //499
-			return true;
-		}
-	}
-
-	return ecore::EClassifierImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any MessageTypeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-
-		default:
-		{
-			// call superTypes
-			result = ecore::EClassifierImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -367,9 +268,6 @@ void MessageTypeImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler
 	ecore::EModelElementImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
 }
 
 void MessageTypeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -387,3 +285,101 @@ void MessageTypeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> MessageTypeImpl::eStaticClass() const
+{
+	return ocl::Types::TypesPackage::eInstance()->getMessageType_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any MessageTypeImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case ocl::Types::TypesPackage::MESSAGETYPE_ATTRIBUTE_REFERREDOPERATION:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getReferredOperation();
+				return eAny(returnValue); //498
+			}
+		case ocl::Types::TypesPackage::MESSAGETYPE_ATTRIBUTE_REFERREDSIGNAL:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getReferredSignal();
+				return eAny(returnValue); //499
+			}
+	}
+	return ecore::EClassifierImpl::eGet(featureID, resolve, coreType);
+}
+
+bool MessageTypeImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case ocl::Types::TypesPackage::MESSAGETYPE_ATTRIBUTE_REFERREDOPERATION:
+			return getReferredOperation() != nullptr; //498
+		case ocl::Types::TypesPackage::MESSAGETYPE_ATTRIBUTE_REFERREDSIGNAL:
+			return getReferredSignal() != nullptr; //499
+	}
+	return ecore::EClassifierImpl::internalEIsSet(featureID);
+}
+
+bool MessageTypeImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case ocl::Types::TypesPackage::MESSAGETYPE_ATTRIBUTE_REFERREDOPERATION:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<ecore::EOperation> _referredOperation = std::dynamic_pointer_cast<ecore::EOperation>(_temp);
+			setReferredOperation(_referredOperation); //498
+			return true;
+		}
+		case ocl::Types::TypesPackage::MESSAGETYPE_ATTRIBUTE_REFERREDSIGNAL:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::Signal> _referredSignal = std::dynamic_pointer_cast<uml::Signal>(_temp);
+			setReferredSignal(_referredSignal); //499
+			return true;
+		}
+	}
+
+	return ecore::EClassifierImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any MessageTypeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+
+		default:
+		{
+			// call superTypes
+			result = ecore::EClassifierImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<MessageType> MessageTypeImpl::getThisMessageTypePtr() const
+{
+	return m_thisMessageTypePtr.lock();
+}
+void MessageTypeImpl::setThisMessageTypePtr(std::weak_ptr<MessageType> thisMessageTypePtr)
+{
+	m_thisMessageTypePtr = thisMessageTypePtr;
+	setThisEClassifierPtr(thisMessageTypePtr);
+}

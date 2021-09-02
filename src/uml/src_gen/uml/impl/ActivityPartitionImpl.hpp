@@ -57,7 +57,8 @@ namespace uml
 			isDimension implies superPartition->isEmpty()
 			*/
 			 
-			virtual bool dimension_not_contained(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
+			virtual bool dimension_not_contained(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			/*!
 			If a non-external ActivityPartition represents a Classifier and has a superPartition, then the superPartition must represent a Classifier, and the Classifier of the subpartition must be nested (nestedClassifier or ownedBehavior) in the Classifier represented by the superPartition, or be at the contained end of a composition Association with the Classifier represented by the superPartition.
 			(not isExternal and represents.oclIsKindOf(Classifier) and superPartition->notEmpty()) implies
 			(
@@ -74,7 +75,8 @@ namespace uml
 			)
 			*/
 			 
-			virtual bool represents_classifier(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
+			virtual bool represents_classifier(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			/*!
 			If an ActivityPartition represents a Property and has a superPartition representing a Classifier, then all the other non-external subpartitions of the superPartition must represent Properties directly owned by the same Classifier.
 			(represents.oclIsKindOf(Property) and superPartition->notEmpty() and superPartition.represents.oclIsKindOf(Classifier)) implies
 			(
@@ -85,7 +87,8 @@ namespace uml
 			)
 			*/
 			 
-			virtual bool represents_property(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
+			virtual bool represents_property(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			/*!
 			If an ActivityPartition represents a Property and has a superPartition, then the Property must be of a Classifier represented by the superPartition, or of a Classifier that is the type of a Property represented by the superPartition.
 			(represents.oclIsKindOf(Property) and superPartition->notEmpty()) implies
 			(
@@ -97,7 +100,7 @@ namespace uml
 			virtual bool represents_property_and_is_contained(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
-			// Attributes Getter Setter
+			// Attribute Getters & Setters
 			//*********************************
 			/*!
 			Indicates whether the ActivityPartition groups other ActivityPartitions along a dimension.
@@ -124,9 +127,8 @@ namespace uml
 			 
 			virtual void setIsExternal (bool _isExternal);
 			
-			
 			//*********************************
-			// Reference
+			// Reference Getters & Setters
 			//*********************************
 			/*!
 			ActivityEdges immediately contained in the ActivityPartition.
@@ -134,14 +136,12 @@ namespace uml
 			*/
 			
 			virtual std::shared_ptr<Subset<uml::ActivityEdge, uml::ActivityEdge>> getEdge() const ;
-			
 			/*!
 			ActivityNodes immediately contained in the ActivityPartition.
 			<p>From package UML::Activities.</p>
 			*/
 			
 			virtual std::shared_ptr<Subset<uml::ActivityNode, uml::ActivityNode>> getNode() const ;
-			
 			/*!
 			An Element represented by the functionality modeled within the ActivityPartition.
 			<p>From package UML::Activities.</p>
@@ -160,7 +160,6 @@ namespace uml
 			*/
 			
 			virtual std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup>> getSubpartition() const ;
-			
 			/*!
 			Other ActivityPartitions immediately containing this ActivityPartition (as its superGroups).
 			<p>From package UML::Activities.</p>
@@ -174,43 +173,49 @@ namespace uml
 			
 			virtual void setSuperPartition(std::weak_ptr<uml::ActivityPartition>) ;
 			
-			
 			//*********************************
-			// Union Getter
+			// Union Reference Getters
 			//*********************************
 			/*!
 			ActivityEdges immediately contained in the ActivityGroup.
 			<p>From package UML::Activities.</p>
 			*/
 			
-			virtual std::shared_ptr<Union<uml::ActivityEdge>> getContainedEdge() const ;/*!
+			virtual std::shared_ptr<Union<uml::ActivityEdge>> getContainedEdge() const ;
+			/*!
 			ActivityNodes immediately contained in the ActivityGroup.
 			<p>From package UML::Activities.</p>
 			*/
 			
-			virtual std::shared_ptr<Union<uml::ActivityNode>> getContainedNode() const ;/*!
+			virtual std::shared_ptr<Union<uml::ActivityNode>> getContainedNode() const ;
+			/*!
 			The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const ;/*!
+			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const ;
+			/*!
 			The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element> getOwner() const ;/*!
+			virtual std::weak_ptr<uml::Element> getOwner() const ;
+			/*!
 			Other ActivityGroups immediately contained in this ActivityGroup.
 			<p>From package UML::Activities.</p>
 			*/
 			
-			virtual std::shared_ptr<SubsetUnion<uml::ActivityGroup, uml::Element>> getSubgroup() const ;/*!
+			virtual std::shared_ptr<SubsetUnion<uml::ActivityGroup, uml::Element>> getSubgroup() const ;
+			/*!
 			The ActivityGroup immediately containing this ActivityGroup, if it is directly owned by another ActivityGroup.
 			<p>From package UML::Activities.</p>
 			*/
 			
 			virtual std::weak_ptr<uml::ActivityGroup> getSuperGroup() const ;
 			
-
+			//*********************************
+			// Container Getter
+			//*********************************
 			virtual std::shared_ptr<ecore::EObject> eContainer() const ; 
 			
 			//*********************************
@@ -219,20 +224,23 @@ namespace uml
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) ;
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
-			
 			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
-			
 
-			//*********************************
-			// Structural Feature Getter/Setter
-			//*********************************
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+
+			//*********************************
+			// EStructuralFeature Get/Set/IsSet
+			//*********************************
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool internalEIsSet(int featureID) const ;
 			virtual bool eSet(int featureID, Any newValue) ;
+			virtual bool internalEIsSet(int featureID) const ;
+
+			//*********************************
+			// EOperation Invoke
+			//*********************************
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:

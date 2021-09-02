@@ -1,3 +1,4 @@
+
 #include "PSCS/Semantics/Loci/impl/CS_LocusImpl.hpp"
 
 #ifdef NDEBUG
@@ -37,7 +38,6 @@
 #include <exception> // used in Persistence
 #include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
-
 
 #include "uml/Class.hpp"
 #include "fUML/Semantics/Loci/ExecutionFactory.hpp"
@@ -117,15 +117,6 @@ std::shared_ptr<ecore::EObject> CS_LocusImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> CS_LocusImpl::eStaticClass() const
-{
-	return PSCS::Semantics::Loci::LociPackage::eInstance()->getCS_Locus_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
@@ -151,88 +142,23 @@ std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> CS_LocusImpl::in
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
+//*********************************
+
+//*********************************
+// Reference Getters & Setters
 //*********************************
 
 //*********************************
 // Union Getter
 //*********************************
 
-
-
-std::shared_ptr<CS_Locus> CS_LocusImpl::getThisCS_LocusPtr() const
-{
-	return m_thisCS_LocusPtr.lock();
-}
-void CS_LocusImpl::setThisCS_LocusPtr(std::weak_ptr<CS_Locus> thisCS_LocusPtr)
-{
-	m_thisCS_LocusPtr = thisCS_LocusPtr;
-	setThisLocusPtr(thisCS_LocusPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> CS_LocusImpl::eContainer() const
 {
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any CS_LocusImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-	}
-	return fUML::Semantics::Loci::LocusImpl::eGet(featureID, resolve, coreType);
-}
-bool CS_LocusImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-	}
-	return fUML::Semantics::Loci::LocusImpl::internalEIsSet(featureID);
-}
-bool CS_LocusImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-	}
-
-	return fUML::Semantics::Loci::LocusImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any CS_LocusImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-		
-		// 1523861822
-		case LociPackage::CS_LOCUS_OPERATION_INSTANTIATE_CLASS:
-		{
-			//Retrieve input parameter 'type'
-			//parameter 0
-			std::shared_ptr<uml::Class> incoming_param_type;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_type_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_type = (*incoming_param_type_arguments_citer)->get()->get<std::shared_ptr<uml::Class> >();
-			result = eAny(this->instantiate(incoming_param_type));
-			break;
-		}
-
-		default:
-		{
-			// call superTypes
-			result = fUML::Semantics::Loci::LocusImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -279,7 +205,6 @@ void CS_LocusImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> s
 	fUML::Semantics::Loci::LocusImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
 }
 
 void CS_LocusImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -294,3 +219,83 @@ void CS_LocusImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> CS_LocusImpl::eStaticClass() const
+{
+	return PSCS::Semantics::Loci::LociPackage::eInstance()->getCS_Locus_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any CS_LocusImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+	}
+	return fUML::Semantics::Loci::LocusImpl::eGet(featureID, resolve, coreType);
+}
+
+bool CS_LocusImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+	}
+	return fUML::Semantics::Loci::LocusImpl::internalEIsSet(featureID);
+}
+
+bool CS_LocusImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+	}
+
+	return fUML::Semantics::Loci::LocusImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any CS_LocusImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 1523861822
+		case LociPackage::CS_LOCUS_OPERATION_INSTANTIATE_CLASS:
+		{
+			//Retrieve input parameter 'type'
+			//parameter 0
+			std::shared_ptr<uml::Class> incoming_param_type;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_type_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_type = (*incoming_param_type_arguments_citer)->get()->get<std::shared_ptr<uml::Class> >();
+			result = eAny(this->instantiate(incoming_param_type));
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = fUML::Semantics::Loci::LocusImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<CS_Locus> CS_LocusImpl::getThisCS_LocusPtr() const
+{
+	return m_thisCS_LocusPtr.lock();
+}
+void CS_LocusImpl::setThisCS_LocusPtr(std::weak_ptr<CS_Locus> thisCS_LocusPtr)
+{
+	m_thisCS_LocusPtr = thisCS_LocusPtr;
+	setThisLocusPtr(thisCS_LocusPtr);
+}

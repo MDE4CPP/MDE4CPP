@@ -1,3 +1,4 @@
+
 #include "uml/impl/ProfileImpl.hpp"
 
 #ifdef NDEBUG
@@ -26,7 +27,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -34,7 +34,6 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-
 
 #include "uml/Class.hpp"
 #include "uml/Classifier.hpp"
@@ -233,15 +232,6 @@ std::shared_ptr<ecore::EObject> ProfileImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> ProfileImpl::eStaticClass() const
-{
-	return uml::umlPackage::eInstance()->getProfile_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
@@ -312,11 +302,13 @@ bool ProfileImpl::references_same_metamodel(Any diagnostics,std::shared_ptr<std:
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference metaclassReference
-*/
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference metaclassReference */
 std::shared_ptr<Subset<uml::ElementImport, uml::ElementImport /*Subset does not reference a union*/>> ProfileImpl::getMetaclassReference() const
 {
 	if(m_metaclassReference == nullptr)
@@ -337,11 +329,7 @@ std::shared_ptr<Subset<uml::ElementImport, uml::ElementImport /*Subset does not 
     return m_metaclassReference;
 }
 
-
-
-/*
-Getter & Setter for reference metamodelReference
-*/
+/* Getter & Setter for reference metamodelReference */
 std::shared_ptr<Subset<uml::PackageImport, uml::PackageImport /*Subset does not reference a union*/>> ProfileImpl::getMetamodelReference() const
 {
 	if(m_metamodelReference == nullptr)
@@ -361,8 +349,6 @@ std::shared_ptr<Subset<uml::PackageImport, uml::PackageImport /*Subset does not 
 	}
     return m_metamodelReference;
 }
-
-
 
 //*********************************
 // Union Getter
@@ -429,16 +415,9 @@ std::weak_ptr<uml::Element> ProfileImpl::getOwner() const
 
 
 
-
-std::shared_ptr<Profile> ProfileImpl::getThisProfilePtr() const
-{
-	return m_thisProfilePtr.lock();
-}
-void ProfileImpl::setThisProfilePtr(std::weak_ptr<Profile> thisProfilePtr)
-{
-	m_thisProfilePtr = thisProfilePtr;
-	setThisPackagePtr(thisProfilePtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> ProfileImpl::eContainer() const
 {
 	if(auto wp = m_namespace.lock())
@@ -469,7 +448,142 @@ std::shared_ptr<ecore::EObject> ProfileImpl::eContainer() const
 }
 
 //*********************************
-// Structural Feature Getter/Setter
+// Persistence Functions
+//*********************************
+void ProfileImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get umlFactory
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
+	}
+}		
+
+void ProfileImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+	try
+	{
+		std::map<std::string, std::string>::const_iterator iter;
+		std::shared_ptr<ecore::EClass> metaClass = this->eClass(); // get MetaClass
+		iter = attr_list.find("metaclassReference");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("metaclassReference")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+
+		iter = attr_list.find("metamodelReference");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("metamodelReference")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	PackageImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void ProfileImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+
+	//load BasePackage Nodes
+	PackageImpl::loadNode(nodeName, loadHandler);
+}
+
+void ProfileImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::PROFILE_ATTRIBUTE_METACLASSREFERENCE:
+		{
+			std::shared_ptr<Subset<uml::ElementImport, uml::ElementImport /*Subset does not reference a union*/>> _metaclassReference = getMetaclassReference();
+			for(std::shared_ptr<ecore::EObject> ref : references)
+			{
+				std::shared_ptr<uml::ElementImport>  _r = std::dynamic_pointer_cast<uml::ElementImport>(ref);
+				if (_r != nullptr)
+				{
+					_metaclassReference->push_back(_r);
+				}
+			}
+			return;
+		}
+
+		case uml::umlPackage::PROFILE_ATTRIBUTE_METAMODELREFERENCE:
+		{
+			std::shared_ptr<Subset<uml::PackageImport, uml::PackageImport /*Subset does not reference a union*/>> _metamodelReference = getMetamodelReference();
+			for(std::shared_ptr<ecore::EObject> ref : references)
+			{
+				std::shared_ptr<uml::PackageImport>  _r = std::dynamic_pointer_cast<uml::PackageImport>(ref);
+				if (_r != nullptr)
+				{
+					_metamodelReference->push_back(_r);
+				}
+			}
+			return;
+		}
+	}
+	PackageImpl::resolveReferences(featureID, references);
+}
+
+void ProfileImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	PackageImpl::saveContent(saveHandler);
+	
+	NamespaceImpl::saveContent(saveHandler);
+	PackageableElementImpl::saveContent(saveHandler);
+	TemplateableElementImpl::saveContent(saveHandler);
+	
+	NamedElementImpl::saveContent(saveHandler);
+	ParameterableElementImpl::saveContent(saveHandler);
+	
+	ElementImpl::saveContent(saveHandler);
+	
+	ObjectImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+}
+
+void ProfileImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
+	// Add references
+		saveHandler->addReferences<uml::ElementImport>("metaclassReference", this->getMetaclassReference());
+		saveHandler->addReferences<uml::PackageImport>("metamodelReference", this->getMetamodelReference());
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+}
+
+
+std::shared_ptr<ecore::EClass> ProfileImpl::eStaticClass() const
+{
+	return uml::umlPackage::eInstance()->getProfile_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
 //*********************************
 Any ProfileImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
@@ -502,6 +616,7 @@ Any ProfileImpl::eGet(int featureID, bool resolve, bool coreType) const
 	}
 	return PackageImpl::eGet(featureID, resolve, coreType);
 }
+
 bool ProfileImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
@@ -513,6 +628,7 @@ bool ProfileImpl::internalEIsSet(int featureID) const
 	}
 	return PackageImpl::internalEIsSet(featureID);
 }
+
 bool ProfileImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
@@ -595,7 +711,7 @@ bool ProfileImpl::eSet(int featureID, Any newValue)
 }
 
 //*********************************
-// Behavioral Feature
+// EOperation Invoke
 //*********************************
 Any ProfileImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
 {
@@ -744,136 +860,13 @@ Any ProfileImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::share
 	return result;
 }
 
-//*********************************
-// Persistence Functions
-//*********************************
-void ProfileImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+
+std::shared_ptr<Profile> ProfileImpl::getThisProfilePtr() const
 {
-	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
-	loadAttributes(loadHandler, attr_list);
-
-	//
-	// Create new objects (from references (containment == true))
-	//
-	// get umlFactory
-	int numNodes = loadHandler->getNumOfChildNodes();
-	for(int ii = 0; ii < numNodes; ii++)
-	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler);
-	}
-}		
-
-void ProfileImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
-{
-	try
-	{
-		std::map<std::string, std::string>::const_iterator iter;
-		std::shared_ptr<ecore::EClass> metaClass = this->eClass(); // get MetaClass
-		iter = attr_list.find("metaclassReference");
-		if ( iter != attr_list.end() )
-		{
-			// add unresolvedReference to loadHandler's list
-			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("metaclassReference")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
-		}
-
-		iter = attr_list.find("metamodelReference");
-		if ( iter != attr_list.end() )
-		{
-			// add unresolvedReference to loadHandler's list
-			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("metamodelReference")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
-		}
-	}
-	catch (std::exception& e)
-	{
-		std::cout << "| ERROR    | " << e.what() << std::endl;
-	}
-	catch (...) 
-	{
-		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
-	}
-
-	PackageImpl::loadAttributes(loadHandler, attr_list);
+	return m_thisProfilePtr.lock();
 }
-
-void ProfileImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+void ProfileImpl::setThisProfilePtr(std::weak_ptr<Profile> thisProfilePtr)
 {
-
-	//load BasePackage Nodes
-	PackageImpl::loadNode(nodeName, loadHandler);
+	m_thisProfilePtr = thisProfilePtr;
+	setThisPackagePtr(thisProfilePtr);
 }
-
-void ProfileImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::PROFILE_ATTRIBUTE_METACLASSREFERENCE:
-		{
-			std::shared_ptr<Subset<uml::ElementImport, uml::ElementImport /*Subset does not reference a union*/>> _metaclassReference = getMetaclassReference();
-			for(std::shared_ptr<ecore::EObject> ref : references)
-			{
-				std::shared_ptr<uml::ElementImport>  _r = std::dynamic_pointer_cast<uml::ElementImport>(ref);
-				if (_r != nullptr)
-				{
-					_metaclassReference->push_back(_r);
-				}
-			}
-			return;
-		}
-
-		case uml::umlPackage::PROFILE_ATTRIBUTE_METAMODELREFERENCE:
-		{
-			std::shared_ptr<Subset<uml::PackageImport, uml::PackageImport /*Subset does not reference a union*/>> _metamodelReference = getMetamodelReference();
-			for(std::shared_ptr<ecore::EObject> ref : references)
-			{
-				std::shared_ptr<uml::PackageImport>  _r = std::dynamic_pointer_cast<uml::PackageImport>(ref);
-				if (_r != nullptr)
-				{
-					_metamodelReference->push_back(_r);
-				}
-			}
-			return;
-		}
-	}
-	PackageImpl::resolveReferences(featureID, references);
-}
-
-void ProfileImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
-{
-	saveContent(saveHandler);
-
-	PackageImpl::saveContent(saveHandler);
-	
-	NamespaceImpl::saveContent(saveHandler);
-	PackageableElementImpl::saveContent(saveHandler);
-	TemplateableElementImpl::saveContent(saveHandler);
-	
-	NamedElementImpl::saveContent(saveHandler);
-	ParameterableElementImpl::saveContent(saveHandler);
-	
-	ElementImpl::saveContent(saveHandler);
-	
-	ObjectImpl::saveContent(saveHandler);
-	
-	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
-	
-}
-
-void ProfileImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
-{
-	try
-	{
-		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-	// Add references
-		saveHandler->addReferences<uml::ElementImport>("metaclassReference", this->getMetaclassReference());
-		saveHandler->addReferences<uml::PackageImport>("metamodelReference", this->getMetamodelReference());
-	}
-	catch (std::exception& e)
-	{
-		std::cout << "| ERROR    | " << e.what() << std::endl;
-	}
-}
-

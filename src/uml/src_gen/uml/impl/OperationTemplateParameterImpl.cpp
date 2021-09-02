@@ -1,3 +1,4 @@
+
 #include "uml/impl/OperationTemplateParameterImpl.hpp"
 
 #ifdef NDEBUG
@@ -26,7 +27,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -34,7 +34,6 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-
 
 #include "uml/Comment.hpp"
 #include "uml/Element.hpp"
@@ -122,15 +121,6 @@ std::shared_ptr<ecore::EObject> OperationTemplateParameterImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> OperationTemplateParameterImpl::eStaticClass() const
-{
-	return uml::umlPackage::eInstance()->getOperationTemplateParameter_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
@@ -141,12 +131,18 @@ bool OperationTemplateParameterImpl::match_default_signature(Any diagnostics,std
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
+//*********************************
+
+//*********************************
+// Reference Getters & Setters
 //*********************************
 
 //*********************************
 // Union Getter
 //*********************************
+
+
 std::shared_ptr<Union<uml::Element>> OperationTemplateParameterImpl::getOwnedElement() const
 {
 	if(m_ownedElement == nullptr)
@@ -169,16 +165,9 @@ std::weak_ptr<uml::Element> OperationTemplateParameterImpl::getOwner() const
 
 
 
-
-std::shared_ptr<OperationTemplateParameter> OperationTemplateParameterImpl::getThisOperationTemplateParameterPtr() const
-{
-	return m_thisOperationTemplateParameterPtr.lock();
-}
-void OperationTemplateParameterImpl::setThisOperationTemplateParameterPtr(std::weak_ptr<OperationTemplateParameter> thisOperationTemplateParameterPtr)
-{
-	m_thisOperationTemplateParameterPtr = thisOperationTemplateParameterPtr;
-	setThisTemplateParameterPtr(thisOperationTemplateParameterPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> OperationTemplateParameterImpl::eContainer() const
 {
 	if(auto wp = m_owner.lock())
@@ -191,72 +180,6 @@ std::shared_ptr<ecore::EObject> OperationTemplateParameterImpl::eContainer() con
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any OperationTemplateParameterImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-	}
-	return TemplateParameterImpl::eGet(featureID, resolve, coreType);
-}
-bool OperationTemplateParameterImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-	}
-	return TemplateParameterImpl::internalEIsSet(featureID);
-}
-bool OperationTemplateParameterImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-	}
-
-	return TemplateParameterImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any OperationTemplateParameterImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-		
-		// 1020467918
-		case umlPackage::OPERATIONTEMPLATEPARAMETER_OPERATION_MATCH_DEFAULT_SIGNATURE_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->match_default_signature(incoming_param_diagnostics,incoming_param_context));
-			break;
-		}
-
-		default:
-		{
-			// call superTypes
-			result = TemplateParameterImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -307,9 +230,6 @@ void OperationTemplateParameterImpl::save(std::shared_ptr<persistence::interface
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
 }
 
 void OperationTemplateParameterImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -324,3 +244,88 @@ void OperationTemplateParameterImpl::saveContent(std::shared_ptr<persistence::in
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> OperationTemplateParameterImpl::eStaticClass() const
+{
+	return uml::umlPackage::eInstance()->getOperationTemplateParameter_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any OperationTemplateParameterImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+	}
+	return TemplateParameterImpl::eGet(featureID, resolve, coreType);
+}
+
+bool OperationTemplateParameterImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+	}
+	return TemplateParameterImpl::internalEIsSet(featureID);
+}
+
+bool OperationTemplateParameterImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+	}
+
+	return TemplateParameterImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any OperationTemplateParameterImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 1020467918
+		case umlPackage::OPERATIONTEMPLATEPARAMETER_OPERATION_MATCH_DEFAULT_SIGNATURE_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->match_default_signature(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = TemplateParameterImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<OperationTemplateParameter> OperationTemplateParameterImpl::getThisOperationTemplateParameterPtr() const
+{
+	return m_thisOperationTemplateParameterPtr.lock();
+}
+void OperationTemplateParameterImpl::setThisOperationTemplateParameterPtr(std::weak_ptr<OperationTemplateParameter> thisOperationTemplateParameterPtr)
+{
+	m_thisOperationTemplateParameterPtr = thisOperationTemplateParameterPtr;
+	setThisTemplateParameterPtr(thisOperationTemplateParameterPtr);
+}

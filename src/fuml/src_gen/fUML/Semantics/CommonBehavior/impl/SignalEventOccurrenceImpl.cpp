@@ -1,3 +1,4 @@
+
 #include "fUML/Semantics/CommonBehavior/impl/SignalEventOccurrenceImpl.hpp"
 
 #ifdef NDEBUG
@@ -25,7 +26,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -34,7 +34,6 @@
 #include <exception> // used in Persistence
 #include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
 #include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
-
 
 #include "fUML/Semantics/CommonBehavior/EventOccurrence.hpp"
 #include "fUML/Semantics/CommonBehavior/ParameterValue.hpp"
@@ -114,15 +113,6 @@ std::shared_ptr<ecore::EObject> SignalEventOccurrenceImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> SignalEventOccurrenceImpl::eStaticClass() const
-{
-	return fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance()->getSignalEventOccurrence_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
@@ -139,11 +129,13 @@ bool SignalEventOccurrenceImpl::match(std::shared_ptr<uml::Trigger> trigger)
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference signalInstance
-*/
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference signalInstance */
 std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance> SignalEventOccurrenceImpl::getSignalInstance() const
 {
     return m_signalInstance;
@@ -154,108 +146,16 @@ void SignalEventOccurrenceImpl::setSignalInstance(std::shared_ptr<fUML::Semantic
 	
 }
 
-
 //*********************************
 // Union Getter
 //*********************************
 
-
-
-std::shared_ptr<SignalEventOccurrence> SignalEventOccurrenceImpl::getThisSignalEventOccurrencePtr() const
-{
-	return m_thisSignalEventOccurrencePtr.lock();
-}
-void SignalEventOccurrenceImpl::setThisSignalEventOccurrencePtr(std::weak_ptr<SignalEventOccurrence> thisSignalEventOccurrencePtr)
-{
-	m_thisSignalEventOccurrencePtr = thisSignalEventOccurrencePtr;
-	setThisEventOccurrencePtr(thisSignalEventOccurrencePtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> SignalEventOccurrenceImpl::eContainer() const
 {
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any SignalEventOccurrenceImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::SIGNALEVENTOCCURRENCE_ATTRIBUTE_SIGNALINSTANCE:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getSignalInstance();
-				return eAny(returnValue); //1061
-			}
-	}
-	return EventOccurrenceImpl::eGet(featureID, resolve, coreType);
-}
-bool SignalEventOccurrenceImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::SIGNALEVENTOCCURRENCE_ATTRIBUTE_SIGNALINSTANCE:
-			return getSignalInstance() != nullptr; //1061
-	}
-	return EventOccurrenceImpl::internalEIsSet(featureID);
-}
-bool SignalEventOccurrenceImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::SIGNALEVENTOCCURRENCE_ATTRIBUTE_SIGNALINSTANCE:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance> _signalInstance = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::SignalInstance>(_temp);
-			setSignalInstance(_signalInstance); //1061
-			return true;
-		}
-	}
-
-	return EventOccurrenceImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any SignalEventOccurrenceImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-		
-		// 588055238
-		case CommonBehaviorPackage::SIGNALEVENTOCCURRENCE_OPERATION_GETPARAMETERVALUES:
-		{
-			result = eAny(this->getParameterValues());
-			break;
-		}
-		
-		// 582994447
-		case CommonBehaviorPackage::SIGNALEVENTOCCURRENCE_OPERATION_MATCH_TRIGGER:
-		{
-			//Retrieve input parameter 'trigger'
-			//parameter 0
-			std::shared_ptr<uml::Trigger> incoming_param_trigger;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_trigger_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_trigger = (*incoming_param_trigger_arguments_citer)->get()->get<std::shared_ptr<uml::Trigger> >();
-			result = eAny(this->match(incoming_param_trigger));
-			break;
-		}
-
-		default:
-		{
-			// call superTypes
-			result = EventOccurrenceImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -335,7 +235,6 @@ void SignalEventOccurrenceImpl::save(std::shared_ptr<persistence::interfaces::XS
 	EventOccurrenceImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
 }
 
 void SignalEventOccurrenceImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -352,3 +251,105 @@ void SignalEventOccurrenceImpl::saveContent(std::shared_ptr<persistence::interfa
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> SignalEventOccurrenceImpl::eStaticClass() const
+{
+	return fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance()->getSignalEventOccurrence_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any SignalEventOccurrenceImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::SIGNALEVENTOCCURRENCE_ATTRIBUTE_SIGNALINSTANCE:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getSignalInstance();
+				return eAny(returnValue); //1061
+			}
+	}
+	return EventOccurrenceImpl::eGet(featureID, resolve, coreType);
+}
+
+bool SignalEventOccurrenceImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::SIGNALEVENTOCCURRENCE_ATTRIBUTE_SIGNALINSTANCE:
+			return getSignalInstance() != nullptr; //1061
+	}
+	return EventOccurrenceImpl::internalEIsSet(featureID);
+}
+
+bool SignalEventOccurrenceImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::SIGNALEVENTOCCURRENCE_ATTRIBUTE_SIGNALINSTANCE:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance> _signalInstance = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::SignalInstance>(_temp);
+			setSignalInstance(_signalInstance); //1061
+			return true;
+		}
+	}
+
+	return EventOccurrenceImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any SignalEventOccurrenceImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 588055238
+		case CommonBehaviorPackage::SIGNALEVENTOCCURRENCE_OPERATION_GETPARAMETERVALUES:
+		{
+			result = eAny(this->getParameterValues());
+			break;
+		}
+		
+		// 582994447
+		case CommonBehaviorPackage::SIGNALEVENTOCCURRENCE_OPERATION_MATCH_TRIGGER:
+		{
+			//Retrieve input parameter 'trigger'
+			//parameter 0
+			std::shared_ptr<uml::Trigger> incoming_param_trigger;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_trigger_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_trigger = (*incoming_param_trigger_arguments_citer)->get()->get<std::shared_ptr<uml::Trigger> >();
+			result = eAny(this->match(incoming_param_trigger));
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = EventOccurrenceImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<SignalEventOccurrence> SignalEventOccurrenceImpl::getThisSignalEventOccurrencePtr() const
+{
+	return m_thisSignalEventOccurrencePtr.lock();
+}
+void SignalEventOccurrenceImpl::setThisSignalEventOccurrencePtr(std::weak_ptr<SignalEventOccurrence> thisSignalEventOccurrencePtr)
+{
+	m_thisSignalEventOccurrencePtr = thisSignalEventOccurrencePtr;
+	setThisEventOccurrencePtr(thisSignalEventOccurrencePtr);
+}

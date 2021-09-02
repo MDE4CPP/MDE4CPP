@@ -1,3 +1,4 @@
+
 #include "ocl/Expressions/impl/UnspecifiedValueExpImpl.hpp"
 
 #ifdef NDEBUG
@@ -25,7 +26,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -35,7 +35,6 @@
 #include "ecore/ecoreFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
-
 
 #include "ocl/Expressions/CallExp.hpp"
 #include "ocl/Expressions/CollectionRange.hpp"
@@ -203,38 +202,25 @@ std::shared_ptr<ecore::EObject> UnspecifiedValueExpImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> UnspecifiedValueExpImpl::eStaticClass() const
-{
-	return ocl::Expressions::ExpressionsPackage::eInstance()->getUnspecifiedValueExp_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
 
 //*********************************
-// References
+// Attribute Getters & Setters
+//*********************************
+
+//*********************************
+// Reference Getters & Setters
 //*********************************
 
 //*********************************
 // Union Getter
 //*********************************
 
-
-
-std::shared_ptr<UnspecifiedValueExp> UnspecifiedValueExpImpl::getThisUnspecifiedValueExpPtr() const
-{
-	return m_thisUnspecifiedValueExpPtr.lock();
-}
-void UnspecifiedValueExpImpl::setThisUnspecifiedValueExpPtr(std::weak_ptr<UnspecifiedValueExp> thisUnspecifiedValueExpPtr)
-{
-	m_thisUnspecifiedValueExpPtr = thisUnspecifiedValueExpPtr;
-	setThisOclExpressionPtr(thisUnspecifiedValueExpPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> UnspecifiedValueExpImpl::eContainer() const
 {
 	if(auto wp = m_appliedElement.lock())
@@ -295,55 +281,6 @@ std::shared_ptr<ecore::EObject> UnspecifiedValueExpImpl::eContainer() const
 }
 
 //*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any UnspecifiedValueExpImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-	}
-	return OclExpressionImpl::eGet(featureID, resolve, coreType);
-}
-bool UnspecifiedValueExpImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-	}
-	return OclExpressionImpl::internalEIsSet(featureID);
-}
-bool UnspecifiedValueExpImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-	}
-
-	return OclExpressionImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any UnspecifiedValueExpImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-
-		default:
-		{
-			// call superTypes
-			result = OclExpressionImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
-}
-
-//*********************************
 // Persistence Functions
 //*********************************
 void UnspecifiedValueExpImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
@@ -393,10 +330,6 @@ void UnspecifiedValueExpImpl::save(std::shared_ptr<persistence::interfaces::XSav
 	ecore::EModelElementImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
 }
 
 void UnspecifiedValueExpImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -411,3 +344,71 @@ void UnspecifiedValueExpImpl::saveContent(std::shared_ptr<persistence::interface
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> UnspecifiedValueExpImpl::eStaticClass() const
+{
+	return ocl::Expressions::ExpressionsPackage::eInstance()->getUnspecifiedValueExp_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any UnspecifiedValueExpImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+	}
+	return OclExpressionImpl::eGet(featureID, resolve, coreType);
+}
+
+bool UnspecifiedValueExpImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+	}
+	return OclExpressionImpl::internalEIsSet(featureID);
+}
+
+bool UnspecifiedValueExpImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+	}
+
+	return OclExpressionImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any UnspecifiedValueExpImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+
+		default:
+		{
+			// call superTypes
+			result = OclExpressionImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<UnspecifiedValueExp> UnspecifiedValueExpImpl::getThisUnspecifiedValueExpPtr() const
+{
+	return m_thisUnspecifiedValueExpPtr.lock();
+}
+void UnspecifiedValueExpImpl::setThisUnspecifiedValueExpPtr(std::weak_ptr<UnspecifiedValueExp> thisUnspecifiedValueExpPtr)
+{
+	m_thisUnspecifiedValueExpPtr = thisUnspecifiedValueExpPtr;
+	setThisOclExpressionPtr(thisUnspecifiedValueExpPtr);
+}

@@ -44,9 +44,7 @@ namespace ecore
 // namespace macro header include
 #include "ecore/ecore.hpp"
 
-// base class includes
 
-// enum includes
 
 #include "ecore/EModelElement.hpp"
 
@@ -72,74 +70,57 @@ namespace ecore
 			//*********************************
 			// Operations
 			//*********************************
-			 
 			virtual bool isInstance(Any object) const = 0;
+
 			//*********************************
-			// Attributes Getter & Setter
+			// Attribute Getters & Setters
 			//*********************************
-			
+
 			//*********************************
-			// References Getter & Setter
+			// Reference Getters & Setters
 			//*********************************
-			
 			virtual std::shared_ptr<ecore::EClassifier> getEClassifier() const = 0;
-			
 			virtual void setEClassifier(std::shared_ptr<ecore::EClassifier>) = 0;
-			
 			virtual std::shared_ptr<ecore::EGenericType> getELowerBound() const = 0;
-			
 			virtual void setELowerBound(std::shared_ptr<ecore::EGenericType>) = 0;
-			
 			virtual std::shared_ptr<ecore::EClassifier> getERawType() const = 0;
-			
 			virtual void setERawType(std::shared_ptr<ecore::EClassifier>) = 0;
-			
 			virtual std::shared_ptr<Bag<ecore::EGenericType>> getETypeArguments() const = 0;
-			
-			
 			virtual std::shared_ptr<ecore::ETypeParameter> getETypeParameter() const = 0;
-			
 			virtual void setETypeParameter(std::shared_ptr<ecore::ETypeParameter>) = 0;
-			
 			virtual std::shared_ptr<ecore::EGenericType> getEUpperBound() const = 0;
-			
 			virtual void setEUpperBound(std::shared_ptr<ecore::EGenericType>) = 0;
-			
+
+			//*********************************
+			// Union Reference Getters
+			//*********************************
+
+			//*********************************
+			// Container Getter
+			//*********************************
+			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
+
+			//*********************************
+			// Persistence Functions
+			//*********************************
+			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<EObject> > references) = 0;
+			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 
 		protected:
 			//*********************************
 			// Attribute Members
 			//*********************************
 			
-			
 			//*********************************
 			// Reference Members
 			//*********************************
-			
 			std::shared_ptr<ecore::EClassifier> m_eClassifier;
 			std::shared_ptr<ecore::EGenericType> m_eLowerBound;
 			std::shared_ptr<ecore::EClassifier> m_eRawType;
 			mutable std::shared_ptr<Bag<ecore::EGenericType>> m_eTypeArguments;
 			std::shared_ptr<ecore::ETypeParameter> m_eTypeParameter;
 			std::shared_ptr<ecore::EGenericType> m_eUpperBound;
-
-		public:
-			//*********************************
-			// Union Getter
-			//*********************************
-			
-
-			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
-			
-			//*********************************
-			// Persistence Functions
-			//*********************************
-			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
-			
-			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<EObject> > references) = 0;
-			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
-			
 	};
-
 }
 #endif /* end of include guard: ECORE_EGENERICTYPE_HPP */

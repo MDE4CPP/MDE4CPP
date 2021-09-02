@@ -1,3 +1,4 @@
+
 #include "uml/impl/RelationshipImpl.hpp"
 
 #ifdef NDEBUG
@@ -25,7 +26,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -33,7 +33,6 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-
 
 #include "uml/Comment.hpp"
 #include "uml/Element.hpp"
@@ -111,28 +110,18 @@ std::shared_ptr<ecore::EObject> RelationshipImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> RelationshipImpl::eStaticClass() const
-{
-	return uml::umlPackage::eInstance()->getRelationship_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference relatedElement
-*/
 
-
-
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference relatedElement */
 
 //*********************************
 // Union Getter
@@ -167,18 +156,9 @@ std::shared_ptr<Union<uml::Element>> RelationshipImpl::getRelatedElement() const
 	return m_relatedElement;
 }
 
-
-
-
-std::shared_ptr<Relationship> RelationshipImpl::getThisRelationshipPtr() const
-{
-	return m_thisRelationshipPtr.lock();
-}
-void RelationshipImpl::setThisRelationshipPtr(std::weak_ptr<Relationship> thisRelationshipPtr)
-{
-	m_thisRelationshipPtr = thisRelationshipPtr;
-	setThisElementPtr(thisRelationshipPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> RelationshipImpl::eContainer() const
 {
 	if(auto wp = m_owner.lock())
@@ -186,69 +166,6 @@ std::shared_ptr<ecore::EObject> RelationshipImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any RelationshipImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::RELATIONSHIP_ATTRIBUTE_RELATEDELEMENT:
-		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Element>::iterator iter = getRelatedElement()->begin();
-			Bag<uml::Element>::iterator end = getRelatedElement()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //2083			
-		}
-	}
-	return ElementImpl::eGet(featureID, resolve, coreType);
-}
-bool RelationshipImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::RELATIONSHIP_ATTRIBUTE_RELATEDELEMENT:
-			return getRelatedElement() != nullptr; //2083
-	}
-	return ElementImpl::internalEIsSet(featureID);
-}
-bool RelationshipImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-	}
-
-	return ElementImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any RelationshipImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-
-		default:
-		{
-			// call superTypes
-			result = ElementImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -297,8 +214,6 @@ void RelationshipImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandle
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
 }
 
 void RelationshipImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -313,3 +228,85 @@ void RelationshipImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> RelationshipImpl::eStaticClass() const
+{
+	return uml::umlPackage::eInstance()->getRelationship_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any RelationshipImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::RELATIONSHIP_ATTRIBUTE_RELATEDELEMENT:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Element>::iterator iter = getRelatedElement()->begin();
+			Bag<uml::Element>::iterator end = getRelatedElement()->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //2083			
+		}
+	}
+	return ElementImpl::eGet(featureID, resolve, coreType);
+}
+
+bool RelationshipImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::RELATIONSHIP_ATTRIBUTE_RELATEDELEMENT:
+			return getRelatedElement() != nullptr; //2083
+	}
+	return ElementImpl::internalEIsSet(featureID);
+}
+
+bool RelationshipImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+	}
+
+	return ElementImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any RelationshipImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+
+		default:
+		{
+			// call superTypes
+			result = ElementImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<Relationship> RelationshipImpl::getThisRelationshipPtr() const
+{
+	return m_thisRelationshipPtr.lock();
+}
+void RelationshipImpl::setThisRelationshipPtr(std::weak_ptr<Relationship> thisRelationshipPtr)
+{
+	m_thisRelationshipPtr = thisRelationshipPtr;
+	setThisElementPtr(thisRelationshipPtr);
+}

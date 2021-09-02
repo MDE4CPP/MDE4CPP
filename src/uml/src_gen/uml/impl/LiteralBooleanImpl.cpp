@@ -1,3 +1,4 @@
+
 #include "uml/impl/LiteralBooleanImpl.hpp"
 
 #ifdef NDEBUG
@@ -25,7 +26,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -33,7 +33,6 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-
 
 #include "uml/Comment.hpp"
 #include "uml/Dependency.hpp"
@@ -160,28 +159,6 @@ std::shared_ptr<ecore::EObject> LiteralBooleanImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> LiteralBooleanImpl::eStaticClass() const
-{
-	return uml::umlPackage::eInstance()->getLiteralBoolean_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-/*
-Getter & Setter for attribute value
-*/
-bool LiteralBooleanImpl::getValue() const 
-{
-	return m_value;
-}
-void LiteralBooleanImpl::setValue(bool _value)
-{
-	m_value = _value;
-	
-} 
-
-
 //*********************************
 // Operations
 //*********************************
@@ -202,7 +179,21 @@ bool LiteralBooleanImpl::isComputable()
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
+//*********************************
+/* Getter & Setter for attribute value */
+bool LiteralBooleanImpl::getValue() const 
+{
+	return m_value;
+}
+void LiteralBooleanImpl::setValue(bool _value)
+{
+	m_value = _value;
+	
+}
+
+//*********************************
+// Reference Getters & Setters
 //*********************************
 
 //*********************************
@@ -235,16 +226,9 @@ std::weak_ptr<uml::Element> LiteralBooleanImpl::getOwner() const
 
 
 
-
-std::shared_ptr<LiteralBoolean> LiteralBooleanImpl::getThisLiteralBooleanPtr() const
-{
-	return m_thisLiteralBooleanPtr.lock();
-}
-void LiteralBooleanImpl::setThisLiteralBooleanPtr(std::weak_ptr<LiteralBoolean> thisLiteralBooleanPtr)
-{
-	m_thisLiteralBooleanPtr = thisLiteralBooleanPtr;
-	setThisLiteralSpecificationPtr(thisLiteralBooleanPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> LiteralBooleanImpl::eContainer() const
 {
 	if(auto wp = m_namespace.lock())
@@ -277,80 +261,6 @@ std::shared_ptr<ecore::EObject> LiteralBooleanImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any LiteralBooleanImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::LITERALBOOLEAN_ATTRIBUTE_VALUE:
-			return eAny(getValue()); //13715
-	}
-	return LiteralSpecificationImpl::eGet(featureID, resolve, coreType);
-}
-bool LiteralBooleanImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::LITERALBOOLEAN_ATTRIBUTE_VALUE:
-			return getValue() != false; //13715
-	}
-	return LiteralSpecificationImpl::internalEIsSet(featureID);
-}
-bool LiteralBooleanImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::LITERALBOOLEAN_ATTRIBUTE_VALUE:
-		{
-			// BOOST CAST
-			bool _value = newValue->get<bool>();
-			setValue(_value); //13715
-			return true;
-		}
-	}
-
-	return LiteralSpecificationImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any LiteralBooleanImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-		
-		// 844586416
-		case umlPackage::LITERALBOOLEAN_OPERATION_BOOLEANVALUE:
-		{
-			result = eAny(this->booleanValue());
-			break;
-		}
-		
-		// 27416872
-		case umlPackage::LITERALBOOLEAN_OPERATION_ISCOMPUTABLE:
-		{
-			result = eAny(this->isComputable());
-			break;
-		}
-
-		default:
-		{
-			// call superTypes
-			result = LiteralSpecificationImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -430,12 +340,6 @@ void LiteralBooleanImpl::save(std::shared_ptr<persistence::interfaces::XSaveHand
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
-	
-	
 }
 
 void LiteralBooleanImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -455,3 +359,96 @@ void LiteralBooleanImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> LiteralBooleanImpl::eStaticClass() const
+{
+	return uml::umlPackage::eInstance()->getLiteralBoolean_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any LiteralBooleanImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::LITERALBOOLEAN_ATTRIBUTE_VALUE:
+			return eAny(getValue()); //13715
+	}
+	return LiteralSpecificationImpl::eGet(featureID, resolve, coreType);
+}
+
+bool LiteralBooleanImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::LITERALBOOLEAN_ATTRIBUTE_VALUE:
+			return getValue() != false; //13715
+	}
+	return LiteralSpecificationImpl::internalEIsSet(featureID);
+}
+
+bool LiteralBooleanImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::LITERALBOOLEAN_ATTRIBUTE_VALUE:
+		{
+			// BOOST CAST
+			bool _value = newValue->get<bool>();
+			setValue(_value); //13715
+			return true;
+		}
+	}
+
+	return LiteralSpecificationImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any LiteralBooleanImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 844586416
+		case umlPackage::LITERALBOOLEAN_OPERATION_BOOLEANVALUE:
+		{
+			result = eAny(this->booleanValue());
+			break;
+		}
+		
+		// 27416872
+		case umlPackage::LITERALBOOLEAN_OPERATION_ISCOMPUTABLE:
+		{
+			result = eAny(this->isComputable());
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = LiteralSpecificationImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<LiteralBoolean> LiteralBooleanImpl::getThisLiteralBooleanPtr() const
+{
+	return m_thisLiteralBooleanPtr.lock();
+}
+void LiteralBooleanImpl::setThisLiteralBooleanPtr(std::weak_ptr<LiteralBoolean> thisLiteralBooleanPtr)
+{
+	m_thisLiteralBooleanPtr = thisLiteralBooleanPtr;
+	setThisLiteralSpecificationPtr(thisLiteralBooleanPtr);
+}

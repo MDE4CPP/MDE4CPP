@@ -1,3 +1,4 @@
+
 #include "fUML/Semantics/Actions/impl/InvocationActionActivationImpl.hpp"
 
 #ifdef NDEBUG
@@ -25,7 +26,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -35,7 +35,6 @@
 #include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "uml/umlFactory.hpp"
-
 
 #include "uml/Action.hpp"
 #include "fUML/Semantics/Actions/ActionActivation.hpp"
@@ -123,21 +122,16 @@ std::shared_ptr<ecore::EObject> InvocationActionActivationImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> InvocationActionActivationImpl::eStaticClass() const
-{
-	return fUML::Semantics::Actions::ActionsPackage::eInstance()->getInvocationActionActivation_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
 
 //*********************************
-// References
+// Attribute Getters & Setters
+//*********************************
+
+//*********************************
+// Reference Getters & Setters
 //*********************************
 
 //*********************************
@@ -158,18 +152,9 @@ std::shared_ptr<Union<fUML::Semantics::Actions::PinActivation>> InvocationAction
 	return m_pinActivation;
 }
 
-
-
-
-std::shared_ptr<InvocationActionActivation> InvocationActionActivationImpl::getThisInvocationActionActivationPtr() const
-{
-	return m_thisInvocationActionActivationPtr.lock();
-}
-void InvocationActionActivationImpl::setThisInvocationActionActivationPtr(std::weak_ptr<InvocationActionActivation> thisInvocationActionActivationPtr)
-{
-	m_thisInvocationActionActivationPtr = thisInvocationActionActivationPtr;
-	setThisActionActivationPtr(thisInvocationActionActivationPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> InvocationActionActivationImpl::eContainer() const
 {
 	if(auto wp = m_group.lock())
@@ -177,55 +162,6 @@ std::shared_ptr<ecore::EObject> InvocationActionActivationImpl::eContainer() con
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any InvocationActionActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-	}
-	return ActionActivationImpl::eGet(featureID, resolve, coreType);
-}
-bool InvocationActionActivationImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-	}
-	return ActionActivationImpl::internalEIsSet(featureID);
-}
-bool InvocationActionActivationImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-	}
-
-	return ActionActivationImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any InvocationActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-
-		default:
-		{
-			// call superTypes
-			result = ActionActivationImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -276,9 +212,6 @@ void InvocationActionActivationImpl::save(std::shared_ptr<persistence::interface
 	fUML::Semantics::Loci::SemanticVisitorImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
 }
 
 void InvocationActionActivationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -293,3 +226,71 @@ void InvocationActionActivationImpl::saveContent(std::shared_ptr<persistence::in
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> InvocationActionActivationImpl::eStaticClass() const
+{
+	return fUML::Semantics::Actions::ActionsPackage::eInstance()->getInvocationActionActivation_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any InvocationActionActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+	}
+	return ActionActivationImpl::eGet(featureID, resolve, coreType);
+}
+
+bool InvocationActionActivationImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+	}
+	return ActionActivationImpl::internalEIsSet(featureID);
+}
+
+bool InvocationActionActivationImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+	}
+
+	return ActionActivationImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any InvocationActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+
+		default:
+		{
+			// call superTypes
+			result = ActionActivationImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<InvocationActionActivation> InvocationActionActivationImpl::getThisInvocationActionActivationPtr() const
+{
+	return m_thisInvocationActionActivationPtr.lock();
+}
+void InvocationActionActivationImpl::setThisInvocationActionActivationPtr(std::weak_ptr<InvocationActionActivation> thisInvocationActionActivationPtr)
+{
+	m_thisInvocationActionActivationPtr = thisInvocationActionActivationPtr;
+	setThisActionActivationPtr(thisInvocationActionActivationPtr);
+}

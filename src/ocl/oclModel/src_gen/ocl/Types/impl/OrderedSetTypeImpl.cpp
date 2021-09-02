@@ -1,3 +1,4 @@
+
 #include "ocl/Types/impl/OrderedSetTypeImpl.hpp"
 
 #ifdef NDEBUG
@@ -25,7 +26,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -34,7 +34,6 @@
 #include <exception> // used in Persistence
 #include "ecore/ecoreFactory.hpp"
 #include "ocl/Values/ValuesFactory.hpp"
-
 
 #include "ocl/Types/CollectionType.hpp"
 #include "ocl/Values/CollectionValue.hpp"
@@ -118,38 +117,25 @@ std::shared_ptr<ecore::EObject> OrderedSetTypeImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> OrderedSetTypeImpl::eStaticClass() const
-{
-	return ocl::Types::TypesPackage::eInstance()->getOrderedSetType_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
 
 //*********************************
-// References
+// Attribute Getters & Setters
+//*********************************
+
+//*********************************
+// Reference Getters & Setters
 //*********************************
 
 //*********************************
 // Union Getter
 //*********************************
 
-
-
-std::shared_ptr<OrderedSetType> OrderedSetTypeImpl::getThisOrderedSetTypePtr() const
-{
-	return m_thisOrderedSetTypePtr.lock();
-}
-void OrderedSetTypeImpl::setThisOrderedSetTypePtr(std::weak_ptr<OrderedSetType> thisOrderedSetTypePtr)
-{
-	m_thisOrderedSetTypePtr = thisOrderedSetTypePtr;
-	setThisCollectionTypePtr(thisOrderedSetTypePtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> OrderedSetTypeImpl::eContainer() const
 {
 	if(auto wp = m_ePackage.lock())
@@ -157,55 +143,6 @@ std::shared_ptr<ecore::EObject> OrderedSetTypeImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any OrderedSetTypeImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-	}
-	return CollectionTypeImpl::eGet(featureID, resolve, coreType);
-}
-bool OrderedSetTypeImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-	}
-	return CollectionTypeImpl::internalEIsSet(featureID);
-}
-bool OrderedSetTypeImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-	}
-
-	return CollectionTypeImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any OrderedSetTypeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-
-		default:
-		{
-			// call superTypes
-			result = CollectionTypeImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -260,11 +197,6 @@ void OrderedSetTypeImpl::save(std::shared_ptr<persistence::interfaces::XSaveHand
 	ecore::EModelElementImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
-	
 }
 
 void OrderedSetTypeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -279,3 +211,71 @@ void OrderedSetTypeImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> OrderedSetTypeImpl::eStaticClass() const
+{
+	return ocl::Types::TypesPackage::eInstance()->getOrderedSetType_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any OrderedSetTypeImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+	}
+	return CollectionTypeImpl::eGet(featureID, resolve, coreType);
+}
+
+bool OrderedSetTypeImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+	}
+	return CollectionTypeImpl::internalEIsSet(featureID);
+}
+
+bool OrderedSetTypeImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+	}
+
+	return CollectionTypeImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any OrderedSetTypeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+
+		default:
+		{
+			// call superTypes
+			result = CollectionTypeImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<OrderedSetType> OrderedSetTypeImpl::getThisOrderedSetTypePtr() const
+{
+	return m_thisOrderedSetTypePtr.lock();
+}
+void OrderedSetTypeImpl::setThisOrderedSetTypePtr(std::weak_ptr<OrderedSetType> thisOrderedSetTypePtr)
+{
+	m_thisOrderedSetTypePtr = thisOrderedSetTypePtr;
+	setThisCollectionTypePtr(thisOrderedSetTypePtr);
+}

@@ -1,3 +1,4 @@
+
 #include "uml/impl/AbstractionImpl.hpp"
 
 #ifdef NDEBUG
@@ -25,7 +26,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -33,7 +33,6 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-
 
 #include "uml/Comment.hpp"
 #include "uml/Dependency.hpp"
@@ -147,25 +146,18 @@ std::shared_ptr<ecore::EObject> AbstractionImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> AbstractionImpl::eStaticClass() const
-{
-	return uml::umlPackage::eInstance()->getAbstraction_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference mapping
-*/
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference mapping */
 std::shared_ptr<uml::OpaqueExpression> AbstractionImpl::getMapping() const
 {
     return m_mapping;
@@ -175,7 +167,6 @@ void AbstractionImpl::setMapping(std::shared_ptr<uml::OpaqueExpression> _mapping
     m_mapping = _mapping;
 	
 }
-
 
 //*********************************
 // Union Getter
@@ -262,16 +253,9 @@ std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> AbstractionImpl::getTar
 
 
 
-
-std::shared_ptr<Abstraction> AbstractionImpl::getThisAbstractionPtr() const
-{
-	return m_thisAbstractionPtr.lock();
-}
-void AbstractionImpl::setThisAbstractionPtr(std::weak_ptr<Abstraction> thisAbstractionPtr)
-{
-	m_thisAbstractionPtr = thisAbstractionPtr;
-	setThisDependencyPtr(thisAbstractionPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> AbstractionImpl::eContainer() const
 {
 	if(auto wp = m_namespace.lock())
@@ -294,70 +278,6 @@ std::shared_ptr<ecore::EObject> AbstractionImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any AbstractionImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::ABSTRACTION_ATTRIBUTE_MAPPING:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getMapping();
-				return eAny(returnValue); //117
-			}
-	}
-	return DependencyImpl::eGet(featureID, resolve, coreType);
-}
-bool AbstractionImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::ABSTRACTION_ATTRIBUTE_MAPPING:
-			return getMapping() != nullptr; //117
-	}
-	return DependencyImpl::internalEIsSet(featureID);
-}
-bool AbstractionImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::ABSTRACTION_ATTRIBUTE_MAPPING:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::OpaqueExpression> _mapping = std::dynamic_pointer_cast<uml::OpaqueExpression>(_temp);
-			setMapping(_mapping); //117
-			return true;
-		}
-	}
-
-	return DependencyImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any AbstractionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-
-		default:
-		{
-			// call superTypes
-			result = DependencyImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -437,11 +357,6 @@ void AbstractionImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
-	
 }
 
 void AbstractionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -462,3 +377,86 @@ void AbstractionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> AbstractionImpl::eStaticClass() const
+{
+	return uml::umlPackage::eInstance()->getAbstraction_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any AbstractionImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::ABSTRACTION_ATTRIBUTE_MAPPING:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getMapping();
+				return eAny(returnValue); //117
+			}
+	}
+	return DependencyImpl::eGet(featureID, resolve, coreType);
+}
+
+bool AbstractionImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::ABSTRACTION_ATTRIBUTE_MAPPING:
+			return getMapping() != nullptr; //117
+	}
+	return DependencyImpl::internalEIsSet(featureID);
+}
+
+bool AbstractionImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::ABSTRACTION_ATTRIBUTE_MAPPING:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::OpaqueExpression> _mapping = std::dynamic_pointer_cast<uml::OpaqueExpression>(_temp);
+			setMapping(_mapping); //117
+			return true;
+		}
+	}
+
+	return DependencyImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any AbstractionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+
+		default:
+		{
+			// call superTypes
+			result = DependencyImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<Abstraction> AbstractionImpl::getThisAbstractionPtr() const
+{
+	return m_thisAbstractionPtr.lock();
+}
+void AbstractionImpl::setThisAbstractionPtr(std::weak_ptr<Abstraction> thisAbstractionPtr)
+{
+	m_thisAbstractionPtr = thisAbstractionPtr;
+	setThisDependencyPtr(thisAbstractionPtr);
+}

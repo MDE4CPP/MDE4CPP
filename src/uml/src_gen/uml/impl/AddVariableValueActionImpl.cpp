@@ -1,3 +1,4 @@
+
 #include "uml/impl/AddVariableValueActionImpl.hpp"
 
 #ifdef NDEBUG
@@ -26,7 +27,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -34,7 +34,6 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-
 
 #include "uml/Activity.hpp"
 #include "uml/ActivityEdge.hpp"
@@ -160,28 +159,6 @@ std::shared_ptr<ecore::EObject> AddVariableValueActionImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> AddVariableValueActionImpl::eStaticClass() const
-{
-	return uml::umlPackage::eInstance()->getAddVariableValueAction_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-/*
-Getter & Setter for attribute isReplaceAll
-*/
-bool AddVariableValueActionImpl::getIsReplaceAll() const 
-{
-	return m_isReplaceAll;
-}
-void AddVariableValueActionImpl::setIsReplaceAll(bool _isReplaceAll)
-{
-	m_isReplaceAll = _isReplaceAll;
-	
-} 
-
-
 //*********************************
 // Operations
 //*********************************
@@ -198,11 +175,23 @@ bool AddVariableValueActionImpl::required_value(Any diagnostics,std::shared_ptr<
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference insertAt
-*/
+/* Getter & Setter for attribute isReplaceAll */
+bool AddVariableValueActionImpl::getIsReplaceAll() const 
+{
+	return m_isReplaceAll;
+}
+void AddVariableValueActionImpl::setIsReplaceAll(bool _isReplaceAll)
+{
+	m_isReplaceAll = _isReplaceAll;
+	
+}
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference insertAt */
 std::shared_ptr<uml::InputPin> AddVariableValueActionImpl::getInsertAt() const
 {
     return m_insertAt;
@@ -212,7 +201,6 @@ void AddVariableValueActionImpl::setInsertAt(std::shared_ptr<uml::InputPin> _ins
     m_insertAt = _insertAt;
 	
 }
-
 
 //*********************************
 // Union Getter
@@ -287,18 +275,9 @@ std::shared_ptr<Union<uml::RedefinableElement>> AddVariableValueActionImpl::getR
 	return m_redefinedElement;
 }
 
-
-
-
-std::shared_ptr<AddVariableValueAction> AddVariableValueActionImpl::getThisAddVariableValueActionPtr() const
-{
-	return m_thisAddVariableValueActionPtr.lock();
-}
-void AddVariableValueActionImpl::setThisAddVariableValueActionPtr(std::weak_ptr<AddVariableValueAction> thisAddVariableValueActionPtr)
-{
-	m_thisAddVariableValueActionPtr = thisAddVariableValueActionPtr;
-	setThisWriteVariableActionPtr(thisAddVariableValueActionPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> AddVariableValueActionImpl::eContainer() const
 {
 	if(auto wp = m_activity.lock())
@@ -321,115 +300,6 @@ std::shared_ptr<ecore::EObject> AddVariableValueActionImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any AddVariableValueActionImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::ADDVARIABLEVALUEACTION_ATTRIBUTE_INSERTAT:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getInsertAt();
-				return eAny(returnValue); //1629
-			}
-		case uml::umlPackage::ADDVARIABLEVALUEACTION_ATTRIBUTE_ISREPLACEALL:
-			return eAny(getIsReplaceAll()); //1630
-	}
-	return WriteVariableActionImpl::eGet(featureID, resolve, coreType);
-}
-bool AddVariableValueActionImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::ADDVARIABLEVALUEACTION_ATTRIBUTE_INSERTAT:
-			return getInsertAt() != nullptr; //1629
-		case uml::umlPackage::ADDVARIABLEVALUEACTION_ATTRIBUTE_ISREPLACEALL:
-			return getIsReplaceAll() != false; //1630
-	}
-	return WriteVariableActionImpl::internalEIsSet(featureID);
-}
-bool AddVariableValueActionImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::ADDVARIABLEVALUEACTION_ATTRIBUTE_INSERTAT:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::InputPin> _insertAt = std::dynamic_pointer_cast<uml::InputPin>(_temp);
-			setInsertAt(_insertAt); //1629
-			return true;
-		}
-		case uml::umlPackage::ADDVARIABLEVALUEACTION_ATTRIBUTE_ISREPLACEALL:
-		{
-			// BOOST CAST
-			bool _isReplaceAll = newValue->get<bool>();
-			setIsReplaceAll(_isReplaceAll); //1630
-			return true;
-		}
-	}
-
-	return WriteVariableActionImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any AddVariableValueActionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-		
-		// 39023039
-		case umlPackage::ADDVARIABLEVALUEACTION_OPERATION_INSERTAT_PIN_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->insertAt_pin(incoming_param_diagnostics,incoming_param_context));
-			break;
-		}
-		
-		// 1623846851
-		case umlPackage::ADDVARIABLEVALUEACTION_OPERATION_REQUIRED_VALUE_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->required_value(incoming_param_diagnostics,incoming_param_context));
-			break;
-		}
-
-		default:
-		{
-			// call superTypes
-			result = WriteVariableActionImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -535,15 +405,6 @@ void AddVariableValueActionImpl::save(std::shared_ptr<persistence::interfaces::X
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
-	
-	
-	
-	
-	
 }
 
 void AddVariableValueActionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -569,3 +430,131 @@ void AddVariableValueActionImpl::saveContent(std::shared_ptr<persistence::interf
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> AddVariableValueActionImpl::eStaticClass() const
+{
+	return uml::umlPackage::eInstance()->getAddVariableValueAction_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any AddVariableValueActionImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::ADDVARIABLEVALUEACTION_ATTRIBUTE_INSERTAT:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getInsertAt();
+				return eAny(returnValue); //1629
+			}
+		case uml::umlPackage::ADDVARIABLEVALUEACTION_ATTRIBUTE_ISREPLACEALL:
+			return eAny(getIsReplaceAll()); //1630
+	}
+	return WriteVariableActionImpl::eGet(featureID, resolve, coreType);
+}
+
+bool AddVariableValueActionImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::ADDVARIABLEVALUEACTION_ATTRIBUTE_INSERTAT:
+			return getInsertAt() != nullptr; //1629
+		case uml::umlPackage::ADDVARIABLEVALUEACTION_ATTRIBUTE_ISREPLACEALL:
+			return getIsReplaceAll() != false; //1630
+	}
+	return WriteVariableActionImpl::internalEIsSet(featureID);
+}
+
+bool AddVariableValueActionImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::ADDVARIABLEVALUEACTION_ATTRIBUTE_INSERTAT:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::InputPin> _insertAt = std::dynamic_pointer_cast<uml::InputPin>(_temp);
+			setInsertAt(_insertAt); //1629
+			return true;
+		}
+		case uml::umlPackage::ADDVARIABLEVALUEACTION_ATTRIBUTE_ISREPLACEALL:
+		{
+			// BOOST CAST
+			bool _isReplaceAll = newValue->get<bool>();
+			setIsReplaceAll(_isReplaceAll); //1630
+			return true;
+		}
+	}
+
+	return WriteVariableActionImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any AddVariableValueActionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 39023039
+		case umlPackage::ADDVARIABLEVALUEACTION_OPERATION_INSERTAT_PIN_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->insertAt_pin(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+		
+		// 1623846851
+		case umlPackage::ADDVARIABLEVALUEACTION_OPERATION_REQUIRED_VALUE_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->required_value(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = WriteVariableActionImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<AddVariableValueAction> AddVariableValueActionImpl::getThisAddVariableValueActionPtr() const
+{
+	return m_thisAddVariableValueActionPtr.lock();
+}
+void AddVariableValueActionImpl::setThisAddVariableValueActionPtr(std::weak_ptr<AddVariableValueAction> thisAddVariableValueActionPtr)
+{
+	m_thisAddVariableValueActionPtr = thisAddVariableValueActionPtr;
+	setThisWriteVariableActionPtr(thisAddVariableValueActionPtr);
+}

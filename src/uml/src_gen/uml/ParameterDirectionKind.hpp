@@ -10,12 +10,16 @@
 namespace uml 
 {
 	enum ParameterDirectionKind {
+		
 		IN = 0
 ,
+		
 		INOUT = 1
 ,
+		
 		OUT = 2
 ,
+		
 		RETURN = 3
 	};
 }

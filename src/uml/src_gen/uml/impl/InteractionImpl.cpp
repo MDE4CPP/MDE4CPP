@@ -1,3 +1,4 @@
+
 #include "uml/impl/InteractionImpl.hpp"
 
 #ifdef NDEBUG
@@ -26,7 +27,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -34,7 +34,6 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-
 
 #include "uml/Action.hpp"
 #include "uml/Behavior.hpp"
@@ -399,15 +398,6 @@ std::shared_ptr<ecore::EObject> InteractionImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> InteractionImpl::eStaticClass() const
-{
-	return uml::umlPackage::eInstance()->getInteraction_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
@@ -418,11 +408,13 @@ bool InteractionImpl::not_contained(Any diagnostics,std::shared_ptr<std::map < A
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference action
-*/
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference action */
 std::shared_ptr<Subset<uml::Action, uml::Element>> InteractionImpl::getAction() const
 {
 	if(m_action == nullptr)
@@ -443,11 +435,7 @@ std::shared_ptr<Subset<uml::Action, uml::Element>> InteractionImpl::getAction() 
     return m_action;
 }
 
-
-
-/*
-Getter & Setter for reference formalGate
-*/
+/* Getter & Setter for reference formalGate */
 std::shared_ptr<Subset<uml::Gate, uml::NamedElement>> InteractionImpl::getFormalGate() const
 {
 	if(m_formalGate == nullptr)
@@ -468,11 +456,7 @@ std::shared_ptr<Subset<uml::Gate, uml::NamedElement>> InteractionImpl::getFormal
     return m_formalGate;
 }
 
-
-
-/*
-Getter & Setter for reference fragment
-*/
+/* Getter & Setter for reference fragment */
 std::shared_ptr<Subset<uml::InteractionFragment, uml::NamedElement>> InteractionImpl::getFragment() const
 {
 	if(m_fragment == nullptr)
@@ -493,11 +477,7 @@ std::shared_ptr<Subset<uml::InteractionFragment, uml::NamedElement>> Interaction
     return m_fragment;
 }
 
-
-
-/*
-Getter & Setter for reference lifeline
-*/
+/* Getter & Setter for reference lifeline */
 std::shared_ptr<Subset<uml::Lifeline, uml::NamedElement>> InteractionImpl::getLifeline() const
 {
 	if(m_lifeline == nullptr)
@@ -518,11 +498,7 @@ std::shared_ptr<Subset<uml::Lifeline, uml::NamedElement>> InteractionImpl::getLi
     return m_lifeline;
 }
 
-
-
-/*
-Getter & Setter for reference message
-*/
+/* Getter & Setter for reference message */
 std::shared_ptr<Subset<uml::Message, uml::NamedElement>> InteractionImpl::getMessage() const
 {
 	if(m_message == nullptr)
@@ -542,8 +518,6 @@ std::shared_ptr<Subset<uml::Message, uml::NamedElement>> InteractionImpl::getMes
 	}
     return m_message;
 }
-
-
 
 //*********************************
 // Union Getter
@@ -700,17 +674,9 @@ std::shared_ptr<SubsetUnion<uml::ConnectableElement, uml::NamedElement>> Interac
 
 
 
-
-std::shared_ptr<Interaction> InteractionImpl::getThisInteractionPtr() const
-{
-	return m_thisInteractionPtr.lock();
-}
-void InteractionImpl::setThisInteractionPtr(std::weak_ptr<Interaction> thisInteractionPtr)
-{
-	m_thisInteractionPtr = thisInteractionPtr;
-	setThisBehaviorPtr(thisInteractionPtr);
-	setThisInteractionFragmentPtr(thisInteractionPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> InteractionImpl::eContainer() const
 {
 	if(auto wp = m_behavioredClassifier.lock())
@@ -756,7 +722,200 @@ std::shared_ptr<ecore::EObject> InteractionImpl::eContainer() const
 }
 
 //*********************************
-// Structural Feature Getter/Setter
+// Persistence Functions
+//*********************************
+void InteractionImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get umlFactory
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
+	}
+}		
+
+void InteractionImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+
+	BehaviorImpl::loadAttributes(loadHandler, attr_list);
+	InteractionFragmentImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void InteractionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+
+	try
+	{
+		if ( nodeName.compare("action") == 0 )
+		{
+  			std::string typeName = loadHandler->getCurrentXSITypeName();
+			if (typeName.empty())
+			{
+				std::cout << "| WARNING    | type if an eClassifiers node it empty" << std::endl;
+				return; // no type name given and reference type is abstract
+			}
+			loadHandler->handleChildContainer<uml::Action>(this->getAction());  
+
+			return; 
+		}
+
+		if ( nodeName.compare("formalGate") == 0 )
+		{
+  			std::string typeName = loadHandler->getCurrentXSITypeName();
+			if (typeName.empty())
+			{
+				typeName = "Gate";
+			}
+			loadHandler->handleChildContainer<uml::Gate>(this->getFormalGate());  
+
+			return; 
+		}
+
+		if ( nodeName.compare("fragment") == 0 )
+		{
+  			std::string typeName = loadHandler->getCurrentXSITypeName();
+			if (typeName.empty())
+			{
+				std::cout << "| WARNING    | type if an eClassifiers node it empty" << std::endl;
+				return; // no type name given and reference type is abstract
+			}
+			loadHandler->handleChildContainer<uml::InteractionFragment>(this->getFragment());  
+
+			return; 
+		}
+
+		if ( nodeName.compare("lifeline") == 0 )
+		{
+  			std::string typeName = loadHandler->getCurrentXSITypeName();
+			if (typeName.empty())
+			{
+				typeName = "Lifeline";
+			}
+			loadHandler->handleChildContainer<uml::Lifeline>(this->getLifeline());  
+
+			return; 
+		}
+
+		if ( nodeName.compare("message") == 0 )
+		{
+  			std::string typeName = loadHandler->getCurrentXSITypeName();
+			if (typeName.empty())
+			{
+				typeName = "Message";
+			}
+			loadHandler->handleChildContainer<uml::Message>(this->getMessage());  
+
+			return; 
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+	//load BasePackage Nodes
+	BehaviorImpl::loadNode(nodeName, loadHandler);
+	InteractionFragmentImpl::loadNode(nodeName, loadHandler);
+}
+
+void InteractionImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+{
+	BehaviorImpl::resolveReferences(featureID, references);
+	InteractionFragmentImpl::resolveReferences(featureID, references);
+}
+
+void InteractionImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	BehaviorImpl::saveContent(saveHandler);
+	InteractionFragmentImpl::saveContent(saveHandler);
+	
+	ClassImpl::saveContent(saveHandler);
+	
+	BehavioredClassifierImpl::saveContent(saveHandler);
+	EncapsulatedClassifierImpl::saveContent(saveHandler);
+	
+	StructuredClassifierImpl::saveContent(saveHandler);
+	
+	ClassifierImpl::saveContent(saveHandler);
+	
+	NamespaceImpl::saveContent(saveHandler);
+	RedefinableElementImpl::saveContent(saveHandler);
+	TemplateableElementImpl::saveContent(saveHandler);
+	TypeImpl::saveContent(saveHandler);
+	
+	PackageableElementImpl::saveContent(saveHandler);
+	
+	NamedElementImpl::saveContent(saveHandler);
+	ParameterableElementImpl::saveContent(saveHandler);
+	
+	ElementImpl::saveContent(saveHandler);
+	
+	ObjectImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+}
+
+void InteractionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
+		// Save 'action'
+		for (std::shared_ptr<uml::Action> action : *this->getAction()) 
+		{
+			saveHandler->addReference(action, "action", action->eClass() != package->getAction_Class());
+		}
+
+		// Save 'formalGate'
+		for (std::shared_ptr<uml::Gate> formalGate : *this->getFormalGate()) 
+		{
+			saveHandler->addReference(formalGate, "formalGate", formalGate->eClass() != package->getGate_Class());
+		}
+
+		// Save 'fragment'
+		for (std::shared_ptr<uml::InteractionFragment> fragment : *this->getFragment()) 
+		{
+			saveHandler->addReference(fragment, "fragment", fragment->eClass() != package->getInteractionFragment_Class());
+		}
+
+		// Save 'lifeline'
+		for (std::shared_ptr<uml::Lifeline> lifeline : *this->getLifeline()) 
+		{
+			saveHandler->addReference(lifeline, "lifeline", lifeline->eClass() != package->getLifeline_Class());
+		}
+
+		// Save 'message'
+		for (std::shared_ptr<uml::Message> message : *this->getMessage()) 
+		{
+			saveHandler->addReference(message, "message", message->eClass() != package->getMessage_Class());
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+}
+
+
+std::shared_ptr<ecore::EClass> InteractionImpl::eStaticClass() const
+{
+	return uml::umlPackage::eInstance()->getInteraction_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
 //*********************************
 Any InteractionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
@@ -832,6 +991,7 @@ Any InteractionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	result = InteractionFragmentImpl::eGet(featureID, resolve, coreType);
 	return result;
 }
+
 bool InteractionImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
@@ -856,6 +1016,7 @@ bool InteractionImpl::internalEIsSet(int featureID) const
 	result = InteractionFragmentImpl::internalEIsSet(featureID);
 	return result;
 }
+
 bool InteractionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
@@ -1053,7 +1214,7 @@ bool InteractionImpl::eSet(int featureID, Any newValue)
 }
 
 //*********************************
-// Behavioral Feature
+// EOperation Invoke
 //*********************************
 Any InteractionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
 {
@@ -1095,199 +1256,14 @@ Any InteractionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::s
 	return result;
 }
 
-//*********************************
-// Persistence Functions
-//*********************************
-void InteractionImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+
+std::shared_ptr<Interaction> InteractionImpl::getThisInteractionPtr() const
 {
-	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
-	loadAttributes(loadHandler, attr_list);
-
-	//
-	// Create new objects (from references (containment == true))
-	//
-	// get umlFactory
-	int numNodes = loadHandler->getNumOfChildNodes();
-	for(int ii = 0; ii < numNodes; ii++)
-	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler);
-	}
-}		
-
-void InteractionImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
-{
-
-	BehaviorImpl::loadAttributes(loadHandler, attr_list);
-	InteractionFragmentImpl::loadAttributes(loadHandler, attr_list);
+	return m_thisInteractionPtr.lock();
 }
-
-void InteractionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+void InteractionImpl::setThisInteractionPtr(std::weak_ptr<Interaction> thisInteractionPtr)
 {
-
-	try
-	{
-		if ( nodeName.compare("action") == 0 )
-		{
-  			std::string typeName = loadHandler->getCurrentXSITypeName();
-			if (typeName.empty())
-			{
-				std::cout << "| WARNING    | type if an eClassifiers node it empty" << std::endl;
-				return; // no type name given and reference type is abstract
-			}
-			loadHandler->handleChildContainer<uml::Action>(this->getAction());  
-
-			return; 
-		}
-
-		if ( nodeName.compare("formalGate") == 0 )
-		{
-  			std::string typeName = loadHandler->getCurrentXSITypeName();
-			if (typeName.empty())
-			{
-				typeName = "Gate";
-			}
-			loadHandler->handleChildContainer<uml::Gate>(this->getFormalGate());  
-
-			return; 
-		}
-
-		if ( nodeName.compare("fragment") == 0 )
-		{
-  			std::string typeName = loadHandler->getCurrentXSITypeName();
-			if (typeName.empty())
-			{
-				std::cout << "| WARNING    | type if an eClassifiers node it empty" << std::endl;
-				return; // no type name given and reference type is abstract
-			}
-			loadHandler->handleChildContainer<uml::InteractionFragment>(this->getFragment());  
-
-			return; 
-		}
-
-		if ( nodeName.compare("lifeline") == 0 )
-		{
-  			std::string typeName = loadHandler->getCurrentXSITypeName();
-			if (typeName.empty())
-			{
-				typeName = "Lifeline";
-			}
-			loadHandler->handleChildContainer<uml::Lifeline>(this->getLifeline());  
-
-			return; 
-		}
-
-		if ( nodeName.compare("message") == 0 )
-		{
-  			std::string typeName = loadHandler->getCurrentXSITypeName();
-			if (typeName.empty())
-			{
-				typeName = "Message";
-			}
-			loadHandler->handleChildContainer<uml::Message>(this->getMessage());  
-
-			return; 
-		}
-	}
-	catch (std::exception& e)
-	{
-		std::cout << "| ERROR    | " << e.what() << std::endl;
-	}
-	catch (...) 
-	{
-		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
-	}
-	//load BasePackage Nodes
-	BehaviorImpl::loadNode(nodeName, loadHandler);
-	InteractionFragmentImpl::loadNode(nodeName, loadHandler);
+	m_thisInteractionPtr = thisInteractionPtr;
+	setThisBehaviorPtr(thisInteractionPtr);
+	setThisInteractionFragmentPtr(thisInteractionPtr);
 }
-
-void InteractionImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
-{
-	BehaviorImpl::resolveReferences(featureID, references);
-	InteractionFragmentImpl::resolveReferences(featureID, references);
-}
-
-void InteractionImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
-{
-	saveContent(saveHandler);
-
-	BehaviorImpl::saveContent(saveHandler);
-	InteractionFragmentImpl::saveContent(saveHandler);
-	
-	ClassImpl::saveContent(saveHandler);
-	
-	BehavioredClassifierImpl::saveContent(saveHandler);
-	EncapsulatedClassifierImpl::saveContent(saveHandler);
-	
-	StructuredClassifierImpl::saveContent(saveHandler);
-	
-	ClassifierImpl::saveContent(saveHandler);
-	
-	NamespaceImpl::saveContent(saveHandler);
-	RedefinableElementImpl::saveContent(saveHandler);
-	TemplateableElementImpl::saveContent(saveHandler);
-	TypeImpl::saveContent(saveHandler);
-	
-	PackageableElementImpl::saveContent(saveHandler);
-	
-	NamedElementImpl::saveContent(saveHandler);
-	ParameterableElementImpl::saveContent(saveHandler);
-	
-	ElementImpl::saveContent(saveHandler);
-	
-	ObjectImpl::saveContent(saveHandler);
-	
-	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-}
-
-void InteractionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
-{
-	try
-	{
-		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-		// Save 'action'
-		for (std::shared_ptr<uml::Action> action : *this->getAction()) 
-		{
-			saveHandler->addReference(action, "action", action->eClass() != package->getAction_Class());
-		}
-
-		// Save 'formalGate'
-		for (std::shared_ptr<uml::Gate> formalGate : *this->getFormalGate()) 
-		{
-			saveHandler->addReference(formalGate, "formalGate", formalGate->eClass() != package->getGate_Class());
-		}
-
-		// Save 'fragment'
-		for (std::shared_ptr<uml::InteractionFragment> fragment : *this->getFragment()) 
-		{
-			saveHandler->addReference(fragment, "fragment", fragment->eClass() != package->getInteractionFragment_Class());
-		}
-
-		// Save 'lifeline'
-		for (std::shared_ptr<uml::Lifeline> lifeline : *this->getLifeline()) 
-		{
-			saveHandler->addReference(lifeline, "lifeline", lifeline->eClass() != package->getLifeline_Class());
-		}
-
-		// Save 'message'
-		for (std::shared_ptr<uml::Message> message : *this->getMessage()) 
-		{
-			saveHandler->addReference(message, "message", message->eClass() != package->getMessage_Class());
-		}
-	}
-	catch (std::exception& e)
-	{
-		std::cout << "| ERROR    | " << e.what() << std::endl;
-	}
-}
-

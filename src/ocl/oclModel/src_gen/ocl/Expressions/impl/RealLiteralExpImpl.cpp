@@ -1,3 +1,4 @@
+
 #include "ocl/Expressions/impl/RealLiteralExpImpl.hpp"
 
 #ifdef NDEBUG
@@ -25,7 +26,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -35,7 +35,6 @@
 #include "ecore/ecoreFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
-
 
 #include "ocl/Expressions/CallExp.hpp"
 #include "ocl/Expressions/CollectionRange.hpp"
@@ -204,17 +203,14 @@ std::shared_ptr<ecore::EObject> RealLiteralExpImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> RealLiteralExpImpl::eStaticClass() const
-{
-	return ocl::Expressions::ExpressionsPackage::eInstance()->getRealLiteralExp_Class();
-}
+//*********************************
+// Operations
+//*********************************
 
 //*********************************
-// Attribute Setter Getter
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for attribute realSymbol
-*/
+/* Getter & Setter for attribute realSymbol */
 int RealLiteralExpImpl::getRealSymbol() const 
 {
 	return m_realSymbol;
@@ -223,32 +219,19 @@ void RealLiteralExpImpl::setRealSymbol(int _realSymbol)
 {
 	m_realSymbol = _realSymbol;
 	
-} 
-
-
-//*********************************
-// Operations
-//*********************************
+}
 
 //*********************************
-// References
+// Reference Getters & Setters
 //*********************************
 
 //*********************************
 // Union Getter
 //*********************************
 
-
-
-std::shared_ptr<RealLiteralExp> RealLiteralExpImpl::getThisRealLiteralExpPtr() const
-{
-	return m_thisRealLiteralExpPtr.lock();
-}
-void RealLiteralExpImpl::setThisRealLiteralExpPtr(std::weak_ptr<RealLiteralExp> thisRealLiteralExpPtr)
-{
-	m_thisRealLiteralExpPtr = thisRealLiteralExpPtr;
-	setThisNumericLiteralExpPtr(thisRealLiteralExpPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> RealLiteralExpImpl::eContainer() const
 {
 	if(auto wp = m_appliedElement.lock())
@@ -306,66 +289,6 @@ std::shared_ptr<ecore::EObject> RealLiteralExpImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any RealLiteralExpImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case ocl::Expressions::ExpressionsPackage::REALLITERALEXP_ATTRIBUTE_REALSYMBOL:
-			return eAny(getRealSymbol()); //7323
-	}
-	return NumericLiteralExpImpl::eGet(featureID, resolve, coreType);
-}
-bool RealLiteralExpImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case ocl::Expressions::ExpressionsPackage::REALLITERALEXP_ATTRIBUTE_REALSYMBOL:
-			return getRealSymbol() != 0; //7323
-	}
-	return NumericLiteralExpImpl::internalEIsSet(featureID);
-}
-bool RealLiteralExpImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case ocl::Expressions::ExpressionsPackage::REALLITERALEXP_ATTRIBUTE_REALSYMBOL:
-		{
-			// BOOST CAST
-			int _realSymbol = newValue->get<int>();
-			setRealSymbol(_realSymbol); //7323
-			return true;
-		}
-	}
-
-	return NumericLiteralExpImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any RealLiteralExpImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-
-		default:
-		{
-			// call superTypes
-			result = NumericLiteralExpImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -445,13 +368,6 @@ void RealLiteralExpImpl::save(std::shared_ptr<persistence::interfaces::XSaveHand
 	ecore::EModelElementImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
-	
-	
-	
 }
 
 void RealLiteralExpImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -471,3 +387,82 @@ void RealLiteralExpImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> RealLiteralExpImpl::eStaticClass() const
+{
+	return ocl::Expressions::ExpressionsPackage::eInstance()->getRealLiteralExp_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any RealLiteralExpImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case ocl::Expressions::ExpressionsPackage::REALLITERALEXP_ATTRIBUTE_REALSYMBOL:
+			return eAny(getRealSymbol()); //7323
+	}
+	return NumericLiteralExpImpl::eGet(featureID, resolve, coreType);
+}
+
+bool RealLiteralExpImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case ocl::Expressions::ExpressionsPackage::REALLITERALEXP_ATTRIBUTE_REALSYMBOL:
+			return getRealSymbol() != 0; //7323
+	}
+	return NumericLiteralExpImpl::internalEIsSet(featureID);
+}
+
+bool RealLiteralExpImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case ocl::Expressions::ExpressionsPackage::REALLITERALEXP_ATTRIBUTE_REALSYMBOL:
+		{
+			// BOOST CAST
+			int _realSymbol = newValue->get<int>();
+			setRealSymbol(_realSymbol); //7323
+			return true;
+		}
+	}
+
+	return NumericLiteralExpImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any RealLiteralExpImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+
+		default:
+		{
+			// call superTypes
+			result = NumericLiteralExpImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<RealLiteralExp> RealLiteralExpImpl::getThisRealLiteralExpPtr() const
+{
+	return m_thisRealLiteralExpPtr.lock();
+}
+void RealLiteralExpImpl::setThisRealLiteralExpPtr(std::weak_ptr<RealLiteralExp> thisRealLiteralExpPtr)
+{
+	m_thisRealLiteralExpPtr = thisRealLiteralExpPtr;
+	setThisNumericLiteralExpPtr(thisRealLiteralExpPtr);
+}

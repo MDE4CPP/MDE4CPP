@@ -1,3 +1,4 @@
+
 #include "ocl/Types/impl/AnyTypeImpl.hpp"
 
 #ifdef NDEBUG
@@ -25,7 +26,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -33,7 +33,6 @@
 
 #include <exception> // used in Persistence
 #include "ecore/ecoreFactory.hpp"
-
 
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClassifier.hpp"
@@ -120,25 +119,18 @@ std::shared_ptr<ecore::EObject> AnyTypeImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> AnyTypeImpl::eStaticClass() const
-{
-	return ocl::Types::TypesPackage::eInstance()->getAnyType_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference object
-*/
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference object */
 std::shared_ptr<ecore::EClassifier> AnyTypeImpl::getObject() const
 {
     return m_object;
@@ -149,22 +141,13 @@ void AnyTypeImpl::setObject(std::shared_ptr<ecore::EClassifier> _object)
 	
 }
 
-
 //*********************************
 // Union Getter
 //*********************************
 
-
-
-std::shared_ptr<AnyType> AnyTypeImpl::getThisAnyTypePtr() const
-{
-	return m_thisAnyTypePtr.lock();
-}
-void AnyTypeImpl::setThisAnyTypePtr(std::weak_ptr<AnyType> thisAnyTypePtr)
-{
-	m_thisAnyTypePtr = thisAnyTypePtr;
-	setThisEClassifierPtr(thisAnyTypePtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> AnyTypeImpl::eContainer() const
 {
 	if(auto wp = m_ePackage.lock())
@@ -172,70 +155,6 @@ std::shared_ptr<ecore::EObject> AnyTypeImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any AnyTypeImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case ocl::Types::TypesPackage::ANYTYPE_ATTRIBUTE_OBJECT:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getObject();
-				return eAny(returnValue); //18
-			}
-	}
-	return ecore::EClassifierImpl::eGet(featureID, resolve, coreType);
-}
-bool AnyTypeImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case ocl::Types::TypesPackage::ANYTYPE_ATTRIBUTE_OBJECT:
-			return getObject() != nullptr; //18
-	}
-	return ecore::EClassifierImpl::internalEIsSet(featureID);
-}
-bool AnyTypeImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case ocl::Types::TypesPackage::ANYTYPE_ATTRIBUTE_OBJECT:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<ecore::EClassifier> _object = std::dynamic_pointer_cast<ecore::EClassifier>(_temp);
-			setObject(_object); //18
-			return true;
-		}
-	}
-
-	return ecore::EClassifierImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any AnyTypeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-
-		default:
-		{
-			// call superTypes
-			result = ecore::EClassifierImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -309,9 +228,6 @@ void AnyTypeImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> sa
 	ecore::EModelElementImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
 }
 
 void AnyTypeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -333,3 +249,86 @@ void AnyTypeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHand
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> AnyTypeImpl::eStaticClass() const
+{
+	return ocl::Types::TypesPackage::eInstance()->getAnyType_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any AnyTypeImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case ocl::Types::TypesPackage::ANYTYPE_ATTRIBUTE_OBJECT:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getObject();
+				return eAny(returnValue); //18
+			}
+	}
+	return ecore::EClassifierImpl::eGet(featureID, resolve, coreType);
+}
+
+bool AnyTypeImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case ocl::Types::TypesPackage::ANYTYPE_ATTRIBUTE_OBJECT:
+			return getObject() != nullptr; //18
+	}
+	return ecore::EClassifierImpl::internalEIsSet(featureID);
+}
+
+bool AnyTypeImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case ocl::Types::TypesPackage::ANYTYPE_ATTRIBUTE_OBJECT:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<ecore::EClassifier> _object = std::dynamic_pointer_cast<ecore::EClassifier>(_temp);
+			setObject(_object); //18
+			return true;
+		}
+	}
+
+	return ecore::EClassifierImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any AnyTypeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+
+		default:
+		{
+			// call superTypes
+			result = ecore::EClassifierImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<AnyType> AnyTypeImpl::getThisAnyTypePtr() const
+{
+	return m_thisAnyTypePtr.lock();
+}
+void AnyTypeImpl::setThisAnyTypePtr(std::weak_ptr<AnyType> thisAnyTypePtr)
+{
+	m_thisAnyTypePtr = thisAnyTypePtr;
+	setThisEClassifierPtr(thisAnyTypePtr);
+}

@@ -1,3 +1,4 @@
+
 #include "fUML/Semantics/StructuredClassifiers/impl/LinkImpl.hpp"
 
 #ifdef NDEBUG
@@ -38,7 +39,6 @@
 #include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
 #include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
-
 
 #include "uml/Association.hpp"
 #include "uml/Classifier.hpp"
@@ -120,15 +120,6 @@ std::shared_ptr<ecore::EObject> LinkImpl::copy() const
 	element->setThisLinkPtr(element);
 	return element;
 }
-
-std::shared_ptr<ecore::EClass> LinkImpl::eStaticClass() const
-{
-	return fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::eInstance()->getLink_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
 
 //*********************************
 // Operations
@@ -254,11 +245,13 @@ bool LinkImpl::isMatchingLink(std::shared_ptr<fUML::Semantics::StructuredClassif
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference type
-*/
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference type */
 std::shared_ptr<uml::Association> LinkImpl::getType() const
 {
     return m_type;
@@ -269,149 +262,16 @@ void LinkImpl::setType(std::shared_ptr<uml::Association> _type)
 	
 }
 
-
 //*********************************
 // Union Getter
 //*********************************
 
-
-
-std::shared_ptr<Link> LinkImpl::getThisLinkPtr() const
-{
-	return m_thisLinkPtr.lock();
-}
-void LinkImpl::setThisLinkPtr(std::weak_ptr<Link> thisLinkPtr)
-{
-	m_thisLinkPtr = thisLinkPtr;
-	setThisExtensionalValuePtr(thisLinkPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> LinkImpl::eContainer() const
 {
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any LinkImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::LINK_ATTRIBUTE_TYPE:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getType();
-				return eAny(returnValue); //682
-			}
-	}
-	return ExtensionalValueImpl::eGet(featureID, resolve, coreType);
-}
-bool LinkImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::LINK_ATTRIBUTE_TYPE:
-			return getType() != nullptr; //682
-	}
-	return ExtensionalValueImpl::internalEIsSet(featureID);
-}
-bool LinkImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::LINK_ATTRIBUTE_TYPE:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::Association> _type = std::dynamic_pointer_cast<uml::Association>(_temp);
-			setType(_type); //682
-			return true;
-		}
-	}
-
-	return ExtensionalValueImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any LinkImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-		
-		// 1029670453
-		case StructuredClassifiersPackage::LINK_OPERATION__COPY:
-		{
-			result = eAny(this->_copy());
-			break;
-		}
-		
-		// 750371157
-		case StructuredClassifiersPackage::LINK_OPERATION_ADDTO_LOCUS:
-		{
-			//Retrieve input parameter 'locus'
-			//parameter 0
-			std::shared_ptr<fUML::Semantics::Loci::Locus> incoming_param_locus;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_locus_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_locus = (*incoming_param_locus_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::Loci::Locus> >();
-			this->addTo(incoming_param_locus);
-			break;
-		}
-		
-		// 704042565
-		case StructuredClassifiersPackage::LINK_OPERATION_GETOTHERFEATUREVALUES_EXTENSIONALVALUE_PROPERTY:
-		{
-			//Retrieve input parameter 'extent'
-			//parameter 0
-			std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::ExtensionalValue>> incoming_param_extent;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_extent_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_extent = (*incoming_param_extent_arguments_citer)->get()->get<std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::ExtensionalValue>> >();
-			//Retrieve input parameter 'end'
-			//parameter 1
-			std::shared_ptr<uml::Property> incoming_param_end;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_end_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_end = (*incoming_param_end_arguments_citer)->get()->get<std::shared_ptr<uml::Property> >();
-			result = eAny(this->getOtherFeatureValues(incoming_param_extent,incoming_param_end));
-			break;
-		}
-		
-		// 202529784
-		case StructuredClassifiersPackage::LINK_OPERATION_GETTYPES:
-		{
-			result = eAny(this->getTypes());
-			break;
-		}
-		
-		// 1155151383
-		case StructuredClassifiersPackage::LINK_OPERATION_ISMATCHINGLINK_EXTENSIONALVALUE_PROPERTY:
-		{
-			//Retrieve input parameter 'link'
-			//parameter 0
-			std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue> incoming_param_link;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_link_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_link = (*incoming_param_link_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue> >();
-			//Retrieve input parameter 'end'
-			//parameter 1
-			std::shared_ptr<uml::Property> incoming_param_end;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_end_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_end = (*incoming_param_end_arguments_citer)->get()->get<std::shared_ptr<uml::Property> >();
-			result = eAny(this->isMatchingLink(incoming_param_link,incoming_param_end));
-			break;
-		}
-
-		default:
-		{
-			// call superTypes
-			result = ExtensionalValueImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -499,11 +359,6 @@ void LinkImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveH
 	fUML::Semantics::Loci::SemanticVisitorImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
-	
 }
 
 void LinkImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -520,3 +375,146 @@ void LinkImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> LinkImpl::eStaticClass() const
+{
+	return fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::eInstance()->getLink_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any LinkImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::LINK_ATTRIBUTE_TYPE:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getType();
+				return eAny(returnValue); //682
+			}
+	}
+	return ExtensionalValueImpl::eGet(featureID, resolve, coreType);
+}
+
+bool LinkImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::LINK_ATTRIBUTE_TYPE:
+			return getType() != nullptr; //682
+	}
+	return ExtensionalValueImpl::internalEIsSet(featureID);
+}
+
+bool LinkImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::LINK_ATTRIBUTE_TYPE:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::Association> _type = std::dynamic_pointer_cast<uml::Association>(_temp);
+			setType(_type); //682
+			return true;
+		}
+	}
+
+	return ExtensionalValueImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any LinkImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 1029670453
+		case StructuredClassifiersPackage::LINK_OPERATION__COPY:
+		{
+			result = eAny(this->_copy());
+			break;
+		}
+		
+		// 750371157
+		case StructuredClassifiersPackage::LINK_OPERATION_ADDTO_LOCUS:
+		{
+			//Retrieve input parameter 'locus'
+			//parameter 0
+			std::shared_ptr<fUML::Semantics::Loci::Locus> incoming_param_locus;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_locus_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_locus = (*incoming_param_locus_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::Loci::Locus> >();
+			this->addTo(incoming_param_locus);
+			break;
+		}
+		
+		// 704042565
+		case StructuredClassifiersPackage::LINK_OPERATION_GETOTHERFEATUREVALUES_EXTENSIONALVALUE_PROPERTY:
+		{
+			//Retrieve input parameter 'extent'
+			//parameter 0
+			std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::ExtensionalValue>> incoming_param_extent;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_extent_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_extent = (*incoming_param_extent_arguments_citer)->get()->get<std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::ExtensionalValue>> >();
+			//Retrieve input parameter 'end'
+			//parameter 1
+			std::shared_ptr<uml::Property> incoming_param_end;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_end_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_end = (*incoming_param_end_arguments_citer)->get()->get<std::shared_ptr<uml::Property> >();
+			result = eAny(this->getOtherFeatureValues(incoming_param_extent,incoming_param_end));
+			break;
+		}
+		
+		// 202529784
+		case StructuredClassifiersPackage::LINK_OPERATION_GETTYPES:
+		{
+			result = eAny(this->getTypes());
+			break;
+		}
+		
+		// 1155151383
+		case StructuredClassifiersPackage::LINK_OPERATION_ISMATCHINGLINK_EXTENSIONALVALUE_PROPERTY:
+		{
+			//Retrieve input parameter 'link'
+			//parameter 0
+			std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue> incoming_param_link;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_link_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_link = (*incoming_param_link_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue> >();
+			//Retrieve input parameter 'end'
+			//parameter 1
+			std::shared_ptr<uml::Property> incoming_param_end;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_end_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_end = (*incoming_param_end_arguments_citer)->get()->get<std::shared_ptr<uml::Property> >();
+			result = eAny(this->isMatchingLink(incoming_param_link,incoming_param_end));
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = ExtensionalValueImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<Link> LinkImpl::getThisLinkPtr() const
+{
+	return m_thisLinkPtr.lock();
+}
+void LinkImpl::setThisLinkPtr(std::weak_ptr<Link> thisLinkPtr)
+{
+	m_thisLinkPtr = thisLinkPtr;
+	setThisExtensionalValuePtr(thisLinkPtr);
+}

@@ -1,3 +1,4 @@
+
 #include "uml/impl/RedefinableElementImpl.hpp"
 
 #ifdef NDEBUG
@@ -26,7 +27,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -34,7 +34,6 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-
 
 #include "uml/Classifier.hpp"
 #include "uml/Comment.hpp"
@@ -128,28 +127,6 @@ std::shared_ptr<ecore::EObject> RedefinableElementImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> RedefinableElementImpl::eStaticClass() const
-{
-	return uml::umlPackage::eInstance()->getRedefinableElement_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-/*
-Getter & Setter for attribute isLeaf
-*/
-bool RedefinableElementImpl::getIsLeaf() const 
-{
-	return m_isLeaf;
-}
-void RedefinableElementImpl::setIsLeaf(bool _isLeaf)
-{
-	m_isLeaf = _isLeaf;
-	
-} 
-
-
 //*********************************
 // Operations
 //*********************************
@@ -184,21 +161,25 @@ bool RedefinableElementImpl::redefinition_context_valid(Any diagnostics,std::sha
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference redefinedElement
-*/
+/* Getter & Setter for attribute isLeaf */
+bool RedefinableElementImpl::getIsLeaf() const 
+{
+	return m_isLeaf;
+}
+void RedefinableElementImpl::setIsLeaf(bool _isLeaf)
+{
+	m_isLeaf = _isLeaf;
+	
+}
 
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference redefinedElement */
 
-
-
-/*
-Getter & Setter for reference redefinitionContext
-*/
-
-
-
+/* Getter & Setter for reference redefinitionContext */
 
 //*********************************
 // Union Getter
@@ -253,18 +234,9 @@ std::shared_ptr<Union<uml::Classifier>> RedefinableElementImpl::getRedefinitionC
 	return m_redefinitionContext;
 }
 
-
-
-
-std::shared_ptr<RedefinableElement> RedefinableElementImpl::getThisRedefinableElementPtr() const
-{
-	return m_thisRedefinableElementPtr.lock();
-}
-void RedefinableElementImpl::setThisRedefinableElementPtr(std::weak_ptr<RedefinableElement> thisRedefinableElementPtr)
-{
-	m_thisRedefinableElementPtr = thisRedefinableElementPtr;
-	setThisNamedElementPtr(thisRedefinableElementPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> RedefinableElementImpl::eContainer() const
 {
 	if(auto wp = m_namespace.lock())
@@ -280,7 +252,102 @@ std::shared_ptr<ecore::EObject> RedefinableElementImpl::eContainer() const
 }
 
 //*********************************
-// Structural Feature Getter/Setter
+// Persistence Functions
+//*********************************
+void RedefinableElementImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
+	loadAttributes(loadHandler, attr_list);
+
+	//
+	// Create new objects (from references (containment == true))
+	//
+	// get umlFactory
+	int numNodes = loadHandler->getNumOfChildNodes();
+	for(int ii = 0; ii < numNodes; ii++)
+	{
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
+	}
+}		
+
+void RedefinableElementImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+{
+	try
+	{
+		std::map<std::string, std::string>::const_iterator iter;
+	
+		iter = attr_list.find("isLeaf");
+		if ( iter != attr_list.end() )
+		{
+			// this attribute is a 'bool'
+			bool value;
+			std::istringstream(iter->second) >> std::boolalpha >> value;
+			this->setIsLeaf(value);
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
+
+	NamedElementImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void RedefinableElementImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+
+	//load BasePackage Nodes
+	NamedElementImpl::loadNode(nodeName, loadHandler);
+}
+
+void RedefinableElementImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+{
+	NamedElementImpl::resolveReferences(featureID, references);
+}
+
+void RedefinableElementImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	saveContent(saveHandler);
+
+	NamedElementImpl::saveContent(saveHandler);
+	
+	ElementImpl::saveContent(saveHandler);
+	
+	ObjectImpl::saveContent(saveHandler);
+	
+	ecore::EObjectImpl::saveContent(saveHandler);
+}
+
+void RedefinableElementImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+{
+	try
+	{
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
+		// Add attributes
+		if ( this->eIsSet(package->getRedefinableElement_Attribute_isLeaf()) )
+		{
+			saveHandler->addAttribute("isLeaf", this->getIsLeaf());
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+}
+
+
+std::shared_ptr<ecore::EClass> RedefinableElementImpl::eStaticClass() const
+{
+	return uml::umlPackage::eInstance()->getRedefinableElement_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
 //*********************************
 Any RedefinableElementImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
@@ -315,6 +382,7 @@ Any RedefinableElementImpl::eGet(int featureID, bool resolve, bool coreType) con
 	}
 	return NamedElementImpl::eGet(featureID, resolve, coreType);
 }
+
 bool RedefinableElementImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
@@ -328,6 +396,7 @@ bool RedefinableElementImpl::internalEIsSet(int featureID) const
 	}
 	return NamedElementImpl::internalEIsSet(featureID);
 }
+
 bool RedefinableElementImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
@@ -345,7 +414,7 @@ bool RedefinableElementImpl::eSet(int featureID, Any newValue)
 }
 
 //*********************************
-// Behavioral Feature
+// EOperation Invoke
 //*********************************
 Any RedefinableElementImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
 {
@@ -442,94 +511,13 @@ Any RedefinableElementImpl::eInvoke(int operationID, std::shared_ptr<std::list <
 	return result;
 }
 
-//*********************************
-// Persistence Functions
-//*********************************
-void RedefinableElementImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+
+std::shared_ptr<RedefinableElement> RedefinableElementImpl::getThisRedefinableElementPtr() const
 {
-	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
-	loadAttributes(loadHandler, attr_list);
-
-	//
-	// Create new objects (from references (containment == true))
-	//
-	// get umlFactory
-	int numNodes = loadHandler->getNumOfChildNodes();
-	for(int ii = 0; ii < numNodes; ii++)
-	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler);
-	}
-}		
-
-void RedefinableElementImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
-{
-	try
-	{
-		std::map<std::string, std::string>::const_iterator iter;
-	
-		iter = attr_list.find("isLeaf");
-		if ( iter != attr_list.end() )
-		{
-			// this attribute is a 'bool'
-			bool value;
-			std::istringstream(iter->second) >> std::boolalpha >> value;
-			this->setIsLeaf(value);
-		}
-	}
-	catch (std::exception& e)
-	{
-		std::cout << "| ERROR    | " << e.what() << std::endl;
-	}
-	catch (...) 
-	{
-		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
-	}
-
-	NamedElementImpl::loadAttributes(loadHandler, attr_list);
+	return m_thisRedefinableElementPtr.lock();
 }
-
-void RedefinableElementImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+void RedefinableElementImpl::setThisRedefinableElementPtr(std::weak_ptr<RedefinableElement> thisRedefinableElementPtr)
 {
-
-	//load BasePackage Nodes
-	NamedElementImpl::loadNode(nodeName, loadHandler);
+	m_thisRedefinableElementPtr = thisRedefinableElementPtr;
+	setThisNamedElementPtr(thisRedefinableElementPtr);
 }
-
-void RedefinableElementImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
-{
-	NamedElementImpl::resolveReferences(featureID, references);
-}
-
-void RedefinableElementImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
-{
-	saveContent(saveHandler);
-
-	NamedElementImpl::saveContent(saveHandler);
-	
-	ElementImpl::saveContent(saveHandler);
-	
-	ObjectImpl::saveContent(saveHandler);
-	
-	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-}
-
-void RedefinableElementImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
-{
-	try
-	{
-		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-		// Add attributes
-		if ( this->eIsSet(package->getRedefinableElement_Attribute_isLeaf()) )
-		{
-			saveHandler->addAttribute("isLeaf", this->getIsLeaf());
-		}
-	}
-	catch (std::exception& e)
-	{
-		std::cout << "| ERROR    | " << e.what() << std::endl;
-	}
-}
-

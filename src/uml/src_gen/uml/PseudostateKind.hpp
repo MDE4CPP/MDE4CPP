@@ -10,24 +10,34 @@
 namespace uml 
 {
 	enum PseudostateKind {
+		
 		CHOICE = 6
 ,
+		
 		DEEPHISTORY = 1
 ,
+		
 		ENTRYPOINT = 7
 ,
+		
 		EXITPOINT = 8
 ,
+		
 		FORK = 4
 ,
+		
 		INITIAL = 0
 ,
+		
 		JOIN = 3
 ,
+		
 		JUNCTION = 5
 ,
+		
 		SHALLOWHISTORY = 2
 ,
+		
 		TERMINATE = 9
 	};
 }

@@ -1,3 +1,4 @@
+
 #include "ocl/Expressions/impl/TypeExpImpl.hpp"
 
 #ifdef NDEBUG
@@ -25,7 +26,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -35,7 +35,6 @@
 #include "ecore/ecoreFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
-
 
 #include "ocl/Expressions/CallExp.hpp"
 #include "ocl/Expressions/CollectionRange.hpp"
@@ -204,25 +203,18 @@ std::shared_ptr<ecore::EObject> TypeExpImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> TypeExpImpl::eStaticClass() const
-{
-	return ocl::Expressions::ExpressionsPackage::eInstance()->getTypeExp_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference referredType
-*/
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference referredType */
 std::shared_ptr<ecore::EClassifier> TypeExpImpl::getReferredType() const
 {
     return m_referredType;
@@ -233,22 +225,13 @@ void TypeExpImpl::setReferredType(std::shared_ptr<ecore::EClassifier> _referredT
 	
 }
 
-
 //*********************************
 // Union Getter
 //*********************************
 
-
-
-std::shared_ptr<TypeExp> TypeExpImpl::getThisTypeExpPtr() const
-{
-	return m_thisTypeExpPtr.lock();
-}
-void TypeExpImpl::setThisTypeExpPtr(std::weak_ptr<TypeExp> thisTypeExpPtr)
-{
-	m_thisTypeExpPtr = thisTypeExpPtr;
-	setThisOclExpressionPtr(thisTypeExpPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> TypeExpImpl::eContainer() const
 {
 	if(auto wp = m_appliedElement.lock())
@@ -306,70 +289,6 @@ std::shared_ptr<ecore::EObject> TypeExpImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any TypeExpImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case ocl::Expressions::ExpressionsPackage::TYPEEXP_ATTRIBUTE_REFERREDTYPE:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getReferredType();
-				return eAny(returnValue); //9022
-			}
-	}
-	return OclExpressionImpl::eGet(featureID, resolve, coreType);
-}
-bool TypeExpImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case ocl::Expressions::ExpressionsPackage::TYPEEXP_ATTRIBUTE_REFERREDTYPE:
-			return getReferredType() != nullptr; //9022
-	}
-	return OclExpressionImpl::internalEIsSet(featureID);
-}
-bool TypeExpImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case ocl::Expressions::ExpressionsPackage::TYPEEXP_ATTRIBUTE_REFERREDTYPE:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<ecore::EClassifier> _referredType = std::dynamic_pointer_cast<ecore::EClassifier>(_temp);
-			setReferredType(_referredType); //9022
-			return true;
-		}
-	}
-
-	return OclExpressionImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any TypeExpImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-
-		default:
-		{
-			// call superTypes
-			result = OclExpressionImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -455,10 +374,6 @@ void TypeExpImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> sa
 	ecore::EModelElementImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
 }
 
 void TypeExpImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -475,3 +390,86 @@ void TypeExpImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHand
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> TypeExpImpl::eStaticClass() const
+{
+	return ocl::Expressions::ExpressionsPackage::eInstance()->getTypeExp_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any TypeExpImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case ocl::Expressions::ExpressionsPackage::TYPEEXP_ATTRIBUTE_REFERREDTYPE:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getReferredType();
+				return eAny(returnValue); //9022
+			}
+	}
+	return OclExpressionImpl::eGet(featureID, resolve, coreType);
+}
+
+bool TypeExpImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case ocl::Expressions::ExpressionsPackage::TYPEEXP_ATTRIBUTE_REFERREDTYPE:
+			return getReferredType() != nullptr; //9022
+	}
+	return OclExpressionImpl::internalEIsSet(featureID);
+}
+
+bool TypeExpImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case ocl::Expressions::ExpressionsPackage::TYPEEXP_ATTRIBUTE_REFERREDTYPE:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<ecore::EClassifier> _referredType = std::dynamic_pointer_cast<ecore::EClassifier>(_temp);
+			setReferredType(_referredType); //9022
+			return true;
+		}
+	}
+
+	return OclExpressionImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any TypeExpImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+
+		default:
+		{
+			// call superTypes
+			result = OclExpressionImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<TypeExp> TypeExpImpl::getThisTypeExpPtr() const
+{
+	return m_thisTypeExpPtr.lock();
+}
+void TypeExpImpl::setThisTypeExpPtr(std::weak_ptr<TypeExp> thisTypeExpPtr)
+{
+	m_thisTypeExpPtr = thisTypeExpPtr;
+	setThisOclExpressionPtr(thisTypeExpPtr);
+}

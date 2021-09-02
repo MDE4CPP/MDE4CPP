@@ -1,3 +1,4 @@
+
 #include "uml/impl/ActivityGroupImpl.hpp"
 
 #ifdef NDEBUG
@@ -26,7 +27,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -34,7 +34,6 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-
 
 #include "uml/Activity.hpp"
 #include "uml/ActivityEdge.hpp"
@@ -147,15 +146,6 @@ std::shared_ptr<ecore::EObject> ActivityGroupImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> ActivityGroupImpl::eStaticClass() const
-{
-	return uml::umlPackage::eInstance()->getActivityGroup_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
@@ -178,25 +168,17 @@ bool ActivityGroupImpl::not_contained(Any diagnostics,std::shared_ptr<std::map <
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference containedEdge
-*/
 
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference containedEdge */
 
+/* Getter & Setter for reference containedNode */
 
-
-/*
-Getter & Setter for reference containedNode
-*/
-
-
-
-
-/*
-Getter & Setter for reference inActivity
-*/
+/* Getter & Setter for reference inActivity */
 std::weak_ptr<uml::Activity> ActivityGroupImpl::getInActivity() const
 {
     return m_inActivity;
@@ -207,20 +189,9 @@ void ActivityGroupImpl::setInActivity(std::weak_ptr<uml::Activity> _inActivity)
 	
 }
 
+/* Getter & Setter for reference subgroup */
 
-/*
-Getter & Setter for reference subgroup
-*/
-
-
-
-
-/*
-Getter & Setter for reference superGroup
-*/
-
-
-
+/* Getter & Setter for reference superGroup */
 
 //*********************************
 // Union Getter
@@ -300,18 +271,9 @@ std::weak_ptr<uml::ActivityGroup> ActivityGroupImpl::getSuperGroup() const
 	return m_superGroup;
 }
 
-
-
-
-std::shared_ptr<ActivityGroup> ActivityGroupImpl::getThisActivityGroupPtr() const
-{
-	return m_thisActivityGroupPtr.lock();
-}
-void ActivityGroupImpl::setThisActivityGroupPtr(std::weak_ptr<ActivityGroup> thisActivityGroupPtr)
-{
-	m_thisActivityGroupPtr = thisActivityGroupPtr;
-	setThisNamedElementPtr(thisActivityGroupPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> ActivityGroupImpl::eContainer() const
 {
 	if(auto wp = m_inActivity.lock())
@@ -334,160 +296,6 @@ std::shared_ptr<ecore::EObject> ActivityGroupImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any ActivityGroupImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::ACTIVITYGROUP_ATTRIBUTE_CONTAINEDEDGE:
-		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::ActivityEdge>::iterator iter = getContainedEdge()->begin();
-			Bag<uml::ActivityEdge>::iterator end = getContainedEdge()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //109			
-		}
-		case uml::umlPackage::ACTIVITYGROUP_ATTRIBUTE_CONTAINEDNODE:
-		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::ActivityNode>::iterator iter = getContainedNode()->begin();
-			Bag<uml::ActivityNode>::iterator end = getContainedNode()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //1010			
-		}
-		case uml::umlPackage::ACTIVITYGROUP_ATTRIBUTE_INACTIVITY:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getInActivity().lock();
-				return eAny(returnValue); //1011
-			}
-		case uml::umlPackage::ACTIVITYGROUP_ATTRIBUTE_SUBGROUP:
-		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::ActivityGroup>::iterator iter = getSubgroup()->begin();
-			Bag<uml::ActivityGroup>::iterator end = getSubgroup()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //1012			
-		}
-		case uml::umlPackage::ACTIVITYGROUP_ATTRIBUTE_SUPERGROUP:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getSuperGroup().lock();
-				return eAny(returnValue); //1013
-			}
-	}
-	return NamedElementImpl::eGet(featureID, resolve, coreType);
-}
-bool ActivityGroupImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::ACTIVITYGROUP_ATTRIBUTE_CONTAINEDEDGE:
-			return getContainedEdge() != nullptr; //109
-		case uml::umlPackage::ACTIVITYGROUP_ATTRIBUTE_CONTAINEDNODE:
-			return getContainedNode() != nullptr; //1010
-		case uml::umlPackage::ACTIVITYGROUP_ATTRIBUTE_INACTIVITY:
-			return getInActivity().lock() != nullptr; //1011
-		case uml::umlPackage::ACTIVITYGROUP_ATTRIBUTE_SUBGROUP:
-			return getSubgroup() != nullptr; //1012
-		case uml::umlPackage::ACTIVITYGROUP_ATTRIBUTE_SUPERGROUP:
-			return getSuperGroup().lock() != nullptr; //1013
-	}
-	return NamedElementImpl::internalEIsSet(featureID);
-}
-bool ActivityGroupImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::ACTIVITYGROUP_ATTRIBUTE_INACTIVITY:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::Activity> _inActivity = std::dynamic_pointer_cast<uml::Activity>(_temp);
-			setInActivity(_inActivity); //1011
-			return true;
-		}
-	}
-
-	return NamedElementImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any ActivityGroupImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-		
-		// 155988317
-		case umlPackage::ACTIVITYGROUP_OPERATION_CONTAININGACTIVITY:
-		{
-			result = eAny(this->containingActivity());
-			break;
-		}
-		
-		// 662716167
-		case umlPackage::ACTIVITYGROUP_OPERATION_NODES_AND_EDGES_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->nodes_and_edges(incoming_param_diagnostics,incoming_param_context));
-			break;
-		}
-		
-		// 1338347221
-		case umlPackage::ACTIVITYGROUP_OPERATION_NOT_CONTAINED_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->not_contained(incoming_param_diagnostics,incoming_param_context));
-			break;
-		}
-
-		default:
-		{
-			// call superTypes
-			result = NamedElementImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -575,9 +383,6 @@ void ActivityGroupImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandl
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
 }
 
 void ActivityGroupImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -599,3 +404,176 @@ void ActivityGroupImpl::saveContent(std::shared_ptr<persistence::interfaces::XSa
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> ActivityGroupImpl::eStaticClass() const
+{
+	return uml::umlPackage::eInstance()->getActivityGroup_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any ActivityGroupImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::ACTIVITYGROUP_ATTRIBUTE_CONTAINEDEDGE:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::ActivityEdge>::iterator iter = getContainedEdge()->begin();
+			Bag<uml::ActivityEdge>::iterator end = getContainedEdge()->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //109			
+		}
+		case uml::umlPackage::ACTIVITYGROUP_ATTRIBUTE_CONTAINEDNODE:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::ActivityNode>::iterator iter = getContainedNode()->begin();
+			Bag<uml::ActivityNode>::iterator end = getContainedNode()->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //1010			
+		}
+		case uml::umlPackage::ACTIVITYGROUP_ATTRIBUTE_INACTIVITY:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getInActivity().lock();
+				return eAny(returnValue); //1011
+			}
+		case uml::umlPackage::ACTIVITYGROUP_ATTRIBUTE_SUBGROUP:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::ActivityGroup>::iterator iter = getSubgroup()->begin();
+			Bag<uml::ActivityGroup>::iterator end = getSubgroup()->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //1012			
+		}
+		case uml::umlPackage::ACTIVITYGROUP_ATTRIBUTE_SUPERGROUP:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getSuperGroup().lock();
+				return eAny(returnValue); //1013
+			}
+	}
+	return NamedElementImpl::eGet(featureID, resolve, coreType);
+}
+
+bool ActivityGroupImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::ACTIVITYGROUP_ATTRIBUTE_CONTAINEDEDGE:
+			return getContainedEdge() != nullptr; //109
+		case uml::umlPackage::ACTIVITYGROUP_ATTRIBUTE_CONTAINEDNODE:
+			return getContainedNode() != nullptr; //1010
+		case uml::umlPackage::ACTIVITYGROUP_ATTRIBUTE_INACTIVITY:
+			return getInActivity().lock() != nullptr; //1011
+		case uml::umlPackage::ACTIVITYGROUP_ATTRIBUTE_SUBGROUP:
+			return getSubgroup() != nullptr; //1012
+		case uml::umlPackage::ACTIVITYGROUP_ATTRIBUTE_SUPERGROUP:
+			return getSuperGroup().lock() != nullptr; //1013
+	}
+	return NamedElementImpl::internalEIsSet(featureID);
+}
+
+bool ActivityGroupImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::ACTIVITYGROUP_ATTRIBUTE_INACTIVITY:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::Activity> _inActivity = std::dynamic_pointer_cast<uml::Activity>(_temp);
+			setInActivity(_inActivity); //1011
+			return true;
+		}
+	}
+
+	return NamedElementImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any ActivityGroupImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 155988317
+		case umlPackage::ACTIVITYGROUP_OPERATION_CONTAININGACTIVITY:
+		{
+			result = eAny(this->containingActivity());
+			break;
+		}
+		
+		// 662716167
+		case umlPackage::ACTIVITYGROUP_OPERATION_NODES_AND_EDGES_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->nodes_and_edges(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+		
+		// 1338347221
+		case umlPackage::ACTIVITYGROUP_OPERATION_NOT_CONTAINED_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->not_contained(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = NamedElementImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<ActivityGroup> ActivityGroupImpl::getThisActivityGroupPtr() const
+{
+	return m_thisActivityGroupPtr.lock();
+}
+void ActivityGroupImpl::setThisActivityGroupPtr(std::weak_ptr<ActivityGroup> thisActivityGroupPtr)
+{
+	m_thisActivityGroupPtr = thisActivityGroupPtr;
+	setThisNamedElementPtr(thisActivityGroupPtr);
+}

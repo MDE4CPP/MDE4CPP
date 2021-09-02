@@ -1,3 +1,4 @@
+
 #include "ocl/Types/impl/CollectionTypeImpl.hpp"
 
 #ifdef NDEBUG
@@ -25,7 +26,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -34,7 +34,6 @@
 #include <exception> // used in Persistence
 #include "ecore/ecoreFactory.hpp"
 #include "ocl/Values/ValuesFactory.hpp"
-
 
 #include "ocl/Types/CollectionType.hpp"
 #include "ocl/Values/CollectionValue.hpp"
@@ -126,15 +125,6 @@ std::shared_ptr<ecore::EObject> CollectionTypeImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> CollectionTypeImpl::eStaticClass() const
-{
-	return ocl::Types::TypesPackage::eInstance()->getCollectionType_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
@@ -154,11 +144,13 @@ bool CollectionTypeImpl::kindOf(std::shared_ptr<ocl::Types::CollectionType> coll
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference elementType
-*/
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference elementType */
 std::shared_ptr<ecore::EClassifier> CollectionTypeImpl::getElementType() const
 {
     return m_elementType;
@@ -169,10 +161,7 @@ void CollectionTypeImpl::setElementType(std::shared_ptr<ecore::EClassifier> _ele
 	
 }
 
-
-/*
-Getter & Setter for reference instance
-*/
+/* Getter & Setter for reference instance */
 std::shared_ptr<ocl::Values::CollectionValue> CollectionTypeImpl::getInstance() const
 {
     return m_instance;
@@ -183,22 +172,13 @@ void CollectionTypeImpl::setInstance(std::shared_ptr<ocl::Values::CollectionValu
 	
 }
 
-
 //*********************************
 // Union Getter
 //*********************************
 
-
-
-std::shared_ptr<CollectionType> CollectionTypeImpl::getThisCollectionTypePtr() const
-{
-	return m_thisCollectionTypePtr.lock();
-}
-void CollectionTypeImpl::setThisCollectionTypePtr(std::weak_ptr<CollectionType> thisCollectionTypePtr)
-{
-	m_thisCollectionTypePtr = thisCollectionTypePtr;
-	setThisEDataTypePtr(thisCollectionTypePtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> CollectionTypeImpl::eContainer() const
 {
 	if(auto wp = m_ePackage.lock())
@@ -206,97 +186,6 @@ std::shared_ptr<ecore::EObject> CollectionTypeImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any CollectionTypeImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case ocl::Types::TypesPackage::COLLECTIONTYPE_ATTRIBUTE_ELEMENTTYPE:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getElementType();
-				return eAny(returnValue); //209
-			}
-		case ocl::Types::TypesPackage::COLLECTIONTYPE_ATTRIBUTE_INSTANCE:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getInstance();
-				return eAny(returnValue); //2010
-			}
-	}
-	return ecore::EDataTypeImpl::eGet(featureID, resolve, coreType);
-}
-bool CollectionTypeImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case ocl::Types::TypesPackage::COLLECTIONTYPE_ATTRIBUTE_ELEMENTTYPE:
-			return getElementType() != nullptr; //209
-		case ocl::Types::TypesPackage::COLLECTIONTYPE_ATTRIBUTE_INSTANCE:
-			return getInstance() != nullptr; //2010
-	}
-	return ecore::EDataTypeImpl::internalEIsSet(featureID);
-}
-bool CollectionTypeImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case ocl::Types::TypesPackage::COLLECTIONTYPE_ATTRIBUTE_ELEMENTTYPE:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<ecore::EClassifier> _elementType = std::dynamic_pointer_cast<ecore::EClassifier>(_temp);
-			setElementType(_elementType); //209
-			return true;
-		}
-		case ocl::Types::TypesPackage::COLLECTIONTYPE_ATTRIBUTE_INSTANCE:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<ocl::Values::CollectionValue> _instance = std::dynamic_pointer_cast<ocl::Values::CollectionValue>(_temp);
-			setInstance(_instance); //2010
-			return true;
-		}
-	}
-
-	return ecore::EDataTypeImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any CollectionTypeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-		
-		// 1909894118
-		case TypesPackage::COLLECTIONTYPE_OPERATION_KINDOF_COLLECTIONTYPE:
-		{
-			//Retrieve input parameter 'coll'
-			//parameter 0
-			std::shared_ptr<ocl::Types::CollectionType> incoming_param_coll;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_coll_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_coll = (*incoming_param_coll_arguments_citer)->get()->get<std::shared_ptr<ocl::Types::CollectionType> >();
-			result = eAny(this->kindOf(incoming_param_coll));
-			break;
-		}
-
-		default:
-		{
-			// call superTypes
-			result = ecore::EDataTypeImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -405,10 +294,6 @@ void CollectionTypeImpl::save(std::shared_ptr<persistence::interfaces::XSaveHand
 	ecore::EModelElementImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
 }
 
 void CollectionTypeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -432,3 +317,113 @@ void CollectionTypeImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> CollectionTypeImpl::eStaticClass() const
+{
+	return ocl::Types::TypesPackage::eInstance()->getCollectionType_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any CollectionTypeImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case ocl::Types::TypesPackage::COLLECTIONTYPE_ATTRIBUTE_ELEMENTTYPE:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getElementType();
+				return eAny(returnValue); //209
+			}
+		case ocl::Types::TypesPackage::COLLECTIONTYPE_ATTRIBUTE_INSTANCE:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getInstance();
+				return eAny(returnValue); //2010
+			}
+	}
+	return ecore::EDataTypeImpl::eGet(featureID, resolve, coreType);
+}
+
+bool CollectionTypeImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case ocl::Types::TypesPackage::COLLECTIONTYPE_ATTRIBUTE_ELEMENTTYPE:
+			return getElementType() != nullptr; //209
+		case ocl::Types::TypesPackage::COLLECTIONTYPE_ATTRIBUTE_INSTANCE:
+			return getInstance() != nullptr; //2010
+	}
+	return ecore::EDataTypeImpl::internalEIsSet(featureID);
+}
+
+bool CollectionTypeImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case ocl::Types::TypesPackage::COLLECTIONTYPE_ATTRIBUTE_ELEMENTTYPE:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<ecore::EClassifier> _elementType = std::dynamic_pointer_cast<ecore::EClassifier>(_temp);
+			setElementType(_elementType); //209
+			return true;
+		}
+		case ocl::Types::TypesPackage::COLLECTIONTYPE_ATTRIBUTE_INSTANCE:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<ocl::Values::CollectionValue> _instance = std::dynamic_pointer_cast<ocl::Values::CollectionValue>(_temp);
+			setInstance(_instance); //2010
+			return true;
+		}
+	}
+
+	return ecore::EDataTypeImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any CollectionTypeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 1909894118
+		case TypesPackage::COLLECTIONTYPE_OPERATION_KINDOF_COLLECTIONTYPE:
+		{
+			//Retrieve input parameter 'coll'
+			//parameter 0
+			std::shared_ptr<ocl::Types::CollectionType> incoming_param_coll;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_coll_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_coll = (*incoming_param_coll_arguments_citer)->get()->get<std::shared_ptr<ocl::Types::CollectionType> >();
+			result = eAny(this->kindOf(incoming_param_coll));
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = ecore::EDataTypeImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<CollectionType> CollectionTypeImpl::getThisCollectionTypePtr() const
+{
+	return m_thisCollectionTypePtr.lock();
+}
+void CollectionTypeImpl::setThisCollectionTypePtr(std::weak_ptr<CollectionType> thisCollectionTypePtr)
+{
+	m_thisCollectionTypePtr = thisCollectionTypePtr;
+	setThisEDataTypePtr(thisCollectionTypePtr);
+}

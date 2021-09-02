@@ -1,3 +1,4 @@
+
 #include "ocl/Evaluations/impl/CollectionLiteralExpEvalImpl.hpp"
 
 #ifdef NDEBUG
@@ -25,19 +26,17 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "fUML/Semantics/Values/ValuesFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
 #include "uml/umlFactory.hpp"
+#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
-
 
 #include "ocl/Evaluations/CollectionLiteralPartEval.hpp"
 #include "ocl/Evaluations/EvalEnvironment.hpp"
@@ -119,25 +118,18 @@ std::shared_ptr<ecore::EObject> CollectionLiteralExpEvalImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> CollectionLiteralExpEvalImpl::eStaticClass() const
-{
-	return ocl::Evaluations::EvaluationsPackage::eInstance()->getCollectionLiteralExpEval_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference parts
-*/
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference parts */
 std::shared_ptr<Bag<ocl::Evaluations::CollectionLiteralPartEval>> CollectionLiteralExpEvalImpl::getParts() const
 {
 	if(m_parts == nullptr)
@@ -149,125 +141,16 @@ std::shared_ptr<Bag<ocl::Evaluations::CollectionLiteralPartEval>> CollectionLite
     return m_parts;
 }
 
-
-
 //*********************************
 // Union Getter
 //*********************************
 
-
-
-std::shared_ptr<CollectionLiteralExpEval> CollectionLiteralExpEvalImpl::getThisCollectionLiteralExpEvalPtr() const
-{
-	return m_thisCollectionLiteralExpEvalPtr.lock();
-}
-void CollectionLiteralExpEvalImpl::setThisCollectionLiteralExpEvalPtr(std::weak_ptr<CollectionLiteralExpEval> thisCollectionLiteralExpEvalPtr)
-{
-	m_thisCollectionLiteralExpEvalPtr = thisCollectionLiteralExpEvalPtr;
-	setThisLiteralExpEvalPtr(thisCollectionLiteralExpEvalPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> CollectionLiteralExpEvalImpl::eContainer() const
 {
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any CollectionLiteralExpEvalImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case ocl::Evaluations::EvaluationsPackage::COLLECTIONLITERALEXPEVAL_ATTRIBUTE_PARTS:
-		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<ocl::Evaluations::CollectionLiteralPartEval>::iterator iter = getParts()->begin();
-			Bag<ocl::Evaluations::CollectionLiteralPartEval>::iterator end = getParts()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //156			
-		}
-	}
-	return LiteralExpEvalImpl::eGet(featureID, resolve, coreType);
-}
-bool CollectionLiteralExpEvalImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case ocl::Evaluations::EvaluationsPackage::COLLECTIONLITERALEXPEVAL_ATTRIBUTE_PARTS:
-			return getParts() != nullptr; //156
-	}
-	return LiteralExpEvalImpl::internalEIsSet(featureID);
-}
-bool CollectionLiteralExpEvalImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case ocl::Evaluations::EvaluationsPackage::COLLECTIONLITERALEXPEVAL_ATTRIBUTE_PARTS:
-		{
-			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<ocl::Evaluations::CollectionLiteralPartEval>> partsList(new Bag<ocl::Evaluations::CollectionLiteralPartEval>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
-			{
-				partsList->add(std::dynamic_pointer_cast<ocl::Evaluations::CollectionLiteralPartEval>(*iter));
-				iter++;
-			}
-			
-			Bag<ocl::Evaluations::CollectionLiteralPartEval>::iterator iterParts = getParts()->begin();
-			Bag<ocl::Evaluations::CollectionLiteralPartEval>::iterator endParts = getParts()->end();
-			while (iterParts != endParts)
-			{
-				if (partsList->find(*iterParts) == -1)
-				{
-					getParts()->erase(*iterParts);
-				}
-				iterParts++;
-			}
- 
-			iterParts = partsList->begin();
-			endParts = partsList->end();
-			while (iterParts != endParts)
-			{
-				if (getParts()->find(*iterParts) == -1)
-				{
-					getParts()->add(*iterParts);
-				}
-				iterParts++;			
-			}
-			return true;
-		}
-	}
-
-	return LiteralExpEvalImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any CollectionLiteralExpEvalImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-
-		default:
-		{
-			// call superTypes
-			result = LiteralExpEvalImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -355,10 +238,6 @@ void CollectionLiteralExpEvalImpl::save(std::shared_ptr<persistence::interfaces:
 	fUML::Semantics::Loci::SemanticVisitorImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
 }
 
 void CollectionLiteralExpEvalImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -375,3 +254,121 @@ void CollectionLiteralExpEvalImpl::saveContent(std::shared_ptr<persistence::inte
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> CollectionLiteralExpEvalImpl::eStaticClass() const
+{
+	return ocl::Evaluations::EvaluationsPackage::eInstance()->getCollectionLiteralExpEval_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any CollectionLiteralExpEvalImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case ocl::Evaluations::EvaluationsPackage::COLLECTIONLITERALEXPEVAL_ATTRIBUTE_PARTS:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<ocl::Evaluations::CollectionLiteralPartEval>::iterator iter = getParts()->begin();
+			Bag<ocl::Evaluations::CollectionLiteralPartEval>::iterator end = getParts()->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //156			
+		}
+	}
+	return LiteralExpEvalImpl::eGet(featureID, resolve, coreType);
+}
+
+bool CollectionLiteralExpEvalImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case ocl::Evaluations::EvaluationsPackage::COLLECTIONLITERALEXPEVAL_ATTRIBUTE_PARTS:
+			return getParts() != nullptr; //156
+	}
+	return LiteralExpEvalImpl::internalEIsSet(featureID);
+}
+
+bool CollectionLiteralExpEvalImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case ocl::Evaluations::EvaluationsPackage::COLLECTIONLITERALEXPEVAL_ATTRIBUTE_PARTS:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<ocl::Evaluations::CollectionLiteralPartEval>> partsList(new Bag<ocl::Evaluations::CollectionLiteralPartEval>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				partsList->add(std::dynamic_pointer_cast<ocl::Evaluations::CollectionLiteralPartEval>(*iter));
+				iter++;
+			}
+			
+			Bag<ocl::Evaluations::CollectionLiteralPartEval>::iterator iterParts = getParts()->begin();
+			Bag<ocl::Evaluations::CollectionLiteralPartEval>::iterator endParts = getParts()->end();
+			while (iterParts != endParts)
+			{
+				if (partsList->find(*iterParts) == -1)
+				{
+					getParts()->erase(*iterParts);
+				}
+				iterParts++;
+			}
+ 
+			iterParts = partsList->begin();
+			endParts = partsList->end();
+			while (iterParts != endParts)
+			{
+				if (getParts()->find(*iterParts) == -1)
+				{
+					getParts()->add(*iterParts);
+				}
+				iterParts++;			
+			}
+			return true;
+		}
+	}
+
+	return LiteralExpEvalImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any CollectionLiteralExpEvalImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+
+		default:
+		{
+			// call superTypes
+			result = LiteralExpEvalImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<CollectionLiteralExpEval> CollectionLiteralExpEvalImpl::getThisCollectionLiteralExpEvalPtr() const
+{
+	return m_thisCollectionLiteralExpEvalPtr.lock();
+}
+void CollectionLiteralExpEvalImpl::setThisCollectionLiteralExpEvalPtr(std::weak_ptr<CollectionLiteralExpEval> thisCollectionLiteralExpEvalPtr)
+{
+	m_thisCollectionLiteralExpEvalPtr = thisCollectionLiteralExpEvalPtr;
+	setThisLiteralExpEvalPtr(thisCollectionLiteralExpEvalPtr);
+}

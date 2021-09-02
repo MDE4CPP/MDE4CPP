@@ -1,3 +1,4 @@
+
 #include "uml/impl/DeploymentImpl.hpp"
 
 #ifdef NDEBUG
@@ -25,7 +26,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -33,7 +33,6 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-
 
 #include "uml/Comment.hpp"
 #include "uml/Dependency.hpp"
@@ -219,25 +218,18 @@ std::shared_ptr<ecore::EObject> DeploymentImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> DeploymentImpl::eStaticClass() const
-{
-	return uml::umlPackage::eInstance()->getDeployment_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference configuration
-*/
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference configuration */
 std::shared_ptr<Subset<uml::DeploymentSpecification, uml::Element>> DeploymentImpl::getConfiguration() const
 {
 	if(m_configuration == nullptr)
@@ -258,11 +250,7 @@ std::shared_ptr<Subset<uml::DeploymentSpecification, uml::Element>> DeploymentIm
     return m_configuration;
 }
 
-
-
-/*
-Getter & Setter for reference deployedArtifact
-*/
+/* Getter & Setter for reference deployedArtifact */
 std::shared_ptr<Subset<uml::DeployedArtifact, uml::NamedElement /*Subset does not reference a union*/>> DeploymentImpl::getDeployedArtifact() const
 {
 	if(m_deployedArtifact == nullptr)
@@ -283,11 +271,7 @@ std::shared_ptr<Subset<uml::DeployedArtifact, uml::NamedElement /*Subset does no
     return m_deployedArtifact;
 }
 
-
-
-/*
-Getter & Setter for reference location
-*/
+/* Getter & Setter for reference location */
 std::weak_ptr<uml::DeploymentTarget> DeploymentImpl::getLocation() const
 {
     return m_location;
@@ -298,10 +282,11 @@ void DeploymentImpl::setLocation(std::weak_ptr<uml::DeploymentTarget> _location)
 	
 }
 
-
 //*********************************
 // Union Getter
 //*********************************
+
+
 std::weak_ptr<uml::Namespace> DeploymentImpl::getNamespace() const
 {
 	return m_namespace;
@@ -384,16 +369,9 @@ std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> DeploymentImpl::getTarg
 
 
 
-
-std::shared_ptr<Deployment> DeploymentImpl::getThisDeploymentPtr() const
-{
-	return m_thisDeploymentPtr.lock();
-}
-void DeploymentImpl::setThisDeploymentPtr(std::weak_ptr<Deployment> thisDeploymentPtr)
-{
-	m_thisDeploymentPtr = thisDeploymentPtr;
-	setThisDependencyPtr(thisDeploymentPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> DeploymentImpl::eContainer() const
 {
 	if(auto wp = m_location.lock())
@@ -421,170 +399,6 @@ std::shared_ptr<ecore::EObject> DeploymentImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any DeploymentImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::DEPLOYMENT_ATTRIBUTE_CONFIGURATION:
-		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::DeploymentSpecification>::iterator iter = getConfiguration()->begin();
-			Bag<uml::DeploymentSpecification>::iterator end = getConfiguration()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //6917			
-		}
-		case uml::umlPackage::DEPLOYMENT_ATTRIBUTE_DEPLOYEDARTIFACT:
-		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::DeployedArtifact>::iterator iter = getDeployedArtifact()->begin();
-			Bag<uml::DeployedArtifact>::iterator end = getDeployedArtifact()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //6918			
-		}
-		case uml::umlPackage::DEPLOYMENT_ATTRIBUTE_LOCATION:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getLocation().lock();
-				return eAny(returnValue); //6919
-			}
-	}
-	return DependencyImpl::eGet(featureID, resolve, coreType);
-}
-bool DeploymentImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::DEPLOYMENT_ATTRIBUTE_CONFIGURATION:
-			return getConfiguration() != nullptr; //6917
-		case uml::umlPackage::DEPLOYMENT_ATTRIBUTE_DEPLOYEDARTIFACT:
-			return getDeployedArtifact() != nullptr; //6918
-		case uml::umlPackage::DEPLOYMENT_ATTRIBUTE_LOCATION:
-			return getLocation().lock() != nullptr; //6919
-	}
-	return DependencyImpl::internalEIsSet(featureID);
-}
-bool DeploymentImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::DEPLOYMENT_ATTRIBUTE_CONFIGURATION:
-		{
-			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::DeploymentSpecification>> configurationList(new Bag<uml::DeploymentSpecification>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
-			{
-				configurationList->add(std::dynamic_pointer_cast<uml::DeploymentSpecification>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::DeploymentSpecification>::iterator iterConfiguration = getConfiguration()->begin();
-			Bag<uml::DeploymentSpecification>::iterator endConfiguration = getConfiguration()->end();
-			while (iterConfiguration != endConfiguration)
-			{
-				if (configurationList->find(*iterConfiguration) == -1)
-				{
-					getConfiguration()->erase(*iterConfiguration);
-				}
-				iterConfiguration++;
-			}
- 
-			iterConfiguration = configurationList->begin();
-			endConfiguration = configurationList->end();
-			while (iterConfiguration != endConfiguration)
-			{
-				if (getConfiguration()->find(*iterConfiguration) == -1)
-				{
-					getConfiguration()->add(*iterConfiguration);
-				}
-				iterConfiguration++;			
-			}
-			return true;
-		}
-		case uml::umlPackage::DEPLOYMENT_ATTRIBUTE_DEPLOYEDARTIFACT:
-		{
-			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::DeployedArtifact>> deployedArtifactList(new Bag<uml::DeployedArtifact>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
-			{
-				deployedArtifactList->add(std::dynamic_pointer_cast<uml::DeployedArtifact>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::DeployedArtifact>::iterator iterDeployedArtifact = getDeployedArtifact()->begin();
-			Bag<uml::DeployedArtifact>::iterator endDeployedArtifact = getDeployedArtifact()->end();
-			while (iterDeployedArtifact != endDeployedArtifact)
-			{
-				if (deployedArtifactList->find(*iterDeployedArtifact) == -1)
-				{
-					getDeployedArtifact()->erase(*iterDeployedArtifact);
-				}
-				iterDeployedArtifact++;
-			}
- 
-			iterDeployedArtifact = deployedArtifactList->begin();
-			endDeployedArtifact = deployedArtifactList->end();
-			while (iterDeployedArtifact != endDeployedArtifact)
-			{
-				if (getDeployedArtifact()->find(*iterDeployedArtifact) == -1)
-				{
-					getDeployedArtifact()->add(*iterDeployedArtifact);
-				}
-				iterDeployedArtifact++;			
-			}
-			return true;
-		}
-		case uml::umlPackage::DEPLOYMENT_ATTRIBUTE_LOCATION:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::DeploymentTarget> _location = std::dynamic_pointer_cast<uml::DeploymentTarget>(_temp);
-			setLocation(_location); //6919
-			return true;
-		}
-	}
-
-	return DependencyImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any DeploymentImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-
-		default:
-		{
-			// call superTypes
-			result = DependencyImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -711,11 +525,6 @@ void DeploymentImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler>
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
-	
 }
 
 void DeploymentImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -737,3 +546,186 @@ void DeploymentImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> DeploymentImpl::eStaticClass() const
+{
+	return uml::umlPackage::eInstance()->getDeployment_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any DeploymentImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::DEPLOYMENT_ATTRIBUTE_CONFIGURATION:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::DeploymentSpecification>::iterator iter = getConfiguration()->begin();
+			Bag<uml::DeploymentSpecification>::iterator end = getConfiguration()->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //6917			
+		}
+		case uml::umlPackage::DEPLOYMENT_ATTRIBUTE_DEPLOYEDARTIFACT:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::DeployedArtifact>::iterator iter = getDeployedArtifact()->begin();
+			Bag<uml::DeployedArtifact>::iterator end = getDeployedArtifact()->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //6918			
+		}
+		case uml::umlPackage::DEPLOYMENT_ATTRIBUTE_LOCATION:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getLocation().lock();
+				return eAny(returnValue); //6919
+			}
+	}
+	return DependencyImpl::eGet(featureID, resolve, coreType);
+}
+
+bool DeploymentImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::DEPLOYMENT_ATTRIBUTE_CONFIGURATION:
+			return getConfiguration() != nullptr; //6917
+		case uml::umlPackage::DEPLOYMENT_ATTRIBUTE_DEPLOYEDARTIFACT:
+			return getDeployedArtifact() != nullptr; //6918
+		case uml::umlPackage::DEPLOYMENT_ATTRIBUTE_LOCATION:
+			return getLocation().lock() != nullptr; //6919
+	}
+	return DependencyImpl::internalEIsSet(featureID);
+}
+
+bool DeploymentImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::DEPLOYMENT_ATTRIBUTE_CONFIGURATION:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::DeploymentSpecification>> configurationList(new Bag<uml::DeploymentSpecification>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				configurationList->add(std::dynamic_pointer_cast<uml::DeploymentSpecification>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::DeploymentSpecification>::iterator iterConfiguration = getConfiguration()->begin();
+			Bag<uml::DeploymentSpecification>::iterator endConfiguration = getConfiguration()->end();
+			while (iterConfiguration != endConfiguration)
+			{
+				if (configurationList->find(*iterConfiguration) == -1)
+				{
+					getConfiguration()->erase(*iterConfiguration);
+				}
+				iterConfiguration++;
+			}
+ 
+			iterConfiguration = configurationList->begin();
+			endConfiguration = configurationList->end();
+			while (iterConfiguration != endConfiguration)
+			{
+				if (getConfiguration()->find(*iterConfiguration) == -1)
+				{
+					getConfiguration()->add(*iterConfiguration);
+				}
+				iterConfiguration++;			
+			}
+			return true;
+		}
+		case uml::umlPackage::DEPLOYMENT_ATTRIBUTE_DEPLOYEDARTIFACT:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::DeployedArtifact>> deployedArtifactList(new Bag<uml::DeployedArtifact>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				deployedArtifactList->add(std::dynamic_pointer_cast<uml::DeployedArtifact>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::DeployedArtifact>::iterator iterDeployedArtifact = getDeployedArtifact()->begin();
+			Bag<uml::DeployedArtifact>::iterator endDeployedArtifact = getDeployedArtifact()->end();
+			while (iterDeployedArtifact != endDeployedArtifact)
+			{
+				if (deployedArtifactList->find(*iterDeployedArtifact) == -1)
+				{
+					getDeployedArtifact()->erase(*iterDeployedArtifact);
+				}
+				iterDeployedArtifact++;
+			}
+ 
+			iterDeployedArtifact = deployedArtifactList->begin();
+			endDeployedArtifact = deployedArtifactList->end();
+			while (iterDeployedArtifact != endDeployedArtifact)
+			{
+				if (getDeployedArtifact()->find(*iterDeployedArtifact) == -1)
+				{
+					getDeployedArtifact()->add(*iterDeployedArtifact);
+				}
+				iterDeployedArtifact++;			
+			}
+			return true;
+		}
+		case uml::umlPackage::DEPLOYMENT_ATTRIBUTE_LOCATION:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::DeploymentTarget> _location = std::dynamic_pointer_cast<uml::DeploymentTarget>(_temp);
+			setLocation(_location); //6919
+			return true;
+		}
+	}
+
+	return DependencyImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any DeploymentImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+
+		default:
+		{
+			// call superTypes
+			result = DependencyImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<Deployment> DeploymentImpl::getThisDeploymentPtr() const
+{
+	return m_thisDeploymentPtr.lock();
+}
+void DeploymentImpl::setThisDeploymentPtr(std::weak_ptr<Deployment> thisDeploymentPtr)
+{
+	m_thisDeploymentPtr = thisDeploymentPtr;
+	setThisDependencyPtr(thisDeploymentPtr);
+}

@@ -1,3 +1,4 @@
+
 #include "uml/impl/ConnectorImpl.hpp"
 
 #ifdef NDEBUG
@@ -26,7 +27,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -34,7 +34,6 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-
 
 #include "uml/Association.hpp"
 #include "uml/Behavior.hpp"
@@ -209,24 +208,6 @@ std::shared_ptr<ecore::EObject> ConnectorImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> ConnectorImpl::eStaticClass() const
-{
-	return uml::umlPackage::eInstance()->getConnector_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-/*
-Getter & Setter for attribute kind
-*/
-uml::ConnectorKind ConnectorImpl::getKind() const 
-{
-	return m_kind;
-}
-
-
-
 //*********************************
 // Operations
 //*********************************
@@ -249,11 +230,18 @@ bool ConnectorImpl::types(Any diagnostics,std::shared_ptr<std::map < Any, Any>> 
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference contract
-*/
+/* Getter & Setter for attribute kind */
+uml::ConnectorKind ConnectorImpl::getKind() const 
+{
+	return m_kind;
+}
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference contract */
 std::shared_ptr<Bag<uml::Behavior>> ConnectorImpl::getContract() const
 {
 	if(m_contract == nullptr)
@@ -265,11 +253,7 @@ std::shared_ptr<Bag<uml::Behavior>> ConnectorImpl::getContract() const
     return m_contract;
 }
 
-
-
-/*
-Getter & Setter for reference end
-*/
+/* Getter & Setter for reference end */
 std::shared_ptr<Subset<uml::ConnectorEnd, uml::Element>> ConnectorImpl::getEnd() const
 {
 	if(m_end == nullptr)
@@ -290,11 +274,7 @@ std::shared_ptr<Subset<uml::ConnectorEnd, uml::Element>> ConnectorImpl::getEnd()
     return m_end;
 }
 
-
-
-/*
-Getter & Setter for reference redefinedConnector
-*/
+/* Getter & Setter for reference redefinedConnector */
 std::shared_ptr<Subset<uml::Connector, uml::RedefinableElement>> ConnectorImpl::getRedefinedConnector() const
 {
 	if(m_redefinedConnector == nullptr)
@@ -315,11 +295,7 @@ std::shared_ptr<Subset<uml::Connector, uml::RedefinableElement>> ConnectorImpl::
     return m_redefinedConnector;
 }
 
-
-
-/*
-Getter & Setter for reference structuredClassifier
-*/
+/* Getter & Setter for reference structuredClassifier */
 std::weak_ptr<uml::StructuredClassifier> ConnectorImpl::getStructuredClassifier() const
 {
     return m_structuredClassifier;
@@ -330,10 +306,7 @@ void ConnectorImpl::setStructuredClassifier(std::weak_ptr<uml::StructuredClassif
 	
 }
 
-
-/*
-Getter & Setter for reference type
-*/
+/* Getter & Setter for reference type */
 std::shared_ptr<uml::Association> ConnectorImpl::getType() const
 {
     return m_type;
@@ -343,7 +316,6 @@ void ConnectorImpl::setType(std::shared_ptr<uml::Association> _type)
     m_type = _type;
 	
 }
-
 
 //*********************************
 // Union Getter
@@ -418,18 +390,9 @@ std::shared_ptr<Union<uml::Classifier>> ConnectorImpl::getRedefinitionContext() 
 	return m_redefinitionContext;
 }
 
-
-
-
-std::shared_ptr<Connector> ConnectorImpl::getThisConnectorPtr() const
-{
-	return m_thisConnectorPtr.lock();
-}
-void ConnectorImpl::setThisConnectorPtr(std::weak_ptr<Connector> thisConnectorPtr)
-{
-	m_thisConnectorPtr = thisConnectorPtr;
-	setThisFeaturePtr(thisConnectorPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> ConnectorImpl::eContainer() const
 {
 	if(auto wp = m_namespace.lock())
@@ -447,280 +410,6 @@ std::shared_ptr<ecore::EObject> ConnectorImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any ConnectorImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::CONNECTOR_ATTRIBUTE_CONTRACT:
-		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Behavior>::iterator iter = getContract()->begin();
-			Bag<uml::Behavior>::iterator end = getContract()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //5314			
-		}
-		case uml::umlPackage::CONNECTOR_ATTRIBUTE_END:
-		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::ConnectorEnd>::iterator iter = getEnd()->begin();
-			Bag<uml::ConnectorEnd>::iterator end = getEnd()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //5315			
-		}
-		case uml::umlPackage::CONNECTOR_ATTRIBUTE_KIND:
-			return eAny(getKind()); //5316
-		case uml::umlPackage::CONNECTOR_ATTRIBUTE_REDEFINEDCONNECTOR:
-		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Connector>::iterator iter = getRedefinedConnector()->begin();
-			Bag<uml::Connector>::iterator end = getRedefinedConnector()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //5317			
-		}
-		case uml::umlPackage::CONNECTOR_ATTRIBUTE_STRUCTUREDCLASSIFIER:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getStructuredClassifier().lock();
-				return eAny(returnValue); //5319
-			}
-		case uml::umlPackage::CONNECTOR_ATTRIBUTE_TYPE:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getType();
-				return eAny(returnValue); //5318
-			}
-	}
-	return FeatureImpl::eGet(featureID, resolve, coreType);
-}
-bool ConnectorImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::CONNECTOR_ATTRIBUTE_CONTRACT:
-			return getContract() != nullptr; //5314
-		case uml::umlPackage::CONNECTOR_ATTRIBUTE_END:
-			return getEnd() != nullptr; //5315
-		case uml::umlPackage::CONNECTOR_ATTRIBUTE_KIND:
-			return m_kind != ConnectorKind::ASSEMBLY;; //5316
-		case uml::umlPackage::CONNECTOR_ATTRIBUTE_REDEFINEDCONNECTOR:
-			return getRedefinedConnector() != nullptr; //5317
-		case uml::umlPackage::CONNECTOR_ATTRIBUTE_STRUCTUREDCLASSIFIER:
-			return getStructuredClassifier().lock() != nullptr; //5319
-		case uml::umlPackage::CONNECTOR_ATTRIBUTE_TYPE:
-			return getType() != nullptr; //5318
-	}
-	return FeatureImpl::internalEIsSet(featureID);
-}
-bool ConnectorImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::CONNECTOR_ATTRIBUTE_CONTRACT:
-		{
-			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::Behavior>> contractList(new Bag<uml::Behavior>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
-			{
-				contractList->add(std::dynamic_pointer_cast<uml::Behavior>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::Behavior>::iterator iterContract = getContract()->begin();
-			Bag<uml::Behavior>::iterator endContract = getContract()->end();
-			while (iterContract != endContract)
-			{
-				if (contractList->find(*iterContract) == -1)
-				{
-					getContract()->erase(*iterContract);
-				}
-				iterContract++;
-			}
- 
-			iterContract = contractList->begin();
-			endContract = contractList->end();
-			while (iterContract != endContract)
-			{
-				if (getContract()->find(*iterContract) == -1)
-				{
-					getContract()->add(*iterContract);
-				}
-				iterContract++;			
-			}
-			return true;
-		}
-		case uml::umlPackage::CONNECTOR_ATTRIBUTE_END:
-		{
-			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::ConnectorEnd>> endList(new Bag<uml::ConnectorEnd>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
-			{
-				endList->add(std::dynamic_pointer_cast<uml::ConnectorEnd>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::ConnectorEnd>::iterator iterEnd = getEnd()->begin();
-			Bag<uml::ConnectorEnd>::iterator endEnd = getEnd()->end();
-			while (iterEnd != endEnd)
-			{
-				if (endList->find(*iterEnd) == -1)
-				{
-					getEnd()->erase(*iterEnd);
-				}
-				iterEnd++;
-			}
- 
-			iterEnd = endList->begin();
-			endEnd = endList->end();
-			while (iterEnd != endEnd)
-			{
-				if (getEnd()->find(*iterEnd) == -1)
-				{
-					getEnd()->add(*iterEnd);
-				}
-				iterEnd++;			
-			}
-			return true;
-		}
-		case uml::umlPackage::CONNECTOR_ATTRIBUTE_REDEFINEDCONNECTOR:
-		{
-			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::Connector>> redefinedConnectorList(new Bag<uml::Connector>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
-			{
-				redefinedConnectorList->add(std::dynamic_pointer_cast<uml::Connector>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::Connector>::iterator iterRedefinedConnector = getRedefinedConnector()->begin();
-			Bag<uml::Connector>::iterator endRedefinedConnector = getRedefinedConnector()->end();
-			while (iterRedefinedConnector != endRedefinedConnector)
-			{
-				if (redefinedConnectorList->find(*iterRedefinedConnector) == -1)
-				{
-					getRedefinedConnector()->erase(*iterRedefinedConnector);
-				}
-				iterRedefinedConnector++;
-			}
- 
-			iterRedefinedConnector = redefinedConnectorList->begin();
-			endRedefinedConnector = redefinedConnectorList->end();
-			while (iterRedefinedConnector != endRedefinedConnector)
-			{
-				if (getRedefinedConnector()->find(*iterRedefinedConnector) == -1)
-				{
-					getRedefinedConnector()->add(*iterRedefinedConnector);
-				}
-				iterRedefinedConnector++;			
-			}
-			return true;
-		}
-		case uml::umlPackage::CONNECTOR_ATTRIBUTE_STRUCTUREDCLASSIFIER:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::StructuredClassifier> _structuredClassifier = std::dynamic_pointer_cast<uml::StructuredClassifier>(_temp);
-			setStructuredClassifier(_structuredClassifier); //5319
-			return true;
-		}
-		case uml::umlPackage::CONNECTOR_ATTRIBUTE_TYPE:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::Association> _type = std::dynamic_pointer_cast<uml::Association>(_temp);
-			setType(_type); //5318
-			return true;
-		}
-	}
-
-	return FeatureImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any ConnectorImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-		
-		// 1738876455
-		case umlPackage::CONNECTOR_OPERATION_GETKIND:
-		{
-			result = eAny(this->getKind());
-			break;
-		}
-		
-		// 1203441862
-		case umlPackage::CONNECTOR_OPERATION_ROLES_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->roles(incoming_param_diagnostics,incoming_param_context));
-			break;
-		}
-		
-		// 388310687
-		case umlPackage::CONNECTOR_OPERATION_TYPES_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->types(incoming_param_diagnostics,incoming_param_context));
-			break;
-		}
-
-		default:
-		{
-			// call superTypes
-			result = FeatureImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -884,11 +573,6 @@ void ConnectorImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> 
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
-	
 }
 
 void ConnectorImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -912,3 +596,296 @@ void ConnectorImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHa
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> ConnectorImpl::eStaticClass() const
+{
+	return uml::umlPackage::eInstance()->getConnector_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any ConnectorImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::CONNECTOR_ATTRIBUTE_CONTRACT:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Behavior>::iterator iter = getContract()->begin();
+			Bag<uml::Behavior>::iterator end = getContract()->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //5314			
+		}
+		case uml::umlPackage::CONNECTOR_ATTRIBUTE_END:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::ConnectorEnd>::iterator iter = getEnd()->begin();
+			Bag<uml::ConnectorEnd>::iterator end = getEnd()->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //5315			
+		}
+		case uml::umlPackage::CONNECTOR_ATTRIBUTE_KIND:
+			return eAny(getKind()); //5316
+		case uml::umlPackage::CONNECTOR_ATTRIBUTE_REDEFINEDCONNECTOR:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Connector>::iterator iter = getRedefinedConnector()->begin();
+			Bag<uml::Connector>::iterator end = getRedefinedConnector()->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //5317			
+		}
+		case uml::umlPackage::CONNECTOR_ATTRIBUTE_STRUCTUREDCLASSIFIER:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getStructuredClassifier().lock();
+				return eAny(returnValue); //5319
+			}
+		case uml::umlPackage::CONNECTOR_ATTRIBUTE_TYPE:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getType();
+				return eAny(returnValue); //5318
+			}
+	}
+	return FeatureImpl::eGet(featureID, resolve, coreType);
+}
+
+bool ConnectorImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::CONNECTOR_ATTRIBUTE_CONTRACT:
+			return getContract() != nullptr; //5314
+		case uml::umlPackage::CONNECTOR_ATTRIBUTE_END:
+			return getEnd() != nullptr; //5315
+		case uml::umlPackage::CONNECTOR_ATTRIBUTE_KIND:
+			return m_kind != ConnectorKind::ASSEMBLY;; //5316
+		case uml::umlPackage::CONNECTOR_ATTRIBUTE_REDEFINEDCONNECTOR:
+			return getRedefinedConnector() != nullptr; //5317
+		case uml::umlPackage::CONNECTOR_ATTRIBUTE_STRUCTUREDCLASSIFIER:
+			return getStructuredClassifier().lock() != nullptr; //5319
+		case uml::umlPackage::CONNECTOR_ATTRIBUTE_TYPE:
+			return getType() != nullptr; //5318
+	}
+	return FeatureImpl::internalEIsSet(featureID);
+}
+
+bool ConnectorImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::CONNECTOR_ATTRIBUTE_CONTRACT:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::Behavior>> contractList(new Bag<uml::Behavior>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				contractList->add(std::dynamic_pointer_cast<uml::Behavior>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::Behavior>::iterator iterContract = getContract()->begin();
+			Bag<uml::Behavior>::iterator endContract = getContract()->end();
+			while (iterContract != endContract)
+			{
+				if (contractList->find(*iterContract) == -1)
+				{
+					getContract()->erase(*iterContract);
+				}
+				iterContract++;
+			}
+ 
+			iterContract = contractList->begin();
+			endContract = contractList->end();
+			while (iterContract != endContract)
+			{
+				if (getContract()->find(*iterContract) == -1)
+				{
+					getContract()->add(*iterContract);
+				}
+				iterContract++;			
+			}
+			return true;
+		}
+		case uml::umlPackage::CONNECTOR_ATTRIBUTE_END:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::ConnectorEnd>> endList(new Bag<uml::ConnectorEnd>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				endList->add(std::dynamic_pointer_cast<uml::ConnectorEnd>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::ConnectorEnd>::iterator iterEnd = getEnd()->begin();
+			Bag<uml::ConnectorEnd>::iterator endEnd = getEnd()->end();
+			while (iterEnd != endEnd)
+			{
+				if (endList->find(*iterEnd) == -1)
+				{
+					getEnd()->erase(*iterEnd);
+				}
+				iterEnd++;
+			}
+ 
+			iterEnd = endList->begin();
+			endEnd = endList->end();
+			while (iterEnd != endEnd)
+			{
+				if (getEnd()->find(*iterEnd) == -1)
+				{
+					getEnd()->add(*iterEnd);
+				}
+				iterEnd++;			
+			}
+			return true;
+		}
+		case uml::umlPackage::CONNECTOR_ATTRIBUTE_REDEFINEDCONNECTOR:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::Connector>> redefinedConnectorList(new Bag<uml::Connector>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				redefinedConnectorList->add(std::dynamic_pointer_cast<uml::Connector>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::Connector>::iterator iterRedefinedConnector = getRedefinedConnector()->begin();
+			Bag<uml::Connector>::iterator endRedefinedConnector = getRedefinedConnector()->end();
+			while (iterRedefinedConnector != endRedefinedConnector)
+			{
+				if (redefinedConnectorList->find(*iterRedefinedConnector) == -1)
+				{
+					getRedefinedConnector()->erase(*iterRedefinedConnector);
+				}
+				iterRedefinedConnector++;
+			}
+ 
+			iterRedefinedConnector = redefinedConnectorList->begin();
+			endRedefinedConnector = redefinedConnectorList->end();
+			while (iterRedefinedConnector != endRedefinedConnector)
+			{
+				if (getRedefinedConnector()->find(*iterRedefinedConnector) == -1)
+				{
+					getRedefinedConnector()->add(*iterRedefinedConnector);
+				}
+				iterRedefinedConnector++;			
+			}
+			return true;
+		}
+		case uml::umlPackage::CONNECTOR_ATTRIBUTE_STRUCTUREDCLASSIFIER:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::StructuredClassifier> _structuredClassifier = std::dynamic_pointer_cast<uml::StructuredClassifier>(_temp);
+			setStructuredClassifier(_structuredClassifier); //5319
+			return true;
+		}
+		case uml::umlPackage::CONNECTOR_ATTRIBUTE_TYPE:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::Association> _type = std::dynamic_pointer_cast<uml::Association>(_temp);
+			setType(_type); //5318
+			return true;
+		}
+	}
+
+	return FeatureImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any ConnectorImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 1738876455
+		case umlPackage::CONNECTOR_OPERATION_GETKIND:
+		{
+			result = eAny(this->getKind());
+			break;
+		}
+		
+		// 1203441862
+		case umlPackage::CONNECTOR_OPERATION_ROLES_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->roles(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+		
+		// 388310687
+		case umlPackage::CONNECTOR_OPERATION_TYPES_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->types(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = FeatureImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<Connector> ConnectorImpl::getThisConnectorPtr() const
+{
+	return m_thisConnectorPtr.lock();
+}
+void ConnectorImpl::setThisConnectorPtr(std::weak_ptr<Connector> thisConnectorPtr)
+{
+	m_thisConnectorPtr = thisConnectorPtr;
+	setThisFeaturePtr(thisConnectorPtr);
+}

@@ -1,3 +1,4 @@
+
 #include "uml/impl/ObservationImpl.hpp"
 
 #ifdef NDEBUG
@@ -25,7 +26,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -33,7 +33,6 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-
 
 #include "uml/Comment.hpp"
 #include "uml/Dependency.hpp"
@@ -140,21 +139,16 @@ std::shared_ptr<ecore::EObject> ObservationImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> ObservationImpl::eStaticClass() const
-{
-	return uml::umlPackage::eInstance()->getObservation_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
 
 //*********************************
-// References
+// Attribute Getters & Setters
+//*********************************
+
+//*********************************
+// Reference Getters & Setters
 //*********************************
 
 //*********************************
@@ -187,16 +181,9 @@ std::weak_ptr<uml::Element> ObservationImpl::getOwner() const
 
 
 
-
-std::shared_ptr<Observation> ObservationImpl::getThisObservationPtr() const
-{
-	return m_thisObservationPtr.lock();
-}
-void ObservationImpl::setThisObservationPtr(std::weak_ptr<Observation> thisObservationPtr)
-{
-	m_thisObservationPtr = thisObservationPtr;
-	setThisPackageableElementPtr(thisObservationPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> ObservationImpl::eContainer() const
 {
 	if(auto wp = m_namespace.lock())
@@ -219,55 +206,6 @@ std::shared_ptr<ecore::EObject> ObservationImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any ObservationImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-	}
-	return PackageableElementImpl::eGet(featureID, resolve, coreType);
-}
-bool ObservationImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-	}
-	return PackageableElementImpl::internalEIsSet(featureID);
-}
-bool ObservationImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-	}
-
-	return PackageableElementImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any ObservationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-
-		default:
-		{
-			// call superTypes
-			result = PackageableElementImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -321,10 +259,6 @@ void ObservationImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
 }
 
 void ObservationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -339,3 +273,71 @@ void ObservationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> ObservationImpl::eStaticClass() const
+{
+	return uml::umlPackage::eInstance()->getObservation_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any ObservationImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+	}
+	return PackageableElementImpl::eGet(featureID, resolve, coreType);
+}
+
+bool ObservationImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+	}
+	return PackageableElementImpl::internalEIsSet(featureID);
+}
+
+bool ObservationImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+	}
+
+	return PackageableElementImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any ObservationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+
+		default:
+		{
+			// call superTypes
+			result = PackageableElementImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<Observation> ObservationImpl::getThisObservationPtr() const
+{
+	return m_thisObservationPtr.lock();
+}
+void ObservationImpl::setThisObservationPtr(std::weak_ptr<Observation> thisObservationPtr)
+{
+	m_thisObservationPtr = thisObservationPtr;
+	setThisPackageableElementPtr(thisObservationPtr);
+}

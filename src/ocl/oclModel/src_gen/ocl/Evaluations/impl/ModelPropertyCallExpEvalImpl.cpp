@@ -1,3 +1,4 @@
+
 #include "ocl/Evaluations/impl/ModelPropertyCallExpEvalImpl.hpp"
 
 #ifdef NDEBUG
@@ -24,19 +25,17 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "fUML/Semantics/Values/ValuesFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
 #include "uml/umlFactory.hpp"
+#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
-
 
 #include "ocl/Evaluations/EvalEnvironment.hpp"
 #include "fUML/Semantics/Loci/Locus.hpp"
@@ -117,15 +116,6 @@ std::shared_ptr<ecore::EObject> ModelPropertyCallExpEvalImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> ModelPropertyCallExpEvalImpl::eStaticClass() const
-{
-	return ocl::Evaluations::EvaluationsPackage::eInstance()->getModelPropertyCallExpEval_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
@@ -136,83 +126,23 @@ bool ModelPropertyCallExpEvalImpl::atPre()
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
+//*********************************
+
+//*********************************
+// Reference Getters & Setters
 //*********************************
 
 //*********************************
 // Union Getter
 //*********************************
 
-
-
-std::shared_ptr<ModelPropertyCallExpEval> ModelPropertyCallExpEvalImpl::getThisModelPropertyCallExpEvalPtr() const
-{
-	return m_thisModelPropertyCallExpEvalPtr.lock();
-}
-void ModelPropertyCallExpEvalImpl::setThisModelPropertyCallExpEvalPtr(std::weak_ptr<ModelPropertyCallExpEval> thisModelPropertyCallExpEvalPtr)
-{
-	m_thisModelPropertyCallExpEvalPtr = thisModelPropertyCallExpEvalPtr;
-	setThisPropertyCallExpEvalPtr(thisModelPropertyCallExpEvalPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> ModelPropertyCallExpEvalImpl::eContainer() const
 {
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any ModelPropertyCallExpEvalImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-	}
-	return PropertyCallExpEvalImpl::eGet(featureID, resolve, coreType);
-}
-bool ModelPropertyCallExpEvalImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-	}
-	return PropertyCallExpEvalImpl::internalEIsSet(featureID);
-}
-bool ModelPropertyCallExpEvalImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-	}
-
-	return PropertyCallExpEvalImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any ModelPropertyCallExpEvalImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-		
-		// 2043150223
-		case EvaluationsPackage::MODELPROPERTYCALLEXPEVAL_OPERATION_ATPRE:
-		{
-			result = eAny(this->atPre());
-			break;
-		}
-
-		default:
-		{
-			// call superTypes
-			result = PropertyCallExpEvalImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -265,10 +195,6 @@ void ModelPropertyCallExpEvalImpl::save(std::shared_ptr<persistence::interfaces:
 	fUML::Semantics::Loci::SemanticVisitorImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
 }
 
 void ModelPropertyCallExpEvalImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -283,3 +209,78 @@ void ModelPropertyCallExpEvalImpl::saveContent(std::shared_ptr<persistence::inte
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> ModelPropertyCallExpEvalImpl::eStaticClass() const
+{
+	return ocl::Evaluations::EvaluationsPackage::eInstance()->getModelPropertyCallExpEval_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any ModelPropertyCallExpEvalImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+	}
+	return PropertyCallExpEvalImpl::eGet(featureID, resolve, coreType);
+}
+
+bool ModelPropertyCallExpEvalImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+	}
+	return PropertyCallExpEvalImpl::internalEIsSet(featureID);
+}
+
+bool ModelPropertyCallExpEvalImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+	}
+
+	return PropertyCallExpEvalImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any ModelPropertyCallExpEvalImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 2043150223
+		case EvaluationsPackage::MODELPROPERTYCALLEXPEVAL_OPERATION_ATPRE:
+		{
+			result = eAny(this->atPre());
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = PropertyCallExpEvalImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<ModelPropertyCallExpEval> ModelPropertyCallExpEvalImpl::getThisModelPropertyCallExpEvalPtr() const
+{
+	return m_thisModelPropertyCallExpEvalPtr.lock();
+}
+void ModelPropertyCallExpEvalImpl::setThisModelPropertyCallExpEvalPtr(std::weak_ptr<ModelPropertyCallExpEval> thisModelPropertyCallExpEvalPtr)
+{
+	m_thisModelPropertyCallExpEvalPtr = thisModelPropertyCallExpEvalPtr;
+	setThisPropertyCallExpEvalPtr(thisModelPropertyCallExpEvalPtr);
+}

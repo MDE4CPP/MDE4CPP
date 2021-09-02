@@ -10,16 +10,22 @@
 namespace uml 
 {
 	enum MessageSort {
+		
 		ASYNCHCALL = 1
 ,
+		
 		ASYNCHSIGNAL = 2
 ,
+		
 		CREATEMESSAGE = 3
 ,
+		
 		DELETEMESSAGE = 4
 ,
+		
 		REPLY = 5
 ,
+		
 		SYNCHCALL = 0
 	};
 }

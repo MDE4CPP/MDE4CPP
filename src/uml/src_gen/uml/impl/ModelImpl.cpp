@@ -1,3 +1,4 @@
+
 #include "uml/impl/ModelImpl.hpp"
 
 #ifdef NDEBUG
@@ -25,7 +26,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -33,7 +33,6 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-
 
 #include "uml/Comment.hpp"
 #include "uml/Constraint.hpp"
@@ -164,28 +163,6 @@ std::shared_ptr<ecore::EObject> ModelImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> ModelImpl::eStaticClass() const
-{
-	return uml::umlPackage::eInstance()->getModel_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-/*
-Getter & Setter for attribute viewpoint
-*/
-std::string ModelImpl::getViewpoint() const 
-{
-	return m_viewpoint;
-}
-void ModelImpl::setViewpoint(std::string _viewpoint)
-{
-	m_viewpoint = _viewpoint;
-	
-} 
-
-
 //*********************************
 // Operations
 //*********************************
@@ -196,7 +173,21 @@ bool ModelImpl::isMetamodel()
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
+//*********************************
+/* Getter & Setter for attribute viewpoint */
+std::string ModelImpl::getViewpoint() const 
+{
+	return m_viewpoint;
+}
+void ModelImpl::setViewpoint(std::string _viewpoint)
+{
+	m_viewpoint = _viewpoint;
+	
+}
+
+//*********************************
+// Reference Getters & Setters
 //*********************************
 
 //*********************************
@@ -264,16 +255,9 @@ std::weak_ptr<uml::Element> ModelImpl::getOwner() const
 
 
 
-
-std::shared_ptr<Model> ModelImpl::getThisModelPtr() const
-{
-	return m_thisModelPtr.lock();
-}
-void ModelImpl::setThisModelPtr(std::weak_ptr<Model> thisModelPtr)
-{
-	m_thisModelPtr = thisModelPtr;
-	setThisPackagePtr(thisModelPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> ModelImpl::eContainer() const
 {
 	if(auto wp = m_namespace.lock())
@@ -301,73 +285,6 @@ std::shared_ptr<ecore::EObject> ModelImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any ModelImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::MODEL_ATTRIBUTE_VIEWPOINT:
-			return eAny(getViewpoint()); //15328
-	}
-	return PackageImpl::eGet(featureID, resolve, coreType);
-}
-bool ModelImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::MODEL_ATTRIBUTE_VIEWPOINT:
-			return getViewpoint() != ""; //15328
-	}
-	return PackageImpl::internalEIsSet(featureID);
-}
-bool ModelImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::MODEL_ATTRIBUTE_VIEWPOINT:
-		{
-			// BOOST CAST
-			std::string _viewpoint = newValue->get<std::string>();
-			setViewpoint(_viewpoint); //15328
-			return true;
-		}
-	}
-
-	return PackageImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any ModelImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-		
-		// 632630866
-		case umlPackage::MODEL_OPERATION_ISMETAMODEL:
-		{
-			result = eAny(this->isMetamodel());
-			break;
-		}
-
-		default:
-		{
-			// call superTypes
-			result = PackageImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -446,11 +363,6 @@ void ModelImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> save
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
-	
 }
 
 void ModelImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -470,3 +382,89 @@ void ModelImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandle
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> ModelImpl::eStaticClass() const
+{
+	return uml::umlPackage::eInstance()->getModel_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any ModelImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::MODEL_ATTRIBUTE_VIEWPOINT:
+			return eAny(getViewpoint()); //15328
+	}
+	return PackageImpl::eGet(featureID, resolve, coreType);
+}
+
+bool ModelImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::MODEL_ATTRIBUTE_VIEWPOINT:
+			return getViewpoint() != ""; //15328
+	}
+	return PackageImpl::internalEIsSet(featureID);
+}
+
+bool ModelImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::MODEL_ATTRIBUTE_VIEWPOINT:
+		{
+			// BOOST CAST
+			std::string _viewpoint = newValue->get<std::string>();
+			setViewpoint(_viewpoint); //15328
+			return true;
+		}
+	}
+
+	return PackageImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any ModelImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 632630866
+		case umlPackage::MODEL_OPERATION_ISMETAMODEL:
+		{
+			result = eAny(this->isMetamodel());
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = PackageImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<Model> ModelImpl::getThisModelPtr() const
+{
+	return m_thisModelPtr.lock();
+}
+void ModelImpl::setThisModelPtr(std::weak_ptr<Model> thisModelPtr)
+{
+	m_thisModelPtr = thisModelPtr;
+	setThisPackagePtr(thisModelPtr);
+}

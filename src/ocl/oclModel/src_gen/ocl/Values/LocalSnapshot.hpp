@@ -42,9 +42,7 @@ namespace ocl::Values
 // namespace macro header include
 #include "ocl/ocl.hpp"
 
-// base class includes
 
-// enum includes
 
 #include "ecore/EModelElement.hpp"
 
@@ -70,78 +68,57 @@ namespace ocl::Values
 			//*********************************
 			// Operations
 			//*********************************
-			
+
 			//*********************************
-			// Attributes Getter & Setter
+			// Attribute Getters & Setters
 			//*********************************
-			 
 			virtual bool getIsPost() const = 0;
-			 
 			virtual void setIsPost (bool _isPost)= 0;
-			 
 			virtual bool getIsPre() const = 0;
-			 
 			virtual void setIsPre (bool _isPre)= 0;
-			
+
 			//*********************************
-			// References Getter & Setter
+			// Reference Getters & Setters
 			//*********************************
-			
 			virtual std::shared_ptr<Bag<ocl::Values::NameValueBinding>> getBindings() const = 0;
-			
-			
 			virtual std::shared_ptr<Bag<ocl::Values::OclMessageValue>> getInputQ() const = 0;
-			
-			
 			virtual std::shared_ptr<Bag<ocl::Values::OclMessageValue>> getOutputQ() const = 0;
-			
-			
 			virtual std::shared_ptr<ocl::Values::LocalSnapshot> getPred() const = 0;
-			
 			virtual void setPred(std::shared_ptr<ocl::Values::LocalSnapshot>) = 0;
-			
 			virtual std::shared_ptr<ocl::Values::LocalSnapshot> getSucc() const = 0;
-			
 			virtual void setSucc(std::shared_ptr<ocl::Values::LocalSnapshot>) = 0;
-			
+
+			//*********************************
+			// Union Reference Getters
+			//*********************************
+
+			//*********************************
+			// Container Getter
+			//*********************************
+			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
+
+			//*********************************
+			// Persistence Functions
+			//*********************************
+			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 
 		protected:
 			//*********************************
 			// Attribute Members
 			//*********************************
-			
-			bool m_isPost = false;
-			
-			bool m_isPre = false;
-			
+			bool m_isPost= false;
+			bool m_isPre= false;
 			
 			//*********************************
 			// Reference Members
 			//*********************************
-			
 			mutable std::shared_ptr<Bag<ocl::Values::NameValueBinding>> m_bindings;
 			mutable std::shared_ptr<Bag<ocl::Values::OclMessageValue>> m_inputQ;
 			mutable std::shared_ptr<Bag<ocl::Values::OclMessageValue>> m_outputQ;
 			std::shared_ptr<ocl::Values::LocalSnapshot> m_pred;
 			std::shared_ptr<ocl::Values::LocalSnapshot> m_succ;
-
-		public:
-			//*********************************
-			// Union Getter
-			//*********************************
-			
-
-			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
-			
-			//*********************************
-			// Persistence Functions
-			//*********************************
-			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
-			
-			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
-			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
-			
 	};
-
 }
 #endif /* end of include guard: OCL_VALUES_LOCALSNAPSHOT_HPP */

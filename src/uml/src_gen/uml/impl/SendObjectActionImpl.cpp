@@ -1,3 +1,4 @@
+
 #include "uml/impl/SendObjectActionImpl.hpp"
 
 #ifdef NDEBUG
@@ -26,7 +27,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
-//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -34,7 +34,6 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-
 
 #include "uml/Activity.hpp"
 #include "uml/ActivityEdge.hpp"
@@ -166,15 +165,6 @@ std::shared_ptr<ecore::EObject> SendObjectActionImpl::copy() const
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> SendObjectActionImpl::eStaticClass() const
-{
-	return uml::umlPackage::eInstance()->getSendObjectAction_Class();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-
 //*********************************
 // Operations
 //*********************************
@@ -185,11 +175,13 @@ bool SendObjectActionImpl::type_target_pin(Any diagnostics,std::shared_ptr<std::
 }
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-/*
-Getter & Setter for reference request
-*/
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+/* Getter & Setter for reference request */
 std::shared_ptr<uml::InputPin> SendObjectActionImpl::getRequest() const
 {
     return m_request;
@@ -200,10 +192,7 @@ void SendObjectActionImpl::setRequest(std::shared_ptr<uml::InputPin> _request)
 	
 }
 
-
-/*
-Getter & Setter for reference target
-*/
+/* Getter & Setter for reference target */
 std::shared_ptr<uml::InputPin> SendObjectActionImpl::getTarget() const
 {
     return m_target;
@@ -213,7 +202,6 @@ void SendObjectActionImpl::setTarget(std::shared_ptr<uml::InputPin> _target)
     m_target = _target;
 	
 }
-
 
 //*********************************
 // Union Getter
@@ -288,18 +276,9 @@ std::shared_ptr<Union<uml::RedefinableElement>> SendObjectActionImpl::getRedefin
 	return m_redefinedElement;
 }
 
-
-
-
-std::shared_ptr<SendObjectAction> SendObjectActionImpl::getThisSendObjectActionPtr() const
-{
-	return m_thisSendObjectActionPtr.lock();
-}
-void SendObjectActionImpl::setThisSendObjectActionPtr(std::weak_ptr<SendObjectAction> thisSendObjectActionPtr)
-{
-	m_thisSendObjectActionPtr = thisSendObjectActionPtr;
-	setThisInvocationActionPtr(thisSendObjectActionPtr);
-}
+//*********************************
+// Container Getter
+//*********************************
 std::shared_ptr<ecore::EObject> SendObjectActionImpl::eContainer() const
 {
 	if(auto wp = m_activity.lock())
@@ -322,102 +301,6 @@ std::shared_ptr<ecore::EObject> SendObjectActionImpl::eContainer() const
 		return wp;
 	}
 	return nullptr;
-}
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-Any SendObjectActionImpl::eGet(int featureID, bool resolve, bool coreType) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::SENDOBJECTACTION_ATTRIBUTE_REQUEST:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getRequest();
-				return eAny(returnValue); //21229
-			}
-		case uml::umlPackage::SENDOBJECTACTION_ATTRIBUTE_TARGET:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getTarget();
-				return eAny(returnValue); //21230
-			}
-	}
-	return InvocationActionImpl::eGet(featureID, resolve, coreType);
-}
-bool SendObjectActionImpl::internalEIsSet(int featureID) const
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::SENDOBJECTACTION_ATTRIBUTE_REQUEST:
-			return getRequest() != nullptr; //21229
-		case uml::umlPackage::SENDOBJECTACTION_ATTRIBUTE_TARGET:
-			return getTarget() != nullptr; //21230
-	}
-	return InvocationActionImpl::internalEIsSet(featureID);
-}
-bool SendObjectActionImpl::eSet(int featureID, Any newValue)
-{
-	switch(featureID)
-	{
-		case uml::umlPackage::SENDOBJECTACTION_ATTRIBUTE_REQUEST:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::InputPin> _request = std::dynamic_pointer_cast<uml::InputPin>(_temp);
-			setRequest(_request); //21229
-			return true;
-		}
-		case uml::umlPackage::SENDOBJECTACTION_ATTRIBUTE_TARGET:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::InputPin> _target = std::dynamic_pointer_cast<uml::InputPin>(_temp);
-			setTarget(_target); //21230
-			return true;
-		}
-	}
-
-	return InvocationActionImpl::eSet(featureID, newValue);
-}
-
-//*********************************
-// Behavioral Feature
-//*********************************
-Any SendObjectActionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
-{
-	Any result;
-
-  	switch(operationID)
-	{
-		
-		// 1355807073
-		case umlPackage::SENDOBJECTACTION_OPERATION_TYPE_TARGET_PIN_EDIAGNOSTICCHAIN_EMAP:
-		{
-			//Retrieve input parameter 'diagnostics'
-			//parameter 0
-			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
-			//Retrieve input parameter 'context'
-			//parameter 1
-			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->type_target_pin(incoming_param_diagnostics,incoming_param_context));
-			break;
-		}
-
-		default:
-		{
-			// call superTypes
-			result = InvocationActionImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
-				break;
-			break;
-		}
-  	}
-
-	return result;
 }
 
 //*********************************
@@ -512,14 +395,6 @@ void SendObjectActionImpl::save(std::shared_ptr<persistence::interfaces::XSaveHa
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
-	
-	
-	
-	
 }
 
 void SendObjectActionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -547,3 +422,118 @@ void SendObjectActionImpl::saveContent(std::shared_ptr<persistence::interfaces::
 	}
 }
 
+
+std::shared_ptr<ecore::EClass> SendObjectActionImpl::eStaticClass() const
+{
+	return uml::umlPackage::eInstance()->getSendObjectAction_Class();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+Any SendObjectActionImpl::eGet(int featureID, bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::SENDOBJECTACTION_ATTRIBUTE_REQUEST:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getRequest();
+				return eAny(returnValue); //21229
+			}
+		case uml::umlPackage::SENDOBJECTACTION_ATTRIBUTE_TARGET:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getTarget();
+				return eAny(returnValue); //21230
+			}
+	}
+	return InvocationActionImpl::eGet(featureID, resolve, coreType);
+}
+
+bool SendObjectActionImpl::internalEIsSet(int featureID) const
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::SENDOBJECTACTION_ATTRIBUTE_REQUEST:
+			return getRequest() != nullptr; //21229
+		case uml::umlPackage::SENDOBJECTACTION_ATTRIBUTE_TARGET:
+			return getTarget() != nullptr; //21230
+	}
+	return InvocationActionImpl::internalEIsSet(featureID);
+}
+
+bool SendObjectActionImpl::eSet(int featureID, Any newValue)
+{
+	switch(featureID)
+	{
+		case uml::umlPackage::SENDOBJECTACTION_ATTRIBUTE_REQUEST:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::InputPin> _request = std::dynamic_pointer_cast<uml::InputPin>(_temp);
+			setRequest(_request); //21229
+			return true;
+		}
+		case uml::umlPackage::SENDOBJECTACTION_ATTRIBUTE_TARGET:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::InputPin> _target = std::dynamic_pointer_cast<uml::InputPin>(_temp);
+			setTarget(_target); //21230
+			return true;
+		}
+	}
+
+	return InvocationActionImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// EOperation Invoke
+//*********************************
+Any SendObjectActionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 1355807073
+		case umlPackage::SENDOBJECTACTION_OPERATION_TYPE_TARGET_PIN_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->type_target_pin(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = InvocationActionImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+
+std::shared_ptr<SendObjectAction> SendObjectActionImpl::getThisSendObjectActionPtr() const
+{
+	return m_thisSendObjectActionPtr.lock();
+}
+void SendObjectActionImpl::setThisSendObjectActionPtr(std::weak_ptr<SendObjectAction> thisSendObjectActionPtr)
+{
+	m_thisSendObjectActionPtr = thisSendObjectActionPtr;
+	setThisInvocationActionPtr(thisSendObjectActionPtr);
+}
