@@ -2,6 +2,7 @@ package ecore4CPP.generator.main.validation;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -80,6 +81,7 @@ public class ValidationService {
 	{
 		private String m_message, m_callingOperation;
 		private Ecore4CPPMessageServerityLevel m_level;
+		private static final String INDENT = "    ";
 		
 		@SuppressWarnings("unused")
 		public Ecore4CPPMessage() 
@@ -95,13 +97,18 @@ public class ValidationService {
 			m_callingOperation = callingOperation;
 		}
 		
-		public void print()
+		public void print(Integer level)
 		{	
 			String printedMessage = "[" + 
 									Ecore4CPPConsoleManipulator.ANSI_MAP.get(m_level) +  m_level.name() + Ecore4CPPConsoleManipulator.ANSI_RESET + 
 									"] :\t" + 
+									String.join("",  Collections.nCopies(level, INDENT)) +
 									m_message + 
-									((m_callingOperation.isEmpty()) ? "" : ("\n\t\t(from " + m_callingOperation + ")"));
+									((m_callingOperation.isEmpty()) ? 
+											"" : (
+													"\n\t\t" + 
+													String.join("",  Collections.nCopies(level, INDENT)) +
+													"(from " + m_callingOperation + ")"));
 			System.out.println(printedMessage);
 		}
 	}
@@ -112,7 +119,8 @@ public class ValidationService {
 		private List<Ecore4CPPMessage> errors;
 		private List<Ecore4CPPMessage> warnings;
 		private Boolean validationStatus = false;
-		private Boolean warningsDisabled = false;
+		private Boolean infosDisabled = false, warningsDisabled = false;
+		private Integer disabledLevelInfo = 0, disabledLevelWarning = 0;
 		
 /**
  * Private utility methods
@@ -184,10 +192,44 @@ public class ValidationService {
 		}
 		
 		/**
+		 * Disables the print of info messages
+		 */
+		public void disableInfos()
+		{
+			disableInfos(0);
+		}
+		
+		/**
+		 * Disables the print of info messages from a specific level of depth
+		 */
+		public void disableInfos(Integer disableLevel)
+		{
+			disabledLevelInfo = disableLevel;
+			infosDisabled = true;
+		}
+		
+		/**
+		 * Enables the print of info messages
+		 */
+		public void enableInfos()
+		{
+			infosDisabled = false;
+		}
+		
+		/**
 		 * Disables the print of warning messages
 		 */
 		public void disableWarnings()
 		{
+			disableWarnings(0);
+		}
+		
+		/**
+		 * Disables the print of warning messages from a specific level of depth
+		 */
+		public void disableWarnings(Integer disableLevel)
+		{
+			disabledLevelWarning = disableLevel;
 			warningsDisabled = true;
 		}
 		
@@ -209,8 +251,9 @@ public class ValidationService {
 				System.err.println("Validation failed with the following errors:");
 				System.out.println("--------------------------------------------\n");
 				for (Ecore4CPPMessage errorMessage : errors) {
-					errorMessage.print();
+					errorMessage.print(0);
 				}
+				System.out.println("\n--------------------------------------------");
 			}
 		}
 		
@@ -221,18 +264,19 @@ public class ValidationService {
 		{
 			if (warningsExist())
 			{
-				if(warningsDisabled)
+				if(warningsDisabled && disabledLevelWarning < 1)
 				{
-					printInfo("Warnings disabled!", "");
+					printInfo("Warnings disabled!", "", 0);
 				}
 				
-				else {
+				else 
+				{
 				System.out.println("Warnings during validation (NOTE: generation might not work correctly):");
 				System.out.println("-----------------------------------------------------------------------\n");
-
 					for (Ecore4CPPMessage warningMessage : warnings) {
-						warningMessage.print();
+						warningMessage.print(0);
 					}
+				System.out.println("\n-----------------------------------------------------------------------");
 				}
 			}
 		}
@@ -240,32 +284,42 @@ public class ValidationService {
 		/**
 		 * Creates and prints a new Info message
 		 */
-		public void printInfo(String message, String callingOperation)
+		public void printInfo(String message, String callingOperation, Integer level)
 		{
-			Ecore4CPPMessage infoMessage = new Ecore4CPPMessage(Ecore4CPPMessageServerityLevel.INFO, message, callingOperation);
-			infoMessage.print();
+			/* Print infos only if:
+			 * - infos are enabled
+			 * - or (if infos are disabled) if the disabledLevel for infos is less than the level of the provided info
+			 */
+			if(!infosDisabled || level < disabledLevelInfo) {
+				Ecore4CPPMessage infoMessage = new Ecore4CPPMessage(Ecore4CPPMessageServerityLevel.INFO, message, callingOperation);
+				infoMessage.print(level);
+			}
 		}
 		
 		/**
 		 * Creates and prints a new Warning message (if warnings are enabled)
 		 */
-		public void printWarning(String message, String callingOperation)
+		public void printWarning(String message, String callingOperation, Integer level)
 		{
-			if(!warningsDisabled)
+			/* Print warnings only if:
+			 * - warnings are enabled
+			 * - or (if warnings are disabled) if the disabledLevel for warnings is less than the level of the provided warning
+			 */
+			if(!warningsDisabled || disabledLevelWarning < level)
 			{
 				Ecore4CPPMessage warningMessage = new Ecore4CPPMessage(Ecore4CPPMessageServerityLevel.WARNING, message, callingOperation);
-				warningMessage.print();
+				warningMessage.print(level);
 			}
 		}
 		
 		/**
 		 * Creates and prints a new Error message
 		 */
-		public void printError(String message,  String callingOperation)
+		public void printError(String message,  String callingOperation, Integer level)
 		{
 			
 			Ecore4CPPMessage errorMessage = new Ecore4CPPMessage(Ecore4CPPMessageServerityLevel.ERROR, message, callingOperation);
-			errorMessage.print();
+			errorMessage.print(level);
 		}
 		
 		/**
@@ -567,6 +621,9 @@ public class ValidationService {
 						"Undefined 'eType'" + messageInstanceSuffix,
 						this.getClass().getName() + ":validateEParameter"));
 			}
+			else {
+				validateEClassifier(eParameter.getEType());
+			}
 		}
 		
 		/**
@@ -606,6 +663,10 @@ public class ValidationService {
 						Ecore4CPPMessageServerityLevel.ERROR,
 						"Undefined 'eType'" + messageInstanceSuffix,
 						this.getClass().getName()+ ":validateEStructuralFeature"));
+			}
+			else
+			{
+				validateEClassifier(eStructuralFeature.getEType());
 			}
 		}
 		

@@ -1,11 +1,19 @@
 [comment encoding = Cp1252 /]
 [module validation('http://www.eclipse.org/emf/2002/Ecore')/]
 
+[import ecore4CPP::generator::main::helper /]
+
 
 [template public validateModel(modelRootEPackage : EPackage)]
 [setValidationStatus(true)/]
 [modelRootEPackage.validateEPackage()/]
 [modelRootEPackage.validateEPackageContents()/]
+[if (errorsExist())]
+	[printErrors()/]
+	[closeWithErrorExit(1)/]
+[elseif (warningsExist())]
+	[printWarnings()/]
+[/if]
 [/template]
 
 [template private validateEPackageContents(anEPackage : EPackage)]
@@ -60,86 +68,265 @@
 [/for]
 [/template]
 
-[query public printInfo(arg0 : String, arg1 : String) : OclVoid
-	= invoke('ecore4CPP.generator.main.validation.ValidationService', 'printInfo(java.lang.String, java.lang.String)', Sequence{arg0, arg1})
+
+[**
+ * Invocation queries for utility services
+ * NOTE: These invocations have to be made via templates (not queries), because Acceleo caches results of queries (see https://wiki.eclipse.org/Acceleo/FAQ#My_query_is_only_executed_once).
+ * So if the same call for a print-query is done more than once with the same parameters (e.g. the same string) the query will not be executed again,
+ * but the previously cached result of this query call will be returned.
+ * This would make it impossible to output the same string multiple times during generation.
+ * @param message : The message that should be printed out
+ * @param callingOperation : The name of the query/template from which the message is originated (optional for Infos, mandatory for Warnings and Errors) 
+ * @param level : A message ca be provided a level (optional for all). The level of a message has two effects: 
+ * 				  1) Infos as well as Warnings can be disabled from a specific level (see disableInfos(level : Integer) or disableWarnings(level : Integer) below)
+ * 				  2) The level of a message also effects it's indentation when printed out, so that messages can be printed hierarchically
+*/]
+[comment Prints an INFO message /]
+[template public printInfo(message : String, callingOperation : String, level : Integer) post(trim())][invoke('ecore4CPP.generator.main.validation.ValidationService', 'printInfo(java.lang.String, java.lang.String, java.lang.Integer)', Sequence{message, callingOperation, level})/][/template]
+[template public printInfo(message : String, callingOperation : String) post(trim())][printInfo(message, callingOperation, 0)/][/template]
+[template public printInfo(message : String, level : Integer) post(trim())][printInfo(message, '', level)/][/template]
+[template public printInfo(message : String) post(trim())][printInfo(message, '')/][/template]
+
+[comment Prints a WARNING message /]
+[template public printWarning(message : String, callingOperation : String, level : Integer) post(trim())][invoke('ecore4CPP.generator.main.validation.ValidationService', 'printWarning(java.lang.String, java.lang.String, java.lang.Integer)', Sequence{message, callingOperation, level})/][/template]
+[template public printWarning(message : String, callingOperation : String) post(trim())][printWarning(message, callingOperation, 0)/][/template]
+
+[comment Prints an ERROR message /]
+[template public printError(message : String, callingOperation : String, level : Integer) post(trim())][invoke('ecore4CPP.generator.main.validation.ValidationService', 'printError(java.lang.String, java.lang.String, java.lang.Integer)', Sequence{message, callingOperation, level})/][/template]
+[template public printError(message : String, callingOperation : String) post(trim())][printError(message, callingOperation, 0)/][/template]
+
+[comment Disables the printing of infos /]
+[query public disableInfosAll(anOclAny: OclAny) : OclVoid
+	= invoke('ecore4CPP.generator.main.validation.ValidationService', 'disableInfos()', Sequence{})
+/]
+[comment Disables the printing of infos from a specific level of depth /]
+[comment Has to be implemented as a template, see explanation at the top of this file /]
+[template public disableInfos(level : Integer) post(trim())][invoke('ecore4CPP.generator.main.validation.ValidationService', 'disableInfos(java.lang.Integer)', Sequence{level})/][/template]
+
+[comment Enables the printing of infos /]
+[query public enableInfos(anOclAny: OclAny) : OclVoid
+	= invoke('ecore4CPP.generator.main.validation.ValidationService', 'enableInfos()', Sequence{})
 /]
 
-[query public printWarning(arg0 : String, arg1 : String) : OclVoid
-	= invoke('ecore4CPP.generator.main.validation.ValidationService', 'printWarning(java.lang.String, java.lang.String)', Sequence{arg0, arg1})
-/]
-
-[query public printError(arg0 : String, arg1 : String) : OclVoid
-	= invoke('ecore4CPP.generator.main.validation.ValidationService', 'printError(java.lang.String, java.lang.String)', Sequence{arg0, arg1})
-/]
-
-[query public disableWarnings(anOclAny: OclAny) : OclVoid
+[comment Disables the printing of warnings /]
+[query public disableWarningsAll(anOclAny: OclAny) : OclVoid
 	= invoke('ecore4CPP.generator.main.validation.ValidationService', 'disableWarnings()', Sequence{})
 /]
+[comment Disables the printing of warnings from a specific level of depth /]
+[comment Has to be implemented as a template, see explanation at the top of this file /]
+[template public disableWarnings(level : Integer) post(trim())][invoke('ecore4CPP.generator.main.validation.ValidationService', 'disableWarnings(java.lang.Integer)', Sequence{level})/][/template]
 
+[comment Enables the printing of warnings /]
 [query public enableWarnings(anOclAny: OclAny) : OclVoid
 	= invoke('ecore4CPP.generator.main.validation.ValidationService', 'enableWarnings()', Sequence{})
 /]
 
-[query public errorsExist(anOclAny: OclAny) : Boolean
-	= invoke('ecore4CPP.generator.main.validation.ValidationService', 'errorsExist()', Sequence{})
-/]
-
-[query public warningsExist(anOclAny: OclAny) : Boolean
-	= invoke('ecore4CPP.generator.main.validation.ValidationService', 'warningsExist()', Sequence{})
-/]
-
+[comment Retrieves if the model has already been validated or not /]
 [query public getValidationStatus(anOclAny: OclAny) : Boolean
 	= invoke('ecore4CPP.generator.main.validation.ValidationService', 'getValidationStatus()', Sequence{})
 /]
 
-[query public setValidationStatus(arg0 : Boolean) : OclVoid
-	= invoke('ecore4CPP.generator.main.validation.ValidationService', 'setValidationStatus(java.lang.Boolean)', Sequence{arg0})
+[comment Exits the generator with certain exit code /]
+[query public closeWithErrorExit(exitStatus : Integer) : OclVoid
+	= invoke('ecore4CPP.generator.main.validation.ValidationService', 'closeWithErrorExit(java.lang.Integer)', Sequence{exitStatus})
 /]
 
-[query public printErrors(anOclAny: OclAny) : OclVoid
+[comment Checks whether errors occured during model validation /]
+[query private errorsExist(anOclAny: OclAny) : Boolean
+	= invoke('ecore4CPP.generator.main.validation.ValidationService', 'errorsExist()', Sequence{})
+/]
+
+[comment Checks whether warnings occured during model validation /]
+[query private warningsExist(anOclAny: OclAny) : Boolean
+	= invoke('ecore4CPP.generator.main.validation.ValidationService', 'warningsExist()', Sequence{})
+/]
+
+[comment Sets if the model has already been validated or not /]
+[query private setValidationStatus(status : Boolean) : OclVoid
+	= invoke('ecore4CPP.generator.main.validation.ValidationService', 'setValidationStatus(java.lang.Boolean)', Sequence{status})
+/]
+
+[comment prints out all error messages that occured during model validation /]
+[query private printErrors(anOclAny: OclAny) : OclVoid
 	= invoke('ecore4CPP.generator.main.validation.ValidationService', 'printErrors()', Sequence{})
 /]
 
-[query public printWarnings(anOclAny: OclAny) : OclVoid
+[comment prints out all warning messages that occured during model validation /]
+[query private printWarnings(anOclAny: OclAny) : OclVoid
 	= invoke('ecore4CPP.generator.main.validation.ValidationService', 'printWarnings()', Sequence{})
 /]
 
-[query public closeWithErrorExit(arg0 : Integer) : OclVoid
-	= invoke('ecore4CPP.generator.main.validation.ValidationService', 'closeWithErrorExit(Java.lang.Integer)', Sequence{arg0})
+
+[**
+ * Additional utility queries for standardized messages
+*/]
+	[**
+	 * Messages to inform about the generation of an element or the element being skipped because it is configured as doNotGenerate
+	*/]
+[query public ePackageGenerationMessage(anEPackage : EPackage) : String = 
+	'Generating ' + anEPackage.eClass().name + ' ' 
+	+ anEPackage.generateNamespaceDefinition()
 /]
 
-[query public validateEPackage(arg0 : EPackage) : OclVoid
-	= invoke('ecore4CPP.generator.main.validation.ValidationService', 'validateEPackage(org.eclipse.emf.ecore.EPackage)', Sequence{arg0})
+[query public ePackageNoGenerationMessage(anEPackage : EPackage) : String = 
+	'Skipping ' + anEPackage.eClass().name + ' ' 
+	+ anEPackage.generateNamespaceDefinition() 
+	+ ' because it is configured as doNotGenerate'
 /]
 
-[query public validateEEnumLiteral(arg0 : EEnumLiteral) : OclVoid
-	= invoke('ecore4CPP.generator.main.validation.ValidationService', 'validateEEnumLiteral(org.eclipse.emf.ecore.EEnumLiteral)', Sequence{arg0})
+[query public eClassifierGenerationMessage(anEClassifier : EClassifier) : String = 
+	'Generating ' + anEClassifier.eClass().name + ' ' 
+	+ anEClassifier.generateNamespaceDefinition() + '::'
+	+ anEClassifier.name
 /]
 
-[query public validateEOperation(arg0 : EOperation) : OclVoid
-	= invoke('ecore4CPP.generator.main.validation.ValidationService', 'validateEOperation(org.eclipse.emf.ecore.EOperation)', Sequence{arg0})
+[query public eClassifierNoGenerationMessage(anEClassifier : EClassifier) : String = 
+	'Skipping ' + anEClassifier.eClass().name + ' ' 
+	+ anEClassifier.generateNamespaceDefinition() + '::'
+	+ anEClassifier.name 
+	+ ' because it is configured as doNotGenerate'
 /]
 
-[query public validateEParameter(arg0 : EParameter) : OclVoid
-	= invoke('ecore4CPP.generator.main.validation.ValidationService', 'validateEParameter(org.eclipse.emf.ecore.EParameter)', Sequence{arg0})
+[query public eStructuralFeatureGenerationMessage(anEStructuralFeature : EStructuralFeature) : String = 
+	'm_' + anEStructuralFeature.name + ' for ' + anEStructuralFeature.eClass().name 
+	+ ' "' + anEStructuralFeature.name + ' : ' + anEStructuralFeature.eType.name + '"'
 /]
 
-[query public validateEReference(arg0 : EReference) : OclVoid
-	= invoke('ecore4CPP.generator.main.validation.ValidationService', 'validateEReference(org.eclipse.emf.ecore.EReference)', Sequence{arg0})
+[query public eStructuralFeatureNoGenerationMessage(anEStructuralFeature : EStructuralFeature) : String = 
+	'Skipping ' + anEStructuralFeature.eClass().name
+	+ ' "' + anEStructuralFeature.name + ' : ' + anEStructuralFeature.eType.name + '"'
+	+ ' because it is configured as doNotGenerate'
 /]
 
-[query public validateEAttribute(arg0 : EAttribute) : OclVoid
-	= invoke('ecore4CPP.generator.main.validation.ValidationService', 'validateEAttribute(org.eclipse.emf.ecore.EAttribute)', Sequence{arg0})
+[query public eStructuralFeatureGetterGenerationMessage(anEStructuralFeature : EStructuralFeature) : String = 
+	anEStructuralFeature.GetterName() + ' for ' + anEStructuralFeature.eClass().name 
+	+ ' "' + anEStructuralFeature.name + ' : ' + anEStructuralFeature.eType.name + '"'
 /]
 
-[query public validateEDataType(arg0 : EDataType) : OclVoid
-	= invoke('ecore4CPP.generator.main.validation.ValidationService', 'validateEDataType(org.eclipse.emf.ecore.EDataType)', Sequence{arg0})
+[query public eStructuralFeatureSetterGenerationMessage(anEStructuralFeature : EStructuralFeature) : String = 
+	anEStructuralFeature.SetterName() + ' for ' + anEStructuralFeature.eClass().name 
+	+ ' "' + anEStructuralFeature.name + ' : ' + anEStructuralFeature.eType.name + '"'
 /]
 
-[query public validateEEnum(arg0 : EEnum) : OclVoid
-	= invoke('ecore4CPP.generator.main.validation.ValidationService', 'validateEEnum(org.eclipse.emf.ecore.EEnum)', Sequence{arg0})
+[query public eOperationGenerationMessage(anEOperation : EOperation) : String = 
+	anEOperation.eClass().name 
+	+ ' "' + anEOperation.name + ' : ' + anEOperation.secureTypeName() + '"'
 /]
 
-[query public validateEClass(arg0 : EClass) : OclVoid
-	= invoke('ecore4CPP.generator.main.validation.ValidationService', 'validateEClass(org.eclipse.emf.ecore.EClass)', Sequence{arg0})
+[query public eOperationNoGenerationMessage(anEOperation : EOperation) : String = 
+	'Skipping ' + anEOperation.eClass().name 
+	+ ' "' + anEOperation.name + ' : ' + anEOperation.secureTypeName() + '"'
+	+ ' because it is configured as doNotGenerate'
 /]
+
+[query private secureTypeName(anEOperation : EOperation) : String = if(anEOperation.eType.name.oclIsUndefined() or anEOperation.eType.name = '') then 'void' else anEOperation.eType.name endif /]
+
+
+[query public eParameterGenerationMessage(anEParameter : EParameter) : String = 
+	anEParameter.eClass().name + ' ' 
+	+ anEParameter.generateNamespaceDefinition()
+/]
+
+[query public eParameterNoGenerationMessage(anEParameter : EParameter) : String = 
+	'Skipping ' + anEParameter.eClass().name + ' ' 
+	+ anEParameter.generateNamespaceDefinition()
+	+ ' because it is configured as doNotGenerate'
+/]
+
+[query public eEnumLiteralGenerationMessage(anEEnumLiteral : EEnumLiteral) : String = 
+	anEEnumLiteral.eClass().name + ' ' 
+	+ anEEnumLiteral.generateNamespaceDefinition()
+/]
+
+[query public eEnumLiteralNoGenerationMessage(anEEnumLiteral : EEnumLiteral) : String = 
+	'Skipping ' + anEEnumLiteral.eClass().name + ' ' 
+	+ anEEnumLiteral.generateNamespaceDefinition()
+	+ ' because it is configured as doNotGenerate'
+/]
+
+	[**
+	 * Messages to inform about a type of a typed element being configured as doNotGenerate
+	*/]
+[query public eAttributeTypeNoGenerationMessage(anEAttribute : EAttribute) : String = 
+	'eAttributeType ' + eTypedElementTypeNoGeneration(anEAttribute, anEAttribute.eAttributeType)
+	+ anEAttribute.generateNamespaceDefinition()
+/]
+
+[query public eReferenceTypeNoGenerationMessage(anEReference : EReference) : String = 
+	'eReferenceType ' + eTypedElementTypeNoGeneration(anEReference, anEReference.eReferenceType)
+	+ anEReference.generateNamespaceDefinition()
+/]
+
+[query public eOperationTypeNoGenerationMessage(anEOperation : EOperation) : String = 
+	'eType ' + eTypedElementTypeNoGeneration(anEOperation, anEOperation.eType)
+	+ anEOperation.generateNamespaceDefinition()
+/]
+
+[query public eParameterTypeNoGenerationMessage(anEParameter : EParameter) : String = 
+	'eType ' + eTypedElementTypeNoGeneration(anEParameter, anEParameter.eType)
+	+ anEParameter.generateNamespaceDefinition()
+/]
+
+[query private eTypedElementTypeNoGeneration(anETypedElement : ETypedElement, anEClassifier : EClassifier) : String = 
+	anEClassifier.generateNamespaceDefinition() + '::'
+	+ anEClassifier.name
+	+ ' is configured as doNotGenerate for instance of '
+	+ anETypedElement.eClass().name + ': '
+/]
+
+	[**
+	 * Generic message to inform about a specific file being generated
+	*/]
+[query public fileGenerationMessage(fileName : String, fileDescription : String) : String = 
+	'Generating ' + fileDescription + ' "'
+	+ fileName + '"'
+/]
+
+	[**
+	 * Generic message to inform about an include-statement section being generated
+	*/]
+[query public includeGenerationMessage(any : OclAny) : String = 
+	'Generating #include-statements'
+/]
+
+
+
+[**
+ * Invocation queries for type-specific validation services
+*/]
+[query private validateEPackage(anEPackage : EPackage) : OclVoid
+	= invoke('ecore4CPP.generator.main.validation.ValidationService', 'validateEPackage(org.eclipse.emf.ecore.EPackage)', Sequence{anEPackage})
+/]
+
+[query private validateEEnumLiteral(anEEnumLiteral : EEnumLiteral) : OclVoid
+	= invoke('ecore4CPP.generator.main.validation.ValidationService', 'validateEEnumLiteral(org.eclipse.emf.ecore.EEnumLiteral)', Sequence{anEEnumLiteral})
+/]
+
+[query private validateEOperation(anEOperation : EOperation) : OclVoid
+	= invoke('ecore4CPP.generator.main.validation.ValidationService', 'validateEOperation(org.eclipse.emf.ecore.EOperation)', Sequence{anEOperation})
+/]
+
+[query private validateEParameter(anEParameter : EParameter) : OclVoid
+	= invoke('ecore4CPP.generator.main.validation.ValidationService', 'validateEParameter(org.eclipse.emf.ecore.EParameter)', Sequence{anEParameter})
+/]
+
+[query private validateEReference(anEReference : EReference) : OclVoid
+	= invoke('ecore4CPP.generator.main.validation.ValidationService', 'validateEReference(org.eclipse.emf.ecore.EReference)', Sequence{anEReference})
+/]
+
+[query private validateEAttribute(anEAttribute : EAttribute) : OclVoid
+	= invoke('ecore4CPP.generator.main.validation.ValidationService', 'validateEAttribute(org.eclipse.emf.ecore.EAttribute)', Sequence{anEAttribute})
+/]
+
+[query private validateEDataType(anEDataType : EDataType) : OclVoid
+	= invoke('ecore4CPP.generator.main.validation.ValidationService', 'validateEDataType(org.eclipse.emf.ecore.EDataType)', Sequence{anEDataType})
+/]
+
+[query private validateEEnum(anEEnum : EEnum) : OclVoid
+	= invoke('ecore4CPP.generator.main.validation.ValidationService', 'validateEEnum(org.eclipse.emf.ecore.EEnum)', Sequence{anEEnum})
+/]
+
+[query private validateEClass(anEClass : EClass) : OclVoid
+	= invoke('ecore4CPP.generator.main.validation.ValidationService', 'validateEClass(org.eclipse.emf.ecore.EClass)', Sequence{anEClass})
+/]
+
