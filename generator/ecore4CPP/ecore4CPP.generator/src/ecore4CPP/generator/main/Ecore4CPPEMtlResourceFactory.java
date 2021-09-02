@@ -74,7 +74,7 @@ public class Ecore4CPPEMtlResourceFactory extends EMtlResourceFactoryImpl {
 		initializeConfigurationEmtls(resourcePathPrefix);
 		initializeFactoryEmtls(resourcePathPrefix);
 		initializeHelpersEmtls(resourcePathPrefix);
-		initializeImplEmtls(resourcePathPrefix);
+		initializeClassesEmtls(resourcePathPrefix);
 		initializePackageEmtls(resourcePathPrefix);
 		initializePluginEmtls(resourcePathPrefix);
 		initializeValidationEmtls(resourcePathPrefix);
@@ -87,10 +87,9 @@ public class Ecore4CPPEMtlResourceFactory extends EMtlResourceFactoryImpl {
 								"generateAttribute",
 								"generateBehavioralFeatureInvoke",
 								"generateBuildFile",
-								"generateClass",
+								"generateEClass",
 								"generateDatatype",
 								"generateEnum",
-								"generateModel",
 								"generateOperation",
 								"generatePackageHeaderFile",
 								"generatePersistence",
@@ -136,13 +135,14 @@ public class Ecore4CPPEMtlResourceFactory extends EMtlResourceFactoryImpl {
 		generateFilePathMapData(moduleNames, "helpers", resourcePathPrefix);
 	}
 
-	private void initializeImplEmtls(String resourcePathPrefix)
+	private void initializeClassesEmtls(String resourcePathPrefix)
 	{
-		String[] moduleNames = {"generateImplementation",
-								"generateImplementationHeader",
-								"generateImplementationSource"
+		String[] moduleNames = {"generateClass",
+								"generateClassInterfaceHeader",
+								"generateClassImplementationHeader",
+								"generateClassImplementationSource"
 								};
-		generateFilePathMapData(moduleNames, "impl", resourcePathPrefix);
+		generateFilePathMapData(moduleNames, "classes", resourcePathPrefix);
 	}
 	
 	private void initializePackageEmtls(String resourcePathPrefix)
