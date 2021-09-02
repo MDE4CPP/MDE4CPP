@@ -15,9 +15,14 @@
 [module generateEcorePluginInterfaceSource('http://www.eclipse.org/emf/2002/Ecore')]
 
 [import ecore4CPP::generator::main::helper /]
+[import ecore4CPP::generator::main::validation::validation /]
 
-[template public generateEcorePluginInterfaceSource(anPackage : EPackage) {packageName : String = anPackage.name.concat('Plugin'); }]
-[file  (anPackage.generateNamespacePath().concat('/').concat(packageName).concat('.cpp'), false, 'UTF-8')]
+[template public generateEcorePluginInterfaceSource(anPackage : EPackage) {
+	packageName : String = anPackage.name.concat('Plugin'); 
+	fileName : String = anPackage.generateNamespacePath().concat('/').concat(packageName).concat('.cpp');
+}]
+[printInfo(fileGenerationMessage(fileName, 'plugin interface source file'), 2)/]
+[file  (fileName, false, 'UTF-8')]
 
 #include "[anPackage.name/]/[packageName/].hpp"
 #include "[anPackage.name/]/impl/[packageName.concat('Impl')/].hpp"

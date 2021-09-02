@@ -15,6 +15,7 @@
 [module generateEnum('http://www.eclipse.org/emf/2002/Ecore')]
 
 [import ecore4CPP::generator::main::helper /]
+[import ecore4CPP::generator::main::validation::validation /]
 
 [**
  * The documentation of the template generateEnum.
@@ -28,7 +29,12 @@ namespace [anEEnum.generateNamespaceDefinition()/]
 {
 	enum [anEEnum.name/] {
 [for (lit : EEnumLiteral | anEEnum.eLiterals->reject(doNotGenerateEEnumLiteral())->asOrderedSet()->sortedBy(name)) separator (',\n')]
+	[if (lit.doNotGenerateEEnumLiteral())]
+		[printInfo(lit.eEnumLiteralNoGenerationMessage(), 2)/]
+	[else]
+		[printInfo(lit.eEnumLiteralGenerationMessage(), 2)/]
 		[lit.name.toUpperCase()/] = [lit.value.toString()/]
+	[/if]
 [/for]
 	};
 }

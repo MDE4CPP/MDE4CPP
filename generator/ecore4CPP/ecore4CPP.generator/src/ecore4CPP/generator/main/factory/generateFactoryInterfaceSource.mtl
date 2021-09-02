@@ -16,9 +16,14 @@
 
 [import ecore4CPP::generator::main::generateSingleton /]
 [import ecore4CPP::generator::main::helper /]
+[import ecore4CPP::generator::main::validation::validation /]
 
-[template public generateFactoryCpp(anEPackage : EPackage) {packageName : String = anEPackage.name.concat('Factory');}]
-[file  (anEPackage.generateNamespacePath().concat('/').concat(packageName).concat('.cpp'), false, 'UTF-8')]
+[template public generateFactoryCpp(anEPackage : EPackage) {
+	packageName : String = anEPackage.name.concat('Factory');
+	fileName : String = anEPackage.generateNamespacePath().concat('/').concat(packageName).concat('.cpp');
+}]
+[printInfo(fileGenerationMessage(fileName, 'factory interface source file'), 2)/]
+[file (fileName, false, 'UTF-8')]
 #include "[anEPackage.generateNamespacePath()/]/[packageName/].hpp"
 #include "[anEPackage.generateNamespacePath()/]/impl/[packageName.concat('Impl')/].hpp"
 

@@ -14,13 +14,18 @@
  */]
 [module generateFactoryInterface('http://www.eclipse.org/emf/2002/Ecore')]
 
-[import ecore4CPP::generator::main::generateClass /]
+[import ecore4CPP::generator::main::generateEClass /]
 [import ecore4CPP::generator::main::generateSingleton /]
 [import ecore4CPP::generator::main::generateType /]
 [import ecore4CPP::generator::main::helper /]
+[import ecore4CPP::generator::main::validation::validation /]
  
-[template public generateFactoryInterface(anEPackage : EPackage) {packageName : String = anEPackage.name.concat('Factory');}]
-[file (anEPackage.generateNamespacePath().concat('/').concat(packageName).concat('.hpp'), false, 'UTF-8')]
+[template public generateFactoryInterface(anEPackage : EPackage) {
+	packageName : String = anEPackage.name.concat('Factory');
+	fileName : String = anEPackage.generateNamespacePath().concat('/').concat(packageName).concat('.hpp');
+}]
+[printInfo(fileGenerationMessage(fileName, 'factory interface header file'), 2)/]
+[file (fileName, false, 'UTF-8')]
 [startGuard(anEPackage,'Factory')/]
 // namespace macro header include
 #include "[anEPackage.getRootPackage().name/]/[anEPackage.getRootPackage().name/].hpp"

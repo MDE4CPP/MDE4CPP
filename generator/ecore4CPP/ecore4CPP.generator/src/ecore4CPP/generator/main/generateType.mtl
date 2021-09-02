@@ -16,6 +16,7 @@
 
 [import ecore4CPP::generator::main::helper /]
 [import ecore4CPP::generator::main::helpers::keywords /]
+[import ecore4CPP::generator::main::validation::validation /]
 
 
 [template public generateParameterList(aOperation:EOperation) post(trim())]

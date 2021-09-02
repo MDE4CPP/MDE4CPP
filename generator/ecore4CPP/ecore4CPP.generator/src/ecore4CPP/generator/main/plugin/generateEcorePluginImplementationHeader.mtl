@@ -15,9 +15,13 @@
 [module generateEcorePluginImplementationHeader('http://www.eclipse.org/emf/2002/Ecore')]
 
 [import ecore4CPP::generator::main::helper /]
+[import ecore4CPP::generator::main::validation::validation /]
 
-[template public generateEcorePluginImplHeader(aPackage : EPackage)]
-[file (aPackage.generateNamespacePath().concat('/impl/').concat(aPackage.name).concat('PluginImpl.hpp'), false, 'UTF-8')]
+[template public generateEcorePluginImplHeader(aPackage : EPackage) {
+	fileName : String = aPackage.generateNamespacePath().concat('/impl/').concat(aPackage.name).concat('PluginImpl.hpp');
+}]
+[printInfo(fileGenerationMessage(fileName, 'plugin implementation header file'), 2)/]
+[file (fileName, false, 'UTF-8')]
 [startGuard(aPackage,'PluginImpl')/]
 
 // namespace macro header include

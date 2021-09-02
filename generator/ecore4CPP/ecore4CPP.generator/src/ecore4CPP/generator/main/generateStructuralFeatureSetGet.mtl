@@ -22,19 +22,19 @@
 [**
  * eGet Function
 */]
-[template public generateeGetDel(aClass : EClass,impl : Boolean)]
+[template public generateeGetDeclaration(aClass : EClass,impl : Boolean) post(trim())]
 virtual Any eGet(int featureID, bool resolve, bool coreType) const [abstractSufix(impl)/];
 [/template]
 
-[template public generateeIsSetDel(aClass : EClass,impl : Boolean)]
+[template public generateeIsSetDeclaration(aClass : EClass,impl : Boolean) post(trim())]
 virtual bool internalEIsSet(int featureID) const [abstractSufix(impl)/];
 [/template]
 
-[template public generateeSetDel(aClass : EClass,impl : Boolean)]
+[template public generateeSetDeclaration(aClass : EClass,impl : Boolean) post(trim())]
 virtual bool eSet(int featureID, Any newValue) [abstractSufix(impl)/];
 [/template]
 
-[template public generateeGetImpl(aClass : EClass)]
+[template public generateeGetImplementation(aClass : EClass) post(trim())]
 Any [aClass.name.toUpperFirst().concat('Impl')/]::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
@@ -85,14 +85,14 @@ Any [aClass.name.toUpperFirst().concat('Impl')/]::eGet(int featureID, bool resol
 }
 [/template]
 
-[template public generateeIsSetImpl(aClass : EClass)]
+[template public generateeIsSetImplementation(aClass : EClass) post(trim())]
 bool [aClass.name.toUpperFirst().concat('Impl')/]::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
 	[for (struct : EStructuralFeature | aClass.eStructuralFeatures->reject(doNotGenerateEStructuralFeature())->asOrderedSet()->sortedBy(name))]
 		case [struct.metamodelPackageNameForEstructuralFeture(aClass)/]::[struct.getStaticAttributeIDName()/]:
-			return [struct.generateComparison()/]; //[aClass.getMyClassifierID()/][struct.getFeatureID()/]
+			return [struct._generateComparison()/]; //[aClass.getMyClassifierID()/][struct.getFeatureID()/]
 	[/for]
 	}
 	[if (aClass.eSuperTypes->reject(doNotGenerateEClassifier())->isEmpty() and not (aClass.name ='EObject'))]
@@ -117,7 +117,7 @@ bool [aClass.name.toUpperFirst().concat('Impl')/]::internalEIsSet(int featureID)
 }
 [/template]
 
-[template public generateeSetImpl(aClass : EClass)]
+[template public generateeSetImplementation(aClass : EClass) post(trim())]
 bool [aClass.name.toUpperFirst().concat('Impl')/]::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
@@ -199,7 +199,7 @@ bool [aClass.name.toUpperFirst().concat('Impl')/]::eSet(int featureID, Any newVa
 }
 [/template]
 
-[template public generateComparison(anStructFeature : EStructuralFeature) ? (oclIsKindOf(EAttribute) and not eType.requiresAny()) post (trim())]
+[template private _generateComparison(anStructFeature : EStructuralFeature) ? (oclIsKindOf(EAttribute) and not eType.requiresAny()) post (trim())]
 [if (anStructFeature.upperBound <> 1)]
 ![anStructFeature.GetterName()/]()->empty()
 [elseif (eType.oclIsKindOf(EEnum))]
@@ -209,10 +209,10 @@ m_[anStructFeature.name/] ![anStructFeature.oclAsType(EAttribute).generateDefaul
 [/if]
 [/template]
 
-[template public generateComparison(anStructFeature : EStructuralFeature) ? (not oclIsKindOf(EAttribute) and not eType.requiresAny())]
+[template private _generateComparison(anStructFeature : EStructuralFeature) ? (not oclIsKindOf(EAttribute) and not eType.requiresAny())]
 [anStructFeature.GetterName()/]()[if (anStructFeature.oclIsKindOf(EReference))][if(anStructFeature.oclAsType(EReference).isBackReference())].lock()[/if][/if] != [anStructFeature.eType.getDefaultValue()/]
 [/template]
 
-[template public generateComparison(anStructFeature : EStructuralFeature) ? (eType.requiresAny())]
+[template private _generateComparison(anStructFeature : EStructuralFeature) ? (eType.requiresAny())]
 [anStructFeature.GetterName()/]() != nullptr[comment TODO what is the default value of Any?/]
 [/template]

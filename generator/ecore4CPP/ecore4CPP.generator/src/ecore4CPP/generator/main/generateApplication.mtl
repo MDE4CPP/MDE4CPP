@@ -14,17 +14,22 @@
  */]
 [module generateApplication('http://www.eclipse.org/emf/2002/Ecore')]
 
-[import ecore4CPP::generator::main::generateClass /]
+[import ecore4CPP::generator::main::generateEClass /]
 [import ecore4CPP::generator::main::generateBuildFile /]
 [import ecore4CPP::generator::main::generateProjectFiles /]
 [import ecore4CPP::generator::main::generateType /]
 [import ecore4CPP::generator::main::helper /]
+[import ecore4CPP::generator::main::validation::validation /]
 
-[template public generateApplication(aPackage : EPackage) { packageName : String = aPackage.name; }]
+[template public generateApplication(aPackage : EPackage) { 
+	packageName : String = aPackage.name; 
+	fileName : String = '../application/src/main.cpp';
+}]
+[printInfo(fileGenerationMessage(fileName, 'main application source file'), 2)/]
 [comment ------------------------------------------------------------------- /]
 [comment generate main method of application                                 /]
 [comment ------------------------------------------------------------------- /]
-[file ('../application/src/main.cpp', false, 'UTF-8')]
+[file (fileName, false, 'UTF-8')]
 
 #include <iostream>
 

@@ -15,12 +15,13 @@
 [module generatePackageImplementationSource('http://www.eclipse.org/emf/2002/Ecore')]
 
 [import ecore4CPP::generator::main::generateAttribute /]
-[import ecore4CPP::generator::main::generateClass /]
+[import ecore4CPP::generator::main::generateEClass /]
 [import ecore4CPP::generator::main::generateDatatype /]
 [import ecore4CPP::generator::main::generateOperation /]
 [import ecore4CPP::generator::main::generateReference /]
 [import ecore4CPP::generator::main::helper /]
 [import ecore4CPP::generator::main::package::generatePackageHelper /]
+[import ecore4CPP::generator::main::validation::validation /]
 
 [query private metaModelIncludes(anEPackage : EPackage) : Sequence(EPackage) = Sequence{anEPackage.eAllContents(EClass).eAllSuperTypes.getRootPackage(),anEPackage.eAllContents(EStructuralFeature).eType.getRootPackage(),anEPackage.eAllContents(EParameter).eType.getRootPackage()}->flatten() /]
 
@@ -29,8 +30,12 @@
 [query private getClassifierElementTypes(operations : Sequence(EOperation) ) : Sequence(EPackage) = (operations->select(op : EOperation | not op.eType.oclIsUndefined() and op.eType.oclIsKindOf(EClassifier)).eType.ePackage)->union(operations->select(op : EOperation | not op.eType.oclIsUndefined() and op.eType.oclIsKindOf(EClass)).eParameters.eType.ePackage)/]
 
 
-[template public generatePackageImplSource(anEPackage : EPackage) { packageName : String = anEPackage.name.concat('PackageImpl'); }]
-[file (anEPackage.generateNamespacePath().concat('/impl/').concat(packageName).concat('.cpp'), false, 'UTF-8')]
+[template public generatePackageImplSource(anEPackage : EPackage) { 
+	packageName : String = anEPackage.name.concat('PackageImpl'); 
+	fileName : String = anEPackage.generateNamespacePath().concat('/impl/').concat(packageName).concat('.cpp');
+}]
+[printInfo(fileGenerationMessage(fileName, 'package implementation source file'), 2)/]
+[file (fileName, false, 'UTF-8')]
 #include "[anEPackage.generateNamespacePath()/]/impl/[packageName/].hpp"
 
 #include <cassert>

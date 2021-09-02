@@ -15,9 +15,14 @@
 [module generateEcorePluginInterfaceHeader('http://www.eclipse.org/emf/2002/Ecore')]
 
 [import ecore4CPP::generator::main::helper /]
+[import ecore4CPP::generator::main::validation::validation /]
 
-[template public generateEcorePluginInterfaceHeader(aPackage : EPackage) {packageName : String = aPackage.name.concat('Plugin');}]
-[file (aPackage.generateNamespacePath().concat('/').concat(packageName).concat('.hpp'), false, 'UTF-8')]
+[template public generateEcorePluginInterfaceHeader(aPackage : EPackage) {
+	packageName : String = aPackage.name.concat('Plugin');
+	fileName : String = aPackage.generateNamespacePath().concat('/').concat(packageName).concat('.hpp');
+}]
+[printInfo(fileGenerationMessage(fileName, 'plugin interface header file'), 2)/]
+[file (fileName, false, 'UTF-8')]
 [startGuard(aPackage,'Plugin')/]
 
 // namespace macro header include

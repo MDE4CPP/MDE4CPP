@@ -19,36 +19,50 @@
 [import ecore4CPP::generator::main::helper /]
 [import ecore4CPP::generator::main::validation::validation /]
 
-[**
- * The documentation of the template generateElement.
- * @param anEReference
- */]
-[template public generateUnionGetterCpp(aClass : EClass)]
-[aClass.getUnionsReference()->reject(doNotGenerateEStructuralFeature())->sortedBy(name).generateUnionGetterCpp(aClass)/]
 
+[***###########################################################################################
+ * Section for generating the declarations of Getter methods for EReference elements that are Unions in the generated class header files (interface as well as implementation)
+*/]
+[template public generateUnionGetterDeclaration(aUnionReference : EReference, impl : Boolean) post(trim())]
+[if (aUnionReference.doNotGenerateEStructuralFeature())]
+	[printInfo(aUnionReference.eStructuralFeatureNoGenerationMessage(), 4)/]
+[else]
+[aUnionReference._generateUnionGetterDeclaration(impl)/]
+[/if]
 [/template]
 
-[template public generateUnionGetterCpp(aReference : EReference,aClass: EClass) ? (hasGetter() and aReference.isUnion() and (not aReference.doNotGenerateEModelElement()))]
-[aReference.generateReferenceType()/] [aClass.name.toUpperFirst()/]Impl::[aReference.GetterName()/]() const
+[template private _generateUnionGetterDeclaration(aUnionReference : EReference, impl : EBoolean) ? (hasGetter() and isUnion()) post(trim())]
+[comment "if not impl" so the warning message will only be printed once /]
+[if ((not impl) and aUnionReference.eReferenceType.doNotGenerateEClassifier())]
+[printWarning(aUnionReference.eReferenceTypeNoGenerationMessage(), 'ecore4CPP::generator::main::generateUnion:generateUnionGetterDeclaretaion', 2)/]
+[/if]
+[printInfo(aUnionReference.eStructuralFeatureGetterGenerationMessage(), 4)/]
+[aUnionReference.generateDocumentation()/]
+virtual [aUnionReference.generateReferenceType()/] [aUnionReference.GetterName()/]() const [abstractSufix(impl)/];
+[/template]
+
+[***###########################################################################################
+ * Section for generating the implementations of Getter methods for EReference elements that are Unions in the generated class header files (interface as well as implementation)
+*/]
+[template public generateUnionGetterImplementation(aUnionReference : EReference, anEClass: EClass) post(trim())]
+[if (aUnionReference.doNotGenerateEStructuralFeature())]
+	[printInfo(aUnionReference.eStructuralFeatureNoGenerationMessage(), 4)/]
+[else]
+[aUnionReference._generateUnionGetterImplementation(anEClass)/]
+[/if]
+[/template]
+
+[template private _generateUnionGetterImplementation(aUnionReference : EReference, anEClass: EClass) ? (hasGetter() and aUnionReference.isUnion()) post(trim())]
+[printInfo(aUnionReference.eStructuralFeatureGetterGenerationMessage(), 4)/]
+[aUnionReference.generateReferenceType()/] [anEClass.name.toUpperFirst()/]Impl::[aUnionReference.GetterName()/]() const
 {
-[if (not (aReference.upperBound = 1))]
-	if(m_[aReference.name/] == nullptr)
+[if (not (aUnionReference.upperBound = 1))]
+	if(m_[aUnionReference.name/] == nullptr)
 	{
-		[aReference.generateReferenceInit()/]
-		[aReference.InitReferences()/]
+		[aUnionReference.generateReferenceInit()/]
+		[aUnionReference.InitReferences()/]
 	}
 [/if]
-	return m_[aReference.name/];
+	return m_[aUnionReference.name/];
 }
-
-
-[/template]
-
-[template public generateUnionGetterDeclaretaion(aReference : EReference, impl : EBoolean)? (hasGetter() and isUnion() and (not doNotGenerateEModelElement()))]
-[comment "if not impl" so the warning message will only be printed once /]
-[if ((not impl) and aReference.eReferenceType.doNotGenerateEClassifier())]
-[printWarning('eReferenceType ' + aReference.eReferenceType.generateNamespaceDefinition() + '::' + aReference.eReferenceType.name + ' is configured as doNotGenerate for instance of EReference: ' + aReference.generateNamespaceDefinition(), 'ecore4CPP::generator::main::generateUnion:generateUnionGetterDeclaretaion')/]
-[/if]
-[aReference.generateDocumentation()/]
-virtual [aReference.generateReferenceType()/] [aReference.GetterName()/]() const [abstractSufix(impl)/];
 [/template]

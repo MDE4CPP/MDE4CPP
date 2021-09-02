@@ -15,17 +15,17 @@
 [module generatePersistence('http://www.eclipse.org/emf/2002/Ecore')]
 
 [import ecore4CPP::generator::main::generateAttribute /]
-[import ecore4CPP::generator::main::generateClass /]
+[import ecore4CPP::generator::main::generateEClass /]
 [import ecore4CPP::generator::main::generateType /]
 [import ecore4CPP::generator::main::helper /]
 [import ecore4CPP::generator::main::helpers::keywords /]
 
 
-[template public generatePersistenceNSPath(path : EBoolean)]
+[template public generatePersistenceNSPath(path : EBoolean) post(trim())]
 [if(path)]persistence/interfaces[else]persistence::interfaces[/if]
 [/template]
 
-[template public generatePersistenceForwardDeclarations(aClass : EClass)]
+[template public generatePersistenceForwardDeclarations(aClass : EClass) post(trim())]
 #include <map> // used for Persistence
 #include <vector> // used for Persistence
 namespace persistence
@@ -43,7 +43,7 @@ namespace [aClass.getRootPackage().name/]
 }
 [/template]
 
-[template public generatePersitsenceInclude(aClass : EClass) ]
+[template public generatePersitsenceInclude(aClass : EClass) post(trim())]
 #include "[generatePersistenceNSPath(true)/]/XLoadHandler.hpp" // used for Persistence
 #include "[generatePersistenceNSPath(true)/]/XSaveHandler.hpp" // used for Persistence
 
@@ -55,39 +55,40 @@ namespace [aClass.getRootPackage().name/]
 [/let]																																	
 [/template]
 
-[template public generatePersistenceDecl(aClass : EClass, impl : Boolean) ]
-[generatePersistenceLoadDecl(aClass, impl)/]
-[generatePersistenceResolveReferenceDecl(aClass, impl)/]
-[generatePersistenceSaveDecl(aClass, impl)/]
+[template public generatePersistenceFunctionsDeclarations(aClass : EClass, impl : Boolean) post(trim())]
+[generatePersistenceLoadDeclaration(aClass, impl)/]
+[generatePersistenceResolveReferenceDeclaration(aClass, impl)/]
+[generatePersistenceSaveDeclaration(aClass, impl)/]
 [/template]
 
-[template public generatePersistenceLoadDecl(aClass: EClass, impl : EBoolean)]
+[template public generatePersistenceLoadDeclaration(aClass: EClass, impl : EBoolean) post(trim())]
 virtual void load(std::shared_ptr<[generatePersistenceNSPath(false)/]::XLoadHandler> loadHandler) [abstractSufix(impl)/];
 [if (impl)]
 virtual void loadAttributes(std::shared_ptr<[generatePersistenceNSPath(false)/]::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 virtual void loadNode(std::string nodeName, std::shared_ptr<[generatePersistenceNSPath(false)/]::XLoadHandler> loadHandler);
 [/if]
 [/template]
-[template public generatePersistenceResolveReferenceDecl(aClass: EClass, impl : EBoolean)]
+
+[template public generatePersistenceResolveReferenceDeclaration(aClass: EClass, impl : EBoolean) post(trim())]
 virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<[needNamespace(aClass.ePackage, 'EObject')/]> > references) [abstractSufix(impl)/];
 [/template]
-[template public generatePersistenceSaveDecl(aClass: EClass, impl : EBoolean)]
+
+[template public generatePersistenceSaveDeclaration(aClass: EClass, impl : EBoolean) post(trim())]
 virtual void save(std::shared_ptr<[generatePersistenceNSPath(false)/]::XSaveHandler> saveHandler) const [abstractSufix(impl)/];
 [if (impl)]
 virtual void saveContent(std::shared_ptr<[generatePersistenceNSPath(false)/]::XSaveHandler> saveHandler) const;
 [/if]
 [/template]
 
+[template public generatePersistenceFunctionsImplementations(aClass : EClass) post(trim())]
+[_generatePersistenceLoadImplementation(aClass)/]
 
-[template public generatePersistenceImpl(aClass : EClass) ]
-[generatePersistenceLoadImpl(aClass)/]
+[_generatePersistenceResolveReferenceImplementation(aClass)/]
 
-[generatePersistenceResolveReferenceImpl(aClass)/]
-
-[generatePersistenceSaveImpl(aClass)/]
+[_generatePersistenceSaveImplementation(aClass)/]
 [/template]
 
-[template public generatePersistenceLoadImpl(aClass: EClass)]
+[template private _generatePersistenceLoadImplementation(aClass: EClass) post(trim())]
 void [aClass.name.concat('Impl')/]::load(std::shared_ptr<[generatePersistenceNSPath(false)/]::XLoadHandler> loadHandler)
 {
 	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
@@ -344,7 +345,7 @@ void [aClass.name.concat('Impl')/]::loadNode(std::string nodeName, std::shared_p
 }
 [/template]
 
-[template public generatePersistenceResolveReferenceImpl(aClass: EClass)]
+[template private _generatePersistenceResolveReferenceImplementation(aClass: EClass) post(trim())]
 void [aClass.name.concat('Impl')/]::resolveReferences(const int featureID, std::vector<std::shared_ptr<[needNamespace(aClass.ePackage, 'EObject')/]> > references)
 {
 [let refList : OrderedSet(EReference) = aClass.eReferences->select(eRef: EReference|(eRef.containment = false) and (eRef.changeable = true))->reject(doNotGenerateEStructuralFeature())->asOrderedSet()->sortedBy(name)]
@@ -388,24 +389,24 @@ void [aClass.name.concat('Impl')/]::resolveReferences(const int featureID, std::
 }
 [/template]
 
-[template private generateSuperTypesCalling(aClass : EClass, classList : Set(EClass))]
+[template private _generateSuperTypesCalling(aClass : EClass, classList : Set(EClass)) post(trim())]
 [for (sClass : EClass | classList->removeAll(classList.eAllSuperTypes)->reject(doNotGenerateEClassifier())->asOrderedSet()->sortedBy(name))]
 [ClassWithNamespace(aClass,sClass)/]Impl::saveContent(saveHandler);
 [/for]
 
 [if (classList.eSuperTypes->reject(doNotGenerateEClassifier())->size() > 0)]
-[aClass.generateSuperTypesCalling(classList.eSuperTypes->reject(doNotGenerateEClassifier())->asSet())/]
+[aClass._generateSuperTypesCalling(classList.eSuperTypes->reject(doNotGenerateEClassifier())->asSet())/]
 [else]
 ecore::EObjectImpl::saveContent(saveHandler);
 [/if]
 [/template]
 
-[template public generatePersistenceSaveImpl(aClass: EClass)]
+[template private _generatePersistenceSaveImplementation(aClass: EClass) post(trim())]
 void [aClass.name.concat('Impl')/]::save(std::shared_ptr<[generatePersistenceNSPath(false)/]::XSaveHandler> saveHandler) const
 {
 	saveContent(saveHandler);
 
-	[aClass.generateSuperTypesCalling(aClass.eSuperTypes->reject(doNotGenerateEClassifier())->asSet())/]
+	[aClass._generateSuperTypesCalling(aClass.eSuperTypes->reject(doNotGenerateEClassifier())->asSet())/]
 }
 
 void [aClass.name.concat('Impl')/]::saveContent(std::shared_ptr<[generatePersistenceNSPath(false)/]::XSaveHandler> saveHandler) const

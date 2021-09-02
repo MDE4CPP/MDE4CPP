@@ -17,9 +17,14 @@
 [import ecore4CPP::generator::main::generateSingleton /]
 [import ecore4CPP::generator::main::helper /]
 [import ecore4CPP::generator::main::package::generatePackageHelper /]
+[import ecore4CPP::generator::main::validation::validation /]
 
-[template public generatePackageInterfaceSource(anEPackage : EPackage) {packageName : String = anEPackage.name.concat('Package'); }]
-[file (anEPackage.generateNamespacePath().concat('/').concat(packageName).concat('.cpp'), false, 'UTF-8')]
+[template public generatePackageInterfaceSource(anEPackage : EPackage) {
+	packageName : String = anEPackage.name.concat('Package');
+	fileName : String = anEPackage.generateNamespacePath().concat('/').concat(packageName).concat('.cpp');
+}]
+[printInfo(fileGenerationMessage(fileName, 'package interface source file'), 2)/]
+[file (fileName, false, 'UTF-8')]
 #include "[anEPackage.generateNamespacePath()/]/[packageName/].hpp"
 #include "[anEPackage.generateNamespacePath()/]/impl/[packageName.concat('Impl')/].hpp"
 

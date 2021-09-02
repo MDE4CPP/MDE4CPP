@@ -14,7 +14,7 @@
  */]
 [module generateReference('http://www.eclipse.org/emf/2002/Ecore')]
 
-[import ecore4CPP::generator::main::generateClass /]
+[import ecore4CPP::generator::main::generateEClass /]
 [import ecore4CPP::generator::main::generateType /]
 [import ecore4CPP::generator::main::helper /]
 [import ecore4CPP::generator::main::helpers::keywords /]
@@ -24,24 +24,37 @@
 [query public hasSetter(anEReference : EReference) : EBoolean = anEReference.changeable and anEReference.upperBound=1 and not hasKey(keyNoSetter()) /]
 [query public hasGetter(anEReference : EReference) : EBoolean = not hasKey(keyNoGetter()) /]
 
-[template public generateReferenceAccessorsDeclaration(anEReference : EReference, impl : EBoolean)]
-[anEReference.generateReferenceGetterDeclaretaion(impl)/]
-[anEReference.generateReferenceSetterDeclaretaion(impl)/]
+[***###########################################################################################
+ * Section for generating the declarations of Getter & Setter methods for EReference elements in the generated class header files (interface as well as implementation)
+*/]
+[template public generateReferenceAccessorsDeclaration(anEReference : EReference, impl : Boolean) post(trim())]
+[if (anEReference.doNotGenerateEStructuralFeature())]
+	[printInfo(anEReference.eStructuralFeatureNoGenerationMessage(), 4)/]
+[else]
+[anEReference._generateReferenceAccessorsDeclaration(impl)/]
+[/if]
+[/template]
+
+[template private _generateReferenceAccessorsDeclaration(anEReference : EReference, impl : EBoolean) post(trim())]
+[anEReference._generateReferenceGetterDeclaretaion(impl)/]
+[anEReference._generateReferenceSetterDeclaretaion(impl)/]
 [for (redefinedElement : EObject | anEReference.getAllRedefinedElements())]
 [if (redefinedElement.oclIsKindOf(EReference))]
 [let redefinedEReference : EReference = redefinedElement.oclAsType(EReference)]
 [if(redefinedEReference.hasSetter() and not (anEReference.eContainingClass = redefinedEReference.eContainingClass))]
 /*Additional Setter for '[redefinedEReference.eContainingClass.name/]::[redefinedEReference.name/]' redefined by reference '[anEReference.name/]'*/
-[redefinedEReference.generateReferenceSetterDeclaretaion(impl)/]
+[redefinedEReference._generateReferenceSetterDeclaretaion(impl)/]
 [/if][/let][/if][/for]
 [/template]
 
-[template public generateReferenceGetterDeclaretaion(anEReference : EReference, impl : EBoolean)? (hasGetter() and (not isUnion()) )]
+[template private _generateReferenceGetterDeclaretaion(anEReference : EReference, impl : EBoolean)? (hasGetter() and (not isUnion())) post(trim())]
+[printInfo(anEReference.eStructuralFeatureGetterGenerationMessage(), 4)/]
 [anEReference.generateDocumentation()/]
 virtual [anEReference.generateReferenceType()/] [anEReference.GetterName()/]() const [abstractSufix(impl)/];
 [/template]
 
-[template public generateReferenceSetterDeclaretaion(anEReference : EReference, impl : EBoolean) ? ( hasSetter() )]
+[template private _generateReferenceSetterDeclaretaion(anEReference : EReference, impl : EBoolean) ? ( hasSetter()) post(trim())]
+[printInfo(anEReference.eStructuralFeatureSetterGenerationMessage(), 4)/]
 [anEReference.generateDocumentation()/]
 virtual void [anEReference.SetterName()/]([if (not anEReference.eGenericType.eClassifier.oclIsKindOf(EDataType))]
 [anEReference.generateReferenceType()/][else]
@@ -49,14 +62,28 @@ virtual void [anEReference.SetterName()/]([if (not anEReference.eGenericType.eCl
 ) [abstractSufix(impl)/];
 [/template]
 
-[template public generateReferenceProtectedMember(anEReference : EReference)]
+[***###########################################################################################
+ * Section for generating the declarations of protected members for EReference elements in the generated class header file (interface)
+*/]
+[template public generateReferenceProtectedMember(anEReference : EReference) post(trim())]
+[if (anEReference.doNotGenerateEStructuralFeature())]
+	[printInfo(anEReference.eStructuralFeatureNoGenerationMessage(), 4)/]
+[else]
+[anEReference._generateReferenceProtectedMember()/]
+[/if]
+[/template]
+
+[template private _generateReferenceProtectedMember(anEReference : EReference) post(trim())]
 [if (anEReference.eReferenceType.doNotGenerateEClassifier())]
-[printWarning('eReferenceType ' + anEReference.eReferenceType.generateNamespaceDefinition() + '::' + anEReference.eReferenceType.name + ' is configured as doNotGenerate for instance of EReference: ' + anEReference.generateNamespaceDefinition(), 'ecore4CPP::generator::main::generateReference:generateProtectedReference')/]
+[printWarning(anEReference.eReferenceTypeNoGenerationMessage(), 'ecore4CPP::generator::main::generateReference:generateProtectedReference', 4)/]
 [/if]
 [anEReference.generateDocumentation()/]
 [if(hasKey(keyQualify()))][valueKey(keyQualify())/] [/if][if(not (anEReference.upperBound = 1))]mutable [/if][anEReference.generateReferenceType()/] m_[anEReference.name/];
 [/template]
 
+[***###########################################################################################
+ * Section for generating the initializations of protected members for EReference elements
+*/]
 [template public generateReferenceInit(eReference : EReference)? (not(eReference.upperBound=1))]
 [if(eReference.isSubsetUnion())]
 /*SubsetUnion*/
@@ -98,28 +125,34 @@ m_[eReference.name/].reset(new [eReference.generateReferenceType(false)/]());
 [/template]
 
 
-[***
- * Section for the Reference cpp implementation
+[***###########################################################################################
+ * Section for generating the implementation of Getter & Setter methods for EReference elements in the generated class source file
 */]
+[template public generateReferenceAccessorsImplementation(anEReference : EReference) post(trim())]
+[if (anEReference.doNotGenerateEStructuralFeature())]
+	[printInfo(anEReference.eStructuralFeatureNoGenerationMessage(), 4)/]
+[else]
+[anEReference._generateReferenceAccessorsImplementation()/]
+[/if]
+[/template]
 
-[template public generateReferenceCpp(anEReference : EReference) ? (not doNotGenerateEModelElement())]
-/*
-Getter & Setter for reference [anEReference.name/]
-*/
-[anEReference.generateReferenceGetterCpp()/]
-[anEReference.generateReferenceSetterCpp()/]
+[template private _generateReferenceAccessorsImplementation(anEReference : EReference) post(trim())]
+/* Getter & Setter for reference [anEReference.name/] */
+[anEReference._generateReferenceGetterImplementation()/]
+[anEReference._generateReferenceSetterImplementation()/]
 [comment additional setters for redefined references are only generated for upperBound=1, since no setters are generated for * multiplicity references /]
 [if (anEReference.upperBound = 1)]
-[for (redefinedElement : EObject | anEReference.getAllRedefinedElements())][if (redefinedElement.oclIsKindOf(EReference))]
-[let redefinedEReference : EReference = redefinedElement.oclAsType(EReference)]
-[if(redefinedEReference.hasSetter() and not (anEReference.eContainingClass = redefinedEReference.eContainingClass))]
+	[for (redefinedElement : EObject | anEReference.getAllRedefinedElements())][if (redefinedElement.oclIsKindOf(EReference))]
+	[let redefinedEReference : EReference = redefinedElement.oclAsType(EReference)]
+		[if(redefinedEReference.hasSetter() and not (anEReference.eContainingClass = redefinedEReference.eContainingClass))]
 /*Additional Setter for redefined reference '[redefinedEReference.eContainingClass.name/]::[redefinedEReference.name/]'*/
-[redefinedEReference.generateRedefinedReferenceSetterCpp(anEReference)/]
+[redefinedEReference._generateRedefinedReferenceSetterImplementation(anEReference)/]
 [/if][/let][/if][/for]
 [/if]
 [/template]
 
-[template private generateReferenceGetterCpp(anEReference : EReference) ? (hasGetter() and (not isUnion()))]
+[template private _generateReferenceGetterImplementation(anEReference : EReference) ? (hasGetter() and (not isUnion())) post(trim())]
+[printInfo(anEReference.eStructuralFeatureGetterGenerationMessage(), 4)/]
 [anEReference.generateReferenceType()/] [anEReference.eContainingClass.name.toUpperFirst()/]Impl::[anEReference.GetterName()/]() const
 {
 [if (hasKey(keyGetterBody()))]
@@ -166,7 +199,8 @@ Getter & Setter for reference [anEReference.name/]
 }
 [/template]
 
-[template private generateReferenceSetterCpp(anEReference : EReference) ? (hasSetter())]
+[template private _generateReferenceSetterImplementation(anEReference : EReference) ? (hasSetter()) post(trim())]
+[printInfo(anEReference.eStructuralFeatureSetterGenerationMessage(), 4)/]
 void [anEReference.eContainingClass.name.toUpperFirst()/]Impl::[anEReference.SetterName()/]([anEReference.generateReferenceType()/] _[anEReference.name/])
 {
 	[if (hasKey(keySetterBody()))]
@@ -175,12 +209,12 @@ void [anEReference.eContainingClass.name.toUpperFirst()/]Impl::[anEReference.Set
 	//end of body
 	[else]
     m_[anEReference.name/] = _[anEReference.name/];
-	[anEReference.generateRedefinedReferencesSet()/]
+	[anEReference._generateRedefinedReferencesSetterCalls()/]
 	[/if]
 }
 [/template]
 
-[template private generateRedefinedReferencesSet(anEReference : EReference)]
+[template private _generateRedefinedReferencesSetterCalls(anEReference : EReference) post(trim())]
 [for (redefinedElement : EObject | anEReference.getDirectlyRedefinedElements())]
 [if (redefinedElement.oclIsKindOf(EReference))]
 [let redefinedEReference : EReference = redefinedElement.oclAsType(EReference)]
@@ -192,11 +226,11 @@ void [anEReference.eContainingClass.name.toUpperFirst()/]Impl::[anEReference.Set
 m_[redefinedEReference.name/] = this->[if(anEReference.hasGetter())][anEReference.GetterName()/]()[else]m_[anEReference.name/][/if][if(anEReference.isBackReference())].lock()[/if];
 [/if]
 [comment recursive call to set possibly redefined references of redefinedEReference --> would normally be handled by calling the setter of redefinedEReference, but we do not have a setter here /]
-[redefinedEReference.generateRedefinedReferencesSet()/]
+[redefinedEReference._generateRedefinedReferencesSetterCalls()/]
 [/if][/let][/if][/for]
 [/template]
 
-[template private generateRedefinedReferenceSetterCpp(redefinedEReference : EReference, anEReference : EReference) ? (anEReference.hasSetter() and redefinedEReference.hasSetter())]
+[template private _generateRedefinedReferenceSetterImplementation(redefinedEReference : EReference, anEReference : EReference) ? (anEReference.hasSetter() and redefinedEReference.hasSetter()) post(trim())]
 void [anEReference.eContainingClass.name.toUpperFirst()/]Impl::[redefinedEReference.SetterName()/]([redefinedEReference.generateReferenceType()/] _[redefinedEReference.name/])
 {
 	[if(redefinedEReference.isBackReference())]

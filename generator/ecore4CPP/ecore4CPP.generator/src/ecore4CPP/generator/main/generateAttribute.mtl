@@ -14,7 +14,7 @@
  */]
 [module generateAttribute('http://www.eclipse.org/emf/2002/Ecore')]
 
-[import ecore4CPP::generator::main::generateClass /]
+[import ecore4CPP::generator::main::generateEClass /]
 [import ecore4CPP::generator::main::generateType /]
 [import ecore4CPP::generator::main::helper /]
 [import ecore4CPP::generator::main::helpers::keywords /]
@@ -25,71 +25,93 @@
 [query public hasGetter(anEAttribute : EAttribute) : EBoolean = not hasKey(keyNoGetter()) /]
 
 [***###########################################################################################
- * Section for model and class implementation of an Attribute
- */]
-
-[query public getDefaultValue(anEAttribute : EAttribute) : String = if (defaultValueLiteral->notEmpty()) then defaultValueLiteral else eType.getDefaultValue() endif/]
-
-[template public generateDefaultValue(anEAttribute : EAttribute) post (trim())]
-[if (anEAttribute.eType.oclIsTypeOf(EEnum))]
-	[if (anEAttribute.defaultValueLiteral->notEmpty())]
-		= [anEAttribute.eType.name/]::[anEAttribute.defaultValueLiteral.toUpperCase()/]
-	[else]
-		= [anEAttribute.eType.name/]::[anEAttribute.eType.oclAsType(EEnum).eLiterals->first().name.toUpperCase()/] 
-	[/if]
+ * Section for generating the declarations of Getter & Setter methods for EAttribute elements in the generated class header files (interface as well as implementation)
+*/]
+[template public generateAttributeAccessorsDeclaration(anEAttribute : EAttribute, impl : Boolean) post(trim())]
+[if (anEAttribute.doNotGenerateEStructuralFeature())]
+	[printInfo(anEAttribute.eStructuralFeatureNoGenerationMessage(), 4)/]
 [else]
-	= [anEAttribute.getDefaultValue()/]
+[anEAttribute._generateAttributeAccessorsDeclaration(impl)/]
 [/if]
 [/template]
 
-[template public generateAttributeAccessorsDeclaration(anEAttribute : EAttribute, impl : Boolean)]
-[anEAttribute.generateAttributeGetterDecleration(impl)/]
-[anEAttribute.generateAttributeSetterDecleration(impl)/]
+[template private _generateAttributeAccessorsDeclaration(anEAttribute : EAttribute, impl : Boolean) post(trim())]
+[anEAttribute._generateAttributeGetterDecleration(impl)/]
+[anEAttribute._generateAttributeSetterDecleration(impl)/]
 [for (redefinedElement : EObject | anEAttribute.getAllRedefinedElements())]
 	[if (redefinedElement.oclIsKindOf(EAttribute))]
 	[let redefinedEAttribute : EAttribute = redefinedElement.oclAsType(EAttribute)]
 		[if (redefinedEAttribute.hasSetter() and not (anEAttribute.eContainingClass = redefinedEAttribute.eContainingClass) and not (redefinedEAttribute.doNotGenerateEStructuralFeature()))]
 /*Additional Setter for '[redefinedEAttribute.eContainingClass.name/]::[redefinedEAttribute.name/]' redefined by attribute '[anEAttribute.name/]'*/
-[redefinedEAttribute.generateAttributeSetterDecleration(impl)/]
+[redefinedEAttribute._generateAttributeSetterDecleration(impl)/]
 [/if][/let][/if][/for]
 [/template]
 
-[template public generateAttributeProtectedMember(anEAttribute : EAttribute)]
+[template private _generateAttributeGetterDecleration(anEAttribute : EAttribute, impl : Boolean) ? (hasGetter()) post(trim())]
+[printInfo(anEAttribute.eStructuralFeatureGetterGenerationMessage(), 4)/]
+[anEAttribute.generateDocumentation()/] 
+virtual [anEAttribute.generateStructuralFeatureType(true)/] [anEAttribute.GetterName()/]() const [abstractSufix(impl)/];
+[/template]
+
+[template private _generateAttributeSetterDecleration(anEAttribute : EAttribute, impl : Boolean) ? ((hasSetter() or(impl and hasImplSetterOnly()))) post(trim())]
+[printInfo(anEAttribute.eStructuralFeatureSetterGenerationMessage(), 4)/]
+[anEAttribute.generateDocumentation()/] 
+virtual void [anEAttribute.SetterName()/] ([anEAttribute.generateStructuralFeatureType(true)/] _[anEAttribute.name/])[abstractSufix(impl)/];
+[/template]
+
+[***###########################################################################################
+ * Section for generating the declarations/initializations of protected members for EAttribute elements in the generated class header file (interface)
+*/]
+[template public generateAttributeProtectedMember(anEAttribute : EAttribute) post(trim())]
+[if (anEAttribute.doNotGenerateEStructuralFeature())]
+	[printInfo(anEAttribute.eStructuralFeatureNoGenerationMessage(), 4)/]
+[else]
+[anEAttribute._generateAttributeProtectedMember()/]
+[/if]
+[/template]
+
+[template private _generateAttributeProtectedMember(anEAttribute : EAttribute) post(trim())]
 [if (anEAttribute.eAttributeType.doNotGenerateEClassifier())]
-[printWarning('eAttributeType ' + anEAttribute.eAttributeType.generateNamespaceDefinition() + '::' + anEAttribute.eAttributeType.name + ' is configured as doNotGenerate for instance of EAttribute: ' + anEAttribute.generateNamespaceDefinition(), 'ecore4CPP::generator::main::generateAttribute:generateAttributeProtectedMember')/]
+[printWarning(anEAttribute.eAttributeTypeNoGenerationMessage(), 'ecore4CPP::generator::main::generateAttribute:generateAttributeProtectedMember', 2)/]
 [/if]
 [anEAttribute.generateDocumentation()/]
 [if (anEAttribute.upperBound <> 1)]
 [if(hasKey(keyQualify()))][valueKey(keyQualify())/] [/if]mutable [anEAttribute.generateStructuralFeatureType(true)/] m_[anEAttribute.name/]; 
 [else]
-[if(hasKey(keyQualify()))][valueKey(keyQualify())/] [/if][anEAttribute.generateStructuralFeatureType(true)/] m_[anEAttribute.name/] [generateDefaultValue()/];
+[if(hasKey(keyQualify()))][valueKey(keyQualify())/] [/if][anEAttribute.generateStructuralFeatureType(true)/] m_[anEAttribute.name/][generateDefaultValue()/];
 [/if]
 [/template]
 
-[template public generateAttributeInit(anEAttribute : EAttribute) ? (not(anEAttribute.upperBound = 1))]
-m_[anEAttribute.name/].reset(new [anEAttribute.generateStructuralFeatureType(false)/]());
+[template public generateDefaultValue(anEAttribute : EAttribute) post (trim())]
+[if (anEAttribute.eType.oclIsTypeOf(EEnum))]
+	[if (anEAttribute.defaultValueLiteral->notEmpty())]
+ = [anEAttribute.eType.name/]::[anEAttribute.defaultValueLiteral.toUpperCase()/]
+	[else]
+ = [anEAttribute.eType.name/]::[anEAttribute.eType.oclAsType(EEnum).eLiterals->first().name.toUpperCase()/] 
+	[/if]
+[else]
+ = [anEAttribute.getDefaultValue()/]
+[/if]
 [/template]
 
-[template public generateAttributeGetterDecleration(anEAttribute : EAttribute, impl : Boolean) ? (hasGetter())]
-[anEAttribute.generateDocumentation()/] 
-virtual [anEAttribute.generateStructuralFeatureType(true)/] [anEAttribute.GetterName()/]() const [abstractSufix(impl)/];
-[/template]
+[query public getDefaultValue(anEAttribute : EAttribute) : String = if (defaultValueLiteral->notEmpty()) then defaultValueLiteral else eType.getDefaultValue() endif/]
 
-[template public generateAttributeSetterDecleration(anEAttribute : EAttribute, impl : Boolean) ? ((hasSetter() or(impl and hasImplSetterOnly())) )]
-[anEAttribute.generateDocumentation()/] 
-virtual void [anEAttribute.SetterName()/] ([anEAttribute.generateStructuralFeatureType(true)/] _[anEAttribute.name/])[abstractSufix(impl)/];
-[/template]
 
-[***
- * Section for the Attribute cpp implementation
+[***###########################################################################################
+ * Section for generating the implementation of Getter & Setter methods for EAttribute elements in the generated class source file
 */]
+[template public generateAttributeAccessorsImplementation(anEAttribute : EAttribute) post(trim())]
+[if (anEAttribute.doNotGenerateEStructuralFeature())]
+	[printInfo(anEAttribute.eStructuralFeatureNoGenerationMessage(), 4)/]
+[else]
+[anEAttribute._generateAttributeAccessorsImplementation()/]
+[/if]
+[/template]
 
-[template public generateAttributeCpp(anEAttribute : EAttribute)]
-/*
-Getter & Setter for attribute [anEAttribute.name/]
-*/
-[anEAttribute.generateAttributeGetterImplementationCpp()/]
-[anEAttribute.generateAttributeSetterImplementationCpp()/]
+[template private _generateAttributeAccessorsImplementation(anEAttribute : EAttribute) post(trim())]
+/* Getter & Setter for attribute [anEAttribute.name/] */
+[anEAttribute._generateAttributeGetterImplementation()/]
+[anEAttribute._generateAttributeSetterImplementation()/]
 [comment additional setters for redefined attributes are only generated for upperBound=1, since no setters are generated for * multiplicity attributes /]
 [if (anEAttribute.upperBound = 1)]
 	[for (redefinedElement : EObject | anEAttribute.getAllRedefinedElements())]
@@ -97,7 +119,7 @@ Getter & Setter for attribute [anEAttribute.name/]
 		[let redefinedEAttribute : EAttribute = redefinedElement.oclAsType(EAttribute)]
 			[if(redefinedEAttribute.hasSetter() and not (anEAttribute.eContainingClass = redefinedEAttribute.eContainingClass) and not (redefinedEAttribute.doNotGenerateEStructuralFeature()))]
 /*Additional Setter for redefined attribute '[redefinedEAttribute.eContainingClass.name/]::[redefinedEAttribute.name/]'*/
-[redefinedEAttribute.generateRedefinedAttributeSetterImplementationCpp(anEAttribute)/]
+[redefinedEAttribute._generateRedefinedAttributeSetterImplementation(anEAttribute)/]
 			[/if]
 		[/let]
 		[/if]
@@ -105,7 +127,8 @@ Getter & Setter for attribute [anEAttribute.name/]
 [/if]
 [/template]
 
-[template private generateAttributeGetterImplementationCpp(anEAttribute : EAttribute)? (hasGetter())]
+[template private _generateAttributeGetterImplementation(anEAttribute : EAttribute)? (hasGetter()) post(trim())]
+[printInfo(anEAttribute.eStructuralFeatureGetterGenerationMessage(), 4)/]
 [anEAttribute.generateStructuralFeatureType(true)/] [anEAttribute.eContainingClass.name.toUpperFirst()/]Impl::[anEAttribute.GetterName()/]() const 
 {
 [if (hasKey(keyGetterBody()))]
@@ -124,7 +147,7 @@ Getter & Setter for attribute [anEAttribute.name/]
 		[if (not (anEAttribute.upperBound = 1))]
 	if(m_[anEAttribute.name/] == nullptr)
 	{
-		[anEAttribute.generateAttributeInit()/]
+		[anEAttribute._generateAttributeInitialization()/]
 	}
 		[/if]
 	return m_[anEAttribute.name/];
@@ -133,7 +156,12 @@ Getter & Setter for attribute [anEAttribute.name/]
 }
 [/template]
 
-[template private generateAttributeSetterImplementationCpp(anEAttribute : EAttribute) ? ((hasSetter() or(hasImplSetterOnly())) )]
+[template private _generateAttributeInitialization(anEAttribute : EAttribute) ? (not(anEAttribute.upperBound = 1)) post(trim())]
+m_[anEAttribute.name/].reset(new [anEAttribute.generateStructuralFeatureType(false)/]());
+[/template]
+
+[template private _generateAttributeSetterImplementation(anEAttribute : EAttribute) ? ((hasSetter() or(hasImplSetterOnly()))) post(trim())]
+[printInfo(anEAttribute.eStructuralFeatureSetterGenerationMessage(), 4)/]
 void [anEAttribute.eContainingClass.name.toUpperFirst()/]Impl::[anEAttribute.SetterName()/]([anEAttribute.generateStructuralFeatureType(true)/] _[anEAttribute.name/])
 {
 	[if (hasKey(keySetterBody()))]
@@ -142,12 +170,12 @@ void [anEAttribute.eContainingClass.name.toUpperFirst()/]Impl::[anEAttribute.Set
 	//end of body
 	[else]
 	m_[anEAttribute.name/] = _[anEAttribute.name/];
-	[generateRedefinedAttributesSet()/]
+	[_generateRedefinedAttributesSetterCalls()/]
 	[/if]
 } 
 [/template]
 
-[template private generateRedefinedAttributesSet(anEAttribute : EAttribute)]
+[template private _generateRedefinedAttributesSetterCalls(anEAttribute : EAttribute) post(trim())]
 [for (redefinedElement : EObject | anEAttribute.getDirectlyRedefinedElements())]
 	[if (redefinedElement.oclIsKindOf(EAttribute))]
 	[let redefinedEAttribute : EAttribute = redefinedElement.oclAsType(EAttribute)]
@@ -160,7 +188,7 @@ void [anEAttribute.eContainingClass.name.toUpperFirst()/]Impl::[anEAttribute.Set
 m_[redefinedEAttribute.name/] = this->[if(anEAttribute.hasGetter())][anEAttribute.GetterName()/]()[else]m_[anEAttribute.name/][/if];
 				[/if]
 [comment recursive call to set possibly redefined attributes of redefinedEAttribute --> would normally be handled by calling the setter of redefinedEAttribute, but we do not have a setter here /]
-[redefinedEAttribute.generateRedefinedAttributesSet()/]
+[redefinedEAttribute._generateRedefinedAttributesSetterCalls()/]
 			[/if]
 		[/if]
 	[/let]
@@ -168,7 +196,7 @@ m_[redefinedEAttribute.name/] = this->[if(anEAttribute.hasGetter())][anEAttribut
 [/for]
 [/template]
 
-[template private generateRedefinedAttributeSetterImplementationCpp(redefinedEAttribute : EAttribute, anEAttribute : EAttribute) ? (( hasSetter() or(hasImplSetterOnly())) )]
+[template private _generateRedefinedAttributeSetterImplementation(redefinedEAttribute : EAttribute, anEAttribute : EAttribute) ? (( hasSetter() or(hasImplSetterOnly()))) post(trim())]
 void [anEAttribute.eContainingClass.name.toUpperFirst()/]Impl::[redefinedEAttribute.SetterName()/]([anEAttribute.generateStructuralFeatureType(true)/] _[anEAttribute.name/])
 {
 	std::shared_ptr<[anEAttribute.eGenericType.generateCppType(true)/]> _[anEAttribute.name/] = std::dynamic_pointer_cast<[anEAttribute.eGenericType.generateCppType(true)/]>(_[redefinedEAttribute.name/]);

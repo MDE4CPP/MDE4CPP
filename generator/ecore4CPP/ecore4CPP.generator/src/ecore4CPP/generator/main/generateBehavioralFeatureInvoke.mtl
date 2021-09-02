@@ -41,7 +41,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> [name/]ValueList = inputPar
 [/comment]
 
 [comment] Helper [/comment]
-[template public generateIncomingParameter(aEParameter : EParameter, index : Integer)]
+[template private _generateIncomingParameter(aEParameter : EParameter, index : Integer)]
 	//parameter [index/]
 	[aEParameter.generateParameterType()/] incoming_param_[aEParameter.name/];
 	std::list<std::shared_ptr<Any>>::const_iterator incoming_param_[aEParameter.name/]_arguments_citer = std::next(arguments->begin(), [index/]);
@@ -52,14 +52,14 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> [name/]ValueList = inputPar
 [**/
  *  Declaration of internal eInvoke helper method
  */]
-[template public generateeInvokeByIDDecl(aClass : EClass, impl : Boolean)]
+[template public generateeInvokeByIDDeclaration(aClass : EClass, impl : Boolean)]
 virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) [abstractSufix(impl)/];
 [/template]
 
 [**/
  *  Implementation of internal eInvoke helper method
  */]
-[template public generateeInvokeByIDImpl(aClass : EClass)]
+[template public generateeInvokeByIDImplementation(aClass : EClass) post(trim())]
 Any [aClass.name.toUpperFirst().concat('Impl')/]::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
 {
 	Any result;
@@ -75,7 +75,7 @@ Any [aClass.name.toUpperFirst().concat('Impl')/]::eInvoke(int operationID, std::
 		[let parameterList : OrderedSet(EParameter) = aOperation.eParameters->reject(doNotGenerateEParameter())]
 			[for (inPar : EParameter | parameterList)]
 			//Retrieve input parameter '[inPar.name/]'
-		[inPar.generateIncomingParameter(parameterList->indexOf(inPar)-1)/]
+		[inPar._generateIncomingParameter(parameterList->indexOf(inPar)-1)/]
 			[/for]
 		[/let]
 			[comment Operation w/o return value /]

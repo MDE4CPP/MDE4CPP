@@ -43,6 +43,7 @@
 [query public generateNamespaceDefinition(anEStructuralFeature : EStructuralFeature) : String = anEStructuralFeature.eContainingClass.generateNamespaceDefinition() + '::' + anEStructuralFeature.eContainingClass.name + '::' + anEStructuralFeature.name/]
 [query public generateNamespaceDefinition(anEOperation : EOperation) : String = anEOperation.eContainingClass.generateNamespaceDefinition() + '::' + anEOperation.eContainingClass.name  + '::' + anEOperation.name/]
 [query public generateNamespaceDefinition(anEParameter : EParameter) : String = anEParameter.eOperation.generateNamespaceDefinition() + '::' + anEParameter.name/]
+[query public generateNamespaceDefinition(anEEnumLiteral : EEnumLiteral) : String = anEEnumLiteral.eEnum.generateNamespaceDefinition() + '::' + anEEnumLiteral.eEnum.name + '::' + anEEnumLiteral.name/]
 [query public generateNamespaceDefinition(anEPackage : EPackage) : String = anEPackage.getNamespace('::', false) /]
 [query public getRootPackage(aEPackage : EPackage) : EPackage = if(eSuperPackage.oclIsUndefined()) then aEPackage else eSuperPackage.getRootPackage() endif /]
 [query public getRootPackage(aEClassifier : EClassifier) : EPackage = if(aEClassifier.ePackage.oclIsUndefined()) then aEClassifier.ePackage else aEClassifier.ePackage.getRootPackage() endif /]

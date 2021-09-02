@@ -15,15 +15,19 @@
 [module generatePackageImplementationHeader('http://www.eclipse.org/emf/2002/Ecore')]
 
 [import ecore4CPP::generator::main::generateAttribute /]
-[import ecore4CPP::generator::main::generateClass /]
+[import ecore4CPP::generator::main::generateEClass /]
 [import ecore4CPP::generator::main::generateDatatype /]
 [import ecore4CPP::generator::main::generateOperation /]
 [import ecore4CPP::generator::main::generateReference /]
 [import ecore4CPP::generator::main::helper /]
 [import ecore4CPP::generator::main::package::generatePackageHelper /]
+[import ecore4CPP::generator::main::validation::validation /]
 
-[template public generatePackageImplHeader(anEPackage : EPackage)]
-[file (anEPackage.generateNamespacePath().concat('/impl/').concat(anEPackage.name).concat('PackageImpl.hpp'), false, 'UTF-8')]
+[template public generatePackageImplHeader(anEPackage : EPackage) {
+	fileName : String = anEPackage.generateNamespacePath().concat('/impl/').concat(anEPackage.name).concat('PackageImpl.hpp');
+}]
+[printInfo(fileGenerationMessage(fileName, 'package implementation header file'), 2)/]
+[file (fileName, false, 'UTF-8')]
 [startGuard(anEPackage,'PackageImpl')/]
 
 // namespace macro header include

@@ -14,7 +14,7 @@
  */]
 [module generateOperation('http://www.eclipse.org/emf/2002/Ecore')]
 
-[import ecore4CPP::generator::main::generateClass /]
+[import ecore4CPP::generator::main::generateEClass /]
 [import ecore4CPP::generator::main::generateType /] 
 [import ecore4CPP::generator::main::helper /]
 [import ecore4CPP::generator::main::helpers::keywords /]
@@ -22,25 +22,46 @@
 [import ecore4CPP::generator::main::validation::validation /]
 
 [***###########################################################################################
- * Section for creating the EAttribute elements in the model factory
+ * Section for generating the declarations of EOperation elements in the generated class header files (interface as well as implementation)
 */]
+[template public generateOperationDeclaration(anEOperation : EOperation, impl : Boolean) post(trim())]
+[if (anEOperation.doNotGenerateEOperation())]
+	[printInfo(anEOperation.eOperationNoGenerationMessage(), 4)/]
+[else]
+	[printInfo(anEOperation.eOperationGenerationMessage(), 4)/]
+[anEOperation._generateOperationDeclaration(impl)/]
+[/if]
+[/template]
 
-[template public generateOperationDeclaration(anEOperation : EOperation, impl: Boolean)]
+[template private _generateOperationDeclaration(anEOperation : EOperation, impl: Boolean) post(trim())]
 [if (((impl or (not hasImplOnly())) and (not ignore())))]
 [comment "if impl" so the warning message will only be printed once (also in case that anEOperation is ImplOnly) /]
 [if (impl and anEOperation.eType.doNotGenerateEClassifier())]
-[printWarning('eType ' + anEOperation.eType.generateNamespaceDefinition() + '::' + anEOperation.eType.name + ' is configured as doNotGenerate for instance of EOperation: ' + anEOperation.generateNamespaceDefinition(), 'ecore4CPP::generator::main::generateOperation:generateOperationDeclaration')/]
+[printWarning(anEOperation.eOperationTypeNoGenerationMessage(), 'ecore4CPP::generator::main::generateOperation:generateOperationDeclaration', 2)/]
 [/if]
 [if (impl)]
 	[for (anEParameter : EParameter | anEOperation.eParameters->reject(doNotGenerateEParameter())->select(p : EParameter | p.eType.doNotGenerateEClassifier()))]
-[printWarning('eType ' + anEParameter.eType.generateNamespaceDefinition() + '::' + anEParameter.eType.name + ' is configured as doNotGenerate for instance of EParameter: ' + anEParameter.generateNamespaceDefinition(), 'ecore4CPP::generator::main::generateOperation:generateOperationDeclaration')/]
+[printWarning(anEParameter.eParameterTypeNoGenerationMessage(), 'ecore4CPP::generator::main::generateOperation:generateOperationDeclaration', 2)/]
 	[/for]
 [/if]
 [anEOperation.generateDocumentation()/] 
 virtual [anEOperation.generateOperationType()/] [anEOperation.name/]([anEOperation.generateParameterList()/])[if (hasKey(keyConst()))] const[/if] [abstractSufix(impl)/];[/if]
 [/template]
 
-[template public generateOperationImplementation(anEOperation : EOperation) ? (not (ignore()))]
+
+[***###########################################################################################
+ * Section for generating the implementations of EOperation elements in the generated class source files
+*/]
+[template public generateOperationImplementation(anEOperation : EOperation) ? (not (ignore())) post(trim())]
+[if (anEOperation.doNotGenerateEOperation())]
+	[printInfo(anEOperation.eOperationNoGenerationMessage(), 4)/]
+[else]
+	[printInfo(anEOperation.eOperationGenerationMessage(), 4)/]
+[anEOperation._generateOperationImplementation()/]
+[/if]
+[/template]
+
+[template private _generateOperationImplementation(anEOperation : EOperation) ? (not (ignore())) post(trim())]
 [comment[aOperation.generateDokumentation()/] 
 [anEOperation.generateOperationType()/] [anEOperation.eContainingClass.name.toUpperFirst()/]Impl::[anEOperation.name/]([anEOperation.generateParameterList()/])[if (hasKey(keyConst()))] const[/if]
 {

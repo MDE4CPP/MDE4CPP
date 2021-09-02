@@ -14,12 +14,17 @@
  */]
 [module generateFactoryImplementationSource('http://www.eclipse.org/emf/2002/Ecore')]
 
-[import ecore4CPP::generator::main::generateClass /]
+[import ecore4CPP::generator::main::generateEClass /]
 [import ecore4CPP::generator::main::generateType /]
 [import ecore4CPP::generator::main::helper /]
+[import ecore4CPP::generator::main::validation::validation /]
 
-[template public generateFactoryImplSource(anEPackage : EPackage) {className : String = anEPackage.name.concat('FactoryImpl');}]
-[file (anEPackage.generateNamespacePath().concat('/impl/').concat(className).concat('.cpp'), false, 'UTF-8')]
+[template public generateFactoryImplSource(anEPackage : EPackage) {
+	className : String = anEPackage.name.concat('FactoryImpl');
+	fileName : String = anEPackage.generateNamespacePath().concat('/impl/').concat(className).concat('.cpp');
+}]
+[printInfo(fileGenerationMessage(fileName, 'factory implementation source file'), 2)/]
+[file (fileName, false, 'UTF-8')]
 #include "[anEPackage.generateNamespacePath()/]/impl/[className/].hpp"
 
 #include <cassert>

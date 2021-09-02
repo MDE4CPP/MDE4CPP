@@ -16,9 +16,14 @@
 
 [import ecore4CPP::generator::main::generateType /]
 [import ecore4CPP::generator::main::helper /]
+[import ecore4CPP::generator::main::validation::validation /]
 
-[template public generateEcorePluginImplSource(aPackage : EPackage) { packageName : String = aPackage.name.concat('PluginImpl'); }]
-[file (aPackage.generateNamespacePath().concat('/impl/').concat(packageName).concat('.cpp'), false, 'UTF-8')]
+[template public generateEcorePluginImplSource(aPackage : EPackage) { 
+	packageName : String = aPackage.name.concat('PluginImpl'); 
+	fileName : String = aPackage.generateNamespacePath().concat('/impl/').concat(packageName).concat('.cpp');
+}]
+[printInfo(fileGenerationMessage(fileName, 'plugin implementation source file'), 2)/]
+[file (fileName, false, 'UTF-8')]
 #include "[aPackage.name/]/impl/[packageName/].hpp"
 
 #include "[aPackage.name/]/[aPackage.name/]Factory.hpp"
