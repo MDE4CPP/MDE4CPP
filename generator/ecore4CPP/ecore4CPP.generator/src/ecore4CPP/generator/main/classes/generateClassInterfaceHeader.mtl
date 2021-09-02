@@ -1,0 +1,239 @@
+[comment encoding = UTF-8 /]
+[**
+ * Copyright (c) 2017 TU Ilmenau, Systems and Software Engineering Group
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
+ * to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, 
+ * and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, 
+ * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */]
+[module generateClassInterfaceHeader('http://www.eclipse.org/emf/2002/Ecore')]
+ 
+[import ecore4CPP::generator::main::generateAttribute/]
+[import ecore4CPP::generator::main::generateEClass/]
+[import ecore4CPP::generator::main::generateOperation/]
+[import ecore4CPP::generator::main::generatePersistence/]
+[import ecore4CPP::generator::main::generateReference/]
+[import ecore4CPP::generator::main::generateUnion /]
+[import ecore4CPP::generator::main::generateType /]
+[import ecore4CPP::generator::main::helper /]
+[import ecore4CPP::generator::main::helpers::keywords /] 
+[import ecore4CPP::generator::main::validation::validation /]
+
+
+[template public generateClassInterfaceHeader(anEClass : EClass) {
+	fileName : String = anEClass.generateNamespacePath().concat('/').concat(anEClass.name.toUpperFirst()).concat('.hpp');
+} ]
+[printInfo(fileGenerationMessage(fileName, 'interface header file'), 2)/]
+[file (fileName, false, 'UTF-8')]
+[startGuard(anEClass)/]
+[printInfo(includeGenerationMessage(), 3)/]
+[let usedOrderedTypes:Set(EClassifier)= anEClass.includesFeatureOrderedFilter(true)->filter(EClassifier)->select(c:EClassifier | not (c.name ->isEmpty()))]
+	[if (usedOrderedTypes->size()>0)]
+		[if ((usedOrderedTypes->select(c:EClassifier| c.name.equalsIgnoreCase('EMap'))->size() > 0) or (usedOrderedTypes->filter(EClassifier)->select(c:EClassifier| c.name.equalsIgnoreCase('map'))->size() > 0) )]
+#include <map>
+		[/if]
+	[/if]	
+[/let]
+[let usedUnOrderedTypes:Set(EClassifier)= anEClass.includesFeatureOrderedFilter(false)->filter(EClassifier)->select(c:EClassifier | not (c.name ->isEmpty()))]
+	[if (usedUnOrderedTypes->size()>0)]
+		[if ((usedUnOrderedTypes->select(c:EClassifier| c.name.equalsIgnoreCase('EMap'))->size() > 0) or (usedUnOrderedTypes->filter(EClassifier)->select(c:EClassifier| c.name.equalsIgnoreCase('map'))->size() > 0) )]
+#include <unordered_map>
+		[/if]
+	[/if]	
+[/let]
+[let usedTypes:Set(EClassifier)= anEClass.includes()->filter(EClassifier)->select(c:EClassifier | not (c.name ->isEmpty()))]
+	[if (usedTypes->size()>0)]
+		[if ( (usedTypes->select(c:EClassifier| c.name.equalsIgnoreCase('EEList'))->size() > 0) or (usedTypes->select(c:EClassifier| c.name.equalsIgnoreCase('list'))->size() > 0))]
+#include <list>
+		[/if]
+		[if ((usedTypes->select(name.equalsIgnoreCase('vector'))->size() > 0))]
+#include <vector>
+		[/if]
+		[if ((usedTypes->select(name.equalsIgnoreCase('unordered_map'))->size() > 0))]
+#include <unordered_map>
+		[/if]
+	[/if]
+[/let]
+
+#include <memory>
+#include <string>
+[if (anEClass.eAttributes.eType->select(requiresAny())->size() > 0)]
+#include "abstractDataTypes/Any.hpp"
+[/if]
+// forward declarations
+[generateAbstractDataTypesForwardDeclaration()/]
+[if (anEClass.eAttributes.eType->select(requiresAny())->size() = 0 and anEClass.eOperations.eParameters.eType->select(requiresAny())->size() > 0)]
+class AnyObject;
+typedef std::shared_ptr<AnyObject> Any;
+[/if] 
+
+//*********************************
+// generated Includes
+[generatePersistenceForwardDeclarations()/]
+
+//Forward Declaration for used types 
+[let includeClasses:Set(EClass) = anEClass.includes()->selectByKind(EClass)->select(not oclIsUndefined())->reject(doNotGenerateEClassifier())->select(c:EClass| (not (c = anEClass)) and (not (anEClass.eAllSuperTypes)->includes(c)))]
+	[if (includeClasses->size()>0)]
+	[let includeNameSpaces:OrderedSet(EPackage) = includeClasses.ePackage->asOrderedSet()->sortedBy(name)]
+		[if (includeNameSpaces->size()>0)]
+			[for (includeNamespace: EPackage | includeNameSpaces)]
+namespace [includeNamespace.generateNamespaceDefinition()/] 
+{
+				[for (element : EClassifier| includeClasses->select(includeClass: EClass | includeClass.ePackage = includeNamespace)->asOrderedSet()->sortedBy(name))]
+	class [element.name/];
+				[/for]
+}
+			[/for]
+		[/if]
+	[/let]
+	[/if]
+[/let]
+
+// namespace macro header include
+#include "[anEClass.ePackage.getRootPackage().name/]/[anEClass.ePackage.getRootPackage().name/].hpp"
+
+[for (elements : EClassifier| anEClass.eSuperTypes->reject(doNotGenerateEClassifier())->asOrderedSet()->sortedBy(name)) before('// base class includes\n')]
+#include "[elements.generateNamespacePath()/]/[elements.name.toUpperFirst().concat('.hpp')/]"
+[/for]
+
+[for (elements : EEnum| anEClass.includes()->selectByKind(EEnum)->reject(doNotGenerateEClassifier())->asOrderedSet()->sortedBy(name)) before('// enum includes\n')]
+#include "[elements.generateNamespacePath()/]/[elements.name.toUpperFirst().concat('.hpp')/]"
+[/for]
+
+[if (anEClass.eSuperTypes->reject(doNotGenerateEClassifier())->isEmpty() and not (anEClass.name ='EObject'))]
+#include "ecore/EModelElement.hpp"
+[/if]
+
+[if (anEClass.hasKey(keyHeaderIncludes()))]
+//Includes from codegen annotation
+[anEClass.valueKey(keyHeaderIncludes())/]
+[/if]
+
+//*********************************
+namespace [anEClass.generateNamespaceDefinition()/] 
+{
+	[anEClass.generateDocumentation()/]
+	class [anEClass.ePackage.getRootPackage().name.toUpper()/]_API [anEClass.name.toUpperFirst()/] [if (anEClass.eSuperTypes->reject(doNotGenerateEClassifier())->isEmpty() and not (anEClass.name ='EObject'))] : virtual public ecore::EModelElement
+[else]
+[for (sClass : EClass | anEClass.eSuperTypes->reject(doNotGenerateEClassifier())->asOrderedSet()->sortedBy(name)) before (':') separator (',')] virtual public [ClassWithNamespace(anEClass,sClass)/][/for]
+[/if][if(anEClass.hasKey('shared_from_this'))], public std::enable_shared_from_this<[anEClass.name.toUpperFirst()/]>[/if]	{
+		public:
+ 			[anEClass.name.toUpperFirst()/](const [anEClass.name.toUpperFirst()/] &) {}
+
+		protected:
+			[anEClass.name.toUpperFirst()/](){}
+			[if(anEClass.containsContainerAttribute())]
+			[let ref:OrderedSet(EReference) = anEClass.getAllContainers()]
+				[for(aReference:EReference | ref->reject(doNotGenerateEStructuralFeature())->sortedBy(name)) before(printInfo('Generating additional constructors for containments', 3)) separator('\n')]
+			//Additional constructors for the containments back reference
+					[if(ref->select(eType.name = aReference.eType.name)->size()>1 )]
+						[if(ref->select(eType.name = aReference.eType.name)->asOrderedSet()->sortedBy(name)->first() = aReference)]
+			[anEClass.name.toUpperFirst()/]([aReference.generateReferenceType(true)/] par_[aReference.eType.name/], const int reference_id);
+						[/if]
+					[else]
+			[anEClass.name.toUpperFirst()/]([aReference.generateReferenceType(true)/] par_[aReference.name/]);
+					[/if]
+				[/for]
+			[/let]
+			[/if]
+
+		public:
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
+
+			//destructor
+			virtual ~[anEClass.name.toUpperFirst()/]() {}
+
+			//*********************************
+			// Operations
+			//*********************************
+			[for (anEOperation : EOperation | anEClass.eOperations->sortedBy(name)) before(printInfo('Generating method declarations for EOperations', 3))]
+			[anEOperation.generateOperationDeclaration(false)/]
+			[/for]
+
+			//*********************************
+			// Attribute Getters & Setters
+			//*********************************
+			[for (anEAttribute : EAttribute | anEClass.eAttributes->sortedBy(name)) before(printInfo('Generating member-Getter/Setter declarations for EAttributes', 3))]
+			[anEAttribute.generateAttributeAccessorsDeclaration(false)/]
+			[/for]
+
+			//*********************************
+			// Reference Getters & Setters
+			//*********************************
+			[for (anEReference : EReference | anEClass.eReferences->sortedBy(name)) before(printInfo('Generating member-Getter/Setter declarations for EReferences', 3))]
+			[anEReference.generateReferenceAccessorsDeclaration(false)/]
+			[/for]
+
+			//*********************************
+			// Union Reference Getters
+			//*********************************
+			[for (aUnionReference : EReference | anEClass.getUnionsReference()->sortedBy(name)) before(printInfo('Generating Getter declarations for union references', 3))]
+			[aUnionReference.generateUnionGetterDeclaration(false)/]
+			[/for]
+
+			//*********************************
+			// Container Getter
+			//*********************************
+			[anEClass.generateEContainerOperation(false)/] 
+
+			//*********************************
+			// Persistence Functions
+			//*********************************
+			[anEClass.generatePersistenceFunctionsDeclarations(false)/]
+
+		protected:
+			//*********************************
+			// Attribute Members
+			//*********************************
+			[for (anEAttribute : EAttribute | anEClass.eAttributes->reject(isRedefiningContainer())->sortedBy(name)) before(printInfo('Generating protected members for EAttributes', 3))]
+			[anEAttribute.generateAttributeProtectedMember()/]
+			[/for]
+			
+			//*********************************
+			// Reference Members
+			//*********************************
+			[for (anEReference : EReference | anEClass.eReferences->reject(isRedefiningContainer())->sortedBy(name)) before(printInfo('Generating protected members for EReferences', 3))]
+			[anEReference.generateReferenceProtectedMember()/]
+			[/for]	
+	};
+}
+[endGuard(anEClass)/]
+[/file]
+[/template]
+
+
+[query private templateTypeIncludes(anEClassifier : EClassifier ) : Set(EClassifier) = 
+if (anEClassifier.oclIsUndefined()) 
+	then Set(EClassifier){} 
+else 
+	if((anEClassifier.oclIsKindOf(EClass)) and (anEClassifier.oclAsType(EClass).eGenericSuperTypes->size()>0) and (anEClassifier.oclAsType(EClass).eGenericSuperTypes.eTypeArguments->size()>0)) 
+		then OrderedSet{anEClassifier.oclAsType(EClass).eGenericSuperTypes.eTypeArguments.eClassifier.templateTypeIncludes(), anEClassifier.oclAsType(EClass).eGenericSuperTypes.eClassifier} 
+	else OrderedSet{anEClassifier} 
+	endif 
+endif/]
+
+[query public includes(anEClass : EClass) : Set(EClassifier) =  OrderedSet
+{	anEClass.eSuperTypes,
+	anEClass.eAllStructuralFeatures.eType, 
+	anEClass.eAllStructuralFeatures.eType.templateTypeIncludes(),
+	anEClass.eOperations.eType, 
+	anEClass.eOperations.eType.templateTypeIncludes(),
+	anEClass.eOperations.eParameters.eType, 
+	anEClass.eOperations.eParameters.eType.templateTypeIncludes()
+}->flatten() /]
+
+[query public includesFeatureOrderedFilter(anEClass : EClass, isOrdered:Boolean) : Set(EClassifier) = OrderedSet
+{
+	anEClass.eAllStructuralFeatures->select(ordered = isOrdered).eType, 
+	anEClass.eAllStructuralFeatures->select(ordered = isOrdered).eType.templateTypeIncludes(),
+	anEClass.eOperations->select(ordered = isOrdered).eType,
+	anEClass.eOperations->select(ordered = isOrdered).eType.templateTypeIncludes(),
+	anEClass.eOperations.eParameters->select(ordered = isOrdered).eType,
+	anEClass.eOperations.eParameters->select(ordered = isOrdered).eType.templateTypeIncludes()
+}->flatten() /]

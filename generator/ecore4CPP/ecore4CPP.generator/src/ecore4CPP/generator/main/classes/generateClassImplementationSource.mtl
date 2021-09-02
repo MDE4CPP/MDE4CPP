@@ -12,10 +12,10 @@
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, 
  * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */]
-[module generateImplementationSource('http://www.eclipse.org/emf/2002/Ecore')]
+[module generateClassImplementationSource('http://www.eclipse.org/emf/2002/Ecore')]
 
 [import ecore4CPP::generator::main::generateAttribute/]
-[import ecore4CPP::generator::main::generateClass/]
+[import ecore4CPP::generator::main::generateEClass/]
 [import ecore4CPP::generator::main::generateOperation/]
 [import ecore4CPP::generator::main::generatePersistence/]
 [import ecore4CPP::generator::main::generateReference/]
@@ -23,13 +23,19 @@
 [import ecore4CPP::generator::main::generateBehavioralFeatureInvoke /]
 [import ecore4CPP::generator::main::generateType/]
 [import ecore4CPP::generator::main::generateUnion /]
-[import ecore4CPP::generator::main::generateModel /]
+[import ecore4CPP::generator::main::classes::generateClassInterfaceHeader /]
 [import ecore4CPP::generator::main::helper /]
 [import ecore4CPP::generator::main::helpers::keywords /]
+[import ecore4CPP::generator::main::validation::validation /]
 
-[template public generateImplementationSource(aClass : EClass) { className : String = aClass.name.toUpperFirst().concat('Impl'); }]
-[file (aClass.generateNamespacePath().concat('/impl/').concat(className).concat('.cpp'), false, 'UTF-8')]
-#include "[aClass.generateNamespacePath()/]/impl/[className.concat('.hpp')/]"
+[template public generateClassImplementationSource(anEClass : EClass) { 
+	className : String = anEClass.name.toUpperFirst().concat('Impl');
+	fileName : String = anEClass.generateNamespacePath().concat('/impl/').concat(className).concat('.cpp');
+}]
+[printInfo(fileGenerationMessage(fileName, 'implementation source file'), 2)/]
+[file (fileName, false, 'UTF-8')]
+[printInfo(includeGenerationMessage(), 3)/]
+#include "[anEClass.generateNamespacePath()/]/impl/[className.concat('.hpp')/]"
 
 [defineDebugMacros()/]
 
@@ -38,32 +44,32 @@
 #include <sstream>
 
 [generateAbstractDataTypesIncludes()/]
-[if (aClass.eAttributes.eType->select(requiresAny())->size() = 0 and aClass.eOperations.eParameters.eType->select(requiresAny())->size() > 0)]
+[if (anEClass.eAttributes.eType->select(requiresAny())->size() = 0 and anEClass.eOperations.eParameters.eType->select(requiresAny())->size() > 0)]
 #include "abstractDataTypes/Any.hpp"
 [/if]
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
+[if (anEClass.hasKey(keyImplIncludes()))]
 //Includes from codegen annotation
-[if (aClass.hasKey(keyImplIncludes()))]
-[aClass.valueKey(keyImplIncludes())/]
+[anEClass.valueKey(keyImplIncludes())/]
 [/if]
 
 //Forward declaration includes
-[aClass.generatePersitsenceInclude()/]
+[anEClass.generatePersitsenceInclude()/]
 
-[for (element : EClassifier| aClass.includes()->selectByKind(EClass)->reject(doNotGenerateEClassifier())->asOrderedSet()->sortedBy(name))]
+[for (element : EClassifier| anEClass.includes()->selectByKind(EClass)->reject(doNotGenerateEClassifier())->asOrderedSet()->sortedBy(name))]
 #include "[element.generateNamespacePath()/]/[element.name.toUpperFirst()/].hpp"
 [/for]
 
 //Factories an Package includes
-[for (anEPackage: EPackage| aClass.ePackage->closure(p|p.eSuperPackage)->asSet()->reject(doNotGenerateEPackage()) )]
+[for (anEPackage: EPackage| anEClass.ePackage->closure(p|p.eSuperPackage)->asSet()->reject(doNotGenerateEPackage()) )]
 #include "[anEPackage.getRootPackage().name/]/[anEPackage.getNamespacePathWithoutRoot()/][anEPackage.name/]Package.hpp"
 [/for]
 [comment] nur f�r saveContent bei saveHandler->addReference() mit Meta-Datentyp-Vergleich n�tig siehe generatePersistence.mtl
 [/comment]
-[for (aPackage : EPackage| aClass.includes()->selectByKind(EClass)->reject(doNotGenerateEClassifier())->including(aClass).ePackage->asOrderedSet()->sortedBy(name))]
+[for (aPackage : EPackage| anEClass.includes()->selectByKind(EClass)->reject(doNotGenerateEClassifier())->including(anEClass).ePackage->asOrderedSet()->sortedBy(name))]
 #include "[aPackage.getRootPackage().name/]/[aPackage.getNamespacePathWithoutRoot()/][aPackage.name/]Package.hpp"
 [/for]
 
@@ -72,7 +78,7 @@
 #include "ecore/EStructuralFeature.hpp"
 
 [comment namespace /]
-using namespace [aClass.generateNamespaceDefinition()/];
+using namespace [anEClass.generateNamespaceDefinition()/];
 
 //*********************************
 // Constructor / Destructor
@@ -87,12 +93,12 @@ using namespace [aClass.generateNamespaceDefinition()/];
 [className/]::~[className/]()
 {
 #ifdef SHOW_DELETION
-	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete [aClass.name.toUpperFirst()/] "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
+	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete [anEClass.name.toUpperFirst()/] "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
 }
 
-[let ref:OrderedSet(EReference) = aClass.getAllContainers()]
-	[for(aReference:EReference | ref->reject(doNotGenerateEStructuralFeature())->sortedBy(name)) separator('\n')]
+[let ref:OrderedSet(EReference) = anEClass.getAllContainers()]
+	[for(aReference:EReference | ref->reject(doNotGenerateEStructuralFeature())->sortedBy(name)) before(printInfo('Generating implementation of additional constructors for containments', 3)) separator('\n')]
 		[if(ref->select(eType = aReference.eType)->size()>1 )]
 			[if(ref->select(eType = aReference.eType)->asOrderedSet()->sortedBy(name)->first() = aReference)]
 //Additional constructor for the containments back reference
@@ -143,32 +149,32 @@ using namespace [aClass.generateNamespaceDefinition()/];
 
 [className/]& [className/]::operator=(const [className/] & obj)
 {
-	[if (aClass.eSuperTypes->reject(doNotGenerateEClassifier())->isEmpty() and not(aClass.name='EObject'))]
+	[if (anEClass.eSuperTypes->reject(doNotGenerateEClassifier())->isEmpty() and not(anEClass.name='EObject'))]
 	//call overloaded =Operator for each base class
 	ecore::EModelElementImpl::operator=(obj);
 	[else]
 	//call overloaded =Operator for each base class
-	[for (sClass : EClass | aClass.eSuperTypes->reject(doNotGenerateEClassifier())->asOrderedSet())]
-	[ClassWithNamespace(aClass, sClass)/]Impl::operator=(obj);
+	[for (sClass : EClass | anEClass.eSuperTypes->reject(doNotGenerateEClassifier())->asOrderedSet())]
+	[ClassWithNamespace(anEClass, sClass)/]Impl::operator=(obj);
 	[/for]
 	[/if]
 	/* TODO: Find out if this call is necessary
-	 * Currently, this causes an error because it calls an implicit assignment operator of [aClass.name.toUpperFirst()/] 
-	 * which is generated by the compiler (as [aClass.name.toUpperFirst()/] is an abstract class and does not have a user-defined assignment operator).
+	 * Currently, this causes an error because it calls an implicit assignment operator of [anEClass.name.toUpperFirst()/] 
+	 * which is generated by the compiler (as [anEClass.name.toUpperFirst()/] is an abstract class and does not have a user-defined assignment operator).
 	 * Implicit compiler-generated assignment operators however only create shallow copies of members,
 	 * which implies, that not a real deep copy is created when using the copy()-method.
 	 * 
 	 * NOTE: Since all members are deep-copied by this assignment-operator anyway, why is it even necessary to call this implicit assignment-operator?
 	 * This is only done for ecore-models, not for UML-models.
 	 */
-	//[aClass.name.toUpperFirst()/]::operator=(obj);
+	//[anEClass.name.toUpperFirst()/]::operator=(obj);
 
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
-	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy [aClass.name.toUpperFirst()/] "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
+	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy [anEClass.name.toUpperFirst()/] "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
 	//Clone Attributes with (deep copy)
-	[for (att : EAttribute | aClass.eAttributes->reject(isRedefiningContainer())->reject(doNotGenerateEStructuralFeature())->asOrderedSet()->sortedBy(name))]
+	[for (att : EAttribute | anEClass.eAttributes->reject(isRedefiningContainer())->reject(doNotGenerateEStructuralFeature())->asOrderedSet()->sortedBy(name))]
 		[if (not(att.upperBound = 1))] [comment it is a Bag of Elements /]
 			[if (not att.eGenericType.eClassifier.oclIsKindOf(EDataType))] [comment it is an Bag/Subset of non standard Elements /]
 	[att.generateStructuralFeatureType(true)/] [att.name/]Container = obj.[att.GetterName()/]();
@@ -248,7 +254,7 @@ using namespace [aClass.generateNamespaceDefinition()/];
 	{
 		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr [att.name/]."<< std::endl;)
 	}
-			[else] [comment invalid Generic for instance: EJavaClass<T> --> generated as void* /]
+			[else] [comment invalid Generic for instance: EJavanEClass<T> --> generated as void* /]
 	m_[att.name/] = obj.[att.GetterName()/]();
 			[/if]
 		[elseif ((not(att.lowerBound = 0)) and (not att.eType.oclIsKindOf(EDataType)))] [comment copy simple attribute ptr/]
@@ -259,7 +265,7 @@ using namespace [aClass.generateNamespaceDefinition()/];
 	[/for]
 
 	//copy references with no containment (soft copy)
-	[for (ref : EReference | aClass.eReferences->select(aRef: EReference | aRef.isBackReference() or (aRef.containment = false and not aRef.hasSubset()))->reject(isRedefiningContainer())->reject(doNotGenerateEStructuralFeature())->asOrderedSet()->sortedBy(name))]
+	[for (ref : EReference | anEClass.eReferences->select(aRef: EReference | aRef.isBackReference() or (aRef.containment = false and not aRef.hasSubset()))->reject(isRedefiningContainer())->reject(doNotGenerateEStructuralFeature())->asOrderedSet()->sortedBy(name))]
 		[if (ref.hasGetter())]
 	m_[ref.name/]  = obj.[ref.GetterName()/]();
 		[/if]
@@ -270,7 +276,7 @@ using namespace [aClass.generateNamespaceDefinition()/];
 	3rd all the rest.
 	[/comment]
 	//Clone references with containment (deep copy)
-	[for (ref : EReference | aClass.eReferences->select(eRef: EReference|(eRef.containment = true or eRef.hasSubset()) and (not eRef.isUnion()) and (not eRef.isBackReference()))->reject(isRedefiningContainer())->reject(doNotGenerateEStructuralFeature())->asOrderedSet()->sortedBy(name)) separator('\n')]
+	[for (ref : EReference | anEClass.eReferences->select(eRef: EReference|(eRef.containment = true or eRef.hasSubset()) and (not eRef.isUnion()) and (not eRef.isBackReference()))->reject(isRedefiningContainer())->reject(doNotGenerateEStructuralFeature())->asOrderedSet()->sortedBy(name)) separator('\n')]
 	//clone reference '[ref.name/]'
 	[if (ref.upperBound <> 1)]
 		[if (ref.hasSetter())]
@@ -386,7 +392,7 @@ using namespace [aClass.generateNamespaceDefinition()/];
 	[else] [comment copy simple attribute/]
 	m_[ref.name/] = obj.[ref.GetterName()/]()->copy();
 	[/if][/for]
-	[for (aReference : EReference | aClass.eReferences->select(eRef: EReference|eRef.containment = true and not eRef.isUnion())->reject(doNotGenerateEStructuralFeature())->asOrderedSet()->sortedBy(name))]
+	[for (aReference : EReference | anEClass.eReferences->select(eRef: EReference|eRef.containment = true and not eRef.isUnion())->reject(doNotGenerateEStructuralFeature())->asOrderedSet()->sortedBy(name))]
 	[aReference.InitReferences()/]
 	[/for]
 	return *this;
@@ -398,61 +404,71 @@ std::shared_ptr<ecore::EObject> [className/]::copy() const
 	*element =(*this);
 	element->[generateGetThisPtrPropertySetterName()/](element);
 [if (generateObjectMonitoring())]
-	[aClass.getRootPackage().name/]Factory::eInstance()->add(element);
+	[anEClass.getRootPackage().name/]Factory::eInstance()->add(element);
 [/if]
 	return element;
 }
 
-std::shared_ptr<[needNamespace(aClass.ePackage, 'EClass')/]> [className/]::eStaticClass() const
-{
-	return [aClass.getRootPackage().name/][getPackageAccess(aClass, true)/]::[aClass.ePackage.name/]Package::eInstance()->get[aClass.getMemberNameUpperFirst()/]();
-}
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-[for (aAttribute : EAttribute | aClass.eAttributes->reject(doNotGenerateEStructuralFeature())->asOrderedSet()->sortedBy(name)) separator ('\n')]
-[aAttribute.generateAttributeCpp()/]
-[/for]
-
 //*********************************
 // Operations
 //*********************************
-[for (aOperation : EOperation | aClass.eOperations->reject(doNotGenerateEOperation())->asOrderedSet()->sortedBy(name)) separator ('\n')]
-[aOperation.generateOperationImplementation()/]
+[for (anEOperation : EOperation | anEClass.eOperations->sortedBy(name)) before(printInfo('Generating implementation of methods for EOperations', 3)) separator ('\n')]
+[anEOperation.generateOperationImplementation()/]
 [/for]
 
 //*********************************
-// References
+// Attribute Getters & Setters
 //*********************************
-[for (aReference : EReference | aClass.eReferences->reject(doNotGenerateEStructuralFeature())->asOrderedSet()->sortedBy(name)) separator ('\n')]
-[aReference.generateReferenceCpp()/]
+[for (anEAttribute : EAttribute | anEClass.eAttributes->sortedBy(name)) before(printInfo('Generating implementation of member-Getters/Setters for EAttributes', 3)) separator ('\n')]
+[anEAttribute.generateAttributeAccessorsImplementation()/]
+[/for]
+
+//*********************************
+// Reference Getters & Setters
+//*********************************
+[for (anEReference : EReference | anEClass.eReferences->sortedBy(name)) before(printInfo('Generating implementation of member-Getters/Setters for EReferences', 3)) separator ('\n')]
+[anEReference.generateReferenceAccessorsImplementation()/]
 [/for]
 
 //*********************************
 // Union Getter
 //*********************************
-[aClass.generateUnionGetterCpp()/]
-
-[aClass.generateGetThisPtrCPP()/]
-[aClass.generateEContainerOperationImplementation()/]
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-[aClass.generateeGetImpl()/]
-[aClass.generateeIsSetImpl()/]
-[aClass.generateeSetImpl()/]
+[for (aUnionReference : EReference | anEClass.getUnionsReference()->sortedBy(name)) before(printInfo('Generating implementation of Getters for union references', 3)) separator ('\n')]
+[aUnionReference.generateUnionGetterImplementation(anEClass)/]
+[/for]
 
 //*********************************
-// Behavioral Feature
+// Container Getter
 //*********************************
-[aClass.generateeInvokeByIDImpl()/]
+[anEClass.generateEContainerOperationImplementation()/]
 
 //*********************************
 // Persistence Functions
 //*********************************
-[aClass.generatePersistenceImpl()/]
+[anEClass.generatePersistenceFunctionsImplementations()/]
 
+
+std::shared_ptr<[needNamespace(anEClass.ePackage, 'EClass')/]> [className/]::eStaticClass() const
+{
+	return [anEClass.getRootPackage().name/][getPackageAccess(anEClass, true)/]::[anEClass.ePackage.name/]Package::eInstance()->get[anEClass.getMemberNameUpperFirst()/]();
+}
+
+
+//*********************************
+// EStructuralFeature Get/Set/IsSet
+//*********************************
+[anEClass.generateeGetImplementation()/]
+
+[anEClass.generateeIsSetImplementation()/]
+
+[anEClass.generateeSetImplementation()/]
+
+//*********************************
+// EOperation Invoke
+//*********************************
+[anEClass.generateeInvokeByIDImplementation()/]
+
+
+[anEClass.generateGetThisPtrImplementation()/]
 [/file]
 [/template]

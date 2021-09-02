@@ -12,18 +12,19 @@
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, 
  * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */]
-[module generateImplementation('http://www.eclipse.org/emf/2002/Ecore')]
+[module generateClass('http://www.eclipse.org/emf/2002/Ecore')]
 
-
-[import ecore4CPP::generator::main::impl::generateImplementationHeader /]
-[import ecore4CPP::generator::main::impl::generateImplementationSource /]
+[import ecore4CPP::generator::main::classes::generateClassInterfaceHeader /]
+[import ecore4CPP::generator::main::classes::generateClassImplementationHeader /]
+[import ecore4CPP::generator::main::classes::generateClassImplementationSource /]
 [import ecore4CPP::generator::main::helper /]
 
 [**
  * The documentation of the template generateElement.
  * @param anEClass
  */]
-[template public generateImplementation(aClass : EClass)]
-[aClass.generateImplementationHeader()/]
-[aClass.generateImplementationSource()/]
+[template public generateClass(anEClass : EClass)]
+[anEClass.generateClassInterfaceHeader()/]
+[anEClass.generateClassImplementationHeader()/]
+[anEClass.generateClassImplementationSource()/]
 [/template]
