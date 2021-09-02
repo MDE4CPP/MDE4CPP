@@ -12,7 +12,7 @@
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, 
  * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */]
-[module generateClass('http://www.eclipse.org/emf/2002/Ecore')]
+[module generateEClass('http://www.eclipse.org/emf/2002/Ecore')]
 
 [import ecore4CPP::generator::main::generateType /]
 [import ecore4CPP::generator::main::helper /]
@@ -36,11 +36,11 @@ virtual std::shared_ptr<[aEClass.generateTypeClass()/]> create[aEClass.name/]_as
 [/let]
 [/template]
 
-[template public generateEContainerOperation(aClass : EClass, impl : EBoolean)]
+[template public generateEContainerOperation(aClass : EClass, impl : EBoolean) post(trim())]
 virtual std::shared_ptr<ecore::EObject> eContainer() const [abstractSufix(impl)/];
 [/template]
 
-[template public generateEContainerOperationImplementation(aClass: EClass)]
+[template public generateEContainerOperationImplementation(aClass: EClass) post(trim())]
 std::shared_ptr<ecore::EObject> [aClass.name.toUpperFirst()/]Impl::eContainer() const
 {
 [let ref:OrderedSet(EReference) = aClass.getAllContainers()]
@@ -66,12 +66,12 @@ std::shared_ptr<ecore::EObject> [aClass.name.toUpperFirst()/]Impl::eContainer() 
 }
 [/template]
 
-[template public generateGetThisPtr(aClass : EClass)]
+[template public generateGetThisPtrDeclarations(aClass : EClass) post(trim())]
 virtual std::shared_ptr<[aClass.name/]> [generateGetThisPtrPropertyGetterName()/]() const;
 virtual void [generateGetThisPtrPropertySetterName()/](std::weak_ptr<[aClass.name.toUpperFirst()/]> [generateGetThisPtrPropertyName()/]);
 [/template]
 
-[template public generateGetThisPtrCPP(aClass: EClass)]
+[template public generateGetThisPtrImplementation(aClass: EClass) post(trim())]
 std::shared_ptr<[aClass.name.toUpperFirst()/]> [aClass.name.toUpperFirst()/]Impl::[generateGetThisPtrPropertyGetterName()/]() const
 {
 	return m_[generateGetThisPtrPropertyName()/].lock();
