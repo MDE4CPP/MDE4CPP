@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:UML4CPPProfile="http://www.tu-ilmenau.de/sse/UML4CPPProfile" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xsi:schemaLocation="http://www.tu-ilmenau.de/sse/UML4CPPProfile file:/C:/src/MDE4CPP-dev/src/common/UML4CPPProfile/model/UML4CPPProfile.uml#_v75nIfp7EeuavpF89IQaUg">
+  <uml:Model xmi:id="_DIszUAx8EeyI_oFVTUBWHQ" name="PingModel">
+    <packagedElement xmi:type="uml:Class" xmi:id="_JhcBkAx9EeyI_oFVTUBWHQ" name="Network">
+      <ownedAttribute xmi:id="_OpvYIAx9EeyI_oFVTUBWHQ" name="node_1" type="_bNtPAAx9EeyI_oFVTUBWHQ" aggregation="composite">
+        <defaultValue xmi:type="uml:InstanceValue" xmi:id="_ElLlUAyxEeyI_oFVTUBWHQ" name="node_1_Default" type="_bNtPAAx9EeyI_oFVTUBWHQ" instance="_1BEXMAywEeyI_oFVTUBWHQ"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_sd_ucAymEeyI_oFVTUBWHQ" name="node_2" type="_bNtPAAx9EeyI_oFVTUBWHQ" aggregation="composite">
+        <defaultValue xmi:type="uml:InstanceValue" xmi:id="_TQLaIAyxEeyI_oFVTUBWHQ" name="node_2_Default" type="_bNtPAAx9EeyI_oFVTUBWHQ" instance="_9-dI8AywEeyI_oFVTUBWHQ"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_so-2cAymEeyI_oFVTUBWHQ" name="node_3" type="_bNtPAAx9EeyI_oFVTUBWHQ" aggregation="composite">
+        <defaultValue xmi:type="uml:InstanceValue" xmi:id="_XhSqAAyxEeyI_oFVTUBWHQ" name="node_3_Default" type="_bNtPAAx9EeyI_oFVTUBWHQ" instance="_BSJHQAyxEeyI_oFVTUBWHQ"/>
+      </ownedAttribute>
+      <ownedConnector xmi:id="_VTLUAAyuEeyI_oFVTUBWHQ" name="c_node1_node2" type="_GmiV4AytEeyI_oFVTUBWHQ">
+        <end xmi:id="_cAmOQAyuEeyI_oFVTUBWHQ" partWithPort="_OpvYIAx9EeyI_oFVTUBWHQ" role="_MhlmwAynEeyI_oFVTUBWHQ"/>
+        <end xmi:id="_cjlmkAyuEeyI_oFVTUBWHQ" partWithPort="_sd_ucAymEeyI_oFVTUBWHQ" role="_v32XcAysEeyI_oFVTUBWHQ"/>
+      </ownedConnector>
+      <ownedConnector xmi:id="_vJJzgAyuEeyI_oFVTUBWHQ" name="c_node2_node3" type="_GmiV4AytEeyI_oFVTUBWHQ">
+        <end xmi:id="_vJJzgQyuEeyI_oFVTUBWHQ" partWithPort="_sd_ucAymEeyI_oFVTUBWHQ" role="_MhlmwAynEeyI_oFVTUBWHQ"/>
+        <end xmi:id="_vJJzggyuEeyI_oFVTUBWHQ" partWithPort="_so-2cAymEeyI_oFVTUBWHQ" role="_v32XcAysEeyI_oFVTUBWHQ"/>
+      </ownedConnector>
+      <ownedConnector xmi:id="_V3oE4AyuEeyI_oFVTUBWHQ" name="c_node3_node2" type="_GmiV4AytEeyI_oFVTUBWHQ">
+        <end xmi:id="_6RSlkAyuEeyI_oFVTUBWHQ" partWithPort="_so-2cAymEeyI_oFVTUBWHQ" role="_y13nwAysEeyI_oFVTUBWHQ"/>
+        <end xmi:id="_6olrQAyuEeyI_oFVTUBWHQ" partWithPort="_sd_ucAymEeyI_oFVTUBWHQ" role="_QSBygAynEeyI_oFVTUBWHQ"/>
+      </ownedConnector>
+      <ownedConnector xmi:id="_OaS7MAyvEeyI_oFVTUBWHQ" name="c_node2_node1" type="_GmiV4AytEeyI_oFVTUBWHQ">
+        <end xmi:id="_OaS7MQyvEeyI_oFVTUBWHQ" partWithPort="_sd_ucAymEeyI_oFVTUBWHQ" role="_y13nwAysEeyI_oFVTUBWHQ"/>
+        <end xmi:id="_OaS7MgyvEeyI_oFVTUBWHQ" partWithPort="_OpvYIAx9EeyI_oFVTUBWHQ" role="_QSBygAynEeyI_oFVTUBWHQ"/>
+      </ownedConnector>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_bNtPAAx9EeyI_oFVTUBWHQ" name="Node">
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_v32XcAysEeyI_oFVTUBWHQ" name="receiverLeft" type="_8CpIEAymEeyI_oFVTUBWHQ" aggregation="composite"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_y13nwAysEeyI_oFVTUBWHQ" name="senderLeft" type="_7N-XoAyrEeyI_oFVTUBWHQ" aggregation="composite"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_MhlmwAynEeyI_oFVTUBWHQ" name="senderRight" type="_7N-XoAyrEeyI_oFVTUBWHQ" aggregation="composite"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_QSBygAynEeyI_oFVTUBWHQ" name="receiverRight" type="_8CpIEAymEeyI_oFVTUBWHQ" aggregation="composite"/>
+      <ownedAttribute xmi:id="_6VbwoAysEeyI_oFVTUBWHQ" name="address">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      </ownedAttribute>
+      <ownedBehavior xmi:type="uml:Activity" xmi:id="_eIM3IAyyEeyI_oFVTUBWHQ" name="actPing" specification="_Tq4jsAyyEeyI_oFVTUBWHQ" node="_pB_EIAyyEeyI_oFVTUBWHQ _XxYCgAyzEeyI_oFVTUBWHQ _esFx4AyzEeyI_oFVTUBWHQ _ltwd0AyzEeyI_oFVTUBWHQ _1ZYpMAyzEeyI_oFVTUBWHQ">
+        <ownedParameter xmi:id="_fr8h0AyyEeyI_oFVTUBWHQ" name="destinationAddress">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+        </ownedParameter>
+        <edge xmi:type="uml:ObjectFlow" xmi:id="_jLXZkAyzEeyI_oFVTUBWHQ" target="_esFx4AyzEeyI_oFVTUBWHQ" source="_pB_EIAyyEeyI_oFVTUBWHQ"/>
+        <edge xmi:type="uml:ControlFlow" xmi:id="_GOx5AAy0EeyI_oFVTUBWHQ" target="_ltwd0AyzEeyI_oFVTUBWHQ" source="_XxYCgAyzEeyI_oFVTUBWHQ">
+          <guard xmi:type="uml:LiteralBoolean" xmi:id="_GOx5AQy0EeyI_oFVTUBWHQ" name="call_printSend_To_ReadAddress_guard" value="true"/>
+          <weight xmi:type="uml:LiteralInteger" xmi:id="_GOx5Agy0EeyI_oFVTUBWHQ" name="call_printSend_To_ReadAddress_weight"/>
+        </edge>
+        <edge xmi:type="uml:ObjectFlow" xmi:id="_VaLFIAy0EeyI_oFVTUBWHQ" target="_7Mvu8QyzEeyI_oFVTUBWHQ" source="_esFx4AyzEeyI_oFVTUBWHQ"/>
+        <edge xmi:type="uml:ObjectFlow" xmi:id="_aWOIYAy0EeyI_oFVTUBWHQ" target="_aYRzUAyzEeyI_oFVTUBWHQ" source="_esFx4AyzEeyI_oFVTUBWHQ"/>
+        <edge xmi:type="uml:ObjectFlow" xmi:id="_eoGNQAy0EeyI_oFVTUBWHQ" target="_7Mvu8AyzEeyI_oFVTUBWHQ" source="_ltwd0gyzEeyI_oFVTUBWHQ"/>
+        <node xmi:type="uml:ActivityParameterNode" xmi:id="_pB_EIAyyEeyI_oFVTUBWHQ" name="aPN_destinationAddress" outgoing="_jLXZkAyzEeyI_oFVTUBWHQ" parameter="_fr8h0AyyEeyI_oFVTUBWHQ">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+        </node>
+        <node xmi:type="uml:CallOperationAction" xmi:id="_XxYCgAyzEeyI_oFVTUBWHQ" name="call_printSend" outgoing="_GOx5AAy0EeyI_oFVTUBWHQ" operation="_z3VdEAyyEeyI_oFVTUBWHQ">
+          <argument xmi:id="_aYRzUAyzEeyI_oFVTUBWHQ" name="toAddress" incoming="_aWOIYAy0EeyI_oFVTUBWHQ">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+          </argument>
+          <target xmi:id="_XxYCgQyzEeyI_oFVTUBWHQ" name="self" type="_bNtPAAx9EeyI_oFVTUBWHQ"/>
+        </node>
+        <node xmi:type="uml:ForkNode" xmi:id="_esFx4AyzEeyI_oFVTUBWHQ" name="Fork1" incoming="_jLXZkAyzEeyI_oFVTUBWHQ" outgoing="_VaLFIAy0EeyI_oFVTUBWHQ _aWOIYAy0EeyI_oFVTUBWHQ"/>
+        <node xmi:type="uml:ReadStructuralFeatureAction" xmi:id="_ltwd0AyzEeyI_oFVTUBWHQ" name="ReadAddress" incoming="_GOx5AAy0EeyI_oFVTUBWHQ" structuralFeature="_6VbwoAysEeyI_oFVTUBWHQ">
+          <object xmi:id="_ltwd0QyzEeyI_oFVTUBWHQ" name="self" type="_bNtPAAx9EeyI_oFVTUBWHQ"/>
+          <result xmi:id="_ltwd0gyzEeyI_oFVTUBWHQ" name="out" outgoing="_eoGNQAy0EeyI_oFVTUBWHQ">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+          </result>
+        </node>
+        <node xmi:type="uml:CallOperationAction" xmi:id="_1ZYpMAyzEeyI_oFVTUBWHQ" name="call_receive" operation="_OxFgAAyuEeyI_oFVTUBWHQ">
+          <argument xmi:id="_7Mvu8AyzEeyI_oFVTUBWHQ" name="sourceAddress" incoming="_eoGNQAy0EeyI_oFVTUBWHQ">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+          </argument>
+          <argument xmi:id="_7Mvu8QyzEeyI_oFVTUBWHQ" name="destinationAddress" incoming="_VaLFIAy0EeyI_oFVTUBWHQ">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+          </argument>
+          <target xmi:id="_1ZYpMQyzEeyI_oFVTUBWHQ" name="self" type="_bNtPAAx9EeyI_oFVTUBWHQ"/>
+        </node>
+      </ownedBehavior>
+      <ownedBehavior xmi:type="uml:Activity" xmi:id="_fBsyUAyvEeyI_oFVTUBWHQ" name="actReceive" specification="_OxFgAAyuEeyI_oFVTUBWHQ" node="_jPg2kAyvEeyI_oFVTUBWHQ _kVGloAyvEeyI_oFVTUBWHQ _fzV0MAy7EeyI_oFVTUBWHQ _T8JHQAy8EeyI_oFVTUBWHQ _aI2hIAy8EeyI_oFVTUBWHQ _jpnswAy8EeyI_oFVTUBWHQ _9CvmQAy-EeyI_oFVTUBWHQ _KMbZUAy_EeyI_oFVTUBWHQ _eygsgAy_EeyI_oFVTUBWHQ">
+        <ownedParameter xmi:id="_gdy84AyvEeyI_oFVTUBWHQ" name="sourceAddress">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+        </ownedParameter>
+        <ownedParameter xmi:id="_gdy84QyvEeyI_oFVTUBWHQ" name="destinationAddress">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+        </ownedParameter>
+        <edge xmi:type="uml:ObjectFlow" xmi:id="_XnZ4EAy8EeyI_oFVTUBWHQ" target="_T8JHQAy8EeyI_oFVTUBWHQ" source="_kVGloAyvEeyI_oFVTUBWHQ"/>
+        <edge xmi:type="uml:ObjectFlow" xmi:id="_mpdiAAy8EeyI_oFVTUBWHQ" target="_jpnswAy8EeyI_oFVTUBWHQ" source="_jPg2kAyvEeyI_oFVTUBWHQ"/>
+        <edge xmi:type="uml:ObjectFlow" xmi:id="_0L5zUAy8EeyI_oFVTUBWHQ" target="_c8tI0Ay8EeyI_oFVTUBWHQ" source="_jpnswAy8EeyI_oFVTUBWHQ"/>
+        <edge xmi:type="uml:ObjectFlow" xmi:id="_GxmRMAy_EeyI_oFVTUBWHQ" target="_-NHHoAy-EeyI_oFVTUBWHQ" source="_fzWbQQy7EeyI_oFVTUBWHQ"/>
+        <edge xmi:type="uml:ObjectFlow" xmi:id="_HgTKQAy_EeyI_oFVTUBWHQ" target="_ABAuMAy_EeyI_oFVTUBWHQ" source="_T8JHQAy8EeyI_oFVTUBWHQ"/>
+        <edge xmi:type="uml:ObjectFlow" xmi:id="_VzVLAAy_EeyI_oFVTUBWHQ" name="addressesEqual" target="_KMbZUAy_EeyI_oFVTUBWHQ" source="_Dipo8Ay_EeyI_oFVTUBWHQ"/>
+        <edge xmi:type="uml:ControlFlow" xmi:id="_b_qKYAy_EeyI_oFVTUBWHQ" target="_aI2hIAy8EeyI_oFVTUBWHQ" source="_KMbZUAy_EeyI_oFVTUBWHQ">
+          <guard xmi:type="uml:LiteralBoolean" xmi:id="_b_qxcAy_EeyI_oFVTUBWHQ" name="Decision1_To_call_printReceived_guard" value="true"/>
+          <weight xmi:type="uml:LiteralInteger" xmi:id="_b_qxcQy_EeyI_oFVTUBWHQ" name="Decision1_To_call_printReceived_weight"/>
+        </edge>
+        <edge xmi:type="uml:ControlFlow" xmi:id="_fmB0IAy_EeyI_oFVTUBWHQ" target="_eygsgAy_EeyI_oFVTUBWHQ" source="_KMbZUAy_EeyI_oFVTUBWHQ">
+          <guard xmi:type="uml:LiteralBoolean" xmi:id="_fmCbMAy_EeyI_oFVTUBWHQ" name="Decision1_To_ActivityFinal1_guard"/>
+          <weight xmi:type="uml:LiteralInteger" xmi:id="_fmCbMQy_EeyI_oFVTUBWHQ" name="Decision1_To_ActivityFinal1_weight"/>
+        </edge>
+        <node xmi:type="uml:ActivityParameterNode" xmi:id="_jPg2kAyvEeyI_oFVTUBWHQ" name="aPN_sourceAddress" outgoing="_mpdiAAy8EeyI_oFVTUBWHQ" parameter="_gdy84AyvEeyI_oFVTUBWHQ">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+        </node>
+        <node xmi:type="uml:ActivityParameterNode" xmi:id="_kVGloAyvEeyI_oFVTUBWHQ" name="aPN_destinationAddress" outgoing="_XnZ4EAy8EeyI_oFVTUBWHQ" parameter="_gdy84QyvEeyI_oFVTUBWHQ">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+        </node>
+        <node xmi:type="uml:ReadStructuralFeatureAction" xmi:id="_fzV0MAy7EeyI_oFVTUBWHQ" name="ReadAddress" structuralFeature="_6VbwoAysEeyI_oFVTUBWHQ">
+          <object xmi:id="_fzWbQAy7EeyI_oFVTUBWHQ" name="self" type="_bNtPAAx9EeyI_oFVTUBWHQ"/>
+          <result xmi:id="_fzWbQQy7EeyI_oFVTUBWHQ" name="sourceAddress" outgoing="_GxmRMAy_EeyI_oFVTUBWHQ">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+          </result>
+        </node>
+        <node xmi:type="uml:DataStoreNode" xmi:id="_T8JHQAy8EeyI_oFVTUBWHQ" name="DataStore1" incoming="_XnZ4EAy8EeyI_oFVTUBWHQ" outgoing="_HgTKQAy_EeyI_oFVTUBWHQ"/>
+        <node xmi:type="uml:CallOperationAction" xmi:id="_aI2hIAy8EeyI_oFVTUBWHQ" name="call_printReceived" incoming="_b_qKYAy_EeyI_oFVTUBWHQ" operation="_7BsAYAyxEeyI_oFVTUBWHQ">
+          <argument xmi:id="_c8tI0Ay8EeyI_oFVTUBWHQ" name="fromAddress" incoming="_0L5zUAy8EeyI_oFVTUBWHQ">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+          </argument>
+          <target xmi:id="_aI2hIQy8EeyI_oFVTUBWHQ" name="self" type="_bNtPAAx9EeyI_oFVTUBWHQ"/>
+        </node>
+        <node xmi:type="uml:DataStoreNode" xmi:id="_jpnswAy8EeyI_oFVTUBWHQ" name="DataStore2" incoming="_mpdiAAy8EeyI_oFVTUBWHQ" outgoing="_0L5zUAy8EeyI_oFVTUBWHQ"/>
+        <node xmi:type="uml:CallBehaviorAction" xmi:id="_9CvmQAy-EeyI_oFVTUBWHQ" name="call_addressIsEqual" behavior="_A5LqIAywEeyI_oFVTUBWHQ">
+          <argument xmi:id="_-NHHoAy-EeyI_oFVTUBWHQ" name="sourceAddress" incoming="_GxmRMAy_EeyI_oFVTUBWHQ">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+          </argument>
+          <argument xmi:id="_ABAuMAy_EeyI_oFVTUBWHQ" name="destinationAddress" incoming="_HgTKQAy_EeyI_oFVTUBWHQ">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+          </argument>
+          <result xmi:id="_Dipo8Ay_EeyI_oFVTUBWHQ" name="result" outgoing="_VzVLAAy_EeyI_oFVTUBWHQ">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+          </result>
+        </node>
+        <node xmi:type="uml:DecisionNode" xmi:id="_KMbZUAy_EeyI_oFVTUBWHQ" name="Decision1" incoming="_VzVLAAy_EeyI_oFVTUBWHQ" outgoing="_b_qKYAy_EeyI_oFVTUBWHQ _fmB0IAy_EeyI_oFVTUBWHQ" decisionInputFlow="_VzVLAAy_EeyI_oFVTUBWHQ"/>
+        <node xmi:type="uml:ActivityFinalNode" xmi:id="_eygsgAy_EeyI_oFVTUBWHQ" name="ActivityFinal1" incoming="_fmB0IAy_EeyI_oFVTUBWHQ"/>
+      </ownedBehavior>
+      <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_EiFYkAyyEeyI_oFVTUBWHQ" name="printReceived" specification="_7BsAYAyxEeyI_oFVTUBWHQ">
+        <ownedParameter xmi:id="_HqKj0AyyEeyI_oFVTUBWHQ" name="fromAddress">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+        </ownedParameter>
+        <language>CPP</language>
+        <body>std::cout&lt;&lt;&quot;-- node_&quot;&lt;&lt;getAddress()&lt;&lt;&quot;::printReceived --\n&quot;;&#xD;
+std::cout&lt;&lt;&quot;Received Ping from node_&quot;&lt;&lt;fromAddress&lt;&lt;std::endl;</body>
+      </ownedBehavior>
+      <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_HdouQAyzEeyI_oFVTUBWHQ" name="printSend" specification="_z3VdEAyyEeyI_oFVTUBWHQ">
+        <ownedParameter xmi:id="_HdouQQyzEeyI_oFVTUBWHQ" name="fromAddress">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+        </ownedParameter>
+        <language>CPP</language>
+        <body>std::cout&lt;&lt;&quot;-- node_&quot;&lt;&lt;getAddress()&lt;&lt;&quot;::printSend --\n&quot;;&#xD;
+std::cout&lt;&lt;&quot;Sending Ping to node_&quot;&lt;&lt;toAddress&lt;&lt;std::endl;</body>
+      </ownedBehavior>
+      <ownedOperation xmi:id="_OxFgAAyuEeyI_oFVTUBWHQ" name="receive" method="_fBsyUAyvEeyI_oFVTUBWHQ">
+        <ownedParameter xmi:id="_OxFgAQyuEeyI_oFVTUBWHQ" name="sourceAddress">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+        </ownedParameter>
+        <ownedParameter xmi:id="_OxFgAgyuEeyI_oFVTUBWHQ" name="destinationAddress">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation xmi:id="_7BsAYAyxEeyI_oFVTUBWHQ" name="printReceived" method="_EiFYkAyyEeyI_oFVTUBWHQ">
+        <ownedParameter xmi:id="_Avl-YAyyEeyI_oFVTUBWHQ" name="fromAddress">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation xmi:id="_z3VdEAyyEeyI_oFVTUBWHQ" name="printSend" method="_HdouQAyzEeyI_oFVTUBWHQ">
+        <ownedParameter xmi:id="_z3VdEQyyEeyI_oFVTUBWHQ" name="toAddress">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation xmi:id="_Tq4jsAyyEeyI_oFVTUBWHQ" name="ping" method="_eIM3IAyyEeyI_oFVTUBWHQ">
+        <ownedParameter xmi:id="_YBKncAyyEeyI_oFVTUBWHQ" name="destinationAddress">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+        </ownedParameter>
+      </ownedOperation>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Interface" xmi:id="_yXc1IAymEeyI_oFVTUBWHQ" name="IReceiver">
+      <ownedOperation xmi:id="_1icKcAymEeyI_oFVTUBWHQ" name="receive">
+        <ownedParameter xmi:id="_9Ds4QAytEeyI_oFVTUBWHQ" name="sourceAddress">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+        </ownedParameter>
+        <ownedParameter xmi:id="_9dkJwAytEeyI_oFVTUBWHQ" name="destinationAddress">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+        </ownedParameter>
+      </ownedOperation>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_8CpIEAymEeyI_oFVTUBWHQ" name="Receiver">
+      <ownedAttribute xmi:id="_LzMA8AytEeyI_oFVTUBWHQ" name="incomingFrom" type="_7N-XoAyrEeyI_oFVTUBWHQ" association="_GmiV4AytEeyI_oFVTUBWHQ"/>
+      <interfaceRealization xmi:id="_DCLtEAynEeyI_oFVTUBWHQ" name="IReceiver_Realization" client="_8CpIEAymEeyI_oFVTUBWHQ" supplier="_yXc1IAymEeyI_oFVTUBWHQ" contract="_yXc1IAymEeyI_oFVTUBWHQ"/>
+      <ownedOperation xmi:id="__567oAymEeyI_oFVTUBWHQ" name="receive">
+        <ownedParameter xmi:id="_MuQFkAyuEeyI_oFVTUBWHQ" name="sourceAddress">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+        </ownedParameter>
+        <ownedParameter xmi:id="_NJP_gAyuEeyI_oFVTUBWHQ" name="destinationAddress">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+        </ownedParameter>
+      </ownedOperation>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_7N-XoAyrEeyI_oFVTUBWHQ" name="Sender">
+      <ownedAttribute xmi:id="_I4xeQAytEeyI_oFVTUBWHQ" name="outgoingTo" type="_8CpIEAymEeyI_oFVTUBWHQ" association="_GmiV4AytEeyI_oFVTUBWHQ"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Usage" xmi:id="_n46kQAynEeyI_oFVTUBWHQ" name="ReceiverUsage" client="_7N-XoAyrEeyI_oFVTUBWHQ" supplier="_yXc1IAymEeyI_oFVTUBWHQ"/>
+    <packagedElement xmi:type="uml:Association" xmi:id="_GmiV4AytEeyI_oFVTUBWHQ" name="A_sender_receiver" memberEnd="_LzMA8AytEeyI_oFVTUBWHQ _I4xeQAytEeyI_oFVTUBWHQ"/>
+    <packagedElement xmi:type="uml:OpaqueBehavior" xmi:id="_A5LqIAywEeyI_oFVTUBWHQ" name="addressIsEqual">
+      <ownedParameter xmi:id="_gxuJAAywEeyI_oFVTUBWHQ" name="sourceAddress">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      </ownedParameter>
+      <ownedParameter xmi:id="_DImvEAywEeyI_oFVTUBWHQ" name="destinationAddress">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      </ownedParameter>
+      <ownedParameter xmi:id="_ECLbYAywEeyI_oFVTUBWHQ" name="result" direction="return">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+      </ownedParameter>
+      <language>CPP</language>
+      <body>std::cout&lt;&lt;&quot;source = &quot;&lt;&lt;sourceAddress&lt;&lt;&quot;; destination = &quot;&lt;&lt;destinationAddress&lt;&lt;std::endl;&#xD;
+result = (sourceAddress == destinationAddress);</body>
+    </packagedElement>
+    <packagedElement xmi:type="uml:OpaqueBehavior" xmi:id="_mBOTwAywEeyI_oFVTUBWHQ" name="addressIsLower">
+      <ownedParameter xmi:id="_mBOTwQywEeyI_oFVTUBWHQ" name="sourceAddress">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      </ownedParameter>
+      <ownedParameter xmi:id="_mBOTwgywEeyI_oFVTUBWHQ" name="destinationAddress">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      </ownedParameter>
+      <ownedParameter xmi:id="_mBOTwwywEeyI_oFVTUBWHQ" name="result" direction="return">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+      </ownedParameter>
+      <language>CPP</language>
+      <body>result = (destinationAddress &lt; sourceAddress);</body>
+    </packagedElement>
+    <packagedElement xmi:type="uml:InstanceSpecification" xmi:id="_1BEXMAywEeyI_oFVTUBWHQ" name="node_1_Spec">
+      <slot xmi:id="_3ixe8AywEeyI_oFVTUBWHQ" definingFeature="_6VbwoAysEeyI_oFVTUBWHQ">
+        <value xmi:type="uml:LiteralInteger" xmi:id="_6JLggAywEeyI_oFVTUBWHQ" name="address_1" value="1"/>
+      </slot>
+    </packagedElement>
+    <packagedElement xmi:type="uml:InstanceSpecification" xmi:id="_9-dI8AywEeyI_oFVTUBWHQ" name="node_2_Spec">
+      <slot xmi:id="_9-dI8QywEeyI_oFVTUBWHQ" definingFeature="_6VbwoAysEeyI_oFVTUBWHQ">
+        <value xmi:type="uml:LiteralInteger" xmi:id="_9-dI8gywEeyI_oFVTUBWHQ" name="address_2" value="2"/>
+      </slot>
+    </packagedElement>
+    <packagedElement xmi:type="uml:InstanceSpecification" xmi:id="_BSJHQAyxEeyI_oFVTUBWHQ" name="node_3_Spec">
+      <slot xmi:id="_BSJHQQyxEeyI_oFVTUBWHQ" definingFeature="_6VbwoAysEeyI_oFVTUBWHQ">
+        <value xmi:type="uml:LiteralInteger" xmi:id="_BSJHQgyxEeyI_oFVTUBWHQ" name="address_3" value="3"/>
+      </slot>
+    </packagedElement>
+    <packagedElement xmi:type="uml:OpaqueBehavior" xmi:id="_bDf2YAy6EeyI_oFVTUBWHQ" name="main">
+      <language>CPP</language>
+      <body>std::shared_ptr&lt;PingModel::Network> network = factory->createNetwork();&#xD;
+network->getNode_1()->ping(1);</body>
+    </packagedElement>
+    <profileApplication xmi:id="_FCEtwAySEeyI_oFVTUBWHQ">
+      <eAnnotations xmi:id="_FCEtwQySEeyI_oFVTUBWHQ" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="file:/C:/src/MDE4CPP-dev/src/common/UML4CPPProfile/model/UML4CPPProfile.uml#_v75nIfp7EeuavpF89IQaUg"/>
+      </eAnnotations>
+      <appliedProfile href="file:/C:/src/MDE4CPP-dev/src/common/UML4CPPProfile/model/UML4CPPProfile.uml#_0"/>
+    </profileApplication>
+  </uml:Model>
+  <UML4CPPProfile:MainBehavior xmi:id="_G52uwAySEeyI_oFVTUBWHQ"/>
+  <UML4CPPProfile:NonExecutable xmi:id="_5rFkYAyyEeyI_oFVTUBWHQ" base_NamedElement="_EiFYkAyyEeyI_oFVTUBWHQ"/>
+  <UML4CPPProfile:NonExecutable xmi:id="_HdouQgyzEeyI_oFVTUBWHQ" base_NamedElement="_HdouQAyzEeyI_oFVTUBWHQ"/>
+  <UML4CPPProfile:MainBehavior xmi:id="_mLxyYAy6EeyI_oFVTUBWHQ" base_Behavior="_bDf2YAy6EeyI_oFVTUBWHQ"/>
+  <UML4CPPProfile:NonExecutable xmi:id="_1flToAy6EeyI_oFVTUBWHQ" base_NamedElement="_bDf2YAy6EeyI_oFVTUBWHQ"/>
+</xmi:XMI>
