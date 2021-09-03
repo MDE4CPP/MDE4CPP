@@ -220,6 +220,7 @@ void [aClass.name.toUpperFirst()/]Impl::set[compositeOwnerClass.name.toUpperFirs
 [aProperty.memberName()/]->setIsUnique([aProperty.isUnique/]);
 [aProperty.memberName()/]->setAggregation(uml::AggregationKind::[aProperty.aggregation.toString().toUpper()/]);
 [if (aProperty.oclIsTypeOf(Port))]
+[aProperty.memberName()/]->setIsBehavior([aProperty.oclAsType(Port).isBehavior/]);
 [aProperty.memberName()/]->setIsConjugated([aProperty.oclAsType(Port).isConjugated/]);
 [/if]
 [aProperty.memberName()/]->setVisibility(uml::VisibilityKind::[aProperty.visibility.toString().toUpperCase()/]);
