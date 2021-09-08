@@ -33,7 +33,7 @@ virtual std::shared_ptr<[metaModelTypeString(anENamedElement, anEPackage)/]> get
 
 
 [template public generateModelElementGetterImpl(anENamedElement : ENamedElement, anEPackage : EPackage)]
-std::shared_ptr<[metaModelTypeString(anENamedElement, anEPackage)/]> [anEPackage.name/]PackageImpl::get[anENamedElement.getMemberNameUpperFirst()/]() const
+std::shared_ptr<[metaModelTypeString(anENamedElement, anEPackage)/]> [anEPackage.generateNamespaceDefinition()/]::[anEPackage.name/]PackageImpl::get[anENamedElement.getMemberNameUpperFirst()/]() const
 {
 	return [anENamedElement.getClassMemberName()/];
 }
@@ -41,14 +41,14 @@ std::shared_ptr<[metaModelTypeString(anENamedElement, anEPackage)/]> [anEPackage
 [/template]
 
 [template public generateSubPackageGetter(anEPackage : EPackage, impl : Boolean) ? ( not hasImplOnly()) ]			
-virtual std::shared_ptr<[anEPackage.name/]::[anEPackage.name/]Package> get[anEPackage.getMemberNameUpperFirst()/]Package() const [abstractSufix(impl)/];
+virtual std::shared_ptr<[anEPackage.generateNamespaceDefinition()/]::[anEPackage.name/]Package> get[anEPackage.getMemberNameUpperFirst()/]Package() const [abstractSufix(impl)/];
 
 [/template]
 
 [template public generateSubPackageGetterImpl(aSubPackage: EPackage, anEPackage: EPackage)]
-std::shared_ptr<[aSubPackage.name/]::[aSubPackage.name/]Package> [anEPackage.name/]PackageImpl::get[aSubPackage.getMemberNameUpperFirst()/]Package() const
+std::shared_ptr<[aSubPackage.generateNamespaceDefinition()/]::[aSubPackage.name/]Package> [anEPackage.generateNamespaceDefinition()/]::[anEPackage.name/]PackageImpl::get[aSubPackage.getMemberNameUpperFirst()/]Package() const
 {
-	return [aSubPackage.name/]::[aSubPackage.name/]Package::eInstance();
+	return [aSubPackage.generateNamespaceDefinition()/]::[aSubPackage.name/]Package::eInstance();
 } 
 
 [/template]

@@ -147,7 +147,7 @@ virtual public [ClassWithNamespace(anEClass, sClass)/]Impl[/for][if (anEClass.eS
 			[anEClass.generateeInvokeByIDDeclaration(true)/]
 
 		private:
-			std::weak_ptr<[anEClass.name.toUpperFirst()/]> m_[generateGetThisPtrPropertyName()/];
+			std::weak_ptr<[anEClass.generateNamespaceDefinition()/]::[anEClass.name.toUpperFirst()/]> m_[generateGetThisPtrPropertyName()/];
 	};
 }
 [endGuard(className)/]

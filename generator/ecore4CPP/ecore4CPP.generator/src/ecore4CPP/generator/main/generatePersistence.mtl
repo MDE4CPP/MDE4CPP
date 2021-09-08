@@ -161,7 +161,7 @@ void [aClass.name.concat('Impl')/]::loadAttributes(std::shared_ptr<[generatePers
 [for (aLiteral : EEnumLiteral | aAttribute.eType.oclAsType(EEnum).eLiterals->reject(doNotGenerateEEnumLiteral())) before ('\t\t\t') separator ('\t\t\telse ')]
 if (literal == "[aLiteral.name/]")
 			{
-				value = [aAttribute.eType.name/]::[aLiteral.name.toUpperCase()/];
+				value = [aAttribute.eType.generateNamespaceDefinition()/]::[aAttribute.eType.name/]::[aLiteral.name.toUpperCase()/];
 			}
 [/for]
 		  [else]
@@ -446,11 +446,11 @@ void [aClass.name.concat('Impl')/]::saveContent(std::shared_ptr<[generatePersist
 			[aAttribute.generateStructuralFeatureType(true)/] value = this->[aAttribute.GetterName()/]();
 			std::string literal = "";
 		[for (aLiteral : EEnumLiteral | aAttribute.eType.oclAsType(EEnum).eLiterals->reject(doNotGenerateEEnumLiteral())) before ('\t\t\t') separator ('\t\t\telse ')]
-if (value == [aAttribute.eType.name/]::[aLiteral.name.toUpperCase()/])
+if (value == [aAttribute.eType.generateNamespaceDefinition()/]::[aAttribute.eType.name/]::[aLiteral.name.toUpperCase()/])
 			{
 				literal = "[aLiteral.name/]";
 			}
-[/for]
+		[/for]
 			saveHandler->addAttribute("[aAttribute.name/]", literal);
 	[elseif (aAttribute.upperBound <> 1)]
 			for (std::shared_ptr<[aAttribute.eGenericType.generateCppType(true)/]> value : *m_[aAttribute.name/])
@@ -458,7 +458,11 @@ if (value == [aAttribute.eType.name/]::[aLiteral.name.toUpperCase()/])
 				saveHandler->addAttributeAsNode("[aAttribute.name/]", [if (not (aAttribute.eType.name = 'String' or aAttribute.eType.name = 'EString'))]std::to_string([/if]*value[if (not (aAttribute.eType.name = 'String' or aAttribute.eType.name = 'EString'))])[/if]);
 			}
 	[else]
+		[if (aAttribute.eType.transformType() = 'Any')]
+			//Cannot save attributes of type Any (EJavaObject)
+		[else]
 			saveHandler->addAttribute("[aAttribute.name/]", this->[aAttribute.GetterName()/]());
+		[/if]
 	[/if]
 		}
   [else]

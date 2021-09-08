@@ -66,21 +66,21 @@ std::shared_ptr<ecore::EObject> [aClass.name.toUpperFirst()/]Impl::eContainer() 
 }
 [/template]
 
-[template public generateGetThisPtrDeclarations(aClass : EClass) post(trim())]
-virtual std::shared_ptr<[aClass.name/]> [generateGetThisPtrPropertyGetterName()/]() const;
-virtual void [generateGetThisPtrPropertySetterName()/](std::weak_ptr<[aClass.name.toUpperFirst()/]> [generateGetThisPtrPropertyName()/]);
+[template public generateGetThisPtrDeclarations(anEClass : EClass) post(trim())]
+virtual std::shared_ptr<[anEClass.generateNamespaceDefinition()/]::[anEClass.name.toUpperFirst()/]> [generateGetThisPtrPropertyGetterName()/]() const;
+virtual void [generateGetThisPtrPropertySetterName()/](std::weak_ptr<[anEClass.generateNamespaceDefinition()/]::[anEClass.name.toUpperFirst()/]> [generateGetThisPtrPropertyName()/]);
 [/template]
 
-[template public generateGetThisPtrImplementation(aClass: EClass) post(trim())]
-std::shared_ptr<[aClass.name.toUpperFirst()/]> [aClass.name.toUpperFirst()/]Impl::[generateGetThisPtrPropertyGetterName()/]() const
+[template public generateGetThisPtrImplementation(anEClass: EClass) post(trim())]
+std::shared_ptr<[anEClass.generateNamespaceDefinition()/]::[anEClass.name.toUpperFirst()/]> [anEClass.name.toUpperFirst()/]Impl::[generateGetThisPtrPropertyGetterName()/]() const
 {
 	return m_[generateGetThisPtrPropertyName()/].lock();
 }
-void [aClass.name.toUpperFirst()/]Impl::[generateGetThisPtrPropertySetterName()/](std::weak_ptr<[aClass.name.toUpperFirst()/]> [generateGetThisPtrPropertyName()/])
+void [anEClass.name.toUpperFirst()/]Impl::[generateGetThisPtrPropertySetterName()/](std::weak_ptr<[anEClass.generateNamespaceDefinition()/]::[anEClass.name.toUpperFirst()/]> [generateGetThisPtrPropertyName()/])
 {
 	m_[generateGetThisPtrPropertyName()/] = [generateGetThisPtrPropertyName()/];
-	[for (superClass : EClass | aClass.eSuperTypes->asOrderedSet()->sortedBy(name))]
-	[superClass.generateGetThisPtrPropertySetterName()/]([aClass.generateGetThisPtrPropertyName()/]);
+	[for (superClass : EClass | anEClass.eSuperTypes->asOrderedSet()->sortedBy(name))]
+	[superClass.generateGetThisPtrPropertySetterName()/]([anEClass.generateGetThisPtrPropertyName()/]);
 	[/for]	
 }
 [/template]
