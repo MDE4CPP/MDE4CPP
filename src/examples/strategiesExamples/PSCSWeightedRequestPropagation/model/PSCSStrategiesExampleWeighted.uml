@@ -159,7 +159,7 @@ std::cout&lt;&lt;std::endl;&#xD;
 &#xD;
 std::cout&lt;&lt;&quot;-- End of test case --&quot;&lt;&lt;std::endl;</body>
     </packagedElement>
-    <packagedElement xmi:type="uml:Class" xmi:id="_NfJCQAWjEeyhaZlTpg_vvA" name="Randomized_RequestPropagationStrategy">
+    <packagedElement xmi:type="uml:Class" xmi:id="_NfJCQAWjEeyhaZlTpg_vvA" name="Weighted_RequestPropagationStrategy">
       <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_8KVdIAWjEeyhaZlTpg_vvA" name="obSelect" specification="_dv4s4AWjEeyhaZlTpg_vvA">
         <ownedParameter xmi:id="__4yE0AWjEeyhaZlTpg_vvA" name="potentialTargets">
           <type xmi:type="uml:Class" href="../../../../common/fUMLStrategiesProfile/model/fUMLStrategiesProfile.uml#_Q9EbIAV2EeyhaZlTpg_vvA"/>
