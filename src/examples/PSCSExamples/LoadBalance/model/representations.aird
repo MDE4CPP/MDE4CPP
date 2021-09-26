@@ -32,7 +32,7 @@
     </ownedViews>
     <ownedViews xmi:type="viewpoint:DView" uid="_wpTdEB0UEeyVwfCVnFKaMw">
       <viewpoint xmi:type="description:Viewpoint" href="platform:/plugin/org.obeonetwork.dsl.uml2.design/description/uml2.odesign#//@ownedViewpoints[name='Design']"/>
-      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="_yUU0cB0UEeyVwfCVnFKaMw" name="NewModel Composite Structure Diagram" repPath="#_yT7L0B0UEeyVwfCVnFKaMw" changeId="97edc6dd-0f46-4df0-a670-94108b3e975b">
+      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="_yUU0cB0UEeyVwfCVnFKaMw" name="NewModel Composite Structure Diagram" repPath="#_yT7L0B0UEeyVwfCVnFKaMw" changeId="98d11205-f1f3-4292-a670-023afb34f75d">
         <description xmi:type="description_1:DiagramDescription" href="platform:/plugin/org.obeonetwork.dsl.uml2.design/description/uml2.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Composite%20Structure%20Diagram']"/>
         <target xmi:type="uml:Model" href="loadbalance.uml#_v_ZkcB0UEeyVwfCVnFKaMw"/>
       </ownedRepresentationDescriptors>
@@ -180,7 +180,7 @@
         <description xmi:type="style:FlatContainerStyleDescription" href="platform:/plugin/org.obeonetwork.dsl.uml2.design/description/uml2.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Composite%20Structure%20Diagram']/@defaultLayer/@containerMappings[name='CS_StructuredClassifier']/@conditionnalStyles.1/@style"/>
       </ownedStyle>
       <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/plugin/org.obeonetwork.dsl.uml2.design/description/uml2.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Composite%20Structure%20Diagram']/@defaultLayer/@containerMappings[name='CS_StructuredClassifier']"/>
-      <ownedDiagramElements xmi:type="diagram:DNodeContainer" uid="_N4udQB0YEeyVwfCVnFKaMw" name="+ clients : Client" width="12" height="10">
+      <ownedDiagramElements xmi:type="diagram:DNodeContainer" uid="_N4udQB0YEeyVwfCVnFKaMw" name="+ client : Client" width="12" height="10">
         <target xmi:type="uml:Property" href="loadbalance.uml#_74ys8h0XEeyVwfCVnFKaMw"/>
         <semanticElements xmi:type="uml:Property" href="loadbalance.uml#_74ys8h0XEeyVwfCVnFKaMw"/>
         <ownedBorderedNodes xmi:type="diagram:DNode" uid="_uWZiIB0bEeyVwfCVnFKaMw" name="serverOutPort : ClientPort" outgoingEdges="_mOvpEB0cEeyVwfCVnFKaMw" width="2" height="2">
