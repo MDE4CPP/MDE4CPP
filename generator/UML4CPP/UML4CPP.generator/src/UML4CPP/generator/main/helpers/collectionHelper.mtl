@@ -91,7 +91,7 @@
  * This are all classes of the model except abstract classes and classes with active singleton annotation.
  * The resulting class list is sorted by myQualifiedName.
 */]
-[query public collectModelClassesForFactoryDeclaration(aPackage : Package) : OrderedSet(Class) = collectModelClassesForFactoryInternal(aPackage)->addAll(collectModelClassesForFactoryInternal(aPackage).getCompositeOwners())->addAll(collectModelStereotypesForFactory(aPackage))->sortedBy(myQualifiedName()) /]
+[query public collectModelClassesForFactoryDeclaration(aPackage : Package) : OrderedSet(Class) = collectModelClassesForFactoryInternal(aPackage)->addAll(collectModelClassesForFactoryInternal(aPackage).getImplicitCompositeOwners())->addAll(collectModelStereotypesForFactory(aPackage))->sortedBy(myQualifiedName()) /]
 [query public collectModelClassesForFactoryFunctions(aPackage : Package) : OrderedSet(Class) = collectModelClassesForFactoryInternal(aPackage)->addAll(collectModelStereotypesForFactory(aPackage))->reject(isSingleton() or isAbstract = true)->sortedBy(myQualifiedName()) /]
 [query private collectModelStereotypesForFactory(aPackage : Package) : Set(Class) = aPackage.ownedMember->selectByType(Stereotype) /]
 [query private collectModelClassesForFactoryInternal(aPackage : Package) : Set(Class) = aPackage.ownedMember->selectByType(Class) /]

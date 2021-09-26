@@ -30,9 +30,9 @@
 [query public getStructuralFeaturesFromASTVA(aPackage : Package, aClassifier : Classifier) : OrderedSet(StructuralFeature) = aPackage.allOwnedElements()->filter(AddStructuralFeatureValueAction)->select(object.type=aClassifier).structuralFeature->asOrderedSet()->sortedBy(name)/]
 [query public getStructuralFeaturesFromRSTVA(aPackage : Package, aClassifier : Classifier) : OrderedSet(StructuralFeature) = aPackage.allOwnedElements()->filter(RemoveStructuralFeatureValueAction)->select(object.type=aClassifier).structuralFeature->asOrderedSet()->sortedBy(name)/]
 
-[query private collectConnectedClassesToInclude(aClass : Class) : Set(Class) = Set(Class){getCompositeOwners().ownedConnector.end->select(not role.oclIsUndefined()).role->reject(type = aClass).type, getCompositeOwners().ownedConnector.end->select(not partWithPort.oclIsUndefined()).partWithPort->reject(type = aClass).type}->flatten()->asOrderedSet()->sortedBy(myQualifiedName()) /]
+[query private collectConnectedClassesToInclude(aClass : Class) : Set(Class) = Set(Class){getImplicitCompositeOwners()->addAll(getExplicitCompositeOwners()).ownedConnector.end->select(not role.oclIsUndefined()).role->reject(type = aClass).type, getImplicitCompositeOwners()->addAll(getExplicitCompositeOwners()).ownedConnector.end->select(not partWithPort.oclIsUndefined()).partWithPort->reject(type = aClass).type}->flatten()->asOrderedSet()->sortedBy(myQualifiedName()) /]
 [query private collectClassesToIncludeFromPartsWithPortsProperties(aClass : Class) : Set(Class) = Set(Class){aClass.ownedConnector.end->reject(anEnd : ConnectorEnd | anEnd.partWithPort.oclIsUndefined()).role.type}->flatten()->asOrderedSet()->sortedBy(myQualifiedName()) /]
-[query private collectCompositeStructureIncludes(aClass : Class) : Set(Class) = Set(Class){aClass.collectClassesToIncludeFromPartsWithPortsProperties(), aClass.collectConnectedClassesToInclude(), aClass.getCompositeOwners()}->flatten()->asOrderedSet()->sortedBy(myQualifiedName()) /]
+[query private collectCompositeStructureIncludes(aClass : Class) : Set(Class) = Set(Class){aClass.collectClassesToIncludeFromPartsWithPortsProperties(), aClass.collectConnectedClassesToInclude(), aClass.getImplicitCompositeOwners(), aClass.getExplicitCompositeOwners()}->flatten()->asOrderedSet()->sortedBy(myQualifiedName()) /]
 
 [query private getInterfaceAttributes(aClassifier : Classifier) : OrderedSet(Property) = if (aClassifier.oclIsKindOf(Class)) then aClassifier.oclAsType(Class).interfaceRealization.contract.getAllAttributes()->asOrderedSet()->sortedBy(qualifiedName) else OrderedSet{} endif /]
 [query private getSuperClassAttributes(aClassifier : Classifier) : OrderedSet(Property) = if (aClassifier.oclIsKindOf(Class)) then aClassifier.oclAsType(Class).superClass.getMyAttributes()->asOrderedSet()->sortedBy(qualifiedName) else OrderedSet{} endif /]
@@ -228,7 +228,7 @@ std::shared_ptr<Bag<PSCS::Semantics::StructuredClassifiers::CS_Object>> [classNa
 {   
 	std::shared_ptr<Bag<PSCS::Semantics::StructuredClassifiers::CS_Object>> directContainers(new Bag<PSCS::Semantics::StructuredClassifiers::CS_Object>());
 	[if (not aClassifier.oclIsKindOf(Interface))]
-	[for (ownerClass : Class | aClassifier.oclAsType(Class).getCompositeOwners())]
+	[for (ownerClass : Class | aClassifier.oclAsType(Class).getImplicitCompositeOwners())]
 	//owner class [ownerClass.name.toUpperFirst()/]
 	{	
 [if (aClassifier.hasOwnerProperty(ownerClass))]

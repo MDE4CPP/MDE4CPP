@@ -245,7 +245,7 @@ std::shared_ptr<[aClass.generateCppType(true)/]> [className/]::create[aClass.nam
 	[/let]
 [/for]
 
-[for (compositeOwnerClass : Class | aClass.getCompositeOwners()->select(isGeneratable()))] [comment for each class that has composite properties of type aClass/]
+[for (compositeOwnerClass : Class | aClass.getImplicitCompositeOwners()->select(isGeneratable()))] [comment for each class that has composite properties of type aClass/]
 [for (compositeProperty : Property | compositeOwnerClass.getCompositePropertiesOfType(aClass))] [comment for each composite property that compositeOwnerClass has/]
 std::shared_ptr<[aClass.generateCppType(true)/]> [className/]::create[aClass.name.toUpperFirst()/]_as_[compositeProperty.name/]_in_[compositeOwnerClass.name.toUpperFirst()/](std::weak_ptr<[compositeOwnerClass.generateCppType(true)/]> par_[compositeOwnerClass.name.toLowerFirst()/], const int metaElementID/*=-1*/) const
 {

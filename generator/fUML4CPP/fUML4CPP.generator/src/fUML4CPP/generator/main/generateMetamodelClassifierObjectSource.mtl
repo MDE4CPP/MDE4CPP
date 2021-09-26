@@ -25,9 +25,9 @@
 [import UML4CPP::generator::main::components::generateClass /]
 [import UML4CPP::generator::main::components::generateConnector/]
 
-[query private collectConnectedClassesToInclude(aClass : Class) : Set(Class) = Set(Class){getCompositeOwners().ownedConnector.end->select(not role.oclIsUndefined()).role->reject(type = aClass).type, getCompositeOwners().ownedConnector.end->select(not partWithPort.oclIsUndefined()).partWithPort->reject(type = aClass).type}->flatten()->asOrderedSet()->sortedBy(myQualifiedName()) /]
+[query private collectConnectedClassesToInclude(aClass : Class) : Set(Class) = Set(Class){getImplicitCompositeOwners().ownedConnector.end->select(not role.oclIsUndefined()).role->reject(type = aClass).type, getImplicitCompositeOwners().ownedConnector.end->select(not partWithPort.oclIsUndefined()).partWithPort->reject(type = aClass).type}->flatten()->asOrderedSet()->sortedBy(myQualifiedName()) /]
 [query private collectClassesToIncludeFromPartsWithPortsProperties(aClass : Class) : Set(Class) = Set(Class){aClass.ownedConnector.end->reject(anEnd : ConnectorEnd | anEnd.partWithPort.oclIsUndefined()).role.type}->flatten()->asOrderedSet()->sortedBy(myQualifiedName()) /]
-[query private collectCompositeStructureIncludes(aClass : Class) : Set(Class) = Set(Class){aClass.collectClassesToIncludeFromPartsWithPortsProperties(), aClass.collectConnectedClassesToInclude(), aClass.getCompositeOwners()}->flatten()->asOrderedSet()->sortedBy(myQualifiedName()) /]
+[query private collectCompositeStructureIncludes(aClass : Class) : Set(Class) = Set(Class){aClass.collectClassesToIncludeFromPartsWithPortsProperties(), aClass.collectConnectedClassesToInclude(), aClass.getImplicitCompositeOwners()}->flatten()->asOrderedSet()->sortedBy(myQualifiedName()) /]
 
 [template public generateMetamodelClassifierObjectSource(aClassifier : Classifier, aPackage:Package) {
 	className : String = objectClassName();

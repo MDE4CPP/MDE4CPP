@@ -34,7 +34,7 @@
 [import UML4CPP::generator::main::pscs::generateDestruction/]
 [import UML4CPP::generator::main::profiles::uml4CPPProfileHelper /]
 
-[query private includes(aClass : Class)  : Set(Type) = OrderedSet{aClass.member->selectByKind(TypedElement)->select(not type.oclIsUndefined()).type, aClass.ownedOperation.ownedParameter.type, aClass.getAllAttributes().type, aClass.importedMember, aClass.getCompositeOwners()}->flatten() /]
+[query private includes(aClass : Class)  : Set(Type) = OrderedSet{aClass.member->selectByKind(TypedElement)->select(not type.oclIsUndefined()).type, aClass.ownedOperation.ownedParameter.type, aClass.getAllAttributes().type, aClass.importedMember, aClass.getImplicitCompositeOwners()}->flatten() /]
 [query private includes(aInterface : Interface)  : Set(Type) = OrderedSet{aInterface.member->selectByKind(TypedElement)->select(not type.oclIsUndefined()).type, aInterface.ownedOperation.ownedParameter.type}->flatten() /]
 
 [query private getAllAttributes(anInterface : Interface) : Set(Property) = OrderedSet{anInterface.ownedAttribute, anInterface.generalization.general->selectByType(Interface).getAllAttributes()} /]
@@ -159,7 +159,7 @@
     m_[containmentProperty.name/] = [containmentProperty.name.toLowerFirst()/];
 }
 [/if] [/let] [/if] [/let] [/for]
-[for (compositeOwnerClass : Class | aClass.getCompositeOwners())]
+[for (compositeOwnerClass : Class | aClass.getImplicitCompositeOwners())]
 [className/]::[className/](std::weak_ptr<[compositeOwnerClass.generateCppType(true)/]> [compositeOwnerClass.name.toLowerFirst()/])
 :[className/]()
 {
@@ -310,7 +310,7 @@ void [className/]::destroy()
 	[aProperty.generatePropertyDestruction()/]
 	[/for]
 	//Erase back reference to owner
-	[for (compositeOwnerClass : Class | aClass.getCompositeOwners())]
+	[for (compositeOwnerClass : Class | aClass.getImplicitCompositeOwners())]
 	m_[compositeOwnerClass.name/].reset();
 	[/for]
 }
@@ -326,7 +326,7 @@ void [className/]::destroy()
 [aAttribute.generateAttributeSetterImplementationCpp(aClass)/]
 [aAttribute.generateAttributeGetterImplementationCpp(aClass)/]
 [/if][/for][/for]
-[for (compositeOwnerClass : Class | aClass.getCompositeOwners())]
+[for (compositeOwnerClass : Class | aClass.getImplicitCompositeOwners())]
 [aClass.generateCompositeOwnerAttributeGetterImplementationCpp(compositeOwnerClass)/]
 [aClass.generateCompositeOwnerAttributeSetterImplementationCpp(compositeOwnerClass)/]
 [/for]

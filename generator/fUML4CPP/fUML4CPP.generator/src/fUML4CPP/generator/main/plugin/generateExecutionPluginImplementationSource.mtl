@@ -195,23 +195,23 @@ Any [packageName/]::executeActivity(std::shared_ptr<uml::Activity> activity, std
 #include "[aPackage.generateNamespacePath(false)/]/[aPackage.getPackageName()/]Package.hpp"
 
 //Includes from owner Classes of executed Activities
-[for (act : Activity | aPackage.getUsedActivities()->select(owner.oclIsKindOf(Class)))]
+[for (act : Activity | aPackage.getUsedActivities()->select(owner.oclIsKindOf(Class))->reject(isDoNotGenerateElement()))]
 #include "[act.owner.oclAsType(Classifier).getNearestPackage().generateNamespacePath(false)/]Exec/[act.owner.oclAsType(Classifier).name.toUpperFirst()/]Object.hpp"
 #include "[act.owner.oclAsType(Classifier).getNearestPackage().generateNamespacePath(false)/]/[act.owner.oclAsType(Classifier).name.toUpperFirst()/].hpp"
 [/for]
 
 //Includes for packages of executed OpaqueBehaviors
-[for (anotherPackage : Package | aPackage.findPackagesForOpaqueBehaviorExecutions())]
+[for (anotherPackage : Package | aPackage.findPackagesForOpaqueBehaviorExecutions()->reject(isDoNotGenerateElement()))]
 #include "[anotherPackage.generateNamespacePath(false)/]/[anotherPackage.getPackageName().concat('Package')/].hpp" 
 [/for] 
 
 //Includes for packages of executed Operations
-[for (anotherPackage : Package | aPackage.allOwnedElements()->filter(Operation)->addAll(aPackage.getOperationExecutionsCOA()).getNearestPackage()->asSet())]
+[for (anotherPackage : Package | aPackage.allOwnedElements()->filter(Operation)->addAll(aPackage.getOperationExecutionsCOA())->reject(isDoNotGenerateElement()).getNearestPackage()->asSet())]
 #include "[anotherPackage.generateNamespacePath(false)/]/[anotherPackage.getPackageName().concat('Package')/].hpp" 
 [/for] 
 
 //Includes of packages from parameter types of executed Operations and Activities
-[for (pack : Package | aPackage.allOwnedElements()->filter(Operation)->addAll(aPackage.getOperationExecutionsCOA()).ownedParameter.type.getNearestPackage()->asSet()->addAll(aPackage.allOwnedElements()->filter(Activity).ownedParameter.type.getNearestPackage()->asSet())->sortedBy(name))]
+[for (pack : Package | aPackage.allOwnedElements()->filter(Operation)->addAll(aPackage.getOperationExecutionsCOA()).ownedParameter.type->reject(isDoNotGenerateElement()).getNearestPackage()->asSet()->addAll(aPackage.allOwnedElements()->filter(Activity).ownedParameter.type->reject(isDoNotGenerateElement()).getNearestPackage()->asSet())->sortedBy(name))]
 [if (not (pack.name='StandardProfile'))]
 #include "[pack.generateNamespacePath(false)/]/[pack.name.concat('Package')/].hpp"
 [/if]
@@ -228,11 +228,11 @@ Any [packageName/]::executeActivity(std::shared_ptr<uml::Activity> activity, std
 
 //Includes from parameter types of executed Operations and Activities
 [for ( type : Type | aPackage.allOwnedElements()->filter(Operation)->addAll(aPackage.getOperationExecutionsCOA())->reject(isDoNotGenerateElement())->reject(hasStereotypeApplied(QN_STEREOTYPE_NONEXECUTABLE())).ownedParameter.type->asSet()
-	->addAll(aPackage.allOwnedElements()->filter(Activity).ownedParameter.type->asSet())->sortedBy(qualifiedName))]
+	->addAll(aPackage.allOwnedElements()->filter(Activity).ownedParameter.type->asSet())->reject(isDoNotGenerateElement())->sortedBy(qualifiedName))]
 [type.generateTypeInclude(type.getNearestPackage(), aPackage)/]
 [/for]
 
-[for ( type : Type | aPackage.getActivitiesOwnedByPackage().ownedParameter.type->asSet()->sortedBy(qualifiedName))]
+[for ( type : Type | aPackage.getActivitiesOwnedByPackage().ownedParameter.type->asSet()->reject(isDoNotGenerateElement())->sortedBy(qualifiedName))]
 [type.generateTypeInclude(type.getNearestPackage(), aPackage)/]
 [/for]
 [/template]

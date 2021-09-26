@@ -30,7 +30,7 @@
 [import UML4CPP::generator::main::components::generateClass /]
 [import UML4CPP::generator::main::profiles::uml4CPPProfileHelper /]
 
-[query private includes(aClass : Class) : Set(Type) = Set(Type){aClass.ownedAttribute.type, aClass.ownedOperation.ownedParameter.type, aClass.getCompositeOwners()}->flatten() /]
+[query private includes(aClass : Class) : Set(Type) = Set(Type){aClass.ownedAttribute.type, aClass.ownedOperation.ownedParameter.type, aClass.getImplicitCompositeOwners()}->flatten() /]
 
 [template public generateModel(aClass : Class) {aPackage:Package = aClass.ancestors()->filter(Package)->first();}]
 [file (aPackage.generateNamespacePath(false).concat('/').concat(aClass.name.toUpperFirst()).concat('.hpp'), false, 'UTF-8')]
@@ -114,7 +114,7 @@ virtual public [sClass.getClassifierName(aClass, false, sClass.getNearestPackage
 			// Getter Setter
 			//*********************************
 			[aClass.ownedAttribute->sortedBy(name).generateAttributeAccessorsDeclaration(false)/]
-			[aClass.getCompositeOwners()->sortedBy(name).generateCompositeOwnerAttributeAccessorsDeclaration(false)/]
+			[aClass.getImplicitCompositeOwners()->sortedBy(name).generateCompositeOwnerAttributeAccessorsDeclaration(false)/]
 			
 			//*********************************
 			// Operations
@@ -126,7 +126,7 @@ virtual public [sClass.getClassifierName(aClass, false, sClass.getNearestPackage
 			// Members
 			//*********************************
 			[aClass.ownedAttribute->sortedBy(name).generateAttributeProtectedMember()/]
-			[aClass.getCompositeOwners()->sortedBy(name).generateCompositeOwnerAttributeProtectedMember() /]
+			[aClass.getImplicitCompositeOwners()->sortedBy(name).generateCompositeOwnerAttributeProtectedMember() /]
 
 		public:
 			//*********************************

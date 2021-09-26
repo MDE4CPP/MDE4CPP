@@ -36,7 +36,8 @@
 */]
 [query public getCompositePropertiesOfType(owningClass : Class, compositeType : Class) : Set(Property) = owningClass.getAllAttributes()->select(type = compositeType and isComposite and association.oclIsUndefined())->asOrderedSet()->sortedBy(myQualifiedName()) /]
 [query private hasCompositePropertiesOfType(owningClass : Class, compositeType : Class) : Boolean = getCompositePropertiesOfType(compositeType)->size() > 0 /]
-[query public getCompositeOwners(aClass : Class) : Set(Class) = aClass.getRootPackage().allOwnedElements()->filter(Class)->select(hasCompositePropertiesOfType(aClass))->asOrderedSet()->sortedBy(myQualifiedName())/]
+[query public getImplicitCompositeOwners(aClass : Class) : Set(Class) = aClass.getRootPackage().allOwnedElements()->filter(Class)->select(hasCompositePropertiesOfType(aClass))->asOrderedSet()->sortedBy(myQualifiedName())/]
+[query public getExplicitCompositeOwners(aClass : Class) : Set(Class) = aClass.getCompositionsToClass().getCompositeProperty(aClass).opposite->reject(oclIsUndefined()).type->filter(Class)->asOrderedSet()->sortedBy(myQualifiedName())/]
 [query public hasOwnerProperty(aClass : Classifier, ownerClass : Class) : Boolean = (aClass.attribute->select(type = ownerClass)->size() > 0) /]
 [query public getOwnerProperties(aClass : Classifier, ownerClass : Class) : OrderedSet(Property) = aClass.attribute->select(type = ownerClass)->sortedBy(qualifiedName)/]
 
@@ -63,7 +64,7 @@ virtual std::shared_ptr<[aClass.generateCppType(true)/]> create[aClass.name.toUp
 		[/if]
 	[/let]
 [/for]
-[for (compositeOwnerClass : Class | aClass.getCompositeOwners())] [comment for each class that has composite properties of type aClass/]
+[for (compositeOwnerClass : Class | aClass.getImplicitCompositeOwners())] [comment for each class that has composite properties of type aClass/]
 [for (compositeProperty : Property | compositeOwnerClass.getCompositePropertiesOfType(aClass))] [comment for each composite property that compositeOwnerClass has/]
 virtual std::shared_ptr<[aClass.generateCppType(true)/]> create[aClass.name.toUpperFirst()/]_as_[compositeProperty.name/]_in_[compositeOwnerClass.name.toUpperFirst()/](std::weak_ptr<[compositeOwnerClass.generateCppType(true)/]> par_[compositeOwnerClass.name.toLowerFirst()/], const int metaElementID = [aClass.getNearestPackage().name/]Package::[aClass.getMemberName().toUpperCase()/]) const [abstractSuffix(impl)/] ;
 [/for]
@@ -110,7 +111,7 @@ static const unsigned int [aClass.getMemberName().toUpperCase()/]_OPERATION_COUN
 		[/let]
 	[/for]
 	[comment  Properties of composite owners of c (i.e. back references to classes that have parts and/or ports of type c)/]
-	[for (compositeOwnerClass : Class | c.getCompositeOwners()) before('//Properties for composite owners\n')]
+	[for (compositeOwnerClass : Class | c.getImplicitCompositeOwners()) before('//Properties for composite owners\n')]
 	//Property [compositeOwnerClass.name.toLowerFirst()/]
 	static const long long [c.name.toUpperCase()/]_ATTRIBUTE_[compositeOwnerClass.name.toUpperCase()/] = [c.generateNamespaceName(true).concat('::').concat(compositeOwnerClass.name.toLowerFirst()).generatePolynomialRollingHash()/];
 	[/for]

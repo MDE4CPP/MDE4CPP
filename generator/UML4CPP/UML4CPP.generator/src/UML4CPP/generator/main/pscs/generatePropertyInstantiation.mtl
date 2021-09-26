@@ -32,7 +32,7 @@
 [if (aProperty.upper = 1)]
 	[if (aProperty.canInstantiate() and (not aProperty.type.oclIsTypeOf(Interface)))]
 //instantiate property '[aProperty.name/]'
-		[if (aProperty.isComposite() or aProperty.isBackReference())]
+		[if (aProperty.isComposite())]
 m_[aProperty.name/] = [aProperty.type._package.generateNamespace(false)/]::[aProperty.type._package.getPackageName()/]Factory::eInstance()->create[aProperty.type.name.toUpperFirst()/]_as_[aProperty.name/]_in_[aProperty.class.name.toUpperFirst()/]([if (aProperty.isBackReference())]m_this[aProperty.class.name.toUpperFirst()/]Ptr[else]getThis[aProperty.class.name.toUpperFirst()/]Ptr()[/if]);
 		[else]
 m_[aProperty.name/] = [aProperty.type._package.generateNamespace(false)/]::[aProperty.type._package.getPackageName()/]Factory::eInstance()->create[aProperty.type.name.toUpperFirst()/]();
@@ -56,7 +56,7 @@ for(unsigned int i = 1; i <= [aProperty.getLower()/]; i++)
 */]
 [template private generatePartInstantiation(aProperty : Property) {aPackage : Package = aProperty.type.getNearestPackage(); factoryName : String = aPackage.name.concat('Factory');}]
 	[if (aProperty.isComposite)]
-	std::shared_ptr<[aProperty.type.transformType()/]> value = [aPackage.generateNamespace(false)/]::[factoryName/]::eInstance()->create[aProperty.type.name.toUpperFirst()/]_as_[aProperty.name/]_in_[aProperty.class.name.toUpperFirst()/](m_this[aProperty.class.name.toUpperFirst()/]Ptr);
+	std::shared_ptr<[aProperty.type.transformType()/]> value = [aPackage.generateNamespace(false)/]::[factoryName/]::eInstance()->create[aProperty.type.name.toUpperFirst()/]_as_[aProperty.name/]_in_[aProperty.class.name.toUpperFirst()/]([if (aProperty.isBackReference())]m_this[aProperty.class.name.toUpperFirst()/]Ptr[else]getThis[aProperty.class.name.toUpperFirst()/]Ptr()[/if]);
 	[else]
 	std::shared_ptr<[aProperty.type.transformType()/]> value = [aPackage.generateNamespace(false)/]::[factoryName/]::eInstance()->create[aProperty.type.name.toUpperFirst()/]();
 	m_[aProperty.name/]->add(value);

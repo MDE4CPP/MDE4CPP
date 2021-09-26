@@ -32,6 +32,7 @@
 [import UML4CPP::generator::main::helpers::nameHelper /]
 [import UML4CPP::generator::main::helpers::keywords /]
 [import UML4CPP::generator::main::profiles::uml4CPPProfileHelper /]
+[import UML4CPP::generator::main::profiles::strategyHelper /]
 
 [template public generateApplication(aPackage : Package)]
 [let mainBehavior : Behavior = aPackage.getMainBehavior()]
@@ -60,7 +61,7 @@
 #include "[aPackage.generateNamespacePath(false)/]/[packageName/]Factory.hpp"
 #include "[aPackage.generateNamespacePath(false)/]/[packageName/]Package.hpp"
 
-[for (aClass : Class | aPackage.allOwnedElements()->filter(Class)->reject(oclIsKindOf(Behavior))->reject(isDoNotGenerateElement())->sortedBy(name))]
+[for (aClass : Class | aPackage.allOwnedElements()->filter(Class)->reject(oclIsKindOf(Behavior))->reject(isDoNotGenerateElement())->reject(isStrategyClass())->sortedBy(name))]
 #include "[aClass.getNearestPackage().generateNamespacePath(false)/]/[aClass.name.toUpperFirst()/].hpp"
 [/for]
 [for (anInterface : Interface | aPackage.allOwnedElements()->filter(Interface)->reject(isDoNotGenerateElement())->sortedBy(name))]
