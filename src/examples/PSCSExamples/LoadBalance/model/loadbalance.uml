@@ -123,17 +123,16 @@ std::this_thread::sleep_for(std::chrono::milliseconds(waitTime));&#xD;
         </ownedParameter>
         <language>INCLUDE</language>
         <language>CPP</language>
-        <body>#include &quot;LoadBalance/ServicePort.hpp&quot;</body>
-        <body>unsigned int numberOfServices = this->getServiceOutPort()->getServicePorts()->size();&#xD;
+        <body>#include &quot;LoadBalance/ServiceResponsePort.hpp&quot;</body>
+        <body>unsigned int numberOfServices = this->getToService()->getServicePorts()->size();&#xD;
 unsigned int numberOfBusyServices = 0;&#xD;
 &#xD;
 for(unsigned int i = 0; i &lt; numberOfServices; i++)&#xD;
 {&#xD;
-	if( this->getServiceOutPort()->getServicePorts()->at(i)->isBusy()) numberOfBusyServices++;&#xD;
+	if( this->getToService()->getServicePorts()->at(i)->isBusy()) numberOfBusyServices++;&#xD;
 }&#xD;
 &#xD;
-load = ((float)numberOfBusyServices/numberOfServices) * 100;&#xD;
-</body>
+load = ((float)numberOfBusyServices/numberOfServices) * 100;</body>
       </ownedBehavior>
       <ownedOperation xmi:id="_FsDp4B0wEeyVwfCVnFKaMw" name="request" visibility="public" method="_ht3UgB1AEeyVwfCVnFKaMw"/>
       <ownedOperation xmi:id="_D6H8wB0xEeyVwfCVnFKaMw" name="process" visibility="public"/>
@@ -374,7 +373,9 @@ while (iter != end &amp;&amp; !targetSelected)&#xD;
       <body>#include &lt;string>&#xD;
 #include &lt;sstream>&#xD;
 #include &lt;chrono>&#xD;
-#include &lt;thread></body>
+#include &lt;thread>&#xD;
+#include &lt;list>&#xD;
+#include &lt;fstream></body>
       <body>std::shared_ptr&lt;LoadBalance::System> system = factory->createSystem();&#xD;
 &#xD;
 std::cout&lt;&lt;&quot;----------------------------------------\n&quot;;&#xD;
@@ -387,17 +388,21 @@ std::cout&lt;&lt;&quot;#Services: &quot;&lt;&lt;system->getServices()->size()&lt
  * Read in request rate and service rate&#xD;
  */&#xD;
 std::string input;&#xD;
-double requestRate = system->getClient()->getRequestRate(), serviceRate = system->getServices()->at(0)->getServiceRate();&#xD;
-std::cout&lt;&lt;&quot;Please provide request rate per second [default = &quot;&lt;&lt;requestRate&lt;&lt;&quot;] : &quot;;&#xD;
+double requestRate= system->getClient()->getRequestRate(), serviceRate = system->getServices()->at(0)->getServiceRate(), requestRateFactor = 1.0;&#xD;
+std::cout&lt;&lt;&quot;Please provide initial request rate per second [default = &quot;&lt;&lt;requestRate&lt;&lt;&quot;] : &quot;;&#xD;
 std::getline(std::cin, input);&#xD;
 if (!input.empty()) &#xD;
 {&#xD;
 	std::istringstream stream(input);&#xD;
 	stream >> requestRate;&#xD;
-	if(!stream.fail())&#xD;
-	{&#xD;
-		system->getClient()->setRequestRate(requestRate);&#xD;
-	}&#xD;
+}&#xD;
+&#xD;
+std::cout&lt;&lt;&quot;Please provide the request rate growth factor per simulation [default = &quot;&lt;&lt;requestRateFactor&lt;&lt;&quot;] : &quot;;&#xD;
+std::getline(std::cin, input);&#xD;
+if (!input.empty()) &#xD;
+{&#xD;
+	std::istringstream stream(input);&#xD;
+	stream >> requestRateFactor;&#xD;
 }&#xD;
 &#xD;
 std::cout&lt;&lt;&quot;Please provide service rate per second [default = &quot;&lt;&lt;serviceRate&lt;&lt;&quot;] : &quot;;&#xD;
@@ -417,10 +422,11 @@ if (!input.empty()) &#xD;
 }&#xD;
 &#xD;
 /*&#xD;
- * Read in interval for load checking and simulation time&#xD;
+ * Read in interval for load checking, simulation time and number of simulations&#xD;
  */&#xD;
 unsigned int loadCheckInterval = 10;		//in ms&#xD;
 unsigned int simulationTime = 60;			//in s&#xD;
+unsigned int numberOfSimulations = 1;&#xD;
 std::cout&lt;&lt;&quot;Please provide the interval in which the system load should be checked (in ms) [default = &quot;&lt;&lt;loadCheckInterval&lt;&lt;&quot;ms] : &quot;;&#xD;
 std::getline(std::cin, input);&#xD;
 if (!input.empty()) &#xD;
@@ -437,36 +443,66 @@ if (!input.empty()) &#xD;
 	stream >> simulationTime;&#xD;
 }&#xD;
 &#xD;
-std::cout&lt;&lt;&quot;--------------\nConfigured simulation with [request rate = &quot;&lt;&lt;requestRate&lt;&lt;&quot;] and [serviceRate = &quot;&lt;&lt;serviceRate&lt;&lt;&quot;]\n&quot;;&#xD;
-std::cout&lt;&lt;&quot;System load will be checked every &quot;&lt;&lt;loadCheckInterval&lt;&lt;&quot;ms and simulation runs &quot;&lt;&lt;simulationTime&lt;&lt;&quot;s\n&quot;;&#xD;
-std::cout&lt;&lt;&quot;Press Enter to start simulation...&quot;&lt;&lt;std::endl;&#xD;
-std::cin.get();&#xD;
-&#xD;
-/*&#xD;
- * Run Simultion&#xD;
- */&#xD;
-system->getClient()->setActive(true);&#xD;
-std::thread t(&amp;Client::work, system->getClient());&#xD;
-&#xD;
-&#xD;
-unsigned int loopIterations = (1000 / loadCheckInterval) * simulationTime;&#xD;
-&#xD;
-float meanLoad = 0.0;&#xD;
-&#xD;
-for(unsigned int i = 0; i &lt; loopIterations; i++)&#xD;
+std::cout&lt;&lt;&quot;Please provide the inumber of simulations [default = &quot;&lt;&lt;numberOfSimulations&lt;&lt;&quot;] : &quot;;&#xD;
+std::getline(std::cin, input);&#xD;
+if (!input.empty()) &#xD;
 {&#xD;
-	std::this_thread::sleep_for(std::chrono::milliseconds(loadCheckInterval));&#xD;
-	double currentLoad = system->getServer()->getLoad();&#xD;
-	meanLoad += currentLoad;&#xD;
-	std::cout&lt;&lt;&quot;Current load of system: &quot;&lt;&lt;currentLoad&lt;&lt;&quot;%&quot;&lt;&lt;std::endl;&#xD;
+	std::istringstream stream(input);&#xD;
+	stream >> numberOfSimulations;&#xD;
 }&#xD;
 &#xD;
-system->getClient()->setActive(false);&#xD;
+for(unsigned int simulation = 1; simulation &lt;= numberOfSimulations; simulation++)&#xD;
+{&#xD;
+	std::cout&lt;&lt;&quot;--------------\nConfigured simulation with [request rate = &quot;&lt;&lt;requestRate&lt;&lt;&quot;] and [serviceRate = &quot;&lt;&lt;serviceRate&lt;&lt;&quot;]\n&quot;;&#xD;
+	std::cout&lt;&lt;&quot;System load will be checked every &quot;&lt;&lt;loadCheckInterval&lt;&lt;&quot;ms and simulation runs &quot;&lt;&lt;simulationTime&lt;&lt;&quot;s\n&quot;;&#xD;
+	//std::cout&lt;&lt;&quot;Press Enter to start simulation...&quot;&lt;&lt;std::endl;&#xD;
+	//std::cin.get();&#xD;
 &#xD;
-t.join();&#xD;
+	/*&#xD;
+	 * Run Simultion&#xD;
+	 */&#xD;
+	system->getClient()->setActive(true);&#xD;
+	std::thread t(&amp;Client::work, system->getClient());&#xD;
 &#xD;
-meanLoad /= loopIterations;&#xD;
-std::cout&lt;&lt;&quot;\nMean load of system: &quot;&lt;&lt;meanLoad&lt;&lt;&quot;%&quot;&lt;&lt;std::endl;</body>
+&#xD;
+	unsigned int loopIterations = (1000 / loadCheckInterval) * simulationTime;&#xD;
+&#xD;
+	std::list&lt;float>* loads = new std::list&lt;float>();&#xD;
+&#xD;
+	for(unsigned int i = 0; i &lt; loopIterations; i++)&#xD;
+	{&#xD;
+		std::this_thread::sleep_for(std::chrono::milliseconds(loadCheckInterval));&#xD;
+		float currentLoad = system->getServer()->getLoad();&#xD;
+		loads->push_back(currentLoad);&#xD;
+		//std::cout&lt;&lt;&quot;Current load of system: &quot;&lt;&lt;currentLoad&lt;&lt;&quot;%&quot;&lt;&lt;std::endl;&#xD;
+	}&#xD;
+&#xD;
+	system->getClient()->setActive(false);&#xD;
+&#xD;
+	t.join();&#xD;
+&#xD;
+	//meanLoad /= loopIterations;&#xD;
+	//std::cout&lt;&lt;&quot;\nMean load of system: &quot;&lt;&lt;meanLoad&lt;&lt;&quot;%&quot;&lt;&lt;std::endl;&#xD;
+&#xD;
+	/*&#xD;
+	 * Write all mean values to file&#xD;
+	 */&#xD;
+	std::ofstream myfile;&#xD;
+	std::string filename = std::to_string(requestRate) + &quot;_&quot; + std::to_string(serviceRate) + &quot;_&quot; + std::to_string(loadCheckInterval) + &quot;_&quot; + std::to_string(simulationTime) + &quot;.csv&quot;;&#xD;
+	myfile.open(filename);&#xD;
+&#xD;
+	myfile &lt;&lt;&quot;RequestRate;ServiceRate;LoadCheckInterval;SimulationTime\n&quot;;&#xD;
+	myfile &lt;&lt;requestRate&lt;&lt;&quot;;&quot;&lt;&lt;serviceRate&lt;&lt;&quot;;&quot;&lt;&lt;loadCheckInterval&lt;&lt;&quot;;&quot;&lt;&lt;simulationTime&lt;&lt;&quot;\n&quot;;&#xD;
+&#xD;
+	for(float load : *loads)&#xD;
+	{&#xD;
+		myfile &lt;&lt; load &lt;&lt; &quot;\n&quot;;&#xD;
+	}&#xD;
+&#xD;
+	myfile.close();&#xD;
+&#xD;
+	requestRate *= requestRateFactor;&#xD;
+}</body>
     </packagedElement>
     <profileApplication xmi:id="_w9upkB1DEeyVwfCVnFKaMw">
       <eAnnotations xmi:id="_w-NxwB1DEeyVwfCVnFKaMw" source="http://www.eclipse.org/uml2/2.0.0/UML">
