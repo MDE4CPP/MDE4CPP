@@ -5,9 +5,9 @@
       <importedPackage xmi:type="uml:Model" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#_0"/>
     </packageImport>
     <packagedElement xmi:type="uml:Class" xmi:id="_1WXpIB0UEeyVwfCVnFKaMw" name="System" visibility="public">
-      <ownedAttribute xmi:id="_74ys8h0XEeyVwfCVnFKaMw" name="client" type="_UyVgwB0VEeyVwfCVnFKaMw" aggregation="composite" association="_74xe0B0XEeyVwfCVnFKaMw"/>
-      <ownedAttribute xmi:id="_ukyDwB0YEeyVwfCVnFKaMw" name="server" type="_dbZBQB0VEeyVwfCVnFKaMw" aggregation="composite" association="_YC-qwB0YEeyVwfCVnFKaMw"/>
-      <ownedAttribute xmi:id="_xlzkwB0YEeyVwfCVnFKaMw" name="services" type="_jaO-QB0VEeyVwfCVnFKaMw" aggregation="composite" association="_gNTA0B0YEeyVwfCVnFKaMw">
+      <ownedAttribute xmi:id="_74ys8h0XEeyVwfCVnFKaMw" name="client" visibility="private" type="_UyVgwB0VEeyVwfCVnFKaMw" aggregation="composite" association="_74xe0B0XEeyVwfCVnFKaMw"/>
+      <ownedAttribute xmi:id="_ukyDwB0YEeyVwfCVnFKaMw" name="server" visibility="private" type="_dbZBQB0VEeyVwfCVnFKaMw" aggregation="composite" association="_YC-qwB0YEeyVwfCVnFKaMw"/>
+      <ownedAttribute xmi:id="_xlzkwB0YEeyVwfCVnFKaMw" name="services" visibility="private" type="_jaO-QB0VEeyVwfCVnFKaMw" aggregation="composite" association="_gNTA0B0YEeyVwfCVnFKaMw">
         <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_XqZZYB0dEeyVwfCVnFKaMw" value="50"/>
         <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_YLf7UB0dEeyVwfCVnFKaMw" value="*"/>
       </ownedAttribute>
@@ -29,12 +29,12 @@
       </ownedConnector>
     </packagedElement>
     <packagedElement xmi:type="uml:Class" xmi:id="_UyVgwB0VEeyVwfCVnFKaMw" name="Client" visibility="public">
-      <ownedAttribute xmi:type="uml:Port" xmi:id="_uHmRIB0bEeyVwfCVnFKaMw" name="serverOutPort" type="_FxqIIB0bEeyVwfCVnFKaMw" aggregation="composite" association="__0HysB0aEeyVwfCVnFKaMw"/>
-      <ownedAttribute xmi:id="_K06zYB0rEeyVwfCVnFKaMw" name="requestRate" visibility="public">
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_uHmRIB0bEeyVwfCVnFKaMw" name="toServer" visibility="private" type="_FxqIIB0bEeyVwfCVnFKaMw" aggregation="composite" association="__0HysB0aEeyVwfCVnFKaMw"/>
+      <ownedAttribute xmi:id="_K06zYB0rEeyVwfCVnFKaMw" name="requestRate" visibility="private">
         <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Real"/>
-        <defaultValue xmi:type="uml:LiteralReal" xmi:id="_21JsYB9mEey1n4qdAQDPqA" value="10.0"/>
+        <defaultValue xmi:type="uml:LiteralReal" xmi:id="_21JsYB9mEey1n4qdAQDPqA" visibility="private" value="10.0"/>
       </ownedAttribute>
-      <ownedAttribute xmi:id="_vc3tEB0-EeyVwfCVnFKaMw" name="active" visibility="public">
+      <ownedAttribute xmi:id="_vc3tEB0-EeyVwfCVnFKaMw" name="active" visibility="private">
         <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
         <defaultValue xmi:type="uml:LiteralBoolean" xmi:id="_-YC2EB9mEey1n4qdAQDPqA"/>
       </ownedAttribute>
@@ -65,16 +65,16 @@
           <weight xmi:type="uml:LiteralInteger" xmi:id="_Q4KYIh0_EeyVwfCVnFKaMw" name="Decision1_To_ActivityFinal1_weight"/>
         </edge>
         <node xmi:type="uml:InitialNode" xmi:id="_qG4WQB0yEeyVwfCVnFKaMw" name="Initial1" outgoing="_FpzewB0-EeyVwfCVnFKaMw"/>
-        <node xmi:type="uml:CallOperationAction" xmi:id="_2T4doB09EeyVwfCVnFKaMw" name="wait" incoming="_Gp30oB0-EeyVwfCVnFKaMw" outgoing="_a36bQB0-EeyVwfCVnFKaMw" operation="_9wbuwB09EeyVwfCVnFKaMw">
+        <node xmi:type="uml:CallOperationAction" xmi:id="_2T4doB09EeyVwfCVnFKaMw" name="call_Wait" incoming="_Gp30oB0-EeyVwfCVnFKaMw" outgoing="_a36bQB0-EeyVwfCVnFKaMw" operation="_9wbuwB09EeyVwfCVnFKaMw">
           <target xmi:id="_2T5EsB09EeyVwfCVnFKaMw" name="self" type="_UyVgwB0VEeyVwfCVnFKaMw"/>
         </node>
         <node xmi:type="uml:MergeNode" xmi:id="_EEBzwB0-EeyVwfCVnFKaMw" name="Merge1" incoming="_FpzewB0-EeyVwfCVnFKaMw _HlJ7sB0_EeyVwfCVnFKaMw" outgoing="_Gp30oB0-EeyVwfCVnFKaMw"/>
-        <node xmi:type="uml:CallOperationAction" xmi:id="_KWIrAB0-EeyVwfCVnFKaMw" name="request" incoming="_a36bQB0-EeyVwfCVnFKaMw" outgoing="_CKFaIB0_EeyVwfCVnFKaMw" onPort="_uHmRIB0bEeyVwfCVnFKaMw" operation="_BVpN0B0xEeyVwfCVnFKaMw">
+        <node xmi:type="uml:CallOperationAction" xmi:id="_KWIrAB0-EeyVwfCVnFKaMw" name="call_request" incoming="_a36bQB0-EeyVwfCVnFKaMw" outgoing="_CKFaIB0_EeyVwfCVnFKaMw" onPort="_uHmRIB0bEeyVwfCVnFKaMw" operation="_BVpN0B0xEeyVwfCVnFKaMw">
           <target xmi:id="_KWJSEB0-EeyVwfCVnFKaMw" name="self" type="_UyVgwB0VEeyVwfCVnFKaMw"/>
         </node>
-        <node xmi:type="uml:ReadStructuralFeatureAction" xmi:id="_4Ai-UB0-EeyVwfCVnFKaMw" name="ReadStructuralFeatureAction1" incoming="_CKFaIB0_EeyVwfCVnFKaMw" structuralFeature="_vc3tEB0-EeyVwfCVnFKaMw">
+        <node xmi:type="uml:ReadStructuralFeatureAction" xmi:id="_4Ai-UB0-EeyVwfCVnFKaMw" name="isActive" incoming="_CKFaIB0_EeyVwfCVnFKaMw" structuralFeature="_vc3tEB0-EeyVwfCVnFKaMw">
           <object xmi:id="_4AjlYB0-EeyVwfCVnFKaMw" name="self"/>
-          <result xmi:id="_4AjlYR0-EeyVwfCVnFKaMw" name="out" outgoing="_FGF4QB0_EeyVwfCVnFKaMw">
+          <result xmi:id="_4AjlYR0-EeyVwfCVnFKaMw" name="active" outgoing="_FGF4QB0_EeyVwfCVnFKaMw">
             <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
           </result>
         </node>
@@ -95,14 +95,14 @@ unsigned int waitTime = dist(generator) * 1000;	//*1000 for milliseconds&#xD;
 std::this_thread::sleep_for(std::chrono::milliseconds(waitTime));&#xD;
 //std::cout&lt;&lt;&quot;Client::wait - producing some load...&quot;&lt;&lt;std::endl;</body>
       </ownedBehavior>
-      <ownedOperation xmi:id="_uBI3QB0wEeyVwfCVnFKaMw" name="work" method="_ocnM0B0yEeyVwfCVnFKaMw"/>
-      <ownedOperation xmi:id="_BVpN0B0xEeyVwfCVnFKaMw" name="request"/>
-      <ownedOperation xmi:id="_9wbuwB09EeyVwfCVnFKaMw" name="wait" method="_EmbXMB0zEeyVwfCVnFKaMw"/>
+      <ownedOperation xmi:id="_uBI3QB0wEeyVwfCVnFKaMw" name="work" visibility="public" method="_ocnM0B0yEeyVwfCVnFKaMw"/>
+      <ownedOperation xmi:id="_BVpN0B0xEeyVwfCVnFKaMw" name="request" visibility="public"/>
+      <ownedOperation xmi:id="_9wbuwB09EeyVwfCVnFKaMw" name="wait" visibility="public" method="_EmbXMB0zEeyVwfCVnFKaMw"/>
     </packagedElement>
     <packagedElement xmi:type="uml:Class" xmi:id="_dbZBQB0VEeyVwfCVnFKaMw" name="Server" visibility="public">
-      <ownedAttribute xmi:type="uml:Port" xmi:id="_QHfeEB0cEeyVwfCVnFKaMw" name="clientInPort" type="_bUJ1sB0aEeyVwfCVnFKaMw" aggregation="composite" association="_eQpmkB0bEeyVwfCVnFKaMw" isBehavior="true"/>
-      <ownedAttribute xmi:type="uml:Port" xmi:id="_KjCPoB0fEeyVwfCVnFKaMw" name="serviceOutPort" type="_e5wGkB0eEeyVwfCVnFKaMw" aggregation="composite" association="_xCueIB0eEeyVwfCVnFKaMw"/>
-      <ownedBehavior xmi:type="uml:Activity" xmi:id="_ht3UgB1AEeyVwfCVnFKaMw" name="request activity" specification="_FsDp4B0wEeyVwfCVnFKaMw" node="_kDmc0B1AEeyVwfCVnFKaMw _l-n_EB1AEeyVwfCVnFKaMw _va8vkB1AEeyVwfCVnFKaMw">
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_QHfeEB0cEeyVwfCVnFKaMw" name="fromClient" visibility="private" type="_bUJ1sB0aEeyVwfCVnFKaMw" aggregation="composite" association="_eQpmkB0bEeyVwfCVnFKaMw" isBehavior="true"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_KjCPoB0fEeyVwfCVnFKaMw" name="toService" visibility="private" type="_e5wGkB0eEeyVwfCVnFKaMw" aggregation="composite" association="_xCueIB0eEeyVwfCVnFKaMw"/>
+      <ownedBehavior xmi:type="uml:Activity" xmi:id="_ht3UgB1AEeyVwfCVnFKaMw" name="act_request" specification="_FsDp4B0wEeyVwfCVnFKaMw" node="_kDmc0B1AEeyVwfCVnFKaMw _l-n_EB1AEeyVwfCVnFKaMw _va8vkB1AEeyVwfCVnFKaMw">
         <edge xmi:type="uml:ControlFlow" xmi:id="_uXl1IB1AEeyVwfCVnFKaMw" target="_l-n_EB1AEeyVwfCVnFKaMw" source="_kDmc0B1AEeyVwfCVnFKaMw">
           <guard xmi:type="uml:LiteralBoolean" xmi:id="_uXmcMB1AEeyVwfCVnFKaMw" name="Initial1_To_call_do_guard" value="true"/>
           <weight xmi:type="uml:LiteralInteger" xmi:id="_uXmcMR1AEeyVwfCVnFKaMw" name="Initial1_To_call_do_weight"/>
@@ -135,23 +135,23 @@ for(unsigned int i = 0; i &lt; numberOfServices; i++)&#xD;
 load = ((float)numberOfBusyServices/numberOfServices) * 100;&#xD;
 </body>
       </ownedBehavior>
-      <ownedOperation xmi:id="_FsDp4B0wEeyVwfCVnFKaMw" name="request" method="_ht3UgB1AEeyVwfCVnFKaMw"/>
-      <ownedOperation xmi:id="_D6H8wB0xEeyVwfCVnFKaMw" name="process"/>
-      <ownedOperation xmi:id="_1_LcIB1BEeyVwfCVnFKaMw" name="getLoad" method="_VGn1QB1CEeyVwfCVnFKaMw">
+      <ownedOperation xmi:id="_FsDp4B0wEeyVwfCVnFKaMw" name="request" visibility="public" method="_ht3UgB1AEeyVwfCVnFKaMw"/>
+      <ownedOperation xmi:id="_D6H8wB0xEeyVwfCVnFKaMw" name="process" visibility="public"/>
+      <ownedOperation xmi:id="_1_LcIB1BEeyVwfCVnFKaMw" name="getLoad" visibility="public" method="_VGn1QB1CEeyVwfCVnFKaMw">
         <ownedParameter xmi:id="_GMZRoB1CEeyVwfCVnFKaMw" name="load" direction="return">
           <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Real"/>
         </ownedParameter>
       </ownedOperation>
     </packagedElement>
     <packagedElement xmi:type="uml:Class" xmi:id="_jaO-QB0VEeyVwfCVnFKaMw" name="Service" visibility="public">
-      <ownedAttribute xmi:type="uml:Port" xmi:id="_zrGIMB0WEeyVwfCVnFKaMw" name="serverInPort" type="_2TyIEB0eEeyVwfCVnFKaMw" aggregation="composite" association="_BG8IoB0fEeyVwfCVnFKaMw" isBehavior="true">
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_zrGIMB0WEeyVwfCVnFKaMw" name="fromServer" visibility="private" type="_2TyIEB0eEeyVwfCVnFKaMw" aggregation="composite" association="_BG8IoB0fEeyVwfCVnFKaMw" isBehavior="true">
         <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_kWXkoB08EeyVwfCVnFKaMw" value="*"/>
       </ownedAttribute>
-      <ownedAttribute xmi:id="_q0u-8B0rEeyVwfCVnFKaMw" name="serviceRate" visibility="public">
+      <ownedAttribute xmi:id="_q0u-8B0rEeyVwfCVnFKaMw" name="serviceRate" visibility="private">
         <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Real"/>
         <defaultValue xmi:type="uml:LiteralReal" xmi:id="_rZi00B0uEeyVwfCVnFKaMw" value="1.0"/>
       </ownedAttribute>
-      <ownedAttribute xmi:id="_JjQP0B0uEeyVwfCVnFKaMw" name="busy" visibility="public">
+      <ownedAttribute xmi:id="_JjQP0B0uEeyVwfCVnFKaMw" name="busy" visibility="private">
         <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
       </ownedAttribute>
       <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_VHB6YB1BEeyVwfCVnFKaMw" name="ob_process" specification="_alXtAB0uEeyVwfCVnFKaMw">
@@ -176,22 +176,22 @@ std::this_thread::sleep_for(std::chrono::milliseconds(waitTime));&#xD;
 &#xD;
 this->setBusy(false);</body>
       </ownedBehavior>
-      <ownedOperation xmi:id="_alXtAB0uEeyVwfCVnFKaMw" name="process" method="_VHB6YB1BEeyVwfCVnFKaMw"/>
-      <ownedOperation xmi:id="_mQKCkB7CEey0lspuV7FEyA" name="wait" method="_nvFesB7CEey0lspuV7FEyA"/>
+      <ownedOperation xmi:id="_alXtAB0uEeyVwfCVnFKaMw" name="process" visibility="public" method="_VHB6YB1BEeyVwfCVnFKaMw"/>
+      <ownedOperation xmi:id="_mQKCkB7CEey0lspuV7FEyA" name="wait" visibility="public" method="_nvFesB7CEey0lspuV7FEyA"/>
     </packagedElement>
     <packagedElement xmi:type="uml:Interface" xmi:id="_zJ1pwB7NEey0lspuV7FEyA" name="GenericPortInterface" visibility="public">
-      <ownedOperation xmi:id="_MtsegB7OEey0lspuV7FEyA" name="isBusy" isAbstract="true">
+      <ownedOperation xmi:id="_MtsegB7OEey0lspuV7FEyA" name="isBusy" visibility="public" isAbstract="true">
         <ownedParameter xmi:id="_QBzTkB7OEey0lspuV7FEyA" name="busy" direction="return">
           <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
         </ownedParameter>
       </ownedOperation>
     </packagedElement>
-    <packagedElement xmi:type="uml:Class" xmi:id="_FxqIIB0bEeyVwfCVnFKaMw" name="ClientPort" visibility="public">
-      <ownedAttribute xmi:id="_4L_cVB0dEeyVwfCVnFKaMw" name="serverResponsePort" type="_bUJ1sB0aEeyVwfCVnFKaMw" association="_4L_cUB0dEeyVwfCVnFKaMw">
+    <packagedElement xmi:type="uml:Class" xmi:id="_FxqIIB0bEeyVwfCVnFKaMw" name="ClientRequestPort" visibility="public">
+      <ownedAttribute xmi:id="_4L_cVB0dEeyVwfCVnFKaMw" name="serverResponsePort" visibility="private" type="_bUJ1sB0aEeyVwfCVnFKaMw" association="_4L_cUB0dEeyVwfCVnFKaMw">
         <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_4L_cVR0dEeyVwfCVnFKaMw" value="1"/>
         <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_4L_cVh0dEeyVwfCVnFKaMw" value="1"/>
       </ownedAttribute>
-      <ownedAttribute xmi:id="__0IZwB0aEeyVwfCVnFKaMw" name="client" type="_UyVgwB0VEeyVwfCVnFKaMw" association="__0HysB0aEeyVwfCVnFKaMw">
+      <ownedAttribute xmi:id="__0IZwB0aEeyVwfCVnFKaMw" name="client" visibility="private" type="_UyVgwB0VEeyVwfCVnFKaMw" association="__0HysB0aEeyVwfCVnFKaMw">
         <lowerValue xmi:type="uml:LiteralInteger" xmi:id="__0IZwR0aEeyVwfCVnFKaMw"/>
         <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="__0IZwh0aEeyVwfCVnFKaMw" value="1"/>
       </ownedAttribute>
@@ -203,18 +203,18 @@ this->setBusy(false);</body>
         <language>CPP</language>
         <body>busy = false;</body>
       </ownedBehavior>
-      <ownedOperation xmi:id="_cGPV0B7OEey0lspuV7FEyA" name="isBusy" method="_CoJjIB7UEey0lspuV7FEyA">
+      <ownedOperation xmi:id="_cGPV0B7OEey0lspuV7FEyA" name="isBusy" visibility="public" method="_CoJjIB7UEey0lspuV7FEyA">
         <ownedParameter xmi:id="_cGPV0R7OEey0lspuV7FEyA" name="busy" direction="return">
           <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
         </ownedParameter>
       </ownedOperation>
     </packagedElement>
-    <packagedElement xmi:type="uml:Interface" xmi:id="_2E1cMB0VEeyVwfCVnFKaMw" name="ServerResponsePortInterface" visibility="public">
-      <ownedOperation xmi:id="_YQBw0B0vEeyVwfCVnFKaMw" name="request" isAbstract="true"/>
+    <packagedElement xmi:type="uml:Interface" xmi:id="_2E1cMB0VEeyVwfCVnFKaMw" name="ClientServerInterface" visibility="public">
+      <ownedOperation xmi:id="_YQBw0B0vEeyVwfCVnFKaMw" name="request" visibility="public" isAbstract="true"/>
     </packagedElement>
     <packagedElement xmi:type="uml:Class" xmi:id="_bUJ1sB0aEeyVwfCVnFKaMw" name="ServerResponsePort" visibility="public">
-      <ownedAttribute xmi:id="_4L_cUR0dEeyVwfCVnFKaMw" name="clientPort" type="_FxqIIB0bEeyVwfCVnFKaMw" association="_4L_cUB0dEeyVwfCVnFKaMw"/>
-      <ownedAttribute xmi:id="_eQqNoB0bEeyVwfCVnFKaMw" name="server" type="_dbZBQB0VEeyVwfCVnFKaMw" association="_eQpmkB0bEeyVwfCVnFKaMw">
+      <ownedAttribute xmi:id="_4L_cUR0dEeyVwfCVnFKaMw" name="clientRequestPort" visibility="private" type="_FxqIIB0bEeyVwfCVnFKaMw" association="_4L_cUB0dEeyVwfCVnFKaMw"/>
+      <ownedAttribute xmi:id="_eQqNoB0bEeyVwfCVnFKaMw" name="server" visibility="private" type="_dbZBQB0VEeyVwfCVnFKaMw" association="_eQpmkB0bEeyVwfCVnFKaMw">
         <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_eQrbwB0bEeyVwfCVnFKaMw"/>
         <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_eQsC0B0bEeyVwfCVnFKaMw" value="1"/>
       </ownedAttribute>
@@ -227,19 +227,19 @@ this->setBusy(false);</body>
         <language>CPP</language>
         <body>busy = false;</body>
       </ownedBehavior>
-      <ownedOperation xmi:id="_buNH4B0vEeyVwfCVnFKaMw" name="request"/>
-      <ownedOperation xmi:id="_eoNjUB7OEey0lspuV7FEyA" name="isBusy" method="_hD2fUB7OEey0lspuV7FEyA">
+      <ownedOperation xmi:id="_buNH4B0vEeyVwfCVnFKaMw" name="request" visibility="public"/>
+      <ownedOperation xmi:id="_eoNjUB7OEey0lspuV7FEyA" name="isBusy" visibility="public" method="_hD2fUB7OEey0lspuV7FEyA">
         <ownedParameter xmi:id="_eoNjUR7OEey0lspuV7FEyA" name="busy" direction="return">
           <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
         </ownedParameter>
       </ownedOperation>
     </packagedElement>
     <packagedElement xmi:type="uml:Class" xmi:id="_e5wGkB0eEeyVwfCVnFKaMw" name="ServerRequestPort" visibility="public">
-      <ownedAttribute xmi:id="_L6xCJB0gEeyVwfCVnFKaMw" name="servicePorts" type="_2TyIEB0eEeyVwfCVnFKaMw" association="_L6xCIB0gEeyVwfCVnFKaMw">
+      <ownedAttribute xmi:id="_L6xCJB0gEeyVwfCVnFKaMw" name="servicePorts" visibility="private" type="_2TyIEB0eEeyVwfCVnFKaMw" association="_L6xCIB0gEeyVwfCVnFKaMw">
         <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_L6xCJR0gEeyVwfCVnFKaMw"/>
         <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_L6xCJh0gEeyVwfCVnFKaMw" value="*"/>
       </ownedAttribute>
-      <ownedAttribute xmi:id="_xCvFMB0eEeyVwfCVnFKaMw" name="server" type="_dbZBQB0VEeyVwfCVnFKaMw" association="_xCueIB0eEeyVwfCVnFKaMw">
+      <ownedAttribute xmi:id="_xCvFMB0eEeyVwfCVnFKaMw" name="server" visibility="private" type="_dbZBQB0VEeyVwfCVnFKaMw" association="_xCueIB0eEeyVwfCVnFKaMw">
         <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_xCvFMR0eEeyVwfCVnFKaMw"/>
         <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_xCvFMh0eEeyVwfCVnFKaMw" value="1"/>
       </ownedAttribute>
@@ -251,21 +251,21 @@ this->setBusy(false);</body>
         <language>CPP</language>
         <body>busy = false;</body>
       </ownedBehavior>
-      <ownedOperation xmi:id="_oaIJUh7OEey0lspuV7FEyA" name="isBusy" method="_8ce1oB7UEey0lspuV7FEyA">
+      <ownedOperation xmi:id="_oaIJUh7OEey0lspuV7FEyA" name="isBusy" visibility="public" method="_8ce1oB7UEey0lspuV7FEyA">
         <ownedParameter xmi:id="_oaIJUx7OEey0lspuV7FEyA" name="busy" direction="return">
           <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
         </ownedParameter>
       </ownedOperation>
     </packagedElement>
-    <packagedElement xmi:type="uml:Interface" xmi:id="_yKIEsB0WEeyVwfCVnFKaMw" name="ServicePortInterface" visibility="public">
-      <ownedOperation xmi:id="_L06T8B0vEeyVwfCVnFKaMw" name="process" isAbstract="true"/>
+    <packagedElement xmi:type="uml:Interface" xmi:id="_yKIEsB0WEeyVwfCVnFKaMw" name="ServerServiceInterface" visibility="public">
+      <ownedOperation xmi:id="_L06T8B0vEeyVwfCVnFKaMw" name="process" visibility="public" isAbstract="true"/>
     </packagedElement>
-    <packagedElement xmi:type="uml:Class" xmi:id="_2TyIEB0eEeyVwfCVnFKaMw" name="ServicePort" visibility="public">
-      <ownedAttribute xmi:id="_L6xCIR0gEeyVwfCVnFKaMw" name="serverRequestPort" type="_e5wGkB0eEeyVwfCVnFKaMw" association="_L6xCIB0gEeyVwfCVnFKaMw">
+    <packagedElement xmi:type="uml:Class" xmi:id="_2TyIEB0eEeyVwfCVnFKaMw" name="ServiceResponsePort" visibility="public">
+      <ownedAttribute xmi:id="_L6xCIR0gEeyVwfCVnFKaMw" name="serverRequestPort" visibility="private" type="_e5wGkB0eEeyVwfCVnFKaMw" association="_L6xCIB0gEeyVwfCVnFKaMw">
         <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_L6xCIh0gEeyVwfCVnFKaMw"/>
         <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_L6xCIx0gEeyVwfCVnFKaMw" value="1"/>
       </ownedAttribute>
-      <ownedAttribute xmi:id="_BG8IoR0fEeyVwfCVnFKaMw" name="service" type="_jaO-QB0VEeyVwfCVnFKaMw" association="_BG8IoB0fEeyVwfCVnFKaMw">
+      <ownedAttribute xmi:id="_BG8IoR0fEeyVwfCVnFKaMw" name="service" visibility="private" type="_jaO-QB0VEeyVwfCVnFKaMw" association="_BG8IoB0fEeyVwfCVnFKaMw">
         <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_BG8Ioh0fEeyVwfCVnFKaMw"/>
         <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_BG8Iox0fEeyVwfCVnFKaMw" value="1"/>
       </ownedAttribute>
@@ -278,8 +278,8 @@ this->setBusy(false);</body>
         <language>CPP</language>
         <body>busy = this->m_service.lock()->isBusy();</body>
       </ownedBehavior>
-      <ownedOperation xmi:id="_NMd8wB0vEeyVwfCVnFKaMw" name="process"/>
-      <ownedOperation xmi:id="_lsdVEB7BEey0lspuV7FEyA" name="isBusy" method="_qert8B7BEey0lspuV7FEyA">
+      <ownedOperation xmi:id="_NMd8wB0vEeyVwfCVnFKaMw" name="process" visibility="public"/>
+      <ownedOperation xmi:id="_lsdVEB7BEey0lspuV7FEyA" name="isBusy" visibility="public" method="_qert8B7BEey0lspuV7FEyA">
         <ownedParameter xmi:id="_m6OvwB7BEey0lspuV7FEyA" name="busy" direction="return">
           <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
         </ownedParameter>
