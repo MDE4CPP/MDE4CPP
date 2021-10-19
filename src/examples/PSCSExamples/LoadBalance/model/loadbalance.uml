@@ -38,6 +38,10 @@
         <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
         <defaultValue xmi:type="uml:LiteralBoolean" xmi:id="_-YC2EB9mEey1n4qdAQDPqA"/>
       </ownedAttribute>
+      <ownedAttribute xmi:id="_DrvPwDDrEey7TNnLgCvVMg" name="requestCounter" visibility="private">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+        <defaultValue xmi:type="uml:LiteralInteger" xmi:id="_J_EPADDrEey7TNnLgCvVMg"/>
+      </ownedAttribute>
       <ownedBehavior xmi:type="uml:Activity" xmi:id="_ocnM0B0yEeyVwfCVnFKaMw" name="act_work" specification="_uBI3QB0wEeyVwfCVnFKaMw" node="_qG4WQB0yEeyVwfCVnFKaMw _2T4doB09EeyVwfCVnFKaMw _EEBzwB0-EeyVwfCVnFKaMw _KWIrAB0-EeyVwfCVnFKaMw _4Ai-UB0-EeyVwfCVnFKaMw _DI_SYB0_EeyVwfCVnFKaMw _MvOM0B0_EeyVwfCVnFKaMw">
         <edge xmi:type="uml:ControlFlow" xmi:id="_FpzewB0-EeyVwfCVnFKaMw" target="_EEBzwB0-EeyVwfCVnFKaMw" source="_qG4WQB0yEeyVwfCVnFKaMw">
           <guard xmi:type="uml:LiteralBoolean" xmi:id="_Fp0s4B0-EeyVwfCVnFKaMw" name="Initial1_To_Merge1_guard" value="true"/>
@@ -91,9 +95,11 @@
 std::exponential_distribution&lt;> dist(this->getRequestRate());&#xD;
 &#xD;
 unsigned int waitTime = dist(generator) * 1000;	//*1000 for milliseconds&#xD;
-&#xD;
+//std::cout&lt;&lt;waitTime&lt;&lt;std::endl;&#xD;
 std::this_thread::sleep_for(std::chrono::milliseconds(waitTime));&#xD;
-//std::cout&lt;&lt;&quot;Client::wait - producing some load...&quot;&lt;&lt;std::endl;</body>
+&#xD;
+m_requestCounter++;&#xD;
+</body>
       </ownedBehavior>
       <ownedOperation xmi:id="_uBI3QB0wEeyVwfCVnFKaMw" name="work" visibility="public" method="_ocnM0B0yEeyVwfCVnFKaMw"/>
       <ownedOperation xmi:id="_BVpN0B0xEeyVwfCVnFKaMw" name="request" visibility="public"/>
@@ -152,6 +158,7 @@ load = ((float)numberOfBusyServices/numberOfServices) * 100;</body>
       </ownedAttribute>
       <ownedAttribute xmi:id="_JjQP0B0uEeyVwfCVnFKaMw" name="busy" visibility="private">
         <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+        <defaultValue xmi:type="uml:LiteralBoolean" xmi:id="_KFeV0DDnEey7TNnLgCvVMg"/>
       </ownedAttribute>
       <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_VHB6YB1BEeyVwfCVnFKaMw" name="ob_process" specification="_alXtAB0uEeyVwfCVnFKaMw">
         <language>CPP</language>
@@ -376,19 +383,17 @@ while (iter != end &amp;&amp; !targetSelected)&#xD;
 #include &lt;thread>&#xD;
 #include &lt;list>&#xD;
 #include &lt;fstream></body>
-      <body>std::shared_ptr&lt;LoadBalance::System> system = factory->createSystem();&#xD;
-&#xD;
-std::cout&lt;&lt;&quot;----------------------------------------\n&quot;;&#xD;
+      <body>std::cout&lt;&lt;&quot;----------------------------------------\n&quot;;&#xD;
 std::cout&lt;&lt;&quot;| Running PSCS Load Balance simulation |\n&quot;;&#xD;
 std::cout&lt;&lt;&quot;----------------------------------------\n&quot;;&#xD;
 std::cout&lt;&lt;&quot;#Clients: 1\n&quot;;&#xD;
-std::cout&lt;&lt;&quot;#Services: &quot;&lt;&lt;system->getServices()->size()&lt;&lt;&quot;\n&quot;;&#xD;
+std::cout&lt;&lt;&quot;#Services: 50\n&quot;;&#xD;
 &#xD;
 /*&#xD;
  * Read in request rate and service rate&#xD;
  */&#xD;
 std::string input;&#xD;
-double requestRate= system->getClient()->getRequestRate(), serviceRate = system->getServices()->at(0)->getServiceRate(), requestRateFactor = 1.0;&#xD;
+double requestRate = 10, serviceRate = 1, requestRateOffset = 0.0;&#xD;
 std::cout&lt;&lt;&quot;Please provide initial request rate per second [default = &quot;&lt;&lt;requestRate&lt;&lt;&quot;] : &quot;;&#xD;
 std::getline(std::cin, input);&#xD;
 if (!input.empty()) &#xD;
@@ -397,12 +402,12 @@ if (!input.empty()) &#xD;
 	stream >> requestRate;&#xD;
 }&#xD;
 &#xD;
-std::cout&lt;&lt;&quot;Please provide the request rate growth factor per simulation [default = &quot;&lt;&lt;requestRateFactor&lt;&lt;&quot;] : &quot;;&#xD;
+std::cout&lt;&lt;&quot;Please provide the request rate offset per simulation [default = &quot;&lt;&lt;requestRateOffset&lt;&lt;&quot;] : &quot;;&#xD;
 std::getline(std::cin, input);&#xD;
 if (!input.empty()) &#xD;
 {&#xD;
 	std::istringstream stream(input);&#xD;
-	stream >> requestRateFactor;&#xD;
+	stream >> requestRateOffset;&#xD;
 }&#xD;
 &#xD;
 std::cout&lt;&lt;&quot;Please provide service rate per second [default = &quot;&lt;&lt;serviceRate&lt;&lt;&quot;] : &quot;;&#xD;
@@ -411,14 +416,6 @@ if (!input.empty()) &#xD;
 {&#xD;
 	std::istringstream stream(input);&#xD;
 	stream >> serviceRate;&#xD;
-	if(!stream.fail())&#xD;
-	{&#xD;
-		unsigned int numberOfServices = system->getServices()->size();&#xD;
-		for(unsigned int i = 0; i &lt; numberOfServices; i++)&#xD;
-		{&#xD;
-			system->getServices()->at(i)->setServiceRate(serviceRate);&#xD;
-		}&#xD;
-	}&#xD;
 }&#xD;
 &#xD;
 /*&#xD;
@@ -457,32 +454,51 @@ for(unsigned int simulation = 1; simulation &lt;= numberOfSimulations; simulatio
 	//std::cout&lt;&lt;&quot;System load will be checked every &quot;&lt;&lt;loadCheckInterval&lt;&lt;&quot;ms and simulation runs &quot;&lt;&lt;simulationTime&lt;&lt;&quot;s\n&quot;;&#xD;
 	//std::cout&lt;&lt;&quot;Press Enter to start simulation...&quot;&lt;&lt;std::endl;&#xD;
 	//std::cin.get();&#xD;
-&#xD;
-	/*&#xD;
-	 * Run Simultion&#xD;
-	 */&#xD;
-	system->getClient()->setActive(true);&#xD;
-	std::thread t(&amp;Client::work, system->getClient());&#xD;
-&#xD;
-&#xD;
-	unsigned int loopIterations = (1000 / loadCheckInterval) * simulationTime;&#xD;
-&#xD;
+	&#xD;
 	std::list&lt;float>* loads = new std::list&lt;float>();&#xD;
-&#xD;
-	for(unsigned int i = 0; i &lt; loopIterations; i++)&#xD;
+	unsigned long numberOfRequests = 0;&#xD;
 	{&#xD;
-		std::this_thread::sleep_for(std::chrono::milliseconds(loadCheckInterval));&#xD;
-		float currentLoad = system->getServer()->getLoad();&#xD;
-		loads->push_back(currentLoad);&#xD;
-		//std::cout&lt;&lt;&quot;Current load of system: &quot;&lt;&lt;currentLoad&lt;&lt;&quot;%&quot;&lt;&lt;std::endl;&#xD;
+		/*&#xD;
+		 * Configure Simulation&#xD;
+		 */&#xD;
+		std::shared_ptr&lt;LoadBalance::System> system = factory->createSystem();&#xD;
+		 &#xD;
+		unsigned int numberOfServices = system->getServices()->size();&#xD;
+		for(unsigned int i = 0; i &lt; numberOfServices; i++)&#xD;
+		{&#xD;
+			system->getServices()->at(i)->setServiceRate(serviceRate);&#xD;
+		}&#xD;
+		system->getClient()->setRequestRate(requestRate);&#xD;
+		system->getClient()->setActive(true);&#xD;
+&#xD;
+		/*&#xD;
+		 * Run Simultion&#xD;
+		 */&#xD;
+		std::thread t(&amp;Client::work, system->getClient());&#xD;
+		&#xD;
+		std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now() + std::chrono::seconds(simulationTime);&#xD;
+		&#xD;
+		while(std::chrono::steady_clock::now() &lt;= end)&#xD;
+		{&#xD;
+			std::this_thread::sleep_for(std::chrono::milliseconds(loadCheckInterval));&#xD;
+			float currentLoad = system->getServer()->getLoad();&#xD;
+			loads->push_back(currentLoad);&#xD;
+			//std::cout&lt;&lt;&quot;Current load of system: &quot;&lt;&lt;currentLoad&lt;&lt;&quot;%&quot;&lt;&lt;std::endl;&#xD;
+		}&#xD;
+&#xD;
+		system->getClient()->setActive(false);&#xD;
+		t.join();&#xD;
+		&#xD;
+		std::cout&lt;&lt;&quot;Waiting for services to finish...&quot;&lt;&lt;std::endl;&#xD;
+		while(system->getServer()->getLoad() != 0)&#xD;
+		{	&#xD;
+			std::this_thread::sleep_for(std::chrono::milliseconds(100));&#xD;
+		}&#xD;
+		&#xD;
+		numberOfRequests = system->getClient()->getRequestCounter();&#xD;
+&#xD;
+		system->destroy();&#xD;
 	}&#xD;
-&#xD;
-	system->getClient()->setActive(false);&#xD;
-&#xD;
-	t.join();&#xD;
-&#xD;
-	//meanLoad /= loopIterations;&#xD;
-	//std::cout&lt;&lt;&quot;\nMean load of system: &quot;&lt;&lt;meanLoad&lt;&lt;&quot;%&quot;&lt;&lt;std::endl;&#xD;
 &#xD;
 	/*&#xD;
 	 * Write all mean values to file&#xD;
@@ -491,8 +507,8 @@ for(unsigned int simulation = 1; simulation &lt;= numberOfSimulations; simulatio
 	std::string filename = std::to_string(requestRate) + &quot;_&quot; + std::to_string(serviceRate) + &quot;_&quot; + std::to_string(loadCheckInterval) + &quot;_&quot; + std::to_string(simulationTime) + &quot;.csv&quot;;&#xD;
 	myfile.open(filename);&#xD;
 &#xD;
-	myfile &lt;&lt;&quot;RequestRate;ServiceRate;LoadCheckInterval;SimulationTime\n&quot;;&#xD;
-	myfile &lt;&lt;requestRate&lt;&lt;&quot;;&quot;&lt;&lt;serviceRate&lt;&lt;&quot;;&quot;&lt;&lt;loadCheckInterval&lt;&lt;&quot;;&quot;&lt;&lt;simulationTime&lt;&lt;&quot;\n&quot;;&#xD;
+	myfile &lt;&lt;&quot;RequestRate;ServiceRate;LoadCheckInterval;SimulationTime;RequestCounter\n&quot;;&#xD;
+	myfile &lt;&lt;requestRate&lt;&lt;&quot;;&quot;&lt;&lt;serviceRate&lt;&lt;&quot;;&quot;&lt;&lt;loadCheckInterval&lt;&lt;&quot;;&quot;&lt;&lt;simulationTime&lt;&lt;&quot;;&quot;&lt;&lt;numberOfRequests&lt;&lt;&quot;\n&quot;;&#xD;
 &#xD;
 	for(float load : *loads)&#xD;
 	{&#xD;
@@ -500,8 +516,11 @@ for(unsigned int simulation = 1; simulation &lt;= numberOfSimulations; simulatio
 	}&#xD;
 &#xD;
 	myfile.close();&#xD;
+	&#xD;
+	delete loads;&#xD;
 &#xD;
-	requestRate *= requestRateFactor;&#xD;
+	requestRate += requestRateOffset;&#xD;
+	&#xD;
 }</body>
     </packagedElement>
     <profileApplication xmi:id="_w9upkB1DEeyVwfCVnFKaMw">
