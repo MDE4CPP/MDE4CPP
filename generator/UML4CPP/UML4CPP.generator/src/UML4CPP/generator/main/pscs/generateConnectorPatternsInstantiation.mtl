@@ -742,6 +742,7 @@ for(unsigned int i = 0; i < [end1.partWithPort.getLower()/]; i++)
 		{
 			std::shared_ptr<[end2.partWithPort.type.transformType()/]> end2Part = this->get[end2.partWithPort.name.toUpperFirst()/]()->at(k);
 			[if(end2.definingEnd.getUpper() <> 1)][comment *-multiplicity of end2 port/]
+			[comment]TODO: Check if possible [if(end2.role.getUpper() <> 1)][/comment]
 			for(unsigned int l = 0; l < [end2.role.oclAsType(MultiplicityElement).getLower()/]; l++)
 			{
 				std::shared_ptr<[end2.role.type.transformType()/]> end2Port = end2Part->get[end2.role.name.toUpperFirst()/]()->at(l);
@@ -757,6 +758,7 @@ for(unsigned int i = 0; i < [end1.partWithPort.getLower()/]; i++)
 		[else][comment 1-multiplicity of end2 part/]
 		std::shared_ptr<[end2.partWithPort.type.transformType()/]> end2Part = this->get[end2.partWithPort.name.toUpperFirst()/]();
 			[if(end2.definingEnd.getUpper() <> 1)][comment *-multiplicity of end2 port/]
+			[comment]TODO: Check if possible [if(end2.role.getUpper() <> 1)][/comment]
 			for(unsigned int l = 0; l < [end2.role.oclAsType(MultiplicityElement).getLower()/]; l++)
 			{
 				std::shared_ptr<[end2.role.type.transformType()/]> end2Port = end2Part->get[end2.role.name.toUpperFirst()/]()->at(l);
@@ -778,6 +780,7 @@ for(unsigned int i = 0; i < [end1.partWithPort.getLower()/]; i++)
 		{
 			std::shared_ptr<[end2.partWithPort.type.transformType()/]> end2Part = this->get[end2.partWithPort.name.toUpperFirst()/]()->at(k);
 			[if(end2.definingEnd.getUpper() <> 1)][comment *-multiplicity of end2 port/]
+			[comment]TODO: Check if possible [if(end2.role.getUpper() <> 1)][/comment]
 			for(unsigned int l = 0; l < [end2.role.oclAsType(MultiplicityElement).getLower()/]; l++)
 			{
 				std::shared_ptr<[end2.role.type.transformType()/]> end2Port = end2Part->get[end2.role.name.toUpperFirst()/]()->at(l);
@@ -793,6 +796,7 @@ for(unsigned int i = 0; i < [end1.partWithPort.getLower()/]; i++)
 		[else][comment 1-multiplicity of end2 part/]
 		std::shared_ptr<[end2.partWithPort.type.transformType()/]> end2Part = this->get[end2.partWithPort.name.toUpperFirst()/]();
 			[if(end2.definingEnd.getUpper() <> 1)][comment *-multiplicity of end2 port/]
+			[comment]TODO: Check if possible [if(end2.role.getUpper() <> 1)][/comment]
 			for(unsigned int l = 0; l < [end2.role.oclAsType(MultiplicityElement).getLower()/]; l++)
 			{
 				std::shared_ptr<[end2.role.type.transformType()/]> end2Port = end2Part->get[end2.role.name.toUpperFirst()/]()->at(l);
@@ -818,6 +822,7 @@ for(unsigned int i = 0; i < [end1.partWithPort.getLower()/]; i++)
 		{
 			std::shared_ptr<[end2.partWithPort.type.transformType()/]> end2Part = this->get[end2.partWithPort.name.toUpperFirst()/]()->at(k);
 			[if(end2.definingEnd.getUpper() <> 1)][comment *-multiplicity of end2 port/]
+			[comment]TODO: Check if possible [if(end2.role.getUpper() <> 1)][/comment]
 			for(unsigned int l = 0; l < [end2.role.oclAsType(MultiplicityElement).getLower()/]; l++)
 			{
 				std::shared_ptr<[end2.role.type.transformType()/]> end2Port = end2Part->get[end2.role.name.toUpperFirst()/]()->at(l);
@@ -833,6 +838,7 @@ for(unsigned int i = 0; i < [end1.partWithPort.getLower()/]; i++)
 		[else][comment 1-multiplicity of end2 part/]
 		std::shared_ptr<[end2.partWithPort.type.transformType()/]> end2Part = this->get[end2.partWithPort.name.toUpperFirst()/]();
 			[if(end2.definingEnd.getUpper() <> 1)][comment *-multiplicity of end2 port/]
+			[comment]TODO: Check if possible [if(end2.role.getUpper() <> 1)][/comment]
 			for(unsigned int l = 0; l < [end2.role.oclAsType(MultiplicityElement).getLower()/]; l++)
 			{
 				std::shared_ptr<[end2.role.type.transformType()/]> end2Port = end2Part->get[end2.role.name.toUpperFirst()/]()->at(l);
@@ -854,6 +860,7 @@ for(unsigned int i = 0; i < [end1.partWithPort.getLower()/]; i++)
 		{
 			std::shared_ptr<[end2.partWithPort.type.transformType()/]> end2Part = this->get[end2.partWithPort.name.toUpperFirst()/]()->at(k);
 			[if(end2.definingEnd.getUpper() <> 1)][comment *-multiplicity of end2 port/]
+			[comment]TODO: Check if possible [if(end2.role.getUpper() <> 1)][/comment]
 			for(unsigned int l = 0; l < [end2.role.oclAsType(MultiplicityElement).getLower()/]; l++)
 			{
 				std::shared_ptr<[end2.role.type.transformType()/]> end2Port = end2Part->get[end2.role.name.toUpperFirst()/]()->at(l);

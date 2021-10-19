@@ -41,9 +41,12 @@ application/
 /fUMLExamples/**/.project
 /fUMLExamples/**/build.gradle
 
-/PSCSExamples/Ampelsteuerung_Example/.cproject
+/PSCSExamples/**/.cproject
 /PSCSExamples/Ampelsteuerung_Example/.project
-/PSCSExamples/Ampelsteuerung_Example/build.gradle
+/PSCSExamples/**/build.gradle
+
+/strategiesExamples/**/.cproject
+/strategiesExamples/**/build.gradle
 
 /UMLExamples/TestSuite/copyTestUML/.cproject
 /UMLExamples/TestSuite/copyTestUML/.project
