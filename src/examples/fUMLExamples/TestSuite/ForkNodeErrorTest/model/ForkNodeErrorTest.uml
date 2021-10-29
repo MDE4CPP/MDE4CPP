@@ -9,7 +9,7 @@
         <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
         <defaultValue xmi:type="uml:LiteralInteger" xmi:id="__TUJgDfmEey9LICX3m_clg" name="default_10" value="10"/>
       </ownedAttribute>
-      <ownedBehavior xmi:type="uml:Activity" xmi:id="_h68zQDfkEey9LICX3m_clg" name="act_doStuff" specification="_NGPNMDfvEey7EOUjYsP5gg" node="_qwc0UDfkEey9LICX3m_clg _KYdR8DfnEey9LICX3m_clg _Xhj2MDfnEey9LICX3m_clg _brUrcDfoEey9LICX3m_clg _jmDGUDfoEey9LICX3m_clg _AwtpsDfpEey9LICX3m_clg _KkcNkDfpEey9LICX3m_clg _sgqbcDfpEey9LICX3m_clg _4XjJ4DfpEey9LICX3m_clg">
+      <ownedBehavior xmi:type="uml:Activity" xmi:id="_h68zQDfkEey9LICX3m_clg" name="act_doStuff" specification="_NGPNMDfvEey7EOUjYsP5gg" node="_qwc0UDfkEey9LICX3m_clg _KYdR8DfnEey9LICX3m_clg _Xhj2MDfnEey9LICX3m_clg _brUrcDfoEey9LICX3m_clg _jmDGUDfoEey9LICX3m_clg _AwtpsDfpEey9LICX3m_clg _KkcNkDfpEey9LICX3m_clg _sgqbcDfpEey9LICX3m_clg _4XjJ4DfpEey9LICX3m_clg _OcLaQDiQEeyHj6B4CFAkdQ">
         <edge xmi:type="uml:ObjectFlow" xmi:id="_PMrO4DfnEey9LICX3m_clg" target="_KYdR8DfnEey9LICX3m_clg" source="_qwlXMDfkEey9LICX3m_clg">
           <guard xmi:type="uml:LiteralBoolean" xmi:id="_PMvgUDfnEey9LICX3m_clg" value="true"/>
           <weight xmi:type="uml:LiteralInteger" xmi:id="_PMvgUTfnEey9LICX3m_clg" value="1"/>
@@ -18,7 +18,7 @@
           <guard xmi:type="uml:LiteralBoolean" xmi:id="__2f5oDfnEey9LICX3m_clg" value="true"/>
           <weight xmi:type="uml:LiteralInteger" xmi:id="__2f5oTfnEey9LICX3m_clg" value="1"/>
         </edge>
-        <edge xmi:type="uml:ObjectFlow" xmi:id="_yow3kDfoEey9LICX3m_clg" target="_jmE7gDfoEey9LICX3m_clg" source="_brV5kDfoEey9LICX3m_clg">
+        <edge xmi:type="uml:ObjectFlow" xmi:id="_yow3kDfoEey9LICX3m_clg" target="_OcLaQDiQEeyHj6B4CFAkdQ" source="_brV5kDfoEey9LICX3m_clg">
           <guard xmi:type="uml:LiteralBoolean" xmi:id="_yo2XIDfoEey9LICX3m_clg" value="true"/>
           <weight xmi:type="uml:LiteralInteger" xmi:id="_yo2XITfoEey9LICX3m_clg" value="1"/>
         </edge>
@@ -45,6 +45,10 @@
           <weight xmi:type="uml:LiteralInteger" xmi:id="_DoTscTfqEey9LICX3m_clg" value="1"/>
         </edge>
         <edge xmi:type="uml:ControlFlow" xmi:id="_JGqykDfqEey9LICX3m_clg" target="_4XjJ4DfpEey9LICX3m_clg" source="_sgqbcDfpEey9LICX3m_clg"/>
+        <edge xmi:type="uml:ObjectFlow" xmi:id="_UZa0wDiQEeyHj6B4CFAkdQ" target="_jmE7gDfoEey9LICX3m_clg" source="_OcLaQDiQEeyHj6B4CFAkdQ">
+          <guard xmi:type="uml:LiteralBoolean" xmi:id="_UZklwDiQEeyHj6B4CFAkdQ" value="true"/>
+          <weight xmi:type="uml:LiteralInteger" xmi:id="_UZklwTiQEeyHj6B4CFAkdQ" value="1"/>
+        </edge>
         <node xmi:type="uml:ValueSpecificationAction" xmi:id="_qwc0UDfkEey9LICX3m_clg" name="0_Specification">
           <result xmi:type="uml:OutputPin" xmi:id="_qwlXMDfkEey9LICX3m_clg" name="result" visibility="protected" outgoing="_PMrO4DfnEey9LICX3m_clg">
             <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
@@ -66,13 +70,13 @@
             <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_brV5kjfoEey9LICX3m_clg" value="1"/>
           </result>
         </node>
-        <node xmi:type="uml:CallBehaviorAction" xmi:id="_jmDGUDfoEey9LICX3m_clg" name="lessOrEqual" behavior="_zIxUsDflEey9LICX3m_clg">
+        <node xmi:type="uml:CallBehaviorAction" xmi:id="_jmDGUDfoEey9LICX3m_clg" name="lessThan" behavior="_zIxUsDflEey9LICX3m_clg">
           <argument xmi:type="uml:InputPin" xmi:id="_jmEUcDfoEey9LICX3m_clg" name="value_1" incoming="_0eVSEDfoEey9LICX3m_clg">
             <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
             <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_jmEUcTfoEey9LICX3m_clg" value="1"/>
             <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_jmEUcjfoEey9LICX3m_clg" value="1"/>
           </argument>
-          <argument xmi:type="uml:InputPin" xmi:id="_jmE7gDfoEey9LICX3m_clg" name="value_2" incoming="_yow3kDfoEey9LICX3m_clg">
+          <argument xmi:type="uml:InputPin" xmi:id="_jmE7gDfoEey9LICX3m_clg" name="value_2" incoming="_UZa0wDiQEeyHj6B4CFAkdQ">
             <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
             <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_jmE7gTfoEey9LICX3m_clg" value="1"/>
             <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_jmE7gjfoEey9LICX3m_clg" value="1"/>
@@ -101,6 +105,9 @@
             <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_4Xjw8jfpEey9LICX3m_clg" value="1"/>
           </result>
         </node>
+        <node xmi:type="uml:DataStoreNode" xmi:id="_OcLaQDiQEeyHj6B4CFAkdQ" name="loopIterations" incoming="_yow3kDfoEey9LICX3m_clg" outgoing="_UZa0wDiQEeyHj6B4CFAkdQ">
+          <upperBound xmi:type="uml:LiteralInteger" xmi:id="_OdOjIDiQEeyHj6B4CFAkdQ" value="1"/>
+        </node>
       </ownedBehavior>
       <ownedOperation xmi:type="uml:Operation" xmi:id="_NGPNMDfvEey7EOUjYsP5gg" name="doStuff" method="_h68zQDfkEey9LICX3m_clg"/>
     </packagedElement>
@@ -115,7 +122,7 @@
       <body>result = number;&#xD;
 result++;</body>
     </packagedElement>
-    <packagedElement xmi:type="uml:OpaqueBehavior" xmi:id="_zIxUsDflEey9LICX3m_clg" name="ob_lessOrEqual" visibility="public">
+    <packagedElement xmi:type="uml:OpaqueBehavior" xmi:id="_zIxUsDflEey9LICX3m_clg" name="ob_lessThan" visibility="public">
       <ownedParameter xmi:type="uml:Parameter" xmi:id="_6T6FsDflEey9LICX3m_clg" name="value_1" visibility="public" effect="create">
         <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
       </ownedParameter>
@@ -126,7 +133,7 @@ result++;</body>
         <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
       </ownedParameter>
       <language>CPP</language>
-      <body>result = (value_1 &lt;= value_2);</body>
+      <body>result = (value_1 &lt; value_2);</body>
     </packagedElement>
     <packagedElement xmi:type="uml:OpaqueBehavior" xmi:id="_U411kDfpEey9LICX3m_clg" name="ob_print" visibility="public">
       <language>CPP</language>
@@ -149,4 +156,5 @@ testClass->doStuff();</body>
   </uml:Model>
   <UML4CPPProfile:MainBehavior xmi:id="_NCzJkDftEey9LICX3m_clg" base_Behavior="_LXrrkDftEey9LICX3m_clg"/>
   <UML4CPPProfile:NonExecutable xmi:id="_jimTQDf0Eey7EOUjYsP5gg" base_NamedElement="_LXrrkDftEey9LICX3m_clg"/>
+  <UML4CPPProfile:DoNotGenerate xmi:id="__C1V4DiIEeyHj6B4CFAkdQ" base_Element="_FrBqwDftEey9LICX3m_clg"/>
 </xmi:XMI>
