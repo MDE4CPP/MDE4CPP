@@ -20,6 +20,7 @@
 [import ecore4CPP::generator::main::generateType /]
 [import ecore4CPP::generator::main::helper /]
 [import ecore4CPP::generator::main::validation::validation /]
+[import ecore4CPP::generator::main::helpers::keywords /]
 
 [template public generateApplication(aPackage : EPackage) { 
 	packageName : String = aPackage.name; 
@@ -241,11 +242,16 @@ ENDIF()
 [for (pack : EPackage | aPackage.metaModelLibraries()->reject(doNotGenerateEPackage())->asOrderedSet()) ? (not(pack.name = aPackage.name))]
 FIND_LIBRARY([pack.name.toUpperCase()/]_[libraryVariableNameSuffix(debugMode)/] [pack.name/][libraryNameSuffix(debugMode)/][ending/] ${MDE4CPP_HOME}/application/[folderName/])
 [/for]
+[for (libName : String | aPackage.eAnnotations->select(source = sourceNamePrepareApplication())->first().details->select(d : EStringToStringMapEntry | d.key = keyLibrary()).value)]
+[if (not (libName.oclIsUndefined() or libName = ''))]
+FIND_LIBRARY([libName.toUpperCase()/]_[libraryVariableNameSuffix(debugMode)/] [libName/][libraryNameSuffix(debugMode)/][ending/] ${MDE4CPP_HOME}/application/[folderName/])
+[/if]
+[/for]
 FIND_LIBRARY([aPackage.name.toUpperCase()/]_[libraryVariableNameSuffix(debugMode)/] [aPackage.name/][libraryNameSuffix(debugMode)/][ending/] ${MDE4CPP_HOME}/application/[folderName/])
-# ['['/]protected ('library_[system/]_[buildModeCMakeProperty(debugMode)/]')[']'/]
+# [protected ('library_' + system + '_' + buildModeCMakeProperty(debugMode))] 
 # You may manually edit the following lines, won't be overwritten upon generation.
 
-# ['[/protected]'/]
+# [/protected]
 [/template]
 
 [template private generateLibraryLinking(aPackage : EPackage, debugMode : Boolean)]
@@ -253,11 +259,16 @@ TARGET_LINK_LIBRARIES(${PROJECT_NAME}
 [for (pack : EPackage | aPackage.metaModelLibraries()) ? ((not(pack.name = aPackage.name)) and (not doNotGenerateEPackage()))]
 	[buildModeCMakeProperty(debugMode)/] ${[pack.name.toUpperCase()/]_[libraryVariableNameSuffix(debugMode)/]}
 [/for]
+[for (libName : String | aPackage.eAnnotations->select(source = sourceNamePrepareApplication())->first().details->select(d : EStringToStringMapEntry | d.key = keyLibrary()).value)]
+[if (not (libName.oclIsUndefined() or libName = ''))]
+	[buildModeCMakeProperty(debugMode)/] ${[libName.toUpperCase()/]_[libraryVariableNameSuffix(debugMode)/]}
+[/if]
+[/for]
 	[buildModeCMakeProperty(debugMode)/] ${[aPackage.name.toUpperCase()/]_[libraryVariableNameSuffix(debugMode)/]}
 
-	# ['['/]protected ('library_linking_[buildModeCMakeProperty(debugMode)/]')[']'/]
+	# [protected ('library_linking_' + buildModeCMakeProperty(debugMode))] 
 	# You may manually edit the following lines, won't be overwritten upon generation.
-	
-	# ['['/]/protected[']'/]
+
+	# [/protected]
 )
 [/template]
