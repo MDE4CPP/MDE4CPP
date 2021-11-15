@@ -26,6 +26,7 @@
 
 [import UML4CPP::generator::main::components::generateParameter /]
 [import UML4CPP::generator::main::components::generateType /]
+[import UML4CPP::generator::main::components::generateOpaqueBehavior /]
 [import UML4CPP::generator::main::configuration::generateEclipseFiles /]
 [import UML4CPP::generator::main::helpers::collectionHelper /]
 [import UML4CPP::generator::main::helpers::generalHelper /]
@@ -71,13 +72,9 @@
 #include "[anEnumeration.getNearestPackage().generateNamespacePath(false)/]/[anEnumeration.name/].hpp"
 [/for]
 
-[if(mainOpaqueBehavior.language->notEmpty())]
-[if (mainOpaqueBehavior.language->includes(keyInclude()))]
+[if (mainOpaqueBehavior.hasLanguage(keyInclude()))]
 //Includes from main behavior [mainOpaqueBehavior.name/]
-[let index : Integer = mainOpaqueBehavior.language->asOrderedSet()->indexOf(keyInclude()) ]
-[if (0 < index and index <= mainOpaqueBehavior._body->size())]
-[mainOpaqueBehavior._body->asOrderedSet()->at(index)/]
-[/if][/let][/if]
+[mainOpaqueBehavior.getEntryForLanguage(keyInclude())/]
 [/if]
 
 // [protected ('includes')] 
@@ -98,13 +95,13 @@ int main ()
 	std::shared_ptr<[packageName/]Factory> factory = [packageName/]Factory::eInstance();
 	std::shared_ptr<[packageName/]Package> package = [packageName/]Package::eInstance();
 
-	[if(mainOpaqueBehavior.language->notEmpty())]
-	[if (mainOpaqueBehavior.language->includes(keyCPP()))]
-	[let index : Integer = mainOpaqueBehavior.language->asOrderedSet()->indexOf(keyCPP()) ]
-	[if (0 < index and index <= mainOpaqueBehavior._body->size())]
-	[mainOpaqueBehavior._body->asOrderedSet()->at(index)/]
-	[/if][/let][/if]
-	[/if]
+[if (mainOpaqueBehavior.hasLanguage(keyCPP()))]
+	[mainOpaqueBehavior.getEntryForLanguage(keyCPP())/]
+[else]
+	//No source code found for behavior '[mainOpaqueBehavior.name/]'
+	//Make sure that '[keyCPP()/]' is contained in the 'language' property of behavior '[mainOpaqueBehavior.name/]'
+[/if]	
+
 	// [protected ('main')]
 	// You may manually edit the following lines, won't be overwritten upon generation.
 
@@ -361,11 +358,16 @@ FIND_LIBRARY([packName.toUpperCase()/]_[libraryVariableNameSuffix(debugMode)/] [
 FIND_LIBRARY([aPackage.getPackageName().toUpperCase()/]_[libraryVariableNameSuffix(debugMode)/] [aPackage.getPackageName()/][libraryNameSuffix(debugMode)/][ending/] ${MDE4CPP_HOME}/application/[folderName/])
 [if (aPackage.hasMainActivity())]
 FIND_LIBRARY(PLUGINFRAMEWORK_[libraryVariableNameSuffix(debugMode)/] pluginFramework[libraryNameSuffix(debugMode)/][ending/] ${MDE4CPP_HOME}/application/[folderName/])
+[elseif (aPackage.hasMainOpaqueBehavior() and aPackage.getMainOpaqueBehavior().hasLanguage(keyLibrary()))]
+	[for (libName : String | aPackage.getMainOpaqueBehavior().getEntriesForLanguageTokenized(keyLibrary()))]
+FIND_LIBRARY([libName.toUpperCase()/]_[libraryVariableNameSuffix(debugMode)/] [libName/][libraryNameSuffix(debugMode)/][ending/] ${MDE4CPP_HOME}/application/[folderName/])
+	[/for]
 [/if]
-# ['['/]protected ('library_[system/]_[buildModeCMakeProperty(debugMode)/]')[']'/]
+
+# [protected ('library_' + system + '_' + buildModeCMakeProperty(debugMode))] 
 # You may manually edit the following lines, won't be overwritten upon generation.
 
-# ['[/protected]'/]
+# [/protected]
 [/template]
 
 [template private generateLibraryLinking(aPackage : Package, debugMode : Boolean)]
@@ -376,12 +378,16 @@ TARGET_LINK_LIBRARIES(${PROJECT_NAME}
 	[buildModeCMakeProperty(debugMode)/] ${[aPackage.getPackageName().toUpperCase()/]_[libraryVariableNameSuffix(debugMode)/]}
 [if (aPackage.hasMainActivity())]
 	[buildModeCMakeProperty(debugMode)/] ${PLUGINFRAMEWORK_[libraryVariableNameSuffix(debugMode)/]}
+[elseif (aPackage.hasMainOpaqueBehavior() and aPackage.getMainOpaqueBehavior().hasLanguage(keyLibrary()))]
+	[for (libName : String | aPackage.getMainOpaqueBehavior().getEntriesForLanguageTokenized(keyLibrary()))]
+	[buildModeCMakeProperty(debugMode)/] ${[libName.toUpperCase()/]_[libraryVariableNameSuffix(debugMode)/]}
+	[/for]
 [/if]
 
-	# ['['/]protected ('library_linking_[buildModeCMakeProperty(debugMode)/]')[']'/]
+	# [protected ('library_linking_' + buildModeCMakeProperty(debugMode))] 
 	# You may manually edit the following lines, won't be overwritten upon generation.
-	
-	# ['['/]/protected[']'/]
+
+	# [/protected]
 )
 [/template]
 [query private libraryVariableNameSuffix(debugMode : Boolean) : String = if (debugMode) then 'DEBUG' else 'RELEASE' endif/]

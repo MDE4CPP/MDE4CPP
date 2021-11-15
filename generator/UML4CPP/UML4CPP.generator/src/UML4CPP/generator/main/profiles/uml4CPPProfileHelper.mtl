@@ -30,6 +30,8 @@
 */]
 [query public hasMainBehavior(aPackage : Package) : Boolean = aPackage.eAllContents(Behavior)->select(hasStereotypeApplied(QN_STEREOTYPE_MAINBEHAVIOR()))->reject(isDoNotGenerateElement())->size() > 0 /]
 [query public getMainBehavior(aPackage : Package) : Behavior = if(hasMainBehavior()) then aPackage.eAllContents(Behavior)->select(hasStereotypeApplied(QN_STEREOTYPE_MAINBEHAVIOR()))->reject(isDoNotGenerateElement())->asOrderedSet()->first() else null endif/]
+[query public hasMainOpaqueBehavior(aPackage : Package) : Boolean = if(hasMainBehavior() and getMainBehavior().oclIsKindOf(OpaqueBehavior)) then true else false endif /]
+[query public getMainOpaqueBehavior(aPackage : Package) : OpaqueBehavior = if(hasMainOpaqueBehavior()) then getMainBehavior().oclAsType(OpaqueBehavior) else null endif /]
 [query public hasMainActivity(aPackage : Package) : Boolean = if(hasMainBehavior() and getMainBehavior().oclIsKindOf(Activity)) then true else false endif /]
 [query public getMainActivity(aPackage : Package) : Activity = if(hasMainActivity()) then getMainBehavior().oclAsType(Activity) else null endif /]
 [query public hasMainSourceCode(ePackage : Package) : Boolean = true /]

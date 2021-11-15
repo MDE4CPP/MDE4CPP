@@ -110,6 +110,7 @@ public class UML4CPPEMtlResourceFactory extends EMtlResourceFactoryImpl {
 								"generateInstanceSpecification",
 								"generateInterface",
 								"generateInterfaceRealization",
+								"generateOpaqueBehavior",
 								"generateOperation",
 								"generateParameter",
 								"generatePrimitivetype", 

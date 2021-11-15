@@ -22,6 +22,7 @@
 [import UML4CPP::generator::main::components::generateParameter /]
 [import UML4CPP::generator::main::components::generateStereotype /]
 [import UML4CPP::generator::main::components::generateType /]
+[import UML4CPP::generator::main::components::generateOpaqueBehavior /]
 [import UML4CPP::generator::main::helpers::generalHelper /]
 [import UML4CPP::generator::main::helpers::keywords /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
@@ -58,7 +59,7 @@ virtual [aOperation.generateCppType()/] [aOperation.name/]([for (sParameter : Pa
 
 [comment TODO: the following if is somethimes undefined when the method is an activity instead of a function behaviour/] 
 [if (aOperation.method->notEmpty())]
-[if(aOperation.method->filter(Activity)->notEmpty())]
+	[if(aOperation.method->filter(Activity)->notEmpty())]
 	std::shared_ptr<PluginFramework> pluginFramework = PluginFramework::eInstance();
 	std::string pluginName = "[aOperation.getRootPackage().getPackageName()/]Exec";
 	std::shared_ptr<MDE4CPPPlugin> plugin = pluginFramework->findPluginByName(pluginName);
@@ -72,16 +73,16 @@ virtual [aOperation.generateCppType()/] [aOperation.name/]([for (sParameter : Pa
 			DEBUG_MESSAGE(std::cout << "fumlplugin " << executionPlugin->eNAME() << " is accessable" << std::endl;)
 
 			std::shared_ptr<std::vector<Any>> parameterList(new std::vector<Any>());
-[for (par : Parameter | aOperation.method->filter(Activity)->asOrderedSet()->first().ownedParameter->select((direction = ParameterDirectionKind::inout) or (direction = ParameterDirectionKind::_in)))]
+		[for (par : Parameter | aOperation.method->filter(Activity)->asOrderedSet()->first().ownedParameter->select((direction = ParameterDirectionKind::inout) or (direction = ParameterDirectionKind::_in)))]
 			parameterList->push_back(eAny([par.name/]));
-[/for]
-[let anActivity : Activity = aOperation.method->filter(Activity)->asOrderedSet()->first()]
+		[/for]
+		[let anActivity : Activity = aOperation.method->filter(Activity)->asOrderedSet()->first()]
 			Any activityResult = executionPlugin->executeActivity([anActivity.generatePackageGetterCall()/], parameterList, getThis[aOperation.class.name.toUpperFirst()/]Ptr());
-[/let]
+		[/let]
 
-[if (aOperation.ownedParameter->select(p :Parameter | p.direction = ParameterDirectionKind::return)->notEmpty())]
+		[if (aOperation.ownedParameter->select(p :Parameter | p.direction = ParameterDirectionKind::return)->notEmpty())]
 			[aOperation.ownedParameter->select(p :Parameter | p.direction = ParameterDirectionKind::return).name/] = activityResult->get<[aOperation.generateCppType()/]>();
-[/if]
+		[/if]
 		}
 		else
 		{
@@ -92,15 +93,19 @@ virtual [aOperation.generateCppType()/] [aOperation.name/]([for (sParameter : Pa
 	{ 
 		std::cout << "plugin" << pluginName << " not found" << std::endl;
 	}
-[else]
-[if(aOperation.method->asOrderedSet()->first().oclAsType(OpaqueBehavior).language->notEmpty())]
-	// Implemented as Opaque behaviour [aOperation.method->asOrderedSet()->first().oclAsType(OpaqueBehavior).name/]
-
-[if (aOperation.method->asOrderedSet()->first().oclAsType(OpaqueBehavior).language->includes(keyCPP()))]
-[let index : Integer = aOperation.method->asOrderedSet()->first().oclAsType(OpaqueBehavior).language->asOrderedSet()->indexOf(keyCPP()) ]
-[if (0 < index and index <= aOperation.method->asOrderedSet()->first().oclAsType(OpaqueBehavior)._body->size())]
-[aOperation.method->asOrderedSet()->first().oclAsType(OpaqueBehavior)._body->asOrderedSet()->at(index)/]
-[/if][/let][/if][/if][/if]
+	[elseif(aOperation.method->filter(OpaqueBehavior)->notEmpty())]
+	[let anOpaqueBehavior : OpaqueBehavior = aOperation.method->filter(OpaqueBehavior)->asOrderedSet()->first()]
+		[if (anOpaqueBehavior.hasLanguage(keyCPP()))]
+	//Implemented as OpaqueBehaviour [anOpaqueBehavior.name/]
+	[anOpaqueBehavior.getEntryForLanguage(keyCPP())/]
+		[else]
+	//No source code found for behavior '[anOpaqueBehavior.name/]'
+	//Make sure that '[keyCPP()/]' is contained in the 'language' property of behavior '[anOpaqueBehavior.name/]'
+		[/if]
+	[/let]
+	[else]
+	//Unknown type of Behavior: Currently only Activity and OpaqueBehavior are supported
+	[/if]
 [else]
 	std::cout << __PRETTY_FUNCTION__ << std::endl;
 	throw "UnsupportedOperationException";

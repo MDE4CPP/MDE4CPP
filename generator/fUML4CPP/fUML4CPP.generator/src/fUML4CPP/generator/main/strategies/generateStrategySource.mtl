@@ -44,12 +44,14 @@
 #include "pluginFramework/PluginFramework.hpp"
 #include "pluginFramework/UMLExecutionModelPlugin.hpp"
 [/if][/if]
-[for (aOperation : Operation | aClass.ownedOperation->select(op : Operation | op.method->notEmpty() and op.method->asOrderedSet()->first().oclIsKindOf(OpaqueBehavior) and op.method->asOrderedSet()->first().oclAsType(OpaqueBehavior).language->includes(keyInclude()))->asOrderedSet()->sortedBy(myQualifiedName())) before('//Includes of OpaqueBevaiors') after('\n')]
-[let index : Integer = aOperation.method->asOrderedSet()->first().oclAsType(OpaqueBehavior).language->asOrderedSet()->indexOf(keyInclude())]
-[if (0 < index and index <= aOperation.method->asOrderedSet()->first().oclAsType(OpaqueBehavior)._body->size())]
+[for (aOperation : Operation | aClass.ownedOperation->select(method->filter(OpaqueBehavior)->notEmpty())->asOrderedSet()->sortedBy(myQualifiedName())) before('//Includes of OpaqueBevaiors') after('\n')]
+[let anOpaqueBehavior : OpaqueBehavior = aOperation.method->filter(OpaqueBehavior)->asOrderedSet()->first()]
+	[if (anOpaqueBehavior.hasLanguage(keyInclude()))]
 //Included from operation "[aOperation.name/]"
-[aOperation.method->asOrderedSet()->first().oclAsType(OpaqueBehavior)._body->asOrderedSet()->at(index)/]
-[/if][/let][/for]
+[anOpaqueBehavior.getEntryForLanguage(keyInclude())/]
+	[/if]
+[/let]
+[/for]
 [for (instVal : InstanceValue | aClass.ownedAttribute.defaultValue->reject(oclIsUndefined())->selectByType(InstanceValue)->reject(type.oclIsUndefined() or type.oclIsKindOf(Enumeration))->sortedBy(myQualifiedName())) before('//Includes from InstanceValues\n')]
 [if (instVal.type.oclIsUndefined() or instVal.type.name.oclIsUndefined())]
 // undefined type of InstanceValue [instVal.qualifiedName/] ([instVal.type.toString()/]) ['class '.concat(aClass.name).concat(': undefined type of InstanceValue ').concat(instVal.qualifiedName).concat(' (').concat(instVal.type.toString()).registerError()/]

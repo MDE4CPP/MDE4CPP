@@ -19,6 +19,7 @@
 [import fUML4CPP::generator::main::parameterHelper /]
 [import fUML4CPP::generator::main::fUMLKeywords /]
 [import UML4CPP::generator::main::components::generateType /]
+[import UML4CPP::generator::main::components::generateOpaqueBehavior /]
 [import UML4CPP::generator::main::helpers::generalHelper /]
 [import UML4CPP::generator::main::helpers::keywords /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
@@ -91,12 +92,10 @@ void [behaviorName/]::setThisExecutionPtr(std::weak_ptr<[behaviorName/]> thisExe
 [/template]
 
 [template private generateIncludesOpaqueBehavior(anOpaqueBehavior : OpaqueBehavior, aPackage : Package)]
-[if (anOpaqueBehavior.language->includes(keyInclude()))]
-[let index : Integer = anOpaqueBehavior.language->indexOf(keyInclude())]
-[if (0 < index and index <= anOpaqueBehavior._body->size())]
+[if (anOpaqueBehavior.hasLanguage(keyInclude()))]
 //Included from opaque behavior "[anOpaqueBehavior.name/]"
-[anOpaqueBehavior._body->at(index)/]
-[/if][/let][/if]
+[anOpaqueBehavior.getEntryForLanguage(keyInclude())/]
+[/if]
 
 [for (typePackage : Package | anOpaqueBehavior.ownedParameter.type->asSet()->reject(supportedTypes())._package->asSet()->reject(isReflectionModel())->sortedBy(qualifiedName))]
 #include "[typePackage.generateNamespacePath(false)/]/[typePackage.getPackageName()/]Package.hpp"
@@ -149,21 +148,14 @@ DEBUG_MESSAGE(
 [outPar.generateCppType(false)/] [outPar.name/][if (outPar.upper <> 1)](new Bag<[outPar.type.generateCppType(true)/]>())[/if];
 [/for]	
 
-//Body of the Opaquebehavior
-[if (anOpaqueBehavior.language->includes(keyCPP()))]
-[let index : Integer = anOpaqueBehavior.language->indexOf(keyCPP())]
-[if (0 < index and index <= anOpaqueBehavior._body->size())]
-[anOpaqueBehavior._body->at(index)/]
-[/if][/let]
-[elseif (anOpaqueBehavior.language->includes(keyOCL()))]
-[let index : Integer = anOpaqueBehavior.language->indexOf(keyOCL())]
-[if (0 < index and index <= anOpaqueBehavior._body->size())]
+//Body of the OpaqueBehavior
+[if (anOpaqueBehavior.hasLanguage(keyCPP()))]
+[anOpaqueBehavior.getEntryForLanguage(keyCPP())/]
+[elseif (anOpaqueBehavior.hasLanguage(keyOCL()))]
 [let retPar : OrderedSet(Parameter) = anOpaqueBehavior.ownedParameter->select(p :Parameter | (p.direction = ParameterDirectionKind::return))]
-[if(not retPar->isEmpty())]
-[if (not retPar->first().oclIsInvalid())]
-
+	[if(retPar->notEmpty() and not retPar->first().oclIsInvalid())]
 Utilities::Ocl ocl;
-std::string query = "[anOpaqueBehavior._body->at(index)/]";
+std::string query = "[anOpaqueBehavior.getEntryForLanguage(keyOCL())/]";
 [retPar.name/] = ocl.validate(query, context);
 DEBUG_MESSAGE(
 	if(ocl.getErrors().size() > 0) {
@@ -172,12 +164,13 @@ DEBUG_MESSAGE(
 		std::cout << "return: " << ocl.getResult() << std::endl;
 	}
 )
-[/if]
-[else]
+	[else]
 ['An OpaqueBehavior with OCL must return a boolean value '.registerError()/]
-[/if][/let]
-[/if][/let]
+	[/if]
+[/let]
 [else]
+//No source code found for behavior '[anOpaqueBehavior.name/]'
+//Make sure that '[keyCPP()/]' or '[keyOCL()/]' is contained in the 'language' property of behavior '[anOpaqueBehavior.name/]'
 std::cout << __PRETTY_FUNCTION__ << std::endl;
 throw "UnsupportedBehaviorException";
 [/if]
