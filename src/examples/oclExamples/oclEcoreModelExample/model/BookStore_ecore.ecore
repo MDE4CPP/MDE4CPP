@@ -26,17 +26,17 @@
       <eParameters name="b" eType="#//Book"/>
     </eOperations>
     <eOperations name="open">
-      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
         <details key="body" value="    this->setOpened(true);"/>
       </eAnnotations>
     </eOperations>
     <eOperations name="close">
-      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
         <details key="body" value="    this->setOpened(false);"/>
       </eAnnotations>
     </eOperations>
     <eOperations name="closed" eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//Boolean">
-      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
         <details key="body" value="    return !this->isOpened();"/>
       </eAnnotations>
     </eOperations>
@@ -60,18 +60,18 @@
       <details key="OCL" value="context Book inv: self.copies > 0"/>
     </eAnnotations>
     <eOperations name="addCopies" eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//Integer">
-      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
         <details key="body" value="    m_copies += nbCopies;&#xA;    return m_copies;"/>
       </eAnnotations>
       <eParameters name="nbCopies" eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//Integer"/>
     </eOperations>
     <eOperations name="countCopies" eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//Integer">
-      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
         <details key="body" value="    return this->getCopies();"/>
       </eAnnotations>
     </eOperations>
     <eOperations name="incrCopies">
-      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
         <details key="body" value="   m_copies++;"/>
       </eAnnotations>
     </eOperations>
