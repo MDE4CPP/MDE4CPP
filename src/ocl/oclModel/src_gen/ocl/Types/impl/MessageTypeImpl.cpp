@@ -374,11 +374,11 @@ Any MessageTypeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::s
 }
 
 
-std::shared_ptr<MessageType> MessageTypeImpl::getThisMessageTypePtr() const
+std::shared_ptr<ocl::Types::MessageType> MessageTypeImpl::getThisMessageTypePtr() const
 {
 	return m_thisMessageTypePtr.lock();
 }
-void MessageTypeImpl::setThisMessageTypePtr(std::weak_ptr<MessageType> thisMessageTypePtr)
+void MessageTypeImpl::setThisMessageTypePtr(std::weak_ptr<ocl::Types::MessageType> thisMessageTypePtr)
 {
 	m_thisMessageTypePtr = thisMessageTypePtr;
 	setThisEClassifierPtr(thisMessageTypePtr);

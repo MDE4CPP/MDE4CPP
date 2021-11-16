@@ -33,8 +33,8 @@ namespace uml
 		protected:
 			friend class umlFactoryImpl;
 			InstanceSpecificationImpl();
-			virtual std::shared_ptr<InstanceSpecification> getThisInstanceSpecificationPtr() const;
-			virtual void setThisInstanceSpecificationPtr(std::weak_ptr<InstanceSpecification> thisInstanceSpecificationPtr);
+			virtual std::shared_ptr<uml::InstanceSpecification> getThisInstanceSpecificationPtr() const;
+			virtual void setThisInstanceSpecificationPtr(std::weak_ptr<uml::InstanceSpecification> thisInstanceSpecificationPtr);
 
 			//Additional constructors for the containments back reference
 			InstanceSpecificationImpl(std::weak_ptr<uml::Namespace> par_namespace);
@@ -163,7 +163,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<InstanceSpecification> m_thisInstanceSpecificationPtr;
+			std::weak_ptr<uml::InstanceSpecification> m_thisInstanceSpecificationPtr;
 	};
 }
 #endif /* end of include guard: UML_INSTANCESPECIFICATIONINSTANCESPECIFICATIONIMPL_HPP */

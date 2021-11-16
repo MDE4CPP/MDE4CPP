@@ -25,14 +25,14 @@ namespace uml
 	{
 		public: 
 			ObservationImpl(const ObservationImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 			ObservationImpl& operator=(ObservationImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;
 			ObservationImpl();
-			virtual std::shared_ptr<Observation> getThisObservationPtr() const;
-			virtual void setThisObservationPtr(std::weak_ptr<Observation> thisObservationPtr);
+			virtual std::shared_ptr<uml::Observation> getThisObservationPtr() const;
+			virtual void setThisObservationPtr(std::weak_ptr<uml::Observation> thisObservationPtr);
 
 			//Additional constructors for the containments back reference
 			ObservationImpl(std::weak_ptr<uml::Namespace> par_namespace);
@@ -45,7 +45,7 @@ namespace uml
 
 		public:
 			//destructor
-			virtual ~ObservationImpl();
+			virtual ~ObservationImpl() = 0;
 			
 			//*********************************
 			// Operations
@@ -113,7 +113,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<Observation> m_thisObservationPtr;
+			std::weak_ptr<uml::Observation> m_thisObservationPtr;
 	};
 }
 #endif /* end of include guard: UML_OBSERVATIONOBSERVATIONIMPL_HPP */

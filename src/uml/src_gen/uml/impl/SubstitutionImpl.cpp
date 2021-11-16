@@ -517,11 +517,11 @@ Any SubstitutionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::
 }
 
 
-std::shared_ptr<Substitution> SubstitutionImpl::getThisSubstitutionPtr() const
+std::shared_ptr<uml::Substitution> SubstitutionImpl::getThisSubstitutionPtr() const
 {
 	return m_thisSubstitutionPtr.lock();
 }
-void SubstitutionImpl::setThisSubstitutionPtr(std::weak_ptr<Substitution> thisSubstitutionPtr)
+void SubstitutionImpl::setThisSubstitutionPtr(std::weak_ptr<uml::Substitution> thisSubstitutionPtr)
 {
 	m_thisSubstitutionPtr = thisSubstitutionPtr;
 	setThisRealizationPtr(thisSubstitutionPtr);

@@ -31,8 +31,8 @@ namespace uml
 		protected:
 			friend class umlFactoryImpl;
 			AcceptEventActionImpl();
-			virtual std::shared_ptr<AcceptEventAction> getThisAcceptEventActionPtr() const;
-			virtual void setThisAcceptEventActionPtr(std::weak_ptr<AcceptEventAction> thisAcceptEventActionPtr);
+			virtual std::shared_ptr<uml::AcceptEventAction> getThisAcceptEventActionPtr() const;
+			virtual void setThisAcceptEventActionPtr(std::weak_ptr<uml::AcceptEventAction> thisAcceptEventActionPtr);
 
 			//Additional constructors for the containments back reference
 			AcceptEventActionImpl(std::weak_ptr<uml::Activity> par_activity);
@@ -195,7 +195,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<AcceptEventAction> m_thisAcceptEventActionPtr;
+			std::weak_ptr<uml::AcceptEventAction> m_thisAcceptEventActionPtr;
 	};
 }
 #endif /* end of include guard: UML_ACCEPTEVENTACTIONACCEPTEVENTACTIONIMPL_HPP */

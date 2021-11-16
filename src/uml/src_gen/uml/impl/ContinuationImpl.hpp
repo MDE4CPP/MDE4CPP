@@ -31,8 +31,8 @@ namespace uml
 		protected:
 			friend class umlFactoryImpl;
 			ContinuationImpl();
-			virtual std::shared_ptr<Continuation> getThisContinuationPtr() const;
-			virtual void setThisContinuationPtr(std::weak_ptr<Continuation> thisContinuationPtr);
+			virtual std::shared_ptr<uml::Continuation> getThisContinuationPtr() const;
+			virtual void setThisContinuationPtr(std::weak_ptr<uml::Continuation> thisContinuationPtr);
 
 			//Additional constructors for the containments back reference
 			ContinuationImpl(std::weak_ptr<uml::Interaction> par_enclosingInteraction);
@@ -171,7 +171,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<Continuation> m_thisContinuationPtr;
+			std::weak_ptr<uml::Continuation> m_thisContinuationPtr;
 	};
 }
 #endif /* end of include guard: UML_CONTINUATIONCONTINUATIONIMPL_HPP */

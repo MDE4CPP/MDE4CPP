@@ -275,11 +275,11 @@ Any ModelPropertyCallExpEvalImpl::eInvoke(int operationID, std::shared_ptr<std::
 }
 
 
-std::shared_ptr<ModelPropertyCallExpEval> ModelPropertyCallExpEvalImpl::getThisModelPropertyCallExpEvalPtr() const
+std::shared_ptr<ocl::Evaluations::ModelPropertyCallExpEval> ModelPropertyCallExpEvalImpl::getThisModelPropertyCallExpEvalPtr() const
 {
 	return m_thisModelPropertyCallExpEvalPtr.lock();
 }
-void ModelPropertyCallExpEvalImpl::setThisModelPropertyCallExpEvalPtr(std::weak_ptr<ModelPropertyCallExpEval> thisModelPropertyCallExpEvalPtr)
+void ModelPropertyCallExpEvalImpl::setThisModelPropertyCallExpEvalPtr(std::weak_ptr<ocl::Evaluations::ModelPropertyCallExpEval> thisModelPropertyCallExpEvalPtr)
 {
 	m_thisModelPropertyCallExpEvalPtr = thisModelPropertyCallExpEvalPtr;
 	setThisPropertyCallExpEvalPtr(thisModelPropertyCallExpEvalPtr);

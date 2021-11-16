@@ -199,14 +199,6 @@ EncapsulatedClassifierImpl& EncapsulatedClassifierImpl::operator=(const Encapsul
 	return *this;
 }
 
-std::shared_ptr<ecore::EObject> EncapsulatedClassifierImpl::copy() const
-{
-	std::shared_ptr<EncapsulatedClassifierImpl> element(new EncapsulatedClassifierImpl());
-	*element =(*this);
-	element->setThisEncapsulatedClassifierPtr(element);
-	return element;
-}
-
 //*********************************
 // Operations
 //*********************************
@@ -605,11 +597,11 @@ Any EncapsulatedClassifierImpl::eInvoke(int operationID, std::shared_ptr<std::li
 }
 
 
-std::shared_ptr<EncapsulatedClassifier> EncapsulatedClassifierImpl::getThisEncapsulatedClassifierPtr() const
+std::shared_ptr<uml::EncapsulatedClassifier> EncapsulatedClassifierImpl::getThisEncapsulatedClassifierPtr() const
 {
 	return m_thisEncapsulatedClassifierPtr.lock();
 }
-void EncapsulatedClassifierImpl::setThisEncapsulatedClassifierPtr(std::weak_ptr<EncapsulatedClassifier> thisEncapsulatedClassifierPtr)
+void EncapsulatedClassifierImpl::setThisEncapsulatedClassifierPtr(std::weak_ptr<uml::EncapsulatedClassifier> thisEncapsulatedClassifierPtr)
 {
 	m_thisEncapsulatedClassifierPtr = thisEncapsulatedClassifierPtr;
 	setThisStructuredClassifierPtr(thisEncapsulatedClassifierPtr);

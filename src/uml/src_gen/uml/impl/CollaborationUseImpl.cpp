@@ -559,11 +559,11 @@ Any CollaborationUseImpl::eInvoke(int operationID, std::shared_ptr<std::list < s
 }
 
 
-std::shared_ptr<CollaborationUse> CollaborationUseImpl::getThisCollaborationUsePtr() const
+std::shared_ptr<uml::CollaborationUse> CollaborationUseImpl::getThisCollaborationUsePtr() const
 {
 	return m_thisCollaborationUsePtr.lock();
 }
-void CollaborationUseImpl::setThisCollaborationUsePtr(std::weak_ptr<CollaborationUse> thisCollaborationUsePtr)
+void CollaborationUseImpl::setThisCollaborationUsePtr(std::weak_ptr<uml::CollaborationUse> thisCollaborationUsePtr)
 {
 	m_thisCollaborationUsePtr = thisCollaborationUsePtr;
 	setThisNamedElementPtr(thisCollaborationUsePtr);

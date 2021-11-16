@@ -558,11 +558,11 @@ Any StartObjectBehaviorActionImpl::eInvoke(int operationID, std::shared_ptr<std:
 }
 
 
-std::shared_ptr<StartObjectBehaviorAction> StartObjectBehaviorActionImpl::getThisStartObjectBehaviorActionPtr() const
+std::shared_ptr<uml::StartObjectBehaviorAction> StartObjectBehaviorActionImpl::getThisStartObjectBehaviorActionPtr() const
 {
 	return m_thisStartObjectBehaviorActionPtr.lock();
 }
-void StartObjectBehaviorActionImpl::setThisStartObjectBehaviorActionPtr(std::weak_ptr<StartObjectBehaviorAction> thisStartObjectBehaviorActionPtr)
+void StartObjectBehaviorActionImpl::setThisStartObjectBehaviorActionPtr(std::weak_ptr<uml::StartObjectBehaviorAction> thisStartObjectBehaviorActionPtr)
 {
 	m_thisStartObjectBehaviorActionPtr = thisStartObjectBehaviorActionPtr;
 	setThisCallActionPtr(thisStartObjectBehaviorActionPtr);

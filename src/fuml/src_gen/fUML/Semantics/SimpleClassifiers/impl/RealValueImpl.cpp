@@ -149,6 +149,15 @@ bool RealValueImpl::equals(std::shared_ptr<fUML::Semantics::Values::Value> other
 	//end of body
 }
 
+std::shared_ptr<fUML::Semantics::Values::Value> RealValueImpl::new_()
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	// Return a new real value with no value.
+return fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createRealValue();
+	//end of body
+}
+
 std::shared_ptr<uml::ValueSpecification> RealValueImpl::specify()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
@@ -364,6 +373,13 @@ Any RealValueImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sha
 			break;
 		}
 		
+		// 904241655
+		case SimpleClassifiersPackage::REALVALUE_OPERATION_NEW_:
+		{
+			result = eAny(this->new_());
+			break;
+		}
+		
 		// 663742132
 		case SimpleClassifiersPackage::REALVALUE_OPERATION_SPECIFY:
 		{
@@ -392,11 +408,11 @@ Any RealValueImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sha
 }
 
 
-std::shared_ptr<RealValue> RealValueImpl::getThisRealValuePtr() const
+std::shared_ptr<fUML::Semantics::SimpleClassifiers::RealValue> RealValueImpl::getThisRealValuePtr() const
 {
 	return m_thisRealValuePtr.lock();
 }
-void RealValueImpl::setThisRealValuePtr(std::weak_ptr<RealValue> thisRealValuePtr)
+void RealValueImpl::setThisRealValuePtr(std::weak_ptr<fUML::Semantics::SimpleClassifiers::RealValue> thisRealValuePtr)
 {
 	m_thisRealValuePtr = thisRealValuePtr;
 	setThisPrimitiveValuePtr(thisRealValuePtr);

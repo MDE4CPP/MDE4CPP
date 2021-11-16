@@ -44,9 +44,9 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "uml/umlFactory.hpp"
-#include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
+#include "fUML/Semantics/Actions/ActionsFactory.hpp"
+#include "uml/umlFactory.hpp"
 
 #include "uml/Action.hpp"
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
@@ -338,11 +338,11 @@ Any CS_ReadExtentActionActivationImpl::eInvoke(int operationID, std::shared_ptr<
 }
 
 
-std::shared_ptr<CS_ReadExtentActionActivation> CS_ReadExtentActionActivationImpl::getThisCS_ReadExtentActionActivationPtr() const
+std::shared_ptr<PSCS::Semantics::Actions::CS_ReadExtentActionActivation> CS_ReadExtentActionActivationImpl::getThisCS_ReadExtentActionActivationPtr() const
 {
 	return m_thisCS_ReadExtentActionActivationPtr.lock();
 }
-void CS_ReadExtentActionActivationImpl::setThisCS_ReadExtentActionActivationPtr(std::weak_ptr<CS_ReadExtentActionActivation> thisCS_ReadExtentActionActivationPtr)
+void CS_ReadExtentActionActivationImpl::setThisCS_ReadExtentActionActivationPtr(std::weak_ptr<PSCS::Semantics::Actions::CS_ReadExtentActionActivation> thisCS_ReadExtentActionActivationPtr)
 {
 	m_thisCS_ReadExtentActionActivationPtr = thisCS_ReadExtentActionActivationPtr;
 	setThisReadExtentActionActivationPtr(thisCS_ReadExtentActionActivationPtr);

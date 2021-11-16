@@ -33,8 +33,8 @@ namespace uml
 		protected:
 			friend class umlFactoryImpl;
 			StructuredActivityNodeImpl();
-			virtual std::shared_ptr<StructuredActivityNode> getThisStructuredActivityNodePtr() const;
-			virtual void setThisStructuredActivityNodePtr(std::weak_ptr<StructuredActivityNode> thisStructuredActivityNodePtr);
+			virtual std::shared_ptr<uml::StructuredActivityNode> getThisStructuredActivityNodePtr() const;
+			virtual void setThisStructuredActivityNodePtr(std::weak_ptr<uml::StructuredActivityNode> thisStructuredActivityNodePtr);
 
 			//Additional constructors for the containments back reference
 			StructuredActivityNodeImpl(std::weak_ptr<uml::Activity> par_Activity, const int reference_id);
@@ -236,7 +236,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<StructuredActivityNode> m_thisStructuredActivityNodePtr;
+			std::weak_ptr<uml::StructuredActivityNode> m_thisStructuredActivityNodePtr;
 	};
 }
 #endif /* end of include guard: UML_STRUCTUREDACTIVITYNODESTRUCTUREDACTIVITYNODEIMPL_HPP */

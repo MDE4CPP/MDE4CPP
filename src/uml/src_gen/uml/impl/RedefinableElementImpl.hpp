@@ -25,14 +25,14 @@ namespace uml
 	{
 		public: 
 			RedefinableElementImpl(const RedefinableElementImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 			RedefinableElementImpl& operator=(RedefinableElementImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;
 			RedefinableElementImpl();
-			virtual std::shared_ptr<RedefinableElement> getThisRedefinableElementPtr() const;
-			virtual void setThisRedefinableElementPtr(std::weak_ptr<RedefinableElement> thisRedefinableElementPtr);
+			virtual std::shared_ptr<uml::RedefinableElement> getThisRedefinableElementPtr() const;
+			virtual void setThisRedefinableElementPtr(std::weak_ptr<uml::RedefinableElement> thisRedefinableElementPtr);
 
 			//Additional constructors for the containments back reference
 			RedefinableElementImpl(std::weak_ptr<uml::Namespace> par_namespace);
@@ -41,7 +41,7 @@ namespace uml
 
 		public:
 			//destructor
-			virtual ~RedefinableElementImpl();
+			virtual ~RedefinableElementImpl() = 0;
 			
 			//*********************************
 			// Operations
@@ -161,7 +161,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<RedefinableElement> m_thisRedefinableElementPtr;
+			std::weak_ptr<uml::RedefinableElement> m_thisRedefinableElementPtr;
 	};
 }
 #endif /* end of include guard: UML_REDEFINABLEELEMENTREDEFINABLEELEMENTIMPL_HPP */

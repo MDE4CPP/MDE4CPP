@@ -34,8 +34,8 @@ virtual public LocalSnapshot
 		protected:
 			friend class ocl::Values::ValuesFactoryImpl;
 			LocalSnapshotImpl();
-			virtual std::shared_ptr<LocalSnapshot> getThisLocalSnapshotPtr() const;
-			virtual void setThisLocalSnapshotPtr(std::weak_ptr<LocalSnapshot> thisLocalSnapshotPtr);
+			virtual std::shared_ptr<ocl::Values::LocalSnapshot> getThisLocalSnapshotPtr() const;
+			virtual void setThisLocalSnapshotPtr(std::weak_ptr<ocl::Values::LocalSnapshot> thisLocalSnapshotPtr);
 
 
 		public:
@@ -100,7 +100,7 @@ virtual public LocalSnapshot
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<LocalSnapshot> m_thisLocalSnapshotPtr;
+			std::weak_ptr<ocl::Values::LocalSnapshot> m_thisLocalSnapshotPtr;
 	};
 }
 #endif /* end of include guard: OCL_VALUES_LOCALSNAPSHOTLOCALSNAPSHOTIMPL_HPP */

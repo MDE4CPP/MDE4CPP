@@ -102,14 +102,6 @@ RelationshipImpl& RelationshipImpl::operator=(const RelationshipImpl & obj)
 	return *this;
 }
 
-std::shared_ptr<ecore::EObject> RelationshipImpl::copy() const
-{
-	std::shared_ptr<RelationshipImpl> element(new RelationshipImpl());
-	*element =(*this);
-	element->setThisRelationshipPtr(element);
-	return element;
-}
-
 //*********************************
 // Operations
 //*********************************
@@ -301,11 +293,11 @@ Any RelationshipImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::
 }
 
 
-std::shared_ptr<Relationship> RelationshipImpl::getThisRelationshipPtr() const
+std::shared_ptr<uml::Relationship> RelationshipImpl::getThisRelationshipPtr() const
 {
 	return m_thisRelationshipPtr.lock();
 }
-void RelationshipImpl::setThisRelationshipPtr(std::weak_ptr<Relationship> thisRelationshipPtr)
+void RelationshipImpl::setThisRelationshipPtr(std::weak_ptr<uml::Relationship> thisRelationshipPtr)
 {
 	m_thisRelationshipPtr = thisRelationshipPtr;
 	setThisElementPtr(thisRelationshipPtr);

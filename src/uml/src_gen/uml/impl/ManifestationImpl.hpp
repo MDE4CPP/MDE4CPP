@@ -31,8 +31,8 @@ namespace uml
 		protected:
 			friend class umlFactoryImpl;
 			ManifestationImpl();
-			virtual std::shared_ptr<Manifestation> getThisManifestationPtr() const;
-			virtual void setThisManifestationPtr(std::weak_ptr<Manifestation> thisManifestationPtr);
+			virtual std::shared_ptr<uml::Manifestation> getThisManifestationPtr() const;
+			virtual void setThisManifestationPtr(std::weak_ptr<uml::Manifestation> thisManifestationPtr);
 
 			//Additional constructors for the containments back reference
 			ManifestationImpl(std::weak_ptr<uml::Namespace> par_namespace);
@@ -143,7 +143,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<Manifestation> m_thisManifestationPtr;
+			std::weak_ptr<uml::Manifestation> m_thisManifestationPtr;
 	};
 }
 #endif /* end of include guard: UML_MANIFESTATIONMANIFESTATIONIMPL_HPP */

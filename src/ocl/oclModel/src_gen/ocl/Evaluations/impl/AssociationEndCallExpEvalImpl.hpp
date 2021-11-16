@@ -32,8 +32,8 @@ namespace ocl::Evaluations
 		protected:
 			friend class ocl::Evaluations::EvaluationsFactoryImpl;
 			AssociationEndCallExpEvalImpl();
-			virtual std::shared_ptr<AssociationEndCallExpEval> getThisAssociationEndCallExpEvalPtr() const;
-			virtual void setThisAssociationEndCallExpEvalPtr(std::weak_ptr<AssociationEndCallExpEval> thisAssociationEndCallExpEvalPtr);
+			virtual std::shared_ptr<ocl::Evaluations::AssociationEndCallExpEval> getThisAssociationEndCallExpEvalPtr() const;
+			virtual void setThisAssociationEndCallExpEvalPtr(std::weak_ptr<ocl::Evaluations::AssociationEndCallExpEval> thisAssociationEndCallExpEvalPtr);
 
 
 		public:
@@ -89,7 +89,7 @@ namespace ocl::Evaluations
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<AssociationEndCallExpEval> m_thisAssociationEndCallExpEvalPtr;
+			std::weak_ptr<ocl::Evaluations::AssociationEndCallExpEval> m_thisAssociationEndCallExpEvalPtr;
 	};
 }
 #endif /* end of include guard: OCL_EVALUATIONS_ASSOCIATIONENDCALLEXPEVALASSOCIATIONENDCALLEXPEVALIMPL_HPP */

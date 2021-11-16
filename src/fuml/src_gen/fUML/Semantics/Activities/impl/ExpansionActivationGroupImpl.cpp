@@ -747,11 +747,11 @@ Any ExpansionActivationGroupImpl::eInvoke(int operationID, std::shared_ptr<std::
 }
 
 
-std::shared_ptr<ExpansionActivationGroup> ExpansionActivationGroupImpl::getThisExpansionActivationGroupPtr() const
+std::shared_ptr<fUML::Semantics::Activities::ExpansionActivationGroup> ExpansionActivationGroupImpl::getThisExpansionActivationGroupPtr() const
 {
 	return m_thisExpansionActivationGroupPtr.lock();
 }
-void ExpansionActivationGroupImpl::setThisExpansionActivationGroupPtr(std::weak_ptr<ExpansionActivationGroup> thisExpansionActivationGroupPtr)
+void ExpansionActivationGroupImpl::setThisExpansionActivationGroupPtr(std::weak_ptr<fUML::Semantics::Activities::ExpansionActivationGroup> thisExpansionActivationGroupPtr)
 {
 	m_thisExpansionActivationGroupPtr = thisExpansionActivationGroupPtr;
 	setThisActivityNodeActivationGroupPtr(thisExpansionActivationGroupPtr);

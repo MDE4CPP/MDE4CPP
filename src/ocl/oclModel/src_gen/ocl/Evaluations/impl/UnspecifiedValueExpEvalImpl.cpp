@@ -253,11 +253,11 @@ Any UnspecifiedValueExpEvalImpl::eInvoke(int operationID, std::shared_ptr<std::l
 }
 
 
-std::shared_ptr<UnspecifiedValueExpEval> UnspecifiedValueExpEvalImpl::getThisUnspecifiedValueExpEvalPtr() const
+std::shared_ptr<ocl::Evaluations::UnspecifiedValueExpEval> UnspecifiedValueExpEvalImpl::getThisUnspecifiedValueExpEvalPtr() const
 {
 	return m_thisUnspecifiedValueExpEvalPtr.lock();
 }
-void UnspecifiedValueExpEvalImpl::setThisUnspecifiedValueExpEvalPtr(std::weak_ptr<UnspecifiedValueExpEval> thisUnspecifiedValueExpEvalPtr)
+void UnspecifiedValueExpEvalImpl::setThisUnspecifiedValueExpEvalPtr(std::weak_ptr<ocl::Evaluations::UnspecifiedValueExpEval> thisUnspecifiedValueExpEvalPtr)
 {
 	m_thisUnspecifiedValueExpEvalPtr = thisUnspecifiedValueExpEvalPtr;
 	setThisEvaluationPtr(thisUnspecifiedValueExpEvalPtr);

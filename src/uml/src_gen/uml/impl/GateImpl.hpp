@@ -31,8 +31,8 @@ namespace uml
 		protected:
 			friend class umlFactoryImpl;
 			GateImpl();
-			virtual std::shared_ptr<Gate> getThisGatePtr() const;
-			virtual void setThisGatePtr(std::weak_ptr<Gate> thisGatePtr);
+			virtual std::shared_ptr<uml::Gate> getThisGatePtr() const;
+			virtual void setThisGatePtr(std::weak_ptr<uml::Gate> thisGatePtr);
 
 			//Additional constructors for the containments back reference
 			GateImpl(std::weak_ptr<uml::Namespace> par_namespace);
@@ -247,7 +247,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<Gate> m_thisGatePtr;
+			std::weak_ptr<uml::Gate> m_thisGatePtr;
 	};
 }
 #endif /* end of include guard: UML_GATEGATEIMPL_HPP */

@@ -81,14 +81,14 @@ namespace fUML::Semantics
 
 			
 			// SubPackages Getters
-			virtual std::shared_ptr<Actions::ActionsPackage> getActions_Package() const ;
-			virtual std::shared_ptr<Activities::ActivitiesPackage> getActivities_Package() const ;
-			virtual std::shared_ptr<Classification::ClassificationPackage> getClassification_Package() const ;
-			virtual std::shared_ptr<CommonBehavior::CommonBehaviorPackage> getCommonBehavior_Package() const ;
-			virtual std::shared_ptr<Loci::LociPackage> getLoci_Package() const ;
-			virtual std::shared_ptr<SimpleClassifiers::SimpleClassifiersPackage> getSimpleClassifiers_Package() const ;
-			virtual std::shared_ptr<StructuredClassifiers::StructuredClassifiersPackage> getStructuredClassifiers_Package() const ;
-			virtual std::shared_ptr<Values::ValuesPackage> getValues_Package() const ;
+			virtual std::shared_ptr<fUML::Semantics::Actions::ActionsPackage> getActions_Package() const ;
+			virtual std::shared_ptr<fUML::Semantics::Activities::ActivitiesPackage> getActivities_Package() const ;
+			virtual std::shared_ptr<fUML::Semantics::Classification::ClassificationPackage> getClassification_Package() const ;
+			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::CommonBehaviorPackage> getCommonBehavior_Package() const ;
+			virtual std::shared_ptr<fUML::Semantics::Loci::LociPackage> getLoci_Package() const ;
+			virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage> getSimpleClassifiers_Package() const ;
+			virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage> getStructuredClassifiers_Package() const ;
+			virtual std::shared_ptr<fUML::Semantics::Values::ValuesPackage> getValues_Package() const ;
 			
 
 		private:

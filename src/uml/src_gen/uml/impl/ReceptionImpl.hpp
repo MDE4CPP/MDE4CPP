@@ -31,8 +31,8 @@ namespace uml
 		protected:
 			friend class umlFactoryImpl;
 			ReceptionImpl();
-			virtual std::shared_ptr<Reception> getThisReceptionPtr() const;
-			virtual void setThisReceptionPtr(std::weak_ptr<Reception> thisReceptionPtr);
+			virtual std::shared_ptr<uml::Reception> getThisReceptionPtr() const;
+			virtual void setThisReceptionPtr(std::weak_ptr<uml::Reception> thisReceptionPtr);
 
 			//Additional constructors for the containments back reference
 			ReceptionImpl(std::weak_ptr<uml::Namespace> par_namespace);
@@ -145,7 +145,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<Reception> m_thisReceptionPtr;
+			std::weak_ptr<uml::Reception> m_thisReceptionPtr;
 	};
 }
 #endif /* end of include guard: UML_RECEPTIONRECEPTIONIMPL_HPP */

@@ -26,14 +26,14 @@ namespace ocl::Expressions
 	{
 		public: 
 			PrimitiveLiteralExpImpl(const PrimitiveLiteralExpImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 			PrimitiveLiteralExpImpl& operator=(PrimitiveLiteralExpImpl const&); 
 
 		protected:
 			friend class ocl::Expressions::ExpressionsFactoryImpl;
 			PrimitiveLiteralExpImpl();
-			virtual std::shared_ptr<PrimitiveLiteralExp> getThisPrimitiveLiteralExpPtr() const;
-			virtual void setThisPrimitiveLiteralExpPtr(std::weak_ptr<PrimitiveLiteralExp> thisPrimitiveLiteralExpPtr);
+			virtual std::shared_ptr<ocl::Expressions::PrimitiveLiteralExp> getThisPrimitiveLiteralExpPtr() const;
+			virtual void setThisPrimitiveLiteralExpPtr(std::weak_ptr<ocl::Expressions::PrimitiveLiteralExp> thisPrimitiveLiteralExpPtr);
 
 			//Additional constructors for the containments back reference
 			PrimitiveLiteralExpImpl(std::weak_ptr<ocl::Expressions::CallExp> par_appliedElement);
@@ -57,7 +57,7 @@ namespace ocl::Expressions
 
 		public:
 			//destructor
-			virtual ~PrimitiveLiteralExpImpl();
+			virtual ~PrimitiveLiteralExpImpl() = 0;
 			
 			//*********************************
 			// Operations
@@ -108,7 +108,7 @@ namespace ocl::Expressions
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<PrimitiveLiteralExp> m_thisPrimitiveLiteralExpPtr;
+			std::weak_ptr<ocl::Expressions::PrimitiveLiteralExp> m_thisPrimitiveLiteralExpPtr;
 	};
 }
 #endif /* end of include guard: OCL_EXPRESSIONS_PRIMITIVELITERALEXPPRIMITIVELITERALEXPIMPL_HPP */

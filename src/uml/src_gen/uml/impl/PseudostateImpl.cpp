@@ -337,47 +337,47 @@ void PseudostateImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XL
 		iter = attr_list.find("kind");
 		if ( iter != attr_list.end() )
 		{
-			uml::PseudostateKind value = PseudostateKind::INITIAL;
+			uml::PseudostateKind value = uml::PseudostateKind::INITIAL;
 			std::string literal = iter->second;
 			if (literal == "initial")
 			{
-				value = PseudostateKind::INITIAL;
+				value = uml::PseudostateKind::INITIAL;
 			}
 			else if (literal == "deepHistory")
 			{
-				value = PseudostateKind::DEEPHISTORY;
+				value = uml::PseudostateKind::DEEPHISTORY;
 			}
 			else if (literal == "shallowHistory")
 			{
-				value = PseudostateKind::SHALLOWHISTORY;
+				value = uml::PseudostateKind::SHALLOWHISTORY;
 			}
 			else if (literal == "join")
 			{
-				value = PseudostateKind::JOIN;
+				value = uml::PseudostateKind::JOIN;
 			}
 			else if (literal == "fork")
 			{
-				value = PseudostateKind::FORK;
+				value = uml::PseudostateKind::FORK;
 			}
 			else if (literal == "junction")
 			{
-				value = PseudostateKind::JUNCTION;
+				value = uml::PseudostateKind::JUNCTION;
 			}
 			else if (literal == "choice")
 			{
-				value = PseudostateKind::CHOICE;
+				value = uml::PseudostateKind::CHOICE;
 			}
 			else if (literal == "entryPoint")
 			{
-				value = PseudostateKind::ENTRYPOINT;
+				value = uml::PseudostateKind::ENTRYPOINT;
 			}
 			else if (literal == "exitPoint")
 			{
-				value = PseudostateKind::EXITPOINT;
+				value = uml::PseudostateKind::EXITPOINT;
 			}
 			else if (literal == "terminate")
 			{
-				value = PseudostateKind::TERMINATE;
+				value = uml::PseudostateKind::TERMINATE;
 			}
 			this->setKind(value);
 		}
@@ -457,43 +457,43 @@ void PseudostateImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 		{
 			uml::PseudostateKind value = this->getKind();
 			std::string literal = "";
-			if (value == PseudostateKind::INITIAL)
+			if (value == uml::PseudostateKind::INITIAL)
 			{
 				literal = "initial";
 			}
-			else if (value == PseudostateKind::DEEPHISTORY)
+			else if (value == uml::PseudostateKind::DEEPHISTORY)
 			{
 				literal = "deepHistory";
 			}
-			else if (value == PseudostateKind::SHALLOWHISTORY)
+			else if (value == uml::PseudostateKind::SHALLOWHISTORY)
 			{
 				literal = "shallowHistory";
 			}
-			else if (value == PseudostateKind::JOIN)
+			else if (value == uml::PseudostateKind::JOIN)
 			{
 				literal = "join";
 			}
-			else if (value == PseudostateKind::FORK)
+			else if (value == uml::PseudostateKind::FORK)
 			{
 				literal = "fork";
 			}
-			else if (value == PseudostateKind::JUNCTION)
+			else if (value == uml::PseudostateKind::JUNCTION)
 			{
 				literal = "junction";
 			}
-			else if (value == PseudostateKind::CHOICE)
+			else if (value == uml::PseudostateKind::CHOICE)
 			{
 				literal = "choice";
 			}
-			else if (value == PseudostateKind::ENTRYPOINT)
+			else if (value == uml::PseudostateKind::ENTRYPOINT)
 			{
 				literal = "entryPoint";
 			}
-			else if (value == PseudostateKind::EXITPOINT)
+			else if (value == uml::PseudostateKind::EXITPOINT)
 			{
 				literal = "exitPoint";
 			}
-			else if (value == PseudostateKind::TERMINATE)
+			else if (value == uml::PseudostateKind::TERMINATE)
 			{
 				literal = "terminate";
 			}
@@ -541,7 +541,7 @@ bool PseudostateImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case uml::umlPackage::PSEUDOSTATE_ATTRIBUTE_KIND:
-			return m_kind != PseudostateKind::INITIAL;; //18913
+			return m_kind != uml::PseudostateKind::INITIAL;; //18913
 		case uml::umlPackage::PSEUDOSTATE_ATTRIBUTE_STATE:
 			return getState().lock() != nullptr; //18912
 		case uml::umlPackage::PSEUDOSTATE_ATTRIBUTE_STATEMACHINE:
@@ -759,11 +759,11 @@ Any PseudostateImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::s
 }
 
 
-std::shared_ptr<Pseudostate> PseudostateImpl::getThisPseudostatePtr() const
+std::shared_ptr<uml::Pseudostate> PseudostateImpl::getThisPseudostatePtr() const
 {
 	return m_thisPseudostatePtr.lock();
 }
-void PseudostateImpl::setThisPseudostatePtr(std::weak_ptr<Pseudostate> thisPseudostatePtr)
+void PseudostateImpl::setThisPseudostatePtr(std::weak_ptr<uml::Pseudostate> thisPseudostatePtr)
 {
 	m_thisPseudostatePtr = thisPseudostatePtr;
 	setThisVertexPtr(thisPseudostatePtr);

@@ -571,11 +571,11 @@ Any EReferenceImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sh
 }
 
 
-std::shared_ptr<EReference> EReferenceImpl::getThisEReferencePtr() const
+std::shared_ptr<ecore::EReference> EReferenceImpl::getThisEReferencePtr() const
 {
 	return m_thisEReferencePtr.lock();
 }
-void EReferenceImpl::setThisEReferencePtr(std::weak_ptr<EReference> thisEReferencePtr)
+void EReferenceImpl::setThisEReferencePtr(std::weak_ptr<ecore::EReference> thisEReferencePtr)
 {
 	m_thisEReferencePtr = thisEReferencePtr;
 	setThisEStructuralFeaturePtr(thisEReferencePtr);

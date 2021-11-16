@@ -25,14 +25,14 @@ namespace uml
 	{
 		public: 
 			LiteralSpecificationImpl(const LiteralSpecificationImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 			LiteralSpecificationImpl& operator=(LiteralSpecificationImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;
 			LiteralSpecificationImpl();
-			virtual std::shared_ptr<LiteralSpecification> getThisLiteralSpecificationPtr() const;
-			virtual void setThisLiteralSpecificationPtr(std::weak_ptr<LiteralSpecification> thisLiteralSpecificationPtr);
+			virtual std::shared_ptr<uml::LiteralSpecification> getThisLiteralSpecificationPtr() const;
+			virtual void setThisLiteralSpecificationPtr(std::weak_ptr<uml::LiteralSpecification> thisLiteralSpecificationPtr);
 
 			//Additional constructors for the containments back reference
 			LiteralSpecificationImpl(std::weak_ptr<uml::Namespace> par_namespace);
@@ -49,7 +49,7 @@ namespace uml
 
 		public:
 			//destructor
-			virtual ~LiteralSpecificationImpl();
+			virtual ~LiteralSpecificationImpl() = 0;
 			
 			//*********************************
 			// Operations
@@ -117,7 +117,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<LiteralSpecification> m_thisLiteralSpecificationPtr;
+			std::weak_ptr<uml::LiteralSpecification> m_thisLiteralSpecificationPtr;
 	};
 }
 #endif /* end of include guard: UML_LITERALSPECIFICATIONLITERALSPECIFICATIONIMPL_HPP */

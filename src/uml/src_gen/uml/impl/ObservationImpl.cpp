@@ -131,14 +131,6 @@ ObservationImpl& ObservationImpl::operator=(const ObservationImpl & obj)
 	return *this;
 }
 
-std::shared_ptr<ecore::EObject> ObservationImpl::copy() const
-{
-	std::shared_ptr<ObservationImpl> element(new ObservationImpl());
-	*element =(*this);
-	element->setThisObservationPtr(element);
-	return element;
-}
-
 //*********************************
 // Operations
 //*********************************
@@ -332,11 +324,11 @@ Any ObservationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::s
 }
 
 
-std::shared_ptr<Observation> ObservationImpl::getThisObservationPtr() const
+std::shared_ptr<uml::Observation> ObservationImpl::getThisObservationPtr() const
 {
 	return m_thisObservationPtr.lock();
 }
-void ObservationImpl::setThisObservationPtr(std::weak_ptr<Observation> thisObservationPtr)
+void ObservationImpl::setThisObservationPtr(std::weak_ptr<uml::Observation> thisObservationPtr)
 {
 	m_thisObservationPtr = thisObservationPtr;
 	setThisPackageableElementPtr(thisObservationPtr);

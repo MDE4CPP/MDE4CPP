@@ -395,11 +395,11 @@ Any LiteralNullImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::s
 }
 
 
-std::shared_ptr<LiteralNull> LiteralNullImpl::getThisLiteralNullPtr() const
+std::shared_ptr<uml::LiteralNull> LiteralNullImpl::getThisLiteralNullPtr() const
 {
 	return m_thisLiteralNullPtr.lock();
 }
-void LiteralNullImpl::setThisLiteralNullPtr(std::weak_ptr<LiteralNull> thisLiteralNullPtr)
+void LiteralNullImpl::setThisLiteralNullPtr(std::weak_ptr<uml::LiteralNull> thisLiteralNullPtr)
 {
 	m_thisLiteralNullPtr = thisLiteralNullPtr;
 	setThisLiteralSpecificationPtr(thisLiteralNullPtr);

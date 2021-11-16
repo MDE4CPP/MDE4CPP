@@ -411,11 +411,11 @@ Any ForkNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shar
 }
 
 
-std::shared_ptr<ForkNode> ForkNodeImpl::getThisForkNodePtr() const
+std::shared_ptr<uml::ForkNode> ForkNodeImpl::getThisForkNodePtr() const
 {
 	return m_thisForkNodePtr.lock();
 }
-void ForkNodeImpl::setThisForkNodePtr(std::weak_ptr<ForkNode> thisForkNodePtr)
+void ForkNodeImpl::setThisForkNodePtr(std::weak_ptr<uml::ForkNode> thisForkNodePtr)
 {
 	m_thisForkNodePtr = thisForkNodePtr;
 	setThisControlNodePtr(thisForkNodePtr);

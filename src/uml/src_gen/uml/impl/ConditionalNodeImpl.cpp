@@ -949,11 +949,11 @@ Any ConditionalNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list < st
 }
 
 
-std::shared_ptr<ConditionalNode> ConditionalNodeImpl::getThisConditionalNodePtr() const
+std::shared_ptr<uml::ConditionalNode> ConditionalNodeImpl::getThisConditionalNodePtr() const
 {
 	return m_thisConditionalNodePtr.lock();
 }
-void ConditionalNodeImpl::setThisConditionalNodePtr(std::weak_ptr<ConditionalNode> thisConditionalNodePtr)
+void ConditionalNodeImpl::setThisConditionalNodePtr(std::weak_ptr<uml::ConditionalNode> thisConditionalNodePtr)
 {
 	m_thisConditionalNodePtr = thisConditionalNodePtr;
 	setThisStructuredActivityNodePtr(thisConditionalNodePtr);

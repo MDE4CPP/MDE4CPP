@@ -32,8 +32,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "ocl/Values/ValuesFactory.hpp"
 #include "ocl/Types/TypesFactory.hpp"
+#include "ocl/Values/ValuesFactory.hpp"
 
 #include "ocl/Types/CollectionType.hpp"
 #include "ocl/Values/CollectionValue.hpp"
@@ -43,8 +43,8 @@
 //Factories an Package includes
 #include "ocl/oclPackage.hpp"
 #include "ocl/Types/TypesPackage.hpp"
-#include "ocl/Values/ValuesPackage.hpp"
 #include "fUML/Semantics/Values/ValuesPackage.hpp"
+#include "ocl/Values/ValuesPackage.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -280,11 +280,11 @@ Any SequenceTypeValueImpl::eInvoke(int operationID, std::shared_ptr<std::list < 
 }
 
 
-std::shared_ptr<SequenceTypeValue> SequenceTypeValueImpl::getThisSequenceTypeValuePtr() const
+std::shared_ptr<ocl::Values::SequenceTypeValue> SequenceTypeValueImpl::getThisSequenceTypeValuePtr() const
 {
 	return m_thisSequenceTypeValuePtr.lock();
 }
-void SequenceTypeValueImpl::setThisSequenceTypeValuePtr(std::weak_ptr<SequenceTypeValue> thisSequenceTypeValuePtr)
+void SequenceTypeValueImpl::setThisSequenceTypeValuePtr(std::weak_ptr<ocl::Values::SequenceTypeValue> thisSequenceTypeValuePtr)
 {
 	m_thisSequenceTypeValuePtr = thisSequenceTypeValuePtr;
 	setThisCollectionValuePtr(thisSequenceTypeValuePtr);

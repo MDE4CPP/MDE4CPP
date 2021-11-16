@@ -4,18 +4,18 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
-#include "ecore/EAnnotation.hpp"
-#include "ecore/EPackage.hpp"
-#include "ecore/EReference.hpp"
-#include "ecore/EEnum.hpp"
-#include "ecore/EClass.hpp"
-#include "ecore/EDataType.hpp"
-#include "ecore/EGenericType.hpp"
-#include "ecore/EAttribute.hpp"
-#include "ecore/EEnumLiteral.hpp"
-#include "ecore/EParameter.hpp"
-#include "ecore/EOperation.hpp"
 #include "ecore/EStringToStringMapEntry.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
+#include "ecore/EGenericType.hpp"
+#include "ecore/EEnum.hpp"
+#include "ecore/EPackage.hpp"
+#include "ecore/EOperation.hpp"
+#include "ecore/EClass.hpp"
+#include "ecore/EParameter.hpp"
+#include "ecore/EDataType.hpp"
+#include "ecore/EEnumLiteral.hpp"
 
 //metamodel factory
 #include "PSCS/Semantics/SemanticsFactory.hpp"
@@ -72,29 +72,29 @@ void SemanticsPackageImpl::init(std::shared_ptr<ecore::EPackage> package)
     initializePackageContents();   
 }
 
-std::shared_ptr<Actions::ActionsPackage> SemanticsPackageImpl::getActions_Package() const
+std::shared_ptr<PSCS::Semantics::Actions::ActionsPackage> PSCS::Semantics::SemanticsPackageImpl::getActions_Package() const
 {
-	return Actions::ActionsPackage::eInstance();
+	return PSCS::Semantics::Actions::ActionsPackage::eInstance();
 } 
-std::shared_ptr<Classification::ClassificationPackage> SemanticsPackageImpl::getClassification_Package() const
+std::shared_ptr<PSCS::Semantics::Classification::ClassificationPackage> PSCS::Semantics::SemanticsPackageImpl::getClassification_Package() const
 {
-	return Classification::ClassificationPackage::eInstance();
+	return PSCS::Semantics::Classification::ClassificationPackage::eInstance();
 } 
-std::shared_ptr<CommonBehavior::CommonBehaviorPackage> SemanticsPackageImpl::getCommonBehavior_Package() const
+std::shared_ptr<PSCS::Semantics::CommonBehavior::CommonBehaviorPackage> PSCS::Semantics::SemanticsPackageImpl::getCommonBehavior_Package() const
 {
-	return CommonBehavior::CommonBehaviorPackage::eInstance();
+	return PSCS::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance();
 } 
-std::shared_ptr<Loci::LociPackage> SemanticsPackageImpl::getLoci_Package() const
+std::shared_ptr<PSCS::Semantics::Loci::LociPackage> PSCS::Semantics::SemanticsPackageImpl::getLoci_Package() const
 {
-	return Loci::LociPackage::eInstance();
+	return PSCS::Semantics::Loci::LociPackage::eInstance();
 } 
-std::shared_ptr<StructuredClassifiers::StructuredClassifiersPackage> SemanticsPackageImpl::getStructuredClassifiers_Package() const
+std::shared_ptr<PSCS::Semantics::StructuredClassifiers::StructuredClassifiersPackage> PSCS::Semantics::SemanticsPackageImpl::getStructuredClassifiers_Package() const
 {
-	return StructuredClassifiers::StructuredClassifiersPackage::eInstance();
+	return PSCS::Semantics::StructuredClassifiers::StructuredClassifiersPackage::eInstance();
 } 
-std::shared_ptr<Values::ValuesPackage> SemanticsPackageImpl::getValues_Package() const
+std::shared_ptr<PSCS::Semantics::Values::ValuesPackage> PSCS::Semantics::SemanticsPackageImpl::getValues_Package() const
 {
-	return Values::ValuesPackage::eInstance();
+	return PSCS::Semantics::Values::ValuesPackage::eInstance();
 } 
 
 

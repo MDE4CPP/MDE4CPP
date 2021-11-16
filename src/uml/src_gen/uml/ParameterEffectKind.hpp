@@ -9,7 +9,7 @@
 
 namespace uml 
 {
-	enum ParameterEffectKind {
+	enum class ParameterEffectKind {
 		
 		CREATE = 0
 ,

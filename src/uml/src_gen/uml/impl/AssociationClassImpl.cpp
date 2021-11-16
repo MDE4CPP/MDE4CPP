@@ -593,11 +593,11 @@ Any AssociationClassImpl::eInvoke(int operationID, std::shared_ptr<std::list < s
 }
 
 
-std::shared_ptr<AssociationClass> AssociationClassImpl::getThisAssociationClassPtr() const
+std::shared_ptr<uml::AssociationClass> AssociationClassImpl::getThisAssociationClassPtr() const
 {
 	return m_thisAssociationClassPtr.lock();
 }
-void AssociationClassImpl::setThisAssociationClassPtr(std::weak_ptr<AssociationClass> thisAssociationClassPtr)
+void AssociationClassImpl::setThisAssociationClassPtr(std::weak_ptr<uml::AssociationClass> thisAssociationClassPtr)
 {
 	m_thisAssociationClassPtr = thisAssociationClassPtr;
 	setThisAssociationPtr(thisAssociationClassPtr);

@@ -95,14 +95,6 @@ EventAccepterImpl& EventAccepterImpl::operator=(const EventAccepterImpl & obj)
 	return *this;
 }
 
-std::shared_ptr<ecore::EObject> EventAccepterImpl::copy() const
-{
-	std::shared_ptr<EventAccepterImpl> element(new EventAccepterImpl());
-	*element =(*this);
-	element->setThisEventAccepterPtr(element);
-	return element;
-}
-
 //*********************************
 // Operations
 //*********************************
@@ -276,11 +268,11 @@ Any EventAccepterImpl::eInvoke(int operationID, std::shared_ptr<std::list < std:
 }
 
 
-std::shared_ptr<EventAccepter> EventAccepterImpl::getThisEventAccepterPtr() const
+std::shared_ptr<fUML::Semantics::CommonBehavior::EventAccepter> EventAccepterImpl::getThisEventAccepterPtr() const
 {
 	return m_thisEventAccepterPtr.lock();
 }
-void EventAccepterImpl::setThisEventAccepterPtr(std::weak_ptr<EventAccepter> thisEventAccepterPtr)
+void EventAccepterImpl::setThisEventAccepterPtr(std::weak_ptr<fUML::Semantics::CommonBehavior::EventAccepter> thisEventAccepterPtr)
 {
 	m_thisEventAccepterPtr = thisEventAccepterPtr;
 }

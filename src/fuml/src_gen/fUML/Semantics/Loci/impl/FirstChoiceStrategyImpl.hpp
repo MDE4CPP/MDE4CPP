@@ -32,8 +32,8 @@ namespace fUML::Semantics::Loci
 		protected:
 			friend class fUML::Semantics::Loci::LociFactoryImpl;
 			FirstChoiceStrategyImpl();
-			virtual std::shared_ptr<FirstChoiceStrategy> getThisFirstChoiceStrategyPtr() const;
-			virtual void setThisFirstChoiceStrategyPtr(std::weak_ptr<FirstChoiceStrategy> thisFirstChoiceStrategyPtr);
+			virtual std::shared_ptr<fUML::Semantics::Loci::FirstChoiceStrategy> getThisFirstChoiceStrategyPtr() const;
+			virtual void setThisFirstChoiceStrategyPtr(std::weak_ptr<fUML::Semantics::Loci::FirstChoiceStrategy> thisFirstChoiceStrategyPtr);
 
 
 		public:
@@ -88,7 +88,7 @@ namespace fUML::Semantics::Loci
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<FirstChoiceStrategy> m_thisFirstChoiceStrategyPtr;
+			std::weak_ptr<fUML::Semantics::Loci::FirstChoiceStrategy> m_thisFirstChoiceStrategyPtr;
 	};
 }
 #endif /* end of include guard: FUML_SEMANTICS_LOCI_FIRSTCHOICESTRATEGYFIRSTCHOICESTRATEGYIMPL_HPP */

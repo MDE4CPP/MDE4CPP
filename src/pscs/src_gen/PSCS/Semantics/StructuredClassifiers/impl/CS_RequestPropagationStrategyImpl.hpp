@@ -26,19 +26,19 @@ namespace PSCS::Semantics::StructuredClassifiers
 	{
 		public: 
 			CS_RequestPropagationStrategyImpl(const CS_RequestPropagationStrategyImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 			CS_RequestPropagationStrategyImpl& operator=(CS_RequestPropagationStrategyImpl const&); 
 
 		protected:
 			friend class PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactoryImpl;
 			CS_RequestPropagationStrategyImpl();
-			virtual std::shared_ptr<CS_RequestPropagationStrategy> getThisCS_RequestPropagationStrategyPtr() const;
-			virtual void setThisCS_RequestPropagationStrategyPtr(std::weak_ptr<CS_RequestPropagationStrategy> thisCS_RequestPropagationStrategyPtr);
+			virtual std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_RequestPropagationStrategy> getThisCS_RequestPropagationStrategyPtr() const;
+			virtual void setThisCS_RequestPropagationStrategyPtr(std::weak_ptr<PSCS::Semantics::StructuredClassifiers::CS_RequestPropagationStrategy> thisCS_RequestPropagationStrategyPtr);
 
 
 		public:
 			//destructor
-			virtual ~CS_RequestPropagationStrategyImpl();
+			virtual ~CS_RequestPropagationStrategyImpl() = 0;
 			
 			//*********************************
 			// Operations
@@ -89,7 +89,7 @@ namespace PSCS::Semantics::StructuredClassifiers
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<CS_RequestPropagationStrategy> m_thisCS_RequestPropagationStrategyPtr;
+			std::weak_ptr<PSCS::Semantics::StructuredClassifiers::CS_RequestPropagationStrategy> m_thisCS_RequestPropagationStrategyPtr;
 	};
 }
 #endif /* end of include guard: PSCS_SEMANTICS_STRUCTUREDCLASSIFIERS_CS_REQUESTPROPAGATIONSTRATEGYCS_REQUESTPROPAGATIONSTRATEGYIMPL_HPP */

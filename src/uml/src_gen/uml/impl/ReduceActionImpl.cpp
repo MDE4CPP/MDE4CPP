@@ -690,11 +690,11 @@ Any ReduceActionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::
 }
 
 
-std::shared_ptr<ReduceAction> ReduceActionImpl::getThisReduceActionPtr() const
+std::shared_ptr<uml::ReduceAction> ReduceActionImpl::getThisReduceActionPtr() const
 {
 	return m_thisReduceActionPtr.lock();
 }
-void ReduceActionImpl::setThisReduceActionPtr(std::weak_ptr<ReduceAction> thisReduceActionPtr)
+void ReduceActionImpl::setThisReduceActionPtr(std::weak_ptr<uml::ReduceAction> thisReduceActionPtr)
 {
 	m_thisReduceActionPtr = thisReduceActionPtr;
 	setThisActionPtr(thisReduceActionPtr);

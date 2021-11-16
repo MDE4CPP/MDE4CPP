@@ -32,8 +32,8 @@ namespace fUML::Semantics::Actions
 		protected:
 			friend class fUML::Semantics::Actions::ActionsFactoryImpl;
 			AcceptEventActionEventAccepterImpl();
-			virtual std::shared_ptr<AcceptEventActionEventAccepter> getThisAcceptEventActionEventAccepterPtr() const;
-			virtual void setThisAcceptEventActionEventAccepterPtr(std::weak_ptr<AcceptEventActionEventAccepter> thisAcceptEventActionEventAccepterPtr);
+			virtual std::shared_ptr<fUML::Semantics::Actions::AcceptEventActionEventAccepter> getThisAcceptEventActionEventAccepterPtr() const;
+			virtual void setThisAcceptEventActionEventAccepterPtr(std::weak_ptr<fUML::Semantics::Actions::AcceptEventActionEventAccepter> thisAcceptEventActionEventAccepterPtr);
 
 
 		public:
@@ -89,7 +89,7 @@ namespace fUML::Semantics::Actions
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<AcceptEventActionEventAccepter> m_thisAcceptEventActionEventAccepterPtr;
+			std::weak_ptr<fUML::Semantics::Actions::AcceptEventActionEventAccepter> m_thisAcceptEventActionEventAccepterPtr;
 	};
 }
 #endif /* end of include guard: FUML_SEMANTICS_ACTIONS_ACCEPTEVENTACTIONEVENTACCEPTERACCEPTEVENTACTIONEVENTACCEPTERIMPL_HPP */

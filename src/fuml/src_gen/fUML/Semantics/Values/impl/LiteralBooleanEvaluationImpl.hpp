@@ -32,8 +32,8 @@ namespace fUML::Semantics::Values
 		protected:
 			friend class fUML::Semantics::Values::ValuesFactoryImpl;
 			LiteralBooleanEvaluationImpl();
-			virtual std::shared_ptr<LiteralBooleanEvaluation> getThisLiteralBooleanEvaluationPtr() const;
-			virtual void setThisLiteralBooleanEvaluationPtr(std::weak_ptr<LiteralBooleanEvaluation> thisLiteralBooleanEvaluationPtr);
+			virtual std::shared_ptr<fUML::Semantics::Values::LiteralBooleanEvaluation> getThisLiteralBooleanEvaluationPtr() const;
+			virtual void setThisLiteralBooleanEvaluationPtr(std::weak_ptr<fUML::Semantics::Values::LiteralBooleanEvaluation> thisLiteralBooleanEvaluationPtr);
 
 
 		public:
@@ -88,7 +88,7 @@ namespace fUML::Semantics::Values
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<LiteralBooleanEvaluation> m_thisLiteralBooleanEvaluationPtr;
+			std::weak_ptr<fUML::Semantics::Values::LiteralBooleanEvaluation> m_thisLiteralBooleanEvaluationPtr;
 	};
 }
 #endif /* end of include guard: FUML_SEMANTICS_VALUES_LITERALBOOLEANEVALUATIONLITERALBOOLEANEVALUATIONIMPL_HPP */

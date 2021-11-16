@@ -270,11 +270,11 @@ Any BagTypeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::share
 }
 
 
-std::shared_ptr<BagType> BagTypeImpl::getThisBagTypePtr() const
+std::shared_ptr<ocl::Types::BagType> BagTypeImpl::getThisBagTypePtr() const
 {
 	return m_thisBagTypePtr.lock();
 }
-void BagTypeImpl::setThisBagTypePtr(std::weak_ptr<BagType> thisBagTypePtr)
+void BagTypeImpl::setThisBagTypePtr(std::weak_ptr<ocl::Types::BagType> thisBagTypePtr)
 {
 	m_thisBagTypePtr = thisBagTypePtr;
 	setThisCollectionTypePtr(thisBagTypePtr);

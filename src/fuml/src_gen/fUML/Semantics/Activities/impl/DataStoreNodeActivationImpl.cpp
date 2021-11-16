@@ -329,11 +329,11 @@ Any DataStoreNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::l
 }
 
 
-std::shared_ptr<DataStoreNodeActivation> DataStoreNodeActivationImpl::getThisDataStoreNodeActivationPtr() const
+std::shared_ptr<fUML::Semantics::Activities::DataStoreNodeActivation> DataStoreNodeActivationImpl::getThisDataStoreNodeActivationPtr() const
 {
 	return m_thisDataStoreNodeActivationPtr.lock();
 }
-void DataStoreNodeActivationImpl::setThisDataStoreNodeActivationPtr(std::weak_ptr<DataStoreNodeActivation> thisDataStoreNodeActivationPtr)
+void DataStoreNodeActivationImpl::setThisDataStoreNodeActivationPtr(std::weak_ptr<fUML::Semantics::Activities::DataStoreNodeActivation> thisDataStoreNodeActivationPtr)
 {
 	m_thisDataStoreNodeActivationPtr = thisDataStoreNodeActivationPtr;
 	setThisCentralBufferNodeActivationPtr(thisDataStoreNodeActivationPtr);

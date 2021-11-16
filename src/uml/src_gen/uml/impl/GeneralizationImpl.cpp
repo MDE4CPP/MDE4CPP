@@ -575,11 +575,11 @@ Any GeneralizationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std
 }
 
 
-std::shared_ptr<Generalization> GeneralizationImpl::getThisGeneralizationPtr() const
+std::shared_ptr<uml::Generalization> GeneralizationImpl::getThisGeneralizationPtr() const
 {
 	return m_thisGeneralizationPtr.lock();
 }
-void GeneralizationImpl::setThisGeneralizationPtr(std::weak_ptr<Generalization> thisGeneralizationPtr)
+void GeneralizationImpl::setThisGeneralizationPtr(std::weak_ptr<uml::Generalization> thisGeneralizationPtr)
 {
 	m_thisGeneralizationPtr = thisGeneralizationPtr;
 	setThisDirectedRelationshipPtr(thisGeneralizationPtr);

@@ -32,8 +32,8 @@ namespace fUML::Semantics::SimpleClassifiers
 		protected:
 			friend class fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactoryImpl;
 			SignalInstanceImpl();
-			virtual std::shared_ptr<SignalInstance> getThisSignalInstancePtr() const;
-			virtual void setThisSignalInstancePtr(std::weak_ptr<SignalInstance> thisSignalInstancePtr);
+			virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance> getThisSignalInstancePtr() const;
+			virtual void setThisSignalInstancePtr(std::weak_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance> thisSignalInstancePtr);
 
 
 		public:
@@ -44,6 +44,7 @@ namespace fUML::Semantics::SimpleClassifiers
 			// Operations
 			//*********************************
 			virtual std::shared_ptr<fUML::Semantics::Values::Value> _copy() ;
+			virtual std::shared_ptr<fUML::Semantics::Values::Value> new_() ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -90,7 +91,7 @@ namespace fUML::Semantics::SimpleClassifiers
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<SignalInstance> m_thisSignalInstancePtr;
+			std::weak_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance> m_thisSignalInstancePtr;
 	};
 }
 #endif /* end of include guard: FUML_SEMANTICS_SIMPLECLASSIFIERS_SIGNALINSTANCESIGNALINSTANCEIMPL_HPP */

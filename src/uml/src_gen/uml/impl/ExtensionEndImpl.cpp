@@ -497,11 +497,11 @@ Any ExtensionEndImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::
 }
 
 
-std::shared_ptr<ExtensionEnd> ExtensionEndImpl::getThisExtensionEndPtr() const
+std::shared_ptr<uml::ExtensionEnd> ExtensionEndImpl::getThisExtensionEndPtr() const
 {
 	return m_thisExtensionEndPtr.lock();
 }
-void ExtensionEndImpl::setThisExtensionEndPtr(std::weak_ptr<ExtensionEnd> thisExtensionEndPtr)
+void ExtensionEndImpl::setThisExtensionEndPtr(std::weak_ptr<uml::ExtensionEnd> thisExtensionEndPtr)
 {
 	m_thisExtensionEndPtr = thisExtensionEndPtr;
 	setThisPropertyPtr(thisExtensionEndPtr);

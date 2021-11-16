@@ -36,9 +36,9 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "uml/umlFactory.hpp"
-#include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
+#include "fUML/Semantics/Actions/ActionsFactory.hpp"
+#include "uml/umlFactory.hpp"
 
 #include "fUML/Semantics/Actions/AcceptCallActionActivation.hpp"
 #include "fUML/Semantics/Actions/AcceptEventActionEventAccepter.hpp"
@@ -324,11 +324,11 @@ Any CS_AcceptCallActionActivationImpl::eInvoke(int operationID, std::shared_ptr<
 }
 
 
-std::shared_ptr<CS_AcceptCallActionActivation> CS_AcceptCallActionActivationImpl::getThisCS_AcceptCallActionActivationPtr() const
+std::shared_ptr<PSCS::Semantics::Actions::CS_AcceptCallActionActivation> CS_AcceptCallActionActivationImpl::getThisCS_AcceptCallActionActivationPtr() const
 {
 	return m_thisCS_AcceptCallActionActivationPtr.lock();
 }
-void CS_AcceptCallActionActivationImpl::setThisCS_AcceptCallActionActivationPtr(std::weak_ptr<CS_AcceptCallActionActivation> thisCS_AcceptCallActionActivationPtr)
+void CS_AcceptCallActionActivationImpl::setThisCS_AcceptCallActionActivationPtr(std::weak_ptr<PSCS::Semantics::Actions::CS_AcceptCallActionActivation> thisCS_AcceptCallActionActivationPtr)
 {
 	m_thisCS_AcceptCallActionActivationPtr = thisCS_AcceptCallActionActivationPtr;
 	setThisAcceptCallActionActivationPtr(thisCS_AcceptCallActionActivationPtr);

@@ -31,8 +31,8 @@ namespace uml
 		protected:
 			friend class umlFactoryImpl;
 			CombinedFragmentImpl();
-			virtual std::shared_ptr<CombinedFragment> getThisCombinedFragmentPtr() const;
-			virtual void setThisCombinedFragmentPtr(std::weak_ptr<CombinedFragment> thisCombinedFragmentPtr);
+			virtual std::shared_ptr<uml::CombinedFragment> getThisCombinedFragmentPtr() const;
+			virtual void setThisCombinedFragmentPtr(std::weak_ptr<uml::CombinedFragment> thisCombinedFragmentPtr);
 
 			//Additional constructors for the containments back reference
 			CombinedFragmentImpl(std::weak_ptr<uml::Interaction> par_enclosingInteraction);
@@ -159,7 +159,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<CombinedFragment> m_thisCombinedFragmentPtr;
+			std::weak_ptr<uml::CombinedFragment> m_thisCombinedFragmentPtr;
 	};
 }
 #endif /* end of include guard: UML_COMBINEDFRAGMENTCOMBINEDFRAGMENTIMPL_HPP */

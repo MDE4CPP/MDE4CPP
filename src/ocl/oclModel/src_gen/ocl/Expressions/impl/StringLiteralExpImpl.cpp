@@ -32,9 +32,9 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "ecore/ecoreFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
+#include "ecore/ecoreFactory.hpp"
 
 #include "ocl/Expressions/CallExp.hpp"
 #include "ocl/Expressions/CollectionRange.hpp"
@@ -455,11 +455,11 @@ Any StringLiteralExpImpl::eInvoke(int operationID, std::shared_ptr<std::list < s
 }
 
 
-std::shared_ptr<StringLiteralExp> StringLiteralExpImpl::getThisStringLiteralExpPtr() const
+std::shared_ptr<ocl::Expressions::StringLiteralExp> StringLiteralExpImpl::getThisStringLiteralExpPtr() const
 {
 	return m_thisStringLiteralExpPtr.lock();
 }
-void StringLiteralExpImpl::setThisStringLiteralExpPtr(std::weak_ptr<StringLiteralExp> thisStringLiteralExpPtr)
+void StringLiteralExpImpl::setThisStringLiteralExpPtr(std::weak_ptr<ocl::Expressions::StringLiteralExp> thisStringLiteralExpPtr)
 {
 	m_thisStringLiteralExpPtr = thisStringLiteralExpPtr;
 	setThisPrimitiveLiteralExpPtr(thisStringLiteralExpPtr);

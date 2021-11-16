@@ -395,11 +395,11 @@ Any ChangeEventImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::s
 }
 
 
-std::shared_ptr<ChangeEvent> ChangeEventImpl::getThisChangeEventPtr() const
+std::shared_ptr<uml::ChangeEvent> ChangeEventImpl::getThisChangeEventPtr() const
 {
 	return m_thisChangeEventPtr.lock();
 }
-void ChangeEventImpl::setThisChangeEventPtr(std::weak_ptr<ChangeEvent> thisChangeEventPtr)
+void ChangeEventImpl::setThisChangeEventPtr(std::weak_ptr<uml::ChangeEvent> thisChangeEventPtr)
 {
 	m_thisChangeEventPtr = thisChangeEventPtr;
 	setThisEventPtr(thisChangeEventPtr);

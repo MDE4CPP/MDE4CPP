@@ -659,11 +659,11 @@ Any DecisionNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::
 }
 
 
-std::shared_ptr<DecisionNode> DecisionNodeImpl::getThisDecisionNodePtr() const
+std::shared_ptr<uml::DecisionNode> DecisionNodeImpl::getThisDecisionNodePtr() const
 {
 	return m_thisDecisionNodePtr.lock();
 }
-void DecisionNodeImpl::setThisDecisionNodePtr(std::weak_ptr<DecisionNode> thisDecisionNodePtr)
+void DecisionNodeImpl::setThisDecisionNodePtr(std::weak_ptr<uml::DecisionNode> thisDecisionNodePtr)
 {
 	m_thisDecisionNodePtr = thisDecisionNodePtr;
 	setThisControlNodePtr(thisDecisionNodePtr);

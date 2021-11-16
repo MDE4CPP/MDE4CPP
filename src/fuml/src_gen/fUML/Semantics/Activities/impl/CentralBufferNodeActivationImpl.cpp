@@ -289,11 +289,11 @@ Any CentralBufferNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<st
 }
 
 
-std::shared_ptr<CentralBufferNodeActivation> CentralBufferNodeActivationImpl::getThisCentralBufferNodeActivationPtr() const
+std::shared_ptr<fUML::Semantics::Activities::CentralBufferNodeActivation> CentralBufferNodeActivationImpl::getThisCentralBufferNodeActivationPtr() const
 {
 	return m_thisCentralBufferNodeActivationPtr.lock();
 }
-void CentralBufferNodeActivationImpl::setThisCentralBufferNodeActivationPtr(std::weak_ptr<CentralBufferNodeActivation> thisCentralBufferNodeActivationPtr)
+void CentralBufferNodeActivationImpl::setThisCentralBufferNodeActivationPtr(std::weak_ptr<fUML::Semantics::Activities::CentralBufferNodeActivation> thisCentralBufferNodeActivationPtr)
 {
 	m_thisCentralBufferNodeActivationPtr = thisCentralBufferNodeActivationPtr;
 	setThisObjectNodeActivationPtr(thisCentralBufferNodeActivationPtr);

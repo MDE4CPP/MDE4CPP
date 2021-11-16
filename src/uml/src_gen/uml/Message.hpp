@@ -323,13 +323,13 @@ namespace uml
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			uml::MessageKind m_messageKind= MessageKind::UNKNOWN;
+			uml::MessageKind m_messageKind= uml::MessageKind::UNKNOWN;
 			/*!
 			The sort of communication reflected by the Message.
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			uml::MessageSort m_messageSort= MessageSort::SYNCHCALL;
+			uml::MessageSort m_messageSort= uml::MessageSort::SYNCHCALL;
 			
 			//*********************************
 			// Reference Members

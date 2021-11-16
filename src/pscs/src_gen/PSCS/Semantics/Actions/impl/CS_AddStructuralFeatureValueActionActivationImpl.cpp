@@ -60,9 +60,9 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "uml/umlFactory.hpp"
-#include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
+#include "fUML/Semantics/Actions/ActionsFactory.hpp"
+#include "uml/umlFactory.hpp"
 
 #include "uml/Action.hpp"
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
@@ -581,11 +581,11 @@ Any CS_AddStructuralFeatureValueActionActivationImpl::eInvoke(int operationID, s
 }
 
 
-std::shared_ptr<CS_AddStructuralFeatureValueActionActivation> CS_AddStructuralFeatureValueActionActivationImpl::getThisCS_AddStructuralFeatureValueActionActivationPtr() const
+std::shared_ptr<PSCS::Semantics::Actions::CS_AddStructuralFeatureValueActionActivation> CS_AddStructuralFeatureValueActionActivationImpl::getThisCS_AddStructuralFeatureValueActionActivationPtr() const
 {
 	return m_thisCS_AddStructuralFeatureValueActionActivationPtr.lock();
 }
-void CS_AddStructuralFeatureValueActionActivationImpl::setThisCS_AddStructuralFeatureValueActionActivationPtr(std::weak_ptr<CS_AddStructuralFeatureValueActionActivation> thisCS_AddStructuralFeatureValueActionActivationPtr)
+void CS_AddStructuralFeatureValueActionActivationImpl::setThisCS_AddStructuralFeatureValueActionActivationPtr(std::weak_ptr<PSCS::Semantics::Actions::CS_AddStructuralFeatureValueActionActivation> thisCS_AddStructuralFeatureValueActionActivationPtr)
 {
 	m_thisCS_AddStructuralFeatureValueActionActivationPtr = thisCS_AddStructuralFeatureValueActionActivationPtr;
 	setThisAddStructuralFeatureValueActionActivationPtr(thisCS_AddStructuralFeatureValueActionActivationPtr);

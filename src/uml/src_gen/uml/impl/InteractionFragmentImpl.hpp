@@ -25,14 +25,14 @@ namespace uml
 	{
 		public: 
 			InteractionFragmentImpl(const InteractionFragmentImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 			InteractionFragmentImpl& operator=(InteractionFragmentImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;
 			InteractionFragmentImpl();
-			virtual std::shared_ptr<InteractionFragment> getThisInteractionFragmentPtr() const;
-			virtual void setThisInteractionFragmentPtr(std::weak_ptr<InteractionFragment> thisInteractionFragmentPtr);
+			virtual std::shared_ptr<uml::InteractionFragment> getThisInteractionFragmentPtr() const;
+			virtual void setThisInteractionFragmentPtr(std::weak_ptr<uml::InteractionFragment> thisInteractionFragmentPtr);
 
 			//Additional constructors for the containments back reference
 			InteractionFragmentImpl(std::weak_ptr<uml::Interaction> par_enclosingInteraction);
@@ -45,7 +45,7 @@ namespace uml
 
 		public:
 			//destructor
-			virtual ~InteractionFragmentImpl();
+			virtual ~InteractionFragmentImpl() = 0;
 			
 			//*********************************
 			// Operations
@@ -148,7 +148,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<InteractionFragment> m_thisInteractionFragmentPtr;
+			std::weak_ptr<uml::InteractionFragment> m_thisInteractionFragmentPtr;
 	};
 }
 #endif /* end of include guard: UML_INTERACTIONFRAGMENTINTERACTIONFRAGMENTIMPL_HPP */

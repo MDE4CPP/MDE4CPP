@@ -32,8 +32,8 @@ namespace PSCS::Semantics::StructuredClassifiers
 		protected:
 			friend class PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactoryImpl;
 			CS_DefaultRequestPropagationStrategyImpl();
-			virtual std::shared_ptr<CS_DefaultRequestPropagationStrategy> getThisCS_DefaultRequestPropagationStrategyPtr() const;
-			virtual void setThisCS_DefaultRequestPropagationStrategyPtr(std::weak_ptr<CS_DefaultRequestPropagationStrategy> thisCS_DefaultRequestPropagationStrategyPtr);
+			virtual std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_DefaultRequestPropagationStrategy> getThisCS_DefaultRequestPropagationStrategyPtr() const;
+			virtual void setThisCS_DefaultRequestPropagationStrategyPtr(std::weak_ptr<PSCS::Semantics::StructuredClassifiers::CS_DefaultRequestPropagationStrategy> thisCS_DefaultRequestPropagationStrategyPtr);
 
 
 		public:
@@ -88,7 +88,7 @@ namespace PSCS::Semantics::StructuredClassifiers
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<CS_DefaultRequestPropagationStrategy> m_thisCS_DefaultRequestPropagationStrategyPtr;
+			std::weak_ptr<PSCS::Semantics::StructuredClassifiers::CS_DefaultRequestPropagationStrategy> m_thisCS_DefaultRequestPropagationStrategyPtr;
 	};
 }
 #endif /* end of include guard: PSCS_SEMANTICS_STRUCTUREDCLASSIFIERS_CS_DEFAULTREQUESTPROPAGATIONSTRATEGYCS_DEFAULTREQUESTPROPAGATIONSTRATEGYIMPL_HPP */

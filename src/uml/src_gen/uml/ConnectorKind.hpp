@@ -9,7 +9,7 @@
 
 namespace uml 
 {
-	enum ConnectorKind {
+	enum class ConnectorKind {
 		
 		ASSEMBLY = 0
 ,

@@ -26,21 +26,21 @@ namespace fUML::Semantics::Actions
 	{
 		public: 
 			StructuralFeatureActionActivationImpl(const StructuralFeatureActionActivationImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 			StructuralFeatureActionActivationImpl& operator=(StructuralFeatureActionActivationImpl const&); 
 
 		protected:
 			friend class fUML::Semantics::Actions::ActionsFactoryImpl;
 			StructuralFeatureActionActivationImpl();
-			virtual std::shared_ptr<StructuralFeatureActionActivation> getThisStructuralFeatureActionActivationPtr() const;
-			virtual void setThisStructuralFeatureActionActivationPtr(std::weak_ptr<StructuralFeatureActionActivation> thisStructuralFeatureActionActivationPtr);
+			virtual std::shared_ptr<fUML::Semantics::Actions::StructuralFeatureActionActivation> getThisStructuralFeatureActionActivationPtr() const;
+			virtual void setThisStructuralFeatureActionActivationPtr(std::weak_ptr<fUML::Semantics::Actions::StructuralFeatureActionActivation> thisStructuralFeatureActionActivationPtr);
 
 			//Additional constructors for the containments back reference
 			StructuralFeatureActionActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_group);
 
 		public:
 			//destructor
-			virtual ~StructuralFeatureActionActivationImpl();
+			virtual ~StructuralFeatureActionActivationImpl() = 0;
 			
 			//*********************************
 			// Operations
@@ -94,7 +94,7 @@ namespace fUML::Semantics::Actions
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<StructuralFeatureActionActivation> m_thisStructuralFeatureActionActivationPtr;
+			std::weak_ptr<fUML::Semantics::Actions::StructuralFeatureActionActivation> m_thisStructuralFeatureActionActivationPtr;
 	};
 }
 #endif /* end of include guard: FUML_SEMANTICS_ACTIONS_STRUCTURALFEATUREACTIONACTIVATIONSTRUCTURALFEATUREACTIONACTIVATIONIMPL_HPP */

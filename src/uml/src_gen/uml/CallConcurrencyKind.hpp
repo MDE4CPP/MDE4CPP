@@ -9,7 +9,7 @@
 
 namespace uml 
 {
-	enum CallConcurrencyKind {
+	enum class CallConcurrencyKind {
 		
 		CONCURRENT = 2
 ,

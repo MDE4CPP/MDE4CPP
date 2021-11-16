@@ -392,11 +392,11 @@ Any ImageImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_
 }
 
 
-std::shared_ptr<Image> ImageImpl::getThisImagePtr() const
+std::shared_ptr<uml::Image> ImageImpl::getThisImagePtr() const
 {
 	return m_thisImagePtr.lock();
 }
-void ImageImpl::setThisImagePtr(std::weak_ptr<Image> thisImagePtr)
+void ImageImpl::setThisImagePtr(std::weak_ptr<uml::Image> thisImagePtr)
 {
 	m_thisImagePtr = thisImagePtr;
 	setThisElementPtr(thisImagePtr);

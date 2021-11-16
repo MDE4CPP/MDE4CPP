@@ -318,11 +318,11 @@ Any CS_ExecutorImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::s
 }
 
 
-std::shared_ptr<CS_Executor> CS_ExecutorImpl::getThisCS_ExecutorPtr() const
+std::shared_ptr<PSCS::Semantics::Loci::CS_Executor> CS_ExecutorImpl::getThisCS_ExecutorPtr() const
 {
 	return m_thisCS_ExecutorPtr.lock();
 }
-void CS_ExecutorImpl::setThisCS_ExecutorPtr(std::weak_ptr<CS_Executor> thisCS_ExecutorPtr)
+void CS_ExecutorImpl::setThisCS_ExecutorPtr(std::weak_ptr<PSCS::Semantics::Loci::CS_Executor> thisCS_ExecutorPtr)
 {
 	m_thisCS_ExecutorPtr = thisCS_ExecutorPtr;
 	setThisExecutorPtr(thisCS_ExecutorPtr);

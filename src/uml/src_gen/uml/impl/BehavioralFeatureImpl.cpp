@@ -203,14 +203,6 @@ BehavioralFeatureImpl& BehavioralFeatureImpl::operator=(const BehavioralFeatureI
 	return *this;
 }
 
-std::shared_ptr<ecore::EObject> BehavioralFeatureImpl::copy() const
-{
-	std::shared_ptr<BehavioralFeatureImpl> element(new BehavioralFeatureImpl());
-	*element =(*this);
-	element->setThisBehavioralFeaturePtr(element);
-	return element;
-}
-
 //*********************************
 // Operations
 //*********************************
@@ -435,19 +427,19 @@ void BehavioralFeatureImpl::loadAttributes(std::shared_ptr<persistence::interfac
 		iter = attr_list.find("concurrency");
 		if ( iter != attr_list.end() )
 		{
-			uml::CallConcurrencyKind value = CallConcurrencyKind::SEQUENTIAL;
+			uml::CallConcurrencyKind value = uml::CallConcurrencyKind::SEQUENTIAL;
 			std::string literal = iter->second;
 			if (literal == "sequential")
 			{
-				value = CallConcurrencyKind::SEQUENTIAL;
+				value = uml::CallConcurrencyKind::SEQUENTIAL;
 			}
 			else if (literal == "guarded")
 			{
-				value = CallConcurrencyKind::GUARDED;
+				value = uml::CallConcurrencyKind::GUARDED;
 			}
 			else if (literal == "concurrent")
 			{
-				value = CallConcurrencyKind::CONCURRENT;
+				value = uml::CallConcurrencyKind::CONCURRENT;
 			}
 			this->setConcurrency(value);
 		}
@@ -605,15 +597,15 @@ void BehavioralFeatureImpl::saveContent(std::shared_ptr<persistence::interfaces:
 		{
 			uml::CallConcurrencyKind value = this->getConcurrency();
 			std::string literal = "";
-			if (value == CallConcurrencyKind::SEQUENTIAL)
+			if (value == uml::CallConcurrencyKind::SEQUENTIAL)
 			{
 				literal = "sequential";
 			}
-			else if (value == CallConcurrencyKind::GUARDED)
+			else if (value == uml::CallConcurrencyKind::GUARDED)
 			{
 				literal = "guarded";
 			}
-			else if (value == CallConcurrencyKind::CONCURRENT)
+			else if (value == uml::CallConcurrencyKind::CONCURRENT)
 			{
 				literal = "concurrent";
 			}
@@ -716,7 +708,7 @@ bool BehavioralFeatureImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case uml::umlPackage::BEHAVIORALFEATURE_ATTRIBUTE_CONCURRENCY:
-			return m_concurrency != CallConcurrencyKind::SEQUENTIAL;; //2520
+			return m_concurrency != uml::CallConcurrencyKind::SEQUENTIAL;; //2520
 		case uml::umlPackage::BEHAVIORALFEATURE_ATTRIBUTE_ISABSTRACT:
 			return getIsAbstract() != false; //2521
 		case uml::umlPackage::BEHAVIORALFEATURE_ATTRIBUTE_METHOD:
@@ -987,11 +979,11 @@ Any BehavioralFeatureImpl::eInvoke(int operationID, std::shared_ptr<std::list < 
 }
 
 
-std::shared_ptr<BehavioralFeature> BehavioralFeatureImpl::getThisBehavioralFeaturePtr() const
+std::shared_ptr<uml::BehavioralFeature> BehavioralFeatureImpl::getThisBehavioralFeaturePtr() const
 {
 	return m_thisBehavioralFeaturePtr.lock();
 }
-void BehavioralFeatureImpl::setThisBehavioralFeaturePtr(std::weak_ptr<BehavioralFeature> thisBehavioralFeaturePtr)
+void BehavioralFeatureImpl::setThisBehavioralFeaturePtr(std::weak_ptr<uml::BehavioralFeature> thisBehavioralFeaturePtr)
 {
 	m_thisBehavioralFeaturePtr = thisBehavioralFeaturePtr;
 	setThisFeaturePtr(thisBehavioralFeaturePtr);

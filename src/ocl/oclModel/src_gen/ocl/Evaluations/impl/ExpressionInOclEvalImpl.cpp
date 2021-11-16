@@ -349,11 +349,11 @@ Any ExpressionInOclEvalImpl::eInvoke(int operationID, std::shared_ptr<std::list 
 }
 
 
-std::shared_ptr<ExpressionInOclEval> ExpressionInOclEvalImpl::getThisExpressionInOclEvalPtr() const
+std::shared_ptr<ocl::Evaluations::ExpressionInOclEval> ExpressionInOclEvalImpl::getThisExpressionInOclEvalPtr() const
 {
 	return m_thisExpressionInOclEvalPtr.lock();
 }
-void ExpressionInOclEvalImpl::setThisExpressionInOclEvalPtr(std::weak_ptr<ExpressionInOclEval> thisExpressionInOclEvalPtr)
+void ExpressionInOclEvalImpl::setThisExpressionInOclEvalPtr(std::weak_ptr<ocl::Evaluations::ExpressionInOclEval> thisExpressionInOclEvalPtr)
 {
 	m_thisExpressionInOclEvalPtr = thisExpressionInOclEvalPtr;
 }

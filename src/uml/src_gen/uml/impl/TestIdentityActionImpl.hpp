@@ -31,8 +31,8 @@ namespace uml
 		protected:
 			friend class umlFactoryImpl;
 			TestIdentityActionImpl();
-			virtual std::shared_ptr<TestIdentityAction> getThisTestIdentityActionPtr() const;
-			virtual void setThisTestIdentityActionPtr(std::weak_ptr<TestIdentityAction> thisTestIdentityActionPtr);
+			virtual std::shared_ptr<uml::TestIdentityAction> getThisTestIdentityActionPtr() const;
+			virtual void setThisTestIdentityActionPtr(std::weak_ptr<uml::TestIdentityAction> thisTestIdentityActionPtr);
 
 			//Additional constructors for the containments back reference
 			TestIdentityActionImpl(std::weak_ptr<uml::Activity> par_activity);
@@ -184,7 +184,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<TestIdentityAction> m_thisTestIdentityActionPtr;
+			std::weak_ptr<uml::TestIdentityAction> m_thisTestIdentityActionPtr;
 	};
 }
 #endif /* end of include guard: UML_TESTIDENTITYACTIONTESTIDENTITYACTIONIMPL_HPP */

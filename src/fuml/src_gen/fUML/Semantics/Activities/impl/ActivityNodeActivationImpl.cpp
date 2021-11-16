@@ -147,14 +147,6 @@ ActivityNodeActivationImpl& ActivityNodeActivationImpl::operator=(const Activity
 	return *this;
 }
 
-std::shared_ptr<ecore::EObject> ActivityNodeActivationImpl::copy() const
-{
-	std::shared_ptr<ActivityNodeActivationImpl> element(new ActivityNodeActivationImpl());
-	*element =(*this);
-	element->setThisActivityNodeActivationPtr(element);
-	return element;
-}
-
 //*********************************
 // Operations
 //*********************************
@@ -1338,11 +1330,11 @@ Any ActivityNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::li
 }
 
 
-std::shared_ptr<ActivityNodeActivation> ActivityNodeActivationImpl::getThisActivityNodeActivationPtr() const
+std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> ActivityNodeActivationImpl::getThisActivityNodeActivationPtr() const
 {
 	return m_thisActivityNodeActivationPtr.lock();
 }
-void ActivityNodeActivationImpl::setThisActivityNodeActivationPtr(std::weak_ptr<ActivityNodeActivation> thisActivityNodeActivationPtr)
+void ActivityNodeActivationImpl::setThisActivityNodeActivationPtr(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivation> thisActivityNodeActivationPtr)
 {
 	m_thisActivityNodeActivationPtr = thisActivityNodeActivationPtr;
 	setThisSemanticVisitorPtr(thisActivityNodeActivationPtr);

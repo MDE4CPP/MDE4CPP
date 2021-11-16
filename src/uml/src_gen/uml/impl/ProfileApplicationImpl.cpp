@@ -524,11 +524,11 @@ Any ProfileApplicationImpl::eInvoke(int operationID, std::shared_ptr<std::list <
 }
 
 
-std::shared_ptr<ProfileApplication> ProfileApplicationImpl::getThisProfileApplicationPtr() const
+std::shared_ptr<uml::ProfileApplication> ProfileApplicationImpl::getThisProfileApplicationPtr() const
 {
 	return m_thisProfileApplicationPtr.lock();
 }
-void ProfileApplicationImpl::setThisProfileApplicationPtr(std::weak_ptr<ProfileApplication> thisProfileApplicationPtr)
+void ProfileApplicationImpl::setThisProfileApplicationPtr(std::weak_ptr<uml::ProfileApplication> thisProfileApplicationPtr)
 {
 	m_thisProfileApplicationPtr = thisProfileApplicationPtr;
 	setThisDirectedRelationshipPtr(thisProfileApplicationPtr);

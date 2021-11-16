@@ -34,8 +34,8 @@ virtual public ClauseActivation
 		protected:
 			friend class fUML::Semantics::Actions::ActionsFactoryImpl;
 			ClauseActivationImpl();
-			virtual std::shared_ptr<ClauseActivation> getThisClauseActivationPtr() const;
-			virtual void setThisClauseActivationPtr(std::weak_ptr<ClauseActivation> thisClauseActivationPtr);
+			virtual std::shared_ptr<fUML::Semantics::Actions::ClauseActivation> getThisClauseActivationPtr() const;
+			virtual void setThisClauseActivationPtr(std::weak_ptr<fUML::Semantics::Actions::ClauseActivation> thisClauseActivationPtr);
 
 
 		public:
@@ -100,7 +100,7 @@ virtual public ClauseActivation
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<ClauseActivation> m_thisClauseActivationPtr;
+			std::weak_ptr<fUML::Semantics::Actions::ClauseActivation> m_thisClauseActivationPtr;
 	};
 }
 #endif /* end of include guard: FUML_SEMANTICS_ACTIONS_CLAUSEACTIVATIONCLAUSEACTIVATIONIMPL_HPP */

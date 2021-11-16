@@ -32,8 +32,8 @@ namespace fUML::Semantics::Activities
 		protected:
 			friend class fUML::Semantics::Activities::ActivitiesFactoryImpl;
 			InitialNodeActivationImpl();
-			virtual std::shared_ptr<InitialNodeActivation> getThisInitialNodeActivationPtr() const;
-			virtual void setThisInitialNodeActivationPtr(std::weak_ptr<InitialNodeActivation> thisInitialNodeActivationPtr);
+			virtual std::shared_ptr<fUML::Semantics::Activities::InitialNodeActivation> getThisInitialNodeActivationPtr() const;
+			virtual void setThisInitialNodeActivationPtr(std::weak_ptr<fUML::Semantics::Activities::InitialNodeActivation> thisInitialNodeActivationPtr);
 
 			//Additional constructors for the containments back reference
 			InitialNodeActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_group);
@@ -90,7 +90,7 @@ namespace fUML::Semantics::Activities
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<InitialNodeActivation> m_thisInitialNodeActivationPtr;
+			std::weak_ptr<fUML::Semantics::Activities::InitialNodeActivation> m_thisInitialNodeActivationPtr;
 	};
 }
 #endif /* end of include guard: FUML_SEMANTICS_ACTIVITIES_INITIALNODEACTIVATIONINITIALNODEACTIVATIONIMPL_HPP */

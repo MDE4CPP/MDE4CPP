@@ -32,8 +32,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
 #include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
+#include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
 
 #include "fUML/Semantics/CommonBehavior/EventOccurrence.hpp"
 #include "fUML/Semantics/CommonBehavior/ParameterValue.hpp"
@@ -344,11 +344,11 @@ Any SignalEventOccurrenceImpl::eInvoke(int operationID, std::shared_ptr<std::lis
 }
 
 
-std::shared_ptr<SignalEventOccurrence> SignalEventOccurrenceImpl::getThisSignalEventOccurrencePtr() const
+std::shared_ptr<fUML::Semantics::CommonBehavior::SignalEventOccurrence> SignalEventOccurrenceImpl::getThisSignalEventOccurrencePtr() const
 {
 	return m_thisSignalEventOccurrencePtr.lock();
 }
-void SignalEventOccurrenceImpl::setThisSignalEventOccurrencePtr(std::weak_ptr<SignalEventOccurrence> thisSignalEventOccurrencePtr)
+void SignalEventOccurrenceImpl::setThisSignalEventOccurrencePtr(std::weak_ptr<fUML::Semantics::CommonBehavior::SignalEventOccurrence> thisSignalEventOccurrencePtr)
 {
 	m_thisSignalEventOccurrencePtr = thisSignalEventOccurrencePtr;
 	setThisEventOccurrencePtr(thisSignalEventOccurrencePtr);

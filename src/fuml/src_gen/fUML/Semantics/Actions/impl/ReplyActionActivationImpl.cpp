@@ -335,11 +335,11 @@ Any ReplyActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::lis
 }
 
 
-std::shared_ptr<ReplyActionActivation> ReplyActionActivationImpl::getThisReplyActionActivationPtr() const
+std::shared_ptr<fUML::Semantics::Actions::ReplyActionActivation> ReplyActionActivationImpl::getThisReplyActionActivationPtr() const
 {
 	return m_thisReplyActionActivationPtr.lock();
 }
-void ReplyActionActivationImpl::setThisReplyActionActivationPtr(std::weak_ptr<ReplyActionActivation> thisReplyActionActivationPtr)
+void ReplyActionActivationImpl::setThisReplyActionActivationPtr(std::weak_ptr<fUML::Semantics::Actions::ReplyActionActivation> thisReplyActionActivationPtr)
 {
 	m_thisReplyActionActivationPtr = thisReplyActionActivationPtr;
 	setThisActionActivationPtr(thisReplyActionActivationPtr);

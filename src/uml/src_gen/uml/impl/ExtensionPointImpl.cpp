@@ -379,11 +379,11 @@ Any ExtensionPointImpl::eInvoke(int operationID, std::shared_ptr<std::list < std
 }
 
 
-std::shared_ptr<ExtensionPoint> ExtensionPointImpl::getThisExtensionPointPtr() const
+std::shared_ptr<uml::ExtensionPoint> ExtensionPointImpl::getThisExtensionPointPtr() const
 {
 	return m_thisExtensionPointPtr.lock();
 }
-void ExtensionPointImpl::setThisExtensionPointPtr(std::weak_ptr<ExtensionPoint> thisExtensionPointPtr)
+void ExtensionPointImpl::setThisExtensionPointPtr(std::weak_ptr<uml::ExtensionPoint> thisExtensionPointPtr)
 {
 	m_thisExtensionPointPtr = thisExtensionPointPtr;
 	setThisRedefinableElementPtr(thisExtensionPointPtr);

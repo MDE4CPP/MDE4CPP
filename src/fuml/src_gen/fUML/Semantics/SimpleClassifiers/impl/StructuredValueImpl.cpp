@@ -112,14 +112,6 @@ StructuredValueImpl& StructuredValueImpl::operator=(const StructuredValueImpl & 
 	return *this;
 }
 
-std::shared_ptr<ecore::EObject> StructuredValueImpl::copy() const
-{
-	std::shared_ptr<StructuredValueImpl> element(new StructuredValueImpl());
-	*element =(*this);
-	element->setThisStructuredValuePtr(element);
-	return element;
-}
-
 //*********************************
 // Operations
 //*********************************
@@ -481,11 +473,11 @@ Any StructuredValueImpl::eInvoke(int operationID, std::shared_ptr<std::list < st
 }
 
 
-std::shared_ptr<StructuredValue> StructuredValueImpl::getThisStructuredValuePtr() const
+std::shared_ptr<fUML::Semantics::SimpleClassifiers::StructuredValue> StructuredValueImpl::getThisStructuredValuePtr() const
 {
 	return m_thisStructuredValuePtr.lock();
 }
-void StructuredValueImpl::setThisStructuredValuePtr(std::weak_ptr<StructuredValue> thisStructuredValuePtr)
+void StructuredValueImpl::setThisStructuredValuePtr(std::weak_ptr<fUML::Semantics::SimpleClassifiers::StructuredValue> thisStructuredValuePtr)
 {
 	m_thisStructuredValuePtr = thisStructuredValuePtr;
 	setThisValuePtr(thisStructuredValuePtr);

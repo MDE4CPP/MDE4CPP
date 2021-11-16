@@ -219,14 +219,6 @@ ActionImpl& ActionImpl::operator=(const ActionImpl & obj)
 	return *this;
 }
 
-std::shared_ptr<ecore::EObject> ActionImpl::copy() const
-{
-	std::shared_ptr<ActionImpl> element(new ActionImpl());
-	*element =(*this);
-	element->setThisActionPtr(element);
-	return element;
-}
-
 //*********************************
 // Operations
 //*********************************
@@ -846,11 +838,11 @@ Any ActionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared
 }
 
 
-std::shared_ptr<Action> ActionImpl::getThisActionPtr() const
+std::shared_ptr<uml::Action> ActionImpl::getThisActionPtr() const
 {
 	return m_thisActionPtr.lock();
 }
-void ActionImpl::setThisActionPtr(std::weak_ptr<Action> thisActionPtr)
+void ActionImpl::setThisActionPtr(std::weak_ptr<uml::Action> thisActionPtr)
 {
 	m_thisActionPtr = thisActionPtr;
 	setThisExecutableNodePtr(thisActionPtr);

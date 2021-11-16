@@ -34,8 +34,8 @@ virtual public EventDispatchLoop
 		protected:
 			friend class fUML::Semantics::CommonBehavior::CommonBehaviorFactoryImpl;
 			EventDispatchLoopImpl();
-			virtual std::shared_ptr<EventDispatchLoop> getThisEventDispatchLoopPtr() const;
-			virtual void setThisEventDispatchLoopPtr(std::weak_ptr<EventDispatchLoop> thisEventDispatchLoopPtr);
+			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::EventDispatchLoop> getThisEventDispatchLoopPtr() const;
+			virtual void setThisEventDispatchLoopPtr(std::weak_ptr<fUML::Semantics::CommonBehavior::EventDispatchLoop> thisEventDispatchLoopPtr);
 
 
 		public:
@@ -89,7 +89,7 @@ virtual public EventDispatchLoop
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<EventDispatchLoop> m_thisEventDispatchLoopPtr;
+			std::weak_ptr<fUML::Semantics::CommonBehavior::EventDispatchLoop> m_thisEventDispatchLoopPtr;
 	};
 }
 #endif /* end of include guard: FUML_SEMANTICS_COMMONBEHAVIOR_EVENTDISPATCHLOOPEVENTDISPATCHLOOPIMPL_HPP */

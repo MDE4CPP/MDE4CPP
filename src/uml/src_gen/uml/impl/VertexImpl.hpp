@@ -25,14 +25,14 @@ namespace uml
 	{
 		public: 
 			VertexImpl(const VertexImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 			VertexImpl& operator=(VertexImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;
 			VertexImpl();
-			virtual std::shared_ptr<Vertex> getThisVertexPtr() const;
-			virtual void setThisVertexPtr(std::weak_ptr<Vertex> thisVertexPtr);
+			virtual std::shared_ptr<uml::Vertex> getThisVertexPtr() const;
+			virtual void setThisVertexPtr(std::weak_ptr<uml::Vertex> thisVertexPtr);
 
 			//Additional constructors for the containments back reference
 			VertexImpl(std::weak_ptr<uml::Region> par_container);
@@ -43,7 +43,7 @@ namespace uml
 
 		public:
 			//destructor
-			virtual ~VertexImpl();
+			virtual ~VertexImpl() = 0;
 			
 			//*********************************
 			// Operations
@@ -200,7 +200,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<Vertex> m_thisVertexPtr;
+			std::weak_ptr<uml::Vertex> m_thisVertexPtr;
 	};
 }
 #endif /* end of include guard: UML_VERTEXVERTEXIMPL_HPP */

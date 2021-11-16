@@ -31,8 +31,8 @@ namespace uml
 		protected:
 			friend class umlFactoryImpl;
 			LoopNodeImpl();
-			virtual std::shared_ptr<LoopNode> getThisLoopNodePtr() const;
-			virtual void setThisLoopNodePtr(std::weak_ptr<LoopNode> thisLoopNodePtr);
+			virtual std::shared_ptr<uml::LoopNode> getThisLoopNodePtr() const;
+			virtual void setThisLoopNodePtr(std::weak_ptr<uml::LoopNode> thisLoopNodePtr);
 
 			//Additional constructors for the containments back reference
 			LoopNodeImpl(std::weak_ptr<uml::Activity> par_Activity, const int reference_id);
@@ -292,7 +292,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<LoopNode> m_thisLoopNodePtr;
+			std::weak_ptr<uml::LoopNode> m_thisLoopNodePtr;
 	};
 }
 #endif /* end of include guard: UML_LOOPNODELOOPNODEIMPL_HPP */

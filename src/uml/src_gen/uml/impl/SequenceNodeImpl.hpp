@@ -31,8 +31,8 @@ namespace uml
 		protected:
 			friend class umlFactoryImpl;
 			SequenceNodeImpl();
-			virtual std::shared_ptr<SequenceNode> getThisSequenceNodePtr() const;
-			virtual void setThisSequenceNodePtr(std::weak_ptr<SequenceNode> thisSequenceNodePtr);
+			virtual std::shared_ptr<uml::SequenceNode> getThisSequenceNodePtr() const;
+			virtual void setThisSequenceNodePtr(std::weak_ptr<uml::SequenceNode> thisSequenceNodePtr);
 
 			//Additional constructors for the containments back reference
 			SequenceNodeImpl(std::weak_ptr<uml::Activity> par_Activity, const int reference_id);
@@ -163,7 +163,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<SequenceNode> m_thisSequenceNodePtr;
+			std::weak_ptr<uml::SequenceNode> m_thisSequenceNodePtr;
 	};
 }
 #endif /* end of include guard: UML_SEQUENCENODESEQUENCENODEIMPL_HPP */

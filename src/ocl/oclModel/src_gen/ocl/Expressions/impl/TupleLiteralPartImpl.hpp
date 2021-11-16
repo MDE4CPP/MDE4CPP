@@ -32,8 +32,8 @@ namespace ocl::Expressions
 		protected:
 			friend class ocl::Expressions::ExpressionsFactoryImpl;
 			TupleLiteralPartImpl();
-			virtual std::shared_ptr<TupleLiteralPart> getThisTupleLiteralPartPtr() const;
-			virtual void setThisTupleLiteralPartPtr(std::weak_ptr<TupleLiteralPart> thisTupleLiteralPartPtr);
+			virtual std::shared_ptr<ocl::Expressions::TupleLiteralPart> getThisTupleLiteralPartPtr() const;
+			virtual void setThisTupleLiteralPartPtr(std::weak_ptr<ocl::Expressions::TupleLiteralPart> thisTupleLiteralPartPtr);
 
 
 		public:
@@ -89,7 +89,7 @@ namespace ocl::Expressions
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<TupleLiteralPart> m_thisTupleLiteralPartPtr;
+			std::weak_ptr<ocl::Expressions::TupleLiteralPart> m_thisTupleLiteralPartPtr;
 	};
 }
 #endif /* end of include guard: OCL_EXPRESSIONS_TUPLELITERALPARTTUPLELITERALPARTIMPL_HPP */

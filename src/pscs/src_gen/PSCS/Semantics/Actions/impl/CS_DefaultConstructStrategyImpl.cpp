@@ -1186,11 +1186,11 @@ Any CS_DefaultConstructStrategyImpl::eInvoke(int operationID, std::shared_ptr<st
 }
 
 
-std::shared_ptr<CS_DefaultConstructStrategy> CS_DefaultConstructStrategyImpl::getThisCS_DefaultConstructStrategyPtr() const
+std::shared_ptr<PSCS::Semantics::Actions::CS_DefaultConstructStrategy> CS_DefaultConstructStrategyImpl::getThisCS_DefaultConstructStrategyPtr() const
 {
 	return m_thisCS_DefaultConstructStrategyPtr.lock();
 }
-void CS_DefaultConstructStrategyImpl::setThisCS_DefaultConstructStrategyPtr(std::weak_ptr<CS_DefaultConstructStrategy> thisCS_DefaultConstructStrategyPtr)
+void CS_DefaultConstructStrategyImpl::setThisCS_DefaultConstructStrategyPtr(std::weak_ptr<PSCS::Semantics::Actions::CS_DefaultConstructStrategy> thisCS_DefaultConstructStrategyPtr)
 {
 	m_thisCS_DefaultConstructStrategyPtr = thisCS_DefaultConstructStrategyPtr;
 	setThisCS_ConstructStrategyPtr(thisCS_DefaultConstructStrategyPtr);

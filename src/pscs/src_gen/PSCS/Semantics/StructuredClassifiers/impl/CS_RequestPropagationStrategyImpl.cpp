@@ -101,14 +101,6 @@ CS_RequestPropagationStrategyImpl& CS_RequestPropagationStrategyImpl::operator=(
 	return *this;
 }
 
-std::shared_ptr<ecore::EObject> CS_RequestPropagationStrategyImpl::copy() const
-{
-	std::shared_ptr<CS_RequestPropagationStrategyImpl> element(new CS_RequestPropagationStrategyImpl());
-	*element =(*this);
-	element->setThisCS_RequestPropagationStrategyPtr(element);
-	return element;
-}
-
 //*********************************
 // Operations
 //*********************************
@@ -288,11 +280,11 @@ Any CS_RequestPropagationStrategyImpl::eInvoke(int operationID, std::shared_ptr<
 }
 
 
-std::shared_ptr<CS_RequestPropagationStrategy> CS_RequestPropagationStrategyImpl::getThisCS_RequestPropagationStrategyPtr() const
+std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_RequestPropagationStrategy> CS_RequestPropagationStrategyImpl::getThisCS_RequestPropagationStrategyPtr() const
 {
 	return m_thisCS_RequestPropagationStrategyPtr.lock();
 }
-void CS_RequestPropagationStrategyImpl::setThisCS_RequestPropagationStrategyPtr(std::weak_ptr<CS_RequestPropagationStrategy> thisCS_RequestPropagationStrategyPtr)
+void CS_RequestPropagationStrategyImpl::setThisCS_RequestPropagationStrategyPtr(std::weak_ptr<PSCS::Semantics::StructuredClassifiers::CS_RequestPropagationStrategy> thisCS_RequestPropagationStrategyPtr)
 {
 	m_thisCS_RequestPropagationStrategyPtr = thisCS_RequestPropagationStrategyPtr;
 	setThisSemanticStrategyPtr(thisCS_RequestPropagationStrategyPtr);

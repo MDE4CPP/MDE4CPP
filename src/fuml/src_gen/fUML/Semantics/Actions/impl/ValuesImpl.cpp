@@ -342,11 +342,11 @@ Any ValuesImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared
 }
 
 
-std::shared_ptr<Values> ValuesImpl::getThisValuesPtr() const
+std::shared_ptr<fUML::Semantics::Actions::Values> ValuesImpl::getThisValuesPtr() const
 {
 	return m_thisValuesPtr.lock();
 }
-void ValuesImpl::setThisValuesPtr(std::weak_ptr<Values> thisValuesPtr)
+void ValuesImpl::setThisValuesPtr(std::weak_ptr<fUML::Semantics::Actions::Values> thisValuesPtr)
 {
 	m_thisValuesPtr = thisValuesPtr;
 }

@@ -32,8 +32,8 @@ namespace ocl::Values
 		protected:
 			friend class ocl::Values::ValuesFactoryImpl;
 			OrderedSetTypeValueImpl();
-			virtual std::shared_ptr<OrderedSetTypeValue> getThisOrderedSetTypeValuePtr() const;
-			virtual void setThisOrderedSetTypeValuePtr(std::weak_ptr<OrderedSetTypeValue> thisOrderedSetTypeValuePtr);
+			virtual std::shared_ptr<ocl::Values::OrderedSetTypeValue> getThisOrderedSetTypeValuePtr() const;
+			virtual void setThisOrderedSetTypeValuePtr(std::weak_ptr<ocl::Values::OrderedSetTypeValue> thisOrderedSetTypeValuePtr);
 
 
 		public:
@@ -88,7 +88,7 @@ namespace ocl::Values
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<OrderedSetTypeValue> m_thisOrderedSetTypeValuePtr;
+			std::weak_ptr<ocl::Values::OrderedSetTypeValue> m_thisOrderedSetTypeValuePtr;
 	};
 }
 #endif /* end of include guard: OCL_VALUES_ORDEREDSETTYPEVALUEORDEREDSETTYPEVALUEIMPL_HPP */

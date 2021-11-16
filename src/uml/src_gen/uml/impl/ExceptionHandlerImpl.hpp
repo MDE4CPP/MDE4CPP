@@ -31,8 +31,8 @@ namespace uml
 		protected:
 			friend class umlFactoryImpl;
 			ExceptionHandlerImpl();
-			virtual std::shared_ptr<ExceptionHandler> getThisExceptionHandlerPtr() const;
-			virtual void setThisExceptionHandlerPtr(std::weak_ptr<ExceptionHandler> thisExceptionHandlerPtr);
+			virtual std::shared_ptr<uml::ExceptionHandler> getThisExceptionHandlerPtr() const;
+			virtual void setThisExceptionHandlerPtr(std::weak_ptr<uml::ExceptionHandler> thisExceptionHandlerPtr);
 
 			//Additional constructors for the containments back reference
 			ExceptionHandlerImpl(std::weak_ptr<uml::Element> par_owner);
@@ -195,7 +195,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<ExceptionHandler> m_thisExceptionHandlerPtr;
+			std::weak_ptr<uml::ExceptionHandler> m_thisExceptionHandlerPtr;
 	};
 }
 #endif /* end of include guard: UML_EXCEPTIONHANDLEREXCEPTIONHANDLERIMPL_HPP */

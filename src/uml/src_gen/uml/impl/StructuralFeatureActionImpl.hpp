@@ -25,14 +25,14 @@ namespace uml
 	{
 		public: 
 			StructuralFeatureActionImpl(const StructuralFeatureActionImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 			StructuralFeatureActionImpl& operator=(StructuralFeatureActionImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;
 			StructuralFeatureActionImpl();
-			virtual std::shared_ptr<StructuralFeatureAction> getThisStructuralFeatureActionPtr() const;
-			virtual void setThisStructuralFeatureActionPtr(std::weak_ptr<StructuralFeatureAction> thisStructuralFeatureActionPtr);
+			virtual std::shared_ptr<uml::StructuralFeatureAction> getThisStructuralFeatureActionPtr() const;
+			virtual void setThisStructuralFeatureActionPtr(std::weak_ptr<uml::StructuralFeatureAction> thisStructuralFeatureActionPtr);
 
 			//Additional constructors for the containments back reference
 			StructuralFeatureActionImpl(std::weak_ptr<uml::Activity> par_activity);
@@ -45,7 +45,7 @@ namespace uml
 
 		public:
 			//destructor
-			virtual ~StructuralFeatureActionImpl();
+			virtual ~StructuralFeatureActionImpl() = 0;
 			
 			//*********************************
 			// Operations
@@ -182,7 +182,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<StructuralFeatureAction> m_thisStructuralFeatureActionPtr;
+			std::weak_ptr<uml::StructuralFeatureAction> m_thisStructuralFeatureActionPtr;
 	};
 }
 #endif /* end of include guard: UML_STRUCTURALFEATUREACTIONSTRUCTURALFEATUREACTIONIMPL_HPP */

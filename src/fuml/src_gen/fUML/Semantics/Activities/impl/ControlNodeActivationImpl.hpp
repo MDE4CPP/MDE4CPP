@@ -26,21 +26,21 @@ namespace fUML::Semantics::Activities
 	{
 		public: 
 			ControlNodeActivationImpl(const ControlNodeActivationImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 			ControlNodeActivationImpl& operator=(ControlNodeActivationImpl const&); 
 
 		protected:
 			friend class fUML::Semantics::Activities::ActivitiesFactoryImpl;
 			ControlNodeActivationImpl();
-			virtual std::shared_ptr<ControlNodeActivation> getThisControlNodeActivationPtr() const;
-			virtual void setThisControlNodeActivationPtr(std::weak_ptr<ControlNodeActivation> thisControlNodeActivationPtr);
+			virtual std::shared_ptr<fUML::Semantics::Activities::ControlNodeActivation> getThisControlNodeActivationPtr() const;
+			virtual void setThisControlNodeActivationPtr(std::weak_ptr<fUML::Semantics::Activities::ControlNodeActivation> thisControlNodeActivationPtr);
 
 			//Additional constructors for the containments back reference
 			ControlNodeActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_group);
 
 		public:
 			//destructor
-			virtual ~ControlNodeActivationImpl();
+			virtual ~ControlNodeActivationImpl() = 0;
 			
 			//*********************************
 			// Operations
@@ -90,7 +90,7 @@ namespace fUML::Semantics::Activities
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<ControlNodeActivation> m_thisControlNodeActivationPtr;
+			std::weak_ptr<fUML::Semantics::Activities::ControlNodeActivation> m_thisControlNodeActivationPtr;
 	};
 }
 #endif /* end of include guard: FUML_SEMANTICS_ACTIVITIES_CONTROLNODEACTIVATIONCONTROLNODEACTIVATIONIMPL_HPP */

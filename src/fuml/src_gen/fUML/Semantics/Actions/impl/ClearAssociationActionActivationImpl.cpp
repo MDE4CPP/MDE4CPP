@@ -285,11 +285,11 @@ Any ClearAssociationActionActivationImpl::eInvoke(int operationID, std::shared_p
 }
 
 
-std::shared_ptr<ClearAssociationActionActivation> ClearAssociationActionActivationImpl::getThisClearAssociationActionActivationPtr() const
+std::shared_ptr<fUML::Semantics::Actions::ClearAssociationActionActivation> ClearAssociationActionActivationImpl::getThisClearAssociationActionActivationPtr() const
 {
 	return m_thisClearAssociationActionActivationPtr.lock();
 }
-void ClearAssociationActionActivationImpl::setThisClearAssociationActionActivationPtr(std::weak_ptr<ClearAssociationActionActivation> thisClearAssociationActionActivationPtr)
+void ClearAssociationActionActivationImpl::setThisClearAssociationActionActivationPtr(std::weak_ptr<fUML::Semantics::Actions::ClearAssociationActionActivation> thisClearAssociationActionActivationPtr)
 {
 	m_thisClearAssociationActionActivationPtr = thisClearAssociationActionActivationPtr;
 	setThisActionActivationPtr(thisClearAssociationActionActivationPtr);

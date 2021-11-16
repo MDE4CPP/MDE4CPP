@@ -680,11 +680,11 @@ Any EObjectImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::share
 }
 
 
-std::shared_ptr<EObject> EObjectImpl::getThisEObjectPtr() const
+std::shared_ptr<ecore::EObject> EObjectImpl::getThisEObjectPtr() const
 {
 	return m_thisEObjectPtr.lock();
 }
-void EObjectImpl::setThisEObjectPtr(std::weak_ptr<EObject> thisEObjectPtr)
+void EObjectImpl::setThisEObjectPtr(std::weak_ptr<ecore::EObject> thisEObjectPtr)
 {
 	m_thisEObjectPtr = thisEObjectPtr;
 }

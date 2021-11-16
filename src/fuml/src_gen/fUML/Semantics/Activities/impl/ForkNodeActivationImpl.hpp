@@ -32,8 +32,8 @@ namespace fUML::Semantics::Activities
 		protected:
 			friend class fUML::Semantics::Activities::ActivitiesFactoryImpl;
 			ForkNodeActivationImpl();
-			virtual std::shared_ptr<ForkNodeActivation> getThisForkNodeActivationPtr() const;
-			virtual void setThisForkNodeActivationPtr(std::weak_ptr<ForkNodeActivation> thisForkNodeActivationPtr);
+			virtual std::shared_ptr<fUML::Semantics::Activities::ForkNodeActivation> getThisForkNodeActivationPtr() const;
+			virtual void setThisForkNodeActivationPtr(std::weak_ptr<fUML::Semantics::Activities::ForkNodeActivation> thisForkNodeActivationPtr);
 
 			//Additional constructors for the containments back reference
 			ForkNodeActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_group);
@@ -91,7 +91,7 @@ namespace fUML::Semantics::Activities
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<ForkNodeActivation> m_thisForkNodeActivationPtr;
+			std::weak_ptr<fUML::Semantics::Activities::ForkNodeActivation> m_thisForkNodeActivationPtr;
 	};
 }
 #endif /* end of include guard: FUML_SEMANTICS_ACTIVITIES_FORKNODEACTIVATIONFORKNODEACTIVATIONIMPL_HPP */

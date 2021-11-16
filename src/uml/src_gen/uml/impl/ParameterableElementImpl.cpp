@@ -113,14 +113,6 @@ ParameterableElementImpl& ParameterableElementImpl::operator=(const Parameterabl
 	return *this;
 }
 
-std::shared_ptr<ecore::EObject> ParameterableElementImpl::copy() const
-{
-	std::shared_ptr<ParameterableElementImpl> element(new ParameterableElementImpl());
-	*element =(*this);
-	element->setThisParameterableElementPtr(element);
-	return element;
-}
-
 //*********************************
 // Operations
 //*********************************
@@ -422,11 +414,11 @@ Any ParameterableElementImpl::eInvoke(int operationID, std::shared_ptr<std::list
 }
 
 
-std::shared_ptr<ParameterableElement> ParameterableElementImpl::getThisParameterableElementPtr() const
+std::shared_ptr<uml::ParameterableElement> ParameterableElementImpl::getThisParameterableElementPtr() const
 {
 	return m_thisParameterableElementPtr.lock();
 }
-void ParameterableElementImpl::setThisParameterableElementPtr(std::weak_ptr<ParameterableElement> thisParameterableElementPtr)
+void ParameterableElementImpl::setThisParameterableElementPtr(std::weak_ptr<uml::ParameterableElement> thisParameterableElementPtr)
 {
 	m_thisParameterableElementPtr = thisParameterableElementPtr;
 	setThisElementPtr(thisParameterableElementPtr);

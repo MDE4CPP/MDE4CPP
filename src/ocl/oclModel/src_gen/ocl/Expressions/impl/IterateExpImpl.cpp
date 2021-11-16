@@ -32,8 +32,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "ecore/ecoreFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
+#include "ecore/ecoreFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
 
 #include "ocl/Expressions/CallExp.hpp"
@@ -467,11 +467,11 @@ Any IterateExpImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sh
 }
 
 
-std::shared_ptr<IterateExp> IterateExpImpl::getThisIterateExpPtr() const
+std::shared_ptr<ocl::Expressions::IterateExp> IterateExpImpl::getThisIterateExpPtr() const
 {
 	return m_thisIterateExpPtr.lock();
 }
-void IterateExpImpl::setThisIterateExpPtr(std::weak_ptr<IterateExp> thisIterateExpPtr)
+void IterateExpImpl::setThisIterateExpPtr(std::weak_ptr<ocl::Expressions::IterateExp> thisIterateExpPtr)
 {
 	m_thisIterateExpPtr = thisIterateExpPtr;
 	setThisLoopExpPtr(thisIterateExpPtr);

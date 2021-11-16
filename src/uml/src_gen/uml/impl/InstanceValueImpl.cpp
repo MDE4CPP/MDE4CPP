@@ -426,11 +426,11 @@ Any InstanceValueImpl::eInvoke(int operationID, std::shared_ptr<std::list < std:
 }
 
 
-std::shared_ptr<InstanceValue> InstanceValueImpl::getThisInstanceValuePtr() const
+std::shared_ptr<uml::InstanceValue> InstanceValueImpl::getThisInstanceValuePtr() const
 {
 	return m_thisInstanceValuePtr.lock();
 }
-void InstanceValueImpl::setThisInstanceValuePtr(std::weak_ptr<InstanceValue> thisInstanceValuePtr)
+void InstanceValueImpl::setThisInstanceValuePtr(std::weak_ptr<uml::InstanceValue> thisInstanceValuePtr)
 {
 	m_thisInstanceValuePtr = thisInstanceValuePtr;
 	setThisValueSpecificationPtr(thisInstanceValuePtr);

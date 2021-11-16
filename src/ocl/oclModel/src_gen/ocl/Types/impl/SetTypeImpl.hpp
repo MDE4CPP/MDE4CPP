@@ -32,8 +32,8 @@ namespace ocl::Types
 		protected:
 			friend class ocl::Types::TypesFactoryImpl;
 			SetTypeImpl();
-			virtual std::shared_ptr<SetType> getThisSetTypePtr() const;
-			virtual void setThisSetTypePtr(std::weak_ptr<SetType> thisSetTypePtr);
+			virtual std::shared_ptr<ocl::Types::SetType> getThisSetTypePtr() const;
+			virtual void setThisSetTypePtr(std::weak_ptr<ocl::Types::SetType> thisSetTypePtr);
 
 			//Additional constructors for the containments back reference
 			SetTypeImpl(std::weak_ptr<ecore::EPackage> par_ePackage);
@@ -89,7 +89,7 @@ namespace ocl::Types
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<SetType> m_thisSetTypePtr;
+			std::weak_ptr<ocl::Types::SetType> m_thisSetTypePtr;
 	};
 }
 #endif /* end of include guard: OCL_TYPES_SETTYPESETTYPEIMPL_HPP */

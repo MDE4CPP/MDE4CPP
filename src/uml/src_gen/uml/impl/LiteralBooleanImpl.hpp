@@ -31,8 +31,8 @@ namespace uml
 		protected:
 			friend class umlFactoryImpl;
 			LiteralBooleanImpl();
-			virtual std::shared_ptr<LiteralBoolean> getThisLiteralBooleanPtr() const;
-			virtual void setThisLiteralBooleanPtr(std::weak_ptr<LiteralBoolean> thisLiteralBooleanPtr);
+			virtual std::shared_ptr<uml::LiteralBoolean> getThisLiteralBooleanPtr() const;
+			virtual void setThisLiteralBooleanPtr(std::weak_ptr<uml::LiteralBoolean> thisLiteralBooleanPtr);
 
 			//Additional constructors for the containments back reference
 			LiteralBooleanImpl(std::weak_ptr<uml::Namespace> par_namespace);
@@ -143,7 +143,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<LiteralBoolean> m_thisLiteralBooleanPtr;
+			std::weak_ptr<uml::LiteralBoolean> m_thisLiteralBooleanPtr;
 	};
 }
 #endif /* end of include guard: UML_LITERALBOOLEANLITERALBOOLEANIMPL_HPP */

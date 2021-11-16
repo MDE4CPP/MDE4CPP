@@ -31,8 +31,8 @@ namespace uml
 		protected:
 			friend class umlFactoryImpl;
 			OccurrenceSpecificationImpl();
-			virtual std::shared_ptr<OccurrenceSpecification> getThisOccurrenceSpecificationPtr() const;
-			virtual void setThisOccurrenceSpecificationPtr(std::weak_ptr<OccurrenceSpecification> thisOccurrenceSpecificationPtr);
+			virtual std::shared_ptr<uml::OccurrenceSpecification> getThisOccurrenceSpecificationPtr() const;
+			virtual void setThisOccurrenceSpecificationPtr(std::weak_ptr<uml::OccurrenceSpecification> thisOccurrenceSpecificationPtr);
 
 			//Additional constructors for the containments back reference
 			OccurrenceSpecificationImpl(std::weak_ptr<uml::Interaction> par_enclosingInteraction);
@@ -130,7 +130,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<OccurrenceSpecification> m_thisOccurrenceSpecificationPtr;
+			std::weak_ptr<uml::OccurrenceSpecification> m_thisOccurrenceSpecificationPtr;
 	};
 }
 #endif /* end of include guard: UML_OCCURRENCESPECIFICATIONOCCURRENCESPECIFICATIONIMPL_HPP */

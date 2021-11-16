@@ -31,8 +31,8 @@ namespace uml
 		protected:
 			friend class umlFactoryImpl;
 			QualifierValueImpl();
-			virtual std::shared_ptr<QualifierValue> getThisQualifierValuePtr() const;
-			virtual void setThisQualifierValuePtr(std::weak_ptr<QualifierValue> thisQualifierValuePtr);
+			virtual std::shared_ptr<uml::QualifierValue> getThisQualifierValuePtr() const;
+			virtual void setThisQualifierValuePtr(std::weak_ptr<uml::QualifierValue> thisQualifierValuePtr);
 
 			//Additional constructors for the containments back reference
 			QualifierValueImpl(std::weak_ptr<uml::Element> par_owner);
@@ -136,7 +136,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<QualifierValue> m_thisQualifierValuePtr;
+			std::weak_ptr<uml::QualifierValue> m_thisQualifierValuePtr;
 	};
 }
 #endif /* end of include guard: UML_QUALIFIERVALUEQUALIFIERVALUEIMPL_HPP */

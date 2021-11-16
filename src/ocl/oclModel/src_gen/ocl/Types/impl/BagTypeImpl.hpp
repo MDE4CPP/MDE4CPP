@@ -32,8 +32,8 @@ namespace ocl::Types
 		protected:
 			friend class ocl::Types::TypesFactoryImpl;
 			BagTypeImpl();
-			virtual std::shared_ptr<BagType> getThisBagTypePtr() const;
-			virtual void setThisBagTypePtr(std::weak_ptr<BagType> thisBagTypePtr);
+			virtual std::shared_ptr<ocl::Types::BagType> getThisBagTypePtr() const;
+			virtual void setThisBagTypePtr(std::weak_ptr<ocl::Types::BagType> thisBagTypePtr);
 
 			//Additional constructors for the containments back reference
 			BagTypeImpl(std::weak_ptr<ecore::EPackage> par_ePackage);
@@ -89,7 +89,7 @@ namespace ocl::Types
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<BagType> m_thisBagTypePtr;
+			std::weak_ptr<ocl::Types::BagType> m_thisBagTypePtr;
 	};
 }
 #endif /* end of include guard: OCL_TYPES_BAGTYPEBAGTYPEIMPL_HPP */

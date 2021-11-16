@@ -520,11 +520,11 @@ Any JoinNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shar
 }
 
 
-std::shared_ptr<JoinNode> JoinNodeImpl::getThisJoinNodePtr() const
+std::shared_ptr<uml::JoinNode> JoinNodeImpl::getThisJoinNodePtr() const
 {
 	return m_thisJoinNodePtr.lock();
 }
-void JoinNodeImpl::setThisJoinNodePtr(std::weak_ptr<JoinNode> thisJoinNodePtr)
+void JoinNodeImpl::setThisJoinNodePtr(std::weak_ptr<uml::JoinNode> thisJoinNodePtr)
 {
 	m_thisJoinNodePtr = thisJoinNodePtr;
 	setThisControlNodePtr(thisJoinNodePtr);

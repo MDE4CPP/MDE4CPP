@@ -31,8 +31,8 @@ namespace uml
 		protected:
 			friend class umlFactoryImpl;
 			DataStoreNodeImpl();
-			virtual std::shared_ptr<DataStoreNode> getThisDataStoreNodePtr() const;
-			virtual void setThisDataStoreNodePtr(std::weak_ptr<DataStoreNode> thisDataStoreNodePtr);
+			virtual std::shared_ptr<uml::DataStoreNode> getThisDataStoreNodePtr() const;
+			virtual void setThisDataStoreNodePtr(std::weak_ptr<uml::DataStoreNode> thisDataStoreNodePtr);
 
 			//Additional constructors for the containments back reference
 			DataStoreNodeImpl(std::weak_ptr<uml::Activity> par_activity);
@@ -118,7 +118,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<DataStoreNode> m_thisDataStoreNodePtr;
+			std::weak_ptr<uml::DataStoreNode> m_thisDataStoreNodePtr;
 	};
 }
 #endif /* end of include guard: UML_DATASTORENODEDATASTORENODEIMPL_HPP */

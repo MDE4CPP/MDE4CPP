@@ -34,8 +34,8 @@ virtual public FeatureValue
 		protected:
 			friend class fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactoryImpl;
 			FeatureValueImpl();
-			virtual std::shared_ptr<FeatureValue> getThisFeatureValuePtr() const;
-			virtual void setThisFeatureValuePtr(std::weak_ptr<FeatureValue> thisFeatureValuePtr);
+			virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> getThisFeatureValuePtr() const;
+			virtual void setThisFeatureValuePtr(std::weak_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> thisFeatureValuePtr);
 
 
 		public:
@@ -96,7 +96,7 @@ virtual public FeatureValue
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<FeatureValue> m_thisFeatureValuePtr;
+			std::weak_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> m_thisFeatureValuePtr;
 	};
 }
 #endif /* end of include guard: FUML_SEMANTICS_SIMPLECLASSIFIERS_FEATUREVALUEFEATUREVALUEIMPL_HPP */

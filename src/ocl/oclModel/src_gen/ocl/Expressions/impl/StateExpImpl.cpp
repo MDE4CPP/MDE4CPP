@@ -32,8 +32,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "ecore/ecoreFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
+#include "ecore/ecoreFactory.hpp"
 #include "uml/umlFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
 
@@ -467,11 +467,11 @@ Any StateExpImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shar
 }
 
 
-std::shared_ptr<StateExp> StateExpImpl::getThisStateExpPtr() const
+std::shared_ptr<ocl::Expressions::StateExp> StateExpImpl::getThisStateExpPtr() const
 {
 	return m_thisStateExpPtr.lock();
 }
-void StateExpImpl::setThisStateExpPtr(std::weak_ptr<StateExp> thisStateExpPtr)
+void StateExpImpl::setThisStateExpPtr(std::weak_ptr<ocl::Expressions::StateExp> thisStateExpPtr)
 {
 	m_thisStateExpPtr = thisStateExpPtr;
 	setThisOclExpressionPtr(thisStateExpPtr);

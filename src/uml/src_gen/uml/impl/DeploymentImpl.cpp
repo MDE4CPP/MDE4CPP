@@ -720,11 +720,11 @@ Any DeploymentImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sh
 }
 
 
-std::shared_ptr<Deployment> DeploymentImpl::getThisDeploymentPtr() const
+std::shared_ptr<uml::Deployment> DeploymentImpl::getThisDeploymentPtr() const
 {
 	return m_thisDeploymentPtr.lock();
 }
-void DeploymentImpl::setThisDeploymentPtr(std::weak_ptr<Deployment> thisDeploymentPtr)
+void DeploymentImpl::setThisDeploymentPtr(std::weak_ptr<uml::Deployment> thisDeploymentPtr)
 {
 	m_thisDeploymentPtr = thisDeploymentPtr;
 	setThisDependencyPtr(thisDeploymentPtr);

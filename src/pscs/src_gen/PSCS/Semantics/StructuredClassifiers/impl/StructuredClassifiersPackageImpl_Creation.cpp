@@ -7,16 +7,16 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
+#include "ecore/EStringToStringMapEntry.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EReference.hpp"
-#include "ecore/EEnum.hpp"
-#include "ecore/EClass.hpp"
-#include "ecore/EDataType.hpp"
 #include "ecore/EGenericType.hpp"
-#include "ecore/EEnumLiteral.hpp"
-#include "ecore/EParameter.hpp"
+#include "ecore/EEnum.hpp"
 #include "ecore/EOperation.hpp"
-#include "ecore/EStringToStringMapEntry.hpp"
+#include "ecore/EClass.hpp"
+#include "ecore/EParameter.hpp"
+#include "ecore/EDataType.hpp"
+#include "ecore/EEnumLiteral.hpp"
 
 //depending model packages
 #include "PSCS/PSCSPackage.hpp"
@@ -74,7 +74,9 @@ void StructuredClassifiersPackageImpl::createCS_InteractionPointContent(std::sha
 {
 	m_cS_InteractionPoint_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, CS_INTERACTIONPOINT_CLASS);
 	
-	m_cS_InteractionPoint_Attribute_definingPort = factory->createEReference_as_eStructuralFeatures_in_EClass(m_cS_InteractionPoint_Class, CS_INTERACTIONPOINT_ATTRIBUTE_DEFININGPORT);m_cS_InteractionPoint_Attribute_owner = factory->createEReference_as_eStructuralFeatures_in_EClass(m_cS_InteractionPoint_Class, CS_INTERACTIONPOINT_ATTRIBUTE_OWNER);
+	m_cS_InteractionPoint_Attribute_definingPort = factory->createEReference_as_eStructuralFeatures_in_EClass(m_cS_InteractionPoint_Class, CS_INTERACTIONPOINT_ATTRIBUTE_DEFININGPORT);
+	m_cS_InteractionPoint_Attribute_owner = factory->createEReference_as_eStructuralFeatures_in_EClass(m_cS_InteractionPoint_Class, CS_INTERACTIONPOINT_ATTRIBUTE_OWNER);
+	
 	m_cS_InteractionPoint_Operation_checkAllParents_Classifier_Classifier = factory->createEOperation_as_eOperations_in_EClass(m_cS_InteractionPoint_Class, CS_INTERACTIONPOINT_OPERATION_CHECKALLPARENTS_CLASSIFIER_CLASSIFIER);
 	m_cS_InteractionPoint_Operation_dispatch_Operation = factory->createEOperation_as_eOperations_in_EClass(m_cS_InteractionPoint_Class, CS_INTERACTIONPOINT_OPERATION_DISPATCH_OPERATION);
 	m_cS_InteractionPoint_Operation_send_EventOccurrence = factory->createEOperation_as_eOperations_in_EClass(m_cS_InteractionPoint_Class, CS_INTERACTIONPOINT_OPERATION_SEND_EVENTOCCURRENCE);
@@ -138,6 +140,7 @@ void StructuredClassifiersPackageImpl::createCS_ReferenceContent(std::shared_ptr
 	m_cS_Reference_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, CS_REFERENCE_CLASS);
 	
 	m_cS_Reference_Attribute_compositeReferent = factory->createEReference_as_eStructuralFeatures_in_EClass(m_cS_Reference_Class, CS_REFERENCE_ATTRIBUTE_COMPOSITEREFERENT);
+	
 	m_cS_Reference_Operation__copy = factory->createEOperation_as_eOperations_in_EClass(m_cS_Reference_Class, CS_REFERENCE_OPERATION__COPY);
 	m_cS_Reference_Operation_dispatchIn_Operation_CS_InteractionPoint = factory->createEOperation_as_eOperations_in_EClass(m_cS_Reference_Class, CS_REFERENCE_OPERATION_DISPATCHIN_OPERATION_CS_INTERACTIONPOINT);
 	m_cS_Reference_Operation_dispatchIn_Operation_Port = factory->createEOperation_as_eOperations_in_EClass(m_cS_Reference_Class, CS_REFERENCE_OPERATION_DISPATCHIN_OPERATION_PORT);

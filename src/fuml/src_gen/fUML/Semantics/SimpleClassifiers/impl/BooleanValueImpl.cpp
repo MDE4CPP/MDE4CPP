@@ -148,6 +148,15 @@ bool BooleanValueImpl::equals(std::shared_ptr<fUML::Semantics::Values::Value> ot
 	//end of body
 }
 
+std::shared_ptr<fUML::Semantics::Values::Value> BooleanValueImpl::new_()
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	// Return a new boolean value with no value.
+return fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createBooleanValue();
+	//end of body
+}
+
 std::shared_ptr<uml::ValueSpecification> BooleanValueImpl::specify()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
@@ -367,6 +376,13 @@ Any BooleanValueImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::
 			break;
 		}
 		
+		// 1857572281
+		case SimpleClassifiersPackage::BOOLEANVALUE_OPERATION_NEW_:
+		{
+			result = eAny(this->new_());
+			break;
+		}
+		
 		// 2004933041
 		case SimpleClassifiersPackage::BOOLEANVALUE_OPERATION_SPECIFY:
 		{
@@ -395,11 +411,11 @@ Any BooleanValueImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::
 }
 
 
-std::shared_ptr<BooleanValue> BooleanValueImpl::getThisBooleanValuePtr() const
+std::shared_ptr<fUML::Semantics::SimpleClassifiers::BooleanValue> BooleanValueImpl::getThisBooleanValuePtr() const
 {
 	return m_thisBooleanValuePtr.lock();
 }
-void BooleanValueImpl::setThisBooleanValuePtr(std::weak_ptr<BooleanValue> thisBooleanValuePtr)
+void BooleanValueImpl::setThisBooleanValuePtr(std::weak_ptr<fUML::Semantics::SimpleClassifiers::BooleanValue> thisBooleanValuePtr)
 {
 	m_thisBooleanValuePtr = thisBooleanValuePtr;
 	setThisPrimitiveValuePtr(thisBooleanValuePtr);

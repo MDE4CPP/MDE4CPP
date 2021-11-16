@@ -25,14 +25,14 @@ namespace ecore
 	{
 		public: 
 			EStructuralFeatureImpl(const EStructuralFeatureImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 			EStructuralFeatureImpl& operator=(EStructuralFeatureImpl const&); 
 
 		protected:
 			friend class ecoreFactoryImpl;
 			EStructuralFeatureImpl();
-			virtual std::shared_ptr<EStructuralFeature> getThisEStructuralFeaturePtr() const;
-			virtual void setThisEStructuralFeaturePtr(std::weak_ptr<EStructuralFeature> thisEStructuralFeaturePtr);
+			virtual std::shared_ptr<ecore::EStructuralFeature> getThisEStructuralFeaturePtr() const;
+			virtual void setThisEStructuralFeaturePtr(std::weak_ptr<ecore::EStructuralFeature> thisEStructuralFeaturePtr);
 
 			//Additional constructors for the containments back reference
 			EStructuralFeatureImpl(std::weak_ptr<ecore::EObject> par_eContainer);
@@ -41,7 +41,7 @@ namespace ecore
 
 		public:
 			//destructor
-			virtual ~EStructuralFeatureImpl();
+			virtual ~EStructuralFeatureImpl() = 0;
 			
 			//*********************************
 			// Operations
@@ -110,7 +110,7 @@ namespace ecore
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<EStructuralFeature> m_thisEStructuralFeaturePtr;
+			std::weak_ptr<ecore::EStructuralFeature> m_thisEStructuralFeaturePtr;
 	};
 }
 #endif /* end of include guard: ECORE_ESTRUCTURALFEATUREESTRUCTURALFEATUREIMPL_HPP */

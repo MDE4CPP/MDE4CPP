@@ -4,11 +4,11 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
+#include "ecore/EStringToStringMapEntry.hpp"
 #include "ecore/EAnnotation.hpp"
-#include "ecore/EClass.hpp"
 #include "ecore/EGenericType.hpp"
 #include "ecore/EOperation.hpp"
-#include "ecore/EStringToStringMapEntry.hpp"
+#include "ecore/EClass.hpp"
 
 //metamodel factory
 #include "PSCS/Semantics/Values/ValuesFactory.hpp"
@@ -53,18 +53,18 @@ void ValuesPackageImpl::init(std::shared_ptr<ecore::EPackage> package)
 
 
 // Begin Class CS_OpaqueExpressionEvaluation
-std::shared_ptr<ecore::EClass> ValuesPackageImpl::getCS_OpaqueExpressionEvaluation_Class() const
+std::shared_ptr<ecore::EClass> PSCS::Semantics::Values::ValuesPackageImpl::getCS_OpaqueExpressionEvaluation_Class() const
 {
 	return m_cS_OpaqueExpressionEvaluation_Class;
 }
 
 
 
-std::shared_ptr<ecore::EOperation> ValuesPackageImpl::getCS_OpaqueExpressionEvaluation_Operation_evaluate() const
+std::shared_ptr<ecore::EOperation> PSCS::Semantics::Values::ValuesPackageImpl::getCS_OpaqueExpressionEvaluation_Operation_evaluate() const
 {
 	return m_cS_OpaqueExpressionEvaluation_Operation_evaluate;
 }
-std::shared_ptr<ecore::EOperation> ValuesPackageImpl::getCS_OpaqueExpressionEvaluation_Operation_executeExpressionBehavior() const
+std::shared_ptr<ecore::EOperation> PSCS::Semantics::Values::ValuesPackageImpl::getCS_OpaqueExpressionEvaluation_Operation_executeExpressionBehavior() const
 {
 	return m_cS_OpaqueExpressionEvaluation_Operation_executeExpressionBehavior;
 }

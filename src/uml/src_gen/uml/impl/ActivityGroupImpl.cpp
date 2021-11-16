@@ -138,14 +138,6 @@ ActivityGroupImpl& ActivityGroupImpl::operator=(const ActivityGroupImpl & obj)
 	return *this;
 }
 
-std::shared_ptr<ecore::EObject> ActivityGroupImpl::copy() const
-{
-	std::shared_ptr<ActivityGroupImpl> element(new ActivityGroupImpl());
-	*element =(*this);
-	element->setThisActivityGroupPtr(element);
-	return element;
-}
-
 //*********************************
 // Operations
 //*********************************
@@ -568,11 +560,11 @@ Any ActivityGroupImpl::eInvoke(int operationID, std::shared_ptr<std::list < std:
 }
 
 
-std::shared_ptr<ActivityGroup> ActivityGroupImpl::getThisActivityGroupPtr() const
+std::shared_ptr<uml::ActivityGroup> ActivityGroupImpl::getThisActivityGroupPtr() const
 {
 	return m_thisActivityGroupPtr.lock();
 }
-void ActivityGroupImpl::setThisActivityGroupPtr(std::weak_ptr<ActivityGroup> thisActivityGroupPtr)
+void ActivityGroupImpl::setThisActivityGroupPtr(std::weak_ptr<uml::ActivityGroup> thisActivityGroupPtr)
 {
 	m_thisActivityGroupPtr = thisActivityGroupPtr;
 	setThisNamedElementPtr(thisActivityGroupPtr);

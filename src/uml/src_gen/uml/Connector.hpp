@@ -234,7 +234,7 @@ namespace uml
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			
-			uml::ConnectorKind m_kind= ConnectorKind::ASSEMBLY;
+			uml::ConnectorKind m_kind= uml::ConnectorKind::ASSEMBLY;
 			
 			//*********************************
 			// Reference Members

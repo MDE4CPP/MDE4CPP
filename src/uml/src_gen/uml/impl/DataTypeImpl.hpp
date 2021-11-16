@@ -31,8 +31,8 @@ namespace uml
 		protected:
 			friend class umlFactoryImpl;
 			DataTypeImpl();
-			virtual std::shared_ptr<DataType> getThisDataTypePtr() const;
-			virtual void setThisDataTypePtr(std::weak_ptr<DataType> thisDataTypePtr);
+			virtual std::shared_ptr<uml::DataType> getThisDataTypePtr() const;
+			virtual void setThisDataTypePtr(std::weak_ptr<uml::DataType> thisDataTypePtr);
 
 			//Additional constructors for the containments back reference
 			DataTypeImpl(std::weak_ptr<uml::Namespace> par_namespace);
@@ -166,7 +166,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<DataType> m_thisDataTypePtr;
+			std::weak_ptr<uml::DataType> m_thisDataTypePtr;
 	};
 }
 #endif /* end of include guard: UML_DATATYPEDATATYPEIMPL_HPP */

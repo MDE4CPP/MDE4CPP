@@ -453,11 +453,11 @@ Any PackageMergeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::
 }
 
 
-std::shared_ptr<PackageMerge> PackageMergeImpl::getThisPackageMergePtr() const
+std::shared_ptr<uml::PackageMerge> PackageMergeImpl::getThisPackageMergePtr() const
 {
 	return m_thisPackageMergePtr.lock();
 }
-void PackageMergeImpl::setThisPackageMergePtr(std::weak_ptr<PackageMerge> thisPackageMergePtr)
+void PackageMergeImpl::setThisPackageMergePtr(std::weak_ptr<uml::PackageMerge> thisPackageMergePtr)
 {
 	m_thisPackageMergePtr = thisPackageMergePtr;
 	setThisDirectedRelationshipPtr(thisPackageMergePtr);

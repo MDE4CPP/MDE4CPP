@@ -411,11 +411,11 @@ Any InitialNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::s
 }
 
 
-std::shared_ptr<InitialNode> InitialNodeImpl::getThisInitialNodePtr() const
+std::shared_ptr<uml::InitialNode> InitialNodeImpl::getThisInitialNodePtr() const
 {
 	return m_thisInitialNodePtr.lock();
 }
-void InitialNodeImpl::setThisInitialNodePtr(std::weak_ptr<InitialNode> thisInitialNodePtr)
+void InitialNodeImpl::setThisInitialNodePtr(std::weak_ptr<uml::InitialNode> thisInitialNodePtr)
 {
 	m_thisInitialNodePtr = thisInitialNodePtr;
 	setThisControlNodePtr(thisInitialNodePtr);

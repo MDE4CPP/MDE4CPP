@@ -32,8 +32,8 @@ namespace PSCS::Semantics::Values
 		protected:
 			friend class PSCS::Semantics::Values::ValuesFactoryImpl;
 			CS_OpaqueExpressionEvaluationImpl();
-			virtual std::shared_ptr<CS_OpaqueExpressionEvaluation> getThisCS_OpaqueExpressionEvaluationPtr() const;
-			virtual void setThisCS_OpaqueExpressionEvaluationPtr(std::weak_ptr<CS_OpaqueExpressionEvaluation> thisCS_OpaqueExpressionEvaluationPtr);
+			virtual std::shared_ptr<PSCS::Semantics::Values::CS_OpaqueExpressionEvaluation> getThisCS_OpaqueExpressionEvaluationPtr() const;
+			virtual void setThisCS_OpaqueExpressionEvaluationPtr(std::weak_ptr<PSCS::Semantics::Values::CS_OpaqueExpressionEvaluation> thisCS_OpaqueExpressionEvaluationPtr);
 
 
 		public:
@@ -89,7 +89,7 @@ namespace PSCS::Semantics::Values
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<CS_OpaqueExpressionEvaluation> m_thisCS_OpaqueExpressionEvaluationPtr;
+			std::weak_ptr<PSCS::Semantics::Values::CS_OpaqueExpressionEvaluation> m_thisCS_OpaqueExpressionEvaluationPtr;
 	};
 }
 #endif /* end of include guard: PSCS_SEMANTICS_VALUES_CS_OPAQUEEXPRESSIONEVALUATIONCS_OPAQUEEXPRESSIONEVALUATIONIMPL_HPP */

@@ -32,9 +32,9 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "ecore/ecoreFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
+#include "ecore/ecoreFactory.hpp"
 
 #include "ocl/Expressions/CallExp.hpp"
 #include "ocl/Expressions/CollectionRange.hpp"
@@ -193,14 +193,6 @@ PrimitiveLiteralExpImpl& PrimitiveLiteralExpImpl::operator=(const PrimitiveLiter
 	//copy references with no containment (soft copy)
 	//Clone references with containment (deep copy)
 	return *this;
-}
-
-std::shared_ptr<ecore::EObject> PrimitiveLiteralExpImpl::copy() const
-{
-	std::shared_ptr<PrimitiveLiteralExpImpl> element(new PrimitiveLiteralExpImpl());
-	*element =(*this);
-	element->setThisPrimitiveLiteralExpPtr(element);
-	return element;
 }
 
 //*********************************
@@ -453,11 +445,11 @@ Any PrimitiveLiteralExpImpl::eInvoke(int operationID, std::shared_ptr<std::list 
 }
 
 
-std::shared_ptr<PrimitiveLiteralExp> PrimitiveLiteralExpImpl::getThisPrimitiveLiteralExpPtr() const
+std::shared_ptr<ocl::Expressions::PrimitiveLiteralExp> PrimitiveLiteralExpImpl::getThisPrimitiveLiteralExpPtr() const
 {
 	return m_thisPrimitiveLiteralExpPtr.lock();
 }
-void PrimitiveLiteralExpImpl::setThisPrimitiveLiteralExpPtr(std::weak_ptr<PrimitiveLiteralExp> thisPrimitiveLiteralExpPtr)
+void PrimitiveLiteralExpImpl::setThisPrimitiveLiteralExpPtr(std::weak_ptr<ocl::Expressions::PrimitiveLiteralExp> thisPrimitiveLiteralExpPtr)
 {
 	m_thisPrimitiveLiteralExpPtr = thisPrimitiveLiteralExpPtr;
 	setThisLiteralExpPtr(thisPrimitiveLiteralExpPtr);

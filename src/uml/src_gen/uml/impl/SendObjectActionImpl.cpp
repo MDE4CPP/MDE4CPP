@@ -528,11 +528,11 @@ Any SendObjectActionImpl::eInvoke(int operationID, std::shared_ptr<std::list < s
 }
 
 
-std::shared_ptr<SendObjectAction> SendObjectActionImpl::getThisSendObjectActionPtr() const
+std::shared_ptr<uml::SendObjectAction> SendObjectActionImpl::getThisSendObjectActionPtr() const
 {
 	return m_thisSendObjectActionPtr.lock();
 }
-void SendObjectActionImpl::setThisSendObjectActionPtr(std::weak_ptr<SendObjectAction> thisSendObjectActionPtr)
+void SendObjectActionImpl::setThisSendObjectActionPtr(std::weak_ptr<uml::SendObjectAction> thisSendObjectActionPtr)
 {
 	m_thisSendObjectActionPtr = thisSendObjectActionPtr;
 	setThisInvocationActionPtr(thisSendObjectActionPtr);

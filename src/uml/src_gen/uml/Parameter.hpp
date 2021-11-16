@@ -320,13 +320,13 @@ namespace uml
 			<p>From package UML::Classification.</p>
 			*/
 			
-			uml::ParameterDirectionKind m_direction= ParameterDirectionKind::IN;
+			uml::ParameterDirectionKind m_direction= uml::ParameterDirectionKind::IN;
 			/*!
 			Specifies the effect that executions of the owner of the Parameter have on objects passed in or out of the parameter.
 			<p>From package UML::Classification.</p>
 			*/
 			
-			uml::ParameterEffectKind m_effect= ParameterEffectKind::CREATE;
+			uml::ParameterEffectKind m_effect= uml::ParameterEffectKind::CREATE;
 			/*!
 			Tells whether an output parameter may emit a value to the exclusion of the other outputs.
 			<p>From package UML::Classification.</p>

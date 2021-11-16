@@ -31,8 +31,8 @@ namespace ecore
 		protected:
 			friend class ecoreFactoryImpl;
 			EEnumLiteralImpl();
-			virtual std::shared_ptr<EEnumLiteral> getThisEEnumLiteralPtr() const;
-			virtual void setThisEEnumLiteralPtr(std::weak_ptr<EEnumLiteral> thisEEnumLiteralPtr);
+			virtual std::shared_ptr<ecore::EEnumLiteral> getThisEEnumLiteralPtr() const;
+			virtual void setThisEEnumLiteralPtr(std::weak_ptr<ecore::EEnumLiteral> thisEEnumLiteralPtr);
 
 			//Additional constructors for the containments back reference
 			EEnumLiteralImpl(std::weak_ptr<ecore::EObject> par_eContainer);
@@ -98,7 +98,7 @@ namespace ecore
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<EEnumLiteral> m_thisEEnumLiteralPtr;
+			std::weak_ptr<ecore::EEnumLiteral> m_thisEEnumLiteralPtr;
 	};
 }
 #endif /* end of include guard: ECORE_EENUMLITERALEENUMLITERALIMPL_HPP */

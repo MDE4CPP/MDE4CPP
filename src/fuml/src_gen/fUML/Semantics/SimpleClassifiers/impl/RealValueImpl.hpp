@@ -32,8 +32,8 @@ namespace fUML::Semantics::SimpleClassifiers
 		protected:
 			friend class fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactoryImpl;
 			RealValueImpl();
-			virtual std::shared_ptr<RealValue> getThisRealValuePtr() const;
-			virtual void setThisRealValuePtr(std::weak_ptr<RealValue> thisRealValuePtr);
+			virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::RealValue> getThisRealValuePtr() const;
+			virtual void setThisRealValuePtr(std::weak_ptr<fUML::Semantics::SimpleClassifiers::RealValue> thisRealValuePtr);
 
 
 		public:
@@ -45,6 +45,7 @@ namespace fUML::Semantics::SimpleClassifiers
 			//*********************************
 			virtual std::shared_ptr<fUML::Semantics::Values::Value> _copy() ;
 			virtual bool equals(std::shared_ptr<fUML::Semantics::Values::Value> otherValue) ;
+			virtual std::shared_ptr<fUML::Semantics::Values::Value> new_() ;
 			virtual std::shared_ptr<uml::ValueSpecification> specify() ;
 			virtual std::string toString() ;
 			
@@ -93,7 +94,7 @@ namespace fUML::Semantics::SimpleClassifiers
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<RealValue> m_thisRealValuePtr;
+			std::weak_ptr<fUML::Semantics::SimpleClassifiers::RealValue> m_thisRealValuePtr;
 	};
 }
 #endif /* end of include guard: FUML_SEMANTICS_SIMPLECLASSIFIERS_REALVALUEREALVALUEIMPL_HPP */

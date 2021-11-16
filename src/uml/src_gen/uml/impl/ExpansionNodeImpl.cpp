@@ -502,11 +502,11 @@ Any ExpansionNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std:
 }
 
 
-std::shared_ptr<ExpansionNode> ExpansionNodeImpl::getThisExpansionNodePtr() const
+std::shared_ptr<uml::ExpansionNode> ExpansionNodeImpl::getThisExpansionNodePtr() const
 {
 	return m_thisExpansionNodePtr.lock();
 }
-void ExpansionNodeImpl::setThisExpansionNodePtr(std::weak_ptr<ExpansionNode> thisExpansionNodePtr)
+void ExpansionNodeImpl::setThisExpansionNodePtr(std::weak_ptr<uml::ExpansionNode> thisExpansionNodePtr)
 {
 	m_thisExpansionNodePtr = thisExpansionNodePtr;
 	setThisObjectNodePtr(thisExpansionNodePtr);

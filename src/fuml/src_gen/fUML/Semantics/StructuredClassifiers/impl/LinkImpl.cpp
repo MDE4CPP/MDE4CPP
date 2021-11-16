@@ -36,9 +36,9 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
+#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
 #include "uml/umlFactory.hpp"
-#include "fUML/Semantics/Loci/LociFactory.hpp"
 
 #include "uml/Association.hpp"
 #include "uml/Classifier.hpp"
@@ -241,6 +241,15 @@ bool LinkImpl::isMatchingLink(std::shared_ptr<fUML::Semantics::StructuredClassif
 	}
 
 	return matches;
+	//end of body
+}
+
+std::shared_ptr<fUML::Semantics::Values::Value> LinkImpl::new_()
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	// Create a new link with no type or properties.
+return fUML::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createLink();
 	//end of body
 }
 
@@ -494,6 +503,13 @@ Any LinkImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_p
 			result = eAny(this->isMatchingLink(incoming_param_link,incoming_param_end));
 			break;
 		}
+		
+		// 432830578
+		case StructuredClassifiersPackage::LINK_OPERATION_NEW_:
+		{
+			result = eAny(this->new_());
+			break;
+		}
 
 		default:
 		{
@@ -509,11 +525,11 @@ Any LinkImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_p
 }
 
 
-std::shared_ptr<Link> LinkImpl::getThisLinkPtr() const
+std::shared_ptr<fUML::Semantics::StructuredClassifiers::Link> LinkImpl::getThisLinkPtr() const
 {
 	return m_thisLinkPtr.lock();
 }
-void LinkImpl::setThisLinkPtr(std::weak_ptr<Link> thisLinkPtr)
+void LinkImpl::setThisLinkPtr(std::weak_ptr<fUML::Semantics::StructuredClassifiers::Link> thisLinkPtr)
 {
 	m_thisLinkPtr = thisLinkPtr;
 	setThisExtensionalValuePtr(thisLinkPtr);

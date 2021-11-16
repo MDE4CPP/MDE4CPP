@@ -341,11 +341,11 @@ Any TokenSetImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shar
 }
 
 
-std::shared_ptr<TokenSet> TokenSetImpl::getThisTokenSetPtr() const
+std::shared_ptr<fUML::Semantics::Activities::TokenSet> TokenSetImpl::getThisTokenSetPtr() const
 {
 	return m_thisTokenSetPtr.lock();
 }
-void TokenSetImpl::setThisTokenSetPtr(std::weak_ptr<TokenSet> thisTokenSetPtr)
+void TokenSetImpl::setThisTokenSetPtr(std::weak_ptr<fUML::Semantics::Activities::TokenSet> thisTokenSetPtr)
 {
 	m_thisTokenSetPtr = thisTokenSetPtr;
 }

@@ -31,8 +31,8 @@ namespace uml
 		protected:
 			friend class umlFactoryImpl;
 			OpaqueExpressionImpl();
-			virtual std::shared_ptr<OpaqueExpression> getThisOpaqueExpressionPtr() const;
-			virtual void setThisOpaqueExpressionPtr(std::weak_ptr<OpaqueExpression> thisOpaqueExpressionPtr);
+			virtual std::shared_ptr<uml::OpaqueExpression> getThisOpaqueExpressionPtr() const;
+			virtual void setThisOpaqueExpressionPtr(std::weak_ptr<uml::OpaqueExpression> thisOpaqueExpressionPtr);
 
 			//Additional constructors for the containments back reference
 			OpaqueExpressionImpl(std::weak_ptr<uml::Namespace> par_namespace);
@@ -198,7 +198,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<OpaqueExpression> m_thisOpaqueExpressionPtr;
+			std::weak_ptr<uml::OpaqueExpression> m_thisOpaqueExpressionPtr;
 	};
 }
 #endif /* end of include guard: UML_OPAQUEEXPRESSIONOPAQUEEXPRESSIONIMPL_HPP */

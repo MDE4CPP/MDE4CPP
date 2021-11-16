@@ -31,8 +31,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
+#include "uml/umlFactory.hpp"
 
 #include "fUML/Semantics/Loci/Locus.hpp"
 #include "fUML/Semantics/Loci/SemanticVisitor.hpp"
@@ -101,14 +101,6 @@ EvaluationImpl& EvaluationImpl::operator=(const EvaluationImpl & obj)
 	m_specification  = obj.getSpecification();
 	//Clone references with containment (deep copy)
 	return *this;
-}
-
-std::shared_ptr<ecore::EObject> EvaluationImpl::copy() const
-{
-	std::shared_ptr<EvaluationImpl> element(new EvaluationImpl());
-	*element =(*this);
-	element->setThisEvaluationPtr(element);
-	return element;
 }
 
 //*********************************
@@ -370,11 +362,11 @@ Any EvaluationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sh
 }
 
 
-std::shared_ptr<Evaluation> EvaluationImpl::getThisEvaluationPtr() const
+std::shared_ptr<fUML::Semantics::Values::Evaluation> EvaluationImpl::getThisEvaluationPtr() const
 {
 	return m_thisEvaluationPtr.lock();
 }
-void EvaluationImpl::setThisEvaluationPtr(std::weak_ptr<Evaluation> thisEvaluationPtr)
+void EvaluationImpl::setThisEvaluationPtr(std::weak_ptr<fUML::Semantics::Values::Evaluation> thisEvaluationPtr)
 {
 	m_thisEvaluationPtr = thisEvaluationPtr;
 	setThisSemanticVisitorPtr(thisEvaluationPtr);

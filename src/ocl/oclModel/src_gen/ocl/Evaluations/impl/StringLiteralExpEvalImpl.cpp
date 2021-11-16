@@ -297,11 +297,11 @@ Any StringLiteralExpEvalImpl::eInvoke(int operationID, std::shared_ptr<std::list
 }
 
 
-std::shared_ptr<StringLiteralExpEval> StringLiteralExpEvalImpl::getThisStringLiteralExpEvalPtr() const
+std::shared_ptr<ocl::Evaluations::StringLiteralExpEval> StringLiteralExpEvalImpl::getThisStringLiteralExpEvalPtr() const
 {
 	return m_thisStringLiteralExpEvalPtr.lock();
 }
-void StringLiteralExpEvalImpl::setThisStringLiteralExpEvalPtr(std::weak_ptr<StringLiteralExpEval> thisStringLiteralExpEvalPtr)
+void StringLiteralExpEvalImpl::setThisStringLiteralExpEvalPtr(std::weak_ptr<ocl::Evaluations::StringLiteralExpEval> thisStringLiteralExpEvalPtr)
 {
 	m_thisStringLiteralExpEvalPtr = thisStringLiteralExpEvalPtr;
 	setThisLiteralStringEvaluationPtr(thisStringLiteralExpEvalPtr);

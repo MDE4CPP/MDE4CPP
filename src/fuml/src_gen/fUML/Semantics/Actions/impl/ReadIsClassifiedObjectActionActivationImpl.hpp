@@ -32,8 +32,8 @@ namespace fUML::Semantics::Actions
 		protected:
 			friend class fUML::Semantics::Actions::ActionsFactoryImpl;
 			ReadIsClassifiedObjectActionActivationImpl();
-			virtual std::shared_ptr<ReadIsClassifiedObjectActionActivation> getThisReadIsClassifiedObjectActionActivationPtr() const;
-			virtual void setThisReadIsClassifiedObjectActionActivationPtr(std::weak_ptr<ReadIsClassifiedObjectActionActivation> thisReadIsClassifiedObjectActionActivationPtr);
+			virtual std::shared_ptr<fUML::Semantics::Actions::ReadIsClassifiedObjectActionActivation> getThisReadIsClassifiedObjectActionActivationPtr() const;
+			virtual void setThisReadIsClassifiedObjectActionActivationPtr(std::weak_ptr<fUML::Semantics::Actions::ReadIsClassifiedObjectActionActivation> thisReadIsClassifiedObjectActionActivationPtr);
 
 			//Additional constructors for the containments back reference
 			ReadIsClassifiedObjectActionActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_group);
@@ -91,7 +91,7 @@ namespace fUML::Semantics::Actions
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<ReadIsClassifiedObjectActionActivation> m_thisReadIsClassifiedObjectActionActivationPtr;
+			std::weak_ptr<fUML::Semantics::Actions::ReadIsClassifiedObjectActionActivation> m_thisReadIsClassifiedObjectActionActivationPtr;
 	};
 }
 #endif /* end of include guard: FUML_SEMANTICS_ACTIONS_READISCLASSIFIEDOBJECTACTIONACTIVATIONREADISCLASSIFIEDOBJECTACTIONACTIVATIONIMPL_HPP */

@@ -185,7 +185,7 @@ namespace uml
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			uml::InteractionOperatorKind m_interactionOperator= InteractionOperatorKind::SEQ;
+			uml::InteractionOperatorKind m_interactionOperator= uml::InteractionOperatorKind::SEQ;
 			
 			//*********************************
 			// Reference Members

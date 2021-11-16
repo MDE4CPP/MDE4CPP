@@ -1346,11 +1346,11 @@ Any StructuredActivityNodeImpl::eInvoke(int operationID, std::shared_ptr<std::li
 }
 
 
-std::shared_ptr<StructuredActivityNode> StructuredActivityNodeImpl::getThisStructuredActivityNodePtr() const
+std::shared_ptr<uml::StructuredActivityNode> StructuredActivityNodeImpl::getThisStructuredActivityNodePtr() const
 {
 	return m_thisStructuredActivityNodePtr.lock();
 }
-void StructuredActivityNodeImpl::setThisStructuredActivityNodePtr(std::weak_ptr<StructuredActivityNode> thisStructuredActivityNodePtr)
+void StructuredActivityNodeImpl::setThisStructuredActivityNodePtr(std::weak_ptr<uml::StructuredActivityNode> thisStructuredActivityNodePtr)
 {
 	m_thisStructuredActivityNodePtr = thisStructuredActivityNodePtr;
 	setThisActionPtr(thisStructuredActivityNodePtr);

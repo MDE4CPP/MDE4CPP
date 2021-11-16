@@ -364,11 +364,11 @@ Any MessageOccurrenceSpecificationImpl::eInvoke(int operationID, std::shared_ptr
 }
 
 
-std::shared_ptr<MessageOccurrenceSpecification> MessageOccurrenceSpecificationImpl::getThisMessageOccurrenceSpecificationPtr() const
+std::shared_ptr<uml::MessageOccurrenceSpecification> MessageOccurrenceSpecificationImpl::getThisMessageOccurrenceSpecificationPtr() const
 {
 	return m_thisMessageOccurrenceSpecificationPtr.lock();
 }
-void MessageOccurrenceSpecificationImpl::setThisMessageOccurrenceSpecificationPtr(std::weak_ptr<MessageOccurrenceSpecification> thisMessageOccurrenceSpecificationPtr)
+void MessageOccurrenceSpecificationImpl::setThisMessageOccurrenceSpecificationPtr(std::weak_ptr<uml::MessageOccurrenceSpecification> thisMessageOccurrenceSpecificationPtr)
 {
 	m_thisMessageOccurrenceSpecificationPtr = thisMessageOccurrenceSpecificationPtr;
 	setThisMessageEndPtr(thisMessageOccurrenceSpecificationPtr);

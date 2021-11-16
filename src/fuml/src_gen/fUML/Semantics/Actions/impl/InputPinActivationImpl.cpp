@@ -314,11 +314,11 @@ Any InputPinActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list <
 }
 
 
-std::shared_ptr<InputPinActivation> InputPinActivationImpl::getThisInputPinActivationPtr() const
+std::shared_ptr<fUML::Semantics::Actions::InputPinActivation> InputPinActivationImpl::getThisInputPinActivationPtr() const
 {
 	return m_thisInputPinActivationPtr.lock();
 }
-void InputPinActivationImpl::setThisInputPinActivationPtr(std::weak_ptr<InputPinActivation> thisInputPinActivationPtr)
+void InputPinActivationImpl::setThisInputPinActivationPtr(std::weak_ptr<fUML::Semantics::Actions::InputPinActivation> thisInputPinActivationPtr)
 {
 	m_thisInputPinActivationPtr = thisInputPinActivationPtr;
 	setThisPinActivationPtr(thisInputPinActivationPtr);

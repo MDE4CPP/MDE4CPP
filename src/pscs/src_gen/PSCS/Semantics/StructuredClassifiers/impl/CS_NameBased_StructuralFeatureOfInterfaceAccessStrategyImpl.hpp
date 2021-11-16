@@ -32,8 +32,8 @@ namespace PSCS::Semantics::StructuredClassifiers
 		protected:
 			friend class PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactoryImpl;
 			CS_NameBased_StructuralFeatureOfInterfaceAccessStrategyImpl();
-			virtual std::shared_ptr<CS_NameBased_StructuralFeatureOfInterfaceAccessStrategy> getThisCS_NameBased_StructuralFeatureOfInterfaceAccessStrategyPtr() const;
-			virtual void setThisCS_NameBased_StructuralFeatureOfInterfaceAccessStrategyPtr(std::weak_ptr<CS_NameBased_StructuralFeatureOfInterfaceAccessStrategy> thisCS_NameBased_StructuralFeatureOfInterfaceAccessStrategyPtr);
+			virtual std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_NameBased_StructuralFeatureOfInterfaceAccessStrategy> getThisCS_NameBased_StructuralFeatureOfInterfaceAccessStrategyPtr() const;
+			virtual void setThisCS_NameBased_StructuralFeatureOfInterfaceAccessStrategyPtr(std::weak_ptr<PSCS::Semantics::StructuredClassifiers::CS_NameBased_StructuralFeatureOfInterfaceAccessStrategy> thisCS_NameBased_StructuralFeatureOfInterfaceAccessStrategyPtr);
 
 
 		public:
@@ -89,7 +89,7 @@ namespace PSCS::Semantics::StructuredClassifiers
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<CS_NameBased_StructuralFeatureOfInterfaceAccessStrategy> m_thisCS_NameBased_StructuralFeatureOfInterfaceAccessStrategyPtr;
+			std::weak_ptr<PSCS::Semantics::StructuredClassifiers::CS_NameBased_StructuralFeatureOfInterfaceAccessStrategy> m_thisCS_NameBased_StructuralFeatureOfInterfaceAccessStrategyPtr;
 	};
 }
 #endif /* end of include guard: PSCS_SEMANTICS_STRUCTUREDCLASSIFIERS_CS_NAMEBASED_STRUCTURALFEATUREOFINTERFACEACCESSSTRATEGYCS_NAMEBASED_STRUCTURALFEATUREOFINTERFACEACCESSSTRATEGYIMPL_HPP */

@@ -503,11 +503,11 @@ Any DeviceImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared
 }
 
 
-std::shared_ptr<Device> DeviceImpl::getThisDevicePtr() const
+std::shared_ptr<uml::Device> DeviceImpl::getThisDevicePtr() const
 {
 	return m_thisDevicePtr.lock();
 }
-void DeviceImpl::setThisDevicePtr(std::weak_ptr<Device> thisDevicePtr)
+void DeviceImpl::setThisDevicePtr(std::weak_ptr<uml::Device> thisDevicePtr)
 {
 	m_thisDevicePtr = thisDevicePtr;
 	setThisNodePtr(thisDevicePtr);

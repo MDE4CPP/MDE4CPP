@@ -25,14 +25,14 @@ namespace uml
 	{
 		public: 
 			StructuredClassifierImpl(const StructuredClassifierImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 			StructuredClassifierImpl& operator=(StructuredClassifierImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;
 			StructuredClassifierImpl();
-			virtual std::shared_ptr<StructuredClassifier> getThisStructuredClassifierPtr() const;
-			virtual void setThisStructuredClassifierPtr(std::weak_ptr<StructuredClassifier> thisStructuredClassifierPtr);
+			virtual std::shared_ptr<uml::StructuredClassifier> getThisStructuredClassifierPtr() const;
+			virtual void setThisStructuredClassifierPtr(std::weak_ptr<uml::StructuredClassifier> thisStructuredClassifierPtr);
 
 			//Additional constructors for the containments back reference
 			StructuredClassifierImpl(std::weak_ptr<uml::Namespace> par_namespace);
@@ -46,7 +46,7 @@ namespace uml
 
 		public:
 			//destructor
-			virtual ~StructuredClassifierImpl();
+			virtual ~StructuredClassifierImpl() = 0;
 			
 			//*********************************
 			// Operations
@@ -188,7 +188,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<StructuredClassifier> m_thisStructuredClassifierPtr;
+			std::weak_ptr<uml::StructuredClassifier> m_thisStructuredClassifierPtr;
 	};
 }
 #endif /* end of include guard: UML_STRUCTUREDCLASSIFIERSTRUCTUREDCLASSIFIERIMPL_HPP */

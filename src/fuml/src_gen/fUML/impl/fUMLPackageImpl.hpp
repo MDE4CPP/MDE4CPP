@@ -46,7 +46,7 @@ namespace fUML
 
 			
 			// SubPackages Getters
-			virtual std::shared_ptr<Semantics::SemanticsPackage> getSemantics_Package() const ;
+			virtual std::shared_ptr<fUML::Semantics::SemanticsPackage> getSemantics_Package() const ;
 			
 
 		private:

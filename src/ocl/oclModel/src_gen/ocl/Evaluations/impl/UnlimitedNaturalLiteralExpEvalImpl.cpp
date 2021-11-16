@@ -299,11 +299,11 @@ Any UnlimitedNaturalLiteralExpEvalImpl::eInvoke(int operationID, std::shared_ptr
 }
 
 
-std::shared_ptr<UnlimitedNaturalLiteralExpEval> UnlimitedNaturalLiteralExpEvalImpl::getThisUnlimitedNaturalLiteralExpEvalPtr() const
+std::shared_ptr<ocl::Evaluations::UnlimitedNaturalLiteralExpEval> UnlimitedNaturalLiteralExpEvalImpl::getThisUnlimitedNaturalLiteralExpEvalPtr() const
 {
 	return m_thisUnlimitedNaturalLiteralExpEvalPtr.lock();
 }
-void UnlimitedNaturalLiteralExpEvalImpl::setThisUnlimitedNaturalLiteralExpEvalPtr(std::weak_ptr<UnlimitedNaturalLiteralExpEval> thisUnlimitedNaturalLiteralExpEvalPtr)
+void UnlimitedNaturalLiteralExpEvalImpl::setThisUnlimitedNaturalLiteralExpEvalPtr(std::weak_ptr<ocl::Evaluations::UnlimitedNaturalLiteralExpEval> thisUnlimitedNaturalLiteralExpEvalPtr)
 {
 	m_thisUnlimitedNaturalLiteralExpEvalPtr = thisUnlimitedNaturalLiteralExpEvalPtr;
 	setThisLiteralUnlimitedNaturalEvaluationPtr(thisUnlimitedNaturalLiteralExpEvalPtr);

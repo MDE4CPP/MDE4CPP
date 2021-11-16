@@ -239,11 +239,11 @@ Any EventDispatchLoopImpl::eInvoke(int operationID, std::shared_ptr<std::list < 
 }
 
 
-std::shared_ptr<EventDispatchLoop> EventDispatchLoopImpl::getThisEventDispatchLoopPtr() const
+std::shared_ptr<fUML::Semantics::CommonBehavior::EventDispatchLoop> EventDispatchLoopImpl::getThisEventDispatchLoopPtr() const
 {
 	return m_thisEventDispatchLoopPtr.lock();
 }
-void EventDispatchLoopImpl::setThisEventDispatchLoopPtr(std::weak_ptr<EventDispatchLoop> thisEventDispatchLoopPtr)
+void EventDispatchLoopImpl::setThisEventDispatchLoopPtr(std::weak_ptr<fUML::Semantics::CommonBehavior::EventDispatchLoop> thisEventDispatchLoopPtr)
 {
 	m_thisEventDispatchLoopPtr = thisEventDispatchLoopPtr;
 }

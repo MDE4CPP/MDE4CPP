@@ -547,11 +547,11 @@ Any ActivityParameterNodeImpl::eInvoke(int operationID, std::shared_ptr<std::lis
 }
 
 
-std::shared_ptr<ActivityParameterNode> ActivityParameterNodeImpl::getThisActivityParameterNodePtr() const
+std::shared_ptr<uml::ActivityParameterNode> ActivityParameterNodeImpl::getThisActivityParameterNodePtr() const
 {
 	return m_thisActivityParameterNodePtr.lock();
 }
-void ActivityParameterNodeImpl::setThisActivityParameterNodePtr(std::weak_ptr<ActivityParameterNode> thisActivityParameterNodePtr)
+void ActivityParameterNodeImpl::setThisActivityParameterNodePtr(std::weak_ptr<uml::ActivityParameterNode> thisActivityParameterNodePtr)
 {
 	m_thisActivityParameterNodePtr = thisActivityParameterNodePtr;
 	setThisObjectNodePtr(thisActivityParameterNodePtr);

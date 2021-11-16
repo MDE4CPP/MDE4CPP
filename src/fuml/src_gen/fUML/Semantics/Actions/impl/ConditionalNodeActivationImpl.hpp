@@ -32,8 +32,8 @@ namespace fUML::Semantics::Actions
 		protected:
 			friend class fUML::Semantics::Actions::ActionsFactoryImpl;
 			ConditionalNodeActivationImpl();
-			virtual std::shared_ptr<ConditionalNodeActivation> getThisConditionalNodeActivationPtr() const;
-			virtual void setThisConditionalNodeActivationPtr(std::weak_ptr<ConditionalNodeActivation> thisConditionalNodeActivationPtr);
+			virtual std::shared_ptr<fUML::Semantics::Actions::ConditionalNodeActivation> getThisConditionalNodeActivationPtr() const;
+			virtual void setThisConditionalNodeActivationPtr(std::weak_ptr<fUML::Semantics::Actions::ConditionalNodeActivation> thisConditionalNodeActivationPtr);
 
 			//Additional constructors for the containments back reference
 			ConditionalNodeActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_group);
@@ -95,7 +95,7 @@ namespace fUML::Semantics::Actions
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<ConditionalNodeActivation> m_thisConditionalNodeActivationPtr;
+			std::weak_ptr<fUML::Semantics::Actions::ConditionalNodeActivation> m_thisConditionalNodeActivationPtr;
 	};
 }
 #endif /* end of include guard: FUML_SEMANTICS_ACTIONS_CONDITIONALNODEACTIVATIONCONDITIONALNODEACTIVATIONIMPL_HPP */

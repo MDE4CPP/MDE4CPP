@@ -32,8 +32,8 @@ namespace fUML::Semantics::Activities
 		protected:
 			friend class fUML::Semantics::Activities::ActivitiesFactoryImpl;
 			ExpansionRegionActivationImpl();
-			virtual std::shared_ptr<ExpansionRegionActivation> getThisExpansionRegionActivationPtr() const;
-			virtual void setThisExpansionRegionActivationPtr(std::weak_ptr<ExpansionRegionActivation> thisExpansionRegionActivationPtr);
+			virtual std::shared_ptr<fUML::Semantics::Activities::ExpansionRegionActivation> getThisExpansionRegionActivationPtr() const;
+			virtual void setThisExpansionRegionActivationPtr(std::weak_ptr<fUML::Semantics::Activities::ExpansionRegionActivation> thisExpansionRegionActivationPtr);
 
 			//Additional constructors for the containments back reference
 			ExpansionRegionActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_group);
@@ -109,7 +109,7 @@ namespace fUML::Semantics::Activities
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<ExpansionRegionActivation> m_thisExpansionRegionActivationPtr;
+			std::weak_ptr<fUML::Semantics::Activities::ExpansionRegionActivation> m_thisExpansionRegionActivationPtr;
 	};
 }
 #endif /* end of include guard: FUML_SEMANTICS_ACTIVITIES_EXPANSIONREGIONACTIVATIONEXPANSIONREGIONACTIVATIONIMPL_HPP */

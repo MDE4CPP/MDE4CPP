@@ -729,11 +729,11 @@ Any ObjectFlowImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sh
 }
 
 
-std::shared_ptr<ObjectFlow> ObjectFlowImpl::getThisObjectFlowPtr() const
+std::shared_ptr<uml::ObjectFlow> ObjectFlowImpl::getThisObjectFlowPtr() const
 {
 	return m_thisObjectFlowPtr.lock();
 }
-void ObjectFlowImpl::setThisObjectFlowPtr(std::weak_ptr<ObjectFlow> thisObjectFlowPtr)
+void ObjectFlowImpl::setThisObjectFlowPtr(std::weak_ptr<uml::ObjectFlow> thisObjectFlowPtr)
 {
 	m_thisObjectFlowPtr = thisObjectFlowPtr;
 	setThisActivityEdgePtr(thisObjectFlowPtr);

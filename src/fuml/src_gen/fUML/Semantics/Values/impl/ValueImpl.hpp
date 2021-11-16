@@ -26,19 +26,19 @@ namespace fUML::Semantics::Values
 	{
 		public: 
 			ValueImpl(const ValueImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 			ValueImpl& operator=(ValueImpl const&); 
 
 		protected:
 			friend class fUML::Semantics::Values::ValuesFactoryImpl;
 			ValueImpl();
-			virtual std::shared_ptr<Value> getThisValuePtr() const;
-			virtual void setThisValuePtr(std::weak_ptr<Value> thisValuePtr);
+			virtual std::shared_ptr<fUML::Semantics::Values::Value> getThisValuePtr() const;
+			virtual void setThisValuePtr(std::weak_ptr<fUML::Semantics::Values::Value> thisValuePtr);
 
 
 		public:
 			//destructor
-			virtual ~ValueImpl();
+			virtual ~ValueImpl() = 0;
 			
 			//*********************************
 			// Operations
@@ -48,6 +48,7 @@ namespace fUML::Semantics::Values
 			virtual bool equals(std::shared_ptr<fUML::Semantics::Values::Value> otherValue) ;
 			virtual std::shared_ptr<Bag<uml::Classifier> > getTypes() const ;
 			virtual bool hasTypes(std::shared_ptr<uml::Classifier> type) ;
+			virtual std::shared_ptr<fUML::Semantics::Values::Value> new_() ;
 			virtual std::string objectId() ;
 			virtual std::shared_ptr<uml::ValueSpecification> specify() ;
 			virtual std::string toString() ;
@@ -95,7 +96,7 @@ namespace fUML::Semantics::Values
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<Value> m_thisValuePtr;
+			std::weak_ptr<fUML::Semantics::Values::Value> m_thisValuePtr;
 	};
 }
 #endif /* end of include guard: FUML_SEMANTICS_VALUES_VALUEVALUEIMPL_HPP */

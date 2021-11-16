@@ -32,8 +32,8 @@ namespace fUML::Semantics::Actions
 		protected:
 			friend class fUML::Semantics::Actions::ActionsFactoryImpl;
 			LoopNodeActivationImpl();
-			virtual std::shared_ptr<LoopNodeActivation> getThisLoopNodeActivationPtr() const;
-			virtual void setThisLoopNodeActivationPtr(std::weak_ptr<LoopNodeActivation> thisLoopNodeActivationPtr);
+			virtual std::shared_ptr<fUML::Semantics::Actions::LoopNodeActivation> getThisLoopNodeActivationPtr() const;
+			virtual void setThisLoopNodeActivationPtr(std::weak_ptr<fUML::Semantics::Actions::LoopNodeActivation> thisLoopNodeActivationPtr);
 
 			//Additional constructors for the containments back reference
 			LoopNodeActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_group);
@@ -95,7 +95,7 @@ namespace fUML::Semantics::Actions
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<LoopNodeActivation> m_thisLoopNodeActivationPtr;
+			std::weak_ptr<fUML::Semantics::Actions::LoopNodeActivation> m_thisLoopNodeActivationPtr;
 	};
 }
 #endif /* end of include guard: FUML_SEMANTICS_ACTIONS_LOOPNODEACTIVATIONLOOPNODEACTIVATIONIMPL_HPP */

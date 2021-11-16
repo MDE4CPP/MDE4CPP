@@ -443,11 +443,11 @@ Any LiteralUnlimitedNaturalImpl::eInvoke(int operationID, std::shared_ptr<std::l
 }
 
 
-std::shared_ptr<LiteralUnlimitedNatural> LiteralUnlimitedNaturalImpl::getThisLiteralUnlimitedNaturalPtr() const
+std::shared_ptr<uml::LiteralUnlimitedNatural> LiteralUnlimitedNaturalImpl::getThisLiteralUnlimitedNaturalPtr() const
 {
 	return m_thisLiteralUnlimitedNaturalPtr.lock();
 }
-void LiteralUnlimitedNaturalImpl::setThisLiteralUnlimitedNaturalPtr(std::weak_ptr<LiteralUnlimitedNatural> thisLiteralUnlimitedNaturalPtr)
+void LiteralUnlimitedNaturalImpl::setThisLiteralUnlimitedNaturalPtr(std::weak_ptr<uml::LiteralUnlimitedNatural> thisLiteralUnlimitedNaturalPtr)
 {
 	m_thisLiteralUnlimitedNaturalPtr = thisLiteralUnlimitedNaturalPtr;
 	setThisLiteralSpecificationPtr(thisLiteralUnlimitedNaturalPtr);

@@ -110,14 +110,6 @@ ControlNodeActivationImpl& ControlNodeActivationImpl::operator=(const ControlNod
 	return *this;
 }
 
-std::shared_ptr<ecore::EObject> ControlNodeActivationImpl::copy() const
-{
-	std::shared_ptr<ControlNodeActivationImpl> element(new ControlNodeActivationImpl());
-	*element =(*this);
-	element->setThisControlNodeActivationPtr(element);
-	return element;
-}
-
 //*********************************
 // Operations
 //*********************************
@@ -288,11 +280,11 @@ Any ControlNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::lis
 }
 
 
-std::shared_ptr<ControlNodeActivation> ControlNodeActivationImpl::getThisControlNodeActivationPtr() const
+std::shared_ptr<fUML::Semantics::Activities::ControlNodeActivation> ControlNodeActivationImpl::getThisControlNodeActivationPtr() const
 {
 	return m_thisControlNodeActivationPtr.lock();
 }
-void ControlNodeActivationImpl::setThisControlNodeActivationPtr(std::weak_ptr<ControlNodeActivation> thisControlNodeActivationPtr)
+void ControlNodeActivationImpl::setThisControlNodeActivationPtr(std::weak_ptr<fUML::Semantics::Activities::ControlNodeActivation> thisControlNodeActivationPtr)
 {
 	m_thisControlNodeActivationPtr = thisControlNodeActivationPtr;
 	setThisActivityNodeActivationPtr(thisControlNodeActivationPtr);

@@ -380,55 +380,55 @@ void CombinedFragmentImpl::loadAttributes(std::shared_ptr<persistence::interface
 		iter = attr_list.find("interactionOperator");
 		if ( iter != attr_list.end() )
 		{
-			uml::InteractionOperatorKind value = InteractionOperatorKind::SEQ;
+			uml::InteractionOperatorKind value = uml::InteractionOperatorKind::SEQ;
 			std::string literal = iter->second;
 			if (literal == "seq")
 			{
-				value = InteractionOperatorKind::SEQ;
+				value = uml::InteractionOperatorKind::SEQ;
 			}
 			else if (literal == "alt")
 			{
-				value = InteractionOperatorKind::ALT;
+				value = uml::InteractionOperatorKind::ALT;
 			}
 			else if (literal == "opt")
 			{
-				value = InteractionOperatorKind::OPT;
+				value = uml::InteractionOperatorKind::OPT;
 			}
 			else if (literal == "break")
 			{
-				value = InteractionOperatorKind::BREAK;
+				value = uml::InteractionOperatorKind::BREAK;
 			}
 			else if (literal == "par")
 			{
-				value = InteractionOperatorKind::PAR;
+				value = uml::InteractionOperatorKind::PAR;
 			}
 			else if (literal == "strict")
 			{
-				value = InteractionOperatorKind::STRICT;
+				value = uml::InteractionOperatorKind::STRICT;
 			}
 			else if (literal == "loop")
 			{
-				value = InteractionOperatorKind::LOOP;
+				value = uml::InteractionOperatorKind::LOOP;
 			}
 			else if (literal == "critical")
 			{
-				value = InteractionOperatorKind::CRITICAL;
+				value = uml::InteractionOperatorKind::CRITICAL;
 			}
 			else if (literal == "neg")
 			{
-				value = InteractionOperatorKind::NEG;
+				value = uml::InteractionOperatorKind::NEG;
 			}
 			else if (literal == "assert")
 			{
-				value = InteractionOperatorKind::ASSERT;
+				value = uml::InteractionOperatorKind::ASSERT;
 			}
 			else if (literal == "ignore")
 			{
-				value = InteractionOperatorKind::IGNORE;
+				value = uml::InteractionOperatorKind::IGNORE;
 			}
 			else if (literal == "consider")
 			{
-				value = InteractionOperatorKind::CONSIDER;
+				value = uml::InteractionOperatorKind::CONSIDER;
 			}
 			this->setInteractionOperator(value);
 		}
@@ -527,51 +527,51 @@ void CombinedFragmentImpl::saveContent(std::shared_ptr<persistence::interfaces::
 		{
 			uml::InteractionOperatorKind value = this->getInteractionOperator();
 			std::string literal = "";
-			if (value == InteractionOperatorKind::SEQ)
+			if (value == uml::InteractionOperatorKind::SEQ)
 			{
 				literal = "seq";
 			}
-			else if (value == InteractionOperatorKind::ALT)
+			else if (value == uml::InteractionOperatorKind::ALT)
 			{
 				literal = "alt";
 			}
-			else if (value == InteractionOperatorKind::OPT)
+			else if (value == uml::InteractionOperatorKind::OPT)
 			{
 				literal = "opt";
 			}
-			else if (value == InteractionOperatorKind::BREAK)
+			else if (value == uml::InteractionOperatorKind::BREAK)
 			{
 				literal = "break";
 			}
-			else if (value == InteractionOperatorKind::PAR)
+			else if (value == uml::InteractionOperatorKind::PAR)
 			{
 				literal = "par";
 			}
-			else if (value == InteractionOperatorKind::STRICT)
+			else if (value == uml::InteractionOperatorKind::STRICT)
 			{
 				literal = "strict";
 			}
-			else if (value == InteractionOperatorKind::LOOP)
+			else if (value == uml::InteractionOperatorKind::LOOP)
 			{
 				literal = "loop";
 			}
-			else if (value == InteractionOperatorKind::CRITICAL)
+			else if (value == uml::InteractionOperatorKind::CRITICAL)
 			{
 				literal = "critical";
 			}
-			else if (value == InteractionOperatorKind::NEG)
+			else if (value == uml::InteractionOperatorKind::NEG)
 			{
 				literal = "neg";
 			}
-			else if (value == InteractionOperatorKind::ASSERT)
+			else if (value == uml::InteractionOperatorKind::ASSERT)
 			{
 				literal = "assert";
 			}
-			else if (value == InteractionOperatorKind::IGNORE)
+			else if (value == uml::InteractionOperatorKind::IGNORE)
 			{
 				literal = "ignore";
 			}
-			else if (value == InteractionOperatorKind::CONSIDER)
+			else if (value == uml::InteractionOperatorKind::CONSIDER)
 			{
 				literal = "consider";
 			}
@@ -635,7 +635,7 @@ bool CombinedFragmentImpl::internalEIsSet(int featureID) const
 		case uml::umlPackage::COMBINEDFRAGMENT_ATTRIBUTE_CFRAGMENTGATE:
 			return getCfragmentGate() != nullptr; //4413
 		case uml::umlPackage::COMBINEDFRAGMENT_ATTRIBUTE_INTERACTIONOPERATOR:
-			return m_interactionOperator != InteractionOperatorKind::SEQ;; //4414
+			return m_interactionOperator != uml::InteractionOperatorKind::SEQ;; //4414
 		case uml::umlPackage::COMBINEDFRAGMENT_ATTRIBUTE_OPERAND:
 			return getOperand() != nullptr; //4415
 	}
@@ -805,11 +805,11 @@ Any CombinedFragmentImpl::eInvoke(int operationID, std::shared_ptr<std::list < s
 }
 
 
-std::shared_ptr<CombinedFragment> CombinedFragmentImpl::getThisCombinedFragmentPtr() const
+std::shared_ptr<uml::CombinedFragment> CombinedFragmentImpl::getThisCombinedFragmentPtr() const
 {
 	return m_thisCombinedFragmentPtr.lock();
 }
-void CombinedFragmentImpl::setThisCombinedFragmentPtr(std::weak_ptr<CombinedFragment> thisCombinedFragmentPtr)
+void CombinedFragmentImpl::setThisCombinedFragmentPtr(std::weak_ptr<uml::CombinedFragment> thisCombinedFragmentPtr)
 {
 	m_thisCombinedFragmentPtr = thisCombinedFragmentPtr;
 	setThisInteractionFragmentPtr(thisCombinedFragmentPtr);

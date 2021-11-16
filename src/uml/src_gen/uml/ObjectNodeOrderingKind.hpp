@@ -9,7 +9,7 @@
 
 namespace uml 
 {
-	enum ObjectNodeOrderingKind {
+	enum class ObjectNodeOrderingKind {
 		
 		FIFO = 3
 ,

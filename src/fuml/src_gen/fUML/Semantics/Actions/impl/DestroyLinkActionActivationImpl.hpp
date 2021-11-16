@@ -32,8 +32,8 @@ namespace fUML::Semantics::Actions
 		protected:
 			friend class fUML::Semantics::Actions::ActionsFactoryImpl;
 			DestroyLinkActionActivationImpl();
-			virtual std::shared_ptr<DestroyLinkActionActivation> getThisDestroyLinkActionActivationPtr() const;
-			virtual void setThisDestroyLinkActionActivationPtr(std::weak_ptr<DestroyLinkActionActivation> thisDestroyLinkActionActivationPtr);
+			virtual std::shared_ptr<fUML::Semantics::Actions::DestroyLinkActionActivation> getThisDestroyLinkActionActivationPtr() const;
+			virtual void setThisDestroyLinkActionActivationPtr(std::weak_ptr<fUML::Semantics::Actions::DestroyLinkActionActivation> thisDestroyLinkActionActivationPtr);
 
 			//Additional constructors for the containments back reference
 			DestroyLinkActionActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_group);
@@ -90,7 +90,7 @@ namespace fUML::Semantics::Actions
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<DestroyLinkActionActivation> m_thisDestroyLinkActionActivationPtr;
+			std::weak_ptr<fUML::Semantics::Actions::DestroyLinkActionActivation> m_thisDestroyLinkActionActivationPtr;
 	};
 }
 #endif /* end of include guard: FUML_SEMANTICS_ACTIONS_DESTROYLINKACTIONACTIVATIONDESTROYLINKACTIONACTIVATIONIMPL_HPP */

@@ -307,11 +307,11 @@ Any CallEventBehaviorImpl::eInvoke(int operationID, std::shared_ptr<std::list < 
 }
 
 
-std::shared_ptr<CallEventBehavior> CallEventBehaviorImpl::getThisCallEventBehaviorPtr() const
+std::shared_ptr<fUML::Semantics::CommonBehavior::CallEventBehavior> CallEventBehaviorImpl::getThisCallEventBehaviorPtr() const
 {
 	return m_thisCallEventBehaviorPtr.lock();
 }
-void CallEventBehaviorImpl::setThisCallEventBehaviorPtr(std::weak_ptr<CallEventBehavior> thisCallEventBehaviorPtr)
+void CallEventBehaviorImpl::setThisCallEventBehaviorPtr(std::weak_ptr<fUML::Semantics::CommonBehavior::CallEventBehavior> thisCallEventBehaviorPtr)
 {
 	m_thisCallEventBehaviorPtr = thisCallEventBehaviorPtr;
 }

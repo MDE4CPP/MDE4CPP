@@ -31,8 +31,8 @@ namespace uml
 		protected:
 			friend class umlFactoryImpl;
 			ActivityFinalNodeImpl();
-			virtual std::shared_ptr<ActivityFinalNode> getThisActivityFinalNodePtr() const;
-			virtual void setThisActivityFinalNodePtr(std::weak_ptr<ActivityFinalNode> thisActivityFinalNodePtr);
+			virtual std::shared_ptr<uml::ActivityFinalNode> getThisActivityFinalNodePtr() const;
+			virtual void setThisActivityFinalNodePtr(std::weak_ptr<uml::ActivityFinalNode> thisActivityFinalNodePtr);
 
 			//Additional constructors for the containments back reference
 			ActivityFinalNodeImpl(std::weak_ptr<uml::Activity> par_activity);
@@ -118,7 +118,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<ActivityFinalNode> m_thisActivityFinalNodePtr;
+			std::weak_ptr<uml::ActivityFinalNode> m_thisActivityFinalNodePtr;
 	};
 }
 #endif /* end of include guard: UML_ACTIVITYFINALNODEACTIVITYFINALNODEIMPL_HPP */

@@ -680,11 +680,11 @@ Any DependencyImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sh
 }
 
 
-std::shared_ptr<Dependency> DependencyImpl::getThisDependencyPtr() const
+std::shared_ptr<uml::Dependency> DependencyImpl::getThisDependencyPtr() const
 {
 	return m_thisDependencyPtr.lock();
 }
-void DependencyImpl::setThisDependencyPtr(std::weak_ptr<Dependency> thisDependencyPtr)
+void DependencyImpl::setThisDependencyPtr(std::weak_ptr<uml::Dependency> thisDependencyPtr)
 {
 	m_thisDependencyPtr = thisDependencyPtr;
 	setThisDirectedRelationshipPtr(thisDependencyPtr);

@@ -34,8 +34,8 @@ virtual public ParameterValue
 		protected:
 			friend class fUML::Semantics::CommonBehavior::CommonBehaviorFactoryImpl;
 			ParameterValueImpl();
-			virtual std::shared_ptr<ParameterValue> getThisParameterValuePtr() const;
-			virtual void setThisParameterValuePtr(std::weak_ptr<ParameterValue> thisParameterValuePtr);
+			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> getThisParameterValuePtr() const;
+			virtual void setThisParameterValuePtr(std::weak_ptr<fUML::Semantics::CommonBehavior::ParameterValue> thisParameterValuePtr);
 
 
 		public:
@@ -93,7 +93,7 @@ virtual public ParameterValue
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<ParameterValue> m_thisParameterValuePtr;
+			std::weak_ptr<fUML::Semantics::CommonBehavior::ParameterValue> m_thisParameterValuePtr;
 	};
 }
 #endif /* end of include guard: FUML_SEMANTICS_COMMONBEHAVIOR_PARAMETERVALUEPARAMETERVALUEIMPL_HPP */

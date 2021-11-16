@@ -220,14 +220,6 @@ ActivityEdgeImpl& ActivityEdgeImpl::operator=(const ActivityEdgeImpl & obj)
 	return *this;
 }
 
-std::shared_ptr<ecore::EObject> ActivityEdgeImpl::copy() const
-{
-	std::shared_ptr<ActivityEdgeImpl> element(new ActivityEdgeImpl());
-	*element =(*this);
-	element->setThisActivityEdgePtr(element);
-	return element;
-}
-
 //*********************************
 // Operations
 //*********************************
@@ -996,11 +988,11 @@ Any ActivityEdgeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::
 }
 
 
-std::shared_ptr<ActivityEdge> ActivityEdgeImpl::getThisActivityEdgePtr() const
+std::shared_ptr<uml::ActivityEdge> ActivityEdgeImpl::getThisActivityEdgePtr() const
 {
 	return m_thisActivityEdgePtr.lock();
 }
-void ActivityEdgeImpl::setThisActivityEdgePtr(std::weak_ptr<ActivityEdge> thisActivityEdgePtr)
+void ActivityEdgeImpl::setThisActivityEdgePtr(std::weak_ptr<uml::ActivityEdge> thisActivityEdgePtr)
 {
 	m_thisActivityEdgePtr = thisActivityEdgePtr;
 	setThisRedefinableElementPtr(thisActivityEdgePtr);

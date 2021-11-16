@@ -516,11 +516,11 @@ Any DurationObservationImpl::eInvoke(int operationID, std::shared_ptr<std::list 
 }
 
 
-std::shared_ptr<DurationObservation> DurationObservationImpl::getThisDurationObservationPtr() const
+std::shared_ptr<uml::DurationObservation> DurationObservationImpl::getThisDurationObservationPtr() const
 {
 	return m_thisDurationObservationPtr.lock();
 }
-void DurationObservationImpl::setThisDurationObservationPtr(std::weak_ptr<DurationObservation> thisDurationObservationPtr)
+void DurationObservationImpl::setThisDurationObservationPtr(std::weak_ptr<uml::DurationObservation> thisDurationObservationPtr)
 {
 	m_thisDurationObservationPtr = thisDurationObservationPtr;
 	setThisObservationPtr(thisDurationObservationPtr);

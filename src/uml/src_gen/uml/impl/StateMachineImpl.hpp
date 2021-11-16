@@ -31,8 +31,8 @@ namespace uml
 		protected:
 			friend class umlFactoryImpl;
 			StateMachineImpl();
-			virtual std::shared_ptr<StateMachine> getThisStateMachinePtr() const;
-			virtual void setThisStateMachinePtr(std::weak_ptr<StateMachine> thisStateMachinePtr);
+			virtual std::shared_ptr<uml::StateMachine> getThisStateMachinePtr() const;
+			virtual void setThisStateMachinePtr(std::weak_ptr<uml::StateMachine> thisStateMachinePtr);
 
 			//Additional constructors for the containments back reference
 			StateMachineImpl(std::weak_ptr<uml::BehavioredClassifier> par_behavioredClassifier);
@@ -254,7 +254,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<StateMachine> m_thisStateMachinePtr;
+			std::weak_ptr<uml::StateMachine> m_thisStateMachinePtr;
 	};
 }
 #endif /* end of include guard: UML_STATEMACHINESTATEMACHINEIMPL_HPP */

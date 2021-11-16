@@ -443,11 +443,11 @@ Any LiteralIntegerImpl::eInvoke(int operationID, std::shared_ptr<std::list < std
 }
 
 
-std::shared_ptr<LiteralInteger> LiteralIntegerImpl::getThisLiteralIntegerPtr() const
+std::shared_ptr<uml::LiteralInteger> LiteralIntegerImpl::getThisLiteralIntegerPtr() const
 {
 	return m_thisLiteralIntegerPtr.lock();
 }
-void LiteralIntegerImpl::setThisLiteralIntegerPtr(std::weak_ptr<LiteralInteger> thisLiteralIntegerPtr)
+void LiteralIntegerImpl::setThisLiteralIntegerPtr(std::weak_ptr<uml::LiteralInteger> thisLiteralIntegerPtr)
 {
 	m_thisLiteralIntegerPtr = thisLiteralIntegerPtr;
 	setThisLiteralSpecificationPtr(thisLiteralIntegerPtr);

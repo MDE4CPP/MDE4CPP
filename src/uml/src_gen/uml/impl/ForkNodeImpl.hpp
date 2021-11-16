@@ -31,8 +31,8 @@ namespace uml
 		protected:
 			friend class umlFactoryImpl;
 			ForkNodeImpl();
-			virtual std::shared_ptr<ForkNode> getThisForkNodePtr() const;
-			virtual void setThisForkNodePtr(std::weak_ptr<ForkNode> thisForkNodePtr);
+			virtual std::shared_ptr<uml::ForkNode> getThisForkNodePtr() const;
+			virtual void setThisForkNodePtr(std::weak_ptr<uml::ForkNode> thisForkNodePtr);
 
 			//Additional constructors for the containments back reference
 			ForkNodeImpl(std::weak_ptr<uml::Activity> par_activity);
@@ -131,7 +131,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<ForkNode> m_thisForkNodePtr;
+			std::weak_ptr<uml::ForkNode> m_thisForkNodePtr;
 	};
 }
 #endif /* end of include guard: UML_FORKNODEFORKNODEIMPL_HPP */

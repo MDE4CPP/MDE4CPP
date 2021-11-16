@@ -32,11 +32,11 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Values/ValuesFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
+#include "fUML/Semantics/Values/ValuesFactory.hpp"
 #include "uml/umlFactory.hpp"
-#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
+#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
 
 #include "ocl/Evaluations/EvalEnvironment.hpp"
@@ -332,11 +332,11 @@ Any AssociationEndCallExpEvalImpl::eInvoke(int operationID, std::shared_ptr<std:
 }
 
 
-std::shared_ptr<AssociationEndCallExpEval> AssociationEndCallExpEvalImpl::getThisAssociationEndCallExpEvalPtr() const
+std::shared_ptr<ocl::Evaluations::AssociationEndCallExpEval> AssociationEndCallExpEvalImpl::getThisAssociationEndCallExpEvalPtr() const
 {
 	return m_thisAssociationEndCallExpEvalPtr.lock();
 }
-void AssociationEndCallExpEvalImpl::setThisAssociationEndCallExpEvalPtr(std::weak_ptr<AssociationEndCallExpEval> thisAssociationEndCallExpEvalPtr)
+void AssociationEndCallExpEvalImpl::setThisAssociationEndCallExpEvalPtr(std::weak_ptr<ocl::Evaluations::AssociationEndCallExpEval> thisAssociationEndCallExpEvalPtr)
 {
 	m_thisAssociationEndCallExpEvalPtr = thisAssociationEndCallExpEvalPtr;
 	setThisNavigationCallExpEvalPtr(thisAssociationEndCallExpEvalPtr);

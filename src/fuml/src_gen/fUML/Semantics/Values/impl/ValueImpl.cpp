@@ -102,14 +102,6 @@ ValueImpl& ValueImpl::operator=(const ValueImpl & obj)
 	return *this;
 }
 
-std::shared_ptr<ecore::EObject> ValueImpl::copy() const
-{
-	std::shared_ptr<ValueImpl> element(new ValueImpl());
-	*element =(*this);
-	element->setThisValuePtr(element);
-	return element;
-}
-
 //*********************************
 // Operations
 //*********************************
@@ -121,8 +113,7 @@ std::shared_ptr<fUML::Semantics::Values::Value> ValueImpl::_copy()
 // By default, this operation simply creates a new value with empty properties.
 // It must be overridden in each Value subclass to do the superclass copy and then appropriately set properties defined in the subclass.
 
-std::shared_ptr<fUML::Semantics::Values::Value> newValue(new fUML::Semantics::Values::ValueImpl());
-return newValue;
+return this->new_();
 	//end of body
 }
 
@@ -190,6 +181,12 @@ bool ValueImpl::hasTypes(std::shared_ptr<uml::Classifier> type)
 
     return found;
 	//end of body
+}
+
+std::shared_ptr<fUML::Semantics::Values::Value> ValueImpl::new_()
+{
+	std::cout << __PRETTY_FUNCTION__  << std::endl;
+	throw "UnsupportedOperationException";
 }
 
 std::string ValueImpl::objectId()
@@ -391,6 +388,13 @@ Any ValueImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_
 			break;
 		}
 		
+		// 374650370
+		case ValuesPackage::VALUE_OPERATION_NEW_:
+		{
+			result = eAny(this->new_());
+			break;
+		}
+		
 		// 520851197
 		case ValuesPackage::VALUE_OPERATION_OBJECTID:
 		{
@@ -426,11 +430,11 @@ Any ValueImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_
 }
 
 
-std::shared_ptr<Value> ValueImpl::getThisValuePtr() const
+std::shared_ptr<fUML::Semantics::Values::Value> ValueImpl::getThisValuePtr() const
 {
 	return m_thisValuePtr.lock();
 }
-void ValueImpl::setThisValuePtr(std::weak_ptr<Value> thisValuePtr)
+void ValueImpl::setThisValuePtr(std::weak_ptr<fUML::Semantics::Values::Value> thisValuePtr)
 {
 	m_thisValuePtr = thisValuePtr;
 	setThisSemanticVisitorPtr(thisValuePtr);

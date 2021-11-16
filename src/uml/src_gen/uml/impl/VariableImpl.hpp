@@ -32,8 +32,8 @@ namespace uml
 		protected:
 			friend class umlFactoryImpl;
 			VariableImpl();
-			virtual std::shared_ptr<Variable> getThisVariablePtr() const;
-			virtual void setThisVariablePtr(std::weak_ptr<Variable> thisVariablePtr);
+			virtual std::shared_ptr<uml::Variable> getThisVariablePtr() const;
+			virtual void setThisVariablePtr(std::weak_ptr<uml::Variable> thisVariablePtr);
 
 			//Additional constructors for the containments back reference
 			VariableImpl(std::weak_ptr<uml::Activity> par_activityScope);
@@ -149,7 +149,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<Variable> m_thisVariablePtr;
+			std::weak_ptr<uml::Variable> m_thisVariablePtr;
 	};
 }
 #endif /* end of include guard: UML_VARIABLEVARIABLEIMPL_HPP */

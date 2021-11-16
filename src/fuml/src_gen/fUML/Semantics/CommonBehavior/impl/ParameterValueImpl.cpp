@@ -34,8 +34,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Values/ValuesFactory.hpp"
+#include "uml/umlFactory.hpp"
 
 #include "uml/Parameter.hpp"
 #include "fUML/Semantics/CommonBehavior/ParameterValue.hpp"
@@ -453,11 +453,11 @@ Any ParameterValueImpl::eInvoke(int operationID, std::shared_ptr<std::list < std
 }
 
 
-std::shared_ptr<ParameterValue> ParameterValueImpl::getThisParameterValuePtr() const
+std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> ParameterValueImpl::getThisParameterValuePtr() const
 {
 	return m_thisParameterValuePtr.lock();
 }
-void ParameterValueImpl::setThisParameterValuePtr(std::weak_ptr<ParameterValue> thisParameterValuePtr)
+void ParameterValueImpl::setThisParameterValuePtr(std::weak_ptr<fUML::Semantics::CommonBehavior::ParameterValue> thisParameterValuePtr)
 {
 	m_thisParameterValuePtr = thisParameterValuePtr;
 }

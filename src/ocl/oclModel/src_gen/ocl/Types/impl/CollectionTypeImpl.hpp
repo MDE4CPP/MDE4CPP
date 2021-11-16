@@ -32,8 +32,8 @@ namespace ocl::Types
 		protected:
 			friend class ocl::Types::TypesFactoryImpl;
 			CollectionTypeImpl();
-			virtual std::shared_ptr<CollectionType> getThisCollectionTypePtr() const;
-			virtual void setThisCollectionTypePtr(std::weak_ptr<CollectionType> thisCollectionTypePtr);
+			virtual std::shared_ptr<ocl::Types::CollectionType> getThisCollectionTypePtr() const;
+			virtual void setThisCollectionTypePtr(std::weak_ptr<ocl::Types::CollectionType> thisCollectionTypePtr);
 
 			//Additional constructors for the containments back reference
 			CollectionTypeImpl(std::weak_ptr<ecore::EPackage> par_ePackage);
@@ -94,7 +94,7 @@ namespace ocl::Types
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<CollectionType> m_thisCollectionTypePtr;
+			std::weak_ptr<ocl::Types::CollectionType> m_thisCollectionTypePtr;
 	};
 }
 #endif /* end of include guard: OCL_TYPES_COLLECTIONTYPECOLLECTIONTYPEIMPL_HPP */

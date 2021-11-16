@@ -525,11 +525,11 @@ Any BroadcastSignalActionImpl::eInvoke(int operationID, std::shared_ptr<std::lis
 }
 
 
-std::shared_ptr<BroadcastSignalAction> BroadcastSignalActionImpl::getThisBroadcastSignalActionPtr() const
+std::shared_ptr<uml::BroadcastSignalAction> BroadcastSignalActionImpl::getThisBroadcastSignalActionPtr() const
 {
 	return m_thisBroadcastSignalActionPtr.lock();
 }
-void BroadcastSignalActionImpl::setThisBroadcastSignalActionPtr(std::weak_ptr<BroadcastSignalAction> thisBroadcastSignalActionPtr)
+void BroadcastSignalActionImpl::setThisBroadcastSignalActionPtr(std::weak_ptr<uml::BroadcastSignalAction> thisBroadcastSignalActionPtr)
 {
 	m_thisBroadcastSignalActionPtr = thisBroadcastSignalActionPtr;
 	setThisInvocationActionPtr(thisBroadcastSignalActionPtr);

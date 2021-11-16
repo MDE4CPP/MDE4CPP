@@ -31,8 +31,8 @@ namespace uml
 		protected:
 			friend class umlFactoryImpl;
 			TimeConstraintImpl();
-			virtual std::shared_ptr<TimeConstraint> getThisTimeConstraintPtr() const;
-			virtual void setThisTimeConstraintPtr(std::weak_ptr<TimeConstraint> thisTimeConstraintPtr);
+			virtual std::shared_ptr<uml::TimeConstraint> getThisTimeConstraintPtr() const;
+			virtual void setThisTimeConstraintPtr(std::weak_ptr<uml::TimeConstraint> thisTimeConstraintPtr);
 
 			//Additional constructors for the containments back reference
 			TimeConstraintImpl(std::weak_ptr<uml::Namespace> par_Namespace, const int reference_id);
@@ -132,7 +132,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<TimeConstraint> m_thisTimeConstraintPtr;
+			std::weak_ptr<uml::TimeConstraint> m_thisTimeConstraintPtr;
 	};
 }
 #endif /* end of include guard: UML_TIMECONSTRAINTTIMECONSTRAINTIMPL_HPP */

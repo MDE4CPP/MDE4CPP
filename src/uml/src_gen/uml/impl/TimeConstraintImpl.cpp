@@ -426,11 +426,11 @@ Any TimeConstraintImpl::eInvoke(int operationID, std::shared_ptr<std::list < std
 }
 
 
-std::shared_ptr<TimeConstraint> TimeConstraintImpl::getThisTimeConstraintPtr() const
+std::shared_ptr<uml::TimeConstraint> TimeConstraintImpl::getThisTimeConstraintPtr() const
 {
 	return m_thisTimeConstraintPtr.lock();
 }
-void TimeConstraintImpl::setThisTimeConstraintPtr(std::weak_ptr<TimeConstraint> thisTimeConstraintPtr)
+void TimeConstraintImpl::setThisTimeConstraintPtr(std::weak_ptr<uml::TimeConstraint> thisTimeConstraintPtr)
 {
 	m_thisTimeConstraintPtr = thisTimeConstraintPtr;
 	setThisIntervalConstraintPtr(thisTimeConstraintPtr);

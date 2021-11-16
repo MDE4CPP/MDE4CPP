@@ -343,11 +343,11 @@ Any ForkNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list <
 }
 
 
-std::shared_ptr<ForkNodeActivation> ForkNodeActivationImpl::getThisForkNodeActivationPtr() const
+std::shared_ptr<fUML::Semantics::Activities::ForkNodeActivation> ForkNodeActivationImpl::getThisForkNodeActivationPtr() const
 {
 	return m_thisForkNodeActivationPtr.lock();
 }
-void ForkNodeActivationImpl::setThisForkNodeActivationPtr(std::weak_ptr<ForkNodeActivation> thisForkNodeActivationPtr)
+void ForkNodeActivationImpl::setThisForkNodeActivationPtr(std::weak_ptr<fUML::Semantics::Activities::ForkNodeActivation> thisForkNodeActivationPtr)
 {
 	m_thisForkNodeActivationPtr = thisForkNodeActivationPtr;
 	setThisControlNodeActivationPtr(thisForkNodeActivationPtr);

@@ -25,21 +25,21 @@ namespace uml
 	{
 		public: 
 			ElementImpl(const ElementImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 			ElementImpl& operator=(ElementImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;
 			ElementImpl();
-			virtual std::shared_ptr<Element> getThisElementPtr() const;
-			virtual void setThisElementPtr(std::weak_ptr<Element> thisElementPtr);
+			virtual std::shared_ptr<uml::Element> getThisElementPtr() const;
+			virtual void setThisElementPtr(std::weak_ptr<uml::Element> thisElementPtr);
 
 			//Additional constructors for the containments back reference
 			ElementImpl(std::weak_ptr<uml::Element> par_owner);
 
 		public:
 			//destructor
-			virtual ~ElementImpl();
+			virtual ~ElementImpl() = 0;
 			
 			//*********************************
 			// Operations
@@ -308,7 +308,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<Element> m_thisElementPtr;
+			std::weak_ptr<uml::Element> m_thisElementPtr;
 	};
 }
 #endif /* end of include guard: UML_ELEMENTELEMENTIMPL_HPP */

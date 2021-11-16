@@ -262,11 +262,11 @@ Any VoidTypeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shar
 }
 
 
-std::shared_ptr<VoidType> VoidTypeImpl::getThisVoidTypePtr() const
+std::shared_ptr<ocl::Types::VoidType> VoidTypeImpl::getThisVoidTypePtr() const
 {
 	return m_thisVoidTypePtr.lock();
 }
-void VoidTypeImpl::setThisVoidTypePtr(std::weak_ptr<VoidType> thisVoidTypePtr)
+void VoidTypeImpl::setThisVoidTypePtr(std::weak_ptr<ocl::Types::VoidType> thisVoidTypePtr)
 {
 	m_thisVoidTypePtr = thisVoidTypePtr;
 	setThisEClassifierPtr(thisVoidTypePtr);

@@ -31,8 +31,8 @@ namespace uml
 		protected:
 			friend class umlFactoryImpl;
 			TemplateParameterImpl();
-			virtual std::shared_ptr<TemplateParameter> getThisTemplateParameterPtr() const;
-			virtual void setThisTemplateParameterPtr(std::weak_ptr<TemplateParameter> thisTemplateParameterPtr);
+			virtual std::shared_ptr<uml::TemplateParameter> getThisTemplateParameterPtr() const;
+			virtual void setThisTemplateParameterPtr(std::weak_ptr<uml::TemplateParameter> thisTemplateParameterPtr);
 
 			//Additional constructors for the containments back reference
 			TemplateParameterImpl(std::weak_ptr<uml::Element> par_owner);
@@ -170,7 +170,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<TemplateParameter> m_thisTemplateParameterPtr;
+			std::weak_ptr<uml::TemplateParameter> m_thisTemplateParameterPtr;
 	};
 }
 #endif /* end of include guard: UML_TEMPLATEPARAMETERTEMPLATEPARAMETERIMPL_HPP */

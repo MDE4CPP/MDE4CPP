@@ -338,11 +338,11 @@ Any NameTypeBindingImpl::eInvoke(int operationID, std::shared_ptr<std::list < st
 }
 
 
-std::shared_ptr<NameTypeBinding> NameTypeBindingImpl::getThisNameTypeBindingPtr() const
+std::shared_ptr<ocl::Types::NameTypeBinding> NameTypeBindingImpl::getThisNameTypeBindingPtr() const
 {
 	return m_thisNameTypeBindingPtr.lock();
 }
-void NameTypeBindingImpl::setThisNameTypeBindingPtr(std::weak_ptr<NameTypeBinding> thisNameTypeBindingPtr)
+void NameTypeBindingImpl::setThisNameTypeBindingPtr(std::weak_ptr<ocl::Types::NameTypeBinding> thisNameTypeBindingPtr)
 {
 	m_thisNameTypeBindingPtr = thisNameTypeBindingPtr;
 }

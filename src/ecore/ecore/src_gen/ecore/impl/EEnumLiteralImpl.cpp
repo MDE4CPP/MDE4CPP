@@ -407,11 +407,11 @@ Any EEnumLiteralImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::
 }
 
 
-std::shared_ptr<EEnumLiteral> EEnumLiteralImpl::getThisEEnumLiteralPtr() const
+std::shared_ptr<ecore::EEnumLiteral> EEnumLiteralImpl::getThisEEnumLiteralPtr() const
 {
 	return m_thisEEnumLiteralPtr.lock();
 }
-void EEnumLiteralImpl::setThisEEnumLiteralPtr(std::weak_ptr<EEnumLiteral> thisEEnumLiteralPtr)
+void EEnumLiteralImpl::setThisEEnumLiteralPtr(std::weak_ptr<ecore::EEnumLiteral> thisEEnumLiteralPtr)
 {
 	m_thisEEnumLiteralPtr = thisEEnumLiteralPtr;
 	setThisENamedElementPtr(thisEEnumLiteralPtr);

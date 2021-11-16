@@ -121,14 +121,6 @@ MultiplicityElementImpl& MultiplicityElementImpl::operator=(const MultiplicityEl
 	return *this;
 }
 
-std::shared_ptr<ecore::EObject> MultiplicityElementImpl::copy() const
-{
-	std::shared_ptr<MultiplicityElementImpl> element(new MultiplicityElementImpl());
-	*element =(*this);
-	element->setThisMultiplicityElementPtr(element);
-	return element;
-}
-
 //*********************************
 // Operations
 //*********************************
@@ -752,11 +744,11 @@ Any MultiplicityElementImpl::eInvoke(int operationID, std::shared_ptr<std::list 
 }
 
 
-std::shared_ptr<MultiplicityElement> MultiplicityElementImpl::getThisMultiplicityElementPtr() const
+std::shared_ptr<uml::MultiplicityElement> MultiplicityElementImpl::getThisMultiplicityElementPtr() const
 {
 	return m_thisMultiplicityElementPtr.lock();
 }
-void MultiplicityElementImpl::setThisMultiplicityElementPtr(std::weak_ptr<MultiplicityElement> thisMultiplicityElementPtr)
+void MultiplicityElementImpl::setThisMultiplicityElementPtr(std::weak_ptr<uml::MultiplicityElement> thisMultiplicityElementPtr)
 {
 	m_thisMultiplicityElementPtr = thisMultiplicityElementPtr;
 	setThisElementPtr(thisMultiplicityElementPtr);

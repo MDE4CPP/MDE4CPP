@@ -347,11 +347,11 @@ Any JoinNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list <
 }
 
 
-std::shared_ptr<JoinNodeActivation> JoinNodeActivationImpl::getThisJoinNodeActivationPtr() const
+std::shared_ptr<fUML::Semantics::Activities::JoinNodeActivation> JoinNodeActivationImpl::getThisJoinNodeActivationPtr() const
 {
 	return m_thisJoinNodeActivationPtr.lock();
 }
-void JoinNodeActivationImpl::setThisJoinNodeActivationPtr(std::weak_ptr<JoinNodeActivation> thisJoinNodeActivationPtr)
+void JoinNodeActivationImpl::setThisJoinNodeActivationPtr(std::weak_ptr<fUML::Semantics::Activities::JoinNodeActivation> thisJoinNodeActivationPtr)
 {
 	m_thisJoinNodeActivationPtr = thisJoinNodeActivationPtr;
 	setThisControlNodeActivationPtr(thisJoinNodeActivationPtr);

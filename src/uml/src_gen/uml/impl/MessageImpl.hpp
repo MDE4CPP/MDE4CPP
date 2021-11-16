@@ -31,8 +31,8 @@ namespace uml
 		protected:
 			friend class umlFactoryImpl;
 			MessageImpl();
-			virtual std::shared_ptr<Message> getThisMessagePtr() const;
-			virtual void setThisMessagePtr(std::weak_ptr<Message> thisMessagePtr);
+			virtual std::shared_ptr<uml::Message> getThisMessagePtr() const;
+			virtual void setThisMessagePtr(std::weak_ptr<uml::Message> thisMessagePtr);
 
 			//Additional constructors for the containments back reference
 			MessageImpl(std::weak_ptr<uml::Interaction> par_interaction);
@@ -287,7 +287,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<Message> m_thisMessagePtr;
+			std::weak_ptr<uml::Message> m_thisMessagePtr;
 	};
 }
 #endif /* end of include guard: UML_MESSAGEMESSAGEIMPL_HPP */

@@ -34,8 +34,8 @@
 #include "fUML/Semantics/Values/ValuesFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
 #include "uml/umlFactory.hpp"
-#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
+#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
 
 #include "ocl/Evaluations/EvalEnvironment.hpp"
@@ -329,11 +329,11 @@ Any AttributeCallExpEvalImpl::eInvoke(int operationID, std::shared_ptr<std::list
 }
 
 
-std::shared_ptr<AttributeCallExpEval> AttributeCallExpEvalImpl::getThisAttributeCallExpEvalPtr() const
+std::shared_ptr<ocl::Evaluations::AttributeCallExpEval> AttributeCallExpEvalImpl::getThisAttributeCallExpEvalPtr() const
 {
 	return m_thisAttributeCallExpEvalPtr.lock();
 }
-void AttributeCallExpEvalImpl::setThisAttributeCallExpEvalPtr(std::weak_ptr<AttributeCallExpEval> thisAttributeCallExpEvalPtr)
+void AttributeCallExpEvalImpl::setThisAttributeCallExpEvalPtr(std::weak_ptr<ocl::Evaluations::AttributeCallExpEval> thisAttributeCallExpEvalPtr)
 {
 	m_thisAttributeCallExpEvalPtr = thisAttributeCallExpEvalPtr;
 	setThisModelPropertyCallExpEvalPtr(thisAttributeCallExpEvalPtr);

@@ -405,11 +405,11 @@ Any CommentImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::share
 }
 
 
-std::shared_ptr<Comment> CommentImpl::getThisCommentPtr() const
+std::shared_ptr<uml::Comment> CommentImpl::getThisCommentPtr() const
 {
 	return m_thisCommentPtr.lock();
 }
-void CommentImpl::setThisCommentPtr(std::weak_ptr<Comment> thisCommentPtr)
+void CommentImpl::setThisCommentPtr(std::weak_ptr<uml::Comment> thisCommentPtr)
 {
 	m_thisCommentPtr = thisCommentPtr;
 	setThisElementPtr(thisCommentPtr);

@@ -144,14 +144,6 @@ WriteLinkActionImpl& WriteLinkActionImpl::operator=(const WriteLinkActionImpl & 
 	return *this;
 }
 
-std::shared_ptr<ecore::EObject> WriteLinkActionImpl::copy() const
-{
-	std::shared_ptr<WriteLinkActionImpl> element(new WriteLinkActionImpl());
-	*element =(*this);
-	element->setThisWriteLinkActionPtr(element);
-	return element;
-}
-
 //*********************************
 // Operations
 //*********************************
@@ -417,11 +409,11 @@ Any WriteLinkActionImpl::eInvoke(int operationID, std::shared_ptr<std::list < st
 }
 
 
-std::shared_ptr<WriteLinkAction> WriteLinkActionImpl::getThisWriteLinkActionPtr() const
+std::shared_ptr<uml::WriteLinkAction> WriteLinkActionImpl::getThisWriteLinkActionPtr() const
 {
 	return m_thisWriteLinkActionPtr.lock();
 }
-void WriteLinkActionImpl::setThisWriteLinkActionPtr(std::weak_ptr<WriteLinkAction> thisWriteLinkActionPtr)
+void WriteLinkActionImpl::setThisWriteLinkActionPtr(std::weak_ptr<uml::WriteLinkAction> thisWriteLinkActionPtr)
 {
 	m_thisWriteLinkActionPtr = thisWriteLinkActionPtr;
 	setThisLinkActionPtr(thisWriteLinkActionPtr);

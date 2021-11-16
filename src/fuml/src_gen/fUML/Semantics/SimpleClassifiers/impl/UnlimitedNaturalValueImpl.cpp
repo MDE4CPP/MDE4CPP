@@ -151,6 +151,15 @@ bool UnlimitedNaturalValueImpl::equals(std::shared_ptr<fUML::Semantics::Values::
 	//end of body
 }
 
+std::shared_ptr<fUML::Semantics::Values::Value> UnlimitedNaturalValueImpl::new_()
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	// Return a new unlimited natural value with no value.
+return fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createUnlimitedNaturalValue();
+	//end of body
+}
+
 std::shared_ptr<uml::ValueSpecification> UnlimitedNaturalValueImpl::specify()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
@@ -372,6 +381,13 @@ Any UnlimitedNaturalValueImpl::eInvoke(int operationID, std::shared_ptr<std::lis
 			break;
 		}
 		
+		// 1924598092
+		case SimpleClassifiersPackage::UNLIMITEDNATURALVALUE_OPERATION_NEW_:
+		{
+			result = eAny(this->new_());
+			break;
+		}
+		
 		// 519448828
 		case SimpleClassifiersPackage::UNLIMITEDNATURALVALUE_OPERATION_SPECIFY:
 		{
@@ -400,11 +416,11 @@ Any UnlimitedNaturalValueImpl::eInvoke(int operationID, std::shared_ptr<std::lis
 }
 
 
-std::shared_ptr<UnlimitedNaturalValue> UnlimitedNaturalValueImpl::getThisUnlimitedNaturalValuePtr() const
+std::shared_ptr<fUML::Semantics::SimpleClassifiers::UnlimitedNaturalValue> UnlimitedNaturalValueImpl::getThisUnlimitedNaturalValuePtr() const
 {
 	return m_thisUnlimitedNaturalValuePtr.lock();
 }
-void UnlimitedNaturalValueImpl::setThisUnlimitedNaturalValuePtr(std::weak_ptr<UnlimitedNaturalValue> thisUnlimitedNaturalValuePtr)
+void UnlimitedNaturalValueImpl::setThisUnlimitedNaturalValuePtr(std::weak_ptr<fUML::Semantics::SimpleClassifiers::UnlimitedNaturalValue> thisUnlimitedNaturalValuePtr)
 {
 	m_thisUnlimitedNaturalValuePtr = thisUnlimitedNaturalValuePtr;
 	setThisPrimitiveValuePtr(thisUnlimitedNaturalValuePtr);

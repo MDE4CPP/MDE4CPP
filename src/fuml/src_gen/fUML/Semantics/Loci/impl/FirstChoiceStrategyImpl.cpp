@@ -264,11 +264,11 @@ Any FirstChoiceStrategyImpl::eInvoke(int operationID, std::shared_ptr<std::list 
 }
 
 
-std::shared_ptr<FirstChoiceStrategy> FirstChoiceStrategyImpl::getThisFirstChoiceStrategyPtr() const
+std::shared_ptr<fUML::Semantics::Loci::FirstChoiceStrategy> FirstChoiceStrategyImpl::getThisFirstChoiceStrategyPtr() const
 {
 	return m_thisFirstChoiceStrategyPtr.lock();
 }
-void FirstChoiceStrategyImpl::setThisFirstChoiceStrategyPtr(std::weak_ptr<FirstChoiceStrategy> thisFirstChoiceStrategyPtr)
+void FirstChoiceStrategyImpl::setThisFirstChoiceStrategyPtr(std::weak_ptr<fUML::Semantics::Loci::FirstChoiceStrategy> thisFirstChoiceStrategyPtr)
 {
 	m_thisFirstChoiceStrategyPtr = thisFirstChoiceStrategyPtr;
 	setThisChoiceStrategyPtr(thisFirstChoiceStrategyPtr);

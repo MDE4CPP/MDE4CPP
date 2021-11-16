@@ -120,7 +120,7 @@ namespace ocl::Expressions
 			//*********************************
 			// Attribute Members
 			//*********************************
-			ocl::Expressions::CollectionKind m_kind= CollectionKind::COLLECTION;
+			ocl::Expressions::CollectionKind m_kind= ocl::Expressions::CollectionKind::COLLECTION;
 			
 			//*********************************
 			// Reference Members

@@ -31,8 +31,8 @@ namespace uml
 		protected:
 			friend class umlFactoryImpl;
 			LiteralRealImpl();
-			virtual std::shared_ptr<LiteralReal> getThisLiteralRealPtr() const;
-			virtual void setThisLiteralRealPtr(std::weak_ptr<LiteralReal> thisLiteralRealPtr);
+			virtual std::shared_ptr<uml::LiteralReal> getThisLiteralRealPtr() const;
+			virtual void setThisLiteralRealPtr(std::weak_ptr<uml::LiteralReal> thisLiteralRealPtr);
 
 			//Additional constructors for the containments back reference
 			LiteralRealImpl(std::weak_ptr<uml::Namespace> par_namespace);
@@ -143,7 +143,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<LiteralReal> m_thisLiteralRealPtr;
+			std::weak_ptr<uml::LiteralReal> m_thisLiteralRealPtr;
 	};
 }
 #endif /* end of include guard: UML_LITERALREALLITERALREALIMPL_HPP */

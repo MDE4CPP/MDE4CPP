@@ -32,8 +32,8 @@ namespace fUML::Semantics::Actions
 		protected:
 			friend class fUML::Semantics::Actions::ActionsFactoryImpl;
 			StartObjectBehaviorActionActivationImpl();
-			virtual std::shared_ptr<StartObjectBehaviorActionActivation> getThisStartObjectBehaviorActionActivationPtr() const;
-			virtual void setThisStartObjectBehaviorActionActivationPtr(std::weak_ptr<StartObjectBehaviorActionActivation> thisStartObjectBehaviorActionActivationPtr);
+			virtual std::shared_ptr<fUML::Semantics::Actions::StartObjectBehaviorActionActivation> getThisStartObjectBehaviorActionActivationPtr() const;
+			virtual void setThisStartObjectBehaviorActionActivationPtr(std::weak_ptr<fUML::Semantics::Actions::StartObjectBehaviorActionActivation> thisStartObjectBehaviorActionActivationPtr);
 
 			//Additional constructors for the containments back reference
 			StartObjectBehaviorActionActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_group);
@@ -91,7 +91,7 @@ namespace fUML::Semantics::Actions
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<StartObjectBehaviorActionActivation> m_thisStartObjectBehaviorActionActivationPtr;
+			std::weak_ptr<fUML::Semantics::Actions::StartObjectBehaviorActionActivation> m_thisStartObjectBehaviorActionActivationPtr;
 	};
 }
 #endif /* end of include guard: FUML_SEMANTICS_ACTIONS_STARTOBJECTBEHAVIORACTIONACTIVATIONSTARTOBJECTBEHAVIORACTIONACTIVATIONIMPL_HPP */

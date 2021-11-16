@@ -32,8 +32,8 @@ namespace PSCS::Semantics::Loci
 		protected:
 			friend class PSCS::Semantics::Loci::LociFactoryImpl;
 			CS_ExecutorImpl();
-			virtual std::shared_ptr<CS_Executor> getThisCS_ExecutorPtr() const;
-			virtual void setThisCS_ExecutorPtr(std::weak_ptr<CS_Executor> thisCS_ExecutorPtr);
+			virtual std::shared_ptr<PSCS::Semantics::Loci::CS_Executor> getThisCS_ExecutorPtr() const;
+			virtual void setThisCS_ExecutorPtr(std::weak_ptr<PSCS::Semantics::Loci::CS_Executor> thisCS_ExecutorPtr);
 
 			//Additional constructors for the containments back reference
 			CS_ExecutorImpl(std::weak_ptr<fUML::Semantics::Loci::Locus> par_locus);
@@ -90,7 +90,7 @@ namespace PSCS::Semantics::Loci
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<CS_Executor> m_thisCS_ExecutorPtr;
+			std::weak_ptr<PSCS::Semantics::Loci::CS_Executor> m_thisCS_ExecutorPtr;
 	};
 }
 #endif /* end of include guard: PSCS_SEMANTICS_LOCI_CS_EXECUTORCS_EXECUTORIMPL_HPP */

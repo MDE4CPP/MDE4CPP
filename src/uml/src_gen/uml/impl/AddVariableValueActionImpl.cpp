@@ -549,11 +549,11 @@ Any AddVariableValueActionImpl::eInvoke(int operationID, std::shared_ptr<std::li
 }
 
 
-std::shared_ptr<AddVariableValueAction> AddVariableValueActionImpl::getThisAddVariableValueActionPtr() const
+std::shared_ptr<uml::AddVariableValueAction> AddVariableValueActionImpl::getThisAddVariableValueActionPtr() const
 {
 	return m_thisAddVariableValueActionPtr.lock();
 }
-void AddVariableValueActionImpl::setThisAddVariableValueActionPtr(std::weak_ptr<AddVariableValueAction> thisAddVariableValueActionPtr)
+void AddVariableValueActionImpl::setThisAddVariableValueActionPtr(std::weak_ptr<uml::AddVariableValueAction> thisAddVariableValueActionPtr)
 {
 	m_thisAddVariableValueActionPtr = thisAddVariableValueActionPtr;
 	setThisWriteVariableActionPtr(thisAddVariableValueActionPtr);

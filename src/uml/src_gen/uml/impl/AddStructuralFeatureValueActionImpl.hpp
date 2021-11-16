@@ -31,8 +31,8 @@ namespace uml
 		protected:
 			friend class umlFactoryImpl;
 			AddStructuralFeatureValueActionImpl();
-			virtual std::shared_ptr<AddStructuralFeatureValueAction> getThisAddStructuralFeatureValueActionPtr() const;
-			virtual void setThisAddStructuralFeatureValueActionPtr(std::weak_ptr<AddStructuralFeatureValueAction> thisAddStructuralFeatureValueActionPtr);
+			virtual std::shared_ptr<uml::AddStructuralFeatureValueAction> getThisAddStructuralFeatureValueActionPtr() const;
+			virtual void setThisAddStructuralFeatureValueActionPtr(std::weak_ptr<uml::AddStructuralFeatureValueAction> thisAddStructuralFeatureValueActionPtr);
 
 			//Additional constructors for the containments back reference
 			AddStructuralFeatureValueActionImpl(std::weak_ptr<uml::Activity> par_activity);
@@ -171,7 +171,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<AddStructuralFeatureValueAction> m_thisAddStructuralFeatureValueActionPtr;
+			std::weak_ptr<uml::AddStructuralFeatureValueAction> m_thisAddStructuralFeatureValueActionPtr;
 	};
 }
 #endif /* end of include guard: UML_ADDSTRUCTURALFEATUREVALUEACTIONADDSTRUCTURALFEATUREVALUEACTIONIMPL_HPP */

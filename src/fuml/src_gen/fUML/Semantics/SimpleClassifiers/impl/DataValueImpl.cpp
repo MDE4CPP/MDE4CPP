@@ -148,7 +148,8 @@ std::shared_ptr<fUML::Semantics::Values::Value> DataValueImpl::new_()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	return std::shared_ptr<fUML::Semantics::Values::Value>(fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createDataValue());
+	// Create a new data value with no type or feature values.
+return std::shared_ptr<fUML::Semantics::Values::Value>(fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createDataValue());
 	//end of body
 }
 
@@ -376,11 +377,11 @@ Any DataValueImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sha
 }
 
 
-std::shared_ptr<DataValue> DataValueImpl::getThisDataValuePtr() const
+std::shared_ptr<fUML::Semantics::SimpleClassifiers::DataValue> DataValueImpl::getThisDataValuePtr() const
 {
 	return m_thisDataValuePtr.lock();
 }
-void DataValueImpl::setThisDataValuePtr(std::weak_ptr<DataValue> thisDataValuePtr)
+void DataValueImpl::setThisDataValuePtr(std::weak_ptr<fUML::Semantics::SimpleClassifiers::DataValue> thisDataValuePtr)
 {
 	m_thisDataValuePtr = thisDataValuePtr;
 	setThisCompoundValuePtr(thisDataValuePtr);

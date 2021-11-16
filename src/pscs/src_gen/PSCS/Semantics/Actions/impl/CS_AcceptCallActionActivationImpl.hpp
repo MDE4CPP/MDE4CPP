@@ -32,8 +32,8 @@ namespace PSCS::Semantics::Actions
 		protected:
 			friend class PSCS::Semantics::Actions::ActionsFactoryImpl;
 			CS_AcceptCallActionActivationImpl();
-			virtual std::shared_ptr<CS_AcceptCallActionActivation> getThisCS_AcceptCallActionActivationPtr() const;
-			virtual void setThisCS_AcceptCallActionActivationPtr(std::weak_ptr<CS_AcceptCallActionActivation> thisCS_AcceptCallActionActivationPtr);
+			virtual std::shared_ptr<PSCS::Semantics::Actions::CS_AcceptCallActionActivation> getThisCS_AcceptCallActionActivationPtr() const;
+			virtual void setThisCS_AcceptCallActionActivationPtr(std::weak_ptr<PSCS::Semantics::Actions::CS_AcceptCallActionActivation> thisCS_AcceptCallActionActivationPtr);
 
 			//Additional constructors for the containments back reference
 			CS_AcceptCallActionActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_group);
@@ -91,7 +91,7 @@ namespace PSCS::Semantics::Actions
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<CS_AcceptCallActionActivation> m_thisCS_AcceptCallActionActivationPtr;
+			std::weak_ptr<PSCS::Semantics::Actions::CS_AcceptCallActionActivation> m_thisCS_AcceptCallActionActivationPtr;
 	};
 }
 #endif /* end of include guard: PSCS_SEMANTICS_ACTIONS_CS_ACCEPTCALLACTIONACTIVATIONCS_ACCEPTCALLACTIONACTIVATIONIMPL_HPP */

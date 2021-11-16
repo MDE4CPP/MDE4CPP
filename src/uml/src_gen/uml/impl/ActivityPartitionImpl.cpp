@@ -1041,11 +1041,11 @@ Any ActivityPartitionImpl::eInvoke(int operationID, std::shared_ptr<std::list < 
 }
 
 
-std::shared_ptr<ActivityPartition> ActivityPartitionImpl::getThisActivityPartitionPtr() const
+std::shared_ptr<uml::ActivityPartition> ActivityPartitionImpl::getThisActivityPartitionPtr() const
 {
 	return m_thisActivityPartitionPtr.lock();
 }
-void ActivityPartitionImpl::setThisActivityPartitionPtr(std::weak_ptr<ActivityPartition> thisActivityPartitionPtr)
+void ActivityPartitionImpl::setThisActivityPartitionPtr(std::weak_ptr<uml::ActivityPartition> thisActivityPartitionPtr)
 {
 	m_thisActivityPartitionPtr = thisActivityPartitionPtr;
 	setThisActivityGroupPtr(thisActivityPartitionPtr);

@@ -31,8 +31,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Values/ValuesFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
+#include "fUML/Semantics/Values/ValuesFactory.hpp"
 #include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
@@ -415,11 +415,11 @@ Any IfExpEvalImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sha
 }
 
 
-std::shared_ptr<IfExpEval> IfExpEvalImpl::getThisIfExpEvalPtr() const
+std::shared_ptr<ocl::Evaluations::IfExpEval> IfExpEvalImpl::getThisIfExpEvalPtr() const
 {
 	return m_thisIfExpEvalPtr.lock();
 }
-void IfExpEvalImpl::setThisIfExpEvalPtr(std::weak_ptr<IfExpEval> thisIfExpEvalPtr)
+void IfExpEvalImpl::setThisIfExpEvalPtr(std::weak_ptr<ocl::Evaluations::IfExpEval> thisIfExpEvalPtr)
 {
 	m_thisIfExpEvalPtr = thisIfExpEvalPtr;
 	setThisOclExpEvalPtr(thisIfExpEvalPtr);

@@ -53,10 +53,10 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "uml/umlFactory.hpp"
-#include "fUML/Semantics/Actions/ActionsFactory.hpp"
-#include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
+#include "uml/umlFactory.hpp"
+#include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
+#include "fUML/Semantics/Actions/ActionsFactory.hpp"
 
 #include "uml/Action.hpp"
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
@@ -601,11 +601,11 @@ Any CS_CallOperationActionActivationImpl::eInvoke(int operationID, std::shared_p
 }
 
 
-std::shared_ptr<CS_CallOperationActionActivation> CS_CallOperationActionActivationImpl::getThisCS_CallOperationActionActivationPtr() const
+std::shared_ptr<PSCS::Semantics::Actions::CS_CallOperationActionActivation> CS_CallOperationActionActivationImpl::getThisCS_CallOperationActionActivationPtr() const
 {
 	return m_thisCS_CallOperationActionActivationPtr.lock();
 }
-void CS_CallOperationActionActivationImpl::setThisCS_CallOperationActionActivationPtr(std::weak_ptr<CS_CallOperationActionActivation> thisCS_CallOperationActionActivationPtr)
+void CS_CallOperationActionActivationImpl::setThisCS_CallOperationActionActivationPtr(std::weak_ptr<PSCS::Semantics::Actions::CS_CallOperationActionActivation> thisCS_CallOperationActionActivationPtr)
 {
 	m_thisCS_CallOperationActionActivationPtr = thisCS_CallOperationActionActivationPtr;
 	setThisCallOperationActionActivationPtr(thisCS_CallOperationActionActivationPtr);

@@ -31,8 +31,8 @@ namespace uml
 		protected:
 			friend class umlFactoryImpl;
 			ChangeEventImpl();
-			virtual std::shared_ptr<ChangeEvent> getThisChangeEventPtr() const;
-			virtual void setThisChangeEventPtr(std::weak_ptr<ChangeEvent> thisChangeEventPtr);
+			virtual std::shared_ptr<uml::ChangeEvent> getThisChangeEventPtr() const;
+			virtual void setThisChangeEventPtr(std::weak_ptr<uml::ChangeEvent> thisChangeEventPtr);
 
 			//Additional constructors for the containments back reference
 			ChangeEventImpl(std::weak_ptr<uml::Namespace> par_namespace);
@@ -125,7 +125,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<ChangeEvent> m_thisChangeEventPtr;
+			std::weak_ptr<uml::ChangeEvent> m_thisChangeEventPtr;
 	};
 }
 #endif /* end of include guard: UML_CHANGEEVENTCHANGEEVENTIMPL_HPP */

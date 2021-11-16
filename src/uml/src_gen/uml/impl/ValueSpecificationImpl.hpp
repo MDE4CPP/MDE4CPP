@@ -26,14 +26,14 @@ namespace uml
 	{
 		public: 
 			ValueSpecificationImpl(const ValueSpecificationImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 			ValueSpecificationImpl& operator=(ValueSpecificationImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;
 			ValueSpecificationImpl();
-			virtual std::shared_ptr<ValueSpecification> getThisValueSpecificationPtr() const;
-			virtual void setThisValueSpecificationPtr(std::weak_ptr<ValueSpecification> thisValueSpecificationPtr);
+			virtual std::shared_ptr<uml::ValueSpecification> getThisValueSpecificationPtr() const;
+			virtual void setThisValueSpecificationPtr(std::weak_ptr<uml::ValueSpecification> thisValueSpecificationPtr);
 
 			//Additional constructors for the containments back reference
 			ValueSpecificationImpl(std::weak_ptr<uml::Namespace> par_namespace);
@@ -50,7 +50,7 @@ namespace uml
 
 		public:
 			//destructor
-			virtual ~ValueSpecificationImpl();
+			virtual ~ValueSpecificationImpl() = 0;
 			
 			//*********************************
 			// Operations
@@ -171,7 +171,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<ValueSpecification> m_thisValueSpecificationPtr;
+			std::weak_ptr<uml::ValueSpecification> m_thisValueSpecificationPtr;
 	};
 }
 #endif /* end of include guard: UML_VALUESPECIFICATIONVALUESPECIFICATIONIMPL_HPP */

@@ -542,11 +542,11 @@ Any ReadSelfActionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std
 }
 
 
-std::shared_ptr<ReadSelfAction> ReadSelfActionImpl::getThisReadSelfActionPtr() const
+std::shared_ptr<uml::ReadSelfAction> ReadSelfActionImpl::getThisReadSelfActionPtr() const
 {
 	return m_thisReadSelfActionPtr.lock();
 }
-void ReadSelfActionImpl::setThisReadSelfActionPtr(std::weak_ptr<ReadSelfAction> thisReadSelfActionPtr)
+void ReadSelfActionImpl::setThisReadSelfActionPtr(std::weak_ptr<uml::ReadSelfAction> thisReadSelfActionPtr)
 {
 	m_thisReadSelfActionPtr = thisReadSelfActionPtr;
 	setThisActionPtr(thisReadSelfActionPtr);

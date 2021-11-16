@@ -395,11 +395,11 @@ Any ExecutionOccurrenceSpecificationImpl::eInvoke(int operationID, std::shared_p
 }
 
 
-std::shared_ptr<ExecutionOccurrenceSpecification> ExecutionOccurrenceSpecificationImpl::getThisExecutionOccurrenceSpecificationPtr() const
+std::shared_ptr<uml::ExecutionOccurrenceSpecification> ExecutionOccurrenceSpecificationImpl::getThisExecutionOccurrenceSpecificationPtr() const
 {
 	return m_thisExecutionOccurrenceSpecificationPtr.lock();
 }
-void ExecutionOccurrenceSpecificationImpl::setThisExecutionOccurrenceSpecificationPtr(std::weak_ptr<ExecutionOccurrenceSpecification> thisExecutionOccurrenceSpecificationPtr)
+void ExecutionOccurrenceSpecificationImpl::setThisExecutionOccurrenceSpecificationPtr(std::weak_ptr<uml::ExecutionOccurrenceSpecification> thisExecutionOccurrenceSpecificationPtr)
 {
 	m_thisExecutionOccurrenceSpecificationPtr = thisExecutionOccurrenceSpecificationPtr;
 	setThisOccurrenceSpecificationPtr(thisExecutionOccurrenceSpecificationPtr);

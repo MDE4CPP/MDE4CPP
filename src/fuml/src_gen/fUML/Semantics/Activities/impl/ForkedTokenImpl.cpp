@@ -493,11 +493,11 @@ Any ForkedTokenImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::s
 }
 
 
-std::shared_ptr<ForkedToken> ForkedTokenImpl::getThisForkedTokenPtr() const
+std::shared_ptr<fUML::Semantics::Activities::ForkedToken> ForkedTokenImpl::getThisForkedTokenPtr() const
 {
 	return m_thisForkedTokenPtr.lock();
 }
-void ForkedTokenImpl::setThisForkedTokenPtr(std::weak_ptr<ForkedToken> thisForkedTokenPtr)
+void ForkedTokenImpl::setThisForkedTokenPtr(std::weak_ptr<fUML::Semantics::Activities::ForkedToken> thisForkedTokenPtr)
 {
 	m_thisForkedTokenPtr = thisForkedTokenPtr;
 	setThisTokenPtr(thisForkedTokenPtr);

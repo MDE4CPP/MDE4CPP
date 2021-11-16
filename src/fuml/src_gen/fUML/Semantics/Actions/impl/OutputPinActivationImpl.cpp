@@ -271,11 +271,11 @@ Any OutputPinActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list 
 }
 
 
-std::shared_ptr<OutputPinActivation> OutputPinActivationImpl::getThisOutputPinActivationPtr() const
+std::shared_ptr<fUML::Semantics::Actions::OutputPinActivation> OutputPinActivationImpl::getThisOutputPinActivationPtr() const
 {
 	return m_thisOutputPinActivationPtr.lock();
 }
-void OutputPinActivationImpl::setThisOutputPinActivationPtr(std::weak_ptr<OutputPinActivation> thisOutputPinActivationPtr)
+void OutputPinActivationImpl::setThisOutputPinActivationPtr(std::weak_ptr<fUML::Semantics::Actions::OutputPinActivation> thisOutputPinActivationPtr)
 {
 	m_thisOutputPinActivationPtr = thisOutputPinActivationPtr;
 	setThisPinActivationPtr(thisOutputPinActivationPtr);

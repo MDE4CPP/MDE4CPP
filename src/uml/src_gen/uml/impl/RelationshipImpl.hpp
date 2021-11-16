@@ -25,21 +25,21 @@ namespace uml
 	{
 		public: 
 			RelationshipImpl(const RelationshipImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 			RelationshipImpl& operator=(RelationshipImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;
 			RelationshipImpl();
-			virtual std::shared_ptr<Relationship> getThisRelationshipPtr() const;
-			virtual void setThisRelationshipPtr(std::weak_ptr<Relationship> thisRelationshipPtr);
+			virtual std::shared_ptr<uml::Relationship> getThisRelationshipPtr() const;
+			virtual void setThisRelationshipPtr(std::weak_ptr<uml::Relationship> thisRelationshipPtr);
 
 			//Additional constructors for the containments back reference
 			RelationshipImpl(std::weak_ptr<uml::Element> par_owner);
 
 		public:
 			//destructor
-			virtual ~RelationshipImpl();
+			virtual ~RelationshipImpl() = 0;
 			
 			//*********************************
 			// Operations
@@ -101,7 +101,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<Relationship> m_thisRelationshipPtr;
+			std::weak_ptr<uml::Relationship> m_thisRelationshipPtr;
 	};
 }
 #endif /* end of include guard: UML_RELATIONSHIPRELATIONSHIPIMPL_HPP */

@@ -419,11 +419,11 @@ Any ActionExecutionSpecificationImpl::eInvoke(int operationID, std::shared_ptr<s
 }
 
 
-std::shared_ptr<ActionExecutionSpecification> ActionExecutionSpecificationImpl::getThisActionExecutionSpecificationPtr() const
+std::shared_ptr<uml::ActionExecutionSpecification> ActionExecutionSpecificationImpl::getThisActionExecutionSpecificationPtr() const
 {
 	return m_thisActionExecutionSpecificationPtr.lock();
 }
-void ActionExecutionSpecificationImpl::setThisActionExecutionSpecificationPtr(std::weak_ptr<ActionExecutionSpecification> thisActionExecutionSpecificationPtr)
+void ActionExecutionSpecificationImpl::setThisActionExecutionSpecificationPtr(std::weak_ptr<uml::ActionExecutionSpecification> thisActionExecutionSpecificationPtr)
 {
 	m_thisActionExecutionSpecificationPtr = thisActionExecutionSpecificationPtr;
 	setThisExecutionSpecificationPtr(thisActionExecutionSpecificationPtr);

@@ -32,8 +32,8 @@ namespace ocl::Evaluations
 		protected:
 			friend class ocl::Evaluations::EvaluationsFactoryImpl;
 			LoopExpEvalImpl();
-			virtual std::shared_ptr<LoopExpEval> getThisLoopExpEvalPtr() const;
-			virtual void setThisLoopExpEvalPtr(std::weak_ptr<LoopExpEval> thisLoopExpEvalPtr);
+			virtual std::shared_ptr<ocl::Evaluations::LoopExpEval> getThisLoopExpEvalPtr() const;
+			virtual void setThisLoopExpEvalPtr(std::weak_ptr<ocl::Evaluations::LoopExpEval> thisLoopExpEvalPtr);
 
 
 		public:
@@ -89,7 +89,7 @@ namespace ocl::Evaluations
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<LoopExpEval> m_thisLoopExpEvalPtr;
+			std::weak_ptr<ocl::Evaluations::LoopExpEval> m_thisLoopExpEvalPtr;
 	};
 }
 #endif /* end of include guard: OCL_EVALUATIONS_LOOPEXPEVALLOOPEXPEVALIMPL_HPP */

@@ -561,11 +561,11 @@ Any FeatureValueImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::
 }
 
 
-std::shared_ptr<FeatureValue> FeatureValueImpl::getThisFeatureValuePtr() const
+std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> FeatureValueImpl::getThisFeatureValuePtr() const
 {
 	return m_thisFeatureValuePtr.lock();
 }
-void FeatureValueImpl::setThisFeatureValuePtr(std::weak_ptr<FeatureValue> thisFeatureValuePtr)
+void FeatureValueImpl::setThisFeatureValuePtr(std::weak_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> thisFeatureValuePtr)
 {
 	m_thisFeatureValuePtr = thisFeatureValuePtr;
 }

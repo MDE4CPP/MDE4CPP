@@ -147,14 +147,6 @@ TypeImpl& TypeImpl::operator=(const TypeImpl & obj)
 	return *this;
 }
 
-std::shared_ptr<ecore::EObject> TypeImpl::copy() const
-{
-	std::shared_ptr<TypeImpl> element(new TypeImpl());
-	*element =(*this);
-	element->setThisTypePtr(element);
-	return element;
-}
-
 //*********************************
 // Operations
 //*********************************
@@ -490,11 +482,11 @@ Any TypeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_p
 }
 
 
-std::shared_ptr<Type> TypeImpl::getThisTypePtr() const
+std::shared_ptr<uml::Type> TypeImpl::getThisTypePtr() const
 {
 	return m_thisTypePtr.lock();
 }
-void TypeImpl::setThisTypePtr(std::weak_ptr<Type> thisTypePtr)
+void TypeImpl::setThisTypePtr(std::weak_ptr<uml::Type> thisTypePtr)
 {
 	m_thisTypePtr = thisTypePtr;
 	setThisPackageableElementPtr(thisTypePtr);

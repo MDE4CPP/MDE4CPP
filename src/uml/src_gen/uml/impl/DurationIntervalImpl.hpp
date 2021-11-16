@@ -31,8 +31,8 @@ namespace uml
 		protected:
 			friend class umlFactoryImpl;
 			DurationIntervalImpl();
-			virtual std::shared_ptr<DurationInterval> getThisDurationIntervalPtr() const;
-			virtual void setThisDurationIntervalPtr(std::weak_ptr<DurationInterval> thisDurationIntervalPtr);
+			virtual std::shared_ptr<uml::DurationInterval> getThisDurationIntervalPtr() const;
+			virtual void setThisDurationIntervalPtr(std::weak_ptr<uml::DurationInterval> thisDurationIntervalPtr);
 
 			//Additional constructors for the containments back reference
 			DurationIntervalImpl(std::weak_ptr<uml::Namespace> par_namespace);
@@ -117,7 +117,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<DurationInterval> m_thisDurationIntervalPtr;
+			std::weak_ptr<uml::DurationInterval> m_thisDurationIntervalPtr;
 	};
 }
 #endif /* end of include guard: UML_DURATIONINTERVALDURATIONINTERVALIMPL_HPP */

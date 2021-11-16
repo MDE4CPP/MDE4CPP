@@ -28,19 +28,19 @@ virtual public EventAccepter
 	{
 		public: 
 			EventAccepterImpl(const EventAccepterImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 			EventAccepterImpl& operator=(EventAccepterImpl const&); 
 
 		protected:
 			friend class fUML::Semantics::CommonBehavior::CommonBehaviorFactoryImpl;
 			EventAccepterImpl();
-			virtual std::shared_ptr<EventAccepter> getThisEventAccepterPtr() const;
-			virtual void setThisEventAccepterPtr(std::weak_ptr<EventAccepter> thisEventAccepterPtr);
+			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::EventAccepter> getThisEventAccepterPtr() const;
+			virtual void setThisEventAccepterPtr(std::weak_ptr<fUML::Semantics::CommonBehavior::EventAccepter> thisEventAccepterPtr);
 
 
 		public:
 			//destructor
-			virtual ~EventAccepterImpl();
+			virtual ~EventAccepterImpl() = 0;
 			
 			//*********************************
 			// Operations
@@ -91,7 +91,7 @@ virtual public EventAccepter
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<EventAccepter> m_thisEventAccepterPtr;
+			std::weak_ptr<fUML::Semantics::CommonBehavior::EventAccepter> m_thisEventAccepterPtr;
 	};
 }
 #endif /* end of include guard: FUML_SEMANTICS_COMMONBEHAVIOR_EVENTACCEPTEREVENTACCEPTERIMPL_HPP */

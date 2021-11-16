@@ -372,11 +372,11 @@ Any DataStoreNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std:
 }
 
 
-std::shared_ptr<DataStoreNode> DataStoreNodeImpl::getThisDataStoreNodePtr() const
+std::shared_ptr<uml::DataStoreNode> DataStoreNodeImpl::getThisDataStoreNodePtr() const
 {
 	return m_thisDataStoreNodePtr.lock();
 }
-void DataStoreNodeImpl::setThisDataStoreNodePtr(std::weak_ptr<DataStoreNode> thisDataStoreNodePtr)
+void DataStoreNodeImpl::setThisDataStoreNodePtr(std::weak_ptr<uml::DataStoreNode> thisDataStoreNodePtr)
 {
 	m_thisDataStoreNodePtr = thisDataStoreNodePtr;
 	setThisCentralBufferNodePtr(thisDataStoreNodePtr);

@@ -324,11 +324,11 @@ Any ObjectImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared
 }
 
 
-std::shared_ptr<Object> ObjectImpl::getThisObjectPtr() const
+std::shared_ptr<uml::Object> ObjectImpl::getThisObjectPtr() const
 {
 	return m_thisObjectPtr.lock();
 }
-void ObjectImpl::setThisObjectPtr(std::weak_ptr<Object> thisObjectPtr)
+void ObjectImpl::setThisObjectPtr(std::weak_ptr<uml::Object> thisObjectPtr)
 {
 	m_thisObjectPtr = thisObjectPtr;
 }

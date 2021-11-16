@@ -26,21 +26,21 @@ namespace fUML::Semantics::Actions
 	{
 		public: 
 			CallActionActivationImpl(const CallActionActivationImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 			CallActionActivationImpl& operator=(CallActionActivationImpl const&); 
 
 		protected:
 			friend class fUML::Semantics::Actions::ActionsFactoryImpl;
 			CallActionActivationImpl();
-			virtual std::shared_ptr<CallActionActivation> getThisCallActionActivationPtr() const;
-			virtual void setThisCallActionActivationPtr(std::weak_ptr<CallActionActivation> thisCallActionActivationPtr);
+			virtual std::shared_ptr<fUML::Semantics::Actions::CallActionActivation> getThisCallActionActivationPtr() const;
+			virtual void setThisCallActionActivationPtr(std::weak_ptr<fUML::Semantics::Actions::CallActionActivation> thisCallActionActivationPtr);
 
 			//Additional constructors for the containments back reference
 			CallActionActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_group);
 
 		public:
 			//destructor
-			virtual ~CallActionActivationImpl();
+			virtual ~CallActionActivationImpl() = 0;
 			
 			//*********************************
 			// Operations
@@ -101,7 +101,7 @@ namespace fUML::Semantics::Actions
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<CallActionActivation> m_thisCallActionActivationPtr;
+			std::weak_ptr<fUML::Semantics::Actions::CallActionActivation> m_thisCallActionActivationPtr;
 	};
 }
 #endif /* end of include guard: FUML_SEMANTICS_ACTIONS_CALLACTIONACTIVATIONCALLACTIONACTIVATIONIMPL_HPP */

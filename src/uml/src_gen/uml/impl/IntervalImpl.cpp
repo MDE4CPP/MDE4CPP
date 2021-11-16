@@ -472,11 +472,11 @@ Any IntervalImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shar
 }
 
 
-std::shared_ptr<Interval> IntervalImpl::getThisIntervalPtr() const
+std::shared_ptr<uml::Interval> IntervalImpl::getThisIntervalPtr() const
 {
 	return m_thisIntervalPtr.lock();
 }
-void IntervalImpl::setThisIntervalPtr(std::weak_ptr<Interval> thisIntervalPtr)
+void IntervalImpl::setThisIntervalPtr(std::weak_ptr<uml::Interval> thisIntervalPtr)
 {
 	m_thisIntervalPtr = thisIntervalPtr;
 	setThisValueSpecificationPtr(thisIntervalPtr);

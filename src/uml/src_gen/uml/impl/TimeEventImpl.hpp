@@ -31,8 +31,8 @@ namespace uml
 		protected:
 			friend class umlFactoryImpl;
 			TimeEventImpl();
-			virtual std::shared_ptr<TimeEvent> getThisTimeEventPtr() const;
-			virtual void setThisTimeEventPtr(std::weak_ptr<TimeEvent> thisTimeEventPtr);
+			virtual std::shared_ptr<uml::TimeEvent> getThisTimeEventPtr() const;
+			virtual void setThisTimeEventPtr(std::weak_ptr<uml::TimeEvent> thisTimeEventPtr);
 
 			//Additional constructors for the containments back reference
 			TimeEventImpl(std::weak_ptr<uml::Namespace> par_namespace);
@@ -143,7 +143,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<TimeEvent> m_thisTimeEventPtr;
+			std::weak_ptr<uml::TimeEvent> m_thisTimeEventPtr;
 	};
 }
 #endif /* end of include guard: UML_TIMEEVENTTIMEEVENTIMPL_HPP */

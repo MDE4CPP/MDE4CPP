@@ -138,14 +138,6 @@ EClassifierImpl& EClassifierImpl::operator=(const EClassifierImpl & obj)
 	return *this;
 }
 
-std::shared_ptr<ecore::EObject> EClassifierImpl::copy() const
-{
-	std::shared_ptr<EClassifierImpl> element(new EClassifierImpl());
-	*element =(*this);
-	element->setThisEClassifierPtr(element);
-	return element;
-}
-
 //*********************************
 // Operations
 //*********************************
@@ -564,11 +556,11 @@ Any EClassifierImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::s
 }
 
 
-std::shared_ptr<EClassifier> EClassifierImpl::getThisEClassifierPtr() const
+std::shared_ptr<ecore::EClassifier> EClassifierImpl::getThisEClassifierPtr() const
 {
 	return m_thisEClassifierPtr.lock();
 }
-void EClassifierImpl::setThisEClassifierPtr(std::weak_ptr<EClassifier> thisEClassifierPtr)
+void EClassifierImpl::setThisEClassifierPtr(std::weak_ptr<ecore::EClassifier> thisEClassifierPtr)
 {
 	m_thisEClassifierPtr = thisEClassifierPtr;
 	setThisENamedElementPtr(thisEClassifierPtr);

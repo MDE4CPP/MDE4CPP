@@ -239,11 +239,11 @@ Any ClassifierBehaviorExecutionActivityImpl::eInvoke(int operationID, std::share
 }
 
 
-std::shared_ptr<ClassifierBehaviorExecutionActivity> ClassifierBehaviorExecutionActivityImpl::getThisClassifierBehaviorExecutionActivityPtr() const
+std::shared_ptr<fUML::Semantics::Activities::ClassifierBehaviorExecutionActivity> ClassifierBehaviorExecutionActivityImpl::getThisClassifierBehaviorExecutionActivityPtr() const
 {
 	return m_thisClassifierBehaviorExecutionActivityPtr.lock();
 }
-void ClassifierBehaviorExecutionActivityImpl::setThisClassifierBehaviorExecutionActivityPtr(std::weak_ptr<ClassifierBehaviorExecutionActivity> thisClassifierBehaviorExecutionActivityPtr)
+void ClassifierBehaviorExecutionActivityImpl::setThisClassifierBehaviorExecutionActivityPtr(std::weak_ptr<fUML::Semantics::Activities::ClassifierBehaviorExecutionActivity> thisClassifierBehaviorExecutionActivityPtr)
 {
 	m_thisClassifierBehaviorExecutionActivityPtr = thisClassifierBehaviorExecutionActivityPtr;
 }

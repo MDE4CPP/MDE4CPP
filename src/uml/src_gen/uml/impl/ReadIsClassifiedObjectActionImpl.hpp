@@ -31,8 +31,8 @@ namespace uml
 		protected:
 			friend class umlFactoryImpl;
 			ReadIsClassifiedObjectActionImpl();
-			virtual std::shared_ptr<ReadIsClassifiedObjectAction> getThisReadIsClassifiedObjectActionPtr() const;
-			virtual void setThisReadIsClassifiedObjectActionPtr(std::weak_ptr<ReadIsClassifiedObjectAction> thisReadIsClassifiedObjectActionPtr);
+			virtual std::shared_ptr<uml::ReadIsClassifiedObjectAction> getThisReadIsClassifiedObjectActionPtr() const;
+			virtual void setThisReadIsClassifiedObjectActionPtr(std::weak_ptr<uml::ReadIsClassifiedObjectAction> thisReadIsClassifiedObjectActionPtr);
 
 			//Additional constructors for the containments back reference
 			ReadIsClassifiedObjectActionImpl(std::weak_ptr<uml::Activity> par_activity);
@@ -202,7 +202,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<ReadIsClassifiedObjectAction> m_thisReadIsClassifiedObjectActionPtr;
+			std::weak_ptr<uml::ReadIsClassifiedObjectAction> m_thisReadIsClassifiedObjectActionPtr;
 	};
 }
 #endif /* end of include guard: UML_READISCLASSIFIEDOBJECTACTIONREADISCLASSIFIEDOBJECTACTIONIMPL_HPP */

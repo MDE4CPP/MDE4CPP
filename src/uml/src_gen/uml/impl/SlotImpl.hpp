@@ -31,8 +31,8 @@ namespace uml
 		protected:
 			friend class umlFactoryImpl;
 			SlotImpl();
-			virtual std::shared_ptr<Slot> getThisSlotPtr() const;
-			virtual void setThisSlotPtr(std::weak_ptr<Slot> thisSlotPtr);
+			virtual std::shared_ptr<uml::Slot> getThisSlotPtr() const;
+			virtual void setThisSlotPtr(std::weak_ptr<uml::Slot> thisSlotPtr);
 
 			//Additional constructors for the containments back reference
 			SlotImpl(std::weak_ptr<uml::Element> par_owner);
@@ -132,7 +132,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<Slot> m_thisSlotPtr;
+			std::weak_ptr<uml::Slot> m_thisSlotPtr;
 	};
 }
 #endif /* end of include guard: UML_SLOTSLOTIMPL_HPP */

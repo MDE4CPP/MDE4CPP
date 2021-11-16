@@ -478,11 +478,11 @@ Any VariableImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shar
 }
 
 
-std::shared_ptr<Variable> VariableImpl::getThisVariablePtr() const
+std::shared_ptr<uml::Variable> VariableImpl::getThisVariablePtr() const
 {
 	return m_thisVariablePtr.lock();
 }
-void VariableImpl::setThisVariablePtr(std::weak_ptr<Variable> thisVariablePtr)
+void VariableImpl::setThisVariablePtr(std::weak_ptr<uml::Variable> thisVariablePtr)
 {
 	m_thisVariablePtr = thisVariablePtr;
 	setThisConnectableElementPtr(thisVariablePtr);

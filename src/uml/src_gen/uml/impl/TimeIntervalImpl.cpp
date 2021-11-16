@@ -367,11 +367,11 @@ Any TimeIntervalImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::
 }
 
 
-std::shared_ptr<TimeInterval> TimeIntervalImpl::getThisTimeIntervalPtr() const
+std::shared_ptr<uml::TimeInterval> TimeIntervalImpl::getThisTimeIntervalPtr() const
 {
 	return m_thisTimeIntervalPtr.lock();
 }
-void TimeIntervalImpl::setThisTimeIntervalPtr(std::weak_ptr<TimeInterval> thisTimeIntervalPtr)
+void TimeIntervalImpl::setThisTimeIntervalPtr(std::weak_ptr<uml::TimeInterval> thisTimeIntervalPtr)
 {
 	m_thisTimeIntervalPtr = thisTimeIntervalPtr;
 	setThisIntervalPtr(thisTimeIntervalPtr);

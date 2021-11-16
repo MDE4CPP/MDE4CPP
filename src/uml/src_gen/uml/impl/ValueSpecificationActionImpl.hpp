@@ -31,8 +31,8 @@ namespace uml
 		protected:
 			friend class umlFactoryImpl;
 			ValueSpecificationActionImpl();
-			virtual std::shared_ptr<ValueSpecificationAction> getThisValueSpecificationActionPtr() const;
-			virtual void setThisValueSpecificationActionPtr(std::weak_ptr<ValueSpecificationAction> thisValueSpecificationActionPtr);
+			virtual std::shared_ptr<uml::ValueSpecificationAction> getThisValueSpecificationActionPtr() const;
+			virtual void setThisValueSpecificationActionPtr(std::weak_ptr<uml::ValueSpecificationAction> thisValueSpecificationActionPtr);
 
 			//Additional constructors for the containments back reference
 			ValueSpecificationActionImpl(std::weak_ptr<uml::Activity> par_activity);
@@ -160,7 +160,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<ValueSpecificationAction> m_thisValueSpecificationActionPtr;
+			std::weak_ptr<uml::ValueSpecificationAction> m_thisValueSpecificationActionPtr;
 	};
 }
 #endif /* end of include guard: UML_VALUESPECIFICATIONACTIONVALUESPECIFICATIONACTIONIMPL_HPP */

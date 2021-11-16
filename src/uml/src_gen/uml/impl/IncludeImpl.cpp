@@ -504,11 +504,11 @@ Any IncludeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::share
 }
 
 
-std::shared_ptr<Include> IncludeImpl::getThisIncludePtr() const
+std::shared_ptr<uml::Include> IncludeImpl::getThisIncludePtr() const
 {
 	return m_thisIncludePtr.lock();
 }
-void IncludeImpl::setThisIncludePtr(std::weak_ptr<Include> thisIncludePtr)
+void IncludeImpl::setThisIncludePtr(std::weak_ptr<uml::Include> thisIncludePtr)
 {
 	m_thisIncludePtr = thisIncludePtr;
 	setThisDirectedRelationshipPtr(thisIncludePtr);

@@ -356,14 +356,6 @@ BehaviorImpl& BehaviorImpl::operator=(const BehaviorImpl & obj)
 	return *this;
 }
 
-std::shared_ptr<ecore::EObject> BehaviorImpl::copy() const
-{
-	std::shared_ptr<BehaviorImpl> element(new BehaviorImpl());
-	*element =(*this);
-	element->setThisBehaviorPtr(element);
-	return element;
-}
-
 //*********************************
 // Operations
 //*********************************
@@ -1472,11 +1464,11 @@ Any BehaviorImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shar
 }
 
 
-std::shared_ptr<Behavior> BehaviorImpl::getThisBehaviorPtr() const
+std::shared_ptr<uml::Behavior> BehaviorImpl::getThisBehaviorPtr() const
 {
 	return m_thisBehaviorPtr.lock();
 }
-void BehaviorImpl::setThisBehaviorPtr(std::weak_ptr<Behavior> thisBehaviorPtr)
+void BehaviorImpl::setThisBehaviorPtr(std::weak_ptr<uml::Behavior> thisBehaviorPtr)
 {
 	m_thisBehaviorPtr = thisBehaviorPtr;
 	setThisClassPtr(thisBehaviorPtr);

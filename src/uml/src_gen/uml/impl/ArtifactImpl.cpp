@@ -1120,11 +1120,11 @@ Any ArtifactImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shar
 }
 
 
-std::shared_ptr<Artifact> ArtifactImpl::getThisArtifactPtr() const
+std::shared_ptr<uml::Artifact> ArtifactImpl::getThisArtifactPtr() const
 {
 	return m_thisArtifactPtr.lock();
 }
-void ArtifactImpl::setThisArtifactPtr(std::weak_ptr<Artifact> thisArtifactPtr)
+void ArtifactImpl::setThisArtifactPtr(std::weak_ptr<uml::Artifact> thisArtifactPtr)
 {
 	m_thisArtifactPtr = thisArtifactPtr;
 	setThisClassifierPtr(thisArtifactPtr);

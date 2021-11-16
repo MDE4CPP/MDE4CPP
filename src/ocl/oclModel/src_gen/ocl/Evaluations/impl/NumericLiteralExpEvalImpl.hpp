@@ -32,8 +32,8 @@ namespace ocl::Evaluations
 		protected:
 			friend class ocl::Evaluations::EvaluationsFactoryImpl;
 			NumericLiteralExpEvalImpl();
-			virtual std::shared_ptr<NumericLiteralExpEval> getThisNumericLiteralExpEvalPtr() const;
-			virtual void setThisNumericLiteralExpEvalPtr(std::weak_ptr<NumericLiteralExpEval> thisNumericLiteralExpEvalPtr);
+			virtual std::shared_ptr<ocl::Evaluations::NumericLiteralExpEval> getThisNumericLiteralExpEvalPtr() const;
+			virtual void setThisNumericLiteralExpEvalPtr(std::weak_ptr<ocl::Evaluations::NumericLiteralExpEval> thisNumericLiteralExpEvalPtr);
 
 
 		public:
@@ -87,7 +87,7 @@ namespace ocl::Evaluations
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<NumericLiteralExpEval> m_thisNumericLiteralExpEvalPtr;
+			std::weak_ptr<ocl::Evaluations::NumericLiteralExpEval> m_thisNumericLiteralExpEvalPtr;
 	};
 }
 #endif /* end of include guard: OCL_EVALUATIONS_NUMERICLITERALEXPEVALNUMERICLITERALEXPEVALIMPL_HPP */

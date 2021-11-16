@@ -31,8 +31,8 @@ namespace uml
 		protected:
 			friend class umlFactoryImpl;
 			GeneralOrderingImpl();
-			virtual std::shared_ptr<GeneralOrdering> getThisGeneralOrderingPtr() const;
-			virtual void setThisGeneralOrderingPtr(std::weak_ptr<GeneralOrdering> thisGeneralOrderingPtr);
+			virtual std::shared_ptr<uml::GeneralOrdering> getThisGeneralOrderingPtr() const;
+			virtual void setThisGeneralOrderingPtr(std::weak_ptr<uml::GeneralOrdering> thisGeneralOrderingPtr);
 
 			//Additional constructors for the containments back reference
 			GeneralOrderingImpl(std::weak_ptr<uml::Namespace> par_namespace);
@@ -132,7 +132,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<GeneralOrdering> m_thisGeneralOrderingPtr;
+			std::weak_ptr<uml::GeneralOrdering> m_thisGeneralOrderingPtr;
 	};
 }
 #endif /* end of include guard: UML_GENERALORDERINGGENERALORDERINGIMPL_HPP */

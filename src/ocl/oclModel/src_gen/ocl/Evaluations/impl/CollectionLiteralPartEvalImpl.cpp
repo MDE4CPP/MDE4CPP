@@ -316,11 +316,11 @@ Any CollectionLiteralPartEvalImpl::eInvoke(int operationID, std::shared_ptr<std:
 }
 
 
-std::shared_ptr<CollectionLiteralPartEval> CollectionLiteralPartEvalImpl::getThisCollectionLiteralPartEvalPtr() const
+std::shared_ptr<ocl::Evaluations::CollectionLiteralPartEval> CollectionLiteralPartEvalImpl::getThisCollectionLiteralPartEvalPtr() const
 {
 	return m_thisCollectionLiteralPartEvalPtr.lock();
 }
-void CollectionLiteralPartEvalImpl::setThisCollectionLiteralPartEvalPtr(std::weak_ptr<CollectionLiteralPartEval> thisCollectionLiteralPartEvalPtr)
+void CollectionLiteralPartEvalImpl::setThisCollectionLiteralPartEvalPtr(std::weak_ptr<ocl::Evaluations::CollectionLiteralPartEval> thisCollectionLiteralPartEvalPtr)
 {
 	m_thisCollectionLiteralPartEvalPtr = thisCollectionLiteralPartEvalPtr;
 	setThisEvaluationPtr(thisCollectionLiteralPartEvalPtr);

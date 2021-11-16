@@ -32,10 +32,10 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "ecore/ecoreFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
-#include "uml/umlFactory.hpp"
+#include "ecore/ecoreFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
+#include "uml/umlFactory.hpp"
 
 #include "ocl/Expressions/CallExp.hpp"
 #include "ocl/Expressions/CollectionRange.hpp"
@@ -469,11 +469,11 @@ Any EnumLiteralExpImpl::eInvoke(int operationID, std::shared_ptr<std::list < std
 }
 
 
-std::shared_ptr<EnumLiteralExp> EnumLiteralExpImpl::getThisEnumLiteralExpPtr() const
+std::shared_ptr<ocl::Expressions::EnumLiteralExp> EnumLiteralExpImpl::getThisEnumLiteralExpPtr() const
 {
 	return m_thisEnumLiteralExpPtr.lock();
 }
-void EnumLiteralExpImpl::setThisEnumLiteralExpPtr(std::weak_ptr<EnumLiteralExp> thisEnumLiteralExpPtr)
+void EnumLiteralExpImpl::setThisEnumLiteralExpPtr(std::weak_ptr<ocl::Expressions::EnumLiteralExp> thisEnumLiteralExpPtr)
 {
 	m_thisEnumLiteralExpPtr = thisEnumLiteralExpPtr;
 	setThisLiteralExpPtr(thisEnumLiteralExpPtr);

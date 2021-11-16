@@ -684,11 +684,11 @@ Any OpaqueExpressionImpl::eInvoke(int operationID, std::shared_ptr<std::list < s
 }
 
 
-std::shared_ptr<OpaqueExpression> OpaqueExpressionImpl::getThisOpaqueExpressionPtr() const
+std::shared_ptr<uml::OpaqueExpression> OpaqueExpressionImpl::getThisOpaqueExpressionPtr() const
 {
 	return m_thisOpaqueExpressionPtr.lock();
 }
-void OpaqueExpressionImpl::setThisOpaqueExpressionPtr(std::weak_ptr<OpaqueExpression> thisOpaqueExpressionPtr)
+void OpaqueExpressionImpl::setThisOpaqueExpressionPtr(std::weak_ptr<uml::OpaqueExpression> thisOpaqueExpressionPtr)
 {
 	m_thisOpaqueExpressionPtr = thisOpaqueExpressionPtr;
 	setThisValueSpecificationPtr(thisOpaqueExpressionPtr);

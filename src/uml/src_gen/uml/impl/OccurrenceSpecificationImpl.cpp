@@ -541,11 +541,11 @@ Any OccurrenceSpecificationImpl::eInvoke(int operationID, std::shared_ptr<std::l
 }
 
 
-std::shared_ptr<OccurrenceSpecification> OccurrenceSpecificationImpl::getThisOccurrenceSpecificationPtr() const
+std::shared_ptr<uml::OccurrenceSpecification> OccurrenceSpecificationImpl::getThisOccurrenceSpecificationPtr() const
 {
 	return m_thisOccurrenceSpecificationPtr.lock();
 }
-void OccurrenceSpecificationImpl::setThisOccurrenceSpecificationPtr(std::weak_ptr<OccurrenceSpecification> thisOccurrenceSpecificationPtr)
+void OccurrenceSpecificationImpl::setThisOccurrenceSpecificationPtr(std::weak_ptr<uml::OccurrenceSpecification> thisOccurrenceSpecificationPtr)
 {
 	m_thisOccurrenceSpecificationPtr = thisOccurrenceSpecificationPtr;
 	setThisInteractionFragmentPtr(thisOccurrenceSpecificationPtr);

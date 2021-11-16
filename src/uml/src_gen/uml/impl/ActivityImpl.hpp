@@ -31,8 +31,8 @@ namespace uml
 		protected:
 			friend class umlFactoryImpl;
 			ActivityImpl();
-			virtual std::shared_ptr<Activity> getThisActivityPtr() const;
-			virtual void setThisActivityPtr(std::weak_ptr<Activity> thisActivityPtr);
+			virtual std::shared_ptr<uml::Activity> getThisActivityPtr() const;
+			virtual void setThisActivityPtr(std::weak_ptr<uml::Activity> thisActivityPtr);
 
 			//Additional constructors for the containments back reference
 			ActivityImpl(std::weak_ptr<uml::BehavioredClassifier> par_behavioredClassifier);
@@ -126,7 +126,7 @@ namespace uml
 			<p>From package UML::Activities.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup, uml::ActivityGroup /*Subset does not reference a union*/>> getPartition() const ;
+			virtual std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup /*Subset does not reference a union*/, uml::ActivityGroup>> getPartition() const ;
 			/*!
 			Top-level StructuredActivityNodes in the Activity.
 			<p>From package UML::Activities.</p>
@@ -244,7 +244,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<Activity> m_thisActivityPtr;
+			std::weak_ptr<uml::Activity> m_thisActivityPtr;
 	};
 }
 #endif /* end of include guard: UML_ACTIVITYACTIVITYIMPL_HPP */

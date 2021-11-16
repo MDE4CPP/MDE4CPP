@@ -32,8 +32,8 @@ namespace fUML::Semantics::SimpleClassifiers
 		protected:
 			friend class fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactoryImpl;
 			DataValueImpl();
-			virtual std::shared_ptr<DataValue> getThisDataValuePtr() const;
-			virtual void setThisDataValuePtr(std::weak_ptr<DataValue> thisDataValuePtr);
+			virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::DataValue> getThisDataValuePtr() const;
+			virtual void setThisDataValuePtr(std::weak_ptr<fUML::Semantics::SimpleClassifiers::DataValue> thisDataValuePtr);
 
 
 		public:
@@ -92,7 +92,7 @@ namespace fUML::Semantics::SimpleClassifiers
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<DataValue> m_thisDataValuePtr;
+			std::weak_ptr<fUML::Semantics::SimpleClassifiers::DataValue> m_thisDataValuePtr;
 	};
 }
 #endif /* end of include guard: FUML_SEMANTICS_SIMPLECLASSIFIERS_DATAVALUEDATAVALUEIMPL_HPP */

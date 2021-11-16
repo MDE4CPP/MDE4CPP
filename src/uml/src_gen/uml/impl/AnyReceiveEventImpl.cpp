@@ -336,11 +336,11 @@ Any AnyReceiveEventImpl::eInvoke(int operationID, std::shared_ptr<std::list < st
 }
 
 
-std::shared_ptr<AnyReceiveEvent> AnyReceiveEventImpl::getThisAnyReceiveEventPtr() const
+std::shared_ptr<uml::AnyReceiveEvent> AnyReceiveEventImpl::getThisAnyReceiveEventPtr() const
 {
 	return m_thisAnyReceiveEventPtr.lock();
 }
-void AnyReceiveEventImpl::setThisAnyReceiveEventPtr(std::weak_ptr<AnyReceiveEvent> thisAnyReceiveEventPtr)
+void AnyReceiveEventImpl::setThisAnyReceiveEventPtr(std::weak_ptr<uml::AnyReceiveEvent> thisAnyReceiveEventPtr)
 {
 	m_thisAnyReceiveEventPtr = thisAnyReceiveEventPtr;
 	setThisMessageEventPtr(thisAnyReceiveEventPtr);

@@ -31,8 +31,8 @@ namespace uml
 		protected:
 			friend class umlFactoryImpl;
 			TimeExpressionImpl();
-			virtual std::shared_ptr<TimeExpression> getThisTimeExpressionPtr() const;
-			virtual void setThisTimeExpressionPtr(std::weak_ptr<TimeExpression> thisTimeExpressionPtr);
+			virtual std::shared_ptr<uml::TimeExpression> getThisTimeExpressionPtr() const;
+			virtual void setThisTimeExpressionPtr(std::weak_ptr<uml::TimeExpression> thisTimeExpressionPtr);
 
 			//Additional constructors for the containments back reference
 			TimeExpressionImpl(std::weak_ptr<uml::Namespace> par_namespace);
@@ -141,7 +141,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<TimeExpression> m_thisTimeExpressionPtr;
+			std::weak_ptr<uml::TimeExpression> m_thisTimeExpressionPtr;
 	};
 }
 #endif /* end of include guard: UML_TIMEEXPRESSIONTIMEEXPRESSIONIMPL_HPP */

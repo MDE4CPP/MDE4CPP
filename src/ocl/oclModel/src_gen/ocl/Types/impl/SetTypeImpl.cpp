@@ -270,11 +270,11 @@ Any SetTypeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::share
 }
 
 
-std::shared_ptr<SetType> SetTypeImpl::getThisSetTypePtr() const
+std::shared_ptr<ocl::Types::SetType> SetTypeImpl::getThisSetTypePtr() const
 {
 	return m_thisSetTypePtr.lock();
 }
-void SetTypeImpl::setThisSetTypePtr(std::weak_ptr<SetType> thisSetTypePtr)
+void SetTypeImpl::setThisSetTypePtr(std::weak_ptr<ocl::Types::SetType> thisSetTypePtr)
 {
 	m_thisSetTypePtr = thisSetTypePtr;
 	setThisCollectionTypePtr(thisSetTypePtr);

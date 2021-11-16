@@ -546,11 +546,11 @@ Any CreateLinkObjectActionImpl::eInvoke(int operationID, std::shared_ptr<std::li
 }
 
 
-std::shared_ptr<CreateLinkObjectAction> CreateLinkObjectActionImpl::getThisCreateLinkObjectActionPtr() const
+std::shared_ptr<uml::CreateLinkObjectAction> CreateLinkObjectActionImpl::getThisCreateLinkObjectActionPtr() const
 {
 	return m_thisCreateLinkObjectActionPtr.lock();
 }
-void CreateLinkObjectActionImpl::setThisCreateLinkObjectActionPtr(std::weak_ptr<CreateLinkObjectAction> thisCreateLinkObjectActionPtr)
+void CreateLinkObjectActionImpl::setThisCreateLinkObjectActionPtr(std::weak_ptr<uml::CreateLinkObjectAction> thisCreateLinkObjectActionPtr)
 {
 	m_thisCreateLinkObjectActionPtr = thisCreateLinkObjectActionPtr;
 	setThisCreateLinkActionPtr(thisCreateLinkObjectActionPtr);

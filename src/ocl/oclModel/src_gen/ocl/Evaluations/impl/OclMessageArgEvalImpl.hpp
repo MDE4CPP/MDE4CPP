@@ -32,8 +32,8 @@ namespace ocl::Evaluations
 		protected:
 			friend class ocl::Evaluations::EvaluationsFactoryImpl;
 			OclMessageArgEvalImpl();
-			virtual std::shared_ptr<OclMessageArgEval> getThisOclMessageArgEvalPtr() const;
-			virtual void setThisOclMessageArgEvalPtr(std::weak_ptr<OclMessageArgEval> thisOclMessageArgEvalPtr);
+			virtual std::shared_ptr<ocl::Evaluations::OclMessageArgEval> getThisOclMessageArgEvalPtr() const;
+			virtual void setThisOclMessageArgEvalPtr(std::weak_ptr<ocl::Evaluations::OclMessageArgEval> thisOclMessageArgEvalPtr);
 
 
 		public:
@@ -93,7 +93,7 @@ namespace ocl::Evaluations
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<OclMessageArgEval> m_thisOclMessageArgEvalPtr;
+			std::weak_ptr<ocl::Evaluations::OclMessageArgEval> m_thisOclMessageArgEvalPtr;
 	};
 }
 #endif /* end of include guard: OCL_EVALUATIONS_OCLMESSAGEARGEVALOCLMESSAGEARGEVALIMPL_HPP */

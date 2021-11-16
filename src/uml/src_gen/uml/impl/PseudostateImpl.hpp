@@ -31,8 +31,8 @@ namespace uml
 		protected:
 			friend class umlFactoryImpl;
 			PseudostateImpl();
-			virtual std::shared_ptr<Pseudostate> getThisPseudostatePtr() const;
-			virtual void setThisPseudostatePtr(std::weak_ptr<Pseudostate> thisPseudostatePtr);
+			virtual std::shared_ptr<uml::Pseudostate> getThisPseudostatePtr() const;
+			virtual void setThisPseudostatePtr(std::weak_ptr<uml::Pseudostate> thisPseudostatePtr);
 
 			//Additional constructors for the containments back reference
 			PseudostateImpl(std::weak_ptr<uml::Region> par_container);
@@ -218,7 +218,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<Pseudostate> m_thisPseudostatePtr;
+			std::weak_ptr<uml::Pseudostate> m_thisPseudostatePtr;
 	};
 }
 #endif /* end of include guard: UML_PSEUDOSTATEPSEUDOSTATEIMPL_HPP */

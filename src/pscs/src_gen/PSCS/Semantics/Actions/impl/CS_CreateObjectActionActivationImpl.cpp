@@ -45,9 +45,9 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
+#include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Actions/ActionsFactory.hpp"
-#include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 
 #include "uml/Action.hpp"
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
@@ -340,11 +340,11 @@ Any CS_CreateObjectActionActivationImpl::eInvoke(int operationID, std::shared_pt
 }
 
 
-std::shared_ptr<CS_CreateObjectActionActivation> CS_CreateObjectActionActivationImpl::getThisCS_CreateObjectActionActivationPtr() const
+std::shared_ptr<PSCS::Semantics::Actions::CS_CreateObjectActionActivation> CS_CreateObjectActionActivationImpl::getThisCS_CreateObjectActionActivationPtr() const
 {
 	return m_thisCS_CreateObjectActionActivationPtr.lock();
 }
-void CS_CreateObjectActionActivationImpl::setThisCS_CreateObjectActionActivationPtr(std::weak_ptr<CS_CreateObjectActionActivation> thisCS_CreateObjectActionActivationPtr)
+void CS_CreateObjectActionActivationImpl::setThisCS_CreateObjectActionActivationPtr(std::weak_ptr<PSCS::Semantics::Actions::CS_CreateObjectActionActivation> thisCS_CreateObjectActionActivationPtr)
 {
 	m_thisCS_CreateObjectActionActivationPtr = thisCS_CreateObjectActionActivationPtr;
 	setThisCreateObjectActionActivationPtr(thisCS_CreateObjectActionActivationPtr);

@@ -32,8 +32,8 @@
 
 #include <exception> // used in Persistence
 #include "fUML/Semantics/Values/ValuesFactory.hpp"
-#include "uml/umlFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
+#include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
 
 #include "ocl/Evaluations/CollectionLiteralPartEval.hpp"
@@ -365,11 +365,11 @@ Any CollectionRangeEvalImpl::eInvoke(int operationID, std::shared_ptr<std::list 
 }
 
 
-std::shared_ptr<CollectionRangeEval> CollectionRangeEvalImpl::getThisCollectionRangeEvalPtr() const
+std::shared_ptr<ocl::Evaluations::CollectionRangeEval> CollectionRangeEvalImpl::getThisCollectionRangeEvalPtr() const
 {
 	return m_thisCollectionRangeEvalPtr.lock();
 }
-void CollectionRangeEvalImpl::setThisCollectionRangeEvalPtr(std::weak_ptr<CollectionRangeEval> thisCollectionRangeEvalPtr)
+void CollectionRangeEvalImpl::setThisCollectionRangeEvalPtr(std::weak_ptr<ocl::Evaluations::CollectionRangeEval> thisCollectionRangeEvalPtr)
 {
 	m_thisCollectionRangeEvalPtr = thisCollectionRangeEvalPtr;
 	setThisCollectionLiteralPartEvalPtr(thisCollectionRangeEvalPtr);

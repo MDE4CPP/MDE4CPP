@@ -32,8 +32,8 @@ namespace fUML::Semantics::CommonBehavior
 		protected:
 			friend class fUML::Semantics::CommonBehavior::CommonBehaviorFactoryImpl;
 			SignalEventOccurrenceImpl();
-			virtual std::shared_ptr<SignalEventOccurrence> getThisSignalEventOccurrencePtr() const;
-			virtual void setThisSignalEventOccurrencePtr(std::weak_ptr<SignalEventOccurrence> thisSignalEventOccurrencePtr);
+			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::SignalEventOccurrence> getThisSignalEventOccurrencePtr() const;
+			virtual void setThisSignalEventOccurrencePtr(std::weak_ptr<fUML::Semantics::CommonBehavior::SignalEventOccurrence> thisSignalEventOccurrencePtr);
 
 
 		public:
@@ -91,7 +91,7 @@ namespace fUML::Semantics::CommonBehavior
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<SignalEventOccurrence> m_thisSignalEventOccurrencePtr;
+			std::weak_ptr<fUML::Semantics::CommonBehavior::SignalEventOccurrence> m_thisSignalEventOccurrencePtr;
 	};
 }
 #endif /* end of include guard: FUML_SEMANTICS_COMMONBEHAVIOR_SIGNALEVENTOCCURRENCESIGNALEVENTOCCURRENCEIMPL_HPP */

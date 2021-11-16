@@ -33,8 +33,8 @@ namespace ocl::Evaluations
 		protected:
 			friend class ocl::Evaluations::EvaluationsFactoryImpl;
 			UnlimitedNaturalLiteralExpEvalImpl();
-			virtual std::shared_ptr<UnlimitedNaturalLiteralExpEval> getThisUnlimitedNaturalLiteralExpEvalPtr() const;
-			virtual void setThisUnlimitedNaturalLiteralExpEvalPtr(std::weak_ptr<UnlimitedNaturalLiteralExpEval> thisUnlimitedNaturalLiteralExpEvalPtr);
+			virtual std::shared_ptr<ocl::Evaluations::UnlimitedNaturalLiteralExpEval> getThisUnlimitedNaturalLiteralExpEvalPtr() const;
+			virtual void setThisUnlimitedNaturalLiteralExpEvalPtr(std::weak_ptr<ocl::Evaluations::UnlimitedNaturalLiteralExpEval> thisUnlimitedNaturalLiteralExpEvalPtr);
 
 
 		public:
@@ -88,7 +88,7 @@ namespace ocl::Evaluations
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<UnlimitedNaturalLiteralExpEval> m_thisUnlimitedNaturalLiteralExpEvalPtr;
+			std::weak_ptr<ocl::Evaluations::UnlimitedNaturalLiteralExpEval> m_thisUnlimitedNaturalLiteralExpEvalPtr;
 	};
 }
 #endif /* end of include guard: OCL_EVALUATIONS_UNLIMITEDNATURALLITERALEXPEVALUNLIMITEDNATURALLITERALEXPEVALIMPL_HPP */

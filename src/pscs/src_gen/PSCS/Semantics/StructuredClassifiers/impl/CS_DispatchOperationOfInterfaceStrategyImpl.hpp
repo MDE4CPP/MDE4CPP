@@ -32,8 +32,8 @@ namespace PSCS::Semantics::StructuredClassifiers
 		protected:
 			friend class PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactoryImpl;
 			CS_DispatchOperationOfInterfaceStrategyImpl();
-			virtual std::shared_ptr<CS_DispatchOperationOfInterfaceStrategy> getThisCS_DispatchOperationOfInterfaceStrategyPtr() const;
-			virtual void setThisCS_DispatchOperationOfInterfaceStrategyPtr(std::weak_ptr<CS_DispatchOperationOfInterfaceStrategy> thisCS_DispatchOperationOfInterfaceStrategyPtr);
+			virtual std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_DispatchOperationOfInterfaceStrategy> getThisCS_DispatchOperationOfInterfaceStrategyPtr() const;
+			virtual void setThisCS_DispatchOperationOfInterfaceStrategyPtr(std::weak_ptr<PSCS::Semantics::StructuredClassifiers::CS_DispatchOperationOfInterfaceStrategy> thisCS_DispatchOperationOfInterfaceStrategyPtr);
 
 
 		public:
@@ -88,7 +88,7 @@ namespace PSCS::Semantics::StructuredClassifiers
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<CS_DispatchOperationOfInterfaceStrategy> m_thisCS_DispatchOperationOfInterfaceStrategyPtr;
+			std::weak_ptr<PSCS::Semantics::StructuredClassifiers::CS_DispatchOperationOfInterfaceStrategy> m_thisCS_DispatchOperationOfInterfaceStrategyPtr;
 	};
 }
 #endif /* end of include guard: PSCS_SEMANTICS_STRUCTUREDCLASSIFIERS_CS_DISPATCHOPERATIONOFINTERFACESTRATEGYCS_DISPATCHOPERATIONOFINTERFACESTRATEGYIMPL_HPP */

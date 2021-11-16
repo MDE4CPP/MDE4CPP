@@ -32,8 +32,8 @@ namespace ocl::Expressions
 		protected:
 			friend class ocl::Expressions::ExpressionsFactoryImpl;
 			StateExpImpl();
-			virtual std::shared_ptr<StateExp> getThisStateExpPtr() const;
-			virtual void setThisStateExpPtr(std::weak_ptr<StateExp> thisStateExpPtr);
+			virtual std::shared_ptr<ocl::Expressions::StateExp> getThisStateExpPtr() const;
+			virtual void setThisStateExpPtr(std::weak_ptr<ocl::Expressions::StateExp> thisStateExpPtr);
 
 			//Additional constructors for the containments back reference
 			StateExpImpl(std::weak_ptr<ocl::Expressions::CallExp> par_appliedElement);
@@ -108,7 +108,7 @@ namespace ocl::Expressions
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<StateExp> m_thisStateExpPtr;
+			std::weak_ptr<ocl::Expressions::StateExp> m_thisStateExpPtr;
 	};
 }
 #endif /* end of include guard: OCL_EXPRESSIONS_STATEEXPSTATEEXPIMPL_HPP */

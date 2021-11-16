@@ -445,11 +445,11 @@ Any ClauseActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list < s
 }
 
 
-std::shared_ptr<ClauseActivation> ClauseActivationImpl::getThisClauseActivationPtr() const
+std::shared_ptr<fUML::Semantics::Actions::ClauseActivation> ClauseActivationImpl::getThisClauseActivationPtr() const
 {
 	return m_thisClauseActivationPtr.lock();
 }
-void ClauseActivationImpl::setThisClauseActivationPtr(std::weak_ptr<ClauseActivation> thisClauseActivationPtr)
+void ClauseActivationImpl::setThisClauseActivationPtr(std::weak_ptr<fUML::Semantics::Actions::ClauseActivation> thisClauseActivationPtr)
 {
 	m_thisClauseActivationPtr = thisClauseActivationPtr;
 }

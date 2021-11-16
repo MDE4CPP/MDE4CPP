@@ -34,8 +34,8 @@ virtual public VariableDeclEval
 		protected:
 			friend class ocl::Evaluations::EvaluationsFactoryImpl;
 			VariableDeclEvalImpl();
-			virtual std::shared_ptr<VariableDeclEval> getThisVariableDeclEvalPtr() const;
-			virtual void setThisVariableDeclEvalPtr(std::weak_ptr<VariableDeclEval> thisVariableDeclEvalPtr);
+			virtual std::shared_ptr<ocl::Evaluations::VariableDeclEval> getThisVariableDeclEvalPtr() const;
+			virtual void setThisVariableDeclEvalPtr(std::weak_ptr<ocl::Evaluations::VariableDeclEval> thisVariableDeclEvalPtr);
 
 
 		public:
@@ -93,7 +93,7 @@ virtual public VariableDeclEval
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<VariableDeclEval> m_thisVariableDeclEvalPtr;
+			std::weak_ptr<ocl::Evaluations::VariableDeclEval> m_thisVariableDeclEvalPtr;
 	};
 }
 #endif /* end of include guard: OCL_EVALUATIONS_VARIABLEDECLEVALVARIABLEDECLEVALIMPL_HPP */

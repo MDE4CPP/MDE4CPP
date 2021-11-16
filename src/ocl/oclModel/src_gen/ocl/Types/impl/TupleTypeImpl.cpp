@@ -33,8 +33,8 @@
 
 #include <exception> // used in Persistence
 #include "ecore/ecoreFactory.hpp"
-#include "ocl/Types/TypesFactory.hpp"
 #include "ocl/Values/ValuesFactory.hpp"
+#include "ocl/Types/TypesFactory.hpp"
 
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EDataType.hpp"
@@ -415,11 +415,11 @@ Any TupleTypeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sha
 }
 
 
-std::shared_ptr<TupleType> TupleTypeImpl::getThisTupleTypePtr() const
+std::shared_ptr<ocl::Types::TupleType> TupleTypeImpl::getThisTupleTypePtr() const
 {
 	return m_thisTupleTypePtr.lock();
 }
-void TupleTypeImpl::setThisTupleTypePtr(std::weak_ptr<TupleType> thisTupleTypePtr)
+void TupleTypeImpl::setThisTupleTypePtr(std::weak_ptr<ocl::Types::TupleType> thisTupleTypePtr)
 {
 	m_thisTupleTypePtr = thisTupleTypePtr;
 	setThisEDataTypePtr(thisTupleTypePtr);

@@ -113,14 +113,6 @@ DeployedArtifactImpl& DeployedArtifactImpl::operator=(const DeployedArtifactImpl
 	return *this;
 }
 
-std::shared_ptr<ecore::EObject> DeployedArtifactImpl::copy() const
-{
-	std::shared_ptr<DeployedArtifactImpl> element(new DeployedArtifactImpl());
-	*element =(*this);
-	element->setThisDeployedArtifactPtr(element);
-	return element;
-}
-
 //*********************************
 // Operations
 //*********************************
@@ -294,11 +286,11 @@ Any DeployedArtifactImpl::eInvoke(int operationID, std::shared_ptr<std::list < s
 }
 
 
-std::shared_ptr<DeployedArtifact> DeployedArtifactImpl::getThisDeployedArtifactPtr() const
+std::shared_ptr<uml::DeployedArtifact> DeployedArtifactImpl::getThisDeployedArtifactPtr() const
 {
 	return m_thisDeployedArtifactPtr.lock();
 }
-void DeployedArtifactImpl::setThisDeployedArtifactPtr(std::weak_ptr<DeployedArtifact> thisDeployedArtifactPtr)
+void DeployedArtifactImpl::setThisDeployedArtifactPtr(std::weak_ptr<uml::DeployedArtifact> thisDeployedArtifactPtr)
 {
 	m_thisDeployedArtifactPtr = thisDeployedArtifactPtr;
 	setThisNamedElementPtr(thisDeployedArtifactPtr);

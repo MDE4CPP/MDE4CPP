@@ -308,11 +308,11 @@ Any ControlTokenImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::
 }
 
 
-std::shared_ptr<ControlToken> ControlTokenImpl::getThisControlTokenPtr() const
+std::shared_ptr<fUML::Semantics::Activities::ControlToken> ControlTokenImpl::getThisControlTokenPtr() const
 {
 	return m_thisControlTokenPtr.lock();
 }
-void ControlTokenImpl::setThisControlTokenPtr(std::weak_ptr<ControlToken> thisControlTokenPtr)
+void ControlTokenImpl::setThisControlTokenPtr(std::weak_ptr<fUML::Semantics::Activities::ControlToken> thisControlTokenPtr)
 {
 	m_thisControlTokenPtr = thisControlTokenPtr;
 	setThisTokenPtr(thisControlTokenPtr);

@@ -32,9 +32,9 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
+#include "fUML/Semantics/Values/ValuesFactory.hpp"
 #include "ecore/ecoreFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
-#include "fUML/Semantics/Values/ValuesFactory.hpp"
 
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClassifier.hpp"
@@ -734,11 +734,11 @@ Any VariableImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shar
 }
 
 
-std::shared_ptr<Variable> VariableImpl::getThisVariablePtr() const
+std::shared_ptr<ocl::Expressions::Variable> VariableImpl::getThisVariablePtr() const
 {
 	return m_thisVariablePtr.lock();
 }
-void VariableImpl::setThisVariablePtr(std::weak_ptr<Variable> thisVariablePtr)
+void VariableImpl::setThisVariablePtr(std::weak_ptr<ocl::Expressions::Variable> thisVariablePtr)
 {
 	m_thisVariablePtr = thisVariablePtr;
 	setThisETypedElementPtr(thisVariablePtr);

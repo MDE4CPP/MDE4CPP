@@ -32,8 +32,8 @@ namespace ocl::Evaluations
 		protected:
 			friend class ocl::Evaluations::EvaluationsFactoryImpl;
 			LetExpEvalImpl();
-			virtual std::shared_ptr<LetExpEval> getThisLetExpEvalPtr() const;
-			virtual void setThisLetExpEvalPtr(std::weak_ptr<LetExpEval> thisLetExpEvalPtr);
+			virtual std::shared_ptr<ocl::Evaluations::LetExpEval> getThisLetExpEvalPtr() const;
+			virtual void setThisLetExpEvalPtr(std::weak_ptr<ocl::Evaluations::LetExpEval> thisLetExpEvalPtr);
 
 
 		public:
@@ -93,7 +93,7 @@ namespace ocl::Evaluations
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<LetExpEval> m_thisLetExpEvalPtr;
+			std::weak_ptr<ocl::Evaluations::LetExpEval> m_thisLetExpEvalPtr;
 	};
 }
 #endif /* end of include guard: OCL_EVALUATIONS_LETEXPEVALLETEXPEVALIMPL_HPP */

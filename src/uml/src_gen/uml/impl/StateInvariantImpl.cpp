@@ -391,11 +391,11 @@ Any StateInvariantImpl::eInvoke(int operationID, std::shared_ptr<std::list < std
 }
 
 
-std::shared_ptr<StateInvariant> StateInvariantImpl::getThisStateInvariantPtr() const
+std::shared_ptr<uml::StateInvariant> StateInvariantImpl::getThisStateInvariantPtr() const
 {
 	return m_thisStateInvariantPtr.lock();
 }
-void StateInvariantImpl::setThisStateInvariantPtr(std::weak_ptr<StateInvariant> thisStateInvariantPtr)
+void StateInvariantImpl::setThisStateInvariantPtr(std::weak_ptr<uml::StateInvariant> thisStateInvariantPtr)
 {
 	m_thisStateInvariantPtr = thisStateInvariantPtr;
 	setThisInteractionFragmentPtr(thisStateInvariantPtr);

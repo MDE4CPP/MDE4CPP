@@ -593,11 +593,11 @@ Any ValuePinImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shar
 }
 
 
-std::shared_ptr<ValuePin> ValuePinImpl::getThisValuePinPtr() const
+std::shared_ptr<uml::ValuePin> ValuePinImpl::getThisValuePinPtr() const
 {
 	return m_thisValuePinPtr.lock();
 }
-void ValuePinImpl::setThisValuePinPtr(std::weak_ptr<ValuePin> thisValuePinPtr)
+void ValuePinImpl::setThisValuePinPtr(std::weak_ptr<uml::ValuePin> thisValuePinPtr)
 {
 	m_thisValuePinPtr = thisValuePinPtr;
 	setThisInputPinPtr(thisValuePinPtr);

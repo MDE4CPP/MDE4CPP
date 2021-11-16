@@ -270,11 +270,11 @@ Any OrderedSetTypeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std
 }
 
 
-std::shared_ptr<OrderedSetType> OrderedSetTypeImpl::getThisOrderedSetTypePtr() const
+std::shared_ptr<ocl::Types::OrderedSetType> OrderedSetTypeImpl::getThisOrderedSetTypePtr() const
 {
 	return m_thisOrderedSetTypePtr.lock();
 }
-void OrderedSetTypeImpl::setThisOrderedSetTypePtr(std::weak_ptr<OrderedSetType> thisOrderedSetTypePtr)
+void OrderedSetTypeImpl::setThisOrderedSetTypePtr(std::weak_ptr<ocl::Types::OrderedSetType> thisOrderedSetTypePtr)
 {
 	m_thisOrderedSetTypePtr = thisOrderedSetTypePtr;
 	setThisCollectionTypePtr(thisOrderedSetTypePtr);

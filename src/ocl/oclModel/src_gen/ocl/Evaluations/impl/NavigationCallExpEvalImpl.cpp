@@ -32,11 +32,11 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Values/ValuesFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
+#include "fUML/Semantics/Values/ValuesFactory.hpp"
 #include "uml/umlFactory.hpp"
-#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
+#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
 
 #include "ocl/Evaluations/EvalEnvironment.hpp"
@@ -415,11 +415,11 @@ Any NavigationCallExpEvalImpl::eInvoke(int operationID, std::shared_ptr<std::lis
 }
 
 
-std::shared_ptr<NavigationCallExpEval> NavigationCallExpEvalImpl::getThisNavigationCallExpEvalPtr() const
+std::shared_ptr<ocl::Evaluations::NavigationCallExpEval> NavigationCallExpEvalImpl::getThisNavigationCallExpEvalPtr() const
 {
 	return m_thisNavigationCallExpEvalPtr.lock();
 }
-void NavigationCallExpEvalImpl::setThisNavigationCallExpEvalPtr(std::weak_ptr<NavigationCallExpEval> thisNavigationCallExpEvalPtr)
+void NavigationCallExpEvalImpl::setThisNavigationCallExpEvalPtr(std::weak_ptr<ocl::Evaluations::NavigationCallExpEval> thisNavigationCallExpEvalPtr)
 {
 	m_thisNavigationCallExpEvalPtr = thisNavigationCallExpEvalPtr;
 	setThisModelPropertyCallExpEvalPtr(thisNavigationCallExpEvalPtr);

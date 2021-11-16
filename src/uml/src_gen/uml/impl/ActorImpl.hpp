@@ -31,8 +31,8 @@ namespace uml
 		protected:
 			friend class umlFactoryImpl;
 			ActorImpl();
-			virtual std::shared_ptr<Actor> getThisActorPtr() const;
-			virtual void setThisActorPtr(std::weak_ptr<Actor> thisActorPtr);
+			virtual std::shared_ptr<uml::Actor> getThisActorPtr() const;
+			virtual void setThisActorPtr(std::weak_ptr<uml::Actor> thisActorPtr);
 
 			//Additional constructors for the containments back reference
 			ActorImpl(std::weak_ptr<uml::Namespace> par_namespace);
@@ -159,7 +159,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<Actor> m_thisActorPtr;
+			std::weak_ptr<uml::Actor> m_thisActorPtr;
 	};
 }
 #endif /* end of include guard: UML_ACTORACTORIMPL_HPP */

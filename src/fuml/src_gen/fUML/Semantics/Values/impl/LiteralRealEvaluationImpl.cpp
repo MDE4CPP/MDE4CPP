@@ -36,8 +36,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
+#include "uml/umlFactory.hpp"
 
 #include "fUML/Semantics/Values/LiteralEvaluation.hpp"
 #include "fUML/Semantics/Loci/Locus.hpp"
@@ -276,11 +276,11 @@ Any LiteralRealEvaluationImpl::eInvoke(int operationID, std::shared_ptr<std::lis
 }
 
 
-std::shared_ptr<LiteralRealEvaluation> LiteralRealEvaluationImpl::getThisLiteralRealEvaluationPtr() const
+std::shared_ptr<fUML::Semantics::Values::LiteralRealEvaluation> LiteralRealEvaluationImpl::getThisLiteralRealEvaluationPtr() const
 {
 	return m_thisLiteralRealEvaluationPtr.lock();
 }
-void LiteralRealEvaluationImpl::setThisLiteralRealEvaluationPtr(std::weak_ptr<LiteralRealEvaluation> thisLiteralRealEvaluationPtr)
+void LiteralRealEvaluationImpl::setThisLiteralRealEvaluationPtr(std::weak_ptr<fUML::Semantics::Values::LiteralRealEvaluation> thisLiteralRealEvaluationPtr)
 {
 	m_thisLiteralRealEvaluationPtr = thisLiteralRealEvaluationPtr;
 	setThisLiteralEvaluationPtr(thisLiteralRealEvaluationPtr);

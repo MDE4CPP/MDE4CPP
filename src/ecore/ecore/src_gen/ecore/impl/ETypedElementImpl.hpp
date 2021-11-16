@@ -25,21 +25,21 @@ namespace ecore
 	{
 		public: 
 			ETypedElementImpl(const ETypedElementImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 			ETypedElementImpl& operator=(ETypedElementImpl const&); 
 
 		protected:
 			friend class ecoreFactoryImpl;
 			ETypedElementImpl();
-			virtual std::shared_ptr<ETypedElement> getThisETypedElementPtr() const;
-			virtual void setThisETypedElementPtr(std::weak_ptr<ETypedElement> thisETypedElementPtr);
+			virtual std::shared_ptr<ecore::ETypedElement> getThisETypedElementPtr() const;
+			virtual void setThisETypedElementPtr(std::weak_ptr<ecore::ETypedElement> thisETypedElementPtr);
 
 			//Additional constructors for the containments back reference
 			ETypedElementImpl(std::weak_ptr<ecore::EObject> par_eContainer);
 
 		public:
 			//destructor
-			virtual ~ETypedElementImpl();
+			virtual ~ETypedElementImpl() = 0;
 			
 			//*********************************
 			// Operations
@@ -104,7 +104,7 @@ namespace ecore
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<ETypedElement> m_thisETypedElementPtr;
+			std::weak_ptr<ecore::ETypedElement> m_thisETypedElementPtr;
 	};
 }
 #endif /* end of include guard: ECORE_ETYPEDELEMENTETYPEDELEMENTIMPL_HPP */

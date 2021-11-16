@@ -28,19 +28,19 @@ virtual public SemanticStrategy
 	{
 		public: 
 			SemanticStrategyImpl(const SemanticStrategyImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 			SemanticStrategyImpl& operator=(SemanticStrategyImpl const&); 
 
 		protected:
 			friend class fUML::Semantics::Loci::LociFactoryImpl;
 			SemanticStrategyImpl();
-			virtual std::shared_ptr<SemanticStrategy> getThisSemanticStrategyPtr() const;
-			virtual void setThisSemanticStrategyPtr(std::weak_ptr<SemanticStrategy> thisSemanticStrategyPtr);
+			virtual std::shared_ptr<fUML::Semantics::Loci::SemanticStrategy> getThisSemanticStrategyPtr() const;
+			virtual void setThisSemanticStrategyPtr(std::weak_ptr<fUML::Semantics::Loci::SemanticStrategy> thisSemanticStrategyPtr);
 
 
 		public:
 			//destructor
-			virtual ~SemanticStrategyImpl();
+			virtual ~SemanticStrategyImpl() = 0;
 			
 			//*********************************
 			// Operations
@@ -90,7 +90,7 @@ virtual public SemanticStrategy
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<SemanticStrategy> m_thisSemanticStrategyPtr;
+			std::weak_ptr<fUML::Semantics::Loci::SemanticStrategy> m_thisSemanticStrategyPtr;
 	};
 }
 #endif /* end of include guard: FUML_SEMANTICS_LOCI_SEMANTICSTRATEGYSEMANTICSTRATEGYIMPL_HPP */

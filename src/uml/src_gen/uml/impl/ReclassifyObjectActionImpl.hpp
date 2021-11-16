@@ -31,8 +31,8 @@ namespace uml
 		protected:
 			friend class umlFactoryImpl;
 			ReclassifyObjectActionImpl();
-			virtual std::shared_ptr<ReclassifyObjectAction> getThisReclassifyObjectActionPtr() const;
-			virtual void setThisReclassifyObjectActionPtr(std::weak_ptr<ReclassifyObjectAction> thisReclassifyObjectActionPtr);
+			virtual std::shared_ptr<uml::ReclassifyObjectAction> getThisReclassifyObjectActionPtr() const;
+			virtual void setThisReclassifyObjectActionPtr(std::weak_ptr<uml::ReclassifyObjectAction> thisReclassifyObjectActionPtr);
 
 			//Additional constructors for the containments back reference
 			ReclassifyObjectActionImpl(std::weak_ptr<uml::Activity> par_activity);
@@ -178,7 +178,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<ReclassifyObjectAction> m_thisReclassifyObjectActionPtr;
+			std::weak_ptr<uml::ReclassifyObjectAction> m_thisReclassifyObjectActionPtr;
 	};
 }
 #endif /* end of include guard: UML_RECLASSIFYOBJECTACTIONRECLASSIFYOBJECTACTIONIMPL_HPP */

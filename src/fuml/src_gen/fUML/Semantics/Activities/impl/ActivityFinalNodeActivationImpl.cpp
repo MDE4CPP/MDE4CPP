@@ -321,11 +321,11 @@ Any ActivityFinalNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<st
 }
 
 
-std::shared_ptr<ActivityFinalNodeActivation> ActivityFinalNodeActivationImpl::getThisActivityFinalNodeActivationPtr() const
+std::shared_ptr<fUML::Semantics::Activities::ActivityFinalNodeActivation> ActivityFinalNodeActivationImpl::getThisActivityFinalNodeActivationPtr() const
 {
 	return m_thisActivityFinalNodeActivationPtr.lock();
 }
-void ActivityFinalNodeActivationImpl::setThisActivityFinalNodeActivationPtr(std::weak_ptr<ActivityFinalNodeActivation> thisActivityFinalNodeActivationPtr)
+void ActivityFinalNodeActivationImpl::setThisActivityFinalNodeActivationPtr(std::weak_ptr<fUML::Semantics::Activities::ActivityFinalNodeActivation> thisActivityFinalNodeActivationPtr)
 {
 	m_thisActivityFinalNodeActivationPtr = thisActivityFinalNodeActivationPtr;
 	setThisControlNodeActivationPtr(thisActivityFinalNodeActivationPtr);

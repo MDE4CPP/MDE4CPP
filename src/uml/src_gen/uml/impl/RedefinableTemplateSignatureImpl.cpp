@@ -683,11 +683,11 @@ Any RedefinableTemplateSignatureImpl::eInvoke(int operationID, std::shared_ptr<s
 }
 
 
-std::shared_ptr<RedefinableTemplateSignature> RedefinableTemplateSignatureImpl::getThisRedefinableTemplateSignaturePtr() const
+std::shared_ptr<uml::RedefinableTemplateSignature> RedefinableTemplateSignatureImpl::getThisRedefinableTemplateSignaturePtr() const
 {
 	return m_thisRedefinableTemplateSignaturePtr.lock();
 }
-void RedefinableTemplateSignatureImpl::setThisRedefinableTemplateSignaturePtr(std::weak_ptr<RedefinableTemplateSignature> thisRedefinableTemplateSignaturePtr)
+void RedefinableTemplateSignatureImpl::setThisRedefinableTemplateSignaturePtr(std::weak_ptr<uml::RedefinableTemplateSignature> thisRedefinableTemplateSignaturePtr)
 {
 	m_thisRedefinableTemplateSignaturePtr = thisRedefinableTemplateSignaturePtr;
 	setThisRedefinableElementPtr(thisRedefinableTemplateSignaturePtr);

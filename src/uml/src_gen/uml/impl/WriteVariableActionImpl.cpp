@@ -150,14 +150,6 @@ WriteVariableActionImpl& WriteVariableActionImpl::operator=(const WriteVariableA
 	return *this;
 }
 
-std::shared_ptr<ecore::EObject> WriteVariableActionImpl::copy() const
-{
-	std::shared_ptr<WriteVariableActionImpl> element(new WriteVariableActionImpl());
-	*element =(*this);
-	element->setThisWriteVariableActionPtr(element);
-	return element;
-}
-
 //*********************************
 // Operations
 //*********************************
@@ -499,11 +491,11 @@ Any WriteVariableActionImpl::eInvoke(int operationID, std::shared_ptr<std::list 
 }
 
 
-std::shared_ptr<WriteVariableAction> WriteVariableActionImpl::getThisWriteVariableActionPtr() const
+std::shared_ptr<uml::WriteVariableAction> WriteVariableActionImpl::getThisWriteVariableActionPtr() const
 {
 	return m_thisWriteVariableActionPtr.lock();
 }
-void WriteVariableActionImpl::setThisWriteVariableActionPtr(std::weak_ptr<WriteVariableAction> thisWriteVariableActionPtr)
+void WriteVariableActionImpl::setThisWriteVariableActionPtr(std::weak_ptr<uml::WriteVariableAction> thisWriteVariableActionPtr)
 {
 	m_thisWriteVariableActionPtr = thisWriteVariableActionPtr;
 	setThisVariableActionPtr(thisWriteVariableActionPtr);

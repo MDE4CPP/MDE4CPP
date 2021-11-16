@@ -503,11 +503,11 @@ Any ExecutionEnvironmentImpl::eInvoke(int operationID, std::shared_ptr<std::list
 }
 
 
-std::shared_ptr<ExecutionEnvironment> ExecutionEnvironmentImpl::getThisExecutionEnvironmentPtr() const
+std::shared_ptr<uml::ExecutionEnvironment> ExecutionEnvironmentImpl::getThisExecutionEnvironmentPtr() const
 {
 	return m_thisExecutionEnvironmentPtr.lock();
 }
-void ExecutionEnvironmentImpl::setThisExecutionEnvironmentPtr(std::weak_ptr<ExecutionEnvironment> thisExecutionEnvironmentPtr)
+void ExecutionEnvironmentImpl::setThisExecutionEnvironmentPtr(std::weak_ptr<uml::ExecutionEnvironment> thisExecutionEnvironmentPtr)
 {
 	m_thisExecutionEnvironmentPtr = thisExecutionEnvironmentPtr;
 	setThisNodePtr(thisExecutionEnvironmentPtr);

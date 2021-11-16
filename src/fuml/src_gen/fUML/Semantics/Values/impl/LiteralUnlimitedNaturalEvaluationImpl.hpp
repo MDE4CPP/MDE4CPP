@@ -32,8 +32,8 @@ namespace fUML::Semantics::Values
 		protected:
 			friend class fUML::Semantics::Values::ValuesFactoryImpl;
 			LiteralUnlimitedNaturalEvaluationImpl();
-			virtual std::shared_ptr<LiteralUnlimitedNaturalEvaluation> getThisLiteralUnlimitedNaturalEvaluationPtr() const;
-			virtual void setThisLiteralUnlimitedNaturalEvaluationPtr(std::weak_ptr<LiteralUnlimitedNaturalEvaluation> thisLiteralUnlimitedNaturalEvaluationPtr);
+			virtual std::shared_ptr<fUML::Semantics::Values::LiteralUnlimitedNaturalEvaluation> getThisLiteralUnlimitedNaturalEvaluationPtr() const;
+			virtual void setThisLiteralUnlimitedNaturalEvaluationPtr(std::weak_ptr<fUML::Semantics::Values::LiteralUnlimitedNaturalEvaluation> thisLiteralUnlimitedNaturalEvaluationPtr);
 
 
 		public:
@@ -88,7 +88,7 @@ namespace fUML::Semantics::Values
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<LiteralUnlimitedNaturalEvaluation> m_thisLiteralUnlimitedNaturalEvaluationPtr;
+			std::weak_ptr<fUML::Semantics::Values::LiteralUnlimitedNaturalEvaluation> m_thisLiteralUnlimitedNaturalEvaluationPtr;
 	};
 }
 #endif /* end of include guard: FUML_SEMANTICS_VALUES_LITERALUNLIMITEDNATURALEVALUATIONLITERALUNLIMITEDNATURALEVALUATIONIMPL_HPP */

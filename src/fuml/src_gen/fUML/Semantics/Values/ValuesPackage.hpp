@@ -14,14 +14,14 @@
 
 namespace ecore 
 {
+	class EStringToStringMapEntry;
 	class EAnnotation;
 	class EReference;
-	class EClass;
-	class EDataType;
 	class EGenericType;
-	class EParameter;
 	class EOperation;
-	class EStringToStringMapEntry;
+	class EClass;
+	class EParameter;
+	class EDataType;
 }
 
 namespace fUML::Semantics::Values 
@@ -219,7 +219,7 @@ namespace fUML::Semantics::Values
 			//Class and Feature IDs 
 			static const long long VALUE_CLASS = 856918907;
 			static const unsigned int VALUE_CLASS_FEATURE_COUNT = 0;
-			static const unsigned int VALUE_CLASS_OPERATION_COUNT = 10;
+			static const unsigned int VALUE_CLASS_OPERATION_COUNT = 11;
 			
 			
 			static const int VALUE_OPERATION__COPY = 569532635;
@@ -227,6 +227,7 @@ namespace fUML::Semantics::Values
 			static const int VALUE_OPERATION_EQUALS_VALUE = 1153535893;
 			static const int VALUE_OPERATION_GETTYPES = 53656869;
 			static const int VALUE_OPERATION_HASTYPES_CLASSIFIER = 157177571;
+			static const int VALUE_OPERATION_NEW_ = 374650370;
 			static const int VALUE_OPERATION_OBJECTID = 520851197;
 			static const int VALUE_OPERATION_SPECIFY = 164025975;
 			static const int VALUE_OPERATION_TOSTRING = 780447699;
@@ -241,6 +242,7 @@ namespace fUML::Semantics::Values
 			virtual std::shared_ptr<ecore::EOperation> getValue_Operation_equals_Value() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getValue_Operation_getTypes() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getValue_Operation_hasTypes_Classifier() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getValue_Operation_new_() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getValue_Operation_objectId() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getValue_Operation_specify() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getValue_Operation_toString() const = 0;

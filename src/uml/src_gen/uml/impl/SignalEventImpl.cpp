@@ -398,11 +398,11 @@ Any SignalEventImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::s
 }
 
 
-std::shared_ptr<SignalEvent> SignalEventImpl::getThisSignalEventPtr() const
+std::shared_ptr<uml::SignalEvent> SignalEventImpl::getThisSignalEventPtr() const
 {
 	return m_thisSignalEventPtr.lock();
 }
-void SignalEventImpl::setThisSignalEventPtr(std::weak_ptr<SignalEvent> thisSignalEventPtr)
+void SignalEventImpl::setThisSignalEventPtr(std::weak_ptr<uml::SignalEvent> thisSignalEventPtr)
 {
 	m_thisSignalEventPtr = thisSignalEventPtr;
 	setThisMessageEventPtr(thisSignalEventPtr);

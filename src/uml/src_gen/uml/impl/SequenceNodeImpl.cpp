@@ -618,11 +618,11 @@ Any SequenceNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::
 }
 
 
-std::shared_ptr<SequenceNode> SequenceNodeImpl::getThisSequenceNodePtr() const
+std::shared_ptr<uml::SequenceNode> SequenceNodeImpl::getThisSequenceNodePtr() const
 {
 	return m_thisSequenceNodePtr.lock();
 }
-void SequenceNodeImpl::setThisSequenceNodePtr(std::weak_ptr<SequenceNode> thisSequenceNodePtr)
+void SequenceNodeImpl::setThisSequenceNodePtr(std::weak_ptr<uml::SequenceNode> thisSequenceNodePtr)
 {
 	m_thisSequenceNodePtr = thisSequenceNodePtr;
 	setThisStructuredActivityNodePtr(thisSequenceNodePtr);

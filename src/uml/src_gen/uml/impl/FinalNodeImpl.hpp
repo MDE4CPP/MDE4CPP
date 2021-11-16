@@ -25,14 +25,14 @@ namespace uml
 	{
 		public: 
 			FinalNodeImpl(const FinalNodeImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 			FinalNodeImpl& operator=(FinalNodeImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;
 			FinalNodeImpl();
-			virtual std::shared_ptr<FinalNode> getThisFinalNodePtr() const;
-			virtual void setThisFinalNodePtr(std::weak_ptr<FinalNode> thisFinalNodePtr);
+			virtual std::shared_ptr<uml::FinalNode> getThisFinalNodePtr() const;
+			virtual void setThisFinalNodePtr(std::weak_ptr<uml::FinalNode> thisFinalNodePtr);
 
 			//Additional constructors for the containments back reference
 			FinalNodeImpl(std::weak_ptr<uml::Activity> par_activity);
@@ -45,7 +45,7 @@ namespace uml
 
 		public:
 			//destructor
-			virtual ~FinalNodeImpl();
+			virtual ~FinalNodeImpl() = 0;
 			
 			//*********************************
 			// Operations
@@ -124,7 +124,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<FinalNode> m_thisFinalNodePtr;
+			std::weak_ptr<uml::FinalNode> m_thisFinalNodePtr;
 	};
 }
 #endif /* end of include guard: UML_FINALNODEFINALNODEIMPL_HPP */

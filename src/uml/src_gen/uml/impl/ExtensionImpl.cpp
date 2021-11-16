@@ -596,11 +596,11 @@ Any ExtensionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sha
 }
 
 
-std::shared_ptr<Extension> ExtensionImpl::getThisExtensionPtr() const
+std::shared_ptr<uml::Extension> ExtensionImpl::getThisExtensionPtr() const
 {
 	return m_thisExtensionPtr.lock();
 }
-void ExtensionImpl::setThisExtensionPtr(std::weak_ptr<Extension> thisExtensionPtr)
+void ExtensionImpl::setThisExtensionPtr(std::weak_ptr<uml::Extension> thisExtensionPtr)
 {
 	m_thisExtensionPtr = thisExtensionPtr;
 	setThisAssociationPtr(thisExtensionPtr);

@@ -26,19 +26,19 @@ namespace fUML::Semantics::CommonBehavior
 	{
 		public: 
 			GetNextEventStrategyImpl(const GetNextEventStrategyImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 			GetNextEventStrategyImpl& operator=(GetNextEventStrategyImpl const&); 
 
 		protected:
 			friend class fUML::Semantics::CommonBehavior::CommonBehaviorFactoryImpl;
 			GetNextEventStrategyImpl();
-			virtual std::shared_ptr<GetNextEventStrategy> getThisGetNextEventStrategyPtr() const;
-			virtual void setThisGetNextEventStrategyPtr(std::weak_ptr<GetNextEventStrategy> thisGetNextEventStrategyPtr);
+			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::GetNextEventStrategy> getThisGetNextEventStrategyPtr() const;
+			virtual void setThisGetNextEventStrategyPtr(std::weak_ptr<fUML::Semantics::CommonBehavior::GetNextEventStrategy> thisGetNextEventStrategyPtr);
 
 
 		public:
 			//destructor
-			virtual ~GetNextEventStrategyImpl();
+			virtual ~GetNextEventStrategyImpl() = 0;
 			
 			//*********************************
 			// Operations
@@ -89,7 +89,7 @@ namespace fUML::Semantics::CommonBehavior
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<GetNextEventStrategy> m_thisGetNextEventStrategyPtr;
+			std::weak_ptr<fUML::Semantics::CommonBehavior::GetNextEventStrategy> m_thisGetNextEventStrategyPtr;
 	};
 }
 #endif /* end of include guard: FUML_SEMANTICS_COMMONBEHAVIOR_GETNEXTEVENTSTRATEGYGETNEXTEVENTSTRATEGYIMPL_HPP */

@@ -32,8 +32,8 @@ namespace PSCS::Semantics::Actions
 		protected:
 			friend class PSCS::Semantics::Actions::ActionsFactoryImpl;
 			CS_ReadExtentActionActivationImpl();
-			virtual std::shared_ptr<CS_ReadExtentActionActivation> getThisCS_ReadExtentActionActivationPtr() const;
-			virtual void setThisCS_ReadExtentActionActivationPtr(std::weak_ptr<CS_ReadExtentActionActivation> thisCS_ReadExtentActionActivationPtr);
+			virtual std::shared_ptr<PSCS::Semantics::Actions::CS_ReadExtentActionActivation> getThisCS_ReadExtentActionActivationPtr() const;
+			virtual void setThisCS_ReadExtentActionActivationPtr(std::weak_ptr<PSCS::Semantics::Actions::CS_ReadExtentActionActivation> thisCS_ReadExtentActionActivationPtr);
 
 			//Additional constructors for the containments back reference
 			CS_ReadExtentActionActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_group);
@@ -91,7 +91,7 @@ namespace PSCS::Semantics::Actions
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<CS_ReadExtentActionActivation> m_thisCS_ReadExtentActionActivationPtr;
+			std::weak_ptr<PSCS::Semantics::Actions::CS_ReadExtentActionActivation> m_thisCS_ReadExtentActionActivationPtr;
 	};
 }
 #endif /* end of include guard: PSCS_SEMANTICS_ACTIONS_CS_READEXTENTACTIONACTIVATIONCS_READEXTENTACTIONACTIVATIONIMPL_HPP */

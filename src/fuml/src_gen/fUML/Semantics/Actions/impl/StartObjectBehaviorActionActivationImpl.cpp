@@ -368,11 +368,11 @@ Any StartObjectBehaviorActionActivationImpl::eInvoke(int operationID, std::share
 }
 
 
-std::shared_ptr<StartObjectBehaviorActionActivation> StartObjectBehaviorActionActivationImpl::getThisStartObjectBehaviorActionActivationPtr() const
+std::shared_ptr<fUML::Semantics::Actions::StartObjectBehaviorActionActivation> StartObjectBehaviorActionActivationImpl::getThisStartObjectBehaviorActionActivationPtr() const
 {
 	return m_thisStartObjectBehaviorActionActivationPtr.lock();
 }
-void StartObjectBehaviorActionActivationImpl::setThisStartObjectBehaviorActionActivationPtr(std::weak_ptr<StartObjectBehaviorActionActivation> thisStartObjectBehaviorActionActivationPtr)
+void StartObjectBehaviorActionActivationImpl::setThisStartObjectBehaviorActionActivationPtr(std::weak_ptr<fUML::Semantics::Actions::StartObjectBehaviorActionActivation> thisStartObjectBehaviorActionActivationPtr)
 {
 	m_thisStartObjectBehaviorActionActivationPtr = thisStartObjectBehaviorActionActivationPtr;
 	setThisInvocationActionActivationPtr(thisStartObjectBehaviorActionActivationPtr);

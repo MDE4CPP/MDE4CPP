@@ -796,11 +796,11 @@ Any OutputPinImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sha
 }
 
 
-std::shared_ptr<OutputPin> OutputPinImpl::getThisOutputPinPtr() const
+std::shared_ptr<uml::OutputPin> OutputPinImpl::getThisOutputPinPtr() const
 {
 	return m_thisOutputPinPtr.lock();
 }
-void OutputPinImpl::setThisOutputPinPtr(std::weak_ptr<OutputPin> thisOutputPinPtr)
+void OutputPinImpl::setThisOutputPinPtr(std::weak_ptr<uml::OutputPin> thisOutputPinPtr)
 {
 	m_thisOutputPinPtr = thisOutputPinPtr;
 	setThisPinPtr(thisOutputPinPtr);

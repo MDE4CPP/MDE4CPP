@@ -31,8 +31,8 @@ namespace uml
 		protected:
 			friend class umlFactoryImpl;
 			AbstractionImpl();
-			virtual std::shared_ptr<Abstraction> getThisAbstractionPtr() const;
-			virtual void setThisAbstractionPtr(std::weak_ptr<Abstraction> thisAbstractionPtr);
+			virtual std::shared_ptr<uml::Abstraction> getThisAbstractionPtr() const;
+			virtual void setThisAbstractionPtr(std::weak_ptr<uml::Abstraction> thisAbstractionPtr);
 
 			//Additional constructors for the containments back reference
 			AbstractionImpl(std::weak_ptr<uml::Namespace> par_namespace);
@@ -143,7 +143,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<Abstraction> m_thisAbstractionPtr;
+			std::weak_ptr<uml::Abstraction> m_thisAbstractionPtr;
 	};
 }
 #endif /* end of include guard: UML_ABSTRACTIONABSTRACTIONIMPL_HPP */

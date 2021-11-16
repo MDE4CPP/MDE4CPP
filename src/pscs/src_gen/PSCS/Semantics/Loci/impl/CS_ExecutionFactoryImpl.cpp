@@ -73,9 +73,9 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
+#include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "uml/umlFactory.hpp"
-#include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
 
 #include "uml/Class.hpp"
 #include "uml/Classifier.hpp"
@@ -574,11 +574,11 @@ Any CS_ExecutionFactoryImpl::eInvoke(int operationID, std::shared_ptr<std::list 
 }
 
 
-std::shared_ptr<CS_ExecutionFactory> CS_ExecutionFactoryImpl::getThisCS_ExecutionFactoryPtr() const
+std::shared_ptr<PSCS::Semantics::Loci::CS_ExecutionFactory> CS_ExecutionFactoryImpl::getThisCS_ExecutionFactoryPtr() const
 {
 	return m_thisCS_ExecutionFactoryPtr.lock();
 }
-void CS_ExecutionFactoryImpl::setThisCS_ExecutionFactoryPtr(std::weak_ptr<CS_ExecutionFactory> thisCS_ExecutionFactoryPtr)
+void CS_ExecutionFactoryImpl::setThisCS_ExecutionFactoryPtr(std::weak_ptr<PSCS::Semantics::Loci::CS_ExecutionFactory> thisCS_ExecutionFactoryPtr)
 {
 	m_thisCS_ExecutionFactoryPtr = thisCS_ExecutionFactoryPtr;
 	setThisExecutionFactoryPtr(thisCS_ExecutionFactoryPtr);

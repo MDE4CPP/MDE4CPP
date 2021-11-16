@@ -292,11 +292,11 @@ Any InitialNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::lis
 }
 
 
-std::shared_ptr<InitialNodeActivation> InitialNodeActivationImpl::getThisInitialNodeActivationPtr() const
+std::shared_ptr<fUML::Semantics::Activities::InitialNodeActivation> InitialNodeActivationImpl::getThisInitialNodeActivationPtr() const
 {
 	return m_thisInitialNodeActivationPtr.lock();
 }
-void InitialNodeActivationImpl::setThisInitialNodeActivationPtr(std::weak_ptr<InitialNodeActivation> thisInitialNodeActivationPtr)
+void InitialNodeActivationImpl::setThisInitialNodeActivationPtr(std::weak_ptr<fUML::Semantics::Activities::InitialNodeActivation> thisInitialNodeActivationPtr)
 {
 	m_thisInitialNodeActivationPtr = thisInitialNodeActivationPtr;
 	setThisControlNodeActivationPtr(thisInitialNodeActivationPtr);

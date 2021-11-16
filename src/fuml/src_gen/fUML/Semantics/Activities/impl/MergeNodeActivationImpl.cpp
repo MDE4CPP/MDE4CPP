@@ -265,11 +265,11 @@ Any MergeNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list 
 }
 
 
-std::shared_ptr<MergeNodeActivation> MergeNodeActivationImpl::getThisMergeNodeActivationPtr() const
+std::shared_ptr<fUML::Semantics::Activities::MergeNodeActivation> MergeNodeActivationImpl::getThisMergeNodeActivationPtr() const
 {
 	return m_thisMergeNodeActivationPtr.lock();
 }
-void MergeNodeActivationImpl::setThisMergeNodeActivationPtr(std::weak_ptr<MergeNodeActivation> thisMergeNodeActivationPtr)
+void MergeNodeActivationImpl::setThisMergeNodeActivationPtr(std::weak_ptr<fUML::Semantics::Activities::MergeNodeActivation> thisMergeNodeActivationPtr)
 {
 	m_thisMergeNodeActivationPtr = thisMergeNodeActivationPtr;
 	setThisControlNodeActivationPtr(thisMergeNodeActivationPtr);

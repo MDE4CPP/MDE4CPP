@@ -465,11 +465,11 @@ Any TimeEventImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sha
 }
 
 
-std::shared_ptr<TimeEvent> TimeEventImpl::getThisTimeEventPtr() const
+std::shared_ptr<uml::TimeEvent> TimeEventImpl::getThisTimeEventPtr() const
 {
 	return m_thisTimeEventPtr.lock();
 }
-void TimeEventImpl::setThisTimeEventPtr(std::weak_ptr<TimeEvent> thisTimeEventPtr)
+void TimeEventImpl::setThisTimeEventPtr(std::weak_ptr<uml::TimeEvent> thisTimeEventPtr)
 {
 	m_thisTimeEventPtr = thisTimeEventPtr;
 	setThisEventPtr(thisTimeEventPtr);

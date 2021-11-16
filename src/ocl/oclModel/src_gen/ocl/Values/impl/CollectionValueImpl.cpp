@@ -32,8 +32,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "ocl/Values/ValuesFactory.hpp"
 #include "ocl/Types/TypesFactory.hpp"
+#include "ocl/Values/ValuesFactory.hpp"
 
 #include "ocl/Types/CollectionType.hpp"
 #include "ocl/Values/Element.hpp"
@@ -43,8 +43,8 @@
 //Factories an Package includes
 #include "ocl/oclPackage.hpp"
 #include "ocl/Types/TypesPackage.hpp"
-#include "ocl/Values/ValuesPackage.hpp"
 #include "fUML/Semantics/Values/ValuesPackage.hpp"
+#include "ocl/Values/ValuesPackage.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -509,11 +509,11 @@ Any CollectionValueImpl::eInvoke(int operationID, std::shared_ptr<std::list < st
 }
 
 
-std::shared_ptr<CollectionValue> CollectionValueImpl::getThisCollectionValuePtr() const
+std::shared_ptr<ocl::Values::CollectionValue> CollectionValueImpl::getThisCollectionValuePtr() const
 {
 	return m_thisCollectionValuePtr.lock();
 }
-void CollectionValueImpl::setThisCollectionValuePtr(std::weak_ptr<CollectionValue> thisCollectionValuePtr)
+void CollectionValueImpl::setThisCollectionValuePtr(std::weak_ptr<ocl::Values::CollectionValue> thisCollectionValuePtr)
 {
 	m_thisCollectionValuePtr = thisCollectionValuePtr;
 	setThisStaticValuePtr(thisCollectionValuePtr);

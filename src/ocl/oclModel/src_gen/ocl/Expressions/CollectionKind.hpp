@@ -9,7 +9,7 @@
 
 namespace ocl::Expressions 
 {
-	enum CollectionKind {
+	enum class CollectionKind {
 		
 		BAG = 3
 ,

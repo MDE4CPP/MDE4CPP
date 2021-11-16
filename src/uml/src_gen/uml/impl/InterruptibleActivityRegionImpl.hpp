@@ -31,8 +31,8 @@ namespace uml
 		protected:
 			friend class umlFactoryImpl;
 			InterruptibleActivityRegionImpl();
-			virtual std::shared_ptr<InterruptibleActivityRegion> getThisInterruptibleActivityRegionPtr() const;
-			virtual void setThisInterruptibleActivityRegionPtr(std::weak_ptr<InterruptibleActivityRegion> thisInterruptibleActivityRegionPtr);
+			virtual std::shared_ptr<uml::InterruptibleActivityRegion> getThisInterruptibleActivityRegionPtr() const;
+			virtual void setThisInterruptibleActivityRegionPtr(std::weak_ptr<uml::InterruptibleActivityRegion> thisInterruptibleActivityRegionPtr);
 
 			//Additional constructors for the containments back reference
 			InterruptibleActivityRegionImpl(std::weak_ptr<uml::Activity> par_inActivity);
@@ -131,7 +131,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<InterruptibleActivityRegion> m_thisInterruptibleActivityRegionPtr;
+			std::weak_ptr<uml::InterruptibleActivityRegion> m_thisInterruptibleActivityRegionPtr;
 	};
 }
 #endif /* end of include guard: UML_INTERRUPTIBLEACTIVITYREGIONINTERRUPTIBLEACTIVITYREGIONIMPL_HPP */

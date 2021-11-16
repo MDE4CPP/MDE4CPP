@@ -35,8 +35,8 @@
 #include "fUML/Semantics/Values/ValuesFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
 #include "uml/umlFactory.hpp"
-#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
+#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
 
 #include "ocl/Evaluations/EvalEnvironment.hpp"
@@ -269,11 +269,11 @@ Any IteratorExpEvalImpl::eInvoke(int operationID, std::shared_ptr<std::list < st
 }
 
 
-std::shared_ptr<IteratorExpEval> IteratorExpEvalImpl::getThisIteratorExpEvalPtr() const
+std::shared_ptr<ocl::Evaluations::IteratorExpEval> IteratorExpEvalImpl::getThisIteratorExpEvalPtr() const
 {
 	return m_thisIteratorExpEvalPtr.lock();
 }
-void IteratorExpEvalImpl::setThisIteratorExpEvalPtr(std::weak_ptr<IteratorExpEval> thisIteratorExpEvalPtr)
+void IteratorExpEvalImpl::setThisIteratorExpEvalPtr(std::weak_ptr<ocl::Evaluations::IteratorExpEval> thisIteratorExpEvalPtr)
 {
 	m_thisIteratorExpEvalPtr = thisIteratorExpEvalPtr;
 	setThisLoopExpEvalPtr(thisIteratorExpEvalPtr);

@@ -154,14 +154,6 @@ ValueSpecificationImpl& ValueSpecificationImpl::operator=(const ValueSpecificati
 	return *this;
 }
 
-std::shared_ptr<ecore::EObject> ValueSpecificationImpl::copy() const
-{
-	std::shared_ptr<ValueSpecificationImpl> element(new ValueSpecificationImpl());
-	*element =(*this);
-	element->setThisValueSpecificationPtr(element);
-	return element;
-}
-
 //*********************************
 // Operations
 //*********************************
@@ -560,11 +552,11 @@ Any ValueSpecificationImpl::eInvoke(int operationID, std::shared_ptr<std::list <
 }
 
 
-std::shared_ptr<ValueSpecification> ValueSpecificationImpl::getThisValueSpecificationPtr() const
+std::shared_ptr<uml::ValueSpecification> ValueSpecificationImpl::getThisValueSpecificationPtr() const
 {
 	return m_thisValueSpecificationPtr.lock();
 }
-void ValueSpecificationImpl::setThisValueSpecificationPtr(std::weak_ptr<ValueSpecification> thisValueSpecificationPtr)
+void ValueSpecificationImpl::setThisValueSpecificationPtr(std::weak_ptr<uml::ValueSpecification> thisValueSpecificationPtr)
 {
 	m_thisValueSpecificationPtr = thisValueSpecificationPtr;
 	setThisPackageableElementPtr(thisValueSpecificationPtr);

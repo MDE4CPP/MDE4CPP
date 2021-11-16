@@ -150,6 +150,15 @@ bool IntegerValueImpl::equals(std::shared_ptr<fUML::Semantics::Values::Value> ot
 	//end of body
 }
 
+std::shared_ptr<fUML::Semantics::Values::Value> IntegerValueImpl::new_()
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	// Return a new integer value with no value.
+return fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createIntegerValue();
+	//end of body
+}
+
 std::shared_ptr<uml::ValueSpecification> IntegerValueImpl::specify()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
@@ -366,6 +375,13 @@ Any IntegerValueImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::
 			break;
 		}
 		
+		// 1044297728
+		case SimpleClassifiersPackage::INTEGERVALUE_OPERATION_NEW_:
+		{
+			result = eAny(this->new_());
+			break;
+		}
+		
 		// 1191658488
 		case SimpleClassifiersPackage::INTEGERVALUE_OPERATION_SPECIFY:
 		{
@@ -394,11 +410,11 @@ Any IntegerValueImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::
 }
 
 
-std::shared_ptr<IntegerValue> IntegerValueImpl::getThisIntegerValuePtr() const
+std::shared_ptr<fUML::Semantics::SimpleClassifiers::IntegerValue> IntegerValueImpl::getThisIntegerValuePtr() const
 {
 	return m_thisIntegerValuePtr.lock();
 }
-void IntegerValueImpl::setThisIntegerValuePtr(std::weak_ptr<IntegerValue> thisIntegerValuePtr)
+void IntegerValueImpl::setThisIntegerValuePtr(std::weak_ptr<fUML::Semantics::SimpleClassifiers::IntegerValue> thisIntegerValuePtr)
 {
 	m_thisIntegerValuePtr = thisIntegerValuePtr;
 	setThisPrimitiveValuePtr(thisIntegerValuePtr);

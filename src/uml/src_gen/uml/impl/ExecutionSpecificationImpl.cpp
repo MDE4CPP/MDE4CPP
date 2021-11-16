@@ -137,14 +137,6 @@ ExecutionSpecificationImpl& ExecutionSpecificationImpl::operator=(const Executio
 	return *this;
 }
 
-std::shared_ptr<ecore::EObject> ExecutionSpecificationImpl::copy() const
-{
-	std::shared_ptr<ExecutionSpecificationImpl> element(new ExecutionSpecificationImpl());
-	*element =(*this);
-	element->setThisExecutionSpecificationPtr(element);
-	return element;
-}
-
 //*********************************
 // Operations
 //*********************************
@@ -463,11 +455,11 @@ Any ExecutionSpecificationImpl::eInvoke(int operationID, std::shared_ptr<std::li
 }
 
 
-std::shared_ptr<ExecutionSpecification> ExecutionSpecificationImpl::getThisExecutionSpecificationPtr() const
+std::shared_ptr<uml::ExecutionSpecification> ExecutionSpecificationImpl::getThisExecutionSpecificationPtr() const
 {
 	return m_thisExecutionSpecificationPtr.lock();
 }
-void ExecutionSpecificationImpl::setThisExecutionSpecificationPtr(std::weak_ptr<ExecutionSpecification> thisExecutionSpecificationPtr)
+void ExecutionSpecificationImpl::setThisExecutionSpecificationPtr(std::weak_ptr<uml::ExecutionSpecification> thisExecutionSpecificationPtr)
 {
 	m_thisExecutionSpecificationPtr = thisExecutionSpecificationPtr;
 	setThisInteractionFragmentPtr(thisExecutionSpecificationPtr);

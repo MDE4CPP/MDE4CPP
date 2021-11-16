@@ -36,8 +36,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
+#include "uml/umlFactory.hpp"
 
 #include "fUML/Semantics/Values/Evaluation.hpp"
 #include "fUML/Semantics/Loci/Locus.hpp"
@@ -104,14 +104,6 @@ LiteralEvaluationImpl& LiteralEvaluationImpl::operator=(const LiteralEvaluationI
 	//copy references with no containment (soft copy)
 	//Clone references with containment (deep copy)
 	return *this;
-}
-
-std::shared_ptr<ecore::EObject> LiteralEvaluationImpl::copy() const
-{
-	std::shared_ptr<LiteralEvaluationImpl> element(new LiteralEvaluationImpl());
-	*element =(*this);
-	element->setThisLiteralEvaluationPtr(element);
-	return element;
 }
 
 //*********************************
@@ -283,11 +275,11 @@ Any LiteralEvaluationImpl::eInvoke(int operationID, std::shared_ptr<std::list < 
 }
 
 
-std::shared_ptr<LiteralEvaluation> LiteralEvaluationImpl::getThisLiteralEvaluationPtr() const
+std::shared_ptr<fUML::Semantics::Values::LiteralEvaluation> LiteralEvaluationImpl::getThisLiteralEvaluationPtr() const
 {
 	return m_thisLiteralEvaluationPtr.lock();
 }
-void LiteralEvaluationImpl::setThisLiteralEvaluationPtr(std::weak_ptr<LiteralEvaluation> thisLiteralEvaluationPtr)
+void LiteralEvaluationImpl::setThisLiteralEvaluationPtr(std::weak_ptr<fUML::Semantics::Values::LiteralEvaluation> thisLiteralEvaluationPtr)
 {
 	m_thisLiteralEvaluationPtr = thisLiteralEvaluationPtr;
 	setThisEvaluationPtr(thisLiteralEvaluationPtr);

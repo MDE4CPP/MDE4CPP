@@ -317,11 +317,11 @@ Any CollectionItemImpl::eInvoke(int operationID, std::shared_ptr<std::list < std
 }
 
 
-std::shared_ptr<CollectionItem> CollectionItemImpl::getThisCollectionItemPtr() const
+std::shared_ptr<ocl::Expressions::CollectionItem> CollectionItemImpl::getThisCollectionItemPtr() const
 {
 	return m_thisCollectionItemPtr.lock();
 }
-void CollectionItemImpl::setThisCollectionItemPtr(std::weak_ptr<CollectionItem> thisCollectionItemPtr)
+void CollectionItemImpl::setThisCollectionItemPtr(std::weak_ptr<ocl::Expressions::CollectionItem> thisCollectionItemPtr)
 {
 	m_thisCollectionItemPtr = thisCollectionItemPtr;
 	setThisCollectionLiteralPartPtr(thisCollectionItemPtr);

@@ -178,7 +178,7 @@ std::shared_ptr<fUML::Semantics::Values::Value> ReturnInformationImpl::new_()
 	//generated from body annotation
 	// Create a new return information value, with an empty call event occurrence.
 
-return std::shared_ptr<fUML::Semantics::Actions::ReturnInformation>(fUML::Semantics::Actions::ActionsFactory::eInstance()->createReturnInformation());
+return fUML::Semantics::Actions::ActionsFactory::eInstance()->createReturnInformation();
 	//end of body
 }
 
@@ -482,11 +482,11 @@ Any ReturnInformationImpl::eInvoke(int operationID, std::shared_ptr<std::list < 
 }
 
 
-std::shared_ptr<ReturnInformation> ReturnInformationImpl::getThisReturnInformationPtr() const
+std::shared_ptr<fUML::Semantics::Actions::ReturnInformation> ReturnInformationImpl::getThisReturnInformationPtr() const
 {
 	return m_thisReturnInformationPtr.lock();
 }
-void ReturnInformationImpl::setThisReturnInformationPtr(std::weak_ptr<ReturnInformation> thisReturnInformationPtr)
+void ReturnInformationImpl::setThisReturnInformationPtr(std::weak_ptr<fUML::Semantics::Actions::ReturnInformation> thisReturnInformationPtr)
 {
 	m_thisReturnInformationPtr = thisReturnInformationPtr;
 	setThisValuePtr(thisReturnInformationPtr);

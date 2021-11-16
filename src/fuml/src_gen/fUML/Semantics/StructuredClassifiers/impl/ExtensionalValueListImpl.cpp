@@ -32,8 +32,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
+#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
 
 #include "fUML/Semantics/StructuredClassifiers/ExtensionalValue.hpp"
 #include "fUML/Semantics/SimpleClassifiers/FeatureValue.hpp"
@@ -354,11 +354,11 @@ Any ExtensionalValueListImpl::eInvoke(int operationID, std::shared_ptr<std::list
 }
 
 
-std::shared_ptr<ExtensionalValueList> ExtensionalValueListImpl::getThisExtensionalValueListPtr() const
+std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValueList> ExtensionalValueListImpl::getThisExtensionalValueListPtr() const
 {
 	return m_thisExtensionalValueListPtr.lock();
 }
-void ExtensionalValueListImpl::setThisExtensionalValueListPtr(std::weak_ptr<ExtensionalValueList> thisExtensionalValueListPtr)
+void ExtensionalValueListImpl::setThisExtensionalValueListPtr(std::weak_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValueList> thisExtensionalValueListPtr)
 {
 	m_thisExtensionalValueListPtr = thisExtensionalValueListPtr;
 	setThisExtensionalValuePtr(thisExtensionalValueListPtr);

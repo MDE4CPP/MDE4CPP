@@ -31,8 +31,8 @@ namespace uml
 		protected:
 			friend class umlFactoryImpl;
 			UsageImpl();
-			virtual std::shared_ptr<Usage> getThisUsagePtr() const;
-			virtual void setThisUsagePtr(std::weak_ptr<Usage> thisUsagePtr);
+			virtual std::shared_ptr<uml::Usage> getThisUsagePtr() const;
+			virtual void setThisUsagePtr(std::weak_ptr<uml::Usage> thisUsagePtr);
 
 			//Additional constructors for the containments back reference
 			UsageImpl(std::weak_ptr<uml::Namespace> par_namespace);
@@ -131,7 +131,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<Usage> m_thisUsagePtr;
+			std::weak_ptr<uml::Usage> m_thisUsagePtr;
 	};
 }
 #endif /* end of include guard: UML_USAGEUSAGEIMPL_HPP */

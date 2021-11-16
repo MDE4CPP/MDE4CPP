@@ -32,8 +32,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "ecore/ecoreFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
+#include "ecore/ecoreFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
 
 #include "ocl/Expressions/CallExp.hpp"
@@ -198,14 +198,6 @@ CallExpImpl& CallExpImpl::operator=(const CallExpImpl & obj)
 	}
 	
 	return *this;
-}
-
-std::shared_ptr<ecore::EObject> CallExpImpl::copy() const
-{
-	std::shared_ptr<CallExpImpl> element(new CallExpImpl());
-	*element =(*this);
-	element->setThisCallExpPtr(element);
-	return element;
 }
 
 //*********************************
@@ -464,11 +456,11 @@ Any CallExpImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::share
 }
 
 
-std::shared_ptr<CallExp> CallExpImpl::getThisCallExpPtr() const
+std::shared_ptr<ocl::Expressions::CallExp> CallExpImpl::getThisCallExpPtr() const
 {
 	return m_thisCallExpPtr.lock();
 }
-void CallExpImpl::setThisCallExpPtr(std::weak_ptr<CallExp> thisCallExpPtr)
+void CallExpImpl::setThisCallExpPtr(std::weak_ptr<ocl::Expressions::CallExp> thisCallExpPtr)
 {
 	m_thisCallExpPtr = thisCallExpPtr;
 	setThisOclExpressionPtr(thisCallExpPtr);

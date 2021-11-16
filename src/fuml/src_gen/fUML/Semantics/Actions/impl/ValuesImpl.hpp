@@ -34,8 +34,8 @@ virtual public Values
 		protected:
 			friend class fUML::Semantics::Actions::ActionsFactoryImpl;
 			ValuesImpl();
-			virtual std::shared_ptr<Values> getThisValuesPtr() const;
-			virtual void setThisValuesPtr(std::weak_ptr<Values> thisValuesPtr);
+			virtual std::shared_ptr<fUML::Semantics::Actions::Values> getThisValuesPtr() const;
+			virtual void setThisValuesPtr(std::weak_ptr<fUML::Semantics::Actions::Values> thisValuesPtr);
 
 
 		public:
@@ -90,7 +90,7 @@ virtual public Values
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<Values> m_thisValuesPtr;
+			std::weak_ptr<fUML::Semantics::Actions::Values> m_thisValuesPtr;
 	};
 }
 #endif /* end of include guard: FUML_SEMANTICS_ACTIONS_VALUESVALUESIMPL_HPP */

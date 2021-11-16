@@ -1445,11 +1445,11 @@ Any LoopNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shar
 }
 
 
-std::shared_ptr<LoopNode> LoopNodeImpl::getThisLoopNodePtr() const
+std::shared_ptr<uml::LoopNode> LoopNodeImpl::getThisLoopNodePtr() const
 {
 	return m_thisLoopNodePtr.lock();
 }
-void LoopNodeImpl::setThisLoopNodePtr(std::weak_ptr<LoopNode> thisLoopNodePtr)
+void LoopNodeImpl::setThisLoopNodePtr(std::weak_ptr<uml::LoopNode> thisLoopNodePtr)
 {
 	m_thisLoopNodePtr = thisLoopNodePtr;
 	setThisStructuredActivityNodePtr(thisLoopNodePtr);

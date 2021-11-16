@@ -32,8 +32,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "ecore/ecoreFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
+#include "ecore/ecoreFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
 
 #include "ocl/Expressions/CallExp.hpp"
@@ -193,14 +193,6 @@ FeatureCallExpImpl& FeatureCallExpImpl::operator=(const FeatureCallExpImpl & obj
 	//copy references with no containment (soft copy)
 	//Clone references with containment (deep copy)
 	return *this;
-}
-
-std::shared_ptr<ecore::EObject> FeatureCallExpImpl::copy() const
-{
-	std::shared_ptr<FeatureCallExpImpl> element(new FeatureCallExpImpl());
-	*element =(*this);
-	element->setThisFeatureCallExpPtr(element);
-	return element;
 }
 
 //*********************************
@@ -453,11 +445,11 @@ Any FeatureCallExpImpl::eInvoke(int operationID, std::shared_ptr<std::list < std
 }
 
 
-std::shared_ptr<FeatureCallExp> FeatureCallExpImpl::getThisFeatureCallExpPtr() const
+std::shared_ptr<ocl::Expressions::FeatureCallExp> FeatureCallExpImpl::getThisFeatureCallExpPtr() const
 {
 	return m_thisFeatureCallExpPtr.lock();
 }
-void FeatureCallExpImpl::setThisFeatureCallExpPtr(std::weak_ptr<FeatureCallExp> thisFeatureCallExpPtr)
+void FeatureCallExpImpl::setThisFeatureCallExpPtr(std::weak_ptr<ocl::Expressions::FeatureCallExp> thisFeatureCallExpPtr)
 {
 	m_thisFeatureCallExpPtr = thisFeatureCallExpPtr;
 	setThisCallExpPtr(thisFeatureCallExpPtr);

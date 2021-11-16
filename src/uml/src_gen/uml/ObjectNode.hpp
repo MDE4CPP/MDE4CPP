@@ -234,7 +234,7 @@ namespace uml
 			<p>From package UML::Activities.</p>
 			*/
 			
-			uml::ObjectNodeOrderingKind m_ordering= ObjectNodeOrderingKind::FIFO;
+			uml::ObjectNodeOrderingKind m_ordering= uml::ObjectNodeOrderingKind::FIFO;
 			
 			//*********************************
 			// Reference Members

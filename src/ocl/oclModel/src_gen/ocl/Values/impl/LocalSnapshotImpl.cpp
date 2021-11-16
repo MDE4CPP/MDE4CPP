@@ -679,11 +679,11 @@ Any LocalSnapshotImpl::eInvoke(int operationID, std::shared_ptr<std::list < std:
 }
 
 
-std::shared_ptr<LocalSnapshot> LocalSnapshotImpl::getThisLocalSnapshotPtr() const
+std::shared_ptr<ocl::Values::LocalSnapshot> LocalSnapshotImpl::getThisLocalSnapshotPtr() const
 {
 	return m_thisLocalSnapshotPtr.lock();
 }
-void LocalSnapshotImpl::setThisLocalSnapshotPtr(std::weak_ptr<LocalSnapshot> thisLocalSnapshotPtr)
+void LocalSnapshotImpl::setThisLocalSnapshotPtr(std::weak_ptr<ocl::Values::LocalSnapshot> thisLocalSnapshotPtr)
 {
 	m_thisLocalSnapshotPtr = thisLocalSnapshotPtr;
 }

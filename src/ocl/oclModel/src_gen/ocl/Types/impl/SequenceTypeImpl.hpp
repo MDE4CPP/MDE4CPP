@@ -32,8 +32,8 @@ namespace ocl::Types
 		protected:
 			friend class ocl::Types::TypesFactoryImpl;
 			SequenceTypeImpl();
-			virtual std::shared_ptr<SequenceType> getThisSequenceTypePtr() const;
-			virtual void setThisSequenceTypePtr(std::weak_ptr<SequenceType> thisSequenceTypePtr);
+			virtual std::shared_ptr<ocl::Types::SequenceType> getThisSequenceTypePtr() const;
+			virtual void setThisSequenceTypePtr(std::weak_ptr<ocl::Types::SequenceType> thisSequenceTypePtr);
 
 			//Additional constructors for the containments back reference
 			SequenceTypeImpl(std::weak_ptr<ecore::EPackage> par_ePackage);
@@ -89,7 +89,7 @@ namespace ocl::Types
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<SequenceType> m_thisSequenceTypePtr;
+			std::weak_ptr<ocl::Types::SequenceType> m_thisSequenceTypePtr;
 	};
 }
 #endif /* end of include guard: OCL_TYPES_SEQUENCETYPESEQUENCETYPEIMPL_HPP */

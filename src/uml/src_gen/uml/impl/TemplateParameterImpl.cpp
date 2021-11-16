@@ -578,11 +578,11 @@ Any TemplateParameterImpl::eInvoke(int operationID, std::shared_ptr<std::list < 
 }
 
 
-std::shared_ptr<TemplateParameter> TemplateParameterImpl::getThisTemplateParameterPtr() const
+std::shared_ptr<uml::TemplateParameter> TemplateParameterImpl::getThisTemplateParameterPtr() const
 {
 	return m_thisTemplateParameterPtr.lock();
 }
-void TemplateParameterImpl::setThisTemplateParameterPtr(std::weak_ptr<TemplateParameter> thisTemplateParameterPtr)
+void TemplateParameterImpl::setThisTemplateParameterPtr(std::weak_ptr<uml::TemplateParameter> thisTemplateParameterPtr)
 {
 	m_thisTemplateParameterPtr = thisTemplateParameterPtr;
 	setThisElementPtr(thisTemplateParameterPtr);

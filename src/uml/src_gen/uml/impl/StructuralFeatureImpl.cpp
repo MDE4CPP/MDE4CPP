@@ -122,14 +122,6 @@ StructuralFeatureImpl& StructuralFeatureImpl::operator=(const StructuralFeatureI
 	return *this;
 }
 
-std::shared_ptr<ecore::EObject> StructuralFeatureImpl::copy() const
-{
-	std::shared_ptr<StructuralFeatureImpl> element(new StructuralFeatureImpl());
-	*element =(*this);
-	element->setThisStructuralFeaturePtr(element);
-	return element;
-}
-
 //*********************************
 // Operations
 //*********************************
@@ -404,11 +396,11 @@ Any StructuralFeatureImpl::eInvoke(int operationID, std::shared_ptr<std::list < 
 }
 
 
-std::shared_ptr<StructuralFeature> StructuralFeatureImpl::getThisStructuralFeaturePtr() const
+std::shared_ptr<uml::StructuralFeature> StructuralFeatureImpl::getThisStructuralFeaturePtr() const
 {
 	return m_thisStructuralFeaturePtr.lock();
 }
-void StructuralFeatureImpl::setThisStructuralFeaturePtr(std::weak_ptr<StructuralFeature> thisStructuralFeaturePtr)
+void StructuralFeatureImpl::setThisStructuralFeaturePtr(std::weak_ptr<uml::StructuralFeature> thisStructuralFeaturePtr)
 {
 	m_thisStructuralFeaturePtr = thisStructuralFeaturePtr;
 	setThisFeaturePtr(thisStructuralFeaturePtr);

@@ -139,14 +139,6 @@ FinalNodeImpl& FinalNodeImpl::operator=(const FinalNodeImpl & obj)
 	return *this;
 }
 
-std::shared_ptr<ecore::EObject> FinalNodeImpl::copy() const
-{
-	std::shared_ptr<FinalNodeImpl> element(new FinalNodeImpl());
-	*element =(*this);
-	element->setThisFinalNodePtr(element);
-	return element;
-}
-
 //*********************************
 // Operations
 //*********************************
@@ -388,11 +380,11 @@ Any FinalNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sha
 }
 
 
-std::shared_ptr<FinalNode> FinalNodeImpl::getThisFinalNodePtr() const
+std::shared_ptr<uml::FinalNode> FinalNodeImpl::getThisFinalNodePtr() const
 {
 	return m_thisFinalNodePtr.lock();
 }
-void FinalNodeImpl::setThisFinalNodePtr(std::weak_ptr<FinalNode> thisFinalNodePtr)
+void FinalNodeImpl::setThisFinalNodePtr(std::weak_ptr<uml::FinalNode> thisFinalNodePtr)
 {
 	m_thisFinalNodePtr = thisFinalNodePtr;
 	setThisControlNodePtr(thisFinalNodePtr);

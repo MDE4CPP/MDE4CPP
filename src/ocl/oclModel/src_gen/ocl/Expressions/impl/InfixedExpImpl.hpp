@@ -32,8 +32,8 @@ namespace ocl::Expressions
 		protected:
 			friend class ocl::Expressions::ExpressionsFactoryImpl;
 			InfixedExpImpl();
-			virtual std::shared_ptr<InfixedExp> getThisInfixedExpPtr() const;
-			virtual void setThisInfixedExpPtr(std::weak_ptr<InfixedExp> thisInfixedExpPtr);
+			virtual std::shared_ptr<ocl::Expressions::InfixedExp> getThisInfixedExpPtr() const;
+			virtual void setThisInfixedExpPtr(std::weak_ptr<ocl::Expressions::InfixedExp> thisInfixedExpPtr);
 
 			//Additional constructors for the containments back reference
 			InfixedExpImpl(std::weak_ptr<ocl::Expressions::CallExp> par_appliedElement);
@@ -108,7 +108,7 @@ namespace ocl::Expressions
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<InfixedExp> m_thisInfixedExpPtr;
+			std::weak_ptr<ocl::Expressions::InfixedExp> m_thisInfixedExpPtr;
 	};
 }
 #endif /* end of include guard: OCL_EXPRESSIONS_INFIXEDEXPINFIXEDEXPIMPL_HPP */

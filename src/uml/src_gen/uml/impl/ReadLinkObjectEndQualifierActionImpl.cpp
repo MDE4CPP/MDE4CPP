@@ -769,11 +769,11 @@ Any ReadLinkObjectEndQualifierActionImpl::eInvoke(int operationID, std::shared_p
 }
 
 
-std::shared_ptr<ReadLinkObjectEndQualifierAction> ReadLinkObjectEndQualifierActionImpl::getThisReadLinkObjectEndQualifierActionPtr() const
+std::shared_ptr<uml::ReadLinkObjectEndQualifierAction> ReadLinkObjectEndQualifierActionImpl::getThisReadLinkObjectEndQualifierActionPtr() const
 {
 	return m_thisReadLinkObjectEndQualifierActionPtr.lock();
 }
-void ReadLinkObjectEndQualifierActionImpl::setThisReadLinkObjectEndQualifierActionPtr(std::weak_ptr<ReadLinkObjectEndQualifierAction> thisReadLinkObjectEndQualifierActionPtr)
+void ReadLinkObjectEndQualifierActionImpl::setThisReadLinkObjectEndQualifierActionPtr(std::weak_ptr<uml::ReadLinkObjectEndQualifierAction> thisReadLinkObjectEndQualifierActionPtr)
 {
 	m_thisReadLinkObjectEndQualifierActionPtr = thisReadLinkObjectEndQualifierActionPtr;
 	setThisActionPtr(thisReadLinkObjectEndQualifierActionPtr);

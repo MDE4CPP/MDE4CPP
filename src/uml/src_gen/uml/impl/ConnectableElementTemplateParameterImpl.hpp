@@ -31,8 +31,8 @@ namespace uml
 		protected:
 			friend class umlFactoryImpl;
 			ConnectableElementTemplateParameterImpl();
-			virtual std::shared_ptr<ConnectableElementTemplateParameter> getThisConnectableElementTemplateParameterPtr() const;
-			virtual void setThisConnectableElementTemplateParameterPtr(std::weak_ptr<ConnectableElementTemplateParameter> thisConnectableElementTemplateParameterPtr);
+			virtual std::shared_ptr<uml::ConnectableElementTemplateParameter> getThisConnectableElementTemplateParameterPtr() const;
+			virtual void setThisConnectableElementTemplateParameterPtr(std::weak_ptr<uml::ConnectableElementTemplateParameter> thisConnectableElementTemplateParameterPtr);
 
 			//Additional constructors for the containments back reference
 			ConnectableElementTemplateParameterImpl(std::weak_ptr<uml::Element> par_owner);
@@ -104,7 +104,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<ConnectableElementTemplateParameter> m_thisConnectableElementTemplateParameterPtr;
+			std::weak_ptr<uml::ConnectableElementTemplateParameter> m_thisConnectableElementTemplateParameterPtr;
 	};
 }
 #endif /* end of include guard: UML_CONNECTABLEELEMENTTEMPLATEPARAMETERCONNECTABLEELEMENTTEMPLATEPARAMETERIMPL_HPP */

@@ -559,11 +559,11 @@ Any ClearAssociationActionImpl::eInvoke(int operationID, std::shared_ptr<std::li
 }
 
 
-std::shared_ptr<ClearAssociationAction> ClearAssociationActionImpl::getThisClearAssociationActionPtr() const
+std::shared_ptr<uml::ClearAssociationAction> ClearAssociationActionImpl::getThisClearAssociationActionPtr() const
 {
 	return m_thisClearAssociationActionPtr.lock();
 }
-void ClearAssociationActionImpl::setThisClearAssociationActionPtr(std::weak_ptr<ClearAssociationAction> thisClearAssociationActionPtr)
+void ClearAssociationActionImpl::setThisClearAssociationActionPtr(std::weak_ptr<uml::ClearAssociationAction> thisClearAssociationActionPtr)
 {
 	m_thisClearAssociationActionPtr = thisClearAssociationActionPtr;
 	setThisActionPtr(thisClearAssociationActionPtr);

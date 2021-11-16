@@ -31,8 +31,8 @@ namespace uml
 		protected:
 			friend class umlFactoryImpl;
 			PrimitiveTypeImpl();
-			virtual std::shared_ptr<PrimitiveType> getThisPrimitiveTypePtr() const;
-			virtual void setThisPrimitiveTypePtr(std::weak_ptr<PrimitiveType> thisPrimitiveTypePtr);
+			virtual std::shared_ptr<uml::PrimitiveType> getThisPrimitiveTypePtr() const;
+			virtual void setThisPrimitiveTypePtr(std::weak_ptr<uml::PrimitiveType> thisPrimitiveTypePtr);
 
 			//Additional constructors for the containments back reference
 			PrimitiveTypeImpl(std::weak_ptr<uml::Namespace> par_namespace);
@@ -144,7 +144,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<PrimitiveType> m_thisPrimitiveTypePtr;
+			std::weak_ptr<uml::PrimitiveType> m_thisPrimitiveTypePtr;
 	};
 }
 #endif /* end of include guard: UML_PRIMITIVETYPEPRIMITIVETYPEIMPL_HPP */

@@ -26,19 +26,19 @@ namespace fUML::Semantics::CommonBehavior
 	{
 		public: 
 			OpaqueBehaviorExecutionImpl(const OpaqueBehaviorExecutionImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 			OpaqueBehaviorExecutionImpl& operator=(OpaqueBehaviorExecutionImpl const&); 
 
 		protected:
 			friend class fUML::Semantics::CommonBehavior::CommonBehaviorFactoryImpl;
 			OpaqueBehaviorExecutionImpl();
-			virtual std::shared_ptr<OpaqueBehaviorExecution> getThisOpaqueBehaviorExecutionPtr() const;
-			virtual void setThisOpaqueBehaviorExecutionPtr(std::weak_ptr<OpaqueBehaviorExecution> thisOpaqueBehaviorExecutionPtr);
+			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::OpaqueBehaviorExecution> getThisOpaqueBehaviorExecutionPtr() const;
+			virtual void setThisOpaqueBehaviorExecutionPtr(std::weak_ptr<fUML::Semantics::CommonBehavior::OpaqueBehaviorExecution> thisOpaqueBehaviorExecutionPtr);
 
 
 		public:
 			//destructor
-			virtual ~OpaqueBehaviorExecutionImpl();
+			virtual ~OpaqueBehaviorExecutionImpl() = 0;
 			
 			//*********************************
 			// Operations
@@ -89,7 +89,7 @@ namespace fUML::Semantics::CommonBehavior
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<OpaqueBehaviorExecution> m_thisOpaqueBehaviorExecutionPtr;
+			std::weak_ptr<fUML::Semantics::CommonBehavior::OpaqueBehaviorExecution> m_thisOpaqueBehaviorExecutionPtr;
 	};
 }
 #endif /* end of include guard: FUML_SEMANTICS_COMMONBEHAVIOR_OPAQUEBEHAVIOREXECUTIONOPAQUEBEHAVIOREXECUTIONIMPL_HPP */

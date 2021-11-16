@@ -1013,11 +1013,11 @@ Any ComponentImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sha
 }
 
 
-std::shared_ptr<Component> ComponentImpl::getThisComponentPtr() const
+std::shared_ptr<uml::Component> ComponentImpl::getThisComponentPtr() const
 {
 	return m_thisComponentPtr.lock();
 }
-void ComponentImpl::setThisComponentPtr(std::weak_ptr<Component> thisComponentPtr)
+void ComponentImpl::setThisComponentPtr(std::weak_ptr<uml::Component> thisComponentPtr)
 {
 	m_thisComponentPtr = thisComponentPtr;
 	setThisClassPtr(thisComponentPtr);

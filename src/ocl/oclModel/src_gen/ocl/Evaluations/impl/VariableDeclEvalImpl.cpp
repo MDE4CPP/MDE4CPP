@@ -351,11 +351,11 @@ Any VariableDeclEvalImpl::eInvoke(int operationID, std::shared_ptr<std::list < s
 }
 
 
-std::shared_ptr<VariableDeclEval> VariableDeclEvalImpl::getThisVariableDeclEvalPtr() const
+std::shared_ptr<ocl::Evaluations::VariableDeclEval> VariableDeclEvalImpl::getThisVariableDeclEvalPtr() const
 {
 	return m_thisVariableDeclEvalPtr.lock();
 }
-void VariableDeclEvalImpl::setThisVariableDeclEvalPtr(std::weak_ptr<VariableDeclEval> thisVariableDeclEvalPtr)
+void VariableDeclEvalImpl::setThisVariableDeclEvalPtr(std::weak_ptr<ocl::Evaluations::VariableDeclEval> thisVariableDeclEvalPtr)
 {
 	m_thisVariableDeclEvalPtr = thisVariableDeclEvalPtr;
 }

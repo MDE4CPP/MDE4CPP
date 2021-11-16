@@ -99,14 +99,6 @@ CollectionLiteralPartImpl& CollectionLiteralPartImpl::operator=(const Collection
 	return *this;
 }
 
-std::shared_ptr<ecore::EObject> CollectionLiteralPartImpl::copy() const
-{
-	std::shared_ptr<CollectionLiteralPartImpl> element(new CollectionLiteralPartImpl());
-	*element =(*this);
-	element->setThisCollectionLiteralPartPtr(element);
-	return element;
-}
-
 //*********************************
 // Operations
 //*********************************
@@ -252,11 +244,11 @@ Any CollectionLiteralPartImpl::eInvoke(int operationID, std::shared_ptr<std::lis
 }
 
 
-std::shared_ptr<CollectionLiteralPart> CollectionLiteralPartImpl::getThisCollectionLiteralPartPtr() const
+std::shared_ptr<ocl::Expressions::CollectionLiteralPart> CollectionLiteralPartImpl::getThisCollectionLiteralPartPtr() const
 {
 	return m_thisCollectionLiteralPartPtr.lock();
 }
-void CollectionLiteralPartImpl::setThisCollectionLiteralPartPtr(std::weak_ptr<CollectionLiteralPart> thisCollectionLiteralPartPtr)
+void CollectionLiteralPartImpl::setThisCollectionLiteralPartPtr(std::weak_ptr<ocl::Expressions::CollectionLiteralPart> thisCollectionLiteralPartPtr)
 {
 	m_thisCollectionLiteralPartPtr = thisCollectionLiteralPartPtr;
 	setThisETypedElementPtr(thisCollectionLiteralPartPtr);

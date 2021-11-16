@@ -299,11 +299,11 @@ Any IntegerLiteralExpEvalImpl::eInvoke(int operationID, std::shared_ptr<std::lis
 }
 
 
-std::shared_ptr<IntegerLiteralExpEval> IntegerLiteralExpEvalImpl::getThisIntegerLiteralExpEvalPtr() const
+std::shared_ptr<ocl::Evaluations::IntegerLiteralExpEval> IntegerLiteralExpEvalImpl::getThisIntegerLiteralExpEvalPtr() const
 {
 	return m_thisIntegerLiteralExpEvalPtr.lock();
 }
-void IntegerLiteralExpEvalImpl::setThisIntegerLiteralExpEvalPtr(std::weak_ptr<IntegerLiteralExpEval> thisIntegerLiteralExpEvalPtr)
+void IntegerLiteralExpEvalImpl::setThisIntegerLiteralExpEvalPtr(std::weak_ptr<ocl::Evaluations::IntegerLiteralExpEval> thisIntegerLiteralExpEvalPtr)
 {
 	m_thisIntegerLiteralExpEvalPtr = thisIntegerLiteralExpEvalPtr;
 	setThisLiteralIntegerEvaluationPtr(thisIntegerLiteralExpEvalPtr);

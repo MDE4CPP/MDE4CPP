@@ -25,14 +25,14 @@ namespace uml
 	{
 		public: 
 			EncapsulatedClassifierImpl(const EncapsulatedClassifierImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 			EncapsulatedClassifierImpl& operator=(EncapsulatedClassifierImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;
 			EncapsulatedClassifierImpl();
-			virtual std::shared_ptr<EncapsulatedClassifier> getThisEncapsulatedClassifierPtr() const;
-			virtual void setThisEncapsulatedClassifierPtr(std::weak_ptr<EncapsulatedClassifier> thisEncapsulatedClassifierPtr);
+			virtual std::shared_ptr<uml::EncapsulatedClassifier> getThisEncapsulatedClassifierPtr() const;
+			virtual void setThisEncapsulatedClassifierPtr(std::weak_ptr<uml::EncapsulatedClassifier> thisEncapsulatedClassifierPtr);
 
 			//Additional constructors for the containments back reference
 			EncapsulatedClassifierImpl(std::weak_ptr<uml::Namespace> par_namespace);
@@ -46,7 +46,7 @@ namespace uml
 
 		public:
 			//destructor
-			virtual ~EncapsulatedClassifierImpl();
+			virtual ~EncapsulatedClassifierImpl() = 0;
 			
 			//*********************************
 			// Operations
@@ -163,7 +163,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<EncapsulatedClassifier> m_thisEncapsulatedClassifierPtr;
+			std::weak_ptr<uml::EncapsulatedClassifier> m_thisEncapsulatedClassifierPtr;
 	};
 }
 #endif /* end of include guard: UML_ENCAPSULATEDCLASSIFIERENCAPSULATEDCLASSIFIERIMPL_HPP */

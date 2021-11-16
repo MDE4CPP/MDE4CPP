@@ -321,11 +321,11 @@ Any PropertyCallExpEvalImpl::eInvoke(int operationID, std::shared_ptr<std::list 
 }
 
 
-std::shared_ptr<PropertyCallExpEval> PropertyCallExpEvalImpl::getThisPropertyCallExpEvalPtr() const
+std::shared_ptr<ocl::Evaluations::PropertyCallExpEval> PropertyCallExpEvalImpl::getThisPropertyCallExpEvalPtr() const
 {
 	return m_thisPropertyCallExpEvalPtr.lock();
 }
-void PropertyCallExpEvalImpl::setThisPropertyCallExpEvalPtr(std::weak_ptr<PropertyCallExpEval> thisPropertyCallExpEvalPtr)
+void PropertyCallExpEvalImpl::setThisPropertyCallExpEvalPtr(std::weak_ptr<ocl::Evaluations::PropertyCallExpEval> thisPropertyCallExpEvalPtr)
 {
 	m_thisPropertyCallExpEvalPtr = thisPropertyCallExpEvalPtr;
 	setThisOclExpEvalPtr(thisPropertyCallExpEvalPtr);

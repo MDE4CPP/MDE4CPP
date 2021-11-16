@@ -32,8 +32,8 @@ namespace ocl::Values
 		protected:
 			friend class ocl::Values::ValuesFactoryImpl;
 			UndefinedValueImpl();
-			virtual std::shared_ptr<UndefinedValue> getThisUndefinedValuePtr() const;
-			virtual void setThisUndefinedValuePtr(std::weak_ptr<UndefinedValue> thisUndefinedValuePtr);
+			virtual std::shared_ptr<ocl::Values::UndefinedValue> getThisUndefinedValuePtr() const;
+			virtual void setThisUndefinedValuePtr(std::weak_ptr<ocl::Values::UndefinedValue> thisUndefinedValuePtr);
 
 
 		public:
@@ -89,7 +89,7 @@ namespace ocl::Values
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<UndefinedValue> m_thisUndefinedValuePtr;
+			std::weak_ptr<ocl::Values::UndefinedValue> m_thisUndefinedValuePtr;
 	};
 }
 #endif /* end of include guard: OCL_VALUES_UNDEFINEDVALUEUNDEFINEDVALUEIMPL_HPP */

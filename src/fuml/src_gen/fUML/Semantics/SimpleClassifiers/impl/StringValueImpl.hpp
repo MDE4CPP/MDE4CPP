@@ -32,8 +32,8 @@ namespace fUML::Semantics::SimpleClassifiers
 		protected:
 			friend class fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactoryImpl;
 			StringValueImpl();
-			virtual std::shared_ptr<StringValue> getThisStringValuePtr() const;
-			virtual void setThisStringValuePtr(std::weak_ptr<StringValue> thisStringValuePtr);
+			virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> getThisStringValuePtr() const;
+			virtual void setThisStringValuePtr(std::weak_ptr<fUML::Semantics::SimpleClassifiers::StringValue> thisStringValuePtr);
 
 
 		public:
@@ -45,6 +45,7 @@ namespace fUML::Semantics::SimpleClassifiers
 			//*********************************
 			virtual std::shared_ptr<fUML::Semantics::Values::Value> _copy() ;
 			virtual bool equals(std::shared_ptr<fUML::Semantics::Values::Value> otherValue) ;
+			virtual std::shared_ptr<fUML::Semantics::Values::Value> new_() ;
 			virtual std::shared_ptr<uml::ValueSpecification> specify() ;
 			virtual std::string toString() ;
 			
@@ -93,7 +94,7 @@ namespace fUML::Semantics::SimpleClassifiers
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<StringValue> m_thisStringValuePtr;
+			std::weak_ptr<fUML::Semantics::SimpleClassifiers::StringValue> m_thisStringValuePtr;
 	};
 }
 #endif /* end of include guard: FUML_SEMANTICS_SIMPLECLASSIFIERS_STRINGVALUESTRINGVALUEIMPL_HPP */

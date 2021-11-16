@@ -411,11 +411,11 @@ Any OclMessageArgEvalImpl::eInvoke(int operationID, std::shared_ptr<std::list < 
 }
 
 
-std::shared_ptr<OclMessageArgEval> OclMessageArgEvalImpl::getThisOclMessageArgEvalPtr() const
+std::shared_ptr<ocl::Evaluations::OclMessageArgEval> OclMessageArgEvalImpl::getThisOclMessageArgEvalPtr() const
 {
 	return m_thisOclMessageArgEvalPtr.lock();
 }
-void OclMessageArgEvalImpl::setThisOclMessageArgEvalPtr(std::weak_ptr<OclMessageArgEval> thisOclMessageArgEvalPtr)
+void OclMessageArgEvalImpl::setThisOclMessageArgEvalPtr(std::weak_ptr<ocl::Evaluations::OclMessageArgEval> thisOclMessageArgEvalPtr)
 {
 	m_thisOclMessageArgEvalPtr = thisOclMessageArgEvalPtr;
 	setThisEvaluationPtr(thisOclMessageArgEvalPtr);

@@ -32,8 +32,8 @@ namespace ocl::Types
 		protected:
 			friend class ocl::Types::TypesFactoryImpl;
 			InvalidTypeImpl();
-			virtual std::shared_ptr<InvalidType> getThisInvalidTypePtr() const;
-			virtual void setThisInvalidTypePtr(std::weak_ptr<InvalidType> thisInvalidTypePtr);
+			virtual std::shared_ptr<ocl::Types::InvalidType> getThisInvalidTypePtr() const;
+			virtual void setThisInvalidTypePtr(std::weak_ptr<ocl::Types::InvalidType> thisInvalidTypePtr);
 
 			//Additional constructors for the containments back reference
 			InvalidTypeImpl(std::weak_ptr<ecore::EPackage> par_ePackage);
@@ -89,7 +89,7 @@ namespace ocl::Types
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<InvalidType> m_thisInvalidTypePtr;
+			std::weak_ptr<ocl::Types::InvalidType> m_thisInvalidTypePtr;
 	};
 }
 #endif /* end of include guard: OCL_TYPES_INVALIDTYPEINVALIDTYPEIMPL_HPP */

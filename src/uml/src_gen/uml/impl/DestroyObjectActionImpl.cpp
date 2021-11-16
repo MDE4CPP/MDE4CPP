@@ -581,11 +581,11 @@ Any DestroyObjectActionImpl::eInvoke(int operationID, std::shared_ptr<std::list 
 }
 
 
-std::shared_ptr<DestroyObjectAction> DestroyObjectActionImpl::getThisDestroyObjectActionPtr() const
+std::shared_ptr<uml::DestroyObjectAction> DestroyObjectActionImpl::getThisDestroyObjectActionPtr() const
 {
 	return m_thisDestroyObjectActionPtr.lock();
 }
-void DestroyObjectActionImpl::setThisDestroyObjectActionPtr(std::weak_ptr<DestroyObjectAction> thisDestroyObjectActionPtr)
+void DestroyObjectActionImpl::setThisDestroyObjectActionPtr(std::weak_ptr<uml::DestroyObjectAction> thisDestroyObjectActionPtr)
 {
 	m_thisDestroyObjectActionPtr = thisDestroyObjectActionPtr;
 	setThisActionPtr(thisDestroyObjectActionPtr);

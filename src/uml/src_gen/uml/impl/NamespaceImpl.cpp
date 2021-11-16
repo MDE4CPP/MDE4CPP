@@ -261,14 +261,6 @@ NamespaceImpl& NamespaceImpl::operator=(const NamespaceImpl & obj)
 	return *this;
 }
 
-std::shared_ptr<ecore::EObject> NamespaceImpl::copy() const
-{
-	std::shared_ptr<NamespaceImpl> element(new NamespaceImpl());
-	*element =(*this);
-	element->setThisNamespacePtr(element);
-	return element;
-}
-
 //*********************************
 // Operations
 //*********************************
@@ -1067,11 +1059,11 @@ Any NamespaceImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sha
 }
 
 
-std::shared_ptr<Namespace> NamespaceImpl::getThisNamespacePtr() const
+std::shared_ptr<uml::Namespace> NamespaceImpl::getThisNamespacePtr() const
 {
 	return m_thisNamespacePtr.lock();
 }
-void NamespaceImpl::setThisNamespacePtr(std::weak_ptr<Namespace> thisNamespacePtr)
+void NamespaceImpl::setThisNamespacePtr(std::weak_ptr<uml::Namespace> thisNamespacePtr)
 {
 	m_thisNamespacePtr = thisNamespacePtr;
 	setThisNamedElementPtr(thisNamespacePtr);

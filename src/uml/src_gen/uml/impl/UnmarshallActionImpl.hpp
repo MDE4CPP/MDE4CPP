@@ -31,8 +31,8 @@ namespace uml
 		protected:
 			friend class umlFactoryImpl;
 			UnmarshallActionImpl();
-			virtual std::shared_ptr<UnmarshallAction> getThisUnmarshallActionPtr() const;
-			virtual void setThisUnmarshallActionPtr(std::weak_ptr<UnmarshallAction> thisUnmarshallActionPtr);
+			virtual std::shared_ptr<uml::UnmarshallAction> getThisUnmarshallActionPtr() const;
+			virtual void setThisUnmarshallActionPtr(std::weak_ptr<uml::UnmarshallAction> thisUnmarshallActionPtr);
 
 			//Additional constructors for the containments back reference
 			UnmarshallActionImpl(std::weak_ptr<uml::Activity> par_activity);
@@ -194,7 +194,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<UnmarshallAction> m_thisUnmarshallActionPtr;
+			std::weak_ptr<uml::UnmarshallAction> m_thisUnmarshallActionPtr;
 	};
 }
 #endif /* end of include guard: UML_UNMARSHALLACTIONUNMARSHALLACTIONIMPL_HPP */

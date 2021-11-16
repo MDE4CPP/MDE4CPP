@@ -26,19 +26,19 @@ namespace fUML::Semantics::Loci
 	{
 		public: 
 			ChoiceStrategyImpl(const ChoiceStrategyImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 			ChoiceStrategyImpl& operator=(ChoiceStrategyImpl const&); 
 
 		protected:
 			friend class fUML::Semantics::Loci::LociFactoryImpl;
 			ChoiceStrategyImpl();
-			virtual std::shared_ptr<ChoiceStrategy> getThisChoiceStrategyPtr() const;
-			virtual void setThisChoiceStrategyPtr(std::weak_ptr<ChoiceStrategy> thisChoiceStrategyPtr);
+			virtual std::shared_ptr<fUML::Semantics::Loci::ChoiceStrategy> getThisChoiceStrategyPtr() const;
+			virtual void setThisChoiceStrategyPtr(std::weak_ptr<fUML::Semantics::Loci::ChoiceStrategy> thisChoiceStrategyPtr);
 
 
 		public:
 			//destructor
-			virtual ~ChoiceStrategyImpl();
+			virtual ~ChoiceStrategyImpl() = 0;
 			
 			//*********************************
 			// Operations
@@ -89,7 +89,7 @@ namespace fUML::Semantics::Loci
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<ChoiceStrategy> m_thisChoiceStrategyPtr;
+			std::weak_ptr<fUML::Semantics::Loci::ChoiceStrategy> m_thisChoiceStrategyPtr;
 	};
 }
 #endif /* end of include guard: FUML_SEMANTICS_LOCI_CHOICESTRATEGYCHOICESTRATEGYIMPL_HPP */

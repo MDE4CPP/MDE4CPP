@@ -450,11 +450,11 @@ Any ClassifierBehaviorExecutionImpl::eInvoke(int operationID, std::shared_ptr<st
 }
 
 
-std::shared_ptr<ClassifierBehaviorExecution> ClassifierBehaviorExecutionImpl::getThisClassifierBehaviorExecutionPtr() const
+std::shared_ptr<fUML::Semantics::CommonBehavior::ClassifierBehaviorExecution> ClassifierBehaviorExecutionImpl::getThisClassifierBehaviorExecutionPtr() const
 {
 	return m_thisClassifierBehaviorExecutionPtr.lock();
 }
-void ClassifierBehaviorExecutionImpl::setThisClassifierBehaviorExecutionPtr(std::weak_ptr<ClassifierBehaviorExecution> thisClassifierBehaviorExecutionPtr)
+void ClassifierBehaviorExecutionImpl::setThisClassifierBehaviorExecutionPtr(std::weak_ptr<fUML::Semantics::CommonBehavior::ClassifierBehaviorExecution> thisClassifierBehaviorExecutionPtr)
 {
 	m_thisClassifierBehaviorExecutionPtr = thisClassifierBehaviorExecutionPtr;
 }

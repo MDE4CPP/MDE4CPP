@@ -34,8 +34,8 @@ virtual public ExpressionInOclEval
 		protected:
 			friend class ocl::Evaluations::EvaluationsFactoryImpl;
 			ExpressionInOclEvalImpl();
-			virtual std::shared_ptr<ExpressionInOclEval> getThisExpressionInOclEvalPtr() const;
-			virtual void setThisExpressionInOclEvalPtr(std::weak_ptr<ExpressionInOclEval> thisExpressionInOclEvalPtr);
+			virtual std::shared_ptr<ocl::Evaluations::ExpressionInOclEval> getThisExpressionInOclEvalPtr() const;
+			virtual void setThisExpressionInOclEvalPtr(std::weak_ptr<ocl::Evaluations::ExpressionInOclEval> thisExpressionInOclEvalPtr);
 
 
 		public:
@@ -93,7 +93,7 @@ virtual public ExpressionInOclEval
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<ExpressionInOclEval> m_thisExpressionInOclEvalPtr;
+			std::weak_ptr<ocl::Evaluations::ExpressionInOclEval> m_thisExpressionInOclEvalPtr;
 	};
 }
 #endif /* end of include guard: OCL_EVALUATIONS_EXPRESSIONINOCLEVALEXPRESSIONINOCLEVALIMPL_HPP */

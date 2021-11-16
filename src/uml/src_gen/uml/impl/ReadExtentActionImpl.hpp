@@ -31,8 +31,8 @@ namespace uml
 		protected:
 			friend class umlFactoryImpl;
 			ReadExtentActionImpl();
-			virtual std::shared_ptr<ReadExtentAction> getThisReadExtentActionPtr() const;
-			virtual void setThisReadExtentActionPtr(std::weak_ptr<ReadExtentAction> thisReadExtentActionPtr);
+			virtual std::shared_ptr<uml::ReadExtentAction> getThisReadExtentActionPtr() const;
+			virtual void setThisReadExtentActionPtr(std::weak_ptr<uml::ReadExtentAction> thisReadExtentActionPtr);
 
 			//Additional constructors for the containments back reference
 			ReadExtentActionImpl(std::weak_ptr<uml::Activity> par_activity);
@@ -160,7 +160,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<ReadExtentAction> m_thisReadExtentActionPtr;
+			std::weak_ptr<uml::ReadExtentAction> m_thisReadExtentActionPtr;
 	};
 }
 #endif /* end of include guard: UML_READEXTENTACTIONREADEXTENTACTIONIMPL_HPP */

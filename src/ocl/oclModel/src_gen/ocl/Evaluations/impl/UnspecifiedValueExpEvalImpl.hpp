@@ -32,8 +32,8 @@ namespace ocl::Evaluations
 		protected:
 			friend class ocl::Evaluations::EvaluationsFactoryImpl;
 			UnspecifiedValueExpEvalImpl();
-			virtual std::shared_ptr<UnspecifiedValueExpEval> getThisUnspecifiedValueExpEvalPtr() const;
-			virtual void setThisUnspecifiedValueExpEvalPtr(std::weak_ptr<UnspecifiedValueExpEval> thisUnspecifiedValueExpEvalPtr);
+			virtual std::shared_ptr<ocl::Evaluations::UnspecifiedValueExpEval> getThisUnspecifiedValueExpEvalPtr() const;
+			virtual void setThisUnspecifiedValueExpEvalPtr(std::weak_ptr<ocl::Evaluations::UnspecifiedValueExpEval> thisUnspecifiedValueExpEvalPtr);
 
 
 		public:
@@ -87,7 +87,7 @@ namespace ocl::Evaluations
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<UnspecifiedValueExpEval> m_thisUnspecifiedValueExpEvalPtr;
+			std::weak_ptr<ocl::Evaluations::UnspecifiedValueExpEval> m_thisUnspecifiedValueExpEvalPtr;
 	};
 }
 #endif /* end of include guard: OCL_EVALUATIONS_UNSPECIFIEDVALUEEXPEVALUNSPECIFIEDVALUEEXPEVALIMPL_HPP */

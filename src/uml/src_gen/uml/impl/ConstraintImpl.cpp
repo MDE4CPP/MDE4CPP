@@ -619,11 +619,11 @@ Any ConstraintImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sh
 }
 
 
-std::shared_ptr<Constraint> ConstraintImpl::getThisConstraintPtr() const
+std::shared_ptr<uml::Constraint> ConstraintImpl::getThisConstraintPtr() const
 {
 	return m_thisConstraintPtr.lock();
 }
-void ConstraintImpl::setThisConstraintPtr(std::weak_ptr<Constraint> thisConstraintPtr)
+void ConstraintImpl::setThisConstraintPtr(std::weak_ptr<uml::Constraint> thisConstraintPtr)
 {
 	m_thisConstraintPtr = thisConstraintPtr;
 	setThisPackageableElementPtr(thisConstraintPtr);

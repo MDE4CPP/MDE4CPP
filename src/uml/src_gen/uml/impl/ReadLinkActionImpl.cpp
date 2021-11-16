@@ -602,11 +602,11 @@ Any ReadLinkActionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std
 }
 
 
-std::shared_ptr<ReadLinkAction> ReadLinkActionImpl::getThisReadLinkActionPtr() const
+std::shared_ptr<uml::ReadLinkAction> ReadLinkActionImpl::getThisReadLinkActionPtr() const
 {
 	return m_thisReadLinkActionPtr.lock();
 }
-void ReadLinkActionImpl::setThisReadLinkActionPtr(std::weak_ptr<ReadLinkAction> thisReadLinkActionPtr)
+void ReadLinkActionImpl::setThisReadLinkActionPtr(std::weak_ptr<uml::ReadLinkAction> thisReadLinkActionPtr)
 {
 	m_thisReadLinkActionPtr = thisReadLinkActionPtr;
 	setThisLinkActionPtr(thisReadLinkActionPtr);

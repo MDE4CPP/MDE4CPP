@@ -270,11 +270,11 @@ Any SequenceTypeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::
 }
 
 
-std::shared_ptr<SequenceType> SequenceTypeImpl::getThisSequenceTypePtr() const
+std::shared_ptr<ocl::Types::SequenceType> SequenceTypeImpl::getThisSequenceTypePtr() const
 {
 	return m_thisSequenceTypePtr.lock();
 }
-void SequenceTypeImpl::setThisSequenceTypePtr(std::weak_ptr<SequenceType> thisSequenceTypePtr)
+void SequenceTypeImpl::setThisSequenceTypePtr(std::weak_ptr<ocl::Types::SequenceType> thisSequenceTypePtr)
 {
 	m_thisSequenceTypePtr = thisSequenceTypePtr;
 	setThisCollectionTypePtr(thisSequenceTypePtr);

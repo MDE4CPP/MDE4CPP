@@ -202,7 +202,8 @@ std::shared_ptr<fUML::Semantics::Values::Value> ReferenceImpl::new_()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	return fUML::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createReference();
+	// Create a new reference with no referent.
+return fUML::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createReference();
 	//end of body
 }
 
@@ -668,11 +669,11 @@ Any ReferenceImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sha
 }
 
 
-std::shared_ptr<Reference> ReferenceImpl::getThisReferencePtr() const
+std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> ReferenceImpl::getThisReferencePtr() const
 {
 	return m_thisReferencePtr.lock();
 }
-void ReferenceImpl::setThisReferencePtr(std::weak_ptr<Reference> thisReferencePtr)
+void ReferenceImpl::setThisReferencePtr(std::weak_ptr<fUML::Semantics::StructuredClassifiers::Reference> thisReferencePtr)
 {
 	m_thisReferencePtr = thisReferencePtr;
 	setThisStructuredValuePtr(thisReferencePtr);

@@ -262,11 +262,11 @@ Any InvalidTypeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::s
 }
 
 
-std::shared_ptr<InvalidType> InvalidTypeImpl::getThisInvalidTypePtr() const
+std::shared_ptr<ocl::Types::InvalidType> InvalidTypeImpl::getThisInvalidTypePtr() const
 {
 	return m_thisInvalidTypePtr.lock();
 }
-void InvalidTypeImpl::setThisInvalidTypePtr(std::weak_ptr<InvalidType> thisInvalidTypePtr)
+void InvalidTypeImpl::setThisInvalidTypePtr(std::weak_ptr<ocl::Types::InvalidType> thisInvalidTypePtr)
 {
 	m_thisInvalidTypePtr = thisInvalidTypePtr;
 	setThisEClassifierPtr(thisInvalidTypePtr);

@@ -462,11 +462,11 @@ Any OclExpEvalImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sh
 }
 
 
-std::shared_ptr<OclExpEval> OclExpEvalImpl::getThisOclExpEvalPtr() const
+std::shared_ptr<ocl::Evaluations::OclExpEval> OclExpEvalImpl::getThisOclExpEvalPtr() const
 {
 	return m_thisOclExpEvalPtr.lock();
 }
-void OclExpEvalImpl::setThisOclExpEvalPtr(std::weak_ptr<OclExpEval> thisOclExpEvalPtr)
+void OclExpEvalImpl::setThisOclExpEvalPtr(std::weak_ptr<ocl::Evaluations::OclExpEval> thisOclExpEvalPtr)
 {
 	m_thisOclExpEvalPtr = thisOclExpEvalPtr;
 	setThisEvaluationPtr(thisOclExpEvalPtr);

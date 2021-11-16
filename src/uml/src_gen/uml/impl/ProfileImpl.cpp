@@ -861,11 +861,11 @@ Any ProfileImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::share
 }
 
 
-std::shared_ptr<Profile> ProfileImpl::getThisProfilePtr() const
+std::shared_ptr<uml::Profile> ProfileImpl::getThisProfilePtr() const
 {
 	return m_thisProfilePtr.lock();
 }
-void ProfileImpl::setThisProfilePtr(std::weak_ptr<Profile> thisProfilePtr)
+void ProfileImpl::setThisProfilePtr(std::weak_ptr<uml::Profile> thisProfilePtr)
 {
 	m_thisProfilePtr = thisProfilePtr;
 	setThisPackagePtr(thisProfilePtr);

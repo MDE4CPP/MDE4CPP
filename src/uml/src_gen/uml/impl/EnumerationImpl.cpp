@@ -623,11 +623,11 @@ Any EnumerationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::s
 }
 
 
-std::shared_ptr<Enumeration> EnumerationImpl::getThisEnumerationPtr() const
+std::shared_ptr<uml::Enumeration> EnumerationImpl::getThisEnumerationPtr() const
 {
 	return m_thisEnumerationPtr.lock();
 }
-void EnumerationImpl::setThisEnumerationPtr(std::weak_ptr<Enumeration> thisEnumerationPtr)
+void EnumerationImpl::setThisEnumerationPtr(std::weak_ptr<uml::Enumeration> thisEnumerationPtr)
 {
 	m_thisEnumerationPtr = thisEnumerationPtr;
 	setThisDataTypePtr(thisEnumerationPtr);

@@ -36,9 +36,9 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "uml/umlFactory.hpp"
-#include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
+#include "fUML/Semantics/Actions/ActionsFactory.hpp"
+#include "uml/umlFactory.hpp"
 
 #include "fUML/Semantics/Actions/AcceptEventActionActivation.hpp"
 #include "fUML/Semantics/Actions/AcceptEventActionEventAccepter.hpp"
@@ -322,11 +322,11 @@ Any CS_AcceptEventActionActivationImpl::eInvoke(int operationID, std::shared_ptr
 }
 
 
-std::shared_ptr<CS_AcceptEventActionActivation> CS_AcceptEventActionActivationImpl::getThisCS_AcceptEventActionActivationPtr() const
+std::shared_ptr<PSCS::Semantics::Actions::CS_AcceptEventActionActivation> CS_AcceptEventActionActivationImpl::getThisCS_AcceptEventActionActivationPtr() const
 {
 	return m_thisCS_AcceptEventActionActivationPtr.lock();
 }
-void CS_AcceptEventActionActivationImpl::setThisCS_AcceptEventActionActivationPtr(std::weak_ptr<CS_AcceptEventActionActivation> thisCS_AcceptEventActionActivationPtr)
+void CS_AcceptEventActionActivationImpl::setThisCS_AcceptEventActionActivationPtr(std::weak_ptr<PSCS::Semantics::Actions::CS_AcceptEventActionActivation> thisCS_AcceptEventActionActivationPtr)
 {
 	m_thisCS_AcceptEventActionActivationPtr = thisCS_AcceptEventActionActivationPtr;
 	setThisAcceptEventActionActivationPtr(thisCS_AcceptEventActionActivationPtr);

@@ -9,7 +9,7 @@
 
 namespace uml 
 {
-	enum InteractionOperatorKind {
+	enum class InteractionOperatorKind {
 		
 		ALT = 1
 ,

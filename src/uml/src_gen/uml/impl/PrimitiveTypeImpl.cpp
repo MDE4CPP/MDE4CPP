@@ -466,11 +466,11 @@ Any PrimitiveTypeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std:
 }
 
 
-std::shared_ptr<PrimitiveType> PrimitiveTypeImpl::getThisPrimitiveTypePtr() const
+std::shared_ptr<uml::PrimitiveType> PrimitiveTypeImpl::getThisPrimitiveTypePtr() const
 {
 	return m_thisPrimitiveTypePtr.lock();
 }
-void PrimitiveTypeImpl::setThisPrimitiveTypePtr(std::weak_ptr<PrimitiveType> thisPrimitiveTypePtr)
+void PrimitiveTypeImpl::setThisPrimitiveTypePtr(std::weak_ptr<uml::PrimitiveType> thisPrimitiveTypePtr)
 {
 	m_thisPrimitiveTypePtr = thisPrimitiveTypePtr;
 	setThisDataTypePtr(thisPrimitiveTypePtr);

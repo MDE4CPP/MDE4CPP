@@ -416,11 +416,11 @@ Any EnumerationLiteralImpl::eInvoke(int operationID, std::shared_ptr<std::list <
 }
 
 
-std::shared_ptr<EnumerationLiteral> EnumerationLiteralImpl::getThisEnumerationLiteralPtr() const
+std::shared_ptr<uml::EnumerationLiteral> EnumerationLiteralImpl::getThisEnumerationLiteralPtr() const
 {
 	return m_thisEnumerationLiteralPtr.lock();
 }
-void EnumerationLiteralImpl::setThisEnumerationLiteralPtr(std::weak_ptr<EnumerationLiteral> thisEnumerationLiteralPtr)
+void EnumerationLiteralImpl::setThisEnumerationLiteralPtr(std::weak_ptr<uml::EnumerationLiteral> thisEnumerationLiteralPtr)
 {
 	m_thisEnumerationLiteralPtr = thisEnumerationLiteralPtr;
 	setThisInstanceSpecificationPtr(thisEnumerationLiteralPtr);

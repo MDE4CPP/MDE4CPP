@@ -9,7 +9,7 @@
 
 namespace uml 
 {
-	enum ParameterDirectionKind {
+	enum class ParameterDirectionKind {
 		
 		IN = 0
 ,

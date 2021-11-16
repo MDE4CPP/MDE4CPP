@@ -451,11 +451,11 @@ Any AbstractionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::s
 }
 
 
-std::shared_ptr<Abstraction> AbstractionImpl::getThisAbstractionPtr() const
+std::shared_ptr<uml::Abstraction> AbstractionImpl::getThisAbstractionPtr() const
 {
 	return m_thisAbstractionPtr.lock();
 }
-void AbstractionImpl::setThisAbstractionPtr(std::weak_ptr<Abstraction> thisAbstractionPtr)
+void AbstractionImpl::setThisAbstractionPtr(std::weak_ptr<uml::Abstraction> thisAbstractionPtr)
 {
 	m_thisAbstractionPtr = thisAbstractionPtr;
 	setThisDependencyPtr(thisAbstractionPtr);

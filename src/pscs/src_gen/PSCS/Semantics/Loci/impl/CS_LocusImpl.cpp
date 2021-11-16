@@ -290,11 +290,11 @@ Any CS_LocusImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shar
 }
 
 
-std::shared_ptr<CS_Locus> CS_LocusImpl::getThisCS_LocusPtr() const
+std::shared_ptr<PSCS::Semantics::Loci::CS_Locus> CS_LocusImpl::getThisCS_LocusPtr() const
 {
 	return m_thisCS_LocusPtr.lock();
 }
-void CS_LocusImpl::setThisCS_LocusPtr(std::weak_ptr<CS_Locus> thisCS_LocusPtr)
+void CS_LocusImpl::setThisCS_LocusPtr(std::weak_ptr<PSCS::Semantics::Loci::CS_Locus> thisCS_LocusPtr)
 {
 	m_thisCS_LocusPtr = thisCS_LocusPtr;
 	setThisLocusPtr(thisCS_LocusPtr);

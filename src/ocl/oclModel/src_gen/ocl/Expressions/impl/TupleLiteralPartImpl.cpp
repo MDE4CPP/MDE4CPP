@@ -313,11 +313,11 @@ Any TupleLiteralPartImpl::eInvoke(int operationID, std::shared_ptr<std::list < s
 }
 
 
-std::shared_ptr<TupleLiteralPart> TupleLiteralPartImpl::getThisTupleLiteralPartPtr() const
+std::shared_ptr<ocl::Expressions::TupleLiteralPart> TupleLiteralPartImpl::getThisTupleLiteralPartPtr() const
 {
 	return m_thisTupleLiteralPartPtr.lock();
 }
-void TupleLiteralPartImpl::setThisTupleLiteralPartPtr(std::weak_ptr<TupleLiteralPart> thisTupleLiteralPartPtr)
+void TupleLiteralPartImpl::setThisTupleLiteralPartPtr(std::weak_ptr<ocl::Expressions::TupleLiteralPart> thisTupleLiteralPartPtr)
 {
 	m_thisTupleLiteralPartPtr = thisTupleLiteralPartPtr;
 	setThisETypedElementPtr(thisTupleLiteralPartPtr);

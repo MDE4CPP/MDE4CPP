@@ -460,11 +460,11 @@ Any DurationConstraintImpl::eInvoke(int operationID, std::shared_ptr<std::list <
 }
 
 
-std::shared_ptr<DurationConstraint> DurationConstraintImpl::getThisDurationConstraintPtr() const
+std::shared_ptr<uml::DurationConstraint> DurationConstraintImpl::getThisDurationConstraintPtr() const
 {
 	return m_thisDurationConstraintPtr.lock();
 }
-void DurationConstraintImpl::setThisDurationConstraintPtr(std::weak_ptr<DurationConstraint> thisDurationConstraintPtr)
+void DurationConstraintImpl::setThisDurationConstraintPtr(std::weak_ptr<uml::DurationConstraint> thisDurationConstraintPtr)
 {
 	m_thisDurationConstraintPtr = thisDurationConstraintPtr;
 	setThisIntervalConstraintPtr(thisDurationConstraintPtr);

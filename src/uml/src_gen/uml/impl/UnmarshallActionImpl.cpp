@@ -773,11 +773,11 @@ Any UnmarshallActionImpl::eInvoke(int operationID, std::shared_ptr<std::list < s
 }
 
 
-std::shared_ptr<UnmarshallAction> UnmarshallActionImpl::getThisUnmarshallActionPtr() const
+std::shared_ptr<uml::UnmarshallAction> UnmarshallActionImpl::getThisUnmarshallActionPtr() const
 {
 	return m_thisUnmarshallActionPtr.lock();
 }
-void UnmarshallActionImpl::setThisUnmarshallActionPtr(std::weak_ptr<UnmarshallAction> thisUnmarshallActionPtr)
+void UnmarshallActionImpl::setThisUnmarshallActionPtr(std::weak_ptr<uml::UnmarshallAction> thisUnmarshallActionPtr)
 {
 	m_thisUnmarshallActionPtr = thisUnmarshallActionPtr;
 	setThisActionPtr(thisUnmarshallActionPtr);

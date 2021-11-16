@@ -32,8 +32,8 @@ namespace fUML::Semantics::CommonBehavior
 		protected:
 			friend class fUML::Semantics::CommonBehavior::CommonBehaviorFactoryImpl;
 			ClassifierBehaviorInvocationEventAccepterImpl();
-			virtual std::shared_ptr<ClassifierBehaviorInvocationEventAccepter> getThisClassifierBehaviorInvocationEventAccepterPtr() const;
-			virtual void setThisClassifierBehaviorInvocationEventAccepterPtr(std::weak_ptr<ClassifierBehaviorInvocationEventAccepter> thisClassifierBehaviorInvocationEventAccepterPtr);
+			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::ClassifierBehaviorInvocationEventAccepter> getThisClassifierBehaviorInvocationEventAccepterPtr() const;
+			virtual void setThisClassifierBehaviorInvocationEventAccepterPtr(std::weak_ptr<fUML::Semantics::CommonBehavior::ClassifierBehaviorInvocationEventAccepter> thisClassifierBehaviorInvocationEventAccepterPtr);
 
 
 		public:
@@ -97,7 +97,7 @@ namespace fUML::Semantics::CommonBehavior
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<ClassifierBehaviorInvocationEventAccepter> m_thisClassifierBehaviorInvocationEventAccepterPtr;
+			std::weak_ptr<fUML::Semantics::CommonBehavior::ClassifierBehaviorInvocationEventAccepter> m_thisClassifierBehaviorInvocationEventAccepterPtr;
 	};
 }
 #endif /* end of include guard: FUML_SEMANTICS_COMMONBEHAVIOR_CLASSIFIERBEHAVIORINVOCATIONEVENTACCEPTERCLASSIFIERBEHAVIORINVOCATIONEVENTACCEPTERIMPL_HPP */

@@ -154,14 +154,6 @@ ObjectNodeImpl& ObjectNodeImpl::operator=(const ObjectNodeImpl & obj)
 	return *this;
 }
 
-std::shared_ptr<ecore::EObject> ObjectNodeImpl::copy() const
-{
-	std::shared_ptr<ObjectNodeImpl> element(new ObjectNodeImpl());
-	*element =(*this);
-	element->setThisObjectNodePtr(element);
-	return element;
-}
-
 //*********************************
 // Operations
 //*********************************
@@ -362,23 +354,23 @@ void ObjectNodeImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLo
 		iter = attr_list.find("ordering");
 		if ( iter != attr_list.end() )
 		{
-			uml::ObjectNodeOrderingKind value = ObjectNodeOrderingKind::FIFO;
+			uml::ObjectNodeOrderingKind value = uml::ObjectNodeOrderingKind::FIFO;
 			std::string literal = iter->second;
 			if (literal == "unordered")
 			{
-				value = ObjectNodeOrderingKind::UNORDERED;
+				value = uml::ObjectNodeOrderingKind::UNORDERED;
 			}
 			else if (literal == "ordered")
 			{
-				value = ObjectNodeOrderingKind::ORDERED;
+				value = uml::ObjectNodeOrderingKind::ORDERED;
 			}
 			else if (literal == "LIFO")
 			{
-				value = ObjectNodeOrderingKind::LIFO;
+				value = uml::ObjectNodeOrderingKind::LIFO;
 			}
 			else if (literal == "FIFO")
 			{
-				value = ObjectNodeOrderingKind::FIFO;
+				value = uml::ObjectNodeOrderingKind::FIFO;
 			}
 			this->setOrdering(value);
 		}
@@ -514,19 +506,19 @@ void ObjectNodeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 		{
 			uml::ObjectNodeOrderingKind value = this->getOrdering();
 			std::string literal = "";
-			if (value == ObjectNodeOrderingKind::UNORDERED)
+			if (value == uml::ObjectNodeOrderingKind::UNORDERED)
 			{
 				literal = "unordered";
 			}
-			else if (value == ObjectNodeOrderingKind::ORDERED)
+			else if (value == uml::ObjectNodeOrderingKind::ORDERED)
 			{
 				literal = "ordered";
 			}
-			else if (value == ObjectNodeOrderingKind::LIFO)
+			else if (value == uml::ObjectNodeOrderingKind::LIFO)
 			{
 				literal = "LIFO";
 			}
-			else if (value == ObjectNodeOrderingKind::FIFO)
+			else if (value == uml::ObjectNodeOrderingKind::FIFO)
 			{
 				literal = "FIFO";
 			}
@@ -602,7 +594,7 @@ bool ObjectNodeImpl::internalEIsSet(int featureID) const
 		case uml::umlPackage::OBJECTNODE_ATTRIBUTE_ISCONTROLTYPE:
 			return getIsControlType() != false; //16022
 		case uml::umlPackage::OBJECTNODE_ATTRIBUTE_ORDERING:
-			return m_ordering != ObjectNodeOrderingKind::FIFO;; //16023
+			return m_ordering != uml::ObjectNodeOrderingKind::FIFO;; //16023
 		case uml::umlPackage::OBJECTNODE_ATTRIBUTE_SELECTION:
 			return getSelection() != nullptr; //16024
 		case uml::umlPackage::OBJECTNODE_ATTRIBUTE_UPPERBOUND:
@@ -778,11 +770,11 @@ Any ObjectNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sh
 }
 
 
-std::shared_ptr<ObjectNode> ObjectNodeImpl::getThisObjectNodePtr() const
+std::shared_ptr<uml::ObjectNode> ObjectNodeImpl::getThisObjectNodePtr() const
 {
 	return m_thisObjectNodePtr.lock();
 }
-void ObjectNodeImpl::setThisObjectNodePtr(std::weak_ptr<ObjectNode> thisObjectNodePtr)
+void ObjectNodeImpl::setThisObjectNodePtr(std::weak_ptr<uml::ObjectNode> thisObjectNodePtr)
 {
 	m_thisObjectNodePtr = thisObjectNodePtr;
 	setThisActivityNodePtr(thisObjectNodePtr);

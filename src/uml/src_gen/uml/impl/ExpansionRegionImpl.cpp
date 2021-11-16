@@ -447,19 +447,19 @@ void ExpansionRegionImpl::loadAttributes(std::shared_ptr<persistence::interfaces
 		iter = attr_list.find("mode");
 		if ( iter != attr_list.end() )
 		{
-			uml::ExpansionKind value = ExpansionKind::ITERATIVE;
+			uml::ExpansionKind value = uml::ExpansionKind::ITERATIVE;
 			std::string literal = iter->second;
 			if (literal == "parallel")
 			{
-				value = ExpansionKind::PARALLEL;
+				value = uml::ExpansionKind::PARALLEL;
 			}
 			else if (literal == "iterative")
 			{
-				value = ExpansionKind::ITERATIVE;
+				value = uml::ExpansionKind::ITERATIVE;
 			}
 			else if (literal == "stream")
 			{
-				value = ExpansionKind::STREAM;
+				value = uml::ExpansionKind::STREAM;
 			}
 			this->setMode(value);
 		}
@@ -567,15 +567,15 @@ void ExpansionRegionImpl::saveContent(std::shared_ptr<persistence::interfaces::X
 		{
 			uml::ExpansionKind value = this->getMode();
 			std::string literal = "";
-			if (value == ExpansionKind::PARALLEL)
+			if (value == uml::ExpansionKind::PARALLEL)
 			{
 				literal = "parallel";
 			}
-			else if (value == ExpansionKind::ITERATIVE)
+			else if (value == uml::ExpansionKind::ITERATIVE)
 			{
 				literal = "iterative";
 			}
-			else if (value == ExpansionKind::STREAM)
+			else if (value == uml::ExpansionKind::STREAM)
 			{
 				literal = "stream";
 			}
@@ -642,7 +642,7 @@ bool ExpansionRegionImpl::internalEIsSet(int featureID) const
 		case uml::umlPackage::EXPANSIONREGION_ATTRIBUTE_INPUTELEMENT:
 			return getInputElement() != nullptr; //9446
 		case uml::umlPackage::EXPANSIONREGION_ATTRIBUTE_MODE:
-			return m_mode != ExpansionKind::ITERATIVE;; //9444
+			return m_mode != uml::ExpansionKind::ITERATIVE;; //9444
 		case uml::umlPackage::EXPANSIONREGION_ATTRIBUTE_OUTPUTELEMENT:
 			return getOutputElement() != nullptr; //9445
 	}
@@ -761,11 +761,11 @@ Any ExpansionRegionImpl::eInvoke(int operationID, std::shared_ptr<std::list < st
 }
 
 
-std::shared_ptr<ExpansionRegion> ExpansionRegionImpl::getThisExpansionRegionPtr() const
+std::shared_ptr<uml::ExpansionRegion> ExpansionRegionImpl::getThisExpansionRegionPtr() const
 {
 	return m_thisExpansionRegionPtr.lock();
 }
-void ExpansionRegionImpl::setThisExpansionRegionPtr(std::weak_ptr<ExpansionRegion> thisExpansionRegionPtr)
+void ExpansionRegionImpl::setThisExpansionRegionPtr(std::weak_ptr<uml::ExpansionRegion> thisExpansionRegionPtr)
 {
 	m_thisExpansionRegionPtr = thisExpansionRegionPtr;
 	setThisStructuredActivityNodePtr(thisExpansionRegionPtr);

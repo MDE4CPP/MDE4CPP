@@ -25,14 +25,14 @@ namespace uml
 	{
 		public: 
 			ActivityEdgeImpl(const ActivityEdgeImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 			ActivityEdgeImpl& operator=(ActivityEdgeImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;
 			ActivityEdgeImpl();
-			virtual std::shared_ptr<ActivityEdge> getThisActivityEdgePtr() const;
-			virtual void setThisActivityEdgePtr(std::weak_ptr<ActivityEdge> thisActivityEdgePtr);
+			virtual std::shared_ptr<uml::ActivityEdge> getThisActivityEdgePtr() const;
+			virtual void setThisActivityEdgePtr(std::weak_ptr<uml::ActivityEdge> thisActivityEdgePtr);
 
 			//Additional constructors for the containments back reference
 			ActivityEdgeImpl(std::weak_ptr<uml::Activity> par_activity);
@@ -45,7 +45,7 @@ namespace uml
 
 		public:
 			//destructor
-			virtual ~ActivityEdgeImpl();
+			virtual ~ActivityEdgeImpl() = 0;
 			
 			//*********************************
 			// Operations
@@ -221,7 +221,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<ActivityEdge> m_thisActivityEdgePtr;
+			std::weak_ptr<uml::ActivityEdge> m_thisActivityEdgePtr;
 	};
 }
 #endif /* end of include guard: UML_ACTIVITYEDGEACTIVITYEDGEIMPL_HPP */

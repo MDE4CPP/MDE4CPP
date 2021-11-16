@@ -4,16 +4,16 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
-#include "ecore/EAnnotation.hpp"
-#include "ecore/EPackage.hpp"
-#include "ecore/EReference.hpp"
-#include "ecore/EClass.hpp"
-#include "ecore/EDataType.hpp"
-#include "ecore/EGenericType.hpp"
-#include "ecore/EAttribute.hpp"
-#include "ecore/EParameter.hpp"
-#include "ecore/EOperation.hpp"
 #include "ecore/EStringToStringMapEntry.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
+#include "ecore/EGenericType.hpp"
+#include "ecore/EPackage.hpp"
+#include "ecore/EOperation.hpp"
+#include "ecore/EClass.hpp"
+#include "ecore/EParameter.hpp"
+#include "ecore/EDataType.hpp"
 
 //metamodel factory
 #include "fUML/Semantics/SemanticsFactory.hpp"
@@ -73,37 +73,37 @@ void SemanticsPackageImpl::init(std::shared_ptr<ecore::EPackage> package)
     initializePackageContents();   
 }
 
-std::shared_ptr<Actions::ActionsPackage> SemanticsPackageImpl::getActions_Package() const
+std::shared_ptr<fUML::Semantics::Actions::ActionsPackage> fUML::Semantics::SemanticsPackageImpl::getActions_Package() const
 {
-	return Actions::ActionsPackage::eInstance();
+	return fUML::Semantics::Actions::ActionsPackage::eInstance();
 } 
-std::shared_ptr<Activities::ActivitiesPackage> SemanticsPackageImpl::getActivities_Package() const
+std::shared_ptr<fUML::Semantics::Activities::ActivitiesPackage> fUML::Semantics::SemanticsPackageImpl::getActivities_Package() const
 {
-	return Activities::ActivitiesPackage::eInstance();
+	return fUML::Semantics::Activities::ActivitiesPackage::eInstance();
 } 
-std::shared_ptr<Classification::ClassificationPackage> SemanticsPackageImpl::getClassification_Package() const
+std::shared_ptr<fUML::Semantics::Classification::ClassificationPackage> fUML::Semantics::SemanticsPackageImpl::getClassification_Package() const
 {
-	return Classification::ClassificationPackage::eInstance();
+	return fUML::Semantics::Classification::ClassificationPackage::eInstance();
 } 
-std::shared_ptr<CommonBehavior::CommonBehaviorPackage> SemanticsPackageImpl::getCommonBehavior_Package() const
+std::shared_ptr<fUML::Semantics::CommonBehavior::CommonBehaviorPackage> fUML::Semantics::SemanticsPackageImpl::getCommonBehavior_Package() const
 {
-	return CommonBehavior::CommonBehaviorPackage::eInstance();
+	return fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance();
 } 
-std::shared_ptr<Loci::LociPackage> SemanticsPackageImpl::getLoci_Package() const
+std::shared_ptr<fUML::Semantics::Loci::LociPackage> fUML::Semantics::SemanticsPackageImpl::getLoci_Package() const
 {
-	return Loci::LociPackage::eInstance();
+	return fUML::Semantics::Loci::LociPackage::eInstance();
 } 
-std::shared_ptr<SimpleClassifiers::SimpleClassifiersPackage> SemanticsPackageImpl::getSimpleClassifiers_Package() const
+std::shared_ptr<fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage> fUML::Semantics::SemanticsPackageImpl::getSimpleClassifiers_Package() const
 {
-	return SimpleClassifiers::SimpleClassifiersPackage::eInstance();
+	return fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::eInstance();
 } 
-std::shared_ptr<StructuredClassifiers::StructuredClassifiersPackage> SemanticsPackageImpl::getStructuredClassifiers_Package() const
+std::shared_ptr<fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage> fUML::Semantics::SemanticsPackageImpl::getStructuredClassifiers_Package() const
 {
-	return StructuredClassifiers::StructuredClassifiersPackage::eInstance();
+	return fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::eInstance();
 } 
-std::shared_ptr<Values::ValuesPackage> SemanticsPackageImpl::getValues_Package() const
+std::shared_ptr<fUML::Semantics::Values::ValuesPackage> fUML::Semantics::SemanticsPackageImpl::getValues_Package() const
 {
-	return Values::ValuesPackage::eInstance();
+	return fUML::Semantics::Values::ValuesPackage::eInstance();
 } 
 
 

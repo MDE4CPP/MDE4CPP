@@ -546,11 +546,11 @@ Any RemoveStructuralFeatureValueActionImpl::eInvoke(int operationID, std::shared
 }
 
 
-std::shared_ptr<RemoveStructuralFeatureValueAction> RemoveStructuralFeatureValueActionImpl::getThisRemoveStructuralFeatureValueActionPtr() const
+std::shared_ptr<uml::RemoveStructuralFeatureValueAction> RemoveStructuralFeatureValueActionImpl::getThisRemoveStructuralFeatureValueActionPtr() const
 {
 	return m_thisRemoveStructuralFeatureValueActionPtr.lock();
 }
-void RemoveStructuralFeatureValueActionImpl::setThisRemoveStructuralFeatureValueActionPtr(std::weak_ptr<RemoveStructuralFeatureValueAction> thisRemoveStructuralFeatureValueActionPtr)
+void RemoveStructuralFeatureValueActionImpl::setThisRemoveStructuralFeatureValueActionPtr(std::weak_ptr<uml::RemoveStructuralFeatureValueAction> thisRemoveStructuralFeatureValueActionPtr)
 {
 	m_thisRemoveStructuralFeatureValueActionPtr = thisRemoveStructuralFeatureValueActionPtr;
 	setThisWriteStructuralFeatureActionPtr(thisRemoveStructuralFeatureValueActionPtr);

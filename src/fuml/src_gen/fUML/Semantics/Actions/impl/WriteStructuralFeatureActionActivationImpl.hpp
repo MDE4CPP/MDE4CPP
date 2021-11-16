@@ -26,21 +26,21 @@ namespace fUML::Semantics::Actions
 	{
 		public: 
 			WriteStructuralFeatureActionActivationImpl(const WriteStructuralFeatureActionActivationImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 			WriteStructuralFeatureActionActivationImpl& operator=(WriteStructuralFeatureActionActivationImpl const&); 
 
 		protected:
 			friend class fUML::Semantics::Actions::ActionsFactoryImpl;
 			WriteStructuralFeatureActionActivationImpl();
-			virtual std::shared_ptr<WriteStructuralFeatureActionActivation> getThisWriteStructuralFeatureActionActivationPtr() const;
-			virtual void setThisWriteStructuralFeatureActionActivationPtr(std::weak_ptr<WriteStructuralFeatureActionActivation> thisWriteStructuralFeatureActionActivationPtr);
+			virtual std::shared_ptr<fUML::Semantics::Actions::WriteStructuralFeatureActionActivation> getThisWriteStructuralFeatureActionActivationPtr() const;
+			virtual void setThisWriteStructuralFeatureActionActivationPtr(std::weak_ptr<fUML::Semantics::Actions::WriteStructuralFeatureActionActivation> thisWriteStructuralFeatureActionActivationPtr);
 
 			//Additional constructors for the containments back reference
 			WriteStructuralFeatureActionActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_group);
 
 		public:
 			//destructor
-			virtual ~WriteStructuralFeatureActionActivationImpl();
+			virtual ~WriteStructuralFeatureActionActivationImpl() = 0;
 			
 			//*********************************
 			// Operations
@@ -91,7 +91,7 @@ namespace fUML::Semantics::Actions
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<WriteStructuralFeatureActionActivation> m_thisWriteStructuralFeatureActionActivationPtr;
+			std::weak_ptr<fUML::Semantics::Actions::WriteStructuralFeatureActionActivation> m_thisWriteStructuralFeatureActionActivationPtr;
 	};
 }
 #endif /* end of include guard: FUML_SEMANTICS_ACTIONS_WRITESTRUCTURALFEATUREACTIONACTIVATIONWRITESTRUCTURALFEATUREACTIONACTIVATIONIMPL_HPP */

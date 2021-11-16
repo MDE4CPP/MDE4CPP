@@ -42,8 +42,8 @@
 //Factories an Package includes
 #include "ocl/oclPackage.hpp"
 #include "ocl/Evaluations/EvaluationsPackage.hpp"
-#include "ocl/Values/ValuesPackage.hpp"
 #include "fUML/Semantics/Values/ValuesPackage.hpp"
+#include "ocl/Values/ValuesPackage.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -468,11 +468,11 @@ Any EvalEnvironmentImpl::eInvoke(int operationID, std::shared_ptr<std::list < st
 }
 
 
-std::shared_ptr<EvalEnvironment> EvalEnvironmentImpl::getThisEvalEnvironmentPtr() const
+std::shared_ptr<ocl::Evaluations::EvalEnvironment> EvalEnvironmentImpl::getThisEvalEnvironmentPtr() const
 {
 	return m_thisEvalEnvironmentPtr.lock();
 }
-void EvalEnvironmentImpl::setThisEvalEnvironmentPtr(std::weak_ptr<EvalEnvironment> thisEvalEnvironmentPtr)
+void EvalEnvironmentImpl::setThisEvalEnvironmentPtr(std::weak_ptr<ocl::Evaluations::EvalEnvironment> thisEvalEnvironmentPtr)
 {
 	m_thisEvalEnvironmentPtr = thisEvalEnvironmentPtr;
 }

@@ -41,10 +41,10 @@
 
 #include <exception> // used in Persistence
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
-#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
+#include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
 #include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
-#include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
+#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
 
 #include "uml/Behavior.hpp"
 #include "uml/Classifier.hpp"
@@ -234,7 +234,8 @@ std::shared_ptr<fUML::Semantics::Values::Value> CallEventExecutionImpl::new_()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	return fUML::Semantics::CommonBehavior::CommonBehaviorFactory::eInstance()->createCallEventExecution();
+	// Create a new call event execution.
+return fUML::Semantics::CommonBehavior::CommonBehaviorFactory::eInstance()->createCallEventExecution();
 	//end of body
 }
 
@@ -578,11 +579,11 @@ Any CallEventExecutionImpl::eInvoke(int operationID, std::shared_ptr<std::list <
 }
 
 
-std::shared_ptr<CallEventExecution> CallEventExecutionImpl::getThisCallEventExecutionPtr() const
+std::shared_ptr<fUML::Semantics::CommonBehavior::CallEventExecution> CallEventExecutionImpl::getThisCallEventExecutionPtr() const
 {
 	return m_thisCallEventExecutionPtr.lock();
 }
-void CallEventExecutionImpl::setThisCallEventExecutionPtr(std::weak_ptr<CallEventExecution> thisCallEventExecutionPtr)
+void CallEventExecutionImpl::setThisCallEventExecutionPtr(std::weak_ptr<fUML::Semantics::CommonBehavior::CallEventExecution> thisCallEventExecutionPtr)
 {
 	m_thisCallEventExecutionPtr = thisCallEventExecutionPtr;
 	setThisExecutionPtr(thisCallEventExecutionPtr);

@@ -31,8 +31,8 @@ namespace uml
 		protected:
 			friend class umlFactoryImpl;
 			ControlFlowImpl();
-			virtual std::shared_ptr<ControlFlow> getThisControlFlowPtr() const;
-			virtual void setThisControlFlowPtr(std::weak_ptr<ControlFlow> thisControlFlowPtr);
+			virtual std::shared_ptr<uml::ControlFlow> getThisControlFlowPtr() const;
+			virtual void setThisControlFlowPtr(std::weak_ptr<uml::ControlFlow> thisControlFlowPtr);
 
 			//Additional constructors for the containments back reference
 			ControlFlowImpl(std::weak_ptr<uml::Activity> par_activity);
@@ -125,7 +125,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<ControlFlow> m_thisControlFlowPtr;
+			std::weak_ptr<uml::ControlFlow> m_thisControlFlowPtr;
 	};
 }
 #endif /* end of include guard: UML_CONTROLFLOWCONTROLFLOWIMPL_HPP */

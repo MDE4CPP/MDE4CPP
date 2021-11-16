@@ -236,14 +236,6 @@ StructuredClassifierImpl& StructuredClassifierImpl::operator=(const StructuredCl
 	return *this;
 }
 
-std::shared_ptr<ecore::EObject> StructuredClassifierImpl::copy() const
-{
-	std::shared_ptr<StructuredClassifierImpl> element(new StructuredClassifierImpl());
-	*element =(*this);
-	element->setThisStructuredClassifierPtr(element);
-	return element;
-}
-
 //*********************************
 // Operations
 //*********************************
@@ -860,11 +852,11 @@ Any StructuredClassifierImpl::eInvoke(int operationID, std::shared_ptr<std::list
 }
 
 
-std::shared_ptr<StructuredClassifier> StructuredClassifierImpl::getThisStructuredClassifierPtr() const
+std::shared_ptr<uml::StructuredClassifier> StructuredClassifierImpl::getThisStructuredClassifierPtr() const
 {
 	return m_thisStructuredClassifierPtr.lock();
 }
-void StructuredClassifierImpl::setThisStructuredClassifierPtr(std::weak_ptr<StructuredClassifier> thisStructuredClassifierPtr)
+void StructuredClassifierImpl::setThisStructuredClassifierPtr(std::weak_ptr<uml::StructuredClassifier> thisStructuredClassifierPtr)
 {
 	m_thisStructuredClassifierPtr = thisStructuredClassifierPtr;
 	setThisClassifierPtr(thisStructuredClassifierPtr);

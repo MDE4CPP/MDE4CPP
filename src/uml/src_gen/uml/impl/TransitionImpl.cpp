@@ -503,19 +503,19 @@ void TransitionImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLo
 		iter = attr_list.find("kind");
 		if ( iter != attr_list.end() )
 		{
-			uml::TransitionKind value = TransitionKind::EXTERNAL;
+			uml::TransitionKind value = uml::TransitionKind::EXTERNAL;
 			std::string literal = iter->second;
 			if (literal == "internal")
 			{
-				value = TransitionKind::INTERNAL;
+				value = uml::TransitionKind::INTERNAL;
 			}
 			else if (literal == "local")
 			{
-				value = TransitionKind::LOCAL;
+				value = uml::TransitionKind::LOCAL;
 			}
 			else if (literal == "external")
 			{
-				value = TransitionKind::EXTERNAL;
+				value = uml::TransitionKind::EXTERNAL;
 			}
 			this->setKind(value);
 		}
@@ -710,15 +710,15 @@ void TransitionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 		{
 			uml::TransitionKind value = this->getKind();
 			std::string literal = "";
-			if (value == TransitionKind::INTERNAL)
+			if (value == uml::TransitionKind::INTERNAL)
 			{
 				literal = "internal";
 			}
-			else if (value == TransitionKind::LOCAL)
+			else if (value == uml::TransitionKind::LOCAL)
 			{
 				literal = "local";
 			}
-			else if (value == TransitionKind::EXTERNAL)
+			else if (value == uml::TransitionKind::EXTERNAL)
 			{
 				literal = "external";
 			}
@@ -816,7 +816,7 @@ bool TransitionImpl::internalEIsSet(int featureID) const
 		case uml::umlPackage::TRANSITION_ATTRIBUTE_GUARD:
 			return getGuard() != nullptr; //24119
 		case uml::umlPackage::TRANSITION_ATTRIBUTE_KIND:
-			return m_kind != TransitionKind::EXTERNAL;; //24120
+			return m_kind != uml::TransitionKind::EXTERNAL;; //24120
 		case uml::umlPackage::TRANSITION_ATTRIBUTE_REDEFINEDTRANSITION:
 			return getRedefinedTransition() != nullptr; //24121
 		case uml::umlPackage::TRANSITION_ATTRIBUTE_SOURCE:
@@ -1137,11 +1137,11 @@ Any TransitionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sh
 }
 
 
-std::shared_ptr<Transition> TransitionImpl::getThisTransitionPtr() const
+std::shared_ptr<uml::Transition> TransitionImpl::getThisTransitionPtr() const
 {
 	return m_thisTransitionPtr.lock();
 }
-void TransitionImpl::setThisTransitionPtr(std::weak_ptr<Transition> thisTransitionPtr)
+void TransitionImpl::setThisTransitionPtr(std::weak_ptr<uml::Transition> thisTransitionPtr)
 {
 	m_thisTransitionPtr = thisTransitionPtr;
 	setThisNamespacePtr(thisTransitionPtr);

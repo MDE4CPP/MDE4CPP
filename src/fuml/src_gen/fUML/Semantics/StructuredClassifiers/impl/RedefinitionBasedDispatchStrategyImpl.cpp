@@ -350,11 +350,11 @@ Any RedefinitionBasedDispatchStrategyImpl::eInvoke(int operationID, std::shared_
 }
 
 
-std::shared_ptr<RedefinitionBasedDispatchStrategy> RedefinitionBasedDispatchStrategyImpl::getThisRedefinitionBasedDispatchStrategyPtr() const
+std::shared_ptr<fUML::Semantics::StructuredClassifiers::RedefinitionBasedDispatchStrategy> RedefinitionBasedDispatchStrategyImpl::getThisRedefinitionBasedDispatchStrategyPtr() const
 {
 	return m_thisRedefinitionBasedDispatchStrategyPtr.lock();
 }
-void RedefinitionBasedDispatchStrategyImpl::setThisRedefinitionBasedDispatchStrategyPtr(std::weak_ptr<RedefinitionBasedDispatchStrategy> thisRedefinitionBasedDispatchStrategyPtr)
+void RedefinitionBasedDispatchStrategyImpl::setThisRedefinitionBasedDispatchStrategyPtr(std::weak_ptr<fUML::Semantics::StructuredClassifiers::RedefinitionBasedDispatchStrategy> thisRedefinitionBasedDispatchStrategyPtr)
 {
 	m_thisRedefinitionBasedDispatchStrategyPtr = thisRedefinitionBasedDispatchStrategyPtr;
 	setThisDispatchStrategyPtr(thisRedefinitionBasedDispatchStrategyPtr);

@@ -297,11 +297,11 @@ Any BooleanLiteralExpEvalImpl::eInvoke(int operationID, std::shared_ptr<std::lis
 }
 
 
-std::shared_ptr<BooleanLiteralExpEval> BooleanLiteralExpEvalImpl::getThisBooleanLiteralExpEvalPtr() const
+std::shared_ptr<ocl::Evaluations::BooleanLiteralExpEval> BooleanLiteralExpEvalImpl::getThisBooleanLiteralExpEvalPtr() const
 {
 	return m_thisBooleanLiteralExpEvalPtr.lock();
 }
-void BooleanLiteralExpEvalImpl::setThisBooleanLiteralExpEvalPtr(std::weak_ptr<BooleanLiteralExpEval> thisBooleanLiteralExpEvalPtr)
+void BooleanLiteralExpEvalImpl::setThisBooleanLiteralExpEvalPtr(std::weak_ptr<ocl::Evaluations::BooleanLiteralExpEval> thisBooleanLiteralExpEvalPtr)
 {
 	m_thisBooleanLiteralExpEvalPtr = thisBooleanLiteralExpEvalPtr;
 	setThisLiteralBooleanEvaluationPtr(thisBooleanLiteralExpEvalPtr);

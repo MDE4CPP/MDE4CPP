@@ -32,8 +32,8 @@ namespace fUML::Semantics::SimpleClassifiers
 		protected:
 			friend class fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactoryImpl;
 			BooleanValueImpl();
-			virtual std::shared_ptr<BooleanValue> getThisBooleanValuePtr() const;
-			virtual void setThisBooleanValuePtr(std::weak_ptr<BooleanValue> thisBooleanValuePtr);
+			virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::BooleanValue> getThisBooleanValuePtr() const;
+			virtual void setThisBooleanValuePtr(std::weak_ptr<fUML::Semantics::SimpleClassifiers::BooleanValue> thisBooleanValuePtr);
 
 
 		public:
@@ -45,6 +45,7 @@ namespace fUML::Semantics::SimpleClassifiers
 			//*********************************
 			virtual std::shared_ptr<fUML::Semantics::Values::Value> _copy() ;
 			virtual bool equals(std::shared_ptr<fUML::Semantics::Values::Value> otherValue) ;
+			virtual std::shared_ptr<fUML::Semantics::Values::Value> new_() ;
 			virtual std::shared_ptr<uml::ValueSpecification> specify() ;
 			virtual std::string toString() ;
 			
@@ -93,7 +94,7 @@ namespace fUML::Semantics::SimpleClassifiers
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<BooleanValue> m_thisBooleanValuePtr;
+			std::weak_ptr<fUML::Semantics::SimpleClassifiers::BooleanValue> m_thisBooleanValuePtr;
 	};
 }
 #endif /* end of include guard: FUML_SEMANTICS_SIMPLECLASSIFIERS_BOOLEANVALUEBOOLEANVALUEIMPL_HPP */

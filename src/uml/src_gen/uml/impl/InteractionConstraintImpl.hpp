@@ -31,8 +31,8 @@ namespace uml
 		protected:
 			friend class umlFactoryImpl;
 			InteractionConstraintImpl();
-			virtual std::shared_ptr<InteractionConstraint> getThisInteractionConstraintPtr() const;
-			virtual void setThisInteractionConstraintPtr(std::weak_ptr<InteractionConstraint> thisInteractionConstraintPtr);
+			virtual std::shared_ptr<uml::InteractionConstraint> getThisInteractionConstraintPtr() const;
+			virtual void setThisInteractionConstraintPtr(std::weak_ptr<uml::InteractionConstraint> thisInteractionConstraintPtr);
 
 			//Additional constructors for the containments back reference
 			InteractionConstraintImpl(std::weak_ptr<uml::Namespace> par_Namespace, const int reference_id);
@@ -178,7 +178,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<InteractionConstraint> m_thisInteractionConstraintPtr;
+			std::weak_ptr<uml::InteractionConstraint> m_thisInteractionConstraintPtr;
 	};
 }
 #endif /* end of include guard: UML_INTERACTIONCONSTRAINTINTERACTIONCONSTRAINTIMPL_HPP */

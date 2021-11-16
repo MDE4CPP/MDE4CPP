@@ -4,15 +4,15 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
-#include "ecore/EAnnotation.hpp"
-#include "ecore/EReference.hpp"
-#include "ecore/EClass.hpp"
-#include "ecore/EDataType.hpp"
-#include "ecore/EGenericType.hpp"
-#include "ecore/EAttribute.hpp"
-#include "ecore/EParameter.hpp"
-#include "ecore/EOperation.hpp"
 #include "ecore/EStringToStringMapEntry.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
+#include "ecore/EGenericType.hpp"
+#include "ecore/EOperation.hpp"
+#include "ecore/EClass.hpp"
+#include "ecore/EParameter.hpp"
+#include "ecore/EDataType.hpp"
 
 // metametamodel factory
 #include "ecore/ecoreFactory.hpp"
@@ -122,6 +122,13 @@ void SimpleClassifiersPackageImpl::initializeBooleanValueContent()
 		parameter->setUnique(true);
 		parameter->setOrdered(true);
 	}
+	
+	m_booleanValue_Operation_new_->setName("new_");
+	m_booleanValue_Operation_new_->setEType(fUML::Semantics::Values::ValuesPackage::eInstance()->getValue_Class());
+	m_booleanValue_Operation_new_->setLowerBound(1);
+	m_booleanValue_Operation_new_->setUpperBound(1);
+	m_booleanValue_Operation_new_->setUnique(true);
+	m_booleanValue_Operation_new_->setOrdered(true);
 	
 	m_booleanValue_Operation_specify->setName("specify");
 	m_booleanValue_Operation_specify->setEType(uml::umlPackage::eInstance()->getValueSpecification_Class());
@@ -599,6 +606,13 @@ void SimpleClassifiersPackageImpl::initializeIntegerValueContent()
 		parameter->setOrdered(true);
 	}
 	
+	m_integerValue_Operation_new_->setName("new_");
+	m_integerValue_Operation_new_->setEType(fUML::Semantics::Values::ValuesPackage::eInstance()->getValue_Class());
+	m_integerValue_Operation_new_->setLowerBound(1);
+	m_integerValue_Operation_new_->setUpperBound(1);
+	m_integerValue_Operation_new_->setUnique(true);
+	m_integerValue_Operation_new_->setOrdered(true);
+	
 	m_integerValue_Operation_specify->setName("specify");
 	m_integerValue_Operation_specify->setEType(uml::umlPackage::eInstance()->getValueSpecification_Class());
 	m_integerValue_Operation_specify->setLowerBound(1);
@@ -714,6 +728,13 @@ void SimpleClassifiersPackageImpl::initializeRealValueContent()
 		parameter->setOrdered(true);
 	}
 	
+	m_realValue_Operation_new_->setName("new_");
+	m_realValue_Operation_new_->setEType(fUML::Semantics::Values::ValuesPackage::eInstance()->getValue_Class());
+	m_realValue_Operation_new_->setLowerBound(1);
+	m_realValue_Operation_new_->setUpperBound(1);
+	m_realValue_Operation_new_->setUnique(true);
+	m_realValue_Operation_new_->setOrdered(true);
+	
 	m_realValue_Operation_specify->setName("specify");
 	m_realValue_Operation_specify->setEType(uml::umlPackage::eInstance()->getValueSpecification_Class());
 	m_realValue_Operation_specify->setLowerBound(1);
@@ -768,6 +789,13 @@ void SimpleClassifiersPackageImpl::initializeSignalInstanceContent()
 	m_signalInstance_Operation__copy->setUnique(true);
 	m_signalInstance_Operation__copy->setOrdered(true);
 	
+	m_signalInstance_Operation_new_->setName("new_");
+	m_signalInstance_Operation_new_->setEType(fUML::Semantics::Values::ValuesPackage::eInstance()->getValue_Class());
+	m_signalInstance_Operation_new_->setLowerBound(1);
+	m_signalInstance_Operation_new_->setUpperBound(1);
+	m_signalInstance_Operation_new_->setUnique(true);
+	m_signalInstance_Operation_new_->setOrdered(true);
+	
 	
 }
 
@@ -821,6 +849,13 @@ void SimpleClassifiersPackageImpl::initializeStringValueContent()
 		parameter->setUnique(true);
 		parameter->setOrdered(true);
 	}
+	
+	m_stringValue_Operation_new_->setName("new_");
+	m_stringValue_Operation_new_->setEType(fUML::Semantics::Values::ValuesPackage::eInstance()->getValue_Class());
+	m_stringValue_Operation_new_->setLowerBound(1);
+	m_stringValue_Operation_new_->setUpperBound(1);
+	m_stringValue_Operation_new_->setUnique(true);
+	m_stringValue_Operation_new_->setOrdered(true);
 	
 	m_stringValue_Operation_specify->setName("specify");
 	m_stringValue_Operation_specify->setEType(uml::umlPackage::eInstance()->getValueSpecification_Class());
@@ -1085,6 +1120,13 @@ void SimpleClassifiersPackageImpl::initializeUnlimitedNaturalValueContent()
 		parameter->setUnique(true);
 		parameter->setOrdered(true);
 	}
+	
+	m_unlimitedNaturalValue_Operation_new_->setName("new_");
+	m_unlimitedNaturalValue_Operation_new_->setEType(fUML::Semantics::Values::ValuesPackage::eInstance()->getValue_Class());
+	m_unlimitedNaturalValue_Operation_new_->setLowerBound(1);
+	m_unlimitedNaturalValue_Operation_new_->setUpperBound(1);
+	m_unlimitedNaturalValue_Operation_new_->setUnique(true);
+	m_unlimitedNaturalValue_Operation_new_->setOrdered(true);
 	
 	m_unlimitedNaturalValue_Operation_specify->setName("specify");
 	m_unlimitedNaturalValue_Operation_specify->setEType(uml::umlPackage::eInstance()->getValueSpecification_Class());

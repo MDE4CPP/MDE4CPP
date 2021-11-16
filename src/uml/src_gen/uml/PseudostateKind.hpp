@@ -9,7 +9,7 @@
 
 namespace uml 
 {
-	enum PseudostateKind {
+	enum class PseudostateKind {
 		
 		CHOICE = 6
 ,

@@ -182,14 +182,6 @@ CallActionImpl& CallActionImpl::operator=(const CallActionImpl & obj)
 	return *this;
 }
 
-std::shared_ptr<ecore::EObject> CallActionImpl::copy() const
-{
-	std::shared_ptr<CallActionImpl> element(new CallActionImpl());
-	*element =(*this);
-	element->setThisCallActionPtr(element);
-	return element;
-}
-
 //*********************************
 // Operations
 //*********************************
@@ -691,11 +683,11 @@ Any CallActionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sh
 }
 
 
-std::shared_ptr<CallAction> CallActionImpl::getThisCallActionPtr() const
+std::shared_ptr<uml::CallAction> CallActionImpl::getThisCallActionPtr() const
 {
 	return m_thisCallActionPtr.lock();
 }
-void CallActionImpl::setThisCallActionPtr(std::weak_ptr<CallAction> thisCallActionPtr)
+void CallActionImpl::setThisCallActionPtr(std::weak_ptr<uml::CallAction> thisCallActionPtr)
 {
 	m_thisCallActionPtr = thisCallActionPtr;
 	setThisInvocationActionPtr(thisCallActionPtr);

@@ -31,8 +31,8 @@ namespace uml
 		protected:
 			friend class umlFactoryImpl;
 			FactoryImpl();
-			virtual std::shared_ptr<Factory> getThisFactoryPtr() const;
-			virtual void setThisFactoryPtr(std::weak_ptr<Factory> thisFactoryPtr);
+			virtual std::shared_ptr<uml::Factory> getThisFactoryPtr() const;
+			virtual void setThisFactoryPtr(std::weak_ptr<uml::Factory> thisFactoryPtr);
 
 			//Additional constructors for the containments back reference
 			FactoryImpl(std::weak_ptr<uml::Element> par_owner);
@@ -102,7 +102,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<Factory> m_thisFactoryPtr;
+			std::weak_ptr<uml::Factory> m_thisFactoryPtr;
 	};
 }
 #endif /* end of include guard: UML_FACTORYFACTORYIMPL_HPP */

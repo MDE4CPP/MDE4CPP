@@ -32,9 +32,9 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "ecore/ecoreFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
+#include "ecore/ecoreFactory.hpp"
 
 #include "ocl/Expressions/CallExp.hpp"
 #include "ocl/Expressions/CollectionRange.hpp"
@@ -204,14 +204,6 @@ OclExpressionImpl& OclExpressionImpl::operator=(const OclExpressionImpl & obj)
 	m_topExpression  = obj.getTopExpression();
 	//Clone references with containment (deep copy)
 	return *this;
-}
-
-std::shared_ptr<ecore::EObject> OclExpressionImpl::copy() const
-{
-	std::shared_ptr<OclExpressionImpl> element(new OclExpressionImpl());
-	*element =(*this);
-	element->setThisOclExpressionPtr(element);
-	return element;
 }
 
 //*********************************
@@ -891,11 +883,11 @@ Any OclExpressionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std:
 }
 
 
-std::shared_ptr<OclExpression> OclExpressionImpl::getThisOclExpressionPtr() const
+std::shared_ptr<ocl::Expressions::OclExpression> OclExpressionImpl::getThisOclExpressionPtr() const
 {
 	return m_thisOclExpressionPtr.lock();
 }
-void OclExpressionImpl::setThisOclExpressionPtr(std::weak_ptr<OclExpression> thisOclExpressionPtr)
+void OclExpressionImpl::setThisOclExpressionPtr(std::weak_ptr<ocl::Expressions::OclExpression> thisOclExpressionPtr)
 {
 	m_thisOclExpressionPtr = thisOclExpressionPtr;
 	setThisETypedElementPtr(thisOclExpressionPtr);

@@ -32,8 +32,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "uml/umlFactory.hpp"
 #include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
+#include "uml/umlFactory.hpp"
 
 #include "fUML/Semantics/SimpleClassifiers/CompoundValue.hpp"
 #include "fUML/Semantics/SimpleClassifiers/FeatureValue.hpp"
@@ -123,6 +123,15 @@ std::shared_ptr<fUML::Semantics::Values::Value> SignalInstanceImpl::_copy()
 std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance> newValue = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::SignalInstance>(fUML::Semantics::SimpleClassifiers::CompoundValueImpl::_copy());
 newValue->setType(this->getType());
 return newValue;
+	//end of body
+}
+
+std::shared_ptr<fUML::Semantics::Values::Value> SignalInstanceImpl::new_()
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	// Create a new signal instance with no type or feature values.
+return fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createSignalInstance();
 	//end of body
 }
 
@@ -321,6 +330,13 @@ Any SignalInstanceImpl::eInvoke(int operationID, std::shared_ptr<std::list < std
 			result = eAny(this->_copy());
 			break;
 		}
+		
+		// 40647669
+		case SimpleClassifiersPackage::SIGNALINSTANCE_OPERATION_NEW_:
+		{
+			result = eAny(this->new_());
+			break;
+		}
 
 		default:
 		{
@@ -336,11 +352,11 @@ Any SignalInstanceImpl::eInvoke(int operationID, std::shared_ptr<std::list < std
 }
 
 
-std::shared_ptr<SignalInstance> SignalInstanceImpl::getThisSignalInstancePtr() const
+std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance> SignalInstanceImpl::getThisSignalInstancePtr() const
 {
 	return m_thisSignalInstancePtr.lock();
 }
-void SignalInstanceImpl::setThisSignalInstancePtr(std::weak_ptr<SignalInstance> thisSignalInstancePtr)
+void SignalInstanceImpl::setThisSignalInstancePtr(std::weak_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance> thisSignalInstancePtr)
 {
 	m_thisSignalInstancePtr = thisSignalInstancePtr;
 	setThisCompoundValuePtr(thisSignalInstancePtr);

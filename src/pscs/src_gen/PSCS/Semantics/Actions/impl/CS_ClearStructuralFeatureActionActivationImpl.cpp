@@ -48,9 +48,9 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "uml/umlFactory.hpp"
-#include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
+#include "fUML/Semantics/Actions/ActionsFactory.hpp"
+#include "uml/umlFactory.hpp"
 
 #include "uml/Action.hpp"
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
@@ -532,11 +532,11 @@ Any CS_ClearStructuralFeatureActionActivationImpl::eInvoke(int operationID, std:
 }
 
 
-std::shared_ptr<CS_ClearStructuralFeatureActionActivation> CS_ClearStructuralFeatureActionActivationImpl::getThisCS_ClearStructuralFeatureActionActivationPtr() const
+std::shared_ptr<PSCS::Semantics::Actions::CS_ClearStructuralFeatureActionActivation> CS_ClearStructuralFeatureActionActivationImpl::getThisCS_ClearStructuralFeatureActionActivationPtr() const
 {
 	return m_thisCS_ClearStructuralFeatureActionActivationPtr.lock();
 }
-void CS_ClearStructuralFeatureActionActivationImpl::setThisCS_ClearStructuralFeatureActionActivationPtr(std::weak_ptr<CS_ClearStructuralFeatureActionActivation> thisCS_ClearStructuralFeatureActionActivationPtr)
+void CS_ClearStructuralFeatureActionActivationImpl::setThisCS_ClearStructuralFeatureActionActivationPtr(std::weak_ptr<PSCS::Semantics::Actions::CS_ClearStructuralFeatureActionActivation> thisCS_ClearStructuralFeatureActionActivationPtr)
 {
 	m_thisCS_ClearStructuralFeatureActionActivationPtr = thisCS_ClearStructuralFeatureActionActivationPtr;
 	setThisClearStructuralFeatureActionActivationPtr(thisCS_ClearStructuralFeatureActionActivationPtr);

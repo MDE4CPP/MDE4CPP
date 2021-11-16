@@ -32,8 +32,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "ecore/ecoreFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
+#include "ecore/ecoreFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
 
 #include "ocl/Expressions/CallExp.hpp"
@@ -518,11 +518,11 @@ Any TupleLiteralExpImpl::eInvoke(int operationID, std::shared_ptr<std::list < st
 }
 
 
-std::shared_ptr<TupleLiteralExp> TupleLiteralExpImpl::getThisTupleLiteralExpPtr() const
+std::shared_ptr<ocl::Expressions::TupleLiteralExp> TupleLiteralExpImpl::getThisTupleLiteralExpPtr() const
 {
 	return m_thisTupleLiteralExpPtr.lock();
 }
-void TupleLiteralExpImpl::setThisTupleLiteralExpPtr(std::weak_ptr<TupleLiteralExp> thisTupleLiteralExpPtr)
+void TupleLiteralExpImpl::setThisTupleLiteralExpPtr(std::weak_ptr<ocl::Expressions::TupleLiteralExp> thisTupleLiteralExpPtr)
 {
 	m_thisTupleLiteralExpPtr = thisTupleLiteralExpPtr;
 	setThisLiteralExpPtr(thisTupleLiteralExpPtr);

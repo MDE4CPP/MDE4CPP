@@ -14,18 +14,18 @@
 
 namespace ecore 
 {
-	class EAnnotation;
-	class EPackage;
-	class EReference;
-	class EEnum;
-	class EClass;
-	class EDataType;
-	class EGenericType;
-	class EAttribute;
-	class EEnumLiteral;
-	class EParameter;
-	class EOperation;
 	class EStringToStringMapEntry;
+	class EAnnotation;
+	class EAttribute;
+	class EReference;
+	class EGenericType;
+	class EEnum;
+	class EPackage;
+	class EOperation;
+	class EClass;
+	class EParameter;
+	class EDataType;
+	class EEnumLiteral;
 }
 
 namespace ocl 
@@ -77,10 +77,10 @@ namespace ocl
 			
 			
 
-			virtual std::shared_ptr<Evaluations::EvaluationsPackage> getEvaluations_Package() const = 0;
-			virtual std::shared_ptr<Expressions::ExpressionsPackage> getExpressions_Package() const = 0;
-			virtual std::shared_ptr<Types::TypesPackage> getTypes_Package() const = 0;
-			virtual std::shared_ptr<Values::ValuesPackage> getValues_Package() const = 0;
+			virtual std::shared_ptr<ocl::Evaluations::EvaluationsPackage> getEvaluations_Package() const = 0;
+			virtual std::shared_ptr<ocl::Expressions::ExpressionsPackage> getExpressions_Package() const = 0;
+			virtual std::shared_ptr<ocl::Types::TypesPackage> getTypes_Package() const = 0;
+			virtual std::shared_ptr<ocl::Values::ValuesPackage> getValues_Package() const = 0;
 			
 
 			//Singleton Instance and Getter

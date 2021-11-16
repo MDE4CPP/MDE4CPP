@@ -32,8 +32,8 @@ namespace fUML::Semantics::CommonBehavior
 		protected:
 			friend class fUML::Semantics::CommonBehavior::CommonBehaviorFactoryImpl;
 			FIFOGetNextEventStrategyImpl();
-			virtual std::shared_ptr<FIFOGetNextEventStrategy> getThisFIFOGetNextEventStrategyPtr() const;
-			virtual void setThisFIFOGetNextEventStrategyPtr(std::weak_ptr<FIFOGetNextEventStrategy> thisFIFOGetNextEventStrategyPtr);
+			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::FIFOGetNextEventStrategy> getThisFIFOGetNextEventStrategyPtr() const;
+			virtual void setThisFIFOGetNextEventStrategyPtr(std::weak_ptr<fUML::Semantics::CommonBehavior::FIFOGetNextEventStrategy> thisFIFOGetNextEventStrategyPtr);
 
 
 		public:
@@ -87,7 +87,7 @@ namespace fUML::Semantics::CommonBehavior
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<FIFOGetNextEventStrategy> m_thisFIFOGetNextEventStrategyPtr;
+			std::weak_ptr<fUML::Semantics::CommonBehavior::FIFOGetNextEventStrategy> m_thisFIFOGetNextEventStrategyPtr;
 	};
 }
 #endif /* end of include guard: FUML_SEMANTICS_COMMONBEHAVIOR_FIFOGETNEXTEVENTSTRATEGYFIFOGETNEXTEVENTSTRATEGYIMPL_HPP */

@@ -32,9 +32,9 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "uml/umlFactory.hpp"
-#include "ecore/ecoreFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
+#include "ecore/ecoreFactory.hpp"
+#include "uml/umlFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
 
 #include "ocl/Expressions/CallExp.hpp"
@@ -647,11 +647,11 @@ Any MessageExpImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sh
 }
 
 
-std::shared_ptr<MessageExp> MessageExpImpl::getThisMessageExpPtr() const
+std::shared_ptr<ocl::Expressions::MessageExp> MessageExpImpl::getThisMessageExpPtr() const
 {
 	return m_thisMessageExpPtr.lock();
 }
-void MessageExpImpl::setThisMessageExpPtr(std::weak_ptr<MessageExp> thisMessageExpPtr)
+void MessageExpImpl::setThisMessageExpPtr(std::weak_ptr<ocl::Expressions::MessageExp> thisMessageExpPtr)
 {
 	m_thisMessageExpPtr = thisMessageExpPtr;
 	setThisOclExpressionPtr(thisMessageExpPtr);

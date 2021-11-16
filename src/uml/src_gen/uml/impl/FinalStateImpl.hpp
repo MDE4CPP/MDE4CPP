@@ -31,8 +31,8 @@ namespace uml
 		protected:
 			friend class umlFactoryImpl;
 			FinalStateImpl();
-			virtual std::shared_ptr<FinalState> getThisFinalStatePtr() const;
-			virtual void setThisFinalStatePtr(std::weak_ptr<FinalState> thisFinalStatePtr);
+			virtual std::shared_ptr<uml::FinalState> getThisFinalStatePtr() const;
+			virtual void setThisFinalStatePtr(std::weak_ptr<uml::FinalState> thisFinalStatePtr);
 
 			//Additional constructors for the containments back reference
 			FinalStateImpl(std::weak_ptr<uml::Region> par_container);
@@ -164,7 +164,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<FinalState> m_thisFinalStatePtr;
+			std::weak_ptr<uml::FinalState> m_thisFinalStatePtr;
 	};
 }
 #endif /* end of include guard: UML_FINALSTATEFINALSTATEIMPL_HPP */

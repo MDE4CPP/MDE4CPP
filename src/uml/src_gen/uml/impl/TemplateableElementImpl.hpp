@@ -25,21 +25,21 @@ namespace uml
 	{
 		public: 
 			TemplateableElementImpl(const TemplateableElementImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 			TemplateableElementImpl& operator=(TemplateableElementImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;
 			TemplateableElementImpl();
-			virtual std::shared_ptr<TemplateableElement> getThisTemplateableElementPtr() const;
-			virtual void setThisTemplateableElementPtr(std::weak_ptr<TemplateableElement> thisTemplateableElementPtr);
+			virtual std::shared_ptr<uml::TemplateableElement> getThisTemplateableElementPtr() const;
+			virtual void setThisTemplateableElementPtr(std::weak_ptr<uml::TemplateableElement> thisTemplateableElementPtr);
 
 			//Additional constructors for the containments back reference
 			TemplateableElementImpl(std::weak_ptr<uml::Element> par_owner);
 
 		public:
 			//destructor
-			virtual ~TemplateableElementImpl();
+			virtual ~TemplateableElementImpl() = 0;
 			
 			//*********************************
 			// Operations
@@ -126,7 +126,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<TemplateableElement> m_thisTemplateableElementPtr;
+			std::weak_ptr<uml::TemplateableElement> m_thisTemplateableElementPtr;
 	};
 }
 #endif /* end of include guard: UML_TEMPLATEABLEELEMENTTEMPLATEABLEELEMENTIMPL_HPP */

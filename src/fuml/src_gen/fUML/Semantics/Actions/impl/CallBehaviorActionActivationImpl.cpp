@@ -38,8 +38,8 @@
 
 #include <exception> // used in Persistence
 #include "fUML/Semantics/Actions/ActionsFactory.hpp"
-#include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "uml/umlFactory.hpp"
+#include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
 
 #include "uml/Action.hpp"
@@ -439,11 +439,11 @@ Any CallBehaviorActionActivationImpl::eInvoke(int operationID, std::shared_ptr<s
 }
 
 
-std::shared_ptr<CallBehaviorActionActivation> CallBehaviorActionActivationImpl::getThisCallBehaviorActionActivationPtr() const
+std::shared_ptr<fUML::Semantics::Actions::CallBehaviorActionActivation> CallBehaviorActionActivationImpl::getThisCallBehaviorActionActivationPtr() const
 {
 	return m_thisCallBehaviorActionActivationPtr.lock();
 }
-void CallBehaviorActionActivationImpl::setThisCallBehaviorActionActivationPtr(std::weak_ptr<CallBehaviorActionActivation> thisCallBehaviorActionActivationPtr)
+void CallBehaviorActionActivationImpl::setThisCallBehaviorActionActivationPtr(std::weak_ptr<fUML::Semantics::Actions::CallBehaviorActionActivation> thisCallBehaviorActionActivationPtr)
 {
 	m_thisCallBehaviorActionActivationPtr = thisCallBehaviorActionActivationPtr;
 	setThisCallActionActivationPtr(thisCallBehaviorActionActivationPtr);

@@ -548,11 +548,11 @@ Any DurationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shar
 }
 
 
-std::shared_ptr<Duration> DurationImpl::getThisDurationPtr() const
+std::shared_ptr<uml::Duration> DurationImpl::getThisDurationPtr() const
 {
 	return m_thisDurationPtr.lock();
 }
-void DurationImpl::setThisDurationPtr(std::weak_ptr<Duration> thisDurationPtr)
+void DurationImpl::setThisDurationPtr(std::weak_ptr<uml::Duration> thisDurationPtr)
 {
 	m_thisDurationPtr = thisDurationPtr;
 	setThisValueSpecificationPtr(thisDurationPtr);

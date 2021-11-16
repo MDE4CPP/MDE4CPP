@@ -645,11 +645,11 @@ Any OpaqueBehaviorImpl::eInvoke(int operationID, std::shared_ptr<std::list < std
 }
 
 
-std::shared_ptr<OpaqueBehavior> OpaqueBehaviorImpl::getThisOpaqueBehaviorPtr() const
+std::shared_ptr<uml::OpaqueBehavior> OpaqueBehaviorImpl::getThisOpaqueBehaviorPtr() const
 {
 	return m_thisOpaqueBehaviorPtr.lock();
 }
-void OpaqueBehaviorImpl::setThisOpaqueBehaviorPtr(std::weak_ptr<OpaqueBehavior> thisOpaqueBehaviorPtr)
+void OpaqueBehaviorImpl::setThisOpaqueBehaviorPtr(std::weak_ptr<uml::OpaqueBehavior> thisOpaqueBehaviorPtr)
 {
 	m_thisOpaqueBehaviorPtr = thisOpaqueBehaviorPtr;
 	setThisBehaviorPtr(thisOpaqueBehaviorPtr);

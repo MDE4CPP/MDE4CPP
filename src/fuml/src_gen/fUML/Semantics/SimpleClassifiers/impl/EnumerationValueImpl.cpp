@@ -163,7 +163,8 @@ std::shared_ptr<fUML::Semantics::Values::Value> EnumerationValueImpl::new_()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	return std::shared_ptr<fUML::Semantics::Values::Value>(fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createEnumerationValue());
+	// Create a new enumeration value with no literal.
+return std::shared_ptr<fUML::Semantics::Values::Value>(fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createEnumerationValue());
 	//end of body
 }
 
@@ -482,11 +483,11 @@ Any EnumerationValueImpl::eInvoke(int operationID, std::shared_ptr<std::list < s
 }
 
 
-std::shared_ptr<EnumerationValue> EnumerationValueImpl::getThisEnumerationValuePtr() const
+std::shared_ptr<fUML::Semantics::SimpleClassifiers::EnumerationValue> EnumerationValueImpl::getThisEnumerationValuePtr() const
 {
 	return m_thisEnumerationValuePtr.lock();
 }
-void EnumerationValueImpl::setThisEnumerationValuePtr(std::weak_ptr<EnumerationValue> thisEnumerationValuePtr)
+void EnumerationValueImpl::setThisEnumerationValuePtr(std::weak_ptr<fUML::Semantics::SimpleClassifiers::EnumerationValue> thisEnumerationValuePtr)
 {
 	m_thisEnumerationValuePtr = thisEnumerationValuePtr;
 	setThisValuePtr(thisEnumerationValuePtr);

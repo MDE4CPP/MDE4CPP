@@ -7,14 +7,14 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
+#include "ecore/EStringToStringMapEntry.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EReference.hpp"
-#include "ecore/EClass.hpp"
-#include "ecore/EDataType.hpp"
 #include "ecore/EGenericType.hpp"
-#include "ecore/EParameter.hpp"
 #include "ecore/EOperation.hpp"
-#include "ecore/EStringToStringMapEntry.hpp"
+#include "ecore/EClass.hpp"
+#include "ecore/EParameter.hpp"
+#include "ecore/EDataType.hpp"
 
 //depending model packages
 #include "ecore/ecorePackage.hpp"
@@ -62,6 +62,7 @@ void StructuredClassifiersPackageImpl::createExtensionalValueContent(std::shared
 	m_extensionalValue_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, EXTENSIONALVALUE_CLASS);
 	
 	m_extensionalValue_Attribute_locus = factory->createEReference_as_eStructuralFeatures_in_EClass(m_extensionalValue_Class, EXTENSIONALVALUE_ATTRIBUTE_LOCUS);
+	
 	m_extensionalValue_Operation__copy = factory->createEOperation_as_eOperations_in_EClass(m_extensionalValue_Class, EXTENSIONALVALUE_OPERATION__COPY);
 	m_extensionalValue_Operation_destroy = factory->createEOperation_as_eOperations_in_EClass(m_extensionalValue_Class, EXTENSIONALVALUE_OPERATION_DESTROY);
 	
@@ -85,11 +86,13 @@ void StructuredClassifiersPackageImpl::createLinkContent(std::shared_ptr<ecore::
 	m_link_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, LINK_CLASS);
 	
 	m_link_Attribute_type = factory->createEReference_as_eStructuralFeatures_in_EClass(m_link_Class, LINK_ATTRIBUTE_TYPE);
+	
 	m_link_Operation__copy = factory->createEOperation_as_eOperations_in_EClass(m_link_Class, LINK_OPERATION__COPY);
 	m_link_Operation_addTo_Locus = factory->createEOperation_as_eOperations_in_EClass(m_link_Class, LINK_OPERATION_ADDTO_LOCUS);
 	m_link_Operation_getOtherFeatureValues_ExtensionalValue_Property = factory->createEOperation_as_eOperations_in_EClass(m_link_Class, LINK_OPERATION_GETOTHERFEATUREVALUES_EXTENSIONALVALUE_PROPERTY);
 	m_link_Operation_getTypes = factory->createEOperation_as_eOperations_in_EClass(m_link_Class, LINK_OPERATION_GETTYPES);
 	m_link_Operation_isMatchingLink_ExtensionalValue_Property = factory->createEOperation_as_eOperations_in_EClass(m_link_Class, LINK_OPERATION_ISMATCHINGLINK_EXTENSIONALVALUE_PROPERTY);
+	m_link_Operation_new_ = factory->createEOperation_as_eOperations_in_EClass(m_link_Class, LINK_OPERATION_NEW_);
 	
 }
 
@@ -97,7 +100,9 @@ void StructuredClassifiersPackageImpl::createObjectContent(std::shared_ptr<ecore
 {
 	m_object_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, OBJECT_CLASS);
 	
-	m_object_Attribute_objectActivation = factory->createEReference_as_eStructuralFeatures_in_EClass(m_object_Class, OBJECT_ATTRIBUTE_OBJECTACTIVATION);m_object_Attribute_types = factory->createEReference_as_eStructuralFeatures_in_EClass(m_object_Class, OBJECT_ATTRIBUTE_TYPES);
+	m_object_Attribute_objectActivation = factory->createEReference_as_eStructuralFeatures_in_EClass(m_object_Class, OBJECT_ATTRIBUTE_OBJECTACTIVATION);
+	m_object_Attribute_types = factory->createEReference_as_eStructuralFeatures_in_EClass(m_object_Class, OBJECT_ATTRIBUTE_TYPES);
+	
 	m_object_Operation__copy = factory->createEOperation_as_eOperations_in_EClass(m_object_Class, OBJECT_OPERATION__COPY);
 	m_object_Operation__register_EventAccepter = factory->createEOperation_as_eOperations_in_EClass(m_object_Class, OBJECT_OPERATION__REGISTER_EVENTACCEPTER);
 	m_object_Operation_destroy = factory->createEOperation_as_eOperations_in_EClass(m_object_Class, OBJECT_OPERATION_DESTROY);
@@ -125,6 +130,7 @@ void StructuredClassifiersPackageImpl::createReferenceContent(std::shared_ptr<ec
 	m_reference_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, REFERENCE_CLASS);
 	
 	m_reference_Attribute_referent = factory->createEReference_as_eStructuralFeatures_in_EClass(m_reference_Class, REFERENCE_ATTRIBUTE_REFERENT);
+	
 	m_reference_Operation__copy = factory->createEOperation_as_eOperations_in_EClass(m_reference_Class, REFERENCE_OPERATION__COPY);
 	m_reference_Operation_assignFeatureValue_StructuralFeature_EInt = factory->createEOperation_as_eOperations_in_EClass(m_reference_Class, REFERENCE_OPERATION_ASSIGNFEATUREVALUE_STRUCTURALFEATURE_EINT);
 	m_reference_Operation_destroy = factory->createEOperation_as_eOperations_in_EClass(m_reference_Class, REFERENCE_OPERATION_DESTROY);

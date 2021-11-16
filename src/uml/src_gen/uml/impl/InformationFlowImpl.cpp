@@ -1179,11 +1179,11 @@ Any InformationFlowImpl::eInvoke(int operationID, std::shared_ptr<std::list < st
 }
 
 
-std::shared_ptr<InformationFlow> InformationFlowImpl::getThisInformationFlowPtr() const
+std::shared_ptr<uml::InformationFlow> InformationFlowImpl::getThisInformationFlowPtr() const
 {
 	return m_thisInformationFlowPtr.lock();
 }
-void InformationFlowImpl::setThisInformationFlowPtr(std::weak_ptr<InformationFlow> thisInformationFlowPtr)
+void InformationFlowImpl::setThisInformationFlowPtr(std::weak_ptr<uml::InformationFlow> thisInformationFlowPtr)
 {
 	m_thisInformationFlowPtr = thisInformationFlowPtr;
 	setThisDirectedRelationshipPtr(thisInformationFlowPtr);

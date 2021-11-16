@@ -34,8 +34,8 @@ virtual public NameTypeBinding
 		protected:
 			friend class ocl::Types::TypesFactoryImpl;
 			NameTypeBindingImpl();
-			virtual std::shared_ptr<NameTypeBinding> getThisNameTypeBindingPtr() const;
-			virtual void setThisNameTypeBindingPtr(std::weak_ptr<NameTypeBinding> thisNameTypeBindingPtr);
+			virtual std::shared_ptr<ocl::Types::NameTypeBinding> getThisNameTypeBindingPtr() const;
+			virtual void setThisNameTypeBindingPtr(std::weak_ptr<ocl::Types::NameTypeBinding> thisNameTypeBindingPtr);
 
 
 		public:
@@ -93,7 +93,7 @@ virtual public NameTypeBinding
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<NameTypeBinding> m_thisNameTypeBindingPtr;
+			std::weak_ptr<ocl::Types::NameTypeBinding> m_thisNameTypeBindingPtr;
 	};
 }
 #endif /* end of include guard: OCL_TYPES_NAMETYPEBINDINGNAMETYPEBINDINGIMPL_HPP */

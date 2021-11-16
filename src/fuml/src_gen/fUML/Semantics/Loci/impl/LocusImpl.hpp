@@ -34,8 +34,8 @@ virtual public Locus
 		protected:
 			friend class fUML::Semantics::Loci::LociFactoryImpl;
 			LocusImpl();
-			virtual std::shared_ptr<Locus> getThisLocusPtr() const;
-			virtual void setThisLocusPtr(std::weak_ptr<Locus> thisLocusPtr);
+			virtual std::shared_ptr<fUML::Semantics::Loci::Locus> getThisLocusPtr() const;
+			virtual void setThisLocusPtr(std::weak_ptr<fUML::Semantics::Loci::Locus> thisLocusPtr);
 
 
 		public:
@@ -101,7 +101,7 @@ virtual public Locus
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<Locus> m_thisLocusPtr;
+			std::weak_ptr<fUML::Semantics::Loci::Locus> m_thisLocusPtr;
 	};
 }
 #endif /* end of include guard: FUML_SEMANTICS_LOCI_LOCUSLOCUSIMPL_HPP */

@@ -34,8 +34,8 @@ virtual public CallEventBehavior
 		protected:
 			friend class fUML::Semantics::CommonBehavior::CommonBehaviorFactoryImpl;
 			CallEventBehaviorImpl();
-			virtual std::shared_ptr<CallEventBehavior> getThisCallEventBehaviorPtr() const;
-			virtual void setThisCallEventBehaviorPtr(std::weak_ptr<CallEventBehavior> thisCallEventBehaviorPtr);
+			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::CallEventBehavior> getThisCallEventBehaviorPtr() const;
+			virtual void setThisCallEventBehaviorPtr(std::weak_ptr<fUML::Semantics::CommonBehavior::CallEventBehavior> thisCallEventBehaviorPtr);
 
 
 		public:
@@ -92,7 +92,7 @@ virtual public CallEventBehavior
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<CallEventBehavior> m_thisCallEventBehaviorPtr;
+			std::weak_ptr<fUML::Semantics::CommonBehavior::CallEventBehavior> m_thisCallEventBehaviorPtr;
 	};
 }
 #endif /* end of include guard: FUML_SEMANTICS_COMMONBEHAVIOR_CALLEVENTBEHAVIORCALLEVENTBEHAVIORIMPL_HPP */

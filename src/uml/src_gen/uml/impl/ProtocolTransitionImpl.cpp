@@ -605,11 +605,11 @@ Any ProtocolTransitionImpl::eInvoke(int operationID, std::shared_ptr<std::list <
 }
 
 
-std::shared_ptr<ProtocolTransition> ProtocolTransitionImpl::getThisProtocolTransitionPtr() const
+std::shared_ptr<uml::ProtocolTransition> ProtocolTransitionImpl::getThisProtocolTransitionPtr() const
 {
 	return m_thisProtocolTransitionPtr.lock();
 }
-void ProtocolTransitionImpl::setThisProtocolTransitionPtr(std::weak_ptr<ProtocolTransition> thisProtocolTransitionPtr)
+void ProtocolTransitionImpl::setThisProtocolTransitionPtr(std::weak_ptr<uml::ProtocolTransition> thisProtocolTransitionPtr)
 {
 	m_thisProtocolTransitionPtr = thisProtocolTransitionPtr;
 	setThisTransitionPtr(thisProtocolTransitionPtr);

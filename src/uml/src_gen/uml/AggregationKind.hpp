@@ -9,7 +9,7 @@
 
 namespace uml 
 {
-	enum AggregationKind {
+	enum class AggregationKind {
 		
 		COMPOSITE = 2
 ,

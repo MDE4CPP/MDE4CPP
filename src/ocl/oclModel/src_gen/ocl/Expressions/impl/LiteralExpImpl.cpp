@@ -32,9 +32,9 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "ecore/ecoreFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
+#include "ecore/ecoreFactory.hpp"
 
 #include "ocl/Expressions/CallExp.hpp"
 #include "ocl/Expressions/CollectionRange.hpp"
@@ -192,14 +192,6 @@ LiteralExpImpl& LiteralExpImpl::operator=(const LiteralExpImpl & obj)
 	//copy references with no containment (soft copy)
 	//Clone references with containment (deep copy)
 	return *this;
-}
-
-std::shared_ptr<ecore::EObject> LiteralExpImpl::copy() const
-{
-	std::shared_ptr<LiteralExpImpl> element(new LiteralExpImpl());
-	*element =(*this);
-	element->setThisLiteralExpPtr(element);
-	return element;
 }
 
 //*********************************
@@ -403,11 +395,11 @@ Any LiteralExpImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sh
 }
 
 
-std::shared_ptr<LiteralExp> LiteralExpImpl::getThisLiteralExpPtr() const
+std::shared_ptr<ocl::Expressions::LiteralExp> LiteralExpImpl::getThisLiteralExpPtr() const
 {
 	return m_thisLiteralExpPtr.lock();
 }
-void LiteralExpImpl::setThisLiteralExpPtr(std::weak_ptr<LiteralExp> thisLiteralExpPtr)
+void LiteralExpImpl::setThisLiteralExpPtr(std::weak_ptr<ocl::Expressions::LiteralExp> thisLiteralExpPtr)
 {
 	m_thisLiteralExpPtr = thisLiteralExpPtr;
 	setThisOclExpressionPtr(thisLiteralExpPtr);

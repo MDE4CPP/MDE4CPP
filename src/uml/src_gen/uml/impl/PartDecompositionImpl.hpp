@@ -31,8 +31,8 @@ namespace uml
 		protected:
 			friend class umlFactoryImpl;
 			PartDecompositionImpl();
-			virtual std::shared_ptr<PartDecomposition> getThisPartDecompositionPtr() const;
-			virtual void setThisPartDecompositionPtr(std::weak_ptr<PartDecomposition> thisPartDecompositionPtr);
+			virtual std::shared_ptr<uml::PartDecomposition> getThisPartDecompositionPtr() const;
+			virtual void setThisPartDecompositionPtr(std::weak_ptr<uml::PartDecomposition> thisPartDecompositionPtr);
 
 			//Additional constructors for the containments back reference
 			PartDecompositionImpl(std::weak_ptr<uml::Interaction> par_enclosingInteraction);
@@ -127,7 +127,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<PartDecomposition> m_thisPartDecompositionPtr;
+			std::weak_ptr<uml::PartDecomposition> m_thisPartDecompositionPtr;
 	};
 }
 #endif /* end of include guard: UML_PARTDECOMPOSITIONPARTDECOMPOSITIONIMPL_HPP */

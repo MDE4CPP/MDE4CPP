@@ -428,11 +428,11 @@ Any ExecutorImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shar
 }
 
 
-std::shared_ptr<Executor> ExecutorImpl::getThisExecutorPtr() const
+std::shared_ptr<fUML::Semantics::Loci::Executor> ExecutorImpl::getThisExecutorPtr() const
 {
 	return m_thisExecutorPtr.lock();
 }
-void ExecutorImpl::setThisExecutorPtr(std::weak_ptr<Executor> thisExecutorPtr)
+void ExecutorImpl::setThisExecutorPtr(std::weak_ptr<fUML::Semantics::Loci::Executor> thisExecutorPtr)
 {
 	m_thisExecutorPtr = thisExecutorPtr;
 }

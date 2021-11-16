@@ -26,19 +26,19 @@ namespace PSCS::Semantics::StructuredClassifiers
 	{
 		public: 
 			CS_StructuralFeatureOfInterfaceAccessStrategyImpl(const CS_StructuralFeatureOfInterfaceAccessStrategyImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 			CS_StructuralFeatureOfInterfaceAccessStrategyImpl& operator=(CS_StructuralFeatureOfInterfaceAccessStrategyImpl const&); 
 
 		protected:
 			friend class PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactoryImpl;
 			CS_StructuralFeatureOfInterfaceAccessStrategyImpl();
-			virtual std::shared_ptr<CS_StructuralFeatureOfInterfaceAccessStrategy> getThisCS_StructuralFeatureOfInterfaceAccessStrategyPtr() const;
-			virtual void setThisCS_StructuralFeatureOfInterfaceAccessStrategyPtr(std::weak_ptr<CS_StructuralFeatureOfInterfaceAccessStrategy> thisCS_StructuralFeatureOfInterfaceAccessStrategyPtr);
+			virtual std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_StructuralFeatureOfInterfaceAccessStrategy> getThisCS_StructuralFeatureOfInterfaceAccessStrategyPtr() const;
+			virtual void setThisCS_StructuralFeatureOfInterfaceAccessStrategyPtr(std::weak_ptr<PSCS::Semantics::StructuredClassifiers::CS_StructuralFeatureOfInterfaceAccessStrategy> thisCS_StructuralFeatureOfInterfaceAccessStrategyPtr);
 
 
 		public:
 			//destructor
-			virtual ~CS_StructuralFeatureOfInterfaceAccessStrategyImpl();
+			virtual ~CS_StructuralFeatureOfInterfaceAccessStrategyImpl() = 0;
 			
 			//*********************************
 			// Operations
@@ -90,7 +90,7 @@ namespace PSCS::Semantics::StructuredClassifiers
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<CS_StructuralFeatureOfInterfaceAccessStrategy> m_thisCS_StructuralFeatureOfInterfaceAccessStrategyPtr;
+			std::weak_ptr<PSCS::Semantics::StructuredClassifiers::CS_StructuralFeatureOfInterfaceAccessStrategy> m_thisCS_StructuralFeatureOfInterfaceAccessStrategyPtr;
 	};
 }
 #endif /* end of include guard: PSCS_SEMANTICS_STRUCTUREDCLASSIFIERS_CS_STRUCTURALFEATUREOFINTERFACEACCESSSTRATEGYCS_STRUCTURALFEATUREOFINTERFACEACCESSSTRATEGYIMPL_HPP */

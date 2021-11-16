@@ -436,11 +436,11 @@ Any ReadStructuralFeatureActionActivationImpl::eInvoke(int operationID, std::sha
 }
 
 
-std::shared_ptr<ReadStructuralFeatureActionActivation> ReadStructuralFeatureActionActivationImpl::getThisReadStructuralFeatureActionActivationPtr() const
+std::shared_ptr<fUML::Semantics::Actions::ReadStructuralFeatureActionActivation> ReadStructuralFeatureActionActivationImpl::getThisReadStructuralFeatureActionActivationPtr() const
 {
 	return m_thisReadStructuralFeatureActionActivationPtr.lock();
 }
-void ReadStructuralFeatureActionActivationImpl::setThisReadStructuralFeatureActionActivationPtr(std::weak_ptr<ReadStructuralFeatureActionActivation> thisReadStructuralFeatureActionActivationPtr)
+void ReadStructuralFeatureActionActivationImpl::setThisReadStructuralFeatureActionActivationPtr(std::weak_ptr<fUML::Semantics::Actions::ReadStructuralFeatureActionActivation> thisReadStructuralFeatureActionActivationPtr)
 {
 	m_thisReadStructuralFeatureActionActivationPtr = thisReadStructuralFeatureActionActivationPtr;
 	setThisStructuralFeatureActionActivationPtr(thisReadStructuralFeatureActionActivationPtr);

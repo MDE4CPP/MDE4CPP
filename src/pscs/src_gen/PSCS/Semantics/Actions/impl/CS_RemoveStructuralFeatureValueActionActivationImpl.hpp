@@ -32,8 +32,8 @@ namespace PSCS::Semantics::Actions
 		protected:
 			friend class PSCS::Semantics::Actions::ActionsFactoryImpl;
 			CS_RemoveStructuralFeatureValueActionActivationImpl();
-			virtual std::shared_ptr<CS_RemoveStructuralFeatureValueActionActivation> getThisCS_RemoveStructuralFeatureValueActionActivationPtr() const;
-			virtual void setThisCS_RemoveStructuralFeatureValueActionActivationPtr(std::weak_ptr<CS_RemoveStructuralFeatureValueActionActivation> thisCS_RemoveStructuralFeatureValueActionActivationPtr);
+			virtual std::shared_ptr<PSCS::Semantics::Actions::CS_RemoveStructuralFeatureValueActionActivation> getThisCS_RemoveStructuralFeatureValueActionActivationPtr() const;
+			virtual void setThisCS_RemoveStructuralFeatureValueActionActivationPtr(std::weak_ptr<PSCS::Semantics::Actions::CS_RemoveStructuralFeatureValueActionActivation> thisCS_RemoveStructuralFeatureValueActionActivationPtr);
 
 			//Additional constructors for the containments back reference
 			CS_RemoveStructuralFeatureValueActionActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_group);
@@ -93,7 +93,7 @@ namespace PSCS::Semantics::Actions
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<CS_RemoveStructuralFeatureValueActionActivation> m_thisCS_RemoveStructuralFeatureValueActionActivationPtr;
+			std::weak_ptr<PSCS::Semantics::Actions::CS_RemoveStructuralFeatureValueActionActivation> m_thisCS_RemoveStructuralFeatureValueActionActivationPtr;
 	};
 }
 #endif /* end of include guard: PSCS_SEMANTICS_ACTIONS_CS_REMOVESTRUCTURALFEATUREVALUEACTIONACTIVATIONCS_REMOVESTRUCTURALFEATUREVALUEACTIONACTIVATIONIMPL_HPP */

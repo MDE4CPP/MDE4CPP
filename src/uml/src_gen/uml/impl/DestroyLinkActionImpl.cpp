@@ -396,11 +396,11 @@ Any DestroyLinkActionImpl::eInvoke(int operationID, std::shared_ptr<std::list < 
 }
 
 
-std::shared_ptr<DestroyLinkAction> DestroyLinkActionImpl::getThisDestroyLinkActionPtr() const
+std::shared_ptr<uml::DestroyLinkAction> DestroyLinkActionImpl::getThisDestroyLinkActionPtr() const
 {
 	return m_thisDestroyLinkActionPtr.lock();
 }
-void DestroyLinkActionImpl::setThisDestroyLinkActionPtr(std::weak_ptr<DestroyLinkAction> thisDestroyLinkActionPtr)
+void DestroyLinkActionImpl::setThisDestroyLinkActionPtr(std::weak_ptr<uml::DestroyLinkAction> thisDestroyLinkActionPtr)
 {
 	m_thisDestroyLinkActionPtr = thisDestroyLinkActionPtr;
 	setThisWriteLinkActionPtr(thisDestroyLinkActionPtr);

@@ -550,11 +550,11 @@ Any ValueSpecificationActionImpl::eInvoke(int operationID, std::shared_ptr<std::
 }
 
 
-std::shared_ptr<ValueSpecificationAction> ValueSpecificationActionImpl::getThisValueSpecificationActionPtr() const
+std::shared_ptr<uml::ValueSpecificationAction> ValueSpecificationActionImpl::getThisValueSpecificationActionPtr() const
 {
 	return m_thisValueSpecificationActionPtr.lock();
 }
-void ValueSpecificationActionImpl::setThisValueSpecificationActionPtr(std::weak_ptr<ValueSpecificationAction> thisValueSpecificationActionPtr)
+void ValueSpecificationActionImpl::setThisValueSpecificationActionPtr(std::weak_ptr<uml::ValueSpecificationAction> thisValueSpecificationActionPtr)
 {
 	m_thisValueSpecificationActionPtr = thisValueSpecificationActionPtr;
 	setThisActionPtr(thisValueSpecificationActionPtr);

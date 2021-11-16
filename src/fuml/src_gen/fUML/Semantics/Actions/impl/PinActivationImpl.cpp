@@ -117,14 +117,6 @@ PinActivationImpl& PinActivationImpl::operator=(const PinActivationImpl & obj)
 	return *this;
 }
 
-std::shared_ptr<ecore::EObject> PinActivationImpl::copy() const
-{
-	std::shared_ptr<PinActivationImpl> element(new PinActivationImpl());
-	*element =(*this);
-	element->setThisPinActivationPtr(element);
-	return element;
-}
-
 //*********************************
 // Operations
 //*********************************
@@ -469,11 +461,11 @@ Any PinActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std:
 }
 
 
-std::shared_ptr<PinActivation> PinActivationImpl::getThisPinActivationPtr() const
+std::shared_ptr<fUML::Semantics::Actions::PinActivation> PinActivationImpl::getThisPinActivationPtr() const
 {
 	return m_thisPinActivationPtr.lock();
 }
-void PinActivationImpl::setThisPinActivationPtr(std::weak_ptr<PinActivation> thisPinActivationPtr)
+void PinActivationImpl::setThisPinActivationPtr(std::weak_ptr<fUML::Semantics::Actions::PinActivation> thisPinActivationPtr)
 {
 	m_thisPinActivationPtr = thisPinActivationPtr;
 	setThisObjectNodeActivationPtr(thisPinActivationPtr);

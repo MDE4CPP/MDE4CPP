@@ -40,9 +40,9 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
+#include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
-#include "uml/umlFactory.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
 
 #include "uml/Action.hpp"
@@ -545,11 +545,11 @@ Any CallOperationActionActivationImpl::eInvoke(int operationID, std::shared_ptr<
 }
 
 
-std::shared_ptr<CallOperationActionActivation> CallOperationActionActivationImpl::getThisCallOperationActionActivationPtr() const
+std::shared_ptr<fUML::Semantics::Actions::CallOperationActionActivation> CallOperationActionActivationImpl::getThisCallOperationActionActivationPtr() const
 {
 	return m_thisCallOperationActionActivationPtr.lock();
 }
-void CallOperationActionActivationImpl::setThisCallOperationActionActivationPtr(std::weak_ptr<CallOperationActionActivation> thisCallOperationActionActivationPtr)
+void CallOperationActionActivationImpl::setThisCallOperationActionActivationPtr(std::weak_ptr<fUML::Semantics::Actions::CallOperationActionActivation> thisCallOperationActionActivationPtr)
 {
 	m_thisCallOperationActionActivationPtr = thisCallOperationActionActivationPtr;
 	setThisCallActionActivationPtr(thisCallOperationActionActivationPtr);

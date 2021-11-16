@@ -14,15 +14,15 @@
 
 namespace ecore 
 {
-	class EAnnotation;
-	class EReference;
-	class EClass;
-	class EDataType;
-	class EGenericType;
-	class EAttribute;
-	class EParameter;
-	class EOperation;
 	class EStringToStringMapEntry;
+	class EAnnotation;
+	class EAttribute;
+	class EReference;
+	class EGenericType;
+	class EOperation;
+	class EClass;
+	class EParameter;
+	class EDataType;
 }
 
 namespace fUML::Semantics::SimpleClassifiers 
@@ -67,12 +67,13 @@ namespace fUML::Semantics::SimpleClassifiers
 			//Class and Feature IDs 
 			static const long long BOOLEANVALUE_CLASS = 696652347;
 			static const unsigned int BOOLEANVALUE_CLASS_FEATURE_COUNT = 2;
-			static const unsigned int BOOLEANVALUE_CLASS_OPERATION_COUNT = 16;
+			static const unsigned int BOOLEANVALUE_CLASS_OPERATION_COUNT = 18;
 			static const long long BOOLEANVALUE_ATTRIBUTE_VALUE = 1331291534;
 			
 			
 			static const int BOOLEANVALUE_OPERATION__COPY = 1222842448;
 			static const int BOOLEANVALUE_OPERATION_EQUALS_VALUE = 2145645855;
+			static const int BOOLEANVALUE_OPERATION_NEW_ = 1857572281;
 			static const int BOOLEANVALUE_OPERATION_SPECIFY = 2004933041;
 			static const int BOOLEANVALUE_OPERATION_TOSTRING = 518253164;
 			
@@ -84,6 +85,7 @@ namespace fUML::Semantics::SimpleClassifiers
 			
 			virtual std::shared_ptr<ecore::EOperation> getBooleanValue_Operation__copy() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getBooleanValue_Operation_equals_Value() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getBooleanValue_Operation_new_() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getBooleanValue_Operation_specify() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getBooleanValue_Operation_toString() const = 0;
 			
@@ -94,7 +96,7 @@ namespace fUML::Semantics::SimpleClassifiers
 			//Class and Feature IDs 
 			static const long long COMPOUNDVALUE_CLASS = 960723248;
 			static const unsigned int COMPOUNDVALUE_CLASS_FEATURE_COUNT = 1;
-			static const unsigned int COMPOUNDVALUE_CLASS_OPERATION_COUNT = 25;
+			static const unsigned int COMPOUNDVALUE_CLASS_OPERATION_COUNT = 26;
 			
 			static const long long COMPOUNDVALUE_ATTRIBUTE_FEATUREVALUES = 956860599;
 			
@@ -127,7 +129,7 @@ namespace fUML::Semantics::SimpleClassifiers
 			//Class and Feature IDs 
 			static const long long DATAVALUE_CLASS = 622084858;
 			static const unsigned int DATAVALUE_CLASS_FEATURE_COUNT = 2;
-			static const unsigned int DATAVALUE_CLASS_OPERATION_COUNT = 28;
+			static const unsigned int DATAVALUE_CLASS_OPERATION_COUNT = 29;
 			
 			static const long long DATAVALUE_ATTRIBUTE_TYPE = 1769283923;
 			
@@ -152,7 +154,7 @@ namespace fUML::Semantics::SimpleClassifiers
 			//Class and Feature IDs 
 			static const long long ENUMERATIONVALUE_CLASS = 241622527;
 			static const unsigned int ENUMERATIONVALUE_CLASS_FEATURE_COUNT = 2;
-			static const unsigned int ENUMERATIONVALUE_CLASS_OPERATION_COUNT = 16;
+			static const unsigned int ENUMERATIONVALUE_CLASS_OPERATION_COUNT = 17;
 			
 			static const long long ENUMERATIONVALUE_ATTRIBUTE_LITERAL = 1720521261;
 			static const long long ENUMERATIONVALUE_ATTRIBUTE_TYPE = 941000500;
@@ -212,12 +214,13 @@ namespace fUML::Semantics::SimpleClassifiers
 			//Class and Feature IDs 
 			static const long long INTEGERVALUE_CLASS = 2030861441;
 			static const unsigned int INTEGERVALUE_CLASS_FEATURE_COUNT = 2;
-			static const unsigned int INTEGERVALUE_CLASS_OPERATION_COUNT = 16;
+			static const unsigned int INTEGERVALUE_CLASS_OPERATION_COUNT = 18;
 			static const long long INTEGERVALUE_ATTRIBUTE_VALUE = 518016981;
 			
 			
 			static const int INTEGERVALUE_OPERATION__COPY = 409567895;
 			static const int INTEGERVALUE_OPERATION_EQUALS_VALUE = 1332371302;
+			static const int INTEGERVALUE_OPERATION_NEW_ = 1044297728;
 			static const int INTEGERVALUE_OPERATION_SPECIFY = 1191658488;
 			static const int INTEGERVALUE_OPERATION_TOSTRING = 1852462258;
 			
@@ -229,6 +232,7 @@ namespace fUML::Semantics::SimpleClassifiers
 			
 			virtual std::shared_ptr<ecore::EOperation> getIntegerValue_Operation__copy() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getIntegerValue_Operation_equals_Value() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getIntegerValue_Operation_new_() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getIntegerValue_Operation_specify() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getIntegerValue_Operation_toString() const = 0;
 			
@@ -239,7 +243,7 @@ namespace fUML::Semantics::SimpleClassifiers
 			//Class and Feature IDs 
 			static const long long PRIMITIVEVALUE_CLASS = 884702000;
 			static const unsigned int PRIMITIVEVALUE_CLASS_FEATURE_COUNT = 1;
-			static const unsigned int PRIMITIVEVALUE_CLASS_OPERATION_COUNT = 12;
+			static const unsigned int PRIMITIVEVALUE_CLASS_OPERATION_COUNT = 13;
 			
 			static const long long PRIMITIVEVALUE_ATTRIBUTE_TYPE = 1999593611;
 			
@@ -262,12 +266,13 @@ namespace fUML::Semantics::SimpleClassifiers
 			//Class and Feature IDs 
 			static const long long REALVALUE_CLASS = 1589674022;
 			static const unsigned int REALVALUE_CLASS_FEATURE_COUNT = 2;
-			static const unsigned int REALVALUE_CLASS_OPERATION_COUNT = 16;
+			static const unsigned int REALVALUE_CLASS_OPERATION_COUNT = 18;
 			static const long long REALVALUE_ATTRIBUTE_VALUE = 305114459;
 			
 			
 			static const int REALVALUE_OPERATION__COPY = 324500325;
 			static const int REALVALUE_OPERATION_EQUALS_VALUE = 1451150382;
+			static const int REALVALUE_OPERATION_NEW_ = 904241655;
 			static const int REALVALUE_OPERATION_SPECIFY = 663742132;
 			static const int REALVALUE_OPERATION_TOSTRING = 413538336;
 			
@@ -279,6 +284,7 @@ namespace fUML::Semantics::SimpleClassifiers
 			
 			virtual std::shared_ptr<ecore::EOperation> getRealValue_Operation__copy() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getRealValue_Operation_equals_Value() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getRealValue_Operation_new_() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getRealValue_Operation_specify() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getRealValue_Operation_toString() const = 0;
 			
@@ -289,11 +295,12 @@ namespace fUML::Semantics::SimpleClassifiers
 			//Class and Feature IDs 
 			static const long long SIGNALINSTANCE_CLASS = 1044212856;
 			static const unsigned int SIGNALINSTANCE_CLASS_FEATURE_COUNT = 2;
-			static const unsigned int SIGNALINSTANCE_CLASS_OPERATION_COUNT = 26;
+			static const unsigned int SIGNALINSTANCE_CLASS_OPERATION_COUNT = 28;
 			
 			static const long long SIGNALINSTANCE_ATTRIBUTE_TYPE = 11620820;
 			
 			static const int SIGNALINSTANCE_OPERATION__COPY = 1643457429;
+			static const int SIGNALINSTANCE_OPERATION_NEW_ = 40647669;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getSignalInstance_Class() const = 0;
@@ -302,6 +309,7 @@ namespace fUML::Semantics::SimpleClassifiers
 			virtual std::shared_ptr<ecore::EReference> getSignalInstance_Attribute_type() const = 0;
 			
 			virtual std::shared_ptr<ecore::EOperation> getSignalInstance_Operation__copy() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getSignalInstance_Operation_new_() const = 0;
 			
 			// End Class SignalInstance
 
@@ -310,12 +318,13 @@ namespace fUML::Semantics::SimpleClassifiers
 			//Class and Feature IDs 
 			static const long long STRINGVALUE_CLASS = 1276339704;
 			static const unsigned int STRINGVALUE_CLASS_FEATURE_COUNT = 2;
-			static const unsigned int STRINGVALUE_CLASS_OPERATION_COUNT = 16;
+			static const unsigned int STRINGVALUE_CLASS_OPERATION_COUNT = 18;
 			static const long long STRINGVALUE_ATTRIBUTE_VALUE = 721054197;
 			
 			
 			static const int STRINGVALUE_OPERATION__COPY = 1488860616;
 			static const int STRINGVALUE_OPERATION_EQUALS_VALUE = 857975051;
+			static const int STRINGVALUE_OPERATION_NEW_ = 42168513;
 			static const int STRINGVALUE_OPERATION_SPECIFY = 936357211;
 			static const int STRINGVALUE_OPERATION_TOSTRING = 341046816;
 			
@@ -327,6 +336,7 @@ namespace fUML::Semantics::SimpleClassifiers
 			
 			virtual std::shared_ptr<ecore::EOperation> getStringValue_Operation__copy() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getStringValue_Operation_equals_Value() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getStringValue_Operation_new_() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getStringValue_Operation_specify() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getStringValue_Operation_toString() const = 0;
 			
@@ -337,7 +347,7 @@ namespace fUML::Semantics::SimpleClassifiers
 			//Class and Feature IDs 
 			static const long long STRUCTUREDVALUE_CLASS = 1984808016;
 			static const unsigned int STRUCTUREDVALUE_CLASS_FEATURE_COUNT = 0;
-			static const unsigned int STRUCTUREDVALUE_CLASS_OPERATION_COUNT = 18;
+			static const unsigned int STRUCTUREDVALUE_CLASS_OPERATION_COUNT = 19;
 			
 			
 			static const int STRUCTUREDVALUE_OPERATION_ASSIGNFEATUREVALUE_STRUCTURALFEATURE_EINT = 27390723;
@@ -370,12 +380,13 @@ namespace fUML::Semantics::SimpleClassifiers
 			//Class and Feature IDs 
 			static const long long UNLIMITEDNATURALVALUE_CLASS = 459381760;
 			static const unsigned int UNLIMITEDNATURALVALUE_CLASS_FEATURE_COUNT = 2;
-			static const unsigned int UNLIMITEDNATURALVALUE_CLASS_OPERATION_COUNT = 16;
+			static const unsigned int UNLIMITEDNATURALVALUE_CLASS_OPERATION_COUNT = 18;
 			static const long long UNLIMITEDNATURALVALUE_ATTRIBUTE_VALUE = 1958359245;
 			
 			
 			static const int UNLIMITEDNATURALVALUE_OPERATION__COPY = 913377262;
 			static const int UNLIMITEDNATURALVALUE_OPERATION_EQUALS_VALUE = 886044238;
+			static const int UNLIMITEDNATURALVALUE_OPERATION_NEW_ = 1924598092;
 			static const int UNLIMITEDNATURALVALUE_OPERATION_SPECIFY = 519448828;
 			static const int UNLIMITEDNATURALVALUE_OPERATION_TOSTRING = 668784562;
 			
@@ -387,6 +398,7 @@ namespace fUML::Semantics::SimpleClassifiers
 			
 			virtual std::shared_ptr<ecore::EOperation> getUnlimitedNaturalValue_Operation__copy() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getUnlimitedNaturalValue_Operation_equals_Value() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getUnlimitedNaturalValue_Operation_new_() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getUnlimitedNaturalValue_Operation_specify() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getUnlimitedNaturalValue_Operation_toString() const = 0;
 			

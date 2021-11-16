@@ -386,11 +386,11 @@ Any EventOccurrenceImpl::eInvoke(int operationID, std::shared_ptr<std::list < st
 }
 
 
-std::shared_ptr<EventOccurrence> EventOccurrenceImpl::getThisEventOccurrencePtr() const
+std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> EventOccurrenceImpl::getThisEventOccurrencePtr() const
 {
 	return m_thisEventOccurrencePtr.lock();
 }
-void EventOccurrenceImpl::setThisEventOccurrencePtr(std::weak_ptr<EventOccurrence> thisEventOccurrencePtr)
+void EventOccurrenceImpl::setThisEventOccurrencePtr(std::weak_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> thisEventOccurrencePtr)
 {
 	m_thisEventOccurrencePtr = thisEventOccurrencePtr;
 }

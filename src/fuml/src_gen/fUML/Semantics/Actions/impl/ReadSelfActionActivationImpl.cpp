@@ -428,11 +428,11 @@ Any ReadSelfActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::
 }
 
 
-std::shared_ptr<ReadSelfActionActivation> ReadSelfActionActivationImpl::getThisReadSelfActionActivationPtr() const
+std::shared_ptr<fUML::Semantics::Actions::ReadSelfActionActivation> ReadSelfActionActivationImpl::getThisReadSelfActionActivationPtr() const
 {
 	return m_thisReadSelfActionActivationPtr.lock();
 }
-void ReadSelfActionActivationImpl::setThisReadSelfActionActivationPtr(std::weak_ptr<ReadSelfActionActivation> thisReadSelfActionActivationPtr)
+void ReadSelfActionActivationImpl::setThisReadSelfActionActivationPtr(std::weak_ptr<fUML::Semantics::Actions::ReadSelfActionActivation> thisReadSelfActionActivationPtr)
 {
 	m_thisReadSelfActionActivationPtr = thisReadSelfActionActivationPtr;
 	setThisActionActivationPtr(thisReadSelfActionActivationPtr);

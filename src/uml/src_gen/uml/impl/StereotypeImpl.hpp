@@ -31,8 +31,8 @@ namespace uml
 		protected:
 			friend class umlFactoryImpl;
 			StereotypeImpl();
-			virtual std::shared_ptr<Stereotype> getThisStereotypePtr() const;
-			virtual void setThisStereotypePtr(std::weak_ptr<Stereotype> thisStereotypePtr);
+			virtual std::shared_ptr<uml::Stereotype> getThisStereotypePtr() const;
+			virtual void setThisStereotypePtr(std::weak_ptr<uml::Stereotype> thisStereotypePtr);
 
 			//Additional constructors for the containments back reference
 			StereotypeImpl(std::weak_ptr<uml::Namespace> par_namespace);
@@ -251,7 +251,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<Stereotype> m_thisStereotypePtr;
+			std::weak_ptr<uml::Stereotype> m_thisStereotypePtr;
 	};
 }
 #endif /* end of include guard: UML_STEREOTYPESTEREOTYPEIMPL_HPP */

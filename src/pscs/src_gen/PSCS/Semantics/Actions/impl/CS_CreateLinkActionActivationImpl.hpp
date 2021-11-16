@@ -32,8 +32,8 @@ namespace PSCS::Semantics::Actions
 		protected:
 			friend class PSCS::Semantics::Actions::ActionsFactoryImpl;
 			CS_CreateLinkActionActivationImpl();
-			virtual std::shared_ptr<CS_CreateLinkActionActivation> getThisCS_CreateLinkActionActivationPtr() const;
-			virtual void setThisCS_CreateLinkActionActivationPtr(std::weak_ptr<CS_CreateLinkActionActivation> thisCS_CreateLinkActionActivationPtr);
+			virtual std::shared_ptr<PSCS::Semantics::Actions::CS_CreateLinkActionActivation> getThisCS_CreateLinkActionActivationPtr() const;
+			virtual void setThisCS_CreateLinkActionActivationPtr(std::weak_ptr<PSCS::Semantics::Actions::CS_CreateLinkActionActivation> thisCS_CreateLinkActionActivationPtr);
 
 			//Additional constructors for the containments back reference
 			CS_CreateLinkActionActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_group);
@@ -91,7 +91,7 @@ namespace PSCS::Semantics::Actions
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<CS_CreateLinkActionActivation> m_thisCS_CreateLinkActionActivationPtr;
+			std::weak_ptr<PSCS::Semantics::Actions::CS_CreateLinkActionActivation> m_thisCS_CreateLinkActionActivationPtr;
 	};
 }
 #endif /* end of include guard: PSCS_SEMANTICS_ACTIONS_CS_CREATELINKACTIONACTIVATIONCS_CREATELINKACTIONACTIVATIONIMPL_HPP */

@@ -347,11 +347,11 @@ Any ExpansionNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::l
 }
 
 
-std::shared_ptr<ExpansionNodeActivation> ExpansionNodeActivationImpl::getThisExpansionNodeActivationPtr() const
+std::shared_ptr<fUML::Semantics::Activities::ExpansionNodeActivation> ExpansionNodeActivationImpl::getThisExpansionNodeActivationPtr() const
 {
 	return m_thisExpansionNodeActivationPtr.lock();
 }
-void ExpansionNodeActivationImpl::setThisExpansionNodeActivationPtr(std::weak_ptr<ExpansionNodeActivation> thisExpansionNodeActivationPtr)
+void ExpansionNodeActivationImpl::setThisExpansionNodeActivationPtr(std::weak_ptr<fUML::Semantics::Activities::ExpansionNodeActivation> thisExpansionNodeActivationPtr)
 {
 	m_thisExpansionNodeActivationPtr = thisExpansionNodeActivationPtr;
 	setThisObjectNodeActivationPtr(thisExpansionNodeActivationPtr);

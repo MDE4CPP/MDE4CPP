@@ -32,8 +32,8 @@ namespace fUML::Semantics::Activities
 		protected:
 			friend class fUML::Semantics::Activities::ActivitiesFactoryImpl;
 			CentralBufferNodeActivationImpl();
-			virtual std::shared_ptr<CentralBufferNodeActivation> getThisCentralBufferNodeActivationPtr() const;
-			virtual void setThisCentralBufferNodeActivationPtr(std::weak_ptr<CentralBufferNodeActivation> thisCentralBufferNodeActivationPtr);
+			virtual std::shared_ptr<fUML::Semantics::Activities::CentralBufferNodeActivation> getThisCentralBufferNodeActivationPtr() const;
+			virtual void setThisCentralBufferNodeActivationPtr(std::weak_ptr<fUML::Semantics::Activities::CentralBufferNodeActivation> thisCentralBufferNodeActivationPtr);
 
 			//Additional constructors for the containments back reference
 			CentralBufferNodeActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_group);
@@ -90,7 +90,7 @@ namespace fUML::Semantics::Activities
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<CentralBufferNodeActivation> m_thisCentralBufferNodeActivationPtr;
+			std::weak_ptr<fUML::Semantics::Activities::CentralBufferNodeActivation> m_thisCentralBufferNodeActivationPtr;
 	};
 }
 #endif /* end of include guard: FUML_SEMANTICS_ACTIVITIES_CENTRALBUFFERNODEACTIVATIONCENTRALBUFFERNODEACTIVATIONIMPL_HPP */

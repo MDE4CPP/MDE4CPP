@@ -546,11 +546,11 @@ Any ExpressionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sh
 }
 
 
-std::shared_ptr<Expression> ExpressionImpl::getThisExpressionPtr() const
+std::shared_ptr<uml::Expression> ExpressionImpl::getThisExpressionPtr() const
 {
 	return m_thisExpressionPtr.lock();
 }
-void ExpressionImpl::setThisExpressionPtr(std::weak_ptr<Expression> thisExpressionPtr)
+void ExpressionImpl::setThisExpressionPtr(std::weak_ptr<uml::Expression> thisExpressionPtr)
 {
 	m_thisExpressionPtr = thisExpressionPtr;
 	setThisValueSpecificationPtr(thisExpressionPtr);

@@ -600,11 +600,11 @@ Any FunctionBehaviorImpl::eInvoke(int operationID, std::shared_ptr<std::list < s
 }
 
 
-std::shared_ptr<FunctionBehavior> FunctionBehaviorImpl::getThisFunctionBehaviorPtr() const
+std::shared_ptr<uml::FunctionBehavior> FunctionBehaviorImpl::getThisFunctionBehaviorPtr() const
 {
 	return m_thisFunctionBehaviorPtr.lock();
 }
-void FunctionBehaviorImpl::setThisFunctionBehaviorPtr(std::weak_ptr<FunctionBehavior> thisFunctionBehaviorPtr)
+void FunctionBehaviorImpl::setThisFunctionBehaviorPtr(std::weak_ptr<uml::FunctionBehavior> thisFunctionBehaviorPtr)
 {
 	m_thisFunctionBehaviorPtr = thisFunctionBehaviorPtr;
 	setThisOpaqueBehaviorPtr(thisFunctionBehaviorPtr);

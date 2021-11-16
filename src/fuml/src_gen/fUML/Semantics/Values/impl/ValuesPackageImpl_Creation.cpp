@@ -7,14 +7,14 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
+#include "ecore/EStringToStringMapEntry.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EReference.hpp"
-#include "ecore/EClass.hpp"
-#include "ecore/EDataType.hpp"
 #include "ecore/EGenericType.hpp"
-#include "ecore/EParameter.hpp"
 #include "ecore/EOperation.hpp"
-#include "ecore/EStringToStringMapEntry.hpp"
+#include "ecore/EClass.hpp"
+#include "ecore/EParameter.hpp"
+#include "ecore/EDataType.hpp"
 
 //depending model packages
 #include "ecore/ecorePackage.hpp"
@@ -52,7 +52,9 @@ void ValuesPackageImpl::createEvaluationContent(std::shared_ptr<ecore::EPackage>
 {
 	m_evaluation_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, EVALUATION_CLASS);
 	
-	m_evaluation_Attribute_locus = factory->createEReference_as_eStructuralFeatures_in_EClass(m_evaluation_Class, EVALUATION_ATTRIBUTE_LOCUS);m_evaluation_Attribute_specification = factory->createEReference_as_eStructuralFeatures_in_EClass(m_evaluation_Class, EVALUATION_ATTRIBUTE_SPECIFICATION);
+	m_evaluation_Attribute_locus = factory->createEReference_as_eStructuralFeatures_in_EClass(m_evaluation_Class, EVALUATION_ATTRIBUTE_LOCUS);
+	m_evaluation_Attribute_specification = factory->createEReference_as_eStructuralFeatures_in_EClass(m_evaluation_Class, EVALUATION_ATTRIBUTE_SPECIFICATION);
+	
 	m_evaluation_Operation_evaluate = factory->createEOperation_as_eOperations_in_EClass(m_evaluation_Class, EVALUATION_OPERATION_EVALUATE);
 	
 }
@@ -130,6 +132,7 @@ void ValuesPackageImpl::createValueContent(std::shared_ptr<ecore::EPackage> pack
 	m_value_Operation_equals_Value = factory->createEOperation_as_eOperations_in_EClass(m_value_Class, VALUE_OPERATION_EQUALS_VALUE);
 	m_value_Operation_getTypes = factory->createEOperation_as_eOperations_in_EClass(m_value_Class, VALUE_OPERATION_GETTYPES);
 	m_value_Operation_hasTypes_Classifier = factory->createEOperation_as_eOperations_in_EClass(m_value_Class, VALUE_OPERATION_HASTYPES_CLASSIFIER);
+	m_value_Operation_new_ = factory->createEOperation_as_eOperations_in_EClass(m_value_Class, VALUE_OPERATION_NEW_);
 	m_value_Operation_objectId = factory->createEOperation_as_eOperations_in_EClass(m_value_Class, VALUE_OPERATION_OBJECTID);
 	m_value_Operation_specify = factory->createEOperation_as_eOperations_in_EClass(m_value_Class, VALUE_OPERATION_SPECIFY);
 	m_value_Operation_toString = factory->createEOperation_as_eOperations_in_EClass(m_value_Class, VALUE_OPERATION_TOSTRING);

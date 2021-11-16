@@ -32,8 +32,8 @@ namespace fUML::Semantics::Actions
 		protected:
 			friend class fUML::Semantics::Actions::ActionsFactoryImpl;
 			ReadStructuralFeatureActionActivationImpl();
-			virtual std::shared_ptr<ReadStructuralFeatureActionActivation> getThisReadStructuralFeatureActionActivationPtr() const;
-			virtual void setThisReadStructuralFeatureActionActivationPtr(std::weak_ptr<ReadStructuralFeatureActionActivation> thisReadStructuralFeatureActionActivationPtr);
+			virtual std::shared_ptr<fUML::Semantics::Actions::ReadStructuralFeatureActionActivation> getThisReadStructuralFeatureActionActivationPtr() const;
+			virtual void setThisReadStructuralFeatureActionActivationPtr(std::weak_ptr<fUML::Semantics::Actions::ReadStructuralFeatureActionActivation> thisReadStructuralFeatureActionActivationPtr);
 
 			//Additional constructors for the containments back reference
 			ReadStructuralFeatureActionActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_group);
@@ -97,7 +97,7 @@ namespace fUML::Semantics::Actions
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<ReadStructuralFeatureActionActivation> m_thisReadStructuralFeatureActionActivationPtr;
+			std::weak_ptr<fUML::Semantics::Actions::ReadStructuralFeatureActionActivation> m_thisReadStructuralFeatureActionActivationPtr;
 	};
 }
 #endif /* end of include guard: FUML_SEMANTICS_ACTIONS_READSTRUCTURALFEATUREACTIONACTIVATIONREADSTRUCTURALFEATUREACTIONACTIVATIONIMPL_HPP */

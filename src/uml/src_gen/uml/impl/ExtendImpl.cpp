@@ -675,11 +675,11 @@ Any ExtendImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared
 }
 
 
-std::shared_ptr<Extend> ExtendImpl::getThisExtendPtr() const
+std::shared_ptr<uml::Extend> ExtendImpl::getThisExtendPtr() const
 {
 	return m_thisExtendPtr.lock();
 }
-void ExtendImpl::setThisExtendPtr(std::weak_ptr<Extend> thisExtendPtr)
+void ExtendImpl::setThisExtendPtr(std::weak_ptr<uml::Extend> thisExtendPtr)
 {
 	m_thisExtendPtr = thisExtendPtr;
 	setThisDirectedRelationshipPtr(thisExtendPtr);

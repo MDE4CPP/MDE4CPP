@@ -31,8 +31,8 @@ namespace uml
 		protected:
 			friend class umlFactoryImpl;
 			ConditionalNodeImpl();
-			virtual std::shared_ptr<ConditionalNode> getThisConditionalNodePtr() const;
-			virtual void setThisConditionalNodePtr(std::weak_ptr<ConditionalNode> thisConditionalNodePtr);
+			virtual std::shared_ptr<uml::ConditionalNode> getThisConditionalNodePtr() const;
+			virtual void setThisConditionalNodePtr(std::weak_ptr<uml::ConditionalNode> thisConditionalNodePtr);
 
 			//Additional constructors for the containments back reference
 			ConditionalNodeImpl(std::weak_ptr<uml::Activity> par_Activity, const int reference_id);
@@ -236,7 +236,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<ConditionalNode> m_thisConditionalNodePtr;
+			std::weak_ptr<uml::ConditionalNode> m_thisConditionalNodePtr;
 	};
 }
 #endif /* end of include guard: UML_CONDITIONALNODECONDITIONALNODEIMPL_HPP */

@@ -31,8 +31,8 @@ namespace uml
 		protected:
 			friend class umlFactoryImpl;
 			ConstraintImpl();
-			virtual std::shared_ptr<Constraint> getThisConstraintPtr() const;
-			virtual void setThisConstraintPtr(std::weak_ptr<Constraint> thisConstraintPtr);
+			virtual std::shared_ptr<uml::Constraint> getThisConstraintPtr() const;
+			virtual void setThisConstraintPtr(std::weak_ptr<uml::Constraint> thisConstraintPtr);
 
 			//Additional constructors for the containments back reference
 			ConstraintImpl(std::weak_ptr<uml::Namespace> par_Namespace, const int reference_id);
@@ -160,7 +160,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<Constraint> m_thisConstraintPtr;
+			std::weak_ptr<uml::Constraint> m_thisConstraintPtr;
 	};
 }
 #endif /* end of include guard: UML_CONSTRAINTCONSTRAINTIMPL_HPP */

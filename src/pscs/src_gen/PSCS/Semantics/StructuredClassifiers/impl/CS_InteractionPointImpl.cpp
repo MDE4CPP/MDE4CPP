@@ -36,8 +36,8 @@
 
 #include <exception> // used in Persistence
 #include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
-#include "uml/umlFactory.hpp"
 #include "PSCS/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
+#include "uml/umlFactory.hpp"
 
 #include "PSCS/Semantics/StructuredClassifiers/CS_Reference.hpp"
 #include "uml/Class.hpp"
@@ -480,11 +480,11 @@ Any CS_InteractionPointImpl::eInvoke(int operationID, std::shared_ptr<std::list 
 }
 
 
-std::shared_ptr<CS_InteractionPoint> CS_InteractionPointImpl::getThisCS_InteractionPointPtr() const
+std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint> CS_InteractionPointImpl::getThisCS_InteractionPointPtr() const
 {
 	return m_thisCS_InteractionPointPtr.lock();
 }
-void CS_InteractionPointImpl::setThisCS_InteractionPointPtr(std::weak_ptr<CS_InteractionPoint> thisCS_InteractionPointPtr)
+void CS_InteractionPointImpl::setThisCS_InteractionPointPtr(std::weak_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint> thisCS_InteractionPointPtr)
 {
 	m_thisCS_InteractionPointPtr = thisCS_InteractionPointPtr;
 	setThisReferencePtr(thisCS_InteractionPointPtr);

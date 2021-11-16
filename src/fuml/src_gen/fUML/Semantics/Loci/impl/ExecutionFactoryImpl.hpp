@@ -34,8 +34,8 @@ virtual public ExecutionFactory
 		protected:
 			friend class fUML::Semantics::Loci::LociFactoryImpl;
 			ExecutionFactoryImpl();
-			virtual std::shared_ptr<ExecutionFactory> getThisExecutionFactoryPtr() const;
-			virtual void setThisExecutionFactoryPtr(std::weak_ptr<ExecutionFactory> thisExecutionFactoryPtr);
+			virtual std::shared_ptr<fUML::Semantics::Loci::ExecutionFactory> getThisExecutionFactoryPtr() const;
+			virtual void setThisExecutionFactoryPtr(std::weak_ptr<fUML::Semantics::Loci::ExecutionFactory> thisExecutionFactoryPtr);
 
 			//Additional constructors for the containments back reference
 			ExecutionFactoryImpl(std::weak_ptr<fUML::Semantics::Loci::Locus> par_locus);
@@ -107,7 +107,7 @@ virtual public ExecutionFactory
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<ExecutionFactory> m_thisExecutionFactoryPtr;
+			std::weak_ptr<fUML::Semantics::Loci::ExecutionFactory> m_thisExecutionFactoryPtr;
 	};
 }
 #endif /* end of include guard: FUML_SEMANTICS_LOCI_EXECUTIONFACTORYEXECUTIONFACTORYIMPL_HPP */

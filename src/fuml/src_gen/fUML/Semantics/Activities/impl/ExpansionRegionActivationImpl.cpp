@@ -1134,11 +1134,11 @@ Any ExpansionRegionActivationImpl::eInvoke(int operationID, std::shared_ptr<std:
 }
 
 
-std::shared_ptr<ExpansionRegionActivation> ExpansionRegionActivationImpl::getThisExpansionRegionActivationPtr() const
+std::shared_ptr<fUML::Semantics::Activities::ExpansionRegionActivation> ExpansionRegionActivationImpl::getThisExpansionRegionActivationPtr() const
 {
 	return m_thisExpansionRegionActivationPtr.lock();
 }
-void ExpansionRegionActivationImpl::setThisExpansionRegionActivationPtr(std::weak_ptr<ExpansionRegionActivation> thisExpansionRegionActivationPtr)
+void ExpansionRegionActivationImpl::setThisExpansionRegionActivationPtr(std::weak_ptr<fUML::Semantics::Activities::ExpansionRegionActivation> thisExpansionRegionActivationPtr)
 {
 	m_thisExpansionRegionActivationPtr = thisExpansionRegionActivationPtr;
 	setThisActionActivationPtr(thisExpansionRegionActivationPtr);

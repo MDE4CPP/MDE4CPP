@@ -643,11 +643,11 @@ Any TestIdentityActionImpl::eInvoke(int operationID, std::shared_ptr<std::list <
 }
 
 
-std::shared_ptr<TestIdentityAction> TestIdentityActionImpl::getThisTestIdentityActionPtr() const
+std::shared_ptr<uml::TestIdentityAction> TestIdentityActionImpl::getThisTestIdentityActionPtr() const
 {
 	return m_thisTestIdentityActionPtr.lock();
 }
-void TestIdentityActionImpl::setThisTestIdentityActionPtr(std::weak_ptr<TestIdentityAction> thisTestIdentityActionPtr)
+void TestIdentityActionImpl::setThisTestIdentityActionPtr(std::weak_ptr<uml::TestIdentityAction> thisTestIdentityActionPtr)
 {
 	m_thisTestIdentityActionPtr = thisTestIdentityActionPtr;
 	setThisActionPtr(thisTestIdentityActionPtr);

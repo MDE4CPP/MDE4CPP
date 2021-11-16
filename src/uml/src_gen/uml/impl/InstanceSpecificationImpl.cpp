@@ -768,11 +768,11 @@ Any InstanceSpecificationImpl::eInvoke(int operationID, std::shared_ptr<std::lis
 }
 
 
-std::shared_ptr<InstanceSpecification> InstanceSpecificationImpl::getThisInstanceSpecificationPtr() const
+std::shared_ptr<uml::InstanceSpecification> InstanceSpecificationImpl::getThisInstanceSpecificationPtr() const
 {
 	return m_thisInstanceSpecificationPtr.lock();
 }
-void InstanceSpecificationImpl::setThisInstanceSpecificationPtr(std::weak_ptr<InstanceSpecification> thisInstanceSpecificationPtr)
+void InstanceSpecificationImpl::setThisInstanceSpecificationPtr(std::weak_ptr<uml::InstanceSpecification> thisInstanceSpecificationPtr)
 {
 	m_thisInstanceSpecificationPtr = thisInstanceSpecificationPtr;
 	setThisDeployedArtifactPtr(thisInstanceSpecificationPtr);

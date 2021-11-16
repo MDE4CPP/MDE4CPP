@@ -548,11 +548,11 @@ Any TimeExpressionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std
 }
 
 
-std::shared_ptr<TimeExpression> TimeExpressionImpl::getThisTimeExpressionPtr() const
+std::shared_ptr<uml::TimeExpression> TimeExpressionImpl::getThisTimeExpressionPtr() const
 {
 	return m_thisTimeExpressionPtr.lock();
 }
-void TimeExpressionImpl::setThisTimeExpressionPtr(std::weak_ptr<TimeExpression> thisTimeExpressionPtr)
+void TimeExpressionImpl::setThisTimeExpressionPtr(std::weak_ptr<uml::TimeExpression> thisTimeExpressionPtr)
 {
 	m_thisTimeExpressionPtr = thisTimeExpressionPtr;
 	setThisValueSpecificationPtr(thisTimeExpressionPtr);

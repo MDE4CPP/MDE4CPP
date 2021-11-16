@@ -31,8 +31,8 @@ namespace uml
 		protected:
 			friend class umlFactoryImpl;
 			SendObjectActionImpl();
-			virtual std::shared_ptr<SendObjectAction> getThisSendObjectActionPtr() const;
-			virtual void setThisSendObjectActionPtr(std::weak_ptr<SendObjectAction> thisSendObjectActionPtr);
+			virtual std::shared_ptr<uml::SendObjectAction> getThisSendObjectActionPtr() const;
+			virtual void setThisSendObjectActionPtr(std::weak_ptr<uml::SendObjectAction> thisSendObjectActionPtr);
 
 			//Additional constructors for the containments back reference
 			SendObjectActionImpl(std::weak_ptr<uml::Activity> par_activity);
@@ -154,7 +154,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<SendObjectAction> m_thisSendObjectActionPtr;
+			std::weak_ptr<uml::SendObjectAction> m_thisSendObjectActionPtr;
 	};
 }
 #endif /* end of include guard: UML_SENDOBJECTACTIONSENDOBJECTACTIONIMPL_HPP */

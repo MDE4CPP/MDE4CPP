@@ -32,9 +32,9 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
+#include "uml/umlFactory.hpp"
 
 #include "uml/Action.hpp"
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
@@ -554,11 +554,11 @@ Any ConditionalNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std:
 }
 
 
-std::shared_ptr<ConditionalNodeActivation> ConditionalNodeActivationImpl::getThisConditionalNodeActivationPtr() const
+std::shared_ptr<fUML::Semantics::Actions::ConditionalNodeActivation> ConditionalNodeActivationImpl::getThisConditionalNodeActivationPtr() const
 {
 	return m_thisConditionalNodeActivationPtr.lock();
 }
-void ConditionalNodeActivationImpl::setThisConditionalNodeActivationPtr(std::weak_ptr<ConditionalNodeActivation> thisConditionalNodeActivationPtr)
+void ConditionalNodeActivationImpl::setThisConditionalNodeActivationPtr(std::weak_ptr<fUML::Semantics::Actions::ConditionalNodeActivation> thisConditionalNodeActivationPtr)
 {
 	m_thisConditionalNodeActivationPtr = thisConditionalNodeActivationPtr;
 	setThisStructuredActivityNodeActivationPtr(thisConditionalNodeActivationPtr);

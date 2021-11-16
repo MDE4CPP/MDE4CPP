@@ -4,14 +4,14 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
+#include "ecore/EStringToStringMapEntry.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EReference.hpp"
-#include "ecore/EClass.hpp"
-#include "ecore/EDataType.hpp"
 #include "ecore/EGenericType.hpp"
-#include "ecore/EParameter.hpp"
 #include "ecore/EOperation.hpp"
-#include "ecore/EStringToStringMapEntry.hpp"
+#include "ecore/EClass.hpp"
+#include "ecore/EParameter.hpp"
+#include "ecore/EDataType.hpp"
 
 //metamodel factory
 #include "PSCS/Semantics/Loci/LociFactory.hpp"
@@ -58,26 +58,26 @@ void LociPackageImpl::init(std::shared_ptr<ecore::EPackage> package)
 
 
 // Begin Class CS_ExecutionFactory
-std::shared_ptr<ecore::EClass> LociPackageImpl::getCS_ExecutionFactory_Class() const
+std::shared_ptr<ecore::EClass> PSCS::Semantics::Loci::LociPackageImpl::getCS_ExecutionFactory_Class() const
 {
 	return m_cS_ExecutionFactory_Class;
 }
 
 
-std::shared_ptr<ecore::EReference> LociPackageImpl::getCS_ExecutionFactory_Attribute_appliedProfiles() const
+std::shared_ptr<ecore::EReference> PSCS::Semantics::Loci::LociPackageImpl::getCS_ExecutionFactory_Attribute_appliedProfiles() const
 {
 	return m_cS_ExecutionFactory_Attribute_appliedProfiles;
 }
 
-std::shared_ptr<ecore::EOperation> LociPackageImpl::getCS_ExecutionFactory_Operation_getStereotypeApplication_Class_Element() const
+std::shared_ptr<ecore::EOperation> PSCS::Semantics::Loci::LociPackageImpl::getCS_ExecutionFactory_Operation_getStereotypeApplication_Class_Element() const
 {
 	return m_cS_ExecutionFactory_Operation_getStereotypeApplication_Class_Element;
 }
-std::shared_ptr<ecore::EOperation> LociPackageImpl::getCS_ExecutionFactory_Operation_getStereotypeClass_EString_EString() const
+std::shared_ptr<ecore::EOperation> PSCS::Semantics::Loci::LociPackageImpl::getCS_ExecutionFactory_Operation_getStereotypeClass_EString_EString() const
 {
 	return m_cS_ExecutionFactory_Operation_getStereotypeClass_EString_EString;
 }
-std::shared_ptr<ecore::EOperation> LociPackageImpl::getCS_ExecutionFactory_Operation_instantiateVisitor_Element() const
+std::shared_ptr<ecore::EOperation> PSCS::Semantics::Loci::LociPackageImpl::getCS_ExecutionFactory_Operation_instantiateVisitor_Element() const
 {
 	return m_cS_ExecutionFactory_Operation_instantiateVisitor_Element;
 }
@@ -85,14 +85,14 @@ std::shared_ptr<ecore::EOperation> LociPackageImpl::getCS_ExecutionFactory_Opera
 // End Class CS_ExecutionFactory
 
 // Begin Class CS_Executor
-std::shared_ptr<ecore::EClass> LociPackageImpl::getCS_Executor_Class() const
+std::shared_ptr<ecore::EClass> PSCS::Semantics::Loci::LociPackageImpl::getCS_Executor_Class() const
 {
 	return m_cS_Executor_Class;
 }
 
 
 
-std::shared_ptr<ecore::EOperation> LociPackageImpl::getCS_Executor_Operation_start_Class_ParameterValue() const
+std::shared_ptr<ecore::EOperation> PSCS::Semantics::Loci::LociPackageImpl::getCS_Executor_Operation_start_Class_ParameterValue() const
 {
 	return m_cS_Executor_Operation_start_Class_ParameterValue;
 }
@@ -100,14 +100,14 @@ std::shared_ptr<ecore::EOperation> LociPackageImpl::getCS_Executor_Operation_sta
 // End Class CS_Executor
 
 // Begin Class CS_Locus
-std::shared_ptr<ecore::EClass> LociPackageImpl::getCS_Locus_Class() const
+std::shared_ptr<ecore::EClass> PSCS::Semantics::Loci::LociPackageImpl::getCS_Locus_Class() const
 {
 	return m_cS_Locus_Class;
 }
 
 
 
-std::shared_ptr<ecore::EOperation> LociPackageImpl::getCS_Locus_Operation_instantiate_Class() const
+std::shared_ptr<ecore::EOperation> PSCS::Semantics::Loci::LociPackageImpl::getCS_Locus_Operation_instantiate_Class() const
 {
 	return m_cS_Locus_Operation_instantiate_Class;
 }

@@ -32,8 +32,8 @@ namespace ocl::Types
 		protected:
 			friend class ocl::Types::TypesFactoryImpl;
 			VoidTypeImpl();
-			virtual std::shared_ptr<VoidType> getThisVoidTypePtr() const;
-			virtual void setThisVoidTypePtr(std::weak_ptr<VoidType> thisVoidTypePtr);
+			virtual std::shared_ptr<ocl::Types::VoidType> getThisVoidTypePtr() const;
+			virtual void setThisVoidTypePtr(std::weak_ptr<ocl::Types::VoidType> thisVoidTypePtr);
 
 			//Additional constructors for the containments back reference
 			VoidTypeImpl(std::weak_ptr<ecore::EPackage> par_ePackage);
@@ -89,7 +89,7 @@ namespace ocl::Types
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<VoidType> m_thisVoidTypePtr;
+			std::weak_ptr<ocl::Types::VoidType> m_thisVoidTypePtr;
 	};
 }
 #endif /* end of include guard: OCL_TYPES_VOIDTYPEVOIDTYPEIMPL_HPP */

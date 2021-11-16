@@ -31,8 +31,8 @@ namespace uml
 		protected:
 			friend class umlFactoryImpl;
 			ConsiderIgnoreFragmentImpl();
-			virtual std::shared_ptr<ConsiderIgnoreFragment> getThisConsiderIgnoreFragmentPtr() const;
-			virtual void setThisConsiderIgnoreFragmentPtr(std::weak_ptr<ConsiderIgnoreFragment> thisConsiderIgnoreFragmentPtr);
+			virtual std::shared_ptr<uml::ConsiderIgnoreFragment> getThisConsiderIgnoreFragmentPtr() const;
+			virtual void setThisConsiderIgnoreFragmentPtr(std::weak_ptr<uml::ConsiderIgnoreFragment> thisConsiderIgnoreFragmentPtr);
 
 			//Additional constructors for the containments back reference
 			ConsiderIgnoreFragmentImpl(std::weak_ptr<uml::Interaction> par_enclosingInteraction);
@@ -130,7 +130,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<ConsiderIgnoreFragment> m_thisConsiderIgnoreFragmentPtr;
+			std::weak_ptr<uml::ConsiderIgnoreFragment> m_thisConsiderIgnoreFragmentPtr;
 	};
 }
 #endif /* end of include guard: UML_CONSIDERIGNOREFRAGMENTCONSIDERIGNOREFRAGMENTIMPL_HPP */

@@ -1286,11 +1286,11 @@ Any ActivityNodeActivationGroupImpl::eInvoke(int operationID, std::shared_ptr<st
 }
 
 
-std::shared_ptr<ActivityNodeActivationGroup> ActivityNodeActivationGroupImpl::getThisActivityNodeActivationGroupPtr() const
+std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> ActivityNodeActivationGroupImpl::getThisActivityNodeActivationGroupPtr() const
 {
 	return m_thisActivityNodeActivationGroupPtr.lock();
 }
-void ActivityNodeActivationGroupImpl::setThisActivityNodeActivationGroupPtr(std::weak_ptr<ActivityNodeActivationGroup> thisActivityNodeActivationGroupPtr)
+void ActivityNodeActivationGroupImpl::setThisActivityNodeActivationGroupPtr(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> thisActivityNodeActivationGroupPtr)
 {
 	m_thisActivityNodeActivationGroupPtr = thisActivityNodeActivationGroupPtr;
 }

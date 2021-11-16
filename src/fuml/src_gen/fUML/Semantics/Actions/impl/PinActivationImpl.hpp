@@ -26,21 +26,21 @@ namespace fUML::Semantics::Actions
 	{
 		public: 
 			PinActivationImpl(const PinActivationImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 			PinActivationImpl& operator=(PinActivationImpl const&); 
 
 		protected:
 			friend class fUML::Semantics::Actions::ActionsFactoryImpl;
 			PinActivationImpl();
-			virtual std::shared_ptr<PinActivation> getThisPinActivationPtr() const;
-			virtual void setThisPinActivationPtr(std::weak_ptr<PinActivation> thisPinActivationPtr);
+			virtual std::shared_ptr<fUML::Semantics::Actions::PinActivation> getThisPinActivationPtr() const;
+			virtual void setThisPinActivationPtr(std::weak_ptr<fUML::Semantics::Actions::PinActivation> thisPinActivationPtr);
 
 			//Additional constructors for the containments back reference
 			PinActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_group);
 
 		public:
 			//destructor
-			virtual ~PinActivationImpl();
+			virtual ~PinActivationImpl() = 0;
 			
 			//*********************************
 			// Operations
@@ -97,7 +97,7 @@ namespace fUML::Semantics::Actions
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<PinActivation> m_thisPinActivationPtr;
+			std::weak_ptr<fUML::Semantics::Actions::PinActivation> m_thisPinActivationPtr;
 	};
 }
 #endif /* end of include guard: FUML_SEMANTICS_ACTIONS_PINACTIVATIONPINACTIVATIONIMPL_HPP */

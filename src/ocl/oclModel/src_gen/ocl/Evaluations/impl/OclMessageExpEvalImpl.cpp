@@ -32,8 +32,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Values/ValuesFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
+#include "fUML/Semantics/Values/ValuesFactory.hpp"
 #include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
@@ -444,11 +444,11 @@ Any OclMessageExpEvalImpl::eInvoke(int operationID, std::shared_ptr<std::list < 
 }
 
 
-std::shared_ptr<OclMessageExpEval> OclMessageExpEvalImpl::getThisOclMessageExpEvalPtr() const
+std::shared_ptr<ocl::Evaluations::OclMessageExpEval> OclMessageExpEvalImpl::getThisOclMessageExpEvalPtr() const
 {
 	return m_thisOclMessageExpEvalPtr.lock();
 }
-void OclMessageExpEvalImpl::setThisOclMessageExpEvalPtr(std::weak_ptr<OclMessageExpEval> thisOclMessageExpEvalPtr)
+void OclMessageExpEvalImpl::setThisOclMessageExpEvalPtr(std::weak_ptr<ocl::Evaluations::OclMessageExpEval> thisOclMessageExpEvalPtr)
 {
 	m_thisOclMessageExpEvalPtr = thisOclMessageExpEvalPtr;
 	setThisOclExpEvalPtr(thisOclMessageExpEvalPtr);

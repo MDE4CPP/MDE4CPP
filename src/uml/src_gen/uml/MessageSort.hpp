@@ -9,7 +9,7 @@
 
 namespace uml 
 {
-	enum MessageSort {
+	enum class MessageSort {
 		
 		ASYNCHCALL = 1
 ,

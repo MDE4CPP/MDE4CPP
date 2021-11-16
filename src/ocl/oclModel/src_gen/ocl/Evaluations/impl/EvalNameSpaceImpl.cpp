@@ -253,11 +253,11 @@ Any EvalNameSpaceImpl::eInvoke(int operationID, std::shared_ptr<std::list < std:
 }
 
 
-std::shared_ptr<EvalNameSpace> EvalNameSpaceImpl::getThisEvalNameSpacePtr() const
+std::shared_ptr<ocl::Evaluations::EvalNameSpace> EvalNameSpaceImpl::getThisEvalNameSpacePtr() const
 {
 	return m_thisEvalNameSpacePtr.lock();
 }
-void EvalNameSpaceImpl::setThisEvalNameSpacePtr(std::weak_ptr<EvalNameSpace> thisEvalNameSpacePtr)
+void EvalNameSpaceImpl::setThisEvalNameSpacePtr(std::weak_ptr<ocl::Evaluations::EvalNameSpace> thisEvalNameSpacePtr)
 {
 	m_thisEvalNameSpacePtr = thisEvalNameSpacePtr;
 	setThisEvaluationPtr(thisEvalNameSpacePtr);

@@ -51,9 +51,9 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "uml/umlFactory.hpp"
-#include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
+#include "fUML/Semantics/Actions/ActionsFactory.hpp"
+#include "uml/umlFactory.hpp"
 
 #include "uml/Action.hpp"
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
@@ -620,11 +620,11 @@ Any CS_RemoveStructuralFeatureValueActionActivationImpl::eInvoke(int operationID
 }
 
 
-std::shared_ptr<CS_RemoveStructuralFeatureValueActionActivation> CS_RemoveStructuralFeatureValueActionActivationImpl::getThisCS_RemoveStructuralFeatureValueActionActivationPtr() const
+std::shared_ptr<PSCS::Semantics::Actions::CS_RemoveStructuralFeatureValueActionActivation> CS_RemoveStructuralFeatureValueActionActivationImpl::getThisCS_RemoveStructuralFeatureValueActionActivationPtr() const
 {
 	return m_thisCS_RemoveStructuralFeatureValueActionActivationPtr.lock();
 }
-void CS_RemoveStructuralFeatureValueActionActivationImpl::setThisCS_RemoveStructuralFeatureValueActionActivationPtr(std::weak_ptr<CS_RemoveStructuralFeatureValueActionActivation> thisCS_RemoveStructuralFeatureValueActionActivationPtr)
+void CS_RemoveStructuralFeatureValueActionActivationImpl::setThisCS_RemoveStructuralFeatureValueActionActivationPtr(std::weak_ptr<PSCS::Semantics::Actions::CS_RemoveStructuralFeatureValueActionActivation> thisCS_RemoveStructuralFeatureValueActionActivationPtr)
 {
 	m_thisCS_RemoveStructuralFeatureValueActionActivationPtr = thisCS_RemoveStructuralFeatureValueActionActivationPtr;
 	setThisRemoveStructuralFeatureValueActivationPtr(thisCS_RemoveStructuralFeatureValueActionActivationPtr);

@@ -32,8 +32,8 @@ namespace fUML::Semantics::Activities
 		protected:
 			friend class fUML::Semantics::Activities::ActivitiesFactoryImpl;
 			DecisionNodeActivationImpl();
-			virtual std::shared_ptr<DecisionNodeActivation> getThisDecisionNodeActivationPtr() const;
-			virtual void setThisDecisionNodeActivationPtr(std::weak_ptr<DecisionNodeActivation> thisDecisionNodeActivationPtr);
+			virtual std::shared_ptr<fUML::Semantics::Activities::DecisionNodeActivation> getThisDecisionNodeActivationPtr() const;
+			virtual void setThisDecisionNodeActivationPtr(std::weak_ptr<fUML::Semantics::Activities::DecisionNodeActivation> thisDecisionNodeActivationPtr);
 
 			//Additional constructors for the containments back reference
 			DecisionNodeActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_group);
@@ -106,7 +106,7 @@ namespace fUML::Semantics::Activities
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<DecisionNodeActivation> m_thisDecisionNodeActivationPtr;
+			std::weak_ptr<fUML::Semantics::Activities::DecisionNodeActivation> m_thisDecisionNodeActivationPtr;
 	};
 }
 #endif /* end of include guard: FUML_SEMANTICS_ACTIVITIES_DECISIONNODEACTIVATIONDECISIONNODEACTIVATIONIMPL_HPP */

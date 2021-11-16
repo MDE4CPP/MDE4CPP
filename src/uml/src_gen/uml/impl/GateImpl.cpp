@@ -556,11 +556,11 @@ Any GateImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_p
 }
 
 
-std::shared_ptr<Gate> GateImpl::getThisGatePtr() const
+std::shared_ptr<uml::Gate> GateImpl::getThisGatePtr() const
 {
 	return m_thisGatePtr.lock();
 }
-void GateImpl::setThisGatePtr(std::weak_ptr<Gate> thisGatePtr)
+void GateImpl::setThisGatePtr(std::weak_ptr<uml::Gate> thisGatePtr)
 {
 	m_thisGatePtr = thisGatePtr;
 	setThisMessageEndPtr(thisGatePtr);

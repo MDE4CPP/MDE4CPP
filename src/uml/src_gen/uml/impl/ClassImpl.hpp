@@ -32,8 +32,8 @@ namespace uml
 		protected:
 			friend class umlFactoryImpl;
 			ClassImpl();
-			virtual std::shared_ptr<Class> getThisClassPtr() const;
-			virtual void setThisClassPtr(std::weak_ptr<Class> thisClassPtr);
+			virtual std::shared_ptr<uml::Class> getThisClassPtr() const;
+			virtual void setThisClassPtr(std::weak_ptr<uml::Class> thisClassPtr);
 
 			//Additional constructors for the containments back reference
 			ClassImpl(std::weak_ptr<uml::Namespace> par_namespace);
@@ -227,7 +227,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<Class> m_thisClassPtr;
+			std::weak_ptr<uml::Class> m_thisClassPtr;
 	};
 }
 #endif /* end of include guard: UML_CLASSCLASSIMPL_HPP */

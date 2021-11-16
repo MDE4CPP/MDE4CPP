@@ -209,7 +209,7 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			uml::ExpansionKind m_mode= ExpansionKind::ITERATIVE;
+			uml::ExpansionKind m_mode= uml::ExpansionKind::ITERATIVE;
 			
 			//*********************************
 			// Reference Members

@@ -105,14 +105,6 @@ CS_StructuralFeatureOfInterfaceAccessStrategyImpl& CS_StructuralFeatureOfInterfa
 	return *this;
 }
 
-std::shared_ptr<ecore::EObject> CS_StructuralFeatureOfInterfaceAccessStrategyImpl::copy() const
-{
-	std::shared_ptr<CS_StructuralFeatureOfInterfaceAccessStrategyImpl> element(new CS_StructuralFeatureOfInterfaceAccessStrategyImpl());
-	*element =(*this);
-	element->setThisCS_StructuralFeatureOfInterfaceAccessStrategyPtr(element);
-	return element;
-}
-
 //*********************************
 // Operations
 //*********************************
@@ -325,11 +317,11 @@ Any CS_StructuralFeatureOfInterfaceAccessStrategyImpl::eInvoke(int operationID, 
 }
 
 
-std::shared_ptr<CS_StructuralFeatureOfInterfaceAccessStrategy> CS_StructuralFeatureOfInterfaceAccessStrategyImpl::getThisCS_StructuralFeatureOfInterfaceAccessStrategyPtr() const
+std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_StructuralFeatureOfInterfaceAccessStrategy> CS_StructuralFeatureOfInterfaceAccessStrategyImpl::getThisCS_StructuralFeatureOfInterfaceAccessStrategyPtr() const
 {
 	return m_thisCS_StructuralFeatureOfInterfaceAccessStrategyPtr.lock();
 }
-void CS_StructuralFeatureOfInterfaceAccessStrategyImpl::setThisCS_StructuralFeatureOfInterfaceAccessStrategyPtr(std::weak_ptr<CS_StructuralFeatureOfInterfaceAccessStrategy> thisCS_StructuralFeatureOfInterfaceAccessStrategyPtr)
+void CS_StructuralFeatureOfInterfaceAccessStrategyImpl::setThisCS_StructuralFeatureOfInterfaceAccessStrategyPtr(std::weak_ptr<PSCS::Semantics::StructuredClassifiers::CS_StructuralFeatureOfInterfaceAccessStrategy> thisCS_StructuralFeatureOfInterfaceAccessStrategyPtr)
 {
 	m_thisCS_StructuralFeatureOfInterfaceAccessStrategyPtr = thisCS_StructuralFeatureOfInterfaceAccessStrategyPtr;
 	setThisSemanticStrategyPtr(thisCS_StructuralFeatureOfInterfaceAccessStrategyPtr);

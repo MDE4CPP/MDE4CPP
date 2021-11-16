@@ -32,8 +32,8 @@ namespace fUML::Semantics::Activities
 		protected:
 			friend class fUML::Semantics::Activities::ActivitiesFactoryImpl;
 			JoinNodeActivationImpl();
-			virtual std::shared_ptr<JoinNodeActivation> getThisJoinNodeActivationPtr() const;
-			virtual void setThisJoinNodeActivationPtr(std::weak_ptr<JoinNodeActivation> thisJoinNodeActivationPtr);
+			virtual std::shared_ptr<fUML::Semantics::Activities::JoinNodeActivation> getThisJoinNodeActivationPtr() const;
+			virtual void setThisJoinNodeActivationPtr(std::weak_ptr<fUML::Semantics::Activities::JoinNodeActivation> thisJoinNodeActivationPtr);
 
 			//Additional constructors for the containments back reference
 			JoinNodeActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_group);
@@ -91,7 +91,7 @@ namespace fUML::Semantics::Activities
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<JoinNodeActivation> m_thisJoinNodeActivationPtr;
+			std::weak_ptr<fUML::Semantics::Activities::JoinNodeActivation> m_thisJoinNodeActivationPtr;
 	};
 }
 #endif /* end of include guard: FUML_SEMANTICS_ACTIVITIES_JOINNODEACTIVATIONJOINNODEACTIVATIONIMPL_HPP */

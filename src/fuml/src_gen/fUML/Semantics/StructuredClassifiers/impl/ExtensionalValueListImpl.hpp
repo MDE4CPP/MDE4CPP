@@ -32,8 +32,8 @@ namespace fUML::Semantics::StructuredClassifiers
 		protected:
 			friend class fUML::Semantics::StructuredClassifiers::StructuredClassifiersFactoryImpl;
 			ExtensionalValueListImpl();
-			virtual std::shared_ptr<ExtensionalValueList> getThisExtensionalValueListPtr() const;
-			virtual void setThisExtensionalValueListPtr(std::weak_ptr<ExtensionalValueList> thisExtensionalValueListPtr);
+			virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValueList> getThisExtensionalValueListPtr() const;
+			virtual void setThisExtensionalValueListPtr(std::weak_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValueList> thisExtensionalValueListPtr);
 
 
 		public:
@@ -92,7 +92,7 @@ namespace fUML::Semantics::StructuredClassifiers
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<ExtensionalValueList> m_thisExtensionalValueListPtr;
+			std::weak_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValueList> m_thisExtensionalValueListPtr;
 	};
 }
 #endif /* end of include guard: FUML_SEMANTICS_STRUCTUREDCLASSIFIERS_EXTENSIONALVALUELISTEXTENSIONALVALUELISTIMPL_HPP */

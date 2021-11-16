@@ -31,8 +31,8 @@ namespace uml
 		protected:
 			friend class umlFactoryImpl;
 			TriggerImpl();
-			virtual std::shared_ptr<Trigger> getThisTriggerPtr() const;
-			virtual void setThisTriggerPtr(std::weak_ptr<Trigger> thisTriggerPtr);
+			virtual std::shared_ptr<uml::Trigger> getThisTriggerPtr() const;
+			virtual void setThisTriggerPtr(std::weak_ptr<uml::Trigger> thisTriggerPtr);
 
 			//Additional constructors for the containments back reference
 			TriggerImpl(std::weak_ptr<uml::Namespace> par_namespace);
@@ -126,7 +126,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<Trigger> m_thisTriggerPtr;
+			std::weak_ptr<uml::Trigger> m_thisTriggerPtr;
 	};
 }
 #endif /* end of include guard: UML_TRIGGERTRIGGERIMPL_HPP */

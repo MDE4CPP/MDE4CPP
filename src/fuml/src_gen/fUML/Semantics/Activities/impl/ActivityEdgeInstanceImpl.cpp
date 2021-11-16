@@ -35,8 +35,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "uml/umlFactory.hpp"
+#include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 
 #include "uml/ActivityEdge.hpp"
 #include "fUML/Semantics/Activities/ActivityNodeActivation.hpp"
@@ -709,11 +709,11 @@ Any ActivityEdgeInstanceImpl::eInvoke(int operationID, std::shared_ptr<std::list
 }
 
 
-std::shared_ptr<ActivityEdgeInstance> ActivityEdgeInstanceImpl::getThisActivityEdgeInstancePtr() const
+std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance> ActivityEdgeInstanceImpl::getThisActivityEdgeInstancePtr() const
 {
 	return m_thisActivityEdgeInstancePtr.lock();
 }
-void ActivityEdgeInstanceImpl::setThisActivityEdgeInstancePtr(std::weak_ptr<ActivityEdgeInstance> thisActivityEdgeInstancePtr)
+void ActivityEdgeInstanceImpl::setThisActivityEdgeInstancePtr(std::weak_ptr<fUML::Semantics::Activities::ActivityEdgeInstance> thisActivityEdgeInstancePtr)
 {
 	m_thisActivityEdgeInstancePtr = thisActivityEdgeInstancePtr;
 }

@@ -32,8 +32,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "ecore/ecoreFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
+#include "ecore/ecoreFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
 
 #include "ocl/Expressions/CallExp.hpp"
@@ -472,11 +472,11 @@ Any AssociationClassCallExpImpl::eInvoke(int operationID, std::shared_ptr<std::l
 }
 
 
-std::shared_ptr<AssociationClassCallExp> AssociationClassCallExpImpl::getThisAssociationClassCallExpPtr() const
+std::shared_ptr<ocl::Expressions::AssociationClassCallExp> AssociationClassCallExpImpl::getThisAssociationClassCallExpPtr() const
 {
 	return m_thisAssociationClassCallExpPtr.lock();
 }
-void AssociationClassCallExpImpl::setThisAssociationClassCallExpPtr(std::weak_ptr<AssociationClassCallExp> thisAssociationClassCallExpPtr)
+void AssociationClassCallExpImpl::setThisAssociationClassCallExpPtr(std::weak_ptr<ocl::Expressions::AssociationClassCallExp> thisAssociationClassCallExpPtr)
 {
 	m_thisAssociationClassCallExpPtr = thisAssociationClassCallExpPtr;
 	setThisNavigationCallExpPtr(thisAssociationClassCallExpPtr);

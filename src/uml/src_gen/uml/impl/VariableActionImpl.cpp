@@ -145,14 +145,6 @@ VariableActionImpl& VariableActionImpl::operator=(const VariableActionImpl & obj
 	return *this;
 }
 
-std::shared_ptr<ecore::EObject> VariableActionImpl::copy() const
-{
-	std::shared_ptr<VariableActionImpl> element(new VariableActionImpl());
-	*element =(*this);
-	element->setThisVariableActionPtr(element);
-	return element;
-}
-
 //*********************************
 // Operations
 //*********************************
@@ -456,11 +448,11 @@ Any VariableActionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std
 }
 
 
-std::shared_ptr<VariableAction> VariableActionImpl::getThisVariableActionPtr() const
+std::shared_ptr<uml::VariableAction> VariableActionImpl::getThisVariableActionPtr() const
 {
 	return m_thisVariableActionPtr.lock();
 }
-void VariableActionImpl::setThisVariableActionPtr(std::weak_ptr<VariableAction> thisVariableActionPtr)
+void VariableActionImpl::setThisVariableActionPtr(std::weak_ptr<uml::VariableAction> thisVariableActionPtr)
 {
 	m_thisVariableActionPtr = thisVariableActionPtr;
 	setThisActionPtr(thisVariableActionPtr);

@@ -31,8 +31,8 @@ namespace uml
 		protected:
 			friend class umlFactoryImpl;
 			ClearAssociationActionImpl();
-			virtual std::shared_ptr<ClearAssociationAction> getThisClearAssociationActionPtr() const;
-			virtual void setThisClearAssociationActionPtr(std::weak_ptr<ClearAssociationAction> thisClearAssociationActionPtr);
+			virtual std::shared_ptr<uml::ClearAssociationAction> getThisClearAssociationActionPtr() const;
+			virtual void setThisClearAssociationActionPtr(std::weak_ptr<uml::ClearAssociationAction> thisClearAssociationActionPtr);
 
 			//Additional constructors for the containments back reference
 			ClearAssociationActionImpl(std::weak_ptr<uml::Activity> par_activity);
@@ -160,7 +160,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<ClearAssociationAction> m_thisClearAssociationActionPtr;
+			std::weak_ptr<uml::ClearAssociationAction> m_thisClearAssociationActionPtr;
 	};
 }
 #endif /* end of include guard: UML_CLEARASSOCIATIONACTIONCLEARASSOCIATIONACTIONIMPL_HPP */

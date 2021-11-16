@@ -449,11 +449,11 @@ Any QualifierValueImpl::eInvoke(int operationID, std::shared_ptr<std::list < std
 }
 
 
-std::shared_ptr<QualifierValue> QualifierValueImpl::getThisQualifierValuePtr() const
+std::shared_ptr<uml::QualifierValue> QualifierValueImpl::getThisQualifierValuePtr() const
 {
 	return m_thisQualifierValuePtr.lock();
 }
-void QualifierValueImpl::setThisQualifierValuePtr(std::weak_ptr<QualifierValue> thisQualifierValuePtr)
+void QualifierValueImpl::setThisQualifierValuePtr(std::weak_ptr<uml::QualifierValue> thisQualifierValuePtr)
 {
 	m_thisQualifierValuePtr = thisQualifierValuePtr;
 	setThisElementPtr(thisQualifierValuePtr);

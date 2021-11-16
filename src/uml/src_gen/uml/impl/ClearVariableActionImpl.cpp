@@ -374,11 +374,11 @@ Any ClearVariableActionImpl::eInvoke(int operationID, std::shared_ptr<std::list 
 }
 
 
-std::shared_ptr<ClearVariableAction> ClearVariableActionImpl::getThisClearVariableActionPtr() const
+std::shared_ptr<uml::ClearVariableAction> ClearVariableActionImpl::getThisClearVariableActionPtr() const
 {
 	return m_thisClearVariableActionPtr.lock();
 }
-void ClearVariableActionImpl::setThisClearVariableActionPtr(std::weak_ptr<ClearVariableAction> thisClearVariableActionPtr)
+void ClearVariableActionImpl::setThisClearVariableActionPtr(std::weak_ptr<uml::ClearVariableAction> thisClearVariableActionPtr)
 {
 	m_thisClearVariableActionPtr = thisClearVariableActionPtr;
 	setThisVariableActionPtr(thisClearVariableActionPtr);

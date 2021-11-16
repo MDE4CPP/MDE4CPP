@@ -25,14 +25,14 @@ namespace uml
 	{
 		public: 
 			BehaviorImpl(const BehaviorImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 			BehaviorImpl& operator=(BehaviorImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;
 			BehaviorImpl();
-			virtual std::shared_ptr<Behavior> getThisBehaviorPtr() const;
-			virtual void setThisBehaviorPtr(std::weak_ptr<Behavior> thisBehaviorPtr);
+			virtual std::shared_ptr<uml::Behavior> getThisBehaviorPtr() const;
+			virtual void setThisBehaviorPtr(std::weak_ptr<uml::Behavior> thisBehaviorPtr);
 
 			//Additional constructors for the containments back reference
 			BehaviorImpl(std::weak_ptr<uml::BehavioredClassifier> par_behavioredClassifier);
@@ -48,7 +48,7 @@ namespace uml
 
 		public:
 			//destructor
-			virtual ~BehaviorImpl();
+			virtual ~BehaviorImpl() = 0;
 			
 			//*********************************
 			// Operations
@@ -273,7 +273,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<Behavior> m_thisBehaviorPtr;
+			std::weak_ptr<uml::Behavior> m_thisBehaviorPtr;
 	};
 }
 #endif /* end of include guard: UML_BEHAVIORBEHAVIORIMPL_HPP */

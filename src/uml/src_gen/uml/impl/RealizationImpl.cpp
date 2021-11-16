@@ -395,11 +395,11 @@ Any RealizationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::s
 }
 
 
-std::shared_ptr<Realization> RealizationImpl::getThisRealizationPtr() const
+std::shared_ptr<uml::Realization> RealizationImpl::getThisRealizationPtr() const
 {
 	return m_thisRealizationPtr.lock();
 }
-void RealizationImpl::setThisRealizationPtr(std::weak_ptr<Realization> thisRealizationPtr)
+void RealizationImpl::setThisRealizationPtr(std::weak_ptr<uml::Realization> thisRealizationPtr)
 {
 	m_thisRealizationPtr = thisRealizationPtr;
 	setThisAbstractionPtr(thisRealizationPtr);

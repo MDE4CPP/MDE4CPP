@@ -363,11 +363,11 @@ Any CollectionLiteralExpEvalImpl::eInvoke(int operationID, std::shared_ptr<std::
 }
 
 
-std::shared_ptr<CollectionLiteralExpEval> CollectionLiteralExpEvalImpl::getThisCollectionLiteralExpEvalPtr() const
+std::shared_ptr<ocl::Evaluations::CollectionLiteralExpEval> CollectionLiteralExpEvalImpl::getThisCollectionLiteralExpEvalPtr() const
 {
 	return m_thisCollectionLiteralExpEvalPtr.lock();
 }
-void CollectionLiteralExpEvalImpl::setThisCollectionLiteralExpEvalPtr(std::weak_ptr<CollectionLiteralExpEval> thisCollectionLiteralExpEvalPtr)
+void CollectionLiteralExpEvalImpl::setThisCollectionLiteralExpEvalPtr(std::weak_ptr<ocl::Evaluations::CollectionLiteralExpEval> thisCollectionLiteralExpEvalPtr)
 {
 	m_thisCollectionLiteralExpEvalPtr = thisCollectionLiteralExpEvalPtr;
 	setThisLiteralExpEvalPtr(thisCollectionLiteralExpEvalPtr);

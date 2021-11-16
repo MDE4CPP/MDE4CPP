@@ -31,8 +31,8 @@ namespace uml
 		protected:
 			friend class umlFactoryImpl;
 			ReplyActionImpl();
-			virtual std::shared_ptr<ReplyAction> getThisReplyActionPtr() const;
-			virtual void setThisReplyActionPtr(std::weak_ptr<ReplyAction> thisReplyActionPtr);
+			virtual std::shared_ptr<uml::ReplyAction> getThisReplyActionPtr() const;
+			virtual void setThisReplyActionPtr(std::weak_ptr<uml::ReplyAction> thisReplyActionPtr);
 
 			//Additional constructors for the containments back reference
 			ReplyActionImpl(std::weak_ptr<uml::Activity> par_activity);
@@ -171,7 +171,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<ReplyAction> m_thisReplyActionPtr;
+			std::weak_ptr<uml::ReplyAction> m_thisReplyActionPtr;
 	};
 }
 #endif /* end of include guard: UML_REPLYACTIONREPLYACTIONIMPL_HPP */

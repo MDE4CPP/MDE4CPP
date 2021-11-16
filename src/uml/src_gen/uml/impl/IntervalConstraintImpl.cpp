@@ -353,11 +353,11 @@ Any IntervalConstraintImpl::eInvoke(int operationID, std::shared_ptr<std::list <
 }
 
 
-std::shared_ptr<IntervalConstraint> IntervalConstraintImpl::getThisIntervalConstraintPtr() const
+std::shared_ptr<uml::IntervalConstraint> IntervalConstraintImpl::getThisIntervalConstraintPtr() const
 {
 	return m_thisIntervalConstraintPtr.lock();
 }
-void IntervalConstraintImpl::setThisIntervalConstraintPtr(std::weak_ptr<IntervalConstraint> thisIntervalConstraintPtr)
+void IntervalConstraintImpl::setThisIntervalConstraintPtr(std::weak_ptr<uml::IntervalConstraint> thisIntervalConstraintPtr)
 {
 	m_thisIntervalConstraintPtr = thisIntervalConstraintPtr;
 	setThisConstraintPtr(thisIntervalConstraintPtr);

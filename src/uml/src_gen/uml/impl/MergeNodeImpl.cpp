@@ -411,11 +411,11 @@ Any MergeNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sha
 }
 
 
-std::shared_ptr<MergeNode> MergeNodeImpl::getThisMergeNodePtr() const
+std::shared_ptr<uml::MergeNode> MergeNodeImpl::getThisMergeNodePtr() const
 {
 	return m_thisMergeNodePtr.lock();
 }
-void MergeNodeImpl::setThisMergeNodePtr(std::weak_ptr<MergeNode> thisMergeNodePtr)
+void MergeNodeImpl::setThisMergeNodePtr(std::weak_ptr<uml::MergeNode> thisMergeNodePtr)
 {
 	m_thisMergeNodePtr = thisMergeNodePtr;
 	setThisControlNodePtr(thisMergeNodePtr);

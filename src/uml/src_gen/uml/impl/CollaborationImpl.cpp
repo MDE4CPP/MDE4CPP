@@ -656,11 +656,11 @@ Any CollaborationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std:
 }
 
 
-std::shared_ptr<Collaboration> CollaborationImpl::getThisCollaborationPtr() const
+std::shared_ptr<uml::Collaboration> CollaborationImpl::getThisCollaborationPtr() const
 {
 	return m_thisCollaborationPtr.lock();
 }
-void CollaborationImpl::setThisCollaborationPtr(std::weak_ptr<Collaboration> thisCollaborationPtr)
+void CollaborationImpl::setThisCollaborationPtr(std::weak_ptr<uml::Collaboration> thisCollaborationPtr)
 {
 	m_thisCollaborationPtr = thisCollaborationPtr;
 	setThisBehavioredClassifierPtr(thisCollaborationPtr);

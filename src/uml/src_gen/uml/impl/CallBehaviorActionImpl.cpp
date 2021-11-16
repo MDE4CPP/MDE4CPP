@@ -501,11 +501,11 @@ Any CallBehaviorActionImpl::eInvoke(int operationID, std::shared_ptr<std::list <
 }
 
 
-std::shared_ptr<CallBehaviorAction> CallBehaviorActionImpl::getThisCallBehaviorActionPtr() const
+std::shared_ptr<uml::CallBehaviorAction> CallBehaviorActionImpl::getThisCallBehaviorActionPtr() const
 {
 	return m_thisCallBehaviorActionPtr.lock();
 }
-void CallBehaviorActionImpl::setThisCallBehaviorActionPtr(std::weak_ptr<CallBehaviorAction> thisCallBehaviorActionPtr)
+void CallBehaviorActionImpl::setThisCallBehaviorActionPtr(std::weak_ptr<uml::CallBehaviorAction> thisCallBehaviorActionPtr)
 {
 	m_thisCallBehaviorActionPtr = thisCallBehaviorActionPtr;
 	setThisCallActionPtr(thisCallBehaviorActionPtr);

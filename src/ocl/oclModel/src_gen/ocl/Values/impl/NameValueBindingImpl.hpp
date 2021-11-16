@@ -34,8 +34,8 @@ virtual public NameValueBinding
 		protected:
 			friend class ocl::Values::ValuesFactoryImpl;
 			NameValueBindingImpl();
-			virtual std::shared_ptr<NameValueBinding> getThisNameValueBindingPtr() const;
-			virtual void setThisNameValueBindingPtr(std::weak_ptr<NameValueBinding> thisNameValueBindingPtr);
+			virtual std::shared_ptr<ocl::Values::NameValueBinding> getThisNameValueBindingPtr() const;
+			virtual void setThisNameValueBindingPtr(std::weak_ptr<ocl::Values::NameValueBinding> thisNameValueBindingPtr);
 
 
 		public:
@@ -93,7 +93,7 @@ virtual public NameValueBinding
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<NameValueBinding> m_thisNameValueBindingPtr;
+			std::weak_ptr<ocl::Values::NameValueBinding> m_thisNameValueBindingPtr;
 	};
 }
 #endif /* end of include guard: OCL_VALUES_NAMEVALUEBINDINGNAMEVALUEBINDINGIMPL_HPP */

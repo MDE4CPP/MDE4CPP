@@ -225,7 +225,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			uml::VisibilityKind m_visibility= VisibilityKind::PUBLIC;
+			uml::VisibilityKind m_visibility= uml::VisibilityKind::PUBLIC;
 			
 			//*********************************
 			// Reference Members

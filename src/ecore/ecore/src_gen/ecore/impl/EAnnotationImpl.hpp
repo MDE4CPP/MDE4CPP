@@ -31,8 +31,8 @@ namespace ecore
 		protected:
 			friend class ecoreFactoryImpl;
 			EAnnotationImpl();
-			virtual std::shared_ptr<EAnnotation> getThisEAnnotationPtr() const;
-			virtual void setThisEAnnotationPtr(std::weak_ptr<EAnnotation> thisEAnnotationPtr);
+			virtual std::shared_ptr<ecore::EAnnotation> getThisEAnnotationPtr() const;
+			virtual void setThisEAnnotationPtr(std::weak_ptr<ecore::EAnnotation> thisEAnnotationPtr);
 
 			//Additional constructors for the containments back reference
 			EAnnotationImpl(std::weak_ptr<ecore::EObject> par_eContainer);
@@ -99,7 +99,7 @@ namespace ecore
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<EAnnotation> m_thisEAnnotationPtr;
+			std::weak_ptr<ecore::EAnnotation> m_thisEAnnotationPtr;
 	};
 }
 #endif /* end of include guard: ECORE_EANNOTATIONEANNOTATIONIMPL_HPP */

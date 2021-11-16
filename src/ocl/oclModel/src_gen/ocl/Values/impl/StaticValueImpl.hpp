@@ -32,8 +32,8 @@ namespace ocl::Values
 		protected:
 			friend class ocl::Values::ValuesFactoryImpl;
 			StaticValueImpl();
-			virtual std::shared_ptr<StaticValue> getThisStaticValuePtr() const;
-			virtual void setThisStaticValuePtr(std::weak_ptr<StaticValue> thisStaticValuePtr);
+			virtual std::shared_ptr<ocl::Values::StaticValue> getThisStaticValuePtr() const;
+			virtual void setThisStaticValuePtr(std::weak_ptr<ocl::Values::StaticValue> thisStaticValuePtr);
 
 
 		public:
@@ -87,7 +87,7 @@ namespace ocl::Values
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<StaticValue> m_thisStaticValuePtr;
+			std::weak_ptr<ocl::Values::StaticValue> m_thisStaticValuePtr;
 	};
 }
 #endif /* end of include guard: OCL_VALUES_STATICVALUESTATICVALUEIMPL_HPP */

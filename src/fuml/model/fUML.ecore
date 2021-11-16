@@ -139,8 +139,11 @@
         </eOperations>
         <eOperations name="_copy" lowerBound="1" eType="#//Semantics/Values/Value">
           <eAnnotations source="http://tu-ilmenau.de/see/codegen">
-            <details key="body" value="// Create a new value that is equal to this value.&#xA;// By default, this operation simply creates a new value with empty properties.&#xA;// It must be overridden in each Value subclass to do the superclass copy and then appropriately set properties defined in the subclass.&#xA;&#xA;std::shared_ptr&lt;fUML::Semantics::Values::Value> newValue(new fUML::Semantics::Values::ValueImpl());&#xA;return newValue;"/>
+            <details key="body" value="// Create a new value that is equal to this value.&#xA;// By default, this operation simply creates a new value with empty properties.&#xA;// It must be overridden in each Value subclass to do the superclass copy and then appropriately set properties defined in the subclass.&#xA;&#xA;return this->new_();"/>
           </eAnnotations>
+        </eOperations>
+        <eOperations name="new_" lowerBound="1" eType="#//Semantics/Values/Value">
+          <eAnnotations source="http://tu-ilmenau.de/see/codegen"/>
         </eOperations>
       </eClassifiers>
     </eSubpackages>
@@ -169,6 +172,11 @@
         <eOperations name="_copy" lowerBound="1" eType="#//Semantics/Values/Value">
           <eAnnotations source="http://tu-ilmenau.de/see/codegen">
             <details key="body" value="// Create a new boolean value with the same value as this boolean value.&#xA;&#xA;std::shared_ptr&lt;fUML::Semantics::SimpleClassifiers::BooleanValue> newValue = fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createBooleanValue();&#xA;newValue->setType(this->getType()); //Duplicated from _copy()-method of super class in order to avoid having to call _copy()-method of super class and having to cast afterwards&#xA;newValue->setValue(this->isValue());&#xA;return newValue;"/>
+          </eAnnotations>
+        </eOperations>
+        <eOperations name="new_" lowerBound="1" eType="#//Semantics/Values/Value">
+          <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+            <details key="body" value="// Return a new boolean value with no value.&#xA;return fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createBooleanValue();"/>
           </eAnnotations>
         </eOperations>
         <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" ordered="false"
@@ -217,7 +225,7 @@
         </eOperations>
         <eOperations name="_copy" lowerBound="1" eType="#//Semantics/Values/Value">
           <eAnnotations source="http://tu-ilmenau.de/see/codegen">
-            <details key="body" value="// Create a new data value with the same featureValues as this data value.&#xA;&#xA;std::shared_ptr&lt;fUML::Semantics::SimpleClassifiers::CompoundValue> newValue(new fUML::Semantics::SimpleClassifiers::CompoundValueImpl());&#xA;&#xA;std::shared_ptr&lt;Bag&lt;fUML::Semantics::SimpleClassifiers::FeatureValue>> featureValues = this->retrieveFeatureValues();&#xA;unsigned int featureValuesSize = featureValues->size();&#xA;&#xA;for(unsigned int i = 0; i &lt; featureValuesSize; i++)&#xA;{&#xA;&#x9;std::shared_ptr&lt;fUML::Semantics::SimpleClassifiers::FeatureValue> featureValue = featureValues->at(i);&#xA;&#x9;newValue->getFeatureValues()->add(featureValue);&#xA;}&#xA;&#xA;return newValue;&#xA;"/>
+            <details key="body" value="// Create a new data value with the same featureValues as this data value.&#xA;&#xA;std::shared_ptr&lt;fUML::Semantics::SimpleClassifiers::CompoundValue> newValue = &#xA;&#x9;std::dynamic_pointer_cast&lt;fUML::Semantics::SimpleClassifiers::CompoundValue>(fUML::Semantics::Values::ValueImpl::_copy());&#xA;&#xA;std::shared_ptr&lt;Bag&lt;fUML::Semantics::SimpleClassifiers::FeatureValue>> featureValues = this->retrieveFeatureValues();&#xA;unsigned int featureValuesSize = featureValues->size();&#xA;&#xA;for(unsigned int i = 0; i &lt; featureValuesSize; i++)&#xA;{&#xA;&#x9;std::shared_ptr&lt;fUML::Semantics::SimpleClassifiers::FeatureValue> featureValue = featureValues->at(i);&#xA;&#x9;newValue->getFeatureValues()->add(featureValue->_copy());&#xA;}&#xA;&#xA;return newValue;&#xA;"/>
           </eAnnotations>
         </eOperations>
         <eStructuralFeatures xsi:type="ecore:EReference" name="featureValues" ordered="false"
@@ -229,7 +237,7 @@
         </eAnnotations>
         <eOperations name="new_" ordered="false" lowerBound="1" eType="#//Semantics/Values/Value">
           <eAnnotations source="http://tu-ilmenau.de/see/codegen">
-            <details key="body" value="return std::shared_ptr&lt;fUML::Semantics::Values::Value>(fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createDataValue());"/>
+            <details key="body" value="// Create a new data value with no type or feature values.&#xD;&#xA;return std::shared_ptr&lt;fUML::Semantics::Values::Value>(fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createDataValue());"/>
           </eAnnotations>
         </eOperations>
         <eOperations name="getTypes" ordered="false" upperBound="-1" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//Classifier">
@@ -262,7 +270,7 @@
         </eOperations>
         <eOperations name="new_" ordered="false" lowerBound="1" eType="#//Semantics/Values/Value">
           <eAnnotations source="http://tu-ilmenau.de/see/codegen">
-            <details key="body" value="return std::shared_ptr&lt;fUML::Semantics::Values::Value>(fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createEnumerationValue());"/>
+            <details key="body" value="// Create a new enumeration value with no literal.&#xD;&#xA;return std::shared_ptr&lt;fUML::Semantics::Values::Value>(fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createEnumerationValue());"/>
           </eAnnotations>
         </eOperations>
         <eOperations name="toString" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
@@ -332,6 +340,11 @@
             <details key="body" value="// Create a new integer value with the same value as this integer value.&#xA;&#xA;std::shared_ptr&lt;fUML::Semantics::SimpleClassifiers::IntegerValue> newValue = fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createIntegerValue();&#xA;newValue->setType(this->getType()); //Duplicated from _copy()-method of super class in order to avoid having to call _copy()-method of super class and having to cast afterwards&#xA;newValue->setValue(this->getValue());&#xA;return newValue;"/>
           </eAnnotations>
         </eOperations>
+        <eOperations name="new_" lowerBound="1" eType="#//Semantics/Values/Value">
+          <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+            <details key="body" value="// Return a new integer value with no value.&#xA;return fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createIntegerValue();"/>
+          </eAnnotations>
+        </eOperations>
         <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" ordered="false"
             lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
       </eClassifiers>
@@ -347,7 +360,7 @@
         </eOperations>
         <eOperations name="_copy" lowerBound="1" eType="#//Semantics/Values/Value">
           <eAnnotations source="http://tu-ilmenau.de/see/codegen">
-            <details key="body" value="// Create a new value that is equal to this primitive value.&#xA;&#xA;std::shared_ptr&lt;fUML::Semantics::SimpleClassifiers::PrimitiveValue> newValue(new fUML::Semantics::SimpleClassifiers::PrimitiveValueImpl());&#xA;newValue->setType(this->getType());&#xA;return newValue;"/>
+            <details key="body" value="// Create a new value that is equal to this primitive value.&#xA;&#xA;std::shared_ptr&lt;fUML::Semantics::SimpleClassifiers::PrimitiveValue> newValue =&#xA;&#x9;std::dynamic_pointer_cast&lt;fUML::Semantics::SimpleClassifiers::PrimitiveValue>(fUML::Semantics::Values::ValueImpl::_copy());&#xA;newValue->setType(this->getType());&#xA;return newValue;"/>
           </eAnnotations>
         </eOperations>
         <eStructuralFeatures xsi:type="ecore:EReference" name="type" ordered="false"
@@ -378,6 +391,11 @@
             <details key="body" value="// Create a new real value with the same value as this real value.&#xA;&#xA;std::shared_ptr&lt;fUML::Semantics::SimpleClassifiers::RealValue> newValue = fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createRealValue();&#xA;newValue->setType(this->getType()); //Duplicated from _copy()-method of super class in order to avoid having to call _copy()-method of super class and having to cast afterwards&#xA;newValue->setValue(this->getValue());&#xA;return newValue;"/>
           </eAnnotations>
         </eOperations>
+        <eOperations name="new_" lowerBound="1" eType="#//Semantics/Values/Value">
+          <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+            <details key="body" value="// Return a new real value with no value.&#xA;return fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createRealValue();"/>
+          </eAnnotations>
+        </eOperations>
         <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" ordered="false"
             lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
       </eClassifiers>
@@ -385,6 +403,11 @@
         <eOperations name="_copy" lowerBound="1" eType="#//Semantics/Values/Value">
           <eAnnotations source="http://tu-ilmenau.de/see/codegen">
             <details key="body" value="// Create a new signal instance with the same type and feature values as this signal instance.&#xA;&#xA;std::shared_ptr&lt;fUML::Semantics::SimpleClassifiers::SignalInstance> newValue = std::dynamic_pointer_cast&lt;fUML::Semantics::SimpleClassifiers::SignalInstance>(fUML::Semantics::SimpleClassifiers::CompoundValueImpl::_copy());&#xA;newValue->setType(this->getType());&#xA;return newValue;"/>
+          </eAnnotations>
+        </eOperations>
+        <eOperations name="new_" lowerBound="1" eType="#//Semantics/Values/Value">
+          <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+            <details key="body" value="// Create a new signal instance with no type or feature values.&#xD;&#xA;return fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createSignalInstance();"/>
           </eAnnotations>
         </eOperations>
         <eStructuralFeatures xsi:type="ecore:EReference" name="type" ordered="false"
@@ -413,6 +436,11 @@
         <eOperations name="_copy" lowerBound="1" eType="#//Semantics/Values/Value">
           <eAnnotations source="http://tu-ilmenau.de/see/codegen">
             <details key="body" value="// Create a new string value with the same value as this string value.&#xA;&#xA;std::shared_ptr&lt;fUML::Semantics::SimpleClassifiers::StringValue> newValue = fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createStringValue();&#xA;newValue->setType(this->getType()); //Duplicated from _copy()-method of super class in order to avoid having to call _copy()-method of super class and having to cast afterwards&#xA;newValue->setValue(this->getValue());&#xA;return newValue;"/>
+          </eAnnotations>
+        </eOperations>
+        <eOperations name="new_" lowerBound="1" eType="#//Semantics/Values/Value">
+          <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+            <details key="body" value="// Return a new string value with no value.&#xA;return fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createStringValue();"/>
           </eAnnotations>
         </eOperations>
         <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" ordered="false"
@@ -491,6 +519,11 @@
         <eOperations name="_copy" lowerBound="1" eType="#//Semantics/Values/Value">
           <eAnnotations source="http://tu-ilmenau.de/see/codegen">
             <details key="body" value="// Create a new unlimited natural value with the same value as this unlimited natural value.&#xA;&#xA;std::shared_ptr&lt;fUML::Semantics::SimpleClassifiers::UnlimitedNaturalValue> newValue = fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createUnlimitedNaturalValue();&#xA;newValue->setType(this->getType()); //Duplicated from _copy()-method of super class in order to avoid having to call _copy()-method of super class and having to cast afterwards&#xA;newValue->setValue(this->getValue());&#xA;return newValue;"/>
+          </eAnnotations>
+        </eOperations>
+        <eOperations name="new_" lowerBound="1" eType="#//Semantics/Values/Value">
+          <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+            <details key="body" value="// Return a new unlimited natural value with no value.&#xA;return fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createUnlimitedNaturalValue();"/>
           </eAnnotations>
         </eOperations>
         <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" ordered="false"
@@ -576,6 +609,11 @@
             <details key="body" value="// Create a new link with the same type, locus and feature values as this link.&#xA;&#xA;std::shared_ptr&lt;fUML::Semantics::StructuredClassifiers::Link> newValue = std::dynamic_pointer_cast&lt;fUML::Semantics::StructuredClassifiers::Link>(fUML::Semantics::StructuredClassifiers::ExtensionalValueImpl::_copy());&#xA;&#xA;newValue->setType(this->getType());&#xA;&#xA;return newValue;"/>
           </eAnnotations>
         </eOperations>
+        <eOperations name="new_" ordered="false" lowerBound="1" eType="#//Semantics/Values/Value">
+          <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+            <details key="body" value="// Create a new link with no type or properties.&#xA;return fUML::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createLink();"/>
+          </eAnnotations>
+        </eOperations>
         <eStructuralFeatures xsi:type="ecore:EReference" name="type" ordered="false"
             eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//Association"/>
       </eClassifiers>
@@ -614,11 +652,6 @@
           </eAnnotations>
           <eParameters name="accepter" ordered="false" lowerBound="1" eType="#//Semantics/CommonBehavior/EventAccepter"/>
         </eOperations>
-        <eOperations name="new_" ordered="false" lowerBound="1" eType="#//Semantics/Values/Value">
-          <eAnnotations source="http://tu-ilmenau.de/see/codegen">
-            <details key="body" value="return fUML::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createObject();"/>
-          </eAnnotations>
-        </eOperations>
         <eOperations name="destroy" ordered="false" lowerBound="1">
           <eAnnotations source="http://tu-ilmenau.de/see/codegen">
             <details key="body" value="    if(this->getObjectActivation() != nullptr)&#xA;    {&#xA;        this->getObjectActivation()->stop();&#xA;        this->setObjectActivation(nullptr);&#xA;    }&#xA;&#xA;    this->getTypes()->clear();&#xA;    fUML::Semantics::StructuredClassifiers::ExtensionalValueImpl::destroy();"/>
@@ -633,6 +666,11 @@
         <eOperations name="_copy" lowerBound="1" eType="#//Semantics/Values/Value">
           <eAnnotations source="http://tu-ilmenau.de/see/codegen">
             <details key="body" value="// Create a new object that is a copy of this object at the same locus as this object.&#xA;// However, the new object will NOT have any object activation (i.e, its classifier behaviors will not be started).&#xA;&#xA;std::shared_ptr&lt;fUML::Semantics::StructuredClassifiers::Object> newObject = std::dynamic_pointer_cast&lt;fUML::Semantics::StructuredClassifiers::Object>(fUML::Semantics::StructuredClassifiers::ExtensionalValueImpl::_copy());&#xA;&#xA;std::shared_ptr&lt;Bag&lt;uml::Classifier>> types = this->getTypes();&#xA;unsigned int typesSize = types->size();&#xA;&#xA;for(unsigned int i = 0; i &lt; typesSize; i++)&#xA;{&#xA;&#x9;std::shared_ptr&lt;uml::Classifier> type = types->at(i);&#xA;&#x9;newObject->getTypes()->add(type);&#xA;}&#xA;&#xA;return newObject;"/>
+          </eAnnotations>
+        </eOperations>
+        <eOperations name="new_" ordered="false" lowerBound="1" eType="#//Semantics/Values/Value">
+          <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+            <details key="body" value="// Create a new object with no type, feature values or locus.&#xA;return fUML::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createObject();"/>
           </eAnnotations>
         </eOperations>
         <eStructuralFeatures xsi:type="ecore:EReference" name="types" ordered="false"
@@ -700,7 +738,7 @@
         </eOperations>
         <eOperations name="new_" ordered="false" lowerBound="1" eType="#//Semantics/Values/Value">
           <eAnnotations source="http://tu-ilmenau.de/see/codegen">
-            <details key="body" value="return fUML::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createReference();"/>
+            <details key="body" value="// Create a new reference with no referent.&#xD;&#xA;return fUML::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createReference();"/>
           </eAnnotations>
         </eOperations>
         <eOperations name="getTypes" ordered="false" upperBound="-1" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//Classifier">
@@ -844,7 +882,7 @@
         </eOperations>
         <eOperations name="new_" eType="#//Semantics/Values/Value">
           <eAnnotations source="http://tu-ilmenau.de/see/codegen">
-            <details key="body" value="return fUML::Semantics::CommonBehavior::CommonBehaviorFactory::eInstance()->createCallEventExecution();"/>
+            <details key="body" value="// Create a new call event execution.&#xA;return fUML::Semantics::CommonBehavior::CommonBehaviorFactory::eInstance()->createCallEventExecution();"/>
           </eAnnotations>
         </eOperations>
         <eOperations name="releaseCaller">
@@ -1665,7 +1703,7 @@
         </eOperations>
         <eOperations name="new_" lowerBound="1" eType="#//Semantics/Values/Value">
           <eAnnotations source="http://tu-ilmenau.de/see/codegen">
-            <details key="body" value="// Create a new return information value, with an empty call event occurrence.&#xA;&#xA;return std::shared_ptr&lt;fUML::Semantics::Actions::ReturnInformation>(fUML::Semantics::Actions::ActionsFactory::eInstance()->createReturnInformation());"/>
+            <details key="body" value="// Create a new return information value, with an empty call event occurrence.&#xA;&#xA;return fUML::Semantics::Actions::ActionsFactory::eInstance()->createReturnInformation();"/>
           </eAnnotations>
         </eOperations>
         <eOperations name="reply">
@@ -1945,7 +1983,7 @@
         </eOperations>
         <eOperations name="new_" ordered="false" lowerBound="1" eType="#//Semantics/Values/Value">
           <eAnnotations source="http://tu-ilmenau.de/see/codegen">
-            <details key="body" value="// return fUML::Semantics::Values::ValuesFactory::eInstance()->createActivityExecution();&#xA;&#xA;&#x9;std::cout &lt;&lt; __PRETTY_FUNCTION__  &lt;&lt; std::endl;&#xA;&#x9;throw &quot;UnsupportedOperationException&quot;;&#xA;&#x9;return nullptr;"/>
+            <details key="body" value="// Create a new activity execution with empty properties.&#xD;&#xA;return fUML::Semantics::Activities::ActivitiesFactory::eInstance()->createActivityExecution();"/>
           </eAnnotations>
         </eOperations>
         <eOperations name="_copy" lowerBound="1" eType="#//Semantics/Values/Value">

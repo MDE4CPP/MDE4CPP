@@ -367,11 +367,11 @@ Any CollectionRangeImpl::eInvoke(int operationID, std::shared_ptr<std::list < st
 }
 
 
-std::shared_ptr<CollectionRange> CollectionRangeImpl::getThisCollectionRangePtr() const
+std::shared_ptr<ocl::Expressions::CollectionRange> CollectionRangeImpl::getThisCollectionRangePtr() const
 {
 	return m_thisCollectionRangePtr.lock();
 }
-void CollectionRangeImpl::setThisCollectionRangePtr(std::weak_ptr<CollectionRange> thisCollectionRangePtr)
+void CollectionRangeImpl::setThisCollectionRangePtr(std::weak_ptr<ocl::Expressions::CollectionRange> thisCollectionRangePtr)
 {
 	m_thisCollectionRangePtr = thisCollectionRangePtr;
 	setThisCollectionLiteralPartPtr(thisCollectionRangePtr);

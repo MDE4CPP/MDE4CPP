@@ -32,8 +32,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "ecore/ecoreFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
+#include "ecore/ecoreFactory.hpp"
 
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClassifier.hpp"
@@ -515,11 +515,11 @@ Any ExpressionInOclImpl::eInvoke(int operationID, std::shared_ptr<std::list < st
 }
 
 
-std::shared_ptr<ExpressionInOcl> ExpressionInOclImpl::getThisExpressionInOclPtr() const
+std::shared_ptr<ocl::Expressions::ExpressionInOcl> ExpressionInOclImpl::getThisExpressionInOclPtr() const
 {
 	return m_thisExpressionInOclPtr.lock();
 }
-void ExpressionInOclImpl::setThisExpressionInOclPtr(std::weak_ptr<ExpressionInOcl> thisExpressionInOclPtr)
+void ExpressionInOclImpl::setThisExpressionInOclPtr(std::weak_ptr<ocl::Expressions::ExpressionInOcl> thisExpressionInOclPtr)
 {
 	m_thisExpressionInOclPtr = thisExpressionInOclPtr;
 	setThisETypedElementPtr(thisExpressionInOclPtr);

@@ -26,19 +26,19 @@ namespace fUML::Semantics::SimpleClassifiers
 	{
 		public: 
 			CompoundValueImpl(const CompoundValueImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 			CompoundValueImpl& operator=(CompoundValueImpl const&); 
 
 		protected:
 			friend class fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactoryImpl;
 			CompoundValueImpl();
-			virtual std::shared_ptr<CompoundValue> getThisCompoundValuePtr() const;
-			virtual void setThisCompoundValuePtr(std::weak_ptr<CompoundValue> thisCompoundValuePtr);
+			virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::CompoundValue> getThisCompoundValuePtr() const;
+			virtual void setThisCompoundValuePtr(std::weak_ptr<fUML::Semantics::SimpleClassifiers::CompoundValue> thisCompoundValuePtr);
 
 
 		public:
 			//destructor
-			virtual ~CompoundValueImpl();
+			virtual ~CompoundValueImpl() = 0;
 			
 			//*********************************
 			// Operations
@@ -95,7 +95,7 @@ namespace fUML::Semantics::SimpleClassifiers
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<CompoundValue> m_thisCompoundValuePtr;
+			std::weak_ptr<fUML::Semantics::SimpleClassifiers::CompoundValue> m_thisCompoundValuePtr;
 	};
 }
 #endif /* end of include guard: FUML_SEMANTICS_SIMPLECLASSIFIERS_COMPOUNDVALUECOMPOUNDVALUEIMPL_HPP */

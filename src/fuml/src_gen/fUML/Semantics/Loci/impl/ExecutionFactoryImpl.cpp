@@ -1279,11 +1279,11 @@ Any ExecutionFactoryImpl::eInvoke(int operationID, std::shared_ptr<std::list < s
 }
 
 
-std::shared_ptr<ExecutionFactory> ExecutionFactoryImpl::getThisExecutionFactoryPtr() const
+std::shared_ptr<fUML::Semantics::Loci::ExecutionFactory> ExecutionFactoryImpl::getThisExecutionFactoryPtr() const
 {
 	return m_thisExecutionFactoryPtr.lock();
 }
-void ExecutionFactoryImpl::setThisExecutionFactoryPtr(std::weak_ptr<ExecutionFactory> thisExecutionFactoryPtr)
+void ExecutionFactoryImpl::setThisExecutionFactoryPtr(std::weak_ptr<fUML::Semantics::Loci::ExecutionFactory> thisExecutionFactoryPtr)
 {
 	m_thisExecutionFactoryPtr = thisExecutionFactoryPtr;
 }

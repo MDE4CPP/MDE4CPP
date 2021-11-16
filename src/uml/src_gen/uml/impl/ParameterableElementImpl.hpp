@@ -25,14 +25,14 @@ namespace uml
 	{
 		public: 
 			ParameterableElementImpl(const ParameterableElementImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 			ParameterableElementImpl& operator=(ParameterableElementImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;
 			ParameterableElementImpl();
-			virtual std::shared_ptr<ParameterableElement> getThisParameterableElementPtr() const;
-			virtual void setThisParameterableElementPtr(std::weak_ptr<ParameterableElement> thisParameterableElementPtr);
+			virtual std::shared_ptr<uml::ParameterableElement> getThisParameterableElementPtr() const;
+			virtual void setThisParameterableElementPtr(std::weak_ptr<uml::ParameterableElement> thisParameterableElementPtr);
 
 			//Additional constructors for the containments back reference
 			ParameterableElementImpl(std::weak_ptr<uml::Element> par_owner);
@@ -41,7 +41,7 @@ namespace uml
 
 		public:
 			//destructor
-			virtual ~ParameterableElementImpl();
+			virtual ~ParameterableElementImpl() = 0;
 			
 			//*********************************
 			// Operations
@@ -141,7 +141,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<ParameterableElement> m_thisParameterableElementPtr;
+			std::weak_ptr<uml::ParameterableElement> m_thisParameterableElementPtr;
 	};
 }
 #endif /* end of include guard: UML_PARAMETERABLEELEMENTPARAMETERABLEELEMENTIMPL_HPP */

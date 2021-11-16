@@ -32,8 +32,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "ecore/ecoreFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
+#include "ecore/ecoreFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
 
 #include "ocl/Expressions/CallExp.hpp"
@@ -217,14 +217,6 @@ NavigationCallExpImpl& NavigationCallExpImpl::operator=(const NavigationCallExpI
 	}
 	
 	return *this;
-}
-
-std::shared_ptr<ecore::EObject> NavigationCallExpImpl::copy() const
-{
-	std::shared_ptr<NavigationCallExpImpl> element(new NavigationCallExpImpl());
-	*element =(*this);
-	element->setThisNavigationCallExpPtr(element);
-	return element;
 }
 
 //*********************************
@@ -584,11 +576,11 @@ Any NavigationCallExpImpl::eInvoke(int operationID, std::shared_ptr<std::list < 
 }
 
 
-std::shared_ptr<NavigationCallExp> NavigationCallExpImpl::getThisNavigationCallExpPtr() const
+std::shared_ptr<ocl::Expressions::NavigationCallExp> NavigationCallExpImpl::getThisNavigationCallExpPtr() const
 {
 	return m_thisNavigationCallExpPtr.lock();
 }
-void NavigationCallExpImpl::setThisNavigationCallExpPtr(std::weak_ptr<NavigationCallExp> thisNavigationCallExpPtr)
+void NavigationCallExpImpl::setThisNavigationCallExpPtr(std::weak_ptr<ocl::Expressions::NavigationCallExp> thisNavigationCallExpPtr)
 {
 	m_thisNavigationCallExpPtr = thisNavigationCallExpPtr;
 	setThisFeatureCallExpPtr(thisNavigationCallExpPtr);

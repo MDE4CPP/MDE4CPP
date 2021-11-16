@@ -1534,11 +1534,11 @@ Any OperationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sha
 }
 
 
-std::shared_ptr<Operation> OperationImpl::getThisOperationPtr() const
+std::shared_ptr<uml::Operation> OperationImpl::getThisOperationPtr() const
 {
 	return m_thisOperationPtr.lock();
 }
-void OperationImpl::setThisOperationPtr(std::weak_ptr<Operation> thisOperationPtr)
+void OperationImpl::setThisOperationPtr(std::weak_ptr<uml::Operation> thisOperationPtr)
 {
 	m_thisOperationPtr = thisOperationPtr;
 	setThisBehavioralFeaturePtr(thisOperationPtr);

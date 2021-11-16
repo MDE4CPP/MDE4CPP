@@ -4,18 +4,18 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
-#include "ecore/EAnnotation.hpp"
-#include "ecore/EPackage.hpp"
-#include "ecore/EReference.hpp"
-#include "ecore/EEnum.hpp"
-#include "ecore/EClass.hpp"
-#include "ecore/EDataType.hpp"
-#include "ecore/EGenericType.hpp"
-#include "ecore/EAttribute.hpp"
-#include "ecore/EEnumLiteral.hpp"
-#include "ecore/EParameter.hpp"
-#include "ecore/EOperation.hpp"
 #include "ecore/EStringToStringMapEntry.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
+#include "ecore/EGenericType.hpp"
+#include "ecore/EEnum.hpp"
+#include "ecore/EPackage.hpp"
+#include "ecore/EOperation.hpp"
+#include "ecore/EClass.hpp"
+#include "ecore/EParameter.hpp"
+#include "ecore/EDataType.hpp"
+#include "ecore/EEnumLiteral.hpp"
 
 //metamodel factory
 #include "PSCS/PSCSFactory.hpp"
@@ -61,9 +61,9 @@ void PSCSPackageImpl::init(std::shared_ptr<ecore::EPackage> package)
     initializePackageContents();   
 }
 
-std::shared_ptr<Semantics::SemanticsPackage> PSCSPackageImpl::getSemantics_Package() const
+std::shared_ptr<PSCS::Semantics::SemanticsPackage> PSCS::PSCSPackageImpl::getSemantics_Package() const
 {
-	return Semantics::SemanticsPackage::eInstance();
+	return PSCS::Semantics::SemanticsPackage::eInstance();
 } 
 
 

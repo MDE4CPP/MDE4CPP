@@ -31,8 +31,8 @@ namespace uml
 		protected:
 			friend class umlFactoryImpl;
 			EnumerationImpl();
-			virtual std::shared_ptr<Enumeration> getThisEnumerationPtr() const;
-			virtual void setThisEnumerationPtr(std::weak_ptr<Enumeration> thisEnumerationPtr);
+			virtual std::shared_ptr<uml::Enumeration> getThisEnumerationPtr() const;
+			virtual void setThisEnumerationPtr(std::weak_ptr<uml::Enumeration> thisEnumerationPtr);
 
 			//Additional constructors for the containments back reference
 			EnumerationImpl(std::weak_ptr<uml::Namespace> par_namespace);
@@ -155,7 +155,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<Enumeration> m_thisEnumerationPtr;
+			std::weak_ptr<uml::Enumeration> m_thisEnumerationPtr;
 	};
 }
 #endif /* end of include guard: UML_ENUMERATIONENUMERATIONIMPL_HPP */

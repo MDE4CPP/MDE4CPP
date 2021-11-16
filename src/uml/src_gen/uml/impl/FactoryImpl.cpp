@@ -288,11 +288,11 @@ Any FactoryImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::share
 }
 
 
-std::shared_ptr<Factory> FactoryImpl::getThisFactoryPtr() const
+std::shared_ptr<uml::Factory> FactoryImpl::getThisFactoryPtr() const
 {
 	return m_thisFactoryPtr.lock();
 }
-void FactoryImpl::setThisFactoryPtr(std::weak_ptr<Factory> thisFactoryPtr)
+void FactoryImpl::setThisFactoryPtr(std::weak_ptr<uml::Factory> thisFactoryPtr)
 {
 	m_thisFactoryPtr = thisFactoryPtr;
 	setThisElementPtr(thisFactoryPtr);

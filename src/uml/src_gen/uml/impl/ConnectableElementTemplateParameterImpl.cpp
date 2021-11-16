@@ -297,11 +297,11 @@ Any ConnectableElementTemplateParameterImpl::eInvoke(int operationID, std::share
 }
 
 
-std::shared_ptr<ConnectableElementTemplateParameter> ConnectableElementTemplateParameterImpl::getThisConnectableElementTemplateParameterPtr() const
+std::shared_ptr<uml::ConnectableElementTemplateParameter> ConnectableElementTemplateParameterImpl::getThisConnectableElementTemplateParameterPtr() const
 {
 	return m_thisConnectableElementTemplateParameterPtr.lock();
 }
-void ConnectableElementTemplateParameterImpl::setThisConnectableElementTemplateParameterPtr(std::weak_ptr<ConnectableElementTemplateParameter> thisConnectableElementTemplateParameterPtr)
+void ConnectableElementTemplateParameterImpl::setThisConnectableElementTemplateParameterPtr(std::weak_ptr<uml::ConnectableElementTemplateParameter> thisConnectableElementTemplateParameterPtr)
 {
 	m_thisConnectableElementTemplateParameterPtr = thisConnectableElementTemplateParameterPtr;
 	setThisTemplateParameterPtr(thisConnectableElementTemplateParameterPtr);

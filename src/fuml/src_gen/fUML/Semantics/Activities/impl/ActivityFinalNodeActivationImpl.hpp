@@ -32,8 +32,8 @@ namespace fUML::Semantics::Activities
 		protected:
 			friend class fUML::Semantics::Activities::ActivitiesFactoryImpl;
 			ActivityFinalNodeActivationImpl();
-			virtual std::shared_ptr<ActivityFinalNodeActivation> getThisActivityFinalNodeActivationPtr() const;
-			virtual void setThisActivityFinalNodeActivationPtr(std::weak_ptr<ActivityFinalNodeActivation> thisActivityFinalNodeActivationPtr);
+			virtual std::shared_ptr<fUML::Semantics::Activities::ActivityFinalNodeActivation> getThisActivityFinalNodeActivationPtr() const;
+			virtual void setThisActivityFinalNodeActivationPtr(std::weak_ptr<fUML::Semantics::Activities::ActivityFinalNodeActivation> thisActivityFinalNodeActivationPtr);
 
 			//Additional constructors for the containments back reference
 			ActivityFinalNodeActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_group);
@@ -90,7 +90,7 @@ namespace fUML::Semantics::Activities
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<ActivityFinalNodeActivation> m_thisActivityFinalNodeActivationPtr;
+			std::weak_ptr<fUML::Semantics::Activities::ActivityFinalNodeActivation> m_thisActivityFinalNodeActivationPtr;
 	};
 }
 #endif /* end of include guard: FUML_SEMANTICS_ACTIVITIES_ACTIVITYFINALNODEACTIVATIONACTIVITYFINALNODEACTIVATIONIMPL_HPP */

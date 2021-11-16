@@ -31,8 +31,8 @@ namespace uml
 		protected:
 			friend class umlFactoryImpl;
 			ProfileImpl();
-			virtual std::shared_ptr<Profile> getThisProfilePtr() const;
-			virtual void setThisProfilePtr(std::weak_ptr<Profile> thisProfilePtr);
+			virtual std::shared_ptr<uml::Profile> getThisProfilePtr() const;
+			virtual void setThisProfilePtr(std::weak_ptr<uml::Profile> thisProfilePtr);
 
 			//Additional constructors for the containments back reference
 			ProfileImpl(std::weak_ptr<uml::Namespace> par_namespace);
@@ -202,7 +202,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<Profile> m_thisProfilePtr;
+			std::weak_ptr<uml::Profile> m_thisProfilePtr;
 	};
 }
 #endif /* end of include guard: UML_PROFILEPROFILEIMPL_HPP */

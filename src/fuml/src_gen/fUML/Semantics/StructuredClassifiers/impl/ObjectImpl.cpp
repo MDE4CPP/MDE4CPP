@@ -41,9 +41,9 @@
 
 #include <exception> // used in Persistence
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
-#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
 #include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
+#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
 
 #include "uml/Class.hpp"
 #include "uml/Classifier.hpp"
@@ -203,7 +203,8 @@ std::shared_ptr<fUML::Semantics::Values::Value> ObjectImpl::new_()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	return fUML::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createObject();
+	// Create a new object with no type, feature values or locus.
+return fUML::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createObject();
 	//end of body
 }
 
@@ -647,11 +648,11 @@ Any ObjectImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared
 }
 
 
-std::shared_ptr<Object> ObjectImpl::getThisObjectPtr() const
+std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> ObjectImpl::getThisObjectPtr() const
 {
 	return m_thisObjectPtr.lock();
 }
-void ObjectImpl::setThisObjectPtr(std::weak_ptr<Object> thisObjectPtr)
+void ObjectImpl::setThisObjectPtr(std::weak_ptr<fUML::Semantics::StructuredClassifiers::Object> thisObjectPtr)
 {
 	m_thisObjectPtr = thisObjectPtr;
 	setThisExtensionalValuePtr(thisObjectPtr);

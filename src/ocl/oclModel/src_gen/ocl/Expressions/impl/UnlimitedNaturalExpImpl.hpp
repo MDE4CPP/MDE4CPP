@@ -32,8 +32,8 @@ namespace ocl::Expressions
 		protected:
 			friend class ocl::Expressions::ExpressionsFactoryImpl;
 			UnlimitedNaturalExpImpl();
-			virtual std::shared_ptr<UnlimitedNaturalExp> getThisUnlimitedNaturalExpPtr() const;
-			virtual void setThisUnlimitedNaturalExpPtr(std::weak_ptr<UnlimitedNaturalExp> thisUnlimitedNaturalExpPtr);
+			virtual std::shared_ptr<ocl::Expressions::UnlimitedNaturalExp> getThisUnlimitedNaturalExpPtr() const;
+			virtual void setThisUnlimitedNaturalExpPtr(std::weak_ptr<ocl::Expressions::UnlimitedNaturalExp> thisUnlimitedNaturalExpPtr);
 
 			//Additional constructors for the containments back reference
 			UnlimitedNaturalExpImpl(std::weak_ptr<ocl::Expressions::CallExp> par_appliedElement);
@@ -108,7 +108,7 @@ namespace ocl::Expressions
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<UnlimitedNaturalExp> m_thisUnlimitedNaturalExpPtr;
+			std::weak_ptr<ocl::Expressions::UnlimitedNaturalExp> m_thisUnlimitedNaturalExpPtr;
 	};
 }
 #endif /* end of include guard: OCL_EXPRESSIONS_UNLIMITEDNATURALEXPUNLIMITEDNATURALEXPIMPL_HPP */

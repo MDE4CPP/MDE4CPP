@@ -839,11 +839,11 @@ Any DecisionNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::li
 }
 
 
-std::shared_ptr<DecisionNodeActivation> DecisionNodeActivationImpl::getThisDecisionNodeActivationPtr() const
+std::shared_ptr<fUML::Semantics::Activities::DecisionNodeActivation> DecisionNodeActivationImpl::getThisDecisionNodeActivationPtr() const
 {
 	return m_thisDecisionNodeActivationPtr.lock();
 }
-void DecisionNodeActivationImpl::setThisDecisionNodeActivationPtr(std::weak_ptr<DecisionNodeActivation> thisDecisionNodeActivationPtr)
+void DecisionNodeActivationImpl::setThisDecisionNodeActivationPtr(std::weak_ptr<fUML::Semantics::Activities::DecisionNodeActivation> thisDecisionNodeActivationPtr)
 {
 	m_thisDecisionNodeActivationPtr = thisDecisionNodeActivationPtr;
 	setThisControlNodeActivationPtr(thisDecisionNodeActivationPtr);

@@ -329,11 +329,11 @@ Any StartClassifierBehaviorActionActivationImpl::eInvoke(int operationID, std::s
 }
 
 
-std::shared_ptr<StartClassifierBehaviorActionActivation> StartClassifierBehaviorActionActivationImpl::getThisStartClassifierBehaviorActionActivationPtr() const
+std::shared_ptr<fUML::Semantics::Actions::StartClassifierBehaviorActionActivation> StartClassifierBehaviorActionActivationImpl::getThisStartClassifierBehaviorActionActivationPtr() const
 {
 	return m_thisStartClassifierBehaviorActionActivationPtr.lock();
 }
-void StartClassifierBehaviorActionActivationImpl::setThisStartClassifierBehaviorActionActivationPtr(std::weak_ptr<StartClassifierBehaviorActionActivation> thisStartClassifierBehaviorActionActivationPtr)
+void StartClassifierBehaviorActionActivationImpl::setThisStartClassifierBehaviorActionActivationPtr(std::weak_ptr<fUML::Semantics::Actions::StartClassifierBehaviorActionActivation> thisStartClassifierBehaviorActionActivationPtr)
 {
 	m_thisStartClassifierBehaviorActionActivationPtr = thisStartClassifierBehaviorActionActivationPtr;
 	setThisActionActivationPtr(thisStartClassifierBehaviorActionActivationPtr);

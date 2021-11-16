@@ -551,11 +551,11 @@ Any DestroyObjectActionActivationImpl::eInvoke(int operationID, std::shared_ptr<
 }
 
 
-std::shared_ptr<DestroyObjectActionActivation> DestroyObjectActionActivationImpl::getThisDestroyObjectActionActivationPtr() const
+std::shared_ptr<fUML::Semantics::Actions::DestroyObjectActionActivation> DestroyObjectActionActivationImpl::getThisDestroyObjectActionActivationPtr() const
 {
 	return m_thisDestroyObjectActionActivationPtr.lock();
 }
-void DestroyObjectActionActivationImpl::setThisDestroyObjectActionActivationPtr(std::weak_ptr<DestroyObjectActionActivation> thisDestroyObjectActionActivationPtr)
+void DestroyObjectActionActivationImpl::setThisDestroyObjectActionActivationPtr(std::weak_ptr<fUML::Semantics::Actions::DestroyObjectActionActivation> thisDestroyObjectActionActivationPtr)
 {
 	m_thisDestroyObjectActionActivationPtr = thisDestroyObjectActionActivationPtr;
 	setThisActionActivationPtr(thisDestroyObjectActionActivationPtr);

@@ -396,11 +396,11 @@ Any BehaviorExecutionSpecificationImpl::eInvoke(int operationID, std::shared_ptr
 }
 
 
-std::shared_ptr<BehaviorExecutionSpecification> BehaviorExecutionSpecificationImpl::getThisBehaviorExecutionSpecificationPtr() const
+std::shared_ptr<uml::BehaviorExecutionSpecification> BehaviorExecutionSpecificationImpl::getThisBehaviorExecutionSpecificationPtr() const
 {
 	return m_thisBehaviorExecutionSpecificationPtr.lock();
 }
-void BehaviorExecutionSpecificationImpl::setThisBehaviorExecutionSpecificationPtr(std::weak_ptr<BehaviorExecutionSpecification> thisBehaviorExecutionSpecificationPtr)
+void BehaviorExecutionSpecificationImpl::setThisBehaviorExecutionSpecificationPtr(std::weak_ptr<uml::BehaviorExecutionSpecification> thisBehaviorExecutionSpecificationPtr)
 {
 	m_thisBehaviorExecutionSpecificationPtr = thisBehaviorExecutionSpecificationPtr;
 	setThisExecutionSpecificationPtr(thisBehaviorExecutionSpecificationPtr);

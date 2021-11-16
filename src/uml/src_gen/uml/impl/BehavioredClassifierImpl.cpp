@@ -242,14 +242,6 @@ BehavioredClassifierImpl& BehavioredClassifierImpl::operator=(const BehavioredCl
 	return *this;
 }
 
-std::shared_ptr<ecore::EObject> BehavioredClassifierImpl::copy() const
-{
-	std::shared_ptr<BehavioredClassifierImpl> element(new BehavioredClassifierImpl());
-	*element =(*this);
-	element->setThisBehavioredClassifierPtr(element);
-	return element;
-}
-
 //*********************************
 // Operations
 //*********************************
@@ -822,11 +814,11 @@ Any BehavioredClassifierImpl::eInvoke(int operationID, std::shared_ptr<std::list
 }
 
 
-std::shared_ptr<BehavioredClassifier> BehavioredClassifierImpl::getThisBehavioredClassifierPtr() const
+std::shared_ptr<uml::BehavioredClassifier> BehavioredClassifierImpl::getThisBehavioredClassifierPtr() const
 {
 	return m_thisBehavioredClassifierPtr.lock();
 }
-void BehavioredClassifierImpl::setThisBehavioredClassifierPtr(std::weak_ptr<BehavioredClassifier> thisBehavioredClassifierPtr)
+void BehavioredClassifierImpl::setThisBehavioredClassifierPtr(std::weak_ptr<uml::BehavioredClassifier> thisBehavioredClassifierPtr)
 {
 	m_thisBehavioredClassifierPtr = thisBehavioredClassifierPtr;
 	setThisClassifierPtr(thisBehavioredClassifierPtr);

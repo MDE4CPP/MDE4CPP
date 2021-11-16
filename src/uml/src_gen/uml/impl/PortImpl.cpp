@@ -950,11 +950,11 @@ Any PortImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_p
 }
 
 
-std::shared_ptr<Port> PortImpl::getThisPortPtr() const
+std::shared_ptr<uml::Port> PortImpl::getThisPortPtr() const
 {
 	return m_thisPortPtr.lock();
 }
-void PortImpl::setThisPortPtr(std::weak_ptr<Port> thisPortPtr)
+void PortImpl::setThisPortPtr(std::weak_ptr<uml::Port> thisPortPtr)
 {
 	m_thisPortPtr = thisPortPtr;
 	setThisPropertyPtr(thisPortPtr);

@@ -289,11 +289,11 @@ Any CS_DefaultRequestPropagationStrategyImpl::eInvoke(int operationID, std::shar
 }
 
 
-std::shared_ptr<CS_DefaultRequestPropagationStrategy> CS_DefaultRequestPropagationStrategyImpl::getThisCS_DefaultRequestPropagationStrategyPtr() const
+std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_DefaultRequestPropagationStrategy> CS_DefaultRequestPropagationStrategyImpl::getThisCS_DefaultRequestPropagationStrategyPtr() const
 {
 	return m_thisCS_DefaultRequestPropagationStrategyPtr.lock();
 }
-void CS_DefaultRequestPropagationStrategyImpl::setThisCS_DefaultRequestPropagationStrategyPtr(std::weak_ptr<CS_DefaultRequestPropagationStrategy> thisCS_DefaultRequestPropagationStrategyPtr)
+void CS_DefaultRequestPropagationStrategyImpl::setThisCS_DefaultRequestPropagationStrategyPtr(std::weak_ptr<PSCS::Semantics::StructuredClassifiers::CS_DefaultRequestPropagationStrategy> thisCS_DefaultRequestPropagationStrategyPtr)
 {
 	m_thisCS_DefaultRequestPropagationStrategyPtr = thisCS_DefaultRequestPropagationStrategyPtr;
 	setThisCS_RequestPropagationStrategyPtr(thisCS_DefaultRequestPropagationStrategyPtr);

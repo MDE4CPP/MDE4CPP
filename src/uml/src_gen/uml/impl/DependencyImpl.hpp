@@ -32,8 +32,8 @@ namespace uml
 		protected:
 			friend class umlFactoryImpl;
 			DependencyImpl();
-			virtual std::shared_ptr<Dependency> getThisDependencyPtr() const;
-			virtual void setThisDependencyPtr(std::weak_ptr<Dependency> thisDependencyPtr);
+			virtual std::shared_ptr<uml::Dependency> getThisDependencyPtr() const;
+			virtual void setThisDependencyPtr(std::weak_ptr<uml::Dependency> thisDependencyPtr);
 
 			//Additional constructors for the containments back reference
 			DependencyImpl(std::weak_ptr<uml::Namespace> par_namespace);
@@ -144,7 +144,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<Dependency> m_thisDependencyPtr;
+			std::weak_ptr<uml::Dependency> m_thisDependencyPtr;
 	};
 }
 #endif /* end of include guard: UML_DEPENDENCYDEPENDENCYIMPL_HPP */

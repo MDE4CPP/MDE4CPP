@@ -32,8 +32,8 @@ namespace fUML::Semantics::Actions
 		protected:
 			friend class fUML::Semantics::Actions::ActionsFactoryImpl;
 			OutputPinActivationImpl();
-			virtual std::shared_ptr<OutputPinActivation> getThisOutputPinActivationPtr() const;
-			virtual void setThisOutputPinActivationPtr(std::weak_ptr<OutputPinActivation> thisOutputPinActivationPtr);
+			virtual std::shared_ptr<fUML::Semantics::Actions::OutputPinActivation> getThisOutputPinActivationPtr() const;
+			virtual void setThisOutputPinActivationPtr(std::weak_ptr<fUML::Semantics::Actions::OutputPinActivation> thisOutputPinActivationPtr);
 
 			//Additional constructors for the containments back reference
 			OutputPinActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_group);
@@ -89,7 +89,7 @@ namespace fUML::Semantics::Actions
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<OutputPinActivation> m_thisOutputPinActivationPtr;
+			std::weak_ptr<fUML::Semantics::Actions::OutputPinActivation> m_thisOutputPinActivationPtr;
 	};
 }
 #endif /* end of include guard: FUML_SEMANTICS_ACTIONS_OUTPUTPINACTIVATIONOUTPUTPINACTIVATIONIMPL_HPP */

@@ -172,14 +172,6 @@ InteractionFragmentImpl& InteractionFragmentImpl::operator=(const InteractionFra
 	return *this;
 }
 
-std::shared_ptr<ecore::EObject> InteractionFragmentImpl::copy() const
-{
-	std::shared_ptr<InteractionFragmentImpl> element(new InteractionFragmentImpl());
-	*element =(*this);
-	element->setThisInteractionFragmentPtr(element);
-	return element;
-}
-
 //*********************************
 // Operations
 //*********************************
@@ -640,11 +632,11 @@ Any InteractionFragmentImpl::eInvoke(int operationID, std::shared_ptr<std::list 
 }
 
 
-std::shared_ptr<InteractionFragment> InteractionFragmentImpl::getThisInteractionFragmentPtr() const
+std::shared_ptr<uml::InteractionFragment> InteractionFragmentImpl::getThisInteractionFragmentPtr() const
 {
 	return m_thisInteractionFragmentPtr.lock();
 }
-void InteractionFragmentImpl::setThisInteractionFragmentPtr(std::weak_ptr<InteractionFragment> thisInteractionFragmentPtr)
+void InteractionFragmentImpl::setThisInteractionFragmentPtr(std::weak_ptr<uml::InteractionFragment> thisInteractionFragmentPtr)
 {
 	m_thisInteractionFragmentPtr = thisInteractionFragmentPtr;
 	setThisNamedElementPtr(thisInteractionFragmentPtr);

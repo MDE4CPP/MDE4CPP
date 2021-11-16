@@ -32,8 +32,8 @@ namespace PSCS::Semantics::StructuredClassifiers
 		protected:
 			friend class PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactoryImpl;
 			CS_ObjectImpl();
-			virtual std::shared_ptr<CS_Object> getThisCS_ObjectPtr() const;
-			virtual void setThisCS_ObjectPtr(std::weak_ptr<CS_Object> thisCS_ObjectPtr);
+			virtual std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Object> getThisCS_ObjectPtr() const;
+			virtual void setThisCS_ObjectPtr(std::weak_ptr<PSCS::Semantics::StructuredClassifiers::CS_Object> thisCS_ObjectPtr);
 
 
 		public:
@@ -110,7 +110,7 @@ namespace PSCS::Semantics::StructuredClassifiers
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<CS_Object> m_thisCS_ObjectPtr;
+			std::weak_ptr<PSCS::Semantics::StructuredClassifiers::CS_Object> m_thisCS_ObjectPtr;
 	};
 }
 #endif /* end of include guard: PSCS_SEMANTICS_STRUCTUREDCLASSIFIERS_CS_OBJECTCS_OBJECTIMPL_HPP */

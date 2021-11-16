@@ -255,7 +255,7 @@ namespace uml
 			<p>From package UML::StateMachines.</p>
 			*/
 			
-			uml::PseudostateKind m_kind= PseudostateKind::INITIAL;
+			uml::PseudostateKind m_kind= uml::PseudostateKind::INITIAL;
 			
 			//*********************************
 			// Reference Members

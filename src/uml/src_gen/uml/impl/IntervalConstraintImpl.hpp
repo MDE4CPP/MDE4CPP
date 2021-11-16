@@ -31,8 +31,8 @@ namespace uml
 		protected:
 			friend class umlFactoryImpl;
 			IntervalConstraintImpl();
-			virtual std::shared_ptr<IntervalConstraint> getThisIntervalConstraintPtr() const;
-			virtual void setThisIntervalConstraintPtr(std::weak_ptr<IntervalConstraint> thisIntervalConstraintPtr);
+			virtual std::shared_ptr<uml::IntervalConstraint> getThisIntervalConstraintPtr() const;
+			virtual void setThisIntervalConstraintPtr(std::weak_ptr<uml::IntervalConstraint> thisIntervalConstraintPtr);
 
 			//Additional constructors for the containments back reference
 			IntervalConstraintImpl(std::weak_ptr<uml::Namespace> par_Namespace, const int reference_id);
@@ -114,7 +114,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<IntervalConstraint> m_thisIntervalConstraintPtr;
+			std::weak_ptr<uml::IntervalConstraint> m_thisIntervalConstraintPtr;
 	};
 }
 #endif /* end of include guard: UML_INTERVALCONSTRAINTINTERVALCONSTRAINTIMPL_HPP */

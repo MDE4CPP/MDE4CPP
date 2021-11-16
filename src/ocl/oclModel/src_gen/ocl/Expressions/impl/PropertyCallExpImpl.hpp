@@ -32,8 +32,8 @@ namespace ocl::Expressions
 		protected:
 			friend class ocl::Expressions::ExpressionsFactoryImpl;
 			PropertyCallExpImpl();
-			virtual std::shared_ptr<PropertyCallExp> getThisPropertyCallExpPtr() const;
-			virtual void setThisPropertyCallExpPtr(std::weak_ptr<PropertyCallExp> thisPropertyCallExpPtr);
+			virtual std::shared_ptr<ocl::Expressions::PropertyCallExp> getThisPropertyCallExpPtr() const;
+			virtual void setThisPropertyCallExpPtr(std::weak_ptr<ocl::Expressions::PropertyCallExp> thisPropertyCallExpPtr);
 
 			//Additional constructors for the containments back reference
 			PropertyCallExpImpl(std::weak_ptr<ocl::Expressions::CallExp> par_appliedElement);
@@ -108,7 +108,7 @@ namespace ocl::Expressions
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<PropertyCallExp> m_thisPropertyCallExpPtr;
+			std::weak_ptr<ocl::Expressions::PropertyCallExp> m_thisPropertyCallExpPtr;
 	};
 }
 #endif /* end of include guard: OCL_EXPRESSIONS_PROPERTYCALLEXPPROPERTYCALLEXPIMPL_HPP */

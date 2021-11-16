@@ -32,8 +32,8 @@ namespace PSCS::Semantics::CommonBehavior
 		protected:
 			friend class PSCS::Semantics::CommonBehavior::CommonBehaviorFactoryImpl;
 			CS_EventOccurrenceImpl();
-			virtual std::shared_ptr<CS_EventOccurrence> getThisCS_EventOccurrencePtr() const;
-			virtual void setThisCS_EventOccurrencePtr(std::weak_ptr<CS_EventOccurrence> thisCS_EventOccurrencePtr);
+			virtual std::shared_ptr<PSCS::Semantics::CommonBehavior::CS_EventOccurrence> getThisCS_EventOccurrencePtr() const;
+			virtual void setThisCS_EventOccurrencePtr(std::weak_ptr<PSCS::Semantics::CommonBehavior::CS_EventOccurrence> thisCS_EventOccurrencePtr);
 
 
 		public:
@@ -100,7 +100,7 @@ namespace PSCS::Semantics::CommonBehavior
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<CS_EventOccurrence> m_thisCS_EventOccurrencePtr;
+			std::weak_ptr<PSCS::Semantics::CommonBehavior::CS_EventOccurrence> m_thisCS_EventOccurrencePtr;
 	};
 }
 #endif /* end of include guard: PSCS_SEMANTICS_COMMONBEHAVIOR_CS_EVENTOCCURRENCECS_EVENTOCCURRENCEIMPL_HPP */

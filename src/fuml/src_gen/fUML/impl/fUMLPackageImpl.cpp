@@ -4,16 +4,16 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
-#include "ecore/EAnnotation.hpp"
-#include "ecore/EPackage.hpp"
-#include "ecore/EReference.hpp"
-#include "ecore/EClass.hpp"
-#include "ecore/EDataType.hpp"
-#include "ecore/EGenericType.hpp"
-#include "ecore/EAttribute.hpp"
-#include "ecore/EParameter.hpp"
-#include "ecore/EOperation.hpp"
 #include "ecore/EStringToStringMapEntry.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
+#include "ecore/EGenericType.hpp"
+#include "ecore/EPackage.hpp"
+#include "ecore/EOperation.hpp"
+#include "ecore/EClass.hpp"
+#include "ecore/EParameter.hpp"
+#include "ecore/EDataType.hpp"
 
 //metamodel factory
 #include "fUML/fUMLFactory.hpp"
@@ -58,9 +58,9 @@ void fUMLPackageImpl::init(std::shared_ptr<ecore::EPackage> package)
     initializePackageContents();   
 }
 
-std::shared_ptr<Semantics::SemanticsPackage> fUMLPackageImpl::getSemantics_Package() const
+std::shared_ptr<fUML::Semantics::SemanticsPackage> fUML::fUMLPackageImpl::getSemantics_Package() const
 {
-	return Semantics::SemanticsPackage::eInstance();
+	return fUML::Semantics::SemanticsPackage::eInstance();
 } 
 
 

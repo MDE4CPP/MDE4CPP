@@ -31,8 +31,8 @@ namespace ecore
 		protected:
 			friend class ecoreFactoryImpl;
 			EFactoryImpl();
-			virtual std::shared_ptr<EFactory> getThisEFactoryPtr() const;
-			virtual void setThisEFactoryPtr(std::weak_ptr<EFactory> thisEFactoryPtr);
+			virtual std::shared_ptr<ecore::EFactory> getThisEFactoryPtr() const;
+			virtual void setThisEFactoryPtr(std::weak_ptr<ecore::EFactory> thisEFactoryPtr);
 
 			//Additional constructors for the containments back reference
 			EFactoryImpl(std::weak_ptr<ecore::EObject> par_eContainer);
@@ -94,7 +94,7 @@ namespace ecore
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<EFactory> m_thisEFactoryPtr;
+			std::weak_ptr<ecore::EFactory> m_thisEFactoryPtr;
 	};
 }
 #endif /* end of include guard: ECORE_EFACTORYEFACTORYIMPL_HPP */

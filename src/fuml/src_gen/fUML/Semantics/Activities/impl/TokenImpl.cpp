@@ -112,14 +112,6 @@ TokenImpl& TokenImpl::operator=(const TokenImpl & obj)
 	return *this;
 }
 
-std::shared_ptr<ecore::EObject> TokenImpl::copy() const
-{
-	std::shared_ptr<TokenImpl> element(new TokenImpl());
-	*element =(*this);
-	element->setThisTokenPtr(element);
-	return element;
-}
-
 //*********************************
 // Operations
 //*********************************
@@ -467,11 +459,11 @@ Any TokenImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_
 }
 
 
-std::shared_ptr<Token> TokenImpl::getThisTokenPtr() const
+std::shared_ptr<fUML::Semantics::Activities::Token> TokenImpl::getThisTokenPtr() const
 {
 	return m_thisTokenPtr.lock();
 }
-void TokenImpl::setThisTokenPtr(std::weak_ptr<Token> thisTokenPtr)
+void TokenImpl::setThisTokenPtr(std::weak_ptr<fUML::Semantics::Activities::Token> thisTokenPtr)
 {
 	m_thisTokenPtr = thisTokenPtr;
 }

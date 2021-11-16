@@ -31,8 +31,8 @@ namespace uml
 		protected:
 			friend class umlFactoryImpl;
 			LiteralStringImpl();
-			virtual std::shared_ptr<LiteralString> getThisLiteralStringPtr() const;
-			virtual void setThisLiteralStringPtr(std::weak_ptr<LiteralString> thisLiteralStringPtr);
+			virtual std::shared_ptr<uml::LiteralString> getThisLiteralStringPtr() const;
+			virtual void setThisLiteralStringPtr(std::weak_ptr<uml::LiteralString> thisLiteralStringPtr);
 
 			//Additional constructors for the containments back reference
 			LiteralStringImpl(std::weak_ptr<uml::Namespace> par_namespace);
@@ -143,7 +143,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<LiteralString> m_thisLiteralStringPtr;
+			std::weak_ptr<uml::LiteralString> m_thisLiteralStringPtr;
 	};
 }
 #endif /* end of include guard: UML_LITERALSTRINGLITERALSTRINGIMPL_HPP */

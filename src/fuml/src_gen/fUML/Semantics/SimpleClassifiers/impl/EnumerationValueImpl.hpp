@@ -32,8 +32,8 @@ namespace fUML::Semantics::SimpleClassifiers
 		protected:
 			friend class fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactoryImpl;
 			EnumerationValueImpl();
-			virtual std::shared_ptr<EnumerationValue> getThisEnumerationValuePtr() const;
-			virtual void setThisEnumerationValuePtr(std::weak_ptr<EnumerationValue> thisEnumerationValuePtr);
+			virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::EnumerationValue> getThisEnumerationValuePtr() const;
+			virtual void setThisEnumerationValuePtr(std::weak_ptr<fUML::Semantics::SimpleClassifiers::EnumerationValue> thisEnumerationValuePtr);
 
 
 		public:
@@ -97,7 +97,7 @@ namespace fUML::Semantics::SimpleClassifiers
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<EnumerationValue> m_thisEnumerationValuePtr;
+			std::weak_ptr<fUML::Semantics::SimpleClassifiers::EnumerationValue> m_thisEnumerationValuePtr;
 	};
 }
 #endif /* end of include guard: FUML_SEMANTICS_SIMPLECLASSIFIERS_ENUMERATIONVALUEENUMERATIONVALUEIMPL_HPP */

@@ -32,8 +32,8 @@ namespace fUML::Semantics::StructuredClassifiers
 		protected:
 			friend class fUML::Semantics::StructuredClassifiers::StructuredClassifiersFactoryImpl;
 			DispatchStrategyImpl();
-			virtual std::shared_ptr<DispatchStrategy> getThisDispatchStrategyPtr() const;
-			virtual void setThisDispatchStrategyPtr(std::weak_ptr<DispatchStrategy> thisDispatchStrategyPtr);
+			virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::DispatchStrategy> getThisDispatchStrategyPtr() const;
+			virtual void setThisDispatchStrategyPtr(std::weak_ptr<fUML::Semantics::StructuredClassifiers::DispatchStrategy> thisDispatchStrategyPtr);
 
 
 		public:
@@ -90,7 +90,7 @@ namespace fUML::Semantics::StructuredClassifiers
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<DispatchStrategy> m_thisDispatchStrategyPtr;
+			std::weak_ptr<fUML::Semantics::StructuredClassifiers::DispatchStrategy> m_thisDispatchStrategyPtr;
 	};
 }
 #endif /* end of include guard: FUML_SEMANTICS_STRUCTUREDCLASSIFIERS_DISPATCHSTRATEGYDISPATCHSTRATEGYIMPL_HPP */

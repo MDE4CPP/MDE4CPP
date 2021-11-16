@@ -966,11 +966,11 @@ Any StereotypeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sh
 }
 
 
-std::shared_ptr<Stereotype> StereotypeImpl::getThisStereotypePtr() const
+std::shared_ptr<uml::Stereotype> StereotypeImpl::getThisStereotypePtr() const
 {
 	return m_thisStereotypePtr.lock();
 }
-void StereotypeImpl::setThisStereotypePtr(std::weak_ptr<Stereotype> thisStereotypePtr)
+void StereotypeImpl::setThisStereotypePtr(std::weak_ptr<uml::Stereotype> thisStereotypePtr)
 {
 	m_thisStereotypePtr = thisStereotypePtr;
 	setThisClassPtr(thisStereotypePtr);

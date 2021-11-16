@@ -262,11 +262,11 @@ Any EnumLiteralExpEvalImpl::eInvoke(int operationID, std::shared_ptr<std::list <
 }
 
 
-std::shared_ptr<EnumLiteralExpEval> EnumLiteralExpEvalImpl::getThisEnumLiteralExpEvalPtr() const
+std::shared_ptr<ocl::Evaluations::EnumLiteralExpEval> EnumLiteralExpEvalImpl::getThisEnumLiteralExpEvalPtr() const
 {
 	return m_thisEnumLiteralExpEvalPtr.lock();
 }
-void EnumLiteralExpEvalImpl::setThisEnumLiteralExpEvalPtr(std::weak_ptr<EnumLiteralExpEval> thisEnumLiteralExpEvalPtr)
+void EnumLiteralExpEvalImpl::setThisEnumLiteralExpEvalPtr(std::weak_ptr<ocl::Evaluations::EnumLiteralExpEval> thisEnumLiteralExpEvalPtr)
 {
 	m_thisEnumLiteralExpEvalPtr = thisEnumLiteralExpEvalPtr;
 	setThisLiteralExpEvalPtr(thisEnumLiteralExpEvalPtr);

@@ -32,8 +32,8 @@ namespace PSCS::Semantics::Actions
 		protected:
 			friend class PSCS::Semantics::Actions::ActionsFactoryImpl;
 			CS_CreateObjectActionActivationImpl();
-			virtual std::shared_ptr<CS_CreateObjectActionActivation> getThisCS_CreateObjectActionActivationPtr() const;
-			virtual void setThisCS_CreateObjectActionActivationPtr(std::weak_ptr<CS_CreateObjectActionActivation> thisCS_CreateObjectActionActivationPtr);
+			virtual std::shared_ptr<PSCS::Semantics::Actions::CS_CreateObjectActionActivation> getThisCS_CreateObjectActionActivationPtr() const;
+			virtual void setThisCS_CreateObjectActionActivationPtr(std::weak_ptr<PSCS::Semantics::Actions::CS_CreateObjectActionActivation> thisCS_CreateObjectActionActivationPtr);
 
 			//Additional constructors for the containments back reference
 			CS_CreateObjectActionActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_group);
@@ -91,7 +91,7 @@ namespace PSCS::Semantics::Actions
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<CS_CreateObjectActionActivation> m_thisCS_CreateObjectActionActivationPtr;
+			std::weak_ptr<PSCS::Semantics::Actions::CS_CreateObjectActionActivation> m_thisCS_CreateObjectActionActivationPtr;
 	};
 }
 #endif /* end of include guard: PSCS_SEMANTICS_ACTIONS_CS_CREATEOBJECTACTIONACTIVATIONCS_CREATEOBJECTACTIONACTIVATIONIMPL_HPP */

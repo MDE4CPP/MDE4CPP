@@ -50,9 +50,9 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "uml/umlFactory.hpp"
-#include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
+#include "fUML/Semantics/Actions/ActionsFactory.hpp"
+#include "uml/umlFactory.hpp"
 
 #include "uml/Action.hpp"
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
@@ -383,11 +383,11 @@ Any CS_SendSignalActionActivationImpl::eInvoke(int operationID, std::shared_ptr<
 }
 
 
-std::shared_ptr<CS_SendSignalActionActivation> CS_SendSignalActionActivationImpl::getThisCS_SendSignalActionActivationPtr() const
+std::shared_ptr<PSCS::Semantics::Actions::CS_SendSignalActionActivation> CS_SendSignalActionActivationImpl::getThisCS_SendSignalActionActivationPtr() const
 {
 	return m_thisCS_SendSignalActionActivationPtr.lock();
 }
-void CS_SendSignalActionActivationImpl::setThisCS_SendSignalActionActivationPtr(std::weak_ptr<CS_SendSignalActionActivation> thisCS_SendSignalActionActivationPtr)
+void CS_SendSignalActionActivationImpl::setThisCS_SendSignalActionActivationPtr(std::weak_ptr<PSCS::Semantics::Actions::CS_SendSignalActionActivation> thisCS_SendSignalActionActivationPtr)
 {
 	m_thisCS_SendSignalActionActivationPtr = thisCS_SendSignalActionActivationPtr;
 	setThisSendSignalActionActivationPtr(thisCS_SendSignalActionActivationPtr);

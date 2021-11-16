@@ -303,11 +303,11 @@ Any EParameterImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sh
 }
 
 
-std::shared_ptr<EParameter> EParameterImpl::getThisEParameterPtr() const
+std::shared_ptr<ecore::EParameter> EParameterImpl::getThisEParameterPtr() const
 {
 	return m_thisEParameterPtr.lock();
 }
-void EParameterImpl::setThisEParameterPtr(std::weak_ptr<EParameter> thisEParameterPtr)
+void EParameterImpl::setThisEParameterPtr(std::weak_ptr<ecore::EParameter> thisEParameterPtr)
 {
 	m_thisEParameterPtr = thisEParameterPtr;
 	setThisETypedElementPtr(thisEParameterPtr);

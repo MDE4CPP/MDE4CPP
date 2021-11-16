@@ -25,21 +25,21 @@ namespace uml
 	{
 		public: 
 			DirectedRelationshipImpl(const DirectedRelationshipImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 			DirectedRelationshipImpl& operator=(DirectedRelationshipImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;
 			DirectedRelationshipImpl();
-			virtual std::shared_ptr<DirectedRelationship> getThisDirectedRelationshipPtr() const;
-			virtual void setThisDirectedRelationshipPtr(std::weak_ptr<DirectedRelationship> thisDirectedRelationshipPtr);
+			virtual std::shared_ptr<uml::DirectedRelationship> getThisDirectedRelationshipPtr() const;
+			virtual void setThisDirectedRelationshipPtr(std::weak_ptr<uml::DirectedRelationship> thisDirectedRelationshipPtr);
 
 			//Additional constructors for the containments back reference
 			DirectedRelationshipImpl(std::weak_ptr<uml::Element> par_owner);
 
 		public:
 			//destructor
-			virtual ~DirectedRelationshipImpl();
+			virtual ~DirectedRelationshipImpl() = 0;
 			
 			//*********************************
 			// Operations
@@ -114,7 +114,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<DirectedRelationship> m_thisDirectedRelationshipPtr;
+			std::weak_ptr<uml::DirectedRelationship> m_thisDirectedRelationshipPtr;
 	};
 }
 #endif /* end of include guard: UML_DIRECTEDRELATIONSHIPDIRECTEDRELATIONSHIPIMPL_HPP */

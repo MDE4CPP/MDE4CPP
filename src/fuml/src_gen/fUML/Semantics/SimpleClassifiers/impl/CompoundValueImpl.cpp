@@ -131,14 +131,6 @@ CompoundValueImpl& CompoundValueImpl::operator=(const CompoundValueImpl & obj)
 	return *this;
 }
 
-std::shared_ptr<ecore::EObject> CompoundValueImpl::copy() const
-{
-	std::shared_ptr<CompoundValueImpl> element(new CompoundValueImpl());
-	*element =(*this);
-	element->setThisCompoundValuePtr(element);
-	return element;
-}
-
 //*********************************
 // Operations
 //*********************************
@@ -148,7 +140,8 @@ std::shared_ptr<fUML::Semantics::Values::Value> CompoundValueImpl::_copy()
 	//generated from body annotation
 	// Create a new data value with the same featureValues as this data value.
 
-std::shared_ptr<fUML::Semantics::SimpleClassifiers::CompoundValue> newValue(new fUML::Semantics::SimpleClassifiers::CompoundValueImpl());
+std::shared_ptr<fUML::Semantics::SimpleClassifiers::CompoundValue> newValue = 
+	std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::CompoundValue>(fUML::Semantics::Values::ValueImpl::_copy());
 
 std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>> featureValues = this->retrieveFeatureValues();
 unsigned int featureValuesSize = featureValues->size();
@@ -156,7 +149,7 @@ unsigned int featureValuesSize = featureValues->size();
 for(unsigned int i = 0; i < featureValuesSize; i++)
 {
 	std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> featureValue = featureValues->at(i);
-	newValue->getFeatureValues()->add(featureValue);
+	newValue->getFeatureValues()->add(featureValue->_copy());
 }
 
 return newValue;
@@ -604,11 +597,11 @@ Any CompoundValueImpl::eInvoke(int operationID, std::shared_ptr<std::list < std:
 }
 
 
-std::shared_ptr<CompoundValue> CompoundValueImpl::getThisCompoundValuePtr() const
+std::shared_ptr<fUML::Semantics::SimpleClassifiers::CompoundValue> CompoundValueImpl::getThisCompoundValuePtr() const
 {
 	return m_thisCompoundValuePtr.lock();
 }
-void CompoundValueImpl::setThisCompoundValuePtr(std::weak_ptr<CompoundValue> thisCompoundValuePtr)
+void CompoundValueImpl::setThisCompoundValuePtr(std::weak_ptr<fUML::Semantics::SimpleClassifiers::CompoundValue> thisCompoundValuePtr)
 {
 	m_thisCompoundValuePtr = thisCompoundValuePtr;
 	setThisStructuredValuePtr(thisCompoundValuePtr);

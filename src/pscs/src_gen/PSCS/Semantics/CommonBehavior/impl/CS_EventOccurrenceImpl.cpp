@@ -34,10 +34,10 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "PSCS/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
-#include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
-#include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
 #include "uml/umlFactory.hpp"
+#include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
+#include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
+#include "PSCS/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
 
 #include "PSCS/Semantics/StructuredClassifiers/CS_InteractionPoint.hpp"
 #include "PSCS/Semantics/StructuredClassifiers/CS_Reference.hpp"
@@ -595,11 +595,11 @@ Any CS_EventOccurrenceImpl::eInvoke(int operationID, std::shared_ptr<std::list <
 }
 
 
-std::shared_ptr<CS_EventOccurrence> CS_EventOccurrenceImpl::getThisCS_EventOccurrencePtr() const
+std::shared_ptr<PSCS::Semantics::CommonBehavior::CS_EventOccurrence> CS_EventOccurrenceImpl::getThisCS_EventOccurrencePtr() const
 {
 	return m_thisCS_EventOccurrencePtr.lock();
 }
-void CS_EventOccurrenceImpl::setThisCS_EventOccurrencePtr(std::weak_ptr<CS_EventOccurrence> thisCS_EventOccurrencePtr)
+void CS_EventOccurrenceImpl::setThisCS_EventOccurrencePtr(std::weak_ptr<PSCS::Semantics::CommonBehavior::CS_EventOccurrence> thisCS_EventOccurrencePtr)
 {
 	m_thisCS_EventOccurrencePtr = thisCS_EventOccurrencePtr;
 	setThisEventOccurrencePtr(thisCS_EventOccurrencePtr);

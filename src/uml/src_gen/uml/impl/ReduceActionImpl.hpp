@@ -31,8 +31,8 @@ namespace uml
 		protected:
 			friend class umlFactoryImpl;
 			ReduceActionImpl();
-			virtual std::shared_ptr<ReduceAction> getThisReduceActionPtr() const;
-			virtual void setThisReduceActionPtr(std::weak_ptr<ReduceAction> thisReduceActionPtr);
+			virtual std::shared_ptr<uml::ReduceAction> getThisReduceActionPtr() const;
+			virtual void setThisReduceActionPtr(std::weak_ptr<uml::ReduceAction> thisReduceActionPtr);
 
 			//Additional constructors for the containments back reference
 			ReduceActionImpl(std::weak_ptr<uml::Activity> par_activity);
@@ -201,7 +201,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<ReduceAction> m_thisReduceActionPtr;
+			std::weak_ptr<uml::ReduceAction> m_thisReduceActionPtr;
 	};
 }
 #endif /* end of include guard: UML_REDUCEACTIONREDUCEACTIONIMPL_HPP */

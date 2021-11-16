@@ -48,11 +48,11 @@
 
 #include <exception> // used in Persistence
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
-#include "uml/umlFactory.hpp"
-#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
-#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
+#include "uml/umlFactory.hpp"
+#include "fUML/Semantics/Loci/LociFactory.hpp"
+#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
 
 #include "uml/Activity.hpp"
 #include "fUML/Semantics/Activities/ActivityNodeActivationGroup.hpp"
@@ -237,11 +237,8 @@ std::shared_ptr<fUML::Semantics::Values::Value> ActivityExecutionImpl::new_()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	// return fUML::Semantics::Values::ValuesFactory::eInstance()->createActivityExecution();
-
-	std::cout << __PRETTY_FUNCTION__  << std::endl;
-	throw "UnsupportedOperationException";
-	return nullptr;
+	// Create a new activity execution with empty properties.
+return fUML::Semantics::Activities::ActivitiesFactory::eInstance()->createActivityExecution();
 	//end of body
 }
 
@@ -569,11 +566,11 @@ Any ActivityExecutionImpl::eInvoke(int operationID, std::shared_ptr<std::list < 
 }
 
 
-std::shared_ptr<ActivityExecution> ActivityExecutionImpl::getThisActivityExecutionPtr() const
+std::shared_ptr<fUML::Semantics::Activities::ActivityExecution> ActivityExecutionImpl::getThisActivityExecutionPtr() const
 {
 	return m_thisActivityExecutionPtr.lock();
 }
-void ActivityExecutionImpl::setThisActivityExecutionPtr(std::weak_ptr<ActivityExecution> thisActivityExecutionPtr)
+void ActivityExecutionImpl::setThisActivityExecutionPtr(std::weak_ptr<fUML::Semantics::Activities::ActivityExecution> thisActivityExecutionPtr)
 {
 	m_thisActivityExecutionPtr = thisActivityExecutionPtr;
 	setThisExecutionPtr(thisActivityExecutionPtr);

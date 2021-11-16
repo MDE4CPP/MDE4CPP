@@ -671,7 +671,7 @@ bool ConnectorImpl::internalEIsSet(int featureID) const
 		case uml::umlPackage::CONNECTOR_ATTRIBUTE_END:
 			return getEnd() != nullptr; //5315
 		case uml::umlPackage::CONNECTOR_ATTRIBUTE_KIND:
-			return m_kind != ConnectorKind::ASSEMBLY;; //5316
+			return m_kind != uml::ConnectorKind::ASSEMBLY;; //5316
 		case uml::umlPackage::CONNECTOR_ATTRIBUTE_REDEFINEDCONNECTOR:
 			return getRedefinedConnector() != nullptr; //5317
 		case uml::umlPackage::CONNECTOR_ATTRIBUTE_STRUCTUREDCLASSIFIER:
@@ -880,11 +880,11 @@ Any ConnectorImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sha
 }
 
 
-std::shared_ptr<Connector> ConnectorImpl::getThisConnectorPtr() const
+std::shared_ptr<uml::Connector> ConnectorImpl::getThisConnectorPtr() const
 {
 	return m_thisConnectorPtr.lock();
 }
-void ConnectorImpl::setThisConnectorPtr(std::weak_ptr<Connector> thisConnectorPtr)
+void ConnectorImpl::setThisConnectorPtr(std::weak_ptr<uml::Connector> thisConnectorPtr)
 {
 	m_thisConnectorPtr = thisConnectorPtr;
 	setThisFeaturePtr(thisConnectorPtr);

@@ -522,11 +522,11 @@ Any AcceptCallActionImpl::eInvoke(int operationID, std::shared_ptr<std::list < s
 }
 
 
-std::shared_ptr<AcceptCallAction> AcceptCallActionImpl::getThisAcceptCallActionPtr() const
+std::shared_ptr<uml::AcceptCallAction> AcceptCallActionImpl::getThisAcceptCallActionPtr() const
 {
 	return m_thisAcceptCallActionPtr.lock();
 }
-void AcceptCallActionImpl::setThisAcceptCallActionPtr(std::weak_ptr<AcceptCallAction> thisAcceptCallActionPtr)
+void AcceptCallActionImpl::setThisAcceptCallActionPtr(std::weak_ptr<uml::AcceptCallAction> thisAcceptCallActionPtr)
 {
 	m_thisAcceptCallActionPtr = thisAcceptCallActionPtr;
 	setThisAcceptEventActionPtr(thisAcceptCallActionPtr);

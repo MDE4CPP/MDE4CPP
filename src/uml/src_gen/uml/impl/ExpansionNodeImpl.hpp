@@ -31,8 +31,8 @@ namespace uml
 		protected:
 			friend class umlFactoryImpl;
 			ExpansionNodeImpl();
-			virtual std::shared_ptr<ExpansionNode> getThisExpansionNodePtr() const;
-			virtual void setThisExpansionNodePtr(std::weak_ptr<ExpansionNode> thisExpansionNodePtr);
+			virtual std::shared_ptr<uml::ExpansionNode> getThisExpansionNodePtr() const;
+			virtual void setThisExpansionNodePtr(std::weak_ptr<uml::ExpansionNode> thisExpansionNodePtr);
 
 			//Additional constructors for the containments back reference
 			ExpansionNodeImpl(std::weak_ptr<uml::Activity> par_activity);
@@ -148,7 +148,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<ExpansionNode> m_thisExpansionNodePtr;
+			std::weak_ptr<uml::ExpansionNode> m_thisExpansionNodePtr;
 	};
 }
 #endif /* end of include guard: UML_EXPANSIONNODEEXPANSIONNODEIMPL_HPP */

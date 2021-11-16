@@ -32,8 +32,8 @@ namespace fUML::Semantics::Actions
 		protected:
 			friend class fUML::Semantics::Actions::ActionsFactoryImpl;
 			ReturnInformationImpl();
-			virtual std::shared_ptr<ReturnInformation> getThisReturnInformationPtr() const;
-			virtual void setThisReturnInformationPtr(std::weak_ptr<ReturnInformation> thisReturnInformationPtr);
+			virtual std::shared_ptr<fUML::Semantics::Actions::ReturnInformation> getThisReturnInformationPtr() const;
+			virtual void setThisReturnInformationPtr(std::weak_ptr<fUML::Semantics::Actions::ReturnInformation> thisReturnInformationPtr);
 
 
 		public:
@@ -97,7 +97,7 @@ namespace fUML::Semantics::Actions
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<ReturnInformation> m_thisReturnInformationPtr;
+			std::weak_ptr<fUML::Semantics::Actions::ReturnInformation> m_thisReturnInformationPtr;
 	};
 }
 #endif /* end of include guard: FUML_SEMANTICS_ACTIONS_RETURNINFORMATIONRETURNINFORMATIONIMPL_HPP */

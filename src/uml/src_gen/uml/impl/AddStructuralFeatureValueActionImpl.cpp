@@ -569,11 +569,11 @@ Any AddStructuralFeatureValueActionImpl::eInvoke(int operationID, std::shared_pt
 }
 
 
-std::shared_ptr<AddStructuralFeatureValueAction> AddStructuralFeatureValueActionImpl::getThisAddStructuralFeatureValueActionPtr() const
+std::shared_ptr<uml::AddStructuralFeatureValueAction> AddStructuralFeatureValueActionImpl::getThisAddStructuralFeatureValueActionPtr() const
 {
 	return m_thisAddStructuralFeatureValueActionPtr.lock();
 }
-void AddStructuralFeatureValueActionImpl::setThisAddStructuralFeatureValueActionPtr(std::weak_ptr<AddStructuralFeatureValueAction> thisAddStructuralFeatureValueActionPtr)
+void AddStructuralFeatureValueActionImpl::setThisAddStructuralFeatureValueActionPtr(std::weak_ptr<uml::AddStructuralFeatureValueAction> thisAddStructuralFeatureValueActionPtr)
 {
 	m_thisAddStructuralFeatureValueActionPtr = thisAddStructuralFeatureValueActionPtr;
 	setThisWriteStructuralFeatureActionPtr(thisAddStructuralFeatureValueActionPtr);

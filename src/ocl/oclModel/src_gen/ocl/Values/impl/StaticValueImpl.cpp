@@ -38,8 +38,8 @@
 
 //Factories an Package includes
 #include "ocl/oclPackage.hpp"
-#include "ocl/Values/ValuesPackage.hpp"
 #include "fUML/Semantics/Values/ValuesPackage.hpp"
+#include "ocl/Values/ValuesPackage.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -247,11 +247,11 @@ Any StaticValueImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::s
 }
 
 
-std::shared_ptr<StaticValue> StaticValueImpl::getThisStaticValuePtr() const
+std::shared_ptr<ocl::Values::StaticValue> StaticValueImpl::getThisStaticValuePtr() const
 {
 	return m_thisStaticValuePtr.lock();
 }
-void StaticValueImpl::setThisStaticValuePtr(std::weak_ptr<StaticValue> thisStaticValuePtr)
+void StaticValueImpl::setThisStaticValuePtr(std::weak_ptr<ocl::Values::StaticValue> thisStaticValuePtr)
 {
 	m_thisStaticValuePtr = thisStaticValuePtr;
 	setThisValuePtr(thisStaticValuePtr);

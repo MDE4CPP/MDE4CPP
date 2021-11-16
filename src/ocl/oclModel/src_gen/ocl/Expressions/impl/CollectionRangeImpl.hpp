@@ -32,8 +32,8 @@ namespace ocl::Expressions
 		protected:
 			friend class ocl::Expressions::ExpressionsFactoryImpl;
 			CollectionRangeImpl();
-			virtual std::shared_ptr<CollectionRange> getThisCollectionRangePtr() const;
-			virtual void setThisCollectionRangePtr(std::weak_ptr<CollectionRange> thisCollectionRangePtr);
+			virtual std::shared_ptr<ocl::Expressions::CollectionRange> getThisCollectionRangePtr() const;
+			virtual void setThisCollectionRangePtr(std::weak_ptr<ocl::Expressions::CollectionRange> thisCollectionRangePtr);
 
 
 		public:
@@ -91,7 +91,7 @@ namespace ocl::Expressions
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<CollectionRange> m_thisCollectionRangePtr;
+			std::weak_ptr<ocl::Expressions::CollectionRange> m_thisCollectionRangePtr;
 	};
 }
 #endif /* end of include guard: OCL_EXPRESSIONS_COLLECTIONRANGECOLLECTIONRANGEIMPL_HPP */

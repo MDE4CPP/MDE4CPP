@@ -32,8 +32,8 @@ namespace fUML::Semantics::Actions
 		protected:
 			friend class fUML::Semantics::Actions::ActionsFactoryImpl;
 			TestIdentityActionActivationImpl();
-			virtual std::shared_ptr<TestIdentityActionActivation> getThisTestIdentityActionActivationPtr() const;
-			virtual void setThisTestIdentityActionActivationPtr(std::weak_ptr<TestIdentityActionActivation> thisTestIdentityActionActivationPtr);
+			virtual std::shared_ptr<fUML::Semantics::Actions::TestIdentityActionActivation> getThisTestIdentityActionActivationPtr() const;
+			virtual void setThisTestIdentityActionActivationPtr(std::weak_ptr<fUML::Semantics::Actions::TestIdentityActionActivation> thisTestIdentityActionActivationPtr);
 
 			//Additional constructors for the containments back reference
 			TestIdentityActionActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_group);
@@ -90,7 +90,7 @@ namespace fUML::Semantics::Actions
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<TestIdentityActionActivation> m_thisTestIdentityActionActivationPtr;
+			std::weak_ptr<fUML::Semantics::Actions::TestIdentityActionActivation> m_thisTestIdentityActionActivationPtr;
 	};
 }
 #endif /* end of include guard: FUML_SEMANTICS_ACTIONS_TESTIDENTITYACTIONACTIVATIONTESTIDENTITYACTIONACTIVATIONIMPL_HPP */

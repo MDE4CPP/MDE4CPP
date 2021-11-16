@@ -1151,11 +1151,11 @@ Any StateMachineImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::
 }
 
 
-std::shared_ptr<StateMachine> StateMachineImpl::getThisStateMachinePtr() const
+std::shared_ptr<uml::StateMachine> StateMachineImpl::getThisStateMachinePtr() const
 {
 	return m_thisStateMachinePtr.lock();
 }
-void StateMachineImpl::setThisStateMachinePtr(std::weak_ptr<StateMachine> thisStateMachinePtr)
+void StateMachineImpl::setThisStateMachinePtr(std::weak_ptr<uml::StateMachine> thisStateMachinePtr)
 {
 	m_thisStateMachinePtr = thisStateMachinePtr;
 	setThisBehaviorPtr(thisStateMachinePtr);

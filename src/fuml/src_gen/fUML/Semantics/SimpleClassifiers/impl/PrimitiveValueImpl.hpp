@@ -26,19 +26,19 @@ namespace fUML::Semantics::SimpleClassifiers
 	{
 		public: 
 			PrimitiveValueImpl(const PrimitiveValueImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 			PrimitiveValueImpl& operator=(PrimitiveValueImpl const&); 
 
 		protected:
 			friend class fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactoryImpl;
 			PrimitiveValueImpl();
-			virtual std::shared_ptr<PrimitiveValue> getThisPrimitiveValuePtr() const;
-			virtual void setThisPrimitiveValuePtr(std::weak_ptr<PrimitiveValue> thisPrimitiveValuePtr);
+			virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::PrimitiveValue> getThisPrimitiveValuePtr() const;
+			virtual void setThisPrimitiveValuePtr(std::weak_ptr<fUML::Semantics::SimpleClassifiers::PrimitiveValue> thisPrimitiveValuePtr);
 
 
 		public:
 			//destructor
-			virtual ~PrimitiveValueImpl();
+			virtual ~PrimitiveValueImpl() = 0;
 			
 			//*********************************
 			// Operations
@@ -91,7 +91,7 @@ namespace fUML::Semantics::SimpleClassifiers
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<PrimitiveValue> m_thisPrimitiveValuePtr;
+			std::weak_ptr<fUML::Semantics::SimpleClassifiers::PrimitiveValue> m_thisPrimitiveValuePtr;
 	};
 }
 #endif /* end of include guard: FUML_SEMANTICS_SIMPLECLASSIFIERS_PRIMITIVEVALUEPRIMITIVEVALUEIMPL_HPP */

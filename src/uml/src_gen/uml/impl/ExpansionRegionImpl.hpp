@@ -31,8 +31,8 @@ namespace uml
 		protected:
 			friend class umlFactoryImpl;
 			ExpansionRegionImpl();
-			virtual std::shared_ptr<ExpansionRegion> getThisExpansionRegionPtr() const;
-			virtual void setThisExpansionRegionPtr(std::weak_ptr<ExpansionRegion> thisExpansionRegionPtr);
+			virtual std::shared_ptr<uml::ExpansionRegion> getThisExpansionRegionPtr() const;
+			virtual void setThisExpansionRegionPtr(std::weak_ptr<uml::ExpansionRegion> thisExpansionRegionPtr);
 
 			//Additional constructors for the containments back reference
 			ExpansionRegionImpl(std::weak_ptr<uml::Activity> par_Activity, const int reference_id);
@@ -181,7 +181,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<ExpansionRegion> m_thisExpansionRegionPtr;
+			std::weak_ptr<uml::ExpansionRegion> m_thisExpansionRegionPtr;
 	};
 }
 #endif /* end of include guard: UML_EXPANSIONREGIONEXPANSIONREGIONIMPL_HPP */

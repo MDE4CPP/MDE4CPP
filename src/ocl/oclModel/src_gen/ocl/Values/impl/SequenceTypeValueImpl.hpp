@@ -32,8 +32,8 @@ namespace ocl::Values
 		protected:
 			friend class ocl::Values::ValuesFactoryImpl;
 			SequenceTypeValueImpl();
-			virtual std::shared_ptr<SequenceTypeValue> getThisSequenceTypeValuePtr() const;
-			virtual void setThisSequenceTypeValuePtr(std::weak_ptr<SequenceTypeValue> thisSequenceTypeValuePtr);
+			virtual std::shared_ptr<ocl::Values::SequenceTypeValue> getThisSequenceTypeValuePtr() const;
+			virtual void setThisSequenceTypeValuePtr(std::weak_ptr<ocl::Values::SequenceTypeValue> thisSequenceTypeValuePtr);
 
 
 		public:
@@ -88,7 +88,7 @@ namespace ocl::Values
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<SequenceTypeValue> m_thisSequenceTypeValuePtr;
+			std::weak_ptr<ocl::Values::SequenceTypeValue> m_thisSequenceTypeValuePtr;
 	};
 }
 #endif /* end of include guard: OCL_VALUES_SEQUENCETYPEVALUESEQUENCETYPEVALUEIMPL_HPP */

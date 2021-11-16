@@ -25,14 +25,14 @@ namespace uml
 	{
 		public: 
 			CallActionImpl(const CallActionImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 			CallActionImpl& operator=(CallActionImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;
 			CallActionImpl();
-			virtual std::shared_ptr<CallAction> getThisCallActionPtr() const;
-			virtual void setThisCallActionPtr(std::weak_ptr<CallAction> thisCallActionPtr);
+			virtual std::shared_ptr<uml::CallAction> getThisCallActionPtr() const;
+			virtual void setThisCallActionPtr(std::weak_ptr<uml::CallAction> thisCallActionPtr);
 
 			//Additional constructors for the containments back reference
 			CallActionImpl(std::weak_ptr<uml::Activity> par_activity);
@@ -45,7 +45,7 @@ namespace uml
 
 		public:
 			//destructor
-			virtual ~CallActionImpl();
+			virtual ~CallActionImpl() = 0;
 			
 			//*********************************
 			// Operations
@@ -188,7 +188,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<CallAction> m_thisCallActionPtr;
+			std::weak_ptr<uml::CallAction> m_thisCallActionPtr;
 	};
 }
 #endif /* end of include guard: UML_CALLACTIONCALLACTIONIMPL_HPP */

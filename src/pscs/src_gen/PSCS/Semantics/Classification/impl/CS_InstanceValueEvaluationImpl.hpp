@@ -32,8 +32,8 @@ namespace PSCS::Semantics::Classification
 		protected:
 			friend class PSCS::Semantics::Classification::ClassificationFactoryImpl;
 			CS_InstanceValueEvaluationImpl();
-			virtual std::shared_ptr<CS_InstanceValueEvaluation> getThisCS_InstanceValueEvaluationPtr() const;
-			virtual void setThisCS_InstanceValueEvaluationPtr(std::weak_ptr<CS_InstanceValueEvaluation> thisCS_InstanceValueEvaluationPtr);
+			virtual std::shared_ptr<PSCS::Semantics::Classification::CS_InstanceValueEvaluation> getThisCS_InstanceValueEvaluationPtr() const;
+			virtual void setThisCS_InstanceValueEvaluationPtr(std::weak_ptr<PSCS::Semantics::Classification::CS_InstanceValueEvaluation> thisCS_InstanceValueEvaluationPtr);
 
 
 		public:
@@ -88,7 +88,7 @@ namespace PSCS::Semantics::Classification
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<CS_InstanceValueEvaluation> m_thisCS_InstanceValueEvaluationPtr;
+			std::weak_ptr<PSCS::Semantics::Classification::CS_InstanceValueEvaluation> m_thisCS_InstanceValueEvaluationPtr;
 	};
 }
 #endif /* end of include guard: PSCS_SEMANTICS_CLASSIFICATION_CS_INSTANCEVALUEEVALUATIONCS_INSTANCEVALUEEVALUATIONIMPL_HPP */

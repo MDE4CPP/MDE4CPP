@@ -31,8 +31,8 @@ namespace uml
 		protected:
 			friend class umlFactoryImpl;
 			ImageImpl();
-			virtual std::shared_ptr<Image> getThisImagePtr() const;
-			virtual void setThisImagePtr(std::weak_ptr<Image> thisImagePtr);
+			virtual std::shared_ptr<uml::Image> getThisImagePtr() const;
+			virtual void setThisImagePtr(std::weak_ptr<uml::Image> thisImagePtr);
 
 			//Additional constructors for the containments back reference
 			ImageImpl(std::weak_ptr<uml::Element> par_owner);
@@ -130,7 +130,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<Image> m_thisImagePtr;
+			std::weak_ptr<uml::Image> m_thisImagePtr;
 	};
 }
 #endif /* end of include guard: UML_IMAGEIMAGEIMPL_HPP */

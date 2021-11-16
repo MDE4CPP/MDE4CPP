@@ -28,14 +28,14 @@ namespace uml
 	{
 		public: 
 			ClassifierImpl(const ClassifierImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 			ClassifierImpl& operator=(ClassifierImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;
 			ClassifierImpl();
-			virtual std::shared_ptr<Classifier> getThisClassifierPtr() const;
-			virtual void setThisClassifierPtr(std::weak_ptr<Classifier> thisClassifierPtr);
+			virtual std::shared_ptr<uml::Classifier> getThisClassifierPtr() const;
+			virtual void setThisClassifierPtr(std::weak_ptr<uml::Classifier> thisClassifierPtr);
 
 			//Additional constructors for the containments back reference
 			ClassifierImpl(std::weak_ptr<uml::Namespace> par_namespace);
@@ -49,7 +49,7 @@ namespace uml
 
 		public:
 			//destructor
-			virtual ~ClassifierImpl();
+			virtual ~ClassifierImpl() = 0;
 			
 			//*********************************
 			// Operations
@@ -430,7 +430,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<Classifier> m_thisClassifierPtr;
+			std::weak_ptr<uml::Classifier> m_thisClassifierPtr;
 	};
 }
 #endif /* end of include guard: UML_CLASSIFIERCLASSIFIERIMPL_HPP */

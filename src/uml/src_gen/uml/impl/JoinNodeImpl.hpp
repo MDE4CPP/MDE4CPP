@@ -31,8 +31,8 @@ namespace uml
 		protected:
 			friend class umlFactoryImpl;
 			JoinNodeImpl();
-			virtual std::shared_ptr<JoinNode> getThisJoinNodePtr() const;
-			virtual void setThisJoinNodePtr(std::weak_ptr<JoinNode> thisJoinNodePtr);
+			virtual std::shared_ptr<uml::JoinNode> getThisJoinNodePtr() const;
+			virtual void setThisJoinNodePtr(std::weak_ptr<uml::JoinNode> thisJoinNodePtr);
 
 			//Additional constructors for the containments back reference
 			JoinNodeImpl(std::weak_ptr<uml::Activity> par_activity);
@@ -156,7 +156,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<JoinNode> m_thisJoinNodePtr;
+			std::weak_ptr<uml::JoinNode> m_thisJoinNodePtr;
 	};
 }
 #endif /* end of include guard: UML_JOINNODEJOINNODEIMPL_HPP */

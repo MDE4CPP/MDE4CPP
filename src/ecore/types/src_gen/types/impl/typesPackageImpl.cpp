@@ -4,9 +4,9 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
+#include "ecore/EStringToStringMapEntry.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EDataType.hpp"
-#include "ecore/EStringToStringMapEntry.hpp"
 
 //metamodel factory
 #include "types/typesFactory.hpp"
@@ -49,23 +49,23 @@ void typesPackageImpl::init(std::shared_ptr<ecore::EPackage> package)
 
 
 
-std::shared_ptr<ecore::EDataType> typesPackageImpl::getBoolean_Class() const
+std::shared_ptr<ecore::EDataType> types::typesPackageImpl::getBoolean_Class() const
 {
 	return m_boolean_Class;
 }
-std::shared_ptr<ecore::EDataType> typesPackageImpl::getInteger_Class() const
+std::shared_ptr<ecore::EDataType> types::typesPackageImpl::getInteger_Class() const
 {
 	return m_integer_Class;
 }
-std::shared_ptr<ecore::EDataType> typesPackageImpl::getReal_Class() const
+std::shared_ptr<ecore::EDataType> types::typesPackageImpl::getReal_Class() const
 {
 	return m_real_Class;
 }
-std::shared_ptr<ecore::EDataType> typesPackageImpl::getString_Class() const
+std::shared_ptr<ecore::EDataType> types::typesPackageImpl::getString_Class() const
 {
 	return m_string_Class;
 }
-std::shared_ptr<ecore::EDataType> typesPackageImpl::getUnlimitedNatural_Class() const
+std::shared_ptr<ecore::EDataType> types::typesPackageImpl::getUnlimitedNatural_Class() const
 {
 	return m_unlimitedNatural_Class;
 }

@@ -32,8 +32,8 @@ namespace ocl::Types
 		protected:
 			friend class ocl::Types::TypesFactoryImpl;
 			TupleTypeImpl();
-			virtual std::shared_ptr<TupleType> getThisTupleTypePtr() const;
-			virtual void setThisTupleTypePtr(std::weak_ptr<TupleType> thisTupleTypePtr);
+			virtual std::shared_ptr<ocl::Types::TupleType> getThisTupleTypePtr() const;
+			virtual void setThisTupleTypePtr(std::weak_ptr<ocl::Types::TupleType> thisTupleTypePtr);
 
 			//Additional constructors for the containments back reference
 			TupleTypeImpl(std::weak_ptr<ecore::EPackage> par_ePackage);
@@ -92,7 +92,7 @@ namespace ocl::Types
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<TupleType> m_thisTupleTypePtr;
+			std::weak_ptr<ocl::Types::TupleType> m_thisTupleTypePtr;
 	};
 }
 #endif /* end of include guard: OCL_TYPES_TUPLETYPETUPLETYPEIMPL_HPP */

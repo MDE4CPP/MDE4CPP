@@ -32,8 +32,8 @@ namespace uml
 		protected:
 			friend class umlFactoryImpl;
 			StringExpressionImpl();
-			virtual std::shared_ptr<StringExpression> getThisStringExpressionPtr() const;
-			virtual void setThisStringExpressionPtr(std::weak_ptr<StringExpression> thisStringExpressionPtr);
+			virtual std::shared_ptr<uml::StringExpression> getThisStringExpressionPtr() const;
+			virtual void setThisStringExpressionPtr(std::weak_ptr<uml::StringExpression> thisStringExpressionPtr);
 
 			//Additional constructors for the containments back reference
 			StringExpressionImpl(std::weak_ptr<uml::Namespace> par_namespace);
@@ -150,7 +150,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<StringExpression> m_thisStringExpressionPtr;
+			std::weak_ptr<uml::StringExpression> m_thisStringExpressionPtr;
 	};
 }
 #endif /* end of include guard: UML_STRINGEXPRESSIONSTRINGEXPRESSIONIMPL_HPP */

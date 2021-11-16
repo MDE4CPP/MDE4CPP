@@ -26,21 +26,21 @@ namespace fUML::Semantics::Actions
 	{
 		public: 
 			WriteLinkActionActivationImpl(const WriteLinkActionActivationImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 			WriteLinkActionActivationImpl& operator=(WriteLinkActionActivationImpl const&); 
 
 		protected:
 			friend class fUML::Semantics::Actions::ActionsFactoryImpl;
 			WriteLinkActionActivationImpl();
-			virtual std::shared_ptr<WriteLinkActionActivation> getThisWriteLinkActionActivationPtr() const;
-			virtual void setThisWriteLinkActionActivationPtr(std::weak_ptr<WriteLinkActionActivation> thisWriteLinkActionActivationPtr);
+			virtual std::shared_ptr<fUML::Semantics::Actions::WriteLinkActionActivation> getThisWriteLinkActionActivationPtr() const;
+			virtual void setThisWriteLinkActionActivationPtr(std::weak_ptr<fUML::Semantics::Actions::WriteLinkActionActivation> thisWriteLinkActionActivationPtr);
 
 			//Additional constructors for the containments back reference
 			WriteLinkActionActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_group);
 
 		public:
 			//destructor
-			virtual ~WriteLinkActionActivationImpl();
+			virtual ~WriteLinkActionActivationImpl() = 0;
 			
 			//*********************************
 			// Operations
@@ -90,7 +90,7 @@ namespace fUML::Semantics::Actions
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<WriteLinkActionActivation> m_thisWriteLinkActionActivationPtr;
+			std::weak_ptr<fUML::Semantics::Actions::WriteLinkActionActivation> m_thisWriteLinkActionActivationPtr;
 	};
 }
 #endif /* end of include guard: FUML_SEMANTICS_ACTIONS_WRITELINKACTIONACTIVATIONWRITELINKACTIONACTIVATIONIMPL_HPP */

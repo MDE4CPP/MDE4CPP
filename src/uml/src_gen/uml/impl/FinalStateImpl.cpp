@@ -520,11 +520,11 @@ Any FinalStateImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sh
 }
 
 
-std::shared_ptr<FinalState> FinalStateImpl::getThisFinalStatePtr() const
+std::shared_ptr<uml::FinalState> FinalStateImpl::getThisFinalStatePtr() const
 {
 	return m_thisFinalStatePtr.lock();
 }
-void FinalStateImpl::setThisFinalStatePtr(std::weak_ptr<FinalState> thisFinalStatePtr)
+void FinalStateImpl::setThisFinalStatePtr(std::weak_ptr<uml::FinalState> thisFinalStatePtr)
 {
 	m_thisFinalStatePtr = thisFinalStatePtr;
 	setThisStatePtr(thisFinalStatePtr);

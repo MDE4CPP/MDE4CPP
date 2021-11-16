@@ -32,8 +32,8 @@ namespace fUML::Semantics::Actions
 		protected:
 			friend class fUML::Semantics::Actions::ActionsFactoryImpl;
 			SendSignalActionActivationImpl();
-			virtual std::shared_ptr<SendSignalActionActivation> getThisSendSignalActionActivationPtr() const;
-			virtual void setThisSendSignalActionActivationPtr(std::weak_ptr<SendSignalActionActivation> thisSendSignalActionActivationPtr);
+			virtual std::shared_ptr<fUML::Semantics::Actions::SendSignalActionActivation> getThisSendSignalActionActivationPtr() const;
+			virtual void setThisSendSignalActionActivationPtr(std::weak_ptr<fUML::Semantics::Actions::SendSignalActionActivation> thisSendSignalActionActivationPtr);
 
 			//Additional constructors for the containments back reference
 			SendSignalActionActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_group);
@@ -91,7 +91,7 @@ namespace fUML::Semantics::Actions
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<SendSignalActionActivation> m_thisSendSignalActionActivationPtr;
+			std::weak_ptr<fUML::Semantics::Actions::SendSignalActionActivation> m_thisSendSignalActionActivationPtr;
 	};
 }
 #endif /* end of include guard: FUML_SEMANTICS_ACTIONS_SENDSIGNALACTIONACTIVATIONSENDSIGNALACTIONACTIVATIONIMPL_HPP */

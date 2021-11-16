@@ -33,8 +33,8 @@ namespace uml
 		protected:
 			friend class umlFactoryImpl;
 			PropertyImpl();
-			virtual std::shared_ptr<Property> getThisPropertyPtr() const;
-			virtual void setThisPropertyPtr(std::weak_ptr<Property> thisPropertyPtr);
+			virtual std::shared_ptr<uml::Property> getThisPropertyPtr() const;
+			virtual void setThisPropertyPtr(std::weak_ptr<uml::Property> thisPropertyPtr);
 
 			//Additional constructors for the containments back reference
 			PropertyImpl(std::weak_ptr<uml::Property> par_associationEnd);
@@ -476,7 +476,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<Property> m_thisPropertyPtr;
+			std::weak_ptr<uml::Property> m_thisPropertyPtr;
 	};
 }
 #endif /* end of include guard: UML_PROPERTYPROPERTYIMPL_HPP */

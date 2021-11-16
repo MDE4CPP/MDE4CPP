@@ -741,11 +741,11 @@ Any ProtocolStateMachineImpl::eInvoke(int operationID, std::shared_ptr<std::list
 }
 
 
-std::shared_ptr<ProtocolStateMachine> ProtocolStateMachineImpl::getThisProtocolStateMachinePtr() const
+std::shared_ptr<uml::ProtocolStateMachine> ProtocolStateMachineImpl::getThisProtocolStateMachinePtr() const
 {
 	return m_thisProtocolStateMachinePtr.lock();
 }
-void ProtocolStateMachineImpl::setThisProtocolStateMachinePtr(std::weak_ptr<ProtocolStateMachine> thisProtocolStateMachinePtr)
+void ProtocolStateMachineImpl::setThisProtocolStateMachinePtr(std::weak_ptr<uml::ProtocolStateMachine> thisProtocolStateMachinePtr)
 {
 	m_thisProtocolStateMachinePtr = thisProtocolStateMachinePtr;
 	setThisStateMachinePtr(thisProtocolStateMachinePtr);

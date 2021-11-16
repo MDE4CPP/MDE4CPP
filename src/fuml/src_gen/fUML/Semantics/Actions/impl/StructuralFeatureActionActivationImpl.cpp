@@ -125,14 +125,6 @@ StructuralFeatureActionActivationImpl& StructuralFeatureActionActivationImpl::op
 	return *this;
 }
 
-std::shared_ptr<ecore::EObject> StructuralFeatureActionActivationImpl::copy() const
-{
-	std::shared_ptr<StructuralFeatureActionActivationImpl> element(new StructuralFeatureActionActivationImpl());
-	*element =(*this);
-	element->setThisStructuralFeatureActionActivationPtr(element);
-	return element;
-}
-
 //*********************************
 // Operations
 //*********************************
@@ -467,11 +459,11 @@ Any StructuralFeatureActionActivationImpl::eInvoke(int operationID, std::shared_
 }
 
 
-std::shared_ptr<StructuralFeatureActionActivation> StructuralFeatureActionActivationImpl::getThisStructuralFeatureActionActivationPtr() const
+std::shared_ptr<fUML::Semantics::Actions::StructuralFeatureActionActivation> StructuralFeatureActionActivationImpl::getThisStructuralFeatureActionActivationPtr() const
 {
 	return m_thisStructuralFeatureActionActivationPtr.lock();
 }
-void StructuralFeatureActionActivationImpl::setThisStructuralFeatureActionActivationPtr(std::weak_ptr<StructuralFeatureActionActivation> thisStructuralFeatureActionActivationPtr)
+void StructuralFeatureActionActivationImpl::setThisStructuralFeatureActionActivationPtr(std::weak_ptr<fUML::Semantics::Actions::StructuralFeatureActionActivation> thisStructuralFeatureActionActivationPtr)
 {
 	m_thisStructuralFeatureActionActivationPtr = thisStructuralFeatureActionActivationPtr;
 	setThisActionActivationPtr(thisStructuralFeatureActionActivationPtr);

@@ -740,11 +740,11 @@ Any ReclassifyObjectActionImpl::eInvoke(int operationID, std::shared_ptr<std::li
 }
 
 
-std::shared_ptr<ReclassifyObjectAction> ReclassifyObjectActionImpl::getThisReclassifyObjectActionPtr() const
+std::shared_ptr<uml::ReclassifyObjectAction> ReclassifyObjectActionImpl::getThisReclassifyObjectActionPtr() const
 {
 	return m_thisReclassifyObjectActionPtr.lock();
 }
-void ReclassifyObjectActionImpl::setThisReclassifyObjectActionPtr(std::weak_ptr<ReclassifyObjectAction> thisReclassifyObjectActionPtr)
+void ReclassifyObjectActionImpl::setThisReclassifyObjectActionPtr(std::weak_ptr<uml::ReclassifyObjectAction> thisReclassifyObjectActionPtr)
 {
 	m_thisReclassifyObjectActionPtr = thisReclassifyObjectActionPtr;
 	setThisActionPtr(thisReclassifyObjectActionPtr);

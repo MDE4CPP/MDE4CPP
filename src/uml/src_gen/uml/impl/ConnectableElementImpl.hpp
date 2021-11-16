@@ -26,14 +26,14 @@ namespace uml
 	{
 		public: 
 			ConnectableElementImpl(const ConnectableElementImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 			ConnectableElementImpl& operator=(ConnectableElementImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;
 			ConnectableElementImpl();
-			virtual std::shared_ptr<ConnectableElement> getThisConnectableElementPtr() const;
-			virtual void setThisConnectableElementPtr(std::weak_ptr<ConnectableElement> thisConnectableElementPtr);
+			virtual std::shared_ptr<uml::ConnectableElement> getThisConnectableElementPtr() const;
+			virtual void setThisConnectableElementPtr(std::weak_ptr<uml::ConnectableElement> thisConnectableElementPtr);
 
 			//Additional constructors for the containments back reference
 			ConnectableElementImpl(std::weak_ptr<uml::Namespace> par_namespace);
@@ -44,7 +44,7 @@ namespace uml
 
 		public:
 			//destructor
-			virtual ~ConnectableElementImpl();
+			virtual ~ConnectableElementImpl() = 0;
 			
 			//*********************************
 			// Operations
@@ -119,7 +119,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<ConnectableElement> m_thisConnectableElementPtr;
+			std::weak_ptr<uml::ConnectableElement> m_thisConnectableElementPtr;
 	};
 }
 #endif /* end of include guard: UML_CONNECTABLEELEMENTCONNECTABLEELEMENTIMPL_HPP */

@@ -32,8 +32,8 @@ namespace ocl::Expressions
 		protected:
 			friend class ocl::Expressions::ExpressionsFactoryImpl;
 			EnumLiteralExpImpl();
-			virtual std::shared_ptr<EnumLiteralExp> getThisEnumLiteralExpPtr() const;
-			virtual void setThisEnumLiteralExpPtr(std::weak_ptr<EnumLiteralExp> thisEnumLiteralExpPtr);
+			virtual std::shared_ptr<ocl::Expressions::EnumLiteralExp> getThisEnumLiteralExpPtr() const;
+			virtual void setThisEnumLiteralExpPtr(std::weak_ptr<ocl::Expressions::EnumLiteralExp> thisEnumLiteralExpPtr);
 
 			//Additional constructors for the containments back reference
 			EnumLiteralExpImpl(std::weak_ptr<ocl::Expressions::CallExp> par_appliedElement);
@@ -108,7 +108,7 @@ namespace ocl::Expressions
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<EnumLiteralExp> m_thisEnumLiteralExpPtr;
+			std::weak_ptr<ocl::Expressions::EnumLiteralExp> m_thisEnumLiteralExpPtr;
 	};
 }
 #endif /* end of include guard: OCL_EXPRESSIONS_ENUMLITERALEXPENUMLITERALEXPIMPL_HPP */

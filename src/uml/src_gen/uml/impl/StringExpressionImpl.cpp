@@ -632,11 +632,11 @@ Any StringExpressionImpl::eInvoke(int operationID, std::shared_ptr<std::list < s
 }
 
 
-std::shared_ptr<StringExpression> StringExpressionImpl::getThisStringExpressionPtr() const
+std::shared_ptr<uml::StringExpression> StringExpressionImpl::getThisStringExpressionPtr() const
 {
 	return m_thisStringExpressionPtr.lock();
 }
-void StringExpressionImpl::setThisStringExpressionPtr(std::weak_ptr<StringExpression> thisStringExpressionPtr)
+void StringExpressionImpl::setThisStringExpressionPtr(std::weak_ptr<uml::StringExpression> thisStringExpressionPtr)
 {
 	m_thisStringExpressionPtr = thisStringExpressionPtr;
 	setThisExpressionPtr(thisStringExpressionPtr);

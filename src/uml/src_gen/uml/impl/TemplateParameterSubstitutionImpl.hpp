@@ -31,8 +31,8 @@ namespace uml
 		protected:
 			friend class umlFactoryImpl;
 			TemplateParameterSubstitutionImpl();
-			virtual std::shared_ptr<TemplateParameterSubstitution> getThisTemplateParameterSubstitutionPtr() const;
-			virtual void setThisTemplateParameterSubstitutionPtr(std::weak_ptr<TemplateParameterSubstitution> thisTemplateParameterSubstitutionPtr);
+			virtual std::shared_ptr<uml::TemplateParameterSubstitution> getThisTemplateParameterSubstitutionPtr() const;
+			virtual void setThisTemplateParameterSubstitutionPtr(std::weak_ptr<uml::TemplateParameterSubstitution> thisTemplateParameterSubstitutionPtr);
 
 			//Additional constructors for the containments back reference
 			TemplateParameterSubstitutionImpl(std::weak_ptr<uml::Element> par_owner);
@@ -157,7 +157,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<TemplateParameterSubstitution> m_thisTemplateParameterSubstitutionPtr;
+			std::weak_ptr<uml::TemplateParameterSubstitution> m_thisTemplateParameterSubstitutionPtr;
 	};
 }
 #endif /* end of include guard: UML_TEMPLATEPARAMETERSUBSTITUTIONTEMPLATEPARAMETERSUBSTITUTIONIMPL_HPP */

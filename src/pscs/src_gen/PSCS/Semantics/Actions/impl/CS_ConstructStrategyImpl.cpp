@@ -103,14 +103,6 @@ CS_ConstructStrategyImpl& CS_ConstructStrategyImpl::operator=(const CS_Construct
 	return *this;
 }
 
-std::shared_ptr<ecore::EObject> CS_ConstructStrategyImpl::copy() const
-{
-	std::shared_ptr<CS_ConstructStrategyImpl> element(new CS_ConstructStrategyImpl());
-	*element =(*this);
-	element->setThisCS_ConstructStrategyPtr(element);
-	return element;
-}
-
 //*********************************
 // Operations
 //*********************************
@@ -290,11 +282,11 @@ Any CS_ConstructStrategyImpl::eInvoke(int operationID, std::shared_ptr<std::list
 }
 
 
-std::shared_ptr<CS_ConstructStrategy> CS_ConstructStrategyImpl::getThisCS_ConstructStrategyPtr() const
+std::shared_ptr<PSCS::Semantics::Actions::CS_ConstructStrategy> CS_ConstructStrategyImpl::getThisCS_ConstructStrategyPtr() const
 {
 	return m_thisCS_ConstructStrategyPtr.lock();
 }
-void CS_ConstructStrategyImpl::setThisCS_ConstructStrategyPtr(std::weak_ptr<CS_ConstructStrategy> thisCS_ConstructStrategyPtr)
+void CS_ConstructStrategyImpl::setThisCS_ConstructStrategyPtr(std::weak_ptr<PSCS::Semantics::Actions::CS_ConstructStrategy> thisCS_ConstructStrategyPtr)
 {
 	m_thisCS_ConstructStrategyPtr = thisCS_ConstructStrategyPtr;
 	setThisSemanticStrategyPtr(thisCS_ConstructStrategyPtr);

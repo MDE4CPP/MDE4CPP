@@ -1681,11 +1681,11 @@ Any PackageImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::share
 }
 
 
-std::shared_ptr<Package> PackageImpl::getThisPackagePtr() const
+std::shared_ptr<uml::Package> PackageImpl::getThisPackagePtr() const
 {
 	return m_thisPackagePtr.lock();
 }
-void PackageImpl::setThisPackagePtr(std::weak_ptr<Package> thisPackagePtr)
+void PackageImpl::setThisPackagePtr(std::weak_ptr<uml::Package> thisPackagePtr)
 {
 	m_thisPackagePtr = thisPackagePtr;
 	setThisNamespacePtr(thisPackagePtr);

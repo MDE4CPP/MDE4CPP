@@ -31,8 +31,8 @@ namespace uml
 		protected:
 			friend class umlFactoryImpl;
 			LinkEndCreationDataImpl();
-			virtual std::shared_ptr<LinkEndCreationData> getThisLinkEndCreationDataPtr() const;
-			virtual void setThisLinkEndCreationDataPtr(std::weak_ptr<LinkEndCreationData> thisLinkEndCreationDataPtr);
+			virtual std::shared_ptr<uml::LinkEndCreationData> getThisLinkEndCreationDataPtr() const;
+			virtual void setThisLinkEndCreationDataPtr(std::weak_ptr<uml::LinkEndCreationData> thisLinkEndCreationDataPtr);
 
 			//Additional constructors for the containments back reference
 			LinkEndCreationDataImpl(std::weak_ptr<uml::Element> par_owner);
@@ -129,7 +129,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<LinkEndCreationData> m_thisLinkEndCreationDataPtr;
+			std::weak_ptr<uml::LinkEndCreationData> m_thisLinkEndCreationDataPtr;
 	};
 }
 #endif /* end of include guard: UML_LINKENDCREATIONDATALINKENDCREATIONDATAIMPL_HPP */

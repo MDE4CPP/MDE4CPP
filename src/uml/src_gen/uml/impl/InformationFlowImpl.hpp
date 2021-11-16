@@ -32,8 +32,8 @@ namespace uml
 		protected:
 			friend class umlFactoryImpl;
 			InformationFlowImpl();
-			virtual std::shared_ptr<InformationFlow> getThisInformationFlowPtr() const;
-			virtual void setThisInformationFlowPtr(std::weak_ptr<InformationFlow> thisInformationFlowPtr);
+			virtual std::shared_ptr<uml::InformationFlow> getThisInformationFlowPtr() const;
+			virtual void setThisInformationFlowPtr(std::weak_ptr<uml::InformationFlow> thisInformationFlowPtr);
 
 			//Additional constructors for the containments back reference
 			InformationFlowImpl(std::weak_ptr<uml::Namespace> par_namespace);
@@ -205,7 +205,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<InformationFlow> m_thisInformationFlowPtr;
+			std::weak_ptr<uml::InformationFlow> m_thisInformationFlowPtr;
 	};
 }
 #endif /* end of include guard: UML_INFORMATIONFLOWINFORMATIONFLOWIMPL_HPP */

@@ -464,11 +464,11 @@ Any CommunicationPathImpl::eInvoke(int operationID, std::shared_ptr<std::list < 
 }
 
 
-std::shared_ptr<CommunicationPath> CommunicationPathImpl::getThisCommunicationPathPtr() const
+std::shared_ptr<uml::CommunicationPath> CommunicationPathImpl::getThisCommunicationPathPtr() const
 {
 	return m_thisCommunicationPathPtr.lock();
 }
-void CommunicationPathImpl::setThisCommunicationPathPtr(std::weak_ptr<CommunicationPath> thisCommunicationPathPtr)
+void CommunicationPathImpl::setThisCommunicationPathPtr(std::weak_ptr<uml::CommunicationPath> thisCommunicationPathPtr)
 {
 	m_thisCommunicationPathPtr = thisCommunicationPathPtr;
 	setThisAssociationPtr(thisCommunicationPathPtr);

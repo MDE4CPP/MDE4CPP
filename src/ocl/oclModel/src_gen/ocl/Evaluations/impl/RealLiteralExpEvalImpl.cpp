@@ -299,11 +299,11 @@ Any RealLiteralExpEvalImpl::eInvoke(int operationID, std::shared_ptr<std::list <
 }
 
 
-std::shared_ptr<RealLiteralExpEval> RealLiteralExpEvalImpl::getThisRealLiteralExpEvalPtr() const
+std::shared_ptr<ocl::Evaluations::RealLiteralExpEval> RealLiteralExpEvalImpl::getThisRealLiteralExpEvalPtr() const
 {
 	return m_thisRealLiteralExpEvalPtr.lock();
 }
-void RealLiteralExpEvalImpl::setThisRealLiteralExpEvalPtr(std::weak_ptr<RealLiteralExpEval> thisRealLiteralExpEvalPtr)
+void RealLiteralExpEvalImpl::setThisRealLiteralExpEvalPtr(std::weak_ptr<ocl::Evaluations::RealLiteralExpEval> thisRealLiteralExpEvalPtr)
 {
 	m_thisRealLiteralExpEvalPtr = thisRealLiteralExpEvalPtr;
 	setThisLiteralRealEvaluationPtr(thisRealLiteralExpEvalPtr);

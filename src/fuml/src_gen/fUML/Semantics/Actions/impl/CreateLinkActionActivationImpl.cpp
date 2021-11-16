@@ -289,11 +289,11 @@ Any CreateLinkActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std
 }
 
 
-std::shared_ptr<CreateLinkActionActivation> CreateLinkActionActivationImpl::getThisCreateLinkActionActivationPtr() const
+std::shared_ptr<fUML::Semantics::Actions::CreateLinkActionActivation> CreateLinkActionActivationImpl::getThisCreateLinkActionActivationPtr() const
 {
 	return m_thisCreateLinkActionActivationPtr.lock();
 }
-void CreateLinkActionActivationImpl::setThisCreateLinkActionActivationPtr(std::weak_ptr<CreateLinkActionActivation> thisCreateLinkActionActivationPtr)
+void CreateLinkActionActivationImpl::setThisCreateLinkActionActivationPtr(std::weak_ptr<fUML::Semantics::Actions::CreateLinkActionActivation> thisCreateLinkActionActivationPtr)
 {
 	m_thisCreateLinkActionActivationPtr = thisCreateLinkActionActivationPtr;
 	setThisWriteLinkActionActivationPtr(thisCreateLinkActionActivationPtr);

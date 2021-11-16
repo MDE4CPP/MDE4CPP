@@ -98,14 +98,6 @@ GetNextEventStrategyImpl& GetNextEventStrategyImpl::operator=(const GetNextEvent
 	return *this;
 }
 
-std::shared_ptr<ecore::EObject> GetNextEventStrategyImpl::copy() const
-{
-	std::shared_ptr<GetNextEventStrategyImpl> element(new GetNextEventStrategyImpl());
-	*element =(*this);
-	element->setThisGetNextEventStrategyPtr(element);
-	return element;
-}
-
 //*********************************
 // Operations
 //*********************************
@@ -280,11 +272,11 @@ Any GetNextEventStrategyImpl::eInvoke(int operationID, std::shared_ptr<std::list
 }
 
 
-std::shared_ptr<GetNextEventStrategy> GetNextEventStrategyImpl::getThisGetNextEventStrategyPtr() const
+std::shared_ptr<fUML::Semantics::CommonBehavior::GetNextEventStrategy> GetNextEventStrategyImpl::getThisGetNextEventStrategyPtr() const
 {
 	return m_thisGetNextEventStrategyPtr.lock();
 }
-void GetNextEventStrategyImpl::setThisGetNextEventStrategyPtr(std::weak_ptr<GetNextEventStrategy> thisGetNextEventStrategyPtr)
+void GetNextEventStrategyImpl::setThisGetNextEventStrategyPtr(std::weak_ptr<fUML::Semantics::CommonBehavior::GetNextEventStrategy> thisGetNextEventStrategyPtr)
 {
 	m_thisGetNextEventStrategyPtr = thisGetNextEventStrategyPtr;
 	setThisSemanticStrategyPtr(thisGetNextEventStrategyPtr);

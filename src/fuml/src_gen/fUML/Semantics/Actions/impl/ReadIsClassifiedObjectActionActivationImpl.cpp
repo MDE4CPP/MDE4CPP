@@ -308,11 +308,11 @@ Any ReadIsClassifiedObjectActionActivationImpl::eInvoke(int operationID, std::sh
 }
 
 
-std::shared_ptr<ReadIsClassifiedObjectActionActivation> ReadIsClassifiedObjectActionActivationImpl::getThisReadIsClassifiedObjectActionActivationPtr() const
+std::shared_ptr<fUML::Semantics::Actions::ReadIsClassifiedObjectActionActivation> ReadIsClassifiedObjectActionActivationImpl::getThisReadIsClassifiedObjectActionActivationPtr() const
 {
 	return m_thisReadIsClassifiedObjectActionActivationPtr.lock();
 }
-void ReadIsClassifiedObjectActionActivationImpl::setThisReadIsClassifiedObjectActionActivationPtr(std::weak_ptr<ReadIsClassifiedObjectActionActivation> thisReadIsClassifiedObjectActionActivationPtr)
+void ReadIsClassifiedObjectActionActivationImpl::setThisReadIsClassifiedObjectActionActivationPtr(std::weak_ptr<fUML::Semantics::Actions::ReadIsClassifiedObjectActionActivation> thisReadIsClassifiedObjectActionActivationPtr)
 {
 	m_thisReadIsClassifiedObjectActionActivationPtr = thisReadIsClassifiedObjectActionActivationPtr;
 	setThisActionActivationPtr(thisReadIsClassifiedObjectActionActivationPtr);

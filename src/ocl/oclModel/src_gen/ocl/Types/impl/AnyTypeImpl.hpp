@@ -32,8 +32,8 @@ namespace ocl::Types
 		protected:
 			friend class ocl::Types::TypesFactoryImpl;
 			AnyTypeImpl();
-			virtual std::shared_ptr<AnyType> getThisAnyTypePtr() const;
-			virtual void setThisAnyTypePtr(std::weak_ptr<AnyType> thisAnyTypePtr);
+			virtual std::shared_ptr<ocl::Types::AnyType> getThisAnyTypePtr() const;
+			virtual void setThisAnyTypePtr(std::weak_ptr<ocl::Types::AnyType> thisAnyTypePtr);
 
 			//Additional constructors for the containments back reference
 			AnyTypeImpl(std::weak_ptr<ecore::EPackage> par_ePackage);
@@ -91,7 +91,7 @@ namespace ocl::Types
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<AnyType> m_thisAnyTypePtr;
+			std::weak_ptr<ocl::Types::AnyType> m_thisAnyTypePtr;
 	};
 }
 #endif /* end of include guard: OCL_TYPES_ANYTYPEANYTYPEIMPL_HPP */

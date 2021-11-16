@@ -32,8 +32,8 @@ namespace ocl::Values
 		protected:
 			friend class ocl::Values::ValuesFactoryImpl;
 			BagTypeValueImpl();
-			virtual std::shared_ptr<BagTypeValue> getThisBagTypeValuePtr() const;
-			virtual void setThisBagTypeValuePtr(std::weak_ptr<BagTypeValue> thisBagTypeValuePtr);
+			virtual std::shared_ptr<ocl::Values::BagTypeValue> getThisBagTypeValuePtr() const;
+			virtual void setThisBagTypeValuePtr(std::weak_ptr<ocl::Values::BagTypeValue> thisBagTypeValuePtr);
 
 
 		public:
@@ -88,7 +88,7 @@ namespace ocl::Values
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<BagTypeValue> m_thisBagTypeValuePtr;
+			std::weak_ptr<ocl::Values::BagTypeValue> m_thisBagTypeValuePtr;
 	};
 }
 #endif /* end of include guard: OCL_VALUES_BAGTYPEVALUEBAGTYPEVALUEIMPL_HPP */

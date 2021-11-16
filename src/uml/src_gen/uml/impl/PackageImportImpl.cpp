@@ -299,23 +299,23 @@ void PackageImportImpl::loadAttributes(std::shared_ptr<persistence::interfaces::
 		iter = attr_list.find("visibility");
 		if ( iter != attr_list.end() )
 		{
-			uml::VisibilityKind value = VisibilityKind::PUBLIC;
+			uml::VisibilityKind value = uml::VisibilityKind::PUBLIC;
 			std::string literal = iter->second;
 			if (literal == "public")
 			{
-				value = VisibilityKind::PUBLIC;
+				value = uml::VisibilityKind::PUBLIC;
 			}
 			else if (literal == "private")
 			{
-				value = VisibilityKind::PRIVATE;
+				value = uml::VisibilityKind::PRIVATE;
 			}
 			else if (literal == "protected")
 			{
-				value = VisibilityKind::PROTECTED;
+				value = uml::VisibilityKind::PROTECTED;
 			}
 			else if (literal == "package")
 			{
-				value = VisibilityKind::PACKAGE;
+				value = uml::VisibilityKind::PACKAGE;
 			}
 			this->setVisibility(value);
 		}
@@ -402,19 +402,19 @@ void PackageImportImpl::saveContent(std::shared_ptr<persistence::interfaces::XSa
 		{
 			uml::VisibilityKind value = this->getVisibility();
 			std::string literal = "";
-			if (value == VisibilityKind::PUBLIC)
+			if (value == uml::VisibilityKind::PUBLIC)
 			{
 				literal = "public";
 			}
-			else if (value == VisibilityKind::PRIVATE)
+			else if (value == uml::VisibilityKind::PRIVATE)
 			{
 				literal = "private";
 			}
-			else if (value == VisibilityKind::PROTECTED)
+			else if (value == uml::VisibilityKind::PROTECTED)
 			{
 				literal = "protected";
 			}
-			else if (value == VisibilityKind::PACKAGE)
+			else if (value == uml::VisibilityKind::PACKAGE)
 			{
 				literal = "package";
 			}
@@ -468,7 +468,7 @@ bool PackageImportImpl::internalEIsSet(int featureID) const
 		case uml::umlPackage::PACKAGEIMPORT_ATTRIBUTE_IMPORTINGNAMESPACE:
 			return getImportingNamespace().lock() != nullptr; //1717
 		case uml::umlPackage::PACKAGEIMPORT_ATTRIBUTE_VISIBILITY:
-			return m_visibility != VisibilityKind::PUBLIC;; //1718
+			return m_visibility != uml::VisibilityKind::PUBLIC;; //1718
 	}
 	return DirectedRelationshipImpl::internalEIsSet(featureID);
 }
@@ -546,11 +546,11 @@ Any PackageImportImpl::eInvoke(int operationID, std::shared_ptr<std::list < std:
 }
 
 
-std::shared_ptr<PackageImport> PackageImportImpl::getThisPackageImportPtr() const
+std::shared_ptr<uml::PackageImport> PackageImportImpl::getThisPackageImportPtr() const
 {
 	return m_thisPackageImportPtr.lock();
 }
-void PackageImportImpl::setThisPackageImportPtr(std::weak_ptr<PackageImport> thisPackageImportPtr)
+void PackageImportImpl::setThisPackageImportPtr(std::weak_ptr<uml::PackageImport> thisPackageImportPtr)
 {
 	m_thisPackageImportPtr = thisPackageImportPtr;
 	setThisDirectedRelationshipPtr(thisPackageImportPtr);

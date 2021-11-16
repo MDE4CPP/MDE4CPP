@@ -32,8 +32,8 @@ namespace ocl::Evaluations
 		protected:
 			friend class ocl::Evaluations::EvaluationsFactoryImpl;
 			IfExpEvalImpl();
-			virtual std::shared_ptr<IfExpEval> getThisIfExpEvalPtr() const;
-			virtual void setThisIfExpEvalPtr(std::weak_ptr<IfExpEval> thisIfExpEvalPtr);
+			virtual std::shared_ptr<ocl::Evaluations::IfExpEval> getThisIfExpEvalPtr() const;
+			virtual void setThisIfExpEvalPtr(std::weak_ptr<ocl::Evaluations::IfExpEval> thisIfExpEvalPtr);
 
 
 		public:
@@ -93,7 +93,7 @@ namespace ocl::Evaluations
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<IfExpEval> m_thisIfExpEvalPtr;
+			std::weak_ptr<ocl::Evaluations::IfExpEval> m_thisIfExpEvalPtr;
 	};
 }
 #endif /* end of include guard: OCL_EVALUATIONS_IFEXPEVALIFEXPEVALIMPL_HPP */

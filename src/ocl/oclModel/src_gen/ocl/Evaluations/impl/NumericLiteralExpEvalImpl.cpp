@@ -264,11 +264,11 @@ Any NumericLiteralExpEvalImpl::eInvoke(int operationID, std::shared_ptr<std::lis
 }
 
 
-std::shared_ptr<NumericLiteralExpEval> NumericLiteralExpEvalImpl::getThisNumericLiteralExpEvalPtr() const
+std::shared_ptr<ocl::Evaluations::NumericLiteralExpEval> NumericLiteralExpEvalImpl::getThisNumericLiteralExpEvalPtr() const
 {
 	return m_thisNumericLiteralExpEvalPtr.lock();
 }
-void NumericLiteralExpEvalImpl::setThisNumericLiteralExpEvalPtr(std::weak_ptr<NumericLiteralExpEval> thisNumericLiteralExpEvalPtr)
+void NumericLiteralExpEvalImpl::setThisNumericLiteralExpEvalPtr(std::weak_ptr<ocl::Evaluations::NumericLiteralExpEval> thisNumericLiteralExpEvalPtr)
 {
 	m_thisNumericLiteralExpEvalPtr = thisNumericLiteralExpEvalPtr;
 	setThisPrimitiveLiteralExpEvalPtr(thisNumericLiteralExpEvalPtr);

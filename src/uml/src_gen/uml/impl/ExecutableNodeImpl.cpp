@@ -174,14 +174,6 @@ ExecutableNodeImpl& ExecutableNodeImpl::operator=(const ExecutableNodeImpl & obj
 	return *this;
 }
 
-std::shared_ptr<ecore::EObject> ExecutableNodeImpl::copy() const
-{
-	std::shared_ptr<ExecutableNodeImpl> element(new ExecutableNodeImpl());
-	*element =(*this);
-	element->setThisExecutableNodePtr(element);
-	return element;
-}
-
 //*********************************
 // Operations
 //*********************************
@@ -496,11 +488,11 @@ Any ExecutableNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std
 }
 
 
-std::shared_ptr<ExecutableNode> ExecutableNodeImpl::getThisExecutableNodePtr() const
+std::shared_ptr<uml::ExecutableNode> ExecutableNodeImpl::getThisExecutableNodePtr() const
 {
 	return m_thisExecutableNodePtr.lock();
 }
-void ExecutableNodeImpl::setThisExecutableNodePtr(std::weak_ptr<ExecutableNode> thisExecutableNodePtr)
+void ExecutableNodeImpl::setThisExecutableNodePtr(std::weak_ptr<uml::ExecutableNode> thisExecutableNodePtr)
 {
 	m_thisExecutableNodePtr = thisExecutableNodePtr;
 	setThisActivityNodePtr(thisExecutableNodePtr);

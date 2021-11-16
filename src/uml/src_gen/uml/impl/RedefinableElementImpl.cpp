@@ -119,14 +119,6 @@ RedefinableElementImpl& RedefinableElementImpl::operator=(const RedefinableEleme
 	return *this;
 }
 
-std::shared_ptr<ecore::EObject> RedefinableElementImpl::copy() const
-{
-	std::shared_ptr<RedefinableElementImpl> element(new RedefinableElementImpl());
-	*element =(*this);
-	element->setThisRedefinableElementPtr(element);
-	return element;
-}
-
 //*********************************
 // Operations
 //*********************************
@@ -512,11 +504,11 @@ Any RedefinableElementImpl::eInvoke(int operationID, std::shared_ptr<std::list <
 }
 
 
-std::shared_ptr<RedefinableElement> RedefinableElementImpl::getThisRedefinableElementPtr() const
+std::shared_ptr<uml::RedefinableElement> RedefinableElementImpl::getThisRedefinableElementPtr() const
 {
 	return m_thisRedefinableElementPtr.lock();
 }
-void RedefinableElementImpl::setThisRedefinableElementPtr(std::weak_ptr<RedefinableElement> thisRedefinableElementPtr)
+void RedefinableElementImpl::setThisRedefinableElementPtr(std::weak_ptr<uml::RedefinableElement> thisRedefinableElementPtr)
 {
 	m_thisRedefinableElementPtr = thisRedefinableElementPtr;
 	setThisNamedElementPtr(thisRedefinableElementPtr);

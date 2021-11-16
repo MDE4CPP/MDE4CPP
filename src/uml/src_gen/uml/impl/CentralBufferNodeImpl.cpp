@@ -370,11 +370,11 @@ Any CentralBufferNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list < 
 }
 
 
-std::shared_ptr<CentralBufferNode> CentralBufferNodeImpl::getThisCentralBufferNodePtr() const
+std::shared_ptr<uml::CentralBufferNode> CentralBufferNodeImpl::getThisCentralBufferNodePtr() const
 {
 	return m_thisCentralBufferNodePtr.lock();
 }
-void CentralBufferNodeImpl::setThisCentralBufferNodePtr(std::weak_ptr<CentralBufferNode> thisCentralBufferNodePtr)
+void CentralBufferNodeImpl::setThisCentralBufferNodePtr(std::weak_ptr<uml::CentralBufferNode> thisCentralBufferNodePtr)
 {
 	m_thisCentralBufferNodePtr = thisCentralBufferNodePtr;
 	setThisObjectNodePtr(thisCentralBufferNodePtr);

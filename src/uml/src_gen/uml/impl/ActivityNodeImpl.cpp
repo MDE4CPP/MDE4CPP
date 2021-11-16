@@ -234,14 +234,6 @@ ActivityNodeImpl& ActivityNodeImpl::operator=(const ActivityNodeImpl & obj)
 	return *this;
 }
 
-std::shared_ptr<ecore::EObject> ActivityNodeImpl::copy() const
-{
-	std::shared_ptr<ActivityNodeImpl> element(new ActivityNodeImpl());
-	*element =(*this);
-	element->setThisActivityNodePtr(element);
-	return element;
-}
-
 //*********************************
 // Operations
 //*********************************
@@ -1022,11 +1014,11 @@ Any ActivityNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::
 }
 
 
-std::shared_ptr<ActivityNode> ActivityNodeImpl::getThisActivityNodePtr() const
+std::shared_ptr<uml::ActivityNode> ActivityNodeImpl::getThisActivityNodePtr() const
 {
 	return m_thisActivityNodePtr.lock();
 }
-void ActivityNodeImpl::setThisActivityNodePtr(std::weak_ptr<ActivityNode> thisActivityNodePtr)
+void ActivityNodeImpl::setThisActivityNodePtr(std::weak_ptr<uml::ActivityNode> thisActivityNodePtr)
 {
 	m_thisActivityNodePtr = thisActivityNodePtr;
 	setThisRedefinableElementPtr(thisActivityNodePtr);

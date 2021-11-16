@@ -131,14 +131,6 @@ EventImpl& EventImpl::operator=(const EventImpl & obj)
 	return *this;
 }
 
-std::shared_ptr<ecore::EObject> EventImpl::copy() const
-{
-	std::shared_ptr<EventImpl> element(new EventImpl());
-	*element =(*this);
-	element->setThisEventPtr(element);
-	return element;
-}
-
 //*********************************
 // Operations
 //*********************************
@@ -332,11 +324,11 @@ Any EventImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_
 }
 
 
-std::shared_ptr<Event> EventImpl::getThisEventPtr() const
+std::shared_ptr<uml::Event> EventImpl::getThisEventPtr() const
 {
 	return m_thisEventPtr.lock();
 }
-void EventImpl::setThisEventPtr(std::weak_ptr<Event> thisEventPtr)
+void EventImpl::setThisEventPtr(std::weak_ptr<uml::Event> thisEventPtr)
 {
 	m_thisEventPtr = thisEventPtr;
 	setThisPackageableElementPtr(thisEventPtr);

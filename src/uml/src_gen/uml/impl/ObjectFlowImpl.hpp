@@ -31,8 +31,8 @@ namespace uml
 		protected:
 			friend class umlFactoryImpl;
 			ObjectFlowImpl();
-			virtual std::shared_ptr<ObjectFlow> getThisObjectFlowPtr() const;
-			virtual void setThisObjectFlowPtr(std::weak_ptr<ObjectFlow> thisObjectFlowPtr);
+			virtual std::shared_ptr<uml::ObjectFlow> getThisObjectFlowPtr() const;
+			virtual void setThisObjectFlowPtr(std::weak_ptr<uml::ObjectFlow> thisObjectFlowPtr);
 
 			//Additional constructors for the containments back reference
 			ObjectFlowImpl(std::weak_ptr<uml::Activity> par_activity);
@@ -216,7 +216,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<ObjectFlow> m_thisObjectFlowPtr;
+			std::weak_ptr<uml::ObjectFlow> m_thisObjectFlowPtr;
 	};
 }
 #endif /* end of include guard: UML_OBJECTFLOWOBJECTFLOWIMPL_HPP */

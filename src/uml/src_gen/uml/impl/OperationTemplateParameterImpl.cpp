@@ -320,11 +320,11 @@ Any OperationTemplateParameterImpl::eInvoke(int operationID, std::shared_ptr<std
 }
 
 
-std::shared_ptr<OperationTemplateParameter> OperationTemplateParameterImpl::getThisOperationTemplateParameterPtr() const
+std::shared_ptr<uml::OperationTemplateParameter> OperationTemplateParameterImpl::getThisOperationTemplateParameterPtr() const
 {
 	return m_thisOperationTemplateParameterPtr.lock();
 }
-void OperationTemplateParameterImpl::setThisOperationTemplateParameterPtr(std::weak_ptr<OperationTemplateParameter> thisOperationTemplateParameterPtr)
+void OperationTemplateParameterImpl::setThisOperationTemplateParameterPtr(std::weak_ptr<uml::OperationTemplateParameter> thisOperationTemplateParameterPtr)
 {
 	m_thisOperationTemplateParameterPtr = thisOperationTemplateParameterPtr;
 	setThisTemplateParameterPtr(thisOperationTemplateParameterPtr);

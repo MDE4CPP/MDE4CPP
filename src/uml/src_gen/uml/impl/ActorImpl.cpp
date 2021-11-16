@@ -493,11 +493,11 @@ Any ActorImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_
 }
 
 
-std::shared_ptr<Actor> ActorImpl::getThisActorPtr() const
+std::shared_ptr<uml::Actor> ActorImpl::getThisActorPtr() const
 {
 	return m_thisActorPtr.lock();
 }
-void ActorImpl::setThisActorPtr(std::weak_ptr<Actor> thisActorPtr)
+void ActorImpl::setThisActorPtr(std::weak_ptr<uml::Actor> thisActorPtr)
 {
 	m_thisActorPtr = thisActorPtr;
 	setThisBehavioredClassifierPtr(thisActorPtr);

@@ -31,8 +31,8 @@ namespace uml
 		protected:
 			friend class umlFactoryImpl;
 			DurationObservationImpl();
-			virtual std::shared_ptr<DurationObservation> getThisDurationObservationPtr() const;
-			virtual void setThisDurationObservationPtr(std::weak_ptr<DurationObservation> thisDurationObservationPtr);
+			virtual std::shared_ptr<uml::DurationObservation> getThisDurationObservationPtr() const;
+			virtual void setThisDurationObservationPtr(std::weak_ptr<uml::DurationObservation> thisDurationObservationPtr);
 
 			//Additional constructors for the containments back reference
 			DurationObservationImpl(std::weak_ptr<uml::Namespace> par_namespace);
@@ -133,7 +133,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<DurationObservation> m_thisDurationObservationPtr;
+			std::weak_ptr<uml::DurationObservation> m_thisDurationObservationPtr;
 	};
 }
 #endif /* end of include guard: UML_DURATIONOBSERVATIONDURATIONOBSERVATIONIMPL_HPP */

@@ -25,14 +25,14 @@ namespace uml
 	{
 		public: 
 			WriteVariableActionImpl(const WriteVariableActionImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 			WriteVariableActionImpl& operator=(WriteVariableActionImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;
 			WriteVariableActionImpl();
-			virtual std::shared_ptr<WriteVariableAction> getThisWriteVariableActionPtr() const;
-			virtual void setThisWriteVariableActionPtr(std::weak_ptr<WriteVariableAction> thisWriteVariableActionPtr);
+			virtual std::shared_ptr<uml::WriteVariableAction> getThisWriteVariableActionPtr() const;
+			virtual void setThisWriteVariableActionPtr(std::weak_ptr<uml::WriteVariableAction> thisWriteVariableActionPtr);
 
 			//Additional constructors for the containments back reference
 			WriteVariableActionImpl(std::weak_ptr<uml::Activity> par_activity);
@@ -45,7 +45,7 @@ namespace uml
 
 		public:
 			//destructor
-			virtual ~WriteVariableActionImpl();
+			virtual ~WriteVariableActionImpl() = 0;
 			
 			//*********************************
 			// Operations
@@ -148,7 +148,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<WriteVariableAction> m_thisWriteVariableActionPtr;
+			std::weak_ptr<uml::WriteVariableAction> m_thisWriteVariableActionPtr;
 	};
 }
 #endif /* end of include guard: UML_WRITEVARIABLEACTIONWRITEVARIABLEACTIONIMPL_HPP */

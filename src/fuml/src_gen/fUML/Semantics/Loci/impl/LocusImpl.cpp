@@ -673,11 +673,11 @@ Any LocusImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_
 }
 
 
-std::shared_ptr<Locus> LocusImpl::getThisLocusPtr() const
+std::shared_ptr<fUML::Semantics::Loci::Locus> LocusImpl::getThisLocusPtr() const
 {
 	return m_thisLocusPtr.lock();
 }
-void LocusImpl::setThisLocusPtr(std::weak_ptr<Locus> thisLocusPtr)
+void LocusImpl::setThisLocusPtr(std::weak_ptr<fUML::Semantics::Loci::Locus> thisLocusPtr)
 {
 	m_thisLocusPtr = thisLocusPtr;
 }

@@ -33,8 +33,8 @@ virtual public EStringToStringMapEntry
 		protected:
 			friend class ecoreFactoryImpl;
 			EStringToStringMapEntryImpl();
-			virtual std::shared_ptr<EStringToStringMapEntry> getThisEStringToStringMapEntryPtr() const;
-			virtual void setThisEStringToStringMapEntryPtr(std::weak_ptr<EStringToStringMapEntry> thisEStringToStringMapEntryPtr);
+			virtual std::shared_ptr<ecore::EStringToStringMapEntry> getThisEStringToStringMapEntryPtr() const;
+			virtual void setThisEStringToStringMapEntryPtr(std::weak_ptr<ecore::EStringToStringMapEntry> thisEStringToStringMapEntryPtr);
 
 
 		public:
@@ -92,7 +92,7 @@ virtual public EStringToStringMapEntry
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<EStringToStringMapEntry> m_thisEStringToStringMapEntryPtr;
+			std::weak_ptr<ecore::EStringToStringMapEntry> m_thisEStringToStringMapEntryPtr;
 	};
 }
 #endif /* end of include guard: ECORE_ESTRINGTOSTRINGMAPENTRYESTRINGTOSTRINGMAPENTRYIMPL_HPP */

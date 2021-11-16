@@ -526,11 +526,11 @@ Any SlotImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_p
 }
 
 
-std::shared_ptr<Slot> SlotImpl::getThisSlotPtr() const
+std::shared_ptr<uml::Slot> SlotImpl::getThisSlotPtr() const
 {
 	return m_thisSlotPtr.lock();
 }
-void SlotImpl::setThisSlotPtr(std::weak_ptr<Slot> thisSlotPtr)
+void SlotImpl::setThisSlotPtr(std::weak_ptr<uml::Slot> thisSlotPtr)
 {
 	m_thisSlotPtr = thisSlotPtr;
 	setThisElementPtr(thisSlotPtr);

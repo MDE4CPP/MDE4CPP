@@ -39,9 +39,9 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "uml/umlFactory.hpp"
-#include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
+#include "fUML/Semantics/Actions/ActionsFactory.hpp"
+#include "uml/umlFactory.hpp"
 
 #include "uml/Action.hpp"
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
@@ -328,11 +328,11 @@ Any CS_ReadSelfActionActivationImpl::eInvoke(int operationID, std::shared_ptr<st
 }
 
 
-std::shared_ptr<CS_ReadSelfActionActivation> CS_ReadSelfActionActivationImpl::getThisCS_ReadSelfActionActivationPtr() const
+std::shared_ptr<PSCS::Semantics::Actions::CS_ReadSelfActionActivation> CS_ReadSelfActionActivationImpl::getThisCS_ReadSelfActionActivationPtr() const
 {
 	return m_thisCS_ReadSelfActionActivationPtr.lock();
 }
-void CS_ReadSelfActionActivationImpl::setThisCS_ReadSelfActionActivationPtr(std::weak_ptr<CS_ReadSelfActionActivation> thisCS_ReadSelfActionActivationPtr)
+void CS_ReadSelfActionActivationImpl::setThisCS_ReadSelfActionActivationPtr(std::weak_ptr<PSCS::Semantics::Actions::CS_ReadSelfActionActivation> thisCS_ReadSelfActionActivationPtr)
 {
 	m_thisCS_ReadSelfActionActivationPtr = thisCS_ReadSelfActionActivationPtr;
 	setThisReadSelfActionActivationPtr(thisCS_ReadSelfActionActivationPtr);

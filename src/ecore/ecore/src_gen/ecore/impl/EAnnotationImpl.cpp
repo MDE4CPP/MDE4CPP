@@ -619,11 +619,11 @@ Any EAnnotationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::s
 }
 
 
-std::shared_ptr<EAnnotation> EAnnotationImpl::getThisEAnnotationPtr() const
+std::shared_ptr<ecore::EAnnotation> EAnnotationImpl::getThisEAnnotationPtr() const
 {
 	return m_thisEAnnotationPtr.lock();
 }
-void EAnnotationImpl::setThisEAnnotationPtr(std::weak_ptr<EAnnotation> thisEAnnotationPtr)
+void EAnnotationImpl::setThisEAnnotationPtr(std::weak_ptr<ecore::EAnnotation> thisEAnnotationPtr)
 {
 	m_thisEAnnotationPtr = thisEAnnotationPtr;
 	setThisEModelElementPtr(thisEAnnotationPtr);

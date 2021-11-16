@@ -32,8 +32,8 @@ namespace ocl::Expressions
 		protected:
 			friend class ocl::Expressions::ExpressionsFactoryImpl;
 			VariableExpImpl();
-			virtual std::shared_ptr<VariableExp> getThisVariableExpPtr() const;
-			virtual void setThisVariableExpPtr(std::weak_ptr<VariableExp> thisVariableExpPtr);
+			virtual std::shared_ptr<ocl::Expressions::VariableExp> getThisVariableExpPtr() const;
+			virtual void setThisVariableExpPtr(std::weak_ptr<ocl::Expressions::VariableExp> thisVariableExpPtr);
 
 			//Additional constructors for the containments back reference
 			VariableExpImpl(std::weak_ptr<ocl::Expressions::CallExp> par_appliedElement);
@@ -108,7 +108,7 @@ namespace ocl::Expressions
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<VariableExp> m_thisVariableExpPtr;
+			std::weak_ptr<ocl::Expressions::VariableExp> m_thisVariableExpPtr;
 	};
 }
 #endif /* end of include guard: OCL_EXPRESSIONS_VARIABLEEXPVARIABLEEXPIMPL_HPP */

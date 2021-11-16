@@ -1302,11 +1302,11 @@ Any ClassImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_
 }
 
 
-std::shared_ptr<Class> ClassImpl::getThisClassPtr() const
+std::shared_ptr<uml::Class> ClassImpl::getThisClassPtr() const
 {
 	return m_thisClassPtr.lock();
 }
-void ClassImpl::setThisClassPtr(std::weak_ptr<Class> thisClassPtr)
+void ClassImpl::setThisClassPtr(std::weak_ptr<uml::Class> thisClassPtr)
 {
 	m_thisClassPtr = thisClassPtr;
 	setThisBehavioredClassifierPtr(thisClassPtr);

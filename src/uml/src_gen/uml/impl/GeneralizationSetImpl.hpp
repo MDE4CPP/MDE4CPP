@@ -31,8 +31,8 @@ namespace uml
 		protected:
 			friend class umlFactoryImpl;
 			GeneralizationSetImpl();
-			virtual std::shared_ptr<GeneralizationSet> getThisGeneralizationSetPtr() const;
-			virtual void setThisGeneralizationSetPtr(std::weak_ptr<GeneralizationSet> thisGeneralizationSetPtr);
+			virtual std::shared_ptr<uml::GeneralizationSet> getThisGeneralizationSetPtr() const;
+			virtual void setThisGeneralizationSetPtr(std::weak_ptr<uml::GeneralizationSet> thisGeneralizationSetPtr);
 
 			//Additional constructors for the containments back reference
 			GeneralizationSetImpl(std::weak_ptr<uml::Namespace> par_namespace);
@@ -169,7 +169,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<GeneralizationSet> m_thisGeneralizationSetPtr;
+			std::weak_ptr<uml::GeneralizationSet> m_thisGeneralizationSetPtr;
 	};
 }
 #endif /* end of include guard: UML_GENERALIZATIONSETGENERALIZATIONSETIMPL_HPP */

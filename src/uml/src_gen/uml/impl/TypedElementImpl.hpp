@@ -25,14 +25,14 @@ namespace uml
 	{
 		public: 
 			TypedElementImpl(const TypedElementImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 			TypedElementImpl& operator=(TypedElementImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;
 			TypedElementImpl();
-			virtual std::shared_ptr<TypedElement> getThisTypedElementPtr() const;
-			virtual void setThisTypedElementPtr(std::weak_ptr<TypedElement> thisTypedElementPtr);
+			virtual std::shared_ptr<uml::TypedElement> getThisTypedElementPtr() const;
+			virtual void setThisTypedElementPtr(std::weak_ptr<uml::TypedElement> thisTypedElementPtr);
 
 			//Additional constructors for the containments back reference
 			TypedElementImpl(std::weak_ptr<uml::Namespace> par_namespace);
@@ -41,7 +41,7 @@ namespace uml
 
 		public:
 			//destructor
-			virtual ~TypedElementImpl();
+			virtual ~TypedElementImpl() = 0;
 			
 			//*********************************
 			// Operations
@@ -114,7 +114,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<TypedElement> m_thisTypedElementPtr;
+			std::weak_ptr<uml::TypedElement> m_thisTypedElementPtr;
 	};
 }
 #endif /* end of include guard: UML_TYPEDELEMENTTYPEDELEMENTIMPL_HPP */

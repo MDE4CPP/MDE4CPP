@@ -33,8 +33,8 @@ namespace uml
 		protected:
 			friend class umlFactoryImpl;
 			OperationImpl();
-			virtual std::shared_ptr<Operation> getThisOperationPtr() const;
-			virtual void setThisOperationPtr(std::weak_ptr<Operation> thisOperationPtr);
+			virtual std::shared_ptr<uml::Operation> getThisOperationPtr() const;
+			virtual void setThisOperationPtr(std::weak_ptr<uml::Operation> thisOperationPtr);
 
 			//Additional constructors for the containments back reference
 			OperationImpl(std::weak_ptr<uml::Class> par_class);
@@ -317,7 +317,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<Operation> m_thisOperationPtr;
+			std::weak_ptr<uml::Operation> m_thisOperationPtr;
 	};
 }
 #endif /* end of include guard: UML_OPERATIONOPERATIONIMPL_HPP */

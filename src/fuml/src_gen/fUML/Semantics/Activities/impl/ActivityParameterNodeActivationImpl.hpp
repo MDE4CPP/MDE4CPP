@@ -32,8 +32,8 @@ namespace fUML::Semantics::Activities
 		protected:
 			friend class fUML::Semantics::Activities::ActivitiesFactoryImpl;
 			ActivityParameterNodeActivationImpl();
-			virtual std::shared_ptr<ActivityParameterNodeActivation> getThisActivityParameterNodeActivationPtr() const;
-			virtual void setThisActivityParameterNodeActivationPtr(std::weak_ptr<ActivityParameterNodeActivation> thisActivityParameterNodeActivationPtr);
+			virtual std::shared_ptr<fUML::Semantics::Activities::ActivityParameterNodeActivation> getThisActivityParameterNodeActivationPtr() const;
+			virtual void setThisActivityParameterNodeActivationPtr(std::weak_ptr<fUML::Semantics::Activities::ActivityParameterNodeActivation> thisActivityParameterNodeActivationPtr);
 
 			//Additional constructors for the containments back reference
 			ActivityParameterNodeActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_group);
@@ -91,7 +91,7 @@ namespace fUML::Semantics::Activities
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<ActivityParameterNodeActivation> m_thisActivityParameterNodeActivationPtr;
+			std::weak_ptr<fUML::Semantics::Activities::ActivityParameterNodeActivation> m_thisActivityParameterNodeActivationPtr;
 	};
 }
 #endif /* end of include guard: FUML_SEMANTICS_ACTIVITIES_ACTIVITYPARAMETERNODEACTIVATIONACTIVITYPARAMETERNODEACTIVATIONIMPL_HPP */

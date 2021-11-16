@@ -33,8 +33,8 @@ virtual public Object
 		protected:
 			friend class umlFactoryImpl;
 			ObjectImpl();
-			virtual std::shared_ptr<Object> getThisObjectPtr() const;
-			virtual void setThisObjectPtr(std::weak_ptr<Object> thisObjectPtr);
+			virtual std::shared_ptr<uml::Object> getThisObjectPtr() const;
+			virtual void setThisObjectPtr(std::weak_ptr<uml::Object> thisObjectPtr);
 
 
 		public:
@@ -109,7 +109,7 @@ virtual public Object
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<Object> m_thisObjectPtr;
+			std::weak_ptr<uml::Object> m_thisObjectPtr;
 	};
 }
 #endif /* end of include guard: UML_OBJECTOBJECTIMPL_HPP */

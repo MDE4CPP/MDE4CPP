@@ -1560,11 +1560,11 @@ Any EClassImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared
 }
 
 
-std::shared_ptr<EClass> EClassImpl::getThisEClassPtr() const
+std::shared_ptr<ecore::EClass> EClassImpl::getThisEClassPtr() const
 {
 	return m_thisEClassPtr.lock();
 }
-void EClassImpl::setThisEClassPtr(std::weak_ptr<EClass> thisEClassPtr)
+void EClassImpl::setThisEClassPtr(std::weak_ptr<ecore::EClass> thisEClassPtr)
 {
 	m_thisEClassPtr = thisEClassPtr;
 	setThisEClassifierPtr(thisEClassPtr);

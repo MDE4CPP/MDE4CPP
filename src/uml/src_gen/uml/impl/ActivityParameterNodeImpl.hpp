@@ -31,8 +31,8 @@ namespace uml
 		protected:
 			friend class umlFactoryImpl;
 			ActivityParameterNodeImpl();
-			virtual std::shared_ptr<ActivityParameterNode> getThisActivityParameterNodePtr() const;
-			virtual void setThisActivityParameterNodePtr(std::weak_ptr<ActivityParameterNode> thisActivityParameterNodePtr);
+			virtual std::shared_ptr<uml::ActivityParameterNode> getThisActivityParameterNodePtr() const;
+			virtual void setThisActivityParameterNodePtr(std::weak_ptr<uml::ActivityParameterNode> thisActivityParameterNodePtr);
 
 			//Additional constructors for the containments back reference
 			ActivityParameterNodeImpl(std::weak_ptr<uml::Activity> par_activity);
@@ -165,7 +165,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<ActivityParameterNode> m_thisActivityParameterNodePtr;
+			std::weak_ptr<uml::ActivityParameterNode> m_thisActivityParameterNodePtr;
 	};
 }
 #endif /* end of include guard: UML_ACTIVITYPARAMETERNODEACTIVITYPARAMETERNODEIMPL_HPP */

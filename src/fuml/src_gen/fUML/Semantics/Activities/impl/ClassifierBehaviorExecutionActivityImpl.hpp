@@ -34,8 +34,8 @@ virtual public ClassifierBehaviorExecutionActivity
 		protected:
 			friend class fUML::Semantics::Activities::ActivitiesFactoryImpl;
 			ClassifierBehaviorExecutionActivityImpl();
-			virtual std::shared_ptr<ClassifierBehaviorExecutionActivity> getThisClassifierBehaviorExecutionActivityPtr() const;
-			virtual void setThisClassifierBehaviorExecutionActivityPtr(std::weak_ptr<ClassifierBehaviorExecutionActivity> thisClassifierBehaviorExecutionActivityPtr);
+			virtual std::shared_ptr<fUML::Semantics::Activities::ClassifierBehaviorExecutionActivity> getThisClassifierBehaviorExecutionActivityPtr() const;
+			virtual void setThisClassifierBehaviorExecutionActivityPtr(std::weak_ptr<fUML::Semantics::Activities::ClassifierBehaviorExecutionActivity> thisClassifierBehaviorExecutionActivityPtr);
 
 
 		public:
@@ -89,7 +89,7 @@ virtual public ClassifierBehaviorExecutionActivity
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<ClassifierBehaviorExecutionActivity> m_thisClassifierBehaviorExecutionActivityPtr;
+			std::weak_ptr<fUML::Semantics::Activities::ClassifierBehaviorExecutionActivity> m_thisClassifierBehaviorExecutionActivityPtr;
 	};
 }
 #endif /* end of include guard: FUML_SEMANTICS_ACTIVITIES_CLASSIFIERBEHAVIOREXECUTIONACTIVITYCLASSIFIERBEHAVIOREXECUTIONACTIVITYIMPL_HPP */

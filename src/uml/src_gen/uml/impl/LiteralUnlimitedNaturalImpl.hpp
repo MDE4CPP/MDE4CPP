@@ -31,8 +31,8 @@ namespace uml
 		protected:
 			friend class umlFactoryImpl;
 			LiteralUnlimitedNaturalImpl();
-			virtual std::shared_ptr<LiteralUnlimitedNatural> getThisLiteralUnlimitedNaturalPtr() const;
-			virtual void setThisLiteralUnlimitedNaturalPtr(std::weak_ptr<LiteralUnlimitedNatural> thisLiteralUnlimitedNaturalPtr);
+			virtual std::shared_ptr<uml::LiteralUnlimitedNatural> getThisLiteralUnlimitedNaturalPtr() const;
+			virtual void setThisLiteralUnlimitedNaturalPtr(std::weak_ptr<uml::LiteralUnlimitedNatural> thisLiteralUnlimitedNaturalPtr);
 
 			//Additional constructors for the containments back reference
 			LiteralUnlimitedNaturalImpl(std::weak_ptr<uml::Namespace> par_namespace);
@@ -143,7 +143,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<LiteralUnlimitedNatural> m_thisLiteralUnlimitedNaturalPtr;
+			std::weak_ptr<uml::LiteralUnlimitedNatural> m_thisLiteralUnlimitedNaturalPtr;
 	};
 }
 #endif /* end of include guard: UML_LITERALUNLIMITEDNATURALLITERALUNLIMITEDNATURALIMPL_HPP */

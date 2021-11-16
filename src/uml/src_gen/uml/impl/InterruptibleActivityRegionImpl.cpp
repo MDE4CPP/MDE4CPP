@@ -585,11 +585,11 @@ Any InterruptibleActivityRegionImpl::eInvoke(int operationID, std::shared_ptr<st
 }
 
 
-std::shared_ptr<InterruptibleActivityRegion> InterruptibleActivityRegionImpl::getThisInterruptibleActivityRegionPtr() const
+std::shared_ptr<uml::InterruptibleActivityRegion> InterruptibleActivityRegionImpl::getThisInterruptibleActivityRegionPtr() const
 {
 	return m_thisInterruptibleActivityRegionPtr.lock();
 }
-void InterruptibleActivityRegionImpl::setThisInterruptibleActivityRegionPtr(std::weak_ptr<InterruptibleActivityRegion> thisInterruptibleActivityRegionPtr)
+void InterruptibleActivityRegionImpl::setThisInterruptibleActivityRegionPtr(std::weak_ptr<uml::InterruptibleActivityRegion> thisInterruptibleActivityRegionPtr)
 {
 	m_thisInterruptibleActivityRegionPtr = thisInterruptibleActivityRegionPtr;
 	setThisActivityGroupPtr(thisInterruptibleActivityRegionPtr);

@@ -585,11 +585,11 @@ Any SendSignalActionImpl::eInvoke(int operationID, std::shared_ptr<std::list < s
 }
 
 
-std::shared_ptr<SendSignalAction> SendSignalActionImpl::getThisSendSignalActionPtr() const
+std::shared_ptr<uml::SendSignalAction> SendSignalActionImpl::getThisSendSignalActionPtr() const
 {
 	return m_thisSendSignalActionPtr.lock();
 }
-void SendSignalActionImpl::setThisSendSignalActionPtr(std::weak_ptr<SendSignalAction> thisSendSignalActionPtr)
+void SendSignalActionImpl::setThisSendSignalActionPtr(std::weak_ptr<uml::SendSignalAction> thisSendSignalActionPtr)
 {
 	m_thisSendSignalActionPtr = thisSendSignalActionPtr;
 	setThisInvocationActionPtr(thisSendSignalActionPtr);

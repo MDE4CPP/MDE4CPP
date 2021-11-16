@@ -32,8 +32,8 @@ namespace PSCS::Semantics::Actions
 		protected:
 			friend class PSCS::Semantics::Actions::ActionsFactoryImpl;
 			CS_DefaultConstructStrategyImpl();
-			virtual std::shared_ptr<CS_DefaultConstructStrategy> getThisCS_DefaultConstructStrategyPtr() const;
-			virtual void setThisCS_DefaultConstructStrategyPtr(std::weak_ptr<CS_DefaultConstructStrategy> thisCS_DefaultConstructStrategyPtr);
+			virtual std::shared_ptr<PSCS::Semantics::Actions::CS_DefaultConstructStrategy> getThisCS_DefaultConstructStrategyPtr() const;
+			virtual void setThisCS_DefaultConstructStrategyPtr(std::weak_ptr<PSCS::Semantics::Actions::CS_DefaultConstructStrategy> thisCS_DefaultConstructStrategyPtr);
 
 
 		public:
@@ -106,7 +106,7 @@ namespace PSCS::Semantics::Actions
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<CS_DefaultConstructStrategy> m_thisCS_DefaultConstructStrategyPtr;
+			std::weak_ptr<PSCS::Semantics::Actions::CS_DefaultConstructStrategy> m_thisCS_DefaultConstructStrategyPtr;
 	};
 }
 #endif /* end of include guard: PSCS_SEMANTICS_ACTIONS_CS_DEFAULTCONSTRUCTSTRATEGYCS_DEFAULTCONSTRUCTSTRATEGYIMPL_HPP */

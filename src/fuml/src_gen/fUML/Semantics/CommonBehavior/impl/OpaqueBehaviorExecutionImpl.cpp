@@ -40,10 +40,10 @@
 
 #include <exception> // used in Persistence
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
-#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
+#include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
 #include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
-#include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
+#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
 
 #include "uml/Behavior.hpp"
 #include "uml/Classifier.hpp"
@@ -118,14 +118,6 @@ OpaqueBehaviorExecutionImpl& OpaqueBehaviorExecutionImpl::operator=(const Opaque
 	return *this;
 }
 
-std::shared_ptr<ecore::EObject> OpaqueBehaviorExecutionImpl::copy() const
-{
-	std::shared_ptr<OpaqueBehaviorExecutionImpl> element(new OpaqueBehaviorExecutionImpl());
-	*element =(*this);
-	element->setThisOpaqueBehaviorExecutionPtr(element);
-	return element;
-}
-
 //*********************************
 // Operations
 //*********************************
@@ -147,7 +139,7 @@ void OpaqueBehaviorExecutionImpl::execute()
 	std::shared_ptr<Bag<uml::Parameter> > parameterList = this->getBehavior()->getOwnedParameter();
     for(std::shared_ptr<uml::Parameter> parameter : *parameterList) 
     {
-        DEBUG_MESSAGE(std::cout<<parameter->getName()<< " Parameter Direction: " << parameter->getDirection()<<std::endl;)
+        DEBUG_MESSAGE(std::cout<<parameter->getName()<< " Parameter Direction: " << (int) parameter->getDirection()<<std::endl;)
         if ((parameter->getDirection() == uml::ParameterDirectionKind::IN)
                 || (parameter->getDirection() == uml::ParameterDirectionKind::INOUT)) 
         {
@@ -359,11 +351,11 @@ Any OpaqueBehaviorExecutionImpl::eInvoke(int operationID, std::shared_ptr<std::l
 }
 
 
-std::shared_ptr<OpaqueBehaviorExecution> OpaqueBehaviorExecutionImpl::getThisOpaqueBehaviorExecutionPtr() const
+std::shared_ptr<fUML::Semantics::CommonBehavior::OpaqueBehaviorExecution> OpaqueBehaviorExecutionImpl::getThisOpaqueBehaviorExecutionPtr() const
 {
 	return m_thisOpaqueBehaviorExecutionPtr.lock();
 }
-void OpaqueBehaviorExecutionImpl::setThisOpaqueBehaviorExecutionPtr(std::weak_ptr<OpaqueBehaviorExecution> thisOpaqueBehaviorExecutionPtr)
+void OpaqueBehaviorExecutionImpl::setThisOpaqueBehaviorExecutionPtr(std::weak_ptr<fUML::Semantics::CommonBehavior::OpaqueBehaviorExecution> thisOpaqueBehaviorExecutionPtr)
 {
 	m_thisOpaqueBehaviorExecutionPtr = thisOpaqueBehaviorExecutionPtr;
 	setThisExecutionPtr(thisOpaqueBehaviorExecutionPtr);

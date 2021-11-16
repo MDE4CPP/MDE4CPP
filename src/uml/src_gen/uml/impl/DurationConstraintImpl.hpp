@@ -31,8 +31,8 @@ namespace uml
 		protected:
 			friend class umlFactoryImpl;
 			DurationConstraintImpl();
-			virtual std::shared_ptr<DurationConstraint> getThisDurationConstraintPtr() const;
-			virtual void setThisDurationConstraintPtr(std::weak_ptr<DurationConstraint> thisDurationConstraintPtr);
+			virtual std::shared_ptr<uml::DurationConstraint> getThisDurationConstraintPtr() const;
+			virtual void setThisDurationConstraintPtr(std::weak_ptr<uml::DurationConstraint> thisDurationConstraintPtr);
 
 			//Additional constructors for the containments back reference
 			DurationConstraintImpl(std::weak_ptr<uml::Namespace> par_Namespace, const int reference_id);
@@ -134,7 +134,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<DurationConstraint> m_thisDurationConstraintPtr;
+			std::weak_ptr<uml::DurationConstraint> m_thisDurationConstraintPtr;
 	};
 }
 #endif /* end of include guard: UML_DURATIONCONSTRAINTDURATIONCONSTRAINTIMPL_HPP */

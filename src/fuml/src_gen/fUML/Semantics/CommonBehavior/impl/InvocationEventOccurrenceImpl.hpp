@@ -32,8 +32,8 @@ namespace fUML::Semantics::CommonBehavior
 		protected:
 			friend class fUML::Semantics::CommonBehavior::CommonBehaviorFactoryImpl;
 			InvocationEventOccurrenceImpl();
-			virtual std::shared_ptr<InvocationEventOccurrence> getThisInvocationEventOccurrencePtr() const;
-			virtual void setThisInvocationEventOccurrencePtr(std::weak_ptr<InvocationEventOccurrence> thisInvocationEventOccurrencePtr);
+			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::InvocationEventOccurrence> getThisInvocationEventOccurrencePtr() const;
+			virtual void setThisInvocationEventOccurrencePtr(std::weak_ptr<fUML::Semantics::CommonBehavior::InvocationEventOccurrence> thisInvocationEventOccurrencePtr);
 
 
 		public:
@@ -91,7 +91,7 @@ namespace fUML::Semantics::CommonBehavior
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<InvocationEventOccurrence> m_thisInvocationEventOccurrencePtr;
+			std::weak_ptr<fUML::Semantics::CommonBehavior::InvocationEventOccurrence> m_thisInvocationEventOccurrencePtr;
 	};
 }
 #endif /* end of include guard: FUML_SEMANTICS_COMMONBEHAVIOR_INVOCATIONEVENTOCCURRENCEINVOCATIONEVENTOCCURRENCEIMPL_HPP */

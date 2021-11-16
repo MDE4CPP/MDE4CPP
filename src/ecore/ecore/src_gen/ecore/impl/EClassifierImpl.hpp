@@ -25,14 +25,14 @@ namespace ecore
 	{
 		public: 
 			EClassifierImpl(const EClassifierImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 			EClassifierImpl& operator=(EClassifierImpl const&); 
 
 		protected:
 			friend class ecoreFactoryImpl;
 			EClassifierImpl();
-			virtual std::shared_ptr<EClassifier> getThisEClassifierPtr() const;
-			virtual void setThisEClassifierPtr(std::weak_ptr<EClassifier> thisEClassifierPtr);
+			virtual std::shared_ptr<ecore::EClassifier> getThisEClassifierPtr() const;
+			virtual void setThisEClassifierPtr(std::weak_ptr<ecore::EClassifier> thisEClassifierPtr);
 
 			//Additional constructors for the containments back reference
 			EClassifierImpl(std::weak_ptr<ecore::EObject> par_eContainer);
@@ -41,7 +41,7 @@ namespace ecore
 
 		public:
 			//destructor
-			virtual ~EClassifierImpl();
+			virtual ~EClassifierImpl() = 0;
 			
 			//*********************************
 			// Operations
@@ -102,7 +102,7 @@ namespace ecore
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<EClassifier> m_thisEClassifierPtr;
+			std::weak_ptr<ecore::EClassifier> m_thisEClassifierPtr;
 	};
 }
 #endif /* end of include guard: ECORE_ECLASSIFIERECLASSIFIERIMPL_HPP */

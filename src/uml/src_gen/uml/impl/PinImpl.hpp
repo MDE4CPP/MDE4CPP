@@ -26,14 +26,14 @@ namespace uml
 	{
 		public: 
 			PinImpl(const PinImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 			PinImpl& operator=(PinImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;
 			PinImpl();
-			virtual std::shared_ptr<Pin> getThisPinPtr() const;
-			virtual void setThisPinPtr(std::weak_ptr<Pin> thisPinPtr);
+			virtual std::shared_ptr<uml::Pin> getThisPinPtr() const;
+			virtual void setThisPinPtr(std::weak_ptr<uml::Pin> thisPinPtr);
 
 			//Additional constructors for the containments back reference
 			PinImpl(std::weak_ptr<uml::Activity> par_activity);
@@ -46,7 +46,7 @@ namespace uml
 
 		public:
 			//destructor
-			virtual ~PinImpl();
+			virtual ~PinImpl() = 0;
 			
 			//*********************************
 			// Operations
@@ -143,7 +143,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<Pin> m_thisPinPtr;
+			std::weak_ptr<uml::Pin> m_thisPinPtr;
 	};
 }
 #endif /* end of include guard: UML_PINPINIMPL_HPP */

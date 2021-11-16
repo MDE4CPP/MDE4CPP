@@ -117,14 +117,6 @@ MessageEndImpl& MessageEndImpl::operator=(const MessageEndImpl & obj)
 	return *this;
 }
 
-std::shared_ptr<ecore::EObject> MessageEndImpl::copy() const
-{
-	std::shared_ptr<MessageEndImpl> element(new MessageEndImpl());
-	*element =(*this);
-	element->setThisMessageEndPtr(element);
-	return element;
-}
-
 //*********************************
 // Operations
 //*********************************
@@ -409,11 +401,11 @@ Any MessageEndImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sh
 }
 
 
-std::shared_ptr<MessageEnd> MessageEndImpl::getThisMessageEndPtr() const
+std::shared_ptr<uml::MessageEnd> MessageEndImpl::getThisMessageEndPtr() const
 {
 	return m_thisMessageEndPtr.lock();
 }
-void MessageEndImpl::setThisMessageEndPtr(std::weak_ptr<MessageEnd> thisMessageEndPtr)
+void MessageEndImpl::setThisMessageEndPtr(std::weak_ptr<uml::MessageEnd> thisMessageEndPtr)
 {
 	m_thisMessageEndPtr = thisMessageEndPtr;
 	setThisNamedElementPtr(thisMessageEndPtr);

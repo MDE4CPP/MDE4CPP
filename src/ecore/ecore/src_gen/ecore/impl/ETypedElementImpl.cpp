@@ -117,14 +117,6 @@ ETypedElementImpl& ETypedElementImpl::operator=(const ETypedElementImpl & obj)
 	return *this;
 }
 
-std::shared_ptr<ecore::EObject> ETypedElementImpl::copy() const
-{
-	std::shared_ptr<ETypedElementImpl> element(new ETypedElementImpl());
-	*element =(*this);
-	element->setThisETypedElementPtr(element);
-	return element;
-}
-
 //*********************************
 // Operations
 //*********************************
@@ -578,11 +570,11 @@ Any ETypedElementImpl::eInvoke(int operationID, std::shared_ptr<std::list < std:
 }
 
 
-std::shared_ptr<ETypedElement> ETypedElementImpl::getThisETypedElementPtr() const
+std::shared_ptr<ecore::ETypedElement> ETypedElementImpl::getThisETypedElementPtr() const
 {
 	return m_thisETypedElementPtr.lock();
 }
-void ETypedElementImpl::setThisETypedElementPtr(std::weak_ptr<ETypedElement> thisETypedElementPtr)
+void ETypedElementImpl::setThisETypedElementPtr(std::weak_ptr<ecore::ETypedElement> thisETypedElementPtr)
 {
 	m_thisETypedElementPtr = thisETypedElementPtr;
 	setThisENamedElementPtr(thisETypedElementPtr);

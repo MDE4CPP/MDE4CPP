@@ -32,8 +32,8 @@ namespace fUML::Semantics::Actions
 		protected:
 			friend class fUML::Semantics::Actions::ActionsFactoryImpl;
 			RemoveStructuralFeatureValueActivationImpl();
-			virtual std::shared_ptr<RemoveStructuralFeatureValueActivation> getThisRemoveStructuralFeatureValueActivationPtr() const;
-			virtual void setThisRemoveStructuralFeatureValueActivationPtr(std::weak_ptr<RemoveStructuralFeatureValueActivation> thisRemoveStructuralFeatureValueActivationPtr);
+			virtual std::shared_ptr<fUML::Semantics::Actions::RemoveStructuralFeatureValueActivation> getThisRemoveStructuralFeatureValueActivationPtr() const;
+			virtual void setThisRemoveStructuralFeatureValueActivationPtr(std::weak_ptr<fUML::Semantics::Actions::RemoveStructuralFeatureValueActivation> thisRemoveStructuralFeatureValueActivationPtr);
 
 			//Additional constructors for the containments back reference
 			RemoveStructuralFeatureValueActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_group);
@@ -97,7 +97,7 @@ namespace fUML::Semantics::Actions
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<RemoveStructuralFeatureValueActivation> m_thisRemoveStructuralFeatureValueActivationPtr;
+			std::weak_ptr<fUML::Semantics::Actions::RemoveStructuralFeatureValueActivation> m_thisRemoveStructuralFeatureValueActivationPtr;
 	};
 }
 #endif /* end of include guard: FUML_SEMANTICS_ACTIONS_REMOVESTRUCTURALFEATUREVALUEACTIVATIONREMOVESTRUCTURALFEATUREVALUEACTIVATIONIMPL_HPP */

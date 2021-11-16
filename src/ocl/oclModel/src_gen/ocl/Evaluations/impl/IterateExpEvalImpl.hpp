@@ -32,8 +32,8 @@ namespace ocl::Evaluations
 		protected:
 			friend class ocl::Evaluations::EvaluationsFactoryImpl;
 			IterateExpEvalImpl();
-			virtual std::shared_ptr<IterateExpEval> getThisIterateExpEvalPtr() const;
-			virtual void setThisIterateExpEvalPtr(std::weak_ptr<IterateExpEval> thisIterateExpEvalPtr);
+			virtual std::shared_ptr<ocl::Evaluations::IterateExpEval> getThisIterateExpEvalPtr() const;
+			virtual void setThisIterateExpEvalPtr(std::weak_ptr<ocl::Evaluations::IterateExpEval> thisIterateExpEvalPtr);
 
 
 		public:
@@ -89,7 +89,7 @@ namespace ocl::Evaluations
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<IterateExpEval> m_thisIterateExpEvalPtr;
+			std::weak_ptr<ocl::Evaluations::IterateExpEval> m_thisIterateExpEvalPtr;
 	};
 }
 #endif /* end of include guard: OCL_EVALUATIONS_ITERATEEXPEVALITERATEEXPEVALIMPL_HPP */

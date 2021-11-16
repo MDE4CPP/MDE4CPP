@@ -34,8 +34,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
+#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
 
 #include "fUML/Semantics/SimpleClassifiers/CompoundValue.hpp"
 #include "fUML/Semantics/SimpleClassifiers/FeatureValue.hpp"
@@ -104,14 +104,6 @@ ExtensionalValueImpl& ExtensionalValueImpl::operator=(const ExtensionalValueImpl
 	m_locus  = obj.getLocus();
 	//Clone references with containment (deep copy)
 	return *this;
-}
-
-std::shared_ptr<ecore::EObject> ExtensionalValueImpl::copy() const
-{
-	std::shared_ptr<ExtensionalValueImpl> element(new ExtensionalValueImpl());
-	*element =(*this);
-	element->setThisExtensionalValuePtr(element);
-	return element;
 }
 
 //*********************************
@@ -362,11 +354,11 @@ Any ExtensionalValueImpl::eInvoke(int operationID, std::shared_ptr<std::list < s
 }
 
 
-std::shared_ptr<ExtensionalValue> ExtensionalValueImpl::getThisExtensionalValuePtr() const
+std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue> ExtensionalValueImpl::getThisExtensionalValuePtr() const
 {
 	return m_thisExtensionalValuePtr.lock();
 }
-void ExtensionalValueImpl::setThisExtensionalValuePtr(std::weak_ptr<ExtensionalValue> thisExtensionalValuePtr)
+void ExtensionalValueImpl::setThisExtensionalValuePtr(std::weak_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue> thisExtensionalValuePtr)
 {
 	m_thisExtensionalValuePtr = thisExtensionalValuePtr;
 	setThisCompoundValuePtr(thisExtensionalValuePtr);

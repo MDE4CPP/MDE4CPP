@@ -32,8 +32,8 @@ namespace PSCS::Semantics::StructuredClassifiers
 		protected:
 			friend class PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactoryImpl;
 			CS_InteractionPointImpl();
-			virtual std::shared_ptr<CS_InteractionPoint> getThisCS_InteractionPointPtr() const;
-			virtual void setThisCS_InteractionPointPtr(std::weak_ptr<CS_InteractionPoint> thisCS_InteractionPointPtr);
+			virtual std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint> getThisCS_InteractionPointPtr() const;
+			virtual void setThisCS_InteractionPointPtr(std::weak_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint> thisCS_InteractionPointPtr);
 
 
 		public:
@@ -95,7 +95,7 @@ namespace PSCS::Semantics::StructuredClassifiers
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<CS_InteractionPoint> m_thisCS_InteractionPointPtr;
+			std::weak_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint> m_thisCS_InteractionPointPtr;
 	};
 }
 #endif /* end of include guard: PSCS_SEMANTICS_STRUCTUREDCLASSIFIERS_CS_INTERACTIONPOINTCS_INTERACTIONPOINTIMPL_HPP */

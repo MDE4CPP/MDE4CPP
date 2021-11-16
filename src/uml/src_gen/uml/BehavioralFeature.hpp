@@ -222,7 +222,7 @@ namespace uml
 			<p>From package UML::Classification.</p>
 			*/
 			
-			uml::CallConcurrencyKind m_concurrency= CallConcurrencyKind::SEQUENTIAL;
+			uml::CallConcurrencyKind m_concurrency= uml::CallConcurrencyKind::SEQUENTIAL;
 			/*!
 			If true, then the BehavioralFeature does not have an implementation, and one must be supplied by a more specific Classifier. If false, the BehavioralFeature must have an implementation in the Classifier or one must be inherited.
 			<p>From package UML::Classification.</p>

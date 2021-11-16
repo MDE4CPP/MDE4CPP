@@ -513,11 +513,11 @@ Any AcceptEventActionActivationImpl::eInvoke(int operationID, std::shared_ptr<st
 }
 
 
-std::shared_ptr<AcceptEventActionActivation> AcceptEventActionActivationImpl::getThisAcceptEventActionActivationPtr() const
+std::shared_ptr<fUML::Semantics::Actions::AcceptEventActionActivation> AcceptEventActionActivationImpl::getThisAcceptEventActionActivationPtr() const
 {
 	return m_thisAcceptEventActionActivationPtr.lock();
 }
-void AcceptEventActionActivationImpl::setThisAcceptEventActionActivationPtr(std::weak_ptr<AcceptEventActionActivation> thisAcceptEventActionActivationPtr)
+void AcceptEventActionActivationImpl::setThisAcceptEventActionActivationPtr(std::weak_ptr<fUML::Semantics::Actions::AcceptEventActionActivation> thisAcceptEventActionActivationPtr)
 {
 	m_thisAcceptEventActionActivationPtr = thisAcceptEventActionActivationPtr;
 	setThisActionActivationPtr(thisAcceptEventActionActivationPtr);

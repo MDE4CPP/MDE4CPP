@@ -9,7 +9,7 @@
 
 namespace PSCS::Semantics::StructuredClassifiers 
 {
-	enum CS_LinkKind {
+	enum class CS_LinkKind {
 		
 		NONE = 2
 ,

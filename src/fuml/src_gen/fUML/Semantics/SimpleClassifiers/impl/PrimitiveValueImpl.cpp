@@ -105,14 +105,6 @@ PrimitiveValueImpl& PrimitiveValueImpl::operator=(const PrimitiveValueImpl & obj
 	return *this;
 }
 
-std::shared_ptr<ecore::EObject> PrimitiveValueImpl::copy() const
-{
-	std::shared_ptr<PrimitiveValueImpl> element(new PrimitiveValueImpl());
-	*element =(*this);
-	element->setThisPrimitiveValuePtr(element);
-	return element;
-}
-
 //*********************************
 // Operations
 //*********************************
@@ -122,7 +114,8 @@ std::shared_ptr<fUML::Semantics::Values::Value> PrimitiveValueImpl::_copy()
 	//generated from body annotation
 	// Create a new value that is equal to this primitive value.
 
-std::shared_ptr<fUML::Semantics::SimpleClassifiers::PrimitiveValue> newValue(new fUML::Semantics::SimpleClassifiers::PrimitiveValueImpl());
+std::shared_ptr<fUML::Semantics::SimpleClassifiers::PrimitiveValue> newValue =
+	std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::PrimitiveValue>(fUML::Semantics::Values::ValueImpl::_copy());
 newValue->setType(this->getType());
 return newValue;
 	//end of body
@@ -355,11 +348,11 @@ Any PrimitiveValueImpl::eInvoke(int operationID, std::shared_ptr<std::list < std
 }
 
 
-std::shared_ptr<PrimitiveValue> PrimitiveValueImpl::getThisPrimitiveValuePtr() const
+std::shared_ptr<fUML::Semantics::SimpleClassifiers::PrimitiveValue> PrimitiveValueImpl::getThisPrimitiveValuePtr() const
 {
 	return m_thisPrimitiveValuePtr.lock();
 }
-void PrimitiveValueImpl::setThisPrimitiveValuePtr(std::weak_ptr<PrimitiveValue> thisPrimitiveValuePtr)
+void PrimitiveValueImpl::setThisPrimitiveValuePtr(std::weak_ptr<fUML::Semantics::SimpleClassifiers::PrimitiveValue> thisPrimitiveValuePtr)
 {
 	m_thisPrimitiveValuePtr = thisPrimitiveValuePtr;
 	setThisValuePtr(thisPrimitiveValuePtr);

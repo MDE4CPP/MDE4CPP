@@ -147,14 +147,6 @@ TemplateableElementImpl& TemplateableElementImpl::operator=(const TemplateableEl
 	return *this;
 }
 
-std::shared_ptr<ecore::EObject> TemplateableElementImpl::copy() const
-{
-	std::shared_ptr<TemplateableElementImpl> element(new TemplateableElementImpl());
-	*element =(*this);
-	element->setThisTemplateableElementPtr(element);
-	return element;
-}
-
 //*********************************
 // Operations
 //*********************************
@@ -483,11 +475,11 @@ Any TemplateableElementImpl::eInvoke(int operationID, std::shared_ptr<std::list 
 }
 
 
-std::shared_ptr<TemplateableElement> TemplateableElementImpl::getThisTemplateableElementPtr() const
+std::shared_ptr<uml::TemplateableElement> TemplateableElementImpl::getThisTemplateableElementPtr() const
 {
 	return m_thisTemplateableElementPtr.lock();
 }
-void TemplateableElementImpl::setThisTemplateableElementPtr(std::weak_ptr<TemplateableElement> thisTemplateableElementPtr)
+void TemplateableElementImpl::setThisTemplateableElementPtr(std::weak_ptr<uml::TemplateableElement> thisTemplateableElementPtr)
 {
 	m_thisTemplateableElementPtr = thisTemplateableElementPtr;
 	setThisElementPtr(thisTemplateableElementPtr);

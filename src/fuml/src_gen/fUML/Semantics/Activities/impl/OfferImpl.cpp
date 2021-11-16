@@ -473,11 +473,11 @@ Any OfferImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_
 }
 
 
-std::shared_ptr<Offer> OfferImpl::getThisOfferPtr() const
+std::shared_ptr<fUML::Semantics::Activities::Offer> OfferImpl::getThisOfferPtr() const
 {
 	return m_thisOfferPtr.lock();
 }
-void OfferImpl::setThisOfferPtr(std::weak_ptr<Offer> thisOfferPtr)
+void OfferImpl::setThisOfferPtr(std::weak_ptr<fUML::Semantics::Activities::Offer> thisOfferPtr)
 {
 	m_thisOfferPtr = thisOfferPtr;
 }

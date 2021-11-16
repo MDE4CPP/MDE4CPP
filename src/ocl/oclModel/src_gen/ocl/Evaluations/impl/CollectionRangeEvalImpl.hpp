@@ -32,8 +32,8 @@ namespace ocl::Evaluations
 		protected:
 			friend class ocl::Evaluations::EvaluationsFactoryImpl;
 			CollectionRangeEvalImpl();
-			virtual std::shared_ptr<CollectionRangeEval> getThisCollectionRangeEvalPtr() const;
-			virtual void setThisCollectionRangeEvalPtr(std::weak_ptr<CollectionRangeEval> thisCollectionRangeEvalPtr);
+			virtual std::shared_ptr<ocl::Evaluations::CollectionRangeEval> getThisCollectionRangeEvalPtr() const;
+			virtual void setThisCollectionRangeEvalPtr(std::weak_ptr<ocl::Evaluations::CollectionRangeEval> thisCollectionRangeEvalPtr);
 
 
 		public:
@@ -91,7 +91,7 @@ namespace ocl::Evaluations
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<CollectionRangeEval> m_thisCollectionRangeEvalPtr;
+			std::weak_ptr<ocl::Evaluations::CollectionRangeEval> m_thisCollectionRangeEvalPtr;
 	};
 }
 #endif /* end of include guard: OCL_EVALUATIONS_COLLECTIONRANGEEVALCOLLECTIONRANGEEVALIMPL_HPP */

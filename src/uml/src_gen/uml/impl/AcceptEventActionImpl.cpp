@@ -814,11 +814,11 @@ Any AcceptEventActionImpl::eInvoke(int operationID, std::shared_ptr<std::list < 
 }
 
 
-std::shared_ptr<AcceptEventAction> AcceptEventActionImpl::getThisAcceptEventActionPtr() const
+std::shared_ptr<uml::AcceptEventAction> AcceptEventActionImpl::getThisAcceptEventActionPtr() const
 {
 	return m_thisAcceptEventActionPtr.lock();
 }
-void AcceptEventActionImpl::setThisAcceptEventActionPtr(std::weak_ptr<AcceptEventAction> thisAcceptEventActionPtr)
+void AcceptEventActionImpl::setThisAcceptEventActionPtr(std::weak_ptr<uml::AcceptEventAction> thisAcceptEventActionPtr)
 {
 	m_thisAcceptEventActionPtr = thisAcceptEventActionPtr;
 	setThisActionPtr(thisAcceptEventActionPtr);

@@ -26,14 +26,14 @@ namespace ocl::Expressions
 	{
 		public: 
 			LoopExpImpl(const LoopExpImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 			LoopExpImpl& operator=(LoopExpImpl const&); 
 
 		protected:
 			friend class ocl::Expressions::ExpressionsFactoryImpl;
 			LoopExpImpl();
-			virtual std::shared_ptr<LoopExp> getThisLoopExpPtr() const;
-			virtual void setThisLoopExpPtr(std::weak_ptr<LoopExp> thisLoopExpPtr);
+			virtual std::shared_ptr<ocl::Expressions::LoopExp> getThisLoopExpPtr() const;
+			virtual void setThisLoopExpPtr(std::weak_ptr<ocl::Expressions::LoopExp> thisLoopExpPtr);
 
 			//Additional constructors for the containments back reference
 			LoopExpImpl(std::weak_ptr<ocl::Expressions::CallExp> par_appliedElement);
@@ -57,7 +57,7 @@ namespace ocl::Expressions
 
 		public:
 			//destructor
-			virtual ~LoopExpImpl();
+			virtual ~LoopExpImpl() = 0;
 			
 			//*********************************
 			// Operations
@@ -109,7 +109,7 @@ namespace ocl::Expressions
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<LoopExp> m_thisLoopExpPtr;
+			std::weak_ptr<ocl::Expressions::LoopExp> m_thisLoopExpPtr;
 	};
 }
 #endif /* end of include guard: OCL_EXPRESSIONS_LOOPEXPLOOPEXPIMPL_HPP */

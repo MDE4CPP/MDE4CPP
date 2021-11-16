@@ -31,8 +31,8 @@ namespace uml
 		protected:
 			friend class umlFactoryImpl;
 			LifelineImpl();
-			virtual std::shared_ptr<Lifeline> getThisLifelinePtr() const;
-			virtual void setThisLifelinePtr(std::weak_ptr<Lifeline> thisLifelinePtr);
+			virtual std::shared_ptr<uml::Lifeline> getThisLifelinePtr() const;
+			virtual void setThisLifelinePtr(std::weak_ptr<uml::Lifeline> thisLifelinePtr);
 
 			//Additional constructors for the containments back reference
 			LifelineImpl(std::weak_ptr<uml::Interaction> par_interaction);
@@ -227,7 +227,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<Lifeline> m_thisLifelinePtr;
+			std::weak_ptr<uml::Lifeline> m_thisLifelinePtr;
 	};
 }
 #endif /* end of include guard: UML_LIFELINELIFELINEIMPL_HPP */

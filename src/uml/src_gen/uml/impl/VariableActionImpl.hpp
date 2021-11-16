@@ -25,14 +25,14 @@ namespace uml
 	{
 		public: 
 			VariableActionImpl(const VariableActionImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 			VariableActionImpl& operator=(VariableActionImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;
 			VariableActionImpl();
-			virtual std::shared_ptr<VariableAction> getThisVariableActionPtr() const;
-			virtual void setThisVariableActionPtr(std::weak_ptr<VariableAction> thisVariableActionPtr);
+			virtual std::shared_ptr<uml::VariableAction> getThisVariableActionPtr() const;
+			virtual void setThisVariableActionPtr(std::weak_ptr<uml::VariableAction> thisVariableActionPtr);
 
 			//Additional constructors for the containments back reference
 			VariableActionImpl(std::weak_ptr<uml::Activity> par_activity);
@@ -45,7 +45,7 @@ namespace uml
 
 		public:
 			//destructor
-			virtual ~VariableActionImpl();
+			virtual ~VariableActionImpl() = 0;
 			
 			//*********************************
 			// Operations
@@ -136,7 +136,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<VariableAction> m_thisVariableActionPtr;
+			std::weak_ptr<uml::VariableAction> m_thisVariableActionPtr;
 	};
 }
 #endif /* end of include guard: UML_VARIABLEACTIONVARIABLEACTIONIMPL_HPP */

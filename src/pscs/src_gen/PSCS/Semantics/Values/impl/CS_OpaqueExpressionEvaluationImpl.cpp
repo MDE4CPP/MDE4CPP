@@ -51,8 +51,8 @@
 #include "PSCS/PSCSPackage.hpp"
 #include "PSCS/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
-#include "fUML/Semantics/Values/ValuesPackage.hpp"
 #include "PSCS/Semantics/Values/ValuesPackage.hpp"
+#include "fUML/Semantics/Values/ValuesPackage.hpp"
 #include "uml/umlPackage.hpp"
 
 
@@ -329,11 +329,11 @@ Any CS_OpaqueExpressionEvaluationImpl::eInvoke(int operationID, std::shared_ptr<
 }
 
 
-std::shared_ptr<CS_OpaqueExpressionEvaluation> CS_OpaqueExpressionEvaluationImpl::getThisCS_OpaqueExpressionEvaluationPtr() const
+std::shared_ptr<PSCS::Semantics::Values::CS_OpaqueExpressionEvaluation> CS_OpaqueExpressionEvaluationImpl::getThisCS_OpaqueExpressionEvaluationPtr() const
 {
 	return m_thisCS_OpaqueExpressionEvaluationPtr.lock();
 }
-void CS_OpaqueExpressionEvaluationImpl::setThisCS_OpaqueExpressionEvaluationPtr(std::weak_ptr<CS_OpaqueExpressionEvaluation> thisCS_OpaqueExpressionEvaluationPtr)
+void CS_OpaqueExpressionEvaluationImpl::setThisCS_OpaqueExpressionEvaluationPtr(std::weak_ptr<PSCS::Semantics::Values::CS_OpaqueExpressionEvaluation> thisCS_OpaqueExpressionEvaluationPtr)
 {
 	m_thisCS_OpaqueExpressionEvaluationPtr = thisCS_OpaqueExpressionEvaluationPtr;
 	setThisEvaluationPtr(thisCS_OpaqueExpressionEvaluationPtr);

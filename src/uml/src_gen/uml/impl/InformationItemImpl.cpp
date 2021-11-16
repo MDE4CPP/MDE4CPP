@@ -610,11 +610,11 @@ Any InformationItemImpl::eInvoke(int operationID, std::shared_ptr<std::list < st
 }
 
 
-std::shared_ptr<InformationItem> InformationItemImpl::getThisInformationItemPtr() const
+std::shared_ptr<uml::InformationItem> InformationItemImpl::getThisInformationItemPtr() const
 {
 	return m_thisInformationItemPtr.lock();
 }
-void InformationItemImpl::setThisInformationItemPtr(std::weak_ptr<InformationItem> thisInformationItemPtr)
+void InformationItemImpl::setThisInformationItemPtr(std::weak_ptr<uml::InformationItem> thisInformationItemPtr)
 {
 	m_thisInformationItemPtr = thisInformationItemPtr;
 	setThisClassifierPtr(thisInformationItemPtr);

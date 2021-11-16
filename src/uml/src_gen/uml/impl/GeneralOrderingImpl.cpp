@@ -426,11 +426,11 @@ Any GeneralOrderingImpl::eInvoke(int operationID, std::shared_ptr<std::list < st
 }
 
 
-std::shared_ptr<GeneralOrdering> GeneralOrderingImpl::getThisGeneralOrderingPtr() const
+std::shared_ptr<uml::GeneralOrdering> GeneralOrderingImpl::getThisGeneralOrderingPtr() const
 {
 	return m_thisGeneralOrderingPtr.lock();
 }
-void GeneralOrderingImpl::setThisGeneralOrderingPtr(std::weak_ptr<GeneralOrdering> thisGeneralOrderingPtr)
+void GeneralOrderingImpl::setThisGeneralOrderingPtr(std::weak_ptr<uml::GeneralOrdering> thisGeneralOrderingPtr)
 {
 	m_thisGeneralOrderingPtr = thisGeneralOrderingPtr;
 	setThisNamedElementPtr(thisGeneralOrderingPtr);

@@ -31,8 +31,8 @@ namespace uml
 		protected:
 			friend class umlFactoryImpl;
 			LinkEndDestructionDataImpl();
-			virtual std::shared_ptr<LinkEndDestructionData> getThisLinkEndDestructionDataPtr() const;
-			virtual void setThisLinkEndDestructionDataPtr(std::weak_ptr<LinkEndDestructionData> thisLinkEndDestructionDataPtr);
+			virtual std::shared_ptr<uml::LinkEndDestructionData> getThisLinkEndDestructionDataPtr() const;
+			virtual void setThisLinkEndDestructionDataPtr(std::weak_ptr<uml::LinkEndDestructionData> thisLinkEndDestructionDataPtr);
 
 			//Additional constructors for the containments back reference
 			LinkEndDestructionDataImpl(std::weak_ptr<uml::Element> par_owner);
@@ -129,7 +129,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<LinkEndDestructionData> m_thisLinkEndDestructionDataPtr;
+			std::weak_ptr<uml::LinkEndDestructionData> m_thisLinkEndDestructionDataPtr;
 	};
 }
 #endif /* end of include guard: UML_LINKENDDESTRUCTIONDATALINKENDDESTRUCTIONDATAIMPL_HPP */

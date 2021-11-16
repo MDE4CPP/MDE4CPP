@@ -443,11 +443,11 @@ Any LiteralBooleanImpl::eInvoke(int operationID, std::shared_ptr<std::list < std
 }
 
 
-std::shared_ptr<LiteralBoolean> LiteralBooleanImpl::getThisLiteralBooleanPtr() const
+std::shared_ptr<uml::LiteralBoolean> LiteralBooleanImpl::getThisLiteralBooleanPtr() const
 {
 	return m_thisLiteralBooleanPtr.lock();
 }
-void LiteralBooleanImpl::setThisLiteralBooleanPtr(std::weak_ptr<LiteralBoolean> thisLiteralBooleanPtr)
+void LiteralBooleanImpl::setThisLiteralBooleanPtr(std::weak_ptr<uml::LiteralBoolean> thisLiteralBooleanPtr)
 {
 	m_thisLiteralBooleanPtr = thisLiteralBooleanPtr;
 	setThisLiteralSpecificationPtr(thisLiteralBooleanPtr);

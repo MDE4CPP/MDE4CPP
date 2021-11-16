@@ -32,8 +32,8 @@ namespace fUML::Semantics::Values
 		protected:
 			friend class fUML::Semantics::Values::ValuesFactoryImpl;
 			LiteralIntegerEvaluationImpl();
-			virtual std::shared_ptr<LiteralIntegerEvaluation> getThisLiteralIntegerEvaluationPtr() const;
-			virtual void setThisLiteralIntegerEvaluationPtr(std::weak_ptr<LiteralIntegerEvaluation> thisLiteralIntegerEvaluationPtr);
+			virtual std::shared_ptr<fUML::Semantics::Values::LiteralIntegerEvaluation> getThisLiteralIntegerEvaluationPtr() const;
+			virtual void setThisLiteralIntegerEvaluationPtr(std::weak_ptr<fUML::Semantics::Values::LiteralIntegerEvaluation> thisLiteralIntegerEvaluationPtr);
 
 
 		public:
@@ -88,7 +88,7 @@ namespace fUML::Semantics::Values
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<LiteralIntegerEvaluation> m_thisLiteralIntegerEvaluationPtr;
+			std::weak_ptr<fUML::Semantics::Values::LiteralIntegerEvaluation> m_thisLiteralIntegerEvaluationPtr;
 	};
 }
 #endif /* end of include guard: FUML_SEMANTICS_VALUES_LITERALINTEGEREVALUATIONLITERALINTEGEREVALUATIONIMPL_HPP */

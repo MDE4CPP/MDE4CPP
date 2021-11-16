@@ -32,8 +32,8 @@ namespace fUML::Semantics::StructuredClassifiers
 		protected:
 			friend class fUML::Semantics::StructuredClassifiers::StructuredClassifiersFactoryImpl;
 			RedefinitionBasedDispatchStrategyImpl();
-			virtual std::shared_ptr<RedefinitionBasedDispatchStrategy> getThisRedefinitionBasedDispatchStrategyPtr() const;
-			virtual void setThisRedefinitionBasedDispatchStrategyPtr(std::weak_ptr<RedefinitionBasedDispatchStrategy> thisRedefinitionBasedDispatchStrategyPtr);
+			virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::RedefinitionBasedDispatchStrategy> getThisRedefinitionBasedDispatchStrategyPtr() const;
+			virtual void setThisRedefinitionBasedDispatchStrategyPtr(std::weak_ptr<fUML::Semantics::StructuredClassifiers::RedefinitionBasedDispatchStrategy> thisRedefinitionBasedDispatchStrategyPtr);
 
 
 		public:
@@ -89,7 +89,7 @@ namespace fUML::Semantics::StructuredClassifiers
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<RedefinitionBasedDispatchStrategy> m_thisRedefinitionBasedDispatchStrategyPtr;
+			std::weak_ptr<fUML::Semantics::StructuredClassifiers::RedefinitionBasedDispatchStrategy> m_thisRedefinitionBasedDispatchStrategyPtr;
 	};
 }
 #endif /* end of include guard: FUML_SEMANTICS_STRUCTUREDCLASSIFIERS_REDEFINITIONBASEDDISPATCHSTRATEGYREDEFINITIONBASEDDISPATCHSTRATEGYIMPL_HPP */

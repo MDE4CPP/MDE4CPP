@@ -447,23 +447,23 @@ void ParameterImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoa
 		iter = attr_list.find("direction");
 		if ( iter != attr_list.end() )
 		{
-			uml::ParameterDirectionKind value = ParameterDirectionKind::IN;
+			uml::ParameterDirectionKind value = uml::ParameterDirectionKind::IN;
 			std::string literal = iter->second;
 			if (literal == "in")
 			{
-				value = ParameterDirectionKind::IN;
+				value = uml::ParameterDirectionKind::IN;
 			}
 			else if (literal == "inout")
 			{
-				value = ParameterDirectionKind::INOUT;
+				value = uml::ParameterDirectionKind::INOUT;
 			}
 			else if (literal == "out")
 			{
-				value = ParameterDirectionKind::OUT;
+				value = uml::ParameterDirectionKind::OUT;
 			}
 			else if (literal == "return")
 			{
-				value = ParameterDirectionKind::RETURN;
+				value = uml::ParameterDirectionKind::RETURN;
 			}
 			this->setDirection(value);
 		}
@@ -471,23 +471,23 @@ void ParameterImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoa
 		iter = attr_list.find("effect");
 		if ( iter != attr_list.end() )
 		{
-			uml::ParameterEffectKind value = ParameterEffectKind::CREATE;
+			uml::ParameterEffectKind value = uml::ParameterEffectKind::CREATE;
 			std::string literal = iter->second;
 			if (literal == "create")
 			{
-				value = ParameterEffectKind::CREATE;
+				value = uml::ParameterEffectKind::CREATE;
 			}
 			else if (literal == "read")
 			{
-				value = ParameterEffectKind::READ;
+				value = uml::ParameterEffectKind::READ;
 			}
 			else if (literal == "update")
 			{
-				value = ParameterEffectKind::UPDATE;
+				value = uml::ParameterEffectKind::UPDATE;
 			}
 			else if (literal == "delete")
 			{
-				value = ParameterEffectKind::DELETE;
+				value = uml::ParameterEffectKind::DELETE;
 			}
 			this->setEffect(value);
 		}
@@ -630,19 +630,19 @@ void ParameterImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHa
 		{
 			uml::ParameterDirectionKind value = this->getDirection();
 			std::string literal = "";
-			if (value == ParameterDirectionKind::IN)
+			if (value == uml::ParameterDirectionKind::IN)
 			{
 				literal = "in";
 			}
-			else if (value == ParameterDirectionKind::INOUT)
+			else if (value == uml::ParameterDirectionKind::INOUT)
 			{
 				literal = "inout";
 			}
-			else if (value == ParameterDirectionKind::OUT)
+			else if (value == uml::ParameterDirectionKind::OUT)
 			{
 				literal = "out";
 			}
-			else if (value == ParameterDirectionKind::RETURN)
+			else if (value == uml::ParameterDirectionKind::RETURN)
 			{
 				literal = "return";
 			}
@@ -653,19 +653,19 @@ void ParameterImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHa
 		{
 			uml::ParameterEffectKind value = this->getEffect();
 			std::string literal = "";
-			if (value == ParameterEffectKind::CREATE)
+			if (value == uml::ParameterEffectKind::CREATE)
 			{
 				literal = "create";
 			}
-			else if (value == ParameterEffectKind::READ)
+			else if (value == uml::ParameterEffectKind::READ)
 			{
 				literal = "read";
 			}
-			else if (value == ParameterEffectKind::UPDATE)
+			else if (value == uml::ParameterEffectKind::UPDATE)
 			{
 				literal = "update";
 			}
-			else if (value == ParameterEffectKind::DELETE)
+			else if (value == uml::ParameterEffectKind::DELETE)
 			{
 				literal = "delete";
 			}
@@ -763,9 +763,9 @@ bool ParameterImpl::internalEIsSet(int featureID) const
 		case uml::umlPackage::PARAMETER_ATTRIBUTE_DEFAULTVALUE:
 			return getDefaultValue() != nullptr; //17420
 		case uml::umlPackage::PARAMETER_ATTRIBUTE_DIRECTION:
-			return m_direction != ParameterDirectionKind::IN;; //17421
+			return m_direction != uml::ParameterDirectionKind::IN;; //17421
 		case uml::umlPackage::PARAMETER_ATTRIBUTE_EFFECT:
-			return m_effect != ParameterEffectKind::CREATE;; //17422
+			return m_effect != uml::ParameterEffectKind::CREATE;; //17422
 		case uml::umlPackage::PARAMETER_ATTRIBUTE_ISEXCEPTION:
 			return getIsException() != false; //17423
 		case uml::umlPackage::PARAMETER_ATTRIBUTE_ISSTREAM:
@@ -1098,11 +1098,11 @@ Any ParameterImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sha
 }
 
 
-std::shared_ptr<Parameter> ParameterImpl::getThisParameterPtr() const
+std::shared_ptr<uml::Parameter> ParameterImpl::getThisParameterPtr() const
 {
 	return m_thisParameterPtr.lock();
 }
-void ParameterImpl::setThisParameterPtr(std::weak_ptr<Parameter> thisParameterPtr)
+void ParameterImpl::setThisParameterPtr(std::weak_ptr<uml::Parameter> thisParameterPtr)
 {
 	m_thisParameterPtr = thisParameterPtr;
 	setThisConnectableElementPtr(thisParameterPtr);

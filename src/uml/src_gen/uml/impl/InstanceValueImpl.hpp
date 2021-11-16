@@ -31,8 +31,8 @@ namespace uml
 		protected:
 			friend class umlFactoryImpl;
 			InstanceValueImpl();
-			virtual std::shared_ptr<InstanceValue> getThisInstanceValuePtr() const;
-			virtual void setThisInstanceValuePtr(std::weak_ptr<InstanceValue> thisInstanceValuePtr);
+			virtual std::shared_ptr<uml::InstanceValue> getThisInstanceValuePtr() const;
+			virtual void setThisInstanceValuePtr(std::weak_ptr<uml::InstanceValue> thisInstanceValuePtr);
 
 			//Additional constructors for the containments back reference
 			InstanceValueImpl(std::weak_ptr<uml::Namespace> par_namespace);
@@ -129,7 +129,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<InstanceValue> m_thisInstanceValuePtr;
+			std::weak_ptr<uml::InstanceValue> m_thisInstanceValuePtr;
 	};
 }
 #endif /* end of include guard: UML_INSTANCEVALUEINSTANCEVALUEIMPL_HPP */

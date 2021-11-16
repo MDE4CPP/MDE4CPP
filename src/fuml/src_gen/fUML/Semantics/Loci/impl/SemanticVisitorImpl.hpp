@@ -28,19 +28,19 @@ virtual public SemanticVisitor
 	{
 		public: 
 			SemanticVisitorImpl(const SemanticVisitorImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 			SemanticVisitorImpl& operator=(SemanticVisitorImpl const&); 
 
 		protected:
 			friend class fUML::Semantics::Loci::LociFactoryImpl;
 			SemanticVisitorImpl();
-			virtual std::shared_ptr<SemanticVisitor> getThisSemanticVisitorPtr() const;
-			virtual void setThisSemanticVisitorPtr(std::weak_ptr<SemanticVisitor> thisSemanticVisitorPtr);
+			virtual std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor> getThisSemanticVisitorPtr() const;
+			virtual void setThisSemanticVisitorPtr(std::weak_ptr<fUML::Semantics::Loci::SemanticVisitor> thisSemanticVisitorPtr);
 
 
 		public:
 			//destructor
-			virtual ~SemanticVisitorImpl();
+			virtual ~SemanticVisitorImpl() = 0;
 			
 			//*********************************
 			// Operations
@@ -91,7 +91,7 @@ virtual public SemanticVisitor
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<SemanticVisitor> m_thisSemanticVisitorPtr;
+			std::weak_ptr<fUML::Semantics::Loci::SemanticVisitor> m_thisSemanticVisitorPtr;
 	};
 }
 #endif /* end of include guard: FUML_SEMANTICS_LOCI_SEMANTICVISITORSEMANTICVISITORIMPL_HPP */

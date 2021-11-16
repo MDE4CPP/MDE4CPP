@@ -152,14 +152,6 @@ ElementImpl& ElementImpl::operator=(const ElementImpl & obj)
 	return *this;
 }
 
-std::shared_ptr<ecore::EObject> ElementImpl::copy() const
-{
-	std::shared_ptr<ElementImpl> element(new ElementImpl());
-	*element =(*this);
-	element->setThisElementPtr(element);
-	return element;
-}
-
 //*********************************
 // Operations
 //*********************************
@@ -1150,11 +1142,11 @@ Any ElementImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::share
 }
 
 
-std::shared_ptr<Element> ElementImpl::getThisElementPtr() const
+std::shared_ptr<uml::Element> ElementImpl::getThisElementPtr() const
 {
 	return m_thisElementPtr.lock();
 }
-void ElementImpl::setThisElementPtr(std::weak_ptr<Element> thisElementPtr)
+void ElementImpl::setThisElementPtr(std::weak_ptr<uml::Element> thisElementPtr)
 {
 	m_thisElementPtr = thisElementPtr;
 	setThisObjectPtr(thisElementPtr);

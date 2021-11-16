@@ -32,8 +32,8 @@ namespace fUML::Semantics::Activities
 		protected:
 			friend class fUML::Semantics::Activities::ActivitiesFactoryImpl;
 			ActivityExecutionImpl();
-			virtual std::shared_ptr<ActivityExecution> getThisActivityExecutionPtr() const;
-			virtual void setThisActivityExecutionPtr(std::weak_ptr<ActivityExecution> thisActivityExecutionPtr);
+			virtual std::shared_ptr<fUML::Semantics::Activities::ActivityExecution> getThisActivityExecutionPtr() const;
+			virtual void setThisActivityExecutionPtr(std::weak_ptr<fUML::Semantics::Activities::ActivityExecution> thisActivityExecutionPtr);
 
 
 		public:
@@ -97,7 +97,7 @@ namespace fUML::Semantics::Activities
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<ActivityExecution> m_thisActivityExecutionPtr;
+			std::weak_ptr<fUML::Semantics::Activities::ActivityExecution> m_thisActivityExecutionPtr;
 	};
 }
 #endif /* end of include guard: FUML_SEMANTICS_ACTIVITIES_ACTIVITYEXECUTIONACTIVITYEXECUTIONIMPL_HPP */

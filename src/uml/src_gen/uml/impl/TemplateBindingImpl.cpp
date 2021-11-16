@@ -636,11 +636,11 @@ Any TemplateBindingImpl::eInvoke(int operationID, std::shared_ptr<std::list < st
 }
 
 
-std::shared_ptr<TemplateBinding> TemplateBindingImpl::getThisTemplateBindingPtr() const
+std::shared_ptr<uml::TemplateBinding> TemplateBindingImpl::getThisTemplateBindingPtr() const
 {
 	return m_thisTemplateBindingPtr.lock();
 }
-void TemplateBindingImpl::setThisTemplateBindingPtr(std::weak_ptr<TemplateBinding> thisTemplateBindingPtr)
+void TemplateBindingImpl::setThisTemplateBindingPtr(std::weak_ptr<uml::TemplateBinding> thisTemplateBindingPtr)
 {
 	m_thisTemplateBindingPtr = thisTemplateBindingPtr;
 	setThisDirectedRelationshipPtr(thisTemplateBindingPtr);

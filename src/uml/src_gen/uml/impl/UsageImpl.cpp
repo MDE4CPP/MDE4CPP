@@ -391,11 +391,11 @@ Any UsageImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_
 }
 
 
-std::shared_ptr<Usage> UsageImpl::getThisUsagePtr() const
+std::shared_ptr<uml::Usage> UsageImpl::getThisUsagePtr() const
 {
 	return m_thisUsagePtr.lock();
 }
-void UsageImpl::setThisUsagePtr(std::weak_ptr<Usage> thisUsagePtr)
+void UsageImpl::setThisUsagePtr(std::weak_ptr<uml::Usage> thisUsagePtr)
 {
 	m_thisUsagePtr = thisUsagePtr;
 	setThisDependencyPtr(thisUsagePtr);

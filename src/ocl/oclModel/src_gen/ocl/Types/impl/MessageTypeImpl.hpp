@@ -32,8 +32,8 @@ namespace ocl::Types
 		protected:
 			friend class ocl::Types::TypesFactoryImpl;
 			MessageTypeImpl();
-			virtual std::shared_ptr<MessageType> getThisMessageTypePtr() const;
-			virtual void setThisMessageTypePtr(std::weak_ptr<MessageType> thisMessageTypePtr);
+			virtual std::shared_ptr<ocl::Types::MessageType> getThisMessageTypePtr() const;
+			virtual void setThisMessageTypePtr(std::weak_ptr<ocl::Types::MessageType> thisMessageTypePtr);
 
 			//Additional constructors for the containments back reference
 			MessageTypeImpl(std::weak_ptr<ecore::EPackage> par_ePackage);
@@ -93,7 +93,7 @@ namespace ocl::Types
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<MessageType> m_thisMessageTypePtr;
+			std::weak_ptr<ocl::Types::MessageType> m_thisMessageTypePtr;
 	};
 }
 #endif /* end of include guard: OCL_TYPES_MESSAGETYPEMESSAGETYPEIMPL_HPP */

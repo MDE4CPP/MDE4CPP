@@ -643,11 +643,11 @@ Any LinkEndDataImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::s
 }
 
 
-std::shared_ptr<LinkEndData> LinkEndDataImpl::getThisLinkEndDataPtr() const
+std::shared_ptr<uml::LinkEndData> LinkEndDataImpl::getThisLinkEndDataPtr() const
 {
 	return m_thisLinkEndDataPtr.lock();
 }
-void LinkEndDataImpl::setThisLinkEndDataPtr(std::weak_ptr<LinkEndData> thisLinkEndDataPtr)
+void LinkEndDataImpl::setThisLinkEndDataPtr(std::weak_ptr<uml::LinkEndData> thisLinkEndDataPtr)
 {
 	m_thisLinkEndDataPtr = thisLinkEndDataPtr;
 	setThisElementPtr(thisLinkEndDataPtr);

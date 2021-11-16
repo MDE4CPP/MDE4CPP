@@ -26,19 +26,19 @@ namespace fUML::Semantics::CommonBehavior
 	{
 		public: 
 			ExecutionImpl(const ExecutionImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 			ExecutionImpl& operator=(ExecutionImpl const&); 
 
 		protected:
 			friend class fUML::Semantics::CommonBehavior::CommonBehaviorFactoryImpl;
 			ExecutionImpl();
-			virtual std::shared_ptr<Execution> getThisExecutionPtr() const;
-			virtual void setThisExecutionPtr(std::weak_ptr<Execution> thisExecutionPtr);
+			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> getThisExecutionPtr() const;
+			virtual void setThisExecutionPtr(std::weak_ptr<fUML::Semantics::CommonBehavior::Execution> thisExecutionPtr);
 
 
 		public:
 			//destructor
-			virtual ~ExecutionImpl();
+			virtual ~ExecutionImpl() = 0;
 			
 			//*********************************
 			// Operations
@@ -100,7 +100,7 @@ namespace fUML::Semantics::CommonBehavior
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<Execution> m_thisExecutionPtr;
+			std::weak_ptr<fUML::Semantics::CommonBehavior::Execution> m_thisExecutionPtr;
 	};
 }
 #endif /* end of include guard: FUML_SEMANTICS_COMMONBEHAVIOR_EXECUTIONEXECUTIONIMPL_HPP */

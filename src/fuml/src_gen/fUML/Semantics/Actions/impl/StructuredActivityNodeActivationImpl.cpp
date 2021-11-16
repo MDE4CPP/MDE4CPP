@@ -708,11 +708,11 @@ Any StructuredActivityNodeActivationImpl::eInvoke(int operationID, std::shared_p
 }
 
 
-std::shared_ptr<StructuredActivityNodeActivation> StructuredActivityNodeActivationImpl::getThisStructuredActivityNodeActivationPtr() const
+std::shared_ptr<fUML::Semantics::Actions::StructuredActivityNodeActivation> StructuredActivityNodeActivationImpl::getThisStructuredActivityNodeActivationPtr() const
 {
 	return m_thisStructuredActivityNodeActivationPtr.lock();
 }
-void StructuredActivityNodeActivationImpl::setThisStructuredActivityNodeActivationPtr(std::weak_ptr<StructuredActivityNodeActivation> thisStructuredActivityNodeActivationPtr)
+void StructuredActivityNodeActivationImpl::setThisStructuredActivityNodeActivationPtr(std::weak_ptr<fUML::Semantics::Actions::StructuredActivityNodeActivation> thisStructuredActivityNodeActivationPtr)
 {
 	m_thisStructuredActivityNodeActivationPtr = thisStructuredActivityNodeActivationPtr;
 	setThisActionActivationPtr(thisStructuredActivityNodeActivationPtr);

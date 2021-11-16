@@ -31,8 +31,8 @@ namespace uml
 		protected:
 			friend class umlFactoryImpl;
 			TemplateSignatureImpl();
-			virtual std::shared_ptr<TemplateSignature> getThisTemplateSignaturePtr() const;
-			virtual void setThisTemplateSignaturePtr(std::weak_ptr<TemplateSignature> thisTemplateSignaturePtr);
+			virtual std::shared_ptr<uml::TemplateSignature> getThisTemplateSignaturePtr() const;
+			virtual void setThisTemplateSignaturePtr(std::weak_ptr<uml::TemplateSignature> thisTemplateSignaturePtr);
 
 			//Additional constructors for the containments back reference
 			TemplateSignatureImpl(std::weak_ptr<uml::Element> par_owner);
@@ -140,7 +140,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<TemplateSignature> m_thisTemplateSignaturePtr;
+			std::weak_ptr<uml::TemplateSignature> m_thisTemplateSignaturePtr;
 	};
 }
 #endif /* end of include guard: UML_TEMPLATESIGNATURETEMPLATESIGNATUREIMPL_HPP */

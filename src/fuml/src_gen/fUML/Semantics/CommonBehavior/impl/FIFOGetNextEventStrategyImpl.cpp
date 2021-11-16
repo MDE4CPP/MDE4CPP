@@ -245,11 +245,11 @@ Any FIFOGetNextEventStrategyImpl::eInvoke(int operationID, std::shared_ptr<std::
 }
 
 
-std::shared_ptr<FIFOGetNextEventStrategy> FIFOGetNextEventStrategyImpl::getThisFIFOGetNextEventStrategyPtr() const
+std::shared_ptr<fUML::Semantics::CommonBehavior::FIFOGetNextEventStrategy> FIFOGetNextEventStrategyImpl::getThisFIFOGetNextEventStrategyPtr() const
 {
 	return m_thisFIFOGetNextEventStrategyPtr.lock();
 }
-void FIFOGetNextEventStrategyImpl::setThisFIFOGetNextEventStrategyPtr(std::weak_ptr<FIFOGetNextEventStrategy> thisFIFOGetNextEventStrategyPtr)
+void FIFOGetNextEventStrategyImpl::setThisFIFOGetNextEventStrategyPtr(std::weak_ptr<fUML::Semantics::CommonBehavior::FIFOGetNextEventStrategy> thisFIFOGetNextEventStrategyPtr)
 {
 	m_thisFIFOGetNextEventStrategyPtr = thisFIFOGetNextEventStrategyPtr;
 	setThisGetNextEventStrategyPtr(thisFIFOGetNextEventStrategyPtr);

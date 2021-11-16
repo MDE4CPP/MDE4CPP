@@ -32,8 +32,8 @@ namespace fUML::Semantics::Activities
 		protected:
 			friend class fUML::Semantics::Activities::ActivitiesFactoryImpl;
 			ObjectTokenImpl();
-			virtual std::shared_ptr<ObjectToken> getThisObjectTokenPtr() const;
-			virtual void setThisObjectTokenPtr(std::weak_ptr<ObjectToken> thisObjectTokenPtr);
+			virtual std::shared_ptr<fUML::Semantics::Activities::ObjectToken> getThisObjectTokenPtr() const;
+			virtual void setThisObjectTokenPtr(std::weak_ptr<fUML::Semantics::Activities::ObjectToken> thisObjectTokenPtr);
 
 			//Additional constructors for the containments back reference
 			ObjectTokenImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivation> par_holder);
@@ -94,7 +94,7 @@ namespace fUML::Semantics::Activities
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<ObjectToken> m_thisObjectTokenPtr;
+			std::weak_ptr<fUML::Semantics::Activities::ObjectToken> m_thisObjectTokenPtr;
 	};
 }
 #endif /* end of include guard: FUML_SEMANTICS_ACTIVITIES_OBJECTTOKENOBJECTTOKENIMPL_HPP */

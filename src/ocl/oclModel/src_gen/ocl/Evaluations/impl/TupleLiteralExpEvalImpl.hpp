@@ -32,8 +32,8 @@ namespace ocl::Evaluations
 		protected:
 			friend class ocl::Evaluations::EvaluationsFactoryImpl;
 			TupleLiteralExpEvalImpl();
-			virtual std::shared_ptr<TupleLiteralExpEval> getThisTupleLiteralExpEvalPtr() const;
-			virtual void setThisTupleLiteralExpEvalPtr(std::weak_ptr<TupleLiteralExpEval> thisTupleLiteralExpEvalPtr);
+			virtual std::shared_ptr<ocl::Evaluations::TupleLiteralExpEval> getThisTupleLiteralExpEvalPtr() const;
+			virtual void setThisTupleLiteralExpEvalPtr(std::weak_ptr<ocl::Evaluations::TupleLiteralExpEval> thisTupleLiteralExpEvalPtr);
 
 
 		public:
@@ -88,7 +88,7 @@ namespace ocl::Evaluations
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<TupleLiteralExpEval> m_thisTupleLiteralExpEvalPtr;
+			std::weak_ptr<ocl::Evaluations::TupleLiteralExpEval> m_thisTupleLiteralExpEvalPtr;
 	};
 }
 #endif /* end of include guard: OCL_EVALUATIONS_TUPLELITERALEXPEVALTUPLELITERALEXPEVALIMPL_HPP */

@@ -327,11 +327,11 @@ Any CS_LinkImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::share
 }
 
 
-std::shared_ptr<CS_Link> CS_LinkImpl::getThisCS_LinkPtr() const
+std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Link> CS_LinkImpl::getThisCS_LinkPtr() const
 {
 	return m_thisCS_LinkPtr.lock();
 }
-void CS_LinkImpl::setThisCS_LinkPtr(std::weak_ptr<CS_Link> thisCS_LinkPtr)
+void CS_LinkImpl::setThisCS_LinkPtr(std::weak_ptr<PSCS::Semantics::StructuredClassifiers::CS_Link> thisCS_LinkPtr)
 {
 	m_thisCS_LinkPtr = thisCS_LinkPtr;
 	setThisLinkPtr(thisCS_LinkPtr);

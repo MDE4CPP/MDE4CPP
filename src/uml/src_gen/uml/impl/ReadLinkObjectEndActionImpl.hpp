@@ -31,8 +31,8 @@ namespace uml
 		protected:
 			friend class umlFactoryImpl;
 			ReadLinkObjectEndActionImpl();
-			virtual std::shared_ptr<ReadLinkObjectEndAction> getThisReadLinkObjectEndActionPtr() const;
-			virtual void setThisReadLinkObjectEndActionPtr(std::weak_ptr<ReadLinkObjectEndAction> thisReadLinkObjectEndActionPtr);
+			virtual std::shared_ptr<uml::ReadLinkObjectEndAction> getThisReadLinkObjectEndActionPtr() const;
+			virtual void setThisReadLinkObjectEndActionPtr(std::weak_ptr<uml::ReadLinkObjectEndAction> thisReadLinkObjectEndActionPtr);
 
 			//Additional constructors for the containments back reference
 			ReadLinkObjectEndActionImpl(std::weak_ptr<uml::Activity> par_activity);
@@ -208,7 +208,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<ReadLinkObjectEndAction> m_thisReadLinkObjectEndActionPtr;
+			std::weak_ptr<uml::ReadLinkObjectEndAction> m_thisReadLinkObjectEndActionPtr;
 	};
 }
 #endif /* end of include guard: UML_READLINKOBJECTENDACTIONREADLINKOBJECTENDACTIONIMPL_HPP */

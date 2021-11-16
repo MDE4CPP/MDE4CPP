@@ -33,8 +33,8 @@ namespace ocl::Evaluations
 		protected:
 			friend class ocl::Evaluations::EvaluationsFactoryImpl;
 			BooleanLiteralExpEvalImpl();
-			virtual std::shared_ptr<BooleanLiteralExpEval> getThisBooleanLiteralExpEvalPtr() const;
-			virtual void setThisBooleanLiteralExpEvalPtr(std::weak_ptr<BooleanLiteralExpEval> thisBooleanLiteralExpEvalPtr);
+			virtual std::shared_ptr<ocl::Evaluations::BooleanLiteralExpEval> getThisBooleanLiteralExpEvalPtr() const;
+			virtual void setThisBooleanLiteralExpEvalPtr(std::weak_ptr<ocl::Evaluations::BooleanLiteralExpEval> thisBooleanLiteralExpEvalPtr);
 
 
 		public:
@@ -88,7 +88,7 @@ namespace ocl::Evaluations
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<BooleanLiteralExpEval> m_thisBooleanLiteralExpEvalPtr;
+			std::weak_ptr<ocl::Evaluations::BooleanLiteralExpEval> m_thisBooleanLiteralExpEvalPtr;
 	};
 }
 #endif /* end of include guard: OCL_EVALUATIONS_BOOLEANLITERALEXPEVALBOOLEANLITERALEXPEVALIMPL_HPP */

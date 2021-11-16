@@ -26,19 +26,19 @@ namespace fUML::Semantics::StructuredClassifiers
 	{
 		public: 
 			ExtensionalValueImpl(const ExtensionalValueImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 			ExtensionalValueImpl& operator=(ExtensionalValueImpl const&); 
 
 		protected:
 			friend class fUML::Semantics::StructuredClassifiers::StructuredClassifiersFactoryImpl;
 			ExtensionalValueImpl();
-			virtual std::shared_ptr<ExtensionalValue> getThisExtensionalValuePtr() const;
-			virtual void setThisExtensionalValuePtr(std::weak_ptr<ExtensionalValue> thisExtensionalValuePtr);
+			virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue> getThisExtensionalValuePtr() const;
+			virtual void setThisExtensionalValuePtr(std::weak_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue> thisExtensionalValuePtr);
 
 
 		public:
 			//destructor
-			virtual ~ExtensionalValueImpl();
+			virtual ~ExtensionalValueImpl() = 0;
 			
 			//*********************************
 			// Operations
@@ -91,7 +91,7 @@ namespace fUML::Semantics::StructuredClassifiers
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<ExtensionalValue> m_thisExtensionalValuePtr;
+			std::weak_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue> m_thisExtensionalValuePtr;
 	};
 }
 #endif /* end of include guard: FUML_SEMANTICS_STRUCTUREDCLASSIFIERS_EXTENSIONALVALUEEXTENSIONALVALUEIMPL_HPP */

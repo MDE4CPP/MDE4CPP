@@ -31,8 +31,8 @@ namespace uml
 		protected:
 			friend class umlFactoryImpl;
 			ProtocolStateMachineImpl();
-			virtual std::shared_ptr<ProtocolStateMachine> getThisProtocolStateMachinePtr() const;
-			virtual void setThisProtocolStateMachinePtr(std::weak_ptr<ProtocolStateMachine> thisProtocolStateMachinePtr);
+			virtual std::shared_ptr<uml::ProtocolStateMachine> getThisProtocolStateMachinePtr() const;
+			virtual void setThisProtocolStateMachinePtr(std::weak_ptr<uml::ProtocolStateMachine> thisProtocolStateMachinePtr);
 
 			//Additional constructors for the containments back reference
 			ProtocolStateMachineImpl(std::weak_ptr<uml::BehavioredClassifier> par_behavioredClassifier);
@@ -184,7 +184,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<ProtocolStateMachine> m_thisProtocolStateMachinePtr;
+			std::weak_ptr<uml::ProtocolStateMachine> m_thisProtocolStateMachinePtr;
 	};
 }
 #endif /* end of include guard: UML_PROTOCOLSTATEMACHINEPROTOCOLSTATEMACHINEIMPL_HPP */

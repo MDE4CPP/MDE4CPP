@@ -310,11 +310,11 @@ Any TemplateParameterTypeImpl::eInvoke(int operationID, std::shared_ptr<std::lis
 }
 
 
-std::shared_ptr<TemplateParameterType> TemplateParameterTypeImpl::getThisTemplateParameterTypePtr() const
+std::shared_ptr<ocl::Types::TemplateParameterType> TemplateParameterTypeImpl::getThisTemplateParameterTypePtr() const
 {
 	return m_thisTemplateParameterTypePtr.lock();
 }
-void TemplateParameterTypeImpl::setThisTemplateParameterTypePtr(std::weak_ptr<TemplateParameterType> thisTemplateParameterTypePtr)
+void TemplateParameterTypeImpl::setThisTemplateParameterTypePtr(std::weak_ptr<ocl::Types::TemplateParameterType> thisTemplateParameterTypePtr)
 {
 	m_thisTemplateParameterTypePtr = thisTemplateParameterTypePtr;
 	setThisEClassifierPtr(thisTemplateParameterTypePtr);

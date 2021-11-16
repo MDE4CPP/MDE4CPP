@@ -604,11 +604,11 @@ Any CreateObjectActionImpl::eInvoke(int operationID, std::shared_ptr<std::list <
 }
 
 
-std::shared_ptr<CreateObjectAction> CreateObjectActionImpl::getThisCreateObjectActionPtr() const
+std::shared_ptr<uml::CreateObjectAction> CreateObjectActionImpl::getThisCreateObjectActionPtr() const
 {
 	return m_thisCreateObjectActionPtr.lock();
 }
-void CreateObjectActionImpl::setThisCreateObjectActionPtr(std::weak_ptr<CreateObjectAction> thisCreateObjectActionPtr)
+void CreateObjectActionImpl::setThisCreateObjectActionPtr(std::weak_ptr<uml::CreateObjectAction> thisCreateObjectActionPtr)
 {
 	m_thisCreateObjectActionPtr = thisCreateObjectActionPtr;
 	setThisActionPtr(thisCreateObjectActionPtr);

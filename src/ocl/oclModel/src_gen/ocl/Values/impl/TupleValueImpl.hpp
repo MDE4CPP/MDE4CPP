@@ -32,8 +32,8 @@ namespace ocl::Values
 		protected:
 			friend class ocl::Values::ValuesFactoryImpl;
 			TupleValueImpl();
-			virtual std::shared_ptr<TupleValue> getThisTupleValuePtr() const;
-			virtual void setThisTupleValuePtr(std::weak_ptr<TupleValue> thisTupleValuePtr);
+			virtual std::shared_ptr<ocl::Values::TupleValue> getThisTupleValuePtr() const;
+			virtual void setThisTupleValuePtr(std::weak_ptr<ocl::Values::TupleValue> thisTupleValuePtr);
 
 
 		public:
@@ -92,7 +92,7 @@ namespace ocl::Values
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<TupleValue> m_thisTupleValuePtr;
+			std::weak_ptr<ocl::Values::TupleValue> m_thisTupleValuePtr;
 	};
 }
 #endif /* end of include guard: OCL_VALUES_TUPLEVALUETUPLEVALUEIMPL_HPP */

@@ -31,8 +31,8 @@ namespace uml
 		protected:
 			friend class umlFactoryImpl;
 			CreateObjectActionImpl();
-			virtual std::shared_ptr<CreateObjectAction> getThisCreateObjectActionPtr() const;
-			virtual void setThisCreateObjectActionPtr(std::weak_ptr<CreateObjectAction> thisCreateObjectActionPtr);
+			virtual std::shared_ptr<uml::CreateObjectAction> getThisCreateObjectActionPtr() const;
+			virtual void setThisCreateObjectActionPtr(std::weak_ptr<uml::CreateObjectAction> thisCreateObjectActionPtr);
 
 			//Additional constructors for the containments back reference
 			CreateObjectActionImpl(std::weak_ptr<uml::Activity> par_activity);
@@ -172,7 +172,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<CreateObjectAction> m_thisCreateObjectActionPtr;
+			std::weak_ptr<uml::CreateObjectAction> m_thisCreateObjectActionPtr;
 	};
 }
 #endif /* end of include guard: UML_CREATEOBJECTACTIONCREATEOBJECTACTIONIMPL_HPP */

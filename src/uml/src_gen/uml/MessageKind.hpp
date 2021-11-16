@@ -9,7 +9,7 @@
 
 namespace uml 
 {
-	enum MessageKind {
+	enum class MessageKind {
 		
 		COMPLETE = 0
 ,

@@ -405,11 +405,11 @@ Any PartDecompositionImpl::eInvoke(int operationID, std::shared_ptr<std::list < 
 }
 
 
-std::shared_ptr<PartDecomposition> PartDecompositionImpl::getThisPartDecompositionPtr() const
+std::shared_ptr<uml::PartDecomposition> PartDecompositionImpl::getThisPartDecompositionPtr() const
 {
 	return m_thisPartDecompositionPtr.lock();
 }
-void PartDecompositionImpl::setThisPartDecompositionPtr(std::weak_ptr<PartDecomposition> thisPartDecompositionPtr)
+void PartDecompositionImpl::setThisPartDecompositionPtr(std::weak_ptr<uml::PartDecomposition> thisPartDecompositionPtr)
 {
 	m_thisPartDecompositionPtr = thisPartDecompositionPtr;
 	setThisInteractionUsePtr(thisPartDecompositionPtr);

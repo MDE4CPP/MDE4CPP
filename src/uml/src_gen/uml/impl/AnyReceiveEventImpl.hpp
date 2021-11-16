@@ -31,8 +31,8 @@ namespace uml
 		protected:
 			friend class umlFactoryImpl;
 			AnyReceiveEventImpl();
-			virtual std::shared_ptr<AnyReceiveEvent> getThisAnyReceiveEventPtr() const;
-			virtual void setThisAnyReceiveEventPtr(std::weak_ptr<AnyReceiveEvent> thisAnyReceiveEventPtr);
+			virtual std::shared_ptr<uml::AnyReceiveEvent> getThisAnyReceiveEventPtr() const;
+			virtual void setThisAnyReceiveEventPtr(std::weak_ptr<uml::AnyReceiveEvent> thisAnyReceiveEventPtr);
 
 			//Additional constructors for the containments back reference
 			AnyReceiveEventImpl(std::weak_ptr<uml::Namespace> par_namespace);
@@ -113,7 +113,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<AnyReceiveEvent> m_thisAnyReceiveEventPtr;
+			std::weak_ptr<uml::AnyReceiveEvent> m_thisAnyReceiveEventPtr;
 	};
 }
 #endif /* end of include guard: UML_ANYRECEIVEEVENTANYRECEIVEEVENTIMPL_HPP */

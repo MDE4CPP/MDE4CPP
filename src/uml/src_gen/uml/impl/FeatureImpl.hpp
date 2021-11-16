@@ -25,14 +25,14 @@ namespace uml
 	{
 		public: 
 			FeatureImpl(const FeatureImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 			FeatureImpl& operator=(FeatureImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;
 			FeatureImpl();
-			virtual std::shared_ptr<Feature> getThisFeaturePtr() const;
-			virtual void setThisFeaturePtr(std::weak_ptr<Feature> thisFeaturePtr);
+			virtual std::shared_ptr<uml::Feature> getThisFeaturePtr() const;
+			virtual void setThisFeaturePtr(std::weak_ptr<uml::Feature> thisFeaturePtr);
 
 			//Additional constructors for the containments back reference
 			FeatureImpl(std::weak_ptr<uml::Namespace> par_namespace);
@@ -41,7 +41,7 @@ namespace uml
 
 		public:
 			//destructor
-			virtual ~FeatureImpl();
+			virtual ~FeatureImpl() = 0;
 			
 			//*********************************
 			// Operations
@@ -121,7 +121,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<Feature> m_thisFeaturePtr;
+			std::weak_ptr<uml::Feature> m_thisFeaturePtr;
 	};
 }
 #endif /* end of include guard: UML_FEATUREFEATUREIMPL_HPP */

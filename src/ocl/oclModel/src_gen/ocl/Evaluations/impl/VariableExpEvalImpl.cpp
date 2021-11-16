@@ -34,8 +34,8 @@
 #include "fUML/Semantics/Values/ValuesFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
 #include "uml/umlFactory.hpp"
-#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
+#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
 
 #include "ocl/Evaluations/EvalEnvironment.hpp"
@@ -324,11 +324,11 @@ Any VariableExpEvalImpl::eInvoke(int operationID, std::shared_ptr<std::list < st
 }
 
 
-std::shared_ptr<VariableExpEval> VariableExpEvalImpl::getThisVariableExpEvalPtr() const
+std::shared_ptr<ocl::Evaluations::VariableExpEval> VariableExpEvalImpl::getThisVariableExpEvalPtr() const
 {
 	return m_thisVariableExpEvalPtr.lock();
 }
-void VariableExpEvalImpl::setThisVariableExpEvalPtr(std::weak_ptr<VariableExpEval> thisVariableExpEvalPtr)
+void VariableExpEvalImpl::setThisVariableExpEvalPtr(std::weak_ptr<ocl::Evaluations::VariableExpEval> thisVariableExpEvalPtr)
 {
 	m_thisVariableExpEvalPtr = thisVariableExpEvalPtr;
 	setThisOclExpEvalPtr(thisVariableExpEvalPtr);

@@ -337,11 +337,11 @@ Any EDataTypeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sha
 }
 
 
-std::shared_ptr<EDataType> EDataTypeImpl::getThisEDataTypePtr() const
+std::shared_ptr<ecore::EDataType> EDataTypeImpl::getThisEDataTypePtr() const
 {
 	return m_thisEDataTypePtr.lock();
 }
-void EDataTypeImpl::setThisEDataTypePtr(std::weak_ptr<EDataType> thisEDataTypePtr)
+void EDataTypeImpl::setThisEDataTypePtr(std::weak_ptr<ecore::EDataType> thisEDataTypePtr)
 {
 	m_thisEDataTypePtr = thisEDataTypePtr;
 	setThisEClassifierPtr(thisEDataTypePtr);

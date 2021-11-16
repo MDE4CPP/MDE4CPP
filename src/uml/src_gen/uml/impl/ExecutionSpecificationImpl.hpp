@@ -25,14 +25,14 @@ namespace uml
 	{
 		public: 
 			ExecutionSpecificationImpl(const ExecutionSpecificationImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 			ExecutionSpecificationImpl& operator=(ExecutionSpecificationImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;
 			ExecutionSpecificationImpl();
-			virtual std::shared_ptr<ExecutionSpecification> getThisExecutionSpecificationPtr() const;
-			virtual void setThisExecutionSpecificationPtr(std::weak_ptr<ExecutionSpecification> thisExecutionSpecificationPtr);
+			virtual std::shared_ptr<uml::ExecutionSpecification> getThisExecutionSpecificationPtr() const;
+			virtual void setThisExecutionSpecificationPtr(std::weak_ptr<uml::ExecutionSpecification> thisExecutionSpecificationPtr);
 
 			//Additional constructors for the containments back reference
 			ExecutionSpecificationImpl(std::weak_ptr<uml::Interaction> par_enclosingInteraction);
@@ -45,7 +45,7 @@ namespace uml
 
 		public:
 			//destructor
-			virtual ~ExecutionSpecificationImpl();
+			virtual ~ExecutionSpecificationImpl() = 0;
 			
 			//*********************************
 			// Operations
@@ -142,7 +142,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<ExecutionSpecification> m_thisExecutionSpecificationPtr;
+			std::weak_ptr<uml::ExecutionSpecification> m_thisExecutionSpecificationPtr;
 	};
 }
 #endif /* end of include guard: UML_EXECUTIONSPECIFICATIONEXECUTIONSPECIFICATIONIMPL_HPP */

@@ -613,11 +613,11 @@ Any TemplateSignatureImpl::eInvoke(int operationID, std::shared_ptr<std::list < 
 }
 
 
-std::shared_ptr<TemplateSignature> TemplateSignatureImpl::getThisTemplateSignaturePtr() const
+std::shared_ptr<uml::TemplateSignature> TemplateSignatureImpl::getThisTemplateSignaturePtr() const
 {
 	return m_thisTemplateSignaturePtr.lock();
 }
-void TemplateSignatureImpl::setThisTemplateSignaturePtr(std::weak_ptr<TemplateSignature> thisTemplateSignaturePtr)
+void TemplateSignatureImpl::setThisTemplateSignaturePtr(std::weak_ptr<uml::TemplateSignature> thisTemplateSignaturePtr)
 {
 	m_thisTemplateSignaturePtr = thisTemplateSignaturePtr;
 	setThisElementPtr(thisTemplateSignaturePtr);

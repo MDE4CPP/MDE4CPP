@@ -31,8 +31,8 @@ namespace uml
 		protected:
 			friend class umlFactoryImpl;
 			ProfileApplicationImpl();
-			virtual std::shared_ptr<ProfileApplication> getThisProfileApplicationPtr() const;
-			virtual void setThisProfileApplicationPtr(std::weak_ptr<ProfileApplication> thisProfileApplicationPtr);
+			virtual std::shared_ptr<uml::ProfileApplication> getThisProfileApplicationPtr() const;
+			virtual void setThisProfileApplicationPtr(std::weak_ptr<uml::ProfileApplication> thisProfileApplicationPtr);
 
 			//Additional constructors for the containments back reference
 			ProfileApplicationImpl(std::weak_ptr<uml::Package> par_applyingPackage);
@@ -166,7 +166,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<ProfileApplication> m_thisProfileApplicationPtr;
+			std::weak_ptr<uml::ProfileApplication> m_thisProfileApplicationPtr;
 	};
 }
 #endif /* end of include guard: UML_PROFILEAPPLICATIONPROFILEAPPLICATIONIMPL_HPP */

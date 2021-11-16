@@ -14,14 +14,14 @@
 
 namespace ecore 
 {
+	class EStringToStringMapEntry;
 	class EAnnotation;
 	class EReference;
-	class EClass;
-	class EDataType;
 	class EGenericType;
-	class EParameter;
 	class EOperation;
-	class EStringToStringMapEntry;
+	class EClass;
+	class EParameter;
+	class EDataType;
 }
 
 namespace fUML::Semantics::StructuredClassifiers 
@@ -84,7 +84,7 @@ namespace fUML::Semantics::StructuredClassifiers
 			//Class and Feature IDs 
 			static const long long EXTENSIONALVALUE_CLASS = 1972653315;
 			static const unsigned int EXTENSIONALVALUE_CLASS_FEATURE_COUNT = 2;
-			static const unsigned int EXTENSIONALVALUE_CLASS_OPERATION_COUNT = 27;
+			static const unsigned int EXTENSIONALVALUE_CLASS_OPERATION_COUNT = 28;
 			
 			static const long long EXTENSIONALVALUE_ATTRIBUTE_LOCUS = 783805933;
 			
@@ -107,7 +107,7 @@ namespace fUML::Semantics::StructuredClassifiers
 			//Class and Feature IDs 
 			static const long long EXTENSIONALVALUELIST_CLASS = 823739257;
 			static const unsigned int EXTENSIONALVALUELIST_CLASS_FEATURE_COUNT = 2;
-			static const unsigned int EXTENSIONALVALUELIST_CLASS_OPERATION_COUNT = 32;
+			static const unsigned int EXTENSIONALVALUELIST_CLASS_OPERATION_COUNT = 33;
 			
 			
 			static const int EXTENSIONALVALUELIST_OPERATION_ADDVALUE_EXTENSIONALVALUE = 935741283;
@@ -134,7 +134,7 @@ namespace fUML::Semantics::StructuredClassifiers
 			//Class and Feature IDs 
 			static const long long LINK_CLASS = 1823394283;
 			static const unsigned int LINK_CLASS_FEATURE_COUNT = 3;
-			static const unsigned int LINK_CLASS_OPERATION_COUNT = 32;
+			static const unsigned int LINK_CLASS_OPERATION_COUNT = 34;
 			
 			static const long long LINK_ATTRIBUTE_TYPE = 1804520989;
 			
@@ -143,6 +143,7 @@ namespace fUML::Semantics::StructuredClassifiers
 			static const int LINK_OPERATION_GETOTHERFEATUREVALUES_EXTENSIONALVALUE_PROPERTY = 704042565;
 			static const int LINK_OPERATION_GETTYPES = 202529784;
 			static const int LINK_OPERATION_ISMATCHINGLINK_EXTENSIONALVALUE_PROPERTY = 1155151383;
+			static const int LINK_OPERATION_NEW_ = 432830578;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getLink_Class() const = 0;
@@ -155,6 +156,7 @@ namespace fUML::Semantics::StructuredClassifiers
 			virtual std::shared_ptr<ecore::EOperation> getLink_Operation_getOtherFeatureValues_ExtensionalValue_Property() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getLink_Operation_getTypes() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getLink_Operation_isMatchingLink_ExtensionalValue_Property() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getLink_Operation_new_() const = 0;
 			
 			// End Class Link
 
@@ -163,7 +165,7 @@ namespace fUML::Semantics::StructuredClassifiers
 			//Class and Feature IDs 
 			static const long long OBJECT_CLASS = 208025094;
 			static const unsigned int OBJECT_CLASS_FEATURE_COUNT = 4;
-			static const unsigned int OBJECT_CLASS_OPERATION_COUNT = 36;
+			static const unsigned int OBJECT_CLASS_OPERATION_COUNT = 37;
 			
 			static const long long OBJECT_ATTRIBUTE_OBJECTACTIVATION = 1045746932;
 			static const long long OBJECT_ATTRIBUTE_TYPES = 1845487453;
@@ -223,7 +225,7 @@ namespace fUML::Semantics::StructuredClassifiers
 			//Class and Feature IDs 
 			static const long long REFERENCE_CLASS = 408530163;
 			static const unsigned int REFERENCE_CLASS_FEATURE_COUNT = 1;
-			static const unsigned int REFERENCE_CLASS_OPERATION_COUNT = 34;
+			static const unsigned int REFERENCE_CLASS_OPERATION_COUNT = 35;
 			
 			static const long long REFERENCE_ATTRIBUTE_REFERENT = 823252190;
 			

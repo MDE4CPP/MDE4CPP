@@ -31,8 +31,8 @@ namespace uml
 		protected:
 			friend class umlFactoryImpl;
 			PortImpl();
-			virtual std::shared_ptr<Port> getThisPortPtr() const;
-			virtual void setThisPortPtr(std::weak_ptr<Port> thisPortPtr);
+			virtual std::shared_ptr<uml::Port> getThisPortPtr() const;
+			virtual void setThisPortPtr(std::weak_ptr<uml::Port> thisPortPtr);
 
 			//Additional constructors for the containments back reference
 			PortImpl(std::weak_ptr<uml::Property> par_associationEnd);
@@ -255,7 +255,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<Port> m_thisPortPtr;
+			std::weak_ptr<uml::Port> m_thisPortPtr;
 	};
 }
 #endif /* end of include guard: UML_PORTPORTIMPL_HPP */

@@ -26,14 +26,14 @@ namespace ocl::Expressions
 	{
 		public: 
 			NavigationCallExpImpl(const NavigationCallExpImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 			NavigationCallExpImpl& operator=(NavigationCallExpImpl const&); 
 
 		protected:
 			friend class ocl::Expressions::ExpressionsFactoryImpl;
 			NavigationCallExpImpl();
-			virtual std::shared_ptr<NavigationCallExp> getThisNavigationCallExpPtr() const;
-			virtual void setThisNavigationCallExpPtr(std::weak_ptr<NavigationCallExp> thisNavigationCallExpPtr);
+			virtual std::shared_ptr<ocl::Expressions::NavigationCallExp> getThisNavigationCallExpPtr() const;
+			virtual void setThisNavigationCallExpPtr(std::weak_ptr<ocl::Expressions::NavigationCallExp> thisNavigationCallExpPtr);
 
 			//Additional constructors for the containments back reference
 			NavigationCallExpImpl(std::weak_ptr<ocl::Expressions::CallExp> par_appliedElement);
@@ -57,7 +57,7 @@ namespace ocl::Expressions
 
 		public:
 			//destructor
-			virtual ~NavigationCallExpImpl();
+			virtual ~NavigationCallExpImpl() = 0;
 			
 			//*********************************
 			// Operations
@@ -109,7 +109,7 @@ namespace ocl::Expressions
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<NavigationCallExp> m_thisNavigationCallExpPtr;
+			std::weak_ptr<ocl::Expressions::NavigationCallExp> m_thisNavigationCallExpPtr;
 	};
 }
 #endif /* end of include guard: OCL_EXPRESSIONS_NAVIGATIONCALLEXPNAVIGATIONCALLEXPIMPL_HPP */

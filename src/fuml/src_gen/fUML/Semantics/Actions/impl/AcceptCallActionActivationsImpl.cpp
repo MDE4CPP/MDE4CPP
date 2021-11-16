@@ -239,11 +239,11 @@ Any AcceptCallActionActivationsImpl::eInvoke(int operationID, std::shared_ptr<st
 }
 
 
-std::shared_ptr<AcceptCallActionActivations> AcceptCallActionActivationsImpl::getThisAcceptCallActionActivationsPtr() const
+std::shared_ptr<fUML::Semantics::Actions::AcceptCallActionActivations> AcceptCallActionActivationsImpl::getThisAcceptCallActionActivationsPtr() const
 {
 	return m_thisAcceptCallActionActivationsPtr.lock();
 }
-void AcceptCallActionActivationsImpl::setThisAcceptCallActionActivationsPtr(std::weak_ptr<AcceptCallActionActivations> thisAcceptCallActionActivationsPtr)
+void AcceptCallActionActivationsImpl::setThisAcceptCallActionActivationsPtr(std::weak_ptr<fUML::Semantics::Actions::AcceptCallActionActivations> thisAcceptCallActionActivationsPtr)
 {
 	m_thisAcceptCallActionActivationsPtr = thisAcceptCallActionActivationsPtr;
 }

@@ -506,11 +506,11 @@ Any EEnumImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_
 }
 
 
-std::shared_ptr<EEnum> EEnumImpl::getThisEEnumPtr() const
+std::shared_ptr<ecore::EEnum> EEnumImpl::getThisEEnumPtr() const
 {
 	return m_thisEEnumPtr.lock();
 }
-void EEnumImpl::setThisEEnumPtr(std::weak_ptr<EEnum> thisEEnumPtr)
+void EEnumImpl::setThisEEnumPtr(std::weak_ptr<ecore::EEnum> thisEEnumPtr)
 {
 	m_thisEEnumPtr = thisEEnumPtr;
 	setThisEDataTypePtr(thisEEnumPtr);

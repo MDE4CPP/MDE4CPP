@@ -32,8 +32,8 @@ namespace fUML::Semantics::Actions
 		protected:
 			friend class fUML::Semantics::Actions::ActionsFactoryImpl;
 			InputPinActivationImpl();
-			virtual std::shared_ptr<InputPinActivation> getThisInputPinActivationPtr() const;
-			virtual void setThisInputPinActivationPtr(std::weak_ptr<InputPinActivation> thisInputPinActivationPtr);
+			virtual std::shared_ptr<fUML::Semantics::Actions::InputPinActivation> getThisInputPinActivationPtr() const;
+			virtual void setThisInputPinActivationPtr(std::weak_ptr<fUML::Semantics::Actions::InputPinActivation> thisInputPinActivationPtr);
 
 			//Additional constructors for the containments back reference
 			InputPinActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_group);
@@ -91,7 +91,7 @@ namespace fUML::Semantics::Actions
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<InputPinActivation> m_thisInputPinActivationPtr;
+			std::weak_ptr<fUML::Semantics::Actions::InputPinActivation> m_thisInputPinActivationPtr;
 	};
 }
 #endif /* end of include guard: FUML_SEMANTICS_ACTIONS_INPUTPINACTIVATIONINPUTPINACTIVATIONIMPL_HPP */

@@ -828,11 +828,11 @@ Any ClauseImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared
 }
 
 
-std::shared_ptr<Clause> ClauseImpl::getThisClausePtr() const
+std::shared_ptr<uml::Clause> ClauseImpl::getThisClausePtr() const
 {
 	return m_thisClausePtr.lock();
 }
-void ClauseImpl::setThisClausePtr(std::weak_ptr<Clause> thisClausePtr)
+void ClauseImpl::setThisClausePtr(std::weak_ptr<uml::Clause> thisClausePtr)
 {
 	m_thisClausePtr = thisClausePtr;
 	setThisElementPtr(thisClausePtr);

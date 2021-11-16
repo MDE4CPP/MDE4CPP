@@ -32,8 +32,8 @@ namespace ocl::Types
 		protected:
 			friend class ocl::Types::TypesFactoryImpl;
 			OrderedSetTypeImpl();
-			virtual std::shared_ptr<OrderedSetType> getThisOrderedSetTypePtr() const;
-			virtual void setThisOrderedSetTypePtr(std::weak_ptr<OrderedSetType> thisOrderedSetTypePtr);
+			virtual std::shared_ptr<ocl::Types::OrderedSetType> getThisOrderedSetTypePtr() const;
+			virtual void setThisOrderedSetTypePtr(std::weak_ptr<ocl::Types::OrderedSetType> thisOrderedSetTypePtr);
 
 			//Additional constructors for the containments back reference
 			OrderedSetTypeImpl(std::weak_ptr<ecore::EPackage> par_ePackage);
@@ -89,7 +89,7 @@ namespace ocl::Types
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<OrderedSetType> m_thisOrderedSetTypePtr;
+			std::weak_ptr<ocl::Types::OrderedSetType> m_thisOrderedSetTypePtr;
 	};
 }
 #endif /* end of include guard: OCL_TYPES_ORDEREDSETTYPEORDEREDSETTYPEIMPL_HPP */

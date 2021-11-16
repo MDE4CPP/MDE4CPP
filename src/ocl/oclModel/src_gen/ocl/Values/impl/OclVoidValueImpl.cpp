@@ -38,8 +38,8 @@
 
 //Factories an Package includes
 #include "ocl/oclPackage.hpp"
-#include "ocl/Values/ValuesPackage.hpp"
 #include "fUML/Semantics/Values/ValuesPackage.hpp"
+#include "ocl/Values/ValuesPackage.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -282,11 +282,11 @@ Any OclVoidValueImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::
 }
 
 
-std::shared_ptr<OclVoidValue> OclVoidValueImpl::getThisOclVoidValuePtr() const
+std::shared_ptr<ocl::Values::OclVoidValue> OclVoidValueImpl::getThisOclVoidValuePtr() const
 {
 	return m_thisOclVoidValuePtr.lock();
 }
-void OclVoidValueImpl::setThisOclVoidValuePtr(std::weak_ptr<OclVoidValue> thisOclVoidValuePtr)
+void OclVoidValueImpl::setThisOclVoidValuePtr(std::weak_ptr<ocl::Values::OclVoidValue> thisOclVoidValuePtr)
 {
 	m_thisOclVoidValuePtr = thisOclVoidValuePtr;
 	setThisValuePtr(thisOclVoidValuePtr);

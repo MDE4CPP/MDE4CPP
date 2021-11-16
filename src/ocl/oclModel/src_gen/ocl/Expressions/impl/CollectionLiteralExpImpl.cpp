@@ -32,8 +32,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "ecore/ecoreFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
+#include "ecore/ecoreFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
 
 #include "ocl/Expressions/CallExp.hpp"
@@ -353,27 +353,27 @@ void CollectionLiteralExpImpl::loadAttributes(std::shared_ptr<persistence::inter
 		iter = attr_list.find("kind");
 		if ( iter != attr_list.end() )
 		{
-			ocl::Expressions::CollectionKind value = CollectionKind::COLLECTION;
+			ocl::Expressions::CollectionKind value = ocl::Expressions::CollectionKind::COLLECTION;
 			std::string literal = iter->second;
 			if (literal == "collection")
 			{
-				value = CollectionKind::COLLECTION;
+				value = ocl::Expressions::CollectionKind::COLLECTION;
 			}
 			else if (literal == "set")
 			{
-				value = CollectionKind::SET;
+				value = ocl::Expressions::CollectionKind::SET;
 			}
 			else if (literal == "orderedSet")
 			{
-				value = CollectionKind::ORDEREDSET;
+				value = ocl::Expressions::CollectionKind::ORDEREDSET;
 			}
 			else if (literal == "bag")
 			{
-				value = CollectionKind::BAG;
+				value = ocl::Expressions::CollectionKind::BAG;
 			}
 			else if (literal == "sequence")
 			{
-				value = CollectionKind::SEQUENCE;
+				value = ocl::Expressions::CollectionKind::SEQUENCE;
 			}
 			this->setKind(value);
 		}
@@ -452,23 +452,23 @@ void CollectionLiteralExpImpl::saveContent(std::shared_ptr<persistence::interfac
 		{
 			ocl::Expressions::CollectionKind value = this->getKind();
 			std::string literal = "";
-			if (value == CollectionKind::COLLECTION)
+			if (value == ocl::Expressions::CollectionKind::COLLECTION)
 			{
 				literal = "collection";
 			}
-			else if (value == CollectionKind::SET)
+			else if (value == ocl::Expressions::CollectionKind::SET)
 			{
 				literal = "set";
 			}
-			else if (value == CollectionKind::ORDEREDSET)
+			else if (value == ocl::Expressions::CollectionKind::ORDEREDSET)
 			{
 				literal = "orderedSet";
 			}
-			else if (value == CollectionKind::BAG)
+			else if (value == ocl::Expressions::CollectionKind::BAG)
 			{
 				literal = "bag";
 			}
-			else if (value == CollectionKind::SEQUENCE)
+			else if (value == ocl::Expressions::CollectionKind::SEQUENCE)
 			{
 				literal = "sequence";
 			}
@@ -525,7 +525,7 @@ bool CollectionLiteralExpImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case ocl::Expressions::ExpressionsPackage::COLLECTIONLITERALEXP_ATTRIBUTE_KIND:
-			return m_kind != CollectionKind::COLLECTION;; //1422
+			return m_kind != ocl::Expressions::CollectionKind::COLLECTION;; //1422
 		case ocl::Expressions::ExpressionsPackage::COLLECTIONLITERALEXP_ATTRIBUTE_PART:
 			return getPart() != nullptr; //1423
 	}
@@ -608,11 +608,11 @@ Any CollectionLiteralExpImpl::eInvoke(int operationID, std::shared_ptr<std::list
 }
 
 
-std::shared_ptr<CollectionLiteralExp> CollectionLiteralExpImpl::getThisCollectionLiteralExpPtr() const
+std::shared_ptr<ocl::Expressions::CollectionLiteralExp> CollectionLiteralExpImpl::getThisCollectionLiteralExpPtr() const
 {
 	return m_thisCollectionLiteralExpPtr.lock();
 }
-void CollectionLiteralExpImpl::setThisCollectionLiteralExpPtr(std::weak_ptr<CollectionLiteralExp> thisCollectionLiteralExpPtr)
+void CollectionLiteralExpImpl::setThisCollectionLiteralExpPtr(std::weak_ptr<ocl::Expressions::CollectionLiteralExp> thisCollectionLiteralExpPtr)
 {
 	m_thisCollectionLiteralExpPtr = thisCollectionLiteralExpPtr;
 	setThisLiteralExpPtr(thisCollectionLiteralExpPtr);

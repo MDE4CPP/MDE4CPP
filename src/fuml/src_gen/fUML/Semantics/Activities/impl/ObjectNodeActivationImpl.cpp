@@ -113,14 +113,6 @@ ObjectNodeActivationImpl& ObjectNodeActivationImpl::operator=(const ObjectNodeAc
 	return *this;
 }
 
-std::shared_ptr<ecore::EObject> ObjectNodeActivationImpl::copy() const
-{
-	std::shared_ptr<ObjectNodeActivationImpl> element(new ObjectNodeActivationImpl());
-	*element =(*this);
-	element->setThisObjectNodeActivationPtr(element);
-	return element;
-}
-
 //*********************************
 // Operations
 //*********************************
@@ -556,11 +548,11 @@ Any ObjectNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list
 }
 
 
-std::shared_ptr<ObjectNodeActivation> ObjectNodeActivationImpl::getThisObjectNodeActivationPtr() const
+std::shared_ptr<fUML::Semantics::Activities::ObjectNodeActivation> ObjectNodeActivationImpl::getThisObjectNodeActivationPtr() const
 {
 	return m_thisObjectNodeActivationPtr.lock();
 }
-void ObjectNodeActivationImpl::setThisObjectNodeActivationPtr(std::weak_ptr<ObjectNodeActivation> thisObjectNodeActivationPtr)
+void ObjectNodeActivationImpl::setThisObjectNodeActivationPtr(std::weak_ptr<fUML::Semantics::Activities::ObjectNodeActivation> thisObjectNodeActivationPtr)
 {
 	m_thisObjectNodeActivationPtr = thisObjectNodeActivationPtr;
 	setThisActivityNodeActivationPtr(thisObjectNodeActivationPtr);

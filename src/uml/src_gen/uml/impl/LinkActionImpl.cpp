@@ -218,14 +218,6 @@ LinkActionImpl& LinkActionImpl::operator=(const LinkActionImpl & obj)
 	return *this;
 }
 
-std::shared_ptr<ecore::EObject> LinkActionImpl::copy() const
-{
-	std::shared_ptr<LinkActionImpl> element(new LinkActionImpl());
-	*element =(*this);
-	element->setThisLinkActionPtr(element);
-	return element;
-}
-
 //*********************************
 // Operations
 //*********************************
@@ -734,11 +726,11 @@ Any LinkActionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sh
 }
 
 
-std::shared_ptr<LinkAction> LinkActionImpl::getThisLinkActionPtr() const
+std::shared_ptr<uml::LinkAction> LinkActionImpl::getThisLinkActionPtr() const
 {
 	return m_thisLinkActionPtr.lock();
 }
-void LinkActionImpl::setThisLinkActionPtr(std::weak_ptr<LinkAction> thisLinkActionPtr)
+void LinkActionImpl::setThisLinkActionPtr(std::weak_ptr<uml::LinkAction> thisLinkActionPtr)
 {
 	m_thisLinkActionPtr = thisLinkActionPtr;
 	setThisActionPtr(thisLinkActionPtr);

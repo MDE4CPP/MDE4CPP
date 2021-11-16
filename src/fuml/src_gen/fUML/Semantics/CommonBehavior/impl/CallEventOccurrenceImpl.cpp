@@ -408,11 +408,11 @@ Any CallEventOccurrenceImpl::eInvoke(int operationID, std::shared_ptr<std::list 
 }
 
 
-std::shared_ptr<CallEventOccurrence> CallEventOccurrenceImpl::getThisCallEventOccurrencePtr() const
+std::shared_ptr<fUML::Semantics::CommonBehavior::CallEventOccurrence> CallEventOccurrenceImpl::getThisCallEventOccurrencePtr() const
 {
 	return m_thisCallEventOccurrencePtr.lock();
 }
-void CallEventOccurrenceImpl::setThisCallEventOccurrencePtr(std::weak_ptr<CallEventOccurrence> thisCallEventOccurrencePtr)
+void CallEventOccurrenceImpl::setThisCallEventOccurrencePtr(std::weak_ptr<fUML::Semantics::CommonBehavior::CallEventOccurrence> thisCallEventOccurrencePtr)
 {
 	m_thisCallEventOccurrencePtr = thisCallEventOccurrencePtr;
 	setThisEventOccurrencePtr(thisCallEventOccurrencePtr);

@@ -367,11 +367,11 @@ Any DurationIntervalImpl::eInvoke(int operationID, std::shared_ptr<std::list < s
 }
 
 
-std::shared_ptr<DurationInterval> DurationIntervalImpl::getThisDurationIntervalPtr() const
+std::shared_ptr<uml::DurationInterval> DurationIntervalImpl::getThisDurationIntervalPtr() const
 {
 	return m_thisDurationIntervalPtr.lock();
 }
-void DurationIntervalImpl::setThisDurationIntervalPtr(std::weak_ptr<DurationInterval> thisDurationIntervalPtr)
+void DurationIntervalImpl::setThisDurationIntervalPtr(std::weak_ptr<uml::DurationInterval> thisDurationIntervalPtr)
 {
 	m_thisDurationIntervalPtr = thisDurationIntervalPtr;
 	setThisIntervalPtr(thisDurationIntervalPtr);

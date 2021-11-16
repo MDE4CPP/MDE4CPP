@@ -32,8 +32,8 @@ namespace uml
 		protected:
 			friend class umlFactoryImpl;
 			TransitionImpl();
-			virtual std::shared_ptr<Transition> getThisTransitionPtr() const;
-			virtual void setThisTransitionPtr(std::weak_ptr<Transition> thisTransitionPtr);
+			virtual std::shared_ptr<uml::Transition> getThisTransitionPtr() const;
+			virtual void setThisTransitionPtr(std::weak_ptr<uml::Transition> thisTransitionPtr);
 
 			//Additional constructors for the containments back reference
 			TransitionImpl(std::weak_ptr<uml::Region> par_container);
@@ -297,7 +297,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<Transition> m_thisTransitionPtr;
+			std::weak_ptr<uml::Transition> m_thisTransitionPtr;
 	};
 }
 #endif /* end of include guard: UML_TRANSITIONTRANSITIONIMPL_HPP */

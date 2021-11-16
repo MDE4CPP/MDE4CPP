@@ -148,6 +148,15 @@ bool StringValueImpl::equals(std::shared_ptr<fUML::Semantics::Values::Value> oth
 	//end of body
 }
 
+std::shared_ptr<fUML::Semantics::Values::Value> StringValueImpl::new_()
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	// Return a new string value with no value.
+return fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createStringValue();
+	//end of body
+}
+
 std::shared_ptr<uml::ValueSpecification> StringValueImpl::specify()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
@@ -360,6 +369,13 @@ Any StringValueImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::s
 			break;
 		}
 		
+		// 42168513
+		case SimpleClassifiersPackage::STRINGVALUE_OPERATION_NEW_:
+		{
+			result = eAny(this->new_());
+			break;
+		}
+		
 		// 936357211
 		case SimpleClassifiersPackage::STRINGVALUE_OPERATION_SPECIFY:
 		{
@@ -388,11 +404,11 @@ Any StringValueImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::s
 }
 
 
-std::shared_ptr<StringValue> StringValueImpl::getThisStringValuePtr() const
+std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> StringValueImpl::getThisStringValuePtr() const
 {
 	return m_thisStringValuePtr.lock();
 }
-void StringValueImpl::setThisStringValuePtr(std::weak_ptr<StringValue> thisStringValuePtr)
+void StringValueImpl::setThisStringValuePtr(std::weak_ptr<fUML::Semantics::SimpleClassifiers::StringValue> thisStringValuePtr)
 {
 	m_thisStringValuePtr = thisStringValuePtr;
 	setThisPrimitiveValuePtr(thisStringValuePtr);

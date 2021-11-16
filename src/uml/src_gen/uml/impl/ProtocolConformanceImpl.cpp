@@ -453,11 +453,11 @@ Any ProtocolConformanceImpl::eInvoke(int operationID, std::shared_ptr<std::list 
 }
 
 
-std::shared_ptr<ProtocolConformance> ProtocolConformanceImpl::getThisProtocolConformancePtr() const
+std::shared_ptr<uml::ProtocolConformance> ProtocolConformanceImpl::getThisProtocolConformancePtr() const
 {
 	return m_thisProtocolConformancePtr.lock();
 }
-void ProtocolConformanceImpl::setThisProtocolConformancePtr(std::weak_ptr<ProtocolConformance> thisProtocolConformancePtr)
+void ProtocolConformanceImpl::setThisProtocolConformancePtr(std::weak_ptr<uml::ProtocolConformance> thisProtocolConformancePtr)
 {
 	m_thisProtocolConformancePtr = thisProtocolConformancePtr;
 	setThisDirectedRelationshipPtr(thisProtocolConformancePtr);

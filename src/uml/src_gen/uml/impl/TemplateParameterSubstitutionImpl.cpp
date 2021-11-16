@@ -524,11 +524,11 @@ Any TemplateParameterSubstitutionImpl::eInvoke(int operationID, std::shared_ptr<
 }
 
 
-std::shared_ptr<TemplateParameterSubstitution> TemplateParameterSubstitutionImpl::getThisTemplateParameterSubstitutionPtr() const
+std::shared_ptr<uml::TemplateParameterSubstitution> TemplateParameterSubstitutionImpl::getThisTemplateParameterSubstitutionPtr() const
 {
 	return m_thisTemplateParameterSubstitutionPtr.lock();
 }
-void TemplateParameterSubstitutionImpl::setThisTemplateParameterSubstitutionPtr(std::weak_ptr<TemplateParameterSubstitution> thisTemplateParameterSubstitutionPtr)
+void TemplateParameterSubstitutionImpl::setThisTemplateParameterSubstitutionPtr(std::weak_ptr<uml::TemplateParameterSubstitution> thisTemplateParameterSubstitutionPtr)
 {
 	m_thisTemplateParameterSubstitutionPtr = thisTemplateParameterSubstitutionPtr;
 	setThisElementPtr(thisTemplateParameterSubstitutionPtr);

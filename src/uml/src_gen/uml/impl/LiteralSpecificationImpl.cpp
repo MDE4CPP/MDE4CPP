@@ -150,14 +150,6 @@ LiteralSpecificationImpl& LiteralSpecificationImpl::operator=(const LiteralSpeci
 	return *this;
 }
 
-std::shared_ptr<ecore::EObject> LiteralSpecificationImpl::copy() const
-{
-	std::shared_ptr<LiteralSpecificationImpl> element(new LiteralSpecificationImpl());
-	*element =(*this);
-	element->setThisLiteralSpecificationPtr(element);
-	return element;
-}
-
 //*********************************
 // Operations
 //*********************************
@@ -364,11 +356,11 @@ Any LiteralSpecificationImpl::eInvoke(int operationID, std::shared_ptr<std::list
 }
 
 
-std::shared_ptr<LiteralSpecification> LiteralSpecificationImpl::getThisLiteralSpecificationPtr() const
+std::shared_ptr<uml::LiteralSpecification> LiteralSpecificationImpl::getThisLiteralSpecificationPtr() const
 {
 	return m_thisLiteralSpecificationPtr.lock();
 }
-void LiteralSpecificationImpl::setThisLiteralSpecificationPtr(std::weak_ptr<LiteralSpecification> thisLiteralSpecificationPtr)
+void LiteralSpecificationImpl::setThisLiteralSpecificationPtr(std::weak_ptr<uml::LiteralSpecification> thisLiteralSpecificationPtr)
 {
 	m_thisLiteralSpecificationPtr = thisLiteralSpecificationPtr;
 	setThisValueSpecificationPtr(thisLiteralSpecificationPtr);

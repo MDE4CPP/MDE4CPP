@@ -604,11 +604,11 @@ Any InteractionConstraintImpl::eInvoke(int operationID, std::shared_ptr<std::lis
 }
 
 
-std::shared_ptr<InteractionConstraint> InteractionConstraintImpl::getThisInteractionConstraintPtr() const
+std::shared_ptr<uml::InteractionConstraint> InteractionConstraintImpl::getThisInteractionConstraintPtr() const
 {
 	return m_thisInteractionConstraintPtr.lock();
 }
-void InteractionConstraintImpl::setThisInteractionConstraintPtr(std::weak_ptr<InteractionConstraint> thisInteractionConstraintPtr)
+void InteractionConstraintImpl::setThisInteractionConstraintPtr(std::weak_ptr<uml::InteractionConstraint> thisInteractionConstraintPtr)
 {
 	m_thisInteractionConstraintPtr = thisInteractionConstraintPtr;
 	setThisConstraintPtr(thisInteractionConstraintPtr);

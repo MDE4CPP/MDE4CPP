@@ -26,19 +26,19 @@ namespace fUML::Semantics::SimpleClassifiers
 	{
 		public: 
 			StructuredValueImpl(const StructuredValueImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 			StructuredValueImpl& operator=(StructuredValueImpl const&); 
 
 		protected:
 			friend class fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactoryImpl;
 			StructuredValueImpl();
-			virtual std::shared_ptr<StructuredValue> getThisStructuredValuePtr() const;
-			virtual void setThisStructuredValuePtr(std::weak_ptr<StructuredValue> thisStructuredValuePtr);
+			virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::StructuredValue> getThisStructuredValuePtr() const;
+			virtual void setThisStructuredValuePtr(std::weak_ptr<fUML::Semantics::SimpleClassifiers::StructuredValue> thisStructuredValuePtr);
 
 
 		public:
 			//destructor
-			virtual ~StructuredValueImpl();
+			virtual ~StructuredValueImpl() = 0;
 			
 			//*********************************
 			// Operations
@@ -95,7 +95,7 @@ namespace fUML::Semantics::SimpleClassifiers
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<StructuredValue> m_thisStructuredValuePtr;
+			std::weak_ptr<fUML::Semantics::SimpleClassifiers::StructuredValue> m_thisStructuredValuePtr;
 	};
 }
 #endif /* end of include guard: FUML_SEMANTICS_SIMPLECLASSIFIERS_STRUCTUREDVALUESTRUCTUREDVALUEIMPL_HPP */

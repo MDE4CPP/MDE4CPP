@@ -25,14 +25,14 @@ namespace uml
 	{
 		public: 
 			BehavioredClassifierImpl(const BehavioredClassifierImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 			BehavioredClassifierImpl& operator=(BehavioredClassifierImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;
 			BehavioredClassifierImpl();
-			virtual std::shared_ptr<BehavioredClassifier> getThisBehavioredClassifierPtr() const;
-			virtual void setThisBehavioredClassifierPtr(std::weak_ptr<BehavioredClassifier> thisBehavioredClassifierPtr);
+			virtual std::shared_ptr<uml::BehavioredClassifier> getThisBehavioredClassifierPtr() const;
+			virtual void setThisBehavioredClassifierPtr(std::weak_ptr<uml::BehavioredClassifier> thisBehavioredClassifierPtr);
 
 			//Additional constructors for the containments back reference
 			BehavioredClassifierImpl(std::weak_ptr<uml::Namespace> par_namespace);
@@ -46,7 +46,7 @@ namespace uml
 
 		public:
 			//destructor
-			virtual ~BehavioredClassifierImpl();
+			virtual ~BehavioredClassifierImpl() = 0;
 			
 			//*********************************
 			// Operations
@@ -178,7 +178,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<BehavioredClassifier> m_thisBehavioredClassifierPtr;
+			std::weak_ptr<uml::BehavioredClassifier> m_thisBehavioredClassifierPtr;
 	};
 }
 #endif /* end of include guard: UML_BEHAVIOREDCLASSIFIERBEHAVIOREDCLASSIFIERIMPL_HPP */

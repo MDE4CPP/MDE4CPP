@@ -32,8 +32,8 @@ namespace fUML::Semantics::Activities
 		protected:
 			friend class fUML::Semantics::Activities::ActivitiesFactoryImpl;
 			MergeNodeActivationImpl();
-			virtual std::shared_ptr<MergeNodeActivation> getThisMergeNodeActivationPtr() const;
-			virtual void setThisMergeNodeActivationPtr(std::weak_ptr<MergeNodeActivation> thisMergeNodeActivationPtr);
+			virtual std::shared_ptr<fUML::Semantics::Activities::MergeNodeActivation> getThisMergeNodeActivationPtr() const;
+			virtual void setThisMergeNodeActivationPtr(std::weak_ptr<fUML::Semantics::Activities::MergeNodeActivation> thisMergeNodeActivationPtr);
 
 			//Additional constructors for the containments back reference
 			MergeNodeActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_group);
@@ -89,7 +89,7 @@ namespace fUML::Semantics::Activities
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<MergeNodeActivation> m_thisMergeNodeActivationPtr;
+			std::weak_ptr<fUML::Semantics::Activities::MergeNodeActivation> m_thisMergeNodeActivationPtr;
 	};
 }
 #endif /* end of include guard: FUML_SEMANTICS_ACTIVITIES_MERGENODEACTIVATIONMERGENODEACTIVATIONIMPL_HPP */

@@ -103,14 +103,6 @@ ENamedElementImpl& ENamedElementImpl::operator=(const ENamedElementImpl & obj)
 	return *this;
 }
 
-std::shared_ptr<ecore::EObject> ENamedElementImpl::copy() const
-{
-	std::shared_ptr<ENamedElementImpl> element(new ENamedElementImpl());
-	*element =(*this);
-	element->setThisENamedElementPtr(element);
-	return element;
-}
-
 //*********************************
 // Operations
 //*********************************
@@ -319,11 +311,11 @@ Any ENamedElementImpl::eInvoke(int operationID, std::shared_ptr<std::list < std:
 }
 
 
-std::shared_ptr<ENamedElement> ENamedElementImpl::getThisENamedElementPtr() const
+std::shared_ptr<ecore::ENamedElement> ENamedElementImpl::getThisENamedElementPtr() const
 {
 	return m_thisENamedElementPtr.lock();
 }
-void ENamedElementImpl::setThisENamedElementPtr(std::weak_ptr<ENamedElement> thisENamedElementPtr)
+void ENamedElementImpl::setThisENamedElementPtr(std::weak_ptr<ecore::ENamedElement> thisENamedElementPtr)
 {
 	m_thisENamedElementPtr = thisENamedElementPtr;
 	setThisEModelElementPtr(thisENamedElementPtr);

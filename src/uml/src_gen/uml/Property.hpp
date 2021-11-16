@@ -525,7 +525,7 @@ namespace uml
 			<p>From package UML::Classification.</p>
 			*/
 			
-			uml::AggregationKind m_aggregation= AggregationKind::NONE;
+			uml::AggregationKind m_aggregation= uml::AggregationKind::NONE;
 			std::string m_default= "";
 			/*!
 			If isComposite is true, the object containing the attribute is a container for the object or value contained in the attribute. This is a derived value, indicating whether the aggregation of the Property is composite or not.

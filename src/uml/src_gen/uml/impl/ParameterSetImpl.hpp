@@ -31,8 +31,8 @@ namespace uml
 		protected:
 			friend class umlFactoryImpl;
 			ParameterSetImpl();
-			virtual std::shared_ptr<ParameterSet> getThisParameterSetPtr() const;
-			virtual void setThisParameterSetPtr(std::weak_ptr<ParameterSet> thisParameterSetPtr);
+			virtual std::shared_ptr<uml::ParameterSet> getThisParameterSetPtr() const;
+			virtual void setThisParameterSetPtr(std::weak_ptr<uml::ParameterSet> thisParameterSetPtr);
 
 			//Additional constructors for the containments back reference
 			ParameterSetImpl(std::weak_ptr<uml::Namespace> par_namespace);
@@ -136,7 +136,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<ParameterSet> m_thisParameterSetPtr;
+			std::weak_ptr<uml::ParameterSet> m_thisParameterSetPtr;
 	};
 }
 #endif /* end of include guard: UML_PARAMETERSETPARAMETERSETIMPL_HPP */

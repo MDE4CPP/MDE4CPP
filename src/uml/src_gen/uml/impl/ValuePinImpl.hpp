@@ -31,8 +31,8 @@ namespace uml
 		protected:
 			friend class umlFactoryImpl;
 			ValuePinImpl();
-			virtual std::shared_ptr<ValuePin> getThisValuePinPtr() const;
-			virtual void setThisValuePinPtr(std::weak_ptr<ValuePin> thisValuePinPtr);
+			virtual std::shared_ptr<uml::ValuePin> getThisValuePinPtr() const;
+			virtual void setThisValuePinPtr(std::weak_ptr<uml::ValuePin> thisValuePinPtr);
 
 			//Additional constructors for the containments back reference
 			ValuePinImpl(std::weak_ptr<uml::Action> par_action);
@@ -158,7 +158,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<ValuePin> m_thisValuePinPtr;
+			std::weak_ptr<uml::ValuePin> m_thisValuePinPtr;
 	};
 }
 #endif /* end of include guard: UML_VALUEPINVALUEPINIMPL_HPP */

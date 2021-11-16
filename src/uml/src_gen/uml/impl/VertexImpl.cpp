@@ -128,14 +128,6 @@ VertexImpl& VertexImpl::operator=(const VertexImpl & obj)
 	return *this;
 }
 
-std::shared_ptr<ecore::EObject> VertexImpl::copy() const
-{
-	std::shared_ptr<VertexImpl> element(new VertexImpl());
-	*element =(*this);
-	element->setThisVertexPtr(element);
-	return element;
-}
-
 //*********************************
 // Operations
 //*********************************
@@ -484,11 +476,11 @@ Any VertexImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared
 }
 
 
-std::shared_ptr<Vertex> VertexImpl::getThisVertexPtr() const
+std::shared_ptr<uml::Vertex> VertexImpl::getThisVertexPtr() const
 {
 	return m_thisVertexPtr.lock();
 }
-void VertexImpl::setThisVertexPtr(std::weak_ptr<Vertex> thisVertexPtr)
+void VertexImpl::setThisVertexPtr(std::weak_ptr<uml::Vertex> thisVertexPtr)
 {
 	m_thisVertexPtr = thisVertexPtr;
 	setThisNamedElementPtr(thisVertexPtr);

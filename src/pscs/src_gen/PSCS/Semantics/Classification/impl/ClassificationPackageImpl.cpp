@@ -4,11 +4,11 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
+#include "ecore/EStringToStringMapEntry.hpp"
 #include "ecore/EAnnotation.hpp"
-#include "ecore/EClass.hpp"
 #include "ecore/EGenericType.hpp"
 #include "ecore/EOperation.hpp"
-#include "ecore/EStringToStringMapEntry.hpp"
+#include "ecore/EClass.hpp"
 
 //metamodel factory
 #include "PSCS/Semantics/Classification/ClassificationFactory.hpp"
@@ -53,14 +53,14 @@ void ClassificationPackageImpl::init(std::shared_ptr<ecore::EPackage> package)
 
 
 // Begin Class CS_InstanceValueEvaluation
-std::shared_ptr<ecore::EClass> ClassificationPackageImpl::getCS_InstanceValueEvaluation_Class() const
+std::shared_ptr<ecore::EClass> PSCS::Semantics::Classification::ClassificationPackageImpl::getCS_InstanceValueEvaluation_Class() const
 {
 	return m_cS_InstanceValueEvaluation_Class;
 }
 
 
 
-std::shared_ptr<ecore::EOperation> ClassificationPackageImpl::getCS_InstanceValueEvaluation_Operation_evaluate() const
+std::shared_ptr<ecore::EOperation> PSCS::Semantics::Classification::ClassificationPackageImpl::getCS_InstanceValueEvaluation_Operation_evaluate() const
 {
 	return m_cS_InstanceValueEvaluation_Operation_evaluate;
 }

@@ -55,8 +55,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
+#include "uml/umlFactory.hpp"
 
 #include "fUML/Semantics/Values/Evaluation.hpp"
 #include "fUML/Semantics/Loci/Locus.hpp"
@@ -364,11 +364,11 @@ Any InstanceValueEvaluationImpl::eInvoke(int operationID, std::shared_ptr<std::l
 }
 
 
-std::shared_ptr<InstanceValueEvaluation> InstanceValueEvaluationImpl::getThisInstanceValueEvaluationPtr() const
+std::shared_ptr<fUML::Semantics::Classification::InstanceValueEvaluation> InstanceValueEvaluationImpl::getThisInstanceValueEvaluationPtr() const
 {
 	return m_thisInstanceValueEvaluationPtr.lock();
 }
-void InstanceValueEvaluationImpl::setThisInstanceValueEvaluationPtr(std::weak_ptr<InstanceValueEvaluation> thisInstanceValueEvaluationPtr)
+void InstanceValueEvaluationImpl::setThisInstanceValueEvaluationPtr(std::weak_ptr<fUML::Semantics::Classification::InstanceValueEvaluation> thisInstanceValueEvaluationPtr)
 {
 	m_thisInstanceValueEvaluationPtr = thisInstanceValueEvaluationPtr;
 	setThisEvaluationPtr(thisInstanceValueEvaluationPtr);

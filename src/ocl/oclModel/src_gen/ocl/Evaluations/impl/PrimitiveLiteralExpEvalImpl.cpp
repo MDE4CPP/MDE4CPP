@@ -262,11 +262,11 @@ Any PrimitiveLiteralExpEvalImpl::eInvoke(int operationID, std::shared_ptr<std::l
 }
 
 
-std::shared_ptr<PrimitiveLiteralExpEval> PrimitiveLiteralExpEvalImpl::getThisPrimitiveLiteralExpEvalPtr() const
+std::shared_ptr<ocl::Evaluations::PrimitiveLiteralExpEval> PrimitiveLiteralExpEvalImpl::getThisPrimitiveLiteralExpEvalPtr() const
 {
 	return m_thisPrimitiveLiteralExpEvalPtr.lock();
 }
-void PrimitiveLiteralExpEvalImpl::setThisPrimitiveLiteralExpEvalPtr(std::weak_ptr<PrimitiveLiteralExpEval> thisPrimitiveLiteralExpEvalPtr)
+void PrimitiveLiteralExpEvalImpl::setThisPrimitiveLiteralExpEvalPtr(std::weak_ptr<ocl::Evaluations::PrimitiveLiteralExpEval> thisPrimitiveLiteralExpEvalPtr)
 {
 	m_thisPrimitiveLiteralExpEvalPtr = thisPrimitiveLiteralExpEvalPtr;
 	setThisLiteralExpEvalPtr(thisPrimitiveLiteralExpEvalPtr);

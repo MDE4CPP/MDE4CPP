@@ -450,11 +450,11 @@ Any RaiseExceptionActionImpl::eInvoke(int operationID, std::shared_ptr<std::list
 }
 
 
-std::shared_ptr<RaiseExceptionAction> RaiseExceptionActionImpl::getThisRaiseExceptionActionPtr() const
+std::shared_ptr<uml::RaiseExceptionAction> RaiseExceptionActionImpl::getThisRaiseExceptionActionPtr() const
 {
 	return m_thisRaiseExceptionActionPtr.lock();
 }
-void RaiseExceptionActionImpl::setThisRaiseExceptionActionPtr(std::weak_ptr<RaiseExceptionAction> thisRaiseExceptionActionPtr)
+void RaiseExceptionActionImpl::setThisRaiseExceptionActionPtr(std::weak_ptr<uml::RaiseExceptionAction> thisRaiseExceptionActionPtr)
 {
 	m_thisRaiseExceptionActionPtr = thisRaiseExceptionActionPtr;
 	setThisActionPtr(thisRaiseExceptionActionPtr);

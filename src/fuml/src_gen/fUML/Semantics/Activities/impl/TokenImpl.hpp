@@ -28,21 +28,21 @@ virtual public Token
 	{
 		public: 
 			TokenImpl(const TokenImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 			TokenImpl& operator=(TokenImpl const&); 
 
 		protected:
 			friend class fUML::Semantics::Activities::ActivitiesFactoryImpl;
 			TokenImpl();
-			virtual std::shared_ptr<Token> getThisTokenPtr() const;
-			virtual void setThisTokenPtr(std::weak_ptr<Token> thisTokenPtr);
+			virtual std::shared_ptr<fUML::Semantics::Activities::Token> getThisTokenPtr() const;
+			virtual void setThisTokenPtr(std::weak_ptr<fUML::Semantics::Activities::Token> thisTokenPtr);
 
 			//Additional constructors for the containments back reference
 			TokenImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivation> par_holder);
 
 		public:
 			//destructor
-			virtual ~TokenImpl();
+			virtual ~TokenImpl() = 0;
 			
 			//*********************************
 			// Operations
@@ -101,7 +101,7 @@ virtual public Token
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<Token> m_thisTokenPtr;
+			std::weak_ptr<fUML::Semantics::Activities::Token> m_thisTokenPtr;
 	};
 }
 #endif /* end of include guard: FUML_SEMANTICS_ACTIVITIES_TOKENTOKENIMPL_HPP */

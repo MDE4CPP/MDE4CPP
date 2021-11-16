@@ -1259,11 +1259,11 @@ Any InterfaceImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sha
 }
 
 
-std::shared_ptr<Interface> InterfaceImpl::getThisInterfacePtr() const
+std::shared_ptr<uml::Interface> InterfaceImpl::getThisInterfacePtr() const
 {
 	return m_thisInterfacePtr.lock();
 }
-void InterfaceImpl::setThisInterfacePtr(std::weak_ptr<Interface> thisInterfacePtr)
+void InterfaceImpl::setThisInterfacePtr(std::weak_ptr<uml::Interface> thisInterfacePtr)
 {
 	m_thisInterfacePtr = thisInterfacePtr;
 	setThisClassifierPtr(thisInterfacePtr);

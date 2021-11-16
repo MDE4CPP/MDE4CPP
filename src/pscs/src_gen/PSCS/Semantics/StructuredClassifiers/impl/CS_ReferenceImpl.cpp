@@ -560,11 +560,11 @@ Any CS_ReferenceImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::
 }
 
 
-std::shared_ptr<CS_Reference> CS_ReferenceImpl::getThisCS_ReferencePtr() const
+std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> CS_ReferenceImpl::getThisCS_ReferencePtr() const
 {
 	return m_thisCS_ReferencePtr.lock();
 }
-void CS_ReferenceImpl::setThisCS_ReferencePtr(std::weak_ptr<CS_Reference> thisCS_ReferencePtr)
+void CS_ReferenceImpl::setThisCS_ReferencePtr(std::weak_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> thisCS_ReferencePtr)
 {
 	m_thisCS_ReferencePtr = thisCS_ReferencePtr;
 	setThisReferencePtr(thisCS_ReferencePtr);

@@ -314,11 +314,11 @@ Any ValueSpecificationActionActivationImpl::eInvoke(int operationID, std::shared
 }
 
 
-std::shared_ptr<ValueSpecificationActionActivation> ValueSpecificationActionActivationImpl::getThisValueSpecificationActionActivationPtr() const
+std::shared_ptr<fUML::Semantics::Actions::ValueSpecificationActionActivation> ValueSpecificationActionActivationImpl::getThisValueSpecificationActionActivationPtr() const
 {
 	return m_thisValueSpecificationActionActivationPtr.lock();
 }
-void ValueSpecificationActionActivationImpl::setThisValueSpecificationActionActivationPtr(std::weak_ptr<ValueSpecificationActionActivation> thisValueSpecificationActionActivationPtr)
+void ValueSpecificationActionActivationImpl::setThisValueSpecificationActionActivationPtr(std::weak_ptr<fUML::Semantics::Actions::ValueSpecificationActionActivation> thisValueSpecificationActionActivationPtr)
 {
 	m_thisValueSpecificationActionActivationPtr = thisValueSpecificationActionActivationPtr;
 	setThisActionActivationPtr(thisValueSpecificationActionActivationPtr);

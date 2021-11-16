@@ -338,7 +338,7 @@ namespace uml
 			<p>From package UML::StateMachines.</p>
 			*/
 			
-			uml::TransitionKind m_kind= TransitionKind::EXTERNAL;
+			uml::TransitionKind m_kind= uml::TransitionKind::EXTERNAL;
 			
 			//*********************************
 			// Reference Members

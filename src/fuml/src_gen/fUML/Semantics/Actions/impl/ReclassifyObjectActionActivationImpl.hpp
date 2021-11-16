@@ -32,8 +32,8 @@ namespace fUML::Semantics::Actions
 		protected:
 			friend class fUML::Semantics::Actions::ActionsFactoryImpl;
 			ReclassifyObjectActionActivationImpl();
-			virtual std::shared_ptr<ReclassifyObjectActionActivation> getThisReclassifyObjectActionActivationPtr() const;
-			virtual void setThisReclassifyObjectActionActivationPtr(std::weak_ptr<ReclassifyObjectActionActivation> thisReclassifyObjectActionActivationPtr);
+			virtual std::shared_ptr<fUML::Semantics::Actions::ReclassifyObjectActionActivation> getThisReclassifyObjectActionActivationPtr() const;
+			virtual void setThisReclassifyObjectActionActivationPtr(std::weak_ptr<fUML::Semantics::Actions::ReclassifyObjectActionActivation> thisReclassifyObjectActionActivationPtr);
 
 			//Additional constructors for the containments back reference
 			ReclassifyObjectActionActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_group);
@@ -90,7 +90,7 @@ namespace fUML::Semantics::Actions
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<ReclassifyObjectActionActivation> m_thisReclassifyObjectActionActivationPtr;
+			std::weak_ptr<fUML::Semantics::Actions::ReclassifyObjectActionActivation> m_thisReclassifyObjectActionActivationPtr;
 	};
 }
 #endif /* end of include guard: FUML_SEMANTICS_ACTIONS_RECLASSIFYOBJECTACTIONACTIVATIONRECLASSIFYOBJECTACTIONACTIVATIONIMPL_HPP */

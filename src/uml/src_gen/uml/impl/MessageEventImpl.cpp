@@ -131,14 +131,6 @@ MessageEventImpl& MessageEventImpl::operator=(const MessageEventImpl & obj)
 	return *this;
 }
 
-std::shared_ptr<ecore::EObject> MessageEventImpl::copy() const
-{
-	std::shared_ptr<MessageEventImpl> element(new MessageEventImpl());
-	*element =(*this);
-	element->setThisMessageEventPtr(element);
-	return element;
-}
-
 //*********************************
 // Operations
 //*********************************
@@ -334,11 +326,11 @@ Any MessageEventImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::
 }
 
 
-std::shared_ptr<MessageEvent> MessageEventImpl::getThisMessageEventPtr() const
+std::shared_ptr<uml::MessageEvent> MessageEventImpl::getThisMessageEventPtr() const
 {
 	return m_thisMessageEventPtr.lock();
 }
-void MessageEventImpl::setThisMessageEventPtr(std::weak_ptr<MessageEvent> thisMessageEventPtr)
+void MessageEventImpl::setThisMessageEventPtr(std::weak_ptr<uml::MessageEvent> thisMessageEventPtr)
 {
 	m_thisMessageEventPtr = thisMessageEventPtr;
 	setThisEventPtr(thisMessageEventPtr);

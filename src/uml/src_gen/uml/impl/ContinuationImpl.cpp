@@ -448,11 +448,11 @@ Any ContinuationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::
 }
 
 
-std::shared_ptr<Continuation> ContinuationImpl::getThisContinuationPtr() const
+std::shared_ptr<uml::Continuation> ContinuationImpl::getThisContinuationPtr() const
 {
 	return m_thisContinuationPtr.lock();
 }
-void ContinuationImpl::setThisContinuationPtr(std::weak_ptr<Continuation> thisContinuationPtr)
+void ContinuationImpl::setThisContinuationPtr(std::weak_ptr<uml::Continuation> thisContinuationPtr)
 {
 	m_thisContinuationPtr = thisContinuationPtr;
 	setThisInteractionFragmentPtr(thisContinuationPtr);

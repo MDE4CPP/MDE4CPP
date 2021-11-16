@@ -518,11 +518,11 @@ Any InterfaceRealizationImpl::eInvoke(int operationID, std::shared_ptr<std::list
 }
 
 
-std::shared_ptr<InterfaceRealization> InterfaceRealizationImpl::getThisInterfaceRealizationPtr() const
+std::shared_ptr<uml::InterfaceRealization> InterfaceRealizationImpl::getThisInterfaceRealizationPtr() const
 {
 	return m_thisInterfaceRealizationPtr.lock();
 }
-void InterfaceRealizationImpl::setThisInterfaceRealizationPtr(std::weak_ptr<InterfaceRealization> thisInterfaceRealizationPtr)
+void InterfaceRealizationImpl::setThisInterfaceRealizationPtr(std::weak_ptr<uml::InterfaceRealization> thisInterfaceRealizationPtr)
 {
 	m_thisInterfaceRealizationPtr = thisInterfaceRealizationPtr;
 	setThisRealizationPtr(thisInterfaceRealizationPtr);

@@ -519,11 +519,11 @@ Any ClearStructuralFeatureActionImpl::eInvoke(int operationID, std::shared_ptr<s
 }
 
 
-std::shared_ptr<ClearStructuralFeatureAction> ClearStructuralFeatureActionImpl::getThisClearStructuralFeatureActionPtr() const
+std::shared_ptr<uml::ClearStructuralFeatureAction> ClearStructuralFeatureActionImpl::getThisClearStructuralFeatureActionPtr() const
 {
 	return m_thisClearStructuralFeatureActionPtr.lock();
 }
-void ClearStructuralFeatureActionImpl::setThisClearStructuralFeatureActionPtr(std::weak_ptr<ClearStructuralFeatureAction> thisClearStructuralFeatureActionPtr)
+void ClearStructuralFeatureActionImpl::setThisClearStructuralFeatureActionPtr(std::weak_ptr<uml::ClearStructuralFeatureAction> thisClearStructuralFeatureActionPtr)
 {
 	m_thisClearStructuralFeatureActionPtr = thisClearStructuralFeatureActionPtr;
 	setThisStructuralFeatureActionPtr(thisClearStructuralFeatureActionPtr);

@@ -32,9 +32,9 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "ecore/ecoreFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
+#include "ecore/ecoreFactory.hpp"
 
 #include "ocl/Expressions/CallExp.hpp"
 #include "ocl/Expressions/CollectionRange.hpp"
@@ -457,11 +457,11 @@ Any UnlimitedNaturalExpImpl::eInvoke(int operationID, std::shared_ptr<std::list 
 }
 
 
-std::shared_ptr<UnlimitedNaturalExp> UnlimitedNaturalExpImpl::getThisUnlimitedNaturalExpPtr() const
+std::shared_ptr<ocl::Expressions::UnlimitedNaturalExp> UnlimitedNaturalExpImpl::getThisUnlimitedNaturalExpPtr() const
 {
 	return m_thisUnlimitedNaturalExpPtr.lock();
 }
-void UnlimitedNaturalExpImpl::setThisUnlimitedNaturalExpPtr(std::weak_ptr<UnlimitedNaturalExp> thisUnlimitedNaturalExpPtr)
+void UnlimitedNaturalExpImpl::setThisUnlimitedNaturalExpPtr(std::weak_ptr<ocl::Expressions::UnlimitedNaturalExp> thisUnlimitedNaturalExpPtr)
 {
 	m_thisUnlimitedNaturalExpPtr = thisUnlimitedNaturalExpPtr;
 	setThisNumericLiteralExpPtr(thisUnlimitedNaturalExpPtr);

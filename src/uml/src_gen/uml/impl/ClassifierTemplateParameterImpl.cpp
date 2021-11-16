@@ -571,11 +571,11 @@ Any ClassifierTemplateParameterImpl::eInvoke(int operationID, std::shared_ptr<st
 }
 
 
-std::shared_ptr<ClassifierTemplateParameter> ClassifierTemplateParameterImpl::getThisClassifierTemplateParameterPtr() const
+std::shared_ptr<uml::ClassifierTemplateParameter> ClassifierTemplateParameterImpl::getThisClassifierTemplateParameterPtr() const
 {
 	return m_thisClassifierTemplateParameterPtr.lock();
 }
-void ClassifierTemplateParameterImpl::setThisClassifierTemplateParameterPtr(std::weak_ptr<ClassifierTemplateParameter> thisClassifierTemplateParameterPtr)
+void ClassifierTemplateParameterImpl::setThisClassifierTemplateParameterPtr(std::weak_ptr<uml::ClassifierTemplateParameter> thisClassifierTemplateParameterPtr)
 {
 	m_thisClassifierTemplateParameterPtr = thisClassifierTemplateParameterPtr;
 	setThisTemplateParameterPtr(thisClassifierTemplateParameterPtr);

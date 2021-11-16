@@ -399,11 +399,11 @@ Any EFactoryImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shar
 }
 
 
-std::shared_ptr<EFactory> EFactoryImpl::getThisEFactoryPtr() const
+std::shared_ptr<ecore::EFactory> EFactoryImpl::getThisEFactoryPtr() const
 {
 	return m_thisEFactoryPtr.lock();
 }
-void EFactoryImpl::setThisEFactoryPtr(std::weak_ptr<EFactory> thisEFactoryPtr)
+void EFactoryImpl::setThisEFactoryPtr(std::weak_ptr<ecore::EFactory> thisEFactoryPtr)
 {
 	m_thisEFactoryPtr = thisEFactoryPtr;
 	setThisEModelElementPtr(thisEFactoryPtr);

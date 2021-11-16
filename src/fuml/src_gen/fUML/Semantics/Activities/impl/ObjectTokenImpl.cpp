@@ -33,8 +33,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Values/ValuesFactory.hpp"
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
+#include "fUML/Semantics/Values/ValuesFactory.hpp"
 
 #include "fUML/Semantics/Activities/ActivityNodeActivation.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
@@ -376,11 +376,11 @@ Any ObjectTokenImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::s
 }
 
 
-std::shared_ptr<ObjectToken> ObjectTokenImpl::getThisObjectTokenPtr() const
+std::shared_ptr<fUML::Semantics::Activities::ObjectToken> ObjectTokenImpl::getThisObjectTokenPtr() const
 {
 	return m_thisObjectTokenPtr.lock();
 }
-void ObjectTokenImpl::setThisObjectTokenPtr(std::weak_ptr<ObjectToken> thisObjectTokenPtr)
+void ObjectTokenImpl::setThisObjectTokenPtr(std::weak_ptr<fUML::Semantics::Activities::ObjectToken> thisObjectTokenPtr)
 {
 	m_thisObjectTokenPtr = thisObjectTokenPtr;
 	setThisTokenPtr(thisObjectTokenPtr);

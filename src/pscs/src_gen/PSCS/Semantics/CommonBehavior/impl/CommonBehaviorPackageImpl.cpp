@@ -4,15 +4,15 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
-#include "ecore/EAnnotation.hpp"
-#include "ecore/EReference.hpp"
-#include "ecore/EClass.hpp"
-#include "ecore/EDataType.hpp"
-#include "ecore/EGenericType.hpp"
-#include "ecore/EAttribute.hpp"
-#include "ecore/EParameter.hpp"
-#include "ecore/EOperation.hpp"
 #include "ecore/EStringToStringMapEntry.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
+#include "ecore/EGenericType.hpp"
+#include "ecore/EOperation.hpp"
+#include "ecore/EClass.hpp"
+#include "ecore/EParameter.hpp"
+#include "ecore/EDataType.hpp"
 
 //metamodel factory
 #include "PSCS/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
@@ -60,26 +60,26 @@ void CommonBehaviorPackageImpl::init(std::shared_ptr<ecore::EPackage> package)
 
 
 // Begin Class CS_CallEventExecution
-std::shared_ptr<ecore::EClass> CommonBehaviorPackageImpl::getCS_CallEventExecution_Class() const
+std::shared_ptr<ecore::EClass> PSCS::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getCS_CallEventExecution_Class() const
 {
 	return m_cS_CallEventExecution_Class;
 }
 
 
-std::shared_ptr<ecore::EReference> CommonBehaviorPackageImpl::getCS_CallEventExecution_Attribute_interactionPoint() const
+std::shared_ptr<ecore::EReference> PSCS::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getCS_CallEventExecution_Attribute_interactionPoint() const
 {
 	return m_cS_CallEventExecution_Attribute_interactionPoint;
 }
 
-std::shared_ptr<ecore::EOperation> CommonBehaviorPackageImpl::getCS_CallEventExecution_Operation__copy() const
+std::shared_ptr<ecore::EOperation> PSCS::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getCS_CallEventExecution_Operation__copy() const
 {
 	return m_cS_CallEventExecution_Operation__copy;
 }
-std::shared_ptr<ecore::EOperation> CommonBehaviorPackageImpl::getCS_CallEventExecution_Operation_createEventOccurrence() const
+std::shared_ptr<ecore::EOperation> PSCS::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getCS_CallEventExecution_Operation_createEventOccurrence() const
 {
 	return m_cS_CallEventExecution_Operation_createEventOccurrence;
 }
-std::shared_ptr<ecore::EOperation> CommonBehaviorPackageImpl::getCS_CallEventExecution_Operation_new_() const
+std::shared_ptr<ecore::EOperation> PSCS::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getCS_CallEventExecution_Operation_new_() const
 {
 	return m_cS_CallEventExecution_Operation_new_;
 }
@@ -87,46 +87,46 @@ std::shared_ptr<ecore::EOperation> CommonBehaviorPackageImpl::getCS_CallEventExe
 // End Class CS_CallEventExecution
 
 // Begin Class CS_EventOccurrence
-std::shared_ptr<ecore::EClass> CommonBehaviorPackageImpl::getCS_EventOccurrence_Class() const
+std::shared_ptr<ecore::EClass> PSCS::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getCS_EventOccurrence_Class() const
 {
 	return m_cS_EventOccurrence_Class;
 }
 
-std::shared_ptr<ecore::EAttribute> CommonBehaviorPackageImpl::getCS_EventOccurrence_Attribute_propagationInward() const
+std::shared_ptr<ecore::EAttribute> PSCS::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getCS_EventOccurrence_Attribute_propagationInward() const
 {
 	return m_cS_EventOccurrence_Attribute_propagationInward;
 }
 
-std::shared_ptr<ecore::EReference> CommonBehaviorPackageImpl::getCS_EventOccurrence_Attribute_interactionPoint() const
+std::shared_ptr<ecore::EReference> PSCS::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getCS_EventOccurrence_Attribute_interactionPoint() const
 {
 	return m_cS_EventOccurrence_Attribute_interactionPoint;
 }
-std::shared_ptr<ecore::EReference> CommonBehaviorPackageImpl::getCS_EventOccurrence_Attribute_onPort() const
+std::shared_ptr<ecore::EReference> PSCS::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getCS_EventOccurrence_Attribute_onPort() const
 {
 	return m_cS_EventOccurrence_Attribute_onPort;
 }
-std::shared_ptr<ecore::EReference> CommonBehaviorPackageImpl::getCS_EventOccurrence_Attribute_wrappedEventOccurrence() const
+std::shared_ptr<ecore::EReference> PSCS::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getCS_EventOccurrence_Attribute_wrappedEventOccurrence() const
 {
 	return m_cS_EventOccurrence_Attribute_wrappedEventOccurrence;
 }
 
-std::shared_ptr<ecore::EOperation> CommonBehaviorPackageImpl::getCS_EventOccurrence_Operation_doSend() const
+std::shared_ptr<ecore::EOperation> PSCS::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getCS_EventOccurrence_Operation_doSend() const
 {
 	return m_cS_EventOccurrence_Operation_doSend;
 }
-std::shared_ptr<ecore::EOperation> CommonBehaviorPackageImpl::getCS_EventOccurrence_Operation_getParameterValues() const
+std::shared_ptr<ecore::EOperation> PSCS::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getCS_EventOccurrence_Operation_getParameterValues() const
 {
 	return m_cS_EventOccurrence_Operation_getParameterValues;
 }
-std::shared_ptr<ecore::EOperation> CommonBehaviorPackageImpl::getCS_EventOccurrence_Operation_match_Trigger() const
+std::shared_ptr<ecore::EOperation> PSCS::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getCS_EventOccurrence_Operation_match_Trigger() const
 {
 	return m_cS_EventOccurrence_Operation_match_Trigger;
 }
-std::shared_ptr<ecore::EOperation> CommonBehaviorPackageImpl::getCS_EventOccurrence_Operation_sendInTo_CS_Reference_Port() const
+std::shared_ptr<ecore::EOperation> PSCS::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getCS_EventOccurrence_Operation_sendInTo_CS_Reference_Port() const
 {
 	return m_cS_EventOccurrence_Operation_sendInTo_CS_Reference_Port;
 }
-std::shared_ptr<ecore::EOperation> CommonBehaviorPackageImpl::getCS_EventOccurrence_Operation_sendOutTo_CS_Reference_Port() const
+std::shared_ptr<ecore::EOperation> PSCS::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getCS_EventOccurrence_Operation_sendOutTo_CS_Reference_Port() const
 {
 	return m_cS_EventOccurrence_Operation_sendOutTo_CS_Reference_Port;
 }

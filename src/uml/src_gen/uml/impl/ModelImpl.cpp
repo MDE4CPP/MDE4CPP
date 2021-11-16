@@ -459,11 +459,11 @@ Any ModelImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_
 }
 
 
-std::shared_ptr<Model> ModelImpl::getThisModelPtr() const
+std::shared_ptr<uml::Model> ModelImpl::getThisModelPtr() const
 {
 	return m_thisModelPtr.lock();
 }
-void ModelImpl::setThisModelPtr(std::weak_ptr<Model> thisModelPtr)
+void ModelImpl::setThisModelPtr(std::weak_ptr<uml::Model> thisModelPtr)
 {
 	m_thisModelPtr = thisModelPtr;
 	setThisPackagePtr(thisModelPtr);

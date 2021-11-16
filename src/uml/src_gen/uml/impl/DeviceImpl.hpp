@@ -31,8 +31,8 @@ namespace uml
 		protected:
 			friend class umlFactoryImpl;
 			DeviceImpl();
-			virtual std::shared_ptr<Device> getThisDevicePtr() const;
-			virtual void setThisDevicePtr(std::weak_ptr<Device> thisDevicePtr);
+			virtual std::shared_ptr<uml::Device> getThisDevicePtr() const;
+			virtual void setThisDevicePtr(std::weak_ptr<uml::Device> thisDevicePtr);
 
 			//Additional constructors for the containments back reference
 			DeviceImpl(std::weak_ptr<uml::Namespace> par_namespace);
@@ -150,7 +150,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<Device> m_thisDevicePtr;
+			std::weak_ptr<uml::Device> m_thisDevicePtr;
 	};
 }
 #endif /* end of include guard: UML_DEVICEDEVICEIMPL_HPP */

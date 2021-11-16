@@ -93,14 +93,6 @@ SemanticStrategyImpl& SemanticStrategyImpl::operator=(const SemanticStrategyImpl
 	return *this;
 }
 
-std::shared_ptr<ecore::EObject> SemanticStrategyImpl::copy() const
-{
-	std::shared_ptr<SemanticStrategyImpl> element(new SemanticStrategyImpl());
-	*element =(*this);
-	element->setThisSemanticStrategyPtr(element);
-	return element;
-}
-
 //*********************************
 // Operations
 //*********************************
@@ -251,11 +243,11 @@ Any SemanticStrategyImpl::eInvoke(int operationID, std::shared_ptr<std::list < s
 }
 
 
-std::shared_ptr<SemanticStrategy> SemanticStrategyImpl::getThisSemanticStrategyPtr() const
+std::shared_ptr<fUML::Semantics::Loci::SemanticStrategy> SemanticStrategyImpl::getThisSemanticStrategyPtr() const
 {
 	return m_thisSemanticStrategyPtr.lock();
 }
-void SemanticStrategyImpl::setThisSemanticStrategyPtr(std::weak_ptr<SemanticStrategy> thisSemanticStrategyPtr)
+void SemanticStrategyImpl::setThisSemanticStrategyPtr(std::weak_ptr<fUML::Semantics::Loci::SemanticStrategy> thisSemanticStrategyPtr)
 {
 	m_thisSemanticStrategyPtr = thisSemanticStrategyPtr;
 }

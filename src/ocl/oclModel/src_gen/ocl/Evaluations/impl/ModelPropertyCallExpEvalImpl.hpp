@@ -32,8 +32,8 @@ namespace ocl::Evaluations
 		protected:
 			friend class ocl::Evaluations::EvaluationsFactoryImpl;
 			ModelPropertyCallExpEvalImpl();
-			virtual std::shared_ptr<ModelPropertyCallExpEval> getThisModelPropertyCallExpEvalPtr() const;
-			virtual void setThisModelPropertyCallExpEvalPtr(std::weak_ptr<ModelPropertyCallExpEval> thisModelPropertyCallExpEvalPtr);
+			virtual std::shared_ptr<ocl::Evaluations::ModelPropertyCallExpEval> getThisModelPropertyCallExpEvalPtr() const;
+			virtual void setThisModelPropertyCallExpEvalPtr(std::weak_ptr<ocl::Evaluations::ModelPropertyCallExpEval> thisModelPropertyCallExpEvalPtr);
 
 
 		public:
@@ -88,7 +88,7 @@ namespace ocl::Evaluations
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<ModelPropertyCallExpEval> m_thisModelPropertyCallExpEvalPtr;
+			std::weak_ptr<ocl::Evaluations::ModelPropertyCallExpEval> m_thisModelPropertyCallExpEvalPtr;
 	};
 }
 #endif /* end of include guard: OCL_EVALUATIONS_MODELPROPERTYCALLEXPEVALMODELPROPERTYCALLEXPEVALIMPL_HPP */

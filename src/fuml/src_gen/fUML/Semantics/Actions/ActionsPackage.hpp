@@ -14,15 +14,15 @@
 
 namespace ecore 
 {
-	class EAnnotation;
-	class EReference;
-	class EClass;
-	class EDataType;
-	class EGenericType;
-	class EAttribute;
-	class EParameter;
-	class EOperation;
 	class EStringToStringMapEntry;
+	class EAnnotation;
+	class EAttribute;
+	class EReference;
+	class EGenericType;
+	class EOperation;
+	class EClass;
+	class EParameter;
+	class EDataType;
 }
 
 namespace fUML::Semantics::Actions 
@@ -828,7 +828,7 @@ namespace fUML::Semantics::Actions
 			//Class and Feature IDs 
 			static const long long RETURNINFORMATION_CLASS = 844522565;
 			static const unsigned int RETURNINFORMATION_CLASS_FEATURE_COUNT = 1;
-			static const unsigned int RETURNINFORMATION_CLASS_OPERATION_COUNT = 18;
+			static const unsigned int RETURNINFORMATION_CLASS_OPERATION_COUNT = 19;
 			
 			static const long long RETURNINFORMATION_ATTRIBUTE_CALLEVENTOCCURRENCE = 671533231;
 			

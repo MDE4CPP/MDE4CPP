@@ -31,8 +31,8 @@ namespace uml
 		protected:
 			friend class umlFactoryImpl;
 			MergeNodeImpl();
-			virtual std::shared_ptr<MergeNode> getThisMergeNodePtr() const;
-			virtual void setThisMergeNodePtr(std::weak_ptr<MergeNode> thisMergeNodePtr);
+			virtual std::shared_ptr<uml::MergeNode> getThisMergeNodePtr() const;
+			virtual void setThisMergeNodePtr(std::weak_ptr<uml::MergeNode> thisMergeNodePtr);
 
 			//Additional constructors for the containments back reference
 			MergeNodeImpl(std::weak_ptr<uml::Activity> par_activity);
@@ -131,7 +131,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<MergeNode> m_thisMergeNodePtr;
+			std::weak_ptr<uml::MergeNode> m_thisMergeNodePtr;
 	};
 }
 #endif /* end of include guard: UML_MERGENODEMERGENODEIMPL_HPP */

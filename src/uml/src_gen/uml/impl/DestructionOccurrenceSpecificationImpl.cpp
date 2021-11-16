@@ -360,11 +360,11 @@ Any DestructionOccurrenceSpecificationImpl::eInvoke(int operationID, std::shared
 }
 
 
-std::shared_ptr<DestructionOccurrenceSpecification> DestructionOccurrenceSpecificationImpl::getThisDestructionOccurrenceSpecificationPtr() const
+std::shared_ptr<uml::DestructionOccurrenceSpecification> DestructionOccurrenceSpecificationImpl::getThisDestructionOccurrenceSpecificationPtr() const
 {
 	return m_thisDestructionOccurrenceSpecificationPtr.lock();
 }
-void DestructionOccurrenceSpecificationImpl::setThisDestructionOccurrenceSpecificationPtr(std::weak_ptr<DestructionOccurrenceSpecification> thisDestructionOccurrenceSpecificationPtr)
+void DestructionOccurrenceSpecificationImpl::setThisDestructionOccurrenceSpecificationPtr(std::weak_ptr<uml::DestructionOccurrenceSpecification> thisDestructionOccurrenceSpecificationPtr)
 {
 	m_thisDestructionOccurrenceSpecificationPtr = thisDestructionOccurrenceSpecificationPtr;
 	setThisMessageOccurrenceSpecificationPtr(thisDestructionOccurrenceSpecificationPtr);

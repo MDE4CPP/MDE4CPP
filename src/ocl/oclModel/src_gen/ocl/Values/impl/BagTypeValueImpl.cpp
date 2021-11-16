@@ -32,8 +32,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "ocl/Values/ValuesFactory.hpp"
 #include "ocl/Types/TypesFactory.hpp"
+#include "ocl/Values/ValuesFactory.hpp"
 
 #include "ocl/Types/CollectionType.hpp"
 #include "ocl/Values/CollectionValue.hpp"
@@ -43,8 +43,8 @@
 //Factories an Package includes
 #include "ocl/oclPackage.hpp"
 #include "ocl/Types/TypesPackage.hpp"
-#include "ocl/Values/ValuesPackage.hpp"
 #include "fUML/Semantics/Values/ValuesPackage.hpp"
+#include "ocl/Values/ValuesPackage.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -280,11 +280,11 @@ Any BagTypeValueImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::
 }
 
 
-std::shared_ptr<BagTypeValue> BagTypeValueImpl::getThisBagTypeValuePtr() const
+std::shared_ptr<ocl::Values::BagTypeValue> BagTypeValueImpl::getThisBagTypeValuePtr() const
 {
 	return m_thisBagTypeValuePtr.lock();
 }
-void BagTypeValueImpl::setThisBagTypeValuePtr(std::weak_ptr<BagTypeValue> thisBagTypeValuePtr)
+void BagTypeValueImpl::setThisBagTypeValuePtr(std::weak_ptr<ocl::Values::BagTypeValue> thisBagTypeValuePtr)
 {
 	m_thisBagTypeValuePtr = thisBagTypeValuePtr;
 	setThisCollectionValuePtr(thisBagTypeValuePtr);

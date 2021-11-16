@@ -14,16 +14,16 @@
 
 namespace ecore 
 {
-	class EAnnotation;
-	class EPackage;
-	class EReference;
-	class EClass;
-	class EDataType;
-	class EGenericType;
-	class EAttribute;
-	class EParameter;
-	class EOperation;
 	class EStringToStringMapEntry;
+	class EAnnotation;
+	class EAttribute;
+	class EReference;
+	class EGenericType;
+	class EPackage;
+	class EOperation;
+	class EClass;
+	class EParameter;
+	class EDataType;
 }
 
 namespace fUML::Semantics 
@@ -95,14 +95,14 @@ namespace fUML::Semantics
 			
 			
 
-			virtual std::shared_ptr<Actions::ActionsPackage> getActions_Package() const = 0;
-			virtual std::shared_ptr<Activities::ActivitiesPackage> getActivities_Package() const = 0;
-			virtual std::shared_ptr<Classification::ClassificationPackage> getClassification_Package() const = 0;
-			virtual std::shared_ptr<CommonBehavior::CommonBehaviorPackage> getCommonBehavior_Package() const = 0;
-			virtual std::shared_ptr<Loci::LociPackage> getLoci_Package() const = 0;
-			virtual std::shared_ptr<SimpleClassifiers::SimpleClassifiersPackage> getSimpleClassifiers_Package() const = 0;
-			virtual std::shared_ptr<StructuredClassifiers::StructuredClassifiersPackage> getStructuredClassifiers_Package() const = 0;
-			virtual std::shared_ptr<Values::ValuesPackage> getValues_Package() const = 0;
+			virtual std::shared_ptr<fUML::Semantics::Actions::ActionsPackage> getActions_Package() const = 0;
+			virtual std::shared_ptr<fUML::Semantics::Activities::ActivitiesPackage> getActivities_Package() const = 0;
+			virtual std::shared_ptr<fUML::Semantics::Classification::ClassificationPackage> getClassification_Package() const = 0;
+			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::CommonBehaviorPackage> getCommonBehavior_Package() const = 0;
+			virtual std::shared_ptr<fUML::Semantics::Loci::LociPackage> getLoci_Package() const = 0;
+			virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage> getSimpleClassifiers_Package() const = 0;
+			virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage> getStructuredClassifiers_Package() const = 0;
+			virtual std::shared_ptr<fUML::Semantics::Values::ValuesPackage> getValues_Package() const = 0;
 			
 
 			//Singleton Instance and Getter

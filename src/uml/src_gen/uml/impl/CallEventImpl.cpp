@@ -398,11 +398,11 @@ Any CallEventImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sha
 }
 
 
-std::shared_ptr<CallEvent> CallEventImpl::getThisCallEventPtr() const
+std::shared_ptr<uml::CallEvent> CallEventImpl::getThisCallEventPtr() const
 {
 	return m_thisCallEventPtr.lock();
 }
-void CallEventImpl::setThisCallEventPtr(std::weak_ptr<CallEvent> thisCallEventPtr)
+void CallEventImpl::setThisCallEventPtr(std::weak_ptr<uml::CallEvent> thisCallEventPtr)
 {
 	m_thisCallEventPtr = thisCallEventPtr;
 	setThisMessageEventPtr(thisCallEventPtr);

@@ -31,8 +31,8 @@ namespace uml
 		protected:
 			friend class umlFactoryImpl;
 			CommentImpl();
-			virtual std::shared_ptr<Comment> getThisCommentPtr() const;
-			virtual void setThisCommentPtr(std::weak_ptr<Comment> thisCommentPtr);
+			virtual std::shared_ptr<uml::Comment> getThisCommentPtr() const;
+			virtual void setThisCommentPtr(std::weak_ptr<uml::Comment> thisCommentPtr);
 
 			//Additional constructors for the containments back reference
 			CommentImpl(std::weak_ptr<uml::Element> par_owner);
@@ -112,7 +112,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<Comment> m_thisCommentPtr;
+			std::weak_ptr<uml::Comment> m_thisCommentPtr;
 	};
 }
 #endif /* end of include guard: UML_COMMENTCOMMENTIMPL_HPP */

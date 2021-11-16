@@ -102,14 +102,6 @@ DirectedRelationshipImpl& DirectedRelationshipImpl::operator=(const DirectedRela
 	return *this;
 }
 
-std::shared_ptr<ecore::EObject> DirectedRelationshipImpl::copy() const
-{
-	std::shared_ptr<DirectedRelationshipImpl> element(new DirectedRelationshipImpl());
-	*element =(*this);
-	element->setThisDirectedRelationshipPtr(element);
-	return element;
-}
-
 //*********************************
 // Operations
 //*********************************
@@ -359,11 +351,11 @@ Any DirectedRelationshipImpl::eInvoke(int operationID, std::shared_ptr<std::list
 }
 
 
-std::shared_ptr<DirectedRelationship> DirectedRelationshipImpl::getThisDirectedRelationshipPtr() const
+std::shared_ptr<uml::DirectedRelationship> DirectedRelationshipImpl::getThisDirectedRelationshipPtr() const
 {
 	return m_thisDirectedRelationshipPtr.lock();
 }
-void DirectedRelationshipImpl::setThisDirectedRelationshipPtr(std::weak_ptr<DirectedRelationship> thisDirectedRelationshipPtr)
+void DirectedRelationshipImpl::setThisDirectedRelationshipPtr(std::weak_ptr<uml::DirectedRelationship> thisDirectedRelationshipPtr)
 {
 	m_thisDirectedRelationshipPtr = thisDirectedRelationshipPtr;
 	setThisRelationshipPtr(thisDirectedRelationshipPtr);

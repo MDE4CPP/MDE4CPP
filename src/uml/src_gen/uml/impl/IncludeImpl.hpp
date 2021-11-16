@@ -32,8 +32,8 @@ namespace uml
 		protected:
 			friend class umlFactoryImpl;
 			IncludeImpl();
-			virtual std::shared_ptr<Include> getThisIncludePtr() const;
-			virtual void setThisIncludePtr(std::weak_ptr<Include> thisIncludePtr);
+			virtual std::shared_ptr<uml::Include> getThisIncludePtr() const;
+			virtual void setThisIncludePtr(std::weak_ptr<uml::Include> thisIncludePtr);
 
 			//Additional constructors for the containments back reference
 			IncludeImpl(std::weak_ptr<uml::UseCase> par_includingCase);
@@ -153,7 +153,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<Include> m_thisIncludePtr;
+			std::weak_ptr<uml::Include> m_thisIncludePtr;
 	};
 }
 #endif /* end of include guard: UML_INCLUDEINCLUDEIMPL_HPP */

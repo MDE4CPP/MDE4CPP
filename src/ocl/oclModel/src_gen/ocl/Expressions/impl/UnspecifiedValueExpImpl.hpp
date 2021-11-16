@@ -32,8 +32,8 @@ namespace ocl::Expressions
 		protected:
 			friend class ocl::Expressions::ExpressionsFactoryImpl;
 			UnspecifiedValueExpImpl();
-			virtual std::shared_ptr<UnspecifiedValueExp> getThisUnspecifiedValueExpPtr() const;
-			virtual void setThisUnspecifiedValueExpPtr(std::weak_ptr<UnspecifiedValueExp> thisUnspecifiedValueExpPtr);
+			virtual std::shared_ptr<ocl::Expressions::UnspecifiedValueExp> getThisUnspecifiedValueExpPtr() const;
+			virtual void setThisUnspecifiedValueExpPtr(std::weak_ptr<ocl::Expressions::UnspecifiedValueExp> thisUnspecifiedValueExpPtr);
 
 			//Additional constructors for the containments back reference
 			UnspecifiedValueExpImpl(std::weak_ptr<ocl::Expressions::CallExp> par_appliedElement);
@@ -106,7 +106,7 @@ namespace ocl::Expressions
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<UnspecifiedValueExp> m_thisUnspecifiedValueExpPtr;
+			std::weak_ptr<ocl::Expressions::UnspecifiedValueExp> m_thisUnspecifiedValueExpPtr;
 	};
 }
 #endif /* end of include guard: OCL_EXPRESSIONS_UNSPECIFIEDVALUEEXPUNSPECIFIEDVALUEEXPIMPL_HPP */

@@ -386,11 +386,11 @@ Any ControlFlowImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::s
 }
 
 
-std::shared_ptr<ControlFlow> ControlFlowImpl::getThisControlFlowPtr() const
+std::shared_ptr<uml::ControlFlow> ControlFlowImpl::getThisControlFlowPtr() const
 {
 	return m_thisControlFlowPtr.lock();
 }
-void ControlFlowImpl::setThisControlFlowPtr(std::weak_ptr<ControlFlow> thisControlFlowPtr)
+void ControlFlowImpl::setThisControlFlowPtr(std::weak_ptr<uml::ControlFlow> thisControlFlowPtr)
 {
 	m_thisControlFlowPtr = thisControlFlowPtr;
 	setThisActivityEdgePtr(thisControlFlowPtr);

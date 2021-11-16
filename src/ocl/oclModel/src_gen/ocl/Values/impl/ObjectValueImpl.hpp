@@ -32,8 +32,8 @@ namespace ocl::Values
 		protected:
 			friend class ocl::Values::ValuesFactoryImpl;
 			ObjectValueImpl();
-			virtual std::shared_ptr<ObjectValue> getThisObjectValuePtr() const;
-			virtual void setThisObjectValuePtr(std::weak_ptr<ObjectValue> thisObjectValuePtr);
+			virtual std::shared_ptr<ocl::Values::ObjectValue> getThisObjectValuePtr() const;
+			virtual void setThisObjectValuePtr(std::weak_ptr<ocl::Values::ObjectValue> thisObjectValuePtr);
 
 
 		public:
@@ -92,7 +92,7 @@ namespace ocl::Values
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<ObjectValue> m_thisObjectValuePtr;
+			std::weak_ptr<ocl::Values::ObjectValue> m_thisObjectValuePtr;
 	};
 }
 #endif /* end of include guard: OCL_VALUES_OBJECTVALUEOBJECTVALUEIMPL_HPP */

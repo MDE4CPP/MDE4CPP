@@ -653,11 +653,11 @@ Any DeploymentSpecificationImpl::eInvoke(int operationID, std::shared_ptr<std::l
 }
 
 
-std::shared_ptr<DeploymentSpecification> DeploymentSpecificationImpl::getThisDeploymentSpecificationPtr() const
+std::shared_ptr<uml::DeploymentSpecification> DeploymentSpecificationImpl::getThisDeploymentSpecificationPtr() const
 {
 	return m_thisDeploymentSpecificationPtr.lock();
 }
-void DeploymentSpecificationImpl::setThisDeploymentSpecificationPtr(std::weak_ptr<DeploymentSpecification> thisDeploymentSpecificationPtr)
+void DeploymentSpecificationImpl::setThisDeploymentSpecificationPtr(std::weak_ptr<uml::DeploymentSpecification> thisDeploymentSpecificationPtr)
 {
 	m_thisDeploymentSpecificationPtr = thisDeploymentSpecificationPtr;
 	setThisArtifactPtr(thisDeploymentSpecificationPtr);

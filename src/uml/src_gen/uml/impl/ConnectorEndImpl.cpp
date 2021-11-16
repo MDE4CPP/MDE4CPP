@@ -551,11 +551,11 @@ Any ConnectorEndImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::
 }
 
 
-std::shared_ptr<ConnectorEnd> ConnectorEndImpl::getThisConnectorEndPtr() const
+std::shared_ptr<uml::ConnectorEnd> ConnectorEndImpl::getThisConnectorEndPtr() const
 {
 	return m_thisConnectorEndPtr.lock();
 }
-void ConnectorEndImpl::setThisConnectorEndPtr(std::weak_ptr<ConnectorEnd> thisConnectorEndPtr)
+void ConnectorEndImpl::setThisConnectorEndPtr(std::weak_ptr<uml::ConnectorEnd> thisConnectorEndPtr)
 {
 	m_thisConnectorEndPtr = thisConnectorEndPtr;
 	setThisMultiplicityElementPtr(thisConnectorEndPtr);

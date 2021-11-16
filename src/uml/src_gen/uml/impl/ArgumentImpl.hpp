@@ -33,8 +33,8 @@ virtual public Argument
 		protected:
 			friend class umlFactoryImpl;
 			ArgumentImpl();
-			virtual std::shared_ptr<Argument> getThisArgumentPtr() const;
-			virtual void setThisArgumentPtr(std::weak_ptr<Argument> thisArgumentPtr);
+			virtual std::shared_ptr<uml::Argument> getThisArgumentPtr() const;
+			virtual void setThisArgumentPtr(std::weak_ptr<uml::Argument> thisArgumentPtr);
 
 
 		public:
@@ -92,7 +92,7 @@ virtual public Argument
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<Argument> m_thisArgumentPtr;
+			std::weak_ptr<uml::Argument> m_thisArgumentPtr;
 	};
 }
 #endif /* end of include guard: UML_ARGUMENTARGUMENTIMPL_HPP */

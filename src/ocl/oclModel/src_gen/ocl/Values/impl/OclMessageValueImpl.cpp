@@ -43,8 +43,8 @@
 
 //Factories an Package includes
 #include "ocl/oclPackage.hpp"
-#include "ocl/Values/ValuesPackage.hpp"
 #include "fUML/Semantics/Values/ValuesPackage.hpp"
+#include "ocl/Values/ValuesPackage.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -653,11 +653,11 @@ Any OclMessageValueImpl::eInvoke(int operationID, std::shared_ptr<std::list < st
 }
 
 
-std::shared_ptr<OclMessageValue> OclMessageValueImpl::getThisOclMessageValuePtr() const
+std::shared_ptr<ocl::Values::OclMessageValue> OclMessageValueImpl::getThisOclMessageValuePtr() const
 {
 	return m_thisOclMessageValuePtr.lock();
 }
-void OclMessageValueImpl::setThisOclMessageValuePtr(std::weak_ptr<OclMessageValue> thisOclMessageValuePtr)
+void OclMessageValueImpl::setThisOclMessageValuePtr(std::weak_ptr<ocl::Values::OclMessageValue> thisOclMessageValuePtr)
 {
 	m_thisOclMessageValuePtr = thisOclMessageValuePtr;
 	setThisValuePtr(thisOclMessageValuePtr);

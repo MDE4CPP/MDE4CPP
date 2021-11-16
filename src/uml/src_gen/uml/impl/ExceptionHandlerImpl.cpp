@@ -661,11 +661,11 @@ Any ExceptionHandlerImpl::eInvoke(int operationID, std::shared_ptr<std::list < s
 }
 
 
-std::shared_ptr<ExceptionHandler> ExceptionHandlerImpl::getThisExceptionHandlerPtr() const
+std::shared_ptr<uml::ExceptionHandler> ExceptionHandlerImpl::getThisExceptionHandlerPtr() const
 {
 	return m_thisExceptionHandlerPtr.lock();
 }
-void ExceptionHandlerImpl::setThisExceptionHandlerPtr(std::weak_ptr<ExceptionHandler> thisExceptionHandlerPtr)
+void ExceptionHandlerImpl::setThisExceptionHandlerPtr(std::weak_ptr<uml::ExceptionHandler> thisExceptionHandlerPtr)
 {
 	m_thisExceptionHandlerPtr = thisExceptionHandlerPtr;
 	setThisElementPtr(thisExceptionHandlerPtr);

@@ -31,8 +31,8 @@ namespace uml
 		protected:
 			friend class umlFactoryImpl;
 			RemoveStructuralFeatureValueActionImpl();
-			virtual std::shared_ptr<RemoveStructuralFeatureValueAction> getThisRemoveStructuralFeatureValueActionPtr() const;
-			virtual void setThisRemoveStructuralFeatureValueActionPtr(std::weak_ptr<RemoveStructuralFeatureValueAction> thisRemoveStructuralFeatureValueActionPtr);
+			virtual std::shared_ptr<uml::RemoveStructuralFeatureValueAction> getThisRemoveStructuralFeatureValueActionPtr() const;
+			virtual void setThisRemoveStructuralFeatureValueActionPtr(std::weak_ptr<uml::RemoveStructuralFeatureValueAction> thisRemoveStructuralFeatureValueActionPtr);
 
 			//Additional constructors for the containments back reference
 			RemoveStructuralFeatureValueActionImpl(std::weak_ptr<uml::Activity> par_activity);
@@ -167,7 +167,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<RemoveStructuralFeatureValueAction> m_thisRemoveStructuralFeatureValueActionPtr;
+			std::weak_ptr<uml::RemoveStructuralFeatureValueAction> m_thisRemoveStructuralFeatureValueActionPtr;
 	};
 }
 #endif /* end of include guard: UML_REMOVESTRUCTURALFEATUREVALUEACTIONREMOVESTRUCTURALFEATUREVALUEACTIONIMPL_HPP */

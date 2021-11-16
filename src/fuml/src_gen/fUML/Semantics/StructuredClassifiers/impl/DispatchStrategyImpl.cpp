@@ -325,11 +325,11 @@ Any DispatchStrategyImpl::eInvoke(int operationID, std::shared_ptr<std::list < s
 }
 
 
-std::shared_ptr<DispatchStrategy> DispatchStrategyImpl::getThisDispatchStrategyPtr() const
+std::shared_ptr<fUML::Semantics::StructuredClassifiers::DispatchStrategy> DispatchStrategyImpl::getThisDispatchStrategyPtr() const
 {
 	return m_thisDispatchStrategyPtr.lock();
 }
-void DispatchStrategyImpl::setThisDispatchStrategyPtr(std::weak_ptr<DispatchStrategy> thisDispatchStrategyPtr)
+void DispatchStrategyImpl::setThisDispatchStrategyPtr(std::weak_ptr<fUML::Semantics::StructuredClassifiers::DispatchStrategy> thisDispatchStrategyPtr)
 {
 	m_thisDispatchStrategyPtr = thisDispatchStrategyPtr;
 	setThisSemanticStrategyPtr(thisDispatchStrategyPtr);

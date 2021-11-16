@@ -455,11 +455,11 @@ Any ReceptionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sha
 }
 
 
-std::shared_ptr<Reception> ReceptionImpl::getThisReceptionPtr() const
+std::shared_ptr<uml::Reception> ReceptionImpl::getThisReceptionPtr() const
 {
 	return m_thisReceptionPtr.lock();
 }
-void ReceptionImpl::setThisReceptionPtr(std::weak_ptr<Reception> thisReceptionPtr)
+void ReceptionImpl::setThisReceptionPtr(std::weak_ptr<uml::Reception> thisReceptionPtr)
 {
 	m_thisReceptionPtr = thisReceptionPtr;
 	setThisBehavioralFeaturePtr(thisReceptionPtr);

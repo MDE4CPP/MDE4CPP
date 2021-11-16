@@ -31,8 +31,8 @@ namespace uml
 		protected:
 			friend class umlFactoryImpl;
 			FunctionBehaviorImpl();
-			virtual std::shared_ptr<FunctionBehavior> getThisFunctionBehaviorPtr() const;
-			virtual void setThisFunctionBehaviorPtr(std::weak_ptr<FunctionBehavior> thisFunctionBehaviorPtr);
+			virtual std::shared_ptr<uml::FunctionBehavior> getThisFunctionBehaviorPtr() const;
+			virtual void setThisFunctionBehaviorPtr(std::weak_ptr<uml::FunctionBehavior> thisFunctionBehaviorPtr);
 
 			//Additional constructors for the containments back reference
 			FunctionBehaviorImpl(std::weak_ptr<uml::BehavioredClassifier> par_behavioredClassifier);
@@ -181,7 +181,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<FunctionBehavior> m_thisFunctionBehaviorPtr;
+			std::weak_ptr<uml::FunctionBehavior> m_thisFunctionBehaviorPtr;
 	};
 }
 #endif /* end of include guard: UML_FUNCTIONBEHAVIORFUNCTIONBEHAVIORIMPL_HPP */

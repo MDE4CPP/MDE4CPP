@@ -800,19 +800,19 @@ void PropertyImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoad
 		iter = attr_list.find("aggregation");
 		if ( iter != attr_list.end() )
 		{
-			uml::AggregationKind value = AggregationKind::NONE;
+			uml::AggregationKind value = uml::AggregationKind::NONE;
 			std::string literal = iter->second;
 			if (literal == "none")
 			{
-				value = AggregationKind::NONE;
+				value = uml::AggregationKind::NONE;
 			}
 			else if (literal == "shared")
 			{
-				value = AggregationKind::SHARED;
+				value = uml::AggregationKind::SHARED;
 			}
 			else if (literal == "composite")
 			{
-				value = AggregationKind::COMPOSITE;
+				value = uml::AggregationKind::COMPOSITE;
 			}
 			this->setAggregation(value);
 		}
@@ -1097,15 +1097,15 @@ void PropertyImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 		{
 			uml::AggregationKind value = this->getAggregation();
 			std::string literal = "";
-			if (value == AggregationKind::NONE)
+			if (value == uml::AggregationKind::NONE)
 			{
 				literal = "none";
 			}
-			else if (value == AggregationKind::SHARED)
+			else if (value == uml::AggregationKind::SHARED)
 			{
 				literal = "shared";
 			}
-			else if (value == AggregationKind::COMPOSITE)
+			else if (value == uml::AggregationKind::COMPOSITE)
 			{
 				literal = "composite";
 			}
@@ -1261,7 +1261,7 @@ bool PropertyImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case uml::umlPackage::PROPERTY_ATTRIBUTE_AGGREGATION:
-			return m_aggregation != AggregationKind::NONE;; //18530
+			return m_aggregation != uml::AggregationKind::NONE;; //18530
 		case uml::umlPackage::PROPERTY_ATTRIBUTE_ASSOCIATION:
 			return getAssociation() != nullptr; //18543
 		case uml::umlPackage::PROPERTY_ATTRIBUTE_ASSOCIATIONEND:
@@ -1897,11 +1897,11 @@ Any PropertyImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shar
 }
 
 
-std::shared_ptr<Property> PropertyImpl::getThisPropertyPtr() const
+std::shared_ptr<uml::Property> PropertyImpl::getThisPropertyPtr() const
 {
 	return m_thisPropertyPtr.lock();
 }
-void PropertyImpl::setThisPropertyPtr(std::weak_ptr<Property> thisPropertyPtr)
+void PropertyImpl::setThisPropertyPtr(std::weak_ptr<uml::Property> thisPropertyPtr)
 {
 	m_thisPropertyPtr = thisPropertyPtr;
 	setThisConnectableElementPtr(thisPropertyPtr);

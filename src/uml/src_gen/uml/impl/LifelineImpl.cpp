@@ -702,11 +702,11 @@ Any LifelineImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shar
 }
 
 
-std::shared_ptr<Lifeline> LifelineImpl::getThisLifelinePtr() const
+std::shared_ptr<uml::Lifeline> LifelineImpl::getThisLifelinePtr() const
 {
 	return m_thisLifelinePtr.lock();
 }
-void LifelineImpl::setThisLifelinePtr(std::weak_ptr<Lifeline> thisLifelinePtr)
+void LifelineImpl::setThisLifelinePtr(std::weak_ptr<uml::Lifeline> thisLifelinePtr)
 {
 	m_thisLifelinePtr = thisLifelinePtr;
 	setThisNamedElementPtr(thisLifelinePtr);

@@ -31,8 +31,8 @@ namespace uml
 		protected:
 			friend class umlFactoryImpl;
 			CollaborationUseImpl();
-			virtual std::shared_ptr<CollaborationUse> getThisCollaborationUsePtr() const;
-			virtual void setThisCollaborationUsePtr(std::weak_ptr<CollaborationUse> thisCollaborationUsePtr);
+			virtual std::shared_ptr<uml::CollaborationUse> getThisCollaborationUsePtr() const;
+			virtual void setThisCollaborationUsePtr(std::weak_ptr<uml::CollaborationUse> thisCollaborationUsePtr);
 
 			//Additional constructors for the containments back reference
 			CollaborationUseImpl(std::weak_ptr<uml::Namespace> par_namespace);
@@ -154,7 +154,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<CollaborationUse> m_thisCollaborationUsePtr;
+			std::weak_ptr<uml::CollaborationUse> m_thisCollaborationUsePtr;
 	};
 }
 #endif /* end of include guard: UML_COLLABORATIONUSECOLLABORATIONUSEIMPL_HPP */

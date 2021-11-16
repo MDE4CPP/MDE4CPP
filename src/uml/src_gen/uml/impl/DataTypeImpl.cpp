@@ -788,11 +788,11 @@ Any DataTypeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shar
 }
 
 
-std::shared_ptr<DataType> DataTypeImpl::getThisDataTypePtr() const
+std::shared_ptr<uml::DataType> DataTypeImpl::getThisDataTypePtr() const
 {
 	return m_thisDataTypePtr.lock();
 }
-void DataTypeImpl::setThisDataTypePtr(std::weak_ptr<DataType> thisDataTypePtr)
+void DataTypeImpl::setThisDataTypePtr(std::weak_ptr<uml::DataType> thisDataTypePtr)
 {
 	m_thisDataTypePtr = thisDataTypePtr;
 	setThisClassifierPtr(thisDataTypePtr);

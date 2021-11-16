@@ -561,11 +561,11 @@ Any CallOperationActionImpl::eInvoke(int operationID, std::shared_ptr<std::list 
 }
 
 
-std::shared_ptr<CallOperationAction> CallOperationActionImpl::getThisCallOperationActionPtr() const
+std::shared_ptr<uml::CallOperationAction> CallOperationActionImpl::getThisCallOperationActionPtr() const
 {
 	return m_thisCallOperationActionPtr.lock();
 }
-void CallOperationActionImpl::setThisCallOperationActionPtr(std::weak_ptr<CallOperationAction> thisCallOperationActionPtr)
+void CallOperationActionImpl::setThisCallOperationActionPtr(std::weak_ptr<uml::CallOperationAction> thisCallOperationActionPtr)
 {
 	m_thisCallOperationActionPtr = thisCallOperationActionPtr;
 	setThisCallActionPtr(thisCallOperationActionPtr);

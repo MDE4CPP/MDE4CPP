@@ -32,8 +32,8 @@ namespace ocl::Evaluations
 		protected:
 			friend class ocl::Evaluations::EvaluationsFactoryImpl;
 			NavigationCallExpEvalImpl();
-			virtual std::shared_ptr<NavigationCallExpEval> getThisNavigationCallExpEvalPtr() const;
-			virtual void setThisNavigationCallExpEvalPtr(std::weak_ptr<NavigationCallExpEval> thisNavigationCallExpEvalPtr);
+			virtual std::shared_ptr<ocl::Evaluations::NavigationCallExpEval> getThisNavigationCallExpEvalPtr() const;
+			virtual void setThisNavigationCallExpEvalPtr(std::weak_ptr<ocl::Evaluations::NavigationCallExpEval> thisNavigationCallExpEvalPtr);
 
 
 		public:
@@ -90,7 +90,7 @@ namespace ocl::Evaluations
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<NavigationCallExpEval> m_thisNavigationCallExpEvalPtr;
+			std::weak_ptr<ocl::Evaluations::NavigationCallExpEval> m_thisNavigationCallExpEvalPtr;
 	};
 }
 #endif /* end of include guard: OCL_EVALUATIONS_NAVIGATIONCALLEXPEVALNAVIGATIONCALLEXPEVALIMPL_HPP */

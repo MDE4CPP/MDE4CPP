@@ -616,11 +616,11 @@ Any ActionInputPinImpl::eInvoke(int operationID, std::shared_ptr<std::list < std
 }
 
 
-std::shared_ptr<ActionInputPin> ActionInputPinImpl::getThisActionInputPinPtr() const
+std::shared_ptr<uml::ActionInputPin> ActionInputPinImpl::getThisActionInputPinPtr() const
 {
 	return m_thisActionInputPinPtr.lock();
 }
-void ActionInputPinImpl::setThisActionInputPinPtr(std::weak_ptr<ActionInputPin> thisActionInputPinPtr)
+void ActionInputPinImpl::setThisActionInputPinPtr(std::weak_ptr<uml::ActionInputPin> thisActionInputPinPtr)
 {
 	m_thisActionInputPinPtr = thisActionInputPinPtr;
 	setThisInputPinPtr(thisActionInputPinPtr);

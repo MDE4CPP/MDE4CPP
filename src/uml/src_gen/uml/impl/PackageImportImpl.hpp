@@ -31,8 +31,8 @@ namespace uml
 		protected:
 			friend class umlFactoryImpl;
 			PackageImportImpl();
-			virtual std::shared_ptr<PackageImport> getThisPackageImportPtr() const;
-			virtual void setThisPackageImportPtr(std::weak_ptr<PackageImport> thisPackageImportPtr);
+			virtual std::shared_ptr<uml::PackageImport> getThisPackageImportPtr() const;
+			virtual void setThisPackageImportPtr(std::weak_ptr<uml::PackageImport> thisPackageImportPtr);
 
 			//Additional constructors for the containments back reference
 			PackageImportImpl(std::weak_ptr<uml::Namespace> par_importingNamespace);
@@ -162,7 +162,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<PackageImport> m_thisPackageImportPtr;
+			std::weak_ptr<uml::PackageImport> m_thisPackageImportPtr;
 	};
 }
 #endif /* end of include guard: UML_PACKAGEIMPORTPACKAGEIMPORTIMPL_HPP */

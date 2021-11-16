@@ -31,8 +31,8 @@ namespace uml
 		protected:
 			friend class umlFactoryImpl;
 			ConnectionPointReferenceImpl();
-			virtual std::shared_ptr<ConnectionPointReference> getThisConnectionPointReferencePtr() const;
-			virtual void setThisConnectionPointReferencePtr(std::weak_ptr<ConnectionPointReference> thisConnectionPointReferencePtr);
+			virtual std::shared_ptr<uml::ConnectionPointReference> getThisConnectionPointReferencePtr() const;
+			virtual void setThisConnectionPointReferencePtr(std::weak_ptr<uml::ConnectionPointReference> thisConnectionPointReferencePtr);
 
 			//Additional constructors for the containments back reference
 			ConnectionPointReferenceImpl(std::weak_ptr<uml::Region> par_container);
@@ -148,7 +148,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<ConnectionPointReference> m_thisConnectionPointReferencePtr;
+			std::weak_ptr<uml::ConnectionPointReference> m_thisConnectionPointReferencePtr;
 	};
 }
 #endif /* end of include guard: UML_CONNECTIONPOINTREFERENCECONNECTIONPOINTREFERENCEIMPL_HPP */

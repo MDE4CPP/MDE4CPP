@@ -32,9 +32,9 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "ecore/ecoreFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
+#include "ecore/ecoreFactory.hpp"
 
 #include "ocl/Expressions/CallExp.hpp"
 #include "ocl/Expressions/CollectionRange.hpp"
@@ -192,14 +192,6 @@ NumericLiteralExpImpl& NumericLiteralExpImpl::operator=(const NumericLiteralExpI
 	//copy references with no containment (soft copy)
 	//Clone references with containment (deep copy)
 	return *this;
-}
-
-std::shared_ptr<ecore::EObject> NumericLiteralExpImpl::copy() const
-{
-	std::shared_ptr<NumericLiteralExpImpl> element(new NumericLiteralExpImpl());
-	*element =(*this);
-	element->setThisNumericLiteralExpPtr(element);
-	return element;
 }
 
 //*********************************
@@ -407,11 +399,11 @@ Any NumericLiteralExpImpl::eInvoke(int operationID, std::shared_ptr<std::list < 
 }
 
 
-std::shared_ptr<NumericLiteralExp> NumericLiteralExpImpl::getThisNumericLiteralExpPtr() const
+std::shared_ptr<ocl::Expressions::NumericLiteralExp> NumericLiteralExpImpl::getThisNumericLiteralExpPtr() const
 {
 	return m_thisNumericLiteralExpPtr.lock();
 }
-void NumericLiteralExpImpl::setThisNumericLiteralExpPtr(std::weak_ptr<NumericLiteralExp> thisNumericLiteralExpPtr)
+void NumericLiteralExpImpl::setThisNumericLiteralExpPtr(std::weak_ptr<ocl::Expressions::NumericLiteralExp> thisNumericLiteralExpPtr)
 {
 	m_thisNumericLiteralExpPtr = thisNumericLiteralExpPtr;
 	setThisPrimitiveLiteralExpPtr(thisNumericLiteralExpPtr);

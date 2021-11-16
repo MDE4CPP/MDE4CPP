@@ -32,8 +32,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "ecore/ecoreFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
+#include "ecore/ecoreFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
 
 #include "ocl/Expressions/CallExp.hpp"
@@ -471,11 +471,11 @@ Any PropertyCallExpImpl::eInvoke(int operationID, std::shared_ptr<std::list < st
 }
 
 
-std::shared_ptr<PropertyCallExp> PropertyCallExpImpl::getThisPropertyCallExpPtr() const
+std::shared_ptr<ocl::Expressions::PropertyCallExp> PropertyCallExpImpl::getThisPropertyCallExpPtr() const
 {
 	return m_thisPropertyCallExpPtr.lock();
 }
-void PropertyCallExpImpl::setThisPropertyCallExpPtr(std::weak_ptr<PropertyCallExp> thisPropertyCallExpPtr)
+void PropertyCallExpImpl::setThisPropertyCallExpPtr(std::weak_ptr<ocl::Expressions::PropertyCallExp> thisPropertyCallExpPtr)
 {
 	m_thisPropertyCallExpPtr = thisPropertyCallExpPtr;
 	setThisNavigationCallExpPtr(thisPropertyCallExpPtr);

@@ -31,8 +31,8 @@ namespace uml
 		protected:
 			friend class umlFactoryImpl;
 			ProtocolConformanceImpl();
-			virtual std::shared_ptr<ProtocolConformance> getThisProtocolConformancePtr() const;
-			virtual void setThisProtocolConformancePtr(std::weak_ptr<ProtocolConformance> thisProtocolConformancePtr);
+			virtual std::shared_ptr<uml::ProtocolConformance> getThisProtocolConformancePtr() const;
+			virtual void setThisProtocolConformancePtr(std::weak_ptr<uml::ProtocolConformance> thisProtocolConformancePtr);
 
 			//Additional constructors for the containments back reference
 			ProtocolConformanceImpl(std::weak_ptr<uml::Element> par_owner);
@@ -144,7 +144,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<ProtocolConformance> m_thisProtocolConformancePtr;
+			std::weak_ptr<uml::ProtocolConformance> m_thisProtocolConformancePtr;
 	};
 }
 #endif /* end of include guard: UML_PROTOCOLCONFORMANCEPROTOCOLCONFORMANCEIMPL_HPP */

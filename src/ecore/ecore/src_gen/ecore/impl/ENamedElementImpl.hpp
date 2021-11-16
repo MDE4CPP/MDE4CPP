@@ -25,21 +25,21 @@ namespace ecore
 	{
 		public: 
 			ENamedElementImpl(const ENamedElementImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 			ENamedElementImpl& operator=(ENamedElementImpl const&); 
 
 		protected:
 			friend class ecoreFactoryImpl;
 			ENamedElementImpl();
-			virtual std::shared_ptr<ENamedElement> getThisENamedElementPtr() const;
-			virtual void setThisENamedElementPtr(std::weak_ptr<ENamedElement> thisENamedElementPtr);
+			virtual std::shared_ptr<ecore::ENamedElement> getThisENamedElementPtr() const;
+			virtual void setThisENamedElementPtr(std::weak_ptr<ecore::ENamedElement> thisENamedElementPtr);
 
 			//Additional constructors for the containments back reference
 			ENamedElementImpl(std::weak_ptr<ecore::EObject> par_eContainer);
 
 		public:
 			//destructor
-			virtual ~ENamedElementImpl();
+			virtual ~ENamedElementImpl() = 0;
 			
 			//*********************************
 			// Operations
@@ -91,7 +91,7 @@ namespace ecore
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<ENamedElement> m_thisENamedElementPtr;
+			std::weak_ptr<ecore::ENamedElement> m_thisENamedElementPtr;
 	};
 }
 #endif /* end of include guard: ECORE_ENAMEDELEMENTENAMEDELEMENTIMPL_HPP */

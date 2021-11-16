@@ -32,8 +32,8 @@ namespace fUML::Semantics::Values
 		protected:
 			friend class fUML::Semantics::Values::ValuesFactoryImpl;
 			LiteralRealEvaluationImpl();
-			virtual std::shared_ptr<LiteralRealEvaluation> getThisLiteralRealEvaluationPtr() const;
-			virtual void setThisLiteralRealEvaluationPtr(std::weak_ptr<LiteralRealEvaluation> thisLiteralRealEvaluationPtr);
+			virtual std::shared_ptr<fUML::Semantics::Values::LiteralRealEvaluation> getThisLiteralRealEvaluationPtr() const;
+			virtual void setThisLiteralRealEvaluationPtr(std::weak_ptr<fUML::Semantics::Values::LiteralRealEvaluation> thisLiteralRealEvaluationPtr);
 
 
 		public:
@@ -88,7 +88,7 @@ namespace fUML::Semantics::Values
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<LiteralRealEvaluation> m_thisLiteralRealEvaluationPtr;
+			std::weak_ptr<fUML::Semantics::Values::LiteralRealEvaluation> m_thisLiteralRealEvaluationPtr;
 	};
 }
 #endif /* end of include guard: FUML_SEMANTICS_VALUES_LITERALREALEVALUATIONLITERALREALEVALUATIONIMPL_HPP */

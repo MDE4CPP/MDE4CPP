@@ -31,8 +31,8 @@ namespace uml
 		protected:
 			friend class umlFactoryImpl;
 			BehaviorExecutionSpecificationImpl();
-			virtual std::shared_ptr<BehaviorExecutionSpecification> getThisBehaviorExecutionSpecificationPtr() const;
-			virtual void setThisBehaviorExecutionSpecificationPtr(std::weak_ptr<BehaviorExecutionSpecification> thisBehaviorExecutionSpecificationPtr);
+			virtual std::shared_ptr<uml::BehaviorExecutionSpecification> getThisBehaviorExecutionSpecificationPtr() const;
+			virtual void setThisBehaviorExecutionSpecificationPtr(std::weak_ptr<uml::BehaviorExecutionSpecification> thisBehaviorExecutionSpecificationPtr);
 
 			//Additional constructors for the containments back reference
 			BehaviorExecutionSpecificationImpl(std::weak_ptr<uml::Interaction> par_enclosingInteraction);
@@ -124,7 +124,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<BehaviorExecutionSpecification> m_thisBehaviorExecutionSpecificationPtr;
+			std::weak_ptr<uml::BehaviorExecutionSpecification> m_thisBehaviorExecutionSpecificationPtr;
 	};
 }
 #endif /* end of include guard: UML_BEHAVIOREXECUTIONSPECIFICATIONBEHAVIOREXECUTIONSPECIFICATIONIMPL_HPP */

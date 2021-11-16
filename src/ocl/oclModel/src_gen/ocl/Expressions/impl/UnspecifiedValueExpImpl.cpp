@@ -32,9 +32,9 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "ecore/ecoreFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
+#include "ecore/ecoreFactory.hpp"
 
 #include "ocl/Expressions/CallExp.hpp"
 #include "ocl/Expressions/CollectionRange.hpp"
@@ -403,11 +403,11 @@ Any UnspecifiedValueExpImpl::eInvoke(int operationID, std::shared_ptr<std::list 
 }
 
 
-std::shared_ptr<UnspecifiedValueExp> UnspecifiedValueExpImpl::getThisUnspecifiedValueExpPtr() const
+std::shared_ptr<ocl::Expressions::UnspecifiedValueExp> UnspecifiedValueExpImpl::getThisUnspecifiedValueExpPtr() const
 {
 	return m_thisUnspecifiedValueExpPtr.lock();
 }
-void UnspecifiedValueExpImpl::setThisUnspecifiedValueExpPtr(std::weak_ptr<UnspecifiedValueExp> thisUnspecifiedValueExpPtr)
+void UnspecifiedValueExpImpl::setThisUnspecifiedValueExpPtr(std::weak_ptr<ocl::Expressions::UnspecifiedValueExp> thisUnspecifiedValueExpPtr)
 {
 	m_thisUnspecifiedValueExpPtr = thisUnspecifiedValueExpPtr;
 	setThisOclExpressionPtr(thisUnspecifiedValueExpPtr);

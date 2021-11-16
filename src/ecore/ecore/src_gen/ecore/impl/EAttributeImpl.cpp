@@ -354,11 +354,11 @@ Any EAttributeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sh
 }
 
 
-std::shared_ptr<EAttribute> EAttributeImpl::getThisEAttributePtr() const
+std::shared_ptr<ecore::EAttribute> EAttributeImpl::getThisEAttributePtr() const
 {
 	return m_thisEAttributePtr.lock();
 }
-void EAttributeImpl::setThisEAttributePtr(std::weak_ptr<EAttribute> thisEAttributePtr)
+void EAttributeImpl::setThisEAttributePtr(std::weak_ptr<ecore::EAttribute> thisEAttributePtr)
 {
 	m_thisEAttributePtr = thisEAttributePtr;
 	setThisEStructuralFeaturePtr(thisEAttributePtr);

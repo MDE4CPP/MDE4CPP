@@ -461,11 +461,11 @@ Any ManifestationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std:
 }
 
 
-std::shared_ptr<Manifestation> ManifestationImpl::getThisManifestationPtr() const
+std::shared_ptr<uml::Manifestation> ManifestationImpl::getThisManifestationPtr() const
 {
 	return m_thisManifestationPtr.lock();
 }
-void ManifestationImpl::setThisManifestationPtr(std::weak_ptr<Manifestation> thisManifestationPtr)
+void ManifestationImpl::setThisManifestationPtr(std::weak_ptr<uml::Manifestation> thisManifestationPtr)
 {
 	m_thisManifestationPtr = thisManifestationPtr;
 	setThisAbstractionPtr(thisManifestationPtr);

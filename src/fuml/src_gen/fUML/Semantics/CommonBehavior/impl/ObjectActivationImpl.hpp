@@ -34,8 +34,8 @@ virtual public ObjectActivation
 		protected:
 			friend class fUML::Semantics::CommonBehavior::CommonBehaviorFactoryImpl;
 			ObjectActivationImpl();
-			virtual std::shared_ptr<ObjectActivation> getThisObjectActivationPtr() const;
-			virtual void setThisObjectActivationPtr(std::weak_ptr<ObjectActivation> thisObjectActivationPtr);
+			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation> getThisObjectActivationPtr() const;
+			virtual void setThisObjectActivationPtr(std::weak_ptr<fUML::Semantics::CommonBehavior::ObjectActivation> thisObjectActivationPtr);
 
 
 		public:
@@ -103,7 +103,7 @@ virtual public ObjectActivation
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<ObjectActivation> m_thisObjectActivationPtr;
+			std::weak_ptr<fUML::Semantics::CommonBehavior::ObjectActivation> m_thisObjectActivationPtr;
 	};
 }
 #endif /* end of include guard: FUML_SEMANTICS_COMMONBEHAVIOR_OBJECTACTIVATIONOBJECTACTIVATIONIMPL_HPP */

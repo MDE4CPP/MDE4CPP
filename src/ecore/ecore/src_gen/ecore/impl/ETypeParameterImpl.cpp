@@ -386,11 +386,11 @@ Any ETypeParameterImpl::eInvoke(int operationID, std::shared_ptr<std::list < std
 }
 
 
-std::shared_ptr<ETypeParameter> ETypeParameterImpl::getThisETypeParameterPtr() const
+std::shared_ptr<ecore::ETypeParameter> ETypeParameterImpl::getThisETypeParameterPtr() const
 {
 	return m_thisETypeParameterPtr.lock();
 }
-void ETypeParameterImpl::setThisETypeParameterPtr(std::weak_ptr<ETypeParameter> thisETypeParameterPtr)
+void ETypeParameterImpl::setThisETypeParameterPtr(std::weak_ptr<ecore::ETypeParameter> thisETypeParameterPtr)
 {
 	m_thisETypeParameterPtr = thisETypeParameterPtr;
 	setThisENamedElementPtr(thisETypeParameterPtr);

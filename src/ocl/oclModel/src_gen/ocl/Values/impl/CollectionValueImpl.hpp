@@ -32,8 +32,8 @@ namespace ocl::Values
 		protected:
 			friend class ocl::Values::ValuesFactoryImpl;
 			CollectionValueImpl();
-			virtual std::shared_ptr<CollectionValue> getThisCollectionValuePtr() const;
-			virtual void setThisCollectionValuePtr(std::weak_ptr<CollectionValue> thisCollectionValuePtr);
+			virtual std::shared_ptr<ocl::Values::CollectionValue> getThisCollectionValuePtr() const;
+			virtual void setThisCollectionValuePtr(std::weak_ptr<ocl::Values::CollectionValue> thisCollectionValuePtr);
 
 
 		public:
@@ -94,7 +94,7 @@ namespace ocl::Values
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<CollectionValue> m_thisCollectionValuePtr;
+			std::weak_ptr<ocl::Values::CollectionValue> m_thisCollectionValuePtr;
 	};
 }
 #endif /* end of include guard: OCL_VALUES_COLLECTIONVALUECOLLECTIONVALUEIMPL_HPP */

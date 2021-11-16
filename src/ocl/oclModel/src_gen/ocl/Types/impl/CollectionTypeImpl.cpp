@@ -418,11 +418,11 @@ Any CollectionTypeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std
 }
 
 
-std::shared_ptr<CollectionType> CollectionTypeImpl::getThisCollectionTypePtr() const
+std::shared_ptr<ocl::Types::CollectionType> CollectionTypeImpl::getThisCollectionTypePtr() const
 {
 	return m_thisCollectionTypePtr.lock();
 }
-void CollectionTypeImpl::setThisCollectionTypePtr(std::weak_ptr<CollectionType> thisCollectionTypePtr)
+void CollectionTypeImpl::setThisCollectionTypePtr(std::weak_ptr<ocl::Types::CollectionType> thisCollectionTypePtr)
 {
 	m_thisCollectionTypePtr = thisCollectionTypePtr;
 	setThisEDataTypePtr(thisCollectionTypePtr);

@@ -32,8 +32,8 @@ namespace fUML::Semantics::StructuredClassifiers
 		protected:
 			friend class fUML::Semantics::StructuredClassifiers::StructuredClassifiersFactoryImpl;
 			ObjectImpl();
-			virtual std::shared_ptr<Object> getThisObjectPtr() const;
-			virtual void setThisObjectPtr(std::weak_ptr<Object> thisObjectPtr);
+			virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> getThisObjectPtr() const;
+			virtual void setThisObjectPtr(std::weak_ptr<fUML::Semantics::StructuredClassifiers::Object> thisObjectPtr);
 
 
 		public:
@@ -99,7 +99,7 @@ namespace fUML::Semantics::StructuredClassifiers
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<Object> m_thisObjectPtr;
+			std::weak_ptr<fUML::Semantics::StructuredClassifiers::Object> m_thisObjectPtr;
 	};
 }
 #endif /* end of include guard: FUML_SEMANTICS_STRUCTUREDCLASSIFIERS_OBJECTOBJECTIMPL_HPP */

@@ -32,11 +32,11 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Values/ValuesFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
+#include "fUML/Semantics/Values/ValuesFactory.hpp"
 #include "uml/umlFactory.hpp"
-#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
+#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
 
 #include "ocl/Evaluations/EvalEnvironment.hpp"
@@ -415,11 +415,11 @@ Any OperationCallExpEvalImpl::eInvoke(int operationID, std::shared_ptr<std::list
 }
 
 
-std::shared_ptr<OperationCallExpEval> OperationCallExpEvalImpl::getThisOperationCallExpEvalPtr() const
+std::shared_ptr<ocl::Evaluations::OperationCallExpEval> OperationCallExpEvalImpl::getThisOperationCallExpEvalPtr() const
 {
 	return m_thisOperationCallExpEvalPtr.lock();
 }
-void OperationCallExpEvalImpl::setThisOperationCallExpEvalPtr(std::weak_ptr<OperationCallExpEval> thisOperationCallExpEvalPtr)
+void OperationCallExpEvalImpl::setThisOperationCallExpEvalPtr(std::weak_ptr<ocl::Evaluations::OperationCallExpEval> thisOperationCallExpEvalPtr)
 {
 	m_thisOperationCallExpEvalPtr = thisOperationCallExpEvalPtr;
 	setThisModelPropertyCallExpEvalPtr(thisOperationCallExpEvalPtr);

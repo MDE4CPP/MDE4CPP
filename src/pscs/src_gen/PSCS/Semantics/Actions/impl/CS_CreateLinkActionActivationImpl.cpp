@@ -47,9 +47,9 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "uml/umlFactory.hpp"
-#include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
+#include "fUML/Semantics/Actions/ActionsFactory.hpp"
+#include "uml/umlFactory.hpp"
 
 #include "uml/Action.hpp"
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
@@ -378,11 +378,11 @@ Any CS_CreateLinkActionActivationImpl::eInvoke(int operationID, std::shared_ptr<
 }
 
 
-std::shared_ptr<CS_CreateLinkActionActivation> CS_CreateLinkActionActivationImpl::getThisCS_CreateLinkActionActivationPtr() const
+std::shared_ptr<PSCS::Semantics::Actions::CS_CreateLinkActionActivation> CS_CreateLinkActionActivationImpl::getThisCS_CreateLinkActionActivationPtr() const
 {
 	return m_thisCS_CreateLinkActionActivationPtr.lock();
 }
-void CS_CreateLinkActionActivationImpl::setThisCS_CreateLinkActionActivationPtr(std::weak_ptr<CS_CreateLinkActionActivation> thisCS_CreateLinkActionActivationPtr)
+void CS_CreateLinkActionActivationImpl::setThisCS_CreateLinkActionActivationPtr(std::weak_ptr<PSCS::Semantics::Actions::CS_CreateLinkActionActivation> thisCS_CreateLinkActionActivationPtr)
 {
 	m_thisCS_CreateLinkActionActivationPtr = thisCS_CreateLinkActionActivationPtr;
 	setThisCreateLinkActionActivationPtr(thisCS_CreateLinkActionActivationPtr);

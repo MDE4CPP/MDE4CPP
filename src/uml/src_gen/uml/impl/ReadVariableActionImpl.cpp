@@ -499,11 +499,11 @@ Any ReadVariableActionImpl::eInvoke(int operationID, std::shared_ptr<std::list <
 }
 
 
-std::shared_ptr<ReadVariableAction> ReadVariableActionImpl::getThisReadVariableActionPtr() const
+std::shared_ptr<uml::ReadVariableAction> ReadVariableActionImpl::getThisReadVariableActionPtr() const
 {
 	return m_thisReadVariableActionPtr.lock();
 }
-void ReadVariableActionImpl::setThisReadVariableActionPtr(std::weak_ptr<ReadVariableAction> thisReadVariableActionPtr)
+void ReadVariableActionImpl::setThisReadVariableActionPtr(std::weak_ptr<uml::ReadVariableAction> thisReadVariableActionPtr)
 {
 	m_thisReadVariableActionPtr = thisReadVariableActionPtr;
 	setThisVariableActionPtr(thisReadVariableActionPtr);

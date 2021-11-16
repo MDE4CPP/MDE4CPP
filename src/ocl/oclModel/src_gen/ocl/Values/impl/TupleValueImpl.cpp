@@ -32,8 +32,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "ocl/Types/TypesFactory.hpp"
 #include "ocl/Values/ValuesFactory.hpp"
+#include "ocl/Types/TypesFactory.hpp"
 
 #include "ocl/Values/NameValueBinding.hpp"
 #include "ocl/Values/StaticValue.hpp"
@@ -43,8 +43,8 @@
 //Factories an Package includes
 #include "ocl/oclPackage.hpp"
 #include "ocl/Types/TypesPackage.hpp"
-#include "ocl/Values/ValuesPackage.hpp"
 #include "fUML/Semantics/Values/ValuesPackage.hpp"
+#include "ocl/Values/ValuesPackage.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -463,11 +463,11 @@ Any TupleValueImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sh
 }
 
 
-std::shared_ptr<TupleValue> TupleValueImpl::getThisTupleValuePtr() const
+std::shared_ptr<ocl::Values::TupleValue> TupleValueImpl::getThisTupleValuePtr() const
 {
 	return m_thisTupleValuePtr.lock();
 }
-void TupleValueImpl::setThisTupleValuePtr(std::weak_ptr<TupleValue> thisTupleValuePtr)
+void TupleValueImpl::setThisTupleValuePtr(std::weak_ptr<ocl::Values::TupleValue> thisTupleValuePtr)
 {
 	m_thisTupleValuePtr = thisTupleValuePtr;
 	setThisStaticValuePtr(thisTupleValuePtr);

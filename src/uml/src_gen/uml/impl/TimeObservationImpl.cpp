@@ -432,11 +432,11 @@ Any TimeObservationImpl::eInvoke(int operationID, std::shared_ptr<std::list < st
 }
 
 
-std::shared_ptr<TimeObservation> TimeObservationImpl::getThisTimeObservationPtr() const
+std::shared_ptr<uml::TimeObservation> TimeObservationImpl::getThisTimeObservationPtr() const
 {
 	return m_thisTimeObservationPtr.lock();
 }
-void TimeObservationImpl::setThisTimeObservationPtr(std::weak_ptr<TimeObservation> thisTimeObservationPtr)
+void TimeObservationImpl::setThisTimeObservationPtr(std::weak_ptr<uml::TimeObservation> thisTimeObservationPtr)
 {
 	m_thisTimeObservationPtr = thisTimeObservationPtr;
 	setThisObservationPtr(thisTimeObservationPtr);

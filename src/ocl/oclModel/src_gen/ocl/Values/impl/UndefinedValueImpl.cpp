@@ -38,8 +38,8 @@
 
 //Factories an Package includes
 #include "ocl/oclPackage.hpp"
-#include "ocl/Values/ValuesPackage.hpp"
 #include "fUML/Semantics/Values/ValuesPackage.hpp"
+#include "ocl/Values/ValuesPackage.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -282,11 +282,11 @@ Any UndefinedValueImpl::eInvoke(int operationID, std::shared_ptr<std::list < std
 }
 
 
-std::shared_ptr<UndefinedValue> UndefinedValueImpl::getThisUndefinedValuePtr() const
+std::shared_ptr<ocl::Values::UndefinedValue> UndefinedValueImpl::getThisUndefinedValuePtr() const
 {
 	return m_thisUndefinedValuePtr.lock();
 }
-void UndefinedValueImpl::setThisUndefinedValuePtr(std::weak_ptr<UndefinedValue> thisUndefinedValuePtr)
+void UndefinedValueImpl::setThisUndefinedValuePtr(std::weak_ptr<ocl::Values::UndefinedValue> thisUndefinedValuePtr)
 {
 	m_thisUndefinedValuePtr = thisUndefinedValuePtr;
 	setThisValuePtr(thisUndefinedValuePtr);

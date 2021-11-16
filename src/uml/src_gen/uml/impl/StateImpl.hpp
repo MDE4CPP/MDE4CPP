@@ -33,8 +33,8 @@ namespace uml
 		protected:
 			friend class umlFactoryImpl;
 			StateImpl();
-			virtual std::shared_ptr<State> getThisStatePtr() const;
-			virtual void setThisStatePtr(std::weak_ptr<State> thisStatePtr);
+			virtual std::shared_ptr<uml::State> getThisStatePtr() const;
+			virtual void setThisStatePtr(std::weak_ptr<uml::State> thisStatePtr);
 
 			//Additional constructors for the containments back reference
 			StateImpl(std::weak_ptr<uml::Region> par_container);
@@ -322,7 +322,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<State> m_thisStatePtr;
+			std::weak_ptr<uml::State> m_thisStatePtr;
 	};
 }
 #endif /* end of include guard: UML_STATESTATEIMPL_HPP */

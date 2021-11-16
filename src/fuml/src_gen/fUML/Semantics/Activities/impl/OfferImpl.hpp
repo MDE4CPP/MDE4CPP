@@ -34,8 +34,8 @@ virtual public Offer
 		protected:
 			friend class fUML::Semantics::Activities::ActivitiesFactoryImpl;
 			OfferImpl();
-			virtual std::shared_ptr<Offer> getThisOfferPtr() const;
-			virtual void setThisOfferPtr(std::weak_ptr<Offer> thisOfferPtr);
+			virtual std::shared_ptr<fUML::Semantics::Activities::Offer> getThisOfferPtr() const;
+			virtual void setThisOfferPtr(std::weak_ptr<fUML::Semantics::Activities::Offer> thisOfferPtr);
 
 
 		public:
@@ -95,7 +95,7 @@ virtual public Offer
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<Offer> m_thisOfferPtr;
+			std::weak_ptr<fUML::Semantics::Activities::Offer> m_thisOfferPtr;
 	};
 }
 #endif /* end of include guard: FUML_SEMANTICS_ACTIVITIES_OFFEROFFERIMPL_HPP */

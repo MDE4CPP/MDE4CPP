@@ -31,8 +31,8 @@ namespace ecore
 		protected:
 			friend class ecoreFactoryImpl;
 			EDataTypeImpl();
-			virtual std::shared_ptr<EDataType> getThisEDataTypePtr() const;
-			virtual void setThisEDataTypePtr(std::weak_ptr<EDataType> thisEDataTypePtr);
+			virtual std::shared_ptr<ecore::EDataType> getThisEDataTypePtr() const;
+			virtual void setThisEDataTypePtr(std::weak_ptr<ecore::EDataType> thisEDataTypePtr);
 
 			//Additional constructors for the containments back reference
 			EDataTypeImpl(std::weak_ptr<ecore::EObject> par_eContainer);
@@ -93,7 +93,7 @@ namespace ecore
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<EDataType> m_thisEDataTypePtr;
+			std::weak_ptr<ecore::EDataType> m_thisEDataTypePtr;
 	};
 }
 #endif /* end of include guard: ECORE_EDATATYPEEDATATYPEIMPL_HPP */

@@ -34,8 +34,8 @@ virtual public Executor
 		protected:
 			friend class fUML::Semantics::Loci::LociFactoryImpl;
 			ExecutorImpl();
-			virtual std::shared_ptr<Executor> getThisExecutorPtr() const;
-			virtual void setThisExecutorPtr(std::weak_ptr<Executor> thisExecutorPtr);
+			virtual std::shared_ptr<fUML::Semantics::Loci::Executor> getThisExecutorPtr() const;
+			virtual void setThisExecutorPtr(std::weak_ptr<fUML::Semantics::Loci::Executor> thisExecutorPtr);
 
 			//Additional constructors for the containments back reference
 			ExecutorImpl(std::weak_ptr<fUML::Semantics::Loci::Locus> par_locus);
@@ -96,7 +96,7 @@ virtual public Executor
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<Executor> m_thisExecutorPtr;
+			std::weak_ptr<fUML::Semantics::Loci::Executor> m_thisExecutorPtr;
 	};
 }
 #endif /* end of include guard: FUML_SEMANTICS_LOCI_EXECUTOREXECUTORIMPL_HPP */

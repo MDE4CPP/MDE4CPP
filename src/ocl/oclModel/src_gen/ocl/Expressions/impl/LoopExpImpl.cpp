@@ -32,8 +32,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "ecore/ecoreFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
+#include "ecore/ecoreFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
 
 #include "ocl/Expressions/CallExp.hpp"
@@ -221,14 +221,6 @@ LoopExpImpl& LoopExpImpl::operator=(const LoopExpImpl & obj)
 	
 	
 	return *this;
-}
-
-std::shared_ptr<ecore::EObject> LoopExpImpl::copy() const
-{
-	std::shared_ptr<LoopExpImpl> element(new LoopExpImpl());
-	*element =(*this);
-	element->setThisLoopExpPtr(element);
-	return element;
 }
 
 //*********************************
@@ -567,11 +559,11 @@ Any LoopExpImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::share
 }
 
 
-std::shared_ptr<LoopExp> LoopExpImpl::getThisLoopExpPtr() const
+std::shared_ptr<ocl::Expressions::LoopExp> LoopExpImpl::getThisLoopExpPtr() const
 {
 	return m_thisLoopExpPtr.lock();
 }
-void LoopExpImpl::setThisLoopExpPtr(std::weak_ptr<LoopExp> thisLoopExpPtr)
+void LoopExpImpl::setThisLoopExpPtr(std::weak_ptr<ocl::Expressions::LoopExp> thisLoopExpPtr)
 {
 	m_thisLoopExpPtr = thisLoopExpPtr;
 	setThisCallExpPtr(thisLoopExpPtr);

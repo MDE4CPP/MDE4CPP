@@ -526,11 +526,11 @@ Any RemoveVariableValueActionImpl::eInvoke(int operationID, std::shared_ptr<std:
 }
 
 
-std::shared_ptr<RemoveVariableValueAction> RemoveVariableValueActionImpl::getThisRemoveVariableValueActionPtr() const
+std::shared_ptr<uml::RemoveVariableValueAction> RemoveVariableValueActionImpl::getThisRemoveVariableValueActionPtr() const
 {
 	return m_thisRemoveVariableValueActionPtr.lock();
 }
-void RemoveVariableValueActionImpl::setThisRemoveVariableValueActionPtr(std::weak_ptr<RemoveVariableValueAction> thisRemoveVariableValueActionPtr)
+void RemoveVariableValueActionImpl::setThisRemoveVariableValueActionPtr(std::weak_ptr<uml::RemoveVariableValueAction> thisRemoveVariableValueActionPtr)
 {
 	m_thisRemoveVariableValueActionPtr = thisRemoveVariableValueActionPtr;
 	setThisWriteVariableActionPtr(thisRemoveVariableValueActionPtr);

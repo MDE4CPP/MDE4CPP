@@ -31,8 +31,8 @@ namespace uml
 		protected:
 			friend class umlFactoryImpl;
 			SubstitutionImpl();
-			virtual std::shared_ptr<Substitution> getThisSubstitutionPtr() const;
-			virtual void setThisSubstitutionPtr(std::weak_ptr<Substitution> thisSubstitutionPtr);
+			virtual std::shared_ptr<uml::Substitution> getThisSubstitutionPtr() const;
+			virtual void setThisSubstitutionPtr(std::weak_ptr<uml::Substitution> thisSubstitutionPtr);
 
 			//Additional constructors for the containments back reference
 			SubstitutionImpl(std::weak_ptr<uml::Namespace> par_namespace);
@@ -158,7 +158,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<Substitution> m_thisSubstitutionPtr;
+			std::weak_ptr<uml::Substitution> m_thisSubstitutionPtr;
 	};
 }
 #endif /* end of include guard: UML_SUBSTITUTIONSUBSTITUTIONIMPL_HPP */

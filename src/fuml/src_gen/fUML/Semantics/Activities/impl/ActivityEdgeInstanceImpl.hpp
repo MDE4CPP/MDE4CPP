@@ -34,8 +34,8 @@ virtual public ActivityEdgeInstance
 		protected:
 			friend class fUML::Semantics::Activities::ActivitiesFactoryImpl;
 			ActivityEdgeInstanceImpl();
-			virtual std::shared_ptr<ActivityEdgeInstance> getThisActivityEdgeInstancePtr() const;
-			virtual void setThisActivityEdgeInstancePtr(std::weak_ptr<ActivityEdgeInstance> thisActivityEdgeInstancePtr);
+			virtual std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance> getThisActivityEdgeInstancePtr() const;
+			virtual void setThisActivityEdgeInstancePtr(std::weak_ptr<fUML::Semantics::Activities::ActivityEdgeInstance> thisActivityEdgeInstancePtr);
 
 			//Additional constructors for the containments back reference
 			ActivityEdgeInstanceImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_group);
@@ -106,7 +106,7 @@ virtual public ActivityEdgeInstance
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<ActivityEdgeInstance> m_thisActivityEdgeInstancePtr;
+			std::weak_ptr<fUML::Semantics::Activities::ActivityEdgeInstance> m_thisActivityEdgeInstancePtr;
 	};
 }
 #endif /* end of include guard: FUML_SEMANTICS_ACTIVITIES_ACTIVITYEDGEINSTANCEACTIVITYEDGEINSTANCEIMPL_HPP */

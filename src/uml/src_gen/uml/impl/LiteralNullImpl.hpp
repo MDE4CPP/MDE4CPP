@@ -31,8 +31,8 @@ namespace uml
 		protected:
 			friend class umlFactoryImpl;
 			LiteralNullImpl();
-			virtual std::shared_ptr<LiteralNull> getThisLiteralNullPtr() const;
-			virtual void setThisLiteralNullPtr(std::weak_ptr<LiteralNull> thisLiteralNullPtr);
+			virtual std::shared_ptr<uml::LiteralNull> getThisLiteralNullPtr() const;
+			virtual void setThisLiteralNullPtr(std::weak_ptr<uml::LiteralNull> thisLiteralNullPtr);
 
 			//Additional constructors for the containments back reference
 			LiteralNullImpl(std::weak_ptr<uml::Namespace> par_namespace);
@@ -131,7 +131,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<LiteralNull> m_thisLiteralNullPtr;
+			std::weak_ptr<uml::LiteralNull> m_thisLiteralNullPtr;
 	};
 }
 #endif /* end of include guard: UML_LITERALNULLLITERALNULLIMPL_HPP */

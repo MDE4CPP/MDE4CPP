@@ -336,11 +336,11 @@ Any ArgumentImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shar
 }
 
 
-std::shared_ptr<Argument> ArgumentImpl::getThisArgumentPtr() const
+std::shared_ptr<uml::Argument> ArgumentImpl::getThisArgumentPtr() const
 {
 	return m_thisArgumentPtr.lock();
 }
-void ArgumentImpl::setThisArgumentPtr(std::weak_ptr<Argument> thisArgumentPtr)
+void ArgumentImpl::setThisArgumentPtr(std::weak_ptr<uml::Argument> thisArgumentPtr)
 {
 	m_thisArgumentPtr = thisArgumentPtr;
 }

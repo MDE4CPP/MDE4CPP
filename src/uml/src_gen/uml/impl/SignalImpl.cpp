@@ -628,11 +628,11 @@ Any SignalImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared
 }
 
 
-std::shared_ptr<Signal> SignalImpl::getThisSignalPtr() const
+std::shared_ptr<uml::Signal> SignalImpl::getThisSignalPtr() const
 {
 	return m_thisSignalPtr.lock();
 }
-void SignalImpl::setThisSignalPtr(std::weak_ptr<Signal> thisSignalPtr)
+void SignalImpl::setThisSignalPtr(std::weak_ptr<uml::Signal> thisSignalPtr)
 {
 	m_thisSignalPtr = thisSignalPtr;
 	setThisClassifierPtr(thisSignalPtr);

@@ -285,11 +285,11 @@ Any TestIdentityActionActivationImpl::eInvoke(int operationID, std::shared_ptr<s
 }
 
 
-std::shared_ptr<TestIdentityActionActivation> TestIdentityActionActivationImpl::getThisTestIdentityActionActivationPtr() const
+std::shared_ptr<fUML::Semantics::Actions::TestIdentityActionActivation> TestIdentityActionActivationImpl::getThisTestIdentityActionActivationPtr() const
 {
 	return m_thisTestIdentityActionActivationPtr.lock();
 }
-void TestIdentityActionActivationImpl::setThisTestIdentityActionActivationPtr(std::weak_ptr<TestIdentityActionActivation> thisTestIdentityActionActivationPtr)
+void TestIdentityActionActivationImpl::setThisTestIdentityActionActivationPtr(std::weak_ptr<fUML::Semantics::Actions::TestIdentityActionActivation> thisTestIdentityActionActivationPtr)
 {
 	m_thisTestIdentityActionActivationPtr = thisTestIdentityActionActivationPtr;
 	setThisActionActivationPtr(thisTestIdentityActionActivationPtr);

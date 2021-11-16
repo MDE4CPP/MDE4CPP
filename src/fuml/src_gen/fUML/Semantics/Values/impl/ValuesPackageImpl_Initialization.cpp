@@ -4,14 +4,14 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
+#include "ecore/EStringToStringMapEntry.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EReference.hpp"
-#include "ecore/EClass.hpp"
-#include "ecore/EDataType.hpp"
 #include "ecore/EGenericType.hpp"
-#include "ecore/EParameter.hpp"
 #include "ecore/EOperation.hpp"
-#include "ecore/EStringToStringMapEntry.hpp"
+#include "ecore/EClass.hpp"
+#include "ecore/EParameter.hpp"
+#include "ecore/EDataType.hpp"
 
 // metametamodel factory
 #include "ecore/ecoreFactory.hpp"
@@ -342,6 +342,13 @@ void ValuesPackageImpl::initializeValueContent()
 		parameter->setUnique(true);
 		parameter->setOrdered(true);
 	}
+	
+	m_value_Operation_new_->setName("new_");
+	m_value_Operation_new_->setEType(getValue_Class());
+	m_value_Operation_new_->setLowerBound(1);
+	m_value_Operation_new_->setUpperBound(1);
+	m_value_Operation_new_->setUnique(true);
+	m_value_Operation_new_->setOrdered(true);
 	
 	m_value_Operation_objectId->setName("objectId");
 	m_value_Operation_objectId->setEType(ecore::ecorePackage::eInstance()->getEString_Class());

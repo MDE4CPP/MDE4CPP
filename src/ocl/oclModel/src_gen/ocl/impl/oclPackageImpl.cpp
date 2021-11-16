@@ -4,18 +4,18 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
-#include "ecore/EAnnotation.hpp"
-#include "ecore/EPackage.hpp"
-#include "ecore/EReference.hpp"
-#include "ecore/EEnum.hpp"
-#include "ecore/EClass.hpp"
-#include "ecore/EDataType.hpp"
-#include "ecore/EGenericType.hpp"
-#include "ecore/EAttribute.hpp"
-#include "ecore/EEnumLiteral.hpp"
-#include "ecore/EParameter.hpp"
-#include "ecore/EOperation.hpp"
 #include "ecore/EStringToStringMapEntry.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
+#include "ecore/EGenericType.hpp"
+#include "ecore/EEnum.hpp"
+#include "ecore/EPackage.hpp"
+#include "ecore/EOperation.hpp"
+#include "ecore/EClass.hpp"
+#include "ecore/EParameter.hpp"
+#include "ecore/EDataType.hpp"
+#include "ecore/EEnumLiteral.hpp"
 
 //metamodel factory
 #include "ocl/oclFactory.hpp"
@@ -67,21 +67,21 @@ void oclPackageImpl::init(std::shared_ptr<ecore::EPackage> package)
     initializePackageContents();   
 }
 
-std::shared_ptr<Evaluations::EvaluationsPackage> oclPackageImpl::getEvaluations_Package() const
+std::shared_ptr<ocl::Evaluations::EvaluationsPackage> ocl::oclPackageImpl::getEvaluations_Package() const
 {
-	return Evaluations::EvaluationsPackage::eInstance();
+	return ocl::Evaluations::EvaluationsPackage::eInstance();
 } 
-std::shared_ptr<Expressions::ExpressionsPackage> oclPackageImpl::getExpressions_Package() const
+std::shared_ptr<ocl::Expressions::ExpressionsPackage> ocl::oclPackageImpl::getExpressions_Package() const
 {
-	return Expressions::ExpressionsPackage::eInstance();
+	return ocl::Expressions::ExpressionsPackage::eInstance();
 } 
-std::shared_ptr<Types::TypesPackage> oclPackageImpl::getTypes_Package() const
+std::shared_ptr<ocl::Types::TypesPackage> ocl::oclPackageImpl::getTypes_Package() const
 {
-	return Types::TypesPackage::eInstance();
+	return ocl::Types::TypesPackage::eInstance();
 } 
-std::shared_ptr<Values::ValuesPackage> oclPackageImpl::getValues_Package() const
+std::shared_ptr<ocl::Values::ValuesPackage> ocl::oclPackageImpl::getValues_Package() const
 {
-	return Values::ValuesPackage::eInstance();
+	return ocl::Values::ValuesPackage::eInstance();
 } 
 
 

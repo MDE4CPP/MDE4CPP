@@ -32,8 +32,8 @@ namespace uml
 		protected:
 			friend class umlFactoryImpl;
 			AssociationClassImpl();
-			virtual std::shared_ptr<AssociationClass> getThisAssociationClassPtr() const;
-			virtual void setThisAssociationClassPtr(std::weak_ptr<AssociationClass> thisAssociationClassPtr);
+			virtual std::shared_ptr<uml::AssociationClass> getThisAssociationClassPtr() const;
+			virtual void setThisAssociationClassPtr(std::weak_ptr<uml::AssociationClass> thisAssociationClassPtr);
 
 			//Additional constructors for the containments back reference
 			AssociationClassImpl(std::weak_ptr<uml::Namespace> par_namespace);
@@ -170,7 +170,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<AssociationClass> m_thisAssociationClassPtr;
+			std::weak_ptr<uml::AssociationClass> m_thisAssociationClassPtr;
 	};
 }
 #endif /* end of include guard: UML_ASSOCIATIONCLASSASSOCIATIONCLASSIMPL_HPP */

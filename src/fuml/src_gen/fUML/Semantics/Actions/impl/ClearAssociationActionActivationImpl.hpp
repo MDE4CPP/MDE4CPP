@@ -32,8 +32,8 @@ namespace fUML::Semantics::Actions
 		protected:
 			friend class fUML::Semantics::Actions::ActionsFactoryImpl;
 			ClearAssociationActionActivationImpl();
-			virtual std::shared_ptr<ClearAssociationActionActivation> getThisClearAssociationActionActivationPtr() const;
-			virtual void setThisClearAssociationActionActivationPtr(std::weak_ptr<ClearAssociationActionActivation> thisClearAssociationActionActivationPtr);
+			virtual std::shared_ptr<fUML::Semantics::Actions::ClearAssociationActionActivation> getThisClearAssociationActionActivationPtr() const;
+			virtual void setThisClearAssociationActionActivationPtr(std::weak_ptr<fUML::Semantics::Actions::ClearAssociationActionActivation> thisClearAssociationActionActivationPtr);
 
 			//Additional constructors for the containments back reference
 			ClearAssociationActionActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_group);
@@ -90,7 +90,7 @@ namespace fUML::Semantics::Actions
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<ClearAssociationActionActivation> m_thisClearAssociationActionActivationPtr;
+			std::weak_ptr<fUML::Semantics::Actions::ClearAssociationActionActivation> m_thisClearAssociationActionActivationPtr;
 	};
 }
 #endif /* end of include guard: FUML_SEMANTICS_ACTIONS_CLEARASSOCIATIONACTIONACTIVATIONCLEARASSOCIATIONACTIONACTIVATIONIMPL_HPP */

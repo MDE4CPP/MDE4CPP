@@ -31,8 +31,8 @@ namespace uml
 		protected:
 			friend class umlFactoryImpl;
 			ClassifierTemplateParameterImpl();
-			virtual std::shared_ptr<ClassifierTemplateParameter> getThisClassifierTemplateParameterPtr() const;
-			virtual void setThisClassifierTemplateParameterPtr(std::weak_ptr<ClassifierTemplateParameter> thisClassifierTemplateParameterPtr);
+			virtual std::shared_ptr<uml::ClassifierTemplateParameter> getThisClassifierTemplateParameterPtr() const;
+			virtual void setThisClassifierTemplateParameterPtr(std::weak_ptr<uml::ClassifierTemplateParameter> thisClassifierTemplateParameterPtr);
 
 			//Additional constructors for the containments back reference
 			ClassifierTemplateParameterImpl(std::weak_ptr<uml::Element> par_owner);
@@ -166,7 +166,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<ClassifierTemplateParameter> m_thisClassifierTemplateParameterPtr;
+			std::weak_ptr<uml::ClassifierTemplateParameter> m_thisClassifierTemplateParameterPtr;
 	};
 }
 #endif /* end of include guard: UML_CLASSIFIERTEMPLATEPARAMETERCLASSIFIERTEMPLATEPARAMETERIMPL_HPP */

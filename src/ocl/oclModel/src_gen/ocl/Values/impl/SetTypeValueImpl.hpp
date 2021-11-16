@@ -32,8 +32,8 @@ namespace ocl::Values
 		protected:
 			friend class ocl::Values::ValuesFactoryImpl;
 			SetTypeValueImpl();
-			virtual std::shared_ptr<SetTypeValue> getThisSetTypeValuePtr() const;
-			virtual void setThisSetTypeValuePtr(std::weak_ptr<SetTypeValue> thisSetTypeValuePtr);
+			virtual std::shared_ptr<ocl::Values::SetTypeValue> getThisSetTypeValuePtr() const;
+			virtual void setThisSetTypeValuePtr(std::weak_ptr<ocl::Values::SetTypeValue> thisSetTypeValuePtr);
 
 
 		public:
@@ -88,7 +88,7 @@ namespace ocl::Values
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<SetTypeValue> m_thisSetTypeValuePtr;
+			std::weak_ptr<ocl::Values::SetTypeValue> m_thisSetTypeValuePtr;
 	};
 }
 #endif /* end of include guard: OCL_VALUES_SETTYPEVALUESETTYPEVALUEIMPL_HPP */

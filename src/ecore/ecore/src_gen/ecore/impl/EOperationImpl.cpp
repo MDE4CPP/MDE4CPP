@@ -827,11 +827,11 @@ Any EOperationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sh
 }
 
 
-std::shared_ptr<EOperation> EOperationImpl::getThisEOperationPtr() const
+std::shared_ptr<ecore::EOperation> EOperationImpl::getThisEOperationPtr() const
 {
 	return m_thisEOperationPtr.lock();
 }
-void EOperationImpl::setThisEOperationPtr(std::weak_ptr<EOperation> thisEOperationPtr)
+void EOperationImpl::setThisEOperationPtr(std::weak_ptr<ecore::EOperation> thisEOperationPtr)
 {
 	m_thisEOperationPtr = thisEOperationPtr;
 	setThisETypedElementPtr(thisEOperationPtr);

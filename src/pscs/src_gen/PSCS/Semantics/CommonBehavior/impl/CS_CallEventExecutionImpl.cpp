@@ -36,11 +36,11 @@
 
 #include <exception> // used in Persistence
 #include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
+#include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
+#include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "PSCS/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
-#include "uml/umlFactory.hpp"
-#include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
 
 #include "uml/Behavior.hpp"
 #include "PSCS/Semantics/StructuredClassifiers/CS_InteractionPoint.hpp"
@@ -401,11 +401,11 @@ Any CS_CallEventExecutionImpl::eInvoke(int operationID, std::shared_ptr<std::lis
 }
 
 
-std::shared_ptr<CS_CallEventExecution> CS_CallEventExecutionImpl::getThisCS_CallEventExecutionPtr() const
+std::shared_ptr<PSCS::Semantics::CommonBehavior::CS_CallEventExecution> CS_CallEventExecutionImpl::getThisCS_CallEventExecutionPtr() const
 {
 	return m_thisCS_CallEventExecutionPtr.lock();
 }
-void CS_CallEventExecutionImpl::setThisCS_CallEventExecutionPtr(std::weak_ptr<CS_CallEventExecution> thisCS_CallEventExecutionPtr)
+void CS_CallEventExecutionImpl::setThisCS_CallEventExecutionPtr(std::weak_ptr<PSCS::Semantics::CommonBehavior::CS_CallEventExecution> thisCS_CallEventExecutionPtr)
 {
 	m_thisCS_CallEventExecutionPtr = thisCS_CallEventExecutionPtr;
 	setThisCallEventExecutionPtr(thisCS_CallEventExecutionPtr);

@@ -31,8 +31,8 @@ namespace uml
 		protected:
 			friend class umlFactoryImpl;
 			CommunicationPathImpl();
-			virtual std::shared_ptr<CommunicationPath> getThisCommunicationPathPtr() const;
-			virtual void setThisCommunicationPathPtr(std::weak_ptr<CommunicationPath> thisCommunicationPathPtr);
+			virtual std::shared_ptr<uml::CommunicationPath> getThisCommunicationPathPtr() const;
+			virtual void setThisCommunicationPathPtr(std::weak_ptr<uml::CommunicationPath> thisCommunicationPathPtr);
 
 			//Additional constructors for the containments back reference
 			CommunicationPathImpl(std::weak_ptr<uml::Namespace> par_namespace);
@@ -145,7 +145,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<CommunicationPath> m_thisCommunicationPathPtr;
+			std::weak_ptr<uml::CommunicationPath> m_thisCommunicationPathPtr;
 	};
 }
 #endif /* end of include guard: UML_COMMUNICATIONPATHCOMMUNICATIONPATHIMPL_HPP */

@@ -32,8 +32,8 @@ namespace fUML::Semantics::Actions
 		protected:
 			friend class fUML::Semantics::Actions::ActionsFactoryImpl;
 			ReadSelfActionActivationImpl();
-			virtual std::shared_ptr<ReadSelfActionActivation> getThisReadSelfActionActivationPtr() const;
-			virtual void setThisReadSelfActionActivationPtr(std::weak_ptr<ReadSelfActionActivation> thisReadSelfActionActivationPtr);
+			virtual std::shared_ptr<fUML::Semantics::Actions::ReadSelfActionActivation> getThisReadSelfActionActivationPtr() const;
+			virtual void setThisReadSelfActionActivationPtr(std::weak_ptr<fUML::Semantics::Actions::ReadSelfActionActivation> thisReadSelfActionActivationPtr);
 
 			//Additional constructors for the containments back reference
 			ReadSelfActionActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_group);
@@ -97,7 +97,7 @@ namespace fUML::Semantics::Actions
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<ReadSelfActionActivation> m_thisReadSelfActionActivationPtr;
+			std::weak_ptr<fUML::Semantics::Actions::ReadSelfActionActivation> m_thisReadSelfActionActivationPtr;
 	};
 }
 #endif /* end of include guard: FUML_SEMANTICS_ACTIONS_READSELFACTIONACTIVATIONREADSELFACTIONACTIVATIONIMPL_HPP */

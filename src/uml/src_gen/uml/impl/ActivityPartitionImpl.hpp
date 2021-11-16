@@ -31,8 +31,8 @@ namespace uml
 		protected:
 			friend class umlFactoryImpl;
 			ActivityPartitionImpl();
-			virtual std::shared_ptr<ActivityPartition> getThisActivityPartitionPtr() const;
-			virtual void setThisActivityPartitionPtr(std::weak_ptr<ActivityPartition> thisActivityPartitionPtr);
+			virtual std::shared_ptr<uml::ActivityPartition> getThisActivityPartitionPtr() const;
+			virtual void setThisActivityPartitionPtr(std::weak_ptr<uml::ActivityPartition> thisActivityPartitionPtr);
 
 			//Additional constructors for the containments back reference
 			ActivityPartitionImpl(std::weak_ptr<uml::Activity> par_inActivity);
@@ -244,7 +244,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<ActivityPartition> m_thisActivityPartitionPtr;
+			std::weak_ptr<uml::ActivityPartition> m_thisActivityPartitionPtr;
 	};
 }
 #endif /* end of include guard: UML_ACTIVITYPARTITIONACTIVITYPARTITIONIMPL_HPP */

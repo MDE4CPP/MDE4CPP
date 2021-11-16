@@ -1257,11 +1257,11 @@ Any InteractionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::s
 }
 
 
-std::shared_ptr<Interaction> InteractionImpl::getThisInteractionPtr() const
+std::shared_ptr<uml::Interaction> InteractionImpl::getThisInteractionPtr() const
 {
 	return m_thisInteractionPtr.lock();
 }
-void InteractionImpl::setThisInteractionPtr(std::weak_ptr<Interaction> thisInteractionPtr)
+void InteractionImpl::setThisInteractionPtr(std::weak_ptr<uml::Interaction> thisInteractionPtr)
 {
 	m_thisInteractionPtr = thisInteractionPtr;
 	setThisBehaviorPtr(thisInteractionPtr);

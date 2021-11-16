@@ -9,7 +9,7 @@
 
 namespace uml 
 {
-	enum VisibilityKind {
+	enum class VisibilityKind {
 		
 		PACKAGE = 3
 ,

@@ -307,11 +307,11 @@ Any AcceptEventActionEventAccepterImpl::eInvoke(int operationID, std::shared_ptr
 }
 
 
-std::shared_ptr<AcceptEventActionEventAccepter> AcceptEventActionEventAccepterImpl::getThisAcceptEventActionEventAccepterPtr() const
+std::shared_ptr<fUML::Semantics::Actions::AcceptEventActionEventAccepter> AcceptEventActionEventAccepterImpl::getThisAcceptEventActionEventAccepterPtr() const
 {
 	return m_thisAcceptEventActionEventAccepterPtr.lock();
 }
-void AcceptEventActionEventAccepterImpl::setThisAcceptEventActionEventAccepterPtr(std::weak_ptr<AcceptEventActionEventAccepter> thisAcceptEventActionEventAccepterPtr)
+void AcceptEventActionEventAccepterImpl::setThisAcceptEventActionEventAccepterPtr(std::weak_ptr<fUML::Semantics::Actions::AcceptEventActionEventAccepter> thisAcceptEventActionEventAccepterPtr)
 {
 	m_thisAcceptEventActionEventAccepterPtr = thisAcceptEventActionEventAccepterPtr;
 	setThisEventAccepterPtr(thisAcceptEventActionEventAccepterPtr);

@@ -121,14 +121,6 @@ EStructuralFeatureImpl& EStructuralFeatureImpl::operator=(const EStructuralFeatu
 	return *this;
 }
 
-std::shared_ptr<ecore::EObject> EStructuralFeatureImpl::copy() const
-{
-	std::shared_ptr<EStructuralFeatureImpl> element(new EStructuralFeatureImpl());
-	*element =(*this);
-	element->setThisEStructuralFeaturePtr(element);
-	return element;
-}
-
 //*********************************
 // Operations
 //*********************************
@@ -603,11 +595,11 @@ Any EStructuralFeatureImpl::eInvoke(int operationID, std::shared_ptr<std::list <
 }
 
 
-std::shared_ptr<EStructuralFeature> EStructuralFeatureImpl::getThisEStructuralFeaturePtr() const
+std::shared_ptr<ecore::EStructuralFeature> EStructuralFeatureImpl::getThisEStructuralFeaturePtr() const
 {
 	return m_thisEStructuralFeaturePtr.lock();
 }
-void EStructuralFeatureImpl::setThisEStructuralFeaturePtr(std::weak_ptr<EStructuralFeature> thisEStructuralFeaturePtr)
+void EStructuralFeatureImpl::setThisEStructuralFeaturePtr(std::weak_ptr<ecore::EStructuralFeature> thisEStructuralFeaturePtr)
 {
 	m_thisEStructuralFeaturePtr = thisEStructuralFeaturePtr;
 	setThisETypedElementPtr(thisEStructuralFeaturePtr);

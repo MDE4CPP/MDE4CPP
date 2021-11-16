@@ -26,19 +26,19 @@ namespace PSCS::Semantics::Actions
 	{
 		public: 
 			CS_ConstructStrategyImpl(const CS_ConstructStrategyImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 			CS_ConstructStrategyImpl& operator=(CS_ConstructStrategyImpl const&); 
 
 		protected:
 			friend class PSCS::Semantics::Actions::ActionsFactoryImpl;
 			CS_ConstructStrategyImpl();
-			virtual std::shared_ptr<CS_ConstructStrategy> getThisCS_ConstructStrategyPtr() const;
-			virtual void setThisCS_ConstructStrategyPtr(std::weak_ptr<CS_ConstructStrategy> thisCS_ConstructStrategyPtr);
+			virtual std::shared_ptr<PSCS::Semantics::Actions::CS_ConstructStrategy> getThisCS_ConstructStrategyPtr() const;
+			virtual void setThisCS_ConstructStrategyPtr(std::weak_ptr<PSCS::Semantics::Actions::CS_ConstructStrategy> thisCS_ConstructStrategyPtr);
 
 
 		public:
 			//destructor
-			virtual ~CS_ConstructStrategyImpl();
+			virtual ~CS_ConstructStrategyImpl() = 0;
 			
 			//*********************************
 			// Operations
@@ -89,7 +89,7 @@ namespace PSCS::Semantics::Actions
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<CS_ConstructStrategy> m_thisCS_ConstructStrategyPtr;
+			std::weak_ptr<PSCS::Semantics::Actions::CS_ConstructStrategy> m_thisCS_ConstructStrategyPtr;
 	};
 }
 #endif /* end of include guard: PSCS_SEMANTICS_ACTIONS_CS_CONSTRUCTSTRATEGYCS_CONSTRUCTSTRATEGYIMPL_HPP */

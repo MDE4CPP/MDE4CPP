@@ -116,14 +116,6 @@ FeatureImpl& FeatureImpl::operator=(const FeatureImpl & obj)
 	return *this;
 }
 
-std::shared_ptr<ecore::EObject> FeatureImpl::copy() const
-{
-	std::shared_ptr<FeatureImpl> element(new FeatureImpl());
-	*element =(*this);
-	element->setThisFeaturePtr(element);
-	return element;
-}
-
 //*********************************
 // Operations
 //*********************************
@@ -376,11 +368,11 @@ Any FeatureImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::share
 }
 
 
-std::shared_ptr<Feature> FeatureImpl::getThisFeaturePtr() const
+std::shared_ptr<uml::Feature> FeatureImpl::getThisFeaturePtr() const
 {
 	return m_thisFeaturePtr.lock();
 }
-void FeatureImpl::setThisFeaturePtr(std::weak_ptr<Feature> thisFeaturePtr)
+void FeatureImpl::setThisFeaturePtr(std::weak_ptr<uml::Feature> thisFeaturePtr)
 {
 	m_thisFeaturePtr = thisFeaturePtr;
 	setThisRedefinableElementPtr(thisFeaturePtr);

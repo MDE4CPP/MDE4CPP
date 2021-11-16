@@ -260,11 +260,11 @@ Any LiteralExpEvalImpl::eInvoke(int operationID, std::shared_ptr<std::list < std
 }
 
 
-std::shared_ptr<LiteralExpEval> LiteralExpEvalImpl::getThisLiteralExpEvalPtr() const
+std::shared_ptr<ocl::Evaluations::LiteralExpEval> LiteralExpEvalImpl::getThisLiteralExpEvalPtr() const
 {
 	return m_thisLiteralExpEvalPtr.lock();
 }
-void LiteralExpEvalImpl::setThisLiteralExpEvalPtr(std::weak_ptr<LiteralExpEval> thisLiteralExpEvalPtr)
+void LiteralExpEvalImpl::setThisLiteralExpEvalPtr(std::weak_ptr<ocl::Evaluations::LiteralExpEval> thisLiteralExpEvalPtr)
 {
 	m_thisLiteralExpEvalPtr = thisLiteralExpEvalPtr;
 	setThisOclExpEvalPtr(thisLiteralExpEvalPtr);

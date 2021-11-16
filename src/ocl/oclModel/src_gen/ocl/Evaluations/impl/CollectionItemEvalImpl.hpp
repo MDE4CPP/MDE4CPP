@@ -32,8 +32,8 @@ namespace ocl::Evaluations
 		protected:
 			friend class ocl::Evaluations::EvaluationsFactoryImpl;
 			CollectionItemEvalImpl();
-			virtual std::shared_ptr<CollectionItemEval> getThisCollectionItemEvalPtr() const;
-			virtual void setThisCollectionItemEvalPtr(std::weak_ptr<CollectionItemEval> thisCollectionItemEvalPtr);
+			virtual std::shared_ptr<ocl::Evaluations::CollectionItemEval> getThisCollectionItemEvalPtr() const;
+			virtual void setThisCollectionItemEvalPtr(std::weak_ptr<ocl::Evaluations::CollectionItemEval> thisCollectionItemEvalPtr);
 
 
 		public:
@@ -89,7 +89,7 @@ namespace ocl::Evaluations
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<CollectionItemEval> m_thisCollectionItemEvalPtr;
+			std::weak_ptr<ocl::Evaluations::CollectionItemEval> m_thisCollectionItemEvalPtr;
 	};
 }
 #endif /* end of include guard: OCL_EVALUATIONS_COLLECTIONITEMEVALCOLLECTIONITEMEVALIMPL_HPP */

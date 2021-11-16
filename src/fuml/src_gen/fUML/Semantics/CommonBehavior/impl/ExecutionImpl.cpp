@@ -44,10 +44,10 @@
 
 #include <exception> // used in Persistence
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
-#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
+#include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
 #include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
-#include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
+#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
 
 #include "uml/Behavior.hpp"
 #include "uml/Classifier.hpp"
@@ -146,14 +146,6 @@ ExecutionImpl& ExecutionImpl::operator=(const ExecutionImpl & obj)
 	}
 	
 	return *this;
-}
-
-std::shared_ptr<ecore::EObject> ExecutionImpl::copy() const
-{
-	std::shared_ptr<ExecutionImpl> element(new ExecutionImpl());
-	*element =(*this);
-	element->setThisExecutionPtr(element);
-	return element;
 }
 
 //*********************************
@@ -673,11 +665,11 @@ Any ExecutionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sha
 }
 
 
-std::shared_ptr<Execution> ExecutionImpl::getThisExecutionPtr() const
+std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> ExecutionImpl::getThisExecutionPtr() const
 {
 	return m_thisExecutionPtr.lock();
 }
-void ExecutionImpl::setThisExecutionPtr(std::weak_ptr<Execution> thisExecutionPtr)
+void ExecutionImpl::setThisExecutionPtr(std::weak_ptr<fUML::Semantics::CommonBehavior::Execution> thisExecutionPtr)
 {
 	m_thisExecutionPtr = thisExecutionPtr;
 	setThisObjectPtr(thisExecutionPtr);

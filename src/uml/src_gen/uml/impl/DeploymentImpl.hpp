@@ -31,8 +31,8 @@ namespace uml
 		protected:
 			friend class umlFactoryImpl;
 			DeploymentImpl();
-			virtual std::shared_ptr<Deployment> getThisDeploymentPtr() const;
-			virtual void setThisDeploymentPtr(std::weak_ptr<Deployment> thisDeploymentPtr);
+			virtual std::shared_ptr<uml::Deployment> getThisDeploymentPtr() const;
+			virtual void setThisDeploymentPtr(std::weak_ptr<uml::Deployment> thisDeploymentPtr);
 
 			//Additional constructors for the containments back reference
 			DeploymentImpl(std::weak_ptr<uml::DeploymentTarget> par_location);
@@ -158,7 +158,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<Deployment> m_thisDeploymentPtr;
+			std::weak_ptr<uml::Deployment> m_thisDeploymentPtr;
 	};
 }
 #endif /* end of include guard: UML_DEPLOYMENTDEPLOYMENTIMPL_HPP */

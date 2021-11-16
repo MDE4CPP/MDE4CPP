@@ -1040,11 +1040,11 @@ Any UseCaseImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::share
 }
 
 
-std::shared_ptr<UseCase> UseCaseImpl::getThisUseCasePtr() const
+std::shared_ptr<uml::UseCase> UseCaseImpl::getThisUseCasePtr() const
 {
 	return m_thisUseCasePtr.lock();
 }
-void UseCaseImpl::setThisUseCasePtr(std::weak_ptr<UseCase> thisUseCasePtr)
+void UseCaseImpl::setThisUseCasePtr(std::weak_ptr<uml::UseCase> thisUseCasePtr)
 {
 	m_thisUseCasePtr = thisUseCasePtr;
 	setThisBehavioredClassifierPtr(thisUseCasePtr);

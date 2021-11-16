@@ -37,8 +37,8 @@
 
 //Factories an Package includes
 #include "ocl/oclPackage.hpp"
-#include "ocl/Values/ValuesPackage.hpp"
 #include "fUML/Semantics/Values/ValuesPackage.hpp"
+#include "ocl/Values/ValuesPackage.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -338,11 +338,11 @@ Any ElementImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::share
 }
 
 
-std::shared_ptr<Element> ElementImpl::getThisElementPtr() const
+std::shared_ptr<ocl::Values::Element> ElementImpl::getThisElementPtr() const
 {
 	return m_thisElementPtr.lock();
 }
-void ElementImpl::setThisElementPtr(std::weak_ptr<Element> thisElementPtr)
+void ElementImpl::setThisElementPtr(std::weak_ptr<ocl::Values::Element> thisElementPtr)
 {
 	m_thisElementPtr = thisElementPtr;
 }

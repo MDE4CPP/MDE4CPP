@@ -25,14 +25,14 @@ namespace uml
 	{
 		public: 
 			DeploymentTargetImpl(const DeploymentTargetImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 			DeploymentTargetImpl& operator=(DeploymentTargetImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;
 			DeploymentTargetImpl();
-			virtual std::shared_ptr<DeploymentTarget> getThisDeploymentTargetPtr() const;
-			virtual void setThisDeploymentTargetPtr(std::weak_ptr<DeploymentTarget> thisDeploymentTargetPtr);
+			virtual std::shared_ptr<uml::DeploymentTarget> getThisDeploymentTargetPtr() const;
+			virtual void setThisDeploymentTargetPtr(std::weak_ptr<uml::DeploymentTarget> thisDeploymentTargetPtr);
 
 			//Additional constructors for the containments back reference
 			DeploymentTargetImpl(std::weak_ptr<uml::Namespace> par_namespace);
@@ -41,7 +41,7 @@ namespace uml
 
 		public:
 			//destructor
-			virtual ~DeploymentTargetImpl();
+			virtual ~DeploymentTargetImpl() = 0;
 			
 			//*********************************
 			// Operations
@@ -121,7 +121,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<DeploymentTarget> m_thisDeploymentTargetPtr;
+			std::weak_ptr<uml::DeploymentTarget> m_thisDeploymentTargetPtr;
 	};
 }
 #endif /* end of include guard: UML_DEPLOYMENTTARGETDEPLOYMENTTARGETIMPL_HPP */

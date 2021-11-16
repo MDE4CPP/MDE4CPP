@@ -590,11 +590,11 @@ Any ComponentRealizationImpl::eInvoke(int operationID, std::shared_ptr<std::list
 }
 
 
-std::shared_ptr<ComponentRealization> ComponentRealizationImpl::getThisComponentRealizationPtr() const
+std::shared_ptr<uml::ComponentRealization> ComponentRealizationImpl::getThisComponentRealizationPtr() const
 {
 	return m_thisComponentRealizationPtr.lock();
 }
-void ComponentRealizationImpl::setThisComponentRealizationPtr(std::weak_ptr<ComponentRealization> thisComponentRealizationPtr)
+void ComponentRealizationImpl::setThisComponentRealizationPtr(std::weak_ptr<uml::ComponentRealization> thisComponentRealizationPtr)
 {
 	m_thisComponentRealizationPtr = thisComponentRealizationPtr;
 	setThisRealizationPtr(thisComponentRealizationPtr);

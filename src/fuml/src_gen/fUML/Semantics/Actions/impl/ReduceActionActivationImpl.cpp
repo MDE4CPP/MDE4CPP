@@ -349,11 +349,11 @@ Any ReduceActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::li
 }
 
 
-std::shared_ptr<ReduceActionActivation> ReduceActionActivationImpl::getThisReduceActionActivationPtr() const
+std::shared_ptr<fUML::Semantics::Actions::ReduceActionActivation> ReduceActionActivationImpl::getThisReduceActionActivationPtr() const
 {
 	return m_thisReduceActionActivationPtr.lock();
 }
-void ReduceActionActivationImpl::setThisReduceActionActivationPtr(std::weak_ptr<ReduceActionActivation> thisReduceActionActivationPtr)
+void ReduceActionActivationImpl::setThisReduceActionActivationPtr(std::weak_ptr<fUML::Semantics::Actions::ReduceActionActivation> thisReduceActionActivationPtr)
 {
 	m_thisReduceActionActivationPtr = thisReduceActionActivationPtr;
 	setThisActionActivationPtr(thisReduceActionActivationPtr);

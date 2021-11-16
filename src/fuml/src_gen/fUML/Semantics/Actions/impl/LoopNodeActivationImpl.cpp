@@ -451,11 +451,11 @@ Any LoopNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list <
 }
 
 
-std::shared_ptr<LoopNodeActivation> LoopNodeActivationImpl::getThisLoopNodeActivationPtr() const
+std::shared_ptr<fUML::Semantics::Actions::LoopNodeActivation> LoopNodeActivationImpl::getThisLoopNodeActivationPtr() const
 {
 	return m_thisLoopNodeActivationPtr.lock();
 }
-void LoopNodeActivationImpl::setThisLoopNodeActivationPtr(std::weak_ptr<LoopNodeActivation> thisLoopNodeActivationPtr)
+void LoopNodeActivationImpl::setThisLoopNodeActivationPtr(std::weak_ptr<fUML::Semantics::Actions::LoopNodeActivation> thisLoopNodeActivationPtr)
 {
 	m_thisLoopNodeActivationPtr = thisLoopNodeActivationPtr;
 	setThisStructuredActivityNodeActivationPtr(thisLoopNodeActivationPtr);

@@ -36,8 +36,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
+#include "uml/umlFactory.hpp"
 
 #include "fUML/Semantics/Values/LiteralEvaluation.hpp"
 #include "fUML/Semantics/Loci/Locus.hpp"
@@ -276,11 +276,11 @@ Any LiteralUnlimitedNaturalEvaluationImpl::eInvoke(int operationID, std::shared_
 }
 
 
-std::shared_ptr<LiteralUnlimitedNaturalEvaluation> LiteralUnlimitedNaturalEvaluationImpl::getThisLiteralUnlimitedNaturalEvaluationPtr() const
+std::shared_ptr<fUML::Semantics::Values::LiteralUnlimitedNaturalEvaluation> LiteralUnlimitedNaturalEvaluationImpl::getThisLiteralUnlimitedNaturalEvaluationPtr() const
 {
 	return m_thisLiteralUnlimitedNaturalEvaluationPtr.lock();
 }
-void LiteralUnlimitedNaturalEvaluationImpl::setThisLiteralUnlimitedNaturalEvaluationPtr(std::weak_ptr<LiteralUnlimitedNaturalEvaluation> thisLiteralUnlimitedNaturalEvaluationPtr)
+void LiteralUnlimitedNaturalEvaluationImpl::setThisLiteralUnlimitedNaturalEvaluationPtr(std::weak_ptr<fUML::Semantics::Values::LiteralUnlimitedNaturalEvaluation> thisLiteralUnlimitedNaturalEvaluationPtr)
 {
 	m_thisLiteralUnlimitedNaturalEvaluationPtr = thisLiteralUnlimitedNaturalEvaluationPtr;
 	setThisLiteralEvaluationPtr(thisLiteralUnlimitedNaturalEvaluationPtr);

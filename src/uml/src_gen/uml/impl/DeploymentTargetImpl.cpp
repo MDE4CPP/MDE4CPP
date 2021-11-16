@@ -152,14 +152,6 @@ DeploymentTargetImpl& DeploymentTargetImpl::operator=(const DeploymentTargetImpl
 	return *this;
 }
 
-std::shared_ptr<ecore::EObject> DeploymentTargetImpl::copy() const
-{
-	std::shared_ptr<DeploymentTargetImpl> element(new DeploymentTargetImpl());
-	*element =(*this);
-	element->setThisDeploymentTargetPtr(element);
-	return element;
-}
-
 //*********************************
 // Operations
 //*********************************
@@ -468,11 +460,11 @@ Any DeploymentTargetImpl::eInvoke(int operationID, std::shared_ptr<std::list < s
 }
 
 
-std::shared_ptr<DeploymentTarget> DeploymentTargetImpl::getThisDeploymentTargetPtr() const
+std::shared_ptr<uml::DeploymentTarget> DeploymentTargetImpl::getThisDeploymentTargetPtr() const
 {
 	return m_thisDeploymentTargetPtr.lock();
 }
-void DeploymentTargetImpl::setThisDeploymentTargetPtr(std::weak_ptr<DeploymentTarget> thisDeploymentTargetPtr)
+void DeploymentTargetImpl::setThisDeploymentTargetPtr(std::weak_ptr<uml::DeploymentTarget> thisDeploymentTargetPtr)
 {
 	m_thisDeploymentTargetPtr = thisDeploymentTargetPtr;
 	setThisNamedElementPtr(thisDeploymentTargetPtr);

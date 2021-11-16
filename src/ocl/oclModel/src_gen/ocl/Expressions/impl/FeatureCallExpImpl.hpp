@@ -26,14 +26,14 @@ namespace ocl::Expressions
 	{
 		public: 
 			FeatureCallExpImpl(const FeatureCallExpImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 			FeatureCallExpImpl& operator=(FeatureCallExpImpl const&); 
 
 		protected:
 			friend class ocl::Expressions::ExpressionsFactoryImpl;
 			FeatureCallExpImpl();
-			virtual std::shared_ptr<FeatureCallExp> getThisFeatureCallExpPtr() const;
-			virtual void setThisFeatureCallExpPtr(std::weak_ptr<FeatureCallExp> thisFeatureCallExpPtr);
+			virtual std::shared_ptr<ocl::Expressions::FeatureCallExp> getThisFeatureCallExpPtr() const;
+			virtual void setThisFeatureCallExpPtr(std::weak_ptr<ocl::Expressions::FeatureCallExp> thisFeatureCallExpPtr);
 
 			//Additional constructors for the containments back reference
 			FeatureCallExpImpl(std::weak_ptr<ocl::Expressions::CallExp> par_appliedElement);
@@ -57,7 +57,7 @@ namespace ocl::Expressions
 
 		public:
 			//destructor
-			virtual ~FeatureCallExpImpl();
+			virtual ~FeatureCallExpImpl() = 0;
 			
 			//*********************************
 			// Operations
@@ -108,7 +108,7 @@ namespace ocl::Expressions
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<FeatureCallExp> m_thisFeatureCallExpPtr;
+			std::weak_ptr<ocl::Expressions::FeatureCallExp> m_thisFeatureCallExpPtr;
 	};
 }
 #endif /* end of include guard: OCL_EXPRESSIONS_FEATURECALLEXPFEATURECALLEXPIMPL_HPP */

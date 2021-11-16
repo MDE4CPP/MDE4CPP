@@ -806,11 +806,11 @@ Any OpaqueActionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::
 }
 
 
-std::shared_ptr<OpaqueAction> OpaqueActionImpl::getThisOpaqueActionPtr() const
+std::shared_ptr<uml::OpaqueAction> OpaqueActionImpl::getThisOpaqueActionPtr() const
 {
 	return m_thisOpaqueActionPtr.lock();
 }
-void OpaqueActionImpl::setThisOpaqueActionPtr(std::weak_ptr<OpaqueAction> thisOpaqueActionPtr)
+void OpaqueActionImpl::setThisOpaqueActionPtr(std::weak_ptr<uml::OpaqueAction> thisOpaqueActionPtr)
 {
 	m_thisOpaqueActionPtr = thisOpaqueActionPtr;
 	setThisActionPtr(thisOpaqueActionPtr);

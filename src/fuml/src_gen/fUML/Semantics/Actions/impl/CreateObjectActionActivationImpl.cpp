@@ -429,11 +429,11 @@ Any CreateObjectActionActivationImpl::eInvoke(int operationID, std::shared_ptr<s
 }
 
 
-std::shared_ptr<CreateObjectActionActivation> CreateObjectActionActivationImpl::getThisCreateObjectActionActivationPtr() const
+std::shared_ptr<fUML::Semantics::Actions::CreateObjectActionActivation> CreateObjectActionActivationImpl::getThisCreateObjectActionActivationPtr() const
 {
 	return m_thisCreateObjectActionActivationPtr.lock();
 }
-void CreateObjectActionActivationImpl::setThisCreateObjectActionActivationPtr(std::weak_ptr<CreateObjectActionActivation> thisCreateObjectActionActivationPtr)
+void CreateObjectActionActivationImpl::setThisCreateObjectActionActivationPtr(std::weak_ptr<fUML::Semantics::Actions::CreateObjectActionActivation> thisCreateObjectActionActivationPtr)
 {
 	m_thisCreateObjectActionActivationPtr = thisCreateObjectActionActivationPtr;
 	setThisActionActivationPtr(thisCreateObjectActionActivationPtr);

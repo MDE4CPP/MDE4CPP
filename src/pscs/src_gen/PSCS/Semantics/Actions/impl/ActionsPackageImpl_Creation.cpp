@@ -7,14 +7,14 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
+#include "ecore/EStringToStringMapEntry.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EReference.hpp"
-#include "ecore/EClass.hpp"
-#include "ecore/EDataType.hpp"
 #include "ecore/EGenericType.hpp"
-#include "ecore/EParameter.hpp"
 #include "ecore/EOperation.hpp"
-#include "ecore/EStringToStringMapEntry.hpp"
+#include "ecore/EClass.hpp"
+#include "ecore/EParameter.hpp"
+#include "ecore/EDataType.hpp"
 
 //depending model packages
 #include "PSCS/PSCSPackage.hpp"
@@ -138,7 +138,10 @@ void ActionsPackageImpl::createCS_DefaultConstructStrategyContent(std::shared_pt
 {
 	m_cS_DefaultConstructStrategy_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, CS_DEFAULTCONSTRUCTSTRATEGY_CLASS);
 	
-	m_cS_DefaultConstructStrategy_Attribute_defaultAssociation = factory->createEReference_as_eStructuralFeatures_in_EClass(m_cS_DefaultConstructStrategy_Class, CS_DEFAULTCONSTRUCTSTRATEGY_ATTRIBUTE_DEFAULTASSOCIATION);m_cS_DefaultConstructStrategy_Attribute_generatedRealizingClasses = factory->createEReference_as_eStructuralFeatures_in_EClass(m_cS_DefaultConstructStrategy_Class, CS_DEFAULTCONSTRUCTSTRATEGY_ATTRIBUTE_GENERATEDREALIZINGCLASSES);m_cS_DefaultConstructStrategy_Attribute_locus = factory->createEReference_as_eStructuralFeatures_in_EClass(m_cS_DefaultConstructStrategy_Class, CS_DEFAULTCONSTRUCTSTRATEGY_ATTRIBUTE_LOCUS);
+	m_cS_DefaultConstructStrategy_Attribute_defaultAssociation = factory->createEReference_as_eStructuralFeatures_in_EClass(m_cS_DefaultConstructStrategy_Class, CS_DEFAULTCONSTRUCTSTRATEGY_ATTRIBUTE_DEFAULTASSOCIATION);
+	m_cS_DefaultConstructStrategy_Attribute_generatedRealizingClasses = factory->createEReference_as_eStructuralFeatures_in_EClass(m_cS_DefaultConstructStrategy_Class, CS_DEFAULTCONSTRUCTSTRATEGY_ATTRIBUTE_GENERATEDREALIZINGCLASSES);
+	m_cS_DefaultConstructStrategy_Attribute_locus = factory->createEReference_as_eStructuralFeatures_in_EClass(m_cS_DefaultConstructStrategy_Class, CS_DEFAULTCONSTRUCTSTRATEGY_ATTRIBUTE_LOCUS);
+	
 	m_cS_DefaultConstructStrategy_Operation_addStructuralFeatureValue_CS_Reference_Value = factory->createEOperation_as_eOperations_in_EClass(m_cS_DefaultConstructStrategy_Class, CS_DEFAULTCONSTRUCTSTRATEGY_OPERATION_ADDSTRUCTURALFEATUREVALUE_CS_REFERENCE_VALUE);
 	m_cS_DefaultConstructStrategy_Operation_canInstantiate_Property = factory->createEOperation_as_eOperations_in_EClass(m_cS_DefaultConstructStrategy_Class, CS_DEFAULTCONSTRUCTSTRATEGY_OPERATION_CANINSTANTIATE_PROPERTY);
 	m_cS_DefaultConstructStrategy_Operation_construct_Operation_CS_Object = factory->createEOperation_as_eOperations_in_EClass(m_cS_DefaultConstructStrategy_Class, CS_DEFAULTCONSTRUCTSTRATEGY_OPERATION_CONSTRUCT_OPERATION_CS_OBJECT);

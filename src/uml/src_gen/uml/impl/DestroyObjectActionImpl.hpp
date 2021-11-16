@@ -31,8 +31,8 @@ namespace uml
 		protected:
 			friend class umlFactoryImpl;
 			DestroyObjectActionImpl();
-			virtual std::shared_ptr<DestroyObjectAction> getThisDestroyObjectActionPtr() const;
-			virtual void setThisDestroyObjectActionPtr(std::weak_ptr<DestroyObjectAction> thisDestroyObjectActionPtr);
+			virtual std::shared_ptr<uml::DestroyObjectAction> getThisDestroyObjectActionPtr() const;
+			virtual void setThisDestroyObjectActionPtr(std::weak_ptr<uml::DestroyObjectAction> thisDestroyObjectActionPtr);
 
 			//Additional constructors for the containments back reference
 			DestroyObjectActionImpl(std::weak_ptr<uml::Activity> par_activity);
@@ -172,7 +172,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<DestroyObjectAction> m_thisDestroyObjectActionPtr;
+			std::weak_ptr<uml::DestroyObjectAction> m_thisDestroyObjectActionPtr;
 	};
 }
 #endif /* end of include guard: UML_DESTROYOBJECTACTIONDESTROYOBJECTACTIONIMPL_HPP */

@@ -31,8 +31,8 @@ namespace uml
 		protected:
 			friend class umlFactoryImpl;
 			ClearStructuralFeatureActionImpl();
-			virtual std::shared_ptr<ClearStructuralFeatureAction> getThisClearStructuralFeatureActionPtr() const;
-			virtual void setThisClearStructuralFeatureActionPtr(std::weak_ptr<ClearStructuralFeatureAction> thisClearStructuralFeatureActionPtr);
+			virtual std::shared_ptr<uml::ClearStructuralFeatureAction> getThisClearStructuralFeatureActionPtr() const;
+			virtual void setThisClearStructuralFeatureActionPtr(std::weak_ptr<uml::ClearStructuralFeatureAction> thisClearStructuralFeatureActionPtr);
 
 			//Additional constructors for the containments back reference
 			ClearStructuralFeatureActionImpl(std::weak_ptr<uml::Activity> par_activity);
@@ -154,7 +154,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<ClearStructuralFeatureAction> m_thisClearStructuralFeatureActionPtr;
+			std::weak_ptr<uml::ClearStructuralFeatureAction> m_thisClearStructuralFeatureActionPtr;
 	};
 }
 #endif /* end of include guard: UML_CLEARSTRUCTURALFEATUREACTIONCLEARSTRUCTURALFEATUREACTIONIMPL_HPP */

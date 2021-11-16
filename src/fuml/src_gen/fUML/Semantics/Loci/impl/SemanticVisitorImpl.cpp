@@ -93,14 +93,6 @@ SemanticVisitorImpl& SemanticVisitorImpl::operator=(const SemanticVisitorImpl & 
 	return *this;
 }
 
-std::shared_ptr<ecore::EObject> SemanticVisitorImpl::copy() const
-{
-	std::shared_ptr<SemanticVisitorImpl> element(new SemanticVisitorImpl());
-	*element =(*this);
-	element->setThisSemanticVisitorPtr(element);
-	return element;
-}
-
 //*********************************
 // Operations
 //*********************************
@@ -268,11 +260,11 @@ Any SemanticVisitorImpl::eInvoke(int operationID, std::shared_ptr<std::list < st
 }
 
 
-std::shared_ptr<SemanticVisitor> SemanticVisitorImpl::getThisSemanticVisitorPtr() const
+std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor> SemanticVisitorImpl::getThisSemanticVisitorPtr() const
 {
 	return m_thisSemanticVisitorPtr.lock();
 }
-void SemanticVisitorImpl::setThisSemanticVisitorPtr(std::weak_ptr<SemanticVisitor> thisSemanticVisitorPtr)
+void SemanticVisitorImpl::setThisSemanticVisitorPtr(std::weak_ptr<fUML::Semantics::Loci::SemanticVisitor> thisSemanticVisitorPtr)
 {
 	m_thisSemanticVisitorPtr = thisSemanticVisitorPtr;
 }

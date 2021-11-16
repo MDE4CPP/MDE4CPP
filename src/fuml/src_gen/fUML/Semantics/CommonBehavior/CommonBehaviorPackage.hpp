@@ -14,15 +14,15 @@
 
 namespace ecore 
 {
-	class EAnnotation;
-	class EReference;
-	class EClass;
-	class EDataType;
-	class EGenericType;
-	class EAttribute;
-	class EParameter;
-	class EOperation;
 	class EStringToStringMapEntry;
+	class EAnnotation;
+	class EAttribute;
+	class EReference;
+	class EGenericType;
+	class EOperation;
+	class EClass;
+	class EParameter;
+	class EDataType;
 }
 
 namespace fUML::Semantics::CommonBehavior 
@@ -90,7 +90,7 @@ namespace fUML::Semantics::CommonBehavior
 			//Class and Feature IDs 
 			static const long long CALLEVENTEXECUTION_CLASS = 1815999052;
 			static const unsigned int CALLEVENTEXECUTION_CLASS_FEATURE_COUNT = 8;
-			static const unsigned int CALLEVENTEXECUTION_CLASS_OPERATION_COUNT = 55;
+			static const unsigned int CALLEVENTEXECUTION_CLASS_OPERATION_COUNT = 56;
 			static const long long CALLEVENTEXECUTION_ATTRIBUTE_CALLERSUSPENDED = 679982988;
 			
 			
@@ -287,7 +287,7 @@ namespace fUML::Semantics::CommonBehavior
 			//Class and Feature IDs 
 			static const long long EXECUTION_CLASS = 921905715;
 			static const unsigned int EXECUTION_CLASS_FEATURE_COUNT = 7;
-			static const unsigned int EXECUTION_CLASS_OPERATION_COUNT = 43;
+			static const unsigned int EXECUTION_CLASS_OPERATION_COUNT = 44;
 			
 			static const long long EXECUTION_ATTRIBUTE_BEHAVIOR = 106545659;
 			static const long long EXECUTION_ATTRIBUTE_CONTEXT = 646122967;
@@ -428,7 +428,7 @@ namespace fUML::Semantics::CommonBehavior
 			//Class and Feature IDs 
 			static const long long OPAQUEBEHAVIOREXECUTION_CLASS = 1247403081;
 			static const unsigned int OPAQUEBEHAVIOREXECUTION_CLASS_FEATURE_COUNT = 7;
-			static const unsigned int OPAQUEBEHAVIOREXECUTION_CLASS_OPERATION_COUNT = 45;
+			static const unsigned int OPAQUEBEHAVIOREXECUTION_CLASS_OPERATION_COUNT = 46;
 			
 			
 			static const int OPAQUEBEHAVIOREXECUTION_OPERATION_DOBODY_PARAMETERVALUE_PARAMETERVALUE = 90990798;

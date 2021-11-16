@@ -323,11 +323,11 @@ Any AnyTypeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::share
 }
 
 
-std::shared_ptr<AnyType> AnyTypeImpl::getThisAnyTypePtr() const
+std::shared_ptr<ocl::Types::AnyType> AnyTypeImpl::getThisAnyTypePtr() const
 {
 	return m_thisAnyTypePtr.lock();
 }
-void AnyTypeImpl::setThisAnyTypePtr(std::weak_ptr<AnyType> thisAnyTypePtr)
+void AnyTypeImpl::setThisAnyTypePtr(std::weak_ptr<ocl::Types::AnyType> thisAnyTypePtr)
 {
 	m_thisAnyTypePtr = thisAnyTypePtr;
 	setThisEClassifierPtr(thisAnyTypePtr);

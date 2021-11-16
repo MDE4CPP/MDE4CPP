@@ -31,8 +31,8 @@ namespace uml
 		protected:
 			friend class umlFactoryImpl;
 			SignalImpl();
-			virtual std::shared_ptr<Signal> getThisSignalPtr() const;
-			virtual void setThisSignalPtr(std::weak_ptr<Signal> thisSignalPtr);
+			virtual std::shared_ptr<uml::Signal> getThisSignalPtr() const;
+			virtual void setThisSignalPtr(std::weak_ptr<uml::Signal> thisSignalPtr);
 
 			//Additional constructors for the containments back reference
 			SignalImpl(std::weak_ptr<uml::Namespace> par_namespace);
@@ -155,7 +155,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<Signal> m_thisSignalPtr;
+			std::weak_ptr<uml::Signal> m_thisSignalPtr;
 	};
 }
 #endif /* end of include guard: UML_SIGNALSIGNALIMPL_HPP */

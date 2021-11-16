@@ -127,14 +127,6 @@ ConnectableElementImpl& ConnectableElementImpl::operator=(const ConnectableEleme
 	return *this;
 }
 
-std::shared_ptr<ecore::EObject> ConnectableElementImpl::copy() const
-{
-	std::shared_ptr<ConnectableElementImpl> element(new ConnectableElementImpl());
-	*element =(*this);
-	element->setThisConnectableElementPtr(element);
-	return element;
-}
-
 //*********************************
 // Operations
 //*********************************
@@ -382,11 +374,11 @@ Any ConnectableElementImpl::eInvoke(int operationID, std::shared_ptr<std::list <
 }
 
 
-std::shared_ptr<ConnectableElement> ConnectableElementImpl::getThisConnectableElementPtr() const
+std::shared_ptr<uml::ConnectableElement> ConnectableElementImpl::getThisConnectableElementPtr() const
 {
 	return m_thisConnectableElementPtr.lock();
 }
-void ConnectableElementImpl::setThisConnectableElementPtr(std::weak_ptr<ConnectableElement> thisConnectableElementPtr)
+void ConnectableElementImpl::setThisConnectableElementPtr(std::weak_ptr<uml::ConnectableElement> thisConnectableElementPtr)
 {
 	m_thisConnectableElementPtr = thisConnectableElementPtr;
 	setThisParameterableElementPtr(thisConnectableElementPtr);

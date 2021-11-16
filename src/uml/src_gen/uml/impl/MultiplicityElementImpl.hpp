@@ -25,21 +25,21 @@ namespace uml
 	{
 		public: 
 			MultiplicityElementImpl(const MultiplicityElementImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 			MultiplicityElementImpl& operator=(MultiplicityElementImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;
 			MultiplicityElementImpl();
-			virtual std::shared_ptr<MultiplicityElement> getThisMultiplicityElementPtr() const;
-			virtual void setThisMultiplicityElementPtr(std::weak_ptr<MultiplicityElement> thisMultiplicityElementPtr);
+			virtual std::shared_ptr<uml::MultiplicityElement> getThisMultiplicityElementPtr() const;
+			virtual void setThisMultiplicityElementPtr(std::weak_ptr<uml::MultiplicityElement> thisMultiplicityElementPtr);
 
 			//Additional constructors for the containments back reference
 			MultiplicityElementImpl(std::weak_ptr<uml::Element> par_owner);
 
 		public:
 			//destructor
-			virtual ~MultiplicityElementImpl();
+			virtual ~MultiplicityElementImpl() = 0;
 			
 			//*********************************
 			// Operations
@@ -244,7 +244,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<MultiplicityElement> m_thisMultiplicityElementPtr;
+			std::weak_ptr<uml::MultiplicityElement> m_thisMultiplicityElementPtr;
 	};
 }
 #endif /* end of include guard: UML_MULTIPLICITYELEMENTMULTIPLICITYELEMENTIMPL_HPP */

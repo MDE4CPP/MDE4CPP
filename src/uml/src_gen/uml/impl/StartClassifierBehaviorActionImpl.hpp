@@ -31,8 +31,8 @@ namespace uml
 		protected:
 			friend class umlFactoryImpl;
 			StartClassifierBehaviorActionImpl();
-			virtual std::shared_ptr<StartClassifierBehaviorAction> getThisStartClassifierBehaviorActionPtr() const;
-			virtual void setThisStartClassifierBehaviorActionPtr(std::weak_ptr<StartClassifierBehaviorAction> thisStartClassifierBehaviorActionPtr);
+			virtual std::shared_ptr<uml::StartClassifierBehaviorAction> getThisStartClassifierBehaviorActionPtr() const;
+			virtual void setThisStartClassifierBehaviorActionPtr(std::weak_ptr<uml::StartClassifierBehaviorAction> thisStartClassifierBehaviorActionPtr);
 
 			//Additional constructors for the containments back reference
 			StartClassifierBehaviorActionImpl(std::weak_ptr<uml::Activity> par_activity);
@@ -149,7 +149,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<StartClassifierBehaviorAction> m_thisStartClassifierBehaviorActionPtr;
+			std::weak_ptr<uml::StartClassifierBehaviorAction> m_thisStartClassifierBehaviorActionPtr;
 	};
 }
 #endif /* end of include guard: UML_STARTCLASSIFIERBEHAVIORACTIONSTARTCLASSIFIERBEHAVIORACTIONIMPL_HPP */

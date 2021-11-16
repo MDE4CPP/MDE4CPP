@@ -31,8 +31,8 @@ namespace uml
 		protected:
 			friend class umlFactoryImpl;
 			RaiseExceptionActionImpl();
-			virtual std::shared_ptr<RaiseExceptionAction> getThisRaiseExceptionActionPtr() const;
-			virtual void setThisRaiseExceptionActionPtr(std::weak_ptr<RaiseExceptionAction> thisRaiseExceptionActionPtr);
+			virtual std::shared_ptr<uml::RaiseExceptionAction> getThisRaiseExceptionActionPtr() const;
+			virtual void setThisRaiseExceptionActionPtr(std::weak_ptr<uml::RaiseExceptionAction> thisRaiseExceptionActionPtr);
 
 			//Additional constructors for the containments back reference
 			RaiseExceptionActionImpl(std::weak_ptr<uml::Activity> par_activity);
@@ -136,7 +136,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<RaiseExceptionAction> m_thisRaiseExceptionActionPtr;
+			std::weak_ptr<uml::RaiseExceptionAction> m_thisRaiseExceptionActionPtr;
 	};
 }
 #endif /* end of include guard: UML_RAISEEXCEPTIONACTIONRAISEEXCEPTIONACTIONIMPL_HPP */

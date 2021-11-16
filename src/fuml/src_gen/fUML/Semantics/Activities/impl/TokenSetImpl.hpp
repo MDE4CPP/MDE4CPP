@@ -34,8 +34,8 @@ virtual public TokenSet
 		protected:
 			friend class fUML::Semantics::Activities::ActivitiesFactoryImpl;
 			TokenSetImpl();
-			virtual std::shared_ptr<TokenSet> getThisTokenSetPtr() const;
-			virtual void setThisTokenSetPtr(std::weak_ptr<TokenSet> thisTokenSetPtr);
+			virtual std::shared_ptr<fUML::Semantics::Activities::TokenSet> getThisTokenSetPtr() const;
+			virtual void setThisTokenSetPtr(std::weak_ptr<fUML::Semantics::Activities::TokenSet> thisTokenSetPtr);
 
 
 		public:
@@ -90,7 +90,7 @@ virtual public TokenSet
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<TokenSet> m_thisTokenSetPtr;
+			std::weak_ptr<fUML::Semantics::Activities::TokenSet> m_thisTokenSetPtr;
 	};
 }
 #endif /* end of include guard: FUML_SEMANTICS_ACTIVITIES_TOKENSETTOKENSETIMPL_HPP */

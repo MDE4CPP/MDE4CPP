@@ -34,8 +34,8 @@ virtual public EvalEnvironment
 		protected:
 			friend class ocl::Evaluations::EvaluationsFactoryImpl;
 			EvalEnvironmentImpl();
-			virtual std::shared_ptr<EvalEnvironment> getThisEvalEnvironmentPtr() const;
-			virtual void setThisEvalEnvironmentPtr(std::weak_ptr<EvalEnvironment> thisEvalEnvironmentPtr);
+			virtual std::shared_ptr<ocl::Evaluations::EvalEnvironment> getThisEvalEnvironmentPtr() const;
+			virtual void setThisEvalEnvironmentPtr(std::weak_ptr<ocl::Evaluations::EvalEnvironment> thisEvalEnvironmentPtr);
 
 
 		public:
@@ -95,7 +95,7 @@ virtual public EvalEnvironment
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<EvalEnvironment> m_thisEvalEnvironmentPtr;
+			std::weak_ptr<ocl::Evaluations::EvalEnvironment> m_thisEvalEnvironmentPtr;
 	};
 }
 #endif /* end of include guard: OCL_EVALUATIONS_EVALENVIRONMENTEVALENVIRONMENTIMPL_HPP */

@@ -32,8 +32,8 @@ namespace fUML::Semantics::Activities
 		protected:
 			friend class fUML::Semantics::Activities::ActivitiesFactoryImpl;
 			ControlTokenImpl();
-			virtual std::shared_ptr<ControlToken> getThisControlTokenPtr() const;
-			virtual void setThisControlTokenPtr(std::weak_ptr<ControlToken> thisControlTokenPtr);
+			virtual std::shared_ptr<fUML::Semantics::Activities::ControlToken> getThisControlTokenPtr() const;
+			virtual void setThisControlTokenPtr(std::weak_ptr<fUML::Semantics::Activities::ControlToken> thisControlTokenPtr);
 
 			//Additional constructors for the containments back reference
 			ControlTokenImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivation> par_holder);
@@ -92,7 +92,7 @@ namespace fUML::Semantics::Activities
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<ControlToken> m_thisControlTokenPtr;
+			std::weak_ptr<fUML::Semantics::Activities::ControlToken> m_thisControlTokenPtr;
 	};
 }
 #endif /* end of include guard: FUML_SEMANTICS_ACTIVITIES_CONTROLTOKENCONTROLTOKENIMPL_HPP */

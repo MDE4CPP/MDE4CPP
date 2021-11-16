@@ -265,11 +265,11 @@ Any FlowFinalNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::l
 }
 
 
-std::shared_ptr<FlowFinalNodeActivation> FlowFinalNodeActivationImpl::getThisFlowFinalNodeActivationPtr() const
+std::shared_ptr<fUML::Semantics::Activities::FlowFinalNodeActivation> FlowFinalNodeActivationImpl::getThisFlowFinalNodeActivationPtr() const
 {
 	return m_thisFlowFinalNodeActivationPtr.lock();
 }
-void FlowFinalNodeActivationImpl::setThisFlowFinalNodeActivationPtr(std::weak_ptr<FlowFinalNodeActivation> thisFlowFinalNodeActivationPtr)
+void FlowFinalNodeActivationImpl::setThisFlowFinalNodeActivationPtr(std::weak_ptr<fUML::Semantics::Activities::FlowFinalNodeActivation> thisFlowFinalNodeActivationPtr)
 {
 	m_thisFlowFinalNodeActivationPtr = thisFlowFinalNodeActivationPtr;
 	setThisControlNodeActivationPtr(thisFlowFinalNodeActivationPtr);

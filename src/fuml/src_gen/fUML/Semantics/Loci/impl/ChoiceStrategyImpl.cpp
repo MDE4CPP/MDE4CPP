@@ -94,14 +94,6 @@ ChoiceStrategyImpl& ChoiceStrategyImpl::operator=(const ChoiceStrategyImpl & obj
 	return *this;
 }
 
-std::shared_ptr<ecore::EObject> ChoiceStrategyImpl::copy() const
-{
-	std::shared_ptr<ChoiceStrategyImpl> element(new ChoiceStrategyImpl());
-	*element =(*this);
-	element->setThisChoiceStrategyPtr(element);
-	return element;
-}
-
 //*********************************
 // Operations
 //*********************************
@@ -275,11 +267,11 @@ Any ChoiceStrategyImpl::eInvoke(int operationID, std::shared_ptr<std::list < std
 }
 
 
-std::shared_ptr<ChoiceStrategy> ChoiceStrategyImpl::getThisChoiceStrategyPtr() const
+std::shared_ptr<fUML::Semantics::Loci::ChoiceStrategy> ChoiceStrategyImpl::getThisChoiceStrategyPtr() const
 {
 	return m_thisChoiceStrategyPtr.lock();
 }
-void ChoiceStrategyImpl::setThisChoiceStrategyPtr(std::weak_ptr<ChoiceStrategy> thisChoiceStrategyPtr)
+void ChoiceStrategyImpl::setThisChoiceStrategyPtr(std::weak_ptr<fUML::Semantics::Loci::ChoiceStrategy> thisChoiceStrategyPtr)
 {
 	m_thisChoiceStrategyPtr = thisChoiceStrategyPtr;
 	setThisSemanticStrategyPtr(thisChoiceStrategyPtr);

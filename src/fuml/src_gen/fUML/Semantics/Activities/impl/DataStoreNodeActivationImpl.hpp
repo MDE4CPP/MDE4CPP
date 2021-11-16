@@ -32,8 +32,8 @@ namespace fUML::Semantics::Activities
 		protected:
 			friend class fUML::Semantics::Activities::ActivitiesFactoryImpl;
 			DataStoreNodeActivationImpl();
-			virtual std::shared_ptr<DataStoreNodeActivation> getThisDataStoreNodeActivationPtr() const;
-			virtual void setThisDataStoreNodeActivationPtr(std::weak_ptr<DataStoreNodeActivation> thisDataStoreNodeActivationPtr);
+			virtual std::shared_ptr<fUML::Semantics::Activities::DataStoreNodeActivation> getThisDataStoreNodeActivationPtr() const;
+			virtual void setThisDataStoreNodeActivationPtr(std::weak_ptr<fUML::Semantics::Activities::DataStoreNodeActivation> thisDataStoreNodeActivationPtr);
 
 			//Additional constructors for the containments back reference
 			DataStoreNodeActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_group);
@@ -91,7 +91,7 @@ namespace fUML::Semantics::Activities
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<DataStoreNodeActivation> m_thisDataStoreNodeActivationPtr;
+			std::weak_ptr<fUML::Semantics::Activities::DataStoreNodeActivation> m_thisDataStoreNodeActivationPtr;
 	};
 }
 #endif /* end of include guard: FUML_SEMANTICS_ACTIVITIES_DATASTORENODEACTIVATIONDATASTORENODEACTIVATIONIMPL_HPP */

@@ -768,11 +768,11 @@ Any NodeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_p
 }
 
 
-std::shared_ptr<Node> NodeImpl::getThisNodePtr() const
+std::shared_ptr<uml::Node> NodeImpl::getThisNodePtr() const
 {
 	return m_thisNodePtr.lock();
 }
-void NodeImpl::setThisNodePtr(std::weak_ptr<Node> thisNodePtr)
+void NodeImpl::setThisNodePtr(std::weak_ptr<uml::Node> thisNodePtr)
 {
 	m_thisNodePtr = thisNodePtr;
 	setThisClassPtr(thisNodePtr);

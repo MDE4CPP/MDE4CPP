@@ -598,11 +598,11 @@ Any ParameterSetImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::
 }
 
 
-std::shared_ptr<ParameterSet> ParameterSetImpl::getThisParameterSetPtr() const
+std::shared_ptr<uml::ParameterSet> ParameterSetImpl::getThisParameterSetPtr() const
 {
 	return m_thisParameterSetPtr.lock();
 }
-void ParameterSetImpl::setThisParameterSetPtr(std::weak_ptr<ParameterSet> thisParameterSetPtr)
+void ParameterSetImpl::setThisParameterSetPtr(std::weak_ptr<uml::ParameterSet> thisParameterSetPtr)
 {
 	m_thisParameterSetPtr = thisParameterSetPtr;
 	setThisNamedElementPtr(thisParameterSetPtr);

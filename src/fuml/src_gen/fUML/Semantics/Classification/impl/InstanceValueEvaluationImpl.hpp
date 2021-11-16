@@ -32,8 +32,8 @@ namespace fUML::Semantics::Classification
 		protected:
 			friend class fUML::Semantics::Classification::ClassificationFactoryImpl;
 			InstanceValueEvaluationImpl();
-			virtual std::shared_ptr<InstanceValueEvaluation> getThisInstanceValueEvaluationPtr() const;
-			virtual void setThisInstanceValueEvaluationPtr(std::weak_ptr<InstanceValueEvaluation> thisInstanceValueEvaluationPtr);
+			virtual std::shared_ptr<fUML::Semantics::Classification::InstanceValueEvaluation> getThisInstanceValueEvaluationPtr() const;
+			virtual void setThisInstanceValueEvaluationPtr(std::weak_ptr<fUML::Semantics::Classification::InstanceValueEvaluation> thisInstanceValueEvaluationPtr);
 
 
 		public:
@@ -88,7 +88,7 @@ namespace fUML::Semantics::Classification
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<InstanceValueEvaluation> m_thisInstanceValueEvaluationPtr;
+			std::weak_ptr<fUML::Semantics::Classification::InstanceValueEvaluation> m_thisInstanceValueEvaluationPtr;
 	};
 }
 #endif /* end of include guard: FUML_SEMANTICS_CLASSIFICATION_INSTANCEVALUEEVALUATIONINSTANCEVALUEEVALUATIONIMPL_HPP */

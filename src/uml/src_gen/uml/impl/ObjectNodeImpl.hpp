@@ -26,14 +26,14 @@ namespace uml
 	{
 		public: 
 			ObjectNodeImpl(const ObjectNodeImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 			ObjectNodeImpl& operator=(ObjectNodeImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;
 			ObjectNodeImpl();
-			virtual std::shared_ptr<ObjectNode> getThisObjectNodePtr() const;
-			virtual void setThisObjectNodePtr(std::weak_ptr<ObjectNode> thisObjectNodePtr);
+			virtual std::shared_ptr<uml::ObjectNode> getThisObjectNodePtr() const;
+			virtual void setThisObjectNodePtr(std::weak_ptr<uml::ObjectNode> thisObjectNodePtr);
 
 			//Additional constructors for the containments back reference
 			ObjectNodeImpl(std::weak_ptr<uml::Activity> par_activity);
@@ -46,7 +46,7 @@ namespace uml
 
 		public:
 			//destructor
-			virtual ~ObjectNodeImpl();
+			virtual ~ObjectNodeImpl() = 0;
 			
 			//*********************************
 			// Operations
@@ -195,7 +195,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<ObjectNode> m_thisObjectNodePtr;
+			std::weak_ptr<uml::ObjectNode> m_thisObjectNodePtr;
 	};
 }
 #endif /* end of include guard: UML_OBJECTNODEOBJECTNODEIMPL_HPP */

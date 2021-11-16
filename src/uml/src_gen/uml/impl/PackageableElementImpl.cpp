@@ -135,14 +135,6 @@ PackageableElementImpl& PackageableElementImpl::operator=(const PackageableEleme
 	return *this;
 }
 
-std::shared_ptr<ecore::EObject> PackageableElementImpl::copy() const
-{
-	std::shared_ptr<PackageableElementImpl> element(new PackageableElementImpl());
-	*element =(*this);
-	element->setThisPackageableElementPtr(element);
-	return element;
-}
-
 //*********************************
 // Operations
 //*********************************
@@ -422,11 +414,11 @@ Any PackageableElementImpl::eInvoke(int operationID, std::shared_ptr<std::list <
 }
 
 
-std::shared_ptr<PackageableElement> PackageableElementImpl::getThisPackageableElementPtr() const
+std::shared_ptr<uml::PackageableElement> PackageableElementImpl::getThisPackageableElementPtr() const
 {
 	return m_thisPackageableElementPtr.lock();
 }
-void PackageableElementImpl::setThisPackageableElementPtr(std::weak_ptr<PackageableElement> thisPackageableElementPtr)
+void PackageableElementImpl::setThisPackageableElementPtr(std::weak_ptr<uml::PackageableElement> thisPackageableElementPtr)
 {
 	m_thisPackageableElementPtr = thisPackageableElementPtr;
 	setThisNamedElementPtr(thisPackageableElementPtr);

@@ -32,8 +32,8 @@ namespace ocl::Values
 		protected:
 			friend class ocl::Values::ValuesFactoryImpl;
 			OclMessageValueImpl();
-			virtual std::shared_ptr<OclMessageValue> getThisOclMessageValuePtr() const;
-			virtual void setThisOclMessageValuePtr(std::weak_ptr<OclMessageValue> thisOclMessageValuePtr);
+			virtual std::shared_ptr<ocl::Values::OclMessageValue> getThisOclMessageValuePtr() const;
+			virtual void setThisOclMessageValuePtr(std::weak_ptr<ocl::Values::OclMessageValue> thisOclMessageValuePtr);
 
 
 		public:
@@ -103,7 +103,7 @@ namespace ocl::Values
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<OclMessageValue> m_thisOclMessageValuePtr;
+			std::weak_ptr<ocl::Values::OclMessageValue> m_thisOclMessageValuePtr;
 	};
 }
 #endif /* end of include guard: OCL_VALUES_OCLMESSAGEVALUEOCLMESSAGEVALUEIMPL_HPP */

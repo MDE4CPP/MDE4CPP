@@ -32,8 +32,8 @@ namespace ocl::Evaluations
 		protected:
 			friend class ocl::Evaluations::EvaluationsFactoryImpl;
 			EvalNameSpaceImpl();
-			virtual std::shared_ptr<EvalNameSpace> getThisEvalNameSpacePtr() const;
-			virtual void setThisEvalNameSpacePtr(std::weak_ptr<EvalNameSpace> thisEvalNameSpacePtr);
+			virtual std::shared_ptr<ocl::Evaluations::EvalNameSpace> getThisEvalNameSpacePtr() const;
+			virtual void setThisEvalNameSpacePtr(std::weak_ptr<ocl::Evaluations::EvalNameSpace> thisEvalNameSpacePtr);
 
 
 		public:
@@ -87,7 +87,7 @@ namespace ocl::Evaluations
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<EvalNameSpace> m_thisEvalNameSpacePtr;
+			std::weak_ptr<ocl::Evaluations::EvalNameSpace> m_thisEvalNameSpacePtr;
 	};
 }
 #endif /* end of include guard: OCL_EVALUATIONS_EVALNAMESPACEEVALNAMESPACEIMPL_HPP */

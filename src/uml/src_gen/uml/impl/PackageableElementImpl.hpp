@@ -26,14 +26,14 @@ namespace uml
 	{
 		public: 
 			PackageableElementImpl(const PackageableElementImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 			PackageableElementImpl& operator=(PackageableElementImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;
 			PackageableElementImpl();
-			virtual std::shared_ptr<PackageableElement> getThisPackageableElementPtr() const;
-			virtual void setThisPackageableElementPtr(std::weak_ptr<PackageableElement> thisPackageableElementPtr);
+			virtual std::shared_ptr<uml::PackageableElement> getThisPackageableElementPtr() const;
+			virtual void setThisPackageableElementPtr(std::weak_ptr<uml::PackageableElement> thisPackageableElementPtr);
 
 			//Additional constructors for the containments back reference
 			PackageableElementImpl(std::weak_ptr<uml::Namespace> par_namespace);
@@ -46,7 +46,7 @@ namespace uml
 
 		public:
 			//destructor
-			virtual ~PackageableElementImpl();
+			virtual ~PackageableElementImpl() = 0;
 			
 			//*********************************
 			// Operations
@@ -122,7 +122,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<PackageableElement> m_thisPackageableElementPtr;
+			std::weak_ptr<uml::PackageableElement> m_thisPackageableElementPtr;
 	};
 }
 #endif /* end of include guard: UML_PACKAGEABLEELEMENTPACKAGEABLEELEMENTIMPL_HPP */

@@ -396,11 +396,11 @@ Any LinkEndDestructionDataImpl::eInvoke(int operationID, std::shared_ptr<std::li
 }
 
 
-std::shared_ptr<LinkEndDestructionData> LinkEndDestructionDataImpl::getThisLinkEndDestructionDataPtr() const
+std::shared_ptr<uml::LinkEndDestructionData> LinkEndDestructionDataImpl::getThisLinkEndDestructionDataPtr() const
 {
 	return m_thisLinkEndDestructionDataPtr.lock();
 }
-void LinkEndDestructionDataImpl::setThisLinkEndDestructionDataPtr(std::weak_ptr<LinkEndDestructionData> thisLinkEndDestructionDataPtr)
+void LinkEndDestructionDataImpl::setThisLinkEndDestructionDataPtr(std::weak_ptr<uml::LinkEndDestructionData> thisLinkEndDestructionDataPtr)
 {
 	m_thisLinkEndDestructionDataPtr = thisLinkEndDestructionDataPtr;
 	setThisLinkEndDataPtr(thisLinkEndDestructionDataPtr);

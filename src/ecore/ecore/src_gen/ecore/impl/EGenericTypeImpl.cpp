@@ -626,11 +626,11 @@ Any EGenericTypeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::
 }
 
 
-std::shared_ptr<EGenericType> EGenericTypeImpl::getThisEGenericTypePtr() const
+std::shared_ptr<ecore::EGenericType> EGenericTypeImpl::getThisEGenericTypePtr() const
 {
 	return m_thisEGenericTypePtr.lock();
 }
-void EGenericTypeImpl::setThisEGenericTypePtr(std::weak_ptr<EGenericType> thisEGenericTypePtr)
+void EGenericTypeImpl::setThisEGenericTypePtr(std::weak_ptr<ecore::EGenericType> thisEGenericTypePtr)
 {
 	m_thisEGenericTypePtr = thisEGenericTypePtr;
 }

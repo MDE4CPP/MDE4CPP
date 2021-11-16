@@ -31,11 +31,11 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Values/ValuesFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
+#include "fUML/Semantics/Values/ValuesFactory.hpp"
 #include "uml/umlFactory.hpp"
-#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
+#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
 
 #include "ocl/Evaluations/EvalEnvironment.hpp"
@@ -418,11 +418,11 @@ Any LetExpEvalImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sh
 }
 
 
-std::shared_ptr<LetExpEval> LetExpEvalImpl::getThisLetExpEvalPtr() const
+std::shared_ptr<ocl::Evaluations::LetExpEval> LetExpEvalImpl::getThisLetExpEvalPtr() const
 {
 	return m_thisLetExpEvalPtr.lock();
 }
-void LetExpEvalImpl::setThisLetExpEvalPtr(std::weak_ptr<LetExpEval> thisLetExpEvalPtr)
+void LetExpEvalImpl::setThisLetExpEvalPtr(std::weak_ptr<ocl::Evaluations::LetExpEval> thisLetExpEvalPtr)
 {
 	m_thisLetExpEvalPtr = thisLetExpEvalPtr;
 	setThisOclExpEvalPtr(thisLetExpEvalPtr);

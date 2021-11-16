@@ -33,8 +33,8 @@ virtual public EGenericType
 		protected:
 			friend class ecoreFactoryImpl;
 			EGenericTypeImpl();
-			virtual std::shared_ptr<EGenericType> getThisEGenericTypePtr() const;
-			virtual void setThisEGenericTypePtr(std::weak_ptr<EGenericType> thisEGenericTypePtr);
+			virtual std::shared_ptr<ecore::EGenericType> getThisEGenericTypePtr() const;
+			virtual void setThisEGenericTypePtr(std::weak_ptr<ecore::EGenericType> thisEGenericTypePtr);
 
 
 		public:
@@ -100,7 +100,7 @@ virtual public EGenericType
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<EGenericType> m_thisEGenericTypePtr;
+			std::weak_ptr<ecore::EGenericType> m_thisEGenericTypePtr;
 	};
 }
 #endif /* end of include guard: ECORE_EGENERICTYPEEGENERICTYPEIMPL_HPP */

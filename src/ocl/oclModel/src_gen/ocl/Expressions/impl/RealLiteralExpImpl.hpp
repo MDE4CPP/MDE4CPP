@@ -32,8 +32,8 @@ namespace ocl::Expressions
 		protected:
 			friend class ocl::Expressions::ExpressionsFactoryImpl;
 			RealLiteralExpImpl();
-			virtual std::shared_ptr<RealLiteralExp> getThisRealLiteralExpPtr() const;
-			virtual void setThisRealLiteralExpPtr(std::weak_ptr<RealLiteralExp> thisRealLiteralExpPtr);
+			virtual std::shared_ptr<ocl::Expressions::RealLiteralExp> getThisRealLiteralExpPtr() const;
+			virtual void setThisRealLiteralExpPtr(std::weak_ptr<ocl::Expressions::RealLiteralExp> thisRealLiteralExpPtr);
 
 			//Additional constructors for the containments back reference
 			RealLiteralExpImpl(std::weak_ptr<ocl::Expressions::CallExp> par_appliedElement);
@@ -108,7 +108,7 @@ namespace ocl::Expressions
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<RealLiteralExp> m_thisRealLiteralExpPtr;
+			std::weak_ptr<ocl::Expressions::RealLiteralExp> m_thisRealLiteralExpPtr;
 	};
 }
 #endif /* end of include guard: OCL_EXPRESSIONS_REALLITERALEXPREALLITERALEXPIMPL_HPP */

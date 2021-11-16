@@ -9,7 +9,7 @@
 
 namespace uml 
 {
-	enum TransitionKind {
+	enum class TransitionKind {
 		
 		EXTERNAL = 2
 ,

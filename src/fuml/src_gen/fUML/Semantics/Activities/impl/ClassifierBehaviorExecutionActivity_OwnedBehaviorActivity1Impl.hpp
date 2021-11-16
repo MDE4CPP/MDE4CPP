@@ -34,8 +34,8 @@ virtual public ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1
 		protected:
 			friend class fUML::Semantics::Activities::ActivitiesFactoryImpl;
 			ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Impl();
-			virtual std::shared_ptr<ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1> getThisClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Ptr() const;
-			virtual void setThisClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Ptr(std::weak_ptr<ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1> thisClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Ptr);
+			virtual std::shared_ptr<fUML::Semantics::Activities::ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1> getThisClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Ptr() const;
+			virtual void setThisClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Ptr(std::weak_ptr<fUML::Semantics::Activities::ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1> thisClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Ptr);
 
 
 		public:
@@ -89,7 +89,7 @@ virtual public ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1> m_thisClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Ptr;
+			std::weak_ptr<fUML::Semantics::Activities::ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1> m_thisClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Ptr;
 	};
 }
 #endif /* end of include guard: FUML_SEMANTICS_ACTIVITIES_CLASSIFIERBEHAVIOREXECUTIONACTIVITY_OWNEDBEHAVIORACTIVITY1CLASSIFIERBEHAVIOREXECUTIONACTIVITY_OWNEDBEHAVIORACTIVITY1IMPL_HPP */

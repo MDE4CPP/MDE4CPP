@@ -31,8 +31,8 @@ namespace uml
 		protected:
 			friend class umlFactoryImpl;
 			ConnectorEndImpl();
-			virtual std::shared_ptr<ConnectorEnd> getThisConnectorEndPtr() const;
-			virtual void setThisConnectorEndPtr(std::weak_ptr<ConnectorEnd> thisConnectorEndPtr);
+			virtual std::shared_ptr<uml::ConnectorEnd> getThisConnectorEndPtr() const;
+			virtual void setThisConnectorEndPtr(std::weak_ptr<uml::ConnectorEnd> thisConnectorEndPtr);
 
 			//Additional constructors for the containments back reference
 			ConnectorEndImpl(std::weak_ptr<uml::Connector> par_connector);
@@ -154,7 +154,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<ConnectorEnd> m_thisConnectorEndPtr;
+			std::weak_ptr<uml::ConnectorEnd> m_thisConnectorEndPtr;
 	};
 }
 #endif /* end of include guard: UML_CONNECTORENDCONNECTORENDIMPL_HPP */

@@ -285,11 +285,11 @@ Any ReadExtentActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std
 }
 
 
-std::shared_ptr<ReadExtentActionActivation> ReadExtentActionActivationImpl::getThisReadExtentActionActivationPtr() const
+std::shared_ptr<fUML::Semantics::Actions::ReadExtentActionActivation> ReadExtentActionActivationImpl::getThisReadExtentActionActivationPtr() const
 {
 	return m_thisReadExtentActionActivationPtr.lock();
 }
-void ReadExtentActionActivationImpl::setThisReadExtentActionActivationPtr(std::weak_ptr<ReadExtentActionActivation> thisReadExtentActionActivationPtr)
+void ReadExtentActionActivationImpl::setThisReadExtentActionActivationPtr(std::weak_ptr<fUML::Semantics::Actions::ReadExtentActionActivation> thisReadExtentActionActivationPtr)
 {
 	m_thisReadExtentActionActivationPtr = thisReadExtentActionActivationPtr;
 	setThisActionActivationPtr(thisReadExtentActionActivationPtr);

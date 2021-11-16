@@ -7,15 +7,15 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
-#include "ecore/EAnnotation.hpp"
-#include "ecore/EReference.hpp"
-#include "ecore/EClass.hpp"
-#include "ecore/EDataType.hpp"
-#include "ecore/EGenericType.hpp"
-#include "ecore/EAttribute.hpp"
-#include "ecore/EParameter.hpp"
-#include "ecore/EOperation.hpp"
 #include "ecore/EStringToStringMapEntry.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
+#include "ecore/EGenericType.hpp"
+#include "ecore/EOperation.hpp"
+#include "ecore/EClass.hpp"
+#include "ecore/EParameter.hpp"
+#include "ecore/EDataType.hpp"
 
 //depending model packages
 #include "ecore/ecorePackage.hpp"
@@ -83,6 +83,7 @@ void EvaluationsPackageImpl::createAssociationClassCallExpEvalContent(std::share
 	
 	m_associationClassCallExpEval_Attribute_referredAssociationClass = factory->createEReference_as_eStructuralFeatures_in_EClass(m_associationClassCallExpEval_Class, ASSOCIATIONCLASSCALLEXPEVAL_ATTRIBUTE_REFERREDASSOCIATIONCLASS);
 	
+	
 }
 
 void EvaluationsPackageImpl::createAssociationEndCallExpEvalContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
@@ -91,6 +92,7 @@ void EvaluationsPackageImpl::createAssociationEndCallExpEvalContent(std::shared_
 	
 	m_associationEndCallExpEval_Attribute_referredAssociationEnd = factory->createEReference_as_eStructuralFeatures_in_EClass(m_associationEndCallExpEval_Class, ASSOCIATIONENDCALLEXPEVAL_ATTRIBUTE_REFERREDASSOCIATIONEND);
 	
+	
 }
 
 void EvaluationsPackageImpl::createAttributeCallExpEvalContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
@@ -98,6 +100,7 @@ void EvaluationsPackageImpl::createAttributeCallExpEvalContent(std::shared_ptr<e
 	m_attributeCallExpEval_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, ATTRIBUTECALLEXPEVAL_CLASS);
 	
 	m_attributeCallExpEval_Attribute_referredAttribute = factory->createEReference_as_eStructuralFeatures_in_EClass(m_attributeCallExpEval_Class, ATTRIBUTECALLEXPEVAL_ATTRIBUTE_REFERREDATTRIBUTE);
+	
 	
 }
 
@@ -115,6 +118,7 @@ void EvaluationsPackageImpl::createCollectionItemEvalContent(std::shared_ptr<eco
 	
 	m_collectionItemEval_Attribute_item = factory->createEReference_as_eStructuralFeatures_in_EClass(m_collectionItemEval_Class, COLLECTIONITEMEVAL_ATTRIBUTE_ITEM);
 	
+	
 }
 
 void EvaluationsPackageImpl::createCollectionLiteralExpEvalContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
@@ -122,6 +126,7 @@ void EvaluationsPackageImpl::createCollectionLiteralExpEvalContent(std::shared_p
 	m_collectionLiteralExpEval_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, COLLECTIONLITERALEXPEVAL_CLASS);
 	
 	m_collectionLiteralExpEval_Attribute_parts = factory->createEReference_as_eStructuralFeatures_in_EClass(m_collectionLiteralExpEval_Class, COLLECTIONLITERALEXPEVAL_ATTRIBUTE_PARTS);
+	
 	
 }
 
@@ -131,13 +136,16 @@ void EvaluationsPackageImpl::createCollectionLiteralPartEvalContent(std::shared_
 	
 	m_collectionLiteralPartEval_Attribute_element = factory->createEReference_as_eStructuralFeatures_in_EClass(m_collectionLiteralPartEval_Class, COLLECTIONLITERALPARTEVAL_ATTRIBUTE_ELEMENT);
 	
+	
 }
 
 void EvaluationsPackageImpl::createCollectionRangeEvalContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_collectionRangeEval_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, COLLECTIONRANGEEVAL_CLASS);
 	
-	m_collectionRangeEval_Attribute_first = factory->createEReference_as_eStructuralFeatures_in_EClass(m_collectionRangeEval_Class, COLLECTIONRANGEEVAL_ATTRIBUTE_FIRST);m_collectionRangeEval_Attribute_last = factory->createEReference_as_eStructuralFeatures_in_EClass(m_collectionRangeEval_Class, COLLECTIONRANGEEVAL_ATTRIBUTE_LAST);
+	m_collectionRangeEval_Attribute_first = factory->createEReference_as_eStructuralFeatures_in_EClass(m_collectionRangeEval_Class, COLLECTIONRANGEEVAL_ATTRIBUTE_FIRST);
+	m_collectionRangeEval_Attribute_last = factory->createEReference_as_eStructuralFeatures_in_EClass(m_collectionRangeEval_Class, COLLECTIONRANGEEVAL_ATTRIBUTE_LAST);
+	
 	
 }
 
@@ -154,6 +162,7 @@ void EvaluationsPackageImpl::createEvalEnvironmentContent(std::shared_ptr<ecore:
 	m_evalEnvironment_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, EVALENVIRONMENT_CLASS);
 	
 	m_evalEnvironment_Attribute_bindings = factory->createEReference_as_eStructuralFeatures_in_EClass(m_evalEnvironment_Class, EVALENVIRONMENT_ATTRIBUTE_BINDINGS);
+	
 	m_evalEnvironment_Operation_add_NameValueBinding = factory->createEOperation_as_eOperations_in_EClass(m_evalEnvironment_Class, EVALENVIRONMENT_OPERATION_ADD_NAMEVALUEBINDING);
 	m_evalEnvironment_Operation_addAll_NameValueBinding = factory->createEOperation_as_eOperations_in_EClass(m_evalEnvironment_Class, EVALENVIRONMENT_OPERATION_ADDALL_NAMEVALUEBINDING);
 	m_evalEnvironment_Operation_find_String = factory->createEOperation_as_eOperations_in_EClass(m_evalEnvironment_Class, EVALENVIRONMENT_OPERATION_FIND_STRING);
@@ -174,7 +183,9 @@ void EvaluationsPackageImpl::createExpressionInOclEvalContent(std::shared_ptr<ec
 {
 	m_expressionInOclEval_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, EXPRESSIONINOCLEVAL_CLASS);
 	
-	m_expressionInOclEval_Attribute_context = factory->createEReference_as_eStructuralFeatures_in_EClass(m_expressionInOclEval_Class, EXPRESSIONINOCLEVAL_ATTRIBUTE_CONTEXT);m_expressionInOclEval_Attribute_environment = factory->createEReference_as_eStructuralFeatures_in_EClass(m_expressionInOclEval_Class, EXPRESSIONINOCLEVAL_ATTRIBUTE_ENVIRONMENT);
+	m_expressionInOclEval_Attribute_context = factory->createEReference_as_eStructuralFeatures_in_EClass(m_expressionInOclEval_Class, EXPRESSIONINOCLEVAL_ATTRIBUTE_CONTEXT);
+	m_expressionInOclEval_Attribute_environment = factory->createEReference_as_eStructuralFeatures_in_EClass(m_expressionInOclEval_Class, EXPRESSIONINOCLEVAL_ATTRIBUTE_ENVIRONMENT);
+	
 	
 }
 
@@ -182,7 +193,10 @@ void EvaluationsPackageImpl::createIfExpEvalContent(std::shared_ptr<ecore::EPack
 {
 	m_ifExpEval_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, IFEXPEVAL_CLASS);
 	
-	m_ifExpEval_Attribute_condition = factory->createEReference_as_eStructuralFeatures_in_EClass(m_ifExpEval_Class, IFEXPEVAL_ATTRIBUTE_CONDITION);m_ifExpEval_Attribute_elseExpression = factory->createEReference_as_eStructuralFeatures_in_EClass(m_ifExpEval_Class, IFEXPEVAL_ATTRIBUTE_ELSEEXPRESSION);m_ifExpEval_Attribute_thenExpression = factory->createEReference_as_eStructuralFeatures_in_EClass(m_ifExpEval_Class, IFEXPEVAL_ATTRIBUTE_THENEXPRESSION);
+	m_ifExpEval_Attribute_condition = factory->createEReference_as_eStructuralFeatures_in_EClass(m_ifExpEval_Class, IFEXPEVAL_ATTRIBUTE_CONDITION);
+	m_ifExpEval_Attribute_elseExpression = factory->createEReference_as_eStructuralFeatures_in_EClass(m_ifExpEval_Class, IFEXPEVAL_ATTRIBUTE_ELSEEXPRESSION);
+	m_ifExpEval_Attribute_thenExpression = factory->createEReference_as_eStructuralFeatures_in_EClass(m_ifExpEval_Class, IFEXPEVAL_ATTRIBUTE_THENEXPRESSION);
+	
 	
 }
 
@@ -200,6 +214,7 @@ void EvaluationsPackageImpl::createIterateExpEvalContent(std::shared_ptr<ecore::
 	
 	m_iterateExpEval_Attribute_result = factory->createEReference_as_eStructuralFeatures_in_EClass(m_iterateExpEval_Class, ITERATEEXPEVAL_ATTRIBUTE_RESULT);
 	
+	
 }
 
 void EvaluationsPackageImpl::createIteratorExpEvalContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
@@ -214,7 +229,10 @@ void EvaluationsPackageImpl::createLetExpEvalContent(std::shared_ptr<ecore::EPac
 {
 	m_letExpEval_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, LETEXPEVAL_CLASS);
 	
-	m_letExpEval_Attribute_in = factory->createEReference_as_eStructuralFeatures_in_EClass(m_letExpEval_Class, LETEXPEVAL_ATTRIBUTE_IN);m_letExpEval_Attribute_initExpression = factory->createEReference_as_eStructuralFeatures_in_EClass(m_letExpEval_Class, LETEXPEVAL_ATTRIBUTE_INITEXPRESSION);m_letExpEval_Attribute_variable = factory->createEReference_as_eStructuralFeatures_in_EClass(m_letExpEval_Class, LETEXPEVAL_ATTRIBUTE_VARIABLE);
+	m_letExpEval_Attribute_in = factory->createEReference_as_eStructuralFeatures_in_EClass(m_letExpEval_Class, LETEXPEVAL_ATTRIBUTE_IN);
+	m_letExpEval_Attribute_initExpression = factory->createEReference_as_eStructuralFeatures_in_EClass(m_letExpEval_Class, LETEXPEVAL_ATTRIBUTE_INITEXPRESSION);
+	m_letExpEval_Attribute_variable = factory->createEReference_as_eStructuralFeatures_in_EClass(m_letExpEval_Class, LETEXPEVAL_ATTRIBUTE_VARIABLE);
+	
 	
 }
 
@@ -230,7 +248,9 @@ void EvaluationsPackageImpl::createLoopExpEvalContent(std::shared_ptr<ecore::EPa
 {
 	m_loopExpEval_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, LOOPEXPEVAL_CLASS);
 	
-	m_loopExpEval_Attribute_bodyEvals = factory->createEReference_as_eStructuralFeatures_in_EClass(m_loopExpEval_Class, LOOPEXPEVAL_ATTRIBUTE_BODYEVALS);m_loopExpEval_Attribute_iterators = factory->createEReference_as_eStructuralFeatures_in_EClass(m_loopExpEval_Class, LOOPEXPEVAL_ATTRIBUTE_ITERATORS);
+	m_loopExpEval_Attribute_bodyEvals = factory->createEReference_as_eStructuralFeatures_in_EClass(m_loopExpEval_Class, LOOPEXPEVAL_ATTRIBUTE_BODYEVALS);
+	m_loopExpEval_Attribute_iterators = factory->createEReference_as_eStructuralFeatures_in_EClass(m_loopExpEval_Class, LOOPEXPEVAL_ATTRIBUTE_ITERATORS);
+	
 	
 }
 
@@ -247,7 +267,9 @@ void EvaluationsPackageImpl::createNavigationCallExpEvalContent(std::shared_ptr<
 {
 	m_navigationCallExpEval_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, NAVIGATIONCALLEXPEVAL_CLASS);
 	
-	m_navigationCallExpEval_Attribute_navigationSource = factory->createEReference_as_eStructuralFeatures_in_EClass(m_navigationCallExpEval_Class, NAVIGATIONCALLEXPEVAL_ATTRIBUTE_NAVIGATIONSOURCE);m_navigationCallExpEval_Attribute_qualifiers = factory->createEReference_as_eStructuralFeatures_in_EClass(m_navigationCallExpEval_Class, NAVIGATIONCALLEXPEVAL_ATTRIBUTE_QUALIFIERS);
+	m_navigationCallExpEval_Attribute_navigationSource = factory->createEReference_as_eStructuralFeatures_in_EClass(m_navigationCallExpEval_Class, NAVIGATIONCALLEXPEVAL_ATTRIBUTE_NAVIGATIONSOURCE);
+	m_navigationCallExpEval_Attribute_qualifiers = factory->createEReference_as_eStructuralFeatures_in_EClass(m_navigationCallExpEval_Class, NAVIGATIONCALLEXPEVAL_ATTRIBUTE_QUALIFIERS);
+	
 	
 }
 
@@ -263,7 +285,11 @@ void EvaluationsPackageImpl::createOclExpEvalContent(std::shared_ptr<ecore::EPac
 {
 	m_oclExpEval_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, OCLEXPEVAL_CLASS);
 	
-	m_oclExpEval_Attribute_beforeEnvironment = factory->createEReference_as_eStructuralFeatures_in_EClass(m_oclExpEval_Class, OCLEXPEVAL_ATTRIBUTE_BEFOREENVIRONMENT);m_oclExpEval_Attribute_environment = factory->createEReference_as_eStructuralFeatures_in_EClass(m_oclExpEval_Class, OCLEXPEVAL_ATTRIBUTE_ENVIRONMENT);m_oclExpEval_Attribute_model = factory->createEReference_as_eStructuralFeatures_in_EClass(m_oclExpEval_Class, OCLEXPEVAL_ATTRIBUTE_MODEL);m_oclExpEval_Attribute_resultValue = factory->createEReference_as_eStructuralFeatures_in_EClass(m_oclExpEval_Class, OCLEXPEVAL_ATTRIBUTE_RESULTVALUE);
+	m_oclExpEval_Attribute_beforeEnvironment = factory->createEReference_as_eStructuralFeatures_in_EClass(m_oclExpEval_Class, OCLEXPEVAL_ATTRIBUTE_BEFOREENVIRONMENT);
+	m_oclExpEval_Attribute_environment = factory->createEReference_as_eStructuralFeatures_in_EClass(m_oclExpEval_Class, OCLEXPEVAL_ATTRIBUTE_ENVIRONMENT);
+	m_oclExpEval_Attribute_model = factory->createEReference_as_eStructuralFeatures_in_EClass(m_oclExpEval_Class, OCLEXPEVAL_ATTRIBUTE_MODEL);
+	m_oclExpEval_Attribute_resultValue = factory->createEReference_as_eStructuralFeatures_in_EClass(m_oclExpEval_Class, OCLEXPEVAL_ATTRIBUTE_RESULTVALUE);
+	
 	
 }
 
@@ -271,7 +297,10 @@ void EvaluationsPackageImpl::createOclMessageArgEvalContent(std::shared_ptr<ecor
 {
 	m_oclMessageArgEval_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, OCLMESSAGEARGEVAL_CLASS);
 	
-	m_oclMessageArgEval_Attribute_expression = factory->createEReference_as_eStructuralFeatures_in_EClass(m_oclMessageArgEval_Class, OCLMESSAGEARGEVAL_ATTRIBUTE_EXPRESSION);m_oclMessageArgEval_Attribute_unspecified = factory->createEReference_as_eStructuralFeatures_in_EClass(m_oclMessageArgEval_Class, OCLMESSAGEARGEVAL_ATTRIBUTE_UNSPECIFIED);m_oclMessageArgEval_Attribute_variable = factory->createEReference_as_eStructuralFeatures_in_EClass(m_oclMessageArgEval_Class, OCLMESSAGEARGEVAL_ATTRIBUTE_VARIABLE);
+	m_oclMessageArgEval_Attribute_expression = factory->createEReference_as_eStructuralFeatures_in_EClass(m_oclMessageArgEval_Class, OCLMESSAGEARGEVAL_ATTRIBUTE_EXPRESSION);
+	m_oclMessageArgEval_Attribute_unspecified = factory->createEReference_as_eStructuralFeatures_in_EClass(m_oclMessageArgEval_Class, OCLMESSAGEARGEVAL_ATTRIBUTE_UNSPECIFIED);
+	m_oclMessageArgEval_Attribute_variable = factory->createEReference_as_eStructuralFeatures_in_EClass(m_oclMessageArgEval_Class, OCLMESSAGEARGEVAL_ATTRIBUTE_VARIABLE);
+	
 	
 }
 
@@ -279,7 +308,10 @@ void EvaluationsPackageImpl::createOclMessageExpEvalContent(std::shared_ptr<ecor
 {
 	m_oclMessageExpEval_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, OCLMESSAGEEXPEVAL_CLASS);
 	m_oclMessageExpEval_Attribute_name = factory->createEAttribute_as_eStructuralFeatures_in_EClass(m_oclMessageExpEval_Class, OCLMESSAGEEXPEVAL_ATTRIBUTE_NAME);
-	m_oclMessageExpEval_Attribute_arguments = factory->createEReference_as_eStructuralFeatures_in_EClass(m_oclMessageExpEval_Class, OCLMESSAGEEXPEVAL_ATTRIBUTE_ARGUMENTS);m_oclMessageExpEval_Attribute_target = factory->createEReference_as_eStructuralFeatures_in_EClass(m_oclMessageExpEval_Class, OCLMESSAGEEXPEVAL_ATTRIBUTE_TARGET);
+	
+	m_oclMessageExpEval_Attribute_arguments = factory->createEReference_as_eStructuralFeatures_in_EClass(m_oclMessageExpEval_Class, OCLMESSAGEEXPEVAL_ATTRIBUTE_ARGUMENTS);
+	m_oclMessageExpEval_Attribute_target = factory->createEReference_as_eStructuralFeatures_in_EClass(m_oclMessageExpEval_Class, OCLMESSAGEEXPEVAL_ATTRIBUTE_TARGET);
+	
 	
 }
 
@@ -287,7 +319,9 @@ void EvaluationsPackageImpl::createOperationCallExpEvalContent(std::shared_ptr<e
 {
 	m_operationCallExpEval_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, OPERATIONCALLEXPEVAL_CLASS);
 	
-	m_operationCallExpEval_Attribute_arguments = factory->createEReference_as_eStructuralFeatures_in_EClass(m_operationCallExpEval_Class, OPERATIONCALLEXPEVAL_ATTRIBUTE_ARGUMENTS);m_operationCallExpEval_Attribute_referredOperation = factory->createEReference_as_eStructuralFeatures_in_EClass(m_operationCallExpEval_Class, OPERATIONCALLEXPEVAL_ATTRIBUTE_REFERREDOPERATION);
+	m_operationCallExpEval_Attribute_arguments = factory->createEReference_as_eStructuralFeatures_in_EClass(m_operationCallExpEval_Class, OPERATIONCALLEXPEVAL_ATTRIBUTE_ARGUMENTS);
+	m_operationCallExpEval_Attribute_referredOperation = factory->createEReference_as_eStructuralFeatures_in_EClass(m_operationCallExpEval_Class, OPERATIONCALLEXPEVAL_ATTRIBUTE_REFERREDOPERATION);
+	
 	
 }
 
@@ -304,6 +338,7 @@ void EvaluationsPackageImpl::createPropertyCallExpEvalContent(std::shared_ptr<ec
 	m_propertyCallExpEval_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, PROPERTYCALLEXPEVAL_CLASS);
 	
 	m_propertyCallExpEval_Attribute_source = factory->createEReference_as_eStructuralFeatures_in_EClass(m_propertyCallExpEval_Class, PROPERTYCALLEXPEVAL_ATTRIBUTE_SOURCE);
+	
 	
 }
 
@@ -328,6 +363,7 @@ void EvaluationsPackageImpl::createTupleLiteralExpEvalContent(std::shared_ptr<ec
 	m_tupleLiteralExpEval_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, TUPLELITERALEXPEVAL_CLASS);
 	
 	m_tupleLiteralExpEval_Attribute_tuplePart = factory->createEReference_as_eStructuralFeatures_in_EClass(m_tupleLiteralExpEval_Class, TUPLELITERALEXPEVAL_ATTRIBUTE_TUPLEPART);
+	
 	
 }
 
@@ -359,7 +395,9 @@ void EvaluationsPackageImpl::createVariableDeclEvalContent(std::shared_ptr<ecore
 {
 	m_variableDeclEval_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, VARIABLEDECLEVAL_CLASS);
 	
-	m_variableDeclEval_Attribute_initExp = factory->createEReference_as_eStructuralFeatures_in_EClass(m_variableDeclEval_Class, VARIABLEDECLEVAL_ATTRIBUTE_INITEXP);m_variableDeclEval_Attribute_name = factory->createEReference_as_eStructuralFeatures_in_EClass(m_variableDeclEval_Class, VARIABLEDECLEVAL_ATTRIBUTE_NAME);
+	m_variableDeclEval_Attribute_initExp = factory->createEReference_as_eStructuralFeatures_in_EClass(m_variableDeclEval_Class, VARIABLEDECLEVAL_ATTRIBUTE_INITEXP);
+	m_variableDeclEval_Attribute_name = factory->createEReference_as_eStructuralFeatures_in_EClass(m_variableDeclEval_Class, VARIABLEDECLEVAL_ATTRIBUTE_NAME);
+	
 	
 }
 
@@ -368,6 +406,7 @@ void EvaluationsPackageImpl::createVariableExpEvalContent(std::shared_ptr<ecore:
 	m_variableExpEval_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, VARIABLEEXPEVAL_CLASS);
 	
 	m_variableExpEval_Attribute_referredVariable = factory->createEReference_as_eStructuralFeatures_in_EClass(m_variableExpEval_Class, VARIABLEEXPEVAL_ATTRIBUTE_REFERREDVARIABLE);
+	
 	
 }
 

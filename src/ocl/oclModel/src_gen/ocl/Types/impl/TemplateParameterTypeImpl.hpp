@@ -32,8 +32,8 @@ namespace ocl::Types
 		protected:
 			friend class ocl::Types::TypesFactoryImpl;
 			TemplateParameterTypeImpl();
-			virtual std::shared_ptr<TemplateParameterType> getThisTemplateParameterTypePtr() const;
-			virtual void setThisTemplateParameterTypePtr(std::weak_ptr<TemplateParameterType> thisTemplateParameterTypePtr);
+			virtual std::shared_ptr<ocl::Types::TemplateParameterType> getThisTemplateParameterTypePtr() const;
+			virtual void setThisTemplateParameterTypePtr(std::weak_ptr<ocl::Types::TemplateParameterType> thisTemplateParameterTypePtr);
 
 			//Additional constructors for the containments back reference
 			TemplateParameterTypeImpl(std::weak_ptr<ecore::EPackage> par_ePackage);
@@ -91,7 +91,7 @@ namespace ocl::Types
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<TemplateParameterType> m_thisTemplateParameterTypePtr;
+			std::weak_ptr<ocl::Types::TemplateParameterType> m_thisTemplateParameterTypePtr;
 	};
 }
 #endif /* end of include guard: OCL_TYPES_TEMPLATEPARAMETERTYPETEMPLATEPARAMETERTYPEIMPL_HPP */

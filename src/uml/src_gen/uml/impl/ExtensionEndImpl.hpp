@@ -31,8 +31,8 @@ namespace uml
 		protected:
 			friend class umlFactoryImpl;
 			ExtensionEndImpl();
-			virtual std::shared_ptr<ExtensionEnd> getThisExtensionEndPtr() const;
-			virtual void setThisExtensionEndPtr(std::weak_ptr<ExtensionEnd> thisExtensionEndPtr);
+			virtual std::shared_ptr<uml::ExtensionEnd> getThisExtensionEndPtr() const;
+			virtual void setThisExtensionEndPtr(std::weak_ptr<uml::ExtensionEnd> thisExtensionEndPtr);
 
 			//Additional constructors for the containments back reference
 			ExtensionEndImpl(std::weak_ptr<uml::Property> par_associationEnd);
@@ -152,7 +152,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<ExtensionEnd> m_thisExtensionEndPtr;
+			std::weak_ptr<uml::ExtensionEnd> m_thisExtensionEndPtr;
 	};
 }
 #endif /* end of include guard: UML_EXTENSIONENDEXTENSIONENDIMPL_HPP */

@@ -25,14 +25,14 @@ namespace uml
 	{
 		public: 
 			EventImpl(const EventImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 			EventImpl& operator=(EventImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;
 			EventImpl();
-			virtual std::shared_ptr<Event> getThisEventPtr() const;
-			virtual void setThisEventPtr(std::weak_ptr<Event> thisEventPtr);
+			virtual std::shared_ptr<uml::Event> getThisEventPtr() const;
+			virtual void setThisEventPtr(std::weak_ptr<uml::Event> thisEventPtr);
 
 			//Additional constructors for the containments back reference
 			EventImpl(std::weak_ptr<uml::Namespace> par_namespace);
@@ -45,7 +45,7 @@ namespace uml
 
 		public:
 			//destructor
-			virtual ~EventImpl();
+			virtual ~EventImpl() = 0;
 			
 			//*********************************
 			// Operations
@@ -113,7 +113,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<Event> m_thisEventPtr;
+			std::weak_ptr<uml::Event> m_thisEventPtr;
 	};
 }
 #endif /* end of include guard: UML_EVENTEVENTIMPL_HPP */

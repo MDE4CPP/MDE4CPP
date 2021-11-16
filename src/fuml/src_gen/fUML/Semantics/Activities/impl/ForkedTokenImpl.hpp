@@ -32,8 +32,8 @@ namespace fUML::Semantics::Activities
 		protected:
 			friend class fUML::Semantics::Activities::ActivitiesFactoryImpl;
 			ForkedTokenImpl();
-			virtual std::shared_ptr<ForkedToken> getThisForkedTokenPtr() const;
-			virtual void setThisForkedTokenPtr(std::weak_ptr<ForkedToken> thisForkedTokenPtr);
+			virtual std::shared_ptr<fUML::Semantics::Activities::ForkedToken> getThisForkedTokenPtr() const;
+			virtual void setThisForkedTokenPtr(std::weak_ptr<fUML::Semantics::Activities::ForkedToken> thisForkedTokenPtr);
 
 			//Additional constructors for the containments back reference
 			ForkedTokenImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivation> par_holder);
@@ -100,7 +100,7 @@ namespace fUML::Semantics::Activities
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<ForkedToken> m_thisForkedTokenPtr;
+			std::weak_ptr<fUML::Semantics::Activities::ForkedToken> m_thisForkedTokenPtr;
 	};
 }
 #endif /* end of include guard: FUML_SEMANTICS_ACTIVITIES_FORKEDTOKENFORKEDTOKENIMPL_HPP */

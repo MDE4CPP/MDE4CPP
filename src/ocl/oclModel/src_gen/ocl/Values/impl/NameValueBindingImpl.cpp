@@ -37,8 +37,8 @@
 
 //Factories an Package includes
 #include "ocl/oclPackage.hpp"
-#include "ocl/Values/ValuesPackage.hpp"
 #include "fUML/Semantics/Values/ValuesPackage.hpp"
+#include "ocl/Values/ValuesPackage.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -338,11 +338,11 @@ Any NameValueBindingImpl::eInvoke(int operationID, std::shared_ptr<std::list < s
 }
 
 
-std::shared_ptr<NameValueBinding> NameValueBindingImpl::getThisNameValueBindingPtr() const
+std::shared_ptr<ocl::Values::NameValueBinding> NameValueBindingImpl::getThisNameValueBindingPtr() const
 {
 	return m_thisNameValueBindingPtr.lock();
 }
-void NameValueBindingImpl::setThisNameValueBindingPtr(std::weak_ptr<NameValueBinding> thisNameValueBindingPtr)
+void NameValueBindingImpl::setThisNameValueBindingPtr(std::weak_ptr<ocl::Values::NameValueBinding> thisNameValueBindingPtr)
 {
 	m_thisNameValueBindingPtr = thisNameValueBindingPtr;
 }

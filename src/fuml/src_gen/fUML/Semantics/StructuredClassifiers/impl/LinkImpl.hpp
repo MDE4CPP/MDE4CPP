@@ -32,8 +32,8 @@ namespace fUML::Semantics::StructuredClassifiers
 		protected:
 			friend class fUML::Semantics::StructuredClassifiers::StructuredClassifiersFactoryImpl;
 			LinkImpl();
-			virtual std::shared_ptr<Link> getThisLinkPtr() const;
-			virtual void setThisLinkPtr(std::weak_ptr<Link> thisLinkPtr);
+			virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::Link> getThisLinkPtr() const;
+			virtual void setThisLinkPtr(std::weak_ptr<fUML::Semantics::StructuredClassifiers::Link> thisLinkPtr);
 
 
 		public:
@@ -48,6 +48,7 @@ namespace fUML::Semantics::StructuredClassifiers
 			virtual std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue> > getOtherFeatureValues(std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::ExtensionalValue>> extent,std::shared_ptr<uml::Property> end) ;
 			virtual std::shared_ptr<Bag<uml::Classifier> > getTypes() const ;
 			virtual bool isMatchingLink(std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue> link,std::shared_ptr<uml::Property> end) ;
+			virtual std::shared_ptr<fUML::Semantics::Values::Value> new_() ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -94,7 +95,7 @@ namespace fUML::Semantics::StructuredClassifiers
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<Link> m_thisLinkPtr;
+			std::weak_ptr<fUML::Semantics::StructuredClassifiers::Link> m_thisLinkPtr;
 	};
 }
 #endif /* end of include guard: FUML_SEMANTICS_STRUCTUREDCLASSIFIERS_LINKLINKIMPL_HPP */

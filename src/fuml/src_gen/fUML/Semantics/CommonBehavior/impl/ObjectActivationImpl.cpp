@@ -39,8 +39,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
+#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
 #include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
 
 #include "uml/Class.hpp"
@@ -838,11 +838,11 @@ Any ObjectActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list < s
 }
 
 
-std::shared_ptr<ObjectActivation> ObjectActivationImpl::getThisObjectActivationPtr() const
+std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation> ObjectActivationImpl::getThisObjectActivationPtr() const
 {
 	return m_thisObjectActivationPtr.lock();
 }
-void ObjectActivationImpl::setThisObjectActivationPtr(std::weak_ptr<ObjectActivation> thisObjectActivationPtr)
+void ObjectActivationImpl::setThisObjectActivationPtr(std::weak_ptr<fUML::Semantics::CommonBehavior::ObjectActivation> thisObjectActivationPtr)
 {
 	m_thisObjectActivationPtr = thisObjectActivationPtr;
 }

@@ -146,14 +146,6 @@ PinImpl& PinImpl::operator=(const PinImpl & obj)
 	return *this;
 }
 
-std::shared_ptr<ecore::EObject> PinImpl::copy() const
-{
-	std::shared_ptr<PinImpl> element(new PinImpl());
-	*element =(*this);
-	element->setThisPinPtr(element);
-	return element;
-}
-
 //*********************************
 // Operations
 //*********************************
@@ -494,11 +486,11 @@ Any PinImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_pt
 }
 
 
-std::shared_ptr<Pin> PinImpl::getThisPinPtr() const
+std::shared_ptr<uml::Pin> PinImpl::getThisPinPtr() const
 {
 	return m_thisPinPtr.lock();
 }
-void PinImpl::setThisPinPtr(std::weak_ptr<Pin> thisPinPtr)
+void PinImpl::setThisPinPtr(std::weak_ptr<uml::Pin> thisPinPtr)
 {
 	m_thisPinPtr = thisPinPtr;
 	setThisMultiplicityElementPtr(thisPinPtr);

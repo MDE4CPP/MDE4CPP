@@ -253,11 +253,11 @@ Any TupleLiteralExpPartEvalImpl::eInvoke(int operationID, std::shared_ptr<std::l
 }
 
 
-std::shared_ptr<TupleLiteralExpPartEval> TupleLiteralExpPartEvalImpl::getThisTupleLiteralExpPartEvalPtr() const
+std::shared_ptr<ocl::Evaluations::TupleLiteralExpPartEval> TupleLiteralExpPartEvalImpl::getThisTupleLiteralExpPartEvalPtr() const
 {
 	return m_thisTupleLiteralExpPartEvalPtr.lock();
 }
-void TupleLiteralExpPartEvalImpl::setThisTupleLiteralExpPartEvalPtr(std::weak_ptr<TupleLiteralExpPartEval> thisTupleLiteralExpPartEvalPtr)
+void TupleLiteralExpPartEvalImpl::setThisTupleLiteralExpPartEvalPtr(std::weak_ptr<ocl::Evaluations::TupleLiteralExpPartEval> thisTupleLiteralExpPartEvalPtr)
 {
 	m_thisTupleLiteralExpPartEvalPtr = thisTupleLiteralExpPartEvalPtr;
 	setThisEvaluationPtr(thisTupleLiteralExpPartEvalPtr);

@@ -26,14 +26,14 @@ namespace ocl::Expressions
 	{
 		public: 
 			NumericLiteralExpImpl(const NumericLiteralExpImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 			NumericLiteralExpImpl& operator=(NumericLiteralExpImpl const&); 
 
 		protected:
 			friend class ocl::Expressions::ExpressionsFactoryImpl;
 			NumericLiteralExpImpl();
-			virtual std::shared_ptr<NumericLiteralExp> getThisNumericLiteralExpPtr() const;
-			virtual void setThisNumericLiteralExpPtr(std::weak_ptr<NumericLiteralExp> thisNumericLiteralExpPtr);
+			virtual std::shared_ptr<ocl::Expressions::NumericLiteralExp> getThisNumericLiteralExpPtr() const;
+			virtual void setThisNumericLiteralExpPtr(std::weak_ptr<ocl::Expressions::NumericLiteralExp> thisNumericLiteralExpPtr);
 
 			//Additional constructors for the containments back reference
 			NumericLiteralExpImpl(std::weak_ptr<ocl::Expressions::CallExp> par_appliedElement);
@@ -57,7 +57,7 @@ namespace ocl::Expressions
 
 		public:
 			//destructor
-			virtual ~NumericLiteralExpImpl();
+			virtual ~NumericLiteralExpImpl() = 0;
 			
 			//*********************************
 			// Operations
@@ -106,7 +106,7 @@ namespace ocl::Expressions
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<NumericLiteralExp> m_thisNumericLiteralExpPtr;
+			std::weak_ptr<ocl::Expressions::NumericLiteralExp> m_thisNumericLiteralExpPtr;
 	};
 }
 #endif /* end of include guard: OCL_EXPRESSIONS_NUMERICLITERALEXPNUMERICLITERALEXPIMPL_HPP */

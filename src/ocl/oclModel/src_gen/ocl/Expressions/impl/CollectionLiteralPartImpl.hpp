@@ -26,19 +26,19 @@ namespace ocl::Expressions
 	{
 		public: 
 			CollectionLiteralPartImpl(const CollectionLiteralPartImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 			CollectionLiteralPartImpl& operator=(CollectionLiteralPartImpl const&); 
 
 		protected:
 			friend class ocl::Expressions::ExpressionsFactoryImpl;
 			CollectionLiteralPartImpl();
-			virtual std::shared_ptr<CollectionLiteralPart> getThisCollectionLiteralPartPtr() const;
-			virtual void setThisCollectionLiteralPartPtr(std::weak_ptr<CollectionLiteralPart> thisCollectionLiteralPartPtr);
+			virtual std::shared_ptr<ocl::Expressions::CollectionLiteralPart> getThisCollectionLiteralPartPtr() const;
+			virtual void setThisCollectionLiteralPartPtr(std::weak_ptr<ocl::Expressions::CollectionLiteralPart> thisCollectionLiteralPartPtr);
 
 
 		public:
 			//destructor
-			virtual ~CollectionLiteralPartImpl();
+			virtual ~CollectionLiteralPartImpl() = 0;
 			
 			//*********************************
 			// Operations
@@ -87,7 +87,7 @@ namespace ocl::Expressions
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<CollectionLiteralPart> m_thisCollectionLiteralPartPtr;
+			std::weak_ptr<ocl::Expressions::CollectionLiteralPart> m_thisCollectionLiteralPartPtr;
 	};
 }
 #endif /* end of include guard: OCL_EXPRESSIONS_COLLECTIONLITERALPARTCOLLECTIONLITERALPARTIMPL_HPP */

@@ -702,11 +702,11 @@ Any EPackageImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shar
 }
 
 
-std::shared_ptr<EPackage> EPackageImpl::getThisEPackagePtr() const
+std::shared_ptr<ecore::EPackage> EPackageImpl::getThisEPackagePtr() const
 {
 	return m_thisEPackagePtr.lock();
 }
-void EPackageImpl::setThisEPackagePtr(std::weak_ptr<EPackage> thisEPackagePtr)
+void EPackageImpl::setThisEPackagePtr(std::weak_ptr<ecore::EPackage> thisEPackagePtr)
 {
 	m_thisEPackagePtr = thisEPackagePtr;
 	setThisENamedElementPtr(thisEPackagePtr);

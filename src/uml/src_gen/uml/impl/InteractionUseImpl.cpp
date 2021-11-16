@@ -894,11 +894,11 @@ Any InteractionUseImpl::eInvoke(int operationID, std::shared_ptr<std::list < std
 }
 
 
-std::shared_ptr<InteractionUse> InteractionUseImpl::getThisInteractionUsePtr() const
+std::shared_ptr<uml::InteractionUse> InteractionUseImpl::getThisInteractionUsePtr() const
 {
 	return m_thisInteractionUsePtr.lock();
 }
-void InteractionUseImpl::setThisInteractionUsePtr(std::weak_ptr<InteractionUse> thisInteractionUsePtr)
+void InteractionUseImpl::setThisInteractionUsePtr(std::weak_ptr<uml::InteractionUse> thisInteractionUsePtr)
 {
 	m_thisInteractionUsePtr = thisInteractionUsePtr;
 	setThisInteractionFragmentPtr(thisInteractionUsePtr);

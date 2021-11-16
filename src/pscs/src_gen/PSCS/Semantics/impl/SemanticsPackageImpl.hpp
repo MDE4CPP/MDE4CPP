@@ -71,12 +71,12 @@ namespace PSCS::Semantics
 
 			
 			// SubPackages Getters
-			virtual std::shared_ptr<Actions::ActionsPackage> getActions_Package() const ;
-			virtual std::shared_ptr<Classification::ClassificationPackage> getClassification_Package() const ;
-			virtual std::shared_ptr<CommonBehavior::CommonBehaviorPackage> getCommonBehavior_Package() const ;
-			virtual std::shared_ptr<Loci::LociPackage> getLoci_Package() const ;
-			virtual std::shared_ptr<StructuredClassifiers::StructuredClassifiersPackage> getStructuredClassifiers_Package() const ;
-			virtual std::shared_ptr<Values::ValuesPackage> getValues_Package() const ;
+			virtual std::shared_ptr<PSCS::Semantics::Actions::ActionsPackage> getActions_Package() const ;
+			virtual std::shared_ptr<PSCS::Semantics::Classification::ClassificationPackage> getClassification_Package() const ;
+			virtual std::shared_ptr<PSCS::Semantics::CommonBehavior::CommonBehaviorPackage> getCommonBehavior_Package() const ;
+			virtual std::shared_ptr<PSCS::Semantics::Loci::LociPackage> getLoci_Package() const ;
+			virtual std::shared_ptr<PSCS::Semantics::StructuredClassifiers::StructuredClassifiersPackage> getStructuredClassifiers_Package() const ;
+			virtual std::shared_ptr<PSCS::Semantics::Values::ValuesPackage> getValues_Package() const ;
 			
 
 		private:

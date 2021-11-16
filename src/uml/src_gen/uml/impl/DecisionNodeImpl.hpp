@@ -31,8 +31,8 @@ namespace uml
 		protected:
 			friend class umlFactoryImpl;
 			DecisionNodeImpl();
-			virtual std::shared_ptr<DecisionNode> getThisDecisionNodePtr() const;
-			virtual void setThisDecisionNodePtr(std::weak_ptr<DecisionNode> thisDecisionNodePtr);
+			virtual std::shared_ptr<uml::DecisionNode> getThisDecisionNodePtr() const;
+			virtual void setThisDecisionNodePtr(std::weak_ptr<uml::DecisionNode> thisDecisionNodePtr);
 
 			//Additional constructors for the containments back reference
 			DecisionNodeImpl(std::weak_ptr<uml::Activity> par_activity);
@@ -202,7 +202,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<DecisionNode> m_thisDecisionNodePtr;
+			std::weak_ptr<uml::DecisionNode> m_thisDecisionNodePtr;
 	};
 }
 #endif /* end of include guard: UML_DECISIONNODEDECISIONNODEIMPL_HPP */

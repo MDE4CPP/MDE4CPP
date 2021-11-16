@@ -32,8 +32,8 @@ namespace uml
 		protected:
 			friend class umlFactoryImpl;
 			ArtifactImpl();
-			virtual std::shared_ptr<Artifact> getThisArtifactPtr() const;
-			virtual void setThisArtifactPtr(std::weak_ptr<Artifact> thisArtifactPtr);
+			virtual std::shared_ptr<uml::Artifact> getThisArtifactPtr() const;
+			virtual void setThisArtifactPtr(std::weak_ptr<uml::Artifact> thisArtifactPtr);
 
 			//Additional constructors for the containments back reference
 			ArtifactImpl(std::weak_ptr<uml::Namespace> par_namespace);
@@ -191,7 +191,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<Artifact> m_thisArtifactPtr;
+			std::weak_ptr<uml::Artifact> m_thisArtifactPtr;
 	};
 }
 #endif /* end of include guard: UML_ARTIFACTARTIFACTIMPL_HPP */

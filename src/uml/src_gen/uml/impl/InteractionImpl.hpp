@@ -32,8 +32,8 @@ namespace uml
 		protected:
 			friend class umlFactoryImpl;
 			InteractionImpl();
-			virtual std::shared_ptr<Interaction> getThisInteractionPtr() const;
-			virtual void setThisInteractionPtr(std::weak_ptr<Interaction> thisInteractionPtr);
+			virtual std::shared_ptr<uml::Interaction> getThisInteractionPtr() const;
+			virtual void setThisInteractionPtr(std::weak_ptr<uml::Interaction> thisInteractionPtr);
 
 			//Additional constructors for the containments back reference
 			InteractionImpl(std::weak_ptr<uml::BehavioredClassifier> par_behavioredClassifier);
@@ -199,7 +199,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<Interaction> m_thisInteractionPtr;
+			std::weak_ptr<uml::Interaction> m_thisInteractionPtr;
 	};
 }
 #endif /* end of include guard: UML_INTERACTIONINTERACTIONIMPL_HPP */

@@ -26,19 +26,19 @@ namespace fUML::Semantics::Values
 	{
 		public: 
 			EvaluationImpl(const EvaluationImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 			EvaluationImpl& operator=(EvaluationImpl const&); 
 
 		protected:
 			friend class fUML::Semantics::Values::ValuesFactoryImpl;
 			EvaluationImpl();
-			virtual std::shared_ptr<Evaluation> getThisEvaluationPtr() const;
-			virtual void setThisEvaluationPtr(std::weak_ptr<Evaluation> thisEvaluationPtr);
+			virtual std::shared_ptr<fUML::Semantics::Values::Evaluation> getThisEvaluationPtr() const;
+			virtual void setThisEvaluationPtr(std::weak_ptr<fUML::Semantics::Values::Evaluation> thisEvaluationPtr);
 
 
 		public:
 			//destructor
-			virtual ~EvaluationImpl();
+			virtual ~EvaluationImpl() = 0;
 			
 			//*********************************
 			// Operations
@@ -92,7 +92,7 @@ namespace fUML::Semantics::Values
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<Evaluation> m_thisEvaluationPtr;
+			std::weak_ptr<fUML::Semantics::Values::Evaluation> m_thisEvaluationPtr;
 	};
 }
 #endif /* end of include guard: FUML_SEMANTICS_VALUES_EVALUATIONEVALUATIONIMPL_HPP */

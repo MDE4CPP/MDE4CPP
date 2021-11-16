@@ -32,8 +32,8 @@ namespace uml
 		protected:
 			friend class umlFactoryImpl;
 			RegionImpl();
-			virtual std::shared_ptr<Region> getThisRegionPtr() const;
-			virtual void setThisRegionPtr(std::weak_ptr<Region> thisRegionPtr);
+			virtual std::shared_ptr<uml::Region> getThisRegionPtr() const;
+			virtual void setThisRegionPtr(std::weak_ptr<uml::Region> thisRegionPtr);
 
 			//Additional constructors for the containments back reference
 			RegionImpl(std::weak_ptr<uml::Namespace> par_namespace);
@@ -242,7 +242,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<Region> m_thisRegionPtr;
+			std::weak_ptr<uml::Region> m_thisRegionPtr;
 	};
 }
 #endif /* end of include guard: UML_REGIONREGIONIMPL_HPP */

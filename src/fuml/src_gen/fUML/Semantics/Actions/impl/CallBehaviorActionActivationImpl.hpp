@@ -32,8 +32,8 @@ namespace fUML::Semantics::Actions
 		protected:
 			friend class fUML::Semantics::Actions::ActionsFactoryImpl;
 			CallBehaviorActionActivationImpl();
-			virtual std::shared_ptr<CallBehaviorActionActivation> getThisCallBehaviorActionActivationPtr() const;
-			virtual void setThisCallBehaviorActionActivationPtr(std::weak_ptr<CallBehaviorActionActivation> thisCallBehaviorActionActivationPtr);
+			virtual std::shared_ptr<fUML::Semantics::Actions::CallBehaviorActionActivation> getThisCallBehaviorActionActivationPtr() const;
+			virtual void setThisCallBehaviorActionActivationPtr(std::weak_ptr<fUML::Semantics::Actions::CallBehaviorActionActivation> thisCallBehaviorActionActivationPtr);
 
 			//Additional constructors for the containments back reference
 			CallBehaviorActionActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_group);
@@ -99,7 +99,7 @@ namespace fUML::Semantics::Actions
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<CallBehaviorActionActivation> m_thisCallBehaviorActionActivationPtr;
+			std::weak_ptr<fUML::Semantics::Actions::CallBehaviorActionActivation> m_thisCallBehaviorActionActivationPtr;
 	};
 }
 #endif /* end of include guard: FUML_SEMANTICS_ACTIONS_CALLBEHAVIORACTIONACTIVATIONCALLBEHAVIORACTIONACTIVATIONIMPL_HPP */

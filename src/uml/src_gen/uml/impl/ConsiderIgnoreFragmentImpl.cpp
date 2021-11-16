@@ -480,11 +480,11 @@ Any ConsiderIgnoreFragmentImpl::eInvoke(int operationID, std::shared_ptr<std::li
 }
 
 
-std::shared_ptr<ConsiderIgnoreFragment> ConsiderIgnoreFragmentImpl::getThisConsiderIgnoreFragmentPtr() const
+std::shared_ptr<uml::ConsiderIgnoreFragment> ConsiderIgnoreFragmentImpl::getThisConsiderIgnoreFragmentPtr() const
 {
 	return m_thisConsiderIgnoreFragmentPtr.lock();
 }
-void ConsiderIgnoreFragmentImpl::setThisConsiderIgnoreFragmentPtr(std::weak_ptr<ConsiderIgnoreFragment> thisConsiderIgnoreFragmentPtr)
+void ConsiderIgnoreFragmentImpl::setThisConsiderIgnoreFragmentPtr(std::weak_ptr<uml::ConsiderIgnoreFragment> thisConsiderIgnoreFragmentPtr)
 {
 	m_thisConsiderIgnoreFragmentPtr = thisConsiderIgnoreFragmentPtr;
 	setThisCombinedFragmentPtr(thisConsiderIgnoreFragmentPtr);

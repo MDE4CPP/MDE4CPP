@@ -287,11 +287,11 @@ Any ReadLinkActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::
 }
 
 
-std::shared_ptr<ReadLinkActionActivation> ReadLinkActionActivationImpl::getThisReadLinkActionActivationPtr() const
+std::shared_ptr<fUML::Semantics::Actions::ReadLinkActionActivation> ReadLinkActionActivationImpl::getThisReadLinkActionActivationPtr() const
 {
 	return m_thisReadLinkActionActivationPtr.lock();
 }
-void ReadLinkActionActivationImpl::setThisReadLinkActionActivationPtr(std::weak_ptr<ReadLinkActionActivation> thisReadLinkActionActivationPtr)
+void ReadLinkActionActivationImpl::setThisReadLinkActionActivationPtr(std::weak_ptr<fUML::Semantics::Actions::ReadLinkActionActivation> thisReadLinkActionActivationPtr)
 {
 	m_thisReadLinkActionActivationPtr = thisReadLinkActionActivationPtr;
 	setThisLinkActionActivationPtr(thisReadLinkActionActivationPtr);

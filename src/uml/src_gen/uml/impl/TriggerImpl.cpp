@@ -465,11 +465,11 @@ Any TriggerImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::share
 }
 
 
-std::shared_ptr<Trigger> TriggerImpl::getThisTriggerPtr() const
+std::shared_ptr<uml::Trigger> TriggerImpl::getThisTriggerPtr() const
 {
 	return m_thisTriggerPtr.lock();
 }
-void TriggerImpl::setThisTriggerPtr(std::weak_ptr<Trigger> thisTriggerPtr)
+void TriggerImpl::setThisTriggerPtr(std::weak_ptr<uml::Trigger> thisTriggerPtr)
 {
 	m_thisTriggerPtr = thisTriggerPtr;
 	setThisNamedElementPtr(thisTriggerPtr);

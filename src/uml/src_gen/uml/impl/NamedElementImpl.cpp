@@ -129,14 +129,6 @@ NamedElementImpl& NamedElementImpl::operator=(const NamedElementImpl & obj)
 	return *this;
 }
 
-std::shared_ptr<ecore::EObject> NamedElementImpl::copy() const
-{
-	std::shared_ptr<NamedElementImpl> element(new NamedElementImpl());
-	*element =(*this);
-	element->setThisNamedElementPtr(element);
-	return element;
-}
-
 //*********************************
 // Operations
 //*********************************
@@ -395,23 +387,23 @@ void NamedElementImpl::loadAttributes(std::shared_ptr<persistence::interfaces::X
 		iter = attr_list.find("visibility");
 		if ( iter != attr_list.end() )
 		{
-			uml::VisibilityKind value = VisibilityKind::PUBLIC;
+			uml::VisibilityKind value = uml::VisibilityKind::PUBLIC;
 			std::string literal = iter->second;
 			if (literal == "public")
 			{
-				value = VisibilityKind::PUBLIC;
+				value = uml::VisibilityKind::PUBLIC;
 			}
 			else if (literal == "private")
 			{
-				value = VisibilityKind::PRIVATE;
+				value = uml::VisibilityKind::PRIVATE;
 			}
 			else if (literal == "protected")
 			{
-				value = VisibilityKind::PROTECTED;
+				value = uml::VisibilityKind::PROTECTED;
 			}
 			else if (literal == "package")
 			{
-				value = VisibilityKind::PACKAGE;
+				value = uml::VisibilityKind::PACKAGE;
 			}
 			this->setVisibility(value);
 		}
@@ -494,19 +486,19 @@ void NamedElementImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 		{
 			uml::VisibilityKind value = this->getVisibility();
 			std::string literal = "";
-			if (value == VisibilityKind::PUBLIC)
+			if (value == uml::VisibilityKind::PUBLIC)
 			{
 				literal = "public";
 			}
-			else if (value == VisibilityKind::PRIVATE)
+			else if (value == uml::VisibilityKind::PRIVATE)
 			{
 				literal = "private";
 			}
-			else if (value == VisibilityKind::PROTECTED)
+			else if (value == uml::VisibilityKind::PROTECTED)
 			{
 				literal = "protected";
 			}
-			else if (value == VisibilityKind::PACKAGE)
+			else if (value == uml::VisibilityKind::PACKAGE)
 			{
 				literal = "package";
 			}
@@ -580,7 +572,7 @@ bool NamedElementImpl::internalEIsSet(int featureID) const
 		case uml::umlPackage::NAMEDELEMENT_ATTRIBUTE_QUALIFIEDNAME:
 			return getQualifiedName() != ""; //1557
 		case uml::umlPackage::NAMEDELEMENT_ATTRIBUTE_VISIBILITY:
-			return m_visibility != VisibilityKind::PUBLIC;; //1558
+			return m_visibility != uml::VisibilityKind::PUBLIC;; //1558
 	}
 	return ElementImpl::internalEIsSet(featureID);
 }
@@ -793,11 +785,11 @@ Any NamedElementImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::
 }
 
 
-std::shared_ptr<NamedElement> NamedElementImpl::getThisNamedElementPtr() const
+std::shared_ptr<uml::NamedElement> NamedElementImpl::getThisNamedElementPtr() const
 {
 	return m_thisNamedElementPtr.lock();
 }
-void NamedElementImpl::setThisNamedElementPtr(std::weak_ptr<NamedElement> thisNamedElementPtr)
+void NamedElementImpl::setThisNamedElementPtr(std::weak_ptr<uml::NamedElement> thisNamedElementPtr)
 {
 	m_thisNamedElementPtr = thisNamedElementPtr;
 	setThisElementPtr(thisNamedElementPtr);

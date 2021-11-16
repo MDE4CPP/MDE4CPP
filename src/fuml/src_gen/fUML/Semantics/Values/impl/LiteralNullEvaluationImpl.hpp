@@ -32,8 +32,8 @@ namespace fUML::Semantics::Values
 		protected:
 			friend class fUML::Semantics::Values::ValuesFactoryImpl;
 			LiteralNullEvaluationImpl();
-			virtual std::shared_ptr<LiteralNullEvaluation> getThisLiteralNullEvaluationPtr() const;
-			virtual void setThisLiteralNullEvaluationPtr(std::weak_ptr<LiteralNullEvaluation> thisLiteralNullEvaluationPtr);
+			virtual std::shared_ptr<fUML::Semantics::Values::LiteralNullEvaluation> getThisLiteralNullEvaluationPtr() const;
+			virtual void setThisLiteralNullEvaluationPtr(std::weak_ptr<fUML::Semantics::Values::LiteralNullEvaluation> thisLiteralNullEvaluationPtr);
 
 
 		public:
@@ -88,7 +88,7 @@ namespace fUML::Semantics::Values
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<LiteralNullEvaluation> m_thisLiteralNullEvaluationPtr;
+			std::weak_ptr<fUML::Semantics::Values::LiteralNullEvaluation> m_thisLiteralNullEvaluationPtr;
 	};
 }
 #endif /* end of include guard: FUML_SEMANTICS_VALUES_LITERALNULLEVALUATIONLITERALNULLEVALUATIONIMPL_HPP */

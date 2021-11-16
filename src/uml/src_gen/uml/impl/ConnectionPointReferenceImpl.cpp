@@ -600,11 +600,11 @@ Any ConnectionPointReferenceImpl::eInvoke(int operationID, std::shared_ptr<std::
 }
 
 
-std::shared_ptr<ConnectionPointReference> ConnectionPointReferenceImpl::getThisConnectionPointReferencePtr() const
+std::shared_ptr<uml::ConnectionPointReference> ConnectionPointReferenceImpl::getThisConnectionPointReferencePtr() const
 {
 	return m_thisConnectionPointReferencePtr.lock();
 }
-void ConnectionPointReferenceImpl::setThisConnectionPointReferencePtr(std::weak_ptr<ConnectionPointReference> thisConnectionPointReferencePtr)
+void ConnectionPointReferenceImpl::setThisConnectionPointReferencePtr(std::weak_ptr<uml::ConnectionPointReference> thisConnectionPointReferencePtr)
 {
 	m_thisConnectionPointReferencePtr = thisConnectionPointReferencePtr;
 	setThisVertexPtr(thisConnectionPointReferencePtr);

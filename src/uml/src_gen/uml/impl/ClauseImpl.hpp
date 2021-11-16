@@ -31,8 +31,8 @@ namespace uml
 		protected:
 			friend class umlFactoryImpl;
 			ClauseImpl();
-			virtual std::shared_ptr<Clause> getThisClausePtr() const;
-			virtual void setThisClausePtr(std::weak_ptr<Clause> thisClausePtr);
+			virtual std::shared_ptr<uml::Clause> getThisClausePtr() const;
+			virtual void setThisClausePtr(std::weak_ptr<uml::Clause> thisClausePtr);
 
 			//Additional constructors for the containments back reference
 			ClauseImpl(std::weak_ptr<uml::Element> par_owner);
@@ -156,7 +156,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<Clause> m_thisClausePtr;
+			std::weak_ptr<uml::Clause> m_thisClausePtr;
 	};
 }
 #endif /* end of include guard: UML_CLAUSECLAUSEIMPL_HPP */

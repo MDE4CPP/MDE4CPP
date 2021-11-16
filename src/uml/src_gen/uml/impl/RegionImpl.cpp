@@ -953,11 +953,11 @@ Any RegionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared
 }
 
 
-std::shared_ptr<Region> RegionImpl::getThisRegionPtr() const
+std::shared_ptr<uml::Region> RegionImpl::getThisRegionPtr() const
 {
 	return m_thisRegionPtr.lock();
 }
-void RegionImpl::setThisRegionPtr(std::weak_ptr<Region> thisRegionPtr)
+void RegionImpl::setThisRegionPtr(std::weak_ptr<uml::Region> thisRegionPtr)
 {
 	m_thisRegionPtr = thisRegionPtr;
 	setThisNamespacePtr(thisRegionPtr);

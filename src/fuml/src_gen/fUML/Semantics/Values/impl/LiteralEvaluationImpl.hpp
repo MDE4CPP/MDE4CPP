@@ -26,19 +26,19 @@ namespace fUML::Semantics::Values
 	{
 		public: 
 			LiteralEvaluationImpl(const LiteralEvaluationImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 			LiteralEvaluationImpl& operator=(LiteralEvaluationImpl const&); 
 
 		protected:
 			friend class fUML::Semantics::Values::ValuesFactoryImpl;
 			LiteralEvaluationImpl();
-			virtual std::shared_ptr<LiteralEvaluation> getThisLiteralEvaluationPtr() const;
-			virtual void setThisLiteralEvaluationPtr(std::weak_ptr<LiteralEvaluation> thisLiteralEvaluationPtr);
+			virtual std::shared_ptr<fUML::Semantics::Values::LiteralEvaluation> getThisLiteralEvaluationPtr() const;
+			virtual void setThisLiteralEvaluationPtr(std::weak_ptr<fUML::Semantics::Values::LiteralEvaluation> thisLiteralEvaluationPtr);
 
 
 		public:
 			//destructor
-			virtual ~LiteralEvaluationImpl();
+			virtual ~LiteralEvaluationImpl() = 0;
 			
 			//*********************************
 			// Operations
@@ -88,7 +88,7 @@ namespace fUML::Semantics::Values
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<LiteralEvaluation> m_thisLiteralEvaluationPtr;
+			std::weak_ptr<fUML::Semantics::Values::LiteralEvaluation> m_thisLiteralEvaluationPtr;
 	};
 }
 #endif /* end of include guard: FUML_SEMANTICS_VALUES_LITERALEVALUATIONLITERALEVALUATIONIMPL_HPP */

@@ -1490,11 +1490,11 @@ Any StateImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_
 }
 
 
-std::shared_ptr<State> StateImpl::getThisStatePtr() const
+std::shared_ptr<uml::State> StateImpl::getThisStatePtr() const
 {
 	return m_thisStatePtr.lock();
 }
-void StateImpl::setThisStatePtr(std::weak_ptr<State> thisStatePtr)
+void StateImpl::setThisStatePtr(std::weak_ptr<uml::State> thisStatePtr)
 {
 	m_thisStatePtr = thisStatePtr;
 	setThisNamespacePtr(thisStatePtr);

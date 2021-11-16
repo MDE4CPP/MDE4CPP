@@ -285,11 +285,11 @@ Any ReclassifyObjectActionActivationImpl::eInvoke(int operationID, std::shared_p
 }
 
 
-std::shared_ptr<ReclassifyObjectActionActivation> ReclassifyObjectActionActivationImpl::getThisReclassifyObjectActionActivationPtr() const
+std::shared_ptr<fUML::Semantics::Actions::ReclassifyObjectActionActivation> ReclassifyObjectActionActivationImpl::getThisReclassifyObjectActionActivationPtr() const
 {
 	return m_thisReclassifyObjectActionActivationPtr.lock();
 }
-void ReclassifyObjectActionActivationImpl::setThisReclassifyObjectActionActivationPtr(std::weak_ptr<ReclassifyObjectActionActivation> thisReclassifyObjectActionActivationPtr)
+void ReclassifyObjectActionActivationImpl::setThisReclassifyObjectActionActivationPtr(std::weak_ptr<fUML::Semantics::Actions::ReclassifyObjectActionActivation> thisReclassifyObjectActionActivationPtr)
 {
 	m_thisReclassifyObjectActionActivationPtr = thisReclassifyObjectActionActivationPtr;
 	setThisActionActivationPtr(thisReclassifyObjectActionActivationPtr);

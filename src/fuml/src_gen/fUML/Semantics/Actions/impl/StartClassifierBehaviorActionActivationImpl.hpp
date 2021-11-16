@@ -32,8 +32,8 @@ namespace fUML::Semantics::Actions
 		protected:
 			friend class fUML::Semantics::Actions::ActionsFactoryImpl;
 			StartClassifierBehaviorActionActivationImpl();
-			virtual std::shared_ptr<StartClassifierBehaviorActionActivation> getThisStartClassifierBehaviorActionActivationPtr() const;
-			virtual void setThisStartClassifierBehaviorActionActivationPtr(std::weak_ptr<StartClassifierBehaviorActionActivation> thisStartClassifierBehaviorActionActivationPtr);
+			virtual std::shared_ptr<fUML::Semantics::Actions::StartClassifierBehaviorActionActivation> getThisStartClassifierBehaviorActionActivationPtr() const;
+			virtual void setThisStartClassifierBehaviorActionActivationPtr(std::weak_ptr<fUML::Semantics::Actions::StartClassifierBehaviorActionActivation> thisStartClassifierBehaviorActionActivationPtr);
 
 			//Additional constructors for the containments back reference
 			StartClassifierBehaviorActionActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_group);
@@ -91,7 +91,7 @@ namespace fUML::Semantics::Actions
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<StartClassifierBehaviorActionActivation> m_thisStartClassifierBehaviorActionActivationPtr;
+			std::weak_ptr<fUML::Semantics::Actions::StartClassifierBehaviorActionActivation> m_thisStartClassifierBehaviorActionActivationPtr;
 	};
 }
 #endif /* end of include guard: FUML_SEMANTICS_ACTIONS_STARTCLASSIFIERBEHAVIORACTIONACTIVATIONSTARTCLASSIFIERBEHAVIORACTIONACTIVATIONIMPL_HPP */

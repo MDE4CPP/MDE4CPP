@@ -48,9 +48,9 @@
 
 #include <exception> // used in Persistence
 #include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
+#include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
-#include "uml/umlFactory.hpp"
 
 #include "PSCS/Semantics/StructuredClassifiers/CS_InteractionPoint.hpp"
 #include "PSCS/Semantics/StructuredClassifiers/CS_Link.hpp"
@@ -1549,11 +1549,11 @@ Any CS_ObjectImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sha
 }
 
 
-std::shared_ptr<CS_Object> CS_ObjectImpl::getThisCS_ObjectPtr() const
+std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Object> CS_ObjectImpl::getThisCS_ObjectPtr() const
 {
 	return m_thisCS_ObjectPtr.lock();
 }
-void CS_ObjectImpl::setThisCS_ObjectPtr(std::weak_ptr<CS_Object> thisCS_ObjectPtr)
+void CS_ObjectImpl::setThisCS_ObjectPtr(std::weak_ptr<PSCS::Semantics::StructuredClassifiers::CS_Object> thisCS_ObjectPtr)
 {
 	m_thisCS_ObjectPtr = thisCS_ObjectPtr;
 	setThisObjectPtr(thisCS_ObjectPtr);

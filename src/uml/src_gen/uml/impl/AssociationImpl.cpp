@@ -1131,11 +1131,11 @@ Any AssociationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::s
 }
 
 
-std::shared_ptr<Association> AssociationImpl::getThisAssociationPtr() const
+std::shared_ptr<uml::Association> AssociationImpl::getThisAssociationPtr() const
 {
 	return m_thisAssociationPtr.lock();
 }
-void AssociationImpl::setThisAssociationPtr(std::weak_ptr<Association> thisAssociationPtr)
+void AssociationImpl::setThisAssociationPtr(std::weak_ptr<uml::Association> thisAssociationPtr)
 {
 	m_thisAssociationPtr = thisAssociationPtr;
 	setThisClassifierPtr(thisAssociationPtr);

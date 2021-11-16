@@ -9,7 +9,7 @@
 
 namespace uml 
 {
-	enum ExpansionKind {
+	enum class ExpansionKind {
 		
 		ITERATIVE = 1
 ,

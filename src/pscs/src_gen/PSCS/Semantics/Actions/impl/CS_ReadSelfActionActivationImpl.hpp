@@ -32,8 +32,8 @@ namespace PSCS::Semantics::Actions
 		protected:
 			friend class PSCS::Semantics::Actions::ActionsFactoryImpl;
 			CS_ReadSelfActionActivationImpl();
-			virtual std::shared_ptr<CS_ReadSelfActionActivation> getThisCS_ReadSelfActionActivationPtr() const;
-			virtual void setThisCS_ReadSelfActionActivationPtr(std::weak_ptr<CS_ReadSelfActionActivation> thisCS_ReadSelfActionActivationPtr);
+			virtual std::shared_ptr<PSCS::Semantics::Actions::CS_ReadSelfActionActivation> getThisCS_ReadSelfActionActivationPtr() const;
+			virtual void setThisCS_ReadSelfActionActivationPtr(std::weak_ptr<PSCS::Semantics::Actions::CS_ReadSelfActionActivation> thisCS_ReadSelfActionActivationPtr);
 
 			//Additional constructors for the containments back reference
 			CS_ReadSelfActionActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_group);
@@ -91,7 +91,7 @@ namespace PSCS::Semantics::Actions
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<CS_ReadSelfActionActivation> m_thisCS_ReadSelfActionActivationPtr;
+			std::weak_ptr<PSCS::Semantics::Actions::CS_ReadSelfActionActivation> m_thisCS_ReadSelfActionActivationPtr;
 	};
 }
 #endif /* end of include guard: PSCS_SEMANTICS_ACTIONS_CS_READSELFACTIONACTIVATIONCS_READSELFACTIONACTIVATIONIMPL_HPP */

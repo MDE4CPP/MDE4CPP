@@ -26,14 +26,14 @@ namespace ocl::Expressions
 	{
 		public: 
 			OclExpressionImpl(const OclExpressionImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 			OclExpressionImpl& operator=(OclExpressionImpl const&); 
 
 		protected:
 			friend class ocl::Expressions::ExpressionsFactoryImpl;
 			OclExpressionImpl();
-			virtual std::shared_ptr<OclExpression> getThisOclExpressionPtr() const;
-			virtual void setThisOclExpressionPtr(std::weak_ptr<OclExpression> thisOclExpressionPtr);
+			virtual std::shared_ptr<ocl::Expressions::OclExpression> getThisOclExpressionPtr() const;
+			virtual void setThisOclExpressionPtr(std::weak_ptr<ocl::Expressions::OclExpression> thisOclExpressionPtr);
 
 			//Additional constructors for the containments back reference
 			OclExpressionImpl(std::weak_ptr<ocl::Expressions::CallExp> par_appliedElement);
@@ -57,7 +57,7 @@ namespace ocl::Expressions
 
 		public:
 			//destructor
-			virtual ~OclExpressionImpl();
+			virtual ~OclExpressionImpl() = 0;
 			
 			//*********************************
 			// Operations
@@ -130,7 +130,7 @@ namespace ocl::Expressions
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<OclExpression> m_thisOclExpressionPtr;
+			std::weak_ptr<ocl::Expressions::OclExpression> m_thisOclExpressionPtr;
 	};
 }
 #endif /* end of include guard: OCL_EXPRESSIONS_OCLEXPRESSIONOCLEXPRESSIONIMPL_HPP */

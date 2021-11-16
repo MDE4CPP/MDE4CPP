@@ -31,8 +31,8 @@ namespace uml
 		protected:
 			friend class umlFactoryImpl;
 			StateInvariantImpl();
-			virtual std::shared_ptr<StateInvariant> getThisStateInvariantPtr() const;
-			virtual void setThisStateInvariantPtr(std::weak_ptr<StateInvariant> thisStateInvariantPtr);
+			virtual std::shared_ptr<uml::StateInvariant> getThisStateInvariantPtr() const;
+			virtual void setThisStateInvariantPtr(std::weak_ptr<uml::StateInvariant> thisStateInvariantPtr);
 
 			//Additional constructors for the containments back reference
 			StateInvariantImpl(std::weak_ptr<uml::Interaction> par_enclosingInteraction);
@@ -124,7 +124,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<StateInvariant> m_thisStateInvariantPtr;
+			std::weak_ptr<uml::StateInvariant> m_thisStateInvariantPtr;
 	};
 }
 #endif /* end of include guard: UML_STATEINVARIANTSTATEINVARIANTIMPL_HPP */

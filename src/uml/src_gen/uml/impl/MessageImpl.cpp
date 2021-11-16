@@ -411,31 +411,31 @@ void MessageImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadH
 		iter = attr_list.find("messageSort");
 		if ( iter != attr_list.end() )
 		{
-			uml::MessageSort value = MessageSort::SYNCHCALL;
+			uml::MessageSort value = uml::MessageSort::SYNCHCALL;
 			std::string literal = iter->second;
 			if (literal == "synchCall")
 			{
-				value = MessageSort::SYNCHCALL;
+				value = uml::MessageSort::SYNCHCALL;
 			}
 			else if (literal == "asynchCall")
 			{
-				value = MessageSort::ASYNCHCALL;
+				value = uml::MessageSort::ASYNCHCALL;
 			}
 			else if (literal == "asynchSignal")
 			{
-				value = MessageSort::ASYNCHSIGNAL;
+				value = uml::MessageSort::ASYNCHSIGNAL;
 			}
 			else if (literal == "createMessage")
 			{
-				value = MessageSort::CREATEMESSAGE;
+				value = uml::MessageSort::CREATEMESSAGE;
 			}
 			else if (literal == "deleteMessage")
 			{
-				value = MessageSort::DELETEMESSAGE;
+				value = uml::MessageSort::DELETEMESSAGE;
 			}
 			else if (literal == "reply")
 			{
-				value = MessageSort::REPLY;
+				value = uml::MessageSort::REPLY;
 			}
 			this->setMessageSort(value);
 		}
@@ -605,27 +605,27 @@ void MessageImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHand
 		{
 			uml::MessageSort value = this->getMessageSort();
 			std::string literal = "";
-			if (value == MessageSort::SYNCHCALL)
+			if (value == uml::MessageSort::SYNCHCALL)
 			{
 				literal = "synchCall";
 			}
-			else if (value == MessageSort::ASYNCHCALL)
+			else if (value == uml::MessageSort::ASYNCHCALL)
 			{
 				literal = "asynchCall";
 			}
-			else if (value == MessageSort::ASYNCHSIGNAL)
+			else if (value == uml::MessageSort::ASYNCHSIGNAL)
 			{
 				literal = "asynchSignal";
 			}
-			else if (value == MessageSort::CREATEMESSAGE)
+			else if (value == uml::MessageSort::CREATEMESSAGE)
 			{
 				literal = "createMessage";
 			}
-			else if (value == MessageSort::DELETEMESSAGE)
+			else if (value == uml::MessageSort::DELETEMESSAGE)
 			{
 				literal = "deleteMessage";
 			}
-			else if (value == MessageSort::REPLY)
+			else if (value == uml::MessageSort::REPLY)
 			{
 				literal = "reply";
 			}
@@ -713,9 +713,9 @@ bool MessageImpl::internalEIsSet(int featureID) const
 		case uml::umlPackage::MESSAGE_ATTRIBUTE_INTERACTION:
 			return getInteraction().lock() != nullptr; //14711
 		case uml::umlPackage::MESSAGE_ATTRIBUTE_MESSAGEKIND:
-			return m_messageKind != MessageKind::UNKNOWN;; //14712
+			return m_messageKind != uml::MessageKind::UNKNOWN;; //14712
 		case uml::umlPackage::MESSAGE_ATTRIBUTE_MESSAGESORT:
-			return m_messageSort != MessageSort::SYNCHCALL;; //14713
+			return m_messageSort != uml::MessageSort::SYNCHCALL;; //14713
 		case uml::umlPackage::MESSAGE_ATTRIBUTE_RECEIVEEVENT:
 			return getReceiveEvent() != nullptr; //14714
 		case uml::umlPackage::MESSAGE_ATTRIBUTE_SENDEVENT:
@@ -985,11 +985,11 @@ Any MessageImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::share
 }
 
 
-std::shared_ptr<Message> MessageImpl::getThisMessagePtr() const
+std::shared_ptr<uml::Message> MessageImpl::getThisMessagePtr() const
 {
 	return m_thisMessagePtr.lock();
 }
-void MessageImpl::setThisMessagePtr(std::weak_ptr<Message> thisMessagePtr)
+void MessageImpl::setThisMessagePtr(std::weak_ptr<uml::Message> thisMessagePtr)
 {
 	m_thisMessagePtr = thisMessagePtr;
 	setThisNamedElementPtr(thisMessagePtr);

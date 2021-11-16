@@ -32,8 +32,8 @@ namespace PSCS::Semantics::Loci
 		protected:
 			friend class PSCS::Semantics::Loci::LociFactoryImpl;
 			CS_LocusImpl();
-			virtual std::shared_ptr<CS_Locus> getThisCS_LocusPtr() const;
-			virtual void setThisCS_LocusPtr(std::weak_ptr<CS_Locus> thisCS_LocusPtr);
+			virtual std::shared_ptr<PSCS::Semantics::Loci::CS_Locus> getThisCS_LocusPtr() const;
+			virtual void setThisCS_LocusPtr(std::weak_ptr<PSCS::Semantics::Loci::CS_Locus> thisCS_LocusPtr);
 
 
 		public:
@@ -88,7 +88,7 @@ namespace PSCS::Semantics::Loci
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<CS_Locus> m_thisCS_LocusPtr;
+			std::weak_ptr<PSCS::Semantics::Loci::CS_Locus> m_thisCS_LocusPtr;
 	};
 }
 #endif /* end of include guard: PSCS_SEMANTICS_LOCI_CS_LOCUSCS_LOCUSIMPL_HPP */

@@ -322,11 +322,11 @@ Any EStringToStringMapEntryImpl::eInvoke(int operationID, std::shared_ptr<std::l
 }
 
 
-std::shared_ptr<EStringToStringMapEntry> EStringToStringMapEntryImpl::getThisEStringToStringMapEntryPtr() const
+std::shared_ptr<ecore::EStringToStringMapEntry> EStringToStringMapEntryImpl::getThisEStringToStringMapEntryPtr() const
 {
 	return m_thisEStringToStringMapEntryPtr.lock();
 }
-void EStringToStringMapEntryImpl::setThisEStringToStringMapEntryPtr(std::weak_ptr<EStringToStringMapEntry> thisEStringToStringMapEntryPtr)
+void EStringToStringMapEntryImpl::setThisEStringToStringMapEntryPtr(std::weak_ptr<ecore::EStringToStringMapEntry> thisEStringToStringMapEntryPtr)
 {
 	m_thisEStringToStringMapEntryPtr = thisEStringToStringMapEntryPtr;
 }

@@ -685,11 +685,11 @@ Any ReplyActionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::s
 }
 
 
-std::shared_ptr<ReplyAction> ReplyActionImpl::getThisReplyActionPtr() const
+std::shared_ptr<uml::ReplyAction> ReplyActionImpl::getThisReplyActionPtr() const
 {
 	return m_thisReplyActionPtr.lock();
 }
-void ReplyActionImpl::setThisReplyActionPtr(std::weak_ptr<ReplyAction> thisReplyActionPtr)
+void ReplyActionImpl::setThisReplyActionPtr(std::weak_ptr<uml::ReplyAction> thisReplyActionPtr)
 {
 	m_thisReplyActionPtr = thisReplyActionPtr;
 	setThisActionPtr(thisReplyActionPtr);

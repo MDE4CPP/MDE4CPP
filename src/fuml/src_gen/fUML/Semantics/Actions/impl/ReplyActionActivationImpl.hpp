@@ -32,8 +32,8 @@ namespace fUML::Semantics::Actions
 		protected:
 			friend class fUML::Semantics::Actions::ActionsFactoryImpl;
 			ReplyActionActivationImpl();
-			virtual std::shared_ptr<ReplyActionActivation> getThisReplyActionActivationPtr() const;
-			virtual void setThisReplyActionActivationPtr(std::weak_ptr<ReplyActionActivation> thisReplyActionActivationPtr);
+			virtual std::shared_ptr<fUML::Semantics::Actions::ReplyActionActivation> getThisReplyActionActivationPtr() const;
+			virtual void setThisReplyActionActivationPtr(std::weak_ptr<fUML::Semantics::Actions::ReplyActionActivation> thisReplyActionActivationPtr);
 
 			//Additional constructors for the containments back reference
 			ReplyActionActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_group);
@@ -91,7 +91,7 @@ namespace fUML::Semantics::Actions
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<ReplyActionActivation> m_thisReplyActionActivationPtr;
+			std::weak_ptr<fUML::Semantics::Actions::ReplyActionActivation> m_thisReplyActionActivationPtr;
 	};
 }
 #endif /* end of include guard: FUML_SEMANTICS_ACTIONS_REPLYACTIONACTIVATIONREPLYACTIONACTIVATIONIMPL_HPP */

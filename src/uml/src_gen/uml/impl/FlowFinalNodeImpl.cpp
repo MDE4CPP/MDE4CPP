@@ -367,11 +367,11 @@ Any FlowFinalNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std:
 }
 
 
-std::shared_ptr<FlowFinalNode> FlowFinalNodeImpl::getThisFlowFinalNodePtr() const
+std::shared_ptr<uml::FlowFinalNode> FlowFinalNodeImpl::getThisFlowFinalNodePtr() const
 {
 	return m_thisFlowFinalNodePtr.lock();
 }
-void FlowFinalNodeImpl::setThisFlowFinalNodePtr(std::weak_ptr<FlowFinalNode> thisFlowFinalNodePtr)
+void FlowFinalNodeImpl::setThisFlowFinalNodePtr(std::weak_ptr<uml::FlowFinalNode> thisFlowFinalNodePtr)
 {
 	m_thisFlowFinalNodePtr = thisFlowFinalNodePtr;
 	setThisFinalNodePtr(thisFlowFinalNodePtr);

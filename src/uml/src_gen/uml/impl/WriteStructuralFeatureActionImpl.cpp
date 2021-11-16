@@ -157,14 +157,6 @@ WriteStructuralFeatureActionImpl& WriteStructuralFeatureActionImpl::operator=(co
 	return *this;
 }
 
-std::shared_ptr<ecore::EObject> WriteStructuralFeatureActionImpl::copy() const
-{
-	std::shared_ptr<WriteStructuralFeatureActionImpl> element(new WriteStructuralFeatureActionImpl());
-	*element =(*this);
-	element->setThisWriteStructuralFeatureActionPtr(element);
-	return element;
-}
-
 //*********************************
 // Operations
 //*********************************
@@ -617,11 +609,11 @@ Any WriteStructuralFeatureActionImpl::eInvoke(int operationID, std::shared_ptr<s
 }
 
 
-std::shared_ptr<WriteStructuralFeatureAction> WriteStructuralFeatureActionImpl::getThisWriteStructuralFeatureActionPtr() const
+std::shared_ptr<uml::WriteStructuralFeatureAction> WriteStructuralFeatureActionImpl::getThisWriteStructuralFeatureActionPtr() const
 {
 	return m_thisWriteStructuralFeatureActionPtr.lock();
 }
-void WriteStructuralFeatureActionImpl::setThisWriteStructuralFeatureActionPtr(std::weak_ptr<WriteStructuralFeatureAction> thisWriteStructuralFeatureActionPtr)
+void WriteStructuralFeatureActionImpl::setThisWriteStructuralFeatureActionPtr(std::weak_ptr<uml::WriteStructuralFeatureAction> thisWriteStructuralFeatureActionPtr)
 {
 	m_thisWriteStructuralFeatureActionPtr = thisWriteStructuralFeatureActionPtr;
 	setThisStructuralFeatureActionPtr(thisWriteStructuralFeatureActionPtr);

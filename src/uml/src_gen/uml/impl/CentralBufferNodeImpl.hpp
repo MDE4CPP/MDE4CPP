@@ -31,8 +31,8 @@ namespace uml
 		protected:
 			friend class umlFactoryImpl;
 			CentralBufferNodeImpl();
-			virtual std::shared_ptr<CentralBufferNode> getThisCentralBufferNodePtr() const;
-			virtual void setThisCentralBufferNodePtr(std::weak_ptr<CentralBufferNode> thisCentralBufferNodePtr);
+			virtual std::shared_ptr<uml::CentralBufferNode> getThisCentralBufferNodePtr() const;
+			virtual void setThisCentralBufferNodePtr(std::weak_ptr<uml::CentralBufferNode> thisCentralBufferNodePtr);
 
 			//Additional constructors for the containments back reference
 			CentralBufferNodeImpl(std::weak_ptr<uml::Activity> par_activity);
@@ -118,7 +118,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<CentralBufferNode> m_thisCentralBufferNodePtr;
+			std::weak_ptr<uml::CentralBufferNode> m_thisCentralBufferNodePtr;
 	};
 }
 #endif /* end of include guard: UML_CENTRALBUFFERNODECENTRALBUFFERNODEIMPL_HPP */

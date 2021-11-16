@@ -31,8 +31,8 @@ namespace uml
 		protected:
 			friend class umlFactoryImpl;
 			FlowFinalNodeImpl();
-			virtual std::shared_ptr<FlowFinalNode> getThisFlowFinalNodePtr() const;
-			virtual void setThisFlowFinalNodePtr(std::weak_ptr<FlowFinalNode> thisFlowFinalNodePtr);
+			virtual std::shared_ptr<uml::FlowFinalNode> getThisFlowFinalNodePtr() const;
+			virtual void setThisFlowFinalNodePtr(std::weak_ptr<uml::FlowFinalNode> thisFlowFinalNodePtr);
 
 			//Additional constructors for the containments back reference
 			FlowFinalNodeImpl(std::weak_ptr<uml::Activity> par_activity);
@@ -118,7 +118,7 @@ namespace uml
 			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
-			std::weak_ptr<FlowFinalNode> m_thisFlowFinalNodePtr;
+			std::weak_ptr<uml::FlowFinalNode> m_thisFlowFinalNodePtr;
 	};
 }
 #endif /* end of include guard: UML_FLOWFINALNODEFLOWFINALNODEIMPL_HPP */

@@ -387,11 +387,11 @@ Any CS_InstanceValueEvaluationImpl::eInvoke(int operationID, std::shared_ptr<std
 }
 
 
-std::shared_ptr<CS_InstanceValueEvaluation> CS_InstanceValueEvaluationImpl::getThisCS_InstanceValueEvaluationPtr() const
+std::shared_ptr<PSCS::Semantics::Classification::CS_InstanceValueEvaluation> CS_InstanceValueEvaluationImpl::getThisCS_InstanceValueEvaluationPtr() const
 {
 	return m_thisCS_InstanceValueEvaluationPtr.lock();
 }
-void CS_InstanceValueEvaluationImpl::setThisCS_InstanceValueEvaluationPtr(std::weak_ptr<CS_InstanceValueEvaluation> thisCS_InstanceValueEvaluationPtr)
+void CS_InstanceValueEvaluationImpl::setThisCS_InstanceValueEvaluationPtr(std::weak_ptr<PSCS::Semantics::Classification::CS_InstanceValueEvaluation> thisCS_InstanceValueEvaluationPtr)
 {
 	m_thisCS_InstanceValueEvaluationPtr = thisCS_InstanceValueEvaluationPtr;
 	setThisInstanceValueEvaluationPtr(thisCS_InstanceValueEvaluationPtr);
