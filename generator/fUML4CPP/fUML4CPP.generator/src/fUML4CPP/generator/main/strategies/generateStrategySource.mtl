@@ -10,6 +10,7 @@
 [import UML4CPP::generator::main::helpers::keywords /]
 [import UML4CPP::generator::main::components::generateProperty /]
 [import UML4CPP::generator::main::components::generateOperation /]
+[import UML4CPP::generator::main::components::generateOpaqueBehavior /]
 
 [template public generateStrategySource(aClass : Class) {
 	aPackage : Package = aClass._package;
