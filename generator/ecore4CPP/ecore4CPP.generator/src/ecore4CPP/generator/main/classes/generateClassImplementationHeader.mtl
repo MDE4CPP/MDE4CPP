@@ -64,7 +64,7 @@ virtual public [ClassWithNamespace(anEClass, sClass)/]Impl[/for][if (anEClass.eS
 	{
 		public: 
 			[className/](const [className/] & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const[if(anEClass.abstract)] = 0[/if];
 			[className/]& operator=([className/] const&); [comment partial =operator is possible/]
 
 		protected:
@@ -91,7 +91,7 @@ virtual public [ClassWithNamespace(anEClass, sClass)/]Impl[/for][if (anEClass.eS
 
 		public:
 			//destructor
-			virtual ~[className/]();
+			virtual ~[className/]()[if(anEClass.abstract)] = 0[/if];
 			
 			//*********************************
 			// Operations

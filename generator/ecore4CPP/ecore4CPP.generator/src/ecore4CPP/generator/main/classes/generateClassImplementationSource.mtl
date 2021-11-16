@@ -397,6 +397,7 @@ using namespace [anEClass.generateNamespaceDefinition()/];
 	[/for]
 	return *this;
 }
+[if(anEClass.abstract = false)]
 
 std::shared_ptr<ecore::EObject> [className/]::copy() const
 {
@@ -408,6 +409,7 @@ std::shared_ptr<ecore::EObject> [className/]::copy() const
 [/if]
 	return element;
 }
+[/if]
 
 //*********************************
 // Operations

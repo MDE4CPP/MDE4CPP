@@ -47,7 +47,7 @@ using namespace [anEPackage.generateNamespaceDefinition()/];
 
 [className/]::[className/]()
 {
-	[for (aClass : EClass | anEPackage.eClassifiers->selectByKind(EClass)->reject(doNotGenerateEClassifier())->asOrderedSet()->sortedBy(name)) ? (aClass.abstract=false)]
+	[for (aClass : EClass | anEPackage.eClassifiers->selectByKind(EClass)->reject(doNotGenerateEClassifier())->asOrderedSet()->sortedBy(name)) ? (aClass.abstract=false and aClass.interface=false)]
 	m_idMap.insert(std::make_pair("[aClass.generateTypeClass()/]", [anEPackage.name/]Package::[aClass.getStaticAttributeIDName()/]));
 	[/for]
 [if (generateObjectMonitoring())]
@@ -133,7 +133,7 @@ std::shared_ptr<[needNamespace(anEPackage, 'EObject')/]> [className/]::create(co
 {
 	switch(metaElementID)
 	{
-	[for (aClass : EClass | anEPackage.eClassifiers->selectByKind(EClass)->reject(doNotGenerateEClassifier())->asOrderedSet()->sortedBy(name)) ? (aClass.abstract=false)]
+	[for (aClass : EClass | anEPackage.eClassifiers->selectByKind(EClass)->reject(doNotGenerateEClassifier())->asOrderedSet()->sortedBy(name)) ? (aClass.abstract=false and aClass.interface=false)]
 	[let ref:OrderedSet(EReference) = aClass.getAllCompositionsToClass()->reject(doNotGenerateEStructuralFeature())]
 		case [anEPackage.name/]Package::[aClass.getStaticAttributeIDName()/]:
 		{
@@ -203,7 +203,7 @@ std::shared_ptr<[needNamespace(anEPackage, 'EObject')/]> [className/]::create(st
     return nullptr;
 }
 
-[for (aClass : EClass | anEPackage.eClassifiers->selectByKind(EClass)->reject(doNotGenerateEClassifier())->asOrderedSet()->sortedBy(name)) ? (aClass.abstract=false)]
+[for (aClass : EClass | anEPackage.eClassifiers->selectByKind(EClass)->reject(doNotGenerateEClassifier())->asOrderedSet()->sortedBy(name)) ? (aClass.abstract=false and aClass.interface=false)]
 std::shared_ptr<[aClass.generateTypeClass()/]> [className/]::create[aClass.name/](const int metaElementID/*=-1*/)[if (not generateObjectMonitoring())] const[/if]
 {
 	std::shared_ptr<[aClass.generateTypeClass()/]Impl> element(new [aClass.generateTypeClass()/]Impl());
