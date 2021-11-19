@@ -231,7 +231,7 @@ void [anEAttribute.eContainingClass.name.toUpperFirst()/]Impl::[redefinedEAttrib
 */]
 
 [template public generateAttributeCreation(anEAttribute : EAttribute)]
-[anEAttribute.getClassMemberName()/] = factory->createEAttribute_as_eStructuralFeatures_in_EClass([anEAttribute.eContainingClass.getClassMemberName()/], [anEAttribute.getStaticAttributeIDName()/]);
+[anEAttribute.getClassMemberName()/] = factory->createEAttribute_as_eAttributes_in_EClass([anEAttribute.eContainingClass.getClassMemberName()/], [anEAttribute.getStaticAttributeIDName()/]);
 
 [/template]
 

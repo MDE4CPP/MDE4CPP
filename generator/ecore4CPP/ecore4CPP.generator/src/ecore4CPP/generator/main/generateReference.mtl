@@ -269,7 +269,7 @@ void [anEReference.eContainingClass.name.toUpperFirst()/]Impl::[redefinedERefere
 */]
 
 [template public generateReferenceCreation(anEReference : EReference)]
-[anEReference.getClassMemberName()/] = factory->createEReference_as_eStructuralFeatures_in_EClass([anEReference.eContainingClass.getClassMemberName()/], [anEReference.getStaticAttributeIDName()/]);
+[anEReference.getClassMemberName()/] = factory->createEReference_as_eReferences_in_EClass([anEReference.eContainingClass.getClassMemberName()/], [anEReference.getStaticAttributeIDName()/]);
 
 [/template] 
  
