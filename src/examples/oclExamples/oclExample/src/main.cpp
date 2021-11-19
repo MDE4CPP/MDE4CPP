@@ -174,9 +174,9 @@ void ecore_query1() {
 void ecore_query2() {
     std::string qry = "self.eAttributes";
     std::shared_ptr<ecore::EPackage> ep = efactory->createEPackage();
-    std::shared_ptr<ecore::EClass> context = efactory->createEClass_in_EPackage(ep);
-    std::shared_ptr<ecore::EAttribute> a1 = efactory->createEAttribute_in_EContainingClass(context);
-    std::shared_ptr<ecore::EAttribute> a2 = efactory->createEAttribute_in_EContainingClass(context);
+    std::shared_ptr<ecore::EClass> context = efactory->createEClass_as_eClassifiers_in_EPackage(ep);
+    std::shared_ptr<ecore::EAttribute> a1 = efactory->createEAttribute_as_eAttributes_in_EClass(context);
+    std::shared_ptr<ecore::EAttribute> a2 = efactory->createEAttribute_as_eAttributes_in_EClass(context);
 
     context->setName("theContext");
     a1->setName("a1");
@@ -194,8 +194,8 @@ void ecore_query2() {
 void ecore_query3() {
     std::string qry = "self.eType";
     std::shared_ptr<ecore::EPackage> ep = efactory->createEPackage();
-    std::shared_ptr<ecore::EClass> c1 = efactory->createEClass_in_EPackage(ep);
-    std::shared_ptr<ecore::EAttribute> context = efactory->createEAttribute_in_EContainingClass(c1);
+    std::shared_ptr<ecore::EClass> c1 = efactory->createEClass_as_eClassifiers_in_EPackage(ep);
+    std::shared_ptr<ecore::EAttribute> context = efactory->createEAttribute_as_eAttributes_in_EClass(c1);
 
     context->setName("a1");
     context->setLowerBound(0);
@@ -210,10 +210,10 @@ void ecore_query3() {
 void ecore_query4() {
     std::string qry = "self";
     std::shared_ptr<ecore::EPackage> ep = efactory->createEPackage();
-    std::shared_ptr<ecore::EClass> c1 = efactory->createEClass_in_EPackage(ep);
-    std::shared_ptr<ecore::EOperation> context = efactory->createEOperation_in_EContainingClass(c1);
-    std::shared_ptr<ecore::EParameter> p1 = efactory->createEParameter_in_EOperation(context);
-    std::shared_ptr<ecore::EParameter> p2 = efactory->createEParameter_in_EOperation(context);
+    std::shared_ptr<ecore::EClass> c1 = efactory->createEClass_as_eClassifiers_in_EPackage(ep);
+    std::shared_ptr<ecore::EOperation> context = efactory->createEOperation_as_eOperations_in_EClass(c1);
+    std::shared_ptr<ecore::EParameter> p1 = efactory->createEParameter_as_eParameters_in_EOperation(context);
+    std::shared_ptr<ecore::EParameter> p2 = efactory->createEParameter_as_eParameters_in_EOperation(context);
 
     context->setName("o1");
     context->setEType(types::typesPackage::eInstance()->getBoolean_Class());
@@ -242,12 +242,12 @@ void uml_query1() {
 void uml_query2() {
     std::string qry = "self.ownedElement";
     std::shared_ptr<uml::Model> p = ufactory->createModel();
-    std::shared_ptr<uml::Class> context = ufactory->createClass_in_Package(p);
-    std::shared_ptr<uml::Property> a1 = ufactory->createProperty_in_Class(context);
-    std::shared_ptr<uml::Property> a2 = ufactory->createProperty_in_Class(context);
-    std::shared_ptr<uml::Operation> o1 = ufactory->createOperation_in_Class(context);
-    std::shared_ptr<uml::Parameter> p1 = ufactory->createParameter_in_Operation(o1);
-    std::shared_ptr<uml::Parameter> p2 = ufactory->createParameter_in_Operation(o1);
+    std::shared_ptr<uml::Class> context = ufactory->createClass_as_ownedType_in_Package(p);
+    std::shared_ptr<uml::Property> a1 = ufactory->createProperty_as_ownedAttribute_in_Class(context);
+    std::shared_ptr<uml::Property> a2 = ufactory->createProperty_as_ownedAttribute_in_Class(context);
+    std::shared_ptr<uml::Operation> o1 = ufactory->createOperation_as_ownedOperation_in_Class(context);
+    std::shared_ptr<uml::Parameter> p1 = ufactory->createParameter_as_ownedParameter_in_Operation(o1);
+    std::shared_ptr<uml::Parameter> p2 = ufactory->createParameter_as_ownedParameter_in_Operation(o1);
 
     context->setName("theContext");
     a1->setName("a1");
@@ -274,8 +274,8 @@ void uml_query2() {
 void uml_query3() {
     std::string qry = "self.name";
     std::shared_ptr<uml::Model> p = ufactory->createModel();
-    std::shared_ptr<uml::Class> c1 = ufactory->createClass_in_Package(p);
-    std::shared_ptr<uml::Property> context = ufactory->createProperty_in_Class(c1);
+    std::shared_ptr<uml::Class> c1 = ufactory->createClass_as_ownedType_in_Package(p);
+    std::shared_ptr<uml::Property> context = ufactory->createProperty_as_ownedAttribute_in_Class(c1);
     c1->setName("c1");
     context->setName("a1");
     context->setLower(0);
@@ -290,10 +290,10 @@ void uml_query3() {
 void uml_query4() {
     std::string qry = "self";
     std::shared_ptr<uml::Model> p = ufactory->createModel();
-    std::shared_ptr<uml::Class> c1 = ufactory->createClass_in_Package(p);
-    std::shared_ptr<uml::Operation> context = ufactory->createOperation_in_Class(c1);
-    std::shared_ptr<uml::Parameter> p1 = ufactory->createParameter_in_Operation(context);
-    std::shared_ptr<uml::Parameter> p2 = ufactory->createParameter_in_Operation(context);
+    std::shared_ptr<uml::Class> c1 = ufactory->createClass_as_ownedType_in_Package(p);
+    std::shared_ptr<uml::Operation> context = ufactory->createOperation_as_ownedOperation_in_Class(c1);
+    std::shared_ptr<uml::Parameter> p1 = ufactory->createParameter_as_ownedParameter_in_Operation(context);
+    std::shared_ptr<uml::Parameter> p2 = ufactory->createParameter_as_ownedParameter_in_Operation(context);
 
     c1->setName("theContext");
     context->setName("o1");
@@ -327,9 +327,9 @@ void ecore_any_query1() {
 void ecore_any_query2() {
     std::string qry = "self.eAttributes";
     std::shared_ptr<ecore::EPackage> ep = efactory->createEPackage();
-    std::shared_ptr<ecore::EClass> context = efactory->createEClass_in_EPackage(ep);
-    std::shared_ptr<ecore::EAttribute> a1 = efactory->createEAttribute_in_EContainingClass(context);
-    std::shared_ptr<ecore::EAttribute> a2 = efactory->createEAttribute_in_EContainingClass(context);
+    std::shared_ptr<ecore::EClass> context = efactory->createEClass_as_eClassifiers_in_EPackage(ep);
+    std::shared_ptr<ecore::EAttribute> a1 = efactory->createEAttribute_as_eAttributes_in_EClass(context);
+    std::shared_ptr<ecore::EAttribute> a2 = efactory->createEAttribute_as_eAttributes_in_EClass(context);
 
     context->setName("theContext");
     a1->setName("a1");
@@ -360,8 +360,8 @@ void ecore_any_query2() {
 void ecore_any_query3() {
     std::string qry = "self.eType";
     std::shared_ptr<ecore::EPackage> ep = efactory->createEPackage();
-    std::shared_ptr<ecore::EClass> c1 = efactory->createEClass_in_EPackage(ep);
-    std::shared_ptr<ecore::EAttribute> context = efactory->createEAttribute_in_EContainingClass(c1);
+    std::shared_ptr<ecore::EClass> c1 = efactory->createEClass_as_eClassifiers_in_EPackage(ep);
+    std::shared_ptr<ecore::EAttribute> context = efactory->createEAttribute_as_eAttributes_in_EClass(c1);
 
     context->setName("a1");
     context->setLowerBound(0);
@@ -378,10 +378,10 @@ void ecore_any_query3() {
 void ecore_any_query4() {
     std::string qry = "self";
     std::shared_ptr<ecore::EPackage> ep = efactory->createEPackage();
-    std::shared_ptr<ecore::EClass> c1 = efactory->createEClass_in_EPackage(ep);
-    std::shared_ptr<ecore::EOperation> context = efactory->createEOperation_in_EContainingClass(c1);
-    std::shared_ptr<ecore::EParameter> p1 = efactory->createEParameter_in_EOperation(context);
-    std::shared_ptr<ecore::EParameter> p2 = efactory->createEParameter_in_EOperation(context);
+    std::shared_ptr<ecore::EClass> c1 = efactory->createEClass_as_eClassifiers_in_EPackage(ep);
+    std::shared_ptr<ecore::EOperation> context = efactory->createEOperation_as_eOperations_in_EClass(c1);
+    std::shared_ptr<ecore::EParameter> p1 = efactory->createEParameter_as_eParameters_in_EOperation(context);
+    std::shared_ptr<ecore::EParameter> p2 = efactory->createEParameter_as_eParameters_in_EOperation(context);
 
     context->setName("o1");
     context->setEType(types::typesPackage::eInstance()->getBoolean_Class());
@@ -402,12 +402,12 @@ void ecore_any_query4() {
 void ecore_any_query5() {
     std::string qry = "self.eStructuralFeatures";
     std::shared_ptr<ecore::EPackage> ep = efactory->createEPackage();
-    std::shared_ptr<ecore::EClass> context = efactory->createEClass_in_EPackage(ep);
-    std::shared_ptr<ecore::EOperation> o1 = efactory->createEOperation_in_EContainingClass(context);
-    std::shared_ptr<ecore::EParameter> p1 = efactory->createEParameter_in_EOperation(o1);
-    std::shared_ptr<ecore::EParameter> p2 = efactory->createEParameter_in_EOperation(o1);
-    std::shared_ptr<ecore::EAttribute> a1 = efactory->createEAttribute_in_EContainingClass(context);
-    std::shared_ptr<ecore::EReference> r1 = efactory->createEReference_in_EContainingClass(context);
+    std::shared_ptr<ecore::EClass> context = efactory->createEClass_as_eClassifiers_in_EPackage(ep);
+    std::shared_ptr<ecore::EOperation> o1 = efactory->createEOperation_as_eOperations_in_EClass(context);
+    std::shared_ptr<ecore::EParameter> p1 = efactory->createEParameter_as_eParameters_in_EOperation(o1);
+    std::shared_ptr<ecore::EParameter> p2 = efactory->createEParameter_as_eParameters_in_EOperation(o1);
+    std::shared_ptr<ecore::EAttribute> a1 = efactory->createEAttribute_as_eAttributes_in_EClass(context);
+    std::shared_ptr<ecore::EReference> r1 = efactory->createEReference_as_eReferences_in_EClass(context);
 
     context->setName("theContext");
     a1->setName("a1");
@@ -449,12 +449,12 @@ void uml_any_query1() {
 void uml_any_query2() {
     std::string qry = "self.ownedElement";
     std::shared_ptr<uml::Model> p = ufactory->createModel();
-    std::shared_ptr<uml::Class> context = ufactory->createClass_in_Package(p);
-    std::shared_ptr<uml::Property> a1 = ufactory->createProperty_in_Class(context);
-    std::shared_ptr<uml::Property> a2 = ufactory->createProperty_in_Class(context);
-    std::shared_ptr<uml::Operation> o1 = ufactory->createOperation_in_Class(context);
-    std::shared_ptr<uml::Parameter> p1 = ufactory->createParameter_in_Operation(o1);
-    std::shared_ptr<uml::Parameter> p2 = ufactory->createParameter_in_Operation(o1);
+    std::shared_ptr<uml::Class> context = ufactory->createClass_as_ownedType_in_Package(p);
+    std::shared_ptr<uml::Property> a1 = ufactory->createProperty_as_ownedAttribute_in_Class(context);
+    std::shared_ptr<uml::Property> a2 = ufactory->createProperty_as_ownedAttribute_in_Class(context);
+    std::shared_ptr<uml::Operation> o1 = ufactory->createOperation_as_ownedOperation_in_Class(context);
+    std::shared_ptr<uml::Parameter> p1 = ufactory->createParameter_as_ownedParameter_in_Operation(o1);
+    std::shared_ptr<uml::Parameter> p2 = ufactory->createParameter_as_ownedParameter_in_Operation(o1);
 
     context->setName("theContext");
     a1->setName("a1");
@@ -484,9 +484,9 @@ void ecore_validate1() { /* NOT WORKING */
     std::string qry = "context C1 inv: self.a1 > 0 ";
 
     std::shared_ptr<ecore::EPackage> ep = efactory->createEPackage();
-    std::shared_ptr<ecore::EClass> c1 = efactory->createEClass_in_EPackage(ep);
-    std::shared_ptr<ecore::EAttribute> a1 = efactory->createEAttribute_in_EContainingClass(c1);
-    std::shared_ptr<ecore::EObject> context = efactory->createEObject(c1->getClassifierID());
+    std::shared_ptr<ecore::EClass> c1 = efactory->createEClass_as_eClassifiers_in_EPackage(ep);
+    std::shared_ptr<ecore::EAttribute> a1 = efactory->createEAttribute_as_eAttributes_in_EClass(c1);
+    std::shared_ptr<ecore::EObject> context = efactory->create(c1->getClassifierID());
 
     c1->setName("C1");
     a1->setName("a1");
@@ -502,8 +502,8 @@ void ecore_validate2() { /* NOT WORKING */
     std::string qry = "context C1 inv: self.a1 > 10 ";
 
     std::shared_ptr<ecore::EPackage> ep = efactory->createEPackage();
-    std::shared_ptr<ecore::EClass> c1 = efactory->createEClass_in_EPackage(ep);
-    std::shared_ptr<ecore::EAttribute> a1 = efactory->createEAttribute_in_EContainingClass(c1);
+    std::shared_ptr<ecore::EClass> c1 = efactory->createEClass_as_eClassifiers_in_EPackage(ep);
+    std::shared_ptr<ecore::EAttribute> a1 = efactory->createEAttribute_as_eAttributes_in_EClass(c1);
     std::shared_ptr<ecore::EObject> context = efactory->create(c1->getClassifierID());
 
     c1->setName("C1");
