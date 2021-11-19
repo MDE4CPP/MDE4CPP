@@ -83,7 +83,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="Element_Level9" eSuperTypes="#//Element_Level8"/>
   <eClassifiers xsi:type="ecore:EClass" name="Container_Level9" eSuperTypes="#//Container_Level8">
     <eStructuralFeatures xsi:type="ecore:EReference" name="subset9" upperBound="-1"
-        eType="#//Element_Level9" containment="true">
+        eType="#//Element_Level9">
       <eAnnotations source="subsets" references="#//Container_Level8/subset8"/>
       <eAnnotations source="union"/>
     </eStructuralFeatures>
@@ -91,7 +91,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="Element_Level10" eSuperTypes="#//Element_Level9"/>
   <eClassifiers xsi:type="ecore:EClass" name="Container_Level10" eSuperTypes="#//Container_Level9">
     <eStructuralFeatures xsi:type="ecore:EReference" name="subset10" upperBound="-1"
-        eType="#//Element_Level10" containment="true">
+        eType="#//Element_Level10">
       <eAnnotations source="subsets" references="#//Container_Level9/subset9"/>
       <eAnnotations source="union"/>
     </eStructuralFeatures>
