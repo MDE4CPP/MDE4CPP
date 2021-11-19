@@ -72,12 +72,14 @@
 
 [query public getAllCompositionsToClass(aClass : EClass) : OrderedSet(EReference) = 
 	if not aClass.getRootPackage()->oclIsUndefined() 
-	then aClass.getRootPackage().eAllContents()->filter(EClass).eReferences->select(ref : EReference | ref.isDirectOrIndirectCompositionToClass(aClass))
+	then aClass.getRootPackage().eAllContents()->filter(EClass).eReferences->select(ref : EReference | (ref.isDirectOrIndirectCompositionToClass(aClass)) or (ref.isSubsetToClass(aClass)) )
 		 ->addAll(aClass.eSuperTypes->reject(s : EClass | s.getRootPackage() = aClass.getRootPackage()).getAllCompositionsToClass())->asOrderedSet()
 	else OrderedSet(EReference){} 
 	endif/] [comment ->addAll(aClass.eSuperTypes->reject(...)) : Also search for compositions of base classes from other models. Required due to inheritance between fUML and PSCS classes across model boundaries/]
 [query public getCompositionsToClass(containerClass : EClass, containedClass : EClass) : OrderedSet(EReference) = containerClass.eReferences->select(isDirectOrIndirectCompositionToClass(containedClass)) /]
 [query private isDirectOrIndirectCompositionToClass(aComposition : EReference, anEClass : EClass) : Boolean = aComposition.containment and (aComposition.eReferenceType = anEClass or aComposition.eReferenceType.isSuperTypeOf(anEClass)) /]
+
+[query private isSubsetToClass(aReference : EReference, anEClass : EClass) : Boolean = (aReference.hasSubset() and ( (aReference.eReferenceType = anEClass) or (aReference.eReferenceType.isSuperTypeOf(anEClass) ) and ((aReference.eOpposite->isEmpty()) or (not aReference.eOpposite.containment) ) )) /]
 
 [query public hasImplOnly(aModelElement : EModelElement) : Boolean =  aModelElement.hasKey(keyImplOnly())/]
 [query public doNotGenerateEModelElement(aModelElement : EModelElement) : Boolean =  aModelElement.hasKey(keyDoNotGenerate())/]

@@ -25,11 +25,11 @@
 virtual std::shared_ptr<[aEClass.generateTypeClass()/]> create[aEClass.name/](const int metaElementID = [aEClass.ePackage.name/]Package::[aEClass.getStaticAttributeIDName()/])[if (not generateObjectMonitoring())] const[/if] [abstractSufix(impl)/];
 [let ref:OrderedSet(EReference) = aEClass.getAllCompositionsToClass()->reject(doNotGenerateEStructuralFeature())]
 	[for(aReference:EReference | ref->sortedBy(name)) before('//Add as contained object\n')]
-		[if not (aReference.oclIsUndefined() or aReference.eContainingClass.oclIsUndefined())]
+		[if not (aReference.oclIsUndefined() or aReference.eContainingClass.oclIsUndefined() or aReference.container)]
 			[if (aReference.eOpposite->isEmpty())]
 virtual std::shared_ptr<[aEClass.generateTypeClass()/]> create[aEClass.name/]_as_[aReference.name/]_in_[aReference.eContainingClass.name.toUpperFirst()/](std::shared_ptr<[aReference.eContainingClass.generateTypeClass()/]> par_[aReference.eContainingClass.name/], const int metaElementID = [aEClass.ePackage.name/]Package::[aEClass.getStaticAttributeIDName()/])[if (not generateObjectMonitoring())] const[/if] [abstractSufix(impl)/];
 			[else]
-virtual std::shared_ptr<[aEClass.generateTypeClass()/]> create[aEClass.name/]_as_[aReference.name/]_in_[aReference.eContainingClass.name.toUpperFirst()/]([aReference.eOpposite.generateReferenceType(true)/] par_[aReference.eContainingClass.name/], const int metaElementID = [aEClass.ePackage.name/]Package::[aEClass.getStaticAttributeIDName()/])[if (not generateObjectMonitoring())] const[/if] [abstractSufix(impl)/];
+virtual std::shared_ptr<[aEClass.generateTypeClass()/]> create[aEClass.name/]_as_[aReference.name/]_in_[aReference.eContainingClass.name.toUpperFirst()/]([aReference.eOpposite.pointertype()/]<[aReference.eOpposite.eGenericType.generateCppType(false)/]> par_[aReference.eContainingClass.name/], const int metaElementID = [aEClass.ePackage.name/]Package::[aEClass.getStaticAttributeIDName()/])[if (not generateObjectMonitoring())] const[/if] [abstractSufix(impl)/];
 			[/if]
 		[/if]
 	[/for]
