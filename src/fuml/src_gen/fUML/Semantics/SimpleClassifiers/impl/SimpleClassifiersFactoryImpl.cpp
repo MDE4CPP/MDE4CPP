@@ -73,19 +73,19 @@ std::shared_ptr<ecore::EObject> SimpleClassifiersFactoryImpl::create(const int m
 					//BooleanValue has value as a containment
 					case  fUML::Semantics::Activities::ActivitiesPackage::OBJECTTOKEN_ATTRIBUTE_VALUE:	
 					{
-						auto castedContainer = std::dynamic_pointer_cast<fUML::Semantics::Activities::ObjectToken>(container);
+						std::shared_ptr<fUML::Semantics::Activities::ObjectToken> castedContainer = std::dynamic_pointer_cast<fUML::Semantics::Activities::ObjectToken> (container);;
 						return this->createBooleanValue_as_value_in_ObjectToken(castedContainer,metaElementID);
 					}
 					//BooleanValue has values as a containment
 					case  fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::FEATUREVALUE_ATTRIBUTE_VALUES:	
 					{
-						auto castedContainer = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::FeatureValue>(container);
+						std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> castedContainer = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::FeatureValue> (container);;
 						return this->createBooleanValue_as_values_in_FeatureValue(castedContainer,metaElementID);
 					}
 					//BooleanValue has values as a containment
 					case  fUML::Semantics::CommonBehavior::CommonBehaviorPackage::PARAMETERVALUE_ATTRIBUTE_VALUES:	
 					{
-						auto castedContainer = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::ParameterValue>(container);
+						std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> castedContainer = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::ParameterValue> (container);;
 						return this->createBooleanValue_as_values_in_ParameterValue(castedContainer,metaElementID);
 					}
 					default:
@@ -107,19 +107,19 @@ std::shared_ptr<ecore::EObject> SimpleClassifiersFactoryImpl::create(const int m
 					//DataValue has value as a containment
 					case  fUML::Semantics::Activities::ActivitiesPackage::OBJECTTOKEN_ATTRIBUTE_VALUE:	
 					{
-						auto castedContainer = std::dynamic_pointer_cast<fUML::Semantics::Activities::ObjectToken>(container);
+						std::shared_ptr<fUML::Semantics::Activities::ObjectToken> castedContainer = std::dynamic_pointer_cast<fUML::Semantics::Activities::ObjectToken> (container);;
 						return this->createDataValue_as_value_in_ObjectToken(castedContainer,metaElementID);
 					}
 					//DataValue has values as a containment
 					case  fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::FEATUREVALUE_ATTRIBUTE_VALUES:	
 					{
-						auto castedContainer = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::FeatureValue>(container);
+						std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> castedContainer = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::FeatureValue> (container);;
 						return this->createDataValue_as_values_in_FeatureValue(castedContainer,metaElementID);
 					}
 					//DataValue has values as a containment
 					case  fUML::Semantics::CommonBehavior::CommonBehaviorPackage::PARAMETERVALUE_ATTRIBUTE_VALUES:	
 					{
-						auto castedContainer = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::ParameterValue>(container);
+						std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> castedContainer = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::ParameterValue> (container);;
 						return this->createDataValue_as_values_in_ParameterValue(castedContainer,metaElementID);
 					}
 					default:
@@ -141,19 +141,19 @@ std::shared_ptr<ecore::EObject> SimpleClassifiersFactoryImpl::create(const int m
 					//EnumerationValue has value as a containment
 					case  fUML::Semantics::Activities::ActivitiesPackage::OBJECTTOKEN_ATTRIBUTE_VALUE:	
 					{
-						auto castedContainer = std::dynamic_pointer_cast<fUML::Semantics::Activities::ObjectToken>(container);
+						std::shared_ptr<fUML::Semantics::Activities::ObjectToken> castedContainer = std::dynamic_pointer_cast<fUML::Semantics::Activities::ObjectToken> (container);;
 						return this->createEnumerationValue_as_value_in_ObjectToken(castedContainer,metaElementID);
 					}
 					//EnumerationValue has values as a containment
 					case  fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::FEATUREVALUE_ATTRIBUTE_VALUES:	
 					{
-						auto castedContainer = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::FeatureValue>(container);
+						std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> castedContainer = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::FeatureValue> (container);;
 						return this->createEnumerationValue_as_values_in_FeatureValue(castedContainer,metaElementID);
 					}
 					//EnumerationValue has values as a containment
 					case  fUML::Semantics::CommonBehavior::CommonBehaviorPackage::PARAMETERVALUE_ATTRIBUTE_VALUES:	
 					{
-						auto castedContainer = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::ParameterValue>(container);
+						std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> castedContainer = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::ParameterValue> (container);;
 						return this->createEnumerationValue_as_values_in_ParameterValue(castedContainer,metaElementID);
 					}
 					default:
@@ -189,19 +189,19 @@ std::shared_ptr<ecore::EObject> SimpleClassifiersFactoryImpl::create(const int m
 					//IntegerValue has value as a containment
 					case  fUML::Semantics::Activities::ActivitiesPackage::OBJECTTOKEN_ATTRIBUTE_VALUE:	
 					{
-						auto castedContainer = std::dynamic_pointer_cast<fUML::Semantics::Activities::ObjectToken>(container);
+						std::shared_ptr<fUML::Semantics::Activities::ObjectToken> castedContainer = std::dynamic_pointer_cast<fUML::Semantics::Activities::ObjectToken> (container);;
 						return this->createIntegerValue_as_value_in_ObjectToken(castedContainer,metaElementID);
 					}
 					//IntegerValue has values as a containment
 					case  fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::FEATUREVALUE_ATTRIBUTE_VALUES:	
 					{
-						auto castedContainer = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::FeatureValue>(container);
+						std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> castedContainer = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::FeatureValue> (container);;
 						return this->createIntegerValue_as_values_in_FeatureValue(castedContainer,metaElementID);
 					}
 					//IntegerValue has values as a containment
 					case  fUML::Semantics::CommonBehavior::CommonBehaviorPackage::PARAMETERVALUE_ATTRIBUTE_VALUES:	
 					{
-						auto castedContainer = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::ParameterValue>(container);
+						std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> castedContainer = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::ParameterValue> (container);;
 						return this->createIntegerValue_as_values_in_ParameterValue(castedContainer,metaElementID);
 					}
 					default:
@@ -223,19 +223,19 @@ std::shared_ptr<ecore::EObject> SimpleClassifiersFactoryImpl::create(const int m
 					//RealValue has value as a containment
 					case  fUML::Semantics::Activities::ActivitiesPackage::OBJECTTOKEN_ATTRIBUTE_VALUE:	
 					{
-						auto castedContainer = std::dynamic_pointer_cast<fUML::Semantics::Activities::ObjectToken>(container);
+						std::shared_ptr<fUML::Semantics::Activities::ObjectToken> castedContainer = std::dynamic_pointer_cast<fUML::Semantics::Activities::ObjectToken> (container);;
 						return this->createRealValue_as_value_in_ObjectToken(castedContainer,metaElementID);
 					}
 					//RealValue has values as a containment
 					case  fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::FEATUREVALUE_ATTRIBUTE_VALUES:	
 					{
-						auto castedContainer = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::FeatureValue>(container);
+						std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> castedContainer = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::FeatureValue> (container);;
 						return this->createRealValue_as_values_in_FeatureValue(castedContainer,metaElementID);
 					}
 					//RealValue has values as a containment
 					case  fUML::Semantics::CommonBehavior::CommonBehaviorPackage::PARAMETERVALUE_ATTRIBUTE_VALUES:	
 					{
-						auto castedContainer = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::ParameterValue>(container);
+						std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> castedContainer = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::ParameterValue> (container);;
 						return this->createRealValue_as_values_in_ParameterValue(castedContainer,metaElementID);
 					}
 					default:
@@ -257,25 +257,25 @@ std::shared_ptr<ecore::EObject> SimpleClassifiersFactoryImpl::create(const int m
 					//SignalInstance has eventPool as a containment
 					case  fUML::Semantics::CommonBehavior::CommonBehaviorPackage::OBJECTACTIVATION_ATTRIBUTE_EVENTPOOL:	
 					{
-						auto castedContainer = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::ObjectActivation>(container);
+						std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation> castedContainer = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::ObjectActivation> (container);;
 						return this->createSignalInstance_as_eventPool_in_ObjectActivation(castedContainer,metaElementID);
 					}
 					//SignalInstance has value as a containment
 					case  fUML::Semantics::Activities::ActivitiesPackage::OBJECTTOKEN_ATTRIBUTE_VALUE:	
 					{
-						auto castedContainer = std::dynamic_pointer_cast<fUML::Semantics::Activities::ObjectToken>(container);
+						std::shared_ptr<fUML::Semantics::Activities::ObjectToken> castedContainer = std::dynamic_pointer_cast<fUML::Semantics::Activities::ObjectToken> (container);;
 						return this->createSignalInstance_as_value_in_ObjectToken(castedContainer,metaElementID);
 					}
 					//SignalInstance has values as a containment
 					case  fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::FEATUREVALUE_ATTRIBUTE_VALUES:	
 					{
-						auto castedContainer = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::FeatureValue>(container);
+						std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> castedContainer = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::FeatureValue> (container);;
 						return this->createSignalInstance_as_values_in_FeatureValue(castedContainer,metaElementID);
 					}
 					//SignalInstance has values as a containment
 					case  fUML::Semantics::CommonBehavior::CommonBehaviorPackage::PARAMETERVALUE_ATTRIBUTE_VALUES:	
 					{
-						auto castedContainer = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::ParameterValue>(container);
+						std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> castedContainer = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::ParameterValue> (container);;
 						return this->createSignalInstance_as_values_in_ParameterValue(castedContainer,metaElementID);
 					}
 					default:
@@ -297,19 +297,19 @@ std::shared_ptr<ecore::EObject> SimpleClassifiersFactoryImpl::create(const int m
 					//StringValue has value as a containment
 					case  fUML::Semantics::Activities::ActivitiesPackage::OBJECTTOKEN_ATTRIBUTE_VALUE:	
 					{
-						auto castedContainer = std::dynamic_pointer_cast<fUML::Semantics::Activities::ObjectToken>(container);
+						std::shared_ptr<fUML::Semantics::Activities::ObjectToken> castedContainer = std::dynamic_pointer_cast<fUML::Semantics::Activities::ObjectToken> (container);;
 						return this->createStringValue_as_value_in_ObjectToken(castedContainer,metaElementID);
 					}
 					//StringValue has values as a containment
 					case  fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::FEATUREVALUE_ATTRIBUTE_VALUES:	
 					{
-						auto castedContainer = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::FeatureValue>(container);
+						std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> castedContainer = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::FeatureValue> (container);;
 						return this->createStringValue_as_values_in_FeatureValue(castedContainer,metaElementID);
 					}
 					//StringValue has values as a containment
 					case  fUML::Semantics::CommonBehavior::CommonBehaviorPackage::PARAMETERVALUE_ATTRIBUTE_VALUES:	
 					{
-						auto castedContainer = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::ParameterValue>(container);
+						std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> castedContainer = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::ParameterValue> (container);;
 						return this->createStringValue_as_values_in_ParameterValue(castedContainer,metaElementID);
 					}
 					default:
@@ -331,19 +331,19 @@ std::shared_ptr<ecore::EObject> SimpleClassifiersFactoryImpl::create(const int m
 					//UnlimitedNaturalValue has value as a containment
 					case  fUML::Semantics::Activities::ActivitiesPackage::OBJECTTOKEN_ATTRIBUTE_VALUE:	
 					{
-						auto castedContainer = std::dynamic_pointer_cast<fUML::Semantics::Activities::ObjectToken>(container);
+						std::shared_ptr<fUML::Semantics::Activities::ObjectToken> castedContainer = std::dynamic_pointer_cast<fUML::Semantics::Activities::ObjectToken> (container);;
 						return this->createUnlimitedNaturalValue_as_value_in_ObjectToken(castedContainer,metaElementID);
 					}
 					//UnlimitedNaturalValue has values as a containment
 					case  fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::FEATUREVALUE_ATTRIBUTE_VALUES:	
 					{
-						auto castedContainer = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::FeatureValue>(container);
+						std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> castedContainer = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::FeatureValue> (container);;
 						return this->createUnlimitedNaturalValue_as_values_in_FeatureValue(castedContainer,metaElementID);
 					}
 					//UnlimitedNaturalValue has values as a containment
 					case  fUML::Semantics::CommonBehavior::CommonBehaviorPackage::PARAMETERVALUE_ATTRIBUTE_VALUES:	
 					{
-						auto castedContainer = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::ParameterValue>(container);
+						std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> castedContainer = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::ParameterValue> (container);;
 						return this->createUnlimitedNaturalValue_as_values_in_ParameterValue(castedContainer,metaElementID);
 					}
 					default:
@@ -394,8 +394,8 @@ std::shared_ptr<fUML::Semantics::SimpleClassifiers::BooleanValue> SimpleClassifi
 	if(nullptr != par_ObjectToken)
 	{
 		par_ObjectToken->setValue(element);
-	
 	}
+	
 	element->setThisBooleanValuePtr(element);
 	return element;
 	
@@ -407,8 +407,8 @@ std::shared_ptr<fUML::Semantics::SimpleClassifiers::BooleanValue> SimpleClassifi
 	if(nullptr != par_FeatureValue)
 	{
 		par_FeatureValue->getValues()->push_back(element);
-	
 	}
+	
 	element->setThisBooleanValuePtr(element);
 	return element;
 	
@@ -420,8 +420,8 @@ std::shared_ptr<fUML::Semantics::SimpleClassifiers::BooleanValue> SimpleClassifi
 	if(nullptr != par_ParameterValue)
 	{
 		par_ParameterValue->getValues()->push_back(element);
-	
 	}
+	
 	element->setThisBooleanValuePtr(element);
 	return element;
 	
@@ -440,8 +440,8 @@ std::shared_ptr<fUML::Semantics::SimpleClassifiers::DataValue> SimpleClassifiers
 	if(nullptr != par_ObjectToken)
 	{
 		par_ObjectToken->setValue(element);
-	
 	}
+	
 	element->setThisDataValuePtr(element);
 	return element;
 	
@@ -453,8 +453,8 @@ std::shared_ptr<fUML::Semantics::SimpleClassifiers::DataValue> SimpleClassifiers
 	if(nullptr != par_FeatureValue)
 	{
 		par_FeatureValue->getValues()->push_back(element);
-	
 	}
+	
 	element->setThisDataValuePtr(element);
 	return element;
 	
@@ -466,8 +466,8 @@ std::shared_ptr<fUML::Semantics::SimpleClassifiers::DataValue> SimpleClassifiers
 	if(nullptr != par_ParameterValue)
 	{
 		par_ParameterValue->getValues()->push_back(element);
-	
 	}
+	
 	element->setThisDataValuePtr(element);
 	return element;
 	
@@ -486,8 +486,8 @@ std::shared_ptr<fUML::Semantics::SimpleClassifiers::EnumerationValue> SimpleClas
 	if(nullptr != par_ObjectToken)
 	{
 		par_ObjectToken->setValue(element);
-	
 	}
+	
 	element->setThisEnumerationValuePtr(element);
 	return element;
 	
@@ -499,8 +499,8 @@ std::shared_ptr<fUML::Semantics::SimpleClassifiers::EnumerationValue> SimpleClas
 	if(nullptr != par_FeatureValue)
 	{
 		par_FeatureValue->getValues()->push_back(element);
-	
 	}
+	
 	element->setThisEnumerationValuePtr(element);
 	return element;
 	
@@ -512,8 +512,8 @@ std::shared_ptr<fUML::Semantics::SimpleClassifiers::EnumerationValue> SimpleClas
 	if(nullptr != par_ParameterValue)
 	{
 		par_ParameterValue->getValues()->push_back(element);
-	
 	}
+	
 	element->setThisEnumerationValuePtr(element);
 	return element;
 	
@@ -532,8 +532,8 @@ std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> SimpleClassifi
 	if(nullptr != par_CompoundValue)
 	{
 		par_CompoundValue->getFeatureValues()->push_back(element);
-	
 	}
+	
 	element->setThisFeatureValuePtr(element);
 	return element;
 	
@@ -552,8 +552,8 @@ std::shared_ptr<fUML::Semantics::SimpleClassifiers::IntegerValue> SimpleClassifi
 	if(nullptr != par_ObjectToken)
 	{
 		par_ObjectToken->setValue(element);
-	
 	}
+	
 	element->setThisIntegerValuePtr(element);
 	return element;
 	
@@ -565,8 +565,8 @@ std::shared_ptr<fUML::Semantics::SimpleClassifiers::IntegerValue> SimpleClassifi
 	if(nullptr != par_FeatureValue)
 	{
 		par_FeatureValue->getValues()->push_back(element);
-	
 	}
+	
 	element->setThisIntegerValuePtr(element);
 	return element;
 	
@@ -578,8 +578,8 @@ std::shared_ptr<fUML::Semantics::SimpleClassifiers::IntegerValue> SimpleClassifi
 	if(nullptr != par_ParameterValue)
 	{
 		par_ParameterValue->getValues()->push_back(element);
-	
 	}
+	
 	element->setThisIntegerValuePtr(element);
 	return element;
 	
@@ -598,8 +598,8 @@ std::shared_ptr<fUML::Semantics::SimpleClassifiers::RealValue> SimpleClassifiers
 	if(nullptr != par_ObjectToken)
 	{
 		par_ObjectToken->setValue(element);
-	
 	}
+	
 	element->setThisRealValuePtr(element);
 	return element;
 	
@@ -611,8 +611,8 @@ std::shared_ptr<fUML::Semantics::SimpleClassifiers::RealValue> SimpleClassifiers
 	if(nullptr != par_FeatureValue)
 	{
 		par_FeatureValue->getValues()->push_back(element);
-	
 	}
+	
 	element->setThisRealValuePtr(element);
 	return element;
 	
@@ -624,8 +624,8 @@ std::shared_ptr<fUML::Semantics::SimpleClassifiers::RealValue> SimpleClassifiers
 	if(nullptr != par_ParameterValue)
 	{
 		par_ParameterValue->getValues()->push_back(element);
-	
 	}
+	
 	element->setThisRealValuePtr(element);
 	return element;
 	
@@ -644,8 +644,8 @@ std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance> SimpleClassi
 	if(nullptr != par_ObjectActivation)
 	{
 		par_ObjectActivation->getEventPool()->push_back(element);
-	
 	}
+	
 	element->setThisSignalInstancePtr(element);
 	return element;
 	
@@ -657,8 +657,8 @@ std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance> SimpleClassi
 	if(nullptr != par_ObjectToken)
 	{
 		par_ObjectToken->setValue(element);
-	
 	}
+	
 	element->setThisSignalInstancePtr(element);
 	return element;
 	
@@ -670,8 +670,8 @@ std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance> SimpleClassi
 	if(nullptr != par_FeatureValue)
 	{
 		par_FeatureValue->getValues()->push_back(element);
-	
 	}
+	
 	element->setThisSignalInstancePtr(element);
 	return element;
 	
@@ -683,8 +683,8 @@ std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance> SimpleClassi
 	if(nullptr != par_ParameterValue)
 	{
 		par_ParameterValue->getValues()->push_back(element);
-	
 	}
+	
 	element->setThisSignalInstancePtr(element);
 	return element;
 	
@@ -703,8 +703,8 @@ std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> SimpleClassifie
 	if(nullptr != par_ObjectToken)
 	{
 		par_ObjectToken->setValue(element);
-	
 	}
+	
 	element->setThisStringValuePtr(element);
 	return element;
 	
@@ -716,8 +716,8 @@ std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> SimpleClassifie
 	if(nullptr != par_FeatureValue)
 	{
 		par_FeatureValue->getValues()->push_back(element);
-	
 	}
+	
 	element->setThisStringValuePtr(element);
 	return element;
 	
@@ -729,8 +729,8 @@ std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> SimpleClassifie
 	if(nullptr != par_ParameterValue)
 	{
 		par_ParameterValue->getValues()->push_back(element);
-	
 	}
+	
 	element->setThisStringValuePtr(element);
 	return element;
 	
@@ -749,8 +749,8 @@ std::shared_ptr<fUML::Semantics::SimpleClassifiers::UnlimitedNaturalValue> Simpl
 	if(nullptr != par_ObjectToken)
 	{
 		par_ObjectToken->setValue(element);
-	
 	}
+	
 	element->setThisUnlimitedNaturalValuePtr(element);
 	return element;
 	
@@ -762,8 +762,8 @@ std::shared_ptr<fUML::Semantics::SimpleClassifiers::UnlimitedNaturalValue> Simpl
 	if(nullptr != par_FeatureValue)
 	{
 		par_FeatureValue->getValues()->push_back(element);
-	
 	}
+	
 	element->setThisUnlimitedNaturalValuePtr(element);
 	return element;
 	
@@ -775,8 +775,8 @@ std::shared_ptr<fUML::Semantics::SimpleClassifiers::UnlimitedNaturalValue> Simpl
 	if(nullptr != par_ParameterValue)
 	{
 		par_ParameterValue->getValues()->push_back(element);
-	
 	}
+	
 	element->setThisUnlimitedNaturalValuePtr(element);
 	return element;
 	

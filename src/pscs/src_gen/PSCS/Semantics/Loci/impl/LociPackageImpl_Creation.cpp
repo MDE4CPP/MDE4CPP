@@ -7,14 +7,14 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
-#include "ecore/EStringToStringMapEntry.hpp"
-#include "ecore/EAnnotation.hpp"
-#include "ecore/EReference.hpp"
-#include "ecore/EGenericType.hpp"
-#include "ecore/EOperation.hpp"
-#include "ecore/EClass.hpp"
 #include "ecore/EParameter.hpp"
 #include "ecore/EDataType.hpp"
+#include "ecore/EStringToStringMapEntry.hpp"
+#include "ecore/EGenericType.hpp"
+#include "ecore/EReference.hpp"
+#include "ecore/EOperation.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
 
 //depending model packages
 #include "ecore/ecorePackage.hpp"
@@ -46,7 +46,7 @@ void LociPackageImpl::createCS_ExecutionFactoryContent(std::shared_ptr<ecore::EP
 {
 	m_cS_ExecutionFactory_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, CS_EXECUTIONFACTORY_CLASS);
 	
-	m_cS_ExecutionFactory_Attribute_appliedProfiles = factory->createEReference_as_eStructuralFeatures_in_EClass(m_cS_ExecutionFactory_Class, CS_EXECUTIONFACTORY_ATTRIBUTE_APPLIEDPROFILES);
+	m_cS_ExecutionFactory_Attribute_appliedProfiles = factory->createEReference_as_eReferences_in_EClass(m_cS_ExecutionFactory_Class, CS_EXECUTIONFACTORY_ATTRIBUTE_APPLIEDPROFILES);
 	
 	m_cS_ExecutionFactory_Operation_getStereotypeApplication_Class_Element = factory->createEOperation_as_eOperations_in_EClass(m_cS_ExecutionFactory_Class, CS_EXECUTIONFACTORY_OPERATION_GETSTEREOTYPEAPPLICATION_CLASS_ELEMENT);
 	m_cS_ExecutionFactory_Operation_getStereotypeClass_EString_EString = factory->createEOperation_as_eOperations_in_EClass(m_cS_ExecutionFactory_Class, CS_EXECUTIONFACTORY_OPERATION_GETSTEREOTYPECLASS_ESTRING_ESTRING);

@@ -111,19 +111,19 @@ std::shared_ptr<ecore::EObject> ValuesFactoryImpl::create(const int metaElementI
 					//ObjectValue has value as a containment
 					case  fUML::Semantics::Activities::ActivitiesPackage::OBJECTTOKEN_ATTRIBUTE_VALUE:	
 					{
-						auto castedContainer = std::dynamic_pointer_cast<fUML::Semantics::Activities::ObjectToken>(container);
+						std::shared_ptr<fUML::Semantics::Activities::ObjectToken> castedContainer = std::dynamic_pointer_cast<fUML::Semantics::Activities::ObjectToken> (container);;
 						return this->createObjectValue_as_value_in_ObjectToken(castedContainer,metaElementID);
 					}
 					//ObjectValue has values as a containment
 					case  fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::FEATUREVALUE_ATTRIBUTE_VALUES:	
 					{
-						auto castedContainer = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::FeatureValue>(container);
+						std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> castedContainer = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::FeatureValue> (container);;
 						return this->createObjectValue_as_values_in_FeatureValue(castedContainer,metaElementID);
 					}
 					//ObjectValue has values as a containment
 					case  fUML::Semantics::CommonBehavior::CommonBehaviorPackage::PARAMETERVALUE_ATTRIBUTE_VALUES:	
 					{
-						auto castedContainer = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::ParameterValue>(container);
+						std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> castedContainer = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::ParameterValue> (container);;
 						return this->createObjectValue_as_values_in_ParameterValue(castedContainer,metaElementID);
 					}
 					default:
@@ -145,19 +145,19 @@ std::shared_ptr<ecore::EObject> ValuesFactoryImpl::create(const int metaElementI
 					//OclMessageValue has value as a containment
 					case  fUML::Semantics::Activities::ActivitiesPackage::OBJECTTOKEN_ATTRIBUTE_VALUE:	
 					{
-						auto castedContainer = std::dynamic_pointer_cast<fUML::Semantics::Activities::ObjectToken>(container);
+						std::shared_ptr<fUML::Semantics::Activities::ObjectToken> castedContainer = std::dynamic_pointer_cast<fUML::Semantics::Activities::ObjectToken> (container);;
 						return this->createOclMessageValue_as_value_in_ObjectToken(castedContainer,metaElementID);
 					}
 					//OclMessageValue has values as a containment
 					case  fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::FEATUREVALUE_ATTRIBUTE_VALUES:	
 					{
-						auto castedContainer = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::FeatureValue>(container);
+						std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> castedContainer = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::FeatureValue> (container);;
 						return this->createOclMessageValue_as_values_in_FeatureValue(castedContainer,metaElementID);
 					}
 					//OclMessageValue has values as a containment
 					case  fUML::Semantics::CommonBehavior::CommonBehaviorPackage::PARAMETERVALUE_ATTRIBUTE_VALUES:	
 					{
-						auto castedContainer = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::ParameterValue>(container);
+						std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> castedContainer = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::ParameterValue> (container);;
 						return this->createOclMessageValue_as_values_in_ParameterValue(castedContainer,metaElementID);
 					}
 					default:
@@ -179,19 +179,19 @@ std::shared_ptr<ecore::EObject> ValuesFactoryImpl::create(const int metaElementI
 					//OclVoidValue has value as a containment
 					case  fUML::Semantics::Activities::ActivitiesPackage::OBJECTTOKEN_ATTRIBUTE_VALUE:	
 					{
-						auto castedContainer = std::dynamic_pointer_cast<fUML::Semantics::Activities::ObjectToken>(container);
+						std::shared_ptr<fUML::Semantics::Activities::ObjectToken> castedContainer = std::dynamic_pointer_cast<fUML::Semantics::Activities::ObjectToken> (container);;
 						return this->createOclVoidValue_as_value_in_ObjectToken(castedContainer,metaElementID);
 					}
 					//OclVoidValue has values as a containment
 					case  fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::FEATUREVALUE_ATTRIBUTE_VALUES:	
 					{
-						auto castedContainer = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::FeatureValue>(container);
+						std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> castedContainer = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::FeatureValue> (container);;
 						return this->createOclVoidValue_as_values_in_FeatureValue(castedContainer,metaElementID);
 					}
 					//OclVoidValue has values as a containment
 					case  fUML::Semantics::CommonBehavior::CommonBehaviorPackage::PARAMETERVALUE_ATTRIBUTE_VALUES:	
 					{
-						auto castedContainer = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::ParameterValue>(container);
+						std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> castedContainer = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::ParameterValue> (container);;
 						return this->createOclVoidValue_as_values_in_ParameterValue(castedContainer,metaElementID);
 					}
 					default:
@@ -231,19 +231,19 @@ std::shared_ptr<ecore::EObject> ValuesFactoryImpl::create(const int metaElementI
 					//StaticValue has value as a containment
 					case  fUML::Semantics::Activities::ActivitiesPackage::OBJECTTOKEN_ATTRIBUTE_VALUE:	
 					{
-						auto castedContainer = std::dynamic_pointer_cast<fUML::Semantics::Activities::ObjectToken>(container);
+						std::shared_ptr<fUML::Semantics::Activities::ObjectToken> castedContainer = std::dynamic_pointer_cast<fUML::Semantics::Activities::ObjectToken> (container);;
 						return this->createStaticValue_as_value_in_ObjectToken(castedContainer,metaElementID);
 					}
 					//StaticValue has values as a containment
 					case  fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::FEATUREVALUE_ATTRIBUTE_VALUES:	
 					{
-						auto castedContainer = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::FeatureValue>(container);
+						std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> castedContainer = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::FeatureValue> (container);;
 						return this->createStaticValue_as_values_in_FeatureValue(castedContainer,metaElementID);
 					}
 					//StaticValue has values as a containment
 					case  fUML::Semantics::CommonBehavior::CommonBehaviorPackage::PARAMETERVALUE_ATTRIBUTE_VALUES:	
 					{
-						auto castedContainer = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::ParameterValue>(container);
+						std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> castedContainer = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::ParameterValue> (container);;
 						return this->createStaticValue_as_values_in_ParameterValue(castedContainer,metaElementID);
 					}
 					default:
@@ -271,19 +271,19 @@ std::shared_ptr<ecore::EObject> ValuesFactoryImpl::create(const int metaElementI
 					//UndefinedValue has value as a containment
 					case  fUML::Semantics::Activities::ActivitiesPackage::OBJECTTOKEN_ATTRIBUTE_VALUE:	
 					{
-						auto castedContainer = std::dynamic_pointer_cast<fUML::Semantics::Activities::ObjectToken>(container);
+						std::shared_ptr<fUML::Semantics::Activities::ObjectToken> castedContainer = std::dynamic_pointer_cast<fUML::Semantics::Activities::ObjectToken> (container);;
 						return this->createUndefinedValue_as_value_in_ObjectToken(castedContainer,metaElementID);
 					}
 					//UndefinedValue has values as a containment
 					case  fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::FEATUREVALUE_ATTRIBUTE_VALUES:	
 					{
-						auto castedContainer = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::FeatureValue>(container);
+						std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> castedContainer = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::FeatureValue> (container);;
 						return this->createUndefinedValue_as_values_in_FeatureValue(castedContainer,metaElementID);
 					}
 					//UndefinedValue has values as a containment
 					case  fUML::Semantics::CommonBehavior::CommonBehaviorPackage::PARAMETERVALUE_ATTRIBUTE_VALUES:	
 					{
-						auto castedContainer = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::ParameterValue>(container);
+						std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> castedContainer = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::ParameterValue> (container);;
 						return this->createUndefinedValue_as_values_in_ParameterValue(castedContainer,metaElementID);
 					}
 					default:
@@ -369,8 +369,8 @@ std::shared_ptr<ocl::Values::ObjectValue> ValuesFactoryImpl::createObjectValue_a
 	if(nullptr != par_ObjectToken)
 	{
 		par_ObjectToken->setValue(element);
-	
 	}
+	
 	element->setThisObjectValuePtr(element);
 	return element;
 	
@@ -382,8 +382,8 @@ std::shared_ptr<ocl::Values::ObjectValue> ValuesFactoryImpl::createObjectValue_a
 	if(nullptr != par_FeatureValue)
 	{
 		par_FeatureValue->getValues()->push_back(element);
-	
 	}
+	
 	element->setThisObjectValuePtr(element);
 	return element;
 	
@@ -395,8 +395,8 @@ std::shared_ptr<ocl::Values::ObjectValue> ValuesFactoryImpl::createObjectValue_a
 	if(nullptr != par_ParameterValue)
 	{
 		par_ParameterValue->getValues()->push_back(element);
-	
 	}
+	
 	element->setThisObjectValuePtr(element);
 	return element;
 	
@@ -415,8 +415,8 @@ std::shared_ptr<ocl::Values::OclMessageValue> ValuesFactoryImpl::createOclMessag
 	if(nullptr != par_ObjectToken)
 	{
 		par_ObjectToken->setValue(element);
-	
 	}
+	
 	element->setThisOclMessageValuePtr(element);
 	return element;
 	
@@ -428,8 +428,8 @@ std::shared_ptr<ocl::Values::OclMessageValue> ValuesFactoryImpl::createOclMessag
 	if(nullptr != par_FeatureValue)
 	{
 		par_FeatureValue->getValues()->push_back(element);
-	
 	}
+	
 	element->setThisOclMessageValuePtr(element);
 	return element;
 	
@@ -441,8 +441,8 @@ std::shared_ptr<ocl::Values::OclMessageValue> ValuesFactoryImpl::createOclMessag
 	if(nullptr != par_ParameterValue)
 	{
 		par_ParameterValue->getValues()->push_back(element);
-	
 	}
+	
 	element->setThisOclMessageValuePtr(element);
 	return element;
 	
@@ -461,8 +461,8 @@ std::shared_ptr<ocl::Values::OclVoidValue> ValuesFactoryImpl::createOclVoidValue
 	if(nullptr != par_ObjectToken)
 	{
 		par_ObjectToken->setValue(element);
-	
 	}
+	
 	element->setThisOclVoidValuePtr(element);
 	return element;
 	
@@ -474,8 +474,8 @@ std::shared_ptr<ocl::Values::OclVoidValue> ValuesFactoryImpl::createOclVoidValue
 	if(nullptr != par_FeatureValue)
 	{
 		par_FeatureValue->getValues()->push_back(element);
-	
 	}
+	
 	element->setThisOclVoidValuePtr(element);
 	return element;
 	
@@ -487,8 +487,8 @@ std::shared_ptr<ocl::Values::OclVoidValue> ValuesFactoryImpl::createOclVoidValue
 	if(nullptr != par_ParameterValue)
 	{
 		par_ParameterValue->getValues()->push_back(element);
-	
 	}
+	
 	element->setThisOclVoidValuePtr(element);
 	return element;
 	
@@ -528,8 +528,8 @@ std::shared_ptr<ocl::Values::StaticValue> ValuesFactoryImpl::createStaticValue_a
 	if(nullptr != par_ObjectToken)
 	{
 		par_ObjectToken->setValue(element);
-	
 	}
+	
 	element->setThisStaticValuePtr(element);
 	return element;
 	
@@ -541,8 +541,8 @@ std::shared_ptr<ocl::Values::StaticValue> ValuesFactoryImpl::createStaticValue_a
 	if(nullptr != par_FeatureValue)
 	{
 		par_FeatureValue->getValues()->push_back(element);
-	
 	}
+	
 	element->setThisStaticValuePtr(element);
 	return element;
 	
@@ -554,8 +554,8 @@ std::shared_ptr<ocl::Values::StaticValue> ValuesFactoryImpl::createStaticValue_a
 	if(nullptr != par_ParameterValue)
 	{
 		par_ParameterValue->getValues()->push_back(element);
-	
 	}
+	
 	element->setThisStaticValuePtr(element);
 	return element;
 	
@@ -581,8 +581,8 @@ std::shared_ptr<ocl::Values::UndefinedValue> ValuesFactoryImpl::createUndefinedV
 	if(nullptr != par_ObjectToken)
 	{
 		par_ObjectToken->setValue(element);
-	
 	}
+	
 	element->setThisUndefinedValuePtr(element);
 	return element;
 	
@@ -594,8 +594,8 @@ std::shared_ptr<ocl::Values::UndefinedValue> ValuesFactoryImpl::createUndefinedV
 	if(nullptr != par_FeatureValue)
 	{
 		par_FeatureValue->getValues()->push_back(element);
-	
 	}
+	
 	element->setThisUndefinedValuePtr(element);
 	return element;
 	
@@ -607,8 +607,8 @@ std::shared_ptr<ocl::Values::UndefinedValue> ValuesFactoryImpl::createUndefinedV
 	if(nullptr != par_ParameterValue)
 	{
 		par_ParameterValue->getValues()->push_back(element);
-	
 	}
+	
 	element->setThisUndefinedValuePtr(element);
 	return element;
 	

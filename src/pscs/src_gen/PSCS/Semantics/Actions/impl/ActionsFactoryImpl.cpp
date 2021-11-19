@@ -263,8 +263,8 @@ std::shared_ptr<PSCS::Semantics::Actions::CS_AcceptCallActionActivation> Actions
 	if(auto wp = par_ActivityNodeActivationGroup.lock())
 	{
 		wp->getNodeActivations()->push_back(element);
-	
 	}
+	
 	element->setThisCS_AcceptCallActionActivationPtr(element);
 	return element;
 	
@@ -283,8 +283,8 @@ std::shared_ptr<PSCS::Semantics::Actions::CS_AcceptEventActionActivation> Action
 	if(auto wp = par_ActivityNodeActivationGroup.lock())
 	{
 		wp->getNodeActivations()->push_back(element);
-	
 	}
+	
 	element->setThisCS_AcceptEventActionActivationPtr(element);
 	return element;
 	
@@ -303,8 +303,8 @@ std::shared_ptr<PSCS::Semantics::Actions::CS_AddStructuralFeatureValueActionActi
 	if(auto wp = par_ActivityNodeActivationGroup.lock())
 	{
 		wp->getNodeActivations()->push_back(element);
-	
 	}
+	
 	element->setThisCS_AddStructuralFeatureValueActionActivationPtr(element);
 	return element;
 	
@@ -323,8 +323,8 @@ std::shared_ptr<PSCS::Semantics::Actions::CS_CallOperationActionActivation> Acti
 	if(auto wp = par_ActivityNodeActivationGroup.lock())
 	{
 		wp->getNodeActivations()->push_back(element);
-	
 	}
+	
 	element->setThisCS_CallOperationActionActivationPtr(element);
 	return element;
 	
@@ -343,8 +343,8 @@ std::shared_ptr<PSCS::Semantics::Actions::CS_ClearStructuralFeatureActionActivat
 	if(auto wp = par_ActivityNodeActivationGroup.lock())
 	{
 		wp->getNodeActivations()->push_back(element);
-	
 	}
+	
 	element->setThisCS_ClearStructuralFeatureActionActivationPtr(element);
 	return element;
 	
@@ -363,8 +363,8 @@ std::shared_ptr<PSCS::Semantics::Actions::CS_CreateLinkActionActivation> Actions
 	if(auto wp = par_ActivityNodeActivationGroup.lock())
 	{
 		wp->getNodeActivations()->push_back(element);
-	
 	}
+	
 	element->setThisCS_CreateLinkActionActivationPtr(element);
 	return element;
 	
@@ -383,8 +383,8 @@ std::shared_ptr<PSCS::Semantics::Actions::CS_CreateObjectActionActivation> Actio
 	if(auto wp = par_ActivityNodeActivationGroup.lock())
 	{
 		wp->getNodeActivations()->push_back(element);
-	
 	}
+	
 	element->setThisCS_CreateObjectActionActivationPtr(element);
 	return element;
 	
@@ -410,8 +410,8 @@ std::shared_ptr<PSCS::Semantics::Actions::CS_ReadExtentActionActivation> Actions
 	if(auto wp = par_ActivityNodeActivationGroup.lock())
 	{
 		wp->getNodeActivations()->push_back(element);
-	
 	}
+	
 	element->setThisCS_ReadExtentActionActivationPtr(element);
 	return element;
 	
@@ -430,8 +430,8 @@ std::shared_ptr<PSCS::Semantics::Actions::CS_ReadSelfActionActivation> ActionsFa
 	if(auto wp = par_ActivityNodeActivationGroup.lock())
 	{
 		wp->getNodeActivations()->push_back(element);
-	
 	}
+	
 	element->setThisCS_ReadSelfActionActivationPtr(element);
 	return element;
 	
@@ -450,8 +450,8 @@ std::shared_ptr<PSCS::Semantics::Actions::CS_RemoveStructuralFeatureValueActionA
 	if(auto wp = par_ActivityNodeActivationGroup.lock())
 	{
 		wp->getNodeActivations()->push_back(element);
-	
 	}
+	
 	element->setThisCS_RemoveStructuralFeatureValueActionActivationPtr(element);
 	return element;
 	
@@ -470,8 +470,8 @@ std::shared_ptr<PSCS::Semantics::Actions::CS_SendSignalActionActivation> Actions
 	if(auto wp = par_ActivityNodeActivationGroup.lock())
 	{
 		wp->getNodeActivations()->push_back(element);
-	
 	}
+	
 	element->setThisCS_SendSignalActionActivationPtr(element);
 	return element;
 	

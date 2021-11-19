@@ -7,15 +7,15 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
-#include "ecore/EStringToStringMapEntry.hpp"
-#include "ecore/EAnnotation.hpp"
-#include "ecore/EAttribute.hpp"
-#include "ecore/EReference.hpp"
-#include "ecore/EGenericType.hpp"
-#include "ecore/EOperation.hpp"
-#include "ecore/EClass.hpp"
 #include "ecore/EParameter.hpp"
 #include "ecore/EDataType.hpp"
+#include "ecore/EStringToStringMapEntry.hpp"
+#include "ecore/EGenericType.hpp"
+#include "ecore/EReference.hpp"
+#include "ecore/EOperation.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
 
 //depending model packages
 #include "ecore/ecorePackage.hpp"
@@ -57,7 +57,7 @@ void TypesPackageImpl::createAnyTypeContent(std::shared_ptr<ecore::EPackage> pac
 {
 	m_anyType_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, ANYTYPE_CLASS);
 	
-	m_anyType_Attribute_object = factory->createEReference_as_eStructuralFeatures_in_EClass(m_anyType_Class, ANYTYPE_ATTRIBUTE_OBJECT);
+	m_anyType_Attribute_object = factory->createEReference_as_eReferences_in_EClass(m_anyType_Class, ANYTYPE_ATTRIBUTE_OBJECT);
 	
 	
 }
@@ -74,8 +74,8 @@ void TypesPackageImpl::createCollectionTypeContent(std::shared_ptr<ecore::EPacka
 {
 	m_collectionType_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, COLLECTIONTYPE_CLASS);
 	
-	m_collectionType_Attribute_elementType = factory->createEReference_as_eStructuralFeatures_in_EClass(m_collectionType_Class, COLLECTIONTYPE_ATTRIBUTE_ELEMENTTYPE);
-	m_collectionType_Attribute_instance = factory->createEReference_as_eStructuralFeatures_in_EClass(m_collectionType_Class, COLLECTIONTYPE_ATTRIBUTE_INSTANCE);
+	m_collectionType_Attribute_elementType = factory->createEReference_as_eReferences_in_EClass(m_collectionType_Class, COLLECTIONTYPE_ATTRIBUTE_ELEMENTTYPE);
+	m_collectionType_Attribute_instance = factory->createEReference_as_eReferences_in_EClass(m_collectionType_Class, COLLECTIONTYPE_ATTRIBUTE_INSTANCE);
 	
 	m_collectionType_Operation_kindOf_CollectionType = factory->createEOperation_as_eOperations_in_EClass(m_collectionType_Class, COLLECTIONTYPE_OPERATION_KINDOF_COLLECTIONTYPE);
 	
@@ -93,8 +93,8 @@ void TypesPackageImpl::createMessageTypeContent(std::shared_ptr<ecore::EPackage>
 {
 	m_messageType_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, MESSAGETYPE_CLASS);
 	
-	m_messageType_Attribute_referredOperation = factory->createEReference_as_eStructuralFeatures_in_EClass(m_messageType_Class, MESSAGETYPE_ATTRIBUTE_REFERREDOPERATION);
-	m_messageType_Attribute_referredSignal = factory->createEReference_as_eStructuralFeatures_in_EClass(m_messageType_Class, MESSAGETYPE_ATTRIBUTE_REFERREDSIGNAL);
+	m_messageType_Attribute_referredOperation = factory->createEReference_as_eReferences_in_EClass(m_messageType_Class, MESSAGETYPE_ATTRIBUTE_REFERREDOPERATION);
+	m_messageType_Attribute_referredSignal = factory->createEReference_as_eReferences_in_EClass(m_messageType_Class, MESSAGETYPE_ATTRIBUTE_REFERREDSIGNAL);
 	
 	
 }
@@ -102,9 +102,9 @@ void TypesPackageImpl::createMessageTypeContent(std::shared_ptr<ecore::EPackage>
 void TypesPackageImpl::createNameTypeBindingContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_nameTypeBinding_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, NAMETYPEBINDING_CLASS);
-	m_nameTypeBinding_Attribute_name = factory->createEAttribute_as_eStructuralFeatures_in_EClass(m_nameTypeBinding_Class, NAMETYPEBINDING_ATTRIBUTE_NAME);
+	m_nameTypeBinding_Attribute_name = factory->createEAttribute_as_eAttributes_in_EClas(m_nameTypeBinding_Class, NAMETYPEBINDING_ATTRIBUTE_NAME);
 	
-	m_nameTypeBinding_Attribute_type = factory->createEReference_as_eStructuralFeatures_in_EClass(m_nameTypeBinding_Class, NAMETYPEBINDING_ATTRIBUTE_TYPE);
+	m_nameTypeBinding_Attribute_type = factory->createEReference_as_eReferences_in_EClass(m_nameTypeBinding_Class, NAMETYPEBINDING_ATTRIBUTE_TYPE);
 	
 	
 }
@@ -136,7 +136,7 @@ void TypesPackageImpl::createSetTypeContent(std::shared_ptr<ecore::EPackage> pac
 void TypesPackageImpl::createTemplateParameterTypeContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_templateParameterType_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, TEMPLATEPARAMETERTYPE_CLASS);
-	m_templateParameterType_Attribute_specification = factory->createEAttribute_as_eStructuralFeatures_in_EClass(m_templateParameterType_Class, TEMPLATEPARAMETERTYPE_ATTRIBUTE_SPECIFICATION);
+	m_templateParameterType_Attribute_specification = factory->createEAttribute_as_eAttributes_in_EClas(m_templateParameterType_Class, TEMPLATEPARAMETERTYPE_ATTRIBUTE_SPECIFICATION);
 	
 	
 	
@@ -146,8 +146,8 @@ void TypesPackageImpl::createTupleTypeContent(std::shared_ptr<ecore::EPackage> p
 {
 	m_tupleType_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, TUPLETYPE_CLASS);
 	
-	m_tupleType_Attribute_instance = factory->createEReference_as_eStructuralFeatures_in_EClass(m_tupleType_Class, TUPLETYPE_ATTRIBUTE_INSTANCE);
-	m_tupleType_Attribute_parts = factory->createEReference_as_eStructuralFeatures_in_EClass(m_tupleType_Class, TUPLETYPE_ATTRIBUTE_PARTS);
+	m_tupleType_Attribute_instance = factory->createEReference_as_eReferences_in_EClass(m_tupleType_Class, TUPLETYPE_ATTRIBUTE_INSTANCE);
+	m_tupleType_Attribute_parts = factory->createEReference_as_eReferences_in_EClass(m_tupleType_Class, TUPLETYPE_ATTRIBUTE_PARTS);
 	
 	
 }

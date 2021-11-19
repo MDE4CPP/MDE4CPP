@@ -62,37 +62,37 @@ std::shared_ptr<ecore::EObject> CommonBehaviorFactoryImpl::create(const int meta
 					//CS_CallEventExecution has callExecutions as a containment
 					case  fUML::Semantics::Actions::ActionsPackage::CALLACTIONACTIVATION_ATTRIBUTE_CALLEXECUTIONS:	
 					{
-						auto castedContainer = std::dynamic_pointer_cast<fUML::Semantics::Actions::CallActionActivation>(container);
+						std::shared_ptr<fUML::Semantics::Actions::CallActionActivation> castedContainer = std::dynamic_pointer_cast<fUML::Semantics::Actions::CallActionActivation> (container);;
 						return this->createCS_CallEventExecution_as_callExecutions_in_CallActionActivation(castedContainer,metaElementID);
 					}
 					//CS_CallEventExecution has decisionInputExecution as a containment
 					case  fUML::Semantics::Activities::ActivitiesPackage::DECISIONNODEACTIVATION_ATTRIBUTE_DECISIONINPUTEXECUTION:	
 					{
-						auto castedContainer = std::dynamic_pointer_cast<fUML::Semantics::Activities::DecisionNodeActivation>(container);
+						std::shared_ptr<fUML::Semantics::Activities::DecisionNodeActivation> castedContainer = std::dynamic_pointer_cast<fUML::Semantics::Activities::DecisionNodeActivation> (container);;
 						return this->createCS_CallEventExecution_as_decisionInputExecution_in_DecisionNodeActivation(castedContainer,metaElementID);
 					}
 					//CS_CallEventExecution has extensionalValues as a containment
 					case  fUML::Semantics::Loci::LociPackage::LOCUS_ATTRIBUTE_EXTENSIONALVALUES:	
 					{
-						auto castedContainer = std::dynamic_pointer_cast<fUML::Semantics::Loci::Locus>(container);
+						std::shared_ptr<fUML::Semantics::Loci::Locus> castedContainer = std::dynamic_pointer_cast<fUML::Semantics::Loci::Locus> (container);;
 						return this->createCS_CallEventExecution_as_extensionalValues_in_Locus(castedContainer,metaElementID);
 					}
 					//CS_CallEventExecution has value as a containment
 					case  fUML::Semantics::Activities::ActivitiesPackage::OBJECTTOKEN_ATTRIBUTE_VALUE:	
 					{
-						auto castedContainer = std::dynamic_pointer_cast<fUML::Semantics::Activities::ObjectToken>(container);
+						std::shared_ptr<fUML::Semantics::Activities::ObjectToken> castedContainer = std::dynamic_pointer_cast<fUML::Semantics::Activities::ObjectToken> (container);;
 						return this->createCS_CallEventExecution_as_value_in_ObjectToken(castedContainer,metaElementID);
 					}
 					//CS_CallEventExecution has values as a containment
 					case  fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::FEATUREVALUE_ATTRIBUTE_VALUES:	
 					{
-						auto castedContainer = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::FeatureValue>(container);
+						std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> castedContainer = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::FeatureValue> (container);;
 						return this->createCS_CallEventExecution_as_values_in_FeatureValue(castedContainer,metaElementID);
 					}
 					//CS_CallEventExecution has values as a containment
 					case  fUML::Semantics::CommonBehavior::CommonBehaviorPackage::PARAMETERVALUE_ATTRIBUTE_VALUES:	
 					{
-						auto castedContainer = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::ParameterValue>(container);
+						std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> castedContainer = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::ParameterValue> (container);;
 						return this->createCS_CallEventExecution_as_values_in_ParameterValue(castedContainer,metaElementID);
 					}
 					default:
@@ -149,8 +149,8 @@ std::shared_ptr<PSCS::Semantics::CommonBehavior::CS_CallEventExecution> CommonBe
 	if(nullptr != par_CallActionActivation)
 	{
 		par_CallActionActivation->getCallExecutions()->push_back(element);
-	
 	}
+	
 	element->setThisCS_CallEventExecutionPtr(element);
 	return element;
 	
@@ -162,8 +162,8 @@ std::shared_ptr<PSCS::Semantics::CommonBehavior::CS_CallEventExecution> CommonBe
 	if(nullptr != par_DecisionNodeActivation)
 	{
 		par_DecisionNodeActivation->setDecisionInputExecution(element);
-	
 	}
+	
 	element->setThisCS_CallEventExecutionPtr(element);
 	return element;
 	
@@ -175,8 +175,8 @@ std::shared_ptr<PSCS::Semantics::CommonBehavior::CS_CallEventExecution> CommonBe
 	if(nullptr != par_Locus)
 	{
 		par_Locus->getExtensionalValues()->push_back(element);
-	
 	}
+	
 	element->setThisCS_CallEventExecutionPtr(element);
 	return element;
 	
@@ -188,8 +188,8 @@ std::shared_ptr<PSCS::Semantics::CommonBehavior::CS_CallEventExecution> CommonBe
 	if(nullptr != par_ObjectToken)
 	{
 		par_ObjectToken->setValue(element);
-	
 	}
+	
 	element->setThisCS_CallEventExecutionPtr(element);
 	return element;
 	
@@ -201,8 +201,8 @@ std::shared_ptr<PSCS::Semantics::CommonBehavior::CS_CallEventExecution> CommonBe
 	if(nullptr != par_FeatureValue)
 	{
 		par_FeatureValue->getValues()->push_back(element);
-	
 	}
+	
 	element->setThisCS_CallEventExecutionPtr(element);
 	return element;
 	
@@ -214,8 +214,8 @@ std::shared_ptr<PSCS::Semantics::CommonBehavior::CS_CallEventExecution> CommonBe
 	if(nullptr != par_ParameterValue)
 	{
 		par_ParameterValue->getValues()->push_back(element);
-	
 	}
+	
 	element->setThisCS_CallEventExecutionPtr(element);
 	return element;
 	

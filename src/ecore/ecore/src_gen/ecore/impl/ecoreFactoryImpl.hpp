@@ -65,6 +65,7 @@ namespace ecore
 			 virtual std::shared_ptr<EAttribute> createEAttribute(const int metaElementID = ecorePackage::EATTRIBUTE_CLASS) const ;
 			 //Add as contained object
 			 virtual std::shared_ptr<EAttribute> createEAttribute_as_contents_in_EAnnotation(std::shared_ptr<EAnnotation> par_EAnnotation, const int metaElementID = ecorePackage::EATTRIBUTE_CLASS) const ;
+			 virtual std::shared_ptr<EAttribute> createEAttribute_as_eAttributes_in_EClass(std::shared_ptr<EClass> par_EClass, const int metaElementID = ecorePackage::EATTRIBUTE_CLASS) const ;
 			 virtual std::shared_ptr<EAttribute> createEAttribute_as_eContens_in_EObject(std::weak_ptr<ecore::EObject> par_EObject, const int metaElementID = ecorePackage::EATTRIBUTE_CLASS) const ;
 			 virtual std::shared_ptr<EAttribute> createEAttribute_as_eStructuralFeatures_in_EClass(std::weak_ptr<ecore::EClass> par_EClass, const int metaElementID = ecorePackage::EATTRIBUTE_CLASS) const ;
 			 virtual std::shared_ptr<EClass> createEClass(const int metaElementID = ecorePackage::ECLASS_CLASS) const ;
@@ -123,6 +124,7 @@ namespace ecore
 			 //Add as contained object
 			 virtual std::shared_ptr<EReference> createEReference_as_contents_in_EAnnotation(std::shared_ptr<EAnnotation> par_EAnnotation, const int metaElementID = ecorePackage::EREFERENCE_CLASS) const ;
 			 virtual std::shared_ptr<EReference> createEReference_as_eContens_in_EObject(std::weak_ptr<ecore::EObject> par_EObject, const int metaElementID = ecorePackage::EREFERENCE_CLASS) const ;
+			 virtual std::shared_ptr<EReference> createEReference_as_eReferences_in_EClass(std::shared_ptr<EClass> par_EClass, const int metaElementID = ecorePackage::EREFERENCE_CLASS) const ;
 			 virtual std::shared_ptr<EReference> createEReference_as_eStructuralFeatures_in_EClass(std::weak_ptr<ecore::EClass> par_EClass, const int metaElementID = ecorePackage::EREFERENCE_CLASS) const ;
 			 virtual std::shared_ptr<EStringToStringMapEntry> createEStringToStringMapEntry(const int metaElementID = ecorePackage::ESTRINGTOSTRINGMAPENTRY_CLASS) const ;
 			 virtual std::shared_ptr<ETypeParameter> createETypeParameter(const int metaElementID = ecorePackage::ETYPEPARAMETER_CLASS) const ;

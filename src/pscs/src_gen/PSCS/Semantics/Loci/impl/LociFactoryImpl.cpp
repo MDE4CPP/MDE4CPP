@@ -118,8 +118,8 @@ std::shared_ptr<PSCS::Semantics::Loci::CS_ExecutionFactory> LociFactoryImpl::cre
 	if(auto wp = par_Locus.lock())
 	{
 		wp->setFactory(element);
-	
 	}
+	
 	element->setThisCS_ExecutionFactoryPtr(element);
 	return element;
 	
@@ -138,8 +138,8 @@ std::shared_ptr<PSCS::Semantics::Loci::CS_Executor> LociFactoryImpl::createCS_Ex
 	if(auto wp = par_Locus.lock())
 	{
 		wp->setExecutor(element);
-	
 	}
+	
 	element->setThisCS_ExecutorPtr(element);
 	return element;
 	

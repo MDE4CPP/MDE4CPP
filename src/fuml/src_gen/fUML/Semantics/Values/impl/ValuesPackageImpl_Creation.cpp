@@ -7,14 +7,14 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
-#include "ecore/EStringToStringMapEntry.hpp"
-#include "ecore/EAnnotation.hpp"
-#include "ecore/EReference.hpp"
-#include "ecore/EGenericType.hpp"
-#include "ecore/EOperation.hpp"
-#include "ecore/EClass.hpp"
 #include "ecore/EParameter.hpp"
 #include "ecore/EDataType.hpp"
+#include "ecore/EStringToStringMapEntry.hpp"
+#include "ecore/EGenericType.hpp"
+#include "ecore/EReference.hpp"
+#include "ecore/EOperation.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
 
 //depending model packages
 #include "ecore/ecorePackage.hpp"
@@ -52,8 +52,8 @@ void ValuesPackageImpl::createEvaluationContent(std::shared_ptr<ecore::EPackage>
 {
 	m_evaluation_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, EVALUATION_CLASS);
 	
-	m_evaluation_Attribute_locus = factory->createEReference_as_eStructuralFeatures_in_EClass(m_evaluation_Class, EVALUATION_ATTRIBUTE_LOCUS);
-	m_evaluation_Attribute_specification = factory->createEReference_as_eStructuralFeatures_in_EClass(m_evaluation_Class, EVALUATION_ATTRIBUTE_SPECIFICATION);
+	m_evaluation_Attribute_locus = factory->createEReference_as_eReferences_in_EClass(m_evaluation_Class, EVALUATION_ATTRIBUTE_LOCUS);
+	m_evaluation_Attribute_specification = factory->createEReference_as_eReferences_in_EClass(m_evaluation_Class, EVALUATION_ATTRIBUTE_SPECIFICATION);
 	
 	m_evaluation_Operation_evaluate = factory->createEOperation_as_eOperations_in_EClass(m_evaluation_Class, EVALUATION_OPERATION_EVALUATE);
 	

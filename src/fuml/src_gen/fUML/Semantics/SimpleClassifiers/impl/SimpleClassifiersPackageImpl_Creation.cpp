@@ -7,15 +7,15 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
-#include "ecore/EStringToStringMapEntry.hpp"
-#include "ecore/EAnnotation.hpp"
-#include "ecore/EAttribute.hpp"
-#include "ecore/EReference.hpp"
-#include "ecore/EGenericType.hpp"
-#include "ecore/EOperation.hpp"
-#include "ecore/EClass.hpp"
 #include "ecore/EParameter.hpp"
 #include "ecore/EDataType.hpp"
+#include "ecore/EStringToStringMapEntry.hpp"
+#include "ecore/EGenericType.hpp"
+#include "ecore/EReference.hpp"
+#include "ecore/EOperation.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
 
 //depending model packages
 #include "ecore/ecorePackage.hpp"
@@ -55,7 +55,7 @@ void SimpleClassifiersPackageImpl::createPackageContents(std::shared_ptr<ecore::
 void SimpleClassifiersPackageImpl::createBooleanValueContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_booleanValue_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, BOOLEANVALUE_CLASS);
-	m_booleanValue_Attribute_value = factory->createEAttribute_as_eStructuralFeatures_in_EClass(m_booleanValue_Class, BOOLEANVALUE_ATTRIBUTE_VALUE);
+	m_booleanValue_Attribute_value = factory->createEAttribute_as_eAttributes_in_EClas(m_booleanValue_Class, BOOLEANVALUE_ATTRIBUTE_VALUE);
 	
 	
 	m_booleanValue_Operation__copy = factory->createEOperation_as_eOperations_in_EClass(m_booleanValue_Class, BOOLEANVALUE_OPERATION__COPY);
@@ -70,7 +70,7 @@ void SimpleClassifiersPackageImpl::createCompoundValueContent(std::shared_ptr<ec
 {
 	m_compoundValue_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, COMPOUNDVALUE_CLASS);
 	
-	m_compoundValue_Attribute_featureValues = factory->createEReference_as_eStructuralFeatures_in_EClass(m_compoundValue_Class, COMPOUNDVALUE_ATTRIBUTE_FEATUREVALUES);
+	m_compoundValue_Attribute_featureValues = factory->createEReference_as_eReferences_in_EClass(m_compoundValue_Class, COMPOUNDVALUE_ATTRIBUTE_FEATUREVALUES);
 	
 	m_compoundValue_Operation__copy = factory->createEOperation_as_eOperations_in_EClass(m_compoundValue_Class, COMPOUNDVALUE_OPERATION__COPY);
 	m_compoundValue_Operation_assignFeatureValue_StructuralFeature_EInt = factory->createEOperation_as_eOperations_in_EClass(m_compoundValue_Class, COMPOUNDVALUE_OPERATION_ASSIGNFEATUREVALUE_STRUCTURALFEATURE_EINT);
@@ -86,7 +86,7 @@ void SimpleClassifiersPackageImpl::createDataValueContent(std::shared_ptr<ecore:
 {
 	m_dataValue_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, DATAVALUE_CLASS);
 	
-	m_dataValue_Attribute_type = factory->createEReference_as_eStructuralFeatures_in_EClass(m_dataValue_Class, DATAVALUE_ATTRIBUTE_TYPE);
+	m_dataValue_Attribute_type = factory->createEReference_as_eReferences_in_EClass(m_dataValue_Class, DATAVALUE_ATTRIBUTE_TYPE);
 	
 	m_dataValue_Operation__copy = factory->createEOperation_as_eOperations_in_EClass(m_dataValue_Class, DATAVALUE_OPERATION__COPY);
 	m_dataValue_Operation_getTypes = factory->createEOperation_as_eOperations_in_EClass(m_dataValue_Class, DATAVALUE_OPERATION_GETTYPES);
@@ -98,8 +98,8 @@ void SimpleClassifiersPackageImpl::createEnumerationValueContent(std::shared_ptr
 {
 	m_enumerationValue_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, ENUMERATIONVALUE_CLASS);
 	
-	m_enumerationValue_Attribute_literal = factory->createEReference_as_eStructuralFeatures_in_EClass(m_enumerationValue_Class, ENUMERATIONVALUE_ATTRIBUTE_LITERAL);
-	m_enumerationValue_Attribute_type = factory->createEReference_as_eStructuralFeatures_in_EClass(m_enumerationValue_Class, ENUMERATIONVALUE_ATTRIBUTE_TYPE);
+	m_enumerationValue_Attribute_literal = factory->createEReference_as_eReferences_in_EClass(m_enumerationValue_Class, ENUMERATIONVALUE_ATTRIBUTE_LITERAL);
+	m_enumerationValue_Attribute_type = factory->createEReference_as_eReferences_in_EClass(m_enumerationValue_Class, ENUMERATIONVALUE_ATTRIBUTE_TYPE);
 	
 	m_enumerationValue_Operation__copy = factory->createEOperation_as_eOperations_in_EClass(m_enumerationValue_Class, ENUMERATIONVALUE_OPERATION__COPY);
 	m_enumerationValue_Operation_equals_Value = factory->createEOperation_as_eOperations_in_EClass(m_enumerationValue_Class, ENUMERATIONVALUE_OPERATION_EQUALS_VALUE);
@@ -113,10 +113,10 @@ void SimpleClassifiersPackageImpl::createEnumerationValueContent(std::shared_ptr
 void SimpleClassifiersPackageImpl::createFeatureValueContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_featureValue_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, FEATUREVALUE_CLASS);
-	m_featureValue_Attribute_position = factory->createEAttribute_as_eStructuralFeatures_in_EClass(m_featureValue_Class, FEATUREVALUE_ATTRIBUTE_POSITION);
+	m_featureValue_Attribute_position = factory->createEAttribute_as_eAttributes_in_EClas(m_featureValue_Class, FEATUREVALUE_ATTRIBUTE_POSITION);
 	
-	m_featureValue_Attribute_feature = factory->createEReference_as_eStructuralFeatures_in_EClass(m_featureValue_Class, FEATUREVALUE_ATTRIBUTE_FEATURE);
-	m_featureValue_Attribute_values = factory->createEReference_as_eStructuralFeatures_in_EClass(m_featureValue_Class, FEATUREVALUE_ATTRIBUTE_VALUES);
+	m_featureValue_Attribute_feature = factory->createEReference_as_eReferences_in_EClass(m_featureValue_Class, FEATUREVALUE_ATTRIBUTE_FEATURE);
+	m_featureValue_Attribute_values = factory->createEReference_as_eReferences_in_EClass(m_featureValue_Class, FEATUREVALUE_ATTRIBUTE_VALUES);
 	
 	m_featureValue_Operation__copy = factory->createEOperation_as_eOperations_in_EClass(m_featureValue_Class, FEATUREVALUE_OPERATION__COPY);
 	m_featureValue_Operation_hasEqualValues_FeatureValue = factory->createEOperation_as_eOperations_in_EClass(m_featureValue_Class, FEATUREVALUE_OPERATION_HASEQUALVALUES_FEATUREVALUE);
@@ -126,7 +126,7 @@ void SimpleClassifiersPackageImpl::createFeatureValueContent(std::shared_ptr<eco
 void SimpleClassifiersPackageImpl::createIntegerValueContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_integerValue_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, INTEGERVALUE_CLASS);
-	m_integerValue_Attribute_value = factory->createEAttribute_as_eStructuralFeatures_in_EClass(m_integerValue_Class, INTEGERVALUE_ATTRIBUTE_VALUE);
+	m_integerValue_Attribute_value = factory->createEAttribute_as_eAttributes_in_EClas(m_integerValue_Class, INTEGERVALUE_ATTRIBUTE_VALUE);
 	
 	
 	m_integerValue_Operation__copy = factory->createEOperation_as_eOperations_in_EClass(m_integerValue_Class, INTEGERVALUE_OPERATION__COPY);
@@ -141,7 +141,7 @@ void SimpleClassifiersPackageImpl::createPrimitiveValueContent(std::shared_ptr<e
 {
 	m_primitiveValue_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, PRIMITIVEVALUE_CLASS);
 	
-	m_primitiveValue_Attribute_type = factory->createEReference_as_eStructuralFeatures_in_EClass(m_primitiveValue_Class, PRIMITIVEVALUE_ATTRIBUTE_TYPE);
+	m_primitiveValue_Attribute_type = factory->createEReference_as_eReferences_in_EClass(m_primitiveValue_Class, PRIMITIVEVALUE_ATTRIBUTE_TYPE);
 	
 	m_primitiveValue_Operation__copy = factory->createEOperation_as_eOperations_in_EClass(m_primitiveValue_Class, PRIMITIVEVALUE_OPERATION__COPY);
 	m_primitiveValue_Operation_getTypes = factory->createEOperation_as_eOperations_in_EClass(m_primitiveValue_Class, PRIMITIVEVALUE_OPERATION_GETTYPES);
@@ -151,7 +151,7 @@ void SimpleClassifiersPackageImpl::createPrimitiveValueContent(std::shared_ptr<e
 void SimpleClassifiersPackageImpl::createRealValueContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_realValue_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, REALVALUE_CLASS);
-	m_realValue_Attribute_value = factory->createEAttribute_as_eStructuralFeatures_in_EClass(m_realValue_Class, REALVALUE_ATTRIBUTE_VALUE);
+	m_realValue_Attribute_value = factory->createEAttribute_as_eAttributes_in_EClas(m_realValue_Class, REALVALUE_ATTRIBUTE_VALUE);
 	
 	
 	m_realValue_Operation__copy = factory->createEOperation_as_eOperations_in_EClass(m_realValue_Class, REALVALUE_OPERATION__COPY);
@@ -166,7 +166,7 @@ void SimpleClassifiersPackageImpl::createSignalInstanceContent(std::shared_ptr<e
 {
 	m_signalInstance_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, SIGNALINSTANCE_CLASS);
 	
-	m_signalInstance_Attribute_type = factory->createEReference_as_eStructuralFeatures_in_EClass(m_signalInstance_Class, SIGNALINSTANCE_ATTRIBUTE_TYPE);
+	m_signalInstance_Attribute_type = factory->createEReference_as_eReferences_in_EClass(m_signalInstance_Class, SIGNALINSTANCE_ATTRIBUTE_TYPE);
 	
 	m_signalInstance_Operation__copy = factory->createEOperation_as_eOperations_in_EClass(m_signalInstance_Class, SIGNALINSTANCE_OPERATION__COPY);
 	m_signalInstance_Operation_new_ = factory->createEOperation_as_eOperations_in_EClass(m_signalInstance_Class, SIGNALINSTANCE_OPERATION_NEW_);
@@ -176,7 +176,7 @@ void SimpleClassifiersPackageImpl::createSignalInstanceContent(std::shared_ptr<e
 void SimpleClassifiersPackageImpl::createStringValueContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_stringValue_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, STRINGVALUE_CLASS);
-	m_stringValue_Attribute_value = factory->createEAttribute_as_eStructuralFeatures_in_EClass(m_stringValue_Class, STRINGVALUE_ATTRIBUTE_VALUE);
+	m_stringValue_Attribute_value = factory->createEAttribute_as_eAttributes_in_EClas(m_stringValue_Class, STRINGVALUE_ATTRIBUTE_VALUE);
 	
 	
 	m_stringValue_Operation__copy = factory->createEOperation_as_eOperations_in_EClass(m_stringValue_Class, STRINGVALUE_OPERATION__COPY);
@@ -206,7 +206,7 @@ void SimpleClassifiersPackageImpl::createStructuredValueContent(std::shared_ptr<
 void SimpleClassifiersPackageImpl::createUnlimitedNaturalValueContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_unlimitedNaturalValue_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, UNLIMITEDNATURALVALUE_CLASS);
-	m_unlimitedNaturalValue_Attribute_value = factory->createEAttribute_as_eStructuralFeatures_in_EClass(m_unlimitedNaturalValue_Class, UNLIMITEDNATURALVALUE_ATTRIBUTE_VALUE);
+	m_unlimitedNaturalValue_Attribute_value = factory->createEAttribute_as_eAttributes_in_EClas(m_unlimitedNaturalValue_Class, UNLIMITEDNATURALVALUE_ATTRIBUTE_VALUE);
 	
 	
 	m_unlimitedNaturalValue_Operation__copy = factory->createEOperation_as_eOperations_in_EClass(m_unlimitedNaturalValue_Class, UNLIMITEDNATURALVALUE_OPERATION__COPY);

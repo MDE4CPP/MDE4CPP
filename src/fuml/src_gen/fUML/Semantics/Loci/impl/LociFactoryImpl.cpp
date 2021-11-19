@@ -127,8 +127,8 @@ std::shared_ptr<fUML::Semantics::Loci::ExecutionFactory> LociFactoryImpl::create
 	if(auto wp = par_Locus.lock())
 	{
 		wp->setFactory(element);
-	
 	}
+	
 	element->setThisExecutionFactoryPtr(element);
 	return element;
 	
@@ -147,8 +147,8 @@ std::shared_ptr<fUML::Semantics::Loci::Executor> LociFactoryImpl::createExecutor
 	if(auto wp = par_Locus.lock())
 	{
 		wp->setExecutor(element);
-	
 	}
+	
 	element->setThisExecutorPtr(element);
 	return element;
 	

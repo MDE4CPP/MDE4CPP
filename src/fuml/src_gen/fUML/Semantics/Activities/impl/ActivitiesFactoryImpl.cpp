@@ -120,37 +120,37 @@ std::shared_ptr<ecore::EObject> ActivitiesFactoryImpl::create(const int metaElem
 					//ActivityExecution has callExecutions as a containment
 					case  fUML::Semantics::Actions::ActionsPackage::CALLACTIONACTIVATION_ATTRIBUTE_CALLEXECUTIONS:	
 					{
-						auto castedContainer = std::dynamic_pointer_cast<fUML::Semantics::Actions::CallActionActivation>(container);
+						std::shared_ptr<fUML::Semantics::Actions::CallActionActivation> castedContainer = std::dynamic_pointer_cast<fUML::Semantics::Actions::CallActionActivation> (container);;
 						return this->createActivityExecution_as_callExecutions_in_CallActionActivation(castedContainer,metaElementID);
 					}
 					//ActivityExecution has decisionInputExecution as a containment
 					case  fUML::Semantics::Activities::ActivitiesPackage::DECISIONNODEACTIVATION_ATTRIBUTE_DECISIONINPUTEXECUTION:	
 					{
-						auto castedContainer = std::dynamic_pointer_cast<fUML::Semantics::Activities::DecisionNodeActivation>(container);
+						std::shared_ptr<fUML::Semantics::Activities::DecisionNodeActivation> castedContainer = std::dynamic_pointer_cast<fUML::Semantics::Activities::DecisionNodeActivation> (container);;
 						return this->createActivityExecution_as_decisionInputExecution_in_DecisionNodeActivation(castedContainer,metaElementID);
 					}
 					//ActivityExecution has extensionalValues as a containment
 					case  fUML::Semantics::Loci::LociPackage::LOCUS_ATTRIBUTE_EXTENSIONALVALUES:	
 					{
-						auto castedContainer = std::dynamic_pointer_cast<fUML::Semantics::Loci::Locus>(container);
+						std::shared_ptr<fUML::Semantics::Loci::Locus> castedContainer = std::dynamic_pointer_cast<fUML::Semantics::Loci::Locus> (container);;
 						return this->createActivityExecution_as_extensionalValues_in_Locus(castedContainer,metaElementID);
 					}
 					//ActivityExecution has value as a containment
 					case  fUML::Semantics::Activities::ActivitiesPackage::OBJECTTOKEN_ATTRIBUTE_VALUE:	
 					{
-						auto castedContainer = std::dynamic_pointer_cast<fUML::Semantics::Activities::ObjectToken>(container);
+						std::shared_ptr<fUML::Semantics::Activities::ObjectToken> castedContainer = std::dynamic_pointer_cast<fUML::Semantics::Activities::ObjectToken> (container);;
 						return this->createActivityExecution_as_value_in_ObjectToken(castedContainer,metaElementID);
 					}
 					//ActivityExecution has values as a containment
 					case  fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::FEATUREVALUE_ATTRIBUTE_VALUES:	
 					{
-						auto castedContainer = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::FeatureValue>(container);
+						std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> castedContainer = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::FeatureValue> (container);;
 						return this->createActivityExecution_as_values_in_FeatureValue(castedContainer,metaElementID);
 					}
 					//ActivityExecution has values as a containment
 					case  fUML::Semantics::CommonBehavior::CommonBehaviorPackage::PARAMETERVALUE_ATTRIBUTE_VALUES:	
 					{
-						auto castedContainer = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::ParameterValue>(container);
+						std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> castedContainer = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::ParameterValue> (container);;
 						return this->createActivityExecution_as_values_in_ParameterValue(castedContainer,metaElementID);
 					}
 					default:
@@ -186,13 +186,13 @@ std::shared_ptr<ecore::EObject> ActivitiesFactoryImpl::create(const int metaElem
 					//ActivityNodeActivationGroup has activationGroup as a containment
 					case  fUML::Semantics::Actions::ActionsPackage::STRUCTUREDACTIVITYNODEACTIVATION_ATTRIBUTE_ACTIVATIONGROUP:	
 					{
-						auto castedContainer = std::dynamic_pointer_cast<fUML::Semantics::Actions::StructuredActivityNodeActivation>(container);
+						std::weak_ptr<fUML::Semantics::Actions::StructuredActivityNodeActivation> castedContainer = std::dynamic_pointer_cast<fUML::Semantics::Actions::StructuredActivityNodeActivation> (container);
 						return this->createActivityNodeActivationGroup_as_activationGroup_in_StructuredActivityNodeActivation(castedContainer,metaElementID);
 					}
 					//ActivityNodeActivationGroup has activationGroup as a containment
 					case  fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYEXECUTION_ATTRIBUTE_ACTIVATIONGROUP:	
 					{
-						auto castedContainer = std::dynamic_pointer_cast<fUML::Semantics::Activities::ActivityExecution>(container);
+						std::weak_ptr<fUML::Semantics::Activities::ActivityExecution> castedContainer = std::dynamic_pointer_cast<fUML::Semantics::Activities::ActivityExecution> (container);
 						return this->createActivityNodeActivationGroup_as_activationGroup_in_ActivityExecution(castedContainer,metaElementID);
 					}
 					default:
@@ -296,13 +296,13 @@ std::shared_ptr<ecore::EObject> ActivitiesFactoryImpl::create(const int metaElem
 					//ExpansionActivationGroup has activationGroup as a containment
 					case  fUML::Semantics::Actions::ActionsPackage::STRUCTUREDACTIVITYNODEACTIVATION_ATTRIBUTE_ACTIVATIONGROUP:	
 					{
-						auto castedContainer = std::dynamic_pointer_cast<fUML::Semantics::Actions::StructuredActivityNodeActivation>(container);
+						std::weak_ptr<fUML::Semantics::Actions::StructuredActivityNodeActivation> castedContainer = std::dynamic_pointer_cast<fUML::Semantics::Actions::StructuredActivityNodeActivation> (container);
 						return this->createExpansionActivationGroup_as_activationGroup_in_StructuredActivityNodeActivation(castedContainer,metaElementID);
 					}
 					//ExpansionActivationGroup has activationGroup as a containment
 					case  fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYEXECUTION_ATTRIBUTE_ACTIVATIONGROUP:	
 					{
-						auto castedContainer = std::dynamic_pointer_cast<fUML::Semantics::Activities::ActivityExecution>(container);
+						std::weak_ptr<fUML::Semantics::Activities::ActivityExecution> castedContainer = std::dynamic_pointer_cast<fUML::Semantics::Activities::ActivityExecution> (container);
 						return this->createExpansionActivationGroup_as_activationGroup_in_ActivityExecution(castedContainer,metaElementID);
 					}
 					default:
@@ -491,8 +491,8 @@ std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance> ActivitiesFac
 	if(auto wp = par_ActivityNodeActivationGroup.lock())
 	{
 		wp->getEdgeInstances()->push_back(element);
-	
 	}
+	
 	element->setThisActivityEdgeInstancePtr(element);
 	return element;
 	
@@ -511,8 +511,8 @@ std::shared_ptr<fUML::Semantics::Activities::ActivityExecution> ActivitiesFactor
 	if(nullptr != par_CallActionActivation)
 	{
 		par_CallActionActivation->getCallExecutions()->push_back(element);
-	
 	}
+	
 	element->setThisActivityExecutionPtr(element);
 	return element;
 	
@@ -524,8 +524,8 @@ std::shared_ptr<fUML::Semantics::Activities::ActivityExecution> ActivitiesFactor
 	if(nullptr != par_DecisionNodeActivation)
 	{
 		par_DecisionNodeActivation->setDecisionInputExecution(element);
-	
 	}
+	
 	element->setThisActivityExecutionPtr(element);
 	return element;
 	
@@ -537,8 +537,8 @@ std::shared_ptr<fUML::Semantics::Activities::ActivityExecution> ActivitiesFactor
 	if(nullptr != par_Locus)
 	{
 		par_Locus->getExtensionalValues()->push_back(element);
-	
 	}
+	
 	element->setThisActivityExecutionPtr(element);
 	return element;
 	
@@ -550,8 +550,8 @@ std::shared_ptr<fUML::Semantics::Activities::ActivityExecution> ActivitiesFactor
 	if(nullptr != par_ObjectToken)
 	{
 		par_ObjectToken->setValue(element);
-	
 	}
+	
 	element->setThisActivityExecutionPtr(element);
 	return element;
 	
@@ -563,8 +563,8 @@ std::shared_ptr<fUML::Semantics::Activities::ActivityExecution> ActivitiesFactor
 	if(nullptr != par_FeatureValue)
 	{
 		par_FeatureValue->getValues()->push_back(element);
-	
 	}
+	
 	element->setThisActivityExecutionPtr(element);
 	return element;
 	
@@ -576,8 +576,8 @@ std::shared_ptr<fUML::Semantics::Activities::ActivityExecution> ActivitiesFactor
 	if(nullptr != par_ParameterValue)
 	{
 		par_ParameterValue->getValues()->push_back(element);
-	
 	}
+	
 	element->setThisActivityExecutionPtr(element);
 	return element;
 	
@@ -596,8 +596,8 @@ std::shared_ptr<fUML::Semantics::Activities::ActivityFinalNodeActivation> Activi
 	if(auto wp = par_ActivityNodeActivationGroup.lock())
 	{
 		wp->getNodeActivations()->push_back(element);
-	
 	}
+	
 	element->setThisActivityFinalNodeActivationPtr(element);
 	return element;
 	
@@ -616,8 +616,8 @@ std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> Activi
 	if(auto wp = par_StructuredActivityNodeActivation.lock())
 	{
 		wp->setActivationGroup(element);
-	
 	}
+	
 	element->setThisActivityNodeActivationGroupPtr(element);
 	return element;
 	
@@ -629,8 +629,8 @@ std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> Activi
 	if(auto wp = par_ActivityExecution.lock())
 	{
 		wp->setActivationGroup(element);
-	
 	}
+	
 	element->setThisActivityNodeActivationGroupPtr(element);
 	return element;
 	
@@ -649,8 +649,8 @@ std::shared_ptr<fUML::Semantics::Activities::ActivityParameterNodeActivation> Ac
 	if(auto wp = par_ActivityNodeActivationGroup.lock())
 	{
 		wp->getNodeActivations()->push_back(element);
-	
 	}
+	
 	element->setThisActivityParameterNodeActivationPtr(element);
 	return element;
 	
@@ -669,8 +669,8 @@ std::shared_ptr<fUML::Semantics::Activities::CentralBufferNodeActivation> Activi
 	if(auto wp = par_ActivityNodeActivationGroup.lock())
 	{
 		wp->getNodeActivations()->push_back(element);
-	
 	}
+	
 	element->setThisCentralBufferNodeActivationPtr(element);
 	return element;
 	
@@ -703,8 +703,8 @@ std::shared_ptr<fUML::Semantics::Activities::ControlToken> ActivitiesFactoryImpl
 	if(auto wp = par_ActivityNodeActivation.lock())
 	{
 		wp->getHeldTokens()->push_back(element);
-	
 	}
+	
 	element->setThisControlTokenPtr(element);
 	return element;
 	
@@ -723,8 +723,8 @@ std::shared_ptr<fUML::Semantics::Activities::DataStoreNodeActivation> Activities
 	if(auto wp = par_ActivityNodeActivationGroup.lock())
 	{
 		wp->getNodeActivations()->push_back(element);
-	
 	}
+	
 	element->setThisDataStoreNodeActivationPtr(element);
 	return element;
 	
@@ -743,8 +743,8 @@ std::shared_ptr<fUML::Semantics::Activities::DecisionNodeActivation> ActivitiesF
 	if(auto wp = par_ActivityNodeActivationGroup.lock())
 	{
 		wp->getNodeActivations()->push_back(element);
-	
 	}
+	
 	element->setThisDecisionNodeActivationPtr(element);
 	return element;
 	
@@ -763,8 +763,8 @@ std::shared_ptr<fUML::Semantics::Activities::ExpansionActivationGroup> Activitie
 	if(auto wp = par_StructuredActivityNodeActivation.lock())
 	{
 		wp->setActivationGroup(element);
-	
 	}
+	
 	element->setThisExpansionActivationGroupPtr(element);
 	return element;
 	
@@ -776,8 +776,8 @@ std::shared_ptr<fUML::Semantics::Activities::ExpansionActivationGroup> Activitie
 	if(auto wp = par_ActivityExecution.lock())
 	{
 		wp->setActivationGroup(element);
-	
 	}
+	
 	element->setThisExpansionActivationGroupPtr(element);
 	return element;
 	
@@ -796,8 +796,8 @@ std::shared_ptr<fUML::Semantics::Activities::ExpansionNodeActivation> Activities
 	if(auto wp = par_ActivityNodeActivationGroup.lock())
 	{
 		wp->getNodeActivations()->push_back(element);
-	
 	}
+	
 	element->setThisExpansionNodeActivationPtr(element);
 	return element;
 	
@@ -816,8 +816,8 @@ std::shared_ptr<fUML::Semantics::Activities::ExpansionRegionActivation> Activiti
 	if(auto wp = par_ActivityNodeActivationGroup.lock())
 	{
 		wp->getNodeActivations()->push_back(element);
-	
 	}
+	
 	element->setThisExpansionRegionActivationPtr(element);
 	return element;
 	
@@ -836,8 +836,8 @@ std::shared_ptr<fUML::Semantics::Activities::FlowFinalNodeActivation> Activities
 	if(auto wp = par_ActivityNodeActivationGroup.lock())
 	{
 		wp->getNodeActivations()->push_back(element);
-	
 	}
+	
 	element->setThisFlowFinalNodeActivationPtr(element);
 	return element;
 	
@@ -856,8 +856,8 @@ std::shared_ptr<fUML::Semantics::Activities::ForkNodeActivation> ActivitiesFacto
 	if(auto wp = par_ActivityNodeActivationGroup.lock())
 	{
 		wp->getNodeActivations()->push_back(element);
-	
 	}
+	
 	element->setThisForkNodeActivationPtr(element);
 	return element;
 	
@@ -876,8 +876,8 @@ std::shared_ptr<fUML::Semantics::Activities::ForkedToken> ActivitiesFactoryImpl:
 	if(auto wp = par_ActivityNodeActivation.lock())
 	{
 		wp->getHeldTokens()->push_back(element);
-	
 	}
+	
 	element->setThisForkedTokenPtr(element);
 	return element;
 	
@@ -896,8 +896,8 @@ std::shared_ptr<fUML::Semantics::Activities::InitialNodeActivation> ActivitiesFa
 	if(auto wp = par_ActivityNodeActivationGroup.lock())
 	{
 		wp->getNodeActivations()->push_back(element);
-	
 	}
+	
 	element->setThisInitialNodeActivationPtr(element);
 	return element;
 	
@@ -916,8 +916,8 @@ std::shared_ptr<fUML::Semantics::Activities::JoinNodeActivation> ActivitiesFacto
 	if(auto wp = par_ActivityNodeActivationGroup.lock())
 	{
 		wp->getNodeActivations()->push_back(element);
-	
 	}
+	
 	element->setThisJoinNodeActivationPtr(element);
 	return element;
 	
@@ -936,8 +936,8 @@ std::shared_ptr<fUML::Semantics::Activities::MergeNodeActivation> ActivitiesFact
 	if(auto wp = par_ActivityNodeActivationGroup.lock())
 	{
 		wp->getNodeActivations()->push_back(element);
-	
 	}
+	
 	element->setThisMergeNodeActivationPtr(element);
 	return element;
 	
@@ -956,8 +956,8 @@ std::shared_ptr<fUML::Semantics::Activities::ObjectToken> ActivitiesFactoryImpl:
 	if(auto wp = par_ActivityNodeActivation.lock())
 	{
 		wp->getHeldTokens()->push_back(element);
-	
 	}
+	
 	element->setThisObjectTokenPtr(element);
 	return element;
 	

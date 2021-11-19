@@ -32,9 +32,9 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "ocl/Expressions/ExpressionsFactory.hpp"
-#include "ecore/ecoreFactory.hpp"
 #include "uml/umlFactory.hpp"
+#include "ecore/ecoreFactory.hpp"
+#include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
 
 #include "ocl/Expressions/CallExp.hpp"
