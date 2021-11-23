@@ -12,7 +12,7 @@ rootProject.name = 'MDE4CPP'
 fileTree('.') {
 	include '**/build.gradle'
 	exclude 'build.gradle' // Exclude root build file
-//	exclude '**/examples/' // Exclude examples directory
+	exclude '**/examples/' // Exclude examples directory
 }.collect { 
 	relativePath(it.parent).replace(File.separator, ':') 
 }.each {
