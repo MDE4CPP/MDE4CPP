@@ -250,10 +250,10 @@ bool OclParserCustomVisitor::visitOperationCallExpCS(CSTNode* ctx, std::shared_p
     if(isImplicit) {
         std::shared_ptr<Variable> varImpl = ctx->getEnv()->getSelfVariable();
 
-        eClass = ctx->getEnv()->getMetaClass(varImpl->getEType());
+        eClass = std::dynamic_pointer_cast<ecore::EClass>(varImpl->getEType());
         srcValue = varImpl->getValue();
     } else {
-        eClass = ctx->getEnv()->getMetaClass(exp->getSource()->getEType());
+        eClass = std::dynamic_pointer_cast<ecore::EClass>(exp->getSource()->getEType());
         srcValue = exp->getSource()->getInstance()->getResultValue();
     }
 
@@ -391,7 +391,7 @@ bool OclParserCustomVisitor::visitPropertyCallExpCS(CSTNode* ctx, std::shared_pt
         std::shared_ptr<Variable> varImpl = ctx->getEnv()->lookup(simpleName);
         if(varImpl == nullptr) {
             varImpl = ctx->getEnv()->getSelfVariable();
-            eClass = ctx->getEnv()->getMetaClass(varImpl->getEType());
+            eClass = std::dynamic_pointer_cast<ecore::EClass>(varImpl->getEType());
             srcValue = varImpl->getValue();
         }
         else {
@@ -404,7 +404,7 @@ bool OclParserCustomVisitor::visitPropertyCallExpCS(CSTNode* ctx, std::shared_pt
         }
     }
     else {
-        eClass = ctx->getEnv()->getMetaClass(exp->getSource()->getEType());
+        eClass = std::dynamic_pointer_cast<ecore::EClass>(exp->getSource()->getEType());
         srcValue = exp->getSource()->getInstance()->getResultValue();
     }
 
@@ -504,10 +504,10 @@ bool OclParserCustomVisitor::visitAssociationCallExpCS(CSTNode *ctx, OclParser::
     if(isImplicit) {
         std::shared_ptr<Variable> varImpl = ctx->getEnv()->getSelfVariable();
 
-        eClass = ctx->getEnv()->getMetaClass(varImpl->getEType());
+        eClass = std::dynamic_pointer_cast<ecore::EClass>(varImpl->getEType());
         srcValue = varImpl->getValue();
     } else {
-        eClass = ctx->getEnv()->getMetaClass(exp->getSource()->getEType());
+        eClass = std::dynamic_pointer_cast<ecore::EClass>(exp->getSource()->getEType());
         srcValue = exp->getSource()->getInstance()->getResultValue();
     }
 
@@ -731,7 +731,7 @@ antlrcpp::Any OclParserCustomVisitor::visitTypeCS(OclParser::TypeCSContext *ctx)
         std::vector<std::string> seq = result.as<std::vector<std::string>>();
         std::shared_ptr<Variable> var = ctx->getEnv()->lookupPathName(seq);
         if(var != nullptr) {
-            std::shared_ptr<ecore::EClassifier> ref = ctx->getEnv()->getMetaClass(var->getEType());
+            std::shared_ptr<ecore::EClassifier> ref = var->getEType();
             std::shared_ptr<OclExpEval> typeEval = ocl::Evaluations::EvaluationsFactory::eInstance()->createOclExpEval();
             std::shared_ptr<ObjectValue> objValue = ocl::Values::ValuesFactory::eInstance()->createObjectValue();
             objValue->setValue(ref);
@@ -1949,7 +1949,7 @@ antlrcpp::Any OclParserCustomVisitor::visitPropertyContextDeclCS(OclParser::Prop
         std::shared_ptr<Environment> env = ctx->getEnv();
         std::string simpleName = simpleNameCS->ID()->getSymbol()->getText();
 
-        std::shared_ptr<ecore::EClass> eClass = env->getMetaClass(var->getEType());
+        std::shared_ptr<ecore::EClass> eClass = std::dynamic_pointer_cast<ecore::EClass>(var->getEType());
         std::shared_ptr<ecore::EAttribute> eatt = nullptr;
         std::shared_ptr<ecore::EReference> eref = nullptr;
         std::shared_ptr<ecore::EStructuralFeature> feature = nullptr;
@@ -2141,7 +2141,7 @@ antlrcpp::Any OclParserCustomVisitor::visitOperationCS(OclParser::OperationCSCon
 
     if(var != nullptr) {
         std::shared_ptr<OperationCallExp> exp = ocl::Expressions::ExpressionsFactory::eInstance()->createOperationCallExp();
-        std::shared_ptr<ecore::EClass> eClass = ctx->getEnv()->getMetaClass(var->getEType());
+        std::shared_ptr<ecore::EClass> eClass = std::dynamic_pointer_cast<ecore::EClass>(var->getEType());
         exp->setSource(createVariableExp(var));
 
         if(paramCS != nullptr) {
