@@ -57,6 +57,7 @@ class Environment
 {
 public:
     Environment(std::shared_ptr<Environment> parent);
+
     /*!
      * \brief Find a named element in the current environment, not in its parents, based on a single name.
      * \param name
@@ -102,7 +103,7 @@ public:
      * \brief Retrieve the meta class of the given type.
      * If it is already a meta class, cast and return it.
      */
-    std::shared_ptr<ecore::EClass> getMetaClass(std::shared_ptr<ecore::EClassifier> type);
+    //std::shared_ptr<ecore::EClass> getMetaClass(std::shared_ptr<ecore::EClassifier> type);
     /*!
      * \brief createNewObject creates a new object of given EClass and returns it
      * \param meta_package is the EPackage of the meta model in which e_class is

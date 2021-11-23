@@ -307,7 +307,7 @@ void EvaluationsPackageImpl::createOclMessageArgEvalContent(std::shared_ptr<ecor
 void EvaluationsPackageImpl::createOclMessageExpEvalContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_oclMessageExpEval_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, OCLMESSAGEEXPEVAL_CLASS);
-	m_oclMessageExpEval_Attribute_name = factory->createEAttribute_as_eAttributes_in_EClas(m_oclMessageExpEval_Class, OCLMESSAGEEXPEVAL_ATTRIBUTE_NAME);
+	m_oclMessageExpEval_Attribute_name = factory->createEAttribute_as_eAttributes_in_EClass(m_oclMessageExpEval_Class, OCLMESSAGEEXPEVAL_ATTRIBUTE_NAME);
 	
 	m_oclMessageExpEval_Attribute_arguments = factory->createEReference_as_eReferences_in_EClass(m_oclMessageExpEval_Class, OCLMESSAGEEXPEVAL_ATTRIBUTE_ARGUMENTS);
 	m_oclMessageExpEval_Attribute_target = factory->createEReference_as_eReferences_in_EClass(m_oclMessageExpEval_Class, OCLMESSAGEEXPEVAL_ATTRIBUTE_TARGET);

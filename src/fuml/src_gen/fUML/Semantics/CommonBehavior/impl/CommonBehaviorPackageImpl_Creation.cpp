@@ -69,7 +69,7 @@ void CommonBehaviorPackageImpl::createCallEventBehaviorContent(std::shared_ptr<e
 void CommonBehaviorPackageImpl::createCallEventExecutionContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_callEventExecution_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, CALLEVENTEXECUTION_CLASS);
-	m_callEventExecution_Attribute_callerSuspended = factory->createEAttribute_as_eAttributes_in_EClas(m_callEventExecution_Class, CALLEVENTEXECUTION_ATTRIBUTE_CALLERSUSPENDED);
+	m_callEventExecution_Attribute_callerSuspended = factory->createEAttribute_as_eAttributes_in_EClass(m_callEventExecution_Class, CALLEVENTEXECUTION_ATTRIBUTE_CALLERSUSPENDED);
 	
 	
 	m_callEventExecution_Operation__copy = factory->createEOperation_as_eOperations_in_EClass(m_callEventExecution_Class, CALLEVENTEXECUTION_OPERATION__COPY);

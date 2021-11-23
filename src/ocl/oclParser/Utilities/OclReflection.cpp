@@ -115,25 +115,32 @@ bool OclReflection::isMany(std::shared_ptr<ecore::ETypedElement> etyped)
 
 bool OclReflection::kindOf(std::shared_ptr<ecore::EClassifier> type, std::shared_ptr<ecore::EClassifier> ofType)
 {
-    std::shared_ptr<ecore::EClass> eclass = std::dynamic_pointer_cast<ecore::EClass>(type->eClass());
-    std::shared_ptr<ecore::EClass> eclassOf = std::dynamic_pointer_cast<ecore::EClass>(ofType->eClass());
-    if(eclass != nullptr && eclassOf != nullptr) {
-        if(eclassOf->isSuperTypeOf(eclass)) {
-            if(instanceOf<CollectionType>(type) && instanceOf<CollectionType>(ofType)) {
-                std::shared_ptr<CollectionType> coll = std::dynamic_pointer_cast<CollectionType>(type);
-                std::shared_ptr<CollectionType> collOf = std::dynamic_pointer_cast<CollectionType>(ofType);
+	if(type->getClassifierID() == ofType->getClassifierID() && type->getClassifierID() != -1 && ofType->getClassifierID() != -1)
+	{
+		return true;
+	}
+	else
+	{
+		std::shared_ptr<ecore::EClass> eclass = std::dynamic_pointer_cast<ecore::EClass>(type->eClass());
+		std::shared_ptr<ecore::EClass> eclassOf = std::dynamic_pointer_cast<ecore::EClass>(ofType->eClass());
+		if(eclass != nullptr && eclassOf != nullptr) {
+			if(eclassOf->isSuperTypeOf(eclass)) {
+				if(instanceOf<CollectionType>(type) && instanceOf<CollectionType>(ofType)) {
+					std::shared_ptr<CollectionType> coll = std::dynamic_pointer_cast<CollectionType>(type);
+					std::shared_ptr<CollectionType> collOf = std::dynamic_pointer_cast<CollectionType>(ofType);
 
-                if(coll->getElementType() == nullptr || collOf->getElementType() == nullptr)
-                    return true;
-                else
-                    return kindOf(coll->getElementType(), collOf->getElementType());
-            }
-            else {
-                return true;
-            }
-        }
-    }
-    return type->getClassifierID() == ofType->getClassifierID() && type->getClassifierID() != -1 && ofType->getClassifierID() != -1;
+					if(coll->getElementType() == nullptr || collOf->getElementType() == nullptr)
+						return true;
+					else
+						return kindOf(coll->getElementType(), collOf->getElementType());
+				}
+				else {
+					return true;
+				}
+			}
+		}
+	}
+    return false;
 }
 
 std::shared_ptr<ecore::EOperation> OclReflection::lookupOperation(std::shared_ptr<ecore::EClass> eclass,
@@ -274,6 +281,7 @@ std::shared_ptr<fUML::Semantics::Values::Value> OclReflection::createValue(std::
                 std::shared_ptr<uml::EnumerationLiteral> liter = value->get<std::shared_ptr<uml::EnumerationLiteral>>();
                 std::shared_ptr<fUML::Semantics::SimpleClassifiers::EnumerationValue> value = fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createEnumerationValue();
                 value->setLiteral(liter);
+                return value;
             } catch (...) { }
 
             try {
@@ -302,6 +310,7 @@ std::shared_ptr<fUML::Semantics::Values::Value> OclReflection::createValue(std::
             } catch (...) { }
         }
     }
+    // else create emptyValue
     return createValue(type);
 }
 

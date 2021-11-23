@@ -51,12 +51,12 @@ std::shared_ptr<Environment> EnvironmentFactory::createEnvironment(std::shared_p
     return  std::make_shared<Environment>(parent);
 }
 
-std::shared_ptr<Environment> EnvironmentFactory::createEnvironment(std::shared_ptr<Environment> parent, std::shared_ptr<ecore::EObject> context, Level level)
+std::shared_ptr<Environment> EnvironmentFactory::createRootEnvironment(std::shared_ptr<ecore::EObject> context)
 {
-    std::shared_ptr<Environment> env = createEnvironment(parent);
-    env->setLevel(level);
+    std::shared_ptr<Environment> env = createEnvironment(nullptr);
+    //env->setLevel(level);
 
-    if(level == Level::M2) {
+//    if(level == Level::M2) {
         std::shared_ptr<uml::Element> element = std::dynamic_pointer_cast<uml::Element>(context);
         std::shared_ptr<ecore::EPackage> epackage = nullptr;
         std::shared_ptr<ecore::EClassifier> classifier = nullptr;
@@ -82,8 +82,8 @@ std::shared_ptr<Environment> EnvironmentFactory::createEnvironment(std::shared_p
 
         env->setSelfVariable(self);
         env->addElement(Environment::SELF_VARIABLE_NAME, self, true);
-        env->addElement(packageVar->getName(), packageVar, false);
-    }
+//        env->addElement(packageVar->getName(), packageVar, false);
+/*    }
     else {
         std::shared_ptr<Variable> self = ocl::Expressions::ExpressionsFactory::eInstance()->createVariable();
         self->setName(Environment::SELF_VARIABLE_NAME);
@@ -93,6 +93,6 @@ std::shared_ptr<Environment> EnvironmentFactory::createEnvironment(std::shared_p
         env->addElement(self->getName(), self, true);
         env->setSelfVariable(self);
     }
-
+*/
     return env;
 }

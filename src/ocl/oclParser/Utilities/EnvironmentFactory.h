@@ -49,7 +49,7 @@ public:
      * \param context : can be a package, a classifier, a EStructuralFeature or an operation
      * \return
      */
-    std::shared_ptr<Environment> createEnvironment(std::shared_ptr<Environment> parent, std::shared_ptr<ecore::EObject> context, Level level);
+    std::shared_ptr<Environment> createRootEnvironment(std::shared_ptr<ecore::EObject> context);
     /*!
      * \brief Create an environment son of the given environment.
      * \param parent

@@ -55,7 +55,7 @@ void SimpleClassifiersPackageImpl::createPackageContents(std::shared_ptr<ecore::
 void SimpleClassifiersPackageImpl::createBooleanValueContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_booleanValue_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, BOOLEANVALUE_CLASS);
-	m_booleanValue_Attribute_value = factory->createEAttribute_as_eAttributes_in_EClas(m_booleanValue_Class, BOOLEANVALUE_ATTRIBUTE_VALUE);
+	m_booleanValue_Attribute_value = factory->createEAttribute_as_eAttributes_in_EClass(m_booleanValue_Class, BOOLEANVALUE_ATTRIBUTE_VALUE);
 	
 	
 	m_booleanValue_Operation__copy = factory->createEOperation_as_eOperations_in_EClass(m_booleanValue_Class, BOOLEANVALUE_OPERATION__COPY);
@@ -113,7 +113,7 @@ void SimpleClassifiersPackageImpl::createEnumerationValueContent(std::shared_ptr
 void SimpleClassifiersPackageImpl::createFeatureValueContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_featureValue_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, FEATUREVALUE_CLASS);
-	m_featureValue_Attribute_position = factory->createEAttribute_as_eAttributes_in_EClas(m_featureValue_Class, FEATUREVALUE_ATTRIBUTE_POSITION);
+	m_featureValue_Attribute_position = factory->createEAttribute_as_eAttributes_in_EClass(m_featureValue_Class, FEATUREVALUE_ATTRIBUTE_POSITION);
 	
 	m_featureValue_Attribute_feature = factory->createEReference_as_eReferences_in_EClass(m_featureValue_Class, FEATUREVALUE_ATTRIBUTE_FEATURE);
 	m_featureValue_Attribute_values = factory->createEReference_as_eReferences_in_EClass(m_featureValue_Class, FEATUREVALUE_ATTRIBUTE_VALUES);
@@ -126,7 +126,7 @@ void SimpleClassifiersPackageImpl::createFeatureValueContent(std::shared_ptr<eco
 void SimpleClassifiersPackageImpl::createIntegerValueContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_integerValue_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, INTEGERVALUE_CLASS);
-	m_integerValue_Attribute_value = factory->createEAttribute_as_eAttributes_in_EClas(m_integerValue_Class, INTEGERVALUE_ATTRIBUTE_VALUE);
+	m_integerValue_Attribute_value = factory->createEAttribute_as_eAttributes_in_EClass(m_integerValue_Class, INTEGERVALUE_ATTRIBUTE_VALUE);
 	
 	
 	m_integerValue_Operation__copy = factory->createEOperation_as_eOperations_in_EClass(m_integerValue_Class, INTEGERVALUE_OPERATION__COPY);
@@ -151,7 +151,7 @@ void SimpleClassifiersPackageImpl::createPrimitiveValueContent(std::shared_ptr<e
 void SimpleClassifiersPackageImpl::createRealValueContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_realValue_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, REALVALUE_CLASS);
-	m_realValue_Attribute_value = factory->createEAttribute_as_eAttributes_in_EClas(m_realValue_Class, REALVALUE_ATTRIBUTE_VALUE);
+	m_realValue_Attribute_value = factory->createEAttribute_as_eAttributes_in_EClass(m_realValue_Class, REALVALUE_ATTRIBUTE_VALUE);
 	
 	
 	m_realValue_Operation__copy = factory->createEOperation_as_eOperations_in_EClass(m_realValue_Class, REALVALUE_OPERATION__COPY);
@@ -176,7 +176,7 @@ void SimpleClassifiersPackageImpl::createSignalInstanceContent(std::shared_ptr<e
 void SimpleClassifiersPackageImpl::createStringValueContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_stringValue_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, STRINGVALUE_CLASS);
-	m_stringValue_Attribute_value = factory->createEAttribute_as_eAttributes_in_EClas(m_stringValue_Class, STRINGVALUE_ATTRIBUTE_VALUE);
+	m_stringValue_Attribute_value = factory->createEAttribute_as_eAttributes_in_EClass(m_stringValue_Class, STRINGVALUE_ATTRIBUTE_VALUE);
 	
 	
 	m_stringValue_Operation__copy = factory->createEOperation_as_eOperations_in_EClass(m_stringValue_Class, STRINGVALUE_OPERATION__COPY);
@@ -206,7 +206,7 @@ void SimpleClassifiersPackageImpl::createStructuredValueContent(std::shared_ptr<
 void SimpleClassifiersPackageImpl::createUnlimitedNaturalValueContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_unlimitedNaturalValue_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, UNLIMITEDNATURALVALUE_CLASS);
-	m_unlimitedNaturalValue_Attribute_value = factory->createEAttribute_as_eAttributes_in_EClas(m_unlimitedNaturalValue_Class, UNLIMITEDNATURALVALUE_ATTRIBUTE_VALUE);
+	m_unlimitedNaturalValue_Attribute_value = factory->createEAttribute_as_eAttributes_in_EClass(m_unlimitedNaturalValue_Class, UNLIMITEDNATURALVALUE_ATTRIBUTE_VALUE);
 	
 	
 	m_unlimitedNaturalValue_Operation__copy = factory->createEOperation_as_eOperations_in_EClass(m_unlimitedNaturalValue_Class, UNLIMITEDNATURALVALUE_OPERATION__COPY);

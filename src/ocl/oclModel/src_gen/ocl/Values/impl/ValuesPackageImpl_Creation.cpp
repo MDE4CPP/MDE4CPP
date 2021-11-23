@@ -81,7 +81,7 @@ void ValuesPackageImpl::createCollectionValueContent(std::shared_ptr<ecore::EPac
 void ValuesPackageImpl::createElementContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_element_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, ELEMENT_CLASS);
-	m_element_Attribute_indexNr = factory->createEAttribute_as_eAttributes_in_EClas(m_element_Class, ELEMENT_ATTRIBUTE_INDEXNR);
+	m_element_Attribute_indexNr = factory->createEAttribute_as_eAttributes_in_EClass(m_element_Class, ELEMENT_ATTRIBUTE_INDEXNR);
 	
 	m_element_Attribute_value = factory->createEReference_as_eReferences_in_EClass(m_element_Class, ELEMENT_ATTRIBUTE_VALUE);
 	
@@ -91,8 +91,8 @@ void ValuesPackageImpl::createElementContent(std::shared_ptr<ecore::EPackage> pa
 void ValuesPackageImpl::createLocalSnapshotContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_localSnapshot_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, LOCALSNAPSHOT_CLASS);
-	m_localSnapshot_Attribute_isPost = factory->createEAttribute_as_eAttributes_in_EClas(m_localSnapshot_Class, LOCALSNAPSHOT_ATTRIBUTE_ISPOST);
-	m_localSnapshot_Attribute_isPre = factory->createEAttribute_as_eAttributes_in_EClas(m_localSnapshot_Class, LOCALSNAPSHOT_ATTRIBUTE_ISPRE);
+	m_localSnapshot_Attribute_isPost = factory->createEAttribute_as_eAttributes_in_EClass(m_localSnapshot_Class, LOCALSNAPSHOT_ATTRIBUTE_ISPOST);
+	m_localSnapshot_Attribute_isPre = factory->createEAttribute_as_eAttributes_in_EClass(m_localSnapshot_Class, LOCALSNAPSHOT_ATTRIBUTE_ISPRE);
 	
 	m_localSnapshot_Attribute_bindings = factory->createEReference_as_eReferences_in_EClass(m_localSnapshot_Class, LOCALSNAPSHOT_ATTRIBUTE_BINDINGS);
 	m_localSnapshot_Attribute_inputQ = factory->createEReference_as_eReferences_in_EClass(m_localSnapshot_Class, LOCALSNAPSHOT_ATTRIBUTE_INPUTQ);
@@ -106,7 +106,7 @@ void ValuesPackageImpl::createLocalSnapshotContent(std::shared_ptr<ecore::EPacka
 void ValuesPackageImpl::createNameValueBindingContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_nameValueBinding_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, NAMEVALUEBINDING_CLASS);
-	m_nameValueBinding_Attribute_name = factory->createEAttribute_as_eAttributes_in_EClas(m_nameValueBinding_Class, NAMEVALUEBINDING_ATTRIBUTE_NAME);
+	m_nameValueBinding_Attribute_name = factory->createEAttribute_as_eAttributes_in_EClass(m_nameValueBinding_Class, NAMEVALUEBINDING_ATTRIBUTE_NAME);
 	
 	m_nameValueBinding_Attribute_value = factory->createEReference_as_eReferences_in_EClass(m_nameValueBinding_Class, NAMEVALUEBINDING_ATTRIBUTE_VALUE);
 	
@@ -128,10 +128,10 @@ void ValuesPackageImpl::createObjectValueContent(std::shared_ptr<ecore::EPackage
 void ValuesPackageImpl::createOclMessageValueContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_oclMessageValue_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, OCLMESSAGEVALUE_CLASS);
-	m_oclMessageValue_Attribute_isAsyncOperation = factory->createEAttribute_as_eAttributes_in_EClas(m_oclMessageValue_Class, OCLMESSAGEVALUE_ATTRIBUTE_ISASYNCOPERATION);
-	m_oclMessageValue_Attribute_isSignal = factory->createEAttribute_as_eAttributes_in_EClas(m_oclMessageValue_Class, OCLMESSAGEVALUE_ATTRIBUTE_ISSIGNAL);
-	m_oclMessageValue_Attribute_isSyncOperation = factory->createEAttribute_as_eAttributes_in_EClas(m_oclMessageValue_Class, OCLMESSAGEVALUE_ATTRIBUTE_ISSYNCOPERATION);
-	m_oclMessageValue_Attribute_name = factory->createEAttribute_as_eAttributes_in_EClas(m_oclMessageValue_Class, OCLMESSAGEVALUE_ATTRIBUTE_NAME);
+	m_oclMessageValue_Attribute_isAsyncOperation = factory->createEAttribute_as_eAttributes_in_EClass(m_oclMessageValue_Class, OCLMESSAGEVALUE_ATTRIBUTE_ISASYNCOPERATION);
+	m_oclMessageValue_Attribute_isSignal = factory->createEAttribute_as_eAttributes_in_EClass(m_oclMessageValue_Class, OCLMESSAGEVALUE_ATTRIBUTE_ISSIGNAL);
+	m_oclMessageValue_Attribute_isSyncOperation = factory->createEAttribute_as_eAttributes_in_EClass(m_oclMessageValue_Class, OCLMESSAGEVALUE_ATTRIBUTE_ISSYNCOPERATION);
+	m_oclMessageValue_Attribute_name = factory->createEAttribute_as_eAttributes_in_EClass(m_oclMessageValue_Class, OCLMESSAGEVALUE_ATTRIBUTE_NAME);
 	
 	m_oclMessageValue_Attribute_arguments = factory->createEReference_as_eReferences_in_EClass(m_oclMessageValue_Class, OCLMESSAGEVALUE_ATTRIBUTE_ARGUMENTS);
 	m_oclMessageValue_Attribute_returnMessage = factory->createEReference_as_eReferences_in_EClass(m_oclMessageValue_Class, OCLMESSAGEVALUE_ATTRIBUTE_RETURNMESSAGE);

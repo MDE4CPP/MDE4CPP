@@ -89,7 +89,7 @@ void ExpressionsPackageImpl::createAssociationClassCallExpContent(std::shared_pt
 void ExpressionsPackageImpl::createBooleanLiteralExpContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_booleanLiteralExp_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, BOOLEANLITERALEXP_CLASS);
-	m_booleanLiteralExp_Attribute_booleanSymbol = factory->createEAttribute_as_eAttributes_in_EClas(m_booleanLiteralExp_Class, BOOLEANLITERALEXP_ATTRIBUTE_BOOLEANSYMBOL);
+	m_booleanLiteralExp_Attribute_booleanSymbol = factory->createEAttribute_as_eAttributes_in_EClass(m_booleanLiteralExp_Class, BOOLEANLITERALEXP_ATTRIBUTE_BOOLEANSYMBOL);
 	
 	
 	
@@ -116,7 +116,7 @@ void ExpressionsPackageImpl::createCollectionItemContent(std::shared_ptr<ecore::
 void ExpressionsPackageImpl::createCollectionLiteralExpContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_collectionLiteralExp_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, COLLECTIONLITERALEXP_CLASS);
-	m_collectionLiteralExp_Attribute_kind = factory->createEAttribute_as_eAttributes_in_EClas(m_collectionLiteralExp_Class, COLLECTIONLITERALEXP_ATTRIBUTE_KIND);
+	m_collectionLiteralExp_Attribute_kind = factory->createEAttribute_as_eAttributes_in_EClass(m_collectionLiteralExp_Class, COLLECTIONLITERALEXP_ATTRIBUTE_KIND);
 	
 	m_collectionLiteralExp_Attribute_part = factory->createEReference_as_eReferences_in_EClass(m_collectionLiteralExp_Class, COLLECTIONLITERALEXP_ATTRIBUTE_PART);
 	
@@ -165,7 +165,7 @@ void ExpressionsPackageImpl::createExpressionInOclContent(std::shared_ptr<ecore:
 void ExpressionsPackageImpl::createFeatureCallExpContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_featureCallExp_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, FEATURECALLEXP_CLASS);
-	m_featureCallExp_Attribute_isPre = factory->createEAttribute_as_eAttributes_in_EClas(m_featureCallExp_Class, FEATURECALLEXP_ATTRIBUTE_ISPRE);
+	m_featureCallExp_Attribute_isPre = factory->createEAttribute_as_eAttributes_in_EClass(m_featureCallExp_Class, FEATURECALLEXP_ATTRIBUTE_ISPRE);
 	
 	
 	
@@ -194,7 +194,7 @@ void ExpressionsPackageImpl::createInfixedExpContent(std::shared_ptr<ecore::EPac
 void ExpressionsPackageImpl::createIntegerLiteralExpContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_integerLiteralExp_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, INTEGERLITERALEXP_CLASS);
-	m_integerLiteralExp_Attribute_integerSymbol = factory->createEAttribute_as_eAttributes_in_EClas(m_integerLiteralExp_Class, INTEGERLITERALEXP_ATTRIBUTE_INTEGERSYMBOL);
+	m_integerLiteralExp_Attribute_integerSymbol = factory->createEAttribute_as_eAttributes_in_EClass(m_integerLiteralExp_Class, INTEGERLITERALEXP_ATTRIBUTE_INTEGERSYMBOL);
 	
 	
 	
@@ -324,7 +324,7 @@ void ExpressionsPackageImpl::createOperationCallExpContent(std::shared_ptr<ecore
 void ExpressionsPackageImpl::createPrimitiveLiteralExpContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_primitiveLiteralExp_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, PRIMITIVELITERALEXP_CLASS);
-	m_primitiveLiteralExp_Attribute_symbol = factory->createEAttribute_as_eAttributes_in_EClas(m_primitiveLiteralExp_Class, PRIMITIVELITERALEXP_ATTRIBUTE_SYMBOL);
+	m_primitiveLiteralExp_Attribute_symbol = factory->createEAttribute_as_eAttributes_in_EClass(m_primitiveLiteralExp_Class, PRIMITIVELITERALEXP_ATTRIBUTE_SYMBOL);
 	
 	
 	
@@ -342,7 +342,7 @@ void ExpressionsPackageImpl::createPropertyCallExpContent(std::shared_ptr<ecore:
 void ExpressionsPackageImpl::createRealLiteralExpContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_realLiteralExp_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, REALLITERALEXP_CLASS);
-	m_realLiteralExp_Attribute_realSymbol = factory->createEAttribute_as_eAttributes_in_EClas(m_realLiteralExp_Class, REALLITERALEXP_ATTRIBUTE_REALSYMBOL);
+	m_realLiteralExp_Attribute_realSymbol = factory->createEAttribute_as_eAttributes_in_EClass(m_realLiteralExp_Class, REALLITERALEXP_ATTRIBUTE_REALSYMBOL);
 	
 	
 	
@@ -360,7 +360,7 @@ void ExpressionsPackageImpl::createStateExpContent(std::shared_ptr<ecore::EPacka
 void ExpressionsPackageImpl::createStringLiteralExpContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_stringLiteralExp_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, STRINGLITERALEXP_CLASS);
-	m_stringLiteralExp_Attribute_stringSymbol = factory->createEAttribute_as_eAttributes_in_EClas(m_stringLiteralExp_Class, STRINGLITERALEXP_ATTRIBUTE_STRINGSYMBOL);
+	m_stringLiteralExp_Attribute_stringSymbol = factory->createEAttribute_as_eAttributes_in_EClass(m_stringLiteralExp_Class, STRINGLITERALEXP_ATTRIBUTE_STRINGSYMBOL);
 	
 	
 	
@@ -396,7 +396,7 @@ void ExpressionsPackageImpl::createTypeExpContent(std::shared_ptr<ecore::EPackag
 void ExpressionsPackageImpl::createUnlimitedNaturalExpContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_unlimitedNaturalExp_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, UNLIMITEDNATURALEXP_CLASS);
-	m_unlimitedNaturalExp_Attribute_unlimitedNaturalSymbol = factory->createEAttribute_as_eAttributes_in_EClas(m_unlimitedNaturalExp_Class, UNLIMITEDNATURALEXP_ATTRIBUTE_UNLIMITEDNATURALSYMBOL);
+	m_unlimitedNaturalExp_Attribute_unlimitedNaturalSymbol = factory->createEAttribute_as_eAttributes_in_EClass(m_unlimitedNaturalExp_Class, UNLIMITEDNATURALEXP_ATTRIBUTE_UNLIMITEDNATURALSYMBOL);
 	
 	
 	

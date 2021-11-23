@@ -121,7 +121,7 @@ bool Ocl::query(const string& oclText, std::shared_ptr<ecore::EObject> context)
 {
     parse(oclText);
 
-    m_env = EnvironmentFactory::getInstance().createEnvironment(nullptr, context, Level::M1);
+    m_env = EnvironmentFactory::getInstance().createRootEnvironment(context);
     m_root = m_parser->expressionInOclCS();
     m_root->setEnv(m_env);
     m_root->setErrorListener(m_analyseErListener);
@@ -136,7 +136,7 @@ bool Ocl::validate(const string& oclText, std::shared_ptr<ecore::EObject> contex
 {
     parse(oclText);
 
-    m_env = EnvironmentFactory::getInstance().createEnvironment(nullptr, context, Level::M2);
+    m_env = EnvironmentFactory::getInstance().createRootEnvironment(context);
     m_root = m_parser->packageDeclarationCS();
     m_root->setEnv(m_env);
     m_root->setErrorListener(m_analyseErListener);

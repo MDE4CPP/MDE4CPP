@@ -58,6 +58,7 @@ Environment::Environment(std::shared_ptr<Environment> parent) : m_parent(parent)
         }
     }
 }
+
 std::shared_ptr<NamedElement> Environment::lookupLocal(const std::string& name)
 {
     if(m_namedElements.find(name) != m_namedElements.end()) {
@@ -235,30 +236,6 @@ std::string Environment::generateName()
 {
     m_generatorInt++;
     return "temp" + std::to_string(m_generatorInt);
-}
-
-
-std::shared_ptr<ecore::EClass> Environment::getMetaClass(std::shared_ptr<ecore::EClassifier> type)
-{
-    if(m_level == Level::M2 ||
-            type->getClassifierID() == ecore::ecorePackage::EPACKAGE_CLASS ||
-            type->getClassifierID() == ecore::ecorePackage::EOPERATION_CLASS ||
-            type->getClassifierID() == ecore::ecorePackage::EATTRIBUTE_CLASS ||
-            type->getClassifierID() == ecore::ecorePackage::EREFERENCE_CLASS ||
-            type->getClassifierID() == ecore::ecorePackage::EENUM_CLASS ||
-            type->getClassifierID() == uml::umlPackage::MODEL_CLASS ||
-            type->getClassifierID() == uml::umlPackage::PACKAGE_CLASS ||
-            type->getClassifierID() == uml::umlPackage::CLASS_CLASS ||
-            type->getClassifierID() == uml::umlPackage::OPERATION_CLASS ||
-            type->getClassifierID() == uml::umlPackage::PROPERTY_CLASS ||
-            type->getClassifierID() == uml::umlPackage::ASSOCIATION_CLASS ||
-            type->getClassifierID() == uml::umlPackage::ENUMERATION_CLASS )
-    {
-        return std::dynamic_pointer_cast<ecore::EClass>(type);
-    }
-    else {
-        return type->eClass();
-    }
 }
 
 std::shared_ptr<Environment> Environment::getRootEnv()

@@ -102,7 +102,7 @@ void TypesPackageImpl::createMessageTypeContent(std::shared_ptr<ecore::EPackage>
 void TypesPackageImpl::createNameTypeBindingContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_nameTypeBinding_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, NAMETYPEBINDING_CLASS);
-	m_nameTypeBinding_Attribute_name = factory->createEAttribute_as_eAttributes_in_EClas(m_nameTypeBinding_Class, NAMETYPEBINDING_ATTRIBUTE_NAME);
+	m_nameTypeBinding_Attribute_name = factory->createEAttribute_as_eAttributes_in_EClass(m_nameTypeBinding_Class, NAMETYPEBINDING_ATTRIBUTE_NAME);
 	
 	m_nameTypeBinding_Attribute_type = factory->createEReference_as_eReferences_in_EClass(m_nameTypeBinding_Class, NAMETYPEBINDING_ATTRIBUTE_TYPE);
 	
@@ -136,7 +136,7 @@ void TypesPackageImpl::createSetTypeContent(std::shared_ptr<ecore::EPackage> pac
 void TypesPackageImpl::createTemplateParameterTypeContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_templateParameterType_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, TEMPLATEPARAMETERTYPE_CLASS);
-	m_templateParameterType_Attribute_specification = factory->createEAttribute_as_eAttributes_in_EClas(m_templateParameterType_Class, TEMPLATEPARAMETERTYPE_ATTRIBUTE_SPECIFICATION);
+	m_templateParameterType_Attribute_specification = factory->createEAttribute_as_eAttributes_in_EClass(m_templateParameterType_Class, TEMPLATEPARAMETERTYPE_ATTRIBUTE_SPECIFICATION);
 	
 	
 	

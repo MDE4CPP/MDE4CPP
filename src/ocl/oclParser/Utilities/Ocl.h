@@ -27,6 +27,7 @@
 #define OCL4CPP_H
 
 #include <ecore/EPackage.hpp>
+#include <ecore/EFactory.hpp>
 #include <uml/Package.hpp>
 #include <uml/Classifier.hpp>
 

@@ -113,7 +113,7 @@ void ActivitiesPackageImpl::createActivityFinalNodeActivationContent(std::shared
 void ActivitiesPackageImpl::createActivityNodeActivationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_activityNodeActivation_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, ACTIVITYNODEACTIVATION_CLASS);
-	m_activityNodeActivation_Attribute_running = factory->createEAttribute_as_eAttributes_in_EClas(m_activityNodeActivation_Class, ACTIVITYNODEACTIVATION_ATTRIBUTE_RUNNING);
+	m_activityNodeActivation_Attribute_running = factory->createEAttribute_as_eAttributes_in_EClass(m_activityNodeActivation_Class, ACTIVITYNODEACTIVATION_ATTRIBUTE_RUNNING);
 	
 	m_activityNodeActivation_Attribute_group = factory->createEReference_as_eReferences_in_EClass(m_activityNodeActivation_Class, ACTIVITYNODEACTIVATION_ATTRIBUTE_GROUP);
 	m_activityNodeActivation_Attribute_heldTokens = factory->createEReference_as_eReferences_in_EClass(m_activityNodeActivation_Class, ACTIVITYNODEACTIVATION_ATTRIBUTE_HELDTOKENS);
@@ -268,7 +268,7 @@ void ActivitiesPackageImpl::createDecisionNodeActivationContent(std::shared_ptr<
 void ActivitiesPackageImpl::createExpansionActivationGroupContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_expansionActivationGroup_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, EXPANSIONACTIVATIONGROUP_CLASS);
-	m_expansionActivationGroup_Attribute_index = factory->createEAttribute_as_eAttributes_in_EClas(m_expansionActivationGroup_Class, EXPANSIONACTIVATIONGROUP_ATTRIBUTE_INDEX);
+	m_expansionActivationGroup_Attribute_index = factory->createEAttribute_as_eAttributes_in_EClass(m_expansionActivationGroup_Class, EXPANSIONACTIVATIONGROUP_ATTRIBUTE_INDEX);
 	
 	m_expansionActivationGroup_Attribute_groupInputs = factory->createEReference_as_eReferences_in_EClass(m_expansionActivationGroup_Class, EXPANSIONACTIVATIONGROUP_ATTRIBUTE_GROUPINPUTS);
 	m_expansionActivationGroup_Attribute_groupOutputs = factory->createEReference_as_eReferences_in_EClass(m_expansionActivationGroup_Class, EXPANSIONACTIVATIONGROUP_ATTRIBUTE_GROUPOUTPUTS);
@@ -297,7 +297,7 @@ void ActivitiesPackageImpl::createExpansionNodeActivationContent(std::shared_ptr
 void ActivitiesPackageImpl::createExpansionRegionActivationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_expansionRegionActivation_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, EXPANSIONREGIONACTIVATION_CLASS);
-	m_expansionRegionActivation_Attribute_next = factory->createEAttribute_as_eAttributes_in_EClas(m_expansionRegionActivation_Class, EXPANSIONREGIONACTIVATION_ATTRIBUTE_NEXT);
+	m_expansionRegionActivation_Attribute_next = factory->createEAttribute_as_eAttributes_in_EClass(m_expansionRegionActivation_Class, EXPANSIONREGIONACTIVATION_ATTRIBUTE_NEXT);
 	
 	m_expansionRegionActivation_Attribute_activationGroups = factory->createEReference_as_eReferences_in_EClass(m_expansionRegionActivation_Class, EXPANSIONREGIONACTIVATION_ATTRIBUTE_ACTIVATIONGROUPS);
 	m_expansionRegionActivation_Attribute_inputExpansionTokens = factory->createEReference_as_eReferences_in_EClass(m_expansionRegionActivation_Class, EXPANSIONREGIONACTIVATION_ATTRIBUTE_INPUTEXPANSIONTOKENS);
@@ -341,8 +341,8 @@ void ActivitiesPackageImpl::createForkNodeActivationContent(std::shared_ptr<ecor
 void ActivitiesPackageImpl::createForkedTokenContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_forkedToken_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, FORKEDTOKEN_CLASS);
-	m_forkedToken_Attribute_baseTokenIsWithdrawn = factory->createEAttribute_as_eAttributes_in_EClas(m_forkedToken_Class, FORKEDTOKEN_ATTRIBUTE_BASETOKENISWITHDRAWN);
-	m_forkedToken_Attribute_remainingOffersCount = factory->createEAttribute_as_eAttributes_in_EClas(m_forkedToken_Class, FORKEDTOKEN_ATTRIBUTE_REMAININGOFFERSCOUNT);
+	m_forkedToken_Attribute_baseTokenIsWithdrawn = factory->createEAttribute_as_eAttributes_in_EClass(m_forkedToken_Class, FORKEDTOKEN_ATTRIBUTE_BASETOKENISWITHDRAWN);
+	m_forkedToken_Attribute_remainingOffersCount = factory->createEAttribute_as_eAttributes_in_EClass(m_forkedToken_Class, FORKEDTOKEN_ATTRIBUTE_REMAININGOFFERSCOUNT);
 	
 	m_forkedToken_Attribute_baseToken = factory->createEReference_as_eReferences_in_EClass(m_forkedToken_Class, FORKEDTOKEN_ATTRIBUTE_BASETOKEN);
 	
@@ -384,7 +384,7 @@ void ActivitiesPackageImpl::createMergeNodeActivationContent(std::shared_ptr<eco
 void ActivitiesPackageImpl::createObjectNodeActivationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_objectNodeActivation_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, OBJECTNODEACTIVATION_CLASS);
-	m_objectNodeActivation_Attribute_offeredTokenCount = factory->createEAttribute_as_eAttributes_in_EClas(m_objectNodeActivation_Class, OBJECTNODEACTIVATION_ATTRIBUTE_OFFEREDTOKENCOUNT);
+	m_objectNodeActivation_Attribute_offeredTokenCount = factory->createEAttribute_as_eAttributes_in_EClass(m_objectNodeActivation_Class, OBJECTNODEACTIVATION_ATTRIBUTE_OFFEREDTOKENCOUNT);
 	
 	
 	m_objectNodeActivation_Operation_addToken_Token = factory->createEOperation_as_eOperations_in_EClass(m_objectNodeActivation_Class, OBJECTNODEACTIVATION_OPERATION_ADDTOKEN_TOKEN);
@@ -430,7 +430,7 @@ void ActivitiesPackageImpl::createOfferContent(std::shared_ptr<ecore::EPackage> 
 void ActivitiesPackageImpl::createTokenContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_token_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, TOKEN_CLASS);
-	m_token_Attribute_withdrawn = factory->createEAttribute_as_eAttributes_in_EClas(m_token_Class, TOKEN_ATTRIBUTE_WITHDRAWN);
+	m_token_Attribute_withdrawn = factory->createEAttribute_as_eAttributes_in_EClass(m_token_Class, TOKEN_ATTRIBUTE_WITHDRAWN);
 	
 	m_token_Attribute_holder = factory->createEReference_as_eReferences_in_EClass(m_token_Class, TOKEN_ATTRIBUTE_HOLDER);
 	

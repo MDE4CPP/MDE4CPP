@@ -103,7 +103,7 @@ void ActionsPackageImpl::createAcceptCallActionActivationsContent(std::shared_pt
 void ActionsPackageImpl::createAcceptEventActionActivationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_acceptEventActionActivation_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, ACCEPTEVENTACTIONACTIVATION_CLASS);
-	m_acceptEventActionActivation_Attribute_waiting = factory->createEAttribute_as_eAttributes_in_EClas(m_acceptEventActionActivation_Class, ACCEPTEVENTACTIONACTIVATION_ATTRIBUTE_WAITING);
+	m_acceptEventActionActivation_Attribute_waiting = factory->createEAttribute_as_eAttributes_in_EClass(m_acceptEventActionActivation_Class, ACCEPTEVENTACTIONACTIVATION_ATTRIBUTE_WAITING);
 	
 	m_acceptEventActionActivation_Attribute_eventAccepter = factory->createEReference_as_eReferences_in_EClass(m_acceptEventActionActivation_Class, ACCEPTEVENTACTIONACTIVATION_ATTRIBUTE_EVENTACCEPTER);
 	
@@ -130,7 +130,7 @@ void ActionsPackageImpl::createAcceptEventActionEventAccepterContent(std::shared
 void ActionsPackageImpl::createActionActivationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_actionActivation_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, ACTIONACTIVATION_CLASS);
-	m_actionActivation_Attribute_firing = factory->createEAttribute_as_eAttributes_in_EClas(m_actionActivation_Class, ACTIONACTIVATION_ATTRIBUTE_FIRING);
+	m_actionActivation_Attribute_firing = factory->createEAttribute_as_eAttributes_in_EClass(m_actionActivation_Class, ACTIONACTIVATION_ATTRIBUTE_FIRING);
 	
 	m_actionActivation_Attribute_action = factory->createEReference_as_eReferences_in_EClass(m_actionActivation_Class, ACTIONACTIVATION_ATTRIBUTE_ACTION);
 	m_actionActivation_Attribute_inputPinActivation = factory->createEReference_as_eReferences_in_EClass(m_actionActivation_Class, ACTIONACTIVATION_ATTRIBUTE_INPUTPINACTIVATION);
