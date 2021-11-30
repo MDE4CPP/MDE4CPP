@@ -126,6 +126,8 @@ private:
     bool visitAssociationCallExpCS(CSTNode *ctx, OclParser::ArgumentsCSContext *argCS, std::shared_ptr<AssociationClassCallExp> exp,
                                    std::string simpleName, bool isPre, bool isImplicit);
     std::string getPath(std::vector<std::string> path);
+    void createPropertyCallExpEval(std::shared_ptr<ecore::EAttribute> eatt,	std::shared_ptr<fUML::Semantics::Values::Value> srcValue, std::shared_ptr<PropertyCallExp> exp, std::string simpleName,	bool isPre, CSTNode *ctx);
+    void createAssociationClassCallExpEval(std::shared_ptr<ecore::EReference> eref,	std::shared_ptr<fUML::Semantics::Values::Value> srcValue,std::string simpleName, std::shared_ptr<PropertyCallExp> exp, bool isPre, CSTNode *ctx);
 };
 }
 #endif // OCLPARSERCUSTOMVISITOR_H

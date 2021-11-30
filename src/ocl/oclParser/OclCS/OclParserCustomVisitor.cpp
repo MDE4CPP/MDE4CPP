@@ -273,6 +273,25 @@ bool OclParserCustomVisitor::visitOperationCallExpCS(CSTNode* ctx, std::shared_p
 
         return true;
     }
+    //Additional BaseMetamodelElements EModelElement
+     eoper = OclReflection::lookupOperation(ecore::ecorePackage::eInstance()->getENamedElement_Class(), simpleName, exp->getArgument());
+    if(eoper != nullptr) {
+        std::shared_ptr<OperationCallExpEval> expEval = ocl::Evaluations::EvaluationsFactory::eInstance()->createOperationCallExpEval();
+        std::shared_ptr<fUML::Semantics::Values::Value> objValue = OclReflection::createValue(eoper, exp->getArgument(), srcValue);
+
+        expEval->setModel(exp);
+        expEval->setResultValue(objValue);
+
+        exp->setName(simpleName);
+        exp->setInstance(expEval);
+        exp->setSource(exp->getSource());
+        exp->setEType(eoper->getEType());
+        exp->setReferredOperation(eoper);
+
+        return true;
+    }
+
+
     std::string error = "Unrecognized operation: " + simpleName + "(";
     for(size_t i = 0; i < exp->getArgument()->size(); i++) {
         if(i != 0) {
@@ -382,11 +401,39 @@ antlrcpp::Any OclParserCustomVisitor::visitOperationCallExpCS_B(OclParser::Opera
     return false;
 }
 
+void OclParserCustomVisitor::createPropertyCallExpEval(std::shared_ptr<ecore::EAttribute> eatt,	std::shared_ptr<fUML::Semantics::Values::Value> srcValue, std::shared_ptr<PropertyCallExp> exp, std::string simpleName,	bool isPre, CSTNode *ctx) {
+	std::shared_ptr<PropertyCallExpEval> expEval =	ocl::Evaluations::EvaluationsFactory::eInstance()->createPropertyCallExpEval();
+	std::shared_ptr<fUML::Semantics::Values::Value> objValue =	OclReflection::createValue(eatt, srcValue, 	ctx->getEnv()->getLevel());
+	expEval->setModel(exp);
+	expEval->setResultValue(objValue);
+	exp->setName(simpleName);
+	exp->setInstance(expEval);
+	exp->setSource(exp->getSource());
+	exp->setEType(eatt->getEType());
+	exp->setReferredProperty(eatt);
+	exp->setIsPre(isPre);
+}
+
+void OclParserCustomVisitor::createAssociationClassCallExpEval(std::shared_ptr<ecore::EReference> eref,	std::shared_ptr<fUML::Semantics::Values::Value> srcValue,std::string simpleName, std::shared_ptr<PropertyCallExp> exp, bool isPre, CSTNode *ctx)
+{
+	std::shared_ptr<AssociationClassCallExpEval> expEval =	ocl::Evaluations::EvaluationsFactory::eInstance()->createAssociationClassCallExpEval();
+	std::shared_ptr<AssociationClassCallExp> assExpr =	ocl::Expressions::ExpressionsFactory::eInstance()->createAssociationClassCallExp();
+	std::shared_ptr<fUML::Semantics::Values::Value> objValue = 	OclReflection::createValue(eref, srcValue, ctx->getEnv()->getLevel());
+	expEval->setModel(assExpr);
+	expEval->setResultValue(objValue);
+	assExpr->setName(simpleName);
+	assExpr->setInstance(expEval);
+	assExpr->setSource(exp->getSource());
+	assExpr->setEType(eref->getEType());
+	assExpr->setReferredAssociationClass(eref);
+	assExpr->setIsPre(isPre);
+	ctx->setAST(assExpr);
+}
+
 bool OclParserCustomVisitor::visitPropertyCallExpCS(CSTNode* ctx, std::shared_ptr<PropertyCallExp> exp, std::string simpleName, bool isPre, bool isImplicit)
 {
     std::shared_ptr<ecore::EClass> eClass;
     std::shared_ptr<fUML::Semantics::Values::Value> srcValue;
-
     if(isImplicit) {
         std::shared_ptr<Variable> varImpl = ctx->getEnv()->lookup(simpleName);
         if(varImpl == nullptr) {
@@ -430,38 +477,31 @@ bool OclParserCustomVisitor::visitPropertyCallExpCS(CSTNode* ctx, std::shared_pt
 
     std::shared_ptr<ecore::EAttribute> eatt = OclReflection::lookupProperty(eClass, simpleName);
     if(eatt != nullptr) {
-        std::shared_ptr<PropertyCallExpEval> expEval = ocl::Evaluations::EvaluationsFactory::eInstance()->createPropertyCallExpEval();
-        std::shared_ptr<fUML::Semantics::Values::Value> objValue = OclReflection::createValue(eatt, srcValue, ctx->getEnv()->getLevel());
-
-        expEval->setModel(exp);
-        expEval->setResultValue(objValue);
-
-        exp->setName(simpleName);
-        exp->setInstance(expEval);
-        exp->setSource(exp->getSource());
-        exp->setEType(eatt->getEType());
-        exp->setReferredProperty(eatt);
-        exp->setIsPre(isPre);
+		createPropertyCallExpEval(eatt, srcValue, exp, simpleName, isPre, ctx);
         return true;
     }
     else { // Association
         std::shared_ptr<ecore::EReference> eref = OclReflection::lookupAssociationClass(eClass, simpleName);
         if(eref != nullptr) {
-            std::shared_ptr<AssociationClassCallExpEval> expEval = ocl::Evaluations::EvaluationsFactory::eInstance()->createAssociationClassCallExpEval();
-            std::shared_ptr<AssociationClassCallExp> assExpr = ocl::Expressions::ExpressionsFactory::eInstance()->createAssociationClassCallExp();
-            std::shared_ptr<fUML::Semantics::Values::Value> objValue = OclReflection::createValue(eref, srcValue, ctx->getEnv()->getLevel());
-
-            expEval->setModel(assExpr);
-            expEval->setResultValue(objValue);
-
-            assExpr->setName(simpleName);
-            assExpr->setInstance(expEval);
-            assExpr->setSource(exp->getSource());
-            assExpr->setEType(eref->getEType());
-            assExpr->setReferredAssociationClass(eref);
-            assExpr->setIsPre(isPre);
-            ctx->setAST(assExpr);
+			createAssociationClassCallExpEval(eref, srcValue, simpleName, exp,isPre, ctx);
             return true;
+        }
+        else
+        {
+            //Additional BaseMetamodelElements EModelElement
+            eatt = OclReflection::lookupProperty(ecore::ecorePackage::eInstance()->getENamedElement_Class(), simpleName);
+            if(eatt != nullptr) {
+        		createPropertyCallExpEval(eatt, srcValue, exp, simpleName, isPre, ctx);
+                return true;
+            }
+            else { // Association
+                eref = OclReflection::lookupAssociationClass(ecore::ecorePackage::eInstance()->getENamedElement_Class(), simpleName);
+                if(eref != nullptr) {
+        			createAssociationClassCallExpEval(eref, srcValue, simpleName, exp,isPre, ctx);
+                    return true;
+                }
+            }
+
         }
     }
     ctx->getErrorListener()->syntaxError("Unrecognized variable: ("+ simpleName +")");
@@ -1325,7 +1365,7 @@ antlrcpp::Any OclParserCustomVisitor::visitCollectionLiteralExpCS(OclParser::Col
     if(collTypeCS->SET() != nullptr) {
         std::shared_ptr<SetTypeValue> setValue = ocl::Values::ValuesFactory::eInstance()->createSetTypeValue();
         std::shared_ptr<SetType> setType = ocl::Types::TypesFactory::eInstance()->createSetType();
-        setValue->setModel(setType);
+//        setValue->setModel(setType);
         collExp->setKind(CollectionKind::SET);
         value = setValue;
         type = setType;
@@ -1333,7 +1373,7 @@ antlrcpp::Any OclParserCustomVisitor::visitCollectionLiteralExpCS(OclParser::Col
     else if(collTypeCS->ORDEREDSET() != nullptr) {
         std::shared_ptr<OrderedSetTypeValue> ordSetValue = ocl::Values::ValuesFactory::eInstance()->createOrderedSetTypeValue();
         std::shared_ptr<OrderedSetType> ordSetType = ocl::Types::TypesFactory::eInstance()->createOrderedSetType();
-        ordSetValue->setModel(ordSetType);
+//        ordSetValue->setModel(ordSetType);
         collExp->setKind(CollectionKind::ORDEREDSET);
         value = ordSetValue;
         type = ordSetType;
@@ -1341,7 +1381,7 @@ antlrcpp::Any OclParserCustomVisitor::visitCollectionLiteralExpCS(OclParser::Col
     else if(collTypeCS->SEQUENCE() != nullptr) {
         std::shared_ptr<SequenceTypeValue> seqValue = ocl::Values::ValuesFactory::eInstance()->createSequenceTypeValue();
         std::shared_ptr<SequenceType> seqType = ocl::Types::TypesFactory::eInstance()->createSequenceType();
-        seqValue->setModel(seqType);
+//        seqValue->setModel(seqType);
         collExp->setKind(CollectionKind::SEQUENCE);
         value = seqValue;
         type = seqType;
@@ -1349,7 +1389,7 @@ antlrcpp::Any OclParserCustomVisitor::visitCollectionLiteralExpCS(OclParser::Col
     else {
         std::shared_ptr<BagTypeValue> bagValue = ocl::Values::ValuesFactory::eInstance()->createBagTypeValue();
         std::shared_ptr<BagType> bagType = ocl::Types::TypesFactory::eInstance()->createBagType();
-        bagValue->setModel(bagType);
+//        bagValue->setModel(bagType);
         collExp->setKind(CollectionKind::BAG);
         value = bagValue;
         type = bagType;
