@@ -1,1813 +1,790 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ecore:EPackage
-    xmi:version="2.0"
-    xmlns:xmi="http://www.omg.org/XMI"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
-    name="ecore"
-    nsURI="http://www.eclipse.org/emf/2002/Ecore"
-    nsPrefix="ecore">
-  <eClassifiers
-      xsi:type="ecore:EClass"
-      name="EAttribute"
-      eSuperTypes="#//EStructuralFeature">
-    <eAnnotations
-        source="http://www.eclipse.org/emf/2002/Ecore">
-      <details
-          key="constraints"
-          value="ConsistentTransient"/>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="ecore" nsURI="http://www.eclipse.org/emf/2002/Ecore" nsPrefix="ecore">
+  <eClassifiers xsi:type="ecore:EClass" name="EAttribute" eSuperTypes="#//EStructuralFeature">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="ConsistentTransient"/>
     </eAnnotations>
-    <eStructuralFeatures
-        xsi:type="ecore:EAttribute"
-        name="iD"
-        eType="#//EBoolean"/>
-    <eStructuralFeatures
-        xsi:type="ecore:EReference"
-        name="eAttributeType"
-        lowerBound="1"
-        eType="#//EDataType"
-        changeable="false"
-        volatile="true"
-        transient="true"
-        derived="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="iD" eType="#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="eAttributeType" lowerBound="1"
+        eType="#//EDataType" changeable="false" volatile="true" transient="true" derived="true"/>
   </eClassifiers>
-  <eClassifiers
-      xsi:type="ecore:EClass"
-      name="EAnnotation"
-      eSuperTypes="#//EModelElement">
-    <eAnnotations
-        source="http://www.eclipse.org/emf/2002/Ecore">
-      <details
-          key="constraints"
-          value="WellFormedSourceURI"/>
+  <eClassifiers xsi:type="ecore:EClass" name="EAnnotation" eSuperTypes="#//EModelElement">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="WellFormedSourceURI"/>
     </eAnnotations>
-    <eStructuralFeatures
-        xsi:type="ecore:EAttribute"
-        name="source"
-        eType="#//EString"/>
-    <eStructuralFeatures
-        xsi:type="ecore:EReference"
-        name="eModelElement"
-        eType="#//EModelElement"
-        transient="true"
-        resolveProxies="false"
-        eOpposite="#//EModelElement/eAnnotations">
-      <eAnnotations
-          source="http://tu-ilmenau.de/see/codegen">
-        <details
-            key="isContainerAttribute"
-            value="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="source" eType="#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="eModelElement" eType="#//EModelElement"
+        transient="true" resolveProxies="false" eOpposite="#//EModelElement/eAnnotations">
+      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+        <details key="isContainerAttribute" value="true"/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures
-        xsi:type="ecore:EReference"
-        name="contents"
-        upperBound="-1"
-        eType="#//EObject"
-        containment="true"
-        resolveProxies="false">
-      <eAnnotations
-          source="subsets"
-          references="#//EObject/eContens"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="contents" upperBound="-1"
+        eType="#//EObject" containment="true" resolveProxies="false">
+      <eAnnotations source="subsets" references="#//EObject/eContentUnion"/>
     </eStructuralFeatures>
-    <eStructuralFeatures
-        xsi:type="ecore:EReference"
-        name="references"
-        upperBound="-1"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="references" upperBound="-1"
         eType="#//EObject"/>
-    <eStructuralFeatures
-        xsi:type="ecore:EAttribute"
-        name="details"
-        transient="true">
-      <eGenericType
-          eClassifier="#//EMap">
-        <eTypeArguments
-            eClassifier="#//EString"/>
-        <eTypeArguments
-            eClassifier="#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="details" transient="true">
+      <eGenericType eClassifier="#//EMap">
+        <eTypeArguments eClassifier="#//EString"/>
+        <eTypeArguments eClassifier="#//EString"/>
       </eGenericType>
     </eStructuralFeatures>
   </eClassifiers>
-  <eClassifiers
-      xsi:type="ecore:EClass"
-      name="EClass"
-      eSuperTypes="#//EClassifier">
-    <eAnnotations
-        source="http://www.eclipse.org/emf/2002/Ecore">
-      <details
-          key="constraints"
-          value="InterfaceIsAbstract AtMostOneID UniqueFeatureNames UniqueOperationSignatures NoCircularSuperTypes WellFormedMapEntryClass ConsistentSuperTypes DisjointFeatureAndOperationSignatures"/>
+  <eClassifiers xsi:type="ecore:EClass" name="EClass" eSuperTypes="#//EClassifier">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="InterfaceIsAbstract AtMostOneID UniqueFeatureNames UniqueOperationSignatures NoCircularSuperTypes WellFormedMapEntryClass ConsistentSuperTypes DisjointFeatureAndOperationSignatures"/>
     </eAnnotations>
-    <eOperations
-        name="isSuperTypeOf"
-        eType="#//EBoolean">
-      <eAnnotations
-          source="http://tu-ilmenau.de/see/codegen">
-        <details
-            key="body"
-            value="&#x9;std::shared_ptr&lt; Bag&lt;ecore::EClass > > list = someClass->getEAllSuperTypes();&#xD;&#xA;&#xD;&#xA;    Bag&lt; ecore::EClass > ::iterator i=list->begin();&#xD;&#xA;    Bag&lt; ecore::EClass > ::iterator endIter=list->end();&#xD;&#xA;&#xD;&#xA;    while (i!=endIter)&#xD;&#xA;    {&#xD;&#xA;&#x9;    if ((*i).get()==this) return true;&#xD;&#xA;&#x9;    ++i;&#xD;&#xA;    }&#xD;&#xA;&#xD;&#xA;    return someClass.get() == this;"/>
-        <details
-            key="const"/>
+    <eOperations name="isSuperTypeOf" eType="#//EBoolean">
+      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+        <details key="body" value="&#x9;std::shared_ptr&lt; Bag&lt;ecore::EClass > > list = someClass->getEAllSuperTypes();&#xD;&#xA;&#xD;&#xA;    Bag&lt; ecore::EClass > ::iterator i=list->begin();&#xD;&#xA;    Bag&lt; ecore::EClass > ::iterator endIter=list->end();&#xD;&#xA;&#xD;&#xA;    while (i!=endIter)&#xD;&#xA;    {&#xD;&#xA;&#x9;    if ((*i).get()==this) return true;&#xD;&#xA;&#x9;    ++i;&#xD;&#xA;    }&#xD;&#xA;&#xD;&#xA;    return someClass.get() == this;"/>
+        <details key="const"/>
       </eAnnotations>
-      <eParameters
-          name="someClass"
-          eType="#//EClass"/>
+      <eParameters name="someClass" eType="#//EClass"/>
     </eOperations>
-    <eOperations
-        name="getFeatureCount"
-        eType="#//EInt">
-      <eAnnotations
-          source="http://tu-ilmenau.de/see/codegen">
-        <details
-            key="body"
-            value="return getEAllStructuralFeatures()->size();"/>
-        <details
-            key="const"/>
+    <eOperations name="getFeatureCount" eType="#//EInt">
+      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+        <details key="body" value="return getEAllStructuralFeatures()->size();"/>
+        <details key="const"/>
       </eAnnotations>
     </eOperations>
-    <eOperations
-        name="getEStructuralFeature"
-        eType="#//EStructuralFeature">
-      <eAnnotations
-          source="http://tu-ilmenau.de/see/codegen">
-        <details
-            key="body"
-            value="std::shared_ptr&lt; Bag&lt;ecore::EStructuralFeature> >  eAllFeat = getEAllStructuralFeatures();&#xD;&#xA;    return featureID >=0 &amp;&amp; featureID &lt; (int) eAllFeat->size() ? eAllFeat->at(featureID): nullptr;"/>
-        <details
-            key="const"/>
+    <eOperations name="getEStructuralFeature" eType="#//EStructuralFeature">
+      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+        <details key="body" value="std::shared_ptr&lt; Bag&lt;ecore::EStructuralFeature> >  eAllFeat = getEAllStructuralFeatures();&#xD;&#xA;    return featureID >=0 &amp;&amp; featureID &lt; (int) eAllFeat->size() ? eAllFeat->at(featureID): nullptr;"/>
+        <details key="const"/>
       </eAnnotations>
-      <eParameters
-          name="featureID"
-          eType="#//EInt"/>
+      <eParameters name="featureID" eType="#//EInt"/>
     </eOperations>
-    <eOperations
-        name="getFeatureID"
-        eType="#//EInt">
-      <eAnnotations
-          source="http://tu-ilmenau.de/see/codegen">
-        <details
-            key="body"
-            value="    std::shared_ptr&lt;Bag&lt;EStructuralFeature > > eAllFeat = getEAllStructuralFeatures();&#xD;&#xA;    int index = feature->getFeatureID();&#xD;&#xA;    &#xD;&#xA;    if(index != -1)&#xD;&#xA;    {&#xD;&#xA;        index = 0;&#xD;&#xA;        Bag&lt;EStructuralFeature > ::iterator iter = eAllFeat->begin();&#xD;&#xA;        while (iter != eAllFeat->end())&#xD;&#xA;        {&#xD;&#xA;           if (feature == *iter)&#xD;&#xA;           {&#xD;&#xA;               return index;&#xD;&#xA;           }&#xD;&#xA;           index++;&#xD;&#xA;           iter++;&#xD;&#xA;        }&#xD;&#xA;    }&#xD;&#xA;    return -1;"/>
-        <details
-            key="const"/>
+    <eOperations name="getFeatureID" eType="#//EInt">
+      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+        <details key="body" value="    std::shared_ptr&lt;Bag&lt;EStructuralFeature > > eAllFeat = getEAllStructuralFeatures();&#xD;&#xA;    int index = feature->getFeatureID();&#xD;&#xA;    &#xD;&#xA;    if(index != -1)&#xD;&#xA;    {&#xD;&#xA;        index = 0;&#xD;&#xA;        Bag&lt;EStructuralFeature > ::iterator iter = eAllFeat->begin();&#xD;&#xA;        while (iter != eAllFeat->end())&#xD;&#xA;        {&#xD;&#xA;           if (feature == *iter)&#xD;&#xA;           {&#xD;&#xA;               return index;&#xD;&#xA;           }&#xD;&#xA;           index++;&#xD;&#xA;           iter++;&#xD;&#xA;        }&#xD;&#xA;    }&#xD;&#xA;    return -1;"/>
+        <details key="const"/>
       </eAnnotations>
-      <eParameters
-          name="feature"
-          eType="#//EStructuralFeature"/>
+      <eParameters name="feature" eType="#//EStructuralFeature"/>
     </eOperations>
-    <eOperations
-        name="getEStructuralFeature"
-        eType="#//EStructuralFeature">
-      <eAnnotations
-          source="http://tu-ilmenau.de/see/codegen">
-        <details
-            key="body"
-            value="    std::shared_ptr&lt;Bag&lt;EStructuralFeature > > eAllFeat = getEAllStructuralFeatures();&#xD;&#xA;    for(std::shared_ptr&lt;EStructuralFeature> f: *eAllFeat)&#xD;&#xA;    {&#xD;&#xA;        if(f->getName()==featureName)&#xD;&#xA;        {&#xD;&#xA;            return f;&#xD;&#xA;        }&#xD;&#xA;    }&#xD;&#xA;&#xD;&#xA;    return nullptr;"/>
-        <details
-            key="const"/>
+    <eOperations name="getEStructuralFeature" eType="#//EStructuralFeature">
+      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+        <details key="body" value="    std::shared_ptr&lt;Bag&lt;EStructuralFeature > > eAllFeat = getEAllStructuralFeatures();&#xD;&#xA;    for(std::shared_ptr&lt;EStructuralFeature> f: *eAllFeat)&#xD;&#xA;    {&#xD;&#xA;        if(f->getName()==featureName)&#xD;&#xA;        {&#xD;&#xA;            return f;&#xD;&#xA;        }&#xD;&#xA;    }&#xD;&#xA;&#xD;&#xA;    return nullptr;"/>
+        <details key="const"/>
       </eAnnotations>
-      <eParameters
-          name="featureName"
-          eType="#//EString"/>
+      <eParameters name="featureName" eType="#//EString"/>
     </eOperations>
-    <eOperations
-        name="getOperationCount"
-        eType="#//EInt">
-      <eAnnotations
-          source="http://tu-ilmenau.de/see/codegen">
-        <details
-            key="body"
-            value="return getEAllOperations()->size();"/>
-        <details
-            key="const"/>
+    <eOperations name="getOperationCount" eType="#//EInt">
+      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+        <details key="body" value="return getEAllOperations()->size();"/>
+        <details key="const"/>
       </eAnnotations>
     </eOperations>
-    <eOperations
-        name="getEOperation"
-        eType="#//EOperation">
-      <eAnnotations
-          source="http://tu-ilmenau.de/see/codegen">
-        <details
-            key="body"
-            value="std::shared_ptr&lt; Bag&lt;ecore::EOperation> > eAllOps = getEAllOperations();&#xA;&#xA;    std::shared_ptr&lt;ecore::EOperation> operation;&#xA;    Bag&lt;ecore::EOperation >::iterator iter = eAllOps->begin();&#xA;    &#xA;    while (iter != eAllOps->end())&#xA;    {&#xA;        operation = *iter;&#xA;        if (operation->getOperationID() == operationID)&#xA;            return operation;&#xA;        iter++;&#xA;    }&#xA;    &#xA;    return nullptr;"/>
-        <details
-            key="const"/>
+    <eOperations name="getEOperation" eType="#//EOperation">
+      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+        <details key="body" value="std::shared_ptr&lt; Bag&lt;ecore::EOperation> > eAllOps = getEAllOperations();&#xA;&#xA;    std::shared_ptr&lt;ecore::EOperation> operation;&#xA;    Bag&lt;ecore::EOperation >::iterator iter = eAllOps->begin();&#xA;    &#xA;    while (iter != eAllOps->end())&#xA;    {&#xA;        operation = *iter;&#xA;        if (operation->getOperationID() == operationID)&#xA;            return operation;&#xA;        iter++;&#xA;    }&#xA;    &#xA;    return nullptr;"/>
+        <details key="const"/>
       </eAnnotations>
-      <eParameters
-          name="operationID"
-          eType="#//EInt"/>
+      <eParameters name="operationID" eType="#//EInt"/>
     </eOperations>
-    <eOperations
-        name="getOperationID"
-        eType="#//EInt">
-      <eAnnotations
-          source="http://tu-ilmenau.de/see/codegen">
-        <details
-            key="body"
-            value="    std::shared_ptr&lt; Bag&lt;ecore::EOperation> > eAllOps = getEAllOperations();&#xD;&#xA;    int index = operation->getOperationID();&#xD;&#xA;    &#xD;&#xA;    if(index != -1)&#xD;&#xA;    {&#xD;&#xA;        index = 0;&#xD;&#xA;        Bag&lt;ecore::EOperation >::iterator iter = eAllOps->begin();&#xD;&#xA;        while (iter != eAllOps->end())&#xD;&#xA;        {&#xD;&#xA;           if (operation == *iter)&#xD;&#xA;           {&#xD;&#xA;               return index;&#xD;&#xA;           }&#xD;&#xA;           index++;&#xD;&#xA;           iter++;&#xD;&#xA;        }&#xD;&#xA;    }&#xD;&#xA;    return -1;"/>
-        <details
-            key="const"/>
+    <eOperations name="getOperationID" eType="#//EInt">
+      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+        <details key="body" value="    std::shared_ptr&lt; Bag&lt;ecore::EOperation> > eAllOps = getEAllOperations();&#xD;&#xA;    int index = operation->getOperationID();&#xD;&#xA;    &#xD;&#xA;    if(index != -1)&#xD;&#xA;    {&#xD;&#xA;        index = 0;&#xD;&#xA;        Bag&lt;ecore::EOperation >::iterator iter = eAllOps->begin();&#xD;&#xA;        while (iter != eAllOps->end())&#xD;&#xA;        {&#xD;&#xA;           if (operation == *iter)&#xD;&#xA;           {&#xD;&#xA;               return index;&#xD;&#xA;           }&#xD;&#xA;           index++;&#xD;&#xA;           iter++;&#xD;&#xA;        }&#xD;&#xA;    }&#xD;&#xA;    return -1;"/>
+        <details key="const"/>
       </eAnnotations>
-      <eParameters
-          name="operation"
-          eType="#//EOperation"/>
+      <eParameters name="operation" eType="#//EOperation"/>
     </eOperations>
-    <eOperations
-        name="getOverride"
-        eType="#//EOperation">
-      <eAnnotations
-          source="http://tu-ilmenau.de/see/codegen">
-        <details
-            key="const"/>
+    <eOperations name="getOverride" eType="#//EOperation">
+      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+        <details key="const"/>
       </eAnnotations>
-      <eParameters
-          name="operation"
-          eType="#//EOperation"/>
+      <eParameters name="operation" eType="#//EOperation"/>
     </eOperations>
-    <eOperations
-        name="getFeatureType"
-        eType="#//EGenericType">
-      <eAnnotations
-          source="http://tu-ilmenau.de/see/codegen">
-        <details
-            key="const"/>
+    <eOperations name="getFeatureType" eType="#//EGenericType">
+      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+        <details key="const"/>
       </eAnnotations>
-      <eParameters
-          name="feature"
-          eType="#//EStructuralFeature"/>
+      <eParameters name="feature" eType="#//EStructuralFeature"/>
     </eOperations>
-    <eStructuralFeatures
-        xsi:type="ecore:EAttribute"
-        name="abstract"
-        eType="#//EBoolean"/>
-    <eStructuralFeatures
-        xsi:type="ecore:EAttribute"
-        name="interface"
-        eType="#//EBoolean"/>
-    <eStructuralFeatures
-        xsi:type="ecore:EReference"
-        name="eSuperTypes"
-        upperBound="-1"
-        eType="#//EClass"
-        unsettable="true">
-      <eAnnotations
-          source="http://www.eclipse.org/emf/2002/GenModel">
-        <details
-            key="suppressedIsSetVisibility"
-            value="true"/>
-        <details
-            key="suppressedUnsetVisibility"
-            value="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="abstract" eType="#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="interface" eType="#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="eSuperTypes" upperBound="-1"
+        eType="#//EClass" unsettable="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="suppressedIsSetVisibility" value="true"/>
+        <details key="suppressedUnsetVisibility" value="true"/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures
-        xsi:type="ecore:EReference"
-        name="eOperations"
-        upperBound="-1"
-        eType="#//EOperation"
-        containment="true"
-        resolveProxies="false"
-        eOpposite="#//EOperation/eContainingClass">
-      <eAnnotations
-          source="subsets"
-          references="#//EObject/eContens"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="eOperations" upperBound="-1"
+        eType="#//EOperation" containment="true" resolveProxies="false" eOpposite="#//EOperation/eContainingClass">
+      <eAnnotations source="subsets" references="#//EObject/eContentUnion"/>
     </eStructuralFeatures>
-    <eStructuralFeatures
-        xsi:type="ecore:EReference"
-        name="eAllAttributes"
-        upperBound="-1"
-        eType="#//EAttribute"
-        changeable="false"
-        volatile="true"
-        transient="true"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="eAllAttributes" upperBound="-1"
+        eType="#//EAttribute" changeable="false" volatile="true" transient="true"
         derived="true">
-      <eAnnotations
-          source="http://tu-ilmenau.de/see/codegen">
-        <details
-            key="getterBody"
-            value="    std::shared_ptr&lt;Bag&lt;ecore::EAttribute> > eAllAttributes(new Bag&lt;ecore::EAttribute>());&#xD;&#xA;&#xD;&#xA;    std::shared_ptr&lt;Bag&lt;ecore::EAttribute> > attributeList = this->getEAttributes();&#xD;&#xA;    eAllAttributes->insert(eAllAttributes->end(), attributeList->begin(), attributeList->end());&#xD;&#xA;    std::shared_ptr&lt;Bag&lt;EClass> > classList = this->getESuperTypes();&#xD;&#xA;    for (std::shared_ptr&lt;EClass> c : *classList)&#xD;&#xA;    {&#xD;&#xA;        std::shared_ptr&lt;Bag&lt;EAttribute> > attributeList = c->getEAllAttributes();&#xD;&#xA;        eAllAttributes->insert(eAllAttributes->end(), attributeList->begin(), attributeList->end());&#xD;&#xA;    }&#xD;&#xA;    return eAllAttributes;"/>
+      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+        <details key="getterBody" value="    std::shared_ptr&lt;Bag&lt;ecore::EAttribute> > eAllAttributes(new Bag&lt;ecore::EAttribute>());&#xD;&#xA;&#xD;&#xA;    std::shared_ptr&lt;Bag&lt;ecore::EAttribute> > attributeList = this->getEAttributes();&#xD;&#xA;    eAllAttributes->insert(eAllAttributes->end(), attributeList->begin(), attributeList->end());&#xD;&#xA;    std::shared_ptr&lt;Bag&lt;EClass> > classList = this->getESuperTypes();&#xD;&#xA;    for (std::shared_ptr&lt;EClass> c : *classList)&#xD;&#xA;    {&#xD;&#xA;        std::shared_ptr&lt;Bag&lt;EAttribute> > attributeList = c->getEAllAttributes();&#xD;&#xA;        eAllAttributes->insert(eAllAttributes->end(), attributeList->begin(), attributeList->end());&#xD;&#xA;    }&#xD;&#xA;    return eAllAttributes;"/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures
-        xsi:type="ecore:EReference"
-        name="eAllReferences"
-        upperBound="-1"
-        eType="#//EReference"
-        changeable="false"
-        volatile="true"
-        transient="true"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="eAllReferences" upperBound="-1"
+        eType="#//EReference" changeable="false" volatile="true" transient="true"
         derived="true">
-      <eAnnotations
-          source="http://tu-ilmenau.de/see/codegen">
-        <details
-            key="getterBody"
-            value="    std::shared_ptr&lt;Bag&lt;ecore::EReference> > eAllReferences(new Bag&lt;ecore::EReference>());&#xD;&#xA;&#xD;&#xA;    std::shared_ptr&lt;Bag&lt;ecore::EReference> > referenceList = this->getEReferences();&#xD;&#xA;    eAllReferences->insert(eAllReferences->end(), referenceList->begin(), referenceList->end());&#xD;&#xA;    std::shared_ptr&lt;Bag&lt;EClass> > classList = this->getESuperTypes();&#xD;&#xA;    for (std::shared_ptr&lt;EClass> c : *classList)&#xD;&#xA;    {&#xD;&#xA;        std::shared_ptr&lt;Bag&lt;EReference> > referenceList = c->getEAllReferences();&#xD;&#xA;        eAllReferences->insert(eAllReferences->end(), referenceList->begin(), referenceList->end());&#xD;&#xA;    }&#xD;&#xA;    return eAllReferences;"/>
+      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+        <details key="getterBody" value="    std::shared_ptr&lt;Bag&lt;ecore::EReference> > eAllReferences(new Bag&lt;ecore::EReference>());&#xD;&#xA;&#xD;&#xA;    std::shared_ptr&lt;Bag&lt;ecore::EReference> > referenceList = this->getEReferences();&#xD;&#xA;    eAllReferences->insert(eAllReferences->end(), referenceList->begin(), referenceList->end());&#xD;&#xA;    std::shared_ptr&lt;Bag&lt;EClass> > classList = this->getESuperTypes();&#xD;&#xA;    for (std::shared_ptr&lt;EClass> c : *classList)&#xD;&#xA;    {&#xD;&#xA;        std::shared_ptr&lt;Bag&lt;EReference> > referenceList = c->getEAllReferences();&#xD;&#xA;        eAllReferences->insert(eAllReferences->end(), referenceList->begin(), referenceList->end());&#xD;&#xA;    }&#xD;&#xA;    return eAllReferences;"/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures
-        xsi:type="ecore:EReference"
-        name="eReferences"
-        upperBound="-1"
-        eType="#//EReference"
-        volatile="true"
-        transient="true"
-        derived="true">
-      <eAnnotations
-          source="subsets"
-          references="#//EClass/eStructuralFeatures"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="eReferences" upperBound="-1"
+        eType="#//EReference" volatile="true" transient="true" derived="true">
+      <eAnnotations source="subsets" references="#//EClass/eStructuralFeatures"/>
     </eStructuralFeatures>
-    <eStructuralFeatures
-        xsi:type="ecore:EReference"
-        name="eAttributes"
-        upperBound="-1"
-        eType="#//EAttribute"
-        volatile="true"
-        transient="true"
-        derived="true">
-      <eAnnotations
-          source="subsets"
-          references="#//EClass/eStructuralFeatures"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="eAttributes" upperBound="-1"
+        eType="#//EAttribute" volatile="true" transient="true" derived="true">
+      <eAnnotations source="subsets" references="#//EClass/eStructuralFeatures"/>
     </eStructuralFeatures>
-    <eStructuralFeatures
-        xsi:type="ecore:EReference"
-        name="eAllContainments"
-        upperBound="-1"
-        eType="#//EReference"
-        changeable="false"
-        volatile="true"
-        transient="true"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="eAllContainments" upperBound="-1"
+        eType="#//EReference" changeable="false" volatile="true" transient="true"
         derived="true"/>
-    <eStructuralFeatures
-        xsi:type="ecore:EReference"
-        name="eAllOperations"
-        upperBound="-1"
-        eType="#//EOperation"
-        changeable="false"
-        volatile="true"
-        transient="true"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="eAllOperations" upperBound="-1"
+        eType="#//EOperation" changeable="false" volatile="true" transient="true"
         derived="true">
-      <eAnnotations
-          source="http://tu-ilmenau.de/see/codegen">
-        <details
-            key="getterBody"
-            value="std::shared_ptr&lt; Bag&lt;ecore::EOperation> > eAllOperations(new Bag&lt;ecore::EOperation> () );&#xD;&#xA;&#xD;&#xA;    std::shared_ptr&lt;Bag&lt;ecore::EOperation> > operationList = this->getEOperations();&#xD;&#xA;    eAllOperations->insert(eAllOperations->end(), operationList->begin(), operationList->end());&#xD;&#xA;    std::shared_ptr&lt;Bag&lt;EClass> > classList = this->getESuperTypes();&#xD;&#xA;    for (std::shared_ptr&lt;EClass > c : *classList)&#xD;&#xA;    {&#xD;&#xA;    &#x9;std::shared_ptr&lt; Bag&lt; EOperation> > operationList = c->getEAllOperations();&#xD;&#xA;        eAllOperations->insert(eAllOperations->end(), operationList->begin(), operationList->end());&#xD;&#xA;    }&#xD;&#xA;    return eAllOperations;"/>
+      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+        <details key="getterBody" value="std::shared_ptr&lt; Bag&lt;ecore::EOperation> > eAllOperations(new Bag&lt;ecore::EOperation> () );&#xD;&#xA;&#xD;&#xA;    std::shared_ptr&lt;Bag&lt;ecore::EOperation> > operationList = this->getEOperations();&#xD;&#xA;    eAllOperations->insert(eAllOperations->end(), operationList->begin(), operationList->end());&#xD;&#xA;    std::shared_ptr&lt;Bag&lt;EClass> > classList = this->getESuperTypes();&#xD;&#xA;    for (std::shared_ptr&lt;EClass > c : *classList)&#xD;&#xA;    {&#xD;&#xA;    &#x9;std::shared_ptr&lt; Bag&lt; EOperation> > operationList = c->getEAllOperations();&#xD;&#xA;        eAllOperations->insert(eAllOperations->end(), operationList->begin(), operationList->end());&#xD;&#xA;    }&#xD;&#xA;    return eAllOperations;"/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures
-        xsi:type="ecore:EReference"
-        name="eAllStructuralFeatures"
-        upperBound="-1"
-        eType="#//EStructuralFeature"
-        changeable="false"
-        volatile="true"
-        transient="true"
-        derived="true">
-      <eAnnotations
-          source="http://tu-ilmenau.de/see/codegen">
-        <details
-            key="getterBody"
-            value="std::shared_ptr&lt; Bag&lt;ecore::EStructuralFeature> > eAllStructuralFeatures( new Bag&lt;ecore::EStructuralFeature> ());&#xD;&#xA;&#xD;&#xA;    std::shared_ptr&lt; Bag&lt; EStructuralFeature> > featureList = this->getEStructuralFeatures();&#xD;&#xA;    eAllStructuralFeatures->insert(eAllStructuralFeatures->end(), featureList->begin(), featureList->end());&#xD;&#xA;    std::shared_ptr&lt;Bag&lt;EClass> > classList = this->getESuperTypes();&#xD;&#xA;    for (std::shared_ptr&lt;EClass > c : *classList)&#xD;&#xA;    {&#xD;&#xA;    &#x9;std::shared_ptr&lt;Bag&lt;EStructuralFeature> > featureList = c->getEAllStructuralFeatures();&#xD;&#xA;        eAllStructuralFeatures->insert(eAllStructuralFeatures->end(), featureList->begin(), featureList->end());&#xD;&#xA;    }&#xD;&#xA;    return eAllStructuralFeatures;"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="eAllStructuralFeatures"
+        upperBound="-1" eType="#//EStructuralFeature" changeable="false" volatile="true"
+        transient="true" derived="true">
+      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+        <details key="getterBody" value="std::shared_ptr&lt; Bag&lt;ecore::EStructuralFeature> > eAllStructuralFeatures( new Bag&lt;ecore::EStructuralFeature> ());&#xD;&#xA;&#xD;&#xA;    std::shared_ptr&lt; Bag&lt; EStructuralFeature> > featureList = this->getEStructuralFeatures();&#xD;&#xA;    eAllStructuralFeatures->insert(eAllStructuralFeatures->end(), featureList->begin(), featureList->end());&#xD;&#xA;    std::shared_ptr&lt;Bag&lt;EClass> > classList = this->getESuperTypes();&#xD;&#xA;    for (std::shared_ptr&lt;EClass > c : *classList)&#xD;&#xA;    {&#xD;&#xA;    &#x9;std::shared_ptr&lt;Bag&lt;EStructuralFeature> > featureList = c->getEAllStructuralFeatures();&#xD;&#xA;        eAllStructuralFeatures->insert(eAllStructuralFeatures->end(), featureList->begin(), featureList->end());&#xD;&#xA;    }&#xD;&#xA;    return eAllStructuralFeatures;"/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures
-        xsi:type="ecore:EReference"
-        name="eAllSuperTypes"
-        upperBound="-1"
-        eType="#//EClass"
-        changeable="false"
-        volatile="true"
-        transient="true"
-        derived="true">
-      <eAnnotations
-          source="http://tu-ilmenau.de/see/codegen">
-        <details
-            key="getterBody"
-            value="std::shared_ptr&lt; Bag&lt;ecore::EClass> > eAllSuperTypes(new Bag&lt;ecore::EClass>  ());&#xD;&#xA;&#xD;&#xA;&#x9;std::shared_ptr&lt;Bag&lt;EClass> > classList = this->getESuperTypes();&#xD;&#xA;    eAllSuperTypes->insert(eAllSuperTypes->end(), classList->begin(), classList->end());&#xD;&#xA;    for (std::shared_ptr&lt;EClass > c : *classList)&#xD;&#xA;    {&#xD;&#xA;    &#x9;std::shared_ptr&lt;Bag&lt;EClass> > classList = c->getEAllSuperTypes();&#xD;&#xA;        eAllSuperTypes->insert(eAllSuperTypes->end(), classList->begin(), classList->end());&#xD;&#xA;    }&#xD;&#xA;    return eAllSuperTypes;"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="eAllSuperTypes" upperBound="-1"
+        eType="#//EClass" changeable="false" volatile="true" transient="true" derived="true">
+      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+        <details key="getterBody" value="std::shared_ptr&lt; Bag&lt;ecore::EClass> > eAllSuperTypes(new Bag&lt;ecore::EClass>  ());&#xD;&#xA;&#xD;&#xA;&#x9;std::shared_ptr&lt;Bag&lt;EClass> > classList = this->getESuperTypes();&#xD;&#xA;    eAllSuperTypes->insert(eAllSuperTypes->end(), classList->begin(), classList->end());&#xD;&#xA;    for (std::shared_ptr&lt;EClass > c : *classList)&#xD;&#xA;    {&#xD;&#xA;    &#x9;std::shared_ptr&lt;Bag&lt;EClass> > classList = c->getEAllSuperTypes();&#xD;&#xA;        eAllSuperTypes->insert(eAllSuperTypes->end(), classList->begin(), classList->end());&#xD;&#xA;    }&#xD;&#xA;    return eAllSuperTypes;"/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures
-        xsi:type="ecore:EReference"
-        name="eIDAttribute"
-        eType="#//EAttribute"
-        volatile="true"
-        transient="true"
-        derived="true"
-        resolveProxies="false"/>
-    <eStructuralFeatures
-        xsi:type="ecore:EReference"
-        name="eStructuralFeatures"
-        upperBound="-1"
-        eType="#//EStructuralFeature"
-        containment="true"
-        resolveProxies="false"
-        eOpposite="#//EStructuralFeature/eContainingClass">
-      <eAnnotations
-          source="union"/>
-      <eAnnotations
-          source="subsets"
-          references="#//EObject/eContens"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="eIDAttribute" eType="#//EAttribute"
+        volatile="true" transient="true" derived="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="eStructuralFeatures" upperBound="-1"
+        eType="#//EStructuralFeature" containment="true" resolveProxies="false" eOpposite="#//EStructuralFeature/eContainingClass">
+      <eAnnotations source="union"/>
+      <eAnnotations source="subsets" references="#//EObject/eContentUnion"/>
     </eStructuralFeatures>
-    <eStructuralFeatures
-        xsi:type="ecore:EReference"
-        name="eGenericSuperTypes"
-        upperBound="-1"
-        eType="#//EGenericType"
-        unsettable="true"
-        containment="true"
-        resolveProxies="false">
-      <eAnnotations
-          source="http://www.eclipse.org/emf/2002/GenModel">
-        <details
-            key="suppressedIsSetVisibility"
-            value="true"/>
-        <details
-            key="suppressedUnsetVisibility"
-            value="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="eGenericSuperTypes" upperBound="-1"
+        eType="#//EGenericType" unsettable="true" containment="true" resolveProxies="false">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="suppressedIsSetVisibility" value="true"/>
+        <details key="suppressedUnsetVisibility" value="true"/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures
-        xsi:type="ecore:EReference"
-        name="eAllGenericSuperTypes"
-        upperBound="-1"
-        eType="#//EGenericType"
-        changeable="false"
-        volatile="true"
-        transient="true"
-        derived="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="eAllGenericSuperTypes"
+        upperBound="-1" eType="#//EGenericType" changeable="false" volatile="true"
+        transient="true" derived="true"/>
   </eClassifiers>
-  <eClassifiers
-      xsi:type="ecore:EClass"
-      name="EClassifier"
-      abstract="true"
-      eSuperTypes="#//ENamedElement">
-    <eAnnotations
-        source="http://www.eclipse.org/emf/2002/Ecore">
-      <details
-          key="constraints"
-          value="WellFormedInstanceTypeName UniqueTypeParameterNames"/>
+  <eClassifiers xsi:type="ecore:EClass" name="EClassifier" abstract="true" eSuperTypes="#//ENamedElement">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="WellFormedInstanceTypeName UniqueTypeParameterNames"/>
     </eAnnotations>
-    <eAnnotations
-        source="http://www.obeo.fr/dsl/dnc/archetype">
-      <details
-          key="archetype"
-          value="Description"/>
+    <eAnnotations source="http://www.obeo.fr/dsl/dnc/archetype">
+      <details key="archetype" value="Description"/>
     </eAnnotations>
-    <eOperations
-        name="isInstance"
-        eType="#//EBoolean">
-      <eAnnotations
-          source="http://tu-ilmenau.de/see/codegen">
-        <details
-            key="const"/>
+    <eOperations name="isInstance" eType="#//EBoolean">
+      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+        <details key="const"/>
       </eAnnotations>
-      <eParameters
-          name="object"
-          eType="#//EJavaObject"/>
+      <eParameters name="object" eType="#//EJavaObject"/>
     </eOperations>
-    <eOperations
-        name="getClassifierID"
-        eType="#//EInt">
-      <eAnnotations
-          source="http://tu-ilmenau.de/see/codegen">
-        <details
-            key="body"
-            value="return getMetaElementID();"/>
+    <eOperations name="getClassifierID" eType="#//EInt">
+      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+        <details key="body" value="return getMetaElementID();"/>
       </eAnnotations>
     </eOperations>
-    <eStructuralFeatures
-        xsi:type="ecore:EAttribute"
-        name="instanceClassName"
-        eType="#//EString"
-        volatile="true"
-        unsettable="true">
-      <eAnnotations
-          source="http://www.eclipse.org/emf/2002/GenModel">
-        <details
-            key="suppressedIsSetVisibility"
-            value="true"/>
-        <details
-            key="suppressedUnsetVisibility"
-            value="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="instanceClassName" eType="#//EString"
+        volatile="true" unsettable="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="suppressedIsSetVisibility" value="true"/>
+        <details key="suppressedUnsetVisibility" value="true"/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures
-        xsi:type="ecore:EAttribute"
-        name="instanceClass"
-        changeable="false"
-        volatile="true"
-        transient="true"
-        derived="true">
-      <eGenericType
-          eClassifier="#//EJavaClass">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="instanceClass" changeable="false"
+        volatile="true" transient="true" derived="true">
+      <eGenericType eClassifier="#//EJavaClass">
         <eTypeArguments/>
       </eGenericType>
     </eStructuralFeatures>
-    <eStructuralFeatures
-        xsi:type="ecore:EAttribute"
-        name="defaultValue"
-        eType="#//EJavaObject"
-        volatile="true"
-        transient="true"
-        derived="true"/>
-    <eStructuralFeatures
-        xsi:type="ecore:EAttribute"
-        name="instanceTypeName"
-        eType="#//EString"
-        volatile="true"
-        unsettable="true">
-      <eAnnotations
-          source="http://www.eclipse.org/emf/2002/GenModel">
-        <details
-            key="suppressedIsSetVisibility"
-            value="true"/>
-        <details
-            key="suppressedUnsetVisibility"
-            value="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="defaultValue" eType="#//EJavaObject"
+        volatile="true" transient="true" derived="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="instanceTypeName" eType="#//EString"
+        volatile="true" unsettable="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="suppressedIsSetVisibility" value="true"/>
+        <details key="suppressedUnsetVisibility" value="true"/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures
-        xsi:type="ecore:EReference"
-        name="ePackage"
-        eType="#//EPackage"
-        changeable="false"
-        transient="true"
-        eOpposite="#//EPackage/eClassifiers">
-      <eAnnotations
-          source="http://tu-ilmenau.de/see/codegen">
-        <details
-            key="isContainerAttribute"
-            value="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ePackage" eType="#//EPackage"
+        changeable="false" transient="true" eOpposite="#//EPackage/eClassifiers">
+      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+        <details key="isContainerAttribute" value="true"/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures
-        xsi:type="ecore:EReference"
-        name="eTypeParameters"
-        upperBound="-1"
-        eType="#//ETypeParameter"
-        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="eTypeParameters" upperBound="-1"
+        eType="#//ETypeParameter" containment="true"/>
   </eClassifiers>
-  <eClassifiers
-      xsi:type="ecore:EClass"
-      name="EDataType"
-      eSuperTypes="#//EClassifier">
-    <eStructuralFeatures
-        xsi:type="ecore:EAttribute"
-        name="serializable"
-        eType="#//EBoolean"
+  <eClassifiers xsi:type="ecore:EClass" name="EDataType" eSuperTypes="#//EClassifier">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="serializable" eType="#//EBoolean"
         defaultValueLiteral="true"/>
   </eClassifiers>
-  <eClassifiers
-      xsi:type="ecore:EClass"
-      name="EEnum"
-      eSuperTypes="#//EDataType">
-    <eAnnotations
-        source="http://www.eclipse.org/emf/2002/Ecore">
-      <details
-          key="constraints"
-          value="UniqueEnumeratorNames UniqueEnumeratorLiterals"/>
+  <eClassifiers xsi:type="ecore:EClass" name="EEnum" eSuperTypes="#//EDataType">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="UniqueEnumeratorNames UniqueEnumeratorLiterals"/>
     </eAnnotations>
-    <eOperations
-        name="getEEnumLiteral"
-        eType="#//EEnumLiteral">
-      <eAnnotations
-          source="http://tu-ilmenau.de/see/codegen">
-        <details
-            key="body"
-            value="    for (std::shared_ptr&lt;EEnumLiteral> e : *getELiterals())&#xD;&#xA;    {&#xD;&#xA;        if(e->getName()==name)&#xD;&#xA;        {&#xD;&#xA;            return e;&#xD;&#xA;        }&#xD;&#xA;    }&#xD;&#xA;    return std::shared_ptr&lt;ecore::EEnumLiteral>();"/>
-        <details
-            key="const"/>
+    <eOperations name="getEEnumLiteral" eType="#//EEnumLiteral">
+      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+        <details key="body" value="    for (std::shared_ptr&lt;EEnumLiteral> e : *getELiterals())&#xD;&#xA;    {&#xD;&#xA;        if(e->getName()==name)&#xD;&#xA;        {&#xD;&#xA;            return e;&#xD;&#xA;        }&#xD;&#xA;    }&#xD;&#xA;    return std::shared_ptr&lt;ecore::EEnumLiteral>();"/>
+        <details key="const"/>
       </eAnnotations>
-      <eParameters
-          name="name"
-          eType="#//EString"/>
+      <eParameters name="name" eType="#//EString"/>
     </eOperations>
-    <eOperations
-        name="getEEnumLiteral"
-        eType="#//EEnumLiteral">
-      <eAnnotations
-          source="http://tu-ilmenau.de/see/codegen">
-        <details
-            key="body"
-            value="    for (std::shared_ptr&lt;EEnumLiteral> e : *getELiterals())&#xD;&#xA;    {&#xD;&#xA;        if(e->getValue()==value)&#xD;&#xA;        {&#xD;&#xA;            return e;&#xD;&#xA;        }&#xD;&#xA;    }&#xD;&#xA;    return std::shared_ptr&lt;ecore::EEnumLiteral>();&#xD;&#xA;"/>
-        <details
-            key="const"/>
+    <eOperations name="getEEnumLiteral" eType="#//EEnumLiteral">
+      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+        <details key="body" value="    for (std::shared_ptr&lt;EEnumLiteral> e : *getELiterals())&#xD;&#xA;    {&#xD;&#xA;        if(e->getValue()==value)&#xD;&#xA;        {&#xD;&#xA;            return e;&#xD;&#xA;        }&#xD;&#xA;    }&#xD;&#xA;    return std::shared_ptr&lt;ecore::EEnumLiteral>();&#xD;&#xA;"/>
+        <details key="const"/>
       </eAnnotations>
-      <eParameters
-          name="value"
-          eType="#//EInt"/>
+      <eParameters name="value" eType="#//EInt"/>
     </eOperations>
-    <eOperations
-        name="getEEnumLiteralByLiteral"
-        eType="#//EEnumLiteral">
-      <eAnnotations
-          source="http://tu-ilmenau.de/see/codegen">
-        <details
-            key="body"
-            value="    for (std::shared_ptr&lt;EEnumLiteral> e : *getELiterals())&#xD;&#xA;    {&#xD;&#xA;        if(e->getLiteral()==literal)&#xD;&#xA;        {&#xD;&#xA;            return e;&#xD;&#xA;        }&#xD;&#xA;    }&#xD;&#xA;    return std::shared_ptr&lt;ecore::EEnumLiteral>  ();"/>
-        <details
-            key="const"/>
+    <eOperations name="getEEnumLiteralByLiteral" eType="#//EEnumLiteral">
+      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+        <details key="body" value="    for (std::shared_ptr&lt;EEnumLiteral> e : *getELiterals())&#xD;&#xA;    {&#xD;&#xA;        if(e->getLiteral()==literal)&#xD;&#xA;        {&#xD;&#xA;            return e;&#xD;&#xA;        }&#xD;&#xA;    }&#xD;&#xA;    return std::shared_ptr&lt;ecore::EEnumLiteral>  ();"/>
+        <details key="const"/>
       </eAnnotations>
-      <eParameters
-          name="literal"
-          eType="#//EString"/>
+      <eParameters name="literal" eType="#//EString"/>
     </eOperations>
-    <eStructuralFeatures
-        xsi:type="ecore:EReference"
-        name="eLiterals"
-        upperBound="-1"
-        eType="#//EEnumLiteral"
-        containment="true"
-        resolveProxies="false"
-        eOpposite="#//EEnumLiteral/eEnum">
-      <eAnnotations
-          source="subsets"
-          references="#//EObject/eContens"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="eLiterals" upperBound="-1"
+        eType="#//EEnumLiteral" containment="true" resolveProxies="false" eOpposite="#//EEnumLiteral/eEnum">
+      <eAnnotations source="subsets" references="#//EObject/eContentUnion"/>
     </eStructuralFeatures>
   </eClassifiers>
-  <eClassifiers
-      xsi:type="ecore:EClass"
-      name="EEnumLiteral"
-      eSuperTypes="#//ENamedElement">
-    <eStructuralFeatures
-        xsi:type="ecore:EAttribute"
-        name="value"
-        eType="#//EInt"/>
-    <eStructuralFeatures
-        xsi:type="ecore:EAttribute"
-        name="instance"
-        eType="#//EEnumerator"
+  <eClassifiers xsi:type="ecore:EClass" name="EEnumLiteral" eSuperTypes="#//ENamedElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="instance" eType="#//EEnumerator"
         transient="true"/>
-    <eStructuralFeatures
-        xsi:type="ecore:EAttribute"
-        name="literal"
-        eType="#//EString"/>
-    <eStructuralFeatures
-        xsi:type="ecore:EReference"
-        name="eEnum"
-        eType="#//EEnum"
-        changeable="false"
-        transient="true"
-        resolveProxies="false"
-        eOpposite="#//EEnum/eLiterals">
-      <eAnnotations
-          source="http://tu-ilmenau.de/see/codegen">
-        <details
-            key="isContainerAttribute"
-            value="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="literal" eType="#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="eEnum" eType="#//EEnum"
+        changeable="false" transient="true" resolveProxies="false" eOpposite="#//EEnum/eLiterals">
+      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+        <details key="isContainerAttribute" value="true"/>
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
-  <eClassifiers
-      xsi:type="ecore:EClass"
-      name="EFactory"
-      eSuperTypes="#//EModelElement">
-    <eOperations
-        name="create"
-        eType="#//EObject">
-      <eAnnotations
-          source="http://tu-ilmenau.de/see/codegen">
-        <details
-            key="const"/>
+  <eClassifiers xsi:type="ecore:EClass" name="EFactory" eSuperTypes="#//EModelElement">
+    <eOperations name="create" eType="#//EObject">
+      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+        <details key="const"/>
       </eAnnotations>
-      <eParameters
-          name="eClass"
-          eType="#//EClass"/>
+      <eParameters name="eClass" eType="#//EClass"/>
     </eOperations>
-    <eOperations
-        name="createFromString"
-        eType="#//EJavaObject">
-      <eAnnotations
-          source="http://tu-ilmenau.de/see/codegen">
-        <details
-            key="const"/>
+    <eOperations name="createFromString" eType="#//EJavaObject">
+      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+        <details key="const"/>
       </eAnnotations>
-      <eParameters
-          name="eDataType"
-          eType="#//EDataType"/>
-      <eParameters
-          name="literalValue"
-          eType="#//EString"/>
+      <eParameters name="eDataType" eType="#//EDataType"/>
+      <eParameters name="literalValue" eType="#//EString"/>
     </eOperations>
-    <eOperations
-        name="convertToString"
-        eType="#//EString">
-      <eAnnotations
-          source="http://tu-ilmenau.de/see/codegen">
-        <details
-            key="const"/>
+    <eOperations name="convertToString" eType="#//EString">
+      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+        <details key="const"/>
       </eAnnotations>
-      <eParameters
-          name="eDataType"
-          eType="#//EDataType"/>
-      <eParameters
-          name="instanceValue"
-          eType="#//EJavaObject"/>
+      <eParameters name="eDataType" eType="#//EDataType"/>
+      <eParameters name="instanceValue" eType="#//EJavaObject"/>
     </eOperations>
-    <eStructuralFeatures
-        xsi:type="ecore:EReference"
-        name="ePackage"
-        lowerBound="1"
-        eType="#//EPackage"
-        transient="true"
-        resolveProxies="false"
-        eOpposite="#//EPackage/eFactoryInstance"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ePackage" lowerBound="1"
+        eType="#//EPackage" transient="true" resolveProxies="false" eOpposite="#//EPackage/eFactoryInstance"/>
   </eClassifiers>
-  <eClassifiers
-      xsi:type="ecore:EClass"
-      name="EModelElement"
-      abstract="true"
-      eSuperTypes="#//EObject">
-    <eOperations
-        name="getEAnnotation"
-        eType="#//EAnnotation">
-      <eAnnotations
-          source="http://tu-ilmenau.de/see/codegen">
-        <details
-            key="body"
-            value="    for(std::shared_ptr&lt;EAnnotation> a : *m_eAnnotations)&#xD;&#xA;    {&#xD;&#xA;&#x9;    if(a->getSource()==source)&#xD;&#xA;&#x9;    {&#xD;&#xA;&#x9;&#x9;    return a;&#xD;&#xA;&#x9;    }&#xD;&#xA;    }&#xD;&#xA;    return std::shared_ptr&lt;ecore::EAnnotation>();"/>
+  <eClassifiers xsi:type="ecore:EClass" name="EModelElement" abstract="true" eSuperTypes="#//EObject">
+    <eOperations name="getEAnnotation" eType="#//EAnnotation">
+      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+        <details key="body" value="    for(std::shared_ptr&lt;EAnnotation> a : *m_eAnnotations)&#xD;&#xA;    {&#xD;&#xA;&#x9;    if(a->getSource()==source)&#xD;&#xA;&#x9;    {&#xD;&#xA;&#x9;&#x9;    return a;&#xD;&#xA;&#x9;    }&#xD;&#xA;    }&#xD;&#xA;    return std::shared_ptr&lt;ecore::EAnnotation>();"/>
       </eAnnotations>
-      <eParameters
-          name="source"
-          eType="#//EString"/>
+      <eParameters name="source" eType="#//EString"/>
     </eOperations>
-    <eStructuralFeatures
-        xsi:type="ecore:EReference"
-        name="eAnnotations"
-        upperBound="-1"
-        eType="#//EAnnotation"
-        containment="true"
-        resolveProxies="false"
-        eOpposite="#//EAnnotation/eModelElement">
-      <eAnnotations
-          source="subsets"
-          references="#//EObject/eContens"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="eAnnotations" upperBound="-1"
+        eType="#//EAnnotation" containment="true" resolveProxies="false" eOpposite="#//EAnnotation/eModelElement">
+      <eAnnotations source="subsets" references="#//EObject/eContentUnion"/>
     </eStructuralFeatures>
   </eClassifiers>
-  <eClassifiers
-      xsi:type="ecore:EClass"
-      name="ENamedElement"
-      abstract="true"
-      eSuperTypes="#//EModelElement">
-    <eAnnotations
-        source="http://www.eclipse.org/emf/2002/Ecore">
-      <details
-          key="constraints"
-          value="WellFormedName"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ENamedElement" abstract="true" eSuperTypes="#//EModelElement">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="WellFormedName"/>
     </eAnnotations>
-    <eAnnotations
-        source="http://tu-ilmenau.de/see/codegen">
-      <details
-          key="const"/>
+    <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+      <details key="const"/>
     </eAnnotations>
-    <eStructuralFeatures
-        xsi:type="ecore:EAttribute"
-        name="name"
-        eType="#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="#//EString"/>
   </eClassifiers>
-  <eClassifiers
-      xsi:type="ecore:EClass"
-      name="EObject">
-    <eOperations
-        name="eClass"
-        eType="#//EClass">
-      <eAnnotations
-          source="http://tu-ilmenau.de/see/codegen">
-        <details
-            key="body"
-            value="return this->eStaticClass();"/>
-        <details
-            key="const"/>
+  <eClassifiers xsi:type="ecore:EClass" name="EObject">
+    <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+      <details key="implIncludes" value="#include &quot;ecore/EObjectContainer.hpp&quot;"/>
+    </eAnnotations>
+    <eOperations name="eClass" eType="#//EClass">
+      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+        <details key="body" value="return this->eStaticClass();"/>
+        <details key="const"/>
       </eAnnotations>
     </eOperations>
-    <eOperations
-        name="eIsProxy"
-        eType="#//EBoolean">
-      <eAnnotations
-          source="http://tu-ilmenau.de/see/codegen">
-        <details
-            key="const"/>
+    <eOperations name="eIsProxy" eType="#//EBoolean">
+      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+        <details key="const"/>
       </eAnnotations>
     </eOperations>
-    <eOperations
-        name="eResource"
-        eType="#//EResource">
-      <eAnnotations
-          source="http://tu-ilmenau.de/see/codegen">
-        <details
-            key="const"/>
+    <eOperations name="eResource" eType="#//EResource">
+      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+        <details key="const"/>
       </eAnnotations>
     </eOperations>
-    <eOperations
-        name="eContainer"
-        eType="#//EObject">
-      <eAnnotations
-          source="http://tu-ilmenau.de/see/codegen">
-        <details
-            key="doNotGenerate"
-            value="true"/>
+    <eOperations name="eContainer" eType="#//EObject">
+      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+        <details key="body" value="&#x9;if(auto wp = m_eContainer.lock())&#xA;&#x9;{&#xA;&#x9;&#x9;return wp;&#xA;&#x9;}&#xA;&#x9;return nullptr;"/>
       </eAnnotations>
     </eOperations>
-    <eOperations
-        name="eContainingFeature"
-        eType="#//EStructuralFeature">
-      <eAnnotations
-          source="http://tu-ilmenau.de/see/codegen">
-        <details
-            key="const"/>
+    <eOperations name="eContainingFeature" eType="#//EStructuralFeature">
+      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+        <details key="const"/>
       </eAnnotations>
     </eOperations>
-    <eOperations
-        name="eContainmentFeature"
-        eType="#//EReference">
-      <eAnnotations
-          source="http://tu-ilmenau.de/see/codegen">
-        <details
-            key="const"/>
+    <eOperations name="eContainmentFeature" eType="#//EReference">
+      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+        <details key="const"/>
       </eAnnotations>
     </eOperations>
-    <eOperations
-        name="eContents">
-      <eAnnotations
-          source="http://tu-ilmenau.de/see/codegen">
-        <details
-            key="const"/>
+    <eOperations name="eContents" upperBound="-1" eType="#//EObject">
+      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+        <details key="const"/>
+        <details key="body" value="std::shared_ptr&lt;Bag&lt;ecore::EObject>> returnList=std::make_shared&lt;Bag&lt;ecore::EObject>>();&#xA;&#xA;&#x9;std::shared_ptr&lt;ecore::EClass> metaClass=this->eClass();&#xA;&#x9;std::shared_ptr&lt;Bag&lt;ecore::EStructuralFeature>> features=metaClass->getEAllStructuralFeatures();&#xA;&#x9;int size = features->size();&#xA;&#x9;for (auto i = 0; i &lt; size; ++i)&#xA;&#x9;{&#xA;&#x9;&#x9;Any anyValue=this->eGet(features->at(i));&#xA;&#x9;&#x9;try&#xA;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;std::shared_ptr&lt;ecore::EObject> value=anyValue->get&lt;std::shared_ptr&lt;ecore::EObject>>();&#xA;&#x9;&#x9;&#x9;if(value)&#xA;&#x9;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;&#x9;returnList->push_back(value);&#xA;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;}&#xA;&#x9;&#x9;catch(...){}&#xA;&#x9;&#x9;try&#xA;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;std::shared_ptr&lt;Bag&lt;EObject>> valueList = anyValue->get&lt;std::shared_ptr&lt;Bag&lt;EObject>>>();&#xA;&#x9;&#x9;&#x9;if(valueList)&#xA;&#x9;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;&#x9;std::shared_ptr&lt;ecore::EObjectContainer> containerObject= ecore::ecoreFactory::eInstance()->createEObjectContainer();&#xA;&#x9;&#x9;&#x9;&#x9;std::shared_ptr&lt;Bag&lt;ecore::EObject>> container=containerObject->getContainer();&#xA;&#x9;&#x9;&#x9;&#x9;container.swap(valueList);&#xA;&#x9;&#x9;&#x9;&#x9;returnList->push_back(containerObject);&#xA;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;}&#xA;&#x9;&#x9;catch(...){}&#xA;&#xA;&#x9;}&#xA;&#x9;return returnList;&#xA;"/>
       </eAnnotations>
-      <eGenericType
-          eClassifier="#//EEList">
-        <eTypeArguments
-            eClassifier="#//EObject"/>
+    </eOperations>
+    <eOperations name="eCrossReferences">
+      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+        <details key="const"/>
+      </eAnnotations>
+      <eGenericType eClassifier="#//EEList">
+        <eTypeArguments eClassifier="#//EObject"/>
       </eGenericType>
     </eOperations>
-    <eOperations
-        name="eAllContents">
-      <eAnnotations
-          source="http://tu-ilmenau.de/see/codegen">
-        <details
-            key="const"/>
+    <eOperations name="eGet" eType="#//EJavaObject">
+      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+        <details key="body" value="return this->eGet(feature,false);"/>
+        <details key="const"/>
       </eAnnotations>
-      <eGenericType
-          eClassifier="#//ETreeIterator">
-        <eTypeArguments
-            eClassifier="#//EObject"/>
-      </eGenericType>
+      <eParameters name="feature" eType="#//EStructuralFeature"/>
     </eOperations>
-    <eOperations
-        name="eCrossReferences">
-      <eAnnotations
-          source="http://tu-ilmenau.de/see/codegen">
-        <details
-            key="const"/>
+    <eOperations name="eGet" eType="#//EJavaObject">
+      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+        <details key="body" value="return this->eGet(feature->getFeatureID(),resolve,false);"/>
+        <details key="const"/>
       </eAnnotations>
-      <eGenericType
-          eClassifier="#//EEList">
-        <eTypeArguments
-            eClassifier="#//EObject"/>
-      </eGenericType>
+      <eParameters name="feature" eType="#//EStructuralFeature"/>
+      <eParameters name="resolve" eType="#//EBoolean"/>
     </eOperations>
-    <eOperations
-        name="eGet"
-        eType="#//EJavaObject">
-      <eAnnotations
-          source="http://tu-ilmenau.de/see/codegen">
-        <details
-            key="body"
-            value="return this->eGet(feature,false);"/>
-        <details
-            key="const"/>
+    <eOperations name="eSet">
+      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+        <details key="body" value="this->eSet(feature->getFeatureID(), newValue);"/>
       </eAnnotations>
-      <eParameters
-          name="feature"
-          eType="#//EStructuralFeature"/>
+      <eParameters name="feature" eType="#//EStructuralFeature"/>
+      <eParameters name="newValue" eType="#//EJavaObject"/>
     </eOperations>
-    <eOperations
-        name="eGet"
-        eType="#//EJavaObject">
-      <eAnnotations
-          source="http://tu-ilmenau.de/see/codegen">
-        <details
-            key="body"
-            value="return this->eGet(feature->getFeatureID(),resolve,false);"/>
-        <details
-            key="const"/>
+    <eOperations name="eIsSet" eType="#//EBoolean">
+      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+        <details key="const"/>
+        <details key="body" value="return this->internalEIsSet(feature->getFeatureID());"/>
       </eAnnotations>
-      <eParameters
-          name="feature"
-          eType="#//EStructuralFeature"/>
-      <eParameters
-          name="resolve"
-          eType="#//EBoolean"/>
+      <eParameters name="feature" eType="#//EStructuralFeature"/>
     </eOperations>
-    <eOperations
-        name="eSet">
-      <eAnnotations
-          source="http://tu-ilmenau.de/see/codegen">
-        <details
-            key="body"
-            value="this->eSet(feature->getFeatureID(), newValue);"/>
+    <eOperations name="eUnset">
+      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+        <details key="const"/>
       </eAnnotations>
-      <eParameters
-          name="feature"
-          eType="#//EStructuralFeature"/>
-      <eParameters
-          name="newValue"
-          eType="#//EJavaObject"/>
+      <eParameters name="feature" eType="#//EStructuralFeature"/>
     </eOperations>
-    <eOperations
-        name="eIsSet"
-        eType="#//EBoolean">
-      <eAnnotations
-          source="http://tu-ilmenau.de/see/codegen">
-        <details
-            key="const"/>
-        <details
-            key="body"
-            value="return this->internalEIsSet(feature->getFeatureID());"/>
+    <eOperations name="eInvoke" eType="#//EJavaObject" eExceptions="#//EInvocationTargetException">
+      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+        <details key="body" value="  std::cout &lt;&lt; __PRETTY_FUNCTION__  &lt;&lt; std::endl;&#xA;&#xA;  Any result;&#xA;  result = this->eInvoke(operation->getOperationID(), arguments);&#xA;&#xA;  return result;"/>
       </eAnnotations>
-      <eParameters
-          name="feature"
-          eType="#//EStructuralFeature"/>
-    </eOperations>
-    <eOperations
-        name="eUnset">
-      <eAnnotations
-          source="http://tu-ilmenau.de/see/codegen">
-        <details
-            key="const"/>
-      </eAnnotations>
-      <eParameters
-          name="feature"
-          eType="#//EStructuralFeature"/>
-    </eOperations>
-    <eOperations
-        name="eInvoke"
-        eType="#//EJavaObject"
-        eExceptions="#//EInvocationTargetException">
-      <eAnnotations
-          source="http://tu-ilmenau.de/see/codegen">
-        <details
-            key="body"
-            value="  std::cout &lt;&lt; __PRETTY_FUNCTION__  &lt;&lt; std::endl;&#xA;&#xA;  Any result;&#xA;  result = this->eInvoke(operation->getOperationID(), arguments);&#xA;&#xA;  return result;"/>
-      </eAnnotations>
-      <eParameters
-          name="operation"
-          eType="#//EOperation"/>
-      <eParameters
-          name="arguments">
-        <eGenericType
-            eClassifier="#//EEList">
+      <eParameters name="operation" eType="#//EOperation"/>
+      <eParameters name="arguments">
+        <eGenericType eClassifier="#//EEList">
           <eTypeArguments/>
         </eGenericType>
       </eParameters>
     </eOperations>
-    <eStructuralFeatures
-        xsi:type="ecore:EReference"
-        name="eContens"
-        upperBound="-1"
-        eType="#//EObject"
-        containment="true"
-        eOpposite="#//EObject/eContainer.1">
-      <eAnnotations
-          source="union"/>
-    </eStructuralFeatures>
-    <eStructuralFeatures
-        xsi:type="ecore:EReference"
-        name="eContainer"
-        eType="#//EObject"
-        eOpposite="#//EObject/eContens"/>
-    <eStructuralFeatures
-        xsi:type="ecore:EAttribute"
-        name="metaElementID"
-        eType="#//EInt"
-        defaultValueLiteral="0"
-        unsettable="true">
-      <eAnnotations
-          source="http://sse.tu-ilmenau.de/modelChange">
-        <details
-            value="realization of ClassifierID or MetaType-ID for reflection support for ecore, UML and Evore/UML based models"/>
+    <eOperations name="eAllContents" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject">
+      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+        <details key="const"/>
+        <details key="body" value="std::shared_ptr&lt;Bag&lt;AnyObject>> returnList=std::make_shared&lt;Bag&lt;AnyObject>>();&#xA;&#x9;std::shared_ptr&lt;ecore::EClass> metaClass=this->eClass();&#xA;&#x9;std::shared_ptr&lt;Bag&lt;ecore::EStructuralFeature>> features=metaClass->getEAllStructuralFeatures();&#xA;&#x9;int size = features->size();&#xA;&#x9;for (auto i = 0; i &lt; size; ++i)&#xA;&#x9;{&#xA;&#x9;&#x9;Any anyValue=this->eGet(features->at(i));&#xA;&#x9;&#x9;if(anyValue)&#xA;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;returnList->push_back(anyValue);&#xA;&#x9;&#x9;}&#xA;&#x9;}&#xA;&#x9;return eAny(returnList);"/>
       </eAnnotations>
-    </eStructuralFeatures>
-  </eClassifiers>
-  <eClassifiers
-      xsi:type="ecore:EClass"
-      name="EOperation"
-      eSuperTypes="#//ETypedElement">
-    <eAnnotations
-        source="http://www.eclipse.org/emf/2002/Ecore">
-      <details
-          key="constraints"
-          value="UniqueParameterNames UniqueTypeParameterNames NoRepeatingVoid"/>
-    </eAnnotations>
-    <eOperations
-        name="getOperationID"
-        eType="#//EInt">
-      <eAnnotations
-          source="http://tu-ilmenau.de/see/codegen">
-        <details
-            key="doNotGenerate"
-            value="true"/>
+      <eAnnotations source="http://sse.tu-ilmenau.de/modelChange">
+        <details value="return value to Any, Integer is no EObject in C++"/>
       </eAnnotations>
     </eOperations>
-    <eOperations
-        name="isOverrideOf"
-        eType="#//EBoolean">
-      <eAnnotations
-          source="http://tu-ilmenau.de/see/codegen">
-        <details
-            key="body"
-            value="&#x9;std::shared_ptr&lt;ecore::EClass > containingClass = someOperation->getEContainingClass().lock();&#xD;&#xA;&#x9;if(nullptr == containingClass)&#xD;&#xA;&#x9;{&#xD;&#xA;&#x9;&#x9;std::cerr &lt;&lt; __PRETTY_FUNCTION__ &lt;&lt; &quot; containing class not set.&quot; &lt;&lt; std::endl;&#xD;&#xA;&#x9;&#x9;return false;&#xD;&#xA;&#x9;}&#xD;&#xA;&#xD;&#xA;&#x9;std::shared_ptr&lt;ecore::EClass > thisContainingClass = getEContainingClass().lock();&#xD;&#xA;&#x9;if(nullptr == thisContainingClass)&#xD;&#xA;&#x9;{&#xD;&#xA;&#x9;&#x9;std::cerr &lt;&lt; __PRETTY_FUNCTION__ &lt;&lt; &quot; thisContainingClass not set.&quot; &lt;&lt; std::endl;&#xD;&#xA;&#x9;&#x9;return false;&#xD;&#xA;&#x9;}&#xD;&#xA;&#xD;&#xA;&#x9;if (containingClass->isSuperTypeOf(thisContainingClass) &amp;&amp; (someOperation->getName()==getName()))&#xD;&#xA;    {&#xD;&#xA;        std::shared_ptr&lt; Bag&lt;ecore::EParameter> > parameters = getEParameters();&#xD;&#xA;        std::shared_ptr&lt; Bag&lt;ecore::EParameter> > otherParameters = someOperation->getEParameters();&#xD;&#xA;        if (parameters->size() == otherParameters->size())&#xD;&#xA;        {&#xD;&#xA;            for (Bag&lt;EParameter> ::iterator i = parameters->begin(), j = otherParameters->begin(); i != parameters->end(); ++i,++j )&#xD;&#xA;        &#x9;{&#xD;&#xA;            &#x9;std::shared_ptr&lt;EParameter> parameter = *i;&#xD;&#xA;            &#x9;std::shared_ptr&lt;EParameter> otherParameter = *j;&#xD;&#xA;                if (parameter->getEType().get() != otherParameter->getEType().get())&#xD;&#xA;          &#x9;&#x9;{&#xD;&#xA;                    return false;&#xD;&#xA;        &#x9;&#x9;}&#xD;&#xA;        &#x9;}&#xD;&#xA;            return true;&#xD;&#xA;&#x9;&#x9;}&#xD;&#xA;&#x9;}&#xD;&#xA;    return false;"/>
-        <details
-            key="const"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="eContentUnion" upperBound="-1"
+        eType="#//EObject" containment="true" eOpposite="#//EObject/eContainer.1">
+      <eAnnotations source="union"/>
+      <eAnnotations source="http://sse.tu-ilmenau.de/modelChange">
+        <details value="additional attribute to model union of content Model Elements"/>
       </eAnnotations>
-      <eParameters
-          name="someOperation"
-          eType="#//EOperation"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="eContainer" eType="#//EObject"
+        eOpposite="#//EObject/eContentUnion">
+      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+        <details key="noGetter"/>
+        <details key="getterName" value="eContainer"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="metaElementID" eType="#//EInt"
+        defaultValueLiteral="0" unsettable="true">
+      <eAnnotations source="http://sse.tu-ilmenau.de/modelChange">
+        <details value="realization of ClassifierID or MetaType-ID for reflection support for ecore, UML and Evore/UML based models"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EOperation" eSuperTypes="#//ETypedElement">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="UniqueParameterNames UniqueTypeParameterNames NoRepeatingVoid"/>
+    </eAnnotations>
+    <eOperations name="getOperationID" eType="#//EInt">
+      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+        <details key="doNotGenerate" value="true"/>
+      </eAnnotations>
     </eOperations>
-    <eStructuralFeatures
-        xsi:type="ecore:EAttribute"
-        name="operationID"
-        eType="#//EInt"
-        changeable="false"
-        defaultValueLiteral="-1">
-      <eAnnotations
-          source="http://tu-ilmenau.de/see/codegen">
-        <details
-            key="implSetterOnly"/>
+    <eOperations name="isOverrideOf" eType="#//EBoolean">
+      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+        <details key="body" value="&#x9;std::shared_ptr&lt;ecore::EClass > containingClass = someOperation->getEContainingClass().lock();&#xD;&#xA;&#x9;if(nullptr == containingClass)&#xD;&#xA;&#x9;{&#xD;&#xA;&#x9;&#x9;std::cerr &lt;&lt; __PRETTY_FUNCTION__ &lt;&lt; &quot; containing class not set.&quot; &lt;&lt; std::endl;&#xD;&#xA;&#x9;&#x9;return false;&#xD;&#xA;&#x9;}&#xD;&#xA;&#xD;&#xA;&#x9;std::shared_ptr&lt;ecore::EClass > thisContainingClass = getEContainingClass().lock();&#xD;&#xA;&#x9;if(nullptr == thisContainingClass)&#xD;&#xA;&#x9;{&#xD;&#xA;&#x9;&#x9;std::cerr &lt;&lt; __PRETTY_FUNCTION__ &lt;&lt; &quot; thisContainingClass not set.&quot; &lt;&lt; std::endl;&#xD;&#xA;&#x9;&#x9;return false;&#xD;&#xA;&#x9;}&#xD;&#xA;&#xD;&#xA;&#x9;if (containingClass->isSuperTypeOf(thisContainingClass) &amp;&amp; (someOperation->getName()==getName()))&#xD;&#xA;    {&#xD;&#xA;        std::shared_ptr&lt; Bag&lt;ecore::EParameter> > parameters = getEParameters();&#xD;&#xA;        std::shared_ptr&lt; Bag&lt;ecore::EParameter> > otherParameters = someOperation->getEParameters();&#xD;&#xA;        if (parameters->size() == otherParameters->size())&#xD;&#xA;        {&#xD;&#xA;            for (Bag&lt;EParameter> ::iterator i = parameters->begin(), j = otherParameters->begin(); i != parameters->end(); ++i,++j )&#xD;&#xA;        &#x9;{&#xD;&#xA;            &#x9;std::shared_ptr&lt;EParameter> parameter = *i;&#xD;&#xA;            &#x9;std::shared_ptr&lt;EParameter> otherParameter = *j;&#xD;&#xA;                if (parameter->getEType().get() != otherParameter->getEType().get())&#xD;&#xA;          &#x9;&#x9;{&#xD;&#xA;                    return false;&#xD;&#xA;        &#x9;&#x9;}&#xD;&#xA;        &#x9;}&#xD;&#xA;            return true;&#xD;&#xA;&#x9;&#x9;}&#xD;&#xA;&#x9;}&#xD;&#xA;    return false;"/>
+        <details key="const"/>
       </eAnnotations>
-    </eStructuralFeatures>
-    <eStructuralFeatures
-        xsi:type="ecore:EReference"
-        name="eContainingClass"
-        eType="#//EClass"
-        changeable="false"
-        transient="true"
-        resolveProxies="false"
-        eOpposite="#//EClass/eOperations">
-      <eAnnotations
-          source="http://tu-ilmenau.de/see/codegen">
-        <details
-            key="isContainerAttribute"
-            value="true"/>
-      </eAnnotations>
-    </eStructuralFeatures>
-    <eStructuralFeatures
-        xsi:type="ecore:EReference"
-        name="eTypeParameters"
-        upperBound="-1"
-        eType="#//ETypeParameter"
-        containment="true"/>
-    <eStructuralFeatures
-        xsi:type="ecore:EReference"
-        name="eParameters"
-        upperBound="-1"
-        eType="#//EParameter"
-        containment="true"
-        resolveProxies="false"
-        eOpposite="#//EParameter/eOperation">
-      <eAnnotations
-          source="subsets"
-          references="#//EObject/eContens"/>
-    </eStructuralFeatures>
-    <eStructuralFeatures
-        xsi:type="ecore:EReference"
-        name="eExceptions"
-        upperBound="-1"
-        eType="#//EClassifier"
-        unsettable="true">
-      <eAnnotations
-          source="http://www.eclipse.org/emf/2002/GenModel">
-        <details
-            key="suppressedIsSetVisibility"
-            value="true"/>
-        <details
-            key="suppressedUnsetVisibility"
-            value="true"/>
-      </eAnnotations>
-    </eStructuralFeatures>
-    <eStructuralFeatures
-        xsi:type="ecore:EReference"
-        name="eGenericExceptions"
-        upperBound="-1"
-        eType="#//EGenericType"
-        unsettable="true"
-        containment="true"
-        resolveProxies="false">
-      <eAnnotations
-          source="http://www.eclipse.org/emf/2002/GenModel">
-        <details
-            key="suppressedIsSetVisibility"
-            value="true"/>
-        <details
-            key="suppressedUnsetVisibility"
-            value="true"/>
-      </eAnnotations>
-    </eStructuralFeatures>
-  </eClassifiers>
-  <eClassifiers
-      xsi:type="ecore:EClass"
-      name="EPackage"
-      eSuperTypes="#//ENamedElement">
-    <eAnnotations
-        source="http://www.eclipse.org/emf/2002/Ecore">
-      <details
-          key="constraints"
-          value="WellFormedNsURI WellFormedNsPrefix UniqueSubpackageNames UniqueClassifierNames UniqueNsURIs"/>
-    </eAnnotations>
-    <eAnnotations
-        source="http://tu-ilmenau.de/see/codegen">
-      <details
-          key="shared_this"
-          value="true"/>
-    </eAnnotations>
-    <eOperations
-        name="getEClassifier"
-        eType="#//EClassifier">
-      <eAnnotations
-          source="http://tu-ilmenau.de/see/codegen">
-        <details
-            key="body"
-            value="std::shared_ptr&lt;Bag&lt;EClassifier> > classifierList = getEClassifiers();&#xD;&#xA;    for (std::shared_ptr&lt;EClassifier> c : *classifierList)&#xD;&#xA;    {&#xD;&#xA;        if(c->getName()==name)&#xD;&#xA;        {&#xD;&#xA;            return c;&#xD;&#xA;        }&#xD;&#xA;    }&#xD;&#xA;    return std::shared_ptr&lt;ecore::EClassifier>();"/>
-        <details
-            key="const"/>
-      </eAnnotations>
-      <eParameters
-          name="name"
-          eType="#//EString"/>
+      <eParameters name="someOperation" eType="#//EOperation"/>
     </eOperations>
-    <eStructuralFeatures
-        xsi:type="ecore:EAttribute"
-        name="nsURI"
-        eType="#//EString"/>
-    <eStructuralFeatures
-        xsi:type="ecore:EAttribute"
-        name="nsPrefix"
-        eType="#//EString"/>
-    <eStructuralFeatures
-        xsi:type="ecore:EReference"
-        name="eFactoryInstance"
-        lowerBound="1"
-        eType="#//EFactory"
-        transient="true"
-        resolveProxies="false"
-        eOpposite="#//EFactory/ePackage"/>
-    <eStructuralFeatures
-        xsi:type="ecore:EReference"
-        name="eClassifiers"
-        upperBound="-1"
-        eType="#//EClassifier"
-        containment="true"
-        eOpposite="#//EClassifier/ePackage">
-      <eAnnotations
-          source="subsets"
-          references="#//EObject/eContens"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="operationID" eType="#//EInt"
+        changeable="false" defaultValueLiteral="-1">
+      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+        <details key="implSetterOnly"/>
+      </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures
-        xsi:type="ecore:EReference"
-        name="eSubpackages"
-        upperBound="-1"
-        eType="#//EPackage"
-        containment="true"
-        eOpposite="#//EPackage/eSuperPackage"/>
-    <eStructuralFeatures
-        xsi:type="ecore:EReference"
-        name="eSuperPackage"
-        eType="#//EPackage"
-        changeable="false"
-        transient="true"
-        eOpposite="#//EPackage/eSubpackages">
-      <eAnnotations
-          source="http://tu-ilmenau.de/see/codegen">
-        <details
-            key="isContainerAttribute"
-            value="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="eContainingClass" eType="#//EClass"
+        changeable="false" transient="true" resolveProxies="false" eOpposite="#//EClass/eOperations">
+      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+        <details key="isContainerAttribute" value="true"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="eTypeParameters" upperBound="-1"
+        eType="#//ETypeParameter" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="eParameters" upperBound="-1"
+        eType="#//EParameter" containment="true" resolveProxies="false" eOpposite="#//EParameter/eOperation">
+      <eAnnotations source="subsets" references="#//EObject/eContentUnion"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="eExceptions" upperBound="-1"
+        eType="#//EClassifier" unsettable="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="suppressedIsSetVisibility" value="true"/>
+        <details key="suppressedUnsetVisibility" value="true"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="eGenericExceptions" upperBound="-1"
+        eType="#//EGenericType" unsettable="true" containment="true" resolveProxies="false">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="suppressedIsSetVisibility" value="true"/>
+        <details key="suppressedUnsetVisibility" value="true"/>
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
-  <eClassifiers
-      xsi:type="ecore:EClass"
-      name="EParameter"
-      eSuperTypes="#//ETypedElement">
-    <eStructuralFeatures
-        xsi:type="ecore:EReference"
-        name="eOperation"
-        eType="#//EOperation"
-        changeable="false"
-        transient="true"
-        resolveProxies="false"
-        eOpposite="#//EOperation/eParameters">
-      <eAnnotations
-          source="http://tu-ilmenau.de/see/codegen">
-        <details
-            key="isContainerAttribute"
-            value="true"/>
-      </eAnnotations>
-    </eStructuralFeatures>
-  </eClassifiers>
-  <eClassifiers
-      xsi:type="ecore:EClass"
-      name="EReference"
-      eSuperTypes="#//EStructuralFeature">
-    <eAnnotations
-        source="http://www.eclipse.org/emf/2002/Ecore">
-      <details
-          key="constraints"
-          value="ConsistentOpposite SingleContainer ConsistentKeys ConsistentUnique ConsistentContainer"/>
+  <eClassifiers xsi:type="ecore:EClass" name="EPackage" eSuperTypes="#//ENamedElement">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="WellFormedNsURI WellFormedNsPrefix UniqueSubpackageNames UniqueClassifierNames UniqueNsURIs"/>
     </eAnnotations>
-    <eStructuralFeatures
-        xsi:type="ecore:EAttribute"
-        name="containment"
-        eType="#//EBoolean"/>
-    <eStructuralFeatures
-        xsi:type="ecore:EAttribute"
-        name="container"
-        eType="#//EBoolean"
-        changeable="false"
-        volatile="true"
-        transient="true"
-        derived="true"/>
-    <eStructuralFeatures
-        xsi:type="ecore:EAttribute"
-        name="resolveProxies"
-        eType="#//EBoolean"
+    <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+      <details key="shared_this" value="true"/>
+    </eAnnotations>
+    <eOperations name="getEClassifier" eType="#//EClassifier">
+      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+        <details key="body" value="std::shared_ptr&lt;Bag&lt;EClassifier> > classifierList = getEClassifiers();&#xD;&#xA;    for (std::shared_ptr&lt;EClassifier> c : *classifierList)&#xD;&#xA;    {&#xD;&#xA;        if(c->getName()==name)&#xD;&#xA;        {&#xD;&#xA;            return c;&#xD;&#xA;        }&#xD;&#xA;    }&#xD;&#xA;    return std::shared_ptr&lt;ecore::EClassifier>();"/>
+        <details key="const"/>
+      </eAnnotations>
+      <eParameters name="name" eType="#//EString"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="nsURI" eType="#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="nsPrefix" eType="#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="eFactoryInstance" lowerBound="1"
+        eType="#//EFactory" transient="true" resolveProxies="false" eOpposite="#//EFactory/ePackage"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="eClassifiers" upperBound="-1"
+        eType="#//EClassifier" containment="true" eOpposite="#//EClassifier/ePackage">
+      <eAnnotations source="subsets" references="#//EObject/eContentUnion"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="eSubpackages" upperBound="-1"
+        eType="#//EPackage" containment="true" eOpposite="#//EPackage/eSuperPackage"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="eSuperPackage" eType="#//EPackage"
+        changeable="false" transient="true" eOpposite="#//EPackage/eSubpackages">
+      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+        <details key="isContainerAttribute" value="true"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EParameter" eSuperTypes="#//ETypedElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="eOperation" eType="#//EOperation"
+        changeable="false" transient="true" resolveProxies="false" eOpposite="#//EOperation/eParameters">
+      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+        <details key="isContainerAttribute" value="true"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EReference" eSuperTypes="#//EStructuralFeature">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="ConsistentOpposite SingleContainer ConsistentKeys ConsistentUnique ConsistentContainer"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="containment" eType="#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="container" eType="#//EBoolean"
+        changeable="false" volatile="true" transient="true" derived="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="resolveProxies" eType="#//EBoolean"
         defaultValueLiteral="true"/>
-    <eStructuralFeatures
-        xsi:type="ecore:EReference"
-        name="eOpposite"
-        eType="#//EReference"/>
-    <eStructuralFeatures
-        xsi:type="ecore:EReference"
-        name="eReferenceType"
-        lowerBound="1"
-        eType="#//EClass"
-        volatile="true"
-        transient="true"
-        derived="true"/>
-    <eStructuralFeatures
-        xsi:type="ecore:EReference"
-        name="eKeys"
-        upperBound="-1"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="eOpposite" eType="#//EReference"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="eReferenceType" lowerBound="1"
+        eType="#//EClass" volatile="true" transient="true" derived="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="eKeys" upperBound="-1"
         eType="#//EAttribute"/>
   </eClassifiers>
-  <eClassifiers
-      xsi:type="ecore:EClass"
-      name="EStructuralFeature"
-      abstract="true"
+  <eClassifiers xsi:type="ecore:EClass" name="EStructuralFeature" abstract="true"
       eSuperTypes="#//ETypedElement">
-    <eAnnotations
-        source="http://www.eclipse.org/emf/2002/Ecore">
-      <details
-          key="constraints"
-          value="ValidDefaultValueLiteral"/>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="ValidDefaultValueLiteral"/>
     </eAnnotations>
-    <eOperations
-        name="getFeatureID"
-        eType="#//EInt">
-      <eAnnotations
-          source="http://tu-ilmenau.de/see/codegen">
-        <details
-            key="doNotGenerate"
-            value="true"/>
+    <eOperations name="getFeatureID" eType="#//EInt">
+      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+        <details key="doNotGenerate" value="true"/>
       </eAnnotations>
     </eOperations>
-    <eOperations
-        name="getContainerClass">
-      <eGenericType
-          eClassifier="#//EJavaClass">
+    <eOperations name="getContainerClass">
+      <eGenericType eClassifier="#//EJavaClass">
         <eTypeArguments/>
       </eGenericType>
     </eOperations>
-    <eStructuralFeatures
-        xsi:type="ecore:EAttribute"
-        name="changeable"
-        eType="#//EBoolean"
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="changeable" eType="#//EBoolean"
         defaultValueLiteral="true"/>
-    <eStructuralFeatures
-        xsi:type="ecore:EAttribute"
-        name="volatile"
-        eType="#//EBoolean"/>
-    <eStructuralFeatures
-        xsi:type="ecore:EAttribute"
-        name="transient"
-        eType="#//EBoolean"/>
-    <eStructuralFeatures
-        xsi:type="ecore:EAttribute"
-        name="defaultValueLiteral"
-        eType="#//EString"/>
-    <eStructuralFeatures
-        xsi:type="ecore:EAttribute"
-        name="defaultValue"
-        eType="#//EJavaObject"
-        volatile="true"
-        transient="true"
-        derived="true"/>
-    <eStructuralFeatures
-        xsi:type="ecore:EAttribute"
-        name="unsettable"
-        eType="#//EBoolean"/>
-    <eStructuralFeatures
-        xsi:type="ecore:EAttribute"
-        name="derived"
-        eType="#//EBoolean"/>
-    <eStructuralFeatures
-        xsi:type="ecore:EAttribute"
-        name="featureID"
-        eType="#//EInt"
-        changeable="false"
-        defaultValueLiteral="-1">
-      <eAnnotations
-          source="http://tu-ilmenau.de/see/codegen">
-        <details
-            key="implSetterOnly"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="volatile" eType="#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="transient" eType="#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="defaultValueLiteral" eType="#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="defaultValue" eType="#//EJavaObject"
+        volatile="true" transient="true" derived="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="unsettable" eType="#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="derived" eType="#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="featureID" eType="#//EInt"
+        changeable="false" defaultValueLiteral="-1">
+      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+        <details key="implSetterOnly"/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures
-        xsi:type="ecore:EReference"
-        name="eContainingClass"
-        eType="#//EClass"
-        changeable="false"
-        transient="true"
-        resolveProxies="false"
-        eOpposite="#//EClass/eStructuralFeatures">
-      <eAnnotations
-          source="http://tu-ilmenau.de/see/codegen">
-        <details
-            key="isContainerAttribute"
-            value="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="eContainingClass" eType="#//EClass"
+        changeable="false" transient="true" resolveProxies="false" eOpposite="#//EClass/eStructuralFeatures">
+      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+        <details key="isContainerAttribute" value="true"/>
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
-  <eClassifiers
-      xsi:type="ecore:EClass"
-      name="ETypedElement"
-      abstract="true"
-      eSuperTypes="#//ENamedElement">
-    <eAnnotations
-        source="http://www.eclipse.org/emf/2002/Ecore">
-      <details
-          key="constraints"
-          value="ValidLowerBound ValidUpperBound ConsistentBounds ValidType"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ETypedElement" abstract="true" eSuperTypes="#//ENamedElement">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="ValidLowerBound ValidUpperBound ConsistentBounds ValidType"/>
     </eAnnotations>
-    <eStructuralFeatures
-        xsi:type="ecore:EAttribute"
-        name="ordered"
-        eType="#//EBoolean"
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="ordered" eType="#//EBoolean"
         defaultValueLiteral="true"/>
-    <eStructuralFeatures
-        xsi:type="ecore:EAttribute"
-        name="unique"
-        eType="#//EBoolean"
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="unique" eType="#//EBoolean"
         defaultValueLiteral="true"/>
-    <eStructuralFeatures
-        xsi:type="ecore:EAttribute"
-        name="lowerBound"
-        eType="#//EInt"/>
-    <eStructuralFeatures
-        xsi:type="ecore:EAttribute"
-        name="upperBound"
-        eType="#//EInt"
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="lowerBound" eType="#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="upperBound" eType="#//EInt"
         defaultValueLiteral="1"/>
-    <eStructuralFeatures
-        xsi:type="ecore:EAttribute"
-        name="many"
-        eType="#//EBoolean"
-        changeable="false"
-        volatile="true"
-        transient="true"
-        derived="true"/>
-    <eStructuralFeatures
-        xsi:type="ecore:EAttribute"
-        name="required"
-        eType="#//EBoolean"
-        volatile="true"
-        transient="true"
-        derived="true"/>
-    <eStructuralFeatures
-        xsi:type="ecore:EReference"
-        name="eType"
-        eType="#//EClassifier"
-        volatile="true"
-        unsettable="true">
-      <eAnnotations
-          source="http://www.eclipse.org/emf/2002/GenModel">
-        <details
-            key="suppressedIsSetVisibility"
-            value="true"/>
-        <details
-            key="suppressedUnsetVisibility"
-            value="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="many" eType="#//EBoolean"
+        changeable="false" volatile="true" transient="true" derived="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="required" eType="#//EBoolean"
+        volatile="true" transient="true" derived="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="eType" eType="#//EClassifier"
+        volatile="true" unsettable="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="suppressedIsSetVisibility" value="true"/>
+        <details key="suppressedUnsetVisibility" value="true"/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures
-        xsi:type="ecore:EReference"
-        name="eGenericType"
-        eType="#//EGenericType"
-        volatile="true"
-        unsettable="true"
-        containment="true"
-        resolveProxies="false">
-      <eAnnotations
-          source="http://www.eclipse.org/emf/2002/GenModel">
-        <details
-            key="suppressedIsSetVisibility"
-            value="true"/>
-        <details
-            key="suppressedUnsetVisibility"
-            value="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="eGenericType" eType="#//EGenericType"
+        volatile="true" unsettable="true" containment="true" resolveProxies="false">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="suppressedIsSetVisibility" value="true"/>
+        <details key="suppressedUnsetVisibility" value="true"/>
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
-  <eClassifiers
-      xsi:type="ecore:EDataType"
-      name="EBigDecimal"
-      instanceClassName="java.math.BigDecimal">
-    <eAnnotations
-        source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
-      <details
-          key="baseType"
-          value="http://www.w3.org/2001/XMLSchema#decimal"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="EBigDecimal" instanceClassName="java.math.BigDecimal">
+    <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+      <details key="baseType" value="http://www.w3.org/2001/XMLSchema#decimal"/>
     </eAnnotations>
   </eClassifiers>
-  <eClassifiers
-      xsi:type="ecore:EDataType"
-      name="EBigInteger"
-      instanceClassName="java.math.BigInteger">
-    <eAnnotations
-        source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
-      <details
-          key="baseType"
-          value="http://www.w3.org/2001/XMLSchema#integer"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="EBigInteger" instanceClassName="java.math.BigInteger">
+    <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+      <details key="baseType" value="http://www.w3.org/2001/XMLSchema#integer"/>
     </eAnnotations>
   </eClassifiers>
-  <eClassifiers
-      xsi:type="ecore:EDataType"
-      name="EBoolean"
-      instanceClassName="boolean">
-    <eAnnotations
-        source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
-      <details
-          key="baseType"
-          value="http://www.w3.org/2001/XMLSchema#boolean"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="EBoolean" instanceClassName="boolean">
+    <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+      <details key="baseType" value="http://www.w3.org/2001/XMLSchema#boolean"/>
     </eAnnotations>
   </eClassifiers>
-  <eClassifiers
-      xsi:type="ecore:EDataType"
-      name="EBooleanObject"
-      instanceClassName="java.lang.Boolean">
-    <eAnnotations
-        source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
-      <details
-          key="baseType"
-          value="EBoolean"/>
-      <details
-          key="name"
-          value="EBoolean:Object"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="EBooleanObject" instanceClassName="java.lang.Boolean">
+    <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+      <details key="baseType" value="EBoolean"/>
+      <details key="name" value="EBoolean:Object"/>
     </eAnnotations>
   </eClassifiers>
-  <eClassifiers
-      xsi:type="ecore:EDataType"
-      name="EByte"
-      instanceClassName="byte">
-    <eAnnotations
-        source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
-      <details
-          key="baseType"
-          value="http://www.w3.org/2001/XMLSchema#byte"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="EByte" instanceClassName="byte">
+    <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+      <details key="baseType" value="http://www.w3.org/2001/XMLSchema#byte"/>
     </eAnnotations>
   </eClassifiers>
-  <eClassifiers
-      xsi:type="ecore:EDataType"
-      name="EByteArray"
-      instanceClassName="byte[]">
-    <eAnnotations
-        source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
-      <details
-          key="baseType"
-          value="http://www.w3.org/2001/XMLSchema#hexBinary"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="EByteArray" instanceClassName="byte[]">
+    <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+      <details key="baseType" value="http://www.w3.org/2001/XMLSchema#hexBinary"/>
     </eAnnotations>
   </eClassifiers>
-  <eClassifiers
-      xsi:type="ecore:EDataType"
-      name="EByteObject"
-      instanceClassName="java.lang.Byte">
-    <eAnnotations
-        source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
-      <details
-          key="baseType"
-          value="EByte"/>
-      <details
-          key="name"
-          value="EByte:Object"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="EByteObject" instanceClassName="java.lang.Byte">
+    <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+      <details key="baseType" value="EByte"/>
+      <details key="name" value="EByte:Object"/>
     </eAnnotations>
   </eClassifiers>
-  <eClassifiers
-      xsi:type="ecore:EDataType"
-      name="EChar"
-      instanceClassName="char"/>
-  <eClassifiers
-      xsi:type="ecore:EDataType"
-      name="ECharacterObject"
-      instanceClassName="java.lang.Character">
-    <eAnnotations
-        source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
-      <details
-          key="baseType"
-          value="EChar"/>
-      <details
-          key="name"
-          value="EChar:Object"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="EChar" instanceClassName="char"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="ECharacterObject" instanceClassName="java.lang.Character">
+    <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+      <details key="baseType" value="EChar"/>
+      <details key="name" value="EChar:Object"/>
     </eAnnotations>
   </eClassifiers>
-  <eClassifiers
-      xsi:type="ecore:EDataType"
-      name="EDate"
-      instanceClassName="java.util.Date"/>
-  <eClassifiers
-      xsi:type="ecore:EDataType"
-      name="EDiagnosticChain"
-      instanceClassName="org.eclipse.emf.common.util.DiagnosticChain"
+  <eClassifiers xsi:type="ecore:EDataType" name="EDate" instanceClassName="java.util.Date"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="EDiagnosticChain" instanceClassName="org.eclipse.emf.common.util.DiagnosticChain"
       serializable="false"/>
-  <eClassifiers
-      xsi:type="ecore:EDataType"
-      name="EDouble"
-      instanceClassName="double">
-    <eAnnotations
-        source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
-      <details
-          key="baseType"
-          value="http://www.w3.org/2001/XMLSchema#double"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="EDouble" instanceClassName="double">
+    <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+      <details key="baseType" value="http://www.w3.org/2001/XMLSchema#double"/>
     </eAnnotations>
   </eClassifiers>
-  <eClassifiers
-      xsi:type="ecore:EDataType"
-      name="EDoubleObject"
-      instanceClassName="java.lang.Double">
-    <eAnnotations
-        source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
-      <details
-          key="baseType"
-          value="EDouble"/>
-      <details
-          key="name"
-          value="EDouble:Object"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="EDoubleObject" instanceClassName="java.lang.Double">
+    <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+      <details key="baseType" value="EDouble"/>
+      <details key="name" value="EDouble:Object"/>
     </eAnnotations>
   </eClassifiers>
-  <eClassifiers
-      xsi:type="ecore:EDataType"
-      name="EEList"
-      instanceClassName="org.eclipse.emf.common.util.EList"
+  <eClassifiers xsi:type="ecore:EDataType" name="EEList" instanceClassName="org.eclipse.emf.common.util.EList"
       serializable="false">
-    <eTypeParameters
-        name="E"/>
+    <eTypeParameters name="E"/>
   </eClassifiers>
-  <eClassifiers
-      xsi:type="ecore:EDataType"
-      name="EEnumerator"
-      instanceClassName="org.eclipse.emf.common.util.Enumerator"
+  <eClassifiers xsi:type="ecore:EDataType" name="EEnumerator" instanceClassName="org.eclipse.emf.common.util.Enumerator"
       serializable="false"/>
-  <eClassifiers
-      xsi:type="ecore:EDataType"
-      name="EFeatureMap"
-      instanceClassName="org.eclipse.emf.ecore.util.FeatureMap"
+  <eClassifiers xsi:type="ecore:EDataType" name="EFeatureMap" instanceClassName="org.eclipse.emf.ecore.util.FeatureMap"
       serializable="false"/>
-  <eClassifiers
-      xsi:type="ecore:EDataType"
-      name="EFeatureMapEntry"
-      instanceClassName="org.eclipse.emf.ecore.util.FeatureMap$Entry"
+  <eClassifiers xsi:type="ecore:EDataType" name="EFeatureMapEntry" instanceClassName="org.eclipse.emf.ecore.util.FeatureMap$Entry"
       serializable="false"/>
-  <eClassifiers
-      xsi:type="ecore:EDataType"
-      name="EFloat"
-      instanceClassName="float">
-    <eAnnotations
-        source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
-      <details
-          key="baseType"
-          value="http://www.w3.org/2001/XMLSchema#float"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="EFloat" instanceClassName="float">
+    <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+      <details key="baseType" value="http://www.w3.org/2001/XMLSchema#float"/>
     </eAnnotations>
   </eClassifiers>
-  <eClassifiers
-      xsi:type="ecore:EDataType"
-      name="EFloatObject"
-      instanceClassName="java.lang.Float">
-    <eAnnotations
-        source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
-      <details
-          key="baseType"
-          value="EFloat"/>
-      <details
-          key="name"
-          value="EFloat:Object"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="EFloatObject" instanceClassName="java.lang.Float">
+    <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+      <details key="baseType" value="EFloat"/>
+      <details key="name" value="EFloat:Object"/>
     </eAnnotations>
   </eClassifiers>
-  <eClassifiers
-      xsi:type="ecore:EDataType"
-      name="EInt"
-      instanceClassName="int">
-    <eAnnotations
-        source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
-      <details
-          key="baseType"
-          value="http://www.w3.org/2001/XMLSchema#int"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="EInt" instanceClassName="int">
+    <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+      <details key="baseType" value="http://www.w3.org/2001/XMLSchema#int"/>
     </eAnnotations>
   </eClassifiers>
-  <eClassifiers
-      xsi:type="ecore:EDataType"
-      name="EIntegerObject"
-      instanceClassName="java.lang.Integer">
-    <eAnnotations
-        source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
-      <details
-          key="baseType"
-          value="EInt"/>
-      <details
-          key="name"
-          value="EInt:Object"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="EIntegerObject" instanceClassName="java.lang.Integer">
+    <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+      <details key="baseType" value="EInt"/>
+      <details key="name" value="EInt:Object"/>
     </eAnnotations>
   </eClassifiers>
-  <eClassifiers
-      xsi:type="ecore:EDataType"
-      name="EJavaClass"
-      instanceClassName="java.lang.Class">
-    <eTypeParameters
-        name="T"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="EJavaClass" instanceClassName="java.lang.Class">
+    <eTypeParameters name="T"/>
   </eClassifiers>
-  <eClassifiers
-      xsi:type="ecore:EDataType"
-      name="EJavaObject"
-      instanceClassName="java.lang.Object"/>
-  <eClassifiers
-      xsi:type="ecore:EDataType"
-      name="ELong"
-      instanceClassName="long">
-    <eAnnotations
-        source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
-      <details
-          key="baseType"
-          value="http://www.w3.org/2001/XMLSchema#long"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="EJavaObject" instanceClassName="java.lang.Object"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="ELong" instanceClassName="long">
+    <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+      <details key="baseType" value="http://www.w3.org/2001/XMLSchema#long"/>
     </eAnnotations>
   </eClassifiers>
-  <eClassifiers
-      xsi:type="ecore:EDataType"
-      name="ELongObject"
-      instanceClassName="java.lang.Long">
-    <eAnnotations
-        source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
-      <details
-          key="baseType"
-          value="ELong"/>
-      <details
-          key="name"
-          value="ELong:Object"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="ELongObject" instanceClassName="java.lang.Long">
+    <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+      <details key="baseType" value="ELong"/>
+      <details key="name" value="ELong:Object"/>
     </eAnnotations>
   </eClassifiers>
-  <eClassifiers
-      xsi:type="ecore:EDataType"
-      name="EMap"
-      instanceClassName="java.util.Map"
+  <eClassifiers xsi:type="ecore:EDataType" name="EMap" instanceClassName="java.util.Map"
       serializable="false">
-    <eTypeParameters
-        name="K"/>
-    <eTypeParameters
-        name="V"/>
+    <eTypeParameters name="K"/>
+    <eTypeParameters name="V"/>
   </eClassifiers>
-  <eClassifiers
-      xsi:type="ecore:EDataType"
-      name="EResource"
-      instanceClassName="org.eclipse.emf.ecore.resource.Resource"
+  <eClassifiers xsi:type="ecore:EDataType" name="EResource" instanceClassName="org.eclipse.emf.ecore.resource.Resource"
       serializable="false"/>
-  <eClassifiers
-      xsi:type="ecore:EDataType"
-      name="EResourceSet"
-      instanceClassName="org.eclipse.emf.ecore.resource.ResourceSet"
+  <eClassifiers xsi:type="ecore:EDataType" name="EResourceSet" instanceClassName="org.eclipse.emf.ecore.resource.ResourceSet"
       serializable="false"/>
-  <eClassifiers
-      xsi:type="ecore:EDataType"
-      name="EShort"
-      instanceClassName="short">
-    <eAnnotations
-        source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
-      <details
-          key="baseType"
-          value="http://www.w3.org/2001/XMLSchema#short"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="EShort" instanceClassName="short">
+    <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+      <details key="baseType" value="http://www.w3.org/2001/XMLSchema#short"/>
     </eAnnotations>
   </eClassifiers>
-  <eClassifiers
-      xsi:type="ecore:EDataType"
-      name="EShortObject"
-      instanceClassName="java.lang.Short">
-    <eAnnotations
-        source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
-      <details
-          key="baseType"
-          value="EShort"/>
-      <details
-          key="name"
-          value="EShort:Object"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="EShortObject" instanceClassName="java.lang.Short">
+    <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+      <details key="baseType" value="EShort"/>
+      <details key="name" value="EShort:Object"/>
     </eAnnotations>
   </eClassifiers>
-  <eClassifiers
-      xsi:type="ecore:EDataType"
-      name="EString"
-      instanceClassName="java.lang.String">
-    <eAnnotations
-        source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
-      <details
-          key="baseType"
-          value="http://www.w3.org/2001/XMLSchema#string"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="EString" instanceClassName="java.lang.String">
+    <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+      <details key="baseType" value="http://www.w3.org/2001/XMLSchema#string"/>
     </eAnnotations>
   </eClassifiers>
-  <eClassifiers
-      xsi:type="ecore:EClass"
-      name="EStringToStringMapEntry"
-      instanceClassName="java.util.Map$Entry">
-    <eStructuralFeatures
-        xsi:type="ecore:EAttribute"
-        name="key"
-        eType="#//EString"/>
-    <eStructuralFeatures
-        xsi:type="ecore:EAttribute"
-        name="value"
-        eType="#//EString"/>
+  <eClassifiers xsi:type="ecore:EClass" name="EStringToStringMapEntry" instanceClassName="java.util.Map$Entry">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="key" eType="#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="#//EString"/>
   </eClassifiers>
-  <eClassifiers
-      xsi:type="ecore:EDataType"
-      name="ETreeIterator"
-      instanceClassName="org.eclipse.emf.common.util.TreeIterator"
+  <eClassifiers xsi:type="ecore:EDataType" name="ETreeIterator" instanceClassName="org.eclipse.emf.common.util.TreeIterator"
       serializable="false">
-    <eTypeParameters
-        name="E"/>
+    <eTypeParameters name="E"/>
   </eClassifiers>
-  <eClassifiers
-      xsi:type="ecore:EClass"
-      name="EGenericType">
-    <eAnnotations
-        source="http://www.eclipse.org/emf/2002/Ecore">
-      <details
-          key="constraints"
-          value="ConsistentType ConsistentBounds ConsistentArguments"/>
+  <eClassifiers xsi:type="ecore:EClass" name="EGenericType">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="ConsistentType ConsistentBounds ConsistentArguments"/>
     </eAnnotations>
-    <eOperations
-        name="isInstance"
-        eType="#//EBoolean">
-      <eAnnotations
-          source="http://tu-ilmenau.de/see/codegen">
-        <details
-            key="const"/>
+    <eOperations name="isInstance" eType="#//EBoolean">
+      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+        <details key="const"/>
       </eAnnotations>
-      <eParameters
-          name="object"
-          eType="#//EJavaObject"/>
+      <eParameters name="object" eType="#//EJavaObject"/>
     </eOperations>
-    <eStructuralFeatures
-        xsi:type="ecore:EReference"
-        name="eUpperBound"
-        eType="#//EGenericType"
-        containment="true"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="eUpperBound" eType="#//EGenericType"
+        containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="eTypeArguments" upperBound="-1"
+        eType="#//EGenericType" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="eRawType" lowerBound="1"
+        eType="#//EClassifier" transient="true" derived="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="eLowerBound" eType="#//EGenericType"
+        containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="eTypeParameter" eType="#//ETypeParameter"
         resolveProxies="false"/>
-    <eStructuralFeatures
-        xsi:type="ecore:EReference"
-        name="eTypeArguments"
-        upperBound="-1"
-        eType="#//EGenericType"
-        containment="true"
-        resolveProxies="false"/>
-    <eStructuralFeatures
-        xsi:type="ecore:EReference"
-        name="eRawType"
-        lowerBound="1"
-        eType="#//EClassifier"
-        transient="true"
-        derived="true"/>
-    <eStructuralFeatures
-        xsi:type="ecore:EReference"
-        name="eLowerBound"
-        eType="#//EGenericType"
-        containment="true"
-        resolveProxies="false"/>
-    <eStructuralFeatures
-        xsi:type="ecore:EReference"
-        name="eTypeParameter"
-        eType="#//ETypeParameter"
-        resolveProxies="false"/>
-    <eStructuralFeatures
-        xsi:type="ecore:EReference"
-        name="eClassifier"
-        eType="#//EClassifier"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="eClassifier" eType="#//EClassifier"/>
   </eClassifiers>
-  <eClassifiers
-      xsi:type="ecore:EClass"
-      name="ETypeParameter"
-      eSuperTypes="#//ENamedElement">
-    <eStructuralFeatures
-        xsi:type="ecore:EReference"
-        name="eBounds"
-        upperBound="-1"
-        eType="#//EGenericType"
-        containment="true"
-        resolveProxies="false"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ETypeParameter" eSuperTypes="#//ENamedElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="eBounds" upperBound="-1"
+        eType="#//EGenericType" containment="true" resolveProxies="false"/>
   </eClassifiers>
-  <eClassifiers
-      xsi:type="ecore:EDataType"
-      name="EInvocationTargetException"
-      instanceClassName="java.lang.reflect.InvocationTargetException"
+  <eClassifiers xsi:type="ecore:EDataType" name="EInvocationTargetException" instanceClassName="java.lang.reflect.InvocationTargetException"
       serializable="false"/>
+  <eClassifiers xsi:type="ecore:EClass" name="EObjectContainer" eSuperTypes="#//EObject">
+    <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+      <details key="" value="Additional Datatype for a Bag of EObjects"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="container" upperBound="-1"
+        eType="#//EObject"/>
+  </eClassifiers>
 </ecore:EPackage>
