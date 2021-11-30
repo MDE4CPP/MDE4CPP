@@ -267,9 +267,9 @@ element->set[anEClass.getClassifierIDName()/]ID(metaElementID);
 if(nullptr != par_[currentCompositionOrSubsetToClass.eContainingClass.name/])
 {
 		[if(currentCompositionOrSubsetToClass.upperBound <> 1)]
-	par_[currentCompositionOrSubsetToClass.eContainingClass.name/]->get[currentCompositionOrSubsetToClass.name.toUpperFirst()/]()->push_back(element);
+	par_[currentCompositionOrSubsetToClass.eContainingClass.name/]->[currentCompositionOrSubsetToClass.GetterName()/]()->push_back(element);
 		[else]
-	par_[currentCompositionOrSubsetToClass.eContainingClass.name/]->set[currentCompositionOrSubsetToClass.name.toUpperFirst()/](element);
+	par_[currentCompositionOrSubsetToClass.eContainingClass.name/]->[currentCompositionOrSubsetToClass.SetterName()/](element);
 		[/if]
 	[else]
 		[if(currentCompositionOrSubsetToClass.eOpposite.isBackReference())]
@@ -283,9 +283,9 @@ if(nullptr != par_[currentCompositionOrSubsetToClass.eContainingClass.name/])
 	[let r : EReference = findLowerSubset(currentCompositionOrSubsetToClass.eType.oclAsType(EClass), anEClass, currentCompositionOrSubsetToClass.eOpposite)]
 [/comment]
 		[if(currentCompositionOrSubsetToClass.upperBound <> 1)]
-	[if(currentCompositionOrSubsetToClass.eOpposite.isBackReference())]wp[else]par_[currentCompositionOrSubsetToClass.eContainingClass.name/][/if]->get[currentCompositionOrSubsetToClass.name.toUpperFirst()/]()->push_back(element);
+	[if(currentCompositionOrSubsetToClass.eOpposite.isBackReference())]wp[else]par_[currentCompositionOrSubsetToClass.eContainingClass.name/][/if]->[currentCompositionOrSubsetToClass.GetterName()/]()->push_back(element);
 		[else]
-	[if(currentCompositionOrSubsetToClass.eOpposite.isBackReference())]wp[else]par_[currentCompositionOrSubsetToClass.eContainingClass.name/][/if]->set[currentCompositionOrSubsetToClass.name.toUpperFirst()/](element);
+	[if(currentCompositionOrSubsetToClass.eOpposite.isBackReference())]wp[else]par_[currentCompositionOrSubsetToClass.eContainingClass.name/][/if]->[currentCompositionOrSubsetToClass.SetterName()/](element);
 		[/if]
 	[/if]
 [comment 	[/let/]

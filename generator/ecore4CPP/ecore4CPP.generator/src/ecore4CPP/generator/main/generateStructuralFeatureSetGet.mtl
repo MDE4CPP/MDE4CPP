@@ -44,10 +44,10 @@ Any [aClass.name.toUpperFirst().concat('Impl')/]::eGet(int featureID, bool resol
 		[if (struct.eType.oclIsKindOf(EDataType))]
 			return eAny([struct.GetterName()/]()); //[aClass.getMyClassifierID()/][struct.getFeatureID()/]
 		[elseif (struct.upperBound = 1)]
-			{
-				std::shared_ptr<ecore::EObject> returnValue=[struct.GetterName()/]()[if (struct.oclAsType(EReference).isBackReference())].lock()[/if];
-				return eAny(returnValue); //[aClass.getMyClassifierID()/][struct.getFeatureID()/]
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=[struct.GetterName()/]()[if (( (struct.oclAsType(EReference).isBackReference()) and (not struct.hasGetterName()) ))].lock()[/if];
+			return eAny(returnValue); //[aClass.getMyClassifierID()/][struct.getFeatureID()/]
+		}
 		[else]
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
@@ -210,7 +210,7 @@ m_[anStructFeature.name/] ![anStructFeature.oclAsType(EAttribute).generateDefaul
 [/template]
 
 [template private _generateComparison(anStructFeature : EStructuralFeature) ? (not oclIsKindOf(EAttribute) and not eType.requiresAny())]
-[anStructFeature.GetterName()/]()[if (anStructFeature.oclIsKindOf(EReference))][if(anStructFeature.oclAsType(EReference).isBackReference())].lock()[/if][/if] != [anStructFeature.eType.getDefaultValue()/]
+[anStructFeature.GetterName()/]()[if (anStructFeature.oclIsKindOf(EReference))][if((anStructFeature.oclAsType(EReference).isBackReference()) and (not anStructFeature.hasGetterName()) ) ].lock()[/if][/if] != [anStructFeature.eType.getDefaultValue()/]
 [/template]
 
 [template private _generateComparison(anStructFeature : EStructuralFeature) ? (eType.requiresAny())]

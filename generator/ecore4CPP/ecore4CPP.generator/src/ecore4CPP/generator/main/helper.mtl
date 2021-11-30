@@ -93,7 +93,9 @@
 [query public hasImplSetterOnly(aModelElement : EModelElement) : Boolean = aModelElement.hasKey(keyImplSetterOnly())/]
 
 [query public SetterName(feature : EStructuralFeature) : String = if hasKey(keySetterName()) then valueKey(keySetterName()) else 'set'.concat(feature.name.toUpperFirst()) endif/]
-[query public GetterName(feature : EStructuralFeature) : String = if hasKey(keyGetterName()) then valueKey(keyGetterName()) else getterPrefix().concat(name.toUpperFirst()) endif/]
+[query public GetterName(feature : EStructuralFeature) : String = if hasGetterName() then valueKey(keyGetterName()) else getterPrefix().concat(name.toUpperFirst()) endif/]
+[query public hasGetterName(feature : EStructuralFeature) : Boolean = if hasKey(keyGetterName()) then true else false endif/]
+
 
 [query public packageGetter(aReference : EReference) : String = if oclIsUndefined() then 'nullptr' else getterPrefix().concat(getMemberNameUpperFirst()).concat('()') endif/]
 [query public packageGetter(aAttribute : EAttribute) : String = 'get'.concat(getMemberNameUpperFirst()).concat('()') /]
