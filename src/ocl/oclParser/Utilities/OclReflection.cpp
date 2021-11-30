@@ -61,6 +61,7 @@
 #include <ocl/Values/BagTypeValue.hpp>
 #include <ocl/Values/Element.hpp>
 #include <ocl/Values/UndefinedValue.hpp>
+#include <ocl/Values/AnyValue.hpp>
 
 #include <uml/EnumerationLiteral.hpp>
 #include <uml/LiteralBoolean.hpp>
@@ -86,7 +87,7 @@ std::shared_ptr<uml::Property> OclReflection::lookupProperty(std::shared_ptr<uml
     for (Bag<uml::Property>::const_iterator it_attribute = uml_attribute->begin();
          it_attribute != endIt_attribute; ++it_attribute)
     {
-        //std::cout << (*it_attribute)->getName() << std::endl;
+        //std::cout << (*it_attribute)->getName() << ":"<<std::endl;
         if ((*it_attribute)->getName() == name) {
             return (*it_attribute);
         }
@@ -201,8 +202,8 @@ Any OclReflection::retrieveRawValue(std::shared_ptr<fUML::Semantics::Values::Val
     if(instanceOf<CollectionValue>(fromValue)) {
         std::shared_ptr<CollectionValue> colValue = std::dynamic_pointer_cast<CollectionValue>(fromValue);
         std::shared_ptr<Bag<AnyObject>> bagValue = std::make_shared<Bag<AnyObject>>();
-
-        for(size_t i = 0; i < colValue->getElements()->size(); i++) {
+        size_t size=colValue->getElements()->size();
+        for(size_t i = 0; i < size; i++) {
             std::shared_ptr<fUML::Semantics::Values::Value> src = colValue->getElements()->at(i)->getValue();
             Any objValue = retrieveNotManyRawValue(src);
             if(objValue != nullptr) {
@@ -222,7 +223,7 @@ Any OclReflection::retrieveNotManyRawValue(std::shared_ptr<fUML::Semantics::Valu
         std::shared_ptr<ObjectValue> value = std::dynamic_pointer_cast<ObjectValue>(fromValue);
         return eAny(value->getValue());
     }
-    else if(instanceOf<fUML::Semantics::SimpleClassifiers::EnumerationValue>(fromValue)) {
+        else if(instanceOf<fUML::Semantics::SimpleClassifiers::EnumerationValue>(fromValue)) {
         std::shared_ptr<fUML::Semantics::SimpleClassifiers::EnumerationValue> value = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::EnumerationValue>(fromValue);
         return eAny(value->getLiteral());
     }
@@ -242,6 +243,11 @@ Any OclReflection::retrieveNotManyRawValue(std::shared_ptr<fUML::Semantics::Valu
         std::shared_ptr<fUML::Semantics::SimpleClassifiers::RealValue> value = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::RealValue>(fromValue);
         return eAny(value->getValue());
     }
+    if(instanceOf<ocl::Values::AnyValue>(fromValue)) {
+        std::shared_ptr<ocl::Values::AnyValue> value = std::dynamic_pointer_cast<ocl::Values::AnyValue>(fromValue);
+        Any v=value->getValue();
+        return v;
+    }
     else {
         return eAny(nullptr);
     }
@@ -257,71 +263,81 @@ std::shared_ptr<fUML::Semantics::Values::Value> OclReflection::createValue(std::
 
 std::shared_ptr<fUML::Semantics::Values::Value> OclReflection::createValue(std::shared_ptr<ecore::ETypedElement> type, Any value)
 {
-    if(value != nullptr && !value->isEmpty()) {
-        if(type != nullptr && isMany(type)) {
-            std::shared_ptr<Bag<ecore::EObject>> valueItems = value->get<std::shared_ptr<Bag<ecore::EObject>>>();
-            std::shared_ptr<BagTypeValue> bagValue = ocl::Values::ValuesFactory::eInstance()->createBagTypeValue();
-            std::shared_ptr<BagType> bagType = ocl::Types::TypesFactory::eInstance()->createBagType();
-            bagType->setElementType(type->getEType());
-            bagValue->setModel(bagType);
+    if(value != nullptr && !value->isEmpty())
+    {
+        if((type != nullptr)&&isMany(type))
+        {
+			try {
+				std::shared_ptr<Bag<ecore::EObject>> valueItems = value->get<std::shared_ptr<Bag<ecore::EObject>>>();
+				std::shared_ptr<BagTypeValue> bagValue = ocl::Values::ValuesFactory::eInstance()->createBagTypeValue();
+//				std::shared_ptr<BagType> bagType = ocl::Types::TypesFactory::eInstance()->createBagType();
+//				bagType->setElementType(type->getEType());
+//				bagValue->setModel(bagType);
 
-            for(size_t i = 0; i < valueItems->size(); i++) {
-                std::shared_ptr<fUML::Semantics::Values::Value> val = createValue(valueItems->at(i));
-                bagValue->addValue(val);
-            }
-            return bagValue;
+				for(size_t i = 0; i < valueItems->size(); i++) {
+					std::shared_ptr<fUML::Semantics::Values::Value> val = createValue(valueItems->at(i));
+					bagValue->addValue(val);
+				}
+				return bagValue;
+			} catch (...) { }
         }
-        else {
-            try {
-                std::shared_ptr<ecore::EObject> obj = value->get<std::shared_ptr<ecore::EObject>>();
-                return createValue(obj);
-            } catch (...) { }
-
-            try {
-                std::shared_ptr<uml::EnumerationLiteral> liter = value->get<std::shared_ptr<uml::EnumerationLiteral>>();
-                std::shared_ptr<fUML::Semantics::SimpleClassifiers::EnumerationValue> value = fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createEnumerationValue();
-                value->setLiteral(liter);
-                return value;
-            } catch (...) { }
-
-            try {
-                bool result = value->get<bool>();
-                std::shared_ptr<fUML::Semantics::SimpleClassifiers::BooleanValue> boolValue = fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createBooleanValue();
-                boolValue->setValue(result);
-                return boolValue;
-            } catch (...) { }
-            try {
-                std::string result = value->get<std::string>();
-                std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> stringValue = fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createStringValue();
-                stringValue->setValue(result);
-                return stringValue;
-            } catch (...) { }
-            try {
-                int result = value->get<int>();
-                std::shared_ptr<fUML::Semantics::SimpleClassifiers::IntegerValue> intValue = fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createIntegerValue();
-                intValue->setValue(result);
-                return intValue;
-            } catch (...) { }
-            try {
-                double result = value->get<double>();
-                std::shared_ptr<fUML::Semantics::SimpleClassifiers::RealValue> realValue = fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createRealValue();
-                realValue->setValue(result);
-                return realValue;
-            } catch (...) { }
-        }
+		else
+		{
+			try {
+				std::shared_ptr<ecore::EObject> obj = value->get<std::shared_ptr<ecore::EObject>>();
+				return createValue(obj);
+			} catch (...) { }
+			try {
+				std::shared_ptr<Bag<AnyObject>> anyObjectBag = value->get<std::shared_ptr<Bag<AnyObject>>>();
+				std::shared_ptr<ocl::Values::AnyValue> anyValue = ocl::Values::ValuesFactory::eInstance()->createAnyValue();
+				anyValue->setValue(value); // A Bag in AnyValue, can be AnyValue...
+				return anyValue;
+			} catch (...) { }
+			try {
+				bool result = value->get<bool>();
+				std::shared_ptr<fUML::Semantics::SimpleClassifiers::BooleanValue> boolValue = fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createBooleanValue();
+				boolValue->setValue(result);
+				return boolValue;
+			} catch (...) { }
+			try {
+				std::string result = value->get<std::string>();
+				std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> stringValue = fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createStringValue();
+				stringValue->setValue(result);
+				return stringValue;
+			} catch (...) { }
+			try {
+				int result = value->get<int>();
+				std::shared_ptr<fUML::Semantics::SimpleClassifiers::IntegerValue> intValue = fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createIntegerValue();
+				intValue->setValue(result);
+				return intValue;
+			} catch (...) { }
+			try {
+				double result = value->get<double>();
+				std::shared_ptr<fUML::Semantics::SimpleClassifiers::RealValue> realValue = fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createRealValue();
+				realValue->setValue(result);
+				return realValue;
+			} catch (...) { }
+			try {
+				std::shared_ptr<AnyObject> anyObject = value->get<std::shared_ptr<AnyObject>>();
+				std::shared_ptr<ocl::Values::AnyValue> anyValue = ocl::Values::ValuesFactory::eInstance()->createAnyValue();
+				anyValue->setValue(value); // A Bag in AnyValue, can be AnyValue...
+		        return anyValue;
+			} catch (...) { }
+		}
     }
-    // else create emptyValue
+    // else create emptyValue with given type
     return createValue(type);
 }
 
 std::shared_ptr<fUML::Semantics::Values::Value> OclReflection::createValue(std::shared_ptr<ecore::EStructuralFeature> type, std::shared_ptr<fUML::Semantics::Values::Value> fromValue, Level level)
 {
-    if(instanceOf<CollectionValue>(fromValue)) {
+    if(instanceOf<CollectionValue>(fromValue))
+    {
         std::shared_ptr<CollectionValue> colValue = std::dynamic_pointer_cast<CollectionValue>(fromValue);
         std::shared_ptr<BagTypeValue> bagValue = ocl::Values::ValuesFactory::eInstance()->createBagTypeValue();
-        std::shared_ptr<BagType> bagType = ocl::Types::TypesFactory::eInstance()->createBagType();
-        bagType->setElementType(type->getEType());
-        bagValue->setModel(bagType);
+//        std::shared_ptr<BagType> bagType = ocl::Types::TypesFactory::eInstance()->createBagType();
+//        bagType->setElementType(type->getEType());
+//        bagValue->setModel(bagType);
 
         for(size_t i = 0; i < colValue->getElements()->size(); i++) {
             std::shared_ptr<fUML::Semantics::Values::Value> src = colValue->getElements()->at(i)->getValue();
@@ -330,33 +346,38 @@ std::shared_ptr<fUML::Semantics::Values::Value> OclReflection::createValue(std::
         }
         return bagValue;
     }
-    else if(instanceOf<ObjectValue>(fromValue)) {
+    else if(instanceOf<ObjectValue>(fromValue))
+    {
         std::shared_ptr<ObjectValue> objValue = std::dynamic_pointer_cast<ObjectValue>(fromValue);
         std::shared_ptr<ecore::EObject> obj = objValue->getValue();
         std::shared_ptr<uml::Element> uobj = std::dynamic_pointer_cast<uml::Element>(obj);
         std::shared_ptr<AnyObject> value = nullptr;
 
-        if(level == Level::M2 && uobj != nullptr && uobj->getMetaClass() != nullptr) {
+        if(level == Level::M2 && uobj != nullptr && uobj->getMetaClass() != nullptr)
+        {
             std::shared_ptr<uml::Property> prop = lookupProperty(uobj->getMetaClass(), type->getName());
-            if(prop != nullptr) {
+            if(prop != nullptr)
+            {
                 value = uobj->get(prop);
             }
         }
-        else {
+        else
+        {
             value = obj->eGet(type);
         }
-
         return OclReflection::createValue(type, value);
     }
     else
     {// primary value not managed yet
-        if(instanceOf<fUML::Semantics::SimpleClassifiers::StringValue>(fromValue)) {
+        if(instanceOf<fUML::Semantics::SimpleClassifiers::StringValue>(fromValue))
+        {
             std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> stringValue = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::StringValue>(fromValue);
             std::string value = stringValue->getValue();
-
+            return stringValue;
         }
         return ocl::Values::ValuesFactory::eInstance()->createUndefinedValue();
     }
+    return ocl::Values::ValuesFactory::eInstance()->createUndefinedValue();
 }
 
 std::shared_ptr<fUML::Semantics::Values::Value> OclReflection::createValue(std::shared_ptr<ecore::EOperation> operation,
@@ -365,9 +386,9 @@ std::shared_ptr<fUML::Semantics::Values::Value> OclReflection::createValue(std::
     if(instanceOf<CollectionValue>(fromValue)) {
         std::shared_ptr<CollectionValue> colValue = std::dynamic_pointer_cast<CollectionValue>(fromValue);
         std::shared_ptr<BagTypeValue> bagValue = ocl::Values::ValuesFactory::eInstance()->createBagTypeValue();
-        std::shared_ptr<BagType> bagType = ocl::Types::TypesFactory::eInstance()->createBagType();
-        bagType->setElementType(operation->getEType());
-        bagValue->setModel(bagType);
+//        std::shared_ptr<BagType> bagType = ocl::Types::TypesFactory::eInstance()->createBagType();
+//        bagType->setElementType(operation->getEType());
+//        bagValue->setModel(bagType);
 
         for(size_t i = 0; i < colValue->getElements()->size(); i++) {
             std::shared_ptr<fUML::Semantics::Values::Value> src = colValue->getElements()->at(i)->getValue();
@@ -422,7 +443,12 @@ std::shared_ptr<fUML::Semantics::Values::Value> OclReflection::createValue(std::
     }
     else
     { // primary value not managed yet
-
+        if(instanceOf<fUML::Semantics::SimpleClassifiers::StringValue>(fromValue))
+        {
+            std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> stringValue = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::StringValue>(fromValue);
+            std::string value = stringValue->getValue();
+            return stringValue;
+        }
         return ocl::Values::ValuesFactory::eInstance()->createUndefinedValue();
     }
 }
