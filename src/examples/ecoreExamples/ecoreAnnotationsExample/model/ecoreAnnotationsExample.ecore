@@ -30,6 +30,7 @@
         <details key="doNotGenerate" value="This DetailsEntry indicates, that the parent operation should not be generated.&#xA;No additional information.&#xA;"/>
         <details key="implOnly" value="The DetailsEntry determines, if the operation should only be generated for the implementation files of the resulting C++-class.&#xA;That means, that will not be accessible through the interface of the class.&#xA;&#xA;No additional information."/>
         <details key="returnWeakPtr" value="This DetailsEntry determines, if the generated operation should return an std::weak_ptr instead of an std::shared_ptr (whcih is the default).&#xA;&#xA;No additional information."/>
+        <details key="cppType" value="This DetailsEntry is used to substitute the generated type of this operation&#xA;&#xA;Examples:&#xA;&#xA;&quot;long&quot;, &quot;long long&quot;, &quot;char*&quot;, &quot;std::ostream&quot;, ..."/>
       </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="This DetailsEntry is used to add documentation to an operation.&#xA;&#xA;Example:&#xA;&#xA;Prints out the names of all books as well as their auhtors of the library object."/>
@@ -86,6 +87,7 @@
         <details key="setterName" value="This DetailsEntry is used to specify the name of the setter function of this reference.&#xA;&#xA;NOTE: This is only applicable for references with multiplicity [0..1] or [1..1].&#xA;References with [*] multiplicity do not have setter functions.&#xA;&#xA;Example:&#xA;&#xA;mySpecialSetter"/>
         <details key="sharedAggregation" value="This DetailsEntry is only used to substitute the aggregation kind &quot;shared&quot; of UML in ecore.&#xA;No additional information."/>
         <details key="qualify" value="This DetailsEntry is used to add qualifiers to the generated attribute of this reference.&#xA;&#xA;Examples:&#xA;&#xA;&quot;const&quot; ; &quot;volatile&quot; ; &quot;mutable&quot; ; &quot;const volatile&quot; ; ..."/>
+        <details key="cppType" value="This DetailsEntry is used to substitute the generated type of this reference.&#xA;&#xA;Examples:&#xA;&#xA;Any external type."/>
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="pageNumber" eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//Integer">
@@ -98,6 +100,7 @@
         <details key="setterBody" value="This DetailsEntry is used to specify the body of the setter function of this attribute.&#xA;By default, the generated getter function will only set the corresponding attribute value.&#xA;This can be extended here.&#xA;&#xA;NOTE: This is only applicable for attributes with multiplicity [0..1] or [1..1].&#xA;Attributes with [*] multiplicity do not have setter functions.&#xA;&#xA;Example:&#xA;&#xA;&#x9;if(_pageNumber &lt; 0)&#xA;&#x9;{&#xA;&#x9;&#x9;std::cout&lt;&lt;&quot;Error: negative page number&quot;&lt;&lt;std::endl;&#xA;&#x9;&#x9;return;&#xA;&#x9;}&#xA;&#xA;&#x9;_pageNumber = m_pageNumber;"/>
         <details key="setterName" value="This DetailsEntry is used to specify the name of the setter function of this attribute.&#xA;&#xA;NOTE: This is only applicable for attributes with multiplicity [0..1] or [1..1].&#xA;Attributes with [*] multiplicity do not have setter functions.&#xA;&#xA;Example:&#xA;&#xA;mySpecialSetter"/>
         <details key="qualify" value="This DetailsEntry is used to add qualifiers to the generated attribute of this attribute.&#xA;&#xA;Examples:&#xA;&#xA;&quot;const&quot; ; &quot;volatile&quot; ; &quot;mutable&quot; ; &quot;const volatile&quot; ; ..."/>
+        <details key="cppType" value="This DetailsEntry is used to substitute the generated type of this attribute.&#xA;&#xA;Examples:&#xA;&#xA;&quot;long&quot; ; &quot;long long&quot; ; &quot;char*&quot; ; &quot;std::ostream&quot; ; ..."/>
       </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="This DetailsEntry is used to add documentation to an attribute.&#xA;&#xA;Example:&#xA;&#xA;Represents the page number on which the picture is depicted in the book."/>
