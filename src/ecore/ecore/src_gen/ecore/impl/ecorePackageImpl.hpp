@@ -476,12 +476,11 @@ namespace ecore
 			void initializeETypedElementContent();
 			void initializePackageEDataTypes();
 
-
-
-	
 	//prevent from hiding functions
 	using EPackageImpl::getEAnnotation;
 	using EPackageImpl::getEClassifier;
+		private:
+			std::map<std::string,int> m_idMap;
 	};
 }
 #endif /* end of include guard: ECOREPACKAGEIMPL_HPP */

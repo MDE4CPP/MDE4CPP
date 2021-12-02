@@ -132,4 +132,6 @@ namespace ecore
 			mutable std::shared_ptr<Union<ecore::EObject>> m_eContentUnion;
 	};
 }
+	Any eAny(std::shared_ptr<ecore::EObject> value);
+	Any eAny(std::shared_ptr<Bag<ecore::EObject>> value);
 #endif /* end of include guard: ECORE_EOBJECT_HPP */

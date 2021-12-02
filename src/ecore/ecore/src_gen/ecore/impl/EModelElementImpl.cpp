@@ -298,12 +298,10 @@ void EModelElementImpl::saveContent(std::shared_ptr<persistence::interfaces::XSa
 	}
 }
 
-
 std::shared_ptr<EClass> EModelElementImpl::eStaticClass() const
 {
 	return ecore::ecorePackage::eInstance()->getEModelElement_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -322,7 +320,7 @@ Any EModelElementImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //373			
+			return eAny(tempList,ecore::ecorePackage::EOBJECT_CLASS,true); //373			
 		}
 	}
 	return EObjectImpl::eGet(featureID, resolve, coreType);
@@ -401,7 +399,7 @@ Any EModelElementImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> 
 			std::string incoming_param_source;
 			std::list<Any>::const_iterator incoming_param_source_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_source = (*incoming_param_source_arguments_citer)->get<std::string >();
-			result = eAny(this->getEAnnotation(incoming_param_source));
+				result = eAny(this->getEAnnotation(incoming_param_source));
 			break;
 		}
 
@@ -418,7 +416,6 @@ Any EModelElementImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> 
 	return result;
 }
 
-
 std::shared_ptr<ecore::EModelElement> EModelElementImpl::getThisEModelElementPtr() const
 {
 	return m_thisEModelElementPtr.lock();
@@ -428,3 +425,5 @@ void EModelElementImpl::setThisEModelElementPtr(std::weak_ptr<ecore::EModelEleme
 	m_thisEModelElementPtr = thisEModelElementPtr;
 	setThisEObjectPtr(thisEModelElementPtr);
 }
+
+
