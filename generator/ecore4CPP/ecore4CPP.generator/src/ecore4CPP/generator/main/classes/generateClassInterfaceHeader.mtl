@@ -203,6 +203,10 @@ namespace [anEClass.generateNamespaceDefinition()/]
 			[/for]	
 	};
 }
+[if (anEClass.name ='EObject')] [comment simple use of Any for EObject & Bag<EObject>/]
+	Any eAny(std::shared_ptr<ecore::EObject> value);
+	Any eAny(std::shared_ptr<Bag<ecore::EObject>> value);
+[/if]
 [endGuard(anEClass)/]
 [/file]
 [/template]
