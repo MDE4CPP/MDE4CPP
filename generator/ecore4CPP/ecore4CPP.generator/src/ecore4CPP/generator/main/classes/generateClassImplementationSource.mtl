@@ -203,9 +203,9 @@ using namespace [anEClass.generateNamespaceDefinition()/];
 	[att.generateStructuralFeatureType(true)/] [att.name/]List = obj.[att.GetterName()/]();
 	if([att.name/]List)
 	{	
-		[att.GetterName()/]().reset(new Bag<[att.eType.generateType()/]>());
-		Bag<[att.eType.generateType()/]>::iterator [att.name/]Iter = [att.name/]List->begin();
-		Bag<[att.eType.generateType()/]>::iterator [att.name/]End = [att.name/]List->end();
+		[att.GetterName()/]().reset(new Bag<[att.eType.generateType(false)/]>());
+		Bag<[att.eType.generateType(false)/]>::iterator [att.name/]Iter = [att.name/]List->begin();
+		Bag<[att.eType.generateType(false)/]>::iterator [att.name/]End = [att.name/]List->end();
 		while ([att.name/]Iter != [att.name/]End) 
 		{
 			[att.GetterName()/]()->push_back(*[att.name/]Iter);
@@ -288,11 +288,11 @@ using namespace [anEClass.generateNamespaceDefinition()/];
 		[ref.generateReferenceInit()/]
 		[ref.InitReferences()/]
 
-		Bag<[ref.eType.generateType()/]>::iterator [ref.name/]Iter = [ref.name/]List->begin();
-		Bag<[ref.eType.generateType()/]>::iterator [ref.name/]End = [ref.name/]List->end();
+		Bag<[ref.eType.generateType(false)/]>::iterator [ref.name/]Iter = [ref.name/]List->begin();
+		Bag<[ref.eType.generateType(false)/]>::iterator [ref.name/]End = [ref.name/]List->end();
 		while ([ref.name/]Iter != [ref.name/]End) 
 		{
-			std::shared_ptr<[ref.eType.generateType()/]> temp = std::dynamic_pointer_cast<[ref.eType.generateType()/]>((*[ref.name/]Iter)->copy());
+			std::shared_ptr<[ref.eType.generateType(false)/]> temp = std::dynamic_pointer_cast<[ref.eType.generateType(false)/]>((*[ref.name/]Iter)->copy());
 			[ref.GetterName()/]()->push_back(temp);
 			[ref.name/]Iter++;
 		}
@@ -343,7 +343,7 @@ using namespace [anEClass.generateNamespaceDefinition()/];
 		[else]
 	if(obj.[ref.GetterName()/]()!=nullptr)
 	{
-		m_[ref.name/] = std::dynamic_pointer_cast<[ref.eType.generateType()/]>(obj.[ref.GetterName()/]()->copy());
+		m_[ref.name/] = std::dynamic_pointer_cast<[ref.eType.generateType(false)/]>(obj.[ref.GetterName()/]()->copy());
 	}
 		[/if]
 	[elseif (ref.eType.eTypeParameters->size()>0) ]

@@ -123,48 +123,52 @@ void [aClass.name.concat('Impl')/]::loadAttributes(std::shared_ptr<[generatePers
 		iter = attr_list.find("[aAttribute.name/]");
 		if ( iter != attr_list.end() )
 		{
-		  [if (generateType(aAttribute.eType) = 'bool')]
+		[if (aAttribute.hasKey(keyCPPType()))]
+			// this attribute is a '[aAttribute.valueKey(keyCPPType())/]'
+			[aAttribute.valueKey(keyCPPType())/] value;
+			std::istringstream(iter->second) >> value;
+		[elseif (generateType(aAttribute.eType, false) = 'bool')]
 			// this attribute is a 'bool'
 			bool value;
 			std::istringstream(iter->second) >> std::boolalpha >> value;
-		  [elseif ((generateType(aAttribute.eType) = 'int'))]
+		[elseif ((generateType(aAttribute.eType, false) = 'int'))]
 			// this attribute is a 'int'
 			int value;
-			std::istringstream ( iter->second ) >> value;
- 		  [elseif ((generateType(aAttribute.eType) = 'unlimitedNatural'))]
+			std::istringstream(iter->second) >> value;
+		[elseif ((generateType(aAttribute.eType, false) = 'unlimitedNatural'))]
 			// this attribute is a 'int'
 			int value;
-			std::istringstream ( iter->second ) >> value;
-		  [elseif ((generateType(aAttribute.eType) = 'long'))]
+			std::istringstream(iter->second) >> value;
+		[elseif ((generateType(aAttribute.eType, false) = 'long'))]
 			// this attribute is a 'long'
 			long value;
-			std::istringstream ( iter->second ) >> value;
-		  [elseif ((generateType(aAttribute.eType) = 'float'))]
+			std::istringstream(iter->second) >> value;
+		[elseif ((generateType(aAttribute.eType, false) = 'float'))]
 			// this attribute is a 'float'
 			float value;
-			std::istringstream ( iter->second ) >> value;
-		  [elseif ((generateType(aAttribute.eType) = 'double'))]
+			std::istringstream(iter->second) >> value;
+		[elseif ((generateType(aAttribute.eType, false) = 'double'))]
 			// this attribute is a 'double'
 			double value;
-			std::istringstream ( iter->second ) >> value;
-		  [elseif ((generateType(aAttribute.eType) = 'char'))]
+			std::istringstream(iter->second) >> value;
+		[elseif ((generateType(aAttribute.eType, false) = 'char'))]
 			// this attribute is a 'char'
 			char value;
-			std::istringstream ( iter->second ) >> value;
-		  [elseif ((generateType(aAttribute.eType) = 'std::string'))]
+			std::istringstream(iter->second) >> value;
+		[elseif ((generateType(aAttribute.eType, false) = 'std::string'))]
 			// this attribute is a 'std::string'
 			std::string value;
 			value = iter->second;
-		  [elseif (aAttribute.eType.oclIsKindOf(EEnum))]
+		[elseif (aAttribute.eType.oclIsKindOf(EEnum))]
 			[aAttribute.generateStructuralFeatureType(true)/] value [aAttribute.generateDefaultValue()/];
 			std::string literal = iter->second;
-[for (aLiteral : EEnumLiteral | aAttribute.eType.oclAsType(EEnum).eLiterals->reject(doNotGenerateEEnumLiteral())) before ('\t\t\t') separator ('\t\t\telse ')]
-if (literal == "[aLiteral.name/]")
+			[for (aLiteral : EEnumLiteral | aAttribute.eType.oclAsType(EEnum).eLiterals->reject(doNotGenerateEEnumLiteral())) before ('\t\t\t') separator ('\t\t\telse ')]
+			if (literal == "[aLiteral.name/]")
 			{
 				value = [aAttribute.eType.generateNamespaceDefinition()/]::[aAttribute.eType.name/]::[aLiteral.name.toUpperCase()/];
 			}
-[/for]
-		  [else]
+			[/for]
+		[else]
 			// TODO this attribute has a non handle type
 			std::cout << "| ERROR    | " << __PRETTY_FUNCTION__ << " handle type of '[aAttribute.name/]'" << " [aAttribute.eType/]" << std::endl; 
 			[aAttribute.generateStructuralFeatureType(true)/] value; [/if]
@@ -280,7 +284,7 @@ void [aClass.name.concat('Impl')/]::loadNode(std::string nodeName, std::shared_p
 			[/for]
 			[else]
 
-			std::shared_ptr<[aReference.eType.generateType()/]> [aReference.name/] = std::dynamic_pointer_cast<[aReference.eType.generateType()/]>([if (aEClass.getRootPackage() = aClass.getRootPackage())]modelFactory[else][aEClass.getRootPackage().name/][getPackageAccess(aEClass, true)/]::[aEClass.ePackage.name/]Factory::eInstance()[/if]->create(typeName));
+			std::shared_ptr<[aReference.eType.generateType(false)/]> [aReference.name/] = std::dynamic_pointer_cast<[aReference.eType.generateType(false)/]>([if (aEClass.getRootPackage() = aClass.getRootPackage())]modelFactory[else][aEClass.getRootPackage().name/][getPackageAccess(aEClass, true)/]::[aEClass.ePackage.name/]Factory::eInstance()[/if]->create(typeName));
 
 			[/if]
 			if ([aReference.name/] != nullptr)
@@ -425,7 +429,7 @@ void [aClass.name.concat('Impl')/]::saveContent(std::shared_ptr<[generatePersist
 			saveHandler->addReference([aReference.name/], "[aReference.name/]", [aReference.name/]->eClass() != package->get[aReference.eType.getMemberNameUpperFirst()/]());
 		}
 		[else]
-		for (std::shared_ptr<[aReference.eType.generateType()/]> [aReference.name/] : *this->[aReference.GetterName()/]()) 
+		for ([aReference.eType.generateType(true)/] [aReference.name/] : *this->[aReference.GetterName()/]()) 
 		{
 			saveHandler->addReference([aReference.name/], "[aReference.name/]", [aReference.name/]->eClass() != package->get[aReference.eType.getMemberNameUpperFirst()/]());
 		}

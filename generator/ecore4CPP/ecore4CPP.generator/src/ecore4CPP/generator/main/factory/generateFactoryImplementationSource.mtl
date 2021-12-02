@@ -174,7 +174,7 @@ std::shared_ptr<[needNamespace(anEPackage, 'EObject')/]> [className/]::create(co
 				[elseif(ref->size()=1)]
 				std::shared_ptr<[ref->first().eContainingClass.generateTypeClass()/]> castedContainer = std::dynamic_pointer_cast<[ref->first().eContainingClass.generateTypeClass(false)/]>(container);
 				assert(castedContainer);
-				return std::shared_ptr<[aClass.generateType()/]>(this->create[aClass.name/]_as_[ref->first().name/]_in_[ref->first().eContainingClass.name.toUpperFirst()/](castedContainer,metaElementID));
+				return [aClass.generateType(true)/](this->create[aClass.name/]_as_[ref->first().name/]_in_[ref->first().eContainingClass.name.toUpperFirst()/](castedContainer,metaElementID));
 				[/if]
 			[if(ref->size()>0)]}[/if]
 			break;

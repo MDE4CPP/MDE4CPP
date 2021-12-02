@@ -50,12 +50,13 @@
 
 [template public generateGenericType(anEDataType : EGenericType, pointer:Boolean) post(trim())]
 [if (anEDataType.eClassifier.name = 'EJavaClass')] [anEDataType.eClassifier.transformType()/] 
-[else][anEDataType.eClassifier.transformType()/] <[for (g : EGenericType | anEDataType.eTypeArguments) separator(',')] [if (not (g.eClassifier.oclIsUndefined()) and (g.eClassifier.oclIsKindOf(ecore::EDataType)))][g.eClassifier.generateType()/][else][if (pointer)]std::shared_ptr<[/if][g.eClassifier.generateType()/][if (pointer)]>[/if][/if][/for]>[/if]
+[else][anEDataType.eClassifier.transformType()/] <[for (g : EGenericType | anEDataType.eTypeArguments) separator(',')] [if (not (g.eClassifier.oclIsUndefined()) and (g.eClassifier.oclIsKindOf(ecore::EDataType)))][g.eClassifier.generateType(false)/][else][g.eClassifier.generateType(pointer)/][/if][/for]>[/if]
 [/template]
 
-[template public generateType(anEDataType : EClassifier) post(trim())]
-[if (anEDataType.oclIsUndefined())]Any
-[else][anEDataType.transformType()/]
+[template public generateType(anEClassifier : EClassifier, pointer : Boolean) post(trim())]
+[if (anEClassifier.hasKey(keyCPPType()))][anEClassifier.valueKey(keyCPPType())/]
+[elseif (anEClassifier.oclIsUndefined())]Any
+[else][if (pointer)]std::shared_ptr<[/if][anEClassifier.transformType()/][if (pointer)]>[/if]
 [/if]
 [/template]
 
