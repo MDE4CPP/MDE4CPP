@@ -106,7 +106,6 @@ namespace [anEPackage.generateNamespaceDefinition()/]
 		public:
 			void createPackageContents(std::shared_ptr<ecore::EPackage> package);
 			void initializePackageContents();
-			virtual long long findTypeID(std::string _className);
 
 		private:
 [for (aClass : EClass | anEPackage.eClassifiers->selectByKind(EClass)->reject(doNotGenerateEClassifier())->asOrderedSet()->sortedBy(name))]

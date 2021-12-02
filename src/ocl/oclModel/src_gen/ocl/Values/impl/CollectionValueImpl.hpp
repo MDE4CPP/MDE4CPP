@@ -56,6 +56,8 @@ namespace ocl::Values
 			// Reference Getters & Setters
 			//*********************************
 			virtual std::shared_ptr<Bag<ocl::Values::Element>> getElements() const ;
+			virtual std::shared_ptr<ocl::Types::CollectionType> getModel() const ;
+			virtual void setModel(std::shared_ptr<ocl::Types::CollectionType>) ;
 			
 			//*********************************
 			// Union Reference Getters

@@ -241,10 +241,12 @@ void ENamedElementImpl::saveContent(std::shared_ptr<persistence::interfaces::XSa
 	}
 }
 
+
 std::shared_ptr<EClass> ENamedElementImpl::eStaticClass() const
 {
 	return ecore::ecorePackage::eInstance()->getENamedElement_Class();
 }
+
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -254,7 +256,7 @@ Any ENamedElementImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case ecore::ecorePackage::ENAMEDELEMENT_ATTRIBUTE_NAME:
-				return eAny(getName(),0,true); //384
+			return eAny(getName()); //384
 	}
 	return EModelElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -308,6 +310,7 @@ Any ENamedElementImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> 
 	return result;
 }
 
+
 std::shared_ptr<ecore::ENamedElement> ENamedElementImpl::getThisENamedElementPtr() const
 {
 	return m_thisENamedElementPtr.lock();
@@ -317,5 +320,3 @@ void ENamedElementImpl::setThisENamedElementPtr(std::weak_ptr<ecore::ENamedEleme
 	m_thisENamedElementPtr = thisENamedElementPtr;
 	setThisEModelElementPtr(thisENamedElementPtr);
 }
-
-

@@ -26,39 +26,11 @@ bool ecorePackageImpl::isInited = false;
 
 ecorePackageImpl::ecorePackageImpl()
 {
-	m_idMap.insert(std::make_pair("EAnnotation", ecorePackage::EANNOTATION_CLASS));
-	m_idMap.insert(std::make_pair("EAttribute", ecorePackage::EATTRIBUTE_CLASS));
-	m_idMap.insert(std::make_pair("EClass", ecorePackage::ECLASS_CLASS));
-	m_idMap.insert(std::make_pair("EDataType", ecorePackage::EDATATYPE_CLASS));
-	m_idMap.insert(std::make_pair("EEnum", ecorePackage::EENUM_CLASS));
-	m_idMap.insert(std::make_pair("EEnumLiteral", ecorePackage::EENUMLITERAL_CLASS));
-	m_idMap.insert(std::make_pair("EFactory", ecorePackage::EFACTORY_CLASS));
-	m_idMap.insert(std::make_pair("EGenericType", ecorePackage::EGENERICTYPE_CLASS));
-	m_idMap.insert(std::make_pair("EObject", ecorePackage::EOBJECT_CLASS));
-	m_idMap.insert(std::make_pair("EObjectContainer", ecorePackage::EOBJECTCONTAINER_CLASS));
-	m_idMap.insert(std::make_pair("EOperation", ecorePackage::EOPERATION_CLASS));
-	m_idMap.insert(std::make_pair("EPackage", ecorePackage::EPACKAGE_CLASS));
-	m_idMap.insert(std::make_pair("EParameter", ecorePackage::EPARAMETER_CLASS));
-	m_idMap.insert(std::make_pair("EReference", ecorePackage::EREFERENCE_CLASS));
-	m_idMap.insert(std::make_pair("EStringToStringMapEntry", ecorePackage::ESTRINGTOSTRINGMAPENTRY_CLASS));
-	m_idMap.insert(std::make_pair("ETypeParameter", ecorePackage::ETYPEPARAMETER_CLASS));
-
 	setEFactoryInstance(std::shared_ptr<ecore::EFactory >( ecoreFactory::eInstance()));
 }
 
 ecorePackageImpl::~ecorePackageImpl()
 {
-}
-
-long long ecorePackage::getTypeID(std::string _className)
-{
-	auto iter = m_idMap.find(_className);
-	if(iter != m_idMap.end())
-    {
-		//get the ID
-        return iter->second;
-    }
-    return 0;
 }
 
 ecorePackage* ecorePackageImpl::create()
@@ -82,59 +54,6 @@ void ecorePackageImpl::init(std::shared_ptr<ecore::EPackage> package)
     initializePackageContents();   
 }
 
-template <class T> T getAny(Any value)
-{
-	if(value.isContainer())
-	{
-
-	}
-	else
-	{
-		switch value.getTypeId()
-		{
-			case::EATTRIBUTE_CLASS:
-			{
-				std::shared_ptr<ecore::EAttribute> aValue = value->get<std::shared_ptr<ecore::EAttribute>>();
-				return dynamic_pointer_cast<T>(aValue);
-			}
-		}
-	}
-		long long getTypeId()
-		{
-			return m_typeID;
-		}
-
-		bool isContainer()
-		{
-			return m_isContainer;
-		}
-}
-
-template <class T> T getAny(Any value)
-{
-	if(value.isContainer())
-	{
-
-	}
-	else
-	{
-		switch (value.getTypeId())
-		{
-		case
-
-		std::shared_ptr<ecore::EObject> eobj = value->get<std::shared_ptr<ecore::EObject>>();
-		}
-	}
-		long long getTypeId()
-		{
-			return m_typeID;
-		}
-
-		bool isContainer()
-		{
-			return m_isContainer;
-		}
-}
 
 
 // Begin Class EAnnotation

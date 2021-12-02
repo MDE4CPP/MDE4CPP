@@ -102,6 +102,12 @@ AnyTypeImpl& AnyTypeImpl::operator=(const AnyTypeImpl & obj)
 
 	//copy references with no containment (soft copy)
 	//Clone references with containment (deep copy)
+	//clone reference 'object'
+	if(obj.getObject()!=nullptr)
+	{
+		m_object = std::dynamic_pointer_cast<ecore::EClassifier>(obj.getObject()->copy());
+	}
+	
 	return *this;
 }
 
@@ -124,6 +130,16 @@ std::shared_ptr<ecore::EObject> AnyTypeImpl::copy() const
 //*********************************
 // Reference Getters & Setters
 //*********************************
+/* Getter & Setter for reference object */
+std::shared_ptr<ecore::EClassifier> AnyTypeImpl::getObject() const
+{
+    return m_object;
+}
+void AnyTypeImpl::setObject(std::shared_ptr<ecore::EClassifier> _object)
+{
+    m_object = _object;
+	
+}
 
 //*********************************
 // Union Getter
@@ -169,6 +185,29 @@ void AnyTypeImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadH
 void AnyTypeImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
 
+	try
+	{
+		if ( nodeName.compare("object") == 0 )
+		{
+  			std::string typeName = loadHandler->getCurrentXSITypeName();
+			if (typeName.empty())
+			{
+				std::cout << "| WARNING    | type if an eClassifiers node it empty" << std::endl;
+				return; // no type name given and reference type is abstract
+			}
+			loadHandler->handleChild(this->getObject());
+
+			return; 
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
 	//load BasePackage Nodes
 	ecore::EClassifierImpl::loadNode(nodeName, loadHandler);
 }
@@ -196,6 +235,13 @@ void AnyTypeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHand
 	try
 	{
 		std::shared_ptr<ocl::Types::TypesPackage> package = ocl::Types::TypesPackage::eInstance();
+		//
+		// Add new tags (from references)
+		//
+		std::shared_ptr<ecore::EClass> metaClass = this->eClass();
+		// Save 'object'
+
+		saveHandler->addReference(this->getObject(), "object", getObject()->eClass() != ecore::ecorePackage::eInstance()->getEClassifier_Class());
 	}
 	catch (std::exception& e)
 	{
@@ -217,6 +263,11 @@ Any AnyTypeImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
+		case ocl::Types::TypesPackage::ANYTYPE_ATTRIBUTE_OBJECT:
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getObject();
+				return eAny(returnValue); //18
+			}
 	}
 	return ecore::EClassifierImpl::eGet(featureID, resolve, coreType);
 }
@@ -225,6 +276,8 @@ bool AnyTypeImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
+		case ocl::Types::TypesPackage::ANYTYPE_ATTRIBUTE_OBJECT:
+			return getObject() != nullptr; //18
 	}
 	return ecore::EClassifierImpl::internalEIsSet(featureID);
 }
@@ -233,6 +286,14 @@ bool AnyTypeImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
+		case ocl::Types::TypesPackage::ANYTYPE_ATTRIBUTE_OBJECT:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<ecore::EClassifier> _object = std::dynamic_pointer_cast<ecore::EClassifier>(_temp);
+			setObject(_object); //18
+			return true;
+		}
 	}
 
 	return ecore::EClassifierImpl::eSet(featureID, newValue);

@@ -32,6 +32,10 @@ namespace ocl
 }
 
 //Forward Declaration for used types 
+namespace ocl::Types 
+{
+	class CollectionType;
+}
 namespace ocl::Values 
 {
 	class Element;

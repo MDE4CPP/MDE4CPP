@@ -361,10 +361,12 @@ void EEnumImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandle
 	}
 }
 
+
 std::shared_ptr<EClass> EEnumImpl::eStaticClass() const
 {
 	return ecore::ecorePackage::eInstance()->getEEnum_Class();
 }
+
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -383,7 +385,7 @@ Any EEnumImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList,ecore::ecorePackage::EOBJECT_CLASS,true); //2012			
+			return eAny(tempList); //2012			
 		}
 	}
 	return EDataTypeImpl::eGet(featureID, resolve, coreType);
@@ -462,7 +464,7 @@ Any EEnumImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argument
 			std::string incoming_param_name;
 			std::list<Any>::const_iterator incoming_param_name_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_name = (*incoming_param_name_arguments_citer)->get<std::string >();
-				result = eAny(this->getEEnumLiteral(incoming_param_name));
+			result = eAny(this->getEEnumLiteral(incoming_param_name));
 			break;
 		}
 		
@@ -474,7 +476,7 @@ Any EEnumImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argument
 			int incoming_param_value;
 			std::list<Any>::const_iterator incoming_param_value_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_value = (*incoming_param_value_arguments_citer)->get<int >();
-				result = eAny(this->getEEnumLiteral(incoming_param_value));
+			result = eAny(this->getEEnumLiteral(incoming_param_value));
 			break;
 		}
 		
@@ -486,7 +488,7 @@ Any EEnumImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argument
 			std::string incoming_param_literal;
 			std::list<Any>::const_iterator incoming_param_literal_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_literal = (*incoming_param_literal_arguments_citer)->get<std::string >();
-				result = eAny(this->getEEnumLiteralByLiteral(incoming_param_literal));
+			result = eAny(this->getEEnumLiteralByLiteral(incoming_param_literal));
 			break;
 		}
 
@@ -503,6 +505,7 @@ Any EEnumImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argument
 	return result;
 }
 
+
 std::shared_ptr<ecore::EEnum> EEnumImpl::getThisEEnumPtr() const
 {
 	return m_thisEEnumPtr.lock();
@@ -512,5 +515,3 @@ void EEnumImpl::setThisEEnumPtr(std::weak_ptr<ecore::EEnum> thisEEnumPtr)
 	m_thisEEnumPtr = thisEEnumPtr;
 	setThisEDataTypePtr(thisEEnumPtr);
 }
-
-

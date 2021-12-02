@@ -45,14 +45,13 @@ namespace types
 			virtual std::shared_ptr<ecore::EDataType> getReal_Class() const ;
 			virtual std::shared_ptr<ecore::EDataType> getString_Class() const ;
 			virtual std::shared_ptr<ecore::EDataType> getUnlimitedNatural_Class() const ;
-			virtual std::shared_ptr<ecore::EDataType> getAny_Class() const ;
 			
 			// SubPackages Getters
 			
 
 		private:
 			
-			std::shared_ptr<ecore::EDataType> m_any_Class = nullptr;std::shared_ptr<ecore::EDataType> m_boolean_Class = nullptr;std::shared_ptr<ecore::EDataType> m_integer_Class = nullptr;std::shared_ptr<ecore::EDataType> m_real_Class = nullptr;std::shared_ptr<ecore::EDataType> m_string_Class = nullptr;std::shared_ptr<ecore::EDataType> m_unlimitedNatural_Class = nullptr;
+			std::shared_ptr<ecore::EDataType> m_boolean_Class = nullptr;std::shared_ptr<ecore::EDataType> m_integer_Class = nullptr;std::shared_ptr<ecore::EDataType> m_real_Class = nullptr;std::shared_ptr<ecore::EDataType> m_string_Class = nullptr;std::shared_ptr<ecore::EDataType> m_unlimitedNatural_Class = nullptr;
 			
 			
 			

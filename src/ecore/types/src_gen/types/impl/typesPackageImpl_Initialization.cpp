@@ -42,8 +42,6 @@ void typesPackageImpl::initializePackageContents()
 
 void typesPackageImpl::initializePackageEDataTypes()
 {
-	m_any_Class->setName("Any");
-	m_any_Class->setSerializable(true);
 	m_boolean_Class->setName("Boolean");
 	m_boolean_Class->setSerializable(true);
 	m_integer_Class->setName("Integer");

@@ -33,6 +33,10 @@ namespace ocl
 }
 
 //Forward Declaration for used types 
+namespace ocl::Types 
+{
+	class CollectionType;
+}
 namespace ocl::Values 
 {
 	class Element;
@@ -81,6 +85,8 @@ namespace ocl::Values
 			// Reference Getters & Setters
 			//*********************************
 			virtual std::shared_ptr<Bag<ocl::Values::Element>> getElements() const = 0;
+			virtual std::shared_ptr<ocl::Types::CollectionType> getModel() const = 0;
+			virtual void setModel(std::shared_ptr<ocl::Types::CollectionType>) = 0;
 
 			//*********************************
 			// Union Reference Getters
@@ -107,6 +113,7 @@ namespace ocl::Values
 			// Reference Members
 			//*********************************
 			mutable std::shared_ptr<Bag<ocl::Values::Element>> m_elements;
+			std::shared_ptr<ocl::Types::CollectionType> m_model;
 	};
 }
 #endif /* end of include guard: OCL_VALUES_COLLECTIONVALUE_HPP */
