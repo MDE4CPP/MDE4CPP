@@ -386,7 +386,7 @@ bool EModelElementImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any EModelElementImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any EModelElementImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -399,8 +399,8 @@ Any EModelElementImpl::eInvoke(int operationID, std::shared_ptr<std::list < std:
 			//Retrieve input parameter 'source'
 			//parameter 0
 			std::string incoming_param_source;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_source_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_source = (*incoming_param_source_arguments_citer)->get()->get<std::string >();
+			std::list<Any>::const_iterator incoming_param_source_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_source = (*incoming_param_source_arguments_citer)->get<std::string >();
 			result = eAny(this->getEAnnotation(incoming_param_source));
 			break;
 		}

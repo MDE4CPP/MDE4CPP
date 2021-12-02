@@ -449,7 +449,7 @@ bool EEnumImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any EEnumImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any EEnumImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -462,8 +462,8 @@ Any EEnumImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_
 			//Retrieve input parameter 'name'
 			//parameter 0
 			std::string incoming_param_name;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_name_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_name = (*incoming_param_name_arguments_citer)->get()->get<std::string >();
+			std::list<Any>::const_iterator incoming_param_name_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_name = (*incoming_param_name_arguments_citer)->get<std::string >();
 			result = eAny(this->getEEnumLiteral(incoming_param_name));
 			break;
 		}
@@ -474,8 +474,8 @@ Any EEnumImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_
 			//Retrieve input parameter 'value'
 			//parameter 0
 			int incoming_param_value;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_value_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_value = (*incoming_param_value_arguments_citer)->get()->get<int >();
+			std::list<Any>::const_iterator incoming_param_value_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_value = (*incoming_param_value_arguments_citer)->get<int >();
 			result = eAny(this->getEEnumLiteral(incoming_param_value));
 			break;
 		}
@@ -486,8 +486,8 @@ Any EEnumImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_
 			//Retrieve input parameter 'literal'
 			//parameter 0
 			std::string incoming_param_literal;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_literal_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_literal = (*incoming_param_literal_arguments_citer)->get()->get<std::string >();
+			std::list<Any>::const_iterator incoming_param_literal_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_literal = (*incoming_param_literal_arguments_citer)->get<std::string >();
 			result = eAny(this->getEEnumLiteralByLiteral(incoming_param_literal));
 			break;
 		}

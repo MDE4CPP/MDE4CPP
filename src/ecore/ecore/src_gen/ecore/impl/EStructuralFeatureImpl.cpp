@@ -324,7 +324,7 @@ void EStructuralFeatureImpl::loadAttributes(std::shared_ptr<persistence::interfa
 		{
 			// this attribute is a 'int'
 			int value;
-			std::istringstream ( iter->second ) >> value;
+			std::istringstream(iter->second) >> value;
 			this->setFeatureID(value);
 		}
 
@@ -567,7 +567,7 @@ bool EStructuralFeatureImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any EStructuralFeatureImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any EStructuralFeatureImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 

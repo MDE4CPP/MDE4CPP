@@ -593,7 +593,7 @@ bool EGenericTypeImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any EGenericTypeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any EGenericTypeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -606,8 +606,8 @@ Any EGenericTypeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::
 			//Retrieve input parameter 'object'
 			//parameter 0
 			Any incoming_param_object;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_object_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_object = (*incoming_param_object_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_object_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_object = (*incoming_param_object_arguments_citer)->get<Any >();
 			result = eAny(this->isInstance(incoming_param_object));
 			break;
 		}

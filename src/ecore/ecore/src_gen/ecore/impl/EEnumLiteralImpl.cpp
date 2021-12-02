@@ -245,7 +245,7 @@ void EEnumLiteralImpl::loadAttributes(std::shared_ptr<persistence::interfaces::X
 		{
 			// this attribute is a 'int'
 			int value;
-			std::istringstream ( iter->second ) >> value;
+			std::istringstream(iter->second) >> value;
 			this->setValue(value);
 		}
 	}
@@ -386,7 +386,7 @@ bool EEnumLiteralImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any EEnumLiteralImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any EEnumLiteralImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 

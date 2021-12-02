@@ -270,7 +270,7 @@ void ETypedElementImpl::loadAttributes(std::shared_ptr<persistence::interfaces::
 		{
 			// this attribute is a 'int'
 			int value;
-			std::istringstream ( iter->second ) >> value;
+			std::istringstream(iter->second) >> value;
 			this->setLowerBound(value);
 		}
 
@@ -297,7 +297,7 @@ void ETypedElementImpl::loadAttributes(std::shared_ptr<persistence::interfaces::
 		{
 			// this attribute is a 'int'
 			int value;
-			std::istringstream ( iter->second ) >> value;
+			std::istringstream(iter->second) >> value;
 			this->setUpperBound(value);
 		}
 		std::shared_ptr<EClass> metaClass = this->eClass(); // get MetaClass
@@ -549,7 +549,7 @@ bool ETypedElementImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ETypedElementImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any ETypedElementImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 

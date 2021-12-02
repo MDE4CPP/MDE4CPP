@@ -332,7 +332,7 @@ bool EFactoryImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any EFactoryImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any EFactoryImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -345,13 +345,13 @@ Any EFactoryImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shar
 			//Retrieve input parameter 'eDataType'
 			//parameter 0
 			std::shared_ptr<ecore::EDataType> incoming_param_eDataType;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_eDataType_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_eDataType = (*incoming_param_eDataType_arguments_citer)->get()->get<std::shared_ptr<ecore::EDataType> >();
+			std::list<Any>::const_iterator incoming_param_eDataType_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_eDataType = (*incoming_param_eDataType_arguments_citer)->get<std::shared_ptr<ecore::EDataType> >();
 			//Retrieve input parameter 'instanceValue'
 			//parameter 1
 			Any incoming_param_instanceValue;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_instanceValue_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_instanceValue = (*incoming_param_instanceValue_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_instanceValue_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_instanceValue = (*incoming_param_instanceValue_arguments_citer)->get<Any >();
 			result = eAny(this->convertToString(incoming_param_eDataType,incoming_param_instanceValue));
 			break;
 		}
@@ -362,8 +362,8 @@ Any EFactoryImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shar
 			//Retrieve input parameter 'eClass'
 			//parameter 0
 			std::shared_ptr<ecore::EClass> incoming_param_eClass;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_eClass_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_eClass = (*incoming_param_eClass_arguments_citer)->get()->get<std::shared_ptr<ecore::EClass> >();
+			std::list<Any>::const_iterator incoming_param_eClass_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_eClass = (*incoming_param_eClass_arguments_citer)->get<std::shared_ptr<ecore::EClass> >();
 			result = eAny(this->create(incoming_param_eClass));
 			break;
 		}
@@ -374,13 +374,13 @@ Any EFactoryImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shar
 			//Retrieve input parameter 'eDataType'
 			//parameter 0
 			std::shared_ptr<ecore::EDataType> incoming_param_eDataType;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_eDataType_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_eDataType = (*incoming_param_eDataType_arguments_citer)->get()->get<std::shared_ptr<ecore::EDataType> >();
+			std::list<Any>::const_iterator incoming_param_eDataType_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_eDataType = (*incoming_param_eDataType_arguments_citer)->get<std::shared_ptr<ecore::EDataType> >();
 			//Retrieve input parameter 'literalValue'
 			//parameter 1
 			std::string incoming_param_literalValue;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_literalValue_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_literalValue = (*incoming_param_literalValue_arguments_citer)->get()->get<std::string >();
+			std::list<Any>::const_iterator incoming_param_literalValue_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_literalValue = (*incoming_param_literalValue_arguments_citer)->get<std::string >();
 			result = eAny(this->createFromString(incoming_param_eDataType,incoming_param_literalValue));
 			break;
 		}

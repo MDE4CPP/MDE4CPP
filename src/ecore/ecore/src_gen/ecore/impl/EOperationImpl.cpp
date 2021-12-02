@@ -398,7 +398,7 @@ void EOperationImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLo
 		{
 			// this attribute is a 'int'
 			int value;
-			std::istringstream ( iter->second ) >> value;
+			std::istringstream(iter->second) >> value;
 			this->setOperationID(value);
 		}
 		std::shared_ptr<EClass> metaClass = this->eClass(); // get MetaClass
@@ -794,7 +794,7 @@ bool EOperationImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any EOperationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any EOperationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -807,8 +807,8 @@ Any EOperationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sh
 			//Retrieve input parameter 'someOperation'
 			//parameter 0
 			std::shared_ptr<ecore::EOperation> incoming_param_someOperation;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_someOperation_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_someOperation = (*incoming_param_someOperation_arguments_citer)->get()->get<std::shared_ptr<ecore::EOperation> >();
+			std::list<Any>::const_iterator incoming_param_someOperation_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_someOperation = (*incoming_param_someOperation_arguments_citer)->get<std::shared_ptr<ecore::EOperation> >();
 			result = eAny(this->isOverrideOf(incoming_param_someOperation));
 			break;
 		}

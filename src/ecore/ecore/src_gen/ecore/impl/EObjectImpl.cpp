@@ -232,7 +232,7 @@ Any EObjectImpl::eGet(std::shared_ptr<ecore::EStructuralFeature> feature,bool re
 	//end of body
 }
 
-Any EObjectImpl::eInvoke(std::shared_ptr<ecore::EOperation> operation,std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any EObjectImpl::eInvoke(std::shared_ptr<ecore::EOperation> operation,std::shared_ptr<std::list < Any>> arguments)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -364,9 +364,9 @@ void EObjectImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadH
 		iter = attr_list.find("metaElementID");
 		if ( iter != attr_list.end() )
 		{
-			// this attribute is a 'int'
-			int value;
-			std::istringstream ( iter->second ) >> value;
+			// this attribute is a 'long long'
+			long long value;
+			std::istringstream(iter->second) >> value;
 			this->setMetaElementID(value);
 		}
 	}
@@ -575,7 +575,7 @@ bool EObjectImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any EObjectImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any EObjectImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -637,8 +637,8 @@ Any EObjectImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::share
 			//Retrieve input parameter 'feature'
 			//parameter 0
 			std::shared_ptr<ecore::EStructuralFeature> incoming_param_feature;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_feature_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_feature = (*incoming_param_feature_arguments_citer)->get()->get<std::shared_ptr<ecore::EStructuralFeature> >();
+			std::list<Any>::const_iterator incoming_param_feature_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_feature = (*incoming_param_feature_arguments_citer)->get<std::shared_ptr<ecore::EStructuralFeature> >();
 			result = eAny(this->eGet(incoming_param_feature));
 			break;
 		}
@@ -649,13 +649,13 @@ Any EObjectImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::share
 			//Retrieve input parameter 'feature'
 			//parameter 0
 			std::shared_ptr<ecore::EStructuralFeature> incoming_param_feature;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_feature_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_feature = (*incoming_param_feature_arguments_citer)->get()->get<std::shared_ptr<ecore::EStructuralFeature> >();
+			std::list<Any>::const_iterator incoming_param_feature_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_feature = (*incoming_param_feature_arguments_citer)->get<std::shared_ptr<ecore::EStructuralFeature> >();
 			//Retrieve input parameter 'resolve'
 			//parameter 1
 			bool incoming_param_resolve;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_resolve_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_resolve = (*incoming_param_resolve_arguments_citer)->get()->get<bool >();
+			std::list<Any>::const_iterator incoming_param_resolve_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_resolve = (*incoming_param_resolve_arguments_citer)->get<bool >();
 			result = eAny(this->eGet(incoming_param_feature,incoming_param_resolve));
 			break;
 		}
@@ -666,13 +666,13 @@ Any EObjectImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::share
 			//Retrieve input parameter 'operation'
 			//parameter 0
 			std::shared_ptr<ecore::EOperation> incoming_param_operation;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_operation_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_operation = (*incoming_param_operation_arguments_citer)->get()->get<std::shared_ptr<ecore::EOperation> >();
+			std::list<Any>::const_iterator incoming_param_operation_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_operation = (*incoming_param_operation_arguments_citer)->get<std::shared_ptr<ecore::EOperation> >();
 			//Retrieve input parameter 'arguments'
 			//parameter 1
-			std::shared_ptr<std::list < std::shared_ptr<Any>>> incoming_param_arguments;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_arguments_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_arguments = (*incoming_param_arguments_arguments_citer)->get()->get<std::shared_ptr<std::list < std::shared_ptr<Any>>> >();
+			std::shared_ptr<std::list < Any>> incoming_param_arguments;
+			std::list<Any>::const_iterator incoming_param_arguments_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_arguments = (*incoming_param_arguments_arguments_citer)->get<std::shared_ptr<std::list < Any>> >();
 			result = eAny(this->eInvoke(incoming_param_operation,incoming_param_arguments));
 			break;
 		}
@@ -690,8 +690,8 @@ Any EObjectImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::share
 			//Retrieve input parameter 'feature'
 			//parameter 0
 			std::shared_ptr<ecore::EStructuralFeature> incoming_param_feature;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_feature_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_feature = (*incoming_param_feature_arguments_citer)->get()->get<std::shared_ptr<ecore::EStructuralFeature> >();
+			std::list<Any>::const_iterator incoming_param_feature_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_feature = (*incoming_param_feature_arguments_citer)->get<std::shared_ptr<ecore::EStructuralFeature> >();
 			result = eAny(this->eIsSet(incoming_param_feature));
 			break;
 		}
@@ -709,13 +709,13 @@ Any EObjectImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::share
 			//Retrieve input parameter 'feature'
 			//parameter 0
 			std::shared_ptr<ecore::EStructuralFeature> incoming_param_feature;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_feature_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_feature = (*incoming_param_feature_arguments_citer)->get()->get<std::shared_ptr<ecore::EStructuralFeature> >();
+			std::list<Any>::const_iterator incoming_param_feature_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_feature = (*incoming_param_feature_arguments_citer)->get<std::shared_ptr<ecore::EStructuralFeature> >();
 			//Retrieve input parameter 'newValue'
 			//parameter 1
 			Any incoming_param_newValue;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_newValue_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_newValue = (*incoming_param_newValue_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_newValue_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_newValue = (*incoming_param_newValue_arguments_citer)->get<Any >();
 			this->eSet(incoming_param_feature,incoming_param_newValue);
 			break;
 		}
@@ -726,8 +726,8 @@ Any EObjectImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::share
 			//Retrieve input parameter 'feature'
 			//parameter 0
 			std::shared_ptr<ecore::EStructuralFeature> incoming_param_feature;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_feature_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_feature = (*incoming_param_feature_arguments_citer)->get()->get<std::shared_ptr<ecore::EStructuralFeature> >();
+			std::list<Any>::const_iterator incoming_param_feature_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_feature = (*incoming_param_feature_arguments_citer)->get<std::shared_ptr<ecore::EStructuralFeature> >();
 			this->eUnset(incoming_param_feature);
 			break;
 		}
