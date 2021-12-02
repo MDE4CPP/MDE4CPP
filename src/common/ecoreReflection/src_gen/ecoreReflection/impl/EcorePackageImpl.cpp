@@ -2111,9 +2111,6 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EModelElement_getEAnnotation_EString_EString_source->setUpper(1);
 	
 	ecore_EModelElement_getEAnnotation_EString_EString_source->setDirection(uml::ParameterDirectionKind::IN);
-	
-	
-	
 
     //-------------------------------------------
 	//	class ENamedElement
@@ -2151,7 +2148,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EObject_eAllContents__return->setName("");
 	ecore_EObject_eAllContents__return->setType(get_Ecore_EObject_ETreeIterator_EObject());
 	ecore_EObject_eAllContents__return->setLower(0);
-	ecore_EObject_eAllContents__return->setUpper(1);
+	ecore_EObject_eAllContents__return->setUpper(-1);
 	ecore_EObject_eAllContents__return->setDirection(uml::ParameterDirectionKind::RETURN);
 	
 	

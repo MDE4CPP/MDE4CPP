@@ -102,6 +102,7 @@ namespace [anEPackage.generateNamespaceDefinition()/]
 
 			//Singleton Instance and Getter
 			[generateSingletonDecl(packageName)/]
+			virtual long long findTypeID(std::string _className)=0;
 [if anEPackage.name.equalsIgnoreCase('ecore')]
 
 			//prevent from hiding functions

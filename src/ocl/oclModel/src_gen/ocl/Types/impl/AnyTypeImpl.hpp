@@ -53,8 +53,6 @@ namespace ocl::Types
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual std::shared_ptr<ecore::EClassifier> getObject() const ;
-			virtual void setObject(std::shared_ptr<ecore::EClassifier>) ;
 			
 			//*********************************
 			// Union Reference Getters

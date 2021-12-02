@@ -267,12 +267,10 @@ void EDataTypeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHa
 	}
 }
 
-
 std::shared_ptr<EClass> EDataTypeImpl::eStaticClass() const
 {
 	return ecore::ecorePackage::eInstance()->getEDataType_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -282,7 +280,7 @@ Any EDataTypeImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case ecore::ecorePackage::EDATATYPE_ATTRIBUTE_SERIALIZABLE:
-			return eAny(isSerializable()); //1411
+				return eAny(isSerializable(),0,true); //1411
 	}
 	return EClassifierImpl::eGet(featureID, resolve, coreType);
 }
@@ -336,7 +334,6 @@ Any EDataTypeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sha
 	return result;
 }
 
-
 std::shared_ptr<ecore::EDataType> EDataTypeImpl::getThisEDataTypePtr() const
 {
 	return m_thisEDataTypePtr.lock();
@@ -346,3 +343,5 @@ void EDataTypeImpl::setThisEDataTypePtr(std::weak_ptr<ecore::EDataType> thisEDat
 	m_thisEDataTypePtr = thisEDataTypePtr;
 	setThisEClassifierPtr(thisEDataTypePtr);
 }
+
+

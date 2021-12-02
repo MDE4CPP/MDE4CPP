@@ -79,7 +79,6 @@ namespace [anEPackage.generateNamespaceDefinition()/]
 
 		private:
 			static [anEPackage.name.concat('Factory')/]* create();
-            std::map<std::string,int> m_idMap;
 [if (generateObjectMonitoring())]
 			std::shared_ptr<Bag<ecore::EObject>> m_createdElements;
 			void clearCreatedElements();

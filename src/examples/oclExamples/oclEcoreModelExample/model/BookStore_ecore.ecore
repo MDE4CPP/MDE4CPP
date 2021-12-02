@@ -15,16 +15,6 @@
     <eAnnotations source="http://www.eclipse.org/OCL">
       <details key="OCL" value="context Library inv: self.nbBooks > 0"/>
     </eAnnotations>
-    <eOperations name="addMember" eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//Boolean">
-      <eParameters name="m" eType="#//Member"/>
-    </eOperations>
-    <eOperations name="addLoan" eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//Boolean">
-      <eParameters name="m" eType="#//Member"/>
-      <eParameters name="b" eType="#//Book"/>
-    </eOperations>
-    <eOperations name="addBook" eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//Boolean">
-      <eParameters name="b" eType="#//Book"/>
-    </eOperations>
     <eOperations name="open">
       <eAnnotations source="http://tu-ilmenau.de/see/codegen">
         <details key="body" value="    this->setOpened(true);"/>
