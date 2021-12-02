@@ -62,7 +62,7 @@ Any [aClass.name.toUpperFirst().concat('Impl')/]::eGet(int featureID, bool resol
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList,ecore::ecorePackage::EOBJECT_CLASS,true); //[aClass.getMyClassifierID()/][struct.getFeatureID()/]			
+			return eAny(tempList); //[aClass.getMyClassifierID()/][struct.getFeatureID()/]			
 		}
 		[/if]
 	[/for]
