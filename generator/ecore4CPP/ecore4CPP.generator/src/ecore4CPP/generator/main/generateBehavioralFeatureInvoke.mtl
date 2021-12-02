@@ -83,7 +83,15 @@ Any [aClass.name.toUpperFirst().concat('Impl')/]::eInvoke(int operationID, std::
 			this->[aOperation.name.toString()/]([for (inPar : EParameter | aOperation.eParameters) separator (',')]incoming_param_[inPar.name/][/for]);
  		[else]
 			[comment Operation w/ return value /]
-			result = eAny(this->[aOperation.name.toString()/]([for (inPar : EParameter | aOperation.eParameters) separator (',')]incoming_param_[inPar.name/][/for]));
+			[if (aOperation.eType.oclIsKindOf(EClass))]
+				result = eAny(this->[aOperation.name.toString()/]([for (inPar : EParameter | aOperation.eParameters) separator (',')]incoming_param_[inPar.name/][/for]));
+			[else]
+				[if (aOperation.upperBound = 1)]
+					result = eAny(this->[aOperation.name.toString()/]([for (inPar : EParameter | aOperation.eParameters) separator (',')]incoming_param_[inPar.name/][/for]),0,false);
+				[else]
+					result = eAny(this->[aOperation.name.toString()/]([for (inPar : EParameter | aOperation.eParameters) separator (',')]incoming_param_[inPar.name/][/for]),0,true);
+				[/if]
+			[/if]
 		[/if]
 			break;
 		}
