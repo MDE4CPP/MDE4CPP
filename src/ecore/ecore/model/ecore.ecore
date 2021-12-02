@@ -417,7 +417,7 @@
     <eOperations name="eAllContents" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject">
       <eAnnotations source="http://tu-ilmenau.de/see/codegen">
         <details key="const"/>
-        <details key="body" value="std::shared_ptr&lt;Bag&lt;AnyObject>> returnList=std::make_shared&lt;Bag&lt;AnyObject>>();&#xA;&#x9;std::shared_ptr&lt;ecore::EClass> metaClass=this->eClass();&#xA;&#x9;std::shared_ptr&lt;Bag&lt;ecore::EStructuralFeature>> features=metaClass->getEAllStructuralFeatures();&#xA;&#x9;int size = features->size();&#xA;&#x9;for (auto i = 0; i &lt; size; ++i)&#xA;&#x9;{&#xA;&#x9;&#x9;Any anyValue=this->eGet(features->at(i));&#xA;&#x9;&#x9;if(anyValue)&#xA;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;returnList->push_back(anyValue);&#xA;&#x9;&#x9;}&#xA;&#x9;}&#xA;&#x9;return eAny(returnList);"/>
+        <details key="body" value="std::shared_ptr&lt;Bag&lt;AnyObject>> returnList=std::make_shared&lt;Bag&lt;AnyObject>>();&#xA;&#x9;std::shared_ptr&lt;ecore::EClass> metaClass=this->eClass();&#xA;&#x9;std::shared_ptr&lt;Bag&lt;ecore::EStructuralFeature>> features=metaClass->getEAllStructuralFeatures();&#xA;&#x9;int size = features->size();&#xA;&#x9;for (auto i = 0; i &lt; size; ++i)&#xA;&#x9;{&#xA;&#x9;&#x9;Any anyValue=this->eGet(features->at(i));&#xA;&#x9;&#x9;if(anyValue)&#xA;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;returnList->push_back(anyValue);&#xA;&#x9;&#x9;}&#xA;&#x9;}&#xA;&#x9;return eAny(returnList,0,true);"/>
       </eAnnotations>
       <eAnnotations source="http://sse.tu-ilmenau.de/modelChange">
         <details value="return value to Any, Integer is no EObject in C++"/>
