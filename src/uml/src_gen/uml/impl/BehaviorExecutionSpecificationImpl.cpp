@@ -337,10 +337,10 @@ Any BehaviorExecutionSpecificationImpl::eGet(int featureID, bool resolve, bool c
 	switch(featureID)
 	{
 		case uml::umlPackage::BEHAVIOREXECUTIONSPECIFICATION_ATTRIBUTE_BEHAVIOR:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getBehavior();
-				return eAny(returnValue); //2415
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getBehavior();
+			return eAny(returnValue); //2415
+		}
 	}
 	return ExecutionSpecificationImpl::eGet(featureID, resolve, coreType);
 }

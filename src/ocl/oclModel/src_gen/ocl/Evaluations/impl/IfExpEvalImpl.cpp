@@ -31,11 +31,11 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "ocl/Evaluations/EvaluationsFactory.hpp"
-#include "fUML/Semantics/Values/ValuesFactory.hpp"
-#include "ocl/Expressions/ExpressionsFactory.hpp"
-#include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
+#include "ocl/Expressions/ExpressionsFactory.hpp"
+#include "ocl/Evaluations/EvaluationsFactory.hpp"
+#include "uml/umlFactory.hpp"
+#include "fUML/Semantics/Values/ValuesFactory.hpp"
 
 #include "ocl/Evaluations/EvalEnvironment.hpp"
 #include "fUML/Semantics/Loci/Locus.hpp"
@@ -326,20 +326,20 @@ Any IfExpEvalImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case ocl::Evaluations::EvaluationsPackage::IFEXPEVAL_ATTRIBUTE_CONDITION:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getCondition();
-				return eAny(returnValue); //316
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getCondition();
+			return eAny(returnValue); //326
+		}
 		case ocl::Evaluations::EvaluationsPackage::IFEXPEVAL_ATTRIBUTE_ELSEEXPRESSION:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getElseExpression();
-				return eAny(returnValue); //318
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getElseExpression();
+			return eAny(returnValue); //328
+		}
 		case ocl::Evaluations::EvaluationsPackage::IFEXPEVAL_ATTRIBUTE_THENEXPRESSION:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getThenExpression();
-				return eAny(returnValue); //317
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getThenExpression();
+			return eAny(returnValue); //327
+		}
 	}
 	return OclExpEvalImpl::eGet(featureID, resolve, coreType);
 }
@@ -349,11 +349,11 @@ bool IfExpEvalImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case ocl::Evaluations::EvaluationsPackage::IFEXPEVAL_ATTRIBUTE_CONDITION:
-			return getCondition() != nullptr; //316
+			return getCondition() != nullptr; //326
 		case ocl::Evaluations::EvaluationsPackage::IFEXPEVAL_ATTRIBUTE_ELSEEXPRESSION:
-			return getElseExpression() != nullptr; //318
+			return getElseExpression() != nullptr; //328
 		case ocl::Evaluations::EvaluationsPackage::IFEXPEVAL_ATTRIBUTE_THENEXPRESSION:
-			return getThenExpression() != nullptr; //317
+			return getThenExpression() != nullptr; //327
 	}
 	return OclExpEvalImpl::internalEIsSet(featureID);
 }
@@ -367,7 +367,7 @@ bool IfExpEvalImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<ocl::Evaluations::OclExpEval> _condition = std::dynamic_pointer_cast<ocl::Evaluations::OclExpEval>(_temp);
-			setCondition(_condition); //316
+			setCondition(_condition); //326
 			return true;
 		}
 		case ocl::Evaluations::EvaluationsPackage::IFEXPEVAL_ATTRIBUTE_ELSEEXPRESSION:
@@ -375,7 +375,7 @@ bool IfExpEvalImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<ocl::Evaluations::OclExpEval> _elseExpression = std::dynamic_pointer_cast<ocl::Evaluations::OclExpEval>(_temp);
-			setElseExpression(_elseExpression); //318
+			setElseExpression(_elseExpression); //328
 			return true;
 		}
 		case ocl::Evaluations::EvaluationsPackage::IFEXPEVAL_ATTRIBUTE_THENEXPRESSION:
@@ -383,7 +383,7 @@ bool IfExpEvalImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<ocl::Evaluations::OclExpEval> _thenExpression = std::dynamic_pointer_cast<ocl::Evaluations::OclExpEval>(_temp);
-			setThenExpression(_thenExpression); //317
+			setThenExpression(_thenExpression); //327
 			return true;
 		}
 	}

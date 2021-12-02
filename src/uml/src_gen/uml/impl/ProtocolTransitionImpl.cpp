@@ -459,15 +459,15 @@ Any ProtocolTransitionImpl::eGet(int featureID, bool resolve, bool coreType) con
 	switch(featureID)
 	{
 		case uml::umlPackage::PROTOCOLTRANSITION_ATTRIBUTE_POSTCONDITION:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getPostCondition();
-				return eAny(returnValue); //18826
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getPostCondition();
+			return eAny(returnValue); //18826
+		}
 		case uml::umlPackage::PROTOCOLTRANSITION_ATTRIBUTE_PRECONDITION:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getPreCondition();
-				return eAny(returnValue); //18827
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getPreCondition();
+			return eAny(returnValue); //18827
+		}
 		case uml::umlPackage::PROTOCOLTRANSITION_ATTRIBUTE_REFERRED:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());

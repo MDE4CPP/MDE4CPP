@@ -544,22 +544,22 @@ Any ReadIsClassifiedObjectActionImpl::eGet(int featureID, bool resolve, bool cor
 	switch(featureID)
 	{
 		case uml::umlPackage::READISCLASSIFIEDOBJECTACTION_ATTRIBUTE_CLASSIFIER:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getClassifier();
-				return eAny(returnValue); //19427
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getClassifier();
+			return eAny(returnValue); //19427
+		}
 		case uml::umlPackage::READISCLASSIFIEDOBJECTACTION_ATTRIBUTE_ISDIRECT:
 			return eAny(getIsDirect()); //19428
 		case uml::umlPackage::READISCLASSIFIEDOBJECTACTION_ATTRIBUTE_OBJECT:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getObject();
-				return eAny(returnValue); //19429
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getObject();
+			return eAny(returnValue); //19429
+		}
 		case uml::umlPackage::READISCLASSIFIEDOBJECTACTION_ATTRIBUTE_RESULT:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getResult();
-				return eAny(returnValue); //19430
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getResult();
+			return eAny(returnValue); //19430
+		}
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
 }

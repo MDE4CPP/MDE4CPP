@@ -268,12 +268,12 @@ Any NameTypeBindingImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case ocl::Types::TypesPackage::NAMETYPEBINDING_ATTRIBUTE_NAME:
-			return eAny(getName()); //510
+			return eAny(getName()); //520
 		case ocl::Types::TypesPackage::NAMETYPEBINDING_ATTRIBUTE_TYPE:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getType();
-				return eAny(returnValue); //511
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getType();
+			return eAny(returnValue); //521
+		}
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
 }
@@ -283,9 +283,9 @@ bool NameTypeBindingImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case ocl::Types::TypesPackage::NAMETYPEBINDING_ATTRIBUTE_NAME:
-			return getName() != ""; //510
+			return getName() != ""; //520
 		case ocl::Types::TypesPackage::NAMETYPEBINDING_ATTRIBUTE_TYPE:
-			return getType() != nullptr; //511
+			return getType() != nullptr; //521
 	}
 	return ecore::EObjectImpl::internalEIsSet(featureID);
 }
@@ -298,7 +298,7 @@ bool NameTypeBindingImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::string _name = newValue->get<std::string>();
-			setName(_name); //510
+			setName(_name); //520
 			return true;
 		}
 		case ocl::Types::TypesPackage::NAMETYPEBINDING_ATTRIBUTE_TYPE:
@@ -306,7 +306,7 @@ bool NameTypeBindingImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<ecore::EClassifier> _type = std::dynamic_pointer_cast<ecore::EClassifier>(_temp);
-			setType(_type); //511
+			setType(_type); //521
 			return true;
 		}
 	}

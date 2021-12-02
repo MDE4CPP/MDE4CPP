@@ -417,13 +417,13 @@ Any ObjectValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //580			
+			return eAny(tempList); //590			
 		}
 		case ocl::Values::ValuesPackage::OBJECTVALUE_ATTRIBUTE_VALUE:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getValue();
-				return eAny(returnValue); //581
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getValue();
+			return eAny(returnValue); //591
+		}
 	}
 	return fUML::Semantics::Values::ValueImpl::eGet(featureID, resolve, coreType);
 }
@@ -433,9 +433,9 @@ bool ObjectValueImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case ocl::Values::ValuesPackage::OBJECTVALUE_ATTRIBUTE_HISTORY:
-			return getHistory() != nullptr; //580
+			return getHistory() != nullptr; //590
 		case ocl::Values::ValuesPackage::OBJECTVALUE_ATTRIBUTE_VALUE:
-			return getValue() != nullptr; //581
+			return getValue() != nullptr; //591
 	}
 	return fUML::Semantics::Values::ValueImpl::internalEIsSet(featureID);
 }
@@ -485,7 +485,7 @@ bool ObjectValueImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<ecore::EObject> _value = std::dynamic_pointer_cast<ecore::EObject>(_temp);
-			setValue(_value); //581
+			setValue(_value); //591
 			return true;
 		}
 	}

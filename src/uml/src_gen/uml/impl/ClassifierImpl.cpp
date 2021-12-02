@@ -1489,10 +1489,10 @@ Any ClassifierImpl::eGet(int featureID, bool resolve, bool coreType) const
 			return eAny(tempList); //3635			
 		}
 		case uml::umlPackage::CLASSIFIER_ATTRIBUTE_REPRESENTATION:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getRepresentation();
-				return eAny(returnValue); //3636
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getRepresentation();
+			return eAny(returnValue); //3636
+		}
 		case uml::umlPackage::CLASSIFIER_ATTRIBUTE_SUBSTITUTION:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());

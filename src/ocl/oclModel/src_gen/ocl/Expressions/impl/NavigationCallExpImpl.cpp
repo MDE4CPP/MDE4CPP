@@ -467,10 +467,10 @@ Any NavigationCallExpImpl::eGet(int featureID, bool resolve, bool coreType) cons
 	switch(featureID)
 	{
 		case ocl::Expressions::ExpressionsPackage::NAVIGATIONCALLEXP_ATTRIBUTE_NAVIGATIONSOURCE:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getNavigationSource();
-				return eAny(returnValue); //5325
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getNavigationSource();
+			return eAny(returnValue); //5425
+		}
 		case ocl::Expressions::ExpressionsPackage::NAVIGATIONCALLEXP_ATTRIBUTE_QUALIFIER:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
@@ -481,7 +481,7 @@ Any NavigationCallExpImpl::eGet(int featureID, bool resolve, bool coreType) cons
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //5324			
+			return eAny(tempList); //5424			
 		}
 	}
 	return FeatureCallExpImpl::eGet(featureID, resolve, coreType);
@@ -492,9 +492,9 @@ bool NavigationCallExpImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case ocl::Expressions::ExpressionsPackage::NAVIGATIONCALLEXP_ATTRIBUTE_NAVIGATIONSOURCE:
-			return getNavigationSource() != nullptr; //5325
+			return getNavigationSource() != nullptr; //5425
 		case ocl::Expressions::ExpressionsPackage::NAVIGATIONCALLEXP_ATTRIBUTE_QUALIFIER:
-			return getQualifier() != nullptr; //5324
+			return getQualifier() != nullptr; //5424
 	}
 	return FeatureCallExpImpl::internalEIsSet(featureID);
 }
@@ -508,7 +508,7 @@ bool NavigationCallExpImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<ecore::EAttribute> _navigationSource = std::dynamic_pointer_cast<ecore::EAttribute>(_temp);
-			setNavigationSource(_navigationSource); //5325
+			setNavigationSource(_navigationSource); //5425
 			return true;
 		}
 		case ocl::Expressions::ExpressionsPackage::NAVIGATIONCALLEXP_ATTRIBUTE_QUALIFIER:

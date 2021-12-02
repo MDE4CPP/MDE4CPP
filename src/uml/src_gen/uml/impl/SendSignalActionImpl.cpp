@@ -460,15 +460,15 @@ Any SendSignalActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::SENDSIGNALACTION_ATTRIBUTE_SIGNAL:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getSignal();
-				return eAny(returnValue); //21329
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getSignal();
+			return eAny(returnValue); //21329
+		}
 		case uml::umlPackage::SENDSIGNALACTION_ATTRIBUTE_TARGET:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getTarget();
-				return eAny(returnValue); //21330
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getTarget();
+			return eAny(returnValue); //21330
+		}
 	}
 	return InvocationActionImpl::eGet(featureID, resolve, coreType);
 }

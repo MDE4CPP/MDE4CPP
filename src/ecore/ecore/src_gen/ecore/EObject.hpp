@@ -74,12 +74,12 @@ namespace ecore
 			//*********************************
 			// Operations
 			//*********************************
-			virtual std::shared_ptr<Bag < ecore::EObject>> eAllContents() const = 0;
+			virtual Any eAllContents() const = 0;
 			virtual std::shared_ptr<ecore::EClass> eClass() const = 0;
-			
+			virtual std::shared_ptr<ecore::EObject> eContainer() = 0;
 			virtual std::shared_ptr<ecore::EStructuralFeature> eContainingFeature() const = 0;
 			virtual std::shared_ptr<ecore::EReference> eContainmentFeature() const = 0;
-			virtual std::shared_ptr<std::list < ecore::EObject>> eContents() const = 0;
+			virtual std::shared_ptr<Bag<ecore::EObject> > eContents() const = 0;
 			virtual std::shared_ptr<std::list < ecore::EObject>> eCrossReferences() const = 0;
 			virtual Any eGet(std::shared_ptr<ecore::EStructuralFeature> feature) const = 0;
 			virtual Any eGet(std::shared_ptr<ecore::EStructuralFeature> feature,bool resolve) const = 0;
@@ -93,20 +93,19 @@ namespace ecore
 			//*********************************
 			// Attribute Getters & Setters
 			//*********************************
-			virtual int getMetaElementID() const = 0;
-			virtual void setMetaElementID (int _metaElementID)= 0;
+			virtual long long getMetaElementID() const = 0;
+			virtual void setMetaElementID (long long _metaElementID)= 0;
 
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual std::weak_ptr<ecore::EObject> getEContainer() const = 0;
 			virtual void setEContainer(std::weak_ptr<ecore::EObject>) = 0;
 			
 
 			//*********************************
 			// Union Reference Getters
 			//*********************************
-			virtual std::shared_ptr<Union<ecore::EObject>> getEContens() const = 0;
+			virtual std::shared_ptr<Union<ecore::EObject>> getEContentUnion() const = 0;
 
 			//*********************************
 			// Container Getter
@@ -124,13 +123,13 @@ namespace ecore
 			//*********************************
 			// Attribute Members
 			//*********************************
-			int m_metaElementID= 0;
+			long long m_metaElementID= 0;
 			
 			//*********************************
 			// Reference Members
 			//*********************************
 			std::weak_ptr<ecore::EObject> m_eContainer;
-			mutable std::shared_ptr<Union<ecore::EObject>> m_eContens;
+			mutable std::shared_ptr<Union<ecore::EObject>> m_eContentUnion;
 	};
 }
 #endif /* end of include guard: ECORE_EOBJECT_HPP */

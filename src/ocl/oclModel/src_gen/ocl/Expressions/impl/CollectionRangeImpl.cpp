@@ -293,15 +293,15 @@ Any CollectionRangeImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case ocl::Expressions::ExpressionsPackage::COLLECTIONRANGE_ATTRIBUTE_FIRST:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getFirst();
-				return eAny(returnValue); //1810
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getFirst();
+			return eAny(returnValue); //1910
+		}
 		case ocl::Expressions::ExpressionsPackage::COLLECTIONRANGE_ATTRIBUTE_LAST:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getLast();
-				return eAny(returnValue); //1811
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getLast();
+			return eAny(returnValue); //1911
+		}
 	}
 	return CollectionLiteralPartImpl::eGet(featureID, resolve, coreType);
 }
@@ -311,9 +311,9 @@ bool CollectionRangeImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case ocl::Expressions::ExpressionsPackage::COLLECTIONRANGE_ATTRIBUTE_FIRST:
-			return getFirst() != nullptr; //1810
+			return getFirst() != nullptr; //1910
 		case ocl::Expressions::ExpressionsPackage::COLLECTIONRANGE_ATTRIBUTE_LAST:
-			return getLast() != nullptr; //1811
+			return getLast() != nullptr; //1911
 	}
 	return CollectionLiteralPartImpl::internalEIsSet(featureID);
 }
@@ -327,7 +327,7 @@ bool CollectionRangeImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<ocl::Expressions::OclExpression> _first = std::dynamic_pointer_cast<ocl::Expressions::OclExpression>(_temp);
-			setFirst(_first); //1810
+			setFirst(_first); //1910
 			return true;
 		}
 		case ocl::Expressions::ExpressionsPackage::COLLECTIONRANGE_ATTRIBUTE_LAST:
@@ -335,7 +335,7 @@ bool CollectionRangeImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<ocl::Expressions::OclExpression> _last = std::dynamic_pointer_cast<ocl::Expressions::OclExpression>(_temp);
-			setLast(_last); //1811
+			setLast(_last); //1911
 			return true;
 		}
 	}

@@ -751,37 +751,37 @@ Any TransitionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::TRANSITION_ATTRIBUTE_CONTAINER:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getContainer().lock();
-				return eAny(returnValue); //24125
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getContainer().lock();
+			return eAny(returnValue); //24125
+		}
 		case uml::umlPackage::TRANSITION_ATTRIBUTE_EFFECT:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getEffect();
-				return eAny(returnValue); //24118
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getEffect();
+			return eAny(returnValue); //24118
+		}
 		case uml::umlPackage::TRANSITION_ATTRIBUTE_GUARD:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getGuard();
-				return eAny(returnValue); //24119
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getGuard();
+			return eAny(returnValue); //24119
+		}
 		case uml::umlPackage::TRANSITION_ATTRIBUTE_KIND:
 			return eAny(getKind()); //24120
 		case uml::umlPackage::TRANSITION_ATTRIBUTE_REDEFINEDTRANSITION:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getRedefinedTransition();
-				return eAny(returnValue); //24121
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getRedefinedTransition();
+			return eAny(returnValue); //24121
+		}
 		case uml::umlPackage::TRANSITION_ATTRIBUTE_SOURCE:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getSource();
-				return eAny(returnValue); //24122
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getSource();
+			return eAny(returnValue); //24122
+		}
 		case uml::umlPackage::TRANSITION_ATTRIBUTE_TARGET:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getTarget();
-				return eAny(returnValue); //24123
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getTarget();
+			return eAny(returnValue); //24123
+		}
 		case uml::umlPackage::TRANSITION_ATTRIBUTE_TRIGGER:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());

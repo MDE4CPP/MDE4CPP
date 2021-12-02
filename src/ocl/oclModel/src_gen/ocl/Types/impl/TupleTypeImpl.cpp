@@ -33,8 +33,8 @@
 
 #include <exception> // used in Persistence
 #include "ecore/ecoreFactory.hpp"
-#include "ocl/Values/ValuesFactory.hpp"
 #include "ocl/Types/TypesFactory.hpp"
+#include "ocl/Values/ValuesFactory.hpp"
 
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EDataType.hpp"
@@ -306,10 +306,10 @@ Any TupleTypeImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case ocl::Types::TypesPackage::TUPLETYPE_ATTRIBUTE_INSTANCE:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getInstance();
-				return eAny(returnValue); //889
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getInstance();
+			return eAny(returnValue); //899
+		}
 		case ocl::Types::TypesPackage::TUPLETYPE_ATTRIBUTE_PARTS:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
@@ -320,7 +320,7 @@ Any TupleTypeImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //8810			
+			return eAny(tempList); //8910			
 		}
 	}
 	return ecore::EDataTypeImpl::eGet(featureID, resolve, coreType);
@@ -331,9 +331,9 @@ bool TupleTypeImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case ocl::Types::TypesPackage::TUPLETYPE_ATTRIBUTE_INSTANCE:
-			return getInstance() != nullptr; //889
+			return getInstance() != nullptr; //899
 		case ocl::Types::TypesPackage::TUPLETYPE_ATTRIBUTE_PARTS:
-			return getParts() != nullptr; //8810
+			return getParts() != nullptr; //8910
 	}
 	return ecore::EDataTypeImpl::internalEIsSet(featureID);
 }
@@ -347,7 +347,7 @@ bool TupleTypeImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<ocl::Values::TupleValue> _instance = std::dynamic_pointer_cast<ocl::Values::TupleValue>(_temp);
-			setInstance(_instance); //889
+			setInstance(_instance); //899
 			return true;
 		}
 		case ocl::Types::TypesPackage::TUPLETYPE_ATTRIBUTE_PARTS:

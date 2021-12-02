@@ -14,15 +14,15 @@
 
 namespace ecore 
 {
-	class EParameter;
-	class EDataType;
-	class EStringToStringMapEntry;
-	class EGenericType;
-	class EReference;
-	class EOperation;
-	class EAttribute;
 	class EAnnotation;
+	class EReference;
 	class EClass;
+	class EDataType;
+	class EGenericType;
+	class EAttribute;
+	class EParameter;
+	class EOperation;
+	class EStringToStringMapEntry;
 }
 
 namespace ocl::Types 
@@ -66,17 +66,15 @@ namespace ocl::Types
 			// Begin Class AnyType
 			//Class and Feature IDs 
 			static const long long ANYTYPE_CLASS = 1049138756;
-			static const unsigned int ANYTYPE_CLASS_FEATURE_COUNT = 9;
+			static const unsigned int ANYTYPE_CLASS_FEATURE_COUNT = 8;
 			static const unsigned int ANYTYPE_CLASS_OPERATION_COUNT = 3;
 			
-			static const long long ANYTYPE_ATTRIBUTE_OBJECT = 1903704520;
 			
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getAnyType_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getAnyType_Attribute_object() const = 0;
 			
 			
 			// End Class AnyType

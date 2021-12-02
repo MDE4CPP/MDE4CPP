@@ -4,6 +4,7 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EClass.hpp"
+#include "ocl/Values/impl/AnyValueImpl.hpp"
 #include "ocl/Values/impl/BagTypeValueImpl.hpp"
 #include "ocl/Values/impl/CollectionValueImpl.hpp"
 #include "ocl/Values/impl/ElementImpl.hpp"
@@ -35,6 +36,7 @@ using namespace ocl::Values;
 
 ValuesFactoryImpl::ValuesFactoryImpl()
 {
+	m_idMap.insert(std::make_pair("ocl::Values::AnyValue", ValuesPackage::ANYVALUE_CLASS));
 	m_idMap.insert(std::make_pair("ocl::Values::BagTypeValue", ValuesPackage::BAGTYPEVALUE_CLASS));
 	m_idMap.insert(std::make_pair("ocl::Values::CollectionValue", ValuesPackage::COLLECTIONVALUE_CLASS));
 	m_idMap.insert(std::make_pair("ocl::Values::Element", ValuesPackage::ELEMENT_CLASS));
@@ -68,6 +70,40 @@ std::shared_ptr<ecore::EObject> ValuesFactoryImpl::create(const int metaElementI
 {
 	switch(metaElementID)
 	{
+		case ValuesPackage::ANYVALUE_CLASS:
+		{
+			if (nullptr == container)
+			{
+				return this->createAnyValue(metaElementID);
+			}
+			else
+			{
+				switch(referenceID)
+				{
+					//AnyValue has value as a containment
+					case  fUML::Semantics::Activities::ActivitiesPackage::OBJECTTOKEN_ATTRIBUTE_VALUE:	
+					{
+						std::shared_ptr<fUML::Semantics::Activities::ObjectToken> castedContainer = std::dynamic_pointer_cast<fUML::Semantics::Activities::ObjectToken> (container);;
+						return this->createAnyValue_as_value_in_ObjectToken(castedContainer,metaElementID);
+					}
+					//AnyValue has values as a containment
+					case  fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::FEATUREVALUE_ATTRIBUTE_VALUES:	
+					{
+						std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> castedContainer = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::FeatureValue> (container);;
+						return this->createAnyValue_as_values_in_FeatureValue(castedContainer,metaElementID);
+					}
+					//AnyValue has values as a containment
+					case  fUML::Semantics::CommonBehavior::CommonBehaviorPackage::PARAMETERVALUE_ATTRIBUTE_VALUES:	
+					{
+						std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> castedContainer = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::ParameterValue> (container);;
+						return this->createAnyValue_as_values_in_ParameterValue(castedContainer,metaElementID);
+					}
+					default:
+						std::cerr << __PRETTY_FUNCTION__ << "ERROR: Reference type not found." << std::endl;
+				}	
+			}
+			break;
+		}
 		case ValuesPackage::BAGTYPEVALUE_CLASS:
 		{
 				return this->createBagTypeValue(metaElementID);
@@ -320,6 +356,52 @@ std::shared_ptr<ecore::EObject> ValuesFactoryImpl::create(std::string _className
     return nullptr;
 }
 
+std::shared_ptr<ocl::Values::AnyValue> ValuesFactoryImpl::createAnyValue(const int metaElementID/*=-1*/) const
+{
+	std::shared_ptr<ocl::Values::AnyValueImpl> element(new ocl::Values::AnyValueImpl());
+	element->setMetaElementID(metaElementID);
+	element->setThisAnyValuePtr(element);
+	return element;
+}
+std::shared_ptr<ocl::Values::AnyValue> ValuesFactoryImpl::createAnyValue_as_value_in_ObjectToken(std::shared_ptr<fUML::Semantics::Activities::ObjectToken> par_ObjectToken, const int metaElementID) const
+{
+	std::shared_ptr<ocl::Values::AnyValueImpl> element(new ocl::Values::AnyValueImpl());
+	element->setMetaElementID(metaElementID);
+	if(nullptr != par_ObjectToken)
+	{
+		par_ObjectToken->setValue(element);
+	}
+	
+	element->setThisAnyValuePtr(element);
+	return element;
+	
+}
+std::shared_ptr<ocl::Values::AnyValue> ValuesFactoryImpl::createAnyValue_as_values_in_FeatureValue(std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> par_FeatureValue, const int metaElementID) const
+{
+	std::shared_ptr<ocl::Values::AnyValueImpl> element(new ocl::Values::AnyValueImpl());
+	element->setMetaElementID(metaElementID);
+	if(nullptr != par_FeatureValue)
+	{
+		par_FeatureValue->getValues()->push_back(element);
+	}
+	
+	element->setThisAnyValuePtr(element);
+	return element;
+	
+}
+std::shared_ptr<ocl::Values::AnyValue> ValuesFactoryImpl::createAnyValue_as_values_in_ParameterValue(std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> par_ParameterValue, const int metaElementID) const
+{
+	std::shared_ptr<ocl::Values::AnyValueImpl> element(new ocl::Values::AnyValueImpl());
+	element->setMetaElementID(metaElementID);
+	if(nullptr != par_ParameterValue)
+	{
+		par_ParameterValue->getValues()->push_back(element);
+	}
+	
+	element->setThisAnyValuePtr(element);
+	return element;
+	
+}
 std::shared_ptr<ocl::Values::BagTypeValue> ValuesFactoryImpl::createBagTypeValue(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<ocl::Values::BagTypeValueImpl> element(new ocl::Values::BagTypeValueImpl());

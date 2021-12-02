@@ -31,10 +31,10 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "ocl/Evaluations/EvaluationsFactory.hpp"
-#include "fUML/Semantics/Values/ValuesFactory.hpp"
-#include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
+#include "ocl/Evaluations/EvaluationsFactory.hpp"
+#include "uml/umlFactory.hpp"
+#include "fUML/Semantics/Values/ValuesFactory.hpp"
 
 #include "ocl/Evaluations/CollectionLiteralPartEval.hpp"
 #include "fUML/Semantics/Loci/Locus.hpp"
@@ -291,15 +291,15 @@ Any CollectionRangeEvalImpl::eGet(int featureID, bool resolve, bool coreType) co
 	switch(featureID)
 	{
 		case ocl::Evaluations::EvaluationsPackage::COLLECTIONRANGEEVAL_ATTRIBUTE_FIRST:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getFirst();
-				return eAny(returnValue); //193
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getFirst();
+			return eAny(returnValue); //203
+		}
 		case ocl::Evaluations::EvaluationsPackage::COLLECTIONRANGEEVAL_ATTRIBUTE_LAST:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getLast();
-				return eAny(returnValue); //194
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getLast();
+			return eAny(returnValue); //204
+		}
 	}
 	return CollectionLiteralPartEvalImpl::eGet(featureID, resolve, coreType);
 }
@@ -309,9 +309,9 @@ bool CollectionRangeEvalImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case ocl::Evaluations::EvaluationsPackage::COLLECTIONRANGEEVAL_ATTRIBUTE_FIRST:
-			return getFirst() != nullptr; //193
+			return getFirst() != nullptr; //203
 		case ocl::Evaluations::EvaluationsPackage::COLLECTIONRANGEEVAL_ATTRIBUTE_LAST:
-			return getLast() != nullptr; //194
+			return getLast() != nullptr; //204
 	}
 	return CollectionLiteralPartEvalImpl::internalEIsSet(featureID);
 }
@@ -325,7 +325,7 @@ bool CollectionRangeEvalImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<ocl::Evaluations::OclExpEval> _first = std::dynamic_pointer_cast<ocl::Evaluations::OclExpEval>(_temp);
-			setFirst(_first); //193
+			setFirst(_first); //203
 			return true;
 		}
 		case ocl::Evaluations::EvaluationsPackage::COLLECTIONRANGEEVAL_ATTRIBUTE_LAST:
@@ -333,7 +333,7 @@ bool CollectionRangeEvalImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<ocl::Evaluations::OclExpEval> _last = std::dynamic_pointer_cast<ocl::Evaluations::OclExpEval>(_temp);
-			setLast(_last); //194
+			setLast(_last); //204
 			return true;
 		}
 	}

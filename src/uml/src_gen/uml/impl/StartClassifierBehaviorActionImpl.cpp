@@ -403,10 +403,10 @@ Any StartClassifierBehaviorActionImpl::eGet(int featureID, bool resolve, bool co
 	switch(featureID)
 	{
 		case uml::umlPackage::STARTCLASSIFIERBEHAVIORACTION_ATTRIBUTE_OBJECT:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getObject();
-				return eAny(returnValue); //21827
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getObject();
+			return eAny(returnValue); //21827
+		}
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
 }

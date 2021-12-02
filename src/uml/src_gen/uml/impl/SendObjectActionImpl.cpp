@@ -437,15 +437,15 @@ Any SendObjectActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::SENDOBJECTACTION_ATTRIBUTE_REQUEST:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getRequest();
-				return eAny(returnValue); //21229
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getRequest();
+			return eAny(returnValue); //21229
+		}
 		case uml::umlPackage::SENDOBJECTACTION_ATTRIBUTE_TARGET:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getTarget();
-				return eAny(returnValue); //21230
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getTarget();
+			return eAny(returnValue); //21230
+		}
 	}
 	return InvocationActionImpl::eGet(featureID, resolve, coreType);
 }

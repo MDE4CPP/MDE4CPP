@@ -444,10 +444,10 @@ Any TemplateSignatureImpl::eGet(int featureID, bool resolve, bool coreType) cons
 			return eAny(tempList); //2333			
 		}
 		case uml::umlPackage::TEMPLATESIGNATURE_ATTRIBUTE_TEMPLATE:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getTemplate().lock();
-				return eAny(returnValue); //2334
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getTemplate().lock();
+			return eAny(returnValue); //2334
+		}
 	}
 	return ElementImpl::eGet(featureID, resolve, coreType);
 }

@@ -32,9 +32,9 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "ocl/Evaluations/EvaluationsFactory.hpp"
 #include "ecore/ecoreFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
+#include "ocl/Evaluations/EvaluationsFactory.hpp"
 
 #include "ocl/Expressions/CallExp.hpp"
 #include "ocl/Expressions/CollectionRange.hpp"
@@ -402,7 +402,7 @@ Any UnlimitedNaturalExpImpl::eGet(int featureID, bool resolve, bool coreType) co
 	switch(featureID)
 	{
 		case ocl::Expressions::ExpressionsPackage::UNLIMITEDNATURALEXP_ATTRIBUTE_UNLIMITEDNATURALSYMBOL:
-			return eAny(getUnlimitedNaturalSymbol()); //9223
+			return eAny(getUnlimitedNaturalSymbol()); //9323
 	}
 	return NumericLiteralExpImpl::eGet(featureID, resolve, coreType);
 }
@@ -412,7 +412,7 @@ bool UnlimitedNaturalExpImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case ocl::Expressions::ExpressionsPackage::UNLIMITEDNATURALEXP_ATTRIBUTE_UNLIMITEDNATURALSYMBOL:
-			return getUnlimitedNaturalSymbol() != 0; //9223
+			return getUnlimitedNaturalSymbol() != 0; //9323
 	}
 	return NumericLiteralExpImpl::internalEIsSet(featureID);
 }
@@ -425,7 +425,7 @@ bool UnlimitedNaturalExpImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			int _unlimitedNaturalSymbol = newValue->get<int>();
-			setUnlimitedNaturalSymbol(_unlimitedNaturalSymbol); //9223
+			setUnlimitedNaturalSymbol(_unlimitedNaturalSymbol); //9323
 			return true;
 		}
 	}

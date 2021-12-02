@@ -405,10 +405,10 @@ Any InfixedExpImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case ocl::Expressions::ExpressionsPackage::INFIXEDEXP_ATTRIBUTE_SOURCE:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getSource();
-				return eAny(returnValue); //3222
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getSource();
+			return eAny(returnValue); //3322
+		}
 	}
 	return OclExpressionImpl::eGet(featureID, resolve, coreType);
 }
@@ -418,7 +418,7 @@ bool InfixedExpImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case ocl::Expressions::ExpressionsPackage::INFIXEDEXP_ATTRIBUTE_SOURCE:
-			return getSource() != nullptr; //3222
+			return getSource() != nullptr; //3322
 	}
 	return OclExpressionImpl::internalEIsSet(featureID);
 }
@@ -432,7 +432,7 @@ bool InfixedExpImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<ocl::Expressions::OclExpression> _source = std::dynamic_pointer_cast<ocl::Expressions::OclExpression>(_temp);
-			setSource(_source); //3222
+			setSource(_source); //3322
 			return true;
 		}
 	}

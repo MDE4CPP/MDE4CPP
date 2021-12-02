@@ -32,12 +32,12 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
+#include "fUML/Semantics/Loci/LociFactory.hpp"
+#include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
 #include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
-#include "fUML/Semantics/Values/ValuesFactory.hpp"
-#include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "uml/umlFactory.hpp"
-#include "fUML/Semantics/Loci/LociFactory.hpp"
+#include "fUML/Semantics/Values/ValuesFactory.hpp"
 
 #include "ocl/Evaluations/EvalEnvironment.hpp"
 #include "fUML/Semantics/Loci/Locus.hpp"
@@ -273,10 +273,10 @@ Any AssociationClassCallExpEvalImpl::eGet(int featureID, bool resolve, bool core
 	switch(featureID)
 	{
 		case ocl::Evaluations::EvaluationsPackage::ASSOCIATIONCLASSCALLEXPEVAL_ATTRIBUTE_REFERREDASSOCIATIONCLASS:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getReferredAssociationClass();
-				return eAny(returnValue); //39
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getReferredAssociationClass();
+			return eAny(returnValue); //49
+		}
 	}
 	return NavigationCallExpEvalImpl::eGet(featureID, resolve, coreType);
 }
@@ -286,7 +286,7 @@ bool AssociationClassCallExpEvalImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case ocl::Evaluations::EvaluationsPackage::ASSOCIATIONCLASSCALLEXPEVAL_ATTRIBUTE_REFERREDASSOCIATIONCLASS:
-			return getReferredAssociationClass() != nullptr; //39
+			return getReferredAssociationClass() != nullptr; //49
 	}
 	return NavigationCallExpEvalImpl::internalEIsSet(featureID);
 }
@@ -300,7 +300,7 @@ bool AssociationClassCallExpEvalImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> _referredAssociationClass = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::StringValue>(_temp);
-			setReferredAssociationClass(_referredAssociationClass); //39
+			setReferredAssociationClass(_referredAssociationClass); //49
 			return true;
 		}
 	}

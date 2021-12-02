@@ -379,15 +379,15 @@ Any PackageMergeImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::PACKAGEMERGE_ATTRIBUTE_MERGEDPACKAGE:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getMergedPackage();
-				return eAny(returnValue); //1726
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getMergedPackage();
+			return eAny(returnValue); //1726
+		}
 		case uml::umlPackage::PACKAGEMERGE_ATTRIBUTE_RECEIVINGPACKAGE:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getReceivingPackage().lock();
-				return eAny(returnValue); //1727
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getReceivingPackage().lock();
+			return eAny(returnValue); //1727
+		}
 	}
 	return DirectedRelationshipImpl::eGet(featureID, resolve, coreType);
 }

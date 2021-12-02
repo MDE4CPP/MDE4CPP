@@ -309,10 +309,10 @@ Any LinkEndDestructionDataImpl::eGet(int featureID, bool resolve, bool coreType)
 	switch(featureID)
 	{
 		case uml::umlPackage::LINKENDDESTRUCTIONDATA_ATTRIBUTE_DESTROYAT:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getDestroyAt();
-				return eAny(returnValue); //1366
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getDestroyAt();
+			return eAny(returnValue); //1366
+		}
 		case uml::umlPackage::LINKENDDESTRUCTIONDATA_ATTRIBUTE_ISDESTROYDUPLICATES:
 			return eAny(getIsDestroyDuplicates()); //1367
 	}

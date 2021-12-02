@@ -623,45 +623,45 @@ Any OutputPinImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::OUTPUTPIN_ATTRIBUTE_ACTION:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getAction().lock();
-				return eAny(returnValue); //16934
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getAction().lock();
+			return eAny(returnValue); //16934
+		}
 		case uml::umlPackage::OUTPUTPIN_ATTRIBUTE_CALLACTION:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getCallAction().lock();
-				return eAny(returnValue); //16933
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getCallAction().lock();
+			return eAny(returnValue); //16933
+		}
 		case uml::umlPackage::OUTPUTPIN_ATTRIBUTE_CLEARSTRUCTURALFEATUREACTION:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getClearStructuralFeatureAction().lock();
-				return eAny(returnValue); //16938
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getClearStructuralFeatureAction().lock();
+			return eAny(returnValue); //16938
+		}
 		case uml::umlPackage::OUTPUTPIN_ATTRIBUTE_CREATEOBJECTACTION:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getCreateObjectAction().lock();
-				return eAny(returnValue); //16940
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getCreateObjectAction().lock();
+			return eAny(returnValue); //16940
+		}
 		case uml::umlPackage::OUTPUTPIN_ATTRIBUTE_READSELFACTION:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getReadSelfAction().lock();
-				return eAny(returnValue); //16939
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getReadSelfAction().lock();
+			return eAny(returnValue); //16939
+		}
 		case uml::umlPackage::OUTPUTPIN_ATTRIBUTE_READSTRUCTURALFEATUREACTION:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getReadStructuralFeatureAction().lock();
-				return eAny(returnValue); //16937
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getReadStructuralFeatureAction().lock();
+			return eAny(returnValue); //16937
+		}
 		case uml::umlPackage::OUTPUTPIN_ATTRIBUTE_VALUESPECIFICATIONACTION:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getValueSpecificationAction().lock();
-				return eAny(returnValue); //16935
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getValueSpecificationAction().lock();
+			return eAny(returnValue); //16935
+		}
 		case uml::umlPackage::OUTPUTPIN_ATTRIBUTE_WRITESTRUCTURALFEATUREACTION:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getWriteStructuralFeatureAction().lock();
-				return eAny(returnValue); //16936
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getWriteStructuralFeatureAction().lock();
+			return eAny(returnValue); //16936
+		}
 	}
 	return PinImpl::eGet(featureID, resolve, coreType);
 }

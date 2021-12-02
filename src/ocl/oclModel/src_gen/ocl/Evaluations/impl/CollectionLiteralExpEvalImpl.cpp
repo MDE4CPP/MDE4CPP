@@ -32,11 +32,11 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Values/ValuesFactory.hpp"
-#include "ocl/Evaluations/EvaluationsFactory.hpp"
-#include "ocl/Expressions/ExpressionsFactory.hpp"
-#include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
+#include "ocl/Expressions/ExpressionsFactory.hpp"
+#include "ocl/Evaluations/EvaluationsFactory.hpp"
+#include "uml/umlFactory.hpp"
+#include "fUML/Semantics/Values/ValuesFactory.hpp"
 
 #include "ocl/Evaluations/CollectionLiteralPartEval.hpp"
 #include "ocl/Evaluations/EvalEnvironment.hpp"
@@ -278,7 +278,7 @@ Any CollectionLiteralExpEvalImpl::eGet(int featureID, bool resolve, bool coreTyp
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //156			
+			return eAny(tempList); //166			
 		}
 	}
 	return LiteralExpEvalImpl::eGet(featureID, resolve, coreType);
@@ -289,7 +289,7 @@ bool CollectionLiteralExpEvalImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case ocl::Evaluations::EvaluationsPackage::COLLECTIONLITERALEXPEVAL_ATTRIBUTE_PARTS:
-			return getParts() != nullptr; //156
+			return getParts() != nullptr; //166
 	}
 	return LiteralExpEvalImpl::internalEIsSet(featureID);
 }

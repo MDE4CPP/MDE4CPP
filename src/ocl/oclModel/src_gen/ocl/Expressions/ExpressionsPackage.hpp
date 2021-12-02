@@ -14,13 +14,13 @@
 
 namespace ecore 
 {
-	class EEnumLiteral;
-	class EDataType;
-	class EGenericType;
 	class EReference;
-	class EAttribute;
 	class EEnum;
 	class EClass;
+	class EDataType;
+	class EGenericType;
+	class EAttribute;
+	class EEnumLiteral;
 }
 
 namespace ocl::Expressions 
@@ -840,7 +840,7 @@ namespace ocl::Expressions
 			
 			// End Class VariableExp
 
-			static const int COLLECTIONKIND_CLASS = 13;
+			static const int COLLECTIONKIND_CLASS = 14;
 			
 			virtual std::shared_ptr<ecore::EEnum> getCollectionKind_Class() const = 0;
 			

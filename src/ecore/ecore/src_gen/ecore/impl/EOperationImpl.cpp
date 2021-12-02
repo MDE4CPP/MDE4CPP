@@ -148,9 +148,9 @@ EOperationImpl& EOperationImpl::operator=(const EOperationImpl & obj)
 		#endif
 		
 		/*Subset*/
-		getEParameters()->initSubset(getEContens());
+		getEParameters()->initSubset(getEContentUnion());
 		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_eParameters - Subset<ecore::EParameter, ecore::EObject >(getEContens())" << std::endl;
+			std::cout << "Initialising value Subset: " << "m_eParameters - Subset<ecore::EParameter, ecore::EObject >(getEContentUnion())" << std::endl;
 		#endif
 		
 
@@ -191,9 +191,9 @@ EOperationImpl& EOperationImpl::operator=(const EOperationImpl & obj)
 	}
 	
 	/*Subset*/
-	getEParameters()->initSubset(getEContens());
+	getEParameters()->initSubset(getEContentUnion());
 	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Initialising value Subset: " << "m_eParameters - Subset<ecore::EParameter, ecore::EObject >(getEContens())" << std::endl;
+		std::cout << "Initialising value Subset: " << "m_eParameters - Subset<ecore::EParameter, ecore::EObject >(getEContentUnion())" << std::endl;
 	#endif
 	
 	
@@ -312,9 +312,9 @@ std::shared_ptr<Subset<ecore::EParameter, ecore::EObject>> EOperationImpl::getEP
 		#endif
 		
 		/*Subset*/
-		getEParameters()->initSubset(getEContens());
+		getEParameters()->initSubset(getEContentUnion());
 		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_eParameters - Subset<ecore::EParameter, ecore::EObject >(getEContens())" << std::endl;
+			std::cout << "Initialising value Subset: " << "m_eParameters - Subset<ecore::EParameter, ecore::EObject >(getEContentUnion())" << std::endl;
 		#endif
 		
 	}
@@ -336,19 +336,19 @@ std::shared_ptr<Bag<ecore::ETypeParameter>> EOperationImpl::getETypeParameters()
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<Union<ecore::EObject>> EOperationImpl::getEContens() const
+std::shared_ptr<Union<ecore::EObject>> EOperationImpl::getEContentUnion() const
 {
-	if(m_eContens == nullptr)
+	if(m_eContentUnion == nullptr)
 	{
 		/*Union*/
-		m_eContens.reset(new Union<ecore::EObject>());
+		m_eContentUnion.reset(new Union<ecore::EObject>());
 			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_eContens - Union<ecore::EObject>()" << std::endl;
+			std::cout << "Initialising Union: " << "m_eContentUnion - Union<ecore::EObject>()" << std::endl;
 		#endif
 		
 		
 	}
-	return m_eContens;
+	return m_eContentUnion;
 }
 
 //*********************************
@@ -560,10 +560,10 @@ Any EOperationImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case ecore::ecorePackage::EOPERATION_ATTRIBUTE_ECONTAININGCLASS:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getEContainingClass().lock();
-				return eAny(returnValue); //4014
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getEContainingClass().lock();
+			return eAny(returnValue); //4114
+		}
 		case ecore::ecorePackage::EOPERATION_ATTRIBUTE_EEXCEPTIONS:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
@@ -574,7 +574,7 @@ Any EOperationImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //4017			
+			return eAny(tempList); //4117			
 		}
 		case ecore::ecorePackage::EOPERATION_ATTRIBUTE_EGENERICEXCEPTIONS:
 		{
@@ -586,7 +586,7 @@ Any EOperationImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //4018			
+			return eAny(tempList); //4118			
 		}
 		case ecore::ecorePackage::EOPERATION_ATTRIBUTE_EPARAMETERS:
 		{
@@ -598,7 +598,7 @@ Any EOperationImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //4016			
+			return eAny(tempList); //4116			
 		}
 		case ecore::ecorePackage::EOPERATION_ATTRIBUTE_ETYPEPARAMETERS:
 		{
@@ -610,10 +610,10 @@ Any EOperationImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //4015			
+			return eAny(tempList); //4115			
 		}
 		case ecore::ecorePackage::EOPERATION_ATTRIBUTE_OPERATIONID:
-			return eAny(getOperationID()); //4013
+			return eAny(getOperationID()); //4113
 	}
 	return ETypedElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -623,17 +623,17 @@ bool EOperationImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case ecore::ecorePackage::EOPERATION_ATTRIBUTE_ECONTAININGCLASS:
-			return getEContainingClass().lock() != nullptr; //4014
+			return getEContainingClass().lock() != nullptr; //4114
 		case ecore::ecorePackage::EOPERATION_ATTRIBUTE_EEXCEPTIONS:
-			return getEExceptions() != nullptr; //4017
+			return getEExceptions() != nullptr; //4117
 		case ecore::ecorePackage::EOPERATION_ATTRIBUTE_EGENERICEXCEPTIONS:
-			return getEGenericExceptions() != nullptr; //4018
+			return getEGenericExceptions() != nullptr; //4118
 		case ecore::ecorePackage::EOPERATION_ATTRIBUTE_EPARAMETERS:
-			return getEParameters() != nullptr; //4016
+			return getEParameters() != nullptr; //4116
 		case ecore::ecorePackage::EOPERATION_ATTRIBUTE_ETYPEPARAMETERS:
-			return getETypeParameters() != nullptr; //4015
+			return getETypeParameters() != nullptr; //4115
 		case ecore::ecorePackage::EOPERATION_ATTRIBUTE_OPERATIONID:
-			return getOperationID() != -1; //4013
+			return getOperationID() != -1; //4113
 	}
 	return ETypedElementImpl::internalEIsSet(featureID);
 }

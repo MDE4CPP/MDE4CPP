@@ -445,20 +445,20 @@ Any EGenericTypeImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case ecore::ecorePackage::EGENERICTYPE_ATTRIBUTE_ECLASSIFIER:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getEClassifier();
-				return eAny(returnValue); //285
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getEClassifier();
+			return eAny(returnValue); //285
+		}
 		case ecore::ecorePackage::EGENERICTYPE_ATTRIBUTE_ELOWERBOUND:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getELowerBound();
-				return eAny(returnValue); //283
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getELowerBound();
+			return eAny(returnValue); //283
+		}
 		case ecore::ecorePackage::EGENERICTYPE_ATTRIBUTE_ERAWTYPE:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getERawType();
-				return eAny(returnValue); //282
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getERawType();
+			return eAny(returnValue); //282
+		}
 		case ecore::ecorePackage::EGENERICTYPE_ATTRIBUTE_ETYPEARGUMENTS:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
@@ -472,15 +472,15 @@ Any EGenericTypeImpl::eGet(int featureID, bool resolve, bool coreType) const
 			return eAny(tempList); //281			
 		}
 		case ecore::ecorePackage::EGENERICTYPE_ATTRIBUTE_ETYPEPARAMETER:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getETypeParameter();
-				return eAny(returnValue); //284
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getETypeParameter();
+			return eAny(returnValue); //284
+		}
 		case ecore::ecorePackage::EGENERICTYPE_ATTRIBUTE_EUPPERBOUND:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getEUpperBound();
-				return eAny(returnValue); //280
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getEUpperBound();
+			return eAny(returnValue); //280
+		}
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
 }

@@ -7,15 +7,15 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
-#include "ecore/EParameter.hpp"
-#include "ecore/EDataType.hpp"
-#include "ecore/EStringToStringMapEntry.hpp"
-#include "ecore/EGenericType.hpp"
-#include "ecore/EReference.hpp"
-#include "ecore/EOperation.hpp"
-#include "ecore/EAttribute.hpp"
 #include "ecore/EAnnotation.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EClass.hpp"
+#include "ecore/EDataType.hpp"
+#include "ecore/EGenericType.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EParameter.hpp"
+#include "ecore/EOperation.hpp"
+#include "ecore/EStringToStringMapEntry.hpp"
 
 //depending model packages
 #include "ecore/ecorePackage.hpp"
@@ -57,7 +57,6 @@ void TypesPackageImpl::createAnyTypeContent(std::shared_ptr<ecore::EPackage> pac
 {
 	m_anyType_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, ANYTYPE_CLASS);
 	
-	m_anyType_Attribute_object = factory->createEReference_as_eReferences_in_EClass(m_anyType_Class, ANYTYPE_ATTRIBUTE_OBJECT);
 	
 	
 }

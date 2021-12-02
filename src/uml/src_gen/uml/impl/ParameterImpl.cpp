@@ -705,17 +705,17 @@ Any ParameterImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::PARAMETER_ATTRIBUTE_BEHAVIOR:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getBehavior().lock();
-				return eAny(returnValue); //17427
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getBehavior().lock();
+			return eAny(returnValue); //17427
+		}
 		case uml::umlPackage::PARAMETER_ATTRIBUTE_DEFAULT:
 			return eAny(getDefault()); //17419
 		case uml::umlPackage::PARAMETER_ATTRIBUTE_DEFAULTVALUE:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getDefaultValue();
-				return eAny(returnValue); //17420
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getDefaultValue();
+			return eAny(returnValue); //17420
+		}
 		case uml::umlPackage::PARAMETER_ATTRIBUTE_DIRECTION:
 			return eAny(getDirection()); //17421
 		case uml::umlPackage::PARAMETER_ATTRIBUTE_EFFECT:
@@ -725,10 +725,10 @@ Any ParameterImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::PARAMETER_ATTRIBUTE_ISSTREAM:
 			return eAny(getIsStream()); //17424
 		case uml::umlPackage::PARAMETER_ATTRIBUTE_OPERATION:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getOperation().lock();
-				return eAny(returnValue); //17425
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getOperation().lock();
+			return eAny(returnValue); //17425
+		}
 		case uml::umlPackage::PARAMETER_ATTRIBUTE_PARAMETERSET:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());

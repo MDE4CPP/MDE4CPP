@@ -4,15 +4,15 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
-#include "ecore/EParameter.hpp"
-#include "ecore/EDataType.hpp"
-#include "ecore/EStringToStringMapEntry.hpp"
-#include "ecore/EGenericType.hpp"
-#include "ecore/EReference.hpp"
-#include "ecore/EOperation.hpp"
-#include "ecore/EAttribute.hpp"
 #include "ecore/EAnnotation.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EClass.hpp"
+#include "ecore/EDataType.hpp"
+#include "ecore/EGenericType.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EParameter.hpp"
+#include "ecore/EOperation.hpp"
+#include "ecore/EStringToStringMapEntry.hpp"
 
 // metametamodel factory
 #include "ecore/ecoreFactory.hpp"
@@ -80,28 +80,6 @@ void TypesPackageImpl::initializeAnyTypeContent()
 	m_anyType_Class->setInterface(false);
 	
 	
-	m_anyType_Attribute_object->setName("object");
-	m_anyType_Attribute_object->setEType(ecore::ecorePackage::eInstance()->getEClassifier_Class());
-	m_anyType_Attribute_object->setLowerBound(0);
-	m_anyType_Attribute_object->setUpperBound(1);
-	m_anyType_Attribute_object->setTransient(false);
-	m_anyType_Attribute_object->setVolatile(false);
-	m_anyType_Attribute_object->setChangeable(true);
-	m_anyType_Attribute_object->setUnsettable(false);
-	m_anyType_Attribute_object->setUnique(true);
-	m_anyType_Attribute_object->setDerived(false);
-	m_anyType_Attribute_object->setOrdered(true);
-	m_anyType_Attribute_object->setContainment(true);
-	m_anyType_Attribute_object->setResolveProxies(true);
-	{
-		std::string defaultValue = "";
-		if (!defaultValue.empty())
-		{
-			m_anyType_Attribute_object->setDefaultValueLiteral(defaultValue);
-		}				
-			//undefined otherEnd
-			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
-	}
 	
 	
 }
@@ -165,11 +143,8 @@ void TypesPackageImpl::initializeCollectionTypeContent()
 		{
 			m_collectionType_Attribute_instance->setDefaultValueLiteral(defaultValue);
 		}				
-		std::shared_ptr<ecore::EReference>  otherEnd = ocl::Values::ValuesPackage::eInstance()->getCollectionValue_Attribute_model();
-		if (otherEnd != nullptr)
-	    {
-	   		m_collectionType_Attribute_instance->setEOpposite(otherEnd);
-	    }
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
 	m_collectionType_Operation_kindOf_CollectionType->setName("kindOf");

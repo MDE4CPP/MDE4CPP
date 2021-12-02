@@ -52,8 +52,8 @@
 #include "fUML/Semantics/Activities/Token.hpp"
 
 //Factories an Package includes
-#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -362,10 +362,10 @@ Any ReadSelfActionActivationImpl::eGet(int featureID, bool resolve, bool coreTyp
 	switch(featureID)
 	{
 		case fUML::Semantics::Actions::ActionsPackage::READSELFACTIONACTIVATION_ATTRIBUTE_READSELFACTION:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getReadSelfAction();
-				return eAny(returnValue); //9311
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getReadSelfAction();
+			return eAny(returnValue); //9311
+		}
 	}
 	return ActionActivationImpl::eGet(featureID, resolve, coreType);
 }

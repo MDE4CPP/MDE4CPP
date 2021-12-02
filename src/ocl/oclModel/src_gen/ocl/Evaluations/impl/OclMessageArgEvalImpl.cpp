@@ -33,9 +33,9 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
+#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
 #include "uml/umlFactory.hpp"
-#include "fUML/Semantics/Loci/LociFactory.hpp"
 
 #include "fUML/Semantics/Values/Evaluation.hpp"
 #include "fUML/Semantics/Loci/Locus.hpp"
@@ -322,20 +322,20 @@ Any OclMessageArgEvalImpl::eGet(int featureID, bool resolve, bool coreType) cons
 	switch(featureID)
 	{
 		case ocl::Evaluations::EvaluationsPackage::OCLMESSAGEARGEVAL_ATTRIBUTE_EXPRESSION:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getExpression();
-				return eAny(returnValue); //613
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getExpression();
+			return eAny(returnValue); //623
+		}
 		case ocl::Evaluations::EvaluationsPackage::OCLMESSAGEARGEVAL_ATTRIBUTE_UNSPECIFIED:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getUnspecified();
-				return eAny(returnValue); //612
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getUnspecified();
+			return eAny(returnValue); //622
+		}
 		case ocl::Evaluations::EvaluationsPackage::OCLMESSAGEARGEVAL_ATTRIBUTE_VARIABLE:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getVariable();
-				return eAny(returnValue); //614
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getVariable();
+			return eAny(returnValue); //624
+		}
 	}
 	return fUML::Semantics::Values::EvaluationImpl::eGet(featureID, resolve, coreType);
 }
@@ -345,11 +345,11 @@ bool OclMessageArgEvalImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case ocl::Evaluations::EvaluationsPackage::OCLMESSAGEARGEVAL_ATTRIBUTE_EXPRESSION:
-			return getExpression() != nullptr; //613
+			return getExpression() != nullptr; //623
 		case ocl::Evaluations::EvaluationsPackage::OCLMESSAGEARGEVAL_ATTRIBUTE_UNSPECIFIED:
-			return getUnspecified() != nullptr; //612
+			return getUnspecified() != nullptr; //622
 		case ocl::Evaluations::EvaluationsPackage::OCLMESSAGEARGEVAL_ATTRIBUTE_VARIABLE:
-			return getVariable() != nullptr; //614
+			return getVariable() != nullptr; //624
 	}
 	return fUML::Semantics::Values::EvaluationImpl::internalEIsSet(featureID);
 }
@@ -363,7 +363,7 @@ bool OclMessageArgEvalImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<ocl::Evaluations::OclExpEval> _expression = std::dynamic_pointer_cast<ocl::Evaluations::OclExpEval>(_temp);
-			setExpression(_expression); //613
+			setExpression(_expression); //623
 			return true;
 		}
 		case ocl::Evaluations::EvaluationsPackage::OCLMESSAGEARGEVAL_ATTRIBUTE_UNSPECIFIED:
@@ -371,7 +371,7 @@ bool OclMessageArgEvalImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<ocl::Evaluations::UnspecifiedValueExpEval> _unspecified = std::dynamic_pointer_cast<ocl::Evaluations::UnspecifiedValueExpEval>(_temp);
-			setUnspecified(_unspecified); //612
+			setUnspecified(_unspecified); //622
 			return true;
 		}
 		case ocl::Evaluations::EvaluationsPackage::OCLMESSAGEARGEVAL_ATTRIBUTE_VARIABLE:
@@ -379,7 +379,7 @@ bool OclMessageArgEvalImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<ocl::Evaluations::OclExpEval> _variable = std::dynamic_pointer_cast<ocl::Evaluations::OclExpEval>(_temp);
-			setVariable(_variable); //614
+			setVariable(_variable); //624
 			return true;
 		}
 	}

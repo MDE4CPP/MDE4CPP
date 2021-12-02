@@ -45,12 +45,12 @@ virtual public EObject
 			//*********************************
 			// Operations
 			//*********************************
-			virtual std::shared_ptr<Bag < ecore::EObject>> eAllContents() const ;
+			virtual Any eAllContents() const ;
 			virtual std::shared_ptr<ecore::EClass> eClass() const ;
-			
+			virtual std::shared_ptr<ecore::EObject> eContainer() ;
 			virtual std::shared_ptr<ecore::EStructuralFeature> eContainingFeature() const ;
 			virtual std::shared_ptr<ecore::EReference> eContainmentFeature() const ;
-			virtual std::shared_ptr<std::list < ecore::EObject>> eContents() const ;
+			virtual std::shared_ptr<Bag<ecore::EObject> > eContents() const ;
 			virtual std::shared_ptr<std::list < ecore::EObject>> eCrossReferences() const ;
 			virtual Any eGet(std::shared_ptr<ecore::EStructuralFeature> feature) const ;
 			virtual Any eGet(std::shared_ptr<ecore::EStructuralFeature> feature,bool resolve) const ;
@@ -64,20 +64,19 @@ virtual public EObject
 			//*********************************
 			// Attribute Getters & Setters
 			//*********************************
-			virtual int getMetaElementID() const ;
-			virtual void setMetaElementID (int _metaElementID);
+			virtual long long getMetaElementID() const ;
+			virtual void setMetaElementID (long long _metaElementID);
 			
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual std::weak_ptr<ecore::EObject> getEContainer() const ;
 			virtual void setEContainer(std::weak_ptr<ecore::EObject>) ;
 			
 			
 			//*********************************
 			// Union Reference Getters
 			//*********************************
-			virtual std::shared_ptr<Union<ecore::EObject>> getEContens() const ;
+			virtual std::shared_ptr<Union<ecore::EObject>> getEContentUnion() const ;
 			
 			//*********************************
 			// Container Getter

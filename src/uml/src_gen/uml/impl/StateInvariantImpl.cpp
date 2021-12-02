@@ -332,10 +332,10 @@ Any StateInvariantImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::STATEINVARIANT_ATTRIBUTE_INVARIANT:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getInvariant();
-				return eAny(returnValue); //22113
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getInvariant();
+			return eAny(returnValue); //22113
+		}
 	}
 	return InteractionFragmentImpl::eGet(featureID, resolve, coreType);
 }

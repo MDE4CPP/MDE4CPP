@@ -39,8 +39,8 @@
 #include "uml/Operation.hpp"
 
 //Factories an Package includes
-#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "uml/umlPackage.hpp"
 
@@ -248,10 +248,10 @@ Any CallEventBehaviorImpl::eGet(int featureID, bool resolve, bool coreType) cons
 	switch(featureID)
 	{
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::CALLEVENTBEHAVIOR_ATTRIBUTE_OPERATION:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getOperation();
-				return eAny(returnValue); //160
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getOperation();
+			return eAny(returnValue); //160
+		}
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
 }

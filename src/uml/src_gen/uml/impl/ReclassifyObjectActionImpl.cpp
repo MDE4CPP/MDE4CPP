@@ -533,10 +533,10 @@ Any ReclassifyObjectActionImpl::eGet(int featureID, bool resolve, bool coreType)
 			return eAny(tempList); //20328			
 		}
 		case uml::umlPackage::RECLASSIFYOBJECTACTION_ATTRIBUTE_OBJECT:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getObject();
-				return eAny(returnValue); //20329
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getObject();
+			return eAny(returnValue); //20329
+		}
 		case uml::umlPackage::RECLASSIFYOBJECTACTION_ATTRIBUTE_OLDCLASSIFIER:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());

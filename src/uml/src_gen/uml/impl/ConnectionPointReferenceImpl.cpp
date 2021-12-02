@@ -431,10 +431,10 @@ Any ConnectionPointReferenceImpl::eGet(int featureID, bool resolve, bool coreTyp
 			return eAny(tempList); //5213			
 		}
 		case uml::umlPackage::CONNECTIONPOINTREFERENCE_ATTRIBUTE_STATE:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getState().lock();
-				return eAny(returnValue); //5214
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getState().lock();
+			return eAny(returnValue); //5214
+		}
 	}
 	return VertexImpl::eGet(featureID, resolve, coreType);
 }

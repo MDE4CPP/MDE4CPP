@@ -565,15 +565,15 @@ Any ObjectNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::OBJECTNODE_ATTRIBUTE_ORDERING:
 			return eAny(getOrdering()); //16023
 		case uml::umlPackage::OBJECTNODE_ATTRIBUTE_SELECTION:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getSelection();
-				return eAny(returnValue); //16024
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getSelection();
+			return eAny(returnValue); //16024
+		}
 		case uml::umlPackage::OBJECTNODE_ATTRIBUTE_UPPERBOUND:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getUpperBound();
-				return eAny(returnValue); //16025
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getUpperBound();
+			return eAny(returnValue); //16025
+		}
 	}
 	Any result;
 	result = ActivityNodeImpl::eGet(featureID, resolve, coreType);

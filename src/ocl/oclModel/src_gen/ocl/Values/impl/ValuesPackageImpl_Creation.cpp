@@ -7,15 +7,15 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
-#include "ecore/EParameter.hpp"
-#include "ecore/EDataType.hpp"
-#include "ecore/EStringToStringMapEntry.hpp"
-#include "ecore/EGenericType.hpp"
-#include "ecore/EReference.hpp"
-#include "ecore/EOperation.hpp"
-#include "ecore/EAttribute.hpp"
 #include "ecore/EAnnotation.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EClass.hpp"
+#include "ecore/EDataType.hpp"
+#include "ecore/EGenericType.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EParameter.hpp"
+#include "ecore/EOperation.hpp"
+#include "ecore/EStringToStringMapEntry.hpp"
 
 //depending model packages
 #include "ecore/ecorePackage.hpp"
@@ -36,6 +36,7 @@ void ValuesPackageImpl::createPackageContents(std::shared_ptr<ecore::EPackage> p
 
 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
 
+	createAnyValueContent(package, factory);
 	createBagTypeValueContent(package, factory);
 	createCollectionValueContent(package, factory);
 	createElementContent(package, factory);
@@ -55,6 +56,16 @@ void ValuesPackageImpl::createPackageContents(std::shared_ptr<ecore::EPackage> p
 
 }
 
+void ValuesPackageImpl::createAnyValueContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
+{
+	m_anyValue_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, ANYVALUE_CLASS);
+	m_anyValue_Attribute_value = factory->createEAttribute_as_eAttributes_in_EClass(m_anyValue_Class, ANYVALUE_ATTRIBUTE_VALUE);
+	
+	
+	m_anyValue_Operation_toString = factory->createEOperation_as_eOperations_in_EClass(m_anyValue_Class, ANYVALUE_OPERATION_TOSTRING);
+	
+}
+
 void ValuesPackageImpl::createBagTypeValueContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_bagTypeValue_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, BAGTYPEVALUE_CLASS);
@@ -69,7 +80,6 @@ void ValuesPackageImpl::createCollectionValueContent(std::shared_ptr<ecore::EPac
 	m_collectionValue_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, COLLECTIONVALUE_CLASS);
 	
 	m_collectionValue_Attribute_elements = factory->createEReference_as_eReferences_in_EClass(m_collectionValue_Class, COLLECTIONVALUE_ATTRIBUTE_ELEMENTS);
-	m_collectionValue_Attribute_model = factory->createEReference_as_eReferences_in_EClass(m_collectionValue_Class, COLLECTIONVALUE_ATTRIBUTE_MODEL);
 	
 	m_collectionValue_Operation_addValue_Value = factory->createEOperation_as_eOperations_in_EClass(m_collectionValue_Class, COLLECTIONVALUE_OPERATION_ADDVALUE_VALUE);
 	m_collectionValue_Operation_equals_Value = factory->createEOperation_as_eOperations_in_EClass(m_collectionValue_Class, COLLECTIONVALUE_OPERATION_EQUALS_VALUE);

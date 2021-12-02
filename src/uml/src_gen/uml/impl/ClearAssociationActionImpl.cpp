@@ -451,15 +451,15 @@ Any ClearAssociationActionImpl::eGet(int featureID, bool resolve, bool coreType)
 	switch(featureID)
 	{
 		case uml::umlPackage::CLEARASSOCIATIONACTION_ATTRIBUTE_ASSOCIATION:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getAssociation();
-				return eAny(returnValue); //3927
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getAssociation();
+			return eAny(returnValue); //3927
+		}
 		case uml::umlPackage::CLEARASSOCIATIONACTION_ATTRIBUTE_OBJECT:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getObject();
-				return eAny(returnValue); //3928
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getObject();
+			return eAny(returnValue); //3928
+		}
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
 }

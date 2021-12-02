@@ -481,10 +481,10 @@ Any ComponentRealizationImpl::eGet(int featureID, bool resolve, bool coreType) c
 	switch(featureID)
 	{
 		case uml::umlPackage::COMPONENTREALIZATION_ATTRIBUTE_ABSTRACTION:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getAbstraction().lock();
-				return eAny(returnValue); //4819
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getAbstraction().lock();
+			return eAny(returnValue); //4819
+		}
 		case uml::umlPackage::COMPONENTREALIZATION_ATTRIBUTE_REALIZINGCLASSIFIER:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());

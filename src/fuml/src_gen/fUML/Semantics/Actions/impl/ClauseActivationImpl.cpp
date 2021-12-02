@@ -40,8 +40,8 @@
 #include "fUML/Semantics/Actions/ConditionalNodeActivation.hpp"
 
 //Factories an Package includes
-#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -322,15 +322,15 @@ Any ClauseActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case fUML::Semantics::Actions::ActionsPackage::CLAUSEACTIVATION_ATTRIBUTE_CLAUSE:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getClause();
-				return eAny(returnValue); //260
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getClause();
+			return eAny(returnValue); //260
+		}
 		case fUML::Semantics::Actions::ActionsPackage::CLAUSEACTIVATION_ATTRIBUTE_CONDITIONALNODEACTIVATION:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getConditionalNodeActivation();
-				return eAny(returnValue); //261
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getConditionalNodeActivation();
+			return eAny(returnValue); //261
+		}
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
 }

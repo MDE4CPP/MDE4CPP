@@ -255,7 +255,7 @@ Any TemplateParameterTypeImpl::eGet(int featureID, bool resolve, bool coreType) 
 	switch(featureID)
 	{
 		case ocl::Types::TypesPackage::TEMPLATEPARAMETERTYPE_ATTRIBUTE_SPECIFICATION:
-			return eAny(getSpecification()); //838
+			return eAny(getSpecification()); //848
 	}
 	return ecore::EClassifierImpl::eGet(featureID, resolve, coreType);
 }
@@ -265,7 +265,7 @@ bool TemplateParameterTypeImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case ocl::Types::TypesPackage::TEMPLATEPARAMETERTYPE_ATTRIBUTE_SPECIFICATION:
-			return getSpecification() != ""; //838
+			return getSpecification() != ""; //848
 	}
 	return ecore::EClassifierImpl::internalEIsSet(featureID);
 }
@@ -278,7 +278,7 @@ bool TemplateParameterTypeImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::string _specification = newValue->get<std::string>();
-			setSpecification(_specification); //838
+			setSpecification(_specification); //848
 			return true;
 		}
 	}

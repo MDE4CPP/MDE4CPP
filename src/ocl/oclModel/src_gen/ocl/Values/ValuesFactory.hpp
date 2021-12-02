@@ -52,6 +52,11 @@ namespace ocl::Values
 			virtual std::shared_ptr<ecore::EObject> create(const int classID,  std::shared_ptr<ecore::EObject> container = nullptr, const int referenceID = -1) const = 0;
 			virtual std::shared_ptr<ecore::EObject> create(std::shared_ptr<ecore::EClass> _class, std::shared_ptr<EObject> _container=nullptr, const int referenceID = -1) const = 0;
 
+			virtual std::shared_ptr<ocl::Values::AnyValue> createAnyValue(const int metaElementID = ValuesPackage::ANYVALUE_CLASS) const = 0;
+			//Add as contained object
+			virtual std::shared_ptr<ocl::Values::AnyValue> createAnyValue_as_value_in_ObjectToken(std::shared_ptr<fUML::Semantics::Activities::ObjectToken> par_ObjectToken, const int metaElementID = ValuesPackage::ANYVALUE_CLASS) const = 0;
+			virtual std::shared_ptr<ocl::Values::AnyValue> createAnyValue_as_values_in_FeatureValue(std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> par_FeatureValue, const int metaElementID = ValuesPackage::ANYVALUE_CLASS) const = 0;
+			virtual std::shared_ptr<ocl::Values::AnyValue> createAnyValue_as_values_in_ParameterValue(std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> par_ParameterValue, const int metaElementID = ValuesPackage::ANYVALUE_CLASS) const = 0;
 			virtual std::shared_ptr<ocl::Values::BagTypeValue> createBagTypeValue(const int metaElementID = ValuesPackage::BAGTYPEVALUE_CLASS) const = 0;
 			virtual std::shared_ptr<ocl::Values::CollectionValue> createCollectionValue(const int metaElementID = ValuesPackage::COLLECTIONVALUE_CLASS) const = 0;
 			virtual std::shared_ptr<ocl::Values::Element> createElement(const int metaElementID = ValuesPackage::ELEMENT_CLASS) const = 0;

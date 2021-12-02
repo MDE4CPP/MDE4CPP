@@ -4,15 +4,15 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
-#include "ecore/EParameter.hpp"
-#include "ecore/EDataType.hpp"
-#include "ecore/EStringToStringMapEntry.hpp"
-#include "ecore/EGenericType.hpp"
-#include "ecore/EReference.hpp"
-#include "ecore/EOperation.hpp"
-#include "ecore/EAttribute.hpp"
 #include "ecore/EAnnotation.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EClass.hpp"
+#include "ecore/EDataType.hpp"
+#include "ecore/EGenericType.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EParameter.hpp"
+#include "ecore/EOperation.hpp"
+#include "ecore/EStringToStringMapEntry.hpp"
 
 //metamodel factory
 #include "ocl/Values/ValuesFactory.hpp"
@@ -59,6 +59,25 @@ void ValuesPackageImpl::init(std::shared_ptr<ecore::EPackage> package)
 
 
 
+// Begin Class AnyValue
+std::shared_ptr<ecore::EClass> ocl::Values::ValuesPackageImpl::getAnyValue_Class() const
+{
+	return m_anyValue_Class;
+}
+
+std::shared_ptr<ecore::EAttribute> ocl::Values::ValuesPackageImpl::getAnyValue_Attribute_value() const
+{
+	return m_anyValue_Attribute_value;
+}
+
+
+std::shared_ptr<ecore::EOperation> ocl::Values::ValuesPackageImpl::getAnyValue_Operation_toString() const
+{
+	return m_anyValue_Operation_toString;
+}
+
+// End Class AnyValue
+
 // Begin Class BagTypeValue
 std::shared_ptr<ecore::EClass> ocl::Values::ValuesPackageImpl::getBagTypeValue_Class() const
 {
@@ -84,10 +103,6 @@ std::shared_ptr<ecore::EClass> ocl::Values::ValuesPackageImpl::getCollectionValu
 std::shared_ptr<ecore::EReference> ocl::Values::ValuesPackageImpl::getCollectionValue_Attribute_elements() const
 {
 	return m_collectionValue_Attribute_elements;
-}
-std::shared_ptr<ecore::EReference> ocl::Values::ValuesPackageImpl::getCollectionValue_Attribute_model() const
-{
-	return m_collectionValue_Attribute_model;
 }
 
 std::shared_ptr<ecore::EOperation> ocl::Values::ValuesPackageImpl::getCollectionValue_Operation_addValue_Value() const

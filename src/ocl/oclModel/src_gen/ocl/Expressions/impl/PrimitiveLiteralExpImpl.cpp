@@ -32,9 +32,9 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "ocl/Evaluations/EvaluationsFactory.hpp"
 #include "ecore/ecoreFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
+#include "ocl/Evaluations/EvaluationsFactory.hpp"
 
 #include "ocl/Expressions/CallExp.hpp"
 #include "ocl/Expressions/CollectionRange.hpp"
@@ -390,7 +390,7 @@ Any PrimitiveLiteralExpImpl::eGet(int featureID, bool resolve, bool coreType) co
 	switch(featureID)
 	{
 		case ocl::Expressions::ExpressionsPackage::PRIMITIVELITERALEXP_ATTRIBUTE_SYMBOL:
-			return eAny(getSymbol()); //6922
+			return eAny(getSymbol()); //7022
 	}
 	return LiteralExpImpl::eGet(featureID, resolve, coreType);
 }
@@ -400,7 +400,7 @@ bool PrimitiveLiteralExpImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case ocl::Expressions::ExpressionsPackage::PRIMITIVELITERALEXP_ATTRIBUTE_SYMBOL:
-			return getSymbol() != ""; //6922
+			return getSymbol() != ""; //7022
 	}
 	return LiteralExpImpl::internalEIsSet(featureID);
 }
@@ -413,7 +413,7 @@ bool PrimitiveLiteralExpImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::string _symbol = newValue->get<std::string>();
-			setSymbol(_symbol); //6922
+			setSymbol(_symbol); //7022
 			return true;
 		}
 	}

@@ -439,15 +439,15 @@ Any LetExpImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case ocl::Expressions::ExpressionsPackage::LETEXP_ATTRIBUTE_IN:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getIn();
-				return eAny(returnValue); //4122
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getIn();
+			return eAny(returnValue); //4222
+		}
 		case ocl::Expressions::ExpressionsPackage::LETEXP_ATTRIBUTE_VARIABLE:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getVariable();
-				return eAny(returnValue); //4123
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getVariable();
+			return eAny(returnValue); //4223
+		}
 	}
 	return OclExpressionImpl::eGet(featureID, resolve, coreType);
 }
@@ -457,9 +457,9 @@ bool LetExpImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case ocl::Expressions::ExpressionsPackage::LETEXP_ATTRIBUTE_IN:
-			return getIn() != nullptr; //4122
+			return getIn() != nullptr; //4222
 		case ocl::Expressions::ExpressionsPackage::LETEXP_ATTRIBUTE_VARIABLE:
-			return getVariable() != nullptr; //4123
+			return getVariable() != nullptr; //4223
 	}
 	return OclExpressionImpl::internalEIsSet(featureID);
 }
@@ -473,7 +473,7 @@ bool LetExpImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<ocl::Expressions::OclExpression> _in = std::dynamic_pointer_cast<ocl::Expressions::OclExpression>(_temp);
-			setIn(_in); //4122
+			setIn(_in); //4222
 			return true;
 		}
 		case ocl::Expressions::ExpressionsPackage::LETEXP_ATTRIBUTE_VARIABLE:
@@ -481,7 +481,7 @@ bool LetExpImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<ocl::Expressions::Variable> _variable = std::dynamic_pointer_cast<ocl::Expressions::Variable>(_temp);
-			setVariable(_variable); //4123
+			setVariable(_variable); //4223
 			return true;
 		}
 	}

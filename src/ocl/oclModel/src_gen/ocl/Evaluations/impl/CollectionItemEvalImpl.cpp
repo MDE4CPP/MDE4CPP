@@ -31,10 +31,10 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "ocl/Evaluations/EvaluationsFactory.hpp"
-#include "fUML/Semantics/Values/ValuesFactory.hpp"
-#include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
+#include "ocl/Evaluations/EvaluationsFactory.hpp"
+#include "uml/umlFactory.hpp"
+#include "fUML/Semantics/Values/ValuesFactory.hpp"
 
 #include "ocl/Evaluations/CollectionLiteralPartEval.hpp"
 #include "fUML/Semantics/Loci/Locus.hpp"
@@ -259,10 +259,10 @@ Any CollectionItemEvalImpl::eGet(int featureID, bool resolve, bool coreType) con
 	switch(featureID)
 	{
 		case ocl::Evaluations::EvaluationsPackage::COLLECTIONITEMEVAL_ATTRIBUTE_ITEM:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getItem();
-				return eAny(returnValue); //123
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getItem();
+			return eAny(returnValue); //133
+		}
 	}
 	return CollectionLiteralPartEvalImpl::eGet(featureID, resolve, coreType);
 }
@@ -272,7 +272,7 @@ bool CollectionItemEvalImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case ocl::Evaluations::EvaluationsPackage::COLLECTIONITEMEVAL_ATTRIBUTE_ITEM:
-			return getItem() != nullptr; //123
+			return getItem() != nullptr; //133
 	}
 	return CollectionLiteralPartEvalImpl::internalEIsSet(featureID);
 }
@@ -286,7 +286,7 @@ bool CollectionItemEvalImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<ocl::Evaluations::OclExpEval> _item = std::dynamic_pointer_cast<ocl::Evaluations::OclExpEval>(_temp);
-			setItem(_item); //123
+			setItem(_item); //133
 			return true;
 		}
 	}

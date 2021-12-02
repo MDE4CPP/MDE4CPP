@@ -555,50 +555,50 @@ Any VariableImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case ocl::Expressions::ExpressionsPackage::VARIABLE_ATTRIBUTE_BASEEXP:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getBaseExp().lock();
-				return eAny(returnValue); //9613
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getBaseExp().lock();
+			return eAny(returnValue); //9713
+		}
 		case ocl::Expressions::ExpressionsPackage::VARIABLE_ATTRIBUTE_INITEXPRESSION:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getInitExpression();
-				return eAny(returnValue); //9610
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getInitExpression();
+			return eAny(returnValue); //9710
+		}
 		case ocl::Expressions::ExpressionsPackage::VARIABLE_ATTRIBUTE_LOOPEXP:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getLoopExp().lock();
-				return eAny(returnValue); //9612
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getLoopExp().lock();
+			return eAny(returnValue); //9712
+		}
 		case ocl::Expressions::ExpressionsPackage::VARIABLE_ATTRIBUTE_REFERRINGEXP:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getReferringExp();
-				return eAny(returnValue); //9614
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getReferringExp();
+			return eAny(returnValue); //9714
+		}
 		case ocl::Expressions::ExpressionsPackage::VARIABLE_ATTRIBUTE_REPRESENTEDPARAMETER:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getRepresentedParameter();
-				return eAny(returnValue); //9611
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getRepresentedParameter();
+			return eAny(returnValue); //9711
+		}
 		case ocl::Expressions::ExpressionsPackage::VARIABLE_ATTRIBUTE_RESULTOWNER:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getResultOwner().lock();
-				return eAny(returnValue); //9616
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getResultOwner().lock();
+			return eAny(returnValue); //9716
+		}
 		case ocl::Expressions::ExpressionsPackage::VARIABLE_ATTRIBUTE_SELFOWNER:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getSelfOwner().lock();
-				return eAny(returnValue); //9615
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getSelfOwner().lock();
+			return eAny(returnValue); //9715
+		}
 		case ocl::Expressions::ExpressionsPackage::VARIABLE_ATTRIBUTE_VALUE:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getValue();
-				return eAny(returnValue); //9618
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getValue();
+			return eAny(returnValue); //9718
+		}
 		case ocl::Expressions::ExpressionsPackage::VARIABLE_ATTRIBUTE_VAROWNER:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getVarOwner().lock();
-				return eAny(returnValue); //9617
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getVarOwner().lock();
+			return eAny(returnValue); //9717
+		}
 	}
 	return ecore::ETypedElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -608,23 +608,23 @@ bool VariableImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case ocl::Expressions::ExpressionsPackage::VARIABLE_ATTRIBUTE_BASEEXP:
-			return getBaseExp().lock() != nullptr; //9613
+			return getBaseExp().lock() != nullptr; //9713
 		case ocl::Expressions::ExpressionsPackage::VARIABLE_ATTRIBUTE_INITEXPRESSION:
-			return getInitExpression() != nullptr; //9610
+			return getInitExpression() != nullptr; //9710
 		case ocl::Expressions::ExpressionsPackage::VARIABLE_ATTRIBUTE_LOOPEXP:
-			return getLoopExp().lock() != nullptr; //9612
+			return getLoopExp().lock() != nullptr; //9712
 		case ocl::Expressions::ExpressionsPackage::VARIABLE_ATTRIBUTE_REFERRINGEXP:
-			return getReferringExp() != nullptr; //9614
+			return getReferringExp() != nullptr; //9714
 		case ocl::Expressions::ExpressionsPackage::VARIABLE_ATTRIBUTE_REPRESENTEDPARAMETER:
-			return getRepresentedParameter() != nullptr; //9611
+			return getRepresentedParameter() != nullptr; //9711
 		case ocl::Expressions::ExpressionsPackage::VARIABLE_ATTRIBUTE_RESULTOWNER:
-			return getResultOwner().lock() != nullptr; //9616
+			return getResultOwner().lock() != nullptr; //9716
 		case ocl::Expressions::ExpressionsPackage::VARIABLE_ATTRIBUTE_SELFOWNER:
-			return getSelfOwner().lock() != nullptr; //9615
+			return getSelfOwner().lock() != nullptr; //9715
 		case ocl::Expressions::ExpressionsPackage::VARIABLE_ATTRIBUTE_VALUE:
-			return getValue() != nullptr; //9618
+			return getValue() != nullptr; //9718
 		case ocl::Expressions::ExpressionsPackage::VARIABLE_ATTRIBUTE_VAROWNER:
-			return getVarOwner().lock() != nullptr; //9617
+			return getVarOwner().lock() != nullptr; //9717
 	}
 	return ecore::ETypedElementImpl::internalEIsSet(featureID);
 }
@@ -638,7 +638,7 @@ bool VariableImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<ocl::Expressions::IterateExp> _baseExp = std::dynamic_pointer_cast<ocl::Expressions::IterateExp>(_temp);
-			setBaseExp(_baseExp); //9613
+			setBaseExp(_baseExp); //9713
 			return true;
 		}
 		case ocl::Expressions::ExpressionsPackage::VARIABLE_ATTRIBUTE_INITEXPRESSION:
@@ -646,7 +646,7 @@ bool VariableImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<ocl::Expressions::OclExpression> _initExpression = std::dynamic_pointer_cast<ocl::Expressions::OclExpression>(_temp);
-			setInitExpression(_initExpression); //9610
+			setInitExpression(_initExpression); //9710
 			return true;
 		}
 		case ocl::Expressions::ExpressionsPackage::VARIABLE_ATTRIBUTE_LOOPEXP:
@@ -654,7 +654,7 @@ bool VariableImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<ocl::Expressions::LoopExp> _loopExp = std::dynamic_pointer_cast<ocl::Expressions::LoopExp>(_temp);
-			setLoopExp(_loopExp); //9612
+			setLoopExp(_loopExp); //9712
 			return true;
 		}
 		case ocl::Expressions::ExpressionsPackage::VARIABLE_ATTRIBUTE_REFERRINGEXP:
@@ -662,7 +662,7 @@ bool VariableImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<ocl::Expressions::VariableExp> _referringExp = std::dynamic_pointer_cast<ocl::Expressions::VariableExp>(_temp);
-			setReferringExp(_referringExp); //9614
+			setReferringExp(_referringExp); //9714
 			return true;
 		}
 		case ocl::Expressions::ExpressionsPackage::VARIABLE_ATTRIBUTE_REPRESENTEDPARAMETER:
@@ -670,7 +670,7 @@ bool VariableImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<ecore::EParameter> _representedParameter = std::dynamic_pointer_cast<ecore::EParameter>(_temp);
-			setRepresentedParameter(_representedParameter); //9611
+			setRepresentedParameter(_representedParameter); //9711
 			return true;
 		}
 		case ocl::Expressions::ExpressionsPackage::VARIABLE_ATTRIBUTE_RESULTOWNER:
@@ -678,7 +678,7 @@ bool VariableImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<ocl::Expressions::ExpressionInOcl> _resultOwner = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl>(_temp);
-			setResultOwner(_resultOwner); //9616
+			setResultOwner(_resultOwner); //9716
 			return true;
 		}
 		case ocl::Expressions::ExpressionsPackage::VARIABLE_ATTRIBUTE_SELFOWNER:
@@ -686,7 +686,7 @@ bool VariableImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<ocl::Expressions::ExpressionInOcl> _selfOwner = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl>(_temp);
-			setSelfOwner(_selfOwner); //9615
+			setSelfOwner(_selfOwner); //9715
 			return true;
 		}
 		case ocl::Expressions::ExpressionsPackage::VARIABLE_ATTRIBUTE_VALUE:
@@ -694,7 +694,7 @@ bool VariableImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<fUML::Semantics::Values::Value> _value = std::dynamic_pointer_cast<fUML::Semantics::Values::Value>(_temp);
-			setValue(_value); //9618
+			setValue(_value); //9718
 			return true;
 		}
 		case ocl::Expressions::ExpressionsPackage::VARIABLE_ATTRIBUTE_VAROWNER:
@@ -702,7 +702,7 @@ bool VariableImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<ocl::Expressions::ExpressionInOcl> _varOwner = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl>(_temp);
-			setVarOwner(_varOwner); //9617
+			setVarOwner(_varOwner); //9717
 			return true;
 		}
 	}

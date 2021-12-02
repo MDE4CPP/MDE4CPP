@@ -277,15 +277,15 @@ Any VariableDeclEvalImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case ocl::Evaluations::EvaluationsPackage::VARIABLEDECLEVAL_ATTRIBUTE_INITEXP:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getInitExp();
-				return eAny(returnValue); //970
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getInitExp();
+			return eAny(returnValue); //980
+		}
 		case ocl::Evaluations::EvaluationsPackage::VARIABLEDECLEVAL_ATTRIBUTE_NAME:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getName();
-				return eAny(returnValue); //971
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getName();
+			return eAny(returnValue); //981
+		}
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
 }
@@ -295,9 +295,9 @@ bool VariableDeclEvalImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case ocl::Evaluations::EvaluationsPackage::VARIABLEDECLEVAL_ATTRIBUTE_INITEXP:
-			return getInitExp() != nullptr; //970
+			return getInitExp() != nullptr; //980
 		case ocl::Evaluations::EvaluationsPackage::VARIABLEDECLEVAL_ATTRIBUTE_NAME:
-			return getName() != nullptr; //971
+			return getName() != nullptr; //981
 	}
 	return ecore::EObjectImpl::internalEIsSet(featureID);
 }
@@ -311,7 +311,7 @@ bool VariableDeclEvalImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<ocl::Evaluations::OclExpEval> _initExp = std::dynamic_pointer_cast<ocl::Evaluations::OclExpEval>(_temp);
-			setInitExp(_initExp); //970
+			setInitExp(_initExp); //980
 			return true;
 		}
 		case ocl::Evaluations::EvaluationsPackage::VARIABLEDECLEVAL_ATTRIBUTE_NAME:
@@ -319,7 +319,7 @@ bool VariableDeclEvalImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> _name = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::StringValue>(_temp);
-			setName(_name); //971
+			setName(_name); //981
 			return true;
 		}
 	}

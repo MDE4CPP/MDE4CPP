@@ -141,19 +141,19 @@ std::weak_ptr<ecore::EOperation> EParameterImpl::getEOperation() const
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<Union<ecore::EObject>> EParameterImpl::getEContens() const
+std::shared_ptr<Union<ecore::EObject>> EParameterImpl::getEContentUnion() const
 {
-	if(m_eContens == nullptr)
+	if(m_eContentUnion == nullptr)
 	{
 		/*Union*/
-		m_eContens.reset(new Union<ecore::EObject>());
+		m_eContentUnion.reset(new Union<ecore::EObject>());
 			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_eContens - Union<ecore::EObject>()" << std::endl;
+			std::cout << "Initialising Union: " << "m_eContentUnion - Union<ecore::EObject>()" << std::endl;
 		#endif
 		
 		
 	}
-	return m_eContens;
+	return m_eContentUnion;
 }
 
 //*********************************
@@ -252,10 +252,10 @@ Any EParameterImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case ecore::ecorePackage::EPARAMETER_ATTRIBUTE_EOPERATION:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getEOperation().lock();
-				return eAny(returnValue); //4213
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getEOperation().lock();
+			return eAny(returnValue); //4313
+		}
 	}
 	return ETypedElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -265,7 +265,7 @@ bool EParameterImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case ecore::ecorePackage::EPARAMETER_ATTRIBUTE_EOPERATION:
-			return getEOperation().lock() != nullptr; //4213
+			return getEOperation().lock() != nullptr; //4313
 	}
 	return ETypedElementImpl::internalEIsSet(featureID);
 }

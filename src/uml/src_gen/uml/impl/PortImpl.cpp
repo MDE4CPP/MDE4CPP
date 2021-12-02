@@ -707,10 +707,10 @@ Any PortImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::PORT_ATTRIBUTE_ISSERVICE:
 			return eAny(getIsService()); //18146
 		case uml::umlPackage::PORT_ATTRIBUTE_PROTOCOL:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getProtocol();
-				return eAny(returnValue); //18147
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getProtocol();
+			return eAny(returnValue); //18147
+		}
 		case uml::umlPackage::PORT_ATTRIBUTE_PROVIDED:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());

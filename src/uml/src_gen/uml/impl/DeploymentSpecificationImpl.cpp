@@ -538,10 +538,10 @@ Any DeploymentSpecificationImpl::eGet(int featureID, bool resolve, bool coreType
 	switch(featureID)
 	{
 		case uml::umlPackage::DEPLOYMENTSPECIFICATION_ATTRIBUTE_DEPLOYMENT:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getDeployment().lock();
-				return eAny(returnValue); //7045
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getDeployment().lock();
+			return eAny(returnValue); //7045
+		}
 		case uml::umlPackage::DEPLOYMENTSPECIFICATION_ATTRIBUTE_DEPLOYMENTLOCATION:
 			return eAny(getDeploymentLocation()); //7043
 		case uml::umlPackage::DEPLOYMENTSPECIFICATION_ATTRIBUTE_EXECUTIONLOCATION:

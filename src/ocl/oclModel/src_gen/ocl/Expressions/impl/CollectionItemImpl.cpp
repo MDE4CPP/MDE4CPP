@@ -258,10 +258,10 @@ Any CollectionItemImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case ocl::Expressions::ExpressionsPackage::COLLECTIONITEM_ATTRIBUTE_ITEM:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getItem();
-				return eAny(returnValue); //1110
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getItem();
+			return eAny(returnValue); //1210
+		}
 	}
 	return CollectionLiteralPartImpl::eGet(featureID, resolve, coreType);
 }
@@ -271,7 +271,7 @@ bool CollectionItemImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case ocl::Expressions::ExpressionsPackage::COLLECTIONITEM_ATTRIBUTE_ITEM:
-			return getItem() != nullptr; //1110
+			return getItem() != nullptr; //1210
 	}
 	return CollectionLiteralPartImpl::internalEIsSet(featureID);
 }
@@ -285,7 +285,7 @@ bool CollectionItemImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<ocl::Expressions::OclExpression> _item = std::dynamic_pointer_cast<ocl::Expressions::OclExpression>(_temp);
-			setItem(_item); //1110
+			setItem(_item); //1210
 			return true;
 		}
 	}

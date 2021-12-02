@@ -651,20 +651,20 @@ Any RegionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::REGION_ATTRIBUTE_EXTENDEDREGION:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getExtendedRegion();
-				return eAny(returnValue); //20718
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getExtendedRegion();
+			return eAny(returnValue); //20718
+		}
 		case uml::umlPackage::REGION_ATTRIBUTE_STATE:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getState().lock();
-				return eAny(returnValue); //20719
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getState().lock();
+			return eAny(returnValue); //20719
+		}
 		case uml::umlPackage::REGION_ATTRIBUTE_STATEMACHINE:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getStateMachine().lock();
-				return eAny(returnValue); //20720
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getStateMachine().lock();
+			return eAny(returnValue); //20720
+		}
 		case uml::umlPackage::REGION_ATTRIBUTE_SUBVERTEX:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());

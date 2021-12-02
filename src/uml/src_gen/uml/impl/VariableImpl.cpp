@@ -368,15 +368,15 @@ Any VariableImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::VARIABLE_ATTRIBUTE_ACTIVITYSCOPE:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getActivityScope().lock();
-				return eAny(returnValue); //25219
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getActivityScope().lock();
+			return eAny(returnValue); //25219
+		}
 		case uml::umlPackage::VARIABLE_ATTRIBUTE_SCOPE:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getScope().lock();
-				return eAny(returnValue); //25220
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getScope().lock();
+			return eAny(returnValue); //25220
+		}
 	}
 	Any result;
 	result = ConnectableElementImpl::eGet(featureID, resolve, coreType);

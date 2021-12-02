@@ -380,10 +380,10 @@ Any TimeEventImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::TIMEEVENT_ATTRIBUTE_ISRELATIVE:
 			return eAny(getIsRelative()); //23712
 		case uml::umlPackage::TIMEEVENT_ATTRIBUTE_WHEN:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getWhen();
-				return eAny(returnValue); //23713
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getWhen();
+			return eAny(returnValue); //23713
+		}
 	}
 	return EventImpl::eGet(featureID, resolve, coreType);
 }

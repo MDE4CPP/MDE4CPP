@@ -343,10 +343,10 @@ Any ActionExecutionSpecificationImpl::eGet(int featureID, bool resolve, bool cor
 	switch(featureID)
 	{
 		case uml::umlPackage::ACTIONEXECUTIONSPECIFICATION_ATTRIBUTE_ACTION:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getAction();
-				return eAny(returnValue); //515
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getAction();
+			return eAny(returnValue); //515
+		}
 	}
 	return ExecutionSpecificationImpl::eGet(featureID, resolve, coreType);
 }

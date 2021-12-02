@@ -500,10 +500,10 @@ Any ValuePinImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::VALUEPIN_ATTRIBUTE_VALUE:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getValue();
-				return eAny(returnValue); //24941
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getValue();
+			return eAny(returnValue); //24941
+		}
 	}
 	return InputPinImpl::eGet(featureID, resolve, coreType);
 }

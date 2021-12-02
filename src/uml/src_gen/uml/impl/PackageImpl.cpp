@@ -1056,10 +1056,10 @@ Any PackageImpl::eGet(int featureID, bool resolve, bool coreType) const
 			return eAny(tempList); //17021			
 		}
 		case uml::umlPackage::PACKAGE_ATTRIBUTE_NESTINGPACKAGE:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getNestingPackage().lock();
-				return eAny(returnValue); //17022
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getNestingPackage().lock();
+			return eAny(returnValue); //17022
+		}
 		case uml::umlPackage::PACKAGE_ATTRIBUTE_OWNEDSTEREOTYPE:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());

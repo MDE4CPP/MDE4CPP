@@ -51,8 +51,8 @@
 #include "uml/ValueSpecification.hpp"
 
 //Factories an Package includes
-#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
 #include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
@@ -318,10 +318,10 @@ Any ExecutorImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case fUML::Semantics::Loci::LociPackage::EXECUTOR_ATTRIBUTE_LOCUS:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getLocus().lock();
-				return eAny(returnValue); //480
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getLocus().lock();
+			return eAny(returnValue); //480
+		}
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
 }

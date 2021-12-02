@@ -31,12 +31,12 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
+#include "fUML/Semantics/Loci/LociFactory.hpp"
+#include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
 #include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
-#include "fUML/Semantics/Values/ValuesFactory.hpp"
-#include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "uml/umlFactory.hpp"
-#include "fUML/Semantics/Loci/LociFactory.hpp"
+#include "fUML/Semantics/Values/ValuesFactory.hpp"
 
 #include "ocl/Evaluations/EvalEnvironment.hpp"
 #include "fUML/Semantics/Loci/Locus.hpp"
@@ -329,20 +329,20 @@ Any LetExpEvalImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case ocl::Evaluations::EvaluationsPackage::LETEXPEVAL_ATTRIBUTE_IN:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getIn();
-				return eAny(returnValue); //426
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getIn();
+			return eAny(returnValue); //436
+		}
 		case ocl::Evaluations::EvaluationsPackage::LETEXPEVAL_ATTRIBUTE_INITEXPRESSION:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getInitExpression();
-				return eAny(returnValue); //427
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getInitExpression();
+			return eAny(returnValue); //437
+		}
 		case ocl::Evaluations::EvaluationsPackage::LETEXPEVAL_ATTRIBUTE_VARIABLE:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getVariable();
-				return eAny(returnValue); //428
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getVariable();
+			return eAny(returnValue); //438
+		}
 	}
 	return OclExpEvalImpl::eGet(featureID, resolve, coreType);
 }
@@ -352,11 +352,11 @@ bool LetExpEvalImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case ocl::Evaluations::EvaluationsPackage::LETEXPEVAL_ATTRIBUTE_IN:
-			return getIn() != nullptr; //426
+			return getIn() != nullptr; //436
 		case ocl::Evaluations::EvaluationsPackage::LETEXPEVAL_ATTRIBUTE_INITEXPRESSION:
-			return getInitExpression() != nullptr; //427
+			return getInitExpression() != nullptr; //437
 		case ocl::Evaluations::EvaluationsPackage::LETEXPEVAL_ATTRIBUTE_VARIABLE:
-			return getVariable() != nullptr; //428
+			return getVariable() != nullptr; //438
 	}
 	return OclExpEvalImpl::internalEIsSet(featureID);
 }
@@ -370,7 +370,7 @@ bool LetExpEvalImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<ocl::Evaluations::OclExpEval> _in = std::dynamic_pointer_cast<ocl::Evaluations::OclExpEval>(_temp);
-			setIn(_in); //426
+			setIn(_in); //436
 			return true;
 		}
 		case ocl::Evaluations::EvaluationsPackage::LETEXPEVAL_ATTRIBUTE_INITEXPRESSION:
@@ -378,7 +378,7 @@ bool LetExpEvalImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<ocl::Evaluations::OclExpEval> _initExpression = std::dynamic_pointer_cast<ocl::Evaluations::OclExpEval>(_temp);
-			setInitExpression(_initExpression); //427
+			setInitExpression(_initExpression); //437
 			return true;
 		}
 		case ocl::Evaluations::EvaluationsPackage::LETEXPEVAL_ATTRIBUTE_VARIABLE:
@@ -386,7 +386,7 @@ bool LetExpEvalImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> _variable = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::StringValue>(_temp);
-			setVariable(_variable); //428
+			setVariable(_variable); //438
 			return true;
 		}
 	}

@@ -303,10 +303,10 @@ Any ExtensionPointImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::EXTENSIONPOINT_ATTRIBUTE_USECASE:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getUseCase().lock();
-				return eAny(returnValue); //9912
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getUseCase().lock();
+			return eAny(returnValue); //9912
+		}
 	}
 	return RedefinableElementImpl::eGet(featureID, resolve, coreType);
 }

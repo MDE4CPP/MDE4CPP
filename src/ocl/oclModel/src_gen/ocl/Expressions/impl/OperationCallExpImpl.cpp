@@ -484,13 +484,13 @@ Any OperationCallExpImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //6524			
+			return eAny(tempList); //6624			
 		}
 		case ocl::Expressions::ExpressionsPackage::OPERATIONCALLEXP_ATTRIBUTE_REFERREDOPERATION:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getReferredOperation();
-				return eAny(returnValue); //6525
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getReferredOperation();
+			return eAny(returnValue); //6625
+		}
 	}
 	return FeatureCallExpImpl::eGet(featureID, resolve, coreType);
 }
@@ -500,9 +500,9 @@ bool OperationCallExpImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case ocl::Expressions::ExpressionsPackage::OPERATIONCALLEXP_ATTRIBUTE_ARGUMENT:
-			return getArgument() != nullptr; //6524
+			return getArgument() != nullptr; //6624
 		case ocl::Expressions::ExpressionsPackage::OPERATIONCALLEXP_ATTRIBUTE_REFERREDOPERATION:
-			return getReferredOperation() != nullptr; //6525
+			return getReferredOperation() != nullptr; //6625
 	}
 	return FeatureCallExpImpl::internalEIsSet(featureID);
 }
@@ -552,7 +552,7 @@ bool OperationCallExpImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<ecore::EOperation> _referredOperation = std::dynamic_pointer_cast<ecore::EOperation>(_temp);
-			setReferredOperation(_referredOperation); //6525
+			setReferredOperation(_referredOperation); //6625
 			return true;
 		}
 	}

@@ -624,10 +624,10 @@ Any BehavioredClassifierImpl::eGet(int featureID, bool resolve, bool coreType) c
 	switch(featureID)
 	{
 		case uml::umlPackage::BEHAVIOREDCLASSIFIER_ATTRIBUTE_CLASSIFIERBEHAVIOR:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getClassifierBehavior();
-				return eAny(returnValue); //2638
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getClassifierBehavior();
+			return eAny(returnValue); //2638
+		}
 		case uml::umlPackage::BEHAVIOREDCLASSIFIER_ATTRIBUTE_INTERFACEREALIZATION:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());

@@ -503,20 +503,20 @@ Any TestIdentityActionImpl::eGet(int featureID, bool resolve, bool coreType) con
 	switch(featureID)
 	{
 		case uml::umlPackage::TESTIDENTITYACTION_ATTRIBUTE_FIRST:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getFirst();
-				return eAny(returnValue); //23527
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getFirst();
+			return eAny(returnValue); //23527
+		}
 		case uml::umlPackage::TESTIDENTITYACTION_ATTRIBUTE_RESULT:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getResult();
-				return eAny(returnValue); //23528
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getResult();
+			return eAny(returnValue); //23528
+		}
 		case uml::umlPackage::TESTIDENTITYACTION_ATTRIBUTE_SECOND:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getSecond();
-				return eAny(returnValue); //23529
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getSecond();
+			return eAny(returnValue); //23529
+		}
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
 }

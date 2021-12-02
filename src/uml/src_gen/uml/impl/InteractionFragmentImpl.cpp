@@ -470,15 +470,15 @@ Any InteractionFragmentImpl::eGet(int featureID, bool resolve, bool coreType) co
 			return eAny(tempList); //1219			
 		}
 		case uml::umlPackage::INTERACTIONFRAGMENT_ATTRIBUTE_ENCLOSINGINTERACTION:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getEnclosingInteraction().lock();
-				return eAny(returnValue); //12111
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getEnclosingInteraction().lock();
+			return eAny(returnValue); //12111
+		}
 		case uml::umlPackage::INTERACTIONFRAGMENT_ATTRIBUTE_ENCLOSINGOPERAND:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getEnclosingOperand().lock();
-				return eAny(returnValue); //12110
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getEnclosingOperand().lock();
+			return eAny(returnValue); //12110
+		}
 		case uml::umlPackage::INTERACTIONFRAGMENT_ATTRIBUTE_GENERALORDERING:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());

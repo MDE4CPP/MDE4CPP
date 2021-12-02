@@ -32,9 +32,9 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "ocl/Evaluations/EvaluationsFactory.hpp"
 #include "ecore/ecoreFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
+#include "ocl/Evaluations/EvaluationsFactory.hpp"
 
 #include "ocl/Expressions/CallExp.hpp"
 #include "ocl/Expressions/CollectionRange.hpp"
@@ -402,7 +402,7 @@ Any RealLiteralExpImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case ocl::Expressions::ExpressionsPackage::REALLITERALEXP_ATTRIBUTE_REALSYMBOL:
-			return eAny(getRealSymbol()); //7323
+			return eAny(getRealSymbol()); //7423
 	}
 	return NumericLiteralExpImpl::eGet(featureID, resolve, coreType);
 }
@@ -412,7 +412,7 @@ bool RealLiteralExpImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case ocl::Expressions::ExpressionsPackage::REALLITERALEXP_ATTRIBUTE_REALSYMBOL:
-			return getRealSymbol() != 0; //7323
+			return getRealSymbol() != 0; //7423
 	}
 	return NumericLiteralExpImpl::internalEIsSet(featureID);
 }
@@ -425,7 +425,7 @@ bool RealLiteralExpImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			int _realSymbol = newValue->get<int>();
-			setRealSymbol(_realSymbol); //7323
+			setRealSymbol(_realSymbol); //7423
 			return true;
 		}
 	}

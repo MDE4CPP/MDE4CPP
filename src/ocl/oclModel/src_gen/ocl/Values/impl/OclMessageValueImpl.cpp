@@ -472,31 +472,31 @@ Any OclMessageValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //637			
+			return eAny(tempList); //647			
 		}
 		case ocl::Values::ValuesPackage::OCLMESSAGEVALUE_ATTRIBUTE_ISASYNCOPERATION:
-			return eAny(getIsAsyncOperation()); //632
+			return eAny(getIsAsyncOperation()); //642
 		case ocl::Values::ValuesPackage::OCLMESSAGEVALUE_ATTRIBUTE_ISSIGNAL:
-			return eAny(getIsSignal()); //633
+			return eAny(getIsSignal()); //643
 		case ocl::Values::ValuesPackage::OCLMESSAGEVALUE_ATTRIBUTE_ISSYNCOPERATION:
-			return eAny(getIsSyncOperation()); //631
+			return eAny(getIsSyncOperation()); //641
 		case ocl::Values::ValuesPackage::OCLMESSAGEVALUE_ATTRIBUTE_NAME:
-			return eAny(getName()); //630
+			return eAny(getName()); //640
 		case ocl::Values::ValuesPackage::OCLMESSAGEVALUE_ATTRIBUTE_RETURNMESSAGE:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getReturnMessage();
-				return eAny(returnValue); //634
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getReturnMessage();
+			return eAny(returnValue); //644
+		}
 		case ocl::Values::ValuesPackage::OCLMESSAGEVALUE_ATTRIBUTE_SOURCE:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getSource();
-				return eAny(returnValue); //636
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getSource();
+			return eAny(returnValue); //646
+		}
 		case ocl::Values::ValuesPackage::OCLMESSAGEVALUE_ATTRIBUTE_TARGET:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getTarget();
-				return eAny(returnValue); //635
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getTarget();
+			return eAny(returnValue); //645
+		}
 	}
 	return fUML::Semantics::Values::ValueImpl::eGet(featureID, resolve, coreType);
 }
@@ -506,21 +506,21 @@ bool OclMessageValueImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case ocl::Values::ValuesPackage::OCLMESSAGEVALUE_ATTRIBUTE_ARGUMENTS:
-			return getArguments() != nullptr; //637
+			return getArguments() != nullptr; //647
 		case ocl::Values::ValuesPackage::OCLMESSAGEVALUE_ATTRIBUTE_ISASYNCOPERATION:
-			return getIsAsyncOperation() != false; //632
+			return getIsAsyncOperation() != false; //642
 		case ocl::Values::ValuesPackage::OCLMESSAGEVALUE_ATTRIBUTE_ISSIGNAL:
-			return getIsSignal() != false; //633
+			return getIsSignal() != false; //643
 		case ocl::Values::ValuesPackage::OCLMESSAGEVALUE_ATTRIBUTE_ISSYNCOPERATION:
-			return getIsSyncOperation() != false; //631
+			return getIsSyncOperation() != false; //641
 		case ocl::Values::ValuesPackage::OCLMESSAGEVALUE_ATTRIBUTE_NAME:
-			return getName() != ""; //630
+			return getName() != ""; //640
 		case ocl::Values::ValuesPackage::OCLMESSAGEVALUE_ATTRIBUTE_RETURNMESSAGE:
-			return getReturnMessage() != nullptr; //634
+			return getReturnMessage() != nullptr; //644
 		case ocl::Values::ValuesPackage::OCLMESSAGEVALUE_ATTRIBUTE_SOURCE:
-			return getSource() != nullptr; //636
+			return getSource() != nullptr; //646
 		case ocl::Values::ValuesPackage::OCLMESSAGEVALUE_ATTRIBUTE_TARGET:
-			return getTarget() != nullptr; //635
+			return getTarget() != nullptr; //645
 	}
 	return fUML::Semantics::Values::ValueImpl::internalEIsSet(featureID);
 }
@@ -569,28 +569,28 @@ bool OclMessageValueImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			bool _isAsyncOperation = newValue->get<bool>();
-			setIsAsyncOperation(_isAsyncOperation); //632
+			setIsAsyncOperation(_isAsyncOperation); //642
 			return true;
 		}
 		case ocl::Values::ValuesPackage::OCLMESSAGEVALUE_ATTRIBUTE_ISSIGNAL:
 		{
 			// BOOST CAST
 			bool _isSignal = newValue->get<bool>();
-			setIsSignal(_isSignal); //633
+			setIsSignal(_isSignal); //643
 			return true;
 		}
 		case ocl::Values::ValuesPackage::OCLMESSAGEVALUE_ATTRIBUTE_ISSYNCOPERATION:
 		{
 			// BOOST CAST
 			bool _isSyncOperation = newValue->get<bool>();
-			setIsSyncOperation(_isSyncOperation); //631
+			setIsSyncOperation(_isSyncOperation); //641
 			return true;
 		}
 		case ocl::Values::ValuesPackage::OCLMESSAGEVALUE_ATTRIBUTE_NAME:
 		{
 			// BOOST CAST
 			std::string _name = newValue->get<std::string>();
-			setName(_name); //630
+			setName(_name); //640
 			return true;
 		}
 		case ocl::Values::ValuesPackage::OCLMESSAGEVALUE_ATTRIBUTE_RETURNMESSAGE:
@@ -598,7 +598,7 @@ bool OclMessageValueImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<ocl::Values::OclMessageValue> _returnMessage = std::dynamic_pointer_cast<ocl::Values::OclMessageValue>(_temp);
-			setReturnMessage(_returnMessage); //634
+			setReturnMessage(_returnMessage); //644
 			return true;
 		}
 		case ocl::Values::ValuesPackage::OCLMESSAGEVALUE_ATTRIBUTE_SOURCE:
@@ -606,7 +606,7 @@ bool OclMessageValueImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<ocl::Values::ObjectValue> _source = std::dynamic_pointer_cast<ocl::Values::ObjectValue>(_temp);
-			setSource(_source); //636
+			setSource(_source); //646
 			return true;
 		}
 		case ocl::Values::ValuesPackage::OCLMESSAGEVALUE_ATTRIBUTE_TARGET:
@@ -614,7 +614,7 @@ bool OclMessageValueImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<ocl::Values::ObjectValue> _target = std::dynamic_pointer_cast<ocl::Values::ObjectValue>(_temp);
-			setTarget(_target); //635
+			setTarget(_target); //645
 			return true;
 		}
 	}

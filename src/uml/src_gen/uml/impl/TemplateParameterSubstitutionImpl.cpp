@@ -403,25 +403,25 @@ Any TemplateParameterSubstitutionImpl::eGet(int featureID, bool resolve, bool co
 	switch(featureID)
 	{
 		case uml::umlPackage::TEMPLATEPARAMETERSUBSTITUTION_ATTRIBUTE_ACTUAL:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getActual();
-				return eAny(returnValue); //2323
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getActual();
+			return eAny(returnValue); //2323
+		}
 		case uml::umlPackage::TEMPLATEPARAMETERSUBSTITUTION_ATTRIBUTE_FORMAL:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getFormal();
-				return eAny(returnValue); //2324
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getFormal();
+			return eAny(returnValue); //2324
+		}
 		case uml::umlPackage::TEMPLATEPARAMETERSUBSTITUTION_ATTRIBUTE_OWNEDACTUAL:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getOwnedActual();
-				return eAny(returnValue); //2325
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getOwnedActual();
+			return eAny(returnValue); //2325
+		}
 		case uml::umlPackage::TEMPLATEPARAMETERSUBSTITUTION_ATTRIBUTE_TEMPLATEBINDING:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getTemplateBinding().lock();
-				return eAny(returnValue); //2326
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getTemplateBinding().lock();
+			return eAny(returnValue); //2326
+		}
 	}
 	return ElementImpl::eGet(featureID, resolve, coreType);
 }

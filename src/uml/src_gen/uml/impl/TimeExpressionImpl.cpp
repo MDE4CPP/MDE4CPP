@@ -422,10 +422,10 @@ Any TimeExpressionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::TIMEEXPRESSION_ATTRIBUTE_EXPR:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getExpr();
-				return eAny(returnValue); //23815
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getExpr();
+			return eAny(returnValue); //23815
+		}
 		case uml::umlPackage::TIMEEXPRESSION_ATTRIBUTE_OBSERVATION:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());

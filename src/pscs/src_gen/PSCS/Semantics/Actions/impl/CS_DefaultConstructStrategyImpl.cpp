@@ -50,8 +50,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "uml/umlFactory.hpp"
+#include "fUML/Semantics/Loci/LociFactory.hpp"
 
 #include "uml/Association.hpp"
 #include "PSCS/Semantics/Actions/CS_ConstructStrategy.hpp"
@@ -68,8 +68,8 @@
 #include "fUML/Semantics/Values/Value.hpp"
 
 //Factories an Package includes
-#include "PSCS/Semantics/SemanticsPackage.hpp"
 #include "PSCS/PSCSPackage.hpp"
+#include "PSCS/Semantics/SemanticsPackage.hpp"
 #include "PSCS/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
 #include "PSCS/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
@@ -854,10 +854,10 @@ Any CS_DefaultConstructStrategyImpl::eGet(int featureID, bool resolve, bool core
 	switch(featureID)
 	{
 		case PSCS::Semantics::Actions::ActionsPackage::CS_DEFAULTCONSTRUCTSTRATEGY_ATTRIBUTE_DEFAULTASSOCIATION:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getDefaultAssociation();
-				return eAny(returnValue); //101
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getDefaultAssociation();
+			return eAny(returnValue); //101
+		}
 		case PSCS::Semantics::Actions::ActionsPackage::CS_DEFAULTCONSTRUCTSTRATEGY_ATTRIBUTE_GENERATEDREALIZINGCLASSES:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
@@ -871,10 +871,10 @@ Any CS_DefaultConstructStrategyImpl::eGet(int featureID, bool resolve, bool core
 			return eAny(tempList); //102			
 		}
 		case PSCS::Semantics::Actions::ActionsPackage::CS_DEFAULTCONSTRUCTSTRATEGY_ATTRIBUTE_LOCUS:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getLocus();
-				return eAny(returnValue); //100
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getLocus();
+			return eAny(returnValue); //100
+		}
 	}
 	return CS_ConstructStrategyImpl::eGet(featureID, resolve, coreType);
 }

@@ -55,7 +55,6 @@ namespace ocl::Types
 			virtual std::shared_ptr<ecore::EClass> getAnyType_Class() const ;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getAnyType_Attribute_object() const ;
 			
 			
 			// End Class AnyType
@@ -177,7 +176,7 @@ namespace ocl::Types
 			std::shared_ptr<ecore::EClass> m_anyType_Class = nullptr;std::shared_ptr<ecore::EClass> m_bagType_Class = nullptr;std::shared_ptr<ecore::EClass> m_collectionType_Class = nullptr;std::shared_ptr<ecore::EClass> m_invalidType_Class = nullptr;std::shared_ptr<ecore::EClass> m_messageType_Class = nullptr;std::shared_ptr<ecore::EClass> m_nameTypeBinding_Class = nullptr;std::shared_ptr<ecore::EClass> m_orderedSetType_Class = nullptr;std::shared_ptr<ecore::EClass> m_sequenceType_Class = nullptr;std::shared_ptr<ecore::EClass> m_setType_Class = nullptr;std::shared_ptr<ecore::EClass> m_templateParameterType_Class = nullptr;std::shared_ptr<ecore::EClass> m_tupleType_Class = nullptr;std::shared_ptr<ecore::EClass> m_voidType_Class = nullptr;
 			
 			std::shared_ptr<ecore::EAttribute> m_nameTypeBinding_Attribute_name = nullptr;std::shared_ptr<ecore::EAttribute> m_templateParameterType_Attribute_specification = nullptr;
-			std::shared_ptr<ecore::EReference> m_collectionType_Attribute_elementType = nullptr;std::shared_ptr<ecore::EReference> m_collectionType_Attribute_instance = nullptr;std::shared_ptr<ecore::EReference> m_tupleType_Attribute_instance = nullptr;std::shared_ptr<ecore::EReference> m_anyType_Attribute_object = nullptr;std::shared_ptr<ecore::EReference> m_tupleType_Attribute_parts = nullptr;std::shared_ptr<ecore::EReference> m_messageType_Attribute_referredOperation = nullptr;std::shared_ptr<ecore::EReference> m_messageType_Attribute_referredSignal = nullptr;std::shared_ptr<ecore::EReference> m_nameTypeBinding_Attribute_type = nullptr;
+			std::shared_ptr<ecore::EReference> m_collectionType_Attribute_elementType = nullptr;std::shared_ptr<ecore::EReference> m_collectionType_Attribute_instance = nullptr;std::shared_ptr<ecore::EReference> m_tupleType_Attribute_instance = nullptr;std::shared_ptr<ecore::EReference> m_tupleType_Attribute_parts = nullptr;std::shared_ptr<ecore::EReference> m_messageType_Attribute_referredOperation = nullptr;std::shared_ptr<ecore::EReference> m_messageType_Attribute_referredSignal = nullptr;std::shared_ptr<ecore::EReference> m_nameTypeBinding_Attribute_type = nullptr;
 			std::shared_ptr<ecore::EOperation> m_collectionType_Operation_kindOf_CollectionType = nullptr;
 
 			friend class TypesPackage;

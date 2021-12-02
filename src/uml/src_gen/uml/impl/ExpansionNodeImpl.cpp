@@ -411,15 +411,15 @@ Any ExpansionNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::EXPANSIONNODE_ATTRIBUTE_REGIONASINPUT:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getRegionAsInput();
-				return eAny(returnValue); //9326
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getRegionAsInput();
+			return eAny(returnValue); //9326
+		}
 		case uml::umlPackage::EXPANSIONNODE_ATTRIBUTE_REGIONASOUTPUT:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getRegionAsOutput();
-				return eAny(returnValue); //9327
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getRegionAsOutput();
+			return eAny(returnValue); //9327
+		}
 	}
 	return ObjectNodeImpl::eGet(featureID, resolve, coreType);
 }

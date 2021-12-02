@@ -1030,15 +1030,15 @@ Any BehaviorImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::BEHAVIOR_ATTRIBUTE_BEHAVIOREDCLASSIFIER:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getBehavioredClassifier().lock();
-				return eAny(returnValue); //2361
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getBehavioredClassifier().lock();
+			return eAny(returnValue); //2361
+		}
 		case uml::umlPackage::BEHAVIOR_ATTRIBUTE_CONTEXT:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getContext();
-				return eAny(returnValue); //2354
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getContext();
+			return eAny(returnValue); //2354
+		}
 		case uml::umlPackage::BEHAVIOR_ATTRIBUTE_ISREENTRANT:
 			return eAny(getIsReentrant()); //2355
 		case uml::umlPackage::BEHAVIOR_ATTRIBUTE_OWNEDPARAMETER:
@@ -1102,10 +1102,10 @@ Any BehaviorImpl::eGet(int featureID, bool resolve, bool coreType) const
 			return eAny(tempList); //2360			
 		}
 		case uml::umlPackage::BEHAVIOR_ATTRIBUTE_SPECIFICATION:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getSpecification();
-				return eAny(returnValue); //2353
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getSpecification();
+			return eAny(returnValue); //2353
+		}
 	}
 	return ClassImpl::eGet(featureID, resolve, coreType);
 }

@@ -538,20 +538,20 @@ Any ReadLinkObjectEndActionImpl::eGet(int featureID, bool resolve, bool coreType
 	switch(featureID)
 	{
 		case uml::umlPackage::READLINKOBJECTENDACTION_ATTRIBUTE_END:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getEnd();
-				return eAny(returnValue); //19627
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getEnd();
+			return eAny(returnValue); //19627
+		}
 		case uml::umlPackage::READLINKOBJECTENDACTION_ATTRIBUTE_OBJECT:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getObject();
-				return eAny(returnValue); //19628
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getObject();
+			return eAny(returnValue); //19628
+		}
 		case uml::umlPackage::READLINKOBJECTENDACTION_ATTRIBUTE_RESULT:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getResult();
-				return eAny(returnValue); //19629
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getResult();
+			return eAny(returnValue); //19629
+		}
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
 }

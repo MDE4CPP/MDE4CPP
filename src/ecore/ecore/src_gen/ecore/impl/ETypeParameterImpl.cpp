@@ -159,19 +159,19 @@ std::shared_ptr<Bag<ecore::EGenericType>> ETypeParameterImpl::getEBounds() const
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<Union<ecore::EObject>> ETypeParameterImpl::getEContens() const
+std::shared_ptr<Union<ecore::EObject>> ETypeParameterImpl::getEContentUnion() const
 {
-	if(m_eContens == nullptr)
+	if(m_eContentUnion == nullptr)
 	{
 		/*Union*/
-		m_eContens.reset(new Union<ecore::EObject>());
+		m_eContentUnion.reset(new Union<ecore::EObject>());
 			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_eContens - Union<ecore::EObject>()" << std::endl;
+			std::cout << "Initialising Union: " << "m_eContentUnion - Union<ecore::EObject>()" << std::endl;
 		#endif
 		
 		
 	}
-	return m_eContens;
+	return m_eContentUnion;
 }
 
 //*********************************
@@ -301,7 +301,7 @@ Any ETypeParameterImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //525			
+			return eAny(tempList); //535			
 		}
 	}
 	return ENamedElementImpl::eGet(featureID, resolve, coreType);
@@ -312,7 +312,7 @@ bool ETypeParameterImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case ecore::ecorePackage::ETYPEPARAMETER_ATTRIBUTE_EBOUNDS:
-			return getEBounds() != nullptr; //525
+			return getEBounds() != nullptr; //535
 	}
 	return ENamedElementImpl::internalEIsSet(featureID);
 }

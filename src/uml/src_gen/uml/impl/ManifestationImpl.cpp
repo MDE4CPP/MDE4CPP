@@ -402,10 +402,10 @@ Any ManifestationImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::MANIFESTATION_ATTRIBUTE_UTILIZEDELEMENT:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getUtilizedElement();
-				return eAny(returnValue); //14518
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getUtilizedElement();
+			return eAny(returnValue); //14518
+		}
 	}
 	return AbstractionImpl::eGet(featureID, resolve, coreType);
 }

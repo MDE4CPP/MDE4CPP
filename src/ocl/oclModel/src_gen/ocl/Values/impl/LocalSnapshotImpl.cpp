@@ -442,7 +442,7 @@ Any LocalSnapshotImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //452			
+			return eAny(tempList); //462			
 		}
 		case ocl::Values::ValuesPackage::LOCALSNAPSHOT_ATTRIBUTE_INPUTQ:
 		{
@@ -454,12 +454,12 @@ Any LocalSnapshotImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //455			
+			return eAny(tempList); //465			
 		}
 		case ocl::Values::ValuesPackage::LOCALSNAPSHOT_ATTRIBUTE_ISPOST:
-			return eAny(getIsPost()); //453
+			return eAny(getIsPost()); //463
 		case ocl::Values::ValuesPackage::LOCALSNAPSHOT_ATTRIBUTE_ISPRE:
-			return eAny(getIsPre()); //454
+			return eAny(getIsPre()); //464
 		case ocl::Values::ValuesPackage::LOCALSNAPSHOT_ATTRIBUTE_OUTPUTQ:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
@@ -470,18 +470,18 @@ Any LocalSnapshotImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //456			
+			return eAny(tempList); //466			
 		}
 		case ocl::Values::ValuesPackage::LOCALSNAPSHOT_ATTRIBUTE_PRED:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getPred();
-				return eAny(returnValue); //451
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getPred();
+			return eAny(returnValue); //461
+		}
 		case ocl::Values::ValuesPackage::LOCALSNAPSHOT_ATTRIBUTE_SUCC:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getSucc();
-				return eAny(returnValue); //450
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getSucc();
+			return eAny(returnValue); //460
+		}
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
 }
@@ -491,19 +491,19 @@ bool LocalSnapshotImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case ocl::Values::ValuesPackage::LOCALSNAPSHOT_ATTRIBUTE_BINDINGS:
-			return getBindings() != nullptr; //452
+			return getBindings() != nullptr; //462
 		case ocl::Values::ValuesPackage::LOCALSNAPSHOT_ATTRIBUTE_INPUTQ:
-			return getInputQ() != nullptr; //455
+			return getInputQ() != nullptr; //465
 		case ocl::Values::ValuesPackage::LOCALSNAPSHOT_ATTRIBUTE_ISPOST:
-			return getIsPost() != false; //453
+			return getIsPost() != false; //463
 		case ocl::Values::ValuesPackage::LOCALSNAPSHOT_ATTRIBUTE_ISPRE:
-			return getIsPre() != false; //454
+			return getIsPre() != false; //464
 		case ocl::Values::ValuesPackage::LOCALSNAPSHOT_ATTRIBUTE_OUTPUTQ:
-			return getOutputQ() != nullptr; //456
+			return getOutputQ() != nullptr; //466
 		case ocl::Values::ValuesPackage::LOCALSNAPSHOT_ATTRIBUTE_PRED:
-			return getPred() != nullptr; //451
+			return getPred() != nullptr; //461
 		case ocl::Values::ValuesPackage::LOCALSNAPSHOT_ATTRIBUTE_SUCC:
-			return getSucc() != nullptr; //450
+			return getSucc() != nullptr; //460
 	}
 	return ecore::EObjectImpl::internalEIsSet(featureID);
 }
@@ -588,14 +588,14 @@ bool LocalSnapshotImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			bool _isPost = newValue->get<bool>();
-			setIsPost(_isPost); //453
+			setIsPost(_isPost); //463
 			return true;
 		}
 		case ocl::Values::ValuesPackage::LOCALSNAPSHOT_ATTRIBUTE_ISPRE:
 		{
 			// BOOST CAST
 			bool _isPre = newValue->get<bool>();
-			setIsPre(_isPre); //454
+			setIsPre(_isPre); //464
 			return true;
 		}
 		case ocl::Values::ValuesPackage::LOCALSNAPSHOT_ATTRIBUTE_OUTPUTQ:
@@ -639,7 +639,7 @@ bool LocalSnapshotImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<ocl::Values::LocalSnapshot> _pred = std::dynamic_pointer_cast<ocl::Values::LocalSnapshot>(_temp);
-			setPred(_pred); //451
+			setPred(_pred); //461
 			return true;
 		}
 		case ocl::Values::ValuesPackage::LOCALSNAPSHOT_ATTRIBUTE_SUCC:
@@ -647,7 +647,7 @@ bool LocalSnapshotImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<ocl::Values::LocalSnapshot> _succ = std::dynamic_pointer_cast<ocl::Values::LocalSnapshot>(_temp);
-			setSucc(_succ); //450
+			setSucc(_succ); //460
 			return true;
 		}
 	}

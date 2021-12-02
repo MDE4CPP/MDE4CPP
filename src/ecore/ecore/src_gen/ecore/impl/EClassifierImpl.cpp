@@ -221,19 +221,19 @@ std::shared_ptr<Bag<ecore::ETypeParameter>> EClassifierImpl::getETypeParameters(
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<Union<ecore::EObject>> EClassifierImpl::getEContens() const
+std::shared_ptr<Union<ecore::EObject>> EClassifierImpl::getEContentUnion() const
 {
-	if(m_eContens == nullptr)
+	if(m_eContentUnion == nullptr)
 	{
 		/*Union*/
-		m_eContens.reset(new Union<ecore::EObject>());
+		m_eContentUnion.reset(new Union<ecore::EObject>());
 			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_eContens - Union<ecore::EObject>()" << std::endl;
+			std::cout << "Initialising Union: " << "m_eContentUnion - Union<ecore::EObject>()" << std::endl;
 		#endif
 		
 		
 	}
-	return m_eContens;
+	return m_eContentUnion;
 }
 
 //*********************************
@@ -401,10 +401,10 @@ Any EClassifierImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case ecore::ecorePackage::ECLASSIFIER_ATTRIBUTE_DEFAULTVALUE:
 			return eAny(getDefaultValue()); //137
 		case ecore::ecorePackage::ECLASSIFIER_ATTRIBUTE_EPACKAGE:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getEPackage().lock();
-				return eAny(returnValue); //139
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getEPackage().lock();
+			return eAny(returnValue); //139
+		}
 		case ecore::ecorePackage::ECLASSIFIER_ATTRIBUTE_ETYPEPARAMETERS:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());

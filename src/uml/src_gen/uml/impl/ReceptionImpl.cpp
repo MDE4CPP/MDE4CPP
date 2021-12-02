@@ -362,10 +362,10 @@ Any ReceptionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::RECEPTION_ATTRIBUTE_SIGNAL:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getSignal();
-				return eAny(returnValue); //20226
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getSignal();
+			return eAny(returnValue); //20226
+		}
 	}
 	return BehavioralFeatureImpl::eGet(featureID, resolve, coreType);
 }

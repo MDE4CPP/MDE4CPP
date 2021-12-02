@@ -300,15 +300,15 @@ Any MessageTypeImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case ocl::Types::TypesPackage::MESSAGETYPE_ATTRIBUTE_REFERREDOPERATION:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getReferredOperation();
-				return eAny(returnValue); //498
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getReferredOperation();
+			return eAny(returnValue); //508
+		}
 		case ocl::Types::TypesPackage::MESSAGETYPE_ATTRIBUTE_REFERREDSIGNAL:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getReferredSignal();
-				return eAny(returnValue); //499
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getReferredSignal();
+			return eAny(returnValue); //509
+		}
 	}
 	return ecore::EClassifierImpl::eGet(featureID, resolve, coreType);
 }
@@ -318,9 +318,9 @@ bool MessageTypeImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case ocl::Types::TypesPackage::MESSAGETYPE_ATTRIBUTE_REFERREDOPERATION:
-			return getReferredOperation() != nullptr; //498
+			return getReferredOperation() != nullptr; //508
 		case ocl::Types::TypesPackage::MESSAGETYPE_ATTRIBUTE_REFERREDSIGNAL:
-			return getReferredSignal() != nullptr; //499
+			return getReferredSignal() != nullptr; //509
 	}
 	return ecore::EClassifierImpl::internalEIsSet(featureID);
 }
@@ -334,7 +334,7 @@ bool MessageTypeImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<ecore::EOperation> _referredOperation = std::dynamic_pointer_cast<ecore::EOperation>(_temp);
-			setReferredOperation(_referredOperation); //498
+			setReferredOperation(_referredOperation); //508
 			return true;
 		}
 		case ocl::Types::TypesPackage::MESSAGETYPE_ATTRIBUTE_REFERREDSIGNAL:
@@ -342,7 +342,7 @@ bool MessageTypeImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Signal> _referredSignal = std::dynamic_pointer_cast<uml::Signal>(_temp);
-			setReferredSignal(_referredSignal); //499
+			setReferredSignal(_referredSignal); //509
 			return true;
 		}
 	}

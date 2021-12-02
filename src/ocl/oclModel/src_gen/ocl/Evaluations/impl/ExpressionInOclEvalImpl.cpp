@@ -275,15 +275,15 @@ Any ExpressionInOclEvalImpl::eGet(int featureID, bool resolve, bool coreType) co
 	switch(featureID)
 	{
 		case ocl::Evaluations::EvaluationsPackage::EXPRESSIONINOCLEVAL_ATTRIBUTE_CONTEXT:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getContext();
-				return eAny(returnValue); //280
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getContext();
+			return eAny(returnValue); //290
+		}
 		case ocl::Evaluations::EvaluationsPackage::EXPRESSIONINOCLEVAL_ATTRIBUTE_ENVIRONMENT:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getEnvironment();
-				return eAny(returnValue); //281
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getEnvironment();
+			return eAny(returnValue); //291
+		}
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
 }
@@ -293,9 +293,9 @@ bool ExpressionInOclEvalImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case ocl::Evaluations::EvaluationsPackage::EXPRESSIONINOCLEVAL_ATTRIBUTE_CONTEXT:
-			return getContext() != nullptr; //280
+			return getContext() != nullptr; //290
 		case ocl::Evaluations::EvaluationsPackage::EXPRESSIONINOCLEVAL_ATTRIBUTE_ENVIRONMENT:
-			return getEnvironment() != nullptr; //281
+			return getEnvironment() != nullptr; //291
 	}
 	return ecore::EObjectImpl::internalEIsSet(featureID);
 }
@@ -309,7 +309,7 @@ bool ExpressionInOclEvalImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<ocl::Evaluations::OclExpEval> _context = std::dynamic_pointer_cast<ocl::Evaluations::OclExpEval>(_temp);
-			setContext(_context); //280
+			setContext(_context); //290
 			return true;
 		}
 		case ocl::Evaluations::EvaluationsPackage::EXPRESSIONINOCLEVAL_ATTRIBUTE_ENVIRONMENT:
@@ -317,7 +317,7 @@ bool ExpressionInOclEvalImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<ocl::Evaluations::EvalEnvironment> _environment = std::dynamic_pointer_cast<ocl::Evaluations::EvalEnvironment>(_temp);
-			setEnvironment(_environment); //281
+			setEnvironment(_environment); //291
 			return true;
 		}
 	}

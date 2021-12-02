@@ -27,6 +27,8 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
+//Includes from codegen annotation
+#include "ecore/EObjectContainer.hpp"
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -101,7 +103,6 @@ EObjectImpl& EObjectImpl::operator=(const EObjectImpl & obj)
 	m_metaElementID = obj.getMetaElementID();
 
 	//copy references with no containment (soft copy)
-	m_eContainer  = obj.getEContainer();
 	//Clone references with containment (deep copy)
 	return *this;
 }
@@ -117,10 +118,24 @@ std::shared_ptr<ecore::EObject> EObjectImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<Bag < ecore::EObject>> EObjectImpl::eAllContents() const
+Any EObjectImpl::eAllContents() const
 {
-	std::cout << __PRETTY_FUNCTION__  << std::endl;
-	throw "UnsupportedOperationException";
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	std::shared_ptr<Bag<AnyObject>> returnList=std::make_shared<Bag<AnyObject>>();
+	std::shared_ptr<ecore::EClass> metaClass=this->eClass();
+	std::shared_ptr<Bag<ecore::EStructuralFeature>> features=metaClass->getEAllStructuralFeatures();
+	int size = features->size();
+	for (auto i = 0; i < size; ++i)
+	{
+		Any anyValue=this->eGet(features->at(i));
+		if(anyValue)
+		{
+			returnList->push_back(anyValue);
+		}
+	}
+	return eAny(returnList);
+	//end of body
 }
 
 std::shared_ptr<ecore::EClass> EObjectImpl::eClass() const
@@ -131,7 +146,17 @@ std::shared_ptr<ecore::EClass> EObjectImpl::eClass() const
 	//end of body
 }
 
-
+std::shared_ptr<ecore::EObject> EObjectImpl::eContainer()
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+		if(auto wp = m_eContainer.lock())
+	{
+		return wp;
+	}
+	return nullptr;
+	//end of body
+}
 
 std::shared_ptr<ecore::EStructuralFeature> EObjectImpl::eContainingFeature() const
 {
@@ -145,10 +170,44 @@ std::shared_ptr<ecore::EReference> EObjectImpl::eContainmentFeature() const
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<std::list < ecore::EObject>> EObjectImpl::eContents() const
+std::shared_ptr<Bag<ecore::EObject> > EObjectImpl::eContents() const
 {
-	std::cout << __PRETTY_FUNCTION__  << std::endl;
-	throw "UnsupportedOperationException";
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	std::shared_ptr<Bag<ecore::EObject>> returnList=std::make_shared<Bag<ecore::EObject>>();
+
+	std::shared_ptr<ecore::EClass> metaClass=this->eClass();
+	std::shared_ptr<Bag<ecore::EStructuralFeature>> features=metaClass->getEAllStructuralFeatures();
+	int size = features->size();
+	for (auto i = 0; i < size; ++i)
+	{
+		Any anyValue=this->eGet(features->at(i));
+		try
+		{
+			std::shared_ptr<ecore::EObject> value=anyValue->get<std::shared_ptr<ecore::EObject>>();
+			if(value)
+			{
+				returnList->push_back(value);
+			}
+		}
+		catch(...){}
+		try
+		{
+			std::shared_ptr<Bag<EObject>> valueList = anyValue->get<std::shared_ptr<Bag<EObject>>>();
+			if(valueList)
+			{
+				std::shared_ptr<ecore::EObjectContainer> containerObject= ecore::ecoreFactory::eInstance()->createEObjectContainer();
+				std::shared_ptr<Bag<ecore::EObject>> container=containerObject->getContainer();
+				container.swap(valueList);
+				returnList->push_back(containerObject);
+			}
+		}
+		catch(...){}
+
+	}
+	return returnList;
+
+	//end of body
 }
 
 std::shared_ptr<std::list < ecore::EObject>> EObjectImpl::eCrossReferences() const
@@ -224,11 +283,11 @@ void EObjectImpl::eUnset(std::shared_ptr<ecore::EStructuralFeature> feature) con
 // Attribute Getters & Setters
 //*********************************
 /* Getter & Setter for attribute metaElementID */
-int EObjectImpl::getMetaElementID() const 
+long long EObjectImpl::getMetaElementID() const 
 {
 	return m_metaElementID;
 }
-void EObjectImpl::setMetaElementID(int _metaElementID)
+void EObjectImpl::setMetaElementID(long long _metaElementID)
 {
 	m_metaElementID = _metaElementID;
 	
@@ -238,34 +297,31 @@ void EObjectImpl::setMetaElementID(int _metaElementID)
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference eContainer */
-std::weak_ptr<ecore::EObject> EObjectImpl::getEContainer() const
-{
-    return m_eContainer;
-}
+
 void EObjectImpl::setEContainer(std::weak_ptr<ecore::EObject> _eContainer)
 {
     m_eContainer = _eContainer;
 	
 }
 
-/* Getter & Setter for reference eContens */
+/* Getter & Setter for reference eContentUnion */
 
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<Union<ecore::EObject>> EObjectImpl::getEContens() const
+std::shared_ptr<Union<ecore::EObject>> EObjectImpl::getEContentUnion() const
 {
-	if(m_eContens == nullptr)
+	if(m_eContentUnion == nullptr)
 	{
 		/*Union*/
-		m_eContens.reset(new Union<ecore::EObject>());
+		m_eContentUnion.reset(new Union<ecore::EObject>());
 			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_eContens - Union<ecore::EObject>()" << std::endl;
+			std::cout << "Initialising Union: " << "m_eContentUnion - Union<ecore::EObject>()" << std::endl;
 		#endif
 		
 		
 	}
-	return m_eContens;
+	return m_eContentUnion;
 }
 
 //*********************************
@@ -330,14 +386,14 @@ void EObjectImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::in
 
 	try
 	{
-		if ( nodeName.compare("eContens") == 0 )
+		if ( nodeName.compare("eContentUnion") == 0 )
 		{
   			std::string typeName = loadHandler->getCurrentXSITypeName();
 			if (typeName.empty())
 			{
 				typeName = "EObject";
 			}
-			loadHandler->handleChildContainer<ecore::EObject>(this->getEContens());  
+			loadHandler->handleChildContainer<ecore::EObject>(this->getEContentUnion());  
 
 			return; 
 		}
@@ -392,9 +448,9 @@ void EObjectImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHand
 		// Add new tags (from references)
 		//
 		std::shared_ptr<EClass> metaClass = this->eClass();
-		// Save 'eContens'
+		// Save 'eContentUnion'
 
-		saveHandler->addReferences<ecore::EObject>("eContens", this->getEContens());
+		saveHandler->addReferences<ecore::EObject>("eContentUnion", this->getEContentUnion());
 	}
 	catch (std::exception& e)
 	{
@@ -417,15 +473,15 @@ Any EObjectImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case ecore::ecorePackage::EOBJECT_ATTRIBUTE_ECONTAINER:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getEContainer().lock();
-				return eAny(returnValue); //391
-			}
-		case ecore::ecorePackage::EOBJECT_ATTRIBUTE_ECONTENS:
+		{
+			std::shared_ptr<ecore::EObject> returnValue=eContainer();
+			return eAny(returnValue); //391
+		}
+		case ecore::ecorePackage::EOBJECT_ATTRIBUTE_ECONTENTUNION:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<ecore::EObject>::iterator iter = getEContens()->begin();
-			Bag<ecore::EObject>::iterator end = getEContens()->end();
+			Bag<ecore::EObject>::iterator iter = getEContentUnion()->begin();
+			Bag<ecore::EObject>::iterator end = getEContentUnion()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -445,9 +501,9 @@ bool EObjectImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case ecore::ecorePackage::EOBJECT_ATTRIBUTE_ECONTAINER:
-			return getEContainer().lock() != nullptr; //391
-		case ecore::ecorePackage::EOBJECT_ATTRIBUTE_ECONTENS:
-			return getEContens() != nullptr; //390
+			return eContainer() != nullptr; //391
+		case ecore::ecorePackage::EOBJECT_ATTRIBUTE_ECONTENTUNION:
+			return getEContentUnion() != nullptr; //390
 		case ecore::ecorePackage::EOBJECT_ATTRIBUTE_METAELEMENTID:
 			return getMetaElementID() != 0; //392
 	}
@@ -467,46 +523,46 @@ bool EObjectImpl::eSet(int featureID, Any newValue)
 			setEContainer(_eContainer); //391
 			return true;
 		}
-		case ecore::ecorePackage::EOBJECT_ATTRIBUTE_ECONTENS:
+		case ecore::ecorePackage::EOBJECT_ATTRIBUTE_ECONTENTUNION:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<ecore::EObject>> eContensList(new Bag<ecore::EObject>());
+			std::shared_ptr<Bag<ecore::EObject>> eContentUnionList(new Bag<ecore::EObject>());
 			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
 			Bag<ecore::EObject>::iterator end = tempObjectList->end();
 			while (iter != end)
 			{
-				eContensList->add(std::dynamic_pointer_cast<ecore::EObject>(*iter));
+				eContentUnionList->add(std::dynamic_pointer_cast<ecore::EObject>(*iter));
 				iter++;
 			}
 			
-			Bag<ecore::EObject>::iterator iterEContens = getEContens()->begin();
-			Bag<ecore::EObject>::iterator endEContens = getEContens()->end();
-			while (iterEContens != endEContens)
+			Bag<ecore::EObject>::iterator iterEContentUnion = getEContentUnion()->begin();
+			Bag<ecore::EObject>::iterator endEContentUnion = getEContentUnion()->end();
+			while (iterEContentUnion != endEContentUnion)
 			{
-				if (eContensList->find(*iterEContens) == -1)
+				if (eContentUnionList->find(*iterEContentUnion) == -1)
 				{
-					getEContens()->erase(*iterEContens);
+					getEContentUnion()->erase(*iterEContentUnion);
 				}
-				iterEContens++;
+				iterEContentUnion++;
 			}
  
-			iterEContens = eContensList->begin();
-			endEContens = eContensList->end();
-			while (iterEContens != endEContens)
+			iterEContentUnion = eContentUnionList->begin();
+			endEContentUnion = eContentUnionList->end();
+			while (iterEContentUnion != endEContentUnion)
 			{
-				if (getEContens()->find(*iterEContens) == -1)
+				if (getEContentUnion()->find(*iterEContentUnion) == -1)
 				{
-					getEContens()->add(*iterEContens);
+					getEContentUnion()->add(*iterEContentUnion);
 				}
-				iterEContens++;			
+				iterEContentUnion++;			
 			}
 			return true;
 		}
 		case ecore::ecorePackage::EOBJECT_ATTRIBUTE_METAELEMENTID:
 		{
 			// BOOST CAST
-			int _metaElementID = newValue->get<int>();
+			long long _metaElementID = newValue->get<long long>();
 			setMetaElementID(_metaElementID); //392
 			return true;
 		}
@@ -526,7 +582,7 @@ Any EObjectImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::share
   	switch(operationID)
 	{
 		
-		// 269186772
+		// 345308248
 		case ecorePackage::EOBJECT_OPERATION_EALLCONTENTS:
 		{
 			result = eAny(this->eAllContents());
@@ -537,6 +593,13 @@ Any EObjectImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::share
 		case ecorePackage::EOBJECT_OPERATION_ECLASS:
 		{
 			result = eAny(this->eClass());
+			break;
+		}
+		
+		// 1564505762
+		case ecorePackage::EOBJECT_OPERATION_ECONTAINER:
+		{
+			result = eAny(this->eContainer());
 			break;
 		}
 		
@@ -554,7 +617,7 @@ Any EObjectImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::share
 			break;
 		}
 		
-		// 614061473
+		// 1140157049
 		case ecorePackage::EOBJECT_OPERATION_ECONTENTS:
 		{
 			result = eAny(this->eContents());

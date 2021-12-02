@@ -120,9 +120,9 @@ EEnumImpl& EEnumImpl::operator=(const EEnumImpl & obj)
 		#endif
 		
 		/*Subset*/
-		getELiterals()->initSubset(getEContens());
+		getELiterals()->initSubset(getEContentUnion());
 		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_eLiterals - Subset<ecore::EEnumLiteral, ecore::EObject >(getEContens())" << std::endl;
+			std::cout << "Initialising value Subset: " << "m_eLiterals - Subset<ecore::EEnumLiteral, ecore::EObject >(getEContentUnion())" << std::endl;
 		#endif
 		
 
@@ -140,9 +140,9 @@ EEnumImpl& EEnumImpl::operator=(const EEnumImpl & obj)
 		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr eLiterals."<< std::endl;)
 	}
 	/*Subset*/
-	getELiterals()->initSubset(getEContens());
+	getELiterals()->initSubset(getEContentUnion());
 	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Initialising value Subset: " << "m_eLiterals - Subset<ecore::EEnumLiteral, ecore::EObject >(getEContens())" << std::endl;
+		std::cout << "Initialising value Subset: " << "m_eLiterals - Subset<ecore::EEnumLiteral, ecore::EObject >(getEContentUnion())" << std::endl;
 	#endif
 	
 	return *this;
@@ -224,9 +224,9 @@ std::shared_ptr<Subset<ecore::EEnumLiteral, ecore::EObject>> EEnumImpl::getELite
 		#endif
 		
 		/*Subset*/
-		getELiterals()->initSubset(getEContens());
+		getELiterals()->initSubset(getEContentUnion());
 		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_eLiterals - Subset<ecore::EEnumLiteral, ecore::EObject >(getEContens())" << std::endl;
+			std::cout << "Initialising value Subset: " << "m_eLiterals - Subset<ecore::EEnumLiteral, ecore::EObject >(getEContentUnion())" << std::endl;
 		#endif
 		
 	}
@@ -236,19 +236,19 @@ std::shared_ptr<Subset<ecore::EEnumLiteral, ecore::EObject>> EEnumImpl::getELite
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<Union<ecore::EObject>> EEnumImpl::getEContens() const
+std::shared_ptr<Union<ecore::EObject>> EEnumImpl::getEContentUnion() const
 {
-	if(m_eContens == nullptr)
+	if(m_eContentUnion == nullptr)
 	{
 		/*Union*/
-		m_eContens.reset(new Union<ecore::EObject>());
+		m_eContentUnion.reset(new Union<ecore::EObject>());
 			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_eContens - Union<ecore::EObject>()" << std::endl;
+			std::cout << "Initialising Union: " << "m_eContentUnion - Union<ecore::EObject>()" << std::endl;
 		#endif
 		
 		
 	}
-	return m_eContens;
+	return m_eContentUnion;
 }
 
 //*********************************

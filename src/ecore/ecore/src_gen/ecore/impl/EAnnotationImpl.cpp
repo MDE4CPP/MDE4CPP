@@ -125,9 +125,9 @@ EAnnotationImpl& EAnnotationImpl::operator=(const EAnnotationImpl & obj)
 		#endif
 		
 		/*Subset*/
-		getContents()->initSubset(getEContens());
+		getContents()->initSubset(getEContentUnion());
 		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_contents - Subset<ecore::EObject, ecore::EObject >(getEContens())" << std::endl;
+			std::cout << "Initialising value Subset: " << "m_contents - Subset<ecore::EObject, ecore::EObject >(getEContentUnion())" << std::endl;
 		#endif
 		
 
@@ -145,9 +145,9 @@ EAnnotationImpl& EAnnotationImpl::operator=(const EAnnotationImpl & obj)
 		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr contents."<< std::endl;)
 	}
 	/*Subset*/
-	getContents()->initSubset(getEContens());
+	getContents()->initSubset(getEContentUnion());
 	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Initialising value Subset: " << "m_contents - Subset<ecore::EObject, ecore::EObject >(getEContens())" << std::endl;
+		std::cout << "Initialising value Subset: " << "m_contents - Subset<ecore::EObject, ecore::EObject >(getEContentUnion())" << std::endl;
 	#endif
 	
 	return *this;
@@ -205,9 +205,9 @@ std::shared_ptr<Subset<ecore::EObject, ecore::EObject>> EAnnotationImpl::getCont
 		#endif
 		
 		/*Subset*/
-		getContents()->initSubset(getEContens());
+		getContents()->initSubset(getEContentUnion());
 		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_contents - Subset<ecore::EObject, ecore::EObject >(getEContens())" << std::endl;
+			std::cout << "Initialising value Subset: " << "m_contents - Subset<ecore::EObject, ecore::EObject >(getEContentUnion())" << std::endl;
 		#endif
 		
 	}
@@ -240,19 +240,19 @@ std::shared_ptr<Bag<ecore::EObject>> EAnnotationImpl::getReferences() const
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<Union<ecore::EObject>> EAnnotationImpl::getEContens() const
+std::shared_ptr<Union<ecore::EObject>> EAnnotationImpl::getEContentUnion() const
 {
-	if(m_eContens == nullptr)
+	if(m_eContentUnion == nullptr)
 	{
 		/*Union*/
-		m_eContens.reset(new Union<ecore::EObject>());
+		m_eContentUnion.reset(new Union<ecore::EObject>());
 			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_eContens - Union<ecore::EObject>()" << std::endl;
+			std::cout << "Initialising Union: " << "m_eContentUnion - Union<ecore::EObject>()" << std::endl;
 		#endif
 		
 		
 	}
-	return m_eContens;
+	return m_eContentUnion;
 }
 
 //*********************************
@@ -451,10 +451,10 @@ Any EAnnotationImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case ecore::ecorePackage::EANNOTATION_ATTRIBUTE_DETAILS:
 			return eAny(getDetails()); //18
 		case ecore::ecorePackage::EANNOTATION_ATTRIBUTE_EMODELELEMENT:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getEModelElement().lock();
-				return eAny(returnValue); //15
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getEModelElement().lock();
+			return eAny(returnValue); //15
+		}
 		case ecore::ecorePackage::EANNOTATION_ATTRIBUTE_REFERENCES:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());

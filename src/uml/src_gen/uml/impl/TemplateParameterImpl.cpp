@@ -442,30 +442,30 @@ Any TemplateParameterImpl::eGet(int featureID, bool resolve, bool coreType) cons
 	switch(featureID)
 	{
 		case uml::umlPackage::TEMPLATEPARAMETER_ATTRIBUTE_DEFAULT:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getDefault();
-				return eAny(returnValue); //2313
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getDefault();
+			return eAny(returnValue); //2313
+		}
 		case uml::umlPackage::TEMPLATEPARAMETER_ATTRIBUTE_OWNEDDEFAULT:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getOwnedDefault();
-				return eAny(returnValue); //2314
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getOwnedDefault();
+			return eAny(returnValue); //2314
+		}
 		case uml::umlPackage::TEMPLATEPARAMETER_ATTRIBUTE_OWNEDPARAMETEREDELEMENT:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getOwnedParameteredElement();
-				return eAny(returnValue); //2317
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getOwnedParameteredElement();
+			return eAny(returnValue); //2317
+		}
 		case uml::umlPackage::TEMPLATEPARAMETER_ATTRIBUTE_PARAMETEREDELEMENT:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getParameteredElement();
-				return eAny(returnValue); //2315
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getParameteredElement();
+			return eAny(returnValue); //2315
+		}
 		case uml::umlPackage::TEMPLATEPARAMETER_ATTRIBUTE_SIGNATURE:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getSignature().lock();
-				return eAny(returnValue); //2316
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getSignature().lock();
+			return eAny(returnValue); //2316
+		}
 	}
 	return ElementImpl::eGet(featureID, resolve, coreType);
 }

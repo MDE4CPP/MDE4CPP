@@ -157,19 +157,19 @@ void EFactoryImpl::setEPackage(std::shared_ptr<ecore::EPackage> _ePackage)
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<Union<ecore::EObject>> EFactoryImpl::getEContens() const
+std::shared_ptr<Union<ecore::EObject>> EFactoryImpl::getEContentUnion() const
 {
-	if(m_eContens == nullptr)
+	if(m_eContentUnion == nullptr)
 	{
 		/*Union*/
-		m_eContens.reset(new Union<ecore::EObject>());
+		m_eContentUnion.reset(new Union<ecore::EObject>());
 			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_eContens - Union<ecore::EObject>()" << std::endl;
+			std::cout << "Initialising Union: " << "m_eContentUnion - Union<ecore::EObject>()" << std::endl;
 		#endif
 		
 		
 	}
-	return m_eContens;
+	return m_eContentUnion;
 }
 
 //*********************************
@@ -294,10 +294,10 @@ Any EFactoryImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case ecore::ecorePackage::EFACTORY_ATTRIBUTE_EPACKAGE:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getEPackage();
-				return eAny(returnValue); //234
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getEPackage();
+			return eAny(returnValue); //234
+		}
 	}
 	return EModelElementImpl::eGet(featureID, resolve, coreType);
 }

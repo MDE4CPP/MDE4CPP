@@ -670,34 +670,34 @@ Any MessageImpl::eGet(int featureID, bool resolve, bool coreType) const
 			return eAny(tempList); //1479			
 		}
 		case uml::umlPackage::MESSAGE_ATTRIBUTE_CONNECTOR:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getConnector();
-				return eAny(returnValue); //14710
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getConnector();
+			return eAny(returnValue); //14710
+		}
 		case uml::umlPackage::MESSAGE_ATTRIBUTE_INTERACTION:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getInteraction().lock();
-				return eAny(returnValue); //14711
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getInteraction().lock();
+			return eAny(returnValue); //14711
+		}
 		case uml::umlPackage::MESSAGE_ATTRIBUTE_MESSAGEKIND:
 			return eAny(getMessageKind()); //14712
 		case uml::umlPackage::MESSAGE_ATTRIBUTE_MESSAGESORT:
 			return eAny(getMessageSort()); //14713
 		case uml::umlPackage::MESSAGE_ATTRIBUTE_RECEIVEEVENT:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getReceiveEvent();
-				return eAny(returnValue); //14714
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getReceiveEvent();
+			return eAny(returnValue); //14714
+		}
 		case uml::umlPackage::MESSAGE_ATTRIBUTE_SENDEVENT:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getSendEvent();
-				return eAny(returnValue); //14715
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getSendEvent();
+			return eAny(returnValue); //14715
+		}
 		case uml::umlPackage::MESSAGE_ATTRIBUTE_SIGNATURE:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getSignature();
-				return eAny(returnValue); //14716
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getSignature();
+			return eAny(returnValue); //14716
+		}
 	}
 	return NamedElementImpl::eGet(featureID, resolve, coreType);
 }

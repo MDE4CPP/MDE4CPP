@@ -4,15 +4,15 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
-#include "ecore/EParameter.hpp"
-#include "ecore/EDataType.hpp"
-#include "ecore/EStringToStringMapEntry.hpp"
-#include "ecore/EGenericType.hpp"
-#include "ecore/EReference.hpp"
-#include "ecore/EOperation.hpp"
-#include "ecore/EAttribute.hpp"
 #include "ecore/EAnnotation.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EClass.hpp"
+#include "ecore/EDataType.hpp"
+#include "ecore/EGenericType.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EParameter.hpp"
+#include "ecore/EOperation.hpp"
+#include "ecore/EStringToStringMapEntry.hpp"
 
 // metametamodel factory
 #include "ecore/ecoreFactory.hpp"
@@ -43,6 +43,7 @@ void ValuesPackageImpl::initializePackageContents()
 	setNsURI(eNS_URI);
 	
 	// Add supertypes to classes
+	m_anyValue_Class->getESuperTypes()->push_back(fUML::Semantics::Values::ValuesPackage::eInstance()->getValue_Class());
 	m_bagTypeValue_Class->getESuperTypes()->push_back(getCollectionValue_Class());
 	m_collectionValue_Class->getESuperTypes()->push_back(getStaticValue_Class());
 	m_objectValue_Class->getESuperTypes()->push_back(fUML::Semantics::Values::ValuesPackage::eInstance()->getValue_Class());
@@ -57,6 +58,7 @@ void ValuesPackageImpl::initializePackageContents()
 	
 
  	// Initialize classes and features; add operations and parameters
+	initializeAnyValueContent();
 	initializeBagTypeValueContent();
 	initializeCollectionValueContent();
 	initializeElementContent();
@@ -74,6 +76,44 @@ void ValuesPackageImpl::initializePackageContents()
 
 	initializePackageEDataTypes();
 
+}
+
+void ValuesPackageImpl::initializeAnyValueContent()
+{
+	m_anyValue_Class->setName("AnyValue");
+	m_anyValue_Class->setAbstract(false);
+	m_anyValue_Class->setInterface(false);
+	
+	m_anyValue_Attribute_value = getAnyValue_Attribute_value();
+	m_anyValue_Attribute_value->setName("value");
+		m_anyValue_Attribute_value->setEType(ecore::ecorePackage::eInstance()->getEJavaObject_Class());
+	m_anyValue_Attribute_value->setLowerBound(0);
+	m_anyValue_Attribute_value->setUpperBound(1);
+	m_anyValue_Attribute_value->setTransient(false);
+	m_anyValue_Attribute_value->setVolatile(false);
+	m_anyValue_Attribute_value->setChangeable(true);
+	m_anyValue_Attribute_value->setUnsettable(false);
+	m_anyValue_Attribute_value->setUnique(true);
+	m_anyValue_Attribute_value->setDerived(false);
+	m_anyValue_Attribute_value->setOrdered(true);
+	m_anyValue_Attribute_value->setID(false);
+	{
+		std::string defaultValue = "";
+		if (!defaultValue.empty())
+		{
+		   m_anyValue_Attribute_value->setDefaultValueLiteral(defaultValue);
+		}
+	}
+	
+	
+	m_anyValue_Operation_toString->setName("toString");
+	m_anyValue_Operation_toString->setEType(types::typesPackage::eInstance()->getString_Class());
+	m_anyValue_Operation_toString->setLowerBound(1);
+	m_anyValue_Operation_toString->setUpperBound(1);
+	m_anyValue_Operation_toString->setUnique(true);
+	m_anyValue_Operation_toString->setOrdered(false);
+	
+	
 }
 
 void ValuesPackageImpl::initializeBagTypeValueContent()
@@ -131,31 +171,6 @@ void ValuesPackageImpl::initializeCollectionValueContent()
 		}				
 			//undefined otherEnd
 			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
-	}
-	m_collectionValue_Attribute_model->setName("model");
-	m_collectionValue_Attribute_model->setEType(ocl::Types::TypesPackage::eInstance()->getCollectionType_Class());
-	m_collectionValue_Attribute_model->setLowerBound(1);
-	m_collectionValue_Attribute_model->setUpperBound(1);
-	m_collectionValue_Attribute_model->setTransient(false);
-	m_collectionValue_Attribute_model->setVolatile(false);
-	m_collectionValue_Attribute_model->setChangeable(true);
-	m_collectionValue_Attribute_model->setUnsettable(false);
-	m_collectionValue_Attribute_model->setUnique(true);
-	m_collectionValue_Attribute_model->setDerived(false);
-	m_collectionValue_Attribute_model->setOrdered(true);
-	m_collectionValue_Attribute_model->setContainment(false);
-	m_collectionValue_Attribute_model->setResolveProxies(true);
-	{
-		std::string defaultValue = "";
-		if (!defaultValue.empty())
-		{
-			m_collectionValue_Attribute_model->setDefaultValueLiteral(defaultValue);
-		}				
-		std::shared_ptr<ecore::EReference>  otherEnd = ocl::Types::TypesPackage::eInstance()->getCollectionType_Attribute_instance();
-		if (otherEnd != nullptr)
-	    {
-	   		m_collectionValue_Attribute_model->setEOpposite(otherEnd);
-	    }
 	}
 	
 	m_collectionValue_Operation_addValue_Value->setName("addValue");

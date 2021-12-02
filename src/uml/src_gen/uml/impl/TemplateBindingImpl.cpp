@@ -478,10 +478,10 @@ Any TemplateBindingImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::TEMPLATEBINDING_ATTRIBUTE_BOUNDELEMENT:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getBoundElement().lock();
-				return eAny(returnValue); //2308
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getBoundElement().lock();
+			return eAny(returnValue); //2308
+		}
 		case uml::umlPackage::TEMPLATEBINDING_ATTRIBUTE_PARAMETERSUBSTITUTION:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
@@ -495,10 +495,10 @@ Any TemplateBindingImpl::eGet(int featureID, bool resolve, bool coreType) const
 			return eAny(tempList); //2306			
 		}
 		case uml::umlPackage::TEMPLATEBINDING_ATTRIBUTE_SIGNATURE:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getSignature();
-				return eAny(returnValue); //2307
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getSignature();
+			return eAny(returnValue); //2307
+		}
 	}
 	return DirectedRelationshipImpl::eGet(featureID, resolve, coreType);
 }

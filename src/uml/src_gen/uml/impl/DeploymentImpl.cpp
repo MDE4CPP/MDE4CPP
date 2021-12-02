@@ -585,10 +585,10 @@ Any DeploymentImpl::eGet(int featureID, bool resolve, bool coreType) const
 			return eAny(tempList); //6918			
 		}
 		case uml::umlPackage::DEPLOYMENT_ATTRIBUTE_LOCATION:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getLocation().lock();
-				return eAny(returnValue); //6919
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getLocation().lock();
+			return eAny(returnValue); //6919
+		}
 	}
 	return DependencyImpl::eGet(featureID, resolve, coreType);
 }

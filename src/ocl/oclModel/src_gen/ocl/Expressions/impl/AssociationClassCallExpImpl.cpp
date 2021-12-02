@@ -413,10 +413,10 @@ Any AssociationClassCallExpImpl::eGet(int featureID, bool resolve, bool coreType
 	switch(featureID)
 	{
 		case ocl::Expressions::ExpressionsPackage::ASSOCIATIONCLASSCALLEXP_ATTRIBUTE_REFERREDASSOCIATIONCLASS:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getReferredAssociationClass();
-				return eAny(returnValue); //226
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getReferredAssociationClass();
+			return eAny(returnValue); //326
+		}
 	}
 	return NavigationCallExpImpl::eGet(featureID, resolve, coreType);
 }
@@ -426,7 +426,7 @@ bool AssociationClassCallExpImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case ocl::Expressions::ExpressionsPackage::ASSOCIATIONCLASSCALLEXP_ATTRIBUTE_REFERREDASSOCIATIONCLASS:
-			return getReferredAssociationClass() != nullptr; //226
+			return getReferredAssociationClass() != nullptr; //326
 	}
 	return NavigationCallExpImpl::internalEIsSet(featureID);
 }
@@ -440,7 +440,7 @@ bool AssociationClassCallExpImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<ecore::EReference> _referredAssociationClass = std::dynamic_pointer_cast<ecore::EReference>(_temp);
-			setReferredAssociationClass(_referredAssociationClass); //226
+			setReferredAssociationClass(_referredAssociationClass); //326
 			return true;
 		}
 	}

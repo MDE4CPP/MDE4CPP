@@ -523,15 +523,15 @@ Any PseudostateImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::PSEUDOSTATE_ATTRIBUTE_KIND:
 			return eAny(getKind()); //18913
 		case uml::umlPackage::PSEUDOSTATE_ATTRIBUTE_STATE:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getState().lock();
-				return eAny(returnValue); //18912
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getState().lock();
+			return eAny(returnValue); //18912
+		}
 		case uml::umlPackage::PSEUDOSTATE_ATTRIBUTE_STATEMACHINE:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getStateMachine().lock();
-				return eAny(returnValue); //18914
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getStateMachine().lock();
+			return eAny(returnValue); //18914
+		}
 	}
 	return VertexImpl::eGet(featureID, resolve, coreType);
 }

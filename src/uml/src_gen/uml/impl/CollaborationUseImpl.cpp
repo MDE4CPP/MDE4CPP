@@ -411,10 +411,10 @@ Any CollaborationUseImpl::eGet(int featureID, bool resolve, bool coreType) const
 			return eAny(tempList); //439			
 		}
 		case uml::umlPackage::COLLABORATIONUSE_ATTRIBUTE_TYPE:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getType();
-				return eAny(returnValue); //4310
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getType();
+			return eAny(returnValue); //4310
+		}
 	}
 	return NamedElementImpl::eGet(featureID, resolve, coreType);
 }

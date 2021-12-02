@@ -342,10 +342,10 @@ Any TypeImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::TYPE_ATTRIBUTE_PACKAGE:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getPackage().lock();
-				return eAny(returnValue); //24412
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getPackage().lock();
+			return eAny(returnValue); //24412
+		}
 	}
 	return PackageableElementImpl::eGet(featureID, resolve, coreType);
 }

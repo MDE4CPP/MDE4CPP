@@ -474,10 +474,10 @@ Any ExtensionImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::EXTENSION_ATTRIBUTE_ISREQUIRED:
 			return eAny(getIsRequired()); //9744
 		case uml::umlPackage::EXTENSION_ATTRIBUTE_METACLASS:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getMetaclass();
-				return eAny(returnValue); //9745
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getMetaclass();
+			return eAny(returnValue); //9745
+		}
 	}
 	return AssociationImpl::eGet(featureID, resolve, coreType);
 }

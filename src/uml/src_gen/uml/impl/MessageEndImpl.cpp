@@ -314,10 +314,10 @@ Any MessageEndImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::MESSAGEEND_ATTRIBUTE_MESSAGE:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getMessage();
-				return eAny(returnValue); //1489
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getMessage();
+			return eAny(returnValue); //1489
+		}
 	}
 	return NamedElementImpl::eGet(featureID, resolve, coreType);
 }

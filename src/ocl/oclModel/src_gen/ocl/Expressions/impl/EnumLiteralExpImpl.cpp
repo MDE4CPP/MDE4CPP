@@ -410,10 +410,10 @@ Any EnumLiteralExpImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case ocl::Expressions::ExpressionsPackage::ENUMLITERALEXP_ATTRIBUTE_REFERREDENUMLITERAL:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getReferredEnumLiteral();
-				return eAny(returnValue); //2322
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getReferredEnumLiteral();
+			return eAny(returnValue); //2422
+		}
 	}
 	return LiteralExpImpl::eGet(featureID, resolve, coreType);
 }
@@ -423,7 +423,7 @@ bool EnumLiteralExpImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case ocl::Expressions::ExpressionsPackage::ENUMLITERALEXP_ATTRIBUTE_REFERREDENUMLITERAL:
-			return getReferredEnumLiteral() != nullptr; //2322
+			return getReferredEnumLiteral() != nullptr; //2422
 	}
 	return LiteralExpImpl::internalEIsSet(featureID);
 }
@@ -437,7 +437,7 @@ bool EnumLiteralExpImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::EnumerationLiteral> _referredEnumLiteral = std::dynamic_pointer_cast<uml::EnumerationLiteral>(_temp);
-			setReferredEnumLiteral(_referredEnumLiteral); //2322
+			setReferredEnumLiteral(_referredEnumLiteral); //2422
 			return true;
 		}
 	}

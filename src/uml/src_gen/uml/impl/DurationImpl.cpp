@@ -422,10 +422,10 @@ Any DurationImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::DURATION_ATTRIBUTE_EXPR:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getExpr();
-				return eAny(returnValue); //7715
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getExpr();
+			return eAny(returnValue); //7715
+		}
 		case uml::umlPackage::DURATION_ATTRIBUTE_OBSERVATION:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());

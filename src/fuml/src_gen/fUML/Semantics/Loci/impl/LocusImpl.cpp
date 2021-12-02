@@ -56,8 +56,8 @@
 #include "fUML/Semantics/StructuredClassifiers/Object.hpp"
 
 //Factories an Package includes
-#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
 #include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -460,10 +460,10 @@ Any LocusImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case fUML::Semantics::Loci::LociPackage::LOCUS_ATTRIBUTE_EXECUTOR:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getExecutor();
-				return eAny(returnValue); //770
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getExecutor();
+			return eAny(returnValue); //770
+		}
 		case fUML::Semantics::Loci::LociPackage::LOCUS_ATTRIBUTE_EXTENSIONALVALUES:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
@@ -477,10 +477,10 @@ Any LocusImpl::eGet(int featureID, bool resolve, bool coreType) const
 			return eAny(tempList); //772			
 		}
 		case fUML::Semantics::Loci::LociPackage::LOCUS_ATTRIBUTE_FACTORY:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getFactory();
-				return eAny(returnValue); //771
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getFactory();
+			return eAny(returnValue); //771
+		}
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
 }

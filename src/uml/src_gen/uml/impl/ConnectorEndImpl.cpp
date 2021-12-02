@@ -380,25 +380,25 @@ Any ConnectorEndImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::CONNECTOREND_ATTRIBUTE_CONNECTOR:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getConnector().lock();
-				return eAny(returnValue); //5412
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getConnector().lock();
+			return eAny(returnValue); //5412
+		}
 		case uml::umlPackage::CONNECTOREND_ATTRIBUTE_DEFININGEND:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getDefiningEnd();
-				return eAny(returnValue); //549
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getDefiningEnd();
+			return eAny(returnValue); //549
+		}
 		case uml::umlPackage::CONNECTOREND_ATTRIBUTE_PARTWITHPORT:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getPartWithPort();
-				return eAny(returnValue); //5410
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getPartWithPort();
+			return eAny(returnValue); //5410
+		}
 		case uml::umlPackage::CONNECTOREND_ATTRIBUTE_ROLE:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getRole();
-				return eAny(returnValue); //5411
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getRole();
+			return eAny(returnValue); //5411
+		}
 	}
 	return MultiplicityElementImpl::eGet(featureID, resolve, coreType);
 }

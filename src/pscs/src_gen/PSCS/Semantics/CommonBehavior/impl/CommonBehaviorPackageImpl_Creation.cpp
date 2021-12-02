@@ -7,15 +7,15 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
-#include "ecore/EParameter.hpp"
-#include "ecore/EDataType.hpp"
-#include "ecore/EStringToStringMapEntry.hpp"
-#include "ecore/EGenericType.hpp"
-#include "ecore/EReference.hpp"
-#include "ecore/EOperation.hpp"
-#include "ecore/EAttribute.hpp"
 #include "ecore/EAnnotation.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EClass.hpp"
+#include "ecore/EDataType.hpp"
+#include "ecore/EGenericType.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EParameter.hpp"
+#include "ecore/EOperation.hpp"
+#include "ecore/EStringToStringMapEntry.hpp"
 
 //depending model packages
 #include "PSCS/PSCSPackage.hpp"
@@ -58,7 +58,7 @@ void CommonBehaviorPackageImpl::createCS_CallEventExecutionContent(std::shared_p
 void CommonBehaviorPackageImpl::createCS_EventOccurrenceContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_cS_EventOccurrence_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, CS_EVENTOCCURRENCE_CLASS);
-	m_cS_EventOccurrence_Attribute_propagationInward = factory->createEAttribute_as_eAttributes_in_EClas(m_cS_EventOccurrence_Class, CS_EVENTOCCURRENCE_ATTRIBUTE_PROPAGATIONINWARD);
+	m_cS_EventOccurrence_Attribute_propagationInward = factory->createEAttribute_as_eAttributes_in_EClass(m_cS_EventOccurrence_Class, CS_EVENTOCCURRENCE_ATTRIBUTE_PROPAGATIONINWARD);
 	
 	m_cS_EventOccurrence_Attribute_interactionPoint = factory->createEReference_as_eReferences_in_EClass(m_cS_EventOccurrence_Class, CS_EVENTOCCURRENCE_ATTRIBUTE_INTERACTIONPOINT);
 	m_cS_EventOccurrence_Attribute_onPort = factory->createEReference_as_eReferences_in_EClass(m_cS_EventOccurrence_Class, CS_EVENTOCCURRENCE_ATTRIBUTE_ONPORT);

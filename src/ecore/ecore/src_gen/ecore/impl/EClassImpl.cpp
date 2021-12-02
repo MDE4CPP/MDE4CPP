@@ -189,9 +189,9 @@ EClassImpl& EClassImpl::operator=(const EClassImpl & obj)
 		#endif
 		
 		/*Subset*/
-		getEOperations()->initSubset(getEContens());
+		getEOperations()->initSubset(getEContentUnion());
 		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_eOperations - Subset<ecore::EOperation, ecore::EObject >(getEContens())" << std::endl;
+			std::cout << "Initialising value Subset: " << "m_eOperations - Subset<ecore::EOperation, ecore::EObject >(getEContentUnion())" << std::endl;
 		#endif
 		
 
@@ -241,9 +241,9 @@ EClassImpl& EClassImpl::operator=(const EClassImpl & obj)
 	}
 	
 	/*Subset*/
-	getEOperations()->initSubset(getEContens());
+	getEOperations()->initSubset(getEContentUnion());
 	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Initialising value Subset: " << "m_eOperations - Subset<ecore::EOperation, ecore::EObject >(getEContens())" << std::endl;
+		std::cout << "Initialising value Subset: " << "m_eOperations - Subset<ecore::EOperation, ecore::EObject >(getEContentUnion())" << std::endl;
 	#endif
 	
 	return *this;
@@ -601,9 +601,9 @@ std::shared_ptr<Subset<ecore::EOperation, ecore::EObject>> EClassImpl::getEOpera
 		#endif
 		
 		/*Subset*/
-		getEOperations()->initSubset(getEContens());
+		getEOperations()->initSubset(getEContentUnion());
 		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_eOperations - Subset<ecore::EOperation, ecore::EObject >(getEContens())" << std::endl;
+			std::cout << "Initialising value Subset: " << "m_eOperations - Subset<ecore::EOperation, ecore::EObject >(getEContentUnion())" << std::endl;
 		#endif
 		
 	}
@@ -648,19 +648,19 @@ std::shared_ptr<Bag<ecore::EClass>> EClassImpl::getESuperTypes() const
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<Union<ecore::EObject>> EClassImpl::getEContens() const
+std::shared_ptr<Union<ecore::EObject>> EClassImpl::getEContentUnion() const
 {
-	if(m_eContens == nullptr)
+	if(m_eContentUnion == nullptr)
 	{
 		/*Union*/
-		m_eContens.reset(new Union<ecore::EObject>());
+		m_eContentUnion.reset(new Union<ecore::EObject>());
 			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_eContens - Union<ecore::EObject>()" << std::endl;
+			std::cout << "Initialising Union: " << "m_eContentUnion - Union<ecore::EObject>()" << std::endl;
 		#endif
 		
 		
 	}
-	return m_eContens;
+	return m_eContentUnion;
 }
 
 std::shared_ptr<SubsetUnion<ecore::EStructuralFeature, ecore::EObject>> EClassImpl::getEStructuralFeatures() const
@@ -674,9 +674,9 @@ std::shared_ptr<SubsetUnion<ecore::EStructuralFeature, ecore::EObject>> EClassIm
 		#endif
 		
 		/*SubsetUnion*/
-		getEStructuralFeatures()->initSubsetUnion(getEContens());
+		getEStructuralFeatures()->initSubsetUnion(getEContentUnion());
 		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value SubsetUnion: " << "m_eStructuralFeatures - SubsetUnion<ecore::EStructuralFeature, ecore::EObject >(getEContens())" << std::endl;
+			std::cout << "Initialising value SubsetUnion: " << "m_eStructuralFeatures - SubsetUnion<ecore::EStructuralFeature, ecore::EObject >(getEContentUnion())" << std::endl;
 		#endif
 		
 	}
@@ -1081,10 +1081,10 @@ Any EClassImpl::eGet(int featureID, bool resolve, bool coreType) const
 			return eAny(tempList); //1225			
 		}
 		case ecore::ecorePackage::ECLASS_ATTRIBUTE_EIDATTRIBUTE:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getEIDAttribute();
-				return eAny(returnValue); //1223
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getEIDAttribute();
+			return eAny(returnValue); //1223
+		}
 		case ecore::ecorePackage::ECLASS_ATTRIBUTE_EOPERATIONS:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());

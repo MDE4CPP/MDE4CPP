@@ -927,10 +927,10 @@ Any InterfaceImpl::eGet(int featureID, bool resolve, bool coreType) const
 			return eAny(tempList); //12540			
 		}
 		case uml::umlPackage::INTERFACE_ATTRIBUTE_PROTOCOL:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getProtocol();
-				return eAny(returnValue); //12541
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getProtocol();
+			return eAny(returnValue); //12541
+		}
 		case uml::umlPackage::INTERFACE_ATTRIBUTE_REDEFINEDINTERFACE:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());

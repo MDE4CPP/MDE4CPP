@@ -456,15 +456,15 @@ Any ConstraintImpl::eGet(int featureID, bool resolve, bool coreType) const
 			return eAny(tempList); //5712			
 		}
 		case uml::umlPackage::CONSTRAINT_ATTRIBUTE_CONTEXT:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getContext().lock();
-				return eAny(returnValue); //5713
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getContext().lock();
+			return eAny(returnValue); //5713
+		}
 		case uml::umlPackage::CONSTRAINT_ATTRIBUTE_SPECIFICATION:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getSpecification();
-				return eAny(returnValue); //5714
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getSpecification();
+			return eAny(returnValue); //5714
+		}
 	}
 	return PackageableElementImpl::eGet(featureID, resolve, coreType);
 }

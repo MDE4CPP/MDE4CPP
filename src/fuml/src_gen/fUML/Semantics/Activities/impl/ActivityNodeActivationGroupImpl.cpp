@@ -62,8 +62,8 @@
 #include "fUML/Semantics/Actions/StructuredActivityNodeActivation.hpp"
 
 //Factories an Package includes
-#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -868,15 +868,15 @@ Any ActivityNodeActivationGroupImpl::eGet(int featureID, bool resolve, bool core
 	switch(featureID)
 	{
 		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYNODEACTIVATIONGROUP_ATTRIBUTE_ACTIVITYEXECUTION:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getActivityExecution().lock();
-				return eAny(returnValue); //102
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getActivityExecution().lock();
+			return eAny(returnValue); //102
+		}
 		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYNODEACTIVATIONGROUP_ATTRIBUTE_CONTAININGNODEACTIVATION:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getContainingNodeActivation().lock();
-				return eAny(returnValue); //103
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getContainingNodeActivation().lock();
+			return eAny(returnValue); //103
+		}
 		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYNODEACTIVATIONGROUP_ATTRIBUTE_EDGEINSTANCES:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());

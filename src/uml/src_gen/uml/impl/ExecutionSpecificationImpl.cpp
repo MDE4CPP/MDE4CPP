@@ -364,15 +364,15 @@ Any ExecutionSpecificationImpl::eGet(int featureID, bool resolve, bool coreType)
 	switch(featureID)
 	{
 		case uml::umlPackage::EXECUTIONSPECIFICATION_ATTRIBUTE_FINISH:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getFinish();
-				return eAny(returnValue); //9113
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getFinish();
+			return eAny(returnValue); //9113
+		}
 		case uml::umlPackage::EXECUTIONSPECIFICATION_ATTRIBUTE_START:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getStart();
-				return eAny(returnValue); //9114
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getStart();
+			return eAny(returnValue); //9114
+		}
 	}
 	return InteractionFragmentImpl::eGet(featureID, resolve, coreType);
 }

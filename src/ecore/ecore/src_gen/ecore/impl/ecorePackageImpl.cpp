@@ -4,16 +4,16 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
-#include "ecore/EParameter.hpp"
-#include "ecore/EDataType.hpp"
-#include "ecore/EStringToStringMapEntry.hpp"
-#include "ecore/EGenericType.hpp"
+#include "ecore/EAnnotation.hpp"
 #include "ecore/EReference.hpp"
 #include "ecore/ETypeParameter.hpp"
-#include "ecore/EOperation.hpp"
-#include "ecore/EAttribute.hpp"
-#include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
+#include "ecore/EDataType.hpp"
+#include "ecore/EGenericType.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EParameter.hpp"
+#include "ecore/EOperation.hpp"
+#include "ecore/EStringToStringMapEntry.hpp"
 
 //metamodel factory
 #include "ecore/ecoreFactory.hpp"
@@ -448,9 +448,9 @@ std::shared_ptr<ecore::EReference> ecore::ecorePackageImpl::getEObject_Attribute
 {
 	return m_eObject_Attribute_eContainer;
 }
-std::shared_ptr<ecore::EReference> ecore::ecorePackageImpl::getEObject_Attribute_eContens() const
+std::shared_ptr<ecore::EReference> ecore::ecorePackageImpl::getEObject_Attribute_eContentUnion() const
 {
-	return m_eObject_Attribute_eContens;
+	return m_eObject_Attribute_eContentUnion;
 }
 
 std::shared_ptr<ecore::EOperation> ecore::ecorePackageImpl::getEObject_Operation_eAllContents() const
@@ -460,6 +460,10 @@ std::shared_ptr<ecore::EOperation> ecore::ecorePackageImpl::getEObject_Operation
 std::shared_ptr<ecore::EOperation> ecore::ecorePackageImpl::getEObject_Operation_eClass() const
 {
 	return m_eObject_Operation_eClass;
+}
+std::shared_ptr<ecore::EOperation> ecore::ecorePackageImpl::getEObject_Operation_eContainer() const
+{
+	return m_eObject_Operation_eContainer;
 }
 std::shared_ptr<ecore::EOperation> ecore::ecorePackageImpl::getEObject_Operation_eContainingFeature() const
 {
@@ -511,6 +515,21 @@ std::shared_ptr<ecore::EOperation> ecore::ecorePackageImpl::getEObject_Operation
 }
 
 // End Class EObject
+
+// Begin Class EObjectContainer
+std::shared_ptr<ecore::EClass> ecore::ecorePackageImpl::getEObjectContainer_Class() const
+{
+	return m_eObjectContainer_Class;
+}
+
+
+std::shared_ptr<ecore::EReference> ecore::ecorePackageImpl::getEObjectContainer_Attribute_container() const
+{
+	return m_eObjectContainer_Attribute_container;
+}
+
+
+// End Class EObjectContainer
 
 // Begin Class EOperation
 std::shared_ptr<ecore::EClass> ecore::ecorePackageImpl::getEOperation_Class() const

@@ -32,9 +32,9 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "ocl/Evaluations/EvaluationsFactory.hpp"
 #include "ecore/ecoreFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
+#include "ocl/Evaluations/EvaluationsFactory.hpp"
 
 #include "ocl/Expressions/CallExp.hpp"
 #include "ocl/Expressions/CollectionRange.hpp"
@@ -400,7 +400,7 @@ Any StringLiteralExpImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case ocl::Expressions::ExpressionsPackage::STRINGLITERALEXP_ATTRIBUTE_STRINGSYMBOL:
-			return eAny(getStringSymbol()); //8123
+			return eAny(getStringSymbol()); //8223
 	}
 	return PrimitiveLiteralExpImpl::eGet(featureID, resolve, coreType);
 }
@@ -410,7 +410,7 @@ bool StringLiteralExpImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case ocl::Expressions::ExpressionsPackage::STRINGLITERALEXP_ATTRIBUTE_STRINGSYMBOL:
-			return getStringSymbol() != ""; //8123
+			return getStringSymbol() != ""; //8223
 	}
 	return PrimitiveLiteralExpImpl::internalEIsSet(featureID);
 }
@@ -423,7 +423,7 @@ bool StringLiteralExpImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::string _stringSymbol = newValue->get<std::string>();
-			setStringSymbol(_stringSymbol); //8123
+			setStringSymbol(_stringSymbol); //8223
 			return true;
 		}
 	}

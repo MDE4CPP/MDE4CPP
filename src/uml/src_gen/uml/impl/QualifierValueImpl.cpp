@@ -324,15 +324,15 @@ Any QualifierValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::QUALIFIERVALUE_ATTRIBUTE_QUALIFIER:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getQualifier();
-				return eAny(returnValue); //1913
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getQualifier();
+			return eAny(returnValue); //1913
+		}
 		case uml::umlPackage::QUALIFIERVALUE_ATTRIBUTE_VALUE:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getValue();
-				return eAny(returnValue); //1914
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getValue();
+			return eAny(returnValue); //1914
+		}
 	}
 	return ElementImpl::eGet(featureID, resolve, coreType);
 }

@@ -420,10 +420,10 @@ Any ExceptionHandlerImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::EXCEPTIONHANDLER_ATTRIBUTE_EXCEPTIONINPUT:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getExceptionInput();
-				return eAny(returnValue); //873
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getExceptionInput();
+			return eAny(returnValue); //873
+		}
 		case uml::umlPackage::EXCEPTIONHANDLER_ATTRIBUTE_EXCEPTIONTYPE:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
@@ -437,15 +437,15 @@ Any ExceptionHandlerImpl::eGet(int featureID, bool resolve, bool coreType) const
 			return eAny(tempList); //874			
 		}
 		case uml::umlPackage::EXCEPTIONHANDLER_ATTRIBUTE_HANDLERBODY:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getHandlerBody();
-				return eAny(returnValue); //875
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getHandlerBody();
+			return eAny(returnValue); //875
+		}
 		case uml::umlPackage::EXCEPTIONHANDLER_ATTRIBUTE_PROTECTEDNODE:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getProtectedNode().lock();
-				return eAny(returnValue); //876
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getProtectedNode().lock();
+			return eAny(returnValue); //876
+		}
 	}
 	return ElementImpl::eGet(featureID, resolve, coreType);
 }

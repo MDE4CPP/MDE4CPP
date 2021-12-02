@@ -352,10 +352,10 @@ Any TemplateableElementImpl::eGet(int featureID, bool resolve, bool coreType) co
 	switch(featureID)
 	{
 		case uml::umlPackage::TEMPLATEABLEELEMENT_ATTRIBUTE_OWNEDTEMPLATESIGNATURE:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getOwnedTemplateSignature();
-				return eAny(returnValue); //2344
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getOwnedTemplateSignature();
+			return eAny(returnValue); //2344
+		}
 		case uml::umlPackage::TEMPLATEABLEELEMENT_ATTRIBUTE_TEMPLATEBINDING:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());

@@ -443,15 +443,15 @@ Any SubstitutionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::SUBSTITUTION_ATTRIBUTE_CONTRACT:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getContract();
-				return eAny(returnValue); //22918
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getContract();
+			return eAny(returnValue); //22918
+		}
 		case uml::umlPackage::SUBSTITUTION_ATTRIBUTE_SUBSTITUTINGCLASSIFIER:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getSubstitutingClassifier().lock();
-				return eAny(returnValue); //22919
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getSubstitutingClassifier().lock();
+			return eAny(returnValue); //22919
+		}
 	}
 	return RealizationImpl::eGet(featureID, resolve, coreType);
 }

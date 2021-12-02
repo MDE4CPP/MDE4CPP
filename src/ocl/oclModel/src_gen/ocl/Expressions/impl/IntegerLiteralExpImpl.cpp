@@ -32,9 +32,9 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "ocl/Evaluations/EvaluationsFactory.hpp"
 #include "ecore/ecoreFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
+#include "ocl/Evaluations/EvaluationsFactory.hpp"
 
 #include "ocl/Expressions/CallExp.hpp"
 #include "ocl/Expressions/CollectionRange.hpp"
@@ -402,7 +402,7 @@ Any IntegerLiteralExpImpl::eGet(int featureID, bool resolve, bool coreType) cons
 	switch(featureID)
 	{
 		case ocl::Expressions::ExpressionsPackage::INTEGERLITERALEXP_ATTRIBUTE_INTEGERSYMBOL:
-			return eAny(getIntegerSymbol()); //3323
+			return eAny(getIntegerSymbol()); //3423
 	}
 	return NumericLiteralExpImpl::eGet(featureID, resolve, coreType);
 }
@@ -412,7 +412,7 @@ bool IntegerLiteralExpImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case ocl::Expressions::ExpressionsPackage::INTEGERLITERALEXP_ATTRIBUTE_INTEGERSYMBOL:
-			return getIntegerSymbol() != 0; //3323
+			return getIntegerSymbol() != 0; //3423
 	}
 	return NumericLiteralExpImpl::internalEIsSet(featureID);
 }
@@ -425,7 +425,7 @@ bool IntegerLiteralExpImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			int _integerSymbol = newValue->get<int>();
-			setIntegerSymbol(_integerSymbol); //3323
+			setIntegerSymbol(_integerSymbol); //3423
 			return true;
 		}
 	}

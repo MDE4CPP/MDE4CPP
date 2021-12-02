@@ -52,8 +52,8 @@
 #include "fUML/Semantics/Activities/Token.hpp"
 
 //Factories an Package includes
-#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
 #include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
@@ -875,10 +875,10 @@ Any ActivityNodeActivationImpl::eGet(int featureID, bool resolve, bool coreType)
 	switch(featureID)
 	{
 		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYNODEACTIVATION_ATTRIBUTE_GROUP:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getGroup().lock();
-				return eAny(returnValue); //93
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getGroup().lock();
+			return eAny(returnValue); //93
+		}
 		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYNODEACTIVATION_ATTRIBUTE_HELDTOKENS:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
@@ -904,10 +904,10 @@ Any ActivityNodeActivationImpl::eGet(int featureID, bool resolve, bool coreType)
 			return eAny(tempList); //91			
 		}
 		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYNODEACTIVATION_ATTRIBUTE_NODE:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getNode();
-				return eAny(returnValue); //94
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getNode();
+			return eAny(returnValue); //94
+		}
 		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYNODEACTIVATION_ATTRIBUTE_OUTGOINGEDGES:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());

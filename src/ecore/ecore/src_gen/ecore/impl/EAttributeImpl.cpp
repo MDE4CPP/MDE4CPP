@@ -153,19 +153,19 @@ std::shared_ptr<ecore::EDataType> EAttributeImpl::getEAttributeType() const
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<Union<ecore::EObject>> EAttributeImpl::getEContens() const
+std::shared_ptr<Union<ecore::EObject>> EAttributeImpl::getEContentUnion() const
 {
-	if(m_eContens == nullptr)
+	if(m_eContentUnion == nullptr)
 	{
 		/*Union*/
-		m_eContens.reset(new Union<ecore::EObject>());
+		m_eContentUnion.reset(new Union<ecore::EObject>());
 			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_eContens - Union<ecore::EObject>()" << std::endl;
+			std::cout << "Initialising Union: " << "m_eContentUnion - Union<ecore::EObject>()" << std::endl;
 		#endif
 		
 		
 	}
-	return m_eContens;
+	return m_eContentUnion;
 }
 
 //*********************************
@@ -292,10 +292,10 @@ Any EAttributeImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case ecore::ecorePackage::EATTRIBUTE_ATTRIBUTE_EATTRIBUTETYPE:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getEAttributeType();
-				return eAny(returnValue); //223
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getEAttributeType();
+			return eAny(returnValue); //223
+		}
 		case ecore::ecorePackage::EATTRIBUTE_ATTRIBUTE_ID:
 			return eAny(isID()); //222
 	}

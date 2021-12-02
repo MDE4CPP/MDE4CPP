@@ -37,8 +37,8 @@
 
 //Factories an Package includes
 #include "ocl/oclPackage.hpp"
-#include "fUML/Semantics/Values/ValuesPackage.hpp"
 #include "ocl/Values/ValuesPackage.hpp"
+#include "fUML/Semantics/Values/ValuesPackage.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -268,12 +268,12 @@ Any ElementImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case ocl::Values::ValuesPackage::ELEMENT_ATTRIBUTE_INDEXNR:
-			return eAny(getIndexNr()); //220
+			return eAny(getIndexNr()); //230
 		case ocl::Values::ValuesPackage::ELEMENT_ATTRIBUTE_VALUE:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getValue();
-				return eAny(returnValue); //221
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getValue();
+			return eAny(returnValue); //231
+		}
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
 }
@@ -283,9 +283,9 @@ bool ElementImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case ocl::Values::ValuesPackage::ELEMENT_ATTRIBUTE_INDEXNR:
-			return getIndexNr() != 0; //220
+			return getIndexNr() != 0; //230
 		case ocl::Values::ValuesPackage::ELEMENT_ATTRIBUTE_VALUE:
-			return getValue() != nullptr; //221
+			return getValue() != nullptr; //231
 	}
 	return ecore::EObjectImpl::internalEIsSet(featureID);
 }
@@ -298,7 +298,7 @@ bool ElementImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			int _indexNr = newValue->get<int>();
-			setIndexNr(_indexNr); //220
+			setIndexNr(_indexNr); //230
 			return true;
 		}
 		case ocl::Values::ValuesPackage::ELEMENT_ATTRIBUTE_VALUE:
@@ -306,7 +306,7 @@ bool ElementImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<fUML::Semantics::Values::Value> _value = std::dynamic_pointer_cast<fUML::Semantics::Values::Value>(_temp);
-			setValue(_value); //221
+			setValue(_value); //231
 			return true;
 		}
 	}

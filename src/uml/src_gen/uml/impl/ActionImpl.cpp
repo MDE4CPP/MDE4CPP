@@ -620,10 +620,10 @@ Any ActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::ACTION_ATTRIBUTE_CONTEXT:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getContext();
-				return eAny(returnValue); //421
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getContext();
+			return eAny(returnValue); //421
+		}
 		case uml::umlPackage::ACTION_ATTRIBUTE_INPUT:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());

@@ -896,10 +896,10 @@ Any LoopNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 			return eAny(tempList); //14445			
 		}
 		case uml::umlPackage::LOOPNODE_ATTRIBUTE_DECIDER:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getDecider();
-				return eAny(returnValue); //14446
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getDecider();
+			return eAny(returnValue); //14446
+		}
 		case uml::umlPackage::LOOPNODE_ATTRIBUTE_ISTESTEDFIRST:
 			return eAny(getIsTestedFirst()); //14447
 		case uml::umlPackage::LOOPNODE_ATTRIBUTE_LOOPVARIABLE:

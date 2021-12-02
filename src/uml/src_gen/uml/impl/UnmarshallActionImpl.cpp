@@ -564,10 +564,10 @@ Any UnmarshallActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::UNMARSHALLACTION_ATTRIBUTE_OBJECT:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getObject();
-				return eAny(returnValue); //24627
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getObject();
+			return eAny(returnValue); //24627
+		}
 		case uml::umlPackage::UNMARSHALLACTION_ATTRIBUTE_RESULT:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
@@ -581,10 +581,10 @@ Any UnmarshallActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 			return eAny(tempList); //24628			
 		}
 		case uml::umlPackage::UNMARSHALLACTION_ATTRIBUTE_UNMARSHALLTYPE:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getUnmarshallType();
-				return eAny(returnValue); //24629
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getUnmarshallType();
+			return eAny(returnValue); //24629
+		}
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
 }

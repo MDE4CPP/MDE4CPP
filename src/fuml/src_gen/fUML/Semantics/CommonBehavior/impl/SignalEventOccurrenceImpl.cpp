@@ -42,8 +42,8 @@
 #include "uml/Trigger.hpp"
 
 //Factories an Package includes
-#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersPackage.hpp"
 #include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
@@ -266,10 +266,10 @@ Any SignalEventOccurrenceImpl::eGet(int featureID, bool resolve, bool coreType) 
 	switch(featureID)
 	{
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::SIGNALEVENTOCCURRENCE_ATTRIBUTE_SIGNALINSTANCE:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getSignalInstance();
-				return eAny(returnValue); //1061
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getSignalInstance();
+			return eAny(returnValue); //1061
+		}
 	}
 	return EventOccurrenceImpl::eGet(featureID, resolve, coreType);
 }

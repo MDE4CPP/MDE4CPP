@@ -379,15 +379,15 @@ Any ProtocolConformanceImpl::eGet(int featureID, bool resolve, bool coreType) co
 	switch(featureID)
 	{
 		case uml::umlPackage::PROTOCOLCONFORMANCE_ATTRIBUTE_GENERALMACHINE:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getGeneralMachine();
-				return eAny(returnValue); //1866
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getGeneralMachine();
+			return eAny(returnValue); //1866
+		}
 		case uml::umlPackage::PROTOCOLCONFORMANCE_ATTRIBUTE_SPECIFICMACHINE:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getSpecificMachine().lock();
-				return eAny(returnValue); //1867
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getSpecificMachine().lock();
+			return eAny(returnValue); //1867
+		}
 	}
 	return DirectedRelationshipImpl::eGet(featureID, resolve, coreType);
 }

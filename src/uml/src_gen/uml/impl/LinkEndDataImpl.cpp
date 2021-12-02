@@ -427,10 +427,10 @@ Any LinkEndDataImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::LINKENDDATA_ATTRIBUTE_END:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getEnd();
-				return eAny(returnValue); //1353
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getEnd();
+			return eAny(returnValue); //1353
+		}
 		case uml::umlPackage::LINKENDDATA_ATTRIBUTE_QUALIFIER:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
@@ -444,10 +444,10 @@ Any LinkEndDataImpl::eGet(int featureID, bool resolve, bool coreType) const
 			return eAny(tempList); //1354			
 		}
 		case uml::umlPackage::LINKENDDATA_ATTRIBUTE_VALUE:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getValue();
-				return eAny(returnValue); //1355
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getValue();
+			return eAny(returnValue); //1355
+		}
 	}
 	return ElementImpl::eGet(featureID, resolve, coreType);
 }

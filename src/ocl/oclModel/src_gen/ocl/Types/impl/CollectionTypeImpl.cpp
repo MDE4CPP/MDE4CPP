@@ -32,8 +32,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "ocl/Values/ValuesFactory.hpp"
 #include "ecore/ecoreFactory.hpp"
+#include "ocl/Values/ValuesFactory.hpp"
 
 #include "ocl/Types/CollectionType.hpp"
 #include "ocl/Values/CollectionValue.hpp"
@@ -332,15 +332,15 @@ Any CollectionTypeImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case ocl::Types::TypesPackage::COLLECTIONTYPE_ATTRIBUTE_ELEMENTTYPE:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getElementType();
-				return eAny(returnValue); //209
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getElementType();
+			return eAny(returnValue); //219
+		}
 		case ocl::Types::TypesPackage::COLLECTIONTYPE_ATTRIBUTE_INSTANCE:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getInstance();
-				return eAny(returnValue); //2010
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getInstance();
+			return eAny(returnValue); //2110
+		}
 	}
 	return ecore::EDataTypeImpl::eGet(featureID, resolve, coreType);
 }
@@ -350,9 +350,9 @@ bool CollectionTypeImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case ocl::Types::TypesPackage::COLLECTIONTYPE_ATTRIBUTE_ELEMENTTYPE:
-			return getElementType() != nullptr; //209
+			return getElementType() != nullptr; //219
 		case ocl::Types::TypesPackage::COLLECTIONTYPE_ATTRIBUTE_INSTANCE:
-			return getInstance() != nullptr; //2010
+			return getInstance() != nullptr; //2110
 	}
 	return ecore::EDataTypeImpl::internalEIsSet(featureID);
 }
@@ -366,7 +366,7 @@ bool CollectionTypeImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<ecore::EClassifier> _elementType = std::dynamic_pointer_cast<ecore::EClassifier>(_temp);
-			setElementType(_elementType); //209
+			setElementType(_elementType); //219
 			return true;
 		}
 		case ocl::Types::TypesPackage::COLLECTIONTYPE_ATTRIBUTE_INSTANCE:
@@ -374,7 +374,7 @@ bool CollectionTypeImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<ocl::Values::CollectionValue> _instance = std::dynamic_pointer_cast<ocl::Values::CollectionValue>(_temp);
-			setInstance(_instance); //2010
+			setInstance(_instance); //2110
 			return true;
 		}
 	}

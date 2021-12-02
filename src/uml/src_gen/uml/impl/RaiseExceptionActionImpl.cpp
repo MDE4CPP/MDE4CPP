@@ -391,10 +391,10 @@ Any RaiseExceptionActionImpl::eGet(int featureID, bool resolve, bool coreType) c
 	switch(featureID)
 	{
 		case uml::umlPackage::RAISEEXCEPTIONACTION_ATTRIBUTE_EXCEPTION:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getException();
-				return eAny(returnValue); //19227
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getException();
+			return eAny(returnValue); //19227
+		}
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
 }

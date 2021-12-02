@@ -669,10 +669,10 @@ Any ActivityNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::ACTIVITYNODE_ATTRIBUTE_ACTIVITY:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getActivity().lock();
-				return eAny(returnValue); //1112
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getActivity().lock();
+			return eAny(returnValue); //1112
+		}
 		case uml::umlPackage::ACTIVITYNODE_ATTRIBUTE_INGROUP:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
@@ -710,10 +710,10 @@ Any ActivityNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 			return eAny(tempList); //1119			
 		}
 		case uml::umlPackage::ACTIVITYNODE_ATTRIBUTE_INSTRUCTUREDNODE:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getInStructuredNode().lock();
-				return eAny(returnValue); //1115
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getInStructuredNode().lock();
+			return eAny(returnValue); //1115
+		}
 		case uml::umlPackage::ACTIVITYNODE_ATTRIBUTE_INCOMING:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());

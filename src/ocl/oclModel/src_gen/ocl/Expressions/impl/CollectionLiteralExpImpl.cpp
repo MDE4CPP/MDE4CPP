@@ -503,7 +503,7 @@ Any CollectionLiteralExpImpl::eGet(int featureID, bool resolve, bool coreType) c
 	switch(featureID)
 	{
 		case ocl::Expressions::ExpressionsPackage::COLLECTIONLITERALEXP_ATTRIBUTE_KIND:
-			return eAny(getKind()); //1422
+			return eAny(getKind()); //1522
 		case ocl::Expressions::ExpressionsPackage::COLLECTIONLITERALEXP_ATTRIBUTE_PART:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
@@ -514,7 +514,7 @@ Any CollectionLiteralExpImpl::eGet(int featureID, bool resolve, bool coreType) c
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //1423			
+			return eAny(tempList); //1523			
 		}
 	}
 	return LiteralExpImpl::eGet(featureID, resolve, coreType);
@@ -525,9 +525,9 @@ bool CollectionLiteralExpImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case ocl::Expressions::ExpressionsPackage::COLLECTIONLITERALEXP_ATTRIBUTE_KIND:
-			return m_kind != ocl::Expressions::CollectionKind::COLLECTION;; //1422
+			return m_kind != ocl::Expressions::CollectionKind::COLLECTION;; //1522
 		case ocl::Expressions::ExpressionsPackage::COLLECTIONLITERALEXP_ATTRIBUTE_PART:
-			return getPart() != nullptr; //1423
+			return getPart() != nullptr; //1523
 	}
 	return LiteralExpImpl::internalEIsSet(featureID);
 }
@@ -540,7 +540,7 @@ bool CollectionLiteralExpImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			ocl::Expressions::CollectionKind _kind = newValue->get<ocl::Expressions::CollectionKind>();
-			setKind(_kind); //1422
+			setKind(_kind); //1522
 			return true;
 		}
 		case ocl::Expressions::ExpressionsPackage::COLLECTIONLITERALEXP_ATTRIBUTE_PART:

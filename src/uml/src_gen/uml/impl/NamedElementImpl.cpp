@@ -540,15 +540,15 @@ Any NamedElementImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::NAMEDELEMENT_ATTRIBUTE_NAME:
 			return eAny(getName()); //1554
 		case uml::umlPackage::NAMEDELEMENT_ATTRIBUTE_NAMEEXPRESSION:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getNameExpression();
-				return eAny(returnValue); //1555
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getNameExpression();
+			return eAny(returnValue); //1555
+		}
 		case uml::umlPackage::NAMEDELEMENT_ATTRIBUTE_NAMESPACE:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getNamespace().lock();
-				return eAny(returnValue); //1556
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getNamespace().lock();
+			return eAny(returnValue); //1556
+		}
 		case uml::umlPackage::NAMEDELEMENT_ATTRIBUTE_QUALIFIEDNAME:
 			return eAny(getQualifiedName()); //1557
 		case uml::umlPackage::NAMEDELEMENT_ATTRIBUTE_VISIBILITY:

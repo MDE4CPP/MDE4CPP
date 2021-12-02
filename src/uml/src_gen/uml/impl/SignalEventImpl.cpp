@@ -339,10 +339,10 @@ Any SignalEventImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::SIGNALEVENT_ATTRIBUTE_SIGNAL:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getSignal();
-				return eAny(returnValue); //21612
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getSignal();
+			return eAny(returnValue); //21612
+		}
 	}
 	return MessageEventImpl::eGet(featureID, resolve, coreType);
 }

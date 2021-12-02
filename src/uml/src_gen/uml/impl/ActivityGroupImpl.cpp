@@ -435,10 +435,10 @@ Any ActivityGroupImpl::eGet(int featureID, bool resolve, bool coreType) const
 			return eAny(tempList); //1010			
 		}
 		case uml::umlPackage::ACTIVITYGROUP_ATTRIBUTE_INACTIVITY:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getInActivity().lock();
-				return eAny(returnValue); //1011
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getInActivity().lock();
+			return eAny(returnValue); //1011
+		}
 		case uml::umlPackage::ACTIVITYGROUP_ATTRIBUTE_SUBGROUP:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
@@ -452,10 +452,10 @@ Any ActivityGroupImpl::eGet(int featureID, bool resolve, bool coreType) const
 			return eAny(tempList); //1012			
 		}
 		case uml::umlPackage::ACTIVITYGROUP_ATTRIBUTE_SUPERGROUP:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getSuperGroup().lock();
-				return eAny(returnValue); //1013
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getSuperGroup().lock();
+			return eAny(returnValue); //1013
+		}
 	}
 	return NamedElementImpl::eGet(featureID, resolve, coreType);
 }

@@ -517,23 +517,23 @@ Any MessageExpImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //4823			
+			return eAny(tempList); //4923			
 		}
 		case ocl::Expressions::ExpressionsPackage::MESSAGEEXP_ATTRIBUTE_CALLEDOPERATION:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getCalledOperation();
-				return eAny(returnValue); //4824
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getCalledOperation();
+			return eAny(returnValue); //4924
+		}
 		case ocl::Expressions::ExpressionsPackage::MESSAGEEXP_ATTRIBUTE_SENTSIGNAL:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getSentSignal();
-				return eAny(returnValue); //4825
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getSentSignal();
+			return eAny(returnValue); //4925
+		}
 		case ocl::Expressions::ExpressionsPackage::MESSAGEEXP_ATTRIBUTE_TARGET:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getTarget();
-				return eAny(returnValue); //4822
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getTarget();
+			return eAny(returnValue); //4922
+		}
 	}
 	return OclExpressionImpl::eGet(featureID, resolve, coreType);
 }
@@ -543,13 +543,13 @@ bool MessageExpImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case ocl::Expressions::ExpressionsPackage::MESSAGEEXP_ATTRIBUTE_ARGUMENT:
-			return getArgument() != nullptr; //4823
+			return getArgument() != nullptr; //4923
 		case ocl::Expressions::ExpressionsPackage::MESSAGEEXP_ATTRIBUTE_CALLEDOPERATION:
-			return getCalledOperation() != nullptr; //4824
+			return getCalledOperation() != nullptr; //4924
 		case ocl::Expressions::ExpressionsPackage::MESSAGEEXP_ATTRIBUTE_SENTSIGNAL:
-			return getSentSignal() != nullptr; //4825
+			return getSentSignal() != nullptr; //4925
 		case ocl::Expressions::ExpressionsPackage::MESSAGEEXP_ATTRIBUTE_TARGET:
-			return getTarget() != nullptr; //4822
+			return getTarget() != nullptr; //4922
 	}
 	return OclExpressionImpl::internalEIsSet(featureID);
 }
@@ -599,7 +599,7 @@ bool MessageExpImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::CallOperationAction> _calledOperation = std::dynamic_pointer_cast<uml::CallOperationAction>(_temp);
-			setCalledOperation(_calledOperation); //4824
+			setCalledOperation(_calledOperation); //4924
 			return true;
 		}
 		case ocl::Expressions::ExpressionsPackage::MESSAGEEXP_ATTRIBUTE_SENTSIGNAL:
@@ -607,7 +607,7 @@ bool MessageExpImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::SendSignalAction> _sentSignal = std::dynamic_pointer_cast<uml::SendSignalAction>(_temp);
-			setSentSignal(_sentSignal); //4825
+			setSentSignal(_sentSignal); //4925
 			return true;
 		}
 		case ocl::Expressions::ExpressionsPackage::MESSAGEEXP_ATTRIBUTE_TARGET:
@@ -615,7 +615,7 @@ bool MessageExpImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<ocl::Expressions::OclExpression> _target = std::dynamic_pointer_cast<ocl::Expressions::OclExpression>(_temp);
-			setTarget(_target); //4822
+			setTarget(_target); //4922
 			return true;
 		}
 	}

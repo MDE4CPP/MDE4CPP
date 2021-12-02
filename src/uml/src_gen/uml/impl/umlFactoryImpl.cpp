@@ -44828,7 +44828,7 @@ std::shared_ptr<ExtensionEnd> umlFactoryImpl::createExtensionEnd_as_ownedAttribu
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_Class.lock())
 	{
-		wp->getOwnedAttribute()->push_back(element);
+		wp->getClass_OwnedAttribute()->push_back(element);
 	}
 	
 	element->setThisExtensionEndPtr(element);
@@ -60444,7 +60444,7 @@ std::shared_ptr<Parameter> umlFactoryImpl::createParameter_as_ownedParameter_in_
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_Operation.lock())
 	{
-		wp->getOwnedParameter()->push_back(element);
+		wp->getProperty_OwnedParameter()->push_back(element);
 	}
 	
 	element->setThisParameterPtr(element);
@@ -60972,7 +60972,7 @@ std::shared_ptr<Port> umlFactoryImpl::createPort_as_ownedAttribute_in_Class(std:
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_Class.lock())
 	{
-		wp->getOwnedAttribute()->push_back(element);
+		wp->getClass_OwnedAttribute()->push_back(element);
 	}
 	
 	element->setThisPortPtr(element);
@@ -62040,7 +62040,7 @@ std::shared_ptr<Property> umlFactoryImpl::createProperty_as_ownedAttribute_in_Cl
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_Class.lock())
 	{
-		wp->getOwnedAttribute()->push_back(element);
+		wp->getClass_OwnedAttribute()->push_back(element);
 	}
 	
 	element->setThisPropertyPtr(element);

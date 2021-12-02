@@ -82,12 +82,6 @@ std::shared_ptr<ecore::EObject> TypesFactoryImpl::create(const int metaElementID
 						std::shared_ptr<ocl::Types::CollectionType> castedContainer = std::dynamic_pointer_cast<ocl::Types::CollectionType> (container);;
 						return this->createAnyType_as_elementType_in_CollectionType(castedContainer,metaElementID);
 					}
-					//AnyType has object as a containment
-					case  ocl::Types::TypesPackage::ANYTYPE_ATTRIBUTE_OBJECT:	
-					{
-						std::shared_ptr<ocl::Types::AnyType> castedContainer = std::dynamic_pointer_cast<ocl::Types::AnyType> (container);;
-						return this->createAnyType_as_object_in_AnyType(castedContainer,metaElementID);
-					}
 					default:
 						std::cerr << __PRETTY_FUNCTION__ << "ERROR: Reference type not found." << std::endl;
 				}	
@@ -102,23 +96,9 @@ std::shared_ptr<ecore::EObject> TypesFactoryImpl::create(const int metaElementID
 			}
 			else
 			{
-				switch(referenceID)
-				{
-					//BagType has elementType as a containment
-					case  ocl::Types::TypesPackage::COLLECTIONTYPE_ATTRIBUTE_ELEMENTTYPE:	
-					{
-						std::shared_ptr<ocl::Types::CollectionType> castedContainer = std::dynamic_pointer_cast<ocl::Types::CollectionType> (container);;
-						return this->createBagType_as_elementType_in_CollectionType(castedContainer,metaElementID);
-					}
-					//BagType has object as a containment
-					case  ocl::Types::TypesPackage::ANYTYPE_ATTRIBUTE_OBJECT:	
-					{
-						std::shared_ptr<ocl::Types::AnyType> castedContainer = std::dynamic_pointer_cast<ocl::Types::AnyType> (container);;
-						return this->createBagType_as_object_in_AnyType(castedContainer,metaElementID);
-					}
-					default:
-						std::cerr << __PRETTY_FUNCTION__ << "ERROR: Reference type not found." << std::endl;
-				}	
+				std::shared_ptr<ocl::Types::CollectionType> castedContainer = std::dynamic_pointer_cast<ocl::Types::CollectionType>(container);
+				assert(castedContainer);
+				return std::shared_ptr<ocl::Types::BagType>(this->createBagType_as_elementType_in_CollectionType(castedContainer,metaElementID));
 			}
 			break;
 		}
@@ -143,12 +123,6 @@ std::shared_ptr<ecore::EObject> TypesFactoryImpl::create(const int metaElementID
 					{
 						std::shared_ptr<ocl::Types::CollectionType> castedContainer = std::dynamic_pointer_cast<ocl::Types::CollectionType> (container);;
 						return this->createCollectionType_as_elementType_in_CollectionType(castedContainer,metaElementID);
-					}
-					//CollectionType has object as a containment
-					case  ocl::Types::TypesPackage::ANYTYPE_ATTRIBUTE_OBJECT:	
-					{
-						std::shared_ptr<ocl::Types::AnyType> castedContainer = std::dynamic_pointer_cast<ocl::Types::AnyType> (container);;
-						return this->createCollectionType_as_object_in_AnyType(castedContainer,metaElementID);
 					}
 					default:
 						std::cerr << __PRETTY_FUNCTION__ << "ERROR: Reference type not found." << std::endl;
@@ -178,12 +152,6 @@ std::shared_ptr<ecore::EObject> TypesFactoryImpl::create(const int metaElementID
 						std::shared_ptr<ocl::Types::CollectionType> castedContainer = std::dynamic_pointer_cast<ocl::Types::CollectionType> (container);;
 						return this->createInvalidType_as_elementType_in_CollectionType(castedContainer,metaElementID);
 					}
-					//InvalidType has object as a containment
-					case  ocl::Types::TypesPackage::ANYTYPE_ATTRIBUTE_OBJECT:	
-					{
-						std::shared_ptr<ocl::Types::AnyType> castedContainer = std::dynamic_pointer_cast<ocl::Types::AnyType> (container);;
-						return this->createInvalidType_as_object_in_AnyType(castedContainer,metaElementID);
-					}
 					default:
 						std::cerr << __PRETTY_FUNCTION__ << "ERROR: Reference type not found." << std::endl;
 				}	
@@ -212,12 +180,6 @@ std::shared_ptr<ecore::EObject> TypesFactoryImpl::create(const int metaElementID
 						std::shared_ptr<ocl::Types::CollectionType> castedContainer = std::dynamic_pointer_cast<ocl::Types::CollectionType> (container);;
 						return this->createMessageType_as_elementType_in_CollectionType(castedContainer,metaElementID);
 					}
-					//MessageType has object as a containment
-					case  ocl::Types::TypesPackage::ANYTYPE_ATTRIBUTE_OBJECT:	
-					{
-						std::shared_ptr<ocl::Types::AnyType> castedContainer = std::dynamic_pointer_cast<ocl::Types::AnyType> (container);;
-						return this->createMessageType_as_object_in_AnyType(castedContainer,metaElementID);
-					}
 					default:
 						std::cerr << __PRETTY_FUNCTION__ << "ERROR: Reference type not found." << std::endl;
 				}	
@@ -238,23 +200,9 @@ std::shared_ptr<ecore::EObject> TypesFactoryImpl::create(const int metaElementID
 			}
 			else
 			{
-				switch(referenceID)
-				{
-					//OrderedSetType has elementType as a containment
-					case  ocl::Types::TypesPackage::COLLECTIONTYPE_ATTRIBUTE_ELEMENTTYPE:	
-					{
-						std::shared_ptr<ocl::Types::CollectionType> castedContainer = std::dynamic_pointer_cast<ocl::Types::CollectionType> (container);;
-						return this->createOrderedSetType_as_elementType_in_CollectionType(castedContainer,metaElementID);
-					}
-					//OrderedSetType has object as a containment
-					case  ocl::Types::TypesPackage::ANYTYPE_ATTRIBUTE_OBJECT:	
-					{
-						std::shared_ptr<ocl::Types::AnyType> castedContainer = std::dynamic_pointer_cast<ocl::Types::AnyType> (container);;
-						return this->createOrderedSetType_as_object_in_AnyType(castedContainer,metaElementID);
-					}
-					default:
-						std::cerr << __PRETTY_FUNCTION__ << "ERROR: Reference type not found." << std::endl;
-				}	
+				std::shared_ptr<ocl::Types::CollectionType> castedContainer = std::dynamic_pointer_cast<ocl::Types::CollectionType>(container);
+				assert(castedContainer);
+				return std::shared_ptr<ocl::Types::OrderedSetType>(this->createOrderedSetType_as_elementType_in_CollectionType(castedContainer,metaElementID));
 			}
 			break;
 		}
@@ -266,23 +214,9 @@ std::shared_ptr<ecore::EObject> TypesFactoryImpl::create(const int metaElementID
 			}
 			else
 			{
-				switch(referenceID)
-				{
-					//SequenceType has elementType as a containment
-					case  ocl::Types::TypesPackage::COLLECTIONTYPE_ATTRIBUTE_ELEMENTTYPE:	
-					{
-						std::shared_ptr<ocl::Types::CollectionType> castedContainer = std::dynamic_pointer_cast<ocl::Types::CollectionType> (container);;
-						return this->createSequenceType_as_elementType_in_CollectionType(castedContainer,metaElementID);
-					}
-					//SequenceType has object as a containment
-					case  ocl::Types::TypesPackage::ANYTYPE_ATTRIBUTE_OBJECT:	
-					{
-						std::shared_ptr<ocl::Types::AnyType> castedContainer = std::dynamic_pointer_cast<ocl::Types::AnyType> (container);;
-						return this->createSequenceType_as_object_in_AnyType(castedContainer,metaElementID);
-					}
-					default:
-						std::cerr << __PRETTY_FUNCTION__ << "ERROR: Reference type not found." << std::endl;
-				}	
+				std::shared_ptr<ocl::Types::CollectionType> castedContainer = std::dynamic_pointer_cast<ocl::Types::CollectionType>(container);
+				assert(castedContainer);
+				return std::shared_ptr<ocl::Types::SequenceType>(this->createSequenceType_as_elementType_in_CollectionType(castedContainer,metaElementID));
 			}
 			break;
 		}
@@ -294,23 +228,9 @@ std::shared_ptr<ecore::EObject> TypesFactoryImpl::create(const int metaElementID
 			}
 			else
 			{
-				switch(referenceID)
-				{
-					//SetType has elementType as a containment
-					case  ocl::Types::TypesPackage::COLLECTIONTYPE_ATTRIBUTE_ELEMENTTYPE:	
-					{
-						std::shared_ptr<ocl::Types::CollectionType> castedContainer = std::dynamic_pointer_cast<ocl::Types::CollectionType> (container);;
-						return this->createSetType_as_elementType_in_CollectionType(castedContainer,metaElementID);
-					}
-					//SetType has object as a containment
-					case  ocl::Types::TypesPackage::ANYTYPE_ATTRIBUTE_OBJECT:	
-					{
-						std::shared_ptr<ocl::Types::AnyType> castedContainer = std::dynamic_pointer_cast<ocl::Types::AnyType> (container);;
-						return this->createSetType_as_object_in_AnyType(castedContainer,metaElementID);
-					}
-					default:
-						std::cerr << __PRETTY_FUNCTION__ << "ERROR: Reference type not found." << std::endl;
-				}	
+				std::shared_ptr<ocl::Types::CollectionType> castedContainer = std::dynamic_pointer_cast<ocl::Types::CollectionType>(container);
+				assert(castedContainer);
+				return std::shared_ptr<ocl::Types::SetType>(this->createSetType_as_elementType_in_CollectionType(castedContainer,metaElementID));
 			}
 			break;
 		}
@@ -335,12 +255,6 @@ std::shared_ptr<ecore::EObject> TypesFactoryImpl::create(const int metaElementID
 					{
 						std::shared_ptr<ocl::Types::CollectionType> castedContainer = std::dynamic_pointer_cast<ocl::Types::CollectionType> (container);;
 						return this->createTemplateParameterType_as_elementType_in_CollectionType(castedContainer,metaElementID);
-					}
-					//TemplateParameterType has object as a containment
-					case  ocl::Types::TypesPackage::ANYTYPE_ATTRIBUTE_OBJECT:	
-					{
-						std::shared_ptr<ocl::Types::AnyType> castedContainer = std::dynamic_pointer_cast<ocl::Types::AnyType> (container);;
-						return this->createTemplateParameterType_as_object_in_AnyType(castedContainer,metaElementID);
 					}
 					default:
 						std::cerr << __PRETTY_FUNCTION__ << "ERROR: Reference type not found." << std::endl;
@@ -370,12 +284,6 @@ std::shared_ptr<ecore::EObject> TypesFactoryImpl::create(const int metaElementID
 						std::shared_ptr<ocl::Types::CollectionType> castedContainer = std::dynamic_pointer_cast<ocl::Types::CollectionType> (container);;
 						return this->createTupleType_as_elementType_in_CollectionType(castedContainer,metaElementID);
 					}
-					//TupleType has object as a containment
-					case  ocl::Types::TypesPackage::ANYTYPE_ATTRIBUTE_OBJECT:	
-					{
-						std::shared_ptr<ocl::Types::AnyType> castedContainer = std::dynamic_pointer_cast<ocl::Types::AnyType> (container);;
-						return this->createTupleType_as_object_in_AnyType(castedContainer,metaElementID);
-					}
 					default:
 						std::cerr << __PRETTY_FUNCTION__ << "ERROR: Reference type not found." << std::endl;
 				}	
@@ -403,12 +311,6 @@ std::shared_ptr<ecore::EObject> TypesFactoryImpl::create(const int metaElementID
 					{
 						std::shared_ptr<ocl::Types::CollectionType> castedContainer = std::dynamic_pointer_cast<ocl::Types::CollectionType> (container);;
 						return this->createVoidType_as_elementType_in_CollectionType(castedContainer,metaElementID);
-					}
-					//VoidType has object as a containment
-					case  ocl::Types::TypesPackage::ANYTYPE_ATTRIBUTE_OBJECT:	
-					{
-						std::shared_ptr<ocl::Types::AnyType> castedContainer = std::dynamic_pointer_cast<ocl::Types::AnyType> (container);;
-						return this->createVoidType_as_object_in_AnyType(castedContainer,metaElementID);
 					}
 					default:
 						std::cerr << __PRETTY_FUNCTION__ << "ERROR: Reference type not found." << std::endl;
@@ -477,19 +379,6 @@ std::shared_ptr<ocl::Types::AnyType> TypesFactoryImpl::createAnyType_as_elementT
 	return element;
 	
 }
-std::shared_ptr<ocl::Types::AnyType> TypesFactoryImpl::createAnyType_as_object_in_AnyType(std::shared_ptr<ocl::Types::AnyType> par_AnyType, const int metaElementID) const
-{
-	std::shared_ptr<ocl::Types::AnyTypeImpl> element(new ocl::Types::AnyTypeImpl());
-	element->setMetaElementID(metaElementID);
-	if(nullptr != par_AnyType)
-	{
-		par_AnyType->setObject(element);
-	}
-	
-	element->setThisAnyTypePtr(element);
-	return element;
-	
-}
 std::shared_ptr<ocl::Types::BagType> TypesFactoryImpl::createBagType(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<ocl::Types::BagTypeImpl> element(new ocl::Types::BagTypeImpl());
@@ -504,19 +393,6 @@ std::shared_ptr<ocl::Types::BagType> TypesFactoryImpl::createBagType_as_elementT
 	if(nullptr != par_CollectionType)
 	{
 		par_CollectionType->setElementType(element);
-	}
-	
-	element->setThisBagTypePtr(element);
-	return element;
-	
-}
-std::shared_ptr<ocl::Types::BagType> TypesFactoryImpl::createBagType_as_object_in_AnyType(std::shared_ptr<ocl::Types::AnyType> par_AnyType, const int metaElementID) const
-{
-	std::shared_ptr<ocl::Types::BagTypeImpl> element(new ocl::Types::BagTypeImpl());
-	element->setMetaElementID(metaElementID);
-	if(nullptr != par_AnyType)
-	{
-		par_AnyType->setObject(element);
 	}
 	
 	element->setThisBagTypePtr(element);
@@ -556,19 +432,6 @@ std::shared_ptr<ocl::Types::CollectionType> TypesFactoryImpl::createCollectionTy
 	return element;
 	
 }
-std::shared_ptr<ocl::Types::CollectionType> TypesFactoryImpl::createCollectionType_as_object_in_AnyType(std::shared_ptr<ocl::Types::AnyType> par_AnyType, const int metaElementID) const
-{
-	std::shared_ptr<ocl::Types::CollectionTypeImpl> element(new ocl::Types::CollectionTypeImpl());
-	element->setMetaElementID(metaElementID);
-	if(nullptr != par_AnyType)
-	{
-		par_AnyType->setObject(element);
-	}
-	
-	element->setThisCollectionTypePtr(element);
-	return element;
-	
-}
 std::shared_ptr<ocl::Types::InvalidType> TypesFactoryImpl::createInvalidType(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<ocl::Types::InvalidTypeImpl> element(new ocl::Types::InvalidTypeImpl());
@@ -596,19 +459,6 @@ std::shared_ptr<ocl::Types::InvalidType> TypesFactoryImpl::createInvalidType_as_
 	if(nullptr != par_CollectionType)
 	{
 		par_CollectionType->setElementType(element);
-	}
-	
-	element->setThisInvalidTypePtr(element);
-	return element;
-	
-}
-std::shared_ptr<ocl::Types::InvalidType> TypesFactoryImpl::createInvalidType_as_object_in_AnyType(std::shared_ptr<ocl::Types::AnyType> par_AnyType, const int metaElementID) const
-{
-	std::shared_ptr<ocl::Types::InvalidTypeImpl> element(new ocl::Types::InvalidTypeImpl());
-	element->setMetaElementID(metaElementID);
-	if(nullptr != par_AnyType)
-	{
-		par_AnyType->setObject(element);
 	}
 	
 	element->setThisInvalidTypePtr(element);
@@ -648,19 +498,6 @@ std::shared_ptr<ocl::Types::MessageType> TypesFactoryImpl::createMessageType_as_
 	return element;
 	
 }
-std::shared_ptr<ocl::Types::MessageType> TypesFactoryImpl::createMessageType_as_object_in_AnyType(std::shared_ptr<ocl::Types::AnyType> par_AnyType, const int metaElementID) const
-{
-	std::shared_ptr<ocl::Types::MessageTypeImpl> element(new ocl::Types::MessageTypeImpl());
-	element->setMetaElementID(metaElementID);
-	if(nullptr != par_AnyType)
-	{
-		par_AnyType->setObject(element);
-	}
-	
-	element->setThisMessageTypePtr(element);
-	return element;
-	
-}
 std::shared_ptr<ocl::Types::NameTypeBinding> TypesFactoryImpl::createNameTypeBinding(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<ocl::Types::NameTypeBindingImpl> element(new ocl::Types::NameTypeBindingImpl());
@@ -688,19 +525,6 @@ std::shared_ptr<ocl::Types::OrderedSetType> TypesFactoryImpl::createOrderedSetTy
 	return element;
 	
 }
-std::shared_ptr<ocl::Types::OrderedSetType> TypesFactoryImpl::createOrderedSetType_as_object_in_AnyType(std::shared_ptr<ocl::Types::AnyType> par_AnyType, const int metaElementID) const
-{
-	std::shared_ptr<ocl::Types::OrderedSetTypeImpl> element(new ocl::Types::OrderedSetTypeImpl());
-	element->setMetaElementID(metaElementID);
-	if(nullptr != par_AnyType)
-	{
-		par_AnyType->setObject(element);
-	}
-	
-	element->setThisOrderedSetTypePtr(element);
-	return element;
-	
-}
 std::shared_ptr<ocl::Types::SequenceType> TypesFactoryImpl::createSequenceType(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<ocl::Types::SequenceTypeImpl> element(new ocl::Types::SequenceTypeImpl());
@@ -721,19 +545,6 @@ std::shared_ptr<ocl::Types::SequenceType> TypesFactoryImpl::createSequenceType_a
 	return element;
 	
 }
-std::shared_ptr<ocl::Types::SequenceType> TypesFactoryImpl::createSequenceType_as_object_in_AnyType(std::shared_ptr<ocl::Types::AnyType> par_AnyType, const int metaElementID) const
-{
-	std::shared_ptr<ocl::Types::SequenceTypeImpl> element(new ocl::Types::SequenceTypeImpl());
-	element->setMetaElementID(metaElementID);
-	if(nullptr != par_AnyType)
-	{
-		par_AnyType->setObject(element);
-	}
-	
-	element->setThisSequenceTypePtr(element);
-	return element;
-	
-}
 std::shared_ptr<ocl::Types::SetType> TypesFactoryImpl::createSetType(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<ocl::Types::SetTypeImpl> element(new ocl::Types::SetTypeImpl());
@@ -748,19 +559,6 @@ std::shared_ptr<ocl::Types::SetType> TypesFactoryImpl::createSetType_as_elementT
 	if(nullptr != par_CollectionType)
 	{
 		par_CollectionType->setElementType(element);
-	}
-	
-	element->setThisSetTypePtr(element);
-	return element;
-	
-}
-std::shared_ptr<ocl::Types::SetType> TypesFactoryImpl::createSetType_as_object_in_AnyType(std::shared_ptr<ocl::Types::AnyType> par_AnyType, const int metaElementID) const
-{
-	std::shared_ptr<ocl::Types::SetTypeImpl> element(new ocl::Types::SetTypeImpl());
-	element->setMetaElementID(metaElementID);
-	if(nullptr != par_AnyType)
-	{
-		par_AnyType->setObject(element);
 	}
 	
 	element->setThisSetTypePtr(element);
@@ -800,19 +598,6 @@ std::shared_ptr<ocl::Types::TemplateParameterType> TypesFactoryImpl::createTempl
 	return element;
 	
 }
-std::shared_ptr<ocl::Types::TemplateParameterType> TypesFactoryImpl::createTemplateParameterType_as_object_in_AnyType(std::shared_ptr<ocl::Types::AnyType> par_AnyType, const int metaElementID) const
-{
-	std::shared_ptr<ocl::Types::TemplateParameterTypeImpl> element(new ocl::Types::TemplateParameterTypeImpl());
-	element->setMetaElementID(metaElementID);
-	if(nullptr != par_AnyType)
-	{
-		par_AnyType->setObject(element);
-	}
-	
-	element->setThisTemplateParameterTypePtr(element);
-	return element;
-	
-}
 std::shared_ptr<ocl::Types::TupleType> TypesFactoryImpl::createTupleType(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<ocl::Types::TupleTypeImpl> element(new ocl::Types::TupleTypeImpl());
@@ -846,19 +631,6 @@ std::shared_ptr<ocl::Types::TupleType> TypesFactoryImpl::createTupleType_as_elem
 	return element;
 	
 }
-std::shared_ptr<ocl::Types::TupleType> TypesFactoryImpl::createTupleType_as_object_in_AnyType(std::shared_ptr<ocl::Types::AnyType> par_AnyType, const int metaElementID) const
-{
-	std::shared_ptr<ocl::Types::TupleTypeImpl> element(new ocl::Types::TupleTypeImpl());
-	element->setMetaElementID(metaElementID);
-	if(nullptr != par_AnyType)
-	{
-		par_AnyType->setObject(element);
-	}
-	
-	element->setThisTupleTypePtr(element);
-	return element;
-	
-}
 std::shared_ptr<ocl::Types::VoidType> TypesFactoryImpl::createVoidType(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<ocl::Types::VoidTypeImpl> element(new ocl::Types::VoidTypeImpl());
@@ -886,19 +658,6 @@ std::shared_ptr<ocl::Types::VoidType> TypesFactoryImpl::createVoidType_as_elemen
 	if(nullptr != par_CollectionType)
 	{
 		par_CollectionType->setElementType(element);
-	}
-	
-	element->setThisVoidTypePtr(element);
-	return element;
-	
-}
-std::shared_ptr<ocl::Types::VoidType> TypesFactoryImpl::createVoidType_as_object_in_AnyType(std::shared_ptr<ocl::Types::AnyType> par_AnyType, const int metaElementID) const
-{
-	std::shared_ptr<ocl::Types::VoidTypeImpl> element(new ocl::Types::VoidTypeImpl());
-	element->setMetaElementID(metaElementID);
-	if(nullptr != par_AnyType)
-	{
-		par_AnyType->setObject(element);
 	}
 	
 	element->setThisVoidTypePtr(element);

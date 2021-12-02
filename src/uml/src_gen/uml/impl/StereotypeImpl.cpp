@@ -658,10 +658,10 @@ Any StereotypeImpl::eGet(int featureID, bool resolve, bool coreType) const
 			return eAny(tempList); //22353			
 		}
 		case uml::umlPackage::STEREOTYPE_ATTRIBUTE_PROFILE:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getProfile();
-				return eAny(returnValue); //22354
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getProfile();
+			return eAny(returnValue); //22354
+		}
 	}
 	return ClassImpl::eGet(featureID, resolve, coreType);
 }

@@ -376,15 +376,15 @@ Any ExpressionInOclImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_BODYEXPRESSION:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getBodyExpression();
-				return eAny(returnValue); //2710
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getBodyExpression();
+			return eAny(returnValue); //2810
+		}
 		case ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_CONTEXTVARIABLE:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getContextVariable();
-				return eAny(returnValue); //2711
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getContextVariable();
+			return eAny(returnValue); //2811
+		}
 		case ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_PARAMETERVARIABLE:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
@@ -395,13 +395,13 @@ Any ExpressionInOclImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //2713			
+			return eAny(tempList); //2813			
 		}
 		case ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_RESULTVARIABLE:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getResultVariable();
-				return eAny(returnValue); //2712
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getResultVariable();
+			return eAny(returnValue); //2812
+		}
 	}
 	return ecore::ETypedElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -411,13 +411,13 @@ bool ExpressionInOclImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_BODYEXPRESSION:
-			return getBodyExpression() != nullptr; //2710
+			return getBodyExpression() != nullptr; //2810
 		case ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_CONTEXTVARIABLE:
-			return getContextVariable() != nullptr; //2711
+			return getContextVariable() != nullptr; //2811
 		case ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_PARAMETERVARIABLE:
-			return getParameterVariable() != nullptr; //2713
+			return getParameterVariable() != nullptr; //2813
 		case ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_RESULTVARIABLE:
-			return getResultVariable() != nullptr; //2712
+			return getResultVariable() != nullptr; //2812
 	}
 	return ecore::ETypedElementImpl::internalEIsSet(featureID);
 }
@@ -431,7 +431,7 @@ bool ExpressionInOclImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<ocl::Expressions::OclExpression> _bodyExpression = std::dynamic_pointer_cast<ocl::Expressions::OclExpression>(_temp);
-			setBodyExpression(_bodyExpression); //2710
+			setBodyExpression(_bodyExpression); //2810
 			return true;
 		}
 		case ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_CONTEXTVARIABLE:
@@ -439,7 +439,7 @@ bool ExpressionInOclImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<ocl::Expressions::Variable> _contextVariable = std::dynamic_pointer_cast<ocl::Expressions::Variable>(_temp);
-			setContextVariable(_contextVariable); //2711
+			setContextVariable(_contextVariable); //2811
 			return true;
 		}
 		case ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_PARAMETERVARIABLE:
@@ -483,7 +483,7 @@ bool ExpressionInOclImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<ocl::Expressions::Variable> _resultVariable = std::dynamic_pointer_cast<ocl::Expressions::Variable>(_temp);
-			setResultVariable(_resultVariable); //2712
+			setResultVariable(_resultVariable); //2812
 			return true;
 		}
 	}

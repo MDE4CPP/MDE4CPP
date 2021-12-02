@@ -465,10 +465,10 @@ Any StringExpressionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::STRINGEXPRESSION_ATTRIBUTE_OWNINGEXPRESSION:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getOwningExpression().lock();
-				return eAny(returnValue); //22419
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getOwningExpression().lock();
+			return eAny(returnValue); //22419
+		}
 		case uml::umlPackage::STRINGEXPRESSION_ATTRIBUTE_SUBEXPRESSION:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());

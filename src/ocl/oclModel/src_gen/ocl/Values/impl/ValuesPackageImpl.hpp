@@ -18,6 +18,7 @@
 
 namespace ocl::Values 
 {
+	class AnyValue;
 	class BagTypeValue;
 	class CollectionValue;
 	class Element;
@@ -52,6 +53,17 @@ namespace ocl::Values
 		public:
 			virtual ~ValuesPackageImpl();
 
+			// Begin Class AnyValue
+			//Class and Feature Getter
+			virtual std::shared_ptr<ecore::EClass> getAnyValue_Class() const ;
+			
+			virtual std::shared_ptr<ecore::EAttribute> getAnyValue_Attribute_value() const ;
+			
+			
+			virtual std::shared_ptr<ecore::EOperation> getAnyValue_Operation_toString() const ;
+			
+			// End Class AnyValue
+
 			// Begin Class BagTypeValue
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getBagTypeValue_Class() const ;
@@ -68,7 +80,6 @@ namespace ocl::Values
 			
 			
 			virtual std::shared_ptr<ecore::EReference> getCollectionValue_Attribute_elements() const ;
-			virtual std::shared_ptr<ecore::EReference> getCollectionValue_Attribute_model() const ;
 			
 			virtual std::shared_ptr<ecore::EOperation> getCollectionValue_Operation_addValue_Value() const ;
 			virtual std::shared_ptr<ecore::EOperation> getCollectionValue_Operation_equals_Value() const ;
@@ -225,11 +236,11 @@ namespace ocl::Values
 			
 
 		private:
-			std::shared_ptr<ecore::EClass> m_bagTypeValue_Class = nullptr;std::shared_ptr<ecore::EClass> m_collectionValue_Class = nullptr;std::shared_ptr<ecore::EClass> m_element_Class = nullptr;std::shared_ptr<ecore::EClass> m_localSnapshot_Class = nullptr;std::shared_ptr<ecore::EClass> m_nameValueBinding_Class = nullptr;std::shared_ptr<ecore::EClass> m_objectValue_Class = nullptr;std::shared_ptr<ecore::EClass> m_oclMessageValue_Class = nullptr;std::shared_ptr<ecore::EClass> m_oclVoidValue_Class = nullptr;std::shared_ptr<ecore::EClass> m_orderedSetTypeValue_Class = nullptr;std::shared_ptr<ecore::EClass> m_sequenceTypeValue_Class = nullptr;std::shared_ptr<ecore::EClass> m_setTypeValue_Class = nullptr;std::shared_ptr<ecore::EClass> m_staticValue_Class = nullptr;std::shared_ptr<ecore::EClass> m_tupleValue_Class = nullptr;std::shared_ptr<ecore::EClass> m_undefinedValue_Class = nullptr;
+			std::shared_ptr<ecore::EClass> m_anyValue_Class = nullptr;std::shared_ptr<ecore::EClass> m_bagTypeValue_Class = nullptr;std::shared_ptr<ecore::EClass> m_collectionValue_Class = nullptr;std::shared_ptr<ecore::EClass> m_element_Class = nullptr;std::shared_ptr<ecore::EClass> m_localSnapshot_Class = nullptr;std::shared_ptr<ecore::EClass> m_nameValueBinding_Class = nullptr;std::shared_ptr<ecore::EClass> m_objectValue_Class = nullptr;std::shared_ptr<ecore::EClass> m_oclMessageValue_Class = nullptr;std::shared_ptr<ecore::EClass> m_oclVoidValue_Class = nullptr;std::shared_ptr<ecore::EClass> m_orderedSetTypeValue_Class = nullptr;std::shared_ptr<ecore::EClass> m_sequenceTypeValue_Class = nullptr;std::shared_ptr<ecore::EClass> m_setTypeValue_Class = nullptr;std::shared_ptr<ecore::EClass> m_staticValue_Class = nullptr;std::shared_ptr<ecore::EClass> m_tupleValue_Class = nullptr;std::shared_ptr<ecore::EClass> m_undefinedValue_Class = nullptr;
 			
-			std::shared_ptr<ecore::EAttribute> m_element_Attribute_indexNr = nullptr;std::shared_ptr<ecore::EAttribute> m_oclMessageValue_Attribute_isAsyncOperation = nullptr;std::shared_ptr<ecore::EAttribute> m_localSnapshot_Attribute_isPost = nullptr;std::shared_ptr<ecore::EAttribute> m_localSnapshot_Attribute_isPre = nullptr;std::shared_ptr<ecore::EAttribute> m_oclMessageValue_Attribute_isSignal = nullptr;std::shared_ptr<ecore::EAttribute> m_oclMessageValue_Attribute_isSyncOperation = nullptr;std::shared_ptr<ecore::EAttribute> m_nameValueBinding_Attribute_name = nullptr;std::shared_ptr<ecore::EAttribute> m_oclMessageValue_Attribute_name = nullptr;
-			std::shared_ptr<ecore::EReference> m_oclMessageValue_Attribute_arguments = nullptr;std::shared_ptr<ecore::EReference> m_localSnapshot_Attribute_bindings = nullptr;std::shared_ptr<ecore::EReference> m_collectionValue_Attribute_elements = nullptr;std::shared_ptr<ecore::EReference> m_tupleValue_Attribute_elements = nullptr;std::shared_ptr<ecore::EReference> m_objectValue_Attribute_history = nullptr;std::shared_ptr<ecore::EReference> m_localSnapshot_Attribute_inputQ = nullptr;std::shared_ptr<ecore::EReference> m_collectionValue_Attribute_model = nullptr;std::shared_ptr<ecore::EReference> m_tupleValue_Attribute_model = nullptr;std::shared_ptr<ecore::EReference> m_localSnapshot_Attribute_outputQ = nullptr;std::shared_ptr<ecore::EReference> m_localSnapshot_Attribute_pred = nullptr;std::shared_ptr<ecore::EReference> m_oclMessageValue_Attribute_returnMessage = nullptr;std::shared_ptr<ecore::EReference> m_oclMessageValue_Attribute_source = nullptr;std::shared_ptr<ecore::EReference> m_localSnapshot_Attribute_succ = nullptr;std::shared_ptr<ecore::EReference> m_oclMessageValue_Attribute_target = nullptr;std::shared_ptr<ecore::EReference> m_nameValueBinding_Attribute_value = nullptr;std::shared_ptr<ecore::EReference> m_element_Attribute_value = nullptr;std::shared_ptr<ecore::EReference> m_objectValue_Attribute_value = nullptr;
-			std::shared_ptr<ecore::EOperation> m_bagTypeValue_Operation_addValue_Value = nullptr;std::shared_ptr<ecore::EOperation> m_sequenceTypeValue_Operation_addValue_Value = nullptr;std::shared_ptr<ecore::EOperation> m_collectionValue_Operation_addValue_Value = nullptr;std::shared_ptr<ecore::EOperation> m_setTypeValue_Operation_addValue_Value = nullptr;std::shared_ptr<ecore::EOperation> m_orderedSetTypeValue_Operation_addValue_Value = nullptr;std::shared_ptr<ecore::EOperation> m_objectValue_Operation_equals_Value = nullptr;std::shared_ptr<ecore::EOperation> m_collectionValue_Operation_equals_Value = nullptr;std::shared_ptr<ecore::EOperation> m_oclVoidValue_Operation_equals_Value = nullptr;std::shared_ptr<ecore::EOperation> m_tupleValue_Operation_equals_Value = nullptr;std::shared_ptr<ecore::EOperation> m_undefinedValue_Operation_equals_Value = nullptr;std::shared_ptr<ecore::EOperation> m_collectionValue_Operation_find_Value = nullptr;std::shared_ptr<ecore::EOperation> m_objectValue_Operation_toString = nullptr;std::shared_ptr<ecore::EOperation> m_collectionValue_Operation_toString = nullptr;std::shared_ptr<ecore::EOperation> m_oclVoidValue_Operation_toString = nullptr;std::shared_ptr<ecore::EOperation> m_oclMessageValue_Operation_toString = nullptr;std::shared_ptr<ecore::EOperation> m_tupleValue_Operation_toString = nullptr;std::shared_ptr<ecore::EOperation> m_undefinedValue_Operation_toString = nullptr;
+			std::shared_ptr<ecore::EAttribute> m_element_Attribute_indexNr = nullptr;std::shared_ptr<ecore::EAttribute> m_oclMessageValue_Attribute_isAsyncOperation = nullptr;std::shared_ptr<ecore::EAttribute> m_localSnapshot_Attribute_isPost = nullptr;std::shared_ptr<ecore::EAttribute> m_localSnapshot_Attribute_isPre = nullptr;std::shared_ptr<ecore::EAttribute> m_oclMessageValue_Attribute_isSignal = nullptr;std::shared_ptr<ecore::EAttribute> m_oclMessageValue_Attribute_isSyncOperation = nullptr;std::shared_ptr<ecore::EAttribute> m_nameValueBinding_Attribute_name = nullptr;std::shared_ptr<ecore::EAttribute> m_oclMessageValue_Attribute_name = nullptr;std::shared_ptr<ecore::EAttribute> m_anyValue_Attribute_value = nullptr;
+			std::shared_ptr<ecore::EReference> m_oclMessageValue_Attribute_arguments = nullptr;std::shared_ptr<ecore::EReference> m_localSnapshot_Attribute_bindings = nullptr;std::shared_ptr<ecore::EReference> m_collectionValue_Attribute_elements = nullptr;std::shared_ptr<ecore::EReference> m_tupleValue_Attribute_elements = nullptr;std::shared_ptr<ecore::EReference> m_objectValue_Attribute_history = nullptr;std::shared_ptr<ecore::EReference> m_localSnapshot_Attribute_inputQ = nullptr;std::shared_ptr<ecore::EReference> m_tupleValue_Attribute_model = nullptr;std::shared_ptr<ecore::EReference> m_localSnapshot_Attribute_outputQ = nullptr;std::shared_ptr<ecore::EReference> m_localSnapshot_Attribute_pred = nullptr;std::shared_ptr<ecore::EReference> m_oclMessageValue_Attribute_returnMessage = nullptr;std::shared_ptr<ecore::EReference> m_oclMessageValue_Attribute_source = nullptr;std::shared_ptr<ecore::EReference> m_localSnapshot_Attribute_succ = nullptr;std::shared_ptr<ecore::EReference> m_oclMessageValue_Attribute_target = nullptr;std::shared_ptr<ecore::EReference> m_nameValueBinding_Attribute_value = nullptr;std::shared_ptr<ecore::EReference> m_element_Attribute_value = nullptr;std::shared_ptr<ecore::EReference> m_objectValue_Attribute_value = nullptr;
+			std::shared_ptr<ecore::EOperation> m_bagTypeValue_Operation_addValue_Value = nullptr;std::shared_ptr<ecore::EOperation> m_sequenceTypeValue_Operation_addValue_Value = nullptr;std::shared_ptr<ecore::EOperation> m_collectionValue_Operation_addValue_Value = nullptr;std::shared_ptr<ecore::EOperation> m_setTypeValue_Operation_addValue_Value = nullptr;std::shared_ptr<ecore::EOperation> m_orderedSetTypeValue_Operation_addValue_Value = nullptr;std::shared_ptr<ecore::EOperation> m_objectValue_Operation_equals_Value = nullptr;std::shared_ptr<ecore::EOperation> m_collectionValue_Operation_equals_Value = nullptr;std::shared_ptr<ecore::EOperation> m_oclVoidValue_Operation_equals_Value = nullptr;std::shared_ptr<ecore::EOperation> m_tupleValue_Operation_equals_Value = nullptr;std::shared_ptr<ecore::EOperation> m_undefinedValue_Operation_equals_Value = nullptr;std::shared_ptr<ecore::EOperation> m_collectionValue_Operation_find_Value = nullptr;std::shared_ptr<ecore::EOperation> m_objectValue_Operation_toString = nullptr;std::shared_ptr<ecore::EOperation> m_collectionValue_Operation_toString = nullptr;std::shared_ptr<ecore::EOperation> m_oclVoidValue_Operation_toString = nullptr;std::shared_ptr<ecore::EOperation> m_oclMessageValue_Operation_toString = nullptr;std::shared_ptr<ecore::EOperation> m_tupleValue_Operation_toString = nullptr;std::shared_ptr<ecore::EOperation> m_undefinedValue_Operation_toString = nullptr;std::shared_ptr<ecore::EOperation> m_anyValue_Operation_toString = nullptr;
 
 			friend class ValuesPackage;
 
@@ -245,6 +256,7 @@ namespace ocl::Values
 			void initializePackageContents();
 
 		private:
+			void createAnyValueContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
 			void createBagTypeValueContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
 			void createCollectionValueContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
 			void createElementContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
@@ -261,6 +273,7 @@ namespace ocl::Values
 			void createUndefinedValueContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
 			void createPackageEDataTypes(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
 
+			void initializeAnyValueContent();
 			void initializeBagTypeValueContent();
 			void initializeCollectionValueContent();
 			void initializeElementContent();

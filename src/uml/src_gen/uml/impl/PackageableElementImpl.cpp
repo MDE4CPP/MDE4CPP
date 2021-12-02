@@ -314,10 +314,10 @@ Any PackageableElementImpl::eGet(int featureID, bool resolve, bool coreType) con
 	switch(featureID)
 	{
 		case uml::umlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getOwningPackage().lock();
-				return eAny(returnValue); //17311
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getOwningPackage().lock();
+			return eAny(returnValue); //17311
+		}
 	}
 	Any result;
 	result = NamedElementImpl::eGet(featureID, resolve, coreType);

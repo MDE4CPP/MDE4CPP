@@ -14,19 +14,20 @@
 
 namespace ecore 
 {
-	class EParameter;
-	class EDataType;
-	class EStringToStringMapEntry;
-	class EGenericType;
-	class EReference;
-	class EOperation;
-	class EAttribute;
 	class EAnnotation;
+	class EReference;
 	class EClass;
+	class EDataType;
+	class EGenericType;
+	class EAttribute;
+	class EParameter;
+	class EOperation;
+	class EStringToStringMapEntry;
 }
 
 namespace ocl::Values 
 {
+	class AnyValue;
 	class BagTypeValue;
 	class CollectionValue;
 	class Element;
@@ -65,10 +66,31 @@ namespace ocl::Values
 			static const std::string eNS_URI;
 			static const std::string eNS_PREFIX;
 
+			// Begin Class AnyValue
+			//Class and Feature IDs 
+			static const long long ANYVALUE_CLASS = 1772675012;
+			static const unsigned int ANYVALUE_CLASS_FEATURE_COUNT = 1;
+			static const unsigned int ANYVALUE_CLASS_OPERATION_COUNT = 12;
+			static const long long ANYVALUE_ATTRIBUTE_VALUE = 79068194;
+			
+			
+			static const int ANYVALUE_OPERATION_TOSTRING = 944564240;
+			
+			//Class and Feature Getter
+			virtual std::shared_ptr<ecore::EClass> getAnyValue_Class() const = 0;
+			
+			virtual std::shared_ptr<ecore::EAttribute> getAnyValue_Attribute_value() const = 0;
+			
+			
+			virtual std::shared_ptr<ecore::EOperation> getAnyValue_Operation_toString() const = 0;
+			
+			// End Class AnyValue
+
+
 			// Begin Class BagTypeValue
 			//Class and Feature IDs 
 			static const long long BAGTYPEVALUE_CLASS = 1755720122;
-			static const unsigned int BAGTYPEVALUE_CLASS_FEATURE_COUNT = 2;
+			static const unsigned int BAGTYPEVALUE_CLASS_FEATURE_COUNT = 1;
 			static const unsigned int BAGTYPEVALUE_CLASS_OPERATION_COUNT = 16;
 			
 			
@@ -87,11 +109,10 @@ namespace ocl::Values
 			// Begin Class CollectionValue
 			//Class and Feature IDs 
 			static const long long COLLECTIONVALUE_CLASS = 539163728;
-			static const unsigned int COLLECTIONVALUE_CLASS_FEATURE_COUNT = 2;
+			static const unsigned int COLLECTIONVALUE_CLASS_FEATURE_COUNT = 1;
 			static const unsigned int COLLECTIONVALUE_CLASS_OPERATION_COUNT = 15;
 			
 			static const long long COLLECTIONVALUE_ATTRIBUTE_ELEMENTS = 1816541873;
-			static const long long COLLECTIONVALUE_ATTRIBUTE_MODEL = 1835252505;
 			
 			static const int COLLECTIONVALUE_OPERATION_ADDVALUE_VALUE = 1275818346;
 			static const int COLLECTIONVALUE_OPERATION_EQUALS_VALUE = 2069036065;
@@ -103,7 +124,6 @@ namespace ocl::Values
 			
 			
 			virtual std::shared_ptr<ecore::EReference> getCollectionValue_Attribute_elements() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getCollectionValue_Attribute_model() const = 0;
 			
 			virtual std::shared_ptr<ecore::EOperation> getCollectionValue_Operation_addValue_Value() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getCollectionValue_Operation_equals_Value() const = 0;
@@ -270,7 +290,7 @@ namespace ocl::Values
 			// Begin Class OrderedSetTypeValue
 			//Class and Feature IDs 
 			static const long long ORDEREDSETTYPEVALUE_CLASS = 119598672;
-			static const unsigned int ORDEREDSETTYPEVALUE_CLASS_FEATURE_COUNT = 2;
+			static const unsigned int ORDEREDSETTYPEVALUE_CLASS_FEATURE_COUNT = 1;
 			static const unsigned int ORDEREDSETTYPEVALUE_CLASS_OPERATION_COUNT = 16;
 			
 			
@@ -289,7 +309,7 @@ namespace ocl::Values
 			// Begin Class SequenceTypeValue
 			//Class and Feature IDs 
 			static const long long SEQUENCETYPEVALUE_CLASS = 695063447;
-			static const unsigned int SEQUENCETYPEVALUE_CLASS_FEATURE_COUNT = 2;
+			static const unsigned int SEQUENCETYPEVALUE_CLASS_FEATURE_COUNT = 1;
 			static const unsigned int SEQUENCETYPEVALUE_CLASS_OPERATION_COUNT = 16;
 			
 			
@@ -308,7 +328,7 @@ namespace ocl::Values
 			// Begin Class SetTypeValue
 			//Class and Feature IDs 
 			static const long long SETTYPEVALUE_CLASS = 139010578;
-			static const unsigned int SETTYPEVALUE_CLASS_FEATURE_COUNT = 2;
+			static const unsigned int SETTYPEVALUE_CLASS_FEATURE_COUNT = 1;
 			static const unsigned int SETTYPEVALUE_CLASS_OPERATION_COUNT = 16;
 			
 			

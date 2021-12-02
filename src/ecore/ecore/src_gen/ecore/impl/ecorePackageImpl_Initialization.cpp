@@ -4,22 +4,23 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
-#include "ecore/EParameter.hpp"
-#include "ecore/EDataType.hpp"
-#include "ecore/EStringToStringMapEntry.hpp"
-#include "ecore/EGenericType.hpp"
+#include "ecore/EAnnotation.hpp"
 #include "ecore/EReference.hpp"
 #include "ecore/ETypeParameter.hpp"
-#include "ecore/EOperation.hpp"
-#include "ecore/EAttribute.hpp"
-#include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
+#include "ecore/EDataType.hpp"
+#include "ecore/EGenericType.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EParameter.hpp"
+#include "ecore/EOperation.hpp"
+#include "ecore/EStringToStringMapEntry.hpp"
 
 // metametamodel factory
 #include "ecore/ecoreFactory.hpp"
 
 //depending model packages
 
+#include "ecore/ecorePackage.hpp"
 
 
 using namespace ecore;
@@ -48,6 +49,7 @@ void ecorePackageImpl::initializePackageContents()
 	m_eFactory_Class->getESuperTypes()->push_back(getEModelElement_Class());
 	m_eModelElement_Class->getESuperTypes()->push_back(getEObject_Class());
 	m_eNamedElement_Class->getESuperTypes()->push_back(getEModelElement_Class());
+	m_eObjectContainer_Class->getESuperTypes()->push_back(getEObject_Class());
 	m_eOperation_Class->getESuperTypes()->push_back(getETypedElement_Class());
 	m_ePackage_Class->getESuperTypes()->push_back(getENamedElement_Class());
 	m_eParameter_Class->getESuperTypes()->push_back(getETypedElement_Class());
@@ -70,6 +72,7 @@ void ecorePackageImpl::initializePackageContents()
 	initializeEModelElementContent();
 	initializeENamedElementContent();
 	initializeEObjectContent();
+	initializeEObjectContainerContent();
 	initializeEOperationContent();
 	initializeEPackageContent();
 	initializeEParameterContent();
@@ -1527,40 +1530,40 @@ void ecorePackageImpl::initializeEObjectContent()
 		{
 			m_eObject_Attribute_eContainer->setDefaultValueLiteral(defaultValue);
 		}				
-		std::shared_ptr<ecore::EReference>  otherEnd = ecore::ecorePackage::eInstance()->getEObject_Attribute_eContens();
+		std::shared_ptr<ecore::EReference>  otherEnd = ecore::ecorePackage::eInstance()->getEObject_Attribute_eContentUnion();
 		if (otherEnd != nullptr)
 	    {
 	   		m_eObject_Attribute_eContainer->setEOpposite(otherEnd);
 	    }
 	}
-	m_eObject_Attribute_eContens->setName("eContens");
-	m_eObject_Attribute_eContens->setEType(getEObject_Class());
-	m_eObject_Attribute_eContens->setLowerBound(0);
-	m_eObject_Attribute_eContens->setUpperBound(-1);
-	m_eObject_Attribute_eContens->setTransient(false);
-	m_eObject_Attribute_eContens->setVolatile(false);
-	m_eObject_Attribute_eContens->setChangeable(true);
-	m_eObject_Attribute_eContens->setUnsettable(false);
-	m_eObject_Attribute_eContens->setUnique(true);
-	m_eObject_Attribute_eContens->setDerived(false);
-	m_eObject_Attribute_eContens->setOrdered(true);
-	m_eObject_Attribute_eContens->setContainment(true);
-	m_eObject_Attribute_eContens->setResolveProxies(true);
+	m_eObject_Attribute_eContentUnion->setName("eContentUnion");
+	m_eObject_Attribute_eContentUnion->setEType(getEObject_Class());
+	m_eObject_Attribute_eContentUnion->setLowerBound(0);
+	m_eObject_Attribute_eContentUnion->setUpperBound(-1);
+	m_eObject_Attribute_eContentUnion->setTransient(false);
+	m_eObject_Attribute_eContentUnion->setVolatile(false);
+	m_eObject_Attribute_eContentUnion->setChangeable(true);
+	m_eObject_Attribute_eContentUnion->setUnsettable(false);
+	m_eObject_Attribute_eContentUnion->setUnique(true);
+	m_eObject_Attribute_eContentUnion->setDerived(false);
+	m_eObject_Attribute_eContentUnion->setOrdered(true);
+	m_eObject_Attribute_eContentUnion->setContainment(true);
+	m_eObject_Attribute_eContentUnion->setResolveProxies(true);
 	{
 		std::string defaultValue = "";
 		if (!defaultValue.empty())
 		{
-			m_eObject_Attribute_eContens->setDefaultValueLiteral(defaultValue);
+			m_eObject_Attribute_eContentUnion->setDefaultValueLiteral(defaultValue);
 		}				
 		std::shared_ptr<ecore::EReference>  otherEnd = ecore::ecorePackage::eInstance()->getEObject_Attribute_eContainer();
 		if (otherEnd != nullptr)
 	    {
-	   		m_eObject_Attribute_eContens->setEOpposite(otherEnd);
+	   		m_eObject_Attribute_eContentUnion->setEOpposite(otherEnd);
 	    }
 	}
 	
 	m_eObject_Operation_eAllContents->setName("eAllContents");
-	m_eObject_Operation_eAllContents->setEType(getETreeIterator_Class());
+	m_eObject_Operation_eAllContents->setEType(getEJavaObject_Class());
 	m_eObject_Operation_eAllContents->setLowerBound(0);
 	m_eObject_Operation_eAllContents->setUpperBound(1);
 	m_eObject_Operation_eAllContents->setUnique(true);
@@ -1572,6 +1575,13 @@ void ecorePackageImpl::initializeEObjectContent()
 	m_eObject_Operation_eClass->setUpperBound(1);
 	m_eObject_Operation_eClass->setUnique(true);
 	m_eObject_Operation_eClass->setOrdered(true);
+	
+	m_eObject_Operation_eContainer->setName("eContainer");
+	m_eObject_Operation_eContainer->setEType(getEObject_Class());
+	m_eObject_Operation_eContainer->setLowerBound(0);
+	m_eObject_Operation_eContainer->setUpperBound(1);
+	m_eObject_Operation_eContainer->setUnique(true);
+	m_eObject_Operation_eContainer->setOrdered(true);
 	
 	m_eObject_Operation_eContainingFeature->setName("eContainingFeature");
 	m_eObject_Operation_eContainingFeature->setEType(getEStructuralFeature_Class());
@@ -1588,9 +1598,9 @@ void ecorePackageImpl::initializeEObjectContent()
 	m_eObject_Operation_eContainmentFeature->setOrdered(true);
 	
 	m_eObject_Operation_eContents->setName("eContents");
-	m_eObject_Operation_eContents->setEType(getEEList_Class());
+	m_eObject_Operation_eContents->setEType(getEObject_Class());
 	m_eObject_Operation_eContents->setLowerBound(0);
-	m_eObject_Operation_eContents->setUpperBound(1);
+	m_eObject_Operation_eContents->setUpperBound(-1);
 	m_eObject_Operation_eContents->setUnique(true);
 	m_eObject_Operation_eContents->setOrdered(true);
 	
@@ -1751,6 +1761,39 @@ void ecorePackageImpl::initializeEObjectContent()
 		parameter->setUpperBound(1);
 		parameter->setUnique(true);
 		parameter->setOrdered(true);
+	}
+	
+	
+}
+
+void ecorePackageImpl::initializeEObjectContainerContent()
+{
+	m_eObjectContainer_Class->setName("EObjectContainer");
+	m_eObjectContainer_Class->setAbstract(false);
+	m_eObjectContainer_Class->setInterface(false);
+	
+	
+	m_eObjectContainer_Attribute_container->setName("container");
+	m_eObjectContainer_Attribute_container->setEType(getEObject_Class());
+	m_eObjectContainer_Attribute_container->setLowerBound(0);
+	m_eObjectContainer_Attribute_container->setUpperBound(-1);
+	m_eObjectContainer_Attribute_container->setTransient(false);
+	m_eObjectContainer_Attribute_container->setVolatile(false);
+	m_eObjectContainer_Attribute_container->setChangeable(true);
+	m_eObjectContainer_Attribute_container->setUnsettable(false);
+	m_eObjectContainer_Attribute_container->setUnique(true);
+	m_eObjectContainer_Attribute_container->setDerived(false);
+	m_eObjectContainer_Attribute_container->setOrdered(true);
+	m_eObjectContainer_Attribute_container->setContainment(false);
+	m_eObjectContainer_Attribute_container->setResolveProxies(true);
+	{
+		std::string defaultValue = "";
+		if (!defaultValue.empty())
+		{
+			m_eObjectContainer_Attribute_container->setDefaultValueLiteral(defaultValue);
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
 	

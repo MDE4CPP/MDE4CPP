@@ -444,15 +444,15 @@ Any InterfaceRealizationImpl::eGet(int featureID, bool resolve, bool coreType) c
 	switch(featureID)
 	{
 		case uml::umlPackage::INTERFACEREALIZATION_ATTRIBUTE_CONTRACT:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getContract();
-				return eAny(returnValue); //12618
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getContract();
+			return eAny(returnValue); //12618
+		}
 		case uml::umlPackage::INTERFACEREALIZATION_ATTRIBUTE_IMPLEMENTINGCLASSIFIER:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getImplementingClassifier().lock();
-				return eAny(returnValue); //12619
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getImplementingClassifier().lock();
+			return eAny(returnValue); //12619
+		}
 	}
 	return RealizationImpl::eGet(featureID, resolve, coreType);
 }

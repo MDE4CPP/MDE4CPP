@@ -32,17 +32,14 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "ocl/Types/TypesFactory.hpp"
 #include "ocl/Values/ValuesFactory.hpp"
 
-#include "ocl/Types/CollectionType.hpp"
 #include "ocl/Values/Element.hpp"
 #include "ocl/Values/StaticValue.hpp"
 #include "fUML/Semantics/Values/Value.hpp"
 
 //Factories an Package includes
 #include "ocl/oclPackage.hpp"
-#include "ocl/Types/TypesPackage.hpp"
 #include "ocl/Values/ValuesPackage.hpp"
 #include "fUML/Semantics/Values/ValuesPackage.hpp"
 
@@ -98,7 +95,6 @@ CollectionValueImpl& CollectionValueImpl::operator=(const CollectionValueImpl & 
 
 	//copy references with no containment (soft copy)
 	m_elements  = obj.getElements();
-	m_model  = obj.getModel();
 	//Clone references with containment (deep copy)
 	return *this;
 }
@@ -124,14 +120,12 @@ bool CollectionValueImpl::equals(std::shared_ptr<fUML::Semantics::Values::Value>
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	    if(otherValue != nullptr)
+	 if(otherValue != nullptr)
     {
         std::shared_ptr<ocl::Values::CollectionValue> otherBag = std::dynamic_pointer_cast<ocl::Values::CollectionValue>(otherValue);
 
-	if(otherBag != nullptr && otherBag->getModel() != nullptr && 
-           this->getModel()->kindOf(otherBag->getModel()) &&
-           otherBag->getElements()->size() == this->getElements()->size()) {
-
+	if(otherBag != nullptr && otherBag->getElements()->size() == this->getElements()->size())
+	{
            for(size_t i = 0; i < this->getElements()->size(); i++) {
                 auto item1 = this->getElements()->at(i)->getValue();
                 auto item2 = otherBag->getElements()->at(i)->getValue();
@@ -144,7 +138,6 @@ bool CollectionValueImpl::equals(std::shared_ptr<fUML::Semantics::Values::Value>
         }
     }
     return false;
-   
 	//end of body
 }
 
@@ -200,17 +193,6 @@ std::shared_ptr<Bag<ocl::Values::Element>> CollectionValueImpl::getElements() co
     return m_elements;
 }
 
-/* Getter & Setter for reference model */
-std::shared_ptr<ocl::Types::CollectionType> CollectionValueImpl::getModel() const
-{
-    return m_model;
-}
-void CollectionValueImpl::setModel(std::shared_ptr<ocl::Types::CollectionType> _model)
-{
-    m_model = _model;
-	
-}
-
 //*********************************
 // Union Getter
 //*********************************
@@ -254,13 +236,6 @@ void CollectionValueImpl::loadAttributes(std::shared_ptr<persistence::interfaces
 			// add unresolvedReference to loadHandler's list
 			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("elements")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
 		}
-
-		iter = attr_list.find("model");
-		if ( iter != attr_list.end() )
-		{
-			// add unresolvedReference to loadHandler's list
-			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("model")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
-		}
 	}
 	catch (std::exception& e)
 	{
@@ -298,18 +273,6 @@ void CollectionValueImpl::resolveReferences(const int featureID, std::vector<std
 			}
 			return;
 		}
-
-		case ocl::Values::ValuesPackage::COLLECTIONVALUE_ATTRIBUTE_MODEL:
-		{
-			if (references.size() == 1)
-			{
-				// Cast object to correct type
-				std::shared_ptr<ocl::Types::CollectionType> _model = std::dynamic_pointer_cast<ocl::Types::CollectionType>( references.front() );
-				setModel(_model);
-			}
-			
-			return;
-		}
 	}
 	StaticValueImpl::resolveReferences(featureID, references);
 }
@@ -334,7 +297,6 @@ void CollectionValueImpl::saveContent(std::shared_ptr<persistence::interfaces::X
 		std::shared_ptr<ocl::Values::ValuesPackage> package = ocl::Values::ValuesPackage::eInstance();
 	// Add references
 		saveHandler->addReferences<ocl::Values::Element>("elements", this->getElements());
-		saveHandler->addReference(this->getModel(), "model", getModel()->eClass() != ocl::Types::TypesPackage::eInstance()->getCollectionType_Class()); 
 	}
 	catch (std::exception& e)
 	{
@@ -366,13 +328,8 @@ Any CollectionValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //210			
+			return eAny(tempList); //220			
 		}
-		case ocl::Values::ValuesPackage::COLLECTIONVALUE_ATTRIBUTE_MODEL:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getModel();
-				return eAny(returnValue); //211
-			}
 	}
 	return StaticValueImpl::eGet(featureID, resolve, coreType);
 }
@@ -382,9 +339,7 @@ bool CollectionValueImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case ocl::Values::ValuesPackage::COLLECTIONVALUE_ATTRIBUTE_ELEMENTS:
-			return getElements() != nullptr; //210
-		case ocl::Values::ValuesPackage::COLLECTIONVALUE_ATTRIBUTE_MODEL:
-			return getModel() != nullptr; //211
+			return getElements() != nullptr; //220
 	}
 	return StaticValueImpl::internalEIsSet(featureID);
 }
@@ -427,14 +382,6 @@ bool CollectionValueImpl::eSet(int featureID, Any newValue)
 				}
 				iterElements++;			
 			}
-			return true;
-		}
-		case ocl::Values::ValuesPackage::COLLECTIONVALUE_ATTRIBUTE_MODEL:
-		{
-			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<ocl::Types::CollectionType> _model = std::dynamic_pointer_cast<ocl::Types::CollectionType>(_temp);
-			setModel(_model); //211
 			return true;
 		}
 	}

@@ -539,22 +539,22 @@ Any ReduceActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::REDUCEACTION_ATTRIBUTE_COLLECTION:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getCollection();
-				return eAny(returnValue); //20627
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getCollection();
+			return eAny(returnValue); //20627
+		}
 		case uml::umlPackage::REDUCEACTION_ATTRIBUTE_ISORDERED:
 			return eAny(getIsOrdered()); //20628
 		case uml::umlPackage::REDUCEACTION_ATTRIBUTE_REDUCER:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getReducer();
-				return eAny(returnValue); //20629
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getReducer();
+			return eAny(returnValue); //20629
+		}
 		case uml::umlPackage::REDUCEACTION_ATTRIBUTE_RESULT:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getResult();
-				return eAny(returnValue); //20630
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getResult();
+			return eAny(returnValue); //20630
+		}
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
 }

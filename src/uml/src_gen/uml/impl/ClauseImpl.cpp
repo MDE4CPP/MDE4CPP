@@ -492,10 +492,10 @@ Any ClauseImpl::eGet(int featureID, bool resolve, bool coreType) const
 			return eAny(tempList); //384			
 		}
 		case uml::umlPackage::CLAUSE_ATTRIBUTE_DECIDER:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getDecider();
-				return eAny(returnValue); //385
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getDecider();
+			return eAny(returnValue); //385
+		}
 		case uml::umlPackage::CLAUSE_ATTRIBUTE_PREDECESSORCLAUSE:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());

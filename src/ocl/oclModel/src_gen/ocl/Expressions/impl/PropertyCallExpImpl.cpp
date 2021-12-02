@@ -412,10 +412,10 @@ Any PropertyCallExpImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case ocl::Expressions::ExpressionsPackage::PROPERTYCALLEXP_ATTRIBUTE_REFERREDPROPERTY:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getReferredProperty();
-				return eAny(returnValue); //7126
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getReferredProperty();
+			return eAny(returnValue); //7226
+		}
 	}
 	return NavigationCallExpImpl::eGet(featureID, resolve, coreType);
 }
@@ -425,7 +425,7 @@ bool PropertyCallExpImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case ocl::Expressions::ExpressionsPackage::PROPERTYCALLEXP_ATTRIBUTE_REFERREDPROPERTY:
-			return getReferredProperty() != nullptr; //7126
+			return getReferredProperty() != nullptr; //7226
 	}
 	return NavigationCallExpImpl::internalEIsSet(featureID);
 }
@@ -439,7 +439,7 @@ bool PropertyCallExpImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<ecore::EAttribute> _referredProperty = std::dynamic_pointer_cast<ecore::EAttribute>(_temp);
-			setReferredProperty(_referredProperty); //7126
+			setReferredProperty(_referredProperty); //7226
 			return true;
 		}
 	}

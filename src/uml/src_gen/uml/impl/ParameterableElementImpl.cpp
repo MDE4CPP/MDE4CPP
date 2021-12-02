@@ -321,15 +321,15 @@ Any ParameterableElementImpl::eGet(int featureID, bool resolve, bool coreType) c
 	switch(featureID)
 	{
 		case uml::umlPackage::PARAMETERABLEELEMENT_ATTRIBUTE_OWNINGTEMPLATEPARAMETER:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getOwningTemplateParameter().lock();
-				return eAny(returnValue); //1783
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getOwningTemplateParameter().lock();
+			return eAny(returnValue); //1783
+		}
 		case uml::umlPackage::PARAMETERABLEELEMENT_ATTRIBUTE_TEMPLATEPARAMETER:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getTemplateParameter();
-				return eAny(returnValue); //1784
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getTemplateParameter();
+			return eAny(returnValue); //1784
+		}
 	}
 	return ElementImpl::eGet(featureID, resolve, coreType);
 }

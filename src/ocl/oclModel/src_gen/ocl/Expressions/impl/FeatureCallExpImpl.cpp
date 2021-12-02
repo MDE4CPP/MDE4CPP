@@ -390,7 +390,7 @@ Any FeatureCallExpImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case ocl::Expressions::ExpressionsPackage::FEATURECALLEXP_ATTRIBUTE_ISPRE:
-			return eAny(getIsPre()); //2923
+			return eAny(getIsPre()); //3023
 	}
 	return CallExpImpl::eGet(featureID, resolve, coreType);
 }
@@ -400,7 +400,7 @@ bool FeatureCallExpImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case ocl::Expressions::ExpressionsPackage::FEATURECALLEXP_ATTRIBUTE_ISPRE:
-			return getIsPre() != false; //2923
+			return getIsPre() != false; //3023
 	}
 	return CallExpImpl::internalEIsSet(featureID);
 }
@@ -413,7 +413,7 @@ bool FeatureCallExpImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			bool _isPre = newValue->get<bool>();
-			setIsPre(_isPre); //2923
+			setIsPre(_isPre); //3023
 			return true;
 		}
 	}

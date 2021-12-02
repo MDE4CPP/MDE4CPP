@@ -336,10 +336,10 @@ Any ExecutionOccurrenceSpecificationImpl::eGet(int featureID, bool resolve, bool
 	switch(featureID)
 	{
 		case uml::umlPackage::EXECUTIONOCCURRENCESPECIFICATION_ATTRIBUTE_EXECUTION:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getExecution();
-				return eAny(returnValue); //9015
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getExecution();
+			return eAny(returnValue); //9015
+		}
 	}
 	return OccurrenceSpecificationImpl::eGet(featureID, resolve, coreType);
 }

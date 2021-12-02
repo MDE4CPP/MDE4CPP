@@ -235,19 +235,19 @@ std::weak_ptr<ecore::EClass> EStructuralFeatureImpl::getEContainingClass() const
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<Union<ecore::EObject>> EStructuralFeatureImpl::getEContens() const
+std::shared_ptr<Union<ecore::EObject>> EStructuralFeatureImpl::getEContentUnion() const
 {
-	if(m_eContens == nullptr)
+	if(m_eContentUnion == nullptr)
 	{
 		/*Union*/
-		m_eContens.reset(new Union<ecore::EObject>());
+		m_eContentUnion.reset(new Union<ecore::EObject>());
 			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_eContens - Union<ecore::EObject>()" << std::endl;
+			std::cout << "Initialising Union: " << "m_eContentUnion - Union<ecore::EObject>()" << std::endl;
 		#endif
 		
 		
 	}
-	return m_eContens;
+	return m_eContentUnion;
 }
 
 //*********************************
@@ -456,26 +456,26 @@ Any EStructuralFeatureImpl::eGet(int featureID, bool resolve, bool coreType) con
 	switch(featureID)
 	{
 		case ecore::ecorePackage::ESTRUCTURALFEATURE_ATTRIBUTE_CHANGEABLE:
-			return eAny(isChangeable()); //5013
+			return eAny(isChangeable()); //5113
 		case ecore::ecorePackage::ESTRUCTURALFEATURE_ATTRIBUTE_DEFAULTVALUE:
-			return eAny(getDefaultValue()); //5017
+			return eAny(getDefaultValue()); //5117
 		case ecore::ecorePackage::ESTRUCTURALFEATURE_ATTRIBUTE_DEFAULTVALUELITERAL:
-			return eAny(getDefaultValueLiteral()); //5016
+			return eAny(getDefaultValueLiteral()); //5116
 		case ecore::ecorePackage::ESTRUCTURALFEATURE_ATTRIBUTE_DERIVED:
-			return eAny(isDerived()); //5019
+			return eAny(isDerived()); //5119
 		case ecore::ecorePackage::ESTRUCTURALFEATURE_ATTRIBUTE_ECONTAININGCLASS:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getEContainingClass().lock();
-				return eAny(returnValue); //5021
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getEContainingClass().lock();
+			return eAny(returnValue); //5121
+		}
 		case ecore::ecorePackage::ESTRUCTURALFEATURE_ATTRIBUTE_FEATUREID:
-			return eAny(getFeatureID()); //5020
+			return eAny(getFeatureID()); //5120
 		case ecore::ecorePackage::ESTRUCTURALFEATURE_ATTRIBUTE_TRANSIENT:
-			return eAny(isTransient()); //5015
+			return eAny(isTransient()); //5115
 		case ecore::ecorePackage::ESTRUCTURALFEATURE_ATTRIBUTE_UNSETTABLE:
-			return eAny(isUnsettable()); //5018
+			return eAny(isUnsettable()); //5118
 		case ecore::ecorePackage::ESTRUCTURALFEATURE_ATTRIBUTE_VOLATILE:
-			return eAny(isVolatile()); //5014
+			return eAny(isVolatile()); //5114
 	}
 	return ETypedElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -485,23 +485,23 @@ bool EStructuralFeatureImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case ecore::ecorePackage::ESTRUCTURALFEATURE_ATTRIBUTE_CHANGEABLE:
-			return isChangeable() != true; //5013
+			return isChangeable() != true; //5113
 		case ecore::ecorePackage::ESTRUCTURALFEATURE_ATTRIBUTE_DEFAULTVALUE:
-			return getDefaultValue() != nullptr; //5017
+			return getDefaultValue() != nullptr; //5117
 		case ecore::ecorePackage::ESTRUCTURALFEATURE_ATTRIBUTE_DEFAULTVALUELITERAL:
-			return getDefaultValueLiteral() != ""; //5016
+			return getDefaultValueLiteral() != ""; //5116
 		case ecore::ecorePackage::ESTRUCTURALFEATURE_ATTRIBUTE_DERIVED:
-			return isDerived() != false; //5019
+			return isDerived() != false; //5119
 		case ecore::ecorePackage::ESTRUCTURALFEATURE_ATTRIBUTE_ECONTAININGCLASS:
-			return getEContainingClass().lock() != nullptr; //5021
+			return getEContainingClass().lock() != nullptr; //5121
 		case ecore::ecorePackage::ESTRUCTURALFEATURE_ATTRIBUTE_FEATUREID:
-			return getFeatureID() != -1; //5020
+			return getFeatureID() != -1; //5120
 		case ecore::ecorePackage::ESTRUCTURALFEATURE_ATTRIBUTE_TRANSIENT:
-			return isTransient() != false; //5015
+			return isTransient() != false; //5115
 		case ecore::ecorePackage::ESTRUCTURALFEATURE_ATTRIBUTE_UNSETTABLE:
-			return isUnsettable() != false; //5018
+			return isUnsettable() != false; //5118
 		case ecore::ecorePackage::ESTRUCTURALFEATURE_ATTRIBUTE_VOLATILE:
-			return isVolatile() != false; //5014
+			return isVolatile() != false; //5114
 	}
 	return ETypedElementImpl::internalEIsSet(featureID);
 }
@@ -514,49 +514,49 @@ bool EStructuralFeatureImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			bool _changeable = newValue->get<bool>();
-			setChangeable(_changeable); //5013
+			setChangeable(_changeable); //5113
 			return true;
 		}
 		case ecore::ecorePackage::ESTRUCTURALFEATURE_ATTRIBUTE_DEFAULTVALUE:
 		{
 			// BOOST CAST
 			Any _defaultValue = newValue->get<Any>();
-			setDefaultValue(_defaultValue); //5017
+			setDefaultValue(_defaultValue); //5117
 			return true;
 		}
 		case ecore::ecorePackage::ESTRUCTURALFEATURE_ATTRIBUTE_DEFAULTVALUELITERAL:
 		{
 			// BOOST CAST
 			std::string _defaultValueLiteral = newValue->get<std::string>();
-			setDefaultValueLiteral(_defaultValueLiteral); //5016
+			setDefaultValueLiteral(_defaultValueLiteral); //5116
 			return true;
 		}
 		case ecore::ecorePackage::ESTRUCTURALFEATURE_ATTRIBUTE_DERIVED:
 		{
 			// BOOST CAST
 			bool _derived = newValue->get<bool>();
-			setDerived(_derived); //5019
+			setDerived(_derived); //5119
 			return true;
 		}
 		case ecore::ecorePackage::ESTRUCTURALFEATURE_ATTRIBUTE_TRANSIENT:
 		{
 			// BOOST CAST
 			bool _transient = newValue->get<bool>();
-			setTransient(_transient); //5015
+			setTransient(_transient); //5115
 			return true;
 		}
 		case ecore::ecorePackage::ESTRUCTURALFEATURE_ATTRIBUTE_UNSETTABLE:
 		{
 			// BOOST CAST
 			bool _unsettable = newValue->get<bool>();
-			setUnsettable(_unsettable); //5018
+			setUnsettable(_unsettable); //5118
 			return true;
 		}
 		case ecore::ecorePackage::ESTRUCTURALFEATURE_ATTRIBUTE_VOLATILE:
 		{
 			// BOOST CAST
 			bool _volatile = newValue->get<bool>();
-			setVolatile(_volatile); //5014
+			setVolatile(_volatile); //5114
 			return true;
 		}
 	}

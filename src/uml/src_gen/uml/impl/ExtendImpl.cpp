@@ -495,20 +495,20 @@ Any ExtendImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::EXTEND_ATTRIBUTE_CONDITION:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getCondition();
-				return eAny(returnValue); //9612
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getCondition();
+			return eAny(returnValue); //9612
+		}
 		case uml::umlPackage::EXTEND_ATTRIBUTE_EXTENDEDCASE:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getExtendedCase();
-				return eAny(returnValue); //9613
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getExtendedCase();
+			return eAny(returnValue); //9613
+		}
 		case uml::umlPackage::EXTEND_ATTRIBUTE_EXTENSION:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getExtension().lock();
-				return eAny(returnValue); //9615
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getExtension().lock();
+			return eAny(returnValue); //9615
+		}
 		case uml::umlPackage::EXTEND_ATTRIBUTE_EXTENSIONLOCATION:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());

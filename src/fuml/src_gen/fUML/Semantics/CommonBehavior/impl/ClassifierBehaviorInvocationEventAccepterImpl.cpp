@@ -48,8 +48,8 @@
 #include "fUML/Semantics/CommonBehavior/ParameterValue.hpp"
 
 //Factories an Package includes
-#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "uml/umlPackage.hpp"
 
@@ -373,20 +373,20 @@ Any ClassifierBehaviorInvocationEventAccepterImpl::eGet(int featureID, bool reso
 	switch(featureID)
 	{
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::CLASSIFIERBEHAVIORINVOCATIONEVENTACCEPTER_ATTRIBUTE_CLASSIFIER:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getClassifier();
-				return eAny(returnValue); //250
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getClassifier();
+			return eAny(returnValue); //250
+		}
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::CLASSIFIERBEHAVIORINVOCATIONEVENTACCEPTER_ATTRIBUTE_EXECUTION:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getExecution();
-				return eAny(returnValue); //251
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getExecution();
+			return eAny(returnValue); //251
+		}
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::CLASSIFIERBEHAVIORINVOCATIONEVENTACCEPTER_ATTRIBUTE_OBJECTACTIVATION:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getObjectActivation();
-				return eAny(returnValue); //252
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getObjectActivation();
+			return eAny(returnValue); //252
+		}
 	}
 	return EventAccepterImpl::eGet(featureID, resolve, coreType);
 }

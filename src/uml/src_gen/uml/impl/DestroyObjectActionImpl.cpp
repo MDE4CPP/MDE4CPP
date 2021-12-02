@@ -470,10 +470,10 @@ Any DestroyObjectActionImpl::eGet(int featureID, bool resolve, bool coreType) co
 		case uml::umlPackage::DESTROYOBJECTACTION_ATTRIBUTE_ISDESTROYOWNEDOBJECTS:
 			return eAny(getIsDestroyOwnedObjects()); //7328
 		case uml::umlPackage::DESTROYOBJECTACTION_ATTRIBUTE_TARGET:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getTarget();
-				return eAny(returnValue); //7329
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getTarget();
+			return eAny(returnValue); //7329
+		}
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
 }

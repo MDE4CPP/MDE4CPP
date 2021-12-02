@@ -635,10 +635,10 @@ Any ElementImpl::eGet(int featureID, bool resolve, bool coreType) const
 			return eAny(tempList); //811			
 		}
 		case uml::umlPackage::ELEMENT_ATTRIBUTE_OWNER:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getOwner().lock();
-				return eAny(returnValue); //812
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getOwner().lock();
+			return eAny(returnValue); //812
+		}
 	}
 	return ObjectImpl::eGet(featureID, resolve, coreType);
 }

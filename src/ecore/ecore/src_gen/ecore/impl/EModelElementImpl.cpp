@@ -109,9 +109,9 @@ EModelElementImpl& EModelElementImpl::operator=(const EModelElementImpl & obj)
 		#endif
 		
 		/*Subset*/
-		getEAnnotations()->initSubset(getEContens());
+		getEAnnotations()->initSubset(getEContentUnion());
 		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_eAnnotations - Subset<ecore::EAnnotation, ecore::EObject >(getEContens())" << std::endl;
+			std::cout << "Initialising value Subset: " << "m_eAnnotations - Subset<ecore::EAnnotation, ecore::EObject >(getEContentUnion())" << std::endl;
 		#endif
 		
 
@@ -129,9 +129,9 @@ EModelElementImpl& EModelElementImpl::operator=(const EModelElementImpl & obj)
 		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr eAnnotations."<< std::endl;)
 	}
 	/*Subset*/
-	getEAnnotations()->initSubset(getEContens());
+	getEAnnotations()->initSubset(getEContentUnion());
 	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Initialising value Subset: " << "m_eAnnotations - Subset<ecore::EAnnotation, ecore::EObject >(getEContens())" << std::endl;
+		std::cout << "Initialising value Subset: " << "m_eAnnotations - Subset<ecore::EAnnotation, ecore::EObject >(getEContentUnion())" << std::endl;
 	#endif
 	
 	return *this;
@@ -174,9 +174,9 @@ std::shared_ptr<Subset<ecore::EAnnotation, ecore::EObject>> EModelElementImpl::g
 		#endif
 		
 		/*Subset*/
-		getEAnnotations()->initSubset(getEContens());
+		getEAnnotations()->initSubset(getEContentUnion());
 		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_eAnnotations - Subset<ecore::EAnnotation, ecore::EObject >(getEContens())" << std::endl;
+			std::cout << "Initialising value Subset: " << "m_eAnnotations - Subset<ecore::EAnnotation, ecore::EObject >(getEContentUnion())" << std::endl;
 		#endif
 		
 	}
@@ -186,19 +186,19 @@ std::shared_ptr<Subset<ecore::EAnnotation, ecore::EObject>> EModelElementImpl::g
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<Union<ecore::EObject>> EModelElementImpl::getEContens() const
+std::shared_ptr<Union<ecore::EObject>> EModelElementImpl::getEContentUnion() const
 {
-	if(m_eContens == nullptr)
+	if(m_eContentUnion == nullptr)
 	{
 		/*Union*/
-		m_eContens.reset(new Union<ecore::EObject>());
+		m_eContentUnion.reset(new Union<ecore::EObject>());
 			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_eContens - Union<ecore::EObject>()" << std::endl;
+			std::cout << "Initialising Union: " << "m_eContentUnion - Union<ecore::EObject>()" << std::endl;
 		#endif
 		
 		
 	}
-	return m_eContens;
+	return m_eContentUnion;
 }
 
 //*********************************

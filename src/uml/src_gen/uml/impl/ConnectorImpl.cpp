@@ -649,15 +649,15 @@ Any ConnectorImpl::eGet(int featureID, bool resolve, bool coreType) const
 			return eAny(tempList); //5317			
 		}
 		case uml::umlPackage::CONNECTOR_ATTRIBUTE_STRUCTUREDCLASSIFIER:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getStructuredClassifier().lock();
-				return eAny(returnValue); //5319
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getStructuredClassifier().lock();
+			return eAny(returnValue); //5319
+		}
 		case uml::umlPackage::CONNECTOR_ATTRIBUTE_TYPE:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getType();
-				return eAny(returnValue); //5318
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getType();
+			return eAny(returnValue); //5318
+		}
 	}
 	return FeatureImpl::eGet(featureID, resolve, coreType);
 }

@@ -32,9 +32,9 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "ocl/Evaluations/EvaluationsFactory.hpp"
 #include "ecore/ecoreFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
+#include "ocl/Evaluations/EvaluationsFactory.hpp"
 
 #include "ocl/Expressions/CallExp.hpp"
 #include "ocl/Expressions/CollectionRange.hpp"
@@ -405,10 +405,10 @@ Any VariableExpImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case ocl::Expressions::ExpressionsPackage::VARIABLEEXP_ATTRIBUTE_REFERREDVARIABLE:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getReferredVariable();
-				return eAny(returnValue); //9822
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getReferredVariable();
+			return eAny(returnValue); //9922
+		}
 	}
 	return OclExpressionImpl::eGet(featureID, resolve, coreType);
 }
@@ -418,7 +418,7 @@ bool VariableExpImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case ocl::Expressions::ExpressionsPackage::VARIABLEEXP_ATTRIBUTE_REFERREDVARIABLE:
-			return getReferredVariable() != nullptr; //9822
+			return getReferredVariable() != nullptr; //9922
 	}
 	return OclExpressionImpl::internalEIsSet(featureID);
 }
@@ -432,7 +432,7 @@ bool VariableExpImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<ocl::Expressions::Variable> _referredVariable = std::dynamic_pointer_cast<ocl::Expressions::Variable>(_temp);
-			setReferredVariable(_referredVariable); //9822
+			setReferredVariable(_referredVariable); //9922
 			return true;
 		}
 	}

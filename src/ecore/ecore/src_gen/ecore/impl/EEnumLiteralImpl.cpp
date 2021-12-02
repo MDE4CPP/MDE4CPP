@@ -174,19 +174,19 @@ std::weak_ptr<ecore::EEnum> EEnumLiteralImpl::getEEnum() const
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<Union<ecore::EObject>> EEnumLiteralImpl::getEContens() const
+std::shared_ptr<Union<ecore::EObject>> EEnumLiteralImpl::getEContentUnion() const
 {
-	if(m_eContens == nullptr)
+	if(m_eContentUnion == nullptr)
 	{
 		/*Union*/
-		m_eContens.reset(new Union<ecore::EObject>());
+		m_eContentUnion.reset(new Union<ecore::EObject>());
 			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_eContens - Union<ecore::EObject>()" << std::endl;
+			std::cout << "Initialising Union: " << "m_eContentUnion - Union<ecore::EObject>()" << std::endl;
 		#endif
 		
 		
 	}
-	return m_eContens;
+	return m_eContentUnion;
 }
 
 //*********************************
@@ -323,10 +323,10 @@ Any EEnumLiteralImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case ecore::ecorePackage::EENUMLITERAL_ATTRIBUTE_EENUM:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getEEnum().lock();
-				return eAny(returnValue); //218
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getEEnum().lock();
+			return eAny(returnValue); //218
+		}
 		case ecore::ecorePackage::EENUMLITERAL_ATTRIBUTE_INSTANCE:
 			return eAny(getInstance()); //216
 		case ecore::ecorePackage::EENUMLITERAL_ATTRIBUTE_LITERAL:

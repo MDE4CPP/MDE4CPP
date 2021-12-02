@@ -32,9 +32,9 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "ocl/Evaluations/EvaluationsFactory.hpp"
 #include "ecore/ecoreFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
+#include "ocl/Evaluations/EvaluationsFactory.hpp"
 
 #include "ocl/Expressions/CallExp.hpp"
 #include "ocl/Expressions/CollectionRange.hpp"
@@ -405,10 +405,10 @@ Any TypeExpImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case ocl::Expressions::ExpressionsPackage::TYPEEXP_ATTRIBUTE_REFERREDTYPE:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getReferredType();
-				return eAny(returnValue); //9022
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getReferredType();
+			return eAny(returnValue); //9122
+		}
 	}
 	return OclExpressionImpl::eGet(featureID, resolve, coreType);
 }
@@ -418,7 +418,7 @@ bool TypeExpImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case ocl::Expressions::ExpressionsPackage::TYPEEXP_ATTRIBUTE_REFERREDTYPE:
-			return getReferredType() != nullptr; //9022
+			return getReferredType() != nullptr; //9122
 	}
 	return OclExpressionImpl::internalEIsSet(featureID);
 }
@@ -432,7 +432,7 @@ bool TypeExpImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<ecore::EClassifier> _referredType = std::dynamic_pointer_cast<ecore::EClassifier>(_temp);
-			setReferredType(_referredType); //9022
+			setReferredType(_referredType); //9122
 			return true;
 		}
 	}

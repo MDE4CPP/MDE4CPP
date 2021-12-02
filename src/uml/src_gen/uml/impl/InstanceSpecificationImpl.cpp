@@ -523,10 +523,10 @@ Any InstanceSpecificationImpl::eGet(int featureID, bool resolve, bool coreType) 
 			return eAny(tempList); //11715			
 		}
 		case uml::umlPackage::INSTANCESPECIFICATION_ATTRIBUTE_SPECIFICATION:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getSpecification();
-				return eAny(returnValue); //11716
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getSpecification();
+			return eAny(returnValue); //11716
+		}
 	}
 	Any result;
 	result = DeployedArtifactImpl::eGet(featureID, resolve, coreType);

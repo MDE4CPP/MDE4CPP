@@ -418,10 +418,10 @@ Any JoinNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::JOINNODE_ATTRIBUTE_ISCOMBINEDUPLICATE:
 			return eAny(getIsCombineDuplicate()); //13120
 		case uml::umlPackage::JOINNODE_ATTRIBUTE_JOINSPEC:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getJoinSpec();
-				return eAny(returnValue); //13121
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getJoinSpec();
+			return eAny(returnValue); //13121
+		}
 	}
 	return ControlNodeImpl::eGet(featureID, resolve, coreType);
 }

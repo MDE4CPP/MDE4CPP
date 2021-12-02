@@ -32,9 +32,9 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "ocl/Evaluations/EvaluationsFactory.hpp"
 #include "ecore/ecoreFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
+#include "ocl/Evaluations/EvaluationsFactory.hpp"
 
 #include "ocl/Expressions/CallExp.hpp"
 #include "ocl/Expressions/CollectionRange.hpp"
@@ -400,7 +400,7 @@ Any BooleanLiteralExpImpl::eGet(int featureID, bool resolve, bool coreType) cons
 	switch(featureID)
 	{
 		case ocl::Expressions::ExpressionsPackage::BOOLEANLITERALEXP_ATTRIBUTE_BOOLEANSYMBOL:
-			return eAny(getBooleanSymbol()); //823
+			return eAny(getBooleanSymbol()); //923
 	}
 	return PrimitiveLiteralExpImpl::eGet(featureID, resolve, coreType);
 }
@@ -410,7 +410,7 @@ bool BooleanLiteralExpImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case ocl::Expressions::ExpressionsPackage::BOOLEANLITERALEXP_ATTRIBUTE_BOOLEANSYMBOL:
-			return getBooleanSymbol() != false; //823
+			return getBooleanSymbol() != false; //923
 	}
 	return PrimitiveLiteralExpImpl::internalEIsSet(featureID);
 }
@@ -423,7 +423,7 @@ bool BooleanLiteralExpImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			bool _booleanSymbol = newValue->get<bool>();
-			setBooleanSymbol(_booleanSymbol); //823
+			setBooleanSymbol(_booleanSymbol); //923
 			return true;
 		}
 	}

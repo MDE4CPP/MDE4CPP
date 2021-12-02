@@ -37,8 +37,8 @@
 #include "fUML/Semantics/CommonBehavior/EventAccepter.hpp"
 
 //Factories an Package includes
-#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 
@@ -248,10 +248,10 @@ Any AcceptEventActionEventAccepterImpl::eGet(int featureID, bool resolve, bool c
 	switch(featureID)
 	{
 		case fUML::Semantics::Actions::ActionsPackage::ACCEPTEVENTACTIONEVENTACCEPTER_ATTRIBUTE_ACTIONACTIVATION:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getActionActivation();
-				return eAny(returnValue); //40
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getActionActivation();
+			return eAny(returnValue); //40
+		}
 	}
 	return fUML::Semantics::CommonBehavior::EventAccepterImpl::eGet(featureID, resolve, coreType);
 }

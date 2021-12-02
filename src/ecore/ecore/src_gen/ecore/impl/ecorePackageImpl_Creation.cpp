@@ -7,16 +7,16 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
-#include "ecore/EParameter.hpp"
-#include "ecore/EDataType.hpp"
-#include "ecore/EStringToStringMapEntry.hpp"
-#include "ecore/EGenericType.hpp"
+#include "ecore/EAnnotation.hpp"
 #include "ecore/EReference.hpp"
 #include "ecore/ETypeParameter.hpp"
-#include "ecore/EOperation.hpp"
-#include "ecore/EAttribute.hpp"
-#include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
+#include "ecore/EDataType.hpp"
+#include "ecore/EGenericType.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EParameter.hpp"
+#include "ecore/EOperation.hpp"
+#include "ecore/EStringToStringMapEntry.hpp"
 
 //depending model packages
 //include subpackages 
@@ -45,6 +45,7 @@ void ecorePackageImpl::createPackageContents(std::shared_ptr<ecore::EPackage> pa
 	createEModelElementContent(package, factory);
 	createENamedElementContent(package, factory);
 	createEObjectContent(package, factory);
+	createEObjectContainerContent(package, factory);
 	createEOperationContent(package, factory);
 	createEPackageContent(package, factory);
 	createEParameterContent(package, factory);
@@ -216,10 +217,11 @@ void ecorePackageImpl::createEObjectContent(std::shared_ptr<ecore::EPackage> pac
 	m_eObject_Attribute_metaElementID = factory->createEAttribute_as_eAttributes_in_EClass(m_eObject_Class, EOBJECT_ATTRIBUTE_METAELEMENTID);
 	
 	m_eObject_Attribute_eContainer = factory->createEReference_as_eReferences_in_EClass(m_eObject_Class, EOBJECT_ATTRIBUTE_ECONTAINER);
-	m_eObject_Attribute_eContens = factory->createEReference_as_eReferences_in_EClass(m_eObject_Class, EOBJECT_ATTRIBUTE_ECONTENS);
+	m_eObject_Attribute_eContentUnion = factory->createEReference_as_eReferences_in_EClass(m_eObject_Class, EOBJECT_ATTRIBUTE_ECONTENTUNION);
 	
 	m_eObject_Operation_eAllContents = factory->createEOperation_as_eOperations_in_EClass(m_eObject_Class, EOBJECT_OPERATION_EALLCONTENTS);
 	m_eObject_Operation_eClass = factory->createEOperation_as_eOperations_in_EClass(m_eObject_Class, EOBJECT_OPERATION_ECLASS);
+	m_eObject_Operation_eContainer = factory->createEOperation_as_eOperations_in_EClass(m_eObject_Class, EOBJECT_OPERATION_ECONTAINER);
 	m_eObject_Operation_eContainingFeature = factory->createEOperation_as_eOperations_in_EClass(m_eObject_Class, EOBJECT_OPERATION_ECONTAININGFEATURE);
 	m_eObject_Operation_eContainmentFeature = factory->createEOperation_as_eOperations_in_EClass(m_eObject_Class, EOBJECT_OPERATION_ECONTAINMENTFEATURE);
 	m_eObject_Operation_eContents = factory->createEOperation_as_eOperations_in_EClass(m_eObject_Class, EOBJECT_OPERATION_ECONTENTS);
@@ -232,6 +234,15 @@ void ecorePackageImpl::createEObjectContent(std::shared_ptr<ecore::EPackage> pac
 	m_eObject_Operation_eResource = factory->createEOperation_as_eOperations_in_EClass(m_eObject_Class, EOBJECT_OPERATION_ERESOURCE);
 	m_eObject_Operation_eSet_EStructuralFeature_EJavaObject = factory->createEOperation_as_eOperations_in_EClass(m_eObject_Class, EOBJECT_OPERATION_ESET_ESTRUCTURALFEATURE_EJAVAOBJECT);
 	m_eObject_Operation_eUnset_EStructuralFeature = factory->createEOperation_as_eOperations_in_EClass(m_eObject_Class, EOBJECT_OPERATION_EUNSET_ESTRUCTURALFEATURE);
+	
+}
+
+void ecorePackageImpl::createEObjectContainerContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
+{
+	m_eObjectContainer_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, EOBJECTCONTAINER_CLASS);
+	
+	m_eObjectContainer_Attribute_container = factory->createEReference_as_eReferences_in_EClass(m_eObjectContainer_Class, EOBJECTCONTAINER_ATTRIBUTE_CONTAINER);
+	
 	
 }
 

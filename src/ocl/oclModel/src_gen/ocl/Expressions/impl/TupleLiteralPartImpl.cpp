@@ -254,10 +254,10 @@ Any TupleLiteralPartImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case ocl::Expressions::ExpressionsPackage::TUPLELITERALPART_ATTRIBUTE_ATTRIBUTE:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getAttribute();
-				return eAny(returnValue); //8710
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getAttribute();
+			return eAny(returnValue); //8810
+		}
 	}
 	return ecore::ETypedElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -267,7 +267,7 @@ bool TupleLiteralPartImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case ocl::Expressions::ExpressionsPackage::TUPLELITERALPART_ATTRIBUTE_ATTRIBUTE:
-			return getAttribute() != nullptr; //8710
+			return getAttribute() != nullptr; //8810
 	}
 	return ecore::ETypedElementImpl::internalEIsSet(featureID);
 }
@@ -281,7 +281,7 @@ bool TupleLiteralPartImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<ecore::EAttribute> _attribute = std::dynamic_pointer_cast<ecore::EAttribute>(_temp);
-			setAttribute(_attribute); //8710
+			setAttribute(_attribute); //8810
 			return true;
 		}
 	}

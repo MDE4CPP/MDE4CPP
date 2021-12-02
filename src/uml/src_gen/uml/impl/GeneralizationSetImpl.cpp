@@ -450,10 +450,10 @@ Any GeneralizationSetImpl::eGet(int featureID, bool resolve, bool coreType) cons
 		case uml::umlPackage::GENERALIZATIONSET_ATTRIBUTE_ISDISJOINT:
 			return eAny(getIsDisjoint()); //11013
 		case uml::umlPackage::GENERALIZATIONSET_ATTRIBUTE_POWERTYPE:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getPowertype();
-				return eAny(returnValue); //11014
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getPowertype();
+			return eAny(returnValue); //11014
+		}
 	}
 	return PackageableElementImpl::eGet(featureID, resolve, coreType);
 }

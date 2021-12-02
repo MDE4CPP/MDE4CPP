@@ -43,8 +43,8 @@
 //Factories an Package includes
 #include "ocl/oclPackage.hpp"
 #include "ocl/Types/TypesPackage.hpp"
-#include "fUML/Semantics/Values/ValuesPackage.hpp"
 #include "ocl/Values/ValuesPackage.hpp"
+#include "fUML/Semantics/Values/ValuesPackage.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -344,13 +344,13 @@ Any TupleValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //890			
+			return eAny(tempList); //900			
 		}
 		case ocl::Values::ValuesPackage::TUPLEVALUE_ATTRIBUTE_MODEL:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getModel();
-				return eAny(returnValue); //891
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getModel();
+			return eAny(returnValue); //901
+		}
 	}
 	return StaticValueImpl::eGet(featureID, resolve, coreType);
 }
@@ -360,9 +360,9 @@ bool TupleValueImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case ocl::Values::ValuesPackage::TUPLEVALUE_ATTRIBUTE_ELEMENTS:
-			return getElements() != nullptr; //890
+			return getElements() != nullptr; //900
 		case ocl::Values::ValuesPackage::TUPLEVALUE_ATTRIBUTE_MODEL:
-			return getModel() != nullptr; //891
+			return getModel() != nullptr; //901
 	}
 	return StaticValueImpl::internalEIsSet(featureID);
 }
@@ -412,7 +412,7 @@ bool TupleValueImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<ocl::Types::TupleType> _model = std::dynamic_pointer_cast<ocl::Types::TupleType>(_temp);
-			setModel(_model); //891
+			setModel(_model); //901
 			return true;
 		}
 	}

@@ -256,9 +256,9 @@ Any EStringToStringMapEntryImpl::eGet(int featureID, bool resolve, bool coreType
 	switch(featureID)
 	{
 		case ecore::ecorePackage::ESTRINGTOSTRINGMAPENTRY_ATTRIBUTE_KEY:
-			return eAny(getKey()); //490
+			return eAny(getKey()); //500
 		case ecore::ecorePackage::ESTRINGTOSTRINGMAPENTRY_ATTRIBUTE_VALUE:
-			return eAny(getValue()); //491
+			return eAny(getValue()); //501
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
 }
@@ -268,9 +268,9 @@ bool EStringToStringMapEntryImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case ecore::ecorePackage::ESTRINGTOSTRINGMAPENTRY_ATTRIBUTE_KEY:
-			return getKey() != ""; //490
+			return getKey() != ""; //500
 		case ecore::ecorePackage::ESTRINGTOSTRINGMAPENTRY_ATTRIBUTE_VALUE:
-			return getValue() != ""; //491
+			return getValue() != ""; //501
 	}
 	return ecore::EObjectImpl::internalEIsSet(featureID);
 }
@@ -283,14 +283,14 @@ bool EStringToStringMapEntryImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::string _key = newValue->get<std::string>();
-			setKey(_key); //490
+			setKey(_key); //500
 			return true;
 		}
 		case ecore::ecorePackage::ESTRINGTOSTRINGMAPENTRY_ATTRIBUTE_VALUE:
 		{
 			// BOOST CAST
 			std::string _value = newValue->get<std::string>();
-			setValue(_value); //491
+			setValue(_value); //501
 			return true;
 		}
 	}

@@ -32,12 +32,12 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
+#include "fUML/Semantics/Loci/LociFactory.hpp"
+#include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
 #include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
-#include "fUML/Semantics/Values/ValuesFactory.hpp"
-#include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "uml/umlFactory.hpp"
-#include "fUML/Semantics/Loci/LociFactory.hpp"
+#include "fUML/Semantics/Values/ValuesFactory.hpp"
 
 #include "ocl/Evaluations/EvalEnvironment.hpp"
 #include "fUML/Semantics/Loci/Locus.hpp"
@@ -273,10 +273,10 @@ Any AssociationEndCallExpEvalImpl::eGet(int featureID, bool resolve, bool coreTy
 	switch(featureID)
 	{
 		case ocl::Evaluations::EvaluationsPackage::ASSOCIATIONENDCALLEXPEVAL_ATTRIBUTE_REFERREDASSOCIATIONEND:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getReferredAssociationEnd();
-				return eAny(returnValue); //49
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getReferredAssociationEnd();
+			return eAny(returnValue); //59
+		}
 	}
 	return NavigationCallExpEvalImpl::eGet(featureID, resolve, coreType);
 }
@@ -286,7 +286,7 @@ bool AssociationEndCallExpEvalImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case ocl::Evaluations::EvaluationsPackage::ASSOCIATIONENDCALLEXPEVAL_ATTRIBUTE_REFERREDASSOCIATIONEND:
-			return getReferredAssociationEnd() != nullptr; //49
+			return getReferredAssociationEnd() != nullptr; //59
 	}
 	return NavigationCallExpEvalImpl::internalEIsSet(featureID);
 }
@@ -300,7 +300,7 @@ bool AssociationEndCallExpEvalImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> _referredAssociationEnd = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::StringValue>(_temp);
-			setReferredAssociationEnd(_referredAssociationEnd); //49
+			setReferredAssociationEnd(_referredAssociationEnd); //59
 			return true;
 		}
 	}

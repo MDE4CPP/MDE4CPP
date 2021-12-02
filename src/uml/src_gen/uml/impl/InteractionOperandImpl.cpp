@@ -478,10 +478,10 @@ Any InteractionOperandImpl::eGet(int featureID, bool resolve, bool coreType) con
 			return eAny(tempList); //12219			
 		}
 		case uml::umlPackage::INTERACTIONOPERAND_ATTRIBUTE_GUARD:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getGuard();
-				return eAny(returnValue); //12220
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getGuard();
+			return eAny(returnValue); //12220
+		}
 	}
 	Any result;
 	result = InteractionFragmentImpl::eGet(featureID, resolve, coreType);

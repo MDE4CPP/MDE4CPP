@@ -32,10 +32,10 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "uml/umlFactory.hpp"
 #include "ecore/ecoreFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
+#include "uml/umlFactory.hpp"
 
 #include "ocl/Expressions/CallExp.hpp"
 #include "ocl/Expressions/CollectionRange.hpp"
@@ -408,10 +408,10 @@ Any StateExpImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case ocl::Expressions::ExpressionsPackage::STATEEXP_ATTRIBUTE_REFERREDSTATE:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getReferredState();
-				return eAny(returnValue); //7922
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getReferredState();
+			return eAny(returnValue); //8022
+		}
 	}
 	return OclExpressionImpl::eGet(featureID, resolve, coreType);
 }
@@ -421,7 +421,7 @@ bool StateExpImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case ocl::Expressions::ExpressionsPackage::STATEEXP_ATTRIBUTE_REFERREDSTATE:
-			return getReferredState() != nullptr; //7922
+			return getReferredState() != nullptr; //8022
 	}
 	return OclExpressionImpl::internalEIsSet(featureID);
 }
@@ -435,7 +435,7 @@ bool StateExpImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::State> _referredState = std::dynamic_pointer_cast<uml::State>(_temp);
-			setReferredState(_referredState); //7922
+			setReferredState(_referredState); //8022
 			return true;
 		}
 	}

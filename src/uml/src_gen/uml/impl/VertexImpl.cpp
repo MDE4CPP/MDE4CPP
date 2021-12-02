@@ -344,10 +344,10 @@ Any VertexImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::VERTEX_ATTRIBUTE_CONTAINER:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getContainer().lock();
-				return eAny(returnValue); //2549
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getContainer().lock();
+			return eAny(returnValue); //2549
+		}
 		case uml::umlPackage::VERTEX_ATTRIBUTE_INCOMING:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());

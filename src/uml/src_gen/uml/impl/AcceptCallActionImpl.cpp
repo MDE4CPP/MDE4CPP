@@ -412,10 +412,10 @@ Any AcceptCallActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::ACCEPTCALLACTION_ATTRIBUTE_RETURNINFORMATION:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getReturnInformation();
-				return eAny(returnValue); //230
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getReturnInformation();
+			return eAny(returnValue); //230
+		}
 	}
 	return AcceptEventActionImpl::eGet(featureID, resolve, coreType);
 }

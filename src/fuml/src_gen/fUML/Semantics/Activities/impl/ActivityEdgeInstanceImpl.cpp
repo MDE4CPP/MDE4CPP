@@ -35,8 +35,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "uml/umlFactory.hpp"
+#include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 
 #include "uml/ActivityEdge.hpp"
 #include "fUML/Semantics/Activities/ActivityNodeActivation.hpp"
@@ -45,8 +45,8 @@
 #include "fUML/Semantics/Activities/Token.hpp"
 
 //Factories an Package includes
-#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "uml/umlPackage.hpp"
 
@@ -503,15 +503,15 @@ Any ActivityEdgeInstanceImpl::eGet(int featureID, bool resolve, bool coreType) c
 	switch(featureID)
 	{
 		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYEDGEINSTANCE_ATTRIBUTE_EDGE:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getEdge();
-				return eAny(returnValue); //60
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getEdge();
+			return eAny(returnValue); //60
+		}
 		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYEDGEINSTANCE_ATTRIBUTE_GROUP:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getGroup().lock();
-				return eAny(returnValue); //64
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getGroup().lock();
+			return eAny(returnValue); //64
+		}
 		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYEDGEINSTANCE_ATTRIBUTE_OFFERS:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
@@ -525,15 +525,15 @@ Any ActivityEdgeInstanceImpl::eGet(int featureID, bool resolve, bool coreType) c
 			return eAny(tempList); //63			
 		}
 		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYEDGEINSTANCE_ATTRIBUTE_SOURCE:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getSource().lock();
-				return eAny(returnValue); //61
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getSource().lock();
+			return eAny(returnValue); //61
+		}
 		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYEDGEINSTANCE_ATTRIBUTE_TARGET:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getTarget().lock();
-				return eAny(returnValue); //62
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getTarget().lock();
+			return eAny(returnValue); //62
+		}
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
 }

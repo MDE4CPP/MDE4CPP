@@ -450,10 +450,10 @@ Any LoopExpImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case ocl::Expressions::ExpressionsPackage::LOOPEXP_ATTRIBUTE_BODY:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getBody();
-				return eAny(returnValue); //4623
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getBody();
+			return eAny(returnValue); //4723
+		}
 		case ocl::Expressions::ExpressionsPackage::LOOPEXP_ATTRIBUTE_ITERATOR:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
@@ -464,7 +464,7 @@ Any LoopExpImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //4624			
+			return eAny(tempList); //4724			
 		}
 	}
 	return CallExpImpl::eGet(featureID, resolve, coreType);
@@ -475,9 +475,9 @@ bool LoopExpImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case ocl::Expressions::ExpressionsPackage::LOOPEXP_ATTRIBUTE_BODY:
-			return getBody() != nullptr; //4623
+			return getBody() != nullptr; //4723
 		case ocl::Expressions::ExpressionsPackage::LOOPEXP_ATTRIBUTE_ITERATOR:
-			return getIterator() != nullptr; //4624
+			return getIterator() != nullptr; //4724
 	}
 	return CallExpImpl::internalEIsSet(featureID);
 }
@@ -491,7 +491,7 @@ bool LoopExpImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<ocl::Expressions::OclExpression> _body = std::dynamic_pointer_cast<ocl::Expressions::OclExpression>(_temp);
-			setBody(_body); //4623
+			setBody(_body); //4723
 			return true;
 		}
 		case ocl::Expressions::ExpressionsPackage::LOOPEXP_ATTRIBUTE_ITERATOR:

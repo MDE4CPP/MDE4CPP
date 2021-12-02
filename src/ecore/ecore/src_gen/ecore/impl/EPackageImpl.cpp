@@ -124,9 +124,9 @@ EPackageImpl& EPackageImpl::operator=(const EPackageImpl & obj)
 		#endif
 		
 		/*Subset*/
-		getEClassifiers()->initSubset(getEContens());
+		getEClassifiers()->initSubset(getEContentUnion());
 		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_eClassifiers - Subset<ecore::EClassifier, ecore::EObject >(getEContens())" << std::endl;
+			std::cout << "Initialising value Subset: " << "m_eClassifiers - Subset<ecore::EClassifier, ecore::EObject >(getEContentUnion())" << std::endl;
 		#endif
 		
 
@@ -166,9 +166,9 @@ EPackageImpl& EPackageImpl::operator=(const EPackageImpl & obj)
 		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr eSubpackages."<< std::endl;)
 	}
 	/*Subset*/
-	getEClassifiers()->initSubset(getEContens());
+	getEClassifiers()->initSubset(getEContentUnion());
 	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Initialising value Subset: " << "m_eClassifiers - Subset<ecore::EClassifier, ecore::EObject >(getEContens())" << std::endl;
+		std::cout << "Initialising value Subset: " << "m_eClassifiers - Subset<ecore::EClassifier, ecore::EObject >(getEContentUnion())" << std::endl;
 	#endif
 	
 	
@@ -242,9 +242,9 @@ std::shared_ptr<Subset<ecore::EClassifier, ecore::EObject>> EPackageImpl::getECl
 		#endif
 		
 		/*Subset*/
-		getEClassifiers()->initSubset(getEContens());
+		getEClassifiers()->initSubset(getEContentUnion());
 		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_eClassifiers - Subset<ecore::EClassifier, ecore::EObject >(getEContens())" << std::endl;
+			std::cout << "Initialising value Subset: " << "m_eClassifiers - Subset<ecore::EClassifier, ecore::EObject >(getEContentUnion())" << std::endl;
 		#endif
 		
 	}
@@ -283,19 +283,19 @@ std::weak_ptr<ecore::EPackage> EPackageImpl::getESuperPackage() const
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<Union<ecore::EObject>> EPackageImpl::getEContens() const
+std::shared_ptr<Union<ecore::EObject>> EPackageImpl::getEContentUnion() const
 {
-	if(m_eContens == nullptr)
+	if(m_eContentUnion == nullptr)
 	{
 		/*Union*/
-		m_eContens.reset(new Union<ecore::EObject>());
+		m_eContentUnion.reset(new Union<ecore::EObject>());
 			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_eContens - Union<ecore::EObject>()" << std::endl;
+			std::cout << "Initialising Union: " << "m_eContentUnion - Union<ecore::EObject>()" << std::endl;
 		#endif
 		
 		
 	}
-	return m_eContens;
+	return m_eContentUnion;
 }
 
 //*********************************
@@ -511,13 +511,13 @@ Any EPackageImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //418			
+			return eAny(tempList); //428			
 		}
 		case ecore::ecorePackage::EPACKAGE_ATTRIBUTE_EFACTORYINSTANCE:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getEFactoryInstance();
-				return eAny(returnValue); //417
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getEFactoryInstance();
+			return eAny(returnValue); //427
+		}
 		case ecore::ecorePackage::EPACKAGE_ATTRIBUTE_ESUBPACKAGES:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
@@ -528,17 +528,17 @@ Any EPackageImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //419			
+			return eAny(tempList); //429			
 		}
 		case ecore::ecorePackage::EPACKAGE_ATTRIBUTE_ESUPERPACKAGE:
-			{
-				std::shared_ptr<ecore::EObject> returnValue=getESuperPackage().lock();
-				return eAny(returnValue); //4110
-			}
+		{
+			std::shared_ptr<ecore::EObject> returnValue=getESuperPackage().lock();
+			return eAny(returnValue); //4210
+		}
 		case ecore::ecorePackage::EPACKAGE_ATTRIBUTE_NSPREFIX:
-			return eAny(getNsPrefix()); //416
+			return eAny(getNsPrefix()); //426
 		case ecore::ecorePackage::EPACKAGE_ATTRIBUTE_NSURI:
-			return eAny(getNsURI()); //415
+			return eAny(getNsURI()); //425
 	}
 	return ENamedElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -548,17 +548,17 @@ bool EPackageImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case ecore::ecorePackage::EPACKAGE_ATTRIBUTE_ECLASSIFIERS:
-			return getEClassifiers() != nullptr; //418
+			return getEClassifiers() != nullptr; //428
 		case ecore::ecorePackage::EPACKAGE_ATTRIBUTE_EFACTORYINSTANCE:
-			return getEFactoryInstance() != nullptr; //417
+			return getEFactoryInstance() != nullptr; //427
 		case ecore::ecorePackage::EPACKAGE_ATTRIBUTE_ESUBPACKAGES:
-			return getESubpackages() != nullptr; //419
+			return getESubpackages() != nullptr; //429
 		case ecore::ecorePackage::EPACKAGE_ATTRIBUTE_ESUPERPACKAGE:
-			return getESuperPackage().lock() != nullptr; //4110
+			return getESuperPackage().lock() != nullptr; //4210
 		case ecore::ecorePackage::EPACKAGE_ATTRIBUTE_NSPREFIX:
-			return getNsPrefix() != ""; //416
+			return getNsPrefix() != ""; //426
 		case ecore::ecorePackage::EPACKAGE_ATTRIBUTE_NSURI:
-			return getNsURI() != ""; //415
+			return getNsURI() != ""; //425
 	}
 	return ENamedElementImpl::internalEIsSet(featureID);
 }
@@ -608,7 +608,7 @@ bool EPackageImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<ecore::EFactory> _eFactoryInstance = std::dynamic_pointer_cast<ecore::EFactory>(_temp);
-			setEFactoryInstance(_eFactoryInstance); //417
+			setEFactoryInstance(_eFactoryInstance); //427
 			return true;
 		}
 		case ecore::ecorePackage::EPACKAGE_ATTRIBUTE_ESUBPACKAGES:
@@ -651,14 +651,14 @@ bool EPackageImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::string _nsPrefix = newValue->get<std::string>();
-			setNsPrefix(_nsPrefix); //416
+			setNsPrefix(_nsPrefix); //426
 			return true;
 		}
 		case ecore::ecorePackage::EPACKAGE_ATTRIBUTE_NSURI:
 		{
 			// BOOST CAST
 			std::string _nsURI = newValue->get<std::string>();
-			setNsURI(_nsURI); //415
+			setNsURI(_nsURI); //425
 			return true;
 		}
 	}
