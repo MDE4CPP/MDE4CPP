@@ -181,13 +181,15 @@ using namespace [anEClass.generateNamespaceDefinition()/];
 	if([att.name/]Container)
 	{
 		m_[att.name/].reset(new [att.generateStructuralFeatureType(false)/]());
-		int size = [att.name/]Container->size();
-		for(int i=0; i<size ; i++)
+		for(const std::shared_ptr<[att.eType.generateType(false)/]> it : *[att.name/]Container)
 		{
-			auto _[att.name/]=(*[att.name/]Container)['['/]i[']'/]; 	
-			if(nullptr != _[att.name/])
+			if(nullptr != it)
 			{
-				[att.GetterName()/]()->push_back(std::dynamic_pointer_cast<[att.generateStructuralFeatureType(true)/]>(_[att.name/]->copy()));
+				auto [att.name/]_copy=std::dynamic_pointer_cast<[att.generateStructuralFeatureType(true)/]>(it->copy()) 	
+				if(nullptr != [att.name/]_copy)
+				{
+					m_[att.name/]->push_back([att.name/]_copy);
+				}
 			}
 			else
 			{
@@ -203,13 +205,10 @@ using namespace [anEClass.generateNamespaceDefinition()/];
 	[att.generateStructuralFeatureType(true)/] [att.name/]List = obj.[att.GetterName()/]();
 	if([att.name/]List)
 	{	
-		[att.GetterName()/]().reset(new Bag<[att.eType.generateType(false)/]>());
-		Bag<[att.eType.generateType(false)/]>::iterator [att.name/]Iter = [att.name/]List->begin();
-		Bag<[att.eType.generateType(false)/]>::iterator [att.name/]End = [att.name/]List->end();
-		while ([att.name/]Iter != [att.name/]End) 
+		m_[att.name/].reset(new Bag<[att.eType.generateType(false)/]>());
+		for(const std::shared_ptr<[att.eType.generateType(false)/]> it: *[att.name/]List) 
 		{
-			[att.GetterName()/]()->push_back(*[att.name/]Iter);
-			[att.name/]Iter++;
+			m_[att.name/]->push_back(*it);
 		}
 	}
 	else
@@ -236,13 +235,11 @@ using namespace [anEClass.generateNamespaceDefinition()/];
 	[att.generateStructuralFeatureType(true)/] [att.name/]Container = [att.GetterName()/]();
 	if(nullptr != [att.name/]Container )
 	{
-		int size = [att.name/]Container->size();
-		for(int i=0; i<size ; i++)
+		for(const std::shared_ptr<[att.eType.generateType(false)/]> it:*[att.name/]Container )
 		{
-			auto _[att.name/]=(*[att.name/]Container)['['/]i[']'/];	
-			if(nullptr != _[att.name/])
+			if(nullptr != it)
 			{
-				[att.name/]Container->push_back(std::dynamic_pointer_cast<[att.eGenericType.eTypeArguments->first().eClassifier.transformType()/]>(_[att.name/]->copy()));
+				[att.name/]Container->push_back(std::dynamic_pointer_cast<[att.eGenericType.eTypeArguments->first().eClassifier.transformType()/]>(it->copy()));
 			}
 			else
 			{
@@ -287,14 +284,10 @@ using namespace [anEClass.generateNamespaceDefinition()/];
 	{
 		[ref.generateReferenceInit()/]
 		[ref.InitReferences()/]
-
-		Bag<[ref.eType.generateType(false)/]>::iterator [ref.name/]Iter = [ref.name/]List->begin();
-		Bag<[ref.eType.generateType(false)/]>::iterator [ref.name/]End = [ref.name/]List->end();
-		while ([ref.name/]Iter != [ref.name/]End) 
+		for(const std::shared_ptr<[ref.eType.generateType(false)/]> [ref.name/]indexElem: *[ref.name/]List) 
 		{
-			std::shared_ptr<[ref.eType.generateType(false)/]> temp = std::dynamic_pointer_cast<[ref.eType.generateType(false)/]>((*[ref.name/]Iter)->copy());
-			[ref.GetterName()/]()->push_back(temp);
-			[ref.name/]Iter++;
+			std::shared_ptr<[ref.eType.generateType(false)/]> temp = std::dynamic_pointer_cast<[ref.eType.generateType(false)/]>(([ref.name/]indexElem)->copy());
+			m_[ref.name/]->push_back(temp);
 		}
 	}
 	else
@@ -321,13 +314,11 @@ using namespace [anEClass.generateNamespaceDefinition()/];
 	[ref.generateReferenceType()/] [ref.name/]Container = [ref.GetterName()/]();
 	if(nullptr != [ref.name/]Container )
 	{
-		int size = [ref.name/]Container->size();
-		for(int i=0; i<size ; i++)
+		for(const std::shared_ptr<[ref.eType.generateType(false)/]> it : *[ref.name/]Container)
 		{
-			auto _[ref.name/]=(*[ref.name/]Container)['['/]i[']'/];
-			if(nullptr != _[ref.name/])
+			if(nullptr != it)
 			{
-				[ref.name/]Container->push_back(std::dynamic_pointer_cast<[ref.eType.oclAsType(ecore::EClass).eGenericSuperTypes->first().eTypeArguments->first().generateCppType(false)/]>(_[ref.name/]->copy()));
+				m_[ref.name/]->push_back(std::dynamic_pointer_cast<[ref.eType.oclAsType(ecore::EClass).eGenericSuperTypes->first().eTypeArguments->first().generateCppType(false)/]>(it->copy()));
 			}
 			else
 			{
@@ -368,13 +359,11 @@ using namespace [anEClass.generateNamespaceDefinition()/];
 	[ref.generateReferenceType()/] [ref.name/]Container = [ref.GetterName()/]();
 	if(nullptr != [ref.name/]Container )
 	{
-		int size = [ref.name/]Container->size();
-		for(int i=0; i<size ; i++)
+		for(const std::shared_ptr<[ref.eType.generateType(false)/]> it: *[ref.name/]Container)
 		{
-			auto _[ref.name/]=(*[ref.name/]Container)['['/]i[']'/];
-			if(nullptr != _[ref.name/])
+			if(nullptr != it)
 			{
-				[ref.name/]Container->push_back(std::dynamic_pointer_cast<[ref.eGenericType.eTypeArguments->first().eClassifier.transformType()/]>(_[ref.name/]->copy()));
+				m_[ref.name/]->push_back(std::dynamic_pointer_cast<[ref.eGenericType.eTypeArguments->first().eClassifier.transformType()/]>(it->copy()));
 			}
 			else
 			{
