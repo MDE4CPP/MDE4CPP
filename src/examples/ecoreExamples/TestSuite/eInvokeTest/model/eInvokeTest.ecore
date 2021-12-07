@@ -1,57 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ecore:EPackage
-    xmi:version="2.0"
-    xmlns:xmi="http://www.omg.org/XMI"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
-    name="eInvokeTest"
-    nsURI="http://sse.tu-ilmenau.de/eInvokeTest"
-    nsPrefix="eInvokeTest">
-  <eAnnotations
-      source="http://tu-ilmenau.de/see/prepareApplication">
-    <details
-        key="body"
-        value="&#x9;std::list&lt;std::shared_ptr&lt;Any>> arglist;&#xA;&#xA;&#x9;std::shared_ptr&lt;std::list&lt;std::shared_ptr&lt;Any>>> arglist_ptr&#xA;&#x9;  = std::make_shared&lt;std::list&lt;std::shared_ptr&lt;Any>>>();&#xA;&#xA;&#x9;std::shared_ptr&lt;std::shared_ptr&lt;AnyObject>> arg_1_ptr&#xA;&#x9;  = std::make_shared&lt;std::shared_ptr&lt;AnyObject>>(eAny(42));&#xA;&#x9;//std::cout &lt;&lt; &quot;Argument 1 (arg_1_ptr): &quot; &lt;&lt; arg_1_ptr->get()->get&lt;int>() &lt;&lt; std::endl;&#xA;&#x9;arglist_ptr->push_back(arg_1_ptr);&#xA;&#xA;&#xA;&#x9;std::shared_ptr&lt;ecore::EObject> t_EObject_ServiceA = eInvokeTestFactory::eInstance()->create(&quot;ServiceA&quot;);&#xA;&#x9;std::shared_ptr&lt;ecore::EOperation> t_EOperation_funcA2 = t_EObject_ServiceA->eClass()->getEOperation(eInvokeTestPackage::SERVICEA_OPERATION_FUNCA2_EINT);&#xA;&#xA;&#x9;try {&#xA;&#x9;&#x9;std::cout &lt;&lt; &quot;... call eInvoke on ServiceA::funcA2&quot; &lt;&lt; std::endl;&#xA;&#x9;&#x9;Any res = t_EObject_ServiceA->eInvoke(t_EOperation_funcA2, arglist_ptr);&#xA;&#x9;&#x9;std::cout &lt;&lt; &quot;Result: &quot; &lt;&lt; res->get&lt;int>() &lt;&lt; std::endl;&#xA;&#x9;} catch(...) {&#xA;&#x9;&#x9;// nothing here&#xA;&#x9;}"/>
-    <details
-        key="includes"
-        value="#include &quot;ecore/EClass.hpp&quot;"/>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="eInvokeTest" nsURI="http://sse.tu-ilmenau.de/eInvokeTest" nsPrefix="eInvokeTest">
+  <eAnnotations source="http://tu-ilmenau.de/see/prepareApplication">
+    <details key="body" value="std::shared_ptr&lt;eInvokeTestFactory> factory = eInvokeTestFactory::eInstance();&#xA;&#xA;&#x9;std::list&lt;std::shared_ptr&lt;Any>> arglist;&#xA;&#xA;&#x9;std::shared_ptr&lt;std::list&lt;Any>> arglist_ptr = std::make_shared&lt;std::list&lt;Any>>();&#xA;&#xA;&#x9;Any arg_1_ptr = eAny(42);&#xA;&#x9;//std::cout &lt;&lt; &quot;Argument 1 (arg_1_ptr): &quot; &lt;&lt; arg_1_ptr->get()->get&lt;int>() &lt;&lt; std::endl;&#xA;&#x9;arglist_ptr->push_back(arg_1_ptr);&#xA;&#xA;&#xA;&#x9;std::shared_ptr&lt;ecore::EObject> t_EObject_ServiceA = eInvokeTestFactory::eInstance()->create(&quot;ServiceA&quot;);&#xA;&#x9;std::shared_ptr&lt;ecore::EOperation> t_EOperation_funcA2 = t_EObject_ServiceA->eClass()->getEOperation(eInvokeTestPackage::SERVICEA_OPERATION_FUNCA2_EINT);&#xA;&#xA;&#x9;try {&#xA;&#x9;&#x9;std::cout &lt;&lt; &quot;... call eInvoke on ServiceA::funcA2&quot; &lt;&lt; std::endl;&#xA;&#x9;&#x9;Any res = t_EObject_ServiceA->eInvoke(t_EOperation_funcA2, arglist_ptr);&#xA;&#x9;&#x9;std::cout &lt;&lt; &quot;Result: &quot; &lt;&lt; res->get&lt;int>() &lt;&lt; std::endl;&#xA;&#x9;}&#xA;&#x9;catch(...)&#xA;&#x9;{&#xA;&#x9;&#x9;std::cout &lt;&lt; &quot;Error call ServiceA::funcA2. &quot; &lt;&lt; std::endl;&#xA;&#x9;}"/>
+    <details key="includes" value="#include &quot;ecore/EClass.hpp&quot;"/>
   </eAnnotations>
-  <eClassifiers
-      xsi:type="ecore:EClass"
-      name="ServiceBroker"/>
-  <eClassifiers
-      xsi:type="ecore:EClass"
-      name="ServiceA">
-    <eOperations
-        name="funcA1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
-      <eAnnotations
-          source="http://tu-ilmenau.de/see/codegen">
-        <details
-            key="body"
-            value="return 23;"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ServiceBroker"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ServiceA">
+    <eOperations name="funcA1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+        <details key="body" value="return 23;"/>
       </eAnnotations>
     </eOperations>
-    <eOperations
-        name="funcA2"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt">
-      <eAnnotations
-          source="http://tu-ilmenau.de/see/codegen">
-        <details
-            key="body"
-            value="std::cout &lt;&lt; __PRETTY_FUNCTION__  &lt;&lt; &quot;: parameter p1 = &quot; &lt;&lt; p1 &lt;&lt; std::endl;&#xA;return p1;&#xA;"/>
+    <eOperations name="funcA2" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt">
+      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+        <details key="body" value="std::cout &lt;&lt; __PRETTY_FUNCTION__  &lt;&lt; &quot;: parameter p1 = &quot; &lt;&lt; p1 &lt;&lt; std::endl;&#xA;return p1;&#xA;"/>
       </eAnnotations>
-      <eParameters
-          name="p1"
-          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+      <eParameters name="p1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
     </eOperations>
   </eClassifiers>
-  <eClassifiers
-      xsi:type="ecore:EClass"
-      name="ServiceB">
-    <eOperations
-        name="funcB1"/>
-    <eOperations
-        name="funcB2"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ServiceB">
+    <eOperations name="funcB1"/>
+    <eOperations name="funcB2"/>
   </eClassifiers>
 </ecore:EPackage>
