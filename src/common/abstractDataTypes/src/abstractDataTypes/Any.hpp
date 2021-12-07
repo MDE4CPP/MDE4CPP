@@ -46,7 +46,7 @@ class AnyObject
 			return m_isContainer;
 		}
 
-	private:
+	protected:
 		const long long m_typeID=0;
 		const bool m_isContainer=false;
 
@@ -76,6 +76,10 @@ class AnyObject
 					return m_value;
 				}
 
+				void set(T value)
+				{
+					m_value=value;
+				}
 			private:
 				T m_value;
 
