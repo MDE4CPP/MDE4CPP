@@ -208,7 +208,7 @@ using namespace [anEClass.generateNamespaceDefinition()/];
 		m_[att.name/].reset(new Bag<[att.eType.generateType(false)/]>());
 		for(const std::shared_ptr<[att.eType.generateType(false)/]> it: *[att.name/]List) 
 		{
-			m_[att.name/]->push_back(*it);
+			m_[att.name/]->push_back(it);
 		}
 	}
 	else
