@@ -34,6 +34,7 @@
 [if (anEDataType.oclIsUndefined())] void
 [else]
 	[if (anEDataType.eTypeArguments->notEmpty())] [anEDataType.generateGenericType(false)/]
+	[elseif (anEDataType.eTypeParameter->notEmpty())] [anEDataType.eTypeParameter.name/]
 	[elseif (anEDataType.eClassifier.oclIsKindOf(EDataType))][anEDataType.eClassifier.transformType()/]
 	[else] [if (pointer)]std::shared_ptr<[/if][anEDataType.eClassifier.transformType()/][if (pointer)]>[/if]
 [/if][/if]
@@ -49,7 +50,8 @@
 [/template]
 
 [template public generateGenericType(anEDataType : EGenericType, pointer:Boolean) post(trim())]
-[if (anEDataType.eClassifier.name = 'EJavaClass')] [anEDataType.eClassifier.transformType()/] 
+[if (anEDataType.eTypeParameter->notEmpty())] [anEDataType.eTypeParameter.name/]
+[elseif  (anEDataType.eClassifier.name = 'EJavaClass')] [anEDataType.eClassifier.transformType()/] 
 [else][anEDataType.eClassifier.transformType()/] <[for (g : EGenericType | anEDataType.eTypeArguments) separator(',')] [if (not (g.eClassifier.oclIsUndefined()) and (g.eClassifier.oclIsKindOf(ecore::EDataType)))][g.eClassifier.generateType(false)/][else][g.eClassifier.generateType(pointer)/][/if][/for]>[/if]
 [/template]
 
@@ -97,7 +99,7 @@
 [template public generateStructuralFeatureType(eAttribute : EStructuralFeature, pointer : Boolean) post(trim())]
 [if (eAttribute.hasKey(keyCPPType()))][eAttribute.valueKey(keyCPPType())/]
 [elseif (not(eAttribute.upperBound = 1))][if (pointer)]std::shared_ptr<[/if]Bag<[eAttribute.eGenericType.generateCppType(false)/]>[if (pointer)]>[/if]
-[elseif (eAttribute.eType.oclIsUndefined())][eAttribute.eGenericType.generateCppType(pointer)/]
+[elseif ((eAttribute.eGenericType.eTypeParameter->notEmpty()) or (eAttribute.eType.oclIsUndefined()))][eAttribute.eGenericType.generateCppType(pointer)/]
 [elseif ((eAttribute.eType.name ='EEList') 
 		or (eAttribute.eType.name ='ETreeIterator') )][if (pointer)]std::shared_ptr<[/if][eAttribute.eGenericType.generateCppTypeDeepPointer(true)/][if (pointer)]>[/if]
 [elseif ((eAttribute.eType.name ='EMap') and (eAttribute.ordered = true))][if (pointer)]std::shared_ptr<[/if][eAttribute.eGenericType.generateCppTypeDeepPointer(true)/][if (pointer)]>[/if] 
@@ -133,10 +135,11 @@
 	[elseif(eReference.hasSubset())]
         [if(pointer)]std::shared_ptr<[/if]Subset<[eReference.eGenericType.generateCppType(false)/], [generateSubsetType(eReference)/]>[if(pointer)]>[/if]
 	[elseif(eReference.isUnion())]
-        [if(pointer)]std::shared_ptr<[/if]Union<[eReference.eGenericType.generateCppType(false)/]>[if(pointer)]>[/if]
+       [if(pointer)]std::shared_ptr<[/if]Union<[eReference.eGenericType.generateCppType(false)/]>[if(pointer)]>[/if]
 	[else]
-        [if(pointer)]std::shared_ptr<[/if]Bag<[eReference.eGenericType.generateCppType(false)/]>[if(pointer)]>[/if]
+       [if(pointer)]std::shared_ptr<[/if]Bag<[eReference.eGenericType.generateCppType(false)/]>[if(pointer)]>[/if]
 	[/if]
+[elseif (eReference.eGenericType.eTypeParameter->notEmpty())] [eReference.eGenericType.eTypeParameter.name/]
 [elseif (eReference.eType.oclIsUndefined())][eReference.eGenericType.generateCppType(pointer)/]
 [elseif ((eReference.eType.name ='EEList') 
 		or (eReference.eType.name ='ETreeIterator') )] [if(pointer)][eReference.pointertype()/]<[/if][eReference.eGenericType.generateCppType(true)/][if(pointer)]>[/if]
@@ -189,6 +192,11 @@ std::shared_ptr
 		(bindingType.eClassifier.oclIsKindOf(EDataType))][bindingType.eClassifier.transformType()/][else]std::shared_ptr<[bindingType.eClassifier.transformType()/]>[/if][/for]
 [/template] 
 
+[template public transformTemplateSigniture(anGenericType: EGenericType) post(trim())]
+[for (templateTypeType : ETypeParameter | anGenericType.eTypeParameter) before('<') separator(',') after('>')]
+[templateTypeType.name/]
+[/for]
+[/template] 
 [template public transformTypeName(name: String) ? ((name = 'EBoolean') or (name = 'EBooleanObject') or (name = 'Boolean'))]
 bool
 [/template]
