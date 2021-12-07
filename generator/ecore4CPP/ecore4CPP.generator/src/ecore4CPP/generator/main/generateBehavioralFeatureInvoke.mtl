@@ -67,9 +67,8 @@ Any [aClass.name.toUpperFirst().concat('Impl')/]::eInvoke(int operationID, std::
   	switch(operationID)
 	{
 	[for (aOperation : EOperation | aClass.eOperations->reject(doNotGenerateEOperation())->asOrderedSet()->sortedBy(name))]
-		
 		[comment @see ecore4CPP::generator::main::generateOperation for ID calculation /]
-		// [aOperation.generateQualifiedNameWithSignature().generatePolynomialRollingHash()/]
+		// [aOperation.generateQualifiedNameWithSignature()/]: [aOperation.generateQualifiedNameWithSignature().generatePolynomialRollingHash()/]
 		case [aClass.ePackage.name/]Package::[aOperation.getStaticAttributeIDName()/]:
 		{
 		[let parameterList : OrderedSet(EParameter) = aOperation.eParameters->reject(doNotGenerateEParameter())]
@@ -83,17 +82,24 @@ Any [aClass.name.toUpperFirst().concat('Impl')/]::eInvoke(int operationID, std::
 			this->[aOperation.name.toString()/]([for (inPar : EParameter | aOperation.eParameters) separator (',')]incoming_param_[inPar.name/][/for]);
  		[else]
 			[comment Operation w/ return value /]
-			[if (aOperation.eType.oclIsKindOf(EClass))]
-				result = eAny(this->[aOperation.name.toString()/]([for (inPar : EParameter | aOperation.eParameters) separator (',')]incoming_param_[inPar.name/][/for]));
-			[else]
+			[if (aOperation.eType.oclIsKindOf(EDataType))] [comment Primitive Returntype/]
 				[if (aOperation.upperBound = 1)]
-					result = eAny(this->[aOperation.name.toString()/]([for (inPar : EParameter | aOperation.eParameters) separator (',')]incoming_param_[inPar.name/][/for]),0,false);
+			result = eAny(this->[aOperation.name.toString()/]([for (inPar : EParameter | aOperation.eParameters) separator (',')]incoming_param_[inPar.name/][/for]),0,false);
 				[else]
-					result = eAny(this->[aOperation.name.toString()/]([for (inPar : EParameter | aOperation.eParameters) separator (',')]incoming_param_[inPar.name/][/for]),0,true);
+			result = eAny(this->[aOperation.name.toString()/]([for (inPar : EParameter | aOperation.eParameters) separator (',')]incoming_param_[inPar.name/][/for]),0,true);
 				[/if]
+			[elseif (aOperation.eType.oclIsKindOf(EClass))] [comment Returntype Class/]
+				[if ((aOperation.upperBound = 1))]
+			result = eAny(this->[aOperation.name.toString()/]([for (inPar : EParameter | aOperation.eParameters) separator (',')]incoming_param_[inPar.name/][/for]), [aOperation.eType.ePackage.name/]Package::[aOperation.eType.oclAsType(EClass).getStaticAttributeIDName()/],false);
+				[else] [comment Returntype Bag<EObject>/]
+			[aOperation.generateOperationType()/] resultList = this->[aOperation.name.toString()/]([for (inPar : EParameter | aOperation.eParameters) separator (',')]incoming_param_[inPar.name/][/for]);
+			return eAny(resultList,[aOperation.eType.ePackage.name/]Package::[aOperation.eType.oclAsType(EClass).getStaticAttributeIDName()/],true);
+				[/if]
+			[else] [comment Unknown should be an EClass or EDataType /]
+			result = eAny(this->[aOperation.name.toString()/]([for (inPar : EParameter | aOperation.eParameters) separator (',')]incoming_param_[inPar.name/][/for]), 0,false);
 			[/if]
-		[/if]
 			break;
+		[/if]
 		}
 	[/for]
 
