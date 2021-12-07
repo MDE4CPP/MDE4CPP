@@ -52,8 +52,8 @@
 #include "fUML/Semantics/Activities/Token.hpp"
 
 //Factories an Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
 #include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
@@ -860,12 +860,10 @@ void ActivityNodeActivationImpl::saveContent(std::shared_ptr<persistence::interf
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> ActivityNodeActivationImpl::eStaticClass() const
 {
 	return fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getActivityNodeActivation_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -877,7 +875,7 @@ Any ActivityNodeActivationImpl::eGet(int featureID, bool resolve, bool coreType)
 		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYNODEACTIVATION_ATTRIBUTE_GROUP:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getGroup().lock();
-			return eAny(returnValue); //93
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //93
 		}
 		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYNODEACTIVATION_ATTRIBUTE_HELDTOKENS:
 		{
@@ -906,7 +904,7 @@ Any ActivityNodeActivationImpl::eGet(int featureID, bool resolve, bool coreType)
 		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYNODEACTIVATION_ATTRIBUTE_NODE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getNode();
-			return eAny(returnValue); //94
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //94
 		}
 		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYNODEACTIVATION_ATTRIBUTE_OUTGOINGEDGES:
 		{
@@ -921,7 +919,7 @@ Any ActivityNodeActivationImpl::eGet(int featureID, bool resolve, bool coreType)
 			return eAny(tempList); //90			
 		}
 		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYNODEACTIVATION_ATTRIBUTE_RUNNING:
-			return eAny(isRunning()); //95
+				return eAny(isRunning(),0,true); //95
 	}
 	return fUML::Semantics::Loci::SemanticVisitorImpl::eGet(featureID, resolve, coreType);
 }
@@ -1089,7 +1087,7 @@ bool ActivityNodeActivationImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ActivityNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any ActivityNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -1102,8 +1100,8 @@ Any ActivityNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::li
 			//Retrieve input parameter 'edge'
 			//parameter 0
 			std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance> incoming_param_edge;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_edge_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_edge = (*incoming_param_edge_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance> >();
+			std::list<Any>::const_iterator incoming_param_edge_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_edge = (*incoming_param_edge_arguments_citer)->get<std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance> >();
 			this->addIncomingEdge(incoming_param_edge);
 			break;
 		}
@@ -1114,8 +1112,8 @@ Any ActivityNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::li
 			//Retrieve input parameter 'edge'
 			//parameter 0
 			std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance> incoming_param_edge;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_edge_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_edge = (*incoming_param_edge_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance> >();
+			std::list<Any>::const_iterator incoming_param_edge_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_edge = (*incoming_param_edge_arguments_citer)->get<std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance> >();
 			this->addOutgoingEdge(incoming_param_edge);
 			break;
 		}
@@ -1126,8 +1124,8 @@ Any ActivityNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::li
 			//Retrieve input parameter 'token'
 			//parameter 0
 			std::shared_ptr<fUML::Semantics::Activities::Token> incoming_param_token;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_token_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_token = (*incoming_param_token_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::Activities::Token> >();
+			std::list<Any>::const_iterator incoming_param_token_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_token = (*incoming_param_token_arguments_citer)->get<std::shared_ptr<fUML::Semantics::Activities::Token> >();
 			this->addToken(incoming_param_token);
 			break;
 		}
@@ -1138,8 +1136,8 @@ Any ActivityNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::li
 			//Retrieve input parameter 'tokens'
 			//parameter 0
 			std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> incoming_param_tokens;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_tokens_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_tokens = (*incoming_param_tokens_arguments_citer)->get()->get<std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> >();
+			std::list<Any>::const_iterator incoming_param_tokens_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_tokens = (*incoming_param_tokens_arguments_citer)->get<std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> >();
 			this->addTokens(incoming_param_tokens);
 			break;
 		}
@@ -1171,8 +1169,8 @@ Any ActivityNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::li
 			//Retrieve input parameter 'incomingTokens'
 			//parameter 0
 			std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> incoming_param_incomingTokens;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_incomingTokens_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_incomingTokens = (*incoming_param_incomingTokens_arguments_citer)->get()->get<std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> >();
+			std::list<Any>::const_iterator incoming_param_incomingTokens_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_incomingTokens = (*incoming_param_incomingTokens_arguments_citer)->get<std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> >();
 			this->fire(incoming_param_incomingTokens);
 			break;
 		}
@@ -1180,21 +1178,21 @@ Any ActivityNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::li
 		// 2125708528
 		case ActivitiesPackage::ACTIVITYNODEACTIVATION_OPERATION_GETACTIVITYEXECUTION:
 		{
-			result = eAny(this->getActivityExecution());
+				result = eAny(this->getActivityExecution());
 			break;
 		}
 		
 		// 786203858
 		case ActivitiesPackage::ACTIVITYNODEACTIVATION_OPERATION_GETEXECUTIONCONTEXT:
 		{
-			result = eAny(this->getExecutionContext());
+				result = eAny(this->getExecutionContext());
 			break;
 		}
 		
 		// 1480581087
 		case ActivitiesPackage::ACTIVITYNODEACTIVATION_OPERATION_GETEXECUTIONLOCUS:
 		{
-			result = eAny(this->getExecutionLocus());
+				result = eAny(this->getExecutionLocus());
 			break;
 		}
 		
@@ -1204,30 +1202,30 @@ Any ActivityNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::li
 			//Retrieve input parameter 'node'
 			//parameter 0
 			std::shared_ptr<uml::ActivityNode> incoming_param_node;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_node_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_node = (*incoming_param_node_arguments_citer)->get()->get<std::shared_ptr<uml::ActivityNode> >();
-			result = eAny(this->getNodeActivation(incoming_param_node));
+			std::list<Any>::const_iterator incoming_param_node_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_node = (*incoming_param_node_arguments_citer)->get<std::shared_ptr<uml::ActivityNode> >();
+				result = eAny(this->getNodeActivation(incoming_param_node));
 			break;
 		}
 		
 		// 858692644
 		case ActivitiesPackage::ACTIVITYNODEACTIVATION_OPERATION_GETRUNNING:
 		{
-			result = eAny(this->getRunning());
+					result = eAny(this->getRunning(),0,false);
 			break;
 		}
 		
 		// 1779350108
 		case ActivitiesPackage::ACTIVITYNODEACTIVATION_OPERATION_GETTOKENS:
 		{
-			result = eAny(this->getTokens());
+				result = eAny(this->getTokens());
 			break;
 		}
 		
 		// 1093902867
 		case ActivitiesPackage::ACTIVITYNODEACTIVATION_OPERATION_ISREADY:
 		{
-			result = eAny(this->isReady());
+					result = eAny(this->isReady(),0,false);
 			break;
 		}
 		
@@ -1237,9 +1235,9 @@ Any ActivityNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::li
 			//Retrieve input parameter 'edgeInstances'
 			//parameter 0
 			std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance> incoming_param_edgeInstances;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_edgeInstances_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_edgeInstances = (*incoming_param_edgeInstances_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance> >();
-			result = eAny(this->isSourceFor(incoming_param_edgeInstances));
+			std::list<Any>::const_iterator incoming_param_edgeInstances_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_edgeInstances = (*incoming_param_edgeInstances_arguments_citer)->get<std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance> >();
+					result = eAny(this->isSourceFor(incoming_param_edgeInstances),0,false);
 			break;
 		}
 		
@@ -1256,9 +1254,9 @@ Any ActivityNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::li
 			//Retrieve input parameter 'token'
 			//parameter 0
 			std::shared_ptr<fUML::Semantics::Activities::Token> incoming_param_token;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_token_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_token = (*incoming_param_token_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::Activities::Token> >();
-			result = eAny(this->removeToken(incoming_param_token));
+			std::list<Any>::const_iterator incoming_param_token_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_token = (*incoming_param_token_arguments_citer)->get<std::shared_ptr<fUML::Semantics::Activities::Token> >();
+					result = eAny(this->removeToken(incoming_param_token),0,false);
 			break;
 		}
 		
@@ -1282,8 +1280,8 @@ Any ActivityNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::li
 			//Retrieve input parameter 'tokens'
 			//parameter 0
 			std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> incoming_param_tokens;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_tokens_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_tokens = (*incoming_param_tokens_arguments_citer)->get()->get<std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> >();
+			std::list<Any>::const_iterator incoming_param_tokens_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_tokens = (*incoming_param_tokens_arguments_citer)->get<std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> >();
 			this->sendOffers(incoming_param_tokens);
 			break;
 		}
@@ -1298,14 +1296,14 @@ Any ActivityNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::li
 		// 1366572667
 		case ActivitiesPackage::ACTIVITYNODEACTIVATION_OPERATION_TAKEOFFEREDTOKENS:
 		{
-			result = eAny(this->takeOfferedTokens());
+				result = eAny(this->takeOfferedTokens());
 			break;
 		}
 		
 		// 739906654
 		case ActivitiesPackage::ACTIVITYNODEACTIVATION_OPERATION_TAKETOKENS:
 		{
-			result = eAny(this->takeTokens());
+				result = eAny(this->takeTokens());
 			break;
 		}
 		
@@ -1329,7 +1327,6 @@ Any ActivityNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::li
 	return result;
 }
 
-
 std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> ActivityNodeActivationImpl::getThisActivityNodeActivationPtr() const
 {
 	return m_thisActivityNodeActivationPtr.lock();
@@ -1339,3 +1336,5 @@ void ActivityNodeActivationImpl::setThisActivityNodeActivationPtr(std::weak_ptr<
 	m_thisActivityNodeActivationPtr = thisActivityNodeActivationPtr;
 	setThisSemanticVisitorPtr(thisActivityNodeActivationPtr);
 }
+
+

@@ -293,7 +293,7 @@ void LiteralIntegerImpl::loadAttributes(std::shared_ptr<persistence::interfaces:
 		{
 			// this attribute is a 'int'
 			int value;
-			std::istringstream ( iter->second ) >> value;
+			std::istringstream(iter->second) >> value;
 			this->setValue(value);
 		}
 	}
@@ -359,12 +359,10 @@ void LiteralIntegerImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> LiteralIntegerImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getLiteralInteger_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -374,7 +372,7 @@ Any LiteralIntegerImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::LITERALINTEGER_ATTRIBUTE_VALUE:
-			return eAny(getValue()); //13815
+			return eAny(getValue(),0,true); //13815
 	}
 	return LiteralSpecificationImpl::eGet(featureID, resolve, coreType);
 }
@@ -408,24 +406,22 @@ bool LiteralIntegerImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any LiteralIntegerImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any LiteralIntegerImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
   	switch(operationID)
 	{
-		
-		// 1304183652
+		// uml::LiteralInteger::integerValue() : int: 1304183652
 		case umlPackage::LITERALINTEGER_OPERATION_INTEGERVALUE:
 		{
-			result = eAny(this->integerValue());
+			result = eAny(this->integerValue(),0,false);
 			break;
 		}
-		
-		// 1573689205
+		// uml::LiteralInteger::isComputable() : bool: 1573689205
 		case umlPackage::LITERALINTEGER_OPERATION_ISCOMPUTABLE:
 		{
-			result = eAny(this->isComputable());
+			result = eAny(this->isComputable(),0,false);
 			break;
 		}
 
@@ -442,7 +438,6 @@ Any LiteralIntegerImpl::eInvoke(int operationID, std::shared_ptr<std::list < std
 	return result;
 }
 
-
 std::shared_ptr<uml::LiteralInteger> LiteralIntegerImpl::getThisLiteralIntegerPtr() const
 {
 	return m_thisLiteralIntegerPtr.lock();
@@ -452,3 +447,5 @@ void LiteralIntegerImpl::setThisLiteralIntegerPtr(std::weak_ptr<uml::LiteralInte
 	m_thisLiteralIntegerPtr = thisLiteralIntegerPtr;
 	setThisLiteralSpecificationPtr(thisLiteralIntegerPtr);
 }
+
+

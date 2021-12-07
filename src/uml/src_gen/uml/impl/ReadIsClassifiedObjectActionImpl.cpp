@@ -529,12 +529,10 @@ void ReadIsClassifiedObjectActionImpl::saveContent(std::shared_ptr<persistence::
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> ReadIsClassifiedObjectActionImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getReadIsClassifiedObjectAction_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -546,19 +544,19 @@ Any ReadIsClassifiedObjectActionImpl::eGet(int featureID, bool resolve, bool cor
 		case uml::umlPackage::READISCLASSIFIEDOBJECTACTION_ATTRIBUTE_CLASSIFIER:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getClassifier();
-			return eAny(returnValue); //19427
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //19427
 		}
 		case uml::umlPackage::READISCLASSIFIEDOBJECTACTION_ATTRIBUTE_ISDIRECT:
-			return eAny(getIsDirect()); //19428
+			return eAny(getIsDirect(),0,true); //19428
 		case uml::umlPackage::READISCLASSIFIEDOBJECTACTION_ATTRIBUTE_OBJECT:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getObject();
-			return eAny(returnValue); //19429
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //19429
 		}
 		case uml::umlPackage::READISCLASSIFIEDOBJECTACTION_ATTRIBUTE_RESULT:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getResult();
-			return eAny(returnValue); //19430
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //19430
 		}
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
@@ -623,78 +621,74 @@ bool ReadIsClassifiedObjectActionImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ReadIsClassifiedObjectActionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any ReadIsClassifiedObjectActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
   	switch(operationID)
 	{
-		
-		// 1594582560
+		// uml::ReadIsClassifiedObjectAction::boolean_result(Any, std::map) : bool: 1594582560
 		case umlPackage::READISCLASSIFIEDOBJECTACTION_OPERATION_BOOLEAN_RESULT_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->boolean_result(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->boolean_result(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		
-		// 2021986095
+		// uml::ReadIsClassifiedObjectAction::multiplicity_of_input(Any, std::map) : bool: 2021986095
 		case umlPackage::READISCLASSIFIEDOBJECTACTION_OPERATION_MULTIPLICITY_OF_INPUT_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->multiplicity_of_input(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->multiplicity_of_input(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		
-		// 2130862958
+		// uml::ReadIsClassifiedObjectAction::multiplicity_of_output(Any, std::map) : bool: 2130862958
 		case umlPackage::READISCLASSIFIEDOBJECTACTION_OPERATION_MULTIPLICITY_OF_OUTPUT_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->multiplicity_of_output(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->multiplicity_of_output(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		
-		// 990896155
+		// uml::ReadIsClassifiedObjectAction::no_type(Any, std::map) : bool: 990896155
 		case umlPackage::READISCLASSIFIEDOBJECTACTION_OPERATION_NO_TYPE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->no_type(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->no_type(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
 
@@ -711,7 +705,6 @@ Any ReadIsClassifiedObjectActionImpl::eInvoke(int operationID, std::shared_ptr<s
 	return result;
 }
 
-
 std::shared_ptr<uml::ReadIsClassifiedObjectAction> ReadIsClassifiedObjectActionImpl::getThisReadIsClassifiedObjectActionPtr() const
 {
 	return m_thisReadIsClassifiedObjectActionPtr.lock();
@@ -721,3 +714,5 @@ void ReadIsClassifiedObjectActionImpl::setThisReadIsClassifiedObjectActionPtr(st
 	m_thisReadIsClassifiedObjectActionPtr = thisReadIsClassifiedObjectActionPtr;
 	setThisActionPtr(thisReadIsClassifiedObjectActionPtr);
 }
+
+

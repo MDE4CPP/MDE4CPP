@@ -385,12 +385,10 @@ void BooleanLiteralExpImpl::saveContent(std::shared_ptr<persistence::interfaces:
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> BooleanLiteralExpImpl::eStaticClass() const
 {
 	return ocl::Expressions::ExpressionsPackage::eInstance()->getBooleanLiteralExp_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -400,7 +398,7 @@ Any BooleanLiteralExpImpl::eGet(int featureID, bool resolve, bool coreType) cons
 	switch(featureID)
 	{
 		case ocl::Expressions::ExpressionsPackage::BOOLEANLITERALEXP_ATTRIBUTE_BOOLEANSYMBOL:
-			return eAny(getBooleanSymbol()); //923
+				return eAny(getBooleanSymbol(),0,true); //923
 	}
 	return PrimitiveLiteralExpImpl::eGet(featureID, resolve, coreType);
 }
@@ -434,7 +432,7 @@ bool BooleanLiteralExpImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any BooleanLiteralExpImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any BooleanLiteralExpImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -454,7 +452,6 @@ Any BooleanLiteralExpImpl::eInvoke(int operationID, std::shared_ptr<std::list < 
 	return result;
 }
 
-
 std::shared_ptr<ocl::Expressions::BooleanLiteralExp> BooleanLiteralExpImpl::getThisBooleanLiteralExpPtr() const
 {
 	return m_thisBooleanLiteralExpPtr.lock();
@@ -464,3 +461,5 @@ void BooleanLiteralExpImpl::setThisBooleanLiteralExpPtr(std::weak_ptr<ocl::Expre
 	m_thisBooleanLiteralExpPtr = thisBooleanLiteralExpPtr;
 	setThisPrimitiveLiteralExpPtr(thisBooleanLiteralExpPtr);
 }
+
+

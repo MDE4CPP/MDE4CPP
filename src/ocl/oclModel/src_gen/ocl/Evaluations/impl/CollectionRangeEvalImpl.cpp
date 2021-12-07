@@ -31,10 +31,10 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Loci/LociFactory.hpp"
-#include "ocl/Evaluations/EvaluationsFactory.hpp"
-#include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Values/ValuesFactory.hpp"
+#include "uml/umlFactory.hpp"
+#include "ocl/Evaluations/EvaluationsFactory.hpp"
+#include "fUML/Semantics/Loci/LociFactory.hpp"
 
 #include "ocl/Evaluations/CollectionLiteralPartEval.hpp"
 #include "fUML/Semantics/Loci/Locus.hpp"
@@ -276,12 +276,10 @@ void CollectionRangeEvalImpl::saveContent(std::shared_ptr<persistence::interface
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> CollectionRangeEvalImpl::eStaticClass() const
 {
 	return ocl::Evaluations::EvaluationsPackage::eInstance()->getCollectionRangeEval_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -293,12 +291,12 @@ Any CollectionRangeEvalImpl::eGet(int featureID, bool resolve, bool coreType) co
 		case ocl::Evaluations::EvaluationsPackage::COLLECTIONRANGEEVAL_ATTRIBUTE_FIRST:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getFirst();
-			return eAny(returnValue); //203
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //203
 		}
 		case ocl::Evaluations::EvaluationsPackage::COLLECTIONRANGEEVAL_ATTRIBUTE_LAST:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getLast();
-			return eAny(returnValue); //204
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //204
 		}
 	}
 	return CollectionLiteralPartEvalImpl::eGet(featureID, resolve, coreType);
@@ -344,7 +342,7 @@ bool CollectionRangeEvalImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any CollectionRangeEvalImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any CollectionRangeEvalImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -364,7 +362,6 @@ Any CollectionRangeEvalImpl::eInvoke(int operationID, std::shared_ptr<std::list 
 	return result;
 }
 
-
 std::shared_ptr<ocl::Evaluations::CollectionRangeEval> CollectionRangeEvalImpl::getThisCollectionRangeEvalPtr() const
 {
 	return m_thisCollectionRangeEvalPtr.lock();
@@ -374,3 +371,5 @@ void CollectionRangeEvalImpl::setThisCollectionRangeEvalPtr(std::weak_ptr<ocl::E
 	m_thisCollectionRangeEvalPtr = thisCollectionRangeEvalPtr;
 	setThisCollectionLiteralPartEvalPtr(thisCollectionRangeEvalPtr);
 }
+
+

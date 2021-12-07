@@ -504,12 +504,10 @@ void ReclassifyObjectActionImpl::saveContent(std::shared_ptr<persistence::interf
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> ReclassifyObjectActionImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getReclassifyObjectAction_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -519,35 +517,19 @@ Any ReclassifyObjectActionImpl::eGet(int featureID, bool resolve, bool coreType)
 	switch(featureID)
 	{
 		case uml::umlPackage::RECLASSIFYOBJECTACTION_ATTRIBUTE_ISREPLACEALL:
-			return eAny(getIsReplaceAll()); //20327
+			return eAny(getIsReplaceAll(),0,true); //20327
 		case uml::umlPackage::RECLASSIFYOBJECTACTION_ATTRIBUTE_NEWCLASSIFIER:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Classifier>::iterator iter = getNewClassifier()->begin();
-			Bag<uml::Classifier>::iterator end = getNewClassifier()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //20328			
+			return eAnyBag(getNewClassifier(),845259359); //20328
 		}
 		case uml::umlPackage::RECLASSIFYOBJECTACTION_ATTRIBUTE_OBJECT:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getObject();
-			return eAny(returnValue); //20329
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //20329
 		}
 		case uml::umlPackage::RECLASSIFYOBJECTACTION_ATTRIBUTE_OLDCLASSIFIER:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Classifier>::iterator iter = getOldClassifier()->begin();
-			Bag<uml::Classifier>::iterator end = getOldClassifier()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //20330			
+			return eAnyBag(getOldClassifier(),845259359); //20330
 		}
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
@@ -583,36 +565,37 @@ bool ReclassifyObjectActionImpl::eSet(int featureID, Any newValue)
 		case uml::umlPackage::RECLASSIFYOBJECTACTION_ATTRIBUTE_NEWCLASSIFIER:
 		{
 			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::Classifier>> newClassifierList(new Bag<uml::Classifier>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
+			if((newValue->isContainer()) && (uml::umlPackage::CLASSIFIER_CLASS ==newValue->getTypeId()))
 			{
-				newClassifierList->add(std::dynamic_pointer_cast<uml::Classifier>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::Classifier>::iterator iterNewClassifier = getNewClassifier()->begin();
-			Bag<uml::Classifier>::iterator endNewClassifier = getNewClassifier()->end();
-			while (iterNewClassifier != endNewClassifier)
-			{
-				if (newClassifierList->find(*iterNewClassifier) == -1)
+				try
 				{
-					getNewClassifier()->erase(*iterNewClassifier);
+					std::shared_ptr<Bag<uml::Classifier>> newClassifierList= newValue->get<std::shared_ptr<Bag<uml::Classifier>>>();
+					std::shared_ptr<Bag<uml::Classifier>> _newClassifier=getNewClassifier();
+					for(const std::shared_ptr<uml::Classifier> indexNewClassifier: *_newClassifier)
+					{
+						if (newClassifierList->find(indexNewClassifier) == -1)
+						{
+							_newClassifier->erase(indexNewClassifier);
+						}
+					}
+
+					for(const std::shared_ptr<uml::Classifier> indexNewClassifier: *newClassifierList)
+					{
+						if (_newClassifier->find(indexNewClassifier) == -1)
+						{
+							_newClassifier->add(indexNewClassifier);
+						}
+					}
 				}
-				iterNewClassifier++;
-			}
- 
-			iterNewClassifier = newClassifierList->begin();
-			endNewClassifier = newClassifierList->end();
-			while (iterNewClassifier != endNewClassifier)
-			{
-				if (getNewClassifier()->find(*iterNewClassifier) == -1)
+				catch(...)
 				{
-					getNewClassifier()->add(*iterNewClassifier);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterNewClassifier++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}
@@ -627,36 +610,37 @@ bool ReclassifyObjectActionImpl::eSet(int featureID, Any newValue)
 		case uml::umlPackage::RECLASSIFYOBJECTACTION_ATTRIBUTE_OLDCLASSIFIER:
 		{
 			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::Classifier>> oldClassifierList(new Bag<uml::Classifier>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
+			if((newValue->isContainer()) && (uml::umlPackage::CLASSIFIER_CLASS ==newValue->getTypeId()))
 			{
-				oldClassifierList->add(std::dynamic_pointer_cast<uml::Classifier>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::Classifier>::iterator iterOldClassifier = getOldClassifier()->begin();
-			Bag<uml::Classifier>::iterator endOldClassifier = getOldClassifier()->end();
-			while (iterOldClassifier != endOldClassifier)
-			{
-				if (oldClassifierList->find(*iterOldClassifier) == -1)
+				try
 				{
-					getOldClassifier()->erase(*iterOldClassifier);
+					std::shared_ptr<Bag<uml::Classifier>> oldClassifierList= newValue->get<std::shared_ptr<Bag<uml::Classifier>>>();
+					std::shared_ptr<Bag<uml::Classifier>> _oldClassifier=getOldClassifier();
+					for(const std::shared_ptr<uml::Classifier> indexOldClassifier: *_oldClassifier)
+					{
+						if (oldClassifierList->find(indexOldClassifier) == -1)
+						{
+							_oldClassifier->erase(indexOldClassifier);
+						}
+					}
+
+					for(const std::shared_ptr<uml::Classifier> indexOldClassifier: *oldClassifierList)
+					{
+						if (_oldClassifier->find(indexOldClassifier) == -1)
+						{
+							_oldClassifier->add(indexOldClassifier);
+						}
+					}
 				}
-				iterOldClassifier++;
-			}
- 
-			iterOldClassifier = oldClassifierList->begin();
-			endOldClassifier = oldClassifierList->end();
-			while (iterOldClassifier != endOldClassifier)
-			{
-				if (getOldClassifier()->find(*iterOldClassifier) == -1)
+				catch(...)
 				{
-					getOldClassifier()->add(*iterOldClassifier);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterOldClassifier++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}
@@ -668,61 +652,58 @@ bool ReclassifyObjectActionImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ReclassifyObjectActionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any ReclassifyObjectActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
   	switch(operationID)
 	{
-		
-		// 1111669922
+		// uml::ReclassifyObjectAction::classifier_not_abstract(Any, std::map) : bool: 1111669922
 		case umlPackage::RECLASSIFYOBJECTACTION_OPERATION_CLASSIFIER_NOT_ABSTRACT_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->classifier_not_abstract(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->classifier_not_abstract(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		
-		// 1910336897
+		// uml::ReclassifyObjectAction::input_pin(Any, std::map) : bool: 1910336897
 		case umlPackage::RECLASSIFYOBJECTACTION_OPERATION_INPUT_PIN_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->input_pin(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->input_pin(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		
-		// 1719223328
+		// uml::ReclassifyObjectAction::multiplicity(Any, std::map) : bool: 1719223328
 		case umlPackage::RECLASSIFYOBJECTACTION_OPERATION_MULTIPLICITY_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->multiplicity(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->multiplicity(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
 
@@ -739,7 +720,6 @@ Any ReclassifyObjectActionImpl::eInvoke(int operationID, std::shared_ptr<std::li
 	return result;
 }
 
-
 std::shared_ptr<uml::ReclassifyObjectAction> ReclassifyObjectActionImpl::getThisReclassifyObjectActionPtr() const
 {
 	return m_thisReclassifyObjectActionPtr.lock();
@@ -749,3 +729,5 @@ void ReclassifyObjectActionImpl::setThisReclassifyObjectActionPtr(std::weak_ptr<
 	m_thisReclassifyObjectActionPtr = thisReclassifyObjectActionPtr;
 	setThisActionPtr(thisReclassifyObjectActionPtr);
 }
+
+

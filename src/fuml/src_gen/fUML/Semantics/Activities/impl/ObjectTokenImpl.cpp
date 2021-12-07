@@ -33,16 +33,16 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Values/ValuesFactory.hpp"
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
+#include "fUML/Semantics/Values/ValuesFactory.hpp"
 
 #include "fUML/Semantics/Activities/ActivityNodeActivation.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
 #include "fUML/Semantics/Values/Value.hpp"
 
 //Factories an Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "fUML/Semantics/Values/ValuesPackage.hpp"
 
@@ -276,12 +276,10 @@ void ObjectTokenImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> ObjectTokenImpl::eStaticClass() const
 {
 	return fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getObjectToken_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -293,7 +291,7 @@ Any ObjectTokenImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case fUML::Semantics::Activities::ActivitiesPackage::OBJECTTOKEN_ATTRIBUTE_VALUE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getValue();
-			return eAny(returnValue); //832
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //832
 		}
 	}
 	return TokenImpl::eGet(featureID, resolve, coreType);
@@ -329,7 +327,7 @@ bool ObjectTokenImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ObjectTokenImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any ObjectTokenImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -339,7 +337,7 @@ Any ObjectTokenImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::s
 		// 2097614011
 		case ActivitiesPackage::OBJECTTOKEN_OPERATION__COPY:
 		{
-			result = eAny(this->_copy());
+				result = eAny(this->_copy());
 			break;
 		}
 		
@@ -349,16 +347,16 @@ Any ObjectTokenImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::s
 			//Retrieve input parameter 'other'
 			//parameter 0
 			std::shared_ptr<fUML::Semantics::Activities::Token> incoming_param_other;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_other_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_other = (*incoming_param_other_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::Activities::Token> >();
-			result = eAny(this->equals(incoming_param_other));
+			std::list<Any>::const_iterator incoming_param_other_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_other = (*incoming_param_other_arguments_citer)->get<std::shared_ptr<fUML::Semantics::Activities::Token> >();
+					result = eAny(this->equals(incoming_param_other),0,false);
 			break;
 		}
 		
 		// 1282940466
 		case ActivitiesPackage::OBJECTTOKEN_OPERATION_ISCONTROL:
 		{
-			result = eAny(this->isControl());
+					result = eAny(this->isControl(),0,false);
 			break;
 		}
 
@@ -375,7 +373,6 @@ Any ObjectTokenImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::s
 	return result;
 }
 
-
 std::shared_ptr<fUML::Semantics::Activities::ObjectToken> ObjectTokenImpl::getThisObjectTokenPtr() const
 {
 	return m_thisObjectTokenPtr.lock();
@@ -385,3 +382,5 @@ void ObjectTokenImpl::setThisObjectTokenPtr(std::weak_ptr<fUML::Semantics::Activ
 	m_thisObjectTokenPtr = thisObjectTokenPtr;
 	setThisTokenPtr(thisObjectTokenPtr);
 }
+
+

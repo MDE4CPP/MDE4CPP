@@ -33,8 +33,8 @@
 
 #include <exception> // used in Persistence
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
-#include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Actions/ActionsFactory.hpp"
+#include "uml/umlFactory.hpp"
 
 #include "uml/Action.hpp"
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
@@ -48,8 +48,8 @@
 #include "fUML/Semantics/Actions/Values.hpp"
 
 //Factories an Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -314,12 +314,10 @@ void LoopNodeActivationImpl::saveContent(std::shared_ptr<persistence::interfaces
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> LoopNodeActivationImpl::eStaticClass() const
 {
 	return fUML::Semantics::Actions::ActionsPackage::eInstance()->getLoopNodeActivation_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -402,7 +400,7 @@ bool LoopNodeActivationImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any LoopNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any LoopNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -412,7 +410,7 @@ Any LoopNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list <
 		// 1597416642
 		case ActionsPackage::LOOPNODEACTIVATION_OPERATION_MAKELOOPVARIABLELIST:
 		{
-			result = eAny(this->makeLoopVariableList());
+				result = eAny(this->makeLoopVariableList());
 			break;
 		}
 		
@@ -433,7 +431,7 @@ Any LoopNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list <
 		// 1241885508
 		case ActionsPackage::LOOPNODEACTIVATION_OPERATION_RUNTEST:
 		{
-			result = eAny(this->runTest());
+					result = eAny(this->runTest(),0,false);
 			break;
 		}
 
@@ -450,7 +448,6 @@ Any LoopNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list <
 	return result;
 }
 
-
 std::shared_ptr<fUML::Semantics::Actions::LoopNodeActivation> LoopNodeActivationImpl::getThisLoopNodeActivationPtr() const
 {
 	return m_thisLoopNodeActivationPtr.lock();
@@ -460,3 +457,5 @@ void LoopNodeActivationImpl::setThisLoopNodeActivationPtr(std::weak_ptr<fUML::Se
 	m_thisLoopNodeActivationPtr = thisLoopNodeActivationPtr;
 	setThisStructuredActivityNodeActivationPtr(thisLoopNodeActivationPtr);
 }
+
+

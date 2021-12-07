@@ -355,23 +355,23 @@ void CollectionLiteralExpImpl::loadAttributes(std::shared_ptr<persistence::inter
 		{
 			ocl::Expressions::CollectionKind value = ocl::Expressions::CollectionKind::COLLECTION;
 			std::string literal = iter->second;
-			if (literal == "collection")
+						if (literal == "collection")
 			{
 				value = ocl::Expressions::CollectionKind::COLLECTION;
 			}
-			else if (literal == "set")
+			else 			if (literal == "set")
 			{
 				value = ocl::Expressions::CollectionKind::SET;
 			}
-			else if (literal == "orderedSet")
+			else 			if (literal == "orderedSet")
 			{
 				value = ocl::Expressions::CollectionKind::ORDEREDSET;
 			}
-			else if (literal == "bag")
+			else 			if (literal == "bag")
 			{
 				value = ocl::Expressions::CollectionKind::BAG;
 			}
-			else if (literal == "sequence")
+			else 			if (literal == "sequence")
 			{
 				value = ocl::Expressions::CollectionKind::SEQUENCE;
 			}
@@ -488,12 +488,10 @@ void CollectionLiteralExpImpl::saveContent(std::shared_ptr<persistence::interfac
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> CollectionLiteralExpImpl::eStaticClass() const
 {
 	return ocl::Expressions::ExpressionsPackage::eInstance()->getCollectionLiteralExp_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -503,7 +501,7 @@ Any CollectionLiteralExpImpl::eGet(int featureID, bool resolve, bool coreType) c
 	switch(featureID)
 	{
 		case ocl::Expressions::ExpressionsPackage::COLLECTIONLITERALEXP_ATTRIBUTE_KIND:
-			return eAny(getKind()); //1522
+				return eAny(getKind(),0,true); //1522
 		case ocl::Expressions::ExpressionsPackage::COLLECTIONLITERALEXP_ATTRIBUTE_PART:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
@@ -587,7 +585,7 @@ bool CollectionLiteralExpImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any CollectionLiteralExpImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any CollectionLiteralExpImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -607,7 +605,6 @@ Any CollectionLiteralExpImpl::eInvoke(int operationID, std::shared_ptr<std::list
 	return result;
 }
 
-
 std::shared_ptr<ocl::Expressions::CollectionLiteralExp> CollectionLiteralExpImpl::getThisCollectionLiteralExpPtr() const
 {
 	return m_thisCollectionLiteralExpPtr.lock();
@@ -617,3 +614,5 @@ void CollectionLiteralExpImpl::setThisCollectionLiteralExpPtr(std::weak_ptr<ocl:
 	m_thisCollectionLiteralExpPtr = thisCollectionLiteralExpPtr;
 	setThisLiteralExpPtr(thisCollectionLiteralExpPtr);
 }
+
+

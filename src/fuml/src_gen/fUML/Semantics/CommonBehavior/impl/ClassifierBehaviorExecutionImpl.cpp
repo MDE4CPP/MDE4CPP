@@ -41,8 +41,8 @@
 #include "fUML/Semantics/CommonBehavior/ParameterValue.hpp"
 
 //Factories an Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "uml/umlPackage.hpp"
 
@@ -315,12 +315,10 @@ void ClassifierBehaviorExecutionImpl::saveContent(std::shared_ptr<persistence::i
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> ClassifierBehaviorExecutionImpl::eStaticClass() const
 {
 	return fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance()->getClassifierBehaviorExecution_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -332,17 +330,17 @@ Any ClassifierBehaviorExecutionImpl::eGet(int featureID, bool resolve, bool core
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::CLASSIFIERBEHAVIOREXECUTION_ATTRIBUTE_CLASSIFIER:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getClassifier();
-			return eAny(returnValue); //221
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //221
 		}
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::CLASSIFIERBEHAVIOREXECUTION_ATTRIBUTE_EXECUTION:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getExecution();
-			return eAny(returnValue); //220
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //220
 		}
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::CLASSIFIERBEHAVIOREXECUTION_ATTRIBUTE_OBJECTACTIVATION:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getObjectActivation();
-			return eAny(returnValue); //222
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //222
 		}
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
@@ -398,7 +396,7 @@ bool ClassifierBehaviorExecutionImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ClassifierBehaviorExecutionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any ClassifierBehaviorExecutionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -418,13 +416,13 @@ Any ClassifierBehaviorExecutionImpl::eInvoke(int operationID, std::shared_ptr<st
 			//Retrieve input parameter 'classifier'
 			//parameter 0
 			std::shared_ptr<Bag<uml::Class>> incoming_param_classifier;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_classifier_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_classifier = (*incoming_param_classifier_arguments_citer)->get()->get<std::shared_ptr<Bag<uml::Class>> >();
+			std::list<Any>::const_iterator incoming_param_classifier_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_classifier = (*incoming_param_classifier_arguments_citer)->get<std::shared_ptr<Bag<uml::Class>> >();
 			//Retrieve input parameter 'inputs'
 			//parameter 1
 			std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> incoming_param_inputs;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_inputs_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_inputs = (*incoming_param_inputs_arguments_citer)->get()->get<std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> >();
+			std::list<Any>::const_iterator incoming_param_inputs_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_inputs = (*incoming_param_inputs_arguments_citer)->get<std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> >();
 			this->execute(incoming_param_classifier,incoming_param_inputs);
 			break;
 		}
@@ -449,7 +447,6 @@ Any ClassifierBehaviorExecutionImpl::eInvoke(int operationID, std::shared_ptr<st
 	return result;
 }
 
-
 std::shared_ptr<fUML::Semantics::CommonBehavior::ClassifierBehaviorExecution> ClassifierBehaviorExecutionImpl::getThisClassifierBehaviorExecutionPtr() const
 {
 	return m_thisClassifierBehaviorExecutionPtr.lock();
@@ -458,3 +455,5 @@ void ClassifierBehaviorExecutionImpl::setThisClassifierBehaviorExecutionPtr(std:
 {
 	m_thisClassifierBehaviorExecutionPtr = thisClassifierBehaviorExecutionPtr;
 }
+
+

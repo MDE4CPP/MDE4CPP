@@ -321,7 +321,7 @@ void UnlimitedNaturalExpImpl::loadAttributes(std::shared_ptr<persistence::interf
 		{
 			// this attribute is a 'int'
 			int value;
-			std::istringstream ( iter->second ) >> value;
+			std::istringstream(iter->second) >> value;
 			this->setUnlimitedNaturalSymbol(value);
 		}
 	}
@@ -387,12 +387,10 @@ void UnlimitedNaturalExpImpl::saveContent(std::shared_ptr<persistence::interface
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> UnlimitedNaturalExpImpl::eStaticClass() const
 {
 	return ocl::Expressions::ExpressionsPackage::eInstance()->getUnlimitedNaturalExp_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -402,7 +400,7 @@ Any UnlimitedNaturalExpImpl::eGet(int featureID, bool resolve, bool coreType) co
 	switch(featureID)
 	{
 		case ocl::Expressions::ExpressionsPackage::UNLIMITEDNATURALEXP_ATTRIBUTE_UNLIMITEDNATURALSYMBOL:
-			return eAny(getUnlimitedNaturalSymbol()); //9323
+				return eAny(getUnlimitedNaturalSymbol(),0,true); //9323
 	}
 	return NumericLiteralExpImpl::eGet(featureID, resolve, coreType);
 }
@@ -436,7 +434,7 @@ bool UnlimitedNaturalExpImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any UnlimitedNaturalExpImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any UnlimitedNaturalExpImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -456,7 +454,6 @@ Any UnlimitedNaturalExpImpl::eInvoke(int operationID, std::shared_ptr<std::list 
 	return result;
 }
 
-
 std::shared_ptr<ocl::Expressions::UnlimitedNaturalExp> UnlimitedNaturalExpImpl::getThisUnlimitedNaturalExpPtr() const
 {
 	return m_thisUnlimitedNaturalExpPtr.lock();
@@ -466,3 +463,5 @@ void UnlimitedNaturalExpImpl::setThisUnlimitedNaturalExpPtr(std::weak_ptr<ocl::E
 	m_thisUnlimitedNaturalExpPtr = thisUnlimitedNaturalExpPtr;
 	setThisNumericLiteralExpPtr(thisUnlimitedNaturalExpPtr);
 }
+
+

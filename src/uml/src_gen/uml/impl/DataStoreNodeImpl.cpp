@@ -313,12 +313,10 @@ void DataStoreNodeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSa
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> DataStoreNodeImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getDataStoreNode_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -351,7 +349,7 @@ bool DataStoreNodeImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any DataStoreNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any DataStoreNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -371,7 +369,6 @@ Any DataStoreNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std:
 	return result;
 }
 
-
 std::shared_ptr<uml::DataStoreNode> DataStoreNodeImpl::getThisDataStoreNodePtr() const
 {
 	return m_thisDataStoreNodePtr.lock();
@@ -381,3 +378,5 @@ void DataStoreNodeImpl::setThisDataStoreNodePtr(std::weak_ptr<uml::DataStoreNode
 	m_thisDataStoreNodePtr = thisDataStoreNodePtr;
 	setThisCentralBufferNodePtr(thisDataStoreNodePtr);
 }
+
+

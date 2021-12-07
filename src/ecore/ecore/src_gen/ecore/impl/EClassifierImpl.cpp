@@ -120,14 +120,10 @@ EClassifierImpl& EClassifierImpl::operator=(const EClassifierImpl & obj)
 		m_eTypeParameters.reset(new Bag<ecore::ETypeParameter>());
 		
 		
-
-		Bag<ecore::ETypeParameter>::iterator eTypeParametersIter = eTypeParametersList->begin();
-		Bag<ecore::ETypeParameter>::iterator eTypeParametersEnd = eTypeParametersList->end();
-		while (eTypeParametersIter != eTypeParametersEnd) 
+		for(const std::shared_ptr<ecore::ETypeParameter> eTypeParametersindexElem: *eTypeParametersList) 
 		{
-			std::shared_ptr<ecore::ETypeParameter> temp = std::dynamic_pointer_cast<ecore::ETypeParameter>((*eTypeParametersIter)->copy());
-			getETypeParameters()->push_back(temp);
-			eTypeParametersIter++;
+			std::shared_ptr<ecore::ETypeParameter> temp = std::dynamic_pointer_cast<ecore::ETypeParameter>((eTypeParametersindexElem)->copy());
+			m_eTypeParameters->push_back(temp);
 		}
 	}
 	else
@@ -384,12 +380,10 @@ void EClassifierImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 	}
 }
 
-
 std::shared_ptr<EClass> EClassifierImpl::eStaticClass() const
 {
 	return ecore::ecorePackage::eInstance()->getEClassifier_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -399,30 +393,22 @@ Any EClassifierImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case ecore::ecorePackage::ECLASSIFIER_ATTRIBUTE_DEFAULTVALUE:
-			return eAny(getDefaultValue()); //137
+			return eAny(getDefaultValue(),0,true); //137
 		case ecore::ecorePackage::ECLASSIFIER_ATTRIBUTE_EPACKAGE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getEPackage().lock();
-			return eAny(returnValue); //139
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //139
 		}
 		case ecore::ecorePackage::ECLASSIFIER_ATTRIBUTE_ETYPEPARAMETERS:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<ecore::ETypeParameter>::iterator iter = getETypeParameters()->begin();
-			Bag<ecore::ETypeParameter>::iterator end = getETypeParameters()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //1310			
+			return eAnyBag(getETypeParameters(),1516033880); //1310
 		}
 		case ecore::ecorePackage::ECLASSIFIER_ATTRIBUTE_INSTANCECLASS:
-			return eAny(getInstanceClass()); //136
+			return eAny(getInstanceClass(),0,true); //136
 		case ecore::ecorePackage::ECLASSIFIER_ATTRIBUTE_INSTANCECLASSNAME:
-			return eAny(getInstanceClassName()); //135
+			return eAny(getInstanceClassName(),0,true); //135
 		case ecore::ecorePackage::ECLASSIFIER_ATTRIBUTE_INSTANCETYPENAME:
-			return eAny(getInstanceTypeName()); //138
+			return eAny(getInstanceTypeName(),0,true); //138
 	}
 	return ENamedElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -461,36 +447,37 @@ bool EClassifierImpl::eSet(int featureID, Any newValue)
 		case ecore::ecorePackage::ECLASSIFIER_ATTRIBUTE_ETYPEPARAMETERS:
 		{
 			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<ecore::ETypeParameter>> eTypeParametersList(new Bag<ecore::ETypeParameter>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
+			if((newValue->isContainer()) && (ecore::ecorePackage::ETYPEPARAMETER_CLASS ==newValue->getTypeId()))
 			{
-				eTypeParametersList->add(std::dynamic_pointer_cast<ecore::ETypeParameter>(*iter));
-				iter++;
-			}
-			
-			Bag<ecore::ETypeParameter>::iterator iterETypeParameters = getETypeParameters()->begin();
-			Bag<ecore::ETypeParameter>::iterator endETypeParameters = getETypeParameters()->end();
-			while (iterETypeParameters != endETypeParameters)
-			{
-				if (eTypeParametersList->find(*iterETypeParameters) == -1)
+				try
 				{
-					getETypeParameters()->erase(*iterETypeParameters);
+					std::shared_ptr<Bag<ecore::ETypeParameter>> eTypeParametersList= newValue->get<std::shared_ptr<Bag<ecore::ETypeParameter>>>();
+					std::shared_ptr<Bag<ecore::ETypeParameter>> _eTypeParameters=getETypeParameters();
+					for(const std::shared_ptr<ecore::ETypeParameter> indexETypeParameters: *_eTypeParameters)
+					{
+						if (eTypeParametersList->find(indexETypeParameters) == -1)
+						{
+							_eTypeParameters->erase(indexETypeParameters);
+						}
+					}
+
+					for(const std::shared_ptr<ecore::ETypeParameter> indexETypeParameters: *eTypeParametersList)
+					{
+						if (_eTypeParameters->find(indexETypeParameters) == -1)
+						{
+							_eTypeParameters->add(indexETypeParameters);
+						}
+					}
 				}
-				iterETypeParameters++;
-			}
- 
-			iterETypeParameters = eTypeParametersList->begin();
-			endETypeParameters = eTypeParametersList->end();
-			while (iterETypeParameters != endETypeParameters)
-			{
-				if (getETypeParameters()->find(*iterETypeParameters) == -1)
+				catch(...)
 				{
-					getETypeParameters()->add(*iterETypeParameters);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterETypeParameters++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}
@@ -522,15 +509,13 @@ Any EClassifierImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> ar
 
   	switch(operationID)
 	{
-		
-		// 1232310610
+		// ecore::EClassifier::getClassifierID() : int: 1232310610
 		case ecorePackage::ECLASSIFIER_OPERATION_GETCLASSIFIERID:
 		{
-			result = eAny(this->getClassifierID());
+			result = eAny(this->getClassifierID(),0,false);
 			break;
 		}
-		
-		// 890144981
+		// ecore::EClassifier::isInstance(Any) : bool {const}: 890144981
 		case ecorePackage::ECLASSIFIER_OPERATION_ISINSTANCE_EJAVAOBJECT:
 		{
 			//Retrieve input parameter 'object'
@@ -538,7 +523,7 @@ Any EClassifierImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> ar
 			Any incoming_param_object;
 			std::list<Any>::const_iterator incoming_param_object_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_object = (*incoming_param_object_arguments_citer)->get<Any >();
-			result = eAny(this->isInstance(incoming_param_object));
+			result = eAny(this->isInstance(incoming_param_object),0,false);
 			break;
 		}
 
@@ -555,7 +540,6 @@ Any EClassifierImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> ar
 	return result;
 }
 
-
 std::shared_ptr<ecore::EClassifier> EClassifierImpl::getThisEClassifierPtr() const
 {
 	return m_thisEClassifierPtr.lock();
@@ -565,3 +549,5 @@ void EClassifierImpl::setThisEClassifierPtr(std::weak_ptr<ecore::EClassifier> th
 	m_thisEClassifierPtr = thisEClassifierPtr;
 	setThisENamedElementPtr(thisEClassifierPtr);
 }
+
+

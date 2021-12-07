@@ -188,14 +188,10 @@ ClassImpl& ClassImpl::operator=(const ClassImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_nestedClassifier - Subset<uml::Classifier, uml::NamedElement >(getOwnedMember())" << std::endl;
 		#endif
 		
-
-		Bag<uml::Classifier>::iterator nestedClassifierIter = nestedClassifierList->begin();
-		Bag<uml::Classifier>::iterator nestedClassifierEnd = nestedClassifierList->end();
-		while (nestedClassifierIter != nestedClassifierEnd) 
+		for(const std::shared_ptr<uml::Classifier> nestedClassifierindexElem: *nestedClassifierList) 
 		{
-			std::shared_ptr<uml::Classifier> temp = std::dynamic_pointer_cast<uml::Classifier>((*nestedClassifierIter)->copy());
-			getNestedClassifier()->push_back(temp);
-			nestedClassifierIter++;
+			std::shared_ptr<uml::Classifier> temp = std::dynamic_pointer_cast<uml::Classifier>((nestedClassifierindexElem)->copy());
+			m_nestedClassifier->push_back(temp);
 		}
 	}
 	else
@@ -219,14 +215,10 @@ ClassImpl& ClassImpl::operator=(const ClassImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_ownedOperation - Subset<uml::Operation, uml::Feature, uml::NamedElement >(getFeature(), getOwnedMember())" << std::endl;
 		#endif
 		
-
-		Bag<uml::Operation>::iterator ownedOperationIter = ownedOperationList->begin();
-		Bag<uml::Operation>::iterator ownedOperationEnd = ownedOperationList->end();
-		while (ownedOperationIter != ownedOperationEnd) 
+		for(const std::shared_ptr<uml::Operation> ownedOperationindexElem: *ownedOperationList) 
 		{
-			std::shared_ptr<uml::Operation> temp = std::dynamic_pointer_cast<uml::Operation>((*ownedOperationIter)->copy());
-			getOwnedOperation()->push_back(temp);
-			ownedOperationIter++;
+			std::shared_ptr<uml::Operation> temp = std::dynamic_pointer_cast<uml::Operation>((ownedOperationindexElem)->copy());
+			m_ownedOperation->push_back(temp);
 		}
 	}
 	else
@@ -250,14 +242,10 @@ ClassImpl& ClassImpl::operator=(const ClassImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_ownedReception - Subset<uml::Reception, uml::Feature, uml::NamedElement >(getFeature(), getOwnedMember())" << std::endl;
 		#endif
 		
-
-		Bag<uml::Reception>::iterator ownedReceptionIter = ownedReceptionList->begin();
-		Bag<uml::Reception>::iterator ownedReceptionEnd = ownedReceptionList->end();
-		while (ownedReceptionIter != ownedReceptionEnd) 
+		for(const std::shared_ptr<uml::Reception> ownedReceptionindexElem: *ownedReceptionList) 
 		{
-			std::shared_ptr<uml::Reception> temp = std::dynamic_pointer_cast<uml::Reception>((*ownedReceptionIter)->copy());
-			getOwnedReception()->push_back(temp);
-			ownedReceptionIter++;
+			std::shared_ptr<uml::Reception> temp = std::dynamic_pointer_cast<uml::Reception>((ownedReceptionindexElem)->copy());
+			m_ownedReception->push_back(temp);
 		}
 	}
 	else
@@ -872,12 +860,10 @@ void ClassImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandle
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> ClassImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getClass_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -888,77 +874,29 @@ Any ClassImpl::eGet(int featureID, bool resolve, bool coreType) const
 	{
 		case uml::umlPackage::CLASS_ATTRIBUTE_EXTENSION:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Extension>::iterator iter = getExtension()->begin();
-			Bag<uml::Extension>::iterator end = getExtension()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //3547			
+			return eAnyBag(getExtension(),1186631288); //3547
 		}
 		case uml::umlPackage::CLASS_ATTRIBUTE_ISACTIVE:
-			return eAny(getIsActive()); //3548
+			return eAny(getIsActive(),0,true); //3548
 		case uml::umlPackage::CLASS_ATTRIBUTE_NESTEDCLASSIFIER:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Classifier>::iterator iter = getNestedClassifier()->begin();
-			Bag<uml::Classifier>::iterator end = getNestedClassifier()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //3549			
+			return eAnyBag(getNestedClassifier(),845259359); //3549
 		}
 		case uml::umlPackage::CLASS_ATTRIBUTE_OWNEDATTRIBUTE:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Property>::iterator iter = getClass_OwnedAttribute()->begin();
-			Bag<uml::Property>::iterator end = getClass_OwnedAttribute()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //3552			
+			return eAnyBag(getClass_OwnedAttribute(),1938835355); //3552
 		}
 		case uml::umlPackage::CLASS_ATTRIBUTE_OWNEDOPERATION:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Operation>::iterator iter = getOwnedOperation()->begin();
-			Bag<uml::Operation>::iterator end = getOwnedOperation()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //3546			
+			return eAnyBag(getOwnedOperation(),504486732); //3546
 		}
 		case uml::umlPackage::CLASS_ATTRIBUTE_OWNEDRECEPTION:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Reception>::iterator iter = getOwnedReception()->begin();
-			Bag<uml::Reception>::iterator end = getOwnedReception()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //3550			
+			return eAnyBag(getOwnedReception(),1360864860); //3550
 		}
 		case uml::umlPackage::CLASS_ATTRIBUTE_SUPERCLASS:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Class>::iterator iter = getSuperClass()->begin();
-			Bag<uml::Class>::iterator end = getSuperClass()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //3551			
+			return eAnyBag(getSuperClass(),47454819); //3551
 		}
 	}
 	Any result;
@@ -1014,180 +952,185 @@ bool ClassImpl::eSet(int featureID, Any newValue)
 		case uml::umlPackage::CLASS_ATTRIBUTE_NESTEDCLASSIFIER:
 		{
 			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::Classifier>> nestedClassifierList(new Bag<uml::Classifier>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
+			if((newValue->isContainer()) && (uml::umlPackage::CLASSIFIER_CLASS ==newValue->getTypeId()))
 			{
-				nestedClassifierList->add(std::dynamic_pointer_cast<uml::Classifier>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::Classifier>::iterator iterNestedClassifier = getNestedClassifier()->begin();
-			Bag<uml::Classifier>::iterator endNestedClassifier = getNestedClassifier()->end();
-			while (iterNestedClassifier != endNestedClassifier)
-			{
-				if (nestedClassifierList->find(*iterNestedClassifier) == -1)
+				try
 				{
-					getNestedClassifier()->erase(*iterNestedClassifier);
+					std::shared_ptr<Bag<uml::Classifier>> nestedClassifierList= newValue->get<std::shared_ptr<Bag<uml::Classifier>>>();
+					std::shared_ptr<Bag<uml::Classifier>> _nestedClassifier=getNestedClassifier();
+					for(const std::shared_ptr<uml::Classifier> indexNestedClassifier: *_nestedClassifier)
+					{
+						if (nestedClassifierList->find(indexNestedClassifier) == -1)
+						{
+							_nestedClassifier->erase(indexNestedClassifier);
+						}
+					}
+
+					for(const std::shared_ptr<uml::Classifier> indexNestedClassifier: *nestedClassifierList)
+					{
+						if (_nestedClassifier->find(indexNestedClassifier) == -1)
+						{
+							_nestedClassifier->add(indexNestedClassifier);
+						}
+					}
 				}
-				iterNestedClassifier++;
-			}
- 
-			iterNestedClassifier = nestedClassifierList->begin();
-			endNestedClassifier = nestedClassifierList->end();
-			while (iterNestedClassifier != endNestedClassifier)
-			{
-				if (getNestedClassifier()->find(*iterNestedClassifier) == -1)
+				catch(...)
 				{
-					getNestedClassifier()->add(*iterNestedClassifier);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterNestedClassifier++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}
 		case uml::umlPackage::CLASS_ATTRIBUTE_OWNEDATTRIBUTE:
 		{
 			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::Property>> ownedAttributeList(new Bag<uml::Property>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
+			if((newValue->isContainer()) && (uml::umlPackage::PROPERTY_CLASS ==newValue->getTypeId()))
 			{
-				ownedAttributeList->add(std::dynamic_pointer_cast<uml::Property>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::Property>::iterator iterOwnedAttribute = getClass_OwnedAttribute()->begin();
-			Bag<uml::Property>::iterator endOwnedAttribute = getClass_OwnedAttribute()->end();
-			while (iterOwnedAttribute != endOwnedAttribute)
-			{
-				if (ownedAttributeList->find(*iterOwnedAttribute) == -1)
+				try
 				{
-					getClass_OwnedAttribute()->erase(*iterOwnedAttribute);
+					std::shared_ptr<Bag<uml::Property>> ownedAttributeList= newValue->get<std::shared_ptr<Bag<uml::Property>>>();
+					std::shared_ptr<Bag<uml::Property>> _ownedAttribute=getClass_OwnedAttribute();
+					for(const std::shared_ptr<uml::Property> indexOwnedAttribute: *_ownedAttribute)
+					{
+						if (ownedAttributeList->find(indexOwnedAttribute) == -1)
+						{
+							_ownedAttribute->erase(indexOwnedAttribute);
+						}
+					}
+
+					for(const std::shared_ptr<uml::Property> indexOwnedAttribute: *ownedAttributeList)
+					{
+						if (_ownedAttribute->find(indexOwnedAttribute) == -1)
+						{
+							_ownedAttribute->add(indexOwnedAttribute);
+						}
+					}
 				}
-				iterOwnedAttribute++;
-			}
- 
-			iterOwnedAttribute = ownedAttributeList->begin();
-			endOwnedAttribute = ownedAttributeList->end();
-			while (iterOwnedAttribute != endOwnedAttribute)
-			{
-				if (getClass_OwnedAttribute()->find(*iterOwnedAttribute) == -1)
+				catch(...)
 				{
-					getClass_OwnedAttribute()->add(*iterOwnedAttribute);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterOwnedAttribute++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}
 		case uml::umlPackage::CLASS_ATTRIBUTE_OWNEDOPERATION:
 		{
 			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::Operation>> ownedOperationList(new Bag<uml::Operation>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
+			if((newValue->isContainer()) && (uml::umlPackage::OPERATION_CLASS ==newValue->getTypeId()))
 			{
-				ownedOperationList->add(std::dynamic_pointer_cast<uml::Operation>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::Operation>::iterator iterOwnedOperation = getOwnedOperation()->begin();
-			Bag<uml::Operation>::iterator endOwnedOperation = getOwnedOperation()->end();
-			while (iterOwnedOperation != endOwnedOperation)
-			{
-				if (ownedOperationList->find(*iterOwnedOperation) == -1)
+				try
 				{
-					getOwnedOperation()->erase(*iterOwnedOperation);
+					std::shared_ptr<Bag<uml::Operation>> ownedOperationList= newValue->get<std::shared_ptr<Bag<uml::Operation>>>();
+					std::shared_ptr<Bag<uml::Operation>> _ownedOperation=getOwnedOperation();
+					for(const std::shared_ptr<uml::Operation> indexOwnedOperation: *_ownedOperation)
+					{
+						if (ownedOperationList->find(indexOwnedOperation) == -1)
+						{
+							_ownedOperation->erase(indexOwnedOperation);
+						}
+					}
+
+					for(const std::shared_ptr<uml::Operation> indexOwnedOperation: *ownedOperationList)
+					{
+						if (_ownedOperation->find(indexOwnedOperation) == -1)
+						{
+							_ownedOperation->add(indexOwnedOperation);
+						}
+					}
 				}
-				iterOwnedOperation++;
-			}
- 
-			iterOwnedOperation = ownedOperationList->begin();
-			endOwnedOperation = ownedOperationList->end();
-			while (iterOwnedOperation != endOwnedOperation)
-			{
-				if (getOwnedOperation()->find(*iterOwnedOperation) == -1)
+				catch(...)
 				{
-					getOwnedOperation()->add(*iterOwnedOperation);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterOwnedOperation++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}
 		case uml::umlPackage::CLASS_ATTRIBUTE_OWNEDRECEPTION:
 		{
 			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::Reception>> ownedReceptionList(new Bag<uml::Reception>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
+			if((newValue->isContainer()) && (uml::umlPackage::RECEPTION_CLASS ==newValue->getTypeId()))
 			{
-				ownedReceptionList->add(std::dynamic_pointer_cast<uml::Reception>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::Reception>::iterator iterOwnedReception = getOwnedReception()->begin();
-			Bag<uml::Reception>::iterator endOwnedReception = getOwnedReception()->end();
-			while (iterOwnedReception != endOwnedReception)
-			{
-				if (ownedReceptionList->find(*iterOwnedReception) == -1)
+				try
 				{
-					getOwnedReception()->erase(*iterOwnedReception);
+					std::shared_ptr<Bag<uml::Reception>> ownedReceptionList= newValue->get<std::shared_ptr<Bag<uml::Reception>>>();
+					std::shared_ptr<Bag<uml::Reception>> _ownedReception=getOwnedReception();
+					for(const std::shared_ptr<uml::Reception> indexOwnedReception: *_ownedReception)
+					{
+						if (ownedReceptionList->find(indexOwnedReception) == -1)
+						{
+							_ownedReception->erase(indexOwnedReception);
+						}
+					}
+
+					for(const std::shared_ptr<uml::Reception> indexOwnedReception: *ownedReceptionList)
+					{
+						if (_ownedReception->find(indexOwnedReception) == -1)
+						{
+							_ownedReception->add(indexOwnedReception);
+						}
+					}
 				}
-				iterOwnedReception++;
-			}
- 
-			iterOwnedReception = ownedReceptionList->begin();
-			endOwnedReception = ownedReceptionList->end();
-			while (iterOwnedReception != endOwnedReception)
-			{
-				if (getOwnedReception()->find(*iterOwnedReception) == -1)
+				catch(...)
 				{
-					getOwnedReception()->add(*iterOwnedReception);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterOwnedReception++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}
 		case uml::umlPackage::CLASS_ATTRIBUTE_SUPERCLASS:
 		{
 			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::Class>> superClassList(new Bag<uml::Class>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
+			if((newValue->isContainer()) && (uml::umlPackage::CLASS_CLASS ==newValue->getTypeId()))
 			{
-				superClassList->add(std::dynamic_pointer_cast<uml::Class>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::Class>::iterator iterSuperClass = getSuperClass()->begin();
-			Bag<uml::Class>::iterator endSuperClass = getSuperClass()->end();
-			while (iterSuperClass != endSuperClass)
-			{
-				if (superClassList->find(*iterSuperClass) == -1)
+				try
 				{
-					getSuperClass()->erase(*iterSuperClass);
+					std::shared_ptr<Bag<uml::Class>> superClassList= newValue->get<std::shared_ptr<Bag<uml::Class>>>();
+					std::shared_ptr<Bag<uml::Class>> _superClass=getSuperClass();
+					for(const std::shared_ptr<uml::Class> indexSuperClass: *_superClass)
+					{
+						if (superClassList->find(indexSuperClass) == -1)
+						{
+							_superClass->erase(indexSuperClass);
+						}
+					}
+
+					for(const std::shared_ptr<uml::Class> indexSuperClass: *superClassList)
+					{
+						if (_superClass->find(indexSuperClass) == -1)
+						{
+							_superClass->add(indexSuperClass);
+						}
+					}
 				}
-				iterSuperClass++;
-			}
- 
-			iterSuperClass = superClassList->begin();
-			endSuperClass = superClassList->end();
-			while (iterSuperClass != endSuperClass)
-			{
-				if (getSuperClass()->find(*iterSuperClass) == -1)
+				catch(...)
 				{
-					getSuperClass()->add(*iterSuperClass);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterSuperClass++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}
@@ -1206,82 +1149,79 @@ bool ClassImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ClassImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any ClassImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
   	switch(operationID)
 	{
-		
-		// 1692428043
+		// uml::Class::createOwnedOperation(std::string, std::string[*], uml::Type[*], uml::Type) : uml::Operation: 1692428043
 		case umlPackage::CLASS_OPERATION_CREATEOWNEDOPERATION_STRING_TYPE:
 		{
 			//Retrieve input parameter 'name'
 			//parameter 0
 			std::string incoming_param_name;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_name_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_name = (*incoming_param_name_arguments_citer)->get()->get<std::string >();
+			std::list<Any>::const_iterator incoming_param_name_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_name = (*incoming_param_name_arguments_citer)->get<std::string >();
 			//Retrieve input parameter 'parameterNames'
 			//parameter 1
 			std::shared_ptr<Bag<std::string>> incoming_param_parameterNames;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_parameterNames_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_parameterNames = (*incoming_param_parameterNames_arguments_citer)->get()->get<std::shared_ptr<Bag<std::string>> >();
+			std::list<Any>::const_iterator incoming_param_parameterNames_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_parameterNames = (*incoming_param_parameterNames_arguments_citer)->get<std::shared_ptr<Bag<std::string>> >();
 			//Retrieve input parameter 'parameterTypes'
 			//parameter 2
 			std::shared_ptr<Bag<uml::Type>> incoming_param_parameterTypes;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_parameterTypes_arguments_citer = std::next(arguments->begin(), 2);
-			incoming_param_parameterTypes = (*incoming_param_parameterTypes_arguments_citer)->get()->get<std::shared_ptr<Bag<uml::Type>> >();
+			std::list<Any>::const_iterator incoming_param_parameterTypes_arguments_citer = std::next(arguments->begin(), 2);
+			incoming_param_parameterTypes = (*incoming_param_parameterTypes_arguments_citer)->get<std::shared_ptr<Bag<uml::Type>> >();
 			//Retrieve input parameter 'returnType'
 			//parameter 3
 			std::shared_ptr<uml::Type> incoming_param_returnType;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_returnType_arguments_citer = std::next(arguments->begin(), 3);
-			incoming_param_returnType = (*incoming_param_returnType_arguments_citer)->get()->get<std::shared_ptr<uml::Type> >();
-			result = eAny(this->createOwnedOperation(incoming_param_name,incoming_param_parameterNames,incoming_param_parameterTypes,incoming_param_returnType));
+			std::list<Any>::const_iterator incoming_param_returnType_arguments_citer = std::next(arguments->begin(), 3);
+			incoming_param_returnType = (*incoming_param_returnType_arguments_citer)->get<std::shared_ptr<uml::Type> >();
+			result = eAny(this->createOwnedOperation(incoming_param_name,incoming_param_parameterNames,incoming_param_parameterTypes,incoming_param_returnType), umlPackage::OPERATION_CLASS,false);
 			break;
 		}
-		
-		// 1306968088
+		// uml::Class::getAllOperations() : uml::Operation[*]: 1306968088
 		case umlPackage::CLASS_OPERATION_GETALLOPERATIONS:
 		{
-			result = eAny(this->getAllOperations());
+			std::shared_ptr<Bag<uml::Operation> > resultList = this->getAllOperations();
+			return eAny(resultList,umlPackage::OPERATION_CLASS,true);
 			break;
 		}
-		
-		// 448268741
+		// uml::Class::getExtensions() : uml::Extension[*]: 448268741
 		case umlPackage::CLASS_OPERATION_GETEXTENSIONS:
 		{
-			result = eAny(this->getExtensions());
+			std::shared_ptr<Bag<uml::Extension> > resultList = this->getExtensions();
+			return eAny(resultList,umlPackage::EXTENSION_CLASS,true);
 			break;
 		}
-		
-		// 313726634
+		// uml::Class::getSuperClasses() : uml::Class[*]: 313726634
 		case umlPackage::CLASS_OPERATION_GETSUPERCLASSES:
 		{
-			result = eAny(this->getSuperClasses());
+			std::shared_ptr<Bag<uml::Class> > resultList = this->getSuperClasses();
+			return eAny(resultList,umlPackage::CLASS_CLASS,true);
 			break;
 		}
-		
-		// 251508775
+		// uml::Class::isMetaclass() : bool: 251508775
 		case umlPackage::CLASS_OPERATION_ISMETACLASS:
 		{
-			result = eAny(this->isMetaclass());
+			result = eAny(this->isMetaclass(),0,false);
 			break;
 		}
-		
-		// 1167069382
+		// uml::Class::passive_class(Any, std::map) : bool: 1167069382
 		case umlPackage::CLASS_OPERATION_PASSIVE_CLASS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->passive_class(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->passive_class(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
 
@@ -1301,7 +1241,6 @@ Any ClassImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_
 	return result;
 }
 
-
 std::shared_ptr<uml::Class> ClassImpl::getThisClassPtr() const
 {
 	return m_thisClassPtr.lock();
@@ -1312,3 +1251,5 @@ void ClassImpl::setThisClassPtr(std::weak_ptr<uml::Class> thisClassPtr)
 	setThisBehavioredClassifierPtr(thisClassPtr);
 	setThisEncapsulatedClassifierPtr(thisClassPtr);
 }
+
+

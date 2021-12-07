@@ -182,14 +182,10 @@ BehavioredClassifierImpl& BehavioredClassifierImpl::operator=(const BehavioredCl
 			std::cout << "Initialising value Subset: " << "m_interfaceRealization - Subset<uml::InterfaceRealization, uml::Element >(getOwnedElement())" << std::endl;
 		#endif
 		
-
-		Bag<uml::InterfaceRealization>::iterator interfaceRealizationIter = interfaceRealizationList->begin();
-		Bag<uml::InterfaceRealization>::iterator interfaceRealizationEnd = interfaceRealizationList->end();
-		while (interfaceRealizationIter != interfaceRealizationEnd) 
+		for(const std::shared_ptr<uml::InterfaceRealization> interfaceRealizationindexElem: *interfaceRealizationList) 
 		{
-			std::shared_ptr<uml::InterfaceRealization> temp = std::dynamic_pointer_cast<uml::InterfaceRealization>((*interfaceRealizationIter)->copy());
-			getInterfaceRealization()->push_back(temp);
-			interfaceRealizationIter++;
+			std::shared_ptr<uml::InterfaceRealization> temp = std::dynamic_pointer_cast<uml::InterfaceRealization>((interfaceRealizationindexElem)->copy());
+			m_interfaceRealization->push_back(temp);
 		}
 	}
 	else
@@ -213,14 +209,10 @@ BehavioredClassifierImpl& BehavioredClassifierImpl::operator=(const BehavioredCl
 			std::cout << "Initialising value SubsetUnion: " << "m_ownedBehavior - SubsetUnion<uml::Behavior, uml::NamedElement >(getOwnedMember())" << std::endl;
 		#endif
 		
-
-		Bag<uml::Behavior>::iterator ownedBehaviorIter = ownedBehaviorList->begin();
-		Bag<uml::Behavior>::iterator ownedBehaviorEnd = ownedBehaviorList->end();
-		while (ownedBehaviorIter != ownedBehaviorEnd) 
+		for(const std::shared_ptr<uml::Behavior> ownedBehaviorindexElem: *ownedBehaviorList) 
 		{
-			std::shared_ptr<uml::Behavior> temp = std::dynamic_pointer_cast<uml::Behavior>((*ownedBehaviorIter)->copy());
-			getOwnedBehavior()->push_back(temp);
-			ownedBehaviorIter++;
+			std::shared_ptr<uml::Behavior> temp = std::dynamic_pointer_cast<uml::Behavior>((ownedBehaviorindexElem)->copy());
+			m_ownedBehavior->push_back(temp);
 		}
 	}
 	else
@@ -609,12 +601,10 @@ void BehavioredClassifierImpl::saveContent(std::shared_ptr<persistence::interfac
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> BehavioredClassifierImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getBehavioredClassifier_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -626,31 +616,15 @@ Any BehavioredClassifierImpl::eGet(int featureID, bool resolve, bool coreType) c
 		case uml::umlPackage::BEHAVIOREDCLASSIFIER_ATTRIBUTE_CLASSIFIERBEHAVIOR:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getClassifierBehavior();
-			return eAny(returnValue); //2638
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //2638
 		}
 		case uml::umlPackage::BEHAVIOREDCLASSIFIER_ATTRIBUTE_INTERFACEREALIZATION:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::InterfaceRealization>::iterator iter = getInterfaceRealization()->begin();
-			Bag<uml::InterfaceRealization>::iterator end = getInterfaceRealization()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //2639			
+			return eAnyBag(getInterfaceRealization(),409044285); //2639
 		}
 		case uml::umlPackage::BEHAVIOREDCLASSIFIER_ATTRIBUTE_OWNEDBEHAVIOR:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Behavior>::iterator iter = getOwnedBehavior()->begin();
-			Bag<uml::Behavior>::iterator end = getOwnedBehavior()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //2640			
+			return eAnyBag(getOwnedBehavior(),1087049961); //2640
 		}
 	}
 	return ClassifierImpl::eGet(featureID, resolve, coreType);
@@ -685,72 +659,74 @@ bool BehavioredClassifierImpl::eSet(int featureID, Any newValue)
 		case uml::umlPackage::BEHAVIOREDCLASSIFIER_ATTRIBUTE_INTERFACEREALIZATION:
 		{
 			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::InterfaceRealization>> interfaceRealizationList(new Bag<uml::InterfaceRealization>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
+			if((newValue->isContainer()) && (uml::umlPackage::INTERFACEREALIZATION_CLASS ==newValue->getTypeId()))
 			{
-				interfaceRealizationList->add(std::dynamic_pointer_cast<uml::InterfaceRealization>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::InterfaceRealization>::iterator iterInterfaceRealization = getInterfaceRealization()->begin();
-			Bag<uml::InterfaceRealization>::iterator endInterfaceRealization = getInterfaceRealization()->end();
-			while (iterInterfaceRealization != endInterfaceRealization)
-			{
-				if (interfaceRealizationList->find(*iterInterfaceRealization) == -1)
+				try
 				{
-					getInterfaceRealization()->erase(*iterInterfaceRealization);
+					std::shared_ptr<Bag<uml::InterfaceRealization>> interfaceRealizationList= newValue->get<std::shared_ptr<Bag<uml::InterfaceRealization>>>();
+					std::shared_ptr<Bag<uml::InterfaceRealization>> _interfaceRealization=getInterfaceRealization();
+					for(const std::shared_ptr<uml::InterfaceRealization> indexInterfaceRealization: *_interfaceRealization)
+					{
+						if (interfaceRealizationList->find(indexInterfaceRealization) == -1)
+						{
+							_interfaceRealization->erase(indexInterfaceRealization);
+						}
+					}
+
+					for(const std::shared_ptr<uml::InterfaceRealization> indexInterfaceRealization: *interfaceRealizationList)
+					{
+						if (_interfaceRealization->find(indexInterfaceRealization) == -1)
+						{
+							_interfaceRealization->add(indexInterfaceRealization);
+						}
+					}
 				}
-				iterInterfaceRealization++;
-			}
- 
-			iterInterfaceRealization = interfaceRealizationList->begin();
-			endInterfaceRealization = interfaceRealizationList->end();
-			while (iterInterfaceRealization != endInterfaceRealization)
-			{
-				if (getInterfaceRealization()->find(*iterInterfaceRealization) == -1)
+				catch(...)
 				{
-					getInterfaceRealization()->add(*iterInterfaceRealization);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterInterfaceRealization++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}
 		case uml::umlPackage::BEHAVIOREDCLASSIFIER_ATTRIBUTE_OWNEDBEHAVIOR:
 		{
 			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::Behavior>> ownedBehaviorList(new Bag<uml::Behavior>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
+			if((newValue->isContainer()) && (uml::umlPackage::BEHAVIOR_CLASS ==newValue->getTypeId()))
 			{
-				ownedBehaviorList->add(std::dynamic_pointer_cast<uml::Behavior>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::Behavior>::iterator iterOwnedBehavior = getOwnedBehavior()->begin();
-			Bag<uml::Behavior>::iterator endOwnedBehavior = getOwnedBehavior()->end();
-			while (iterOwnedBehavior != endOwnedBehavior)
-			{
-				if (ownedBehaviorList->find(*iterOwnedBehavior) == -1)
+				try
 				{
-					getOwnedBehavior()->erase(*iterOwnedBehavior);
+					std::shared_ptr<Bag<uml::Behavior>> ownedBehaviorList= newValue->get<std::shared_ptr<Bag<uml::Behavior>>>();
+					std::shared_ptr<Bag<uml::Behavior>> _ownedBehavior=getOwnedBehavior();
+					for(const std::shared_ptr<uml::Behavior> indexOwnedBehavior: *_ownedBehavior)
+					{
+						if (ownedBehaviorList->find(indexOwnedBehavior) == -1)
+						{
+							_ownedBehavior->erase(indexOwnedBehavior);
+						}
+					}
+
+					for(const std::shared_ptr<uml::Behavior> indexOwnedBehavior: *ownedBehaviorList)
+					{
+						if (_ownedBehavior->find(indexOwnedBehavior) == -1)
+						{
+							_ownedBehavior->add(indexOwnedBehavior);
+						}
+					}
 				}
-				iterOwnedBehavior++;
-			}
- 
-			iterOwnedBehavior = ownedBehaviorList->begin();
-			endOwnedBehavior = ownedBehaviorList->end();
-			while (iterOwnedBehavior != endOwnedBehavior)
-			{
-				if (getOwnedBehavior()->find(*iterOwnedBehavior) == -1)
+				catch(...)
 				{
-					getOwnedBehavior()->add(*iterOwnedBehavior);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterOwnedBehavior++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}
@@ -762,41 +738,40 @@ bool BehavioredClassifierImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any BehavioredClassifierImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any BehavioredClassifierImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
   	switch(operationID)
 	{
-		
-		// 1882586927
+		// uml::BehavioredClassifier::class_behavior(Any, std::map) : bool: 1882586927
 		case umlPackage::BEHAVIOREDCLASSIFIER_OPERATION_CLASS_BEHAVIOR_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->class_behavior(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->class_behavior(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		
-		// 1253009224
+		// uml::BehavioredClassifier::getAllImplementedInterfaces() : uml::Interface[*]: 1253009224
 		case umlPackage::BEHAVIOREDCLASSIFIER_OPERATION_GETALLIMPLEMENTEDINTERFACES:
 		{
-			result = eAny(this->getAllImplementedInterfaces());
+			std::shared_ptr<Bag<uml::Interface> > resultList = this->getAllImplementedInterfaces();
+			return eAny(resultList,umlPackage::INTERFACE_CLASS,true);
 			break;
 		}
-		
-		// 1944346500
+		// uml::BehavioredClassifier::getImplementedInterfaces() : uml::Interface[*]: 1944346500
 		case umlPackage::BEHAVIOREDCLASSIFIER_OPERATION_GETIMPLEMENTEDINTERFACES:
 		{
-			result = eAny(this->getImplementedInterfaces());
+			std::shared_ptr<Bag<uml::Interface> > resultList = this->getImplementedInterfaces();
+			return eAny(resultList,umlPackage::INTERFACE_CLASS,true);
 			break;
 		}
 
@@ -813,7 +788,6 @@ Any BehavioredClassifierImpl::eInvoke(int operationID, std::shared_ptr<std::list
 	return result;
 }
 
-
 std::shared_ptr<uml::BehavioredClassifier> BehavioredClassifierImpl::getThisBehavioredClassifierPtr() const
 {
 	return m_thisBehavioredClassifierPtr.lock();
@@ -823,3 +797,5 @@ void BehavioredClassifierImpl::setThisBehavioredClassifierPtr(std::weak_ptr<uml:
 	m_thisBehavioredClassifierPtr = thisBehavioredClassifierPtr;
 	setThisClassifierPtr(thisBehavioredClassifierPtr);
 }
+
+

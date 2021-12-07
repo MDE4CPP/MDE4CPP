@@ -284,12 +284,10 @@ void StructuralFeatureImpl::saveContent(std::shared_ptr<persistence::interfaces:
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> StructuralFeatureImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getStructuralFeature_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -299,7 +297,7 @@ Any StructuralFeatureImpl::eGet(int featureID, bool resolve, bool coreType) cons
 	switch(featureID)
 	{
 		case uml::umlPackage::STRUCTURALFEATURE_ATTRIBUTE_ISREADONLY:
-			return eAny(getIsReadOnly()); //22521
+			return eAny(getIsReadOnly(),0,true); //22521
 	}
 	Any result;
 	result = FeatureImpl::eGet(featureID, resolve, coreType);
@@ -369,7 +367,7 @@ bool StructuralFeatureImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any StructuralFeatureImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any StructuralFeatureImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -395,7 +393,6 @@ Any StructuralFeatureImpl::eInvoke(int operationID, std::shared_ptr<std::list < 
 	return result;
 }
 
-
 std::shared_ptr<uml::StructuralFeature> StructuralFeatureImpl::getThisStructuralFeaturePtr() const
 {
 	return m_thisStructuralFeaturePtr.lock();
@@ -407,3 +404,5 @@ void StructuralFeatureImpl::setThisStructuralFeaturePtr(std::weak_ptr<uml::Struc
 	setThisMultiplicityElementPtr(thisStructuralFeaturePtr);
 	setThisTypedElementPtr(thisStructuralFeaturePtr);
 }
+
+

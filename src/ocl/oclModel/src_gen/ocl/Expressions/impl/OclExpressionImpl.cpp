@@ -644,12 +644,10 @@ void OclExpressionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSa
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> OclExpressionImpl::eStaticClass() const
 {
 	return ocl::Expressions::ExpressionsPackage::eInstance()->getOclExpression_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -661,62 +659,62 @@ Any OclExpressionImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_APPLIEDELEMENT:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getAppliedElement().lock();
-			return eAny(returnValue); //6110
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //6110
 		}
 		case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_ELSEOWNER:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getElseOwner().lock();
-			return eAny(returnValue); //6117
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //6117
 		}
 		case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_FIRSTOWNER:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getFirstOwner().lock();
-			return eAny(returnValue); //6119
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //6119
 		}
 		case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_IFOWNER:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getIfOwner().lock();
-			return eAny(returnValue); //6116
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //6116
 		}
 		case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_INITIALIZEDELEMENT:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getInitializedElement().lock();
-			return eAny(returnValue); //6112
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //6112
 		}
 		case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_INSTANCE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getInstance();
-			return eAny(returnValue); //6121
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //6121
 		}
 		case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_LASTOWNER:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getLastOwner().lock();
-			return eAny(returnValue); //6120
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //6120
 		}
 		case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_LOOPBODYOWNER:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getLoopBodyOwner().lock();
-			return eAny(returnValue); //6111
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //6111
 		}
 		case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_PARENTCALL:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getParentCall().lock();
-			return eAny(returnValue); //6114
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //6114
 		}
 		case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_PARENTNAV:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getParentNav().lock();
-			return eAny(returnValue); //6118
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //6118
 		}
 		case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_THENOWNER:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getThenOwner().lock();
-			return eAny(returnValue); //6115
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //6115
 		}
 		case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_TOPEXPRESSION:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getTopExpression().lock();
-			return eAny(returnValue); //6113
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //6113
 		}
 	}
 	return ecore::ETypedElementImpl::eGet(featureID, resolve, coreType);
@@ -862,7 +860,7 @@ bool OclExpressionImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any OclExpressionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any OclExpressionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -882,7 +880,6 @@ Any OclExpressionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std:
 	return result;
 }
 
-
 std::shared_ptr<ocl::Expressions::OclExpression> OclExpressionImpl::getThisOclExpressionPtr() const
 {
 	return m_thisOclExpressionPtr.lock();
@@ -892,3 +889,5 @@ void OclExpressionImpl::setThisOclExpressionPtr(std::weak_ptr<ocl::Expressions::
 	m_thisOclExpressionPtr = thisOclExpressionPtr;
 	setThisETypedElementPtr(thisOclExpressionPtr);
 }
+
+

@@ -146,14 +146,10 @@ ConnectorImpl& ConnectorImpl::operator=(const ConnectorImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_end - Subset<uml::ConnectorEnd, uml::Element >(getOwnedElement())" << std::endl;
 		#endif
 		
-
-		Bag<uml::ConnectorEnd>::iterator endIter = endList->begin();
-		Bag<uml::ConnectorEnd>::iterator endEnd = endList->end();
-		while (endIter != endEnd) 
+		for(const std::shared_ptr<uml::ConnectorEnd> endindexElem: *endList) 
 		{
-			std::shared_ptr<uml::ConnectorEnd> temp = std::dynamic_pointer_cast<uml::ConnectorEnd>((*endIter)->copy());
-			getEnd()->push_back(temp);
-			endIter++;
+			std::shared_ptr<uml::ConnectorEnd> temp = std::dynamic_pointer_cast<uml::ConnectorEnd>((endindexElem)->copy());
+			m_end->push_back(temp);
 		}
 	}
 	else
@@ -177,14 +173,10 @@ ConnectorImpl& ConnectorImpl::operator=(const ConnectorImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_redefinedConnector - Subset<uml::Connector, uml::RedefinableElement >(getRedefinedElement())" << std::endl;
 		#endif
 		
-
-		Bag<uml::Connector>::iterator redefinedConnectorIter = redefinedConnectorList->begin();
-		Bag<uml::Connector>::iterator redefinedConnectorEnd = redefinedConnectorList->end();
-		while (redefinedConnectorIter != redefinedConnectorEnd) 
+		for(const std::shared_ptr<uml::Connector> redefinedConnectorindexElem: *redefinedConnectorList) 
 		{
-			std::shared_ptr<uml::Connector> temp = std::dynamic_pointer_cast<uml::Connector>((*redefinedConnectorIter)->copy());
-			getRedefinedConnector()->push_back(temp);
-			redefinedConnectorIter++;
+			std::shared_ptr<uml::Connector> temp = std::dynamic_pointer_cast<uml::Connector>((redefinedConnectorindexElem)->copy());
+			m_redefinedConnector->push_back(temp);
 		}
 	}
 	else
@@ -596,12 +588,10 @@ void ConnectorImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHa
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> ConnectorImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getConnector_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -612,51 +602,27 @@ Any ConnectorImpl::eGet(int featureID, bool resolve, bool coreType) const
 	{
 		case uml::umlPackage::CONNECTOR_ATTRIBUTE_CONTRACT:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Behavior>::iterator iter = getContract()->begin();
-			Bag<uml::Behavior>::iterator end = getContract()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //5314			
+			return eAnyBag(getContract(),1087049961); //5314
 		}
 		case uml::umlPackage::CONNECTOR_ATTRIBUTE_END:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::ConnectorEnd>::iterator iter = getEnd()->begin();
-			Bag<uml::ConnectorEnd>::iterator end = getEnd()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //5315			
+			return eAnyBag(getEnd(),786822967); //5315
 		}
 		case uml::umlPackage::CONNECTOR_ATTRIBUTE_KIND:
-			return eAny(getKind()); //5316
+			return eAny(getKind(),0,true); //5316
 		case uml::umlPackage::CONNECTOR_ATTRIBUTE_REDEFINEDCONNECTOR:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Connector>::iterator iter = getRedefinedConnector()->begin();
-			Bag<uml::Connector>::iterator end = getRedefinedConnector()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //5317			
+			return eAnyBag(getRedefinedConnector(),836776355); //5317
 		}
 		case uml::umlPackage::CONNECTOR_ATTRIBUTE_STRUCTUREDCLASSIFIER:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getStructuredClassifier().lock();
-			return eAny(returnValue); //5319
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //5319
 		}
 		case uml::umlPackage::CONNECTOR_ATTRIBUTE_TYPE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getType();
-			return eAny(returnValue); //5318
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //5318
 		}
 	}
 	return FeatureImpl::eGet(featureID, resolve, coreType);
@@ -689,108 +655,111 @@ bool ConnectorImpl::eSet(int featureID, Any newValue)
 		case uml::umlPackage::CONNECTOR_ATTRIBUTE_CONTRACT:
 		{
 			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::Behavior>> contractList(new Bag<uml::Behavior>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
+			if((newValue->isContainer()) && (uml::umlPackage::BEHAVIOR_CLASS ==newValue->getTypeId()))
 			{
-				contractList->add(std::dynamic_pointer_cast<uml::Behavior>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::Behavior>::iterator iterContract = getContract()->begin();
-			Bag<uml::Behavior>::iterator endContract = getContract()->end();
-			while (iterContract != endContract)
-			{
-				if (contractList->find(*iterContract) == -1)
+				try
 				{
-					getContract()->erase(*iterContract);
+					std::shared_ptr<Bag<uml::Behavior>> contractList= newValue->get<std::shared_ptr<Bag<uml::Behavior>>>();
+					std::shared_ptr<Bag<uml::Behavior>> _contract=getContract();
+					for(const std::shared_ptr<uml::Behavior> indexContract: *_contract)
+					{
+						if (contractList->find(indexContract) == -1)
+						{
+							_contract->erase(indexContract);
+						}
+					}
+
+					for(const std::shared_ptr<uml::Behavior> indexContract: *contractList)
+					{
+						if (_contract->find(indexContract) == -1)
+						{
+							_contract->add(indexContract);
+						}
+					}
 				}
-				iterContract++;
-			}
- 
-			iterContract = contractList->begin();
-			endContract = contractList->end();
-			while (iterContract != endContract)
-			{
-				if (getContract()->find(*iterContract) == -1)
+				catch(...)
 				{
-					getContract()->add(*iterContract);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterContract++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}
 		case uml::umlPackage::CONNECTOR_ATTRIBUTE_END:
 		{
 			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::ConnectorEnd>> endList(new Bag<uml::ConnectorEnd>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
+			if((newValue->isContainer()) && (uml::umlPackage::CONNECTOREND_CLASS ==newValue->getTypeId()))
 			{
-				endList->add(std::dynamic_pointer_cast<uml::ConnectorEnd>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::ConnectorEnd>::iterator iterEnd = getEnd()->begin();
-			Bag<uml::ConnectorEnd>::iterator endEnd = getEnd()->end();
-			while (iterEnd != endEnd)
-			{
-				if (endList->find(*iterEnd) == -1)
+				try
 				{
-					getEnd()->erase(*iterEnd);
+					std::shared_ptr<Bag<uml::ConnectorEnd>> endList= newValue->get<std::shared_ptr<Bag<uml::ConnectorEnd>>>();
+					std::shared_ptr<Bag<uml::ConnectorEnd>> _end=getEnd();
+					for(const std::shared_ptr<uml::ConnectorEnd> indexEnd: *_end)
+					{
+						if (endList->find(indexEnd) == -1)
+						{
+							_end->erase(indexEnd);
+						}
+					}
+
+					for(const std::shared_ptr<uml::ConnectorEnd> indexEnd: *endList)
+					{
+						if (_end->find(indexEnd) == -1)
+						{
+							_end->add(indexEnd);
+						}
+					}
 				}
-				iterEnd++;
-			}
- 
-			iterEnd = endList->begin();
-			endEnd = endList->end();
-			while (iterEnd != endEnd)
-			{
-				if (getEnd()->find(*iterEnd) == -1)
+				catch(...)
 				{
-					getEnd()->add(*iterEnd);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterEnd++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}
 		case uml::umlPackage::CONNECTOR_ATTRIBUTE_REDEFINEDCONNECTOR:
 		{
 			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::Connector>> redefinedConnectorList(new Bag<uml::Connector>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
+			if((newValue->isContainer()) && (uml::umlPackage::CONNECTOR_CLASS ==newValue->getTypeId()))
 			{
-				redefinedConnectorList->add(std::dynamic_pointer_cast<uml::Connector>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::Connector>::iterator iterRedefinedConnector = getRedefinedConnector()->begin();
-			Bag<uml::Connector>::iterator endRedefinedConnector = getRedefinedConnector()->end();
-			while (iterRedefinedConnector != endRedefinedConnector)
-			{
-				if (redefinedConnectorList->find(*iterRedefinedConnector) == -1)
+				try
 				{
-					getRedefinedConnector()->erase(*iterRedefinedConnector);
+					std::shared_ptr<Bag<uml::Connector>> redefinedConnectorList= newValue->get<std::shared_ptr<Bag<uml::Connector>>>();
+					std::shared_ptr<Bag<uml::Connector>> _redefinedConnector=getRedefinedConnector();
+					for(const std::shared_ptr<uml::Connector> indexRedefinedConnector: *_redefinedConnector)
+					{
+						if (redefinedConnectorList->find(indexRedefinedConnector) == -1)
+						{
+							_redefinedConnector->erase(indexRedefinedConnector);
+						}
+					}
+
+					for(const std::shared_ptr<uml::Connector> indexRedefinedConnector: *redefinedConnectorList)
+					{
+						if (_redefinedConnector->find(indexRedefinedConnector) == -1)
+						{
+							_redefinedConnector->add(indexRedefinedConnector);
+						}
+					}
 				}
-				iterRedefinedConnector++;
-			}
- 
-			iterRedefinedConnector = redefinedConnectorList->begin();
-			endRedefinedConnector = redefinedConnectorList->end();
-			while (iterRedefinedConnector != endRedefinedConnector)
-			{
-				if (getRedefinedConnector()->find(*iterRedefinedConnector) == -1)
+				catch(...)
 				{
-					getRedefinedConnector()->add(*iterRedefinedConnector);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterRedefinedConnector++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}
@@ -818,51 +787,48 @@ bool ConnectorImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ConnectorImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any ConnectorImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
   	switch(operationID)
 	{
-		
-		// 1738876455
+		// uml::Connector::getKind() : uml::ConnectorKind: 1738876455
 		case umlPackage::CONNECTOR_OPERATION_GETKIND:
 		{
-			result = eAny(this->getKind());
+			result = eAny(this->getKind(),0,false);
 			break;
 		}
-		
-		// 1203441862
+		// uml::Connector::roles(Any, std::map) : bool: 1203441862
 		case umlPackage::CONNECTOR_OPERATION_ROLES_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->roles(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->roles(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		
-		// 388310687
+		// uml::Connector::types(Any, std::map) : bool: 388310687
 		case umlPackage::CONNECTOR_OPERATION_TYPES_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->types(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->types(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
 
@@ -879,7 +845,6 @@ Any ConnectorImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sha
 	return result;
 }
 
-
 std::shared_ptr<uml::Connector> ConnectorImpl::getThisConnectorPtr() const
 {
 	return m_thisConnectorPtr.lock();
@@ -889,3 +854,5 @@ void ConnectorImpl::setThisConnectorPtr(std::weak_ptr<uml::Connector> thisConnec
 	m_thisConnectorPtr = thisConnectorPtr;
 	setThisFeaturePtr(thisConnectorPtr);
 }
+
+

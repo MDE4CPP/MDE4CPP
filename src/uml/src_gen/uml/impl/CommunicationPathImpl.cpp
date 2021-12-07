@@ -405,12 +405,10 @@ void CommunicationPathImpl::saveContent(std::shared_ptr<persistence::interfaces:
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> CommunicationPathImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getCommunicationPath_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -443,7 +441,7 @@ bool CommunicationPathImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any CommunicationPathImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any CommunicationPathImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -463,7 +461,6 @@ Any CommunicationPathImpl::eInvoke(int operationID, std::shared_ptr<std::list < 
 	return result;
 }
 
-
 std::shared_ptr<uml::CommunicationPath> CommunicationPathImpl::getThisCommunicationPathPtr() const
 {
 	return m_thisCommunicationPathPtr.lock();
@@ -473,3 +470,5 @@ void CommunicationPathImpl::setThisCommunicationPathPtr(std::weak_ptr<uml::Commu
 	m_thisCommunicationPathPtr = thisCommunicationPathPtr;
 	setThisAssociationPtr(thisCommunicationPathPtr);
 }
+
+

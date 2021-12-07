@@ -39,8 +39,8 @@
 #include "fUML/Semantics/Activities/Token.hpp"
 
 //Factories an Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 
 
@@ -223,12 +223,10 @@ void ControlTokenImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> ControlTokenImpl::eStaticClass() const
 {
 	return fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getControlToken_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -261,7 +259,7 @@ bool ControlTokenImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ControlTokenImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any ControlTokenImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -271,7 +269,7 @@ Any ControlTokenImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::
 		// 186948332
 		case ActivitiesPackage::CONTROLTOKEN_OPERATION__COPY:
 		{
-			result = eAny(this->_copy());
+				result = eAny(this->_copy());
 			break;
 		}
 		
@@ -281,16 +279,16 @@ Any ControlTokenImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::
 			//Retrieve input parameter 'other'
 			//parameter 0
 			std::shared_ptr<fUML::Semantics::Activities::Token> incoming_param_other;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_other_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_other = (*incoming_param_other_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::Activities::Token> >();
-			result = eAny(this->equals(incoming_param_other));
+			std::list<Any>::const_iterator incoming_param_other_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_other = (*incoming_param_other_arguments_citer)->get<std::shared_ptr<fUML::Semantics::Activities::Token> >();
+					result = eAny(this->equals(incoming_param_other),0,false);
 			break;
 		}
 		
 		// 2106407034
 		case ActivitiesPackage::CONTROLTOKEN_OPERATION_ISCONTROL:
 		{
-			result = eAny(this->isControl());
+					result = eAny(this->isControl(),0,false);
 			break;
 		}
 
@@ -307,7 +305,6 @@ Any ControlTokenImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::
 	return result;
 }
 
-
 std::shared_ptr<fUML::Semantics::Activities::ControlToken> ControlTokenImpl::getThisControlTokenPtr() const
 {
 	return m_thisControlTokenPtr.lock();
@@ -317,3 +314,5 @@ void ControlTokenImpl::setThisControlTokenPtr(std::weak_ptr<fUML::Semantics::Act
 	m_thisControlTokenPtr = thisControlTokenPtr;
 	setThisTokenPtr(thisControlTokenPtr);
 }
+
+

@@ -453,12 +453,10 @@ void ClauseImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandl
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> ClauseImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getClause_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -469,68 +467,28 @@ Any ClauseImpl::eGet(int featureID, bool resolve, bool coreType) const
 	{
 		case uml::umlPackage::CLAUSE_ATTRIBUTE_BODY:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::ExecutableNode>::iterator iter = getBody()->begin();
-			Bag<uml::ExecutableNode>::iterator end = getBody()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //383			
+			return eAnyBag(getBody(),1759403238); //383
 		}
 		case uml::umlPackage::CLAUSE_ATTRIBUTE_BODYOUTPUT:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::OutputPin>::iterator iter = getBodyOutput()->begin();
-			Bag<uml::OutputPin>::iterator end = getBodyOutput()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //384			
+			return eAnyBag(getBodyOutput(),681481770); //384
 		}
 		case uml::umlPackage::CLAUSE_ATTRIBUTE_DECIDER:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getDecider();
-			return eAny(returnValue); //385
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //385
 		}
 		case uml::umlPackage::CLAUSE_ATTRIBUTE_PREDECESSORCLAUSE:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Clause>::iterator iter = getPredecessorClause()->begin();
-			Bag<uml::Clause>::iterator end = getPredecessorClause()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //386			
+			return eAnyBag(getPredecessorClause(),1571471300); //386
 		}
 		case uml::umlPackage::CLAUSE_ATTRIBUTE_SUCCESSORCLAUSE:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Clause>::iterator iter = getSuccessorClause()->begin();
-			Bag<uml::Clause>::iterator end = getSuccessorClause()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //387			
+			return eAnyBag(getSuccessorClause(),1571471300); //387
 		}
 		case uml::umlPackage::CLAUSE_ATTRIBUTE_TEST:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::ExecutableNode>::iterator iter = getTest()->begin();
-			Bag<uml::ExecutableNode>::iterator end = getTest()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //388			
+			return eAnyBag(getTest(),1759403238); //388
 		}
 	}
 	return ElementImpl::eGet(featureID, resolve, coreType);
@@ -563,72 +521,74 @@ bool ClauseImpl::eSet(int featureID, Any newValue)
 		case uml::umlPackage::CLAUSE_ATTRIBUTE_BODY:
 		{
 			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::ExecutableNode>> bodyList(new Bag<uml::ExecutableNode>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
+			if((newValue->isContainer()) && (uml::umlPackage::EXECUTABLENODE_CLASS ==newValue->getTypeId()))
 			{
-				bodyList->add(std::dynamic_pointer_cast<uml::ExecutableNode>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::ExecutableNode>::iterator iterBody = getBody()->begin();
-			Bag<uml::ExecutableNode>::iterator endBody = getBody()->end();
-			while (iterBody != endBody)
-			{
-				if (bodyList->find(*iterBody) == -1)
+				try
 				{
-					getBody()->erase(*iterBody);
+					std::shared_ptr<Bag<uml::ExecutableNode>> bodyList= newValue->get<std::shared_ptr<Bag<uml::ExecutableNode>>>();
+					std::shared_ptr<Bag<uml::ExecutableNode>> _body=getBody();
+					for(const std::shared_ptr<uml::ExecutableNode> indexBody: *_body)
+					{
+						if (bodyList->find(indexBody) == -1)
+						{
+							_body->erase(indexBody);
+						}
+					}
+
+					for(const std::shared_ptr<uml::ExecutableNode> indexBody: *bodyList)
+					{
+						if (_body->find(indexBody) == -1)
+						{
+							_body->add(indexBody);
+						}
+					}
 				}
-				iterBody++;
-			}
- 
-			iterBody = bodyList->begin();
-			endBody = bodyList->end();
-			while (iterBody != endBody)
-			{
-				if (getBody()->find(*iterBody) == -1)
+				catch(...)
 				{
-					getBody()->add(*iterBody);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterBody++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}
 		case uml::umlPackage::CLAUSE_ATTRIBUTE_BODYOUTPUT:
 		{
 			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::OutputPin>> bodyOutputList(new Bag<uml::OutputPin>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
+			if((newValue->isContainer()) && (uml::umlPackage::OUTPUTPIN_CLASS ==newValue->getTypeId()))
 			{
-				bodyOutputList->add(std::dynamic_pointer_cast<uml::OutputPin>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::OutputPin>::iterator iterBodyOutput = getBodyOutput()->begin();
-			Bag<uml::OutputPin>::iterator endBodyOutput = getBodyOutput()->end();
-			while (iterBodyOutput != endBodyOutput)
-			{
-				if (bodyOutputList->find(*iterBodyOutput) == -1)
+				try
 				{
-					getBodyOutput()->erase(*iterBodyOutput);
+					std::shared_ptr<Bag<uml::OutputPin>> bodyOutputList= newValue->get<std::shared_ptr<Bag<uml::OutputPin>>>();
+					std::shared_ptr<Bag<uml::OutputPin>> _bodyOutput=getBodyOutput();
+					for(const std::shared_ptr<uml::OutputPin> indexBodyOutput: *_bodyOutput)
+					{
+						if (bodyOutputList->find(indexBodyOutput) == -1)
+						{
+							_bodyOutput->erase(indexBodyOutput);
+						}
+					}
+
+					for(const std::shared_ptr<uml::OutputPin> indexBodyOutput: *bodyOutputList)
+					{
+						if (_bodyOutput->find(indexBodyOutput) == -1)
+						{
+							_bodyOutput->add(indexBodyOutput);
+						}
+					}
 				}
-				iterBodyOutput++;
-			}
- 
-			iterBodyOutput = bodyOutputList->begin();
-			endBodyOutput = bodyOutputList->end();
-			while (iterBodyOutput != endBodyOutput)
-			{
-				if (getBodyOutput()->find(*iterBodyOutput) == -1)
+				catch(...)
 				{
-					getBodyOutput()->add(*iterBodyOutput);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterBodyOutput++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}
@@ -643,108 +603,111 @@ bool ClauseImpl::eSet(int featureID, Any newValue)
 		case uml::umlPackage::CLAUSE_ATTRIBUTE_PREDECESSORCLAUSE:
 		{
 			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::Clause>> predecessorClauseList(new Bag<uml::Clause>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
+			if((newValue->isContainer()) && (uml::umlPackage::CLAUSE_CLASS ==newValue->getTypeId()))
 			{
-				predecessorClauseList->add(std::dynamic_pointer_cast<uml::Clause>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::Clause>::iterator iterPredecessorClause = getPredecessorClause()->begin();
-			Bag<uml::Clause>::iterator endPredecessorClause = getPredecessorClause()->end();
-			while (iterPredecessorClause != endPredecessorClause)
-			{
-				if (predecessorClauseList->find(*iterPredecessorClause) == -1)
+				try
 				{
-					getPredecessorClause()->erase(*iterPredecessorClause);
+					std::shared_ptr<Bag<uml::Clause>> predecessorClauseList= newValue->get<std::shared_ptr<Bag<uml::Clause>>>();
+					std::shared_ptr<Bag<uml::Clause>> _predecessorClause=getPredecessorClause();
+					for(const std::shared_ptr<uml::Clause> indexPredecessorClause: *_predecessorClause)
+					{
+						if (predecessorClauseList->find(indexPredecessorClause) == -1)
+						{
+							_predecessorClause->erase(indexPredecessorClause);
+						}
+					}
+
+					for(const std::shared_ptr<uml::Clause> indexPredecessorClause: *predecessorClauseList)
+					{
+						if (_predecessorClause->find(indexPredecessorClause) == -1)
+						{
+							_predecessorClause->add(indexPredecessorClause);
+						}
+					}
 				}
-				iterPredecessorClause++;
-			}
- 
-			iterPredecessorClause = predecessorClauseList->begin();
-			endPredecessorClause = predecessorClauseList->end();
-			while (iterPredecessorClause != endPredecessorClause)
-			{
-				if (getPredecessorClause()->find(*iterPredecessorClause) == -1)
+				catch(...)
 				{
-					getPredecessorClause()->add(*iterPredecessorClause);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterPredecessorClause++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}
 		case uml::umlPackage::CLAUSE_ATTRIBUTE_SUCCESSORCLAUSE:
 		{
 			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::Clause>> successorClauseList(new Bag<uml::Clause>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
+			if((newValue->isContainer()) && (uml::umlPackage::CLAUSE_CLASS ==newValue->getTypeId()))
 			{
-				successorClauseList->add(std::dynamic_pointer_cast<uml::Clause>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::Clause>::iterator iterSuccessorClause = getSuccessorClause()->begin();
-			Bag<uml::Clause>::iterator endSuccessorClause = getSuccessorClause()->end();
-			while (iterSuccessorClause != endSuccessorClause)
-			{
-				if (successorClauseList->find(*iterSuccessorClause) == -1)
+				try
 				{
-					getSuccessorClause()->erase(*iterSuccessorClause);
+					std::shared_ptr<Bag<uml::Clause>> successorClauseList= newValue->get<std::shared_ptr<Bag<uml::Clause>>>();
+					std::shared_ptr<Bag<uml::Clause>> _successorClause=getSuccessorClause();
+					for(const std::shared_ptr<uml::Clause> indexSuccessorClause: *_successorClause)
+					{
+						if (successorClauseList->find(indexSuccessorClause) == -1)
+						{
+							_successorClause->erase(indexSuccessorClause);
+						}
+					}
+
+					for(const std::shared_ptr<uml::Clause> indexSuccessorClause: *successorClauseList)
+					{
+						if (_successorClause->find(indexSuccessorClause) == -1)
+						{
+							_successorClause->add(indexSuccessorClause);
+						}
+					}
 				}
-				iterSuccessorClause++;
-			}
- 
-			iterSuccessorClause = successorClauseList->begin();
-			endSuccessorClause = successorClauseList->end();
-			while (iterSuccessorClause != endSuccessorClause)
-			{
-				if (getSuccessorClause()->find(*iterSuccessorClause) == -1)
+				catch(...)
 				{
-					getSuccessorClause()->add(*iterSuccessorClause);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterSuccessorClause++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}
 		case uml::umlPackage::CLAUSE_ATTRIBUTE_TEST:
 		{
 			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::ExecutableNode>> testList(new Bag<uml::ExecutableNode>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
+			if((newValue->isContainer()) && (uml::umlPackage::EXECUTABLENODE_CLASS ==newValue->getTypeId()))
 			{
-				testList->add(std::dynamic_pointer_cast<uml::ExecutableNode>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::ExecutableNode>::iterator iterTest = getTest()->begin();
-			Bag<uml::ExecutableNode>::iterator endTest = getTest()->end();
-			while (iterTest != endTest)
-			{
-				if (testList->find(*iterTest) == -1)
+				try
 				{
-					getTest()->erase(*iterTest);
+					std::shared_ptr<Bag<uml::ExecutableNode>> testList= newValue->get<std::shared_ptr<Bag<uml::ExecutableNode>>>();
+					std::shared_ptr<Bag<uml::ExecutableNode>> _test=getTest();
+					for(const std::shared_ptr<uml::ExecutableNode> indexTest: *_test)
+					{
+						if (testList->find(indexTest) == -1)
+						{
+							_test->erase(indexTest);
+						}
+					}
+
+					for(const std::shared_ptr<uml::ExecutableNode> indexTest: *testList)
+					{
+						if (_test->find(indexTest) == -1)
+						{
+							_test->add(indexTest);
+						}
+					}
 				}
-				iterTest++;
-			}
- 
-			iterTest = testList->begin();
-			endTest = testList->end();
-			while (iterTest != endTest)
-			{
-				if (getTest()->find(*iterTest) == -1)
+				catch(...)
 				{
-					getTest()->add(*iterTest);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterTest++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}
@@ -756,61 +719,58 @@ bool ClauseImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ClauseImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any ClauseImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
   	switch(operationID)
 	{
-		
-		// 555602658
+		// uml::Clause::body_output_pins(Any, std::map) : bool: 555602658
 		case umlPackage::CLAUSE_OPERATION_BODY_OUTPUT_PINS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->body_output_pins(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->body_output_pins(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		
-		// 1781490540
+		// uml::Clause::decider_output(Any, std::map) : bool: 1781490540
 		case umlPackage::CLAUSE_OPERATION_DECIDER_OUTPUT_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->decider_output(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->decider_output(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		
-		// 1862078178
+		// uml::Clause::test_and_body(Any, std::map) : bool: 1862078178
 		case umlPackage::CLAUSE_OPERATION_TEST_AND_BODY_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->test_and_body(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->test_and_body(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
 
@@ -827,7 +787,6 @@ Any ClauseImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared
 	return result;
 }
 
-
 std::shared_ptr<uml::Clause> ClauseImpl::getThisClausePtr() const
 {
 	return m_thisClausePtr.lock();
@@ -837,3 +796,5 @@ void ClauseImpl::setThisClausePtr(std::weak_ptr<uml::Clause> thisClausePtr)
 	m_thisClausePtr = thisClausePtr;
 	setThisElementPtr(thisClausePtr);
 }
+
+

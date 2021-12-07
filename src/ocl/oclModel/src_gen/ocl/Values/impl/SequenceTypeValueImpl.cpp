@@ -32,17 +32,14 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "ocl/Types/TypesFactory.hpp"
 #include "ocl/Values/ValuesFactory.hpp"
 
-#include "ocl/Types/CollectionType.hpp"
 #include "ocl/Values/CollectionValue.hpp"
 #include "ocl/Values/Element.hpp"
 #include "fUML/Semantics/Values/Value.hpp"
 
 //Factories an Package includes
 #include "ocl/oclPackage.hpp"
-#include "ocl/Types/TypesPackage.hpp"
 #include "ocl/Values/ValuesPackage.hpp"
 #include "fUML/Semantics/Values/ValuesPackage.hpp"
 
@@ -209,12 +206,10 @@ void SequenceTypeValueImpl::saveContent(std::shared_ptr<persistence::interfaces:
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> SequenceTypeValueImpl::eStaticClass() const
 {
 	return ocl::Values::ValuesPackage::eInstance()->getSequenceTypeValue_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -247,7 +242,7 @@ bool SequenceTypeValueImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any SequenceTypeValueImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any SequenceTypeValueImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -260,9 +255,9 @@ Any SequenceTypeValueImpl::eInvoke(int operationID, std::shared_ptr<std::list < 
 			//Retrieve input parameter 'value'
 			//parameter 0
 			std::shared_ptr<fUML::Semantics::Values::Value> incoming_param_value;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_value_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_value = (*incoming_param_value_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::Values::Value> >();
-			result = eAny(this->addValue(incoming_param_value));
+			std::list<Any>::const_iterator incoming_param_value_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_value = (*incoming_param_value_arguments_citer)->get<std::shared_ptr<fUML::Semantics::Values::Value> >();
+					result = eAny(this->addValue(incoming_param_value),0,false);
 			break;
 		}
 
@@ -279,7 +274,6 @@ Any SequenceTypeValueImpl::eInvoke(int operationID, std::shared_ptr<std::list < 
 	return result;
 }
 
-
 std::shared_ptr<ocl::Values::SequenceTypeValue> SequenceTypeValueImpl::getThisSequenceTypeValuePtr() const
 {
 	return m_thisSequenceTypeValuePtr.lock();
@@ -289,3 +283,5 @@ void SequenceTypeValueImpl::setThisSequenceTypeValuePtr(std::weak_ptr<ocl::Value
 	m_thisSequenceTypeValuePtr = thisSequenceTypeValuePtr;
 	setThisCollectionValuePtr(thisSequenceTypeValuePtr);
 }
+
+

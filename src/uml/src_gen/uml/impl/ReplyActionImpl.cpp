@@ -158,14 +158,10 @@ ReplyActionImpl& ReplyActionImpl::operator=(const ReplyActionImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_replyValue - Subset<uml::InputPin, uml::InputPin >(getInput())" << std::endl;
 		#endif
 		
-
-		Bag<uml::InputPin>::iterator replyValueIter = replyValueList->begin();
-		Bag<uml::InputPin>::iterator replyValueEnd = replyValueList->end();
-		while (replyValueIter != replyValueEnd) 
+		for(const std::shared_ptr<uml::InputPin> replyValueindexElem: *replyValueList) 
 		{
-			std::shared_ptr<uml::InputPin> temp = std::dynamic_pointer_cast<uml::InputPin>((*replyValueIter)->copy());
-			getReplyValue()->push_back(temp);
-			replyValueIter++;
+			std::shared_ptr<uml::InputPin> temp = std::dynamic_pointer_cast<uml::InputPin>((replyValueindexElem)->copy());
+			m_replyValue->push_back(temp);
 		}
 	}
 	else
@@ -512,12 +508,10 @@ void ReplyActionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> ReplyActionImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getReplyAction_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -529,24 +523,16 @@ Any ReplyActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::REPLYACTION_ATTRIBUTE_REPLYTOCALL:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getReplyToCall();
-			return eAny(returnValue); //21127
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //21127
 		}
 		case uml::umlPackage::REPLYACTION_ATTRIBUTE_REPLYVALUE:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::InputPin>::iterator iter = getReplyValue()->begin();
-			Bag<uml::InputPin>::iterator end = getReplyValue()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //21128			
+			return eAnyBag(getReplyValue(),567201991); //21128
 		}
 		case uml::umlPackage::REPLYACTION_ATTRIBUTE_RETURNINFORMATION:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getReturnInformation();
-			return eAny(returnValue); //21129
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //21129
 		}
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
@@ -581,36 +567,37 @@ bool ReplyActionImpl::eSet(int featureID, Any newValue)
 		case uml::umlPackage::REPLYACTION_ATTRIBUTE_REPLYVALUE:
 		{
 			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::InputPin>> replyValueList(new Bag<uml::InputPin>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
+			if((newValue->isContainer()) && (uml::umlPackage::INPUTPIN_CLASS ==newValue->getTypeId()))
 			{
-				replyValueList->add(std::dynamic_pointer_cast<uml::InputPin>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::InputPin>::iterator iterReplyValue = getReplyValue()->begin();
-			Bag<uml::InputPin>::iterator endReplyValue = getReplyValue()->end();
-			while (iterReplyValue != endReplyValue)
-			{
-				if (replyValueList->find(*iterReplyValue) == -1)
+				try
 				{
-					getReplyValue()->erase(*iterReplyValue);
+					std::shared_ptr<Bag<uml::InputPin>> replyValueList= newValue->get<std::shared_ptr<Bag<uml::InputPin>>>();
+					std::shared_ptr<Bag<uml::InputPin>> _replyValue=getReplyValue();
+					for(const std::shared_ptr<uml::InputPin> indexReplyValue: *_replyValue)
+					{
+						if (replyValueList->find(indexReplyValue) == -1)
+						{
+							_replyValue->erase(indexReplyValue);
+						}
+					}
+
+					for(const std::shared_ptr<uml::InputPin> indexReplyValue: *replyValueList)
+					{
+						if (_replyValue->find(indexReplyValue) == -1)
+						{
+							_replyValue->add(indexReplyValue);
+						}
+					}
 				}
-				iterReplyValue++;
-			}
- 
-			iterReplyValue = replyValueList->begin();
-			endReplyValue = replyValueList->end();
-			while (iterReplyValue != endReplyValue)
-			{
-				if (getReplyValue()->find(*iterReplyValue) == -1)
+				catch(...)
 				{
-					getReplyValue()->add(*iterReplyValue);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterReplyValue++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}
@@ -630,44 +617,42 @@ bool ReplyActionImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ReplyActionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any ReplyActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
   	switch(operationID)
 	{
-		
-		// 1073826622
+		// uml::ReplyAction::event_on_reply_to_call_trigger(Any, std::map) : bool: 1073826622
 		case umlPackage::REPLYACTION_OPERATION_EVENT_ON_REPLY_TO_CALL_TRIGGER_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->event_on_reply_to_call_trigger(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->event_on_reply_to_call_trigger(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		
-		// 347748320
+		// uml::ReplyAction::pins_match_parameter(Any, std::map) : bool: 347748320
 		case umlPackage::REPLYACTION_OPERATION_PINS_MATCH_PARAMETER_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->pins_match_parameter(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->pins_match_parameter(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
 
@@ -684,7 +669,6 @@ Any ReplyActionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::s
 	return result;
 }
 
-
 std::shared_ptr<uml::ReplyAction> ReplyActionImpl::getThisReplyActionPtr() const
 {
 	return m_thisReplyActionPtr.lock();
@@ -694,3 +678,5 @@ void ReplyActionImpl::setThisReplyActionPtr(std::weak_ptr<uml::ReplyAction> this
 	m_thisReplyActionPtr = thisReplyActionPtr;
 	setThisActionPtr(thisReplyActionPtr);
 }
+
+

@@ -32,11 +32,11 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Loci/LociFactory.hpp"
-#include "ocl/Evaluations/EvaluationsFactory.hpp"
-#include "ocl/Expressions/ExpressionsFactory.hpp"
-#include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Values/ValuesFactory.hpp"
+#include "ocl/Evaluations/EvaluationsFactory.hpp"
+#include "uml/umlFactory.hpp"
+#include "ocl/Expressions/ExpressionsFactory.hpp"
+#include "fUML/Semantics/Loci/LociFactory.hpp"
 
 #include "ocl/Evaluations/EvalEnvironment.hpp"
 #include "ocl/Evaluations/LiteralExpEval.hpp"
@@ -254,12 +254,10 @@ void TupleLiteralExpEvalImpl::saveContent(std::shared_ptr<persistence::interface
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> TupleLiteralExpEvalImpl::eStaticClass() const
 {
 	return ocl::Evaluations::EvaluationsPackage::eInstance()->getTupleLiteralExpEval_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -342,7 +340,7 @@ bool TupleLiteralExpEvalImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any TupleLiteralExpEvalImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any TupleLiteralExpEvalImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -362,7 +360,6 @@ Any TupleLiteralExpEvalImpl::eInvoke(int operationID, std::shared_ptr<std::list 
 	return result;
 }
 
-
 std::shared_ptr<ocl::Evaluations::TupleLiteralExpEval> TupleLiteralExpEvalImpl::getThisTupleLiteralExpEvalPtr() const
 {
 	return m_thisTupleLiteralExpEvalPtr.lock();
@@ -372,3 +369,5 @@ void TupleLiteralExpEvalImpl::setThisTupleLiteralExpEvalPtr(std::weak_ptr<ocl::E
 	m_thisTupleLiteralExpEvalPtr = thisTupleLiteralExpEvalPtr;
 	setThisLiteralExpEvalPtr(thisTupleLiteralExpEvalPtr);
 }
+
+

@@ -33,8 +33,8 @@
 
 #include <exception> // used in Persistence
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
-#include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Actions/ActionsFactory.hpp"
+#include "uml/umlFactory.hpp"
 
 #include "uml/Action.hpp"
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
@@ -47,8 +47,8 @@
 #include "fUML/Semantics/Activities/Token.hpp"
 
 //Factories an Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -228,12 +228,10 @@ void ReadLinkActionActivationImpl::saveContent(std::shared_ptr<persistence::inte
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> ReadLinkActionActivationImpl::eStaticClass() const
 {
 	return fUML::Semantics::Actions::ActionsPackage::eInstance()->getReadLinkActionActivation_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -266,7 +264,7 @@ bool ReadLinkActionActivationImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ReadLinkActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any ReadLinkActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -286,7 +284,6 @@ Any ReadLinkActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::
 	return result;
 }
 
-
 std::shared_ptr<fUML::Semantics::Actions::ReadLinkActionActivation> ReadLinkActionActivationImpl::getThisReadLinkActionActivationPtr() const
 {
 	return m_thisReadLinkActionActivationPtr.lock();
@@ -296,3 +293,5 @@ void ReadLinkActionActivationImpl::setThisReadLinkActionActivationPtr(std::weak_
 	m_thisReadLinkActionActivationPtr = thisReadLinkActionActivationPtr;
 	setThisLinkActionActivationPtr(thisReadLinkActionActivationPtr);
 }
+
+

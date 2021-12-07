@@ -405,12 +405,10 @@ void ExceptionHandlerImpl::saveContent(std::shared_ptr<persistence::interfaces::
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> ExceptionHandlerImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getExceptionHandler_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -422,29 +420,21 @@ Any ExceptionHandlerImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::EXCEPTIONHANDLER_ATTRIBUTE_EXCEPTIONINPUT:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getExceptionInput();
-			return eAny(returnValue); //873
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //873
 		}
 		case uml::umlPackage::EXCEPTIONHANDLER_ATTRIBUTE_EXCEPTIONTYPE:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Classifier>::iterator iter = getExceptionType()->begin();
-			Bag<uml::Classifier>::iterator end = getExceptionType()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //874			
+			return eAnyBag(getExceptionType(),845259359); //874
 		}
 		case uml::umlPackage::EXCEPTIONHANDLER_ATTRIBUTE_HANDLERBODY:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getHandlerBody();
-			return eAny(returnValue); //875
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //875
 		}
 		case uml::umlPackage::EXCEPTIONHANDLER_ATTRIBUTE_PROTECTEDNODE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getProtectedNode().lock();
-			return eAny(returnValue); //876
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //876
 		}
 	}
 	return ElementImpl::eGet(featureID, resolve, coreType);
@@ -481,36 +471,37 @@ bool ExceptionHandlerImpl::eSet(int featureID, Any newValue)
 		case uml::umlPackage::EXCEPTIONHANDLER_ATTRIBUTE_EXCEPTIONTYPE:
 		{
 			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::Classifier>> exceptionTypeList(new Bag<uml::Classifier>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
+			if((newValue->isContainer()) && (uml::umlPackage::CLASSIFIER_CLASS ==newValue->getTypeId()))
 			{
-				exceptionTypeList->add(std::dynamic_pointer_cast<uml::Classifier>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::Classifier>::iterator iterExceptionType = getExceptionType()->begin();
-			Bag<uml::Classifier>::iterator endExceptionType = getExceptionType()->end();
-			while (iterExceptionType != endExceptionType)
-			{
-				if (exceptionTypeList->find(*iterExceptionType) == -1)
+				try
 				{
-					getExceptionType()->erase(*iterExceptionType);
+					std::shared_ptr<Bag<uml::Classifier>> exceptionTypeList= newValue->get<std::shared_ptr<Bag<uml::Classifier>>>();
+					std::shared_ptr<Bag<uml::Classifier>> _exceptionType=getExceptionType();
+					for(const std::shared_ptr<uml::Classifier> indexExceptionType: *_exceptionType)
+					{
+						if (exceptionTypeList->find(indexExceptionType) == -1)
+						{
+							_exceptionType->erase(indexExceptionType);
+						}
+					}
+
+					for(const std::shared_ptr<uml::Classifier> indexExceptionType: *exceptionTypeList)
+					{
+						if (_exceptionType->find(indexExceptionType) == -1)
+						{
+							_exceptionType->add(indexExceptionType);
+						}
+					}
 				}
-				iterExceptionType++;
-			}
- 
-			iterExceptionType = exceptionTypeList->begin();
-			endExceptionType = exceptionTypeList->end();
-			while (iterExceptionType != endExceptionType)
-			{
-				if (getExceptionType()->find(*iterExceptionType) == -1)
+				catch(...)
 				{
-					getExceptionType()->add(*iterExceptionType);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterExceptionType++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}
@@ -538,112 +529,106 @@ bool ExceptionHandlerImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ExceptionHandlerImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any ExceptionHandlerImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
   	switch(operationID)
 	{
-		
-		// 2069883868
+		// uml::ExceptionHandler::edge_source_target(Any, std::map) : bool: 2069883868
 		case umlPackage::EXCEPTIONHANDLER_OPERATION_EDGE_SOURCE_TARGET_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->edge_source_target(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->edge_source_target(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		
-		// 246495643
+		// uml::ExceptionHandler::exception_input_type(Any, std::map) : bool: 246495643
 		case umlPackage::EXCEPTIONHANDLER_OPERATION_EXCEPTION_INPUT_TYPE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->exception_input_type(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->exception_input_type(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		
-		// 925333255
+		// uml::ExceptionHandler::handler_body_edges(Any, std::map) : bool: 925333255
 		case umlPackage::EXCEPTIONHANDLER_OPERATION_HANDLER_BODY_EDGES_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->handler_body_edges(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->handler_body_edges(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		
-		// 1200757114
+		// uml::ExceptionHandler::handler_body_owner(Any, std::map) : bool: 1200757114
 		case umlPackage::EXCEPTIONHANDLER_OPERATION_HANDLER_BODY_OWNER_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->handler_body_owner(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->handler_body_owner(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		
-		// 2043514136
+		// uml::ExceptionHandler::one_input(Any, std::map) : bool: 2043514136
 		case umlPackage::EXCEPTIONHANDLER_OPERATION_ONE_INPUT_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->one_input(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->one_input(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		
-		// 1444145046
+		// uml::ExceptionHandler::output_pins(Any, std::map) : bool: 1444145046
 		case umlPackage::EXCEPTIONHANDLER_OPERATION_OUTPUT_PINS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->output_pins(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->output_pins(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
 
@@ -660,7 +645,6 @@ Any ExceptionHandlerImpl::eInvoke(int operationID, std::shared_ptr<std::list < s
 	return result;
 }
 
-
 std::shared_ptr<uml::ExceptionHandler> ExceptionHandlerImpl::getThisExceptionHandlerPtr() const
 {
 	return m_thisExceptionHandlerPtr.lock();
@@ -670,3 +654,5 @@ void ExceptionHandlerImpl::setThisExceptionHandlerPtr(std::weak_ptr<uml::Excepti
 	m_thisExceptionHandlerPtr = thisExceptionHandlerPtr;
 	setThisElementPtr(thisExceptionHandlerPtr);
 }
+
+

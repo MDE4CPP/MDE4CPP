@@ -44,8 +44,8 @@
 #include "uml/ValueSpecification.hpp"
 
 //Factories an Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "fUML/Semantics/Values/ValuesPackage.hpp"
@@ -342,12 +342,10 @@ void ReturnInformationImpl::saveContent(std::shared_ptr<persistence::interfaces:
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> ReturnInformationImpl::eStaticClass() const
 {
 	return fUML::Semantics::Actions::ActionsPackage::eInstance()->getReturnInformation_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -359,7 +357,7 @@ Any ReturnInformationImpl::eGet(int featureID, bool resolve, bool coreType) cons
 		case fUML::Semantics::Actions::ActionsPackage::RETURNINFORMATION_ATTRIBUTE_CALLEVENTOCCURRENCE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getCallEventOccurrence();
-			return eAny(returnValue); //1020
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //1020
 		}
 	}
 	return fUML::Semantics::Values::ValueImpl::eGet(featureID, resolve, coreType);
@@ -395,7 +393,7 @@ bool ReturnInformationImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ReturnInformationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any ReturnInformationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -405,7 +403,7 @@ Any ReturnInformationImpl::eInvoke(int operationID, std::shared_ptr<std::list < 
 		// 2045103425
 		case ActionsPackage::RETURNINFORMATION_OPERATION__COPY:
 		{
-			result = eAny(this->_copy());
+				result = eAny(this->_copy());
 			break;
 		}
 		
@@ -415,30 +413,30 @@ Any ReturnInformationImpl::eInvoke(int operationID, std::shared_ptr<std::list < 
 			//Retrieve input parameter 'otherValue'
 			//parameter 0
 			std::shared_ptr<fUML::Semantics::Values::Value> incoming_param_otherValue;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_otherValue_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_otherValue = (*incoming_param_otherValue_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::Values::Value> >();
-			result = eAny(this->equals(incoming_param_otherValue));
+			std::list<Any>::const_iterator incoming_param_otherValue_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_otherValue = (*incoming_param_otherValue_arguments_citer)->get<std::shared_ptr<fUML::Semantics::Values::Value> >();
+					result = eAny(this->equals(incoming_param_otherValue),0,false);
 			break;
 		}
 		
 		// 455013808
 		case ActionsPackage::RETURNINFORMATION_OPERATION_GETOPERATION:
 		{
-			result = eAny(this->getOperation());
+				result = eAny(this->getOperation());
 			break;
 		}
 		
 		// 904744346
 		case ActionsPackage::RETURNINFORMATION_OPERATION_GETTYPES:
 		{
-			result = eAny(this->getTypes());
+				result = eAny(this->getTypes());
 			break;
 		}
 		
 		// 1466582464
 		case ActionsPackage::RETURNINFORMATION_OPERATION_NEW_:
 		{
-			result = eAny(this->new_());
+				result = eAny(this->new_());
 			break;
 		}
 		
@@ -448,8 +446,8 @@ Any ReturnInformationImpl::eInvoke(int operationID, std::shared_ptr<std::list < 
 			//Retrieve input parameter 'outputParameterValues'
 			//parameter 0
 			std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> incoming_param_outputParameterValues;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_outputParameterValues_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_outputParameterValues = (*incoming_param_outputParameterValues_arguments_citer)->get()->get<std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> >();
+			std::list<Any>::const_iterator incoming_param_outputParameterValues_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_outputParameterValues = (*incoming_param_outputParameterValues_arguments_citer)->get<std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> >();
 			this->reply(incoming_param_outputParameterValues);
 			break;
 		}
@@ -457,14 +455,14 @@ Any ReturnInformationImpl::eInvoke(int operationID, std::shared_ptr<std::list < 
 		// 364086231
 		case ActionsPackage::RETURNINFORMATION_OPERATION_SPECIFY:
 		{
-			result = eAny(this->specify());
+				result = eAny(this->specify());
 			break;
 		}
 		
 		// 352529642
 		case ActionsPackage::RETURNINFORMATION_OPERATION_TOSTRING:
 		{
-			result = eAny(this->toString());
+					result = eAny(this->toString(),0,false);
 			break;
 		}
 
@@ -481,7 +479,6 @@ Any ReturnInformationImpl::eInvoke(int operationID, std::shared_ptr<std::list < 
 	return result;
 }
 
-
 std::shared_ptr<fUML::Semantics::Actions::ReturnInformation> ReturnInformationImpl::getThisReturnInformationPtr() const
 {
 	return m_thisReturnInformationPtr.lock();
@@ -491,3 +488,5 @@ void ReturnInformationImpl::setThisReturnInformationPtr(std::weak_ptr<fUML::Sema
 	m_thisReturnInformationPtr = thisReturnInformationPtr;
 	setThisValuePtr(thisReturnInformationPtr);
 }
+
+

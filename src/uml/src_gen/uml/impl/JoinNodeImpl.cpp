@@ -401,12 +401,10 @@ void JoinNodeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> JoinNodeImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getJoinNode_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -416,11 +414,11 @@ Any JoinNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::JOINNODE_ATTRIBUTE_ISCOMBINEDUPLICATE:
-			return eAny(getIsCombineDuplicate()); //13120
+			return eAny(getIsCombineDuplicate(),0,true); //13120
 		case uml::umlPackage::JOINNODE_ATTRIBUTE_JOINSPEC:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getJoinSpec();
-			return eAny(returnValue); //13121
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //13121
 		}
 	}
 	return ControlNodeImpl::eGet(featureID, resolve, coreType);
@@ -465,44 +463,42 @@ bool JoinNodeImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any JoinNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any JoinNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
   	switch(operationID)
 	{
-		
-		// 1655982604
+		// uml::JoinNode::incoming_object_flow(Any, std::map) : bool: 1655982604
 		case umlPackage::JOINNODE_OPERATION_INCOMING_OBJECT_FLOW_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->incoming_object_flow(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->incoming_object_flow(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		
-		// 1727251626
+		// uml::JoinNode::one_outgoing_edge(Any, std::map) : bool: 1727251626
 		case umlPackage::JOINNODE_OPERATION_ONE_OUTGOING_EDGE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->one_outgoing_edge(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->one_outgoing_edge(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
 
@@ -519,7 +515,6 @@ Any JoinNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shar
 	return result;
 }
 
-
 std::shared_ptr<uml::JoinNode> JoinNodeImpl::getThisJoinNodePtr() const
 {
 	return m_thisJoinNodePtr.lock();
@@ -529,3 +524,5 @@ void JoinNodeImpl::setThisJoinNodePtr(std::weak_ptr<uml::JoinNode> thisJoinNodeP
 	m_thisJoinNodePtr = thisJoinNodePtr;
 	setThisControlNodePtr(thisJoinNodePtr);
 }
+
+

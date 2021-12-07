@@ -346,12 +346,10 @@ void InvalidLiteralExpImpl::saveContent(std::shared_ptr<persistence::interfaces:
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> InvalidLiteralExpImpl::eStaticClass() const
 {
 	return ocl::Expressions::ExpressionsPackage::eInstance()->getInvalidLiteralExp_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -384,7 +382,7 @@ bool InvalidLiteralExpImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any InvalidLiteralExpImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any InvalidLiteralExpImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -404,7 +402,6 @@ Any InvalidLiteralExpImpl::eInvoke(int operationID, std::shared_ptr<std::list < 
 	return result;
 }
 
-
 std::shared_ptr<ocl::Expressions::InvalidLiteralExp> InvalidLiteralExpImpl::getThisInvalidLiteralExpPtr() const
 {
 	return m_thisInvalidLiteralExpPtr.lock();
@@ -414,3 +411,5 @@ void InvalidLiteralExpImpl::setThisInvalidLiteralExpPtr(std::weak_ptr<ocl::Expre
 	m_thisInvalidLiteralExpPtr = thisInvalidLiteralExpPtr;
 	setThisLiteralExpPtr(thisInvalidLiteralExpPtr);
 }
+
+

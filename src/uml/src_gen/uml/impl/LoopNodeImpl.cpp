@@ -188,14 +188,10 @@ LoopNodeImpl& LoopNodeImpl::operator=(const LoopNodeImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_loopVariable - Subset<uml::OutputPin, uml::Element >(getOwnedElement())" << std::endl;
 		#endif
 		
-
-		Bag<uml::OutputPin>::iterator loopVariableIter = loopVariableList->begin();
-		Bag<uml::OutputPin>::iterator loopVariableEnd = loopVariableList->end();
-		while (loopVariableIter != loopVariableEnd) 
+		for(const std::shared_ptr<uml::OutputPin> loopVariableindexElem: *loopVariableList) 
 		{
-			std::shared_ptr<uml::OutputPin> temp = std::dynamic_pointer_cast<uml::OutputPin>((*loopVariableIter)->copy());
-			getLoopVariable()->push_back(temp);
-			loopVariableIter++;
+			std::shared_ptr<uml::OutputPin> temp = std::dynamic_pointer_cast<uml::OutputPin>((loopVariableindexElem)->copy());
+			m_loopVariable->push_back(temp);
 		}
 	}
 	else
@@ -857,12 +853,10 @@ void LoopNodeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> LoopNodeImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getLoopNode_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -873,94 +867,38 @@ Any LoopNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 	{
 		case uml::umlPackage::LOOPNODE_ATTRIBUTE_BODYOUTPUT:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::OutputPin>::iterator iter = getBodyOutput()->begin();
-			Bag<uml::OutputPin>::iterator end = getBodyOutput()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //14444			
+			return eAnyBag(getBodyOutput(),681481770); //14444
 		}
 		case uml::umlPackage::LOOPNODE_ATTRIBUTE_BODYPART:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::ExecutableNode>::iterator iter = getBodyPart()->begin();
-			Bag<uml::ExecutableNode>::iterator end = getBodyPart()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //14445			
+			return eAnyBag(getBodyPart(),1759403238); //14445
 		}
 		case uml::umlPackage::LOOPNODE_ATTRIBUTE_DECIDER:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getDecider();
-			return eAny(returnValue); //14446
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //14446
 		}
 		case uml::umlPackage::LOOPNODE_ATTRIBUTE_ISTESTEDFIRST:
-			return eAny(getIsTestedFirst()); //14447
+			return eAny(getIsTestedFirst(),0,true); //14447
 		case uml::umlPackage::LOOPNODE_ATTRIBUTE_LOOPVARIABLE:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::OutputPin>::iterator iter = getLoopVariable()->begin();
-			Bag<uml::OutputPin>::iterator end = getLoopVariable()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //14448			
+			return eAnyBag(getLoopVariable(),681481770); //14448
 		}
 		case uml::umlPackage::LOOPNODE_ATTRIBUTE_LOOPVARIABLEINPUT:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::InputPin>::iterator iter = getLoopVariableInput()->begin();
-			Bag<uml::InputPin>::iterator end = getLoopVariableInput()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //14449			
+			return eAnyBag(getLoopVariableInput(),567201991); //14449
 		}
 		case uml::umlPackage::LOOPNODE_ATTRIBUTE_RESULT:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::OutputPin>::iterator iter = getResult()->begin();
-			Bag<uml::OutputPin>::iterator end = getResult()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //14450			
+			return eAnyBag(getResult(),681481770); //14450
 		}
 		case uml::umlPackage::LOOPNODE_ATTRIBUTE_SETUPPART:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::ExecutableNode>::iterator iter = getSetupPart()->begin();
-			Bag<uml::ExecutableNode>::iterator end = getSetupPart()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //14451			
+			return eAnyBag(getSetupPart(),1759403238); //14451
 		}
 		case uml::umlPackage::LOOPNODE_ATTRIBUTE_TEST:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::ExecutableNode>::iterator iter = getTest()->begin();
-			Bag<uml::ExecutableNode>::iterator end = getTest()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //14452			
+			return eAnyBag(getTest(),1759403238); //14452
 		}
 	}
 	return StructuredActivityNodeImpl::eGet(featureID, resolve, coreType);
@@ -999,72 +937,74 @@ bool LoopNodeImpl::eSet(int featureID, Any newValue)
 		case uml::umlPackage::LOOPNODE_ATTRIBUTE_BODYOUTPUT:
 		{
 			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::OutputPin>> bodyOutputList(new Bag<uml::OutputPin>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
+			if((newValue->isContainer()) && (uml::umlPackage::OUTPUTPIN_CLASS ==newValue->getTypeId()))
 			{
-				bodyOutputList->add(std::dynamic_pointer_cast<uml::OutputPin>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::OutputPin>::iterator iterBodyOutput = getBodyOutput()->begin();
-			Bag<uml::OutputPin>::iterator endBodyOutput = getBodyOutput()->end();
-			while (iterBodyOutput != endBodyOutput)
-			{
-				if (bodyOutputList->find(*iterBodyOutput) == -1)
+				try
 				{
-					getBodyOutput()->erase(*iterBodyOutput);
+					std::shared_ptr<Bag<uml::OutputPin>> bodyOutputList= newValue->get<std::shared_ptr<Bag<uml::OutputPin>>>();
+					std::shared_ptr<Bag<uml::OutputPin>> _bodyOutput=getBodyOutput();
+					for(const std::shared_ptr<uml::OutputPin> indexBodyOutput: *_bodyOutput)
+					{
+						if (bodyOutputList->find(indexBodyOutput) == -1)
+						{
+							_bodyOutput->erase(indexBodyOutput);
+						}
+					}
+
+					for(const std::shared_ptr<uml::OutputPin> indexBodyOutput: *bodyOutputList)
+					{
+						if (_bodyOutput->find(indexBodyOutput) == -1)
+						{
+							_bodyOutput->add(indexBodyOutput);
+						}
+					}
 				}
-				iterBodyOutput++;
-			}
- 
-			iterBodyOutput = bodyOutputList->begin();
-			endBodyOutput = bodyOutputList->end();
-			while (iterBodyOutput != endBodyOutput)
-			{
-				if (getBodyOutput()->find(*iterBodyOutput) == -1)
+				catch(...)
 				{
-					getBodyOutput()->add(*iterBodyOutput);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterBodyOutput++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}
 		case uml::umlPackage::LOOPNODE_ATTRIBUTE_BODYPART:
 		{
 			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::ExecutableNode>> bodyPartList(new Bag<uml::ExecutableNode>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
+			if((newValue->isContainer()) && (uml::umlPackage::EXECUTABLENODE_CLASS ==newValue->getTypeId()))
 			{
-				bodyPartList->add(std::dynamic_pointer_cast<uml::ExecutableNode>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::ExecutableNode>::iterator iterBodyPart = getBodyPart()->begin();
-			Bag<uml::ExecutableNode>::iterator endBodyPart = getBodyPart()->end();
-			while (iterBodyPart != endBodyPart)
-			{
-				if (bodyPartList->find(*iterBodyPart) == -1)
+				try
 				{
-					getBodyPart()->erase(*iterBodyPart);
+					std::shared_ptr<Bag<uml::ExecutableNode>> bodyPartList= newValue->get<std::shared_ptr<Bag<uml::ExecutableNode>>>();
+					std::shared_ptr<Bag<uml::ExecutableNode>> _bodyPart=getBodyPart();
+					for(const std::shared_ptr<uml::ExecutableNode> indexBodyPart: *_bodyPart)
+					{
+						if (bodyPartList->find(indexBodyPart) == -1)
+						{
+							_bodyPart->erase(indexBodyPart);
+						}
+					}
+
+					for(const std::shared_ptr<uml::ExecutableNode> indexBodyPart: *bodyPartList)
+					{
+						if (_bodyPart->find(indexBodyPart) == -1)
+						{
+							_bodyPart->add(indexBodyPart);
+						}
+					}
 				}
-				iterBodyPart++;
-			}
- 
-			iterBodyPart = bodyPartList->begin();
-			endBodyPart = bodyPartList->end();
-			while (iterBodyPart != endBodyPart)
-			{
-				if (getBodyPart()->find(*iterBodyPart) == -1)
+				catch(...)
 				{
-					getBodyPart()->add(*iterBodyPart);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterBodyPart++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}
@@ -1086,180 +1026,185 @@ bool LoopNodeImpl::eSet(int featureID, Any newValue)
 		case uml::umlPackage::LOOPNODE_ATTRIBUTE_LOOPVARIABLE:
 		{
 			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::OutputPin>> loopVariableList(new Bag<uml::OutputPin>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
+			if((newValue->isContainer()) && (uml::umlPackage::OUTPUTPIN_CLASS ==newValue->getTypeId()))
 			{
-				loopVariableList->add(std::dynamic_pointer_cast<uml::OutputPin>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::OutputPin>::iterator iterLoopVariable = getLoopVariable()->begin();
-			Bag<uml::OutputPin>::iterator endLoopVariable = getLoopVariable()->end();
-			while (iterLoopVariable != endLoopVariable)
-			{
-				if (loopVariableList->find(*iterLoopVariable) == -1)
+				try
 				{
-					getLoopVariable()->erase(*iterLoopVariable);
+					std::shared_ptr<Bag<uml::OutputPin>> loopVariableList= newValue->get<std::shared_ptr<Bag<uml::OutputPin>>>();
+					std::shared_ptr<Bag<uml::OutputPin>> _loopVariable=getLoopVariable();
+					for(const std::shared_ptr<uml::OutputPin> indexLoopVariable: *_loopVariable)
+					{
+						if (loopVariableList->find(indexLoopVariable) == -1)
+						{
+							_loopVariable->erase(indexLoopVariable);
+						}
+					}
+
+					for(const std::shared_ptr<uml::OutputPin> indexLoopVariable: *loopVariableList)
+					{
+						if (_loopVariable->find(indexLoopVariable) == -1)
+						{
+							_loopVariable->add(indexLoopVariable);
+						}
+					}
 				}
-				iterLoopVariable++;
-			}
- 
-			iterLoopVariable = loopVariableList->begin();
-			endLoopVariable = loopVariableList->end();
-			while (iterLoopVariable != endLoopVariable)
-			{
-				if (getLoopVariable()->find(*iterLoopVariable) == -1)
+				catch(...)
 				{
-					getLoopVariable()->add(*iterLoopVariable);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterLoopVariable++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}
 		case uml::umlPackage::LOOPNODE_ATTRIBUTE_LOOPVARIABLEINPUT:
 		{
 			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::InputPin>> loopVariableInputList(new Bag<uml::InputPin>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
+			if((newValue->isContainer()) && (uml::umlPackage::INPUTPIN_CLASS ==newValue->getTypeId()))
 			{
-				loopVariableInputList->add(std::dynamic_pointer_cast<uml::InputPin>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::InputPin>::iterator iterLoopVariableInput = getLoopVariableInput()->begin();
-			Bag<uml::InputPin>::iterator endLoopVariableInput = getLoopVariableInput()->end();
-			while (iterLoopVariableInput != endLoopVariableInput)
-			{
-				if (loopVariableInputList->find(*iterLoopVariableInput) == -1)
+				try
 				{
-					getLoopVariableInput()->erase(*iterLoopVariableInput);
+					std::shared_ptr<Bag<uml::InputPin>> loopVariableInputList= newValue->get<std::shared_ptr<Bag<uml::InputPin>>>();
+					std::shared_ptr<Bag<uml::InputPin>> _loopVariableInput=getLoopVariableInput();
+					for(const std::shared_ptr<uml::InputPin> indexLoopVariableInput: *_loopVariableInput)
+					{
+						if (loopVariableInputList->find(indexLoopVariableInput) == -1)
+						{
+							_loopVariableInput->erase(indexLoopVariableInput);
+						}
+					}
+
+					for(const std::shared_ptr<uml::InputPin> indexLoopVariableInput: *loopVariableInputList)
+					{
+						if (_loopVariableInput->find(indexLoopVariableInput) == -1)
+						{
+							_loopVariableInput->add(indexLoopVariableInput);
+						}
+					}
 				}
-				iterLoopVariableInput++;
-			}
- 
-			iterLoopVariableInput = loopVariableInputList->begin();
-			endLoopVariableInput = loopVariableInputList->end();
-			while (iterLoopVariableInput != endLoopVariableInput)
-			{
-				if (getLoopVariableInput()->find(*iterLoopVariableInput) == -1)
+				catch(...)
 				{
-					getLoopVariableInput()->add(*iterLoopVariableInput);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterLoopVariableInput++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}
 		case uml::umlPackage::LOOPNODE_ATTRIBUTE_RESULT:
 		{
 			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::OutputPin>> resultList(new Bag<uml::OutputPin>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
+			if((newValue->isContainer()) && (uml::umlPackage::OUTPUTPIN_CLASS ==newValue->getTypeId()))
 			{
-				resultList->add(std::dynamic_pointer_cast<uml::OutputPin>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::OutputPin>::iterator iterResult = getResult()->begin();
-			Bag<uml::OutputPin>::iterator endResult = getResult()->end();
-			while (iterResult != endResult)
-			{
-				if (resultList->find(*iterResult) == -1)
+				try
 				{
-					getResult()->erase(*iterResult);
+					std::shared_ptr<Bag<uml::OutputPin>> resultList= newValue->get<std::shared_ptr<Bag<uml::OutputPin>>>();
+					std::shared_ptr<Bag<uml::OutputPin>> _result=getResult();
+					for(const std::shared_ptr<uml::OutputPin> indexResult: *_result)
+					{
+						if (resultList->find(indexResult) == -1)
+						{
+							_result->erase(indexResult);
+						}
+					}
+
+					for(const std::shared_ptr<uml::OutputPin> indexResult: *resultList)
+					{
+						if (_result->find(indexResult) == -1)
+						{
+							_result->add(indexResult);
+						}
+					}
 				}
-				iterResult++;
-			}
- 
-			iterResult = resultList->begin();
-			endResult = resultList->end();
-			while (iterResult != endResult)
-			{
-				if (getResult()->find(*iterResult) == -1)
+				catch(...)
 				{
-					getResult()->add(*iterResult);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterResult++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}
 		case uml::umlPackage::LOOPNODE_ATTRIBUTE_SETUPPART:
 		{
 			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::ExecutableNode>> setupPartList(new Bag<uml::ExecutableNode>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
+			if((newValue->isContainer()) && (uml::umlPackage::EXECUTABLENODE_CLASS ==newValue->getTypeId()))
 			{
-				setupPartList->add(std::dynamic_pointer_cast<uml::ExecutableNode>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::ExecutableNode>::iterator iterSetupPart = getSetupPart()->begin();
-			Bag<uml::ExecutableNode>::iterator endSetupPart = getSetupPart()->end();
-			while (iterSetupPart != endSetupPart)
-			{
-				if (setupPartList->find(*iterSetupPart) == -1)
+				try
 				{
-					getSetupPart()->erase(*iterSetupPart);
+					std::shared_ptr<Bag<uml::ExecutableNode>> setupPartList= newValue->get<std::shared_ptr<Bag<uml::ExecutableNode>>>();
+					std::shared_ptr<Bag<uml::ExecutableNode>> _setupPart=getSetupPart();
+					for(const std::shared_ptr<uml::ExecutableNode> indexSetupPart: *_setupPart)
+					{
+						if (setupPartList->find(indexSetupPart) == -1)
+						{
+							_setupPart->erase(indexSetupPart);
+						}
+					}
+
+					for(const std::shared_ptr<uml::ExecutableNode> indexSetupPart: *setupPartList)
+					{
+						if (_setupPart->find(indexSetupPart) == -1)
+						{
+							_setupPart->add(indexSetupPart);
+						}
+					}
 				}
-				iterSetupPart++;
-			}
- 
-			iterSetupPart = setupPartList->begin();
-			endSetupPart = setupPartList->end();
-			while (iterSetupPart != endSetupPart)
-			{
-				if (getSetupPart()->find(*iterSetupPart) == -1)
+				catch(...)
 				{
-					getSetupPart()->add(*iterSetupPart);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterSetupPart++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}
 		case uml::umlPackage::LOOPNODE_ATTRIBUTE_TEST:
 		{
 			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::ExecutableNode>> testList(new Bag<uml::ExecutableNode>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
+			if((newValue->isContainer()) && (uml::umlPackage::EXECUTABLENODE_CLASS ==newValue->getTypeId()))
 			{
-				testList->add(std::dynamic_pointer_cast<uml::ExecutableNode>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::ExecutableNode>::iterator iterTest = getTest()->begin();
-			Bag<uml::ExecutableNode>::iterator endTest = getTest()->end();
-			while (iterTest != endTest)
-			{
-				if (testList->find(*iterTest) == -1)
+				try
 				{
-					getTest()->erase(*iterTest);
+					std::shared_ptr<Bag<uml::ExecutableNode>> testList= newValue->get<std::shared_ptr<Bag<uml::ExecutableNode>>>();
+					std::shared_ptr<Bag<uml::ExecutableNode>> _test=getTest();
+					for(const std::shared_ptr<uml::ExecutableNode> indexTest: *_test)
+					{
+						if (testList->find(indexTest) == -1)
+						{
+							_test->erase(indexTest);
+						}
+					}
+
+					for(const std::shared_ptr<uml::ExecutableNode> indexTest: *testList)
+					{
+						if (_test->find(indexTest) == -1)
+						{
+							_test->add(indexTest);
+						}
+					}
 				}
-				iterTest++;
-			}
- 
-			iterTest = testList->begin();
-			endTest = testList->end();
-			while (iterTest != endTest)
-			{
-				if (getTest()->find(*iterTest) == -1)
+				catch(...)
 				{
-					getTest()->add(*iterTest);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterTest++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}
@@ -1271,163 +1216,154 @@ bool LoopNodeImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any LoopNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any LoopNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
   	switch(operationID)
 	{
-		
-		// 2141690272
+		// uml::LoopNode::body_output_pins(Any, std::map) : bool: 2141690272
 		case umlPackage::LOOPNODE_OPERATION_BODY_OUTPUT_PINS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->body_output_pins(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->body_output_pins(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		
-		// 1456712769
+		// uml::LoopNode::executable_nodes(Any, std::map) : bool: 1456712769
 		case umlPackage::LOOPNODE_OPERATION_EXECUTABLE_NODES_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->executable_nodes(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->executable_nodes(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		
-		// 1724786530
+		// uml::LoopNode::input_edges(Any, std::map) : bool: 1724786530
 		case umlPackage::LOOPNODE_OPERATION_INPUT_EDGES_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->input_edges(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->input_edges(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		
-		// 1413799573
+		// uml::LoopNode::loop_variable_outgoing(Any, std::map) : bool: 1413799573
 		case umlPackage::LOOPNODE_OPERATION_LOOP_VARIABLE_OUTGOING_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->loop_variable_outgoing(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->loop_variable_outgoing(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		
-		// 1009662775
+		// uml::LoopNode::matching_loop_variables(Any, std::map) : bool: 1009662775
 		case umlPackage::LOOPNODE_OPERATION_MATCHING_LOOP_VARIABLES_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->matching_loop_variables(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->matching_loop_variables(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		
-		// 1016601316
+		// uml::LoopNode::matching_output_pins(Any, std::map) : bool: 1016601316
 		case umlPackage::LOOPNODE_OPERATION_MATCHING_OUTPUT_PINS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->matching_output_pins(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->matching_output_pins(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		
-		// 518260818
+		// uml::LoopNode::matching_result_pins(Any, std::map) : bool: 518260818
 		case umlPackage::LOOPNODE_OPERATION_MATCHING_RESULT_PINS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->matching_result_pins(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->matching_result_pins(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		
-		// 328518130
+		// uml::LoopNode::result_no_incoming(Any, std::map) : bool: 328518130
 		case umlPackage::LOOPNODE_OPERATION_RESULT_NO_INCOMING_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->result_no_incoming(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->result_no_incoming(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		
-		// 942624726
+		// uml::LoopNode::setup_test_and_body(Any, std::map) : bool: 942624726
 		case umlPackage::LOOPNODE_OPERATION_SETUP_TEST_AND_BODY_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->setup_test_and_body(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->setup_test_and_body(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
 
@@ -1444,7 +1380,6 @@ Any LoopNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shar
 	return result;
 }
 
-
 std::shared_ptr<uml::LoopNode> LoopNodeImpl::getThisLoopNodePtr() const
 {
 	return m_thisLoopNodePtr.lock();
@@ -1454,3 +1389,5 @@ void LoopNodeImpl::setThisLoopNodePtr(std::weak_ptr<uml::LoopNode> thisLoopNodeP
 	m_thisLoopNodePtr = thisLoopNodePtr;
 	setThisStructuredActivityNodePtr(thisLoopNodePtr);
 }
+
+

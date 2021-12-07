@@ -36,8 +36,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
+#include "uml/umlFactory.hpp"
 
 #include "fUML/Semantics/Values/Evaluation.hpp"
 #include "fUML/Semantics/Loci/Locus.hpp"
@@ -45,8 +45,8 @@
 #include "uml/ValueSpecification.hpp"
 
 //Factories an Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
 #include "fUML/Semantics/Values/ValuesPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -204,12 +204,10 @@ void LiteralEvaluationImpl::saveContent(std::shared_ptr<persistence::interfaces:
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> LiteralEvaluationImpl::eStaticClass() const
 {
 	return fUML::Semantics::Values::ValuesPackage::eInstance()->getLiteralEvaluation_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -242,7 +240,7 @@ bool LiteralEvaluationImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any LiteralEvaluationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any LiteralEvaluationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -255,9 +253,9 @@ Any LiteralEvaluationImpl::eInvoke(int operationID, std::shared_ptr<std::list < 
 			//Retrieve input parameter 'builtInTypeName'
 			//parameter 0
 			std::string incoming_param_builtInTypeName;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_builtInTypeName_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_builtInTypeName = (*incoming_param_builtInTypeName_arguments_citer)->get()->get<std::string >();
-			result = eAny(this->getType(incoming_param_builtInTypeName));
+			std::list<Any>::const_iterator incoming_param_builtInTypeName_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_builtInTypeName = (*incoming_param_builtInTypeName_arguments_citer)->get<std::string >();
+				result = eAny(this->getType(incoming_param_builtInTypeName));
 			break;
 		}
 
@@ -274,7 +272,6 @@ Any LiteralEvaluationImpl::eInvoke(int operationID, std::shared_ptr<std::list < 
 	return result;
 }
 
-
 std::shared_ptr<fUML::Semantics::Values::LiteralEvaluation> LiteralEvaluationImpl::getThisLiteralEvaluationPtr() const
 {
 	return m_thisLiteralEvaluationPtr.lock();
@@ -284,3 +281,5 @@ void LiteralEvaluationImpl::setThisLiteralEvaluationPtr(std::weak_ptr<fUML::Sema
 	m_thisLiteralEvaluationPtr = thisLiteralEvaluationPtr;
 	setThisEvaluationPtr(thisLiteralEvaluationPtr);
 }
+
+

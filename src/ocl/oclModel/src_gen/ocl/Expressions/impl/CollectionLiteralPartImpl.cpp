@@ -185,12 +185,10 @@ void CollectionLiteralPartImpl::saveContent(std::shared_ptr<persistence::interfa
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> CollectionLiteralPartImpl::eStaticClass() const
 {
 	return ocl::Expressions::ExpressionsPackage::eInstance()->getCollectionLiteralPart_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -223,7 +221,7 @@ bool CollectionLiteralPartImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any CollectionLiteralPartImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any CollectionLiteralPartImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -243,7 +241,6 @@ Any CollectionLiteralPartImpl::eInvoke(int operationID, std::shared_ptr<std::lis
 	return result;
 }
 
-
 std::shared_ptr<ocl::Expressions::CollectionLiteralPart> CollectionLiteralPartImpl::getThisCollectionLiteralPartPtr() const
 {
 	return m_thisCollectionLiteralPartPtr.lock();
@@ -253,3 +250,5 @@ void CollectionLiteralPartImpl::setThisCollectionLiteralPartPtr(std::weak_ptr<oc
 	m_thisCollectionLiteralPartPtr = thisCollectionLiteralPartPtr;
 	setThisETypedElementPtr(thisCollectionLiteralPartPtr);
 }
+
+

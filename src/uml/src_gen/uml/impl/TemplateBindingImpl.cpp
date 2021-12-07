@@ -128,14 +128,10 @@ TemplateBindingImpl& TemplateBindingImpl::operator=(const TemplateBindingImpl & 
 			std::cout << "Initialising value Subset: " << "m_parameterSubstitution - Subset<uml::TemplateParameterSubstitution, uml::Element >(getOwnedElement())" << std::endl;
 		#endif
 		
-
-		Bag<uml::TemplateParameterSubstitution>::iterator parameterSubstitutionIter = parameterSubstitutionList->begin();
-		Bag<uml::TemplateParameterSubstitution>::iterator parameterSubstitutionEnd = parameterSubstitutionList->end();
-		while (parameterSubstitutionIter != parameterSubstitutionEnd) 
+		for(const std::shared_ptr<uml::TemplateParameterSubstitution> parameterSubstitutionindexElem: *parameterSubstitutionList) 
 		{
-			std::shared_ptr<uml::TemplateParameterSubstitution> temp = std::dynamic_pointer_cast<uml::TemplateParameterSubstitution>((*parameterSubstitutionIter)->copy());
-			getParameterSubstitution()->push_back(temp);
-			parameterSubstitutionIter++;
+			std::shared_ptr<uml::TemplateParameterSubstitution> temp = std::dynamic_pointer_cast<uml::TemplateParameterSubstitution>((parameterSubstitutionindexElem)->copy());
+			m_parameterSubstitution->push_back(temp);
 		}
 	}
 	else
@@ -463,12 +459,10 @@ void TemplateBindingImpl::saveContent(std::shared_ptr<persistence::interfaces::X
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> TemplateBindingImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getTemplateBinding_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -480,24 +474,16 @@ Any TemplateBindingImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::TEMPLATEBINDING_ATTRIBUTE_BOUNDELEMENT:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getBoundElement().lock();
-			return eAny(returnValue); //2308
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //2308
 		}
 		case uml::umlPackage::TEMPLATEBINDING_ATTRIBUTE_PARAMETERSUBSTITUTION:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::TemplateParameterSubstitution>::iterator iter = getParameterSubstitution()->begin();
-			Bag<uml::TemplateParameterSubstitution>::iterator end = getParameterSubstitution()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //2306			
+			return eAnyBag(getParameterSubstitution(),1208766550); //2306
 		}
 		case uml::umlPackage::TEMPLATEBINDING_ATTRIBUTE_SIGNATURE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getSignature();
-			return eAny(returnValue); //2307
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //2307
 		}
 	}
 	return DirectedRelationshipImpl::eGet(featureID, resolve, coreType);
@@ -532,36 +518,37 @@ bool TemplateBindingImpl::eSet(int featureID, Any newValue)
 		case uml::umlPackage::TEMPLATEBINDING_ATTRIBUTE_PARAMETERSUBSTITUTION:
 		{
 			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::TemplateParameterSubstitution>> parameterSubstitutionList(new Bag<uml::TemplateParameterSubstitution>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
+			if((newValue->isContainer()) && (uml::umlPackage::TEMPLATEPARAMETERSUBSTITUTION_CLASS ==newValue->getTypeId()))
 			{
-				parameterSubstitutionList->add(std::dynamic_pointer_cast<uml::TemplateParameterSubstitution>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::TemplateParameterSubstitution>::iterator iterParameterSubstitution = getParameterSubstitution()->begin();
-			Bag<uml::TemplateParameterSubstitution>::iterator endParameterSubstitution = getParameterSubstitution()->end();
-			while (iterParameterSubstitution != endParameterSubstitution)
-			{
-				if (parameterSubstitutionList->find(*iterParameterSubstitution) == -1)
+				try
 				{
-					getParameterSubstitution()->erase(*iterParameterSubstitution);
+					std::shared_ptr<Bag<uml::TemplateParameterSubstitution>> parameterSubstitutionList= newValue->get<std::shared_ptr<Bag<uml::TemplateParameterSubstitution>>>();
+					std::shared_ptr<Bag<uml::TemplateParameterSubstitution>> _parameterSubstitution=getParameterSubstitution();
+					for(const std::shared_ptr<uml::TemplateParameterSubstitution> indexParameterSubstitution: *_parameterSubstitution)
+					{
+						if (parameterSubstitutionList->find(indexParameterSubstitution) == -1)
+						{
+							_parameterSubstitution->erase(indexParameterSubstitution);
+						}
+					}
+
+					for(const std::shared_ptr<uml::TemplateParameterSubstitution> indexParameterSubstitution: *parameterSubstitutionList)
+					{
+						if (_parameterSubstitution->find(indexParameterSubstitution) == -1)
+						{
+							_parameterSubstitution->add(indexParameterSubstitution);
+						}
+					}
 				}
-				iterParameterSubstitution++;
-			}
- 
-			iterParameterSubstitution = parameterSubstitutionList->begin();
-			endParameterSubstitution = parameterSubstitutionList->end();
-			while (iterParameterSubstitution != endParameterSubstitution)
-			{
-				if (getParameterSubstitution()->find(*iterParameterSubstitution) == -1)
+				catch(...)
 				{
-					getParameterSubstitution()->add(*iterParameterSubstitution);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterParameterSubstitution++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}
@@ -581,44 +568,42 @@ bool TemplateBindingImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any TemplateBindingImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any TemplateBindingImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
   	switch(operationID)
 	{
-		
-		// 654929774
+		// uml::TemplateBinding::one_parameter_substitution(Any, std::map) : bool: 654929774
 		case umlPackage::TEMPLATEBINDING_OPERATION_ONE_PARAMETER_SUBSTITUTION_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->one_parameter_substitution(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->one_parameter_substitution(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		
-		// 1000422805
+		// uml::TemplateBinding::parameter_substitution_formal(Any, std::map) : bool: 1000422805
 		case umlPackage::TEMPLATEBINDING_OPERATION_PARAMETER_SUBSTITUTION_FORMAL_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->parameter_substitution_formal(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->parameter_substitution_formal(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
 
@@ -635,7 +620,6 @@ Any TemplateBindingImpl::eInvoke(int operationID, std::shared_ptr<std::list < st
 	return result;
 }
 
-
 std::shared_ptr<uml::TemplateBinding> TemplateBindingImpl::getThisTemplateBindingPtr() const
 {
 	return m_thisTemplateBindingPtr.lock();
@@ -645,3 +629,5 @@ void TemplateBindingImpl::setThisTemplateBindingPtr(std::weak_ptr<uml::TemplateB
 	m_thisTemplateBindingPtr = thisTemplateBindingPtr;
 	setThisDirectedRelationshipPtr(thisTemplateBindingPtr);
 }
+
+

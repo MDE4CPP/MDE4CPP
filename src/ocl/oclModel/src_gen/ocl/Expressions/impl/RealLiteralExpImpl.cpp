@@ -321,7 +321,7 @@ void RealLiteralExpImpl::loadAttributes(std::shared_ptr<persistence::interfaces:
 		{
 			// this attribute is a 'int'
 			int value;
-			std::istringstream ( iter->second ) >> value;
+			std::istringstream(iter->second) >> value;
 			this->setRealSymbol(value);
 		}
 	}
@@ -387,12 +387,10 @@ void RealLiteralExpImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> RealLiteralExpImpl::eStaticClass() const
 {
 	return ocl::Expressions::ExpressionsPackage::eInstance()->getRealLiteralExp_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -402,7 +400,7 @@ Any RealLiteralExpImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case ocl::Expressions::ExpressionsPackage::REALLITERALEXP_ATTRIBUTE_REALSYMBOL:
-			return eAny(getRealSymbol()); //7423
+				return eAny(getRealSymbol(),0,true); //7423
 	}
 	return NumericLiteralExpImpl::eGet(featureID, resolve, coreType);
 }
@@ -436,7 +434,7 @@ bool RealLiteralExpImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any RealLiteralExpImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any RealLiteralExpImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -456,7 +454,6 @@ Any RealLiteralExpImpl::eInvoke(int operationID, std::shared_ptr<std::list < std
 	return result;
 }
 
-
 std::shared_ptr<ocl::Expressions::RealLiteralExp> RealLiteralExpImpl::getThisRealLiteralExpPtr() const
 {
 	return m_thisRealLiteralExpPtr.lock();
@@ -466,3 +463,5 @@ void RealLiteralExpImpl::setThisRealLiteralExpPtr(std::weak_ptr<ocl::Expressions
 	m_thisRealLiteralExpPtr = thisRealLiteralExpPtr;
 	setThisNumericLiteralExpPtr(thisRealLiteralExpPtr);
 }
+
+

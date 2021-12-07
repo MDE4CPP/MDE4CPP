@@ -31,11 +31,11 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Loci/LociFactory.hpp"
+#include "fUML/Semantics/Values/ValuesFactory.hpp"
+#include "uml/umlFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
-#include "uml/umlFactory.hpp"
-#include "fUML/Semantics/Values/ValuesFactory.hpp"
+#include "fUML/Semantics/Loci/LociFactory.hpp"
 
 #include "ocl/Evaluations/EvalEnvironment.hpp"
 #include "fUML/Semantics/Loci/Locus.hpp"
@@ -209,12 +209,10 @@ void ModelPropertyCallExpEvalImpl::saveContent(std::shared_ptr<persistence::inte
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> ModelPropertyCallExpEvalImpl::eStaticClass() const
 {
 	return ocl::Evaluations::EvaluationsPackage::eInstance()->getModelPropertyCallExpEval_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -247,7 +245,7 @@ bool ModelPropertyCallExpEvalImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ModelPropertyCallExpEvalImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any ModelPropertyCallExpEvalImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -257,7 +255,7 @@ Any ModelPropertyCallExpEvalImpl::eInvoke(int operationID, std::shared_ptr<std::
 		// 2043150223
 		case EvaluationsPackage::MODELPROPERTYCALLEXPEVAL_OPERATION_ATPRE:
 		{
-			result = eAny(this->atPre());
+					result = eAny(this->atPre(),0,false);
 			break;
 		}
 
@@ -274,7 +272,6 @@ Any ModelPropertyCallExpEvalImpl::eInvoke(int operationID, std::shared_ptr<std::
 	return result;
 }
 
-
 std::shared_ptr<ocl::Evaluations::ModelPropertyCallExpEval> ModelPropertyCallExpEvalImpl::getThisModelPropertyCallExpEvalPtr() const
 {
 	return m_thisModelPropertyCallExpEvalPtr.lock();
@@ -284,3 +281,5 @@ void ModelPropertyCallExpEvalImpl::setThisModelPropertyCallExpEvalPtr(std::weak_
 	m_thisModelPropertyCallExpEvalPtr = thisModelPropertyCallExpEvalPtr;
 	setThisPropertyCallExpEvalPtr(thisModelPropertyCallExpEvalPtr);
 }
+
+

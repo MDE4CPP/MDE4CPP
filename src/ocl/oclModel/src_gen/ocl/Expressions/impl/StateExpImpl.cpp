@@ -32,10 +32,10 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
+#include "uml/umlFactory.hpp"
 #include "ecore/ecoreFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
-#include "uml/umlFactory.hpp"
 
 #include "ocl/Expressions/CallExp.hpp"
 #include "ocl/Expressions/CollectionRange.hpp"
@@ -393,12 +393,10 @@ void StateExpImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> StateExpImpl::eStaticClass() const
 {
 	return ocl::Expressions::ExpressionsPackage::eInstance()->getStateExp_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -410,7 +408,7 @@ Any StateExpImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case ocl::Expressions::ExpressionsPackage::STATEEXP_ATTRIBUTE_REFERREDSTATE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getReferredState();
-			return eAny(returnValue); //8022
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //8022
 		}
 	}
 	return OclExpressionImpl::eGet(featureID, resolve, coreType);
@@ -446,7 +444,7 @@ bool StateExpImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any StateExpImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any StateExpImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -466,7 +464,6 @@ Any StateExpImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shar
 	return result;
 }
 
-
 std::shared_ptr<ocl::Expressions::StateExp> StateExpImpl::getThisStateExpPtr() const
 {
 	return m_thisStateExpPtr.lock();
@@ -476,3 +473,5 @@ void StateExpImpl::setThisStateExpPtr(std::weak_ptr<ocl::Expressions::StateExp> 
 	m_thisStateExpPtr = thisStateExpPtr;
 	setThisOclExpressionPtr(thisStateExpPtr);
 }
+
+

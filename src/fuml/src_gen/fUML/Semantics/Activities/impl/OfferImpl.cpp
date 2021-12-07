@@ -37,8 +37,8 @@
 #include "fUML/Semantics/Activities/Token.hpp"
 
 //Factories an Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 
 
@@ -324,12 +324,10 @@ void OfferImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandle
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> OfferImpl::eStaticClass() const
 {
 	return fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getOffer_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -412,7 +410,7 @@ bool OfferImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any OfferImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any OfferImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -422,14 +420,14 @@ Any OfferImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_
 		// 1010430261
 		case ActivitiesPackage::OFFER_OPERATION_COUNTOFFEREDVALES:
 		{
-			result = eAny(this->countOfferedVales());
+					result = eAny(this->countOfferedVales(),0,false);
 			break;
 		}
 		
 		// 610053038
 		case ActivitiesPackage::OFFER_OPERATION_HASTOKENS:
 		{
-			result = eAny(this->hasTokens());
+					result = eAny(this->hasTokens(),0,false);
 			break;
 		}
 		
@@ -439,8 +437,8 @@ Any OfferImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_
 			//Retrieve input parameter 'count'
 			//parameter 0
 			int incoming_param_count;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_count_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_count = (*incoming_param_count_arguments_citer)->get()->get<int >();
+			std::list<Any>::const_iterator incoming_param_count_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_count = (*incoming_param_count_arguments_citer)->get<int >();
 			this->removeOfferedValues(incoming_param_count);
 			break;
 		}
@@ -455,7 +453,7 @@ Any OfferImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_
 		// 1975591629
 		case ActivitiesPackage::OFFER_OPERATION_RETRIEVEOFFEREDTOKENS:
 		{
-			result = eAny(this->retrieveOfferedTokens());
+				result = eAny(this->retrieveOfferedTokens());
 			break;
 		}
 
@@ -472,7 +470,6 @@ Any OfferImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_
 	return result;
 }
 
-
 std::shared_ptr<fUML::Semantics::Activities::Offer> OfferImpl::getThisOfferPtr() const
 {
 	return m_thisOfferPtr.lock();
@@ -481,3 +478,5 @@ void OfferImpl::setThisOfferPtr(std::weak_ptr<fUML::Semantics::Activities::Offer
 {
 	m_thisOfferPtr = thisOfferPtr;
 }
+
+

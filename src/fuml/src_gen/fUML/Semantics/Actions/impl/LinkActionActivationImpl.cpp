@@ -33,8 +33,8 @@
 
 #include <exception> // used in Persistence
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
-#include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Actions/ActionsFactory.hpp"
+#include "uml/umlFactory.hpp"
 
 #include "uml/Action.hpp"
 #include "fUML/Semantics/Actions/ActionActivation.hpp"
@@ -50,8 +50,8 @@
 #include "fUML/Semantics/Activities/Token.hpp"
 
 //Factories an Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
@@ -239,12 +239,10 @@ void LinkActionActivationImpl::saveContent(std::shared_ptr<persistence::interfac
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> LinkActionActivationImpl::eStaticClass() const
 {
 	return fUML::Semantics::Actions::ActionsPackage::eInstance()->getLinkActionActivation_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -277,7 +275,7 @@ bool LinkActionActivationImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any LinkActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any LinkActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -290,21 +288,21 @@ Any LinkActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list
 			//Retrieve input parameter 'link'
 			//parameter 0
 			std::shared_ptr<fUML::Semantics::StructuredClassifiers::Link> incoming_param_link;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_link_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_link = (*incoming_param_link_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::StructuredClassifiers::Link> >();
+			std::list<Any>::const_iterator incoming_param_link_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_link = (*incoming_param_link_arguments_citer)->get<std::shared_ptr<fUML::Semantics::StructuredClassifiers::Link> >();
 			//Retrieve input parameter 'endData'
 			//parameter 1
 			std::shared_ptr<uml::LinkEndData> incoming_param_endData;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_endData_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_endData = (*incoming_param_endData_arguments_citer)->get()->get<std::shared_ptr<uml::LinkEndData> >();
-			result = eAny(this->endMatchesEndData(incoming_param_link,incoming_param_endData));
+			std::list<Any>::const_iterator incoming_param_endData_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_endData = (*incoming_param_endData_arguments_citer)->get<std::shared_ptr<uml::LinkEndData> >();
+					result = eAny(this->endMatchesEndData(incoming_param_link,incoming_param_endData),0,false);
 			break;
 		}
 		
 		// 1506375580
 		case ActionsPackage::LINKACTIONACTIVATION_OPERATION_GETASSOCIATION:
 		{
-			result = eAny(this->getAssociation());
+				result = eAny(this->getAssociation());
 			break;
 		}
 		
@@ -314,14 +312,14 @@ Any LinkActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list
 			//Retrieve input parameter 'link'
 			//parameter 0
 			std::shared_ptr<fUML::Semantics::StructuredClassifiers::Link> incoming_param_link;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_link_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_link = (*incoming_param_link_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::StructuredClassifiers::Link> >();
+			std::list<Any>::const_iterator incoming_param_link_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_link = (*incoming_param_link_arguments_citer)->get<std::shared_ptr<fUML::Semantics::StructuredClassifiers::Link> >();
 			//Retrieve input parameter 'endDataList'
 			//parameter 1
 			std::shared_ptr<Bag<uml::LinkEndData>> incoming_param_endDataList;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_endDataList_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_endDataList = (*incoming_param_endDataList_arguments_citer)->get()->get<std::shared_ptr<Bag<uml::LinkEndData>> >();
-			result = eAny(this->linkMatchesEndData(incoming_param_link,incoming_param_endDataList));
+			std::list<Any>::const_iterator incoming_param_endDataList_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_endDataList = (*incoming_param_endDataList_arguments_citer)->get<std::shared_ptr<Bag<uml::LinkEndData>> >();
+					result = eAny(this->linkMatchesEndData(incoming_param_link,incoming_param_endDataList),0,false);
 			break;
 		}
 
@@ -338,7 +336,6 @@ Any LinkActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list
 	return result;
 }
 
-
 std::shared_ptr<fUML::Semantics::Actions::LinkActionActivation> LinkActionActivationImpl::getThisLinkActionActivationPtr() const
 {
 	return m_thisLinkActionActivationPtr.lock();
@@ -348,3 +345,5 @@ void LinkActionActivationImpl::setThisLinkActionActivationPtr(std::weak_ptr<fUML
 	m_thisLinkActionActivationPtr = thisLinkActionActivationPtr;
 	setThisActionActivationPtr(thisLinkActionActivationPtr);
 }
+
+

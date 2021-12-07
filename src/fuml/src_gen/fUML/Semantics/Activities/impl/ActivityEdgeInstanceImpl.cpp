@@ -35,8 +35,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
+#include "uml/umlFactory.hpp"
 
 #include "uml/ActivityEdge.hpp"
 #include "fUML/Semantics/Activities/ActivityNodeActivation.hpp"
@@ -45,8 +45,8 @@
 #include "fUML/Semantics/Activities/Token.hpp"
 
 //Factories an Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "uml/umlPackage.hpp"
 
@@ -488,12 +488,10 @@ void ActivityEdgeInstanceImpl::saveContent(std::shared_ptr<persistence::interfac
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> ActivityEdgeInstanceImpl::eStaticClass() const
 {
 	return fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getActivityEdgeInstance_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -505,12 +503,12 @@ Any ActivityEdgeInstanceImpl::eGet(int featureID, bool resolve, bool coreType) c
 		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYEDGEINSTANCE_ATTRIBUTE_EDGE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getEdge();
-			return eAny(returnValue); //60
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //60
 		}
 		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYEDGEINSTANCE_ATTRIBUTE_GROUP:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getGroup().lock();
-			return eAny(returnValue); //64
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //64
 		}
 		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYEDGEINSTANCE_ATTRIBUTE_OFFERS:
 		{
@@ -527,12 +525,12 @@ Any ActivityEdgeInstanceImpl::eGet(int featureID, bool resolve, bool coreType) c
 		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYEDGEINSTANCE_ATTRIBUTE_SOURCE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getSource().lock();
-			return eAny(returnValue); //61
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //61
 		}
 		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYEDGEINSTANCE_ATTRIBUTE_TARGET:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getTarget().lock();
-			return eAny(returnValue); //62
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //62
 		}
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
@@ -636,7 +634,7 @@ bool ActivityEdgeInstanceImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ActivityEdgeInstanceImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any ActivityEdgeInstanceImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -646,21 +644,21 @@ Any ActivityEdgeInstanceImpl::eInvoke(int operationID, std::shared_ptr<std::list
 		// 729654799
 		case ActivitiesPackage::ACTIVITYEDGEINSTANCE_OPERATION_COUNTOFFEREDVALUE:
 		{
-			result = eAny(this->countOfferedValue());
+					result = eAny(this->countOfferedValue(),0,false);
 			break;
 		}
 		
 		// 433302189
 		case ActivitiesPackage::ACTIVITYEDGEINSTANCE_OPERATION_GETOFFEREDTOKENS:
 		{
-			result = eAny(this->getOfferedTokens());
+				result = eAny(this->getOfferedTokens());
 			break;
 		}
 		
 		// 1690101896
 		case ActivitiesPackage::ACTIVITYEDGEINSTANCE_OPERATION_HASOFFER:
 		{
-			result = eAny(this->hasOffer());
+					result = eAny(this->hasOffer(),0,false);
 			break;
 		}
 		
@@ -670,8 +668,8 @@ Any ActivityEdgeInstanceImpl::eInvoke(int operationID, std::shared_ptr<std::list
 			//Retrieve input parameter 'tokens'
 			//parameter 0
 			std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> incoming_param_tokens;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_tokens_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_tokens = (*incoming_param_tokens_arguments_citer)->get()->get<std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> >();
+			std::list<Any>::const_iterator incoming_param_tokens_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_tokens = (*incoming_param_tokens_arguments_citer)->get<std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> >();
 			this->sendOffer(incoming_param_tokens);
 			break;
 		}
@@ -679,7 +677,7 @@ Any ActivityEdgeInstanceImpl::eInvoke(int operationID, std::shared_ptr<std::list
 		// 1733798230
 		case ActivitiesPackage::ACTIVITYEDGEINSTANCE_OPERATION_TAKEOFFEREDTOKENS:
 		{
-			result = eAny(this->takeOfferedTokens());
+				result = eAny(this->takeOfferedTokens());
 			break;
 		}
 		
@@ -689,9 +687,9 @@ Any ActivityEdgeInstanceImpl::eInvoke(int operationID, std::shared_ptr<std::list
 			//Retrieve input parameter 'maxCount'
 			//parameter 0
 			int incoming_param_maxCount;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_maxCount_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_maxCount = (*incoming_param_maxCount_arguments_citer)->get()->get<int >();
-			result = eAny(this->takeOfferedTokens(incoming_param_maxCount));
+			std::list<Any>::const_iterator incoming_param_maxCount_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_maxCount = (*incoming_param_maxCount_arguments_citer)->get<int >();
+				result = eAny(this->takeOfferedTokens(incoming_param_maxCount));
 			break;
 		}
 
@@ -708,7 +706,6 @@ Any ActivityEdgeInstanceImpl::eInvoke(int operationID, std::shared_ptr<std::list
 	return result;
 }
 
-
 std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance> ActivityEdgeInstanceImpl::getThisActivityEdgeInstancePtr() const
 {
 	return m_thisActivityEdgeInstancePtr.lock();
@@ -717,3 +714,5 @@ void ActivityEdgeInstanceImpl::setThisActivityEdgeInstancePtr(std::weak_ptr<fUML
 {
 	m_thisActivityEdgeInstancePtr = thisActivityEdgeInstancePtr;
 }
+
+

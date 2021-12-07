@@ -253,12 +253,10 @@ void NameTypeBindingImpl::saveContent(std::shared_ptr<persistence::interfaces::X
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> NameTypeBindingImpl::eStaticClass() const
 {
 	return ocl::Types::TypesPackage::eInstance()->getNameTypeBinding_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -268,11 +266,11 @@ Any NameTypeBindingImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case ocl::Types::TypesPackage::NAMETYPEBINDING_ATTRIBUTE_NAME:
-			return eAny(getName()); //520
+				return eAny(getName(),0,true); //520
 		case ocl::Types::TypesPackage::NAMETYPEBINDING_ATTRIBUTE_TYPE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getType();
-			return eAny(returnValue); //521
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //521
 		}
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
@@ -317,7 +315,7 @@ bool NameTypeBindingImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any NameTypeBindingImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any NameTypeBindingImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -337,7 +335,6 @@ Any NameTypeBindingImpl::eInvoke(int operationID, std::shared_ptr<std::list < st
 	return result;
 }
 
-
 std::shared_ptr<ocl::Types::NameTypeBinding> NameTypeBindingImpl::getThisNameTypeBindingPtr() const
 {
 	return m_thisNameTypeBindingPtr.lock();
@@ -346,3 +343,5 @@ void NameTypeBindingImpl::setThisNameTypeBindingPtr(std::weak_ptr<ocl::Types::Na
 {
 	m_thisNameTypeBindingPtr = thisNameTypeBindingPtr;
 }
+
+

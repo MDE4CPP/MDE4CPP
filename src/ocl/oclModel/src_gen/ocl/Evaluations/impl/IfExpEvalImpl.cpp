@@ -31,11 +31,11 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Loci/LociFactory.hpp"
+#include "fUML/Semantics/Values/ValuesFactory.hpp"
+#include "uml/umlFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
-#include "uml/umlFactory.hpp"
-#include "fUML/Semantics/Values/ValuesFactory.hpp"
+#include "fUML/Semantics/Loci/LociFactory.hpp"
 
 #include "ocl/Evaluations/EvalEnvironment.hpp"
 #include "fUML/Semantics/Loci/Locus.hpp"
@@ -311,12 +311,10 @@ void IfExpEvalImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHa
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> IfExpEvalImpl::eStaticClass() const
 {
 	return ocl::Evaluations::EvaluationsPackage::eInstance()->getIfExpEval_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -328,17 +326,17 @@ Any IfExpEvalImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case ocl::Evaluations::EvaluationsPackage::IFEXPEVAL_ATTRIBUTE_CONDITION:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getCondition();
-			return eAny(returnValue); //326
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //326
 		}
 		case ocl::Evaluations::EvaluationsPackage::IFEXPEVAL_ATTRIBUTE_ELSEEXPRESSION:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getElseExpression();
-			return eAny(returnValue); //328
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //328
 		}
 		case ocl::Evaluations::EvaluationsPackage::IFEXPEVAL_ATTRIBUTE_THENEXPRESSION:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getThenExpression();
-			return eAny(returnValue); //327
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //327
 		}
 	}
 	return OclExpEvalImpl::eGet(featureID, resolve, coreType);
@@ -394,7 +392,7 @@ bool IfExpEvalImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any IfExpEvalImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any IfExpEvalImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -414,7 +412,6 @@ Any IfExpEvalImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sha
 	return result;
 }
 
-
 std::shared_ptr<ocl::Evaluations::IfExpEval> IfExpEvalImpl::getThisIfExpEvalPtr() const
 {
 	return m_thisIfExpEvalPtr.lock();
@@ -424,3 +421,5 @@ void IfExpEvalImpl::setThisIfExpEvalPtr(std::weak_ptr<ocl::Evaluations::IfExpEva
 	m_thisIfExpEvalPtr = thisIfExpEvalPtr;
 	setThisOclExpEvalPtr(thisIfExpEvalPtr);
 }
+
+

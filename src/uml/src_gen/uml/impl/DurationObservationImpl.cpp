@@ -130,13 +130,10 @@ DurationObservationImpl& DurationObservationImpl::operator=(const DurationObserv
 	std::shared_ptr<Bag<bool>> firstEventList = obj.isFirstEvent();
 	if(firstEventList)
 	{	
-		isFirstEvent().reset(new Bag<bool>());
-		Bag<bool>::iterator firstEventIter = firstEventList->begin();
-		Bag<bool>::iterator firstEventEnd = firstEventList->end();
-		while (firstEventIter != firstEventEnd) 
+		m_firstEvent.reset(new Bag<bool>());
+		for(const std::shared_ptr<bool> it: *firstEventList) 
 		{
-			isFirstEvent()->push_back(*firstEventIter);
-			firstEventIter++;
+			m_firstEvent->push_back(*it);
 		}
 	}
 	else
@@ -380,12 +377,10 @@ void DurationObservationImpl::saveContent(std::shared_ptr<persistence::interface
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> DurationObservationImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getDurationObservation_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -396,18 +391,10 @@ Any DurationObservationImpl::eGet(int featureID, bool resolve, bool coreType) co
 	{
 		case uml::umlPackage::DURATIONOBSERVATION_ATTRIBUTE_EVENT:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::NamedElement>::iterator iter = getEvent()->begin();
-			Bag<uml::NamedElement>::iterator end = getEvent()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //8012			
+			return eAnyBag(getEvent(),591414745); //8012
 		}
 		case uml::umlPackage::DURATIONOBSERVATION_ATTRIBUTE_FIRSTEVENT:
-			return eAny(isFirstEvent()); //8013
+			return eAny(isFirstEvent(),0,false); //8013
 	}
 	return ObservationImpl::eGet(featureID, resolve, coreType);
 }
@@ -431,36 +418,37 @@ bool DurationObservationImpl::eSet(int featureID, Any newValue)
 		case uml::umlPackage::DURATIONOBSERVATION_ATTRIBUTE_EVENT:
 		{
 			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::NamedElement>> eventList(new Bag<uml::NamedElement>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
+			if((newValue->isContainer()) && (uml::umlPackage::NAMEDELEMENT_CLASS ==newValue->getTypeId()))
 			{
-				eventList->add(std::dynamic_pointer_cast<uml::NamedElement>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::NamedElement>::iterator iterEvent = getEvent()->begin();
-			Bag<uml::NamedElement>::iterator endEvent = getEvent()->end();
-			while (iterEvent != endEvent)
-			{
-				if (eventList->find(*iterEvent) == -1)
+				try
 				{
-					getEvent()->erase(*iterEvent);
+					std::shared_ptr<Bag<uml::NamedElement>> eventList= newValue->get<std::shared_ptr<Bag<uml::NamedElement>>>();
+					std::shared_ptr<Bag<uml::NamedElement>> _event=getEvent();
+					for(const std::shared_ptr<uml::NamedElement> indexEvent: *_event)
+					{
+						if (eventList->find(indexEvent) == -1)
+						{
+							_event->erase(indexEvent);
+						}
+					}
+
+					for(const std::shared_ptr<uml::NamedElement> indexEvent: *eventList)
+					{
+						if (_event->find(indexEvent) == -1)
+						{
+							_event->add(indexEvent);
+						}
+					}
 				}
-				iterEvent++;
-			}
- 
-			iterEvent = eventList->begin();
-			endEvent = eventList->end();
-			while (iterEvent != endEvent)
-			{
-				if (getEvent()->find(*iterEvent) == -1)
+				catch(...)
 				{
-					getEvent()->add(*iterEvent);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterEvent++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}
@@ -478,27 +466,26 @@ bool DurationObservationImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any DurationObservationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any DurationObservationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
   	switch(operationID)
 	{
-		
-		// 254475739
+		// uml::DurationObservation::first_event_multiplicity(Any, std::map) : bool: 254475739
 		case umlPackage::DURATIONOBSERVATION_OPERATION_FIRST_EVENT_MULTIPLICITY_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->first_event_multiplicity(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->first_event_multiplicity(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
 
@@ -515,7 +502,6 @@ Any DurationObservationImpl::eInvoke(int operationID, std::shared_ptr<std::list 
 	return result;
 }
 
-
 std::shared_ptr<uml::DurationObservation> DurationObservationImpl::getThisDurationObservationPtr() const
 {
 	return m_thisDurationObservationPtr.lock();
@@ -525,3 +511,5 @@ void DurationObservationImpl::setThisDurationObservationPtr(std::weak_ptr<uml::D
 	m_thisDurationObservationPtr = thisDurationObservationPtr;
 	setThisObservationPtr(thisDurationObservationPtr);
 }
+
+

@@ -36,8 +36,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
+#include "uml/umlFactory.hpp"
 
 #include "fUML/Semantics/Values/LiteralEvaluation.hpp"
 #include "fUML/Semantics/Loci/Locus.hpp"
@@ -45,8 +45,8 @@
 #include "uml/ValueSpecification.hpp"
 
 //Factories an Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
 #include "fUML/Semantics/Values/ValuesPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -210,12 +210,10 @@ void LiteralBooleanEvaluationImpl::saveContent(std::shared_ptr<persistence::inte
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> LiteralBooleanEvaluationImpl::eStaticClass() const
 {
 	return fUML::Semantics::Values::ValuesPackage::eInstance()->getLiteralBooleanEvaluation_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -248,7 +246,7 @@ bool LiteralBooleanEvaluationImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any LiteralBooleanEvaluationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any LiteralBooleanEvaluationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -258,7 +256,7 @@ Any LiteralBooleanEvaluationImpl::eInvoke(int operationID, std::shared_ptr<std::
 		// 1960284282
 		case ValuesPackage::LITERALBOOLEANEVALUATION_OPERATION_EVALUATE:
 		{
-			result = eAny(this->evaluate());
+				result = eAny(this->evaluate());
 			break;
 		}
 
@@ -275,7 +273,6 @@ Any LiteralBooleanEvaluationImpl::eInvoke(int operationID, std::shared_ptr<std::
 	return result;
 }
 
-
 std::shared_ptr<fUML::Semantics::Values::LiteralBooleanEvaluation> LiteralBooleanEvaluationImpl::getThisLiteralBooleanEvaluationPtr() const
 {
 	return m_thisLiteralBooleanEvaluationPtr.lock();
@@ -285,3 +282,5 @@ void LiteralBooleanEvaluationImpl::setThisLiteralBooleanEvaluationPtr(std::weak_
 	m_thisLiteralBooleanEvaluationPtr = thisLiteralBooleanEvaluationPtr;
 	setThisLiteralEvaluationPtr(thisLiteralBooleanEvaluationPtr);
 }
+
+

@@ -32,12 +32,12 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Loci/LociFactory.hpp"
+#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
+#include "fUML/Semantics/Values/ValuesFactory.hpp"
+#include "uml/umlFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
-#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
-#include "uml/umlFactory.hpp"
-#include "fUML/Semantics/Values/ValuesFactory.hpp"
+#include "fUML/Semantics/Loci/LociFactory.hpp"
 
 #include "ocl/Evaluations/EvalEnvironment.hpp"
 #include "fUML/Semantics/Loci/Locus.hpp"
@@ -291,12 +291,10 @@ void NavigationCallExpEvalImpl::saveContent(std::shared_ptr<persistence::interfa
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> NavigationCallExpEvalImpl::eStaticClass() const
 {
 	return ocl::Evaluations::EvaluationsPackage::eInstance()->getNavigationCallExpEval_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -308,7 +306,7 @@ Any NavigationCallExpEvalImpl::eGet(int featureID, bool resolve, bool coreType) 
 		case ocl::Evaluations::EvaluationsPackage::NAVIGATIONCALLEXPEVAL_ATTRIBUTE_NAVIGATIONSOURCE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getNavigationSource();
-			return eAny(returnValue); //557
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //557
 		}
 		case ocl::Evaluations::EvaluationsPackage::NAVIGATIONCALLEXPEVAL_ATTRIBUTE_QUALIFIERS:
 		{
@@ -394,7 +392,7 @@ bool NavigationCallExpEvalImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any NavigationCallExpEvalImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any NavigationCallExpEvalImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -414,7 +412,6 @@ Any NavigationCallExpEvalImpl::eInvoke(int operationID, std::shared_ptr<std::lis
 	return result;
 }
 
-
 std::shared_ptr<ocl::Evaluations::NavigationCallExpEval> NavigationCallExpEvalImpl::getThisNavigationCallExpEvalPtr() const
 {
 	return m_thisNavigationCallExpEvalPtr.lock();
@@ -424,3 +421,5 @@ void NavigationCallExpEvalImpl::setThisNavigationCallExpEvalPtr(std::weak_ptr<oc
 	m_thisNavigationCallExpEvalPtr = thisNavigationCallExpEvalPtr;
 	setThisModelPropertyCallExpEvalPtr(thisNavigationCallExpEvalPtr);
 }
+
+

@@ -164,14 +164,10 @@ ExpressionImpl& ExpressionImpl::operator=(const ExpressionImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_operand - Subset<uml::ValueSpecification, uml::Element >(getOwnedElement())" << std::endl;
 		#endif
 		
-
-		Bag<uml::ValueSpecification>::iterator operandIter = operandList->begin();
-		Bag<uml::ValueSpecification>::iterator operandEnd = operandList->end();
-		while (operandIter != operandEnd) 
+		for(const std::shared_ptr<uml::ValueSpecification> operandindexElem: *operandList) 
 		{
-			std::shared_ptr<uml::ValueSpecification> temp = std::dynamic_pointer_cast<uml::ValueSpecification>((*operandIter)->copy());
-			getOperand()->push_back(temp);
-			operandIter++;
+			std::shared_ptr<uml::ValueSpecification> temp = std::dynamic_pointer_cast<uml::ValueSpecification>((operandindexElem)->copy());
+			m_operand->push_back(temp);
 		}
 	}
 	else
@@ -426,12 +422,10 @@ void ExpressionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> ExpressionImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getExpression_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -442,18 +436,10 @@ Any ExpressionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	{
 		case uml::umlPackage::EXPRESSION_ATTRIBUTE_OPERAND:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::ValueSpecification>::iterator iter = getOperand()->begin();
-			Bag<uml::ValueSpecification>::iterator end = getOperand()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //9515			
+			return eAnyBag(getOperand(),1133099843); //9515
 		}
 		case uml::umlPackage::EXPRESSION_ATTRIBUTE_SYMBOL:
-			return eAny(getSymbol()); //9516
+			return eAny(getSymbol(),0,true); //9516
 	}
 	return ValueSpecificationImpl::eGet(featureID, resolve, coreType);
 }
@@ -477,36 +463,37 @@ bool ExpressionImpl::eSet(int featureID, Any newValue)
 		case uml::umlPackage::EXPRESSION_ATTRIBUTE_OPERAND:
 		{
 			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::ValueSpecification>> operandList(new Bag<uml::ValueSpecification>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
+			if((newValue->isContainer()) && (uml::umlPackage::VALUESPECIFICATION_CLASS ==newValue->getTypeId()))
 			{
-				operandList->add(std::dynamic_pointer_cast<uml::ValueSpecification>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::ValueSpecification>::iterator iterOperand = getOperand()->begin();
-			Bag<uml::ValueSpecification>::iterator endOperand = getOperand()->end();
-			while (iterOperand != endOperand)
-			{
-				if (operandList->find(*iterOperand) == -1)
+				try
 				{
-					getOperand()->erase(*iterOperand);
+					std::shared_ptr<Bag<uml::ValueSpecification>> operandList= newValue->get<std::shared_ptr<Bag<uml::ValueSpecification>>>();
+					std::shared_ptr<Bag<uml::ValueSpecification>> _operand=getOperand();
+					for(const std::shared_ptr<uml::ValueSpecification> indexOperand: *_operand)
+					{
+						if (operandList->find(indexOperand) == -1)
+						{
+							_operand->erase(indexOperand);
+						}
+					}
+
+					for(const std::shared_ptr<uml::ValueSpecification> indexOperand: *operandList)
+					{
+						if (_operand->find(indexOperand) == -1)
+						{
+							_operand->add(indexOperand);
+						}
+					}
 				}
-				iterOperand++;
-			}
- 
-			iterOperand = operandList->begin();
-			endOperand = operandList->end();
-			while (iterOperand != endOperand)
-			{
-				if (getOperand()->find(*iterOperand) == -1)
+				catch(...)
 				{
-					getOperand()->add(*iterOperand);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterOperand++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}
@@ -525,7 +512,7 @@ bool ExpressionImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ExpressionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any ExpressionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -545,7 +532,6 @@ Any ExpressionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sh
 	return result;
 }
 
-
 std::shared_ptr<uml::Expression> ExpressionImpl::getThisExpressionPtr() const
 {
 	return m_thisExpressionPtr.lock();
@@ -555,3 +541,5 @@ void ExpressionImpl::setThisExpressionPtr(std::weak_ptr<uml::Expression> thisExp
 	m_thisExpressionPtr = thisExpressionPtr;
 	setThisValueSpecificationPtr(thisExpressionPtr);
 }
+
+

@@ -334,19 +334,19 @@ void ElementImportImpl::loadAttributes(std::shared_ptr<persistence::interfaces::
 		{
 			uml::VisibilityKind value = uml::VisibilityKind::PUBLIC;
 			std::string literal = iter->second;
-			if (literal == "public")
+						if (literal == "public")
 			{
 				value = uml::VisibilityKind::PUBLIC;
 			}
-			else if (literal == "private")
+			else 			if (literal == "private")
 			{
 				value = uml::VisibilityKind::PRIVATE;
 			}
-			else if (literal == "protected")
+			else 			if (literal == "protected")
 			{
 				value = uml::VisibilityKind::PROTECTED;
 			}
-			else if (literal == "package")
+			else 			if (literal == "package")
 			{
 				value = uml::VisibilityKind::PACKAGE;
 			}
@@ -467,12 +467,10 @@ void ElementImportImpl::saveContent(std::shared_ptr<persistence::interfaces::XSa
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> ElementImportImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getElementImport_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -482,19 +480,19 @@ Any ElementImportImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::ELEMENTIMPORT_ATTRIBUTE_ALIAS:
-			return eAny(getAlias()); //826
+			return eAny(getAlias(),0,true); //826
 		case uml::umlPackage::ELEMENTIMPORT_ATTRIBUTE_IMPORTEDELEMENT:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getImportedElement();
-			return eAny(returnValue); //827
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //827
 		}
 		case uml::umlPackage::ELEMENTIMPORT_ATTRIBUTE_IMPORTINGNAMESPACE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getImportingNamespace().lock();
-			return eAny(returnValue); //828
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //828
 		}
 		case uml::umlPackage::ELEMENTIMPORT_ATTRIBUTE_VISIBILITY:
-			return eAny(getVisibility()); //829
+			return eAny(getVisibility(),0,true); //829
 	}
 	return DirectedRelationshipImpl::eGet(featureID, resolve, coreType);
 }
@@ -557,51 +555,48 @@ bool ElementImportImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ElementImportImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any ElementImportImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
   	switch(operationID)
 	{
-		
-		// 991755702
+		// uml::ElementImport::getName() : std::string: 991755702
 		case umlPackage::ELEMENTIMPORT_OPERATION_GETNAME:
 		{
-			result = eAny(this->getName());
+			result = eAny(this->getName(),0,false);
 			break;
 		}
-		
-		// 533790703
+		// uml::ElementImport::imported_element_is_public(Any, std::map) : bool: 533790703
 		case umlPackage::ELEMENTIMPORT_OPERATION_IMPORTED_ELEMENT_IS_PUBLIC_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->imported_element_is_public(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->imported_element_is_public(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		
-		// 336841407
+		// uml::ElementImport::visibility_public_or_private(Any, std::map) : bool: 336841407
 		case umlPackage::ELEMENTIMPORT_OPERATION_VISIBILITY_PUBLIC_OR_PRIVATE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->visibility_public_or_private(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->visibility_public_or_private(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
 
@@ -618,7 +613,6 @@ Any ElementImportImpl::eInvoke(int operationID, std::shared_ptr<std::list < std:
 	return result;
 }
 
-
 std::shared_ptr<uml::ElementImport> ElementImportImpl::getThisElementImportPtr() const
 {
 	return m_thisElementImportPtr.lock();
@@ -628,3 +622,5 @@ void ElementImportImpl::setThisElementImportPtr(std::weak_ptr<uml::ElementImport
 	m_thisElementImportPtr = thisElementImportPtr;
 	setThisDirectedRelationshipPtr(thisElementImportPtr);
 }
+
+

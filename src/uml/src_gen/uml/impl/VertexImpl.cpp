@@ -329,12 +329,10 @@ void VertexImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandl
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> VertexImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getVertex_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -346,31 +344,15 @@ Any VertexImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::VERTEX_ATTRIBUTE_CONTAINER:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getContainer().lock();
-			return eAny(returnValue); //2549
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //2549
 		}
 		case uml::umlPackage::VERTEX_ATTRIBUTE_INCOMING:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Transition>::iterator iter = getIncoming()->begin();
-			Bag<uml::Transition>::iterator end = getIncoming()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //25410			
+			return eAnyBag(getIncoming(),2094970339); //25410
 		}
 		case uml::umlPackage::VERTEX_ATTRIBUTE_OUTGOING:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Transition>::iterator iter = getOutgoing()->begin();
-			Bag<uml::Transition>::iterator end = getOutgoing()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //25411			
+			return eAnyBag(getOutgoing(),2094970339); //25411
 		}
 	}
 	return NamedElementImpl::eGet(featureID, resolve, coreType);
@@ -410,55 +392,52 @@ bool VertexImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any VertexImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any VertexImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
   	switch(operationID)
 	{
-		
-		// 1261919053
+		// uml::Vertex::containingStateMachine() : uml::StateMachine: 1261919053
 		case umlPackage::VERTEX_OPERATION_CONTAININGSTATEMACHINE:
 		{
-			result = eAny(this->containingStateMachine());
+			result = eAny(this->containingStateMachine(), umlPackage::STATEMACHINE_CLASS,false);
 			break;
 		}
-		
-		// 773358148
+		// uml::Vertex::getIncomings() : uml::Transition[*]: 773358148
 		case umlPackage::VERTEX_OPERATION_GETINCOMINGS:
 		{
-			result = eAny(this->getIncomings());
+			std::shared_ptr<Bag<uml::Transition> > resultList = this->getIncomings();
+			return eAny(resultList,umlPackage::TRANSITION_CLASS,true);
 			break;
 		}
-		
-		// 1266036165
+		// uml::Vertex::getOutgoings() : uml::Transition[*]: 1266036165
 		case umlPackage::VERTEX_OPERATION_GETOUTGOINGS:
 		{
-			result = eAny(this->getOutgoings());
+			std::shared_ptr<Bag<uml::Transition> > resultList = this->getOutgoings();
+			return eAny(resultList,umlPackage::TRANSITION_CLASS,true);
 			break;
 		}
-		
-		// 846277715
+		// uml::Vertex::isContainedInRegion(uml::Region) : bool: 846277715
 		case umlPackage::VERTEX_OPERATION_ISCONTAINEDINREGION_REGION:
 		{
 			//Retrieve input parameter 'r'
 			//parameter 0
 			std::shared_ptr<uml::Region> incoming_param_r;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_r_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_r = (*incoming_param_r_arguments_citer)->get()->get<std::shared_ptr<uml::Region> >();
-			result = eAny(this->isContainedInRegion(incoming_param_r));
+			std::list<Any>::const_iterator incoming_param_r_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_r = (*incoming_param_r_arguments_citer)->get<std::shared_ptr<uml::Region> >();
+			result = eAny(this->isContainedInRegion(incoming_param_r),0,false);
 			break;
 		}
-		
-		// 26280316
+		// uml::Vertex::isContainedInState(uml::State) : bool: 26280316
 		case umlPackage::VERTEX_OPERATION_ISCONTAINEDINSTATE_STATE:
 		{
 			//Retrieve input parameter 's'
 			//parameter 0
 			std::shared_ptr<uml::State> incoming_param_s;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_s_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_s = (*incoming_param_s_arguments_citer)->get()->get<std::shared_ptr<uml::State> >();
-			result = eAny(this->isContainedInState(incoming_param_s));
+			std::list<Any>::const_iterator incoming_param_s_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_s = (*incoming_param_s_arguments_citer)->get<std::shared_ptr<uml::State> >();
+			result = eAny(this->isContainedInState(incoming_param_s),0,false);
 			break;
 		}
 
@@ -475,7 +454,6 @@ Any VertexImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared
 	return result;
 }
 
-
 std::shared_ptr<uml::Vertex> VertexImpl::getThisVertexPtr() const
 {
 	return m_thisVertexPtr.lock();
@@ -485,3 +463,5 @@ void VertexImpl::setThisVertexPtr(std::weak_ptr<uml::Vertex> thisVertexPtr)
 	m_thisVertexPtr = thisVertexPtr;
 	setThisNamedElementPtr(thisVertexPtr);
 }
+
+

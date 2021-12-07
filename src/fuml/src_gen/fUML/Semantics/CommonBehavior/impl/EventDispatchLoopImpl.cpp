@@ -34,8 +34,8 @@
 
 
 //Factories an Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 
 
@@ -180,12 +180,10 @@ void EventDispatchLoopImpl::saveContent(std::shared_ptr<persistence::interfaces:
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> EventDispatchLoopImpl::eStaticClass() const
 {
 	return fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance()->getEventDispatchLoop_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -218,7 +216,7 @@ bool EventDispatchLoopImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any EventDispatchLoopImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any EventDispatchLoopImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -238,7 +236,6 @@ Any EventDispatchLoopImpl::eInvoke(int operationID, std::shared_ptr<std::list < 
 	return result;
 }
 
-
 std::shared_ptr<fUML::Semantics::CommonBehavior::EventDispatchLoop> EventDispatchLoopImpl::getThisEventDispatchLoopPtr() const
 {
 	return m_thisEventDispatchLoopPtr.lock();
@@ -247,3 +244,5 @@ void EventDispatchLoopImpl::setThisEventDispatchLoopPtr(std::weak_ptr<fUML::Sema
 {
 	m_thisEventDispatchLoopPtr = thisEventDispatchLoopPtr;
 }
+
+

@@ -320,12 +320,10 @@ void TupleValueImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> TupleValueImpl::eStaticClass() const
 {
 	return ocl::Values::ValuesPackage::eInstance()->getTupleValue_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -349,7 +347,7 @@ Any TupleValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case ocl::Values::ValuesPackage::TUPLEVALUE_ATTRIBUTE_MODEL:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getModel();
-			return eAny(returnValue); //901
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //901
 		}
 	}
 	return StaticValueImpl::eGet(featureID, resolve, coreType);
@@ -423,7 +421,7 @@ bool TupleValueImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any TupleValueImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any TupleValueImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -436,16 +434,16 @@ Any TupleValueImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sh
 			//Retrieve input parameter 'otherValue'
 			//parameter 0
 			std::shared_ptr<fUML::Semantics::Values::Value> incoming_param_otherValue;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_otherValue_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_otherValue = (*incoming_param_otherValue_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::Values::Value> >();
-			result = eAny(this->equals(incoming_param_otherValue));
+			std::list<Any>::const_iterator incoming_param_otherValue_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_otherValue = (*incoming_param_otherValue_arguments_citer)->get<std::shared_ptr<fUML::Semantics::Values::Value> >();
+					result = eAny(this->equals(incoming_param_otherValue),0,false);
 			break;
 		}
 		
 		// 1666165674
 		case ValuesPackage::TUPLEVALUE_OPERATION_TOSTRING:
 		{
-			result = eAny(this->toString());
+					result = eAny(this->toString(),0,false);
 			break;
 		}
 
@@ -462,7 +460,6 @@ Any TupleValueImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sh
 	return result;
 }
 
-
 std::shared_ptr<ocl::Values::TupleValue> TupleValueImpl::getThisTupleValuePtr() const
 {
 	return m_thisTupleValuePtr.lock();
@@ -472,3 +469,5 @@ void TupleValueImpl::setThisTupleValuePtr(std::weak_ptr<ocl::Values::TupleValue>
 	m_thisTupleValuePtr = thisTupleValuePtr;
 	setThisStaticValuePtr(thisTupleValuePtr);
 }
+
+

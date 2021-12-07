@@ -52,8 +52,8 @@
 #include "fUML/Semantics/Values/Value.hpp"
 
 //Factories an Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersPackage.hpp"
 #include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
@@ -398,12 +398,10 @@ void ReferenceImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHa
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> ReferenceImpl::eStaticClass() const
 {
 	return fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::eInstance()->getReference_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -415,7 +413,7 @@ Any ReferenceImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::REFERENCE_ATTRIBUTE_REFERENT:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getReferent();
-			return eAny(returnValue); //990
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //990
 		}
 	}
 	return fUML::Semantics::SimpleClassifiers::StructuredValueImpl::eGet(featureID, resolve, coreType);
@@ -451,7 +449,7 @@ bool ReferenceImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ReferenceImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any ReferenceImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -461,7 +459,7 @@ Any ReferenceImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sha
 		// 379318105
 		case StructuredClassifiersPackage::REFERENCE_OPERATION__COPY:
 		{
-			result = eAny(this->_copy());
+				result = eAny(this->_copy());
 			break;
 		}
 		
@@ -471,18 +469,18 @@ Any ReferenceImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sha
 			//Retrieve input parameter 'feature'
 			//parameter 0
 			std::shared_ptr<uml::StructuralFeature> incoming_param_feature;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_feature_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_feature = (*incoming_param_feature_arguments_citer)->get()->get<std::shared_ptr<uml::StructuralFeature> >();
+			std::list<Any>::const_iterator incoming_param_feature_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_feature = (*incoming_param_feature_arguments_citer)->get<std::shared_ptr<uml::StructuralFeature> >();
 			//Retrieve input parameter 'values'
 			//parameter 1
 			std::shared_ptr<Bag<fUML::Semantics::Values::Value>> incoming_param_values;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_values_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_values = (*incoming_param_values_arguments_citer)->get()->get<std::shared_ptr<Bag<fUML::Semantics::Values::Value>> >();
+			std::list<Any>::const_iterator incoming_param_values_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_values = (*incoming_param_values_arguments_citer)->get<std::shared_ptr<Bag<fUML::Semantics::Values::Value>> >();
 			//Retrieve input parameter 'position'
 			//parameter 2
 			int incoming_param_position;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_position_arguments_citer = std::next(arguments->begin(), 2);
-			incoming_param_position = (*incoming_param_position_arguments_citer)->get()->get<int >();
+			std::list<Any>::const_iterator incoming_param_position_arguments_citer = std::next(arguments->begin(), 2);
+			incoming_param_position = (*incoming_param_position_arguments_citer)->get<int >();
 			this->assignFeatureValue(incoming_param_feature,incoming_param_values,incoming_param_position);
 			break;
 		}
@@ -500,9 +498,9 @@ Any ReferenceImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sha
 			//Retrieve input parameter 'operation'
 			//parameter 0
 			std::shared_ptr<uml::Operation> incoming_param_operation;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_operation_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_operation = (*incoming_param_operation_arguments_citer)->get()->get<std::shared_ptr<uml::Operation> >();
-			result = eAny(this->dispatch(incoming_param_operation));
+			std::list<Any>::const_iterator incoming_param_operation_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_operation = (*incoming_param_operation_arguments_citer)->get<std::shared_ptr<uml::Operation> >();
+				result = eAny(this->dispatch(incoming_param_operation));
 			break;
 		}
 		
@@ -512,16 +510,16 @@ Any ReferenceImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sha
 			//Retrieve input parameter 'otherValue'
 			//parameter 0
 			std::shared_ptr<fUML::Semantics::Values::Value> incoming_param_otherValue;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_otherValue_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_otherValue = (*incoming_param_otherValue_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::Values::Value> >();
-			result = eAny(this->equals(incoming_param_otherValue));
+			std::list<Any>::const_iterator incoming_param_otherValue_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_otherValue = (*incoming_param_otherValue_arguments_citer)->get<std::shared_ptr<fUML::Semantics::Values::Value> >();
+					result = eAny(this->equals(incoming_param_otherValue),0,false);
 			break;
 		}
 		
 		// 341056213
 		case StructuredClassifiersPackage::REFERENCE_OPERATION_GETTYPES:
 		{
-			result = eAny(this->getTypes());
+				result = eAny(this->getTypes());
 			break;
 		}
 		
@@ -531,21 +529,21 @@ Any ReferenceImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sha
 			//Retrieve input parameter 'feature'
 			//parameter 0
 			std::shared_ptr<uml::StructuralFeature> incoming_param_feature;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_feature_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_feature = (*incoming_param_feature_arguments_citer)->get()->get<std::shared_ptr<uml::StructuralFeature> >();
+			std::list<Any>::const_iterator incoming_param_feature_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_feature = (*incoming_param_feature_arguments_citer)->get<std::shared_ptr<uml::StructuralFeature> >();
 			//Retrieve input parameter 'featureValues'
 			//parameter 1
 			std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>> incoming_param_featureValues;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_featureValues_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_featureValues = (*incoming_param_featureValues_arguments_citer)->get()->get<std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>> >();
-			result = eAny(this->getValues(incoming_param_feature,incoming_param_featureValues));
+			std::list<Any>::const_iterator incoming_param_featureValues_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_featureValues = (*incoming_param_featureValues_arguments_citer)->get<std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>> >();
+				result = eAny(this->getValues(incoming_param_feature,incoming_param_featureValues));
 			break;
 		}
 		
 		// 1807744549
 		case StructuredClassifiersPackage::REFERENCE_OPERATION_NEW_:
 		{
-			result = eAny(this->new_());
+				result = eAny(this->new_());
 			break;
 		}
 		
@@ -555,13 +553,13 @@ Any ReferenceImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sha
 			//Retrieve input parameter 'feature'
 			//parameter 0
 			std::shared_ptr<uml::StructuralFeature> incoming_param_feature;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_feature_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_feature = (*incoming_param_feature_arguments_citer)->get()->get<std::shared_ptr<uml::StructuralFeature> >();
+			std::list<Any>::const_iterator incoming_param_feature_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_feature = (*incoming_param_feature_arguments_citer)->get<std::shared_ptr<uml::StructuralFeature> >();
 			//Retrieve input parameter 'value'
 			//parameter 1
 			std::shared_ptr<fUML::Semantics::Values::Value> incoming_param_value;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_value_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_value = (*incoming_param_value_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::Values::Value> >();
+			std::list<Any>::const_iterator incoming_param_value_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_value = (*incoming_param_value_arguments_citer)->get<std::shared_ptr<fUML::Semantics::Values::Value> >();
 			this->removeValue(incoming_param_feature,incoming_param_value);
 			break;
 		}
@@ -572,16 +570,16 @@ Any ReferenceImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sha
 			//Retrieve input parameter 'feature'
 			//parameter 0
 			std::shared_ptr<uml::StructuralFeature> incoming_param_feature;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_feature_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_feature = (*incoming_param_feature_arguments_citer)->get()->get<std::shared_ptr<uml::StructuralFeature> >();
-			result = eAny(this->retrieveFeatureValue(incoming_param_feature));
+			std::list<Any>::const_iterator incoming_param_feature_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_feature = (*incoming_param_feature_arguments_citer)->get<std::shared_ptr<uml::StructuralFeature> >();
+				result = eAny(this->retrieveFeatureValue(incoming_param_feature));
 			break;
 		}
 		
 		// 1383269448
 		case StructuredClassifiersPackage::REFERENCE_OPERATION_RETRIEVEFEATUREVALUES:
 		{
-			result = eAny(this->retrieveFeatureValues());
+				result = eAny(this->retrieveFeatureValues());
 			break;
 		}
 		
@@ -591,8 +589,8 @@ Any ReferenceImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sha
 			//Retrieve input parameter 'signalInstance'
 			//parameter 0
 			std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance> incoming_param_signalInstance;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_signalInstance_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_signalInstance = (*incoming_param_signalInstance_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance> >();
+			std::list<Any>::const_iterator incoming_param_signalInstance_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_signalInstance = (*incoming_param_signalInstance_arguments_citer)->get<std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance> >();
 			this->send(incoming_param_signalInstance);
 			break;
 		}
@@ -603,8 +601,8 @@ Any ReferenceImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sha
 			//Retrieve input parameter 'eventOccurrence'
 			//parameter 0
 			std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> incoming_param_eventOccurrence;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_eventOccurrence_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_eventOccurrence = (*incoming_param_eventOccurrence_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> >();
+			std::list<Any>::const_iterator incoming_param_eventOccurrence_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_eventOccurrence = (*incoming_param_eventOccurrence_arguments_citer)->get<std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> >();
 			this->send(incoming_param_eventOccurrence);
 			break;
 		}
@@ -615,18 +613,18 @@ Any ReferenceImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sha
 			//Retrieve input parameter 'feature'
 			//parameter 0
 			std::shared_ptr<uml::StructuralFeature> incoming_param_feature;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_feature_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_feature = (*incoming_param_feature_arguments_citer)->get()->get<std::shared_ptr<uml::StructuralFeature> >();
+			std::list<Any>::const_iterator incoming_param_feature_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_feature = (*incoming_param_feature_arguments_citer)->get<std::shared_ptr<uml::StructuralFeature> >();
 			//Retrieve input parameter 'values'
 			//parameter 1
 			std::shared_ptr<Bag<fUML::Semantics::Values::Value>> incoming_param_values;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_values_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_values = (*incoming_param_values_arguments_citer)->get()->get<std::shared_ptr<Bag<fUML::Semantics::Values::Value>> >();
+			std::list<Any>::const_iterator incoming_param_values_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_values = (*incoming_param_values_arguments_citer)->get<std::shared_ptr<Bag<fUML::Semantics::Values::Value>> >();
 			//Retrieve input parameter 'position'
 			//parameter 2
 			int incoming_param_position;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_position_arguments_citer = std::next(arguments->begin(), 2);
-			incoming_param_position = (*incoming_param_position_arguments_citer)->get()->get<int >();
+			std::list<Any>::const_iterator incoming_param_position_arguments_citer = std::next(arguments->begin(), 2);
+			incoming_param_position = (*incoming_param_position_arguments_citer)->get<int >();
 			this->setFeatureValue(incoming_param_feature,incoming_param_values,incoming_param_position);
 			break;
 		}
@@ -637,13 +635,13 @@ Any ReferenceImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sha
 			//Retrieve input parameter 'classifier'
 			//parameter 0
 			std::shared_ptr<uml::Class> incoming_param_classifier;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_classifier_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_classifier = (*incoming_param_classifier_arguments_citer)->get()->get<std::shared_ptr<uml::Class> >();
+			std::list<Any>::const_iterator incoming_param_classifier_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_classifier = (*incoming_param_classifier_arguments_citer)->get<std::shared_ptr<uml::Class> >();
 			//Retrieve input parameter 'inputs'
 			//parameter 1
 			std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> incoming_param_inputs;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_inputs_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_inputs = (*incoming_param_inputs_arguments_citer)->get()->get<std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> >();
+			std::list<Any>::const_iterator incoming_param_inputs_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_inputs = (*incoming_param_inputs_arguments_citer)->get<std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> >();
 			this->startBehavior(incoming_param_classifier,incoming_param_inputs);
 			break;
 		}
@@ -651,7 +649,7 @@ Any ReferenceImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sha
 		// 1690791699
 		case StructuredClassifiersPackage::REFERENCE_OPERATION_TOSTRING:
 		{
-			result = eAny(this->toString());
+					result = eAny(this->toString(),0,false);
 			break;
 		}
 
@@ -668,7 +666,6 @@ Any ReferenceImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sha
 	return result;
 }
 
-
 std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> ReferenceImpl::getThisReferencePtr() const
 {
 	return m_thisReferencePtr.lock();
@@ -678,3 +675,5 @@ void ReferenceImpl::setThisReferencePtr(std::weak_ptr<fUML::Semantics::Structure
 	m_thisReferencePtr = thisReferencePtr;
 	setThisStructuredValuePtr(thisReferencePtr);
 }
+
+

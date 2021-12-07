@@ -39,11 +39,11 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "uml/umlFactory.hpp"
-#include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
 #include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
-#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
+#include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
+#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
+#include "uml/umlFactory.hpp"
 
 #include "uml/Behavior.hpp"
 #include "uml/Classifier.hpp"
@@ -55,8 +55,8 @@
 #include "fUML/Semantics/CommonBehavior/ParameterValue.hpp"
 
 //Factories an Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
 #include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersPackage.hpp"
@@ -268,12 +268,10 @@ void OpaqueBehaviorExecutionImpl::saveContent(std::shared_ptr<persistence::inter
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> OpaqueBehaviorExecutionImpl::eStaticClass() const
 {
 	return fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance()->getOpaqueBehaviorExecution_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -306,7 +304,7 @@ bool OpaqueBehaviorExecutionImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any OpaqueBehaviorExecutionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any OpaqueBehaviorExecutionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -319,13 +317,13 @@ Any OpaqueBehaviorExecutionImpl::eInvoke(int operationID, std::shared_ptr<std::l
 			//Retrieve input parameter 'inputParameters'
 			//parameter 0
 			std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> incoming_param_inputParameters;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_inputParameters_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_inputParameters = (*incoming_param_inputParameters_arguments_citer)->get()->get<std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> >();
+			std::list<Any>::const_iterator incoming_param_inputParameters_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_inputParameters = (*incoming_param_inputParameters_arguments_citer)->get<std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> >();
 			//Retrieve input parameter 'outputParameters'
 			//parameter 1
 			std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> incoming_param_outputParameters;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_outputParameters_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_outputParameters = (*incoming_param_outputParameters_arguments_citer)->get()->get<std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> >();
+			std::list<Any>::const_iterator incoming_param_outputParameters_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_outputParameters = (*incoming_param_outputParameters_arguments_citer)->get<std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> >();
 			this->doBody(incoming_param_inputParameters,incoming_param_outputParameters);
 			break;
 		}
@@ -350,7 +348,6 @@ Any OpaqueBehaviorExecutionImpl::eInvoke(int operationID, std::shared_ptr<std::l
 	return result;
 }
 
-
 std::shared_ptr<fUML::Semantics::CommonBehavior::OpaqueBehaviorExecution> OpaqueBehaviorExecutionImpl::getThisOpaqueBehaviorExecutionPtr() const
 {
 	return m_thisOpaqueBehaviorExecutionPtr.lock();
@@ -360,3 +357,5 @@ void OpaqueBehaviorExecutionImpl::setThisOpaqueBehaviorExecutionPtr(std::weak_pt
 	m_thisOpaqueBehaviorExecutionPtr = thisOpaqueBehaviorExecutionPtr;
 	setThisExecutionPtr(thisOpaqueBehaviorExecutionPtr);
 }
+
+

@@ -37,8 +37,8 @@
 #include "fUML/Semantics/Values/Value.hpp"
 
 //Factories an Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Values/ValuesPackage.hpp"
 
@@ -233,12 +233,10 @@ void ValuesImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandl
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> ValuesImpl::eStaticClass() const
 {
 	return fUML::Semantics::Actions::ActionsPackage::eInstance()->getValues_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -321,7 +319,7 @@ bool ValuesImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ValuesImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any ValuesImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -341,7 +339,6 @@ Any ValuesImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared
 	return result;
 }
 
-
 std::shared_ptr<fUML::Semantics::Actions::Values> ValuesImpl::getThisValuesPtr() const
 {
 	return m_thisValuesPtr.lock();
@@ -350,3 +347,5 @@ void ValuesImpl::setThisValuesPtr(std::weak_ptr<fUML::Semantics::Actions::Values
 {
 	m_thisValuesPtr = thisValuesPtr;
 }
+
+

@@ -265,12 +265,10 @@ void ObservationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> ObservationImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getObservation_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -303,7 +301,7 @@ bool ObservationImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ObservationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any ObservationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -323,7 +321,6 @@ Any ObservationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::s
 	return result;
 }
 
-
 std::shared_ptr<uml::Observation> ObservationImpl::getThisObservationPtr() const
 {
 	return m_thisObservationPtr.lock();
@@ -333,3 +330,5 @@ void ObservationImpl::setThisObservationPtr(std::weak_ptr<uml::Observation> this
 	m_thisObservationPtr = thisObservationPtr;
 	setThisPackageableElementPtr(thisObservationPtr);
 }
+
+

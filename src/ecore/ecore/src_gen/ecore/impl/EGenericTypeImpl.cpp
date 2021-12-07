@@ -110,14 +110,10 @@ EGenericTypeImpl& EGenericTypeImpl::operator=(const EGenericTypeImpl & obj)
 		m_eTypeArguments.reset(new Bag<ecore::EGenericType>());
 		
 		
-
-		Bag<ecore::EGenericType>::iterator eTypeArgumentsIter = eTypeArgumentsList->begin();
-		Bag<ecore::EGenericType>::iterator eTypeArgumentsEnd = eTypeArgumentsList->end();
-		while (eTypeArgumentsIter != eTypeArgumentsEnd) 
+		for(const std::shared_ptr<ecore::EGenericType> eTypeArgumentsindexElem: *eTypeArgumentsList) 
 		{
-			std::shared_ptr<ecore::EGenericType> temp = std::dynamic_pointer_cast<ecore::EGenericType>((*eTypeArgumentsIter)->copy());
-			getETypeArguments()->push_back(temp);
-			eTypeArgumentsIter++;
+			std::shared_ptr<ecore::EGenericType> temp = std::dynamic_pointer_cast<ecore::EGenericType>((eTypeArgumentsindexElem)->copy());
+			m_eTypeArguments->push_back(temp);
 		}
 	}
 	else
@@ -430,12 +426,10 @@ void EGenericTypeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 	}
 }
 
-
 std::shared_ptr<EClass> EGenericTypeImpl::eStaticClass() const
 {
 	return ecore::ecorePackage::eInstance()->getEGenericType_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -447,39 +441,31 @@ Any EGenericTypeImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case ecore::ecorePackage::EGENERICTYPE_ATTRIBUTE_ECLASSIFIER:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getEClassifier();
-			return eAny(returnValue); //285
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //285
 		}
 		case ecore::ecorePackage::EGENERICTYPE_ATTRIBUTE_ELOWERBOUND:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getELowerBound();
-			return eAny(returnValue); //283
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //283
 		}
 		case ecore::ecorePackage::EGENERICTYPE_ATTRIBUTE_ERAWTYPE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getERawType();
-			return eAny(returnValue); //282
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //282
 		}
 		case ecore::ecorePackage::EGENERICTYPE_ATTRIBUTE_ETYPEARGUMENTS:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<ecore::EGenericType>::iterator iter = getETypeArguments()->begin();
-			Bag<ecore::EGenericType>::iterator end = getETypeArguments()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //281			
+			return eAnyBag(getETypeArguments(),1282018195); //281
 		}
 		case ecore::ecorePackage::EGENERICTYPE_ATTRIBUTE_ETYPEPARAMETER:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getETypeParameter();
-			return eAny(returnValue); //284
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //284
 		}
 		case ecore::ecorePackage::EGENERICTYPE_ATTRIBUTE_EUPPERBOUND:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getEUpperBound();
-			return eAny(returnValue); //280
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //280
 		}
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
@@ -536,36 +522,37 @@ bool EGenericTypeImpl::eSet(int featureID, Any newValue)
 		case ecore::ecorePackage::EGENERICTYPE_ATTRIBUTE_ETYPEARGUMENTS:
 		{
 			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<ecore::EGenericType>> eTypeArgumentsList(new Bag<ecore::EGenericType>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
+			if((newValue->isContainer()) && (ecore::ecorePackage::EGENERICTYPE_CLASS ==newValue->getTypeId()))
 			{
-				eTypeArgumentsList->add(std::dynamic_pointer_cast<ecore::EGenericType>(*iter));
-				iter++;
-			}
-			
-			Bag<ecore::EGenericType>::iterator iterETypeArguments = getETypeArguments()->begin();
-			Bag<ecore::EGenericType>::iterator endETypeArguments = getETypeArguments()->end();
-			while (iterETypeArguments != endETypeArguments)
-			{
-				if (eTypeArgumentsList->find(*iterETypeArguments) == -1)
+				try
 				{
-					getETypeArguments()->erase(*iterETypeArguments);
+					std::shared_ptr<Bag<ecore::EGenericType>> eTypeArgumentsList= newValue->get<std::shared_ptr<Bag<ecore::EGenericType>>>();
+					std::shared_ptr<Bag<ecore::EGenericType>> _eTypeArguments=getETypeArguments();
+					for(const std::shared_ptr<ecore::EGenericType> indexETypeArguments: *_eTypeArguments)
+					{
+						if (eTypeArgumentsList->find(indexETypeArguments) == -1)
+						{
+							_eTypeArguments->erase(indexETypeArguments);
+						}
+					}
+
+					for(const std::shared_ptr<ecore::EGenericType> indexETypeArguments: *eTypeArgumentsList)
+					{
+						if (_eTypeArguments->find(indexETypeArguments) == -1)
+						{
+							_eTypeArguments->add(indexETypeArguments);
+						}
+					}
 				}
-				iterETypeArguments++;
-			}
- 
-			iterETypeArguments = eTypeArgumentsList->begin();
-			endETypeArguments = eTypeArgumentsList->end();
-			while (iterETypeArguments != endETypeArguments)
-			{
-				if (getETypeArguments()->find(*iterETypeArguments) == -1)
+				catch(...)
 				{
-					getETypeArguments()->add(*iterETypeArguments);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterETypeArguments++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}
@@ -599,8 +586,7 @@ Any EGenericTypeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> a
 
   	switch(operationID)
 	{
-		
-		// 1426574931
+		// ecore::EGenericType::isInstance(Any) : bool {const}: 1426574931
 		case ecorePackage::EGENERICTYPE_OPERATION_ISINSTANCE_EJAVAOBJECT:
 		{
 			//Retrieve input parameter 'object'
@@ -608,7 +594,7 @@ Any EGenericTypeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> a
 			Any incoming_param_object;
 			std::list<Any>::const_iterator incoming_param_object_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_object = (*incoming_param_object_arguments_citer)->get<Any >();
-			result = eAny(this->isInstance(incoming_param_object));
+			result = eAny(this->isInstance(incoming_param_object),0,false);
 			break;
 		}
 
@@ -625,7 +611,6 @@ Any EGenericTypeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> a
 	return result;
 }
 
-
 std::shared_ptr<ecore::EGenericType> EGenericTypeImpl::getThisEGenericTypePtr() const
 {
 	return m_thisEGenericTypePtr.lock();
@@ -634,3 +619,5 @@ void EGenericTypeImpl::setThisEGenericTypePtr(std::weak_ptr<ecore::EGenericType>
 {
 	m_thisEGenericTypePtr = thisEGenericTypePtr;
 }
+
+

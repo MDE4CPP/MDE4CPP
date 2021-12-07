@@ -130,14 +130,10 @@ ParameterSetImpl& ParameterSetImpl::operator=(const ParameterSetImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_condition - Subset<uml::Constraint, uml::Element >(getOwnedElement())" << std::endl;
 		#endif
 		
-
-		Bag<uml::Constraint>::iterator conditionIter = conditionList->begin();
-		Bag<uml::Constraint>::iterator conditionEnd = conditionList->end();
-		while (conditionIter != conditionEnd) 
+		for(const std::shared_ptr<uml::Constraint> conditionindexElem: *conditionList) 
 		{
-			std::shared_ptr<uml::Constraint> temp = std::dynamic_pointer_cast<uml::Constraint>((*conditionIter)->copy());
-			getCondition()->push_back(temp);
-			conditionIter++;
+			std::shared_ptr<uml::Constraint> temp = std::dynamic_pointer_cast<uml::Constraint>((conditionindexElem)->copy());
+			m_condition->push_back(temp);
 		}
 	}
 	else
@@ -388,12 +384,10 @@ void ParameterSetImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> ParameterSetImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getParameterSet_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -404,27 +398,11 @@ Any ParameterSetImpl::eGet(int featureID, bool resolve, bool coreType) const
 	{
 		case uml::umlPackage::PARAMETERSET_ATTRIBUTE_CONDITION:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Constraint>::iterator iter = getCondition()->begin();
-			Bag<uml::Constraint>::iterator end = getCondition()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //1779			
+			return eAnyBag(getCondition(),11514188); //1779
 		}
 		case uml::umlPackage::PARAMETERSET_ATTRIBUTE_PARAMETER:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Parameter>::iterator iter = getParameter()->begin();
-			Bag<uml::Parameter>::iterator end = getParameter()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //17710			
+			return eAnyBag(getParameter(),2083421173); //17710
 		}
 	}
 	return NamedElementImpl::eGet(featureID, resolve, coreType);
@@ -449,72 +427,74 @@ bool ParameterSetImpl::eSet(int featureID, Any newValue)
 		case uml::umlPackage::PARAMETERSET_ATTRIBUTE_CONDITION:
 		{
 			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::Constraint>> conditionList(new Bag<uml::Constraint>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
+			if((newValue->isContainer()) && (uml::umlPackage::CONSTRAINT_CLASS ==newValue->getTypeId()))
 			{
-				conditionList->add(std::dynamic_pointer_cast<uml::Constraint>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::Constraint>::iterator iterCondition = getCondition()->begin();
-			Bag<uml::Constraint>::iterator endCondition = getCondition()->end();
-			while (iterCondition != endCondition)
-			{
-				if (conditionList->find(*iterCondition) == -1)
+				try
 				{
-					getCondition()->erase(*iterCondition);
+					std::shared_ptr<Bag<uml::Constraint>> conditionList= newValue->get<std::shared_ptr<Bag<uml::Constraint>>>();
+					std::shared_ptr<Bag<uml::Constraint>> _condition=getCondition();
+					for(const std::shared_ptr<uml::Constraint> indexCondition: *_condition)
+					{
+						if (conditionList->find(indexCondition) == -1)
+						{
+							_condition->erase(indexCondition);
+						}
+					}
+
+					for(const std::shared_ptr<uml::Constraint> indexCondition: *conditionList)
+					{
+						if (_condition->find(indexCondition) == -1)
+						{
+							_condition->add(indexCondition);
+						}
+					}
 				}
-				iterCondition++;
-			}
- 
-			iterCondition = conditionList->begin();
-			endCondition = conditionList->end();
-			while (iterCondition != endCondition)
-			{
-				if (getCondition()->find(*iterCondition) == -1)
+				catch(...)
 				{
-					getCondition()->add(*iterCondition);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterCondition++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}
 		case uml::umlPackage::PARAMETERSET_ATTRIBUTE_PARAMETER:
 		{
 			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::Parameter>> parameterList(new Bag<uml::Parameter>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
+			if((newValue->isContainer()) && (uml::umlPackage::PARAMETER_CLASS ==newValue->getTypeId()))
 			{
-				parameterList->add(std::dynamic_pointer_cast<uml::Parameter>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::Parameter>::iterator iterParameter = getParameter()->begin();
-			Bag<uml::Parameter>::iterator endParameter = getParameter()->end();
-			while (iterParameter != endParameter)
-			{
-				if (parameterList->find(*iterParameter) == -1)
+				try
 				{
-					getParameter()->erase(*iterParameter);
+					std::shared_ptr<Bag<uml::Parameter>> parameterList= newValue->get<std::shared_ptr<Bag<uml::Parameter>>>();
+					std::shared_ptr<Bag<uml::Parameter>> _parameter=getParameter();
+					for(const std::shared_ptr<uml::Parameter> indexParameter: *_parameter)
+					{
+						if (parameterList->find(indexParameter) == -1)
+						{
+							_parameter->erase(indexParameter);
+						}
+					}
+
+					for(const std::shared_ptr<uml::Parameter> indexParameter: *parameterList)
+					{
+						if (_parameter->find(indexParameter) == -1)
+						{
+							_parameter->add(indexParameter);
+						}
+					}
 				}
-				iterParameter++;
-			}
- 
-			iterParameter = parameterList->begin();
-			endParameter = parameterList->end();
-			while (iterParameter != endParameter)
-			{
-				if (getParameter()->find(*iterParameter) == -1)
+				catch(...)
 				{
-					getParameter()->add(*iterParameter);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterParameter++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}
@@ -526,61 +506,58 @@ bool ParameterSetImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ParameterSetImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any ParameterSetImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
   	switch(operationID)
 	{
-		
-		// 893901939
+		// uml::ParameterSet::input(Any, std::map) : bool: 893901939
 		case umlPackage::PARAMETERSET_OPERATION_INPUT_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->input(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->input(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		
-		// 396663857
+		// uml::ParameterSet::same_parameterized_entity(Any, std::map) : bool: 396663857
 		case umlPackage::PARAMETERSET_OPERATION_SAME_PARAMETERIZED_ENTITY_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->same_parameterized_entity(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->same_parameterized_entity(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		
-		// 1153192792
+		// uml::ParameterSet::two_parameter_sets(Any, std::map) : bool: 1153192792
 		case umlPackage::PARAMETERSET_OPERATION_TWO_PARAMETER_SETS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->two_parameter_sets(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->two_parameter_sets(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
 
@@ -597,7 +574,6 @@ Any ParameterSetImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::
 	return result;
 }
 
-
 std::shared_ptr<uml::ParameterSet> ParameterSetImpl::getThisParameterSetPtr() const
 {
 	return m_thisParameterSetPtr.lock();
@@ -607,3 +583,5 @@ void ParameterSetImpl::setThisParameterSetPtr(std::weak_ptr<uml::ParameterSet> t
 	m_thisParameterSetPtr = thisParameterSetPtr;
 	setThisNamedElementPtr(thisParameterSetPtr);
 }
+
+

@@ -157,14 +157,10 @@ InvocationActionImpl& InvocationActionImpl::operator=(const InvocationActionImpl
 			std::cout << "Initialising value SubsetUnion: " << "m_argument - SubsetUnion<uml::InputPin, uml::InputPin >(getInput())" << std::endl;
 		#endif
 		
-
-		Bag<uml::InputPin>::iterator argumentIter = argumentList->begin();
-		Bag<uml::InputPin>::iterator argumentEnd = argumentList->end();
-		while (argumentIter != argumentEnd) 
+		for(const std::shared_ptr<uml::InputPin> argumentindexElem: *argumentList) 
 		{
-			std::shared_ptr<uml::InputPin> temp = std::dynamic_pointer_cast<uml::InputPin>((*argumentIter)->copy());
-			getArgument()->push_back(temp);
-			argumentIter++;
+			std::shared_ptr<uml::InputPin> temp = std::dynamic_pointer_cast<uml::InputPin>((argumentindexElem)->copy());
+			m_argument->push_back(temp);
 		}
 	}
 	else
@@ -457,12 +453,10 @@ void InvocationActionImpl::saveContent(std::shared_ptr<persistence::interfaces::
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> InvocationActionImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getInvocationAction_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -473,20 +467,12 @@ Any InvocationActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	{
 		case uml::umlPackage::INVOCATIONACTION_ATTRIBUTE_ARGUMENT:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::InputPin>::iterator iter = getArgument()->begin();
-			Bag<uml::InputPin>::iterator end = getArgument()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //13027			
+			return eAnyBag(getArgument(),567201991); //13027
 		}
 		case uml::umlPackage::INVOCATIONACTION_ATTRIBUTE_ONPORT:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getOnPort();
-			return eAny(returnValue); //13028
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //13028
 		}
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
@@ -511,36 +497,37 @@ bool InvocationActionImpl::eSet(int featureID, Any newValue)
 		case uml::umlPackage::INVOCATIONACTION_ATTRIBUTE_ARGUMENT:
 		{
 			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::InputPin>> argumentList(new Bag<uml::InputPin>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
+			if((newValue->isContainer()) && (uml::umlPackage::INPUTPIN_CLASS ==newValue->getTypeId()))
 			{
-				argumentList->add(std::dynamic_pointer_cast<uml::InputPin>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::InputPin>::iterator iterArgument = getArgument()->begin();
-			Bag<uml::InputPin>::iterator endArgument = getArgument()->end();
-			while (iterArgument != endArgument)
-			{
-				if (argumentList->find(*iterArgument) == -1)
+				try
 				{
-					getArgument()->erase(*iterArgument);
+					std::shared_ptr<Bag<uml::InputPin>> argumentList= newValue->get<std::shared_ptr<Bag<uml::InputPin>>>();
+					std::shared_ptr<Bag<uml::InputPin>> _argument=getArgument();
+					for(const std::shared_ptr<uml::InputPin> indexArgument: *_argument)
+					{
+						if (argumentList->find(indexArgument) == -1)
+						{
+							_argument->erase(indexArgument);
+						}
+					}
+
+					for(const std::shared_ptr<uml::InputPin> indexArgument: *argumentList)
+					{
+						if (_argument->find(indexArgument) == -1)
+						{
+							_argument->add(indexArgument);
+						}
+					}
 				}
-				iterArgument++;
-			}
- 
-			iterArgument = argumentList->begin();
-			endArgument = argumentList->end();
-			while (iterArgument != endArgument)
-			{
-				if (getArgument()->find(*iterArgument) == -1)
+				catch(...)
 				{
-					getArgument()->add(*iterArgument);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterArgument++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}
@@ -560,7 +547,7 @@ bool InvocationActionImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any InvocationActionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any InvocationActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -580,7 +567,6 @@ Any InvocationActionImpl::eInvoke(int operationID, std::shared_ptr<std::list < s
 	return result;
 }
 
-
 std::shared_ptr<uml::InvocationAction> InvocationActionImpl::getThisInvocationActionPtr() const
 {
 	return m_thisInvocationActionPtr.lock();
@@ -590,3 +576,5 @@ void InvocationActionImpl::setThisInvocationActionPtr(std::weak_ptr<uml::Invocat
 	m_thisInvocationActionPtr = thisInvocationActionPtr;
 	setThisActionPtr(thisInvocationActionPtr);
 }
+
+

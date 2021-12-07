@@ -308,12 +308,10 @@ void TimeIntervalImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> TimeIntervalImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getTimeInterval_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -346,7 +344,7 @@ bool TimeIntervalImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any TimeIntervalImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any TimeIntervalImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -366,7 +364,6 @@ Any TimeIntervalImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::
 	return result;
 }
 
-
 std::shared_ptr<uml::TimeInterval> TimeIntervalImpl::getThisTimeIntervalPtr() const
 {
 	return m_thisTimeIntervalPtr.lock();
@@ -376,3 +373,5 @@ void TimeIntervalImpl::setThisTimeIntervalPtr(std::weak_ptr<uml::TimeInterval> t
 	m_thisTimeIntervalPtr = thisTimeIntervalPtr;
 	setThisIntervalPtr(thisTimeIntervalPtr);
 }
+
+

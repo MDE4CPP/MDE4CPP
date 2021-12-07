@@ -41,8 +41,8 @@
 
 #include <exception> // used in Persistence
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
-#include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Actions/ActionsFactory.hpp"
+#include "uml/umlFactory.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
 
 #include "uml/Action.hpp"
@@ -59,8 +59,8 @@
 #include "fUML/Semantics/Activities/Token.hpp"
 
 //Factories an Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
@@ -464,12 +464,10 @@ void CallOperationActionActivationImpl::saveContent(std::shared_ptr<persistence:
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> CallOperationActionActivationImpl::eStaticClass() const
 {
 	return fUML::Semantics::Actions::ActionsPackage::eInstance()->getCallOperationActionActivation_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -481,7 +479,7 @@ Any CallOperationActionActivationImpl::eGet(int featureID, bool resolve, bool co
 		case fUML::Semantics::Actions::ActionsPackage::CALLOPERATIONACTIONACTIVATION_ATTRIBUTE_CALLOPERATIONACTION:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getCallOperationAction();
-			return eAny(returnValue); //1913
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //1913
 		}
 	}
 	return CallActionActivationImpl::eGet(featureID, resolve, coreType);
@@ -517,7 +515,7 @@ bool CallOperationActionActivationImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any CallOperationActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any CallOperationActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -527,7 +525,7 @@ Any CallOperationActionActivationImpl::eInvoke(int operationID, std::shared_ptr<
 		// 371888052
 		case ActionsPackage::CALLOPERATIONACTIONACTIVATION_OPERATION_GETCALLEXECUTION:
 		{
-			result = eAny(this->getCallExecution());
+				result = eAny(this->getCallExecution());
 			break;
 		}
 
@@ -544,7 +542,6 @@ Any CallOperationActionActivationImpl::eInvoke(int operationID, std::shared_ptr<
 	return result;
 }
 
-
 std::shared_ptr<fUML::Semantics::Actions::CallOperationActionActivation> CallOperationActionActivationImpl::getThisCallOperationActionActivationPtr() const
 {
 	return m_thisCallOperationActionActivationPtr.lock();
@@ -554,3 +551,5 @@ void CallOperationActionActivationImpl::setThisCallOperationActionActivationPtr(
 	m_thisCallOperationActionActivationPtr = thisCallOperationActionActivationPtr;
 	setThisCallActionActivationPtr(thisCallOperationActionActivationPtr);
 }
+
+

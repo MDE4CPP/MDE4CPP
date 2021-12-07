@@ -375,12 +375,10 @@ void FeatureCallExpImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> FeatureCallExpImpl::eStaticClass() const
 {
 	return ocl::Expressions::ExpressionsPackage::eInstance()->getFeatureCallExp_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -390,7 +388,7 @@ Any FeatureCallExpImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case ocl::Expressions::ExpressionsPackage::FEATURECALLEXP_ATTRIBUTE_ISPRE:
-			return eAny(getIsPre()); //3023
+				return eAny(getIsPre(),0,true); //3023
 	}
 	return CallExpImpl::eGet(featureID, resolve, coreType);
 }
@@ -424,7 +422,7 @@ bool FeatureCallExpImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any FeatureCallExpImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any FeatureCallExpImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -444,7 +442,6 @@ Any FeatureCallExpImpl::eInvoke(int operationID, std::shared_ptr<std::list < std
 	return result;
 }
 
-
 std::shared_ptr<ocl::Expressions::FeatureCallExp> FeatureCallExpImpl::getThisFeatureCallExpPtr() const
 {
 	return m_thisFeatureCallExpPtr.lock();
@@ -454,3 +451,5 @@ void FeatureCallExpImpl::setThisFeatureCallExpPtr(std::weak_ptr<ocl::Expressions
 	m_thisFeatureCallExpPtr = thisFeatureCallExpPtr;
 	setThisCallExpPtr(thisFeatureCallExpPtr);
 }
+
+

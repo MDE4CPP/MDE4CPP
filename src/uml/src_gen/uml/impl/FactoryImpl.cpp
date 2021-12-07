@@ -217,12 +217,10 @@ void FactoryImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHand
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> FactoryImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getFactory_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -255,22 +253,21 @@ bool FactoryImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any FactoryImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any FactoryImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
   	switch(operationID)
 	{
-		
-		// 486892436
+		// uml::Factory::create(uml::Class) : uml::Element: 486892436
 		case umlPackage::FACTORY_OPERATION_CREATE_CLASS:
 		{
 			//Retrieve input parameter 'metaClass'
 			//parameter 0
 			std::shared_ptr<uml::Class> incoming_param_metaClass;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_metaClass_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_metaClass = (*incoming_param_metaClass_arguments_citer)->get()->get<std::shared_ptr<uml::Class> >();
-			result = eAny(this->create(incoming_param_metaClass));
+			std::list<Any>::const_iterator incoming_param_metaClass_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_metaClass = (*incoming_param_metaClass_arguments_citer)->get<std::shared_ptr<uml::Class> >();
+			result = eAny(this->create(incoming_param_metaClass), umlPackage::ELEMENT_CLASS,false);
 			break;
 		}
 
@@ -287,7 +284,6 @@ Any FactoryImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::share
 	return result;
 }
 
-
 std::shared_ptr<uml::Factory> FactoryImpl::getThisFactoryPtr() const
 {
 	return m_thisFactoryPtr.lock();
@@ -297,3 +293,5 @@ void FactoryImpl::setThisFactoryPtr(std::weak_ptr<uml::Factory> thisFactoryPtr)
 	m_thisFactoryPtr = thisFactoryPtr;
 	setThisElementPtr(thisFactoryPtr);
 }
+
+

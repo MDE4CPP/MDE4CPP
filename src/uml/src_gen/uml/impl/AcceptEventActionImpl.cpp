@@ -158,14 +158,10 @@ AcceptEventActionImpl& AcceptEventActionImpl::operator=(const AcceptEventActionI
 			std::cout << "Initialising value Subset: " << "m_result - Subset<uml::OutputPin, uml::OutputPin >(getOutput())" << std::endl;
 		#endif
 		
-
-		Bag<uml::OutputPin>::iterator resultIter = resultList->begin();
-		Bag<uml::OutputPin>::iterator resultEnd = resultList->end();
-		while (resultIter != resultEnd) 
+		for(const std::shared_ptr<uml::OutputPin> resultindexElem: *resultList) 
 		{
-			std::shared_ptr<uml::OutputPin> temp = std::dynamic_pointer_cast<uml::OutputPin>((*resultIter)->copy());
-			getResult()->push_back(temp);
-			resultIter++;
+			std::shared_ptr<uml::OutputPin> temp = std::dynamic_pointer_cast<uml::OutputPin>((resultindexElem)->copy());
+			m_result->push_back(temp);
 		}
 	}
 	else
@@ -189,14 +185,10 @@ AcceptEventActionImpl& AcceptEventActionImpl::operator=(const AcceptEventActionI
 			std::cout << "Initialising value Subset: " << "m_trigger - Subset<uml::Trigger, uml::Element >(getOwnedElement())" << std::endl;
 		#endif
 		
-
-		Bag<uml::Trigger>::iterator triggerIter = triggerList->begin();
-		Bag<uml::Trigger>::iterator triggerEnd = triggerList->end();
-		while (triggerIter != triggerEnd) 
+		for(const std::shared_ptr<uml::Trigger> triggerindexElem: *triggerList) 
 		{
-			std::shared_ptr<uml::Trigger> temp = std::dynamic_pointer_cast<uml::Trigger>((*triggerIter)->copy());
-			getTrigger()->push_back(temp);
-			triggerIter++;
+			std::shared_ptr<uml::Trigger> temp = std::dynamic_pointer_cast<uml::Trigger>((triggerindexElem)->copy());
+			m_trigger->push_back(temp);
 		}
 	}
 	else
@@ -559,12 +551,10 @@ void AcceptEventActionImpl::saveContent(std::shared_ptr<persistence::interfaces:
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> AcceptEventActionImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getAcceptEventAction_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -574,30 +564,14 @@ Any AcceptEventActionImpl::eGet(int featureID, bool resolve, bool coreType) cons
 	switch(featureID)
 	{
 		case uml::umlPackage::ACCEPTEVENTACTION_ATTRIBUTE_ISUNMARSHALL:
-			return eAny(getIsUnmarshall()); //327
+			return eAny(getIsUnmarshall(),0,true); //327
 		case uml::umlPackage::ACCEPTEVENTACTION_ATTRIBUTE_RESULT:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::OutputPin>::iterator iter = getResult()->begin();
-			Bag<uml::OutputPin>::iterator end = getResult()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //328			
+			return eAnyBag(getResult(),681481770); //328
 		}
 		case uml::umlPackage::ACCEPTEVENTACTION_ATTRIBUTE_TRIGGER:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Trigger>::iterator iter = getTrigger()->begin();
-			Bag<uml::Trigger>::iterator end = getTrigger()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //329			
+			return eAnyBag(getTrigger(),509470680); //329
 		}
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
@@ -631,72 +605,74 @@ bool AcceptEventActionImpl::eSet(int featureID, Any newValue)
 		case uml::umlPackage::ACCEPTEVENTACTION_ATTRIBUTE_RESULT:
 		{
 			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::OutputPin>> resultList(new Bag<uml::OutputPin>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
+			if((newValue->isContainer()) && (uml::umlPackage::OUTPUTPIN_CLASS ==newValue->getTypeId()))
 			{
-				resultList->add(std::dynamic_pointer_cast<uml::OutputPin>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::OutputPin>::iterator iterResult = getResult()->begin();
-			Bag<uml::OutputPin>::iterator endResult = getResult()->end();
-			while (iterResult != endResult)
-			{
-				if (resultList->find(*iterResult) == -1)
+				try
 				{
-					getResult()->erase(*iterResult);
+					std::shared_ptr<Bag<uml::OutputPin>> resultList= newValue->get<std::shared_ptr<Bag<uml::OutputPin>>>();
+					std::shared_ptr<Bag<uml::OutputPin>> _result=getResult();
+					for(const std::shared_ptr<uml::OutputPin> indexResult: *_result)
+					{
+						if (resultList->find(indexResult) == -1)
+						{
+							_result->erase(indexResult);
+						}
+					}
+
+					for(const std::shared_ptr<uml::OutputPin> indexResult: *resultList)
+					{
+						if (_result->find(indexResult) == -1)
+						{
+							_result->add(indexResult);
+						}
+					}
 				}
-				iterResult++;
-			}
- 
-			iterResult = resultList->begin();
-			endResult = resultList->end();
-			while (iterResult != endResult)
-			{
-				if (getResult()->find(*iterResult) == -1)
+				catch(...)
 				{
-					getResult()->add(*iterResult);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterResult++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}
 		case uml::umlPackage::ACCEPTEVENTACTION_ATTRIBUTE_TRIGGER:
 		{
 			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::Trigger>> triggerList(new Bag<uml::Trigger>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
+			if((newValue->isContainer()) && (uml::umlPackage::TRIGGER_CLASS ==newValue->getTypeId()))
 			{
-				triggerList->add(std::dynamic_pointer_cast<uml::Trigger>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::Trigger>::iterator iterTrigger = getTrigger()->begin();
-			Bag<uml::Trigger>::iterator endTrigger = getTrigger()->end();
-			while (iterTrigger != endTrigger)
-			{
-				if (triggerList->find(*iterTrigger) == -1)
+				try
 				{
-					getTrigger()->erase(*iterTrigger);
+					std::shared_ptr<Bag<uml::Trigger>> triggerList= newValue->get<std::shared_ptr<Bag<uml::Trigger>>>();
+					std::shared_ptr<Bag<uml::Trigger>> _trigger=getTrigger();
+					for(const std::shared_ptr<uml::Trigger> indexTrigger: *_trigger)
+					{
+						if (triggerList->find(indexTrigger) == -1)
+						{
+							_trigger->erase(indexTrigger);
+						}
+					}
+
+					for(const std::shared_ptr<uml::Trigger> indexTrigger: *triggerList)
+					{
+						if (_trigger->find(indexTrigger) == -1)
+						{
+							_trigger->add(indexTrigger);
+						}
+					}
 				}
-				iterTrigger++;
-			}
- 
-			iterTrigger = triggerList->begin();
-			endTrigger = triggerList->end();
-			while (iterTrigger != endTrigger)
-			{
-				if (getTrigger()->find(*iterTrigger) == -1)
+				catch(...)
 				{
-					getTrigger()->add(*iterTrigger);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterTrigger++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}
@@ -708,95 +684,90 @@ bool AcceptEventActionImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any AcceptEventActionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any AcceptEventActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
   	switch(operationID)
 	{
-		
-		// 1819988295
+		// uml::AcceptEventAction::conforming_type(Any, std::map) : bool: 1819988295
 		case umlPackage::ACCEPTEVENTACTION_OPERATION_CONFORMING_TYPE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->conforming_type(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->conforming_type(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		
-		// 1577028175
+		// uml::AcceptEventAction::no_input_pins(Any, std::map) : bool: 1577028175
 		case umlPackage::ACCEPTEVENTACTION_OPERATION_NO_INPUT_PINS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->no_input_pins(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->no_input_pins(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		
-		// 33049259
+		// uml::AcceptEventAction::no_output_pins(Any, std::map) : bool: 33049259
 		case umlPackage::ACCEPTEVENTACTION_OPERATION_NO_OUTPUT_PINS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->no_output_pins(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->no_output_pins(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		
-		// 361980146
+		// uml::AcceptEventAction::one_output_pin(Any, std::map) : bool: 361980146
 		case umlPackage::ACCEPTEVENTACTION_OPERATION_ONE_OUTPUT_PIN_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->one_output_pin(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->one_output_pin(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		
-		// 1699791673
+		// uml::AcceptEventAction::unmarshall_signal_events(Any, std::map) : bool: 1699791673
 		case umlPackage::ACCEPTEVENTACTION_OPERATION_UNMARSHALL_SIGNAL_EVENTS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->unmarshall_signal_events(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->unmarshall_signal_events(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
 
@@ -813,7 +784,6 @@ Any AcceptEventActionImpl::eInvoke(int operationID, std::shared_ptr<std::list < 
 	return result;
 }
 
-
 std::shared_ptr<uml::AcceptEventAction> AcceptEventActionImpl::getThisAcceptEventActionPtr() const
 {
 	return m_thisAcceptEventActionPtr.lock();
@@ -823,3 +793,5 @@ void AcceptEventActionImpl::setThisAcceptEventActionPtr(std::weak_ptr<uml::Accep
 	m_thisAcceptEventActionPtr = thisAcceptEventActionPtr;
 	setThisActionPtr(thisAcceptEventActionPtr);
 }
+
+

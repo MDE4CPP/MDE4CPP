@@ -285,12 +285,10 @@ void MessageTypeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> MessageTypeImpl::eStaticClass() const
 {
 	return ocl::Types::TypesPackage::eInstance()->getMessageType_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -302,12 +300,12 @@ Any MessageTypeImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case ocl::Types::TypesPackage::MESSAGETYPE_ATTRIBUTE_REFERREDOPERATION:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getReferredOperation();
-			return eAny(returnValue); //508
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //508
 		}
 		case ocl::Types::TypesPackage::MESSAGETYPE_ATTRIBUTE_REFERREDSIGNAL:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getReferredSignal();
-			return eAny(returnValue); //509
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //509
 		}
 	}
 	return ecore::EClassifierImpl::eGet(featureID, resolve, coreType);
@@ -353,7 +351,7 @@ bool MessageTypeImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any MessageTypeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any MessageTypeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -373,7 +371,6 @@ Any MessageTypeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::s
 	return result;
 }
 
-
 std::shared_ptr<ocl::Types::MessageType> MessageTypeImpl::getThisMessageTypePtr() const
 {
 	return m_thisMessageTypePtr.lock();
@@ -383,3 +380,5 @@ void MessageTypeImpl::setThisMessageTypePtr(std::weak_ptr<ocl::Types::MessageTyp
 	m_thisMessageTypePtr = thisMessageTypePtr;
 	setThisEClassifierPtr(thisMessageTypePtr);
 }
+
+

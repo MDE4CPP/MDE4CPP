@@ -170,14 +170,10 @@ TransitionImpl& TransitionImpl::operator=(const TransitionImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_trigger - Subset<uml::Trigger, uml::Element >(getOwnedElement())" << std::endl;
 		#endif
 		
-
-		Bag<uml::Trigger>::iterator triggerIter = triggerList->begin();
-		Bag<uml::Trigger>::iterator triggerEnd = triggerList->end();
-		while (triggerIter != triggerEnd) 
+		for(const std::shared_ptr<uml::Trigger> triggerindexElem: *triggerList) 
 		{
-			std::shared_ptr<uml::Trigger> temp = std::dynamic_pointer_cast<uml::Trigger>((*triggerIter)->copy());
-			getTrigger()->push_back(temp);
-			triggerIter++;
+			std::shared_ptr<uml::Trigger> temp = std::dynamic_pointer_cast<uml::Trigger>((triggerindexElem)->copy());
+			m_trigger->push_back(temp);
 		}
 	}
 	else
@@ -505,15 +501,15 @@ void TransitionImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLo
 		{
 			uml::TransitionKind value = uml::TransitionKind::EXTERNAL;
 			std::string literal = iter->second;
-			if (literal == "internal")
+						if (literal == "internal")
 			{
 				value = uml::TransitionKind::INTERNAL;
 			}
-			else if (literal == "local")
+			else 			if (literal == "local")
 			{
 				value = uml::TransitionKind::LOCAL;
 			}
-			else if (literal == "external")
+			else 			if (literal == "external")
 			{
 				value = uml::TransitionKind::EXTERNAL;
 			}
@@ -736,12 +732,10 @@ void TransitionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> TransitionImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getTransition_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -753,46 +747,38 @@ Any TransitionImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::TRANSITION_ATTRIBUTE_CONTAINER:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getContainer().lock();
-			return eAny(returnValue); //24125
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //24125
 		}
 		case uml::umlPackage::TRANSITION_ATTRIBUTE_EFFECT:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getEffect();
-			return eAny(returnValue); //24118
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //24118
 		}
 		case uml::umlPackage::TRANSITION_ATTRIBUTE_GUARD:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getGuard();
-			return eAny(returnValue); //24119
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //24119
 		}
 		case uml::umlPackage::TRANSITION_ATTRIBUTE_KIND:
-			return eAny(getKind()); //24120
+			return eAny(getKind(),0,true); //24120
 		case uml::umlPackage::TRANSITION_ATTRIBUTE_REDEFINEDTRANSITION:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getRedefinedTransition();
-			return eAny(returnValue); //24121
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //24121
 		}
 		case uml::umlPackage::TRANSITION_ATTRIBUTE_SOURCE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getSource();
-			return eAny(returnValue); //24122
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //24122
 		}
 		case uml::umlPackage::TRANSITION_ATTRIBUTE_TARGET:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getTarget();
-			return eAny(returnValue); //24123
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //24123
 		}
 		case uml::umlPackage::TRANSITION_ATTRIBUTE_TRIGGER:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Trigger>::iterator iter = getTrigger()->begin();
-			Bag<uml::Trigger>::iterator end = getTrigger()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //24124			
+			return eAnyBag(getTrigger(),509470680); //24124
 		}
 	}
 	Any result;
@@ -898,36 +884,37 @@ bool TransitionImpl::eSet(int featureID, Any newValue)
 		case uml::umlPackage::TRANSITION_ATTRIBUTE_TRIGGER:
 		{
 			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::Trigger>> triggerList(new Bag<uml::Trigger>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
+			if((newValue->isContainer()) && (uml::umlPackage::TRIGGER_CLASS ==newValue->getTypeId()))
 			{
-				triggerList->add(std::dynamic_pointer_cast<uml::Trigger>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::Trigger>::iterator iterTrigger = getTrigger()->begin();
-			Bag<uml::Trigger>::iterator endTrigger = getTrigger()->end();
-			while (iterTrigger != endTrigger)
-			{
-				if (triggerList->find(*iterTrigger) == -1)
+				try
 				{
-					getTrigger()->erase(*iterTrigger);
+					std::shared_ptr<Bag<uml::Trigger>> triggerList= newValue->get<std::shared_ptr<Bag<uml::Trigger>>>();
+					std::shared_ptr<Bag<uml::Trigger>> _trigger=getTrigger();
+					for(const std::shared_ptr<uml::Trigger> indexTrigger: *_trigger)
+					{
+						if (triggerList->find(indexTrigger) == -1)
+						{
+							_trigger->erase(indexTrigger);
+						}
+					}
+
+					for(const std::shared_ptr<uml::Trigger> indexTrigger: *triggerList)
+					{
+						if (_trigger->find(indexTrigger) == -1)
+						{
+							_trigger->add(indexTrigger);
+						}
+					}
 				}
-				iterTrigger++;
-			}
- 
-			iterTrigger = triggerList->begin();
-			endTrigger = triggerList->end();
-			while (iterTrigger != endTrigger)
-			{
-				if (getTrigger()->find(*iterTrigger) == -1)
+				catch(...)
 				{
-					getTrigger()->add(*iterTrigger);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterTrigger++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}
@@ -946,177 +933,166 @@ bool TransitionImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any TransitionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any TransitionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
   	switch(operationID)
 	{
-		
-		// 1765667922
+		// uml::Transition::containingStateMachine() : uml::StateMachine: 1765667922
 		case umlPackage::TRANSITION_OPERATION_CONTAININGSTATEMACHINE:
 		{
-			result = eAny(this->containingStateMachine());
+			result = eAny(this->containingStateMachine(), umlPackage::STATEMACHINE_CLASS,false);
 			break;
 		}
-		
-		// 909121488
+		// uml::Transition::fork_segment_guards(Any, std::map) : bool: 909121488
 		case umlPackage::TRANSITION_OPERATION_FORK_SEGMENT_GUARDS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->fork_segment_guards(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->fork_segment_guards(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		
-		// 1112316898
+		// uml::Transition::fork_segment_state(Any, std::map) : bool: 1112316898
 		case umlPackage::TRANSITION_OPERATION_FORK_SEGMENT_STATE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->fork_segment_state(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->fork_segment_state(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		
-		// 1797542133
+		// uml::Transition::initial_transition(Any, std::map) : bool: 1797542133
 		case umlPackage::TRANSITION_OPERATION_INITIAL_TRANSITION_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->initial_transition(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->initial_transition(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		
-		// 1538095167
+		// uml::Transition::join_segment_guards(Any, std::map) : bool: 1538095167
 		case umlPackage::TRANSITION_OPERATION_JOIN_SEGMENT_GUARDS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->join_segment_guards(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->join_segment_guards(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		
-		// 1741290577
+		// uml::Transition::join_segment_state(Any, std::map) : bool: 1741290577
 		case umlPackage::TRANSITION_OPERATION_JOIN_SEGMENT_STATE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->join_segment_state(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->join_segment_state(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		
-		// 432953338
+		// uml::Transition::outgoing_pseudostates(Any, std::map) : bool: 432953338
 		case umlPackage::TRANSITION_OPERATION_OUTGOING_PSEUDOSTATES_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->outgoing_pseudostates(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->outgoing_pseudostates(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		
-		// 1971879180
+		// uml::Transition::redefinitionContext() : uml::Classifier: 1971879180
 		case umlPackage::TRANSITION_OPERATION_REDEFINITIONCONTEXT:
 		{
-			result = eAny(this->redefinitionContext());
+			result = eAny(this->redefinitionContext(), umlPackage::CLASSIFIER_CLASS,false);
 			break;
 		}
-		
-		// 1155164645
+		// uml::Transition::state_is_external(Any, std::map) : bool: 1155164645
 		case umlPackage::TRANSITION_OPERATION_STATE_IS_EXTERNAL_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->state_is_external(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->state_is_external(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		
-		// 1164838571
+		// uml::Transition::state_is_internal(Any, std::map) : bool: 1164838571
 		case umlPackage::TRANSITION_OPERATION_STATE_IS_INTERNAL_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->state_is_internal(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->state_is_internal(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		
-		// 923777817
+		// uml::Transition::state_is_local(Any, std::map) : bool: 923777817
 		case umlPackage::TRANSITION_OPERATION_STATE_IS_LOCAL_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->state_is_local(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->state_is_local(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
 
@@ -1136,7 +1112,6 @@ Any TransitionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sh
 	return result;
 }
 
-
 std::shared_ptr<uml::Transition> TransitionImpl::getThisTransitionPtr() const
 {
 	return m_thisTransitionPtr.lock();
@@ -1147,3 +1122,5 @@ void TransitionImpl::setThisTransitionPtr(std::weak_ptr<uml::Transition> thisTra
 	setThisNamespacePtr(thisTransitionPtr);
 	setThisRedefinableElementPtr(thisTransitionPtr);
 }
+
+

@@ -203,12 +203,10 @@ void VoidTypeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> VoidTypeImpl::eStaticClass() const
 {
 	return ocl::Types::TypesPackage::eInstance()->getVoidType_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -241,7 +239,7 @@ bool VoidTypeImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any VoidTypeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any VoidTypeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -261,7 +259,6 @@ Any VoidTypeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shar
 	return result;
 }
 
-
 std::shared_ptr<ocl::Types::VoidType> VoidTypeImpl::getThisVoidTypePtr() const
 {
 	return m_thisVoidTypePtr.lock();
@@ -271,3 +268,5 @@ void VoidTypeImpl::setThisVoidTypePtr(std::weak_ptr<ocl::Types::VoidType> thisVo
 	m_thisVoidTypePtr = thisVoidTypePtr;
 	setThisEClassifierPtr(thisVoidTypePtr);
 }
+
+

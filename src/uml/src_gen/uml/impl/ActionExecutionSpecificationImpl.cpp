@@ -328,12 +328,10 @@ void ActionExecutionSpecificationImpl::saveContent(std::shared_ptr<persistence::
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> ActionExecutionSpecificationImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getActionExecutionSpecification_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -345,7 +343,7 @@ Any ActionExecutionSpecificationImpl::eGet(int featureID, bool resolve, bool cor
 		case uml::umlPackage::ACTIONEXECUTIONSPECIFICATION_ATTRIBUTE_ACTION:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getAction();
-			return eAny(returnValue); //515
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //515
 		}
 	}
 	return ExecutionSpecificationImpl::eGet(featureID, resolve, coreType);
@@ -381,27 +379,26 @@ bool ActionExecutionSpecificationImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ActionExecutionSpecificationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any ActionExecutionSpecificationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
   	switch(operationID)
 	{
-		
-		// 861896458
+		// uml::ActionExecutionSpecification::action_referenced(Any, std::map) : bool: 861896458
 		case umlPackage::ACTIONEXECUTIONSPECIFICATION_OPERATION_ACTION_REFERENCED_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->action_referenced(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->action_referenced(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
 
@@ -418,7 +415,6 @@ Any ActionExecutionSpecificationImpl::eInvoke(int operationID, std::shared_ptr<s
 	return result;
 }
 
-
 std::shared_ptr<uml::ActionExecutionSpecification> ActionExecutionSpecificationImpl::getThisActionExecutionSpecificationPtr() const
 {
 	return m_thisActionExecutionSpecificationPtr.lock();
@@ -428,3 +424,5 @@ void ActionExecutionSpecificationImpl::setThisActionExecutionSpecificationPtr(st
 	m_thisActionExecutionSpecificationPtr = thisActionExecutionSpecificationPtr;
 	setThisExecutionSpecificationPtr(thisActionExecutionSpecificationPtr);
 }
+
+

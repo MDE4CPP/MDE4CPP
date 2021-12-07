@@ -4,16 +4,16 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
-#include "ecore/EAnnotation.hpp"
+#include "ecore/EParameter.hpp"
+#include "ecore/EDataType.hpp"
+#include "ecore/EStringToStringMapEntry.hpp"
+#include "ecore/EGenericType.hpp"
 #include "ecore/EReference.hpp"
 #include "ecore/ETypeParameter.hpp"
-#include "ecore/EClass.hpp"
-#include "ecore/EDataType.hpp"
-#include "ecore/EGenericType.hpp"
-#include "ecore/EAttribute.hpp"
-#include "ecore/EParameter.hpp"
 #include "ecore/EOperation.hpp"
-#include "ecore/EStringToStringMapEntry.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
 
 // metametamodel factory
 #include "ecore/ecoreFactory.hpp"
@@ -49,7 +49,6 @@ void ecorePackageImpl::initializePackageContents()
 	m_eFactory_Class->getESuperTypes()->push_back(getEModelElement_Class());
 	m_eModelElement_Class->getESuperTypes()->push_back(getEObject_Class());
 	m_eNamedElement_Class->getESuperTypes()->push_back(getEModelElement_Class());
-	m_eObjectContainer_Class->getESuperTypes()->push_back(getEObject_Class());
 	m_eOperation_Class->getESuperTypes()->push_back(getETypedElement_Class());
 	m_ePackage_Class->getESuperTypes()->push_back(getENamedElement_Class());
 	m_eParameter_Class->getESuperTypes()->push_back(getETypedElement_Class());

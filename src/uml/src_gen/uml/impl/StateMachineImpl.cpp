@@ -200,14 +200,10 @@ StateMachineImpl& StateMachineImpl::operator=(const StateMachineImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_connectionPoint - Subset<uml::Pseudostate, uml::NamedElement >(getOwnedMember())" << std::endl;
 		#endif
 		
-
-		Bag<uml::Pseudostate>::iterator connectionPointIter = connectionPointList->begin();
-		Bag<uml::Pseudostate>::iterator connectionPointEnd = connectionPointList->end();
-		while (connectionPointIter != connectionPointEnd) 
+		for(const std::shared_ptr<uml::Pseudostate> connectionPointindexElem: *connectionPointList) 
 		{
-			std::shared_ptr<uml::Pseudostate> temp = std::dynamic_pointer_cast<uml::Pseudostate>((*connectionPointIter)->copy());
-			getConnectionPoint()->push_back(temp);
-			connectionPointIter++;
+			std::shared_ptr<uml::Pseudostate> temp = std::dynamic_pointer_cast<uml::Pseudostate>((connectionPointindexElem)->copy());
+			m_connectionPoint->push_back(temp);
 		}
 	}
 	else
@@ -231,14 +227,10 @@ StateMachineImpl& StateMachineImpl::operator=(const StateMachineImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_region - Subset<uml::Region, uml::NamedElement >(getOwnedMember())" << std::endl;
 		#endif
 		
-
-		Bag<uml::Region>::iterator regionIter = regionList->begin();
-		Bag<uml::Region>::iterator regionEnd = regionList->end();
-		while (regionIter != regionEnd) 
+		for(const std::shared_ptr<uml::Region> regionindexElem: *regionList) 
 		{
-			std::shared_ptr<uml::Region> temp = std::dynamic_pointer_cast<uml::Region>((*regionIter)->copy());
-			getRegion()->push_back(temp);
-			regionIter++;
+			std::shared_ptr<uml::Region> temp = std::dynamic_pointer_cast<uml::Region>((regionindexElem)->copy());
+			m_region->push_back(temp);
 		}
 	}
 	else
@@ -773,12 +765,10 @@ void StateMachineImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> StateMachineImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getStateMachine_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -789,51 +779,19 @@ Any StateMachineImpl::eGet(int featureID, bool resolve, bool coreType) const
 	{
 		case uml::umlPackage::STATEMACHINE_ATTRIBUTE_CONNECTIONPOINT:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Pseudostate>::iterator iter = getConnectionPoint()->begin();
-			Bag<uml::Pseudostate>::iterator end = getConnectionPoint()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //22262			
+			return eAnyBag(getConnectionPoint(),376665850); //22262
 		}
 		case uml::umlPackage::STATEMACHINE_ATTRIBUTE_EXTENDEDSTATEMACHINE:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::StateMachine>::iterator iter = getExtendedStateMachine()->begin();
-			Bag<uml::StateMachine>::iterator end = getExtendedStateMachine()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //22265			
+			return eAnyBag(getExtendedStateMachine(),526416040); //22265
 		}
 		case uml::umlPackage::STATEMACHINE_ATTRIBUTE_REGION:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Region>::iterator iter = getRegion()->begin();
-			Bag<uml::Region>::iterator end = getRegion()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //22264			
+			return eAnyBag(getRegion(),707017270); //22264
 		}
 		case uml::umlPackage::STATEMACHINE_ATTRIBUTE_SUBMACHINESTATE:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::State>::iterator iter = getSubmachineState()->begin();
-			Bag<uml::State>::iterator end = getSubmachineState()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //22263			
+			return eAnyBag(getSubmachineState(),765749889); //22263
 		}
 	}
 	return BehaviorImpl::eGet(featureID, resolve, coreType);
@@ -862,144 +820,148 @@ bool StateMachineImpl::eSet(int featureID, Any newValue)
 		case uml::umlPackage::STATEMACHINE_ATTRIBUTE_CONNECTIONPOINT:
 		{
 			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::Pseudostate>> connectionPointList(new Bag<uml::Pseudostate>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
+			if((newValue->isContainer()) && (uml::umlPackage::PSEUDOSTATE_CLASS ==newValue->getTypeId()))
 			{
-				connectionPointList->add(std::dynamic_pointer_cast<uml::Pseudostate>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::Pseudostate>::iterator iterConnectionPoint = getConnectionPoint()->begin();
-			Bag<uml::Pseudostate>::iterator endConnectionPoint = getConnectionPoint()->end();
-			while (iterConnectionPoint != endConnectionPoint)
-			{
-				if (connectionPointList->find(*iterConnectionPoint) == -1)
+				try
 				{
-					getConnectionPoint()->erase(*iterConnectionPoint);
+					std::shared_ptr<Bag<uml::Pseudostate>> connectionPointList= newValue->get<std::shared_ptr<Bag<uml::Pseudostate>>>();
+					std::shared_ptr<Bag<uml::Pseudostate>> _connectionPoint=getConnectionPoint();
+					for(const std::shared_ptr<uml::Pseudostate> indexConnectionPoint: *_connectionPoint)
+					{
+						if (connectionPointList->find(indexConnectionPoint) == -1)
+						{
+							_connectionPoint->erase(indexConnectionPoint);
+						}
+					}
+
+					for(const std::shared_ptr<uml::Pseudostate> indexConnectionPoint: *connectionPointList)
+					{
+						if (_connectionPoint->find(indexConnectionPoint) == -1)
+						{
+							_connectionPoint->add(indexConnectionPoint);
+						}
+					}
 				}
-				iterConnectionPoint++;
-			}
- 
-			iterConnectionPoint = connectionPointList->begin();
-			endConnectionPoint = connectionPointList->end();
-			while (iterConnectionPoint != endConnectionPoint)
-			{
-				if (getConnectionPoint()->find(*iterConnectionPoint) == -1)
+				catch(...)
 				{
-					getConnectionPoint()->add(*iterConnectionPoint);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterConnectionPoint++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}
 		case uml::umlPackage::STATEMACHINE_ATTRIBUTE_EXTENDEDSTATEMACHINE:
 		{
 			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::StateMachine>> extendedStateMachineList(new Bag<uml::StateMachine>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
+			if((newValue->isContainer()) && (uml::umlPackage::STATEMACHINE_CLASS ==newValue->getTypeId()))
 			{
-				extendedStateMachineList->add(std::dynamic_pointer_cast<uml::StateMachine>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::StateMachine>::iterator iterExtendedStateMachine = getExtendedStateMachine()->begin();
-			Bag<uml::StateMachine>::iterator endExtendedStateMachine = getExtendedStateMachine()->end();
-			while (iterExtendedStateMachine != endExtendedStateMachine)
-			{
-				if (extendedStateMachineList->find(*iterExtendedStateMachine) == -1)
+				try
 				{
-					getExtendedStateMachine()->erase(*iterExtendedStateMachine);
+					std::shared_ptr<Bag<uml::StateMachine>> extendedStateMachineList= newValue->get<std::shared_ptr<Bag<uml::StateMachine>>>();
+					std::shared_ptr<Bag<uml::StateMachine>> _extendedStateMachine=getExtendedStateMachine();
+					for(const std::shared_ptr<uml::StateMachine> indexExtendedStateMachine: *_extendedStateMachine)
+					{
+						if (extendedStateMachineList->find(indexExtendedStateMachine) == -1)
+						{
+							_extendedStateMachine->erase(indexExtendedStateMachine);
+						}
+					}
+
+					for(const std::shared_ptr<uml::StateMachine> indexExtendedStateMachine: *extendedStateMachineList)
+					{
+						if (_extendedStateMachine->find(indexExtendedStateMachine) == -1)
+						{
+							_extendedStateMachine->add(indexExtendedStateMachine);
+						}
+					}
 				}
-				iterExtendedStateMachine++;
-			}
- 
-			iterExtendedStateMachine = extendedStateMachineList->begin();
-			endExtendedStateMachine = extendedStateMachineList->end();
-			while (iterExtendedStateMachine != endExtendedStateMachine)
-			{
-				if (getExtendedStateMachine()->find(*iterExtendedStateMachine) == -1)
+				catch(...)
 				{
-					getExtendedStateMachine()->add(*iterExtendedStateMachine);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterExtendedStateMachine++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}
 		case uml::umlPackage::STATEMACHINE_ATTRIBUTE_REGION:
 		{
 			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::Region>> regionList(new Bag<uml::Region>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
+			if((newValue->isContainer()) && (uml::umlPackage::REGION_CLASS ==newValue->getTypeId()))
 			{
-				regionList->add(std::dynamic_pointer_cast<uml::Region>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::Region>::iterator iterRegion = getRegion()->begin();
-			Bag<uml::Region>::iterator endRegion = getRegion()->end();
-			while (iterRegion != endRegion)
-			{
-				if (regionList->find(*iterRegion) == -1)
+				try
 				{
-					getRegion()->erase(*iterRegion);
+					std::shared_ptr<Bag<uml::Region>> regionList= newValue->get<std::shared_ptr<Bag<uml::Region>>>();
+					std::shared_ptr<Bag<uml::Region>> _region=getRegion();
+					for(const std::shared_ptr<uml::Region> indexRegion: *_region)
+					{
+						if (regionList->find(indexRegion) == -1)
+						{
+							_region->erase(indexRegion);
+						}
+					}
+
+					for(const std::shared_ptr<uml::Region> indexRegion: *regionList)
+					{
+						if (_region->find(indexRegion) == -1)
+						{
+							_region->add(indexRegion);
+						}
+					}
 				}
-				iterRegion++;
-			}
- 
-			iterRegion = regionList->begin();
-			endRegion = regionList->end();
-			while (iterRegion != endRegion)
-			{
-				if (getRegion()->find(*iterRegion) == -1)
+				catch(...)
 				{
-					getRegion()->add(*iterRegion);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterRegion++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}
 		case uml::umlPackage::STATEMACHINE_ATTRIBUTE_SUBMACHINESTATE:
 		{
 			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::State>> submachineStateList(new Bag<uml::State>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
+			if((newValue->isContainer()) && (uml::umlPackage::STATE_CLASS ==newValue->getTypeId()))
 			{
-				submachineStateList->add(std::dynamic_pointer_cast<uml::State>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::State>::iterator iterSubmachineState = getSubmachineState()->begin();
-			Bag<uml::State>::iterator endSubmachineState = getSubmachineState()->end();
-			while (iterSubmachineState != endSubmachineState)
-			{
-				if (submachineStateList->find(*iterSubmachineState) == -1)
+				try
 				{
-					getSubmachineState()->erase(*iterSubmachineState);
+					std::shared_ptr<Bag<uml::State>> submachineStateList= newValue->get<std::shared_ptr<Bag<uml::State>>>();
+					std::shared_ptr<Bag<uml::State>> _submachineState=getSubmachineState();
+					for(const std::shared_ptr<uml::State> indexSubmachineState: *_submachineState)
+					{
+						if (submachineStateList->find(indexSubmachineState) == -1)
+						{
+							_submachineState->erase(indexSubmachineState);
+						}
+					}
+
+					for(const std::shared_ptr<uml::State> indexSubmachineState: *submachineStateList)
+					{
+						if (_submachineState->find(indexSubmachineState) == -1)
+						{
+							_submachineState->add(indexSubmachineState);
+						}
+					}
 				}
-				iterSubmachineState++;
-			}
- 
-			iterSubmachineState = submachineStateList->begin();
-			endSubmachineState = submachineStateList->end();
-			while (iterSubmachineState != endSubmachineState)
-			{
-				if (getSubmachineState()->find(*iterSubmachineState) == -1)
+				catch(...)
 				{
-					getSubmachineState()->add(*iterSubmachineState);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterSubmachineState++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}
@@ -1011,129 +973,122 @@ bool StateMachineImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any StateMachineImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any StateMachineImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
   	switch(operationID)
 	{
-		
-		// 475472255
+		// uml::StateMachine::LCA(uml::Vertex, uml::Vertex) : uml::Region: 475472255
 		case umlPackage::STATEMACHINE_OPERATION_LCA_VERTEX_VERTEX:
 		{
 			//Retrieve input parameter 's1'
 			//parameter 0
 			std::shared_ptr<uml::Vertex> incoming_param_s1;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_s1_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_s1 = (*incoming_param_s1_arguments_citer)->get()->get<std::shared_ptr<uml::Vertex> >();
+			std::list<Any>::const_iterator incoming_param_s1_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_s1 = (*incoming_param_s1_arguments_citer)->get<std::shared_ptr<uml::Vertex> >();
 			//Retrieve input parameter 's2'
 			//parameter 1
 			std::shared_ptr<uml::Vertex> incoming_param_s2;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_s2_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_s2 = (*incoming_param_s2_arguments_citer)->get()->get<std::shared_ptr<uml::Vertex> >();
-			result = eAny(this->LCA(incoming_param_s1,incoming_param_s2));
+			std::list<Any>::const_iterator incoming_param_s2_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_s2 = (*incoming_param_s2_arguments_citer)->get<std::shared_ptr<uml::Vertex> >();
+			result = eAny(this->LCA(incoming_param_s1,incoming_param_s2), umlPackage::REGION_CLASS,false);
 			break;
 		}
-		
-		// 296092779
+		// uml::StateMachine::LCAState(uml::Vertex, uml::Vertex) : uml::State: 296092779
 		case umlPackage::STATEMACHINE_OPERATION_LCASTATE_VERTEX_VERTEX:
 		{
 			//Retrieve input parameter 'v1'
 			//parameter 0
 			std::shared_ptr<uml::Vertex> incoming_param_v1;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_v1_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_v1 = (*incoming_param_v1_arguments_citer)->get()->get<std::shared_ptr<uml::Vertex> >();
+			std::list<Any>::const_iterator incoming_param_v1_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_v1 = (*incoming_param_v1_arguments_citer)->get<std::shared_ptr<uml::Vertex> >();
 			//Retrieve input parameter 'v2'
 			//parameter 1
 			std::shared_ptr<uml::Vertex> incoming_param_v2;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_v2_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_v2 = (*incoming_param_v2_arguments_citer)->get()->get<std::shared_ptr<uml::Vertex> >();
-			result = eAny(this->LCAState(incoming_param_v1,incoming_param_v2));
+			std::list<Any>::const_iterator incoming_param_v2_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_v2 = (*incoming_param_v2_arguments_citer)->get<std::shared_ptr<uml::Vertex> >();
+			result = eAny(this->LCAState(incoming_param_v1,incoming_param_v2), umlPackage::STATE_CLASS,false);
 			break;
 		}
-		
-		// 235532453
+		// uml::StateMachine::ancestor(uml::Vertex, uml::Vertex) : bool: 235532453
 		case umlPackage::STATEMACHINE_OPERATION_ANCESTOR_VERTEX_VERTEX:
 		{
 			//Retrieve input parameter 's1'
 			//parameter 0
 			std::shared_ptr<uml::Vertex> incoming_param_s1;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_s1_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_s1 = (*incoming_param_s1_arguments_citer)->get()->get<std::shared_ptr<uml::Vertex> >();
+			std::list<Any>::const_iterator incoming_param_s1_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_s1 = (*incoming_param_s1_arguments_citer)->get<std::shared_ptr<uml::Vertex> >();
 			//Retrieve input parameter 's2'
 			//parameter 1
 			std::shared_ptr<uml::Vertex> incoming_param_s2;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_s2_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_s2 = (*incoming_param_s2_arguments_citer)->get()->get<std::shared_ptr<uml::Vertex> >();
-			result = eAny(this->ancestor(incoming_param_s1,incoming_param_s2));
+			std::list<Any>::const_iterator incoming_param_s2_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_s2 = (*incoming_param_s2_arguments_citer)->get<std::shared_ptr<uml::Vertex> >();
+			result = eAny(this->ancestor(incoming_param_s1,incoming_param_s2),0,false);
 			break;
 		}
-		
-		// 2045587773
+		// uml::StateMachine::classifier_context(Any, std::map) : bool: 2045587773
 		case umlPackage::STATEMACHINE_OPERATION_CLASSIFIER_CONTEXT_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->classifier_context(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->classifier_context(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		
-		// 378768249
+		// uml::StateMachine::connection_points(Any, std::map) : bool: 378768249
 		case umlPackage::STATEMACHINE_OPERATION_CONNECTION_POINTS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->connection_points(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->connection_points(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		
-		// 1332478160
+		// uml::StateMachine::context_classifier(Any, std::map) : bool: 1332478160
 		case umlPackage::STATEMACHINE_OPERATION_CONTEXT_CLASSIFIER_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->context_classifier(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->context_classifier(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		
-		// 1154910431
+		// uml::StateMachine::method(Any, std::map) : bool: 1154910431
 		case umlPackage::STATEMACHINE_OPERATION_METHOD_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->method(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->method(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
 
@@ -1150,7 +1105,6 @@ Any StateMachineImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::
 	return result;
 }
 
-
 std::shared_ptr<uml::StateMachine> StateMachineImpl::getThisStateMachinePtr() const
 {
 	return m_thisStateMachinePtr.lock();
@@ -1160,3 +1114,5 @@ void StateMachineImpl::setThisStateMachinePtr(std::weak_ptr<uml::StateMachine> t
 	m_thisStateMachinePtr = thisStateMachinePtr;
 	setThisBehaviorPtr(thisStateMachinePtr);
 }
+
+

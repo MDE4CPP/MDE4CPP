@@ -435,12 +435,10 @@ void ReadExtentActionImpl::saveContent(std::shared_ptr<persistence::interfaces::
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> ReadExtentActionImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getReadExtentAction_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -452,12 +450,12 @@ Any ReadExtentActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::READEXTENTACTION_ATTRIBUTE_CLASSIFIER:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getClassifier();
-			return eAny(returnValue); //19327
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //19327
 		}
 		case uml::umlPackage::READEXTENTACTION_ATTRIBUTE_RESULT:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getResult();
-			return eAny(returnValue); //19328
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //19328
 		}
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
@@ -503,44 +501,42 @@ bool ReadExtentActionImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ReadExtentActionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any ReadExtentActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
   	switch(operationID)
 	{
-		
-		// 796840948
+		// uml::ReadExtentAction::multiplicity_of_result(Any, std::map) : bool: 796840948
 		case umlPackage::READEXTENTACTION_OPERATION_MULTIPLICITY_OF_RESULT_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->multiplicity_of_result(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->multiplicity_of_result(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		
-		// 163178380
+		// uml::ReadExtentAction::type_is_classifier(Any, std::map) : bool: 163178380
 		case umlPackage::READEXTENTACTION_OPERATION_TYPE_IS_CLASSIFIER_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->type_is_classifier(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->type_is_classifier(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
 
@@ -557,7 +553,6 @@ Any ReadExtentActionImpl::eInvoke(int operationID, std::shared_ptr<std::list < s
 	return result;
 }
 
-
 std::shared_ptr<uml::ReadExtentAction> ReadExtentActionImpl::getThisReadExtentActionPtr() const
 {
 	return m_thisReadExtentActionPtr.lock();
@@ -567,3 +562,5 @@ void ReadExtentActionImpl::setThisReadExtentActionPtr(std::weak_ptr<uml::ReadExt
 	m_thisReadExtentActionPtr = thisReadExtentActionPtr;
 	setThisActionPtr(thisReadExtentActionPtr);
 }
+
+

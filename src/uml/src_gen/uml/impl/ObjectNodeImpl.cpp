@@ -356,19 +356,19 @@ void ObjectNodeImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLo
 		{
 			uml::ObjectNodeOrderingKind value = uml::ObjectNodeOrderingKind::FIFO;
 			std::string literal = iter->second;
-			if (literal == "unordered")
+						if (literal == "unordered")
 			{
 				value = uml::ObjectNodeOrderingKind::UNORDERED;
 			}
-			else if (literal == "ordered")
+			else 			if (literal == "ordered")
 			{
 				value = uml::ObjectNodeOrderingKind::ORDERED;
 			}
-			else if (literal == "LIFO")
+			else 			if (literal == "LIFO")
 			{
 				value = uml::ObjectNodeOrderingKind::LIFO;
 			}
-			else if (literal == "FIFO")
+			else 			if (literal == "FIFO")
 			{
 				value = uml::ObjectNodeOrderingKind::FIFO;
 			}
@@ -534,12 +534,10 @@ void ObjectNodeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> ObjectNodeImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getObjectNode_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -550,29 +548,21 @@ Any ObjectNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 	{
 		case uml::umlPackage::OBJECTNODE_ATTRIBUTE_INSTATE:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::State>::iterator iter = getInState()->begin();
-			Bag<uml::State>::iterator end = getInState()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //16021			
+			return eAnyBag(getInState(),765749889); //16021
 		}
 		case uml::umlPackage::OBJECTNODE_ATTRIBUTE_ISCONTROLTYPE:
-			return eAny(getIsControlType()); //16022
+			return eAny(getIsControlType(),0,true); //16022
 		case uml::umlPackage::OBJECTNODE_ATTRIBUTE_ORDERING:
-			return eAny(getOrdering()); //16023
+			return eAny(getOrdering(),0,true); //16023
 		case uml::umlPackage::OBJECTNODE_ATTRIBUTE_SELECTION:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getSelection();
-			return eAny(returnValue); //16024
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //16024
 		}
 		case uml::umlPackage::OBJECTNODE_ATTRIBUTE_UPPERBOUND:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getUpperBound();
-			return eAny(returnValue); //16025
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //16025
 		}
 	}
 	Any result;
@@ -617,36 +607,37 @@ bool ObjectNodeImpl::eSet(int featureID, Any newValue)
 		case uml::umlPackage::OBJECTNODE_ATTRIBUTE_INSTATE:
 		{
 			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::State>> inStateList(new Bag<uml::State>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
+			if((newValue->isContainer()) && (uml::umlPackage::STATE_CLASS ==newValue->getTypeId()))
 			{
-				inStateList->add(std::dynamic_pointer_cast<uml::State>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::State>::iterator iterInState = getInState()->begin();
-			Bag<uml::State>::iterator endInState = getInState()->end();
-			while (iterInState != endInState)
-			{
-				if (inStateList->find(*iterInState) == -1)
+				try
 				{
-					getInState()->erase(*iterInState);
+					std::shared_ptr<Bag<uml::State>> inStateList= newValue->get<std::shared_ptr<Bag<uml::State>>>();
+					std::shared_ptr<Bag<uml::State>> _inState=getInState();
+					for(const std::shared_ptr<uml::State> indexInState: *_inState)
+					{
+						if (inStateList->find(indexInState) == -1)
+						{
+							_inState->erase(indexInState);
+						}
+					}
+
+					for(const std::shared_ptr<uml::State> indexInState: *inStateList)
+					{
+						if (_inState->find(indexInState) == -1)
+						{
+							_inState->add(indexInState);
+						}
+					}
 				}
-				iterInState++;
-			}
- 
-			iterInState = inStateList->begin();
-			endInState = inStateList->end();
-			while (iterInState != endInState)
-			{
-				if (getInState()->find(*iterInState) == -1)
+				catch(...)
 				{
-					getInState()->add(*iterInState);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterInState++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}
@@ -695,61 +686,58 @@ bool ObjectNodeImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ObjectNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any ObjectNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
   	switch(operationID)
 	{
-		
-		// 1199944681
+		// uml::ObjectNode::input_output_parameter(Any, std::map) : bool: 1199944681
 		case umlPackage::OBJECTNODE_OPERATION_INPUT_OUTPUT_PARAMETER_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->input_output_parameter(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->input_output_parameter(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		
-		// 987041183
+		// uml::ObjectNode::object_flow_edges(Any, std::map) : bool: 987041183
 		case umlPackage::OBJECTNODE_OPERATION_OBJECT_FLOW_EDGES_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->object_flow_edges(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->object_flow_edges(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		
-		// 1576805400
+		// uml::ObjectNode::selection_behavior(Any, std::map) : bool: 1576805400
 		case umlPackage::OBJECTNODE_OPERATION_SELECTION_BEHAVIOR_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->selection_behavior(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->selection_behavior(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
 
@@ -769,7 +757,6 @@ Any ObjectNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sh
 	return result;
 }
 
-
 std::shared_ptr<uml::ObjectNode> ObjectNodeImpl::getThisObjectNodePtr() const
 {
 	return m_thisObjectNodePtr.lock();
@@ -780,3 +767,5 @@ void ObjectNodeImpl::setThisObjectNodePtr(std::weak_ptr<uml::ObjectNode> thisObj
 	setThisActivityNodePtr(thisObjectNodePtr);
 	setThisTypedElementPtr(thisObjectNodePtr);
 }
+
+

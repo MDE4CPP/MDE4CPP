@@ -315,12 +315,10 @@ void ClearVariableActionImpl::saveContent(std::shared_ptr<persistence::interface
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> ClearVariableActionImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getClearVariableAction_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -353,7 +351,7 @@ bool ClearVariableActionImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ClearVariableActionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any ClearVariableActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -373,7 +371,6 @@ Any ClearVariableActionImpl::eInvoke(int operationID, std::shared_ptr<std::list 
 	return result;
 }
 
-
 std::shared_ptr<uml::ClearVariableAction> ClearVariableActionImpl::getThisClearVariableActionPtr() const
 {
 	return m_thisClearVariableActionPtr.lock();
@@ -383,3 +380,5 @@ void ClearVariableActionImpl::setThisClearVariableActionPtr(std::weak_ptr<uml::C
 	m_thisClearVariableActionPtr = thisClearVariableActionPtr;
 	setThisVariableActionPtr(thisClearVariableActionPtr);
 }
+
+

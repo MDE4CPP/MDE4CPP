@@ -238,12 +238,10 @@ void ConnectableElementTemplateParameterImpl::saveContent(std::shared_ptr<persis
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> ConnectableElementTemplateParameterImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getConnectableElementTemplateParameter_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -276,7 +274,7 @@ bool ConnectableElementTemplateParameterImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ConnectableElementTemplateParameterImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any ConnectableElementTemplateParameterImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -296,7 +294,6 @@ Any ConnectableElementTemplateParameterImpl::eInvoke(int operationID, std::share
 	return result;
 }
 
-
 std::shared_ptr<uml::ConnectableElementTemplateParameter> ConnectableElementTemplateParameterImpl::getThisConnectableElementTemplateParameterPtr() const
 {
 	return m_thisConnectableElementTemplateParameterPtr.lock();
@@ -306,3 +303,5 @@ void ConnectableElementTemplateParameterImpl::setThisConnectableElementTemplateP
 	m_thisConnectableElementTemplateParameterPtr = thisConnectableElementTemplateParameterPtr;
 	setThisTemplateParameterPtr(thisConnectableElementTemplateParameterPtr);
 }
+
+

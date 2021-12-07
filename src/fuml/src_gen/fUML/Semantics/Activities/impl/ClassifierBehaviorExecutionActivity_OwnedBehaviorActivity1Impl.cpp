@@ -34,8 +34,8 @@
 
 
 //Factories an Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 
 
@@ -180,12 +180,10 @@ void ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Impl::saveContent
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Impl::eStaticClass() const
 {
 	return fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -218,7 +216,7 @@ bool ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Impl::eSet(int fe
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Impl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Impl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -238,7 +236,6 @@ Any ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Impl::eInvoke(int 
 	return result;
 }
 
-
 std::shared_ptr<fUML::Semantics::Activities::ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1> ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Impl::getThisClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Ptr() const
 {
 	return m_thisClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Ptr.lock();
@@ -247,3 +244,5 @@ void ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Impl::setThisClas
 {
 	m_thisClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Ptr = thisClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Ptr;
 }
+
+

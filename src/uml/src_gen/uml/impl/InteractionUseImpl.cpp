@@ -152,14 +152,10 @@ InteractionUseImpl& InteractionUseImpl::operator=(const InteractionUseImpl & obj
 			std::cout << "Initialising value Subset: " << "m_actualGate - Subset<uml::Gate, uml::Element >(getOwnedElement())" << std::endl;
 		#endif
 		
-
-		Bag<uml::Gate>::iterator actualGateIter = actualGateList->begin();
-		Bag<uml::Gate>::iterator actualGateEnd = actualGateList->end();
-		while (actualGateIter != actualGateEnd) 
+		for(const std::shared_ptr<uml::Gate> actualGateindexElem: *actualGateList) 
 		{
-			std::shared_ptr<uml::Gate> temp = std::dynamic_pointer_cast<uml::Gate>((*actualGateIter)->copy());
-			getActualGate()->push_back(temp);
-			actualGateIter++;
+			std::shared_ptr<uml::Gate> temp = std::dynamic_pointer_cast<uml::Gate>((actualGateindexElem)->copy());
+			m_actualGate->push_back(temp);
 		}
 	}
 	else
@@ -183,14 +179,10 @@ InteractionUseImpl& InteractionUseImpl::operator=(const InteractionUseImpl & obj
 			std::cout << "Initialising value Subset: " << "m_argument - Subset<uml::ValueSpecification, uml::Element >(getOwnedElement())" << std::endl;
 		#endif
 		
-
-		Bag<uml::ValueSpecification>::iterator argumentIter = argumentList->begin();
-		Bag<uml::ValueSpecification>::iterator argumentEnd = argumentList->end();
-		while (argumentIter != argumentEnd) 
+		for(const std::shared_ptr<uml::ValueSpecification> argumentindexElem: *argumentList) 
 		{
-			std::shared_ptr<uml::ValueSpecification> temp = std::dynamic_pointer_cast<uml::ValueSpecification>((*argumentIter)->copy());
-			getArgument()->push_back(temp);
-			argumentIter++;
+			std::shared_ptr<uml::ValueSpecification> temp = std::dynamic_pointer_cast<uml::ValueSpecification>((argumentindexElem)->copy());
+			m_argument->push_back(temp);
 		}
 	}
 	else
@@ -588,12 +580,10 @@ void InteractionUseImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> InteractionUseImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getInteractionUse_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -604,42 +594,26 @@ Any InteractionUseImpl::eGet(int featureID, bool resolve, bool coreType) const
 	{
 		case uml::umlPackage::INTERACTIONUSE_ATTRIBUTE_ACTUALGATE:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Gate>::iterator iter = getActualGate()->begin();
-			Bag<uml::Gate>::iterator end = getActualGate()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //12413			
+			return eAnyBag(getActualGate(),1946624608); //12413
 		}
 		case uml::umlPackage::INTERACTIONUSE_ATTRIBUTE_ARGUMENT:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::ValueSpecification>::iterator iter = getArgument()->begin();
-			Bag<uml::ValueSpecification>::iterator end = getArgument()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //12414			
+			return eAnyBag(getArgument(),1133099843); //12414
 		}
 		case uml::umlPackage::INTERACTIONUSE_ATTRIBUTE_REFERSTO:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getRefersTo();
-			return eAny(returnValue); //12415
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //12415
 		}
 		case uml::umlPackage::INTERACTIONUSE_ATTRIBUTE_RETURNVALUE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getReturnValue();
-			return eAny(returnValue); //12416
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //12416
 		}
 		case uml::umlPackage::INTERACTIONUSE_ATTRIBUTE_RETURNVALUERECIPIENT:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getReturnValueRecipient();
-			return eAny(returnValue); //12417
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //12417
 		}
 	}
 	return InteractionFragmentImpl::eGet(featureID, resolve, coreType);
@@ -670,72 +644,74 @@ bool InteractionUseImpl::eSet(int featureID, Any newValue)
 		case uml::umlPackage::INTERACTIONUSE_ATTRIBUTE_ACTUALGATE:
 		{
 			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::Gate>> actualGateList(new Bag<uml::Gate>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
+			if((newValue->isContainer()) && (uml::umlPackage::GATE_CLASS ==newValue->getTypeId()))
 			{
-				actualGateList->add(std::dynamic_pointer_cast<uml::Gate>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::Gate>::iterator iterActualGate = getActualGate()->begin();
-			Bag<uml::Gate>::iterator endActualGate = getActualGate()->end();
-			while (iterActualGate != endActualGate)
-			{
-				if (actualGateList->find(*iterActualGate) == -1)
+				try
 				{
-					getActualGate()->erase(*iterActualGate);
+					std::shared_ptr<Bag<uml::Gate>> actualGateList= newValue->get<std::shared_ptr<Bag<uml::Gate>>>();
+					std::shared_ptr<Bag<uml::Gate>> _actualGate=getActualGate();
+					for(const std::shared_ptr<uml::Gate> indexActualGate: *_actualGate)
+					{
+						if (actualGateList->find(indexActualGate) == -1)
+						{
+							_actualGate->erase(indexActualGate);
+						}
+					}
+
+					for(const std::shared_ptr<uml::Gate> indexActualGate: *actualGateList)
+					{
+						if (_actualGate->find(indexActualGate) == -1)
+						{
+							_actualGate->add(indexActualGate);
+						}
+					}
 				}
-				iterActualGate++;
-			}
- 
-			iterActualGate = actualGateList->begin();
-			endActualGate = actualGateList->end();
-			while (iterActualGate != endActualGate)
-			{
-				if (getActualGate()->find(*iterActualGate) == -1)
+				catch(...)
 				{
-					getActualGate()->add(*iterActualGate);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterActualGate++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}
 		case uml::umlPackage::INTERACTIONUSE_ATTRIBUTE_ARGUMENT:
 		{
 			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::ValueSpecification>> argumentList(new Bag<uml::ValueSpecification>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
+			if((newValue->isContainer()) && (uml::umlPackage::VALUESPECIFICATION_CLASS ==newValue->getTypeId()))
 			{
-				argumentList->add(std::dynamic_pointer_cast<uml::ValueSpecification>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::ValueSpecification>::iterator iterArgument = getArgument()->begin();
-			Bag<uml::ValueSpecification>::iterator endArgument = getArgument()->end();
-			while (iterArgument != endArgument)
-			{
-				if (argumentList->find(*iterArgument) == -1)
+				try
 				{
-					getArgument()->erase(*iterArgument);
+					std::shared_ptr<Bag<uml::ValueSpecification>> argumentList= newValue->get<std::shared_ptr<Bag<uml::ValueSpecification>>>();
+					std::shared_ptr<Bag<uml::ValueSpecification>> _argument=getArgument();
+					for(const std::shared_ptr<uml::ValueSpecification> indexArgument: *_argument)
+					{
+						if (argumentList->find(indexArgument) == -1)
+						{
+							_argument->erase(indexArgument);
+						}
+					}
+
+					for(const std::shared_ptr<uml::ValueSpecification> indexArgument: *argumentList)
+					{
+						if (_argument->find(indexArgument) == -1)
+						{
+							_argument->add(indexArgument);
+						}
+					}
 				}
-				iterArgument++;
-			}
- 
-			iterArgument = argumentList->begin();
-			endArgument = argumentList->end();
-			while (iterArgument != endArgument)
-			{
-				if (getArgument()->find(*iterArgument) == -1)
+				catch(...)
 				{
-					getArgument()->add(*iterArgument);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterArgument++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}
@@ -771,112 +747,106 @@ bool InteractionUseImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any InteractionUseImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any InteractionUseImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
   	switch(operationID)
 	{
-		
-		// 558716346
+		// uml::InteractionUse::all_lifelines(Any, std::map) : bool: 558716346
 		case umlPackage::INTERACTIONUSE_OPERATION_ALL_LIFELINES_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->all_lifelines(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->all_lifelines(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		
-		// 575523977
+		// uml::InteractionUse::arguments_are_constants(Any, std::map) : bool: 575523977
 		case umlPackage::INTERACTIONUSE_OPERATION_ARGUMENTS_ARE_CONSTANTS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->arguments_are_constants(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->arguments_are_constants(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		
-		// 1624485963
+		// uml::InteractionUse::arguments_correspond_to_parameters(Any, std::map) : bool: 1624485963
 		case umlPackage::INTERACTIONUSE_OPERATION_ARGUMENTS_CORRESPOND_TO_PARAMETERS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->arguments_correspond_to_parameters(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->arguments_correspond_to_parameters(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		
-		// 1291555823
+		// uml::InteractionUse::gates_match(Any, std::map) : bool: 1291555823
 		case umlPackage::INTERACTIONUSE_OPERATION_GATES_MATCH_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->gates_match(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->gates_match(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		
-		// 272508456
+		// uml::InteractionUse::returnValueRecipient_coverage(Any, std::map) : bool: 272508456
 		case umlPackage::INTERACTIONUSE_OPERATION_RETURNVALUERECIPIENT_COVERAGE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->returnValueRecipient_coverage(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->returnValueRecipient_coverage(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		
-		// 1838270170
+		// uml::InteractionUse::returnValue_type_recipient_correspondence(Any, std::map) : bool: 1838270170
 		case umlPackage::INTERACTIONUSE_OPERATION_RETURNVALUE_TYPE_RECIPIENT_CORRESPONDENCE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->returnValue_type_recipient_correspondence(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->returnValue_type_recipient_correspondence(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
 
@@ -893,7 +863,6 @@ Any InteractionUseImpl::eInvoke(int operationID, std::shared_ptr<std::list < std
 	return result;
 }
 
-
 std::shared_ptr<uml::InteractionUse> InteractionUseImpl::getThisInteractionUsePtr() const
 {
 	return m_thisInteractionUsePtr.lock();
@@ -903,3 +872,5 @@ void InteractionUseImpl::setThisInteractionUsePtr(std::weak_ptr<uml::Interaction
 	m_thisInteractionUsePtr = thisInteractionUsePtr;
 	setThisInteractionFragmentPtr(thisInteractionUsePtr);
 }
+
+

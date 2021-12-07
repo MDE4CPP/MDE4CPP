@@ -46,8 +46,8 @@
 #include "fUML/Semantics/Activities/Token.hpp"
 
 //Factories an Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "uml/umlPackage.hpp"
 
@@ -255,12 +255,10 @@ void ExpansionNodeActivationImpl::saveContent(std::shared_ptr<persistence::inter
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> ExpansionNodeActivationImpl::eStaticClass() const
 {
 	return fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getExpansionNodeActivation_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -293,7 +291,7 @@ bool ExpansionNodeActivationImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ExpansionNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any ExpansionNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -306,8 +304,8 @@ Any ExpansionNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::l
 			//Retrieve input parameter 'incomingTokens'
 			//parameter 0
 			std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> incoming_param_incomingTokens;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_incomingTokens_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_incomingTokens = (*incoming_param_incomingTokens_arguments_citer)->get()->get<std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> >();
+			std::list<Any>::const_iterator incoming_param_incomingTokens_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_incomingTokens = (*incoming_param_incomingTokens_arguments_citer)->get<std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> >();
 			this->fire(incoming_param_incomingTokens);
 			break;
 		}
@@ -315,14 +313,14 @@ Any ExpansionNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::l
 		// 1117119621
 		case ActivitiesPackage::EXPANSIONNODEACTIVATION_OPERATION_GETEXPANSIONREGIONACTIVATION:
 		{
-			result = eAny(this->getExpansionRegionActivation());
+				result = eAny(this->getExpansionRegionActivation());
 			break;
 		}
 		
 		// 14712609
 		case ActivitiesPackage::EXPANSIONNODEACTIVATION_OPERATION_ISREADY:
 		{
-			result = eAny(this->isReady());
+					result = eAny(this->isReady(),0,false);
 			break;
 		}
 		
@@ -346,7 +344,6 @@ Any ExpansionNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::l
 	return result;
 }
 
-
 std::shared_ptr<fUML::Semantics::Activities::ExpansionNodeActivation> ExpansionNodeActivationImpl::getThisExpansionNodeActivationPtr() const
 {
 	return m_thisExpansionNodeActivationPtr.lock();
@@ -356,3 +353,5 @@ void ExpansionNodeActivationImpl::setThisExpansionNodeActivationPtr(std::weak_pt
 	m_thisExpansionNodeActivationPtr = thisExpansionNodeActivationPtr;
 	setThisObjectNodeActivationPtr(thisExpansionNodeActivationPtr);
 }
+
+

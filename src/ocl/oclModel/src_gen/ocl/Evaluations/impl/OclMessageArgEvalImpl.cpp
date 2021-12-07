@@ -33,9 +33,9 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
 #include "uml/umlFactory.hpp"
+#include "fUML/Semantics/Loci/LociFactory.hpp"
 
 #include "fUML/Semantics/Values/Evaluation.hpp"
 #include "fUML/Semantics/Loci/Locus.hpp"
@@ -307,12 +307,10 @@ void OclMessageArgEvalImpl::saveContent(std::shared_ptr<persistence::interfaces:
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> OclMessageArgEvalImpl::eStaticClass() const
 {
 	return ocl::Evaluations::EvaluationsPackage::eInstance()->getOclMessageArgEval_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -324,17 +322,17 @@ Any OclMessageArgEvalImpl::eGet(int featureID, bool resolve, bool coreType) cons
 		case ocl::Evaluations::EvaluationsPackage::OCLMESSAGEARGEVAL_ATTRIBUTE_EXPRESSION:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getExpression();
-			return eAny(returnValue); //623
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //623
 		}
 		case ocl::Evaluations::EvaluationsPackage::OCLMESSAGEARGEVAL_ATTRIBUTE_UNSPECIFIED:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getUnspecified();
-			return eAny(returnValue); //622
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //622
 		}
 		case ocl::Evaluations::EvaluationsPackage::OCLMESSAGEARGEVAL_ATTRIBUTE_VARIABLE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getVariable();
-			return eAny(returnValue); //624
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //624
 		}
 	}
 	return fUML::Semantics::Values::EvaluationImpl::eGet(featureID, resolve, coreType);
@@ -390,7 +388,7 @@ bool OclMessageArgEvalImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any OclMessageArgEvalImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any OclMessageArgEvalImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -410,7 +408,6 @@ Any OclMessageArgEvalImpl::eInvoke(int operationID, std::shared_ptr<std::list < 
 	return result;
 }
 
-
 std::shared_ptr<ocl::Evaluations::OclMessageArgEval> OclMessageArgEvalImpl::getThisOclMessageArgEvalPtr() const
 {
 	return m_thisOclMessageArgEvalPtr.lock();
@@ -420,3 +417,5 @@ void OclMessageArgEvalImpl::setThisOclMessageArgEvalPtr(std::weak_ptr<ocl::Evalu
 	m_thisOclMessageArgEvalPtr = thisOclMessageArgEvalPtr;
 	setThisEvaluationPtr(thisOclMessageArgEvalPtr);
 }
+
+

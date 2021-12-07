@@ -163,14 +163,10 @@ RegionImpl& RegionImpl::operator=(const RegionImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_subvertex - Subset<uml::Vertex, uml::NamedElement >(getOwnedMember())" << std::endl;
 		#endif
 		
-
-		Bag<uml::Vertex>::iterator subvertexIter = subvertexList->begin();
-		Bag<uml::Vertex>::iterator subvertexEnd = subvertexList->end();
-		while (subvertexIter != subvertexEnd) 
+		for(const std::shared_ptr<uml::Vertex> subvertexindexElem: *subvertexList) 
 		{
-			std::shared_ptr<uml::Vertex> temp = std::dynamic_pointer_cast<uml::Vertex>((*subvertexIter)->copy());
-			getSubvertex()->push_back(temp);
-			subvertexIter++;
+			std::shared_ptr<uml::Vertex> temp = std::dynamic_pointer_cast<uml::Vertex>((subvertexindexElem)->copy());
+			m_subvertex->push_back(temp);
 		}
 	}
 	else
@@ -194,14 +190,10 @@ RegionImpl& RegionImpl::operator=(const RegionImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_transition - Subset<uml::Transition, uml::NamedElement >(getOwnedMember())" << std::endl;
 		#endif
 		
-
-		Bag<uml::Transition>::iterator transitionIter = transitionList->begin();
-		Bag<uml::Transition>::iterator transitionEnd = transitionList->end();
-		while (transitionIter != transitionEnd) 
+		for(const std::shared_ptr<uml::Transition> transitionindexElem: *transitionList) 
 		{
-			std::shared_ptr<uml::Transition> temp = std::dynamic_pointer_cast<uml::Transition>((*transitionIter)->copy());
-			getTransition()->push_back(temp);
-			transitionIter++;
+			std::shared_ptr<uml::Transition> temp = std::dynamic_pointer_cast<uml::Transition>((transitionindexElem)->copy());
+			m_transition->push_back(temp);
 		}
 	}
 	else
@@ -636,12 +628,10 @@ void RegionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandl
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> RegionImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getRegion_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -653,41 +643,25 @@ Any RegionImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::REGION_ATTRIBUTE_EXTENDEDREGION:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getExtendedRegion();
-			return eAny(returnValue); //20718
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //20718
 		}
 		case uml::umlPackage::REGION_ATTRIBUTE_STATE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getState().lock();
-			return eAny(returnValue); //20719
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //20719
 		}
 		case uml::umlPackage::REGION_ATTRIBUTE_STATEMACHINE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getStateMachine().lock();
-			return eAny(returnValue); //20720
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //20720
 		}
 		case uml::umlPackage::REGION_ATTRIBUTE_SUBVERTEX:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Vertex>::iterator iter = getSubvertex()->begin();
-			Bag<uml::Vertex>::iterator end = getSubvertex()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //20722			
+			return eAnyBag(getSubvertex(),216121842); //20722
 		}
 		case uml::umlPackage::REGION_ATTRIBUTE_TRANSITION:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Transition>::iterator iter = getTransition()->begin();
-			Bag<uml::Transition>::iterator end = getTransition()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //20721			
+			return eAnyBag(getTransition(),2094970339); //20721
 		}
 	}
 	Any result;
@@ -756,72 +730,74 @@ bool RegionImpl::eSet(int featureID, Any newValue)
 		case uml::umlPackage::REGION_ATTRIBUTE_SUBVERTEX:
 		{
 			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::Vertex>> subvertexList(new Bag<uml::Vertex>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
+			if((newValue->isContainer()) && (uml::umlPackage::VERTEX_CLASS ==newValue->getTypeId()))
 			{
-				subvertexList->add(std::dynamic_pointer_cast<uml::Vertex>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::Vertex>::iterator iterSubvertex = getSubvertex()->begin();
-			Bag<uml::Vertex>::iterator endSubvertex = getSubvertex()->end();
-			while (iterSubvertex != endSubvertex)
-			{
-				if (subvertexList->find(*iterSubvertex) == -1)
+				try
 				{
-					getSubvertex()->erase(*iterSubvertex);
+					std::shared_ptr<Bag<uml::Vertex>> subvertexList= newValue->get<std::shared_ptr<Bag<uml::Vertex>>>();
+					std::shared_ptr<Bag<uml::Vertex>> _subvertex=getSubvertex();
+					for(const std::shared_ptr<uml::Vertex> indexSubvertex: *_subvertex)
+					{
+						if (subvertexList->find(indexSubvertex) == -1)
+						{
+							_subvertex->erase(indexSubvertex);
+						}
+					}
+
+					for(const std::shared_ptr<uml::Vertex> indexSubvertex: *subvertexList)
+					{
+						if (_subvertex->find(indexSubvertex) == -1)
+						{
+							_subvertex->add(indexSubvertex);
+						}
+					}
 				}
-				iterSubvertex++;
-			}
- 
-			iterSubvertex = subvertexList->begin();
-			endSubvertex = subvertexList->end();
-			while (iterSubvertex != endSubvertex)
-			{
-				if (getSubvertex()->find(*iterSubvertex) == -1)
+				catch(...)
 				{
-					getSubvertex()->add(*iterSubvertex);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterSubvertex++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}
 		case uml::umlPackage::REGION_ATTRIBUTE_TRANSITION:
 		{
 			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::Transition>> transitionList(new Bag<uml::Transition>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
+			if((newValue->isContainer()) && (uml::umlPackage::TRANSITION_CLASS ==newValue->getTypeId()))
 			{
-				transitionList->add(std::dynamic_pointer_cast<uml::Transition>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::Transition>::iterator iterTransition = getTransition()->begin();
-			Bag<uml::Transition>::iterator endTransition = getTransition()->end();
-			while (iterTransition != endTransition)
-			{
-				if (transitionList->find(*iterTransition) == -1)
+				try
 				{
-					getTransition()->erase(*iterTransition);
+					std::shared_ptr<Bag<uml::Transition>> transitionList= newValue->get<std::shared_ptr<Bag<uml::Transition>>>();
+					std::shared_ptr<Bag<uml::Transition>> _transition=getTransition();
+					for(const std::shared_ptr<uml::Transition> indexTransition: *_transition)
+					{
+						if (transitionList->find(indexTransition) == -1)
+						{
+							_transition->erase(indexTransition);
+						}
+					}
+
+					for(const std::shared_ptr<uml::Transition> indexTransition: *transitionList)
+					{
+						if (_transition->find(indexTransition) == -1)
+						{
+							_transition->add(indexTransition);
+						}
+					}
 				}
-				iterTransition++;
-			}
- 
-			iterTransition = transitionList->begin();
-			endTransition = transitionList->end();
-			while (iterTransition != endTransition)
-			{
-				if (getTransition()->find(*iterTransition) == -1)
+				catch(...)
 				{
-					getTransition()->add(*iterTransition);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterTransition++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}
@@ -840,99 +816,92 @@ bool RegionImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any RegionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any RegionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
   	switch(operationID)
 	{
-		
-		// 701066281
+		// uml::Region::belongsToPSM() : bool: 701066281
 		case umlPackage::REGION_OPERATION_BELONGSTOPSM:
 		{
-			result = eAny(this->belongsToPSM());
+			result = eAny(this->belongsToPSM(),0,false);
 			break;
 		}
-		
-		// 1752814481
+		// uml::Region::containingStateMachine() : uml::StateMachine: 1752814481
 		case umlPackage::REGION_OPERATION_CONTAININGSTATEMACHINE:
 		{
-			result = eAny(this->containingStateMachine());
+			result = eAny(this->containingStateMachine(), umlPackage::STATEMACHINE_CLASS,false);
 			break;
 		}
-		
-		// 629096106
+		// uml::Region::deep_history_vertex(Any, std::map) : bool: 629096106
 		case umlPackage::REGION_OPERATION_DEEP_HISTORY_VERTEX_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->deep_history_vertex(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->deep_history_vertex(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		
-		// 709638913
+		// uml::Region::initial_vertex(Any, std::map) : bool: 709638913
 		case umlPackage::REGION_OPERATION_INITIAL_VERTEX_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->initial_vertex(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->initial_vertex(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		
-		// 118469315
+		// uml::Region::owned(Any, std::map) : bool: 118469315
 		case umlPackage::REGION_OPERATION_OWNED_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->owned(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->owned(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		
-		// 2039075134
+		// uml::Region::redefinitionContext() : uml::Classifier: 2039075134
 		case umlPackage::REGION_OPERATION_REDEFINITIONCONTEXT:
 		{
-			result = eAny(this->redefinitionContext());
+			result = eAny(this->redefinitionContext(), umlPackage::CLASSIFIER_CLASS,false);
 			break;
 		}
-		
-		// 771598032
+		// uml::Region::shallow_history_vertex(Any, std::map) : bool: 771598032
 		case umlPackage::REGION_OPERATION_SHALLOW_HISTORY_VERTEX_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->shallow_history_vertex(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->shallow_history_vertex(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
 
@@ -952,7 +921,6 @@ Any RegionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared
 	return result;
 }
 
-
 std::shared_ptr<uml::Region> RegionImpl::getThisRegionPtr() const
 {
 	return m_thisRegionPtr.lock();
@@ -963,3 +931,5 @@ void RegionImpl::setThisRegionPtr(std::weak_ptr<uml::Region> thisRegionPtr)
 	setThisNamespacePtr(thisRegionPtr);
 	setThisRedefinableElementPtr(thisRegionPtr);
 }
+
+

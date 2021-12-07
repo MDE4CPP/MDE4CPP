@@ -465,12 +465,10 @@ void LifelineImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> LifelineImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getLifeline_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -481,35 +479,27 @@ Any LifelineImpl::eGet(int featureID, bool resolve, bool coreType) const
 	{
 		case uml::umlPackage::LIFELINE_ATTRIBUTE_COVEREDBY:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::InteractionFragment>::iterator iter = getCoveredBy()->begin();
-			Bag<uml::InteractionFragment>::iterator end = getCoveredBy()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //13213			
+			return eAnyBag(getCoveredBy(),1990551888); //13213
 		}
 		case uml::umlPackage::LIFELINE_ATTRIBUTE_DECOMPOSEDAS:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getDecomposedAs();
-			return eAny(returnValue); //1329
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //1329
 		}
 		case uml::umlPackage::LIFELINE_ATTRIBUTE_INTERACTION:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getInteraction().lock();
-			return eAny(returnValue); //13210
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //13210
 		}
 		case uml::umlPackage::LIFELINE_ATTRIBUTE_REPRESENTS:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getRepresents();
-			return eAny(returnValue); //13211
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //13211
 		}
 		case uml::umlPackage::LIFELINE_ATTRIBUTE_SELECTOR:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getSelector();
-			return eAny(returnValue); //13212
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //13212
 		}
 	}
 	return NamedElementImpl::eGet(featureID, resolve, coreType);
@@ -540,36 +530,37 @@ bool LifelineImpl::eSet(int featureID, Any newValue)
 		case uml::umlPackage::LIFELINE_ATTRIBUTE_COVEREDBY:
 		{
 			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::InteractionFragment>> coveredByList(new Bag<uml::InteractionFragment>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
+			if((newValue->isContainer()) && (uml::umlPackage::INTERACTIONFRAGMENT_CLASS ==newValue->getTypeId()))
 			{
-				coveredByList->add(std::dynamic_pointer_cast<uml::InteractionFragment>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::InteractionFragment>::iterator iterCoveredBy = getCoveredBy()->begin();
-			Bag<uml::InteractionFragment>::iterator endCoveredBy = getCoveredBy()->end();
-			while (iterCoveredBy != endCoveredBy)
-			{
-				if (coveredByList->find(*iterCoveredBy) == -1)
+				try
 				{
-					getCoveredBy()->erase(*iterCoveredBy);
+					std::shared_ptr<Bag<uml::InteractionFragment>> coveredByList= newValue->get<std::shared_ptr<Bag<uml::InteractionFragment>>>();
+					std::shared_ptr<Bag<uml::InteractionFragment>> _coveredBy=getCoveredBy();
+					for(const std::shared_ptr<uml::InteractionFragment> indexCoveredBy: *_coveredBy)
+					{
+						if (coveredByList->find(indexCoveredBy) == -1)
+						{
+							_coveredBy->erase(indexCoveredBy);
+						}
+					}
+
+					for(const std::shared_ptr<uml::InteractionFragment> indexCoveredBy: *coveredByList)
+					{
+						if (_coveredBy->find(indexCoveredBy) == -1)
+						{
+							_coveredBy->add(indexCoveredBy);
+						}
+					}
 				}
-				iterCoveredBy++;
-			}
- 
-			iterCoveredBy = coveredByList->begin();
-			endCoveredBy = coveredByList->end();
-			while (iterCoveredBy != endCoveredBy)
-			{
-				if (getCoveredBy()->find(*iterCoveredBy) == -1)
+				catch(...)
 				{
-					getCoveredBy()->add(*iterCoveredBy);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterCoveredBy++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}
@@ -613,78 +604,74 @@ bool LifelineImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any LifelineImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any LifelineImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
   	switch(operationID)
 	{
-		
-		// 1328915244
+		// uml::Lifeline::interaction_uses_share_lifeline(Any, std::map) : bool: 1328915244
 		case umlPackage::LIFELINE_OPERATION_INTERACTION_USES_SHARE_LIFELINE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->interaction_uses_share_lifeline(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->interaction_uses_share_lifeline(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		
-		// 520184878
+		// uml::Lifeline::same_classifier(Any, std::map) : bool: 520184878
 		case umlPackage::LIFELINE_OPERATION_SAME_CLASSIFIER_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->same_classifier(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->same_classifier(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		
-		// 1159498731
+		// uml::Lifeline::selector_int_or_string(Any, std::map) : bool: 1159498731
 		case umlPackage::LIFELINE_OPERATION_SELECTOR_INT_OR_STRING_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->selector_int_or_string(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->selector_int_or_string(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		
-		// 1628682169
+		// uml::Lifeline::selector_specified(Any, std::map) : bool: 1628682169
 		case umlPackage::LIFELINE_OPERATION_SELECTOR_SPECIFIED_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->selector_specified(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->selector_specified(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
 
@@ -701,7 +688,6 @@ Any LifelineImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shar
 	return result;
 }
 
-
 std::shared_ptr<uml::Lifeline> LifelineImpl::getThisLifelinePtr() const
 {
 	return m_thisLifelinePtr.lock();
@@ -711,3 +697,5 @@ void LifelineImpl::setThisLifelinePtr(std::weak_ptr<uml::Lifeline> thisLifelineP
 	m_thisLifelinePtr = thisLifelinePtr;
 	setThisNamedElementPtr(thisLifelinePtr);
 }
+
+

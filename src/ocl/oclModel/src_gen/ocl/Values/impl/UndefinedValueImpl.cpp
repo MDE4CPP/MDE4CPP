@@ -204,12 +204,10 @@ void UndefinedValueImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> UndefinedValueImpl::eStaticClass() const
 {
 	return ocl::Values::ValuesPackage::eInstance()->getUndefinedValue_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -242,7 +240,7 @@ bool UndefinedValueImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any UndefinedValueImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any UndefinedValueImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -255,16 +253,16 @@ Any UndefinedValueImpl::eInvoke(int operationID, std::shared_ptr<std::list < std
 			//Retrieve input parameter 'otherValue'
 			//parameter 0
 			std::shared_ptr<fUML::Semantics::Values::Value> incoming_param_otherValue;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_otherValue_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_otherValue = (*incoming_param_otherValue_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::Values::Value> >();
-			result = eAny(this->equals(incoming_param_otherValue));
+			std::list<Any>::const_iterator incoming_param_otherValue_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_otherValue = (*incoming_param_otherValue_arguments_citer)->get<std::shared_ptr<fUML::Semantics::Values::Value> >();
+					result = eAny(this->equals(incoming_param_otherValue),0,false);
 			break;
 		}
 		
 		// 1847553997
 		case ValuesPackage::UNDEFINEDVALUE_OPERATION_TOSTRING:
 		{
-			result = eAny(this->toString());
+					result = eAny(this->toString(),0,false);
 			break;
 		}
 
@@ -281,7 +279,6 @@ Any UndefinedValueImpl::eInvoke(int operationID, std::shared_ptr<std::list < std
 	return result;
 }
 
-
 std::shared_ptr<ocl::Values::UndefinedValue> UndefinedValueImpl::getThisUndefinedValuePtr() const
 {
 	return m_thisUndefinedValuePtr.lock();
@@ -291,3 +288,5 @@ void UndefinedValueImpl::setThisUndefinedValuePtr(std::weak_ptr<ocl::Values::Und
 	m_thisUndefinedValuePtr = thisUndefinedValuePtr;
 	setThisValuePtr(thisUndefinedValuePtr);
 }
+
+

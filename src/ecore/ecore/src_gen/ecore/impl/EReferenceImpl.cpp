@@ -406,12 +406,10 @@ void EReferenceImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 	}
 }
 
-
 std::shared_ptr<EClass> EReferenceImpl::eStaticClass() const
 {
 	return ecore::ecorePackage::eInstance()->getEReference_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -421,33 +419,25 @@ Any EReferenceImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case ecore::ecorePackage::EREFERENCE_ATTRIBUTE_CONTAINER:
-			return eAny(isContainer()); //4423
+			return eAny(isContainer(),0,true); //4423
 		case ecore::ecorePackage::EREFERENCE_ATTRIBUTE_CONTAINMENT:
-			return eAny(isContainment()); //4422
+			return eAny(isContainment(),0,true); //4422
 		case ecore::ecorePackage::EREFERENCE_ATTRIBUTE_EKEYS:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<ecore::EAttribute>::iterator iter = getEKeys()->begin();
-			Bag<ecore::EAttribute>::iterator end = getEKeys()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //4427			
+			return eAnyBag(getEKeys(),1433133167); //4427
 		}
 		case ecore::ecorePackage::EREFERENCE_ATTRIBUTE_EOPPOSITE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getEOpposite();
-			return eAny(returnValue); //4425
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //4425
 		}
 		case ecore::ecorePackage::EREFERENCE_ATTRIBUTE_EREFERENCETYPE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getEReferenceType();
-			return eAny(returnValue); //4426
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //4426
 		}
 		case ecore::ecorePackage::EREFERENCE_ATTRIBUTE_RESOLVEPROXIES:
-			return eAny(isResolveProxies()); //4424
+			return eAny(isResolveProxies(),0,true); //4424
 	}
 	return EStructuralFeatureImpl::eGet(featureID, resolve, coreType);
 }
@@ -486,36 +476,37 @@ bool EReferenceImpl::eSet(int featureID, Any newValue)
 		case ecore::ecorePackage::EREFERENCE_ATTRIBUTE_EKEYS:
 		{
 			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<ecore::EAttribute>> eKeysList(new Bag<ecore::EAttribute>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
+			if((newValue->isContainer()) && (ecore::ecorePackage::EATTRIBUTE_CLASS ==newValue->getTypeId()))
 			{
-				eKeysList->add(std::dynamic_pointer_cast<ecore::EAttribute>(*iter));
-				iter++;
-			}
-			
-			Bag<ecore::EAttribute>::iterator iterEKeys = getEKeys()->begin();
-			Bag<ecore::EAttribute>::iterator endEKeys = getEKeys()->end();
-			while (iterEKeys != endEKeys)
-			{
-				if (eKeysList->find(*iterEKeys) == -1)
+				try
 				{
-					getEKeys()->erase(*iterEKeys);
+					std::shared_ptr<Bag<ecore::EAttribute>> eKeysList= newValue->get<std::shared_ptr<Bag<ecore::EAttribute>>>();
+					std::shared_ptr<Bag<ecore::EAttribute>> _eKeys=getEKeys();
+					for(const std::shared_ptr<ecore::EAttribute> indexEKeys: *_eKeys)
+					{
+						if (eKeysList->find(indexEKeys) == -1)
+						{
+							_eKeys->erase(indexEKeys);
+						}
+					}
+
+					for(const std::shared_ptr<ecore::EAttribute> indexEKeys: *eKeysList)
+					{
+						if (_eKeys->find(indexEKeys) == -1)
+						{
+							_eKeys->add(indexEKeys);
+						}
+					}
 				}
-				iterEKeys++;
-			}
- 
-			iterEKeys = eKeysList->begin();
-			endEKeys = eKeysList->end();
-			while (iterEKeys != endEKeys)
-			{
-				if (getEKeys()->find(*iterEKeys) == -1)
+				catch(...)
 				{
-					getEKeys()->add(*iterEKeys);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterEKeys++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}
@@ -570,7 +561,6 @@ Any EReferenceImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arg
 	return result;
 }
 
-
 std::shared_ptr<ecore::EReference> EReferenceImpl::getThisEReferencePtr() const
 {
 	return m_thisEReferencePtr.lock();
@@ -580,3 +570,5 @@ void EReferenceImpl::setThisEReferencePtr(std::weak_ptr<ecore::EReference> thisE
 	m_thisEReferencePtr = thisEReferencePtr;
 	setThisEStructuralFeaturePtr(thisEReferencePtr);
 }
+
+

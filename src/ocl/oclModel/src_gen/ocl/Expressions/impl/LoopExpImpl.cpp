@@ -435,12 +435,10 @@ void LoopExpImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHand
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> LoopExpImpl::eStaticClass() const
 {
 	return ocl::Expressions::ExpressionsPackage::eInstance()->getLoopExp_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -452,7 +450,7 @@ Any LoopExpImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case ocl::Expressions::ExpressionsPackage::LOOPEXP_ATTRIBUTE_BODY:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getBody();
-			return eAny(returnValue); //4723
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //4723
 		}
 		case ocl::Expressions::ExpressionsPackage::LOOPEXP_ATTRIBUTE_ITERATOR:
 		{
@@ -538,7 +536,7 @@ bool LoopExpImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any LoopExpImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any LoopExpImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -558,7 +556,6 @@ Any LoopExpImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::share
 	return result;
 }
 
-
 std::shared_ptr<ocl::Expressions::LoopExp> LoopExpImpl::getThisLoopExpPtr() const
 {
 	return m_thisLoopExpPtr.lock();
@@ -568,3 +565,5 @@ void LoopExpImpl::setThisLoopExpPtr(std::weak_ptr<ocl::Expressions::LoopExp> thi
 	m_thisLoopExpPtr = thisLoopExpPtr;
 	setThisCallExpPtr(thisLoopExpPtr);
 }
+
+

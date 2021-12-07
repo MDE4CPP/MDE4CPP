@@ -180,14 +180,10 @@ PackageImpl& PackageImpl::operator=(const PackageImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_nestedPackage - Subset<uml::Package, uml::PackageableElement /*Subset does not reference a union*/ >(getPackagedElement())" << std::endl;
 		#endif
 		
-
-		Bag<uml::Package>::iterator nestedPackageIter = nestedPackageList->begin();
-		Bag<uml::Package>::iterator nestedPackageEnd = nestedPackageList->end();
-		while (nestedPackageIter != nestedPackageEnd) 
+		for(const std::shared_ptr<uml::Package> nestedPackageindexElem: *nestedPackageList) 
 		{
-			std::shared_ptr<uml::Package> temp = std::dynamic_pointer_cast<uml::Package>((*nestedPackageIter)->copy());
-			getNestedPackage()->push_back(temp);
-			nestedPackageIter++;
+			std::shared_ptr<uml::Package> temp = std::dynamic_pointer_cast<uml::Package>((nestedPackageindexElem)->copy());
+			m_nestedPackage->push_back(temp);
 		}
 	}
 	else
@@ -211,14 +207,10 @@ PackageImpl& PackageImpl::operator=(const PackageImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_ownedStereotype - Subset<uml::Stereotype, uml::PackageableElement /*Subset does not reference a union*/ >(getPackagedElement())" << std::endl;
 		#endif
 		
-
-		Bag<uml::Stereotype>::iterator ownedStereotypeIter = ownedStereotypeList->begin();
-		Bag<uml::Stereotype>::iterator ownedStereotypeEnd = ownedStereotypeList->end();
-		while (ownedStereotypeIter != ownedStereotypeEnd) 
+		for(const std::shared_ptr<uml::Stereotype> ownedStereotypeindexElem: *ownedStereotypeList) 
 		{
-			std::shared_ptr<uml::Stereotype> temp = std::dynamic_pointer_cast<uml::Stereotype>((*ownedStereotypeIter)->copy());
-			getOwnedStereotype()->push_back(temp);
-			ownedStereotypeIter++;
+			std::shared_ptr<uml::Stereotype> temp = std::dynamic_pointer_cast<uml::Stereotype>((ownedStereotypeindexElem)->copy());
+			m_ownedStereotype->push_back(temp);
 		}
 	}
 	else
@@ -242,14 +234,10 @@ PackageImpl& PackageImpl::operator=(const PackageImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_ownedType - Subset<uml::Type, uml::PackageableElement /*Subset does not reference a union*/ >(getPackagedElement())" << std::endl;
 		#endif
 		
-
-		Bag<uml::Type>::iterator ownedTypeIter = ownedTypeList->begin();
-		Bag<uml::Type>::iterator ownedTypeEnd = ownedTypeList->end();
-		while (ownedTypeIter != ownedTypeEnd) 
+		for(const std::shared_ptr<uml::Type> ownedTypeindexElem: *ownedTypeList) 
 		{
-			std::shared_ptr<uml::Type> temp = std::dynamic_pointer_cast<uml::Type>((*ownedTypeIter)->copy());
-			getOwnedType()->push_back(temp);
-			ownedTypeIter++;
+			std::shared_ptr<uml::Type> temp = std::dynamic_pointer_cast<uml::Type>((ownedTypeindexElem)->copy());
+			m_ownedType->push_back(temp);
 		}
 	}
 	else
@@ -273,14 +261,10 @@ PackageImpl& PackageImpl::operator=(const PackageImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_packageMerge - Subset<uml::PackageMerge, uml::Element >(getOwnedElement())" << std::endl;
 		#endif
 		
-
-		Bag<uml::PackageMerge>::iterator packageMergeIter = packageMergeList->begin();
-		Bag<uml::PackageMerge>::iterator packageMergeEnd = packageMergeList->end();
-		while (packageMergeIter != packageMergeEnd) 
+		for(const std::shared_ptr<uml::PackageMerge> packageMergeindexElem: *packageMergeList) 
 		{
-			std::shared_ptr<uml::PackageMerge> temp = std::dynamic_pointer_cast<uml::PackageMerge>((*packageMergeIter)->copy());
-			getPackageMerge()->push_back(temp);
-			packageMergeIter++;
+			std::shared_ptr<uml::PackageMerge> temp = std::dynamic_pointer_cast<uml::PackageMerge>((packageMergeindexElem)->copy());
+			m_packageMerge->push_back(temp);
 		}
 	}
 	else
@@ -304,14 +288,10 @@ PackageImpl& PackageImpl::operator=(const PackageImpl & obj)
 			std::cout << "Initialising value SubsetUnion: " << "m_packagedElement - SubsetUnion<uml::PackageableElement, uml::NamedElement >(getOwnedMember())" << std::endl;
 		#endif
 		
-
-		Bag<uml::PackageableElement>::iterator packagedElementIter = packagedElementList->begin();
-		Bag<uml::PackageableElement>::iterator packagedElementEnd = packagedElementList->end();
-		while (packagedElementIter != packagedElementEnd) 
+		for(const std::shared_ptr<uml::PackageableElement> packagedElementindexElem: *packagedElementList) 
 		{
-			std::shared_ptr<uml::PackageableElement> temp = std::dynamic_pointer_cast<uml::PackageableElement>((*packagedElementIter)->copy());
-			getPackagedElement()->push_back(temp);
-			packagedElementIter++;
+			std::shared_ptr<uml::PackageableElement> temp = std::dynamic_pointer_cast<uml::PackageableElement>((packagedElementindexElem)->copy());
+			m_packagedElement->push_back(temp);
 		}
 	}
 	else
@@ -335,14 +315,10 @@ PackageImpl& PackageImpl::operator=(const PackageImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_profileApplication - Subset<uml::ProfileApplication, uml::Element >(getOwnedElement())" << std::endl;
 		#endif
 		
-
-		Bag<uml::ProfileApplication>::iterator profileApplicationIter = profileApplicationList->begin();
-		Bag<uml::ProfileApplication>::iterator profileApplicationEnd = profileApplicationList->end();
-		while (profileApplicationIter != profileApplicationEnd) 
+		for(const std::shared_ptr<uml::ProfileApplication> profileApplicationindexElem: *profileApplicationList) 
 		{
-			std::shared_ptr<uml::ProfileApplication> temp = std::dynamic_pointer_cast<uml::ProfileApplication>((*profileApplicationIter)->copy());
-			getProfileApplication()->push_back(temp);
-			profileApplicationIter++;
+			std::shared_ptr<uml::ProfileApplication> temp = std::dynamic_pointer_cast<uml::ProfileApplication>((profileApplicationindexElem)->copy());
+			m_profileApplication->push_back(temp);
 		}
 	}
 	else
@@ -1027,12 +1003,10 @@ void PackageImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHand
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> PackageImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getPackage_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -1042,83 +1016,35 @@ Any PackageImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::PACKAGE_ATTRIBUTE_URI:
-			return eAny(getURI()); //17020
+			return eAny(getURI(),0,true); //17020
 		case uml::umlPackage::PACKAGE_ATTRIBUTE_NESTEDPACKAGE:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Package>::iterator iter = getNestedPackage()->begin();
-			Bag<uml::Package>::iterator end = getNestedPackage()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //17021			
+			return eAnyBag(getNestedPackage(),202268009); //17021
 		}
 		case uml::umlPackage::PACKAGE_ATTRIBUTE_NESTINGPACKAGE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getNestingPackage().lock();
-			return eAny(returnValue); //17022
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //17022
 		}
 		case uml::umlPackage::PACKAGE_ATTRIBUTE_OWNEDSTEREOTYPE:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Stereotype>::iterator iter = getOwnedStereotype()->begin();
-			Bag<uml::Stereotype>::iterator end = getOwnedStereotype()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //17023			
+			return eAnyBag(getOwnedStereotype(),144493812); //17023
 		}
 		case uml::umlPackage::PACKAGE_ATTRIBUTE_OWNEDTYPE:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Type>::iterator iter = getOwnedType()->begin();
-			Bag<uml::Type>::iterator end = getOwnedType()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //17024			
+			return eAnyBag(getOwnedType(),159098004); //17024
 		}
 		case uml::umlPackage::PACKAGE_ATTRIBUTE_PACKAGEMERGE:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::PackageMerge>::iterator iter = getPackageMerge()->begin();
-			Bag<uml::PackageMerge>::iterator end = getPackageMerge()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //17025			
+			return eAnyBag(getPackageMerge(),1665406148); //17025
 		}
 		case uml::umlPackage::PACKAGE_ATTRIBUTE_PACKAGEDELEMENT:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::PackageableElement>::iterator iter = getPackagedElement()->begin();
-			Bag<uml::PackageableElement>::iterator end = getPackagedElement()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //17026			
+			return eAnyBag(getPackagedElement(),1261869628); //17026
 		}
 		case uml::umlPackage::PACKAGE_ATTRIBUTE_PROFILEAPPLICATION:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::ProfileApplication>::iterator iter = getProfileApplication()->begin();
-			Bag<uml::ProfileApplication>::iterator end = getProfileApplication()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //17027			
+			return eAnyBag(getProfileApplication(),331068100); //17027
 		}
 	}
 	Any result;
@@ -1186,36 +1112,37 @@ bool PackageImpl::eSet(int featureID, Any newValue)
 		case uml::umlPackage::PACKAGE_ATTRIBUTE_NESTEDPACKAGE:
 		{
 			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::Package>> nestedPackageList(new Bag<uml::Package>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
+			if((newValue->isContainer()) && (uml::umlPackage::PACKAGE_CLASS ==newValue->getTypeId()))
 			{
-				nestedPackageList->add(std::dynamic_pointer_cast<uml::Package>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::Package>::iterator iterNestedPackage = getNestedPackage()->begin();
-			Bag<uml::Package>::iterator endNestedPackage = getNestedPackage()->end();
-			while (iterNestedPackage != endNestedPackage)
-			{
-				if (nestedPackageList->find(*iterNestedPackage) == -1)
+				try
 				{
-					getNestedPackage()->erase(*iterNestedPackage);
+					std::shared_ptr<Bag<uml::Package>> nestedPackageList= newValue->get<std::shared_ptr<Bag<uml::Package>>>();
+					std::shared_ptr<Bag<uml::Package>> _nestedPackage=getNestedPackage();
+					for(const std::shared_ptr<uml::Package> indexNestedPackage: *_nestedPackage)
+					{
+						if (nestedPackageList->find(indexNestedPackage) == -1)
+						{
+							_nestedPackage->erase(indexNestedPackage);
+						}
+					}
+
+					for(const std::shared_ptr<uml::Package> indexNestedPackage: *nestedPackageList)
+					{
+						if (_nestedPackage->find(indexNestedPackage) == -1)
+						{
+							_nestedPackage->add(indexNestedPackage);
+						}
+					}
 				}
-				iterNestedPackage++;
-			}
- 
-			iterNestedPackage = nestedPackageList->begin();
-			endNestedPackage = nestedPackageList->end();
-			while (iterNestedPackage != endNestedPackage)
-			{
-				if (getNestedPackage()->find(*iterNestedPackage) == -1)
+				catch(...)
 				{
-					getNestedPackage()->add(*iterNestedPackage);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterNestedPackage++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}
@@ -1230,144 +1157,148 @@ bool PackageImpl::eSet(int featureID, Any newValue)
 		case uml::umlPackage::PACKAGE_ATTRIBUTE_OWNEDTYPE:
 		{
 			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::Type>> ownedTypeList(new Bag<uml::Type>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
+			if((newValue->isContainer()) && (uml::umlPackage::TYPE_CLASS ==newValue->getTypeId()))
 			{
-				ownedTypeList->add(std::dynamic_pointer_cast<uml::Type>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::Type>::iterator iterOwnedType = getOwnedType()->begin();
-			Bag<uml::Type>::iterator endOwnedType = getOwnedType()->end();
-			while (iterOwnedType != endOwnedType)
-			{
-				if (ownedTypeList->find(*iterOwnedType) == -1)
+				try
 				{
-					getOwnedType()->erase(*iterOwnedType);
+					std::shared_ptr<Bag<uml::Type>> ownedTypeList= newValue->get<std::shared_ptr<Bag<uml::Type>>>();
+					std::shared_ptr<Bag<uml::Type>> _ownedType=getOwnedType();
+					for(const std::shared_ptr<uml::Type> indexOwnedType: *_ownedType)
+					{
+						if (ownedTypeList->find(indexOwnedType) == -1)
+						{
+							_ownedType->erase(indexOwnedType);
+						}
+					}
+
+					for(const std::shared_ptr<uml::Type> indexOwnedType: *ownedTypeList)
+					{
+						if (_ownedType->find(indexOwnedType) == -1)
+						{
+							_ownedType->add(indexOwnedType);
+						}
+					}
 				}
-				iterOwnedType++;
-			}
- 
-			iterOwnedType = ownedTypeList->begin();
-			endOwnedType = ownedTypeList->end();
-			while (iterOwnedType != endOwnedType)
-			{
-				if (getOwnedType()->find(*iterOwnedType) == -1)
+				catch(...)
 				{
-					getOwnedType()->add(*iterOwnedType);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterOwnedType++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}
 		case uml::umlPackage::PACKAGE_ATTRIBUTE_PACKAGEMERGE:
 		{
 			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::PackageMerge>> packageMergeList(new Bag<uml::PackageMerge>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
+			if((newValue->isContainer()) && (uml::umlPackage::PACKAGEMERGE_CLASS ==newValue->getTypeId()))
 			{
-				packageMergeList->add(std::dynamic_pointer_cast<uml::PackageMerge>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::PackageMerge>::iterator iterPackageMerge = getPackageMerge()->begin();
-			Bag<uml::PackageMerge>::iterator endPackageMerge = getPackageMerge()->end();
-			while (iterPackageMerge != endPackageMerge)
-			{
-				if (packageMergeList->find(*iterPackageMerge) == -1)
+				try
 				{
-					getPackageMerge()->erase(*iterPackageMerge);
+					std::shared_ptr<Bag<uml::PackageMerge>> packageMergeList= newValue->get<std::shared_ptr<Bag<uml::PackageMerge>>>();
+					std::shared_ptr<Bag<uml::PackageMerge>> _packageMerge=getPackageMerge();
+					for(const std::shared_ptr<uml::PackageMerge> indexPackageMerge: *_packageMerge)
+					{
+						if (packageMergeList->find(indexPackageMerge) == -1)
+						{
+							_packageMerge->erase(indexPackageMerge);
+						}
+					}
+
+					for(const std::shared_ptr<uml::PackageMerge> indexPackageMerge: *packageMergeList)
+					{
+						if (_packageMerge->find(indexPackageMerge) == -1)
+						{
+							_packageMerge->add(indexPackageMerge);
+						}
+					}
 				}
-				iterPackageMerge++;
-			}
- 
-			iterPackageMerge = packageMergeList->begin();
-			endPackageMerge = packageMergeList->end();
-			while (iterPackageMerge != endPackageMerge)
-			{
-				if (getPackageMerge()->find(*iterPackageMerge) == -1)
+				catch(...)
 				{
-					getPackageMerge()->add(*iterPackageMerge);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterPackageMerge++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}
 		case uml::umlPackage::PACKAGE_ATTRIBUTE_PACKAGEDELEMENT:
 		{
 			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::PackageableElement>> packagedElementList(new Bag<uml::PackageableElement>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
+			if((newValue->isContainer()) && (uml::umlPackage::PACKAGEABLEELEMENT_CLASS ==newValue->getTypeId()))
 			{
-				packagedElementList->add(std::dynamic_pointer_cast<uml::PackageableElement>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::PackageableElement>::iterator iterPackagedElement = getPackagedElement()->begin();
-			Bag<uml::PackageableElement>::iterator endPackagedElement = getPackagedElement()->end();
-			while (iterPackagedElement != endPackagedElement)
-			{
-				if (packagedElementList->find(*iterPackagedElement) == -1)
+				try
 				{
-					getPackagedElement()->erase(*iterPackagedElement);
+					std::shared_ptr<Bag<uml::PackageableElement>> packagedElementList= newValue->get<std::shared_ptr<Bag<uml::PackageableElement>>>();
+					std::shared_ptr<Bag<uml::PackageableElement>> _packagedElement=getPackagedElement();
+					for(const std::shared_ptr<uml::PackageableElement> indexPackagedElement: *_packagedElement)
+					{
+						if (packagedElementList->find(indexPackagedElement) == -1)
+						{
+							_packagedElement->erase(indexPackagedElement);
+						}
+					}
+
+					for(const std::shared_ptr<uml::PackageableElement> indexPackagedElement: *packagedElementList)
+					{
+						if (_packagedElement->find(indexPackagedElement) == -1)
+						{
+							_packagedElement->add(indexPackagedElement);
+						}
+					}
 				}
-				iterPackagedElement++;
-			}
- 
-			iterPackagedElement = packagedElementList->begin();
-			endPackagedElement = packagedElementList->end();
-			while (iterPackagedElement != endPackagedElement)
-			{
-				if (getPackagedElement()->find(*iterPackagedElement) == -1)
+				catch(...)
 				{
-					getPackagedElement()->add(*iterPackagedElement);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterPackagedElement++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}
 		case uml::umlPackage::PACKAGE_ATTRIBUTE_PROFILEAPPLICATION:
 		{
 			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::ProfileApplication>> profileApplicationList(new Bag<uml::ProfileApplication>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
+			if((newValue->isContainer()) && (uml::umlPackage::PROFILEAPPLICATION_CLASS ==newValue->getTypeId()))
 			{
-				profileApplicationList->add(std::dynamic_pointer_cast<uml::ProfileApplication>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::ProfileApplication>::iterator iterProfileApplication = getProfileApplication()->begin();
-			Bag<uml::ProfileApplication>::iterator endProfileApplication = getProfileApplication()->end();
-			while (iterProfileApplication != endProfileApplication)
-			{
-				if (profileApplicationList->find(*iterProfileApplication) == -1)
+				try
 				{
-					getProfileApplication()->erase(*iterProfileApplication);
+					std::shared_ptr<Bag<uml::ProfileApplication>> profileApplicationList= newValue->get<std::shared_ptr<Bag<uml::ProfileApplication>>>();
+					std::shared_ptr<Bag<uml::ProfileApplication>> _profileApplication=getProfileApplication();
+					for(const std::shared_ptr<uml::ProfileApplication> indexProfileApplication: *_profileApplication)
+					{
+						if (profileApplicationList->find(indexProfileApplication) == -1)
+						{
+							_profileApplication->erase(indexProfileApplication);
+						}
+					}
+
+					for(const std::shared_ptr<uml::ProfileApplication> indexProfileApplication: *profileApplicationList)
+					{
+						if (_profileApplication->find(indexProfileApplication) == -1)
+						{
+							_profileApplication->add(indexProfileApplication);
+						}
+					}
 				}
-				iterProfileApplication++;
-			}
- 
-			iterProfileApplication = profileApplicationList->begin();
-			endProfileApplication = profileApplicationList->end();
-			while (iterProfileApplication != endProfileApplication)
-			{
-				if (getProfileApplication()->find(*iterProfileApplication) == -1)
+				catch(...)
 				{
-					getProfileApplication()->add(*iterProfileApplication);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterProfileApplication++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}
@@ -1391,273 +1322,259 @@ bool PackageImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any PackageImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any PackageImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
   	switch(operationID)
 	{
-		
-		// 1557820782
+		// uml::Package::allApplicableStereotypes() : uml::Stereotype[*]: 1557820782
 		case umlPackage::PACKAGE_OPERATION_ALLAPPLICABLESTEREOTYPES:
 		{
-			result = eAny(this->allApplicableStereotypes());
+			std::shared_ptr<Bag<uml::Stereotype> > resultList = this->allApplicableStereotypes();
+			return eAny(resultList,umlPackage::STEREOTYPE_CLASS,true);
 			break;
 		}
-		
-		// 532857739
+		// uml::Package::applyProfile(uml::Profile) : ecore::EObject[*]: 532857739
 		case umlPackage::PACKAGE_OPERATION_APPLYPROFILE_PROFILE:
 		{
 			//Retrieve input parameter 'profile'
 			//parameter 0
 			std::shared_ptr<uml::Profile> incoming_param_profile;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_profile_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_profile = (*incoming_param_profile_arguments_citer)->get()->get<std::shared_ptr<uml::Profile> >();
-			result = eAny(this->applyProfile(incoming_param_profile));
+			std::list<Any>::const_iterator incoming_param_profile_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_profile = (*incoming_param_profile_arguments_citer)->get<std::shared_ptr<uml::Profile> >();
+			std::shared_ptr<Bag<ecore::EObject> > resultList = this->applyProfile(incoming_param_profile);
+			return eAny(resultList,ecorePackage::EOBJECT_CLASS,true);
 			break;
 		}
-		
-		// 1369083844
+		// uml::Package::containingProfile() : uml::Profile: 1369083844
 		case umlPackage::PACKAGE_OPERATION_CONTAININGPROFILE:
 		{
-			result = eAny(this->containingProfile());
+			result = eAny(this->containingProfile(), umlPackage::PROFILE_CLASS,false);
 			break;
 		}
-		
-		// 520555000
+		// uml::Package::createOwnedClass(std::string, bool) : uml::Class: 520555000
 		case umlPackage::PACKAGE_OPERATION_CREATEOWNEDCLASS_STRING_BOOLEAN:
 		{
 			//Retrieve input parameter 'name'
 			//parameter 0
 			std::string incoming_param_name;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_name_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_name = (*incoming_param_name_arguments_citer)->get()->get<std::string >();
+			std::list<Any>::const_iterator incoming_param_name_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_name = (*incoming_param_name_arguments_citer)->get<std::string >();
 			//Retrieve input parameter 'isAbstract'
 			//parameter 1
 			bool incoming_param_isAbstract;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_isAbstract_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_isAbstract = (*incoming_param_isAbstract_arguments_citer)->get()->get<bool >();
-			result = eAny(this->createOwnedClass(incoming_param_name,incoming_param_isAbstract));
+			std::list<Any>::const_iterator incoming_param_isAbstract_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_isAbstract = (*incoming_param_isAbstract_arguments_citer)->get<bool >();
+			result = eAny(this->createOwnedClass(incoming_param_name,incoming_param_isAbstract), umlPackage::CLASS_CLASS,false);
 			break;
 		}
-		
-		// 588810307
+		// uml::Package::createOwnedEnumeration(std::string) : uml::Enumeration: 588810307
 		case umlPackage::PACKAGE_OPERATION_CREATEOWNEDENUMERATION_STRING:
 		{
 			//Retrieve input parameter 'name'
 			//parameter 0
 			std::string incoming_param_name;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_name_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_name = (*incoming_param_name_arguments_citer)->get()->get<std::string >();
-			result = eAny(this->createOwnedEnumeration(incoming_param_name));
+			std::list<Any>::const_iterator incoming_param_name_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_name = (*incoming_param_name_arguments_citer)->get<std::string >();
+			result = eAny(this->createOwnedEnumeration(incoming_param_name), umlPackage::ENUMERATION_CLASS,false);
 			break;
 		}
-		
-		// 2141179079
+		// uml::Package::createOwnedInterface(std::string) : uml::Interface: 2141179079
 		case umlPackage::PACKAGE_OPERATION_CREATEOWNEDINTERFACE_STRING:
 		{
 			//Retrieve input parameter 'name'
 			//parameter 0
 			std::string incoming_param_name;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_name_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_name = (*incoming_param_name_arguments_citer)->get()->get<std::string >();
-			result = eAny(this->createOwnedInterface(incoming_param_name));
+			std::list<Any>::const_iterator incoming_param_name_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_name = (*incoming_param_name_arguments_citer)->get<std::string >();
+			result = eAny(this->createOwnedInterface(incoming_param_name), umlPackage::INTERFACE_CLASS,false);
 			break;
 		}
-		
-		// 1204664161
+		// uml::Package::createOwnedPrimitiveType(std::string) : uml::PrimitiveType: 1204664161
 		case umlPackage::PACKAGE_OPERATION_CREATEOWNEDPRIMITIVETYPE_STRING:
 		{
 			//Retrieve input parameter 'name'
 			//parameter 0
 			std::string incoming_param_name;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_name_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_name = (*incoming_param_name_arguments_citer)->get()->get<std::string >();
-			result = eAny(this->createOwnedPrimitiveType(incoming_param_name));
+			std::list<Any>::const_iterator incoming_param_name_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_name = (*incoming_param_name_arguments_citer)->get<std::string >();
+			result = eAny(this->createOwnedPrimitiveType(incoming_param_name), umlPackage::PRIMITIVETYPE_CLASS,false);
 			break;
 		}
-		
-		// 64069774
+		// uml::Package::createOwnedStereotype(std::string, bool) : uml::Stereotype: 64069774
 		case umlPackage::PACKAGE_OPERATION_CREATEOWNEDSTEREOTYPE_STRING_BOOLEAN:
 		{
 			//Retrieve input parameter 'name'
 			//parameter 0
 			std::string incoming_param_name;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_name_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_name = (*incoming_param_name_arguments_citer)->get()->get<std::string >();
+			std::list<Any>::const_iterator incoming_param_name_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_name = (*incoming_param_name_arguments_citer)->get<std::string >();
 			//Retrieve input parameter 'isAbstract'
 			//parameter 1
 			bool incoming_param_isAbstract;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_isAbstract_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_isAbstract = (*incoming_param_isAbstract_arguments_citer)->get()->get<bool >();
-			result = eAny(this->createOwnedStereotype(incoming_param_name,incoming_param_isAbstract));
+			std::list<Any>::const_iterator incoming_param_isAbstract_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_isAbstract = (*incoming_param_isAbstract_arguments_citer)->get<bool >();
+			result = eAny(this->createOwnedStereotype(incoming_param_name,incoming_param_isAbstract), umlPackage::STEREOTYPE_CLASS,false);
 			break;
 		}
-		
-		// 1451255929
+		// uml::Package::elements_public_or_private(Any, std::map) : bool: 1451255929
 		case umlPackage::PACKAGE_OPERATION_ELEMENTS_PUBLIC_OR_PRIVATE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->elements_public_or_private(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->elements_public_or_private(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		
-		// 1609552989
+		// uml::Package::getAllAppliedProfiles() : uml::Profile[*]: 1609552989
 		case umlPackage::PACKAGE_OPERATION_GETALLAPPLIEDPROFILES:
 		{
-			result = eAny(this->getAllAppliedProfiles());
+			std::shared_ptr<Bag<uml::Profile> > resultList = this->getAllAppliedProfiles();
+			return eAny(resultList,umlPackage::PROFILE_CLASS,true);
 			break;
 		}
-		
-		// 1816651881
+		// uml::Package::getAllProfileApplications() : uml::ProfileApplication[*]: 1816651881
 		case umlPackage::PACKAGE_OPERATION_GETALLPROFILEAPPLICATIONS:
 		{
-			result = eAny(this->getAllProfileApplications());
+			std::shared_ptr<Bag<uml::ProfileApplication> > resultList = this->getAllProfileApplications();
+			return eAny(resultList,umlPackage::PROFILEAPPLICATION_CLASS,true);
 			break;
 		}
-		
-		// 996929944
+		// uml::Package::getAppliedProfile(std::string) : uml::Profile: 996929944
 		case umlPackage::PACKAGE_OPERATION_GETAPPLIEDPROFILE_STRING:
 		{
 			//Retrieve input parameter 'qualifiedName'
 			//parameter 0
 			std::string incoming_param_qualifiedName;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_qualifiedName_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_qualifiedName = (*incoming_param_qualifiedName_arguments_citer)->get()->get<std::string >();
-			result = eAny(this->getAppliedProfile(incoming_param_qualifiedName));
+			std::list<Any>::const_iterator incoming_param_qualifiedName_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_qualifiedName = (*incoming_param_qualifiedName_arguments_citer)->get<std::string >();
+			result = eAny(this->getAppliedProfile(incoming_param_qualifiedName), umlPackage::PROFILE_CLASS,false);
 			break;
 		}
-		
-		// 537452639
+		// uml::Package::getAppliedProfile(std::string, bool) : uml::Profile: 537452639
 		case umlPackage::PACKAGE_OPERATION_GETAPPLIEDPROFILE_STRING_BOOLEAN:
 		{
 			//Retrieve input parameter 'qualifiedName'
 			//parameter 0
 			std::string incoming_param_qualifiedName;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_qualifiedName_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_qualifiedName = (*incoming_param_qualifiedName_arguments_citer)->get()->get<std::string >();
+			std::list<Any>::const_iterator incoming_param_qualifiedName_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_qualifiedName = (*incoming_param_qualifiedName_arguments_citer)->get<std::string >();
 			//Retrieve input parameter 'recurse'
 			//parameter 1
 			bool incoming_param_recurse;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_recurse_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_recurse = (*incoming_param_recurse_arguments_citer)->get()->get<bool >();
-			result = eAny(this->getAppliedProfile(incoming_param_qualifiedName,incoming_param_recurse));
+			std::list<Any>::const_iterator incoming_param_recurse_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_recurse = (*incoming_param_recurse_arguments_citer)->get<bool >();
+			result = eAny(this->getAppliedProfile(incoming_param_qualifiedName,incoming_param_recurse), umlPackage::PROFILE_CLASS,false);
 			break;
 		}
-		
-		// 619686908
+		// uml::Package::getAppliedProfiles() : uml::Profile[*]: 619686908
 		case umlPackage::PACKAGE_OPERATION_GETAPPLIEDPROFILES:
 		{
-			result = eAny(this->getAppliedProfiles());
+			std::shared_ptr<Bag<uml::Profile> > resultList = this->getAppliedProfiles();
+			return eAny(resultList,umlPackage::PROFILE_CLASS,true);
 			break;
 		}
-		
-		// 1133617509
+		// uml::Package::getNestedPackages() : uml::Package[*]: 1133617509
 		case umlPackage::PACKAGE_OPERATION_GETNESTEDPACKAGES:
 		{
-			result = eAny(this->getNestedPackages());
+			std::shared_ptr<Bag<uml::Package> > resultList = this->getNestedPackages();
+			return eAny(resultList,umlPackage::PACKAGE_CLASS,true);
 			break;
 		}
-		
-		// 984223651
+		// uml::Package::getOwnedStereotypes() : uml::Stereotype[*]: 984223651
 		case umlPackage::PACKAGE_OPERATION_GETOWNEDSTEREOTYPES:
 		{
-			result = eAny(this->getOwnedStereotypes());
+			std::shared_ptr<Bag<uml::Stereotype> > resultList = this->getOwnedStereotypes();
+			return eAny(resultList,umlPackage::STEREOTYPE_CLASS,true);
 			break;
 		}
-		
-		// 1807861876
+		// uml::Package::getOwnedTypes() : uml::Type[*]: 1807861876
 		case umlPackage::PACKAGE_OPERATION_GETOWNEDTYPES:
 		{
-			result = eAny(this->getOwnedTypes());
+			std::shared_ptr<Bag<uml::Type> > resultList = this->getOwnedTypes();
+			return eAny(resultList,umlPackage::TYPE_CLASS,true);
 			break;
 		}
-		
-		// 1780891819
+		// uml::Package::getProfileApplication(uml::Profile) : uml::ProfileApplication: 1780891819
 		case umlPackage::PACKAGE_OPERATION_GETPROFILEAPPLICATION_PROFILE:
 		{
 			//Retrieve input parameter 'profile'
 			//parameter 0
 			std::shared_ptr<uml::Profile> incoming_param_profile;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_profile_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_profile = (*incoming_param_profile_arguments_citer)->get()->get<std::shared_ptr<uml::Profile> >();
-			result = eAny(this->getProfileApplication(incoming_param_profile));
+			std::list<Any>::const_iterator incoming_param_profile_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_profile = (*incoming_param_profile_arguments_citer)->get<std::shared_ptr<uml::Profile> >();
+			result = eAny(this->getProfileApplication(incoming_param_profile), umlPackage::PROFILEAPPLICATION_CLASS,false);
 			break;
 		}
-		
-		// 1620950971
+		// uml::Package::getProfileApplication(uml::Profile, bool) : uml::ProfileApplication: 1620950971
 		case umlPackage::PACKAGE_OPERATION_GETPROFILEAPPLICATION_PROFILE_BOOLEAN:
 		{
 			//Retrieve input parameter 'profile'
 			//parameter 0
 			std::shared_ptr<uml::Profile> incoming_param_profile;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_profile_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_profile = (*incoming_param_profile_arguments_citer)->get()->get<std::shared_ptr<uml::Profile> >();
+			std::list<Any>::const_iterator incoming_param_profile_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_profile = (*incoming_param_profile_arguments_citer)->get<std::shared_ptr<uml::Profile> >();
 			//Retrieve input parameter 'recurse'
 			//parameter 1
 			bool incoming_param_recurse;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_recurse_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_recurse = (*incoming_param_recurse_arguments_citer)->get()->get<bool >();
-			result = eAny(this->getProfileApplication(incoming_param_profile,incoming_param_recurse));
+			std::list<Any>::const_iterator incoming_param_recurse_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_recurse = (*incoming_param_recurse_arguments_citer)->get<bool >();
+			result = eAny(this->getProfileApplication(incoming_param_profile,incoming_param_recurse), umlPackage::PROFILEAPPLICATION_CLASS,false);
 			break;
 		}
-		
-		// 126460786
+		// uml::Package::isModelLibrary() : bool: 126460786
 		case umlPackage::PACKAGE_OPERATION_ISMODELLIBRARY:
 		{
-			result = eAny(this->isModelLibrary());
+			result = eAny(this->isModelLibrary(),0,false);
 			break;
 		}
-		
-		// 1688405008
+		// uml::Package::isProfileApplied(uml::Profile) : bool: 1688405008
 		case umlPackage::PACKAGE_OPERATION_ISPROFILEAPPLIED_PROFILE:
 		{
 			//Retrieve input parameter 'profile'
 			//parameter 0
 			std::shared_ptr<uml::Profile> incoming_param_profile;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_profile_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_profile = (*incoming_param_profile_arguments_citer)->get()->get<std::shared_ptr<uml::Profile> >();
-			result = eAny(this->isProfileApplied(incoming_param_profile));
+			std::list<Any>::const_iterator incoming_param_profile_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_profile = (*incoming_param_profile_arguments_citer)->get<std::shared_ptr<uml::Profile> >();
+			result = eAny(this->isProfileApplied(incoming_param_profile),0,false);
 			break;
 		}
-		
-		// 1550634476
+		// uml::Package::makesVisible(uml::NamedElement) : bool: 1550634476
 		case umlPackage::PACKAGE_OPERATION_MAKESVISIBLE_NAMEDELEMENT:
 		{
 			//Retrieve input parameter 'el'
 			//parameter 0
 			std::shared_ptr<uml::NamedElement> incoming_param_el;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_el_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_el = (*incoming_param_el_arguments_citer)->get()->get<std::shared_ptr<uml::NamedElement> >();
-			result = eAny(this->makesVisible(incoming_param_el));
+			std::list<Any>::const_iterator incoming_param_el_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_el = (*incoming_param_el_arguments_citer)->get<std::shared_ptr<uml::NamedElement> >();
+			result = eAny(this->makesVisible(incoming_param_el),0,false);
 			break;
 		}
-		
-		// 775995658
+		// uml::Package::unapplyProfile(uml::Profile) : ecore::EObject[*]: 775995658
 		case umlPackage::PACKAGE_OPERATION_UNAPPLYPROFILE_PROFILE:
 		{
 			//Retrieve input parameter 'profile'
 			//parameter 0
 			std::shared_ptr<uml::Profile> incoming_param_profile;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_profile_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_profile = (*incoming_param_profile_arguments_citer)->get()->get<std::shared_ptr<uml::Profile> >();
-			result = eAny(this->unapplyProfile(incoming_param_profile));
+			std::list<Any>::const_iterator incoming_param_profile_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_profile = (*incoming_param_profile_arguments_citer)->get<std::shared_ptr<uml::Profile> >();
+			std::shared_ptr<Bag<ecore::EObject> > resultList = this->unapplyProfile(incoming_param_profile);
+			return eAny(resultList,ecorePackage::EOBJECT_CLASS,true);
 			break;
 		}
-		
-		// 1123478292
+		// uml::Package::visibleMembers() : uml::PackageableElement[*]: 1123478292
 		case umlPackage::PACKAGE_OPERATION_VISIBLEMEMBERS:
 		{
-			result = eAny(this->visibleMembers());
+			std::shared_ptr<Bag<uml::PackageableElement> > resultList = this->visibleMembers();
+			return eAny(resultList,umlPackage::PACKAGEABLEELEMENT_CLASS,true);
 			break;
 		}
 
@@ -1680,7 +1597,6 @@ Any PackageImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::share
 	return result;
 }
 
-
 std::shared_ptr<uml::Package> PackageImpl::getThisPackagePtr() const
 {
 	return m_thisPackagePtr.lock();
@@ -1692,3 +1608,5 @@ void PackageImpl::setThisPackagePtr(std::weak_ptr<uml::Package> thisPackagePtr)
 	setThisPackageableElementPtr(thisPackagePtr);
 	setThisTemplateableElementPtr(thisPackagePtr);
 }
+
+

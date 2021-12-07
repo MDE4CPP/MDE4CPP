@@ -359,12 +359,10 @@ void LiteralStringImpl::saveContent(std::shared_ptr<persistence::interfaces::XSa
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> LiteralStringImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getLiteralString_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -374,7 +372,7 @@ Any LiteralStringImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::LITERALSTRING_ATTRIBUTE_VALUE:
-			return eAny(getValue()); //14215
+			return eAny(getValue(),0,true); //14215
 	}
 	return LiteralSpecificationImpl::eGet(featureID, resolve, coreType);
 }
@@ -408,24 +406,22 @@ bool LiteralStringImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any LiteralStringImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any LiteralStringImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
   	switch(operationID)
 	{
-		
-		// 681007420
+		// uml::LiteralString::isComputable() : bool: 681007420
 		case umlPackage::LITERALSTRING_OPERATION_ISCOMPUTABLE:
 		{
-			result = eAny(this->isComputable());
+			result = eAny(this->isComputable(),0,false);
 			break;
 		}
-		
-		// 1579170200
+		// uml::LiteralString::stringValue() : std::string: 1579170200
 		case umlPackage::LITERALSTRING_OPERATION_STRINGVALUE:
 		{
-			result = eAny(this->stringValue());
+			result = eAny(this->stringValue(),0,false);
 			break;
 		}
 
@@ -442,7 +438,6 @@ Any LiteralStringImpl::eInvoke(int operationID, std::shared_ptr<std::list < std:
 	return result;
 }
 
-
 std::shared_ptr<uml::LiteralString> LiteralStringImpl::getThisLiteralStringPtr() const
 {
 	return m_thisLiteralStringPtr.lock();
@@ -452,3 +447,5 @@ void LiteralStringImpl::setThisLiteralStringPtr(std::weak_ptr<uml::LiteralString
 	m_thisLiteralStringPtr = thisLiteralStringPtr;
 	setThisLiteralSpecificationPtr(thisLiteralStringPtr);
 }
+
+

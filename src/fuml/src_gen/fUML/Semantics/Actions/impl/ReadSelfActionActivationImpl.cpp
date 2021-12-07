@@ -52,8 +52,8 @@
 #include "fUML/Semantics/Activities/Token.hpp"
 
 //Factories an Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -347,12 +347,10 @@ void ReadSelfActionActivationImpl::saveContent(std::shared_ptr<persistence::inte
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> ReadSelfActionActivationImpl::eStaticClass() const
 {
 	return fUML::Semantics::Actions::ActionsPackage::eInstance()->getReadSelfActionActivation_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -364,7 +362,7 @@ Any ReadSelfActionActivationImpl::eGet(int featureID, bool resolve, bool coreTyp
 		case fUML::Semantics::Actions::ActionsPackage::READSELFACTIONACTIVATION_ATTRIBUTE_READSELFACTION:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getReadSelfAction();
-			return eAny(returnValue); //9311
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //9311
 		}
 	}
 	return ActionActivationImpl::eGet(featureID, resolve, coreType);
@@ -400,7 +398,7 @@ bool ReadSelfActionActivationImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ReadSelfActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any ReadSelfActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -427,7 +425,6 @@ Any ReadSelfActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::
 	return result;
 }
 
-
 std::shared_ptr<fUML::Semantics::Actions::ReadSelfActionActivation> ReadSelfActionActivationImpl::getThisReadSelfActionActivationPtr() const
 {
 	return m_thisReadSelfActionActivationPtr.lock();
@@ -437,3 +434,5 @@ void ReadSelfActionActivationImpl::setThisReadSelfActionActivationPtr(std::weak_
 	m_thisReadSelfActionActivationPtr = thisReadSelfActionActivationPtr;
 	setThisActionActivationPtr(thisReadSelfActionActivationPtr);
 }
+
+

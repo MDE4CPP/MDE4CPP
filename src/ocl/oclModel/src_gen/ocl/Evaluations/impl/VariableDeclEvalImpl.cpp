@@ -31,8 +31,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "ocl/Evaluations/EvaluationsFactory.hpp"
 #include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
+#include "ocl/Evaluations/EvaluationsFactory.hpp"
 
 #include "ocl/Evaluations/OclExpEval.hpp"
 #include "fUML/Semantics/SimpleClassifiers/StringValue.hpp"
@@ -262,12 +262,10 @@ void VariableDeclEvalImpl::saveContent(std::shared_ptr<persistence::interfaces::
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> VariableDeclEvalImpl::eStaticClass() const
 {
 	return ocl::Evaluations::EvaluationsPackage::eInstance()->getVariableDeclEval_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -279,12 +277,12 @@ Any VariableDeclEvalImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case ocl::Evaluations::EvaluationsPackage::VARIABLEDECLEVAL_ATTRIBUTE_INITEXP:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getInitExp();
-			return eAny(returnValue); //980
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //980
 		}
 		case ocl::Evaluations::EvaluationsPackage::VARIABLEDECLEVAL_ATTRIBUTE_NAME:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getName();
-			return eAny(returnValue); //981
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //981
 		}
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
@@ -330,7 +328,7 @@ bool VariableDeclEvalImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any VariableDeclEvalImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any VariableDeclEvalImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -350,7 +348,6 @@ Any VariableDeclEvalImpl::eInvoke(int operationID, std::shared_ptr<std::list < s
 	return result;
 }
 
-
 std::shared_ptr<ocl::Evaluations::VariableDeclEval> VariableDeclEvalImpl::getThisVariableDeclEvalPtr() const
 {
 	return m_thisVariableDeclEvalPtr.lock();
@@ -359,3 +356,5 @@ void VariableDeclEvalImpl::setThisVariableDeclEvalPtr(std::weak_ptr<ocl::Evaluat
 {
 	m_thisVariableDeclEvalPtr = thisVariableDeclEvalPtr;
 }
+
+

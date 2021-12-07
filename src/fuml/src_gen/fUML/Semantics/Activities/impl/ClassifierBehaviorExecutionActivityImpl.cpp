@@ -34,8 +34,8 @@
 
 
 //Factories an Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 
 
@@ -180,12 +180,10 @@ void ClassifierBehaviorExecutionActivityImpl::saveContent(std::shared_ptr<persis
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> ClassifierBehaviorExecutionActivityImpl::eStaticClass() const
 {
 	return fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getClassifierBehaviorExecutionActivity_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -218,7 +216,7 @@ bool ClassifierBehaviorExecutionActivityImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ClassifierBehaviorExecutionActivityImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any ClassifierBehaviorExecutionActivityImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -238,7 +236,6 @@ Any ClassifierBehaviorExecutionActivityImpl::eInvoke(int operationID, std::share
 	return result;
 }
 
-
 std::shared_ptr<fUML::Semantics::Activities::ClassifierBehaviorExecutionActivity> ClassifierBehaviorExecutionActivityImpl::getThisClassifierBehaviorExecutionActivityPtr() const
 {
 	return m_thisClassifierBehaviorExecutionActivityPtr.lock();
@@ -247,3 +244,5 @@ void ClassifierBehaviorExecutionActivityImpl::setThisClassifierBehaviorExecution
 {
 	m_thisClassifierBehaviorExecutionActivityPtr = thisClassifierBehaviorExecutionActivityPtr;
 }
+
+

@@ -344,12 +344,10 @@ void UnspecifiedValueExpImpl::saveContent(std::shared_ptr<persistence::interface
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> UnspecifiedValueExpImpl::eStaticClass() const
 {
 	return ocl::Expressions::ExpressionsPackage::eInstance()->getUnspecifiedValueExp_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -382,7 +380,7 @@ bool UnspecifiedValueExpImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any UnspecifiedValueExpImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any UnspecifiedValueExpImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -402,7 +400,6 @@ Any UnspecifiedValueExpImpl::eInvoke(int operationID, std::shared_ptr<std::list 
 	return result;
 }
 
-
 std::shared_ptr<ocl::Expressions::UnspecifiedValueExp> UnspecifiedValueExpImpl::getThisUnspecifiedValueExpPtr() const
 {
 	return m_thisUnspecifiedValueExpPtr.lock();
@@ -412,3 +409,5 @@ void UnspecifiedValueExpImpl::setThisUnspecifiedValueExpPtr(std::weak_ptr<ocl::E
 	m_thisUnspecifiedValueExpPtr = thisUnspecifiedValueExpPtr;
 	setThisOclExpressionPtr(thisUnspecifiedValueExpPtr);
 }
+
+

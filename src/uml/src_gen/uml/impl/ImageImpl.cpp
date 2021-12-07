@@ -300,12 +300,10 @@ void ImageImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandle
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> ImageImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getImage_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -315,11 +313,11 @@ Any ImageImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::IMAGE_ATTRIBUTE_CONTENT:
-			return eAny(getContent()); //1113
+			return eAny(getContent(),0,true); //1113
 		case uml::umlPackage::IMAGE_ATTRIBUTE_FORMAT:
-			return eAny(getFormat()); //1114
+			return eAny(getFormat(),0,true); //1114
 		case uml::umlPackage::IMAGE_ATTRIBUTE_LOCATION:
-			return eAny(getLocation()); //1115
+			return eAny(getLocation(),0,true); //1115
 	}
 	return ElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -371,7 +369,7 @@ bool ImageImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ImageImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any ImageImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -391,7 +389,6 @@ Any ImageImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_
 	return result;
 }
 
-
 std::shared_ptr<uml::Image> ImageImpl::getThisImagePtr() const
 {
 	return m_thisImagePtr.lock();
@@ -401,3 +398,5 @@ void ImageImpl::setThisImagePtr(std::weak_ptr<uml::Image> thisImagePtr)
 	m_thisImagePtr = thisImagePtr;
 	setThisElementPtr(thisImagePtr);
 }
+
+

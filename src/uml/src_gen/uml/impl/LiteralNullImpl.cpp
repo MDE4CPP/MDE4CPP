@@ -322,12 +322,10 @@ void LiteralNullImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> LiteralNullImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getLiteralNull_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -360,24 +358,22 @@ bool LiteralNullImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any LiteralNullImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any LiteralNullImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
   	switch(operationID)
 	{
-		
-		// 1995427709
+		// uml::LiteralNull::isComputable() : bool: 1995427709
 		case umlPackage::LITERALNULL_OPERATION_ISCOMPUTABLE:
 		{
-			result = eAny(this->isComputable());
+			result = eAny(this->isComputable(),0,false);
 			break;
 		}
-		
-		// 1222543064
+		// uml::LiteralNull::isNull() : bool: 1222543064
 		case umlPackage::LITERALNULL_OPERATION_ISNULL:
 		{
-			result = eAny(this->isNull());
+			result = eAny(this->isNull(),0,false);
 			break;
 		}
 
@@ -394,7 +390,6 @@ Any LiteralNullImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::s
 	return result;
 }
 
-
 std::shared_ptr<uml::LiteralNull> LiteralNullImpl::getThisLiteralNullPtr() const
 {
 	return m_thisLiteralNullPtr.lock();
@@ -404,3 +399,5 @@ void LiteralNullImpl::setThisLiteralNullPtr(std::weak_ptr<uml::LiteralNull> this
 	m_thisLiteralNullPtr = thisLiteralNullPtr;
 	setThisLiteralSpecificationPtr(thisLiteralNullPtr);
 }
+
+

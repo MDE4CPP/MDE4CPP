@@ -297,12 +297,10 @@ void LiteralSpecificationImpl::saveContent(std::shared_ptr<persistence::interfac
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> LiteralSpecificationImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getLiteralSpecification_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -335,7 +333,7 @@ bool LiteralSpecificationImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any LiteralSpecificationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any LiteralSpecificationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -355,7 +353,6 @@ Any LiteralSpecificationImpl::eInvoke(int operationID, std::shared_ptr<std::list
 	return result;
 }
 
-
 std::shared_ptr<uml::LiteralSpecification> LiteralSpecificationImpl::getThisLiteralSpecificationPtr() const
 {
 	return m_thisLiteralSpecificationPtr.lock();
@@ -365,3 +362,5 @@ void LiteralSpecificationImpl::setThisLiteralSpecificationPtr(std::weak_ptr<uml:
 	m_thisLiteralSpecificationPtr = thisLiteralSpecificationPtr;
 	setThisValueSpecificationPtr(thisLiteralSpecificationPtr);
 }
+
+

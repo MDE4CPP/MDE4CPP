@@ -321,12 +321,10 @@ void ChangeEventImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> ChangeEventImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getChangeEvent_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -338,7 +336,7 @@ Any ChangeEventImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::CHANGEEVENT_ATTRIBUTE_CHANGEEXPRESSION:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getChangeExpression();
-			return eAny(returnValue); //3412
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //3412
 		}
 	}
 	return EventImpl::eGet(featureID, resolve, coreType);
@@ -374,7 +372,7 @@ bool ChangeEventImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ChangeEventImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any ChangeEventImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -394,7 +392,6 @@ Any ChangeEventImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::s
 	return result;
 }
 
-
 std::shared_ptr<uml::ChangeEvent> ChangeEventImpl::getThisChangeEventPtr() const
 {
 	return m_thisChangeEventPtr.lock();
@@ -404,3 +401,5 @@ void ChangeEventImpl::setThisChangeEventPtr(std::weak_ptr<uml::ChangeEvent> this
 	m_thisChangeEventPtr = thisChangeEventPtr;
 	setThisEventPtr(thisChangeEventPtr);
 }
+
+

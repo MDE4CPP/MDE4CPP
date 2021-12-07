@@ -32,8 +32,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "ecore/ecoreFactory.hpp"
 #include "ocl/Values/ValuesFactory.hpp"
+#include "ecore/ecoreFactory.hpp"
 
 #include "ocl/Types/CollectionType.hpp"
 #include "ocl/Values/CollectionValue.hpp"
@@ -211,12 +211,10 @@ void SequenceTypeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> SequenceTypeImpl::eStaticClass() const
 {
 	return ocl::Types::TypesPackage::eInstance()->getSequenceType_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -249,7 +247,7 @@ bool SequenceTypeImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any SequenceTypeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any SequenceTypeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -269,7 +267,6 @@ Any SequenceTypeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::
 	return result;
 }
 
-
 std::shared_ptr<ocl::Types::SequenceType> SequenceTypeImpl::getThisSequenceTypePtr() const
 {
 	return m_thisSequenceTypePtr.lock();
@@ -279,3 +276,5 @@ void SequenceTypeImpl::setThisSequenceTypePtr(std::weak_ptr<ocl::Types::Sequence
 	m_thisSequenceTypePtr = thisSequenceTypePtr;
 	setThisCollectionTypePtr(thisSequenceTypePtr);
 }
+
+

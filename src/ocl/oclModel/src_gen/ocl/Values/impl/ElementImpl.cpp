@@ -37,8 +37,8 @@
 
 //Factories an Package includes
 #include "ocl/oclPackage.hpp"
-#include "ocl/Values/ValuesPackage.hpp"
 #include "fUML/Semantics/Values/ValuesPackage.hpp"
+#include "ocl/Values/ValuesPackage.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -179,7 +179,7 @@ void ElementImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadH
 		{
 			// this attribute is a 'int'
 			int value;
-			std::istringstream ( iter->second ) >> value;
+			std::istringstream(iter->second) >> value;
 			this->setIndexNr(value);
 		}
 		std::shared_ptr<ecore::EClass> metaClass = this->eClass(); // get MetaClass
@@ -253,12 +253,10 @@ void ElementImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHand
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> ElementImpl::eStaticClass() const
 {
 	return ocl::Values::ValuesPackage::eInstance()->getElement_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -268,11 +266,11 @@ Any ElementImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case ocl::Values::ValuesPackage::ELEMENT_ATTRIBUTE_INDEXNR:
-			return eAny(getIndexNr()); //230
+				return eAny(getIndexNr(),0,true); //230
 		case ocl::Values::ValuesPackage::ELEMENT_ATTRIBUTE_VALUE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getValue();
-			return eAny(returnValue); //231
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //231
 		}
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
@@ -317,7 +315,7 @@ bool ElementImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ElementImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any ElementImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -337,7 +335,6 @@ Any ElementImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::share
 	return result;
 }
 
-
 std::shared_ptr<ocl::Values::Element> ElementImpl::getThisElementPtr() const
 {
 	return m_thisElementPtr.lock();
@@ -346,3 +343,5 @@ void ElementImpl::setThisElementPtr(std::weak_ptr<ocl::Values::Element> thisElem
 {
 	m_thisElementPtr = thisElementPtr;
 }
+
+

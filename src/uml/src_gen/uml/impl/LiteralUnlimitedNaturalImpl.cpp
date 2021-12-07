@@ -293,7 +293,7 @@ void LiteralUnlimitedNaturalImpl::loadAttributes(std::shared_ptr<persistence::in
 		{
 			// this attribute is a 'int'
 			int value;
-			std::istringstream ( iter->second ) >> value;
+			std::istringstream(iter->second) >> value;
 			this->setValue(value);
 		}
 	}
@@ -359,12 +359,10 @@ void LiteralUnlimitedNaturalImpl::saveContent(std::shared_ptr<persistence::inter
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> LiteralUnlimitedNaturalImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getLiteralUnlimitedNatural_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -374,7 +372,7 @@ Any LiteralUnlimitedNaturalImpl::eGet(int featureID, bool resolve, bool coreType
 	switch(featureID)
 	{
 		case uml::umlPackage::LITERALUNLIMITEDNATURAL_ATTRIBUTE_VALUE:
-			return eAny(getValue()); //14315
+			return eAny(getValue(),0,true); //14315
 	}
 	return LiteralSpecificationImpl::eGet(featureID, resolve, coreType);
 }
@@ -408,24 +406,22 @@ bool LiteralUnlimitedNaturalImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any LiteralUnlimitedNaturalImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any LiteralUnlimitedNaturalImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
   	switch(operationID)
 	{
-		
-		// 1049705709
+		// uml::LiteralUnlimitedNatural::isComputable() : bool: 1049705709
 		case umlPackage::LITERALUNLIMITEDNATURAL_OPERATION_ISCOMPUTABLE:
 		{
-			result = eAny(this->isComputable());
+			result = eAny(this->isComputable(),0,false);
 			break;
 		}
-		
-		// 1389217242
+		// uml::LiteralUnlimitedNatural::unlimitedValue() : int: 1389217242
 		case umlPackage::LITERALUNLIMITEDNATURAL_OPERATION_UNLIMITEDVALUE:
 		{
-			result = eAny(this->unlimitedValue());
+			result = eAny(this->unlimitedValue(),0,false);
 			break;
 		}
 
@@ -442,7 +438,6 @@ Any LiteralUnlimitedNaturalImpl::eInvoke(int operationID, std::shared_ptr<std::l
 	return result;
 }
 
-
 std::shared_ptr<uml::LiteralUnlimitedNatural> LiteralUnlimitedNaturalImpl::getThisLiteralUnlimitedNaturalPtr() const
 {
 	return m_thisLiteralUnlimitedNaturalPtr.lock();
@@ -452,3 +447,5 @@ void LiteralUnlimitedNaturalImpl::setThisLiteralUnlimitedNaturalPtr(std::weak_pt
 	m_thisLiteralUnlimitedNaturalPtr = thisLiteralUnlimitedNaturalPtr;
 	setThisLiteralSpecificationPtr(thisLiteralUnlimitedNaturalPtr);
 }
+
+

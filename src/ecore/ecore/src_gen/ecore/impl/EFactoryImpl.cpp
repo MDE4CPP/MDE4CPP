@@ -279,12 +279,10 @@ void EFactoryImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 	}
 }
 
-
 std::shared_ptr<EClass> EFactoryImpl::eStaticClass() const
 {
 	return ecore::ecorePackage::eInstance()->getEFactory_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -296,7 +294,7 @@ Any EFactoryImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case ecore::ecorePackage::EFACTORY_ATTRIBUTE_EPACKAGE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getEPackage();
-			return eAny(returnValue); //234
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //234
 		}
 	}
 	return EModelElementImpl::eGet(featureID, resolve, coreType);
@@ -338,8 +336,7 @@ Any EFactoryImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argum
 
   	switch(operationID)
 	{
-		
-		// 776190528
+		// ecore::EFactory::convertToString(ecore::EDataType, Any) : std::string {const}: 776190528
 		case ecorePackage::EFACTORY_OPERATION_CONVERTTOSTRING_EDATATYPE_EJAVAOBJECT:
 		{
 			//Retrieve input parameter 'eDataType'
@@ -352,11 +349,10 @@ Any EFactoryImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argum
 			Any incoming_param_instanceValue;
 			std::list<Any>::const_iterator incoming_param_instanceValue_arguments_citer = std::next(arguments->begin(), 1);
 			incoming_param_instanceValue = (*incoming_param_instanceValue_arguments_citer)->get<Any >();
-			result = eAny(this->convertToString(incoming_param_eDataType,incoming_param_instanceValue));
+			result = eAny(this->convertToString(incoming_param_eDataType,incoming_param_instanceValue),0,false);
 			break;
 		}
-		
-		// 2062111577
+		// ecore::EFactory::create(ecore::EClass) : ecore::EObject {const}: 2062111577
 		case ecorePackage::EFACTORY_OPERATION_CREATE_ECLASS:
 		{
 			//Retrieve input parameter 'eClass'
@@ -364,11 +360,10 @@ Any EFactoryImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argum
 			std::shared_ptr<ecore::EClass> incoming_param_eClass;
 			std::list<Any>::const_iterator incoming_param_eClass_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_eClass = (*incoming_param_eClass_arguments_citer)->get<std::shared_ptr<ecore::EClass> >();
-			result = eAny(this->create(incoming_param_eClass));
+			result = eAny(this->create(incoming_param_eClass), ecorePackage::EOBJECT_CLASS,false);
 			break;
 		}
-		
-		// 1793041850
+		// ecore::EFactory::createFromString(ecore::EDataType, std::string) : Any {const}: 1793041850
 		case ecorePackage::EFACTORY_OPERATION_CREATEFROMSTRING_EDATATYPE_ESTRING:
 		{
 			//Retrieve input parameter 'eDataType'
@@ -381,7 +376,7 @@ Any EFactoryImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argum
 			std::string incoming_param_literalValue;
 			std::list<Any>::const_iterator incoming_param_literalValue_arguments_citer = std::next(arguments->begin(), 1);
 			incoming_param_literalValue = (*incoming_param_literalValue_arguments_citer)->get<std::string >();
-			result = eAny(this->createFromString(incoming_param_eDataType,incoming_param_literalValue));
+			result = eAny(this->createFromString(incoming_param_eDataType,incoming_param_literalValue),0,false);
 			break;
 		}
 
@@ -398,7 +393,6 @@ Any EFactoryImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argum
 	return result;
 }
 
-
 std::shared_ptr<ecore::EFactory> EFactoryImpl::getThisEFactoryPtr() const
 {
 	return m_thisEFactoryPtr.lock();
@@ -408,3 +402,5 @@ void EFactoryImpl::setThisEFactoryPtr(std::weak_ptr<ecore::EFactory> thisEFactor
 	m_thisEFactoryPtr = thisEFactoryPtr;
 	setThisEModelElementPtr(thisEFactoryPtr);
 }
+
+

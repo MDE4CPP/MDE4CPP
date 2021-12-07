@@ -154,14 +154,10 @@ InstanceSpecificationImpl& InstanceSpecificationImpl::operator=(const InstanceSp
 			std::cout << "Initialising value Subset: " << "m_slot - Subset<uml::Slot, uml::Element >(getOwnedElement())" << std::endl;
 		#endif
 		
-
-		Bag<uml::Slot>::iterator slotIter = slotList->begin();
-		Bag<uml::Slot>::iterator slotEnd = slotList->end();
-		while (slotIter != slotEnd) 
+		for(const std::shared_ptr<uml::Slot> slotindexElem: *slotList) 
 		{
-			std::shared_ptr<uml::Slot> temp = std::dynamic_pointer_cast<uml::Slot>((*slotIter)->copy());
-			getSlot()->push_back(temp);
-			slotIter++;
+			std::shared_ptr<uml::Slot> temp = std::dynamic_pointer_cast<uml::Slot>((slotindexElem)->copy());
+			m_slot->push_back(temp);
 		}
 	}
 	else
@@ -484,12 +480,10 @@ void InstanceSpecificationImpl::saveContent(std::shared_ptr<persistence::interfa
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> InstanceSpecificationImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getInstanceSpecification_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -500,32 +494,16 @@ Any InstanceSpecificationImpl::eGet(int featureID, bool resolve, bool coreType) 
 	{
 		case uml::umlPackage::INSTANCESPECIFICATION_ATTRIBUTE_CLASSIFIER:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Classifier>::iterator iter = getClassifier()->begin();
-			Bag<uml::Classifier>::iterator end = getClassifier()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //11714			
+			return eAnyBag(getClassifier(),845259359); //11714
 		}
 		case uml::umlPackage::INSTANCESPECIFICATION_ATTRIBUTE_SLOT:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Slot>::iterator iter = getSlot()->begin();
-			Bag<uml::Slot>::iterator end = getSlot()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //11715			
+			return eAnyBag(getSlot(),1292161953); //11715
 		}
 		case uml::umlPackage::INSTANCESPECIFICATION_ATTRIBUTE_SPECIFICATION:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getSpecification();
-			return eAny(returnValue); //11716
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //11716
 		}
 	}
 	Any result;
@@ -576,72 +554,74 @@ bool InstanceSpecificationImpl::eSet(int featureID, Any newValue)
 		case uml::umlPackage::INSTANCESPECIFICATION_ATTRIBUTE_CLASSIFIER:
 		{
 			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::Classifier>> classifierList(new Bag<uml::Classifier>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
+			if((newValue->isContainer()) && (uml::umlPackage::CLASSIFIER_CLASS ==newValue->getTypeId()))
 			{
-				classifierList->add(std::dynamic_pointer_cast<uml::Classifier>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::Classifier>::iterator iterClassifier = getClassifier()->begin();
-			Bag<uml::Classifier>::iterator endClassifier = getClassifier()->end();
-			while (iterClassifier != endClassifier)
-			{
-				if (classifierList->find(*iterClassifier) == -1)
+				try
 				{
-					getClassifier()->erase(*iterClassifier);
+					std::shared_ptr<Bag<uml::Classifier>> classifierList= newValue->get<std::shared_ptr<Bag<uml::Classifier>>>();
+					std::shared_ptr<Bag<uml::Classifier>> _classifier=getClassifier();
+					for(const std::shared_ptr<uml::Classifier> indexClassifier: *_classifier)
+					{
+						if (classifierList->find(indexClassifier) == -1)
+						{
+							_classifier->erase(indexClassifier);
+						}
+					}
+
+					for(const std::shared_ptr<uml::Classifier> indexClassifier: *classifierList)
+					{
+						if (_classifier->find(indexClassifier) == -1)
+						{
+							_classifier->add(indexClassifier);
+						}
+					}
 				}
-				iterClassifier++;
-			}
- 
-			iterClassifier = classifierList->begin();
-			endClassifier = classifierList->end();
-			while (iterClassifier != endClassifier)
-			{
-				if (getClassifier()->find(*iterClassifier) == -1)
+				catch(...)
 				{
-					getClassifier()->add(*iterClassifier);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterClassifier++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}
 		case uml::umlPackage::INSTANCESPECIFICATION_ATTRIBUTE_SLOT:
 		{
 			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::Slot>> slotList(new Bag<uml::Slot>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
+			if((newValue->isContainer()) && (uml::umlPackage::SLOT_CLASS ==newValue->getTypeId()))
 			{
-				slotList->add(std::dynamic_pointer_cast<uml::Slot>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::Slot>::iterator iterSlot = getSlot()->begin();
-			Bag<uml::Slot>::iterator endSlot = getSlot()->end();
-			while (iterSlot != endSlot)
-			{
-				if (slotList->find(*iterSlot) == -1)
+				try
 				{
-					getSlot()->erase(*iterSlot);
+					std::shared_ptr<Bag<uml::Slot>> slotList= newValue->get<std::shared_ptr<Bag<uml::Slot>>>();
+					std::shared_ptr<Bag<uml::Slot>> _slot=getSlot();
+					for(const std::shared_ptr<uml::Slot> indexSlot: *_slot)
+					{
+						if (slotList->find(indexSlot) == -1)
+						{
+							_slot->erase(indexSlot);
+						}
+					}
+
+					for(const std::shared_ptr<uml::Slot> indexSlot: *slotList)
+					{
+						if (_slot->find(indexSlot) == -1)
+						{
+							_slot->add(indexSlot);
+						}
+					}
 				}
-				iterSlot++;
-			}
- 
-			iterSlot = slotList->begin();
-			endSlot = slotList->end();
-			while (iterSlot != endSlot)
-			{
-				if (getSlot()->find(*iterSlot) == -1)
+				catch(...)
 				{
-					getSlot()->add(*iterSlot);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterSlot++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}
@@ -673,78 +653,74 @@ bool InstanceSpecificationImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any InstanceSpecificationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any InstanceSpecificationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
   	switch(operationID)
 	{
-		
-		// 305091535
+		// uml::InstanceSpecification::defining_feature(Any, std::map) : bool: 305091535
 		case umlPackage::INSTANCESPECIFICATION_OPERATION_DEFINING_FEATURE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->defining_feature(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->defining_feature(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		
-		// 2089426612
+		// uml::InstanceSpecification::deployment_artifact(Any, std::map) : bool: 2089426612
 		case umlPackage::INSTANCESPECIFICATION_OPERATION_DEPLOYMENT_ARTIFACT_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->deployment_artifact(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->deployment_artifact(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		
-		// 1332220925
+		// uml::InstanceSpecification::deployment_target(Any, std::map) : bool: 1332220925
 		case umlPackage::INSTANCESPECIFICATION_OPERATION_DEPLOYMENT_TARGET_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->deployment_target(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->deployment_target(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		
-		// 1699332849
+		// uml::InstanceSpecification::structural_feature(Any, std::map) : bool: 1699332849
 		case umlPackage::INSTANCESPECIFICATION_OPERATION_STRUCTURAL_FEATURE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->structural_feature(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->structural_feature(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
 
@@ -767,7 +743,6 @@ Any InstanceSpecificationImpl::eInvoke(int operationID, std::shared_ptr<std::lis
 	return result;
 }
 
-
 std::shared_ptr<uml::InstanceSpecification> InstanceSpecificationImpl::getThisInstanceSpecificationPtr() const
 {
 	return m_thisInstanceSpecificationPtr.lock();
@@ -779,3 +754,5 @@ void InstanceSpecificationImpl::setThisInstanceSpecificationPtr(std::weak_ptr<um
 	setThisDeploymentTargetPtr(thisInstanceSpecificationPtr);
 	setThisPackageableElementPtr(thisInstanceSpecificationPtr);
 }
+
+

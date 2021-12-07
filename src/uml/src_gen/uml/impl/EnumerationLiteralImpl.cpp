@@ -328,12 +328,10 @@ void EnumerationLiteralImpl::saveContent(std::shared_ptr<persistence::interfaces
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> EnumerationLiteralImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getEnumerationLiteral_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -345,7 +343,7 @@ Any EnumerationLiteralImpl::eGet(int featureID, bool resolve, bool coreType) con
 		case uml::umlPackage::ENUMERATIONLITERAL_ATTRIBUTE_ENUMERATION:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getEnumeration().lock();
-			return eAny(returnValue); //8517
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //8517
 		}
 	}
 	return InstanceSpecificationImpl::eGet(featureID, resolve, coreType);
@@ -381,24 +379,23 @@ bool EnumerationLiteralImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any EnumerationLiteralImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any EnumerationLiteralImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
   	switch(operationID)
 	{
-		
-		// 118208468
+		// uml::EnumerationLiteral::getClassifier() : uml::Enumeration: 118208468
 		case umlPackage::ENUMERATIONLITERAL_OPERATION_GETCLASSIFIER:
 		{
-			result = eAny(this->getClassifier());
+			result = eAny(this->getClassifier(), umlPackage::ENUMERATION_CLASS,false);
 			break;
 		}
-		
-		// 1410424622
+		// uml::EnumerationLiteral::getClassifiers() : uml::Classifier[*]: 1410424622
 		case umlPackage::ENUMERATIONLITERAL_OPERATION_GETCLASSIFIERS:
 		{
-			result = eAny(this->getClassifiers());
+			std::shared_ptr<Bag<uml::Classifier> > resultList = this->getClassifiers();
+			return eAny(resultList,umlPackage::CLASSIFIER_CLASS,true);
 			break;
 		}
 
@@ -415,7 +412,6 @@ Any EnumerationLiteralImpl::eInvoke(int operationID, std::shared_ptr<std::list <
 	return result;
 }
 
-
 std::shared_ptr<uml::EnumerationLiteral> EnumerationLiteralImpl::getThisEnumerationLiteralPtr() const
 {
 	return m_thisEnumerationLiteralPtr.lock();
@@ -425,3 +421,5 @@ void EnumerationLiteralImpl::setThisEnumerationLiteralPtr(std::weak_ptr<uml::Enu
 	m_thisEnumerationLiteralPtr = thisEnumerationLiteralPtr;
 	setThisInstanceSpecificationPtr(thisEnumerationLiteralPtr);
 }
+
+

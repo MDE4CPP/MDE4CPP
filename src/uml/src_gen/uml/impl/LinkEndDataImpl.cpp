@@ -120,14 +120,10 @@ LinkEndDataImpl& LinkEndDataImpl::operator=(const LinkEndDataImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_qualifier - Subset<uml::QualifierValue, uml::Element >(getOwnedElement())" << std::endl;
 		#endif
 		
-
-		Bag<uml::QualifierValue>::iterator qualifierIter = qualifierList->begin();
-		Bag<uml::QualifierValue>::iterator qualifierEnd = qualifierList->end();
-		while (qualifierIter != qualifierEnd) 
+		for(const std::shared_ptr<uml::QualifierValue> qualifierindexElem: *qualifierList) 
 		{
-			std::shared_ptr<uml::QualifierValue> temp = std::dynamic_pointer_cast<uml::QualifierValue>((*qualifierIter)->copy());
-			getQualifier()->push_back(temp);
-			qualifierIter++;
+			std::shared_ptr<uml::QualifierValue> temp = std::dynamic_pointer_cast<uml::QualifierValue>((qualifierindexElem)->copy());
+			m_qualifier->push_back(temp);
 		}
 	}
 	else
@@ -412,12 +408,10 @@ void LinkEndDataImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> LinkEndDataImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getLinkEndData_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -429,24 +423,16 @@ Any LinkEndDataImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::LINKENDDATA_ATTRIBUTE_END:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getEnd();
-			return eAny(returnValue); //1353
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //1353
 		}
 		case uml::umlPackage::LINKENDDATA_ATTRIBUTE_QUALIFIER:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::QualifierValue>::iterator iter = getQualifier()->begin();
-			Bag<uml::QualifierValue>::iterator end = getQualifier()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //1354			
+			return eAnyBag(getQualifier(),2095701169); //1354
 		}
 		case uml::umlPackage::LINKENDDATA_ATTRIBUTE_VALUE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getValue();
-			return eAny(returnValue); //1355
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //1355
 		}
 	}
 	return ElementImpl::eGet(featureID, resolve, coreType);
@@ -481,36 +467,37 @@ bool LinkEndDataImpl::eSet(int featureID, Any newValue)
 		case uml::umlPackage::LINKENDDATA_ATTRIBUTE_QUALIFIER:
 		{
 			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::QualifierValue>> qualifierList(new Bag<uml::QualifierValue>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
+			if((newValue->isContainer()) && (uml::umlPackage::QUALIFIERVALUE_CLASS ==newValue->getTypeId()))
 			{
-				qualifierList->add(std::dynamic_pointer_cast<uml::QualifierValue>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::QualifierValue>::iterator iterQualifier = getQualifier()->begin();
-			Bag<uml::QualifierValue>::iterator endQualifier = getQualifier()->end();
-			while (iterQualifier != endQualifier)
-			{
-				if (qualifierList->find(*iterQualifier) == -1)
+				try
 				{
-					getQualifier()->erase(*iterQualifier);
+					std::shared_ptr<Bag<uml::QualifierValue>> qualifierList= newValue->get<std::shared_ptr<Bag<uml::QualifierValue>>>();
+					std::shared_ptr<Bag<uml::QualifierValue>> _qualifier=getQualifier();
+					for(const std::shared_ptr<uml::QualifierValue> indexQualifier: *_qualifier)
+					{
+						if (qualifierList->find(indexQualifier) == -1)
+						{
+							_qualifier->erase(indexQualifier);
+						}
+					}
+
+					for(const std::shared_ptr<uml::QualifierValue> indexQualifier: *qualifierList)
+					{
+						if (_qualifier->find(indexQualifier) == -1)
+						{
+							_qualifier->add(indexQualifier);
+						}
+					}
 				}
-				iterQualifier++;
-			}
- 
-			iterQualifier = qualifierList->begin();
-			endQualifier = qualifierList->end();
-			while (iterQualifier != endQualifier)
-			{
-				if (getQualifier()->find(*iterQualifier) == -1)
+				catch(...)
 				{
-					getQualifier()->add(*iterQualifier);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterQualifier++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}
@@ -530,102 +517,97 @@ bool LinkEndDataImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any LinkEndDataImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any LinkEndDataImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
   	switch(operationID)
 	{
-		
-		// 1232620149
+		// uml::LinkEndData::allPins() : uml::InputPin[*]: 1232620149
 		case umlPackage::LINKENDDATA_OPERATION_ALLPINS:
 		{
-			result = eAny(this->allPins());
+			std::shared_ptr<Bag<uml::InputPin> > resultList = this->allPins();
+			return eAny(resultList,umlPackage::INPUTPIN_CLASS,true);
 			break;
 		}
-		
-		// 1213117792
+		// uml::LinkEndData::end_object_input_pin(Any, std::map) : bool: 1213117792
 		case umlPackage::LINKENDDATA_OPERATION_END_OBJECT_INPUT_PIN_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->end_object_input_pin(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->end_object_input_pin(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		
-		// 1093089992
+		// uml::LinkEndData::multiplicity(Any, std::map) : bool: 1093089992
 		case umlPackage::LINKENDDATA_OPERATION_MULTIPLICITY_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->multiplicity(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->multiplicity(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		
-		// 781012681
+		// uml::LinkEndData::property_is_association_end(Any, std::map) : bool: 781012681
 		case umlPackage::LINKENDDATA_OPERATION_PROPERTY_IS_ASSOCIATION_END_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->property_is_association_end(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->property_is_association_end(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		
-		// 762800978
+		// uml::LinkEndData::qualifiers(Any, std::map) : bool: 762800978
 		case umlPackage::LINKENDDATA_OPERATION_QUALIFIERS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->qualifiers(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->qualifiers(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		
-		// 1930031988
+		// uml::LinkEndData::same_type(Any, std::map) : bool: 1930031988
 		case umlPackage::LINKENDDATA_OPERATION_SAME_TYPE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->same_type(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->same_type(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
 
@@ -642,7 +624,6 @@ Any LinkEndDataImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::s
 	return result;
 }
 
-
 std::shared_ptr<uml::LinkEndData> LinkEndDataImpl::getThisLinkEndDataPtr() const
 {
 	return m_thisLinkEndDataPtr.lock();
@@ -652,3 +633,5 @@ void LinkEndDataImpl::setThisLinkEndDataPtr(std::weak_ptr<uml::LinkEndData> this
 	m_thisLinkEndDataPtr = thisLinkEndDataPtr;
 	setThisElementPtr(thisLinkEndDataPtr);
 }
+
+

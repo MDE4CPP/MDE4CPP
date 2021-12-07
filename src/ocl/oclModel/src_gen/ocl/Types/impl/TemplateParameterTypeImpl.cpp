@@ -240,12 +240,10 @@ void TemplateParameterTypeImpl::saveContent(std::shared_ptr<persistence::interfa
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> TemplateParameterTypeImpl::eStaticClass() const
 {
 	return ocl::Types::TypesPackage::eInstance()->getTemplateParameterType_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -255,7 +253,7 @@ Any TemplateParameterTypeImpl::eGet(int featureID, bool resolve, bool coreType) 
 	switch(featureID)
 	{
 		case ocl::Types::TypesPackage::TEMPLATEPARAMETERTYPE_ATTRIBUTE_SPECIFICATION:
-			return eAny(getSpecification()); //848
+				return eAny(getSpecification(),0,true); //848
 	}
 	return ecore::EClassifierImpl::eGet(featureID, resolve, coreType);
 }
@@ -289,7 +287,7 @@ bool TemplateParameterTypeImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any TemplateParameterTypeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any TemplateParameterTypeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -309,7 +307,6 @@ Any TemplateParameterTypeImpl::eInvoke(int operationID, std::shared_ptr<std::lis
 	return result;
 }
 
-
 std::shared_ptr<ocl::Types::TemplateParameterType> TemplateParameterTypeImpl::getThisTemplateParameterTypePtr() const
 {
 	return m_thisTemplateParameterTypePtr.lock();
@@ -319,3 +316,5 @@ void TemplateParameterTypeImpl::setThisTemplateParameterTypePtr(std::weak_ptr<oc
 	m_thisTemplateParameterTypePtr = thisTemplateParameterTypePtr;
 	setThisEClassifierPtr(thisTemplateParameterTypePtr);
 }
+
+

@@ -457,12 +457,10 @@ void ExtensionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHa
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> ExtensionImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getExtension_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -472,11 +470,11 @@ Any ExtensionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::EXTENSION_ATTRIBUTE_ISREQUIRED:
-			return eAny(getIsRequired()); //9744
+			return eAny(getIsRequired(),0,true); //9744
 		case uml::umlPackage::EXTENSION_ATTRIBUTE_METACLASS:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getMetaclass();
-			return eAny(returnValue); //9745
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //9745
 		}
 	}
 	return AssociationImpl::eGet(featureID, resolve, coreType);
@@ -506,79 +504,72 @@ bool ExtensionImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ExtensionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any ExtensionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
   	switch(operationID)
 	{
-		
-		// 210211592
+		// uml::Extension::getMetaclass() : uml::Class: 210211592
 		case umlPackage::EXTENSION_OPERATION_GETMETACLASS:
 		{
-			result = eAny(this->getMetaclass());
+			result = eAny(this->getMetaclass(), umlPackage::CLASS_CLASS,false);
 			break;
 		}
-		
-		// 1488888961
+		// uml::Extension::getStereotype() : uml::Stereotype: 1488888961
 		case umlPackage::EXTENSION_OPERATION_GETSTEREOTYPE:
 		{
-			result = eAny(this->getStereotype());
+			result = eAny(this->getStereotype(), umlPackage::STEREOTYPE_CLASS,false);
 			break;
 		}
-		
-		// 969898884
+		// uml::Extension::getStereotypeEnd() : uml::Property: 969898884
 		case umlPackage::EXTENSION_OPERATION_GETSTEREOTYPEEND:
 		{
-			result = eAny(this->getStereotypeEnd());
+			result = eAny(this->getStereotypeEnd(), umlPackage::PROPERTY_CLASS,false);
 			break;
 		}
-		
-		// 792186175
+		// uml::Extension::isRequired() : bool: 792186175
 		case umlPackage::EXTENSION_OPERATION_ISREQUIRED:
 		{
-			result = eAny(this->isRequired());
+			result = eAny(this->isRequired(),0,false);
 			break;
 		}
-		
-		// 1026814326
+		// uml::Extension::is_binary(Any, std::map) : bool: 1026814326
 		case umlPackage::EXTENSION_OPERATION_IS_BINARY_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->is_binary(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->is_binary(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		
-		// 2105308144
+		// uml::Extension::metaclassEnd() : uml::Property: 2105308144
 		case umlPackage::EXTENSION_OPERATION_METACLASSEND:
 		{
-			result = eAny(this->metaclassEnd());
+			result = eAny(this->metaclassEnd(), umlPackage::PROPERTY_CLASS,false);
 			break;
 		}
-		
-		// 1195964610
+		// uml::Extension::non_owned_end(Any, std::map) : bool: 1195964610
 		case umlPackage::EXTENSION_OPERATION_NON_OWNED_END_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->non_owned_end(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->non_owned_end(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
 
@@ -595,7 +586,6 @@ Any ExtensionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sha
 	return result;
 }
 
-
 std::shared_ptr<uml::Extension> ExtensionImpl::getThisExtensionPtr() const
 {
 	return m_thisExtensionPtr.lock();
@@ -605,3 +595,5 @@ void ExtensionImpl::setThisExtensionPtr(std::weak_ptr<uml::Extension> thisExtens
 	m_thisExtensionPtr = thisExtensionPtr;
 	setThisAssociationPtr(thisExtensionPtr);
 }
+
+

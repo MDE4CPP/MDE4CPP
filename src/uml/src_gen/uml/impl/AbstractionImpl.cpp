@@ -377,12 +377,10 @@ void AbstractionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> AbstractionImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getAbstraction_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -394,7 +392,7 @@ Any AbstractionImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::ABSTRACTION_ATTRIBUTE_MAPPING:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getMapping();
-			return eAny(returnValue); //117
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //117
 		}
 	}
 	return DependencyImpl::eGet(featureID, resolve, coreType);
@@ -430,7 +428,7 @@ bool AbstractionImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any AbstractionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any AbstractionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -450,7 +448,6 @@ Any AbstractionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::s
 	return result;
 }
 
-
 std::shared_ptr<uml::Abstraction> AbstractionImpl::getThisAbstractionPtr() const
 {
 	return m_thisAbstractionPtr.lock();
@@ -460,3 +457,5 @@ void AbstractionImpl::setThisAbstractionPtr(std::weak_ptr<uml::Abstraction> this
 	m_thisAbstractionPtr = thisAbstractionPtr;
 	setThisDependencyPtr(thisAbstractionPtr);
 }
+
+

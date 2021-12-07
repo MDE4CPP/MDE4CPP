@@ -282,12 +282,10 @@ void TypedElementImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> TypedElementImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getTypedElement_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -299,7 +297,7 @@ Any TypedElementImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::TYPEDELEMENT_ATTRIBUTE_TYPE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getType();
-			return eAny(returnValue); //2459
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //2459
 		}
 	}
 	return NamedElementImpl::eGet(featureID, resolve, coreType);
@@ -335,7 +333,7 @@ bool TypedElementImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any TypedElementImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any TypedElementImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -355,7 +353,6 @@ Any TypedElementImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::
 	return result;
 }
 
-
 std::shared_ptr<uml::TypedElement> TypedElementImpl::getThisTypedElementPtr() const
 {
 	return m_thisTypedElementPtr.lock();
@@ -365,3 +362,5 @@ void TypedElementImpl::setThisTypedElementPtr(std::weak_ptr<uml::TypedElement> t
 	m_thisTypedElementPtr = thisTypedElementPtr;
 	setThisNamedElementPtr(thisTypedElementPtr);
 }
+
+

@@ -460,12 +460,10 @@ void OperationCallExpImpl::saveContent(std::shared_ptr<persistence::interfaces::
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> OperationCallExpImpl::eStaticClass() const
 {
 	return ocl::Expressions::ExpressionsPackage::eInstance()->getOperationCallExp_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -489,7 +487,7 @@ Any OperationCallExpImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case ocl::Expressions::ExpressionsPackage::OPERATIONCALLEXP_ATTRIBUTE_REFERREDOPERATION:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getReferredOperation();
-			return eAny(returnValue); //6625
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //6625
 		}
 	}
 	return FeatureCallExpImpl::eGet(featureID, resolve, coreType);
@@ -563,7 +561,7 @@ bool OperationCallExpImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any OperationCallExpImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any OperationCallExpImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -583,7 +581,6 @@ Any OperationCallExpImpl::eInvoke(int operationID, std::shared_ptr<std::list < s
 	return result;
 }
 
-
 std::shared_ptr<ocl::Expressions::OperationCallExp> OperationCallExpImpl::getThisOperationCallExpPtr() const
 {
 	return m_thisOperationCallExpPtr.lock();
@@ -593,3 +590,5 @@ void OperationCallExpImpl::setThisOperationCallExpPtr(std::weak_ptr<ocl::Express
 	m_thisOperationCallExpPtr = thisOperationCallExpPtr;
 	setThisFeatureCallExpPtr(thisOperationCallExpPtr);
 }
+
+

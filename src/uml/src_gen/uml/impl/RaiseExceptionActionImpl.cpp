@@ -376,12 +376,10 @@ void RaiseExceptionActionImpl::saveContent(std::shared_ptr<persistence::interfac
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> RaiseExceptionActionImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getRaiseExceptionAction_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -393,7 +391,7 @@ Any RaiseExceptionActionImpl::eGet(int featureID, bool resolve, bool coreType) c
 		case uml::umlPackage::RAISEEXCEPTIONACTION_ATTRIBUTE_EXCEPTION:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getException();
-			return eAny(returnValue); //19227
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //19227
 		}
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
@@ -429,7 +427,7 @@ bool RaiseExceptionActionImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any RaiseExceptionActionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any RaiseExceptionActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -449,7 +447,6 @@ Any RaiseExceptionActionImpl::eInvoke(int operationID, std::shared_ptr<std::list
 	return result;
 }
 
-
 std::shared_ptr<uml::RaiseExceptionAction> RaiseExceptionActionImpl::getThisRaiseExceptionActionPtr() const
 {
 	return m_thisRaiseExceptionActionPtr.lock();
@@ -459,3 +456,5 @@ void RaiseExceptionActionImpl::setThisRaiseExceptionActionPtr(std::weak_ptr<uml:
 	m_thisRaiseExceptionActionPtr = thisRaiseExceptionActionPtr;
 	setThisActionPtr(thisRaiseExceptionActionPtr);
 }
+
+

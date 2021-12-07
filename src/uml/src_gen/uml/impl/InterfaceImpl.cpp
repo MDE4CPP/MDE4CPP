@@ -178,14 +178,10 @@ InterfaceImpl& InterfaceImpl::operator=(const InterfaceImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_nestedClassifier - Subset<uml::Classifier, uml::NamedElement >(getOwnedMember())" << std::endl;
 		#endif
 		
-
-		Bag<uml::Classifier>::iterator nestedClassifierIter = nestedClassifierList->begin();
-		Bag<uml::Classifier>::iterator nestedClassifierEnd = nestedClassifierList->end();
-		while (nestedClassifierIter != nestedClassifierEnd) 
+		for(const std::shared_ptr<uml::Classifier> nestedClassifierindexElem: *nestedClassifierList) 
 		{
-			std::shared_ptr<uml::Classifier> temp = std::dynamic_pointer_cast<uml::Classifier>((*nestedClassifierIter)->copy());
-			getNestedClassifier()->push_back(temp);
-			nestedClassifierIter++;
+			std::shared_ptr<uml::Classifier> temp = std::dynamic_pointer_cast<uml::Classifier>((nestedClassifierindexElem)->copy());
+			m_nestedClassifier->push_back(temp);
 		}
 	}
 	else
@@ -209,14 +205,10 @@ InterfaceImpl& InterfaceImpl::operator=(const InterfaceImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_ownedAttribute - Subset<uml::Property, uml::NamedElement, uml::Property >(getOwnedMember(), getAttribute())" << std::endl;
 		#endif
 		
-
-		Bag<uml::Property>::iterator ownedAttributeIter = ownedAttributeList->begin();
-		Bag<uml::Property>::iterator ownedAttributeEnd = ownedAttributeList->end();
-		while (ownedAttributeIter != ownedAttributeEnd) 
+		for(const std::shared_ptr<uml::Property> ownedAttributeindexElem: *ownedAttributeList) 
 		{
-			std::shared_ptr<uml::Property> temp = std::dynamic_pointer_cast<uml::Property>((*ownedAttributeIter)->copy());
-			getOwnedAttribute()->push_back(temp);
-			ownedAttributeIter++;
+			std::shared_ptr<uml::Property> temp = std::dynamic_pointer_cast<uml::Property>((ownedAttributeindexElem)->copy());
+			m_ownedAttribute->push_back(temp);
 		}
 	}
 	else
@@ -240,14 +232,10 @@ InterfaceImpl& InterfaceImpl::operator=(const InterfaceImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_ownedOperation - Subset<uml::Operation, uml::Feature, uml::NamedElement >(getFeature(), getOwnedMember())" << std::endl;
 		#endif
 		
-
-		Bag<uml::Operation>::iterator ownedOperationIter = ownedOperationList->begin();
-		Bag<uml::Operation>::iterator ownedOperationEnd = ownedOperationList->end();
-		while (ownedOperationIter != ownedOperationEnd) 
+		for(const std::shared_ptr<uml::Operation> ownedOperationindexElem: *ownedOperationList) 
 		{
-			std::shared_ptr<uml::Operation> temp = std::dynamic_pointer_cast<uml::Operation>((*ownedOperationIter)->copy());
-			getOwnedOperation()->push_back(temp);
-			ownedOperationIter++;
+			std::shared_ptr<uml::Operation> temp = std::dynamic_pointer_cast<uml::Operation>((ownedOperationindexElem)->copy());
+			m_ownedOperation->push_back(temp);
 		}
 	}
 	else
@@ -271,14 +259,10 @@ InterfaceImpl& InterfaceImpl::operator=(const InterfaceImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_ownedReception - Subset<uml::Reception, uml::Feature, uml::NamedElement >(getFeature(), getOwnedMember())" << std::endl;
 		#endif
 		
-
-		Bag<uml::Reception>::iterator ownedReceptionIter = ownedReceptionList->begin();
-		Bag<uml::Reception>::iterator ownedReceptionEnd = ownedReceptionList->end();
-		while (ownedReceptionIter != ownedReceptionEnd) 
+		for(const std::shared_ptr<uml::Reception> ownedReceptionindexElem: *ownedReceptionList) 
 		{
-			std::shared_ptr<uml::Reception> temp = std::dynamic_pointer_cast<uml::Reception>((*ownedReceptionIter)->copy());
-			getOwnedReception()->push_back(temp);
-			ownedReceptionIter++;
+			std::shared_ptr<uml::Reception> temp = std::dynamic_pointer_cast<uml::Reception>((ownedReceptionindexElem)->copy());
+			m_ownedReception->push_back(temp);
 		}
 	}
 	else
@@ -308,14 +292,10 @@ InterfaceImpl& InterfaceImpl::operator=(const InterfaceImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_redefinedInterface - Subset<uml::Interface, uml::Classifier /*Subset does not reference a union*/ >(getRedefinedClassifier())" << std::endl;
 		#endif
 		
-
-		Bag<uml::Interface>::iterator redefinedInterfaceIter = redefinedInterfaceList->begin();
-		Bag<uml::Interface>::iterator redefinedInterfaceEnd = redefinedInterfaceList->end();
-		while (redefinedInterfaceIter != redefinedInterfaceEnd) 
+		for(const std::shared_ptr<uml::Interface> redefinedInterfaceindexElem: *redefinedInterfaceList) 
 		{
-			std::shared_ptr<uml::Interface> temp = std::dynamic_pointer_cast<uml::Interface>((*redefinedInterfaceIter)->copy());
-			getRedefinedInterface()->push_back(temp);
-			redefinedInterfaceIter++;
+			std::shared_ptr<uml::Interface> temp = std::dynamic_pointer_cast<uml::Interface>((redefinedInterfaceindexElem)->copy());
+			m_redefinedInterface->push_back(temp);
 		}
 	}
 	else
@@ -864,12 +844,10 @@ void InterfaceImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHa
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> InterfaceImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getInterface_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -880,68 +858,28 @@ Any InterfaceImpl::eGet(int featureID, bool resolve, bool coreType) const
 	{
 		case uml::umlPackage::INTERFACE_ATTRIBUTE_NESTEDCLASSIFIER:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Classifier>::iterator iter = getNestedClassifier()->begin();
-			Bag<uml::Classifier>::iterator end = getNestedClassifier()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //12538			
+			return eAnyBag(getNestedClassifier(),845259359); //12538
 		}
 		case uml::umlPackage::INTERFACE_ATTRIBUTE_OWNEDATTRIBUTE:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Property>::iterator iter = getOwnedAttribute()->begin();
-			Bag<uml::Property>::iterator end = getOwnedAttribute()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //12539			
+			return eAnyBag(getOwnedAttribute(),1938835355); //12539
 		}
 		case uml::umlPackage::INTERFACE_ATTRIBUTE_OWNEDOPERATION:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Operation>::iterator iter = getOwnedOperation()->begin();
-			Bag<uml::Operation>::iterator end = getOwnedOperation()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //12543			
+			return eAnyBag(getOwnedOperation(),504486732); //12543
 		}
 		case uml::umlPackage::INTERFACE_ATTRIBUTE_OWNEDRECEPTION:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Reception>::iterator iter = getOwnedReception()->begin();
-			Bag<uml::Reception>::iterator end = getOwnedReception()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //12540			
+			return eAnyBag(getOwnedReception(),1360864860); //12540
 		}
 		case uml::umlPackage::INTERFACE_ATTRIBUTE_PROTOCOL:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getProtocol();
-			return eAny(returnValue); //12541
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //12541
 		}
 		case uml::umlPackage::INTERFACE_ATTRIBUTE_REDEFINEDINTERFACE:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Interface>::iterator iter = getRedefinedInterface()->begin();
-			Bag<uml::Interface>::iterator end = getRedefinedInterface()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //12542			
+			return eAnyBag(getRedefinedInterface(),578134333); //12542
 		}
 	}
 	return ClassifierImpl::eGet(featureID, resolve, coreType);
@@ -974,144 +912,148 @@ bool InterfaceImpl::eSet(int featureID, Any newValue)
 		case uml::umlPackage::INTERFACE_ATTRIBUTE_NESTEDCLASSIFIER:
 		{
 			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::Classifier>> nestedClassifierList(new Bag<uml::Classifier>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
+			if((newValue->isContainer()) && (uml::umlPackage::CLASSIFIER_CLASS ==newValue->getTypeId()))
 			{
-				nestedClassifierList->add(std::dynamic_pointer_cast<uml::Classifier>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::Classifier>::iterator iterNestedClassifier = getNestedClassifier()->begin();
-			Bag<uml::Classifier>::iterator endNestedClassifier = getNestedClassifier()->end();
-			while (iterNestedClassifier != endNestedClassifier)
-			{
-				if (nestedClassifierList->find(*iterNestedClassifier) == -1)
+				try
 				{
-					getNestedClassifier()->erase(*iterNestedClassifier);
+					std::shared_ptr<Bag<uml::Classifier>> nestedClassifierList= newValue->get<std::shared_ptr<Bag<uml::Classifier>>>();
+					std::shared_ptr<Bag<uml::Classifier>> _nestedClassifier=getNestedClassifier();
+					for(const std::shared_ptr<uml::Classifier> indexNestedClassifier: *_nestedClassifier)
+					{
+						if (nestedClassifierList->find(indexNestedClassifier) == -1)
+						{
+							_nestedClassifier->erase(indexNestedClassifier);
+						}
+					}
+
+					for(const std::shared_ptr<uml::Classifier> indexNestedClassifier: *nestedClassifierList)
+					{
+						if (_nestedClassifier->find(indexNestedClassifier) == -1)
+						{
+							_nestedClassifier->add(indexNestedClassifier);
+						}
+					}
 				}
-				iterNestedClassifier++;
-			}
- 
-			iterNestedClassifier = nestedClassifierList->begin();
-			endNestedClassifier = nestedClassifierList->end();
-			while (iterNestedClassifier != endNestedClassifier)
-			{
-				if (getNestedClassifier()->find(*iterNestedClassifier) == -1)
+				catch(...)
 				{
-					getNestedClassifier()->add(*iterNestedClassifier);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterNestedClassifier++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}
 		case uml::umlPackage::INTERFACE_ATTRIBUTE_OWNEDATTRIBUTE:
 		{
 			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::Property>> ownedAttributeList(new Bag<uml::Property>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
+			if((newValue->isContainer()) && (uml::umlPackage::PROPERTY_CLASS ==newValue->getTypeId()))
 			{
-				ownedAttributeList->add(std::dynamic_pointer_cast<uml::Property>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::Property>::iterator iterOwnedAttribute = getOwnedAttribute()->begin();
-			Bag<uml::Property>::iterator endOwnedAttribute = getOwnedAttribute()->end();
-			while (iterOwnedAttribute != endOwnedAttribute)
-			{
-				if (ownedAttributeList->find(*iterOwnedAttribute) == -1)
+				try
 				{
-					getOwnedAttribute()->erase(*iterOwnedAttribute);
+					std::shared_ptr<Bag<uml::Property>> ownedAttributeList= newValue->get<std::shared_ptr<Bag<uml::Property>>>();
+					std::shared_ptr<Bag<uml::Property>> _ownedAttribute=getOwnedAttribute();
+					for(const std::shared_ptr<uml::Property> indexOwnedAttribute: *_ownedAttribute)
+					{
+						if (ownedAttributeList->find(indexOwnedAttribute) == -1)
+						{
+							_ownedAttribute->erase(indexOwnedAttribute);
+						}
+					}
+
+					for(const std::shared_ptr<uml::Property> indexOwnedAttribute: *ownedAttributeList)
+					{
+						if (_ownedAttribute->find(indexOwnedAttribute) == -1)
+						{
+							_ownedAttribute->add(indexOwnedAttribute);
+						}
+					}
 				}
-				iterOwnedAttribute++;
-			}
- 
-			iterOwnedAttribute = ownedAttributeList->begin();
-			endOwnedAttribute = ownedAttributeList->end();
-			while (iterOwnedAttribute != endOwnedAttribute)
-			{
-				if (getOwnedAttribute()->find(*iterOwnedAttribute) == -1)
+				catch(...)
 				{
-					getOwnedAttribute()->add(*iterOwnedAttribute);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterOwnedAttribute++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}
 		case uml::umlPackage::INTERFACE_ATTRIBUTE_OWNEDOPERATION:
 		{
 			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::Operation>> ownedOperationList(new Bag<uml::Operation>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
+			if((newValue->isContainer()) && (uml::umlPackage::OPERATION_CLASS ==newValue->getTypeId()))
 			{
-				ownedOperationList->add(std::dynamic_pointer_cast<uml::Operation>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::Operation>::iterator iterOwnedOperation = getOwnedOperation()->begin();
-			Bag<uml::Operation>::iterator endOwnedOperation = getOwnedOperation()->end();
-			while (iterOwnedOperation != endOwnedOperation)
-			{
-				if (ownedOperationList->find(*iterOwnedOperation) == -1)
+				try
 				{
-					getOwnedOperation()->erase(*iterOwnedOperation);
+					std::shared_ptr<Bag<uml::Operation>> ownedOperationList= newValue->get<std::shared_ptr<Bag<uml::Operation>>>();
+					std::shared_ptr<Bag<uml::Operation>> _ownedOperation=getOwnedOperation();
+					for(const std::shared_ptr<uml::Operation> indexOwnedOperation: *_ownedOperation)
+					{
+						if (ownedOperationList->find(indexOwnedOperation) == -1)
+						{
+							_ownedOperation->erase(indexOwnedOperation);
+						}
+					}
+
+					for(const std::shared_ptr<uml::Operation> indexOwnedOperation: *ownedOperationList)
+					{
+						if (_ownedOperation->find(indexOwnedOperation) == -1)
+						{
+							_ownedOperation->add(indexOwnedOperation);
+						}
+					}
 				}
-				iterOwnedOperation++;
-			}
- 
-			iterOwnedOperation = ownedOperationList->begin();
-			endOwnedOperation = ownedOperationList->end();
-			while (iterOwnedOperation != endOwnedOperation)
-			{
-				if (getOwnedOperation()->find(*iterOwnedOperation) == -1)
+				catch(...)
 				{
-					getOwnedOperation()->add(*iterOwnedOperation);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterOwnedOperation++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}
 		case uml::umlPackage::INTERFACE_ATTRIBUTE_OWNEDRECEPTION:
 		{
 			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::Reception>> ownedReceptionList(new Bag<uml::Reception>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
+			if((newValue->isContainer()) && (uml::umlPackage::RECEPTION_CLASS ==newValue->getTypeId()))
 			{
-				ownedReceptionList->add(std::dynamic_pointer_cast<uml::Reception>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::Reception>::iterator iterOwnedReception = getOwnedReception()->begin();
-			Bag<uml::Reception>::iterator endOwnedReception = getOwnedReception()->end();
-			while (iterOwnedReception != endOwnedReception)
-			{
-				if (ownedReceptionList->find(*iterOwnedReception) == -1)
+				try
 				{
-					getOwnedReception()->erase(*iterOwnedReception);
+					std::shared_ptr<Bag<uml::Reception>> ownedReceptionList= newValue->get<std::shared_ptr<Bag<uml::Reception>>>();
+					std::shared_ptr<Bag<uml::Reception>> _ownedReception=getOwnedReception();
+					for(const std::shared_ptr<uml::Reception> indexOwnedReception: *_ownedReception)
+					{
+						if (ownedReceptionList->find(indexOwnedReception) == -1)
+						{
+							_ownedReception->erase(indexOwnedReception);
+						}
+					}
+
+					for(const std::shared_ptr<uml::Reception> indexOwnedReception: *ownedReceptionList)
+					{
+						if (_ownedReception->find(indexOwnedReception) == -1)
+						{
+							_ownedReception->add(indexOwnedReception);
+						}
+					}
 				}
-				iterOwnedReception++;
-			}
- 
-			iterOwnedReception = ownedReceptionList->begin();
-			endOwnedReception = ownedReceptionList->end();
-			while (iterOwnedReception != endOwnedReception)
-			{
-				if (getOwnedReception()->find(*iterOwnedReception) == -1)
+				catch(...)
 				{
-					getOwnedReception()->add(*iterOwnedReception);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterOwnedReception++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}
@@ -1126,36 +1068,37 @@ bool InterfaceImpl::eSet(int featureID, Any newValue)
 		case uml::umlPackage::INTERFACE_ATTRIBUTE_REDEFINEDINTERFACE:
 		{
 			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::Interface>> redefinedInterfaceList(new Bag<uml::Interface>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
+			if((newValue->isContainer()) && (uml::umlPackage::INTERFACE_CLASS ==newValue->getTypeId()))
 			{
-				redefinedInterfaceList->add(std::dynamic_pointer_cast<uml::Interface>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::Interface>::iterator iterRedefinedInterface = getRedefinedInterface()->begin();
-			Bag<uml::Interface>::iterator endRedefinedInterface = getRedefinedInterface()->end();
-			while (iterRedefinedInterface != endRedefinedInterface)
-			{
-				if (redefinedInterfaceList->find(*iterRedefinedInterface) == -1)
+				try
 				{
-					getRedefinedInterface()->erase(*iterRedefinedInterface);
+					std::shared_ptr<Bag<uml::Interface>> redefinedInterfaceList= newValue->get<std::shared_ptr<Bag<uml::Interface>>>();
+					std::shared_ptr<Bag<uml::Interface>> _redefinedInterface=getRedefinedInterface();
+					for(const std::shared_ptr<uml::Interface> indexRedefinedInterface: *_redefinedInterface)
+					{
+						if (redefinedInterfaceList->find(indexRedefinedInterface) == -1)
+						{
+							_redefinedInterface->erase(indexRedefinedInterface);
+						}
+					}
+
+					for(const std::shared_ptr<uml::Interface> indexRedefinedInterface: *redefinedInterfaceList)
+					{
+						if (_redefinedInterface->find(indexRedefinedInterface) == -1)
+						{
+							_redefinedInterface->add(indexRedefinedInterface);
+						}
+					}
 				}
-				iterRedefinedInterface++;
-			}
- 
-			iterRedefinedInterface = redefinedInterfaceList->begin();
-			endRedefinedInterface = redefinedInterfaceList->end();
-			while (iterRedefinedInterface != endRedefinedInterface)
-			{
-				if (getRedefinedInterface()->find(*iterRedefinedInterface) == -1)
+				catch(...)
 				{
-					getRedefinedInterface()->add(*iterRedefinedInterface);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterRedefinedInterface++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}
@@ -1167,81 +1110,78 @@ bool InterfaceImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any InterfaceImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any InterfaceImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
   	switch(operationID)
 	{
-		
-		// 1204717073
+		// uml::Interface::createOwnedAttribute(std::string, uml::Type, int, int) : uml::Property: 1204717073
 		case umlPackage::INTERFACE_OPERATION_CREATEOWNEDATTRIBUTE_STRING_UNLIMITEDNATURAL:
 		{
 			//Retrieve input parameter 'name'
 			//parameter 0
 			std::string incoming_param_name;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_name_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_name = (*incoming_param_name_arguments_citer)->get()->get<std::string >();
+			std::list<Any>::const_iterator incoming_param_name_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_name = (*incoming_param_name_arguments_citer)->get<std::string >();
 			//Retrieve input parameter 'type'
 			//parameter 1
 			std::shared_ptr<uml::Type> incoming_param_type;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_type_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_type = (*incoming_param_type_arguments_citer)->get()->get<std::shared_ptr<uml::Type> >();
+			std::list<Any>::const_iterator incoming_param_type_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_type = (*incoming_param_type_arguments_citer)->get<std::shared_ptr<uml::Type> >();
 			//Retrieve input parameter 'lower'
 			//parameter 2
 			int incoming_param_lower;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_lower_arguments_citer = std::next(arguments->begin(), 2);
-			incoming_param_lower = (*incoming_param_lower_arguments_citer)->get()->get<int >();
+			std::list<Any>::const_iterator incoming_param_lower_arguments_citer = std::next(arguments->begin(), 2);
+			incoming_param_lower = (*incoming_param_lower_arguments_citer)->get<int >();
 			//Retrieve input parameter 'upper'
 			//parameter 3
 			int incoming_param_upper;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_upper_arguments_citer = std::next(arguments->begin(), 3);
-			incoming_param_upper = (*incoming_param_upper_arguments_citer)->get()->get<int >();
-			result = eAny(this->createOwnedAttribute(incoming_param_name,incoming_param_type,incoming_param_lower,incoming_param_upper));
+			std::list<Any>::const_iterator incoming_param_upper_arguments_citer = std::next(arguments->begin(), 3);
+			incoming_param_upper = (*incoming_param_upper_arguments_citer)->get<int >();
+			result = eAny(this->createOwnedAttribute(incoming_param_name,incoming_param_type,incoming_param_lower,incoming_param_upper), umlPackage::PROPERTY_CLASS,false);
 			break;
 		}
-		
-		// 1014462260
+		// uml::Interface::createOwnedOperation(std::string, std::string[*], uml::Type[*], uml::Type) : uml::Operation: 1014462260
 		case umlPackage::INTERFACE_OPERATION_CREATEOWNEDOPERATION_STRING_TYPE:
 		{
 			//Retrieve input parameter 'name'
 			//parameter 0
 			std::string incoming_param_name;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_name_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_name = (*incoming_param_name_arguments_citer)->get()->get<std::string >();
+			std::list<Any>::const_iterator incoming_param_name_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_name = (*incoming_param_name_arguments_citer)->get<std::string >();
 			//Retrieve input parameter 'parameterNames'
 			//parameter 1
 			std::shared_ptr<Bag<std::string>> incoming_param_parameterNames;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_parameterNames_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_parameterNames = (*incoming_param_parameterNames_arguments_citer)->get()->get<std::shared_ptr<Bag<std::string>> >();
+			std::list<Any>::const_iterator incoming_param_parameterNames_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_parameterNames = (*incoming_param_parameterNames_arguments_citer)->get<std::shared_ptr<Bag<std::string>> >();
 			//Retrieve input parameter 'parameterTypes'
 			//parameter 2
 			std::shared_ptr<Bag<uml::Type>> incoming_param_parameterTypes;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_parameterTypes_arguments_citer = std::next(arguments->begin(), 2);
-			incoming_param_parameterTypes = (*incoming_param_parameterTypes_arguments_citer)->get()->get<std::shared_ptr<Bag<uml::Type>> >();
+			std::list<Any>::const_iterator incoming_param_parameterTypes_arguments_citer = std::next(arguments->begin(), 2);
+			incoming_param_parameterTypes = (*incoming_param_parameterTypes_arguments_citer)->get<std::shared_ptr<Bag<uml::Type>> >();
 			//Retrieve input parameter 'returnType'
 			//parameter 3
 			std::shared_ptr<uml::Type> incoming_param_returnType;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_returnType_arguments_citer = std::next(arguments->begin(), 3);
-			incoming_param_returnType = (*incoming_param_returnType_arguments_citer)->get()->get<std::shared_ptr<uml::Type> >();
-			result = eAny(this->createOwnedOperation(incoming_param_name,incoming_param_parameterNames,incoming_param_parameterTypes,incoming_param_returnType));
+			std::list<Any>::const_iterator incoming_param_returnType_arguments_citer = std::next(arguments->begin(), 3);
+			incoming_param_returnType = (*incoming_param_returnType_arguments_citer)->get<std::shared_ptr<uml::Type> >();
+			result = eAny(this->createOwnedOperation(incoming_param_name,incoming_param_parameterNames,incoming_param_parameterTypes,incoming_param_returnType), umlPackage::OPERATION_CLASS,false);
 			break;
 		}
-		
-		// 679404061
+		// uml::Interface::visibility(Any, std::map) : bool: 679404061
 		case umlPackage::INTERFACE_OPERATION_VISIBILITY_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->visibility(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->visibility(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
 
@@ -1258,7 +1198,6 @@ Any InterfaceImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sha
 	return result;
 }
 
-
 std::shared_ptr<uml::Interface> InterfaceImpl::getThisInterfacePtr() const
 {
 	return m_thisInterfacePtr.lock();
@@ -1268,3 +1207,5 @@ void InterfaceImpl::setThisInterfacePtr(std::weak_ptr<uml::Interface> thisInterf
 	m_thisInterfacePtr = thisInterfacePtr;
 	setThisClassifierPtr(thisInterfacePtr);
 }
+
+

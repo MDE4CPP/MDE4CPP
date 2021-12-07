@@ -448,12 +448,10 @@ void OclMessageValueImpl::saveContent(std::shared_ptr<persistence::interfaces::X
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> OclMessageValueImpl::eStaticClass() const
 {
 	return ocl::Values::ValuesPackage::eInstance()->getOclMessageValue_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -475,27 +473,27 @@ Any OclMessageValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 			return eAny(tempList); //647			
 		}
 		case ocl::Values::ValuesPackage::OCLMESSAGEVALUE_ATTRIBUTE_ISASYNCOPERATION:
-			return eAny(getIsAsyncOperation()); //642
+				return eAny(getIsAsyncOperation(),0,true); //642
 		case ocl::Values::ValuesPackage::OCLMESSAGEVALUE_ATTRIBUTE_ISSIGNAL:
-			return eAny(getIsSignal()); //643
+				return eAny(getIsSignal(),0,true); //643
 		case ocl::Values::ValuesPackage::OCLMESSAGEVALUE_ATTRIBUTE_ISSYNCOPERATION:
-			return eAny(getIsSyncOperation()); //641
+				return eAny(getIsSyncOperation(),0,true); //641
 		case ocl::Values::ValuesPackage::OCLMESSAGEVALUE_ATTRIBUTE_NAME:
-			return eAny(getName()); //640
+				return eAny(getName(),0,true); //640
 		case ocl::Values::ValuesPackage::OCLMESSAGEVALUE_ATTRIBUTE_RETURNMESSAGE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getReturnMessage();
-			return eAny(returnValue); //644
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //644
 		}
 		case ocl::Values::ValuesPackage::OCLMESSAGEVALUE_ATTRIBUTE_SOURCE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getSource();
-			return eAny(returnValue); //646
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //646
 		}
 		case ocl::Values::ValuesPackage::OCLMESSAGEVALUE_ATTRIBUTE_TARGET:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getTarget();
-			return eAny(returnValue); //645
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //645
 		}
 	}
 	return fUML::Semantics::Values::ValueImpl::eGet(featureID, resolve, coreType);
@@ -625,7 +623,7 @@ bool OclMessageValueImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any OclMessageValueImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any OclMessageValueImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -635,7 +633,7 @@ Any OclMessageValueImpl::eInvoke(int operationID, std::shared_ptr<std::list < st
 		// 1478167767
 		case ValuesPackage::OCLMESSAGEVALUE_OPERATION_TOSTRING:
 		{
-			result = eAny(this->toString());
+					result = eAny(this->toString(),0,false);
 			break;
 		}
 
@@ -652,7 +650,6 @@ Any OclMessageValueImpl::eInvoke(int operationID, std::shared_ptr<std::list < st
 	return result;
 }
 
-
 std::shared_ptr<ocl::Values::OclMessageValue> OclMessageValueImpl::getThisOclMessageValuePtr() const
 {
 	return m_thisOclMessageValuePtr.lock();
@@ -662,3 +659,5 @@ void OclMessageValueImpl::setThisOclMessageValuePtr(std::weak_ptr<ocl::Values::O
 	m_thisOclMessageValuePtr = thisOclMessageValuePtr;
 	setThisValuePtr(thisOclMessageValuePtr);
 }
+
+

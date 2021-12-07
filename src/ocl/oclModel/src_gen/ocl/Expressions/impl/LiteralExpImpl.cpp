@@ -336,12 +336,10 @@ void LiteralExpImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> LiteralExpImpl::eStaticClass() const
 {
 	return ocl::Expressions::ExpressionsPackage::eInstance()->getLiteralExp_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -374,7 +372,7 @@ bool LiteralExpImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any LiteralExpImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any LiteralExpImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -394,7 +392,6 @@ Any LiteralExpImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sh
 	return result;
 }
 
-
 std::shared_ptr<ocl::Expressions::LiteralExp> LiteralExpImpl::getThisLiteralExpPtr() const
 {
 	return m_thisLiteralExpPtr.lock();
@@ -404,3 +401,5 @@ void LiteralExpImpl::setThisLiteralExpPtr(std::weak_ptr<ocl::Expressions::Litera
 	m_thisLiteralExpPtr = thisLiteralExpPtr;
 	setThisOclExpressionPtr(thisLiteralExpPtr);
 }
+
+

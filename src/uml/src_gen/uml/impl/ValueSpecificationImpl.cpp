@@ -390,12 +390,10 @@ void ValueSpecificationImpl::saveContent(std::shared_ptr<persistence::interfaces
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> ValueSpecificationImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getValueSpecification_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -407,12 +405,12 @@ Any ValueSpecificationImpl::eGet(int featureID, bool resolve, bool coreType) con
 		case uml::umlPackage::VALUESPECIFICATION_ATTRIBUTE_OWNINGSLOT:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getOwningSlot().lock();
-			return eAny(returnValue); //25013
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //25013
 		}
 		case uml::umlPackage::VALUESPECIFICATION_ATTRIBUTE_VALUESPECIFICATIONACTION:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getValueSpecificationAction().lock();
-			return eAny(returnValue); //25014
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //25014
 		}
 	}
 	Any result;
@@ -479,59 +477,52 @@ bool ValueSpecificationImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ValueSpecificationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any ValueSpecificationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
   	switch(operationID)
 	{
-		
-		// 1922865696
+		// uml::ValueSpecification::booleanValue() : bool: 1922865696
 		case umlPackage::VALUESPECIFICATION_OPERATION_BOOLEANVALUE:
 		{
-			result = eAny(this->booleanValue());
+			result = eAny(this->booleanValue(),0,false);
 			break;
 		}
-		
-		// 1670693406
+		// uml::ValueSpecification::integerValue() : int: 1670693406
 		case umlPackage::VALUESPECIFICATION_OPERATION_INTEGERVALUE:
 		{
-			result = eAny(this->integerValue());
+			result = eAny(this->integerValue(),0,false);
 			break;
 		}
-		
-		// 1614461825
+		// uml::ValueSpecification::isComputable() : bool: 1614461825
 		case umlPackage::VALUESPECIFICATION_OPERATION_ISCOMPUTABLE:
 		{
-			result = eAny(this->isComputable());
+			result = eAny(this->isComputable(),0,false);
 			break;
 		}
-		
-		// 1604304741
+		// uml::ValueSpecification::isNull() : bool: 1604304741
 		case umlPackage::VALUESPECIFICATION_OPERATION_ISNULL:
 		{
-			result = eAny(this->isNull());
+			result = eAny(this->isNull(),0,false);
 			break;
 		}
-		
-		// 1827075769
+		// uml::ValueSpecification::realValue() : double: 1827075769
 		case umlPackage::VALUESPECIFICATION_OPERATION_REALVALUE:
 		{
-			result = eAny(this->realValue());
+			result = eAny(this->realValue(),0,false);
 			break;
 		}
-		
-		// 1605002008
+		// uml::ValueSpecification::stringValue() : std::string: 1605002008
 		case umlPackage::VALUESPECIFICATION_OPERATION_STRINGVALUE:
 		{
-			result = eAny(this->stringValue());
+			result = eAny(this->stringValue(),0,false);
 			break;
 		}
-		
-		// 1854981431
+		// uml::ValueSpecification::unlimitedValue() : int: 1854981431
 		case umlPackage::VALUESPECIFICATION_OPERATION_UNLIMITEDVALUE:
 		{
-			result = eAny(this->unlimitedValue());
+			result = eAny(this->unlimitedValue(),0,false);
 			break;
 		}
 
@@ -551,7 +542,6 @@ Any ValueSpecificationImpl::eInvoke(int operationID, std::shared_ptr<std::list <
 	return result;
 }
 
-
 std::shared_ptr<uml::ValueSpecification> ValueSpecificationImpl::getThisValueSpecificationPtr() const
 {
 	return m_thisValueSpecificationPtr.lock();
@@ -562,3 +552,5 @@ void ValueSpecificationImpl::setThisValueSpecificationPtr(std::weak_ptr<uml::Val
 	setThisPackageableElementPtr(thisValueSpecificationPtr);
 	setThisTypedElementPtr(thisValueSpecificationPtr);
 }
+
+

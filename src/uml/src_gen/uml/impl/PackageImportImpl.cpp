@@ -301,19 +301,19 @@ void PackageImportImpl::loadAttributes(std::shared_ptr<persistence::interfaces::
 		{
 			uml::VisibilityKind value = uml::VisibilityKind::PUBLIC;
 			std::string literal = iter->second;
-			if (literal == "public")
+						if (literal == "public")
 			{
 				value = uml::VisibilityKind::PUBLIC;
 			}
-			else if (literal == "private")
+			else 			if (literal == "private")
 			{
 				value = uml::VisibilityKind::PRIVATE;
 			}
-			else if (literal == "protected")
+			else 			if (literal == "protected")
 			{
 				value = uml::VisibilityKind::PROTECTED;
 			}
-			else if (literal == "package")
+			else 			if (literal == "package")
 			{
 				value = uml::VisibilityKind::PACKAGE;
 			}
@@ -429,12 +429,10 @@ void PackageImportImpl::saveContent(std::shared_ptr<persistence::interfaces::XSa
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> PackageImportImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getPackageImport_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -446,15 +444,15 @@ Any PackageImportImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::PACKAGEIMPORT_ATTRIBUTE_IMPORTEDPACKAGE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getImportedPackage();
-			return eAny(returnValue); //1716
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //1716
 		}
 		case uml::umlPackage::PACKAGEIMPORT_ATTRIBUTE_IMPORTINGNAMESPACE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getImportingNamespace().lock();
-			return eAny(returnValue); //1717
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //1717
 		}
 		case uml::umlPackage::PACKAGEIMPORT_ATTRIBUTE_VISIBILITY:
-			return eAny(getVisibility()); //1718
+			return eAny(getVisibility(),0,true); //1718
 	}
 	return DirectedRelationshipImpl::eGet(featureID, resolve, coreType);
 }
@@ -508,27 +506,26 @@ bool PackageImportImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any PackageImportImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any PackageImportImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
   	switch(operationID)
 	{
-		
-		// 216730500
+		// uml::PackageImport::public_or_private(Any, std::map) : bool: 216730500
 		case umlPackage::PACKAGEIMPORT_OPERATION_PUBLIC_OR_PRIVATE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->public_or_private(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->public_or_private(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
 
@@ -545,7 +542,6 @@ Any PackageImportImpl::eInvoke(int operationID, std::shared_ptr<std::list < std:
 	return result;
 }
 
-
 std::shared_ptr<uml::PackageImport> PackageImportImpl::getThisPackageImportPtr() const
 {
 	return m_thisPackageImportPtr.lock();
@@ -555,3 +551,5 @@ void PackageImportImpl::setThisPackageImportPtr(std::weak_ptr<uml::PackageImport
 	m_thisPackageImportPtr = thisPackageImportPtr;
 	setThisDirectedRelationshipPtr(thisPackageImportPtr);
 }
+
+

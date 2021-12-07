@@ -159,14 +159,10 @@ CallActionImpl& CallActionImpl::operator=(const CallActionImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_result - Subset<uml::OutputPin, uml::OutputPin >(getOutput())" << std::endl;
 		#endif
 		
-
-		Bag<uml::OutputPin>::iterator resultIter = resultList->begin();
-		Bag<uml::OutputPin>::iterator resultEnd = resultList->end();
-		while (resultIter != resultEnd) 
+		for(const std::shared_ptr<uml::OutputPin> resultindexElem: *resultList) 
 		{
-			std::shared_ptr<uml::OutputPin> temp = std::dynamic_pointer_cast<uml::OutputPin>((*resultIter)->copy());
-			getResult()->push_back(temp);
-			resultIter++;
+			std::shared_ptr<uml::OutputPin> temp = std::dynamic_pointer_cast<uml::OutputPin>((resultindexElem)->copy());
+			m_result->push_back(temp);
 		}
 	}
 	else
@@ -498,12 +494,10 @@ void CallActionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> CallActionImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getCallAction_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -513,18 +507,10 @@ Any CallActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::CALLACTION_ATTRIBUTE_ISSYNCHRONOUS:
-			return eAny(getIsSynchronous()); //2829
+			return eAny(getIsSynchronous(),0,true); //2829
 		case uml::umlPackage::CALLACTION_ATTRIBUTE_RESULT:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::OutputPin>::iterator iter = getResult()->begin();
-			Bag<uml::OutputPin>::iterator end = getResult()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //2830			
+			return eAnyBag(getResult(),681481770); //2830
 		}
 	}
 	return InvocationActionImpl::eGet(featureID, resolve, coreType);
@@ -556,36 +542,37 @@ bool CallActionImpl::eSet(int featureID, Any newValue)
 		case uml::umlPackage::CALLACTION_ATTRIBUTE_RESULT:
 		{
 			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::OutputPin>> resultList(new Bag<uml::OutputPin>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
+			if((newValue->isContainer()) && (uml::umlPackage::OUTPUTPIN_CLASS ==newValue->getTypeId()))
 			{
-				resultList->add(std::dynamic_pointer_cast<uml::OutputPin>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::OutputPin>::iterator iterResult = getResult()->begin();
-			Bag<uml::OutputPin>::iterator endResult = getResult()->end();
-			while (iterResult != endResult)
-			{
-				if (resultList->find(*iterResult) == -1)
+				try
 				{
-					getResult()->erase(*iterResult);
+					std::shared_ptr<Bag<uml::OutputPin>> resultList= newValue->get<std::shared_ptr<Bag<uml::OutputPin>>>();
+					std::shared_ptr<Bag<uml::OutputPin>> _result=getResult();
+					for(const std::shared_ptr<uml::OutputPin> indexResult: *_result)
+					{
+						if (resultList->find(indexResult) == -1)
+						{
+							_result->erase(indexResult);
+						}
+					}
+
+					for(const std::shared_ptr<uml::OutputPin> indexResult: *resultList)
+					{
+						if (_result->find(indexResult) == -1)
+						{
+							_result->add(indexResult);
+						}
+					}
 				}
-				iterResult++;
-			}
- 
-			iterResult = resultList->begin();
-			endResult = resultList->end();
-			while (iterResult != endResult)
-			{
-				if (getResult()->find(*iterResult) == -1)
+				catch(...)
 				{
-					getResult()->add(*iterResult);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterResult++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}
@@ -597,75 +584,72 @@ bool CallActionImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any CallActionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any CallActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
   	switch(operationID)
 	{
-		
-		// 1200715811
+		// uml::CallAction::argument_pins(Any, std::map) : bool: 1200715811
 		case umlPackage::CALLACTION_OPERATION_ARGUMENT_PINS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->argument_pins(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->argument_pins(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		
-		// 1722506140
+		// uml::CallAction::inputParameters() : uml::Parameter[*]: 1722506140
 		case umlPackage::CALLACTION_OPERATION_INPUTPARAMETERS:
 		{
-			result = eAny(this->inputParameters());
+			std::shared_ptr<Bag<uml::Parameter> > resultList = this->inputParameters();
+			return eAny(resultList,umlPackage::PARAMETER_CLASS,true);
 			break;
 		}
-		
-		// 138816985
+		// uml::CallAction::outputParameters() : uml::Parameter[*]: 138816985
 		case umlPackage::CALLACTION_OPERATION_OUTPUTPARAMETERS:
 		{
-			result = eAny(this->outputParameters());
+			std::shared_ptr<Bag<uml::Parameter> > resultList = this->outputParameters();
+			return eAny(resultList,umlPackage::PARAMETER_CLASS,true);
 			break;
 		}
-		
-		// 1421824785
+		// uml::CallAction::result_pins(Any, std::map) : bool: 1421824785
 		case umlPackage::CALLACTION_OPERATION_RESULT_PINS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->result_pins(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->result_pins(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		
-		// 1233077375
+		// uml::CallAction::synchronous_call(Any, std::map) : bool: 1233077375
 		case umlPackage::CALLACTION_OPERATION_SYNCHRONOUS_CALL_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->synchronous_call(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->synchronous_call(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
 
@@ -682,7 +666,6 @@ Any CallActionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sh
 	return result;
 }
 
-
 std::shared_ptr<uml::CallAction> CallActionImpl::getThisCallActionPtr() const
 {
 	return m_thisCallActionPtr.lock();
@@ -692,3 +675,5 @@ void CallActionImpl::setThisCallActionPtr(std::weak_ptr<uml::CallAction> thisCal
 	m_thisCallActionPtr = thisCallActionPtr;
 	setThisInvocationActionPtr(thisCallActionPtr);
 }
+
+

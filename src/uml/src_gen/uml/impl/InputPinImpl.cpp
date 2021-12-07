@@ -608,12 +608,10 @@ void InputPinImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> InputPinImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getInputPin_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -625,42 +623,42 @@ Any InputPinImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::INPUTPIN_ATTRIBUTE_ACTION:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getAction().lock();
-			return eAny(returnValue); //11636
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //11636
 		}
 		case uml::umlPackage::INPUTPIN_ATTRIBUTE_ADDSTRUCTURALFEATUREVALUEACTION:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getAddStructuralFeatureValueAction().lock();
-			return eAny(returnValue); //11638
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //11638
 		}
 		case uml::umlPackage::INPUTPIN_ATTRIBUTE_CALLOPERATIONACTION:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getCallOperationAction().lock();
-			return eAny(returnValue); //11634
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //11634
 		}
 		case uml::umlPackage::INPUTPIN_ATTRIBUTE_DESTROYOBJECTACTION:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getDestroyObjectAction().lock();
-			return eAny(returnValue); //11639
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //11639
 		}
 		case uml::umlPackage::INPUTPIN_ATTRIBUTE_INVOCATIONACTION:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getInvocationAction().lock();
-			return eAny(returnValue); //11635
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //11635
 		}
 		case uml::umlPackage::INPUTPIN_ATTRIBUTE_REMOVESTRUCTURALFEATUREVALUEACTION:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getRemoveStructuralFeatureValueAction().lock();
-			return eAny(returnValue); //11640
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //11640
 		}
 		case uml::umlPackage::INPUTPIN_ATTRIBUTE_STRUCTURALFEATUREACTION:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getStructuralFeatureAction().lock();
-			return eAny(returnValue); //11633
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //11633
 		}
 		case uml::umlPackage::INPUTPIN_ATTRIBUTE_WRITESTRUCTURALFEATUREACTION:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getWriteStructuralFeatureAction().lock();
-			return eAny(returnValue); //11637
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //11637
 		}
 	}
 	return PinImpl::eGet(featureID, resolve, coreType);
@@ -758,27 +756,26 @@ bool InputPinImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any InputPinImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any InputPinImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
   	switch(operationID)
 	{
-		
-		// 2026004074
+		// uml::InputPin::outgoing_edges_structured_only(Any, std::map) : bool: 2026004074
 		case umlPackage::INPUTPIN_OPERATION_OUTGOING_EDGES_STRUCTURED_ONLY_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->outgoing_edges_structured_only(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->outgoing_edges_structured_only(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
 
@@ -795,7 +792,6 @@ Any InputPinImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shar
 	return result;
 }
 
-
 std::shared_ptr<uml::InputPin> InputPinImpl::getThisInputPinPtr() const
 {
 	return m_thisInputPinPtr.lock();
@@ -805,3 +801,5 @@ void InputPinImpl::setThisInputPinPtr(std::weak_ptr<uml::InputPin> thisInputPinP
 	m_thisInputPinPtr = thisInputPinPtr;
 	setThisPinPtr(thisInputPinPtr);
 }
+
+

@@ -42,8 +42,8 @@
 //Factories an Package includes
 #include "ocl/oclPackage.hpp"
 #include "ocl/Evaluations/EvaluationsPackage.hpp"
-#include "ocl/Values/ValuesPackage.hpp"
 #include "fUML/Semantics/Values/ValuesPackage.hpp"
+#include "ocl/Values/ValuesPackage.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -299,12 +299,10 @@ void EvalEnvironmentImpl::saveContent(std::shared_ptr<persistence::interfaces::X
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> EvalEnvironmentImpl::eStaticClass() const
 {
 	return ocl::Evaluations::EvaluationsPackage::eInstance()->getEvalEnvironment_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -387,7 +385,7 @@ bool EvalEnvironmentImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any EvalEnvironmentImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any EvalEnvironmentImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -400,8 +398,8 @@ Any EvalEnvironmentImpl::eInvoke(int operationID, std::shared_ptr<std::list < st
 			//Retrieve input parameter 'n'
 			//parameter 0
 			std::shared_ptr<ocl::Values::NameValueBinding> incoming_param_n;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_n_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_n = (*incoming_param_n_arguments_citer)->get()->get<std::shared_ptr<ocl::Values::NameValueBinding> >();
+			std::list<Any>::const_iterator incoming_param_n_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_n = (*incoming_param_n_arguments_citer)->get<std::shared_ptr<ocl::Values::NameValueBinding> >();
 			this->add(incoming_param_n);
 			break;
 		}
@@ -412,8 +410,8 @@ Any EvalEnvironmentImpl::eInvoke(int operationID, std::shared_ptr<std::list < st
 			//Retrieve input parameter 'nvbs'
 			//parameter 0
 			std::shared_ptr<Bag<ocl::Values::NameValueBinding>> incoming_param_nvbs;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_nvbs_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_nvbs = (*incoming_param_nvbs_arguments_citer)->get()->get<std::shared_ptr<Bag<ocl::Values::NameValueBinding>> >();
+			std::list<Any>::const_iterator incoming_param_nvbs_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_nvbs = (*incoming_param_nvbs_arguments_citer)->get<std::shared_ptr<Bag<ocl::Values::NameValueBinding>> >();
 			this->addAll(incoming_param_nvbs);
 			break;
 		}
@@ -424,9 +422,9 @@ Any EvalEnvironmentImpl::eInvoke(int operationID, std::shared_ptr<std::list < st
 			//Retrieve input parameter 'name'
 			//parameter 0
 			std::string incoming_param_name;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_name_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_name = (*incoming_param_name_arguments_citer)->get()->get<std::string >();
-			result = eAny(this->find(incoming_param_name));
+			std::list<Any>::const_iterator incoming_param_name_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_name = (*incoming_param_name_arguments_citer)->get<std::string >();
+				result = eAny(this->find(incoming_param_name));
 			break;
 		}
 		
@@ -436,9 +434,9 @@ Any EvalEnvironmentImpl::eInvoke(int operationID, std::shared_ptr<std::list < st
 			//Retrieve input parameter 'n'
 			//parameter 0
 			std::string incoming_param_n;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_n_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_n = (*incoming_param_n_arguments_citer)->get()->get<std::string >();
-			result = eAny(this->getValueOf(incoming_param_n));
+			std::list<Any>::const_iterator incoming_param_n_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_n = (*incoming_param_n_arguments_citer)->get<std::string >();
+				result = eAny(this->getValueOf(incoming_param_n));
 			break;
 		}
 		
@@ -448,8 +446,8 @@ Any EvalEnvironmentImpl::eInvoke(int operationID, std::shared_ptr<std::list < st
 			//Retrieve input parameter 'n'
 			//parameter 0
 			std::shared_ptr<ocl::Values::NameValueBinding> incoming_param_n;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_n_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_n = (*incoming_param_n_arguments_citer)->get()->get<std::shared_ptr<ocl::Values::NameValueBinding> >();
+			std::list<Any>::const_iterator incoming_param_n_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_n = (*incoming_param_n_arguments_citer)->get<std::shared_ptr<ocl::Values::NameValueBinding> >();
 			this->replace(incoming_param_n);
 			break;
 		}
@@ -467,7 +465,6 @@ Any EvalEnvironmentImpl::eInvoke(int operationID, std::shared_ptr<std::list < st
 	return result;
 }
 
-
 std::shared_ptr<ocl::Evaluations::EvalEnvironment> EvalEnvironmentImpl::getThisEvalEnvironmentPtr() const
 {
 	return m_thisEvalEnvironmentPtr.lock();
@@ -476,3 +473,5 @@ void EvalEnvironmentImpl::setThisEvalEnvironmentPtr(std::weak_ptr<ocl::Evaluatio
 {
 	m_thisEvalEnvironmentPtr = thisEvalEnvironmentPtr;
 }
+
+

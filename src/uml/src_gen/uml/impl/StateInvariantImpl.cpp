@@ -317,12 +317,10 @@ void StateInvariantImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> StateInvariantImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getStateInvariant_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -334,7 +332,7 @@ Any StateInvariantImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::STATEINVARIANT_ATTRIBUTE_INVARIANT:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getInvariant();
-			return eAny(returnValue); //22113
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //22113
 		}
 	}
 	return InteractionFragmentImpl::eGet(featureID, resolve, coreType);
@@ -370,7 +368,7 @@ bool StateInvariantImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any StateInvariantImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any StateInvariantImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -390,7 +388,6 @@ Any StateInvariantImpl::eInvoke(int operationID, std::shared_ptr<std::list < std
 	return result;
 }
 
-
 std::shared_ptr<uml::StateInvariant> StateInvariantImpl::getThisStateInvariantPtr() const
 {
 	return m_thisStateInvariantPtr.lock();
@@ -400,3 +397,5 @@ void StateInvariantImpl::setThisStateInvariantPtr(std::weak_ptr<uml::StateInvari
 	m_thisStateInvariantPtr = thisStateInvariantPtr;
 	setThisInteractionFragmentPtr(thisStateInvariantPtr);
 }
+
+

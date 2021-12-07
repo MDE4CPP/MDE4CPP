@@ -337,12 +337,10 @@ void ConsiderIgnoreFragmentImpl::saveContent(std::shared_ptr<persistence::interf
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> ConsiderIgnoreFragmentImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getConsiderIgnoreFragment_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -353,15 +351,7 @@ Any ConsiderIgnoreFragmentImpl::eGet(int featureID, bool resolve, bool coreType)
 	{
 		case uml::umlPackage::CONSIDERIGNOREFRAGMENT_ATTRIBUTE_MESSAGE:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::NamedElement>::iterator iter = getMessage()->begin();
-			Bag<uml::NamedElement>::iterator end = getMessage()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //5616			
+			return eAnyBag(getMessage(),591414745); //5616
 		}
 	}
 	return CombinedFragmentImpl::eGet(featureID, resolve, coreType);
@@ -384,36 +374,37 @@ bool ConsiderIgnoreFragmentImpl::eSet(int featureID, Any newValue)
 		case uml::umlPackage::CONSIDERIGNOREFRAGMENT_ATTRIBUTE_MESSAGE:
 		{
 			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::NamedElement>> messageList(new Bag<uml::NamedElement>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
+			if((newValue->isContainer()) && (uml::umlPackage::NAMEDELEMENT_CLASS ==newValue->getTypeId()))
 			{
-				messageList->add(std::dynamic_pointer_cast<uml::NamedElement>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::NamedElement>::iterator iterMessage = getMessage()->begin();
-			Bag<uml::NamedElement>::iterator endMessage = getMessage()->end();
-			while (iterMessage != endMessage)
-			{
-				if (messageList->find(*iterMessage) == -1)
+				try
 				{
-					getMessage()->erase(*iterMessage);
+					std::shared_ptr<Bag<uml::NamedElement>> messageList= newValue->get<std::shared_ptr<Bag<uml::NamedElement>>>();
+					std::shared_ptr<Bag<uml::NamedElement>> _message=getMessage();
+					for(const std::shared_ptr<uml::NamedElement> indexMessage: *_message)
+					{
+						if (messageList->find(indexMessage) == -1)
+						{
+							_message->erase(indexMessage);
+						}
+					}
+
+					for(const std::shared_ptr<uml::NamedElement> indexMessage: *messageList)
+					{
+						if (_message->find(indexMessage) == -1)
+						{
+							_message->add(indexMessage);
+						}
+					}
 				}
-				iterMessage++;
-			}
- 
-			iterMessage = messageList->begin();
-			endMessage = messageList->end();
-			while (iterMessage != endMessage)
-			{
-				if (getMessage()->find(*iterMessage) == -1)
+				catch(...)
 				{
-					getMessage()->add(*iterMessage);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterMessage++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}
@@ -425,44 +416,42 @@ bool ConsiderIgnoreFragmentImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ConsiderIgnoreFragmentImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any ConsiderIgnoreFragmentImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
   	switch(operationID)
 	{
-		
-		// 849186850
+		// uml::ConsiderIgnoreFragment::consider_or_ignore(Any, std::map) : bool: 849186850
 		case umlPackage::CONSIDERIGNOREFRAGMENT_OPERATION_CONSIDER_OR_IGNORE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->consider_or_ignore(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->consider_or_ignore(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		
-		// 859253303
+		// uml::ConsiderIgnoreFragment::type(Any, std::map) : bool: 859253303
 		case umlPackage::CONSIDERIGNOREFRAGMENT_OPERATION_TYPE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->type(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->type(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
 
@@ -479,7 +468,6 @@ Any ConsiderIgnoreFragmentImpl::eInvoke(int operationID, std::shared_ptr<std::li
 	return result;
 }
 
-
 std::shared_ptr<uml::ConsiderIgnoreFragment> ConsiderIgnoreFragmentImpl::getThisConsiderIgnoreFragmentPtr() const
 {
 	return m_thisConsiderIgnoreFragmentPtr.lock();
@@ -489,3 +477,5 @@ void ConsiderIgnoreFragmentImpl::setThisConsiderIgnoreFragmentPtr(std::weak_ptr<
 	m_thisConsiderIgnoreFragmentPtr = thisConsiderIgnoreFragmentPtr;
 	setThisCombinedFragmentPtr(thisConsiderIgnoreFragmentPtr);
 }
+
+

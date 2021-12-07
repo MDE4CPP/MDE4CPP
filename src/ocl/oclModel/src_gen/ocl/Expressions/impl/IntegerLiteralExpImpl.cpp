@@ -321,7 +321,7 @@ void IntegerLiteralExpImpl::loadAttributes(std::shared_ptr<persistence::interfac
 		{
 			// this attribute is a 'int'
 			int value;
-			std::istringstream ( iter->second ) >> value;
+			std::istringstream(iter->second) >> value;
 			this->setIntegerSymbol(value);
 		}
 	}
@@ -387,12 +387,10 @@ void IntegerLiteralExpImpl::saveContent(std::shared_ptr<persistence::interfaces:
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> IntegerLiteralExpImpl::eStaticClass() const
 {
 	return ocl::Expressions::ExpressionsPackage::eInstance()->getIntegerLiteralExp_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -402,7 +400,7 @@ Any IntegerLiteralExpImpl::eGet(int featureID, bool resolve, bool coreType) cons
 	switch(featureID)
 	{
 		case ocl::Expressions::ExpressionsPackage::INTEGERLITERALEXP_ATTRIBUTE_INTEGERSYMBOL:
-			return eAny(getIntegerSymbol()); //3423
+				return eAny(getIntegerSymbol(),0,true); //3423
 	}
 	return NumericLiteralExpImpl::eGet(featureID, resolve, coreType);
 }
@@ -436,7 +434,7 @@ bool IntegerLiteralExpImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any IntegerLiteralExpImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any IntegerLiteralExpImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -456,7 +454,6 @@ Any IntegerLiteralExpImpl::eInvoke(int operationID, std::shared_ptr<std::list < 
 	return result;
 }
 
-
 std::shared_ptr<ocl::Expressions::IntegerLiteralExp> IntegerLiteralExpImpl::getThisIntegerLiteralExpPtr() const
 {
 	return m_thisIntegerLiteralExpPtr.lock();
@@ -466,3 +463,5 @@ void IntegerLiteralExpImpl::setThisIntegerLiteralExpPtr(std::weak_ptr<ocl::Expre
 	m_thisIntegerLiteralExpPtr = thisIntegerLiteralExpPtr;
 	setThisNumericLiteralExpPtr(thisIntegerLiteralExpPtr);
 }
+
+

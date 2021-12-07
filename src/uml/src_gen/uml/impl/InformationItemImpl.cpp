@@ -450,12 +450,10 @@ void InformationItemImpl::saveContent(std::shared_ptr<persistence::interfaces::X
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> InformationItemImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getInformationItem_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -466,15 +464,7 @@ Any InformationItemImpl::eGet(int featureID, bool resolve, bool coreType) const
 	{
 		case uml::umlPackage::INFORMATIONITEM_ATTRIBUTE_REPRESENTED:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Classifier>::iterator iter = getRepresented()->begin();
-			Bag<uml::Classifier>::iterator end = getRepresented()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //11438			
+			return eAnyBag(getRepresented(),845259359); //11438
 		}
 	}
 	return ClassifierImpl::eGet(featureID, resolve, coreType);
@@ -497,36 +487,37 @@ bool InformationItemImpl::eSet(int featureID, Any newValue)
 		case uml::umlPackage::INFORMATIONITEM_ATTRIBUTE_REPRESENTED:
 		{
 			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::Classifier>> representedList(new Bag<uml::Classifier>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
+			if((newValue->isContainer()) && (uml::umlPackage::CLASSIFIER_CLASS ==newValue->getTypeId()))
 			{
-				representedList->add(std::dynamic_pointer_cast<uml::Classifier>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::Classifier>::iterator iterRepresented = getRepresented()->begin();
-			Bag<uml::Classifier>::iterator endRepresented = getRepresented()->end();
-			while (iterRepresented != endRepresented)
-			{
-				if (representedList->find(*iterRepresented) == -1)
+				try
 				{
-					getRepresented()->erase(*iterRepresented);
+					std::shared_ptr<Bag<uml::Classifier>> representedList= newValue->get<std::shared_ptr<Bag<uml::Classifier>>>();
+					std::shared_ptr<Bag<uml::Classifier>> _represented=getRepresented();
+					for(const std::shared_ptr<uml::Classifier> indexRepresented: *_represented)
+					{
+						if (representedList->find(indexRepresented) == -1)
+						{
+							_represented->erase(indexRepresented);
+						}
+					}
+
+					for(const std::shared_ptr<uml::Classifier> indexRepresented: *representedList)
+					{
+						if (_represented->find(indexRepresented) == -1)
+						{
+							_represented->add(indexRepresented);
+						}
+					}
 				}
-				iterRepresented++;
-			}
- 
-			iterRepresented = representedList->begin();
-			endRepresented = representedList->end();
-			while (iterRepresented != endRepresented)
-			{
-				if (getRepresented()->find(*iterRepresented) == -1)
+				catch(...)
 				{
-					getRepresented()->add(*iterRepresented);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterRepresented++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}
@@ -538,61 +529,58 @@ bool InformationItemImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any InformationItemImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any InformationItemImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
   	switch(operationID)
 	{
-		
-		// 1598598328
+		// uml::InformationItem::has_no(Any, std::map) : bool: 1598598328
 		case umlPackage::INFORMATIONITEM_OPERATION_HAS_NO_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->has_no(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->has_no(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		
-		// 2094046008
+		// uml::InformationItem::not_instantiable(Any, std::map) : bool: 2094046008
 		case umlPackage::INFORMATIONITEM_OPERATION_NOT_INSTANTIABLE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->not_instantiable(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->not_instantiable(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		
-		// 41648181
+		// uml::InformationItem::sources_and_targets(Any, std::map) : bool: 41648181
 		case umlPackage::INFORMATIONITEM_OPERATION_SOURCES_AND_TARGETS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->sources_and_targets(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->sources_and_targets(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
 
@@ -609,7 +597,6 @@ Any InformationItemImpl::eInvoke(int operationID, std::shared_ptr<std::list < st
 	return result;
 }
 
-
 std::shared_ptr<uml::InformationItem> InformationItemImpl::getThisInformationItemPtr() const
 {
 	return m_thisInformationItemPtr.lock();
@@ -619,3 +606,5 @@ void InformationItemImpl::setThisInformationItemPtr(std::weak_ptr<uml::Informati
 	m_thisInformationItemPtr = thisInformationItemPtr;
 	setThisClassifierPtr(thisInformationItemPtr);
 }
+
+

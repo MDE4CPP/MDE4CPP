@@ -382,12 +382,10 @@ void CallExpImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHand
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> CallExpImpl::eStaticClass() const
 {
 	return ocl::Expressions::ExpressionsPackage::eInstance()->getCallExp_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -399,7 +397,7 @@ Any CallExpImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case ocl::Expressions::ExpressionsPackage::CALLEXP_ATTRIBUTE_SOURCE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getSource();
-			return eAny(returnValue); //1122
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //1122
 		}
 	}
 	return OclExpressionImpl::eGet(featureID, resolve, coreType);
@@ -435,7 +433,7 @@ bool CallExpImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any CallExpImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any CallExpImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -455,7 +453,6 @@ Any CallExpImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::share
 	return result;
 }
 
-
 std::shared_ptr<ocl::Expressions::CallExp> CallExpImpl::getThisCallExpPtr() const
 {
 	return m_thisCallExpPtr.lock();
@@ -465,3 +462,5 @@ void CallExpImpl::setThisCallExpPtr(std::weak_ptr<ocl::Expressions::CallExp> thi
 	m_thisCallExpPtr = thisCallExpPtr;
 	setThisOclExpressionPtr(thisCallExpPtr);
 }
+
+

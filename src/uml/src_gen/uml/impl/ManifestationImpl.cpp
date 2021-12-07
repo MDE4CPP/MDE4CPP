@@ -387,12 +387,10 @@ void ManifestationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSa
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> ManifestationImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getManifestation_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -404,7 +402,7 @@ Any ManifestationImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::MANIFESTATION_ATTRIBUTE_UTILIZEDELEMENT:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getUtilizedElement();
-			return eAny(returnValue); //14518
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //14518
 		}
 	}
 	return AbstractionImpl::eGet(featureID, resolve, coreType);
@@ -440,7 +438,7 @@ bool ManifestationImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ManifestationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any ManifestationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -460,7 +458,6 @@ Any ManifestationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std:
 	return result;
 }
 
-
 std::shared_ptr<uml::Manifestation> ManifestationImpl::getThisManifestationPtr() const
 {
 	return m_thisManifestationPtr.lock();
@@ -470,3 +467,5 @@ void ManifestationImpl::setThisManifestationPtr(std::weak_ptr<uml::Manifestation
 	m_thisManifestationPtr = thisManifestationPtr;
 	setThisAbstractionPtr(thisManifestationPtr);
 }
+
+

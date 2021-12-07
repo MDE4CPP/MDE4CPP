@@ -278,12 +278,10 @@ void CollectionRangeImpl::saveContent(std::shared_ptr<persistence::interfaces::X
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> CollectionRangeImpl::eStaticClass() const
 {
 	return ocl::Expressions::ExpressionsPackage::eInstance()->getCollectionRange_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -295,12 +293,12 @@ Any CollectionRangeImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case ocl::Expressions::ExpressionsPackage::COLLECTIONRANGE_ATTRIBUTE_FIRST:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getFirst();
-			return eAny(returnValue); //1910
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //1910
 		}
 		case ocl::Expressions::ExpressionsPackage::COLLECTIONRANGE_ATTRIBUTE_LAST:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getLast();
-			return eAny(returnValue); //1911
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //1911
 		}
 	}
 	return CollectionLiteralPartImpl::eGet(featureID, resolve, coreType);
@@ -346,7 +344,7 @@ bool CollectionRangeImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any CollectionRangeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any CollectionRangeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -366,7 +364,6 @@ Any CollectionRangeImpl::eInvoke(int operationID, std::shared_ptr<std::list < st
 	return result;
 }
 
-
 std::shared_ptr<ocl::Expressions::CollectionRange> CollectionRangeImpl::getThisCollectionRangePtr() const
 {
 	return m_thisCollectionRangePtr.lock();
@@ -376,3 +373,5 @@ void CollectionRangeImpl::setThisCollectionRangePtr(std::weak_ptr<ocl::Expressio
 	m_thisCollectionRangePtr = thisCollectionRangePtr;
 	setThisCollectionLiteralPartPtr(thisCollectionRangePtr);
 }
+
+

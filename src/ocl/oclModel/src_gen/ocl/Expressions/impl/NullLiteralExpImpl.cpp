@@ -348,12 +348,10 @@ void NullLiteralExpImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> NullLiteralExpImpl::eStaticClass() const
 {
 	return ocl::Expressions::ExpressionsPackage::eInstance()->getNullLiteralExp_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -386,7 +384,7 @@ bool NullLiteralExpImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any NullLiteralExpImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any NullLiteralExpImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -406,7 +404,6 @@ Any NullLiteralExpImpl::eInvoke(int operationID, std::shared_ptr<std::list < std
 	return result;
 }
 
-
 std::shared_ptr<ocl::Expressions::NullLiteralExp> NullLiteralExpImpl::getThisNullLiteralExpPtr() const
 {
 	return m_thisNullLiteralExpPtr.lock();
@@ -416,3 +413,5 @@ void NullLiteralExpImpl::setThisNullLiteralExpPtr(std::weak_ptr<ocl::Expressions
 	m_thisNullLiteralExpPtr = thisNullLiteralExpPtr;
 	setThisPrimitiveLiteralExpPtr(thisNullLiteralExpPtr);
 }
+
+

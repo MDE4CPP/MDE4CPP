@@ -243,12 +243,10 @@ void CollectionItemImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> CollectionItemImpl::eStaticClass() const
 {
 	return ocl::Expressions::ExpressionsPackage::eInstance()->getCollectionItem_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -260,7 +258,7 @@ Any CollectionItemImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case ocl::Expressions::ExpressionsPackage::COLLECTIONITEM_ATTRIBUTE_ITEM:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getItem();
-			return eAny(returnValue); //1210
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //1210
 		}
 	}
 	return CollectionLiteralPartImpl::eGet(featureID, resolve, coreType);
@@ -296,7 +294,7 @@ bool CollectionItemImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any CollectionItemImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any CollectionItemImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -316,7 +314,6 @@ Any CollectionItemImpl::eInvoke(int operationID, std::shared_ptr<std::list < std
 	return result;
 }
 
-
 std::shared_ptr<ocl::Expressions::CollectionItem> CollectionItemImpl::getThisCollectionItemPtr() const
 {
 	return m_thisCollectionItemPtr.lock();
@@ -326,3 +323,5 @@ void CollectionItemImpl::setThisCollectionItemPtr(std::weak_ptr<ocl::Expressions
 	m_thisCollectionItemPtr = thisCollectionItemPtr;
 	setThisCollectionLiteralPartPtr(thisCollectionItemPtr);
 }
+
+

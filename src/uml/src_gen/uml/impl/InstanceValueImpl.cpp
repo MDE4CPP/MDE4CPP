@@ -352,12 +352,10 @@ void InstanceValueImpl::saveContent(std::shared_ptr<persistence::interfaces::XSa
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> InstanceValueImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getInstanceValue_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -369,7 +367,7 @@ Any InstanceValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::INSTANCEVALUE_ATTRIBUTE_INSTANCE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getInstance();
-			return eAny(returnValue); //11815
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //11815
 		}
 	}
 	return ValueSpecificationImpl::eGet(featureID, resolve, coreType);
@@ -405,7 +403,7 @@ bool InstanceValueImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any InstanceValueImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any InstanceValueImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -425,7 +423,6 @@ Any InstanceValueImpl::eInvoke(int operationID, std::shared_ptr<std::list < std:
 	return result;
 }
 
-
 std::shared_ptr<uml::InstanceValue> InstanceValueImpl::getThisInstanceValuePtr() const
 {
 	return m_thisInstanceValuePtr.lock();
@@ -435,3 +432,5 @@ void InstanceValueImpl::setThisInstanceValuePtr(std::weak_ptr<uml::InstanceValue
 	m_thisInstanceValuePtr = thisInstanceValuePtr;
 	setThisValueSpecificationPtr(thisInstanceValuePtr);
 }
+
+

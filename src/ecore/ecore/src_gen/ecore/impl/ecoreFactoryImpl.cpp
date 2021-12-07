@@ -396,30 +396,8 @@ std::shared_ptr<EObject> ecoreFactoryImpl::create(const int metaElementID, std::
 		}
 		case ecorePackage::EOBJECTCONTAINER_CLASS:
 		{
-			if (nullptr == container)
-			{
 				return this->createEObjectContainer(metaElementID);
-			}
-			else
-			{
-				switch(referenceID)
-				{
-					//EObjectContainer has contents as a containment
-					case  ecore::ecorePackage::EANNOTATION_ATTRIBUTE_CONTENTS:	
-					{
-						std::shared_ptr<EAnnotation> castedContainer = std::dynamic_pointer_cast<EAnnotation> (container);;
-						return this->createEObjectContainer_as_contents_in_EAnnotation(castedContainer,metaElementID);
-					}
-					//EObjectContainer has eContentUnion as a containment
-					case  ecore::ecorePackage::EOBJECT_ATTRIBUTE_ECONTENTUNION:	
-					{
-						std::weak_ptr<ecore::EObject> castedContainer = std::dynamic_pointer_cast<ecore::EObject> (container);
-						return this->createEObjectContainer_as_eContentUnion_in_EObject(castedContainer,metaElementID);
-					}
-					default:
-						std::cerr << __PRETTY_FUNCTION__ << "ERROR: Reference type not found." << std::endl;
-				}	
-			}
+			
 			break;
 		}
 		case ecorePackage::EOPERATION_CLASS:
@@ -1097,32 +1075,6 @@ std::shared_ptr<EObjectContainer> ecoreFactoryImpl::createEObjectContainer(const
 	element->setMetaElementID(metaElementID);
 	element->setThisEObjectContainerPtr(element);
 	return element;
-}
-std::shared_ptr<EObjectContainer> ecoreFactoryImpl::createEObjectContainer_as_contents_in_EAnnotation(std::shared_ptr<EAnnotation> par_EAnnotation, const int metaElementID) const
-{
-	std::shared_ptr<EObjectContainerImpl> element(new EObjectContainerImpl());
-	element->setMetaElementID(metaElementID);
-	if(nullptr != par_EAnnotation)
-	{
-		par_EAnnotation->getContents()->push_back(element);
-	}
-	
-	element->setThisEObjectContainerPtr(element);
-	return element;
-	
-}
-std::shared_ptr<EObjectContainer> ecoreFactoryImpl::createEObjectContainer_as_eContentUnion_in_EObject(std::weak_ptr<ecore::EObject> par_EObject, const int metaElementID) const
-{
-	std::shared_ptr<EObjectContainerImpl> element(new EObjectContainerImpl(par_EObject));
-	element->setMetaElementID(metaElementID);
-	if(auto wp = par_EObject.lock())
-	{
-		wp->getEContentUnion()->push_back(element);
-	}
-	
-	element->setThisEObjectContainerPtr(element);
-	return element;
-	
 }
 std::shared_ptr<EOperation> ecoreFactoryImpl::createEOperation(const int metaElementID/*=-1*/) const
 {

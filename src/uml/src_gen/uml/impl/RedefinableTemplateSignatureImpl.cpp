@@ -142,14 +142,10 @@ RedefinableTemplateSignatureImpl& RedefinableTemplateSignatureImpl::operator=(co
 			std::cout << "Initialising value Subset: " << "m_extendedSignature - Subset<uml::RedefinableTemplateSignature, uml::RedefinableElement >(getRedefinedElement())" << std::endl;
 		#endif
 		
-
-		Bag<uml::RedefinableTemplateSignature>::iterator extendedSignatureIter = extendedSignatureList->begin();
-		Bag<uml::RedefinableTemplateSignature>::iterator extendedSignatureEnd = extendedSignatureList->end();
-		while (extendedSignatureIter != extendedSignatureEnd) 
+		for(const std::shared_ptr<uml::RedefinableTemplateSignature> extendedSignatureindexElem: *extendedSignatureList) 
 		{
-			std::shared_ptr<uml::RedefinableTemplateSignature> temp = std::dynamic_pointer_cast<uml::RedefinableTemplateSignature>((*extendedSignatureIter)->copy());
-			getExtendedSignature()->push_back(temp);
-			extendedSignatureIter++;
+			std::shared_ptr<uml::RedefinableTemplateSignature> temp = std::dynamic_pointer_cast<uml::RedefinableTemplateSignature>((extendedSignatureindexElem)->copy());
+			m_extendedSignature->push_back(temp);
 		}
 	}
 	else
@@ -173,14 +169,10 @@ RedefinableTemplateSignatureImpl& RedefinableTemplateSignatureImpl::operator=(co
 			std::cout << "Initialising value Subset: " << "m_inheritedParameter - Subset<uml::TemplateParameter, uml::TemplateParameter >(getParameter())" << std::endl;
 		#endif
 		
-
-		Bag<uml::TemplateParameter>::iterator inheritedParameterIter = inheritedParameterList->begin();
-		Bag<uml::TemplateParameter>::iterator inheritedParameterEnd = inheritedParameterList->end();
-		while (inheritedParameterIter != inheritedParameterEnd) 
+		for(const std::shared_ptr<uml::TemplateParameter> inheritedParameterindexElem: *inheritedParameterList) 
 		{
-			std::shared_ptr<uml::TemplateParameter> temp = std::dynamic_pointer_cast<uml::TemplateParameter>((*inheritedParameterIter)->copy());
-			getInheritedParameter()->push_back(temp);
-			inheritedParameterIter++;
+			std::shared_ptr<uml::TemplateParameter> temp = std::dynamic_pointer_cast<uml::TemplateParameter>((inheritedParameterindexElem)->copy());
+			m_inheritedParameter->push_back(temp);
 		}
 	}
 	else
@@ -497,12 +489,10 @@ void RedefinableTemplateSignatureImpl::saveContent(std::shared_ptr<persistence::
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> RedefinableTemplateSignatureImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getRedefinableTemplateSignature_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -514,31 +504,15 @@ Any RedefinableTemplateSignatureImpl::eGet(int featureID, bool resolve, bool cor
 		case uml::umlPackage::REDEFINABLETEMPLATESIGNATURE_ATTRIBUTE_CLASSIFIER:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getClassifier().lock();
-			return eAny(returnValue); //20517
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //20517
 		}
 		case uml::umlPackage::REDEFINABLETEMPLATESIGNATURE_ATTRIBUTE_EXTENDEDSIGNATURE:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::RedefinableTemplateSignature>::iterator iter = getExtendedSignature()->begin();
-			Bag<uml::RedefinableTemplateSignature>::iterator end = getExtendedSignature()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //20515			
+			return eAnyBag(getExtendedSignature(),551760388); //20515
 		}
 		case uml::umlPackage::REDEFINABLETEMPLATESIGNATURE_ATTRIBUTE_INHERITEDPARAMETER:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::TemplateParameter>::iterator iter = getInheritedParameter()->begin();
-			Bag<uml::TemplateParameter>::iterator end = getInheritedParameter()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //20516			
+			return eAnyBag(getInheritedParameter(),821817342); //20516
 		}
 	}
 	Any result;
@@ -587,36 +561,37 @@ bool RedefinableTemplateSignatureImpl::eSet(int featureID, Any newValue)
 		case uml::umlPackage::REDEFINABLETEMPLATESIGNATURE_ATTRIBUTE_EXTENDEDSIGNATURE:
 		{
 			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::RedefinableTemplateSignature>> extendedSignatureList(new Bag<uml::RedefinableTemplateSignature>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
+			if((newValue->isContainer()) && (uml::umlPackage::REDEFINABLETEMPLATESIGNATURE_CLASS ==newValue->getTypeId()))
 			{
-				extendedSignatureList->add(std::dynamic_pointer_cast<uml::RedefinableTemplateSignature>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::RedefinableTemplateSignature>::iterator iterExtendedSignature = getExtendedSignature()->begin();
-			Bag<uml::RedefinableTemplateSignature>::iterator endExtendedSignature = getExtendedSignature()->end();
-			while (iterExtendedSignature != endExtendedSignature)
-			{
-				if (extendedSignatureList->find(*iterExtendedSignature) == -1)
+				try
 				{
-					getExtendedSignature()->erase(*iterExtendedSignature);
+					std::shared_ptr<Bag<uml::RedefinableTemplateSignature>> extendedSignatureList= newValue->get<std::shared_ptr<Bag<uml::RedefinableTemplateSignature>>>();
+					std::shared_ptr<Bag<uml::RedefinableTemplateSignature>> _extendedSignature=getExtendedSignature();
+					for(const std::shared_ptr<uml::RedefinableTemplateSignature> indexExtendedSignature: *_extendedSignature)
+					{
+						if (extendedSignatureList->find(indexExtendedSignature) == -1)
+						{
+							_extendedSignature->erase(indexExtendedSignature);
+						}
+					}
+
+					for(const std::shared_ptr<uml::RedefinableTemplateSignature> indexExtendedSignature: *extendedSignatureList)
+					{
+						if (_extendedSignature->find(indexExtendedSignature) == -1)
+						{
+							_extendedSignature->add(indexExtendedSignature);
+						}
+					}
 				}
-				iterExtendedSignature++;
-			}
- 
-			iterExtendedSignature = extendedSignatureList->begin();
-			endExtendedSignature = extendedSignatureList->end();
-			while (iterExtendedSignature != endExtendedSignature)
-			{
-				if (getExtendedSignature()->find(*iterExtendedSignature) == -1)
+				catch(...)
 				{
-					getExtendedSignature()->add(*iterExtendedSignature);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterExtendedSignature++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}
@@ -635,34 +610,33 @@ bool RedefinableTemplateSignatureImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any RedefinableTemplateSignatureImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any RedefinableTemplateSignatureImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
   	switch(operationID)
 	{
-		
-		// 257289515
+		// uml::RedefinableTemplateSignature::getInheritedParameters() : uml::TemplateParameter[*]: 257289515
 		case umlPackage::REDEFINABLETEMPLATESIGNATURE_OPERATION_GETINHERITEDPARAMETERS:
 		{
-			result = eAny(this->getInheritedParameters());
+			std::shared_ptr<Bag<uml::TemplateParameter> > resultList = this->getInheritedParameters();
+			return eAny(resultList,umlPackage::TEMPLATEPARAMETER_CLASS,true);
 			break;
 		}
-		
-		// 1263440260
+		// uml::RedefinableTemplateSignature::redefines_parents(Any, std::map) : bool: 1263440260
 		case umlPackage::REDEFINABLETEMPLATESIGNATURE_OPERATION_REDEFINES_PARENTS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->redefines_parents(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->redefines_parents(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
 
@@ -682,7 +656,6 @@ Any RedefinableTemplateSignatureImpl::eInvoke(int operationID, std::shared_ptr<s
 	return result;
 }
 
-
 std::shared_ptr<uml::RedefinableTemplateSignature> RedefinableTemplateSignatureImpl::getThisRedefinableTemplateSignaturePtr() const
 {
 	return m_thisRedefinableTemplateSignaturePtr.lock();
@@ -693,3 +666,5 @@ void RedefinableTemplateSignatureImpl::setThisRedefinableTemplateSignaturePtr(st
 	setThisRedefinableElementPtr(thisRedefinableTemplateSignaturePtr);
 	setThisTemplateSignaturePtr(thisRedefinableTemplateSignaturePtr);
 }
+
+

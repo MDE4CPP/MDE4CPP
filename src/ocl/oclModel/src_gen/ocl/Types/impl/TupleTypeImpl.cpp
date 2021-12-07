@@ -32,9 +32,9 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "ecore/ecoreFactory.hpp"
 #include "ocl/Types/TypesFactory.hpp"
 #include "ocl/Values/ValuesFactory.hpp"
+#include "ecore/ecoreFactory.hpp"
 
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EDataType.hpp"
@@ -291,12 +291,10 @@ void TupleTypeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHa
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> TupleTypeImpl::eStaticClass() const
 {
 	return ocl::Types::TypesPackage::eInstance()->getTupleType_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -308,7 +306,7 @@ Any TupleTypeImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case ocl::Types::TypesPackage::TUPLETYPE_ATTRIBUTE_INSTANCE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getInstance();
-			return eAny(returnValue); //899
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //899
 		}
 		case ocl::Types::TypesPackage::TUPLETYPE_ATTRIBUTE_PARTS:
 		{
@@ -394,7 +392,7 @@ bool TupleTypeImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any TupleTypeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any TupleTypeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -414,7 +412,6 @@ Any TupleTypeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sha
 	return result;
 }
 
-
 std::shared_ptr<ocl::Types::TupleType> TupleTypeImpl::getThisTupleTypePtr() const
 {
 	return m_thisTupleTypePtr.lock();
@@ -424,3 +421,5 @@ void TupleTypeImpl::setThisTupleTypePtr(std::weak_ptr<ocl::Types::TupleType> thi
 	m_thisTupleTypePtr = thisTupleTypePtr;
 	setThisEDataTypePtr(thisTupleTypePtr);
 }
+
+

@@ -35,16 +35,16 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Values/ValuesFactory.hpp"
 #include "uml/umlFactory.hpp"
+#include "fUML/Semantics/Values/ValuesFactory.hpp"
 
 #include "fUML/Semantics/SimpleClassifiers/FeatureValue.hpp"
 #include "uml/StructuralFeature.hpp"
 #include "fUML/Semantics/Values/Value.hpp"
 
 //Factories an Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersPackage.hpp"
 #include "fUML/Semantics/Values/ValuesPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -303,7 +303,7 @@ void FeatureValueImpl::loadAttributes(std::shared_ptr<persistence::interfaces::X
 		{
 			// this attribute is a 'int'
 			int value;
-			std::istringstream ( iter->second ) >> value;
+			std::istringstream(iter->second) >> value;
 			this->setPosition(value);
 		}
 		std::shared_ptr<ecore::EClass> metaClass = this->eClass(); // get MetaClass
@@ -407,12 +407,10 @@ void FeatureValueImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> FeatureValueImpl::eStaticClass() const
 {
 	return fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::eInstance()->getFeatureValue_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -424,10 +422,10 @@ Any FeatureValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::FEATUREVALUE_ATTRIBUTE_FEATURE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getFeature();
-			return eAny(returnValue); //552
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //552
 		}
 		case fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::FEATUREVALUE_ATTRIBUTE_POSITION:
-			return eAny(getPosition()); //551
+				return eAny(getPosition(),0,true); //551
 		case fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::FEATUREVALUE_ATTRIBUTE_VALUES:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
@@ -521,7 +519,7 @@ bool FeatureValueImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any FeatureValueImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any FeatureValueImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -531,7 +529,7 @@ Any FeatureValueImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::
 		// 1429289502
 		case SimpleClassifiersPackage::FEATUREVALUE_OPERATION__COPY:
 		{
-			result = eAny(this->_copy());
+				result = eAny(this->_copy());
 			break;
 		}
 		
@@ -541,9 +539,9 @@ Any FeatureValueImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::
 			//Retrieve input parameter 'other'
 			//parameter 0
 			std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> incoming_param_other;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_other_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_other = (*incoming_param_other_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> >();
-			result = eAny(this->hasEqualValues(incoming_param_other));
+			std::list<Any>::const_iterator incoming_param_other_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_other = (*incoming_param_other_arguments_citer)->get<std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> >();
+					result = eAny(this->hasEqualValues(incoming_param_other),0,false);
 			break;
 		}
 
@@ -560,7 +558,6 @@ Any FeatureValueImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::
 	return result;
 }
 
-
 std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> FeatureValueImpl::getThisFeatureValuePtr() const
 {
 	return m_thisFeatureValuePtr.lock();
@@ -569,3 +566,5 @@ void FeatureValueImpl::setThisFeatureValuePtr(std::weak_ptr<fUML::Semantics::Sim
 {
 	m_thisFeatureValuePtr = thisFeatureValuePtr;
 }
+
+

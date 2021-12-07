@@ -46,11 +46,6 @@ task compileFUML(type: tui.sse.mde4cpp.MDE4CPPCompile) {
 	dependsOn getRootProject().getTasksByName('deliverBasicInterfaces', true)
 
 
-	// dependency to model 'types'
-	def types = getRootProject().getTasksByName('compileTypes', true)
-	dependsOn types
-	inputs.files(types.outputs)
-
 	// dependency to model 'uml'
 	def uml = getRootProject().getTasksByName('compileUml', true)
 	dependsOn uml
@@ -60,6 +55,11 @@ task compileFUML(type: tui.sse.mde4cpp.MDE4CPPCompile) {
 	def ecore = getRootProject().getTasksByName('compileEcore', true)
 	dependsOn ecore
 	inputs.files(ecore.outputs)
+
+	// dependency to model 'types'
+	def types = getRootProject().getTasksByName('compileTypes', true)
+	dependsOn types
+	inputs.files(types.outputs)
 
 	// dependency to model 'primitivetypesReflection'
 	def primitivetypesReflection = getRootProject().getTasksByName('compilePrimitivetypesReflection', true)

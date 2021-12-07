@@ -391,12 +391,10 @@ void IncludeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHand
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> IncludeImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getInclude_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -408,12 +406,12 @@ Any IncludeImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::INCLUDE_ATTRIBUTE_ADDITION:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getAddition();
-			return eAny(returnValue); //11212
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //11212
 		}
 		case uml::umlPackage::INCLUDE_ATTRIBUTE_INCLUDINGCASE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getIncludingCase().lock();
-			return eAny(returnValue); //11213
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //11213
 		}
 	}
 	Any result;
@@ -480,7 +478,7 @@ bool IncludeImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any IncludeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any IncludeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -503,7 +501,6 @@ Any IncludeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::share
 	return result;
 }
 
-
 std::shared_ptr<uml::Include> IncludeImpl::getThisIncludePtr() const
 {
 	return m_thisIncludePtr.lock();
@@ -514,3 +511,5 @@ void IncludeImpl::setThisIncludePtr(std::weak_ptr<uml::Include> thisIncludePtr)
 	setThisDirectedRelationshipPtr(thisIncludePtr);
 	setThisNamedElementPtr(thisIncludePtr);
 }
+
+

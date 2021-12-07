@@ -36,8 +36,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
+#include "uml/umlFactory.hpp"
 
 #include "fUML/Semantics/Values/LiteralEvaluation.hpp"
 #include "fUML/Semantics/Loci/Locus.hpp"
@@ -45,8 +45,8 @@
 #include "uml/ValueSpecification.hpp"
 
 //Factories an Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
 #include "fUML/Semantics/Values/ValuesPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -211,12 +211,10 @@ void LiteralIntegerEvaluationImpl::saveContent(std::shared_ptr<persistence::inte
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> LiteralIntegerEvaluationImpl::eStaticClass() const
 {
 	return fUML::Semantics::Values::ValuesPackage::eInstance()->getLiteralIntegerEvaluation_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -249,7 +247,7 @@ bool LiteralIntegerEvaluationImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any LiteralIntegerEvaluationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any LiteralIntegerEvaluationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -259,7 +257,7 @@ Any LiteralIntegerEvaluationImpl::eInvoke(int operationID, std::shared_ptr<std::
 		// 604709657
 		case ValuesPackage::LITERALINTEGEREVALUATION_OPERATION_EVALUATE:
 		{
-			result = eAny(this->evaluate());
+				result = eAny(this->evaluate());
 			break;
 		}
 
@@ -276,7 +274,6 @@ Any LiteralIntegerEvaluationImpl::eInvoke(int operationID, std::shared_ptr<std::
 	return result;
 }
 
-
 std::shared_ptr<fUML::Semantics::Values::LiteralIntegerEvaluation> LiteralIntegerEvaluationImpl::getThisLiteralIntegerEvaluationPtr() const
 {
 	return m_thisLiteralIntegerEvaluationPtr.lock();
@@ -286,3 +283,5 @@ void LiteralIntegerEvaluationImpl::setThisLiteralIntegerEvaluationPtr(std::weak_
 	m_thisLiteralIntegerEvaluationPtr = thisLiteralIntegerEvaluationPtr;
 	setThisLiteralEvaluationPtr(thisLiteralIntegerEvaluationPtr);
 }
+
+

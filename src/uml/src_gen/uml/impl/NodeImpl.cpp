@@ -187,14 +187,10 @@ NodeImpl& NodeImpl::operator=(const NodeImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_nestedNode - Subset<uml::Node, uml::NamedElement >(getOwnedMember())" << std::endl;
 		#endif
 		
-
-		Bag<uml::Node>::iterator nestedNodeIter = nestedNodeList->begin();
-		Bag<uml::Node>::iterator nestedNodeEnd = nestedNodeList->end();
-		while (nestedNodeIter != nestedNodeEnd) 
+		for(const std::shared_ptr<uml::Node> nestedNodeindexElem: *nestedNodeList) 
 		{
-			std::shared_ptr<uml::Node> temp = std::dynamic_pointer_cast<uml::Node>((*nestedNodeIter)->copy());
-			getNestedNode()->push_back(temp);
-			nestedNodeIter++;
+			std::shared_ptr<uml::Node> temp = std::dynamic_pointer_cast<uml::Node>((nestedNodeindexElem)->copy());
+			m_nestedNode->push_back(temp);
 		}
 	}
 	else
@@ -549,12 +545,10 @@ void NodeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> NodeImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getNode_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -565,15 +559,7 @@ Any NodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 	{
 		case uml::umlPackage::NODE_ATTRIBUTE_NESTEDNODE:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Node>::iterator iter = getNestedNode()->begin();
-			Bag<uml::Node>::iterator end = getNestedNode()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //15755			
+			return eAnyBag(getNestedNode(),1041077555); //15755
 		}
 	}
 	Any result;
@@ -610,36 +596,37 @@ bool NodeImpl::eSet(int featureID, Any newValue)
 		case uml::umlPackage::NODE_ATTRIBUTE_NESTEDNODE:
 		{
 			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::Node>> nestedNodeList(new Bag<uml::Node>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
+			if((newValue->isContainer()) && (uml::umlPackage::NODE_CLASS ==newValue->getTypeId()))
 			{
-				nestedNodeList->add(std::dynamic_pointer_cast<uml::Node>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::Node>::iterator iterNestedNode = getNestedNode()->begin();
-			Bag<uml::Node>::iterator endNestedNode = getNestedNode()->end();
-			while (iterNestedNode != endNestedNode)
-			{
-				if (nestedNodeList->find(*iterNestedNode) == -1)
+				try
 				{
-					getNestedNode()->erase(*iterNestedNode);
+					std::shared_ptr<Bag<uml::Node>> nestedNodeList= newValue->get<std::shared_ptr<Bag<uml::Node>>>();
+					std::shared_ptr<Bag<uml::Node>> _nestedNode=getNestedNode();
+					for(const std::shared_ptr<uml::Node> indexNestedNode: *_nestedNode)
+					{
+						if (nestedNodeList->find(indexNestedNode) == -1)
+						{
+							_nestedNode->erase(indexNestedNode);
+						}
+					}
+
+					for(const std::shared_ptr<uml::Node> indexNestedNode: *nestedNodeList)
+					{
+						if (_nestedNode->find(indexNestedNode) == -1)
+						{
+							_nestedNode->add(indexNestedNode);
+						}
+					}
 				}
-				iterNestedNode++;
-			}
- 
-			iterNestedNode = nestedNodeList->begin();
-			endNestedNode = nestedNodeList->end();
-			while (iterNestedNode != endNestedNode)
-			{
-				if (getNestedNode()->find(*iterNestedNode) == -1)
+				catch(...)
 				{
-					getNestedNode()->add(*iterNestedNode);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterNestedNode++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}
@@ -658,96 +645,94 @@ bool NodeImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any NodeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any NodeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
   	switch(operationID)
 	{
-		
-		// 584788215
+		// uml::Node::createCommunicationPath(bool, uml::AggregationKind, std::string, int, int, uml::Node, bool, uml::AggregationKind, std::string, int, int) : uml::CommunicationPath: 584788215
 		case umlPackage::NODE_OPERATION_CREATECOMMUNICATIONPATH_BOOLEAN_UNLIMITEDNATURAL:
 		{
 			//Retrieve input parameter 'end1IsNavigable'
 			//parameter 0
 			bool incoming_param_end1IsNavigable;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_end1IsNavigable_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_end1IsNavigable = (*incoming_param_end1IsNavigable_arguments_citer)->get()->get<bool >();
+			std::list<Any>::const_iterator incoming_param_end1IsNavigable_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_end1IsNavigable = (*incoming_param_end1IsNavigable_arguments_citer)->get<bool >();
 			//Retrieve input parameter 'end1Aggregation'
 			//parameter 1
 			uml::AggregationKind incoming_param_end1Aggregation;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_end1Aggregation_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_end1Aggregation = (*incoming_param_end1Aggregation_arguments_citer)->get()->get<uml::AggregationKind >();
+			std::list<Any>::const_iterator incoming_param_end1Aggregation_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_end1Aggregation = (*incoming_param_end1Aggregation_arguments_citer)->get<uml::AggregationKind >();
 			//Retrieve input parameter 'end1Name'
 			//parameter 2
 			std::string incoming_param_end1Name;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_end1Name_arguments_citer = std::next(arguments->begin(), 2);
-			incoming_param_end1Name = (*incoming_param_end1Name_arguments_citer)->get()->get<std::string >();
+			std::list<Any>::const_iterator incoming_param_end1Name_arguments_citer = std::next(arguments->begin(), 2);
+			incoming_param_end1Name = (*incoming_param_end1Name_arguments_citer)->get<std::string >();
 			//Retrieve input parameter 'end1Lower'
 			//parameter 3
 			int incoming_param_end1Lower;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_end1Lower_arguments_citer = std::next(arguments->begin(), 3);
-			incoming_param_end1Lower = (*incoming_param_end1Lower_arguments_citer)->get()->get<int >();
+			std::list<Any>::const_iterator incoming_param_end1Lower_arguments_citer = std::next(arguments->begin(), 3);
+			incoming_param_end1Lower = (*incoming_param_end1Lower_arguments_citer)->get<int >();
 			//Retrieve input parameter 'end1Upper'
 			//parameter 4
 			int incoming_param_end1Upper;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_end1Upper_arguments_citer = std::next(arguments->begin(), 4);
-			incoming_param_end1Upper = (*incoming_param_end1Upper_arguments_citer)->get()->get<int >();
+			std::list<Any>::const_iterator incoming_param_end1Upper_arguments_citer = std::next(arguments->begin(), 4);
+			incoming_param_end1Upper = (*incoming_param_end1Upper_arguments_citer)->get<int >();
 			//Retrieve input parameter 'end1Node'
 			//parameter 5
 			std::shared_ptr<uml::Node> incoming_param_end1Node;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_end1Node_arguments_citer = std::next(arguments->begin(), 5);
-			incoming_param_end1Node = (*incoming_param_end1Node_arguments_citer)->get()->get<std::shared_ptr<uml::Node> >();
+			std::list<Any>::const_iterator incoming_param_end1Node_arguments_citer = std::next(arguments->begin(), 5);
+			incoming_param_end1Node = (*incoming_param_end1Node_arguments_citer)->get<std::shared_ptr<uml::Node> >();
 			//Retrieve input parameter 'end2IsNavigable'
 			//parameter 6
 			bool incoming_param_end2IsNavigable;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_end2IsNavigable_arguments_citer = std::next(arguments->begin(), 6);
-			incoming_param_end2IsNavigable = (*incoming_param_end2IsNavigable_arguments_citer)->get()->get<bool >();
+			std::list<Any>::const_iterator incoming_param_end2IsNavigable_arguments_citer = std::next(arguments->begin(), 6);
+			incoming_param_end2IsNavigable = (*incoming_param_end2IsNavigable_arguments_citer)->get<bool >();
 			//Retrieve input parameter 'end2Aggregation'
 			//parameter 7
 			uml::AggregationKind incoming_param_end2Aggregation;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_end2Aggregation_arguments_citer = std::next(arguments->begin(), 7);
-			incoming_param_end2Aggregation = (*incoming_param_end2Aggregation_arguments_citer)->get()->get<uml::AggregationKind >();
+			std::list<Any>::const_iterator incoming_param_end2Aggregation_arguments_citer = std::next(arguments->begin(), 7);
+			incoming_param_end2Aggregation = (*incoming_param_end2Aggregation_arguments_citer)->get<uml::AggregationKind >();
 			//Retrieve input parameter 'end2Name'
 			//parameter 8
 			std::string incoming_param_end2Name;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_end2Name_arguments_citer = std::next(arguments->begin(), 8);
-			incoming_param_end2Name = (*incoming_param_end2Name_arguments_citer)->get()->get<std::string >();
+			std::list<Any>::const_iterator incoming_param_end2Name_arguments_citer = std::next(arguments->begin(), 8);
+			incoming_param_end2Name = (*incoming_param_end2Name_arguments_citer)->get<std::string >();
 			//Retrieve input parameter 'end2Lower'
 			//parameter 9
 			int incoming_param_end2Lower;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_end2Lower_arguments_citer = std::next(arguments->begin(), 9);
-			incoming_param_end2Lower = (*incoming_param_end2Lower_arguments_citer)->get()->get<int >();
+			std::list<Any>::const_iterator incoming_param_end2Lower_arguments_citer = std::next(arguments->begin(), 9);
+			incoming_param_end2Lower = (*incoming_param_end2Lower_arguments_citer)->get<int >();
 			//Retrieve input parameter 'end2Upper'
 			//parameter 10
 			int incoming_param_end2Upper;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_end2Upper_arguments_citer = std::next(arguments->begin(), 10);
-			incoming_param_end2Upper = (*incoming_param_end2Upper_arguments_citer)->get()->get<int >();
-			result = eAny(this->createCommunicationPath(incoming_param_end1IsNavigable,incoming_param_end1Aggregation,incoming_param_end1Name,incoming_param_end1Lower,incoming_param_end1Upper,incoming_param_end1Node,incoming_param_end2IsNavigable,incoming_param_end2Aggregation,incoming_param_end2Name,incoming_param_end2Lower,incoming_param_end2Upper));
+			std::list<Any>::const_iterator incoming_param_end2Upper_arguments_citer = std::next(arguments->begin(), 10);
+			incoming_param_end2Upper = (*incoming_param_end2Upper_arguments_citer)->get<int >();
+			result = eAny(this->createCommunicationPath(incoming_param_end1IsNavigable,incoming_param_end1Aggregation,incoming_param_end1Name,incoming_param_end1Lower,incoming_param_end1Upper,incoming_param_end1Node,incoming_param_end2IsNavigable,incoming_param_end2Aggregation,incoming_param_end2Name,incoming_param_end2Lower,incoming_param_end2Upper), umlPackage::COMMUNICATIONPATH_CLASS,false);
 			break;
 		}
-		
-		// 1487234918
+		// uml::Node::getCommunicationPaths() : uml::CommunicationPath[*]: 1487234918
 		case umlPackage::NODE_OPERATION_GETCOMMUNICATIONPATHS:
 		{
-			result = eAny(this->getCommunicationPaths());
+			std::shared_ptr<Bag<uml::CommunicationPath> > resultList = this->getCommunicationPaths();
+			return eAny(resultList,umlPackage::COMMUNICATIONPATH_CLASS,true);
 			break;
 		}
-		
-		// 3509535
+		// uml::Node::internal_structure(Any, std::map) : bool: 3509535
 		case umlPackage::NODE_OPERATION_INTERNAL_STRUCTURE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->internal_structure(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->internal_structure(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
 
@@ -767,7 +752,6 @@ Any NodeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_p
 	return result;
 }
 
-
 std::shared_ptr<uml::Node> NodeImpl::getThisNodePtr() const
 {
 	return m_thisNodePtr.lock();
@@ -778,3 +762,5 @@ void NodeImpl::setThisNodePtr(std::weak_ptr<uml::Node> thisNodePtr)
 	setThisClassPtr(thisNodePtr);
 	setThisDeploymentTargetPtr(thisNodePtr);
 }
+
+

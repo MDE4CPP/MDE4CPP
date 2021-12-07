@@ -321,12 +321,10 @@ void ExecutionOccurrenceSpecificationImpl::saveContent(std::shared_ptr<persisten
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> ExecutionOccurrenceSpecificationImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getExecutionOccurrenceSpecification_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -338,7 +336,7 @@ Any ExecutionOccurrenceSpecificationImpl::eGet(int featureID, bool resolve, bool
 		case uml::umlPackage::EXECUTIONOCCURRENCESPECIFICATION_ATTRIBUTE_EXECUTION:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getExecution();
-			return eAny(returnValue); //9015
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //9015
 		}
 	}
 	return OccurrenceSpecificationImpl::eGet(featureID, resolve, coreType);
@@ -374,7 +372,7 @@ bool ExecutionOccurrenceSpecificationImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ExecutionOccurrenceSpecificationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any ExecutionOccurrenceSpecificationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -394,7 +392,6 @@ Any ExecutionOccurrenceSpecificationImpl::eInvoke(int operationID, std::shared_p
 	return result;
 }
 
-
 std::shared_ptr<uml::ExecutionOccurrenceSpecification> ExecutionOccurrenceSpecificationImpl::getThisExecutionOccurrenceSpecificationPtr() const
 {
 	return m_thisExecutionOccurrenceSpecificationPtr.lock();
@@ -404,3 +401,5 @@ void ExecutionOccurrenceSpecificationImpl::setThisExecutionOccurrenceSpecificati
 	m_thisExecutionOccurrenceSpecificationPtr = thisExecutionOccurrenceSpecificationPtr;
 	setThisOccurrenceSpecificationPtr(thisExecutionOccurrenceSpecificationPtr);
 }
+
+

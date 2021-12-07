@@ -33,11 +33,11 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Loci/LociFactory.hpp"
+#include "fUML/Semantics/Values/ValuesFactory.hpp"
+#include "uml/umlFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
-#include "uml/umlFactory.hpp"
-#include "fUML/Semantics/Values/ValuesFactory.hpp"
+#include "fUML/Semantics/Loci/LociFactory.hpp"
 
 #include "ocl/Evaluations/EvalEnvironment.hpp"
 #include "fUML/Semantics/Values/LiteralUnlimitedNaturalEvaluation.hpp"
@@ -216,12 +216,10 @@ void UnlimitedNaturalLiteralExpEvalImpl::saveContent(std::shared_ptr<persistence
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> UnlimitedNaturalLiteralExpEvalImpl::eStaticClass() const
 {
 	return ocl::Evaluations::EvaluationsPackage::eInstance()->getUnlimitedNaturalLiteralExpEval_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -275,7 +273,7 @@ bool UnlimitedNaturalLiteralExpEvalImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any UnlimitedNaturalLiteralExpEvalImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any UnlimitedNaturalLiteralExpEvalImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -298,7 +296,6 @@ Any UnlimitedNaturalLiteralExpEvalImpl::eInvoke(int operationID, std::shared_ptr
 	return result;
 }
 
-
 std::shared_ptr<ocl::Evaluations::UnlimitedNaturalLiteralExpEval> UnlimitedNaturalLiteralExpEvalImpl::getThisUnlimitedNaturalLiteralExpEvalPtr() const
 {
 	return m_thisUnlimitedNaturalLiteralExpEvalPtr.lock();
@@ -309,3 +306,5 @@ void UnlimitedNaturalLiteralExpEvalImpl::setThisUnlimitedNaturalLiteralExpEvalPt
 	setThisLiteralUnlimitedNaturalEvaluationPtr(thisUnlimitedNaturalLiteralExpEvalPtr);
 	setThisNumericLiteralExpEvalPtr(thisUnlimitedNaturalLiteralExpEvalPtr);
 }
+
+

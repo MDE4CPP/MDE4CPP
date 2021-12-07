@@ -444,12 +444,10 @@ void ExecutionEnvironmentImpl::saveContent(std::shared_ptr<persistence::interfac
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> ExecutionEnvironmentImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getExecutionEnvironment_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -482,7 +480,7 @@ bool ExecutionEnvironmentImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ExecutionEnvironmentImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any ExecutionEnvironmentImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -502,7 +500,6 @@ Any ExecutionEnvironmentImpl::eInvoke(int operationID, std::shared_ptr<std::list
 	return result;
 }
 
-
 std::shared_ptr<uml::ExecutionEnvironment> ExecutionEnvironmentImpl::getThisExecutionEnvironmentPtr() const
 {
 	return m_thisExecutionEnvironmentPtr.lock();
@@ -512,3 +509,5 @@ void ExecutionEnvironmentImpl::setThisExecutionEnvironmentPtr(std::weak_ptr<uml:
 	m_thisExecutionEnvironmentPtr = thisExecutionEnvironmentPtr;
 	setThisNodePtr(thisExecutionEnvironmentPtr);
 }
+
+

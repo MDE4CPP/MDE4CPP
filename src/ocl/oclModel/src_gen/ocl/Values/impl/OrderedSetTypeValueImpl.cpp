@@ -32,17 +32,14 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "ocl/Types/TypesFactory.hpp"
 #include "ocl/Values/ValuesFactory.hpp"
 
-#include "ocl/Types/CollectionType.hpp"
 #include "ocl/Values/CollectionValue.hpp"
 #include "ocl/Values/Element.hpp"
 #include "fUML/Semantics/Values/Value.hpp"
 
 //Factories an Package includes
 #include "ocl/oclPackage.hpp"
-#include "ocl/Types/TypesPackage.hpp"
 #include "ocl/Values/ValuesPackage.hpp"
 #include "fUML/Semantics/Values/ValuesPackage.hpp"
 
@@ -212,12 +209,10 @@ void OrderedSetTypeValueImpl::saveContent(std::shared_ptr<persistence::interface
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> OrderedSetTypeValueImpl::eStaticClass() const
 {
 	return ocl::Values::ValuesPackage::eInstance()->getOrderedSetTypeValue_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -250,7 +245,7 @@ bool OrderedSetTypeValueImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any OrderedSetTypeValueImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any OrderedSetTypeValueImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -263,9 +258,9 @@ Any OrderedSetTypeValueImpl::eInvoke(int operationID, std::shared_ptr<std::list 
 			//Retrieve input parameter 'value'
 			//parameter 0
 			std::shared_ptr<fUML::Semantics::Values::Value> incoming_param_value;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_value_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_value = (*incoming_param_value_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::Values::Value> >();
-			result = eAny(this->addValue(incoming_param_value));
+			std::list<Any>::const_iterator incoming_param_value_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_value = (*incoming_param_value_arguments_citer)->get<std::shared_ptr<fUML::Semantics::Values::Value> >();
+					result = eAny(this->addValue(incoming_param_value),0,false);
 			break;
 		}
 
@@ -282,7 +277,6 @@ Any OrderedSetTypeValueImpl::eInvoke(int operationID, std::shared_ptr<std::list 
 	return result;
 }
 
-
 std::shared_ptr<ocl::Values::OrderedSetTypeValue> OrderedSetTypeValueImpl::getThisOrderedSetTypeValuePtr() const
 {
 	return m_thisOrderedSetTypeValuePtr.lock();
@@ -292,3 +286,5 @@ void OrderedSetTypeValueImpl::setThisOrderedSetTypeValuePtr(std::weak_ptr<ocl::V
 	m_thisOrderedSetTypeValuePtr = thisOrderedSetTypeValuePtr;
 	setThisCollectionValuePtr(thisOrderedSetTypeValuePtr);
 }
+
+

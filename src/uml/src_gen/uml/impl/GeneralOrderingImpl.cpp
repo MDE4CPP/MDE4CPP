@@ -320,12 +320,10 @@ void GeneralOrderingImpl::saveContent(std::shared_ptr<persistence::interfaces::X
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> GeneralOrderingImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getGeneralOrdering_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -337,12 +335,12 @@ Any GeneralOrderingImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::GENERALORDERING_ATTRIBUTE_AFTER:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getAfter();
-			return eAny(returnValue); //1089
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //1089
 		}
 		case uml::umlPackage::GENERALORDERING_ATTRIBUTE_BEFORE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getBefore();
-			return eAny(returnValue); //10810
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //10810
 		}
 	}
 	return NamedElementImpl::eGet(featureID, resolve, coreType);
@@ -388,27 +386,26 @@ bool GeneralOrderingImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any GeneralOrderingImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any GeneralOrderingImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
   	switch(operationID)
 	{
-		
-		// 1443676012
+		// uml::GeneralOrdering::irreflexive_transitive_closure(Any, std::map) : bool: 1443676012
 		case umlPackage::GENERALORDERING_OPERATION_IRREFLEXIVE_TRANSITIVE_CLOSURE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->irreflexive_transitive_closure(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->irreflexive_transitive_closure(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
 
@@ -425,7 +422,6 @@ Any GeneralOrderingImpl::eInvoke(int operationID, std::shared_ptr<std::list < st
 	return result;
 }
 
-
 std::shared_ptr<uml::GeneralOrdering> GeneralOrderingImpl::getThisGeneralOrderingPtr() const
 {
 	return m_thisGeneralOrderingPtr.lock();
@@ -435,3 +431,5 @@ void GeneralOrderingImpl::setThisGeneralOrderingPtr(std::weak_ptr<uml::GeneralOr
 	m_thisGeneralOrderingPtr = thisGeneralOrderingPtr;
 	setThisNamedElementPtr(thisGeneralOrderingPtr);
 }
+
+

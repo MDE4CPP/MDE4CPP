@@ -267,12 +267,10 @@ void MessageEventImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> MessageEventImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getMessageEvent_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -305,7 +303,7 @@ bool MessageEventImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any MessageEventImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any MessageEventImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -325,7 +323,6 @@ Any MessageEventImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::
 	return result;
 }
 
-
 std::shared_ptr<uml::MessageEvent> MessageEventImpl::getThisMessageEventPtr() const
 {
 	return m_thisMessageEventPtr.lock();
@@ -335,3 +332,5 @@ void MessageEventImpl::setThisMessageEventPtr(std::weak_ptr<uml::MessageEvent> t
 	m_thisMessageEventPtr = thisMessageEventPtr;
 	setThisEventPtr(thisMessageEventPtr);
 }
+
+

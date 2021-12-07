@@ -35,8 +35,8 @@
 #include "fUML/Semantics/Loci/ChoiceStrategy.hpp"
 
 //Factories an Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
 
 
@@ -193,12 +193,10 @@ void FirstChoiceStrategyImpl::saveContent(std::shared_ptr<persistence::interface
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> FirstChoiceStrategyImpl::eStaticClass() const
 {
 	return fUML::Semantics::Loci::LociPackage::eInstance()->getFirstChoiceStrategy_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -231,7 +229,7 @@ bool FirstChoiceStrategyImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any FirstChoiceStrategyImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any FirstChoiceStrategyImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -244,9 +242,9 @@ Any FirstChoiceStrategyImpl::eInvoke(int operationID, std::shared_ptr<std::list 
 			//Retrieve input parameter 'size'
 			//parameter 0
 			int incoming_param_size;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_size_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_size = (*incoming_param_size_arguments_citer)->get()->get<int >();
-			result = eAny(this->choose(incoming_param_size));
+			std::list<Any>::const_iterator incoming_param_size_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_size = (*incoming_param_size_arguments_citer)->get<int >();
+					result = eAny(this->choose(incoming_param_size),0,false);
 			break;
 		}
 
@@ -263,7 +261,6 @@ Any FirstChoiceStrategyImpl::eInvoke(int operationID, std::shared_ptr<std::list 
 	return result;
 }
 
-
 std::shared_ptr<fUML::Semantics::Loci::FirstChoiceStrategy> FirstChoiceStrategyImpl::getThisFirstChoiceStrategyPtr() const
 {
 	return m_thisFirstChoiceStrategyPtr.lock();
@@ -273,3 +270,5 @@ void FirstChoiceStrategyImpl::setThisFirstChoiceStrategyPtr(std::weak_ptr<fUML::
 	m_thisFirstChoiceStrategyPtr = thisFirstChoiceStrategyPtr;
 	setThisChoiceStrategyPtr(thisFirstChoiceStrategyPtr);
 }
+
+

@@ -114,14 +114,10 @@ EModelElementImpl& EModelElementImpl::operator=(const EModelElementImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_eAnnotations - Subset<ecore::EAnnotation, ecore::EObject >(getEContentUnion())" << std::endl;
 		#endif
 		
-
-		Bag<ecore::EAnnotation>::iterator eAnnotationsIter = eAnnotationsList->begin();
-		Bag<ecore::EAnnotation>::iterator eAnnotationsEnd = eAnnotationsList->end();
-		while (eAnnotationsIter != eAnnotationsEnd) 
+		for(const std::shared_ptr<ecore::EAnnotation> eAnnotationsindexElem: *eAnnotationsList) 
 		{
-			std::shared_ptr<ecore::EAnnotation> temp = std::dynamic_pointer_cast<ecore::EAnnotation>((*eAnnotationsIter)->copy());
-			getEAnnotations()->push_back(temp);
-			eAnnotationsIter++;
+			std::shared_ptr<ecore::EAnnotation> temp = std::dynamic_pointer_cast<ecore::EAnnotation>((eAnnotationsindexElem)->copy());
+			m_eAnnotations->push_back(temp);
 		}
 	}
 	else
@@ -298,12 +294,10 @@ void EModelElementImpl::saveContent(std::shared_ptr<persistence::interfaces::XSa
 	}
 }
 
-
 std::shared_ptr<EClass> EModelElementImpl::eStaticClass() const
 {
 	return ecore::ecorePackage::eInstance()->getEModelElement_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -314,15 +308,7 @@ Any EModelElementImpl::eGet(int featureID, bool resolve, bool coreType) const
 	{
 		case ecore::ecorePackage::EMODELELEMENT_ATTRIBUTE_EANNOTATIONS:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<ecore::EAnnotation>::iterator iter = getEAnnotations()->begin();
-			Bag<ecore::EAnnotation>::iterator end = getEAnnotations()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //373			
+			return eAnyBag(getEAnnotations(),1746034582); //373
 		}
 	}
 	return EObjectImpl::eGet(featureID, resolve, coreType);
@@ -345,36 +331,37 @@ bool EModelElementImpl::eSet(int featureID, Any newValue)
 		case ecore::ecorePackage::EMODELELEMENT_ATTRIBUTE_EANNOTATIONS:
 		{
 			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<ecore::EAnnotation>> eAnnotationsList(new Bag<ecore::EAnnotation>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
+			if((newValue->isContainer()) && (ecore::ecorePackage::EANNOTATION_CLASS ==newValue->getTypeId()))
 			{
-				eAnnotationsList->add(std::dynamic_pointer_cast<ecore::EAnnotation>(*iter));
-				iter++;
-			}
-			
-			Bag<ecore::EAnnotation>::iterator iterEAnnotations = getEAnnotations()->begin();
-			Bag<ecore::EAnnotation>::iterator endEAnnotations = getEAnnotations()->end();
-			while (iterEAnnotations != endEAnnotations)
-			{
-				if (eAnnotationsList->find(*iterEAnnotations) == -1)
+				try
 				{
-					getEAnnotations()->erase(*iterEAnnotations);
+					std::shared_ptr<Bag<ecore::EAnnotation>> eAnnotationsList= newValue->get<std::shared_ptr<Bag<ecore::EAnnotation>>>();
+					std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotations=getEAnnotations();
+					for(const std::shared_ptr<ecore::EAnnotation> indexEAnnotations: *_eAnnotations)
+					{
+						if (eAnnotationsList->find(indexEAnnotations) == -1)
+						{
+							_eAnnotations->erase(indexEAnnotations);
+						}
+					}
+
+					for(const std::shared_ptr<ecore::EAnnotation> indexEAnnotations: *eAnnotationsList)
+					{
+						if (_eAnnotations->find(indexEAnnotations) == -1)
+						{
+							_eAnnotations->add(indexEAnnotations);
+						}
+					}
 				}
-				iterEAnnotations++;
-			}
- 
-			iterEAnnotations = eAnnotationsList->begin();
-			endEAnnotations = eAnnotationsList->end();
-			while (iterEAnnotations != endEAnnotations)
-			{
-				if (getEAnnotations()->find(*iterEAnnotations) == -1)
+				catch(...)
 				{
-					getEAnnotations()->add(*iterEAnnotations);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterEAnnotations++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}
@@ -392,8 +379,7 @@ Any EModelElementImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> 
 
   	switch(operationID)
 	{
-		
-		// 304921690
+		// ecore::EModelElement::getEAnnotation(std::string) : ecore::EAnnotation: 304921690
 		case ecorePackage::EMODELELEMENT_OPERATION_GETEANNOTATION_ESTRING:
 		{
 			//Retrieve input parameter 'source'
@@ -401,7 +387,7 @@ Any EModelElementImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> 
 			std::string incoming_param_source;
 			std::list<Any>::const_iterator incoming_param_source_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_source = (*incoming_param_source_arguments_citer)->get<std::string >();
-			result = eAny(this->getEAnnotation(incoming_param_source));
+			result = eAny(this->getEAnnotation(incoming_param_source), ecorePackage::EANNOTATION_CLASS,false);
 			break;
 		}
 
@@ -418,7 +404,6 @@ Any EModelElementImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> 
 	return result;
 }
 
-
 std::shared_ptr<ecore::EModelElement> EModelElementImpl::getThisEModelElementPtr() const
 {
 	return m_thisEModelElementPtr.lock();
@@ -428,3 +413,5 @@ void EModelElementImpl::setThisEModelElementPtr(std::weak_ptr<ecore::EModelEleme
 	m_thisEModelElementPtr = thisEModelElementPtr;
 	setThisEObjectPtr(thisEModelElementPtr);
 }
+
+

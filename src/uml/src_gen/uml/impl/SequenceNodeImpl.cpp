@@ -509,12 +509,10 @@ void SequenceNodeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> SequenceNodeImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getSequenceNode_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -525,15 +523,7 @@ Any SequenceNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 	{
 		case uml::umlPackage::SEQUENCENODE_ATTRIBUTE_EXECUTABLENODE:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::ExecutableNode>::iterator iter = getExecutableNode()->begin();
-			Bag<uml::ExecutableNode>::iterator end = getExecutableNode()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //21444			
+			return eAnyBag(getExecutableNode(),1759403238); //21444
 		}
 	}
 	return StructuredActivityNodeImpl::eGet(featureID, resolve, coreType);
@@ -556,36 +546,37 @@ bool SequenceNodeImpl::eSet(int featureID, Any newValue)
 		case uml::umlPackage::SEQUENCENODE_ATTRIBUTE_EXECUTABLENODE:
 		{
 			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::ExecutableNode>> executableNodeList(new Bag<uml::ExecutableNode>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
+			if((newValue->isContainer()) && (uml::umlPackage::EXECUTABLENODE_CLASS ==newValue->getTypeId()))
 			{
-				executableNodeList->add(std::dynamic_pointer_cast<uml::ExecutableNode>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::ExecutableNode>::iterator iterExecutableNode = getExecutableNode()->begin();
-			Bag<uml::ExecutableNode>::iterator endExecutableNode = getExecutableNode()->end();
-			while (iterExecutableNode != endExecutableNode)
-			{
-				if (executableNodeList->find(*iterExecutableNode) == -1)
+				try
 				{
-					getExecutableNode()->erase(*iterExecutableNode);
+					std::shared_ptr<Bag<uml::ExecutableNode>> executableNodeList= newValue->get<std::shared_ptr<Bag<uml::ExecutableNode>>>();
+					std::shared_ptr<Bag<uml::ExecutableNode>> _executableNode=getExecutableNode();
+					for(const std::shared_ptr<uml::ExecutableNode> indexExecutableNode: *_executableNode)
+					{
+						if (executableNodeList->find(indexExecutableNode) == -1)
+						{
+							_executableNode->erase(indexExecutableNode);
+						}
+					}
+
+					for(const std::shared_ptr<uml::ExecutableNode> indexExecutableNode: *executableNodeList)
+					{
+						if (_executableNode->find(indexExecutableNode) == -1)
+						{
+							_executableNode->add(indexExecutableNode);
+						}
+					}
 				}
-				iterExecutableNode++;
-			}
- 
-			iterExecutableNode = executableNodeList->begin();
-			endExecutableNode = executableNodeList->end();
-			while (iterExecutableNode != endExecutableNode)
-			{
-				if (getExecutableNode()->find(*iterExecutableNode) == -1)
+				catch(...)
 				{
-					getExecutableNode()->add(*iterExecutableNode);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterExecutableNode++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}
@@ -597,7 +588,7 @@ bool SequenceNodeImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any SequenceNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any SequenceNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -617,7 +608,6 @@ Any SequenceNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::
 	return result;
 }
 
-
 std::shared_ptr<uml::SequenceNode> SequenceNodeImpl::getThisSequenceNodePtr() const
 {
 	return m_thisSequenceNodePtr.lock();
@@ -627,3 +617,5 @@ void SequenceNodeImpl::setThisSequenceNodePtr(std::weak_ptr<uml::SequenceNode> t
 	m_thisSequenceNodePtr = thisSequenceNodePtr;
 	setThisStructuredActivityNodePtr(thisSequenceNodePtr);
 }
+
+

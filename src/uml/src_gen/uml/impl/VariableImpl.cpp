@@ -353,12 +353,10 @@ void VariableImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> VariableImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getVariable_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -370,12 +368,12 @@ Any VariableImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::VARIABLE_ATTRIBUTE_ACTIVITYSCOPE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getActivityScope().lock();
-			return eAny(returnValue); //25219
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //25219
 		}
 		case uml::umlPackage::VARIABLE_ATTRIBUTE_SCOPE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getScope().lock();
-			return eAny(returnValue); //25220
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //25220
 		}
 	}
 	Any result;
@@ -442,22 +440,21 @@ bool VariableImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any VariableImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any VariableImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
   	switch(operationID)
 	{
-		
-		// 1435273110
+		// uml::Variable::isAccessibleBy(uml::Action) : bool: 1435273110
 		case umlPackage::VARIABLE_OPERATION_ISACCESSIBLEBY_ACTION:
 		{
 			//Retrieve input parameter 'a'
 			//parameter 0
 			std::shared_ptr<uml::Action> incoming_param_a;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_a_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_a = (*incoming_param_a_arguments_citer)->get()->get<std::shared_ptr<uml::Action> >();
-			result = eAny(this->isAccessibleBy(incoming_param_a));
+			std::list<Any>::const_iterator incoming_param_a_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_a = (*incoming_param_a_arguments_citer)->get<std::shared_ptr<uml::Action> >();
+			result = eAny(this->isAccessibleBy(incoming_param_a),0,false);
 			break;
 		}
 
@@ -477,7 +474,6 @@ Any VariableImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shar
 	return result;
 }
 
-
 std::shared_ptr<uml::Variable> VariableImpl::getThisVariablePtr() const
 {
 	return m_thisVariablePtr.lock();
@@ -488,3 +484,5 @@ void VariableImpl::setThisVariablePtr(std::weak_ptr<uml::Variable> thisVariableP
 	setThisConnectableElementPtr(thisVariablePtr);
 	setThisMultiplicityElementPtr(thisVariablePtr);
 }
+
+

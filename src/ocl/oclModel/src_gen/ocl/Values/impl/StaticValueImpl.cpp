@@ -188,12 +188,10 @@ void StaticValueImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> StaticValueImpl::eStaticClass() const
 {
 	return ocl::Values::ValuesPackage::eInstance()->getStaticValue_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -226,7 +224,7 @@ bool StaticValueImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any StaticValueImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any StaticValueImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -246,7 +244,6 @@ Any StaticValueImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::s
 	return result;
 }
 
-
 std::shared_ptr<ocl::Values::StaticValue> StaticValueImpl::getThisStaticValuePtr() const
 {
 	return m_thisStaticValuePtr.lock();
@@ -256,3 +253,5 @@ void StaticValueImpl::setThisStaticValuePtr(std::weak_ptr<ocl::Values::StaticVal
 	m_thisStaticValuePtr = thisStaticValuePtr;
 	setThisValuePtr(thisStaticValuePtr);
 }
+
+

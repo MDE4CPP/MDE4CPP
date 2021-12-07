@@ -339,12 +339,10 @@ void TimeConstraintImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> TimeConstraintImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getTimeConstraint_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -354,7 +352,7 @@ Any TimeConstraintImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::TIMECONSTRAINT_ATTRIBUTE_FIRSTEVENT:
-			return eAny(getFirstEvent()); //23615
+			return eAny(getFirstEvent(),0,true); //23615
 	}
 	return IntervalConstraintImpl::eGet(featureID, resolve, coreType);
 }
@@ -388,27 +386,26 @@ bool TimeConstraintImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any TimeConstraintImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any TimeConstraintImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
   	switch(operationID)
 	{
-		
-		// 161108299
+		// uml::TimeConstraint::has_one_constrainedElement(Any, std::map) : bool: 161108299
 		case umlPackage::TIMECONSTRAINT_OPERATION_HAS_ONE_CONSTRAINEDELEMENT_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->has_one_constrainedElement(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->has_one_constrainedElement(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
 
@@ -425,7 +422,6 @@ Any TimeConstraintImpl::eInvoke(int operationID, std::shared_ptr<std::list < std
 	return result;
 }
 
-
 std::shared_ptr<uml::TimeConstraint> TimeConstraintImpl::getThisTimeConstraintPtr() const
 {
 	return m_thisTimeConstraintPtr.lock();
@@ -435,3 +431,5 @@ void TimeConstraintImpl::setThisTimeConstraintPtr(std::weak_ptr<uml::TimeConstra
 	m_thisTimeConstraintPtr = thisTimeConstraintPtr;
 	setThisIntervalConstraintPtr(thisTimeConstraintPtr);
 }
+
+

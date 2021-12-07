@@ -42,8 +42,8 @@
 #include "fUML/Semantics/Activities/Token.hpp"
 
 //Factories an Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "uml/umlPackage.hpp"
 
@@ -206,12 +206,10 @@ void MergeNodeActivationImpl::saveContent(std::shared_ptr<persistence::interface
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> MergeNodeActivationImpl::eStaticClass() const
 {
 	return fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getMergeNodeActivation_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -244,7 +242,7 @@ bool MergeNodeActivationImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any MergeNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any MergeNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -264,7 +262,6 @@ Any MergeNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list 
 	return result;
 }
 
-
 std::shared_ptr<fUML::Semantics::Activities::MergeNodeActivation> MergeNodeActivationImpl::getThisMergeNodeActivationPtr() const
 {
 	return m_thisMergeNodeActivationPtr.lock();
@@ -274,3 +271,5 @@ void MergeNodeActivationImpl::setThisMergeNodeActivationPtr(std::weak_ptr<fUML::
 	m_thisMergeNodeActivationPtr = thisMergeNodeActivationPtr;
 	setThisControlNodeActivationPtr(thisMergeNodeActivationPtr);
 }
+
+

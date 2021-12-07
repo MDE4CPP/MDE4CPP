@@ -151,14 +151,10 @@ ExecutableNodeImpl& ExecutableNodeImpl::operator=(const ExecutableNodeImpl & obj
 			std::cout << "Initialising value Subset: " << "m_handler - Subset<uml::ExceptionHandler, uml::Element >(getOwnedElement())" << std::endl;
 		#endif
 		
-
-		Bag<uml::ExceptionHandler>::iterator handlerIter = handlerList->begin();
-		Bag<uml::ExceptionHandler>::iterator handlerEnd = handlerList->end();
-		while (handlerIter != handlerEnd) 
+		for(const std::shared_ptr<uml::ExceptionHandler> handlerindexElem: *handlerList) 
 		{
-			std::shared_ptr<uml::ExceptionHandler> temp = std::dynamic_pointer_cast<uml::ExceptionHandler>((*handlerIter)->copy());
-			getHandler()->push_back(temp);
-			handlerIter++;
+			std::shared_ptr<uml::ExceptionHandler> temp = std::dynamic_pointer_cast<uml::ExceptionHandler>((handlerindexElem)->copy());
+			m_handler->push_back(temp);
 		}
 	}
 	else
@@ -379,12 +375,10 @@ void ExecutableNodeImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> ExecutableNodeImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getExecutableNode_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -395,15 +389,7 @@ Any ExecutableNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 	{
 		case uml::umlPackage::EXECUTABLENODE_ATTRIBUTE_HANDLER:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::ExceptionHandler>::iterator iter = getHandler()->begin();
-			Bag<uml::ExceptionHandler>::iterator end = getHandler()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //8820			
+			return eAnyBag(getHandler(),1521014251); //8820
 		}
 	}
 	return ActivityNodeImpl::eGet(featureID, resolve, coreType);
@@ -426,36 +412,37 @@ bool ExecutableNodeImpl::eSet(int featureID, Any newValue)
 		case uml::umlPackage::EXECUTABLENODE_ATTRIBUTE_HANDLER:
 		{
 			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::ExceptionHandler>> handlerList(new Bag<uml::ExceptionHandler>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
+			if((newValue->isContainer()) && (uml::umlPackage::EXCEPTIONHANDLER_CLASS ==newValue->getTypeId()))
 			{
-				handlerList->add(std::dynamic_pointer_cast<uml::ExceptionHandler>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::ExceptionHandler>::iterator iterHandler = getHandler()->begin();
-			Bag<uml::ExceptionHandler>::iterator endHandler = getHandler()->end();
-			while (iterHandler != endHandler)
-			{
-				if (handlerList->find(*iterHandler) == -1)
+				try
 				{
-					getHandler()->erase(*iterHandler);
+					std::shared_ptr<Bag<uml::ExceptionHandler>> handlerList= newValue->get<std::shared_ptr<Bag<uml::ExceptionHandler>>>();
+					std::shared_ptr<Bag<uml::ExceptionHandler>> _handler=getHandler();
+					for(const std::shared_ptr<uml::ExceptionHandler> indexHandler: *_handler)
+					{
+						if (handlerList->find(indexHandler) == -1)
+						{
+							_handler->erase(indexHandler);
+						}
+					}
+
+					for(const std::shared_ptr<uml::ExceptionHandler> indexHandler: *handlerList)
+					{
+						if (_handler->find(indexHandler) == -1)
+						{
+							_handler->add(indexHandler);
+						}
+					}
 				}
-				iterHandler++;
-			}
- 
-			iterHandler = handlerList->begin();
-			endHandler = handlerList->end();
-			while (iterHandler != endHandler)
-			{
-				if (getHandler()->find(*iterHandler) == -1)
+				catch(...)
 				{
-					getHandler()->add(*iterHandler);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterHandler++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}
@@ -467,7 +454,7 @@ bool ExecutableNodeImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ExecutableNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any ExecutableNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -487,7 +474,6 @@ Any ExecutableNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std
 	return result;
 }
 
-
 std::shared_ptr<uml::ExecutableNode> ExecutableNodeImpl::getThisExecutableNodePtr() const
 {
 	return m_thisExecutableNodePtr.lock();
@@ -497,3 +483,5 @@ void ExecutableNodeImpl::setThisExecutableNodePtr(std::weak_ptr<uml::ExecutableN
 	m_thisExecutableNodePtr = thisExecutableNodePtr;
 	setThisActivityNodePtr(thisExecutableNodePtr);
 }
+
+

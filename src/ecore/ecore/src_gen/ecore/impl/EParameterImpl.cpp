@@ -237,12 +237,10 @@ void EParameterImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 	}
 }
 
-
 std::shared_ptr<EClass> EParameterImpl::eStaticClass() const
 {
 	return ecore::ecorePackage::eInstance()->getEParameter_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -254,7 +252,7 @@ Any EParameterImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case ecore::ecorePackage::EPARAMETER_ATTRIBUTE_EOPERATION:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getEOperation().lock();
-			return eAny(returnValue); //4313
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //4313
 		}
 	}
 	return ETypedElementImpl::eGet(featureID, resolve, coreType);
@@ -302,7 +300,6 @@ Any EParameterImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arg
 	return result;
 }
 
-
 std::shared_ptr<ecore::EParameter> EParameterImpl::getThisEParameterPtr() const
 {
 	return m_thisEParameterPtr.lock();
@@ -312,3 +309,5 @@ void EParameterImpl::setThisEParameterPtr(std::weak_ptr<ecore::EParameter> thisE
 	m_thisEParameterPtr = thisEParameterPtr;
 	setThisETypedElementPtr(thisEParameterPtr);
 }
+
+

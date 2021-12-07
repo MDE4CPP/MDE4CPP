@@ -127,14 +127,10 @@ TemplateSignatureImpl& TemplateSignatureImpl::operator=(const TemplateSignatureI
 			std::cout << "Initialising value Subset: " << "m_ownedParameter - Subset<uml::TemplateParameter, uml::Element, uml::TemplateParameter >(getOwnedElement(), getParameter())" << std::endl;
 		#endif
 		
-
-		Bag<uml::TemplateParameter>::iterator ownedParameterIter = ownedParameterList->begin();
-		Bag<uml::TemplateParameter>::iterator ownedParameterEnd = ownedParameterList->end();
-		while (ownedParameterIter != ownedParameterEnd) 
+		for(const std::shared_ptr<uml::TemplateParameter> ownedParameterindexElem: *ownedParameterList) 
 		{
-			std::shared_ptr<uml::TemplateParameter> temp = std::dynamic_pointer_cast<uml::TemplateParameter>((*ownedParameterIter)->copy());
-			getOwnedParameter()->push_back(temp);
-			ownedParameterIter++;
+			std::shared_ptr<uml::TemplateParameter> temp = std::dynamic_pointer_cast<uml::TemplateParameter>((ownedParameterindexElem)->copy());
+			m_ownedParameter->push_back(temp);
 		}
 	}
 	else
@@ -405,12 +401,10 @@ void TemplateSignatureImpl::saveContent(std::shared_ptr<persistence::interfaces:
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> TemplateSignatureImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getTemplateSignature_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -421,32 +415,16 @@ Any TemplateSignatureImpl::eGet(int featureID, bool resolve, bool coreType) cons
 	{
 		case uml::umlPackage::TEMPLATESIGNATURE_ATTRIBUTE_OWNEDPARAMETER:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::TemplateParameter>::iterator iter = getOwnedParameter()->begin();
-			Bag<uml::TemplateParameter>::iterator end = getOwnedParameter()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //2335			
+			return eAnyBag(getOwnedParameter(),821817342); //2335
 		}
 		case uml::umlPackage::TEMPLATESIGNATURE_ATTRIBUTE_PARAMETER:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::TemplateParameter>::iterator iter = getParameter()->begin();
-			Bag<uml::TemplateParameter>::iterator end = getParameter()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //2333			
+			return eAnyBag(getParameter(),821817342); //2333
 		}
 		case uml::umlPackage::TEMPLATESIGNATURE_ATTRIBUTE_TEMPLATE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getTemplate().lock();
-			return eAny(returnValue); //2334
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //2334
 		}
 	}
 	return ElementImpl::eGet(featureID, resolve, coreType);
@@ -473,72 +451,74 @@ bool TemplateSignatureImpl::eSet(int featureID, Any newValue)
 		case uml::umlPackage::TEMPLATESIGNATURE_ATTRIBUTE_OWNEDPARAMETER:
 		{
 			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::TemplateParameter>> ownedParameterList(new Bag<uml::TemplateParameter>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
+			if((newValue->isContainer()) && (uml::umlPackage::TEMPLATEPARAMETER_CLASS ==newValue->getTypeId()))
 			{
-				ownedParameterList->add(std::dynamic_pointer_cast<uml::TemplateParameter>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::TemplateParameter>::iterator iterOwnedParameter = getOwnedParameter()->begin();
-			Bag<uml::TemplateParameter>::iterator endOwnedParameter = getOwnedParameter()->end();
-			while (iterOwnedParameter != endOwnedParameter)
-			{
-				if (ownedParameterList->find(*iterOwnedParameter) == -1)
+				try
 				{
-					getOwnedParameter()->erase(*iterOwnedParameter);
+					std::shared_ptr<Bag<uml::TemplateParameter>> ownedParameterList= newValue->get<std::shared_ptr<Bag<uml::TemplateParameter>>>();
+					std::shared_ptr<Bag<uml::TemplateParameter>> _ownedParameter=getOwnedParameter();
+					for(const std::shared_ptr<uml::TemplateParameter> indexOwnedParameter: *_ownedParameter)
+					{
+						if (ownedParameterList->find(indexOwnedParameter) == -1)
+						{
+							_ownedParameter->erase(indexOwnedParameter);
+						}
+					}
+
+					for(const std::shared_ptr<uml::TemplateParameter> indexOwnedParameter: *ownedParameterList)
+					{
+						if (_ownedParameter->find(indexOwnedParameter) == -1)
+						{
+							_ownedParameter->add(indexOwnedParameter);
+						}
+					}
 				}
-				iterOwnedParameter++;
-			}
- 
-			iterOwnedParameter = ownedParameterList->begin();
-			endOwnedParameter = ownedParameterList->end();
-			while (iterOwnedParameter != endOwnedParameter)
-			{
-				if (getOwnedParameter()->find(*iterOwnedParameter) == -1)
+				catch(...)
 				{
-					getOwnedParameter()->add(*iterOwnedParameter);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterOwnedParameter++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}
 		case uml::umlPackage::TEMPLATESIGNATURE_ATTRIBUTE_PARAMETER:
 		{
 			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::TemplateParameter>> parameterList(new Bag<uml::TemplateParameter>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
+			if((newValue->isContainer()) && (uml::umlPackage::TEMPLATEPARAMETER_CLASS ==newValue->getTypeId()))
 			{
-				parameterList->add(std::dynamic_pointer_cast<uml::TemplateParameter>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::TemplateParameter>::iterator iterParameter = getParameter()->begin();
-			Bag<uml::TemplateParameter>::iterator endParameter = getParameter()->end();
-			while (iterParameter != endParameter)
-			{
-				if (parameterList->find(*iterParameter) == -1)
+				try
 				{
-					getParameter()->erase(*iterParameter);
+					std::shared_ptr<Bag<uml::TemplateParameter>> parameterList= newValue->get<std::shared_ptr<Bag<uml::TemplateParameter>>>();
+					std::shared_ptr<Bag<uml::TemplateParameter>> _parameter=getParameter();
+					for(const std::shared_ptr<uml::TemplateParameter> indexParameter: *_parameter)
+					{
+						if (parameterList->find(indexParameter) == -1)
+						{
+							_parameter->erase(indexParameter);
+						}
+					}
+
+					for(const std::shared_ptr<uml::TemplateParameter> indexParameter: *parameterList)
+					{
+						if (_parameter->find(indexParameter) == -1)
+						{
+							_parameter->add(indexParameter);
+						}
+					}
 				}
-				iterParameter++;
-			}
- 
-			iterParameter = parameterList->begin();
-			endParameter = parameterList->end();
-			while (iterParameter != endParameter)
-			{
-				if (getParameter()->find(*iterParameter) == -1)
+				catch(...)
 				{
-					getParameter()->add(*iterParameter);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterParameter++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}
@@ -558,44 +538,42 @@ bool TemplateSignatureImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any TemplateSignatureImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any TemplateSignatureImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
   	switch(operationID)
 	{
-		
-		// 545793563
+		// uml::TemplateSignature::own_elements(Any, std::map) : bool: 545793563
 		case umlPackage::TEMPLATESIGNATURE_OPERATION_OWN_ELEMENTS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->own_elements(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->own_elements(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		
-		// 1841790268
+		// uml::TemplateSignature::unique_parameters(Any, std::map) : bool: 1841790268
 		case umlPackage::TEMPLATESIGNATURE_OPERATION_UNIQUE_PARAMETERS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->unique_parameters(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->unique_parameters(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
 
@@ -612,7 +590,6 @@ Any TemplateSignatureImpl::eInvoke(int operationID, std::shared_ptr<std::list < 
 	return result;
 }
 
-
 std::shared_ptr<uml::TemplateSignature> TemplateSignatureImpl::getThisTemplateSignaturePtr() const
 {
 	return m_thisTemplateSignaturePtr.lock();
@@ -622,3 +599,5 @@ void TemplateSignatureImpl::setThisTemplateSignaturePtr(std::weak_ptr<uml::Templ
 	m_thisTemplateSignaturePtr = thisTemplateSignaturePtr;
 	setThisElementPtr(thisTemplateSignaturePtr);
 }
+
+

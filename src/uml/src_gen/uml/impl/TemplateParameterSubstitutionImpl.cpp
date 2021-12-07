@@ -388,12 +388,10 @@ void TemplateParameterSubstitutionImpl::saveContent(std::shared_ptr<persistence:
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> TemplateParameterSubstitutionImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getTemplateParameterSubstitution_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -405,22 +403,22 @@ Any TemplateParameterSubstitutionImpl::eGet(int featureID, bool resolve, bool co
 		case uml::umlPackage::TEMPLATEPARAMETERSUBSTITUTION_ATTRIBUTE_ACTUAL:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getActual();
-			return eAny(returnValue); //2323
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //2323
 		}
 		case uml::umlPackage::TEMPLATEPARAMETERSUBSTITUTION_ATTRIBUTE_FORMAL:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getFormal();
-			return eAny(returnValue); //2324
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //2324
 		}
 		case uml::umlPackage::TEMPLATEPARAMETERSUBSTITUTION_ATTRIBUTE_OWNEDACTUAL:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getOwnedActual();
-			return eAny(returnValue); //2325
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //2325
 		}
 		case uml::umlPackage::TEMPLATEPARAMETERSUBSTITUTION_ATTRIBUTE_TEMPLATEBINDING:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getTemplateBinding().lock();
-			return eAny(returnValue); //2326
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //2326
 		}
 	}
 	return ElementImpl::eGet(featureID, resolve, coreType);
@@ -486,27 +484,26 @@ bool TemplateParameterSubstitutionImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any TemplateParameterSubstitutionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any TemplateParameterSubstitutionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
   	switch(operationID)
 	{
-		
-		// 649406787
+		// uml::TemplateParameterSubstitution::must_be_compatible(Any, std::map) : bool: 649406787
 		case umlPackage::TEMPLATEPARAMETERSUBSTITUTION_OPERATION_MUST_BE_COMPATIBLE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->must_be_compatible(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->must_be_compatible(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
 
@@ -523,7 +520,6 @@ Any TemplateParameterSubstitutionImpl::eInvoke(int operationID, std::shared_ptr<
 	return result;
 }
 
-
 std::shared_ptr<uml::TemplateParameterSubstitution> TemplateParameterSubstitutionImpl::getThisTemplateParameterSubstitutionPtr() const
 {
 	return m_thisTemplateParameterSubstitutionPtr.lock();
@@ -533,3 +529,5 @@ void TemplateParameterSubstitutionImpl::setThisTemplateParameterSubstitutionPtr(
 	m_thisTemplateParameterSubstitutionPtr = thisTemplateParameterSubstitutionPtr;
 	setThisElementPtr(thisTemplateParameterSubstitutionPtr);
 }
+
+

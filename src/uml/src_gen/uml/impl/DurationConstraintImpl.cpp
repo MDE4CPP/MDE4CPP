@@ -143,13 +143,10 @@ DurationConstraintImpl& DurationConstraintImpl::operator=(const DurationConstrai
 	std::shared_ptr<Bag<bool>> firstEventList = obj.isFirstEvent();
 	if(firstEventList)
 	{	
-		isFirstEvent().reset(new Bag<bool>());
-		Bag<bool>::iterator firstEventIter = firstEventList->begin();
-		Bag<bool>::iterator firstEventEnd = firstEventList->end();
-		while (firstEventIter != firstEventEnd) 
+		m_firstEvent.reset(new Bag<bool>());
+		for(const std::shared_ptr<bool> it: *firstEventList) 
 		{
-			isFirstEvent()->push_back(*firstEventIter);
-			firstEventIter++;
+			m_firstEvent->push_back(*it);
 		}
 	}
 	else
@@ -357,12 +354,10 @@ void DurationConstraintImpl::saveContent(std::shared_ptr<persistence::interfaces
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> DurationConstraintImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getDurationConstraint_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -372,7 +367,7 @@ Any DurationConstraintImpl::eGet(int featureID, bool resolve, bool coreType) con
 	switch(featureID)
 	{
 		case uml::umlPackage::DURATIONCONSTRAINT_ATTRIBUTE_FIRSTEVENT:
-			return eAny(isFirstEvent()); //7815
+			return eAny(isFirstEvent(),0,false); //7815
 	}
 	return IntervalConstraintImpl::eGet(featureID, resolve, coreType);
 }
@@ -405,44 +400,42 @@ bool DurationConstraintImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any DurationConstraintImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any DurationConstraintImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
   	switch(operationID)
 	{
-		
-		// 605050300
+		// uml::DurationConstraint::first_event_multiplicity(Any, std::map) : bool: 605050300
 		case umlPackage::DURATIONCONSTRAINT_OPERATION_FIRST_EVENT_MULTIPLICITY_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->first_event_multiplicity(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->first_event_multiplicity(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		
-		// 662438263
+		// uml::DurationConstraint::has_one_or_two_constrainedElements(Any, std::map) : bool: 662438263
 		case umlPackage::DURATIONCONSTRAINT_OPERATION_HAS_ONE_OR_TWO_CONSTRAINEDELEMENTS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->has_one_or_two_constrainedElements(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->has_one_or_two_constrainedElements(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
 
@@ -459,7 +452,6 @@ Any DurationConstraintImpl::eInvoke(int operationID, std::shared_ptr<std::list <
 	return result;
 }
 
-
 std::shared_ptr<uml::DurationConstraint> DurationConstraintImpl::getThisDurationConstraintPtr() const
 {
 	return m_thisDurationConstraintPtr.lock();
@@ -469,3 +461,5 @@ void DurationConstraintImpl::setThisDurationConstraintPtr(std::weak_ptr<uml::Dur
 	m_thisDurationConstraintPtr = thisDurationConstraintPtr;
 	setThisIntervalConstraintPtr(thisDurationConstraintPtr);
 }
+
+

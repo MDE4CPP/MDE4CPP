@@ -132,4 +132,75 @@ namespace ecore
 			mutable std::shared_ptr<Union<ecore::EObject>> m_eContentUnion;
 	};
 }
+#include "abstractDataTypes/Any.hpp"
+#include "abstractDataTypes/Bag.hpp"
+
+Any eAny(std::shared_ptr<ecore::EObject> value);
+
+class AnyEObjectBag: virtual public AnyObject
+{
+public:
+	template <typename T> AnyEObjectBag(T value,long long typeID, bool isContainer=true):AnyObject(value, typeID,isContainer)
+	{
+	}
+
+	virtual ~AnyEObjectBag()
+	{
+	}
+
+	virtual std::shared_ptr<Bag<ecore::EObject>> getBag()
+	{
+		if(2051543432==this->getTypeId())  /*ecore::ecorePackage::EOBJECT_CLASS*/
+		{
+			return this->get<std::shared_ptr<Bag<ecore::EObject>>>();
+		}
+		return std::make_shared<Bag<ecore::EObject>>(); // return emptyList
+	}
+};
+
+template <class T> class AnyGenericBag: virtual public AnyEObjectBag
+{
+public:
+	template <class N> AnyGenericBag(N value,long long typeID=0, bool isContainer=true):AnyEObjectBag(value, typeID, isContainer),AnyObject(value, typeID, isContainer)
+	{
+	}
+
+	void resetBag(T value)
+	{
+		TypedObject<T>* obj = dynamic_cast<TypedObject<T>*>(m_object);
+		if (obj)
+		{
+			return obj->set(value);
+		}
+		throw "Any::get - cast failed";
+	}
+
+	virtual std::shared_ptr<Bag<ecore::EObject>> getBag()
+	{
+		if(2051543432==this->getTypeId()) /*ecore::ecorePackage::EOBJECT_CLASS*/
+		{
+			return AnyEObjectBag::getBag();
+		}
+		else
+		{
+			std::shared_ptr<Bag<ecore::EObject>> returnList=std::make_shared<Bag<ecore::EObject>>();
+			T anyBag=this->get<T>();
+			for (auto i : *anyBag)
+			{
+				std::shared_ptr<ecore::EObject> object= std::dynamic_pointer_cast<ecore::EObject>(i);
+				if(object)
+				{
+					returnList->push_back(object);
+				}
+			}
+			return returnList;
+		}
+	}
+};
+
+template <typename T> static Any eAnyBag(T value,long long typeID)
+{
+	Any any(new AnyGenericBag<T>(value,typeID,true));
+	return any;
+}
 #endif /* end of include guard: ECORE_EOBJECT_HPP */

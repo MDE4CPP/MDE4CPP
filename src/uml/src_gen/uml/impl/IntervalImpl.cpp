@@ -383,12 +383,10 @@ void IntervalImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> IntervalImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getInterval_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -400,12 +398,12 @@ Any IntervalImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::INTERVAL_ATTRIBUTE_MAX:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getMax();
-			return eAny(returnValue); //12815
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //12815
 		}
 		case uml::umlPackage::INTERVAL_ATTRIBUTE_MIN:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getMin();
-			return eAny(returnValue); //12816
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //12816
 		}
 	}
 	return ValueSpecificationImpl::eGet(featureID, resolve, coreType);
@@ -451,7 +449,7 @@ bool IntervalImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any IntervalImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any IntervalImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -471,7 +469,6 @@ Any IntervalImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shar
 	return result;
 }
 
-
 std::shared_ptr<uml::Interval> IntervalImpl::getThisIntervalPtr() const
 {
 	return m_thisIntervalPtr.lock();
@@ -481,3 +478,5 @@ void IntervalImpl::setThisIntervalPtr(std::weak_ptr<uml::Interval> thisIntervalP
 	m_thisIntervalPtr = thisIntervalPtr;
 	setThisValueSpecificationPtr(thisIntervalPtr);
 }
+
+

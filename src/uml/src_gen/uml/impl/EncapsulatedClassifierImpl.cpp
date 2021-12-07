@@ -176,14 +176,10 @@ EncapsulatedClassifierImpl& EncapsulatedClassifierImpl::operator=(const Encapsul
 			std::cout << "Initialising value Subset: " << "m_ownedPort - Subset<uml::Port, uml::Property /*Subset does not reference a union*/ >(getOwnedAttribute())" << std::endl;
 		#endif
 		
-
-		Bag<uml::Port>::iterator ownedPortIter = ownedPortList->begin();
-		Bag<uml::Port>::iterator ownedPortEnd = ownedPortList->end();
-		while (ownedPortIter != ownedPortEnd) 
+		for(const std::shared_ptr<uml::Port> ownedPortindexElem: *ownedPortList) 
 		{
-			std::shared_ptr<uml::Port> temp = std::dynamic_pointer_cast<uml::Port>((*ownedPortIter)->copy());
-			getOwnedPort()->push_back(temp);
-			ownedPortIter++;
+			std::shared_ptr<uml::Port> temp = std::dynamic_pointer_cast<uml::Port>((ownedPortindexElem)->copy());
+			m_ownedPort->push_back(temp);
 		}
 	}
 	else
@@ -517,12 +513,10 @@ void EncapsulatedClassifierImpl::saveContent(std::shared_ptr<persistence::interf
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> EncapsulatedClassifierImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getEncapsulatedClassifier_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -533,15 +527,7 @@ Any EncapsulatedClassifierImpl::eGet(int featureID, bool resolve, bool coreType)
 	{
 		case uml::umlPackage::ENCAPSULATEDCLASSIFIER_ATTRIBUTE_OWNEDPORT:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Port>::iterator iter = getOwnedPort()->begin();
-			Bag<uml::Port>::iterator end = getOwnedPort()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //8342			
+			return eAnyBag(getOwnedPort(),71420588); //8342
 		}
 	}
 	return StructuredClassifierImpl::eGet(featureID, resolve, coreType);
@@ -569,17 +555,17 @@ bool EncapsulatedClassifierImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any EncapsulatedClassifierImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any EncapsulatedClassifierImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
   	switch(operationID)
 	{
-		
-		// 1343953906
+		// uml::EncapsulatedClassifier::getOwnedPorts() : uml::Port[*]: 1343953906
 		case umlPackage::ENCAPSULATEDCLASSIFIER_OPERATION_GETOWNEDPORTS:
 		{
-			result = eAny(this->getOwnedPorts());
+			std::shared_ptr<Bag<uml::Port> > resultList = this->getOwnedPorts();
+			return eAny(resultList,umlPackage::PORT_CLASS,true);
 			break;
 		}
 
@@ -596,7 +582,6 @@ Any EncapsulatedClassifierImpl::eInvoke(int operationID, std::shared_ptr<std::li
 	return result;
 }
 
-
 std::shared_ptr<uml::EncapsulatedClassifier> EncapsulatedClassifierImpl::getThisEncapsulatedClassifierPtr() const
 {
 	return m_thisEncapsulatedClassifierPtr.lock();
@@ -606,3 +591,5 @@ void EncapsulatedClassifierImpl::setThisEncapsulatedClassifierPtr(std::weak_ptr<
 	m_thisEncapsulatedClassifierPtr = thisEncapsulatedClassifierPtr;
 	setThisStructuredClassifierPtr(thisEncapsulatedClassifierPtr);
 }
+
+

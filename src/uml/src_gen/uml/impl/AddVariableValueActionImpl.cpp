@@ -430,12 +430,10 @@ void AddVariableValueActionImpl::saveContent(std::shared_ptr<persistence::interf
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> AddVariableValueActionImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getAddVariableValueAction_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -447,10 +445,10 @@ Any AddVariableValueActionImpl::eGet(int featureID, bool resolve, bool coreType)
 		case uml::umlPackage::ADDVARIABLEVALUEACTION_ATTRIBUTE_INSERTAT:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getInsertAt();
-			return eAny(returnValue); //1629
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //1629
 		}
 		case uml::umlPackage::ADDVARIABLEVALUEACTION_ATTRIBUTE_ISREPLACEALL:
-			return eAny(getIsReplaceAll()); //1630
+			return eAny(getIsReplaceAll(),0,true); //1630
 	}
 	return WriteVariableActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -494,44 +492,42 @@ bool AddVariableValueActionImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any AddVariableValueActionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any AddVariableValueActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
   	switch(operationID)
 	{
-		
-		// 39023039
+		// uml::AddVariableValueAction::insertAt_pin(Any, std::map) : bool: 39023039
 		case umlPackage::ADDVARIABLEVALUEACTION_OPERATION_INSERTAT_PIN_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->insertAt_pin(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->insertAt_pin(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		
-		// 1623846851
+		// uml::AddVariableValueAction::required_value(Any, std::map) : bool: 1623846851
 		case umlPackage::ADDVARIABLEVALUEACTION_OPERATION_REQUIRED_VALUE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->required_value(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->required_value(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
 
@@ -548,7 +544,6 @@ Any AddVariableValueActionImpl::eInvoke(int operationID, std::shared_ptr<std::li
 	return result;
 }
 
-
 std::shared_ptr<uml::AddVariableValueAction> AddVariableValueActionImpl::getThisAddVariableValueActionPtr() const
 {
 	return m_thisAddVariableValueActionPtr.lock();
@@ -558,3 +553,5 @@ void AddVariableValueActionImpl::setThisAddVariableValueActionPtr(std::weak_ptr<
 	m_thisAddVariableValueActionPtr = thisAddVariableValueActionPtr;
 	setThisWriteVariableActionPtr(thisAddVariableValueActionPtr);
 }
+
+

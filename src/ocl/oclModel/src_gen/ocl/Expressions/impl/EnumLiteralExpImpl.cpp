@@ -395,12 +395,10 @@ void EnumLiteralExpImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> EnumLiteralExpImpl::eStaticClass() const
 {
 	return ocl::Expressions::ExpressionsPackage::eInstance()->getEnumLiteralExp_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -412,7 +410,7 @@ Any EnumLiteralExpImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case ocl::Expressions::ExpressionsPackage::ENUMLITERALEXP_ATTRIBUTE_REFERREDENUMLITERAL:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getReferredEnumLiteral();
-			return eAny(returnValue); //2422
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //2422
 		}
 	}
 	return LiteralExpImpl::eGet(featureID, resolve, coreType);
@@ -448,7 +446,7 @@ bool EnumLiteralExpImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any EnumLiteralExpImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any EnumLiteralExpImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -468,7 +466,6 @@ Any EnumLiteralExpImpl::eInvoke(int operationID, std::shared_ptr<std::list < std
 	return result;
 }
 
-
 std::shared_ptr<ocl::Expressions::EnumLiteralExp> EnumLiteralExpImpl::getThisEnumLiteralExpPtr() const
 {
 	return m_thisEnumLiteralExpPtr.lock();
@@ -478,3 +475,5 @@ void EnumLiteralExpImpl::setThisEnumLiteralExpPtr(std::weak_ptr<ocl::Expressions
 	m_thisEnumLiteralExpPtr = thisEnumLiteralExpPtr;
 	setThisLiteralExpPtr(thisEnumLiteralExpPtr);
 }
+
+

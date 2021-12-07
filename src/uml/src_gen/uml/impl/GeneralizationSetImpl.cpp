@@ -419,12 +419,10 @@ void GeneralizationSetImpl::saveContent(std::shared_ptr<persistence::interfaces:
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> GeneralizationSetImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getGeneralizationSet_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -435,24 +433,16 @@ Any GeneralizationSetImpl::eGet(int featureID, bool resolve, bool coreType) cons
 	{
 		case uml::umlPackage::GENERALIZATIONSET_ATTRIBUTE_GENERALIZATION:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Generalization>::iterator iter = getGeneralization()->begin();
-			Bag<uml::Generalization>::iterator end = getGeneralization()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //11015			
+			return eAnyBag(getGeneralization(),2081117978); //11015
 		}
 		case uml::umlPackage::GENERALIZATIONSET_ATTRIBUTE_ISCOVERING:
-			return eAny(getIsCovering()); //11012
+			return eAny(getIsCovering(),0,true); //11012
 		case uml::umlPackage::GENERALIZATIONSET_ATTRIBUTE_ISDISJOINT:
-			return eAny(getIsDisjoint()); //11013
+			return eAny(getIsDisjoint(),0,true); //11013
 		case uml::umlPackage::GENERALIZATIONSET_ATTRIBUTE_POWERTYPE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getPowertype();
-			return eAny(returnValue); //11014
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //11014
 		}
 	}
 	return PackageableElementImpl::eGet(featureID, resolve, coreType);
@@ -481,36 +471,37 @@ bool GeneralizationSetImpl::eSet(int featureID, Any newValue)
 		case uml::umlPackage::GENERALIZATIONSET_ATTRIBUTE_GENERALIZATION:
 		{
 			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::Generalization>> generalizationList(new Bag<uml::Generalization>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
+			if((newValue->isContainer()) && (uml::umlPackage::GENERALIZATION_CLASS ==newValue->getTypeId()))
 			{
-				generalizationList->add(std::dynamic_pointer_cast<uml::Generalization>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::Generalization>::iterator iterGeneralization = getGeneralization()->begin();
-			Bag<uml::Generalization>::iterator endGeneralization = getGeneralization()->end();
-			while (iterGeneralization != endGeneralization)
-			{
-				if (generalizationList->find(*iterGeneralization) == -1)
+				try
 				{
-					getGeneralization()->erase(*iterGeneralization);
+					std::shared_ptr<Bag<uml::Generalization>> generalizationList= newValue->get<std::shared_ptr<Bag<uml::Generalization>>>();
+					std::shared_ptr<Bag<uml::Generalization>> _generalization=getGeneralization();
+					for(const std::shared_ptr<uml::Generalization> indexGeneralization: *_generalization)
+					{
+						if (generalizationList->find(indexGeneralization) == -1)
+						{
+							_generalization->erase(indexGeneralization);
+						}
+					}
+
+					for(const std::shared_ptr<uml::Generalization> indexGeneralization: *generalizationList)
+					{
+						if (_generalization->find(indexGeneralization) == -1)
+						{
+							_generalization->add(indexGeneralization);
+						}
+					}
 				}
-				iterGeneralization++;
-			}
- 
-			iterGeneralization = generalizationList->begin();
-			endGeneralization = generalizationList->end();
-			while (iterGeneralization != endGeneralization)
-			{
-				if (getGeneralization()->find(*iterGeneralization) == -1)
+				catch(...)
 				{
-					getGeneralization()->add(*iterGeneralization);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterGeneralization++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}
@@ -544,44 +535,42 @@ bool GeneralizationSetImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any GeneralizationSetImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any GeneralizationSetImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
   	switch(operationID)
 	{
-		
-		// 2025134361
+		// uml::GeneralizationSet::generalization_same_classifier(Any, std::map) : bool: 2025134361
 		case umlPackage::GENERALIZATIONSET_OPERATION_GENERALIZATION_SAME_CLASSIFIER_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->generalization_same_classifier(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->generalization_same_classifier(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		
-		// 1048697575
+		// uml::GeneralizationSet::maps_to_generalization_set(Any, std::map) : bool: 1048697575
 		case umlPackage::GENERALIZATIONSET_OPERATION_MAPS_TO_GENERALIZATION_SET_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->maps_to_generalization_set(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->maps_to_generalization_set(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
 
@@ -598,7 +587,6 @@ Any GeneralizationSetImpl::eInvoke(int operationID, std::shared_ptr<std::list < 
 	return result;
 }
 
-
 std::shared_ptr<uml::GeneralizationSet> GeneralizationSetImpl::getThisGeneralizationSetPtr() const
 {
 	return m_thisGeneralizationSetPtr.lock();
@@ -608,3 +596,5 @@ void GeneralizationSetImpl::setThisGeneralizationSetPtr(std::weak_ptr<uml::Gener
 	m_thisGeneralizationSetPtr = thisGeneralizationSetPtr;
 	setThisPackageableElementPtr(thisGeneralizationSetPtr);
 }
+
+

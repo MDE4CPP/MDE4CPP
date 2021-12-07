@@ -48,8 +48,8 @@
 #include "uml/ValueSpecification.hpp"
 
 //Factories an Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersPackage.hpp"
 #include "fUML/Semantics/Values/ValuesPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -347,12 +347,10 @@ void EnumerationValueImpl::saveContent(std::shared_ptr<persistence::interfaces::
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> EnumerationValueImpl::eStaticClass() const
 {
 	return fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::eInstance()->getEnumerationValue_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -364,12 +362,12 @@ Any EnumerationValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::ENUMERATIONVALUE_ATTRIBUTE_LITERAL:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getLiteral();
-			return eAny(returnValue); //410
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //410
 		}
 		case fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::ENUMERATIONVALUE_ATTRIBUTE_TYPE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getType();
-			return eAny(returnValue); //411
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //411
 		}
 	}
 	return fUML::Semantics::Values::ValueImpl::eGet(featureID, resolve, coreType);
@@ -415,7 +413,7 @@ bool EnumerationValueImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any EnumerationValueImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any EnumerationValueImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -425,7 +423,7 @@ Any EnumerationValueImpl::eInvoke(int operationID, std::shared_ptr<std::list < s
 		// 2039932483
 		case SimpleClassifiersPackage::ENUMERATIONVALUE_OPERATION__COPY:
 		{
-			result = eAny(this->_copy());
+				result = eAny(this->_copy());
 			break;
 		}
 		
@@ -435,37 +433,37 @@ Any EnumerationValueImpl::eInvoke(int operationID, std::shared_ptr<std::list < s
 			//Retrieve input parameter 'otherValue'
 			//parameter 0
 			std::shared_ptr<fUML::Semantics::Values::Value> incoming_param_otherValue;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_otherValue_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_otherValue = (*incoming_param_otherValue_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::Values::Value> >();
-			result = eAny(this->equals(incoming_param_otherValue));
+			std::list<Any>::const_iterator incoming_param_otherValue_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_otherValue = (*incoming_param_otherValue_arguments_citer)->get<std::shared_ptr<fUML::Semantics::Values::Value> >();
+					result = eAny(this->equals(incoming_param_otherValue),0,false);
 			break;
 		}
 		
 		// 850869043
 		case SimpleClassifiersPackage::ENUMERATIONVALUE_OPERATION_GETTYPES:
 		{
-			result = eAny(this->getTypes());
+				result = eAny(this->getTypes());
 			break;
 		}
 		
 		// 873040755
 		case SimpleClassifiersPackage::ENUMERATIONVALUE_OPERATION_NEW_:
 		{
-			result = eAny(this->new_());
+				result = eAny(this->new_());
 			break;
 		}
 		
 		// 1719232753
 		case SimpleClassifiersPackage::ENUMERATIONVALUE_OPERATION_SPECIFY:
 		{
-			result = eAny(this->specify());
+				result = eAny(this->specify());
 			break;
 		}
 		
 		// 1081001181
 		case SimpleClassifiersPackage::ENUMERATIONVALUE_OPERATION_TOSTRING:
 		{
-			result = eAny(this->toString());
+					result = eAny(this->toString(),0,false);
 			break;
 		}
 
@@ -482,7 +480,6 @@ Any EnumerationValueImpl::eInvoke(int operationID, std::shared_ptr<std::list < s
 	return result;
 }
 
-
 std::shared_ptr<fUML::Semantics::SimpleClassifiers::EnumerationValue> EnumerationValueImpl::getThisEnumerationValuePtr() const
 {
 	return m_thisEnumerationValuePtr.lock();
@@ -492,3 +489,5 @@ void EnumerationValueImpl::setThisEnumerationValuePtr(std::weak_ptr<fUML::Semant
 	m_thisEnumerationValuePtr = thisEnumerationValuePtr;
 	setThisValuePtr(thisEnumerationValuePtr);
 }
+
+

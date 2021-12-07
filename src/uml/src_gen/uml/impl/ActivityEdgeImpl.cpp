@@ -164,14 +164,10 @@ ActivityEdgeImpl& ActivityEdgeImpl::operator=(const ActivityEdgeImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_inPartition - Subset<uml::ActivityPartition, uml::ActivityGroup >(getInGroup())" << std::endl;
 		#endif
 		
-
-		Bag<uml::ActivityPartition>::iterator inPartitionIter = inPartitionList->begin();
-		Bag<uml::ActivityPartition>::iterator inPartitionEnd = inPartitionList->end();
-		while (inPartitionIter != inPartitionEnd) 
+		for(const std::shared_ptr<uml::ActivityPartition> inPartitionindexElem: *inPartitionList) 
 		{
-			std::shared_ptr<uml::ActivityPartition> temp = std::dynamic_pointer_cast<uml::ActivityPartition>((*inPartitionIter)->copy());
-			getInPartition()->push_back(temp);
-			inPartitionIter++;
+			std::shared_ptr<uml::ActivityPartition> temp = std::dynamic_pointer_cast<uml::ActivityPartition>((inPartitionindexElem)->copy());
+			m_inPartition->push_back(temp);
 		}
 	}
 	else
@@ -195,14 +191,10 @@ ActivityEdgeImpl& ActivityEdgeImpl::operator=(const ActivityEdgeImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_redefinedEdge - Subset<uml::ActivityEdge, uml::RedefinableElement >(getRedefinedElement())" << std::endl;
 		#endif
 		
-
-		Bag<uml::ActivityEdge>::iterator redefinedEdgeIter = redefinedEdgeList->begin();
-		Bag<uml::ActivityEdge>::iterator redefinedEdgeEnd = redefinedEdgeList->end();
-		while (redefinedEdgeIter != redefinedEdgeEnd) 
+		for(const std::shared_ptr<uml::ActivityEdge> redefinedEdgeindexElem: *redefinedEdgeList) 
 		{
-			std::shared_ptr<uml::ActivityEdge> temp = std::dynamic_pointer_cast<uml::ActivityEdge>((*redefinedEdgeIter)->copy());
-			getRedefinedEdge()->push_back(temp);
-			redefinedEdgeIter++;
+			std::shared_ptr<uml::ActivityEdge> temp = std::dynamic_pointer_cast<uml::ActivityEdge>((redefinedEdgeindexElem)->copy());
+			m_redefinedEdge->push_back(temp);
 		}
 	}
 	else
@@ -693,12 +685,10 @@ void ActivityEdgeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> ActivityEdgeImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getActivityEdge_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -710,73 +700,49 @@ Any ActivityEdgeImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::ACTIVITYEDGE_ATTRIBUTE_ACTIVITY:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getActivity().lock();
-			return eAny(returnValue); //812
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //812
 		}
 		case uml::umlPackage::ACTIVITYEDGE_ATTRIBUTE_GUARD:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getGuard();
-			return eAny(returnValue); //813
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //813
 		}
 		case uml::umlPackage::ACTIVITYEDGE_ATTRIBUTE_INGROUP:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::ActivityGroup>::iterator iter = getInGroup()->begin();
-			Bag<uml::ActivityGroup>::iterator end = getInGroup()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //821			
+			return eAnyBag(getInGroup(),1058869010); //821
 		}
 		case uml::umlPackage::ACTIVITYEDGE_ATTRIBUTE_INPARTITION:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::ActivityPartition>::iterator iter = getInPartition()->begin();
-			Bag<uml::ActivityPartition>::iterator end = getInPartition()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //814			
+			return eAnyBag(getInPartition(),993679143); //814
 		}
 		case uml::umlPackage::ACTIVITYEDGE_ATTRIBUTE_INSTRUCTUREDNODE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getInStructuredNode().lock();
-			return eAny(returnValue); //816
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //816
 		}
 		case uml::umlPackage::ACTIVITYEDGE_ATTRIBUTE_INTERRUPTS:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getInterrupts();
-			return eAny(returnValue); //815
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //815
 		}
 		case uml::umlPackage::ACTIVITYEDGE_ATTRIBUTE_REDEFINEDEDGE:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::ActivityEdge>::iterator iter = getRedefinedEdge()->begin();
-			Bag<uml::ActivityEdge>::iterator end = getRedefinedEdge()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //819			
+			return eAnyBag(getRedefinedEdge(),583468403); //819
 		}
 		case uml::umlPackage::ACTIVITYEDGE_ATTRIBUTE_SOURCE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getSource();
-			return eAny(returnValue); //818
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //818
 		}
 		case uml::umlPackage::ACTIVITYEDGE_ATTRIBUTE_TARGET:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getTarget();
-			return eAny(returnValue); //817
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //817
 		}
 		case uml::umlPackage::ACTIVITYEDGE_ATTRIBUTE_WEIGHT:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getWeight();
-			return eAny(returnValue); //820
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //820
 		}
 	}
 	return RedefinableElementImpl::eGet(featureID, resolve, coreType);
@@ -833,36 +799,37 @@ bool ActivityEdgeImpl::eSet(int featureID, Any newValue)
 		case uml::umlPackage::ACTIVITYEDGE_ATTRIBUTE_INPARTITION:
 		{
 			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::ActivityPartition>> inPartitionList(new Bag<uml::ActivityPartition>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
+			if((newValue->isContainer()) && (uml::umlPackage::ACTIVITYPARTITION_CLASS ==newValue->getTypeId()))
 			{
-				inPartitionList->add(std::dynamic_pointer_cast<uml::ActivityPartition>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::ActivityPartition>::iterator iterInPartition = getInPartition()->begin();
-			Bag<uml::ActivityPartition>::iterator endInPartition = getInPartition()->end();
-			while (iterInPartition != endInPartition)
-			{
-				if (inPartitionList->find(*iterInPartition) == -1)
+				try
 				{
-					getInPartition()->erase(*iterInPartition);
+					std::shared_ptr<Bag<uml::ActivityPartition>> inPartitionList= newValue->get<std::shared_ptr<Bag<uml::ActivityPartition>>>();
+					std::shared_ptr<Bag<uml::ActivityPartition>> _inPartition=getInPartition();
+					for(const std::shared_ptr<uml::ActivityPartition> indexInPartition: *_inPartition)
+					{
+						if (inPartitionList->find(indexInPartition) == -1)
+						{
+							_inPartition->erase(indexInPartition);
+						}
+					}
+
+					for(const std::shared_ptr<uml::ActivityPartition> indexInPartition: *inPartitionList)
+					{
+						if (_inPartition->find(indexInPartition) == -1)
+						{
+							_inPartition->add(indexInPartition);
+						}
+					}
 				}
-				iterInPartition++;
-			}
- 
-			iterInPartition = inPartitionList->begin();
-			endInPartition = inPartitionList->end();
-			while (iterInPartition != endInPartition)
-			{
-				if (getInPartition()->find(*iterInPartition) == -1)
+				catch(...)
 				{
-					getInPartition()->add(*iterInPartition);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterInPartition++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}
@@ -885,36 +852,37 @@ bool ActivityEdgeImpl::eSet(int featureID, Any newValue)
 		case uml::umlPackage::ACTIVITYEDGE_ATTRIBUTE_REDEFINEDEDGE:
 		{
 			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::ActivityEdge>> redefinedEdgeList(new Bag<uml::ActivityEdge>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
+			if((newValue->isContainer()) && (uml::umlPackage::ACTIVITYEDGE_CLASS ==newValue->getTypeId()))
 			{
-				redefinedEdgeList->add(std::dynamic_pointer_cast<uml::ActivityEdge>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::ActivityEdge>::iterator iterRedefinedEdge = getRedefinedEdge()->begin();
-			Bag<uml::ActivityEdge>::iterator endRedefinedEdge = getRedefinedEdge()->end();
-			while (iterRedefinedEdge != endRedefinedEdge)
-			{
-				if (redefinedEdgeList->find(*iterRedefinedEdge) == -1)
+				try
 				{
-					getRedefinedEdge()->erase(*iterRedefinedEdge);
+					std::shared_ptr<Bag<uml::ActivityEdge>> redefinedEdgeList= newValue->get<std::shared_ptr<Bag<uml::ActivityEdge>>>();
+					std::shared_ptr<Bag<uml::ActivityEdge>> _redefinedEdge=getRedefinedEdge();
+					for(const std::shared_ptr<uml::ActivityEdge> indexRedefinedEdge: *_redefinedEdge)
+					{
+						if (redefinedEdgeList->find(indexRedefinedEdge) == -1)
+						{
+							_redefinedEdge->erase(indexRedefinedEdge);
+						}
+					}
+
+					for(const std::shared_ptr<uml::ActivityEdge> indexRedefinedEdge: *redefinedEdgeList)
+					{
+						if (_redefinedEdge->find(indexRedefinedEdge) == -1)
+						{
+							_redefinedEdge->add(indexRedefinedEdge);
+						}
+					}
 				}
-				iterRedefinedEdge++;
-			}
- 
-			iterRedefinedEdge = redefinedEdgeList->begin();
-			endRedefinedEdge = redefinedEdgeList->end();
-			while (iterRedefinedEdge != endRedefinedEdge)
-			{
-				if (getRedefinedEdge()->find(*iterRedefinedEdge) == -1)
+				catch(...)
 				{
-					getRedefinedEdge()->add(*iterRedefinedEdge);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterRedefinedEdge++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}
@@ -950,27 +918,26 @@ bool ActivityEdgeImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ActivityEdgeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any ActivityEdgeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
   	switch(operationID)
 	{
-		
-		// 256269069
+		// uml::ActivityEdge::source_and_target(Any, std::map) : bool: 256269069
 		case umlPackage::ACTIVITYEDGE_OPERATION_SOURCE_AND_TARGET_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->source_and_target(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->source_and_target(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
 
@@ -987,7 +954,6 @@ Any ActivityEdgeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::
 	return result;
 }
 
-
 std::shared_ptr<uml::ActivityEdge> ActivityEdgeImpl::getThisActivityEdgePtr() const
 {
 	return m_thisActivityEdgePtr.lock();
@@ -997,3 +963,5 @@ void ActivityEdgeImpl::setThisActivityEdgePtr(std::weak_ptr<uml::ActivityEdge> t
 	m_thisActivityEdgePtr = thisActivityEdgePtr;
 	setThisRedefinableElementPtr(thisActivityEdgePtr);
 }
+
+

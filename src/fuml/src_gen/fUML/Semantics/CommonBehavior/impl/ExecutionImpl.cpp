@@ -43,11 +43,11 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "uml/umlFactory.hpp"
-#include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
 #include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
-#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
+#include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
+#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
+#include "uml/umlFactory.hpp"
 
 #include "uml/Behavior.hpp"
 #include "uml/Classifier.hpp"
@@ -60,8 +60,8 @@
 #include "fUML/Semantics/Values/Value.hpp"
 
 //Factories an Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
 #include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersPackage.hpp"
@@ -467,12 +467,10 @@ void ExecutionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHa
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> ExecutionImpl::eStaticClass() const
 {
 	return fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance()->getExecution_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -484,12 +482,12 @@ Any ExecutionImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::EXECUTION_ATTRIBUTE_BEHAVIOR:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getBehavior();
-			return eAny(returnValue); //466
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //466
 		}
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::EXECUTION_ATTRIBUTE_CONTEXT:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getContext();
-			return eAny(returnValue); //464
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //464
 		}
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::EXECUTION_ATTRIBUTE_PARAMETERVALUES:
 		{
@@ -585,7 +583,7 @@ bool ExecutionImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ExecutionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any ExecutionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -595,7 +593,7 @@ Any ExecutionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sha
 		// 2119596406
 		case CommonBehaviorPackage::EXECUTION_OPERATION__COPY:
 		{
-			result = eAny(this->_copy());
+				result = eAny(this->_copy());
 			break;
 		}
 		
@@ -609,7 +607,7 @@ Any ExecutionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sha
 		// 990554645
 		case CommonBehaviorPackage::EXECUTION_OPERATION_GETOUTPUTPARAMETERVALUES:
 		{
-			result = eAny(this->getOutputParameterValues());
+				result = eAny(this->getOutputParameterValues());
 			break;
 		}
 		
@@ -619,16 +617,16 @@ Any ExecutionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sha
 			//Retrieve input parameter 'parameter'
 			//parameter 0
 			std::shared_ptr<uml::Parameter> incoming_param_parameter;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_parameter_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_parameter = (*incoming_param_parameter_arguments_citer)->get()->get<std::shared_ptr<uml::Parameter> >();
-			result = eAny(this->getParameterValue(incoming_param_parameter));
+			std::list<Any>::const_iterator incoming_param_parameter_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_parameter = (*incoming_param_parameter_arguments_citer)->get<std::shared_ptr<uml::Parameter> >();
+				result = eAny(this->getParameterValue(incoming_param_parameter));
 			break;
 		}
 		
 		// 1338828288
 		case CommonBehaviorPackage::EXECUTION_OPERATION_NEW_:
 		{
-			result = eAny(this->new_());
+				result = eAny(this->new_());
 			break;
 		}
 		
@@ -638,8 +636,8 @@ Any ExecutionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sha
 			//Retrieve input parameter 'parameterValue'
 			//parameter 0
 			std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> incoming_param_parameterValue;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_parameterValue_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_parameterValue = (*incoming_param_parameterValue_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> >();
+			std::list<Any>::const_iterator incoming_param_parameterValue_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_parameterValue = (*incoming_param_parameterValue_arguments_citer)->get<std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> >();
 			this->setParameterValue(incoming_param_parameterValue);
 			break;
 		}
@@ -664,7 +662,6 @@ Any ExecutionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sha
 	return result;
 }
 
-
 std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> ExecutionImpl::getThisExecutionPtr() const
 {
 	return m_thisExecutionPtr.lock();
@@ -674,3 +671,5 @@ void ExecutionImpl::setThisExecutionPtr(std::weak_ptr<fUML::Semantics::CommonBeh
 	m_thisExecutionPtr = thisExecutionPtr;
 	setThisObjectPtr(thisExecutionPtr);
 }
+
+

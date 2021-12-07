@@ -348,12 +348,10 @@ void IteratorExpImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> IteratorExpImpl::eStaticClass() const
 {
 	return ocl::Expressions::ExpressionsPackage::eInstance()->getIteratorExp_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -386,7 +384,7 @@ bool IteratorExpImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any IteratorExpImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any IteratorExpImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -406,7 +404,6 @@ Any IteratorExpImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::s
 	return result;
 }
 
-
 std::shared_ptr<ocl::Expressions::IteratorExp> IteratorExpImpl::getThisIteratorExpPtr() const
 {
 	return m_thisIteratorExpPtr.lock();
@@ -416,3 +413,5 @@ void IteratorExpImpl::setThisIteratorExpPtr(std::weak_ptr<ocl::Expressions::Iter
 	m_thisIteratorExpPtr = thisIteratorExpPtr;
 	setThisLoopExpPtr(thisIteratorExpPtr);
 }
+
+

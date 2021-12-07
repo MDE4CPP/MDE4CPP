@@ -42,8 +42,8 @@
 #include "fUML/Semantics/Values/Value.hpp"
 
 //Factories an Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "fUML/Semantics/Values/ValuesPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -322,12 +322,10 @@ void ParameterValueImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> ParameterValueImpl::eStaticClass() const
 {
 	return fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance()->getParameterValue_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -339,7 +337,7 @@ Any ParameterValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::PARAMETERVALUE_ATTRIBUTE_PARAMETER:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getParameter();
-			return eAny(returnValue); //870
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //870
 		}
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::PARAMETERVALUE_ATTRIBUTE_VALUES:
 		{
@@ -425,7 +423,7 @@ bool ParameterValueImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ParameterValueImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any ParameterValueImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -435,7 +433,7 @@ Any ParameterValueImpl::eInvoke(int operationID, std::shared_ptr<std::list < std
 		// 1957074675
 		case CommonBehaviorPackage::PARAMETERVALUE_OPERATION__COPY:
 		{
-			result = eAny(this->_copy());
+				result = eAny(this->_copy());
 			break;
 		}
 
@@ -452,7 +450,6 @@ Any ParameterValueImpl::eInvoke(int operationID, std::shared_ptr<std::list < std
 	return result;
 }
 
-
 std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> ParameterValueImpl::getThisParameterValuePtr() const
 {
 	return m_thisParameterValuePtr.lock();
@@ -461,3 +458,5 @@ void ParameterValueImpl::setThisParameterValuePtr(std::weak_ptr<fUML::Semantics:
 {
 	m_thisParameterValuePtr = thisParameterValuePtr;
 }
+
+

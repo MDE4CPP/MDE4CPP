@@ -361,12 +361,10 @@ void ExpressionInOclImpl::saveContent(std::shared_ptr<persistence::interfaces::X
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> ExpressionInOclImpl::eStaticClass() const
 {
 	return ocl::Expressions::ExpressionsPackage::eInstance()->getExpressionInOcl_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -378,12 +376,12 @@ Any ExpressionInOclImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_BODYEXPRESSION:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getBodyExpression();
-			return eAny(returnValue); //2810
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //2810
 		}
 		case ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_CONTEXTVARIABLE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getContextVariable();
-			return eAny(returnValue); //2811
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //2811
 		}
 		case ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_PARAMETERVARIABLE:
 		{
@@ -400,7 +398,7 @@ Any ExpressionInOclImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_RESULTVARIABLE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getResultVariable();
-			return eAny(returnValue); //2812
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //2812
 		}
 	}
 	return ecore::ETypedElementImpl::eGet(featureID, resolve, coreType);
@@ -494,7 +492,7 @@ bool ExpressionInOclImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ExpressionInOclImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any ExpressionInOclImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -514,7 +512,6 @@ Any ExpressionInOclImpl::eInvoke(int operationID, std::shared_ptr<std::list < st
 	return result;
 }
 
-
 std::shared_ptr<ocl::Expressions::ExpressionInOcl> ExpressionInOclImpl::getThisExpressionInOclPtr() const
 {
 	return m_thisExpressionInOclPtr.lock();
@@ -524,3 +521,5 @@ void ExpressionInOclImpl::setThisExpressionInOclPtr(std::weak_ptr<ocl::Expressio
 	m_thisExpressionInOclPtr = thisExpressionInOclPtr;
 	setThisETypedElementPtr(thisExpressionInOclPtr);
 }
+
+

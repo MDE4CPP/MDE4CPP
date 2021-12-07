@@ -424,12 +424,10 @@ void RemoveVariableValueActionImpl::saveContent(std::shared_ptr<persistence::int
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> RemoveVariableValueActionImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getRemoveVariableValueAction_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -439,11 +437,11 @@ Any RemoveVariableValueActionImpl::eGet(int featureID, bool resolve, bool coreTy
 	switch(featureID)
 	{
 		case uml::umlPackage::REMOVEVARIABLEVALUEACTION_ATTRIBUTE_ISREMOVEDUPLICATES:
-			return eAny(getIsRemoveDuplicates()); //21029
+			return eAny(getIsRemoveDuplicates(),0,true); //21029
 		case uml::umlPackage::REMOVEVARIABLEVALUEACTION_ATTRIBUTE_REMOVEAT:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getRemoveAt();
-			return eAny(returnValue); //21030
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //21030
 		}
 	}
 	return WriteVariableActionImpl::eGet(featureID, resolve, coreType);
@@ -488,27 +486,26 @@ bool RemoveVariableValueActionImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any RemoveVariableValueActionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any RemoveVariableValueActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
   	switch(operationID)
 	{
-		
-		// 212395563
+		// uml::RemoveVariableValueAction::removeAt_and_value(Any, std::map) : bool: 212395563
 		case umlPackage::REMOVEVARIABLEVALUEACTION_OPERATION_REMOVEAT_AND_VALUE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->removeAt_and_value(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->removeAt_and_value(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
 
@@ -525,7 +522,6 @@ Any RemoveVariableValueActionImpl::eInvoke(int operationID, std::shared_ptr<std:
 	return result;
 }
 
-
 std::shared_ptr<uml::RemoveVariableValueAction> RemoveVariableValueActionImpl::getThisRemoveVariableValueActionPtr() const
 {
 	return m_thisRemoveVariableValueActionPtr.lock();
@@ -535,3 +531,5 @@ void RemoveVariableValueActionImpl::setThisRemoveVariableValueActionPtr(std::wea
 	m_thisRemoveVariableValueActionPtr = thisRemoveVariableValueActionPtr;
 	setThisWriteVariableActionPtr(thisRemoveVariableValueActionPtr);
 }
+
+

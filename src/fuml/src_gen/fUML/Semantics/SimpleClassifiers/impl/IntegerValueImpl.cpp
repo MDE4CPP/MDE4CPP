@@ -47,8 +47,8 @@
 #include "uml/ValueSpecification.hpp"
 
 //Factories an Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersPackage.hpp"
 #include "fUML/Semantics/Values/ValuesPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -242,7 +242,7 @@ void IntegerValueImpl::loadAttributes(std::shared_ptr<persistence::interfaces::X
 		{
 			// this attribute is a 'int'
 			int value;
-			std::istringstream ( iter->second ) >> value;
+			std::istringstream(iter->second) >> value;
 			this->setValue(value);
 		}
 	}
@@ -300,12 +300,10 @@ void IntegerValueImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> IntegerValueImpl::eStaticClass() const
 {
 	return fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::eInstance()->getIntegerValue_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -315,7 +313,7 @@ Any IntegerValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::INTEGERVALUE_ATTRIBUTE_VALUE:
-			return eAny(getValue()); //641
+				return eAny(getValue(),0,true); //641
 	}
 	return PrimitiveValueImpl::eGet(featureID, resolve, coreType);
 }
@@ -349,7 +347,7 @@ bool IntegerValueImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any IntegerValueImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any IntegerValueImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -359,7 +357,7 @@ Any IntegerValueImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::
 		// 409567895
 		case SimpleClassifiersPackage::INTEGERVALUE_OPERATION__COPY:
 		{
-			result = eAny(this->_copy());
+				result = eAny(this->_copy());
 			break;
 		}
 		
@@ -369,30 +367,30 @@ Any IntegerValueImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::
 			//Retrieve input parameter 'otherValue'
 			//parameter 0
 			std::shared_ptr<fUML::Semantics::Values::Value> incoming_param_otherValue;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_otherValue_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_otherValue = (*incoming_param_otherValue_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::Values::Value> >();
-			result = eAny(this->equals(incoming_param_otherValue));
+			std::list<Any>::const_iterator incoming_param_otherValue_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_otherValue = (*incoming_param_otherValue_arguments_citer)->get<std::shared_ptr<fUML::Semantics::Values::Value> >();
+					result = eAny(this->equals(incoming_param_otherValue),0,false);
 			break;
 		}
 		
 		// 1044297728
 		case SimpleClassifiersPackage::INTEGERVALUE_OPERATION_NEW_:
 		{
-			result = eAny(this->new_());
+				result = eAny(this->new_());
 			break;
 		}
 		
 		// 1191658488
 		case SimpleClassifiersPackage::INTEGERVALUE_OPERATION_SPECIFY:
 		{
-			result = eAny(this->specify());
+				result = eAny(this->specify());
 			break;
 		}
 		
 		// 1852462258
 		case SimpleClassifiersPackage::INTEGERVALUE_OPERATION_TOSTRING:
 		{
-			result = eAny(this->toString());
+					result = eAny(this->toString(),0,false);
 			break;
 		}
 
@@ -409,7 +407,6 @@ Any IntegerValueImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::
 	return result;
 }
 
-
 std::shared_ptr<fUML::Semantics::SimpleClassifiers::IntegerValue> IntegerValueImpl::getThisIntegerValuePtr() const
 {
 	return m_thisIntegerValuePtr.lock();
@@ -419,3 +416,5 @@ void IntegerValueImpl::setThisIntegerValuePtr(std::weak_ptr<fUML::Semantics::Sim
 	m_thisIntegerValuePtr = thisIntegerValuePtr;
 	setThisPrimitiveValuePtr(thisIntegerValuePtr);
 }
+
+

@@ -129,14 +129,10 @@ CollaborationUseImpl& CollaborationUseImpl::operator=(const CollaborationUseImpl
 			std::cout << "Initialising value Subset: " << "m_roleBinding - Subset<uml::Dependency, uml::Element >(getOwnedElement())" << std::endl;
 		#endif
 		
-
-		Bag<uml::Dependency>::iterator roleBindingIter = roleBindingList->begin();
-		Bag<uml::Dependency>::iterator roleBindingEnd = roleBindingList->end();
-		while (roleBindingIter != roleBindingEnd) 
+		for(const std::shared_ptr<uml::Dependency> roleBindingindexElem: *roleBindingList) 
 		{
-			std::shared_ptr<uml::Dependency> temp = std::dynamic_pointer_cast<uml::Dependency>((*roleBindingIter)->copy());
-			getRoleBinding()->push_back(temp);
-			roleBindingIter++;
+			std::shared_ptr<uml::Dependency> temp = std::dynamic_pointer_cast<uml::Dependency>((roleBindingindexElem)->copy());
+			m_roleBinding->push_back(temp);
 		}
 	}
 	else
@@ -384,12 +380,10 @@ void CollaborationUseImpl::saveContent(std::shared_ptr<persistence::interfaces::
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> CollaborationUseImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getCollaborationUse_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -400,20 +394,12 @@ Any CollaborationUseImpl::eGet(int featureID, bool resolve, bool coreType) const
 	{
 		case uml::umlPackage::COLLABORATIONUSE_ATTRIBUTE_ROLEBINDING:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Dependency>::iterator iter = getRoleBinding()->begin();
-			Bag<uml::Dependency>::iterator end = getRoleBinding()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //439			
+			return eAnyBag(getRoleBinding(),1756692956); //439
 		}
 		case uml::umlPackage::COLLABORATIONUSE_ATTRIBUTE_TYPE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getType();
-			return eAny(returnValue); //4310
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //4310
 		}
 	}
 	return NamedElementImpl::eGet(featureID, resolve, coreType);
@@ -438,36 +424,37 @@ bool CollaborationUseImpl::eSet(int featureID, Any newValue)
 		case uml::umlPackage::COLLABORATIONUSE_ATTRIBUTE_ROLEBINDING:
 		{
 			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::Dependency>> roleBindingList(new Bag<uml::Dependency>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
+			if((newValue->isContainer()) && (uml::umlPackage::DEPENDENCY_CLASS ==newValue->getTypeId()))
 			{
-				roleBindingList->add(std::dynamic_pointer_cast<uml::Dependency>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::Dependency>::iterator iterRoleBinding = getRoleBinding()->begin();
-			Bag<uml::Dependency>::iterator endRoleBinding = getRoleBinding()->end();
-			while (iterRoleBinding != endRoleBinding)
-			{
-				if (roleBindingList->find(*iterRoleBinding) == -1)
+				try
 				{
-					getRoleBinding()->erase(*iterRoleBinding);
+					std::shared_ptr<Bag<uml::Dependency>> roleBindingList= newValue->get<std::shared_ptr<Bag<uml::Dependency>>>();
+					std::shared_ptr<Bag<uml::Dependency>> _roleBinding=getRoleBinding();
+					for(const std::shared_ptr<uml::Dependency> indexRoleBinding: *_roleBinding)
+					{
+						if (roleBindingList->find(indexRoleBinding) == -1)
+						{
+							_roleBinding->erase(indexRoleBinding);
+						}
+					}
+
+					for(const std::shared_ptr<uml::Dependency> indexRoleBinding: *roleBindingList)
+					{
+						if (_roleBinding->find(indexRoleBinding) == -1)
+						{
+							_roleBinding->add(indexRoleBinding);
+						}
+					}
 				}
-				iterRoleBinding++;
-			}
- 
-			iterRoleBinding = roleBindingList->begin();
-			endRoleBinding = roleBindingList->end();
-			while (iterRoleBinding != endRoleBinding)
-			{
-				if (getRoleBinding()->find(*iterRoleBinding) == -1)
+				catch(...)
 				{
-					getRoleBinding()->add(*iterRoleBinding);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterRoleBinding++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}
@@ -487,61 +474,58 @@ bool CollaborationUseImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any CollaborationUseImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any CollaborationUseImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
   	switch(operationID)
 	{
-		
-		// 123075857
+		// uml::CollaborationUse::client_elements(Any, std::map) : bool: 123075857
 		case umlPackage::COLLABORATIONUSE_OPERATION_CLIENT_ELEMENTS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->client_elements(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->client_elements(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		
-		// 851332840
+		// uml::CollaborationUse::connectors(Any, std::map) : bool: 851332840
 		case umlPackage::COLLABORATIONUSE_OPERATION_CONNECTORS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->connectors(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->connectors(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		
-		// 1617953717
+		// uml::CollaborationUse::every_role(Any, std::map) : bool: 1617953717
 		case umlPackage::COLLABORATIONUSE_OPERATION_EVERY_ROLE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->every_role(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->every_role(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
 
@@ -558,7 +542,6 @@ Any CollaborationUseImpl::eInvoke(int operationID, std::shared_ptr<std::list < s
 	return result;
 }
 
-
 std::shared_ptr<uml::CollaborationUse> CollaborationUseImpl::getThisCollaborationUsePtr() const
 {
 	return m_thisCollaborationUsePtr.lock();
@@ -568,3 +551,5 @@ void CollaborationUseImpl::setThisCollaborationUsePtr(std::weak_ptr<uml::Collabo
 	m_thisCollaborationUsePtr = thisCollaborationUsePtr;
 	setThisNamedElementPtr(thisCollaborationUsePtr);
 }
+
+

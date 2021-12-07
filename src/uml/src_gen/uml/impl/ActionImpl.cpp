@@ -159,14 +159,10 @@ ActionImpl& ActionImpl::operator=(const ActionImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_localPostcondition - Subset<uml::Constraint, uml::Element >(getOwnedElement())" << std::endl;
 		#endif
 		
-
-		Bag<uml::Constraint>::iterator localPostconditionIter = localPostconditionList->begin();
-		Bag<uml::Constraint>::iterator localPostconditionEnd = localPostconditionList->end();
-		while (localPostconditionIter != localPostconditionEnd) 
+		for(const std::shared_ptr<uml::Constraint> localPostconditionindexElem: *localPostconditionList) 
 		{
-			std::shared_ptr<uml::Constraint> temp = std::dynamic_pointer_cast<uml::Constraint>((*localPostconditionIter)->copy());
-			getLocalPostcondition()->push_back(temp);
-			localPostconditionIter++;
+			std::shared_ptr<uml::Constraint> temp = std::dynamic_pointer_cast<uml::Constraint>((localPostconditionindexElem)->copy());
+			m_localPostcondition->push_back(temp);
 		}
 	}
 	else
@@ -190,14 +186,10 @@ ActionImpl& ActionImpl::operator=(const ActionImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_localPrecondition - Subset<uml::Constraint, uml::Element >(getOwnedElement())" << std::endl;
 		#endif
 		
-
-		Bag<uml::Constraint>::iterator localPreconditionIter = localPreconditionList->begin();
-		Bag<uml::Constraint>::iterator localPreconditionEnd = localPreconditionList->end();
-		while (localPreconditionIter != localPreconditionEnd) 
+		for(const std::shared_ptr<uml::Constraint> localPreconditionindexElem: *localPreconditionList) 
 		{
-			std::shared_ptr<uml::Constraint> temp = std::dynamic_pointer_cast<uml::Constraint>((*localPreconditionIter)->copy());
-			getLocalPrecondition()->push_back(temp);
-			localPreconditionIter++;
+			std::shared_ptr<uml::Constraint> temp = std::dynamic_pointer_cast<uml::Constraint>((localPreconditionindexElem)->copy());
+			m_localPrecondition->push_back(temp);
 		}
 	}
 	else
@@ -605,12 +597,10 @@ void ActionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandl
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> ActionImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getAction_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -622,57 +612,25 @@ Any ActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::ACTION_ATTRIBUTE_CONTEXT:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getContext();
-			return eAny(returnValue); //421
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //421
 		}
 		case uml::umlPackage::ACTION_ATTRIBUTE_INPUT:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::InputPin>::iterator iter = getInput()->begin();
-			Bag<uml::InputPin>::iterator end = getInput()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //422			
+			return eAnyBag(getInput(),567201991); //422
 		}
 		case uml::umlPackage::ACTION_ATTRIBUTE_ISLOCALLYREENTRANT:
-			return eAny(getIsLocallyReentrant()); //423
+			return eAny(getIsLocallyReentrant(),0,true); //423
 		case uml::umlPackage::ACTION_ATTRIBUTE_LOCALPOSTCONDITION:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Constraint>::iterator iter = getLocalPostcondition()->begin();
-			Bag<uml::Constraint>::iterator end = getLocalPostcondition()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //424			
+			return eAnyBag(getLocalPostcondition(),11514188); //424
 		}
 		case uml::umlPackage::ACTION_ATTRIBUTE_LOCALPRECONDITION:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Constraint>::iterator iter = getLocalPrecondition()->begin();
-			Bag<uml::Constraint>::iterator end = getLocalPrecondition()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //425			
+			return eAnyBag(getLocalPrecondition(),11514188); //425
 		}
 		case uml::umlPackage::ACTION_ATTRIBUTE_OUTPUT:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::OutputPin>::iterator iter = getOutput()->begin();
-			Bag<uml::OutputPin>::iterator end = getOutput()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //426			
+			return eAnyBag(getOutput(),681481770); //426
 		}
 	}
 	return ExecutableNodeImpl::eGet(featureID, resolve, coreType);
@@ -712,72 +670,74 @@ bool ActionImpl::eSet(int featureID, Any newValue)
 		case uml::umlPackage::ACTION_ATTRIBUTE_LOCALPOSTCONDITION:
 		{
 			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::Constraint>> localPostconditionList(new Bag<uml::Constraint>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
+			if((newValue->isContainer()) && (uml::umlPackage::CONSTRAINT_CLASS ==newValue->getTypeId()))
 			{
-				localPostconditionList->add(std::dynamic_pointer_cast<uml::Constraint>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::Constraint>::iterator iterLocalPostcondition = getLocalPostcondition()->begin();
-			Bag<uml::Constraint>::iterator endLocalPostcondition = getLocalPostcondition()->end();
-			while (iterLocalPostcondition != endLocalPostcondition)
-			{
-				if (localPostconditionList->find(*iterLocalPostcondition) == -1)
+				try
 				{
-					getLocalPostcondition()->erase(*iterLocalPostcondition);
+					std::shared_ptr<Bag<uml::Constraint>> localPostconditionList= newValue->get<std::shared_ptr<Bag<uml::Constraint>>>();
+					std::shared_ptr<Bag<uml::Constraint>> _localPostcondition=getLocalPostcondition();
+					for(const std::shared_ptr<uml::Constraint> indexLocalPostcondition: *_localPostcondition)
+					{
+						if (localPostconditionList->find(indexLocalPostcondition) == -1)
+						{
+							_localPostcondition->erase(indexLocalPostcondition);
+						}
+					}
+
+					for(const std::shared_ptr<uml::Constraint> indexLocalPostcondition: *localPostconditionList)
+					{
+						if (_localPostcondition->find(indexLocalPostcondition) == -1)
+						{
+							_localPostcondition->add(indexLocalPostcondition);
+						}
+					}
 				}
-				iterLocalPostcondition++;
-			}
- 
-			iterLocalPostcondition = localPostconditionList->begin();
-			endLocalPostcondition = localPostconditionList->end();
-			while (iterLocalPostcondition != endLocalPostcondition)
-			{
-				if (getLocalPostcondition()->find(*iterLocalPostcondition) == -1)
+				catch(...)
 				{
-					getLocalPostcondition()->add(*iterLocalPostcondition);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterLocalPostcondition++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}
 		case uml::umlPackage::ACTION_ATTRIBUTE_LOCALPRECONDITION:
 		{
 			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::Constraint>> localPreconditionList(new Bag<uml::Constraint>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
+			if((newValue->isContainer()) && (uml::umlPackage::CONSTRAINT_CLASS ==newValue->getTypeId()))
 			{
-				localPreconditionList->add(std::dynamic_pointer_cast<uml::Constraint>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::Constraint>::iterator iterLocalPrecondition = getLocalPrecondition()->begin();
-			Bag<uml::Constraint>::iterator endLocalPrecondition = getLocalPrecondition()->end();
-			while (iterLocalPrecondition != endLocalPrecondition)
-			{
-				if (localPreconditionList->find(*iterLocalPrecondition) == -1)
+				try
 				{
-					getLocalPrecondition()->erase(*iterLocalPrecondition);
+					std::shared_ptr<Bag<uml::Constraint>> localPreconditionList= newValue->get<std::shared_ptr<Bag<uml::Constraint>>>();
+					std::shared_ptr<Bag<uml::Constraint>> _localPrecondition=getLocalPrecondition();
+					for(const std::shared_ptr<uml::Constraint> indexLocalPrecondition: *_localPrecondition)
+					{
+						if (localPreconditionList->find(indexLocalPrecondition) == -1)
+						{
+							_localPrecondition->erase(indexLocalPrecondition);
+						}
+					}
+
+					for(const std::shared_ptr<uml::Constraint> indexLocalPrecondition: *localPreconditionList)
+					{
+						if (_localPrecondition->find(indexLocalPrecondition) == -1)
+						{
+							_localPrecondition->add(indexLocalPrecondition);
+						}
+					}
 				}
-				iterLocalPrecondition++;
-			}
- 
-			iterLocalPrecondition = localPreconditionList->begin();
-			endLocalPrecondition = localPreconditionList->end();
-			while (iterLocalPrecondition != endLocalPrecondition)
-			{
-				if (getLocalPrecondition()->find(*iterLocalPrecondition) == -1)
+				catch(...)
 				{
-					getLocalPrecondition()->add(*iterLocalPrecondition);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterLocalPrecondition++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}
@@ -789,38 +749,36 @@ bool ActionImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ActionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any ActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
   	switch(operationID)
 	{
-		
-		// 547817094
+		// uml::Action::allActions() : uml::Action[*]: 547817094
 		case umlPackage::ACTION_OPERATION_ALLACTIONS:
 		{
-			result = eAny(this->allActions());
+			std::shared_ptr<Bag<uml::Action> > resultList = this->allActions();
+			return eAny(resultList,umlPackage::ACTION_CLASS,true);
 			break;
 		}
-		
-		// 1538297391
+		// uml::Action::allOwnedNodes() : uml::ActivityNode[*]: 1538297391
 		case umlPackage::ACTION_OPERATION_ALLOWNEDNODES:
 		{
-			result = eAny(this->allOwnedNodes());
+			std::shared_ptr<Bag<uml::ActivityNode> > resultList = this->allOwnedNodes();
+			return eAny(resultList,umlPackage::ACTIVITYNODE_CLASS,true);
 			break;
 		}
-		
-		// 959584979
+		// uml::Action::containingBehavior() : uml::Behavior: 959584979
 		case umlPackage::ACTION_OPERATION_CONTAININGBEHAVIOR:
 		{
-			result = eAny(this->containingBehavior());
+			result = eAny(this->containingBehavior(), umlPackage::BEHAVIOR_CLASS,false);
 			break;
 		}
-		
-		// 215661939
+		// uml::Action::getContext() : uml::Classifier: 215661939
 		case umlPackage::ACTION_OPERATION_GETCONTEXT:
 		{
-			result = eAny(this->getContext());
+			result = eAny(this->getContext(), umlPackage::CLASSIFIER_CLASS,false);
 			break;
 		}
 
@@ -837,7 +795,6 @@ Any ActionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared
 	return result;
 }
 
-
 std::shared_ptr<uml::Action> ActionImpl::getThisActionPtr() const
 {
 	return m_thisActionPtr.lock();
@@ -847,3 +804,5 @@ void ActionImpl::setThisActionPtr(std::weak_ptr<uml::Action> thisActionPtr)
 	m_thisActionPtr = thisActionPtr;
 	setThisExecutableNodePtr(thisActionPtr);
 }
+
+

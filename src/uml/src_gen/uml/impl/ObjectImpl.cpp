@@ -207,12 +207,10 @@ void ObjectImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandl
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> ObjectImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getObject_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -245,69 +243,64 @@ bool ObjectImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ObjectImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any ObjectImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
   	switch(operationID)
 	{
-		
-		// 160022814
+		// uml::Object::get(uml::Property) : Any {const}: 160022814
 		case umlPackage::OBJECT_OPERATION_GET_PROPERTY:
 		{
 			//Retrieve input parameter 'property'
 			//parameter 0
 			std::shared_ptr<uml::Property> incoming_param_property;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_property_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_property = (*incoming_param_property_arguments_citer)->get()->get<std::shared_ptr<uml::Property> >();
-			result = eAny(this->get(incoming_param_property));
+			std::list<Any>::const_iterator incoming_param_property_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_property = (*incoming_param_property_arguments_citer)->get<std::shared_ptr<uml::Property> >();
+			result = eAny(this->get(incoming_param_property),0,false);
 			break;
 		}
-		
-		// 229017557
+		// uml::Object::invoke(uml::Operation, uml::Argument[*]) : uml::Object[*]: 229017557
 		case umlPackage::OBJECT_OPERATION_INVOKE_OPERATION_ARGUMENT:
 		{
 			//Retrieve input parameter 'op'
 			//parameter 0
 			std::shared_ptr<uml::Operation> incoming_param_op;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_op_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_op = (*incoming_param_op_arguments_citer)->get()->get<std::shared_ptr<uml::Operation> >();
+			std::list<Any>::const_iterator incoming_param_op_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_op = (*incoming_param_op_arguments_citer)->get<std::shared_ptr<uml::Operation> >();
 			//Retrieve input parameter 'arguments'
 			//parameter 1
 			std::shared_ptr<Bag<uml::Argument>> incoming_param_arguments;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_arguments_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_arguments = (*incoming_param_arguments_arguments_citer)->get()->get<std::shared_ptr<Bag<uml::Argument>> >();
-			result = eAny(this->invoke(incoming_param_op,incoming_param_arguments));
+			std::list<Any>::const_iterator incoming_param_arguments_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_arguments = (*incoming_param_arguments_arguments_citer)->get<std::shared_ptr<Bag<uml::Argument>> >();
+			std::shared_ptr<Bag<uml::Object> > resultList = this->invoke(incoming_param_op,incoming_param_arguments);
+			return eAny(resultList,umlPackage::OBJECT_CLASS,true);
 			break;
 		}
-		
-		// 1266543324
+		// uml::Object::set(uml::Property, Any): 1266543324
 		case umlPackage::OBJECT_OPERATION_SET_PROPERTY_EJAVAOBJECT:
 		{
 			//Retrieve input parameter 'property'
 			//parameter 0
 			std::shared_ptr<uml::Property> incoming_param_property;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_property_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_property = (*incoming_param_property_arguments_citer)->get()->get<std::shared_ptr<uml::Property> >();
+			std::list<Any>::const_iterator incoming_param_property_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_property = (*incoming_param_property_arguments_citer)->get<std::shared_ptr<uml::Property> >();
 			//Retrieve input parameter 'value'
 			//parameter 1
 			Any incoming_param_value;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_value_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_value = (*incoming_param_value_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_value_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_value = (*incoming_param_value_arguments_citer)->get<Any >();
 			this->set(incoming_param_property,incoming_param_value);
-			break;
 		}
-		
-		// 1465531791
+		// uml::Object::unset(uml::Property): 1465531791
 		case umlPackage::OBJECT_OPERATION_UNSET_PROPERTY:
 		{
 			//Retrieve input parameter 'property'
 			//parameter 0
 			std::shared_ptr<uml::Property> incoming_param_property;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_property_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_property = (*incoming_param_property_arguments_citer)->get()->get<std::shared_ptr<uml::Property> >();
+			std::list<Any>::const_iterator incoming_param_property_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_property = (*incoming_param_property_arguments_citer)->get<std::shared_ptr<uml::Property> >();
 			this->unset(incoming_param_property);
-			break;
 		}
 
 		default:
@@ -323,7 +316,6 @@ Any ObjectImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared
 	return result;
 }
 
-
 std::shared_ptr<uml::Object> ObjectImpl::getThisObjectPtr() const
 {
 	return m_thisObjectPtr.lock();
@@ -332,3 +324,5 @@ void ObjectImpl::setThisObjectPtr(std::weak_ptr<uml::Object> thisObjectPtr)
 {
 	m_thisObjectPtr = thisObjectPtr;
 }
+
+

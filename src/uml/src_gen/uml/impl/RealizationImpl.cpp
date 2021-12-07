@@ -336,12 +336,10 @@ void RealizationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> RealizationImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getRealization_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -374,7 +372,7 @@ bool RealizationImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any RealizationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any RealizationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -394,7 +392,6 @@ Any RealizationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::s
 	return result;
 }
 
-
 std::shared_ptr<uml::Realization> RealizationImpl::getThisRealizationPtr() const
 {
 	return m_thisRealizationPtr.lock();
@@ -404,3 +401,5 @@ void RealizationImpl::setThisRealizationPtr(std::weak_ptr<uml::Realization> this
 	m_thisRealizationPtr = thisRealizationPtr;
 	setThisAbstractionPtr(thisRealizationPtr);
 }
+
+

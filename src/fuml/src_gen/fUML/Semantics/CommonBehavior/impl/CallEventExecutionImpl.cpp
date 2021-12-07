@@ -40,11 +40,11 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "uml/umlFactory.hpp"
-#include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
 #include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
-#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
+#include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
+#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
+#include "uml/umlFactory.hpp"
 
 #include "uml/Behavior.hpp"
 #include "uml/Classifier.hpp"
@@ -59,8 +59,8 @@
 #include "fUML/Semantics/Values/Value.hpp"
 
 //Factories an Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
 #include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersPackage.hpp"
@@ -420,12 +420,10 @@ void CallEventExecutionImpl::saveContent(std::shared_ptr<persistence::interfaces
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> CallEventExecutionImpl::eStaticClass() const
 {
 	return fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance()->getCallEventExecution_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -435,7 +433,7 @@ Any CallEventExecutionImpl::eGet(int featureID, bool resolve, bool coreType) con
 	switch(featureID)
 	{
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::CALLEVENTEXECUTION_ATTRIBUTE_CALLERSUSPENDED:
-			return eAny(getCallerSuspended()); //177
+				return eAny(getCallerSuspended(),0,true); //177
 	}
 	return ExecutionImpl::eGet(featureID, resolve, coreType);
 }
@@ -469,7 +467,7 @@ bool CallEventExecutionImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any CallEventExecutionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any CallEventExecutionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -479,14 +477,14 @@ Any CallEventExecutionImpl::eInvoke(int operationID, std::shared_ptr<std::list <
 		// 1363706716
 		case CommonBehaviorPackage::CALLEVENTEXECUTION_OPERATION__COPY:
 		{
-			result = eAny(this->_copy());
+				result = eAny(this->_copy());
 			break;
 		}
 		
 		// 481630429
 		case CommonBehaviorPackage::CALLEVENTEXECUTION_OPERATION_CREATEEVENTOCCURRENCE:
 		{
-			result = eAny(this->createEventOccurrence());
+				result = eAny(this->createEventOccurrence());
 			break;
 		}
 		
@@ -500,21 +498,21 @@ Any CallEventExecutionImpl::eInvoke(int operationID, std::shared_ptr<std::list <
 		// 1341556238
 		case CommonBehaviorPackage::CALLEVENTEXECUTION_OPERATION_GETINPUTPARAMETERVALUES:
 		{
-			result = eAny(this->getInputParameterValues());
+				result = eAny(this->getInputParameterValues());
 			break;
 		}
 		
 		// 1532410324
 		case CommonBehaviorPackage::CALLEVENTEXECUTION_OPERATION_GETOPERATION:
 		{
-			result = eAny(this->getOperation());
+				result = eAny(this->getOperation());
 			break;
 		}
 		
 		// 2007960635
 		case CommonBehaviorPackage::CALLEVENTEXECUTION_OPERATION_ISCALLERSUSPENDED:
 		{
-			result = eAny(this->isCallerSuspended());
+					result = eAny(this->isCallerSuspended(),0,false);
 			break;
 		}
 		
@@ -528,7 +526,7 @@ Any CallEventExecutionImpl::eInvoke(int operationID, std::shared_ptr<std::list <
 		// 166651669
 		case CommonBehaviorPackage::CALLEVENTEXECUTION_OPERATION_NEW_:
 		{
-			result = eAny(this->new_());
+				result = eAny(this->new_());
 			break;
 		}
 		
@@ -545,8 +543,8 @@ Any CallEventExecutionImpl::eInvoke(int operationID, std::shared_ptr<std::list <
 			//Retrieve input parameter 'parameterValues'
 			//parameter 0
 			std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> incoming_param_parameterValues;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_parameterValues_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_parameterValues = (*incoming_param_parameterValues_arguments_citer)->get()->get<std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> >();
+			std::list<Any>::const_iterator incoming_param_parameterValues_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_parameterValues = (*incoming_param_parameterValues_arguments_citer)->get<std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> >();
 			this->setOutputParameterValues(incoming_param_parameterValues);
 			break;
 		}
@@ -578,7 +576,6 @@ Any CallEventExecutionImpl::eInvoke(int operationID, std::shared_ptr<std::list <
 	return result;
 }
 
-
 std::shared_ptr<fUML::Semantics::CommonBehavior::CallEventExecution> CallEventExecutionImpl::getThisCallEventExecutionPtr() const
 {
 	return m_thisCallEventExecutionPtr.lock();
@@ -588,3 +585,5 @@ void CallEventExecutionImpl::setThisCallEventExecutionPtr(std::weak_ptr<fUML::Se
 	m_thisCallEventExecutionPtr = thisCallEventExecutionPtr;
 	setThisExecutionPtr(thisCallEventExecutionPtr);
 }
+
+

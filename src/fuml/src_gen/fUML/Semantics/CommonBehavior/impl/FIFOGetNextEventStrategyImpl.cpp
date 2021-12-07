@@ -35,8 +35,8 @@
 #include "fUML/Semantics/CommonBehavior/GetNextEventStrategy.hpp"
 
 //Factories an Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 
 
@@ -186,12 +186,10 @@ void FIFOGetNextEventStrategyImpl::saveContent(std::shared_ptr<persistence::inte
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> FIFOGetNextEventStrategyImpl::eStaticClass() const
 {
 	return fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance()->getFIFOGetNextEventStrategy_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -224,7 +222,7 @@ bool FIFOGetNextEventStrategyImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any FIFOGetNextEventStrategyImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any FIFOGetNextEventStrategyImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -244,7 +242,6 @@ Any FIFOGetNextEventStrategyImpl::eInvoke(int operationID, std::shared_ptr<std::
 	return result;
 }
 
-
 std::shared_ptr<fUML::Semantics::CommonBehavior::FIFOGetNextEventStrategy> FIFOGetNextEventStrategyImpl::getThisFIFOGetNextEventStrategyPtr() const
 {
 	return m_thisFIFOGetNextEventStrategyPtr.lock();
@@ -254,3 +251,5 @@ void FIFOGetNextEventStrategyImpl::setThisFIFOGetNextEventStrategyPtr(std::weak_
 	m_thisFIFOGetNextEventStrategyPtr = thisFIFOGetNextEventStrategyPtr;
 	setThisGetNextEventStrategyPtr(thisFIFOGetNextEventStrategyPtr);
 }
+
+

@@ -37,8 +37,8 @@
 #include "fUML/Semantics/SimpleClassifiers/SignalInstance.hpp"
 
 //Factories an Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
 #include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersPackage.hpp"
@@ -194,12 +194,10 @@ void GetNextEventStrategyImpl::saveContent(std::shared_ptr<persistence::interfac
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> GetNextEventStrategyImpl::eStaticClass() const
 {
 	return fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance()->getGetNextEventStrategy_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -232,7 +230,7 @@ bool GetNextEventStrategyImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any GetNextEventStrategyImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any GetNextEventStrategyImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -242,7 +240,7 @@ Any GetNextEventStrategyImpl::eInvoke(int operationID, std::shared_ptr<std::list
 		// 905122154
 		case CommonBehaviorPackage::GETNEXTEVENTSTRATEGY_OPERATION_GETNAME:
 		{
-			result = eAny(this->getName());
+					result = eAny(this->getName(),0,false);
 			break;
 		}
 		
@@ -252,9 +250,9 @@ Any GetNextEventStrategyImpl::eInvoke(int operationID, std::shared_ptr<std::list
 			//Retrieve input parameter 'objectActivation'
 			//parameter 0
 			std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation> incoming_param_objectActivation;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_objectActivation_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_objectActivation = (*incoming_param_objectActivation_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation> >();
-			result = eAny(this->retrieveNextEvent(incoming_param_objectActivation));
+			std::list<Any>::const_iterator incoming_param_objectActivation_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_objectActivation = (*incoming_param_objectActivation_arguments_citer)->get<std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation> >();
+				result = eAny(this->retrieveNextEvent(incoming_param_objectActivation));
 			break;
 		}
 
@@ -271,7 +269,6 @@ Any GetNextEventStrategyImpl::eInvoke(int operationID, std::shared_ptr<std::list
 	return result;
 }
 
-
 std::shared_ptr<fUML::Semantics::CommonBehavior::GetNextEventStrategy> GetNextEventStrategyImpl::getThisGetNextEventStrategyPtr() const
 {
 	return m_thisGetNextEventStrategyPtr.lock();
@@ -281,3 +278,5 @@ void GetNextEventStrategyImpl::setThisGetNextEventStrategyPtr(std::weak_ptr<fUML
 	m_thisGetNextEventStrategyPtr = thisGetNextEventStrategyPtr;
 	setThisSemanticStrategyPtr(thisGetNextEventStrategyPtr);
 }
+
+

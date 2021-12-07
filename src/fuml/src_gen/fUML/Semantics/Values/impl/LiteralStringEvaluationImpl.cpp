@@ -36,8 +36,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
+#include "uml/umlFactory.hpp"
 
 #include "fUML/Semantics/Values/LiteralEvaluation.hpp"
 #include "fUML/Semantics/Loci/Locus.hpp"
@@ -45,8 +45,8 @@
 #include "uml/ValueSpecification.hpp"
 
 //Factories an Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
 #include "fUML/Semantics/Values/ValuesPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -210,12 +210,10 @@ void LiteralStringEvaluationImpl::saveContent(std::shared_ptr<persistence::inter
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> LiteralStringEvaluationImpl::eStaticClass() const
 {
 	return fUML::Semantics::Values::ValuesPackage::eInstance()->getLiteralStringEvaluation_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -248,7 +246,7 @@ bool LiteralStringEvaluationImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any LiteralStringEvaluationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any LiteralStringEvaluationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -258,7 +256,7 @@ Any LiteralStringEvaluationImpl::eInvoke(int operationID, std::shared_ptr<std::l
 		// 970736967
 		case ValuesPackage::LITERALSTRINGEVALUATION_OPERATION_EVALUATE:
 		{
-			result = eAny(this->evaluate());
+				result = eAny(this->evaluate());
 			break;
 		}
 
@@ -275,7 +273,6 @@ Any LiteralStringEvaluationImpl::eInvoke(int operationID, std::shared_ptr<std::l
 	return result;
 }
 
-
 std::shared_ptr<fUML::Semantics::Values::LiteralStringEvaluation> LiteralStringEvaluationImpl::getThisLiteralStringEvaluationPtr() const
 {
 	return m_thisLiteralStringEvaluationPtr.lock();
@@ -285,3 +282,5 @@ void LiteralStringEvaluationImpl::setThisLiteralStringEvaluationPtr(std::weak_pt
 	m_thisLiteralStringEvaluationPtr = thisLiteralStringEvaluationPtr;
 	setThisLiteralEvaluationPtr(thisLiteralStringEvaluationPtr);
 }
+
+

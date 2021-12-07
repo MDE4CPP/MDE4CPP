@@ -295,12 +295,10 @@ void ControlNodeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> ControlNodeImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getControlNode_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -333,7 +331,7 @@ bool ControlNodeImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ControlNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any ControlNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -353,7 +351,6 @@ Any ControlNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::s
 	return result;
 }
 
-
 std::shared_ptr<uml::ControlNode> ControlNodeImpl::getThisControlNodePtr() const
 {
 	return m_thisControlNodePtr.lock();
@@ -363,3 +360,5 @@ void ControlNodeImpl::setThisControlNodePtr(std::weak_ptr<uml::ControlNode> this
 	m_thisControlNodePtr = thisControlNodePtr;
 	setThisActivityNodePtr(thisControlNodePtr);
 }
+
+

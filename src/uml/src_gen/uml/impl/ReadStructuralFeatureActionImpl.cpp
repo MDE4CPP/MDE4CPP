@@ -405,12 +405,10 @@ void ReadStructuralFeatureActionImpl::saveContent(std::shared_ptr<persistence::i
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> ReadStructuralFeatureActionImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getReadStructuralFeatureAction_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -422,7 +420,7 @@ Any ReadStructuralFeatureActionImpl::eGet(int featureID, bool resolve, bool core
 		case uml::umlPackage::READSTRUCTURALFEATUREACTION_ATTRIBUTE_RESULT:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getResult();
-			return eAny(returnValue); //19929
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //19929
 		}
 	}
 	return StructuralFeatureActionImpl::eGet(featureID, resolve, coreType);
@@ -458,27 +456,26 @@ bool ReadStructuralFeatureActionImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ReadStructuralFeatureActionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any ReadStructuralFeatureActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
   	switch(operationID)
 	{
-		
-		// 26062862
+		// uml::ReadStructuralFeatureAction::type_and_ordering(Any, std::map) : bool: 26062862
 		case umlPackage::READSTRUCTURALFEATUREACTION_OPERATION_TYPE_AND_ORDERING_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->type_and_ordering(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->type_and_ordering(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
 
@@ -495,7 +492,6 @@ Any ReadStructuralFeatureActionImpl::eInvoke(int operationID, std::shared_ptr<st
 	return result;
 }
 
-
 std::shared_ptr<uml::ReadStructuralFeatureAction> ReadStructuralFeatureActionImpl::getThisReadStructuralFeatureActionPtr() const
 {
 	return m_thisReadStructuralFeatureActionPtr.lock();
@@ -505,3 +501,5 @@ void ReadStructuralFeatureActionImpl::setThisReadStructuralFeatureActionPtr(std:
 	m_thisReadStructuralFeatureActionPtr = thisReadStructuralFeatureActionPtr;
 	setThisStructuralFeatureActionPtr(thisReadStructuralFeatureActionPtr);
 }
+
+

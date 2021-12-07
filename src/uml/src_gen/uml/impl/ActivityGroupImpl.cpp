@@ -396,12 +396,10 @@ void ActivityGroupImpl::saveContent(std::shared_ptr<persistence::interfaces::XSa
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> ActivityGroupImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getActivityGroup_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -412,49 +410,25 @@ Any ActivityGroupImpl::eGet(int featureID, bool resolve, bool coreType) const
 	{
 		case uml::umlPackage::ACTIVITYGROUP_ATTRIBUTE_CONTAINEDEDGE:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::ActivityEdge>::iterator iter = getContainedEdge()->begin();
-			Bag<uml::ActivityEdge>::iterator end = getContainedEdge()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //109			
+			return eAnyBag(getContainedEdge(),583468403); //109
 		}
 		case uml::umlPackage::ACTIVITYGROUP_ATTRIBUTE_CONTAINEDNODE:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::ActivityNode>::iterator iter = getContainedNode()->begin();
-			Bag<uml::ActivityNode>::iterator end = getContainedNode()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //1010			
+			return eAnyBag(getContainedNode(),1676583160); //1010
 		}
 		case uml::umlPackage::ACTIVITYGROUP_ATTRIBUTE_INACTIVITY:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getInActivity().lock();
-			return eAny(returnValue); //1011
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //1011
 		}
 		case uml::umlPackage::ACTIVITYGROUP_ATTRIBUTE_SUBGROUP:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::ActivityGroup>::iterator iter = getSubgroup()->begin();
-			Bag<uml::ActivityGroup>::iterator end = getSubgroup()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //1012			
+			return eAnyBag(getSubgroup(),1058869010); //1012
 		}
 		case uml::umlPackage::ACTIVITYGROUP_ATTRIBUTE_SUPERGROUP:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getSuperGroup().lock();
-			return eAny(returnValue); //1013
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //1013
 		}
 	}
 	return NamedElementImpl::eGet(featureID, resolve, coreType);
@@ -498,51 +472,48 @@ bool ActivityGroupImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ActivityGroupImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any ActivityGroupImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
   	switch(operationID)
 	{
-		
-		// 155988317
+		// uml::ActivityGroup::containingActivity() : uml::Activity: 155988317
 		case umlPackage::ACTIVITYGROUP_OPERATION_CONTAININGACTIVITY:
 		{
-			result = eAny(this->containingActivity());
+			result = eAny(this->containingActivity(), umlPackage::ACTIVITY_CLASS,false);
 			break;
 		}
-		
-		// 662716167
+		// uml::ActivityGroup::nodes_and_edges(Any, std::map) : bool: 662716167
 		case umlPackage::ACTIVITYGROUP_OPERATION_NODES_AND_EDGES_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->nodes_and_edges(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->nodes_and_edges(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		
-		// 1338347221
+		// uml::ActivityGroup::not_contained(Any, std::map) : bool: 1338347221
 		case umlPackage::ACTIVITYGROUP_OPERATION_NOT_CONTAINED_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->not_contained(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->not_contained(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
 
@@ -559,7 +530,6 @@ Any ActivityGroupImpl::eInvoke(int operationID, std::shared_ptr<std::list < std:
 	return result;
 }
 
-
 std::shared_ptr<uml::ActivityGroup> ActivityGroupImpl::getThisActivityGroupPtr() const
 {
 	return m_thisActivityGroupPtr.lock();
@@ -569,3 +539,5 @@ void ActivityGroupImpl::setThisActivityGroupPtr(std::weak_ptr<uml::ActivityGroup
 	m_thisActivityGroupPtr = thisActivityGroupPtr;
 	setThisNamedElementPtr(thisActivityGroupPtr);
 }
+
+

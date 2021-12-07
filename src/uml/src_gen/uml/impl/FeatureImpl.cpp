@@ -284,12 +284,10 @@ void FeatureImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHand
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> FeatureImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getFeature_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -300,18 +298,10 @@ Any FeatureImpl::eGet(int featureID, bool resolve, bool coreType) const
 	{
 		case uml::umlPackage::FEATURE_ATTRIBUTE_FEATURINGCLASSIFIER:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Classifier>::iterator iter = getFeaturingClassifier()->begin();
-			Bag<uml::Classifier>::iterator end = getFeaturingClassifier()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //10112			
+			return eAnyBag(getFeaturingClassifier(),845259359); //10112
 		}
 		case uml::umlPackage::FEATURE_ATTRIBUTE_ISSTATIC:
-			return eAny(getIsStatic()); //10113
+			return eAny(getIsStatic(),0,true); //10113
 	}
 	return RedefinableElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -347,7 +337,7 @@ bool FeatureImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any FeatureImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any FeatureImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -367,7 +357,6 @@ Any FeatureImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::share
 	return result;
 }
 
-
 std::shared_ptr<uml::Feature> FeatureImpl::getThisFeaturePtr() const
 {
 	return m_thisFeaturePtr.lock();
@@ -377,3 +366,5 @@ void FeatureImpl::setThisFeaturePtr(std::weak_ptr<uml::Feature> thisFeaturePtr)
 	m_thisFeaturePtr = thisFeaturePtr;
 	setThisRedefinableElementPtr(thisFeaturePtr);
 }
+
+

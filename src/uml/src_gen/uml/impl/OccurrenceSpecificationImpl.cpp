@@ -363,12 +363,10 @@ void OccurrenceSpecificationImpl::saveContent(std::shared_ptr<persistence::inter
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> OccurrenceSpecificationImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getOccurrenceSpecification_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -379,27 +377,11 @@ Any OccurrenceSpecificationImpl::eGet(int featureID, bool resolve, bool coreType
 	{
 		case uml::umlPackage::OCCURRENCESPECIFICATION_ATTRIBUTE_TOAFTER:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::GeneralOrdering>::iterator iter = getToAfter()->begin();
-			Bag<uml::GeneralOrdering>::iterator end = getToAfter()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //16313			
+			return eAnyBag(getToAfter(),1235473143); //16313
 		}
 		case uml::umlPackage::OCCURRENCESPECIFICATION_ATTRIBUTE_TOBEFORE:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::GeneralOrdering>::iterator iter = getToBefore()->begin();
-			Bag<uml::GeneralOrdering>::iterator end = getToBefore()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //16314			
+			return eAnyBag(getToBefore(),1235473143); //16314
 		}
 	}
 	return InteractionFragmentImpl::eGet(featureID, resolve, coreType);
@@ -424,72 +406,74 @@ bool OccurrenceSpecificationImpl::eSet(int featureID, Any newValue)
 		case uml::umlPackage::OCCURRENCESPECIFICATION_ATTRIBUTE_TOAFTER:
 		{
 			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::GeneralOrdering>> toAfterList(new Bag<uml::GeneralOrdering>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
+			if((newValue->isContainer()) && (uml::umlPackage::GENERALORDERING_CLASS ==newValue->getTypeId()))
 			{
-				toAfterList->add(std::dynamic_pointer_cast<uml::GeneralOrdering>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::GeneralOrdering>::iterator iterToAfter = getToAfter()->begin();
-			Bag<uml::GeneralOrdering>::iterator endToAfter = getToAfter()->end();
-			while (iterToAfter != endToAfter)
-			{
-				if (toAfterList->find(*iterToAfter) == -1)
+				try
 				{
-					getToAfter()->erase(*iterToAfter);
+					std::shared_ptr<Bag<uml::GeneralOrdering>> toAfterList= newValue->get<std::shared_ptr<Bag<uml::GeneralOrdering>>>();
+					std::shared_ptr<Bag<uml::GeneralOrdering>> _toAfter=getToAfter();
+					for(const std::shared_ptr<uml::GeneralOrdering> indexToAfter: *_toAfter)
+					{
+						if (toAfterList->find(indexToAfter) == -1)
+						{
+							_toAfter->erase(indexToAfter);
+						}
+					}
+
+					for(const std::shared_ptr<uml::GeneralOrdering> indexToAfter: *toAfterList)
+					{
+						if (_toAfter->find(indexToAfter) == -1)
+						{
+							_toAfter->add(indexToAfter);
+						}
+					}
 				}
-				iterToAfter++;
-			}
- 
-			iterToAfter = toAfterList->begin();
-			endToAfter = toAfterList->end();
-			while (iterToAfter != endToAfter)
-			{
-				if (getToAfter()->find(*iterToAfter) == -1)
+				catch(...)
 				{
-					getToAfter()->add(*iterToAfter);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterToAfter++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}
 		case uml::umlPackage::OCCURRENCESPECIFICATION_ATTRIBUTE_TOBEFORE:
 		{
 			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::GeneralOrdering>> toBeforeList(new Bag<uml::GeneralOrdering>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
+			if((newValue->isContainer()) && (uml::umlPackage::GENERALORDERING_CLASS ==newValue->getTypeId()))
 			{
-				toBeforeList->add(std::dynamic_pointer_cast<uml::GeneralOrdering>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::GeneralOrdering>::iterator iterToBefore = getToBefore()->begin();
-			Bag<uml::GeneralOrdering>::iterator endToBefore = getToBefore()->end();
-			while (iterToBefore != endToBefore)
-			{
-				if (toBeforeList->find(*iterToBefore) == -1)
+				try
 				{
-					getToBefore()->erase(*iterToBefore);
+					std::shared_ptr<Bag<uml::GeneralOrdering>> toBeforeList= newValue->get<std::shared_ptr<Bag<uml::GeneralOrdering>>>();
+					std::shared_ptr<Bag<uml::GeneralOrdering>> _toBefore=getToBefore();
+					for(const std::shared_ptr<uml::GeneralOrdering> indexToBefore: *_toBefore)
+					{
+						if (toBeforeList->find(indexToBefore) == -1)
+						{
+							_toBefore->erase(indexToBefore);
+						}
+					}
+
+					for(const std::shared_ptr<uml::GeneralOrdering> indexToBefore: *toBeforeList)
+					{
+						if (_toBefore->find(indexToBefore) == -1)
+						{
+							_toBefore->add(indexToBefore);
+						}
+					}
 				}
-				iterToBefore++;
-			}
- 
-			iterToBefore = toBeforeList->begin();
-			endToBefore = toBeforeList->end();
-			while (iterToBefore != endToBefore)
-			{
-				if (getToBefore()->find(*iterToBefore) == -1)
+				catch(...)
 				{
-					getToBefore()->add(*iterToBefore);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterToBefore++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}
@@ -501,30 +485,27 @@ bool OccurrenceSpecificationImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any OccurrenceSpecificationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any OccurrenceSpecificationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
   	switch(operationID)
 	{
-		
-		// 1100038979
+		// uml::OccurrenceSpecification::getCovered() : uml::Lifeline: 1100038979
 		case umlPackage::OCCURRENCESPECIFICATION_OPERATION_GETCOVERED:
 		{
-			result = eAny(this->getCovered());
+			result = eAny(this->getCovered(), umlPackage::LIFELINE_CLASS,false);
 			break;
 		}
-		
-		// 1493510619
+		// uml::OccurrenceSpecification::setCovered(uml::Lifeline): 1493510619
 		case umlPackage::OCCURRENCESPECIFICATION_OPERATION_SETCOVERED_LIFELINE:
 		{
 			//Retrieve input parameter 'value'
 			//parameter 0
 			std::shared_ptr<uml::Lifeline> incoming_param_value;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_value_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_value = (*incoming_param_value_arguments_citer)->get()->get<std::shared_ptr<uml::Lifeline> >();
+			std::list<Any>::const_iterator incoming_param_value_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_value = (*incoming_param_value_arguments_citer)->get<std::shared_ptr<uml::Lifeline> >();
 			this->setCovered(incoming_param_value);
-			break;
 		}
 
 		default:
@@ -540,7 +521,6 @@ Any OccurrenceSpecificationImpl::eInvoke(int operationID, std::shared_ptr<std::l
 	return result;
 }
 
-
 std::shared_ptr<uml::OccurrenceSpecification> OccurrenceSpecificationImpl::getThisOccurrenceSpecificationPtr() const
 {
 	return m_thisOccurrenceSpecificationPtr.lock();
@@ -550,3 +530,5 @@ void OccurrenceSpecificationImpl::setThisOccurrenceSpecificationPtr(std::weak_pt
 	m_thisOccurrenceSpecificationPtr = thisOccurrenceSpecificationPtr;
 	setThisInteractionFragmentPtr(thisOccurrenceSpecificationPtr);
 }
+
+

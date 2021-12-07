@@ -340,12 +340,10 @@ void NumericLiteralExpImpl::saveContent(std::shared_ptr<persistence::interfaces:
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> NumericLiteralExpImpl::eStaticClass() const
 {
 	return ocl::Expressions::ExpressionsPackage::eInstance()->getNumericLiteralExp_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -378,7 +376,7 @@ bool NumericLiteralExpImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any NumericLiteralExpImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any NumericLiteralExpImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -398,7 +396,6 @@ Any NumericLiteralExpImpl::eInvoke(int operationID, std::shared_ptr<std::list < 
 	return result;
 }
 
-
 std::shared_ptr<ocl::Expressions::NumericLiteralExp> NumericLiteralExpImpl::getThisNumericLiteralExpPtr() const
 {
 	return m_thisNumericLiteralExpPtr.lock();
@@ -408,3 +405,5 @@ void NumericLiteralExpImpl::setThisNumericLiteralExpPtr(std::weak_ptr<ocl::Expre
 	m_thisNumericLiteralExpPtr = thisNumericLiteralExpPtr;
 	setThisPrimitiveLiteralExpPtr(thisNumericLiteralExpPtr);
 }
+
+

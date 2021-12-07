@@ -294,12 +294,10 @@ void LinkEndCreationDataImpl::saveContent(std::shared_ptr<persistence::interface
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> LinkEndCreationDataImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getLinkEndCreationData_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -311,10 +309,10 @@ Any LinkEndCreationDataImpl::eGet(int featureID, bool resolve, bool coreType) co
 		case uml::umlPackage::LINKENDCREATIONDATA_ATTRIBUTE_INSERTAT:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getInsertAt();
-			return eAny(returnValue); //1346
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //1346
 		}
 		case uml::umlPackage::LINKENDCREATIONDATA_ATTRIBUTE_ISREPLACEALL:
-			return eAny(getIsReplaceAll()); //1347
+			return eAny(getIsReplaceAll(),0,true); //1347
 	}
 	return LinkEndDataImpl::eGet(featureID, resolve, coreType);
 }
@@ -358,27 +356,26 @@ bool LinkEndCreationDataImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any LinkEndCreationDataImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any LinkEndCreationDataImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
   	switch(operationID)
 	{
-		
-		// 632771740
+		// uml::LinkEndCreationData::insertAt_pin(Any, std::map) : bool: 632771740
 		case umlPackage::LINKENDCREATIONDATA_OPERATION_INSERTAT_PIN_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->insertAt_pin(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->insertAt_pin(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
 
@@ -395,7 +392,6 @@ Any LinkEndCreationDataImpl::eInvoke(int operationID, std::shared_ptr<std::list 
 	return result;
 }
 
-
 std::shared_ptr<uml::LinkEndCreationData> LinkEndCreationDataImpl::getThisLinkEndCreationDataPtr() const
 {
 	return m_thisLinkEndCreationDataPtr.lock();
@@ -405,3 +401,5 @@ void LinkEndCreationDataImpl::setThisLinkEndCreationDataPtr(std::weak_ptr<uml::L
 	m_thisLinkEndCreationDataPtr = thisLinkEndCreationDataPtr;
 	setThisLinkEndDataPtr(thisLinkEndCreationDataPtr);
 }
+
+

@@ -410,12 +410,10 @@ void CallBehaviorActionImpl::saveContent(std::shared_ptr<persistence::interfaces
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> CallBehaviorActionImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getCallBehaviorAction_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -427,7 +425,7 @@ Any CallBehaviorActionImpl::eGet(int featureID, bool resolve, bool coreType) con
 		case uml::umlPackage::CALLBEHAVIORACTION_ATTRIBUTE_BEHAVIOR:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getBehavior();
-			return eAny(returnValue); //2931
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //2931
 		}
 	}
 	return CallActionImpl::eGet(featureID, resolve, coreType);
@@ -463,27 +461,26 @@ bool CallBehaviorActionImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any CallBehaviorActionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any CallBehaviorActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
   	switch(operationID)
 	{
-		
-		// 1974091371
+		// uml::CallBehaviorAction::no_onport(Any, std::map) : bool: 1974091371
 		case umlPackage::CALLBEHAVIORACTION_OPERATION_NO_ONPORT_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->no_onport(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->no_onport(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
 
@@ -500,7 +497,6 @@ Any CallBehaviorActionImpl::eInvoke(int operationID, std::shared_ptr<std::list <
 	return result;
 }
 
-
 std::shared_ptr<uml::CallBehaviorAction> CallBehaviorActionImpl::getThisCallBehaviorActionPtr() const
 {
 	return m_thisCallBehaviorActionPtr.lock();
@@ -510,3 +506,5 @@ void CallBehaviorActionImpl::setThisCallBehaviorActionPtr(std::weak_ptr<uml::Cal
 	m_thisCallBehaviorActionPtr = thisCallBehaviorActionPtr;
 	setThisCallActionPtr(thisCallBehaviorActionPtr);
 }
+
+

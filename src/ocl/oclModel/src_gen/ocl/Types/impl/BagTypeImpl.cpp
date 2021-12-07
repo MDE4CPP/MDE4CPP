@@ -32,8 +32,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "ecore/ecoreFactory.hpp"
 #include "ocl/Values/ValuesFactory.hpp"
+#include "ecore/ecoreFactory.hpp"
 
 #include "ocl/Types/CollectionType.hpp"
 #include "ocl/Values/CollectionValue.hpp"
@@ -211,12 +211,10 @@ void BagTypeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHand
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> BagTypeImpl::eStaticClass() const
 {
 	return ocl::Types::TypesPackage::eInstance()->getBagType_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -249,7 +247,7 @@ bool BagTypeImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any BagTypeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any BagTypeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -269,7 +267,6 @@ Any BagTypeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::share
 	return result;
 }
 
-
 std::shared_ptr<ocl::Types::BagType> BagTypeImpl::getThisBagTypePtr() const
 {
 	return m_thisBagTypePtr.lock();
@@ -279,3 +276,5 @@ void BagTypeImpl::setThisBagTypePtr(std::weak_ptr<ocl::Types::BagType> thisBagTy
 	m_thisBagTypePtr = thisBagTypePtr;
 	setThisCollectionTypePtr(thisBagTypePtr);
 }
+
+

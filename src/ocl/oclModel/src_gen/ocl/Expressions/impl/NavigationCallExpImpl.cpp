@@ -452,12 +452,10 @@ void NavigationCallExpImpl::saveContent(std::shared_ptr<persistence::interfaces:
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> NavigationCallExpImpl::eStaticClass() const
 {
 	return ocl::Expressions::ExpressionsPackage::eInstance()->getNavigationCallExp_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -469,7 +467,7 @@ Any NavigationCallExpImpl::eGet(int featureID, bool resolve, bool coreType) cons
 		case ocl::Expressions::ExpressionsPackage::NAVIGATIONCALLEXP_ATTRIBUTE_NAVIGATIONSOURCE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getNavigationSource();
-			return eAny(returnValue); //5425
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //5425
 		}
 		case ocl::Expressions::ExpressionsPackage::NAVIGATIONCALLEXP_ATTRIBUTE_QUALIFIER:
 		{
@@ -555,7 +553,7 @@ bool NavigationCallExpImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any NavigationCallExpImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any NavigationCallExpImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -575,7 +573,6 @@ Any NavigationCallExpImpl::eInvoke(int operationID, std::shared_ptr<std::list < 
 	return result;
 }
 
-
 std::shared_ptr<ocl::Expressions::NavigationCallExp> NavigationCallExpImpl::getThisNavigationCallExpPtr() const
 {
 	return m_thisNavigationCallExpPtr.lock();
@@ -585,3 +582,5 @@ void NavigationCallExpImpl::setThisNavigationCallExpPtr(std::weak_ptr<ocl::Expre
 	m_thisNavigationCallExpPtr = thisNavigationCallExpPtr;
 	setThisFeatureCallExpPtr(thisNavigationCallExpPtr);
 }
+
+

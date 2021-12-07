@@ -493,12 +493,10 @@ void MessageExpImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> MessageExpImpl::eStaticClass() const
 {
 	return ocl::Expressions::ExpressionsPackage::eInstance()->getMessageExp_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -522,17 +520,17 @@ Any MessageExpImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case ocl::Expressions::ExpressionsPackage::MESSAGEEXP_ATTRIBUTE_CALLEDOPERATION:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getCalledOperation();
-			return eAny(returnValue); //4924
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //4924
 		}
 		case ocl::Expressions::ExpressionsPackage::MESSAGEEXP_ATTRIBUTE_SENTSIGNAL:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getSentSignal();
-			return eAny(returnValue); //4925
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //4925
 		}
 		case ocl::Expressions::ExpressionsPackage::MESSAGEEXP_ATTRIBUTE_TARGET:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getTarget();
-			return eAny(returnValue); //4922
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //4922
 		}
 	}
 	return OclExpressionImpl::eGet(featureID, resolve, coreType);
@@ -626,7 +624,7 @@ bool MessageExpImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any MessageExpImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any MessageExpImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -646,7 +644,6 @@ Any MessageExpImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sh
 	return result;
 }
 
-
 std::shared_ptr<ocl::Expressions::MessageExp> MessageExpImpl::getThisMessageExpPtr() const
 {
 	return m_thisMessageExpPtr.lock();
@@ -656,3 +653,5 @@ void MessageExpImpl::setThisMessageExpPtr(std::weak_ptr<ocl::Expressions::Messag
 	m_thisMessageExpPtr = thisMessageExpPtr;
 	setThisOclExpressionPtr(thisMessageExpPtr);
 }
+
+

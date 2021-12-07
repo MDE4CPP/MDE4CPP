@@ -244,12 +244,10 @@ void OperationTemplateParameterImpl::saveContent(std::shared_ptr<persistence::in
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> OperationTemplateParameterImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getOperationTemplateParameter_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -282,27 +280,26 @@ bool OperationTemplateParameterImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any OperationTemplateParameterImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any OperationTemplateParameterImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
   	switch(operationID)
 	{
-		
-		// 1020467918
+		// uml::OperationTemplateParameter::match_default_signature(Any, std::map) : bool: 1020467918
 		case umlPackage::OPERATIONTEMPLATEPARAMETER_OPERATION_MATCH_DEFAULT_SIGNATURE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->match_default_signature(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->match_default_signature(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
 
@@ -319,7 +316,6 @@ Any OperationTemplateParameterImpl::eInvoke(int operationID, std::shared_ptr<std
 	return result;
 }
 
-
 std::shared_ptr<uml::OperationTemplateParameter> OperationTemplateParameterImpl::getThisOperationTemplateParameterPtr() const
 {
 	return m_thisOperationTemplateParameterPtr.lock();
@@ -329,3 +325,5 @@ void OperationTemplateParameterImpl::setThisOperationTemplateParameterPtr(std::w
 	m_thisOperationTemplateParameterPtr = thisOperationTemplateParameterPtr;
 	setThisTemplateParameterPtr(thisOperationTemplateParameterPtr);
 }
+
+

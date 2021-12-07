@@ -324,12 +324,10 @@ void SignalEventImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> SignalEventImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getSignalEvent_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -341,7 +339,7 @@ Any SignalEventImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::SIGNALEVENT_ATTRIBUTE_SIGNAL:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getSignal();
-			return eAny(returnValue); //21612
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //21612
 		}
 	}
 	return MessageEventImpl::eGet(featureID, resolve, coreType);
@@ -377,7 +375,7 @@ bool SignalEventImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any SignalEventImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any SignalEventImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -397,7 +395,6 @@ Any SignalEventImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::s
 	return result;
 }
 
-
 std::shared_ptr<uml::SignalEvent> SignalEventImpl::getThisSignalEventPtr() const
 {
 	return m_thisSignalEventPtr.lock();
@@ -407,3 +404,5 @@ void SignalEventImpl::setThisSignalEventPtr(std::weak_ptr<uml::SignalEvent> this
 	m_thisSignalEventPtr = thisSignalEventPtr;
 	setThisMessageEventPtr(thisSignalEventPtr);
 }
+
+

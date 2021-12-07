@@ -177,14 +177,10 @@ AssociationImpl& AssociationImpl::operator=(const AssociationImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_endType - Subset<uml::Type, uml::Element >(getRelatedElement())" << std::endl;
 		#endif
 		
-
-		Bag<uml::Type>::iterator endTypeIter = endTypeList->begin();
-		Bag<uml::Type>::iterator endTypeEnd = endTypeList->end();
-		while (endTypeIter != endTypeEnd) 
+		for(const std::shared_ptr<uml::Type> endTypeindexElem: *endTypeList) 
 		{
-			std::shared_ptr<uml::Type> temp = std::dynamic_pointer_cast<uml::Type>((*endTypeIter)->copy());
-			getEndType()->push_back(temp);
-			endTypeIter++;
+			std::shared_ptr<uml::Type> temp = std::dynamic_pointer_cast<uml::Type>((endTypeindexElem)->copy());
+			m_endType->push_back(temp);
 		}
 	}
 	else
@@ -208,14 +204,10 @@ AssociationImpl& AssociationImpl::operator=(const AssociationImpl & obj)
 			std::cout << "Initialising value SubsetUnion: " << "m_memberEnd - SubsetUnion<uml::Property, uml::NamedElement >(getMember())" << std::endl;
 		#endif
 		
-
-		Bag<uml::Property>::iterator memberEndIter = memberEndList->begin();
-		Bag<uml::Property>::iterator memberEndEnd = memberEndList->end();
-		while (memberEndIter != memberEndEnd) 
+		for(const std::shared_ptr<uml::Property> memberEndindexElem: *memberEndList) 
 		{
-			std::shared_ptr<uml::Property> temp = std::dynamic_pointer_cast<uml::Property>((*memberEndIter)->copy());
-			getMemberEnd()->push_back(temp);
-			memberEndIter++;
+			std::shared_ptr<uml::Property> temp = std::dynamic_pointer_cast<uml::Property>((memberEndindexElem)->copy());
+			m_memberEnd->push_back(temp);
 		}
 	}
 	else
@@ -239,14 +231,10 @@ AssociationImpl& AssociationImpl::operator=(const AssociationImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_navigableOwnedEnd - Subset<uml::Property, uml::Property /*Subset does not reference a union*/ >(getOwnedEnd())" << std::endl;
 		#endif
 		
-
-		Bag<uml::Property>::iterator navigableOwnedEndIter = navigableOwnedEndList->begin();
-		Bag<uml::Property>::iterator navigableOwnedEndEnd = navigableOwnedEndList->end();
-		while (navigableOwnedEndIter != navigableOwnedEndEnd) 
+		for(const std::shared_ptr<uml::Property> navigableOwnedEndindexElem: *navigableOwnedEndList) 
 		{
-			std::shared_ptr<uml::Property> temp = std::dynamic_pointer_cast<uml::Property>((*navigableOwnedEndIter)->copy());
-			getNavigableOwnedEnd()->push_back(temp);
-			navigableOwnedEndIter++;
+			std::shared_ptr<uml::Property> temp = std::dynamic_pointer_cast<uml::Property>((navigableOwnedEndindexElem)->copy());
+			m_navigableOwnedEnd->push_back(temp);
 		}
 	}
 	else
@@ -270,14 +258,10 @@ AssociationImpl& AssociationImpl::operator=(const AssociationImpl & obj)
 			std::cout << "Initialising value SubsetUnion: " << "m_ownedEnd - SubsetUnion<uml::Property, uml::Feature, uml::NamedElement, uml::Property /*Subset does not reference a union*/ >(getFeature(), getOwnedMember(), getMemberEnd())" << std::endl;
 		#endif
 		
-
-		Bag<uml::Property>::iterator ownedEndIter = ownedEndList->begin();
-		Bag<uml::Property>::iterator ownedEndEnd = ownedEndList->end();
-		while (ownedEndIter != ownedEndEnd) 
+		for(const std::shared_ptr<uml::Property> ownedEndindexElem: *ownedEndList) 
 		{
-			std::shared_ptr<uml::Property> temp = std::dynamic_pointer_cast<uml::Property>((*ownedEndIter)->copy());
-			getOwnedEnd()->push_back(temp);
-			ownedEndIter++;
+			std::shared_ptr<uml::Property> temp = std::dynamic_pointer_cast<uml::Property>((ownedEndindexElem)->copy());
+			m_ownedEnd->push_back(temp);
 		}
 	}
 	else
@@ -774,12 +758,10 @@ void AssociationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> AssociationImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getAssociation_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -790,53 +772,21 @@ Any AssociationImpl::eGet(int featureID, bool resolve, bool coreType) const
 	{
 		case uml::umlPackage::ASSOCIATION_ATTRIBUTE_ENDTYPE:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Type>::iterator iter = getEndType()->begin();
-			Bag<uml::Type>::iterator end = getEndType()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //2139			
+			return eAnyBag(getEndType(),159098004); //2139
 		}
 		case uml::umlPackage::ASSOCIATION_ATTRIBUTE_ISDERIVED:
-			return eAny(getIsDerived()); //2140
+			return eAny(getIsDerived(),0,true); //2140
 		case uml::umlPackage::ASSOCIATION_ATTRIBUTE_MEMBEREND:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Property>::iterator iter = getMemberEnd()->begin();
-			Bag<uml::Property>::iterator end = getMemberEnd()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //2141			
+			return eAnyBag(getMemberEnd(),1938835355); //2141
 		}
 		case uml::umlPackage::ASSOCIATION_ATTRIBUTE_NAVIGABLEOWNEDEND:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Property>::iterator iter = getNavigableOwnedEnd()->begin();
-			Bag<uml::Property>::iterator end = getNavigableOwnedEnd()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //2143			
+			return eAnyBag(getNavigableOwnedEnd(),1938835355); //2143
 		}
 		case uml::umlPackage::ASSOCIATION_ATTRIBUTE_OWNEDEND:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Property>::iterator iter = getOwnedEnd()->begin();
-			Bag<uml::Property>::iterator end = getOwnedEnd()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //2142			
+			return eAnyBag(getOwnedEnd(),1938835355); //2142
 		}
 	}
 	Any result;
@@ -888,108 +838,111 @@ bool AssociationImpl::eSet(int featureID, Any newValue)
 		case uml::umlPackage::ASSOCIATION_ATTRIBUTE_MEMBEREND:
 		{
 			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::Property>> memberEndList(new Bag<uml::Property>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
+			if((newValue->isContainer()) && (uml::umlPackage::PROPERTY_CLASS ==newValue->getTypeId()))
 			{
-				memberEndList->add(std::dynamic_pointer_cast<uml::Property>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::Property>::iterator iterMemberEnd = getMemberEnd()->begin();
-			Bag<uml::Property>::iterator endMemberEnd = getMemberEnd()->end();
-			while (iterMemberEnd != endMemberEnd)
-			{
-				if (memberEndList->find(*iterMemberEnd) == -1)
+				try
 				{
-					getMemberEnd()->erase(*iterMemberEnd);
+					std::shared_ptr<Bag<uml::Property>> memberEndList= newValue->get<std::shared_ptr<Bag<uml::Property>>>();
+					std::shared_ptr<Bag<uml::Property>> _memberEnd=getMemberEnd();
+					for(const std::shared_ptr<uml::Property> indexMemberEnd: *_memberEnd)
+					{
+						if (memberEndList->find(indexMemberEnd) == -1)
+						{
+							_memberEnd->erase(indexMemberEnd);
+						}
+					}
+
+					for(const std::shared_ptr<uml::Property> indexMemberEnd: *memberEndList)
+					{
+						if (_memberEnd->find(indexMemberEnd) == -1)
+						{
+							_memberEnd->add(indexMemberEnd);
+						}
+					}
 				}
-				iterMemberEnd++;
-			}
- 
-			iterMemberEnd = memberEndList->begin();
-			endMemberEnd = memberEndList->end();
-			while (iterMemberEnd != endMemberEnd)
-			{
-				if (getMemberEnd()->find(*iterMemberEnd) == -1)
+				catch(...)
 				{
-					getMemberEnd()->add(*iterMemberEnd);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterMemberEnd++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}
 		case uml::umlPackage::ASSOCIATION_ATTRIBUTE_NAVIGABLEOWNEDEND:
 		{
 			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::Property>> navigableOwnedEndList(new Bag<uml::Property>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
+			if((newValue->isContainer()) && (uml::umlPackage::PROPERTY_CLASS ==newValue->getTypeId()))
 			{
-				navigableOwnedEndList->add(std::dynamic_pointer_cast<uml::Property>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::Property>::iterator iterNavigableOwnedEnd = getNavigableOwnedEnd()->begin();
-			Bag<uml::Property>::iterator endNavigableOwnedEnd = getNavigableOwnedEnd()->end();
-			while (iterNavigableOwnedEnd != endNavigableOwnedEnd)
-			{
-				if (navigableOwnedEndList->find(*iterNavigableOwnedEnd) == -1)
+				try
 				{
-					getNavigableOwnedEnd()->erase(*iterNavigableOwnedEnd);
+					std::shared_ptr<Bag<uml::Property>> navigableOwnedEndList= newValue->get<std::shared_ptr<Bag<uml::Property>>>();
+					std::shared_ptr<Bag<uml::Property>> _navigableOwnedEnd=getNavigableOwnedEnd();
+					for(const std::shared_ptr<uml::Property> indexNavigableOwnedEnd: *_navigableOwnedEnd)
+					{
+						if (navigableOwnedEndList->find(indexNavigableOwnedEnd) == -1)
+						{
+							_navigableOwnedEnd->erase(indexNavigableOwnedEnd);
+						}
+					}
+
+					for(const std::shared_ptr<uml::Property> indexNavigableOwnedEnd: *navigableOwnedEndList)
+					{
+						if (_navigableOwnedEnd->find(indexNavigableOwnedEnd) == -1)
+						{
+							_navigableOwnedEnd->add(indexNavigableOwnedEnd);
+						}
+					}
 				}
-				iterNavigableOwnedEnd++;
-			}
- 
-			iterNavigableOwnedEnd = navigableOwnedEndList->begin();
-			endNavigableOwnedEnd = navigableOwnedEndList->end();
-			while (iterNavigableOwnedEnd != endNavigableOwnedEnd)
-			{
-				if (getNavigableOwnedEnd()->find(*iterNavigableOwnedEnd) == -1)
+				catch(...)
 				{
-					getNavigableOwnedEnd()->add(*iterNavigableOwnedEnd);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterNavigableOwnedEnd++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}
 		case uml::umlPackage::ASSOCIATION_ATTRIBUTE_OWNEDEND:
 		{
 			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::Property>> ownedEndList(new Bag<uml::Property>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
+			if((newValue->isContainer()) && (uml::umlPackage::PROPERTY_CLASS ==newValue->getTypeId()))
 			{
-				ownedEndList->add(std::dynamic_pointer_cast<uml::Property>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::Property>::iterator iterOwnedEnd = getOwnedEnd()->begin();
-			Bag<uml::Property>::iterator endOwnedEnd = getOwnedEnd()->end();
-			while (iterOwnedEnd != endOwnedEnd)
-			{
-				if (ownedEndList->find(*iterOwnedEnd) == -1)
+				try
 				{
-					getOwnedEnd()->erase(*iterOwnedEnd);
+					std::shared_ptr<Bag<uml::Property>> ownedEndList= newValue->get<std::shared_ptr<Bag<uml::Property>>>();
+					std::shared_ptr<Bag<uml::Property>> _ownedEnd=getOwnedEnd();
+					for(const std::shared_ptr<uml::Property> indexOwnedEnd: *_ownedEnd)
+					{
+						if (ownedEndList->find(indexOwnedEnd) == -1)
+						{
+							_ownedEnd->erase(indexOwnedEnd);
+						}
+					}
+
+					for(const std::shared_ptr<uml::Property> indexOwnedEnd: *ownedEndList)
+					{
+						if (_ownedEnd->find(indexOwnedEnd) == -1)
+						{
+							_ownedEnd->add(indexOwnedEnd);
+						}
+					}
 				}
-				iterOwnedEnd++;
-			}
- 
-			iterOwnedEnd = ownedEndList->begin();
-			endOwnedEnd = ownedEndList->end();
-			while (iterOwnedEnd != endOwnedEnd)
-			{
-				if (getOwnedEnd()->find(*iterOwnedEnd) == -1)
+				catch(...)
 				{
-					getOwnedEnd()->add(*iterOwnedEnd);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterOwnedEnd++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}
@@ -1008,109 +961,103 @@ bool AssociationImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any AssociationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any AssociationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
   	switch(operationID)
 	{
-		
-		// 1798482022
+		// uml::Association::association_ends(Any, std::map) : bool: 1798482022
 		case umlPackage::ASSOCIATION_OPERATION_ASSOCIATION_ENDS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->association_ends(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->association_ends(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		
-		// 1486749742
+		// uml::Association::binary_associations(Any, std::map) : bool: 1486749742
 		case umlPackage::ASSOCIATION_OPERATION_BINARY_ASSOCIATIONS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->binary_associations(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->binary_associations(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		
-		// 2137643093
+		// uml::Association::ends_must_be_typed(Any, std::map) : bool: 2137643093
 		case umlPackage::ASSOCIATION_OPERATION_ENDS_MUST_BE_TYPED_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->ends_must_be_typed(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->ends_must_be_typed(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		
-		// 855369150
+		// uml::Association::getEndTypes() : uml::Type[*]: 855369150
 		case umlPackage::ASSOCIATION_OPERATION_GETENDTYPES:
 		{
-			result = eAny(this->getEndTypes());
+			std::shared_ptr<Bag<uml::Type> > resultList = this->getEndTypes();
+			return eAny(resultList,umlPackage::TYPE_CLASS,true);
 			break;
 		}
-		
-		// 1275990908
+		// uml::Association::isBinary() : bool: 1275990908
 		case umlPackage::ASSOCIATION_OPERATION_ISBINARY:
 		{
-			result = eAny(this->isBinary());
+			result = eAny(this->isBinary(),0,false);
 			break;
 		}
-		
-		// 1038022213
+		// uml::Association::specialized_end_number(Any, std::map) : bool: 1038022213
 		case umlPackage::ASSOCIATION_OPERATION_SPECIALIZED_END_NUMBER_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->specialized_end_number(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->specialized_end_number(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		
-		// 2057384221
+		// uml::Association::specialized_end_types(Any, std::map) : bool: 2057384221
 		case umlPackage::ASSOCIATION_OPERATION_SPECIALIZED_END_TYPES_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->specialized_end_types(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->specialized_end_types(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
 
@@ -1130,7 +1077,6 @@ Any AssociationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::s
 	return result;
 }
 
-
 std::shared_ptr<uml::Association> AssociationImpl::getThisAssociationPtr() const
 {
 	return m_thisAssociationPtr.lock();
@@ -1141,3 +1087,5 @@ void AssociationImpl::setThisAssociationPtr(std::weak_ptr<uml::Association> this
 	setThisClassifierPtr(thisAssociationPtr);
 	setThisRelationshipPtr(thisAssociationPtr);
 }
+
+

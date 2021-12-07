@@ -324,12 +324,10 @@ void TriggerImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHand
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> TriggerImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getTrigger_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -341,19 +339,11 @@ Any TriggerImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::TRIGGER_ATTRIBUTE_EVENT:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getEvent();
-			return eAny(returnValue); //2439
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //2439
 		}
 		case uml::umlPackage::TRIGGER_ATTRIBUTE_PORT:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Port>::iterator iter = getPort()->begin();
-			Bag<uml::Port>::iterator end = getPort()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //24310			
+			return eAnyBag(getPort(),71420588); //24310
 		}
 	}
 	return NamedElementImpl::eGet(featureID, resolve, coreType);
@@ -386,36 +376,37 @@ bool TriggerImpl::eSet(int featureID, Any newValue)
 		case uml::umlPackage::TRIGGER_ATTRIBUTE_PORT:
 		{
 			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::Port>> portList(new Bag<uml::Port>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
+			if((newValue->isContainer()) && (uml::umlPackage::PORT_CLASS ==newValue->getTypeId()))
 			{
-				portList->add(std::dynamic_pointer_cast<uml::Port>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::Port>::iterator iterPort = getPort()->begin();
-			Bag<uml::Port>::iterator endPort = getPort()->end();
-			while (iterPort != endPort)
-			{
-				if (portList->find(*iterPort) == -1)
+				try
 				{
-					getPort()->erase(*iterPort);
+					std::shared_ptr<Bag<uml::Port>> portList= newValue->get<std::shared_ptr<Bag<uml::Port>>>();
+					std::shared_ptr<Bag<uml::Port>> _port=getPort();
+					for(const std::shared_ptr<uml::Port> indexPort: *_port)
+					{
+						if (portList->find(indexPort) == -1)
+						{
+							_port->erase(indexPort);
+						}
+					}
+
+					for(const std::shared_ptr<uml::Port> indexPort: *portList)
+					{
+						if (_port->find(indexPort) == -1)
+						{
+							_port->add(indexPort);
+						}
+					}
 				}
-				iterPort++;
-			}
- 
-			iterPort = portList->begin();
-			endPort = portList->end();
-			while (iterPort != endPort)
-			{
-				if (getPort()->find(*iterPort) == -1)
+				catch(...)
 				{
-					getPort()->add(*iterPort);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterPort++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}
@@ -427,27 +418,26 @@ bool TriggerImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any TriggerImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any TriggerImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
   	switch(operationID)
 	{
-		
-		// 1662674080
+		// uml::Trigger::trigger_with_ports(Any, std::map) : bool: 1662674080
 		case umlPackage::TRIGGER_OPERATION_TRIGGER_WITH_PORTS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->trigger_with_ports(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->trigger_with_ports(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
 
@@ -464,7 +454,6 @@ Any TriggerImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::share
 	return result;
 }
 
-
 std::shared_ptr<uml::Trigger> TriggerImpl::getThisTriggerPtr() const
 {
 	return m_thisTriggerPtr.lock();
@@ -474,3 +463,5 @@ void TriggerImpl::setThisTriggerPtr(std::weak_ptr<uml::Trigger> thisTriggerPtr)
 	m_thisTriggerPtr = thisTriggerPtr;
 	setThisNamedElementPtr(thisTriggerPtr);
 }
+
+

@@ -264,12 +264,10 @@ void DirectedRelationshipImpl::saveContent(std::shared_ptr<persistence::interfac
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> DirectedRelationshipImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getDirectedRelationship_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -280,27 +278,11 @@ Any DirectedRelationshipImpl::eGet(int featureID, bool resolve, bool coreType) c
 	{
 		case uml::umlPackage::DIRECTEDRELATIONSHIP_ATTRIBUTE_SOURCE:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Element>::iterator iter = getSource()->begin();
-			Bag<uml::Element>::iterator end = getSource()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //764			
+			return eAnyBag(getSource(),272430456); //764
 		}
 		case uml::umlPackage::DIRECTEDRELATIONSHIP_ATTRIBUTE_TARGET:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Element>::iterator iter = getTarget()->begin();
-			Bag<uml::Element>::iterator end = getTarget()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //765			
+			return eAnyBag(getTarget(),272430456); //765
 		}
 	}
 	return RelationshipImpl::eGet(featureID, resolve, coreType);
@@ -330,7 +312,7 @@ bool DirectedRelationshipImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any DirectedRelationshipImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any DirectedRelationshipImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -350,7 +332,6 @@ Any DirectedRelationshipImpl::eInvoke(int operationID, std::shared_ptr<std::list
 	return result;
 }
 
-
 std::shared_ptr<uml::DirectedRelationship> DirectedRelationshipImpl::getThisDirectedRelationshipPtr() const
 {
 	return m_thisDirectedRelationshipPtr.lock();
@@ -360,3 +341,5 @@ void DirectedRelationshipImpl::setThisDirectedRelationshipPtr(std::weak_ptr<uml:
 	m_thisDirectedRelationshipPtr = thisDirectedRelationshipPtr;
 	setThisRelationshipPtr(thisDirectedRelationshipPtr);
 }
+
+

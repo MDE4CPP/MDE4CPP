@@ -393,12 +393,10 @@ void IterateExpImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> IterateExpImpl::eStaticClass() const
 {
 	return ocl::Expressions::ExpressionsPackage::eInstance()->getIterateExp_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -410,7 +408,7 @@ Any IterateExpImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case ocl::Expressions::ExpressionsPackage::ITERATEEXP_ATTRIBUTE_RESULT:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getResult();
-			return eAny(returnValue); //3825
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //3825
 		}
 	}
 	return LoopExpImpl::eGet(featureID, resolve, coreType);
@@ -446,7 +444,7 @@ bool IterateExpImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any IterateExpImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any IterateExpImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -466,7 +464,6 @@ Any IterateExpImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sh
 	return result;
 }
 
-
 std::shared_ptr<ocl::Expressions::IterateExp> IterateExpImpl::getThisIterateExpPtr() const
 {
 	return m_thisIterateExpPtr.lock();
@@ -476,3 +473,5 @@ void IterateExpImpl::setThisIterateExpPtr(std::weak_ptr<ocl::Expressions::Iterat
 	m_thisIterateExpPtr = thisIterateExpPtr;
 	setThisLoopExpPtr(thisIterateExpPtr);
 }
+
+

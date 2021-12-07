@@ -363,12 +363,10 @@ void TimeEventImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHa
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> TimeEventImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getTimeEvent_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -378,11 +376,11 @@ Any TimeEventImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::TIMEEVENT_ATTRIBUTE_ISRELATIVE:
-			return eAny(getIsRelative()); //23712
+			return eAny(getIsRelative(),0,true); //23712
 		case uml::umlPackage::TIMEEVENT_ATTRIBUTE_WHEN:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getWhen();
-			return eAny(returnValue); //23713
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //23713
 		}
 	}
 	return EventImpl::eGet(featureID, resolve, coreType);
@@ -427,27 +425,26 @@ bool TimeEventImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any TimeEventImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any TimeEventImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
   	switch(operationID)
 	{
-		
-		// 368076727
+		// uml::TimeEvent::when_non_negative(Any, std::map) : bool: 368076727
 		case umlPackage::TIMEEVENT_OPERATION_WHEN_NON_NEGATIVE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->when_non_negative(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->when_non_negative(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
 
@@ -464,7 +461,6 @@ Any TimeEventImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sha
 	return result;
 }
 
-
 std::shared_ptr<uml::TimeEvent> TimeEventImpl::getThisTimeEventPtr() const
 {
 	return m_thisTimeEventPtr.lock();
@@ -474,3 +470,5 @@ void TimeEventImpl::setThisTimeEventPtr(std::weak_ptr<uml::TimeEvent> thisTimeEv
 	m_thisTimeEventPtr = thisTimeEventPtr;
 	setThisEventPtr(thisTimeEventPtr);
 }
+
+

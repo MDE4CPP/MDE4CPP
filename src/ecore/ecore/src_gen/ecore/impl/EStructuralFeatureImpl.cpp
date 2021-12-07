@@ -441,12 +441,10 @@ void EStructuralFeatureImpl::saveContent(std::shared_ptr<persistence::interfaces
 	}
 }
 
-
 std::shared_ptr<EClass> EStructuralFeatureImpl::eStaticClass() const
 {
 	return ecore::ecorePackage::eInstance()->getEStructuralFeature_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -456,26 +454,26 @@ Any EStructuralFeatureImpl::eGet(int featureID, bool resolve, bool coreType) con
 	switch(featureID)
 	{
 		case ecore::ecorePackage::ESTRUCTURALFEATURE_ATTRIBUTE_CHANGEABLE:
-			return eAny(isChangeable()); //5113
+			return eAny(isChangeable(),0,true); //5113
 		case ecore::ecorePackage::ESTRUCTURALFEATURE_ATTRIBUTE_DEFAULTVALUE:
-			return eAny(getDefaultValue()); //5117
+			return eAny(getDefaultValue(),0,true); //5117
 		case ecore::ecorePackage::ESTRUCTURALFEATURE_ATTRIBUTE_DEFAULTVALUELITERAL:
-			return eAny(getDefaultValueLiteral()); //5116
+			return eAny(getDefaultValueLiteral(),0,true); //5116
 		case ecore::ecorePackage::ESTRUCTURALFEATURE_ATTRIBUTE_DERIVED:
-			return eAny(isDerived()); //5119
+			return eAny(isDerived(),0,true); //5119
 		case ecore::ecorePackage::ESTRUCTURALFEATURE_ATTRIBUTE_ECONTAININGCLASS:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getEContainingClass().lock();
-			return eAny(returnValue); //5121
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //5121
 		}
 		case ecore::ecorePackage::ESTRUCTURALFEATURE_ATTRIBUTE_FEATUREID:
-			return eAny(getFeatureID()); //5120
+			return eAny(getFeatureID(),0,true); //5120
 		case ecore::ecorePackage::ESTRUCTURALFEATURE_ATTRIBUTE_TRANSIENT:
-			return eAny(isTransient()); //5115
+			return eAny(isTransient(),0,true); //5115
 		case ecore::ecorePackage::ESTRUCTURALFEATURE_ATTRIBUTE_UNSETTABLE:
-			return eAny(isUnsettable()); //5118
+			return eAny(isUnsettable(),0,true); //5118
 		case ecore::ecorePackage::ESTRUCTURALFEATURE_ATTRIBUTE_VOLATILE:
-			return eAny(isVolatile()); //5114
+			return eAny(isVolatile(),0,true); //5114
 	}
 	return ETypedElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -573,11 +571,10 @@ Any EStructuralFeatureImpl::eInvoke(int operationID, std::shared_ptr<std::list<A
 
   	switch(operationID)
 	{
-		
-		// 172675706
+		// ecore::EStructuralFeature::getContainerClass() : void *: 172675706
 		case ecorePackage::ESTRUCTURALFEATURE_OPERATION_GETCONTAINERCLASS:
 		{
-			result = eAny(this->getContainerClass());
+			result = eAny(this->getContainerClass(),0,false);
 			break;
 		}
 
@@ -594,7 +591,6 @@ Any EStructuralFeatureImpl::eInvoke(int operationID, std::shared_ptr<std::list<A
 	return result;
 }
 
-
 std::shared_ptr<ecore::EStructuralFeature> EStructuralFeatureImpl::getThisEStructuralFeaturePtr() const
 {
 	return m_thisEStructuralFeaturePtr.lock();
@@ -604,3 +600,5 @@ void EStructuralFeatureImpl::setThisEStructuralFeaturePtr(std::weak_ptr<ecore::E
 	m_thisEStructuralFeaturePtr = thisEStructuralFeaturePtr;
 	setThisETypedElementPtr(thisEStructuralFeaturePtr);
 }
+
+

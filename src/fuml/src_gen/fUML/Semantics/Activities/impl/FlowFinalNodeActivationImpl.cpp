@@ -42,8 +42,8 @@
 #include "fUML/Semantics/Activities/Token.hpp"
 
 //Factories an Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "uml/umlPackage.hpp"
 
@@ -206,12 +206,10 @@ void FlowFinalNodeActivationImpl::saveContent(std::shared_ptr<persistence::inter
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> FlowFinalNodeActivationImpl::eStaticClass() const
 {
 	return fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getFlowFinalNodeActivation_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -244,7 +242,7 @@ bool FlowFinalNodeActivationImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any FlowFinalNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any FlowFinalNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -264,7 +262,6 @@ Any FlowFinalNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::l
 	return result;
 }
 
-
 std::shared_ptr<fUML::Semantics::Activities::FlowFinalNodeActivation> FlowFinalNodeActivationImpl::getThisFlowFinalNodeActivationPtr() const
 {
 	return m_thisFlowFinalNodeActivationPtr.lock();
@@ -274,3 +271,5 @@ void FlowFinalNodeActivationImpl::setThisFlowFinalNodeActivationPtr(std::weak_pt
 	m_thisFlowFinalNodeActivationPtr = thisFlowFinalNodeActivationPtr;
 	setThisControlNodeActivationPtr(thisFlowFinalNodeActivationPtr);
 }
+
+

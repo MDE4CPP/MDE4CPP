@@ -155,14 +155,10 @@ ActivityNodeImpl& ActivityNodeImpl::operator=(const ActivityNodeImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_inInterruptibleRegion - Subset<uml::InterruptibleActivityRegion, uml::ActivityGroup >(getInGroup())" << std::endl;
 		#endif
 		
-
-		Bag<uml::InterruptibleActivityRegion>::iterator inInterruptibleRegionIter = inInterruptibleRegionList->begin();
-		Bag<uml::InterruptibleActivityRegion>::iterator inInterruptibleRegionEnd = inInterruptibleRegionList->end();
-		while (inInterruptibleRegionIter != inInterruptibleRegionEnd) 
+		for(const std::shared_ptr<uml::InterruptibleActivityRegion> inInterruptibleRegionindexElem: *inInterruptibleRegionList) 
 		{
-			std::shared_ptr<uml::InterruptibleActivityRegion> temp = std::dynamic_pointer_cast<uml::InterruptibleActivityRegion>((*inInterruptibleRegionIter)->copy());
-			getInInterruptibleRegion()->push_back(temp);
-			inInterruptibleRegionIter++;
+			std::shared_ptr<uml::InterruptibleActivityRegion> temp = std::dynamic_pointer_cast<uml::InterruptibleActivityRegion>((inInterruptibleRegionindexElem)->copy());
+			m_inInterruptibleRegion->push_back(temp);
 		}
 	}
 	else
@@ -186,14 +182,10 @@ ActivityNodeImpl& ActivityNodeImpl::operator=(const ActivityNodeImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_inPartition - Subset<uml::ActivityPartition, uml::ActivityGroup >(getInGroup())" << std::endl;
 		#endif
 		
-
-		Bag<uml::ActivityPartition>::iterator inPartitionIter = inPartitionList->begin();
-		Bag<uml::ActivityPartition>::iterator inPartitionEnd = inPartitionList->end();
-		while (inPartitionIter != inPartitionEnd) 
+		for(const std::shared_ptr<uml::ActivityPartition> inPartitionindexElem: *inPartitionList) 
 		{
-			std::shared_ptr<uml::ActivityPartition> temp = std::dynamic_pointer_cast<uml::ActivityPartition>((*inPartitionIter)->copy());
-			getInPartition()->push_back(temp);
-			inPartitionIter++;
+			std::shared_ptr<uml::ActivityPartition> temp = std::dynamic_pointer_cast<uml::ActivityPartition>((inPartitionindexElem)->copy());
+			m_inPartition->push_back(temp);
 		}
 	}
 	else
@@ -217,14 +209,10 @@ ActivityNodeImpl& ActivityNodeImpl::operator=(const ActivityNodeImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_redefinedNode - Subset<uml::ActivityNode, uml::RedefinableElement >(getRedefinedElement())" << std::endl;
 		#endif
 		
-
-		Bag<uml::ActivityNode>::iterator redefinedNodeIter = redefinedNodeList->begin();
-		Bag<uml::ActivityNode>::iterator redefinedNodeEnd = redefinedNodeList->end();
-		while (redefinedNodeIter != redefinedNodeEnd) 
+		for(const std::shared_ptr<uml::ActivityNode> redefinedNodeindexElem: *redefinedNodeList) 
 		{
-			std::shared_ptr<uml::ActivityNode> temp = std::dynamic_pointer_cast<uml::ActivityNode>((*redefinedNodeIter)->copy());
-			getRedefinedNode()->push_back(temp);
-			redefinedNodeIter++;
+			std::shared_ptr<uml::ActivityNode> temp = std::dynamic_pointer_cast<uml::ActivityNode>((redefinedNodeindexElem)->copy());
+			m_redefinedNode->push_back(temp);
 		}
 	}
 	else
@@ -654,12 +642,10 @@ void ActivityNodeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> ActivityNodeImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getActivityNode_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -671,84 +657,36 @@ Any ActivityNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::ACTIVITYNODE_ATTRIBUTE_ACTIVITY:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getActivity().lock();
-			return eAny(returnValue); //1112
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //1112
 		}
 		case uml::umlPackage::ACTIVITYNODE_ATTRIBUTE_INGROUP:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::ActivityGroup>::iterator iter = getInGroup()->begin();
-			Bag<uml::ActivityGroup>::iterator end = getInGroup()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //1113			
+			return eAnyBag(getInGroup(),1058869010); //1113
 		}
 		case uml::umlPackage::ACTIVITYNODE_ATTRIBUTE_ININTERRUPTIBLEREGION:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::InterruptibleActivityRegion>::iterator iter = getInInterruptibleRegion()->begin();
-			Bag<uml::InterruptibleActivityRegion>::iterator end = getInInterruptibleRegion()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //1114			
+			return eAnyBag(getInInterruptibleRegion(),1256088679); //1114
 		}
 		case uml::umlPackage::ACTIVITYNODE_ATTRIBUTE_INPARTITION:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::ActivityPartition>::iterator iter = getInPartition()->begin();
-			Bag<uml::ActivityPartition>::iterator end = getInPartition()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //1119			
+			return eAnyBag(getInPartition(),993679143); //1119
 		}
 		case uml::umlPackage::ACTIVITYNODE_ATTRIBUTE_INSTRUCTUREDNODE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getInStructuredNode().lock();
-			return eAny(returnValue); //1115
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //1115
 		}
 		case uml::umlPackage::ACTIVITYNODE_ATTRIBUTE_INCOMING:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::ActivityEdge>::iterator iter = getIncoming()->begin();
-			Bag<uml::ActivityEdge>::iterator end = getIncoming()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //1116			
+			return eAnyBag(getIncoming(),583468403); //1116
 		}
 		case uml::umlPackage::ACTIVITYNODE_ATTRIBUTE_OUTGOING:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::ActivityEdge>::iterator iter = getOutgoing()->begin();
-			Bag<uml::ActivityEdge>::iterator end = getOutgoing()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //1117			
+			return eAnyBag(getOutgoing(),583468403); //1117
 		}
 		case uml::umlPackage::ACTIVITYNODE_ATTRIBUTE_REDEFINEDNODE:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::ActivityNode>::iterator iter = getRedefinedNode()->begin();
-			Bag<uml::ActivityNode>::iterator end = getRedefinedNode()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //1118			
+			return eAnyBag(getRedefinedNode(),1676583160); //1118
 		}
 	}
 	return RedefinableElementImpl::eGet(featureID, resolve, coreType);
@@ -793,72 +731,74 @@ bool ActivityNodeImpl::eSet(int featureID, Any newValue)
 		case uml::umlPackage::ACTIVITYNODE_ATTRIBUTE_ININTERRUPTIBLEREGION:
 		{
 			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::InterruptibleActivityRegion>> inInterruptibleRegionList(new Bag<uml::InterruptibleActivityRegion>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
+			if((newValue->isContainer()) && (uml::umlPackage::INTERRUPTIBLEACTIVITYREGION_CLASS ==newValue->getTypeId()))
 			{
-				inInterruptibleRegionList->add(std::dynamic_pointer_cast<uml::InterruptibleActivityRegion>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::InterruptibleActivityRegion>::iterator iterInInterruptibleRegion = getInInterruptibleRegion()->begin();
-			Bag<uml::InterruptibleActivityRegion>::iterator endInInterruptibleRegion = getInInterruptibleRegion()->end();
-			while (iterInInterruptibleRegion != endInInterruptibleRegion)
-			{
-				if (inInterruptibleRegionList->find(*iterInInterruptibleRegion) == -1)
+				try
 				{
-					getInInterruptibleRegion()->erase(*iterInInterruptibleRegion);
+					std::shared_ptr<Bag<uml::InterruptibleActivityRegion>> inInterruptibleRegionList= newValue->get<std::shared_ptr<Bag<uml::InterruptibleActivityRegion>>>();
+					std::shared_ptr<Bag<uml::InterruptibleActivityRegion>> _inInterruptibleRegion=getInInterruptibleRegion();
+					for(const std::shared_ptr<uml::InterruptibleActivityRegion> indexInInterruptibleRegion: *_inInterruptibleRegion)
+					{
+						if (inInterruptibleRegionList->find(indexInInterruptibleRegion) == -1)
+						{
+							_inInterruptibleRegion->erase(indexInInterruptibleRegion);
+						}
+					}
+
+					for(const std::shared_ptr<uml::InterruptibleActivityRegion> indexInInterruptibleRegion: *inInterruptibleRegionList)
+					{
+						if (_inInterruptibleRegion->find(indexInInterruptibleRegion) == -1)
+						{
+							_inInterruptibleRegion->add(indexInInterruptibleRegion);
+						}
+					}
 				}
-				iterInInterruptibleRegion++;
-			}
- 
-			iterInInterruptibleRegion = inInterruptibleRegionList->begin();
-			endInInterruptibleRegion = inInterruptibleRegionList->end();
-			while (iterInInterruptibleRegion != endInInterruptibleRegion)
-			{
-				if (getInInterruptibleRegion()->find(*iterInInterruptibleRegion) == -1)
+				catch(...)
 				{
-					getInInterruptibleRegion()->add(*iterInInterruptibleRegion);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterInInterruptibleRegion++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}
 		case uml::umlPackage::ACTIVITYNODE_ATTRIBUTE_INPARTITION:
 		{
 			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::ActivityPartition>> inPartitionList(new Bag<uml::ActivityPartition>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
+			if((newValue->isContainer()) && (uml::umlPackage::ACTIVITYPARTITION_CLASS ==newValue->getTypeId()))
 			{
-				inPartitionList->add(std::dynamic_pointer_cast<uml::ActivityPartition>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::ActivityPartition>::iterator iterInPartition = getInPartition()->begin();
-			Bag<uml::ActivityPartition>::iterator endInPartition = getInPartition()->end();
-			while (iterInPartition != endInPartition)
-			{
-				if (inPartitionList->find(*iterInPartition) == -1)
+				try
 				{
-					getInPartition()->erase(*iterInPartition);
+					std::shared_ptr<Bag<uml::ActivityPartition>> inPartitionList= newValue->get<std::shared_ptr<Bag<uml::ActivityPartition>>>();
+					std::shared_ptr<Bag<uml::ActivityPartition>> _inPartition=getInPartition();
+					for(const std::shared_ptr<uml::ActivityPartition> indexInPartition: *_inPartition)
+					{
+						if (inPartitionList->find(indexInPartition) == -1)
+						{
+							_inPartition->erase(indexInPartition);
+						}
+					}
+
+					for(const std::shared_ptr<uml::ActivityPartition> indexInPartition: *inPartitionList)
+					{
+						if (_inPartition->find(indexInPartition) == -1)
+						{
+							_inPartition->add(indexInPartition);
+						}
+					}
 				}
-				iterInPartition++;
-			}
- 
-			iterInPartition = inPartitionList->begin();
-			endInPartition = inPartitionList->end();
-			while (iterInPartition != endInPartition)
-			{
-				if (getInPartition()->find(*iterInPartition) == -1)
+				catch(...)
 				{
-					getInPartition()->add(*iterInPartition);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterInPartition++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}
@@ -873,108 +813,111 @@ bool ActivityNodeImpl::eSet(int featureID, Any newValue)
 		case uml::umlPackage::ACTIVITYNODE_ATTRIBUTE_INCOMING:
 		{
 			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::ActivityEdge>> incomingList(new Bag<uml::ActivityEdge>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
+			if((newValue->isContainer()) && (uml::umlPackage::ACTIVITYEDGE_CLASS ==newValue->getTypeId()))
 			{
-				incomingList->add(std::dynamic_pointer_cast<uml::ActivityEdge>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::ActivityEdge>::iterator iterIncoming = getIncoming()->begin();
-			Bag<uml::ActivityEdge>::iterator endIncoming = getIncoming()->end();
-			while (iterIncoming != endIncoming)
-			{
-				if (incomingList->find(*iterIncoming) == -1)
+				try
 				{
-					getIncoming()->erase(*iterIncoming);
+					std::shared_ptr<Bag<uml::ActivityEdge>> incomingList= newValue->get<std::shared_ptr<Bag<uml::ActivityEdge>>>();
+					std::shared_ptr<Bag<uml::ActivityEdge>> _incoming=getIncoming();
+					for(const std::shared_ptr<uml::ActivityEdge> indexIncoming: *_incoming)
+					{
+						if (incomingList->find(indexIncoming) == -1)
+						{
+							_incoming->erase(indexIncoming);
+						}
+					}
+
+					for(const std::shared_ptr<uml::ActivityEdge> indexIncoming: *incomingList)
+					{
+						if (_incoming->find(indexIncoming) == -1)
+						{
+							_incoming->add(indexIncoming);
+						}
+					}
 				}
-				iterIncoming++;
-			}
- 
-			iterIncoming = incomingList->begin();
-			endIncoming = incomingList->end();
-			while (iterIncoming != endIncoming)
-			{
-				if (getIncoming()->find(*iterIncoming) == -1)
+				catch(...)
 				{
-					getIncoming()->add(*iterIncoming);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterIncoming++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}
 		case uml::umlPackage::ACTIVITYNODE_ATTRIBUTE_OUTGOING:
 		{
 			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::ActivityEdge>> outgoingList(new Bag<uml::ActivityEdge>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
+			if((newValue->isContainer()) && (uml::umlPackage::ACTIVITYEDGE_CLASS ==newValue->getTypeId()))
 			{
-				outgoingList->add(std::dynamic_pointer_cast<uml::ActivityEdge>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::ActivityEdge>::iterator iterOutgoing = getOutgoing()->begin();
-			Bag<uml::ActivityEdge>::iterator endOutgoing = getOutgoing()->end();
-			while (iterOutgoing != endOutgoing)
-			{
-				if (outgoingList->find(*iterOutgoing) == -1)
+				try
 				{
-					getOutgoing()->erase(*iterOutgoing);
+					std::shared_ptr<Bag<uml::ActivityEdge>> outgoingList= newValue->get<std::shared_ptr<Bag<uml::ActivityEdge>>>();
+					std::shared_ptr<Bag<uml::ActivityEdge>> _outgoing=getOutgoing();
+					for(const std::shared_ptr<uml::ActivityEdge> indexOutgoing: *_outgoing)
+					{
+						if (outgoingList->find(indexOutgoing) == -1)
+						{
+							_outgoing->erase(indexOutgoing);
+						}
+					}
+
+					for(const std::shared_ptr<uml::ActivityEdge> indexOutgoing: *outgoingList)
+					{
+						if (_outgoing->find(indexOutgoing) == -1)
+						{
+							_outgoing->add(indexOutgoing);
+						}
+					}
 				}
-				iterOutgoing++;
-			}
- 
-			iterOutgoing = outgoingList->begin();
-			endOutgoing = outgoingList->end();
-			while (iterOutgoing != endOutgoing)
-			{
-				if (getOutgoing()->find(*iterOutgoing) == -1)
+				catch(...)
 				{
-					getOutgoing()->add(*iterOutgoing);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterOutgoing++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}
 		case uml::umlPackage::ACTIVITYNODE_ATTRIBUTE_REDEFINEDNODE:
 		{
 			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::ActivityNode>> redefinedNodeList(new Bag<uml::ActivityNode>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
+			if((newValue->isContainer()) && (uml::umlPackage::ACTIVITYNODE_CLASS ==newValue->getTypeId()))
 			{
-				redefinedNodeList->add(std::dynamic_pointer_cast<uml::ActivityNode>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::ActivityNode>::iterator iterRedefinedNode = getRedefinedNode()->begin();
-			Bag<uml::ActivityNode>::iterator endRedefinedNode = getRedefinedNode()->end();
-			while (iterRedefinedNode != endRedefinedNode)
-			{
-				if (redefinedNodeList->find(*iterRedefinedNode) == -1)
+				try
 				{
-					getRedefinedNode()->erase(*iterRedefinedNode);
+					std::shared_ptr<Bag<uml::ActivityNode>> redefinedNodeList= newValue->get<std::shared_ptr<Bag<uml::ActivityNode>>>();
+					std::shared_ptr<Bag<uml::ActivityNode>> _redefinedNode=getRedefinedNode();
+					for(const std::shared_ptr<uml::ActivityNode> indexRedefinedNode: *_redefinedNode)
+					{
+						if (redefinedNodeList->find(indexRedefinedNode) == -1)
+						{
+							_redefinedNode->erase(indexRedefinedNode);
+						}
+					}
+
+					for(const std::shared_ptr<uml::ActivityNode> indexRedefinedNode: *redefinedNodeList)
+					{
+						if (_redefinedNode->find(indexRedefinedNode) == -1)
+						{
+							_redefinedNode->add(indexRedefinedNode);
+						}
+					}
 				}
-				iterRedefinedNode++;
-			}
- 
-			iterRedefinedNode = redefinedNodeList->begin();
-			endRedefinedNode = redefinedNodeList->end();
-			while (iterRedefinedNode != endRedefinedNode)
-			{
-				if (getRedefinedNode()->find(*iterRedefinedNode) == -1)
+				catch(...)
 				{
-					getRedefinedNode()->add(*iterRedefinedNode);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterRedefinedNode++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}
@@ -986,17 +929,16 @@ bool ActivityNodeImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ActivityNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any ActivityNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
   	switch(operationID)
 	{
-		
-		// 2064733269
+		// uml::ActivityNode::containingActivity() : uml::Activity: 2064733269
 		case umlPackage::ACTIVITYNODE_OPERATION_CONTAININGACTIVITY:
 		{
-			result = eAny(this->containingActivity());
+			result = eAny(this->containingActivity(), umlPackage::ACTIVITY_CLASS,false);
 			break;
 		}
 
@@ -1013,7 +955,6 @@ Any ActivityNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::
 	return result;
 }
 
-
 std::shared_ptr<uml::ActivityNode> ActivityNodeImpl::getThisActivityNodePtr() const
 {
 	return m_thisActivityNodePtr.lock();
@@ -1023,3 +964,5 @@ void ActivityNodeImpl::setThisActivityNodePtr(std::weak_ptr<uml::ActivityNode> t
 	m_thisActivityNodePtr = thisActivityNodePtr;
 	setThisRedefinableElementPtr(thisActivityNodePtr);
 }
+
+

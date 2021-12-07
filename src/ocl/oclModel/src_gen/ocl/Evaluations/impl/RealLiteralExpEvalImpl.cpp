@@ -33,11 +33,11 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Loci/LociFactory.hpp"
+#include "fUML/Semantics/Values/ValuesFactory.hpp"
+#include "uml/umlFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
-#include "uml/umlFactory.hpp"
-#include "fUML/Semantics/Values/ValuesFactory.hpp"
+#include "fUML/Semantics/Loci/LociFactory.hpp"
 
 #include "ocl/Evaluations/EvalEnvironment.hpp"
 #include "fUML/Semantics/Values/LiteralRealEvaluation.hpp"
@@ -216,12 +216,10 @@ void RealLiteralExpEvalImpl::saveContent(std::shared_ptr<persistence::interfaces
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> RealLiteralExpEvalImpl::eStaticClass() const
 {
 	return ocl::Evaluations::EvaluationsPackage::eInstance()->getRealLiteralExpEval_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -275,7 +273,7 @@ bool RealLiteralExpEvalImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any RealLiteralExpEvalImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any RealLiteralExpEvalImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -298,7 +296,6 @@ Any RealLiteralExpEvalImpl::eInvoke(int operationID, std::shared_ptr<std::list <
 	return result;
 }
 
-
 std::shared_ptr<ocl::Evaluations::RealLiteralExpEval> RealLiteralExpEvalImpl::getThisRealLiteralExpEvalPtr() const
 {
 	return m_thisRealLiteralExpEvalPtr.lock();
@@ -309,3 +306,5 @@ void RealLiteralExpEvalImpl::setThisRealLiteralExpEvalPtr(std::weak_ptr<ocl::Eva
 	setThisLiteralRealEvaluationPtr(thisRealLiteralExpEvalPtr);
 	setThisNumericLiteralExpEvalPtr(thisRealLiteralExpEvalPtr);
 }
+
+

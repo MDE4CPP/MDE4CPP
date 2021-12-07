@@ -324,12 +324,10 @@ void CallEventImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHa
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> CallEventImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getCallEvent_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -341,7 +339,7 @@ Any CallEventImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::CALLEVENT_ATTRIBUTE_OPERATION:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getOperation();
-			return eAny(returnValue); //3112
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //3112
 		}
 	}
 	return MessageEventImpl::eGet(featureID, resolve, coreType);
@@ -377,7 +375,7 @@ bool CallEventImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any CallEventImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any CallEventImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -397,7 +395,6 @@ Any CallEventImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sha
 	return result;
 }
 
-
 std::shared_ptr<uml::CallEvent> CallEventImpl::getThisCallEventPtr() const
 {
 	return m_thisCallEventPtr.lock();
@@ -407,3 +404,5 @@ void CallEventImpl::setThisCallEventPtr(std::weak_ptr<uml::CallEvent> thisCallEv
 	m_thisCallEventPtr = thisCallEventPtr;
 	setThisMessageEventPtr(thisCallEventPtr);
 }
+
+

@@ -337,12 +337,10 @@ void DestroyLinkActionImpl::saveContent(std::shared_ptr<persistence::interfaces:
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> DestroyLinkActionImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getDestroyLinkAction_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -375,7 +373,7 @@ bool DestroyLinkActionImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any DestroyLinkActionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any DestroyLinkActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -395,7 +393,6 @@ Any DestroyLinkActionImpl::eInvoke(int operationID, std::shared_ptr<std::list < 
 	return result;
 }
 
-
 std::shared_ptr<uml::DestroyLinkAction> DestroyLinkActionImpl::getThisDestroyLinkActionPtr() const
 {
 	return m_thisDestroyLinkActionPtr.lock();
@@ -405,3 +402,5 @@ void DestroyLinkActionImpl::setThisDestroyLinkActionPtr(std::weak_ptr<uml::Destr
 	m_thisDestroyLinkActionPtr = thisDestroyLinkActionPtr;
 	setThisWriteLinkActionPtr(thisDestroyLinkActionPtr);
 }
+
+

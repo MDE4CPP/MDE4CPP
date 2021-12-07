@@ -34,8 +34,8 @@
 
 
 //Factories an Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 
 
@@ -180,12 +180,10 @@ void AcceptCallActionActivationsImpl::saveContent(std::shared_ptr<persistence::i
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> AcceptCallActionActivationsImpl::eStaticClass() const
 {
 	return fUML::Semantics::Actions::ActionsPackage::eInstance()->getAcceptCallActionActivations_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -218,7 +216,7 @@ bool AcceptCallActionActivationsImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any AcceptCallActionActivationsImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any AcceptCallActionActivationsImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -238,7 +236,6 @@ Any AcceptCallActionActivationsImpl::eInvoke(int operationID, std::shared_ptr<st
 	return result;
 }
 
-
 std::shared_ptr<fUML::Semantics::Actions::AcceptCallActionActivations> AcceptCallActionActivationsImpl::getThisAcceptCallActionActivationsPtr() const
 {
 	return m_thisAcceptCallActionActivationsPtr.lock();
@@ -247,3 +244,5 @@ void AcceptCallActionActivationsImpl::setThisAcceptCallActionActivationsPtr(std:
 {
 	m_thisAcceptCallActionActivationsPtr = thisAcceptCallActionActivationsPtr;
 }
+
+

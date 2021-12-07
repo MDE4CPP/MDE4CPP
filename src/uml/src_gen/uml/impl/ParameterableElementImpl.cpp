@@ -306,12 +306,10 @@ void ParameterableElementImpl::saveContent(std::shared_ptr<persistence::interfac
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> ParameterableElementImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getParameterableElement_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -323,12 +321,12 @@ Any ParameterableElementImpl::eGet(int featureID, bool resolve, bool coreType) c
 		case uml::umlPackage::PARAMETERABLEELEMENT_ATTRIBUTE_OWNINGTEMPLATEPARAMETER:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getOwningTemplateParameter().lock();
-			return eAny(returnValue); //1783
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //1783
 		}
 		case uml::umlPackage::PARAMETERABLEELEMENT_ATTRIBUTE_TEMPLATEPARAMETER:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getTemplateParameter();
-			return eAny(returnValue); //1784
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //1784
 		}
 	}
 	return ElementImpl::eGet(featureID, resolve, coreType);
@@ -374,29 +372,27 @@ bool ParameterableElementImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ParameterableElementImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any ParameterableElementImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
   	switch(operationID)
 	{
-		
-		// 1783372574
+		// uml::ParameterableElement::isCompatibleWith(uml::ParameterableElement) : bool: 1783372574
 		case umlPackage::PARAMETERABLEELEMENT_OPERATION_ISCOMPATIBLEWITH_PARAMETERABLEELEMENT:
 		{
 			//Retrieve input parameter 'p'
 			//parameter 0
 			std::shared_ptr<uml::ParameterableElement> incoming_param_p;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_p_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_p = (*incoming_param_p_arguments_citer)->get()->get<std::shared_ptr<uml::ParameterableElement> >();
-			result = eAny(this->isCompatibleWith(incoming_param_p));
+			std::list<Any>::const_iterator incoming_param_p_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_p = (*incoming_param_p_arguments_citer)->get<std::shared_ptr<uml::ParameterableElement> >();
+			result = eAny(this->isCompatibleWith(incoming_param_p),0,false);
 			break;
 		}
-		
-		// 414546068
+		// uml::ParameterableElement::isTemplateParameter() : bool: 414546068
 		case umlPackage::PARAMETERABLEELEMENT_OPERATION_ISTEMPLATEPARAMETER:
 		{
-			result = eAny(this->isTemplateParameter());
+			result = eAny(this->isTemplateParameter(),0,false);
 			break;
 		}
 
@@ -413,7 +409,6 @@ Any ParameterableElementImpl::eInvoke(int operationID, std::shared_ptr<std::list
 	return result;
 }
 
-
 std::shared_ptr<uml::ParameterableElement> ParameterableElementImpl::getThisParameterableElementPtr() const
 {
 	return m_thisParameterableElementPtr.lock();
@@ -423,3 +418,5 @@ void ParameterableElementImpl::setThisParameterableElementPtr(std::weak_ptr<uml:
 	m_thisParameterableElementPtr = thisParameterableElementPtr;
 	setThisElementPtr(thisParameterableElementPtr);
 }
+
+

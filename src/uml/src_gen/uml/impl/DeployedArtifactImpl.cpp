@@ -227,12 +227,10 @@ void DeployedArtifactImpl::saveContent(std::shared_ptr<persistence::interfaces::
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> DeployedArtifactImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getDeployedArtifact_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -265,7 +263,7 @@ bool DeployedArtifactImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any DeployedArtifactImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any DeployedArtifactImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -285,7 +283,6 @@ Any DeployedArtifactImpl::eInvoke(int operationID, std::shared_ptr<std::list < s
 	return result;
 }
 
-
 std::shared_ptr<uml::DeployedArtifact> DeployedArtifactImpl::getThisDeployedArtifactPtr() const
 {
 	return m_thisDeployedArtifactPtr.lock();
@@ -295,3 +292,5 @@ void DeployedArtifactImpl::setThisDeployedArtifactPtr(std::weak_ptr<uml::Deploye
 	m_thisDeployedArtifactPtr = thisDeployedArtifactPtr;
 	setThisNamedElementPtr(thisDeployedArtifactPtr);
 }
+
+

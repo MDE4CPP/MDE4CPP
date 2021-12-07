@@ -382,12 +382,10 @@ void ModelImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandle
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> ModelImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getModel_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -397,7 +395,7 @@ Any ModelImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::MODEL_ATTRIBUTE_VIEWPOINT:
-			return eAny(getViewpoint()); //15328
+			return eAny(getViewpoint(),0,true); //15328
 	}
 	return PackageImpl::eGet(featureID, resolve, coreType);
 }
@@ -431,17 +429,16 @@ bool ModelImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ModelImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any ModelImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
   	switch(operationID)
 	{
-		
-		// 632630866
+		// uml::Model::isMetamodel() : bool: 632630866
 		case umlPackage::MODEL_OPERATION_ISMETAMODEL:
 		{
-			result = eAny(this->isMetamodel());
+			result = eAny(this->isMetamodel(),0,false);
 			break;
 		}
 
@@ -458,7 +455,6 @@ Any ModelImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_
 	return result;
 }
 
-
 std::shared_ptr<uml::Model> ModelImpl::getThisModelPtr() const
 {
 	return m_thisModelPtr.lock();
@@ -468,3 +464,5 @@ void ModelImpl::setThisModelPtr(std::weak_ptr<uml::Model> thisModelPtr)
 	m_thisModelPtr = thisModelPtr;
 	setThisPackagePtr(thisModelPtr);
 }
+
+

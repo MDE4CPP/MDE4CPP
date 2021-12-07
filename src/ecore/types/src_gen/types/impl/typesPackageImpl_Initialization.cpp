@@ -4,9 +4,9 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
-#include "ecore/EAnnotation.hpp"
 #include "ecore/EDataType.hpp"
 #include "ecore/EStringToStringMapEntry.hpp"
+#include "ecore/EAnnotation.hpp"
 
 // metametamodel factory
 #include "ecore/ecoreFactory.hpp"
@@ -42,6 +42,8 @@ void typesPackageImpl::initializePackageContents()
 
 void typesPackageImpl::initializePackageEDataTypes()
 {
+	m_any_Class->setName("Any");
+	m_any_Class->setSerializable(true);
 	m_boolean_Class->setName("Boolean");
 	m_boolean_Class->setSerializable(true);
 	m_integer_Class->setName("Integer");

@@ -33,11 +33,11 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Loci/LociFactory.hpp"
+#include "fUML/Semantics/Values/ValuesFactory.hpp"
+#include "uml/umlFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
-#include "uml/umlFactory.hpp"
-#include "fUML/Semantics/Values/ValuesFactory.hpp"
+#include "fUML/Semantics/Loci/LociFactory.hpp"
 
 #include "ocl/Evaluations/EvalEnvironment.hpp"
 #include "fUML/Semantics/Values/Evaluation.hpp"
@@ -343,12 +343,10 @@ void OclExpEvalImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> OclExpEvalImpl::eStaticClass() const
 {
 	return ocl::Evaluations::EvaluationsPackage::eInstance()->getOclExpEval_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -360,22 +358,22 @@ Any OclExpEvalImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case ocl::Evaluations::EvaluationsPackage::OCLEXPEVAL_ATTRIBUTE_BEFOREENVIRONMENT:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getBeforeEnvironment();
-			return eAny(returnValue); //603
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //603
 		}
 		case ocl::Evaluations::EvaluationsPackage::OCLEXPEVAL_ATTRIBUTE_ENVIRONMENT:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getEnvironment();
-			return eAny(returnValue); //602
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //602
 		}
 		case ocl::Evaluations::EvaluationsPackage::OCLEXPEVAL_ATTRIBUTE_MODEL:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getModel();
-			return eAny(returnValue); //605
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //605
 		}
 		case ocl::Evaluations::EvaluationsPackage::OCLEXPEVAL_ATTRIBUTE_RESULTVALUE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getResultValue();
-			return eAny(returnValue); //604
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //604
 		}
 	}
 	return fUML::Semantics::Values::EvaluationImpl::eGet(featureID, resolve, coreType);
@@ -441,7 +439,7 @@ bool OclExpEvalImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any OclExpEvalImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any OclExpEvalImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -461,7 +459,6 @@ Any OclExpEvalImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sh
 	return result;
 }
 
-
 std::shared_ptr<ocl::Evaluations::OclExpEval> OclExpEvalImpl::getThisOclExpEvalPtr() const
 {
 	return m_thisOclExpEvalPtr.lock();
@@ -471,3 +468,5 @@ void OclExpEvalImpl::setThisOclExpEvalPtr(std::weak_ptr<ocl::Evaluations::OclExp
 	m_thisOclExpEvalPtr = thisOclExpEvalPtr;
 	setThisEvaluationPtr(thisOclExpEvalPtr);
 }
+
+

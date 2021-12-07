@@ -157,14 +157,10 @@ ComponentRealizationImpl& ComponentRealizationImpl::operator=(const ComponentRea
 			std::cout << "Initialising value Subset: " << "m_realizingClassifier - Subset<uml::Classifier, uml::NamedElement /*Subset does not reference a union*/ >(getClient())" << std::endl;
 		#endif
 		
-
-		Bag<uml::Classifier>::iterator realizingClassifierIter = realizingClassifierList->begin();
-		Bag<uml::Classifier>::iterator realizingClassifierEnd = realizingClassifierList->end();
-		while (realizingClassifierIter != realizingClassifierEnd) 
+		for(const std::shared_ptr<uml::Classifier> realizingClassifierindexElem: *realizingClassifierList) 
 		{
-			std::shared_ptr<uml::Classifier> temp = std::dynamic_pointer_cast<uml::Classifier>((*realizingClassifierIter)->copy());
-			getRealizingClassifier()->push_back(temp);
-			realizingClassifierIter++;
+			std::shared_ptr<uml::Classifier> temp = std::dynamic_pointer_cast<uml::Classifier>((realizingClassifierindexElem)->copy());
+			m_realizingClassifier->push_back(temp);
 		}
 	}
 	else
@@ -466,12 +462,10 @@ void ComponentRealizationImpl::saveContent(std::shared_ptr<persistence::interfac
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> ComponentRealizationImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getComponentRealization_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -483,19 +477,11 @@ Any ComponentRealizationImpl::eGet(int featureID, bool resolve, bool coreType) c
 		case uml::umlPackage::COMPONENTREALIZATION_ATTRIBUTE_ABSTRACTION:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getAbstraction().lock();
-			return eAny(returnValue); //4819
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //4819
 		}
 		case uml::umlPackage::COMPONENTREALIZATION_ATTRIBUTE_REALIZINGCLASSIFIER:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Classifier>::iterator iter = getRealizingClassifier()->begin();
-			Bag<uml::Classifier>::iterator end = getRealizingClassifier()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //4818			
+			return eAnyBag(getRealizingClassifier(),845259359); //4818
 		}
 	}
 	return RealizationImpl::eGet(featureID, resolve, coreType);
@@ -528,36 +514,37 @@ bool ComponentRealizationImpl::eSet(int featureID, Any newValue)
 		case uml::umlPackage::COMPONENTREALIZATION_ATTRIBUTE_REALIZINGCLASSIFIER:
 		{
 			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::Classifier>> realizingClassifierList(new Bag<uml::Classifier>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
+			if((newValue->isContainer()) && (uml::umlPackage::CLASSIFIER_CLASS ==newValue->getTypeId()))
 			{
-				realizingClassifierList->add(std::dynamic_pointer_cast<uml::Classifier>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::Classifier>::iterator iterRealizingClassifier = getRealizingClassifier()->begin();
-			Bag<uml::Classifier>::iterator endRealizingClassifier = getRealizingClassifier()->end();
-			while (iterRealizingClassifier != endRealizingClassifier)
-			{
-				if (realizingClassifierList->find(*iterRealizingClassifier) == -1)
+				try
 				{
-					getRealizingClassifier()->erase(*iterRealizingClassifier);
+					std::shared_ptr<Bag<uml::Classifier>> realizingClassifierList= newValue->get<std::shared_ptr<Bag<uml::Classifier>>>();
+					std::shared_ptr<Bag<uml::Classifier>> _realizingClassifier=getRealizingClassifier();
+					for(const std::shared_ptr<uml::Classifier> indexRealizingClassifier: *_realizingClassifier)
+					{
+						if (realizingClassifierList->find(indexRealizingClassifier) == -1)
+						{
+							_realizingClassifier->erase(indexRealizingClassifier);
+						}
+					}
+
+					for(const std::shared_ptr<uml::Classifier> indexRealizingClassifier: *realizingClassifierList)
+					{
+						if (_realizingClassifier->find(indexRealizingClassifier) == -1)
+						{
+							_realizingClassifier->add(indexRealizingClassifier);
+						}
+					}
 				}
-				iterRealizingClassifier++;
-			}
- 
-			iterRealizingClassifier = realizingClassifierList->begin();
-			endRealizingClassifier = realizingClassifierList->end();
-			while (iterRealizingClassifier != endRealizingClassifier)
-			{
-				if (getRealizingClassifier()->find(*iterRealizingClassifier) == -1)
+				catch(...)
 				{
-					getRealizingClassifier()->add(*iterRealizingClassifier);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterRealizingClassifier++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}
@@ -569,7 +556,7 @@ bool ComponentRealizationImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ComponentRealizationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any ComponentRealizationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -589,7 +576,6 @@ Any ComponentRealizationImpl::eInvoke(int operationID, std::shared_ptr<std::list
 	return result;
 }
 
-
 std::shared_ptr<uml::ComponentRealization> ComponentRealizationImpl::getThisComponentRealizationPtr() const
 {
 	return m_thisComponentRealizationPtr.lock();
@@ -599,3 +585,5 @@ void ComponentRealizationImpl::setThisComponentRealizationPtr(std::weak_ptr<uml:
 	m_thisComponentRealizationPtr = thisComponentRealizationPtr;
 	setThisRealizationPtr(thisComponentRealizationPtr);
 }
+
+

@@ -31,12 +31,12 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Loci/LociFactory.hpp"
+#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
+#include "fUML/Semantics/Values/ValuesFactory.hpp"
+#include "uml/umlFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
-#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
-#include "uml/umlFactory.hpp"
-#include "fUML/Semantics/Values/ValuesFactory.hpp"
+#include "fUML/Semantics/Loci/LociFactory.hpp"
 
 #include "ocl/Evaluations/EvalEnvironment.hpp"
 #include "fUML/Semantics/Loci/Locus.hpp"
@@ -314,12 +314,10 @@ void LetExpEvalImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> LetExpEvalImpl::eStaticClass() const
 {
 	return ocl::Evaluations::EvaluationsPackage::eInstance()->getLetExpEval_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -331,17 +329,17 @@ Any LetExpEvalImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case ocl::Evaluations::EvaluationsPackage::LETEXPEVAL_ATTRIBUTE_IN:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getIn();
-			return eAny(returnValue); //436
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //436
 		}
 		case ocl::Evaluations::EvaluationsPackage::LETEXPEVAL_ATTRIBUTE_INITEXPRESSION:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getInitExpression();
-			return eAny(returnValue); //437
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //437
 		}
 		case ocl::Evaluations::EvaluationsPackage::LETEXPEVAL_ATTRIBUTE_VARIABLE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getVariable();
-			return eAny(returnValue); //438
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //438
 		}
 	}
 	return OclExpEvalImpl::eGet(featureID, resolve, coreType);
@@ -397,7 +395,7 @@ bool LetExpEvalImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any LetExpEvalImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any LetExpEvalImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -417,7 +415,6 @@ Any LetExpEvalImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sh
 	return result;
 }
 
-
 std::shared_ptr<ocl::Evaluations::LetExpEval> LetExpEvalImpl::getThisLetExpEvalPtr() const
 {
 	return m_thisLetExpEvalPtr.lock();
@@ -427,3 +424,5 @@ void LetExpEvalImpl::setThisLetExpEvalPtr(std::weak_ptr<ocl::Evaluations::LetExp
 	m_thisLetExpEvalPtr = thisLetExpEvalPtr;
 	setThisOclExpEvalPtr(thisLetExpEvalPtr);
 }
+
+

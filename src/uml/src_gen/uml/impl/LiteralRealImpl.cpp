@@ -293,7 +293,7 @@ void LiteralRealImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XL
 		{
 			// this attribute is a 'double'
 			double value;
-			std::istringstream ( iter->second ) >> value;
+			std::istringstream(iter->second) >> value;
 			this->setValue(value);
 		}
 	}
@@ -359,12 +359,10 @@ void LiteralRealImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> LiteralRealImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getLiteralReal_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -374,7 +372,7 @@ Any LiteralRealImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::LITERALREAL_ATTRIBUTE_VALUE:
-			return eAny(getValue()); //14015
+			return eAny(getValue(),0,true); //14015
 	}
 	return LiteralSpecificationImpl::eGet(featureID, resolve, coreType);
 }
@@ -408,24 +406,22 @@ bool LiteralRealImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any LiteralRealImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any LiteralRealImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
   	switch(operationID)
 	{
-		
-		// 1259887142
+		// uml::LiteralReal::isComputable() : bool: 1259887142
 		case umlPackage::LITERALREAL_OPERATION_ISCOMPUTABLE:
 		{
-			result = eAny(this->isComputable());
+			result = eAny(this->isComputable(),0,false);
 			break;
 		}
-		
-		// 998704641
+		// uml::LiteralReal::realValue() : double: 998704641
 		case umlPackage::LITERALREAL_OPERATION_REALVALUE:
 		{
-			result = eAny(this->realValue());
+			result = eAny(this->realValue(),0,false);
 			break;
 		}
 
@@ -442,7 +438,6 @@ Any LiteralRealImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::s
 	return result;
 }
 
-
 std::shared_ptr<uml::LiteralReal> LiteralRealImpl::getThisLiteralRealPtr() const
 {
 	return m_thisLiteralRealPtr.lock();
@@ -452,3 +447,5 @@ void LiteralRealImpl::setThisLiteralRealPtr(std::weak_ptr<uml::LiteralReal> this
 	m_thisLiteralRealPtr = thisLiteralRealPtr;
 	setThisLiteralSpecificationPtr(thisLiteralRealPtr);
 }
+
+

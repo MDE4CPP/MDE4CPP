@@ -150,13 +150,10 @@ OpaqueExpressionImpl& OpaqueExpressionImpl::operator=(const OpaqueExpressionImpl
 	std::shared_ptr<Bag<std::string>> bodyList = obj.getBody();
 	if(bodyList)
 	{	
-		getBody().reset(new Bag<std::string>());
-		Bag<std::string>::iterator bodyIter = bodyList->begin();
-		Bag<std::string>::iterator bodyEnd = bodyList->end();
-		while (bodyIter != bodyEnd) 
+		m_body.reset(new Bag<std::string>());
+		for(const std::shared_ptr<std::string> it: *bodyList) 
 		{
-			getBody()->push_back(*bodyIter);
-			bodyIter++;
+			m_body->push_back(*it);
 		}
 	}
 	else
@@ -166,13 +163,10 @@ OpaqueExpressionImpl& OpaqueExpressionImpl::operator=(const OpaqueExpressionImpl
 	std::shared_ptr<Bag<std::string>> languageList = obj.getLanguage();
 	if(languageList)
 	{	
-		getLanguage().reset(new Bag<std::string>());
-		Bag<std::string>::iterator languageIter = languageList->begin();
-		Bag<std::string>::iterator languageEnd = languageList->end();
-		while (languageIter != languageEnd) 
+		m_language.reset(new Bag<std::string>());
+		for(const std::shared_ptr<std::string> it: *languageList) 
 		{
-			getLanguage()->push_back(*languageIter);
-			languageIter++;
+			m_language->push_back(*it);
 		}
 	}
 	else
@@ -497,12 +491,10 @@ void OpaqueExpressionImpl::saveContent(std::shared_ptr<persistence::interfaces::
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> OpaqueExpressionImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getOpaqueExpression_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -514,16 +506,16 @@ Any OpaqueExpressionImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::OPAQUEEXPRESSION_ATTRIBUTE_BEHAVIOR:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getBehavior();
-			return eAny(returnValue); //16615
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //16615
 		}
 		case uml::umlPackage::OPAQUEEXPRESSION_ATTRIBUTE_BODY:
-			return eAny(getBody()); //16616
+			return eAny(getBody(),0,false); //16616
 		case uml::umlPackage::OPAQUEEXPRESSION_ATTRIBUTE_LANGUAGE:
-			return eAny(getLanguage()); //16617
+			return eAny(getLanguage(),0,false); //16617
 		case uml::umlPackage::OPAQUEEXPRESSION_ATTRIBUTE_RESULT:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getResult();
-			return eAny(returnValue); //16618
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //16618
 		}
 	}
 	return ValueSpecificationImpl::eGet(featureID, resolve, coreType);
@@ -577,96 +569,88 @@ bool OpaqueExpressionImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any OpaqueExpressionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any OpaqueExpressionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
   	switch(operationID)
 	{
-		
-		// 1957650327
+		// uml::OpaqueExpression::getResult() : uml::Parameter: 1957650327
 		case umlPackage::OPAQUEEXPRESSION_OPERATION_GETRESULT:
 		{
-			result = eAny(this->getResult());
+			result = eAny(this->getResult(), umlPackage::PARAMETER_CLASS,false);
 			break;
 		}
-		
-		// 649739801
+		// uml::OpaqueExpression::isIntegral() : bool: 649739801
 		case umlPackage::OPAQUEEXPRESSION_OPERATION_ISINTEGRAL:
 		{
-			result = eAny(this->isIntegral());
+			result = eAny(this->isIntegral(),0,false);
 			break;
 		}
-		
-		// 103942961
+		// uml::OpaqueExpression::isNonNegative() : bool: 103942961
 		case umlPackage::OPAQUEEXPRESSION_OPERATION_ISNONNEGATIVE:
 		{
-			result = eAny(this->isNonNegative());
+			result = eAny(this->isNonNegative(),0,false);
 			break;
 		}
-		
-		// 222077740
+		// uml::OpaqueExpression::isPositive() : bool: 222077740
 		case umlPackage::OPAQUEEXPRESSION_OPERATION_ISPOSITIVE:
 		{
-			result = eAny(this->isPositive());
+			result = eAny(this->isPositive(),0,false);
 			break;
 		}
-		
-		// 1898733225
+		// uml::OpaqueExpression::language_body_size(Any, std::map) : bool: 1898733225
 		case umlPackage::OPAQUEEXPRESSION_OPERATION_LANGUAGE_BODY_SIZE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->language_body_size(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->language_body_size(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		
-		// 1679688181
+		// uml::OpaqueExpression::one_return_result_parameter(Any, std::map) : bool: 1679688181
 		case umlPackage::OPAQUEEXPRESSION_OPERATION_ONE_RETURN_RESULT_PARAMETER_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->one_return_result_parameter(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->one_return_result_parameter(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		
-		// 257815046
+		// uml::OpaqueExpression::only_return_result_parameters(Any, std::map) : bool: 257815046
 		case umlPackage::OPAQUEEXPRESSION_OPERATION_ONLY_RETURN_RESULT_PARAMETERS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->only_return_result_parameters(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->only_return_result_parameters(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		
-		// 1330275204
+		// uml::OpaqueExpression::value() : int: 1330275204
 		case umlPackage::OPAQUEEXPRESSION_OPERATION_VALUE:
 		{
-			result = eAny(this->value());
+			result = eAny(this->value(),0,false);
 			break;
 		}
 
@@ -683,7 +667,6 @@ Any OpaqueExpressionImpl::eInvoke(int operationID, std::shared_ptr<std::list < s
 	return result;
 }
 
-
 std::shared_ptr<uml::OpaqueExpression> OpaqueExpressionImpl::getThisOpaqueExpressionPtr() const
 {
 	return m_thisOpaqueExpressionPtr.lock();
@@ -693,3 +676,5 @@ void OpaqueExpressionImpl::setThisOpaqueExpressionPtr(std::weak_ptr<uml::OpaqueE
 	m_thisOpaqueExpressionPtr = thisOpaqueExpressionPtr;
 	setThisValueSpecificationPtr(thisOpaqueExpressionPtr);
 }
+
+

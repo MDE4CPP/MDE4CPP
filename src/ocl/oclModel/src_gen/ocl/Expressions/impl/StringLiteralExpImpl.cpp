@@ -385,12 +385,10 @@ void StringLiteralExpImpl::saveContent(std::shared_ptr<persistence::interfaces::
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> StringLiteralExpImpl::eStaticClass() const
 {
 	return ocl::Expressions::ExpressionsPackage::eInstance()->getStringLiteralExp_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -400,7 +398,7 @@ Any StringLiteralExpImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case ocl::Expressions::ExpressionsPackage::STRINGLITERALEXP_ATTRIBUTE_STRINGSYMBOL:
-			return eAny(getStringSymbol()); //8223
+				return eAny(getStringSymbol(),0,true); //8223
 	}
 	return PrimitiveLiteralExpImpl::eGet(featureID, resolve, coreType);
 }
@@ -434,7 +432,7 @@ bool StringLiteralExpImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any StringLiteralExpImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any StringLiteralExpImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -454,7 +452,6 @@ Any StringLiteralExpImpl::eInvoke(int operationID, std::shared_ptr<std::list < s
 	return result;
 }
 
-
 std::shared_ptr<ocl::Expressions::StringLiteralExp> StringLiteralExpImpl::getThisStringLiteralExpPtr() const
 {
 	return m_thisStringLiteralExpPtr.lock();
@@ -464,3 +461,5 @@ void StringLiteralExpImpl::setThisStringLiteralExpPtr(std::weak_ptr<ocl::Express
 	m_thisStringLiteralExpPtr = thisStringLiteralExpPtr;
 	setThisPrimitiveLiteralExpPtr(thisStringLiteralExpPtr);
 }
+
+

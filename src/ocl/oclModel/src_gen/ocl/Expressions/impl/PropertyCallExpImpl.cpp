@@ -397,12 +397,10 @@ void PropertyCallExpImpl::saveContent(std::shared_ptr<persistence::interfaces::X
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> PropertyCallExpImpl::eStaticClass() const
 {
 	return ocl::Expressions::ExpressionsPackage::eInstance()->getPropertyCallExp_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -414,7 +412,7 @@ Any PropertyCallExpImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case ocl::Expressions::ExpressionsPackage::PROPERTYCALLEXP_ATTRIBUTE_REFERREDPROPERTY:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getReferredProperty();
-			return eAny(returnValue); //7226
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //7226
 		}
 	}
 	return NavigationCallExpImpl::eGet(featureID, resolve, coreType);
@@ -450,7 +448,7 @@ bool PropertyCallExpImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any PropertyCallExpImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any PropertyCallExpImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -470,7 +468,6 @@ Any PropertyCallExpImpl::eInvoke(int operationID, std::shared_ptr<std::list < st
 	return result;
 }
 
-
 std::shared_ptr<ocl::Expressions::PropertyCallExp> PropertyCallExpImpl::getThisPropertyCallExpPtr() const
 {
 	return m_thisPropertyCallExpPtr.lock();
@@ -480,3 +477,5 @@ void PropertyCallExpImpl::setThisPropertyCallExpPtr(std::weak_ptr<ocl::Expressio
 	m_thisPropertyCallExpPtr = thisPropertyCallExpPtr;
 	setThisNavigationCallExpPtr(thisPropertyCallExpPtr);
 }
+
+

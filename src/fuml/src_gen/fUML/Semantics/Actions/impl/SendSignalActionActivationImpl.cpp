@@ -33,8 +33,8 @@
 
 #include <exception> // used in Persistence
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
-#include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Actions/ActionsFactory.hpp"
+#include "uml/umlFactory.hpp"
 
 #include "uml/Action.hpp"
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
@@ -47,8 +47,8 @@
 #include "fUML/Semantics/Activities/Token.hpp"
 
 //Factories an Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -233,12 +233,10 @@ void SendSignalActionActivationImpl::saveContent(std::shared_ptr<persistence::in
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> SendSignalActionActivationImpl::eStaticClass() const
 {
 	return fUML::Semantics::Actions::ActionsPackage::eInstance()->getSendSignalActionActivation_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -271,7 +269,7 @@ bool SendSignalActionActivationImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any SendSignalActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any SendSignalActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -298,7 +296,6 @@ Any SendSignalActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std
 	return result;
 }
 
-
 std::shared_ptr<fUML::Semantics::Actions::SendSignalActionActivation> SendSignalActionActivationImpl::getThisSendSignalActionActivationPtr() const
 {
 	return m_thisSendSignalActionActivationPtr.lock();
@@ -308,3 +305,5 @@ void SendSignalActionActivationImpl::setThisSendSignalActionActivationPtr(std::w
 	m_thisSendSignalActionActivationPtr = thisSendSignalActionActivationPtr;
 	setThisInvocationActionActivationPtr(thisSendSignalActionActivationPtr);
 }
+
+

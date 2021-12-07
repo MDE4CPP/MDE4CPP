@@ -154,14 +154,10 @@ InteractionOperandImpl& InteractionOperandImpl::operator=(const InteractionOpera
 			std::cout << "Initialising value Subset: " << "m_fragment - Subset<uml::InteractionFragment, uml::NamedElement >(getOwnedMember())" << std::endl;
 		#endif
 		
-
-		Bag<uml::InteractionFragment>::iterator fragmentIter = fragmentList->begin();
-		Bag<uml::InteractionFragment>::iterator fragmentEnd = fragmentList->end();
-		while (fragmentIter != fragmentEnd) 
+		for(const std::shared_ptr<uml::InteractionFragment> fragmentindexElem: *fragmentList) 
 		{
-			std::shared_ptr<uml::InteractionFragment> temp = std::dynamic_pointer_cast<uml::InteractionFragment>((*fragmentIter)->copy());
-			getFragment()->push_back(temp);
-			fragmentIter++;
+			std::shared_ptr<uml::InteractionFragment> temp = std::dynamic_pointer_cast<uml::InteractionFragment>((fragmentindexElem)->copy());
+			m_fragment->push_back(temp);
 		}
 	}
 	else
@@ -451,12 +447,10 @@ void InteractionOperandImpl::saveContent(std::shared_ptr<persistence::interfaces
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> InteractionOperandImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getInteractionOperand_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -467,20 +461,12 @@ Any InteractionOperandImpl::eGet(int featureID, bool resolve, bool coreType) con
 	{
 		case uml::umlPackage::INTERACTIONOPERAND_ATTRIBUTE_FRAGMENT:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::InteractionFragment>::iterator iter = getFragment()->begin();
-			Bag<uml::InteractionFragment>::iterator end = getFragment()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //12219			
+			return eAnyBag(getFragment(),1990551888); //12219
 		}
 		case uml::umlPackage::INTERACTIONOPERAND_ATTRIBUTE_GUARD:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getGuard();
-			return eAny(returnValue); //12220
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //12220
 		}
 	}
 	Any result;
@@ -519,36 +505,37 @@ bool InteractionOperandImpl::eSet(int featureID, Any newValue)
 		case uml::umlPackage::INTERACTIONOPERAND_ATTRIBUTE_FRAGMENT:
 		{
 			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::InteractionFragment>> fragmentList(new Bag<uml::InteractionFragment>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
+			if((newValue->isContainer()) && (uml::umlPackage::INTERACTIONFRAGMENT_CLASS ==newValue->getTypeId()))
 			{
-				fragmentList->add(std::dynamic_pointer_cast<uml::InteractionFragment>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::InteractionFragment>::iterator iterFragment = getFragment()->begin();
-			Bag<uml::InteractionFragment>::iterator endFragment = getFragment()->end();
-			while (iterFragment != endFragment)
-			{
-				if (fragmentList->find(*iterFragment) == -1)
+				try
 				{
-					getFragment()->erase(*iterFragment);
+					std::shared_ptr<Bag<uml::InteractionFragment>> fragmentList= newValue->get<std::shared_ptr<Bag<uml::InteractionFragment>>>();
+					std::shared_ptr<Bag<uml::InteractionFragment>> _fragment=getFragment();
+					for(const std::shared_ptr<uml::InteractionFragment> indexFragment: *_fragment)
+					{
+						if (fragmentList->find(indexFragment) == -1)
+						{
+							_fragment->erase(indexFragment);
+						}
+					}
+
+					for(const std::shared_ptr<uml::InteractionFragment> indexFragment: *fragmentList)
+					{
+						if (_fragment->find(indexFragment) == -1)
+						{
+							_fragment->add(indexFragment);
+						}
+					}
 				}
-				iterFragment++;
-			}
- 
-			iterFragment = fragmentList->begin();
-			endFragment = fragmentList->end();
-			while (iterFragment != endFragment)
-			{
-				if (getFragment()->find(*iterFragment) == -1)
+				catch(...)
 				{
-					getFragment()->add(*iterFragment);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterFragment++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}
@@ -575,44 +562,42 @@ bool InteractionOperandImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any InteractionOperandImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any InteractionOperandImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
   	switch(operationID)
 	{
-		
-		// 922629264
+		// uml::InteractionOperand::guard_contain_references(Any, std::map) : bool: 922629264
 		case umlPackage::INTERACTIONOPERAND_OPERATION_GUARD_CONTAIN_REFERENCES_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->guard_contain_references(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->guard_contain_references(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		
-		// 268236189
+		// uml::InteractionOperand::guard_directly_prior(Any, std::map) : bool: 268236189
 		case umlPackage::INTERACTIONOPERAND_OPERATION_GUARD_DIRECTLY_PRIOR_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->guard_directly_prior(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->guard_directly_prior(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
 
@@ -632,7 +617,6 @@ Any InteractionOperandImpl::eInvoke(int operationID, std::shared_ptr<std::list <
 	return result;
 }
 
-
 std::shared_ptr<uml::InteractionOperand> InteractionOperandImpl::getThisInteractionOperandPtr() const
 {
 	return m_thisInteractionOperandPtr.lock();
@@ -643,3 +627,5 @@ void InteractionOperandImpl::setThisInteractionOperandPtr(std::weak_ptr<uml::Int
 	setThisInteractionFragmentPtr(thisInteractionOperandPtr);
 	setThisNamespacePtr(thisInteractionOperandPtr);
 }
+
+

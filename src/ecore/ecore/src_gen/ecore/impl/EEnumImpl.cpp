@@ -125,14 +125,10 @@ EEnumImpl& EEnumImpl::operator=(const EEnumImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_eLiterals - Subset<ecore::EEnumLiteral, ecore::EObject >(getEContentUnion())" << std::endl;
 		#endif
 		
-
-		Bag<ecore::EEnumLiteral>::iterator eLiteralsIter = eLiteralsList->begin();
-		Bag<ecore::EEnumLiteral>::iterator eLiteralsEnd = eLiteralsList->end();
-		while (eLiteralsIter != eLiteralsEnd) 
+		for(const std::shared_ptr<ecore::EEnumLiteral> eLiteralsindexElem: *eLiteralsList) 
 		{
-			std::shared_ptr<ecore::EEnumLiteral> temp = std::dynamic_pointer_cast<ecore::EEnumLiteral>((*eLiteralsIter)->copy());
-			getELiterals()->push_back(temp);
-			eLiteralsIter++;
+			std::shared_ptr<ecore::EEnumLiteral> temp = std::dynamic_pointer_cast<ecore::EEnumLiteral>((eLiteralsindexElem)->copy());
+			m_eLiterals->push_back(temp);
 		}
 	}
 	else
@@ -361,12 +357,10 @@ void EEnumImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandle
 	}
 }
 
-
 std::shared_ptr<EClass> EEnumImpl::eStaticClass() const
 {
 	return ecore::ecorePackage::eInstance()->getEEnum_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -377,15 +371,7 @@ Any EEnumImpl::eGet(int featureID, bool resolve, bool coreType) const
 	{
 		case ecore::ecorePackage::EENUM_ATTRIBUTE_ELITERALS:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<ecore::EEnumLiteral>::iterator iter = getELiterals()->begin();
-			Bag<ecore::EEnumLiteral>::iterator end = getELiterals()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //2012			
+			return eAnyBag(getELiterals(),306949309); //2012
 		}
 	}
 	return EDataTypeImpl::eGet(featureID, resolve, coreType);
@@ -408,36 +394,37 @@ bool EEnumImpl::eSet(int featureID, Any newValue)
 		case ecore::ecorePackage::EENUM_ATTRIBUTE_ELITERALS:
 		{
 			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<ecore::EEnumLiteral>> eLiteralsList(new Bag<ecore::EEnumLiteral>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
+			if((newValue->isContainer()) && (ecore::ecorePackage::EENUMLITERAL_CLASS ==newValue->getTypeId()))
 			{
-				eLiteralsList->add(std::dynamic_pointer_cast<ecore::EEnumLiteral>(*iter));
-				iter++;
-			}
-			
-			Bag<ecore::EEnumLiteral>::iterator iterELiterals = getELiterals()->begin();
-			Bag<ecore::EEnumLiteral>::iterator endELiterals = getELiterals()->end();
-			while (iterELiterals != endELiterals)
-			{
-				if (eLiteralsList->find(*iterELiterals) == -1)
+				try
 				{
-					getELiterals()->erase(*iterELiterals);
+					std::shared_ptr<Bag<ecore::EEnumLiteral>> eLiteralsList= newValue->get<std::shared_ptr<Bag<ecore::EEnumLiteral>>>();
+					std::shared_ptr<Bag<ecore::EEnumLiteral>> _eLiterals=getELiterals();
+					for(const std::shared_ptr<ecore::EEnumLiteral> indexELiterals: *_eLiterals)
+					{
+						if (eLiteralsList->find(indexELiterals) == -1)
+						{
+							_eLiterals->erase(indexELiterals);
+						}
+					}
+
+					for(const std::shared_ptr<ecore::EEnumLiteral> indexELiterals: *eLiteralsList)
+					{
+						if (_eLiterals->find(indexELiterals) == -1)
+						{
+							_eLiterals->add(indexELiterals);
+						}
+					}
 				}
-				iterELiterals++;
-			}
- 
-			iterELiterals = eLiteralsList->begin();
-			endELiterals = eLiteralsList->end();
-			while (iterELiterals != endELiterals)
-			{
-				if (getELiterals()->find(*iterELiterals) == -1)
+				catch(...)
 				{
-					getELiterals()->add(*iterELiterals);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterELiterals++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}
@@ -455,8 +442,7 @@ Any EEnumImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argument
 
   	switch(operationID)
 	{
-		
-		// 1917703622
+		// ecore::EEnum::getEEnumLiteral(std::string) : ecore::EEnumLiteral {const}: 1917703622
 		case ecorePackage::EENUM_OPERATION_GETEENUMLITERAL_ESTRING:
 		{
 			//Retrieve input parameter 'name'
@@ -464,11 +450,10 @@ Any EEnumImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argument
 			std::string incoming_param_name;
 			std::list<Any>::const_iterator incoming_param_name_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_name = (*incoming_param_name_arguments_citer)->get<std::string >();
-			result = eAny(this->getEEnumLiteral(incoming_param_name));
+			result = eAny(this->getEEnumLiteral(incoming_param_name), ecorePackage::EENUMLITERAL_CLASS,false);
 			break;
 		}
-		
-		// 1070395435
+		// ecore::EEnum::getEEnumLiteral(int) : ecore::EEnumLiteral {const}: 1070395435
 		case ecorePackage::EENUM_OPERATION_GETEENUMLITERAL_EINT:
 		{
 			//Retrieve input parameter 'value'
@@ -476,11 +461,10 @@ Any EEnumImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argument
 			int incoming_param_value;
 			std::list<Any>::const_iterator incoming_param_value_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_value = (*incoming_param_value_arguments_citer)->get<int >();
-			result = eAny(this->getEEnumLiteral(incoming_param_value));
+			result = eAny(this->getEEnumLiteral(incoming_param_value), ecorePackage::EENUMLITERAL_CLASS,false);
 			break;
 		}
-		
-		// 582537382
+		// ecore::EEnum::getEEnumLiteralByLiteral(std::string) : ecore::EEnumLiteral {const}: 582537382
 		case ecorePackage::EENUM_OPERATION_GETEENUMLITERALBYLITERAL_ESTRING:
 		{
 			//Retrieve input parameter 'literal'
@@ -488,7 +472,7 @@ Any EEnumImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argument
 			std::string incoming_param_literal;
 			std::list<Any>::const_iterator incoming_param_literal_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_literal = (*incoming_param_literal_arguments_citer)->get<std::string >();
-			result = eAny(this->getEEnumLiteralByLiteral(incoming_param_literal));
+			result = eAny(this->getEEnumLiteralByLiteral(incoming_param_literal), ecorePackage::EENUMLITERAL_CLASS,false);
 			break;
 		}
 
@@ -505,7 +489,6 @@ Any EEnumImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argument
 	return result;
 }
 
-
 std::shared_ptr<ecore::EEnum> EEnumImpl::getThisEEnumPtr() const
 {
 	return m_thisEEnumPtr.lock();
@@ -515,3 +498,5 @@ void EEnumImpl::setThisEEnumPtr(std::weak_ptr<ecore::EEnum> thisEEnumPtr)
 	m_thisEEnumPtr = thisEEnumPtr;
 	setThisEDataTypePtr(thisEEnumPtr);
 }
+
+

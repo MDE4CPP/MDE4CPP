@@ -185,14 +185,10 @@ StructuredActivityNodeImpl& StructuredActivityNodeImpl::operator=(const Structur
 			std::cout << "Initialising value Subset: " << "m_edge - Subset<uml::ActivityEdge, uml::ActivityEdge, uml::Element >(getContainedEdge(), getOwnedElement())" << std::endl;
 		#endif
 		
-
-		Bag<uml::ActivityEdge>::iterator edgeIter = edgeList->begin();
-		Bag<uml::ActivityEdge>::iterator edgeEnd = edgeList->end();
-		while (edgeIter != edgeEnd) 
+		for(const std::shared_ptr<uml::ActivityEdge> edgeindexElem: *edgeList) 
 		{
-			std::shared_ptr<uml::ActivityEdge> temp = std::dynamic_pointer_cast<uml::ActivityEdge>((*edgeIter)->copy());
-			getEdge()->push_back(temp);
-			edgeIter++;
+			std::shared_ptr<uml::ActivityEdge> temp = std::dynamic_pointer_cast<uml::ActivityEdge>((edgeindexElem)->copy());
+			m_edge->push_back(temp);
 		}
 	}
 	else
@@ -216,14 +212,10 @@ StructuredActivityNodeImpl& StructuredActivityNodeImpl::operator=(const Structur
 			std::cout << "Initialising value Subset: " << "m_node - Subset<uml::ActivityNode, uml::ActivityNode, uml::Element >(getContainedNode(), getOwnedElement())" << std::endl;
 		#endif
 		
-
-		Bag<uml::ActivityNode>::iterator nodeIter = nodeList->begin();
-		Bag<uml::ActivityNode>::iterator nodeEnd = nodeList->end();
-		while (nodeIter != nodeEnd) 
+		for(const std::shared_ptr<uml::ActivityNode> nodeindexElem: *nodeList) 
 		{
-			std::shared_ptr<uml::ActivityNode> temp = std::dynamic_pointer_cast<uml::ActivityNode>((*nodeIter)->copy());
-			getNode()->push_back(temp);
-			nodeIter++;
+			std::shared_ptr<uml::ActivityNode> temp = std::dynamic_pointer_cast<uml::ActivityNode>((nodeindexElem)->copy());
+			m_node->push_back(temp);
 		}
 	}
 	else
@@ -247,14 +239,10 @@ StructuredActivityNodeImpl& StructuredActivityNodeImpl::operator=(const Structur
 			std::cout << "Initialising value Subset: " << "m_structuredNodeInput - Subset<uml::InputPin, uml::InputPin >(getInput())" << std::endl;
 		#endif
 		
-
-		Bag<uml::InputPin>::iterator structuredNodeInputIter = structuredNodeInputList->begin();
-		Bag<uml::InputPin>::iterator structuredNodeInputEnd = structuredNodeInputList->end();
-		while (structuredNodeInputIter != structuredNodeInputEnd) 
+		for(const std::shared_ptr<uml::InputPin> structuredNodeInputindexElem: *structuredNodeInputList) 
 		{
-			std::shared_ptr<uml::InputPin> temp = std::dynamic_pointer_cast<uml::InputPin>((*structuredNodeInputIter)->copy());
-			getStructuredNodeInput()->push_back(temp);
-			structuredNodeInputIter++;
+			std::shared_ptr<uml::InputPin> temp = std::dynamic_pointer_cast<uml::InputPin>((structuredNodeInputindexElem)->copy());
+			m_structuredNodeInput->push_back(temp);
 		}
 	}
 	else
@@ -278,14 +266,10 @@ StructuredActivityNodeImpl& StructuredActivityNodeImpl::operator=(const Structur
 			std::cout << "Initialising value Subset: " << "m_structuredNodeOutput - Subset<uml::OutputPin, uml::OutputPin >(getOutput())" << std::endl;
 		#endif
 		
-
-		Bag<uml::OutputPin>::iterator structuredNodeOutputIter = structuredNodeOutputList->begin();
-		Bag<uml::OutputPin>::iterator structuredNodeOutputEnd = structuredNodeOutputList->end();
-		while (structuredNodeOutputIter != structuredNodeOutputEnd) 
+		for(const std::shared_ptr<uml::OutputPin> structuredNodeOutputindexElem: *structuredNodeOutputList) 
 		{
-			std::shared_ptr<uml::OutputPin> temp = std::dynamic_pointer_cast<uml::OutputPin>((*structuredNodeOutputIter)->copy());
-			getStructuredNodeOutput()->push_back(temp);
-			structuredNodeOutputIter++;
+			std::shared_ptr<uml::OutputPin> temp = std::dynamic_pointer_cast<uml::OutputPin>((structuredNodeOutputindexElem)->copy());
+			m_structuredNodeOutput->push_back(temp);
 		}
 	}
 	else
@@ -309,14 +293,10 @@ StructuredActivityNodeImpl& StructuredActivityNodeImpl::operator=(const Structur
 			std::cout << "Initialising value Subset: " << "m_variable - Subset<uml::Variable, uml::NamedElement >(getOwnedMember())" << std::endl;
 		#endif
 		
-
-		Bag<uml::Variable>::iterator variableIter = variableList->begin();
-		Bag<uml::Variable>::iterator variableEnd = variableList->end();
-		while (variableIter != variableEnd) 
+		for(const std::shared_ptr<uml::Variable> variableindexElem: *variableList) 
 		{
-			std::shared_ptr<uml::Variable> temp = std::dynamic_pointer_cast<uml::Variable>((*variableIter)->copy());
-			getVariable()->push_back(temp);
-			variableIter++;
+			std::shared_ptr<uml::Variable> temp = std::dynamic_pointer_cast<uml::Variable>((variableindexElem)->copy());
+			m_variable->push_back(temp);
 		}
 	}
 	else
@@ -919,12 +899,10 @@ void StructuredActivityNodeImpl::saveContent(std::shared_ptr<persistence::interf
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> StructuredActivityNodeImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getStructuredActivityNode_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -935,65 +913,25 @@ Any StructuredActivityNodeImpl::eGet(int featureID, bool resolve, bool coreType)
 	{
 		case uml::umlPackage::STRUCTUREDACTIVITYNODE_ATTRIBUTE_EDGE:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::ActivityEdge>::iterator iter = getEdge()->begin();
-			Bag<uml::ActivityEdge>::iterator end = getEdge()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //22738			
+			return eAnyBag(getEdge(),583468403); //22738
 		}
 		case uml::umlPackage::STRUCTUREDACTIVITYNODE_ATTRIBUTE_MUSTISOLATE:
-			return eAny(getMustIsolate()); //22739
+			return eAny(getMustIsolate(),0,true); //22739
 		case uml::umlPackage::STRUCTUREDACTIVITYNODE_ATTRIBUTE_NODE:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::ActivityNode>::iterator iter = getNode()->begin();
-			Bag<uml::ActivityNode>::iterator end = getNode()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //22743			
+			return eAnyBag(getNode(),1676583160); //22743
 		}
 		case uml::umlPackage::STRUCTUREDACTIVITYNODE_ATTRIBUTE_STRUCTUREDNODEINPUT:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::InputPin>::iterator iter = getStructuredNodeInput()->begin();
-			Bag<uml::InputPin>::iterator end = getStructuredNodeInput()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //22740			
+			return eAnyBag(getStructuredNodeInput(),567201991); //22740
 		}
 		case uml::umlPackage::STRUCTUREDACTIVITYNODE_ATTRIBUTE_STRUCTUREDNODEOUTPUT:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::OutputPin>::iterator iter = getStructuredNodeOutput()->begin();
-			Bag<uml::OutputPin>::iterator end = getStructuredNodeOutput()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //22741			
+			return eAnyBag(getStructuredNodeOutput(),681481770); //22741
 		}
 		case uml::umlPackage::STRUCTUREDACTIVITYNODE_ATTRIBUTE_VARIABLE:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Variable>::iterator iter = getVariable()->begin();
-			Bag<uml::Variable>::iterator end = getVariable()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //22742			
+			return eAnyBag(getVariable(),1446148199); //22742
 		}
 	}
 	Any result;
@@ -1050,36 +988,37 @@ bool StructuredActivityNodeImpl::eSet(int featureID, Any newValue)
 		case uml::umlPackage::STRUCTUREDACTIVITYNODE_ATTRIBUTE_EDGE:
 		{
 			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::ActivityEdge>> edgeList(new Bag<uml::ActivityEdge>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
+			if((newValue->isContainer()) && (uml::umlPackage::ACTIVITYEDGE_CLASS ==newValue->getTypeId()))
 			{
-				edgeList->add(std::dynamic_pointer_cast<uml::ActivityEdge>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::ActivityEdge>::iterator iterEdge = getEdge()->begin();
-			Bag<uml::ActivityEdge>::iterator endEdge = getEdge()->end();
-			while (iterEdge != endEdge)
-			{
-				if (edgeList->find(*iterEdge) == -1)
+				try
 				{
-					getEdge()->erase(*iterEdge);
+					std::shared_ptr<Bag<uml::ActivityEdge>> edgeList= newValue->get<std::shared_ptr<Bag<uml::ActivityEdge>>>();
+					std::shared_ptr<Bag<uml::ActivityEdge>> _edge=getEdge();
+					for(const std::shared_ptr<uml::ActivityEdge> indexEdge: *_edge)
+					{
+						if (edgeList->find(indexEdge) == -1)
+						{
+							_edge->erase(indexEdge);
+						}
+					}
+
+					for(const std::shared_ptr<uml::ActivityEdge> indexEdge: *edgeList)
+					{
+						if (_edge->find(indexEdge) == -1)
+						{
+							_edge->add(indexEdge);
+						}
+					}
 				}
-				iterEdge++;
-			}
- 
-			iterEdge = edgeList->begin();
-			endEdge = edgeList->end();
-			while (iterEdge != endEdge)
-			{
-				if (getEdge()->find(*iterEdge) == -1)
+				catch(...)
 				{
-					getEdge()->add(*iterEdge);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterEdge++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}
@@ -1093,144 +1032,148 @@ bool StructuredActivityNodeImpl::eSet(int featureID, Any newValue)
 		case uml::umlPackage::STRUCTUREDACTIVITYNODE_ATTRIBUTE_NODE:
 		{
 			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::ActivityNode>> nodeList(new Bag<uml::ActivityNode>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
+			if((newValue->isContainer()) && (uml::umlPackage::ACTIVITYNODE_CLASS ==newValue->getTypeId()))
 			{
-				nodeList->add(std::dynamic_pointer_cast<uml::ActivityNode>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::ActivityNode>::iterator iterNode = getNode()->begin();
-			Bag<uml::ActivityNode>::iterator endNode = getNode()->end();
-			while (iterNode != endNode)
-			{
-				if (nodeList->find(*iterNode) == -1)
+				try
 				{
-					getNode()->erase(*iterNode);
+					std::shared_ptr<Bag<uml::ActivityNode>> nodeList= newValue->get<std::shared_ptr<Bag<uml::ActivityNode>>>();
+					std::shared_ptr<Bag<uml::ActivityNode>> _node=getNode();
+					for(const std::shared_ptr<uml::ActivityNode> indexNode: *_node)
+					{
+						if (nodeList->find(indexNode) == -1)
+						{
+							_node->erase(indexNode);
+						}
+					}
+
+					for(const std::shared_ptr<uml::ActivityNode> indexNode: *nodeList)
+					{
+						if (_node->find(indexNode) == -1)
+						{
+							_node->add(indexNode);
+						}
+					}
 				}
-				iterNode++;
-			}
- 
-			iterNode = nodeList->begin();
-			endNode = nodeList->end();
-			while (iterNode != endNode)
-			{
-				if (getNode()->find(*iterNode) == -1)
+				catch(...)
 				{
-					getNode()->add(*iterNode);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterNode++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}
 		case uml::umlPackage::STRUCTUREDACTIVITYNODE_ATTRIBUTE_STRUCTUREDNODEINPUT:
 		{
 			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::InputPin>> structuredNodeInputList(new Bag<uml::InputPin>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
+			if((newValue->isContainer()) && (uml::umlPackage::INPUTPIN_CLASS ==newValue->getTypeId()))
 			{
-				structuredNodeInputList->add(std::dynamic_pointer_cast<uml::InputPin>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::InputPin>::iterator iterStructuredNodeInput = getStructuredNodeInput()->begin();
-			Bag<uml::InputPin>::iterator endStructuredNodeInput = getStructuredNodeInput()->end();
-			while (iterStructuredNodeInput != endStructuredNodeInput)
-			{
-				if (structuredNodeInputList->find(*iterStructuredNodeInput) == -1)
+				try
 				{
-					getStructuredNodeInput()->erase(*iterStructuredNodeInput);
+					std::shared_ptr<Bag<uml::InputPin>> structuredNodeInputList= newValue->get<std::shared_ptr<Bag<uml::InputPin>>>();
+					std::shared_ptr<Bag<uml::InputPin>> _structuredNodeInput=getStructuredNodeInput();
+					for(const std::shared_ptr<uml::InputPin> indexStructuredNodeInput: *_structuredNodeInput)
+					{
+						if (structuredNodeInputList->find(indexStructuredNodeInput) == -1)
+						{
+							_structuredNodeInput->erase(indexStructuredNodeInput);
+						}
+					}
+
+					for(const std::shared_ptr<uml::InputPin> indexStructuredNodeInput: *structuredNodeInputList)
+					{
+						if (_structuredNodeInput->find(indexStructuredNodeInput) == -1)
+						{
+							_structuredNodeInput->add(indexStructuredNodeInput);
+						}
+					}
 				}
-				iterStructuredNodeInput++;
-			}
- 
-			iterStructuredNodeInput = structuredNodeInputList->begin();
-			endStructuredNodeInput = structuredNodeInputList->end();
-			while (iterStructuredNodeInput != endStructuredNodeInput)
-			{
-				if (getStructuredNodeInput()->find(*iterStructuredNodeInput) == -1)
+				catch(...)
 				{
-					getStructuredNodeInput()->add(*iterStructuredNodeInput);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterStructuredNodeInput++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}
 		case uml::umlPackage::STRUCTUREDACTIVITYNODE_ATTRIBUTE_STRUCTUREDNODEOUTPUT:
 		{
 			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::OutputPin>> structuredNodeOutputList(new Bag<uml::OutputPin>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
+			if((newValue->isContainer()) && (uml::umlPackage::OUTPUTPIN_CLASS ==newValue->getTypeId()))
 			{
-				structuredNodeOutputList->add(std::dynamic_pointer_cast<uml::OutputPin>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::OutputPin>::iterator iterStructuredNodeOutput = getStructuredNodeOutput()->begin();
-			Bag<uml::OutputPin>::iterator endStructuredNodeOutput = getStructuredNodeOutput()->end();
-			while (iterStructuredNodeOutput != endStructuredNodeOutput)
-			{
-				if (structuredNodeOutputList->find(*iterStructuredNodeOutput) == -1)
+				try
 				{
-					getStructuredNodeOutput()->erase(*iterStructuredNodeOutput);
+					std::shared_ptr<Bag<uml::OutputPin>> structuredNodeOutputList= newValue->get<std::shared_ptr<Bag<uml::OutputPin>>>();
+					std::shared_ptr<Bag<uml::OutputPin>> _structuredNodeOutput=getStructuredNodeOutput();
+					for(const std::shared_ptr<uml::OutputPin> indexStructuredNodeOutput: *_structuredNodeOutput)
+					{
+						if (structuredNodeOutputList->find(indexStructuredNodeOutput) == -1)
+						{
+							_structuredNodeOutput->erase(indexStructuredNodeOutput);
+						}
+					}
+
+					for(const std::shared_ptr<uml::OutputPin> indexStructuredNodeOutput: *structuredNodeOutputList)
+					{
+						if (_structuredNodeOutput->find(indexStructuredNodeOutput) == -1)
+						{
+							_structuredNodeOutput->add(indexStructuredNodeOutput);
+						}
+					}
 				}
-				iterStructuredNodeOutput++;
-			}
- 
-			iterStructuredNodeOutput = structuredNodeOutputList->begin();
-			endStructuredNodeOutput = structuredNodeOutputList->end();
-			while (iterStructuredNodeOutput != endStructuredNodeOutput)
-			{
-				if (getStructuredNodeOutput()->find(*iterStructuredNodeOutput) == -1)
+				catch(...)
 				{
-					getStructuredNodeOutput()->add(*iterStructuredNodeOutput);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterStructuredNodeOutput++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}
 		case uml::umlPackage::STRUCTUREDACTIVITYNODE_ATTRIBUTE_VARIABLE:
 		{
 			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::Variable>> variableList(new Bag<uml::Variable>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
+			if((newValue->isContainer()) && (uml::umlPackage::VARIABLE_CLASS ==newValue->getTypeId()))
 			{
-				variableList->add(std::dynamic_pointer_cast<uml::Variable>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::Variable>::iterator iterVariable = getVariable()->begin();
-			Bag<uml::Variable>::iterator endVariable = getVariable()->end();
-			while (iterVariable != endVariable)
-			{
-				if (variableList->find(*iterVariable) == -1)
+				try
 				{
-					getVariable()->erase(*iterVariable);
+					std::shared_ptr<Bag<uml::Variable>> variableList= newValue->get<std::shared_ptr<Bag<uml::Variable>>>();
+					std::shared_ptr<Bag<uml::Variable>> _variable=getVariable();
+					for(const std::shared_ptr<uml::Variable> indexVariable: *_variable)
+					{
+						if (variableList->find(indexVariable) == -1)
+						{
+							_variable->erase(indexVariable);
+						}
+					}
+
+					for(const std::shared_ptr<uml::Variable> indexVariable: *variableList)
+					{
+						if (_variable->find(indexVariable) == -1)
+						{
+							_variable->add(indexVariable);
+						}
+					}
 				}
-				iterVariable++;
-			}
- 
-			iterVariable = variableList->begin();
-			endVariable = variableList->end();
-			while (iterVariable != endVariable)
-			{
-				if (getVariable()->find(*iterVariable) == -1)
+				catch(...)
 				{
-					getVariable()->add(*iterVariable);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterVariable++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}
@@ -1254,75 +1197,72 @@ bool StructuredActivityNodeImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any StructuredActivityNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any StructuredActivityNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
   	switch(operationID)
 	{
-		
-		// 99188554
+		// uml::StructuredActivityNode::edges(Any, std::map) : bool: 99188554
 		case umlPackage::STRUCTUREDACTIVITYNODE_OPERATION_EDGES_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->edges(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->edges(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		
-		// 1066841877
+		// uml::StructuredActivityNode::input_pin_edges(Any, std::map) : bool: 1066841877
 		case umlPackage::STRUCTUREDACTIVITYNODE_OPERATION_INPUT_PIN_EDGES_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->input_pin_edges(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->input_pin_edges(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		
-		// 1915068085
+		// uml::StructuredActivityNode::output_pin_edges(Any, std::map) : bool: 1915068085
 		case umlPackage::STRUCTUREDACTIVITYNODE_OPERATION_OUTPUT_PIN_EDGES_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->output_pin_edges(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->output_pin_edges(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		
-		// 569554525
+		// uml::StructuredActivityNode::sourceNodes() : uml::ActivityNode[*]: 569554525
 		case umlPackage::STRUCTUREDACTIVITYNODE_OPERATION_SOURCENODES:
 		{
-			result = eAny(this->sourceNodes());
+			std::shared_ptr<Bag<uml::ActivityNode> > resultList = this->sourceNodes();
+			return eAny(resultList,umlPackage::ACTIVITYNODE_CLASS,true);
 			break;
 		}
-		
-		// 585821302
+		// uml::StructuredActivityNode::targetNodes() : uml::ActivityNode[*]: 585821302
 		case umlPackage::STRUCTUREDACTIVITYNODE_OPERATION_TARGETNODES:
 		{
-			result = eAny(this->targetNodes());
+			std::shared_ptr<Bag<uml::ActivityNode> > resultList = this->targetNodes();
+			return eAny(resultList,umlPackage::ACTIVITYNODE_CLASS,true);
 			break;
 		}
 
@@ -1345,7 +1285,6 @@ Any StructuredActivityNodeImpl::eInvoke(int operationID, std::shared_ptr<std::li
 	return result;
 }
 
-
 std::shared_ptr<uml::StructuredActivityNode> StructuredActivityNodeImpl::getThisStructuredActivityNodePtr() const
 {
 	return m_thisStructuredActivityNodePtr.lock();
@@ -1357,3 +1296,5 @@ void StructuredActivityNodeImpl::setThisStructuredActivityNodePtr(std::weak_ptr<
 	setThisActivityGroupPtr(thisStructuredActivityNodePtr);
 	setThisNamespacePtr(thisStructuredActivityNodePtr);
 }
+
+

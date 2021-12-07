@@ -41,8 +41,8 @@
 #include "fUML/Semantics/Values/Value.hpp"
 
 //Factories an Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "fUML/Semantics/Values/ValuesPackage.hpp"
 
@@ -275,7 +275,7 @@ void ForkedTokenImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XL
 		{
 			// this attribute is a 'int'
 			int value;
-			std::istringstream ( iter->second ) >> value;
+			std::istringstream(iter->second) >> value;
 			this->setRemainingOffersCount(value);
 		}
 		std::shared_ptr<ecore::EClass> metaClass = this->eClass(); // get MetaClass
@@ -357,12 +357,10 @@ void ForkedTokenImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> ForkedTokenImpl::eStaticClass() const
 {
 	return fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getForkedToken_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -374,12 +372,12 @@ Any ForkedTokenImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case fUML::Semantics::Activities::ActivitiesPackage::FORKEDTOKEN_ATTRIBUTE_BASETOKEN:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getBaseToken();
-			return eAny(returnValue); //592
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //592
 		}
 		case fUML::Semantics::Activities::ActivitiesPackage::FORKEDTOKEN_ATTRIBUTE_BASETOKENISWITHDRAWN:
-			return eAny(isBaseTokenIsWithdrawn()); //594
+				return eAny(isBaseTokenIsWithdrawn(),0,true); //594
 		case fUML::Semantics::Activities::ActivitiesPackage::FORKEDTOKEN_ATTRIBUTE_REMAININGOFFERSCOUNT:
-			return eAny(getRemainingOffersCount()); //593
+				return eAny(getRemainingOffersCount(),0,true); //593
 	}
 	return TokenImpl::eGet(featureID, resolve, coreType);
 }
@@ -432,7 +430,7 @@ bool ForkedTokenImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ForkedTokenImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any ForkedTokenImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -442,7 +440,7 @@ Any ForkedTokenImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::s
 		// 252058926
 		case ActivitiesPackage::FORKEDTOKEN_OPERATION__COPY:
 		{
-			result = eAny(this->_copy());
+				result = eAny(this->_copy());
 			break;
 		}
 		
@@ -452,23 +450,23 @@ Any ForkedTokenImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::s
 			//Retrieve input parameter 'otherToken'
 			//parameter 0
 			std::shared_ptr<fUML::Semantics::Activities::Token> incoming_param_otherToken;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_otherToken_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_otherToken = (*incoming_param_otherToken_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::Activities::Token> >();
-			result = eAny(this->equals(incoming_param_otherToken));
+			std::list<Any>::const_iterator incoming_param_otherToken_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_otherToken = (*incoming_param_otherToken_arguments_citer)->get<std::shared_ptr<fUML::Semantics::Activities::Token> >();
+					result = eAny(this->equals(incoming_param_otherToken),0,false);
 			break;
 		}
 		
 		// 727492760
 		case ActivitiesPackage::FORKEDTOKEN_OPERATION_GETVALUE:
 		{
-			result = eAny(this->getValue());
+				result = eAny(this->getValue());
 			break;
 		}
 		
 		// 1584869028
 		case ActivitiesPackage::FORKEDTOKEN_OPERATION_ISCONTROL:
 		{
-			result = eAny(this->isControl());
+					result = eAny(this->isControl(),0,false);
 			break;
 		}
 		
@@ -492,7 +490,6 @@ Any ForkedTokenImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::s
 	return result;
 }
 
-
 std::shared_ptr<fUML::Semantics::Activities::ForkedToken> ForkedTokenImpl::getThisForkedTokenPtr() const
 {
 	return m_thisForkedTokenPtr.lock();
@@ -502,3 +499,5 @@ void ForkedTokenImpl::setThisForkedTokenPtr(std::weak_ptr<fUML::Semantics::Activ
 	m_thisForkedTokenPtr = thisForkedTokenPtr;
 	setThisTokenPtr(thisForkedTokenPtr);
 }
+
+

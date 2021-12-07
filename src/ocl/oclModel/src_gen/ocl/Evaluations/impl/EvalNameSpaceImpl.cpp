@@ -33,8 +33,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "uml/umlFactory.hpp"
+#include "fUML/Semantics/Loci/LociFactory.hpp"
 
 #include "fUML/Semantics/Values/Evaluation.hpp"
 #include "fUML/Semantics/Loci/Locus.hpp"
@@ -194,12 +194,10 @@ void EvalNameSpaceImpl::saveContent(std::shared_ptr<persistence::interfaces::XSa
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> EvalNameSpaceImpl::eStaticClass() const
 {
 	return ocl::Evaluations::EvaluationsPackage::eInstance()->getEvalNameSpace_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -232,7 +230,7 @@ bool EvalNameSpaceImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any EvalNameSpaceImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any EvalNameSpaceImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -252,7 +250,6 @@ Any EvalNameSpaceImpl::eInvoke(int operationID, std::shared_ptr<std::list < std:
 	return result;
 }
 
-
 std::shared_ptr<ocl::Evaluations::EvalNameSpace> EvalNameSpaceImpl::getThisEvalNameSpacePtr() const
 {
 	return m_thisEvalNameSpacePtr.lock();
@@ -262,3 +259,5 @@ void EvalNameSpaceImpl::setThisEvalNameSpacePtr(std::weak_ptr<ocl::Evaluations::
 	m_thisEvalNameSpacePtr = thisEvalNameSpacePtr;
 	setThisEvaluationPtr(thisEvalNameSpacePtr);
 }
+
+

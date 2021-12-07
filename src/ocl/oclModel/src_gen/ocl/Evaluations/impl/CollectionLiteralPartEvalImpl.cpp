@@ -33,9 +33,9 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Loci/LociFactory.hpp"
-#include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Values/ValuesFactory.hpp"
+#include "uml/umlFactory.hpp"
+#include "fUML/Semantics/Loci/LociFactory.hpp"
 
 #include "fUML/Semantics/Values/Evaluation.hpp"
 #include "fUML/Semantics/Loci/Locus.hpp"
@@ -242,12 +242,10 @@ void CollectionLiteralPartEvalImpl::saveContent(std::shared_ptr<persistence::int
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> CollectionLiteralPartEvalImpl::eStaticClass() const
 {
 	return ocl::Evaluations::EvaluationsPackage::eInstance()->getCollectionLiteralPartEval_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -259,7 +257,7 @@ Any CollectionLiteralPartEvalImpl::eGet(int featureID, bool resolve, bool coreTy
 		case ocl::Evaluations::EvaluationsPackage::COLLECTIONLITERALPARTEVAL_ATTRIBUTE_ELEMENT:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getElement();
-			return eAny(returnValue); //182
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //182
 		}
 	}
 	return fUML::Semantics::Values::EvaluationImpl::eGet(featureID, resolve, coreType);
@@ -295,7 +293,7 @@ bool CollectionLiteralPartEvalImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any CollectionLiteralPartEvalImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any CollectionLiteralPartEvalImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -315,7 +313,6 @@ Any CollectionLiteralPartEvalImpl::eInvoke(int operationID, std::shared_ptr<std:
 	return result;
 }
 
-
 std::shared_ptr<ocl::Evaluations::CollectionLiteralPartEval> CollectionLiteralPartEvalImpl::getThisCollectionLiteralPartEvalPtr() const
 {
 	return m_thisCollectionLiteralPartEvalPtr.lock();
@@ -325,3 +322,5 @@ void CollectionLiteralPartEvalImpl::setThisCollectionLiteralPartEvalPtr(std::wea
 	m_thisCollectionLiteralPartEvalPtr = thisCollectionLiteralPartEvalPtr;
 	setThisEvaluationPtr(thisCollectionLiteralPartEvalPtr);
 }
+
+

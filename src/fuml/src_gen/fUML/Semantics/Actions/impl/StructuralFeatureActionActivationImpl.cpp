@@ -37,8 +37,8 @@
 
 #include <exception> // used in Persistence
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
-#include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Actions/ActionsFactory.hpp"
+#include "uml/umlFactory.hpp"
 
 #include "uml/Action.hpp"
 #include "fUML/Semantics/Actions/ActionActivation.hpp"
@@ -56,8 +56,8 @@
 #include "fUML/Semantics/Values/Value.hpp"
 
 //Factories an Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
@@ -322,12 +322,10 @@ void StructuralFeatureActionActivationImpl::saveContent(std::shared_ptr<persiste
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> StructuralFeatureActionActivationImpl::eStaticClass() const
 {
 	return fUML::Semantics::Actions::ActionsPackage::eInstance()->getStructuralFeatureActionActivation_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -360,7 +358,7 @@ bool StructuralFeatureActionActivationImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any StructuralFeatureActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any StructuralFeatureActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -373,9 +371,9 @@ Any StructuralFeatureActionActivationImpl::eInvoke(int operationID, std::shared_
 			//Retrieve input parameter 'feature'
 			//parameter 0
 			std::shared_ptr<uml::StructuralFeature> incoming_param_feature;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_feature_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_feature = (*incoming_param_feature_arguments_citer)->get()->get<std::shared_ptr<uml::StructuralFeature> >();
-			result = eAny(this->getAssociation(incoming_param_feature));
+			std::list<Any>::const_iterator incoming_param_feature_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_feature = (*incoming_param_feature_arguments_citer)->get<std::shared_ptr<uml::StructuralFeature> >();
+				result = eAny(this->getAssociation(incoming_param_feature));
 			break;
 		}
 		
@@ -385,19 +383,19 @@ Any StructuralFeatureActionActivationImpl::eInvoke(int operationID, std::shared_
 			//Retrieve input parameter 'association'
 			//parameter 0
 			std::shared_ptr<uml::Association> incoming_param_association;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_association_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_association = (*incoming_param_association_arguments_citer)->get()->get<std::shared_ptr<uml::Association> >();
+			std::list<Any>::const_iterator incoming_param_association_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_association = (*incoming_param_association_arguments_citer)->get<std::shared_ptr<uml::Association> >();
 			//Retrieve input parameter 'end'
 			//parameter 1
 			std::shared_ptr<uml::StructuralFeature> incoming_param_end;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_end_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_end = (*incoming_param_end_arguments_citer)->get()->get<std::shared_ptr<uml::StructuralFeature> >();
+			std::list<Any>::const_iterator incoming_param_end_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_end = (*incoming_param_end_arguments_citer)->get<std::shared_ptr<uml::StructuralFeature> >();
 			//Retrieve input parameter 'oppositeValue'
 			//parameter 2
 			std::shared_ptr<fUML::Semantics::Values::Value> incoming_param_oppositeValue;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_oppositeValue_arguments_citer = std::next(arguments->begin(), 2);
-			incoming_param_oppositeValue = (*incoming_param_oppositeValue_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::Values::Value> >();
-			result = eAny(this->getMatchingLinks(incoming_param_association,incoming_param_end,incoming_param_oppositeValue));
+			std::list<Any>::const_iterator incoming_param_oppositeValue_arguments_citer = std::next(arguments->begin(), 2);
+			incoming_param_oppositeValue = (*incoming_param_oppositeValue_arguments_citer)->get<std::shared_ptr<fUML::Semantics::Values::Value> >();
+				result = eAny(this->getMatchingLinks(incoming_param_association,incoming_param_end,incoming_param_oppositeValue));
 			break;
 		}
 		
@@ -407,24 +405,24 @@ Any StructuralFeatureActionActivationImpl::eInvoke(int operationID, std::shared_
 			//Retrieve input parameter 'association'
 			//parameter 0
 			std::shared_ptr<uml::Association> incoming_param_association;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_association_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_association = (*incoming_param_association_arguments_citer)->get()->get<std::shared_ptr<uml::Association> >();
+			std::list<Any>::const_iterator incoming_param_association_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_association = (*incoming_param_association_arguments_citer)->get<std::shared_ptr<uml::Association> >();
 			//Retrieve input parameter 'end'
 			//parameter 1
 			std::shared_ptr<uml::StructuralFeature> incoming_param_end;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_end_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_end = (*incoming_param_end_arguments_citer)->get()->get<std::shared_ptr<uml::StructuralFeature> >();
+			std::list<Any>::const_iterator incoming_param_end_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_end = (*incoming_param_end_arguments_citer)->get<std::shared_ptr<uml::StructuralFeature> >();
 			//Retrieve input parameter 'oppositeValue'
 			//parameter 2
 			std::shared_ptr<fUML::Semantics::Values::Value> incoming_param_oppositeValue;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_oppositeValue_arguments_citer = std::next(arguments->begin(), 2);
-			incoming_param_oppositeValue = (*incoming_param_oppositeValue_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::Values::Value> >();
+			std::list<Any>::const_iterator incoming_param_oppositeValue_arguments_citer = std::next(arguments->begin(), 2);
+			incoming_param_oppositeValue = (*incoming_param_oppositeValue_arguments_citer)->get<std::shared_ptr<fUML::Semantics::Values::Value> >();
 			//Retrieve input parameter 'endValue'
 			//parameter 3
 			std::shared_ptr<fUML::Semantics::Values::Value> incoming_param_endValue;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_endValue_arguments_citer = std::next(arguments->begin(), 3);
-			incoming_param_endValue = (*incoming_param_endValue_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::Values::Value> >();
-			result = eAny(this->getMatchingLinksForEndValue(incoming_param_association,incoming_param_end,incoming_param_oppositeValue,incoming_param_endValue));
+			std::list<Any>::const_iterator incoming_param_endValue_arguments_citer = std::next(arguments->begin(), 3);
+			incoming_param_endValue = (*incoming_param_endValue_arguments_citer)->get<std::shared_ptr<fUML::Semantics::Values::Value> >();
+				result = eAny(this->getMatchingLinksForEndValue(incoming_param_association,incoming_param_end,incoming_param_oppositeValue,incoming_param_endValue));
 			break;
 		}
 		
@@ -434,14 +432,14 @@ Any StructuralFeatureActionActivationImpl::eInvoke(int operationID, std::shared_
 			//Retrieve input parameter 'association'
 			//parameter 0
 			std::shared_ptr<uml::Association> incoming_param_association;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_association_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_association = (*incoming_param_association_arguments_citer)->get()->get<std::shared_ptr<uml::Association> >();
+			std::list<Any>::const_iterator incoming_param_association_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_association = (*incoming_param_association_arguments_citer)->get<std::shared_ptr<uml::Association> >();
 			//Retrieve input parameter 'end'
 			//parameter 1
 			std::shared_ptr<uml::StructuralFeature> incoming_param_end;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_end_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_end = (*incoming_param_end_arguments_citer)->get()->get<std::shared_ptr<uml::StructuralFeature> >();
-			result = eAny(this->getOppositeEnd(incoming_param_association,incoming_param_end));
+			std::list<Any>::const_iterator incoming_param_end_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_end = (*incoming_param_end_arguments_citer)->get<std::shared_ptr<uml::StructuralFeature> >();
+				result = eAny(this->getOppositeEnd(incoming_param_association,incoming_param_end));
 			break;
 		}
 
@@ -458,7 +456,6 @@ Any StructuralFeatureActionActivationImpl::eInvoke(int operationID, std::shared_
 	return result;
 }
 
-
 std::shared_ptr<fUML::Semantics::Actions::StructuralFeatureActionActivation> StructuralFeatureActionActivationImpl::getThisStructuralFeatureActionActivationPtr() const
 {
 	return m_thisStructuralFeatureActionActivationPtr.lock();
@@ -468,3 +465,5 @@ void StructuralFeatureActionActivationImpl::setThisStructuralFeatureActionActiva
 	m_thisStructuralFeatureActionActivationPtr = thisStructuralFeatureActionActivationPtr;
 	setThisActionActivationPtr(thisStructuralFeatureActionActivationPtr);
 }
+
+

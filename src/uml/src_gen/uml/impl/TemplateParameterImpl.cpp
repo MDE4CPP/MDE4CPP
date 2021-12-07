@@ -427,12 +427,10 @@ void TemplateParameterImpl::saveContent(std::shared_ptr<persistence::interfaces:
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> TemplateParameterImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getTemplateParameter_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -444,27 +442,27 @@ Any TemplateParameterImpl::eGet(int featureID, bool resolve, bool coreType) cons
 		case uml::umlPackage::TEMPLATEPARAMETER_ATTRIBUTE_DEFAULT:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getDefault();
-			return eAny(returnValue); //2313
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //2313
 		}
 		case uml::umlPackage::TEMPLATEPARAMETER_ATTRIBUTE_OWNEDDEFAULT:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getOwnedDefault();
-			return eAny(returnValue); //2314
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //2314
 		}
 		case uml::umlPackage::TEMPLATEPARAMETER_ATTRIBUTE_OWNEDPARAMETEREDELEMENT:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getOwnedParameteredElement();
-			return eAny(returnValue); //2317
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //2317
 		}
 		case uml::umlPackage::TEMPLATEPARAMETER_ATTRIBUTE_PARAMETEREDELEMENT:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getParameteredElement();
-			return eAny(returnValue); //2315
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //2315
 		}
 		case uml::umlPackage::TEMPLATEPARAMETER_ATTRIBUTE_SIGNATURE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getSignature().lock();
-			return eAny(returnValue); //2316
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //2316
 		}
 	}
 	return ElementImpl::eGet(featureID, resolve, coreType);
@@ -540,27 +538,26 @@ bool TemplateParameterImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any TemplateParameterImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any TemplateParameterImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
   	switch(operationID)
 	{
-		
-		// 785170366
+		// uml::TemplateParameter::must_be_compatible(Any, std::map) : bool: 785170366
 		case umlPackage::TEMPLATEPARAMETER_OPERATION_MUST_BE_COMPATIBLE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->must_be_compatible(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->must_be_compatible(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
 
@@ -577,7 +574,6 @@ Any TemplateParameterImpl::eInvoke(int operationID, std::shared_ptr<std::list < 
 	return result;
 }
 
-
 std::shared_ptr<uml::TemplateParameter> TemplateParameterImpl::getThisTemplateParameterPtr() const
 {
 	return m_thisTemplateParameterPtr.lock();
@@ -587,3 +583,5 @@ void TemplateParameterImpl::setThisTemplateParameterPtr(std::weak_ptr<uml::Templ
 	m_thisTemplateParameterPtr = thisTemplateParameterPtr;
 	setThisElementPtr(thisTemplateParameterPtr);
 }
+
+

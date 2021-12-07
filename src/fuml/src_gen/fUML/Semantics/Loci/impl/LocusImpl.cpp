@@ -56,8 +56,8 @@
 #include "fUML/Semantics/StructuredClassifiers/Object.hpp"
 
 //Factories an Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
 #include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -445,12 +445,10 @@ void LocusImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandle
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> LocusImpl::eStaticClass() const
 {
 	return fUML::Semantics::Loci::LociPackage::eInstance()->getLocus_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -462,7 +460,7 @@ Any LocusImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case fUML::Semantics::Loci::LociPackage::LOCUS_ATTRIBUTE_EXECUTOR:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getExecutor();
-			return eAny(returnValue); //770
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //770
 		}
 		case fUML::Semantics::Loci::LociPackage::LOCUS_ATTRIBUTE_EXTENSIONALVALUES:
 		{
@@ -479,7 +477,7 @@ Any LocusImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case fUML::Semantics::Loci::LociPackage::LOCUS_ATTRIBUTE_FACTORY:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getFactory();
-			return eAny(returnValue); //771
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //771
 		}
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
@@ -563,7 +561,7 @@ bool LocusImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any LocusImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any LocusImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -576,8 +574,8 @@ Any LocusImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_
 			//Retrieve input parameter 'value'
 			//parameter 0
 			std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue> incoming_param_value;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_value_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_value = (*incoming_param_value_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue> >();
+			std::list<Any>::const_iterator incoming_param_value_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_value = (*incoming_param_value_arguments_citer)->get<std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue> >();
 			this->add(incoming_param_value);
 			break;
 		}
@@ -588,8 +586,8 @@ Any LocusImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_
 			//Retrieve input parameter 'executor'
 			//parameter 0
 			std::shared_ptr<fUML::Semantics::Loci::Executor> incoming_param_executor;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_executor_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_executor = (*incoming_param_executor_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::Loci::Executor> >();
+			std::list<Any>::const_iterator incoming_param_executor_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_executor = (*incoming_param_executor_arguments_citer)->get<std::shared_ptr<fUML::Semantics::Loci::Executor> >();
 			this->assignExecutor(incoming_param_executor);
 			break;
 		}
@@ -600,8 +598,8 @@ Any LocusImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_
 			//Retrieve input parameter 'factory'
 			//parameter 0
 			std::shared_ptr<fUML::Semantics::Loci::ExecutionFactory> incoming_param_factory;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_factory_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_factory = (*incoming_param_factory_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::Loci::ExecutionFactory> >();
+			std::list<Any>::const_iterator incoming_param_factory_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_factory = (*incoming_param_factory_arguments_citer)->get<std::shared_ptr<fUML::Semantics::Loci::ExecutionFactory> >();
 			this->assignFactory(incoming_param_factory);
 			break;
 		}
@@ -612,14 +610,14 @@ Any LocusImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_
 			//Retrieve input parameter 'type'
 			//parameter 0
 			std::shared_ptr<uml::Classifier> incoming_param_type;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_type_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_type = (*incoming_param_type_arguments_citer)->get()->get<std::shared_ptr<uml::Classifier> >();
+			std::list<Any>::const_iterator incoming_param_type_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_type = (*incoming_param_type_arguments_citer)->get<std::shared_ptr<uml::Classifier> >();
 			//Retrieve input parameter 'classifier'
 			//parameter 1
 			std::shared_ptr<uml::Classifier> incoming_param_classifier;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_classifier_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_classifier = (*incoming_param_classifier_arguments_citer)->get()->get<std::shared_ptr<uml::Classifier> >();
-			result = eAny(this->conforms(incoming_param_type,incoming_param_classifier));
+			std::list<Any>::const_iterator incoming_param_classifier_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_classifier = (*incoming_param_classifier_arguments_citer)->get<std::shared_ptr<uml::Classifier> >();
+					result = eAny(this->conforms(incoming_param_type,incoming_param_classifier),0,false);
 			break;
 		}
 		
@@ -629,9 +627,9 @@ Any LocusImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_
 			//Retrieve input parameter 'type'
 			//parameter 0
 			std::shared_ptr<uml::Class> incoming_param_type;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_type_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_type = (*incoming_param_type_arguments_citer)->get()->get<std::shared_ptr<uml::Class> >();
-			result = eAny(this->instantiate(incoming_param_type));
+			std::list<Any>::const_iterator incoming_param_type_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_type = (*incoming_param_type_arguments_citer)->get<std::shared_ptr<uml::Class> >();
+				result = eAny(this->instantiate(incoming_param_type));
 			break;
 		}
 		
@@ -641,8 +639,8 @@ Any LocusImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_
 			//Retrieve input parameter 'value'
 			//parameter 0
 			std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue> incoming_param_value;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_value_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_value = (*incoming_param_value_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue> >();
+			std::list<Any>::const_iterator incoming_param_value_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_value = (*incoming_param_value_arguments_citer)->get<std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue> >();
 			this->remove(incoming_param_value);
 			break;
 		}
@@ -653,9 +651,9 @@ Any LocusImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_
 			//Retrieve input parameter 'classifier'
 			//parameter 0
 			std::shared_ptr<uml::Classifier> incoming_param_classifier;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_classifier_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_classifier = (*incoming_param_classifier_arguments_citer)->get()->get<std::shared_ptr<uml::Classifier> >();
-			result = eAny(this->retrieveExtent(incoming_param_classifier));
+			std::list<Any>::const_iterator incoming_param_classifier_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_classifier = (*incoming_param_classifier_arguments_citer)->get<std::shared_ptr<uml::Classifier> >();
+				result = eAny(this->retrieveExtent(incoming_param_classifier));
 			break;
 		}
 
@@ -672,7 +670,6 @@ Any LocusImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_
 	return result;
 }
 
-
 std::shared_ptr<fUML::Semantics::Loci::Locus> LocusImpl::getThisLocusPtr() const
 {
 	return m_thisLocusPtr.lock();
@@ -681,3 +678,5 @@ void LocusImpl::setThisLocusPtr(std::weak_ptr<fUML::Semantics::Loci::Locus> this
 {
 	m_thisLocusPtr = thisLocusPtr;
 }
+
+

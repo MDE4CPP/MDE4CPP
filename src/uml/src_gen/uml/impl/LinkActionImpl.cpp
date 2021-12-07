@@ -158,14 +158,10 @@ LinkActionImpl& LinkActionImpl::operator=(const LinkActionImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_endData - Subset<uml::LinkEndData, uml::Element >(getOwnedElement())" << std::endl;
 		#endif
 		
-
-		Bag<uml::LinkEndData>::iterator endDataIter = endDataList->begin();
-		Bag<uml::LinkEndData>::iterator endDataEnd = endDataList->end();
-		while (endDataIter != endDataEnd) 
+		for(const std::shared_ptr<uml::LinkEndData> endDataindexElem: *endDataList) 
 		{
-			std::shared_ptr<uml::LinkEndData> temp = std::dynamic_pointer_cast<uml::LinkEndData>((*endDataIter)->copy());
-			getEndData()->push_back(temp);
-			endDataIter++;
+			std::shared_ptr<uml::LinkEndData> temp = std::dynamic_pointer_cast<uml::LinkEndData>((endDataindexElem)->copy());
+			m_endData->push_back(temp);
 		}
 	}
 	else
@@ -189,14 +185,10 @@ LinkActionImpl& LinkActionImpl::operator=(const LinkActionImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_inputValue - Subset<uml::InputPin, uml::InputPin >(getInput())" << std::endl;
 		#endif
 		
-
-		Bag<uml::InputPin>::iterator inputValueIter = inputValueList->begin();
-		Bag<uml::InputPin>::iterator inputValueEnd = inputValueList->end();
-		while (inputValueIter != inputValueEnd) 
+		for(const std::shared_ptr<uml::InputPin> inputValueindexElem: *inputValueList) 
 		{
-			std::shared_ptr<uml::InputPin> temp = std::dynamic_pointer_cast<uml::InputPin>((*inputValueIter)->copy());
-			getInputValue()->push_back(temp);
-			inputValueIter++;
+			std::shared_ptr<uml::InputPin> temp = std::dynamic_pointer_cast<uml::InputPin>((inputValueindexElem)->copy());
+			m_inputValue->push_back(temp);
 		}
 	}
 	else
@@ -509,12 +501,10 @@ void LinkActionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> LinkActionImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getLinkAction_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -525,27 +515,11 @@ Any LinkActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	{
 		case uml::umlPackage::LINKACTION_ATTRIBUTE_ENDDATA:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::LinkEndData>::iterator iter = getEndData()->begin();
-			Bag<uml::LinkEndData>::iterator end = getEndData()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //13327			
+			return eAnyBag(getEndData(),563619343); //13327
 		}
 		case uml::umlPackage::LINKACTION_ATTRIBUTE_INPUTVALUE:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::InputPin>::iterator iter = getInputValue()->begin();
-			Bag<uml::InputPin>::iterator end = getInputValue()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //13328			
+			return eAnyBag(getInputValue(),567201991); //13328
 		}
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
@@ -570,72 +544,74 @@ bool LinkActionImpl::eSet(int featureID, Any newValue)
 		case uml::umlPackage::LINKACTION_ATTRIBUTE_ENDDATA:
 		{
 			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::LinkEndData>> endDataList(new Bag<uml::LinkEndData>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
+			if((newValue->isContainer()) && (uml::umlPackage::LINKENDDATA_CLASS ==newValue->getTypeId()))
 			{
-				endDataList->add(std::dynamic_pointer_cast<uml::LinkEndData>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::LinkEndData>::iterator iterEndData = getEndData()->begin();
-			Bag<uml::LinkEndData>::iterator endEndData = getEndData()->end();
-			while (iterEndData != endEndData)
-			{
-				if (endDataList->find(*iterEndData) == -1)
+				try
 				{
-					getEndData()->erase(*iterEndData);
+					std::shared_ptr<Bag<uml::LinkEndData>> endDataList= newValue->get<std::shared_ptr<Bag<uml::LinkEndData>>>();
+					std::shared_ptr<Bag<uml::LinkEndData>> _endData=getEndData();
+					for(const std::shared_ptr<uml::LinkEndData> indexEndData: *_endData)
+					{
+						if (endDataList->find(indexEndData) == -1)
+						{
+							_endData->erase(indexEndData);
+						}
+					}
+
+					for(const std::shared_ptr<uml::LinkEndData> indexEndData: *endDataList)
+					{
+						if (_endData->find(indexEndData) == -1)
+						{
+							_endData->add(indexEndData);
+						}
+					}
 				}
-				iterEndData++;
-			}
- 
-			iterEndData = endDataList->begin();
-			endEndData = endDataList->end();
-			while (iterEndData != endEndData)
-			{
-				if (getEndData()->find(*iterEndData) == -1)
+				catch(...)
 				{
-					getEndData()->add(*iterEndData);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterEndData++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}
 		case uml::umlPackage::LINKACTION_ATTRIBUTE_INPUTVALUE:
 		{
 			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::InputPin>> inputValueList(new Bag<uml::InputPin>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
+			if((newValue->isContainer()) && (uml::umlPackage::INPUTPIN_CLASS ==newValue->getTypeId()))
 			{
-				inputValueList->add(std::dynamic_pointer_cast<uml::InputPin>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::InputPin>::iterator iterInputValue = getInputValue()->begin();
-			Bag<uml::InputPin>::iterator endInputValue = getInputValue()->end();
-			while (iterInputValue != endInputValue)
-			{
-				if (inputValueList->find(*iterInputValue) == -1)
+				try
 				{
-					getInputValue()->erase(*iterInputValue);
+					std::shared_ptr<Bag<uml::InputPin>> inputValueList= newValue->get<std::shared_ptr<Bag<uml::InputPin>>>();
+					std::shared_ptr<Bag<uml::InputPin>> _inputValue=getInputValue();
+					for(const std::shared_ptr<uml::InputPin> indexInputValue: *_inputValue)
+					{
+						if (inputValueList->find(indexInputValue) == -1)
+						{
+							_inputValue->erase(indexInputValue);
+						}
+					}
+
+					for(const std::shared_ptr<uml::InputPin> indexInputValue: *inputValueList)
+					{
+						if (_inputValue->find(indexInputValue) == -1)
+						{
+							_inputValue->add(indexInputValue);
+						}
+					}
 				}
-				iterInputValue++;
-			}
- 
-			iterInputValue = inputValueList->begin();
-			endInputValue = inputValueList->end();
-			while (iterInputValue != endInputValue)
-			{
-				if (getInputValue()->find(*iterInputValue) == -1)
+				catch(...)
 				{
-					getInputValue()->add(*iterInputValue);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterInputValue++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}
@@ -647,68 +623,64 @@ bool LinkActionImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any LinkActionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any LinkActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
   	switch(operationID)
 	{
-		
-		// 1086747006
+		// uml::LinkAction::association() : uml::Association: 1086747006
 		case umlPackage::LINKACTION_OPERATION_ASSOCIATION:
 		{
-			result = eAny(this->association());
+			result = eAny(this->association(), umlPackage::ASSOCIATION_CLASS,false);
 			break;
 		}
-		
-		// 768493780
+		// uml::LinkAction::not_static(Any, std::map) : bool: 768493780
 		case umlPackage::LINKACTION_OPERATION_NOT_STATIC_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->not_static(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->not_static(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		
-		// 1355951104
+		// uml::LinkAction::same_association(Any, std::map) : bool: 1355951104
 		case umlPackage::LINKACTION_OPERATION_SAME_ASSOCIATION_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->same_association(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->same_association(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		
-		// 1475541173
+		// uml::LinkAction::same_pins(Any, std::map) : bool: 1475541173
 		case umlPackage::LINKACTION_OPERATION_SAME_PINS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->same_pins(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->same_pins(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
 
@@ -725,7 +697,6 @@ Any LinkActionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sh
 	return result;
 }
 
-
 std::shared_ptr<uml::LinkAction> LinkActionImpl::getThisLinkActionPtr() const
 {
 	return m_thisLinkActionPtr.lock();
@@ -735,3 +706,5 @@ void LinkActionImpl::setThisLinkActionPtr(std::weak_ptr<uml::LinkAction> thisLin
 	m_thisLinkActionPtr = thisLinkActionPtr;
 	setThisActionPtr(thisLinkActionPtr);
 }
+
+

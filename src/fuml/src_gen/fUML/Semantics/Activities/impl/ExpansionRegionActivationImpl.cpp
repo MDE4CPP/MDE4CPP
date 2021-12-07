@@ -41,8 +41,8 @@
 
 #include <exception> // used in Persistence
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
-#include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Actions/ActionsFactory.hpp"
+#include "uml/umlFactory.hpp"
 
 #include "uml/Action.hpp"
 #include "fUML/Semantics/Actions/ActionActivation.hpp"
@@ -59,8 +59,8 @@
 #include "fUML/Semantics/Activities/TokenSet.hpp"
 
 //Factories an Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -669,7 +669,7 @@ void ExpansionRegionActivationImpl::loadAttributes(std::shared_ptr<persistence::
 		{
 			// this attribute is a 'int'
 			int value;
-			std::istringstream ( iter->second ) >> value;
+			std::istringstream(iter->second) >> value;
 			this->setNext(value);
 		}
 		std::shared_ptr<ecore::EClass> metaClass = this->eClass(); // get MetaClass
@@ -796,12 +796,10 @@ void ExpansionRegionActivationImpl::saveContent(std::shared_ptr<persistence::int
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> ExpansionRegionActivationImpl::eStaticClass() const
 {
 	return fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getExpansionRegionActivation_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -847,7 +845,7 @@ Any ExpansionRegionActivationImpl::eGet(int featureID, bool resolve, bool coreTy
 			return eAny(tempList); //5111			
 		}
 		case fUML::Semantics::Activities::ActivitiesPackage::EXPANSIONREGIONACTIVATION_ATTRIBUTE_NEXT:
-			return eAny(getNext()); //5114
+				return eAny(getNext(),0,true); //5114
 	}
 	return fUML::Semantics::Actions::ActionActivationImpl::eGet(featureID, resolve, coreType);
 }
@@ -995,7 +993,7 @@ bool ExpansionRegionActivationImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ExpansionRegionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any ExpansionRegionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -1029,23 +1027,23 @@ Any ExpansionRegionActivationImpl::eInvoke(int operationID, std::shared_ptr<std:
 			//Retrieve input parameter 'node'
 			//parameter 0
 			std::shared_ptr<uml::ExpansionNode> incoming_param_node;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_node_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_node = (*incoming_param_node_arguments_citer)->get()->get<std::shared_ptr<uml::ExpansionNode> >();
-			result = eAny(this->getExpansionNodeActivation(incoming_param_node));
+			std::list<Any>::const_iterator incoming_param_node_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_node = (*incoming_param_node_arguments_citer)->get<std::shared_ptr<uml::ExpansionNode> >();
+				result = eAny(this->getExpansionNodeActivation(incoming_param_node));
 			break;
 		}
 		
 		// 1266640523
 		case ActivitiesPackage::EXPANSIONREGIONACTIVATION_OPERATION_ISSUSPENDED:
 		{
-			result = eAny(this->isSuspended());
+					result = eAny(this->isSuspended(),0,false);
 			break;
 		}
 		
 		// 1919951608
 		case ActivitiesPackage::EXPANSIONREGIONACTIVATION_OPERATION_NUMBEROFVALUES:
 		{
-			result = eAny(this->numberOfValues());
+					result = eAny(this->numberOfValues(),0,false);
 			break;
 		}
 		
@@ -1055,8 +1053,8 @@ Any ExpansionRegionActivationImpl::eInvoke(int operationID, std::shared_ptr<std:
 			//Retrieve input parameter 'activationGroup'
 			//parameter 0
 			std::shared_ptr<fUML::Semantics::Activities::ExpansionActivationGroup> incoming_param_activationGroup;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_activationGroup_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_activationGroup = (*incoming_param_activationGroup_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::Activities::ExpansionActivationGroup> >();
+			std::list<Any>::const_iterator incoming_param_activationGroup_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_activationGroup = (*incoming_param_activationGroup_arguments_citer)->get<std::shared_ptr<fUML::Semantics::Activities::ExpansionActivationGroup> >();
 			this->resume(incoming_param_activationGroup);
 			break;
 		}
@@ -1067,8 +1065,8 @@ Any ExpansionRegionActivationImpl::eInvoke(int operationID, std::shared_ptr<std:
 			//Retrieve input parameter 'activationGroup'
 			//parameter 0
 			std::shared_ptr<fUML::Semantics::Activities::ExpansionActivationGroup> incoming_param_activationGroup;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_activationGroup_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_activationGroup = (*incoming_param_activationGroup_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::Activities::ExpansionActivationGroup> >();
+			std::list<Any>::const_iterator incoming_param_activationGroup_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_activationGroup = (*incoming_param_activationGroup_arguments_citer)->get<std::shared_ptr<fUML::Semantics::Activities::ExpansionActivationGroup> >();
 			this->runGroup(incoming_param_activationGroup);
 			break;
 		}
@@ -1097,7 +1095,7 @@ Any ExpansionRegionActivationImpl::eInvoke(int operationID, std::shared_ptr<std:
 		// 1467051328
 		case ActivitiesPackage::EXPANSIONREGIONACTIVATION_OPERATION_TAKEOFFEREDTOKENS:
 		{
-			result = eAny(this->takeOfferedTokens());
+				result = eAny(this->takeOfferedTokens());
 			break;
 		}
 		
@@ -1114,8 +1112,8 @@ Any ExpansionRegionActivationImpl::eInvoke(int operationID, std::shared_ptr<std:
 			//Retrieve input parameter 'activationGroup'
 			//parameter 0
 			std::shared_ptr<fUML::Semantics::Activities::ExpansionActivationGroup> incoming_param_activationGroup;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_activationGroup_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_activationGroup = (*incoming_param_activationGroup_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::Activities::ExpansionActivationGroup> >();
+			std::list<Any>::const_iterator incoming_param_activationGroup_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_activationGroup = (*incoming_param_activationGroup_arguments_citer)->get<std::shared_ptr<fUML::Semantics::Activities::ExpansionActivationGroup> >();
 			this->terminateGroup(incoming_param_activationGroup);
 			break;
 		}
@@ -1133,7 +1131,6 @@ Any ExpansionRegionActivationImpl::eInvoke(int operationID, std::shared_ptr<std:
 	return result;
 }
 
-
 std::shared_ptr<fUML::Semantics::Activities::ExpansionRegionActivation> ExpansionRegionActivationImpl::getThisExpansionRegionActivationPtr() const
 {
 	return m_thisExpansionRegionActivationPtr.lock();
@@ -1143,3 +1140,5 @@ void ExpansionRegionActivationImpl::setThisExpansionRegionActivationPtr(std::wea
 	m_thisExpansionRegionActivationPtr = thisExpansionRegionActivationPtr;
 	setThisActionActivationPtr(thisExpansionRegionActivationPtr);
 }
+
+

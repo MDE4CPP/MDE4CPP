@@ -49,8 +49,8 @@
 #include "fUML/Semantics/Activities/Token.hpp"
 
 //Factories an Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -359,12 +359,10 @@ void ConditionalNodeActivationImpl::saveContent(std::shared_ptr<persistence::int
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> ConditionalNodeActivationImpl::eStaticClass() const
 {
 	return fUML::Semantics::Actions::ActionsPackage::eInstance()->getConditionalNodeActivation_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -497,7 +495,7 @@ bool ConditionalNodeActivationImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ConditionalNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any ConditionalNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -510,9 +508,9 @@ Any ConditionalNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std:
 			//Retrieve input parameter 'clause'
 			//parameter 0
 			std::shared_ptr<uml::Clause> incoming_param_clause;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_clause_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_clause = (*incoming_param_clause_arguments_citer)->get()->get<std::shared_ptr<uml::Clause> >();
-			result = eAny(this->getClauseActivation(incoming_param_clause));
+			std::list<Any>::const_iterator incoming_param_clause_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_clause = (*incoming_param_clause_arguments_citer)->get<std::shared_ptr<uml::Clause> >();
+				result = eAny(this->getClauseActivation(incoming_param_clause));
 			break;
 		}
 		
@@ -522,8 +520,8 @@ Any ConditionalNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std:
 			//Retrieve input parameter 'clause'
 			//parameter 0
 			std::shared_ptr<uml::Clause> incoming_param_clause;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_clause_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_clause = (*incoming_param_clause_arguments_citer)->get()->get<std::shared_ptr<uml::Clause> >();
+			std::list<Any>::const_iterator incoming_param_clause_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_clause = (*incoming_param_clause_arguments_citer)->get<std::shared_ptr<uml::Clause> >();
 			this->runTest(incoming_param_clause);
 			break;
 		}
@@ -534,8 +532,8 @@ Any ConditionalNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std:
 			//Retrieve input parameter 'clause'
 			//parameter 0
 			std::shared_ptr<uml::Clause> incoming_param_clause;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_clause_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_clause = (*incoming_param_clause_arguments_citer)->get()->get<std::shared_ptr<uml::Clause> >();
+			std::list<Any>::const_iterator incoming_param_clause_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_clause = (*incoming_param_clause_arguments_citer)->get<std::shared_ptr<uml::Clause> >();
 			this->selectBody(incoming_param_clause);
 			break;
 		}
@@ -553,7 +551,6 @@ Any ConditionalNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std:
 	return result;
 }
 
-
 std::shared_ptr<fUML::Semantics::Actions::ConditionalNodeActivation> ConditionalNodeActivationImpl::getThisConditionalNodeActivationPtr() const
 {
 	return m_thisConditionalNodeActivationPtr.lock();
@@ -563,3 +560,5 @@ void ConditionalNodeActivationImpl::setThisConditionalNodeActivationPtr(std::wea
 	m_thisConditionalNodeActivationPtr = thisConditionalNodeActivationPtr;
 	setThisStructuredActivityNodeActivationPtr(thisConditionalNodeActivationPtr);
 }
+
+

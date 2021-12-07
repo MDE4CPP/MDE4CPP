@@ -35,8 +35,8 @@
 #include "fUML/Semantics/Loci/SemanticStrategy.hpp"
 
 //Factories an Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
 
 
@@ -189,12 +189,10 @@ void ChoiceStrategyImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> ChoiceStrategyImpl::eStaticClass() const
 {
 	return fUML::Semantics::Loci::LociPackage::eInstance()->getChoiceStrategy_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -227,7 +225,7 @@ bool ChoiceStrategyImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ChoiceStrategyImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any ChoiceStrategyImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -240,16 +238,16 @@ Any ChoiceStrategyImpl::eInvoke(int operationID, std::shared_ptr<std::list < std
 			//Retrieve input parameter 'size'
 			//parameter 0
 			int incoming_param_size;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_size_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_size = (*incoming_param_size_arguments_citer)->get()->get<int >();
-			result = eAny(this->choose(incoming_param_size));
+			std::list<Any>::const_iterator incoming_param_size_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_size = (*incoming_param_size_arguments_citer)->get<int >();
+					result = eAny(this->choose(incoming_param_size),0,false);
 			break;
 		}
 		
 		// 1727304580
 		case LociPackage::CHOICESTRATEGY_OPERATION_GETNAME:
 		{
-			result = eAny(this->getName());
+					result = eAny(this->getName(),0,false);
 			break;
 		}
 
@@ -266,7 +264,6 @@ Any ChoiceStrategyImpl::eInvoke(int operationID, std::shared_ptr<std::list < std
 	return result;
 }
 
-
 std::shared_ptr<fUML::Semantics::Loci::ChoiceStrategy> ChoiceStrategyImpl::getThisChoiceStrategyPtr() const
 {
 	return m_thisChoiceStrategyPtr.lock();
@@ -276,3 +273,5 @@ void ChoiceStrategyImpl::setThisChoiceStrategyPtr(std::weak_ptr<fUML::Semantics:
 	m_thisChoiceStrategyPtr = thisChoiceStrategyPtr;
 	setThisSemanticStrategyPtr(thisChoiceStrategyPtr);
 }
+
+

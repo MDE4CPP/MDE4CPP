@@ -49,8 +49,8 @@
 #include "fUML/Semantics/Values/Value.hpp"
 
 //Factories an Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersPackage.hpp"
 #include "fUML/Semantics/Values/ValuesPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -282,12 +282,10 @@ void DataValueImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHa
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> DataValueImpl::eStaticClass() const
 {
 	return fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::eInstance()->getDataValue_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -299,7 +297,7 @@ Any DataValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::DATAVALUE_ATTRIBUTE_TYPE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getType();
-			return eAny(returnValue); //361
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //361
 		}
 	}
 	return CompoundValueImpl::eGet(featureID, resolve, coreType);
@@ -335,7 +333,7 @@ bool DataValueImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any DataValueImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any DataValueImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -345,21 +343,21 @@ Any DataValueImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sha
 		// 1504394808
 		case SimpleClassifiersPackage::DATAVALUE_OPERATION__COPY:
 		{
-			result = eAny(this->_copy());
+				result = eAny(this->_copy());
 			break;
 		}
 		
 		// 133859574
 		case SimpleClassifiersPackage::DATAVALUE_OPERATION_GETTYPES:
 		{
-			result = eAny(this->getTypes());
+				result = eAny(this->getTypes());
 			break;
 		}
 		
 		// 2084136138
 		case SimpleClassifiersPackage::DATAVALUE_OPERATION_NEW_:
 		{
-			result = eAny(this->new_());
+				result = eAny(this->new_());
 			break;
 		}
 
@@ -376,7 +374,6 @@ Any DataValueImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sha
 	return result;
 }
 
-
 std::shared_ptr<fUML::Semantics::SimpleClassifiers::DataValue> DataValueImpl::getThisDataValuePtr() const
 {
 	return m_thisDataValuePtr.lock();
@@ -386,3 +383,5 @@ void DataValueImpl::setThisDataValuePtr(std::weak_ptr<fUML::Semantics::SimpleCla
 	m_thisDataValuePtr = thisDataValuePtr;
 	setThisCompoundValuePtr(thisDataValuePtr);
 }
+
+

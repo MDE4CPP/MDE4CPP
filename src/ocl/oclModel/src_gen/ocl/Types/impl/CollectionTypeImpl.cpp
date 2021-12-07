@@ -32,8 +32,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "ecore/ecoreFactory.hpp"
 #include "ocl/Values/ValuesFactory.hpp"
+#include "ecore/ecoreFactory.hpp"
 
 #include "ocl/Types/CollectionType.hpp"
 #include "ocl/Values/CollectionValue.hpp"
@@ -317,12 +317,10 @@ void CollectionTypeImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> CollectionTypeImpl::eStaticClass() const
 {
 	return ocl::Types::TypesPackage::eInstance()->getCollectionType_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -334,12 +332,12 @@ Any CollectionTypeImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case ocl::Types::TypesPackage::COLLECTIONTYPE_ATTRIBUTE_ELEMENTTYPE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getElementType();
-			return eAny(returnValue); //219
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //219
 		}
 		case ocl::Types::TypesPackage::COLLECTIONTYPE_ATTRIBUTE_INSTANCE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getInstance();
-			return eAny(returnValue); //2110
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //2110
 		}
 	}
 	return ecore::EDataTypeImpl::eGet(featureID, resolve, coreType);
@@ -385,7 +383,7 @@ bool CollectionTypeImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any CollectionTypeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any CollectionTypeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -398,9 +396,9 @@ Any CollectionTypeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std
 			//Retrieve input parameter 'coll'
 			//parameter 0
 			std::shared_ptr<ocl::Types::CollectionType> incoming_param_coll;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_coll_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_coll = (*incoming_param_coll_arguments_citer)->get()->get<std::shared_ptr<ocl::Types::CollectionType> >();
-			result = eAny(this->kindOf(incoming_param_coll));
+			std::list<Any>::const_iterator incoming_param_coll_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_coll = (*incoming_param_coll_arguments_citer)->get<std::shared_ptr<ocl::Types::CollectionType> >();
+					result = eAny(this->kindOf(incoming_param_coll),0,false);
 			break;
 		}
 
@@ -417,7 +415,6 @@ Any CollectionTypeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std
 	return result;
 }
 
-
 std::shared_ptr<ocl::Types::CollectionType> CollectionTypeImpl::getThisCollectionTypePtr() const
 {
 	return m_thisCollectionTypePtr.lock();
@@ -427,3 +424,5 @@ void CollectionTypeImpl::setThisCollectionTypePtr(std::weak_ptr<ocl::Types::Coll
 	m_thisCollectionTypePtr = thisCollectionTypePtr;
 	setThisEDataTypePtr(thisCollectionTypePtr);
 }
+
+

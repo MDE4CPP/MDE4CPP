@@ -123,14 +123,10 @@ TemplateableElementImpl& TemplateableElementImpl::operator=(const TemplateableEl
 			std::cout << "Initialising value Subset: " << "m_templateBinding - Subset<uml::TemplateBinding, uml::Element >(getOwnedElement())" << std::endl;
 		#endif
 		
-
-		Bag<uml::TemplateBinding>::iterator templateBindingIter = templateBindingList->begin();
-		Bag<uml::TemplateBinding>::iterator templateBindingEnd = templateBindingList->end();
-		while (templateBindingIter != templateBindingEnd) 
+		for(const std::shared_ptr<uml::TemplateBinding> templateBindingindexElem: *templateBindingList) 
 		{
-			std::shared_ptr<uml::TemplateBinding> temp = std::dynamic_pointer_cast<uml::TemplateBinding>((*templateBindingIter)->copy());
-			getTemplateBinding()->push_back(temp);
-			templateBindingIter++;
+			std::shared_ptr<uml::TemplateBinding> temp = std::dynamic_pointer_cast<uml::TemplateBinding>((templateBindingindexElem)->copy());
+			m_templateBinding->push_back(temp);
 		}
 	}
 	else
@@ -337,12 +333,10 @@ void TemplateableElementImpl::saveContent(std::shared_ptr<persistence::interface
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> TemplateableElementImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getTemplateableElement_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -354,19 +348,11 @@ Any TemplateableElementImpl::eGet(int featureID, bool resolve, bool coreType) co
 		case uml::umlPackage::TEMPLATEABLEELEMENT_ATTRIBUTE_OWNEDTEMPLATESIGNATURE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getOwnedTemplateSignature();
-			return eAny(returnValue); //2344
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //2344
 		}
 		case uml::umlPackage::TEMPLATEABLEELEMENT_ATTRIBUTE_TEMPLATEBINDING:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::TemplateBinding>::iterator iter = getTemplateBinding()->begin();
-			Bag<uml::TemplateBinding>::iterator end = getTemplateBinding()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //2343			
+			return eAnyBag(getTemplateBinding(),1915279636); //2343
 		}
 	}
 	return ElementImpl::eGet(featureID, resolve, coreType);
@@ -399,36 +385,37 @@ bool TemplateableElementImpl::eSet(int featureID, Any newValue)
 		case uml::umlPackage::TEMPLATEABLEELEMENT_ATTRIBUTE_TEMPLATEBINDING:
 		{
 			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::TemplateBinding>> templateBindingList(new Bag<uml::TemplateBinding>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
+			if((newValue->isContainer()) && (uml::umlPackage::TEMPLATEBINDING_CLASS ==newValue->getTypeId()))
 			{
-				templateBindingList->add(std::dynamic_pointer_cast<uml::TemplateBinding>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::TemplateBinding>::iterator iterTemplateBinding = getTemplateBinding()->begin();
-			Bag<uml::TemplateBinding>::iterator endTemplateBinding = getTemplateBinding()->end();
-			while (iterTemplateBinding != endTemplateBinding)
-			{
-				if (templateBindingList->find(*iterTemplateBinding) == -1)
+				try
 				{
-					getTemplateBinding()->erase(*iterTemplateBinding);
+					std::shared_ptr<Bag<uml::TemplateBinding>> templateBindingList= newValue->get<std::shared_ptr<Bag<uml::TemplateBinding>>>();
+					std::shared_ptr<Bag<uml::TemplateBinding>> _templateBinding=getTemplateBinding();
+					for(const std::shared_ptr<uml::TemplateBinding> indexTemplateBinding: *_templateBinding)
+					{
+						if (templateBindingList->find(indexTemplateBinding) == -1)
+						{
+							_templateBinding->erase(indexTemplateBinding);
+						}
+					}
+
+					for(const std::shared_ptr<uml::TemplateBinding> indexTemplateBinding: *templateBindingList)
+					{
+						if (_templateBinding->find(indexTemplateBinding) == -1)
+						{
+							_templateBinding->add(indexTemplateBinding);
+						}
+					}
 				}
-				iterTemplateBinding++;
-			}
- 
-			iterTemplateBinding = templateBindingList->begin();
-			endTemplateBinding = templateBindingList->end();
-			while (iterTemplateBinding != endTemplateBinding)
-			{
-				if (getTemplateBinding()->find(*iterTemplateBinding) == -1)
+				catch(...)
 				{
-					getTemplateBinding()->add(*iterTemplateBinding);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterTemplateBinding++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}
@@ -440,24 +427,23 @@ bool TemplateableElementImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any TemplateableElementImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any TemplateableElementImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
   	switch(operationID)
 	{
-		
-		// 175010214
+		// uml::TemplateableElement::isTemplate() : bool: 175010214
 		case umlPackage::TEMPLATEABLEELEMENT_OPERATION_ISTEMPLATE:
 		{
-			result = eAny(this->isTemplate());
+			result = eAny(this->isTemplate(),0,false);
 			break;
 		}
-		
-		// 546853023
+		// uml::TemplateableElement::parameterableElements() : uml::ParameterableElement[*]: 546853023
 		case umlPackage::TEMPLATEABLEELEMENT_OPERATION_PARAMETERABLEELEMENTS:
 		{
-			result = eAny(this->parameterableElements());
+			std::shared_ptr<Bag<uml::ParameterableElement> > resultList = this->parameterableElements();
+			return eAny(resultList,umlPackage::PARAMETERABLEELEMENT_CLASS,true);
 			break;
 		}
 
@@ -474,7 +460,6 @@ Any TemplateableElementImpl::eInvoke(int operationID, std::shared_ptr<std::list 
 	return result;
 }
 
-
 std::shared_ptr<uml::TemplateableElement> TemplateableElementImpl::getThisTemplateableElementPtr() const
 {
 	return m_thisTemplateableElementPtr.lock();
@@ -484,3 +469,5 @@ void TemplateableElementImpl::setThisTemplateableElementPtr(std::weak_ptr<uml::T
 	m_thisTemplateableElementPtr = thisTemplateableElementPtr;
 	setThisElementPtr(thisTemplateableElementPtr);
 }
+
+

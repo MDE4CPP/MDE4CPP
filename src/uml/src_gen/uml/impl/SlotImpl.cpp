@@ -127,14 +127,10 @@ SlotImpl& SlotImpl::operator=(const SlotImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_value - Subset<uml::ValueSpecification, uml::Element >(getOwnedElement())" << std::endl;
 		#endif
 		
-
-		Bag<uml::ValueSpecification>::iterator valueIter = valueList->begin();
-		Bag<uml::ValueSpecification>::iterator valueEnd = valueList->end();
-		while (valueIter != valueEnd) 
+		for(const std::shared_ptr<uml::ValueSpecification> valueindexElem: *valueList) 
 		{
-			std::shared_ptr<uml::ValueSpecification> temp = std::dynamic_pointer_cast<uml::ValueSpecification>((*valueIter)->copy());
-			getValue()->push_back(temp);
-			valueIter++;
+			std::shared_ptr<uml::ValueSpecification> temp = std::dynamic_pointer_cast<uml::ValueSpecification>((valueindexElem)->copy());
+			m_value->push_back(temp);
 		}
 	}
 	else
@@ -387,12 +383,10 @@ void SlotImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> SlotImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getSlot_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -404,24 +398,16 @@ Any SlotImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::SLOT_ATTRIBUTE_DEFININGFEATURE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getDefiningFeature();
-			return eAny(returnValue); //2173
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //2173
 		}
 		case uml::umlPackage::SLOT_ATTRIBUTE_OWNINGINSTANCE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getOwningInstance().lock();
-			return eAny(returnValue); //2175
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //2175
 		}
 		case uml::umlPackage::SLOT_ATTRIBUTE_VALUE:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::ValueSpecification>::iterator iter = getValue()->begin();
-			Bag<uml::ValueSpecification>::iterator end = getValue()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //2174			
+			return eAnyBag(getValue(),1133099843); //2174
 		}
 	}
 	return ElementImpl::eGet(featureID, resolve, coreType);
@@ -464,36 +450,37 @@ bool SlotImpl::eSet(int featureID, Any newValue)
 		case uml::umlPackage::SLOT_ATTRIBUTE_VALUE:
 		{
 			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::ValueSpecification>> valueList(new Bag<uml::ValueSpecification>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
+			if((newValue->isContainer()) && (uml::umlPackage::VALUESPECIFICATION_CLASS ==newValue->getTypeId()))
 			{
-				valueList->add(std::dynamic_pointer_cast<uml::ValueSpecification>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::ValueSpecification>::iterator iterValue = getValue()->begin();
-			Bag<uml::ValueSpecification>::iterator endValue = getValue()->end();
-			while (iterValue != endValue)
-			{
-				if (valueList->find(*iterValue) == -1)
+				try
 				{
-					getValue()->erase(*iterValue);
+					std::shared_ptr<Bag<uml::ValueSpecification>> valueList= newValue->get<std::shared_ptr<Bag<uml::ValueSpecification>>>();
+					std::shared_ptr<Bag<uml::ValueSpecification>> _value=getValue();
+					for(const std::shared_ptr<uml::ValueSpecification> indexValue: *_value)
+					{
+						if (valueList->find(indexValue) == -1)
+						{
+							_value->erase(indexValue);
+						}
+					}
+
+					for(const std::shared_ptr<uml::ValueSpecification> indexValue: *valueList)
+					{
+						if (_value->find(indexValue) == -1)
+						{
+							_value->add(indexValue);
+						}
+					}
 				}
-				iterValue++;
-			}
- 
-			iterValue = valueList->begin();
-			endValue = valueList->end();
-			while (iterValue != endValue)
-			{
-				if (getValue()->find(*iterValue) == -1)
+				catch(...)
 				{
-					getValue()->add(*iterValue);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterValue++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}
@@ -505,7 +492,7 @@ bool SlotImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any SlotImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any SlotImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -525,7 +512,6 @@ Any SlotImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_p
 	return result;
 }
 
-
 std::shared_ptr<uml::Slot> SlotImpl::getThisSlotPtr() const
 {
 	return m_thisSlotPtr.lock();
@@ -535,3 +521,5 @@ void SlotImpl::setThisSlotPtr(std::weak_ptr<uml::Slot> thisSlotPtr)
 	m_thisSlotPtr = thisSlotPtr;
 	setThisElementPtr(thisSlotPtr);
 }
+
+

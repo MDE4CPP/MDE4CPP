@@ -158,14 +158,10 @@ InformationFlowImpl& InformationFlowImpl::operator=(const InformationFlowImpl & 
 			std::cout << "Initialising value Subset: " << "m_informationSource - Subset<uml::NamedElement, uml::Element >(getSource())" << std::endl;
 		#endif
 		
-
-		Bag<uml::NamedElement>::iterator informationSourceIter = informationSourceList->begin();
-		Bag<uml::NamedElement>::iterator informationSourceEnd = informationSourceList->end();
-		while (informationSourceIter != informationSourceEnd) 
+		for(const std::shared_ptr<uml::NamedElement> informationSourceindexElem: *informationSourceList) 
 		{
-			std::shared_ptr<uml::NamedElement> temp = std::dynamic_pointer_cast<uml::NamedElement>((*informationSourceIter)->copy());
-			getInformationSource()->push_back(temp);
-			informationSourceIter++;
+			std::shared_ptr<uml::NamedElement> temp = std::dynamic_pointer_cast<uml::NamedElement>((informationSourceindexElem)->copy());
+			m_informationSource->push_back(temp);
 		}
 	}
 	else
@@ -189,14 +185,10 @@ InformationFlowImpl& InformationFlowImpl::operator=(const InformationFlowImpl & 
 			std::cout << "Initialising value Subset: " << "m_informationTarget - Subset<uml::NamedElement, uml::Element >(getTarget())" << std::endl;
 		#endif
 		
-
-		Bag<uml::NamedElement>::iterator informationTargetIter = informationTargetList->begin();
-		Bag<uml::NamedElement>::iterator informationTargetEnd = informationTargetList->end();
-		while (informationTargetIter != informationTargetEnd) 
+		for(const std::shared_ptr<uml::NamedElement> informationTargetindexElem: *informationTargetList) 
 		{
-			std::shared_ptr<uml::NamedElement> temp = std::dynamic_pointer_cast<uml::NamedElement>((*informationTargetIter)->copy());
-			getInformationTarget()->push_back(temp);
-			informationTargetIter++;
+			std::shared_ptr<uml::NamedElement> temp = std::dynamic_pointer_cast<uml::NamedElement>((informationTargetindexElem)->copy());
+			m_informationTarget->push_back(temp);
 		}
 	}
 	else
@@ -695,12 +687,10 @@ void InformationFlowImpl::saveContent(std::shared_ptr<persistence::interfaces::X
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> InformationFlowImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getInformationFlow_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -711,87 +701,31 @@ Any InformationFlowImpl::eGet(int featureID, bool resolve, bool coreType) const
 	{
 		case uml::umlPackage::INFORMATIONFLOW_ATTRIBUTE_CONVEYED:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Classifier>::iterator iter = getConveyed()->begin();
-			Bag<uml::Classifier>::iterator end = getConveyed()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //11315			
+			return eAnyBag(getConveyed(),845259359); //11315
 		}
 		case uml::umlPackage::INFORMATIONFLOW_ATTRIBUTE_INFORMATIONSOURCE:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::NamedElement>::iterator iter = getInformationSource()->begin();
-			Bag<uml::NamedElement>::iterator end = getInformationSource()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //11316			
+			return eAnyBag(getInformationSource(),591414745); //11316
 		}
 		case uml::umlPackage::INFORMATIONFLOW_ATTRIBUTE_INFORMATIONTARGET:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::NamedElement>::iterator iter = getInformationTarget()->begin();
-			Bag<uml::NamedElement>::iterator end = getInformationTarget()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //11317			
+			return eAnyBag(getInformationTarget(),591414745); //11317
 		}
 		case uml::umlPackage::INFORMATIONFLOW_ATTRIBUTE_REALIZATION:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Relationship>::iterator iter = getRealization()->begin();
-			Bag<uml::Relationship>::iterator end = getRealization()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //11318			
+			return eAnyBag(getRealization(),138854523); //11318
 		}
 		case uml::umlPackage::INFORMATIONFLOW_ATTRIBUTE_REALIZINGACTIVITYEDGE:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::ActivityEdge>::iterator iter = getRealizingActivityEdge()->begin();
-			Bag<uml::ActivityEdge>::iterator end = getRealizingActivityEdge()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //11319			
+			return eAnyBag(getRealizingActivityEdge(),583468403); //11319
 		}
 		case uml::umlPackage::INFORMATIONFLOW_ATTRIBUTE_REALIZINGCONNECTOR:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Connector>::iterator iter = getRealizingConnector()->begin();
-			Bag<uml::Connector>::iterator end = getRealizingConnector()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //11320			
+			return eAnyBag(getRealizingConnector(),836776355); //11320
 		}
 		case uml::umlPackage::INFORMATIONFLOW_ATTRIBUTE_REALIZINGMESSAGE:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Message>::iterator iter = getRealizingMessage()->begin();
-			Bag<uml::Message>::iterator end = getRealizingMessage()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //11321			
+			return eAnyBag(getRealizingMessage(),1063279310); //11321
 		}
 	}
 	Any result;
@@ -840,252 +774,259 @@ bool InformationFlowImpl::eSet(int featureID, Any newValue)
 		case uml::umlPackage::INFORMATIONFLOW_ATTRIBUTE_CONVEYED:
 		{
 			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::Classifier>> conveyedList(new Bag<uml::Classifier>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
+			if((newValue->isContainer()) && (uml::umlPackage::CLASSIFIER_CLASS ==newValue->getTypeId()))
 			{
-				conveyedList->add(std::dynamic_pointer_cast<uml::Classifier>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::Classifier>::iterator iterConveyed = getConveyed()->begin();
-			Bag<uml::Classifier>::iterator endConveyed = getConveyed()->end();
-			while (iterConveyed != endConveyed)
-			{
-				if (conveyedList->find(*iterConveyed) == -1)
+				try
 				{
-					getConveyed()->erase(*iterConveyed);
+					std::shared_ptr<Bag<uml::Classifier>> conveyedList= newValue->get<std::shared_ptr<Bag<uml::Classifier>>>();
+					std::shared_ptr<Bag<uml::Classifier>> _conveyed=getConveyed();
+					for(const std::shared_ptr<uml::Classifier> indexConveyed: *_conveyed)
+					{
+						if (conveyedList->find(indexConveyed) == -1)
+						{
+							_conveyed->erase(indexConveyed);
+						}
+					}
+
+					for(const std::shared_ptr<uml::Classifier> indexConveyed: *conveyedList)
+					{
+						if (_conveyed->find(indexConveyed) == -1)
+						{
+							_conveyed->add(indexConveyed);
+						}
+					}
 				}
-				iterConveyed++;
-			}
- 
-			iterConveyed = conveyedList->begin();
-			endConveyed = conveyedList->end();
-			while (iterConveyed != endConveyed)
-			{
-				if (getConveyed()->find(*iterConveyed) == -1)
+				catch(...)
 				{
-					getConveyed()->add(*iterConveyed);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterConveyed++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}
 		case uml::umlPackage::INFORMATIONFLOW_ATTRIBUTE_INFORMATIONSOURCE:
 		{
 			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::NamedElement>> informationSourceList(new Bag<uml::NamedElement>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
+			if((newValue->isContainer()) && (uml::umlPackage::NAMEDELEMENT_CLASS ==newValue->getTypeId()))
 			{
-				informationSourceList->add(std::dynamic_pointer_cast<uml::NamedElement>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::NamedElement>::iterator iterInformationSource = getInformationSource()->begin();
-			Bag<uml::NamedElement>::iterator endInformationSource = getInformationSource()->end();
-			while (iterInformationSource != endInformationSource)
-			{
-				if (informationSourceList->find(*iterInformationSource) == -1)
+				try
 				{
-					getInformationSource()->erase(*iterInformationSource);
+					std::shared_ptr<Bag<uml::NamedElement>> informationSourceList= newValue->get<std::shared_ptr<Bag<uml::NamedElement>>>();
+					std::shared_ptr<Bag<uml::NamedElement>> _informationSource=getInformationSource();
+					for(const std::shared_ptr<uml::NamedElement> indexInformationSource: *_informationSource)
+					{
+						if (informationSourceList->find(indexInformationSource) == -1)
+						{
+							_informationSource->erase(indexInformationSource);
+						}
+					}
+
+					for(const std::shared_ptr<uml::NamedElement> indexInformationSource: *informationSourceList)
+					{
+						if (_informationSource->find(indexInformationSource) == -1)
+						{
+							_informationSource->add(indexInformationSource);
+						}
+					}
 				}
-				iterInformationSource++;
-			}
- 
-			iterInformationSource = informationSourceList->begin();
-			endInformationSource = informationSourceList->end();
-			while (iterInformationSource != endInformationSource)
-			{
-				if (getInformationSource()->find(*iterInformationSource) == -1)
+				catch(...)
 				{
-					getInformationSource()->add(*iterInformationSource);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterInformationSource++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}
 		case uml::umlPackage::INFORMATIONFLOW_ATTRIBUTE_INFORMATIONTARGET:
 		{
 			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::NamedElement>> informationTargetList(new Bag<uml::NamedElement>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
+			if((newValue->isContainer()) && (uml::umlPackage::NAMEDELEMENT_CLASS ==newValue->getTypeId()))
 			{
-				informationTargetList->add(std::dynamic_pointer_cast<uml::NamedElement>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::NamedElement>::iterator iterInformationTarget = getInformationTarget()->begin();
-			Bag<uml::NamedElement>::iterator endInformationTarget = getInformationTarget()->end();
-			while (iterInformationTarget != endInformationTarget)
-			{
-				if (informationTargetList->find(*iterInformationTarget) == -1)
+				try
 				{
-					getInformationTarget()->erase(*iterInformationTarget);
+					std::shared_ptr<Bag<uml::NamedElement>> informationTargetList= newValue->get<std::shared_ptr<Bag<uml::NamedElement>>>();
+					std::shared_ptr<Bag<uml::NamedElement>> _informationTarget=getInformationTarget();
+					for(const std::shared_ptr<uml::NamedElement> indexInformationTarget: *_informationTarget)
+					{
+						if (informationTargetList->find(indexInformationTarget) == -1)
+						{
+							_informationTarget->erase(indexInformationTarget);
+						}
+					}
+
+					for(const std::shared_ptr<uml::NamedElement> indexInformationTarget: *informationTargetList)
+					{
+						if (_informationTarget->find(indexInformationTarget) == -1)
+						{
+							_informationTarget->add(indexInformationTarget);
+						}
+					}
 				}
-				iterInformationTarget++;
-			}
- 
-			iterInformationTarget = informationTargetList->begin();
-			endInformationTarget = informationTargetList->end();
-			while (iterInformationTarget != endInformationTarget)
-			{
-				if (getInformationTarget()->find(*iterInformationTarget) == -1)
+				catch(...)
 				{
-					getInformationTarget()->add(*iterInformationTarget);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterInformationTarget++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}
 		case uml::umlPackage::INFORMATIONFLOW_ATTRIBUTE_REALIZATION:
 		{
 			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::Relationship>> realizationList(new Bag<uml::Relationship>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
+			if((newValue->isContainer()) && (uml::umlPackage::RELATIONSHIP_CLASS ==newValue->getTypeId()))
 			{
-				realizationList->add(std::dynamic_pointer_cast<uml::Relationship>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::Relationship>::iterator iterRealization = getRealization()->begin();
-			Bag<uml::Relationship>::iterator endRealization = getRealization()->end();
-			while (iterRealization != endRealization)
-			{
-				if (realizationList->find(*iterRealization) == -1)
+				try
 				{
-					getRealization()->erase(*iterRealization);
+					std::shared_ptr<Bag<uml::Relationship>> realizationList= newValue->get<std::shared_ptr<Bag<uml::Relationship>>>();
+					std::shared_ptr<Bag<uml::Relationship>> _realization=getRealization();
+					for(const std::shared_ptr<uml::Relationship> indexRealization: *_realization)
+					{
+						if (realizationList->find(indexRealization) == -1)
+						{
+							_realization->erase(indexRealization);
+						}
+					}
+
+					for(const std::shared_ptr<uml::Relationship> indexRealization: *realizationList)
+					{
+						if (_realization->find(indexRealization) == -1)
+						{
+							_realization->add(indexRealization);
+						}
+					}
 				}
-				iterRealization++;
-			}
- 
-			iterRealization = realizationList->begin();
-			endRealization = realizationList->end();
-			while (iterRealization != endRealization)
-			{
-				if (getRealization()->find(*iterRealization) == -1)
+				catch(...)
 				{
-					getRealization()->add(*iterRealization);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterRealization++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}
 		case uml::umlPackage::INFORMATIONFLOW_ATTRIBUTE_REALIZINGACTIVITYEDGE:
 		{
 			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::ActivityEdge>> realizingActivityEdgeList(new Bag<uml::ActivityEdge>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
+			if((newValue->isContainer()) && (uml::umlPackage::ACTIVITYEDGE_CLASS ==newValue->getTypeId()))
 			{
-				realizingActivityEdgeList->add(std::dynamic_pointer_cast<uml::ActivityEdge>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::ActivityEdge>::iterator iterRealizingActivityEdge = getRealizingActivityEdge()->begin();
-			Bag<uml::ActivityEdge>::iterator endRealizingActivityEdge = getRealizingActivityEdge()->end();
-			while (iterRealizingActivityEdge != endRealizingActivityEdge)
-			{
-				if (realizingActivityEdgeList->find(*iterRealizingActivityEdge) == -1)
+				try
 				{
-					getRealizingActivityEdge()->erase(*iterRealizingActivityEdge);
+					std::shared_ptr<Bag<uml::ActivityEdge>> realizingActivityEdgeList= newValue->get<std::shared_ptr<Bag<uml::ActivityEdge>>>();
+					std::shared_ptr<Bag<uml::ActivityEdge>> _realizingActivityEdge=getRealizingActivityEdge();
+					for(const std::shared_ptr<uml::ActivityEdge> indexRealizingActivityEdge: *_realizingActivityEdge)
+					{
+						if (realizingActivityEdgeList->find(indexRealizingActivityEdge) == -1)
+						{
+							_realizingActivityEdge->erase(indexRealizingActivityEdge);
+						}
+					}
+
+					for(const std::shared_ptr<uml::ActivityEdge> indexRealizingActivityEdge: *realizingActivityEdgeList)
+					{
+						if (_realizingActivityEdge->find(indexRealizingActivityEdge) == -1)
+						{
+							_realizingActivityEdge->add(indexRealizingActivityEdge);
+						}
+					}
 				}
-				iterRealizingActivityEdge++;
-			}
- 
-			iterRealizingActivityEdge = realizingActivityEdgeList->begin();
-			endRealizingActivityEdge = realizingActivityEdgeList->end();
-			while (iterRealizingActivityEdge != endRealizingActivityEdge)
-			{
-				if (getRealizingActivityEdge()->find(*iterRealizingActivityEdge) == -1)
+				catch(...)
 				{
-					getRealizingActivityEdge()->add(*iterRealizingActivityEdge);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterRealizingActivityEdge++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}
 		case uml::umlPackage::INFORMATIONFLOW_ATTRIBUTE_REALIZINGCONNECTOR:
 		{
 			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::Connector>> realizingConnectorList(new Bag<uml::Connector>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
+			if((newValue->isContainer()) && (uml::umlPackage::CONNECTOR_CLASS ==newValue->getTypeId()))
 			{
-				realizingConnectorList->add(std::dynamic_pointer_cast<uml::Connector>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::Connector>::iterator iterRealizingConnector = getRealizingConnector()->begin();
-			Bag<uml::Connector>::iterator endRealizingConnector = getRealizingConnector()->end();
-			while (iterRealizingConnector != endRealizingConnector)
-			{
-				if (realizingConnectorList->find(*iterRealizingConnector) == -1)
+				try
 				{
-					getRealizingConnector()->erase(*iterRealizingConnector);
+					std::shared_ptr<Bag<uml::Connector>> realizingConnectorList= newValue->get<std::shared_ptr<Bag<uml::Connector>>>();
+					std::shared_ptr<Bag<uml::Connector>> _realizingConnector=getRealizingConnector();
+					for(const std::shared_ptr<uml::Connector> indexRealizingConnector: *_realizingConnector)
+					{
+						if (realizingConnectorList->find(indexRealizingConnector) == -1)
+						{
+							_realizingConnector->erase(indexRealizingConnector);
+						}
+					}
+
+					for(const std::shared_ptr<uml::Connector> indexRealizingConnector: *realizingConnectorList)
+					{
+						if (_realizingConnector->find(indexRealizingConnector) == -1)
+						{
+							_realizingConnector->add(indexRealizingConnector);
+						}
+					}
 				}
-				iterRealizingConnector++;
-			}
- 
-			iterRealizingConnector = realizingConnectorList->begin();
-			endRealizingConnector = realizingConnectorList->end();
-			while (iterRealizingConnector != endRealizingConnector)
-			{
-				if (getRealizingConnector()->find(*iterRealizingConnector) == -1)
+				catch(...)
 				{
-					getRealizingConnector()->add(*iterRealizingConnector);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterRealizingConnector++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}
 		case uml::umlPackage::INFORMATIONFLOW_ATTRIBUTE_REALIZINGMESSAGE:
 		{
 			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::Message>> realizingMessageList(new Bag<uml::Message>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
+			if((newValue->isContainer()) && (uml::umlPackage::MESSAGE_CLASS ==newValue->getTypeId()))
 			{
-				realizingMessageList->add(std::dynamic_pointer_cast<uml::Message>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::Message>::iterator iterRealizingMessage = getRealizingMessage()->begin();
-			Bag<uml::Message>::iterator endRealizingMessage = getRealizingMessage()->end();
-			while (iterRealizingMessage != endRealizingMessage)
-			{
-				if (realizingMessageList->find(*iterRealizingMessage) == -1)
+				try
 				{
-					getRealizingMessage()->erase(*iterRealizingMessage);
+					std::shared_ptr<Bag<uml::Message>> realizingMessageList= newValue->get<std::shared_ptr<Bag<uml::Message>>>();
+					std::shared_ptr<Bag<uml::Message>> _realizingMessage=getRealizingMessage();
+					for(const std::shared_ptr<uml::Message> indexRealizingMessage: *_realizingMessage)
+					{
+						if (realizingMessageList->find(indexRealizingMessage) == -1)
+						{
+							_realizingMessage->erase(indexRealizingMessage);
+						}
+					}
+
+					for(const std::shared_ptr<uml::Message> indexRealizingMessage: *realizingMessageList)
+					{
+						if (_realizingMessage->find(indexRealizingMessage) == -1)
+						{
+							_realizingMessage->add(indexRealizingMessage);
+						}
+					}
 				}
-				iterRealizingMessage++;
-			}
- 
-			iterRealizingMessage = realizingMessageList->begin();
-			endRealizingMessage = realizingMessageList->end();
-			while (iterRealizingMessage != endRealizingMessage)
-			{
-				if (getRealizingMessage()->find(*iterRealizingMessage) == -1)
+				catch(...)
 				{
-					getRealizingMessage()->add(*iterRealizingMessage);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterRealizingMessage++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}
@@ -1104,61 +1045,58 @@ bool InformationFlowImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any InformationFlowImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any InformationFlowImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
   	switch(operationID)
 	{
-		
-		// 260413641
+		// uml::InformationFlow::convey_classifiers(Any, std::map) : bool: 260413641
 		case umlPackage::INFORMATIONFLOW_OPERATION_CONVEY_CLASSIFIERS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->convey_classifiers(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->convey_classifiers(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		
-		// 641047489
+		// uml::InformationFlow::must_conform(Any, std::map) : bool: 641047489
 		case umlPackage::INFORMATIONFLOW_OPERATION_MUST_CONFORM_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->must_conform(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->must_conform(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		
-		// 1011309815
+		// uml::InformationFlow::sources_and_targets_kind(Any, std::map) : bool: 1011309815
 		case umlPackage::INFORMATIONFLOW_OPERATION_SOURCES_AND_TARGETS_KIND_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->sources_and_targets_kind(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->sources_and_targets_kind(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
 
@@ -1178,7 +1116,6 @@ Any InformationFlowImpl::eInvoke(int operationID, std::shared_ptr<std::list < st
 	return result;
 }
 
-
 std::shared_ptr<uml::InformationFlow> InformationFlowImpl::getThisInformationFlowPtr() const
 {
 	return m_thisInformationFlowPtr.lock();
@@ -1189,3 +1126,5 @@ void InformationFlowImpl::setThisInformationFlowPtr(std::weak_ptr<uml::Informati
 	setThisDirectedRelationshipPtr(thisInformationFlowPtr);
 	setThisPackageableElementPtr(thisInformationFlowPtr);
 }
+
+

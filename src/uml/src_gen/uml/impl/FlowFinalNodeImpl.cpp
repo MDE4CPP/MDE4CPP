@@ -308,12 +308,10 @@ void FlowFinalNodeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSa
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> FlowFinalNodeImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getFlowFinalNode_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -346,7 +344,7 @@ bool FlowFinalNodeImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any FlowFinalNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any FlowFinalNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -366,7 +364,6 @@ Any FlowFinalNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std:
 	return result;
 }
 
-
 std::shared_ptr<uml::FlowFinalNode> FlowFinalNodeImpl::getThisFlowFinalNodePtr() const
 {
 	return m_thisFlowFinalNodePtr.lock();
@@ -376,3 +373,5 @@ void FlowFinalNodeImpl::setThisFlowFinalNodePtr(std::weak_ptr<uml::FlowFinalNode
 	m_thisFlowFinalNodePtr = thisFlowFinalNodePtr;
 	setThisFinalNodePtr(thisFlowFinalNodePtr);
 }
+
+

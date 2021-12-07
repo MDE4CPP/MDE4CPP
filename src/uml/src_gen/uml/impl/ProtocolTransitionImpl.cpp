@@ -444,12 +444,10 @@ void ProtocolTransitionImpl::saveContent(std::shared_ptr<persistence::interfaces
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> ProtocolTransitionImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getProtocolTransition_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -461,24 +459,16 @@ Any ProtocolTransitionImpl::eGet(int featureID, bool resolve, bool coreType) con
 		case uml::umlPackage::PROTOCOLTRANSITION_ATTRIBUTE_POSTCONDITION:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getPostCondition();
-			return eAny(returnValue); //18826
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //18826
 		}
 		case uml::umlPackage::PROTOCOLTRANSITION_ATTRIBUTE_PRECONDITION:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getPreCondition();
-			return eAny(returnValue); //18827
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //18827
 		}
 		case uml::umlPackage::PROTOCOLTRANSITION_ATTRIBUTE_REFERRED:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Operation>::iterator iter = getReferred()->begin();
-			Bag<uml::Operation>::iterator end = getReferred()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //18828			
+			return eAnyBag(getReferred(),504486732); //18828
 		}
 	}
 	return TransitionImpl::eGet(featureID, resolve, coreType);
@@ -526,68 +516,65 @@ bool ProtocolTransitionImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ProtocolTransitionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any ProtocolTransitionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
   	switch(operationID)
 	{
-		
-		// 222746916
+		// uml::ProtocolTransition::associated_actions(Any, std::map) : bool: 222746916
 		case umlPackage::PROTOCOLTRANSITION_OPERATION_ASSOCIATED_ACTIONS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->associated_actions(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->associated_actions(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		
-		// 402420591
+		// uml::ProtocolTransition::belongs_to_psm(Any, std::map) : bool: 402420591
 		case umlPackage::PROTOCOLTRANSITION_OPERATION_BELONGS_TO_PSM_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->belongs_to_psm(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->belongs_to_psm(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		
-		// 1380815811
+		// uml::ProtocolTransition::getReferreds() : uml::Operation[*]: 1380815811
 		case umlPackage::PROTOCOLTRANSITION_OPERATION_GETREFERREDS:
 		{
-			result = eAny(this->getReferreds());
+			std::shared_ptr<Bag<uml::Operation> > resultList = this->getReferreds();
+			return eAny(resultList,umlPackage::OPERATION_CLASS,true);
 			break;
 		}
-		
-		// 1225665035
+		// uml::ProtocolTransition::refers_to_operation(Any, std::map) : bool: 1225665035
 		case umlPackage::PROTOCOLTRANSITION_OPERATION_REFERS_TO_OPERATION_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->refers_to_operation(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->refers_to_operation(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
 
@@ -604,7 +591,6 @@ Any ProtocolTransitionImpl::eInvoke(int operationID, std::shared_ptr<std::list <
 	return result;
 }
 
-
 std::shared_ptr<uml::ProtocolTransition> ProtocolTransitionImpl::getThisProtocolTransitionPtr() const
 {
 	return m_thisProtocolTransitionPtr.lock();
@@ -614,3 +600,5 @@ void ProtocolTransitionImpl::setThisProtocolTransitionPtr(std::weak_ptr<uml::Pro
 	m_thisProtocolTransitionPtr = thisProtocolTransitionPtr;
 	setThisTransitionPtr(thisProtocolTransitionPtr);
 }
+
+

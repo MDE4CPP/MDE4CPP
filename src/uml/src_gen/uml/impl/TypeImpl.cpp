@@ -327,12 +327,10 @@ void TypeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> TypeImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getType_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -344,7 +342,7 @@ Any TypeImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::TYPE_ATTRIBUTE_PACKAGE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getPackage().lock();
-			return eAny(returnValue); //24412
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //24412
 		}
 	}
 	return PackageableElementImpl::eGet(featureID, resolve, coreType);
@@ -380,91 +378,89 @@ bool TypeImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any TypeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any TypeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
   	switch(operationID)
 	{
-		
-		// 629993373
+		// uml::Type::conformsTo(uml::Type) : bool: 629993373
 		case umlPackage::TYPE_OPERATION_CONFORMSTO_TYPE:
 		{
 			//Retrieve input parameter 'other'
 			//parameter 0
 			std::shared_ptr<uml::Type> incoming_param_other;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_other_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_other = (*incoming_param_other_arguments_citer)->get()->get<std::shared_ptr<uml::Type> >();
-			result = eAny(this->conformsTo(incoming_param_other));
+			std::list<Any>::const_iterator incoming_param_other_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_other = (*incoming_param_other_arguments_citer)->get<std::shared_ptr<uml::Type> >();
+			result = eAny(this->conformsTo(incoming_param_other),0,false);
 			break;
 		}
-		
-		// 968461441
+		// uml::Type::createAssociation(bool, uml::AggregationKind, std::string, int, int, uml::Type, bool, uml::AggregationKind, std::string, int, int) : uml::Association: 968461441
 		case umlPackage::TYPE_OPERATION_CREATEASSOCIATION_BOOLEAN_UNLIMITEDNATURAL:
 		{
 			//Retrieve input parameter 'end1IsNavigable'
 			//parameter 0
 			bool incoming_param_end1IsNavigable;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_end1IsNavigable_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_end1IsNavigable = (*incoming_param_end1IsNavigable_arguments_citer)->get()->get<bool >();
+			std::list<Any>::const_iterator incoming_param_end1IsNavigable_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_end1IsNavigable = (*incoming_param_end1IsNavigable_arguments_citer)->get<bool >();
 			//Retrieve input parameter 'end1Aggregation'
 			//parameter 1
 			uml::AggregationKind incoming_param_end1Aggregation;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_end1Aggregation_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_end1Aggregation = (*incoming_param_end1Aggregation_arguments_citer)->get()->get<uml::AggregationKind >();
+			std::list<Any>::const_iterator incoming_param_end1Aggregation_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_end1Aggregation = (*incoming_param_end1Aggregation_arguments_citer)->get<uml::AggregationKind >();
 			//Retrieve input parameter 'end1Name'
 			//parameter 2
 			std::string incoming_param_end1Name;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_end1Name_arguments_citer = std::next(arguments->begin(), 2);
-			incoming_param_end1Name = (*incoming_param_end1Name_arguments_citer)->get()->get<std::string >();
+			std::list<Any>::const_iterator incoming_param_end1Name_arguments_citer = std::next(arguments->begin(), 2);
+			incoming_param_end1Name = (*incoming_param_end1Name_arguments_citer)->get<std::string >();
 			//Retrieve input parameter 'end1Lower'
 			//parameter 3
 			int incoming_param_end1Lower;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_end1Lower_arguments_citer = std::next(arguments->begin(), 3);
-			incoming_param_end1Lower = (*incoming_param_end1Lower_arguments_citer)->get()->get<int >();
+			std::list<Any>::const_iterator incoming_param_end1Lower_arguments_citer = std::next(arguments->begin(), 3);
+			incoming_param_end1Lower = (*incoming_param_end1Lower_arguments_citer)->get<int >();
 			//Retrieve input parameter 'end1Upper'
 			//parameter 4
 			int incoming_param_end1Upper;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_end1Upper_arguments_citer = std::next(arguments->begin(), 4);
-			incoming_param_end1Upper = (*incoming_param_end1Upper_arguments_citer)->get()->get<int >();
+			std::list<Any>::const_iterator incoming_param_end1Upper_arguments_citer = std::next(arguments->begin(), 4);
+			incoming_param_end1Upper = (*incoming_param_end1Upper_arguments_citer)->get<int >();
 			//Retrieve input parameter 'end1Type'
 			//parameter 5
 			std::shared_ptr<uml::Type> incoming_param_end1Type;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_end1Type_arguments_citer = std::next(arguments->begin(), 5);
-			incoming_param_end1Type = (*incoming_param_end1Type_arguments_citer)->get()->get<std::shared_ptr<uml::Type> >();
+			std::list<Any>::const_iterator incoming_param_end1Type_arguments_citer = std::next(arguments->begin(), 5);
+			incoming_param_end1Type = (*incoming_param_end1Type_arguments_citer)->get<std::shared_ptr<uml::Type> >();
 			//Retrieve input parameter 'end2IsNavigable'
 			//parameter 6
 			bool incoming_param_end2IsNavigable;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_end2IsNavigable_arguments_citer = std::next(arguments->begin(), 6);
-			incoming_param_end2IsNavigable = (*incoming_param_end2IsNavigable_arguments_citer)->get()->get<bool >();
+			std::list<Any>::const_iterator incoming_param_end2IsNavigable_arguments_citer = std::next(arguments->begin(), 6);
+			incoming_param_end2IsNavigable = (*incoming_param_end2IsNavigable_arguments_citer)->get<bool >();
 			//Retrieve input parameter 'end2Aggregation'
 			//parameter 7
 			uml::AggregationKind incoming_param_end2Aggregation;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_end2Aggregation_arguments_citer = std::next(arguments->begin(), 7);
-			incoming_param_end2Aggregation = (*incoming_param_end2Aggregation_arguments_citer)->get()->get<uml::AggregationKind >();
+			std::list<Any>::const_iterator incoming_param_end2Aggregation_arguments_citer = std::next(arguments->begin(), 7);
+			incoming_param_end2Aggregation = (*incoming_param_end2Aggregation_arguments_citer)->get<uml::AggregationKind >();
 			//Retrieve input parameter 'end2Name'
 			//parameter 8
 			std::string incoming_param_end2Name;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_end2Name_arguments_citer = std::next(arguments->begin(), 8);
-			incoming_param_end2Name = (*incoming_param_end2Name_arguments_citer)->get()->get<std::string >();
+			std::list<Any>::const_iterator incoming_param_end2Name_arguments_citer = std::next(arguments->begin(), 8);
+			incoming_param_end2Name = (*incoming_param_end2Name_arguments_citer)->get<std::string >();
 			//Retrieve input parameter 'end2Lower'
 			//parameter 9
 			int incoming_param_end2Lower;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_end2Lower_arguments_citer = std::next(arguments->begin(), 9);
-			incoming_param_end2Lower = (*incoming_param_end2Lower_arguments_citer)->get()->get<int >();
+			std::list<Any>::const_iterator incoming_param_end2Lower_arguments_citer = std::next(arguments->begin(), 9);
+			incoming_param_end2Lower = (*incoming_param_end2Lower_arguments_citer)->get<int >();
 			//Retrieve input parameter 'end2Upper'
 			//parameter 10
 			int incoming_param_end2Upper;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_end2Upper_arguments_citer = std::next(arguments->begin(), 10);
-			incoming_param_end2Upper = (*incoming_param_end2Upper_arguments_citer)->get()->get<int >();
-			result = eAny(this->createAssociation(incoming_param_end1IsNavigable,incoming_param_end1Aggregation,incoming_param_end1Name,incoming_param_end1Lower,incoming_param_end1Upper,incoming_param_end1Type,incoming_param_end2IsNavigable,incoming_param_end2Aggregation,incoming_param_end2Name,incoming_param_end2Lower,incoming_param_end2Upper));
+			std::list<Any>::const_iterator incoming_param_end2Upper_arguments_citer = std::next(arguments->begin(), 10);
+			incoming_param_end2Upper = (*incoming_param_end2Upper_arguments_citer)->get<int >();
+			result = eAny(this->createAssociation(incoming_param_end1IsNavigable,incoming_param_end1Aggregation,incoming_param_end1Name,incoming_param_end1Lower,incoming_param_end1Upper,incoming_param_end1Type,incoming_param_end2IsNavigable,incoming_param_end2Aggregation,incoming_param_end2Name,incoming_param_end2Lower,incoming_param_end2Upper), umlPackage::ASSOCIATION_CLASS,false);
 			break;
 		}
-		
-		// 16000238
+		// uml::Type::getAssociations() : uml::Association[*]: 16000238
 		case umlPackage::TYPE_OPERATION_GETASSOCIATIONS:
 		{
-			result = eAny(this->getAssociations());
+			std::shared_ptr<Bag<uml::Association> > resultList = this->getAssociations();
+			return eAny(resultList,umlPackage::ASSOCIATION_CLASS,true);
 			break;
 		}
 
@@ -481,7 +477,6 @@ Any TypeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_p
 	return result;
 }
 
-
 std::shared_ptr<uml::Type> TypeImpl::getThisTypePtr() const
 {
 	return m_thisTypePtr.lock();
@@ -491,3 +486,5 @@ void TypeImpl::setThisTypePtr(std::weak_ptr<uml::Type> thisTypePtr)
 	m_thisTypePtr = thisTypePtr;
 	setThisPackageableElementPtr(thisTypePtr);
 }
+
+

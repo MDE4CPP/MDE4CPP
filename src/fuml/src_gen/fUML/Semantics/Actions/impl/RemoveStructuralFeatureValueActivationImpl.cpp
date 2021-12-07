@@ -42,9 +42,9 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "fUML/Semantics/Actions/ActionsFactory.hpp"
+#include "uml/umlFactory.hpp"
 
 #include "uml/Action.hpp"
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
@@ -58,8 +58,8 @@
 #include "fUML/Semantics/Actions/WriteStructuralFeatureActionActivation.hpp"
 
 //Factories an Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -357,12 +357,10 @@ void RemoveStructuralFeatureValueActivationImpl::saveContent(std::shared_ptr<per
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> RemoveStructuralFeatureValueActivationImpl::eStaticClass() const
 {
 	return fUML::Semantics::Actions::ActionsPackage::eInstance()->getRemoveStructuralFeatureValueActivation_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -374,7 +372,7 @@ Any RemoveStructuralFeatureValueActivationImpl::eGet(int featureID, bool resolve
 		case fUML::Semantics::Actions::ActionsPackage::REMOVESTRUCTURALFEATUREVALUEACTIVATION_ATTRIBUTE_REMOVESTRUCTURALFEATUREVALUEACTION:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getRemoveStructuralFeatureValueAction();
-			return eAny(returnValue); //10011
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //10011
 		}
 	}
 	return WriteStructuralFeatureActionActivationImpl::eGet(featureID, resolve, coreType);
@@ -410,7 +408,7 @@ bool RemoveStructuralFeatureValueActivationImpl::eSet(int featureID, Any newValu
 //*********************************
 // EOperation Invoke
 //*********************************
-Any RemoveStructuralFeatureValueActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any RemoveStructuralFeatureValueActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -437,7 +435,6 @@ Any RemoveStructuralFeatureValueActivationImpl::eInvoke(int operationID, std::sh
 	return result;
 }
 
-
 std::shared_ptr<fUML::Semantics::Actions::RemoveStructuralFeatureValueActivation> RemoveStructuralFeatureValueActivationImpl::getThisRemoveStructuralFeatureValueActivationPtr() const
 {
 	return m_thisRemoveStructuralFeatureValueActivationPtr.lock();
@@ -447,3 +444,5 @@ void RemoveStructuralFeatureValueActivationImpl::setThisRemoveStructuralFeatureV
 	m_thisRemoveStructuralFeatureValueActivationPtr = thisRemoveStructuralFeatureValueActivationPtr;
 	setThisWriteStructuralFeatureActionActivationPtr(thisRemoveStructuralFeatureValueActivationPtr);
 }
+
+

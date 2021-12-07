@@ -32,8 +32,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "ecore/ecoreFactory.hpp"
 #include "ocl/Values/ValuesFactory.hpp"
+#include "ecore/ecoreFactory.hpp"
 
 #include "ocl/Types/CollectionType.hpp"
 #include "ocl/Values/CollectionValue.hpp"
@@ -211,12 +211,10 @@ void OrderedSetTypeImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> OrderedSetTypeImpl::eStaticClass() const
 {
 	return ocl::Types::TypesPackage::eInstance()->getOrderedSetType_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -249,7 +247,7 @@ bool OrderedSetTypeImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any OrderedSetTypeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any OrderedSetTypeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -269,7 +267,6 @@ Any OrderedSetTypeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std
 	return result;
 }
 
-
 std::shared_ptr<ocl::Types::OrderedSetType> OrderedSetTypeImpl::getThisOrderedSetTypePtr() const
 {
 	return m_thisOrderedSetTypePtr.lock();
@@ -279,3 +276,5 @@ void OrderedSetTypeImpl::setThisOrderedSetTypePtr(std::weak_ptr<ocl::Types::Orde
 	m_thisOrderedSetTypePtr = thisOrderedSetTypePtr;
 	setThisCollectionTypePtr(thisOrderedSetTypePtr);
 }
+
+

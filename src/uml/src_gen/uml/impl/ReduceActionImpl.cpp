@@ -524,12 +524,10 @@ void ReduceActionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> ReduceActionImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getReduceAction_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -541,19 +539,19 @@ Any ReduceActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::REDUCEACTION_ATTRIBUTE_COLLECTION:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getCollection();
-			return eAny(returnValue); //20627
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //20627
 		}
 		case uml::umlPackage::REDUCEACTION_ATTRIBUTE_ISORDERED:
-			return eAny(getIsOrdered()); //20628
+			return eAny(getIsOrdered(),0,true); //20628
 		case uml::umlPackage::REDUCEACTION_ATTRIBUTE_REDUCER:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getReducer();
-			return eAny(returnValue); //20629
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //20629
 		}
 		case uml::umlPackage::REDUCEACTION_ATTRIBUTE_RESULT:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getResult();
-			return eAny(returnValue); //20630
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //20630
 		}
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
@@ -618,61 +616,58 @@ bool ReduceActionImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ReduceActionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any ReduceActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
   	switch(operationID)
 	{
-		
-		// 456887339
+		// uml::ReduceAction::input_type_is_collection(Any, std::map) : bool: 456887339
 		case umlPackage::REDUCEACTION_OPERATION_INPUT_TYPE_IS_COLLECTION_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->input_type_is_collection(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->input_type_is_collection(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		
-		// 694994492
+		// uml::ReduceAction::output_types_are_compatible(Any, std::map) : bool: 694994492
 		case umlPackage::REDUCEACTION_OPERATION_OUTPUT_TYPES_ARE_COMPATIBLE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->output_types_are_compatible(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->output_types_are_compatible(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		
-		// 1133614067
+		// uml::ReduceAction::reducer_inputs_output(Any, std::map) : bool: 1133614067
 		case umlPackage::REDUCEACTION_OPERATION_REDUCER_INPUTS_OUTPUT_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->reducer_inputs_output(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->reducer_inputs_output(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
 
@@ -689,7 +684,6 @@ Any ReduceActionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::
 	return result;
 }
 
-
 std::shared_ptr<uml::ReduceAction> ReduceActionImpl::getThisReduceActionPtr() const
 {
 	return m_thisReduceActionPtr.lock();
@@ -699,3 +693,5 @@ void ReduceActionImpl::setThisReduceActionPtr(std::weak_ptr<uml::ReduceAction> t
 	m_thisReduceActionPtr = thisReduceActionPtr;
 	setThisActionPtr(thisReduceActionPtr);
 }
+
+

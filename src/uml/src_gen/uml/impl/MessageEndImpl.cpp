@@ -299,12 +299,10 @@ void MessageEndImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> MessageEndImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getMessageEnd_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -316,7 +314,7 @@ Any MessageEndImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::MESSAGEEND_ATTRIBUTE_MESSAGE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getMessage();
-			return eAny(returnValue); //1489
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //1489
 		}
 	}
 	return NamedElementImpl::eGet(featureID, resolve, coreType);
@@ -352,38 +350,36 @@ bool MessageEndImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any MessageEndImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any MessageEndImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
   	switch(operationID)
 	{
-		
-		// 767566935
+		// uml::MessageEnd::enclosingFragment() : uml::InteractionFragment[*]: 767566935
 		case umlPackage::MESSAGEEND_OPERATION_ENCLOSINGFRAGMENT:
 		{
-			result = eAny(this->enclosingFragment());
+			std::shared_ptr<Bag<uml::InteractionFragment> > resultList = this->enclosingFragment();
+			return eAny(resultList,umlPackage::INTERACTIONFRAGMENT_CLASS,true);
 			break;
 		}
-		
-		// 786128866
+		// uml::MessageEnd::isReceive() : bool: 786128866
 		case umlPackage::MESSAGEEND_OPERATION_ISRECEIVE:
 		{
-			result = eAny(this->isReceive());
+			result = eAny(this->isReceive(),0,false);
 			break;
 		}
-		
-		// 379994457
+		// uml::MessageEnd::isSend() : bool: 379994457
 		case umlPackage::MESSAGEEND_OPERATION_ISSEND:
 		{
-			result = eAny(this->isSend());
+			result = eAny(this->isSend(),0,false);
 			break;
 		}
-		
-		// 1336350422
+		// uml::MessageEnd::oppositeEnd() : uml::MessageEnd[*]: 1336350422
 		case umlPackage::MESSAGEEND_OPERATION_OPPOSITEEND:
 		{
-			result = eAny(this->oppositeEnd());
+			std::shared_ptr<Bag<uml::MessageEnd> > resultList = this->oppositeEnd();
+			return eAny(resultList,umlPackage::MESSAGEEND_CLASS,true);
 			break;
 		}
 
@@ -400,7 +396,6 @@ Any MessageEndImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sh
 	return result;
 }
 
-
 std::shared_ptr<uml::MessageEnd> MessageEndImpl::getThisMessageEndPtr() const
 {
 	return m_thisMessageEndPtr.lock();
@@ -410,3 +405,5 @@ void MessageEndImpl::setThisMessageEndPtr(std::weak_ptr<uml::MessageEnd> thisMes
 	m_thisMessageEndPtr = thisMessageEndPtr;
 	setThisNamedElementPtr(thisMessageEndPtr);
 }
+
+

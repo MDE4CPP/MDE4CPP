@@ -220,12 +220,10 @@ void RelationshipImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> RelationshipImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getRelationship_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -236,15 +234,7 @@ Any RelationshipImpl::eGet(int featureID, bool resolve, bool coreType) const
 	{
 		case uml::umlPackage::RELATIONSHIP_ATTRIBUTE_RELATEDELEMENT:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Element>::iterator iter = getRelatedElement()->begin();
-			Bag<uml::Element>::iterator end = getRelatedElement()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //2083			
+			return eAnyBag(getRelatedElement(),272430456); //2083
 		}
 	}
 	return ElementImpl::eGet(featureID, resolve, coreType);
@@ -272,7 +262,7 @@ bool RelationshipImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any RelationshipImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any RelationshipImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -292,7 +282,6 @@ Any RelationshipImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::
 	return result;
 }
 
-
 std::shared_ptr<uml::Relationship> RelationshipImpl::getThisRelationshipPtr() const
 {
 	return m_thisRelationshipPtr.lock();
@@ -302,3 +291,5 @@ void RelationshipImpl::setThisRelationshipPtr(std::weak_ptr<uml::Relationship> t
 	m_thisRelationshipPtr = thisRelationshipPtr;
 	setThisElementPtr(thisRelationshipPtr);
 }
+
+

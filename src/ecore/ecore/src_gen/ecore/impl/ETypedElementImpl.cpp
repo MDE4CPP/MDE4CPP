@@ -422,12 +422,10 @@ void ETypedElementImpl::saveContent(std::shared_ptr<persistence::interfaces::XSa
 	}
 }
 
-
 std::shared_ptr<EClass> ETypedElementImpl::eStaticClass() const
 {
 	return ecore::ecorePackage::eInstance()->getETypedElement_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -439,25 +437,25 @@ Any ETypedElementImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case ecore::ecorePackage::ETYPEDELEMENT_ATTRIBUTE_EGENERICTYPE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getEGenericType();
-			return eAny(returnValue); //5412
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //5412
 		}
 		case ecore::ecorePackage::ETYPEDELEMENT_ATTRIBUTE_ETYPE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getEType();
-			return eAny(returnValue); //5411
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //5411
 		}
 		case ecore::ecorePackage::ETYPEDELEMENT_ATTRIBUTE_LOWERBOUND:
-			return eAny(getLowerBound()); //547
+			return eAny(getLowerBound(),0,true); //547
 		case ecore::ecorePackage::ETYPEDELEMENT_ATTRIBUTE_MANY:
-			return eAny(isMany()); //549
+			return eAny(isMany(),0,true); //549
 		case ecore::ecorePackage::ETYPEDELEMENT_ATTRIBUTE_ORDERED:
-			return eAny(isOrdered()); //545
+			return eAny(isOrdered(),0,true); //545
 		case ecore::ecorePackage::ETYPEDELEMENT_ATTRIBUTE_REQUIRED:
-			return eAny(isRequired()); //5410
+			return eAny(isRequired(),0,true); //5410
 		case ecore::ecorePackage::ETYPEDELEMENT_ATTRIBUTE_UNIQUE:
-			return eAny(isUnique()); //546
+			return eAny(isUnique(),0,true); //546
 		case ecore::ecorePackage::ETYPEDELEMENT_ATTRIBUTE_UPPERBOUND:
-			return eAny(getUpperBound()); //548
+			return eAny(getUpperBound(),0,true); //548
 	}
 	return ENamedElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -569,7 +567,6 @@ Any ETypedElementImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> 
 	return result;
 }
 
-
 std::shared_ptr<ecore::ETypedElement> ETypedElementImpl::getThisETypedElementPtr() const
 {
 	return m_thisETypedElementPtr.lock();
@@ -579,3 +576,5 @@ void ETypedElementImpl::setThisETypedElementPtr(std::weak_ptr<ecore::ETypedEleme
 	m_thisETypedElementPtr = thisETypedElementPtr;
 	setThisENamedElementPtr(thisETypedElementPtr);
 }
+
+

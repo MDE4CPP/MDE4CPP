@@ -129,14 +129,10 @@ DeploymentTargetImpl& DeploymentTargetImpl::operator=(const DeploymentTargetImpl
 			std::cout << "Initialising value Subset: " << "m_deployment - Subset<uml::Deployment, uml::Element >(getOwnedElement())" << std::endl;
 		#endif
 		
-
-		Bag<uml::Deployment>::iterator deploymentIter = deploymentList->begin();
-		Bag<uml::Deployment>::iterator deploymentEnd = deploymentList->end();
-		while (deploymentIter != deploymentEnd) 
+		for(const std::shared_ptr<uml::Deployment> deploymentindexElem: *deploymentList) 
 		{
-			std::shared_ptr<uml::Deployment> temp = std::dynamic_pointer_cast<uml::Deployment>((*deploymentIter)->copy());
-			getDeployment()->push_back(temp);
-			deploymentIter++;
+			std::shared_ptr<uml::Deployment> temp = std::dynamic_pointer_cast<uml::Deployment>((deploymentindexElem)->copy());
+			m_deployment->push_back(temp);
 		}
 	}
 	else
@@ -330,12 +326,10 @@ void DeploymentTargetImpl::saveContent(std::shared_ptr<persistence::interfaces::
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> DeploymentTargetImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getDeploymentTarget_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -346,27 +340,11 @@ Any DeploymentTargetImpl::eGet(int featureID, bool resolve, bool coreType) const
 	{
 		case uml::umlPackage::DEPLOYMENTTARGET_ATTRIBUTE_DEPLOYEDELEMENT:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::PackageableElement>::iterator iter = getDeployedElement()->begin();
-			Bag<uml::PackageableElement>::iterator end = getDeployedElement()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //719			
+			return eAnyBag(getDeployedElement(),1261869628); //719
 		}
 		case uml::umlPackage::DEPLOYMENTTARGET_ATTRIBUTE_DEPLOYMENT:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Deployment>::iterator iter = getDeployment()->begin();
-			Bag<uml::Deployment>::iterator end = getDeployment()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //7110			
+			return eAnyBag(getDeployment(),998840902); //7110
 		}
 	}
 	return NamedElementImpl::eGet(featureID, resolve, coreType);
@@ -391,36 +369,37 @@ bool DeploymentTargetImpl::eSet(int featureID, Any newValue)
 		case uml::umlPackage::DEPLOYMENTTARGET_ATTRIBUTE_DEPLOYMENT:
 		{
 			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::Deployment>> deploymentList(new Bag<uml::Deployment>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
+			if((newValue->isContainer()) && (uml::umlPackage::DEPLOYMENT_CLASS ==newValue->getTypeId()))
 			{
-				deploymentList->add(std::dynamic_pointer_cast<uml::Deployment>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::Deployment>::iterator iterDeployment = getDeployment()->begin();
-			Bag<uml::Deployment>::iterator endDeployment = getDeployment()->end();
-			while (iterDeployment != endDeployment)
-			{
-				if (deploymentList->find(*iterDeployment) == -1)
+				try
 				{
-					getDeployment()->erase(*iterDeployment);
+					std::shared_ptr<Bag<uml::Deployment>> deploymentList= newValue->get<std::shared_ptr<Bag<uml::Deployment>>>();
+					std::shared_ptr<Bag<uml::Deployment>> _deployment=getDeployment();
+					for(const std::shared_ptr<uml::Deployment> indexDeployment: *_deployment)
+					{
+						if (deploymentList->find(indexDeployment) == -1)
+						{
+							_deployment->erase(indexDeployment);
+						}
+					}
+
+					for(const std::shared_ptr<uml::Deployment> indexDeployment: *deploymentList)
+					{
+						if (_deployment->find(indexDeployment) == -1)
+						{
+							_deployment->add(indexDeployment);
+						}
+					}
 				}
-				iterDeployment++;
-			}
- 
-			iterDeployment = deploymentList->begin();
-			endDeployment = deploymentList->end();
-			while (iterDeployment != endDeployment)
-			{
-				if (getDeployment()->find(*iterDeployment) == -1)
+				catch(...)
 				{
-					getDeployment()->add(*iterDeployment);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterDeployment++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}
@@ -432,17 +411,17 @@ bool DeploymentTargetImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any DeploymentTargetImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any DeploymentTargetImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
   	switch(operationID)
 	{
-		
-		// 2114329514
+		// uml::DeploymentTarget::getDeployedElements() : uml::PackageableElement[*]: 2114329514
 		case umlPackage::DEPLOYMENTTARGET_OPERATION_GETDEPLOYEDELEMENTS:
 		{
-			result = eAny(this->getDeployedElements());
+			std::shared_ptr<Bag<uml::PackageableElement> > resultList = this->getDeployedElements();
+			return eAny(resultList,umlPackage::PACKAGEABLEELEMENT_CLASS,true);
 			break;
 		}
 
@@ -459,7 +438,6 @@ Any DeploymentTargetImpl::eInvoke(int operationID, std::shared_ptr<std::list < s
 	return result;
 }
 
-
 std::shared_ptr<uml::DeploymentTarget> DeploymentTargetImpl::getThisDeploymentTargetPtr() const
 {
 	return m_thisDeploymentTargetPtr.lock();
@@ -469,3 +447,5 @@ void DeploymentTargetImpl::setThisDeploymentTargetPtr(std::weak_ptr<uml::Deploym
 	m_thisDeploymentTargetPtr = thisDeploymentTargetPtr;
 	setThisNamedElementPtr(thisDeploymentTargetPtr);
 }
+
+

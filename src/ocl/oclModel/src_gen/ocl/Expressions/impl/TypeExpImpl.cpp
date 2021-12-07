@@ -390,12 +390,10 @@ void TypeExpImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHand
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> TypeExpImpl::eStaticClass() const
 {
 	return ocl::Expressions::ExpressionsPackage::eInstance()->getTypeExp_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -407,7 +405,7 @@ Any TypeExpImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case ocl::Expressions::ExpressionsPackage::TYPEEXP_ATTRIBUTE_REFERREDTYPE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getReferredType();
-			return eAny(returnValue); //9122
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //9122
 		}
 	}
 	return OclExpressionImpl::eGet(featureID, resolve, coreType);
@@ -443,7 +441,7 @@ bool TypeExpImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any TypeExpImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any TypeExpImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -463,7 +461,6 @@ Any TypeExpImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::share
 	return result;
 }
 
-
 std::shared_ptr<ocl::Expressions::TypeExp> TypeExpImpl::getThisTypeExpPtr() const
 {
 	return m_thisTypeExpPtr.lock();
@@ -473,3 +470,5 @@ void TypeExpImpl::setThisTypeExpPtr(std::weak_ptr<ocl::Expressions::TypeExp> thi
 	m_thisTypeExpPtr = thisTypeExpPtr;
 	setThisOclExpressionPtr(thisTypeExpPtr);
 }
+
+

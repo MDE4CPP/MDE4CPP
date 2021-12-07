@@ -14,16 +14,16 @@
 
 namespace ecore 
 {
-	class EAnnotation;
+	class EParameter;
+	class EDataType;
+	class EStringToStringMapEntry;
+	class EGenericType;
 	class EReference;
 	class ETypeParameter;
-	class EClass;
-	class EDataType;
-	class EGenericType;
-	class EAttribute;
-	class EParameter;
 	class EOperation;
-	class EStringToStringMapEntry;
+	class EAttribute;
+	class EAnnotation;
+	class EClass;
 }
 
 namespace ecore 
@@ -444,8 +444,8 @@ namespace ecore
 			// Begin Class EObjectContainer
 			//Class and Feature IDs 
 			static const long long EOBJECTCONTAINER_CLASS = 2040922192;
-			static const unsigned int EOBJECTCONTAINER_CLASS_FEATURE_COUNT = 4;
-			static const unsigned int EOBJECTCONTAINER_CLASS_OPERATION_COUNT = 15;
+			static const unsigned int EOBJECTCONTAINER_CLASS_FEATURE_COUNT = 1;
+			static const unsigned int EOBJECTCONTAINER_CLASS_OPERATION_COUNT = 0;
 			
 			static const long long EOBJECTCONTAINER_ATTRIBUTE_CONTAINER = 642035704;
 			

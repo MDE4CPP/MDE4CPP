@@ -407,12 +407,10 @@ void PrimitiveTypeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSa
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> PrimitiveTypeImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getPrimitiveType_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -445,7 +443,7 @@ bool PrimitiveTypeImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any PrimitiveTypeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any PrimitiveTypeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -465,7 +463,6 @@ Any PrimitiveTypeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std:
 	return result;
 }
 
-
 std::shared_ptr<uml::PrimitiveType> PrimitiveTypeImpl::getThisPrimitiveTypePtr() const
 {
 	return m_thisPrimitiveTypePtr.lock();
@@ -475,3 +472,5 @@ void PrimitiveTypeImpl::setThisPrimitiveTypePtr(std::weak_ptr<uml::PrimitiveType
 	m_thisPrimitiveTypePtr = thisPrimitiveTypePtr;
 	setThisDataTypePtr(thisPrimitiveTypePtr);
 }
+
+

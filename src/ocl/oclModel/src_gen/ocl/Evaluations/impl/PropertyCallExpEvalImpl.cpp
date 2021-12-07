@@ -31,11 +31,11 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Loci/LociFactory.hpp"
+#include "fUML/Semantics/Values/ValuesFactory.hpp"
+#include "uml/umlFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
-#include "uml/umlFactory.hpp"
-#include "fUML/Semantics/Values/ValuesFactory.hpp"
+#include "fUML/Semantics/Loci/LociFactory.hpp"
 
 #include "ocl/Evaluations/EvalEnvironment.hpp"
 #include "fUML/Semantics/Loci/Locus.hpp"
@@ -247,12 +247,10 @@ void PropertyCallExpEvalImpl::saveContent(std::shared_ptr<persistence::interface
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> PropertyCallExpEvalImpl::eStaticClass() const
 {
 	return ocl::Evaluations::EvaluationsPackage::eInstance()->getPropertyCallExpEval_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -264,7 +262,7 @@ Any PropertyCallExpEvalImpl::eGet(int featureID, bool resolve, bool coreType) co
 		case ocl::Evaluations::EvaluationsPackage::PROPERTYCALLEXPEVAL_ATTRIBUTE_SOURCE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getSource();
-			return eAny(returnValue); //736
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //736
 		}
 	}
 	return OclExpEvalImpl::eGet(featureID, resolve, coreType);
@@ -300,7 +298,7 @@ bool PropertyCallExpEvalImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any PropertyCallExpEvalImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any PropertyCallExpEvalImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -320,7 +318,6 @@ Any PropertyCallExpEvalImpl::eInvoke(int operationID, std::shared_ptr<std::list 
 	return result;
 }
 
-
 std::shared_ptr<ocl::Evaluations::PropertyCallExpEval> PropertyCallExpEvalImpl::getThisPropertyCallExpEvalPtr() const
 {
 	return m_thisPropertyCallExpEvalPtr.lock();
@@ -330,3 +327,5 @@ void PropertyCallExpEvalImpl::setThisPropertyCallExpEvalPtr(std::weak_ptr<ocl::E
 	m_thisPropertyCallExpEvalPtr = thisPropertyCallExpEvalPtr;
 	setThisOclExpEvalPtr(thisPropertyCallExpEvalPtr);
 }
+
+

@@ -239,12 +239,10 @@ void TupleLiteralPartImpl::saveContent(std::shared_ptr<persistence::interfaces::
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> TupleLiteralPartImpl::eStaticClass() const
 {
 	return ocl::Expressions::ExpressionsPackage::eInstance()->getTupleLiteralPart_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -256,7 +254,7 @@ Any TupleLiteralPartImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case ocl::Expressions::ExpressionsPackage::TUPLELITERALPART_ATTRIBUTE_ATTRIBUTE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getAttribute();
-			return eAny(returnValue); //8810
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //8810
 		}
 	}
 	return ecore::ETypedElementImpl::eGet(featureID, resolve, coreType);
@@ -292,7 +290,7 @@ bool TupleLiteralPartImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any TupleLiteralPartImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any TupleLiteralPartImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -312,7 +310,6 @@ Any TupleLiteralPartImpl::eInvoke(int operationID, std::shared_ptr<std::list < s
 	return result;
 }
 
-
 std::shared_ptr<ocl::Expressions::TupleLiteralPart> TupleLiteralPartImpl::getThisTupleLiteralPartPtr() const
 {
 	return m_thisTupleLiteralPartPtr.lock();
@@ -322,3 +319,5 @@ void TupleLiteralPartImpl::setThisTupleLiteralPartPtr(std::weak_ptr<ocl::Express
 	m_thisTupleLiteralPartPtr = thisTupleLiteralPartPtr;
 	setThisETypedElementPtr(thisTupleLiteralPartPtr);
 }
+
+

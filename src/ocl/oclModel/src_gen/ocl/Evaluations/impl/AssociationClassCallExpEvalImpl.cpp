@@ -32,12 +32,12 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Loci/LociFactory.hpp"
+#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
+#include "fUML/Semantics/Values/ValuesFactory.hpp"
+#include "uml/umlFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
-#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
-#include "uml/umlFactory.hpp"
-#include "fUML/Semantics/Values/ValuesFactory.hpp"
+#include "fUML/Semantics/Loci/LociFactory.hpp"
 
 #include "ocl/Evaluations/EvalEnvironment.hpp"
 #include "fUML/Semantics/Loci/Locus.hpp"
@@ -258,12 +258,10 @@ void AssociationClassCallExpEvalImpl::saveContent(std::shared_ptr<persistence::i
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> AssociationClassCallExpEvalImpl::eStaticClass() const
 {
 	return ocl::Evaluations::EvaluationsPackage::eInstance()->getAssociationClassCallExpEval_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -275,7 +273,7 @@ Any AssociationClassCallExpEvalImpl::eGet(int featureID, bool resolve, bool core
 		case ocl::Evaluations::EvaluationsPackage::ASSOCIATIONCLASSCALLEXPEVAL_ATTRIBUTE_REFERREDASSOCIATIONCLASS:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getReferredAssociationClass();
-			return eAny(returnValue); //49
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //49
 		}
 	}
 	return NavigationCallExpEvalImpl::eGet(featureID, resolve, coreType);
@@ -311,7 +309,7 @@ bool AssociationClassCallExpEvalImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any AssociationClassCallExpEvalImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any AssociationClassCallExpEvalImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -331,7 +329,6 @@ Any AssociationClassCallExpEvalImpl::eInvoke(int operationID, std::shared_ptr<st
 	return result;
 }
 
-
 std::shared_ptr<ocl::Evaluations::AssociationClassCallExpEval> AssociationClassCallExpEvalImpl::getThisAssociationClassCallExpEvalPtr() const
 {
 	return m_thisAssociationClassCallExpEvalPtr.lock();
@@ -341,3 +338,5 @@ void AssociationClassCallExpEvalImpl::setThisAssociationClassCallExpEvalPtr(std:
 	m_thisAssociationClassCallExpEvalPtr = thisAssociationClassCallExpEvalPtr;
 	setThisNavigationCallExpEvalPtr(thisAssociationClassCallExpEvalPtr);
 }
+
+

@@ -32,11 +32,11 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Loci/LociFactory.hpp"
-#include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
-#include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Values/ValuesFactory.hpp"
+#include "uml/umlFactory.hpp"
+#include "ocl/Expressions/ExpressionsFactory.hpp"
+#include "fUML/Semantics/Loci/LociFactory.hpp"
 
 #include "ocl/Evaluations/EvalEnvironment.hpp"
 #include "fUML/Semantics/Loci/Locus.hpp"
@@ -309,12 +309,10 @@ void OclMessageExpEvalImpl::saveContent(std::shared_ptr<persistence::interfaces:
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> OclMessageExpEvalImpl::eStaticClass() const
 {
 	return ocl::Evaluations::EvaluationsPackage::eInstance()->getOclMessageExpEval_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -336,11 +334,11 @@ Any OclMessageExpEvalImpl::eGet(int featureID, bool resolve, bool coreType) cons
 			return eAny(tempList); //637			
 		}
 		case ocl::Evaluations::EvaluationsPackage::OCLMESSAGEEXPEVAL_ATTRIBUTE_NAME:
-			return eAny(getName()); //638
+				return eAny(getName(),0,true); //638
 		case ocl::Evaluations::EvaluationsPackage::OCLMESSAGEEXPEVAL_ATTRIBUTE_TARGET:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getTarget();
-			return eAny(returnValue); //636
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //636
 		}
 	}
 	return OclExpEvalImpl::eGet(featureID, resolve, coreType);
@@ -423,7 +421,7 @@ bool OclMessageExpEvalImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any OclMessageExpEvalImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any OclMessageExpEvalImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -443,7 +441,6 @@ Any OclMessageExpEvalImpl::eInvoke(int operationID, std::shared_ptr<std::list < 
 	return result;
 }
 
-
 std::shared_ptr<ocl::Evaluations::OclMessageExpEval> OclMessageExpEvalImpl::getThisOclMessageExpEvalPtr() const
 {
 	return m_thisOclMessageExpEvalPtr.lock();
@@ -453,3 +450,5 @@ void OclMessageExpEvalImpl::setThisOclMessageExpEvalPtr(std::weak_ptr<ocl::Evalu
 	m_thisOclMessageExpEvalPtr = thisOclMessageExpEvalPtr;
 	setThisOclExpEvalPtr(thisOclMessageExpEvalPtr);
 }
+
+

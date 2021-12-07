@@ -310,12 +310,10 @@ void ControlFlowImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> ControlFlowImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getControlFlow_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -348,27 +346,26 @@ bool ControlFlowImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ControlFlowImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any ControlFlowImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
   	switch(operationID)
 	{
-		
-		// 1247728389
+		// uml::ControlFlow::object_nodes(Any, std::map) : bool: 1247728389
 		case umlPackage::CONTROLFLOW_OPERATION_OBJECT_NODES_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->object_nodes(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->object_nodes(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
 
@@ -385,7 +382,6 @@ Any ControlFlowImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::s
 	return result;
 }
 
-
 std::shared_ptr<uml::ControlFlow> ControlFlowImpl::getThisControlFlowPtr() const
 {
 	return m_thisControlFlowPtr.lock();
@@ -395,3 +391,5 @@ void ControlFlowImpl::setThisControlFlowPtr(std::weak_ptr<uml::ControlFlow> this
 	m_thisControlFlowPtr = thisControlFlowPtr;
 	setThisActivityEdgePtr(thisControlFlowPtr);
 }
+
+

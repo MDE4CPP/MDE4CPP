@@ -364,12 +364,10 @@ void PackageMergeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> PackageMergeImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getPackageMerge_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -381,12 +379,12 @@ Any PackageMergeImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::PACKAGEMERGE_ATTRIBUTE_MERGEDPACKAGE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getMergedPackage();
-			return eAny(returnValue); //1726
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //1726
 		}
 		case uml::umlPackage::PACKAGEMERGE_ATTRIBUTE_RECEIVINGPACKAGE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getReceivingPackage().lock();
-			return eAny(returnValue); //1727
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //1727
 		}
 	}
 	return DirectedRelationshipImpl::eGet(featureID, resolve, coreType);
@@ -432,7 +430,7 @@ bool PackageMergeImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any PackageMergeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any PackageMergeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -452,7 +450,6 @@ Any PackageMergeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::
 	return result;
 }
 
-
 std::shared_ptr<uml::PackageMerge> PackageMergeImpl::getThisPackageMergePtr() const
 {
 	return m_thisPackageMergePtr.lock();
@@ -462,3 +459,5 @@ void PackageMergeImpl::setThisPackageMergePtr(std::weak_ptr<uml::PackageMerge> t
 	m_thisPackageMergePtr = thisPackageMergePtr;
 	setThisDirectedRelationshipPtr(thisPackageMergePtr);
 }
+
+

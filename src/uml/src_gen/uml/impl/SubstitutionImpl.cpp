@@ -428,12 +428,10 @@ void SubstitutionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> SubstitutionImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getSubstitution_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -445,12 +443,12 @@ Any SubstitutionImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::SUBSTITUTION_ATTRIBUTE_CONTRACT:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getContract();
-			return eAny(returnValue); //22918
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //22918
 		}
 		case uml::umlPackage::SUBSTITUTION_ATTRIBUTE_SUBSTITUTINGCLASSIFIER:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getSubstitutingClassifier().lock();
-			return eAny(returnValue); //22919
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //22919
 		}
 	}
 	return RealizationImpl::eGet(featureID, resolve, coreType);
@@ -496,7 +494,7 @@ bool SubstitutionImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any SubstitutionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any SubstitutionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -516,7 +514,6 @@ Any SubstitutionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::
 	return result;
 }
 
-
 std::shared_ptr<uml::Substitution> SubstitutionImpl::getThisSubstitutionPtr() const
 {
 	return m_thisSubstitutionPtr.lock();
@@ -526,3 +523,5 @@ void SubstitutionImpl::setThisSubstitutionPtr(std::weak_ptr<uml::Substitution> t
 	m_thisSubstitutionPtr = thisSubstitutionPtr;
 	setThisRealizationPtr(thisSubstitutionPtr);
 }
+
+

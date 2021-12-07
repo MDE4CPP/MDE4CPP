@@ -288,12 +288,10 @@ void ExtensionPointImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> ExtensionPointImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getExtensionPoint_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -305,7 +303,7 @@ Any ExtensionPointImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::EXTENSIONPOINT_ATTRIBUTE_USECASE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getUseCase().lock();
-			return eAny(returnValue); //9912
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //9912
 		}
 	}
 	return RedefinableElementImpl::eGet(featureID, resolve, coreType);
@@ -341,27 +339,26 @@ bool ExtensionPointImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ExtensionPointImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any ExtensionPointImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
   	switch(operationID)
 	{
-		
-		// 247703177
+		// uml::ExtensionPoint::must_have_name(Any, std::map) : bool: 247703177
 		case umlPackage::EXTENSIONPOINT_OPERATION_MUST_HAVE_NAME_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->must_have_name(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->must_have_name(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
 
@@ -378,7 +375,6 @@ Any ExtensionPointImpl::eInvoke(int operationID, std::shared_ptr<std::list < std
 	return result;
 }
 
-
 std::shared_ptr<uml::ExtensionPoint> ExtensionPointImpl::getThisExtensionPointPtr() const
 {
 	return m_thisExtensionPointPtr.lock();
@@ -388,3 +384,5 @@ void ExtensionPointImpl::setThisExtensionPointPtr(std::weak_ptr<uml::ExtensionPo
 	m_thisExtensionPointPtr = thisExtensionPointPtr;
 	setThisRedefinableElementPtr(thisExtensionPointPtr);
 }
+
+

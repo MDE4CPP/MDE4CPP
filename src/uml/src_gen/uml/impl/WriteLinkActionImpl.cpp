@@ -333,12 +333,10 @@ void WriteLinkActionImpl::saveContent(std::shared_ptr<persistence::interfaces::X
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> WriteLinkActionImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getWriteLinkAction_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -371,27 +369,26 @@ bool WriteLinkActionImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any WriteLinkActionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any WriteLinkActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
   	switch(operationID)
 	{
-		
-		// 717511047
+		// uml::WriteLinkAction::allow_access(Any, std::map) : bool: 717511047
 		case umlPackage::WRITELINKACTION_OPERATION_ALLOW_ACCESS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->allow_access(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->allow_access(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
 
@@ -408,7 +405,6 @@ Any WriteLinkActionImpl::eInvoke(int operationID, std::shared_ptr<std::list < st
 	return result;
 }
 
-
 std::shared_ptr<uml::WriteLinkAction> WriteLinkActionImpl::getThisWriteLinkActionPtr() const
 {
 	return m_thisWriteLinkActionPtr.lock();
@@ -418,3 +414,5 @@ void WriteLinkActionImpl::setThisWriteLinkActionPtr(std::weak_ptr<uml::WriteLink
 	m_thisWriteLinkActionPtr = thisWriteLinkActionPtr;
 	setThisLinkActionPtr(thisWriteLinkActionPtr);
 }
+
+

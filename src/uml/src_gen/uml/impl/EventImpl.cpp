@@ -265,12 +265,10 @@ void EventImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandle
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> EventImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getEvent_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -303,7 +301,7 @@ bool EventImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any EventImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any EventImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -323,7 +321,6 @@ Any EventImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_
 	return result;
 }
 
-
 std::shared_ptr<uml::Event> EventImpl::getThisEventPtr() const
 {
 	return m_thisEventPtr.lock();
@@ -333,3 +330,5 @@ void EventImpl::setThisEventPtr(std::weak_ptr<uml::Event> thisEventPtr)
 	m_thisEventPtr = thisEventPtr;
 	setThisPackageableElementPtr(thisEventPtr);
 }
+
+

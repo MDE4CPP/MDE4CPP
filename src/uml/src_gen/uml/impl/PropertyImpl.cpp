@@ -214,14 +214,10 @@ PropertyImpl& PropertyImpl::operator=(const PropertyImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_qualifier - Subset<uml::Property, uml::Element >(getOwnedElement())" << std::endl;
 		#endif
 		
-
-		Bag<uml::Property>::iterator qualifierIter = qualifierList->begin();
-		Bag<uml::Property>::iterator qualifierEnd = qualifierList->end();
-		while (qualifierIter != qualifierEnd) 
+		for(const std::shared_ptr<uml::Property> qualifierindexElem: *qualifierList) 
 		{
-			std::shared_ptr<uml::Property> temp = std::dynamic_pointer_cast<uml::Property>((*qualifierIter)->copy());
-			getQualifier()->push_back(temp);
-			qualifierIter++;
+			std::shared_ptr<uml::Property> temp = std::dynamic_pointer_cast<uml::Property>((qualifierindexElem)->copy());
+			m_qualifier->push_back(temp);
 		}
 	}
 	else
@@ -245,14 +241,10 @@ PropertyImpl& PropertyImpl::operator=(const PropertyImpl & obj)
 			std::cout << "Initialising value SubsetUnion: " << "m_redefinedProperty - SubsetUnion<uml::Property, uml::RedefinableElement >(getRedefinedElement())" << std::endl;
 		#endif
 		
-
-		Bag<uml::Property>::iterator redefinedPropertyIter = redefinedPropertyList->begin();
-		Bag<uml::Property>::iterator redefinedPropertyEnd = redefinedPropertyList->end();
-		while (redefinedPropertyIter != redefinedPropertyEnd) 
+		for(const std::shared_ptr<uml::Property> redefinedPropertyindexElem: *redefinedPropertyList) 
 		{
-			std::shared_ptr<uml::Property> temp = std::dynamic_pointer_cast<uml::Property>((*redefinedPropertyIter)->copy());
-			getRedefinedProperty()->push_back(temp);
-			redefinedPropertyIter++;
+			std::shared_ptr<uml::Property> temp = std::dynamic_pointer_cast<uml::Property>((redefinedPropertyindexElem)->copy());
+			m_redefinedProperty->push_back(temp);
 		}
 	}
 	else
@@ -802,15 +794,15 @@ void PropertyImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoad
 		{
 			uml::AggregationKind value = uml::AggregationKind::NONE;
 			std::string literal = iter->second;
-			if (literal == "none")
+						if (literal == "none")
 			{
 				value = uml::AggregationKind::NONE;
 			}
-			else if (literal == "shared")
+			else 			if (literal == "shared")
 			{
 				value = uml::AggregationKind::SHARED;
 			}
-			else if (literal == "composite")
+			else 			if (literal == "composite")
 			{
 				value = uml::AggregationKind::COMPOSITE;
 			}
@@ -1138,12 +1130,10 @@ void PropertyImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> PropertyImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getProperty_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -1153,92 +1143,68 @@ Any PropertyImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::PROPERTY_ATTRIBUTE_AGGREGATION:
-			return eAny(getAggregation()); //18530
+			return eAny(getAggregation(),0,true); //18530
 		case uml::umlPackage::PROPERTY_ATTRIBUTE_ASSOCIATION:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getAssociation();
-			return eAny(returnValue); //18543
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //18543
 		}
 		case uml::umlPackage::PROPERTY_ATTRIBUTE_ASSOCIATIONEND:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getAssociationEnd().lock();
-			return eAny(returnValue); //18531
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //18531
 		}
 		case uml::umlPackage::PROPERTY_ATTRIBUTE_CLASS:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getClass().lock();
-			return eAny(returnValue); //18533
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //18533
 		}
 		case uml::umlPackage::PROPERTY_ATTRIBUTE_DATATYPE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getDatatype().lock();
-			return eAny(returnValue); //18527
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //18527
 		}
 		case uml::umlPackage::PROPERTY_ATTRIBUTE_DEFAULT:
-			return eAny(getDefault()); //18529
+			return eAny(getDefault(),0,true); //18529
 		case uml::umlPackage::PROPERTY_ATTRIBUTE_DEFAULTVALUE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getDefaultValue();
-			return eAny(returnValue); //18534
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //18534
 		}
 		case uml::umlPackage::PROPERTY_ATTRIBUTE_INTERFACE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getInterface().lock();
-			return eAny(returnValue); //18528
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //18528
 		}
 		case uml::umlPackage::PROPERTY_ATTRIBUTE_ISCOMPOSITE:
-			return eAny(getIsComposite()); //18535
+			return eAny(getIsComposite(),0,true); //18535
 		case uml::umlPackage::PROPERTY_ATTRIBUTE_ISDERIVED:
-			return eAny(getIsDerived()); //18536
+			return eAny(getIsDerived(),0,true); //18536
 		case uml::umlPackage::PROPERTY_ATTRIBUTE_ISDERIVEDUNION:
-			return eAny(getIsDerivedUnion()); //18537
+			return eAny(getIsDerivedUnion(),0,true); //18537
 		case uml::umlPackage::PROPERTY_ATTRIBUTE_ISID:
-			return eAny(getIsID()); //18538
+			return eAny(getIsID(),0,true); //18538
 		case uml::umlPackage::PROPERTY_ATTRIBUTE_OPPOSITE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getOpposite();
-			return eAny(returnValue); //18539
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //18539
 		}
 		case uml::umlPackage::PROPERTY_ATTRIBUTE_OWNINGASSOCIATION:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getOwningAssociation().lock();
-			return eAny(returnValue); //18540
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //18540
 		}
 		case uml::umlPackage::PROPERTY_ATTRIBUTE_QUALIFIER:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Property>::iterator iter = getQualifier()->begin();
-			Bag<uml::Property>::iterator end = getQualifier()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //18532			
+			return eAnyBag(getQualifier(),1938835355); //18532
 		}
 		case uml::umlPackage::PROPERTY_ATTRIBUTE_REDEFINEDPROPERTY:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Property>::iterator iter = getRedefinedProperty()->begin();
-			Bag<uml::Property>::iterator end = getRedefinedProperty()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //18541			
+			return eAnyBag(getRedefinedProperty(),1938835355); //18541
 		}
 		case uml::umlPackage::PROPERTY_ATTRIBUTE_SUBSETTEDPROPERTY:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Property>::iterator iter = getSubsettedProperty()->begin();
-			Bag<uml::Property>::iterator end = getSubsettedProperty()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //18542			
+			return eAnyBag(getSubsettedProperty(),1938835355); //18542
 		}
 	}
 	Any result;
@@ -1423,108 +1389,111 @@ bool PropertyImpl::eSet(int featureID, Any newValue)
 		case uml::umlPackage::PROPERTY_ATTRIBUTE_QUALIFIER:
 		{
 			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::Property>> qualifierList(new Bag<uml::Property>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
+			if((newValue->isContainer()) && (uml::umlPackage::PROPERTY_CLASS ==newValue->getTypeId()))
 			{
-				qualifierList->add(std::dynamic_pointer_cast<uml::Property>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::Property>::iterator iterQualifier = getQualifier()->begin();
-			Bag<uml::Property>::iterator endQualifier = getQualifier()->end();
-			while (iterQualifier != endQualifier)
-			{
-				if (qualifierList->find(*iterQualifier) == -1)
+				try
 				{
-					getQualifier()->erase(*iterQualifier);
+					std::shared_ptr<Bag<uml::Property>> qualifierList= newValue->get<std::shared_ptr<Bag<uml::Property>>>();
+					std::shared_ptr<Bag<uml::Property>> _qualifier=getQualifier();
+					for(const std::shared_ptr<uml::Property> indexQualifier: *_qualifier)
+					{
+						if (qualifierList->find(indexQualifier) == -1)
+						{
+							_qualifier->erase(indexQualifier);
+						}
+					}
+
+					for(const std::shared_ptr<uml::Property> indexQualifier: *qualifierList)
+					{
+						if (_qualifier->find(indexQualifier) == -1)
+						{
+							_qualifier->add(indexQualifier);
+						}
+					}
 				}
-				iterQualifier++;
-			}
- 
-			iterQualifier = qualifierList->begin();
-			endQualifier = qualifierList->end();
-			while (iterQualifier != endQualifier)
-			{
-				if (getQualifier()->find(*iterQualifier) == -1)
+				catch(...)
 				{
-					getQualifier()->add(*iterQualifier);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterQualifier++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}
 		case uml::umlPackage::PROPERTY_ATTRIBUTE_REDEFINEDPROPERTY:
 		{
 			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::Property>> redefinedPropertyList(new Bag<uml::Property>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
+			if((newValue->isContainer()) && (uml::umlPackage::PROPERTY_CLASS ==newValue->getTypeId()))
 			{
-				redefinedPropertyList->add(std::dynamic_pointer_cast<uml::Property>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::Property>::iterator iterRedefinedProperty = getRedefinedProperty()->begin();
-			Bag<uml::Property>::iterator endRedefinedProperty = getRedefinedProperty()->end();
-			while (iterRedefinedProperty != endRedefinedProperty)
-			{
-				if (redefinedPropertyList->find(*iterRedefinedProperty) == -1)
+				try
 				{
-					getRedefinedProperty()->erase(*iterRedefinedProperty);
+					std::shared_ptr<Bag<uml::Property>> redefinedPropertyList= newValue->get<std::shared_ptr<Bag<uml::Property>>>();
+					std::shared_ptr<Bag<uml::Property>> _redefinedProperty=getRedefinedProperty();
+					for(const std::shared_ptr<uml::Property> indexRedefinedProperty: *_redefinedProperty)
+					{
+						if (redefinedPropertyList->find(indexRedefinedProperty) == -1)
+						{
+							_redefinedProperty->erase(indexRedefinedProperty);
+						}
+					}
+
+					for(const std::shared_ptr<uml::Property> indexRedefinedProperty: *redefinedPropertyList)
+					{
+						if (_redefinedProperty->find(indexRedefinedProperty) == -1)
+						{
+							_redefinedProperty->add(indexRedefinedProperty);
+						}
+					}
 				}
-				iterRedefinedProperty++;
-			}
- 
-			iterRedefinedProperty = redefinedPropertyList->begin();
-			endRedefinedProperty = redefinedPropertyList->end();
-			while (iterRedefinedProperty != endRedefinedProperty)
-			{
-				if (getRedefinedProperty()->find(*iterRedefinedProperty) == -1)
+				catch(...)
 				{
-					getRedefinedProperty()->add(*iterRedefinedProperty);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterRedefinedProperty++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}
 		case uml::umlPackage::PROPERTY_ATTRIBUTE_SUBSETTEDPROPERTY:
 		{
 			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::Property>> subsettedPropertyList(new Bag<uml::Property>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
+			if((newValue->isContainer()) && (uml::umlPackage::PROPERTY_CLASS ==newValue->getTypeId()))
 			{
-				subsettedPropertyList->add(std::dynamic_pointer_cast<uml::Property>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::Property>::iterator iterSubsettedProperty = getSubsettedProperty()->begin();
-			Bag<uml::Property>::iterator endSubsettedProperty = getSubsettedProperty()->end();
-			while (iterSubsettedProperty != endSubsettedProperty)
-			{
-				if (subsettedPropertyList->find(*iterSubsettedProperty) == -1)
+				try
 				{
-					getSubsettedProperty()->erase(*iterSubsettedProperty);
+					std::shared_ptr<Bag<uml::Property>> subsettedPropertyList= newValue->get<std::shared_ptr<Bag<uml::Property>>>();
+					std::shared_ptr<Bag<uml::Property>> _subsettedProperty=getSubsettedProperty();
+					for(const std::shared_ptr<uml::Property> indexSubsettedProperty: *_subsettedProperty)
+					{
+						if (subsettedPropertyList->find(indexSubsettedProperty) == -1)
+						{
+							_subsettedProperty->erase(indexSubsettedProperty);
+						}
+					}
+
+					for(const std::shared_ptr<uml::Property> indexSubsettedProperty: *subsettedPropertyList)
+					{
+						if (_subsettedProperty->find(indexSubsettedProperty) == -1)
+						{
+							_subsettedProperty->add(indexSubsettedProperty);
+						}
+					}
 				}
-				iterSubsettedProperty++;
-			}
- 
-			iterSubsettedProperty = subsettedPropertyList->begin();
-			endSubsettedProperty = subsettedPropertyList->end();
-			while (iterSubsettedProperty != endSubsettedProperty)
-			{
-				if (getSubsettedProperty()->find(*iterSubsettedProperty) == -1)
+				catch(...)
 				{
-					getSubsettedProperty()->add(*iterSubsettedProperty);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterSubsettedProperty++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}
@@ -1548,333 +1517,300 @@ bool PropertyImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any PropertyImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any PropertyImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
   	switch(operationID)
 	{
-		
-		// 1056930161
+		// uml::Property::binding_to_attribute(Any, std::map) : bool: 1056930161
 		case umlPackage::PROPERTY_OPERATION_BINDING_TO_ATTRIBUTE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->binding_to_attribute(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->binding_to_attribute(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		
-		// 1451308280
+		// uml::Property::deployment_target(Any, std::map) : bool: 1451308280
 		case umlPackage::PROPERTY_OPERATION_DEPLOYMENT_TARGET_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->deployment_target(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->deployment_target(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		
-		// 2088980284
+		// uml::Property::derived_union_is_derived(Any, std::map) : bool: 2088980284
 		case umlPackage::PROPERTY_OPERATION_DERIVED_UNION_IS_DERIVED_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->derived_union_is_derived(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->derived_union_is_derived(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		
-		// 487748595
+		// uml::Property::derived_union_is_read_only(Any, std::map) : bool: 487748595
 		case umlPackage::PROPERTY_OPERATION_DERIVED_UNION_IS_READ_ONLY_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->derived_union_is_read_only(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->derived_union_is_read_only(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		
-		// 1965496207
+		// uml::Property::getOpposite() : uml::Property: 1965496207
 		case umlPackage::PROPERTY_OPERATION_GETOPPOSITE:
 		{
-			result = eAny(this->getOpposite());
+			result = eAny(this->getOpposite(), umlPackage::PROPERTY_CLASS,false);
 			break;
 		}
-		
-		// 1860005684
+		// uml::Property::getOtherEnd() : uml::Property: 1860005684
 		case umlPackage::PROPERTY_OPERATION_GETOTHEREND:
 		{
-			result = eAny(this->getOtherEnd());
+			result = eAny(this->getOtherEnd(), umlPackage::PROPERTY_CLASS,false);
 			break;
 		}
-		
-		// 1679656582
+		// uml::Property::isAttribute() : bool: 1679656582
 		case umlPackage::PROPERTY_OPERATION_ISATTRIBUTE:
 		{
-			result = eAny(this->isAttribute());
+			result = eAny(this->isAttribute(),0,false);
 			break;
 		}
-		
-		// 136444713
+		// uml::Property::isComposite() : bool: 136444713
 		case umlPackage::PROPERTY_OPERATION_ISCOMPOSITE:
 		{
-			result = eAny(this->isComposite());
+			result = eAny(this->isComposite(),0,false);
 			break;
 		}
-		
-		// 1815246865
+		// uml::Property::isNavigable() : bool: 1815246865
 		case umlPackage::PROPERTY_OPERATION_ISNAVIGABLE:
 		{
-			result = eAny(this->isNavigable());
+			result = eAny(this->isNavigable(),0,false);
 			break;
 		}
-		
-		// 1613101097
+		// uml::Property::isSetDefault() : bool: 1613101097
 		case umlPackage::PROPERTY_OPERATION_ISSETDEFAULT:
 		{
-			result = eAny(this->isSetDefault());
+			result = eAny(this->isSetDefault(),0,false);
 			break;
 		}
-		
-		// 897292100
+		// uml::Property::multiplicity_of_composite(Any, std::map) : bool: 897292100
 		case umlPackage::PROPERTY_OPERATION_MULTIPLICITY_OF_COMPOSITE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->multiplicity_of_composite(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->multiplicity_of_composite(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		
-		// 763035670
+		// uml::Property::qualified_is_association_end(Any, std::map) : bool: 763035670
 		case umlPackage::PROPERTY_OPERATION_QUALIFIED_IS_ASSOCIATION_END_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->qualified_is_association_end(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->qualified_is_association_end(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		
-		// 1140838564
+		// uml::Property::redefined_property_inherited(Any, std::map) : bool: 1140838564
 		case umlPackage::PROPERTY_OPERATION_REDEFINED_PROPERTY_INHERITED_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->redefined_property_inherited(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->redefined_property_inherited(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		
-		// 1947611129
+		// uml::Property::setBooleanDefaultValue(bool): 1947611129
 		case umlPackage::PROPERTY_OPERATION_SETBOOLEANDEFAULTVALUE_BOOLEAN:
 		{
 			//Retrieve input parameter 'value'
 			//parameter 0
 			bool incoming_param_value;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_value_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_value = (*incoming_param_value_arguments_citer)->get()->get<bool >();
+			std::list<Any>::const_iterator incoming_param_value_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_value = (*incoming_param_value_arguments_citer)->get<bool >();
 			this->setBooleanDefaultValue(incoming_param_value);
-			break;
 		}
-		
-		// 635550506
+		// uml::Property::setIntegerDefaultValue(int): 635550506
 		case umlPackage::PROPERTY_OPERATION_SETINTEGERDEFAULTVALUE_INTEGER:
 		{
 			//Retrieve input parameter 'value'
 			//parameter 0
 			int incoming_param_value;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_value_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_value = (*incoming_param_value_arguments_citer)->get()->get<int >();
+			std::list<Any>::const_iterator incoming_param_value_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_value = (*incoming_param_value_arguments_citer)->get<int >();
 			this->setIntegerDefaultValue(incoming_param_value);
-			break;
 		}
-		
-		// 1084890443
+		// uml::Property::setIsNavigable(bool): 1084890443
 		case umlPackage::PROPERTY_OPERATION_SETISNAVIGABLE_BOOLEAN:
 		{
 			//Retrieve input parameter 'isNavigable'
 			//parameter 0
 			bool incoming_param_isNavigable;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_isNavigable_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_isNavigable = (*incoming_param_isNavigable_arguments_citer)->get()->get<bool >();
+			std::list<Any>::const_iterator incoming_param_isNavigable_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_isNavigable = (*incoming_param_isNavigable_arguments_citer)->get<bool >();
 			this->setIsNavigable(incoming_param_isNavigable);
-			break;
 		}
-		
-		// 1385757410
+		// uml::Property::setNullDefaultValue(): 1385757410
 		case umlPackage::PROPERTY_OPERATION_SETNULLDEFAULTVALUE:
 		{
 			this->setNullDefaultValue();
-			break;
 		}
-		
-		// 1503561658
+		// uml::Property::setRealDefaultValue(double): 1503561658
 		case umlPackage::PROPERTY_OPERATION_SETREALDEFAULTVALUE_REAL:
 		{
 			//Retrieve input parameter 'value'
 			//parameter 0
 			double incoming_param_value;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_value_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_value = (*incoming_param_value_arguments_citer)->get()->get<double >();
+			std::list<Any>::const_iterator incoming_param_value_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_value = (*incoming_param_value_arguments_citer)->get<double >();
 			this->setRealDefaultValue(incoming_param_value);
-			break;
 		}
-		
-		// 748800765
+		// uml::Property::setStringDefaultValue(std::string): 748800765
 		case umlPackage::PROPERTY_OPERATION_SETSTRINGDEFAULTVALUE_STRING:
 		{
 			//Retrieve input parameter 'value'
 			//parameter 0
 			std::string incoming_param_value;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_value_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_value = (*incoming_param_value_arguments_citer)->get()->get<std::string >();
+			std::list<Any>::const_iterator incoming_param_value_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_value = (*incoming_param_value_arguments_citer)->get<std::string >();
 			this->setStringDefaultValue(incoming_param_value);
-			break;
 		}
-		
-		// 486798804
+		// uml::Property::setUnlimitedNaturalDefaultValue(int): 486798804
 		case umlPackage::PROPERTY_OPERATION_SETUNLIMITEDNATURALDEFAULTVALUE_UNLIMITEDNATURAL:
 		{
 			//Retrieve input parameter 'value'
 			//parameter 0
 			int incoming_param_value;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_value_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_value = (*incoming_param_value_arguments_citer)->get()->get<int >();
+			std::list<Any>::const_iterator incoming_param_value_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_value = (*incoming_param_value_arguments_citer)->get<int >();
 			this->setUnlimitedNaturalDefaultValue(incoming_param_value);
-			break;
 		}
-		
-		// 1501045410
+		// uml::Property::subsetted_property_names(Any, std::map) : bool: 1501045410
 		case umlPackage::PROPERTY_OPERATION_SUBSETTED_PROPERTY_NAMES_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->subsetted_property_names(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->subsetted_property_names(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		
-		// 124204192
+		// uml::Property::subsettingContext() : uml::Type[*]: 124204192
 		case umlPackage::PROPERTY_OPERATION_SUBSETTINGCONTEXT:
 		{
-			result = eAny(this->subsettingContext());
+			std::shared_ptr<Bag<uml::Type> > resultList = this->subsettingContext();
+			return eAny(resultList,umlPackage::TYPE_CLASS,true);
 			break;
 		}
-		
-		// 236653454
+		// uml::Property::subsetting_context_conforms(Any, std::map) : bool: 236653454
 		case umlPackage::PROPERTY_OPERATION_SUBSETTING_CONTEXT_CONFORMS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->subsetting_context_conforms(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->subsetting_context_conforms(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		
-		// 569617743
+		// uml::Property::subsetting_rules(Any, std::map) : bool: 569617743
 		case umlPackage::PROPERTY_OPERATION_SUBSETTING_RULES_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->subsetting_rules(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->subsetting_rules(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		
-		// 446766831
+		// uml::Property::type_of_opposite_end(Any, std::map) : bool: 446766831
 		case umlPackage::PROPERTY_OPERATION_TYPE_OF_OPPOSITE_END_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->type_of_opposite_end(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->type_of_opposite_end(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		
-		// 1216643635
+		// uml::Property::unsetDefault(): 1216643635
 		case umlPackage::PROPERTY_OPERATION_UNSETDEFAULT:
 		{
 			this->unsetDefault();
-			break;
 		}
 
 		default:
@@ -1896,7 +1832,6 @@ Any PropertyImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shar
 	return result;
 }
 
-
 std::shared_ptr<uml::Property> PropertyImpl::getThisPropertyPtr() const
 {
 	return m_thisPropertyPtr.lock();
@@ -1908,3 +1843,5 @@ void PropertyImpl::setThisPropertyPtr(std::weak_ptr<uml::Property> thisPropertyP
 	setThisDeploymentTargetPtr(thisPropertyPtr);
 	setThisStructuralFeaturePtr(thisPropertyPtr);
 }
+
+

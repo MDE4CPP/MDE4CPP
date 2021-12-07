@@ -93,9 +93,6 @@ namespace ecore
 			virtual std::shared_ptr<EObject> createEObject_as_contents_in_EAnnotation(std::shared_ptr<EAnnotation> par_EAnnotation, const int metaElementID = ecorePackage::EOBJECT_CLASS) const = 0;
 			virtual std::shared_ptr<EObject> createEObject_as_eContentUnion_in_EObject(std::weak_ptr<ecore::EObject> par_EObject, const int metaElementID = ecorePackage::EOBJECT_CLASS) const = 0;
 			virtual std::shared_ptr<EObjectContainer> createEObjectContainer(const int metaElementID = ecorePackage::EOBJECTCONTAINER_CLASS) const = 0;
-			//Add as contained object
-			virtual std::shared_ptr<EObjectContainer> createEObjectContainer_as_contents_in_EAnnotation(std::shared_ptr<EAnnotation> par_EAnnotation, const int metaElementID = ecorePackage::EOBJECTCONTAINER_CLASS) const = 0;
-			virtual std::shared_ptr<EObjectContainer> createEObjectContainer_as_eContentUnion_in_EObject(std::weak_ptr<ecore::EObject> par_EObject, const int metaElementID = ecorePackage::EOBJECTCONTAINER_CLASS) const = 0;
 			virtual std::shared_ptr<EOperation> createEOperation(const int metaElementID = ecorePackage::EOPERATION_CLASS) const = 0;
 			//Add as contained object
 			virtual std::shared_ptr<EOperation> createEOperation_as_contents_in_EAnnotation(std::shared_ptr<EAnnotation> par_EAnnotation, const int metaElementID = ecorePackage::EOPERATION_CLASS) const = 0;

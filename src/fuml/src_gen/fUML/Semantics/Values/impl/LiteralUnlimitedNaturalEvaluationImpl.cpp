@@ -36,8 +36,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
+#include "uml/umlFactory.hpp"
 
 #include "fUML/Semantics/Values/LiteralEvaluation.hpp"
 #include "fUML/Semantics/Loci/Locus.hpp"
@@ -45,8 +45,8 @@
 #include "uml/ValueSpecification.hpp"
 
 //Factories an Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
 #include "fUML/Semantics/Values/ValuesPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -210,12 +210,10 @@ void LiteralUnlimitedNaturalEvaluationImpl::saveContent(std::shared_ptr<persiste
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> LiteralUnlimitedNaturalEvaluationImpl::eStaticClass() const
 {
 	return fUML::Semantics::Values::ValuesPackage::eInstance()->getLiteralUnlimitedNaturalEvaluation_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -248,7 +246,7 @@ bool LiteralUnlimitedNaturalEvaluationImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any LiteralUnlimitedNaturalEvaluationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any LiteralUnlimitedNaturalEvaluationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -258,7 +256,7 @@ Any LiteralUnlimitedNaturalEvaluationImpl::eInvoke(int operationID, std::shared_
 		// 1159124191
 		case ValuesPackage::LITERALUNLIMITEDNATURALEVALUATION_OPERATION_EVALUATE:
 		{
-			result = eAny(this->evaluate());
+				result = eAny(this->evaluate());
 			break;
 		}
 
@@ -275,7 +273,6 @@ Any LiteralUnlimitedNaturalEvaluationImpl::eInvoke(int operationID, std::shared_
 	return result;
 }
 
-
 std::shared_ptr<fUML::Semantics::Values::LiteralUnlimitedNaturalEvaluation> LiteralUnlimitedNaturalEvaluationImpl::getThisLiteralUnlimitedNaturalEvaluationPtr() const
 {
 	return m_thisLiteralUnlimitedNaturalEvaluationPtr.lock();
@@ -285,3 +282,5 @@ void LiteralUnlimitedNaturalEvaluationImpl::setThisLiteralUnlimitedNaturalEvalua
 	m_thisLiteralUnlimitedNaturalEvaluationPtr = thisLiteralUnlimitedNaturalEvaluationPtr;
 	setThisLiteralEvaluationPtr(thisLiteralUnlimitedNaturalEvaluationPtr);
 }
+
+

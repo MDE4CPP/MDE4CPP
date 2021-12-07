@@ -37,8 +37,8 @@
 
 //Factories an Package includes
 #include "ocl/oclPackage.hpp"
-#include "ocl/Values/ValuesPackage.hpp"
 #include "fUML/Semantics/Values/ValuesPackage.hpp"
+#include "ocl/Values/ValuesPackage.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -253,12 +253,10 @@ void NameValueBindingImpl::saveContent(std::shared_ptr<persistence::interfaces::
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> NameValueBindingImpl::eStaticClass() const
 {
 	return ocl::Values::ValuesPackage::eInstance()->getNameValueBinding_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -268,11 +266,11 @@ Any NameValueBindingImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case ocl::Values::ValuesPackage::NAMEVALUEBINDING_ATTRIBUTE_NAME:
-			return eAny(getName()); //530
+				return eAny(getName(),0,true); //530
 		case ocl::Values::ValuesPackage::NAMEVALUEBINDING_ATTRIBUTE_VALUE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getValue();
-			return eAny(returnValue); //531
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //531
 		}
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
@@ -317,7 +315,7 @@ bool NameValueBindingImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any NameValueBindingImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any NameValueBindingImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -337,7 +335,6 @@ Any NameValueBindingImpl::eInvoke(int operationID, std::shared_ptr<std::list < s
 	return result;
 }
 
-
 std::shared_ptr<ocl::Values::NameValueBinding> NameValueBindingImpl::getThisNameValueBindingPtr() const
 {
 	return m_thisNameValueBindingPtr.lock();
@@ -346,3 +343,5 @@ void NameValueBindingImpl::setThisNameValueBindingPtr(std::weak_ptr<ocl::Values:
 {
 	m_thisNameValueBindingPtr = thisNameValueBindingPtr;
 }
+
+

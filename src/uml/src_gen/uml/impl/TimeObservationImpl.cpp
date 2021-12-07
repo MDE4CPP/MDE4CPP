@@ -347,12 +347,10 @@ void TimeObservationImpl::saveContent(std::shared_ptr<persistence::interfaces::X
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> TimeObservationImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getTimeObservation_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -364,10 +362,10 @@ Any TimeObservationImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::TIMEOBSERVATION_ATTRIBUTE_EVENT:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getEvent();
-			return eAny(returnValue); //24012
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //24012
 		}
 		case uml::umlPackage::TIMEOBSERVATION_ATTRIBUTE_FIRSTEVENT:
-			return eAny(getFirstEvent()); //24013
+			return eAny(getFirstEvent(),0,true); //24013
 	}
 	return ObservationImpl::eGet(featureID, resolve, coreType);
 }
@@ -411,7 +409,7 @@ bool TimeObservationImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any TimeObservationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any TimeObservationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -431,7 +429,6 @@ Any TimeObservationImpl::eInvoke(int operationID, std::shared_ptr<std::list < st
 	return result;
 }
 
-
 std::shared_ptr<uml::TimeObservation> TimeObservationImpl::getThisTimeObservationPtr() const
 {
 	return m_thisTimeObservationPtr.lock();
@@ -441,3 +438,5 @@ void TimeObservationImpl::setThisTimeObservationPtr(std::weak_ptr<uml::TimeObser
 	m_thisTimeObservationPtr = thisTimeObservationPtr;
 	setThisObservationPtr(thisTimeObservationPtr);
 }
+
+

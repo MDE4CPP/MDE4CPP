@@ -33,8 +33,8 @@
 
 #include <exception> // used in Persistence
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
-#include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Actions/ActionsFactory.hpp"
+#include "uml/umlFactory.hpp"
 
 #include "uml/Action.hpp"
 #include "fUML/Semantics/Actions/ActionActivation.hpp"
@@ -47,8 +47,8 @@
 #include "fUML/Semantics/Activities/Token.hpp"
 
 //Factories an Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -218,12 +218,10 @@ void InvocationActionActivationImpl::saveContent(std::shared_ptr<persistence::in
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> InvocationActionActivationImpl::eStaticClass() const
 {
 	return fUML::Semantics::Actions::ActionsPackage::eInstance()->getInvocationActionActivation_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -256,7 +254,7 @@ bool InvocationActionActivationImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any InvocationActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any InvocationActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -276,7 +274,6 @@ Any InvocationActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std
 	return result;
 }
 
-
 std::shared_ptr<fUML::Semantics::Actions::InvocationActionActivation> InvocationActionActivationImpl::getThisInvocationActionActivationPtr() const
 {
 	return m_thisInvocationActionActivationPtr.lock();
@@ -286,3 +283,5 @@ void InvocationActionActivationImpl::setThisInvocationActionActivationPtr(std::w
 	m_thisInvocationActionActivationPtr = thisInvocationActionActivationPtr;
 	setThisActionActivationPtr(thisInvocationActionActivationPtr);
 }
+
+

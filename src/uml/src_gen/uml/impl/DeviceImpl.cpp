@@ -444,12 +444,10 @@ void DeviceImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandl
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> DeviceImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getDevice_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -482,7 +480,7 @@ bool DeviceImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any DeviceImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any DeviceImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -502,7 +500,6 @@ Any DeviceImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared
 	return result;
 }
 
-
 std::shared_ptr<uml::Device> DeviceImpl::getThisDevicePtr() const
 {
 	return m_thisDevicePtr.lock();
@@ -512,3 +509,5 @@ void DeviceImpl::setThisDevicePtr(std::weak_ptr<uml::Device> thisDevicePtr)
 	m_thisDevicePtr = thisDevicePtr;
 	setThisNodePtr(thisDevicePtr);
 }
+
+

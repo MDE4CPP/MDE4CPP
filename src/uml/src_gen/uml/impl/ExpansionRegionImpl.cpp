@@ -449,15 +449,15 @@ void ExpansionRegionImpl::loadAttributes(std::shared_ptr<persistence::interfaces
 		{
 			uml::ExpansionKind value = uml::ExpansionKind::ITERATIVE;
 			std::string literal = iter->second;
-			if (literal == "parallel")
+						if (literal == "parallel")
 			{
 				value = uml::ExpansionKind::PARALLEL;
 			}
-			else if (literal == "iterative")
+			else 			if (literal == "iterative")
 			{
 				value = uml::ExpansionKind::ITERATIVE;
 			}
-			else if (literal == "stream")
+			else 			if (literal == "stream")
 			{
 				value = uml::ExpansionKind::STREAM;
 			}
@@ -591,12 +591,10 @@ void ExpansionRegionImpl::saveContent(std::shared_ptr<persistence::interfaces::X
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> ExpansionRegionImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getExpansionRegion_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -607,29 +605,13 @@ Any ExpansionRegionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	{
 		case uml::umlPackage::EXPANSIONREGION_ATTRIBUTE_INPUTELEMENT:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::ExpansionNode>::iterator iter = getInputElement()->begin();
-			Bag<uml::ExpansionNode>::iterator end = getInputElement()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //9446			
+			return eAnyBag(getInputElement(),316346527); //9446
 		}
 		case uml::umlPackage::EXPANSIONREGION_ATTRIBUTE_MODE:
-			return eAny(getMode()); //9444
+			return eAny(getMode(),0,true); //9444
 		case uml::umlPackage::EXPANSIONREGION_ATTRIBUTE_OUTPUTELEMENT:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::ExpansionNode>::iterator iter = getOutputElement()->begin();
-			Bag<uml::ExpansionNode>::iterator end = getOutputElement()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //9445			
+			return eAnyBag(getOutputElement(),316346527); //9445
 		}
 	}
 	return StructuredActivityNodeImpl::eGet(featureID, resolve, coreType);
@@ -656,36 +638,37 @@ bool ExpansionRegionImpl::eSet(int featureID, Any newValue)
 		case uml::umlPackage::EXPANSIONREGION_ATTRIBUTE_INPUTELEMENT:
 		{
 			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::ExpansionNode>> inputElementList(new Bag<uml::ExpansionNode>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
+			if((newValue->isContainer()) && (uml::umlPackage::EXPANSIONNODE_CLASS ==newValue->getTypeId()))
 			{
-				inputElementList->add(std::dynamic_pointer_cast<uml::ExpansionNode>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::ExpansionNode>::iterator iterInputElement = getInputElement()->begin();
-			Bag<uml::ExpansionNode>::iterator endInputElement = getInputElement()->end();
-			while (iterInputElement != endInputElement)
-			{
-				if (inputElementList->find(*iterInputElement) == -1)
+				try
 				{
-					getInputElement()->erase(*iterInputElement);
+					std::shared_ptr<Bag<uml::ExpansionNode>> inputElementList= newValue->get<std::shared_ptr<Bag<uml::ExpansionNode>>>();
+					std::shared_ptr<Bag<uml::ExpansionNode>> _inputElement=getInputElement();
+					for(const std::shared_ptr<uml::ExpansionNode> indexInputElement: *_inputElement)
+					{
+						if (inputElementList->find(indexInputElement) == -1)
+						{
+							_inputElement->erase(indexInputElement);
+						}
+					}
+
+					for(const std::shared_ptr<uml::ExpansionNode> indexInputElement: *inputElementList)
+					{
+						if (_inputElement->find(indexInputElement) == -1)
+						{
+							_inputElement->add(indexInputElement);
+						}
+					}
 				}
-				iterInputElement++;
-			}
- 
-			iterInputElement = inputElementList->begin();
-			endInputElement = inputElementList->end();
-			while (iterInputElement != endInputElement)
-			{
-				if (getInputElement()->find(*iterInputElement) == -1)
+				catch(...)
 				{
-					getInputElement()->add(*iterInputElement);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterInputElement++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}
@@ -699,36 +682,37 @@ bool ExpansionRegionImpl::eSet(int featureID, Any newValue)
 		case uml::umlPackage::EXPANSIONREGION_ATTRIBUTE_OUTPUTELEMENT:
 		{
 			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::ExpansionNode>> outputElementList(new Bag<uml::ExpansionNode>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
+			if((newValue->isContainer()) && (uml::umlPackage::EXPANSIONNODE_CLASS ==newValue->getTypeId()))
 			{
-				outputElementList->add(std::dynamic_pointer_cast<uml::ExpansionNode>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::ExpansionNode>::iterator iterOutputElement = getOutputElement()->begin();
-			Bag<uml::ExpansionNode>::iterator endOutputElement = getOutputElement()->end();
-			while (iterOutputElement != endOutputElement)
-			{
-				if (outputElementList->find(*iterOutputElement) == -1)
+				try
 				{
-					getOutputElement()->erase(*iterOutputElement);
+					std::shared_ptr<Bag<uml::ExpansionNode>> outputElementList= newValue->get<std::shared_ptr<Bag<uml::ExpansionNode>>>();
+					std::shared_ptr<Bag<uml::ExpansionNode>> _outputElement=getOutputElement();
+					for(const std::shared_ptr<uml::ExpansionNode> indexOutputElement: *_outputElement)
+					{
+						if (outputElementList->find(indexOutputElement) == -1)
+						{
+							_outputElement->erase(indexOutputElement);
+						}
+					}
+
+					for(const std::shared_ptr<uml::ExpansionNode> indexOutputElement: *outputElementList)
+					{
+						if (_outputElement->find(indexOutputElement) == -1)
+						{
+							_outputElement->add(indexOutputElement);
+						}
+					}
 				}
-				iterOutputElement++;
-			}
- 
-			iterOutputElement = outputElementList->begin();
-			endOutputElement = outputElementList->end();
-			while (iterOutputElement != endOutputElement)
-			{
-				if (getOutputElement()->find(*iterOutputElement) == -1)
+				catch(...)
 				{
-					getOutputElement()->add(*iterOutputElement);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterOutputElement++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}
@@ -740,7 +724,7 @@ bool ExpansionRegionImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ExpansionRegionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any ExpansionRegionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -760,7 +744,6 @@ Any ExpansionRegionImpl::eInvoke(int operationID, std::shared_ptr<std::list < st
 	return result;
 }
 
-
 std::shared_ptr<uml::ExpansionRegion> ExpansionRegionImpl::getThisExpansionRegionPtr() const
 {
 	return m_thisExpansionRegionPtr.lock();
@@ -770,3 +753,5 @@ void ExpansionRegionImpl::setThisExpansionRegionPtr(std::weak_ptr<uml::Expansion
 	m_thisExpansionRegionPtr = thisExpansionRegionPtr;
 	setThisStructuredActivityNodePtr(thisExpansionRegionPtr);
 }
+
+

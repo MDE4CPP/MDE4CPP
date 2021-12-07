@@ -203,12 +203,10 @@ void InvalidTypeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> InvalidTypeImpl::eStaticClass() const
 {
 	return ocl::Types::TypesPackage::eInstance()->getInvalidType_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -241,7 +239,7 @@ bool InvalidTypeImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any InvalidTypeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any InvalidTypeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -261,7 +259,6 @@ Any InvalidTypeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::s
 	return result;
 }
 
-
 std::shared_ptr<ocl::Types::InvalidType> InvalidTypeImpl::getThisInvalidTypePtr() const
 {
 	return m_thisInvalidTypePtr.lock();
@@ -271,3 +268,5 @@ void InvalidTypeImpl::setThisInvalidTypePtr(std::weak_ptr<ocl::Types::InvalidTyp
 	m_thisInvalidTypePtr = thisInvalidTypePtr;
 	setThisEClassifierPtr(thisInvalidTypePtr);
 }
+
+

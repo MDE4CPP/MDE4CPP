@@ -322,12 +322,10 @@ void BehaviorExecutionSpecificationImpl::saveContent(std::shared_ptr<persistence
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> BehaviorExecutionSpecificationImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getBehaviorExecutionSpecification_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -339,7 +337,7 @@ Any BehaviorExecutionSpecificationImpl::eGet(int featureID, bool resolve, bool c
 		case uml::umlPackage::BEHAVIOREXECUTIONSPECIFICATION_ATTRIBUTE_BEHAVIOR:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getBehavior();
-			return eAny(returnValue); //2415
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //2415
 		}
 	}
 	return ExecutionSpecificationImpl::eGet(featureID, resolve, coreType);
@@ -375,7 +373,7 @@ bool BehaviorExecutionSpecificationImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any BehaviorExecutionSpecificationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any BehaviorExecutionSpecificationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -395,7 +393,6 @@ Any BehaviorExecutionSpecificationImpl::eInvoke(int operationID, std::shared_ptr
 	return result;
 }
 
-
 std::shared_ptr<uml::BehaviorExecutionSpecification> BehaviorExecutionSpecificationImpl::getThisBehaviorExecutionSpecificationPtr() const
 {
 	return m_thisBehaviorExecutionSpecificationPtr.lock();
@@ -405,3 +402,5 @@ void BehaviorExecutionSpecificationImpl::setThisBehaviorExecutionSpecificationPt
 	m_thisBehaviorExecutionSpecificationPtr = thisBehaviorExecutionSpecificationPtr;
 	setThisExecutionSpecificationPtr(thisBehaviorExecutionSpecificationPtr);
 }
+
+

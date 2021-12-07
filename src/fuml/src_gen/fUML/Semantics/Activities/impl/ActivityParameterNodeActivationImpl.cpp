@@ -50,8 +50,8 @@
 #include "fUML/Semantics/Activities/Token.hpp"
 
 //Factories an Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "uml/umlPackage.hpp"
 
@@ -264,12 +264,10 @@ void ActivityParameterNodeActivationImpl::saveContent(std::shared_ptr<persistenc
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> ActivityParameterNodeActivationImpl::eStaticClass() const
 {
 	return fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getActivityParameterNodeActivation_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -302,7 +300,7 @@ bool ActivityParameterNodeActivationImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ActivityParameterNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any ActivityParameterNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -322,8 +320,8 @@ Any ActivityParameterNodeActivationImpl::eInvoke(int operationID, std::shared_pt
 			//Retrieve input parameter 'incomingTokens'
 			//parameter 0
 			std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> incoming_param_incomingTokens;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_incomingTokens_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_incomingTokens = (*incoming_param_incomingTokens_arguments_citer)->get()->get<std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> >();
+			std::list<Any>::const_iterator incoming_param_incomingTokens_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_incomingTokens = (*incoming_param_incomingTokens_arguments_citer)->get<std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> >();
 			this->fire(incoming_param_incomingTokens);
 			break;
 		}
@@ -341,7 +339,6 @@ Any ActivityParameterNodeActivationImpl::eInvoke(int operationID, std::shared_pt
 	return result;
 }
 
-
 std::shared_ptr<fUML::Semantics::Activities::ActivityParameterNodeActivation> ActivityParameterNodeActivationImpl::getThisActivityParameterNodeActivationPtr() const
 {
 	return m_thisActivityParameterNodeActivationPtr.lock();
@@ -351,3 +348,5 @@ void ActivityParameterNodeActivationImpl::setThisActivityParameterNodeActivation
 	m_thisActivityParameterNodeActivationPtr = thisActivityParameterNodeActivationPtr;
 	setThisObjectNodeActivationPtr(thisActivityParameterNodeActivationPtr);
 }
+
+

@@ -149,14 +149,10 @@ InteractionFragmentImpl& InteractionFragmentImpl::operator=(const InteractionFra
 			std::cout << "Initialising value Subset: " << "m_generalOrdering - Subset<uml::GeneralOrdering, uml::Element >(getOwnedElement())" << std::endl;
 		#endif
 		
-
-		Bag<uml::GeneralOrdering>::iterator generalOrderingIter = generalOrderingList->begin();
-		Bag<uml::GeneralOrdering>::iterator generalOrderingEnd = generalOrderingList->end();
-		while (generalOrderingIter != generalOrderingEnd) 
+		for(const std::shared_ptr<uml::GeneralOrdering> generalOrderingindexElem: *generalOrderingList) 
 		{
-			std::shared_ptr<uml::GeneralOrdering> temp = std::dynamic_pointer_cast<uml::GeneralOrdering>((*generalOrderingIter)->copy());
-			getGeneralOrdering()->push_back(temp);
-			generalOrderingIter++;
+			std::shared_ptr<uml::GeneralOrdering> temp = std::dynamic_pointer_cast<uml::GeneralOrdering>((generalOrderingindexElem)->copy());
+			m_generalOrdering->push_back(temp);
 		}
 	}
 	else
@@ -443,12 +439,10 @@ void InteractionFragmentImpl::saveContent(std::shared_ptr<persistence::interface
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> InteractionFragmentImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getInteractionFragment_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -459,37 +453,21 @@ Any InteractionFragmentImpl::eGet(int featureID, bool resolve, bool coreType) co
 	{
 		case uml::umlPackage::INTERACTIONFRAGMENT_ATTRIBUTE_COVERED:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Lifeline>::iterator iter = getCovered()->begin();
-			Bag<uml::Lifeline>::iterator end = getCovered()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //1219			
+			return eAnyBag(getCovered(),1044072138); //1219
 		}
 		case uml::umlPackage::INTERACTIONFRAGMENT_ATTRIBUTE_ENCLOSINGINTERACTION:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getEnclosingInteraction().lock();
-			return eAny(returnValue); //12111
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //12111
 		}
 		case uml::umlPackage::INTERACTIONFRAGMENT_ATTRIBUTE_ENCLOSINGOPERAND:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getEnclosingOperand().lock();
-			return eAny(returnValue); //12110
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //12110
 		}
 		case uml::umlPackage::INTERACTIONFRAGMENT_ATTRIBUTE_GENERALORDERING:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::GeneralOrdering>::iterator iter = getGeneralOrdering()->begin();
-			Bag<uml::GeneralOrdering>::iterator end = getGeneralOrdering()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //12112			
+			return eAnyBag(getGeneralOrdering(),1235473143); //12112
 		}
 	}
 	return NamedElementImpl::eGet(featureID, resolve, coreType);
@@ -518,36 +496,37 @@ bool InteractionFragmentImpl::eSet(int featureID, Any newValue)
 		case uml::umlPackage::INTERACTIONFRAGMENT_ATTRIBUTE_COVERED:
 		{
 			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::Lifeline>> coveredList(new Bag<uml::Lifeline>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
+			if((newValue->isContainer()) && (uml::umlPackage::LIFELINE_CLASS ==newValue->getTypeId()))
 			{
-				coveredList->add(std::dynamic_pointer_cast<uml::Lifeline>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::Lifeline>::iterator iterCovered = getCovered()->begin();
-			Bag<uml::Lifeline>::iterator endCovered = getCovered()->end();
-			while (iterCovered != endCovered)
-			{
-				if (coveredList->find(*iterCovered) == -1)
+				try
 				{
-					getCovered()->erase(*iterCovered);
+					std::shared_ptr<Bag<uml::Lifeline>> coveredList= newValue->get<std::shared_ptr<Bag<uml::Lifeline>>>();
+					std::shared_ptr<Bag<uml::Lifeline>> _covered=getCovered();
+					for(const std::shared_ptr<uml::Lifeline> indexCovered: *_covered)
+					{
+						if (coveredList->find(indexCovered) == -1)
+						{
+							_covered->erase(indexCovered);
+						}
+					}
+
+					for(const std::shared_ptr<uml::Lifeline> indexCovered: *coveredList)
+					{
+						if (_covered->find(indexCovered) == -1)
+						{
+							_covered->add(indexCovered);
+						}
+					}
 				}
-				iterCovered++;
-			}
- 
-			iterCovered = coveredList->begin();
-			endCovered = coveredList->end();
-			while (iterCovered != endCovered)
-			{
-				if (getCovered()->find(*iterCovered) == -1)
+				catch(...)
 				{
-					getCovered()->add(*iterCovered);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterCovered++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}
@@ -570,36 +549,37 @@ bool InteractionFragmentImpl::eSet(int featureID, Any newValue)
 		case uml::umlPackage::INTERACTIONFRAGMENT_ATTRIBUTE_GENERALORDERING:
 		{
 			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::GeneralOrdering>> generalOrderingList(new Bag<uml::GeneralOrdering>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
+			if((newValue->isContainer()) && (uml::umlPackage::GENERALORDERING_CLASS ==newValue->getTypeId()))
 			{
-				generalOrderingList->add(std::dynamic_pointer_cast<uml::GeneralOrdering>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::GeneralOrdering>::iterator iterGeneralOrdering = getGeneralOrdering()->begin();
-			Bag<uml::GeneralOrdering>::iterator endGeneralOrdering = getGeneralOrdering()->end();
-			while (iterGeneralOrdering != endGeneralOrdering)
-			{
-				if (generalOrderingList->find(*iterGeneralOrdering) == -1)
+				try
 				{
-					getGeneralOrdering()->erase(*iterGeneralOrdering);
+					std::shared_ptr<Bag<uml::GeneralOrdering>> generalOrderingList= newValue->get<std::shared_ptr<Bag<uml::GeneralOrdering>>>();
+					std::shared_ptr<Bag<uml::GeneralOrdering>> _generalOrdering=getGeneralOrdering();
+					for(const std::shared_ptr<uml::GeneralOrdering> indexGeneralOrdering: *_generalOrdering)
+					{
+						if (generalOrderingList->find(indexGeneralOrdering) == -1)
+						{
+							_generalOrdering->erase(indexGeneralOrdering);
+						}
+					}
+
+					for(const std::shared_ptr<uml::GeneralOrdering> indexGeneralOrdering: *generalOrderingList)
+					{
+						if (_generalOrdering->find(indexGeneralOrdering) == -1)
+						{
+							_generalOrdering->add(indexGeneralOrdering);
+						}
+					}
 				}
-				iterGeneralOrdering++;
-			}
- 
-			iterGeneralOrdering = generalOrderingList->begin();
-			endGeneralOrdering = generalOrderingList->end();
-			while (iterGeneralOrdering != endGeneralOrdering)
-			{
-				if (getGeneralOrdering()->find(*iterGeneralOrdering) == -1)
+				catch(...)
 				{
-					getGeneralOrdering()->add(*iterGeneralOrdering);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterGeneralOrdering++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}
@@ -611,7 +591,7 @@ bool InteractionFragmentImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any InteractionFragmentImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any InteractionFragmentImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -631,7 +611,6 @@ Any InteractionFragmentImpl::eInvoke(int operationID, std::shared_ptr<std::list 
 	return result;
 }
 
-
 std::shared_ptr<uml::InteractionFragment> InteractionFragmentImpl::getThisInteractionFragmentPtr() const
 {
 	return m_thisInteractionFragmentPtr.lock();
@@ -641,3 +620,5 @@ void InteractionFragmentImpl::setThisInteractionFragmentPtr(std::weak_ptr<uml::I
 	m_thisInteractionFragmentPtr = thisInteractionFragmentPtr;
 	setThisNamedElementPtr(thisInteractionFragmentPtr);
 }
+
+

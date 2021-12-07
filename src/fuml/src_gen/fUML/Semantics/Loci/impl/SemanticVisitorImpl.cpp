@@ -34,8 +34,8 @@
 
 
 //Factories an Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
 
 
@@ -187,12 +187,10 @@ void SemanticVisitorImpl::saveContent(std::shared_ptr<persistence::interfaces::X
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> SemanticVisitorImpl::eStaticClass() const
 {
 	return fUML::Semantics::Loci::LociPackage::eInstance()->getSemanticVisitor_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -225,7 +223,7 @@ bool SemanticVisitorImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any SemanticVisitorImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any SemanticVisitorImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -259,7 +257,6 @@ Any SemanticVisitorImpl::eInvoke(int operationID, std::shared_ptr<std::list < st
 	return result;
 }
 
-
 std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor> SemanticVisitorImpl::getThisSemanticVisitorPtr() const
 {
 	return m_thisSemanticVisitorPtr.lock();
@@ -268,3 +265,5 @@ void SemanticVisitorImpl::setThisSemanticVisitorPtr(std::weak_ptr<fUML::Semantic
 {
 	m_thisSemanticVisitorPtr = thisSemanticVisitorPtr;
 }
+
+

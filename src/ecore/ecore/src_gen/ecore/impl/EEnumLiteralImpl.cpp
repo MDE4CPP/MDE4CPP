@@ -308,12 +308,10 @@ void EEnumLiteralImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 	}
 }
 
-
 std::shared_ptr<EClass> EEnumLiteralImpl::eStaticClass() const
 {
 	return ecore::ecorePackage::eInstance()->getEEnumLiteral_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -325,14 +323,14 @@ Any EEnumLiteralImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case ecore::ecorePackage::EENUMLITERAL_ATTRIBUTE_EENUM:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getEEnum().lock();
-			return eAny(returnValue); //218
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //218
 		}
 		case ecore::ecorePackage::EENUMLITERAL_ATTRIBUTE_INSTANCE:
-			return eAny(getInstance()); //216
+			return eAny(getInstance(),0,true); //216
 		case ecore::ecorePackage::EENUMLITERAL_ATTRIBUTE_LITERAL:
-			return eAny(getLiteral()); //217
+			return eAny(getLiteral(),0,true); //217
 		case ecore::ecorePackage::EENUMLITERAL_ATTRIBUTE_VALUE:
-			return eAny(getValue()); //215
+			return eAny(getValue(),0,true); //215
 	}
 	return ENamedElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -406,7 +404,6 @@ Any EEnumLiteralImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> a
 	return result;
 }
 
-
 std::shared_ptr<ecore::EEnumLiteral> EEnumLiteralImpl::getThisEEnumLiteralPtr() const
 {
 	return m_thisEEnumLiteralPtr.lock();
@@ -416,3 +413,5 @@ void EEnumLiteralImpl::setThisEEnumLiteralPtr(std::weak_ptr<ecore::EEnumLiteral>
 	m_thisEEnumLiteralPtr = thisEEnumLiteralPtr;
 	setThisENamedElementPtr(thisEEnumLiteralPtr);
 }
+
+

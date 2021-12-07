@@ -31,12 +31,12 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Loci/LociFactory.hpp"
+#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
+#include "fUML/Semantics/Values/ValuesFactory.hpp"
+#include "uml/umlFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
-#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
-#include "uml/umlFactory.hpp"
-#include "fUML/Semantics/Values/ValuesFactory.hpp"
+#include "fUML/Semantics/Loci/LociFactory.hpp"
 
 #include "ocl/Evaluations/EvalEnvironment.hpp"
 #include "fUML/Semantics/Loci/Locus.hpp"
@@ -255,12 +255,10 @@ void AttributeCallExpEvalImpl::saveContent(std::shared_ptr<persistence::interfac
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> AttributeCallExpEvalImpl::eStaticClass() const
 {
 	return ocl::Evaluations::EvaluationsPackage::eInstance()->getAttributeCallExpEval_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -272,7 +270,7 @@ Any AttributeCallExpEvalImpl::eGet(int featureID, bool resolve, bool coreType) c
 		case ocl::Evaluations::EvaluationsPackage::ATTRIBUTECALLEXPEVAL_ATTRIBUTE_REFERREDATTRIBUTE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getReferredAttribute();
-			return eAny(returnValue); //67
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //67
 		}
 	}
 	return ModelPropertyCallExpEvalImpl::eGet(featureID, resolve, coreType);
@@ -308,7 +306,7 @@ bool AttributeCallExpEvalImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any AttributeCallExpEvalImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any AttributeCallExpEvalImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -328,7 +326,6 @@ Any AttributeCallExpEvalImpl::eInvoke(int operationID, std::shared_ptr<std::list
 	return result;
 }
 
-
 std::shared_ptr<ocl::Evaluations::AttributeCallExpEval> AttributeCallExpEvalImpl::getThisAttributeCallExpEvalPtr() const
 {
 	return m_thisAttributeCallExpEvalPtr.lock();
@@ -338,3 +335,5 @@ void AttributeCallExpEvalImpl::setThisAttributeCallExpEvalPtr(std::weak_ptr<ocl:
 	m_thisAttributeCallExpEvalPtr = thisAttributeCallExpEvalPtr;
 	setThisModelPropertyCallExpEvalPtr(thisAttributeCallExpEvalPtr);
 }
+
+

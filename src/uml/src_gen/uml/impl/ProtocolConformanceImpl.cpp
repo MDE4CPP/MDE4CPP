@@ -364,12 +364,10 @@ void ProtocolConformanceImpl::saveContent(std::shared_ptr<persistence::interface
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> ProtocolConformanceImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getProtocolConformance_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -381,12 +379,12 @@ Any ProtocolConformanceImpl::eGet(int featureID, bool resolve, bool coreType) co
 		case uml::umlPackage::PROTOCOLCONFORMANCE_ATTRIBUTE_GENERALMACHINE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getGeneralMachine();
-			return eAny(returnValue); //1866
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //1866
 		}
 		case uml::umlPackage::PROTOCOLCONFORMANCE_ATTRIBUTE_SPECIFICMACHINE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getSpecificMachine().lock();
-			return eAny(returnValue); //1867
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //1867
 		}
 	}
 	return DirectedRelationshipImpl::eGet(featureID, resolve, coreType);
@@ -432,7 +430,7 @@ bool ProtocolConformanceImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ProtocolConformanceImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any ProtocolConformanceImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -452,7 +450,6 @@ Any ProtocolConformanceImpl::eInvoke(int operationID, std::shared_ptr<std::list 
 	return result;
 }
 
-
 std::shared_ptr<uml::ProtocolConformance> ProtocolConformanceImpl::getThisProtocolConformancePtr() const
 {
 	return m_thisProtocolConformancePtr.lock();
@@ -462,3 +459,5 @@ void ProtocolConformanceImpl::setThisProtocolConformancePtr(std::weak_ptr<uml::P
 	m_thisProtocolConformancePtr = thisProtocolConformancePtr;
 	setThisDirectedRelationshipPtr(thisProtocolConformancePtr);
 }
+
+

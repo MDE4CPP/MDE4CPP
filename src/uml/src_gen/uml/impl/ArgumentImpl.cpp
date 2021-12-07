@@ -251,12 +251,10 @@ void ArgumentImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> ArgumentImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getArgument_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -266,11 +264,11 @@ Any ArgumentImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::ARGUMENT_ATTRIBUTE_NAME:
-			return eAny(getName()); //190
+			return eAny(getName(),0,true); //190
 		case uml::umlPackage::ARGUMENT_ATTRIBUTE_VALUE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getValue();
-			return eAny(returnValue); //191
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //191
 		}
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
@@ -315,7 +313,7 @@ bool ArgumentImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ArgumentImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any ArgumentImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -335,7 +333,6 @@ Any ArgumentImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shar
 	return result;
 }
 
-
 std::shared_ptr<uml::Argument> ArgumentImpl::getThisArgumentPtr() const
 {
 	return m_thisArgumentPtr.lock();
@@ -344,3 +341,5 @@ void ArgumentImpl::setThisArgumentPtr(std::weak_ptr<uml::Argument> thisArgumentP
 {
 	m_thisArgumentPtr = thisArgumentPtr;
 }
+
+

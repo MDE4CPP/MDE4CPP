@@ -43,8 +43,8 @@
 #include "fUML/Semantics/Loci/SemanticStrategy.hpp"
 
 //Factories an Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
 #include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
@@ -225,12 +225,10 @@ void DispatchStrategyImpl::saveContent(std::shared_ptr<persistence::interfaces::
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> DispatchStrategyImpl::eStaticClass() const
 {
 	return fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::eInstance()->getDispatchStrategy_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -263,7 +261,7 @@ bool DispatchStrategyImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any DispatchStrategyImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any DispatchStrategyImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -276,21 +274,21 @@ Any DispatchStrategyImpl::eInvoke(int operationID, std::shared_ptr<std::list < s
 			//Retrieve input parameter 'object'
 			//parameter 0
 			std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> incoming_param_object;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_object_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_object = (*incoming_param_object_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> >();
+			std::list<Any>::const_iterator incoming_param_object_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_object = (*incoming_param_object_arguments_citer)->get<std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> >();
 			//Retrieve input parameter 'operation'
 			//parameter 1
 			std::shared_ptr<uml::Operation> incoming_param_operation;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_operation_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_operation = (*incoming_param_operation_arguments_citer)->get()->get<std::shared_ptr<uml::Operation> >();
-			result = eAny(this->dispatch(incoming_param_object,incoming_param_operation));
+			std::list<Any>::const_iterator incoming_param_operation_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_operation = (*incoming_param_operation_arguments_citer)->get<std::shared_ptr<uml::Operation> >();
+				result = eAny(this->dispatch(incoming_param_object,incoming_param_operation));
 			break;
 		}
 		
 		// 1383879722
 		case StructuredClassifiersPackage::DISPATCHSTRATEGY_OPERATION_GETNAME:
 		{
-			result = eAny(this->getName());
+					result = eAny(this->getName(),0,false);
 			break;
 		}
 		
@@ -300,14 +298,14 @@ Any DispatchStrategyImpl::eInvoke(int operationID, std::shared_ptr<std::list < s
 			//Retrieve input parameter 'object'
 			//parameter 0
 			std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> incoming_param_object;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_object_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_object = (*incoming_param_object_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> >();
+			std::list<Any>::const_iterator incoming_param_object_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_object = (*incoming_param_object_arguments_citer)->get<std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> >();
 			//Retrieve input parameter 'operation'
 			//parameter 1
 			std::shared_ptr<uml::Operation> incoming_param_operation;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_operation_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_operation = (*incoming_param_operation_arguments_citer)->get()->get<std::shared_ptr<uml::Operation> >();
-			result = eAny(this->retrieveMethod(incoming_param_object,incoming_param_operation));
+			std::list<Any>::const_iterator incoming_param_operation_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_operation = (*incoming_param_operation_arguments_citer)->get<std::shared_ptr<uml::Operation> >();
+				result = eAny(this->retrieveMethod(incoming_param_object,incoming_param_operation));
 			break;
 		}
 
@@ -324,7 +322,6 @@ Any DispatchStrategyImpl::eInvoke(int operationID, std::shared_ptr<std::list < s
 	return result;
 }
 
-
 std::shared_ptr<fUML::Semantics::StructuredClassifiers::DispatchStrategy> DispatchStrategyImpl::getThisDispatchStrategyPtr() const
 {
 	return m_thisDispatchStrategyPtr.lock();
@@ -334,3 +331,5 @@ void DispatchStrategyImpl::setThisDispatchStrategyPtr(std::weak_ptr<fUML::Semant
 	m_thisDispatchStrategyPtr = thisDispatchStrategyPtr;
 	setThisSemanticStrategyPtr(thisDispatchStrategyPtr);
 }
+
+

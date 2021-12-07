@@ -32,8 +32,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "ecore/ecoreFactory.hpp"
 #include "ocl/Values/ValuesFactory.hpp"
+#include "ecore/ecoreFactory.hpp"
 
 #include "ocl/Types/CollectionType.hpp"
 #include "ocl/Values/CollectionValue.hpp"
@@ -211,12 +211,10 @@ void SetTypeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHand
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> SetTypeImpl::eStaticClass() const
 {
 	return ocl::Types::TypesPackage::eInstance()->getSetType_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -249,7 +247,7 @@ bool SetTypeImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any SetTypeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any SetTypeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -269,7 +267,6 @@ Any SetTypeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::share
 	return result;
 }
 
-
 std::shared_ptr<ocl::Types::SetType> SetTypeImpl::getThisSetTypePtr() const
 {
 	return m_thisSetTypePtr.lock();
@@ -279,3 +276,5 @@ void SetTypeImpl::setThisSetTypePtr(std::weak_ptr<ocl::Types::SetType> thisSetTy
 	m_thisSetTypePtr = thisSetTypePtr;
 	setThisCollectionTypePtr(thisSetTypePtr);
 }
+
+

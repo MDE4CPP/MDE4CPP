@@ -396,12 +396,10 @@ void ExpansionNodeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSa
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> ExpansionNodeImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getExpansionNode_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -413,12 +411,12 @@ Any ExpansionNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::EXPANSIONNODE_ATTRIBUTE_REGIONASINPUT:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getRegionAsInput();
-			return eAny(returnValue); //9326
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //9326
 		}
 		case uml::umlPackage::EXPANSIONNODE_ATTRIBUTE_REGIONASOUTPUT:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getRegionAsOutput();
-			return eAny(returnValue); //9327
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //9327
 		}
 	}
 	return ObjectNodeImpl::eGet(featureID, resolve, coreType);
@@ -464,27 +462,26 @@ bool ExpansionNodeImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ExpansionNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any ExpansionNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
   	switch(operationID)
 	{
-		
-		// 1386125979
+		// uml::ExpansionNode::region_as_input_or_output(Any, std::map) : bool: 1386125979
 		case umlPackage::EXPANSIONNODE_OPERATION_REGION_AS_INPUT_OR_OUTPUT_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->region_as_input_or_output(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->region_as_input_or_output(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
 
@@ -501,7 +498,6 @@ Any ExpansionNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std:
 	return result;
 }
 
-
 std::shared_ptr<uml::ExpansionNode> ExpansionNodeImpl::getThisExpansionNodePtr() const
 {
 	return m_thisExpansionNodePtr.lock();
@@ -511,3 +507,5 @@ void ExpansionNodeImpl::setThisExpansionNodePtr(std::weak_ptr<uml::ExpansionNode
 	m_thisExpansionNodePtr = thisExpansionNodePtr;
 	setThisObjectNodePtr(thisExpansionNodePtr);
 }
+
+

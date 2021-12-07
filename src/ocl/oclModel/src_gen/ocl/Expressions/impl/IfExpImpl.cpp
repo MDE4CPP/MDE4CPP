@@ -460,12 +460,10 @@ void IfExpImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandle
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> IfExpImpl::eStaticClass() const
 {
 	return ocl::Expressions::ExpressionsPackage::eInstance()->getIfExp_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -477,17 +475,17 @@ Any IfExpImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case ocl::Expressions::ExpressionsPackage::IFEXP_ATTRIBUTE_CONDITION:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getCondition();
-			return eAny(returnValue); //3122
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //3122
 		}
 		case ocl::Expressions::ExpressionsPackage::IFEXP_ATTRIBUTE_ELSEEXPRESSION:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getElseExpression();
-			return eAny(returnValue); //3124
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //3124
 		}
 		case ocl::Expressions::ExpressionsPackage::IFEXP_ATTRIBUTE_THENEXPRESSION:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getThenExpression();
-			return eAny(returnValue); //3123
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //3123
 		}
 	}
 	return OclExpressionImpl::eGet(featureID, resolve, coreType);
@@ -543,7 +541,7 @@ bool IfExpImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any IfExpImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any IfExpImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -563,7 +561,6 @@ Any IfExpImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_
 	return result;
 }
 
-
 std::shared_ptr<ocl::Expressions::IfExp> IfExpImpl::getThisIfExpPtr() const
 {
 	return m_thisIfExpPtr.lock();
@@ -573,3 +570,5 @@ void IfExpImpl::setThisIfExpPtr(std::weak_ptr<ocl::Expressions::IfExp> thisIfExp
 	m_thisIfExpPtr = thisIfExpPtr;
 	setThisOclExpressionPtr(thisIfExpPtr);
 }
+
+

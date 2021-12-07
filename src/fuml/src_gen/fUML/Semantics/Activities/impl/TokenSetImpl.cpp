@@ -37,8 +37,8 @@
 #include "fUML/Semantics/Activities/Token.hpp"
 
 //Factories an Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 
 
@@ -232,12 +232,10 @@ void TokenSetImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> TokenSetImpl::eStaticClass() const
 {
 	return fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getTokenSet_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -320,7 +318,7 @@ bool TokenSetImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any TokenSetImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any TokenSetImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -340,7 +338,6 @@ Any TokenSetImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shar
 	return result;
 }
 
-
 std::shared_ptr<fUML::Semantics::Activities::TokenSet> TokenSetImpl::getThisTokenSetPtr() const
 {
 	return m_thisTokenSetPtr.lock();
@@ -349,3 +346,5 @@ void TokenSetImpl::setThisTokenSetPtr(std::weak_ptr<fUML::Semantics::Activities:
 {
 	m_thisTokenSetPtr = thisTokenSetPtr;
 }
+
+

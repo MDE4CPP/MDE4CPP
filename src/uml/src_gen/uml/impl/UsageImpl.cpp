@@ -332,12 +332,10 @@ void UsageImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandle
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> UsageImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getUsage_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -370,7 +368,7 @@ bool UsageImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any UsageImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any UsageImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -390,7 +388,6 @@ Any UsageImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_
 	return result;
 }
 
-
 std::shared_ptr<uml::Usage> UsageImpl::getThisUsagePtr() const
 {
 	return m_thisUsagePtr.lock();
@@ -400,3 +397,5 @@ void UsageImpl::setThisUsagePtr(std::weak_ptr<uml::Usage> thisUsagePtr)
 	m_thisUsagePtr = thisUsagePtr;
 	setThisDependencyPtr(thisUsagePtr);
 }
+
+

@@ -134,7 +134,7 @@ Any EObjectImpl::eAllContents() const
 			returnList->push_back(anyValue);
 		}
 	}
-	return eAny(returnList);
+	return eAny(returnList,0,true);
 	//end of body
 }
 
@@ -175,38 +175,43 @@ std::shared_ptr<Bag<ecore::EObject> > EObjectImpl::eContents() const
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	std::shared_ptr<Bag<ecore::EObject>> returnList=std::make_shared<Bag<ecore::EObject>>();
-
 	std::shared_ptr<ecore::EClass> metaClass=this->eClass();
 	std::shared_ptr<Bag<ecore::EStructuralFeature>> features=metaClass->getEAllStructuralFeatures();
 	int size = features->size();
 	for (auto i = 0; i < size; ++i)
 	{
 		Any anyValue=this->eGet(features->at(i));
-		try
+		if(anyValue->isContainer())
 		{
-			std::shared_ptr<ecore::EObject> value=anyValue->get<std::shared_ptr<ecore::EObject>>();
-			if(value)
+			try
 			{
-				returnList->push_back(value);
+				std::shared_ptr<AnyEObjectBag> bag= std::dynamic_pointer_cast<AnyEObjectBag>(anyValue);
+				std::shared_ptr<Bag<EObject>> valueList = bag->getBag();
+				if(valueList)
+				{
+					std::shared_ptr<ecore::EObjectContainer> containerObject= ecore::ecoreFactory::eInstance()->createEObjectContainer();
+					std::shared_ptr<Bag<ecore::EObject>> container=containerObject->getContainer();
+					container.swap(valueList);
+					returnList->push_back(containerObject);
+				}
 			}
+			catch(...){}
 		}
-		catch(...){}
-		try
+		else
 		{
-			std::shared_ptr<Bag<EObject>> valueList = anyValue->get<std::shared_ptr<Bag<EObject>>>();
-			if(valueList)
+			try
 			{
-				std::shared_ptr<ecore::EObjectContainer> containerObject= ecore::ecoreFactory::eInstance()->createEObjectContainer();
-				std::shared_ptr<Bag<ecore::EObject>> container=containerObject->getContainer();
-				container.swap(valueList);
-				returnList->push_back(containerObject);
+				std::shared_ptr<ecore::EObject> value=anyValue->get<std::shared_ptr<ecore::EObject>>();
+				if(value)
+				{
+					returnList->push_back(value);
+				}
 			}
+			catch(...){}
 		}
-		catch(...){}
 
 	}
 	return returnList;
-
 	//end of body
 }
 
@@ -458,12 +463,10 @@ void EObjectImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHand
 	}
 }
 
-
 std::shared_ptr<EClass> EObjectImpl::eStaticClass() const
 {
 	return ecore::ecorePackage::eInstance()->getEObject_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -475,22 +478,14 @@ Any EObjectImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case ecore::ecorePackage::EOBJECT_ATTRIBUTE_ECONTAINER:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=eContainer();
-			return eAny(returnValue); //391
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //391
 		}
 		case ecore::ecorePackage::EOBJECT_ATTRIBUTE_ECONTENTUNION:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<ecore::EObject>::iterator iter = getEContentUnion()->begin();
-			Bag<ecore::EObject>::iterator end = getEContentUnion()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //390			
+			return eAnyBag(getEContentUnion(),2051543432); //390
 		}
 		case ecore::ecorePackage::EOBJECT_ATTRIBUTE_METAELEMENTID:
-			return eAny(getMetaElementID()); //392
+			return eAny(getMetaElementID(),0,true); //392
 	}
 	Any result;
 	return result;
@@ -526,36 +521,37 @@ bool EObjectImpl::eSet(int featureID, Any newValue)
 		case ecore::ecorePackage::EOBJECT_ATTRIBUTE_ECONTENTUNION:
 		{
 			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<ecore::EObject>> eContentUnionList(new Bag<ecore::EObject>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
+			if((newValue->isContainer()) && (ecore::ecorePackage::EOBJECT_CLASS ==newValue->getTypeId()))
 			{
-				eContentUnionList->add(std::dynamic_pointer_cast<ecore::EObject>(*iter));
-				iter++;
-			}
-			
-			Bag<ecore::EObject>::iterator iterEContentUnion = getEContentUnion()->begin();
-			Bag<ecore::EObject>::iterator endEContentUnion = getEContentUnion()->end();
-			while (iterEContentUnion != endEContentUnion)
-			{
-				if (eContentUnionList->find(*iterEContentUnion) == -1)
+				try
 				{
-					getEContentUnion()->erase(*iterEContentUnion);
+					std::shared_ptr<Bag<ecore::EObject>> eContentUnionList= newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+					std::shared_ptr<Bag<ecore::EObject>> _eContentUnion=getEContentUnion();
+					for(const std::shared_ptr<ecore::EObject> indexEContentUnion: *_eContentUnion)
+					{
+						if (eContentUnionList->find(indexEContentUnion) == -1)
+						{
+							_eContentUnion->erase(indexEContentUnion);
+						}
+					}
+
+					for(const std::shared_ptr<ecore::EObject> indexEContentUnion: *eContentUnionList)
+					{
+						if (_eContentUnion->find(indexEContentUnion) == -1)
+						{
+							_eContentUnion->add(indexEContentUnion);
+						}
+					}
 				}
-				iterEContentUnion++;
-			}
- 
-			iterEContentUnion = eContentUnionList->begin();
-			endEContentUnion = eContentUnionList->end();
-			while (iterEContentUnion != endEContentUnion)
-			{
-				if (getEContentUnion()->find(*iterEContentUnion) == -1)
+				catch(...)
 				{
-					getEContentUnion()->add(*iterEContentUnion);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterEContentUnion++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}
@@ -581,57 +577,50 @@ Any EObjectImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argume
 
   	switch(operationID)
 	{
-		
-		// 345308248
+		// ecore::EObject::eAllContents() : Any {const}: 345308248
 		case ecorePackage::EOBJECT_OPERATION_EALLCONTENTS:
 		{
-			result = eAny(this->eAllContents());
+			result = eAny(this->eAllContents(),0,false);
 			break;
 		}
-		
-		// 1897829605
+		// ecore::EObject::eClass() : ecore::EClass {const}: 1897829605
 		case ecorePackage::EOBJECT_OPERATION_ECLASS:
 		{
-			result = eAny(this->eClass());
+			result = eAny(this->eClass(), ecorePackage::ECLASS_CLASS,false);
 			break;
 		}
-		
-		// 1564505762
+		// ecore::EObject::eContainer() : ecore::EObject: 1564505762
 		case ecorePackage::EOBJECT_OPERATION_ECONTAINER:
 		{
-			result = eAny(this->eContainer());
+			result = eAny(this->eContainer(), ecorePackage::EOBJECT_CLASS,false);
 			break;
 		}
-		
-		// 1314774326
+		// ecore::EObject::eContainingFeature() : ecore::EStructuralFeature {const}: 1314774326
 		case ecorePackage::EOBJECT_OPERATION_ECONTAININGFEATURE:
 		{
-			result = eAny(this->eContainingFeature());
+			result = eAny(this->eContainingFeature(), ecorePackage::ESTRUCTURALFEATURE_CLASS,false);
 			break;
 		}
-		
-		// 1559436300
+		// ecore::EObject::eContainmentFeature() : ecore::EReference {const}: 1559436300
 		case ecorePackage::EOBJECT_OPERATION_ECONTAINMENTFEATURE:
 		{
-			result = eAny(this->eContainmentFeature());
+			result = eAny(this->eContainmentFeature(), ecorePackage::EREFERENCE_CLASS,false);
 			break;
 		}
-		
-		// 1140157049
+		// ecore::EObject::eContents() : ecore::EObject[*] {const}: 1140157049
 		case ecorePackage::EOBJECT_OPERATION_ECONTENTS:
 		{
-			result = eAny(this->eContents());
+			std::shared_ptr<Bag<ecore::EObject> > resultList = this->eContents();
+			return eAny(resultList,ecorePackage::EOBJECT_CLASS,true);
 			break;
 		}
-		
-		// 1830400680
+		// ecore::EObject::eCrossReferences() : std::list {const}: 1830400680
 		case ecorePackage::EOBJECT_OPERATION_ECROSSREFERENCES:
 		{
-			result = eAny(this->eCrossReferences());
+			result = eAny(this->eCrossReferences(),0,false);
 			break;
 		}
-		
-		// 765237638
+		// ecore::EObject::eGet(ecore::EStructuralFeature) : Any {const}: 765237638
 		case ecorePackage::EOBJECT_OPERATION_EGET_ESTRUCTURALFEATURE:
 		{
 			//Retrieve input parameter 'feature'
@@ -639,11 +628,10 @@ Any EObjectImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argume
 			std::shared_ptr<ecore::EStructuralFeature> incoming_param_feature;
 			std::list<Any>::const_iterator incoming_param_feature_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_feature = (*incoming_param_feature_arguments_citer)->get<std::shared_ptr<ecore::EStructuralFeature> >();
-			result = eAny(this->eGet(incoming_param_feature));
+			result = eAny(this->eGet(incoming_param_feature),0,false);
 			break;
 		}
-		
-		// 728807147
+		// ecore::EObject::eGet(ecore::EStructuralFeature, bool) : Any {const}: 728807147
 		case ecorePackage::EOBJECT_OPERATION_EGET_ESTRUCTURALFEATURE_EBOOLEAN:
 		{
 			//Retrieve input parameter 'feature'
@@ -656,11 +644,10 @@ Any EObjectImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argume
 			bool incoming_param_resolve;
 			std::list<Any>::const_iterator incoming_param_resolve_arguments_citer = std::next(arguments->begin(), 1);
 			incoming_param_resolve = (*incoming_param_resolve_arguments_citer)->get<bool >();
-			result = eAny(this->eGet(incoming_param_feature,incoming_param_resolve));
+			result = eAny(this->eGet(incoming_param_feature,incoming_param_resolve),0,false);
 			break;
 		}
-		
-		// 447398534
+		// ecore::EObject::eInvoke(ecore::EOperation, std::list) : Any: 447398534
 		case ecorePackage::EOBJECT_OPERATION_EINVOKE_EOPERATION_EELIST:
 		{
 			//Retrieve input parameter 'operation'
@@ -673,18 +660,16 @@ Any EObjectImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argume
 			std::shared_ptr<std::list < Any>> incoming_param_arguments;
 			std::list<Any>::const_iterator incoming_param_arguments_arguments_citer = std::next(arguments->begin(), 1);
 			incoming_param_arguments = (*incoming_param_arguments_arguments_citer)->get<std::shared_ptr<std::list < Any>> >();
-			result = eAny(this->eInvoke(incoming_param_operation,incoming_param_arguments));
+			result = eAny(this->eInvoke(incoming_param_operation,incoming_param_arguments),0,false);
 			break;
 		}
-		
-		// 780766387
+		// ecore::EObject::eIsProxy() : bool {const}: 780766387
 		case ecorePackage::EOBJECT_OPERATION_EISPROXY:
 		{
-			result = eAny(this->eIsProxy());
+			result = eAny(this->eIsProxy(),0,false);
 			break;
 		}
-		
-		// 527097480
+		// ecore::EObject::eIsSet(ecore::EStructuralFeature) : bool {const}: 527097480
 		case ecorePackage::EOBJECT_OPERATION_EISSET_ESTRUCTURALFEATURE:
 		{
 			//Retrieve input parameter 'feature'
@@ -692,18 +677,16 @@ Any EObjectImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argume
 			std::shared_ptr<ecore::EStructuralFeature> incoming_param_feature;
 			std::list<Any>::const_iterator incoming_param_feature_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_feature = (*incoming_param_feature_arguments_citer)->get<std::shared_ptr<ecore::EStructuralFeature> >();
-			result = eAny(this->eIsSet(incoming_param_feature));
+			result = eAny(this->eIsSet(incoming_param_feature),0,false);
 			break;
 		}
-		
-		// 281242010
+		// ecore::EObject::eResource() : int {const}: 281242010
 		case ecorePackage::EOBJECT_OPERATION_ERESOURCE:
 		{
-			result = eAny(this->eResource());
+			result = eAny(this->eResource(),0,false);
 			break;
 		}
-		
-		// 921412853
+		// ecore::EObject::eSet(ecore::EStructuralFeature, Any): 921412853
 		case ecorePackage::EOBJECT_OPERATION_ESET_ESTRUCTURALFEATURE_EJAVAOBJECT:
 		{
 			//Retrieve input parameter 'feature'
@@ -717,10 +700,8 @@ Any EObjectImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argume
 			std::list<Any>::const_iterator incoming_param_newValue_arguments_citer = std::next(arguments->begin(), 1);
 			incoming_param_newValue = (*incoming_param_newValue_arguments_citer)->get<Any >();
 			this->eSet(incoming_param_feature,incoming_param_newValue);
-			break;
 		}
-		
-		// 640572767
+		// ecore::EObject::eUnset(ecore::EStructuralFeature) {const}: 640572767
 		case ecorePackage::EOBJECT_OPERATION_EUNSET_ESTRUCTURALFEATURE:
 		{
 			//Retrieve input parameter 'feature'
@@ -729,7 +710,6 @@ Any EObjectImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argume
 			std::list<Any>::const_iterator incoming_param_feature_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_feature = (*incoming_param_feature_arguments_citer)->get<std::shared_ptr<ecore::EStructuralFeature> >();
 			this->eUnset(incoming_param_feature);
-			break;
 		}
 
 		default:
@@ -742,7 +722,6 @@ Any EObjectImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argume
 	return result;
 }
 
-
 std::shared_ptr<ecore::EObject> EObjectImpl::getThisEObjectPtr() const
 {
 	return m_thisEObjectPtr.lock();
@@ -751,3 +730,13 @@ void EObjectImpl::setThisEObjectPtr(std::weak_ptr<ecore::EObject> thisEObjectPtr
 {
 	m_thisEObjectPtr = thisEObjectPtr;
 }
+
+Any eAny(std::shared_ptr<ecore::EObject> value)
+{
+	return eAny(value,value->getMetaElementID(),false);
+}
+Any eAny(std::shared_ptr<Bag<ecore::EObject>> value)
+{
+	return eAny(value,ecore::ecorePackage::EOBJECT_CLASS,true);
+}
+

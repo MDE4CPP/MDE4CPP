@@ -270,12 +270,10 @@ void ConnectableElementImpl::saveContent(std::shared_ptr<persistence::interfaces
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> ConnectableElementImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getConnectableElement_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -286,15 +284,7 @@ Any ConnectableElementImpl::eGet(int featureID, bool resolve, bool coreType) con
 	{
 		case uml::umlPackage::CONNECTABLEELEMENT_ATTRIBUTE_END:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::ConnectorEnd>::iterator iter = getEnd()->begin();
-			Bag<uml::ConnectorEnd>::iterator end = getEnd()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //5012			
+			return eAnyBag(getEnd(),786822967); //5012
 		}
 	}
 	Any result;
@@ -343,17 +333,17 @@ bool ConnectableElementImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ConnectableElementImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any ConnectableElementImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
   	switch(operationID)
 	{
-		
-		// 241976055
+		// uml::ConnectableElement::getEnds() : uml::ConnectorEnd[*]: 241976055
 		case umlPackage::CONNECTABLEELEMENT_OPERATION_GETENDS:
 		{
-			result = eAny(this->getEnds());
+			std::shared_ptr<Bag<uml::ConnectorEnd> > resultList = this->getEnds();
+			return eAny(resultList,umlPackage::CONNECTOREND_CLASS,true);
 			break;
 		}
 
@@ -373,7 +363,6 @@ Any ConnectableElementImpl::eInvoke(int operationID, std::shared_ptr<std::list <
 	return result;
 }
 
-
 std::shared_ptr<uml::ConnectableElement> ConnectableElementImpl::getThisConnectableElementPtr() const
 {
 	return m_thisConnectableElementPtr.lock();
@@ -384,3 +373,5 @@ void ConnectableElementImpl::setThisConnectableElementPtr(std::weak_ptr<uml::Con
 	setThisParameterableElementPtr(thisConnectableElementPtr);
 	setThisTypedElementPtr(thisConnectableElementPtr);
 }
+
+

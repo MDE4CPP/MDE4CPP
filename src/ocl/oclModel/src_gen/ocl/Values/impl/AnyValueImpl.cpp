@@ -173,7 +173,7 @@ void AnyValueImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoad
 		if ( iter != attr_list.end() )
 		{
 			// TODO this attribute has a non handle type
-			std::cout << "| ERROR    | " << __PRETTY_FUNCTION__ << " handle type of 'value'" << " org.eclipse.emf.ecore.impl.EDataTypeImpl@5e1218b4 (name: EJavaObject) (instanceClassName: java.lang.Object) (serializable: true)" << std::endl; 
+			std::cout << "| ERROR    | " << __PRETTY_FUNCTION__ << " handle type of 'value'" << " org.eclipse.emf.ecore.impl.EDataTypeImpl@3a2b2322 (name: EJavaObject) (instanceClassName: java.lang.Object) (serializable: true)" << std::endl; 
 			Any value; 			this->setValue(value);
 		}
 	}
@@ -229,12 +229,10 @@ void AnyValueImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> AnyValueImpl::eStaticClass() const
 {
 	return ocl::Values::ValuesPackage::eInstance()->getAnyValue_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -244,7 +242,7 @@ Any AnyValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case ocl::Values::ValuesPackage::ANYVALUE_ATTRIBUTE_VALUE:
-			return eAny(getValue()); //20
+				return eAny(getValue(),0,true); //20
 	}
 	return fUML::Semantics::Values::ValueImpl::eGet(featureID, resolve, coreType);
 }
@@ -278,7 +276,7 @@ bool AnyValueImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any AnyValueImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any AnyValueImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -288,7 +286,7 @@ Any AnyValueImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shar
 		// 944564240
 		case ValuesPackage::ANYVALUE_OPERATION_TOSTRING:
 		{
-			result = eAny(this->toString());
+					result = eAny(this->toString(),0,false);
 			break;
 		}
 
@@ -305,7 +303,6 @@ Any AnyValueImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shar
 	return result;
 }
 
-
 std::shared_ptr<ocl::Values::AnyValue> AnyValueImpl::getThisAnyValuePtr() const
 {
 	return m_thisAnyValuePtr.lock();
@@ -315,3 +312,5 @@ void AnyValueImpl::setThisAnyValuePtr(std::weak_ptr<ocl::Values::AnyValue> thisA
 	m_thisAnyValuePtr = thisAnyValuePtr;
 	setThisValuePtr(thisAnyValuePtr);
 }
+
+

@@ -42,8 +42,8 @@
 
 #include <exception> // used in Persistence
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
-#include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Actions/ActionsFactory.hpp"
+#include "uml/umlFactory.hpp"
 
 #include "uml/Action.hpp"
 #include "fUML/Semantics/Actions/ActionActivation.hpp"
@@ -60,8 +60,8 @@
 #include "fUML/Semantics/Values/Value.hpp"
 
 //Factories an Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "fUML/Semantics/Values/ValuesPackage.hpp"
@@ -506,12 +506,10 @@ void StructuredActivityNodeActivationImpl::saveContent(std::shared_ptr<persisten
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> StructuredActivityNodeActivationImpl::eStaticClass() const
 {
 	return fUML::Semantics::Actions::ActionsPackage::eInstance()->getStructuredActivityNodeActivation_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -523,7 +521,7 @@ Any StructuredActivityNodeActivationImpl::eGet(int featureID, bool resolve, bool
 		case fUML::Semantics::Actions::ActionsPackage::STRUCTUREDACTIVITYNODEACTIVATION_ATTRIBUTE_ACTIVATIONGROUP:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getActivationGroup();
-			return eAny(returnValue); //11211
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //11211
 		}
 	}
 	return ActionActivationImpl::eGet(featureID, resolve, coreType);
@@ -559,7 +557,7 @@ bool StructuredActivityNodeActivationImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any StructuredActivityNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any StructuredActivityNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -569,7 +567,7 @@ Any StructuredActivityNodeActivationImpl::eInvoke(int operationID, std::shared_p
 		// 1463365234
 		case ActionsPackage::STRUCTUREDACTIVITYNODEACTIVATION_OPERATION_COMPLETEACTION:
 		{
-			result = eAny(this->completeAction());
+				result = eAny(this->completeAction());
 			break;
 		}
 		
@@ -607,9 +605,9 @@ Any StructuredActivityNodeActivationImpl::eInvoke(int operationID, std::shared_p
 			//Retrieve input parameter 'node'
 			//parameter 0
 			std::shared_ptr<uml::ActivityNode> incoming_param_node;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_node_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_node = (*incoming_param_node_arguments_citer)->get()->get<std::shared_ptr<uml::ActivityNode> >();
-			result = eAny(this->getNodeActivation(incoming_param_node));
+			std::list<Any>::const_iterator incoming_param_node_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_node = (*incoming_param_node_arguments_citer)->get<std::shared_ptr<uml::ActivityNode> >();
+				result = eAny(this->getNodeActivation(incoming_param_node));
 			break;
 		}
 		
@@ -619,9 +617,9 @@ Any StructuredActivityNodeActivationImpl::eInvoke(int operationID, std::shared_p
 			//Retrieve input parameter 'pin'
 			//parameter 0
 			std::shared_ptr<uml::OutputPin> incoming_param_pin;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_pin_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_pin = (*incoming_param_pin_arguments_citer)->get()->get<std::shared_ptr<uml::OutputPin> >();
-			result = eAny(this->getPinValues(incoming_param_pin));
+			std::list<Any>::const_iterator incoming_param_pin_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_pin = (*incoming_param_pin_arguments_citer)->get<std::shared_ptr<uml::OutputPin> >();
+				result = eAny(this->getPinValues(incoming_param_pin));
 			break;
 		}
 		
@@ -631,16 +629,16 @@ Any StructuredActivityNodeActivationImpl::eInvoke(int operationID, std::shared_p
 			//Retrieve input parameter 'edgeInstance'
 			//parameter 0
 			std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance> incoming_param_edgeInstance;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_edgeInstance_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_edgeInstance = (*incoming_param_edgeInstance_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance> >();
-			result = eAny(this->isSourceFor(incoming_param_edgeInstance));
+			std::list<Any>::const_iterator incoming_param_edgeInstance_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_edgeInstance = (*incoming_param_edgeInstance_arguments_citer)->get<std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance> >();
+					result = eAny(this->isSourceFor(incoming_param_edgeInstance),0,false);
 			break;
 		}
 		
 		// 1041207864
 		case ActionsPackage::STRUCTUREDACTIVITYNODEACTIVATION_OPERATION_ISSUSPENDED:
 		{
-			result = eAny(this->isSuspended());
+					result = eAny(this->isSuspended(),0,false);
 			break;
 		}
 		
@@ -650,9 +648,9 @@ Any StructuredActivityNodeActivationImpl::eInvoke(int operationID, std::shared_p
 			//Retrieve input parameter 'nodes'
 			//parameter 0
 			std::shared_ptr<Bag<uml::ExecutableNode>> incoming_param_nodes;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_nodes_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_nodes = (*incoming_param_nodes_arguments_citer)->get()->get<std::shared_ptr<Bag<uml::ExecutableNode>> >();
-			result = eAny(this->makeActivityNodeList(incoming_param_nodes));
+			std::list<Any>::const_iterator incoming_param_nodes_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_nodes = (*incoming_param_nodes_arguments_citer)->get<std::shared_ptr<Bag<uml::ExecutableNode>> >();
+				result = eAny(this->makeActivityNodeList(incoming_param_nodes));
 			break;
 		}
 		
@@ -662,13 +660,13 @@ Any StructuredActivityNodeActivationImpl::eInvoke(int operationID, std::shared_p
 			//Retrieve input parameter 'pin'
 			//parameter 0
 			std::shared_ptr<uml::OutputPin> incoming_param_pin;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_pin_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_pin = (*incoming_param_pin_arguments_citer)->get()->get<std::shared_ptr<uml::OutputPin> >();
+			std::list<Any>::const_iterator incoming_param_pin_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_pin = (*incoming_param_pin_arguments_citer)->get<std::shared_ptr<uml::OutputPin> >();
 			//Retrieve input parameter 'values'
 			//parameter 1
 			std::shared_ptr<Bag<fUML::Semantics::Values::Value>> incoming_param_values;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_values_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_values = (*incoming_param_values_arguments_citer)->get()->get<std::shared_ptr<Bag<fUML::Semantics::Values::Value>> >();
+			std::list<Any>::const_iterator incoming_param_values_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_values = (*incoming_param_values_arguments_citer)->get<std::shared_ptr<Bag<fUML::Semantics::Values::Value>> >();
 			this->putPinValues(incoming_param_pin,incoming_param_values);
 			break;
 		}
@@ -707,7 +705,6 @@ Any StructuredActivityNodeActivationImpl::eInvoke(int operationID, std::shared_p
 	return result;
 }
 
-
 std::shared_ptr<fUML::Semantics::Actions::StructuredActivityNodeActivation> StructuredActivityNodeActivationImpl::getThisStructuredActivityNodeActivationPtr() const
 {
 	return m_thisStructuredActivityNodeActivationPtr.lock();
@@ -717,3 +714,5 @@ void StructuredActivityNodeActivationImpl::setThisStructuredActivityNodeActivati
 	m_thisStructuredActivityNodeActivationPtr = thisStructuredActivityNodeActivationPtr;
 	setThisActionActivationPtr(thisStructuredActivityNodeActivationPtr);
 }
+
+

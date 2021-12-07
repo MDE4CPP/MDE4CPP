@@ -277,12 +277,10 @@ void EAttributeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 	}
 }
 
-
 std::shared_ptr<EClass> EAttributeImpl::eStaticClass() const
 {
 	return ecore::ecorePackage::eInstance()->getEAttribute_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -294,10 +292,10 @@ Any EAttributeImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case ecore::ecorePackage::EATTRIBUTE_ATTRIBUTE_EATTRIBUTETYPE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getEAttributeType();
-			return eAny(returnValue); //223
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //223
 		}
 		case ecore::ecorePackage::EATTRIBUTE_ATTRIBUTE_ID:
-			return eAny(isID()); //222
+			return eAny(isID(),0,true); //222
 	}
 	return EStructuralFeatureImpl::eGet(featureID, resolve, coreType);
 }
@@ -353,7 +351,6 @@ Any EAttributeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arg
 	return result;
 }
 
-
 std::shared_ptr<ecore::EAttribute> EAttributeImpl::getThisEAttributePtr() const
 {
 	return m_thisEAttributePtr.lock();
@@ -363,3 +360,5 @@ void EAttributeImpl::setThisEAttributePtr(std::weak_ptr<ecore::EAttribute> thisE
 	m_thisEAttributePtr = thisEAttributePtr;
 	setThisEStructuralFeaturePtr(thisEAttributePtr);
 }
+
+

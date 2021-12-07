@@ -429,12 +429,10 @@ void InterfaceRealizationImpl::saveContent(std::shared_ptr<persistence::interfac
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> InterfaceRealizationImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getInterfaceRealization_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -446,12 +444,12 @@ Any InterfaceRealizationImpl::eGet(int featureID, bool resolve, bool coreType) c
 		case uml::umlPackage::INTERFACEREALIZATION_ATTRIBUTE_CONTRACT:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getContract();
-			return eAny(returnValue); //12618
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //12618
 		}
 		case uml::umlPackage::INTERFACEREALIZATION_ATTRIBUTE_IMPLEMENTINGCLASSIFIER:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getImplementingClassifier().lock();
-			return eAny(returnValue); //12619
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //12619
 		}
 	}
 	return RealizationImpl::eGet(featureID, resolve, coreType);
@@ -497,7 +495,7 @@ bool InterfaceRealizationImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any InterfaceRealizationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any InterfaceRealizationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -517,7 +515,6 @@ Any InterfaceRealizationImpl::eInvoke(int operationID, std::shared_ptr<std::list
 	return result;
 }
 
-
 std::shared_ptr<uml::InterfaceRealization> InterfaceRealizationImpl::getThisInterfaceRealizationPtr() const
 {
 	return m_thisInterfaceRealizationPtr.lock();
@@ -527,3 +524,5 @@ void InterfaceRealizationImpl::setThisInterfaceRealizationPtr(std::weak_ptr<uml:
 	m_thisInterfaceRealizationPtr = thisInterfaceRealizationPtr;
 	setThisRealizationPtr(thisInterfaceRealizationPtr);
 }
+
+

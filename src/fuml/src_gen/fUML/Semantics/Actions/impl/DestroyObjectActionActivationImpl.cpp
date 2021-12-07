@@ -40,8 +40,8 @@
 
 #include <exception> // used in Persistence
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
-#include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Actions/ActionsFactory.hpp"
+#include "uml/umlFactory.hpp"
 
 #include "uml/Action.hpp"
 #include "fUML/Semantics/Actions/ActionActivation.hpp"
@@ -58,8 +58,8 @@
 #include "fUML/Semantics/Values/Value.hpp"
 
 //Factories an Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
@@ -431,12 +431,10 @@ void DestroyObjectActionActivationImpl::saveContent(std::shared_ptr<persistence:
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> DestroyObjectActionActivationImpl::eStaticClass() const
 {
 	return fUML::Semantics::Actions::ActionsPackage::eInstance()->getDestroyObjectActionActivation_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -448,7 +446,7 @@ Any DestroyObjectActionActivationImpl::eGet(int featureID, bool resolve, bool co
 		case fUML::Semantics::Actions::ActionsPackage::DESTROYOBJECTACTIONACTIVATION_ATTRIBUTE_DESTROYOBJECTACTION:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getDestroyObjectAction();
-			return eAny(returnValue); //3911
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //3911
 		}
 	}
 	return ActionActivationImpl::eGet(featureID, resolve, coreType);
@@ -484,7 +482,7 @@ bool DestroyObjectActionActivationImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any DestroyObjectActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any DestroyObjectActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -497,18 +495,18 @@ Any DestroyObjectActionActivationImpl::eInvoke(int operationID, std::shared_ptr<
 			//Retrieve input parameter 'value'
 			//parameter 0
 			std::shared_ptr<fUML::Semantics::Values::Value> incoming_param_value;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_value_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_value = (*incoming_param_value_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::Values::Value> >();
+			std::list<Any>::const_iterator incoming_param_value_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_value = (*incoming_param_value_arguments_citer)->get<std::shared_ptr<fUML::Semantics::Values::Value> >();
 			//Retrieve input parameter 'isDestroyLinks'
 			//parameter 1
 			bool incoming_param_isDestroyLinks;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_isDestroyLinks_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_isDestroyLinks = (*incoming_param_isDestroyLinks_arguments_citer)->get()->get<bool >();
+			std::list<Any>::const_iterator incoming_param_isDestroyLinks_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_isDestroyLinks = (*incoming_param_isDestroyLinks_arguments_citer)->get<bool >();
 			//Retrieve input parameter 'isDestroyOwnedObjects'
 			//parameter 2
 			bool incoming_param_isDestroyOwnedObjects;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_isDestroyOwnedObjects_arguments_citer = std::next(arguments->begin(), 2);
-			incoming_param_isDestroyOwnedObjects = (*incoming_param_isDestroyOwnedObjects_arguments_citer)->get()->get<bool >();
+			std::list<Any>::const_iterator incoming_param_isDestroyOwnedObjects_arguments_citer = std::next(arguments->begin(), 2);
+			incoming_param_isDestroyOwnedObjects = (*incoming_param_isDestroyOwnedObjects_arguments_citer)->get<bool >();
 			this->destroyObject(incoming_param_value,incoming_param_isDestroyLinks,incoming_param_isDestroyOwnedObjects);
 			break;
 		}
@@ -526,14 +524,14 @@ Any DestroyObjectActionActivationImpl::eInvoke(int operationID, std::shared_ptr<
 			//Retrieve input parameter 'reference'
 			//parameter 0
 			std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> incoming_param_reference;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_reference_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_reference = (*incoming_param_reference_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> >();
+			std::list<Any>::const_iterator incoming_param_reference_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_reference = (*incoming_param_reference_arguments_citer)->get<std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> >();
 			//Retrieve input parameter 'link'
 			//parameter 1
 			std::shared_ptr<fUML::Semantics::StructuredClassifiers::Link> incoming_param_link;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_link_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_link = (*incoming_param_link_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::StructuredClassifiers::Link> >();
-			result = eAny(this->objectIsComposite(incoming_param_reference,incoming_param_link));
+			std::list<Any>::const_iterator incoming_param_link_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_link = (*incoming_param_link_arguments_citer)->get<std::shared_ptr<fUML::Semantics::StructuredClassifiers::Link> >();
+					result = eAny(this->objectIsComposite(incoming_param_reference,incoming_param_link),0,false);
 			break;
 		}
 
@@ -550,7 +548,6 @@ Any DestroyObjectActionActivationImpl::eInvoke(int operationID, std::shared_ptr<
 	return result;
 }
 
-
 std::shared_ptr<fUML::Semantics::Actions::DestroyObjectActionActivation> DestroyObjectActionActivationImpl::getThisDestroyObjectActionActivationPtr() const
 {
 	return m_thisDestroyObjectActionActivationPtr.lock();
@@ -560,3 +557,5 @@ void DestroyObjectActionActivationImpl::setThisDestroyObjectActionActivationPtr(
 	m_thisDestroyObjectActionActivationPtr = thisDestroyObjectActionActivationPtr;
 	setThisActionActivationPtr(thisDestroyObjectActionActivationPtr);
 }
+
+

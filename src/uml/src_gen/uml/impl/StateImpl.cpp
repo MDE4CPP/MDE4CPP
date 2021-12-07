@@ -157,14 +157,10 @@ StateImpl& StateImpl::operator=(const StateImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_connection - Subset<uml::ConnectionPointReference, uml::NamedElement >(getOwnedMember())" << std::endl;
 		#endif
 		
-
-		Bag<uml::ConnectionPointReference>::iterator connectionIter = connectionList->begin();
-		Bag<uml::ConnectionPointReference>::iterator connectionEnd = connectionList->end();
-		while (connectionIter != connectionEnd) 
+		for(const std::shared_ptr<uml::ConnectionPointReference> connectionindexElem: *connectionList) 
 		{
-			std::shared_ptr<uml::ConnectionPointReference> temp = std::dynamic_pointer_cast<uml::ConnectionPointReference>((*connectionIter)->copy());
-			getConnection()->push_back(temp);
-			connectionIter++;
+			std::shared_ptr<uml::ConnectionPointReference> temp = std::dynamic_pointer_cast<uml::ConnectionPointReference>((connectionindexElem)->copy());
+			m_connection->push_back(temp);
 		}
 	}
 	else
@@ -188,14 +184,10 @@ StateImpl& StateImpl::operator=(const StateImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_connectionPoint - Subset<uml::Pseudostate, uml::NamedElement >(getOwnedMember())" << std::endl;
 		#endif
 		
-
-		Bag<uml::Pseudostate>::iterator connectionPointIter = connectionPointList->begin();
-		Bag<uml::Pseudostate>::iterator connectionPointEnd = connectionPointList->end();
-		while (connectionPointIter != connectionPointEnd) 
+		for(const std::shared_ptr<uml::Pseudostate> connectionPointindexElem: *connectionPointList) 
 		{
-			std::shared_ptr<uml::Pseudostate> temp = std::dynamic_pointer_cast<uml::Pseudostate>((*connectionPointIter)->copy());
-			getConnectionPoint()->push_back(temp);
-			connectionPointIter++;
+			std::shared_ptr<uml::Pseudostate> temp = std::dynamic_pointer_cast<uml::Pseudostate>((connectionPointindexElem)->copy());
+			m_connectionPoint->push_back(temp);
 		}
 	}
 	else
@@ -219,14 +211,10 @@ StateImpl& StateImpl::operator=(const StateImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_deferrableTrigger - Subset<uml::Trigger, uml::Element >(getOwnedElement())" << std::endl;
 		#endif
 		
-
-		Bag<uml::Trigger>::iterator deferrableTriggerIter = deferrableTriggerList->begin();
-		Bag<uml::Trigger>::iterator deferrableTriggerEnd = deferrableTriggerList->end();
-		while (deferrableTriggerIter != deferrableTriggerEnd) 
+		for(const std::shared_ptr<uml::Trigger> deferrableTriggerindexElem: *deferrableTriggerList) 
 		{
-			std::shared_ptr<uml::Trigger> temp = std::dynamic_pointer_cast<uml::Trigger>((*deferrableTriggerIter)->copy());
-			getDeferrableTrigger()->push_back(temp);
-			deferrableTriggerIter++;
+			std::shared_ptr<uml::Trigger> temp = std::dynamic_pointer_cast<uml::Trigger>((deferrableTriggerindexElem)->copy());
+			m_deferrableTrigger->push_back(temp);
 		}
 	}
 	else
@@ -274,14 +262,10 @@ StateImpl& StateImpl::operator=(const StateImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_region - Subset<uml::Region, uml::NamedElement >(getOwnedMember())" << std::endl;
 		#endif
 		
-
-		Bag<uml::Region>::iterator regionIter = regionList->begin();
-		Bag<uml::Region>::iterator regionEnd = regionList->end();
-		while (regionIter != regionEnd) 
+		for(const std::shared_ptr<uml::Region> regionindexElem: *regionList) 
 		{
-			std::shared_ptr<uml::Region> temp = std::dynamic_pointer_cast<uml::Region>((*regionIter)->copy());
-			getRegion()->push_back(temp);
-			regionIter++;
+			std::shared_ptr<uml::Region> temp = std::dynamic_pointer_cast<uml::Region>((regionindexElem)->copy());
+			m_region->push_back(temp);
 		}
 	}
 	else
@@ -963,12 +947,10 @@ void StateImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandle
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> StateImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getState_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -979,89 +961,57 @@ Any StateImpl::eGet(int featureID, bool resolve, bool coreType) const
 	{
 		case uml::umlPackage::STATE_ATTRIBUTE_CONNECTION:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::ConnectionPointReference>::iterator iter = getConnection()->begin();
-			Bag<uml::ConnectionPointReference>::iterator end = getConnection()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //22021			
+			return eAnyBag(getConnection(),79738244); //22021
 		}
 		case uml::umlPackage::STATE_ATTRIBUTE_CONNECTIONPOINT:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Pseudostate>::iterator iter = getConnectionPoint()->begin();
-			Bag<uml::Pseudostate>::iterator end = getConnectionPoint()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //22022			
+			return eAnyBag(getConnectionPoint(),376665850); //22022
 		}
 		case uml::umlPackage::STATE_ATTRIBUTE_DEFERRABLETRIGGER:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Trigger>::iterator iter = getDeferrableTrigger()->begin();
-			Bag<uml::Trigger>::iterator end = getDeferrableTrigger()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //22023			
+			return eAnyBag(getDeferrableTrigger(),509470680); //22023
 		}
 		case uml::umlPackage::STATE_ATTRIBUTE_DOACTIVITY:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getDoActivity();
-			return eAny(returnValue); //22024
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //22024
 		}
 		case uml::umlPackage::STATE_ATTRIBUTE_ENTRY:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getEntry();
-			return eAny(returnValue); //22025
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //22025
 		}
 		case uml::umlPackage::STATE_ATTRIBUTE_EXIT:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getExit();
-			return eAny(returnValue); //22026
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //22026
 		}
 		case uml::umlPackage::STATE_ATTRIBUTE_ISCOMPOSITE:
-			return eAny(getIsComposite()); //22027
+			return eAny(getIsComposite(),0,true); //22027
 		case uml::umlPackage::STATE_ATTRIBUTE_ISORTHOGONAL:
-			return eAny(getIsOrthogonal()); //22028
+			return eAny(getIsOrthogonal(),0,true); //22028
 		case uml::umlPackage::STATE_ATTRIBUTE_ISSIMPLE:
-			return eAny(getIsSimple()); //22029
+			return eAny(getIsSimple(),0,true); //22029
 		case uml::umlPackage::STATE_ATTRIBUTE_ISSUBMACHINESTATE:
-			return eAny(getIsSubmachineState()); //22030
+			return eAny(getIsSubmachineState(),0,true); //22030
 		case uml::umlPackage::STATE_ATTRIBUTE_REDEFINEDSTATE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getRedefinedState();
-			return eAny(returnValue); //22031
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //22031
 		}
 		case uml::umlPackage::STATE_ATTRIBUTE_REGION:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Region>::iterator iter = getRegion()->begin();
-			Bag<uml::Region>::iterator end = getRegion()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //22034			
+			return eAnyBag(getRegion(),707017270); //22034
 		}
 		case uml::umlPackage::STATE_ATTRIBUTE_STATEINVARIANT:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getStateInvariant();
-			return eAny(returnValue); //22032
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //22032
 		}
 		case uml::umlPackage::STATE_ATTRIBUTE_SUBMACHINE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getSubmachine();
-			return eAny(returnValue); //22033
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //22033
 		}
 	}
 	Any result;
@@ -1134,108 +1084,111 @@ bool StateImpl::eSet(int featureID, Any newValue)
 		case uml::umlPackage::STATE_ATTRIBUTE_CONNECTION:
 		{
 			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::ConnectionPointReference>> connectionList(new Bag<uml::ConnectionPointReference>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
+			if((newValue->isContainer()) && (uml::umlPackage::CONNECTIONPOINTREFERENCE_CLASS ==newValue->getTypeId()))
 			{
-				connectionList->add(std::dynamic_pointer_cast<uml::ConnectionPointReference>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::ConnectionPointReference>::iterator iterConnection = getConnection()->begin();
-			Bag<uml::ConnectionPointReference>::iterator endConnection = getConnection()->end();
-			while (iterConnection != endConnection)
-			{
-				if (connectionList->find(*iterConnection) == -1)
+				try
 				{
-					getConnection()->erase(*iterConnection);
+					std::shared_ptr<Bag<uml::ConnectionPointReference>> connectionList= newValue->get<std::shared_ptr<Bag<uml::ConnectionPointReference>>>();
+					std::shared_ptr<Bag<uml::ConnectionPointReference>> _connection=getConnection();
+					for(const std::shared_ptr<uml::ConnectionPointReference> indexConnection: *_connection)
+					{
+						if (connectionList->find(indexConnection) == -1)
+						{
+							_connection->erase(indexConnection);
+						}
+					}
+
+					for(const std::shared_ptr<uml::ConnectionPointReference> indexConnection: *connectionList)
+					{
+						if (_connection->find(indexConnection) == -1)
+						{
+							_connection->add(indexConnection);
+						}
+					}
 				}
-				iterConnection++;
-			}
- 
-			iterConnection = connectionList->begin();
-			endConnection = connectionList->end();
-			while (iterConnection != endConnection)
-			{
-				if (getConnection()->find(*iterConnection) == -1)
+				catch(...)
 				{
-					getConnection()->add(*iterConnection);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterConnection++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}
 		case uml::umlPackage::STATE_ATTRIBUTE_CONNECTIONPOINT:
 		{
 			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::Pseudostate>> connectionPointList(new Bag<uml::Pseudostate>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
+			if((newValue->isContainer()) && (uml::umlPackage::PSEUDOSTATE_CLASS ==newValue->getTypeId()))
 			{
-				connectionPointList->add(std::dynamic_pointer_cast<uml::Pseudostate>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::Pseudostate>::iterator iterConnectionPoint = getConnectionPoint()->begin();
-			Bag<uml::Pseudostate>::iterator endConnectionPoint = getConnectionPoint()->end();
-			while (iterConnectionPoint != endConnectionPoint)
-			{
-				if (connectionPointList->find(*iterConnectionPoint) == -1)
+				try
 				{
-					getConnectionPoint()->erase(*iterConnectionPoint);
+					std::shared_ptr<Bag<uml::Pseudostate>> connectionPointList= newValue->get<std::shared_ptr<Bag<uml::Pseudostate>>>();
+					std::shared_ptr<Bag<uml::Pseudostate>> _connectionPoint=getConnectionPoint();
+					for(const std::shared_ptr<uml::Pseudostate> indexConnectionPoint: *_connectionPoint)
+					{
+						if (connectionPointList->find(indexConnectionPoint) == -1)
+						{
+							_connectionPoint->erase(indexConnectionPoint);
+						}
+					}
+
+					for(const std::shared_ptr<uml::Pseudostate> indexConnectionPoint: *connectionPointList)
+					{
+						if (_connectionPoint->find(indexConnectionPoint) == -1)
+						{
+							_connectionPoint->add(indexConnectionPoint);
+						}
+					}
 				}
-				iterConnectionPoint++;
-			}
- 
-			iterConnectionPoint = connectionPointList->begin();
-			endConnectionPoint = connectionPointList->end();
-			while (iterConnectionPoint != endConnectionPoint)
-			{
-				if (getConnectionPoint()->find(*iterConnectionPoint) == -1)
+				catch(...)
 				{
-					getConnectionPoint()->add(*iterConnectionPoint);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterConnectionPoint++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}
 		case uml::umlPackage::STATE_ATTRIBUTE_DEFERRABLETRIGGER:
 		{
 			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::Trigger>> deferrableTriggerList(new Bag<uml::Trigger>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
+			if((newValue->isContainer()) && (uml::umlPackage::TRIGGER_CLASS ==newValue->getTypeId()))
 			{
-				deferrableTriggerList->add(std::dynamic_pointer_cast<uml::Trigger>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::Trigger>::iterator iterDeferrableTrigger = getDeferrableTrigger()->begin();
-			Bag<uml::Trigger>::iterator endDeferrableTrigger = getDeferrableTrigger()->end();
-			while (iterDeferrableTrigger != endDeferrableTrigger)
-			{
-				if (deferrableTriggerList->find(*iterDeferrableTrigger) == -1)
+				try
 				{
-					getDeferrableTrigger()->erase(*iterDeferrableTrigger);
+					std::shared_ptr<Bag<uml::Trigger>> deferrableTriggerList= newValue->get<std::shared_ptr<Bag<uml::Trigger>>>();
+					std::shared_ptr<Bag<uml::Trigger>> _deferrableTrigger=getDeferrableTrigger();
+					for(const std::shared_ptr<uml::Trigger> indexDeferrableTrigger: *_deferrableTrigger)
+					{
+						if (deferrableTriggerList->find(indexDeferrableTrigger) == -1)
+						{
+							_deferrableTrigger->erase(indexDeferrableTrigger);
+						}
+					}
+
+					for(const std::shared_ptr<uml::Trigger> indexDeferrableTrigger: *deferrableTriggerList)
+					{
+						if (_deferrableTrigger->find(indexDeferrableTrigger) == -1)
+						{
+							_deferrableTrigger->add(indexDeferrableTrigger);
+						}
+					}
 				}
-				iterDeferrableTrigger++;
-			}
- 
-			iterDeferrableTrigger = deferrableTriggerList->begin();
-			endDeferrableTrigger = deferrableTriggerList->end();
-			while (iterDeferrableTrigger != endDeferrableTrigger)
-			{
-				if (getDeferrableTrigger()->find(*iterDeferrableTrigger) == -1)
+				catch(...)
 				{
-					getDeferrableTrigger()->add(*iterDeferrableTrigger);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterDeferrableTrigger++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}
@@ -1274,36 +1227,37 @@ bool StateImpl::eSet(int featureID, Any newValue)
 		case uml::umlPackage::STATE_ATTRIBUTE_REGION:
 		{
 			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::Region>> regionList(new Bag<uml::Region>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
+			if((newValue->isContainer()) && (uml::umlPackage::REGION_CLASS ==newValue->getTypeId()))
 			{
-				regionList->add(std::dynamic_pointer_cast<uml::Region>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::Region>::iterator iterRegion = getRegion()->begin();
-			Bag<uml::Region>::iterator endRegion = getRegion()->end();
-			while (iterRegion != endRegion)
-			{
-				if (regionList->find(*iterRegion) == -1)
+				try
 				{
-					getRegion()->erase(*iterRegion);
+					std::shared_ptr<Bag<uml::Region>> regionList= newValue->get<std::shared_ptr<Bag<uml::Region>>>();
+					std::shared_ptr<Bag<uml::Region>> _region=getRegion();
+					for(const std::shared_ptr<uml::Region> indexRegion: *_region)
+					{
+						if (regionList->find(indexRegion) == -1)
+						{
+							_region->erase(indexRegion);
+						}
+					}
+
+					for(const std::shared_ptr<uml::Region> indexRegion: *regionList)
+					{
+						if (_region->find(indexRegion) == -1)
+						{
+							_region->add(indexRegion);
+						}
+					}
 				}
-				iterRegion++;
-			}
- 
-			iterRegion = regionList->begin();
-			endRegion = regionList->end();
-			while (iterRegion != endRegion)
-			{
-				if (getRegion()->find(*iterRegion) == -1)
+				catch(...)
 				{
-					getRegion()->add(*iterRegion);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterRegion++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}
@@ -1343,130 +1297,120 @@ bool StateImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any StateImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any StateImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
   	switch(operationID)
 	{
-		
-		// 1735758508
+		// uml::State::composite_states(Any, std::map) : bool: 1735758508
 		case umlPackage::STATE_OPERATION_COMPOSITE_STATES_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->composite_states(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->composite_states(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		
-		// 694309769
+		// uml::State::destinations_or_sources_of_transitions(Any, std::map) : bool: 694309769
 		case umlPackage::STATE_OPERATION_DESTINATIONS_OR_SOURCES_OF_TRANSITIONS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->destinations_or_sources_of_transitions(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->destinations_or_sources_of_transitions(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		
-		// 927974608
+		// uml::State::entry_or_exit(Any, std::map) : bool: 927974608
 		case umlPackage::STATE_OPERATION_ENTRY_OR_EXIT_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->entry_or_exit(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->entry_or_exit(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		
-		// 1887131105
+		// uml::State::isComposite() : bool: 1887131105
 		case umlPackage::STATE_OPERATION_ISCOMPOSITE:
 		{
-			result = eAny(this->isComposite());
+			result = eAny(this->isComposite(),0,false);
 			break;
 		}
-		
-		// 1848860248
+		// uml::State::isOrthogonal() : bool: 1848860248
 		case umlPackage::STATE_OPERATION_ISORTHOGONAL:
 		{
-			result = eAny(this->isOrthogonal());
+			result = eAny(this->isOrthogonal(),0,false);
 			break;
 		}
-		
-		// 993070579
+		// uml::State::isSimple() : bool: 993070579
 		case umlPackage::STATE_OPERATION_ISSIMPLE:
 		{
-			result = eAny(this->isSimple());
+			result = eAny(this->isSimple(),0,false);
 			break;
 		}
-		
-		// 1954820373
+		// uml::State::isSubmachineState() : bool: 1954820373
 		case umlPackage::STATE_OPERATION_ISSUBMACHINESTATE:
 		{
-			result = eAny(this->isSubmachineState());
+			result = eAny(this->isSubmachineState(),0,false);
 			break;
 		}
-		
-		// 871920175
+		// uml::State::redefinitionContext() : uml::Classifier: 871920175
 		case umlPackage::STATE_OPERATION_REDEFINITIONCONTEXT:
 		{
-			result = eAny(this->redefinitionContext());
+			result = eAny(this->redefinitionContext(), umlPackage::CLASSIFIER_CLASS,false);
 			break;
 		}
-		
-		// 1111971003
+		// uml::State::submachine_or_regions(Any, std::map) : bool: 1111971003
 		case umlPackage::STATE_OPERATION_SUBMACHINE_OR_REGIONS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->submachine_or_regions(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->submachine_or_regions(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		
-		// 2047311099
+		// uml::State::submachine_states(Any, std::map) : bool: 2047311099
 		case umlPackage::STATE_OPERATION_SUBMACHINE_STATES_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->submachine_states(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->submachine_states(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
 
@@ -1489,7 +1433,6 @@ Any StateImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_
 	return result;
 }
 
-
 std::shared_ptr<uml::State> StateImpl::getThisStatePtr() const
 {
 	return m_thisStatePtr.lock();
@@ -1501,3 +1444,5 @@ void StateImpl::setThisStatePtr(std::weak_ptr<uml::State> thisStatePtr)
 	setThisRedefinableElementPtr(thisStatePtr);
 	setThisVertexPtr(thisStatePtr);
 }
+
+

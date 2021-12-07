@@ -389,19 +389,19 @@ void NamedElementImpl::loadAttributes(std::shared_ptr<persistence::interfaces::X
 		{
 			uml::VisibilityKind value = uml::VisibilityKind::PUBLIC;
 			std::string literal = iter->second;
-			if (literal == "public")
+						if (literal == "public")
 			{
 				value = uml::VisibilityKind::PUBLIC;
 			}
-			else if (literal == "private")
+			else 			if (literal == "private")
 			{
 				value = uml::VisibilityKind::PRIVATE;
 			}
-			else if (literal == "protected")
+			else 			if (literal == "protected")
 			{
 				value = uml::VisibilityKind::PROTECTED;
 			}
-			else if (literal == "package")
+			else 			if (literal == "package")
 			{
 				value = uml::VisibilityKind::PACKAGE;
 			}
@@ -511,12 +511,10 @@ void NamedElementImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> NamedElementImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getNamedElement_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -527,32 +525,24 @@ Any NamedElementImpl::eGet(int featureID, bool resolve, bool coreType) const
 	{
 		case uml::umlPackage::NAMEDELEMENT_ATTRIBUTE_CLIENTDEPENDENCY:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Dependency>::iterator iter = getClientDependency()->begin();
-			Bag<uml::Dependency>::iterator end = getClientDependency()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //1553			
+			return eAnyBag(getClientDependency(),1756692956); //1553
 		}
 		case uml::umlPackage::NAMEDELEMENT_ATTRIBUTE_NAME:
-			return eAny(getName()); //1554
+			return eAny(getName(),0,true); //1554
 		case uml::umlPackage::NAMEDELEMENT_ATTRIBUTE_NAMEEXPRESSION:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getNameExpression();
-			return eAny(returnValue); //1555
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //1555
 		}
 		case uml::umlPackage::NAMEDELEMENT_ATTRIBUTE_NAMESPACE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getNamespace().lock();
-			return eAny(returnValue); //1556
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //1556
 		}
 		case uml::umlPackage::NAMEDELEMENT_ATTRIBUTE_QUALIFIEDNAME:
-			return eAny(getQualifiedName()); //1557
+			return eAny(getQualifiedName(),0,true); //1557
 		case uml::umlPackage::NAMEDELEMENT_ATTRIBUTE_VISIBILITY:
-			return eAny(getVisibility()); //1558
+			return eAny(getVisibility(),0,true); //1558
 	}
 	return ElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -611,163 +601,152 @@ bool NamedElementImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any NamedElementImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any NamedElementImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
   	switch(operationID)
 	{
-		
-		// 2032137401
+		// uml::NamedElement::allNamespaces() : uml::Namespace[*] {const}: 2032137401
 		case umlPackage::NAMEDELEMENT_OPERATION_ALLNAMESPACES:
 		{
-			result = eAny(this->allNamespaces());
+			std::shared_ptr<Bag<uml::Namespace> > resultList = this->allNamespaces();
+			return eAny(resultList,umlPackage::NAMESPACE_CLASS,true);
 			break;
 		}
-		
-		// 1344070418
+		// uml::NamedElement::allOwningPackages() : uml::Package[*]: 1344070418
 		case umlPackage::NAMEDELEMENT_OPERATION_ALLOWNINGPACKAGES:
 		{
-			result = eAny(this->allOwningPackages());
+			std::shared_ptr<Bag<uml::Package> > resultList = this->allOwningPackages();
+			return eAny(resultList,umlPackage::PACKAGE_CLASS,true);
 			break;
 		}
-		
-		// 859532136
+		// uml::NamedElement::createDependency(uml::NamedElement) : uml::Dependency: 859532136
 		case umlPackage::NAMEDELEMENT_OPERATION_CREATEDEPENDENCY_NAMEDELEMENT:
 		{
 			//Retrieve input parameter 'supplier'
 			//parameter 0
 			std::shared_ptr<uml::NamedElement> incoming_param_supplier;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_supplier_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_supplier = (*incoming_param_supplier_arguments_citer)->get()->get<std::shared_ptr<uml::NamedElement> >();
-			result = eAny(this->createDependency(incoming_param_supplier));
+			std::list<Any>::const_iterator incoming_param_supplier_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_supplier = (*incoming_param_supplier_arguments_citer)->get<std::shared_ptr<uml::NamedElement> >();
+			result = eAny(this->createDependency(incoming_param_supplier), umlPackage::DEPENDENCY_CLASS,false);
 			break;
 		}
-		
-		// 274373089
+		// uml::NamedElement::createUsage(uml::NamedElement) : uml::Usage: 274373089
 		case umlPackage::NAMEDELEMENT_OPERATION_CREATEUSAGE_NAMEDELEMENT:
 		{
 			//Retrieve input parameter 'supplier'
 			//parameter 0
 			std::shared_ptr<uml::NamedElement> incoming_param_supplier;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_supplier_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_supplier = (*incoming_param_supplier_arguments_citer)->get()->get<std::shared_ptr<uml::NamedElement> >();
-			result = eAny(this->createUsage(incoming_param_supplier));
+			std::list<Any>::const_iterator incoming_param_supplier_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_supplier = (*incoming_param_supplier_arguments_citer)->get<std::shared_ptr<uml::NamedElement> >();
+			result = eAny(this->createUsage(incoming_param_supplier), umlPackage::USAGE_CLASS,false);
 			break;
 		}
-		
-		// 1863743641
+		// uml::NamedElement::getClientDependencies() : uml::Dependency[*]: 1863743641
 		case umlPackage::NAMEDELEMENT_OPERATION_GETCLIENTDEPENDENCIES:
 		{
-			result = eAny(this->getClientDependencies());
+			std::shared_ptr<Bag<uml::Dependency> > resultList = this->getClientDependencies();
+			return eAny(resultList,umlPackage::DEPENDENCY_CLASS,true);
 			break;
 		}
-		
-		// 1812636995
+		// uml::NamedElement::getLabel() : std::string: 1812636995
 		case umlPackage::NAMEDELEMENT_OPERATION_GETLABEL:
 		{
-			result = eAny(this->getLabel());
+			result = eAny(this->getLabel(),0,false);
 			break;
 		}
-		
-		// 860924116
+		// uml::NamedElement::getLabel(bool) : std::string: 860924116
 		case umlPackage::NAMEDELEMENT_OPERATION_GETLABEL_BOOLEAN:
 		{
 			//Retrieve input parameter 'localize'
 			//parameter 0
 			bool incoming_param_localize;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_localize_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_localize = (*incoming_param_localize_arguments_citer)->get()->get<bool >();
-			result = eAny(this->getLabel(incoming_param_localize));
+			std::list<Any>::const_iterator incoming_param_localize_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_localize = (*incoming_param_localize_arguments_citer)->get<bool >();
+			result = eAny(this->getLabel(incoming_param_localize),0,false);
 			break;
 		}
-		
-		// 769066163
+		// uml::NamedElement::getNamespace() : uml::Namespace: 769066163
 		case umlPackage::NAMEDELEMENT_OPERATION_GETNAMESPACE:
 		{
-			result = eAny(this->getNamespace());
+			result = eAny(this->getNamespace(), umlPackage::NAMESPACE_CLASS,false);
 			break;
 		}
-		
-		// 646487924
+		// uml::NamedElement::getQualifiedName() : std::string {const}: 646487924
 		case umlPackage::NAMEDELEMENT_OPERATION_GETQUALIFIEDNAME:
 		{
-			result = eAny(this->getQualifiedName());
+			result = eAny(this->getQualifiedName(),0,false);
 			break;
 		}
-		
-		// 711098709
+		// uml::NamedElement::has_no_qualified_name(Any, std::map) : bool: 711098709
 		case umlPackage::NAMEDELEMENT_OPERATION_HAS_NO_QUALIFIED_NAME_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->has_no_qualified_name(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->has_no_qualified_name(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		
-		// 2097992942
+		// uml::NamedElement::has_qualified_name(Any, std::map) : bool: 2097992942
 		case umlPackage::NAMEDELEMENT_OPERATION_HAS_QUALIFIED_NAME_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->has_qualified_name(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->has_qualified_name(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		
-		// 420809074
+		// uml::NamedElement::isDistinguishableFrom(uml::NamedElement, uml::Namespace) : bool: 420809074
 		case umlPackage::NAMEDELEMENT_OPERATION_ISDISTINGUISHABLEFROM_NAMEDELEMENT_NAMESPACE:
 		{
 			//Retrieve input parameter 'n'
 			//parameter 0
 			std::shared_ptr<uml::NamedElement> incoming_param_n;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_n_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_n = (*incoming_param_n_arguments_citer)->get()->get<std::shared_ptr<uml::NamedElement> >();
+			std::list<Any>::const_iterator incoming_param_n_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_n = (*incoming_param_n_arguments_citer)->get<std::shared_ptr<uml::NamedElement> >();
 			//Retrieve input parameter 'ns'
 			//parameter 1
 			std::shared_ptr<uml::Namespace> incoming_param_ns;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_ns_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_ns = (*incoming_param_ns_arguments_citer)->get()->get<std::shared_ptr<uml::Namespace> >();
-			result = eAny(this->isDistinguishableFrom(incoming_param_n,incoming_param_ns));
+			std::list<Any>::const_iterator incoming_param_ns_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_ns = (*incoming_param_ns_arguments_citer)->get<std::shared_ptr<uml::Namespace> >();
+			result = eAny(this->isDistinguishableFrom(incoming_param_n,incoming_param_ns),0,false);
 			break;
 		}
-		
-		// 8320228
+		// uml::NamedElement::separator() : std::string {const}: 8320228
 		case umlPackage::NAMEDELEMENT_OPERATION_SEPARATOR:
 		{
-			result = eAny(this->separator());
+			result = eAny(this->separator(),0,false);
 			break;
 		}
-		
-		// 405478997
+		// uml::NamedElement::visibility_needs_ownership(Any, std::map) : bool: 405478997
 		case umlPackage::NAMEDELEMENT_OPERATION_VISIBILITY_NEEDS_OWNERSHIP_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->visibility_needs_ownership(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->visibility_needs_ownership(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
 
@@ -784,7 +763,6 @@ Any NamedElementImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::
 	return result;
 }
 
-
 std::shared_ptr<uml::NamedElement> NamedElementImpl::getThisNamedElementPtr() const
 {
 	return m_thisNamedElementPtr.lock();
@@ -794,3 +772,5 @@ void NamedElementImpl::setThisNamedElementPtr(std::weak_ptr<uml::NamedElement> t
 	m_thisNamedElementPtr = thisNamedElementPtr;
 	setThisElementPtr(thisNamedElementPtr);
 }
+
+

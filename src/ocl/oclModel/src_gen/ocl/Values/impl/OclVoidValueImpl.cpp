@@ -204,12 +204,10 @@ void OclVoidValueImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> OclVoidValueImpl::eStaticClass() const
 {
 	return ocl::Values::ValuesPackage::eInstance()->getOclVoidValue_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -242,7 +240,7 @@ bool OclVoidValueImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any OclVoidValueImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any OclVoidValueImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -255,16 +253,16 @@ Any OclVoidValueImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::
 			//Retrieve input parameter 'otherValue'
 			//parameter 0
 			std::shared_ptr<fUML::Semantics::Values::Value> incoming_param_otherValue;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_otherValue_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_otherValue = (*incoming_param_otherValue_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::Values::Value> >();
-			result = eAny(this->equals(incoming_param_otherValue));
+			std::list<Any>::const_iterator incoming_param_otherValue_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_otherValue = (*incoming_param_otherValue_arguments_citer)->get<std::shared_ptr<fUML::Semantics::Values::Value> >();
+					result = eAny(this->equals(incoming_param_otherValue),0,false);
 			break;
 		}
 		
 		// 1594356317
 		case ValuesPackage::OCLVOIDVALUE_OPERATION_TOSTRING:
 		{
-			result = eAny(this->toString());
+					result = eAny(this->toString(),0,false);
 			break;
 		}
 
@@ -281,7 +279,6 @@ Any OclVoidValueImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::
 	return result;
 }
 
-
 std::shared_ptr<ocl::Values::OclVoidValue> OclVoidValueImpl::getThisOclVoidValuePtr() const
 {
 	return m_thisOclVoidValuePtr.lock();
@@ -291,3 +288,5 @@ void OclVoidValueImpl::setThisOclVoidValuePtr(std::weak_ptr<ocl::Values::OclVoid
 	m_thisOclVoidValuePtr = thisOclVoidValuePtr;
 	setThisValuePtr(thisOclVoidValuePtr);
 }
+
+

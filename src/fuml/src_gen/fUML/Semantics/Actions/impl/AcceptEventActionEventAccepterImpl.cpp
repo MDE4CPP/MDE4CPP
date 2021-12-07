@@ -37,8 +37,8 @@
 #include "fUML/Semantics/CommonBehavior/EventAccepter.hpp"
 
 //Factories an Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 
@@ -233,12 +233,10 @@ void AcceptEventActionEventAccepterImpl::saveContent(std::shared_ptr<persistence
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> AcceptEventActionEventAccepterImpl::eStaticClass() const
 {
 	return fUML::Semantics::Actions::ActionsPackage::eInstance()->getAcceptEventActionEventAccepter_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -250,7 +248,7 @@ Any AcceptEventActionEventAccepterImpl::eGet(int featureID, bool resolve, bool c
 		case fUML::Semantics::Actions::ActionsPackage::ACCEPTEVENTACTIONEVENTACCEPTER_ATTRIBUTE_ACTIONACTIVATION:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getActionActivation();
-			return eAny(returnValue); //40
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //40
 		}
 	}
 	return fUML::Semantics::CommonBehavior::EventAccepterImpl::eGet(featureID, resolve, coreType);
@@ -286,7 +284,7 @@ bool AcceptEventActionEventAccepterImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any AcceptEventActionEventAccepterImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any AcceptEventActionEventAccepterImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -306,7 +304,6 @@ Any AcceptEventActionEventAccepterImpl::eInvoke(int operationID, std::shared_ptr
 	return result;
 }
 
-
 std::shared_ptr<fUML::Semantics::Actions::AcceptEventActionEventAccepter> AcceptEventActionEventAccepterImpl::getThisAcceptEventActionEventAccepterPtr() const
 {
 	return m_thisAcceptEventActionEventAccepterPtr.lock();
@@ -316,3 +313,5 @@ void AcceptEventActionEventAccepterImpl::setThisAcceptEventActionEventAccepterPt
 	m_thisAcceptEventActionEventAccepterPtr = thisAcceptEventActionEventAccepterPtr;
 	setThisEventAccepterPtr(thisAcceptEventActionEventAccepterPtr);
 }
+
+

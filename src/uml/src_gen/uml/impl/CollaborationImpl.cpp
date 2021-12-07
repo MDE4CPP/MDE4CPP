@@ -179,14 +179,10 @@ CollaborationImpl& CollaborationImpl::operator=(const CollaborationImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_collaborationRole - Subset<uml::ConnectableElement, uml::ConnectableElement >(getRole())" << std::endl;
 		#endif
 		
-
-		Bag<uml::ConnectableElement>::iterator collaborationRoleIter = collaborationRoleList->begin();
-		Bag<uml::ConnectableElement>::iterator collaborationRoleEnd = collaborationRoleList->end();
-		while (collaborationRoleIter != collaborationRoleEnd) 
+		for(const std::shared_ptr<uml::ConnectableElement> collaborationRoleindexElem: *collaborationRoleList) 
 		{
-			std::shared_ptr<uml::ConnectableElement> temp = std::dynamic_pointer_cast<uml::ConnectableElement>((*collaborationRoleIter)->copy());
-			getCollaborationRole()->push_back(temp);
-			collaborationRoleIter++;
+			std::shared_ptr<uml::ConnectableElement> temp = std::dynamic_pointer_cast<uml::ConnectableElement>((collaborationRoleindexElem)->copy());
+			m_collaborationRole->push_back(temp);
 		}
 	}
 	else
@@ -523,12 +519,10 @@ void CollaborationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSa
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> CollaborationImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getCollaboration_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -539,15 +533,7 @@ Any CollaborationImpl::eGet(int featureID, bool resolve, bool coreType) const
 	{
 		case uml::umlPackage::COLLABORATION_ATTRIBUTE_COLLABORATIONROLE:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::ConnectableElement>::iterator iter = getCollaborationRole()->begin();
-			Bag<uml::ConnectableElement>::iterator end = getCollaborationRole()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //4245			
+			return eAnyBag(getCollaborationRole(),931219206); //4245
 		}
 	}
 	Any result;
@@ -584,36 +570,37 @@ bool CollaborationImpl::eSet(int featureID, Any newValue)
 		case uml::umlPackage::COLLABORATION_ATTRIBUTE_COLLABORATIONROLE:
 		{
 			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::ConnectableElement>> collaborationRoleList(new Bag<uml::ConnectableElement>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
+			if((newValue->isContainer()) && (uml::umlPackage::CONNECTABLEELEMENT_CLASS ==newValue->getTypeId()))
 			{
-				collaborationRoleList->add(std::dynamic_pointer_cast<uml::ConnectableElement>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::ConnectableElement>::iterator iterCollaborationRole = getCollaborationRole()->begin();
-			Bag<uml::ConnectableElement>::iterator endCollaborationRole = getCollaborationRole()->end();
-			while (iterCollaborationRole != endCollaborationRole)
-			{
-				if (collaborationRoleList->find(*iterCollaborationRole) == -1)
+				try
 				{
-					getCollaborationRole()->erase(*iterCollaborationRole);
+					std::shared_ptr<Bag<uml::ConnectableElement>> collaborationRoleList= newValue->get<std::shared_ptr<Bag<uml::ConnectableElement>>>();
+					std::shared_ptr<Bag<uml::ConnectableElement>> _collaborationRole=getCollaborationRole();
+					for(const std::shared_ptr<uml::ConnectableElement> indexCollaborationRole: *_collaborationRole)
+					{
+						if (collaborationRoleList->find(indexCollaborationRole) == -1)
+						{
+							_collaborationRole->erase(indexCollaborationRole);
+						}
+					}
+
+					for(const std::shared_ptr<uml::ConnectableElement> indexCollaborationRole: *collaborationRoleList)
+					{
+						if (_collaborationRole->find(indexCollaborationRole) == -1)
+						{
+							_collaborationRole->add(indexCollaborationRole);
+						}
+					}
 				}
-				iterCollaborationRole++;
-			}
- 
-			iterCollaborationRole = collaborationRoleList->begin();
-			endCollaborationRole = collaborationRoleList->end();
-			while (iterCollaborationRole != endCollaborationRole)
-			{
-				if (getCollaborationRole()->find(*iterCollaborationRole) == -1)
+				catch(...)
 				{
-					getCollaborationRole()->add(*iterCollaborationRole);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterCollaborationRole++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}
@@ -632,7 +619,7 @@ bool CollaborationImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any CollaborationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any CollaborationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -655,7 +642,6 @@ Any CollaborationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std:
 	return result;
 }
 
-
 std::shared_ptr<uml::Collaboration> CollaborationImpl::getThisCollaborationPtr() const
 {
 	return m_thisCollaborationPtr.lock();
@@ -666,3 +652,5 @@ void CollaborationImpl::setThisCollaborationPtr(std::weak_ptr<uml::Collaboration
 	setThisBehavioredClassifierPtr(thisCollaborationPtr);
 	setThisStructuredClassifierPtr(thisCollaborationPtr);
 }
+
+

@@ -260,12 +260,10 @@ void ExpressionInOclEvalImpl::saveContent(std::shared_ptr<persistence::interface
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> ExpressionInOclEvalImpl::eStaticClass() const
 {
 	return ocl::Evaluations::EvaluationsPackage::eInstance()->getExpressionInOclEval_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -277,12 +275,12 @@ Any ExpressionInOclEvalImpl::eGet(int featureID, bool resolve, bool coreType) co
 		case ocl::Evaluations::EvaluationsPackage::EXPRESSIONINOCLEVAL_ATTRIBUTE_CONTEXT:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getContext();
-			return eAny(returnValue); //290
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //290
 		}
 		case ocl::Evaluations::EvaluationsPackage::EXPRESSIONINOCLEVAL_ATTRIBUTE_ENVIRONMENT:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getEnvironment();
-			return eAny(returnValue); //291
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //291
 		}
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
@@ -328,7 +326,7 @@ bool ExpressionInOclEvalImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ExpressionInOclEvalImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any ExpressionInOclEvalImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -348,7 +346,6 @@ Any ExpressionInOclEvalImpl::eInvoke(int operationID, std::shared_ptr<std::list 
 	return result;
 }
 
-
 std::shared_ptr<ocl::Evaluations::ExpressionInOclEval> ExpressionInOclEvalImpl::getThisExpressionInOclEvalPtr() const
 {
 	return m_thisExpressionInOclEvalPtr.lock();
@@ -357,3 +354,5 @@ void ExpressionInOclEvalImpl::setThisExpressionInOclEvalPtr(std::weak_ptr<ocl::E
 {
 	m_thisExpressionInOclEvalPtr = thisExpressionInOclEvalPtr;
 }
+
+

@@ -34,8 +34,8 @@
 
 
 //Factories an Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
 
 
@@ -177,12 +177,10 @@ void SemanticStrategyImpl::saveContent(std::shared_ptr<persistence::interfaces::
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> SemanticStrategyImpl::eStaticClass() const
 {
 	return fUML::Semantics::Loci::LociPackage::eInstance()->getSemanticStrategy_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -215,7 +213,7 @@ bool SemanticStrategyImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any SemanticStrategyImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any SemanticStrategyImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -225,7 +223,7 @@ Any SemanticStrategyImpl::eInvoke(int operationID, std::shared_ptr<std::list < s
 		// 1330583593
 		case LociPackage::SEMANTICSTRATEGY_OPERATION_GETNAME:
 		{
-			result = eAny(this->getName());
+					result = eAny(this->getName(),0,false);
 			break;
 		}
 
@@ -242,7 +240,6 @@ Any SemanticStrategyImpl::eInvoke(int operationID, std::shared_ptr<std::list < s
 	return result;
 }
 
-
 std::shared_ptr<fUML::Semantics::Loci::SemanticStrategy> SemanticStrategyImpl::getThisSemanticStrategyPtr() const
 {
 	return m_thisSemanticStrategyPtr.lock();
@@ -251,3 +248,5 @@ void SemanticStrategyImpl::setThisSemanticStrategyPtr(std::weak_ptr<fUML::Semant
 {
 	m_thisSemanticStrategyPtr = thisSemanticStrategyPtr;
 }
+
+

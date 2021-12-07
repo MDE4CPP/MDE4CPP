@@ -31,8 +31,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
+#include "uml/umlFactory.hpp"
 
 #include "fUML/Semantics/Loci/Locus.hpp"
 #include "fUML/Semantics/Loci/SemanticVisitor.hpp"
@@ -40,8 +40,8 @@
 #include "uml/ValueSpecification.hpp"
 
 //Factories an Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
 #include "fUML/Semantics/Values/ValuesPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -266,12 +266,10 @@ void EvaluationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> EvaluationImpl::eStaticClass() const
 {
 	return fUML::Semantics::Values::ValuesPackage::eInstance()->getEvaluation_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -283,12 +281,12 @@ Any EvaluationImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case fUML::Semantics::Values::ValuesPackage::EVALUATION_ATTRIBUTE_LOCUS:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getLocus();
-			return eAny(returnValue); //421
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //421
 		}
 		case fUML::Semantics::Values::ValuesPackage::EVALUATION_ATTRIBUTE_SPECIFICATION:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getSpecification();
-			return eAny(returnValue); //420
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //420
 		}
 	}
 	return fUML::Semantics::Loci::SemanticVisitorImpl::eGet(featureID, resolve, coreType);
@@ -334,7 +332,7 @@ bool EvaluationImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any EvaluationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any EvaluationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -344,7 +342,7 @@ Any EvaluationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sh
 		// 1899572768
 		case ValuesPackage::EVALUATION_OPERATION_EVALUATE:
 		{
-			result = eAny(this->evaluate());
+				result = eAny(this->evaluate());
 			break;
 		}
 
@@ -361,7 +359,6 @@ Any EvaluationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sh
 	return result;
 }
 
-
 std::shared_ptr<fUML::Semantics::Values::Evaluation> EvaluationImpl::getThisEvaluationPtr() const
 {
 	return m_thisEvaluationPtr.lock();
@@ -371,3 +368,5 @@ void EvaluationImpl::setThisEvaluationPtr(std::weak_ptr<fUML::Semantics::Values:
 	m_thisEvaluationPtr = thisEvaluationPtr;
 	setThisSemanticVisitorPtr(thisEvaluationPtr);
 }
+
+

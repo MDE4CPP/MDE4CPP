@@ -31,10 +31,10 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Loci/LociFactory.hpp"
-#include "ocl/Evaluations/EvaluationsFactory.hpp"
-#include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Values/ValuesFactory.hpp"
+#include "uml/umlFactory.hpp"
+#include "ocl/Evaluations/EvaluationsFactory.hpp"
+#include "fUML/Semantics/Loci/LociFactory.hpp"
 
 #include "ocl/Evaluations/CollectionLiteralPartEval.hpp"
 #include "fUML/Semantics/Loci/Locus.hpp"
@@ -244,12 +244,10 @@ void CollectionItemEvalImpl::saveContent(std::shared_ptr<persistence::interfaces
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> CollectionItemEvalImpl::eStaticClass() const
 {
 	return ocl::Evaluations::EvaluationsPackage::eInstance()->getCollectionItemEval_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -261,7 +259,7 @@ Any CollectionItemEvalImpl::eGet(int featureID, bool resolve, bool coreType) con
 		case ocl::Evaluations::EvaluationsPackage::COLLECTIONITEMEVAL_ATTRIBUTE_ITEM:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getItem();
-			return eAny(returnValue); //133
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //133
 		}
 	}
 	return CollectionLiteralPartEvalImpl::eGet(featureID, resolve, coreType);
@@ -297,7 +295,7 @@ bool CollectionItemEvalImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any CollectionItemEvalImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any CollectionItemEvalImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -317,7 +315,6 @@ Any CollectionItemEvalImpl::eInvoke(int operationID, std::shared_ptr<std::list <
 	return result;
 }
 
-
 std::shared_ptr<ocl::Evaluations::CollectionItemEval> CollectionItemEvalImpl::getThisCollectionItemEvalPtr() const
 {
 	return m_thisCollectionItemEvalPtr.lock();
@@ -327,3 +324,5 @@ void CollectionItemEvalImpl::setThisCollectionItemEvalPtr(std::weak_ptr<ocl::Eva
 	m_thisCollectionItemEvalPtr = thisCollectionItemEvalPtr;
 	setThisCollectionLiteralPartEvalPtr(thisCollectionItemEvalPtr);
 }
+
+

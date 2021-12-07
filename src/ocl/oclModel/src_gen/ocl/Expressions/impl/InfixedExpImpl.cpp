@@ -390,12 +390,10 @@ void InfixedExpImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> InfixedExpImpl::eStaticClass() const
 {
 	return ocl::Expressions::ExpressionsPackage::eInstance()->getInfixedExp_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -407,7 +405,7 @@ Any InfixedExpImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case ocl::Expressions::ExpressionsPackage::INFIXEDEXP_ATTRIBUTE_SOURCE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getSource();
-			return eAny(returnValue); //3322
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //3322
 		}
 	}
 	return OclExpressionImpl::eGet(featureID, resolve, coreType);
@@ -443,7 +441,7 @@ bool InfixedExpImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any InfixedExpImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any InfixedExpImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -463,7 +461,6 @@ Any InfixedExpImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sh
 	return result;
 }
 
-
 std::shared_ptr<ocl::Expressions::InfixedExp> InfixedExpImpl::getThisInfixedExpPtr() const
 {
 	return m_thisInfixedExpPtr.lock();
@@ -473,3 +470,5 @@ void InfixedExpImpl::setThisInfixedExpPtr(std::weak_ptr<ocl::Expressions::Infixe
 	m_thisInfixedExpPtr = thisInfixedExpPtr;
 	setThisOclExpressionPtr(thisInfixedExpPtr);
 }
+
+

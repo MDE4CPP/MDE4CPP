@@ -365,12 +365,10 @@ void ConnectorEndImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> ConnectorEndImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getConnectorEnd_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -382,22 +380,22 @@ Any ConnectorEndImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::CONNECTOREND_ATTRIBUTE_CONNECTOR:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getConnector().lock();
-			return eAny(returnValue); //5412
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //5412
 		}
 		case uml::umlPackage::CONNECTOREND_ATTRIBUTE_DEFININGEND:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getDefiningEnd();
-			return eAny(returnValue); //549
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //549
 		}
 		case uml::umlPackage::CONNECTOREND_ATTRIBUTE_PARTWITHPORT:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getPartWithPort();
-			return eAny(returnValue); //5410
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //5410
 		}
 		case uml::umlPackage::CONNECTOREND_ATTRIBUTE_ROLE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getRole();
-			return eAny(returnValue); //5411
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //5411
 		}
 	}
 	return MultiplicityElementImpl::eGet(featureID, resolve, coreType);
@@ -455,85 +453,80 @@ bool ConnectorEndImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ConnectorEndImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any ConnectorEndImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
   	switch(operationID)
 	{
-		
-		// 847443347
+		// uml::ConnectorEnd::getDefiningEnd() : uml::Property: 847443347
 		case umlPackage::CONNECTOREND_OPERATION_GETDEFININGEND:
 		{
-			result = eAny(this->getDefiningEnd());
+			result = eAny(this->getDefiningEnd(), umlPackage::PROPERTY_CLASS,false);
 			break;
 		}
-		
-		// 931479953
+		// uml::ConnectorEnd::multiplicity(Any, std::map) : bool: 931479953
 		case umlPackage::CONNECTOREND_OPERATION_MULTIPLICITY_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->multiplicity(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->multiplicity(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		
-		// 1300949541
+		// uml::ConnectorEnd::part_with_port_empty(Any, std::map) : bool: 1300949541
 		case umlPackage::CONNECTOREND_OPERATION_PART_WITH_PORT_EMPTY_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->part_with_port_empty(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->part_with_port_empty(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		
-		// 1121458246
+		// uml::ConnectorEnd::role_and_part_with_port(Any, std::map) : bool: 1121458246
 		case umlPackage::CONNECTOREND_OPERATION_ROLE_AND_PART_WITH_PORT_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->role_and_part_with_port(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->role_and_part_with_port(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
-		
-		// 1132520274
+		// uml::ConnectorEnd::self_part_with_port(Any, std::map) : bool: 1132520274
 		case umlPackage::CONNECTOREND_OPERATION_SELF_PART_WITH_PORT_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->self_part_with_port(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->self_part_with_port(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
 
@@ -550,7 +543,6 @@ Any ConnectorEndImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::
 	return result;
 }
 
-
 std::shared_ptr<uml::ConnectorEnd> ConnectorEndImpl::getThisConnectorEndPtr() const
 {
 	return m_thisConnectorEndPtr.lock();
@@ -560,3 +552,5 @@ void ConnectorEndImpl::setThisConnectorEndPtr(std::weak_ptr<uml::ConnectorEnd> t
 	m_thisConnectorEndPtr = thisConnectorEndPtr;
 	setThisMultiplicityElementPtr(thisConnectorEndPtr);
 }
+
+

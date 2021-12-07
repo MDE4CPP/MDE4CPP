@@ -424,12 +424,10 @@ void LetExpImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandl
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> LetExpImpl::eStaticClass() const
 {
 	return ocl::Expressions::ExpressionsPackage::eInstance()->getLetExp_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -441,12 +439,12 @@ Any LetExpImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case ocl::Expressions::ExpressionsPackage::LETEXP_ATTRIBUTE_IN:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getIn();
-			return eAny(returnValue); //4222
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //4222
 		}
 		case ocl::Expressions::ExpressionsPackage::LETEXP_ATTRIBUTE_VARIABLE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getVariable();
-			return eAny(returnValue); //4223
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //4223
 		}
 	}
 	return OclExpressionImpl::eGet(featureID, resolve, coreType);
@@ -492,7 +490,7 @@ bool LetExpImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any LetExpImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any LetExpImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
@@ -512,7 +510,6 @@ Any LetExpImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared
 	return result;
 }
 
-
 std::shared_ptr<ocl::Expressions::LetExp> LetExpImpl::getThisLetExpPtr() const
 {
 	return m_thisLetExpPtr.lock();
@@ -522,3 +519,5 @@ void LetExpImpl::setThisLetExpPtr(std::weak_ptr<ocl::Expressions::LetExp> thisLe
 	m_thisLetExpPtr = thisLetExpPtr;
 	setThisOclExpressionPtr(thisLetExpPtr);
 }
+
+

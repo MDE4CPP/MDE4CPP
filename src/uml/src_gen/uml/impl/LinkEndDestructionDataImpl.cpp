@@ -294,12 +294,10 @@ void LinkEndDestructionDataImpl::saveContent(std::shared_ptr<persistence::interf
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> LinkEndDestructionDataImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getLinkEndDestructionData_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -311,10 +309,10 @@ Any LinkEndDestructionDataImpl::eGet(int featureID, bool resolve, bool coreType)
 		case uml::umlPackage::LINKENDDESTRUCTIONDATA_ATTRIBUTE_DESTROYAT:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getDestroyAt();
-			return eAny(returnValue); //1366
+			return eAny(returnValue,returnValue->getMetaElementID(),false); //1366
 		}
 		case uml::umlPackage::LINKENDDESTRUCTIONDATA_ATTRIBUTE_ISDESTROYDUPLICATES:
-			return eAny(getIsDestroyDuplicates()); //1367
+			return eAny(getIsDestroyDuplicates(),0,true); //1367
 	}
 	return LinkEndDataImpl::eGet(featureID, resolve, coreType);
 }
@@ -358,27 +356,26 @@ bool LinkEndDestructionDataImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any LinkEndDestructionDataImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any LinkEndDestructionDataImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
   	switch(operationID)
 	{
-		
-		// 342602115
+		// uml::LinkEndDestructionData::destroyAt_pin(Any, std::map) : bool: 342602115
 		case umlPackage::LINKENDDESTRUCTIONDATA_OPERATION_DESTROYAT_PIN_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
 			//parameter 0
 			Any incoming_param_diagnostics;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			std::list<Any>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get<Any >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
-			result = eAny(this->destroyAt_pin(incoming_param_diagnostics,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->destroyAt_pin(incoming_param_diagnostics,incoming_param_context),0,false);
 			break;
 		}
 
@@ -395,7 +392,6 @@ Any LinkEndDestructionDataImpl::eInvoke(int operationID, std::shared_ptr<std::li
 	return result;
 }
 
-
 std::shared_ptr<uml::LinkEndDestructionData> LinkEndDestructionDataImpl::getThisLinkEndDestructionDataPtr() const
 {
 	return m_thisLinkEndDestructionDataPtr.lock();
@@ -405,3 +401,5 @@ void LinkEndDestructionDataImpl::setThisLinkEndDestructionDataPtr(std::weak_ptr<
 	m_thisLinkEndDestructionDataPtr = thisLinkEndDestructionDataPtr;
 	setThisLinkEndDataPtr(thisLinkEndDestructionDataPtr);
 }
+
+

@@ -92,7 +92,7 @@ virtual public EvalEnvironment
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
+			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
 
 		private:
 			std::weak_ptr<ocl::Evaluations::EvalEnvironment> m_thisEvalEnvironmentPtr;

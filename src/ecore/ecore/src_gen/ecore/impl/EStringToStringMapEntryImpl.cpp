@@ -241,12 +241,10 @@ void EStringToStringMapEntryImpl::saveContent(std::shared_ptr<persistence::inter
 	}
 }
 
-
 std::shared_ptr<EClass> EStringToStringMapEntryImpl::eStaticClass() const
 {
 	return ecore::ecorePackage::eInstance()->getEStringToStringMapEntry_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -256,9 +254,9 @@ Any EStringToStringMapEntryImpl::eGet(int featureID, bool resolve, bool coreType
 	switch(featureID)
 	{
 		case ecore::ecorePackage::ESTRINGTOSTRINGMAPENTRY_ATTRIBUTE_KEY:
-			return eAny(getKey()); //500
+			return eAny(getKey(),0,true); //500
 		case ecore::ecorePackage::ESTRINGTOSTRINGMAPENTRY_ATTRIBUTE_VALUE:
-			return eAny(getValue()); //501
+			return eAny(getValue(),0,true); //501
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
 }
@@ -321,7 +319,6 @@ Any EStringToStringMapEntryImpl::eInvoke(int operationID, std::shared_ptr<std::l
 	return result;
 }
 
-
 std::shared_ptr<ecore::EStringToStringMapEntry> EStringToStringMapEntryImpl::getThisEStringToStringMapEntryPtr() const
 {
 	return m_thisEStringToStringMapEntryPtr.lock();
@@ -330,3 +327,5 @@ void EStringToStringMapEntryImpl::setThisEStringToStringMapEntryPtr(std::weak_pt
 {
 	m_thisEStringToStringMapEntryPtr = thisEStringToStringMapEntryPtr;
 }
+
+
