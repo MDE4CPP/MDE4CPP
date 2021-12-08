@@ -432,43 +432,19 @@ Any LocalSnapshotImpl::eGet(int featureID, bool resolve, bool coreType) const
 	{
 		case ocl::Values::ValuesPackage::LOCALSNAPSHOT_ATTRIBUTE_BINDINGS:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<ocl::Values::NameValueBinding>::iterator iter = getBindings()->begin();
-			Bag<ocl::Values::NameValueBinding>::iterator end = getBindings()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //462			
+			return eAnyBag(getBindings(),510142670); //462
 		}
 		case ocl::Values::ValuesPackage::LOCALSNAPSHOT_ATTRIBUTE_INPUTQ:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<ocl::Values::OclMessageValue>::iterator iter = getInputQ()->begin();
-			Bag<ocl::Values::OclMessageValue>::iterator end = getInputQ()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //465			
+			return eAnyBag(getInputQ(),1848978034); //465
 		}
 		case ocl::Values::ValuesPackage::LOCALSNAPSHOT_ATTRIBUTE_ISPOST:
-				return eAny(getIsPost(),0,true); //463
+			return eAny(getIsPost(),0,true); //463
 		case ocl::Values::ValuesPackage::LOCALSNAPSHOT_ATTRIBUTE_ISPRE:
-				return eAny(getIsPre(),0,true); //464
+			return eAny(getIsPre(),0,true); //464
 		case ocl::Values::ValuesPackage::LOCALSNAPSHOT_ATTRIBUTE_OUTPUTQ:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<ocl::Values::OclMessageValue>::iterator iter = getOutputQ()->begin();
-			Bag<ocl::Values::OclMessageValue>::iterator end = getOutputQ()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //466			
+			return eAnyBag(getOutputQ(),1848978034); //466
 		}
 		case ocl::Values::ValuesPackage::LOCALSNAPSHOT_ATTRIBUTE_PRED:
 		{
@@ -512,129 +488,132 @@ bool LocalSnapshotImpl::eSet(int featureID, Any newValue)
 	{
 		case ocl::Values::ValuesPackage::LOCALSNAPSHOT_ATTRIBUTE_BINDINGS:
 		{
-			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<ocl::Values::NameValueBinding>> bindingsList(new Bag<ocl::Values::NameValueBinding>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
-			{
-				bindingsList->add(std::dynamic_pointer_cast<ocl::Values::NameValueBinding>(*iter));
-				iter++;
-			}
-			
-			Bag<ocl::Values::NameValueBinding>::iterator iterBindings = getBindings()->begin();
-			Bag<ocl::Values::NameValueBinding>::iterator endBindings = getBindings()->end();
-			while (iterBindings != endBindings)
-			{
-				if (bindingsList->find(*iterBindings) == -1)
+			// CAST Any to Bag<ocl::Values::NameValueBinding>
+			if((newValue->isContainer()) && (ocl::Values::ValuesPackage::NAMEVALUEBINDING_CLASS ==newValue->getTypeId()))
+			{ 
+				try
 				{
-					getBindings()->erase(*iterBindings);
+					std::shared_ptr<Bag<ocl::Values::NameValueBinding>> bindingsList= newValue->get<std::shared_ptr<Bag<ocl::Values::NameValueBinding>>>();
+					std::shared_ptr<Bag<ocl::Values::NameValueBinding>> _bindings=getBindings();
+					for(const std::shared_ptr<ocl::Values::NameValueBinding> indexBindings: *_bindings)
+					{
+						if (bindingsList->find(indexBindings) == -1)
+						{
+							_bindings->erase(indexBindings);
+						}
+					}
+
+					for(const std::shared_ptr<ocl::Values::NameValueBinding> indexBindings: *bindingsList)
+					{
+						if (_bindings->find(indexBindings) == -1)
+						{
+							_bindings->add(indexBindings);
+						}
+					}
 				}
-				iterBindings++;
-			}
- 
-			iterBindings = bindingsList->begin();
-			endBindings = bindingsList->end();
-			while (iterBindings != endBindings)
-			{
-				if (getBindings()->find(*iterBindings) == -1)
+				catch(...)
 				{
-					getBindings()->add(*iterBindings);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterBindings++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}
 		case ocl::Values::ValuesPackage::LOCALSNAPSHOT_ATTRIBUTE_INPUTQ:
 		{
-			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<ocl::Values::OclMessageValue>> inputQList(new Bag<ocl::Values::OclMessageValue>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
-			{
-				inputQList->add(std::dynamic_pointer_cast<ocl::Values::OclMessageValue>(*iter));
-				iter++;
-			}
-			
-			Bag<ocl::Values::OclMessageValue>::iterator iterInputQ = getInputQ()->begin();
-			Bag<ocl::Values::OclMessageValue>::iterator endInputQ = getInputQ()->end();
-			while (iterInputQ != endInputQ)
-			{
-				if (inputQList->find(*iterInputQ) == -1)
+			// CAST Any to Bag<ocl::Values::OclMessageValue>
+			if((newValue->isContainer()) && (ocl::Values::ValuesPackage::OCLMESSAGEVALUE_CLASS ==newValue->getTypeId()))
+			{ 
+				try
 				{
-					getInputQ()->erase(*iterInputQ);
+					std::shared_ptr<Bag<ocl::Values::OclMessageValue>> inputQList= newValue->get<std::shared_ptr<Bag<ocl::Values::OclMessageValue>>>();
+					std::shared_ptr<Bag<ocl::Values::OclMessageValue>> _inputQ=getInputQ();
+					for(const std::shared_ptr<ocl::Values::OclMessageValue> indexInputQ: *_inputQ)
+					{
+						if (inputQList->find(indexInputQ) == -1)
+						{
+							_inputQ->erase(indexInputQ);
+						}
+					}
+
+					for(const std::shared_ptr<ocl::Values::OclMessageValue> indexInputQ: *inputQList)
+					{
+						if (_inputQ->find(indexInputQ) == -1)
+						{
+							_inputQ->add(indexInputQ);
+						}
+					}
 				}
-				iterInputQ++;
-			}
- 
-			iterInputQ = inputQList->begin();
-			endInputQ = inputQList->end();
-			while (iterInputQ != endInputQ)
-			{
-				if (getInputQ()->find(*iterInputQ) == -1)
+				catch(...)
 				{
-					getInputQ()->add(*iterInputQ);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterInputQ++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}
 		case ocl::Values::ValuesPackage::LOCALSNAPSHOT_ATTRIBUTE_ISPOST:
 		{
-			// BOOST CAST
+			// CAST Any to bool
 			bool _isPost = newValue->get<bool>();
 			setIsPost(_isPost); //463
 			return true;
 		}
 		case ocl::Values::ValuesPackage::LOCALSNAPSHOT_ATTRIBUTE_ISPRE:
 		{
-			// BOOST CAST
+			// CAST Any to bool
 			bool _isPre = newValue->get<bool>();
 			setIsPre(_isPre); //464
 			return true;
 		}
 		case ocl::Values::ValuesPackage::LOCALSNAPSHOT_ATTRIBUTE_OUTPUTQ:
 		{
-			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<ocl::Values::OclMessageValue>> outputQList(new Bag<ocl::Values::OclMessageValue>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
-			{
-				outputQList->add(std::dynamic_pointer_cast<ocl::Values::OclMessageValue>(*iter));
-				iter++;
-			}
-			
-			Bag<ocl::Values::OclMessageValue>::iterator iterOutputQ = getOutputQ()->begin();
-			Bag<ocl::Values::OclMessageValue>::iterator endOutputQ = getOutputQ()->end();
-			while (iterOutputQ != endOutputQ)
-			{
-				if (outputQList->find(*iterOutputQ) == -1)
+			// CAST Any to Bag<ocl::Values::OclMessageValue>
+			if((newValue->isContainer()) && (ocl::Values::ValuesPackage::OCLMESSAGEVALUE_CLASS ==newValue->getTypeId()))
+			{ 
+				try
 				{
-					getOutputQ()->erase(*iterOutputQ);
+					std::shared_ptr<Bag<ocl::Values::OclMessageValue>> outputQList= newValue->get<std::shared_ptr<Bag<ocl::Values::OclMessageValue>>>();
+					std::shared_ptr<Bag<ocl::Values::OclMessageValue>> _outputQ=getOutputQ();
+					for(const std::shared_ptr<ocl::Values::OclMessageValue> indexOutputQ: *_outputQ)
+					{
+						if (outputQList->find(indexOutputQ) == -1)
+						{
+							_outputQ->erase(indexOutputQ);
+						}
+					}
+
+					for(const std::shared_ptr<ocl::Values::OclMessageValue> indexOutputQ: *outputQList)
+					{
+						if (_outputQ->find(indexOutputQ) == -1)
+						{
+							_outputQ->add(indexOutputQ);
+						}
+					}
 				}
-				iterOutputQ++;
-			}
- 
-			iterOutputQ = outputQList->begin();
-			endOutputQ = outputQList->end();
-			while (iterOutputQ != endOutputQ)
-			{
-				if (getOutputQ()->find(*iterOutputQ) == -1)
+				catch(...)
 				{
-					getOutputQ()->add(*iterOutputQ);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterOutputQ++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}
 		case ocl::Values::ValuesPackage::LOCALSNAPSHOT_ATTRIBUTE_PRED:
 		{
-			// BOOST CAST
+			// CAST Any to ocl::Values::LocalSnapshot
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<ocl::Values::LocalSnapshot> _pred = std::dynamic_pointer_cast<ocl::Values::LocalSnapshot>(_temp);
 			setPred(_pred); //461
@@ -642,7 +621,7 @@ bool LocalSnapshotImpl::eSet(int featureID, Any newValue)
 		}
 		case ocl::Values::ValuesPackage::LOCALSNAPSHOT_ATTRIBUTE_SUCC:
 		{
-			// BOOST CAST
+			// CAST Any to ocl::Values::LocalSnapshot
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<ocl::Values::LocalSnapshot> _succ = std::dynamic_pointer_cast<ocl::Values::LocalSnapshot>(_temp);
 			setSucc(_succ); //460

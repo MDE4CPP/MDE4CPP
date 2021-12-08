@@ -662,16 +662,16 @@ bool ActionImpl::eSet(int featureID, Any newValue)
 	{
 		case uml::umlPackage::ACTION_ATTRIBUTE_ISLOCALLYREENTRANT:
 		{
-			// BOOST CAST
+			// CAST Any to bool
 			bool _isLocallyReentrant = newValue->get<bool>();
 			setIsLocallyReentrant(_isLocallyReentrant); //423
 			return true;
 		}
 		case uml::umlPackage::ACTION_ATTRIBUTE_LOCALPOSTCONDITION:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::Constraint>
 			if((newValue->isContainer()) && (uml::umlPackage::CONSTRAINT_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::Constraint>> localPostconditionList= newValue->get<std::shared_ptr<Bag<uml::Constraint>>>();
@@ -706,9 +706,9 @@ bool ActionImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::ACTION_ATTRIBUTE_LOCALPRECONDITION:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::Constraint>
 			if((newValue->isContainer()) && (uml::umlPackage::CONSTRAINT_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::Constraint>> localPreconditionList= newValue->get<std::shared_ptr<Bag<uml::Constraint>>>();
@@ -759,26 +759,26 @@ Any ActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argumen
 		case umlPackage::ACTION_OPERATION_ALLACTIONS:
 		{
 			std::shared_ptr<Bag<uml::Action> > resultList = this->allActions();
-			return eAny(resultList,umlPackage::ACTION_CLASS,true);
+			return eAny(resultList,uml::umlPackage::ACTION_CLASS,true);
 			break;
 		}
 		// uml::Action::allOwnedNodes() : uml::ActivityNode[*]: 1538297391
 		case umlPackage::ACTION_OPERATION_ALLOWNEDNODES:
 		{
 			std::shared_ptr<Bag<uml::ActivityNode> > resultList = this->allOwnedNodes();
-			return eAny(resultList,umlPackage::ACTIVITYNODE_CLASS,true);
+			return eAny(resultList,uml::umlPackage::ACTIVITYNODE_CLASS,true);
 			break;
 		}
 		// uml::Action::containingBehavior() : uml::Behavior: 959584979
 		case umlPackage::ACTION_OPERATION_CONTAININGBEHAVIOR:
 		{
-			result = eAny(this->containingBehavior(), umlPackage::BEHAVIOR_CLASS,false);
+			result = eAny(this->containingBehavior(), uml::umlPackage::BEHAVIOR_CLASS,false);
 			break;
 		}
 		// uml::Action::getContext() : uml::Classifier: 215661939
 		case umlPackage::ACTION_OPERATION_GETCONTEXT:
 		{
-			result = eAny(this->getContext(), umlPackage::CLASSIFIER_CLASS,false);
+			result = eAny(this->getContext(), uml::umlPackage::CLASSIFIER_CLASS,false);
 			break;
 		}
 

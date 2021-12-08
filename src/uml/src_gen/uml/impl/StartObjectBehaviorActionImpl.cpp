@@ -463,7 +463,7 @@ bool StartObjectBehaviorActionImpl::eSet(int featureID, Any newValue)
 	{
 		case uml::umlPackage::STARTOBJECTBEHAVIORACTION_ATTRIBUTE_OBJECT:
 		{
-			// BOOST CAST
+			// CAST Any to uml::InputPin
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::InputPin> _object = std::dynamic_pointer_cast<uml::InputPin>(_temp);
 			setObject(_object); //21931
@@ -486,7 +486,7 @@ Any StartObjectBehaviorActionImpl::eInvoke(int operationID, std::shared_ptr<std:
 		// uml::StartObjectBehaviorAction::behavior() : uml::Behavior: 1069157764
 		case umlPackage::STARTOBJECTBEHAVIORACTION_OPERATION_BEHAVIOR:
 		{
-			result = eAny(this->behavior(), umlPackage::BEHAVIOR_CLASS,false);
+			result = eAny(this->behavior(), uml::umlPackage::BEHAVIOR_CLASS,false);
 			break;
 		}
 		// uml::StartObjectBehaviorAction::multiplicity_of_object(Any, std::map) : bool: 2114618972

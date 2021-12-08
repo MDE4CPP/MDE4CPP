@@ -325,9 +325,9 @@ bool CommentImpl::eSet(int featureID, Any newValue)
 	{
 		case uml::umlPackage::COMMENT_ATTRIBUTE_ANNOTATEDELEMENT:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::Element>
 			if((newValue->isContainer()) && (uml::umlPackage::ELEMENT_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::Element>> annotatedElementList= newValue->get<std::shared_ptr<Bag<uml::Element>>>();
@@ -362,7 +362,7 @@ bool CommentImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::COMMENT_ATTRIBUTE_BODY:
 		{
-			// BOOST CAST
+			// CAST Any to std::string
 			std::string _body = newValue->get<std::string>();
 			setBody(_body); //454
 			return true;

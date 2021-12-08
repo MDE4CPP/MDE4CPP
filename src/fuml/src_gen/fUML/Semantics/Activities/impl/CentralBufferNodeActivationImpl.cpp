@@ -260,8 +260,7 @@ Any CentralBufferNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<st
 
   	switch(operationID)
 	{
-		
-		// 2134504634
+		// fUML::Semantics::Activities::CentralBufferNodeActivation::fire(fUML::Semantics::Activities::Token[*]): 2134504634
 		case ActivitiesPackage::CENTRALBUFFERNODEACTIVATION_OPERATION_FIRE_TOKEN:
 		{
 			//Retrieve input parameter 'incomingTokens'
@@ -270,7 +269,6 @@ Any CentralBufferNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<st
 			std::list<Any>::const_iterator incoming_param_incomingTokens_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_incomingTokens = (*incoming_param_incomingTokens_arguments_citer)->get<std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> >();
 			this->fire(incoming_param_incomingTokens);
-			break;
 		}
 
 		default:

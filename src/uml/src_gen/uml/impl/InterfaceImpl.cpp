@@ -911,9 +911,9 @@ bool InterfaceImpl::eSet(int featureID, Any newValue)
 	{
 		case uml::umlPackage::INTERFACE_ATTRIBUTE_NESTEDCLASSIFIER:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::Classifier>
 			if((newValue->isContainer()) && (uml::umlPackage::CLASSIFIER_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::Classifier>> nestedClassifierList= newValue->get<std::shared_ptr<Bag<uml::Classifier>>>();
@@ -948,9 +948,9 @@ bool InterfaceImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::INTERFACE_ATTRIBUTE_OWNEDATTRIBUTE:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::Property>
 			if((newValue->isContainer()) && (uml::umlPackage::PROPERTY_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::Property>> ownedAttributeList= newValue->get<std::shared_ptr<Bag<uml::Property>>>();
@@ -985,9 +985,9 @@ bool InterfaceImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::INTERFACE_ATTRIBUTE_OWNEDOPERATION:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::Operation>
 			if((newValue->isContainer()) && (uml::umlPackage::OPERATION_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::Operation>> ownedOperationList= newValue->get<std::shared_ptr<Bag<uml::Operation>>>();
@@ -1022,9 +1022,9 @@ bool InterfaceImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::INTERFACE_ATTRIBUTE_OWNEDRECEPTION:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::Reception>
 			if((newValue->isContainer()) && (uml::umlPackage::RECEPTION_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::Reception>> ownedReceptionList= newValue->get<std::shared_ptr<Bag<uml::Reception>>>();
@@ -1059,7 +1059,7 @@ bool InterfaceImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::INTERFACE_ATTRIBUTE_PROTOCOL:
 		{
-			// BOOST CAST
+			// CAST Any to uml::ProtocolStateMachine
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::ProtocolStateMachine> _protocol = std::dynamic_pointer_cast<uml::ProtocolStateMachine>(_temp);
 			setProtocol(_protocol); //12541
@@ -1067,9 +1067,9 @@ bool InterfaceImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::INTERFACE_ATTRIBUTE_REDEFINEDINTERFACE:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::Interface>
 			if((newValue->isContainer()) && (uml::umlPackage::INTERFACE_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::Interface>> redefinedInterfaceList= newValue->get<std::shared_ptr<Bag<uml::Interface>>>();
@@ -1139,7 +1139,7 @@ Any InterfaceImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argu
 			int incoming_param_upper;
 			std::list<Any>::const_iterator incoming_param_upper_arguments_citer = std::next(arguments->begin(), 3);
 			incoming_param_upper = (*incoming_param_upper_arguments_citer)->get<int >();
-			result = eAny(this->createOwnedAttribute(incoming_param_name,incoming_param_type,incoming_param_lower,incoming_param_upper), umlPackage::PROPERTY_CLASS,false);
+			result = eAny(this->createOwnedAttribute(incoming_param_name,incoming_param_type,incoming_param_lower,incoming_param_upper), uml::umlPackage::PROPERTY_CLASS,false);
 			break;
 		}
 		// uml::Interface::createOwnedOperation(std::string, std::string[*], uml::Type[*], uml::Type) : uml::Operation: 1014462260
@@ -1165,7 +1165,7 @@ Any InterfaceImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argu
 			std::shared_ptr<uml::Type> incoming_param_returnType;
 			std::list<Any>::const_iterator incoming_param_returnType_arguments_citer = std::next(arguments->begin(), 3);
 			incoming_param_returnType = (*incoming_param_returnType_arguments_citer)->get<std::shared_ptr<uml::Type> >();
-			result = eAny(this->createOwnedOperation(incoming_param_name,incoming_param_parameterNames,incoming_param_parameterTypes,incoming_param_returnType), umlPackage::OPERATION_CLASS,false);
+			result = eAny(this->createOwnedOperation(incoming_param_name,incoming_param_parameterNames,incoming_param_parameterTypes,incoming_param_returnType), uml::umlPackage::OPERATION_CLASS,false);
 			break;
 		}
 		// uml::Interface::visibility(Any, std::map) : bool: 679404061

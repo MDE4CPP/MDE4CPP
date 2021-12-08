@@ -33,11 +33,11 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
+#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "fUML/Semantics/Values/ValuesFactory.hpp"
 #include "uml/umlFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
-#include "fUML/Semantics/Loci/LociFactory.hpp"
 
 #include "ocl/Evaluations/EvalEnvironment.hpp"
 #include "fUML/Semantics/Values/Evaluation.hpp"
@@ -401,7 +401,7 @@ bool OclExpEvalImpl::eSet(int featureID, Any newValue)
 	{
 		case ocl::Evaluations::EvaluationsPackage::OCLEXPEVAL_ATTRIBUTE_BEFOREENVIRONMENT:
 		{
-			// BOOST CAST
+			// CAST Any to ocl::Evaluations::EvalEnvironment
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<ocl::Evaluations::EvalEnvironment> _beforeEnvironment = std::dynamic_pointer_cast<ocl::Evaluations::EvalEnvironment>(_temp);
 			setBeforeEnvironment(_beforeEnvironment); //603
@@ -409,7 +409,7 @@ bool OclExpEvalImpl::eSet(int featureID, Any newValue)
 		}
 		case ocl::Evaluations::EvaluationsPackage::OCLEXPEVAL_ATTRIBUTE_ENVIRONMENT:
 		{
-			// BOOST CAST
+			// CAST Any to ocl::Evaluations::EvalEnvironment
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<ocl::Evaluations::EvalEnvironment> _environment = std::dynamic_pointer_cast<ocl::Evaluations::EvalEnvironment>(_temp);
 			setEnvironment(_environment); //602
@@ -417,7 +417,7 @@ bool OclExpEvalImpl::eSet(int featureID, Any newValue)
 		}
 		case ocl::Evaluations::EvaluationsPackage::OCLEXPEVAL_ATTRIBUTE_MODEL:
 		{
-			// BOOST CAST
+			// CAST Any to ocl::Expressions::OclExpression
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<ocl::Expressions::OclExpression> _model = std::dynamic_pointer_cast<ocl::Expressions::OclExpression>(_temp);
 			setModel(_model); //605
@@ -425,7 +425,7 @@ bool OclExpEvalImpl::eSet(int featureID, Any newValue)
 		}
 		case ocl::Evaluations::EvaluationsPackage::OCLEXPEVAL_ATTRIBUTE_RESULTVALUE:
 		{
-			// BOOST CAST
+			// CAST Any to fUML::Semantics::Values::Value
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<fUML::Semantics::Values::Value> _resultValue = std::dynamic_pointer_cast<fUML::Semantics::Values::Value>(_temp);
 			setResultValue(_resultValue); //604

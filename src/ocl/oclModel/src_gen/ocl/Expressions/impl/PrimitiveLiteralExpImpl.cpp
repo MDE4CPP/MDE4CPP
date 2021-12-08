@@ -388,7 +388,7 @@ Any PrimitiveLiteralExpImpl::eGet(int featureID, bool resolve, bool coreType) co
 	switch(featureID)
 	{
 		case ocl::Expressions::ExpressionsPackage::PRIMITIVELITERALEXP_ATTRIBUTE_SYMBOL:
-				return eAny(getSymbol(),0,true); //7022
+			return eAny(getSymbol(),0,true); //7022
 	}
 	return LiteralExpImpl::eGet(featureID, resolve, coreType);
 }
@@ -409,7 +409,7 @@ bool PrimitiveLiteralExpImpl::eSet(int featureID, Any newValue)
 	{
 		case ocl::Expressions::ExpressionsPackage::PRIMITIVELITERALEXP_ATTRIBUTE_SYMBOL:
 		{
-			// BOOST CAST
+			// CAST Any to std::string
 			std::string _symbol = newValue->get<std::string>();
 			setSymbol(_symbol); //7022
 			return true;

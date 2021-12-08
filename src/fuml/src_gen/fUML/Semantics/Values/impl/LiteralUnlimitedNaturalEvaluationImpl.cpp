@@ -252,11 +252,10 @@ Any LiteralUnlimitedNaturalEvaluationImpl::eInvoke(int operationID, std::shared_
 
   	switch(operationID)
 	{
-		
-		// 1159124191
+		// fUML::Semantics::Values::LiteralUnlimitedNaturalEvaluation::evaluate() : fUML::Semantics::Values::Value: 1159124191
 		case ValuesPackage::LITERALUNLIMITEDNATURALEVALUATION_OPERATION_EVALUATE:
 		{
-				result = eAny(this->evaluate());
+			result = eAny(this->evaluate(), fUML::Semantics::Values::ValuesPackage::VALUE_CLASS,false);
 			break;
 		}
 

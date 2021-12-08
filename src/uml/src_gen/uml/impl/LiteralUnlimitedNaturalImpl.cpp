@@ -393,7 +393,7 @@ bool LiteralUnlimitedNaturalImpl::eSet(int featureID, Any newValue)
 	{
 		case uml::umlPackage::LITERALUNLIMITEDNATURAL_ATTRIBUTE_VALUE:
 		{
-			// BOOST CAST
+			// CAST Any to int
 			int _value = newValue->get<int>();
 			setValue(_value); //14315
 			return true;

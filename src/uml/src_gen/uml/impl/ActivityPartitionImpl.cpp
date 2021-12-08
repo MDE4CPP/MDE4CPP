@@ -770,9 +770,9 @@ bool ActivityPartitionImpl::eSet(int featureID, Any newValue)
 	{
 		case uml::umlPackage::ACTIVITYPARTITION_ATTRIBUTE_EDGE:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::ActivityEdge>
 			if((newValue->isContainer()) && (uml::umlPackage::ACTIVITYEDGE_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::ActivityEdge>> edgeList= newValue->get<std::shared_ptr<Bag<uml::ActivityEdge>>>();
@@ -807,23 +807,23 @@ bool ActivityPartitionImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::ACTIVITYPARTITION_ATTRIBUTE_ISDIMENSION:
 		{
-			// BOOST CAST
+			// CAST Any to bool
 			bool _isDimension = newValue->get<bool>();
 			setIsDimension(_isDimension); //1314
 			return true;
 		}
 		case uml::umlPackage::ACTIVITYPARTITION_ATTRIBUTE_ISEXTERNAL:
 		{
-			// BOOST CAST
+			// CAST Any to bool
 			bool _isExternal = newValue->get<bool>();
 			setIsExternal(_isExternal); //1315
 			return true;
 		}
 		case uml::umlPackage::ACTIVITYPARTITION_ATTRIBUTE_NODE:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::ActivityNode>
 			if((newValue->isContainer()) && (uml::umlPackage::ACTIVITYNODE_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::ActivityNode>> nodeList= newValue->get<std::shared_ptr<Bag<uml::ActivityNode>>>();
@@ -858,7 +858,7 @@ bool ActivityPartitionImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::ACTIVITYPARTITION_ATTRIBUTE_REPRESENTS:
 		{
-			// BOOST CAST
+			// CAST Any to uml::Element
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Element> _represents = std::dynamic_pointer_cast<uml::Element>(_temp);
 			setRepresents(_represents); //1317
@@ -866,9 +866,9 @@ bool ActivityPartitionImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::ACTIVITYPARTITION_ATTRIBUTE_SUBPARTITION:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::ActivityPartition>
 			if((newValue->isContainer()) && (uml::umlPackage::ACTIVITYPARTITION_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::ActivityPartition>> subpartitionList= newValue->get<std::shared_ptr<Bag<uml::ActivityPartition>>>();
@@ -903,7 +903,7 @@ bool ActivityPartitionImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::ACTIVITYPARTITION_ATTRIBUTE_SUPERPARTITION:
 		{
-			// BOOST CAST
+			// CAST Any to uml::ActivityPartition
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::ActivityPartition> _superPartition = std::dynamic_pointer_cast<uml::ActivityPartition>(_temp);
 			setSuperPartition(_superPartition); //1319

@@ -309,9 +309,9 @@ bool ETypeParameterImpl::eSet(int featureID, Any newValue)
 	{
 		case ecore::ecorePackage::ETYPEPARAMETER_ATTRIBUTE_EBOUNDS:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<ecore::EGenericType>
 			if((newValue->isContainer()) && (ecore::ecorePackage::EGENERICTYPE_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<ecore::EGenericType>> eBoundsList= newValue->get<std::shared_ptr<Bag<ecore::EGenericType>>>();

@@ -33,11 +33,11 @@
 
 #include <exception> // used in Persistence
 #include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
+#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "fUML/Semantics/Values/ValuesFactory.hpp"
 #include "uml/umlFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
-#include "fUML/Semantics/Loci/LociFactory.hpp"
 
 #include "ocl/Evaluations/EvalEnvironment.hpp"
 #include "fUML/Semantics/Loci/Locus.hpp"
@@ -310,15 +310,7 @@ Any NavigationCallExpEvalImpl::eGet(int featureID, bool resolve, bool coreType) 
 		}
 		case ocl::Evaluations::EvaluationsPackage::NAVIGATIONCALLEXPEVAL_ATTRIBUTE_QUALIFIERS:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<ocl::Evaluations::OclExpEval>::iterator iter = getQualifiers()->begin();
-			Bag<ocl::Evaluations::OclExpEval>::iterator end = getQualifiers()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //558			
+			return eAnyBag(getQualifiers(),731240084); //558
 		}
 	}
 	return ModelPropertyCallExpEvalImpl::eGet(featureID, resolve, coreType);
@@ -342,7 +334,7 @@ bool NavigationCallExpEvalImpl::eSet(int featureID, Any newValue)
 	{
 		case ocl::Evaluations::EvaluationsPackage::NAVIGATIONCALLEXPEVAL_ATTRIBUTE_NAVIGATIONSOURCE:
 		{
-			// BOOST CAST
+			// CAST Any to fUML::Semantics::SimpleClassifiers::StringValue
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> _navigationSource = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::StringValue>(_temp);
 			setNavigationSource(_navigationSource); //557
@@ -350,37 +342,38 @@ bool NavigationCallExpEvalImpl::eSet(int featureID, Any newValue)
 		}
 		case ocl::Evaluations::EvaluationsPackage::NAVIGATIONCALLEXPEVAL_ATTRIBUTE_QUALIFIERS:
 		{
-			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<ocl::Evaluations::OclExpEval>> qualifiersList(new Bag<ocl::Evaluations::OclExpEval>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
-			{
-				qualifiersList->add(std::dynamic_pointer_cast<ocl::Evaluations::OclExpEval>(*iter));
-				iter++;
-			}
-			
-			Bag<ocl::Evaluations::OclExpEval>::iterator iterQualifiers = getQualifiers()->begin();
-			Bag<ocl::Evaluations::OclExpEval>::iterator endQualifiers = getQualifiers()->end();
-			while (iterQualifiers != endQualifiers)
-			{
-				if (qualifiersList->find(*iterQualifiers) == -1)
+			// CAST Any to Bag<ocl::Evaluations::OclExpEval>
+			if((newValue->isContainer()) && (ocl::Evaluations::EvaluationsPackage::OCLEXPEVAL_CLASS ==newValue->getTypeId()))
+			{ 
+				try
 				{
-					getQualifiers()->erase(*iterQualifiers);
+					std::shared_ptr<Bag<ocl::Evaluations::OclExpEval>> qualifiersList= newValue->get<std::shared_ptr<Bag<ocl::Evaluations::OclExpEval>>>();
+					std::shared_ptr<Bag<ocl::Evaluations::OclExpEval>> _qualifiers=getQualifiers();
+					for(const std::shared_ptr<ocl::Evaluations::OclExpEval> indexQualifiers: *_qualifiers)
+					{
+						if (qualifiersList->find(indexQualifiers) == -1)
+						{
+							_qualifiers->erase(indexQualifiers);
+						}
+					}
+
+					for(const std::shared_ptr<ocl::Evaluations::OclExpEval> indexQualifiers: *qualifiersList)
+					{
+						if (_qualifiers->find(indexQualifiers) == -1)
+						{
+							_qualifiers->add(indexQualifiers);
+						}
+					}
 				}
-				iterQualifiers++;
-			}
- 
-			iterQualifiers = qualifiersList->begin();
-			endQualifiers = qualifiersList->end();
-			while (iterQualifiers != endQualifiers)
-			{
-				if (getQualifiers()->find(*iterQualifiers) == -1)
+				catch(...)
 				{
-					getQualifiers()->add(*iterQualifiers);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterQualifiers++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}

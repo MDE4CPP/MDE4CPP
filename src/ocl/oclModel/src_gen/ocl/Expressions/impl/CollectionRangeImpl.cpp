@@ -322,7 +322,7 @@ bool CollectionRangeImpl::eSet(int featureID, Any newValue)
 	{
 		case ocl::Expressions::ExpressionsPackage::COLLECTIONRANGE_ATTRIBUTE_FIRST:
 		{
-			// BOOST CAST
+			// CAST Any to ocl::Expressions::OclExpression
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<ocl::Expressions::OclExpression> _first = std::dynamic_pointer_cast<ocl::Expressions::OclExpression>(_temp);
 			setFirst(_first); //1910
@@ -330,7 +330,7 @@ bool CollectionRangeImpl::eSet(int featureID, Any newValue)
 		}
 		case ocl::Expressions::ExpressionsPackage::COLLECTIONRANGE_ATTRIBUTE_LAST:
 		{
-			// BOOST CAST
+			// CAST Any to ocl::Expressions::OclExpression
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<ocl::Expressions::OclExpression> _last = std::dynamic_pointer_cast<ocl::Expressions::OclExpression>(_temp);
 			setLast(_last); //1911

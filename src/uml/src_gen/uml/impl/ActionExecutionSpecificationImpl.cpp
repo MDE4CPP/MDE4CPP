@@ -365,7 +365,7 @@ bool ActionExecutionSpecificationImpl::eSet(int featureID, Any newValue)
 	{
 		case uml::umlPackage::ACTIONEXECUTIONSPECIFICATION_ATTRIBUTE_ACTION:
 		{
-			// BOOST CAST
+			// CAST Any to uml::Action
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Action> _action = std::dynamic_pointer_cast<uml::Action>(_temp);
 			setAction(_action); //515

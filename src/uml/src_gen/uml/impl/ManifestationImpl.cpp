@@ -424,7 +424,7 @@ bool ManifestationImpl::eSet(int featureID, Any newValue)
 	{
 		case uml::umlPackage::MANIFESTATION_ATTRIBUTE_UTILIZEDELEMENT:
 		{
-			// BOOST CAST
+			// CAST Any to uml::PackageableElement
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::PackageableElement> _utilizedElement = std::dynamic_pointer_cast<uml::PackageableElement>(_temp);
 			setUtilizedElement(_utilizedElement); //14518

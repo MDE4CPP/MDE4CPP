@@ -32,11 +32,11 @@
 
 #include <exception> // used in Persistence
 #include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
+#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "fUML/Semantics/Values/ValuesFactory.hpp"
 #include "uml/umlFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
-#include "fUML/Semantics/Loci/LociFactory.hpp"
 
 #include "ocl/Evaluations/EvalEnvironment.hpp"
 #include "fUML/Semantics/Loci/Locus.hpp"
@@ -365,7 +365,7 @@ bool LetExpEvalImpl::eSet(int featureID, Any newValue)
 	{
 		case ocl::Evaluations::EvaluationsPackage::LETEXPEVAL_ATTRIBUTE_IN:
 		{
-			// BOOST CAST
+			// CAST Any to ocl::Evaluations::OclExpEval
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<ocl::Evaluations::OclExpEval> _in = std::dynamic_pointer_cast<ocl::Evaluations::OclExpEval>(_temp);
 			setIn(_in); //436
@@ -373,7 +373,7 @@ bool LetExpEvalImpl::eSet(int featureID, Any newValue)
 		}
 		case ocl::Evaluations::EvaluationsPackage::LETEXPEVAL_ATTRIBUTE_INITEXPRESSION:
 		{
-			// BOOST CAST
+			// CAST Any to ocl::Evaluations::OclExpEval
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<ocl::Evaluations::OclExpEval> _initExpression = std::dynamic_pointer_cast<ocl::Evaluations::OclExpEval>(_temp);
 			setInitExpression(_initExpression); //437
@@ -381,7 +381,7 @@ bool LetExpEvalImpl::eSet(int featureID, Any newValue)
 		}
 		case ocl::Evaluations::EvaluationsPackage::LETEXPEVAL_ATTRIBUTE_VARIABLE:
 		{
-			// BOOST CAST
+			// CAST Any to fUML::Semantics::SimpleClassifiers::StringValue
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> _variable = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::StringValue>(_temp);
 			setVariable(_variable); //438

@@ -358,7 +358,7 @@ bool ExecutionOccurrenceSpecificationImpl::eSet(int featureID, Any newValue)
 	{
 		case uml::umlPackage::EXECUTIONOCCURRENCESPECIFICATION_ATTRIBUTE_EXECUTION:
 		{
-			// BOOST CAST
+			// CAST Any to uml::ExecutionSpecification
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::ExecutionSpecification> _execution = std::dynamic_pointer_cast<uml::ExecutionSpecification>(_temp);
 			setExecution(_execution); //9015

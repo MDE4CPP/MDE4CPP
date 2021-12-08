@@ -366,7 +366,7 @@ bool ClassifierBehaviorExecutionImpl::eSet(int featureID, Any newValue)
 	{
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::CLASSIFIERBEHAVIOREXECUTION_ATTRIBUTE_CLASSIFIER:
 		{
-			// BOOST CAST
+			// CAST Any to uml::Class
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Class> _classifier = std::dynamic_pointer_cast<uml::Class>(_temp);
 			setClassifier(_classifier); //221
@@ -374,7 +374,7 @@ bool ClassifierBehaviorExecutionImpl::eSet(int featureID, Any newValue)
 		}
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::CLASSIFIERBEHAVIOREXECUTION_ATTRIBUTE_EXECUTION:
 		{
-			// BOOST CAST
+			// CAST Any to fUML::Semantics::CommonBehavior::Execution
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> _execution = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::Execution>(_temp);
 			setExecution(_execution); //220
@@ -382,7 +382,7 @@ bool ClassifierBehaviorExecutionImpl::eSet(int featureID, Any newValue)
 		}
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::CLASSIFIERBEHAVIOREXECUTION_ATTRIBUTE_OBJECTACTIVATION:
 		{
-			// BOOST CAST
+			// CAST Any to fUML::Semantics::CommonBehavior::ObjectActivation
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation> _objectActivation = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::ObjectActivation>(_temp);
 			setObjectActivation(_objectActivation); //222
@@ -402,15 +402,12 @@ Any ClassifierBehaviorExecutionImpl::eInvoke(int operationID, std::shared_ptr<st
 
   	switch(operationID)
 	{
-		
-		// 981714484
+		// fUML::Semantics::CommonBehavior::ClassifierBehaviorExecution::_startObjectBehavior(): 981714484
 		case CommonBehaviorPackage::CLASSIFIERBEHAVIOREXECUTION_OPERATION__STARTOBJECTBEHAVIOR:
 		{
 			this->_startObjectBehavior();
-			break;
 		}
-		
-		// 787236707
+		// fUML::Semantics::CommonBehavior::ClassifierBehaviorExecution::execute(uml::Class[*], fUML::Semantics::CommonBehavior::ParameterValue[*]): 787236707
 		case CommonBehaviorPackage::CLASSIFIERBEHAVIOREXECUTION_OPERATION_EXECUTE_CLASS_PARAMETERVALUE:
 		{
 			//Retrieve input parameter 'classifier'
@@ -424,14 +421,11 @@ Any ClassifierBehaviorExecutionImpl::eInvoke(int operationID, std::shared_ptr<st
 			std::list<Any>::const_iterator incoming_param_inputs_arguments_citer = std::next(arguments->begin(), 1);
 			incoming_param_inputs = (*incoming_param_inputs_arguments_citer)->get<std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> >();
 			this->execute(incoming_param_classifier,incoming_param_inputs);
-			break;
 		}
-		
-		// 506895083
+		// fUML::Semantics::CommonBehavior::ClassifierBehaviorExecution::terminate(): 506895083
 		case CommonBehaviorPackage::CLASSIFIERBEHAVIOREXECUTION_OPERATION_TERMINATE:
 		{
 			this->terminate();
-			break;
 		}
 
 		default:

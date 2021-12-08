@@ -416,7 +416,7 @@ bool ModelImpl::eSet(int featureID, Any newValue)
 	{
 		case uml::umlPackage::MODEL_ATTRIBUTE_VIEWPOINT:
 		{
-			// BOOST CAST
+			// CAST Any to std::string
 			std::string _viewpoint = newValue->get<std::string>();
 			setViewpoint(_viewpoint); //15328
 			return true;

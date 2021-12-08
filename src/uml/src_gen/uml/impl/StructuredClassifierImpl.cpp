@@ -670,9 +670,9 @@ bool StructuredClassifierImpl::eSet(int featureID, Any newValue)
 	{
 		case uml::umlPackage::STRUCTUREDCLASSIFIER_ATTRIBUTE_OWNEDATTRIBUTE:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::Property>
 			if((newValue->isContainer()) && (uml::umlPackage::PROPERTY_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::Property>> ownedAttributeList= newValue->get<std::shared_ptr<Bag<uml::Property>>>();
@@ -707,9 +707,9 @@ bool StructuredClassifierImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::STRUCTUREDCLASSIFIER_ATTRIBUTE_OWNEDCONNECTOR:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::Connector>
 			if((newValue->isContainer()) && (uml::umlPackage::CONNECTOR_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::Connector>> ownedConnectorList= newValue->get<std::shared_ptr<Bag<uml::Connector>>>();
@@ -760,7 +760,7 @@ Any StructuredClassifierImpl::eInvoke(int operationID, std::shared_ptr<std::list
 		case umlPackage::STRUCTUREDCLASSIFIER_OPERATION_ALLROLES:
 		{
 			std::shared_ptr<Bag<uml::ConnectableElement> > resultList = this->allRoles();
-			return eAny(resultList,umlPackage::CONNECTABLEELEMENT_CLASS,true);
+			return eAny(resultList,uml::umlPackage::CONNECTABLEELEMENT_CLASS,true);
 			break;
 		}
 		// uml::StructuredClassifier::createOwnedAttribute(std::string, uml::Type, int, int) : uml::Property: 1614024577
@@ -786,14 +786,14 @@ Any StructuredClassifierImpl::eInvoke(int operationID, std::shared_ptr<std::list
 			int incoming_param_upper;
 			std::list<Any>::const_iterator incoming_param_upper_arguments_citer = std::next(arguments->begin(), 3);
 			incoming_param_upper = (*incoming_param_upper_arguments_citer)->get<int >();
-			result = eAny(this->createOwnedAttribute(incoming_param_name,incoming_param_type,incoming_param_lower,incoming_param_upper), umlPackage::PROPERTY_CLASS,false);
+			result = eAny(this->createOwnedAttribute(incoming_param_name,incoming_param_type,incoming_param_lower,incoming_param_upper), uml::umlPackage::PROPERTY_CLASS,false);
 			break;
 		}
 		// uml::StructuredClassifier::getParts() : uml::Property[*]: 494229350
 		case umlPackage::STRUCTUREDCLASSIFIER_OPERATION_GETPARTS:
 		{
 			std::shared_ptr<Bag<uml::Property> > resultList = this->getParts();
-			return eAny(resultList,umlPackage::PROPERTY_CLASS,true);
+			return eAny(resultList,uml::umlPackage::PROPERTY_CLASS,true);
 			break;
 		}
 

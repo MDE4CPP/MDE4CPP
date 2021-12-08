@@ -110,14 +110,10 @@ FeatureValueImpl& FeatureValueImpl::operator=(const FeatureValueImpl & obj)
 		m_values.reset(new Bag<fUML::Semantics::Values::Value>());
 		
 		
-
-		Bag<fUML::Semantics::Values::Value>::iterator valuesIter = valuesList->begin();
-		Bag<fUML::Semantics::Values::Value>::iterator valuesEnd = valuesList->end();
-		while (valuesIter != valuesEnd) 
+		for(const std::shared_ptr<fUML::Semantics::Values::Value> valuesindexElem: *valuesList) 
 		{
-			std::shared_ptr<fUML::Semantics::Values::Value> temp = std::dynamic_pointer_cast<fUML::Semantics::Values::Value>((*valuesIter)->copy());
-			getValues()->push_back(temp);
-			valuesIter++;
+			std::shared_ptr<fUML::Semantics::Values::Value> temp = std::dynamic_pointer_cast<fUML::Semantics::Values::Value>((valuesindexElem)->copy());
+			m_values->push_back(temp);
 		}
 	}
 	else
@@ -425,18 +421,10 @@ Any FeatureValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 			return eAny(returnValue,returnValue->getMetaElementID(),false); //552
 		}
 		case fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::FEATUREVALUE_ATTRIBUTE_POSITION:
-				return eAny(getPosition(),0,true); //551
+			return eAny(getPosition(),0,true); //551
 		case fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::FEATUREVALUE_ATTRIBUTE_VALUES:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<fUML::Semantics::Values::Value>::iterator iter = getValues()->begin();
-			Bag<fUML::Semantics::Values::Value>::iterator end = getValues()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //550			
+			return eAnyBag(getValues(),856918907); //550
 		}
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
@@ -462,7 +450,7 @@ bool FeatureValueImpl::eSet(int featureID, Any newValue)
 	{
 		case fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::FEATUREVALUE_ATTRIBUTE_FEATURE:
 		{
-			// BOOST CAST
+			// CAST Any to uml::StructuralFeature
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::StructuralFeature> _feature = std::dynamic_pointer_cast<uml::StructuralFeature>(_temp);
 			setFeature(_feature); //552
@@ -470,44 +458,45 @@ bool FeatureValueImpl::eSet(int featureID, Any newValue)
 		}
 		case fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::FEATUREVALUE_ATTRIBUTE_POSITION:
 		{
-			// BOOST CAST
+			// CAST Any to int
 			int _position = newValue->get<int>();
 			setPosition(_position); //551
 			return true;
 		}
 		case fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::FEATUREVALUE_ATTRIBUTE_VALUES:
 		{
-			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<fUML::Semantics::Values::Value>> valuesList(new Bag<fUML::Semantics::Values::Value>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
-			{
-				valuesList->add(std::dynamic_pointer_cast<fUML::Semantics::Values::Value>(*iter));
-				iter++;
-			}
-			
-			Bag<fUML::Semantics::Values::Value>::iterator iterValues = getValues()->begin();
-			Bag<fUML::Semantics::Values::Value>::iterator endValues = getValues()->end();
-			while (iterValues != endValues)
-			{
-				if (valuesList->find(*iterValues) == -1)
+			// CAST Any to Bag<fUML::Semantics::Values::Value>
+			if((newValue->isContainer()) && (fUML::Semantics::Values::ValuesPackage::VALUE_CLASS ==newValue->getTypeId()))
+			{ 
+				try
 				{
-					getValues()->erase(*iterValues);
+					std::shared_ptr<Bag<fUML::Semantics::Values::Value>> valuesList= newValue->get<std::shared_ptr<Bag<fUML::Semantics::Values::Value>>>();
+					std::shared_ptr<Bag<fUML::Semantics::Values::Value>> _values=getValues();
+					for(const std::shared_ptr<fUML::Semantics::Values::Value> indexValues: *_values)
+					{
+						if (valuesList->find(indexValues) == -1)
+						{
+							_values->erase(indexValues);
+						}
+					}
+
+					for(const std::shared_ptr<fUML::Semantics::Values::Value> indexValues: *valuesList)
+					{
+						if (_values->find(indexValues) == -1)
+						{
+							_values->add(indexValues);
+						}
+					}
 				}
-				iterValues++;
-			}
- 
-			iterValues = valuesList->begin();
-			endValues = valuesList->end();
-			while (iterValues != endValues)
-			{
-				if (getValues()->find(*iterValues) == -1)
+				catch(...)
 				{
-					getValues()->add(*iterValues);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterValues++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}
@@ -525,15 +514,13 @@ Any FeatureValueImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> a
 
   	switch(operationID)
 	{
-		
-		// 1429289502
+		// fUML::Semantics::SimpleClassifiers::FeatureValue::_copy() : fUML::Semantics::SimpleClassifiers::FeatureValue: 1429289502
 		case SimpleClassifiersPackage::FEATUREVALUE_OPERATION__COPY:
 		{
-				result = eAny(this->_copy());
+			result = eAny(this->_copy(), fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::FEATUREVALUE_CLASS,false);
 			break;
 		}
-		
-		// 2061713627
+		// fUML::Semantics::SimpleClassifiers::FeatureValue::hasEqualValues(fUML::Semantics::SimpleClassifiers::FeatureValue) : bool: 2061713627
 		case SimpleClassifiersPackage::FEATUREVALUE_OPERATION_HASEQUALVALUES_FEATUREVALUE:
 		{
 			//Retrieve input parameter 'other'
@@ -541,7 +528,7 @@ Any FeatureValueImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> a
 			std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> incoming_param_other;
 			std::list<Any>::const_iterator incoming_param_other_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_other = (*incoming_param_other_arguments_citer)->get<std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> >();
-					result = eAny(this->hasEqualValues(incoming_param_other),0,false);
+			result = eAny(this->hasEqualValues(incoming_param_other),0,false);
 			break;
 		}
 

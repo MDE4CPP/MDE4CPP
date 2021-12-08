@@ -31,11 +31,11 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
+#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "fUML/Semantics/Values/ValuesFactory.hpp"
 #include "uml/umlFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
-#include "fUML/Semantics/Loci/LociFactory.hpp"
 
 #include "ocl/Evaluations/EvalEnvironment.hpp"
 #include "fUML/Semantics/Loci/Locus.hpp"
@@ -284,7 +284,7 @@ bool PropertyCallExpEvalImpl::eSet(int featureID, Any newValue)
 	{
 		case ocl::Evaluations::EvaluationsPackage::PROPERTYCALLEXPEVAL_ATTRIBUTE_SOURCE:
 		{
-			// BOOST CAST
+			// CAST Any to ocl::Evaluations::OclExpEval
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<ocl::Evaluations::OclExpEval> _source = std::dynamic_pointer_cast<ocl::Evaluations::OclExpEval>(_temp);
 			setSource(_source); //736

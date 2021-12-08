@@ -427,7 +427,7 @@ bool IntervalImpl::eSet(int featureID, Any newValue)
 	{
 		case uml::umlPackage::INTERVAL_ATTRIBUTE_MAX:
 		{
-			// BOOST CAST
+			// CAST Any to uml::ValueSpecification
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::ValueSpecification> _max = std::dynamic_pointer_cast<uml::ValueSpecification>(_temp);
 			setMax(_max); //12815
@@ -435,7 +435,7 @@ bool IntervalImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::INTERVAL_ATTRIBUTE_MIN:
 		{
-			// BOOST CAST
+			// CAST Any to uml::ValueSpecification
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::ValueSpecification> _min = std::dynamic_pointer_cast<uml::ValueSpecification>(_temp);
 			setMin(_min); //12816

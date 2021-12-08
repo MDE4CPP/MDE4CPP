@@ -248,8 +248,7 @@ Any SequenceTypeValueImpl::eInvoke(int operationID, std::shared_ptr<std::list<An
 
   	switch(operationID)
 	{
-		
-		// 1931133348
+		// ocl::Values::SequenceTypeValue::addValue(fUML::Semantics::Values::Value) : bool: 1931133348
 		case ValuesPackage::SEQUENCETYPEVALUE_OPERATION_ADDVALUE_VALUE:
 		{
 			//Retrieve input parameter 'value'
@@ -257,7 +256,7 @@ Any SequenceTypeValueImpl::eInvoke(int operationID, std::shared_ptr<std::list<An
 			std::shared_ptr<fUML::Semantics::Values::Value> incoming_param_value;
 			std::list<Any>::const_iterator incoming_param_value_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_value = (*incoming_param_value_arguments_citer)->get<std::shared_ptr<fUML::Semantics::Values::Value> >();
-					result = eAny(this->addValue(incoming_param_value),0,false);
+			result = eAny(this->addValue(incoming_param_value),0,false);
 			break;
 		}
 

@@ -426,9 +426,9 @@ bool ParameterSetImpl::eSet(int featureID, Any newValue)
 	{
 		case uml::umlPackage::PARAMETERSET_ATTRIBUTE_CONDITION:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::Constraint>
 			if((newValue->isContainer()) && (uml::umlPackage::CONSTRAINT_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::Constraint>> conditionList= newValue->get<std::shared_ptr<Bag<uml::Constraint>>>();
@@ -463,9 +463,9 @@ bool ParameterSetImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::PARAMETERSET_ATTRIBUTE_PARAMETER:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::Parameter>
 			if((newValue->isContainer()) && (uml::umlPackage::PARAMETER_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::Parameter>> parameterList= newValue->get<std::shared_ptr<Bag<uml::Parameter>>>();

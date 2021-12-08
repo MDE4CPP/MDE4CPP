@@ -389,16 +389,16 @@ bool ClassifierTemplateParameterImpl::eSet(int featureID, Any newValue)
 	{
 		case uml::umlPackage::CLASSIFIERTEMPLATEPARAMETER_ATTRIBUTE_ALLOWSUBSTITUTABLE:
 		{
-			// BOOST CAST
+			// CAST Any to bool
 			bool _allowSubstitutable = newValue->get<bool>();
 			setAllowSubstitutable(_allowSubstitutable); //378
 			return true;
 		}
 		case uml::umlPackage::CLASSIFIERTEMPLATEPARAMETER_ATTRIBUTE_CONSTRAININGCLASSIFIER:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::Classifier>
 			if((newValue->isContainer()) && (uml::umlPackage::CLASSIFIER_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::Classifier>> constrainingClassifierList= newValue->get<std::shared_ptr<Bag<uml::Classifier>>>();

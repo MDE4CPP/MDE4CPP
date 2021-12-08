@@ -279,14 +279,14 @@ bool EStringToStringMapEntryImpl::eSet(int featureID, Any newValue)
 	{
 		case ecore::ecorePackage::ESTRINGTOSTRINGMAPENTRY_ATTRIBUTE_KEY:
 		{
-			// BOOST CAST
+			// CAST Any to std::string
 			std::string _key = newValue->get<std::string>();
 			setKey(_key); //500
 			return true;
 		}
 		case ecore::ecorePackage::ESTRINGTOSTRINGMAPENTRY_ATTRIBUTE_VALUE:
 		{
-			// BOOST CAST
+			// CAST Any to std::string
 			std::string _value = newValue->get<std::string>();
 			setValue(_value); //501
 			return true;

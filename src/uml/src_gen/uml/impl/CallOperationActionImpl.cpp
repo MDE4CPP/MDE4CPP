@@ -499,7 +499,7 @@ bool CallOperationActionImpl::eSet(int featureID, Any newValue)
 	{
 		case uml::umlPackage::CALLOPERATIONACTION_ATTRIBUTE_OPERATION:
 		{
-			// BOOST CAST
+			// CAST Any to uml::Operation
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Operation> _operation = std::dynamic_pointer_cast<uml::Operation>(_temp);
 			setOperation(_operation); //3231
@@ -507,7 +507,7 @@ bool CallOperationActionImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::CALLOPERATIONACTION_ATTRIBUTE_TARGET:
 		{
-			// BOOST CAST
+			// CAST Any to uml::InputPin
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::InputPin> _target = std::dynamic_pointer_cast<uml::InputPin>(_temp);
 			setTarget(_target); //3232

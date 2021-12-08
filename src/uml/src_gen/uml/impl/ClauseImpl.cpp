@@ -520,9 +520,9 @@ bool ClauseImpl::eSet(int featureID, Any newValue)
 	{
 		case uml::umlPackage::CLAUSE_ATTRIBUTE_BODY:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::ExecutableNode>
 			if((newValue->isContainer()) && (uml::umlPackage::EXECUTABLENODE_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::ExecutableNode>> bodyList= newValue->get<std::shared_ptr<Bag<uml::ExecutableNode>>>();
@@ -557,9 +557,9 @@ bool ClauseImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::CLAUSE_ATTRIBUTE_BODYOUTPUT:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::OutputPin>
 			if((newValue->isContainer()) && (uml::umlPackage::OUTPUTPIN_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::OutputPin>> bodyOutputList= newValue->get<std::shared_ptr<Bag<uml::OutputPin>>>();
@@ -594,7 +594,7 @@ bool ClauseImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::CLAUSE_ATTRIBUTE_DECIDER:
 		{
-			// BOOST CAST
+			// CAST Any to uml::OutputPin
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::OutputPin> _decider = std::dynamic_pointer_cast<uml::OutputPin>(_temp);
 			setDecider(_decider); //385
@@ -602,9 +602,9 @@ bool ClauseImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::CLAUSE_ATTRIBUTE_PREDECESSORCLAUSE:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::Clause>
 			if((newValue->isContainer()) && (uml::umlPackage::CLAUSE_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::Clause>> predecessorClauseList= newValue->get<std::shared_ptr<Bag<uml::Clause>>>();
@@ -639,9 +639,9 @@ bool ClauseImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::CLAUSE_ATTRIBUTE_SUCCESSORCLAUSE:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::Clause>
 			if((newValue->isContainer()) && (uml::umlPackage::CLAUSE_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::Clause>> successorClauseList= newValue->get<std::shared_ptr<Bag<uml::Clause>>>();
@@ -676,9 +676,9 @@ bool ClauseImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::CLAUSE_ATTRIBUTE_TEST:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::ExecutableNode>
 			if((newValue->isContainer()) && (uml::umlPackage::EXECUTABLENODE_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::ExecutableNode>> testList= newValue->get<std::shared_ptr<Bag<uml::ExecutableNode>>>();

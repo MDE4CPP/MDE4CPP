@@ -343,7 +343,7 @@ Any ConnectableElementImpl::eInvoke(int operationID, std::shared_ptr<std::list<A
 		case umlPackage::CONNECTABLEELEMENT_OPERATION_GETENDS:
 		{
 			std::shared_ptr<Bag<uml::ConnectorEnd> > resultList = this->getEnds();
-			return eAny(resultList,umlPackage::CONNECTOREND_CLASS,true);
+			return eAny(resultList,uml::umlPackage::CONNECTOREND_CLASS,true);
 			break;
 		}
 

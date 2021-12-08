@@ -378,7 +378,7 @@ bool VertexImpl::eSet(int featureID, Any newValue)
 	{
 		case uml::umlPackage::VERTEX_ATTRIBUTE_CONTAINER:
 		{
-			// BOOST CAST
+			// CAST Any to uml::Region
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Region> _container = std::dynamic_pointer_cast<uml::Region>(_temp);
 			setContainer(_container); //2549
@@ -401,21 +401,21 @@ Any VertexImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argumen
 		// uml::Vertex::containingStateMachine() : uml::StateMachine: 1261919053
 		case umlPackage::VERTEX_OPERATION_CONTAININGSTATEMACHINE:
 		{
-			result = eAny(this->containingStateMachine(), umlPackage::STATEMACHINE_CLASS,false);
+			result = eAny(this->containingStateMachine(), uml::umlPackage::STATEMACHINE_CLASS,false);
 			break;
 		}
 		// uml::Vertex::getIncomings() : uml::Transition[*]: 773358148
 		case umlPackage::VERTEX_OPERATION_GETINCOMINGS:
 		{
 			std::shared_ptr<Bag<uml::Transition> > resultList = this->getIncomings();
-			return eAny(resultList,umlPackage::TRANSITION_CLASS,true);
+			return eAny(resultList,uml::umlPackage::TRANSITION_CLASS,true);
 			break;
 		}
 		// uml::Vertex::getOutgoings() : uml::Transition[*]: 1266036165
 		case umlPackage::VERTEX_OPERATION_GETOUTGOINGS:
 		{
 			std::shared_ptr<Bag<uml::Transition> > resultList = this->getOutgoings();
-			return eAny(resultList,umlPackage::TRANSITION_CLASS,true);
+			return eAny(resultList,uml::umlPackage::TRANSITION_CLASS,true);
 			break;
 		}
 		// uml::Vertex::isContainedInRegion(uml::Region) : bool: 846277715

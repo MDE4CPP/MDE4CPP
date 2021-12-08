@@ -388,7 +388,7 @@ bool TimeObservationImpl::eSet(int featureID, Any newValue)
 	{
 		case uml::umlPackage::TIMEOBSERVATION_ATTRIBUTE_EVENT:
 		{
-			// BOOST CAST
+			// CAST Any to uml::NamedElement
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::NamedElement> _event = std::dynamic_pointer_cast<uml::NamedElement>(_temp);
 			setEvent(_event); //24012
@@ -396,7 +396,7 @@ bool TimeObservationImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::TIMEOBSERVATION_ATTRIBUTE_FIRSTEVENT:
 		{
-			// BOOST CAST
+			// CAST Any to bool
 			bool _firstEvent = newValue->get<bool>();
 			setFirstEvent(_firstEvent); //24013
 			return true;

@@ -288,8 +288,7 @@ Any DataStoreNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::l
 
   	switch(operationID)
 	{
-		
-		// 131946306
+		// fUML::Semantics::Activities::DataStoreNodeActivation::addToken(fUML::Semantics::Activities::Token): 131946306
 		case ActivitiesPackage::DATASTORENODEACTIVATION_OPERATION_ADDTOKEN_TOKEN:
 		{
 			//Retrieve input parameter 'token'
@@ -298,10 +297,8 @@ Any DataStoreNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::l
 			std::list<Any>::const_iterator incoming_param_token_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_token = (*incoming_param_token_arguments_citer)->get<std::shared_ptr<fUML::Semantics::Activities::Token> >();
 			this->addToken(incoming_param_token);
-			break;
 		}
-		
-		// 1985388858
+		// fUML::Semantics::Activities::DataStoreNodeActivation::removeToken(fUML::Semantics::Activities::Token) : int: 1985388858
 		case ActivitiesPackage::DATASTORENODEACTIVATION_OPERATION_REMOVETOKEN_TOKEN:
 		{
 			//Retrieve input parameter 'token'
@@ -309,7 +306,7 @@ Any DataStoreNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::l
 			std::shared_ptr<fUML::Semantics::Activities::Token> incoming_param_token;
 			std::list<Any>::const_iterator incoming_param_token_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_token = (*incoming_param_token_arguments_citer)->get<std::shared_ptr<fUML::Semantics::Activities::Token> >();
-					result = eAny(this->removeToken(incoming_param_token),0,false);
+			result = eAny(this->removeToken(incoming_param_token),0,false);
 			break;
 		}
 

@@ -313,7 +313,7 @@ Any IntegerValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::INTEGERVALUE_ATTRIBUTE_VALUE:
-				return eAny(getValue(),0,true); //641
+			return eAny(getValue(),0,true); //641
 	}
 	return PrimitiveValueImpl::eGet(featureID, resolve, coreType);
 }
@@ -334,7 +334,7 @@ bool IntegerValueImpl::eSet(int featureID, Any newValue)
 	{
 		case fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::INTEGERVALUE_ATTRIBUTE_VALUE:
 		{
-			// BOOST CAST
+			// CAST Any to int
 			int _value = newValue->get<int>();
 			setValue(_value); //641
 			return true;
@@ -353,15 +353,13 @@ Any IntegerValueImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> a
 
   	switch(operationID)
 	{
-		
-		// 409567895
+		// fUML::Semantics::SimpleClassifiers::IntegerValue::_copy() : fUML::Semantics::Values::Value: 409567895
 		case SimpleClassifiersPackage::INTEGERVALUE_OPERATION__COPY:
 		{
-				result = eAny(this->_copy());
+			result = eAny(this->_copy(), fUML::Semantics::Values::ValuesPackage::VALUE_CLASS,false);
 			break;
 		}
-		
-		// 1332371302
+		// fUML::Semantics::SimpleClassifiers::IntegerValue::equals(fUML::Semantics::Values::Value) : bool: 1332371302
 		case SimpleClassifiersPackage::INTEGERVALUE_OPERATION_EQUALS_VALUE:
 		{
 			//Retrieve input parameter 'otherValue'
@@ -369,28 +367,25 @@ Any IntegerValueImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> a
 			std::shared_ptr<fUML::Semantics::Values::Value> incoming_param_otherValue;
 			std::list<Any>::const_iterator incoming_param_otherValue_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_otherValue = (*incoming_param_otherValue_arguments_citer)->get<std::shared_ptr<fUML::Semantics::Values::Value> >();
-					result = eAny(this->equals(incoming_param_otherValue),0,false);
+			result = eAny(this->equals(incoming_param_otherValue),0,false);
 			break;
 		}
-		
-		// 1044297728
+		// fUML::Semantics::SimpleClassifiers::IntegerValue::new_() : fUML::Semantics::Values::Value: 1044297728
 		case SimpleClassifiersPackage::INTEGERVALUE_OPERATION_NEW_:
 		{
-				result = eAny(this->new_());
+			result = eAny(this->new_(), fUML::Semantics::Values::ValuesPackage::VALUE_CLASS,false);
 			break;
 		}
-		
-		// 1191658488
+		// fUML::Semantics::SimpleClassifiers::IntegerValue::specify() : uml::ValueSpecification: 1191658488
 		case SimpleClassifiersPackage::INTEGERVALUE_OPERATION_SPECIFY:
 		{
-				result = eAny(this->specify());
+			result = eAny(this->specify(), uml::umlPackage::VALUESPECIFICATION_CLASS,false);
 			break;
 		}
-		
-		// 1852462258
+		// fUML::Semantics::SimpleClassifiers::IntegerValue::toString() : std::string: 1852462258
 		case SimpleClassifiersPackage::INTEGERVALUE_OPERATION_TOSTRING:
 		{
-					result = eAny(this->toString(),0,false);
+			result = eAny(this->toString(),0,false);
 			break;
 		}
 

@@ -246,15 +246,7 @@ Any TokenSetImpl::eGet(int featureID, bool resolve, bool coreType) const
 	{
 		case fUML::Semantics::Activities::ActivitiesPackage::TOKENSET_ATTRIBUTE_TOKENS:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<fUML::Semantics::Activities::Token>::iterator iter = getTokens()->begin();
-			Bag<fUML::Semantics::Activities::Token>::iterator end = getTokens()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //1160			
+			return eAnyBag(getTokens(),476107875); //1160
 		}
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
@@ -276,37 +268,38 @@ bool TokenSetImpl::eSet(int featureID, Any newValue)
 	{
 		case fUML::Semantics::Activities::ActivitiesPackage::TOKENSET_ATTRIBUTE_TOKENS:
 		{
-			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> tokensList(new Bag<fUML::Semantics::Activities::Token>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
-			{
-				tokensList->add(std::dynamic_pointer_cast<fUML::Semantics::Activities::Token>(*iter));
-				iter++;
-			}
-			
-			Bag<fUML::Semantics::Activities::Token>::iterator iterTokens = getTokens()->begin();
-			Bag<fUML::Semantics::Activities::Token>::iterator endTokens = getTokens()->end();
-			while (iterTokens != endTokens)
-			{
-				if (tokensList->find(*iterTokens) == -1)
+			// CAST Any to Bag<fUML::Semantics::Activities::Token>
+			if((newValue->isContainer()) && (fUML::Semantics::Activities::ActivitiesPackage::TOKEN_CLASS ==newValue->getTypeId()))
+			{ 
+				try
 				{
-					getTokens()->erase(*iterTokens);
+					std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> tokensList= newValue->get<std::shared_ptr<Bag<fUML::Semantics::Activities::Token>>>();
+					std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> _tokens=getTokens();
+					for(const std::shared_ptr<fUML::Semantics::Activities::Token> indexTokens: *_tokens)
+					{
+						if (tokensList->find(indexTokens) == -1)
+						{
+							_tokens->erase(indexTokens);
+						}
+					}
+
+					for(const std::shared_ptr<fUML::Semantics::Activities::Token> indexTokens: *tokensList)
+					{
+						if (_tokens->find(indexTokens) == -1)
+						{
+							_tokens->add(indexTokens);
+						}
+					}
 				}
-				iterTokens++;
-			}
- 
-			iterTokens = tokensList->begin();
-			endTokens = tokensList->end();
-			while (iterTokens != endTokens)
-			{
-				if (getTokens()->find(*iterTokens) == -1)
+				catch(...)
 				{
-					getTokens()->add(*iterTokens);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterTokens++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}

@@ -748,9 +748,9 @@ bool UseCaseImpl::eSet(int featureID, Any newValue)
 	{
 		case uml::umlPackage::USECASE_ATTRIBUTE_EXTEND:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::Extend>
 			if((newValue->isContainer()) && (uml::umlPackage::EXTEND_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::Extend>> extendList= newValue->get<std::shared_ptr<Bag<uml::Extend>>>();
@@ -785,9 +785,9 @@ bool UseCaseImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::USECASE_ATTRIBUTE_EXTENSIONPOINT:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::ExtensionPoint>
 			if((newValue->isContainer()) && (uml::umlPackage::EXTENSIONPOINT_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::ExtensionPoint>> extensionPointList= newValue->get<std::shared_ptr<Bag<uml::ExtensionPoint>>>();
@@ -822,9 +822,9 @@ bool UseCaseImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::USECASE_ATTRIBUTE_INCLUDE:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::Include>
 			if((newValue->isContainer()) && (uml::umlPackage::INCLUDE_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::Include>> includeList= newValue->get<std::shared_ptr<Bag<uml::Include>>>();
@@ -859,9 +859,9 @@ bool UseCaseImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::USECASE_ATTRIBUTE_SUBJECT:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::Classifier>
 			if((newValue->isContainer()) && (uml::umlPackage::CLASSIFIER_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::Classifier>> subjectList= newValue->get<std::shared_ptr<Bag<uml::Classifier>>>();
@@ -912,7 +912,7 @@ Any UseCaseImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argume
 		case umlPackage::USECASE_OPERATION_ALLINCLUDEDUSECASES:
 		{
 			std::shared_ptr<Bag<uml::UseCase> > resultList = this->allIncludedUseCases();
-			return eAny(resultList,umlPackage::USECASE_CLASS,true);
+			return eAny(resultList,uml::umlPackage::USECASE_CLASS,true);
 			break;
 		}
 		// uml::UseCase::binary_associations(Any, std::map) : bool: 994037494

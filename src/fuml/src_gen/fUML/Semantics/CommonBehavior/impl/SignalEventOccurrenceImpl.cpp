@@ -288,7 +288,7 @@ bool SignalEventOccurrenceImpl::eSet(int featureID, Any newValue)
 	{
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::SIGNALEVENTOCCURRENCE_ATTRIBUTE_SIGNALINSTANCE:
 		{
-			// BOOST CAST
+			// CAST Any to fUML::Semantics::SimpleClassifiers::SignalInstance
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance> _signalInstance = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::SignalInstance>(_temp);
 			setSignalInstance(_signalInstance); //1061
@@ -308,15 +308,14 @@ Any SignalEventOccurrenceImpl::eInvoke(int operationID, std::shared_ptr<std::lis
 
   	switch(operationID)
 	{
-		
-		// 588055238
+		// fUML::Semantics::CommonBehavior::SignalEventOccurrence::getParameterValues() : fUML::Semantics::CommonBehavior::ParameterValue[*]: 588055238
 		case CommonBehaviorPackage::SIGNALEVENTOCCURRENCE_OPERATION_GETPARAMETERVALUES:
 		{
-				result = eAny(this->getParameterValues());
+			std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > resultList = this->getParameterValues();
+			return eAny(resultList,fUML::Semantics::CommonBehavior::CommonBehaviorPackage::PARAMETERVALUE_CLASS,true);
 			break;
 		}
-		
-		// 582994447
+		// fUML::Semantics::CommonBehavior::SignalEventOccurrence::match(uml::Trigger) : bool: 582994447
 		case CommonBehaviorPackage::SIGNALEVENTOCCURRENCE_OPERATION_MATCH_TRIGGER:
 		{
 			//Retrieve input parameter 'trigger'
@@ -324,7 +323,7 @@ Any SignalEventOccurrenceImpl::eInvoke(int operationID, std::shared_ptr<std::lis
 			std::shared_ptr<uml::Trigger> incoming_param_trigger;
 			std::list<Any>::const_iterator incoming_param_trigger_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_trigger = (*incoming_param_trigger_arguments_citer)->get<std::shared_ptr<uml::Trigger> >();
-					result = eAny(this->match(incoming_param_trigger),0,false);
+			result = eAny(this->match(incoming_param_trigger),0,false);
 			break;
 		}
 

@@ -200,14 +200,10 @@ CollectionLiteralExpImpl& CollectionLiteralExpImpl::operator=(const CollectionLi
 		m_part.reset(new Bag<ocl::Expressions::CollectionLiteralPart>());
 		
 		
-
-		Bag<ocl::Expressions::CollectionLiteralPart>::iterator partIter = partList->begin();
-		Bag<ocl::Expressions::CollectionLiteralPart>::iterator partEnd = partList->end();
-		while (partIter != partEnd) 
+		for(const std::shared_ptr<ocl::Expressions::CollectionLiteralPart> partindexElem: *partList) 
 		{
-			std::shared_ptr<ocl::Expressions::CollectionLiteralPart> temp = std::dynamic_pointer_cast<ocl::Expressions::CollectionLiteralPart>((*partIter)->copy());
-			getPart()->push_back(temp);
-			partIter++;
+			std::shared_ptr<ocl::Expressions::CollectionLiteralPart> temp = std::dynamic_pointer_cast<ocl::Expressions::CollectionLiteralPart>((partindexElem)->copy());
+			m_part->push_back(temp);
 		}
 	}
 	else
@@ -501,18 +497,10 @@ Any CollectionLiteralExpImpl::eGet(int featureID, bool resolve, bool coreType) c
 	switch(featureID)
 	{
 		case ocl::Expressions::ExpressionsPackage::COLLECTIONLITERALEXP_ATTRIBUTE_KIND:
-				return eAny(getKind(),0,true); //1522
+			return eAny(getKind(),0,true); //1522
 		case ocl::Expressions::ExpressionsPackage::COLLECTIONLITERALEXP_ATTRIBUTE_PART:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<ocl::Expressions::CollectionLiteralPart>::iterator iter = getPart()->begin();
-			Bag<ocl::Expressions::CollectionLiteralPart>::iterator end = getPart()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //1523			
+			return eAnyBag(getPart(),525693555); //1523
 		}
 	}
 	return LiteralExpImpl::eGet(featureID, resolve, coreType);
@@ -536,44 +524,45 @@ bool CollectionLiteralExpImpl::eSet(int featureID, Any newValue)
 	{
 		case ocl::Expressions::ExpressionsPackage::COLLECTIONLITERALEXP_ATTRIBUTE_KIND:
 		{
-			// BOOST CAST
+			// CAST Any to ocl::Expressions::CollectionKind
 			ocl::Expressions::CollectionKind _kind = newValue->get<ocl::Expressions::CollectionKind>();
 			setKind(_kind); //1522
 			return true;
 		}
 		case ocl::Expressions::ExpressionsPackage::COLLECTIONLITERALEXP_ATTRIBUTE_PART:
 		{
-			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<ocl::Expressions::CollectionLiteralPart>> partList(new Bag<ocl::Expressions::CollectionLiteralPart>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
-			{
-				partList->add(std::dynamic_pointer_cast<ocl::Expressions::CollectionLiteralPart>(*iter));
-				iter++;
-			}
-			
-			Bag<ocl::Expressions::CollectionLiteralPart>::iterator iterPart = getPart()->begin();
-			Bag<ocl::Expressions::CollectionLiteralPart>::iterator endPart = getPart()->end();
-			while (iterPart != endPart)
-			{
-				if (partList->find(*iterPart) == -1)
+			// CAST Any to Bag<ocl::Expressions::CollectionLiteralPart>
+			if((newValue->isContainer()) && (ocl::Expressions::ExpressionsPackage::COLLECTIONLITERALPART_CLASS ==newValue->getTypeId()))
+			{ 
+				try
 				{
-					getPart()->erase(*iterPart);
+					std::shared_ptr<Bag<ocl::Expressions::CollectionLiteralPart>> partList= newValue->get<std::shared_ptr<Bag<ocl::Expressions::CollectionLiteralPart>>>();
+					std::shared_ptr<Bag<ocl::Expressions::CollectionLiteralPart>> _part=getPart();
+					for(const std::shared_ptr<ocl::Expressions::CollectionLiteralPart> indexPart: *_part)
+					{
+						if (partList->find(indexPart) == -1)
+						{
+							_part->erase(indexPart);
+						}
+					}
+
+					for(const std::shared_ptr<ocl::Expressions::CollectionLiteralPart> indexPart: *partList)
+					{
+						if (_part->find(indexPart) == -1)
+						{
+							_part->add(indexPart);
+						}
+					}
 				}
-				iterPart++;
-			}
- 
-			iterPart = partList->begin();
-			endPart = partList->end();
-			while (iterPart != endPart)
-			{
-				if (getPart()->find(*iterPart) == -1)
+				catch(...)
 				{
-					getPart()->add(*iterPart);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterPart++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}

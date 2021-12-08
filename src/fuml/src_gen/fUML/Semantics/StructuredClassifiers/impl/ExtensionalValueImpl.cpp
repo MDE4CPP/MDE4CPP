@@ -303,7 +303,7 @@ bool ExtensionalValueImpl::eSet(int featureID, Any newValue)
 	{
 		case fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::EXTENSIONALVALUE_ATTRIBUTE_LOCUS:
 		{
-			// BOOST CAST
+			// CAST Any to fUML::Semantics::Loci::Locus
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<fUML::Semantics::Loci::Locus> _locus = std::dynamic_pointer_cast<fUML::Semantics::Loci::Locus>(_temp);
 			setLocus(_locus); //521
@@ -323,19 +323,16 @@ Any ExtensionalValueImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any
 
   	switch(operationID)
 	{
-		
-		// 2102774946
+		// fUML::Semantics::StructuredClassifiers::ExtensionalValue::_copy() : fUML::Semantics::Values::Value: 2102774946
 		case StructuredClassifiersPackage::EXTENSIONALVALUE_OPERATION__COPY:
 		{
-				result = eAny(this->_copy());
+			result = eAny(this->_copy(), fUML::Semantics::Values::ValuesPackage::VALUE_CLASS,false);
 			break;
 		}
-		
-		// 1826522411
+		// fUML::Semantics::StructuredClassifiers::ExtensionalValue::destroy(): 1826522411
 		case StructuredClassifiersPackage::EXTENSIONALVALUE_OPERATION_DESTROY:
 		{
 			this->destroy();
-			break;
 		}
 
 		default:

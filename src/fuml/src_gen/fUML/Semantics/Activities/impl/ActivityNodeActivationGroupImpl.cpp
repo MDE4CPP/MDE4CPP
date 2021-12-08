@@ -143,14 +143,10 @@ ActivityNodeActivationGroupImpl& ActivityNodeActivationGroupImpl::operator=(cons
 		m_edgeInstances.reset(new Bag<fUML::Semantics::Activities::ActivityEdgeInstance>());
 		
 		
-
-		Bag<fUML::Semantics::Activities::ActivityEdgeInstance>::iterator edgeInstancesIter = edgeInstancesList->begin();
-		Bag<fUML::Semantics::Activities::ActivityEdgeInstance>::iterator edgeInstancesEnd = edgeInstancesList->end();
-		while (edgeInstancesIter != edgeInstancesEnd) 
+		for(const std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance> edgeInstancesindexElem: *edgeInstancesList) 
 		{
-			std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance> temp = std::dynamic_pointer_cast<fUML::Semantics::Activities::ActivityEdgeInstance>((*edgeInstancesIter)->copy());
-			getEdgeInstances()->push_back(temp);
-			edgeInstancesIter++;
+			std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance> temp = std::dynamic_pointer_cast<fUML::Semantics::Activities::ActivityEdgeInstance>((edgeInstancesindexElem)->copy());
+			m_edgeInstances->push_back(temp);
 		}
 	}
 	else
@@ -165,14 +161,10 @@ ActivityNodeActivationGroupImpl& ActivityNodeActivationGroupImpl::operator=(cons
 		m_nodeActivations.reset(new Bag<fUML::Semantics::Activities::ActivityNodeActivation>());
 		
 		
-
-		Bag<fUML::Semantics::Activities::ActivityNodeActivation>::iterator nodeActivationsIter = nodeActivationsList->begin();
-		Bag<fUML::Semantics::Activities::ActivityNodeActivation>::iterator nodeActivationsEnd = nodeActivationsList->end();
-		while (nodeActivationsIter != nodeActivationsEnd) 
+		for(const std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> nodeActivationsindexElem: *nodeActivationsList) 
 		{
-			std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> temp = std::dynamic_pointer_cast<fUML::Semantics::Activities::ActivityNodeActivation>((*nodeActivationsIter)->copy());
-			getNodeActivations()->push_back(temp);
-			nodeActivationsIter++;
+			std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> temp = std::dynamic_pointer_cast<fUML::Semantics::Activities::ActivityNodeActivation>((nodeActivationsindexElem)->copy());
+			m_nodeActivations->push_back(temp);
 		}
 	}
 	else
@@ -877,39 +869,15 @@ Any ActivityNodeActivationGroupImpl::eGet(int featureID, bool resolve, bool core
 		}
 		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYNODEACTIVATIONGROUP_ATTRIBUTE_EDGEINSTANCES:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<fUML::Semantics::Activities::ActivityEdgeInstance>::iterator iter = getEdgeInstances()->begin();
-			Bag<fUML::Semantics::Activities::ActivityEdgeInstance>::iterator end = getEdgeInstances()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //100			
+			return eAnyBag(getEdgeInstances(),203010502); //100
 		}
 		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYNODEACTIVATIONGROUP_ATTRIBUTE_NODEACTIVATIONS:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<fUML::Semantics::Activities::ActivityNodeActivation>::iterator iter = getNodeActivations()->begin();
-			Bag<fUML::Semantics::Activities::ActivityNodeActivation>::iterator end = getNodeActivations()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //101			
+			return eAnyBag(getNodeActivations(),646106009); //101
 		}
 		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYNODEACTIVATIONGROUP_ATTRIBUTE_SUSPENDEDACTIVATIONS:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<fUML::Semantics::Activities::ActivityNodeActivation>::iterator iter = getSuspendedActivations()->begin();
-			Bag<fUML::Semantics::Activities::ActivityNodeActivation>::iterator end = getSuspendedActivations()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //104			
+			return eAnyBag(getSuspendedActivations(),646106009); //104
 		}
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
@@ -939,7 +907,7 @@ bool ActivityNodeActivationGroupImpl::eSet(int featureID, Any newValue)
 	{
 		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYNODEACTIVATIONGROUP_ATTRIBUTE_ACTIVITYEXECUTION:
 		{
-			// BOOST CAST
+			// CAST Any to fUML::Semantics::Activities::ActivityExecution
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<fUML::Semantics::Activities::ActivityExecution> _activityExecution = std::dynamic_pointer_cast<fUML::Semantics::Activities::ActivityExecution>(_temp);
 			setActivityExecution(_activityExecution); //102
@@ -947,7 +915,7 @@ bool ActivityNodeActivationGroupImpl::eSet(int featureID, Any newValue)
 		}
 		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYNODEACTIVATIONGROUP_ATTRIBUTE_CONTAININGNODEACTIVATION:
 		{
-			// BOOST CAST
+			// CAST Any to fUML::Semantics::Actions::StructuredActivityNodeActivation
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<fUML::Semantics::Actions::StructuredActivityNodeActivation> _containingNodeActivation = std::dynamic_pointer_cast<fUML::Semantics::Actions::StructuredActivityNodeActivation>(_temp);
 			setContainingNodeActivation(_containingNodeActivation); //103
@@ -955,109 +923,112 @@ bool ActivityNodeActivationGroupImpl::eSet(int featureID, Any newValue)
 		}
 		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYNODEACTIVATIONGROUP_ATTRIBUTE_EDGEINSTANCES:
 		{
-			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>> edgeInstancesList(new Bag<fUML::Semantics::Activities::ActivityEdgeInstance>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
-			{
-				edgeInstancesList->add(std::dynamic_pointer_cast<fUML::Semantics::Activities::ActivityEdgeInstance>(*iter));
-				iter++;
-			}
-			
-			Bag<fUML::Semantics::Activities::ActivityEdgeInstance>::iterator iterEdgeInstances = getEdgeInstances()->begin();
-			Bag<fUML::Semantics::Activities::ActivityEdgeInstance>::iterator endEdgeInstances = getEdgeInstances()->end();
-			while (iterEdgeInstances != endEdgeInstances)
-			{
-				if (edgeInstancesList->find(*iterEdgeInstances) == -1)
+			// CAST Any to Bag<fUML::Semantics::Activities::ActivityEdgeInstance>
+			if((newValue->isContainer()) && (fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYEDGEINSTANCE_CLASS ==newValue->getTypeId()))
+			{ 
+				try
 				{
-					getEdgeInstances()->erase(*iterEdgeInstances);
+					std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>> edgeInstancesList= newValue->get<std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>>>();
+					std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>> _edgeInstances=getEdgeInstances();
+					for(const std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance> indexEdgeInstances: *_edgeInstances)
+					{
+						if (edgeInstancesList->find(indexEdgeInstances) == -1)
+						{
+							_edgeInstances->erase(indexEdgeInstances);
+						}
+					}
+
+					for(const std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance> indexEdgeInstances: *edgeInstancesList)
+					{
+						if (_edgeInstances->find(indexEdgeInstances) == -1)
+						{
+							_edgeInstances->add(indexEdgeInstances);
+						}
+					}
 				}
-				iterEdgeInstances++;
-			}
- 
-			iterEdgeInstances = edgeInstancesList->begin();
-			endEdgeInstances = edgeInstancesList->end();
-			while (iterEdgeInstances != endEdgeInstances)
-			{
-				if (getEdgeInstances()->find(*iterEdgeInstances) == -1)
+				catch(...)
 				{
-					getEdgeInstances()->add(*iterEdgeInstances);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterEdgeInstances++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}
 		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYNODEACTIVATIONGROUP_ATTRIBUTE_NODEACTIVATIONS:
 		{
-			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityNodeActivation>> nodeActivationsList(new Bag<fUML::Semantics::Activities::ActivityNodeActivation>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
-			{
-				nodeActivationsList->add(std::dynamic_pointer_cast<fUML::Semantics::Activities::ActivityNodeActivation>(*iter));
-				iter++;
-			}
-			
-			Bag<fUML::Semantics::Activities::ActivityNodeActivation>::iterator iterNodeActivations = getNodeActivations()->begin();
-			Bag<fUML::Semantics::Activities::ActivityNodeActivation>::iterator endNodeActivations = getNodeActivations()->end();
-			while (iterNodeActivations != endNodeActivations)
-			{
-				if (nodeActivationsList->find(*iterNodeActivations) == -1)
+			// CAST Any to Bag<fUML::Semantics::Activities::ActivityNodeActivation>
+			if((newValue->isContainer()) && (fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYNODEACTIVATION_CLASS ==newValue->getTypeId()))
+			{ 
+				try
 				{
-					getNodeActivations()->erase(*iterNodeActivations);
+					std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityNodeActivation>> nodeActivationsList= newValue->get<std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityNodeActivation>>>();
+					std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityNodeActivation>> _nodeActivations=getNodeActivations();
+					for(const std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> indexNodeActivations: *_nodeActivations)
+					{
+						if (nodeActivationsList->find(indexNodeActivations) == -1)
+						{
+							_nodeActivations->erase(indexNodeActivations);
+						}
+					}
+
+					for(const std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> indexNodeActivations: *nodeActivationsList)
+					{
+						if (_nodeActivations->find(indexNodeActivations) == -1)
+						{
+							_nodeActivations->add(indexNodeActivations);
+						}
+					}
 				}
-				iterNodeActivations++;
-			}
- 
-			iterNodeActivations = nodeActivationsList->begin();
-			endNodeActivations = nodeActivationsList->end();
-			while (iterNodeActivations != endNodeActivations)
-			{
-				if (getNodeActivations()->find(*iterNodeActivations) == -1)
+				catch(...)
 				{
-					getNodeActivations()->add(*iterNodeActivations);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterNodeActivations++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}
 		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYNODEACTIVATIONGROUP_ATTRIBUTE_SUSPENDEDACTIVATIONS:
 		{
-			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityNodeActivation>> suspendedActivationsList(new Bag<fUML::Semantics::Activities::ActivityNodeActivation>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
-			{
-				suspendedActivationsList->add(std::dynamic_pointer_cast<fUML::Semantics::Activities::ActivityNodeActivation>(*iter));
-				iter++;
-			}
-			
-			Bag<fUML::Semantics::Activities::ActivityNodeActivation>::iterator iterSuspendedActivations = getSuspendedActivations()->begin();
-			Bag<fUML::Semantics::Activities::ActivityNodeActivation>::iterator endSuspendedActivations = getSuspendedActivations()->end();
-			while (iterSuspendedActivations != endSuspendedActivations)
-			{
-				if (suspendedActivationsList->find(*iterSuspendedActivations) == -1)
+			// CAST Any to Bag<fUML::Semantics::Activities::ActivityNodeActivation>
+			if((newValue->isContainer()) && (fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYNODEACTIVATION_CLASS ==newValue->getTypeId()))
+			{ 
+				try
 				{
-					getSuspendedActivations()->erase(*iterSuspendedActivations);
+					std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityNodeActivation>> suspendedActivationsList= newValue->get<std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityNodeActivation>>>();
+					std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityNodeActivation>> _suspendedActivations=getSuspendedActivations();
+					for(const std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> indexSuspendedActivations: *_suspendedActivations)
+					{
+						if (suspendedActivationsList->find(indexSuspendedActivations) == -1)
+						{
+							_suspendedActivations->erase(indexSuspendedActivations);
+						}
+					}
+
+					for(const std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> indexSuspendedActivations: *suspendedActivationsList)
+					{
+						if (_suspendedActivations->find(indexSuspendedActivations) == -1)
+						{
+							_suspendedActivations->add(indexSuspendedActivations);
+						}
+					}
 				}
-				iterSuspendedActivations++;
-			}
- 
-			iterSuspendedActivations = suspendedActivationsList->begin();
-			endSuspendedActivations = suspendedActivationsList->end();
-			while (iterSuspendedActivations != endSuspendedActivations)
-			{
-				if (getSuspendedActivations()->find(*iterSuspendedActivations) == -1)
+				catch(...)
 				{
-					getSuspendedActivations()->add(*iterSuspendedActivations);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterSuspendedActivations++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}
@@ -1075,8 +1046,7 @@ Any ActivityNodeActivationGroupImpl::eInvoke(int operationID, std::shared_ptr<st
 
   	switch(operationID)
 	{
-		
-		// 281905115
+		// fUML::Semantics::Activities::ActivityNodeActivationGroup::activate(uml::ActivityNode[*], uml::ActivityEdge[*]): 281905115
 		case ActivitiesPackage::ACTIVITYNODEACTIVATIONGROUP_OPERATION_ACTIVATE_ACTIVITYNODE_ACTIVITYEDGE:
 		{
 			//Retrieve input parameter 'nodes'
@@ -1090,10 +1060,8 @@ Any ActivityNodeActivationGroupImpl::eInvoke(int operationID, std::shared_ptr<st
 			std::list<Any>::const_iterator incoming_param_edges_arguments_citer = std::next(arguments->begin(), 1);
 			incoming_param_edges = (*incoming_param_edges_arguments_citer)->get<std::shared_ptr<Bag<uml::ActivityEdge>> >();
 			this->activate(incoming_param_nodes,incoming_param_edges);
-			break;
 		}
-		
-		// 1652430233
+		// fUML::Semantics::Activities::ActivityNodeActivationGroup::addEdgeInstance(fUML::Semantics::Activities::ActivityEdgeInstance): 1652430233
 		case ActivitiesPackage::ACTIVITYNODEACTIVATIONGROUP_OPERATION_ADDEDGEINSTANCE_ACTIVITYEDGEINSTANCE:
 		{
 			//Retrieve input parameter 'instance'
@@ -1102,10 +1070,8 @@ Any ActivityNodeActivationGroupImpl::eInvoke(int operationID, std::shared_ptr<st
 			std::list<Any>::const_iterator incoming_param_instance_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_instance = (*incoming_param_instance_arguments_citer)->get<std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance> >();
 			this->addEdgeInstance(incoming_param_instance);
-			break;
 		}
-		
-		// 771980353
+		// fUML::Semantics::Activities::ActivityNodeActivationGroup::addNodeActivation(fUML::Semantics::Activities::ActivityNodeActivation): 771980353
 		case ActivitiesPackage::ACTIVITYNODEACTIVATIONGROUP_OPERATION_ADDNODEACTIVATION_ACTIVITYNODEACTIVATION:
 		{
 			//Retrieve input parameter 'activation'
@@ -1114,10 +1080,8 @@ Any ActivityNodeActivationGroupImpl::eInvoke(int operationID, std::shared_ptr<st
 			std::list<Any>::const_iterator incoming_param_activation_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_activation = (*incoming_param_activation_arguments_citer)->get<std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> >();
 			this->addNodeActivation(incoming_param_activation);
-			break;
 		}
-		
-		// 165124996
+		// fUML::Semantics::Activities::ActivityNodeActivationGroup::checkIncomingEdges(fUML::Semantics::Activities::ActivityEdgeInstance[*], fUML::Semantics::Activities::ActivityNodeActivation[*]) : bool: 165124996
 		case ActivitiesPackage::ACTIVITYNODEACTIVATIONGROUP_OPERATION_CHECKINCOMINGEDGES_ACTIVITYEDGEINSTANCE_ACTIVITYNODEACTIVATION:
 		{
 			//Retrieve input parameter 'incomingEdges'
@@ -1130,11 +1094,10 @@ Any ActivityNodeActivationGroupImpl::eInvoke(int operationID, std::shared_ptr<st
 			std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityNodeActivation>> incoming_param_activations;
 			std::list<Any>::const_iterator incoming_param_activations_arguments_citer = std::next(arguments->begin(), 1);
 			incoming_param_activations = (*incoming_param_activations_arguments_citer)->get<std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityNodeActivation>> >();
-					result = eAny(this->checkIncomingEdges(incoming_param_incomingEdges,incoming_param_activations),0,false);
+			result = eAny(this->checkIncomingEdges(incoming_param_incomingEdges,incoming_param_activations),0,false);
 			break;
 		}
-		
-		// 1674174742
+		// fUML::Semantics::Activities::ActivityNodeActivationGroup::createEdgeInstance(uml::ActivityEdge[*]): 1674174742
 		case ActivitiesPackage::ACTIVITYNODEACTIVATIONGROUP_OPERATION_CREATEEDGEINSTANCE_ACTIVITYEDGE:
 		{
 			//Retrieve input parameter 'edges'
@@ -1143,10 +1106,8 @@ Any ActivityNodeActivationGroupImpl::eInvoke(int operationID, std::shared_ptr<st
 			std::list<Any>::const_iterator incoming_param_edges_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_edges = (*incoming_param_edges_arguments_citer)->get<std::shared_ptr<Bag<uml::ActivityEdge>> >();
 			this->createEdgeInstance(incoming_param_edges);
-			break;
 		}
-		
-		// 1286625228
+		// fUML::Semantics::Activities::ActivityNodeActivationGroup::createNodeActivation(uml::ActivityNode) : fUML::Semantics::Activities::ActivityNodeActivation: 1286625228
 		case ActivitiesPackage::ACTIVITYNODEACTIVATIONGROUP_OPERATION_CREATENODEACTIVATION_ACTIVITYNODE:
 		{
 			//Retrieve input parameter 'node'
@@ -1154,11 +1115,10 @@ Any ActivityNodeActivationGroupImpl::eInvoke(int operationID, std::shared_ptr<st
 			std::shared_ptr<uml::ActivityNode> incoming_param_node;
 			std::list<Any>::const_iterator incoming_param_node_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_node = (*incoming_param_node_arguments_citer)->get<std::shared_ptr<uml::ActivityNode> >();
-				result = eAny(this->createNodeActivation(incoming_param_node));
+			result = eAny(this->createNodeActivation(incoming_param_node), fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYNODEACTIVATION_CLASS,false);
 			break;
 		}
-		
-		// 712701800
+		// fUML::Semantics::Activities::ActivityNodeActivationGroup::createNodeActivations(uml::ActivityNode[*]): 712701800
 		case ActivitiesPackage::ACTIVITYNODEACTIVATIONGROUP_OPERATION_CREATENODEACTIVATIONS_ACTIVITYNODE:
 		{
 			//Retrieve input parameter 'nodes'
@@ -1167,10 +1127,8 @@ Any ActivityNodeActivationGroupImpl::eInvoke(int operationID, std::shared_ptr<st
 			std::list<Any>::const_iterator incoming_param_nodes_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_nodes = (*incoming_param_nodes_arguments_citer)->get<std::shared_ptr<Bag<uml::ActivityNode>> >();
 			this->createNodeActivations(incoming_param_nodes);
-			break;
 		}
-		
-		// 798486402
+		// fUML::Semantics::Activities::ActivityNodeActivationGroup::getNodeActivation(uml::ActivityNode) : fUML::Semantics::Activities::ActivityNodeActivation: 798486402
 		case ActivitiesPackage::ACTIVITYNODEACTIVATIONGROUP_OPERATION_GETNODEACTIVATION_ACTIVITYNODE:
 		{
 			//Retrieve input parameter 'node'
@@ -1178,18 +1136,17 @@ Any ActivityNodeActivationGroupImpl::eInvoke(int operationID, std::shared_ptr<st
 			std::shared_ptr<uml::ActivityNode> incoming_param_node;
 			std::list<Any>::const_iterator incoming_param_node_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_node = (*incoming_param_node_arguments_citer)->get<std::shared_ptr<uml::ActivityNode> >();
-				result = eAny(this->getNodeActivation(incoming_param_node));
+			result = eAny(this->getNodeActivation(incoming_param_node), fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYNODEACTIVATION_CLASS,false);
 			break;
 		}
-		
-		// 1246056845
+		// fUML::Semantics::Activities::ActivityNodeActivationGroup::getOutputParameterNodeActivations() : fUML::Semantics::Activities::ActivityParameterNodeActivation[*]: 1246056845
 		case ActivitiesPackage::ACTIVITYNODEACTIVATIONGROUP_OPERATION_GETOUTPUTPARAMETERNODEACTIVATIONS:
 		{
-				result = eAny(this->getOutputParameterNodeActivations());
+			std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityParameterNodeActivation> > resultList = this->getOutputParameterNodeActivations();
+			return eAny(resultList,fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYPARAMETERNODEACTIVATION_CLASS,true);
 			break;
 		}
-		
-		// 1884986879
+		// fUML::Semantics::Activities::ActivityNodeActivationGroup::hasSourceFor(fUML::Semantics::Activities::ActivityEdgeInstance) : bool: 1884986879
 		case ActivitiesPackage::ACTIVITYNODEACTIVATIONGROUP_OPERATION_HASSOURCEFOR_ACTIVITYEDGEINSTANCE:
 		{
 			//Retrieve input parameter 'edgeInstance'
@@ -1197,18 +1154,16 @@ Any ActivityNodeActivationGroupImpl::eInvoke(int operationID, std::shared_ptr<st
 			std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance> incoming_param_edgeInstance;
 			std::list<Any>::const_iterator incoming_param_edgeInstance_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_edgeInstance = (*incoming_param_edgeInstance_arguments_citer)->get<std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance> >();
-					result = eAny(this->hasSourceFor(incoming_param_edgeInstance),0,false);
+			result = eAny(this->hasSourceFor(incoming_param_edgeInstance),0,false);
 			break;
 		}
-		
-		// 175132142
+		// fUML::Semantics::Activities::ActivityNodeActivationGroup::isSuspended() : bool: 175132142
 		case ActivitiesPackage::ACTIVITYNODEACTIVATIONGROUP_OPERATION_ISSUSPENDED:
 		{
-					result = eAny(this->isSuspended(),0,false);
+			result = eAny(this->isSuspended(),0,false);
 			break;
 		}
-		
-		// 1949139574
+		// fUML::Semantics::Activities::ActivityNodeActivationGroup::resume(fUML::Semantics::Activities::ActivityNodeActivation): 1949139574
 		case ActivitiesPackage::ACTIVITYNODEACTIVATIONGROUP_OPERATION_RESUME_ACTIVITYNODEACTIVATION:
 		{
 			//Retrieve input parameter 'activation'
@@ -1217,17 +1172,14 @@ Any ActivityNodeActivationGroupImpl::eInvoke(int operationID, std::shared_ptr<st
 			std::list<Any>::const_iterator incoming_param_activation_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_activation = (*incoming_param_activation_arguments_citer)->get<std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> >();
 			this->resume(incoming_param_activation);
-			break;
 		}
-		
-		// 894742694
+		// fUML::Semantics::Activities::ActivityNodeActivationGroup::retrieveActivityExecution() : fUML::Semantics::Activities::ActivityExecution: 894742694
 		case ActivitiesPackage::ACTIVITYNODEACTIVATIONGROUP_OPERATION_RETRIEVEACTIVITYEXECUTION:
 		{
-				result = eAny(this->retrieveActivityExecution());
+			result = eAny(this->retrieveActivityExecution(), fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYEXECUTION_CLASS,false);
 			break;
 		}
-		
-		// 1071093417
+		// fUML::Semantics::Activities::ActivityNodeActivationGroup::run(fUML::Semantics::Activities::ActivityNodeActivation[*]): 1071093417
 		case ActivitiesPackage::ACTIVITYNODEACTIVATIONGROUP_OPERATION_RUN_ACTIVITYNODEACTIVATION:
 		{
 			//Retrieve input parameter 'activations'
@@ -1236,10 +1188,8 @@ Any ActivityNodeActivationGroupImpl::eInvoke(int operationID, std::shared_ptr<st
 			std::list<Any>::const_iterator incoming_param_activations_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_activations = (*incoming_param_activations_arguments_citer)->get<std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityNodeActivation>> >();
 			this->run(incoming_param_activations);
-			break;
 		}
-		
-		// 1752071273
+		// fUML::Semantics::Activities::ActivityNodeActivationGroup::runNodes(uml::ActivityNode[*]): 1752071273
 		case ActivitiesPackage::ACTIVITYNODEACTIVATIONGROUP_OPERATION_RUNNODES_ACTIVITYNODE:
 		{
 			//Retrieve input parameter 'nodes'
@@ -1248,10 +1198,8 @@ Any ActivityNodeActivationGroupImpl::eInvoke(int operationID, std::shared_ptr<st
 			std::list<Any>::const_iterator incoming_param_nodes_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_nodes = (*incoming_param_nodes_arguments_citer)->get<std::shared_ptr<Bag<uml::ActivityNode>> >();
 			this->runNodes(incoming_param_nodes);
-			break;
 		}
-		
-		// 259131720
+		// fUML::Semantics::Activities::ActivityNodeActivationGroup::suspend(fUML::Semantics::Activities::ActivityNodeActivation): 259131720
 		case ActivitiesPackage::ACTIVITYNODEACTIVATIONGROUP_OPERATION_SUSPEND_ACTIVITYNODEACTIVATION:
 		{
 			//Retrieve input parameter 'activation'
@@ -1260,14 +1208,11 @@ Any ActivityNodeActivationGroupImpl::eInvoke(int operationID, std::shared_ptr<st
 			std::list<Any>::const_iterator incoming_param_activation_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_activation = (*incoming_param_activation_arguments_citer)->get<std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> >();
 			this->suspend(incoming_param_activation);
-			break;
 		}
-		
-		// 2028038520
+		// fUML::Semantics::Activities::ActivityNodeActivationGroup::terminateAll(): 2028038520
 		case ActivitiesPackage::ACTIVITYNODEACTIVATIONGROUP_OPERATION_TERMINATEALL:
 		{
 			this->terminateAll();
-			break;
 		}
 
 		default:

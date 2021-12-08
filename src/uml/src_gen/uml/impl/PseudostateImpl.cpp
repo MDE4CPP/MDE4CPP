@@ -554,14 +554,14 @@ bool PseudostateImpl::eSet(int featureID, Any newValue)
 	{
 		case uml::umlPackage::PSEUDOSTATE_ATTRIBUTE_KIND:
 		{
-			// BOOST CAST
+			// CAST Any to uml::PseudostateKind
 			uml::PseudostateKind _kind = newValue->get<uml::PseudostateKind>();
 			setKind(_kind); //18913
 			return true;
 		}
 		case uml::umlPackage::PSEUDOSTATE_ATTRIBUTE_STATE:
 		{
-			// BOOST CAST
+			// CAST Any to uml::State
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::State> _state = std::dynamic_pointer_cast<uml::State>(_temp);
 			setState(_state); //18912
@@ -569,7 +569,7 @@ bool PseudostateImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::PSEUDOSTATE_ATTRIBUTE_STATEMACHINE:
 		{
-			// BOOST CAST
+			// CAST Any to uml::StateMachine
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::StateMachine> _stateMachine = std::dynamic_pointer_cast<uml::StateMachine>(_temp);
 			setStateMachine(_stateMachine); //18914

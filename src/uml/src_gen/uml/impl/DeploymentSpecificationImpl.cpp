@@ -568,7 +568,7 @@ bool DeploymentSpecificationImpl::eSet(int featureID, Any newValue)
 	{
 		case uml::umlPackage::DEPLOYMENTSPECIFICATION_ATTRIBUTE_DEPLOYMENT:
 		{
-			// BOOST CAST
+			// CAST Any to uml::Deployment
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Deployment> _deployment = std::dynamic_pointer_cast<uml::Deployment>(_temp);
 			setDeployment(_deployment); //7045
@@ -576,14 +576,14 @@ bool DeploymentSpecificationImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::DEPLOYMENTSPECIFICATION_ATTRIBUTE_DEPLOYMENTLOCATION:
 		{
-			// BOOST CAST
+			// CAST Any to std::string
 			std::string _deploymentLocation = newValue->get<std::string>();
 			setDeploymentLocation(_deploymentLocation); //7043
 			return true;
 		}
 		case uml::umlPackage::DEPLOYMENTSPECIFICATION_ATTRIBUTE_EXECUTIONLOCATION:
 		{
-			// BOOST CAST
+			// CAST Any to std::string
 			std::string _executionLocation = newValue->get<std::string>();
 			setExecutionLocation(_executionLocation); //7044
 			return true;

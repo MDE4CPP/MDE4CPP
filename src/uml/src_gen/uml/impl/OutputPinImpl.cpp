@@ -694,7 +694,7 @@ bool OutputPinImpl::eSet(int featureID, Any newValue)
 	{
 		case uml::umlPackage::OUTPUTPIN_ATTRIBUTE_CALLACTION:
 		{
-			// BOOST CAST
+			// CAST Any to uml::CallAction
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::CallAction> _callAction = std::dynamic_pointer_cast<uml::CallAction>(_temp);
 			setCallAction(_callAction); //16933
@@ -702,7 +702,7 @@ bool OutputPinImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::OUTPUTPIN_ATTRIBUTE_CLEARSTRUCTURALFEATUREACTION:
 		{
-			// BOOST CAST
+			// CAST Any to uml::ClearStructuralFeatureAction
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::ClearStructuralFeatureAction> _clearStructuralFeatureAction = std::dynamic_pointer_cast<uml::ClearStructuralFeatureAction>(_temp);
 			setClearStructuralFeatureAction(_clearStructuralFeatureAction); //16938
@@ -710,7 +710,7 @@ bool OutputPinImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::OUTPUTPIN_ATTRIBUTE_CREATEOBJECTACTION:
 		{
-			// BOOST CAST
+			// CAST Any to uml::CreateObjectAction
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::CreateObjectAction> _createObjectAction = std::dynamic_pointer_cast<uml::CreateObjectAction>(_temp);
 			setCreateObjectAction(_createObjectAction); //16940
@@ -718,7 +718,7 @@ bool OutputPinImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::OUTPUTPIN_ATTRIBUTE_READSELFACTION:
 		{
-			// BOOST CAST
+			// CAST Any to uml::ReadSelfAction
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::ReadSelfAction> _readSelfAction = std::dynamic_pointer_cast<uml::ReadSelfAction>(_temp);
 			setReadSelfAction(_readSelfAction); //16939
@@ -726,7 +726,7 @@ bool OutputPinImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::OUTPUTPIN_ATTRIBUTE_READSTRUCTURALFEATUREACTION:
 		{
-			// BOOST CAST
+			// CAST Any to uml::ReadStructuralFeatureAction
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::ReadStructuralFeatureAction> _readStructuralFeatureAction = std::dynamic_pointer_cast<uml::ReadStructuralFeatureAction>(_temp);
 			setReadStructuralFeatureAction(_readStructuralFeatureAction); //16937
@@ -734,7 +734,7 @@ bool OutputPinImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::OUTPUTPIN_ATTRIBUTE_VALUESPECIFICATIONACTION:
 		{
-			// BOOST CAST
+			// CAST Any to uml::ValueSpecificationAction
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::ValueSpecificationAction> _valueSpecificationAction = std::dynamic_pointer_cast<uml::ValueSpecificationAction>(_temp);
 			setValueSpecificationAction(_valueSpecificationAction); //16935
@@ -742,7 +742,7 @@ bool OutputPinImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::OUTPUTPIN_ATTRIBUTE_WRITESTRUCTURALFEATUREACTION:
 		{
-			// BOOST CAST
+			// CAST Any to uml::WriteStructuralFeatureAction
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::WriteStructuralFeatureAction> _writeStructuralFeatureAction = std::dynamic_pointer_cast<uml::WriteStructuralFeatureAction>(_temp);
 			setWriteStructuralFeatureAction(_writeStructuralFeatureAction); //16936

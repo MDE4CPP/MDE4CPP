@@ -489,7 +489,7 @@ bool SendSignalActionImpl::eSet(int featureID, Any newValue)
 	{
 		case uml::umlPackage::SENDSIGNALACTION_ATTRIBUTE_SIGNAL:
 		{
-			// BOOST CAST
+			// CAST Any to uml::Signal
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Signal> _signal = std::dynamic_pointer_cast<uml::Signal>(_temp);
 			setSignal(_signal); //21329
@@ -497,7 +497,7 @@ bool SendSignalActionImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::SENDSIGNALACTION_ATTRIBUTE_TARGET:
 		{
-			// BOOST CAST
+			// CAST Any to uml::InputPin
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::InputPin> _target = std::dynamic_pointer_cast<uml::InputPin>(_temp);
 			setTarget(_target); //21330

@@ -450,9 +450,9 @@ bool TemplateSignatureImpl::eSet(int featureID, Any newValue)
 	{
 		case uml::umlPackage::TEMPLATESIGNATURE_ATTRIBUTE_OWNEDPARAMETER:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::TemplateParameter>
 			if((newValue->isContainer()) && (uml::umlPackage::TEMPLATEPARAMETER_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::TemplateParameter>> ownedParameterList= newValue->get<std::shared_ptr<Bag<uml::TemplateParameter>>>();
@@ -487,9 +487,9 @@ bool TemplateSignatureImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::TEMPLATESIGNATURE_ATTRIBUTE_PARAMETER:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::TemplateParameter>
 			if((newValue->isContainer()) && (uml::umlPackage::TEMPLATEPARAMETER_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::TemplateParameter>> parameterList= newValue->get<std::shared_ptr<Bag<uml::TemplateParameter>>>();
@@ -524,7 +524,7 @@ bool TemplateSignatureImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::TEMPLATESIGNATURE_ATTRIBUTE_TEMPLATE:
 		{
-			// BOOST CAST
+			// CAST Any to uml::TemplateableElement
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::TemplateableElement> _template = std::dynamic_pointer_cast<uml::TemplateableElement>(_temp);
 			setTemplate(_template); //2334

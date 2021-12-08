@@ -319,7 +319,7 @@ bool DataValueImpl::eSet(int featureID, Any newValue)
 	{
 		case fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::DATAVALUE_ATTRIBUTE_TYPE:
 		{
-			// BOOST CAST
+			// CAST Any to uml::DataType
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::DataType> _type = std::dynamic_pointer_cast<uml::DataType>(_temp);
 			setType(_type); //361
@@ -339,25 +339,23 @@ Any DataValueImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argu
 
   	switch(operationID)
 	{
-		
-		// 1504394808
+		// fUML::Semantics::SimpleClassifiers::DataValue::_copy() : fUML::Semantics::Values::Value: 1504394808
 		case SimpleClassifiersPackage::DATAVALUE_OPERATION__COPY:
 		{
-				result = eAny(this->_copy());
+			result = eAny(this->_copy(), fUML::Semantics::Values::ValuesPackage::VALUE_CLASS,false);
 			break;
 		}
-		
-		// 133859574
+		// fUML::Semantics::SimpleClassifiers::DataValue::getTypes() : uml::Classifier[*]: 133859574
 		case SimpleClassifiersPackage::DATAVALUE_OPERATION_GETTYPES:
 		{
-				result = eAny(this->getTypes());
+			std::shared_ptr<Bag<uml::Classifier> > resultList = this->getTypes();
+			return eAny(resultList,uml::umlPackage::CLASSIFIER_CLASS,true);
 			break;
 		}
-		
-		// 2084136138
+		// fUML::Semantics::SimpleClassifiers::DataValue::new_() : fUML::Semantics::Values::Value: 2084136138
 		case SimpleClassifiersPackage::DATAVALUE_OPERATION_NEW_:
 		{
-				result = eAny(this->new_());
+			result = eAny(this->new_(), fUML::Semantics::Values::ValuesPackage::VALUE_CLASS,false);
 			break;
 		}
 

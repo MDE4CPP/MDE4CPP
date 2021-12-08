@@ -342,21 +342,21 @@ bool ImageImpl::eSet(int featureID, Any newValue)
 	{
 		case uml::umlPackage::IMAGE_ATTRIBUTE_CONTENT:
 		{
-			// BOOST CAST
+			// CAST Any to std::string
 			std::string _content = newValue->get<std::string>();
 			setContent(_content); //1113
 			return true;
 		}
 		case uml::umlPackage::IMAGE_ATTRIBUTE_FORMAT:
 		{
-			// BOOST CAST
+			// CAST Any to std::string
 			std::string _format = newValue->get<std::string>();
 			setFormat(_format); //1114
 			return true;
 		}
 		case uml::umlPackage::IMAGE_ATTRIBUTE_LOCATION:
 		{
-			// BOOST CAST
+			// CAST Any to std::string
 			std::string _location = newValue->get<std::string>();
 			setLocation(_location); //1115
 			return true;

@@ -373,7 +373,7 @@ bool TimeConstraintImpl::eSet(int featureID, Any newValue)
 	{
 		case uml::umlPackage::TIMECONSTRAINT_ATTRIBUTE_FIRSTEVENT:
 		{
-			// BOOST CAST
+			// CAST Any to bool
 			bool _firstEvent = newValue->get<bool>();
 			setFirstEvent(_firstEvent); //23615
 			return true;

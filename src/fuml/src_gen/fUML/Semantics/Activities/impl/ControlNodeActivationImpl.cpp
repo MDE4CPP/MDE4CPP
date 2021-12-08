@@ -251,8 +251,7 @@ Any ControlNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::lis
 
   	switch(operationID)
 	{
-		
-		// 1114472253
+		// fUML::Semantics::Activities::ControlNodeActivation::fire(fUML::Semantics::Activities::Token[*]): 1114472253
 		case ActivitiesPackage::CONTROLNODEACTIVATION_OPERATION_FIRE_TOKEN:
 		{
 			//Retrieve input parameter 'incomingTokens'
@@ -261,7 +260,6 @@ Any ControlNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::lis
 			std::list<Any>::const_iterator incoming_param_incomingTokens_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_incomingTokens = (*incoming_param_incomingTokens_arguments_citer)->get<std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> >();
 			this->fire(incoming_param_incomingTokens);
-			break;
 		}
 
 		default:

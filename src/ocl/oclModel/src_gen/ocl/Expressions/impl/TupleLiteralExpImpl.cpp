@@ -199,14 +199,10 @@ TupleLiteralExpImpl& TupleLiteralExpImpl::operator=(const TupleLiteralExpImpl & 
 		m_part.reset(new Bag<ocl::Expressions::TupleLiteralPart>());
 		
 		
-
-		Bag<ocl::Expressions::TupleLiteralPart>::iterator partIter = partList->begin();
-		Bag<ocl::Expressions::TupleLiteralPart>::iterator partEnd = partList->end();
-		while (partIter != partEnd) 
+		for(const std::shared_ptr<ocl::Expressions::TupleLiteralPart> partindexElem: *partList) 
 		{
-			std::shared_ptr<ocl::Expressions::TupleLiteralPart> temp = std::dynamic_pointer_cast<ocl::Expressions::TupleLiteralPart>((*partIter)->copy());
-			getPart()->push_back(temp);
-			partIter++;
+			std::shared_ptr<ocl::Expressions::TupleLiteralPart> temp = std::dynamic_pointer_cast<ocl::Expressions::TupleLiteralPart>((partindexElem)->copy());
+			m_part->push_back(temp);
 		}
 	}
 	else
@@ -423,15 +419,7 @@ Any TupleLiteralExpImpl::eGet(int featureID, bool resolve, bool coreType) const
 	{
 		case ocl::Expressions::ExpressionsPackage::TUPLELITERALEXP_ATTRIBUTE_PART:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<ocl::Expressions::TupleLiteralPart>::iterator iter = getPart()->begin();
-			Bag<ocl::Expressions::TupleLiteralPart>::iterator end = getPart()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //8522			
+			return eAnyBag(getPart(),2008604788); //8522
 		}
 	}
 	return LiteralExpImpl::eGet(featureID, resolve, coreType);
@@ -453,37 +441,38 @@ bool TupleLiteralExpImpl::eSet(int featureID, Any newValue)
 	{
 		case ocl::Expressions::ExpressionsPackage::TUPLELITERALEXP_ATTRIBUTE_PART:
 		{
-			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<ocl::Expressions::TupleLiteralPart>> partList(new Bag<ocl::Expressions::TupleLiteralPart>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
-			{
-				partList->add(std::dynamic_pointer_cast<ocl::Expressions::TupleLiteralPart>(*iter));
-				iter++;
-			}
-			
-			Bag<ocl::Expressions::TupleLiteralPart>::iterator iterPart = getPart()->begin();
-			Bag<ocl::Expressions::TupleLiteralPart>::iterator endPart = getPart()->end();
-			while (iterPart != endPart)
-			{
-				if (partList->find(*iterPart) == -1)
+			// CAST Any to Bag<ocl::Expressions::TupleLiteralPart>
+			if((newValue->isContainer()) && (ocl::Expressions::ExpressionsPackage::TUPLELITERALPART_CLASS ==newValue->getTypeId()))
+			{ 
+				try
 				{
-					getPart()->erase(*iterPart);
+					std::shared_ptr<Bag<ocl::Expressions::TupleLiteralPart>> partList= newValue->get<std::shared_ptr<Bag<ocl::Expressions::TupleLiteralPart>>>();
+					std::shared_ptr<Bag<ocl::Expressions::TupleLiteralPart>> _part=getPart();
+					for(const std::shared_ptr<ocl::Expressions::TupleLiteralPart> indexPart: *_part)
+					{
+						if (partList->find(indexPart) == -1)
+						{
+							_part->erase(indexPart);
+						}
+					}
+
+					for(const std::shared_ptr<ocl::Expressions::TupleLiteralPart> indexPart: *partList)
+					{
+						if (_part->find(indexPart) == -1)
+						{
+							_part->add(indexPart);
+						}
+					}
 				}
-				iterPart++;
-			}
- 
-			iterPart = partList->begin();
-			endPart = partList->end();
-			while (iterPart != endPart)
-			{
-				if (getPart()->find(*iterPart) == -1)
+				catch(...)
 				{
-					getPart()->add(*iterPart);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterPart++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}

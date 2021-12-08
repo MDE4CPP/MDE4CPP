@@ -397,7 +397,7 @@ bool PinActivationImpl::eSet(int featureID, Any newValue)
 	{
 		case fUML::Semantics::Actions::ActionsPackage::PINACTIVATION_ATTRIBUTE_ACTIONACTIVATION:
 		{
-			// BOOST CAST
+			// CAST Any to fUML::Semantics::Actions::ActionActivation
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<fUML::Semantics::Actions::ActionActivation> _actionActivation = std::dynamic_pointer_cast<fUML::Semantics::Actions::ActionActivation>(_temp);
 			setActionActivation(_actionActivation); //887
@@ -405,7 +405,7 @@ bool PinActivationImpl::eSet(int featureID, Any newValue)
 		}
 		case fUML::Semantics::Actions::ActionsPackage::PINACTIVATION_ATTRIBUTE_PIN:
 		{
-			// BOOST CAST
+			// CAST Any to uml::Pin
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Pin> _pin = std::dynamic_pointer_cast<uml::Pin>(_temp);
 			setPin(_pin); //888
@@ -425,8 +425,7 @@ Any PinActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> 
 
   	switch(operationID)
 	{
-		
-		// 285559969
+		// fUML::Semantics::Actions::PinActivation::fire(fUML::Semantics::Activities::Token[*]): 285559969
 		case ActionsPackage::PINACTIVATION_OPERATION_FIRE_TOKEN:
 		{
 			//Retrieve input parameter 'incomingTokens'
@@ -435,13 +434,12 @@ Any PinActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> 
 			std::list<Any>::const_iterator incoming_param_incomingTokens_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_incomingTokens = (*incoming_param_incomingTokens_arguments_citer)->get<std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> >();
 			this->fire(incoming_param_incomingTokens);
-			break;
 		}
-		
-		// 2035745770
+		// fUML::Semantics::Actions::PinActivation::takeOfferedTokens() : fUML::Semantics::Activities::Token[*]: 2035745770
 		case ActionsPackage::PINACTIVATION_OPERATION_TAKEOFFEREDTOKENS:
 		{
-				result = eAny(this->takeOfferedTokens());
+			std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > resultList = this->takeOfferedTokens();
+			return eAny(resultList,fUML::Semantics::Activities::ActivitiesPackage::TOKEN_CLASS,true);
 			break;
 		}
 

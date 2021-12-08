@@ -365,7 +365,7 @@ bool EnumerationLiteralImpl::eSet(int featureID, Any newValue)
 	{
 		case uml::umlPackage::ENUMERATIONLITERAL_ATTRIBUTE_ENUMERATION:
 		{
-			// BOOST CAST
+			// CAST Any to uml::Enumeration
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Enumeration> _enumeration = std::dynamic_pointer_cast<uml::Enumeration>(_temp);
 			setEnumeration(_enumeration); //8517
@@ -388,14 +388,14 @@ Any EnumerationLiteralImpl::eInvoke(int operationID, std::shared_ptr<std::list<A
 		// uml::EnumerationLiteral::getClassifier() : uml::Enumeration: 118208468
 		case umlPackage::ENUMERATIONLITERAL_OPERATION_GETCLASSIFIER:
 		{
-			result = eAny(this->getClassifier(), umlPackage::ENUMERATION_CLASS,false);
+			result = eAny(this->getClassifier(), uml::umlPackage::ENUMERATION_CLASS,false);
 			break;
 		}
 		// uml::EnumerationLiteral::getClassifiers() : uml::Classifier[*]: 1410424622
 		case umlPackage::ENUMERATIONLITERAL_OPERATION_GETCLASSIFIERS:
 		{
 			std::shared_ptr<Bag<uml::Classifier> > resultList = this->getClassifiers();
-			return eAny(resultList,umlPackage::CLASSIFIER_CLASS,true);
+			return eAny(resultList,uml::umlPackage::CLASSIFIER_CLASS,true);
 			break;
 		}
 

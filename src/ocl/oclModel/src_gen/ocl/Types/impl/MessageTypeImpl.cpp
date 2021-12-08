@@ -329,7 +329,7 @@ bool MessageTypeImpl::eSet(int featureID, Any newValue)
 	{
 		case ocl::Types::TypesPackage::MESSAGETYPE_ATTRIBUTE_REFERREDOPERATION:
 		{
-			// BOOST CAST
+			// CAST Any to ecore::EOperation
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<ecore::EOperation> _referredOperation = std::dynamic_pointer_cast<ecore::EOperation>(_temp);
 			setReferredOperation(_referredOperation); //508
@@ -337,7 +337,7 @@ bool MessageTypeImpl::eSet(int featureID, Any newValue)
 		}
 		case ocl::Types::TypesPackage::MESSAGETYPE_ATTRIBUTE_REFERREDSIGNAL:
 		{
-			// BOOST CAST
+			// CAST Any to uml::Signal
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Signal> _referredSignal = std::dynamic_pointer_cast<uml::Signal>(_temp);
 			setReferredSignal(_referredSignal); //509

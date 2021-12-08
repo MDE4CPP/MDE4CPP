@@ -465,14 +465,14 @@ bool RemoveVariableValueActionImpl::eSet(int featureID, Any newValue)
 	{
 		case uml::umlPackage::REMOVEVARIABLEVALUEACTION_ATTRIBUTE_ISREMOVEDUPLICATES:
 		{
-			// BOOST CAST
+			// CAST Any to bool
 			bool _isRemoveDuplicates = newValue->get<bool>();
 			setIsRemoveDuplicates(_isRemoveDuplicates); //21029
 			return true;
 		}
 		case uml::umlPackage::REMOVEVARIABLEVALUEACTION_ATTRIBUTE_REMOVEAT:
 		{
-			// BOOST CAST
+			// CAST Any to uml::InputPin
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::InputPin> _removeAt = std::dynamic_pointer_cast<uml::InputPin>(_temp);
 			setRemoveAt(_removeAt); //21030

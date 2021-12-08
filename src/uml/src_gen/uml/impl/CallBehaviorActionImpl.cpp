@@ -447,7 +447,7 @@ bool CallBehaviorActionImpl::eSet(int featureID, Any newValue)
 	{
 		case uml::umlPackage::CALLBEHAVIORACTION_ATTRIBUTE_BEHAVIOR:
 		{
-			// BOOST CAST
+			// CAST Any to uml::Behavior
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Behavior> _behavior = std::dynamic_pointer_cast<uml::Behavior>(_temp);
 			setBehavior(_behavior); //2931

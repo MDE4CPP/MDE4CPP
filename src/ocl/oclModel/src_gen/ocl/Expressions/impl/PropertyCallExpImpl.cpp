@@ -434,7 +434,7 @@ bool PropertyCallExpImpl::eSet(int featureID, Any newValue)
 	{
 		case ocl::Expressions::ExpressionsPackage::PROPERTYCALLEXP_ATTRIBUTE_REFERREDPROPERTY:
 		{
-			// BOOST CAST
+			// CAST Any to ecore::EAttribute
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<ecore::EAttribute> _referredProperty = std::dynamic_pointer_cast<ecore::EAttribute>(_temp);
 			setReferredProperty(_referredProperty); //7226

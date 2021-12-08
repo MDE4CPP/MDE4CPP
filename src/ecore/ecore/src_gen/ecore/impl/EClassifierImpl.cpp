@@ -439,16 +439,16 @@ bool EClassifierImpl::eSet(int featureID, Any newValue)
 	{
 		case ecore::ecorePackage::ECLASSIFIER_ATTRIBUTE_DEFAULTVALUE:
 		{
-			// BOOST CAST
+			// CAST Any to Any
 			Any _defaultValue = newValue->get<Any>();
 			setDefaultValue(_defaultValue); //137
 			return true;
 		}
 		case ecore::ecorePackage::ECLASSIFIER_ATTRIBUTE_ETYPEPARAMETERS:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<ecore::ETypeParameter>
 			if((newValue->isContainer()) && (ecore::ecorePackage::ETYPEPARAMETER_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<ecore::ETypeParameter>> eTypeParametersList= newValue->get<std::shared_ptr<Bag<ecore::ETypeParameter>>>();
@@ -483,14 +483,14 @@ bool EClassifierImpl::eSet(int featureID, Any newValue)
 		}
 		case ecore::ecorePackage::ECLASSIFIER_ATTRIBUTE_INSTANCECLASSNAME:
 		{
-			// BOOST CAST
+			// CAST Any to std::string
 			std::string _instanceClassName = newValue->get<std::string>();
 			setInstanceClassName(_instanceClassName); //135
 			return true;
 		}
 		case ecore::ecorePackage::ECLASSIFIER_ATTRIBUTE_INSTANCETYPENAME:
 		{
-			// BOOST CAST
+			// CAST Any to std::string
 			std::string _instanceTypeName = newValue->get<std::string>();
 			setInstanceTypeName(_instanceTypeName); //138
 			return true;

@@ -961,9 +961,9 @@ bool InteractionImpl::eSet(int featureID, Any newValue)
 	{
 		case uml::umlPackage::INTERACTION_ATTRIBUTE_ACTION:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::Action>
 			if((newValue->isContainer()) && (uml::umlPackage::ACTION_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::Action>> actionList= newValue->get<std::shared_ptr<Bag<uml::Action>>>();
@@ -998,9 +998,9 @@ bool InteractionImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::INTERACTION_ATTRIBUTE_FORMALGATE:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::Gate>
 			if((newValue->isContainer()) && (uml::umlPackage::GATE_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::Gate>> formalGateList= newValue->get<std::shared_ptr<Bag<uml::Gate>>>();
@@ -1035,9 +1035,9 @@ bool InteractionImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::INTERACTION_ATTRIBUTE_FRAGMENT:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::InteractionFragment>
 			if((newValue->isContainer()) && (uml::umlPackage::INTERACTIONFRAGMENT_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::InteractionFragment>> fragmentList= newValue->get<std::shared_ptr<Bag<uml::InteractionFragment>>>();
@@ -1072,9 +1072,9 @@ bool InteractionImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::INTERACTION_ATTRIBUTE_LIFELINE:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::Lifeline>
 			if((newValue->isContainer()) && (uml::umlPackage::LIFELINE_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::Lifeline>> lifelineList= newValue->get<std::shared_ptr<Bag<uml::Lifeline>>>();
@@ -1109,9 +1109,9 @@ bool InteractionImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::INTERACTION_ATTRIBUTE_MESSAGE:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::Message>
 			if((newValue->isContainer()) && (uml::umlPackage::MESSAGE_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::Message>> messageList= newValue->get<std::shared_ptr<Bag<uml::Message>>>();

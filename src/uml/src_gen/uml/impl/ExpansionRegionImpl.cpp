@@ -637,9 +637,9 @@ bool ExpansionRegionImpl::eSet(int featureID, Any newValue)
 	{
 		case uml::umlPackage::EXPANSIONREGION_ATTRIBUTE_INPUTELEMENT:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::ExpansionNode>
 			if((newValue->isContainer()) && (uml::umlPackage::EXPANSIONNODE_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::ExpansionNode>> inputElementList= newValue->get<std::shared_ptr<Bag<uml::ExpansionNode>>>();
@@ -674,16 +674,16 @@ bool ExpansionRegionImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::EXPANSIONREGION_ATTRIBUTE_MODE:
 		{
-			// BOOST CAST
+			// CAST Any to uml::ExpansionKind
 			uml::ExpansionKind _mode = newValue->get<uml::ExpansionKind>();
 			setMode(_mode); //9444
 			return true;
 		}
 		case uml::umlPackage::EXPANSIONREGION_ATTRIBUTE_OUTPUTELEMENT:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::ExpansionNode>
 			if((newValue->isContainer()) && (uml::umlPackage::EXPANSIONNODE_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::ExpansionNode>> outputElementList= newValue->get<std::shared_ptr<Bag<uml::ExpansionNode>>>();

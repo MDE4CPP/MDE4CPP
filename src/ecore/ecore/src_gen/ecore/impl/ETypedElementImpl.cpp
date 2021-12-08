@@ -490,7 +490,7 @@ bool ETypedElementImpl::eSet(int featureID, Any newValue)
 	{
 		case ecore::ecorePackage::ETYPEDELEMENT_ATTRIBUTE_EGENERICTYPE:
 		{
-			// BOOST CAST
+			// CAST Any to ecore::EGenericType
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<ecore::EGenericType> _eGenericType = std::dynamic_pointer_cast<ecore::EGenericType>(_temp);
 			setEGenericType(_eGenericType); //5412
@@ -498,7 +498,7 @@ bool ETypedElementImpl::eSet(int featureID, Any newValue)
 		}
 		case ecore::ecorePackage::ETYPEDELEMENT_ATTRIBUTE_ETYPE:
 		{
-			// BOOST CAST
+			// CAST Any to ecore::EClassifier
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<ecore::EClassifier> _eType = std::dynamic_pointer_cast<ecore::EClassifier>(_temp);
 			setEType(_eType); //5411
@@ -506,35 +506,35 @@ bool ETypedElementImpl::eSet(int featureID, Any newValue)
 		}
 		case ecore::ecorePackage::ETYPEDELEMENT_ATTRIBUTE_LOWERBOUND:
 		{
-			// BOOST CAST
+			// CAST Any to int
 			int _lowerBound = newValue->get<int>();
 			setLowerBound(_lowerBound); //547
 			return true;
 		}
 		case ecore::ecorePackage::ETYPEDELEMENT_ATTRIBUTE_ORDERED:
 		{
-			// BOOST CAST
+			// CAST Any to bool
 			bool _ordered = newValue->get<bool>();
 			setOrdered(_ordered); //545
 			return true;
 		}
 		case ecore::ecorePackage::ETYPEDELEMENT_ATTRIBUTE_REQUIRED:
 		{
-			// BOOST CAST
+			// CAST Any to bool
 			bool _required = newValue->get<bool>();
 			setRequired(_required); //5410
 			return true;
 		}
 		case ecore::ecorePackage::ETYPEDELEMENT_ATTRIBUTE_UNIQUE:
 		{
-			// BOOST CAST
+			// CAST Any to bool
 			bool _unique = newValue->get<bool>();
 			setUnique(_unique); //546
 			return true;
 		}
 		case ecore::ecorePackage::ETYPEDELEMENT_ATTRIBUTE_UPPERBOUND:
 		{
-			// BOOST CAST
+			// CAST Any to int
 			int _upperBound = newValue->get<int>();
 			setUpperBound(_upperBound); //548
 			return true;

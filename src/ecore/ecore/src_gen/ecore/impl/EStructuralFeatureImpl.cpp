@@ -510,49 +510,49 @@ bool EStructuralFeatureImpl::eSet(int featureID, Any newValue)
 	{
 		case ecore::ecorePackage::ESTRUCTURALFEATURE_ATTRIBUTE_CHANGEABLE:
 		{
-			// BOOST CAST
+			// CAST Any to bool
 			bool _changeable = newValue->get<bool>();
 			setChangeable(_changeable); //5113
 			return true;
 		}
 		case ecore::ecorePackage::ESTRUCTURALFEATURE_ATTRIBUTE_DEFAULTVALUE:
 		{
-			// BOOST CAST
+			// CAST Any to Any
 			Any _defaultValue = newValue->get<Any>();
 			setDefaultValue(_defaultValue); //5117
 			return true;
 		}
 		case ecore::ecorePackage::ESTRUCTURALFEATURE_ATTRIBUTE_DEFAULTVALUELITERAL:
 		{
-			// BOOST CAST
+			// CAST Any to std::string
 			std::string _defaultValueLiteral = newValue->get<std::string>();
 			setDefaultValueLiteral(_defaultValueLiteral); //5116
 			return true;
 		}
 		case ecore::ecorePackage::ESTRUCTURALFEATURE_ATTRIBUTE_DERIVED:
 		{
-			// BOOST CAST
+			// CAST Any to bool
 			bool _derived = newValue->get<bool>();
 			setDerived(_derived); //5119
 			return true;
 		}
 		case ecore::ecorePackage::ESTRUCTURALFEATURE_ATTRIBUTE_TRANSIENT:
 		{
-			// BOOST CAST
+			// CAST Any to bool
 			bool _transient = newValue->get<bool>();
 			setTransient(_transient); //5115
 			return true;
 		}
 		case ecore::ecorePackage::ESTRUCTURALFEATURE_ATTRIBUTE_UNSETTABLE:
 		{
-			// BOOST CAST
+			// CAST Any to bool
 			bool _unsettable = newValue->get<bool>();
 			setUnsettable(_unsettable); //5118
 			return true;
 		}
 		case ecore::ecorePackage::ESTRUCTURALFEATURE_ATTRIBUTE_VOLATILE:
 		{
-			// BOOST CAST
+			// CAST Any to bool
 			bool _volatile = newValue->get<bool>();
 			setVolatile(_volatile); //5114
 			return true;

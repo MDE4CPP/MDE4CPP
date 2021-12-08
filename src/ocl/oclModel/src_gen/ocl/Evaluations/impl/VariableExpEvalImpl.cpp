@@ -32,11 +32,11 @@
 
 #include <exception> // used in Persistence
 #include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
+#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "fUML/Semantics/Values/ValuesFactory.hpp"
 #include "uml/umlFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
-#include "fUML/Semantics/Loci/LociFactory.hpp"
 
 #include "ocl/Evaluations/EvalEnvironment.hpp"
 #include "fUML/Semantics/Loci/Locus.hpp"
@@ -287,7 +287,7 @@ bool VariableExpEvalImpl::eSet(int featureID, Any newValue)
 	{
 		case ocl::Evaluations::EvaluationsPackage::VARIABLEEXPEVAL_ATTRIBUTE_REFERREDVARIABLE:
 		{
-			// BOOST CAST
+			// CAST Any to fUML::Semantics::SimpleClassifiers::StringValue
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> _referredVariable = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::StringValue>(_temp);
 			setReferredVariable(_referredVariable); //1006

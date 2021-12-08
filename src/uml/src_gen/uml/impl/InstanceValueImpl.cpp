@@ -389,7 +389,7 @@ bool InstanceValueImpl::eSet(int featureID, Any newValue)
 	{
 		case uml::umlPackage::INSTANCEVALUE_ATTRIBUTE_INSTANCE:
 		{
-			// BOOST CAST
+			// CAST Any to uml::InstanceSpecification
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::InstanceSpecification> _instance = std::dynamic_pointer_cast<uml::InstanceSpecification>(_temp);
 			setInstance(_instance); //11815

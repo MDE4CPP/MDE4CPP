@@ -473,7 +473,7 @@ bool InterfaceRealizationImpl::eSet(int featureID, Any newValue)
 	{
 		case uml::umlPackage::INTERFACEREALIZATION_ATTRIBUTE_CONTRACT:
 		{
-			// BOOST CAST
+			// CAST Any to uml::Interface
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Interface> _contract = std::dynamic_pointer_cast<uml::Interface>(_temp);
 			setContract(_contract); //12618
@@ -481,7 +481,7 @@ bool InterfaceRealizationImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::INTERFACEREALIZATION_ATTRIBUTE_IMPLEMENTINGCLASSIFIER:
 		{
-			// BOOST CAST
+			// CAST Any to uml::BehavioredClassifier
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::BehavioredClassifier> _implementingClassifier = std::dynamic_pointer_cast<uml::BehavioredClassifier>(_temp);
 			setImplementingClassifier(_implementingClassifier); //12619

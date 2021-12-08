@@ -364,7 +364,7 @@ bool GeneralOrderingImpl::eSet(int featureID, Any newValue)
 	{
 		case uml::umlPackage::GENERALORDERING_ATTRIBUTE_AFTER:
 		{
-			// BOOST CAST
+			// CAST Any to uml::OccurrenceSpecification
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::OccurrenceSpecification> _after = std::dynamic_pointer_cast<uml::OccurrenceSpecification>(_temp);
 			setAfter(_after); //1089
@@ -372,7 +372,7 @@ bool GeneralOrderingImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::GENERALORDERING_ATTRIBUTE_BEFORE:
 		{
-			// BOOST CAST
+			// CAST Any to uml::OccurrenceSpecification
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::OccurrenceSpecification> _before = std::dynamic_pointer_cast<uml::OccurrenceSpecification>(_temp);
 			setBefore(_before); //10810

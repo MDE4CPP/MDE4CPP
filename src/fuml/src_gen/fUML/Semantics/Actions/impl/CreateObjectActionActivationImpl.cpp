@@ -385,7 +385,7 @@ bool CreateObjectActionActivationImpl::eSet(int featureID, Any newValue)
 	{
 		case fUML::Semantics::Actions::ActionsPackage::CREATEOBJECTACTIONACTIVATION_ATTRIBUTE_CREATEOBJECTACTION:
 		{
-			// BOOST CAST
+			// CAST Any to uml::CreateObjectAction
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::CreateObjectAction> _createObjectAction = std::dynamic_pointer_cast<uml::CreateObjectAction>(_temp);
 			setCreateObjectAction(_createObjectAction); //3411
@@ -405,12 +405,10 @@ Any CreateObjectActionActivationImpl::eInvoke(int operationID, std::shared_ptr<s
 
   	switch(operationID)
 	{
-		
-		// 1970915943
+		// fUML::Semantics::Actions::CreateObjectActionActivation::doAction(): 1970915943
 		case ActionsPackage::CREATEOBJECTACTIONACTIVATION_OPERATION_DOACTION:
 		{
 			this->doAction();
-			break;
 		}
 
 		default:

@@ -164,14 +164,10 @@ ActionActivationImpl& ActionActivationImpl::operator=(const ActionActivationImpl
 			std::cout << "Initialising value Subset: " << "m_inputPinActivation - Subset<fUML::Semantics::Actions::InputPinActivation, fUML::Semantics::Actions::PinActivation >(getPinActivation())" << std::endl;
 		#endif
 		
-
-		Bag<fUML::Semantics::Actions::InputPinActivation>::iterator inputPinActivationIter = inputPinActivationList->begin();
-		Bag<fUML::Semantics::Actions::InputPinActivation>::iterator inputPinActivationEnd = inputPinActivationList->end();
-		while (inputPinActivationIter != inputPinActivationEnd) 
+		for(const std::shared_ptr<fUML::Semantics::Actions::InputPinActivation> inputPinActivationindexElem: *inputPinActivationList) 
 		{
-			std::shared_ptr<fUML::Semantics::Actions::InputPinActivation> temp = std::dynamic_pointer_cast<fUML::Semantics::Actions::InputPinActivation>((*inputPinActivationIter)->copy());
-			getInputPinActivation()->push_back(temp);
-			inputPinActivationIter++;
+			std::shared_ptr<fUML::Semantics::Actions::InputPinActivation> temp = std::dynamic_pointer_cast<fUML::Semantics::Actions::InputPinActivation>((inputPinActivationindexElem)->copy());
+			m_inputPinActivation->push_back(temp);
 		}
 	}
 	else
@@ -195,14 +191,10 @@ ActionActivationImpl& ActionActivationImpl::operator=(const ActionActivationImpl
 			std::cout << "Initialising value Subset: " << "m_outputPinActivation - Subset<fUML::Semantics::Actions::OutputPinActivation, fUML::Semantics::Actions::PinActivation >(getPinActivation())" << std::endl;
 		#endif
 		
-
-		Bag<fUML::Semantics::Actions::OutputPinActivation>::iterator outputPinActivationIter = outputPinActivationList->begin();
-		Bag<fUML::Semantics::Actions::OutputPinActivation>::iterator outputPinActivationEnd = outputPinActivationList->end();
-		while (outputPinActivationIter != outputPinActivationEnd) 
+		for(const std::shared_ptr<fUML::Semantics::Actions::OutputPinActivation> outputPinActivationindexElem: *outputPinActivationList) 
 		{
-			std::shared_ptr<fUML::Semantics::Actions::OutputPinActivation> temp = std::dynamic_pointer_cast<fUML::Semantics::Actions::OutputPinActivation>((*outputPinActivationIter)->copy());
-			getOutputPinActivation()->push_back(temp);
-			outputPinActivationIter++;
+			std::shared_ptr<fUML::Semantics::Actions::OutputPinActivation> temp = std::dynamic_pointer_cast<fUML::Semantics::Actions::OutputPinActivation>((outputPinActivationindexElem)->copy());
+			m_outputPinActivation->push_back(temp);
 		}
 	}
 	else
@@ -1028,42 +1020,18 @@ Any ActionActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
 			return eAny(returnValue,returnValue->getMetaElementID(),false); //510
 		}
 		case fUML::Semantics::Actions::ActionsPackage::ACTIONACTIVATION_ATTRIBUTE_FIRING:
-				return eAny(isFiring(),0,true); //57
+			return eAny(isFiring(),0,true); //57
 		case fUML::Semantics::Actions::ActionsPackage::ACTIONACTIVATION_ATTRIBUTE_INPUTPINACTIVATION:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<fUML::Semantics::Actions::InputPinActivation>::iterator iter = getInputPinActivation()->begin();
-			Bag<fUML::Semantics::Actions::InputPinActivation>::iterator end = getInputPinActivation()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //58			
+			return eAnyBag(getInputPinActivation(),241768265); //58
 		}
 		case fUML::Semantics::Actions::ActionsPackage::ACTIONACTIVATION_ATTRIBUTE_OUTPUTPINACTIVATION:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<fUML::Semantics::Actions::OutputPinActivation>::iterator iter = getOutputPinActivation()->begin();
-			Bag<fUML::Semantics::Actions::OutputPinActivation>::iterator end = getOutputPinActivation()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //59			
+			return eAnyBag(getOutputPinActivation(),1393072800); //59
 		}
 		case fUML::Semantics::Actions::ActionsPackage::ACTIONACTIVATION_ATTRIBUTE_PINACTIVATION:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<fUML::Semantics::Actions::PinActivation>::iterator iter = getPinActivation()->begin();
-			Bag<fUML::Semantics::Actions::PinActivation>::iterator end = getPinActivation()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //56			
+			return eAnyBag(getPinActivation(),1234693025); //56
 		}
 	}
 	return fUML::Semantics::Activities::ActivityNodeActivationImpl::eGet(featureID, resolve, coreType);
@@ -1093,7 +1061,7 @@ bool ActionActivationImpl::eSet(int featureID, Any newValue)
 	{
 		case fUML::Semantics::Actions::ActionsPackage::ACTIONACTIVATION_ATTRIBUTE_ACTION:
 		{
-			// BOOST CAST
+			// CAST Any to uml::Action
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Action> _action = std::dynamic_pointer_cast<uml::Action>(_temp);
 			setAction(_action); //510
@@ -1101,116 +1069,119 @@ bool ActionActivationImpl::eSet(int featureID, Any newValue)
 		}
 		case fUML::Semantics::Actions::ActionsPackage::ACTIONACTIVATION_ATTRIBUTE_FIRING:
 		{
-			// BOOST CAST
+			// CAST Any to bool
 			bool _firing = newValue->get<bool>();
 			setFiring(_firing); //57
 			return true;
 		}
 		case fUML::Semantics::Actions::ActionsPackage::ACTIONACTIVATION_ATTRIBUTE_INPUTPINACTIVATION:
 		{
-			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<fUML::Semantics::Actions::InputPinActivation>> inputPinActivationList(new Bag<fUML::Semantics::Actions::InputPinActivation>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
-			{
-				inputPinActivationList->add(std::dynamic_pointer_cast<fUML::Semantics::Actions::InputPinActivation>(*iter));
-				iter++;
-			}
-			
-			Bag<fUML::Semantics::Actions::InputPinActivation>::iterator iterInputPinActivation = getInputPinActivation()->begin();
-			Bag<fUML::Semantics::Actions::InputPinActivation>::iterator endInputPinActivation = getInputPinActivation()->end();
-			while (iterInputPinActivation != endInputPinActivation)
-			{
-				if (inputPinActivationList->find(*iterInputPinActivation) == -1)
+			// CAST Any to Bag<fUML::Semantics::Actions::InputPinActivation>
+			if((newValue->isContainer()) && (fUML::Semantics::Actions::ActionsPackage::INPUTPINACTIVATION_CLASS ==newValue->getTypeId()))
+			{ 
+				try
 				{
-					getInputPinActivation()->erase(*iterInputPinActivation);
+					std::shared_ptr<Bag<fUML::Semantics::Actions::InputPinActivation>> inputPinActivationList= newValue->get<std::shared_ptr<Bag<fUML::Semantics::Actions::InputPinActivation>>>();
+					std::shared_ptr<Bag<fUML::Semantics::Actions::InputPinActivation>> _inputPinActivation=getInputPinActivation();
+					for(const std::shared_ptr<fUML::Semantics::Actions::InputPinActivation> indexInputPinActivation: *_inputPinActivation)
+					{
+						if (inputPinActivationList->find(indexInputPinActivation) == -1)
+						{
+							_inputPinActivation->erase(indexInputPinActivation);
+						}
+					}
+
+					for(const std::shared_ptr<fUML::Semantics::Actions::InputPinActivation> indexInputPinActivation: *inputPinActivationList)
+					{
+						if (_inputPinActivation->find(indexInputPinActivation) == -1)
+						{
+							_inputPinActivation->add(indexInputPinActivation);
+						}
+					}
 				}
-				iterInputPinActivation++;
-			}
- 
-			iterInputPinActivation = inputPinActivationList->begin();
-			endInputPinActivation = inputPinActivationList->end();
-			while (iterInputPinActivation != endInputPinActivation)
-			{
-				if (getInputPinActivation()->find(*iterInputPinActivation) == -1)
+				catch(...)
 				{
-					getInputPinActivation()->add(*iterInputPinActivation);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterInputPinActivation++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}
 		case fUML::Semantics::Actions::ActionsPackage::ACTIONACTIVATION_ATTRIBUTE_OUTPUTPINACTIVATION:
 		{
-			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<fUML::Semantics::Actions::OutputPinActivation>> outputPinActivationList(new Bag<fUML::Semantics::Actions::OutputPinActivation>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
-			{
-				outputPinActivationList->add(std::dynamic_pointer_cast<fUML::Semantics::Actions::OutputPinActivation>(*iter));
-				iter++;
-			}
-			
-			Bag<fUML::Semantics::Actions::OutputPinActivation>::iterator iterOutputPinActivation = getOutputPinActivation()->begin();
-			Bag<fUML::Semantics::Actions::OutputPinActivation>::iterator endOutputPinActivation = getOutputPinActivation()->end();
-			while (iterOutputPinActivation != endOutputPinActivation)
-			{
-				if (outputPinActivationList->find(*iterOutputPinActivation) == -1)
+			// CAST Any to Bag<fUML::Semantics::Actions::OutputPinActivation>
+			if((newValue->isContainer()) && (fUML::Semantics::Actions::ActionsPackage::OUTPUTPINACTIVATION_CLASS ==newValue->getTypeId()))
+			{ 
+				try
 				{
-					getOutputPinActivation()->erase(*iterOutputPinActivation);
+					std::shared_ptr<Bag<fUML::Semantics::Actions::OutputPinActivation>> outputPinActivationList= newValue->get<std::shared_ptr<Bag<fUML::Semantics::Actions::OutputPinActivation>>>();
+					std::shared_ptr<Bag<fUML::Semantics::Actions::OutputPinActivation>> _outputPinActivation=getOutputPinActivation();
+					for(const std::shared_ptr<fUML::Semantics::Actions::OutputPinActivation> indexOutputPinActivation: *_outputPinActivation)
+					{
+						if (outputPinActivationList->find(indexOutputPinActivation) == -1)
+						{
+							_outputPinActivation->erase(indexOutputPinActivation);
+						}
+					}
+
+					for(const std::shared_ptr<fUML::Semantics::Actions::OutputPinActivation> indexOutputPinActivation: *outputPinActivationList)
+					{
+						if (_outputPinActivation->find(indexOutputPinActivation) == -1)
+						{
+							_outputPinActivation->add(indexOutputPinActivation);
+						}
+					}
 				}
-				iterOutputPinActivation++;
-			}
- 
-			iterOutputPinActivation = outputPinActivationList->begin();
-			endOutputPinActivation = outputPinActivationList->end();
-			while (iterOutputPinActivation != endOutputPinActivation)
-			{
-				if (getOutputPinActivation()->find(*iterOutputPinActivation) == -1)
+				catch(...)
 				{
-					getOutputPinActivation()->add(*iterOutputPinActivation);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterOutputPinActivation++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}
 		case fUML::Semantics::Actions::ActionsPackage::ACTIONACTIVATION_ATTRIBUTE_PINACTIVATION:
 		{
-			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<fUML::Semantics::Actions::PinActivation>> pinActivationList(new Bag<fUML::Semantics::Actions::PinActivation>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
-			{
-				pinActivationList->add(std::dynamic_pointer_cast<fUML::Semantics::Actions::PinActivation>(*iter));
-				iter++;
-			}
-			
-			Bag<fUML::Semantics::Actions::PinActivation>::iterator iterPinActivation = getPinActivation()->begin();
-			Bag<fUML::Semantics::Actions::PinActivation>::iterator endPinActivation = getPinActivation()->end();
-			while (iterPinActivation != endPinActivation)
-			{
-				if (pinActivationList->find(*iterPinActivation) == -1)
+			// CAST Any to Bag<fUML::Semantics::Actions::PinActivation>
+			if((newValue->isContainer()) && (fUML::Semantics::Actions::ActionsPackage::PINACTIVATION_CLASS ==newValue->getTypeId()))
+			{ 
+				try
 				{
-					getPinActivation()->erase(*iterPinActivation);
+					std::shared_ptr<Bag<fUML::Semantics::Actions::PinActivation>> pinActivationList= newValue->get<std::shared_ptr<Bag<fUML::Semantics::Actions::PinActivation>>>();
+					std::shared_ptr<Bag<fUML::Semantics::Actions::PinActivation>> _pinActivation=getPinActivation();
+					for(const std::shared_ptr<fUML::Semantics::Actions::PinActivation> indexPinActivation: *_pinActivation)
+					{
+						if (pinActivationList->find(indexPinActivation) == -1)
+						{
+							_pinActivation->erase(indexPinActivation);
+						}
+					}
+
+					for(const std::shared_ptr<fUML::Semantics::Actions::PinActivation> indexPinActivation: *pinActivationList)
+					{
+						if (_pinActivation->find(indexPinActivation) == -1)
+						{
+							_pinActivation->add(indexPinActivation);
+						}
+					}
 				}
-				iterPinActivation++;
-			}
- 
-			iterPinActivation = pinActivationList->begin();
-			endPinActivation = pinActivationList->end();
-			while (iterPinActivation != endPinActivation)
-			{
-				if (getPinActivation()->find(*iterPinActivation) == -1)
+				catch(...)
 				{
-					getPinActivation()->add(*iterPinActivation);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterPinActivation++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}
@@ -1228,8 +1199,7 @@ Any ActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any
 
   	switch(operationID)
 	{
-		
-		// 742629207
+		// fUML::Semantics::Actions::ActionActivation::addOutgoingEdge(fUML::Semantics::Activities::ActivityEdgeInstance): 742629207
 		case ActionsPackage::ACTIONACTIVATION_OPERATION_ADDOUTGOINGEDGE_ACTIVITYEDGEINSTANCE:
 		{
 			//Retrieve input parameter 'edge'
@@ -1238,10 +1208,8 @@ Any ActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any
 			std::list<Any>::const_iterator incoming_param_edge_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_edge = (*incoming_param_edge_arguments_citer)->get<std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance> >();
 			this->addOutgoingEdge(incoming_param_edge);
-			break;
 		}
-		
-		// 1470350045
+		// fUML::Semantics::Actions::ActionActivation::addPinActivation(fUML::Semantics::Actions::PinActivation): 1470350045
 		case ActionsPackage::ACTIONACTIVATION_OPERATION_ADDPINACTIVATION_PINACTIVATION:
 		{
 			//Retrieve input parameter 'pinActivation'
@@ -1250,31 +1218,25 @@ Any ActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any
 			std::list<Any>::const_iterator incoming_param_pinActivation_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_pinActivation = (*incoming_param_pinActivation_arguments_citer)->get<std::shared_ptr<fUML::Semantics::Actions::PinActivation> >();
 			this->addPinActivation(incoming_param_pinActivation);
-			break;
 		}
-		
-		// 1326769552
+		// fUML::Semantics::Actions::ActionActivation::completeAction() : fUML::Semantics::Activities::Token[*]: 1326769552
 		case ActionsPackage::ACTIONACTIVATION_OPERATION_COMPLETEACTION:
 		{
-				result = eAny(this->completeAction());
+			std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > resultList = this->completeAction();
+			return eAny(resultList,fUML::Semantics::Activities::ActivitiesPackage::TOKEN_CLASS,true);
 			break;
 		}
-		
-		// 1517171940
+		// fUML::Semantics::Actions::ActionActivation::createNodeActivations(): 1517171940
 		case ActionsPackage::ACTIONACTIVATION_OPERATION_CREATENODEACTIVATIONS:
 		{
 			this->createNodeActivations();
-			break;
 		}
-		
-		// 1791647146
+		// fUML::Semantics::Actions::ActionActivation::doAction(): 1791647146
 		case ActionsPackage::ACTIONACTIVATION_OPERATION_DOACTION:
 		{
 			this->doAction();
-			break;
 		}
-		
-		// 1802709999
+		// fUML::Semantics::Actions::ActionActivation::fire(fUML::Semantics::Activities::Token[*]): 1802709999
 		case ActionsPackage::ACTIONACTIVATION_OPERATION_FIRE_TOKEN:
 		{
 			//Retrieve input parameter 'incomingTokens'
@@ -1283,10 +1245,8 @@ Any ActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any
 			std::list<Any>::const_iterator incoming_param_incomingTokens_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_incomingTokens = (*incoming_param_incomingTokens_arguments_citer)->get<std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> >();
 			this->fire(incoming_param_incomingTokens);
-			break;
 		}
-		
-		// 2138916189
+		// fUML::Semantics::Actions::ActionActivation::getTokens(uml::InputPin) : fUML::Semantics::Values::Value[*]: 2138916189
 		case ActionsPackage::ACTIONACTIVATION_OPERATION_GETTOKENS_INPUTPIN:
 		{
 			//Retrieve input parameter 'pin'
@@ -1294,25 +1254,23 @@ Any ActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any
 			std::shared_ptr<uml::InputPin> incoming_param_pin;
 			std::list<Any>::const_iterator incoming_param_pin_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_pin = (*incoming_param_pin_arguments_citer)->get<std::shared_ptr<uml::InputPin> >();
-				result = eAny(this->getTokens(incoming_param_pin));
+			std::shared_ptr<Bag<fUML::Semantics::Values::Value> > resultList = this->getTokens(incoming_param_pin);
+			return eAny(resultList,fUML::Semantics::Values::ValuesPackage::VALUE_CLASS,true);
 			break;
 		}
-		
-		// 1010960154
+		// fUML::Semantics::Actions::ActionActivation::isFirng() : bool: 1010960154
 		case ActionsPackage::ACTIONACTIVATION_OPERATION_ISFIRNG:
 		{
-					result = eAny(this->isFirng(),0,false);
+			result = eAny(this->isFirng(),0,false);
 			break;
 		}
-		
-		// 1902692005
+		// fUML::Semantics::Actions::ActionActivation::isReady() : bool: 1902692005
 		case ActionsPackage::ACTIONACTIVATION_OPERATION_ISREADY:
 		{
-					result = eAny(this->isReady(),0,false);
+			result = eAny(this->isReady(),0,false);
 			break;
 		}
-		
-		// 353708760
+		// fUML::Semantics::Actions::ActionActivation::isSourceFor(fUML::Semantics::Activities::ActivityEdgeInstance) : bool: 353708760
 		case ActionsPackage::ACTIONACTIVATION_OPERATION_ISSOURCEFOR_ACTIVITYEDGEINSTANCE:
 		{
 			//Retrieve input parameter 'edgeInstance'
@@ -1320,11 +1278,10 @@ Any ActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any
 			std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance> incoming_param_edgeInstance;
 			std::list<Any>::const_iterator incoming_param_edgeInstance_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_edgeInstance = (*incoming_param_edgeInstance_arguments_citer)->get<std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance> >();
-					result = eAny(this->isSourceFor(incoming_param_edgeInstance),0,false);
+			result = eAny(this->isSourceFor(incoming_param_edgeInstance),0,false);
 			break;
 		}
-		
-		// 347406919
+		// fUML::Semantics::Actions::ActionActivation::makeBooleanValue(bool) : fUML::Semantics::SimpleClassifiers::BooleanValue: 347406919
 		case ActionsPackage::ACTIONACTIVATION_OPERATION_MAKEBOOLEANVALUE_EBOOLEAN:
 		{
 			//Retrieve input parameter 'value'
@@ -1332,11 +1289,10 @@ Any ActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any
 			bool incoming_param_value;
 			std::list<Any>::const_iterator incoming_param_value_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_value = (*incoming_param_value_arguments_citer)->get<bool >();
-				result = eAny(this->makeBooleanValue(incoming_param_value));
+			result = eAny(this->makeBooleanValue(incoming_param_value), fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::BOOLEANVALUE_CLASS,false);
 			break;
 		}
-		
-		// 1698981854
+		// fUML::Semantics::Actions::ActionActivation::putToken(uml::OutputPin, fUML::Semantics::Values::Value): 1698981854
 		case ActionsPackage::ACTIONACTIVATION_OPERATION_PUTTOKEN_OUTPUTPIN_VALUE:
 		{
 			//Retrieve input parameter 'pin'
@@ -1350,10 +1306,8 @@ Any ActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any
 			std::list<Any>::const_iterator incoming_param_value_arguments_citer = std::next(arguments->begin(), 1);
 			incoming_param_value = (*incoming_param_value_arguments_citer)->get<std::shared_ptr<fUML::Semantics::Values::Value> >();
 			this->putToken(incoming_param_pin,incoming_param_value);
-			break;
 		}
-		
-		// 1943011643
+		// fUML::Semantics::Actions::ActionActivation::putTokens(uml::OutputPin, fUML::Semantics::Values::Value[*]): 1943011643
 		case ActionsPackage::ACTIONACTIVATION_OPERATION_PUTTOKENS_OUTPUTPIN_VALUE:
 		{
 			//Retrieve input parameter 'pin'
@@ -1367,10 +1321,8 @@ Any ActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any
 			std::list<Any>::const_iterator incoming_param_values_arguments_citer = std::next(arguments->begin(), 1);
 			incoming_param_values = (*incoming_param_values_arguments_citer)->get<std::shared_ptr<Bag<fUML::Semantics::Values::Value>> >();
 			this->putTokens(incoming_param_pin,incoming_param_values);
-			break;
 		}
-		
-		// 180803235
+		// fUML::Semantics::Actions::ActionActivation::retrievePinActivation(uml::Pin) : fUML::Semantics::Actions::PinActivation: 180803235
 		case ActionsPackage::ACTIONACTIVATION_OPERATION_RETRIEVEPINACTIVATION_PIN:
 		{
 			//Retrieve input parameter 'pin'
@@ -1378,32 +1330,27 @@ Any ActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any
 			std::shared_ptr<uml::Pin> incoming_param_pin;
 			std::list<Any>::const_iterator incoming_param_pin_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_pin = (*incoming_param_pin_arguments_citer)->get<std::shared_ptr<uml::Pin> >();
-				result = eAny(this->retrievePinActivation(incoming_param_pin));
+			result = eAny(this->retrievePinActivation(incoming_param_pin), fUML::Semantics::Actions::ActionsPackage::PINACTIVATION_CLASS,false);
 			break;
 		}
-		
-		// 1723642497
+		// fUML::Semantics::Actions::ActionActivation::run(): 1723642497
 		case ActionsPackage::ACTIONACTIVATION_OPERATION_RUN:
 		{
 			this->run();
-			break;
 		}
-		
-		// 2099243507
+		// fUML::Semantics::Actions::ActionActivation::sendOffers(): 2099243507
 		case ActionsPackage::ACTIONACTIVATION_OPERATION_SENDOFFERS:
 		{
 			this->sendOffers();
-			break;
 		}
-		
-		// 1433380378
+		// fUML::Semantics::Actions::ActionActivation::takeOfferedTokens() : fUML::Semantics::Activities::Token[*]: 1433380378
 		case ActionsPackage::ACTIONACTIVATION_OPERATION_TAKEOFFEREDTOKENS:
 		{
-				result = eAny(this->takeOfferedTokens());
+			std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > resultList = this->takeOfferedTokens();
+			return eAny(resultList,fUML::Semantics::Activities::ActivitiesPackage::TOKEN_CLASS,true);
 			break;
 		}
-		
-		// 260635550
+		// fUML::Semantics::Actions::ActionActivation::takeTokens(uml::InputPin) : fUML::Semantics::Values::Value[*]: 260635550
 		case ActionsPackage::ACTIONACTIVATION_OPERATION_TAKETOKENS_INPUTPIN:
 		{
 			//Retrieve input parameter 'pin'
@@ -1411,18 +1358,16 @@ Any ActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any
 			std::shared_ptr<uml::InputPin> incoming_param_pin;
 			std::list<Any>::const_iterator incoming_param_pin_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_pin = (*incoming_param_pin_arguments_citer)->get<std::shared_ptr<uml::InputPin> >();
-				result = eAny(this->takeTokens(incoming_param_pin));
+			std::shared_ptr<Bag<fUML::Semantics::Values::Value> > resultList = this->takeTokens(incoming_param_pin);
+			return eAny(resultList,fUML::Semantics::Values::ValuesPackage::VALUE_CLASS,true);
 			break;
 		}
-		
-		// 1477472746
+		// fUML::Semantics::Actions::ActionActivation::terminate(): 1477472746
 		case ActionsPackage::ACTIONACTIVATION_OPERATION_TERMINATE:
 		{
 			this->terminate();
-			break;
 		}
-		
-		// 1676355490
+		// fUML::Semantics::Actions::ActionActivation::valueParticipatesInLink(fUML::Semantics::Values::Value, fUML::Semantics::StructuredClassifiers::Link) : bool: 1676355490
 		case ActionsPackage::ACTIONACTIVATION_OPERATION_VALUEPARTICIPATESINLINK_VALUE_LINK:
 		{
 			//Retrieve input parameter 'value'
@@ -1435,7 +1380,7 @@ Any ActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any
 			std::shared_ptr<fUML::Semantics::StructuredClassifiers::Link> incoming_param_link;
 			std::list<Any>::const_iterator incoming_param_link_arguments_citer = std::next(arguments->begin(), 1);
 			incoming_param_link = (*incoming_param_link_arguments_citer)->get<std::shared_ptr<fUML::Semantics::StructuredClassifiers::Link> >();
-					result = eAny(this->valueParticipatesInLink(incoming_param_value,incoming_param_link),0,false);
+			result = eAny(this->valueParticipatesInLink(incoming_param_value,incoming_param_link),0,false);
 			break;
 		}
 

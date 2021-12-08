@@ -584,7 +584,7 @@ bool ReadIsClassifiedObjectActionImpl::eSet(int featureID, Any newValue)
 	{
 		case uml::umlPackage::READISCLASSIFIEDOBJECTACTION_ATTRIBUTE_CLASSIFIER:
 		{
-			// BOOST CAST
+			// CAST Any to uml::Classifier
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Classifier> _classifier = std::dynamic_pointer_cast<uml::Classifier>(_temp);
 			setClassifier(_classifier); //19427
@@ -592,14 +592,14 @@ bool ReadIsClassifiedObjectActionImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::READISCLASSIFIEDOBJECTACTION_ATTRIBUTE_ISDIRECT:
 		{
-			// BOOST CAST
+			// CAST Any to bool
 			bool _isDirect = newValue->get<bool>();
 			setIsDirect(_isDirect); //19428
 			return true;
 		}
 		case uml::umlPackage::READISCLASSIFIEDOBJECTACTION_ATTRIBUTE_OBJECT:
 		{
-			// BOOST CAST
+			// CAST Any to uml::InputPin
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::InputPin> _object = std::dynamic_pointer_cast<uml::InputPin>(_temp);
 			setObject(_object); //19429
@@ -607,7 +607,7 @@ bool ReadIsClassifiedObjectActionImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::READISCLASSIFIEDOBJECTACTION_ATTRIBUTE_RESULT:
 		{
-			// BOOST CAST
+			// CAST Any to uml::OutputPin
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::OutputPin> _result = std::dynamic_pointer_cast<uml::OutputPin>(_temp);
 			setResult(_result); //19430

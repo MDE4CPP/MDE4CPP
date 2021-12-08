@@ -319,7 +319,7 @@ Any UnlimitedNaturalValueImpl::eGet(int featureID, bool resolve, bool coreType) 
 	switch(featureID)
 	{
 		case fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::UNLIMITEDNATURALVALUE_ATTRIBUTE_VALUE:
-				return eAny(getValue(),0,true); //1171
+			return eAny(getValue(),0,true); //1171
 	}
 	return PrimitiveValueImpl::eGet(featureID, resolve, coreType);
 }
@@ -340,7 +340,7 @@ bool UnlimitedNaturalValueImpl::eSet(int featureID, Any newValue)
 	{
 		case fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::UNLIMITEDNATURALVALUE_ATTRIBUTE_VALUE:
 		{
-			// BOOST CAST
+			// CAST Any to int
 			int _value = newValue->get<int>();
 			setValue(_value); //1171
 			return true;
@@ -359,15 +359,13 @@ Any UnlimitedNaturalValueImpl::eInvoke(int operationID, std::shared_ptr<std::lis
 
   	switch(operationID)
 	{
-		
-		// 913377262
+		// fUML::Semantics::SimpleClassifiers::UnlimitedNaturalValue::_copy() : fUML::Semantics::Values::Value: 913377262
 		case SimpleClassifiersPackage::UNLIMITEDNATURALVALUE_OPERATION__COPY:
 		{
-				result = eAny(this->_copy());
+			result = eAny(this->_copy(), fUML::Semantics::Values::ValuesPackage::VALUE_CLASS,false);
 			break;
 		}
-		
-		// 886044238
+		// fUML::Semantics::SimpleClassifiers::UnlimitedNaturalValue::equals(fUML::Semantics::Values::Value) : bool: 886044238
 		case SimpleClassifiersPackage::UNLIMITEDNATURALVALUE_OPERATION_EQUALS_VALUE:
 		{
 			//Retrieve input parameter 'otherValue'
@@ -375,28 +373,25 @@ Any UnlimitedNaturalValueImpl::eInvoke(int operationID, std::shared_ptr<std::lis
 			std::shared_ptr<fUML::Semantics::Values::Value> incoming_param_otherValue;
 			std::list<Any>::const_iterator incoming_param_otherValue_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_otherValue = (*incoming_param_otherValue_arguments_citer)->get<std::shared_ptr<fUML::Semantics::Values::Value> >();
-					result = eAny(this->equals(incoming_param_otherValue),0,false);
+			result = eAny(this->equals(incoming_param_otherValue),0,false);
 			break;
 		}
-		
-		// 1924598092
+		// fUML::Semantics::SimpleClassifiers::UnlimitedNaturalValue::new_() : fUML::Semantics::Values::Value: 1924598092
 		case SimpleClassifiersPackage::UNLIMITEDNATURALVALUE_OPERATION_NEW_:
 		{
-				result = eAny(this->new_());
+			result = eAny(this->new_(), fUML::Semantics::Values::ValuesPackage::VALUE_CLASS,false);
 			break;
 		}
-		
-		// 519448828
+		// fUML::Semantics::SimpleClassifiers::UnlimitedNaturalValue::specify() : uml::ValueSpecification: 519448828
 		case SimpleClassifiersPackage::UNLIMITEDNATURALVALUE_OPERATION_SPECIFY:
 		{
-				result = eAny(this->specify());
+			result = eAny(this->specify(), uml::umlPackage::VALUESPECIFICATION_CLASS,false);
 			break;
 		}
-		
-		// 668784562
+		// fUML::Semantics::SimpleClassifiers::UnlimitedNaturalValue::toString() : std::string: 668784562
 		case SimpleClassifiersPackage::UNLIMITEDNATURALVALUE_OPERATION_TOSTRING:
 		{
-					result = eAny(this->toString(),0,false);
+			result = eAny(this->toString(),0,false);
 			break;
 		}
 

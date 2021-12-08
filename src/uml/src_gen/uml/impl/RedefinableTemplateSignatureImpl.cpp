@@ -552,7 +552,7 @@ bool RedefinableTemplateSignatureImpl::eSet(int featureID, Any newValue)
 	{
 		case uml::umlPackage::REDEFINABLETEMPLATESIGNATURE_ATTRIBUTE_CLASSIFIER:
 		{
-			// BOOST CAST
+			// CAST Any to uml::Classifier
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Classifier> _classifier = std::dynamic_pointer_cast<uml::Classifier>(_temp);
 			setClassifier(_classifier); //20517
@@ -560,9 +560,9 @@ bool RedefinableTemplateSignatureImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::REDEFINABLETEMPLATESIGNATURE_ATTRIBUTE_EXTENDEDSIGNATURE:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::RedefinableTemplateSignature>
 			if((newValue->isContainer()) && (uml::umlPackage::REDEFINABLETEMPLATESIGNATURE_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::RedefinableTemplateSignature>> extendedSignatureList= newValue->get<std::shared_ptr<Bag<uml::RedefinableTemplateSignature>>>();
@@ -620,7 +620,7 @@ Any RedefinableTemplateSignatureImpl::eInvoke(int operationID, std::shared_ptr<s
 		case umlPackage::REDEFINABLETEMPLATESIGNATURE_OPERATION_GETINHERITEDPARAMETERS:
 		{
 			std::shared_ptr<Bag<uml::TemplateParameter> > resultList = this->getInheritedParameters();
-			return eAny(resultList,umlPackage::TEMPLATEPARAMETER_CLASS,true);
+			return eAny(resultList,uml::umlPackage::TEMPLATEPARAMETER_CLASS,true);
 			break;
 		}
 		// uml::RedefinableTemplateSignature::redefines_parents(Any, std::map) : bool: 1263440260

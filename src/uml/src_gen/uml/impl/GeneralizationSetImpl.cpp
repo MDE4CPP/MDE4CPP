@@ -470,9 +470,9 @@ bool GeneralizationSetImpl::eSet(int featureID, Any newValue)
 	{
 		case uml::umlPackage::GENERALIZATIONSET_ATTRIBUTE_GENERALIZATION:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::Generalization>
 			if((newValue->isContainer()) && (uml::umlPackage::GENERALIZATION_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::Generalization>> generalizationList= newValue->get<std::shared_ptr<Bag<uml::Generalization>>>();
@@ -507,21 +507,21 @@ bool GeneralizationSetImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::GENERALIZATIONSET_ATTRIBUTE_ISCOVERING:
 		{
-			// BOOST CAST
+			// CAST Any to bool
 			bool _isCovering = newValue->get<bool>();
 			setIsCovering(_isCovering); //11012
 			return true;
 		}
 		case uml::umlPackage::GENERALIZATIONSET_ATTRIBUTE_ISDISJOINT:
 		{
-			// BOOST CAST
+			// CAST Any to bool
 			bool _isDisjoint = newValue->get<bool>();
 			setIsDisjoint(_isDisjoint); //11013
 			return true;
 		}
 		case uml::umlPackage::GENERALIZATIONSET_ATTRIBUTE_POWERTYPE:
 		{
-			// BOOST CAST
+			// CAST Any to uml::Classifier
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Classifier> _powertype = std::dynamic_pointer_cast<uml::Classifier>(_temp);
 			setPowertype(_powertype); //11014

@@ -545,9 +545,9 @@ bool DependencyImpl::eSet(int featureID, Any newValue)
 	{
 		case uml::umlPackage::DEPENDENCY_ATTRIBUTE_CLIENT:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::NamedElement>
 			if((newValue->isContainer()) && (uml::umlPackage::NAMEDELEMENT_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::NamedElement>> clientList= newValue->get<std::shared_ptr<Bag<uml::NamedElement>>>();
@@ -582,9 +582,9 @@ bool DependencyImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::DEPENDENCY_ATTRIBUTE_SUPPLIER:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::NamedElement>
 			if((newValue->isContainer()) && (uml::umlPackage::NAMEDELEMENT_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::NamedElement>> supplierList= newValue->get<std::shared_ptr<Bag<uml::NamedElement>>>();

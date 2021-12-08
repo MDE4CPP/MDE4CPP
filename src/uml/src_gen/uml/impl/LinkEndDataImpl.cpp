@@ -458,7 +458,7 @@ bool LinkEndDataImpl::eSet(int featureID, Any newValue)
 	{
 		case uml::umlPackage::LINKENDDATA_ATTRIBUTE_END:
 		{
-			// BOOST CAST
+			// CAST Any to uml::Property
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Property> _end = std::dynamic_pointer_cast<uml::Property>(_temp);
 			setEnd(_end); //1353
@@ -466,9 +466,9 @@ bool LinkEndDataImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::LINKENDDATA_ATTRIBUTE_QUALIFIER:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::QualifierValue>
 			if((newValue->isContainer()) && (uml::umlPackage::QUALIFIERVALUE_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::QualifierValue>> qualifierList= newValue->get<std::shared_ptr<Bag<uml::QualifierValue>>>();
@@ -503,7 +503,7 @@ bool LinkEndDataImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::LINKENDDATA_ATTRIBUTE_VALUE:
 		{
-			// BOOST CAST
+			// CAST Any to uml::InputPin
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::InputPin> _value = std::dynamic_pointer_cast<uml::InputPin>(_temp);
 			setValue(_value); //1355
@@ -527,7 +527,7 @@ Any LinkEndDataImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> ar
 		case umlPackage::LINKENDDATA_OPERATION_ALLPINS:
 		{
 			std::shared_ptr<Bag<uml::InputPin> > resultList = this->allPins();
-			return eAny(resultList,umlPackage::INPUTPIN_CLASS,true);
+			return eAny(resultList,uml::umlPackage::INPUTPIN_CLASS,true);
 			break;
 		}
 		// uml::LinkEndData::end_object_input_pin(Any, std::map) : bool: 1213117792

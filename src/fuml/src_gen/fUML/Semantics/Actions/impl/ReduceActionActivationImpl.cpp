@@ -312,7 +312,7 @@ bool ReduceActionActivationImpl::eSet(int featureID, Any newValue)
 	{
 		case fUML::Semantics::Actions::ActionsPackage::REDUCEACTIONACTIVATION_ATTRIBUTE_CURRENTEXECUTION:
 		{
-			// BOOST CAST
+			// CAST Any to fUML::Semantics::CommonBehavior::Execution
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> _currentExecution = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::Execution>(_temp);
 			setCurrentExecution(_currentExecution); //9811

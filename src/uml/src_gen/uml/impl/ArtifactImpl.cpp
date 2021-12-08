@@ -828,16 +828,16 @@ bool ArtifactImpl::eSet(int featureID, Any newValue)
 	{
 		case uml::umlPackage::ARTIFACT_ATTRIBUTE_FILENAME:
 		{
-			// BOOST CAST
+			// CAST Any to std::string
 			std::string _fileName = newValue->get<std::string>();
 			setFileName(_fileName); //2038
 			return true;
 		}
 		case uml::umlPackage::ARTIFACT_ATTRIBUTE_MANIFESTATION:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::Manifestation>
 			if((newValue->isContainer()) && (uml::umlPackage::MANIFESTATION_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::Manifestation>> manifestationList= newValue->get<std::shared_ptr<Bag<uml::Manifestation>>>();
@@ -872,9 +872,9 @@ bool ArtifactImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::ARTIFACT_ATTRIBUTE_NESTEDARTIFACT:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::Artifact>
 			if((newValue->isContainer()) && (uml::umlPackage::ARTIFACT_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::Artifact>> nestedArtifactList= newValue->get<std::shared_ptr<Bag<uml::Artifact>>>();
@@ -909,9 +909,9 @@ bool ArtifactImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::ARTIFACT_ATTRIBUTE_OWNEDATTRIBUTE:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::Property>
 			if((newValue->isContainer()) && (uml::umlPackage::PROPERTY_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::Property>> ownedAttributeList= newValue->get<std::shared_ptr<Bag<uml::Property>>>();
@@ -946,9 +946,9 @@ bool ArtifactImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::ARTIFACT_ATTRIBUTE_OWNEDOPERATION:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::Operation>
 			if((newValue->isContainer()) && (uml::umlPackage::OPERATION_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::Operation>> ownedOperationList= newValue->get<std::shared_ptr<Bag<uml::Operation>>>();
@@ -1025,7 +1025,7 @@ Any ArtifactImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argum
 			int incoming_param_upper;
 			std::list<Any>::const_iterator incoming_param_upper_arguments_citer = std::next(arguments->begin(), 3);
 			incoming_param_upper = (*incoming_param_upper_arguments_citer)->get<int >();
-			result = eAny(this->createOwnedAttribute(incoming_param_name,incoming_param_type,incoming_param_lower,incoming_param_upper), umlPackage::PROPERTY_CLASS,false);
+			result = eAny(this->createOwnedAttribute(incoming_param_name,incoming_param_type,incoming_param_lower,incoming_param_upper), uml::umlPackage::PROPERTY_CLASS,false);
 			break;
 		}
 		// uml::Artifact::createOwnedOperation(std::string, std::string[*], uml::Type[*], uml::Type) : uml::Operation: 1664248193
@@ -1051,7 +1051,7 @@ Any ArtifactImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argum
 			std::shared_ptr<uml::Type> incoming_param_returnType;
 			std::list<Any>::const_iterator incoming_param_returnType_arguments_citer = std::next(arguments->begin(), 3);
 			incoming_param_returnType = (*incoming_param_returnType_arguments_citer)->get<std::shared_ptr<uml::Type> >();
-			result = eAny(this->createOwnedOperation(incoming_param_name,incoming_param_parameterNames,incoming_param_parameterTypes,incoming_param_returnType), umlPackage::OPERATION_CLASS,false);
+			result = eAny(this->createOwnedOperation(incoming_param_name,incoming_param_parameterNames,incoming_param_parameterTypes,incoming_param_returnType), uml::umlPackage::OPERATION_CLASS,false);
 			break;
 		}
 

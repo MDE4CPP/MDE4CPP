@@ -404,14 +404,14 @@ bool TimeEventImpl::eSet(int featureID, Any newValue)
 	{
 		case uml::umlPackage::TIMEEVENT_ATTRIBUTE_ISRELATIVE:
 		{
-			// BOOST CAST
+			// CAST Any to bool
 			bool _isRelative = newValue->get<bool>();
 			setIsRelative(_isRelative); //23712
 			return true;
 		}
 		case uml::umlPackage::TIMEEVENT_ATTRIBUTE_WHEN:
 		{
-			// BOOST CAST
+			// CAST Any to uml::TimeExpression
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::TimeExpression> _when = std::dynamic_pointer_cast<uml::TimeExpression>(_temp);
 			setWhen(_when); //23713

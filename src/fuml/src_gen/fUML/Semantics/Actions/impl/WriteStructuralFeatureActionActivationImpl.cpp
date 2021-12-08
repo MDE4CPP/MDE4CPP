@@ -286,8 +286,7 @@ Any WriteStructuralFeatureActionActivationImpl::eInvoke(int operationID, std::sh
 
   	switch(operationID)
 	{
-		
-		// 665074260
+		// fUML::Semantics::Actions::WriteStructuralFeatureActionActivation::position(fUML::Semantics::Values::Value, fUML::Semantics::Values::Value[*], int) : int: 665074260
 		case ActionsPackage::WRITESTRUCTURALFEATUREACTIONACTIVATION_OPERATION_POSITION_VALUE_EINT:
 		{
 			//Retrieve input parameter 'value'
@@ -305,7 +304,7 @@ Any WriteStructuralFeatureActionActivationImpl::eInvoke(int operationID, std::sh
 			int incoming_param_startAt;
 			std::list<Any>::const_iterator incoming_param_startAt_arguments_citer = std::next(arguments->begin(), 2);
 			incoming_param_startAt = (*incoming_param_startAt_arguments_citer)->get<int >();
-					result = eAny(this->position(incoming_param_value,incoming_param_list,incoming_param_startAt),0,false);
+			result = eAny(this->position(incoming_param_value,incoming_param_list,incoming_param_startAt),0,false);
 			break;
 		}
 

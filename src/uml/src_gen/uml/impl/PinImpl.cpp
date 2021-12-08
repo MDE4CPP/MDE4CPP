@@ -406,7 +406,7 @@ bool PinImpl::eSet(int featureID, Any newValue)
 	{
 		case uml::umlPackage::PIN_ATTRIBUTE_ISCONTROL:
 		{
-			// BOOST CAST
+			// CAST Any to bool
 			bool _isControl = newValue->get<bool>();
 			setIsControl(_isControl); //18032
 			return true;

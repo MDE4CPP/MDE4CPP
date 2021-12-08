@@ -236,15 +236,13 @@ Any GetNextEventStrategyImpl::eInvoke(int operationID, std::shared_ptr<std::list
 
   	switch(operationID)
 	{
-		
-		// 905122154
+		// fUML::Semantics::CommonBehavior::GetNextEventStrategy::getName() : std::string: 905122154
 		case CommonBehaviorPackage::GETNEXTEVENTSTRATEGY_OPERATION_GETNAME:
 		{
-					result = eAny(this->getName(),0,false);
+			result = eAny(this->getName(),0,false);
 			break;
 		}
-		
-		// 51332097
+		// fUML::Semantics::CommonBehavior::GetNextEventStrategy::retrieveNextEvent(fUML::Semantics::CommonBehavior::ObjectActivation) : fUML::Semantics::SimpleClassifiers::SignalInstance: 51332097
 		case CommonBehaviorPackage::GETNEXTEVENTSTRATEGY_OPERATION_RETRIEVENEXTEVENT_OBJECTACTIVATION:
 		{
 			//Retrieve input parameter 'objectActivation'
@@ -252,7 +250,7 @@ Any GetNextEventStrategyImpl::eInvoke(int operationID, std::shared_ptr<std::list
 			std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation> incoming_param_objectActivation;
 			std::list<Any>::const_iterator incoming_param_objectActivation_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_objectActivation = (*incoming_param_objectActivation_arguments_citer)->get<std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation> >();
-				result = eAny(this->retrieveNextEvent(incoming_param_objectActivation));
+			result = eAny(this->retrieveNextEvent(incoming_param_objectActivation), fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::SIGNALINSTANCE_CLASS,false);
 			break;
 		}
 

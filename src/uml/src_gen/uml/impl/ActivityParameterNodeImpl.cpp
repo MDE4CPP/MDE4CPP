@@ -425,7 +425,7 @@ bool ActivityParameterNodeImpl::eSet(int featureID, Any newValue)
 	{
 		case uml::umlPackage::ACTIVITYPARAMETERNODE_ATTRIBUTE_PARAMETER:
 		{
-			// BOOST CAST
+			// CAST Any to uml::Parameter
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Parameter> _parameter = std::dynamic_pointer_cast<uml::Parameter>(_temp);
 			setParameter(_parameter); //1226

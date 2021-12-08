@@ -394,7 +394,7 @@ bool VariableActionImpl::eSet(int featureID, Any newValue)
 	{
 		case uml::umlPackage::VARIABLEACTION_ATTRIBUTE_VARIABLE:
 		{
-			// BOOST CAST
+			// CAST Any to uml::Variable
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Variable> _variable = std::dynamic_pointer_cast<uml::Variable>(_temp);
 			setVariable(_variable); //25327

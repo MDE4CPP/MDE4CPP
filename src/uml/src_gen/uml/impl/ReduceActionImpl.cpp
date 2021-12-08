@@ -579,7 +579,7 @@ bool ReduceActionImpl::eSet(int featureID, Any newValue)
 	{
 		case uml::umlPackage::REDUCEACTION_ATTRIBUTE_COLLECTION:
 		{
-			// BOOST CAST
+			// CAST Any to uml::InputPin
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::InputPin> _collection = std::dynamic_pointer_cast<uml::InputPin>(_temp);
 			setCollection(_collection); //20627
@@ -587,14 +587,14 @@ bool ReduceActionImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::REDUCEACTION_ATTRIBUTE_ISORDERED:
 		{
-			// BOOST CAST
+			// CAST Any to bool
 			bool _isOrdered = newValue->get<bool>();
 			setIsOrdered(_isOrdered); //20628
 			return true;
 		}
 		case uml::umlPackage::REDUCEACTION_ATTRIBUTE_REDUCER:
 		{
-			// BOOST CAST
+			// CAST Any to uml::Behavior
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Behavior> _reducer = std::dynamic_pointer_cast<uml::Behavior>(_temp);
 			setReducer(_reducer); //20629
@@ -602,7 +602,7 @@ bool ReduceActionImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::REDUCEACTION_ATTRIBUTE_RESULT:
 		{
-			// BOOST CAST
+			// CAST Any to uml::OutputPin
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::OutputPin> _result = std::dynamic_pointer_cast<uml::OutputPin>(_temp);
 			setResult(_result); //20630

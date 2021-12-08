@@ -251,8 +251,7 @@ Any OrderedSetTypeValueImpl::eInvoke(int operationID, std::shared_ptr<std::list<
 
   	switch(operationID)
 	{
-		
-		// 1906377029
+		// ocl::Values::OrderedSetTypeValue::addValue(fUML::Semantics::Values::Value) : bool: 1906377029
 		case ValuesPackage::ORDEREDSETTYPEVALUE_OPERATION_ADDVALUE_VALUE:
 		{
 			//Retrieve input parameter 'value'
@@ -260,7 +259,7 @@ Any OrderedSetTypeValueImpl::eInvoke(int operationID, std::shared_ptr<std::list<
 			std::shared_ptr<fUML::Semantics::Values::Value> incoming_param_value;
 			std::list<Any>::const_iterator incoming_param_value_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_value = (*incoming_param_value_arguments_citer)->get<std::shared_ptr<fUML::Semantics::Values::Value> >();
-					result = eAny(this->addValue(incoming_param_value),0,false);
+			result = eAny(this->addValue(incoming_param_value),0,false);
 			break;
 		}
 

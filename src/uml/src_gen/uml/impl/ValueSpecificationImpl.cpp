@@ -448,7 +448,7 @@ bool ValueSpecificationImpl::eSet(int featureID, Any newValue)
 	{
 		case uml::umlPackage::VALUESPECIFICATION_ATTRIBUTE_OWNINGSLOT:
 		{
-			// BOOST CAST
+			// CAST Any to uml::Slot
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Slot> _owningSlot = std::dynamic_pointer_cast<uml::Slot>(_temp);
 			setOwningSlot(_owningSlot); //25013
@@ -456,7 +456,7 @@ bool ValueSpecificationImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::VALUESPECIFICATION_ATTRIBUTE_VALUESPECIFICATIONACTION:
 		{
-			// BOOST CAST
+			// CAST Any to uml::ValueSpecificationAction
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::ValueSpecificationAction> _valueSpecificationAction = std::dynamic_pointer_cast<uml::ValueSpecificationAction>(_temp);
 			setValueSpecificationAction(_valueSpecificationAction); //25014

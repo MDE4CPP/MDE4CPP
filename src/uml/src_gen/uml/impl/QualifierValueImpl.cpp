@@ -353,7 +353,7 @@ bool QualifierValueImpl::eSet(int featureID, Any newValue)
 	{
 		case uml::umlPackage::QUALIFIERVALUE_ATTRIBUTE_QUALIFIER:
 		{
-			// BOOST CAST
+			// CAST Any to uml::Property
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Property> _qualifier = std::dynamic_pointer_cast<uml::Property>(_temp);
 			setQualifier(_qualifier); //1913
@@ -361,7 +361,7 @@ bool QualifierValueImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::QUALIFIERVALUE_ATTRIBUTE_VALUE:
 		{
-			// BOOST CAST
+			// CAST Any to uml::InputPin
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::InputPin> _value = std::dynamic_pointer_cast<uml::InputPin>(_temp);
 			setValue(_value); //1914

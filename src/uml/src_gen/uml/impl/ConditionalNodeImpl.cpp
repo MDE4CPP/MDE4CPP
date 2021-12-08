@@ -712,9 +712,9 @@ bool ConditionalNodeImpl::eSet(int featureID, Any newValue)
 	{
 		case uml::umlPackage::CONDITIONALNODE_ATTRIBUTE_CLAUSE:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::Clause>
 			if((newValue->isContainer()) && (uml::umlPackage::CLAUSE_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::Clause>> clauseList= newValue->get<std::shared_ptr<Bag<uml::Clause>>>();
@@ -749,23 +749,23 @@ bool ConditionalNodeImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::CONDITIONALNODE_ATTRIBUTE_ISASSURED:
 		{
-			// BOOST CAST
+			// CAST Any to bool
 			bool _isAssured = newValue->get<bool>();
 			setIsAssured(_isAssured); //4945
 			return true;
 		}
 		case uml::umlPackage::CONDITIONALNODE_ATTRIBUTE_ISDETERMINATE:
 		{
-			// BOOST CAST
+			// CAST Any to bool
 			bool _isDeterminate = newValue->get<bool>();
 			setIsDeterminate(_isDeterminate); //4946
 			return true;
 		}
 		case uml::umlPackage::CONDITIONALNODE_ATTRIBUTE_RESULT:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::OutputPin>
 			if((newValue->isContainer()) && (uml::umlPackage::OUTPUTPIN_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::OutputPin>> resultList= newValue->get<std::shared_ptr<Bag<uml::OutputPin>>>();

@@ -613,9 +613,9 @@ bool ProtocolStateMachineImpl::eSet(int featureID, Any newValue)
 	{
 		case uml::umlPackage::PROTOCOLSTATEMACHINE_ATTRIBUTE_CONFORMANCE:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::ProtocolConformance>
 			if((newValue->isContainer()) && (uml::umlPackage::PROTOCOLCONFORMANCE_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::ProtocolConformance>> conformanceList= newValue->get<std::shared_ptr<Bag<uml::ProtocolConformance>>>();

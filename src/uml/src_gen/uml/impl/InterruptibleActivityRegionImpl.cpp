@@ -447,9 +447,9 @@ bool InterruptibleActivityRegionImpl::eSet(int featureID, Any newValue)
 	{
 		case uml::umlPackage::INTERRUPTIBLEACTIVITYREGION_ATTRIBUTE_INTERRUPTINGEDGE:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::ActivityEdge>
 			if((newValue->isContainer()) && (uml::umlPackage::ACTIVITYEDGE_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::ActivityEdge>> interruptingEdgeList= newValue->get<std::shared_ptr<Bag<uml::ActivityEdge>>>();
@@ -484,9 +484,9 @@ bool InterruptibleActivityRegionImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::INTERRUPTIBLEACTIVITYREGION_ATTRIBUTE_NODE:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::ActivityNode>
 			if((newValue->isContainer()) && (uml::umlPackage::ACTIVITYNODE_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::ActivityNode>> nodeList= newValue->get<std::shared_ptr<Bag<uml::ActivityNode>>>();

@@ -393,7 +393,7 @@ bool LiteralIntegerImpl::eSet(int featureID, Any newValue)
 	{
 		case uml::umlPackage::LITERALINTEGER_ATTRIBUTE_VALUE:
 		{
-			// BOOST CAST
+			// CAST Any to int
 			int _value = newValue->get<int>();
 			setValue(_value); //13815
 			return true;

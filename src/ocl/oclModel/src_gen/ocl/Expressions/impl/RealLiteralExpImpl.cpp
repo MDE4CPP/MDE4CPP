@@ -400,7 +400,7 @@ Any RealLiteralExpImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case ocl::Expressions::ExpressionsPackage::REALLITERALEXP_ATTRIBUTE_REALSYMBOL:
-				return eAny(getRealSymbol(),0,true); //7423
+			return eAny(getRealSymbol(),0,true); //7423
 	}
 	return NumericLiteralExpImpl::eGet(featureID, resolve, coreType);
 }
@@ -421,7 +421,7 @@ bool RealLiteralExpImpl::eSet(int featureID, Any newValue)
 	{
 		case ocl::Expressions::ExpressionsPackage::REALLITERALEXP_ATTRIBUTE_REALSYMBOL:
 		{
-			// BOOST CAST
+			// CAST Any to int
 			int _realSymbol = newValue->get<int>();
 			setRealSymbol(_realSymbol); //7423
 			return true;

@@ -398,7 +398,7 @@ Any BooleanLiteralExpImpl::eGet(int featureID, bool resolve, bool coreType) cons
 	switch(featureID)
 	{
 		case ocl::Expressions::ExpressionsPackage::BOOLEANLITERALEXP_ATTRIBUTE_BOOLEANSYMBOL:
-				return eAny(getBooleanSymbol(),0,true); //923
+			return eAny(getBooleanSymbol(),0,true); //923
 	}
 	return PrimitiveLiteralExpImpl::eGet(featureID, resolve, coreType);
 }
@@ -419,7 +419,7 @@ bool BooleanLiteralExpImpl::eSet(int featureID, Any newValue)
 	{
 		case ocl::Expressions::ExpressionsPackage::BOOLEANLITERALEXP_ATTRIBUTE_BOOLEANSYMBOL:
 		{
-			// BOOST CAST
+			// CAST Any to bool
 			bool _booleanSymbol = newValue->get<bool>();
 			setBooleanSymbol(_booleanSymbol); //923
 			return true;

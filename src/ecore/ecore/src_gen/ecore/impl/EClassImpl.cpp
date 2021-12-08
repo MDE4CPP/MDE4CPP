@@ -1058,16 +1058,16 @@ bool EClassImpl::eSet(int featureID, Any newValue)
 	{
 		case ecore::ecorePackage::ECLASS_ATTRIBUTE_ABSTRACT:
 		{
-			// BOOST CAST
+			// CAST Any to bool
 			bool _abstract = newValue->get<bool>();
 			setAbstract(_abstract); //1211
 			return true;
 		}
 		case ecore::ecorePackage::ECLASS_ATTRIBUTE_EATTRIBUTES:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<ecore::EAttribute>
 			if((newValue->isContainer()) && (ecore::ecorePackage::EATTRIBUTE_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<ecore::EAttribute>> eAttributesList= newValue->get<std::shared_ptr<Bag<ecore::EAttribute>>>();
@@ -1102,9 +1102,9 @@ bool EClassImpl::eSet(int featureID, Any newValue)
 		}
 		case ecore::ecorePackage::ECLASS_ATTRIBUTE_EGENERICSUPERTYPES:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<ecore::EGenericType>
 			if((newValue->isContainer()) && (ecore::ecorePackage::EGENERICTYPE_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<ecore::EGenericType>> eGenericSuperTypesList= newValue->get<std::shared_ptr<Bag<ecore::EGenericType>>>();
@@ -1139,7 +1139,7 @@ bool EClassImpl::eSet(int featureID, Any newValue)
 		}
 		case ecore::ecorePackage::ECLASS_ATTRIBUTE_EIDATTRIBUTE:
 		{
-			// BOOST CAST
+			// CAST Any to ecore::EAttribute
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<ecore::EAttribute> _eIDAttribute = std::dynamic_pointer_cast<ecore::EAttribute>(_temp);
 			setEIDAttribute(_eIDAttribute); //1223
@@ -1147,9 +1147,9 @@ bool EClassImpl::eSet(int featureID, Any newValue)
 		}
 		case ecore::ecorePackage::ECLASS_ATTRIBUTE_EOPERATIONS:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<ecore::EOperation>
 			if((newValue->isContainer()) && (ecore::ecorePackage::EOPERATION_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<ecore::EOperation>> eOperationsList= newValue->get<std::shared_ptr<Bag<ecore::EOperation>>>();
@@ -1184,9 +1184,9 @@ bool EClassImpl::eSet(int featureID, Any newValue)
 		}
 		case ecore::ecorePackage::ECLASS_ATTRIBUTE_EREFERENCES:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<ecore::EReference>
 			if((newValue->isContainer()) && (ecore::ecorePackage::EREFERENCE_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<ecore::EReference>> eReferencesList= newValue->get<std::shared_ptr<Bag<ecore::EReference>>>();
@@ -1221,9 +1221,9 @@ bool EClassImpl::eSet(int featureID, Any newValue)
 		}
 		case ecore::ecorePackage::ECLASS_ATTRIBUTE_ESTRUCTURALFEATURES:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<ecore::EStructuralFeature>
 			if((newValue->isContainer()) && (ecore::ecorePackage::ESTRUCTURALFEATURE_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<ecore::EStructuralFeature>> eStructuralFeaturesList= newValue->get<std::shared_ptr<Bag<ecore::EStructuralFeature>>>();
@@ -1258,9 +1258,9 @@ bool EClassImpl::eSet(int featureID, Any newValue)
 		}
 		case ecore::ecorePackage::ECLASS_ATTRIBUTE_ESUPERTYPES:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<ecore::EClass>
 			if((newValue->isContainer()) && (ecore::ecorePackage::ECLASS_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<ecore::EClass>> eSuperTypesList= newValue->get<std::shared_ptr<Bag<ecore::EClass>>>();
@@ -1295,7 +1295,7 @@ bool EClassImpl::eSet(int featureID, Any newValue)
 		}
 		case ecore::ecorePackage::ECLASS_ATTRIBUTE_INTERFACE:
 		{
-			// BOOST CAST
+			// CAST Any to bool
 			bool _interface = newValue->get<bool>();
 			setInterface(_interface); //1212
 			return true;
@@ -1322,7 +1322,7 @@ Any EClassImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argumen
 			int incoming_param_operationID;
 			std::list<Any>::const_iterator incoming_param_operationID_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_operationID = (*incoming_param_operationID_arguments_citer)->get<int >();
-			result = eAny(this->getEOperation(incoming_param_operationID), ecorePackage::EOPERATION_CLASS,false);
+			result = eAny(this->getEOperation(incoming_param_operationID), ecore::ecorePackage::EOPERATION_CLASS,false);
 			break;
 		}
 		// ecore::EClass::getEStructuralFeature(int) : ecore::EStructuralFeature {const}: 1143915648
@@ -1333,7 +1333,7 @@ Any EClassImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argumen
 			int incoming_param_featureID;
 			std::list<Any>::const_iterator incoming_param_featureID_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_featureID = (*incoming_param_featureID_arguments_citer)->get<int >();
-			result = eAny(this->getEStructuralFeature(incoming_param_featureID), ecorePackage::ESTRUCTURALFEATURE_CLASS,false);
+			result = eAny(this->getEStructuralFeature(incoming_param_featureID), ecore::ecorePackage::ESTRUCTURALFEATURE_CLASS,false);
 			break;
 		}
 		// ecore::EClass::getEStructuralFeature(std::string) : ecore::EStructuralFeature {const}: 927658850
@@ -1344,7 +1344,7 @@ Any EClassImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argumen
 			std::string incoming_param_featureName;
 			std::list<Any>::const_iterator incoming_param_featureName_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_featureName = (*incoming_param_featureName_arguments_citer)->get<std::string >();
-			result = eAny(this->getEStructuralFeature(incoming_param_featureName), ecorePackage::ESTRUCTURALFEATURE_CLASS,false);
+			result = eAny(this->getEStructuralFeature(incoming_param_featureName), ecore::ecorePackage::ESTRUCTURALFEATURE_CLASS,false);
 			break;
 		}
 		// ecore::EClass::getFeatureCount() : int {const}: 663421227
@@ -1372,7 +1372,7 @@ Any EClassImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argumen
 			std::shared_ptr<ecore::EStructuralFeature> incoming_param_feature;
 			std::list<Any>::const_iterator incoming_param_feature_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_feature = (*incoming_param_feature_arguments_citer)->get<std::shared_ptr<ecore::EStructuralFeature> >();
-			result = eAny(this->getFeatureType(incoming_param_feature), ecorePackage::EGENERICTYPE_CLASS,false);
+			result = eAny(this->getFeatureType(incoming_param_feature), ecore::ecorePackage::EGENERICTYPE_CLASS,false);
 			break;
 		}
 		// ecore::EClass::getOperationCount() : int {const}: 2008923785
@@ -1400,7 +1400,7 @@ Any EClassImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argumen
 			std::shared_ptr<ecore::EOperation> incoming_param_operation;
 			std::list<Any>::const_iterator incoming_param_operation_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_operation = (*incoming_param_operation_arguments_citer)->get<std::shared_ptr<ecore::EOperation> >();
-			result = eAny(this->getOverride(incoming_param_operation), ecorePackage::EOPERATION_CLASS,false);
+			result = eAny(this->getOverride(incoming_param_operation), ecore::ecorePackage::EOPERATION_CLASS,false);
 			break;
 		}
 		// ecore::EClass::isSuperTypeOf(ecore::EClass) : bool {const}: 253558657

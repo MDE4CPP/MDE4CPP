@@ -377,7 +377,7 @@ bool RedefinableElementImpl::eSet(int featureID, Any newValue)
 	{
 		case uml::umlPackage::REDEFINABLEELEMENT_ATTRIBUTE_ISLEAF:
 		{
-			// BOOST CAST
+			// CAST Any to bool
 			bool _isLeaf = newValue->get<bool>();
 			setIsLeaf(_isLeaf); //2049
 			return true;

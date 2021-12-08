@@ -828,7 +828,7 @@ bool TransitionImpl::eSet(int featureID, Any newValue)
 	{
 		case uml::umlPackage::TRANSITION_ATTRIBUTE_CONTAINER:
 		{
-			// BOOST CAST
+			// CAST Any to uml::Region
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Region> _container = std::dynamic_pointer_cast<uml::Region>(_temp);
 			setContainer(_container); //24125
@@ -836,7 +836,7 @@ bool TransitionImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::TRANSITION_ATTRIBUTE_EFFECT:
 		{
-			// BOOST CAST
+			// CAST Any to uml::Behavior
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Behavior> _effect = std::dynamic_pointer_cast<uml::Behavior>(_temp);
 			setEffect(_effect); //24118
@@ -844,7 +844,7 @@ bool TransitionImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::TRANSITION_ATTRIBUTE_GUARD:
 		{
-			// BOOST CAST
+			// CAST Any to uml::Constraint
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Constraint> _guard = std::dynamic_pointer_cast<uml::Constraint>(_temp);
 			setGuard(_guard); //24119
@@ -852,14 +852,14 @@ bool TransitionImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::TRANSITION_ATTRIBUTE_KIND:
 		{
-			// BOOST CAST
+			// CAST Any to uml::TransitionKind
 			uml::TransitionKind _kind = newValue->get<uml::TransitionKind>();
 			setKind(_kind); //24120
 			return true;
 		}
 		case uml::umlPackage::TRANSITION_ATTRIBUTE_REDEFINEDTRANSITION:
 		{
-			// BOOST CAST
+			// CAST Any to uml::Transition
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Transition> _redefinedTransition = std::dynamic_pointer_cast<uml::Transition>(_temp);
 			setRedefinedTransition(_redefinedTransition); //24121
@@ -867,7 +867,7 @@ bool TransitionImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::TRANSITION_ATTRIBUTE_SOURCE:
 		{
-			// BOOST CAST
+			// CAST Any to uml::Vertex
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Vertex> _source = std::dynamic_pointer_cast<uml::Vertex>(_temp);
 			setSource(_source); //24122
@@ -875,7 +875,7 @@ bool TransitionImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::TRANSITION_ATTRIBUTE_TARGET:
 		{
-			// BOOST CAST
+			// CAST Any to uml::Vertex
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Vertex> _target = std::dynamic_pointer_cast<uml::Vertex>(_temp);
 			setTarget(_target); //24123
@@ -883,9 +883,9 @@ bool TransitionImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::TRANSITION_ATTRIBUTE_TRIGGER:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::Trigger>
 			if((newValue->isContainer()) && (uml::umlPackage::TRIGGER_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::Trigger>> triggerList= newValue->get<std::shared_ptr<Bag<uml::Trigger>>>();
@@ -942,7 +942,7 @@ Any TransitionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arg
 		// uml::Transition::containingStateMachine() : uml::StateMachine: 1765667922
 		case umlPackage::TRANSITION_OPERATION_CONTAININGSTATEMACHINE:
 		{
-			result = eAny(this->containingStateMachine(), umlPackage::STATEMACHINE_CLASS,false);
+			result = eAny(this->containingStateMachine(), uml::umlPackage::STATEMACHINE_CLASS,false);
 			break;
 		}
 		// uml::Transition::fork_segment_guards(Any, std::map) : bool: 909121488
@@ -1044,7 +1044,7 @@ Any TransitionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arg
 		// uml::Transition::redefinitionContext() : uml::Classifier: 1971879180
 		case umlPackage::TRANSITION_OPERATION_REDEFINITIONCONTEXT:
 		{
-			result = eAny(this->redefinitionContext(), umlPackage::CLASSIFIER_CLASS,false);
+			result = eAny(this->redefinitionContext(), uml::umlPackage::CLASSIFIER_CLASS,false);
 			break;
 		}
 		// uml::Transition::state_is_external(Any, std::map) : bool: 1155164645

@@ -694,7 +694,7 @@ bool InputPinImpl::eSet(int featureID, Any newValue)
 	{
 		case uml::umlPackage::INPUTPIN_ATTRIBUTE_ADDSTRUCTURALFEATUREVALUEACTION:
 		{
-			// BOOST CAST
+			// CAST Any to uml::AddStructuralFeatureValueAction
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::AddStructuralFeatureValueAction> _addStructuralFeatureValueAction = std::dynamic_pointer_cast<uml::AddStructuralFeatureValueAction>(_temp);
 			setAddStructuralFeatureValueAction(_addStructuralFeatureValueAction); //11638
@@ -702,7 +702,7 @@ bool InputPinImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::INPUTPIN_ATTRIBUTE_CALLOPERATIONACTION:
 		{
-			// BOOST CAST
+			// CAST Any to uml::CallOperationAction
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::CallOperationAction> _callOperationAction = std::dynamic_pointer_cast<uml::CallOperationAction>(_temp);
 			setCallOperationAction(_callOperationAction); //11634
@@ -710,7 +710,7 @@ bool InputPinImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::INPUTPIN_ATTRIBUTE_DESTROYOBJECTACTION:
 		{
-			// BOOST CAST
+			// CAST Any to uml::DestroyObjectAction
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::DestroyObjectAction> _destroyObjectAction = std::dynamic_pointer_cast<uml::DestroyObjectAction>(_temp);
 			setDestroyObjectAction(_destroyObjectAction); //11639
@@ -718,7 +718,7 @@ bool InputPinImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::INPUTPIN_ATTRIBUTE_INVOCATIONACTION:
 		{
-			// BOOST CAST
+			// CAST Any to uml::InvocationAction
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::InvocationAction> _invocationAction = std::dynamic_pointer_cast<uml::InvocationAction>(_temp);
 			setInvocationAction(_invocationAction); //11635
@@ -726,7 +726,7 @@ bool InputPinImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::INPUTPIN_ATTRIBUTE_REMOVESTRUCTURALFEATUREVALUEACTION:
 		{
-			// BOOST CAST
+			// CAST Any to uml::RemoveStructuralFeatureValueAction
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::RemoveStructuralFeatureValueAction> _removeStructuralFeatureValueAction = std::dynamic_pointer_cast<uml::RemoveStructuralFeatureValueAction>(_temp);
 			setRemoveStructuralFeatureValueAction(_removeStructuralFeatureValueAction); //11640
@@ -734,7 +734,7 @@ bool InputPinImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::INPUTPIN_ATTRIBUTE_STRUCTURALFEATUREACTION:
 		{
-			// BOOST CAST
+			// CAST Any to uml::StructuralFeatureAction
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::StructuralFeatureAction> _structuralFeatureAction = std::dynamic_pointer_cast<uml::StructuralFeatureAction>(_temp);
 			setStructuralFeatureAction(_structuralFeatureAction); //11633
@@ -742,7 +742,7 @@ bool InputPinImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::INPUTPIN_ATTRIBUTE_WRITESTRUCTURALFEATUREACTION:
 		{
-			// BOOST CAST
+			// CAST Any to uml::WriteStructuralFeatureAction
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::WriteStructuralFeatureAction> _writeStructuralFeatureAction = std::dynamic_pointer_cast<uml::WriteStructuralFeatureAction>(_temp);
 			setWriteStructuralFeatureAction(_writeStructuralFeatureAction); //11637

@@ -143,7 +143,7 @@ OpaqueActionImpl& OpaqueActionImpl::operator=(const OpaqueActionImpl & obj)
 		m_body.reset(new Bag<std::string>());
 		for(const std::shared_ptr<std::string> it: *bodyList) 
 		{
-			m_body->push_back(*it);
+			m_body->push_back(it);
 		}
 	}
 	else
@@ -156,7 +156,7 @@ OpaqueActionImpl& OpaqueActionImpl::operator=(const OpaqueActionImpl & obj)
 		m_language.reset(new Bag<std::string>());
 		for(const std::shared_ptr<std::string> it: *languageList) 
 		{
-			m_language->push_back(*it);
+			m_language->push_back(it);
 		}
 	}
 	else
@@ -646,15 +646,15 @@ bool OpaqueActionImpl::eSet(int featureID, Any newValue)
 	{
 		case uml::umlPackage::OPAQUEACTION_ATTRIBUTE_BODY:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<std::string>
 			// nothing to do
 			return true;
 		}
 		case uml::umlPackage::OPAQUEACTION_ATTRIBUTE_INPUTVALUE:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::InputPin>
 			if((newValue->isContainer()) && (uml::umlPackage::INPUTPIN_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::InputPin>> inputValueList= newValue->get<std::shared_ptr<Bag<uml::InputPin>>>();
@@ -689,15 +689,15 @@ bool OpaqueActionImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::OPAQUEACTION_ATTRIBUTE_LANGUAGE:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<std::string>
 			// nothing to do
 			return true;
 		}
 		case uml::umlPackage::OPAQUEACTION_ATTRIBUTE_OUTPUTVALUE:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::OutputPin>
 			if((newValue->isContainer()) && (uml::umlPackage::OUTPUTPIN_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::OutputPin>> outputValueList= newValue->get<std::shared_ptr<Bag<uml::OutputPin>>>();

@@ -42,6 +42,11 @@
 #include "ecore/EObject.hpp"
 #include "ecore/EPackage.hpp"
 
+#include "types/typesPackage.hpp"
+#include "ecore/EObjectContainer.hpp"
+#include "ecore/EReference.hpp"
+#include "ecore/EOperation.hpp"
+
 //Factories an Package includes
 #include "ecore/ecorePackage.hpp"
 
@@ -120,8 +125,214 @@ std::shared_ptr<ecore::EObject> EFactoryImpl::copy() const
 //*********************************
 std::string EFactoryImpl::convertToString(std::shared_ptr<ecore::EDataType> eDataType,Any instanceValue) const
 {
-	std::cout << __PRETTY_FUNCTION__  << std::endl;
-	throw "UnsupportedOperationException";
+	std::ostringstream returnStringStream;
+	if(!instanceValue->isEmpty())
+	{
+		if(instanceValue->isContainer())
+		{
+			try
+			{
+				switch (instanceValue->getTypeId())
+				{
+					case ecore::ecorePackage::EOBJECT_CLASS:
+					{
+						std::shared_ptr<Bag<ecore::EObject>> eObjectBag;
+						std::shared_ptr<AnyEObjectBag> anyObjectBag = std::dynamic_pointer_cast<AnyEObjectBag>(instanceValue);
+						if(nullptr!=anyObjectBag)// AnyEobjectBag?
+						{
+							eObjectBag=anyObjectBag->getBag();
+							returnStringStream << "<AnyEObjectBag<EObject>> size: " << eObjectBag->size() <<std::endl;
+						}
+						else
+						{
+							eObjectBag= instanceValue->get<std::shared_ptr<Bag<ecore::EObject>>>(); //throws exception
+							returnStringStream << "<Bag<EObject>> size: " << eObjectBag->size() <<std::endl;
+						}
+						for(const std::shared_ptr<ecore::EObject> object: *eObjectBag)
+						{	// recursive Call of convertToString via new Any EObject Value
+							returnStringStream << "\t"<< convertToString(eDataType,eAny(object,ecore::ecorePackage::EOBJECT_CLASS,false))<<std::endl;;
+						}
+						break;
+					}
+					case ecore::ecorePackage::EOBJECTCONTAINER_CLASS:
+					{
+						std::shared_ptr<ecore::EObjectContainer> eObjectContainer = instanceValue->get<std::shared_ptr<ecore::EObjectContainer>>();
+						std::shared_ptr<Bag<ecore::EObject>> eObjectBag =  eObjectContainer->getContainer();
+						returnStringStream << "<EObjectContainer> size: " << eObjectBag->size() <<std::endl;
+						for(const std::shared_ptr<ecore::EObject> object: *eObjectBag)
+						{	// recursive Call of convertToString via new Any EObject Value
+							returnStringStream << "\t"<<convertToString(eDataType,eAny(object,ecore::ecorePackage::EOBJECT_CLASS,false))<<std::endl;;
+						}
+						break;
+					}
+					default:
+					{
+						std::shared_ptr<AnyEObjectBag> anyObjectBag = std::dynamic_pointer_cast<AnyEObjectBag>(instanceValue);
+						if(nullptr!=anyObjectBag)// AnyEObjectBag?
+						{
+							std::shared_ptr<Bag<ecore::EObject>> eObjectBag=anyObjectBag->getBag();
+							returnStringStream << "<AnyEObjectBag> size: " << eObjectBag->size() <<std::endl;
+							for(const std::shared_ptr<ecore::EObject> object: *eObjectBag)
+							{	// recursive Call of convertToString via new Any EObject Value
+								returnStringStream << "\t"<<convertToString(eDataType,eAny(object,ecore::ecorePackage::EOBJECT_CLASS,false))<<std::endl;;
+							}
+							break;
+						}
+						else // last supported type bag<Any>
+						{
+							std::shared_ptr<Bag<AnyObject>> anyBag = instanceValue->get<std::shared_ptr<Bag<AnyObject>>>();
+							unsigned int size=anyBag->size();
+							returnStringStream << "<Bag<Any>> size: " << size<<std::endl;
+							for(unsigned int i = 0; i < size; i++)
+							{
+								returnStringStream << "\t"<<convertToString(eDataType, anyBag->at(i));
+							}
+						}
+					}
+				}
+			}
+			catch(...)
+			{
+				returnStringStream <<""<<std::endl;
+			}
+		}
+		else
+		{
+			try
+			{
+				switch(instanceValue->getTypeId())
+				{
+					case ecore::ecorePackage::EOBJECT_CLASS: // unknown or primitive type
+					{
+						std::shared_ptr<ecore::EObject> aObject = instanceValue->get<std::shared_ptr<ecore::EObject>>();
+						std::shared_ptr<ecore::ENamedElement> eNamedElement= std::dynamic_pointer_cast<ecore::ENamedElement>(aObject);
+						if(nullptr != eNamedElement)
+						{
+							returnStringStream << "<EObject name:"<< eNamedElement->getName() << ">" <<std::endl;
+						}
+						else
+						{
+							returnStringStream << "<EObject>" << std::endl;
+						}
+						Any content = aObject->eAllContents();
+						returnStringStream << convertToString(eDataType,content);
+						break;
+					}
+					case ecore::ecorePackage::EATTRIBUTE_CLASS:
+					{
+						std::shared_ptr<ecore::EAttribute> aValue = instanceValue->get<std::shared_ptr<ecore::EAttribute>>();
+						returnStringStream << "<EAttribute>:" << aValue->getName() << ":"<< aValue->getEAttributeType()->getName()<<std::endl;
+						break;
+					}
+					case ecore::ecorePackage::EREFERENCE_CLASS:
+					{
+						std::shared_ptr<ecore::EReference> aValue = instanceValue->get<std::shared_ptr<ecore::EReference>>();
+						returnStringStream << "<EReference>:" << aValue->getName() << ":"<< aValue->getEReferenceType()->getName()<<std::endl;
+						break;
+					}
+					case ecore::ecorePackage::EOPERATION_CLASS:
+					{
+						std::shared_ptr<ecore::EOperation> aValue = instanceValue->get<std::shared_ptr<ecore::EOperation>>();
+						returnStringStream << "<EOperation>:" << aValue->getName() << "(...):"<< aValue->getEType()->getName()<<std::endl;
+						break;
+					}
+					case ecore::ecorePackage::EOBJECTCONTAINER_CLASS:
+					{
+						std::shared_ptr<ecore::EObjectContainer> eObjectContainer = instanceValue->get<std::shared_ptr<ecore::EObjectContainer>>();
+						std::shared_ptr<Bag<ecore::EObject>> eObjectBag =  eObjectContainer->getContainer();
+						returnStringStream << "<EObjectContainer> size: " << eObjectBag->size() <<std::endl;
+						for(const std::shared_ptr<ecore::EObject> object: *eObjectBag)
+						{	// recursive Call of convertToString via new Any EObject Value
+							returnStringStream << "\t"<<convertToString(eDataType,eAny(object,ecore::ecorePackage::EOBJECT_CLASS,false))<<std::endl;;
+						}
+						break;
+					}
+					case types::typesPackage::BOOLEAN_CLASS:
+					{
+						bool result = instanceValue->get<bool>();
+						returnStringStream << result << std::endl;
+						break;
+					}
+					case types::typesPackage::INTEGER_CLASS:
+					{
+						int result = instanceValue->get<int>();
+						returnStringStream << result << std::endl;
+						break;
+					}
+					case types::typesPackage::STRING_CLASS:
+					{
+						std::string result = instanceValue->get<std::string>();
+						returnStringStream << result << std::endl;
+						break;
+					}
+					case types::typesPackage::REAL_CLASS:
+					{
+						try
+						{
+							double result = instanceValue->get<double>();
+							returnStringStream << result << std::endl;
+							break;
+						} catch (...){}
+						try
+						{
+							float result = instanceValue->get<float>();
+							returnStringStream << result << std::endl;
+						} catch (...){}
+						break;
+					}
+					case types::typesPackage::ANY_CLASS:
+					{
+						std::shared_ptr<AnyObject> any = instanceValue->get<std::shared_ptr<AnyObject>>();
+						returnStringStream << "<AnyObject>:" << std::endl;
+						returnStringStream << convertToString(eDataType, any) << std::endl;
+						break;
+					}
+					default: // unknown or primitive type / or 0--> Try & Error
+					{
+						try {
+							bool result = instanceValue->get<bool>();
+							returnStringStream << result << std::endl;
+							break;
+						} catch (...) { }
+						try {
+							int result = instanceValue->get<int>();
+							returnStringStream << result << std::endl;
+							break;
+						} catch (...) { }
+						try {
+							std::string result = instanceValue->get<std::string>();
+							returnStringStream << result << std::endl;
+							break;
+						} catch (...) { }
+						try {
+							double result = instanceValue->get<double>();
+							returnStringStream << result << std::endl;
+							break;
+						} catch (...){}
+						try {
+							std::string result = instanceValue->get<std::string>();
+							returnStringStream << result << std::endl;
+							break;
+						} catch (...){}
+						try {
+							std::shared_ptr<AnyObject> any = instanceValue->get<std::shared_ptr<AnyObject>>();
+							returnStringStream << "<AnyObject>:" << std::endl;
+							returnStringStream << convertToString(eDataType, any) << std::endl;
+							break;
+						} catch (...) { }
+						{
+							std::cout << "Unknowm value"<< std::endl;
+						}
+					}
+				}
+			}
+			catch (...) { }
+			{
+				std::cout << "Invalid value"<< std::endl;
+			}
+		}
+	}
+	return returnStringStream.str();
 }
 
 std::shared_ptr<ecore::EObject> EFactoryImpl::create(std::shared_ptr<ecore::EClass> eClass) const
@@ -360,7 +571,7 @@ Any EFactoryImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argum
 			std::shared_ptr<ecore::EClass> incoming_param_eClass;
 			std::list<Any>::const_iterator incoming_param_eClass_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_eClass = (*incoming_param_eClass_arguments_citer)->get<std::shared_ptr<ecore::EClass> >();
-			result = eAny(this->create(incoming_param_eClass), ecorePackage::EOBJECT_CLASS,false);
+			result = eAny(this->create(incoming_param_eClass), ecore::ecorePackage::EOBJECT_CLASS,false);
 			break;
 		}
 		// ecore::EFactory::createFromString(ecore::EDataType, std::string) : Any {const}: 1793041850

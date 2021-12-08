@@ -1200,9 +1200,9 @@ bool ActivityImpl::eSet(int featureID, Any newValue)
 	{
 		case uml::umlPackage::ACTIVITY_ATTRIBUTE_EDGE:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::ActivityEdge>
 			if((newValue->isContainer()) && (uml::umlPackage::ACTIVITYEDGE_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::ActivityEdge>> edgeList= newValue->get<std::shared_ptr<Bag<uml::ActivityEdge>>>();
@@ -1237,9 +1237,9 @@ bool ActivityImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::ACTIVITY_ATTRIBUTE_GROUP:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::ActivityGroup>
 			if((newValue->isContainer()) && (uml::umlPackage::ACTIVITYGROUP_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::ActivityGroup>> groupList= newValue->get<std::shared_ptr<Bag<uml::ActivityGroup>>>();
@@ -1274,23 +1274,23 @@ bool ActivityImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::ACTIVITY_ATTRIBUTE_ISREADONLY:
 		{
-			// BOOST CAST
+			// CAST Any to bool
 			bool _isReadOnly = newValue->get<bool>();
 			setIsReadOnly(_isReadOnly); //768
 			return true;
 		}
 		case uml::umlPackage::ACTIVITY_ATTRIBUTE_ISSINGLEEXECUTION:
 		{
-			// BOOST CAST
+			// CAST Any to bool
 			bool _isSingleExecution = newValue->get<bool>();
 			setIsSingleExecution(_isSingleExecution); //769
 			return true;
 		}
 		case uml::umlPackage::ACTIVITY_ATTRIBUTE_NODE:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::ActivityNode>
 			if((newValue->isContainer()) && (uml::umlPackage::ACTIVITYNODE_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::ActivityNode>> nodeList= newValue->get<std::shared_ptr<Bag<uml::ActivityNode>>>();
@@ -1325,9 +1325,9 @@ bool ActivityImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::ACTIVITY_ATTRIBUTE_OWNEDGROUP:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::ActivityGroup>
 			if((newValue->isContainer()) && (uml::umlPackage::ACTIVITYGROUP_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::ActivityGroup>> ownedGroupList= newValue->get<std::shared_ptr<Bag<uml::ActivityGroup>>>();
@@ -1362,9 +1362,9 @@ bool ActivityImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::ACTIVITY_ATTRIBUTE_OWNEDNODE:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::ActivityNode>
 			if((newValue->isContainer()) && (uml::umlPackage::ACTIVITYNODE_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::ActivityNode>> ownedNodeList= newValue->get<std::shared_ptr<Bag<uml::ActivityNode>>>();
@@ -1399,9 +1399,9 @@ bool ActivityImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::ACTIVITY_ATTRIBUTE_PARTITION:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::ActivityPartition>
 			if((newValue->isContainer()) && (uml::umlPackage::ACTIVITYPARTITION_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::ActivityPartition>> partitionList= newValue->get<std::shared_ptr<Bag<uml::ActivityPartition>>>();
@@ -1436,9 +1436,9 @@ bool ActivityImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::ACTIVITY_ATTRIBUTE_STRUCTUREDNODE:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::StructuredActivityNode>
 			if((newValue->isContainer()) && (uml::umlPackage::STRUCTUREDACTIVITYNODE_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::StructuredActivityNode>> structuredNodeList= newValue->get<std::shared_ptr<Bag<uml::StructuredActivityNode>>>();
@@ -1473,9 +1473,9 @@ bool ActivityImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::ACTIVITY_ATTRIBUTE_VARIABLE:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::Variable>
 			if((newValue->isContainer()) && (uml::umlPackage::VARIABLE_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::Variable>> variableList= newValue->get<std::shared_ptr<Bag<uml::Variable>>>();

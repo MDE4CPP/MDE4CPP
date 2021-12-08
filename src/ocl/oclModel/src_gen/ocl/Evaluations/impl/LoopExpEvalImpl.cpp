@@ -33,11 +33,11 @@
 
 #include <exception> // used in Persistence
 #include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
+#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "fUML/Semantics/Values/ValuesFactory.hpp"
 #include "uml/umlFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
-#include "fUML/Semantics/Loci/LociFactory.hpp"
 
 #include "ocl/Evaluations/EvalEnvironment.hpp"
 #include "fUML/Semantics/Loci/Locus.hpp"
@@ -306,27 +306,11 @@ Any LoopExpEvalImpl::eGet(int featureID, bool resolve, bool coreType) const
 	{
 		case ocl::Evaluations::EvaluationsPackage::LOOPEXPEVAL_ATTRIBUTE_BODYEVALS:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<ocl::Evaluations::OclExpEval>::iterator iter = getBodyEvals()->begin();
-			Bag<ocl::Evaluations::OclExpEval>::iterator end = getBodyEvals()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //487			
+			return eAnyBag(getBodyEvals(),731240084); //487
 		}
 		case ocl::Evaluations::EvaluationsPackage::LOOPEXPEVAL_ATTRIBUTE_ITERATORS:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<fUML::Semantics::SimpleClassifiers::StringValue>::iterator iter = getIterators()->begin();
-			Bag<fUML::Semantics::SimpleClassifiers::StringValue>::iterator end = getIterators()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //488			
+			return eAnyBag(getIterators(),1276339704); //488
 		}
 	}
 	return PropertyCallExpEvalImpl::eGet(featureID, resolve, coreType);
@@ -350,73 +334,75 @@ bool LoopExpEvalImpl::eSet(int featureID, Any newValue)
 	{
 		case ocl::Evaluations::EvaluationsPackage::LOOPEXPEVAL_ATTRIBUTE_BODYEVALS:
 		{
-			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<ocl::Evaluations::OclExpEval>> bodyEvalsList(new Bag<ocl::Evaluations::OclExpEval>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
-			{
-				bodyEvalsList->add(std::dynamic_pointer_cast<ocl::Evaluations::OclExpEval>(*iter));
-				iter++;
-			}
-			
-			Bag<ocl::Evaluations::OclExpEval>::iterator iterBodyEvals = getBodyEvals()->begin();
-			Bag<ocl::Evaluations::OclExpEval>::iterator endBodyEvals = getBodyEvals()->end();
-			while (iterBodyEvals != endBodyEvals)
-			{
-				if (bodyEvalsList->find(*iterBodyEvals) == -1)
+			// CAST Any to Bag<ocl::Evaluations::OclExpEval>
+			if((newValue->isContainer()) && (ocl::Evaluations::EvaluationsPackage::OCLEXPEVAL_CLASS ==newValue->getTypeId()))
+			{ 
+				try
 				{
-					getBodyEvals()->erase(*iterBodyEvals);
+					std::shared_ptr<Bag<ocl::Evaluations::OclExpEval>> bodyEvalsList= newValue->get<std::shared_ptr<Bag<ocl::Evaluations::OclExpEval>>>();
+					std::shared_ptr<Bag<ocl::Evaluations::OclExpEval>> _bodyEvals=getBodyEvals();
+					for(const std::shared_ptr<ocl::Evaluations::OclExpEval> indexBodyEvals: *_bodyEvals)
+					{
+						if (bodyEvalsList->find(indexBodyEvals) == -1)
+						{
+							_bodyEvals->erase(indexBodyEvals);
+						}
+					}
+
+					for(const std::shared_ptr<ocl::Evaluations::OclExpEval> indexBodyEvals: *bodyEvalsList)
+					{
+						if (_bodyEvals->find(indexBodyEvals) == -1)
+						{
+							_bodyEvals->add(indexBodyEvals);
+						}
+					}
 				}
-				iterBodyEvals++;
-			}
- 
-			iterBodyEvals = bodyEvalsList->begin();
-			endBodyEvals = bodyEvalsList->end();
-			while (iterBodyEvals != endBodyEvals)
-			{
-				if (getBodyEvals()->find(*iterBodyEvals) == -1)
+				catch(...)
 				{
-					getBodyEvals()->add(*iterBodyEvals);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterBodyEvals++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}
 		case ocl::Evaluations::EvaluationsPackage::LOOPEXPEVAL_ATTRIBUTE_ITERATORS:
 		{
-			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::StringValue>> iteratorsList(new Bag<fUML::Semantics::SimpleClassifiers::StringValue>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
-			{
-				iteratorsList->add(std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::StringValue>(*iter));
-				iter++;
-			}
-			
-			Bag<fUML::Semantics::SimpleClassifiers::StringValue>::iterator iterIterators = getIterators()->begin();
-			Bag<fUML::Semantics::SimpleClassifiers::StringValue>::iterator endIterators = getIterators()->end();
-			while (iterIterators != endIterators)
-			{
-				if (iteratorsList->find(*iterIterators) == -1)
+			// CAST Any to Bag<fUML::Semantics::SimpleClassifiers::StringValue>
+			if((newValue->isContainer()) && (fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::STRINGVALUE_CLASS ==newValue->getTypeId()))
+			{ 
+				try
 				{
-					getIterators()->erase(*iterIterators);
+					std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::StringValue>> iteratorsList= newValue->get<std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::StringValue>>>();
+					std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::StringValue>> _iterators=getIterators();
+					for(const std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> indexIterators: *_iterators)
+					{
+						if (iteratorsList->find(indexIterators) == -1)
+						{
+							_iterators->erase(indexIterators);
+						}
+					}
+
+					for(const std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> indexIterators: *iteratorsList)
+					{
+						if (_iterators->find(indexIterators) == -1)
+						{
+							_iterators->add(indexIterators);
+						}
+					}
 				}
-				iterIterators++;
-			}
- 
-			iterIterators = iteratorsList->begin();
-			endIterators = iteratorsList->end();
-			while (iterIterators != endIterators)
-			{
-				if (getIterators()->find(*iterIterators) == -1)
+				catch(...)
 				{
-					getIterators()->add(*iterIterators);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterIterators++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}

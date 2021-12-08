@@ -274,8 +274,7 @@ Any ReadIsClassifiedObjectActionActivationImpl::eInvoke(int operationID, std::sh
 
   	switch(operationID)
 	{
-		
-		// 1906305416
+		// fUML::Semantics::Actions::ReadIsClassifiedObjectActionActivation::checkAllParents(uml::Classifier, uml::Classifier) : bool: 1906305416
 		case ActionsPackage::READISCLASSIFIEDOBJECTACTIONACTIVATION_OPERATION_CHECKALLPARENTS_CLASSIFIER_CLASSIFIER:
 		{
 			//Retrieve input parameter 'type'
@@ -288,7 +287,7 @@ Any ReadIsClassifiedObjectActionActivationImpl::eInvoke(int operationID, std::sh
 			std::shared_ptr<uml::Classifier> incoming_param_classifier;
 			std::list<Any>::const_iterator incoming_param_classifier_arguments_citer = std::next(arguments->begin(), 1);
 			incoming_param_classifier = (*incoming_param_classifier_arguments_citer)->get<std::shared_ptr<uml::Classifier> >();
-					result = eAny(this->checkAllParents(incoming_param_type,incoming_param_classifier),0,false);
+			result = eAny(this->checkAllParents(incoming_param_type,incoming_param_classifier),0,false);
 			break;
 		}
 

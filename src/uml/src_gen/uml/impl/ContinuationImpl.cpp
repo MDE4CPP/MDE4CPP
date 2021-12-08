@@ -361,7 +361,7 @@ bool ContinuationImpl::eSet(int featureID, Any newValue)
 	{
 		case uml::umlPackage::CONTINUATION_ATTRIBUTE_SETTING:
 		{
-			// BOOST CAST
+			// CAST Any to bool
 			bool _setting = newValue->get<bool>();
 			setSetting(_setting); //5813
 			return true;

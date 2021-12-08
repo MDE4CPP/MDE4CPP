@@ -130,14 +130,10 @@ ExecutionImpl& ExecutionImpl::operator=(const ExecutionImpl & obj)
 		m_parameterValues.reset(new Bag<fUML::Semantics::CommonBehavior::ParameterValue>());
 		
 		
-
-		Bag<fUML::Semantics::CommonBehavior::ParameterValue>::iterator parameterValuesIter = parameterValuesList->begin();
-		Bag<fUML::Semantics::CommonBehavior::ParameterValue>::iterator parameterValuesEnd = parameterValuesList->end();
-		while (parameterValuesIter != parameterValuesEnd) 
+		for(const std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> parameterValuesindexElem: *parameterValuesList) 
 		{
-			std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> temp = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::ParameterValue>((*parameterValuesIter)->copy());
-			getParameterValues()->push_back(temp);
-			parameterValuesIter++;
+			std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> temp = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::ParameterValue>((parameterValuesindexElem)->copy());
+			m_parameterValues->push_back(temp);
 		}
 	}
 	else
@@ -491,15 +487,7 @@ Any ExecutionImpl::eGet(int featureID, bool resolve, bool coreType) const
 		}
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::EXECUTION_ATTRIBUTE_PARAMETERVALUES:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<fUML::Semantics::CommonBehavior::ParameterValue>::iterator iter = getParameterValues()->begin();
-			Bag<fUML::Semantics::CommonBehavior::ParameterValue>::iterator end = getParameterValues()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //465			
+			return eAnyBag(getParameterValues(),1804530160); //465
 		}
 	}
 	return fUML::Semantics::StructuredClassifiers::ObjectImpl::eGet(featureID, resolve, coreType);
@@ -525,7 +513,7 @@ bool ExecutionImpl::eSet(int featureID, Any newValue)
 	{
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::EXECUTION_ATTRIBUTE_BEHAVIOR:
 		{
-			// BOOST CAST
+			// CAST Any to uml::Behavior
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Behavior> _behavior = std::dynamic_pointer_cast<uml::Behavior>(_temp);
 			setBehavior(_behavior); //466
@@ -533,7 +521,7 @@ bool ExecutionImpl::eSet(int featureID, Any newValue)
 		}
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::EXECUTION_ATTRIBUTE_CONTEXT:
 		{
-			// BOOST CAST
+			// CAST Any to fUML::Semantics::StructuredClassifiers::Object
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> _context = std::dynamic_pointer_cast<fUML::Semantics::StructuredClassifiers::Object>(_temp);
 			setContext(_context); //464
@@ -541,37 +529,38 @@ bool ExecutionImpl::eSet(int featureID, Any newValue)
 		}
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::EXECUTION_ATTRIBUTE_PARAMETERVALUES:
 		{
-			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> parameterValuesList(new Bag<fUML::Semantics::CommonBehavior::ParameterValue>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
-			{
-				parameterValuesList->add(std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::ParameterValue>(*iter));
-				iter++;
-			}
-			
-			Bag<fUML::Semantics::CommonBehavior::ParameterValue>::iterator iterParameterValues = getParameterValues()->begin();
-			Bag<fUML::Semantics::CommonBehavior::ParameterValue>::iterator endParameterValues = getParameterValues()->end();
-			while (iterParameterValues != endParameterValues)
-			{
-				if (parameterValuesList->find(*iterParameterValues) == -1)
+			// CAST Any to Bag<fUML::Semantics::CommonBehavior::ParameterValue>
+			if((newValue->isContainer()) && (fUML::Semantics::CommonBehavior::CommonBehaviorPackage::PARAMETERVALUE_CLASS ==newValue->getTypeId()))
+			{ 
+				try
 				{
-					getParameterValues()->erase(*iterParameterValues);
+					std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> parameterValuesList= newValue->get<std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>>>();
+					std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> _parameterValues=getParameterValues();
+					for(const std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> indexParameterValues: *_parameterValues)
+					{
+						if (parameterValuesList->find(indexParameterValues) == -1)
+						{
+							_parameterValues->erase(indexParameterValues);
+						}
+					}
+
+					for(const std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> indexParameterValues: *parameterValuesList)
+					{
+						if (_parameterValues->find(indexParameterValues) == -1)
+						{
+							_parameterValues->add(indexParameterValues);
+						}
+					}
 				}
-				iterParameterValues++;
-			}
- 
-			iterParameterValues = parameterValuesList->begin();
-			endParameterValues = parameterValuesList->end();
-			while (iterParameterValues != endParameterValues)
-			{
-				if (getParameterValues()->find(*iterParameterValues) == -1)
+				catch(...)
 				{
-					getParameterValues()->add(*iterParameterValues);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterParameterValues++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}
@@ -589,29 +578,25 @@ Any ExecutionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argu
 
   	switch(operationID)
 	{
-		
-		// 2119596406
+		// fUML::Semantics::CommonBehavior::Execution::_copy() : fUML::Semantics::Values::Value: 2119596406
 		case CommonBehaviorPackage::EXECUTION_OPERATION__COPY:
 		{
-				result = eAny(this->_copy());
+			result = eAny(this->_copy(), fUML::Semantics::Values::ValuesPackage::VALUE_CLASS,false);
 			break;
 		}
-		
-		// 650217545
+		// fUML::Semantics::CommonBehavior::Execution::execute(): 650217545
 		case CommonBehaviorPackage::EXECUTION_OPERATION_EXECUTE:
 		{
 			this->execute();
-			break;
 		}
-		
-		// 990554645
+		// fUML::Semantics::CommonBehavior::Execution::getOutputParameterValues() : fUML::Semantics::CommonBehavior::ParameterValue[*]: 990554645
 		case CommonBehaviorPackage::EXECUTION_OPERATION_GETOUTPUTPARAMETERVALUES:
 		{
-				result = eAny(this->getOutputParameterValues());
+			std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > resultList = this->getOutputParameterValues();
+			return eAny(resultList,fUML::Semantics::CommonBehavior::CommonBehaviorPackage::PARAMETERVALUE_CLASS,true);
 			break;
 		}
-		
-		// 190986849
+		// fUML::Semantics::CommonBehavior::Execution::getParameterValue(uml::Parameter) : fUML::Semantics::CommonBehavior::ParameterValue: 190986849
 		case CommonBehaviorPackage::EXECUTION_OPERATION_GETPARAMETERVALUE_PARAMETER:
 		{
 			//Retrieve input parameter 'parameter'
@@ -619,18 +604,16 @@ Any ExecutionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argu
 			std::shared_ptr<uml::Parameter> incoming_param_parameter;
 			std::list<Any>::const_iterator incoming_param_parameter_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_parameter = (*incoming_param_parameter_arguments_citer)->get<std::shared_ptr<uml::Parameter> >();
-				result = eAny(this->getParameterValue(incoming_param_parameter));
+			result = eAny(this->getParameterValue(incoming_param_parameter), fUML::Semantics::CommonBehavior::CommonBehaviorPackage::PARAMETERVALUE_CLASS,false);
 			break;
 		}
-		
-		// 1338828288
+		// fUML::Semantics::CommonBehavior::Execution::new_() : fUML::Semantics::Values::Value: 1338828288
 		case CommonBehaviorPackage::EXECUTION_OPERATION_NEW_:
 		{
-				result = eAny(this->new_());
+			result = eAny(this->new_(), fUML::Semantics::Values::ValuesPackage::VALUE_CLASS,false);
 			break;
 		}
-		
-		// 680977365
+		// fUML::Semantics::CommonBehavior::Execution::setParameterValue(fUML::Semantics::CommonBehavior::ParameterValue): 680977365
 		case CommonBehaviorPackage::EXECUTION_OPERATION_SETPARAMETERVALUE_PARAMETERVALUE:
 		{
 			//Retrieve input parameter 'parameterValue'
@@ -639,14 +622,11 @@ Any ExecutionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argu
 			std::list<Any>::const_iterator incoming_param_parameterValue_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_parameterValue = (*incoming_param_parameterValue_arguments_citer)->get<std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> >();
 			this->setParameterValue(incoming_param_parameterValue);
-			break;
 		}
-		
-		// 938662950
+		// fUML::Semantics::CommonBehavior::Execution::terminate(): 938662950
 		case CommonBehaviorPackage::EXECUTION_OPERATION_TERMINATE:
 		{
 			this->terminate();
-			break;
 		}
 
 		default:

@@ -274,7 +274,7 @@ Any ObjectImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argumen
 			std::list<Any>::const_iterator incoming_param_arguments_arguments_citer = std::next(arguments->begin(), 1);
 			incoming_param_arguments = (*incoming_param_arguments_arguments_citer)->get<std::shared_ptr<Bag<uml::Argument>> >();
 			std::shared_ptr<Bag<uml::Object> > resultList = this->invoke(incoming_param_op,incoming_param_arguments);
-			return eAny(resultList,umlPackage::OBJECT_CLASS,true);
+			return eAny(resultList,uml::umlPackage::OBJECT_CLASS,true);
 			break;
 		}
 		// uml::Object::set(uml::Property, Any): 1266543324

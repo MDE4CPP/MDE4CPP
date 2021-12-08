@@ -773,9 +773,9 @@ bool InformationFlowImpl::eSet(int featureID, Any newValue)
 	{
 		case uml::umlPackage::INFORMATIONFLOW_ATTRIBUTE_CONVEYED:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::Classifier>
 			if((newValue->isContainer()) && (uml::umlPackage::CLASSIFIER_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::Classifier>> conveyedList= newValue->get<std::shared_ptr<Bag<uml::Classifier>>>();
@@ -810,9 +810,9 @@ bool InformationFlowImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::INFORMATIONFLOW_ATTRIBUTE_INFORMATIONSOURCE:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::NamedElement>
 			if((newValue->isContainer()) && (uml::umlPackage::NAMEDELEMENT_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::NamedElement>> informationSourceList= newValue->get<std::shared_ptr<Bag<uml::NamedElement>>>();
@@ -847,9 +847,9 @@ bool InformationFlowImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::INFORMATIONFLOW_ATTRIBUTE_INFORMATIONTARGET:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::NamedElement>
 			if((newValue->isContainer()) && (uml::umlPackage::NAMEDELEMENT_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::NamedElement>> informationTargetList= newValue->get<std::shared_ptr<Bag<uml::NamedElement>>>();
@@ -884,9 +884,9 @@ bool InformationFlowImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::INFORMATIONFLOW_ATTRIBUTE_REALIZATION:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::Relationship>
 			if((newValue->isContainer()) && (uml::umlPackage::RELATIONSHIP_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::Relationship>> realizationList= newValue->get<std::shared_ptr<Bag<uml::Relationship>>>();
@@ -921,9 +921,9 @@ bool InformationFlowImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::INFORMATIONFLOW_ATTRIBUTE_REALIZINGACTIVITYEDGE:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::ActivityEdge>
 			if((newValue->isContainer()) && (uml::umlPackage::ACTIVITYEDGE_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::ActivityEdge>> realizingActivityEdgeList= newValue->get<std::shared_ptr<Bag<uml::ActivityEdge>>>();
@@ -958,9 +958,9 @@ bool InformationFlowImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::INFORMATIONFLOW_ATTRIBUTE_REALIZINGCONNECTOR:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::Connector>
 			if((newValue->isContainer()) && (uml::umlPackage::CONNECTOR_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::Connector>> realizingConnectorList= newValue->get<std::shared_ptr<Bag<uml::Connector>>>();
@@ -995,9 +995,9 @@ bool InformationFlowImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::INFORMATIONFLOW_ATTRIBUTE_REALIZINGMESSAGE:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::Message>
 			if((newValue->isContainer()) && (uml::umlPackage::MESSAGE_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::Message>> realizingMessageList= newValue->get<std::shared_ptr<Bag<uml::Message>>>();

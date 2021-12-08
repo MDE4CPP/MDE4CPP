@@ -392,7 +392,7 @@ bool ReadStructuralFeatureActionActivationImpl::eSet(int featureID, Any newValue
 	{
 		case fUML::Semantics::Actions::ActionsPackage::READSTRUCTURALFEATUREACTIONACTIVATION_ATTRIBUTE_READSTRUCTURALFEATUREACTION:
 		{
-			// BOOST CAST
+			// CAST Any to uml::ReadStructuralFeatureAction
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::ReadStructuralFeatureAction> _readStructuralFeatureAction = std::dynamic_pointer_cast<uml::ReadStructuralFeatureAction>(_temp);
 			setReadStructuralFeatureAction(_readStructuralFeatureAction); //9411
@@ -412,12 +412,10 @@ Any ReadStructuralFeatureActionActivationImpl::eInvoke(int operationID, std::sha
 
   	switch(operationID)
 	{
-		
-		// 1837829447
+		// fUML::Semantics::Actions::ReadStructuralFeatureActionActivation::doAction(): 1837829447
 		case ActionsPackage::READSTRUCTURALFEATUREACTIONACTIVATION_OPERATION_DOACTION:
 		{
 			this->doAction();
-			break;
 		}
 
 		default:

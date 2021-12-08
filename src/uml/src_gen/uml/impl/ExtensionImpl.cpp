@@ -513,19 +513,19 @@ Any ExtensionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argu
 		// uml::Extension::getMetaclass() : uml::Class: 210211592
 		case umlPackage::EXTENSION_OPERATION_GETMETACLASS:
 		{
-			result = eAny(this->getMetaclass(), umlPackage::CLASS_CLASS,false);
+			result = eAny(this->getMetaclass(), uml::umlPackage::CLASS_CLASS,false);
 			break;
 		}
 		// uml::Extension::getStereotype() : uml::Stereotype: 1488888961
 		case umlPackage::EXTENSION_OPERATION_GETSTEREOTYPE:
 		{
-			result = eAny(this->getStereotype(), umlPackage::STEREOTYPE_CLASS,false);
+			result = eAny(this->getStereotype(), uml::umlPackage::STEREOTYPE_CLASS,false);
 			break;
 		}
 		// uml::Extension::getStereotypeEnd() : uml::Property: 969898884
 		case umlPackage::EXTENSION_OPERATION_GETSTEREOTYPEEND:
 		{
-			result = eAny(this->getStereotypeEnd(), umlPackage::PROPERTY_CLASS,false);
+			result = eAny(this->getStereotypeEnd(), uml::umlPackage::PROPERTY_CLASS,false);
 			break;
 		}
 		// uml::Extension::isRequired() : bool: 792186175
@@ -553,7 +553,7 @@ Any ExtensionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argu
 		// uml::Extension::metaclassEnd() : uml::Property: 2105308144
 		case umlPackage::EXTENSION_OPERATION_METACLASSEND:
 		{
-			result = eAny(this->metaclassEnd(), umlPackage::PROPERTY_CLASS,false);
+			result = eAny(this->metaclassEnd(), uml::umlPackage::PROPERTY_CLASS,false);
 			break;
 		}
 		// uml::Extension::non_owned_end(Any, std::map) : bool: 1195964610

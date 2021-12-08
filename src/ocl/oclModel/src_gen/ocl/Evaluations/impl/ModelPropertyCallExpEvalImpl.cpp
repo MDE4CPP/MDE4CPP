@@ -31,11 +31,11 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
+#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "fUML/Semantics/Values/ValuesFactory.hpp"
 #include "uml/umlFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
-#include "fUML/Semantics/Loci/LociFactory.hpp"
 
 #include "ocl/Evaluations/EvalEnvironment.hpp"
 #include "fUML/Semantics/Loci/Locus.hpp"
@@ -251,11 +251,10 @@ Any ModelPropertyCallExpEvalImpl::eInvoke(int operationID, std::shared_ptr<std::
 
   	switch(operationID)
 	{
-		
-		// 2043150223
+		// ocl::Evaluations::ModelPropertyCallExpEval::atPre() : bool: 2043150223
 		case EvaluationsPackage::MODELPROPERTYCALLEXPEVAL_OPERATION_ATPRE:
 		{
-					result = eAny(this->atPre(),0,false);
+			result = eAny(this->atPre(),0,false);
 			break;
 		}
 

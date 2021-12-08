@@ -350,7 +350,7 @@ bool ParameterableElementImpl::eSet(int featureID, Any newValue)
 	{
 		case uml::umlPackage::PARAMETERABLEELEMENT_ATTRIBUTE_OWNINGTEMPLATEPARAMETER:
 		{
-			// BOOST CAST
+			// CAST Any to uml::TemplateParameter
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::TemplateParameter> _owningTemplateParameter = std::dynamic_pointer_cast<uml::TemplateParameter>(_temp);
 			setOwningTemplateParameter(_owningTemplateParameter); //1783
@@ -358,7 +358,7 @@ bool ParameterableElementImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::PARAMETERABLEELEMENT_ATTRIBUTE_TEMPLATEPARAMETER:
 		{
-			// BOOST CAST
+			// CAST Any to uml::TemplateParameter
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::TemplateParameter> _templateParameter = std::dynamic_pointer_cast<uml::TemplateParameter>(_temp);
 			setTemplateParameter(_templateParameter); //1784

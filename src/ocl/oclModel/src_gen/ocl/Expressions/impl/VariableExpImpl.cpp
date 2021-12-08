@@ -427,7 +427,7 @@ bool VariableExpImpl::eSet(int featureID, Any newValue)
 	{
 		case ocl::Expressions::ExpressionsPackage::VARIABLEEXP_ATTRIBUTE_REFERREDVARIABLE:
 		{
-			// BOOST CAST
+			// CAST Any to ocl::Expressions::Variable
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<ocl::Expressions::Variable> _referredVariable = std::dynamic_pointer_cast<ocl::Expressions::Variable>(_temp);
 			setReferredVariable(_referredVariable); //9922

@@ -485,14 +485,14 @@ bool RemoveStructuralFeatureValueActionImpl::eSet(int featureID, Any newValue)
 	{
 		case uml::umlPackage::REMOVESTRUCTURALFEATUREVALUEACTION_ATTRIBUTE_ISREMOVEDUPLICATES:
 		{
-			// BOOST CAST
+			// CAST Any to bool
 			bool _isRemoveDuplicates = newValue->get<bool>();
 			setIsRemoveDuplicates(_isRemoveDuplicates); //20931
 			return true;
 		}
 		case uml::umlPackage::REMOVESTRUCTURALFEATUREVALUEACTION_ATTRIBUTE_REMOVEAT:
 		{
-			// BOOST CAST
+			// CAST Any to uml::InputPin
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::InputPin> _removeAt = std::dynamic_pointer_cast<uml::InputPin>(_temp);
 			setRemoveAt(_removeAt); //20932

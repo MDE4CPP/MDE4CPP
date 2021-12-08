@@ -468,7 +468,7 @@ bool LetExpImpl::eSet(int featureID, Any newValue)
 	{
 		case ocl::Expressions::ExpressionsPackage::LETEXP_ATTRIBUTE_IN:
 		{
-			// BOOST CAST
+			// CAST Any to ocl::Expressions::OclExpression
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<ocl::Expressions::OclExpression> _in = std::dynamic_pointer_cast<ocl::Expressions::OclExpression>(_temp);
 			setIn(_in); //4222
@@ -476,7 +476,7 @@ bool LetExpImpl::eSet(int featureID, Any newValue)
 		}
 		case ocl::Expressions::ExpressionsPackage::LETEXP_ATTRIBUTE_VARIABLE:
 		{
-			// BOOST CAST
+			// CAST Any to ocl::Expressions::Variable
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<ocl::Expressions::Variable> _variable = std::dynamic_pointer_cast<ocl::Expressions::Variable>(_temp);
 			setVariable(_variable); //4223

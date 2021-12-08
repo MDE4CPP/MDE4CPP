@@ -944,16 +944,16 @@ bool ClassImpl::eSet(int featureID, Any newValue)
 	{
 		case uml::umlPackage::CLASS_ATTRIBUTE_ISACTIVE:
 		{
-			// BOOST CAST
+			// CAST Any to bool
 			bool _isActive = newValue->get<bool>();
 			setIsActive(_isActive); //3548
 			return true;
 		}
 		case uml::umlPackage::CLASS_ATTRIBUTE_NESTEDCLASSIFIER:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::Classifier>
 			if((newValue->isContainer()) && (uml::umlPackage::CLASSIFIER_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::Classifier>> nestedClassifierList= newValue->get<std::shared_ptr<Bag<uml::Classifier>>>();
@@ -988,9 +988,9 @@ bool ClassImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::CLASS_ATTRIBUTE_OWNEDATTRIBUTE:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::Property>
 			if((newValue->isContainer()) && (uml::umlPackage::PROPERTY_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::Property>> ownedAttributeList= newValue->get<std::shared_ptr<Bag<uml::Property>>>();
@@ -1025,9 +1025,9 @@ bool ClassImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::CLASS_ATTRIBUTE_OWNEDOPERATION:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::Operation>
 			if((newValue->isContainer()) && (uml::umlPackage::OPERATION_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::Operation>> ownedOperationList= newValue->get<std::shared_ptr<Bag<uml::Operation>>>();
@@ -1062,9 +1062,9 @@ bool ClassImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::CLASS_ATTRIBUTE_OWNEDRECEPTION:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::Reception>
 			if((newValue->isContainer()) && (uml::umlPackage::RECEPTION_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::Reception>> ownedReceptionList= newValue->get<std::shared_ptr<Bag<uml::Reception>>>();
@@ -1099,9 +1099,9 @@ bool ClassImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::CLASS_ATTRIBUTE_SUPERCLASS:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::Class>
 			if((newValue->isContainer()) && (uml::umlPackage::CLASS_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::Class>> superClassList= newValue->get<std::shared_ptr<Bag<uml::Class>>>();
@@ -1178,28 +1178,28 @@ Any ClassImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argument
 			std::shared_ptr<uml::Type> incoming_param_returnType;
 			std::list<Any>::const_iterator incoming_param_returnType_arguments_citer = std::next(arguments->begin(), 3);
 			incoming_param_returnType = (*incoming_param_returnType_arguments_citer)->get<std::shared_ptr<uml::Type> >();
-			result = eAny(this->createOwnedOperation(incoming_param_name,incoming_param_parameterNames,incoming_param_parameterTypes,incoming_param_returnType), umlPackage::OPERATION_CLASS,false);
+			result = eAny(this->createOwnedOperation(incoming_param_name,incoming_param_parameterNames,incoming_param_parameterTypes,incoming_param_returnType), uml::umlPackage::OPERATION_CLASS,false);
 			break;
 		}
 		// uml::Class::getAllOperations() : uml::Operation[*]: 1306968088
 		case umlPackage::CLASS_OPERATION_GETALLOPERATIONS:
 		{
 			std::shared_ptr<Bag<uml::Operation> > resultList = this->getAllOperations();
-			return eAny(resultList,umlPackage::OPERATION_CLASS,true);
+			return eAny(resultList,uml::umlPackage::OPERATION_CLASS,true);
 			break;
 		}
 		// uml::Class::getExtensions() : uml::Extension[*]: 448268741
 		case umlPackage::CLASS_OPERATION_GETEXTENSIONS:
 		{
 			std::shared_ptr<Bag<uml::Extension> > resultList = this->getExtensions();
-			return eAny(resultList,umlPackage::EXTENSION_CLASS,true);
+			return eAny(resultList,uml::umlPackage::EXTENSION_CLASS,true);
 			break;
 		}
 		// uml::Class::getSuperClasses() : uml::Class[*]: 313726634
 		case umlPackage::CLASS_OPERATION_GETSUPERCLASSES:
 		{
 			std::shared_ptr<Bag<uml::Class> > resultList = this->getSuperClasses();
-			return eAny(resultList,umlPackage::CLASS_CLASS,true);
+			return eAny(resultList,uml::umlPackage::CLASS_CLASS,true);
 			break;
 		}
 		// uml::Class::isMetaclass() : bool: 251508775

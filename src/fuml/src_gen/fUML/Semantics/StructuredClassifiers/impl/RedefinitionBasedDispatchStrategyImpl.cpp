@@ -299,8 +299,7 @@ Any RedefinitionBasedDispatchStrategyImpl::eInvoke(int operationID, std::shared_
 
   	switch(operationID)
 	{
-		
-		// 1256965492
+		// fUML::Semantics::StructuredClassifiers::RedefinitionBasedDispatchStrategy::operationsMatch(uml::Operation, uml::Operation) : bool: 1256965492
 		case StructuredClassifiersPackage::REDEFINITIONBASEDDISPATCHSTRATEGY_OPERATION_OPERATIONSMATCH_OPERATION_OPERATION:
 		{
 			//Retrieve input parameter 'ownedOperation'
@@ -313,11 +312,10 @@ Any RedefinitionBasedDispatchStrategyImpl::eInvoke(int operationID, std::shared_
 			std::shared_ptr<uml::Operation> incoming_param_baseOperation;
 			std::list<Any>::const_iterator incoming_param_baseOperation_arguments_citer = std::next(arguments->begin(), 1);
 			incoming_param_baseOperation = (*incoming_param_baseOperation_arguments_citer)->get<std::shared_ptr<uml::Operation> >();
-					result = eAny(this->operationsMatch(incoming_param_ownedOperation,incoming_param_baseOperation),0,false);
+			result = eAny(this->operationsMatch(incoming_param_ownedOperation,incoming_param_baseOperation),0,false);
 			break;
 		}
-		
-		// 2137388834
+		// fUML::Semantics::StructuredClassifiers::RedefinitionBasedDispatchStrategy::retrieveMethod(fUML::Semantics::StructuredClassifiers::Object, uml::Operation) : uml::Behavior: 2137388834
 		case StructuredClassifiersPackage::REDEFINITIONBASEDDISPATCHSTRATEGY_OPERATION_RETRIEVEMETHOD_OBJECT_OPERATION:
 		{
 			//Retrieve input parameter 'object'
@@ -330,7 +328,7 @@ Any RedefinitionBasedDispatchStrategyImpl::eInvoke(int operationID, std::shared_
 			std::shared_ptr<uml::Operation> incoming_param_operation;
 			std::list<Any>::const_iterator incoming_param_operation_arguments_citer = std::next(arguments->begin(), 1);
 			incoming_param_operation = (*incoming_param_operation_arguments_citer)->get<std::shared_ptr<uml::Operation> >();
-				result = eAny(this->retrieveMethod(incoming_param_object,incoming_param_operation));
+			result = eAny(this->retrieveMethod(incoming_param_object,incoming_param_operation), uml::umlPackage::BEHAVIOR_CLASS,false);
 			break;
 		}
 

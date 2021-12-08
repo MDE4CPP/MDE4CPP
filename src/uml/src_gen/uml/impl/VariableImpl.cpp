@@ -411,7 +411,7 @@ bool VariableImpl::eSet(int featureID, Any newValue)
 	{
 		case uml::umlPackage::VARIABLE_ATTRIBUTE_ACTIVITYSCOPE:
 		{
-			// BOOST CAST
+			// CAST Any to uml::Activity
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Activity> _activityScope = std::dynamic_pointer_cast<uml::Activity>(_temp);
 			setActivityScope(_activityScope); //25219
@@ -419,7 +419,7 @@ bool VariableImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::VARIABLE_ATTRIBUTE_SCOPE:
 		{
-			// BOOST CAST
+			// CAST Any to uml::StructuredActivityNode
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::StructuredActivityNode> _scope = std::dynamic_pointer_cast<uml::StructuredActivityNode>(_temp);
 			setScope(_scope); //25220

@@ -33,10 +33,10 @@
 
 #include <exception> // used in Persistence
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
+#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "fUML/Semantics/Values/ValuesFactory.hpp"
 #include "uml/umlFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
-#include "fUML/Semantics/Loci/LociFactory.hpp"
 
 #include "ocl/Evaluations/CollectionLiteralPartEval.hpp"
 #include "ocl/Evaluations/EvalEnvironment.hpp"
@@ -268,15 +268,7 @@ Any CollectionLiteralExpEvalImpl::eGet(int featureID, bool resolve, bool coreTyp
 	{
 		case ocl::Evaluations::EvaluationsPackage::COLLECTIONLITERALEXPEVAL_ATTRIBUTE_PARTS:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<ocl::Evaluations::CollectionLiteralPartEval>::iterator iter = getParts()->begin();
-			Bag<ocl::Evaluations::CollectionLiteralPartEval>::iterator end = getParts()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //166			
+			return eAnyBag(getParts(),357481470); //166
 		}
 	}
 	return LiteralExpEvalImpl::eGet(featureID, resolve, coreType);
@@ -298,37 +290,38 @@ bool CollectionLiteralExpEvalImpl::eSet(int featureID, Any newValue)
 	{
 		case ocl::Evaluations::EvaluationsPackage::COLLECTIONLITERALEXPEVAL_ATTRIBUTE_PARTS:
 		{
-			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<ocl::Evaluations::CollectionLiteralPartEval>> partsList(new Bag<ocl::Evaluations::CollectionLiteralPartEval>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
-			{
-				partsList->add(std::dynamic_pointer_cast<ocl::Evaluations::CollectionLiteralPartEval>(*iter));
-				iter++;
-			}
-			
-			Bag<ocl::Evaluations::CollectionLiteralPartEval>::iterator iterParts = getParts()->begin();
-			Bag<ocl::Evaluations::CollectionLiteralPartEval>::iterator endParts = getParts()->end();
-			while (iterParts != endParts)
-			{
-				if (partsList->find(*iterParts) == -1)
+			// CAST Any to Bag<ocl::Evaluations::CollectionLiteralPartEval>
+			if((newValue->isContainer()) && (ocl::Evaluations::EvaluationsPackage::COLLECTIONLITERALPARTEVAL_CLASS ==newValue->getTypeId()))
+			{ 
+				try
 				{
-					getParts()->erase(*iterParts);
+					std::shared_ptr<Bag<ocl::Evaluations::CollectionLiteralPartEval>> partsList= newValue->get<std::shared_ptr<Bag<ocl::Evaluations::CollectionLiteralPartEval>>>();
+					std::shared_ptr<Bag<ocl::Evaluations::CollectionLiteralPartEval>> _parts=getParts();
+					for(const std::shared_ptr<ocl::Evaluations::CollectionLiteralPartEval> indexParts: *_parts)
+					{
+						if (partsList->find(indexParts) == -1)
+						{
+							_parts->erase(indexParts);
+						}
+					}
+
+					for(const std::shared_ptr<ocl::Evaluations::CollectionLiteralPartEval> indexParts: *partsList)
+					{
+						if (_parts->find(indexParts) == -1)
+						{
+							_parts->add(indexParts);
+						}
+					}
 				}
-				iterParts++;
-			}
- 
-			iterParts = partsList->begin();
-			endParts = partsList->end();
-			while (iterParts != endParts)
-			{
-				if (getParts()->find(*iterParts) == -1)
+				catch(...)
 				{
-					getParts()->add(*iterParts);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterParts++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}

@@ -449,7 +449,7 @@ bool IncludeImpl::eSet(int featureID, Any newValue)
 	{
 		case uml::umlPackage::INCLUDE_ATTRIBUTE_ADDITION:
 		{
-			// BOOST CAST
+			// CAST Any to uml::UseCase
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::UseCase> _addition = std::dynamic_pointer_cast<uml::UseCase>(_temp);
 			setAddition(_addition); //11212
@@ -457,7 +457,7 @@ bool IncludeImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::INCLUDE_ATTRIBUTE_INCLUDINGCASE:
 		{
-			// BOOST CAST
+			// CAST Any to uml::UseCase
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::UseCase> _includingCase = std::dynamic_pointer_cast<uml::UseCase>(_temp);
 			setIncludingCase(_includingCase); //11213

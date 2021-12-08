@@ -33,11 +33,11 @@
 
 #include <exception> // used in Persistence
 #include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
+#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "fUML/Semantics/Values/ValuesFactory.hpp"
 #include "uml/umlFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
-#include "fUML/Semantics/Loci/LociFactory.hpp"
 
 #include "ocl/Evaluations/EvalEnvironment.hpp"
 #include "fUML/Semantics/Loci/Locus.hpp"
@@ -305,15 +305,7 @@ Any OperationCallExpEvalImpl::eGet(int featureID, bool resolve, bool coreType) c
 	{
 		case ocl::Evaluations::EvaluationsPackage::OPERATIONCALLEXPEVAL_ATTRIBUTE_ARGUMENTS:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<ocl::Evaluations::OclExpEval>::iterator iter = getArguments()->begin();
-			Bag<ocl::Evaluations::OclExpEval>::iterator end = getArguments()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //678			
+			return eAnyBag(getArguments(),731240084); //678
 		}
 		case ocl::Evaluations::EvaluationsPackage::OPERATIONCALLEXPEVAL_ATTRIBUTE_REFERREDOPERATION:
 		{
@@ -342,43 +334,44 @@ bool OperationCallExpEvalImpl::eSet(int featureID, Any newValue)
 	{
 		case ocl::Evaluations::EvaluationsPackage::OPERATIONCALLEXPEVAL_ATTRIBUTE_ARGUMENTS:
 		{
-			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<ocl::Evaluations::OclExpEval>> argumentsList(new Bag<ocl::Evaluations::OclExpEval>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
-			{
-				argumentsList->add(std::dynamic_pointer_cast<ocl::Evaluations::OclExpEval>(*iter));
-				iter++;
-			}
-			
-			Bag<ocl::Evaluations::OclExpEval>::iterator iterArguments = getArguments()->begin();
-			Bag<ocl::Evaluations::OclExpEval>::iterator endArguments = getArguments()->end();
-			while (iterArguments != endArguments)
-			{
-				if (argumentsList->find(*iterArguments) == -1)
+			// CAST Any to Bag<ocl::Evaluations::OclExpEval>
+			if((newValue->isContainer()) && (ocl::Evaluations::EvaluationsPackage::OCLEXPEVAL_CLASS ==newValue->getTypeId()))
+			{ 
+				try
 				{
-					getArguments()->erase(*iterArguments);
+					std::shared_ptr<Bag<ocl::Evaluations::OclExpEval>> argumentsList= newValue->get<std::shared_ptr<Bag<ocl::Evaluations::OclExpEval>>>();
+					std::shared_ptr<Bag<ocl::Evaluations::OclExpEval>> _arguments=getArguments();
+					for(const std::shared_ptr<ocl::Evaluations::OclExpEval> indexArguments: *_arguments)
+					{
+						if (argumentsList->find(indexArguments) == -1)
+						{
+							_arguments->erase(indexArguments);
+						}
+					}
+
+					for(const std::shared_ptr<ocl::Evaluations::OclExpEval> indexArguments: *argumentsList)
+					{
+						if (_arguments->find(indexArguments) == -1)
+						{
+							_arguments->add(indexArguments);
+						}
+					}
 				}
-				iterArguments++;
-			}
- 
-			iterArguments = argumentsList->begin();
-			endArguments = argumentsList->end();
-			while (iterArguments != endArguments)
-			{
-				if (getArguments()->find(*iterArguments) == -1)
+				catch(...)
 				{
-					getArguments()->add(*iterArguments);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterArguments++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}
 		case ocl::Evaluations::EvaluationsPackage::OPERATIONCALLEXPEVAL_ATTRIBUTE_REFERREDOPERATION:
 		{
-			// BOOST CAST
+			// CAST Any to fUML::Semantics::SimpleClassifiers::StringValue
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> _referredOperation = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::StringValue>(_temp);
 			setReferredOperation(_referredOperation); //677

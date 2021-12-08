@@ -399,7 +399,7 @@ Any ObjectNodeActivationImpl::eGet(int featureID, bool resolve, bool coreType) c
 	switch(featureID)
 	{
 		case fUML::Semantics::Activities::ActivitiesPackage::OBJECTNODEACTIVATION_ATTRIBUTE_OFFEREDTOKENCOUNT:
-				return eAny(getOfferedTokenCount(),0,true); //826
+			return eAny(getOfferedTokenCount(),0,true); //826
 	}
 	return ActivityNodeActivationImpl::eGet(featureID, resolve, coreType);
 }
@@ -420,7 +420,7 @@ bool ObjectNodeActivationImpl::eSet(int featureID, Any newValue)
 	{
 		case fUML::Semantics::Activities::ActivitiesPackage::OBJECTNODEACTIVATION_ATTRIBUTE_OFFEREDTOKENCOUNT:
 		{
-			// BOOST CAST
+			// CAST Any to int
 			int _offeredTokenCount = newValue->get<int>();
 			setOfferedTokenCount(_offeredTokenCount); //826
 			return true;
@@ -439,8 +439,7 @@ Any ObjectNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list
 
   	switch(operationID)
 	{
-		
-		// 1979233721
+		// fUML::Semantics::Activities::ObjectNodeActivation::addToken(fUML::Semantics::Activities::Token): 1979233721
 		case ActivitiesPackage::OBJECTNODEACTIVATION_OPERATION_ADDTOKEN_TOKEN:
 		{
 			//Retrieve input parameter 'token'
@@ -449,38 +448,32 @@ Any ObjectNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list
 			std::list<Any>::const_iterator incoming_param_token_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_token = (*incoming_param_token_arguments_citer)->get<std::shared_ptr<fUML::Semantics::Activities::Token> >();
 			this->addToken(incoming_param_token);
-			break;
 		}
-		
-		// 1055175964
+		// fUML::Semantics::Activities::ObjectNodeActivation::clearTokens(): 1055175964
 		case ActivitiesPackage::OBJECTNODEACTIVATION_OPERATION_CLEARTOKENS:
 		{
 			this->clearTokens();
-			break;
 		}
-		
-		// 1194886204
+		// fUML::Semantics::Activities::ObjectNodeActivation::countOfferedValues() : int: 1194886204
 		case ActivitiesPackage::OBJECTNODEACTIVATION_OPERATION_COUNTOFFEREDVALUES:
 		{
-					result = eAny(this->countOfferedValues(),0,false);
+			result = eAny(this->countOfferedValues(),0,false);
 			break;
 		}
-		
-		// 225915978
+		// fUML::Semantics::Activities::ObjectNodeActivation::countUnofferedTokens() : int: 225915978
 		case ActivitiesPackage::OBJECTNODEACTIVATION_OPERATION_COUNTUNOFFEREDTOKENS:
 		{
-					result = eAny(this->countUnofferedTokens(),0,false);
+			result = eAny(this->countUnofferedTokens(),0,false);
 			break;
 		}
-		
-		// 1540483717
+		// fUML::Semantics::Activities::ObjectNodeActivation::getUnofferedTokens() : fUML::Semantics::Activities::Token[*]: 1540483717
 		case ActivitiesPackage::OBJECTNODEACTIVATION_OPERATION_GETUNOFFEREDTOKENS:
 		{
-				result = eAny(this->getUnofferedTokens());
+			std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > resultList = this->getUnofferedTokens();
+			return eAny(resultList,fUML::Semantics::Activities::ActivitiesPackage::TOKEN_CLASS,true);
 			break;
 		}
-		
-		// 265609697
+		// fUML::Semantics::Activities::ObjectNodeActivation::removeToken(fUML::Semantics::Activities::Token) : int: 265609697
 		case ActivitiesPackage::OBJECTNODEACTIVATION_OPERATION_REMOVETOKEN_TOKEN:
 		{
 			//Retrieve input parameter 'token'
@@ -488,18 +481,15 @@ Any ObjectNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list
 			std::shared_ptr<fUML::Semantics::Activities::Token> incoming_param_token;
 			std::list<Any>::const_iterator incoming_param_token_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_token = (*incoming_param_token_arguments_citer)->get<std::shared_ptr<fUML::Semantics::Activities::Token> >();
-					result = eAny(this->removeToken(incoming_param_token),0,false);
+			result = eAny(this->removeToken(incoming_param_token),0,false);
 			break;
 		}
-		
-		// 58376419
+		// fUML::Semantics::Activities::ObjectNodeActivation::run(): 58376419
 		case ActivitiesPackage::OBJECTNODEACTIVATION_OPERATION_RUN:
 		{
 			this->run();
-			break;
 		}
-		
-		// 913937355
+		// fUML::Semantics::Activities::ObjectNodeActivation::sendOffers(fUML::Semantics::Activities::Token[*]): 913937355
 		case ActivitiesPackage::OBJECTNODEACTIVATION_OPERATION_SENDOFFERS_TOKEN:
 		{
 			//Retrieve input parameter 'tokens'
@@ -508,28 +498,23 @@ Any ObjectNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list
 			std::list<Any>::const_iterator incoming_param_tokens_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_tokens = (*incoming_param_tokens_arguments_citer)->get<std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> >();
 			this->sendOffers(incoming_param_tokens);
-			break;
 		}
-		
-		// 1509347969
+		// fUML::Semantics::Activities::ObjectNodeActivation::sendUnofferedTokens(): 1509347969
 		case ActivitiesPackage::OBJECTNODEACTIVATION_OPERATION_SENDUNOFFEREDTOKENS:
 		{
 			this->sendUnofferedTokens();
-			break;
 		}
-		
-		// 622563877
+		// fUML::Semantics::Activities::ObjectNodeActivation::takeUnofferedTokens() : fUML::Semantics::Activities::Token[*]: 622563877
 		case ActivitiesPackage::OBJECTNODEACTIVATION_OPERATION_TAKEUNOFFEREDTOKENS:
 		{
-				result = eAny(this->takeUnofferedTokens());
+			std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > resultList = this->takeUnofferedTokens();
+			return eAny(resultList,fUML::Semantics::Activities::ActivitiesPackage::TOKEN_CLASS,true);
 			break;
 		}
-		
-		// 2070573113
+		// fUML::Semantics::Activities::ObjectNodeActivation::terminate(): 2070573113
 		case ActivitiesPackage::OBJECTNODEACTIVATION_OPERATION_TERMINATE:
 		{
 			this->terminate();
-			break;
 		}
 
 		default:

@@ -340,7 +340,7 @@ Any TokenImpl::eGet(int featureID, bool resolve, bool coreType) const
 			return eAny(returnValue,returnValue->getMetaElementID(),false); //1150
 		}
 		case fUML::Semantics::Activities::ActivitiesPackage::TOKEN_ATTRIBUTE_WITHDRAWN:
-				return eAny(isWithdrawn(),0,true); //1151
+			return eAny(isWithdrawn(),0,true); //1151
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
 }
@@ -363,7 +363,7 @@ bool TokenImpl::eSet(int featureID, Any newValue)
 	{
 		case fUML::Semantics::Activities::ActivitiesPackage::TOKEN_ATTRIBUTE_HOLDER:
 		{
-			// BOOST CAST
+			// CAST Any to fUML::Semantics::Activities::ActivityNodeActivation
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> _holder = std::dynamic_pointer_cast<fUML::Semantics::Activities::ActivityNodeActivation>(_temp);
 			setHolder(_holder); //1150
@@ -371,7 +371,7 @@ bool TokenImpl::eSet(int featureID, Any newValue)
 		}
 		case fUML::Semantics::Activities::ActivitiesPackage::TOKEN_ATTRIBUTE_WITHDRAWN:
 		{
-			// BOOST CAST
+			// CAST Any to bool
 			bool _withdrawn = newValue->get<bool>();
 			setWithdrawn(_withdrawn); //1151
 			return true;
@@ -390,15 +390,13 @@ Any TokenImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argument
 
   	switch(operationID)
 	{
-		
-		// 1757807572
+		// fUML::Semantics::Activities::Token::_copy() : fUML::Semantics::Activities::Token: 1757807572
 		case ActivitiesPackage::TOKEN_OPERATION__COPY:
 		{
-				result = eAny(this->_copy());
+			result = eAny(this->_copy(), fUML::Semantics::Activities::ActivitiesPackage::TOKEN_CLASS,false);
 			break;
 		}
-		
-		// 1923944023
+		// fUML::Semantics::Activities::Token::equals(fUML::Semantics::Activities::Token) : bool: 1923944023
 		case ActivitiesPackage::TOKEN_OPERATION_EQUALS_TOKEN:
 		{
 			//Retrieve input parameter 'other'
@@ -406,25 +404,22 @@ Any TokenImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argument
 			std::shared_ptr<fUML::Semantics::Activities::Token> incoming_param_other;
 			std::list<Any>::const_iterator incoming_param_other_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_other = (*incoming_param_other_arguments_citer)->get<std::shared_ptr<fUML::Semantics::Activities::Token> >();
-					result = eAny(this->equals(incoming_param_other),0,false);
+			result = eAny(this->equals(incoming_param_other),0,false);
 			break;
 		}
-		
-		// 1836665410
+		// fUML::Semantics::Activities::Token::getValue() : fUML::Semantics::Values::Value {const}: 1836665410
 		case ActivitiesPackage::TOKEN_OPERATION_GETVALUE:
 		{
-				result = eAny(this->getValue());
+			result = eAny(this->getValue(), fUML::Semantics::Values::ValuesPackage::VALUE_CLASS,false);
 			break;
 		}
-		
-		// 2050511719
+		// fUML::Semantics::Activities::Token::isControl() : bool: 2050511719
 		case ActivitiesPackage::TOKEN_OPERATION_ISCONTROL:
 		{
-					result = eAny(this->isControl(),0,false);
+			result = eAny(this->isControl(),0,false);
 			break;
 		}
-		
-		// 1196367815
+		// fUML::Semantics::Activities::Token::transfer(fUML::Semantics::Activities::ActivityNodeActivation) : fUML::Semantics::Activities::Token: 1196367815
 		case ActivitiesPackage::TOKEN_OPERATION_TRANSFER_ACTIVITYNODEACTIVATION:
 		{
 			//Retrieve input parameter 'holder'
@@ -432,15 +427,13 @@ Any TokenImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argument
 			std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> incoming_param_holder;
 			std::list<Any>::const_iterator incoming_param_holder_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_holder = (*incoming_param_holder_arguments_citer)->get<std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> >();
-				result = eAny(this->transfer(incoming_param_holder));
+			result = eAny(this->transfer(incoming_param_holder), fUML::Semantics::Activities::ActivitiesPackage::TOKEN_CLASS,false);
 			break;
 		}
-		
-		// 1727020278
+		// fUML::Semantics::Activities::Token::withdraw(): 1727020278
 		case ActivitiesPackage::TOKEN_OPERATION_WITHDRAW:
 		{
 			this->withdraw();
-			break;
 		}
 
 		default:

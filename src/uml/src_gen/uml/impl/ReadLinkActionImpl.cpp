@@ -473,7 +473,7 @@ bool ReadLinkActionImpl::eSet(int featureID, Any newValue)
 	{
 		case uml::umlPackage::READLINKACTION_ATTRIBUTE_RESULT:
 		{
-			// BOOST CAST
+			// CAST Any to uml::OutputPin
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::OutputPin> _result = std::dynamic_pointer_cast<uml::OutputPin>(_temp);
 			setResult(_result); //19529
@@ -545,7 +545,7 @@ Any ReadLinkActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>>
 		case umlPackage::READLINKACTION_OPERATION_OPENEND:
 		{
 			std::shared_ptr<Bag<uml::Property> > resultList = this->openEnd();
-			return eAny(resultList,umlPackage::PROPERTY_CLASS,true);
+			return eAny(resultList,uml::umlPackage::PROPERTY_CLASS,true);
 			break;
 		}
 		// uml::ReadLinkAction::type_and_ordering(Any, std::map) : bool: 1848164464

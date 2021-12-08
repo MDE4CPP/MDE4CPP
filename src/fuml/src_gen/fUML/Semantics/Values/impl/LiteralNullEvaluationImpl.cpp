@@ -244,11 +244,10 @@ Any LiteralNullEvaluationImpl::eInvoke(int operationID, std::shared_ptr<std::lis
 
   	switch(operationID)
 	{
-		
-		// 507735969
+		// fUML::Semantics::Values::LiteralNullEvaluation::evaluate() : fUML::Semantics::Values::Value: 507735969
 		case ValuesPackage::LITERALNULLEVALUATION_OPERATION_EVALUATE:
 		{
-				result = eAny(this->evaluate());
+			result = eAny(this->evaluate(), fUML::Semantics::Values::ValuesPackage::VALUE_CLASS,false);
 			break;
 		}
 

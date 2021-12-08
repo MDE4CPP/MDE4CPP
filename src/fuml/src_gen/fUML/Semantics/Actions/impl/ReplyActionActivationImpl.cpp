@@ -311,12 +311,10 @@ Any ReplyActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::lis
 
   	switch(operationID)
 	{
-		
-		// 563900863
+		// fUML::Semantics::Actions::ReplyActionActivation::doAction(): 563900863
 		case ActionsPackage::REPLYACTIONACTIVATION_OPERATION_DOACTION:
 		{
 			this->doAction();
-			break;
 		}
 
 		default:

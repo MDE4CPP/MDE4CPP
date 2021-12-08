@@ -253,7 +253,7 @@ Any TemplateParameterTypeImpl::eGet(int featureID, bool resolve, bool coreType) 
 	switch(featureID)
 	{
 		case ocl::Types::TypesPackage::TEMPLATEPARAMETERTYPE_ATTRIBUTE_SPECIFICATION:
-				return eAny(getSpecification(),0,true); //848
+			return eAny(getSpecification(),0,true); //848
 	}
 	return ecore::EClassifierImpl::eGet(featureID, resolve, coreType);
 }
@@ -274,7 +274,7 @@ bool TemplateParameterTypeImpl::eSet(int featureID, Any newValue)
 	{
 		case ocl::Types::TypesPackage::TEMPLATEPARAMETERTYPE_ATTRIBUTE_SPECIFICATION:
 		{
-			// BOOST CAST
+			// CAST Any to std::string
 			std::string _specification = newValue->get<std::string>();
 			setSpecification(_specification); //848
 			return true;

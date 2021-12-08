@@ -379,7 +379,7 @@ bool ReturnInformationImpl::eSet(int featureID, Any newValue)
 	{
 		case fUML::Semantics::Actions::ActionsPackage::RETURNINFORMATION_ATTRIBUTE_CALLEVENTOCCURRENCE:
 		{
-			// BOOST CAST
+			// CAST Any to fUML::Semantics::CommonBehavior::CallEventOccurrence
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<fUML::Semantics::CommonBehavior::CallEventOccurrence> _callEventOccurrence = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::CallEventOccurrence>(_temp);
 			setCallEventOccurrence(_callEventOccurrence); //1020
@@ -399,15 +399,13 @@ Any ReturnInformationImpl::eInvoke(int operationID, std::shared_ptr<std::list<An
 
   	switch(operationID)
 	{
-		
-		// 2045103425
+		// fUML::Semantics::Actions::ReturnInformation::_copy() : fUML::Semantics::Values::Value: 2045103425
 		case ActionsPackage::RETURNINFORMATION_OPERATION__COPY:
 		{
-				result = eAny(this->_copy());
+			result = eAny(this->_copy(), fUML::Semantics::Values::ValuesPackage::VALUE_CLASS,false);
 			break;
 		}
-		
-		// 1074588088
+		// fUML::Semantics::Actions::ReturnInformation::equals(fUML::Semantics::Values::Value) : bool: 1074588088
 		case ActionsPackage::RETURNINFORMATION_OPERATION_EQUALS_VALUE:
 		{
 			//Retrieve input parameter 'otherValue'
@@ -415,32 +413,29 @@ Any ReturnInformationImpl::eInvoke(int operationID, std::shared_ptr<std::list<An
 			std::shared_ptr<fUML::Semantics::Values::Value> incoming_param_otherValue;
 			std::list<Any>::const_iterator incoming_param_otherValue_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_otherValue = (*incoming_param_otherValue_arguments_citer)->get<std::shared_ptr<fUML::Semantics::Values::Value> >();
-					result = eAny(this->equals(incoming_param_otherValue),0,false);
+			result = eAny(this->equals(incoming_param_otherValue),0,false);
 			break;
 		}
-		
-		// 455013808
+		// fUML::Semantics::Actions::ReturnInformation::getOperation() : uml::Operation: 455013808
 		case ActionsPackage::RETURNINFORMATION_OPERATION_GETOPERATION:
 		{
-				result = eAny(this->getOperation());
+			result = eAny(this->getOperation(), uml::umlPackage::OPERATION_CLASS,false);
 			break;
 		}
-		
-		// 904744346
+		// fUML::Semantics::Actions::ReturnInformation::getTypes() : uml::Classifier[*]: 904744346
 		case ActionsPackage::RETURNINFORMATION_OPERATION_GETTYPES:
 		{
-				result = eAny(this->getTypes());
+			std::shared_ptr<Bag<uml::Classifier> > resultList = this->getTypes();
+			return eAny(resultList,uml::umlPackage::CLASSIFIER_CLASS,true);
 			break;
 		}
-		
-		// 1466582464
+		// fUML::Semantics::Actions::ReturnInformation::new_() : fUML::Semantics::Values::Value: 1466582464
 		case ActionsPackage::RETURNINFORMATION_OPERATION_NEW_:
 		{
-				result = eAny(this->new_());
+			result = eAny(this->new_(), fUML::Semantics::Values::ValuesPackage::VALUE_CLASS,false);
 			break;
 		}
-		
-		// 1070285524
+		// fUML::Semantics::Actions::ReturnInformation::reply(fUML::Semantics::CommonBehavior::ParameterValue[*]): 1070285524
 		case ActionsPackage::RETURNINFORMATION_OPERATION_REPLY_PARAMETERVALUE:
 		{
 			//Retrieve input parameter 'outputParameterValues'
@@ -449,20 +444,17 @@ Any ReturnInformationImpl::eInvoke(int operationID, std::shared_ptr<std::list<An
 			std::list<Any>::const_iterator incoming_param_outputParameterValues_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_outputParameterValues = (*incoming_param_outputParameterValues_arguments_citer)->get<std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> >();
 			this->reply(incoming_param_outputParameterValues);
-			break;
 		}
-		
-		// 364086231
+		// fUML::Semantics::Actions::ReturnInformation::specify() : uml::ValueSpecification: 364086231
 		case ActionsPackage::RETURNINFORMATION_OPERATION_SPECIFY:
 		{
-				result = eAny(this->specify());
+			result = eAny(this->specify(), uml::umlPackage::VALUESPECIFICATION_CLASS,false);
 			break;
 		}
-		
-		// 352529642
+		// fUML::Semantics::Actions::ReturnInformation::toString() : std::string: 352529642
 		case ActionsPackage::RETURNINFORMATION_OPERATION_TOSTRING:
 		{
-					result = eAny(this->toString(),0,false);
+			result = eAny(this->toString(),0,false);
 			break;
 		}
 

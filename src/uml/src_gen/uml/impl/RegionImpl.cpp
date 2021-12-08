@@ -705,7 +705,7 @@ bool RegionImpl::eSet(int featureID, Any newValue)
 	{
 		case uml::umlPackage::REGION_ATTRIBUTE_EXTENDEDREGION:
 		{
-			// BOOST CAST
+			// CAST Any to uml::Region
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Region> _extendedRegion = std::dynamic_pointer_cast<uml::Region>(_temp);
 			setExtendedRegion(_extendedRegion); //20718
@@ -713,7 +713,7 @@ bool RegionImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::REGION_ATTRIBUTE_STATE:
 		{
-			// BOOST CAST
+			// CAST Any to uml::State
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::State> _state = std::dynamic_pointer_cast<uml::State>(_temp);
 			setState(_state); //20719
@@ -721,7 +721,7 @@ bool RegionImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::REGION_ATTRIBUTE_STATEMACHINE:
 		{
-			// BOOST CAST
+			// CAST Any to uml::StateMachine
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::StateMachine> _stateMachine = std::dynamic_pointer_cast<uml::StateMachine>(_temp);
 			setStateMachine(_stateMachine); //20720
@@ -729,9 +729,9 @@ bool RegionImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::REGION_ATTRIBUTE_SUBVERTEX:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::Vertex>
 			if((newValue->isContainer()) && (uml::umlPackage::VERTEX_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::Vertex>> subvertexList= newValue->get<std::shared_ptr<Bag<uml::Vertex>>>();
@@ -766,9 +766,9 @@ bool RegionImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::REGION_ATTRIBUTE_TRANSITION:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::Transition>
 			if((newValue->isContainer()) && (uml::umlPackage::TRANSITION_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::Transition>> transitionList= newValue->get<std::shared_ptr<Bag<uml::Transition>>>();
@@ -831,7 +831,7 @@ Any RegionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argumen
 		// uml::Region::containingStateMachine() : uml::StateMachine: 1752814481
 		case umlPackage::REGION_OPERATION_CONTAININGSTATEMACHINE:
 		{
-			result = eAny(this->containingStateMachine(), umlPackage::STATEMACHINE_CLASS,false);
+			result = eAny(this->containingStateMachine(), uml::umlPackage::STATEMACHINE_CLASS,false);
 			break;
 		}
 		// uml::Region::deep_history_vertex(Any, std::map) : bool: 629096106
@@ -885,7 +885,7 @@ Any RegionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argumen
 		// uml::Region::redefinitionContext() : uml::Classifier: 2039075134
 		case umlPackage::REGION_OPERATION_REDEFINITIONCONTEXT:
 		{
-			result = eAny(this->redefinitionContext(), umlPackage::CLASSIFIER_CLASS,false);
+			result = eAny(this->redefinitionContext(), uml::umlPackage::CLASSIFIER_CLASS,false);
 			break;
 		}
 		// uml::Region::shallow_history_vertex(Any, std::map) : bool: 771598032

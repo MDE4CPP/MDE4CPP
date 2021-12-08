@@ -597,16 +597,16 @@ bool AcceptEventActionImpl::eSet(int featureID, Any newValue)
 	{
 		case uml::umlPackage::ACCEPTEVENTACTION_ATTRIBUTE_ISUNMARSHALL:
 		{
-			// BOOST CAST
+			// CAST Any to bool
 			bool _isUnmarshall = newValue->get<bool>();
 			setIsUnmarshall(_isUnmarshall); //327
 			return true;
 		}
 		case uml::umlPackage::ACCEPTEVENTACTION_ATTRIBUTE_RESULT:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::OutputPin>
 			if((newValue->isContainer()) && (uml::umlPackage::OUTPUTPIN_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::OutputPin>> resultList= newValue->get<std::shared_ptr<Bag<uml::OutputPin>>>();
@@ -641,9 +641,9 @@ bool AcceptEventActionImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::ACCEPTEVENTACTION_ATTRIBUTE_TRIGGER:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::Trigger>
 			if((newValue->isContainer()) && (uml::umlPackage::TRIGGER_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::Trigger>> triggerList= newValue->get<std::shared_ptr<Bag<uml::Trigger>>>();

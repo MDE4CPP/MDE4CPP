@@ -407,15 +407,7 @@ Any ObjectValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 	{
 		case ocl::Values::ValuesPackage::OBJECTVALUE_ATTRIBUTE_HISTORY:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<ocl::Values::LocalSnapshot>::iterator iter = getHistory()->begin();
-			Bag<ocl::Values::LocalSnapshot>::iterator end = getHistory()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //590			
+			return eAnyBag(getHistory(),48802612); //590
 		}
 		case ocl::Values::ValuesPackage::OBJECTVALUE_ATTRIBUTE_VALUE:
 		{
@@ -444,43 +436,44 @@ bool ObjectValueImpl::eSet(int featureID, Any newValue)
 	{
 		case ocl::Values::ValuesPackage::OBJECTVALUE_ATTRIBUTE_HISTORY:
 		{
-			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<ocl::Values::LocalSnapshot>> historyList(new Bag<ocl::Values::LocalSnapshot>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
-			{
-				historyList->add(std::dynamic_pointer_cast<ocl::Values::LocalSnapshot>(*iter));
-				iter++;
-			}
-			
-			Bag<ocl::Values::LocalSnapshot>::iterator iterHistory = getHistory()->begin();
-			Bag<ocl::Values::LocalSnapshot>::iterator endHistory = getHistory()->end();
-			while (iterHistory != endHistory)
-			{
-				if (historyList->find(*iterHistory) == -1)
+			// CAST Any to Bag<ocl::Values::LocalSnapshot>
+			if((newValue->isContainer()) && (ocl::Values::ValuesPackage::LOCALSNAPSHOT_CLASS ==newValue->getTypeId()))
+			{ 
+				try
 				{
-					getHistory()->erase(*iterHistory);
+					std::shared_ptr<Bag<ocl::Values::LocalSnapshot>> historyList= newValue->get<std::shared_ptr<Bag<ocl::Values::LocalSnapshot>>>();
+					std::shared_ptr<Bag<ocl::Values::LocalSnapshot>> _history=getHistory();
+					for(const std::shared_ptr<ocl::Values::LocalSnapshot> indexHistory: *_history)
+					{
+						if (historyList->find(indexHistory) == -1)
+						{
+							_history->erase(indexHistory);
+						}
+					}
+
+					for(const std::shared_ptr<ocl::Values::LocalSnapshot> indexHistory: *historyList)
+					{
+						if (_history->find(indexHistory) == -1)
+						{
+							_history->add(indexHistory);
+						}
+					}
 				}
-				iterHistory++;
-			}
- 
-			iterHistory = historyList->begin();
-			endHistory = historyList->end();
-			while (iterHistory != endHistory)
-			{
-				if (getHistory()->find(*iterHistory) == -1)
+				catch(...)
 				{
-					getHistory()->add(*iterHistory);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterHistory++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}
 		case ocl::Values::ValuesPackage::OBJECTVALUE_ATTRIBUTE_VALUE:
 		{
-			// BOOST CAST
+			// CAST Any to ecore::EObject
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<ecore::EObject> _value = std::dynamic_pointer_cast<ecore::EObject>(_temp);
 			setValue(_value); //591
@@ -500,8 +493,7 @@ Any ObjectValueImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> ar
 
   	switch(operationID)
 	{
-		
-		// 1285091917
+		// ocl::Values::ObjectValue::equals(fUML::Semantics::Values::Value) : bool: 1285091917
 		case ValuesPackage::OBJECTVALUE_OPERATION_EQUALS_VALUE:
 		{
 			//Retrieve input parameter 'otherValue'
@@ -509,14 +501,13 @@ Any ObjectValueImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> ar
 			std::shared_ptr<fUML::Semantics::Values::Value> incoming_param_otherValue;
 			std::list<Any>::const_iterator incoming_param_otherValue_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_otherValue = (*incoming_param_otherValue_arguments_citer)->get<std::shared_ptr<fUML::Semantics::Values::Value> >();
-					result = eAny(this->equals(incoming_param_otherValue),0,false);
+			result = eAny(this->equals(incoming_param_otherValue),0,false);
 			break;
 		}
-		
-		// 1100996867
+		// ocl::Values::ObjectValue::toString() : std::string: 1100996867
 		case ValuesPackage::OBJECTVALUE_OPERATION_TOSTRING:
 		{
-					result = eAny(this->toString(),0,false);
+			result = eAny(this->toString(),0,false);
 			break;
 		}
 

@@ -324,7 +324,7 @@ bool FeatureImpl::eSet(int featureID, Any newValue)
 	{
 		case uml::umlPackage::FEATURE_ATTRIBUTE_ISSTATIC:
 		{
-			// BOOST CAST
+			// CAST Any to bool
 			bool _isStatic = newValue->get<bool>();
 			setIsStatic(_isStatic); //10113
 			return true;

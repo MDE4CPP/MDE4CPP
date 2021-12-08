@@ -345,8 +345,7 @@ Any StructuredValueImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>
 
   	switch(operationID)
 	{
-		
-		// 27390723
+		// fUML::Semantics::SimpleClassifiers::StructuredValue::assignFeatureValue(uml::StructuralFeature, fUML::Semantics::Values::Value[*], int): 27390723
 		case SimpleClassifiersPackage::STRUCTUREDVALUE_OPERATION_ASSIGNFEATUREVALUE_STRUCTURALFEATURE_EINT:
 		{
 			//Retrieve input parameter 'feature'
@@ -365,17 +364,13 @@ Any StructuredValueImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>
 			std::list<Any>::const_iterator incoming_param_position_arguments_citer = std::next(arguments->begin(), 2);
 			incoming_param_position = (*incoming_param_position_arguments_citer)->get<int >();
 			this->assignFeatureValue(incoming_param_feature,incoming_param_values,incoming_param_position);
-			break;
 		}
-		
-		// 54615103
+		// fUML::Semantics::SimpleClassifiers::StructuredValue::createFeatureValues(): 54615103
 		case SimpleClassifiersPackage::STRUCTUREDVALUE_OPERATION_CREATEFEATUREVALUES:
 		{
 			this->createFeatureValues();
-			break;
 		}
-		
-		// 1413512920
+		// fUML::Semantics::SimpleClassifiers::StructuredValue::getValues(uml::StructuralFeature, fUML::Semantics::SimpleClassifiers::FeatureValue[*]) : fUML::Semantics::Values::Value[*]: 1413512920
 		case SimpleClassifiersPackage::STRUCTUREDVALUE_OPERATION_GETVALUES_STRUCTURALFEATURE_FEATUREVALUE:
 		{
 			//Retrieve input parameter 'feature'
@@ -388,11 +383,11 @@ Any StructuredValueImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>
 			std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>> incoming_param_featureValues;
 			std::list<Any>::const_iterator incoming_param_featureValues_arguments_citer = std::next(arguments->begin(), 1);
 			incoming_param_featureValues = (*incoming_param_featureValues_arguments_citer)->get<std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>> >();
-				result = eAny(this->getValues(incoming_param_feature,incoming_param_featureValues));
+			std::shared_ptr<Bag<fUML::Semantics::Values::Value> > resultList = this->getValues(incoming_param_feature,incoming_param_featureValues);
+			return eAny(resultList,fUML::Semantics::Values::ValuesPackage::VALUE_CLASS,true);
 			break;
 		}
-		
-		// 353901438
+		// fUML::Semantics::SimpleClassifiers::StructuredValue::removeValue(uml::StructuralFeature, fUML::Semantics::Values::Value): 353901438
 		case SimpleClassifiersPackage::STRUCTUREDVALUE_OPERATION_REMOVEVALUE_STRUCTURALFEATURE_VALUE:
 		{
 			//Retrieve input parameter 'feature'
@@ -406,10 +401,8 @@ Any StructuredValueImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>
 			std::list<Any>::const_iterator incoming_param_value_arguments_citer = std::next(arguments->begin(), 1);
 			incoming_param_value = (*incoming_param_value_arguments_citer)->get<std::shared_ptr<fUML::Semantics::Values::Value> >();
 			this->removeValue(incoming_param_feature,incoming_param_value);
-			break;
 		}
-		
-		// 825675364
+		// fUML::Semantics::SimpleClassifiers::StructuredValue::retrieveFeatureValue(uml::StructuralFeature) : fUML::Semantics::SimpleClassifiers::FeatureValue: 825675364
 		case SimpleClassifiersPackage::STRUCTUREDVALUE_OPERATION_RETRIEVEFEATUREVALUE_STRUCTURALFEATURE:
 		{
 			//Retrieve input parameter 'feature'
@@ -417,18 +410,17 @@ Any StructuredValueImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>
 			std::shared_ptr<uml::StructuralFeature> incoming_param_feature;
 			std::list<Any>::const_iterator incoming_param_feature_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_feature = (*incoming_param_feature_arguments_citer)->get<std::shared_ptr<uml::StructuralFeature> >();
-				result = eAny(this->retrieveFeatureValue(incoming_param_feature));
+			result = eAny(this->retrieveFeatureValue(incoming_param_feature), fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::FEATUREVALUE_CLASS,false);
 			break;
 		}
-		
-		// 1985809656
+		// fUML::Semantics::SimpleClassifiers::StructuredValue::retrieveFeatureValues() : fUML::Semantics::SimpleClassifiers::FeatureValue[*]: 1985809656
 		case SimpleClassifiersPackage::STRUCTUREDVALUE_OPERATION_RETRIEVEFEATUREVALUES:
 		{
-				result = eAny(this->retrieveFeatureValues());
+			std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue> > resultList = this->retrieveFeatureValues();
+			return eAny(resultList,fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::FEATUREVALUE_CLASS,true);
 			break;
 		}
-		
-		// 952199679
+		// fUML::Semantics::SimpleClassifiers::StructuredValue::setFeatureValue(uml::StructuralFeature, fUML::Semantics::Values::Value[*], int): 952199679
 		case SimpleClassifiersPackage::STRUCTUREDVALUE_OPERATION_SETFEATUREVALUE_STRUCTURALFEATURE_EINT:
 		{
 			//Retrieve input parameter 'feature'
@@ -447,13 +439,11 @@ Any StructuredValueImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>
 			std::list<Any>::const_iterator incoming_param_position_arguments_citer = std::next(arguments->begin(), 2);
 			incoming_param_position = (*incoming_param_position_arguments_citer)->get<int >();
 			this->setFeatureValue(incoming_param_feature,incoming_param_values,incoming_param_position);
-			break;
 		}
-		
-		// 270389401
+		// fUML::Semantics::SimpleClassifiers::StructuredValue::specify() : uml::ValueSpecification: 270389401
 		case SimpleClassifiersPackage::STRUCTUREDVALUE_OPERATION_SPECIFY:
 		{
-				result = eAny(this->specify());
+			result = eAny(this->specify(), uml::umlPackage::VALUESPECIFICATION_CLASS,false);
 			break;
 		}
 

@@ -119,14 +119,10 @@ LoopNodeActivationImpl& LoopNodeActivationImpl::operator=(const LoopNodeActivati
 		m_bodyOutputLists.reset(new Bag<fUML::Semantics::Actions::Values>());
 		
 		
-
-		Bag<fUML::Semantics::Actions::Values>::iterator bodyOutputListsIter = bodyOutputListsList->begin();
-		Bag<fUML::Semantics::Actions::Values>::iterator bodyOutputListsEnd = bodyOutputListsList->end();
-		while (bodyOutputListsIter != bodyOutputListsEnd) 
+		for(const std::shared_ptr<fUML::Semantics::Actions::Values> bodyOutputListsindexElem: *bodyOutputListsList) 
 		{
-			std::shared_ptr<fUML::Semantics::Actions::Values> temp = std::dynamic_pointer_cast<fUML::Semantics::Actions::Values>((*bodyOutputListsIter)->copy());
-			getBodyOutputLists()->push_back(temp);
-			bodyOutputListsIter++;
+			std::shared_ptr<fUML::Semantics::Actions::Values> temp = std::dynamic_pointer_cast<fUML::Semantics::Actions::Values>((bodyOutputListsindexElem)->copy());
+			m_bodyOutputLists->push_back(temp);
 		}
 	}
 	else
@@ -328,15 +324,7 @@ Any LoopNodeActivationImpl::eGet(int featureID, bool resolve, bool coreType) con
 	{
 		case fUML::Semantics::Actions::ActionsPackage::LOOPNODEACTIVATION_ATTRIBUTE_BODYOUTPUTLISTS:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<fUML::Semantics::Actions::Values>::iterator iter = getBodyOutputLists()->begin();
-			Bag<fUML::Semantics::Actions::Values>::iterator end = getBodyOutputLists()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //7812			
+			return eAnyBag(getBodyOutputLists(),1160776639); //7812
 		}
 	}
 	return StructuredActivityNodeActivationImpl::eGet(featureID, resolve, coreType);
@@ -358,37 +346,38 @@ bool LoopNodeActivationImpl::eSet(int featureID, Any newValue)
 	{
 		case fUML::Semantics::Actions::ActionsPackage::LOOPNODEACTIVATION_ATTRIBUTE_BODYOUTPUTLISTS:
 		{
-			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<fUML::Semantics::Actions::Values>> bodyOutputListsList(new Bag<fUML::Semantics::Actions::Values>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
-			{
-				bodyOutputListsList->add(std::dynamic_pointer_cast<fUML::Semantics::Actions::Values>(*iter));
-				iter++;
-			}
-			
-			Bag<fUML::Semantics::Actions::Values>::iterator iterBodyOutputLists = getBodyOutputLists()->begin();
-			Bag<fUML::Semantics::Actions::Values>::iterator endBodyOutputLists = getBodyOutputLists()->end();
-			while (iterBodyOutputLists != endBodyOutputLists)
-			{
-				if (bodyOutputListsList->find(*iterBodyOutputLists) == -1)
+			// CAST Any to Bag<fUML::Semantics::Actions::Values>
+			if((newValue->isContainer()) && (fUML::Semantics::Actions::ActionsPackage::VALUES_CLASS ==newValue->getTypeId()))
+			{ 
+				try
 				{
-					getBodyOutputLists()->erase(*iterBodyOutputLists);
+					std::shared_ptr<Bag<fUML::Semantics::Actions::Values>> bodyOutputListsList= newValue->get<std::shared_ptr<Bag<fUML::Semantics::Actions::Values>>>();
+					std::shared_ptr<Bag<fUML::Semantics::Actions::Values>> _bodyOutputLists=getBodyOutputLists();
+					for(const std::shared_ptr<fUML::Semantics::Actions::Values> indexBodyOutputLists: *_bodyOutputLists)
+					{
+						if (bodyOutputListsList->find(indexBodyOutputLists) == -1)
+						{
+							_bodyOutputLists->erase(indexBodyOutputLists);
+						}
+					}
+
+					for(const std::shared_ptr<fUML::Semantics::Actions::Values> indexBodyOutputLists: *bodyOutputListsList)
+					{
+						if (_bodyOutputLists->find(indexBodyOutputLists) == -1)
+						{
+							_bodyOutputLists->add(indexBodyOutputLists);
+						}
+					}
 				}
-				iterBodyOutputLists++;
-			}
- 
-			iterBodyOutputLists = bodyOutputListsList->begin();
-			endBodyOutputLists = bodyOutputListsList->end();
-			while (iterBodyOutputLists != endBodyOutputLists)
-			{
-				if (getBodyOutputLists()->find(*iterBodyOutputLists) == -1)
+				catch(...)
 				{
-					getBodyOutputLists()->add(*iterBodyOutputLists);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterBodyOutputLists++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}
@@ -406,32 +395,26 @@ Any LoopNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<A
 
   	switch(operationID)
 	{
-		
-		// 1597416642
+		// fUML::Semantics::Actions::LoopNodeActivation::makeLoopVariableList() : uml::ActivityNode: 1597416642
 		case ActionsPackage::LOOPNODEACTIVATION_OPERATION_MAKELOOPVARIABLELIST:
 		{
-				result = eAny(this->makeLoopVariableList());
+			result = eAny(this->makeLoopVariableList(), uml::umlPackage::ACTIVITYNODE_CLASS,false);
 			break;
 		}
-		
-		// 563107466
+		// fUML::Semantics::Actions::LoopNodeActivation::runBody(): 563107466
 		case ActionsPackage::LOOPNODEACTIVATION_OPERATION_RUNBODY:
 		{
 			this->runBody();
-			break;
 		}
-		
-		// 1175069894
+		// fUML::Semantics::Actions::LoopNodeActivation::runLoopVariables(): 1175069894
 		case ActionsPackage::LOOPNODEACTIVATION_OPERATION_RUNLOOPVARIABLES:
 		{
 			this->runLoopVariables();
-			break;
 		}
-		
-		// 1241885508
+		// fUML::Semantics::Actions::LoopNodeActivation::runTest() : bool: 1241885508
 		case ActionsPackage::LOOPNODEACTIVATION_OPERATION_RUNTEST:
 		{
-					result = eAny(this->runTest(),0,false);
+			result = eAny(this->runTest(),0,false);
 			break;
 		}
 

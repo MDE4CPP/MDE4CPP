@@ -354,7 +354,7 @@ bool StateInvariantImpl::eSet(int featureID, Any newValue)
 	{
 		case uml::umlPackage::STATEINVARIANT_ATTRIBUTE_INVARIANT:
 		{
-			// BOOST CAST
+			// CAST Any to uml::Constraint
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Constraint> _invariant = std::dynamic_pointer_cast<uml::Constraint>(_temp);
 			setInvariant(_invariant); //22113

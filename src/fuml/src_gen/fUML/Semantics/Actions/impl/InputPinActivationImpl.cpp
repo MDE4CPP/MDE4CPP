@@ -283,19 +283,16 @@ Any InputPinActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<A
 
   	switch(operationID)
 	{
-		
-		// 508191945
+		// fUML::Semantics::Actions::InputPinActivation::isReady() : bool: 508191945
 		case ActionsPackage::INPUTPINACTIVATION_OPERATION_ISREADY:
 		{
-					result = eAny(this->isReady(),0,false);
+			result = eAny(this->isReady(),0,false);
 			break;
 		}
-		
-		// 1104040774
+		// fUML::Semantics::Actions::InputPinActivation::receiveOffer(): 1104040774
 		case ActionsPackage::INPUTPINACTIVATION_OPERATION_RECEIVEOFFER:
 		{
 			this->receiveOffer();
-			break;
 		}
 
 		default:

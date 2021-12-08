@@ -553,9 +553,9 @@ bool InstanceSpecificationImpl::eSet(int featureID, Any newValue)
 	{
 		case uml::umlPackage::INSTANCESPECIFICATION_ATTRIBUTE_CLASSIFIER:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::Classifier>
 			if((newValue->isContainer()) && (uml::umlPackage::CLASSIFIER_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::Classifier>> classifierList= newValue->get<std::shared_ptr<Bag<uml::Classifier>>>();
@@ -590,9 +590,9 @@ bool InstanceSpecificationImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::INSTANCESPECIFICATION_ATTRIBUTE_SLOT:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::Slot>
 			if((newValue->isContainer()) && (uml::umlPackage::SLOT_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::Slot>> slotList= newValue->get<std::shared_ptr<Bag<uml::Slot>>>();
@@ -627,7 +627,7 @@ bool InstanceSpecificationImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::INSTANCESPECIFICATION_ATTRIBUTE_SPECIFICATION:
 		{
-			// BOOST CAST
+			// CAST Any to uml::ValueSpecification
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::ValueSpecification> _specification = std::dynamic_pointer_cast<uml::ValueSpecification>(_temp);
 			setSpecification(_specification); //11716

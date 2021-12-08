@@ -595,9 +595,9 @@ bool NodeImpl::eSet(int featureID, Any newValue)
 	{
 		case uml::umlPackage::NODE_ATTRIBUTE_NESTEDNODE:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::Node>
 			if((newValue->isContainer()) && (uml::umlPackage::NODE_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::Node>> nestedNodeList= newValue->get<std::shared_ptr<Bag<uml::Node>>>();
@@ -709,14 +709,14 @@ Any NodeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments
 			int incoming_param_end2Upper;
 			std::list<Any>::const_iterator incoming_param_end2Upper_arguments_citer = std::next(arguments->begin(), 10);
 			incoming_param_end2Upper = (*incoming_param_end2Upper_arguments_citer)->get<int >();
-			result = eAny(this->createCommunicationPath(incoming_param_end1IsNavigable,incoming_param_end1Aggregation,incoming_param_end1Name,incoming_param_end1Lower,incoming_param_end1Upper,incoming_param_end1Node,incoming_param_end2IsNavigable,incoming_param_end2Aggregation,incoming_param_end2Name,incoming_param_end2Lower,incoming_param_end2Upper), umlPackage::COMMUNICATIONPATH_CLASS,false);
+			result = eAny(this->createCommunicationPath(incoming_param_end1IsNavigable,incoming_param_end1Aggregation,incoming_param_end1Name,incoming_param_end1Lower,incoming_param_end1Upper,incoming_param_end1Node,incoming_param_end2IsNavigable,incoming_param_end2Aggregation,incoming_param_end2Name,incoming_param_end2Lower,incoming_param_end2Upper), uml::umlPackage::COMMUNICATIONPATH_CLASS,false);
 			break;
 		}
 		// uml::Node::getCommunicationPaths() : uml::CommunicationPath[*]: 1487234918
 		case umlPackage::NODE_OPERATION_GETCOMMUNICATIONPATHS:
 		{
 			std::shared_ptr<Bag<uml::CommunicationPath> > resultList = this->getCommunicationPaths();
-			return eAny(resultList,umlPackage::COMMUNICATIONPATH_CLASS,true);
+			return eAny(resultList,uml::umlPackage::COMMUNICATIONPATH_CLASS,true);
 			break;
 		}
 		// uml::Node::internal_structure(Any, std::map) : bool: 3509535

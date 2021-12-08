@@ -31,10 +31,10 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
+#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "fUML/Semantics/Values/ValuesFactory.hpp"
 #include "uml/umlFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
-#include "fUML/Semantics/Loci/LociFactory.hpp"
 
 #include "ocl/Evaluations/CollectionLiteralPartEval.hpp"
 #include "fUML/Semantics/Loci/Locus.hpp"
@@ -320,7 +320,7 @@ bool CollectionRangeEvalImpl::eSet(int featureID, Any newValue)
 	{
 		case ocl::Evaluations::EvaluationsPackage::COLLECTIONRANGEEVAL_ATTRIBUTE_FIRST:
 		{
-			// BOOST CAST
+			// CAST Any to ocl::Evaluations::OclExpEval
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<ocl::Evaluations::OclExpEval> _first = std::dynamic_pointer_cast<ocl::Evaluations::OclExpEval>(_temp);
 			setFirst(_first); //203
@@ -328,7 +328,7 @@ bool CollectionRangeEvalImpl::eSet(int featureID, Any newValue)
 		}
 		case ocl::Evaluations::EvaluationsPackage::COLLECTIONRANGEEVAL_ATTRIBUTE_LAST:
 		{
-			// BOOST CAST
+			// CAST Any to ocl::Evaluations::OclExpEval
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<ocl::Evaluations::OclExpEval> _last = std::dynamic_pointer_cast<ocl::Evaluations::OclExpEval>(_temp);
 			setLast(_last); //204

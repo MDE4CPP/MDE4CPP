@@ -373,9 +373,9 @@ bool ConsiderIgnoreFragmentImpl::eSet(int featureID, Any newValue)
 	{
 		case uml::umlPackage::CONSIDERIGNOREFRAGMENT_ATTRIBUTE_MESSAGE:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::NamedElement>
 			if((newValue->isContainer()) && (uml::umlPackage::NAMEDELEMENT_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::NamedElement>> messageList= newValue->get<std::shared_ptr<Bag<uml::NamedElement>>>();

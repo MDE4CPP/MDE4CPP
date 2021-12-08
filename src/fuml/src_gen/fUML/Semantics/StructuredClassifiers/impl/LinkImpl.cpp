@@ -421,7 +421,7 @@ bool LinkImpl::eSet(int featureID, Any newValue)
 	{
 		case fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::LINK_ATTRIBUTE_TYPE:
 		{
-			// BOOST CAST
+			// CAST Any to uml::Association
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Association> _type = std::dynamic_pointer_cast<uml::Association>(_temp);
 			setType(_type); //682
@@ -441,15 +441,13 @@ Any LinkImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments
 
   	switch(operationID)
 	{
-		
-		// 1029670453
+		// fUML::Semantics::StructuredClassifiers::Link::_copy() : fUML::Semantics::Values::Value: 1029670453
 		case StructuredClassifiersPackage::LINK_OPERATION__COPY:
 		{
-				result = eAny(this->_copy());
+			result = eAny(this->_copy(), fUML::Semantics::Values::ValuesPackage::VALUE_CLASS,false);
 			break;
 		}
-		
-		// 750371157
+		// fUML::Semantics::StructuredClassifiers::Link::addTo(fUML::Semantics::Loci::Locus): 750371157
 		case StructuredClassifiersPackage::LINK_OPERATION_ADDTO_LOCUS:
 		{
 			//Retrieve input parameter 'locus'
@@ -458,10 +456,8 @@ Any LinkImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments
 			std::list<Any>::const_iterator incoming_param_locus_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_locus = (*incoming_param_locus_arguments_citer)->get<std::shared_ptr<fUML::Semantics::Loci::Locus> >();
 			this->addTo(incoming_param_locus);
-			break;
 		}
-		
-		// 704042565
+		// fUML::Semantics::StructuredClassifiers::Link::getOtherFeatureValues(fUML::Semantics::StructuredClassifiers::ExtensionalValue[*], uml::Property) : fUML::Semantics::SimpleClassifiers::FeatureValue[*]: 704042565
 		case StructuredClassifiersPackage::LINK_OPERATION_GETOTHERFEATUREVALUES_EXTENSIONALVALUE_PROPERTY:
 		{
 			//Retrieve input parameter 'extent'
@@ -474,18 +470,18 @@ Any LinkImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments
 			std::shared_ptr<uml::Property> incoming_param_end;
 			std::list<Any>::const_iterator incoming_param_end_arguments_citer = std::next(arguments->begin(), 1);
 			incoming_param_end = (*incoming_param_end_arguments_citer)->get<std::shared_ptr<uml::Property> >();
-				result = eAny(this->getOtherFeatureValues(incoming_param_extent,incoming_param_end));
+			std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue> > resultList = this->getOtherFeatureValues(incoming_param_extent,incoming_param_end);
+			return eAny(resultList,fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::FEATUREVALUE_CLASS,true);
 			break;
 		}
-		
-		// 202529784
+		// fUML::Semantics::StructuredClassifiers::Link::getTypes() : uml::Classifier[*] {const}: 202529784
 		case StructuredClassifiersPackage::LINK_OPERATION_GETTYPES:
 		{
-				result = eAny(this->getTypes());
+			std::shared_ptr<Bag<uml::Classifier> > resultList = this->getTypes();
+			return eAny(resultList,uml::umlPackage::CLASSIFIER_CLASS,true);
 			break;
 		}
-		
-		// 1155151383
+		// fUML::Semantics::StructuredClassifiers::Link::isMatchingLink(fUML::Semantics::StructuredClassifiers::ExtensionalValue, uml::Property) : bool: 1155151383
 		case StructuredClassifiersPackage::LINK_OPERATION_ISMATCHINGLINK_EXTENSIONALVALUE_PROPERTY:
 		{
 			//Retrieve input parameter 'link'
@@ -498,14 +494,13 @@ Any LinkImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments
 			std::shared_ptr<uml::Property> incoming_param_end;
 			std::list<Any>::const_iterator incoming_param_end_arguments_citer = std::next(arguments->begin(), 1);
 			incoming_param_end = (*incoming_param_end_arguments_citer)->get<std::shared_ptr<uml::Property> >();
-					result = eAny(this->isMatchingLink(incoming_param_link,incoming_param_end),0,false);
+			result = eAny(this->isMatchingLink(incoming_param_link,incoming_param_end),0,false);
 			break;
 		}
-		
-		// 432830578
+		// fUML::Semantics::StructuredClassifiers::Link::new_() : fUML::Semantics::Values::Value: 432830578
 		case StructuredClassifiersPackage::LINK_OPERATION_NEW_:
 		{
-				result = eAny(this->new_());
+			result = eAny(this->new_(), fUML::Semantics::Values::ValuesPackage::VALUE_CLASS,false);
 			break;
 		}
 

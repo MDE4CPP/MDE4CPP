@@ -393,7 +393,7 @@ bool LiteralBooleanImpl::eSet(int featureID, Any newValue)
 	{
 		case uml::umlPackage::LITERALBOOLEAN_ATTRIBUTE_VALUE:
 		{
-			// BOOST CAST
+			// CAST Any to bool
 			bool _value = newValue->get<bool>();
 			setValue(_value); //13715
 			return true;

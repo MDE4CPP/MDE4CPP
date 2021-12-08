@@ -495,9 +495,9 @@ bool InteractionFragmentImpl::eSet(int featureID, Any newValue)
 	{
 		case uml::umlPackage::INTERACTIONFRAGMENT_ATTRIBUTE_COVERED:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::Lifeline>
 			if((newValue->isContainer()) && (uml::umlPackage::LIFELINE_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::Lifeline>> coveredList= newValue->get<std::shared_ptr<Bag<uml::Lifeline>>>();
@@ -532,7 +532,7 @@ bool InteractionFragmentImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::INTERACTIONFRAGMENT_ATTRIBUTE_ENCLOSINGINTERACTION:
 		{
-			// BOOST CAST
+			// CAST Any to uml::Interaction
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Interaction> _enclosingInteraction = std::dynamic_pointer_cast<uml::Interaction>(_temp);
 			setEnclosingInteraction(_enclosingInteraction); //12111
@@ -540,7 +540,7 @@ bool InteractionFragmentImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::INTERACTIONFRAGMENT_ATTRIBUTE_ENCLOSINGOPERAND:
 		{
-			// BOOST CAST
+			// CAST Any to uml::InteractionOperand
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::InteractionOperand> _enclosingOperand = std::dynamic_pointer_cast<uml::InteractionOperand>(_temp);
 			setEnclosingOperand(_enclosingOperand); //12110
@@ -548,9 +548,9 @@ bool InteractionFragmentImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::INTERACTIONFRAGMENT_ATTRIBUTE_GENERALORDERING:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::GeneralOrdering>
 			if((newValue->isContainer()) && (uml::umlPackage::GENERALORDERING_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::GeneralOrdering>> generalOrderingList= newValue->get<std::shared_ptr<Bag<uml::GeneralOrdering>>>();

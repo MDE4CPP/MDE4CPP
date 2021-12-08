@@ -466,7 +466,7 @@ bool SendObjectActionImpl::eSet(int featureID, Any newValue)
 	{
 		case uml::umlPackage::SENDOBJECTACTION_ATTRIBUTE_REQUEST:
 		{
-			// BOOST CAST
+			// CAST Any to uml::InputPin
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::InputPin> _request = std::dynamic_pointer_cast<uml::InputPin>(_temp);
 			setRequest(_request); //21229
@@ -474,7 +474,7 @@ bool SendObjectActionImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::SENDOBJECTACTION_ATTRIBUTE_TARGET:
 		{
-			// BOOST CAST
+			// CAST Any to uml::InputPin
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::InputPin> _target = std::dynamic_pointer_cast<uml::InputPin>(_temp);
 			setTarget(_target); //21230

@@ -301,7 +301,7 @@ bool EDataTypeImpl::eSet(int featureID, Any newValue)
 	{
 		case ecore::ecorePackage::EDATATYPE_ATTRIBUTE_SERIALIZABLE:
 		{
-			// BOOST CAST
+			// CAST Any to bool
 			bool _serializable = newValue->get<bool>();
 			setSerializable(_serializable); //1411
 			return true;

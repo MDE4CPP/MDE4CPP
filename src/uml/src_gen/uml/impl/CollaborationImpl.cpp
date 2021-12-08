@@ -569,9 +569,9 @@ bool CollaborationImpl::eSet(int featureID, Any newValue)
 	{
 		case uml::umlPackage::COLLABORATION_ATTRIBUTE_COLLABORATIONROLE:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::ConnectableElement>
 			if((newValue->isContainer()) && (uml::umlPackage::CONNECTABLEELEMENT_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::ConnectableElement>> collaborationRoleList= newValue->get<std::shared_ptr<Bag<uml::ConnectableElement>>>();

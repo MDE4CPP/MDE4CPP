@@ -340,11 +340,10 @@ Any InstanceValueEvaluationImpl::eInvoke(int operationID, std::shared_ptr<std::l
 
   	switch(operationID)
 	{
-		
-		// 675295782
+		// fUML::Semantics::Classification::InstanceValueEvaluation::evaluate() : fUML::Semantics::Values::Value: 675295782
 		case ClassificationPackage::INSTANCEVALUEEVALUATION_OPERATION_EVALUATE:
 		{
-				result = eAny(this->evaluate());
+			result = eAny(this->evaluate(), fUML::Semantics::Values::ValuesPackage::VALUE_CLASS,false);
 			break;
 		}
 

@@ -471,7 +471,7 @@ bool ValueSpecificationActionImpl::eSet(int featureID, Any newValue)
 	{
 		case uml::umlPackage::VALUESPECIFICATIONACTION_ATTRIBUTE_RESULT:
 		{
-			// BOOST CAST
+			// CAST Any to uml::OutputPin
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::OutputPin> _result = std::dynamic_pointer_cast<uml::OutputPin>(_temp);
 			setResult(_result); //25127
@@ -479,7 +479,7 @@ bool ValueSpecificationActionImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::VALUESPECIFICATIONACTION_ATTRIBUTE_VALUE:
 		{
-			// BOOST CAST
+			// CAST Any to uml::ValueSpecification
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::ValueSpecification> _value = std::dynamic_pointer_cast<uml::ValueSpecification>(_temp);
 			setValue(_value); //25128

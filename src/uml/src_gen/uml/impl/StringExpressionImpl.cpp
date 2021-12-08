@@ -503,7 +503,7 @@ bool StringExpressionImpl::eSet(int featureID, Any newValue)
 	{
 		case uml::umlPackage::STRINGEXPRESSION_ATTRIBUTE_OWNINGEXPRESSION:
 		{
-			// BOOST CAST
+			// CAST Any to uml::StringExpression
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::StringExpression> _owningExpression = std::dynamic_pointer_cast<uml::StringExpression>(_temp);
 			setOwningExpression(_owningExpression); //22419
@@ -511,9 +511,9 @@ bool StringExpressionImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::STRINGEXPRESSION_ATTRIBUTE_SUBEXPRESSION:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::StringExpression>
 			if((newValue->isContainer()) && (uml::umlPackage::STRINGEXPRESSION_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::StringExpression>> subExpressionList= newValue->get<std::shared_ptr<Bag<uml::StringExpression>>>();

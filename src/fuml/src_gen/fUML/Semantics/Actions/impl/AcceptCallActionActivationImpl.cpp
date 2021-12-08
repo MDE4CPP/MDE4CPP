@@ -278,8 +278,7 @@ Any AcceptCallActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std
 
   	switch(operationID)
 	{
-		
-		// 168434213
+		// fUML::Semantics::Actions::AcceptCallActionActivation::accept(fUML::Semantics::CommonBehavior::EventOccurrence): 168434213
 		case ActionsPackage::ACCEPTCALLACTIONACTIVATION_OPERATION_ACCEPT_EVENTOCCURRENCE:
 		{
 			//Retrieve input parameter 'eventOccurrence'
@@ -288,7 +287,6 @@ Any AcceptCallActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std
 			std::list<Any>::const_iterator incoming_param_eventOccurrence_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_eventOccurrence = (*incoming_param_eventOccurrence_arguments_citer)->get<std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> >();
 			this->accept(incoming_param_eventOccurrence);
-			break;
 		}
 
 		default:

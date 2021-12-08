@@ -1083,9 +1083,9 @@ bool StateImpl::eSet(int featureID, Any newValue)
 	{
 		case uml::umlPackage::STATE_ATTRIBUTE_CONNECTION:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::ConnectionPointReference>
 			if((newValue->isContainer()) && (uml::umlPackage::CONNECTIONPOINTREFERENCE_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::ConnectionPointReference>> connectionList= newValue->get<std::shared_ptr<Bag<uml::ConnectionPointReference>>>();
@@ -1120,9 +1120,9 @@ bool StateImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::STATE_ATTRIBUTE_CONNECTIONPOINT:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::Pseudostate>
 			if((newValue->isContainer()) && (uml::umlPackage::PSEUDOSTATE_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::Pseudostate>> connectionPointList= newValue->get<std::shared_ptr<Bag<uml::Pseudostate>>>();
@@ -1157,9 +1157,9 @@ bool StateImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::STATE_ATTRIBUTE_DEFERRABLETRIGGER:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::Trigger>
 			if((newValue->isContainer()) && (uml::umlPackage::TRIGGER_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::Trigger>> deferrableTriggerList= newValue->get<std::shared_ptr<Bag<uml::Trigger>>>();
@@ -1194,7 +1194,7 @@ bool StateImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::STATE_ATTRIBUTE_DOACTIVITY:
 		{
-			// BOOST CAST
+			// CAST Any to uml::Behavior
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Behavior> _doActivity = std::dynamic_pointer_cast<uml::Behavior>(_temp);
 			setDoActivity(_doActivity); //22024
@@ -1202,7 +1202,7 @@ bool StateImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::STATE_ATTRIBUTE_ENTRY:
 		{
-			// BOOST CAST
+			// CAST Any to uml::Behavior
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Behavior> _entry = std::dynamic_pointer_cast<uml::Behavior>(_temp);
 			setEntry(_entry); //22025
@@ -1210,7 +1210,7 @@ bool StateImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::STATE_ATTRIBUTE_EXIT:
 		{
-			// BOOST CAST
+			// CAST Any to uml::Behavior
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Behavior> _exit = std::dynamic_pointer_cast<uml::Behavior>(_temp);
 			setExit(_exit); //22026
@@ -1218,7 +1218,7 @@ bool StateImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::STATE_ATTRIBUTE_REDEFINEDSTATE:
 		{
-			// BOOST CAST
+			// CAST Any to uml::State
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::State> _redefinedState = std::dynamic_pointer_cast<uml::State>(_temp);
 			setRedefinedState(_redefinedState); //22031
@@ -1226,9 +1226,9 @@ bool StateImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::STATE_ATTRIBUTE_REGION:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::Region>
 			if((newValue->isContainer()) && (uml::umlPackage::REGION_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::Region>> regionList= newValue->get<std::shared_ptr<Bag<uml::Region>>>();
@@ -1263,7 +1263,7 @@ bool StateImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::STATE_ATTRIBUTE_STATEINVARIANT:
 		{
-			// BOOST CAST
+			// CAST Any to uml::Constraint
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Constraint> _stateInvariant = std::dynamic_pointer_cast<uml::Constraint>(_temp);
 			setStateInvariant(_stateInvariant); //22032
@@ -1271,7 +1271,7 @@ bool StateImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::STATE_ATTRIBUTE_SUBMACHINE:
 		{
-			// BOOST CAST
+			// CAST Any to uml::StateMachine
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::StateMachine> _submachine = std::dynamic_pointer_cast<uml::StateMachine>(_temp);
 			setSubmachine(_submachine); //22033
@@ -1378,7 +1378,7 @@ Any StateImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argument
 		// uml::State::redefinitionContext() : uml::Classifier: 871920175
 		case umlPackage::STATE_OPERATION_REDEFINITIONCONTEXT:
 		{
-			result = eAny(this->redefinitionContext(), umlPackage::CLASSIFIER_CLASS,false);
+			result = eAny(this->redefinitionContext(), uml::umlPackage::CLASSIFIER_CLASS,false);
 			break;
 		}
 		// uml::State::submachine_or_regions(Any, std::map) : bool: 1111971003

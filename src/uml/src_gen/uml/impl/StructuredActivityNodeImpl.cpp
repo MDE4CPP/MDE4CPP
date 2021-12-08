@@ -987,9 +987,9 @@ bool StructuredActivityNodeImpl::eSet(int featureID, Any newValue)
 	{
 		case uml::umlPackage::STRUCTUREDACTIVITYNODE_ATTRIBUTE_EDGE:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::ActivityEdge>
 			if((newValue->isContainer()) && (uml::umlPackage::ACTIVITYEDGE_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::ActivityEdge>> edgeList= newValue->get<std::shared_ptr<Bag<uml::ActivityEdge>>>();
@@ -1024,16 +1024,16 @@ bool StructuredActivityNodeImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::STRUCTUREDACTIVITYNODE_ATTRIBUTE_MUSTISOLATE:
 		{
-			// BOOST CAST
+			// CAST Any to bool
 			bool _mustIsolate = newValue->get<bool>();
 			setMustIsolate(_mustIsolate); //22739
 			return true;
 		}
 		case uml::umlPackage::STRUCTUREDACTIVITYNODE_ATTRIBUTE_NODE:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::ActivityNode>
 			if((newValue->isContainer()) && (uml::umlPackage::ACTIVITYNODE_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::ActivityNode>> nodeList= newValue->get<std::shared_ptr<Bag<uml::ActivityNode>>>();
@@ -1068,9 +1068,9 @@ bool StructuredActivityNodeImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::STRUCTUREDACTIVITYNODE_ATTRIBUTE_STRUCTUREDNODEINPUT:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::InputPin>
 			if((newValue->isContainer()) && (uml::umlPackage::INPUTPIN_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::InputPin>> structuredNodeInputList= newValue->get<std::shared_ptr<Bag<uml::InputPin>>>();
@@ -1105,9 +1105,9 @@ bool StructuredActivityNodeImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::STRUCTUREDACTIVITYNODE_ATTRIBUTE_STRUCTUREDNODEOUTPUT:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::OutputPin>
 			if((newValue->isContainer()) && (uml::umlPackage::OUTPUTPIN_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::OutputPin>> structuredNodeOutputList= newValue->get<std::shared_ptr<Bag<uml::OutputPin>>>();
@@ -1142,9 +1142,9 @@ bool StructuredActivityNodeImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::STRUCTUREDACTIVITYNODE_ATTRIBUTE_VARIABLE:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::Variable>
 			if((newValue->isContainer()) && (uml::umlPackage::VARIABLE_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::Variable>> variableList= newValue->get<std::shared_ptr<Bag<uml::Variable>>>();
@@ -1255,14 +1255,14 @@ Any StructuredActivityNodeImpl::eInvoke(int operationID, std::shared_ptr<std::li
 		case umlPackage::STRUCTUREDACTIVITYNODE_OPERATION_SOURCENODES:
 		{
 			std::shared_ptr<Bag<uml::ActivityNode> > resultList = this->sourceNodes();
-			return eAny(resultList,umlPackage::ACTIVITYNODE_CLASS,true);
+			return eAny(resultList,uml::umlPackage::ACTIVITYNODE_CLASS,true);
 			break;
 		}
 		// uml::StructuredActivityNode::targetNodes() : uml::ActivityNode[*]: 585821302
 		case umlPackage::STRUCTUREDACTIVITYNODE_OPERATION_TARGETNODES:
 		{
 			std::shared_ptr<Bag<uml::ActivityNode> > resultList = this->targetNodes();
-			return eAny(resultList,umlPackage::ACTIVITYNODE_CLASS,true);
+			return eAny(resultList,uml::umlPackage::ACTIVITYNODE_CLASS,true);
 			break;
 		}
 

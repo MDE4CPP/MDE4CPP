@@ -266,7 +266,7 @@ Any ElementImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case ocl::Values::ValuesPackage::ELEMENT_ATTRIBUTE_INDEXNR:
-				return eAny(getIndexNr(),0,true); //230
+			return eAny(getIndexNr(),0,true); //230
 		case ocl::Values::ValuesPackage::ELEMENT_ATTRIBUTE_VALUE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getValue();
@@ -294,14 +294,14 @@ bool ElementImpl::eSet(int featureID, Any newValue)
 	{
 		case ocl::Values::ValuesPackage::ELEMENT_ATTRIBUTE_INDEXNR:
 		{
-			// BOOST CAST
+			// CAST Any to int
 			int _indexNr = newValue->get<int>();
 			setIndexNr(_indexNr); //230
 			return true;
 		}
 		case ocl::Values::ValuesPackage::ELEMENT_ATTRIBUTE_VALUE:
 		{
-			// BOOST CAST
+			// CAST Any to fUML::Semantics::Values::Value
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<fUML::Semantics::Values::Value> _value = std::dynamic_pointer_cast<fUML::Semantics::Values::Value>(_temp);
 			setValue(_value); //231

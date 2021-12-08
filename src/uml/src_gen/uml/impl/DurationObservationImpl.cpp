@@ -133,7 +133,7 @@ DurationObservationImpl& DurationObservationImpl::operator=(const DurationObserv
 		m_firstEvent.reset(new Bag<bool>());
 		for(const std::shared_ptr<bool> it: *firstEventList) 
 		{
-			m_firstEvent->push_back(*it);
+			m_firstEvent->push_back(it);
 		}
 	}
 	else
@@ -417,9 +417,9 @@ bool DurationObservationImpl::eSet(int featureID, Any newValue)
 	{
 		case uml::umlPackage::DURATIONOBSERVATION_ATTRIBUTE_EVENT:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::NamedElement>
 			if((newValue->isContainer()) && (uml::umlPackage::NAMEDELEMENT_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::NamedElement>> eventList= newValue->get<std::shared_ptr<Bag<uml::NamedElement>>>();
@@ -454,7 +454,7 @@ bool DurationObservationImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::DURATIONOBSERVATION_ATTRIBUTE_FIRSTEVENT:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<bool>
 			// nothing to do
 			return true;
 		}

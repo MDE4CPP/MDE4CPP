@@ -292,14 +292,14 @@ bool ArgumentImpl::eSet(int featureID, Any newValue)
 	{
 		case uml::umlPackage::ARGUMENT_ATTRIBUTE_NAME:
 		{
-			// BOOST CAST
+			// CAST Any to std::string
 			std::string _name = newValue->get<std::string>();
 			setName(_name); //190
 			return true;
 		}
 		case uml::umlPackage::ARGUMENT_ATTRIBUTE_VALUE:
 		{
-			// BOOST CAST
+			// CAST Any to uml::Object
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Object> _value = std::dynamic_pointer_cast<uml::Object>(_temp);
 			setValue(_value); //191

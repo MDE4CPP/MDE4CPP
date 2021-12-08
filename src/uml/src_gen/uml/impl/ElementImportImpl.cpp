@@ -519,14 +519,14 @@ bool ElementImportImpl::eSet(int featureID, Any newValue)
 	{
 		case uml::umlPackage::ELEMENTIMPORT_ATTRIBUTE_ALIAS:
 		{
-			// BOOST CAST
+			// CAST Any to std::string
 			std::string _alias = newValue->get<std::string>();
 			setAlias(_alias); //826
 			return true;
 		}
 		case uml::umlPackage::ELEMENTIMPORT_ATTRIBUTE_IMPORTEDELEMENT:
 		{
-			// BOOST CAST
+			// CAST Any to uml::PackageableElement
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::PackageableElement> _importedElement = std::dynamic_pointer_cast<uml::PackageableElement>(_temp);
 			setImportedElement(_importedElement); //827
@@ -534,7 +534,7 @@ bool ElementImportImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::ELEMENTIMPORT_ATTRIBUTE_IMPORTINGNAMESPACE:
 		{
-			// BOOST CAST
+			// CAST Any to uml::Namespace
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Namespace> _importingNamespace = std::dynamic_pointer_cast<uml::Namespace>(_temp);
 			setImportingNamespace(_importingNamespace); //828
@@ -542,7 +542,7 @@ bool ElementImportImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::ELEMENTIMPORT_ATTRIBUTE_VISIBILITY:
 		{
-			// BOOST CAST
+			// CAST Any to uml::VisibilityKind
 			uml::VisibilityKind _visibility = newValue->get<uml::VisibilityKind>();
 			setVisibility(_visibility); //829
 			return true;

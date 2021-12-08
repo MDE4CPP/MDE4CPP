@@ -512,15 +512,7 @@ Any ActivityEdgeInstanceImpl::eGet(int featureID, bool resolve, bool coreType) c
 		}
 		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYEDGEINSTANCE_ATTRIBUTE_OFFERS:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<fUML::Semantics::Activities::Offer>::iterator iter = getOffers()->begin();
-			Bag<fUML::Semantics::Activities::Offer>::iterator end = getOffers()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //63			
+			return eAnyBag(getOffers(),1035192448); //63
 		}
 		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYEDGEINSTANCE_ATTRIBUTE_SOURCE:
 		{
@@ -560,7 +552,7 @@ bool ActivityEdgeInstanceImpl::eSet(int featureID, Any newValue)
 	{
 		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYEDGEINSTANCE_ATTRIBUTE_EDGE:
 		{
-			// BOOST CAST
+			// CAST Any to uml::ActivityEdge
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::ActivityEdge> _edge = std::dynamic_pointer_cast<uml::ActivityEdge>(_temp);
 			setEdge(_edge); //60
@@ -568,7 +560,7 @@ bool ActivityEdgeInstanceImpl::eSet(int featureID, Any newValue)
 		}
 		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYEDGEINSTANCE_ATTRIBUTE_GROUP:
 		{
-			// BOOST CAST
+			// CAST Any to fUML::Semantics::Activities::ActivityNodeActivationGroup
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> _group = std::dynamic_pointer_cast<fUML::Semantics::Activities::ActivityNodeActivationGroup>(_temp);
 			setGroup(_group); //64
@@ -576,43 +568,44 @@ bool ActivityEdgeInstanceImpl::eSet(int featureID, Any newValue)
 		}
 		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYEDGEINSTANCE_ATTRIBUTE_OFFERS:
 		{
-			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<fUML::Semantics::Activities::Offer>> offersList(new Bag<fUML::Semantics::Activities::Offer>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
-			{
-				offersList->add(std::dynamic_pointer_cast<fUML::Semantics::Activities::Offer>(*iter));
-				iter++;
-			}
-			
-			Bag<fUML::Semantics::Activities::Offer>::iterator iterOffers = getOffers()->begin();
-			Bag<fUML::Semantics::Activities::Offer>::iterator endOffers = getOffers()->end();
-			while (iterOffers != endOffers)
-			{
-				if (offersList->find(*iterOffers) == -1)
+			// CAST Any to Bag<fUML::Semantics::Activities::Offer>
+			if((newValue->isContainer()) && (fUML::Semantics::Activities::ActivitiesPackage::OFFER_CLASS ==newValue->getTypeId()))
+			{ 
+				try
 				{
-					getOffers()->erase(*iterOffers);
+					std::shared_ptr<Bag<fUML::Semantics::Activities::Offer>> offersList= newValue->get<std::shared_ptr<Bag<fUML::Semantics::Activities::Offer>>>();
+					std::shared_ptr<Bag<fUML::Semantics::Activities::Offer>> _offers=getOffers();
+					for(const std::shared_ptr<fUML::Semantics::Activities::Offer> indexOffers: *_offers)
+					{
+						if (offersList->find(indexOffers) == -1)
+						{
+							_offers->erase(indexOffers);
+						}
+					}
+
+					for(const std::shared_ptr<fUML::Semantics::Activities::Offer> indexOffers: *offersList)
+					{
+						if (_offers->find(indexOffers) == -1)
+						{
+							_offers->add(indexOffers);
+						}
+					}
 				}
-				iterOffers++;
-			}
- 
-			iterOffers = offersList->begin();
-			endOffers = offersList->end();
-			while (iterOffers != endOffers)
-			{
-				if (getOffers()->find(*iterOffers) == -1)
+				catch(...)
 				{
-					getOffers()->add(*iterOffers);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterOffers++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}
 		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYEDGEINSTANCE_ATTRIBUTE_SOURCE:
 		{
-			// BOOST CAST
+			// CAST Any to fUML::Semantics::Activities::ActivityNodeActivation
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> _source = std::dynamic_pointer_cast<fUML::Semantics::Activities::ActivityNodeActivation>(_temp);
 			setSource(_source); //61
@@ -620,7 +613,7 @@ bool ActivityEdgeInstanceImpl::eSet(int featureID, Any newValue)
 		}
 		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYEDGEINSTANCE_ATTRIBUTE_TARGET:
 		{
-			// BOOST CAST
+			// CAST Any to fUML::Semantics::Activities::ActivityNodeActivation
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> _target = std::dynamic_pointer_cast<fUML::Semantics::Activities::ActivityNodeActivation>(_temp);
 			setTarget(_target); //62
@@ -640,29 +633,26 @@ Any ActivityEdgeInstanceImpl::eInvoke(int operationID, std::shared_ptr<std::list
 
   	switch(operationID)
 	{
-		
-		// 729654799
+		// fUML::Semantics::Activities::ActivityEdgeInstance::countOfferedValue() : int: 729654799
 		case ActivitiesPackage::ACTIVITYEDGEINSTANCE_OPERATION_COUNTOFFEREDVALUE:
 		{
-					result = eAny(this->countOfferedValue(),0,false);
+			result = eAny(this->countOfferedValue(),0,false);
 			break;
 		}
-		
-		// 433302189
+		// fUML::Semantics::Activities::ActivityEdgeInstance::getOfferedTokens() : fUML::Semantics::Activities::Token[*]: 433302189
 		case ActivitiesPackage::ACTIVITYEDGEINSTANCE_OPERATION_GETOFFEREDTOKENS:
 		{
-				result = eAny(this->getOfferedTokens());
+			std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > resultList = this->getOfferedTokens();
+			return eAny(resultList,fUML::Semantics::Activities::ActivitiesPackage::TOKEN_CLASS,true);
 			break;
 		}
-		
-		// 1690101896
+		// fUML::Semantics::Activities::ActivityEdgeInstance::hasOffer() : bool: 1690101896
 		case ActivitiesPackage::ACTIVITYEDGEINSTANCE_OPERATION_HASOFFER:
 		{
-					result = eAny(this->hasOffer(),0,false);
+			result = eAny(this->hasOffer(),0,false);
 			break;
 		}
-		
-		// 1208149194
+		// fUML::Semantics::Activities::ActivityEdgeInstance::sendOffer(fUML::Semantics::Activities::Token[*]): 1208149194
 		case ActivitiesPackage::ACTIVITYEDGEINSTANCE_OPERATION_SENDOFFER_TOKEN:
 		{
 			//Retrieve input parameter 'tokens'
@@ -671,17 +661,15 @@ Any ActivityEdgeInstanceImpl::eInvoke(int operationID, std::shared_ptr<std::list
 			std::list<Any>::const_iterator incoming_param_tokens_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_tokens = (*incoming_param_tokens_arguments_citer)->get<std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> >();
 			this->sendOffer(incoming_param_tokens);
-			break;
 		}
-		
-		// 1733798230
+		// fUML::Semantics::Activities::ActivityEdgeInstance::takeOfferedTokens() : fUML::Semantics::Activities::Token[*]: 1733798230
 		case ActivitiesPackage::ACTIVITYEDGEINSTANCE_OPERATION_TAKEOFFEREDTOKENS:
 		{
-				result = eAny(this->takeOfferedTokens());
+			std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > resultList = this->takeOfferedTokens();
+			return eAny(resultList,fUML::Semantics::Activities::ActivitiesPackage::TOKEN_CLASS,true);
 			break;
 		}
-		
-		// 982608933
+		// fUML::Semantics::Activities::ActivityEdgeInstance::takeOfferedTokens(int) : fUML::Semantics::Activities::Token[*]: 982608933
 		case ActivitiesPackage::ACTIVITYEDGEINSTANCE_OPERATION_TAKEOFFEREDTOKENS_EINT:
 		{
 			//Retrieve input parameter 'maxCount'
@@ -689,7 +677,8 @@ Any ActivityEdgeInstanceImpl::eInvoke(int operationID, std::shared_ptr<std::list
 			int incoming_param_maxCount;
 			std::list<Any>::const_iterator incoming_param_maxCount_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_maxCount = (*incoming_param_maxCount_arguments_citer)->get<int >();
-				result = eAny(this->takeOfferedTokens(incoming_param_maxCount));
+			std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > resultList = this->takeOfferedTokens(incoming_param_maxCount);
+			return eAny(resultList,fUML::Semantics::Activities::ActivitiesPackage::TOKEN_CLASS,true);
 			break;
 		}
 

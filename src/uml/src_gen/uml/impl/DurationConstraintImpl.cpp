@@ -146,7 +146,7 @@ DurationConstraintImpl& DurationConstraintImpl::operator=(const DurationConstrai
 		m_firstEvent.reset(new Bag<bool>());
 		for(const std::shared_ptr<bool> it: *firstEventList) 
 		{
-			m_firstEvent->push_back(*it);
+			m_firstEvent->push_back(it);
 		}
 	}
 	else
@@ -388,7 +388,7 @@ bool DurationConstraintImpl::eSet(int featureID, Any newValue)
 	{
 		case uml::umlPackage::DURATIONCONSTRAINT_ATTRIBUTE_FIRSTEVENT:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<bool>
 			// nothing to do
 			return true;
 		}

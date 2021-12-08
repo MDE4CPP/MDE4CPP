@@ -400,7 +400,7 @@ Any UnlimitedNaturalExpImpl::eGet(int featureID, bool resolve, bool coreType) co
 	switch(featureID)
 	{
 		case ocl::Expressions::ExpressionsPackage::UNLIMITEDNATURALEXP_ATTRIBUTE_UNLIMITEDNATURALSYMBOL:
-				return eAny(getUnlimitedNaturalSymbol(),0,true); //9323
+			return eAny(getUnlimitedNaturalSymbol(),0,true); //9323
 	}
 	return NumericLiteralExpImpl::eGet(featureID, resolve, coreType);
 }
@@ -421,7 +421,7 @@ bool UnlimitedNaturalExpImpl::eSet(int featureID, Any newValue)
 	{
 		case ocl::Expressions::ExpressionsPackage::UNLIMITEDNATURALEXP_ATTRIBUTE_UNLIMITEDNATURALSYMBOL:
 		{
-			// BOOST CAST
+			// CAST Any to int
 			int _unlimitedNaturalSymbol = newValue->get<int>();
 			setUnlimitedNaturalSymbol(_unlimitedNaturalSymbol); //9323
 			return true;

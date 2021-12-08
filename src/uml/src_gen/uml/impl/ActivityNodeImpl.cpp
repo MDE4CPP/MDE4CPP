@@ -722,7 +722,7 @@ bool ActivityNodeImpl::eSet(int featureID, Any newValue)
 	{
 		case uml::umlPackage::ACTIVITYNODE_ATTRIBUTE_ACTIVITY:
 		{
-			// BOOST CAST
+			// CAST Any to uml::Activity
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Activity> _activity = std::dynamic_pointer_cast<uml::Activity>(_temp);
 			setActivity(_activity); //1112
@@ -730,9 +730,9 @@ bool ActivityNodeImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::ACTIVITYNODE_ATTRIBUTE_ININTERRUPTIBLEREGION:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::InterruptibleActivityRegion>
 			if((newValue->isContainer()) && (uml::umlPackage::INTERRUPTIBLEACTIVITYREGION_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::InterruptibleActivityRegion>> inInterruptibleRegionList= newValue->get<std::shared_ptr<Bag<uml::InterruptibleActivityRegion>>>();
@@ -767,9 +767,9 @@ bool ActivityNodeImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::ACTIVITYNODE_ATTRIBUTE_INPARTITION:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::ActivityPartition>
 			if((newValue->isContainer()) && (uml::umlPackage::ACTIVITYPARTITION_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::ActivityPartition>> inPartitionList= newValue->get<std::shared_ptr<Bag<uml::ActivityPartition>>>();
@@ -804,7 +804,7 @@ bool ActivityNodeImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::ACTIVITYNODE_ATTRIBUTE_INSTRUCTUREDNODE:
 		{
-			// BOOST CAST
+			// CAST Any to uml::StructuredActivityNode
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::StructuredActivityNode> _inStructuredNode = std::dynamic_pointer_cast<uml::StructuredActivityNode>(_temp);
 			setInStructuredNode(_inStructuredNode); //1115
@@ -812,9 +812,9 @@ bool ActivityNodeImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::ACTIVITYNODE_ATTRIBUTE_INCOMING:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::ActivityEdge>
 			if((newValue->isContainer()) && (uml::umlPackage::ACTIVITYEDGE_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::ActivityEdge>> incomingList= newValue->get<std::shared_ptr<Bag<uml::ActivityEdge>>>();
@@ -849,9 +849,9 @@ bool ActivityNodeImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::ACTIVITYNODE_ATTRIBUTE_OUTGOING:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::ActivityEdge>
 			if((newValue->isContainer()) && (uml::umlPackage::ACTIVITYEDGE_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::ActivityEdge>> outgoingList= newValue->get<std::shared_ptr<Bag<uml::ActivityEdge>>>();
@@ -886,9 +886,9 @@ bool ActivityNodeImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::ACTIVITYNODE_ATTRIBUTE_REDEFINEDNODE:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::ActivityNode>
 			if((newValue->isContainer()) && (uml::umlPackage::ACTIVITYNODE_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::ActivityNode>> redefinedNodeList= newValue->get<std::shared_ptr<Bag<uml::ActivityNode>>>();
@@ -938,7 +938,7 @@ Any ActivityNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> a
 		// uml::ActivityNode::containingActivity() : uml::Activity: 2064733269
 		case umlPackage::ACTIVITYNODE_OPERATION_CONTAININGACTIVITY:
 		{
-			result = eAny(this->containingActivity(), umlPackage::ACTIVITY_CLASS,false);
+			result = eAny(this->containingActivity(), uml::umlPackage::ACTIVITY_CLASS,false);
 			break;
 		}
 

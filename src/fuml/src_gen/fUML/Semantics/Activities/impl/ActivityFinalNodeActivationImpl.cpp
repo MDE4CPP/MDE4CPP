@@ -292,8 +292,7 @@ Any ActivityFinalNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<st
 
   	switch(operationID)
 	{
-		
-		// 1184244438
+		// fUML::Semantics::Activities::ActivityFinalNodeActivation::fire(fUML::Semantics::Activities::Token[*]): 1184244438
 		case ActivitiesPackage::ACTIVITYFINALNODEACTIVATION_OPERATION_FIRE_TOKEN:
 		{
 			//Retrieve input parameter 'incomingTokens'
@@ -302,7 +301,6 @@ Any ActivityFinalNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<st
 			std::list<Any>::const_iterator incoming_param_incomingTokens_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_incomingTokens = (*incoming_param_incomingTokens_arguments_citer)->get<std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> >();
 			this->fire(incoming_param_incomingTokens);
-			break;
 		}
 
 		default:

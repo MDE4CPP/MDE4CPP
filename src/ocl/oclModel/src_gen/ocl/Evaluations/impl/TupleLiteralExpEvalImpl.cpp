@@ -32,11 +32,11 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
+#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "fUML/Semantics/Values/ValuesFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
 #include "uml/umlFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
-#include "fUML/Semantics/Loci/LociFactory.hpp"
 
 #include "ocl/Evaluations/EvalEnvironment.hpp"
 #include "ocl/Evaluations/LiteralExpEval.hpp"
@@ -268,15 +268,7 @@ Any TupleLiteralExpEvalImpl::eGet(int featureID, bool resolve, bool coreType) co
 	{
 		case ocl::Evaluations::EvaluationsPackage::TUPLELITERALEXPEVAL_ATTRIBUTE_TUPLEPART:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<ocl::Evaluations::VariableDeclEval>::iterator iter = getTuplePart()->begin();
-			Bag<ocl::Evaluations::VariableDeclEval>::iterator end = getTuplePart()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //866			
+			return eAnyBag(getTuplePart(),1333409127); //866
 		}
 	}
 	return LiteralExpEvalImpl::eGet(featureID, resolve, coreType);
@@ -298,37 +290,38 @@ bool TupleLiteralExpEvalImpl::eSet(int featureID, Any newValue)
 	{
 		case ocl::Evaluations::EvaluationsPackage::TUPLELITERALEXPEVAL_ATTRIBUTE_TUPLEPART:
 		{
-			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<ocl::Evaluations::VariableDeclEval>> tuplePartList(new Bag<ocl::Evaluations::VariableDeclEval>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
-			{
-				tuplePartList->add(std::dynamic_pointer_cast<ocl::Evaluations::VariableDeclEval>(*iter));
-				iter++;
-			}
-			
-			Bag<ocl::Evaluations::VariableDeclEval>::iterator iterTuplePart = getTuplePart()->begin();
-			Bag<ocl::Evaluations::VariableDeclEval>::iterator endTuplePart = getTuplePart()->end();
-			while (iterTuplePart != endTuplePart)
-			{
-				if (tuplePartList->find(*iterTuplePart) == -1)
+			// CAST Any to Bag<ocl::Evaluations::VariableDeclEval>
+			if((newValue->isContainer()) && (ocl::Evaluations::EvaluationsPackage::VARIABLEDECLEVAL_CLASS ==newValue->getTypeId()))
+			{ 
+				try
 				{
-					getTuplePart()->erase(*iterTuplePart);
+					std::shared_ptr<Bag<ocl::Evaluations::VariableDeclEval>> tuplePartList= newValue->get<std::shared_ptr<Bag<ocl::Evaluations::VariableDeclEval>>>();
+					std::shared_ptr<Bag<ocl::Evaluations::VariableDeclEval>> _tuplePart=getTuplePart();
+					for(const std::shared_ptr<ocl::Evaluations::VariableDeclEval> indexTuplePart: *_tuplePart)
+					{
+						if (tuplePartList->find(indexTuplePart) == -1)
+						{
+							_tuplePart->erase(indexTuplePart);
+						}
+					}
+
+					for(const std::shared_ptr<ocl::Evaluations::VariableDeclEval> indexTuplePart: *tuplePartList)
+					{
+						if (_tuplePart->find(indexTuplePart) == -1)
+						{
+							_tuplePart->add(indexTuplePart);
+						}
+					}
 				}
-				iterTuplePart++;
-			}
- 
-			iterTuplePart = tuplePartList->begin();
-			endTuplePart = tuplePartList->end();
-			while (iterTuplePart != endTuplePart)
-			{
-				if (getTuplePart()->find(*iterTuplePart) == -1)
+				catch(...)
 				{
-					getTuplePart()->add(*iterTuplePart);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterTuplePart++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}

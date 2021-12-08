@@ -430,7 +430,7 @@ bool IterateExpImpl::eSet(int featureID, Any newValue)
 	{
 		case ocl::Expressions::ExpressionsPackage::ITERATEEXP_ATTRIBUTE_RESULT:
 		{
-			// BOOST CAST
+			// CAST Any to ocl::Expressions::Variable
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<ocl::Expressions::Variable> _result = std::dynamic_pointer_cast<ocl::Expressions::Variable>(_temp);
 			setResult(_result); //3825

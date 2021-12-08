@@ -511,7 +511,7 @@ bool IfExpImpl::eSet(int featureID, Any newValue)
 	{
 		case ocl::Expressions::ExpressionsPackage::IFEXP_ATTRIBUTE_CONDITION:
 		{
-			// BOOST CAST
+			// CAST Any to ocl::Expressions::OclExpression
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<ocl::Expressions::OclExpression> _condition = std::dynamic_pointer_cast<ocl::Expressions::OclExpression>(_temp);
 			setCondition(_condition); //3122
@@ -519,7 +519,7 @@ bool IfExpImpl::eSet(int featureID, Any newValue)
 		}
 		case ocl::Expressions::ExpressionsPackage::IFEXP_ATTRIBUTE_ELSEEXPRESSION:
 		{
-			// BOOST CAST
+			// CAST Any to ocl::Expressions::OclExpression
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<ocl::Expressions::OclExpression> _elseExpression = std::dynamic_pointer_cast<ocl::Expressions::OclExpression>(_temp);
 			setElseExpression(_elseExpression); //3124
@@ -527,7 +527,7 @@ bool IfExpImpl::eSet(int featureID, Any newValue)
 		}
 		case ocl::Expressions::ExpressionsPackage::IFEXP_ATTRIBUTE_THENEXPRESSION:
 		{
-			// BOOST CAST
+			// CAST Any to ocl::Expressions::OclExpression
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<ocl::Expressions::OclExpression> _thenExpression = std::dynamic_pointer_cast<ocl::Expressions::OclExpression>(_temp);
 			setThenExpression(_thenExpression); //3123

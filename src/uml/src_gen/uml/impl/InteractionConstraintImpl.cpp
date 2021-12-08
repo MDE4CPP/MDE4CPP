@@ -457,7 +457,7 @@ bool InteractionConstraintImpl::eSet(int featureID, Any newValue)
 	{
 		case uml::umlPackage::INTERACTIONCONSTRAINT_ATTRIBUTE_MAXINT:
 		{
-			// BOOST CAST
+			// CAST Any to uml::ValueSpecification
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::ValueSpecification> _maxint = std::dynamic_pointer_cast<uml::ValueSpecification>(_temp);
 			setMaxint(_maxint); //12015
@@ -465,7 +465,7 @@ bool InteractionConstraintImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::INTERACTIONCONSTRAINT_ATTRIBUTE_MININT:
 		{
-			// BOOST CAST
+			// CAST Any to uml::ValueSpecification
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::ValueSpecification> _minint = std::dynamic_pointer_cast<uml::ValueSpecification>(_temp);
 			setMinint(_minint); //12016

@@ -512,7 +512,7 @@ bool EObjectImpl::eSet(int featureID, Any newValue)
 	{
 		case ecore::ecorePackage::EOBJECT_ATTRIBUTE_ECONTAINER:
 		{
-			// BOOST CAST
+			// CAST Any to ecore::EObject
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<ecore::EObject> _eContainer = std::dynamic_pointer_cast<ecore::EObject>(_temp);
 			setEContainer(_eContainer); //391
@@ -520,9 +520,9 @@ bool EObjectImpl::eSet(int featureID, Any newValue)
 		}
 		case ecore::ecorePackage::EOBJECT_ATTRIBUTE_ECONTENTUNION:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<ecore::EObject>
 			if((newValue->isContainer()) && (ecore::ecorePackage::EOBJECT_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<ecore::EObject>> eContentUnionList= newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -557,7 +557,7 @@ bool EObjectImpl::eSet(int featureID, Any newValue)
 		}
 		case ecore::ecorePackage::EOBJECT_ATTRIBUTE_METAELEMENTID:
 		{
-			// BOOST CAST
+			// CAST Any to long long
 			long long _metaElementID = newValue->get<long long>();
 			setMetaElementID(_metaElementID); //392
 			return true;
@@ -586,32 +586,32 @@ Any EObjectImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argume
 		// ecore::EObject::eClass() : ecore::EClass {const}: 1897829605
 		case ecorePackage::EOBJECT_OPERATION_ECLASS:
 		{
-			result = eAny(this->eClass(), ecorePackage::ECLASS_CLASS,false);
+			result = eAny(this->eClass(), ecore::ecorePackage::ECLASS_CLASS,false);
 			break;
 		}
 		// ecore::EObject::eContainer() : ecore::EObject: 1564505762
 		case ecorePackage::EOBJECT_OPERATION_ECONTAINER:
 		{
-			result = eAny(this->eContainer(), ecorePackage::EOBJECT_CLASS,false);
+			result = eAny(this->eContainer(), ecore::ecorePackage::EOBJECT_CLASS,false);
 			break;
 		}
 		// ecore::EObject::eContainingFeature() : ecore::EStructuralFeature {const}: 1314774326
 		case ecorePackage::EOBJECT_OPERATION_ECONTAININGFEATURE:
 		{
-			result = eAny(this->eContainingFeature(), ecorePackage::ESTRUCTURALFEATURE_CLASS,false);
+			result = eAny(this->eContainingFeature(), ecore::ecorePackage::ESTRUCTURALFEATURE_CLASS,false);
 			break;
 		}
 		// ecore::EObject::eContainmentFeature() : ecore::EReference {const}: 1559436300
 		case ecorePackage::EOBJECT_OPERATION_ECONTAINMENTFEATURE:
 		{
-			result = eAny(this->eContainmentFeature(), ecorePackage::EREFERENCE_CLASS,false);
+			result = eAny(this->eContainmentFeature(), ecore::ecorePackage::EREFERENCE_CLASS,false);
 			break;
 		}
 		// ecore::EObject::eContents() : ecore::EObject[*] {const}: 1140157049
 		case ecorePackage::EOBJECT_OPERATION_ECONTENTS:
 		{
 			std::shared_ptr<Bag<ecore::EObject> > resultList = this->eContents();
-			return eAny(resultList,ecorePackage::EOBJECT_CLASS,true);
+			return eAny(resultList,ecore::ecorePackage::EOBJECT_CLASS,true);
 			break;
 		}
 		// ecore::EObject::eCrossReferences() : std::list {const}: 1830400680

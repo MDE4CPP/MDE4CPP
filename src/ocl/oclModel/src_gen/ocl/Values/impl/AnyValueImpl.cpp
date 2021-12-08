@@ -173,7 +173,7 @@ void AnyValueImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoad
 		if ( iter != attr_list.end() )
 		{
 			// TODO this attribute has a non handle type
-			std::cout << "| ERROR    | " << __PRETTY_FUNCTION__ << " handle type of 'value'" << " org.eclipse.emf.ecore.impl.EDataTypeImpl@3a2b2322 (name: EJavaObject) (instanceClassName: java.lang.Object) (serializable: true)" << std::endl; 
+			std::cout << "| ERROR    | " << __PRETTY_FUNCTION__ << " handle type of 'value'" << " org.eclipse.emf.ecore.impl.EDataTypeImpl@12958360 (name: EJavaObject) (instanceClassName: java.lang.Object) (serializable: true)" << std::endl; 
 			Any value; 			this->setValue(value);
 		}
 	}
@@ -242,7 +242,7 @@ Any AnyValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case ocl::Values::ValuesPackage::ANYVALUE_ATTRIBUTE_VALUE:
-				return eAny(getValue(),0,true); //20
+			return eAny(getValue(),0,true); //20
 	}
 	return fUML::Semantics::Values::ValueImpl::eGet(featureID, resolve, coreType);
 }
@@ -263,7 +263,7 @@ bool AnyValueImpl::eSet(int featureID, Any newValue)
 	{
 		case ocl::Values::ValuesPackage::ANYVALUE_ATTRIBUTE_VALUE:
 		{
-			// BOOST CAST
+			// CAST Any to Any
 			Any _value = newValue->get<Any>();
 			setValue(_value); //20
 			return true;
@@ -282,11 +282,10 @@ Any AnyValueImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argum
 
   	switch(operationID)
 	{
-		
-		// 944564240
+		// ocl::Values::AnyValue::toString() : std::string: 944564240
 		case ValuesPackage::ANYVALUE_OPERATION_TOSTRING:
 		{
-					result = eAny(this->toString(),0,false);
+			result = eAny(this->toString(),0,false);
 			break;
 		}
 

@@ -367,7 +367,7 @@ bool TriggerImpl::eSet(int featureID, Any newValue)
 	{
 		case uml::umlPackage::TRIGGER_ATTRIBUTE_EVENT:
 		{
-			// BOOST CAST
+			// CAST Any to uml::Event
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Event> _event = std::dynamic_pointer_cast<uml::Event>(_temp);
 			setEvent(_event); //2439
@@ -375,9 +375,9 @@ bool TriggerImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::TRIGGER_ATTRIBUTE_PORT:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::Port>
 			if((newValue->isContainer()) && (uml::umlPackage::PORT_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::Port>> portList= newValue->get<std::shared_ptr<Bag<uml::Port>>>();

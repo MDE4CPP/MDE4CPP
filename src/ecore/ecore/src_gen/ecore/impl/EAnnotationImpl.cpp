@@ -475,9 +475,9 @@ bool EAnnotationImpl::eSet(int featureID, Any newValue)
 	{
 		case ecore::ecorePackage::EANNOTATION_ATTRIBUTE_CONTENTS:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<ecore::EObject>
 			if((newValue->isContainer()) && (ecore::ecorePackage::EOBJECT_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<ecore::EObject>> contentsList= newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -512,7 +512,7 @@ bool EAnnotationImpl::eSet(int featureID, Any newValue)
 		}
 		case ecore::ecorePackage::EANNOTATION_ATTRIBUTE_DETAILS:
 		{
-			// BOOST CAST
+			// CAST Any to std::map < std::string, std::string>
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<std::map < std::string, std::string>> _details = std::dynamic_pointer_cast<std::map < std::string, std::string>>(_temp);
 			setDetails(_details); //18			
@@ -520,7 +520,7 @@ bool EAnnotationImpl::eSet(int featureID, Any newValue)
 		}
 		case ecore::ecorePackage::EANNOTATION_ATTRIBUTE_EMODELELEMENT:
 		{
-			// BOOST CAST
+			// CAST Any to ecore::EModelElement
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<ecore::EModelElement> _eModelElement = std::dynamic_pointer_cast<ecore::EModelElement>(_temp);
 			setEModelElement(_eModelElement); //15
@@ -528,9 +528,9 @@ bool EAnnotationImpl::eSet(int featureID, Any newValue)
 		}
 		case ecore::ecorePackage::EANNOTATION_ATTRIBUTE_REFERENCES:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<ecore::EObject>
 			if((newValue->isContainer()) && (ecore::ecorePackage::EOBJECT_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<ecore::EObject>> referencesList= newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -565,7 +565,7 @@ bool EAnnotationImpl::eSet(int featureID, Any newValue)
 		}
 		case ecore::ecorePackage::EANNOTATION_ATTRIBUTE_SOURCE:
 		{
-			// BOOST CAST
+			// CAST Any to std::string
 			std::string _source = newValue->get<std::string>();
 			setSource(_source); //14
 			return true;

@@ -306,7 +306,7 @@ bool VariableDeclEvalImpl::eSet(int featureID, Any newValue)
 	{
 		case ocl::Evaluations::EvaluationsPackage::VARIABLEDECLEVAL_ATTRIBUTE_INITEXP:
 		{
-			// BOOST CAST
+			// CAST Any to ocl::Evaluations::OclExpEval
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<ocl::Evaluations::OclExpEval> _initExp = std::dynamic_pointer_cast<ocl::Evaluations::OclExpEval>(_temp);
 			setInitExp(_initExp); //980
@@ -314,7 +314,7 @@ bool VariableDeclEvalImpl::eSet(int featureID, Any newValue)
 		}
 		case ocl::Evaluations::EvaluationsPackage::VARIABLEDECLEVAL_ATTRIBUTE_NAME:
 		{
-			// BOOST CAST
+			// CAST Any to fUML::Semantics::SimpleClassifiers::StringValue
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> _name = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::StringValue>(_temp);
 			setName(_name); //981

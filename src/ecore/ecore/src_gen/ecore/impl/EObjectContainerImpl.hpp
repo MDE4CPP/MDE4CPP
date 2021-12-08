@@ -16,14 +16,12 @@
 // model includes
 #include "../EObjectContainer.hpp"
 
-
-#include "ecore/impl/EModelElementImpl.hpp"
+#include "ecore/impl/EObjectImpl.hpp"
 
 //*********************************
 namespace ecore 
 {
-	class ECORE_API EObjectContainerImpl : virtual public ecore::EModelElementImpl,
-virtual public EObjectContainer 
+	class ECORE_API EObjectContainerImpl : virtual public EObjectImpl, virtual public EObjectContainer 
 	{
 		public: 
 			EObjectContainerImpl(const EObjectContainerImpl & obj);
@@ -36,6 +34,8 @@ virtual public EObjectContainer
 			virtual std::shared_ptr<ecore::EObjectContainer> getThisEObjectContainerPtr() const;
 			virtual void setThisEObjectContainerPtr(std::weak_ptr<ecore::EObjectContainer> thisEObjectContainerPtr);
 
+			//Additional constructors for the containments back reference
+			EObjectContainerImpl(std::weak_ptr<ecore::EObject> par_eContainer);
 
 		public:
 			//destructor

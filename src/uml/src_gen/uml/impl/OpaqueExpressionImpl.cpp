@@ -153,7 +153,7 @@ OpaqueExpressionImpl& OpaqueExpressionImpl::operator=(const OpaqueExpressionImpl
 		m_body.reset(new Bag<std::string>());
 		for(const std::shared_ptr<std::string> it: *bodyList) 
 		{
-			m_body->push_back(*it);
+			m_body->push_back(it);
 		}
 	}
 	else
@@ -166,7 +166,7 @@ OpaqueExpressionImpl& OpaqueExpressionImpl::operator=(const OpaqueExpressionImpl
 		m_language.reset(new Bag<std::string>());
 		for(const std::shared_ptr<std::string> it: *languageList) 
 		{
-			m_language->push_back(*it);
+			m_language->push_back(it);
 		}
 	}
 	else
@@ -543,7 +543,7 @@ bool OpaqueExpressionImpl::eSet(int featureID, Any newValue)
 	{
 		case uml::umlPackage::OPAQUEEXPRESSION_ATTRIBUTE_BEHAVIOR:
 		{
-			// BOOST CAST
+			// CAST Any to uml::Behavior
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Behavior> _behavior = std::dynamic_pointer_cast<uml::Behavior>(_temp);
 			setBehavior(_behavior); //16615
@@ -551,13 +551,13 @@ bool OpaqueExpressionImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::OPAQUEEXPRESSION_ATTRIBUTE_BODY:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<std::string>
 			// nothing to do
 			return true;
 		}
 		case uml::umlPackage::OPAQUEEXPRESSION_ATTRIBUTE_LANGUAGE:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<std::string>
 			// nothing to do
 			return true;
 		}
@@ -578,7 +578,7 @@ Any OpaqueExpressionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any
 		// uml::OpaqueExpression::getResult() : uml::Parameter: 1957650327
 		case umlPackage::OPAQUEEXPRESSION_OPERATION_GETRESULT:
 		{
-			result = eAny(this->getResult(), umlPackage::PARAMETER_CLASS,false);
+			result = eAny(this->getResult(), uml::umlPackage::PARAMETER_CLASS,false);
 			break;
 		}
 		// uml::OpaqueExpression::isIntegral() : bool: 649739801

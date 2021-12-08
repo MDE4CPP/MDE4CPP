@@ -342,7 +342,7 @@ bool StructuralFeatureImpl::eSet(int featureID, Any newValue)
 	{
 		case uml::umlPackage::STRUCTURALFEATURE_ATTRIBUTE_ISREADONLY:
 		{
-			// BOOST CAST
+			// CAST Any to bool
 			bool _isReadOnly = newValue->get<bool>();
 			setIsReadOnly(_isReadOnly); //22521
 			return true;

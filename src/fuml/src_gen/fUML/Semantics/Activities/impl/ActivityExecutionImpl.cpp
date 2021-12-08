@@ -493,7 +493,7 @@ bool ActivityExecutionImpl::eSet(int featureID, Any newValue)
 	{
 		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYEXECUTION_ATTRIBUTE_ACTIVATIONGROUP:
 		{
-			// BOOST CAST
+			// CAST Any to fUML::Semantics::Activities::ActivityNodeActivationGroup
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> _activationGroup = std::dynamic_pointer_cast<fUML::Semantics::Activities::ActivityNodeActivationGroup>(_temp);
 			setActivationGroup(_activationGroup); //77
@@ -501,7 +501,7 @@ bool ActivityExecutionImpl::eSet(int featureID, Any newValue)
 		}
 		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYEXECUTION_ATTRIBUTE_ACTIVITY:
 		{
-			// BOOST CAST
+			// CAST Any to uml::Activity
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Activity> _activity = std::dynamic_pointer_cast<uml::Activity>(_temp);
 			setActivity(_activity); //78
@@ -521,33 +521,27 @@ Any ActivityExecutionImpl::eInvoke(int operationID, std::shared_ptr<std::list<An
 
   	switch(operationID)
 	{
-		
-		// 268283450
+		// fUML::Semantics::Activities::ActivityExecution::_copy() : fUML::Semantics::Values::Value: 268283450
 		case ActivitiesPackage::ACTIVITYEXECUTION_OPERATION__COPY:
 		{
-				result = eAny(this->_copy());
+			result = eAny(this->_copy(), fUML::Semantics::Values::ValuesPackage::VALUE_CLASS,false);
 			break;
 		}
-		
-		// 1727608078
+		// fUML::Semantics::Activities::ActivityExecution::execute(): 1727608078
 		case ActivitiesPackage::ACTIVITYEXECUTION_OPERATION_EXECUTE:
 		{
 			this->execute();
-			break;
 		}
-		
-		// 929802882
+		// fUML::Semantics::Activities::ActivityExecution::new_() : fUML::Semantics::Values::Value: 929802882
 		case ActivitiesPackage::ACTIVITYEXECUTION_OPERATION_NEW_:
 		{
-				result = eAny(this->new_());
+			result = eAny(this->new_(), fUML::Semantics::Values::ValuesPackage::VALUE_CLASS,false);
 			break;
 		}
-		
-		// 679246932
+		// fUML::Semantics::Activities::ActivityExecution::terminate(): 679246932
 		case ActivitiesPackage::ACTIVITYEXECUTION_OPERATION_TERMINATE:
 		{
 			this->terminate();
-			break;
 		}
 
 		default:

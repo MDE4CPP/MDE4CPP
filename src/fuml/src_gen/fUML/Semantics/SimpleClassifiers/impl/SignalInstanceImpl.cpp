@@ -301,7 +301,7 @@ bool SignalInstanceImpl::eSet(int featureID, Any newValue)
 	{
 		case fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::SIGNALINSTANCE_ATTRIBUTE_TYPE:
 		{
-			// BOOST CAST
+			// CAST Any to uml::Signal
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Signal> _type = std::dynamic_pointer_cast<uml::Signal>(_temp);
 			setType(_type); //1071
@@ -321,18 +321,16 @@ Any SignalInstanceImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>>
 
   	switch(operationID)
 	{
-		
-		// 1643457429
+		// fUML::Semantics::SimpleClassifiers::SignalInstance::_copy() : fUML::Semantics::Values::Value: 1643457429
 		case SimpleClassifiersPackage::SIGNALINSTANCE_OPERATION__COPY:
 		{
-				result = eAny(this->_copy());
+			result = eAny(this->_copy(), fUML::Semantics::Values::ValuesPackage::VALUE_CLASS,false);
 			break;
 		}
-		
-		// 40647669
+		// fUML::Semantics::SimpleClassifiers::SignalInstance::new_() : fUML::Semantics::Values::Value: 40647669
 		case SimpleClassifiersPackage::SIGNALINSTANCE_OPERATION_NEW_:
 		{
-				result = eAny(this->new_());
+			result = eAny(this->new_(), fUML::Semantics::Values::ValuesPackage::VALUE_CLASS,false);
 			break;
 		}
 

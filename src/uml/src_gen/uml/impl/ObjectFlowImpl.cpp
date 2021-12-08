@@ -534,21 +534,21 @@ bool ObjectFlowImpl::eSet(int featureID, Any newValue)
 	{
 		case uml::umlPackage::OBJECTFLOW_ATTRIBUTE_ISMULTICAST:
 		{
-			// BOOST CAST
+			// CAST Any to bool
 			bool _isMulticast = newValue->get<bool>();
 			setIsMulticast(_isMulticast); //15922
 			return true;
 		}
 		case uml::umlPackage::OBJECTFLOW_ATTRIBUTE_ISMULTIRECEIVE:
 		{
-			// BOOST CAST
+			// CAST Any to bool
 			bool _isMultireceive = newValue->get<bool>();
 			setIsMultireceive(_isMultireceive); //15923
 			return true;
 		}
 		case uml::umlPackage::OBJECTFLOW_ATTRIBUTE_SELECTION:
 		{
-			// BOOST CAST
+			// CAST Any to uml::Behavior
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Behavior> _selection = std::dynamic_pointer_cast<uml::Behavior>(_temp);
 			setSelection(_selection); //15924
@@ -556,7 +556,7 @@ bool ObjectFlowImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::OBJECTFLOW_ATTRIBUTE_TRANSFORMATION:
 		{
-			// BOOST CAST
+			// CAST Any to uml::Behavior
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Behavior> _transformation = std::dynamic_pointer_cast<uml::Behavior>(_temp);
 			setTransformation(_transformation); //15925

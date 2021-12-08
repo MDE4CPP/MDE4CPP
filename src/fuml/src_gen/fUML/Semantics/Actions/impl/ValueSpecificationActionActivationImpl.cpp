@@ -290,12 +290,10 @@ Any ValueSpecificationActionActivationImpl::eInvoke(int operationID, std::shared
 
   	switch(operationID)
 	{
-		
-		// 37357803
+		// fUML::Semantics::Actions::ValueSpecificationActionActivation::doAction(): 37357803
 		case ActionsPackage::VALUESPECIFICATIONACTIONACTIVATION_OPERATION_DOACTION:
 		{
 			this->doAction();
-			break;
 		}
 
 		default:

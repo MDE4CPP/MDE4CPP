@@ -275,12 +275,10 @@ Any SendSignalActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std
 
   	switch(operationID)
 	{
-		
-		// 1497979288
+		// fUML::Semantics::Actions::SendSignalActionActivation::doAction(): 1497979288
 		case ActionsPackage::SENDSIGNALACTIONACTIVATION_OPERATION_DOACTION:
 		{
 			this->doAction();
-			break;
 		}
 
 		default:

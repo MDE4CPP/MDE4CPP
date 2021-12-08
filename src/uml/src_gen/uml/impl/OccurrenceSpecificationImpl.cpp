@@ -405,9 +405,9 @@ bool OccurrenceSpecificationImpl::eSet(int featureID, Any newValue)
 	{
 		case uml::umlPackage::OCCURRENCESPECIFICATION_ATTRIBUTE_TOAFTER:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::GeneralOrdering>
 			if((newValue->isContainer()) && (uml::umlPackage::GENERALORDERING_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::GeneralOrdering>> toAfterList= newValue->get<std::shared_ptr<Bag<uml::GeneralOrdering>>>();
@@ -442,9 +442,9 @@ bool OccurrenceSpecificationImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::OCCURRENCESPECIFICATION_ATTRIBUTE_TOBEFORE:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::GeneralOrdering>
 			if((newValue->isContainer()) && (uml::umlPackage::GENERALORDERING_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::GeneralOrdering>> toBeforeList= newValue->get<std::shared_ptr<Bag<uml::GeneralOrdering>>>();
@@ -494,7 +494,7 @@ Any OccurrenceSpecificationImpl::eInvoke(int operationID, std::shared_ptr<std::l
 		// uml::OccurrenceSpecification::getCovered() : uml::Lifeline: 1100038979
 		case umlPackage::OCCURRENCESPECIFICATION_OPERATION_GETCOVERED:
 		{
-			result = eAny(this->getCovered(), umlPackage::LIFELINE_CLASS,false);
+			result = eAny(this->getCovered(), uml::umlPackage::LIFELINE_CLASS,false);
 			break;
 		}
 		// uml::OccurrenceSpecification::setCovered(uml::Lifeline): 1493510619

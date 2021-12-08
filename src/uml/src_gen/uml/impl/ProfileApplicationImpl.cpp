@@ -453,7 +453,7 @@ bool ProfileApplicationImpl::eSet(int featureID, Any newValue)
 	{
 		case uml::umlPackage::PROFILEAPPLICATION_ATTRIBUTE_APPLIEDPROFILE:
 		{
-			// BOOST CAST
+			// CAST Any to uml::Profile
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Profile> _appliedProfile = std::dynamic_pointer_cast<uml::Profile>(_temp);
 			setAppliedProfile(_appliedProfile); //1846
@@ -461,7 +461,7 @@ bool ProfileApplicationImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::PROFILEAPPLICATION_ATTRIBUTE_APPLYINGPACKAGE:
 		{
-			// BOOST CAST
+			// CAST Any to uml::Package
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Package> _applyingPackage = std::dynamic_pointer_cast<uml::Package>(_temp);
 			setApplyingPackage(_applyingPackage); //1848
@@ -469,7 +469,7 @@ bool ProfileApplicationImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::PROFILEAPPLICATION_ATTRIBUTE_ISSTRICT:
 		{
-			// BOOST CAST
+			// CAST Any to bool
 			bool _isStrict = newValue->get<bool>();
 			setIsStrict(_isStrict); //1847
 			return true;
@@ -491,7 +491,7 @@ Any ProfileApplicationImpl::eInvoke(int operationID, std::shared_ptr<std::list<A
 		// uml::ProfileApplication::getAppliedDefinition() : ecore::EPackage: 1871054573
 		case umlPackage::PROFILEAPPLICATION_OPERATION_GETAPPLIEDDEFINITION:
 		{
-			result = eAny(this->getAppliedDefinition(), ecorePackage::EPACKAGE_CLASS,false);
+			result = eAny(this->getAppliedDefinition(), ecore::ecorePackage::EPACKAGE_CLASS,false);
 			break;
 		}
 		// uml::ProfileApplication::getAppliedDefinition(uml::NamedElement) : ecore::ENamedElement: 1978495829
@@ -502,7 +502,7 @@ Any ProfileApplicationImpl::eInvoke(int operationID, std::shared_ptr<std::list<A
 			std::shared_ptr<uml::NamedElement> incoming_param_namedElement;
 			std::list<Any>::const_iterator incoming_param_namedElement_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_namedElement = (*incoming_param_namedElement_arguments_citer)->get<std::shared_ptr<uml::NamedElement> >();
-			result = eAny(this->getAppliedDefinition(incoming_param_namedElement), ecorePackage::ENAMEDELEMENT_CLASS,false);
+			result = eAny(this->getAppliedDefinition(incoming_param_namedElement), ecore::ecorePackage::ENAMEDELEMENT_CLASS,false);
 			break;
 		}
 

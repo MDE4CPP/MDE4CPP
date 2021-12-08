@@ -411,9 +411,9 @@ bool ExecutableNodeImpl::eSet(int featureID, Any newValue)
 	{
 		case uml::umlPackage::EXECUTABLENODE_ATTRIBUTE_HANDLER:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::ExceptionHandler>
 			if((newValue->isContainer()) && (uml::umlPackage::EXCEPTIONHANDLER_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::ExceptionHandler>> handlerList= newValue->get<std::shared_ptr<Bag<uml::ExceptionHandler>>>();

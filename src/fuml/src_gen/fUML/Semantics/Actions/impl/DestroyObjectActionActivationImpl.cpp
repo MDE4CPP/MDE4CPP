@@ -468,7 +468,7 @@ bool DestroyObjectActionActivationImpl::eSet(int featureID, Any newValue)
 	{
 		case fUML::Semantics::Actions::ActionsPackage::DESTROYOBJECTACTIONACTIVATION_ATTRIBUTE_DESTROYOBJECTACTION:
 		{
-			// BOOST CAST
+			// CAST Any to uml::DestroyObjectAction
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::DestroyObjectAction> _destroyObjectAction = std::dynamic_pointer_cast<uml::DestroyObjectAction>(_temp);
 			setDestroyObjectAction(_destroyObjectAction); //3911
@@ -488,8 +488,7 @@ Any DestroyObjectActionActivationImpl::eInvoke(int operationID, std::shared_ptr<
 
   	switch(operationID)
 	{
-		
-		// 1843594424
+		// fUML::Semantics::Actions::DestroyObjectActionActivation::destroyObject(fUML::Semantics::Values::Value, bool, bool): 1843594424
 		case ActionsPackage::DESTROYOBJECTACTIONACTIVATION_OPERATION_DESTROYOBJECT_VALUE_EBOOLEAN:
 		{
 			//Retrieve input parameter 'value'
@@ -508,17 +507,13 @@ Any DestroyObjectActionActivationImpl::eInvoke(int operationID, std::shared_ptr<
 			std::list<Any>::const_iterator incoming_param_isDestroyOwnedObjects_arguments_citer = std::next(arguments->begin(), 2);
 			incoming_param_isDestroyOwnedObjects = (*incoming_param_isDestroyOwnedObjects_arguments_citer)->get<bool >();
 			this->destroyObject(incoming_param_value,incoming_param_isDestroyLinks,incoming_param_isDestroyOwnedObjects);
-			break;
 		}
-		
-		// 1060442259
+		// fUML::Semantics::Actions::DestroyObjectActionActivation::doAction(): 1060442259
 		case ActionsPackage::DESTROYOBJECTACTIONACTIVATION_OPERATION_DOACTION:
 		{
 			this->doAction();
-			break;
 		}
-		
-		// 1102528616
+		// fUML::Semantics::Actions::DestroyObjectActionActivation::objectIsComposite(fUML::Semantics::StructuredClassifiers::Reference, fUML::Semantics::StructuredClassifiers::Link) : bool: 1102528616
 		case ActionsPackage::DESTROYOBJECTACTIONACTIVATION_OPERATION_OBJECTISCOMPOSITE_REFERENCE_LINK:
 		{
 			//Retrieve input parameter 'reference'
@@ -531,7 +526,7 @@ Any DestroyObjectActionActivationImpl::eInvoke(int operationID, std::shared_ptr<
 			std::shared_ptr<fUML::Semantics::StructuredClassifiers::Link> incoming_param_link;
 			std::list<Any>::const_iterator incoming_param_link_arguments_citer = std::next(arguments->begin(), 1);
 			incoming_param_link = (*incoming_param_link_arguments_citer)->get<std::shared_ptr<fUML::Semantics::StructuredClassifiers::Link> >();
-					result = eAny(this->objectIsComposite(incoming_param_reference,incoming_param_link),0,false);
+			result = eAny(this->objectIsComposite(incoming_param_reference,incoming_param_link),0,false);
 			break;
 		}
 

@@ -408,7 +408,7 @@ bool ProtocolConformanceImpl::eSet(int featureID, Any newValue)
 	{
 		case uml::umlPackage::PROTOCOLCONFORMANCE_ATTRIBUTE_GENERALMACHINE:
 		{
-			// BOOST CAST
+			// CAST Any to uml::ProtocolStateMachine
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::ProtocolStateMachine> _generalMachine = std::dynamic_pointer_cast<uml::ProtocolStateMachine>(_temp);
 			setGeneralMachine(_generalMachine); //1866
@@ -416,7 +416,7 @@ bool ProtocolConformanceImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::PROTOCOLCONFORMANCE_ATTRIBUTE_SPECIFICMACHINE:
 		{
-			// BOOST CAST
+			// CAST Any to uml::ProtocolStateMachine
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::ProtocolStateMachine> _specificMachine = std::dynamic_pointer_cast<uml::ProtocolStateMachine>(_temp);
 			setSpecificMachine(_specificMachine); //1867

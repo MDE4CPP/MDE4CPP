@@ -325,7 +325,7 @@ bool ExtensionPointImpl::eSet(int featureID, Any newValue)
 	{
 		case uml::umlPackage::EXTENSIONPOINT_ATTRIBUTE_USECASE:
 		{
-			// BOOST CAST
+			// CAST Any to uml::UseCase
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::UseCase> _useCase = std::dynamic_pointer_cast<uml::UseCase>(_temp);
 			setUseCase(_useCase); //9912

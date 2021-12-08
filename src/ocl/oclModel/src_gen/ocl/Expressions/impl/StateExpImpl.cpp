@@ -430,7 +430,7 @@ bool StateExpImpl::eSet(int featureID, Any newValue)
 	{
 		case ocl::Expressions::ExpressionsPackage::STATEEXP_ATTRIBUTE_REFERREDSTATE:
 		{
-			// BOOST CAST
+			// CAST Any to uml::State
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::State> _referredState = std::dynamic_pointer_cast<uml::State>(_temp);
 			setReferredState(_referredState); //8022

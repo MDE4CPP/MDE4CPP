@@ -529,9 +529,9 @@ bool EnumerationImpl::eSet(int featureID, Any newValue)
 	{
 		case uml::umlPackage::ENUMERATION_ATTRIBUTE_OWNEDLITERAL:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::EnumerationLiteral>
 			if((newValue->isContainer()) && (uml::umlPackage::ENUMERATIONLITERAL_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::EnumerationLiteral>> ownedLiteralList= newValue->get<std::shared_ptr<Bag<uml::EnumerationLiteral>>>();

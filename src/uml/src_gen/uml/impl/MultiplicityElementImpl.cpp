@@ -507,28 +507,28 @@ bool MultiplicityElementImpl::eSet(int featureID, Any newValue)
 	{
 		case uml::umlPackage::MULTIPLICITYELEMENT_ATTRIBUTE_ISORDERED:
 		{
-			// BOOST CAST
+			// CAST Any to bool
 			bool _isOrdered = newValue->get<bool>();
 			setIsOrdered(_isOrdered); //1543
 			return true;
 		}
 		case uml::umlPackage::MULTIPLICITYELEMENT_ATTRIBUTE_ISUNIQUE:
 		{
-			// BOOST CAST
+			// CAST Any to bool
 			bool _isUnique = newValue->get<bool>();
 			setIsUnique(_isUnique); //1544
 			return true;
 		}
 		case uml::umlPackage::MULTIPLICITYELEMENT_ATTRIBUTE_LOWER:
 		{
-			// BOOST CAST
+			// CAST Any to int
 			int _lower = newValue->get<int>();
 			setLower(_lower); //1545
 			return true;
 		}
 		case uml::umlPackage::MULTIPLICITYELEMENT_ATTRIBUTE_LOWERVALUE:
 		{
-			// BOOST CAST
+			// CAST Any to uml::ValueSpecification
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::ValueSpecification> _lowerValue = std::dynamic_pointer_cast<uml::ValueSpecification>(_temp);
 			setLowerValue(_lowerValue); //1546
@@ -536,14 +536,14 @@ bool MultiplicityElementImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::MULTIPLICITYELEMENT_ATTRIBUTE_UPPER:
 		{
-			// BOOST CAST
+			// CAST Any to int
 			int _upper = newValue->get<int>();
 			setUpper(_upper); //1547
 			return true;
 		}
 		case uml::umlPackage::MULTIPLICITYELEMENT_ATTRIBUTE_UPPERVALUE:
 		{
-			// BOOST CAST
+			// CAST Any to uml::ValueSpecification
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::ValueSpecification> _upperValue = std::dynamic_pointer_cast<uml::ValueSpecification>(_temp);
 			setUpperValue(_upperValue); //1548

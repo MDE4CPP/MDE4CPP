@@ -266,7 +266,7 @@ Any NameTypeBindingImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case ocl::Types::TypesPackage::NAMETYPEBINDING_ATTRIBUTE_NAME:
-				return eAny(getName(),0,true); //520
+			return eAny(getName(),0,true); //520
 		case ocl::Types::TypesPackage::NAMETYPEBINDING_ATTRIBUTE_TYPE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getType();
@@ -294,14 +294,14 @@ bool NameTypeBindingImpl::eSet(int featureID, Any newValue)
 	{
 		case ocl::Types::TypesPackage::NAMETYPEBINDING_ATTRIBUTE_NAME:
 		{
-			// BOOST CAST
+			// CAST Any to std::string
 			std::string _name = newValue->get<std::string>();
 			setName(_name); //520
 			return true;
 		}
 		case ocl::Types::TypesPackage::NAMETYPEBINDING_ATTRIBUTE_TYPE:
 		{
-			// BOOST CAST
+			// CAST Any to ecore::EClassifier
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<ecore::EClassifier> _type = std::dynamic_pointer_cast<ecore::EClassifier>(_temp);
 			setType(_type); //521

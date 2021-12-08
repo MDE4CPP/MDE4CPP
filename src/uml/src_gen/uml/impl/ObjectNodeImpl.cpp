@@ -606,9 +606,9 @@ bool ObjectNodeImpl::eSet(int featureID, Any newValue)
 	{
 		case uml::umlPackage::OBJECTNODE_ATTRIBUTE_INSTATE:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::State>
 			if((newValue->isContainer()) && (uml::umlPackage::STATE_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::State>> inStateList= newValue->get<std::shared_ptr<Bag<uml::State>>>();
@@ -643,21 +643,21 @@ bool ObjectNodeImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::OBJECTNODE_ATTRIBUTE_ISCONTROLTYPE:
 		{
-			// BOOST CAST
+			// CAST Any to bool
 			bool _isControlType = newValue->get<bool>();
 			setIsControlType(_isControlType); //16022
 			return true;
 		}
 		case uml::umlPackage::OBJECTNODE_ATTRIBUTE_ORDERING:
 		{
-			// BOOST CAST
+			// CAST Any to uml::ObjectNodeOrderingKind
 			uml::ObjectNodeOrderingKind _ordering = newValue->get<uml::ObjectNodeOrderingKind>();
 			setOrdering(_ordering); //16023
 			return true;
 		}
 		case uml::umlPackage::OBJECTNODE_ATTRIBUTE_SELECTION:
 		{
-			// BOOST CAST
+			// CAST Any to uml::Behavior
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Behavior> _selection = std::dynamic_pointer_cast<uml::Behavior>(_temp);
 			setSelection(_selection); //16024
@@ -665,7 +665,7 @@ bool ObjectNodeImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::OBJECTNODE_ATTRIBUTE_UPPERBOUND:
 		{
-			// BOOST CAST
+			// CAST Any to uml::ValueSpecification
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::ValueSpecification> _upperBound = std::dynamic_pointer_cast<uml::ValueSpecification>(_temp);
 			setUpperBound(_upperBound); //16025

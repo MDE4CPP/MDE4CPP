@@ -432,7 +432,7 @@ bool EnumLiteralExpImpl::eSet(int featureID, Any newValue)
 	{
 		case ocl::Expressions::ExpressionsPackage::ENUMLITERALEXP_ATTRIBUTE_REFERREDENUMLITERAL:
 		{
-			// BOOST CAST
+			// CAST Any to uml::EnumerationLiteral
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::EnumerationLiteral> _referredEnumLiteral = std::dynamic_pointer_cast<uml::EnumerationLiteral>(_temp);
 			setReferredEnumLiteral(_referredEnumLiteral); //2422

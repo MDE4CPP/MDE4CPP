@@ -311,7 +311,7 @@ Any RealValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::REALVALUE_ATTRIBUTE_VALUE:
-				return eAny(getValue(),0,true); //951
+			return eAny(getValue(),0,true); //951
 	}
 	return PrimitiveValueImpl::eGet(featureID, resolve, coreType);
 }
@@ -332,7 +332,7 @@ bool RealValueImpl::eSet(int featureID, Any newValue)
 	{
 		case fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::REALVALUE_ATTRIBUTE_VALUE:
 		{
-			// BOOST CAST
+			// CAST Any to double
 			double _value = newValue->get<double>();
 			setValue(_value); //951
 			return true;
@@ -351,15 +351,13 @@ Any RealValueImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argu
 
   	switch(operationID)
 	{
-		
-		// 324500325
+		// fUML::Semantics::SimpleClassifiers::RealValue::_copy() : fUML::Semantics::Values::Value: 324500325
 		case SimpleClassifiersPackage::REALVALUE_OPERATION__COPY:
 		{
-				result = eAny(this->_copy());
+			result = eAny(this->_copy(), fUML::Semantics::Values::ValuesPackage::VALUE_CLASS,false);
 			break;
 		}
-		
-		// 1451150382
+		// fUML::Semantics::SimpleClassifiers::RealValue::equals(fUML::Semantics::Values::Value) : bool: 1451150382
 		case SimpleClassifiersPackage::REALVALUE_OPERATION_EQUALS_VALUE:
 		{
 			//Retrieve input parameter 'otherValue'
@@ -367,28 +365,25 @@ Any RealValueImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argu
 			std::shared_ptr<fUML::Semantics::Values::Value> incoming_param_otherValue;
 			std::list<Any>::const_iterator incoming_param_otherValue_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_otherValue = (*incoming_param_otherValue_arguments_citer)->get<std::shared_ptr<fUML::Semantics::Values::Value> >();
-					result = eAny(this->equals(incoming_param_otherValue),0,false);
+			result = eAny(this->equals(incoming_param_otherValue),0,false);
 			break;
 		}
-		
-		// 904241655
+		// fUML::Semantics::SimpleClassifiers::RealValue::new_() : fUML::Semantics::Values::Value: 904241655
 		case SimpleClassifiersPackage::REALVALUE_OPERATION_NEW_:
 		{
-				result = eAny(this->new_());
+			result = eAny(this->new_(), fUML::Semantics::Values::ValuesPackage::VALUE_CLASS,false);
 			break;
 		}
-		
-		// 663742132
+		// fUML::Semantics::SimpleClassifiers::RealValue::specify() : uml::ValueSpecification: 663742132
 		case SimpleClassifiersPackage::REALVALUE_OPERATION_SPECIFY:
 		{
-				result = eAny(this->specify());
+			result = eAny(this->specify(), uml::umlPackage::VALUESPECIFICATION_CLASS,false);
 			break;
 		}
-		
-		// 413538336
+		// fUML::Semantics::SimpleClassifiers::RealValue::toString() : std::string: 413538336
 		case SimpleClassifiersPackage::REALVALUE_OPERATION_TOSTRING:
 		{
-					result = eAny(this->toString(),0,false);
+			result = eAny(this->toString(),0,false);
 			break;
 		}
 

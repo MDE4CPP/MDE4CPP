@@ -509,7 +509,7 @@ bool TemplateBindingImpl::eSet(int featureID, Any newValue)
 	{
 		case uml::umlPackage::TEMPLATEBINDING_ATTRIBUTE_BOUNDELEMENT:
 		{
-			// BOOST CAST
+			// CAST Any to uml::TemplateableElement
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::TemplateableElement> _boundElement = std::dynamic_pointer_cast<uml::TemplateableElement>(_temp);
 			setBoundElement(_boundElement); //2308
@@ -517,9 +517,9 @@ bool TemplateBindingImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::TEMPLATEBINDING_ATTRIBUTE_PARAMETERSUBSTITUTION:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::TemplateParameterSubstitution>
 			if((newValue->isContainer()) && (uml::umlPackage::TEMPLATEPARAMETERSUBSTITUTION_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::TemplateParameterSubstitution>> parameterSubstitutionList= newValue->get<std::shared_ptr<Bag<uml::TemplateParameterSubstitution>>>();
@@ -554,7 +554,7 @@ bool TemplateBindingImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::TEMPLATEBINDING_ATTRIBUTE_SIGNATURE:
 		{
-			// BOOST CAST
+			// CAST Any to uml::TemplateSignature
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::TemplateSignature> _signature = std::dynamic_pointer_cast<uml::TemplateSignature>(_temp);
 			setSignature(_signature); //2307

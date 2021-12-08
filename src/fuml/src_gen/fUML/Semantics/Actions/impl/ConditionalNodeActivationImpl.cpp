@@ -121,14 +121,10 @@ ConditionalNodeActivationImpl& ConditionalNodeActivationImpl::operator=(const Co
 		m_clauseActivations.reset(new Bag<fUML::Semantics::Actions::ClauseActivation>());
 		
 		
-
-		Bag<fUML::Semantics::Actions::ClauseActivation>::iterator clauseActivationsIter = clauseActivationsList->begin();
-		Bag<fUML::Semantics::Actions::ClauseActivation>::iterator clauseActivationsEnd = clauseActivationsList->end();
-		while (clauseActivationsIter != clauseActivationsEnd) 
+		for(const std::shared_ptr<fUML::Semantics::Actions::ClauseActivation> clauseActivationsindexElem: *clauseActivationsList) 
 		{
-			std::shared_ptr<fUML::Semantics::Actions::ClauseActivation> temp = std::dynamic_pointer_cast<fUML::Semantics::Actions::ClauseActivation>((*clauseActivationsIter)->copy());
-			getClauseActivations()->push_back(temp);
-			clauseActivationsIter++;
+			std::shared_ptr<fUML::Semantics::Actions::ClauseActivation> temp = std::dynamic_pointer_cast<fUML::Semantics::Actions::ClauseActivation>((clauseActivationsindexElem)->copy());
+			m_clauseActivations->push_back(temp);
 		}
 	}
 	else
@@ -373,27 +369,11 @@ Any ConditionalNodeActivationImpl::eGet(int featureID, bool resolve, bool coreTy
 	{
 		case fUML::Semantics::Actions::ActionsPackage::CONDITIONALNODEACTIVATION_ATTRIBUTE_CLAUSEACTIVATIONS:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<fUML::Semantics::Actions::ClauseActivation>::iterator iter = getClauseActivations()->begin();
-			Bag<fUML::Semantics::Actions::ClauseActivation>::iterator end = getClauseActivations()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //3012			
+			return eAnyBag(getClauseActivations(),776292722); //3012
 		}
 		case fUML::Semantics::Actions::ActionsPackage::CONDITIONALNODEACTIVATION_ATTRIBUTE_SELECTEDCLAUSES:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Clause>::iterator iter = getSelectedClauses()->begin();
-			Bag<uml::Clause>::iterator end = getSelectedClauses()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //3013			
+			return eAnyBag(getSelectedClauses(),1571471300); //3013
 		}
 	}
 	return StructuredActivityNodeActivationImpl::eGet(featureID, resolve, coreType);
@@ -417,73 +397,75 @@ bool ConditionalNodeActivationImpl::eSet(int featureID, Any newValue)
 	{
 		case fUML::Semantics::Actions::ActionsPackage::CONDITIONALNODEACTIVATION_ATTRIBUTE_CLAUSEACTIVATIONS:
 		{
-			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<fUML::Semantics::Actions::ClauseActivation>> clauseActivationsList(new Bag<fUML::Semantics::Actions::ClauseActivation>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
-			{
-				clauseActivationsList->add(std::dynamic_pointer_cast<fUML::Semantics::Actions::ClauseActivation>(*iter));
-				iter++;
-			}
-			
-			Bag<fUML::Semantics::Actions::ClauseActivation>::iterator iterClauseActivations = getClauseActivations()->begin();
-			Bag<fUML::Semantics::Actions::ClauseActivation>::iterator endClauseActivations = getClauseActivations()->end();
-			while (iterClauseActivations != endClauseActivations)
-			{
-				if (clauseActivationsList->find(*iterClauseActivations) == -1)
+			// CAST Any to Bag<fUML::Semantics::Actions::ClauseActivation>
+			if((newValue->isContainer()) && (fUML::Semantics::Actions::ActionsPackage::CLAUSEACTIVATION_CLASS ==newValue->getTypeId()))
+			{ 
+				try
 				{
-					getClauseActivations()->erase(*iterClauseActivations);
+					std::shared_ptr<Bag<fUML::Semantics::Actions::ClauseActivation>> clauseActivationsList= newValue->get<std::shared_ptr<Bag<fUML::Semantics::Actions::ClauseActivation>>>();
+					std::shared_ptr<Bag<fUML::Semantics::Actions::ClauseActivation>> _clauseActivations=getClauseActivations();
+					for(const std::shared_ptr<fUML::Semantics::Actions::ClauseActivation> indexClauseActivations: *_clauseActivations)
+					{
+						if (clauseActivationsList->find(indexClauseActivations) == -1)
+						{
+							_clauseActivations->erase(indexClauseActivations);
+						}
+					}
+
+					for(const std::shared_ptr<fUML::Semantics::Actions::ClauseActivation> indexClauseActivations: *clauseActivationsList)
+					{
+						if (_clauseActivations->find(indexClauseActivations) == -1)
+						{
+							_clauseActivations->add(indexClauseActivations);
+						}
+					}
 				}
-				iterClauseActivations++;
-			}
- 
-			iterClauseActivations = clauseActivationsList->begin();
-			endClauseActivations = clauseActivationsList->end();
-			while (iterClauseActivations != endClauseActivations)
-			{
-				if (getClauseActivations()->find(*iterClauseActivations) == -1)
+				catch(...)
 				{
-					getClauseActivations()->add(*iterClauseActivations);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterClauseActivations++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}
 		case fUML::Semantics::Actions::ActionsPackage::CONDITIONALNODEACTIVATION_ATTRIBUTE_SELECTEDCLAUSES:
 		{
-			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::Clause>> selectedClausesList(new Bag<uml::Clause>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
-			{
-				selectedClausesList->add(std::dynamic_pointer_cast<uml::Clause>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::Clause>::iterator iterSelectedClauses = getSelectedClauses()->begin();
-			Bag<uml::Clause>::iterator endSelectedClauses = getSelectedClauses()->end();
-			while (iterSelectedClauses != endSelectedClauses)
-			{
-				if (selectedClausesList->find(*iterSelectedClauses) == -1)
+			// CAST Any to Bag<uml::Clause>
+			if((newValue->isContainer()) && (uml::umlPackage::CLAUSE_CLASS ==newValue->getTypeId()))
+			{ 
+				try
 				{
-					getSelectedClauses()->erase(*iterSelectedClauses);
+					std::shared_ptr<Bag<uml::Clause>> selectedClausesList= newValue->get<std::shared_ptr<Bag<uml::Clause>>>();
+					std::shared_ptr<Bag<uml::Clause>> _selectedClauses=getSelectedClauses();
+					for(const std::shared_ptr<uml::Clause> indexSelectedClauses: *_selectedClauses)
+					{
+						if (selectedClausesList->find(indexSelectedClauses) == -1)
+						{
+							_selectedClauses->erase(indexSelectedClauses);
+						}
+					}
+
+					for(const std::shared_ptr<uml::Clause> indexSelectedClauses: *selectedClausesList)
+					{
+						if (_selectedClauses->find(indexSelectedClauses) == -1)
+						{
+							_selectedClauses->add(indexSelectedClauses);
+						}
+					}
 				}
-				iterSelectedClauses++;
-			}
- 
-			iterSelectedClauses = selectedClausesList->begin();
-			endSelectedClauses = selectedClausesList->end();
-			while (iterSelectedClauses != endSelectedClauses)
-			{
-				if (getSelectedClauses()->find(*iterSelectedClauses) == -1)
+				catch(...)
 				{
-					getSelectedClauses()->add(*iterSelectedClauses);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterSelectedClauses++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}
@@ -501,8 +483,7 @@ Any ConditionalNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std:
 
   	switch(operationID)
 	{
-		
-		// 655045744
+		// fUML::Semantics::Actions::ConditionalNodeActivation::getClauseActivation(uml::Clause) : fUML::Semantics::Actions::ClauseActivation: 655045744
 		case ActionsPackage::CONDITIONALNODEACTIVATION_OPERATION_GETCLAUSEACTIVATION_CLAUSE:
 		{
 			//Retrieve input parameter 'clause'
@@ -510,11 +491,10 @@ Any ConditionalNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std:
 			std::shared_ptr<uml::Clause> incoming_param_clause;
 			std::list<Any>::const_iterator incoming_param_clause_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_clause = (*incoming_param_clause_arguments_citer)->get<std::shared_ptr<uml::Clause> >();
-				result = eAny(this->getClauseActivation(incoming_param_clause));
+			result = eAny(this->getClauseActivation(incoming_param_clause), fUML::Semantics::Actions::ActionsPackage::CLAUSEACTIVATION_CLASS,false);
 			break;
 		}
-		
-		// 612797622
+		// fUML::Semantics::Actions::ConditionalNodeActivation::runTest(uml::Clause): 612797622
 		case ActionsPackage::CONDITIONALNODEACTIVATION_OPERATION_RUNTEST_CLAUSE:
 		{
 			//Retrieve input parameter 'clause'
@@ -523,10 +503,8 @@ Any ConditionalNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std:
 			std::list<Any>::const_iterator incoming_param_clause_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_clause = (*incoming_param_clause_arguments_citer)->get<std::shared_ptr<uml::Clause> >();
 			this->runTest(incoming_param_clause);
-			break;
 		}
-		
-		// 1236206203
+		// fUML::Semantics::Actions::ConditionalNodeActivation::selectBody(uml::Clause): 1236206203
 		case ActionsPackage::CONDITIONALNODEACTIVATION_OPERATION_SELECTBODY_CLAUSE:
 		{
 			//Retrieve input parameter 'clause'
@@ -535,7 +513,6 @@ Any ConditionalNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std:
 			std::list<Any>::const_iterator incoming_param_clause_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_clause = (*incoming_param_clause_arguments_citer)->get<std::shared_ptr<uml::Clause> >();
 			this->selectBody(incoming_param_clause);
-			break;
 		}
 
 		default:

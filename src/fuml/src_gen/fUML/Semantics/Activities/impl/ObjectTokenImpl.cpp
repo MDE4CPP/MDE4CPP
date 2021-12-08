@@ -313,7 +313,7 @@ bool ObjectTokenImpl::eSet(int featureID, Any newValue)
 	{
 		case fUML::Semantics::Activities::ActivitiesPackage::OBJECTTOKEN_ATTRIBUTE_VALUE:
 		{
-			// BOOST CAST
+			// CAST Any to fUML::Semantics::Values::Value
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<fUML::Semantics::Values::Value> _value = std::dynamic_pointer_cast<fUML::Semantics::Values::Value>(_temp);
 			setValue(_value); //832
@@ -333,15 +333,13 @@ Any ObjectTokenImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> ar
 
   	switch(operationID)
 	{
-		
-		// 2097614011
+		// fUML::Semantics::Activities::ObjectToken::_copy() : fUML::Semantics::Activities::Token: 2097614011
 		case ActivitiesPackage::OBJECTTOKEN_OPERATION__COPY:
 		{
-				result = eAny(this->_copy());
+			result = eAny(this->_copy(), fUML::Semantics::Activities::ActivitiesPackage::TOKEN_CLASS,false);
 			break;
 		}
-		
-		// 986368509
+		// fUML::Semantics::Activities::ObjectToken::equals(fUML::Semantics::Activities::Token) : bool: 986368509
 		case ActivitiesPackage::OBJECTTOKEN_OPERATION_EQUALS_TOKEN:
 		{
 			//Retrieve input parameter 'other'
@@ -349,14 +347,13 @@ Any ObjectTokenImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> ar
 			std::shared_ptr<fUML::Semantics::Activities::Token> incoming_param_other;
 			std::list<Any>::const_iterator incoming_param_other_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_other = (*incoming_param_other_arguments_citer)->get<std::shared_ptr<fUML::Semantics::Activities::Token> >();
-					result = eAny(this->equals(incoming_param_other),0,false);
+			result = eAny(this->equals(incoming_param_other),0,false);
 			break;
 		}
-		
-		// 1282940466
+		// fUML::Semantics::Activities::ObjectToken::isControl() : bool: 1282940466
 		case ActivitiesPackage::OBJECTTOKEN_OPERATION_ISCONTROL:
 		{
-					result = eAny(this->isControl(),0,false);
+			result = eAny(this->isControl(),0,false);
 			break;
 		}
 

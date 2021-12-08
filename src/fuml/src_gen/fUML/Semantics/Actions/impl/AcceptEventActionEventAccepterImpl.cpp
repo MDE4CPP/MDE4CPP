@@ -270,7 +270,7 @@ bool AcceptEventActionEventAccepterImpl::eSet(int featureID, Any newValue)
 	{
 		case fUML::Semantics::Actions::ActionsPackage::ACCEPTEVENTACTIONEVENTACCEPTER_ATTRIBUTE_ACTIONACTIVATION:
 		{
-			// BOOST CAST
+			// CAST Any to fUML::Semantics::Actions::AcceptEventActionActivation
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<fUML::Semantics::Actions::AcceptEventActionActivation> _actionActivation = std::dynamic_pointer_cast<fUML::Semantics::Actions::AcceptEventActionActivation>(_temp);
 			setActionActivation(_actionActivation); //40

@@ -248,8 +248,7 @@ Any BagTypeValueImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> a
 
   	switch(operationID)
 	{
-		
-		// 794069208
+		// ocl::Values::BagTypeValue::addValue(fUML::Semantics::Values::Value) : bool: 794069208
 		case ValuesPackage::BAGTYPEVALUE_OPERATION_ADDVALUE_VALUE:
 		{
 			//Retrieve input parameter 'value'
@@ -257,7 +256,7 @@ Any BagTypeValueImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> a
 			std::shared_ptr<fUML::Semantics::Values::Value> incoming_param_value;
 			std::list<Any>::const_iterator incoming_param_value_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_value = (*incoming_param_value_arguments_citer)->get<std::shared_ptr<fUML::Semantics::Values::Value> >();
-					result = eAny(this->addValue(incoming_param_value),0,false);
+			result = eAny(this->addValue(incoming_param_value),0,false);
 			break;
 		}
 

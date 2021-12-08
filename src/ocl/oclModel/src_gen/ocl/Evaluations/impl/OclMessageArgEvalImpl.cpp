@@ -34,8 +34,8 @@
 
 #include <exception> // used in Persistence
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
-#include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
+#include "uml/umlFactory.hpp"
 
 #include "fUML/Semantics/Values/Evaluation.hpp"
 #include "fUML/Semantics/Loci/Locus.hpp"
@@ -358,7 +358,7 @@ bool OclMessageArgEvalImpl::eSet(int featureID, Any newValue)
 	{
 		case ocl::Evaluations::EvaluationsPackage::OCLMESSAGEARGEVAL_ATTRIBUTE_EXPRESSION:
 		{
-			// BOOST CAST
+			// CAST Any to ocl::Evaluations::OclExpEval
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<ocl::Evaluations::OclExpEval> _expression = std::dynamic_pointer_cast<ocl::Evaluations::OclExpEval>(_temp);
 			setExpression(_expression); //623
@@ -366,7 +366,7 @@ bool OclMessageArgEvalImpl::eSet(int featureID, Any newValue)
 		}
 		case ocl::Evaluations::EvaluationsPackage::OCLMESSAGEARGEVAL_ATTRIBUTE_UNSPECIFIED:
 		{
-			// BOOST CAST
+			// CAST Any to ocl::Evaluations::UnspecifiedValueExpEval
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<ocl::Evaluations::UnspecifiedValueExpEval> _unspecified = std::dynamic_pointer_cast<ocl::Evaluations::UnspecifiedValueExpEval>(_temp);
 			setUnspecified(_unspecified); //622
@@ -374,7 +374,7 @@ bool OclMessageArgEvalImpl::eSet(int featureID, Any newValue)
 		}
 		case ocl::Evaluations::EvaluationsPackage::OCLMESSAGEARGEVAL_ATTRIBUTE_VARIABLE:
 		{
-			// BOOST CAST
+			// CAST Any to ocl::Evaluations::OclExpEval
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<ocl::Evaluations::OclExpEval> _variable = std::dynamic_pointer_cast<ocl::Evaluations::OclExpEval>(_temp);
 			setVariable(_variable); //624

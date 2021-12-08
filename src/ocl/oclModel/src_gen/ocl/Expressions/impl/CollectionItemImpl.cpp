@@ -280,7 +280,7 @@ bool CollectionItemImpl::eSet(int featureID, Any newValue)
 	{
 		case ocl::Expressions::ExpressionsPackage::COLLECTIONITEM_ATTRIBUTE_ITEM:
 		{
-			// BOOST CAST
+			// CAST Any to ocl::Expressions::OclExpression
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<ocl::Expressions::OclExpression> _item = std::dynamic_pointer_cast<ocl::Expressions::OclExpression>(_temp);
 			setItem(_item); //1210

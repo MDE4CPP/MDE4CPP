@@ -313,15 +313,7 @@ Any EvalEnvironmentImpl::eGet(int featureID, bool resolve, bool coreType) const
 	{
 		case ocl::Evaluations::EvaluationsPackage::EVALENVIRONMENT_ATTRIBUTE_BINDINGS:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<ocl::Values::NameValueBinding>::iterator iter = getBindings()->begin();
-			Bag<ocl::Values::NameValueBinding>::iterator end = getBindings()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //260			
+			return eAnyBag(getBindings(),510142670); //260
 		}
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
@@ -343,37 +335,38 @@ bool EvalEnvironmentImpl::eSet(int featureID, Any newValue)
 	{
 		case ocl::Evaluations::EvaluationsPackage::EVALENVIRONMENT_ATTRIBUTE_BINDINGS:
 		{
-			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<ocl::Values::NameValueBinding>> bindingsList(new Bag<ocl::Values::NameValueBinding>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
-			{
-				bindingsList->add(std::dynamic_pointer_cast<ocl::Values::NameValueBinding>(*iter));
-				iter++;
-			}
-			
-			Bag<ocl::Values::NameValueBinding>::iterator iterBindings = getBindings()->begin();
-			Bag<ocl::Values::NameValueBinding>::iterator endBindings = getBindings()->end();
-			while (iterBindings != endBindings)
-			{
-				if (bindingsList->find(*iterBindings) == -1)
+			// CAST Any to Bag<ocl::Values::NameValueBinding>
+			if((newValue->isContainer()) && (ocl::Values::ValuesPackage::NAMEVALUEBINDING_CLASS ==newValue->getTypeId()))
+			{ 
+				try
 				{
-					getBindings()->erase(*iterBindings);
+					std::shared_ptr<Bag<ocl::Values::NameValueBinding>> bindingsList= newValue->get<std::shared_ptr<Bag<ocl::Values::NameValueBinding>>>();
+					std::shared_ptr<Bag<ocl::Values::NameValueBinding>> _bindings=getBindings();
+					for(const std::shared_ptr<ocl::Values::NameValueBinding> indexBindings: *_bindings)
+					{
+						if (bindingsList->find(indexBindings) == -1)
+						{
+							_bindings->erase(indexBindings);
+						}
+					}
+
+					for(const std::shared_ptr<ocl::Values::NameValueBinding> indexBindings: *bindingsList)
+					{
+						if (_bindings->find(indexBindings) == -1)
+						{
+							_bindings->add(indexBindings);
+						}
+					}
 				}
-				iterBindings++;
-			}
- 
-			iterBindings = bindingsList->begin();
-			endBindings = bindingsList->end();
-			while (iterBindings != endBindings)
-			{
-				if (getBindings()->find(*iterBindings) == -1)
+				catch(...)
 				{
-					getBindings()->add(*iterBindings);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterBindings++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}
@@ -391,8 +384,7 @@ Any EvalEnvironmentImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>
 
   	switch(operationID)
 	{
-		
-		// 1479022861
+		// ocl::Evaluations::EvalEnvironment::add(ocl::Values::NameValueBinding): 1479022861
 		case EvaluationsPackage::EVALENVIRONMENT_OPERATION_ADD_NAMEVALUEBINDING:
 		{
 			//Retrieve input parameter 'n'
@@ -401,10 +393,8 @@ Any EvalEnvironmentImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>
 			std::list<Any>::const_iterator incoming_param_n_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_n = (*incoming_param_n_arguments_citer)->get<std::shared_ptr<ocl::Values::NameValueBinding> >();
 			this->add(incoming_param_n);
-			break;
 		}
-		
-		// 1063443542
+		// ocl::Evaluations::EvalEnvironment::addAll(ocl::Values::NameValueBinding[*]): 1063443542
 		case EvaluationsPackage::EVALENVIRONMENT_OPERATION_ADDALL_NAMEVALUEBINDING:
 		{
 			//Retrieve input parameter 'nvbs'
@@ -413,10 +403,8 @@ Any EvalEnvironmentImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>
 			std::list<Any>::const_iterator incoming_param_nvbs_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_nvbs = (*incoming_param_nvbs_arguments_citer)->get<std::shared_ptr<Bag<ocl::Values::NameValueBinding>> >();
 			this->addAll(incoming_param_nvbs);
-			break;
 		}
-		
-		// 946058698
+		// ocl::Evaluations::EvalEnvironment::find(std::string) : ocl::Values::NameValueBinding: 946058698
 		case EvaluationsPackage::EVALENVIRONMENT_OPERATION_FIND_STRING:
 		{
 			//Retrieve input parameter 'name'
@@ -424,11 +412,10 @@ Any EvalEnvironmentImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>
 			std::string incoming_param_name;
 			std::list<Any>::const_iterator incoming_param_name_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_name = (*incoming_param_name_arguments_citer)->get<std::string >();
-				result = eAny(this->find(incoming_param_name));
+			result = eAny(this->find(incoming_param_name), ocl::Values::ValuesPackage::NAMEVALUEBINDING_CLASS,false);
 			break;
 		}
-		
-		// 1187543967
+		// ocl::Evaluations::EvalEnvironment::getValueOf(std::string) : fUML::Semantics::Values::Value: 1187543967
 		case EvaluationsPackage::EVALENVIRONMENT_OPERATION_GETVALUEOF_ESTRING:
 		{
 			//Retrieve input parameter 'n'
@@ -436,11 +423,10 @@ Any EvalEnvironmentImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>
 			std::string incoming_param_n;
 			std::list<Any>::const_iterator incoming_param_n_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_n = (*incoming_param_n_arguments_citer)->get<std::string >();
-				result = eAny(this->getValueOf(incoming_param_n));
+			result = eAny(this->getValueOf(incoming_param_n), fUML::Semantics::Values::ValuesPackage::VALUE_CLASS,false);
 			break;
 		}
-		
-		// 483482254
+		// ocl::Evaluations::EvalEnvironment::replace(ocl::Values::NameValueBinding): 483482254
 		case EvaluationsPackage::EVALENVIRONMENT_OPERATION_REPLACE_NAMEVALUEBINDING:
 		{
 			//Retrieve input parameter 'n'
@@ -449,7 +435,6 @@ Any EvalEnvironmentImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>
 			std::list<Any>::const_iterator incoming_param_n_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_n = (*incoming_param_n_arguments_citer)->get<std::shared_ptr<ocl::Values::NameValueBinding> >();
 			this->replace(incoming_param_n);
-			break;
 		}
 
 		default:

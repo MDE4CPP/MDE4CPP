@@ -297,7 +297,7 @@ bool PrimitiveValueImpl::eSet(int featureID, Any newValue)
 	{
 		case fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::PRIMITIVEVALUE_ATTRIBUTE_TYPE:
 		{
-			// BOOST CAST
+			// CAST Any to uml::PrimitiveType
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::PrimitiveType> _type = std::dynamic_pointer_cast<uml::PrimitiveType>(_temp);
 			setType(_type); //890
@@ -317,18 +317,17 @@ Any PrimitiveValueImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>>
 
   	switch(operationID)
 	{
-		
-		// 1483946573
+		// fUML::Semantics::SimpleClassifiers::PrimitiveValue::_copy() : fUML::Semantics::Values::Value: 1483946573
 		case SimpleClassifiersPackage::PRIMITIVEVALUE_OPERATION__COPY:
 		{
-				result = eAny(this->_copy());
+			result = eAny(this->_copy(), fUML::Semantics::Values::ValuesPackage::VALUE_CLASS,false);
 			break;
 		}
-		
-		// 1603549944
+		// fUML::Semantics::SimpleClassifiers::PrimitiveValue::getTypes() : uml::Classifier[*]: 1603549944
 		case SimpleClassifiersPackage::PRIMITIVEVALUE_OPERATION_GETTYPES:
 		{
-				result = eAny(this->getTypes());
+			std::shared_ptr<Bag<uml::Classifier> > resultList = this->getTypes();
+			return eAny(resultList,uml::umlPackage::CLASSIFIER_CLASS,true);
 			break;
 		}
 

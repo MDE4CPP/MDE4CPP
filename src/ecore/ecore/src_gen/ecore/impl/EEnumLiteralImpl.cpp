@@ -357,21 +357,21 @@ bool EEnumLiteralImpl::eSet(int featureID, Any newValue)
 	{
 		case ecore::ecorePackage::EENUMLITERAL_ATTRIBUTE_INSTANCE:
 		{
-			// BOOST CAST
+			// CAST Any to Any
 			Any _instance = newValue->get<Any>();
 			setInstance(_instance); //216
 			return true;
 		}
 		case ecore::ecorePackage::EENUMLITERAL_ATTRIBUTE_LITERAL:
 		{
-			// BOOST CAST
+			// CAST Any to std::string
 			std::string _literal = newValue->get<std::string>();
 			setLiteral(_literal); //217
 			return true;
 		}
 		case ecore::ecorePackage::EENUMLITERAL_ATTRIBUTE_VALUE:
 		{
-			// BOOST CAST
+			// CAST Any to int
 			int _value = newValue->get<int>();
 			setValue(_value); //215
 			return true;

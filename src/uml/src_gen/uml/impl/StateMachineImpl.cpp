@@ -819,9 +819,9 @@ bool StateMachineImpl::eSet(int featureID, Any newValue)
 	{
 		case uml::umlPackage::STATEMACHINE_ATTRIBUTE_CONNECTIONPOINT:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::Pseudostate>
 			if((newValue->isContainer()) && (uml::umlPackage::PSEUDOSTATE_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::Pseudostate>> connectionPointList= newValue->get<std::shared_ptr<Bag<uml::Pseudostate>>>();
@@ -856,9 +856,9 @@ bool StateMachineImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::STATEMACHINE_ATTRIBUTE_EXTENDEDSTATEMACHINE:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::StateMachine>
 			if((newValue->isContainer()) && (uml::umlPackage::STATEMACHINE_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::StateMachine>> extendedStateMachineList= newValue->get<std::shared_ptr<Bag<uml::StateMachine>>>();
@@ -893,9 +893,9 @@ bool StateMachineImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::STATEMACHINE_ATTRIBUTE_REGION:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::Region>
 			if((newValue->isContainer()) && (uml::umlPackage::REGION_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::Region>> regionList= newValue->get<std::shared_ptr<Bag<uml::Region>>>();
@@ -930,9 +930,9 @@ bool StateMachineImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::STATEMACHINE_ATTRIBUTE_SUBMACHINESTATE:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::State>
 			if((newValue->isContainer()) && (uml::umlPackage::STATE_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::State>> submachineStateList= newValue->get<std::shared_ptr<Bag<uml::State>>>();
@@ -992,7 +992,7 @@ Any StateMachineImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> a
 			std::shared_ptr<uml::Vertex> incoming_param_s2;
 			std::list<Any>::const_iterator incoming_param_s2_arguments_citer = std::next(arguments->begin(), 1);
 			incoming_param_s2 = (*incoming_param_s2_arguments_citer)->get<std::shared_ptr<uml::Vertex> >();
-			result = eAny(this->LCA(incoming_param_s1,incoming_param_s2), umlPackage::REGION_CLASS,false);
+			result = eAny(this->LCA(incoming_param_s1,incoming_param_s2), uml::umlPackage::REGION_CLASS,false);
 			break;
 		}
 		// uml::StateMachine::LCAState(uml::Vertex, uml::Vertex) : uml::State: 296092779
@@ -1008,7 +1008,7 @@ Any StateMachineImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> a
 			std::shared_ptr<uml::Vertex> incoming_param_v2;
 			std::list<Any>::const_iterator incoming_param_v2_arguments_citer = std::next(arguments->begin(), 1);
 			incoming_param_v2 = (*incoming_param_v2_arguments_citer)->get<std::shared_ptr<uml::Vertex> >();
-			result = eAny(this->LCAState(incoming_param_v1,incoming_param_v2), umlPackage::STATE_CLASS,false);
+			result = eAny(this->LCAState(incoming_param_v1,incoming_param_v2), uml::umlPackage::STATE_CLASS,false);
 			break;
 		}
 		// uml::StateMachine::ancestor(uml::Vertex, uml::Vertex) : bool: 235532453

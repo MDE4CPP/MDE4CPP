@@ -423,9 +423,9 @@ bool CollaborationUseImpl::eSet(int featureID, Any newValue)
 	{
 		case uml::umlPackage::COLLABORATIONUSE_ATTRIBUTE_ROLEBINDING:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::Dependency>
 			if((newValue->isContainer()) && (uml::umlPackage::DEPENDENCY_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::Dependency>> roleBindingList= newValue->get<std::shared_ptr<Bag<uml::Dependency>>>();
@@ -460,7 +460,7 @@ bool CollaborationUseImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::COLLABORATIONUSE_ATTRIBUTE_TYPE:
 		{
-			// BOOST CAST
+			// CAST Any to uml::Collaboration
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Collaboration> _type = std::dynamic_pointer_cast<uml::Collaboration>(_temp);
 			setType(_type); //4310

@@ -361,7 +361,7 @@ bool CollectionTypeImpl::eSet(int featureID, Any newValue)
 	{
 		case ocl::Types::TypesPackage::COLLECTIONTYPE_ATTRIBUTE_ELEMENTTYPE:
 		{
-			// BOOST CAST
+			// CAST Any to ecore::EClassifier
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<ecore::EClassifier> _elementType = std::dynamic_pointer_cast<ecore::EClassifier>(_temp);
 			setElementType(_elementType); //219
@@ -369,7 +369,7 @@ bool CollectionTypeImpl::eSet(int featureID, Any newValue)
 		}
 		case ocl::Types::TypesPackage::COLLECTIONTYPE_ATTRIBUTE_INSTANCE:
 		{
-			// BOOST CAST
+			// CAST Any to ocl::Values::CollectionValue
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<ocl::Values::CollectionValue> _instance = std::dynamic_pointer_cast<ocl::Values::CollectionValue>(_temp);
 			setInstance(_instance); //2110
@@ -389,8 +389,7 @@ Any CollectionTypeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>>
 
   	switch(operationID)
 	{
-		
-		// 1909894118
+		// ocl::Types::CollectionType::kindOf(ocl::Types::CollectionType) : bool: 1909894118
 		case TypesPackage::COLLECTIONTYPE_OPERATION_KINDOF_COLLECTIONTYPE:
 		{
 			//Retrieve input parameter 'coll'
@@ -398,7 +397,7 @@ Any CollectionTypeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>>
 			std::shared_ptr<ocl::Types::CollectionType> incoming_param_coll;
 			std::list<Any>::const_iterator incoming_param_coll_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_coll = (*incoming_param_coll_arguments_citer)->get<std::shared_ptr<ocl::Types::CollectionType> >();
-					result = eAny(this->kindOf(incoming_param_coll),0,false);
+			result = eAny(this->kindOf(incoming_param_coll),0,false);
 			break;
 		}
 

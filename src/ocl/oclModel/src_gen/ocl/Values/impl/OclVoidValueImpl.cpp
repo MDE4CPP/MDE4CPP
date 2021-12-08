@@ -246,8 +246,7 @@ Any OclVoidValueImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> a
 
   	switch(operationID)
 	{
-		
-		// 613975732
+		// ocl::Values::OclVoidValue::equals(fUML::Semantics::Values::Value) : bool: 613975732
 		case ValuesPackage::OCLVOIDVALUE_OPERATION_EQUALS_VALUE:
 		{
 			//Retrieve input parameter 'otherValue'
@@ -255,14 +254,13 @@ Any OclVoidValueImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> a
 			std::shared_ptr<fUML::Semantics::Values::Value> incoming_param_otherValue;
 			std::list<Any>::const_iterator incoming_param_otherValue_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_otherValue = (*incoming_param_otherValue_arguments_citer)->get<std::shared_ptr<fUML::Semantics::Values::Value> >();
-					result = eAny(this->equals(incoming_param_otherValue),0,false);
+			result = eAny(this->equals(incoming_param_otherValue),0,false);
 			break;
 		}
-		
-		// 1594356317
+		// ocl::Values::OclVoidValue::toString() : std::string: 1594356317
 		case ValuesPackage::OCLVOIDVALUE_OPERATION_TOSTRING:
 		{
-					result = eAny(this->toString(),0,false);
+			result = eAny(this->toString(),0,false);
 			break;
 		}
 

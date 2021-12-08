@@ -358,7 +358,7 @@ bool ChangeEventImpl::eSet(int featureID, Any newValue)
 	{
 		case uml::umlPackage::CHANGEEVENT_ATTRIBUTE_CHANGEEXPRESSION:
 		{
-			// BOOST CAST
+			// CAST Any to uml::ValueSpecification
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::ValueSpecification> _changeExpression = std::dynamic_pointer_cast<uml::ValueSpecification>(_temp);
 			setChangeExpression(_changeExpression); //3412

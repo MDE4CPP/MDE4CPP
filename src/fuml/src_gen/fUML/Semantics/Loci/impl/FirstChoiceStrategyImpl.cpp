@@ -235,8 +235,7 @@ Any FirstChoiceStrategyImpl::eInvoke(int operationID, std::shared_ptr<std::list<
 
   	switch(operationID)
 	{
-		
-		// 1148186745
+		// fUML::Semantics::Loci::FirstChoiceStrategy::choose(int) : int: 1148186745
 		case LociPackage::FIRSTCHOICESTRATEGY_OPERATION_CHOOSE_EINT:
 		{
 			//Retrieve input parameter 'size'
@@ -244,7 +243,7 @@ Any FirstChoiceStrategyImpl::eInvoke(int operationID, std::shared_ptr<std::list<
 			int incoming_param_size;
 			std::list<Any>::const_iterator incoming_param_size_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_size = (*incoming_param_size_arguments_citer)->get<int >();
-					result = eAny(this->choose(incoming_param_size),0,false);
+			result = eAny(this->choose(incoming_param_size),0,false);
 			break;
 		}
 

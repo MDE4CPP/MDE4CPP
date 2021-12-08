@@ -543,9 +543,9 @@ bool LinkActionImpl::eSet(int featureID, Any newValue)
 	{
 		case uml::umlPackage::LINKACTION_ATTRIBUTE_ENDDATA:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::LinkEndData>
 			if((newValue->isContainer()) && (uml::umlPackage::LINKENDDATA_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::LinkEndData>> endDataList= newValue->get<std::shared_ptr<Bag<uml::LinkEndData>>>();
@@ -580,9 +580,9 @@ bool LinkActionImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::LINKACTION_ATTRIBUTE_INPUTVALUE:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::InputPin>
 			if((newValue->isContainer()) && (uml::umlPackage::INPUTPIN_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::InputPin>> inputValueList= newValue->get<std::shared_ptr<Bag<uml::InputPin>>>();
@@ -632,7 +632,7 @@ Any LinkActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arg
 		// uml::LinkAction::association() : uml::Association: 1086747006
 		case umlPackage::LINKACTION_OPERATION_ASSOCIATION:
 		{
-			result = eAny(this->association(), umlPackage::ASSOCIATION_CLASS,false);
+			result = eAny(this->association(), uml::umlPackage::ASSOCIATION_CLASS,false);
 			break;
 		}
 		// uml::LinkAction::not_static(Any, std::map) : bool: 768493780

@@ -504,7 +504,7 @@ bool AddStructuralFeatureValueActionActivationImpl::eSet(int featureID, Any newV
 	{
 		case fUML::Semantics::Actions::ActionsPackage::ADDSTRUCTURALFEATUREVALUEACTIONACTIVATION_ATTRIBUTE_ADDSTRUCTURALFEATUREVALUEACTION:
 		{
-			// BOOST CAST
+			// CAST Any to uml::AddStructuralFeatureValueAction
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::AddStructuralFeatureValueAction> _addStructuralFeatureValueAction = std::dynamic_pointer_cast<uml::AddStructuralFeatureValueAction>(_temp);
 			setAddStructuralFeatureValueAction(_addStructuralFeatureValueAction); //1211
@@ -524,12 +524,10 @@ Any AddStructuralFeatureValueActionActivationImpl::eInvoke(int operationID, std:
 
   	switch(operationID)
 	{
-		
-		// 1373829199
+		// fUML::Semantics::Actions::AddStructuralFeatureValueActionActivation::doAction(): 1373829199
 		case ActionsPackage::ADDSTRUCTURALFEATUREVALUEACTIONACTIVATION_OPERATION_DOACTION:
 		{
 			this->doAction();
-			break;
 		}
 
 		default:

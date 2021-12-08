@@ -263,8 +263,7 @@ Any InitialNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::lis
 
   	switch(operationID)
 	{
-		
-		// 228412215
+		// fUML::Semantics::Activities::InitialNodeActivation::fire(fUML::Semantics::Activities::Token[*]): 228412215
 		case ActivitiesPackage::INITIALNODEACTIVATION_OPERATION_FIRE_TOKEN:
 		{
 			//Retrieve input parameter 'incomingTokens'
@@ -273,7 +272,6 @@ Any InitialNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::lis
 			std::list<Any>::const_iterator incoming_param_incomingTokens_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_incomingTokens = (*incoming_param_incomingTokens_arguments_citer)->get<std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> >();
 			this->fire(incoming_param_incomingTokens);
-			break;
 		}
 
 		default:

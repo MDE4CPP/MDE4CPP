@@ -528,7 +528,7 @@ bool ActionInputPinImpl::eSet(int featureID, Any newValue)
 	{
 		case uml::umlPackage::ACTIONINPUTPIN_ATTRIBUTE_FROMACTION:
 		{
-			// BOOST CAST
+			// CAST Any to uml::Action
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Action> _fromAction = std::dynamic_pointer_cast<uml::Action>(_temp);
 			setFromAction(_fromAction); //641

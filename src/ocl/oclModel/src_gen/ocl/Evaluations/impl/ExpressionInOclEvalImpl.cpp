@@ -304,7 +304,7 @@ bool ExpressionInOclEvalImpl::eSet(int featureID, Any newValue)
 	{
 		case ocl::Evaluations::EvaluationsPackage::EXPRESSIONINOCLEVAL_ATTRIBUTE_CONTEXT:
 		{
-			// BOOST CAST
+			// CAST Any to ocl::Evaluations::OclExpEval
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<ocl::Evaluations::OclExpEval> _context = std::dynamic_pointer_cast<ocl::Evaluations::OclExpEval>(_temp);
 			setContext(_context); //290
@@ -312,7 +312,7 @@ bool ExpressionInOclEvalImpl::eSet(int featureID, Any newValue)
 		}
 		case ocl::Evaluations::EvaluationsPackage::EXPRESSIONINOCLEVAL_ATTRIBUTE_ENVIRONMENT:
 		{
-			// BOOST CAST
+			// CAST Any to ocl::Evaluations::EvalEnvironment
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<ocl::Evaluations::EvalEnvironment> _environment = std::dynamic_pointer_cast<ocl::Evaluations::EvalEnvironment>(_temp);
 			setEnvironment(_environment); //291

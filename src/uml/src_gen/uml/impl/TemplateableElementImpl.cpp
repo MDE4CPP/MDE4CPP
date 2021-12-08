@@ -376,7 +376,7 @@ bool TemplateableElementImpl::eSet(int featureID, Any newValue)
 	{
 		case uml::umlPackage::TEMPLATEABLEELEMENT_ATTRIBUTE_OWNEDTEMPLATESIGNATURE:
 		{
-			// BOOST CAST
+			// CAST Any to uml::TemplateSignature
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::TemplateSignature> _ownedTemplateSignature = std::dynamic_pointer_cast<uml::TemplateSignature>(_temp);
 			setOwnedTemplateSignature(_ownedTemplateSignature); //2344
@@ -384,9 +384,9 @@ bool TemplateableElementImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::TEMPLATEABLEELEMENT_ATTRIBUTE_TEMPLATEBINDING:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::TemplateBinding>
 			if((newValue->isContainer()) && (uml::umlPackage::TEMPLATEBINDING_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::TemplateBinding>> templateBindingList= newValue->get<std::shared_ptr<Bag<uml::TemplateBinding>>>();
@@ -443,7 +443,7 @@ Any TemplateableElementImpl::eInvoke(int operationID, std::shared_ptr<std::list<
 		case umlPackage::TEMPLATEABLEELEMENT_OPERATION_PARAMETERABLEELEMENTS:
 		{
 			std::shared_ptr<Bag<uml::ParameterableElement> > resultList = this->parameterableElements();
-			return eAny(resultList,umlPackage::PARAMETERABLEELEMENT_CLASS,true);
+			return eAny(resultList,uml::umlPackage::PARAMETERABLEELEMENT_CLASS,true);
 			break;
 		}
 

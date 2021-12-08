@@ -318,7 +318,7 @@ bool EAttributeImpl::eSet(int featureID, Any newValue)
 	{
 		case ecore::ecorePackage::EATTRIBUTE_ATTRIBUTE_ID:
 		{
-			// BOOST CAST
+			// CAST Any to bool
 			bool _iD = newValue->get<bool>();
 			setID(_iD); //222
 			return true;

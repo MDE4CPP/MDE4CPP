@@ -350,7 +350,7 @@ bool PackageableElementImpl::eSet(int featureID, Any newValue)
 	{
 		case uml::umlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE:
 		{
-			// BOOST CAST
+			// CAST Any to uml::Package
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Package> _owningPackage = std::dynamic_pointer_cast<uml::Package>(_temp);
 			setOwningPackage(_owningPackage); //17311

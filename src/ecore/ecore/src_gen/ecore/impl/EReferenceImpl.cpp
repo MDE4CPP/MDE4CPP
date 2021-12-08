@@ -468,16 +468,16 @@ bool EReferenceImpl::eSet(int featureID, Any newValue)
 	{
 		case ecore::ecorePackage::EREFERENCE_ATTRIBUTE_CONTAINMENT:
 		{
-			// BOOST CAST
+			// CAST Any to bool
 			bool _containment = newValue->get<bool>();
 			setContainment(_containment); //4422
 			return true;
 		}
 		case ecore::ecorePackage::EREFERENCE_ATTRIBUTE_EKEYS:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<ecore::EAttribute>
 			if((newValue->isContainer()) && (ecore::ecorePackage::EATTRIBUTE_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<ecore::EAttribute>> eKeysList= newValue->get<std::shared_ptr<Bag<ecore::EAttribute>>>();
@@ -512,7 +512,7 @@ bool EReferenceImpl::eSet(int featureID, Any newValue)
 		}
 		case ecore::ecorePackage::EREFERENCE_ATTRIBUTE_EOPPOSITE:
 		{
-			// BOOST CAST
+			// CAST Any to ecore::EReference
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<ecore::EReference> _eOpposite = std::dynamic_pointer_cast<ecore::EReference>(_temp);
 			setEOpposite(_eOpposite); //4425
@@ -520,7 +520,7 @@ bool EReferenceImpl::eSet(int featureID, Any newValue)
 		}
 		case ecore::ecorePackage::EREFERENCE_ATTRIBUTE_EREFERENCETYPE:
 		{
-			// BOOST CAST
+			// CAST Any to ecore::EClass
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<ecore::EClass> _eReferenceType = std::dynamic_pointer_cast<ecore::EClass>(_temp);
 			setEReferenceType(_eReferenceType); //4426
@@ -528,7 +528,7 @@ bool EReferenceImpl::eSet(int featureID, Any newValue)
 		}
 		case ecore::ecorePackage::EREFERENCE_ATTRIBUTE_RESOLVEPROXIES:
 		{
-			// BOOST CAST
+			// CAST Any to bool
 			bool _resolveProxies = newValue->get<bool>();
 			setResolveProxies(_resolveProxies); //4424
 			return true;

@@ -368,9 +368,9 @@ bool DeploymentTargetImpl::eSet(int featureID, Any newValue)
 	{
 		case uml::umlPackage::DEPLOYMENTTARGET_ATTRIBUTE_DEPLOYMENT:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::Deployment>
 			if((newValue->isContainer()) && (uml::umlPackage::DEPLOYMENT_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::Deployment>> deploymentList= newValue->get<std::shared_ptr<Bag<uml::Deployment>>>();
@@ -421,7 +421,7 @@ Any DeploymentTargetImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any
 		case umlPackage::DEPLOYMENTTARGET_OPERATION_GETDEPLOYEDELEMENTS:
 		{
 			std::shared_ptr<Bag<uml::PackageableElement> > resultList = this->getDeployedElements();
-			return eAny(resultList,umlPackage::PACKAGEABLEELEMENT_CLASS,true);
+			return eAny(resultList,uml::umlPackage::PACKAGEABLEELEMENT_CLASS,true);
 			break;
 		}
 

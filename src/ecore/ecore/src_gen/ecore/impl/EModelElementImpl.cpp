@@ -330,9 +330,9 @@ bool EModelElementImpl::eSet(int featureID, Any newValue)
 	{
 		case ecore::ecorePackage::EMODELELEMENT_ATTRIBUTE_EANNOTATIONS:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<ecore::EAnnotation>
 			if((newValue->isContainer()) && (ecore::ecorePackage::EANNOTATION_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<ecore::EAnnotation>> eAnnotationsList= newValue->get<std::shared_ptr<Bag<ecore::EAnnotation>>>();
@@ -387,7 +387,7 @@ Any EModelElementImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> 
 			std::string incoming_param_source;
 			std::list<Any>::const_iterator incoming_param_source_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_source = (*incoming_param_source_arguments_citer)->get<std::string >();
-			result = eAny(this->getEAnnotation(incoming_param_source), ecorePackage::EANNOTATION_CLASS,false);
+			result = eAny(this->getEAnnotation(incoming_param_source), ecore::ecorePackage::EANNOTATION_CLASS,false);
 			break;
 		}
 

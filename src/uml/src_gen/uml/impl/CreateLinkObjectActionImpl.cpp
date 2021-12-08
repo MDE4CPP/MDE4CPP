@@ -458,7 +458,7 @@ bool CreateLinkObjectActionImpl::eSet(int featureID, Any newValue)
 	{
 		case uml::umlPackage::CREATELINKOBJECTACTION_ATTRIBUTE_RESULT:
 		{
-			// BOOST CAST
+			// CAST Any to uml::OutputPin
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::OutputPin> _result = std::dynamic_pointer_cast<uml::OutputPin>(_temp);
 			setResult(_result); //6229

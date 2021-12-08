@@ -545,9 +545,9 @@ bool SequenceNodeImpl::eSet(int featureID, Any newValue)
 	{
 		case uml::umlPackage::SEQUENCENODE_ATTRIBUTE_EXECUTABLENODE:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::ExecutableNode>
 			if((newValue->isContainer()) && (uml::umlPackage::EXECUTABLENODE_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::ExecutableNode>> executableNodeList= newValue->get<std::shared_ptr<Bag<uml::ExecutableNode>>>();

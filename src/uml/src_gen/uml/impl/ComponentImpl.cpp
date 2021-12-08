@@ -764,16 +764,16 @@ bool ComponentImpl::eSet(int featureID, Any newValue)
 	{
 		case uml::umlPackage::COMPONENT_ATTRIBUTE_ISINDIRECTLYINSTANTIATED:
 		{
-			// BOOST CAST
+			// CAST Any to bool
 			bool _isIndirectlyInstantiated = newValue->get<bool>();
 			setIsIndirectlyInstantiated(_isIndirectlyInstantiated); //4753
 			return true;
 		}
 		case uml::umlPackage::COMPONENT_ATTRIBUTE_PACKAGEDELEMENT:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::PackageableElement>
 			if((newValue->isContainer()) && (uml::umlPackage::PACKAGEABLEELEMENT_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::PackageableElement>> packagedElementList= newValue->get<std::shared_ptr<Bag<uml::PackageableElement>>>();
@@ -808,9 +808,9 @@ bool ComponentImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::COMPONENT_ATTRIBUTE_REALIZATION:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::ComponentRealization>
 			if((newValue->isContainer()) && (uml::umlPackage::COMPONENTREALIZATION_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::ComponentRealization>> realizationList= newValue->get<std::shared_ptr<Bag<uml::ComponentRealization>>>();
@@ -870,7 +870,7 @@ Any ComponentImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argu
 			bool incoming_param_isAbstract;
 			std::list<Any>::const_iterator incoming_param_isAbstract_arguments_citer = std::next(arguments->begin(), 1);
 			incoming_param_isAbstract = (*incoming_param_isAbstract_arguments_citer)->get<bool >();
-			result = eAny(this->createOwnedClass(incoming_param_name,incoming_param_isAbstract), umlPackage::CLASS_CLASS,false);
+			result = eAny(this->createOwnedClass(incoming_param_name,incoming_param_isAbstract), uml::umlPackage::CLASS_CLASS,false);
 			break;
 		}
 		// uml::Component::createOwnedEnumeration(std::string) : uml::Enumeration: 444369064
@@ -881,7 +881,7 @@ Any ComponentImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argu
 			std::string incoming_param_name;
 			std::list<Any>::const_iterator incoming_param_name_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_name = (*incoming_param_name_arguments_citer)->get<std::string >();
-			result = eAny(this->createOwnedEnumeration(incoming_param_name), umlPackage::ENUMERATION_CLASS,false);
+			result = eAny(this->createOwnedEnumeration(incoming_param_name), uml::umlPackage::ENUMERATION_CLASS,false);
 			break;
 		}
 		// uml::Component::createOwnedInterface(std::string) : uml::Interface: 1656446202
@@ -892,7 +892,7 @@ Any ComponentImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argu
 			std::string incoming_param_name;
 			std::list<Any>::const_iterator incoming_param_name_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_name = (*incoming_param_name_arguments_citer)->get<std::string >();
-			result = eAny(this->createOwnedInterface(incoming_param_name), umlPackage::INTERFACE_CLASS,false);
+			result = eAny(this->createOwnedInterface(incoming_param_name), uml::umlPackage::INTERFACE_CLASS,false);
 			break;
 		}
 		// uml::Component::createOwnedPrimitiveType(std::string) : uml::PrimitiveType: 1653509115
@@ -903,21 +903,21 @@ Any ComponentImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argu
 			std::string incoming_param_name;
 			std::list<Any>::const_iterator incoming_param_name_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_name = (*incoming_param_name_arguments_citer)->get<std::string >();
-			result = eAny(this->createOwnedPrimitiveType(incoming_param_name), umlPackage::PRIMITIVETYPE_CLASS,false);
+			result = eAny(this->createOwnedPrimitiveType(incoming_param_name), uml::umlPackage::PRIMITIVETYPE_CLASS,false);
 			break;
 		}
 		// uml::Component::getProvideds() : uml::Interface[*]: 108282626
 		case umlPackage::COMPONENT_OPERATION_GETPROVIDEDS:
 		{
 			std::shared_ptr<Bag<uml::Interface> > resultList = this->getProvideds();
-			return eAny(resultList,umlPackage::INTERFACE_CLASS,true);
+			return eAny(resultList,uml::umlPackage::INTERFACE_CLASS,true);
 			break;
 		}
 		// uml::Component::getRequireds() : uml::Interface[*]: 8442330
 		case umlPackage::COMPONENT_OPERATION_GETREQUIREDS:
 		{
 			std::shared_ptr<Bag<uml::Interface> > resultList = this->getRequireds();
-			return eAny(resultList,umlPackage::INTERFACE_CLASS,true);
+			return eAny(resultList,uml::umlPackage::INTERFACE_CLASS,true);
 			break;
 		}
 		// uml::Component::no_nested_classifiers(Any, std::map) : bool: 1111918920

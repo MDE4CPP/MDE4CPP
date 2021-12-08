@@ -480,7 +480,7 @@ bool ClearAssociationActionImpl::eSet(int featureID, Any newValue)
 	{
 		case uml::umlPackage::CLEARASSOCIATIONACTION_ATTRIBUTE_ASSOCIATION:
 		{
-			// BOOST CAST
+			// CAST Any to uml::Association
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Association> _association = std::dynamic_pointer_cast<uml::Association>(_temp);
 			setAssociation(_association); //3927
@@ -488,7 +488,7 @@ bool ClearAssociationActionImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::CLEARASSOCIATIONACTION_ATTRIBUTE_OBJECT:
 		{
-			// BOOST CAST
+			// CAST Any to uml::InputPin
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::InputPin> _object = std::dynamic_pointer_cast<uml::InputPin>(_temp);
 			setObject(_object); //3928

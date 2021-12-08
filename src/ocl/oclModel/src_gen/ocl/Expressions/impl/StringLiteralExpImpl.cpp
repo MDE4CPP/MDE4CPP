@@ -398,7 +398,7 @@ Any StringLiteralExpImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case ocl::Expressions::ExpressionsPackage::STRINGLITERALEXP_ATTRIBUTE_STRINGSYMBOL:
-				return eAny(getStringSymbol(),0,true); //8223
+			return eAny(getStringSymbol(),0,true); //8223
 	}
 	return PrimitiveLiteralExpImpl::eGet(featureID, resolve, coreType);
 }
@@ -419,7 +419,7 @@ bool StringLiteralExpImpl::eSet(int featureID, Any newValue)
 	{
 		case ocl::Expressions::ExpressionsPackage::STRINGLITERALEXP_ATTRIBUTE_STRINGSYMBOL:
 		{
-			// BOOST CAST
+			// CAST Any to std::string
 			std::string _stringSymbol = newValue->get<std::string>();
 			setStringSymbol(_stringSymbol); //8223
 			return true;

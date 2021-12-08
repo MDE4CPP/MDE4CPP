@@ -450,7 +450,7 @@ bool DurationImpl::eSet(int featureID, Any newValue)
 	{
 		case uml::umlPackage::DURATION_ATTRIBUTE_EXPR:
 		{
-			// BOOST CAST
+			// CAST Any to uml::ValueSpecification
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::ValueSpecification> _expr = std::dynamic_pointer_cast<uml::ValueSpecification>(_temp);
 			setExpr(_expr); //7715
@@ -458,9 +458,9 @@ bool DurationImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::DURATION_ATTRIBUTE_OBSERVATION:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::Observation>
 			if((newValue->isContainer()) && (uml::umlPackage::OBSERVATION_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::Observation>> observationList= newValue->get<std::shared_ptr<Bag<uml::Observation>>>();

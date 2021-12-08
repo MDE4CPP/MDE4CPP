@@ -336,7 +336,7 @@ bool MessageEndImpl::eSet(int featureID, Any newValue)
 	{
 		case uml::umlPackage::MESSAGEEND_ATTRIBUTE_MESSAGE:
 		{
-			// BOOST CAST
+			// CAST Any to uml::Message
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Message> _message = std::dynamic_pointer_cast<uml::Message>(_temp);
 			setMessage(_message); //1489
@@ -360,7 +360,7 @@ Any MessageEndImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arg
 		case umlPackage::MESSAGEEND_OPERATION_ENCLOSINGFRAGMENT:
 		{
 			std::shared_ptr<Bag<uml::InteractionFragment> > resultList = this->enclosingFragment();
-			return eAny(resultList,umlPackage::INTERACTIONFRAGMENT_CLASS,true);
+			return eAny(resultList,uml::umlPackage::INTERACTIONFRAGMENT_CLASS,true);
 			break;
 		}
 		// uml::MessageEnd::isReceive() : bool: 786128866
@@ -379,7 +379,7 @@ Any MessageEndImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arg
 		case umlPackage::MESSAGEEND_OPERATION_OPPOSITEEND:
 		{
 			std::shared_ptr<Bag<uml::MessageEnd> > resultList = this->oppositeEnd();
-			return eAny(resultList,umlPackage::MESSAGEEND_CLASS,true);
+			return eAny(resultList,uml::umlPackage::MESSAGEEND_CLASS,true);
 			break;
 		}
 

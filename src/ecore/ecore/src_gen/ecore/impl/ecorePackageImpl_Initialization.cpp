@@ -49,6 +49,7 @@ void ecorePackageImpl::initializePackageContents()
 	m_eFactory_Class->getESuperTypes()->push_back(getEModelElement_Class());
 	m_eModelElement_Class->getESuperTypes()->push_back(getEObject_Class());
 	m_eNamedElement_Class->getESuperTypes()->push_back(getEModelElement_Class());
+	m_eObjectContainer_Class->getESuperTypes()->push_back(getEObject_Class());
 	m_eOperation_Class->getESuperTypes()->push_back(getETypedElement_Class());
 	m_ePackage_Class->getESuperTypes()->push_back(getENamedElement_Class());
 	m_eParameter_Class->getESuperTypes()->push_back(getETypedElement_Class());

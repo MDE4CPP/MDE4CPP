@@ -338,15 +338,7 @@ Any OfferImpl::eGet(int featureID, bool resolve, bool coreType) const
 	{
 		case fUML::Semantics::Activities::ActivitiesPackage::OFFER_ATTRIBUTE_OFFEREDTOKENS:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<fUML::Semantics::Activities::Token>::iterator iter = getOfferedTokens()->begin();
-			Bag<fUML::Semantics::Activities::Token>::iterator end = getOfferedTokens()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //840			
+			return eAnyBag(getOfferedTokens(),476107875); //840
 		}
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
@@ -368,37 +360,38 @@ bool OfferImpl::eSet(int featureID, Any newValue)
 	{
 		case fUML::Semantics::Activities::ActivitiesPackage::OFFER_ATTRIBUTE_OFFEREDTOKENS:
 		{
-			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> offeredTokensList(new Bag<fUML::Semantics::Activities::Token>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
-			{
-				offeredTokensList->add(std::dynamic_pointer_cast<fUML::Semantics::Activities::Token>(*iter));
-				iter++;
-			}
-			
-			Bag<fUML::Semantics::Activities::Token>::iterator iterOfferedTokens = getOfferedTokens()->begin();
-			Bag<fUML::Semantics::Activities::Token>::iterator endOfferedTokens = getOfferedTokens()->end();
-			while (iterOfferedTokens != endOfferedTokens)
-			{
-				if (offeredTokensList->find(*iterOfferedTokens) == -1)
+			// CAST Any to Bag<fUML::Semantics::Activities::Token>
+			if((newValue->isContainer()) && (fUML::Semantics::Activities::ActivitiesPackage::TOKEN_CLASS ==newValue->getTypeId()))
+			{ 
+				try
 				{
-					getOfferedTokens()->erase(*iterOfferedTokens);
+					std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> offeredTokensList= newValue->get<std::shared_ptr<Bag<fUML::Semantics::Activities::Token>>>();
+					std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> _offeredTokens=getOfferedTokens();
+					for(const std::shared_ptr<fUML::Semantics::Activities::Token> indexOfferedTokens: *_offeredTokens)
+					{
+						if (offeredTokensList->find(indexOfferedTokens) == -1)
+						{
+							_offeredTokens->erase(indexOfferedTokens);
+						}
+					}
+
+					for(const std::shared_ptr<fUML::Semantics::Activities::Token> indexOfferedTokens: *offeredTokensList)
+					{
+						if (_offeredTokens->find(indexOfferedTokens) == -1)
+						{
+							_offeredTokens->add(indexOfferedTokens);
+						}
+					}
 				}
-				iterOfferedTokens++;
-			}
- 
-			iterOfferedTokens = offeredTokensList->begin();
-			endOfferedTokens = offeredTokensList->end();
-			while (iterOfferedTokens != endOfferedTokens)
-			{
-				if (getOfferedTokens()->find(*iterOfferedTokens) == -1)
+				catch(...)
 				{
-					getOfferedTokens()->add(*iterOfferedTokens);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterOfferedTokens++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}
@@ -416,22 +409,19 @@ Any OfferImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argument
 
   	switch(operationID)
 	{
-		
-		// 1010430261
+		// fUML::Semantics::Activities::Offer::countOfferedVales() : int: 1010430261
 		case ActivitiesPackage::OFFER_OPERATION_COUNTOFFEREDVALES:
 		{
-					result = eAny(this->countOfferedVales(),0,false);
+			result = eAny(this->countOfferedVales(),0,false);
 			break;
 		}
-		
-		// 610053038
+		// fUML::Semantics::Activities::Offer::hasTokens() : bool: 610053038
 		case ActivitiesPackage::OFFER_OPERATION_HASTOKENS:
 		{
-					result = eAny(this->hasTokens(),0,false);
+			result = eAny(this->hasTokens(),0,false);
 			break;
 		}
-		
-		// 541660047
+		// fUML::Semantics::Activities::Offer::removeOfferedValues(int): 541660047
 		case ActivitiesPackage::OFFER_OPERATION_REMOVEOFFEREDVALUES_EINT:
 		{
 			//Retrieve input parameter 'count'
@@ -440,20 +430,17 @@ Any OfferImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argument
 			std::list<Any>::const_iterator incoming_param_count_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_count = (*incoming_param_count_arguments_citer)->get<int >();
 			this->removeOfferedValues(incoming_param_count);
-			break;
 		}
-		
-		// 363104288
+		// fUML::Semantics::Activities::Offer::removeWithdrawnTokens(): 363104288
 		case ActivitiesPackage::OFFER_OPERATION_REMOVEWITHDRAWNTOKENS:
 		{
 			this->removeWithdrawnTokens();
-			break;
 		}
-		
-		// 1975591629
+		// fUML::Semantics::Activities::Offer::retrieveOfferedTokens() : fUML::Semantics::Activities::Token[*]: 1975591629
 		case ActivitiesPackage::OFFER_OPERATION_RETRIEVEOFFEREDTOKENS:
 		{
-				result = eAny(this->retrieveOfferedTokens());
+			std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > resultList = this->retrieveOfferedTokens();
+			return eAny(resultList,fUML::Semantics::Activities::ActivitiesPackage::TOKEN_CLASS,true);
 			break;
 		}
 

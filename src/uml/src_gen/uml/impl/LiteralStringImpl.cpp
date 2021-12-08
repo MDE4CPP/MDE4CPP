@@ -393,7 +393,7 @@ bool LiteralStringImpl::eSet(int featureID, Any newValue)
 	{
 		case uml::umlPackage::LITERALSTRING_ATTRIBUTE_VALUE:
 		{
-			// BOOST CAST
+			// CAST Any to std::string
 			std::string _value = newValue->get<std::string>();
 			setValue(_value); //14215
 			return true;

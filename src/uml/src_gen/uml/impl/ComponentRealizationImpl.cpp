@@ -505,7 +505,7 @@ bool ComponentRealizationImpl::eSet(int featureID, Any newValue)
 	{
 		case uml::umlPackage::COMPONENTREALIZATION_ATTRIBUTE_ABSTRACTION:
 		{
-			// BOOST CAST
+			// CAST Any to uml::Component
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Component> _abstraction = std::dynamic_pointer_cast<uml::Component>(_temp);
 			setAbstraction(_abstraction); //4819
@@ -513,9 +513,9 @@ bool ComponentRealizationImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::COMPONENTREALIZATION_ATTRIBUTE_REALIZINGCLASSIFIER:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::Classifier>
 			if((newValue->isContainer()) && (uml::umlPackage::CLASSIFIER_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::Classifier>> realizingClassifierList= newValue->get<std::shared_ptr<Bag<uml::Classifier>>>();

@@ -118,14 +118,10 @@ ExpressionInOclImpl& ExpressionInOclImpl::operator=(const ExpressionInOclImpl & 
 		m_parameterVariable.reset(new Bag<ocl::Expressions::Variable>());
 		
 		
-
-		Bag<ocl::Expressions::Variable>::iterator parameterVariableIter = parameterVariableList->begin();
-		Bag<ocl::Expressions::Variable>::iterator parameterVariableEnd = parameterVariableList->end();
-		while (parameterVariableIter != parameterVariableEnd) 
+		for(const std::shared_ptr<ocl::Expressions::Variable> parameterVariableindexElem: *parameterVariableList) 
 		{
-			std::shared_ptr<ocl::Expressions::Variable> temp = std::dynamic_pointer_cast<ocl::Expressions::Variable>((*parameterVariableIter)->copy());
-			getParameterVariable()->push_back(temp);
-			parameterVariableIter++;
+			std::shared_ptr<ocl::Expressions::Variable> temp = std::dynamic_pointer_cast<ocl::Expressions::Variable>((parameterVariableindexElem)->copy());
+			m_parameterVariable->push_back(temp);
 		}
 	}
 	else
@@ -385,15 +381,7 @@ Any ExpressionInOclImpl::eGet(int featureID, bool resolve, bool coreType) const
 		}
 		case ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_PARAMETERVARIABLE:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<ocl::Expressions::Variable>::iterator iter = getParameterVariable()->begin();
-			Bag<ocl::Expressions::Variable>::iterator end = getParameterVariable()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //2813			
+			return eAnyBag(getParameterVariable(),1173641377); //2813
 		}
 		case ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_RESULTVARIABLE:
 		{
@@ -426,7 +414,7 @@ bool ExpressionInOclImpl::eSet(int featureID, Any newValue)
 	{
 		case ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_BODYEXPRESSION:
 		{
-			// BOOST CAST
+			// CAST Any to ocl::Expressions::OclExpression
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<ocl::Expressions::OclExpression> _bodyExpression = std::dynamic_pointer_cast<ocl::Expressions::OclExpression>(_temp);
 			setBodyExpression(_bodyExpression); //2810
@@ -434,7 +422,7 @@ bool ExpressionInOclImpl::eSet(int featureID, Any newValue)
 		}
 		case ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_CONTEXTVARIABLE:
 		{
-			// BOOST CAST
+			// CAST Any to ocl::Expressions::Variable
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<ocl::Expressions::Variable> _contextVariable = std::dynamic_pointer_cast<ocl::Expressions::Variable>(_temp);
 			setContextVariable(_contextVariable); //2811
@@ -442,43 +430,44 @@ bool ExpressionInOclImpl::eSet(int featureID, Any newValue)
 		}
 		case ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_PARAMETERVARIABLE:
 		{
-			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<ocl::Expressions::Variable>> parameterVariableList(new Bag<ocl::Expressions::Variable>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
-			{
-				parameterVariableList->add(std::dynamic_pointer_cast<ocl::Expressions::Variable>(*iter));
-				iter++;
-			}
-			
-			Bag<ocl::Expressions::Variable>::iterator iterParameterVariable = getParameterVariable()->begin();
-			Bag<ocl::Expressions::Variable>::iterator endParameterVariable = getParameterVariable()->end();
-			while (iterParameterVariable != endParameterVariable)
-			{
-				if (parameterVariableList->find(*iterParameterVariable) == -1)
+			// CAST Any to Bag<ocl::Expressions::Variable>
+			if((newValue->isContainer()) && (ocl::Expressions::ExpressionsPackage::VARIABLE_CLASS ==newValue->getTypeId()))
+			{ 
+				try
 				{
-					getParameterVariable()->erase(*iterParameterVariable);
+					std::shared_ptr<Bag<ocl::Expressions::Variable>> parameterVariableList= newValue->get<std::shared_ptr<Bag<ocl::Expressions::Variable>>>();
+					std::shared_ptr<Bag<ocl::Expressions::Variable>> _parameterVariable=getParameterVariable();
+					for(const std::shared_ptr<ocl::Expressions::Variable> indexParameterVariable: *_parameterVariable)
+					{
+						if (parameterVariableList->find(indexParameterVariable) == -1)
+						{
+							_parameterVariable->erase(indexParameterVariable);
+						}
+					}
+
+					for(const std::shared_ptr<ocl::Expressions::Variable> indexParameterVariable: *parameterVariableList)
+					{
+						if (_parameterVariable->find(indexParameterVariable) == -1)
+						{
+							_parameterVariable->add(indexParameterVariable);
+						}
+					}
 				}
-				iterParameterVariable++;
-			}
- 
-			iterParameterVariable = parameterVariableList->begin();
-			endParameterVariable = parameterVariableList->end();
-			while (iterParameterVariable != endParameterVariable)
-			{
-				if (getParameterVariable()->find(*iterParameterVariable) == -1)
+				catch(...)
 				{
-					getParameterVariable()->add(*iterParameterVariable);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterParameterVariable++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}
 		case ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_RESULTVARIABLE:
 		{
-			// BOOST CAST
+			// CAST Any to ocl::Expressions::Variable
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<ocl::Expressions::Variable> _resultVariable = std::dynamic_pointer_cast<ocl::Expressions::Variable>(_temp);
 			setResultVariable(_resultVariable); //2812

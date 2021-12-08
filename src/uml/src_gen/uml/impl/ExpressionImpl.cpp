@@ -462,9 +462,9 @@ bool ExpressionImpl::eSet(int featureID, Any newValue)
 	{
 		case uml::umlPackage::EXPRESSION_ATTRIBUTE_OPERAND:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::ValueSpecification>
 			if((newValue->isContainer()) && (uml::umlPackage::VALUESPECIFICATION_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::ValueSpecification>> operandList= newValue->get<std::shared_ptr<Bag<uml::ValueSpecification>>>();
@@ -499,7 +499,7 @@ bool ExpressionImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::EXPRESSION_ATTRIBUTE_SYMBOL:
 		{
-			// BOOST CAST
+			// CAST Any to std::string
 			std::string _symbol = newValue->get<std::string>();
 			setSymbol(_symbol); //9516
 			return true;

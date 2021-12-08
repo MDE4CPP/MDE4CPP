@@ -654,9 +654,9 @@ bool ConnectorImpl::eSet(int featureID, Any newValue)
 	{
 		case uml::umlPackage::CONNECTOR_ATTRIBUTE_CONTRACT:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::Behavior>
 			if((newValue->isContainer()) && (uml::umlPackage::BEHAVIOR_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::Behavior>> contractList= newValue->get<std::shared_ptr<Bag<uml::Behavior>>>();
@@ -691,9 +691,9 @@ bool ConnectorImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::CONNECTOR_ATTRIBUTE_END:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::ConnectorEnd>
 			if((newValue->isContainer()) && (uml::umlPackage::CONNECTOREND_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::ConnectorEnd>> endList= newValue->get<std::shared_ptr<Bag<uml::ConnectorEnd>>>();
@@ -728,9 +728,9 @@ bool ConnectorImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::CONNECTOR_ATTRIBUTE_REDEFINEDCONNECTOR:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::Connector>
 			if((newValue->isContainer()) && (uml::umlPackage::CONNECTOR_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::Connector>> redefinedConnectorList= newValue->get<std::shared_ptr<Bag<uml::Connector>>>();
@@ -765,7 +765,7 @@ bool ConnectorImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::CONNECTOR_ATTRIBUTE_STRUCTUREDCLASSIFIER:
 		{
-			// BOOST CAST
+			// CAST Any to uml::StructuredClassifier
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::StructuredClassifier> _structuredClassifier = std::dynamic_pointer_cast<uml::StructuredClassifier>(_temp);
 			setStructuredClassifier(_structuredClassifier); //5319
@@ -773,7 +773,7 @@ bool ConnectorImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::CONNECTOR_ATTRIBUTE_TYPE:
 		{
-			// BOOST CAST
+			// CAST Any to uml::Association
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Association> _type = std::dynamic_pointer_cast<uml::Association>(_temp);
 			setType(_type); //5318

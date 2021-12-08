@@ -650,7 +650,7 @@ bool BehavioredClassifierImpl::eSet(int featureID, Any newValue)
 	{
 		case uml::umlPackage::BEHAVIOREDCLASSIFIER_ATTRIBUTE_CLASSIFIERBEHAVIOR:
 		{
-			// BOOST CAST
+			// CAST Any to uml::Behavior
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Behavior> _classifierBehavior = std::dynamic_pointer_cast<uml::Behavior>(_temp);
 			setClassifierBehavior(_classifierBehavior); //2638
@@ -658,9 +658,9 @@ bool BehavioredClassifierImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::BEHAVIOREDCLASSIFIER_ATTRIBUTE_INTERFACEREALIZATION:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::InterfaceRealization>
 			if((newValue->isContainer()) && (uml::umlPackage::INTERFACEREALIZATION_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::InterfaceRealization>> interfaceRealizationList= newValue->get<std::shared_ptr<Bag<uml::InterfaceRealization>>>();
@@ -695,9 +695,9 @@ bool BehavioredClassifierImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::BEHAVIOREDCLASSIFIER_ATTRIBUTE_OWNEDBEHAVIOR:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::Behavior>
 			if((newValue->isContainer()) && (uml::umlPackage::BEHAVIOR_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::Behavior>> ownedBehaviorList= newValue->get<std::shared_ptr<Bag<uml::Behavior>>>();
@@ -764,14 +764,14 @@ Any BehavioredClassifierImpl::eInvoke(int operationID, std::shared_ptr<std::list
 		case umlPackage::BEHAVIOREDCLASSIFIER_OPERATION_GETALLIMPLEMENTEDINTERFACES:
 		{
 			std::shared_ptr<Bag<uml::Interface> > resultList = this->getAllImplementedInterfaces();
-			return eAny(resultList,umlPackage::INTERFACE_CLASS,true);
+			return eAny(resultList,uml::umlPackage::INTERFACE_CLASS,true);
 			break;
 		}
 		// uml::BehavioredClassifier::getImplementedInterfaces() : uml::Interface[*]: 1944346500
 		case umlPackage::BEHAVIOREDCLASSIFIER_OPERATION_GETIMPLEMENTEDINTERFACES:
 		{
 			std::shared_ptr<Bag<uml::Interface> > resultList = this->getImplementedInterfaces();
-			return eAny(resultList,umlPackage::INTERFACE_CLASS,true);
+			return eAny(resultList,uml::umlPackage::INTERFACE_CLASS,true);
 			break;
 		}
 

@@ -246,8 +246,7 @@ Any UndefinedValueImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>>
 
   	switch(operationID)
 	{
-		
-		// 1032526186
+		// ocl::Values::UndefinedValue::equals(fUML::Semantics::Values::Value) : bool: 1032526186
 		case ValuesPackage::UNDEFINEDVALUE_OPERATION_EQUALS_VALUE:
 		{
 			//Retrieve input parameter 'otherValue'
@@ -255,14 +254,13 @@ Any UndefinedValueImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>>
 			std::shared_ptr<fUML::Semantics::Values::Value> incoming_param_otherValue;
 			std::list<Any>::const_iterator incoming_param_otherValue_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_otherValue = (*incoming_param_otherValue_arguments_citer)->get<std::shared_ptr<fUML::Semantics::Values::Value> >();
-					result = eAny(this->equals(incoming_param_otherValue),0,false);
+			result = eAny(this->equals(incoming_param_otherValue),0,false);
 			break;
 		}
-		
-		// 1847553997
+		// ocl::Values::UndefinedValue::toString() : std::string: 1847553997
 		case ValuesPackage::UNDEFINEDVALUE_OPERATION_TOSTRING:
 		{
-					result = eAny(this->toString(),0,false);
+			result = eAny(this->toString(),0,false);
 			break;
 		}
 

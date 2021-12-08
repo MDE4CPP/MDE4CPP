@@ -441,9 +441,9 @@ bool ConnectionPointReferenceImpl::eSet(int featureID, Any newValue)
 	{
 		case uml::umlPackage::CONNECTIONPOINTREFERENCE_ATTRIBUTE_ENTRY:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::Pseudostate>
 			if((newValue->isContainer()) && (uml::umlPackage::PSEUDOSTATE_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::Pseudostate>> entryList= newValue->get<std::shared_ptr<Bag<uml::Pseudostate>>>();
@@ -478,9 +478,9 @@ bool ConnectionPointReferenceImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::CONNECTIONPOINTREFERENCE_ATTRIBUTE_EXIT:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::Pseudostate>
 			if((newValue->isContainer()) && (uml::umlPackage::PSEUDOSTATE_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::Pseudostate>> exitList= newValue->get<std::shared_ptr<Bag<uml::Pseudostate>>>();
@@ -515,7 +515,7 @@ bool ConnectionPointReferenceImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::CONNECTIONPOINTREFERENCE_ATTRIBUTE_STATE:
 		{
-			// BOOST CAST
+			// CAST Any to uml::State
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::State> _state = std::dynamic_pointer_cast<uml::State>(_temp);
 			setState(_state); //5214

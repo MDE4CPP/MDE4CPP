@@ -252,11 +252,10 @@ Any LiteralStringEvaluationImpl::eInvoke(int operationID, std::shared_ptr<std::l
 
   	switch(operationID)
 	{
-		
-		// 970736967
+		// fUML::Semantics::Values::LiteralStringEvaluation::evaluate() : fUML::Semantics::Values::Value: 970736967
 		case ValuesPackage::LITERALSTRINGEVALUATION_OPERATION_EVALUATE:
 		{
-				result = eAny(this->evaluate());
+			result = eAny(this->evaluate(), fUML::Semantics::Values::ValuesPackage::VALUE_CLASS,false);
 			break;
 		}
 

@@ -472,7 +472,7 @@ bool SubstitutionImpl::eSet(int featureID, Any newValue)
 	{
 		case uml::umlPackage::SUBSTITUTION_ATTRIBUTE_CONTRACT:
 		{
-			// BOOST CAST
+			// CAST Any to uml::Classifier
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Classifier> _contract = std::dynamic_pointer_cast<uml::Classifier>(_temp);
 			setContract(_contract); //22918
@@ -480,7 +480,7 @@ bool SubstitutionImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::SUBSTITUTION_ATTRIBUTE_SUBSTITUTINGCLASSIFIER:
 		{
-			// BOOST CAST
+			// CAST Any to uml::Classifier
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Classifier> _substitutingClassifier = std::dynamic_pointer_cast<uml::Classifier>(_temp);
 			setSubstitutingClassifier(_substitutingClassifier); //22919

@@ -318,15 +318,7 @@ Any CollectionValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 	{
 		case ocl::Values::ValuesPackage::COLLECTIONVALUE_ATTRIBUTE_ELEMENTS:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<ocl::Values::Element>::iterator iter = getElements()->begin();
-			Bag<ocl::Values::Element>::iterator end = getElements()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //220			
+			return eAnyBag(getElements(),1129659260); //220
 		}
 	}
 	return StaticValueImpl::eGet(featureID, resolve, coreType);
@@ -348,37 +340,38 @@ bool CollectionValueImpl::eSet(int featureID, Any newValue)
 	{
 		case ocl::Values::ValuesPackage::COLLECTIONVALUE_ATTRIBUTE_ELEMENTS:
 		{
-			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<ocl::Values::Element>> elementsList(new Bag<ocl::Values::Element>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
-			{
-				elementsList->add(std::dynamic_pointer_cast<ocl::Values::Element>(*iter));
-				iter++;
-			}
-			
-			Bag<ocl::Values::Element>::iterator iterElements = getElements()->begin();
-			Bag<ocl::Values::Element>::iterator endElements = getElements()->end();
-			while (iterElements != endElements)
-			{
-				if (elementsList->find(*iterElements) == -1)
+			// CAST Any to Bag<ocl::Values::Element>
+			if((newValue->isContainer()) && (ocl::Values::ValuesPackage::ELEMENT_CLASS ==newValue->getTypeId()))
+			{ 
+				try
 				{
-					getElements()->erase(*iterElements);
+					std::shared_ptr<Bag<ocl::Values::Element>> elementsList= newValue->get<std::shared_ptr<Bag<ocl::Values::Element>>>();
+					std::shared_ptr<Bag<ocl::Values::Element>> _elements=getElements();
+					for(const std::shared_ptr<ocl::Values::Element> indexElements: *_elements)
+					{
+						if (elementsList->find(indexElements) == -1)
+						{
+							_elements->erase(indexElements);
+						}
+					}
+
+					for(const std::shared_ptr<ocl::Values::Element> indexElements: *elementsList)
+					{
+						if (_elements->find(indexElements) == -1)
+						{
+							_elements->add(indexElements);
+						}
+					}
 				}
-				iterElements++;
-			}
- 
-			iterElements = elementsList->begin();
-			endElements = elementsList->end();
-			while (iterElements != endElements)
-			{
-				if (getElements()->find(*iterElements) == -1)
+				catch(...)
 				{
-					getElements()->add(*iterElements);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterElements++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}
@@ -396,8 +389,7 @@ Any CollectionValueImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>
 
   	switch(operationID)
 	{
-		
-		// 1275818346
+		// ocl::Values::CollectionValue::addValue(fUML::Semantics::Values::Value) : bool: 1275818346
 		case ValuesPackage::COLLECTIONVALUE_OPERATION_ADDVALUE_VALUE:
 		{
 			//Retrieve input parameter 'value'
@@ -405,11 +397,10 @@ Any CollectionValueImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>
 			std::shared_ptr<fUML::Semantics::Values::Value> incoming_param_value;
 			std::list<Any>::const_iterator incoming_param_value_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_value = (*incoming_param_value_arguments_citer)->get<std::shared_ptr<fUML::Semantics::Values::Value> >();
-					result = eAny(this->addValue(incoming_param_value),0,false);
+			result = eAny(this->addValue(incoming_param_value),0,false);
 			break;
 		}
-		
-		// 2069036065
+		// ocl::Values::CollectionValue::equals(fUML::Semantics::Values::Value) : bool: 2069036065
 		case ValuesPackage::COLLECTIONVALUE_OPERATION_EQUALS_VALUE:
 		{
 			//Retrieve input parameter 'otherValue'
@@ -417,11 +408,10 @@ Any CollectionValueImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>
 			std::shared_ptr<fUML::Semantics::Values::Value> incoming_param_otherValue;
 			std::list<Any>::const_iterator incoming_param_otherValue_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_otherValue = (*incoming_param_otherValue_arguments_citer)->get<std::shared_ptr<fUML::Semantics::Values::Value> >();
-					result = eAny(this->equals(incoming_param_otherValue),0,false);
+			result = eAny(this->equals(incoming_param_otherValue),0,false);
 			break;
 		}
-		
-		// 1127442822
+		// ocl::Values::CollectionValue::find(fUML::Semantics::Values::Value) : bool: 1127442822
 		case ValuesPackage::COLLECTIONVALUE_OPERATION_FIND_VALUE:
 		{
 			//Retrieve input parameter 'value'
@@ -429,14 +419,13 @@ Any CollectionValueImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>
 			std::shared_ptr<fUML::Semantics::Values::Value> incoming_param_value;
 			std::list<Any>::const_iterator incoming_param_value_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_value = (*incoming_param_value_arguments_citer)->get<std::shared_ptr<fUML::Semantics::Values::Value> >();
-					result = eAny(this->find(incoming_param_value),0,false);
+			result = eAny(this->find(incoming_param_value),0,false);
 			break;
 		}
-		
-		// 168353461
+		// ocl::Values::CollectionValue::toString() : std::string: 168353461
 		case ValuesPackage::COLLECTIONVALUE_OPERATION_TOSTRING:
 		{
-					result = eAny(this->toString(),0,false);
+			result = eAny(this->toString(),0,false);
 			break;
 		}
 

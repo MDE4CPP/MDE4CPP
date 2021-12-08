@@ -558,7 +558,7 @@ bool ReplyActionImpl::eSet(int featureID, Any newValue)
 	{
 		case uml::umlPackage::REPLYACTION_ATTRIBUTE_REPLYTOCALL:
 		{
-			// BOOST CAST
+			// CAST Any to uml::Trigger
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Trigger> _replyToCall = std::dynamic_pointer_cast<uml::Trigger>(_temp);
 			setReplyToCall(_replyToCall); //21127
@@ -566,9 +566,9 @@ bool ReplyActionImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::REPLYACTION_ATTRIBUTE_REPLYVALUE:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::InputPin>
 			if((newValue->isContainer()) && (uml::umlPackage::INPUTPIN_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::InputPin>> replyValueList= newValue->get<std::shared_ptr<Bag<uml::InputPin>>>();
@@ -603,7 +603,7 @@ bool ReplyActionImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::REPLYACTION_ATTRIBUTE_RETURNINFORMATION:
 		{
-			// BOOST CAST
+			// CAST Any to uml::InputPin
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::InputPin> _returnInformation = std::dynamic_pointer_cast<uml::InputPin>(_temp);
 			setReturnInformation(_returnInformation); //21129

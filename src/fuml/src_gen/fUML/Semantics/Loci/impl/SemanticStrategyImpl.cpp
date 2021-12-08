@@ -219,11 +219,10 @@ Any SemanticStrategyImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any
 
   	switch(operationID)
 	{
-		
-		// 1330583593
+		// fUML::Semantics::Loci::SemanticStrategy::getName() : std::string: 1330583593
 		case LociPackage::SEMANTICSTRATEGY_OPERATION_GETNAME:
 		{
-					result = eAny(this->getName(),0,false);
+			result = eAny(this->getName(),0,false);
 			break;
 		}
 

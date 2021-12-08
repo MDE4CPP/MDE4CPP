@@ -471,7 +471,7 @@ bool AddVariableValueActionImpl::eSet(int featureID, Any newValue)
 	{
 		case uml::umlPackage::ADDVARIABLEVALUEACTION_ATTRIBUTE_INSERTAT:
 		{
-			// BOOST CAST
+			// CAST Any to uml::InputPin
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::InputPin> _insertAt = std::dynamic_pointer_cast<uml::InputPin>(_temp);
 			setInsertAt(_insertAt); //1629
@@ -479,7 +479,7 @@ bool AddVariableValueActionImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::ADDVARIABLEVALUEACTION_ATTRIBUTE_ISREPLACEALL:
 		{
-			// BOOST CAST
+			// CAST Any to bool
 			bool _isReplaceAll = newValue->get<bool>();
 			setIsReplaceAll(_isReplaceAll); //1630
 			return true;

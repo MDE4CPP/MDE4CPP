@@ -33,9 +33,9 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
+#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "fUML/Semantics/Values/ValuesFactory.hpp"
 #include "uml/umlFactory.hpp"
-#include "fUML/Semantics/Loci/LociFactory.hpp"
 
 #include "fUML/Semantics/Values/Evaluation.hpp"
 #include "fUML/Semantics/Loci/Locus.hpp"
@@ -279,7 +279,7 @@ bool CollectionLiteralPartEvalImpl::eSet(int featureID, Any newValue)
 	{
 		case ocl::Evaluations::EvaluationsPackage::COLLECTIONLITERALPARTEVAL_ATTRIBUTE_ELEMENT:
 		{
-			// BOOST CAST
+			// CAST Any to fUML::Semantics::Values::Value
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<fUML::Semantics::Values::Value> _element = std::dynamic_pointer_cast<fUML::Semantics::Values::Value>(_temp);
 			setElement(_element); //182

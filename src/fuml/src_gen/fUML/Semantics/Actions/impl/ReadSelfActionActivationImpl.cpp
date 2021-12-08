@@ -384,7 +384,7 @@ bool ReadSelfActionActivationImpl::eSet(int featureID, Any newValue)
 	{
 		case fUML::Semantics::Actions::ActionsPackage::READSELFACTIONACTIVATION_ATTRIBUTE_READSELFACTION:
 		{
-			// BOOST CAST
+			// CAST Any to uml::ReadSelfAction
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::ReadSelfAction> _readSelfAction = std::dynamic_pointer_cast<uml::ReadSelfAction>(_temp);
 			setReadSelfAction(_readSelfAction); //9311
@@ -404,12 +404,10 @@ Any ReadSelfActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::
 
   	switch(operationID)
 	{
-		
-		// 43961115
+		// fUML::Semantics::Actions::ReadSelfActionActivation::doAction(): 43961115
 		case ActionsPackage::READSELFACTIONACTIVATION_OPERATION_DOACTION:
 		{
 			this->doAction();
-			break;
 		}
 
 		default:

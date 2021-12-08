@@ -442,14 +442,14 @@ bool JoinNodeImpl::eSet(int featureID, Any newValue)
 	{
 		case uml::umlPackage::JOINNODE_ATTRIBUTE_ISCOMBINEDUPLICATE:
 		{
-			// BOOST CAST
+			// CAST Any to bool
 			bool _isCombineDuplicate = newValue->get<bool>();
 			setIsCombineDuplicate(_isCombineDuplicate); //13120
 			return true;
 		}
 		case uml::umlPackage::JOINNODE_ATTRIBUTE_JOINSPEC:
 		{
-			// BOOST CAST
+			// CAST Any to uml::ValueSpecification
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::ValueSpecification> _joinSpec = std::dynamic_pointer_cast<uml::ValueSpecification>(_temp);
 			setJoinSpec(_joinSpec); //13121

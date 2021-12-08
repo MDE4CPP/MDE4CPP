@@ -557,16 +557,16 @@ bool ReclassifyObjectActionImpl::eSet(int featureID, Any newValue)
 	{
 		case uml::umlPackage::RECLASSIFYOBJECTACTION_ATTRIBUTE_ISREPLACEALL:
 		{
-			// BOOST CAST
+			// CAST Any to bool
 			bool _isReplaceAll = newValue->get<bool>();
 			setIsReplaceAll(_isReplaceAll); //20327
 			return true;
 		}
 		case uml::umlPackage::RECLASSIFYOBJECTACTION_ATTRIBUTE_NEWCLASSIFIER:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::Classifier>
 			if((newValue->isContainer()) && (uml::umlPackage::CLASSIFIER_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::Classifier>> newClassifierList= newValue->get<std::shared_ptr<Bag<uml::Classifier>>>();
@@ -601,7 +601,7 @@ bool ReclassifyObjectActionImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::RECLASSIFYOBJECTACTION_ATTRIBUTE_OBJECT:
 		{
-			// BOOST CAST
+			// CAST Any to uml::InputPin
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::InputPin> _object = std::dynamic_pointer_cast<uml::InputPin>(_temp);
 			setObject(_object); //20329
@@ -609,9 +609,9 @@ bool ReclassifyObjectActionImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::RECLASSIFYOBJECTACTION_ATTRIBUTE_OLDCLASSIFIER:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::Classifier>
 			if((newValue->isContainer()) && (uml::umlPackage::CLASSIFIER_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::Classifier>> oldClassifierList= newValue->get<std::shared_ptr<Bag<uml::Classifier>>>();

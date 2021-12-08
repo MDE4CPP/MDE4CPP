@@ -420,7 +420,7 @@ bool WriteVariableActionImpl::eSet(int featureID, Any newValue)
 	{
 		case uml::umlPackage::WRITEVARIABLEACTION_ATTRIBUTE_VALUE:
 		{
-			// BOOST CAST
+			// CAST Any to uml::InputPin
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::InputPin> _value = std::dynamic_pointer_cast<uml::InputPin>(_temp);
 			setValue(_value); //25828

@@ -694,23 +694,23 @@ bool BehavioralFeatureImpl::eSet(int featureID, Any newValue)
 	{
 		case uml::umlPackage::BEHAVIORALFEATURE_ATTRIBUTE_CONCURRENCY:
 		{
-			// BOOST CAST
+			// CAST Any to uml::CallConcurrencyKind
 			uml::CallConcurrencyKind _concurrency = newValue->get<uml::CallConcurrencyKind>();
 			setConcurrency(_concurrency); //2520
 			return true;
 		}
 		case uml::umlPackage::BEHAVIORALFEATURE_ATTRIBUTE_ISABSTRACT:
 		{
-			// BOOST CAST
+			// CAST Any to bool
 			bool _isAbstract = newValue->get<bool>();
 			setIsAbstract(_isAbstract); //2521
 			return true;
 		}
 		case uml::umlPackage::BEHAVIORALFEATURE_ATTRIBUTE_METHOD:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::Behavior>
 			if((newValue->isContainer()) && (uml::umlPackage::BEHAVIOR_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::Behavior>> methodList= newValue->get<std::shared_ptr<Bag<uml::Behavior>>>();
@@ -745,9 +745,9 @@ bool BehavioralFeatureImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::BEHAVIORALFEATURE_ATTRIBUTE_OWNEDPARAMETER:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::Parameter>
 			if((newValue->isContainer()) && (uml::umlPackage::PARAMETER_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::Parameter>> ownedParameterList= newValue->get<std::shared_ptr<Bag<uml::Parameter>>>();
@@ -782,9 +782,9 @@ bool BehavioralFeatureImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::BEHAVIORALFEATURE_ATTRIBUTE_OWNEDPARAMETERSET:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::ParameterSet>
 			if((newValue->isContainer()) && (uml::umlPackage::PARAMETERSET_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::ParameterSet>> ownedParameterSetList= newValue->get<std::shared_ptr<Bag<uml::ParameterSet>>>();
@@ -819,9 +819,9 @@ bool BehavioralFeatureImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::BEHAVIORALFEATURE_ATTRIBUTE_RAISEDEXCEPTION:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::Type>
 			if((newValue->isContainer()) && (uml::umlPackage::TYPE_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::Type>> raisedExceptionList= newValue->get<std::shared_ptr<Bag<uml::Type>>>();
@@ -904,21 +904,21 @@ Any BehavioralFeatureImpl::eInvoke(int operationID, std::shared_ptr<std::list<An
 			std::shared_ptr<uml::Type> incoming_param_type;
 			std::list<Any>::const_iterator incoming_param_type_arguments_citer = std::next(arguments->begin(), 1);
 			incoming_param_type = (*incoming_param_type_arguments_citer)->get<std::shared_ptr<uml::Type> >();
-			result = eAny(this->createReturnResult(incoming_param_name,incoming_param_type), umlPackage::PARAMETER_CLASS,false);
+			result = eAny(this->createReturnResult(incoming_param_name,incoming_param_type), uml::umlPackage::PARAMETER_CLASS,false);
 			break;
 		}
 		// uml::BehavioralFeature::inputParameters() : uml::Parameter[*]: 1757399347
 		case umlPackage::BEHAVIORALFEATURE_OPERATION_INPUTPARAMETERS:
 		{
 			std::shared_ptr<Bag<uml::Parameter> > resultList = this->inputParameters();
-			return eAny(resultList,umlPackage::PARAMETER_CLASS,true);
+			return eAny(resultList,uml::umlPackage::PARAMETER_CLASS,true);
 			break;
 		}
 		// uml::BehavioralFeature::outputParameters() : uml::Parameter[*]: 370844008
 		case umlPackage::BEHAVIORALFEATURE_OPERATION_OUTPUTPARAMETERS:
 		{
 			std::shared_ptr<Bag<uml::Parameter> > resultList = this->outputParameters();
-			return eAny(resultList,umlPackage::PARAMETER_CLASS,true);
+			return eAny(resultList,uml::umlPackage::PARAMETER_CLASS,true);
 			break;
 		}
 

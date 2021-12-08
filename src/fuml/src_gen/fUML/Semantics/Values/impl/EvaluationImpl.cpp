@@ -310,7 +310,7 @@ bool EvaluationImpl::eSet(int featureID, Any newValue)
 	{
 		case fUML::Semantics::Values::ValuesPackage::EVALUATION_ATTRIBUTE_LOCUS:
 		{
-			// BOOST CAST
+			// CAST Any to fUML::Semantics::Loci::Locus
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<fUML::Semantics::Loci::Locus> _locus = std::dynamic_pointer_cast<fUML::Semantics::Loci::Locus>(_temp);
 			setLocus(_locus); //421
@@ -318,7 +318,7 @@ bool EvaluationImpl::eSet(int featureID, Any newValue)
 		}
 		case fUML::Semantics::Values::ValuesPackage::EVALUATION_ATTRIBUTE_SPECIFICATION:
 		{
-			// BOOST CAST
+			// CAST Any to uml::ValueSpecification
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::ValueSpecification> _specification = std::dynamic_pointer_cast<uml::ValueSpecification>(_temp);
 			setSpecification(_specification); //420
@@ -338,11 +338,10 @@ Any EvaluationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arg
 
   	switch(operationID)
 	{
-		
-		// 1899572768
+		// fUML::Semantics::Values::Evaluation::evaluate() : fUML::Semantics::Values::Value: 1899572768
 		case ValuesPackage::EVALUATION_OPERATION_EVALUATE:
 		{
-				result = eAny(this->evaluate());
+			result = eAny(this->evaluate(), fUML::Semantics::Values::ValuesPackage::VALUE_CLASS,false);
 			break;
 		}
 

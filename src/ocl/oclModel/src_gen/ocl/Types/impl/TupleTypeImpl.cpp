@@ -310,15 +310,7 @@ Any TupleTypeImpl::eGet(int featureID, bool resolve, bool coreType) const
 		}
 		case ocl::Types::TypesPackage::TUPLETYPE_ATTRIBUTE_PARTS:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<ocl::Types::NameTypeBinding>::iterator iter = getParts()->begin();
-			Bag<ocl::Types::NameTypeBinding>::iterator end = getParts()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //8910			
+			return eAnyBag(getParts(),238682409); //8910
 		}
 	}
 	return ecore::EDataTypeImpl::eGet(featureID, resolve, coreType);
@@ -342,7 +334,7 @@ bool TupleTypeImpl::eSet(int featureID, Any newValue)
 	{
 		case ocl::Types::TypesPackage::TUPLETYPE_ATTRIBUTE_INSTANCE:
 		{
-			// BOOST CAST
+			// CAST Any to ocl::Values::TupleValue
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<ocl::Values::TupleValue> _instance = std::dynamic_pointer_cast<ocl::Values::TupleValue>(_temp);
 			setInstance(_instance); //899
@@ -350,37 +342,38 @@ bool TupleTypeImpl::eSet(int featureID, Any newValue)
 		}
 		case ocl::Types::TypesPackage::TUPLETYPE_ATTRIBUTE_PARTS:
 		{
-			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<ocl::Types::NameTypeBinding>> partsList(new Bag<ocl::Types::NameTypeBinding>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
-			{
-				partsList->add(std::dynamic_pointer_cast<ocl::Types::NameTypeBinding>(*iter));
-				iter++;
-			}
-			
-			Bag<ocl::Types::NameTypeBinding>::iterator iterParts = getParts()->begin();
-			Bag<ocl::Types::NameTypeBinding>::iterator endParts = getParts()->end();
-			while (iterParts != endParts)
-			{
-				if (partsList->find(*iterParts) == -1)
+			// CAST Any to Bag<ocl::Types::NameTypeBinding>
+			if((newValue->isContainer()) && (ocl::Types::TypesPackage::NAMETYPEBINDING_CLASS ==newValue->getTypeId()))
+			{ 
+				try
 				{
-					getParts()->erase(*iterParts);
+					std::shared_ptr<Bag<ocl::Types::NameTypeBinding>> partsList= newValue->get<std::shared_ptr<Bag<ocl::Types::NameTypeBinding>>>();
+					std::shared_ptr<Bag<ocl::Types::NameTypeBinding>> _parts=getParts();
+					for(const std::shared_ptr<ocl::Types::NameTypeBinding> indexParts: *_parts)
+					{
+						if (partsList->find(indexParts) == -1)
+						{
+							_parts->erase(indexParts);
+						}
+					}
+
+					for(const std::shared_ptr<ocl::Types::NameTypeBinding> indexParts: *partsList)
+					{
+						if (_parts->find(indexParts) == -1)
+						{
+							_parts->add(indexParts);
+						}
+					}
 				}
-				iterParts++;
-			}
- 
-			iterParts = partsList->begin();
-			endParts = partsList->end();
-			while (iterParts != endParts)
-			{
-				if (getParts()->find(*iterParts) == -1)
+				catch(...)
 				{
-					getParts()->add(*iterParts);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterParts++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}

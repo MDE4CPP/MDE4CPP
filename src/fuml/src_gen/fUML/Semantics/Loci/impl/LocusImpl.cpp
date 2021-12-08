@@ -127,14 +127,10 @@ LocusImpl& LocusImpl::operator=(const LocusImpl & obj)
 		m_extensionalValues.reset(new Bag<fUML::Semantics::StructuredClassifiers::ExtensionalValue>());
 		
 		
-
-		Bag<fUML::Semantics::StructuredClassifiers::ExtensionalValue>::iterator extensionalValuesIter = extensionalValuesList->begin();
-		Bag<fUML::Semantics::StructuredClassifiers::ExtensionalValue>::iterator extensionalValuesEnd = extensionalValuesList->end();
-		while (extensionalValuesIter != extensionalValuesEnd) 
+		for(const std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue> extensionalValuesindexElem: *extensionalValuesList) 
 		{
-			std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue> temp = std::dynamic_pointer_cast<fUML::Semantics::StructuredClassifiers::ExtensionalValue>((*extensionalValuesIter)->copy());
-			getExtensionalValues()->push_back(temp);
-			extensionalValuesIter++;
+			std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue> temp = std::dynamic_pointer_cast<fUML::Semantics::StructuredClassifiers::ExtensionalValue>((extensionalValuesindexElem)->copy());
+			m_extensionalValues->push_back(temp);
 		}
 	}
 	else
@@ -464,15 +460,7 @@ Any LocusImpl::eGet(int featureID, bool resolve, bool coreType) const
 		}
 		case fUML::Semantics::Loci::LociPackage::LOCUS_ATTRIBUTE_EXTENSIONALVALUES:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<fUML::Semantics::StructuredClassifiers::ExtensionalValue>::iterator iter = getExtensionalValues()->begin();
-			Bag<fUML::Semantics::StructuredClassifiers::ExtensionalValue>::iterator end = getExtensionalValues()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //772			
+			return eAnyBag(getExtensionalValues(),1972653315); //772
 		}
 		case fUML::Semantics::Loci::LociPackage::LOCUS_ATTRIBUTE_FACTORY:
 		{
@@ -503,7 +491,7 @@ bool LocusImpl::eSet(int featureID, Any newValue)
 	{
 		case fUML::Semantics::Loci::LociPackage::LOCUS_ATTRIBUTE_EXECUTOR:
 		{
-			// BOOST CAST
+			// CAST Any to fUML::Semantics::Loci::Executor
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<fUML::Semantics::Loci::Executor> _executor = std::dynamic_pointer_cast<fUML::Semantics::Loci::Executor>(_temp);
 			setExecutor(_executor); //770
@@ -511,43 +499,44 @@ bool LocusImpl::eSet(int featureID, Any newValue)
 		}
 		case fUML::Semantics::Loci::LociPackage::LOCUS_ATTRIBUTE_EXTENSIONALVALUES:
 		{
-			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::ExtensionalValue>> extensionalValuesList(new Bag<fUML::Semantics::StructuredClassifiers::ExtensionalValue>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
-			{
-				extensionalValuesList->add(std::dynamic_pointer_cast<fUML::Semantics::StructuredClassifiers::ExtensionalValue>(*iter));
-				iter++;
-			}
-			
-			Bag<fUML::Semantics::StructuredClassifiers::ExtensionalValue>::iterator iterExtensionalValues = getExtensionalValues()->begin();
-			Bag<fUML::Semantics::StructuredClassifiers::ExtensionalValue>::iterator endExtensionalValues = getExtensionalValues()->end();
-			while (iterExtensionalValues != endExtensionalValues)
-			{
-				if (extensionalValuesList->find(*iterExtensionalValues) == -1)
+			// CAST Any to Bag<fUML::Semantics::StructuredClassifiers::ExtensionalValue>
+			if((newValue->isContainer()) && (fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::EXTENSIONALVALUE_CLASS ==newValue->getTypeId()))
+			{ 
+				try
 				{
-					getExtensionalValues()->erase(*iterExtensionalValues);
+					std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::ExtensionalValue>> extensionalValuesList= newValue->get<std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::ExtensionalValue>>>();
+					std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::ExtensionalValue>> _extensionalValues=getExtensionalValues();
+					for(const std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue> indexExtensionalValues: *_extensionalValues)
+					{
+						if (extensionalValuesList->find(indexExtensionalValues) == -1)
+						{
+							_extensionalValues->erase(indexExtensionalValues);
+						}
+					}
+
+					for(const std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue> indexExtensionalValues: *extensionalValuesList)
+					{
+						if (_extensionalValues->find(indexExtensionalValues) == -1)
+						{
+							_extensionalValues->add(indexExtensionalValues);
+						}
+					}
 				}
-				iterExtensionalValues++;
-			}
- 
-			iterExtensionalValues = extensionalValuesList->begin();
-			endExtensionalValues = extensionalValuesList->end();
-			while (iterExtensionalValues != endExtensionalValues)
-			{
-				if (getExtensionalValues()->find(*iterExtensionalValues) == -1)
+				catch(...)
 				{
-					getExtensionalValues()->add(*iterExtensionalValues);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterExtensionalValues++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}
 		case fUML::Semantics::Loci::LociPackage::LOCUS_ATTRIBUTE_FACTORY:
 		{
-			// BOOST CAST
+			// CAST Any to fUML::Semantics::Loci::ExecutionFactory
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<fUML::Semantics::Loci::ExecutionFactory> _factory = std::dynamic_pointer_cast<fUML::Semantics::Loci::ExecutionFactory>(_temp);
 			setFactory(_factory); //771
@@ -567,8 +556,7 @@ Any LocusImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argument
 
   	switch(operationID)
 	{
-		
-		// 433913546
+		// fUML::Semantics::Loci::Locus::add(fUML::Semantics::StructuredClassifiers::ExtensionalValue): 433913546
 		case LociPackage::LOCUS_OPERATION_ADD_EXTENSIONALVALUE:
 		{
 			//Retrieve input parameter 'value'
@@ -577,10 +565,8 @@ Any LocusImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argument
 			std::list<Any>::const_iterator incoming_param_value_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_value = (*incoming_param_value_arguments_citer)->get<std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue> >();
 			this->add(incoming_param_value);
-			break;
 		}
-		
-		// 1235487051
+		// fUML::Semantics::Loci::Locus::assignExecutor(fUML::Semantics::Loci::Executor): 1235487051
 		case LociPackage::LOCUS_OPERATION_ASSIGNEXECUTOR_EXECUTOR:
 		{
 			//Retrieve input parameter 'executor'
@@ -589,10 +575,8 @@ Any LocusImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argument
 			std::list<Any>::const_iterator incoming_param_executor_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_executor = (*incoming_param_executor_arguments_citer)->get<std::shared_ptr<fUML::Semantics::Loci::Executor> >();
 			this->assignExecutor(incoming_param_executor);
-			break;
 		}
-		
-		// 361443955
+		// fUML::Semantics::Loci::Locus::assignFactory(fUML::Semantics::Loci::ExecutionFactory): 361443955
 		case LociPackage::LOCUS_OPERATION_ASSIGNFACTORY_EXECUTIONFACTORY:
 		{
 			//Retrieve input parameter 'factory'
@@ -601,10 +585,8 @@ Any LocusImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argument
 			std::list<Any>::const_iterator incoming_param_factory_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_factory = (*incoming_param_factory_arguments_citer)->get<std::shared_ptr<fUML::Semantics::Loci::ExecutionFactory> >();
 			this->assignFactory(incoming_param_factory);
-			break;
 		}
-		
-		// 1626464999
+		// fUML::Semantics::Loci::Locus::conforms(uml::Classifier, uml::Classifier) : bool: 1626464999
 		case LociPackage::LOCUS_OPERATION_CONFORMS_CLASSIFIER_CLASSIFIER:
 		{
 			//Retrieve input parameter 'type'
@@ -617,11 +599,10 @@ Any LocusImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argument
 			std::shared_ptr<uml::Classifier> incoming_param_classifier;
 			std::list<Any>::const_iterator incoming_param_classifier_arguments_citer = std::next(arguments->begin(), 1);
 			incoming_param_classifier = (*incoming_param_classifier_arguments_citer)->get<std::shared_ptr<uml::Classifier> >();
-					result = eAny(this->conforms(incoming_param_type,incoming_param_classifier),0,false);
+			result = eAny(this->conforms(incoming_param_type,incoming_param_classifier),0,false);
 			break;
 		}
-		
-		// 1875707887
+		// fUML::Semantics::Loci::Locus::instantiate(uml::Class) : fUML::Semantics::StructuredClassifiers::Object: 1875707887
 		case LociPackage::LOCUS_OPERATION_INSTANTIATE_CLASS:
 		{
 			//Retrieve input parameter 'type'
@@ -629,11 +610,10 @@ Any LocusImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argument
 			std::shared_ptr<uml::Class> incoming_param_type;
 			std::list<Any>::const_iterator incoming_param_type_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_type = (*incoming_param_type_arguments_citer)->get<std::shared_ptr<uml::Class> >();
-				result = eAny(this->instantiate(incoming_param_type));
+			result = eAny(this->instantiate(incoming_param_type), fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::OBJECT_CLASS,false);
 			break;
 		}
-		
-		// 32081076
+		// fUML::Semantics::Loci::Locus::remove(fUML::Semantics::StructuredClassifiers::ExtensionalValue): 32081076
 		case LociPackage::LOCUS_OPERATION_REMOVE_EXTENSIONALVALUE:
 		{
 			//Retrieve input parameter 'value'
@@ -642,10 +622,8 @@ Any LocusImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argument
 			std::list<Any>::const_iterator incoming_param_value_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_value = (*incoming_param_value_arguments_citer)->get<std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue> >();
 			this->remove(incoming_param_value);
-			break;
 		}
-		
-		// 673387949
+		// fUML::Semantics::Loci::Locus::retrieveExtent(uml::Classifier) : fUML::Semantics::StructuredClassifiers::ExtensionalValue[*]: 673387949
 		case LociPackage::LOCUS_OPERATION_RETRIEVEEXTENT_CLASSIFIER:
 		{
 			//Retrieve input parameter 'classifier'
@@ -653,7 +631,8 @@ Any LocusImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argument
 			std::shared_ptr<uml::Classifier> incoming_param_classifier;
 			std::list<Any>::const_iterator incoming_param_classifier_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_classifier = (*incoming_param_classifier_arguments_citer)->get<std::shared_ptr<uml::Classifier> >();
-				result = eAny(this->retrieveExtent(incoming_param_classifier));
+			std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::ExtensionalValue> > resultList = this->retrieveExtent(incoming_param_classifier);
+			return eAny(resultList,fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::EXTENSIONALVALUE_CLASS,true);
 			break;
 		}
 

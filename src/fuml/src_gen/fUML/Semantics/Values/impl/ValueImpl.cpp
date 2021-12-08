@@ -330,15 +330,13 @@ Any ValueImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argument
 
   	switch(operationID)
 	{
-		
-		// 569532635
+		// fUML::Semantics::Values::Value::_copy() : fUML::Semantics::Values::Value: 569532635
 		case ValuesPackage::VALUE_OPERATION__COPY:
 		{
-				result = eAny(this->_copy());
+			result = eAny(this->_copy(), fUML::Semantics::Values::ValuesPackage::VALUE_CLASS,false);
 			break;
 		}
-		
-		// 1176194197
+		// fUML::Semantics::Values::Value::checkAllParents(uml::Classifier, uml::Classifier) : bool: 1176194197
 		case ValuesPackage::VALUE_OPERATION_CHECKALLPARENTS_CLASSIFIER_CLASSIFIER:
 		{
 			//Retrieve input parameter 'type'
@@ -351,11 +349,10 @@ Any ValueImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argument
 			std::shared_ptr<uml::Classifier> incoming_param_classifier;
 			std::list<Any>::const_iterator incoming_param_classifier_arguments_citer = std::next(arguments->begin(), 1);
 			incoming_param_classifier = (*incoming_param_classifier_arguments_citer)->get<std::shared_ptr<uml::Classifier> >();
-					result = eAny(this->checkAllParents(incoming_param_type,incoming_param_classifier),0,false);
+			result = eAny(this->checkAllParents(incoming_param_type,incoming_param_classifier),0,false);
 			break;
 		}
-		
-		// 1153535893
+		// fUML::Semantics::Values::Value::equals(fUML::Semantics::Values::Value) : bool: 1153535893
 		case ValuesPackage::VALUE_OPERATION_EQUALS_VALUE:
 		{
 			//Retrieve input parameter 'otherValue'
@@ -363,18 +360,17 @@ Any ValueImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argument
 			std::shared_ptr<fUML::Semantics::Values::Value> incoming_param_otherValue;
 			std::list<Any>::const_iterator incoming_param_otherValue_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_otherValue = (*incoming_param_otherValue_arguments_citer)->get<std::shared_ptr<fUML::Semantics::Values::Value> >();
-					result = eAny(this->equals(incoming_param_otherValue),0,false);
+			result = eAny(this->equals(incoming_param_otherValue),0,false);
 			break;
 		}
-		
-		// 53656869
+		// fUML::Semantics::Values::Value::getTypes() : uml::Classifier[*] {const}: 53656869
 		case ValuesPackage::VALUE_OPERATION_GETTYPES:
 		{
-				result = eAny(this->getTypes());
+			std::shared_ptr<Bag<uml::Classifier> > resultList = this->getTypes();
+			return eAny(resultList,uml::umlPackage::CLASSIFIER_CLASS,true);
 			break;
 		}
-		
-		// 157177571
+		// fUML::Semantics::Values::Value::hasTypes(uml::Classifier) : bool: 157177571
 		case ValuesPackage::VALUE_OPERATION_HASTYPES_CLASSIFIER:
 		{
 			//Retrieve input parameter 'type'
@@ -382,35 +378,31 @@ Any ValueImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argument
 			std::shared_ptr<uml::Classifier> incoming_param_type;
 			std::list<Any>::const_iterator incoming_param_type_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_type = (*incoming_param_type_arguments_citer)->get<std::shared_ptr<uml::Classifier> >();
-					result = eAny(this->hasTypes(incoming_param_type),0,false);
+			result = eAny(this->hasTypes(incoming_param_type),0,false);
 			break;
 		}
-		
-		// 374650370
+		// fUML::Semantics::Values::Value::new_() : fUML::Semantics::Values::Value: 374650370
 		case ValuesPackage::VALUE_OPERATION_NEW_:
 		{
-				result = eAny(this->new_());
+			result = eAny(this->new_(), fUML::Semantics::Values::ValuesPackage::VALUE_CLASS,false);
 			break;
 		}
-		
-		// 520851197
+		// fUML::Semantics::Values::Value::objectId() : std::string: 520851197
 		case ValuesPackage::VALUE_OPERATION_OBJECTID:
 		{
-					result = eAny(this->objectId(),0,false);
+			result = eAny(this->objectId(),0,false);
 			break;
 		}
-		
-		// 164025975
+		// fUML::Semantics::Values::Value::specify() : uml::ValueSpecification: 164025975
 		case ValuesPackage::VALUE_OPERATION_SPECIFY:
 		{
-				result = eAny(this->specify());
+			result = eAny(this->specify(), uml::umlPackage::VALUESPECIFICATION_CLASS,false);
 			break;
 		}
-		
-		// 780447699
+		// fUML::Semantics::Values::Value::toString() : std::string: 780447699
 		case ValuesPackage::VALUE_OPERATION_TOSTRING:
 		{
-					result = eAny(this->toString(),0,false);
+			result = eAny(this->toString(),0,false);
 			break;
 		}
 

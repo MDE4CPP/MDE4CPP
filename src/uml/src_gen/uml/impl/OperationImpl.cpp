@@ -1105,7 +1105,7 @@ bool OperationImpl::eSet(int featureID, Any newValue)
 	{
 		case uml::umlPackage::OPERATION_ATTRIBUTE_BODYCONDITION:
 		{
-			// BOOST CAST
+			// CAST Any to uml::Constraint
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Constraint> _bodyCondition = std::dynamic_pointer_cast<uml::Constraint>(_temp);
 			setBodyCondition(_bodyCondition); //16730
@@ -1113,7 +1113,7 @@ bool OperationImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::OPERATION_ATTRIBUTE_CLASS:
 		{
-			// BOOST CAST
+			// CAST Any to uml::Class
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Class> _class = std::dynamic_pointer_cast<uml::Class>(_temp);
 			setClass(_class); //16731
@@ -1121,7 +1121,7 @@ bool OperationImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::OPERATION_ATTRIBUTE_DATATYPE:
 		{
-			// BOOST CAST
+			// CAST Any to uml::DataType
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::DataType> _datatype = std::dynamic_pointer_cast<uml::DataType>(_temp);
 			setDatatype(_datatype); //16732
@@ -1129,7 +1129,7 @@ bool OperationImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::OPERATION_ATTRIBUTE_INTERFACE:
 		{
-			// BOOST CAST
+			// CAST Any to uml::Interface
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Interface> _interface = std::dynamic_pointer_cast<uml::Interface>(_temp);
 			setInterface(_interface); //16733
@@ -1137,16 +1137,16 @@ bool OperationImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::OPERATION_ATTRIBUTE_ISQUERY:
 		{
-			// BOOST CAST
+			// CAST Any to bool
 			bool _isQuery = newValue->get<bool>();
 			setIsQuery(_isQuery); //16735
 			return true;
 		}
 		case uml::umlPackage::OPERATION_ATTRIBUTE_OWNEDPARAMETER:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::Parameter>
 			if((newValue->isContainer()) && (uml::umlPackage::PARAMETER_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::Parameter>> ownedParameterList= newValue->get<std::shared_ptr<Bag<uml::Parameter>>>();
@@ -1181,9 +1181,9 @@ bool OperationImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::OPERATION_ATTRIBUTE_POSTCONDITION:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::Constraint>
 			if((newValue->isContainer()) && (uml::umlPackage::CONSTRAINT_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::Constraint>> postconditionList= newValue->get<std::shared_ptr<Bag<uml::Constraint>>>();
@@ -1218,9 +1218,9 @@ bool OperationImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::OPERATION_ATTRIBUTE_PRECONDITION:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::Constraint>
 			if((newValue->isContainer()) && (uml::umlPackage::CONSTRAINT_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::Constraint>> preconditionList= newValue->get<std::shared_ptr<Bag<uml::Constraint>>>();
@@ -1255,9 +1255,9 @@ bool OperationImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::OPERATION_ATTRIBUTE_REDEFINEDOPERATION:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::Operation>
 			if((newValue->isContainer()) && (uml::umlPackage::OPERATION_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::Operation>> redefinedOperationList= newValue->get<std::shared_ptr<Bag<uml::Operation>>>();
@@ -1341,13 +1341,13 @@ Any OperationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argu
 		// uml::Operation::getReturnResult() : uml::Parameter: 425885811
 		case umlPackage::OPERATION_OPERATION_GETRETURNRESULT:
 		{
-			result = eAny(this->getReturnResult(), umlPackage::PARAMETER_CLASS,false);
+			result = eAny(this->getReturnResult(), uml::umlPackage::PARAMETER_CLASS,false);
 			break;
 		}
 		// uml::Operation::getType() : uml::Type: 84668058
 		case umlPackage::OPERATION_OPERATION_GETTYPE:
 		{
-			result = eAny(this->getType(), umlPackage::TYPE_CLASS,false);
+			result = eAny(this->getType(), uml::umlPackage::TYPE_CLASS,false);
 			break;
 		}
 		// uml::Operation::getUpper() : int: 658132292
@@ -1398,7 +1398,7 @@ Any OperationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argu
 		// uml::Operation::returnResult() : uml::Parameter: 831929813
 		case umlPackage::OPERATION_OPERATION_RETURNRESULT:
 		{
-			result = eAny(this->returnResult(), umlPackage::PARAMETER_CLASS,false);
+			result = eAny(this->returnResult(), uml::umlPackage::PARAMETER_CLASS,false);
 			break;
 		}
 		// uml::Operation::setIsOrdered(bool): 995733814

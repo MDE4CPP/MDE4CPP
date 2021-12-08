@@ -435,7 +435,7 @@ bool AssociationClassCallExpImpl::eSet(int featureID, Any newValue)
 	{
 		case ocl::Expressions::ExpressionsPackage::ASSOCIATIONCLASSCALLEXP_ATTRIBUTE_REFERREDASSOCIATIONCLASS:
 		{
-			// BOOST CAST
+			// CAST Any to ecore::EReference
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<ecore::EReference> _referredAssociationClass = std::dynamic_pointer_cast<ecore::EReference>(_temp);
 			setReferredAssociationClass(_referredAssociationClass); //326

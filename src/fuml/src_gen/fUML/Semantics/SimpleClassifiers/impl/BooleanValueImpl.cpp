@@ -314,7 +314,7 @@ Any BooleanValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::BOOLEANVALUE_ATTRIBUTE_VALUE:
-				return eAny(isValue(),0,true); //131
+			return eAny(isValue(),0,true); //131
 	}
 	return PrimitiveValueImpl::eGet(featureID, resolve, coreType);
 }
@@ -335,7 +335,7 @@ bool BooleanValueImpl::eSet(int featureID, Any newValue)
 	{
 		case fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::BOOLEANVALUE_ATTRIBUTE_VALUE:
 		{
-			// BOOST CAST
+			// CAST Any to bool
 			bool _value = newValue->get<bool>();
 			setValue(_value); //131
 			return true;
@@ -354,15 +354,13 @@ Any BooleanValueImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> a
 
   	switch(operationID)
 	{
-		
-		// 1222842448
+		// fUML::Semantics::SimpleClassifiers::BooleanValue::_copy() : fUML::Semantics::Values::Value: 1222842448
 		case SimpleClassifiersPackage::BOOLEANVALUE_OPERATION__COPY:
 		{
-				result = eAny(this->_copy());
+			result = eAny(this->_copy(), fUML::Semantics::Values::ValuesPackage::VALUE_CLASS,false);
 			break;
 		}
-		
-		// 2145645855
+		// fUML::Semantics::SimpleClassifiers::BooleanValue::equals(fUML::Semantics::Values::Value) : bool: 2145645855
 		case SimpleClassifiersPackage::BOOLEANVALUE_OPERATION_EQUALS_VALUE:
 		{
 			//Retrieve input parameter 'otherValue'
@@ -370,28 +368,25 @@ Any BooleanValueImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> a
 			std::shared_ptr<fUML::Semantics::Values::Value> incoming_param_otherValue;
 			std::list<Any>::const_iterator incoming_param_otherValue_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_otherValue = (*incoming_param_otherValue_arguments_citer)->get<std::shared_ptr<fUML::Semantics::Values::Value> >();
-					result = eAny(this->equals(incoming_param_otherValue),0,false);
+			result = eAny(this->equals(incoming_param_otherValue),0,false);
 			break;
 		}
-		
-		// 1857572281
+		// fUML::Semantics::SimpleClassifiers::BooleanValue::new_() : fUML::Semantics::Values::Value: 1857572281
 		case SimpleClassifiersPackage::BOOLEANVALUE_OPERATION_NEW_:
 		{
-				result = eAny(this->new_());
+			result = eAny(this->new_(), fUML::Semantics::Values::ValuesPackage::VALUE_CLASS,false);
 			break;
 		}
-		
-		// 2004933041
+		// fUML::Semantics::SimpleClassifiers::BooleanValue::specify() : uml::ValueSpecification: 2004933041
 		case SimpleClassifiersPackage::BOOLEANVALUE_OPERATION_SPECIFY:
 		{
-				result = eAny(this->specify());
+			result = eAny(this->specify(), uml::umlPackage::VALUESPECIFICATION_CLASS,false);
 			break;
 		}
-		
-		// 518253164
+		// fUML::Semantics::SimpleClassifiers::BooleanValue::toString() : std::string: 518253164
 		case SimpleClassifiersPackage::BOOLEANVALUE_OPERATION_TOSTRING:
 		{
-					result = eAny(this->toString(),0,false);
+			result = eAny(this->toString(),0,false);
 			break;
 		}
 

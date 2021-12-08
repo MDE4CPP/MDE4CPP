@@ -643,9 +643,9 @@ bool InteractionUseImpl::eSet(int featureID, Any newValue)
 	{
 		case uml::umlPackage::INTERACTIONUSE_ATTRIBUTE_ACTUALGATE:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::Gate>
 			if((newValue->isContainer()) && (uml::umlPackage::GATE_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::Gate>> actualGateList= newValue->get<std::shared_ptr<Bag<uml::Gate>>>();
@@ -680,9 +680,9 @@ bool InteractionUseImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::INTERACTIONUSE_ATTRIBUTE_ARGUMENT:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::ValueSpecification>
 			if((newValue->isContainer()) && (uml::umlPackage::VALUESPECIFICATION_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::ValueSpecification>> argumentList= newValue->get<std::shared_ptr<Bag<uml::ValueSpecification>>>();
@@ -717,7 +717,7 @@ bool InteractionUseImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::INTERACTIONUSE_ATTRIBUTE_REFERSTO:
 		{
-			// BOOST CAST
+			// CAST Any to uml::Interaction
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Interaction> _refersTo = std::dynamic_pointer_cast<uml::Interaction>(_temp);
 			setRefersTo(_refersTo); //12415
@@ -725,7 +725,7 @@ bool InteractionUseImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::INTERACTIONUSE_ATTRIBUTE_RETURNVALUE:
 		{
-			// BOOST CAST
+			// CAST Any to uml::ValueSpecification
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::ValueSpecification> _returnValue = std::dynamic_pointer_cast<uml::ValueSpecification>(_temp);
 			setReturnValue(_returnValue); //12416
@@ -733,7 +733,7 @@ bool InteractionUseImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::INTERACTIONUSE_ATTRIBUTE_RETURNVALUERECIPIENT:
 		{
-			// BOOST CAST
+			// CAST Any to uml::Property
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Property> _returnValueRecipient = std::dynamic_pointer_cast<uml::Property>(_temp);
 			setReturnValueRecipient(_returnValueRecipient); //12417

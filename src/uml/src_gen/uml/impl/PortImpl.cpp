@@ -749,28 +749,28 @@ bool PortImpl::eSet(int featureID, Any newValue)
 	{
 		case uml::umlPackage::PORT_ATTRIBUTE_ISBEHAVIOR:
 		{
-			// BOOST CAST
+			// CAST Any to bool
 			bool _isBehavior = newValue->get<bool>();
 			setIsBehavior(_isBehavior); //18144
 			return true;
 		}
 		case uml::umlPackage::PORT_ATTRIBUTE_ISCONJUGATED:
 		{
-			// BOOST CAST
+			// CAST Any to bool
 			bool _isConjugated = newValue->get<bool>();
 			setIsConjugated(_isConjugated); //18145
 			return true;
 		}
 		case uml::umlPackage::PORT_ATTRIBUTE_ISSERVICE:
 		{
-			// BOOST CAST
+			// CAST Any to bool
 			bool _isService = newValue->get<bool>();
 			setIsService(_isService); //18146
 			return true;
 		}
 		case uml::umlPackage::PORT_ATTRIBUTE_PROTOCOL:
 		{
-			// BOOST CAST
+			// CAST Any to uml::ProtocolStateMachine
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::ProtocolStateMachine> _protocol = std::dynamic_pointer_cast<uml::ProtocolStateMachine>(_temp);
 			setProtocol(_protocol); //18147
@@ -778,9 +778,9 @@ bool PortImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::PORT_ATTRIBUTE_REDEFINEDPORT:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::Port>
 			if((newValue->isContainer()) && (uml::umlPackage::PORT_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::Port>> redefinedPortList= newValue->get<std::shared_ptr<Bag<uml::Port>>>();
@@ -831,14 +831,14 @@ Any PortImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments
 		case umlPackage::PORT_OPERATION_BASICPROVIDED:
 		{
 			std::shared_ptr<Bag<uml::Interface> > resultList = this->basicProvided();
-			return eAny(resultList,umlPackage::INTERFACE_CLASS,true);
+			return eAny(resultList,uml::umlPackage::INTERFACE_CLASS,true);
 			break;
 		}
 		// uml::Port::basicRequired() : uml::Interface[*]: 1121864045
 		case umlPackage::PORT_OPERATION_BASICREQUIRED:
 		{
 			std::shared_ptr<Bag<uml::Interface> > resultList = this->basicRequired();
-			return eAny(resultList,umlPackage::INTERFACE_CLASS,true);
+			return eAny(resultList,uml::umlPackage::INTERFACE_CLASS,true);
 			break;
 		}
 		// uml::Port::default_value(Any, std::map) : bool: 1305438653
@@ -877,14 +877,14 @@ Any PortImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments
 		case umlPackage::PORT_OPERATION_GETPROVIDEDS:
 		{
 			std::shared_ptr<Bag<uml::Interface> > resultList = this->getProvideds();
-			return eAny(resultList,umlPackage::INTERFACE_CLASS,true);
+			return eAny(resultList,uml::umlPackage::INTERFACE_CLASS,true);
 			break;
 		}
 		// uml::Port::getRequireds() : uml::Interface[*]: 1195078911
 		case umlPackage::PORT_OPERATION_GETREQUIREDS:
 		{
 			std::shared_ptr<Bag<uml::Interface> > resultList = this->getRequireds();
-			return eAny(resultList,umlPackage::INTERFACE_CLASS,true);
+			return eAny(resultList,uml::umlPackage::INTERFACE_CLASS,true);
 			break;
 		}
 		// uml::Port::port_aggregation(Any, std::map) : bool: 2107947933

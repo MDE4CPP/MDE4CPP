@@ -33,10 +33,10 @@
 
 #include <exception> // used in Persistence
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
+#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "fUML/Semantics/Values/ValuesFactory.hpp"
 #include "uml/umlFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
-#include "fUML/Semantics/Loci/LociFactory.hpp"
 
 #include "ocl/Evaluations/EvalEnvironment.hpp"
 #include "fUML/Semantics/Loci/Locus.hpp"
@@ -323,18 +323,10 @@ Any OclMessageExpEvalImpl::eGet(int featureID, bool resolve, bool coreType) cons
 	{
 		case ocl::Evaluations::EvaluationsPackage::OCLMESSAGEEXPEVAL_ATTRIBUTE_ARGUMENTS:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<ocl::Evaluations::OclMessageArgEval>::iterator iter = getArguments()->begin();
-			Bag<ocl::Evaluations::OclMessageArgEval>::iterator end = getArguments()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //637			
+			return eAnyBag(getArguments(),1513124741); //637
 		}
 		case ocl::Evaluations::EvaluationsPackage::OCLMESSAGEEXPEVAL_ATTRIBUTE_NAME:
-				return eAny(getName(),0,true); //638
+			return eAny(getName(),0,true); //638
 		case ocl::Evaluations::EvaluationsPackage::OCLMESSAGEEXPEVAL_ATTRIBUTE_TARGET:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getTarget();
@@ -364,50 +356,51 @@ bool OclMessageExpEvalImpl::eSet(int featureID, Any newValue)
 	{
 		case ocl::Evaluations::EvaluationsPackage::OCLMESSAGEEXPEVAL_ATTRIBUTE_ARGUMENTS:
 		{
-			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<ocl::Evaluations::OclMessageArgEval>> argumentsList(new Bag<ocl::Evaluations::OclMessageArgEval>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
-			{
-				argumentsList->add(std::dynamic_pointer_cast<ocl::Evaluations::OclMessageArgEval>(*iter));
-				iter++;
-			}
-			
-			Bag<ocl::Evaluations::OclMessageArgEval>::iterator iterArguments = getArguments()->begin();
-			Bag<ocl::Evaluations::OclMessageArgEval>::iterator endArguments = getArguments()->end();
-			while (iterArguments != endArguments)
-			{
-				if (argumentsList->find(*iterArguments) == -1)
+			// CAST Any to Bag<ocl::Evaluations::OclMessageArgEval>
+			if((newValue->isContainer()) && (ocl::Evaluations::EvaluationsPackage::OCLMESSAGEARGEVAL_CLASS ==newValue->getTypeId()))
+			{ 
+				try
 				{
-					getArguments()->erase(*iterArguments);
+					std::shared_ptr<Bag<ocl::Evaluations::OclMessageArgEval>> argumentsList= newValue->get<std::shared_ptr<Bag<ocl::Evaluations::OclMessageArgEval>>>();
+					std::shared_ptr<Bag<ocl::Evaluations::OclMessageArgEval>> _arguments=getArguments();
+					for(const std::shared_ptr<ocl::Evaluations::OclMessageArgEval> indexArguments: *_arguments)
+					{
+						if (argumentsList->find(indexArguments) == -1)
+						{
+							_arguments->erase(indexArguments);
+						}
+					}
+
+					for(const std::shared_ptr<ocl::Evaluations::OclMessageArgEval> indexArguments: *argumentsList)
+					{
+						if (_arguments->find(indexArguments) == -1)
+						{
+							_arguments->add(indexArguments);
+						}
+					}
 				}
-				iterArguments++;
-			}
- 
-			iterArguments = argumentsList->begin();
-			endArguments = argumentsList->end();
-			while (iterArguments != endArguments)
-			{
-				if (getArguments()->find(*iterArguments) == -1)
+				catch(...)
 				{
-					getArguments()->add(*iterArguments);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterArguments++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}
 		case ocl::Evaluations::EvaluationsPackage::OCLMESSAGEEXPEVAL_ATTRIBUTE_NAME:
 		{
-			// BOOST CAST
+			// CAST Any to std::string
 			std::string _name = newValue->get<std::string>();
 			setName(_name); //638
 			return true;
 		}
 		case ocl::Evaluations::EvaluationsPackage::OCLMESSAGEEXPEVAL_ATTRIBUTE_TARGET:
 		{
-			// BOOST CAST
+			// CAST Any to ocl::Evaluations::OclExpEval
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<ocl::Evaluations::OclExpEval> _target = std::dynamic_pointer_cast<ocl::Evaluations::OclExpEval>(_temp);
 			setTarget(_target); //636

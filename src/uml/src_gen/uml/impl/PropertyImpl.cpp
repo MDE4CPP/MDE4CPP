@@ -1282,14 +1282,14 @@ bool PropertyImpl::eSet(int featureID, Any newValue)
 	{
 		case uml::umlPackage::PROPERTY_ATTRIBUTE_AGGREGATION:
 		{
-			// BOOST CAST
+			// CAST Any to uml::AggregationKind
 			uml::AggregationKind _aggregation = newValue->get<uml::AggregationKind>();
 			setAggregation(_aggregation); //18530
 			return true;
 		}
 		case uml::umlPackage::PROPERTY_ATTRIBUTE_ASSOCIATION:
 		{
-			// BOOST CAST
+			// CAST Any to uml::Association
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Association> _association = std::dynamic_pointer_cast<uml::Association>(_temp);
 			setAssociation(_association); //18543
@@ -1297,7 +1297,7 @@ bool PropertyImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::PROPERTY_ATTRIBUTE_ASSOCIATIONEND:
 		{
-			// BOOST CAST
+			// CAST Any to uml::Property
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Property> _associationEnd = std::dynamic_pointer_cast<uml::Property>(_temp);
 			setAssociationEnd(_associationEnd); //18531
@@ -1305,7 +1305,7 @@ bool PropertyImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::PROPERTY_ATTRIBUTE_CLASS:
 		{
-			// BOOST CAST
+			// CAST Any to uml::Class
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Class> _class = std::dynamic_pointer_cast<uml::Class>(_temp);
 			setClass(_class); //18533
@@ -1313,7 +1313,7 @@ bool PropertyImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::PROPERTY_ATTRIBUTE_DATATYPE:
 		{
-			// BOOST CAST
+			// CAST Any to uml::DataType
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::DataType> _datatype = std::dynamic_pointer_cast<uml::DataType>(_temp);
 			setDatatype(_datatype); //18527
@@ -1321,14 +1321,14 @@ bool PropertyImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::PROPERTY_ATTRIBUTE_DEFAULT:
 		{
-			// BOOST CAST
+			// CAST Any to std::string
 			std::string _default = newValue->get<std::string>();
 			setDefault(_default); //18529
 			return true;
 		}
 		case uml::umlPackage::PROPERTY_ATTRIBUTE_DEFAULTVALUE:
 		{
-			// BOOST CAST
+			// CAST Any to uml::ValueSpecification
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::ValueSpecification> _defaultValue = std::dynamic_pointer_cast<uml::ValueSpecification>(_temp);
 			setDefaultValue(_defaultValue); //18534
@@ -1336,7 +1336,7 @@ bool PropertyImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::PROPERTY_ATTRIBUTE_INTERFACE:
 		{
-			// BOOST CAST
+			// CAST Any to uml::Interface
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Interface> _interface = std::dynamic_pointer_cast<uml::Interface>(_temp);
 			setInterface(_interface); //18528
@@ -1344,35 +1344,35 @@ bool PropertyImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::PROPERTY_ATTRIBUTE_ISCOMPOSITE:
 		{
-			// BOOST CAST
+			// CAST Any to bool
 			bool _isComposite = newValue->get<bool>();
 			setIsComposite(_isComposite); //18535
 			return true;
 		}
 		case uml::umlPackage::PROPERTY_ATTRIBUTE_ISDERIVED:
 		{
-			// BOOST CAST
+			// CAST Any to bool
 			bool _isDerived = newValue->get<bool>();
 			setIsDerived(_isDerived); //18536
 			return true;
 		}
 		case uml::umlPackage::PROPERTY_ATTRIBUTE_ISDERIVEDUNION:
 		{
-			// BOOST CAST
+			// CAST Any to bool
 			bool _isDerivedUnion = newValue->get<bool>();
 			setIsDerivedUnion(_isDerivedUnion); //18537
 			return true;
 		}
 		case uml::umlPackage::PROPERTY_ATTRIBUTE_ISID:
 		{
-			// BOOST CAST
+			// CAST Any to bool
 			bool _isID = newValue->get<bool>();
 			setIsID(_isID); //18538
 			return true;
 		}
 		case uml::umlPackage::PROPERTY_ATTRIBUTE_OPPOSITE:
 		{
-			// BOOST CAST
+			// CAST Any to uml::Property
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Property> _opposite = std::dynamic_pointer_cast<uml::Property>(_temp);
 			setOpposite(_opposite); //18539
@@ -1380,7 +1380,7 @@ bool PropertyImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::PROPERTY_ATTRIBUTE_OWNINGASSOCIATION:
 		{
-			// BOOST CAST
+			// CAST Any to uml::Association
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Association> _owningAssociation = std::dynamic_pointer_cast<uml::Association>(_temp);
 			setOwningAssociation(_owningAssociation); //18540
@@ -1388,9 +1388,9 @@ bool PropertyImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::PROPERTY_ATTRIBUTE_QUALIFIER:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::Property>
 			if((newValue->isContainer()) && (uml::umlPackage::PROPERTY_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::Property>> qualifierList= newValue->get<std::shared_ptr<Bag<uml::Property>>>();
@@ -1425,9 +1425,9 @@ bool PropertyImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::PROPERTY_ATTRIBUTE_REDEFINEDPROPERTY:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::Property>
 			if((newValue->isContainer()) && (uml::umlPackage::PROPERTY_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::Property>> redefinedPropertyList= newValue->get<std::shared_ptr<Bag<uml::Property>>>();
@@ -1462,9 +1462,9 @@ bool PropertyImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::PROPERTY_ATTRIBUTE_SUBSETTEDPROPERTY:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::Property>
 			if((newValue->isContainer()) && (uml::umlPackage::PROPERTY_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::Property>> subsettedPropertyList= newValue->get<std::shared_ptr<Bag<uml::Property>>>();
@@ -1590,13 +1590,13 @@ Any PropertyImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argum
 		// uml::Property::getOpposite() : uml::Property: 1965496207
 		case umlPackage::PROPERTY_OPERATION_GETOPPOSITE:
 		{
-			result = eAny(this->getOpposite(), umlPackage::PROPERTY_CLASS,false);
+			result = eAny(this->getOpposite(), uml::umlPackage::PROPERTY_CLASS,false);
 			break;
 		}
 		// uml::Property::getOtherEnd() : uml::Property: 1860005684
 		case umlPackage::PROPERTY_OPERATION_GETOTHEREND:
 		{
-			result = eAny(this->getOtherEnd(), umlPackage::PROPERTY_CLASS,false);
+			result = eAny(this->getOtherEnd(), uml::umlPackage::PROPERTY_CLASS,false);
 			break;
 		}
 		// uml::Property::isAttribute() : bool: 1679656582
@@ -1756,7 +1756,7 @@ Any PropertyImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argum
 		case umlPackage::PROPERTY_OPERATION_SUBSETTINGCONTEXT:
 		{
 			std::shared_ptr<Bag<uml::Type> > resultList = this->subsettingContext();
-			return eAny(resultList,umlPackage::TYPE_CLASS,true);
+			return eAny(resultList,uml::umlPackage::TYPE_CLASS,true);
 			break;
 		}
 		// uml::Property::subsetting_context_conforms(Any, std::map) : bool: 236653454

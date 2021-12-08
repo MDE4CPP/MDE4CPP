@@ -504,9 +504,9 @@ bool InteractionOperandImpl::eSet(int featureID, Any newValue)
 	{
 		case uml::umlPackage::INTERACTIONOPERAND_ATTRIBUTE_FRAGMENT:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::InteractionFragment>
 			if((newValue->isContainer()) && (uml::umlPackage::INTERACTIONFRAGMENT_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::InteractionFragment>> fragmentList= newValue->get<std::shared_ptr<Bag<uml::InteractionFragment>>>();
@@ -541,7 +541,7 @@ bool InteractionOperandImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::INTERACTIONOPERAND_ATTRIBUTE_GUARD:
 		{
-			// BOOST CAST
+			// CAST Any to uml::InteractionConstraint
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::InteractionConstraint> _guard = std::dynamic_pointer_cast<uml::InteractionConstraint>(_temp);
 			setGuard(_guard); //12220

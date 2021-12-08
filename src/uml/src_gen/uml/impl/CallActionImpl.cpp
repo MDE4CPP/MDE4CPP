@@ -534,16 +534,16 @@ bool CallActionImpl::eSet(int featureID, Any newValue)
 	{
 		case uml::umlPackage::CALLACTION_ATTRIBUTE_ISSYNCHRONOUS:
 		{
-			// BOOST CAST
+			// CAST Any to bool
 			bool _isSynchronous = newValue->get<bool>();
 			setIsSynchronous(_isSynchronous); //2829
 			return true;
 		}
 		case uml::umlPackage::CALLACTION_ATTRIBUTE_RESULT:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::OutputPin>
 			if((newValue->isContainer()) && (uml::umlPackage::OUTPUTPIN_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::OutputPin>> resultList= newValue->get<std::shared_ptr<Bag<uml::OutputPin>>>();
@@ -610,14 +610,14 @@ Any CallActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arg
 		case umlPackage::CALLACTION_OPERATION_INPUTPARAMETERS:
 		{
 			std::shared_ptr<Bag<uml::Parameter> > resultList = this->inputParameters();
-			return eAny(resultList,umlPackage::PARAMETER_CLASS,true);
+			return eAny(resultList,uml::umlPackage::PARAMETER_CLASS,true);
 			break;
 		}
 		// uml::CallAction::outputParameters() : uml::Parameter[*]: 138816985
 		case umlPackage::CALLACTION_OPERATION_OUTPUTPARAMETERS:
 		{
 			std::shared_ptr<Bag<uml::Parameter> > resultList = this->outputParameters();
-			return eAny(resultList,umlPackage::PARAMETER_CLASS,true);
+			return eAny(resultList,uml::umlPackage::PARAMETER_CLASS,true);
 			break;
 		}
 		// uml::CallAction::result_pins(Any, std::map) : bool: 1421824785

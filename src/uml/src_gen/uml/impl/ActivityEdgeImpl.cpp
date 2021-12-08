@@ -782,7 +782,7 @@ bool ActivityEdgeImpl::eSet(int featureID, Any newValue)
 	{
 		case uml::umlPackage::ACTIVITYEDGE_ATTRIBUTE_ACTIVITY:
 		{
-			// BOOST CAST
+			// CAST Any to uml::Activity
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Activity> _activity = std::dynamic_pointer_cast<uml::Activity>(_temp);
 			setActivity(_activity); //812
@@ -790,7 +790,7 @@ bool ActivityEdgeImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::ACTIVITYEDGE_ATTRIBUTE_GUARD:
 		{
-			// BOOST CAST
+			// CAST Any to uml::ValueSpecification
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::ValueSpecification> _guard = std::dynamic_pointer_cast<uml::ValueSpecification>(_temp);
 			setGuard(_guard); //813
@@ -798,9 +798,9 @@ bool ActivityEdgeImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::ACTIVITYEDGE_ATTRIBUTE_INPARTITION:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::ActivityPartition>
 			if((newValue->isContainer()) && (uml::umlPackage::ACTIVITYPARTITION_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::ActivityPartition>> inPartitionList= newValue->get<std::shared_ptr<Bag<uml::ActivityPartition>>>();
@@ -835,7 +835,7 @@ bool ActivityEdgeImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::ACTIVITYEDGE_ATTRIBUTE_INSTRUCTUREDNODE:
 		{
-			// BOOST CAST
+			// CAST Any to uml::StructuredActivityNode
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::StructuredActivityNode> _inStructuredNode = std::dynamic_pointer_cast<uml::StructuredActivityNode>(_temp);
 			setInStructuredNode(_inStructuredNode); //816
@@ -843,7 +843,7 @@ bool ActivityEdgeImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::ACTIVITYEDGE_ATTRIBUTE_INTERRUPTS:
 		{
-			// BOOST CAST
+			// CAST Any to uml::InterruptibleActivityRegion
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::InterruptibleActivityRegion> _interrupts = std::dynamic_pointer_cast<uml::InterruptibleActivityRegion>(_temp);
 			setInterrupts(_interrupts); //815
@@ -851,9 +851,9 @@ bool ActivityEdgeImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::ACTIVITYEDGE_ATTRIBUTE_REDEFINEDEDGE:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::ActivityEdge>
 			if((newValue->isContainer()) && (uml::umlPackage::ACTIVITYEDGE_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::ActivityEdge>> redefinedEdgeList= newValue->get<std::shared_ptr<Bag<uml::ActivityEdge>>>();
@@ -888,7 +888,7 @@ bool ActivityEdgeImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::ACTIVITYEDGE_ATTRIBUTE_SOURCE:
 		{
-			// BOOST CAST
+			// CAST Any to uml::ActivityNode
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::ActivityNode> _source = std::dynamic_pointer_cast<uml::ActivityNode>(_temp);
 			setSource(_source); //818
@@ -896,7 +896,7 @@ bool ActivityEdgeImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::ACTIVITYEDGE_ATTRIBUTE_TARGET:
 		{
-			// BOOST CAST
+			// CAST Any to uml::ActivityNode
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::ActivityNode> _target = std::dynamic_pointer_cast<uml::ActivityNode>(_temp);
 			setTarget(_target); //817
@@ -904,7 +904,7 @@ bool ActivityEdgeImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::ACTIVITYEDGE_ATTRIBUTE_WEIGHT:
 		{
-			// BOOST CAST
+			// CAST Any to uml::ValueSpecification
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::ValueSpecification> _weight = std::dynamic_pointer_cast<uml::ValueSpecification>(_temp);
 			setWeight(_weight); //820

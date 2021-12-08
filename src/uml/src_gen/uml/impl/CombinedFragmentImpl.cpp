@@ -622,9 +622,9 @@ bool CombinedFragmentImpl::eSet(int featureID, Any newValue)
 	{
 		case uml::umlPackage::COMBINEDFRAGMENT_ATTRIBUTE_CFRAGMENTGATE:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::Gate>
 			if((newValue->isContainer()) && (uml::umlPackage::GATE_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::Gate>> cfragmentGateList= newValue->get<std::shared_ptr<Bag<uml::Gate>>>();
@@ -659,16 +659,16 @@ bool CombinedFragmentImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::COMBINEDFRAGMENT_ATTRIBUTE_INTERACTIONOPERATOR:
 		{
-			// BOOST CAST
+			// CAST Any to uml::InteractionOperatorKind
 			uml::InteractionOperatorKind _interactionOperator = newValue->get<uml::InteractionOperatorKind>();
 			setInteractionOperator(_interactionOperator); //4414
 			return true;
 		}
 		case uml::umlPackage::COMBINEDFRAGMENT_ATTRIBUTE_OPERAND:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::InteractionOperand>
 			if((newValue->isContainer()) && (uml::umlPackage::INTERACTIONOPERAND_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::InteractionOperand>> operandList= newValue->get<std::shared_ptr<Bag<uml::InteractionOperand>>>();

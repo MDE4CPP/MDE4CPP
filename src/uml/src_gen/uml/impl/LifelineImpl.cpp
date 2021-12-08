@@ -529,9 +529,9 @@ bool LifelineImpl::eSet(int featureID, Any newValue)
 	{
 		case uml::umlPackage::LIFELINE_ATTRIBUTE_COVEREDBY:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::InteractionFragment>
 			if((newValue->isContainer()) && (uml::umlPackage::INTERACTIONFRAGMENT_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::InteractionFragment>> coveredByList= newValue->get<std::shared_ptr<Bag<uml::InteractionFragment>>>();
@@ -566,7 +566,7 @@ bool LifelineImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::LIFELINE_ATTRIBUTE_DECOMPOSEDAS:
 		{
-			// BOOST CAST
+			// CAST Any to uml::PartDecomposition
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::PartDecomposition> _decomposedAs = std::dynamic_pointer_cast<uml::PartDecomposition>(_temp);
 			setDecomposedAs(_decomposedAs); //1329
@@ -574,7 +574,7 @@ bool LifelineImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::LIFELINE_ATTRIBUTE_INTERACTION:
 		{
-			// BOOST CAST
+			// CAST Any to uml::Interaction
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Interaction> _interaction = std::dynamic_pointer_cast<uml::Interaction>(_temp);
 			setInteraction(_interaction); //13210
@@ -582,7 +582,7 @@ bool LifelineImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::LIFELINE_ATTRIBUTE_REPRESENTS:
 		{
-			// BOOST CAST
+			// CAST Any to uml::ConnectableElement
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::ConnectableElement> _represents = std::dynamic_pointer_cast<uml::ConnectableElement>(_temp);
 			setRepresents(_represents); //13211
@@ -590,7 +590,7 @@ bool LifelineImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::LIFELINE_ATTRIBUTE_SELECTOR:
 		{
-			// BOOST CAST
+			// CAST Any to uml::ValueSpecification
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::ValueSpecification> _selector = std::dynamic_pointer_cast<uml::ValueSpecification>(_temp);
 			setSelector(_selector); //13212

@@ -276,7 +276,7 @@ bool TupleLiteralPartImpl::eSet(int featureID, Any newValue)
 	{
 		case ocl::Expressions::ExpressionsPackage::TUPLELITERALPART_ATTRIBUTE_ATTRIBUTE:
 		{
-			// BOOST CAST
+			// CAST Any to ecore::EAttribute
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<ecore::EAttribute> _attribute = std::dynamic_pointer_cast<ecore::EAttribute>(_temp);
 			setAttribute(_attribute); //8810

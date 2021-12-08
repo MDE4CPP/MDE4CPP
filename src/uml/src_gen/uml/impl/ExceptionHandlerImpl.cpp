@@ -462,7 +462,7 @@ bool ExceptionHandlerImpl::eSet(int featureID, Any newValue)
 	{
 		case uml::umlPackage::EXCEPTIONHANDLER_ATTRIBUTE_EXCEPTIONINPUT:
 		{
-			// BOOST CAST
+			// CAST Any to uml::ObjectNode
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::ObjectNode> _exceptionInput = std::dynamic_pointer_cast<uml::ObjectNode>(_temp);
 			setExceptionInput(_exceptionInput); //873
@@ -470,9 +470,9 @@ bool ExceptionHandlerImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::EXCEPTIONHANDLER_ATTRIBUTE_EXCEPTIONTYPE:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::Classifier>
 			if((newValue->isContainer()) && (uml::umlPackage::CLASSIFIER_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::Classifier>> exceptionTypeList= newValue->get<std::shared_ptr<Bag<uml::Classifier>>>();
@@ -507,7 +507,7 @@ bool ExceptionHandlerImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::EXCEPTIONHANDLER_ATTRIBUTE_HANDLERBODY:
 		{
-			// BOOST CAST
+			// CAST Any to uml::ExecutableNode
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::ExecutableNode> _handlerBody = std::dynamic_pointer_cast<uml::ExecutableNode>(_temp);
 			setHandlerBody(_handlerBody); //875
@@ -515,7 +515,7 @@ bool ExceptionHandlerImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::EXCEPTIONHANDLER_ATTRIBUTE_PROTECTEDNODE:
 		{
-			// BOOST CAST
+			// CAST Any to uml::ExecutableNode
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::ExecutableNode> _protectedNode = std::dynamic_pointer_cast<uml::ExecutableNode>(_temp);
 			setProtectedNode(_protectedNode); //876

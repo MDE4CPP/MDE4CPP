@@ -227,8 +227,7 @@ Any EventAccepterImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> 
 
   	switch(operationID)
 	{
-		
-		// 488129254
+		// fUML::Semantics::CommonBehavior::EventAccepter::accept(fUML::Semantics::SimpleClassifiers::SignalInstance): 488129254
 		case CommonBehaviorPackage::EVENTACCEPTER_OPERATION_ACCEPT_SIGNALINSTANCE:
 		{
 			//Retrieve input parameter 'signalInstance'
@@ -237,10 +236,8 @@ Any EventAccepterImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> 
 			std::list<Any>::const_iterator incoming_param_signalInstance_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_signalInstance = (*incoming_param_signalInstance_arguments_citer)->get<std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance> >();
 			this->accept(incoming_param_signalInstance);
-			break;
 		}
-		
-		// 1803064884
+		// fUML::Semantics::CommonBehavior::EventAccepter::match(fUML::Semantics::SimpleClassifiers::SignalInstance) : bool: 1803064884
 		case CommonBehaviorPackage::EVENTACCEPTER_OPERATION_MATCH_SIGNALINSTANCE:
 		{
 			//Retrieve input parameter 'signalInstance'
@@ -248,7 +245,7 @@ Any EventAccepterImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> 
 			std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance> incoming_param_signalInstance;
 			std::list<Any>::const_iterator incoming_param_signalInstance_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_signalInstance = (*incoming_param_signalInstance_arguments_citer)->get<std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance> >();
-					result = eAny(this->match(incoming_param_signalInstance),0,false);
+			result = eAny(this->match(incoming_param_signalInstance),0,false);
 			break;
 		}
 

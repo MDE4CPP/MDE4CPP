@@ -445,15 +445,7 @@ Any ObjectImpl::eGet(int featureID, bool resolve, bool coreType) const
 		}
 		case fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::OBJECT_ATTRIBUTE_TYPES:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Classifier>::iterator iter = getTypes()->begin();
-			Bag<uml::Classifier>::iterator end = getTypes()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //802			
+			return eAnyBag(getTypes(),845259359); //802
 		}
 	}
 	return ExtensionalValueImpl::eGet(featureID, resolve, coreType);
@@ -477,7 +469,7 @@ bool ObjectImpl::eSet(int featureID, Any newValue)
 	{
 		case fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::OBJECT_ATTRIBUTE_OBJECTACTIVATION:
 		{
-			// BOOST CAST
+			// CAST Any to fUML::Semantics::CommonBehavior::ObjectActivation
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation> _objectActivation = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::ObjectActivation>(_temp);
 			setObjectActivation(_objectActivation); //803
@@ -485,37 +477,38 @@ bool ObjectImpl::eSet(int featureID, Any newValue)
 		}
 		case fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::OBJECT_ATTRIBUTE_TYPES:
 		{
-			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::Classifier>> typesList(new Bag<uml::Classifier>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
-			{
-				typesList->add(std::dynamic_pointer_cast<uml::Classifier>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::Classifier>::iterator iterTypes = getTypes()->begin();
-			Bag<uml::Classifier>::iterator endTypes = getTypes()->end();
-			while (iterTypes != endTypes)
-			{
-				if (typesList->find(*iterTypes) == -1)
+			// CAST Any to Bag<uml::Classifier>
+			if((newValue->isContainer()) && (uml::umlPackage::CLASSIFIER_CLASS ==newValue->getTypeId()))
+			{ 
+				try
 				{
-					getTypes()->erase(*iterTypes);
+					std::shared_ptr<Bag<uml::Classifier>> typesList= newValue->get<std::shared_ptr<Bag<uml::Classifier>>>();
+					std::shared_ptr<Bag<uml::Classifier>> _types=getTypes();
+					for(const std::shared_ptr<uml::Classifier> indexTypes: *_types)
+					{
+						if (typesList->find(indexTypes) == -1)
+						{
+							_types->erase(indexTypes);
+						}
+					}
+
+					for(const std::shared_ptr<uml::Classifier> indexTypes: *typesList)
+					{
+						if (_types->find(indexTypes) == -1)
+						{
+							_types->add(indexTypes);
+						}
+					}
 				}
-				iterTypes++;
-			}
- 
-			iterTypes = typesList->begin();
-			endTypes = typesList->end();
-			while (iterTypes != endTypes)
-			{
-				if (getTypes()->find(*iterTypes) == -1)
+				catch(...)
 				{
-					getTypes()->add(*iterTypes);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterTypes++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}
@@ -533,15 +526,13 @@ Any ObjectImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argumen
 
   	switch(operationID)
 	{
-		
-		// 1873295857
+		// fUML::Semantics::StructuredClassifiers::Object::_copy() : fUML::Semantics::Values::Value: 1873295857
 		case StructuredClassifiersPackage::OBJECT_OPERATION__COPY:
 		{
-				result = eAny(this->_copy());
+			result = eAny(this->_copy(), fUML::Semantics::Values::ValuesPackage::VALUE_CLASS,false);
 			break;
 		}
-		
-		// 124401504
+		// fUML::Semantics::StructuredClassifiers::Object::_register(fUML::Semantics::CommonBehavior::EventAccepter): 124401504
 		case StructuredClassifiersPackage::OBJECT_OPERATION__REGISTER_EVENTACCEPTER:
 		{
 			//Retrieve input parameter 'accepter'
@@ -550,17 +541,13 @@ Any ObjectImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argumen
 			std::list<Any>::const_iterator incoming_param_accepter_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_accepter = (*incoming_param_accepter_arguments_citer)->get<std::shared_ptr<fUML::Semantics::CommonBehavior::EventAccepter> >();
 			this->_register(incoming_param_accepter);
-			break;
 		}
-		
-		// 317518727
+		// fUML::Semantics::StructuredClassifiers::Object::destroy(): 317518727
 		case StructuredClassifiersPackage::OBJECT_OPERATION_DESTROY:
 		{
 			this->destroy();
-			break;
 		}
-		
-		// 961736535
+		// fUML::Semantics::StructuredClassifiers::Object::dispatch(uml::Operation) : fUML::Semantics::CommonBehavior::Execution: 961736535
 		case StructuredClassifiersPackage::OBJECT_OPERATION_DISPATCH_OPERATION:
 		{
 			//Retrieve input parameter 'operation'
@@ -568,18 +555,16 @@ Any ObjectImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argumen
 			std::shared_ptr<uml::Operation> incoming_param_operation;
 			std::list<Any>::const_iterator incoming_param_operation_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_operation = (*incoming_param_operation_arguments_citer)->get<std::shared_ptr<uml::Operation> >();
-				result = eAny(this->dispatch(incoming_param_operation));
+			result = eAny(this->dispatch(incoming_param_operation), fUML::Semantics::CommonBehavior::CommonBehaviorPackage::EXECUTION_CLASS,false);
 			break;
 		}
-		
-		// 387331642
+		// fUML::Semantics::StructuredClassifiers::Object::new_() : fUML::Semantics::Values::Value: 387331642
 		case StructuredClassifiersPackage::OBJECT_OPERATION_NEW_:
 		{
-				result = eAny(this->new_());
+			result = eAny(this->new_(), fUML::Semantics::Values::ValuesPackage::VALUE_CLASS,false);
 			break;
 		}
-		
-		// 1733005088
+		// fUML::Semantics::StructuredClassifiers::Object::send(fUML::Semantics::SimpleClassifiers::SignalInstance): 1733005088
 		case StructuredClassifiersPackage::OBJECT_OPERATION_SEND_SIGNALINSTANCE:
 		{
 			//Retrieve input parameter 'signalInstance'
@@ -588,10 +573,8 @@ Any ObjectImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argumen
 			std::list<Any>::const_iterator incoming_param_signalInstance_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_signalInstance = (*incoming_param_signalInstance_arguments_citer)->get<std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance> >();
 			this->send(incoming_param_signalInstance);
-			break;
 		}
-		
-		// 878633364
+		// fUML::Semantics::StructuredClassifiers::Object::send(fUML::Semantics::CommonBehavior::EventOccurrence): 878633364
 		case StructuredClassifiersPackage::OBJECT_OPERATION_SEND_EVENTOCCURRENCE:
 		{
 			//Retrieve input parameter 'eventOccurrence'
@@ -600,10 +583,8 @@ Any ObjectImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argumen
 			std::list<Any>::const_iterator incoming_param_eventOccurrence_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_eventOccurrence = (*incoming_param_eventOccurrence_arguments_citer)->get<std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> >();
 			this->send(incoming_param_eventOccurrence);
-			break;
 		}
-		
-		// 31089561
+		// fUML::Semantics::StructuredClassifiers::Object::startBehavior(uml::Class, fUML::Semantics::CommonBehavior::ParameterValue[*]): 31089561
 		case StructuredClassifiersPackage::OBJECT_OPERATION_STARTBEHAVIOR_CLASS_PARAMETERVALUE:
 		{
 			//Retrieve input parameter 'classifier'
@@ -617,10 +598,8 @@ Any ObjectImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argumen
 			std::list<Any>::const_iterator incoming_param_inputs_arguments_citer = std::next(arguments->begin(), 1);
 			incoming_param_inputs = (*incoming_param_inputs_arguments_citer)->get<std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> >();
 			this->startBehavior(incoming_param_classifier,incoming_param_inputs);
-			break;
 		}
-		
-		// 1522780229
+		// fUML::Semantics::StructuredClassifiers::Object::unregister(fUML::Semantics::CommonBehavior::EventAccepter): 1522780229
 		case StructuredClassifiersPackage::OBJECT_OPERATION_UNREGISTER_EVENTACCEPTER:
 		{
 			//Retrieve input parameter 'accepter'
@@ -629,7 +608,6 @@ Any ObjectImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argumen
 			std::list<Any>::const_iterator incoming_param_accepter_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_accepter = (*incoming_param_accepter_arguments_citer)->get<std::shared_ptr<fUML::Semantics::CommonBehavior::EventAccepter> >();
 			this->unregister(incoming_param_accepter);
-			break;
 		}
 
 		default:

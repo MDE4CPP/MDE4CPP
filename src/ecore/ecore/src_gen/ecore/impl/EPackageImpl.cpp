@@ -543,9 +543,9 @@ bool EPackageImpl::eSet(int featureID, Any newValue)
 	{
 		case ecore::ecorePackage::EPACKAGE_ATTRIBUTE_ECLASSIFIERS:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<ecore::EClassifier>
 			if((newValue->isContainer()) && (ecore::ecorePackage::ECLASSIFIER_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<ecore::EClassifier>> eClassifiersList= newValue->get<std::shared_ptr<Bag<ecore::EClassifier>>>();
@@ -580,7 +580,7 @@ bool EPackageImpl::eSet(int featureID, Any newValue)
 		}
 		case ecore::ecorePackage::EPACKAGE_ATTRIBUTE_EFACTORYINSTANCE:
 		{
-			// BOOST CAST
+			// CAST Any to ecore::EFactory
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<ecore::EFactory> _eFactoryInstance = std::dynamic_pointer_cast<ecore::EFactory>(_temp);
 			setEFactoryInstance(_eFactoryInstance); //427
@@ -588,9 +588,9 @@ bool EPackageImpl::eSet(int featureID, Any newValue)
 		}
 		case ecore::ecorePackage::EPACKAGE_ATTRIBUTE_ESUBPACKAGES:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<ecore::EPackage>
 			if((newValue->isContainer()) && (ecore::ecorePackage::EPACKAGE_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<ecore::EPackage>> eSubpackagesList= newValue->get<std::shared_ptr<Bag<ecore::EPackage>>>();
@@ -625,14 +625,14 @@ bool EPackageImpl::eSet(int featureID, Any newValue)
 		}
 		case ecore::ecorePackage::EPACKAGE_ATTRIBUTE_NSPREFIX:
 		{
-			// BOOST CAST
+			// CAST Any to std::string
 			std::string _nsPrefix = newValue->get<std::string>();
 			setNsPrefix(_nsPrefix); //426
 			return true;
 		}
 		case ecore::ecorePackage::EPACKAGE_ATTRIBUTE_NSURI:
 		{
-			// BOOST CAST
+			// CAST Any to std::string
 			std::string _nsURI = newValue->get<std::string>();
 			setNsURI(_nsURI); //425
 			return true;
@@ -659,7 +659,7 @@ Any EPackageImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argum
 			std::string incoming_param_name;
 			std::list<Any>::const_iterator incoming_param_name_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_name = (*incoming_param_name_arguments_citer)->get<std::string >();
-			result = eAny(this->getEClassifier(incoming_param_name), ecorePackage::ECLASSIFIER_CLASS,false);
+			result = eAny(this->getEClassifier(incoming_param_name), ecore::ecorePackage::ECLASSIFIER_CLASS,false);
 			break;
 		}
 

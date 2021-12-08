@@ -494,7 +494,7 @@ bool ProtocolTransitionImpl::eSet(int featureID, Any newValue)
 	{
 		case uml::umlPackage::PROTOCOLTRANSITION_ATTRIBUTE_POSTCONDITION:
 		{
-			// BOOST CAST
+			// CAST Any to uml::Constraint
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Constraint> _postCondition = std::dynamic_pointer_cast<uml::Constraint>(_temp);
 			setPostCondition(_postCondition); //18826
@@ -502,7 +502,7 @@ bool ProtocolTransitionImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::PROTOCOLTRANSITION_ATTRIBUTE_PRECONDITION:
 		{
-			// BOOST CAST
+			// CAST Any to uml::Constraint
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Constraint> _preCondition = std::dynamic_pointer_cast<uml::Constraint>(_temp);
 			setPreCondition(_preCondition); //18827
@@ -558,7 +558,7 @@ Any ProtocolTransitionImpl::eInvoke(int operationID, std::shared_ptr<std::list<A
 		case umlPackage::PROTOCOLTRANSITION_OPERATION_GETREFERREDS:
 		{
 			std::shared_ptr<Bag<uml::Operation> > resultList = this->getReferreds();
-			return eAny(resultList,umlPackage::OPERATION_CLASS,true);
+			return eAny(resultList,uml::umlPackage::OPERATION_CLASS,true);
 			break;
 		}
 		// uml::ProtocolTransition::refers_to_operation(Any, std::map) : bool: 1225665035

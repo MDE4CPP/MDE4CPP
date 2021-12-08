@@ -598,9 +598,9 @@ bool EOperationImpl::eSet(int featureID, Any newValue)
 	{
 		case ecore::ecorePackage::EOPERATION_ATTRIBUTE_EEXCEPTIONS:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<ecore::EClassifier>
 			if((newValue->isContainer()) && (ecore::ecorePackage::ECLASSIFIER_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<ecore::EClassifier>> eExceptionsList= newValue->get<std::shared_ptr<Bag<ecore::EClassifier>>>();
@@ -635,9 +635,9 @@ bool EOperationImpl::eSet(int featureID, Any newValue)
 		}
 		case ecore::ecorePackage::EOPERATION_ATTRIBUTE_EGENERICEXCEPTIONS:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<ecore::EGenericType>
 			if((newValue->isContainer()) && (ecore::ecorePackage::EGENERICTYPE_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<ecore::EGenericType>> eGenericExceptionsList= newValue->get<std::shared_ptr<Bag<ecore::EGenericType>>>();
@@ -672,9 +672,9 @@ bool EOperationImpl::eSet(int featureID, Any newValue)
 		}
 		case ecore::ecorePackage::EOPERATION_ATTRIBUTE_EPARAMETERS:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<ecore::EParameter>
 			if((newValue->isContainer()) && (ecore::ecorePackage::EPARAMETER_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<ecore::EParameter>> eParametersList= newValue->get<std::shared_ptr<Bag<ecore::EParameter>>>();
@@ -709,9 +709,9 @@ bool EOperationImpl::eSet(int featureID, Any newValue)
 		}
 		case ecore::ecorePackage::EOPERATION_ATTRIBUTE_ETYPEPARAMETERS:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<ecore::ETypeParameter>
 			if((newValue->isContainer()) && (ecore::ecorePackage::ETYPEPARAMETER_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<ecore::ETypeParameter>> eTypeParametersList= newValue->get<std::shared_ptr<Bag<ecore::ETypeParameter>>>();

@@ -344,12 +344,10 @@ Any StartObjectBehaviorActionActivationImpl::eInvoke(int operationID, std::share
 
   	switch(operationID)
 	{
-		
-		// 964472741
+		// fUML::Semantics::Actions::StartObjectBehaviorActionActivation::doAction(): 964472741
 		case ActionsPackage::STARTOBJECTBEHAVIORACTIONACTIVATION_OPERATION_DOACTION:
 		{
 			this->doAction();
-			break;
 		}
 
 		default:

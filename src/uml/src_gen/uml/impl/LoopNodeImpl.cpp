@@ -936,9 +936,9 @@ bool LoopNodeImpl::eSet(int featureID, Any newValue)
 	{
 		case uml::umlPackage::LOOPNODE_ATTRIBUTE_BODYOUTPUT:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::OutputPin>
 			if((newValue->isContainer()) && (uml::umlPackage::OUTPUTPIN_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::OutputPin>> bodyOutputList= newValue->get<std::shared_ptr<Bag<uml::OutputPin>>>();
@@ -973,9 +973,9 @@ bool LoopNodeImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::LOOPNODE_ATTRIBUTE_BODYPART:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::ExecutableNode>
 			if((newValue->isContainer()) && (uml::umlPackage::EXECUTABLENODE_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::ExecutableNode>> bodyPartList= newValue->get<std::shared_ptr<Bag<uml::ExecutableNode>>>();
@@ -1010,7 +1010,7 @@ bool LoopNodeImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::LOOPNODE_ATTRIBUTE_DECIDER:
 		{
-			// BOOST CAST
+			// CAST Any to uml::OutputPin
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::OutputPin> _decider = std::dynamic_pointer_cast<uml::OutputPin>(_temp);
 			setDecider(_decider); //14446
@@ -1018,16 +1018,16 @@ bool LoopNodeImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::LOOPNODE_ATTRIBUTE_ISTESTEDFIRST:
 		{
-			// BOOST CAST
+			// CAST Any to bool
 			bool _isTestedFirst = newValue->get<bool>();
 			setIsTestedFirst(_isTestedFirst); //14447
 			return true;
 		}
 		case uml::umlPackage::LOOPNODE_ATTRIBUTE_LOOPVARIABLE:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::OutputPin>
 			if((newValue->isContainer()) && (uml::umlPackage::OUTPUTPIN_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::OutputPin>> loopVariableList= newValue->get<std::shared_ptr<Bag<uml::OutputPin>>>();
@@ -1062,9 +1062,9 @@ bool LoopNodeImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::LOOPNODE_ATTRIBUTE_LOOPVARIABLEINPUT:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::InputPin>
 			if((newValue->isContainer()) && (uml::umlPackage::INPUTPIN_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::InputPin>> loopVariableInputList= newValue->get<std::shared_ptr<Bag<uml::InputPin>>>();
@@ -1099,9 +1099,9 @@ bool LoopNodeImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::LOOPNODE_ATTRIBUTE_RESULT:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::OutputPin>
 			if((newValue->isContainer()) && (uml::umlPackage::OUTPUTPIN_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::OutputPin>> resultList= newValue->get<std::shared_ptr<Bag<uml::OutputPin>>>();
@@ -1136,9 +1136,9 @@ bool LoopNodeImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::LOOPNODE_ATTRIBUTE_SETUPPART:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::ExecutableNode>
 			if((newValue->isContainer()) && (uml::umlPackage::EXECUTABLENODE_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::ExecutableNode>> setupPartList= newValue->get<std::shared_ptr<Bag<uml::ExecutableNode>>>();
@@ -1173,9 +1173,9 @@ bool LoopNodeImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::LOOPNODE_ATTRIBUTE_TEST:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::ExecutableNode>
 			if((newValue->isContainer()) && (uml::umlPackage::EXECUTABLENODE_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::ExecutableNode>> testList= newValue->get<std::shared_ptr<Bag<uml::ExecutableNode>>>();

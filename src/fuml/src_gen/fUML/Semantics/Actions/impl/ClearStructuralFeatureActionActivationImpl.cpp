@@ -316,12 +316,10 @@ Any ClearStructuralFeatureActionActivationImpl::eInvoke(int operationID, std::sh
 
   	switch(operationID)
 	{
-		
-		// 1925160483
+		// fUML::Semantics::Actions::ClearStructuralFeatureActionActivation::doAction(): 1925160483
 		case ActionsPackage::CLEARSTRUCTURALFEATUREACTIONACTIVATION_OPERATION_DOACTION:
 		{
 			this->doAction();
-			break;
 		}
 
 		default:

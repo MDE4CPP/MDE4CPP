@@ -462,24 +462,16 @@ Any OclMessageValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 	{
 		case ocl::Values::ValuesPackage::OCLMESSAGEVALUE_ATTRIBUTE_ARGUMENTS:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<ocl::Values::NameValueBinding>::iterator iter = getArguments()->begin();
-			Bag<ocl::Values::NameValueBinding>::iterator end = getArguments()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //647			
+			return eAnyBag(getArguments(),510142670); //647
 		}
 		case ocl::Values::ValuesPackage::OCLMESSAGEVALUE_ATTRIBUTE_ISASYNCOPERATION:
-				return eAny(getIsAsyncOperation(),0,true); //642
+			return eAny(getIsAsyncOperation(),0,true); //642
 		case ocl::Values::ValuesPackage::OCLMESSAGEVALUE_ATTRIBUTE_ISSIGNAL:
-				return eAny(getIsSignal(),0,true); //643
+			return eAny(getIsSignal(),0,true); //643
 		case ocl::Values::ValuesPackage::OCLMESSAGEVALUE_ATTRIBUTE_ISSYNCOPERATION:
-				return eAny(getIsSyncOperation(),0,true); //641
+			return eAny(getIsSyncOperation(),0,true); //641
 		case ocl::Values::ValuesPackage::OCLMESSAGEVALUE_ATTRIBUTE_NAME:
-				return eAny(getName(),0,true); //640
+			return eAny(getName(),0,true); //640
 		case ocl::Values::ValuesPackage::OCLMESSAGEVALUE_ATTRIBUTE_RETURNMESSAGE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getReturnMessage();
@@ -529,71 +521,72 @@ bool OclMessageValueImpl::eSet(int featureID, Any newValue)
 	{
 		case ocl::Values::ValuesPackage::OCLMESSAGEVALUE_ATTRIBUTE_ARGUMENTS:
 		{
-			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<ocl::Values::NameValueBinding>> argumentsList(new Bag<ocl::Values::NameValueBinding>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
-			{
-				argumentsList->add(std::dynamic_pointer_cast<ocl::Values::NameValueBinding>(*iter));
-				iter++;
-			}
-			
-			Bag<ocl::Values::NameValueBinding>::iterator iterArguments = getArguments()->begin();
-			Bag<ocl::Values::NameValueBinding>::iterator endArguments = getArguments()->end();
-			while (iterArguments != endArguments)
-			{
-				if (argumentsList->find(*iterArguments) == -1)
+			// CAST Any to Bag<ocl::Values::NameValueBinding>
+			if((newValue->isContainer()) && (ocl::Values::ValuesPackage::NAMEVALUEBINDING_CLASS ==newValue->getTypeId()))
+			{ 
+				try
 				{
-					getArguments()->erase(*iterArguments);
+					std::shared_ptr<Bag<ocl::Values::NameValueBinding>> argumentsList= newValue->get<std::shared_ptr<Bag<ocl::Values::NameValueBinding>>>();
+					std::shared_ptr<Bag<ocl::Values::NameValueBinding>> _arguments=getArguments();
+					for(const std::shared_ptr<ocl::Values::NameValueBinding> indexArguments: *_arguments)
+					{
+						if (argumentsList->find(indexArguments) == -1)
+						{
+							_arguments->erase(indexArguments);
+						}
+					}
+
+					for(const std::shared_ptr<ocl::Values::NameValueBinding> indexArguments: *argumentsList)
+					{
+						if (_arguments->find(indexArguments) == -1)
+						{
+							_arguments->add(indexArguments);
+						}
+					}
 				}
-				iterArguments++;
-			}
- 
-			iterArguments = argumentsList->begin();
-			endArguments = argumentsList->end();
-			while (iterArguments != endArguments)
-			{
-				if (getArguments()->find(*iterArguments) == -1)
+				catch(...)
 				{
-					getArguments()->add(*iterArguments);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterArguments++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}
 		case ocl::Values::ValuesPackage::OCLMESSAGEVALUE_ATTRIBUTE_ISASYNCOPERATION:
 		{
-			// BOOST CAST
+			// CAST Any to bool
 			bool _isAsyncOperation = newValue->get<bool>();
 			setIsAsyncOperation(_isAsyncOperation); //642
 			return true;
 		}
 		case ocl::Values::ValuesPackage::OCLMESSAGEVALUE_ATTRIBUTE_ISSIGNAL:
 		{
-			// BOOST CAST
+			// CAST Any to bool
 			bool _isSignal = newValue->get<bool>();
 			setIsSignal(_isSignal); //643
 			return true;
 		}
 		case ocl::Values::ValuesPackage::OCLMESSAGEVALUE_ATTRIBUTE_ISSYNCOPERATION:
 		{
-			// BOOST CAST
+			// CAST Any to bool
 			bool _isSyncOperation = newValue->get<bool>();
 			setIsSyncOperation(_isSyncOperation); //641
 			return true;
 		}
 		case ocl::Values::ValuesPackage::OCLMESSAGEVALUE_ATTRIBUTE_NAME:
 		{
-			// BOOST CAST
+			// CAST Any to std::string
 			std::string _name = newValue->get<std::string>();
 			setName(_name); //640
 			return true;
 		}
 		case ocl::Values::ValuesPackage::OCLMESSAGEVALUE_ATTRIBUTE_RETURNMESSAGE:
 		{
-			// BOOST CAST
+			// CAST Any to ocl::Values::OclMessageValue
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<ocl::Values::OclMessageValue> _returnMessage = std::dynamic_pointer_cast<ocl::Values::OclMessageValue>(_temp);
 			setReturnMessage(_returnMessage); //644
@@ -601,7 +594,7 @@ bool OclMessageValueImpl::eSet(int featureID, Any newValue)
 		}
 		case ocl::Values::ValuesPackage::OCLMESSAGEVALUE_ATTRIBUTE_SOURCE:
 		{
-			// BOOST CAST
+			// CAST Any to ocl::Values::ObjectValue
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<ocl::Values::ObjectValue> _source = std::dynamic_pointer_cast<ocl::Values::ObjectValue>(_temp);
 			setSource(_source); //646
@@ -609,7 +602,7 @@ bool OclMessageValueImpl::eSet(int featureID, Any newValue)
 		}
 		case ocl::Values::ValuesPackage::OCLMESSAGEVALUE_ATTRIBUTE_TARGET:
 		{
-			// BOOST CAST
+			// CAST Any to ocl::Values::ObjectValue
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<ocl::Values::ObjectValue> _target = std::dynamic_pointer_cast<ocl::Values::ObjectValue>(_temp);
 			setTarget(_target); //645
@@ -629,11 +622,10 @@ Any OclMessageValueImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>
 
   	switch(operationID)
 	{
-		
-		// 1478167767
+		// ocl::Values::OclMessageValue::toString() : std::string: 1478167767
 		case ValuesPackage::OCLMESSAGEVALUE_OPERATION_TOSTRING:
 		{
-					result = eAny(this->toString(),0,false);
+			result = eAny(this->toString(),0,false);
 			break;
 		}
 

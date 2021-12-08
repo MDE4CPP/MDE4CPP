@@ -394,7 +394,7 @@ bool RemoveStructuralFeatureValueActivationImpl::eSet(int featureID, Any newValu
 	{
 		case fUML::Semantics::Actions::ActionsPackage::REMOVESTRUCTURALFEATUREVALUEACTIVATION_ATTRIBUTE_REMOVESTRUCTURALFEATUREVALUEACTION:
 		{
-			// BOOST CAST
+			// CAST Any to uml::RemoveStructuralFeatureValueAction
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::RemoveStructuralFeatureValueAction> _removeStructuralFeatureValueAction = std::dynamic_pointer_cast<uml::RemoveStructuralFeatureValueAction>(_temp);
 			setRemoveStructuralFeatureValueAction(_removeStructuralFeatureValueAction); //10011
@@ -414,12 +414,10 @@ Any RemoveStructuralFeatureValueActivationImpl::eInvoke(int operationID, std::sh
 
   	switch(operationID)
 	{
-		
-		// 694812278
+		// fUML::Semantics::Actions::RemoveStructuralFeatureValueActivation::doAction(): 694812278
 		case ActionsPackage::REMOVESTRUCTURALFEATUREVALUEACTIVATION_OPERATION_DOACTION:
 		{
 			this->doAction();
-			break;
 		}
 
 		default:

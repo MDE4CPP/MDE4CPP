@@ -400,7 +400,7 @@ Any IntegerLiteralExpImpl::eGet(int featureID, bool resolve, bool coreType) cons
 	switch(featureID)
 	{
 		case ocl::Expressions::ExpressionsPackage::INTEGERLITERALEXP_ATTRIBUTE_INTEGERSYMBOL:
-				return eAny(getIntegerSymbol(),0,true); //3423
+			return eAny(getIntegerSymbol(),0,true); //3423
 	}
 	return NumericLiteralExpImpl::eGet(featureID, resolve, coreType);
 }
@@ -421,7 +421,7 @@ bool IntegerLiteralExpImpl::eSet(int featureID, Any newValue)
 	{
 		case ocl::Expressions::ExpressionsPackage::INTEGERLITERALEXP_ATTRIBUTE_INTEGERSYMBOL:
 		{
-			// BOOST CAST
+			// CAST Any to int
 			int _integerSymbol = newValue->get<int>();
 			setIntegerSymbol(_integerSymbol); //3423
 			return true;

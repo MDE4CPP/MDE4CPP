@@ -446,7 +446,7 @@ bool TemplateParameterSubstitutionImpl::eSet(int featureID, Any newValue)
 	{
 		case uml::umlPackage::TEMPLATEPARAMETERSUBSTITUTION_ATTRIBUTE_ACTUAL:
 		{
-			// BOOST CAST
+			// CAST Any to uml::ParameterableElement
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::ParameterableElement> _actual = std::dynamic_pointer_cast<uml::ParameterableElement>(_temp);
 			setActual(_actual); //2323
@@ -454,7 +454,7 @@ bool TemplateParameterSubstitutionImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::TEMPLATEPARAMETERSUBSTITUTION_ATTRIBUTE_FORMAL:
 		{
-			// BOOST CAST
+			// CAST Any to uml::TemplateParameter
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::TemplateParameter> _formal = std::dynamic_pointer_cast<uml::TemplateParameter>(_temp);
 			setFormal(_formal); //2324
@@ -462,7 +462,7 @@ bool TemplateParameterSubstitutionImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::TEMPLATEPARAMETERSUBSTITUTION_ATTRIBUTE_OWNEDACTUAL:
 		{
-			// BOOST CAST
+			// CAST Any to uml::ParameterableElement
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::ParameterableElement> _ownedActual = std::dynamic_pointer_cast<uml::ParameterableElement>(_temp);
 			setOwnedActual(_ownedActual); //2325
@@ -470,7 +470,7 @@ bool TemplateParameterSubstitutionImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::TEMPLATEPARAMETERSUBSTITUTION_ATTRIBUTE_TEMPLATEBINDING:
 		{
-			// BOOST CAST
+			// CAST Any to uml::TemplateBinding
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::TemplateBinding> _templateBinding = std::dynamic_pointer_cast<uml::TemplateBinding>(_temp);
 			setTemplateBinding(_templateBinding); //2326

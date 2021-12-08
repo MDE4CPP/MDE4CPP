@@ -496,9 +496,9 @@ bool InvocationActionImpl::eSet(int featureID, Any newValue)
 	{
 		case uml::umlPackage::INVOCATIONACTION_ATTRIBUTE_ARGUMENT:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::InputPin>
 			if((newValue->isContainer()) && (uml::umlPackage::INPUTPIN_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::InputPin>> argumentList= newValue->get<std::shared_ptr<Bag<uml::InputPin>>>();
@@ -533,7 +533,7 @@ bool InvocationActionImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::INVOCATIONACTION_ATTRIBUTE_ONPORT:
 		{
-			// BOOST CAST
+			// CAST Any to uml::Port
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Port> _onPort = std::dynamic_pointer_cast<uml::Port>(_temp);
 			setOnPort(_onPort); //13028

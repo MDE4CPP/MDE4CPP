@@ -781,7 +781,7 @@ bool ParameterImpl::eSet(int featureID, Any newValue)
 	{
 		case uml::umlPackage::PARAMETER_ATTRIBUTE_BEHAVIOR:
 		{
-			// BOOST CAST
+			// CAST Any to uml::Behavior
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Behavior> _behavior = std::dynamic_pointer_cast<uml::Behavior>(_temp);
 			setBehavior(_behavior); //17427
@@ -789,14 +789,14 @@ bool ParameterImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::PARAMETER_ATTRIBUTE_DEFAULT:
 		{
-			// BOOST CAST
+			// CAST Any to std::string
 			std::string _default = newValue->get<std::string>();
 			setDefault(_default); //17419
 			return true;
 		}
 		case uml::umlPackage::PARAMETER_ATTRIBUTE_DEFAULTVALUE:
 		{
-			// BOOST CAST
+			// CAST Any to uml::ValueSpecification
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::ValueSpecification> _defaultValue = std::dynamic_pointer_cast<uml::ValueSpecification>(_temp);
 			setDefaultValue(_defaultValue); //17420
@@ -804,37 +804,37 @@ bool ParameterImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::PARAMETER_ATTRIBUTE_DIRECTION:
 		{
-			// BOOST CAST
+			// CAST Any to uml::ParameterDirectionKind
 			uml::ParameterDirectionKind _direction = newValue->get<uml::ParameterDirectionKind>();
 			setDirection(_direction); //17421
 			return true;
 		}
 		case uml::umlPackage::PARAMETER_ATTRIBUTE_EFFECT:
 		{
-			// BOOST CAST
+			// CAST Any to uml::ParameterEffectKind
 			uml::ParameterEffectKind _effect = newValue->get<uml::ParameterEffectKind>();
 			setEffect(_effect); //17422
 			return true;
 		}
 		case uml::umlPackage::PARAMETER_ATTRIBUTE_ISEXCEPTION:
 		{
-			// BOOST CAST
+			// CAST Any to bool
 			bool _isException = newValue->get<bool>();
 			setIsException(_isException); //17423
 			return true;
 		}
 		case uml::umlPackage::PARAMETER_ATTRIBUTE_ISSTREAM:
 		{
-			// BOOST CAST
+			// CAST Any to bool
 			bool _isStream = newValue->get<bool>();
 			setIsStream(_isStream); //17424
 			return true;
 		}
 		case uml::umlPackage::PARAMETER_ATTRIBUTE_PARAMETERSET:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::ParameterSet>
 			if((newValue->isContainer()) && (uml::umlPackage::PARAMETERSET_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::ParameterSet>> parameterSetList= newValue->get<std::shared_ptr<Bag<uml::ParameterSet>>>();

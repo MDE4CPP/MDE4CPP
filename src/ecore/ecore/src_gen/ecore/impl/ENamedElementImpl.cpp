@@ -275,7 +275,7 @@ bool ENamedElementImpl::eSet(int featureID, Any newValue)
 	{
 		case ecore::ecorePackage::ENAMEDELEMENT_ATTRIBUTE_NAME:
 		{
-			// BOOST CAST
+			// CAST Any to std::string
 			std::string _name = newValue->get<std::string>();
 			setName(_name); //384
 			return true;

@@ -297,8 +297,7 @@ Any ExpansionNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::l
 
   	switch(operationID)
 	{
-		
-		// 1801862850
+		// fUML::Semantics::Activities::ExpansionNodeActivation::fire(fUML::Semantics::Activities::Token[*]): 1801862850
 		case ActivitiesPackage::EXPANSIONNODEACTIVATION_OPERATION_FIRE_TOKEN:
 		{
 			//Retrieve input parameter 'incomingTokens'
@@ -307,28 +306,23 @@ Any ExpansionNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::l
 			std::list<Any>::const_iterator incoming_param_incomingTokens_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_incomingTokens = (*incoming_param_incomingTokens_arguments_citer)->get<std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> >();
 			this->fire(incoming_param_incomingTokens);
-			break;
 		}
-		
-		// 1117119621
+		// fUML::Semantics::Activities::ExpansionNodeActivation::getExpansionRegionActivation() : fUML::Semantics::Activities::ExpansionRegionActivation: 1117119621
 		case ActivitiesPackage::EXPANSIONNODEACTIVATION_OPERATION_GETEXPANSIONREGIONACTIVATION:
 		{
-				result = eAny(this->getExpansionRegionActivation());
+			result = eAny(this->getExpansionRegionActivation(), fUML::Semantics::Activities::ActivitiesPackage::EXPANSIONREGIONACTIVATION_CLASS,false);
 			break;
 		}
-		
-		// 14712609
+		// fUML::Semantics::Activities::ExpansionNodeActivation::isReady() : bool: 14712609
 		case ActivitiesPackage::EXPANSIONNODEACTIVATION_OPERATION_ISREADY:
 		{
-					result = eAny(this->isReady(),0,false);
+			result = eAny(this->isReady(),0,false);
 			break;
 		}
-		
-		// 913023797
+		// fUML::Semantics::Activities::ExpansionNodeActivation::receiveOffer(): 913023797
 		case ActivitiesPackage::EXPANSIONNODEACTIVATION_OPERATION_RECEIVEOFFER:
 		{
 			this->receiveOffer();
-			break;
 		}
 
 		default:

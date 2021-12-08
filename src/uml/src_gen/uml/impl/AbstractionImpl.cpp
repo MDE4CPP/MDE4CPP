@@ -414,7 +414,7 @@ bool AbstractionImpl::eSet(int featureID, Any newValue)
 	{
 		case uml::umlPackage::ABSTRACTION_ATTRIBUTE_MAPPING:
 		{
-			// BOOST CAST
+			// CAST Any to uml::OpaqueExpression
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::OpaqueExpression> _mapping = std::dynamic_pointer_cast<uml::OpaqueExpression>(_temp);
 			setMapping(_mapping); //117

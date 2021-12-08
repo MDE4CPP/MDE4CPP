@@ -246,8 +246,7 @@ Any LiteralEvaluationImpl::eInvoke(int operationID, std::shared_ptr<std::list<An
 
   	switch(operationID)
 	{
-		
-		// 1020927880
+		// fUML::Semantics::Values::LiteralEvaluation::getType(std::string) : uml::PrimitiveType: 1020927880
 		case ValuesPackage::LITERALEVALUATION_OPERATION_GETTYPE_ESTRING:
 		{
 			//Retrieve input parameter 'builtInTypeName'
@@ -255,7 +254,7 @@ Any LiteralEvaluationImpl::eInvoke(int operationID, std::shared_ptr<std::list<An
 			std::string incoming_param_builtInTypeName;
 			std::list<Any>::const_iterator incoming_param_builtInTypeName_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_builtInTypeName = (*incoming_param_builtInTypeName_arguments_citer)->get<std::string >();
-				result = eAny(this->getType(incoming_param_builtInTypeName));
+			result = eAny(this->getType(incoming_param_builtInTypeName), uml::umlPackage::PRIMITIVETYPE_CLASS,false);
 			break;
 		}
 

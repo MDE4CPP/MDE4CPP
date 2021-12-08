@@ -434,7 +434,7 @@ bool AcceptCallActionImpl::eSet(int featureID, Any newValue)
 	{
 		case uml::umlPackage::ACCEPTCALLACTION_ATTRIBUTE_RETURNINFORMATION:
 		{
-			// BOOST CAST
+			// CAST Any to uml::OutputPin
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::OutputPin> _returnInformation = std::dynamic_pointer_cast<uml::OutputPin>(_temp);
 			setReturnInformation(_returnInformation); //230

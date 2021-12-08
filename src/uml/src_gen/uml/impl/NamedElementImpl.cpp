@@ -573,14 +573,14 @@ bool NamedElementImpl::eSet(int featureID, Any newValue)
 	{
 		case uml::umlPackage::NAMEDELEMENT_ATTRIBUTE_NAME:
 		{
-			// BOOST CAST
+			// CAST Any to std::string
 			std::string _name = newValue->get<std::string>();
 			setName(_name); //1554
 			return true;
 		}
 		case uml::umlPackage::NAMEDELEMENT_ATTRIBUTE_NAMEEXPRESSION:
 		{
-			// BOOST CAST
+			// CAST Any to uml::StringExpression
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::StringExpression> _nameExpression = std::dynamic_pointer_cast<uml::StringExpression>(_temp);
 			setNameExpression(_nameExpression); //1555
@@ -588,7 +588,7 @@ bool NamedElementImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::NAMEDELEMENT_ATTRIBUTE_VISIBILITY:
 		{
-			// BOOST CAST
+			// CAST Any to uml::VisibilityKind
 			uml::VisibilityKind _visibility = newValue->get<uml::VisibilityKind>();
 			setVisibility(_visibility); //1558
 			return true;
@@ -611,14 +611,14 @@ Any NamedElementImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> a
 		case umlPackage::NAMEDELEMENT_OPERATION_ALLNAMESPACES:
 		{
 			std::shared_ptr<Bag<uml::Namespace> > resultList = this->allNamespaces();
-			return eAny(resultList,umlPackage::NAMESPACE_CLASS,true);
+			return eAny(resultList,uml::umlPackage::NAMESPACE_CLASS,true);
 			break;
 		}
 		// uml::NamedElement::allOwningPackages() : uml::Package[*]: 1344070418
 		case umlPackage::NAMEDELEMENT_OPERATION_ALLOWNINGPACKAGES:
 		{
 			std::shared_ptr<Bag<uml::Package> > resultList = this->allOwningPackages();
-			return eAny(resultList,umlPackage::PACKAGE_CLASS,true);
+			return eAny(resultList,uml::umlPackage::PACKAGE_CLASS,true);
 			break;
 		}
 		// uml::NamedElement::createDependency(uml::NamedElement) : uml::Dependency: 859532136
@@ -629,7 +629,7 @@ Any NamedElementImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> a
 			std::shared_ptr<uml::NamedElement> incoming_param_supplier;
 			std::list<Any>::const_iterator incoming_param_supplier_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_supplier = (*incoming_param_supplier_arguments_citer)->get<std::shared_ptr<uml::NamedElement> >();
-			result = eAny(this->createDependency(incoming_param_supplier), umlPackage::DEPENDENCY_CLASS,false);
+			result = eAny(this->createDependency(incoming_param_supplier), uml::umlPackage::DEPENDENCY_CLASS,false);
 			break;
 		}
 		// uml::NamedElement::createUsage(uml::NamedElement) : uml::Usage: 274373089
@@ -640,14 +640,14 @@ Any NamedElementImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> a
 			std::shared_ptr<uml::NamedElement> incoming_param_supplier;
 			std::list<Any>::const_iterator incoming_param_supplier_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_supplier = (*incoming_param_supplier_arguments_citer)->get<std::shared_ptr<uml::NamedElement> >();
-			result = eAny(this->createUsage(incoming_param_supplier), umlPackage::USAGE_CLASS,false);
+			result = eAny(this->createUsage(incoming_param_supplier), uml::umlPackage::USAGE_CLASS,false);
 			break;
 		}
 		// uml::NamedElement::getClientDependencies() : uml::Dependency[*]: 1863743641
 		case umlPackage::NAMEDELEMENT_OPERATION_GETCLIENTDEPENDENCIES:
 		{
 			std::shared_ptr<Bag<uml::Dependency> > resultList = this->getClientDependencies();
-			return eAny(resultList,umlPackage::DEPENDENCY_CLASS,true);
+			return eAny(resultList,uml::umlPackage::DEPENDENCY_CLASS,true);
 			break;
 		}
 		// uml::NamedElement::getLabel() : std::string: 1812636995
@@ -670,7 +670,7 @@ Any NamedElementImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> a
 		// uml::NamedElement::getNamespace() : uml::Namespace: 769066163
 		case umlPackage::NAMEDELEMENT_OPERATION_GETNAMESPACE:
 		{
-			result = eAny(this->getNamespace(), umlPackage::NAMESPACE_CLASS,false);
+			result = eAny(this->getNamespace(), uml::umlPackage::NAMESPACE_CLASS,false);
 			break;
 		}
 		// uml::NamedElement::getQualifiedName() : std::string {const}: 646487924

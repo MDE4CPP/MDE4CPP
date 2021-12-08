@@ -587,9 +587,9 @@ bool DeploymentImpl::eSet(int featureID, Any newValue)
 	{
 		case uml::umlPackage::DEPLOYMENT_ATTRIBUTE_CONFIGURATION:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::DeploymentSpecification>
 			if((newValue->isContainer()) && (uml::umlPackage::DEPLOYMENTSPECIFICATION_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::DeploymentSpecification>> configurationList= newValue->get<std::shared_ptr<Bag<uml::DeploymentSpecification>>>();
@@ -624,9 +624,9 @@ bool DeploymentImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::DEPLOYMENT_ATTRIBUTE_DEPLOYEDARTIFACT:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::DeployedArtifact>
 			if((newValue->isContainer()) && (uml::umlPackage::DEPLOYEDARTIFACT_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::DeployedArtifact>> deployedArtifactList= newValue->get<std::shared_ptr<Bag<uml::DeployedArtifact>>>();
@@ -661,7 +661,7 @@ bool DeploymentImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::DEPLOYMENT_ATTRIBUTE_LOCATION:
 		{
-			// BOOST CAST
+			// CAST Any to uml::DeploymentTarget
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::DeploymentTarget> _location = std::dynamic_pointer_cast<uml::DeploymentTarget>(_temp);
 			setLocation(_location); //6919

@@ -478,7 +478,7 @@ bool DecisionNodeImpl::eSet(int featureID, Any newValue)
 	{
 		case uml::umlPackage::DECISIONNODE_ATTRIBUTE_DECISIONINPUT:
 		{
-			// BOOST CAST
+			// CAST Any to uml::Behavior
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Behavior> _decisionInput = std::dynamic_pointer_cast<uml::Behavior>(_temp);
 			setDecisionInput(_decisionInput); //6620
@@ -486,7 +486,7 @@ bool DecisionNodeImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::DECISIONNODE_ATTRIBUTE_DECISIONINPUTFLOW:
 		{
-			// BOOST CAST
+			// CAST Any to uml::ObjectFlow
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::ObjectFlow> _decisionInputFlow = std::dynamic_pointer_cast<uml::ObjectFlow>(_temp);
 			setDecisionInputFlow(_decisionInputFlow); //6621

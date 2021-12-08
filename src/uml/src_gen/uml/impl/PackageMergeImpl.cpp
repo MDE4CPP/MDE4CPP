@@ -408,7 +408,7 @@ bool PackageMergeImpl::eSet(int featureID, Any newValue)
 	{
 		case uml::umlPackage::PACKAGEMERGE_ATTRIBUTE_MERGEDPACKAGE:
 		{
-			// BOOST CAST
+			// CAST Any to uml::Package
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Package> _mergedPackage = std::dynamic_pointer_cast<uml::Package>(_temp);
 			setMergedPackage(_mergedPackage); //1726
@@ -416,7 +416,7 @@ bool PackageMergeImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::PACKAGEMERGE_ATTRIBUTE_RECEIVINGPACKAGE:
 		{
-			// BOOST CAST
+			// CAST Any to uml::Package
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Package> _receivingPackage = std::dynamic_pointer_cast<uml::Package>(_temp);
 			setReceivingPackage(_receivingPackage); //1727

@@ -365,7 +365,7 @@ Any AcceptEventActionActivationImpl::eGet(int featureID, bool resolve, bool core
 			return eAny(returnValue,returnValue->getMetaElementID(),false); //311
 		}
 		case fUML::Semantics::Actions::ActionsPackage::ACCEPTEVENTACTIONACTIVATION_ATTRIBUTE_WAITING:
-				return eAny(isWaiting(),0,true); //312
+			return eAny(isWaiting(),0,true); //312
 	}
 	return ActionActivationImpl::eGet(featureID, resolve, coreType);
 }
@@ -388,7 +388,7 @@ bool AcceptEventActionActivationImpl::eSet(int featureID, Any newValue)
 	{
 		case fUML::Semantics::Actions::ActionsPackage::ACCEPTEVENTACTIONACTIVATION_ATTRIBUTE_EVENTACCEPTER:
 		{
-			// BOOST CAST
+			// CAST Any to fUML::Semantics::Actions::AcceptEventActionEventAccepter
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<fUML::Semantics::Actions::AcceptEventActionEventAccepter> _eventAccepter = std::dynamic_pointer_cast<fUML::Semantics::Actions::AcceptEventActionEventAccepter>(_temp);
 			setEventAccepter(_eventAccepter); //311
@@ -396,7 +396,7 @@ bool AcceptEventActionActivationImpl::eSet(int featureID, Any newValue)
 		}
 		case fUML::Semantics::Actions::ActionsPackage::ACCEPTEVENTACTIONACTIVATION_ATTRIBUTE_WAITING:
 		{
-			// BOOST CAST
+			// CAST Any to bool
 			bool _waiting = newValue->get<bool>();
 			setWaiting(_waiting); //312
 			return true;
@@ -415,8 +415,7 @@ Any AcceptEventActionActivationImpl::eInvoke(int operationID, std::shared_ptr<st
 
   	switch(operationID)
 	{
-		
-		// 908096905
+		// fUML::Semantics::Actions::AcceptEventActionActivation::accept(fUML::Semantics::CommonBehavior::EventOccurrence): 908096905
 		case ActionsPackage::ACCEPTEVENTACTIONACTIVATION_OPERATION_ACCEPT_EVENTOCCURRENCE:
 		{
 			//Retrieve input parameter 'eventOccurrence'
@@ -425,17 +424,13 @@ Any AcceptEventActionActivationImpl::eInvoke(int operationID, std::shared_ptr<st
 			std::list<Any>::const_iterator incoming_param_eventOccurrence_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_eventOccurrence = (*incoming_param_eventOccurrence_arguments_citer)->get<std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> >();
 			this->accept(incoming_param_eventOccurrence);
-			break;
 		}
-		
-		// 2139307330
+		// fUML::Semantics::Actions::AcceptEventActionActivation::doAction(): 2139307330
 		case ActionsPackage::ACCEPTEVENTACTIONACTIVATION_OPERATION_DOACTION:
 		{
 			this->doAction();
-			break;
 		}
-		
-		// 1477585117
+		// fUML::Semantics::Actions::AcceptEventActionActivation::fire(fUML::Semantics::Activities::Token[*]): 1477585117
 		case ActionsPackage::ACCEPTEVENTACTIONACTIVATION_OPERATION_FIRE_TOKEN:
 		{
 			//Retrieve input parameter 'incomingTokens'
@@ -444,10 +439,8 @@ Any AcceptEventActionActivationImpl::eInvoke(int operationID, std::shared_ptr<st
 			std::list<Any>::const_iterator incoming_param_incomingTokens_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_incomingTokens = (*incoming_param_incomingTokens_arguments_citer)->get<std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> >();
 			this->fire(incoming_param_incomingTokens);
-			break;
 		}
-		
-		// 640030514
+		// fUML::Semantics::Actions::AcceptEventActionActivation::initialize(uml::ActivityNode, fUML::Semantics::Activities::ActivityNodeActivationGroup): 640030514
 		case ActionsPackage::ACCEPTEVENTACTIONACTIVATION_OPERATION_INITIALIZE_ACTIVITYNODE_ACTIVITYNODEACTIVATIONGROUP:
 		{
 			//Retrieve input parameter 'node'
@@ -461,17 +454,14 @@ Any AcceptEventActionActivationImpl::eInvoke(int operationID, std::shared_ptr<st
 			std::list<Any>::const_iterator incoming_param_group_arguments_citer = std::next(arguments->begin(), 1);
 			incoming_param_group = (*incoming_param_group_arguments_citer)->get<std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> >();
 			this->initialize(incoming_param_node,incoming_param_group);
-			break;
 		}
-		
-		// 1247902812
+		// fUML::Semantics::Actions::AcceptEventActionActivation::isReady() : bool: 1247902812
 		case ActionsPackage::ACCEPTEVENTACTIONACTIVATION_OPERATION_ISREADY:
 		{
-					result = eAny(this->isReady(),0,false);
+			result = eAny(this->isReady(),0,false);
 			break;
 		}
-		
-		// 1530016891
+		// fUML::Semantics::Actions::AcceptEventActionActivation::match(fUML::Semantics::CommonBehavior::EventOccurrence) : bool: 1530016891
 		case ActionsPackage::ACCEPTEVENTACTIONACTIVATION_OPERATION_MATCH_EVENTOCCURRENCE:
 		{
 			//Retrieve input parameter 'eventOccurrence'
@@ -479,22 +469,18 @@ Any AcceptEventActionActivationImpl::eInvoke(int operationID, std::shared_ptr<st
 			std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> incoming_param_eventOccurrence;
 			std::list<Any>::const_iterator incoming_param_eventOccurrence_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_eventOccurrence = (*incoming_param_eventOccurrence_arguments_citer)->get<std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> >();
-					result = eAny(this->match(incoming_param_eventOccurrence),0,false);
+			result = eAny(this->match(incoming_param_eventOccurrence),0,false);
 			break;
 		}
-		
-		// 1056616233
+		// fUML::Semantics::Actions::AcceptEventActionActivation::run(): 1056616233
 		case ActionsPackage::ACCEPTEVENTACTIONACTIVATION_OPERATION_RUN:
 		{
 			this->run();
-			break;
 		}
-		
-		// 1685607188
+		// fUML::Semantics::Actions::AcceptEventActionActivation::terminate(): 1685607188
 		case ActionsPackage::ACCEPTEVENTACTIONACTIVATION_OPERATION_TERMINATE:
 		{
 			this->terminate();
-			break;
 		}
 
 		default:

@@ -458,7 +458,7 @@ bool ActivityGroupImpl::eSet(int featureID, Any newValue)
 	{
 		case uml::umlPackage::ACTIVITYGROUP_ATTRIBUTE_INACTIVITY:
 		{
-			// BOOST CAST
+			// CAST Any to uml::Activity
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Activity> _inActivity = std::dynamic_pointer_cast<uml::Activity>(_temp);
 			setInActivity(_inActivity); //1011
@@ -481,7 +481,7 @@ Any ActivityGroupImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> 
 		// uml::ActivityGroup::containingActivity() : uml::Activity: 155988317
 		case umlPackage::ACTIVITYGROUP_OPERATION_CONTAININGACTIVITY:
 		{
-			result = eAny(this->containingActivity(), umlPackage::ACTIVITY_CLASS,false);
+			result = eAny(this->containingActivity(), uml::umlPackage::ACTIVITY_CLASS,false);
 			break;
 		}
 		// uml::ActivityGroup::nodes_and_edges(Any, std::map) : bool: 662716167

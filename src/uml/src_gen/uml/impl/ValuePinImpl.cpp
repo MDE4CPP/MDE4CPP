@@ -522,7 +522,7 @@ bool ValuePinImpl::eSet(int featureID, Any newValue)
 	{
 		case uml::umlPackage::VALUEPIN_ATTRIBUTE_VALUE:
 		{
-			// BOOST CAST
+			// CAST Any to uml::ValueSpecification
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::ValueSpecification> _value = std::dynamic_pointer_cast<uml::ValueSpecification>(_temp);
 			setValue(_value); //24941

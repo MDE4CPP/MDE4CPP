@@ -375,9 +375,9 @@ Any ForkedTokenImpl::eGet(int featureID, bool resolve, bool coreType) const
 			return eAny(returnValue,returnValue->getMetaElementID(),false); //592
 		}
 		case fUML::Semantics::Activities::ActivitiesPackage::FORKEDTOKEN_ATTRIBUTE_BASETOKENISWITHDRAWN:
-				return eAny(isBaseTokenIsWithdrawn(),0,true); //594
+			return eAny(isBaseTokenIsWithdrawn(),0,true); //594
 		case fUML::Semantics::Activities::ActivitiesPackage::FORKEDTOKEN_ATTRIBUTE_REMAININGOFFERSCOUNT:
-				return eAny(getRemainingOffersCount(),0,true); //593
+			return eAny(getRemainingOffersCount(),0,true); //593
 	}
 	return TokenImpl::eGet(featureID, resolve, coreType);
 }
@@ -402,7 +402,7 @@ bool ForkedTokenImpl::eSet(int featureID, Any newValue)
 	{
 		case fUML::Semantics::Activities::ActivitiesPackage::FORKEDTOKEN_ATTRIBUTE_BASETOKEN:
 		{
-			// BOOST CAST
+			// CAST Any to fUML::Semantics::Activities::Token
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<fUML::Semantics::Activities::Token> _baseToken = std::dynamic_pointer_cast<fUML::Semantics::Activities::Token>(_temp);
 			setBaseToken(_baseToken); //592
@@ -410,14 +410,14 @@ bool ForkedTokenImpl::eSet(int featureID, Any newValue)
 		}
 		case fUML::Semantics::Activities::ActivitiesPackage::FORKEDTOKEN_ATTRIBUTE_BASETOKENISWITHDRAWN:
 		{
-			// BOOST CAST
+			// CAST Any to bool
 			bool _baseTokenIsWithdrawn = newValue->get<bool>();
 			setBaseTokenIsWithdrawn(_baseTokenIsWithdrawn); //594
 			return true;
 		}
 		case fUML::Semantics::Activities::ActivitiesPackage::FORKEDTOKEN_ATTRIBUTE_REMAININGOFFERSCOUNT:
 		{
-			// BOOST CAST
+			// CAST Any to int
 			int _remainingOffersCount = newValue->get<int>();
 			setRemainingOffersCount(_remainingOffersCount); //593
 			return true;
@@ -436,15 +436,13 @@ Any ForkedTokenImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> ar
 
   	switch(operationID)
 	{
-		
-		// 252058926
+		// fUML::Semantics::Activities::ForkedToken::_copy() : fUML::Semantics::Activities::Token: 252058926
 		case ActivitiesPackage::FORKEDTOKEN_OPERATION__COPY:
 		{
-				result = eAny(this->_copy());
+			result = eAny(this->_copy(), fUML::Semantics::Activities::ActivitiesPackage::TOKEN_CLASS,false);
 			break;
 		}
-		
-		// 1288297071
+		// fUML::Semantics::Activities::ForkedToken::equals(fUML::Semantics::Activities::Token) : bool: 1288297071
 		case ActivitiesPackage::FORKEDTOKEN_OPERATION_EQUALS_TOKEN:
 		{
 			//Retrieve input parameter 'otherToken'
@@ -452,29 +450,25 @@ Any ForkedTokenImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> ar
 			std::shared_ptr<fUML::Semantics::Activities::Token> incoming_param_otherToken;
 			std::list<Any>::const_iterator incoming_param_otherToken_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_otherToken = (*incoming_param_otherToken_arguments_citer)->get<std::shared_ptr<fUML::Semantics::Activities::Token> >();
-					result = eAny(this->equals(incoming_param_otherToken),0,false);
+			result = eAny(this->equals(incoming_param_otherToken),0,false);
 			break;
 		}
-		
-		// 727492760
+		// fUML::Semantics::Activities::ForkedToken::getValue() : fUML::Semantics::Values::Value {const}: 727492760
 		case ActivitiesPackage::FORKEDTOKEN_OPERATION_GETVALUE:
 		{
-				result = eAny(this->getValue());
+			result = eAny(this->getValue(), fUML::Semantics::Values::ValuesPackage::VALUE_CLASS,false);
 			break;
 		}
-		
-		// 1584869028
+		// fUML::Semantics::Activities::ForkedToken::isControl() : bool: 1584869028
 		case ActivitiesPackage::FORKEDTOKEN_OPERATION_ISCONTROL:
 		{
-					result = eAny(this->isControl(),0,false);
+			result = eAny(this->isControl(),0,false);
 			break;
 		}
-		
-		// 1407760219
+		// fUML::Semantics::Activities::ForkedToken::withdraw(): 1407760219
 		case ActivitiesPackage::FORKEDTOKEN_OPERATION_WITHDRAW:
 		{
 			this->withdraw();
-			break;
 		}
 
 		default:

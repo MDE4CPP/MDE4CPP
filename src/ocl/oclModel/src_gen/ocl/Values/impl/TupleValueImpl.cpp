@@ -334,15 +334,7 @@ Any TupleValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 	{
 		case ocl::Values::ValuesPackage::TUPLEVALUE_ATTRIBUTE_ELEMENTS:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<ocl::Values::NameValueBinding>::iterator iter = getElements()->begin();
-			Bag<ocl::Values::NameValueBinding>::iterator end = getElements()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //900			
+			return eAnyBag(getElements(),510142670); //900
 		}
 		case ocl::Values::ValuesPackage::TUPLEVALUE_ATTRIBUTE_MODEL:
 		{
@@ -371,43 +363,44 @@ bool TupleValueImpl::eSet(int featureID, Any newValue)
 	{
 		case ocl::Values::ValuesPackage::TUPLEVALUE_ATTRIBUTE_ELEMENTS:
 		{
-			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<ocl::Values::NameValueBinding>> elementsList(new Bag<ocl::Values::NameValueBinding>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
-			{
-				elementsList->add(std::dynamic_pointer_cast<ocl::Values::NameValueBinding>(*iter));
-				iter++;
-			}
-			
-			Bag<ocl::Values::NameValueBinding>::iterator iterElements = getElements()->begin();
-			Bag<ocl::Values::NameValueBinding>::iterator endElements = getElements()->end();
-			while (iterElements != endElements)
-			{
-				if (elementsList->find(*iterElements) == -1)
+			// CAST Any to Bag<ocl::Values::NameValueBinding>
+			if((newValue->isContainer()) && (ocl::Values::ValuesPackage::NAMEVALUEBINDING_CLASS ==newValue->getTypeId()))
+			{ 
+				try
 				{
-					getElements()->erase(*iterElements);
+					std::shared_ptr<Bag<ocl::Values::NameValueBinding>> elementsList= newValue->get<std::shared_ptr<Bag<ocl::Values::NameValueBinding>>>();
+					std::shared_ptr<Bag<ocl::Values::NameValueBinding>> _elements=getElements();
+					for(const std::shared_ptr<ocl::Values::NameValueBinding> indexElements: *_elements)
+					{
+						if (elementsList->find(indexElements) == -1)
+						{
+							_elements->erase(indexElements);
+						}
+					}
+
+					for(const std::shared_ptr<ocl::Values::NameValueBinding> indexElements: *elementsList)
+					{
+						if (_elements->find(indexElements) == -1)
+						{
+							_elements->add(indexElements);
+						}
+					}
 				}
-				iterElements++;
-			}
- 
-			iterElements = elementsList->begin();
-			endElements = elementsList->end();
-			while (iterElements != endElements)
-			{
-				if (getElements()->find(*iterElements) == -1)
+				catch(...)
 				{
-					getElements()->add(*iterElements);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterElements++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}
 		case ocl::Values::ValuesPackage::TUPLEVALUE_ATTRIBUTE_MODEL:
 		{
-			// BOOST CAST
+			// CAST Any to ocl::Types::TupleType
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<ocl::Types::TupleType> _model = std::dynamic_pointer_cast<ocl::Types::TupleType>(_temp);
 			setModel(_model); //901
@@ -427,8 +420,7 @@ Any TupleValueImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arg
 
   	switch(operationID)
 	{
-		
-		// 1507564928
+		// ocl::Values::TupleValue::equals(fUML::Semantics::Values::Value) : bool: 1507564928
 		case ValuesPackage::TUPLEVALUE_OPERATION_EQUALS_VALUE:
 		{
 			//Retrieve input parameter 'otherValue'
@@ -436,14 +428,13 @@ Any TupleValueImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arg
 			std::shared_ptr<fUML::Semantics::Values::Value> incoming_param_otherValue;
 			std::list<Any>::const_iterator incoming_param_otherValue_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_otherValue = (*incoming_param_otherValue_arguments_citer)->get<std::shared_ptr<fUML::Semantics::Values::Value> >();
-					result = eAny(this->equals(incoming_param_otherValue),0,false);
+			result = eAny(this->equals(incoming_param_otherValue),0,false);
 			break;
 		}
-		
-		// 1666165674
+		// ocl::Values::TupleValue::toString() : std::string: 1666165674
 		case ValuesPackage::TUPLEVALUE_OPERATION_TOSTRING:
 		{
-					result = eAny(this->toString(),0,false);
+			result = eAny(this->toString(),0,false);
 			break;
 		}
 

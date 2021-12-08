@@ -565,7 +565,7 @@ Any EncapsulatedClassifierImpl::eInvoke(int operationID, std::shared_ptr<std::li
 		case umlPackage::ENCAPSULATEDCLASSIFIER_OPERATION_GETOWNEDPORTS:
 		{
 			std::shared_ptr<Bag<uml::Port> > resultList = this->getOwnedPorts();
-			return eAny(resultList,umlPackage::PORT_CLASS,true);
+			return eAny(resultList,uml::umlPackage::PORT_CLASS,true);
 			break;
 		}
 

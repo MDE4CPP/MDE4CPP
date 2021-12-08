@@ -33,24 +33,21 @@ namespace ecore
 }
 
 //Forward Declaration for used types 
-namespace ecore 
-{
-	class EObject;
-}
 
 // namespace macro header include
 #include "ecore/ecore.hpp"
 
+// base class includes
+#include "ecore/EObject.hpp"
 
 
-#include "ecore/EModelElement.hpp"
 
 
 //*********************************
 namespace ecore 
 {
 	
-	class ECORE_API EObjectContainer : virtual public ecore::EModelElement
+	class ECORE_API EObjectContainer: virtual public EObject
 	{
 		public:
  			EObjectContainer(const EObjectContainer &) {}

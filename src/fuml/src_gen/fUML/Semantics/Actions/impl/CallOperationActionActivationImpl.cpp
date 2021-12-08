@@ -501,7 +501,7 @@ bool CallOperationActionActivationImpl::eSet(int featureID, Any newValue)
 	{
 		case fUML::Semantics::Actions::ActionsPackage::CALLOPERATIONACTIONACTIVATION_ATTRIBUTE_CALLOPERATIONACTION:
 		{
-			// BOOST CAST
+			// CAST Any to uml::CallOperationAction
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::CallOperationAction> _callOperationAction = std::dynamic_pointer_cast<uml::CallOperationAction>(_temp);
 			setCallOperationAction(_callOperationAction); //1913
@@ -521,11 +521,10 @@ Any CallOperationActionActivationImpl::eInvoke(int operationID, std::shared_ptr<
 
   	switch(operationID)
 	{
-		
-		// 371888052
+		// fUML::Semantics::Actions::CallOperationActionActivation::getCallExecution() : fUML::Semantics::CommonBehavior::Execution: 371888052
 		case ActionsPackage::CALLOPERATIONACTIONACTIVATION_OPERATION_GETCALLEXECUTION:
 		{
-				result = eAny(this->getCallExecution());
+			result = eAny(this->getCallExecution(), fUML::Semantics::CommonBehavior::CommonBehaviorPackage::EXECUTION_CLASS,false);
 			break;
 		}
 

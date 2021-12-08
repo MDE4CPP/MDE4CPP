@@ -265,15 +265,13 @@ Any ControlTokenImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> a
 
   	switch(operationID)
 	{
-		
-		// 186948332
+		// fUML::Semantics::Activities::ControlToken::_copy() : fUML::Semantics::Activities::Token: 186948332
 		case ActivitiesPackage::CONTROLTOKEN_OPERATION__COPY:
 		{
-				result = eAny(this->_copy());
+			result = eAny(this->_copy(), fUML::Semantics::Activities::ActivitiesPackage::TOKEN_CLASS,false);
 			break;
 		}
-		
-		// 1420478842
+		// fUML::Semantics::Activities::ControlToken::equals(fUML::Semantics::Activities::Token) : bool: 1420478842
 		case ActivitiesPackage::CONTROLTOKEN_OPERATION_EQUALS_TOKEN:
 		{
 			//Retrieve input parameter 'other'
@@ -281,14 +279,13 @@ Any ControlTokenImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> a
 			std::shared_ptr<fUML::Semantics::Activities::Token> incoming_param_other;
 			std::list<Any>::const_iterator incoming_param_other_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_other = (*incoming_param_other_arguments_citer)->get<std::shared_ptr<fUML::Semantics::Activities::Token> >();
-					result = eAny(this->equals(incoming_param_other),0,false);
+			result = eAny(this->equals(incoming_param_other),0,false);
 			break;
 		}
-		
-		// 2106407034
+		// fUML::Semantics::Activities::ControlToken::isControl() : bool: 2106407034
 		case ActivitiesPackage::CONTROLTOKEN_OPERATION_ISCONTROL:
 		{
-					result = eAny(this->isControl(),0,false);
+			result = eAny(this->isControl(),0,false);
 			break;
 		}
 

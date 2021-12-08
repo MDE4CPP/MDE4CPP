@@ -479,9 +479,9 @@ bool ConstraintImpl::eSet(int featureID, Any newValue)
 	{
 		case uml::umlPackage::CONSTRAINT_ATTRIBUTE_CONSTRAINEDELEMENT:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::Element>
 			if((newValue->isContainer()) && (uml::umlPackage::ELEMENT_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::Element>> constrainedElementList= newValue->get<std::shared_ptr<Bag<uml::Element>>>();
@@ -516,7 +516,7 @@ bool ConstraintImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::CONSTRAINT_ATTRIBUTE_CONTEXT:
 		{
-			// BOOST CAST
+			// CAST Any to uml::Namespace
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Namespace> _context = std::dynamic_pointer_cast<uml::Namespace>(_temp);
 			setContext(_context); //5713
@@ -524,7 +524,7 @@ bool ConstraintImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::CONSTRAINT_ATTRIBUTE_SPECIFICATION:
 		{
-			// BOOST CAST
+			// CAST Any to uml::ValueSpecification
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::ValueSpecification> _specification = std::dynamic_pointer_cast<uml::ValueSpecification>(_temp);
 			setSpecification(_specification); //5714

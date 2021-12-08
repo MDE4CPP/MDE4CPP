@@ -180,7 +180,7 @@ OpaqueBehaviorImpl& OpaqueBehaviorImpl::operator=(const OpaqueBehaviorImpl & obj
 		m_body.reset(new Bag<std::string>());
 		for(const std::shared_ptr<std::string> it: *bodyList) 
 		{
-			m_body->push_back(*it);
+			m_body->push_back(it);
 		}
 	}
 	else
@@ -193,7 +193,7 @@ OpaqueBehaviorImpl& OpaqueBehaviorImpl::operator=(const OpaqueBehaviorImpl & obj
 		m_language.reset(new Bag<std::string>());
 		for(const std::shared_ptr<std::string> it: *languageList) 
 		{
-			m_language->push_back(*it);
+			m_language->push_back(it);
 		}
 	}
 	else
@@ -598,13 +598,13 @@ bool OpaqueBehaviorImpl::eSet(int featureID, Any newValue)
 	{
 		case uml::umlPackage::OPAQUEBEHAVIOR_ATTRIBUTE_BODY:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<std::string>
 			// nothing to do
 			return true;
 		}
 		case uml::umlPackage::OPAQUEBEHAVIOR_ATTRIBUTE_LANGUAGE:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<std::string>
 			// nothing to do
 			return true;
 		}

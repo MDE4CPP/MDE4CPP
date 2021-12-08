@@ -433,7 +433,7 @@ bool SlotImpl::eSet(int featureID, Any newValue)
 	{
 		case uml::umlPackage::SLOT_ATTRIBUTE_DEFININGFEATURE:
 		{
-			// BOOST CAST
+			// CAST Any to uml::StructuralFeature
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::StructuralFeature> _definingFeature = std::dynamic_pointer_cast<uml::StructuralFeature>(_temp);
 			setDefiningFeature(_definingFeature); //2173
@@ -441,7 +441,7 @@ bool SlotImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::SLOT_ATTRIBUTE_OWNINGINSTANCE:
 		{
-			// BOOST CAST
+			// CAST Any to uml::InstanceSpecification
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::InstanceSpecification> _owningInstance = std::dynamic_pointer_cast<uml::InstanceSpecification>(_temp);
 			setOwningInstance(_owningInstance); //2175
@@ -449,9 +449,9 @@ bool SlotImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::SLOT_ATTRIBUTE_VALUE:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::ValueSpecification>
 			if((newValue->isContainer()) && (uml::umlPackage::VALUESPECIFICATION_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::ValueSpecification>> valueList= newValue->get<std::shared_ptr<Bag<uml::ValueSpecification>>>();

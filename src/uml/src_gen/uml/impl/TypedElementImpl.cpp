@@ -319,7 +319,7 @@ bool TypedElementImpl::eSet(int featureID, Any newValue)
 	{
 		case uml::umlPackage::TYPEDELEMENT_ATTRIBUTE_TYPE:
 		{
-			// BOOST CAST
+			// CAST Any to uml::Type
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Type> _type = std::dynamic_pointer_cast<uml::Type>(_temp);
 			setType(_type); //2459

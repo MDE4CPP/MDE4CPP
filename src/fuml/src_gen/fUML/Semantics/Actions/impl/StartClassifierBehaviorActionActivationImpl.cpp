@@ -305,12 +305,10 @@ Any StartClassifierBehaviorActionActivationImpl::eInvoke(int operationID, std::s
 
   	switch(operationID)
 	{
-		
-		// 271588955
+		// fUML::Semantics::Actions::StartClassifierBehaviorActionActivation::doAction(): 271588955
 		case ActionsPackage::STARTCLASSIFIERBEHAVIORACTIONACTIVATION_OPERATION_DOACTION:
 		{
 			this->doAction();
-			break;
 		}
 
 		default:

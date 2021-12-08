@@ -830,16 +830,16 @@ bool AssociationImpl::eSet(int featureID, Any newValue)
 	{
 		case uml::umlPackage::ASSOCIATION_ATTRIBUTE_ISDERIVED:
 		{
-			// BOOST CAST
+			// CAST Any to bool
 			bool _isDerived = newValue->get<bool>();
 			setIsDerived(_isDerived); //2140
 			return true;
 		}
 		case uml::umlPackage::ASSOCIATION_ATTRIBUTE_MEMBEREND:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::Property>
 			if((newValue->isContainer()) && (uml::umlPackage::PROPERTY_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::Property>> memberEndList= newValue->get<std::shared_ptr<Bag<uml::Property>>>();
@@ -874,9 +874,9 @@ bool AssociationImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::ASSOCIATION_ATTRIBUTE_NAVIGABLEOWNEDEND:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::Property>
 			if((newValue->isContainer()) && (uml::umlPackage::PROPERTY_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::Property>> navigableOwnedEndList= newValue->get<std::shared_ptr<Bag<uml::Property>>>();
@@ -911,9 +911,9 @@ bool AssociationImpl::eSet(int featureID, Any newValue)
 		}
 		case uml::umlPackage::ASSOCIATION_ATTRIBUTE_OWNEDEND:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::Property>
 			if((newValue->isContainer()) && (uml::umlPackage::PROPERTY_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::Property>> ownedEndList= newValue->get<std::shared_ptr<Bag<uml::Property>>>();
@@ -1019,7 +1019,7 @@ Any AssociationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> ar
 		case umlPackage::ASSOCIATION_OPERATION_GETENDTYPES:
 		{
 			std::shared_ptr<Bag<uml::Type> > resultList = this->getEndTypes();
-			return eAny(resultList,umlPackage::TYPE_CLASS,true);
+			return eAny(resultList,uml::umlPackage::TYPE_CLASS,true);
 			break;
 		}
 		// uml::Association::isBinary() : bool: 1275990908

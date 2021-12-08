@@ -201,14 +201,10 @@ NavigationCallExpImpl& NavigationCallExpImpl::operator=(const NavigationCallExpI
 		m_qualifier.reset(new Bag<ocl::Expressions::OclExpression>());
 		
 		
-
-		Bag<ocl::Expressions::OclExpression>::iterator qualifierIter = qualifierList->begin();
-		Bag<ocl::Expressions::OclExpression>::iterator qualifierEnd = qualifierList->end();
-		while (qualifierIter != qualifierEnd) 
+		for(const std::shared_ptr<ocl::Expressions::OclExpression> qualifierindexElem: *qualifierList) 
 		{
-			std::shared_ptr<ocl::Expressions::OclExpression> temp = std::dynamic_pointer_cast<ocl::Expressions::OclExpression>((*qualifierIter)->copy());
-			getQualifier()->push_back(temp);
-			qualifierIter++;
+			std::shared_ptr<ocl::Expressions::OclExpression> temp = std::dynamic_pointer_cast<ocl::Expressions::OclExpression>((qualifierindexElem)->copy());
+			m_qualifier->push_back(temp);
 		}
 	}
 	else
@@ -471,15 +467,7 @@ Any NavigationCallExpImpl::eGet(int featureID, bool resolve, bool coreType) cons
 		}
 		case ocl::Expressions::ExpressionsPackage::NAVIGATIONCALLEXP_ATTRIBUTE_QUALIFIER:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<ocl::Expressions::OclExpression>::iterator iter = getQualifier()->begin();
-			Bag<ocl::Expressions::OclExpression>::iterator end = getQualifier()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //5424			
+			return eAnyBag(getQualifier(),925307628); //5424
 		}
 	}
 	return FeatureCallExpImpl::eGet(featureID, resolve, coreType);
@@ -503,7 +491,7 @@ bool NavigationCallExpImpl::eSet(int featureID, Any newValue)
 	{
 		case ocl::Expressions::ExpressionsPackage::NAVIGATIONCALLEXP_ATTRIBUTE_NAVIGATIONSOURCE:
 		{
-			// BOOST CAST
+			// CAST Any to ecore::EAttribute
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<ecore::EAttribute> _navigationSource = std::dynamic_pointer_cast<ecore::EAttribute>(_temp);
 			setNavigationSource(_navigationSource); //5425
@@ -511,37 +499,38 @@ bool NavigationCallExpImpl::eSet(int featureID, Any newValue)
 		}
 		case ocl::Expressions::ExpressionsPackage::NAVIGATIONCALLEXP_ATTRIBUTE_QUALIFIER:
 		{
-			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<ocl::Expressions::OclExpression>> qualifierList(new Bag<ocl::Expressions::OclExpression>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
-			{
-				qualifierList->add(std::dynamic_pointer_cast<ocl::Expressions::OclExpression>(*iter));
-				iter++;
-			}
-			
-			Bag<ocl::Expressions::OclExpression>::iterator iterQualifier = getQualifier()->begin();
-			Bag<ocl::Expressions::OclExpression>::iterator endQualifier = getQualifier()->end();
-			while (iterQualifier != endQualifier)
-			{
-				if (qualifierList->find(*iterQualifier) == -1)
+			// CAST Any to Bag<ocl::Expressions::OclExpression>
+			if((newValue->isContainer()) && (ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_CLASS ==newValue->getTypeId()))
+			{ 
+				try
 				{
-					getQualifier()->erase(*iterQualifier);
+					std::shared_ptr<Bag<ocl::Expressions::OclExpression>> qualifierList= newValue->get<std::shared_ptr<Bag<ocl::Expressions::OclExpression>>>();
+					std::shared_ptr<Bag<ocl::Expressions::OclExpression>> _qualifier=getQualifier();
+					for(const std::shared_ptr<ocl::Expressions::OclExpression> indexQualifier: *_qualifier)
+					{
+						if (qualifierList->find(indexQualifier) == -1)
+						{
+							_qualifier->erase(indexQualifier);
+						}
+					}
+
+					for(const std::shared_ptr<ocl::Expressions::OclExpression> indexQualifier: *qualifierList)
+					{
+						if (_qualifier->find(indexQualifier) == -1)
+						{
+							_qualifier->add(indexQualifier);
+						}
+					}
 				}
-				iterQualifier++;
-			}
- 
-			iterQualifier = qualifierList->begin();
-			endQualifier = qualifierList->end();
-			while (iterQualifier != endQualifier)
-			{
-				if (getQualifier()->find(*iterQualifier) == -1)
+				catch(...)
 				{
-					getQualifier()->add(*iterQualifier);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterQualifier++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}

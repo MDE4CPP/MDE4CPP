@@ -311,8 +311,7 @@ Any JoinNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<A
 
   	switch(operationID)
 	{
-		
-		// 1177783705
+		// fUML::Semantics::Activities::JoinNodeActivation::fire(fUML::Semantics::Activities::Token[*]): 1177783705
 		case ActivitiesPackage::JOINNODEACTIVATION_OPERATION_FIRE_TOKEN:
 		{
 			//Retrieve input parameter 'incomingTokens'
@@ -321,13 +320,11 @@ Any JoinNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<A
 			std::list<Any>::const_iterator incoming_param_incomingTokens_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_incomingTokens = (*incoming_param_incomingTokens_arguments_citer)->get<std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> >();
 			this->fire(incoming_param_incomingTokens);
-			break;
 		}
-		
-		// 1317433736
+		// fUML::Semantics::Activities::JoinNodeActivation::isReady() : bool: 1317433736
 		case ActivitiesPackage::JOINNODEACTIVATION_OPERATION_ISREADY:
 		{
-					result = eAny(this->isReady(),0,false);
+			result = eAny(this->isReady(),0,false);
 			break;
 		}
 

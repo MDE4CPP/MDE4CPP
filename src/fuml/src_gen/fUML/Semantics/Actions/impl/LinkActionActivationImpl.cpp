@@ -281,8 +281,7 @@ Any LinkActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list
 
   	switch(operationID)
 	{
-		
-		// 767035740
+		// fUML::Semantics::Actions::LinkActionActivation::endMatchesEndData(fUML::Semantics::StructuredClassifiers::Link, uml::LinkEndData) : bool: 767035740
 		case ActionsPackage::LINKACTIONACTIVATION_OPERATION_ENDMATCHESENDDATA_LINK_LINKENDDATA:
 		{
 			//Retrieve input parameter 'link'
@@ -295,18 +294,16 @@ Any LinkActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list
 			std::shared_ptr<uml::LinkEndData> incoming_param_endData;
 			std::list<Any>::const_iterator incoming_param_endData_arguments_citer = std::next(arguments->begin(), 1);
 			incoming_param_endData = (*incoming_param_endData_arguments_citer)->get<std::shared_ptr<uml::LinkEndData> >();
-					result = eAny(this->endMatchesEndData(incoming_param_link,incoming_param_endData),0,false);
+			result = eAny(this->endMatchesEndData(incoming_param_link,incoming_param_endData),0,false);
 			break;
 		}
-		
-		// 1506375580
+		// fUML::Semantics::Actions::LinkActionActivation::getAssociation() : uml::Association: 1506375580
 		case ActionsPackage::LINKACTIONACTIVATION_OPERATION_GETASSOCIATION:
 		{
-				result = eAny(this->getAssociation());
+			result = eAny(this->getAssociation(), uml::umlPackage::ASSOCIATION_CLASS,false);
 			break;
 		}
-		
-		// 1981105116
+		// fUML::Semantics::Actions::LinkActionActivation::linkMatchesEndData(fUML::Semantics::StructuredClassifiers::Link, uml::LinkEndData[*]) : bool: 1981105116
 		case ActionsPackage::LINKACTIONACTIVATION_OPERATION_LINKMATCHESENDDATA_LINK_LINKENDDATA:
 		{
 			//Retrieve input parameter 'link'
@@ -319,7 +316,7 @@ Any LinkActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list
 			std::shared_ptr<Bag<uml::LinkEndData>> incoming_param_endDataList;
 			std::list<Any>::const_iterator incoming_param_endDataList_arguments_citer = std::next(arguments->begin(), 1);
 			incoming_param_endDataList = (*incoming_param_endDataList_arguments_citer)->get<std::shared_ptr<Bag<uml::LinkEndData>> >();
-					result = eAny(this->linkMatchesEndData(incoming_param_link,incoming_param_endDataList),0,false);
+			result = eAny(this->linkMatchesEndData(incoming_param_link,incoming_param_endDataList),0,false);
 			break;
 		}
 

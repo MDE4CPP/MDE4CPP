@@ -425,7 +425,7 @@ bool StartClassifierBehaviorActionImpl::eSet(int featureID, Any newValue)
 	{
 		case uml::umlPackage::STARTCLASSIFIERBEHAVIORACTION_ATTRIBUTE_OBJECT:
 		{
-			// BOOST CAST
+			// CAST Any to uml::InputPin
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::InputPin> _object = std::dynamic_pointer_cast<uml::InputPin>(_temp);
 			setObject(_object); //21827

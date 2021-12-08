@@ -486,9 +486,9 @@ bool InformationItemImpl::eSet(int featureID, Any newValue)
 	{
 		case uml::umlPackage::INFORMATIONITEM_ATTRIBUTE_REPRESENTED:
 		{
-			// BOOST CAST
+			// CAST Any to Bag<uml::Classifier>
 			if((newValue->isContainer()) && (uml::umlPackage::CLASSIFIER_CLASS ==newValue->getTypeId()))
-			{
+			{ 
 				try
 				{
 					std::shared_ptr<Bag<uml::Classifier>> representedList= newValue->get<std::shared_ptr<Bag<uml::Classifier>>>();

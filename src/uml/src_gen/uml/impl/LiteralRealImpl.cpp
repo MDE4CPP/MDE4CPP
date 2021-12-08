@@ -393,7 +393,7 @@ bool LiteralRealImpl::eSet(int featureID, Any newValue)
 	{
 		case uml::umlPackage::LITERALREAL_ATTRIBUTE_VALUE:
 		{
-			// BOOST CAST
+			// CAST Any to double
 			double _value = newValue->get<double>();
 			setValue(_value); //14015
 			return true;

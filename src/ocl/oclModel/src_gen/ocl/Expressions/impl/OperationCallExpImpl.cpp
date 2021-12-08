@@ -201,14 +201,10 @@ OperationCallExpImpl& OperationCallExpImpl::operator=(const OperationCallExpImpl
 		m_argument.reset(new Bag<ocl::Expressions::OclExpression>());
 		
 		
-
-		Bag<ocl::Expressions::OclExpression>::iterator argumentIter = argumentList->begin();
-		Bag<ocl::Expressions::OclExpression>::iterator argumentEnd = argumentList->end();
-		while (argumentIter != argumentEnd) 
+		for(const std::shared_ptr<ocl::Expressions::OclExpression> argumentindexElem: *argumentList) 
 		{
-			std::shared_ptr<ocl::Expressions::OclExpression> temp = std::dynamic_pointer_cast<ocl::Expressions::OclExpression>((*argumentIter)->copy());
-			getArgument()->push_back(temp);
-			argumentIter++;
+			std::shared_ptr<ocl::Expressions::OclExpression> temp = std::dynamic_pointer_cast<ocl::Expressions::OclExpression>((argumentindexElem)->copy());
+			m_argument->push_back(temp);
 		}
 	}
 	else
@@ -474,15 +470,7 @@ Any OperationCallExpImpl::eGet(int featureID, bool resolve, bool coreType) const
 	{
 		case ocl::Expressions::ExpressionsPackage::OPERATIONCALLEXP_ATTRIBUTE_ARGUMENT:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<ocl::Expressions::OclExpression>::iterator iter = getArgument()->begin();
-			Bag<ocl::Expressions::OclExpression>::iterator end = getArgument()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //6624			
+			return eAnyBag(getArgument(),925307628); //6624
 		}
 		case ocl::Expressions::ExpressionsPackage::OPERATIONCALLEXP_ATTRIBUTE_REFERREDOPERATION:
 		{
@@ -511,43 +499,44 @@ bool OperationCallExpImpl::eSet(int featureID, Any newValue)
 	{
 		case ocl::Expressions::ExpressionsPackage::OPERATIONCALLEXP_ATTRIBUTE_ARGUMENT:
 		{
-			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<ocl::Expressions::OclExpression>> argumentList(new Bag<ocl::Expressions::OclExpression>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
-			{
-				argumentList->add(std::dynamic_pointer_cast<ocl::Expressions::OclExpression>(*iter));
-				iter++;
-			}
-			
-			Bag<ocl::Expressions::OclExpression>::iterator iterArgument = getArgument()->begin();
-			Bag<ocl::Expressions::OclExpression>::iterator endArgument = getArgument()->end();
-			while (iterArgument != endArgument)
-			{
-				if (argumentList->find(*iterArgument) == -1)
+			// CAST Any to Bag<ocl::Expressions::OclExpression>
+			if((newValue->isContainer()) && (ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_CLASS ==newValue->getTypeId()))
+			{ 
+				try
 				{
-					getArgument()->erase(*iterArgument);
+					std::shared_ptr<Bag<ocl::Expressions::OclExpression>> argumentList= newValue->get<std::shared_ptr<Bag<ocl::Expressions::OclExpression>>>();
+					std::shared_ptr<Bag<ocl::Expressions::OclExpression>> _argument=getArgument();
+					for(const std::shared_ptr<ocl::Expressions::OclExpression> indexArgument: *_argument)
+					{
+						if (argumentList->find(indexArgument) == -1)
+						{
+							_argument->erase(indexArgument);
+						}
+					}
+
+					for(const std::shared_ptr<ocl::Expressions::OclExpression> indexArgument: *argumentList)
+					{
+						if (_argument->find(indexArgument) == -1)
+						{
+							_argument->add(indexArgument);
+						}
+					}
 				}
-				iterArgument++;
-			}
- 
-			iterArgument = argumentList->begin();
-			endArgument = argumentList->end();
-			while (iterArgument != endArgument)
-			{
-				if (getArgument()->find(*iterArgument) == -1)
+				catch(...)
 				{
-					getArgument()->add(*iterArgument);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterArgument++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}
 		case ocl::Expressions::ExpressionsPackage::OPERATIONCALLEXP_ATTRIBUTE_REFERREDOPERATION:
 		{
-			// BOOST CAST
+			// CAST Any to ecore::EOperation
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<ecore::EOperation> _referredOperation = std::dynamic_pointer_cast<ecore::EOperation>(_temp);
 			setReferredOperation(_referredOperation); //6625

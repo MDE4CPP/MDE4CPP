@@ -299,7 +299,7 @@ bool EventOccurrenceImpl::eSet(int featureID, Any newValue)
 	{
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::EVENTOCCURRENCE_ATTRIBUTE_TARGET:
 		{
-			// BOOST CAST
+			// CAST Any to fUML::Semantics::StructuredClassifiers::Reference
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> _target = std::dynamic_pointer_cast<fUML::Semantics::StructuredClassifiers::Reference>(_temp);
 			setTarget(_target); //450
@@ -319,22 +319,19 @@ Any EventOccurrenceImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>
 
   	switch(operationID)
 	{
-		
-		// 1163016542
+		// fUML::Semantics::CommonBehavior::EventOccurrence::doSend(): 1163016542
 		case CommonBehaviorPackage::EVENTOCCURRENCE_OPERATION_DOSEND:
 		{
 			this->doSend();
-			break;
 		}
-		
-		// 1434655027
+		// fUML::Semantics::CommonBehavior::EventOccurrence::getParameterValues() : fUML::Semantics::CommonBehavior::ParameterValue[*]: 1434655027
 		case CommonBehaviorPackage::EVENTOCCURRENCE_OPERATION_GETPARAMETERVALUES:
 		{
-				result = eAny(this->getParameterValues());
+			std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > resultList = this->getParameterValues();
+			return eAny(resultList,fUML::Semantics::CommonBehavior::CommonBehaviorPackage::PARAMETERVALUE_CLASS,true);
 			break;
 		}
-		
-		// 2115413211
+		// fUML::Semantics::CommonBehavior::EventOccurrence::match(uml::Trigger) : bool: 2115413211
 		case CommonBehaviorPackage::EVENTOCCURRENCE_OPERATION_MATCH_TRIGGER:
 		{
 			//Retrieve input parameter 'trigger'
@@ -342,11 +339,10 @@ Any EventOccurrenceImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>
 			std::shared_ptr<uml::Trigger> incoming_param_trigger;
 			std::list<Any>::const_iterator incoming_param_trigger_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_trigger = (*incoming_param_trigger_arguments_citer)->get<std::shared_ptr<uml::Trigger> >();
-					result = eAny(this->match(incoming_param_trigger),0,false);
+			result = eAny(this->match(incoming_param_trigger),0,false);
 			break;
 		}
-		
-		// 168437065
+		// fUML::Semantics::CommonBehavior::EventOccurrence::matchAny(uml::Trigger[*]) : bool: 168437065
 		case CommonBehaviorPackage::EVENTOCCURRENCE_OPERATION_MATCHANY_TRIGGER:
 		{
 			//Retrieve input parameter 'triggers'
@@ -354,11 +350,10 @@ Any EventOccurrenceImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>
 			std::shared_ptr<Bag<uml::Trigger>> incoming_param_triggers;
 			std::list<Any>::const_iterator incoming_param_triggers_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_triggers = (*incoming_param_triggers_arguments_citer)->get<std::shared_ptr<Bag<uml::Trigger>> >();
-					result = eAny(this->matchAny(incoming_param_triggers),0,false);
+			result = eAny(this->matchAny(incoming_param_triggers),0,false);
 			break;
 		}
-		
-		// 1224118753
+		// fUML::Semantics::CommonBehavior::EventOccurrence::sendTo(fUML::Semantics::StructuredClassifiers::Reference): 1224118753
 		case CommonBehaviorPackage::EVENTOCCURRENCE_OPERATION_SENDTO_REFERENCE:
 		{
 			//Retrieve input parameter 'target'
@@ -367,7 +362,6 @@ Any EventOccurrenceImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>
 			std::list<Any>::const_iterator incoming_param_target_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_target = (*incoming_param_target_arguments_citer)->get<std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> >();
 			this->sendTo(incoming_param_target);
-			break;
 		}
 
 		default:

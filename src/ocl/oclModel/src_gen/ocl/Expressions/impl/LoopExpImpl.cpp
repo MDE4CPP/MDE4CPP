@@ -204,14 +204,10 @@ LoopExpImpl& LoopExpImpl::operator=(const LoopExpImpl & obj)
 		m_iterator.reset(new Bag<ocl::Expressions::Variable>());
 		
 		
-
-		Bag<ocl::Expressions::Variable>::iterator iteratorIter = iteratorList->begin();
-		Bag<ocl::Expressions::Variable>::iterator iteratorEnd = iteratorList->end();
-		while (iteratorIter != iteratorEnd) 
+		for(const std::shared_ptr<ocl::Expressions::Variable> iteratorindexElem: *iteratorList) 
 		{
-			std::shared_ptr<ocl::Expressions::Variable> temp = std::dynamic_pointer_cast<ocl::Expressions::Variable>((*iteratorIter)->copy());
-			getIterator()->push_back(temp);
-			iteratorIter++;
+			std::shared_ptr<ocl::Expressions::Variable> temp = std::dynamic_pointer_cast<ocl::Expressions::Variable>((iteratorindexElem)->copy());
+			m_iterator->push_back(temp);
 		}
 	}
 	else
@@ -454,15 +450,7 @@ Any LoopExpImpl::eGet(int featureID, bool resolve, bool coreType) const
 		}
 		case ocl::Expressions::ExpressionsPackage::LOOPEXP_ATTRIBUTE_ITERATOR:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<ocl::Expressions::Variable>::iterator iter = getIterator()->begin();
-			Bag<ocl::Expressions::Variable>::iterator end = getIterator()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //4724			
+			return eAnyBag(getIterator(),1173641377); //4724
 		}
 	}
 	return CallExpImpl::eGet(featureID, resolve, coreType);
@@ -486,7 +474,7 @@ bool LoopExpImpl::eSet(int featureID, Any newValue)
 	{
 		case ocl::Expressions::ExpressionsPackage::LOOPEXP_ATTRIBUTE_BODY:
 		{
-			// BOOST CAST
+			// CAST Any to ocl::Expressions::OclExpression
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<ocl::Expressions::OclExpression> _body = std::dynamic_pointer_cast<ocl::Expressions::OclExpression>(_temp);
 			setBody(_body); //4723
@@ -494,37 +482,38 @@ bool LoopExpImpl::eSet(int featureID, Any newValue)
 		}
 		case ocl::Expressions::ExpressionsPackage::LOOPEXP_ATTRIBUTE_ITERATOR:
 		{
-			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<ocl::Expressions::Variable>> iteratorList(new Bag<ocl::Expressions::Variable>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
-			{
-				iteratorList->add(std::dynamic_pointer_cast<ocl::Expressions::Variable>(*iter));
-				iter++;
-			}
-			
-			Bag<ocl::Expressions::Variable>::iterator iterIterator = getIterator()->begin();
-			Bag<ocl::Expressions::Variable>::iterator endIterator = getIterator()->end();
-			while (iterIterator != endIterator)
-			{
-				if (iteratorList->find(*iterIterator) == -1)
+			// CAST Any to Bag<ocl::Expressions::Variable>
+			if((newValue->isContainer()) && (ocl::Expressions::ExpressionsPackage::VARIABLE_CLASS ==newValue->getTypeId()))
+			{ 
+				try
 				{
-					getIterator()->erase(*iterIterator);
+					std::shared_ptr<Bag<ocl::Expressions::Variable>> iteratorList= newValue->get<std::shared_ptr<Bag<ocl::Expressions::Variable>>>();
+					std::shared_ptr<Bag<ocl::Expressions::Variable>> _iterator=getIterator();
+					for(const std::shared_ptr<ocl::Expressions::Variable> indexIterator: *_iterator)
+					{
+						if (iteratorList->find(indexIterator) == -1)
+						{
+							_iterator->erase(indexIterator);
+						}
+					}
+
+					for(const std::shared_ptr<ocl::Expressions::Variable> indexIterator: *iteratorList)
+					{
+						if (_iterator->find(indexIterator) == -1)
+						{
+							_iterator->add(indexIterator);
+						}
+					}
 				}
-				iterIterator++;
-			}
- 
-			iterIterator = iteratorList->begin();
-			endIterator = iteratorList->end();
-			while (iterIterator != endIterator)
-			{
-				if (getIterator()->find(*iterIterator) == -1)
+				catch(...)
 				{
-					getIterator()->add(*iterIterator);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterIterator++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}

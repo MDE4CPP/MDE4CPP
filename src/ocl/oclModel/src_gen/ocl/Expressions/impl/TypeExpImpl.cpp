@@ -427,7 +427,7 @@ bool TypeExpImpl::eSet(int featureID, Any newValue)
 	{
 		case ocl::Expressions::ExpressionsPackage::TYPEEXP_ATTRIBUTE_REFERREDTYPE:
 		{
-			// BOOST CAST
+			// CAST Any to ecore::EClassifier
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<ecore::EClassifier> _referredType = std::dynamic_pointer_cast<ecore::EClassifier>(_temp);
 			setReferredType(_referredType); //9122
