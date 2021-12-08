@@ -123,7 +123,7 @@ bool [aClass.name.toUpperFirst().concat('Impl')/]::eSet(int featureID, Any newVa
 	[for (struct : EStructuralFeature | aClass.eStructuralFeatures->select(changeable)->reject(doNotGenerateEStructuralFeature())->asOrderedSet()->sortedBy(name))]
 		case [struct.metamodelPackageNameForEstructuralFeture(aClass)/]::[struct.getStaticAttributeIDName()/]:
 		{
-			// BOOST CAST
+			// CAST Any to [struct.generateStructuralFeatureType(false)/]
 		[if (struct.eType.oclIsKindOf(EDataType) and struct.upperBound = 1 and struct.eGenericType.eTypeArguments->size() = 0 )]
 			[struct.generateStructuralFeatureType(false)/] _[struct.name/] = newValue->get<[struct.generateStructuralFeatureType(false)/]>();
 			[struct.SetterName()/](_[struct.name/]); //[aClass.getMyClassifierID()/][struct.getFeatureID()/]
@@ -138,8 +138,8 @@ bool [aClass.name.toUpperFirst().concat('Impl')/]::eSet(int featureID, Any newVa
 			std::shared_ptr<[struct.generateStructuralFeatureType(false)/]> _[struct.name/] = std::dynamic_pointer_cast<[struct.generateStructuralFeatureType(false)/]>(_temp);
 			[struct.SetterName()/](_[struct.name/]); //[aClass.getMyClassifierID()/][struct.getFeatureID()/]
 		[else]
-			if((newValue->isContainer()) && ([struct.metamodelPackageNameForEstructuralFeture(aClass)/]::[struct.eType.getStaticAttributeIDName()/] ==newValue->getTypeId()))
-			{
+			if((newValue->isContainer()) && ([struct.eType.generateNamespaceDefinition().concat('::').concat(struct.eType.ePackage.name).concat('Package')/]::[struct.eType.getStaticAttributeIDName()/] ==newValue->getTypeId()))
+			{ 
 				try
 				{
 					std::shared_ptr<[struct.generateStructuralFeatureType(false)/]> [struct.name/]List= newValue->get<std::shared_ptr<[struct.generateStructuralFeatureType(false)/]>>();
