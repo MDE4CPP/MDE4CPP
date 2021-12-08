@@ -53,7 +53,7 @@ void StereotypeStorage::applyStereotype(std::shared_ptr<uml::Element> element, s
 				{
 					DEBUG_MESSAGE(std::cout << "Set Base Property " << prop->getQualifiedName() << std::endl;)
 					//set Base
-					stereotype->set(prop, eAny(this));
+					stereotype->set(prop, eAny(this,0,false));
 				}
 			}
 		}
