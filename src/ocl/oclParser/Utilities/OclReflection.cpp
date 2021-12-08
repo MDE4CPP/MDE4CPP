@@ -199,18 +199,21 @@ std::shared_ptr<ecore::EReference> OclReflection::lookupAssociationClass(std::sh
 
 Any OclReflection::retrieveRawValue(std::shared_ptr<fUML::Semantics::Values::Value> fromValue)
 {
-    if(instanceOf<CollectionValue>(fromValue)) {
-        std::shared_ptr<CollectionValue> colValue = std::dynamic_pointer_cast<CollectionValue>(fromValue);
+	std::shared_ptr<CollectionValue> colValue = std::dynamic_pointer_cast<CollectionValue>(fromValue);
+    if(nullptr != colValue)
+    {
+        std::shared_ptr<Bag<ocl::Values::Element>> values=colValue->getElements();
+
         std::shared_ptr<Bag<AnyObject>> bagValue = std::make_shared<Bag<AnyObject>>();
         size_t size=colValue->getElements()->size();
         for(size_t i = 0; i < size; i++) {
             std::shared_ptr<fUML::Semantics::Values::Value> src = colValue->getElements()->at(i)->getValue();
-            Any objValue = retrieveNotManyRawValue(src);
+            Any objValue = retrieveRawValue(src);
             if(objValue != nullptr) {
                 bagValue->add(objValue);
             }
         }
-        return eAny(bagValue);
+        return eAny(bagValue,0,true);
     }
     else {
         return retrieveNotManyRawValue(fromValue);
@@ -219,38 +222,44 @@ Any OclReflection::retrieveRawValue(std::shared_ptr<fUML::Semantics::Values::Val
 
 Any OclReflection::retrieveNotManyRawValue(std::shared_ptr<fUML::Semantics::Values::Value> fromValue)
 {
-    if(instanceOf<ObjectValue>(fromValue)) {
-        std::shared_ptr<ObjectValue> value = std::dynamic_pointer_cast<ObjectValue>(fromValue);
-        return eAny(value->getValue());
+	std::shared_ptr<ObjectValue> value = std::dynamic_pointer_cast<ObjectValue>(fromValue);
+    if(nullptr!= value)
+    {
+    	std::shared_ptr<ecore::EObject> objectValue= value->getValue();
+        return eAny(objectValue,objectValue->getMetaElementID(),false);
     }
-        else if(instanceOf<fUML::Semantics::SimpleClassifiers::EnumerationValue>(fromValue)) {
-        std::shared_ptr<fUML::Semantics::SimpleClassifiers::EnumerationValue> value = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::EnumerationValue>(fromValue);
-        return eAny(value->getLiteral());
+   	std::shared_ptr<fUML::Semantics::SimpleClassifiers::EnumerationValue> enumValue = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::EnumerationValue>(fromValue);
+   	if(nullptr!=enumValue)
+   	{
+   		std::shared_ptr<uml::EnumerationLiteral> enumLiteral=enumValue->getLiteral();
+       	return eAny(enumLiteral,enumLiteral->getMetaElementID(),false);
+   	}
+   	std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> stringValue = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::StringValue>(fromValue);
+   	if(nullptr!=stringValue)
+   	{
+   		return eAny(stringValue->getValue(),types::typesPackage::STRING_CLASS,false);
+   	}
+    std::shared_ptr<fUML::Semantics::SimpleClassifiers::BooleanValue> booleanValue = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::BooleanValue>(fromValue);
+   	if(nullptr!=booleanValue )
+   	{
+        return eAny(booleanValue->isValue(),types::typesPackage::BOOLEAN_CLASS,false);
     }
-    else if(instanceOf<fUML::Semantics::SimpleClassifiers::StringValue>(fromValue)) {
-        std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> value = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::StringValue>(fromValue);
-        return eAny(value->getValue());
+    std::shared_ptr<fUML::Semantics::SimpleClassifiers::IntegerValue> integerValue = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::IntegerValue>(fromValue);
+   	if(nullptr!=integerValue)
+    {
+        return eAny(integerValue->getValue(),types::typesPackage::INTEGER_CLASS,false);
     }
-    else if(instanceOf<fUML::Semantics::SimpleClassifiers::BooleanValue>(fromValue)) {
-        std::shared_ptr<fUML::Semantics::SimpleClassifiers::BooleanValue> value = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::BooleanValue>(fromValue);
-        return eAny(value->isValue());
+    std::shared_ptr<fUML::Semantics::SimpleClassifiers::RealValue> realValue = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::RealValue>(fromValue);
+    if(nullptr!=realValue)
+    {
+        return eAny(realValue->getValue(),types::typesPackage::REAL_CLASS,false);
     }
-    else if(instanceOf<fUML::Semantics::SimpleClassifiers::IntegerValue>(fromValue)) {
-        std::shared_ptr<fUML::Semantics::SimpleClassifiers::IntegerValue> value = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::IntegerValue>(fromValue);
-        return eAny(value->getValue());
+    std::shared_ptr<ocl::Values::AnyValue> anyValue = std::dynamic_pointer_cast<ocl::Values::AnyValue>(fromValue);
+    if(nullptr != anyValue)
+    {
+        return anyValue->getValue();
     }
-    else if(instanceOf<fUML::Semantics::SimpleClassifiers::RealValue>(fromValue)) {
-        std::shared_ptr<fUML::Semantics::SimpleClassifiers::RealValue> value = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::RealValue>(fromValue);
-        return eAny(value->getValue());
-    }
-    if(instanceOf<ocl::Values::AnyValue>(fromValue)) {
-        std::shared_ptr<ocl::Values::AnyValue> value = std::dynamic_pointer_cast<ocl::Values::AnyValue>(fromValue);
-        Any v=value->getValue();
-        return v;
-    }
-    else {
-        return eAny(nullptr);
-    }
+    return nullptr; // unknown Value
 }
 
 std::shared_ptr<fUML::Semantics::Values::Value> OclReflection::createValue(std::shared_ptr<ecore::EObject> obj)
@@ -400,7 +409,7 @@ std::shared_ptr<fUML::Semantics::Values::Value> OclReflection::createValue(std::
     else if(instanceOf<ObjectValue>(fromValue)) {
         std::shared_ptr<ObjectValue> objValue = std::dynamic_pointer_cast<ObjectValue>(fromValue);
         std::shared_ptr<ecore::EObject> obj = objValue->getValue();
-        std::shared_ptr<std::list<std::shared_ptr<Any>>> convertArgs = std::make_shared<std::list<std::shared_ptr<Any>>>();
+        std::shared_ptr<std::list<Any>> convertArgs = std::make_shared<std::list<Any>>();
 
         // create the pre value snapshot
         // copy object to avoid modifying the given context
@@ -434,8 +443,7 @@ std::shared_ptr<fUML::Semantics::Values::Value> OclReflection::createValue(std::
 
         for(size_t i = 0; i < arguments->size(); i++) {
             Any item = retrieveRawValue(arguments->at(i)->getInstance()->getResultValue());
-            std::shared_ptr<Any> item_ptr = std::make_shared<Any>(item);
-            convertArgs->push_back(item_ptr);
+            convertArgs->push_back(item );
         }
         std::shared_ptr<AnyObject> value = postObj->eInvoke(operation, convertArgs);
 
@@ -584,23 +592,23 @@ Any OclReflection::getDefaultValue(std::shared_ptr<uml::Property> prop)
     if(prop->getDefaultValue() != nullptr) { // association
         if(name == PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean()->getName()){
             std::shared_ptr<uml::LiteralBoolean> lit = std::dynamic_pointer_cast<uml::LiteralBoolean>(value);
-            any = eAny(lit->getValue());
+            any = eAny(lit->getValue(),types::typesPackage::BOOLEAN_CLASS,false);
         }
         else if(name == PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Integer()->getName()){
             std::shared_ptr<uml::LiteralInteger> lit = std::dynamic_pointer_cast<uml::LiteralInteger>(value);
-            any = eAny(lit->getValue());
+            any = eAny(lit->getValue(),types::typesPackage::INTEGER_CLASS,false);
         }
         else if(name == PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Real()->getName()){
             std::shared_ptr<uml::LiteralReal> lit = std::dynamic_pointer_cast<uml::LiteralReal>(value);
-            any = eAny(lit->getValue());
+            any = eAny(lit->getValue(),types::typesPackage::REAL_CLASS,false);
         }
         else if(name == PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_String()->getName()){
             std::shared_ptr<uml::LiteralString> lit = std::dynamic_pointer_cast<uml::LiteralString>(value);
-            any = eAny(lit->getValue());
+            any = eAny(lit->getValue(),types::typesPackage::STRING_CLASS,false);
         }
         else if(name == PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_UnlimitedNatural()->getName()){
             std::shared_ptr<uml::LiteralUnlimitedNatural> lit = std::dynamic_pointer_cast<uml::LiteralUnlimitedNatural>(value);
-            any = eAny(lit->getValue());
+            any = eAny(lit->getValue(),types::typesPackage::UNLIMITEDNATURAL_CLASS,false);
         }
     }
 
