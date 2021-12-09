@@ -249,6 +249,8 @@
 [query public getClassMemberName(anENamedElement : ENamedElement) : String = 'm_'.concat(anENamedElement.getMemberName()) /]
 [query public getStaticAttributeIDName(anENamedElement : ENamedElement) : String = if (anENamedElement.oclIsUndefined()) then ''else anENamedElement.getMemberName().toUpperCase() endif/]
 [query public getMemberNameUpperFirst(anENamedElement : ENamedElement) : String = anENamedElement.getMemberName().toUpperFirst() /]
+[query public getMetaElementIDName(anEClassifier: EClassifier): String = anEClassifier.ePackage.generateNamespaceDefinition().concat('::').concat(anEClassifier.ePackage.name).concat('Package::').concat(anEClassifier.getStaticAttributeIDName())/]
+
 
 [query public getMemberName(anENamedElement : ENamedElement) : String = if (anENamedElement. oclIsUndefined()) then '' else if (anENamedElement.oclIsKindOf(EClassifier)) then anENamedElement.oclAsType(EClassifier).getMemberName() else anENamedElement.getMemberNameStructFeat() endif endif/]
 [query private getMemberNameStructFeat(anENamedElement : ENamedElement) : String = if (anENamedElement.oclIsKindOf(EStructuralFeature)) then anENamedElement.oclAsType(EStructuralFeature).getMemberName() else anENamedElement.getMemberNameOperation() endif/]
