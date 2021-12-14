@@ -56,7 +56,7 @@ Any [aClass.name.toUpperFirst().concat('Impl')/]::eGet(int featureID, bool resol
 		}
 		[else]
 		{
-			return eAnyBag([struct.GetterName()/](),[struct.eType.transformType().generatePolynomialRollingHash()/]); //[aClass.getMyClassifierID()/][struct.getFeatureID()/]
+			return eAnyBag([struct.GetterName()/](),[struct.eType.getMetaElementIDName()/]); //[aClass.getMyClassifierID()/][struct.getFeatureID()/]
 		}
 		[/if]
 	[/for]

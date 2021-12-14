@@ -249,7 +249,30 @@
 [query public getClassMemberName(anENamedElement : ENamedElement) : String = 'm_'.concat(anENamedElement.getMemberName()) /]
 [query public getStaticAttributeIDName(anENamedElement : ENamedElement) : String = if (anENamedElement.oclIsUndefined()) then ''else anENamedElement.getMemberName().toUpperCase() endif/]
 [query public getMemberNameUpperFirst(anENamedElement : ENamedElement) : String = anENamedElement.getMemberName().toUpperFirst() /]
-[query public getMetaElementIDName(anEClassifier: EClassifier): String = anEClassifier.ePackage.generateNamespaceDefinition().concat('::').concat(anEClassifier.ePackage.name).concat('Package::').concat(anEClassifier.getStaticAttributeIDName())/]
+[query public getEcoreTypeIDName(anEClassifier: EClassifier): String = if (name = 'EString' or name = 'String') then 'ecore::ecorePackage::ESTRING_CLASS' 
+	else if (name = 'EBoolean' or name = 'Boolean' or name = 'boolean' or name = 'bool') then 'ecore::ecorePackage::EBOOLEAN_CLASS'
+		else if (name = 'EChar' or name = 'Char' or name = 'char') then 'ecore::ecorePackage::ECHAR_CLASS'
+			else if (name = 'EByte' or name = 'Byte' or name = 'byte') then 'ecore::ecorePackage::EBYTE_CLASS'
+				else if (name = 'EShort' or name = 'Short' or name = 'short') then 'ecore::ecorePackage::ESHORT_CLASS'
+					else if (name = 'EInteger' or name = 'EInt' or name = 'Integer' or name = 'integer' or name = 'int') then 'ecore::ecorePackage::EINT_CLASS'
+						else if (name = 'ELong' or name = 'Long' or name = 'long') then 'ecore::ecorePackage::ELONG_CLASS'
+							else if (name = 'EBigInteger' or name = 'EBigInteger' or name = 'EBiginteger'or name = 'long long') then 'ecore::ecorePackage::EBIGINTEGER_CLASS'
+								else if (name = 'EFloat' or name = 'Float' or name = 'float') then 'ecore::ecorePackage::EFLOAT_CLASS'
+									else if (name = 'EDouble' or name = 'Double' or name = 'double') then 'ecore::ecorePackage::EDOUBLE_CLASS'
+									else '0'
+									endif
+								endif
+							endif
+						endif 
+					endif 
+				endif 
+			endif 
+		endif 
+	endif
+endif/]
+
+[comment fur uml::types which are UML primitive types use ecore types instead/]
+[query public getMetaElementIDName(anEClassifier: EClassifier): String = if ((anEClassifier.ePackage.name='types')) then anEClassifier.getEcoreTypeIDName() else anEClassifier.ePackage.generateNamespaceDefinition().concat('::').concat(anEClassifier.ePackage.name).concat('Package::').concat(anEClassifier.getStaticAttributeIDName()) endif/]
 
 
 [query public getMemberName(anENamedElement : ENamedElement) : String = if (anENamedElement. oclIsUndefined()) then '' else if (anENamedElement.oclIsKindOf(EClassifier)) then anENamedElement.oclAsType(EClassifier).getMemberName() else anENamedElement.getMemberNameStructFeat() endif endif/]

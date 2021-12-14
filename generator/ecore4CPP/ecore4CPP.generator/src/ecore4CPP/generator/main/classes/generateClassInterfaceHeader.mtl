@@ -233,7 +233,7 @@ public:
 template <class T> class AnyGenericBag: virtual public AnyEObjectBag
 {
 public:
-	template <class N> AnyGenericBag(N value,long long typeID=0, bool isContainer=true):AnyEObjectBag(value, typeID, isContainer),AnyObject(value, typeID, isContainer)
+	template <class N> AnyGenericBag(N value,long long typeID=0, bool isContainer=true):AnyEObjectBag(value, typeID, isContainer)
 	{
 	}
 

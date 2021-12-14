@@ -49,7 +49,7 @@ class AnyObject
 	protected:
 		const long long m_typeID=0;
 		const bool m_isContainer=false;
-
+		AnyObject(){}
 		class Object
 		{
 			public:

@@ -46,10 +46,13 @@
 [generateAbstractDataTypesIncludes()/]
 [if (anEClass.eAttributes.eType->select(requiresAny())->size() = 0 and anEClass.eOperations.eParameters.eType->select(requiresAny())->size() > 0)]
 #include "abstractDataTypes/Any.hpp"
-[/if]
+[/if][comment toDO selektive Type-includes/]
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
+#include "ecore/ecorePackage.hpp"
 
 [if (anEClass.hasKey(keyImplIncludes()))]
 //Includes from codegen annotation
@@ -58,24 +61,18 @@
 
 //Forward declaration includes
 [anEClass.generatePersitsenceInclude()/]
-
 [for (element : EClassifier| anEClass.includes()->selectByKind(EClass)->reject(doNotGenerateEClassifier())->asOrderedSet()->sortedBy(name))]
 #include "[element.generateNamespacePath()/]/[element.name.toUpperFirst()/].hpp"
 [/for]
-
-//Factories an Package includes
+//Factories and Package includes
 [for (anEPackage: EPackage| anEClass.ePackage->closure(p|p.eSuperPackage)->asSet()->reject(doNotGenerateEPackage()) )]
 #include "[anEPackage.getRootPackage().name/]/[anEPackage.getNamespacePathWithoutRoot()/][anEPackage.name/]Package.hpp"
 [/for]
-[comment] nur fï¿½r saveContent bei saveHandler->addReference() mit Meta-Datentyp-Vergleich nï¿½tig siehe generatePersistence.mtl
+[comment] nur für saveContent bei saveHandler->addReference() mit Meta-Datentyp-Vergleich nötig siehe generatePersistence.mtl
 [/comment]
 [for (aPackage : EPackage| anEClass.includes()->selectByKind(EClass)->reject(doNotGenerateEClassifier())->including(anEClass).ePackage->asOrderedSet()->sortedBy(name))]
 #include "[aPackage.getRootPackage().name/]/[aPackage.getNamespacePathWithoutRoot()/][aPackage.name/]Package.hpp"
 [/for]
-
-
-#include "ecore/EAttribute.hpp"
-#include "ecore/EStructuralFeature.hpp"
 
 [comment namespace /]
 using namespace [anEClass.generateNamespaceDefinition()/];
