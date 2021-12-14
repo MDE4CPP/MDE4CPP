@@ -40,7 +40,6 @@ task buildEcoreModels() {
 	description 'generate and compile all ecore models'
 	
 	dependsOn 'ecore:ecore:buildEcore'
-	dependsOn 'ecore:types:buildTypes'
 	dependsOn 'uml:buildUml'
 	dependsOn 'fuml:buildFUML'
 	dependsOn 'pscs:buildPSCS'
@@ -72,7 +71,6 @@ task compileEcoreModels() {
 	dependsOn rootProject.tasks.getByPath(':src:deliverBasicInterfaces')
 	
 	dependsOn rootProject.tasks.getByPath(':src:ecore:ecore:src_gen:compileEcore')
-	dependsOn rootProject.tasks.getByPath(':src:ecore:types:src_gen:compileTypes')
 	dependsOn rootProject.tasks.getByPath(':src:uml:src_gen:compileUml')
 	dependsOn rootProject.tasks.getByPath(':src:fuml:src_gen:compileFUML')
 	dependsOn rootProject.tasks.getByPath(':src:pscs:src_gen:compilePSCS')
@@ -106,7 +104,6 @@ task generateEcoreModels() {
 	description 'generate all ecore models'
 	
 	dependsOn rootProject.tasks.getByPath(':src:ecore:ecore:model:generateEcore')
-	dependsOn rootProject.tasks.getByPath(':src:ecore:types:model:generateTypes')
 	dependsOn rootProject.tasks.getByPath(':src:uml:model:generateUml')
 	dependsOn rootProject.tasks.getByPath(':src:fuml:model:generateFUML')
 	dependsOn rootProject.tasks.getByPath(':src:pscs:model:generatePSCS')
