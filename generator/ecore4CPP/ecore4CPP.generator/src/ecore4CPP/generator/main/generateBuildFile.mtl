@@ -315,9 +315,21 @@ ENDIF()
 [query private buildModeCMakeProperty(debugMode : Boolean) : String = if (debugMode) then 'debug' else 'optimized' endif/]
 
 [template private generateCMakeFindLibraryCommand(aPackage : EPackage, ending : String, folderName : String, debugMode : Boolean)]
-[for (pack : EPackage | aPackage.metaModelLibraries()->reject(doNotGenerateEPackage())) ? ((not(pack.name = aPackage.name)))]
+[let packageList : OrderedSet(EPackage) = aPackage.metaModelLibraries()->reject(doNotGenerateEPackage())->asOrderedSet()]
+[for (pack : EPackage | packageList) ? (not(pack.name = aPackage.name))]
+	[comment This is done for compatibility reasons: Eclipse's UML uses an ecore reflection package for UML primitive types (types.ecore)
+	This is not supported by MDE4CPP anymore, since the corresponding datatypes are stored in ecore.ecore
+	So "types" is trnsformed to "ecore" IF "ecore" is not already present in the list of packages
+	/]
+	[if (pack.name = 'types')]
+		[if (packageList->select(p : EPackage | p.name = 'ecore')->size() = 0)]
+FIND_LIBRARY(ECORE_[libraryVariableNameSuffix(debugMode)/] ecore[libraryNameSuffix(debugMode)/][ending/] ${MDE4CPP_HOME}/application/[folderName/])
+		[/if]
+	[else]
 FIND_LIBRARY([pack.name.toUpperCase()/]_[libraryVariableNameSuffix(debugMode)/] [pack.name/][libraryNameSuffix(debugMode)/][ending/] ${MDE4CPP_HOME}/application/[folderName/])
+	[/if]
 [/for]
+[/let]
 [for (libName : String | aPackage.eAllContents()->filter(EClass)->reject(doNotGenerateEClassifier())->select(c : EClass | c.hasKey(keyLibrary())).valueKeys(keyLibrary())->asOrderedSet())]
 [if (not (libName.oclIsUndefined() or libName = ''))]
 FIND_LIBRARY([libName.toUpperCase()/]_[libraryVariableNameSuffix(debugMode)/] [libName/][libraryNameSuffix(debugMode)/][ending/] ${MDE4CPP_HOME}/application/[folderName/])
@@ -327,9 +339,21 @@ FIND_LIBRARY([libName.toUpperCase()/]_[libraryVariableNameSuffix(debugMode)/] [l
 
 [template private generateLibraryLinking(aPackage : EPackage, debugMode : Boolean)]
 TARGET_LINK_LIBRARIES(${PROJECT_NAME}
-[for (pack : EPackage | aPackage.metaModelLibraries()->reject(doNotGenerateEPackage())) ? ((not(pack.name = aPackage.name)))]
+[let packageList : OrderedSet(EPackage) = aPackage.metaModelLibraries()->reject(doNotGenerateEPackage())->asOrderedSet()]
+[for (pack : EPackage | packageList) ? (not(pack.name = aPackage.name))]
+	[comment This is done for compatibility reasons: Eclipse's UML uses an ecore reflection package for UML primitive types (types.ecore)
+	This is not supported by MDE4CPP anymore, since the corresponding datatypes are stored in ecore.ecore
+	So "types" is trnsformed to "ecore" IF "ecore" is not already present in the list of packages
+	/]
+	[if (pack.name = 'types')]
+		[if (packageList->select(p : EPackage | p.name = 'ecore')->size() = 0)]
+	[buildModeCMakeProperty(debugMode)/] ${ECORE_[libraryVariableNameSuffix(debugMode)/]}
+		[/if]
+	[else]
 	[buildModeCMakeProperty(debugMode)/] ${[pack.name.toUpperCase()/]_[libraryVariableNameSuffix(debugMode)/]}
+	[/if]
 [/for]
+[/let]
 [for (libName : String | aPackage.eAllContents()->filter(EClass)->reject(doNotGenerateEClassifier())->select(c : EClass | c.hasKey(keyLibrary())).valueKeys(keyLibrary())->asOrderedSet())]
 [if (not (libName.oclIsUndefined() or libName = ''))]
 	[buildModeCMakeProperty(debugMode)/] ${[libName.toUpperCase()/]_[libraryVariableNameSuffix(debugMode)/]}
