@@ -39,8 +39,9 @@ task buildEcoreModels() {
 	group 'Source'
 	description 'generate and compile all ecore models'
 	
-	dependsOn 'ecore:ecore:buildEcore'
-	dependsOn 'uml:buildUml'
+	dependsOn 'ecore:buildEcore'
+	dependsOn 'uml:types:buildTypes'
+	dependsOn 'uml:uml:buildUml'
 	dependsOn 'fuml:buildFUML'
 	dependsOn 'pscs:buildPSCS'
 	dependsOn 'ocl:oclModel:buildOcl'
@@ -70,8 +71,9 @@ task compileEcoreModels() {
 	
 	dependsOn rootProject.tasks.getByPath(':src:deliverBasicInterfaces')
 	
-	dependsOn rootProject.tasks.getByPath(':src:ecore:ecore:src_gen:compileEcore')
-	dependsOn rootProject.tasks.getByPath(':src:uml:src_gen:compileUml')
+	dependsOn rootProject.tasks.getByPath(':src:ecore:src_gen:compileEcore')
+	dependsOn rootProject.tasks.getByPath(':src:uml:types:src_gen:compileTypes')
+	dependsOn rootProject.tasks.getByPath(':src:uml:uml:src_gen:compileUml')
 	dependsOn rootProject.tasks.getByPath(':src:fuml:src_gen:compileFUML')
 	dependsOn rootProject.tasks.getByPath(':src:pscs:src_gen:compilePSCS')
 	dependsOn rootProject.tasks.getByPath(':src:ocl:oclModel:src_gen:compileOcl')
@@ -103,8 +105,9 @@ task generateEcoreModels() {
 	group 'Source'
 	description 'generate all ecore models'
 	
-	dependsOn rootProject.tasks.getByPath(':src:ecore:ecore:model:generateEcore')
-	dependsOn rootProject.tasks.getByPath(':src:uml:model:generateUml')
+	dependsOn rootProject.tasks.getByPath(':src:ecore:model:generateEcore')
+	dependsOn rootProject.tasks.getByPath(':src:uml:types:model:generateTypes')
+	dependsOn rootProject.tasks.getByPath(':src:uml:uml:model:generateUml')
 	dependsOn rootProject.tasks.getByPath(':src:fuml:model:generateFUML')
 	dependsOn rootProject.tasks.getByPath(':src:pscs:model:generatePSCS')
 	dependsOn rootProject.tasks.getByPath(':src:ocl:oclModel:model:generateOcl')
