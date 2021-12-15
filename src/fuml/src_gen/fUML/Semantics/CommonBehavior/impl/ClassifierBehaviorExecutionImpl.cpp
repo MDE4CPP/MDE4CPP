@@ -25,6 +25,9 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
+#include "ecore/ecorePackage.hpp"
 
 
 //Forward declaration includes
@@ -34,21 +37,15 @@
 #include <exception> // used in Persistence
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
 #include "uml/umlFactory.hpp"
-
 #include "uml/Class.hpp"
 #include "fUML/Semantics/CommonBehavior/Execution.hpp"
 #include "fUML/Semantics/CommonBehavior/ObjectActivation.hpp"
 #include "fUML/Semantics/CommonBehavior/ParameterValue.hpp"
-
-//Factories an Package includes
+//Factories and Package includes
 #include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "uml/umlPackage.hpp"
-
-
-#include "ecore/EAttribute.hpp"
-#include "ecore/EStructuralFeature.hpp"
 
 using namespace fUML::Semantics::CommonBehavior;
 
@@ -330,17 +327,17 @@ Any ClassifierBehaviorExecutionImpl::eGet(int featureID, bool resolve, bool core
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::CLASSIFIERBEHAVIOREXECUTION_ATTRIBUTE_CLASSIFIER:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getClassifier();
-			return eAny(returnValue,returnValue->getMetaElementID(),false); //221
+			return eAny(returnValue,uml::umlPackage::CLASS_CLASS,false); //221
 		}
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::CLASSIFIERBEHAVIOREXECUTION_ATTRIBUTE_EXECUTION:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getExecution();
-			return eAny(returnValue,returnValue->getMetaElementID(),false); //220
+			return eAny(returnValue,fUML::Semantics::CommonBehavior::CommonBehaviorPackage::EXECUTION_CLASS,false); //220
 		}
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::CLASSIFIERBEHAVIOREXECUTION_ATTRIBUTE_OBJECTACTIVATION:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getObjectActivation();
-			return eAny(returnValue,returnValue->getMetaElementID(),false); //222
+			return eAny(returnValue,fUML::Semantics::CommonBehavior::CommonBehaviorPackage::OBJECTACTIVATION_CLASS,false); //222
 		}
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);

@@ -24,6 +24,9 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
+#include "ecore/ecorePackage.hpp"
 
 //Includes from codegen annotation
 #include "fUML/fUMLFactory.hpp"
@@ -34,25 +37,19 @@
 
 #include <exception> // used in Persistence
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
-#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "uml/umlFactory.hpp"
-
+#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "fUML/Semantics/Values/Evaluation.hpp"
 #include "fUML/Semantics/Loci/Locus.hpp"
 #include "ocl/Evaluations/OclExpEval.hpp"
 #include "ocl/Evaluations/UnspecifiedValueExpEval.hpp"
 #include "uml/ValueSpecification.hpp"
-
-//Factories an Package includes
+//Factories and Package includes
 #include "ocl/oclPackage.hpp"
 #include "ocl/Evaluations/EvaluationsPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
 #include "fUML/Semantics/Values/ValuesPackage.hpp"
 #include "uml/umlPackage.hpp"
-
-
-#include "ecore/EAttribute.hpp"
-#include "ecore/EStructuralFeature.hpp"
 
 using namespace ocl::Evaluations;
 
@@ -322,17 +319,17 @@ Any OclMessageArgEvalImpl::eGet(int featureID, bool resolve, bool coreType) cons
 		case ocl::Evaluations::EvaluationsPackage::OCLMESSAGEARGEVAL_ATTRIBUTE_EXPRESSION:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getExpression();
-			return eAny(returnValue,returnValue->getMetaElementID(),false); //623
+			return eAny(returnValue,ocl::Evaluations::EvaluationsPackage::OCLEXPEVAL_CLASS,false); //623
 		}
 		case ocl::Evaluations::EvaluationsPackage::OCLMESSAGEARGEVAL_ATTRIBUTE_UNSPECIFIED:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getUnspecified();
-			return eAny(returnValue,returnValue->getMetaElementID(),false); //622
+			return eAny(returnValue,ocl::Evaluations::EvaluationsPackage::UNSPECIFIEDVALUEEXPEVAL_CLASS,false); //622
 		}
 		case ocl::Evaluations::EvaluationsPackage::OCLMESSAGEARGEVAL_ATTRIBUTE_VARIABLE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getVariable();
-			return eAny(returnValue,returnValue->getMetaElementID(),false); //624
+			return eAny(returnValue,ocl::Evaluations::EvaluationsPackage::OCLEXPEVAL_CLASS,false); //624
 		}
 	}
 	return fUML::Semantics::Values::EvaluationImpl::eGet(featureID, resolve, coreType);

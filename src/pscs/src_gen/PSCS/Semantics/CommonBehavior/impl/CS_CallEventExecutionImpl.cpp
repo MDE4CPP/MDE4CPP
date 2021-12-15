@@ -25,6 +25,9 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
+#include "ecore/ecorePackage.hpp"
 
 //Includes from codegen annotation
 #include "PSCS/Semantics/CommonBehavior/CS_EventOccurrence.hpp"
@@ -35,13 +38,12 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
-#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
-#include "uml/umlFactory.hpp"
 #include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
-#include "PSCS/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
+#include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
-
+#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
+#include "PSCS/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
+#include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
 #include "uml/Behavior.hpp"
 #include "PSCS/Semantics/StructuredClassifiers/CS_InteractionPoint.hpp"
 #include "fUML/Semantics/CommonBehavior/CallEventExecution.hpp"
@@ -53,22 +55,17 @@
 #include "fUML/Semantics/CommonBehavior/ObjectActivation.hpp"
 #include "fUML/Semantics/CommonBehavior/ParameterValue.hpp"
 #include "fUML/Semantics/Values/Value.hpp"
-
-//Factories an Package includes
-#include "PSCS/PSCSPackage.hpp"
+//Factories and Package includes
 #include "PSCS/Semantics/SemanticsPackage.hpp"
-#include "PSCS/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
+#include "PSCS/PSCSPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
+#include "PSCS/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
 #include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersPackage.hpp"
-#include "PSCS/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
 #include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
+#include "PSCS/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
 #include "fUML/Semantics/Values/ValuesPackage.hpp"
 #include "uml/umlPackage.hpp"
-
-
-#include "ecore/EAttribute.hpp"
-#include "ecore/EStructuralFeature.hpp"
 
 using namespace PSCS::Semantics::CommonBehavior;
 
@@ -306,12 +303,10 @@ void CS_CallEventExecutionImpl::saveContent(std::shared_ptr<persistence::interfa
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> CS_CallEventExecutionImpl::eStaticClass() const
 {
 	return PSCS::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance()->getCS_CallEventExecution_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -323,7 +318,7 @@ Any CS_CallEventExecutionImpl::eGet(int featureID, bool resolve, bool coreType) 
 		case PSCS::Semantics::CommonBehavior::CommonBehaviorPackage::CS_CALLEVENTEXECUTION_ATTRIBUTE_INTERACTIONPOINT:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getInteractionPoint();
-			return eAny(returnValue); //48
+			return eAny(returnValue,PSCS::Semantics::StructuredClassifiers::StructuredClassifiersPackage::CS_INTERACTIONPOINT_CLASS,false); //48
 		}
 	}
 	return fUML::Semantics::CommonBehavior::CallEventExecutionImpl::eGet(featureID, resolve, coreType);
@@ -345,7 +340,7 @@ bool CS_CallEventExecutionImpl::eSet(int featureID, Any newValue)
 	{
 		case PSCS::Semantics::CommonBehavior::CommonBehaviorPackage::CS_CALLEVENTEXECUTION_ATTRIBUTE_INTERACTIONPOINT:
 		{
-			// BOOST CAST
+			// CAST Any to PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint> _interactionPoint = std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint>(_temp);
 			setInteractionPoint(_interactionPoint); //48
@@ -359,31 +354,28 @@ bool CS_CallEventExecutionImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any CS_CallEventExecutionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any CS_CallEventExecutionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
   	switch(operationID)
 	{
-		
-		// 900135867
+		// PSCS::Semantics::CommonBehavior::CS_CallEventExecution::_copy() : fUML::Semantics::Values::Value: 900135867
 		case CommonBehaviorPackage::CS_CALLEVENTEXECUTION_OPERATION__COPY:
 		{
-			result = eAny(this->_copy());
+			result = eAny(this->_copy(), fUML::Semantics::Values::ValuesPackage::VALUE_CLASS,false);
 			break;
 		}
-		
-		// 801253865
+		// PSCS::Semantics::CommonBehavior::CS_CallEventExecution::createEventOccurrence() : fUML::Semantics::CommonBehavior::EventOccurrence: 801253865
 		case CommonBehaviorPackage::CS_CALLEVENTEXECUTION_OPERATION_CREATEEVENTOCCURRENCE:
 		{
-			result = eAny(this->createEventOccurrence());
+			result = eAny(this->createEventOccurrence(), fUML::Semantics::CommonBehavior::CommonBehaviorPackage::EVENTOCCURRENCE_CLASS,false);
 			break;
 		}
-		
-		// 161317237
+		// PSCS::Semantics::CommonBehavior::CS_CallEventExecution::new_() : fUML::Semantics::Values::Value: 161317237
 		case CommonBehaviorPackage::CS_CALLEVENTEXECUTION_OPERATION_NEW_:
 		{
-			result = eAny(this->new_());
+			result = eAny(this->new_(), fUML::Semantics::Values::ValuesPackage::VALUE_CLASS,false);
 			break;
 		}
 
@@ -400,7 +392,6 @@ Any CS_CallEventExecutionImpl::eInvoke(int operationID, std::shared_ptr<std::lis
 	return result;
 }
 
-
 std::shared_ptr<PSCS::Semantics::CommonBehavior::CS_CallEventExecution> CS_CallEventExecutionImpl::getThisCS_CallEventExecutionPtr() const
 {
 	return m_thisCS_CallEventExecutionPtr.lock();
@@ -410,3 +401,5 @@ void CS_CallEventExecutionImpl::setThisCS_CallEventExecutionPtr(std::weak_ptr<PS
 	m_thisCS_CallEventExecutionPtr = thisCS_CallEventExecutionPtr;
 	setThisCallEventExecutionPtr(thisCS_CallEventExecutionPtr);
 }
+
+

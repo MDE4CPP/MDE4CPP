@@ -86,7 +86,7 @@ namespace PSCS::Semantics::Values
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
+			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
 
 		private:
 			std::weak_ptr<PSCS::Semantics::Values::CS_OpaqueExpressionEvaluation> m_thisCS_OpaqueExpressionEvaluationPtr;

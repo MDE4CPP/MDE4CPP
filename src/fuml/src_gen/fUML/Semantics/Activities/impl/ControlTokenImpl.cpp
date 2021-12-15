@@ -24,6 +24,9 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
+#include "ecore/ecorePackage.hpp"
 
 //Includes from codegen annotation
 #include "fUML/fUMLFactory.hpp"
@@ -34,18 +37,12 @@
 
 #include <exception> // used in Persistence
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
-
 #include "fUML/Semantics/Activities/ActivityNodeActivation.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
-
-//Factories an Package includes
+//Factories and Package includes
 #include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
-
-
-#include "ecore/EAttribute.hpp"
-#include "ecore/EStructuralFeature.hpp"
 
 using namespace fUML::Semantics::Activities;
 

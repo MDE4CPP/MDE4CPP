@@ -25,6 +25,9 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
+#include "ecore/ecorePackage.hpp"
 
 
 //Forward declaration includes
@@ -33,21 +36,15 @@
 
 #include <exception> // used in Persistence
 #include "ecore/ecoreFactory.hpp"
-
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EClassifier.hpp"
 #include "ecore/EGenericType.hpp"
 #include "ecore/ETypedElement.hpp"
-
-//Factories an Package includes
+//Factories and Package includes
 #include "ocl/oclPackage.hpp"
 #include "ocl/Expressions/ExpressionsPackage.hpp"
 #include "ecore/ecorePackage.hpp"
-
-
-#include "ecore/EAttribute.hpp"
-#include "ecore/EStructuralFeature.hpp"
 
 using namespace ocl::Expressions;
 
@@ -254,7 +251,7 @@ Any TupleLiteralPartImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case ocl::Expressions::ExpressionsPackage::TUPLELITERALPART_ATTRIBUTE_ATTRIBUTE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getAttribute();
-			return eAny(returnValue,returnValue->getMetaElementID(),false); //8810
+			return eAny(returnValue,ecore::ecorePackage::EATTRIBUTE_CLASS,false); //8810
 		}
 	}
 	return ecore::ETypedElementImpl::eGet(featureID, resolve, coreType);

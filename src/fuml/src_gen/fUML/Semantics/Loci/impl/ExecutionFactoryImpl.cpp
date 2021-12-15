@@ -25,6 +25,9 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
+#include "ecore/ecorePackage.hpp"
 
 //Includes from codegen annotation
 #include "fUML/fUMLPackage.hpp"
@@ -150,7 +153,6 @@
 #include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
-
 #include "uml/Behavior.hpp"
 #include "uml/Element.hpp"
 #include "fUML/Semantics/Values/Evaluation.hpp"
@@ -163,8 +165,7 @@
 #include "fUML/Semantics/Loci/SemanticStrategy.hpp"
 #include "fUML/Semantics/Loci/SemanticVisitor.hpp"
 #include "uml/ValueSpecification.hpp"
-
-//Factories an Package includes
+//Factories and Package includes
 #include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
@@ -172,10 +173,6 @@
 #include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
 #include "fUML/Semantics/Values/ValuesPackage.hpp"
 #include "uml/umlPackage.hpp"
-
-
-#include "ecore/EAttribute.hpp"
-#include "ecore/EStructuralFeature.hpp"
 
 using namespace fUML::Semantics::Loci;
 
@@ -944,20 +941,20 @@ Any ExecutionFactoryImpl::eGet(int featureID, bool resolve, bool coreType) const
 	{
 		case fUML::Semantics::Loci::LociPackage::EXECUTIONFACTORY_ATTRIBUTE_BUILTINTYPES:
 		{
-			return eAnyBag(getBuiltInTypes(),766018307); //473
+			return eAnyBag(getBuiltInTypes(),uml::umlPackage::PRIMITIVETYPE_CLASS); //473
 		}
 		case fUML::Semantics::Loci::LociPackage::EXECUTIONFACTORY_ATTRIBUTE_LOCUS:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getLocus().lock();
-			return eAny(returnValue,returnValue->getMetaElementID(),false); //470
+			return eAny(returnValue,fUML::Semantics::Loci::LociPackage::LOCUS_CLASS,false); //470
 		}
 		case fUML::Semantics::Loci::LociPackage::EXECUTIONFACTORY_ATTRIBUTE_PRIMITIVEBEHAVIORPROTOTYPES:
 		{
-			return eAnyBag(getPrimitiveBehaviorPrototypes(),1247403081); //472
+			return eAnyBag(getPrimitiveBehaviorPrototypes(),fUML::Semantics::CommonBehavior::CommonBehaviorPackage::OPAQUEBEHAVIOREXECUTION_CLASS); //472
 		}
 		case fUML::Semantics::Loci::LociPackage::EXECUTIONFACTORY_ATTRIBUTE_STRATEGIES:
 		{
-			return eAnyBag(getStrategies(),1874097743); //471
+			return eAnyBag(getStrategies(),fUML::Semantics::Loci::LociPackage::SEMANTICSTRATEGY_CLASS); //471
 		}
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);

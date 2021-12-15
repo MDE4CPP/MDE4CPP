@@ -37,14 +37,14 @@ namespace fUML::Semantics::CommonBehavior
 	class EventOccurrence;
 	class Execution;
 }
+namespace fUML::Semantics::StructuredClassifiers 
+{
+	class Object;
+}
 namespace PSCS::Semantics::StructuredClassifiers 
 {
 	class CS_InteractionPoint;
 	class CS_Object;
-}
-namespace fUML::Semantics::StructuredClassifiers 
-{
-	class Object;
 }
 namespace uml 
 {

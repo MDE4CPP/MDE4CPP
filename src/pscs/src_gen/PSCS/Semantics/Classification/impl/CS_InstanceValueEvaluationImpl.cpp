@@ -24,6 +24,9 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
+#include "ecore/ecorePackage.hpp"
 
 //Includes from codegen annotation
 #include "PSCS/Semantics/StructuredClassifiers/CS_Object.hpp"
@@ -52,26 +55,20 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
-
+#include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Classification/InstanceValueEvaluation.hpp"
 #include "fUML/Semantics/Loci/Locus.hpp"
 #include "fUML/Semantics/Values/Value.hpp"
 #include "uml/ValueSpecification.hpp"
-
-//Factories an Package includes
-#include "PSCS/PSCSPackage.hpp"
+//Factories and Package includes
 #include "PSCS/Semantics/SemanticsPackage.hpp"
-#include "fUML/Semantics/Classification/ClassificationPackage.hpp"
+#include "PSCS/PSCSPackage.hpp"
 #include "PSCS/Semantics/Classification/ClassificationPackage.hpp"
+#include "fUML/Semantics/Classification/ClassificationPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
 #include "fUML/Semantics/Values/ValuesPackage.hpp"
 #include "uml/umlPackage.hpp"
-
-
-#include "ecore/EAttribute.hpp"
-#include "ecore/EStructuralFeature.hpp"
 
 using namespace PSCS::Semantics::Classification;
 
@@ -321,12 +318,10 @@ void CS_InstanceValueEvaluationImpl::saveContent(std::shared_ptr<persistence::in
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> CS_InstanceValueEvaluationImpl::eStaticClass() const
 {
 	return PSCS::Semantics::Classification::ClassificationPackage::eInstance()->getCS_InstanceValueEvaluation_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -359,17 +354,16 @@ bool CS_InstanceValueEvaluationImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any CS_InstanceValueEvaluationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any CS_InstanceValueEvaluationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
   	switch(operationID)
 	{
-		
-		// 71521778
+		// PSCS::Semantics::Classification::CS_InstanceValueEvaluation::evaluate() : fUML::Semantics::Values::Value: 71521778
 		case ClassificationPackage::CS_INSTANCEVALUEEVALUATION_OPERATION_EVALUATE:
 		{
-			result = eAny(this->evaluate());
+			result = eAny(this->evaluate(), fUML::Semantics::Values::ValuesPackage::VALUE_CLASS,false);
 			break;
 		}
 
@@ -386,7 +380,6 @@ Any CS_InstanceValueEvaluationImpl::eInvoke(int operationID, std::shared_ptr<std
 	return result;
 }
 
-
 std::shared_ptr<PSCS::Semantics::Classification::CS_InstanceValueEvaluation> CS_InstanceValueEvaluationImpl::getThisCS_InstanceValueEvaluationPtr() const
 {
 	return m_thisCS_InstanceValueEvaluationPtr.lock();
@@ -396,3 +389,5 @@ void CS_InstanceValueEvaluationImpl::setThisCS_InstanceValueEvaluationPtr(std::w
 	m_thisCS_InstanceValueEvaluationPtr = thisCS_InstanceValueEvaluationPtr;
 	setThisInstanceValueEvaluationPtr(thisCS_InstanceValueEvaluationPtr);
 }
+
+

@@ -25,6 +25,9 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
+#include "ecore/ecorePackage.hpp"
 
 //Includes from codegen annotation
 #include "uml/Behavior.hpp"
@@ -38,25 +41,19 @@
 #include <exception> // used in Persistence
 #include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
-
 #include "uml/Class.hpp"
 #include "fUML/Semantics/Loci/ExecutionFactory.hpp"
 #include "fUML/Semantics/Loci/Executor.hpp"
 #include "fUML/Semantics/StructuredClassifiers/ExtensionalValue.hpp"
 #include "fUML/Semantics/Loci/Locus.hpp"
 #include "fUML/Semantics/StructuredClassifiers/Object.hpp"
-
-//Factories an Package includes
-#include "PSCS/PSCSPackage.hpp"
+//Factories and Package includes
 #include "PSCS/Semantics/SemanticsPackage.hpp"
+#include "PSCS/PSCSPackage.hpp"
 #include "PSCS/Semantics/Loci/LociPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
 #include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
 #include "uml/umlPackage.hpp"
-
-
-#include "ecore/EAttribute.hpp"
-#include "ecore/EStructuralFeature.hpp"
 
 using namespace PSCS::Semantics::Loci;
 
@@ -219,12 +216,10 @@ void CS_LocusImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> CS_LocusImpl::eStaticClass() const
 {
 	return PSCS::Semantics::Loci::LociPackage::eInstance()->getCS_Locus_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -257,22 +252,21 @@ bool CS_LocusImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any CS_LocusImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any CS_LocusImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
   	switch(operationID)
 	{
-		
-		// 1523861822
+		// PSCS::Semantics::Loci::CS_Locus::instantiate(uml::Class) : fUML::Semantics::StructuredClassifiers::Object: 1523861822
 		case LociPackage::CS_LOCUS_OPERATION_INSTANTIATE_CLASS:
 		{
 			//Retrieve input parameter 'type'
 			//parameter 0
 			std::shared_ptr<uml::Class> incoming_param_type;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_type_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_type = (*incoming_param_type_arguments_citer)->get()->get<std::shared_ptr<uml::Class> >();
-			result = eAny(this->instantiate(incoming_param_type));
+			std::list<Any>::const_iterator incoming_param_type_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_type = (*incoming_param_type_arguments_citer)->get<std::shared_ptr<uml::Class> >();
+			result = eAny(this->instantiate(incoming_param_type), fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::OBJECT_CLASS,false);
 			break;
 		}
 
@@ -289,7 +283,6 @@ Any CS_LocusImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shar
 	return result;
 }
 
-
 std::shared_ptr<PSCS::Semantics::Loci::CS_Locus> CS_LocusImpl::getThisCS_LocusPtr() const
 {
 	return m_thisCS_LocusPtr.lock();
@@ -299,3 +292,5 @@ void CS_LocusImpl::setThisCS_LocusPtr(std::weak_ptr<PSCS::Semantics::Loci::CS_Lo
 	m_thisCS_LocusPtr = thisCS_LocusPtr;
 	setThisLocusPtr(thisCS_LocusPtr);
 }
+
+

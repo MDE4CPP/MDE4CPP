@@ -25,6 +25,9 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
+#include "ecore/ecorePackage.hpp"
 
 //Includes from codegen annotation
 #include "fUML/fUMLFactory.hpp"
@@ -53,11 +56,10 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "uml/umlFactory.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
-
+#include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "uml/Action.hpp"
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
 #include "uml/ActivityNode.hpp"
@@ -72,19 +74,14 @@
 #include "fUML/Semantics/Actions/PinActivation.hpp"
 #include "uml/Port.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
-
-//Factories an Package includes
-#include "PSCS/PSCSPackage.hpp"
+//Factories and Package includes
 #include "PSCS/Semantics/SemanticsPackage.hpp"
-#include "PSCS/Semantics/Actions/ActionsPackage.hpp"
+#include "PSCS/PSCSPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
+#include "PSCS/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "uml/umlPackage.hpp"
-
-
-#include "ecore/EAttribute.hpp"
-#include "ecore/EStructuralFeature.hpp"
 
 using namespace PSCS::Semantics::Actions;
 
@@ -470,12 +467,10 @@ void CS_CallOperationActionActivationImpl::saveContent(std::shared_ptr<persisten
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> CS_CallOperationActionActivationImpl::eStaticClass() const
 {
 	return PSCS::Semantics::Actions::ActionsPackage::eInstance()->getCS_CallOperationActionActivation_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -508,82 +503,75 @@ bool CS_CallOperationActionActivationImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any CS_CallOperationActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any CS_CallOperationActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
   	switch(operationID)
 	{
-		
-		// 777835038
+		// PSCS::Semantics::Actions::CS_CallOperationActionActivation::_isCreate(uml::Operation) : bool: 777835038
 		case ActionsPackage::CS_CALLOPERATIONACTIONACTIVATION_OPERATION__ISCREATE_OPERATION:
 		{
 			//Retrieve input parameter 'operation'
 			//parameter 0
 			std::shared_ptr<uml::Operation> incoming_param_operation;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_operation_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_operation = (*incoming_param_operation_arguments_citer)->get()->get<std::shared_ptr<uml::Operation> >();
-			result = eAny(this->_isCreate(incoming_param_operation));
+			std::list<Any>::const_iterator incoming_param_operation_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_operation = (*incoming_param_operation_arguments_citer)->get<std::shared_ptr<uml::Operation> >();
+			result = eAny(this->_isCreate(incoming_param_operation),0,false);
 			break;
 		}
-		
-		// 161083929
+		// PSCS::Semantics::Actions::CS_CallOperationActionActivation::doAction(): 161083929
 		case ActionsPackage::CS_CALLOPERATIONACTIONACTIVATION_OPERATION_DOACTION:
 		{
 			this->doAction();
-			break;
 		}
-		
-		// 1367520836
+		// PSCS::Semantics::Actions::CS_CallOperationActionActivation::getCallExecution() : fUML::Semantics::CommonBehavior::Execution: 1367520836
 		case ActionsPackage::CS_CALLOPERATIONACTIONACTIVATION_OPERATION_GETCALLEXECUTION:
 		{
-			result = eAny(this->getCallExecution());
+			result = eAny(this->getCallExecution(), fUML::Semantics::CommonBehavior::CommonBehaviorPackage::EXECUTION_CLASS,false);
 			break;
 		}
-		
-		// 1805833323
+		// PSCS::Semantics::Actions::CS_CallOperationActionActivation::isCreate(uml::Operation) : bool: 1805833323
 		case ActionsPackage::CS_CALLOPERATIONACTIONACTIVATION_OPERATION_ISCREATE_OPERATION:
 		{
 			//Retrieve input parameter 'operation'
 			//parameter 0
 			std::shared_ptr<uml::Operation> incoming_param_operation;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_operation_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_operation = (*incoming_param_operation_arguments_citer)->get()->get<std::shared_ptr<uml::Operation> >();
-			result = eAny(this->isCreate(incoming_param_operation));
+			std::list<Any>::const_iterator incoming_param_operation_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_operation = (*incoming_param_operation_arguments_citer)->get<std::shared_ptr<uml::Operation> >();
+			result = eAny(this->isCreate(incoming_param_operation),0,false);
 			break;
 		}
-		
-		// 1814316481
+		// PSCS::Semantics::Actions::CS_CallOperationActionActivation::isOperationProvided(uml::Port, uml::Operation) : bool: 1814316481
 		case ActionsPackage::CS_CALLOPERATIONACTIONACTIVATION_OPERATION_ISOPERATIONPROVIDED_PORT_OPERATION:
 		{
 			//Retrieve input parameter 'port'
 			//parameter 0
 			std::shared_ptr<uml::Port> incoming_param_port;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_port_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_port = (*incoming_param_port_arguments_citer)->get()->get<std::shared_ptr<uml::Port> >();
+			std::list<Any>::const_iterator incoming_param_port_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_port = (*incoming_param_port_arguments_citer)->get<std::shared_ptr<uml::Port> >();
 			//Retrieve input parameter 'operation'
 			//parameter 1
 			std::shared_ptr<uml::Operation> incoming_param_operation;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_operation_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_operation = (*incoming_param_operation_arguments_citer)->get()->get<std::shared_ptr<uml::Operation> >();
-			result = eAny(this->isOperationProvided(incoming_param_port,incoming_param_operation));
+			std::list<Any>::const_iterator incoming_param_operation_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_operation = (*incoming_param_operation_arguments_citer)->get<std::shared_ptr<uml::Operation> >();
+			result = eAny(this->isOperationProvided(incoming_param_port,incoming_param_operation),0,false);
 			break;
 		}
-		
-		// 1388387072
+		// PSCS::Semantics::Actions::CS_CallOperationActionActivation::isOperationRequired(uml::Port, uml::Operation) : bool: 1388387072
 		case ActionsPackage::CS_CALLOPERATIONACTIONACTIVATION_OPERATION_ISOPERATIONREQUIRED_PORT_OPERATION:
 		{
 			//Retrieve input parameter 'port'
 			//parameter 0
 			std::shared_ptr<uml::Port> incoming_param_port;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_port_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_port = (*incoming_param_port_arguments_citer)->get()->get<std::shared_ptr<uml::Port> >();
+			std::list<Any>::const_iterator incoming_param_port_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_port = (*incoming_param_port_arguments_citer)->get<std::shared_ptr<uml::Port> >();
 			//Retrieve input parameter 'operation'
 			//parameter 1
 			std::shared_ptr<uml::Operation> incoming_param_operation;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_operation_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_operation = (*incoming_param_operation_arguments_citer)->get()->get<std::shared_ptr<uml::Operation> >();
-			result = eAny(this->isOperationRequired(incoming_param_port,incoming_param_operation));
+			std::list<Any>::const_iterator incoming_param_operation_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_operation = (*incoming_param_operation_arguments_citer)->get<std::shared_ptr<uml::Operation> >();
+			result = eAny(this->isOperationRequired(incoming_param_port,incoming_param_operation),0,false);
 			break;
 		}
 
@@ -600,7 +588,6 @@ Any CS_CallOperationActionActivationImpl::eInvoke(int operationID, std::shared_p
 	return result;
 }
 
-
 std::shared_ptr<PSCS::Semantics::Actions::CS_CallOperationActionActivation> CS_CallOperationActionActivationImpl::getThisCS_CallOperationActionActivationPtr() const
 {
 	return m_thisCS_CallOperationActionActivationPtr.lock();
@@ -610,3 +597,5 @@ void CS_CallOperationActionActivationImpl::setThisCS_CallOperationActionActivati
 	m_thisCS_CallOperationActionActivationPtr = thisCS_CallOperationActionActivationPtr;
 	setThisCallOperationActionActivationPtr(thisCS_CallOperationActionActivationPtr);
 }
+
+

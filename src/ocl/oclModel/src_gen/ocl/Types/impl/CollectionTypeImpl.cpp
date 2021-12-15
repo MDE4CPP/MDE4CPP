@@ -25,6 +25,9 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
+#include "ecore/ecorePackage.hpp"
 
 
 //Forward declaration includes
@@ -34,7 +37,6 @@
 #include <exception> // used in Persistence
 #include "ocl/Values/ValuesFactory.hpp"
 #include "ecore/ecoreFactory.hpp"
-
 #include "ocl/Types/CollectionType.hpp"
 #include "ocl/Values/CollectionValue.hpp"
 #include "ecore/EAnnotation.hpp"
@@ -42,16 +44,11 @@
 #include "ecore/EDataType.hpp"
 #include "ecore/EPackage.hpp"
 #include "ecore/ETypeParameter.hpp"
-
-//Factories an Package includes
+//Factories and Package includes
 #include "ocl/oclPackage.hpp"
 #include "ocl/Types/TypesPackage.hpp"
 #include "ocl/Values/ValuesPackage.hpp"
 #include "ecore/ecorePackage.hpp"
-
-
-#include "ecore/EAttribute.hpp"
-#include "ecore/EStructuralFeature.hpp"
 
 using namespace ocl::Types;
 
@@ -332,12 +329,12 @@ Any CollectionTypeImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case ocl::Types::TypesPackage::COLLECTIONTYPE_ATTRIBUTE_ELEMENTTYPE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getElementType();
-			return eAny(returnValue,returnValue->getMetaElementID(),false); //219
+			return eAny(returnValue,ecore::ecorePackage::ECLASSIFIER_CLASS,false); //219
 		}
 		case ocl::Types::TypesPackage::COLLECTIONTYPE_ATTRIBUTE_INSTANCE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getInstance();
-			return eAny(returnValue,returnValue->getMetaElementID(),false); //2110
+			return eAny(returnValue,ocl::Values::ValuesPackage::COLLECTIONVALUE_CLASS,false); //2110
 		}
 	}
 	return ecore::EDataTypeImpl::eGet(featureID, resolve, coreType);

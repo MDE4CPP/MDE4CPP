@@ -24,6 +24,9 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
+#include "ecore/ecorePackage.hpp"
 
 
 //Forward declaration includes
@@ -33,18 +36,12 @@
 #include <exception> // used in Persistence
 #include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
-
 #include "ocl/Evaluations/OclExpEval.hpp"
 #include "fUML/Semantics/SimpleClassifiers/StringValue.hpp"
-
-//Factories an Package includes
+//Factories and Package includes
 #include "ocl/oclPackage.hpp"
 #include "ocl/Evaluations/EvaluationsPackage.hpp"
 #include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersPackage.hpp"
-
-
-#include "ecore/EAttribute.hpp"
-#include "ecore/EStructuralFeature.hpp"
 
 using namespace ocl::Evaluations;
 
@@ -277,12 +274,12 @@ Any VariableDeclEvalImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case ocl::Evaluations::EvaluationsPackage::VARIABLEDECLEVAL_ATTRIBUTE_INITEXP:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getInitExp();
-			return eAny(returnValue,returnValue->getMetaElementID(),false); //980
+			return eAny(returnValue,ocl::Evaluations::EvaluationsPackage::OCLEXPEVAL_CLASS,false); //980
 		}
 		case ocl::Evaluations::EvaluationsPackage::VARIABLEDECLEVAL_ATTRIBUTE_NAME:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getName();
-			return eAny(returnValue,returnValue->getMetaElementID(),false); //981
+			return eAny(returnValue,fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::STRINGVALUE_CLASS,false); //981
 		}
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);

@@ -25,6 +25,9 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
+#include "ecore/ecorePackage.hpp"
 
 //Includes from codegen annotation
 #include "fUML/fUMLFactory.hpp"
@@ -73,10 +76,9 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
+#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "uml/umlFactory.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
-#include "fUML/Semantics/Loci/LociFactory.hpp"
-
 #include "uml/Class.hpp"
 #include "uml/Classifier.hpp"
 #include "uml/Element.hpp"
@@ -88,19 +90,14 @@
 #include "uml/PrimitiveType.hpp"
 #include "fUML/Semantics/Loci/SemanticStrategy.hpp"
 #include "fUML/Semantics/Loci/SemanticVisitor.hpp"
-
-//Factories an Package includes
-#include "PSCS/PSCSPackage.hpp"
+//Factories and Package includes
 #include "PSCS/Semantics/SemanticsPackage.hpp"
+#include "PSCS/PSCSPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "PSCS/Semantics/Loci/LociPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
 #include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
 #include "uml/umlPackage.hpp"
-
-
-#include "ecore/EAttribute.hpp"
-#include "ecore/EStructuralFeature.hpp"
 
 using namespace PSCS::Semantics::Loci;
 
@@ -419,12 +416,10 @@ void CS_ExecutionFactoryImpl::saveContent(std::shared_ptr<persistence::interface
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> CS_ExecutionFactoryImpl::eStaticClass() const
 {
 	return PSCS::Semantics::Loci::LociPackage::eInstance()->getCS_ExecutionFactory_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -435,15 +430,7 @@ Any CS_ExecutionFactoryImpl::eGet(int featureID, bool resolve, bool coreType) co
 	{
 		case PSCS::Semantics::Loci::LociPackage::CS_EXECUTIONFACTORY_ATTRIBUTE_APPLIEDPROFILES:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Package>::iterator iter = getAppliedProfiles()->begin();
-			Bag<uml::Package>::iterator end = getAppliedProfiles()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //144			
+			return eAnyBag(getAppliedProfiles(),uml::umlPackage::PACKAGE_CLASS); //144
 		}
 	}
 	return fUML::Semantics::Loci::ExecutionFactoryImpl::eGet(featureID, resolve, coreType);
@@ -465,37 +452,38 @@ bool CS_ExecutionFactoryImpl::eSet(int featureID, Any newValue)
 	{
 		case PSCS::Semantics::Loci::LociPackage::CS_EXECUTIONFACTORY_ATTRIBUTE_APPLIEDPROFILES:
 		{
-			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::Package>> appliedProfilesList(new Bag<uml::Package>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
-			{
-				appliedProfilesList->add(std::dynamic_pointer_cast<uml::Package>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::Package>::iterator iterAppliedProfiles = getAppliedProfiles()->begin();
-			Bag<uml::Package>::iterator endAppliedProfiles = getAppliedProfiles()->end();
-			while (iterAppliedProfiles != endAppliedProfiles)
-			{
-				if (appliedProfilesList->find(*iterAppliedProfiles) == -1)
+			// CAST Any to Bag<uml::Package>
+			if((newValue->isContainer()) && (uml::umlPackage::PACKAGE_CLASS ==newValue->getTypeId()))
+			{ 
+				try
 				{
-					getAppliedProfiles()->erase(*iterAppliedProfiles);
+					std::shared_ptr<Bag<uml::Package>> appliedProfilesList= newValue->get<std::shared_ptr<Bag<uml::Package>>>();
+					std::shared_ptr<Bag<uml::Package>> _appliedProfiles=getAppliedProfiles();
+					for(const std::shared_ptr<uml::Package> indexAppliedProfiles: *_appliedProfiles)
+					{
+						if (appliedProfilesList->find(indexAppliedProfiles) == -1)
+						{
+							_appliedProfiles->erase(indexAppliedProfiles);
+						}
+					}
+
+					for(const std::shared_ptr<uml::Package> indexAppliedProfiles: *appliedProfilesList)
+					{
+						if (_appliedProfiles->find(indexAppliedProfiles) == -1)
+						{
+							_appliedProfiles->add(indexAppliedProfiles);
+						}
+					}
 				}
-				iterAppliedProfiles++;
-			}
- 
-			iterAppliedProfiles = appliedProfilesList->begin();
-			endAppliedProfiles = appliedProfilesList->end();
-			while (iterAppliedProfiles != endAppliedProfiles)
-			{
-				if (getAppliedProfiles()->find(*iterAppliedProfiles) == -1)
+				catch(...)
 				{
-					getAppliedProfiles()->add(*iterAppliedProfiles);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterAppliedProfiles++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}
@@ -507,56 +495,53 @@ bool CS_ExecutionFactoryImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any CS_ExecutionFactoryImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any CS_ExecutionFactoryImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
   	switch(operationID)
 	{
-		
-		// 305337573
+		// PSCS::Semantics::Loci::CS_ExecutionFactory::getStereotypeApplication(uml::Class, uml::Element) : fUML::Semantics::StructuredClassifiers::Object: 305337573
 		case LociPackage::CS_EXECUTIONFACTORY_OPERATION_GETSTEREOTYPEAPPLICATION_CLASS_ELEMENT:
 		{
 			//Retrieve input parameter 'stereotype'
 			//parameter 0
 			std::shared_ptr<uml::Class> incoming_param_stereotype;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_stereotype_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_stereotype = (*incoming_param_stereotype_arguments_citer)->get()->get<std::shared_ptr<uml::Class> >();
+			std::list<Any>::const_iterator incoming_param_stereotype_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_stereotype = (*incoming_param_stereotype_arguments_citer)->get<std::shared_ptr<uml::Class> >();
 			//Retrieve input parameter 'element'
 			//parameter 1
 			std::shared_ptr<uml::Element> incoming_param_element;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_element_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_element = (*incoming_param_element_arguments_citer)->get()->get<std::shared_ptr<uml::Element> >();
-			result = eAny(this->getStereotypeApplication(incoming_param_stereotype,incoming_param_element));
+			std::list<Any>::const_iterator incoming_param_element_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_element = (*incoming_param_element_arguments_citer)->get<std::shared_ptr<uml::Element> >();
+			result = eAny(this->getStereotypeApplication(incoming_param_stereotype,incoming_param_element), fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::OBJECT_CLASS,false);
 			break;
 		}
-		
-		// 1716538227
+		// PSCS::Semantics::Loci::CS_ExecutionFactory::getStereotypeClass(std::string, std::string) : uml::Classifier: 1716538227
 		case LociPackage::CS_EXECUTIONFACTORY_OPERATION_GETSTEREOTYPECLASS_ESTRING_ESTRING:
 		{
 			//Retrieve input parameter 'profileName'
 			//parameter 0
 			std::string incoming_param_profileName;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_profileName_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_profileName = (*incoming_param_profileName_arguments_citer)->get()->get<std::string >();
+			std::list<Any>::const_iterator incoming_param_profileName_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_profileName = (*incoming_param_profileName_arguments_citer)->get<std::string >();
 			//Retrieve input parameter 'stereotypeName'
 			//parameter 1
 			std::string incoming_param_stereotypeName;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_stereotypeName_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_stereotypeName = (*incoming_param_stereotypeName_arguments_citer)->get()->get<std::string >();
-			result = eAny(this->getStereotypeClass(incoming_param_profileName,incoming_param_stereotypeName));
+			std::list<Any>::const_iterator incoming_param_stereotypeName_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_stereotypeName = (*incoming_param_stereotypeName_arguments_citer)->get<std::string >();
+			result = eAny(this->getStereotypeClass(incoming_param_profileName,incoming_param_stereotypeName), uml::umlPackage::CLASSIFIER_CLASS,false);
 			break;
 		}
-		
-		// 689017765
+		// PSCS::Semantics::Loci::CS_ExecutionFactory::instantiateVisitor(uml::Element) : fUML::Semantics::Loci::SemanticVisitor: 689017765
 		case LociPackage::CS_EXECUTIONFACTORY_OPERATION_INSTANTIATEVISITOR_ELEMENT:
 		{
 			//Retrieve input parameter 'element'
 			//parameter 0
 			std::shared_ptr<uml::Element> incoming_param_element;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_element_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_element = (*incoming_param_element_arguments_citer)->get()->get<std::shared_ptr<uml::Element> >();
-			result = eAny(this->instantiateVisitor(incoming_param_element));
+			std::list<Any>::const_iterator incoming_param_element_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_element = (*incoming_param_element_arguments_citer)->get<std::shared_ptr<uml::Element> >();
+			result = eAny(this->instantiateVisitor(incoming_param_element), fUML::Semantics::Loci::LociPackage::SEMANTICVISITOR_CLASS,false);
 			break;
 		}
 
@@ -573,7 +558,6 @@ Any CS_ExecutionFactoryImpl::eInvoke(int operationID, std::shared_ptr<std::list 
 	return result;
 }
 
-
 std::shared_ptr<PSCS::Semantics::Loci::CS_ExecutionFactory> CS_ExecutionFactoryImpl::getThisCS_ExecutionFactoryPtr() const
 {
 	return m_thisCS_ExecutionFactoryPtr.lock();
@@ -583,3 +567,5 @@ void CS_ExecutionFactoryImpl::setThisCS_ExecutionFactoryPtr(std::weak_ptr<PSCS::
 	m_thisCS_ExecutionFactoryPtr = thisCS_ExecutionFactoryPtr;
 	setThisExecutionFactoryPtr(thisCS_ExecutionFactoryPtr);
 }
+
+

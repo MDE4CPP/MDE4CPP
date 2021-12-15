@@ -25,6 +25,9 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
+#include "ecore/ecorePackage.hpp"
 
 //Includes from codegen annotation
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -36,10 +39,9 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
+#include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
-#include "uml/umlFactory.hpp"
-
 #include "uml/Association.hpp"
 #include "uml/Classifier.hpp"
 #include "fUML/Semantics/StructuredClassifiers/ExtensionalValue.hpp"
@@ -47,8 +49,7 @@
 #include "fUML/Semantics/Loci/Locus.hpp"
 #include "uml/Property.hpp"
 #include "fUML/Semantics/Values/Value.hpp"
-
-//Factories an Package includes
+//Factories and Package includes
 #include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
@@ -56,10 +57,6 @@
 #include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
 #include "fUML/Semantics/Values/ValuesPackage.hpp"
 #include "uml/umlPackage.hpp"
-
-
-#include "ecore/EAttribute.hpp"
-#include "ecore/EStructuralFeature.hpp"
 
 using namespace fUML::Semantics::StructuredClassifiers;
 
@@ -399,7 +396,7 @@ Any LinkImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::LINK_ATTRIBUTE_TYPE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getType();
-			return eAny(returnValue,returnValue->getMetaElementID(),false); //682
+			return eAny(returnValue,uml::umlPackage::ASSOCIATION_CLASS,false); //682
 		}
 	}
 	return ExtensionalValueImpl::eGet(featureID, resolve, coreType);

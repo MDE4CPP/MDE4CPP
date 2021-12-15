@@ -24,6 +24,9 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
+#include "ecore/ecorePackage.hpp"
 
 //Includes from codegen annotation
 #include "fUML/fUMLFactory.hpp"
@@ -33,30 +36,24 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Loci/LociFactory.hpp"
-#include "fUML/Semantics/Values/ValuesFactory.hpp"
-#include "uml/umlFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
+#include "fUML/Semantics/Values/ValuesFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
-
+#include "uml/umlFactory.hpp"
+#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "ocl/Evaluations/EvalEnvironment.hpp"
 #include "fUML/Semantics/Values/Evaluation.hpp"
 #include "fUML/Semantics/Loci/Locus.hpp"
 #include "ocl/Expressions/OclExpression.hpp"
 #include "fUML/Semantics/Values/Value.hpp"
 #include "uml/ValueSpecification.hpp"
-
-//Factories an Package includes
+//Factories and Package includes
 #include "ocl/oclPackage.hpp"
 #include "ocl/Evaluations/EvaluationsPackage.hpp"
 #include "ocl/Expressions/ExpressionsPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
 #include "fUML/Semantics/Values/ValuesPackage.hpp"
 #include "uml/umlPackage.hpp"
-
-
-#include "ecore/EAttribute.hpp"
-#include "ecore/EStructuralFeature.hpp"
 
 using namespace ocl::Evaluations;
 
@@ -358,22 +355,22 @@ Any OclExpEvalImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case ocl::Evaluations::EvaluationsPackage::OCLEXPEVAL_ATTRIBUTE_BEFOREENVIRONMENT:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getBeforeEnvironment();
-			return eAny(returnValue,returnValue->getMetaElementID(),false); //603
+			return eAny(returnValue,ocl::Evaluations::EvaluationsPackage::EVALENVIRONMENT_CLASS,false); //603
 		}
 		case ocl::Evaluations::EvaluationsPackage::OCLEXPEVAL_ATTRIBUTE_ENVIRONMENT:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getEnvironment();
-			return eAny(returnValue,returnValue->getMetaElementID(),false); //602
+			return eAny(returnValue,ocl::Evaluations::EvaluationsPackage::EVALENVIRONMENT_CLASS,false); //602
 		}
 		case ocl::Evaluations::EvaluationsPackage::OCLEXPEVAL_ATTRIBUTE_MODEL:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getModel();
-			return eAny(returnValue,returnValue->getMetaElementID(),false); //605
+			return eAny(returnValue,ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_CLASS,false); //605
 		}
 		case ocl::Evaluations::EvaluationsPackage::OCLEXPEVAL_ATTRIBUTE_RESULTVALUE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getResultValue();
-			return eAny(returnValue,returnValue->getMetaElementID(),false); //604
+			return eAny(returnValue,fUML::Semantics::Values::ValuesPackage::VALUE_CLASS,false); //604
 		}
 	}
 	return fUML::Semantics::Values::EvaluationImpl::eGet(featureID, resolve, coreType);

@@ -25,6 +25,9 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
+#include "ecore/ecorePackage.hpp"
 
 //Includes from codegen annotation
 #include "ocl/Values/UndefinedValue.hpp"
@@ -35,19 +38,13 @@
 
 #include <exception> // used in Persistence
 #include "ocl/Values/ValuesFactory.hpp"
-
 #include "ocl/Values/NameValueBinding.hpp"
 #include "fUML/Semantics/Values/Value.hpp"
-
-//Factories an Package includes
+//Factories and Package includes
 #include "ocl/oclPackage.hpp"
 #include "ocl/Evaluations/EvaluationsPackage.hpp"
-#include "fUML/Semantics/Values/ValuesPackage.hpp"
 #include "ocl/Values/ValuesPackage.hpp"
-
-
-#include "ecore/EAttribute.hpp"
-#include "ecore/EStructuralFeature.hpp"
+#include "fUML/Semantics/Values/ValuesPackage.hpp"
 
 using namespace ocl::Evaluations;
 
@@ -313,7 +310,7 @@ Any EvalEnvironmentImpl::eGet(int featureID, bool resolve, bool coreType) const
 	{
 		case ocl::Evaluations::EvaluationsPackage::EVALENVIRONMENT_ATTRIBUTE_BINDINGS:
 		{
-			return eAnyBag(getBindings(),510142670); //260
+			return eAnyBag(getBindings(),ocl::Values::ValuesPackage::NAMEVALUEBINDING_CLASS); //260
 		}
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);

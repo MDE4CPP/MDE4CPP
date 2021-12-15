@@ -25,6 +25,9 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
+#include "ecore/ecorePackage.hpp"
 
 //Includes from codegen annotation
 
@@ -34,21 +37,15 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-
 #include "fUML/Semantics/StructuredClassifiers/Reference.hpp"
 #include "fUML/Semantics/Loci/SemanticStrategy.hpp"
 #include "fUML/Semantics/Loci/SemanticVisitor.hpp"
-
-//Factories an Package includes
-#include "PSCS/PSCSPackage.hpp"
+//Factories and Package includes
 #include "PSCS/Semantics/SemanticsPackage.hpp"
+#include "PSCS/PSCSPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
-#include "PSCS/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
 #include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
-
-
-#include "ecore/EAttribute.hpp"
-#include "ecore/EStructuralFeature.hpp"
+#include "PSCS/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
 
 using namespace PSCS::Semantics::StructuredClassifiers;
 
@@ -197,12 +194,10 @@ void CS_RequestPropagationStrategyImpl::saveContent(std::shared_ptr<persistence:
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> CS_RequestPropagationStrategyImpl::eStaticClass() const
 {
 	return PSCS::Semantics::StructuredClassifiers::StructuredClassifiersPackage::eInstance()->getCS_RequestPropagationStrategy_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -235,34 +230,33 @@ bool CS_RequestPropagationStrategyImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any CS_RequestPropagationStrategyImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any CS_RequestPropagationStrategyImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
   	switch(operationID)
 	{
-		
-		// 1845969483
+		// PSCS::Semantics::StructuredClassifiers::CS_RequestPropagationStrategy::getName() : std::string: 1845969483
 		case StructuredClassifiersPackage::CS_REQUESTPROPAGATIONSTRATEGY_OPERATION_GETNAME:
 		{
-			result = eAny(this->getName());
+			result = eAny(this->getName(),0,false);
 			break;
 		}
-		
-		// 503944288
+		// PSCS::Semantics::StructuredClassifiers::CS_RequestPropagationStrategy::select(fUML::Semantics::StructuredClassifiers::Reference[*], fUML::Semantics::Loci::SemanticVisitor) : fUML::Semantics::StructuredClassifiers::Reference[*]: 503944288
 		case StructuredClassifiersPackage::CS_REQUESTPROPAGATIONSTRATEGY_OPERATION_SELECT_REFERENCE_SEMANTICVISITOR:
 		{
 			//Retrieve input parameter 'potentialTargets'
 			//parameter 0
 			std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::Reference>> incoming_param_potentialTargets;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_potentialTargets_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_potentialTargets = (*incoming_param_potentialTargets_arguments_citer)->get()->get<std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::Reference>> >();
+			std::list<Any>::const_iterator incoming_param_potentialTargets_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_potentialTargets = (*incoming_param_potentialTargets_arguments_citer)->get<std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::Reference>> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor> >();
-			result = eAny(this->select(incoming_param_potentialTargets,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor> >();
+			std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::Reference> > resultList = this->select(incoming_param_potentialTargets,incoming_param_context);
+			return eAny(resultList,fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::REFERENCE_CLASS,true);
 			break;
 		}
 
@@ -279,7 +273,6 @@ Any CS_RequestPropagationStrategyImpl::eInvoke(int operationID, std::shared_ptr<
 	return result;
 }
 
-
 std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_RequestPropagationStrategy> CS_RequestPropagationStrategyImpl::getThisCS_RequestPropagationStrategyPtr() const
 {
 	return m_thisCS_RequestPropagationStrategyPtr.lock();
@@ -289,3 +282,5 @@ void CS_RequestPropagationStrategyImpl::setThisCS_RequestPropagationStrategyPtr(
 	m_thisCS_RequestPropagationStrategyPtr = thisCS_RequestPropagationStrategyPtr;
 	setThisSemanticStrategyPtr(thisCS_RequestPropagationStrategyPtr);
 }
+
+

@@ -37,14 +37,14 @@ namespace fUML::Semantics::Loci
 {
 	class Locus;
 }
+namespace fUML::Semantics::StructuredClassifiers 
+{
+	class Object;
+}
 namespace PSCS::Semantics::StructuredClassifiers 
 {
 	class CS_Object;
 	class CS_Reference;
-}
-namespace fUML::Semantics::StructuredClassifiers 
-{
-	class Object;
 }
 namespace fUML::Semantics::Values 
 {

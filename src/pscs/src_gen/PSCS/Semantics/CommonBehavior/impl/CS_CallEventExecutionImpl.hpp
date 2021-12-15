@@ -89,7 +89,7 @@ namespace PSCS::Semantics::CommonBehavior
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
+			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
 
 		private:
 			std::weak_ptr<PSCS::Semantics::CommonBehavior::CS_CallEventExecution> m_thisCS_CallEventExecutionPtr;

@@ -25,6 +25,9 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
+#include "ecore/ecorePackage.hpp"
 
 //Includes from codegen annotation
 #include "fUML/fUMLFactory.hpp"
@@ -52,7 +55,6 @@
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
-
 #include "uml/Association.hpp"
 #include "PSCS/Semantics/Actions/CS_ConstructStrategy.hpp"
 #include "PSCS/Semantics/StructuredClassifiers/CS_Object.hpp"
@@ -66,20 +68,15 @@
 #include "uml/Operation.hpp"
 #include "uml/Property.hpp"
 #include "fUML/Semantics/Values/Value.hpp"
-
-//Factories an Package includes
-#include "PSCS/PSCSPackage.hpp"
+//Factories and Package includes
 #include "PSCS/Semantics/SemanticsPackage.hpp"
+#include "PSCS/PSCSPackage.hpp"
 #include "PSCS/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
-#include "PSCS/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
 #include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
+#include "PSCS/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
 #include "fUML/Semantics/Values/ValuesPackage.hpp"
 #include "uml/umlPackage.hpp"
-
-
-#include "ecore/EAttribute.hpp"
-#include "ecore/EStructuralFeature.hpp"
 
 using namespace PSCS::Semantics::Actions;
 
@@ -143,14 +140,10 @@ CS_DefaultConstructStrategyImpl& CS_DefaultConstructStrategyImpl::operator=(cons
 		m_generatedRealizingClasses.reset(new Bag<uml::Class>());
 		
 		
-
-		Bag<uml::Class>::iterator generatedRealizingClassesIter = generatedRealizingClassesList->begin();
-		Bag<uml::Class>::iterator generatedRealizingClassesEnd = generatedRealizingClassesList->end();
-		while (generatedRealizingClassesIter != generatedRealizingClassesEnd) 
+		for(const std::shared_ptr<uml::Class> generatedRealizingClassesindexElem: *generatedRealizingClassesList) 
 		{
-			std::shared_ptr<uml::Class> temp = std::dynamic_pointer_cast<uml::Class>((*generatedRealizingClassesIter)->copy());
-			getGeneratedRealizingClasses()->push_back(temp);
-			generatedRealizingClassesIter++;
+			std::shared_ptr<uml::Class> temp = std::dynamic_pointer_cast<uml::Class>((generatedRealizingClassesindexElem)->copy());
+			m_generatedRealizingClasses->push_back(temp);
 		}
 	}
 	else
@@ -839,12 +832,10 @@ void CS_DefaultConstructStrategyImpl::saveContent(std::shared_ptr<persistence::i
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> CS_DefaultConstructStrategyImpl::eStaticClass() const
 {
 	return PSCS::Semantics::Actions::ActionsPackage::eInstance()->getCS_DefaultConstructStrategy_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -856,24 +847,16 @@ Any CS_DefaultConstructStrategyImpl::eGet(int featureID, bool resolve, bool core
 		case PSCS::Semantics::Actions::ActionsPackage::CS_DEFAULTCONSTRUCTSTRATEGY_ATTRIBUTE_DEFAULTASSOCIATION:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getDefaultAssociation();
-			return eAny(returnValue); //101
+			return eAny(returnValue,uml::umlPackage::ASSOCIATION_CLASS,false); //101
 		}
 		case PSCS::Semantics::Actions::ActionsPackage::CS_DEFAULTCONSTRUCTSTRATEGY_ATTRIBUTE_GENERATEDREALIZINGCLASSES:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Class>::iterator iter = getGeneratedRealizingClasses()->begin();
-			Bag<uml::Class>::iterator end = getGeneratedRealizingClasses()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //102			
+			return eAnyBag(getGeneratedRealizingClasses(),uml::umlPackage::CLASS_CLASS); //102
 		}
 		case PSCS::Semantics::Actions::ActionsPackage::CS_DEFAULTCONSTRUCTSTRATEGY_ATTRIBUTE_LOCUS:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getLocus();
-			return eAny(returnValue); //100
+			return eAny(returnValue,fUML::Semantics::Loci::LociPackage::LOCUS_CLASS,false); //100
 		}
 	}
 	return CS_ConstructStrategyImpl::eGet(featureID, resolve, coreType);
@@ -899,7 +882,7 @@ bool CS_DefaultConstructStrategyImpl::eSet(int featureID, Any newValue)
 	{
 		case PSCS::Semantics::Actions::ActionsPackage::CS_DEFAULTCONSTRUCTSTRATEGY_ATTRIBUTE_DEFAULTASSOCIATION:
 		{
-			// BOOST CAST
+			// CAST Any to uml::Association
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Association> _defaultAssociation = std::dynamic_pointer_cast<uml::Association>(_temp);
 			setDefaultAssociation(_defaultAssociation); //101
@@ -907,43 +890,44 @@ bool CS_DefaultConstructStrategyImpl::eSet(int featureID, Any newValue)
 		}
 		case PSCS::Semantics::Actions::ActionsPackage::CS_DEFAULTCONSTRUCTSTRATEGY_ATTRIBUTE_GENERATEDREALIZINGCLASSES:
 		{
-			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::Class>> generatedRealizingClassesList(new Bag<uml::Class>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
-			{
-				generatedRealizingClassesList->add(std::dynamic_pointer_cast<uml::Class>(*iter));
-				iter++;
-			}
-			
-			Bag<uml::Class>::iterator iterGeneratedRealizingClasses = getGeneratedRealizingClasses()->begin();
-			Bag<uml::Class>::iterator endGeneratedRealizingClasses = getGeneratedRealizingClasses()->end();
-			while (iterGeneratedRealizingClasses != endGeneratedRealizingClasses)
-			{
-				if (generatedRealizingClassesList->find(*iterGeneratedRealizingClasses) == -1)
+			// CAST Any to Bag<uml::Class>
+			if((newValue->isContainer()) && (uml::umlPackage::CLASS_CLASS ==newValue->getTypeId()))
+			{ 
+				try
 				{
-					getGeneratedRealizingClasses()->erase(*iterGeneratedRealizingClasses);
+					std::shared_ptr<Bag<uml::Class>> generatedRealizingClassesList= newValue->get<std::shared_ptr<Bag<uml::Class>>>();
+					std::shared_ptr<Bag<uml::Class>> _generatedRealizingClasses=getGeneratedRealizingClasses();
+					for(const std::shared_ptr<uml::Class> indexGeneratedRealizingClasses: *_generatedRealizingClasses)
+					{
+						if (generatedRealizingClassesList->find(indexGeneratedRealizingClasses) == -1)
+						{
+							_generatedRealizingClasses->erase(indexGeneratedRealizingClasses);
+						}
+					}
+
+					for(const std::shared_ptr<uml::Class> indexGeneratedRealizingClasses: *generatedRealizingClassesList)
+					{
+						if (_generatedRealizingClasses->find(indexGeneratedRealizingClasses) == -1)
+						{
+							_generatedRealizingClasses->add(indexGeneratedRealizingClasses);
+						}
+					}
 				}
-				iterGeneratedRealizingClasses++;
-			}
- 
-			iterGeneratedRealizingClasses = generatedRealizingClassesList->begin();
-			endGeneratedRealizingClasses = generatedRealizingClassesList->end();
-			while (iterGeneratedRealizingClasses != endGeneratedRealizingClasses)
-			{
-				if (getGeneratedRealizingClasses()->find(*iterGeneratedRealizingClasses) == -1)
+				catch(...)
 				{
-					getGeneratedRealizingClasses()->add(*iterGeneratedRealizingClasses);
+					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					return false;
 				}
-				iterGeneratedRealizingClasses++;			
+			}
+			else
+			{
+				return false;
 			}
 			return true;
 		}
 		case PSCS::Semantics::Actions::ActionsPackage::CS_DEFAULTCONSTRUCTSTRATEGY_ATTRIBUTE_LOCUS:
 		{
-			// BOOST CAST
+			// CAST Any to fUML::Semantics::Loci::Locus
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<fUML::Semantics::Loci::Locus> _locus = std::dynamic_pointer_cast<fUML::Semantics::Loci::Locus>(_temp);
 			setLocus(_locus); //100
@@ -957,218 +941,202 @@ bool CS_DefaultConstructStrategyImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any CS_DefaultConstructStrategyImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any CS_DefaultConstructStrategyImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
   	switch(operationID)
 	{
-		
-		// 1646320932
+		// PSCS::Semantics::Actions::CS_DefaultConstructStrategy::addStructuralFeatureValue(PSCS::Semantics::StructuredClassifiers::CS_Reference, uml::Property, fUML::Semantics::Values::Value): 1646320932
 		case ActionsPackage::CS_DEFAULTCONSTRUCTSTRATEGY_OPERATION_ADDSTRUCTURALFEATUREVALUE_CS_REFERENCE_VALUE:
 		{
 			//Retrieve input parameter 'context'
 			//parameter 0
 			std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> >();
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> >();
 			//Retrieve input parameter 'feature'
 			//parameter 1
 			std::shared_ptr<uml::Property> incoming_param_feature;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_feature_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_feature = (*incoming_param_feature_arguments_citer)->get()->get<std::shared_ptr<uml::Property> >();
+			std::list<Any>::const_iterator incoming_param_feature_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_feature = (*incoming_param_feature_arguments_citer)->get<std::shared_ptr<uml::Property> >();
 			//Retrieve input parameter 'value'
 			//parameter 2
 			std::shared_ptr<fUML::Semantics::Values::Value> incoming_param_value;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_value_arguments_citer = std::next(arguments->begin(), 2);
-			incoming_param_value = (*incoming_param_value_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::Values::Value> >();
+			std::list<Any>::const_iterator incoming_param_value_arguments_citer = std::next(arguments->begin(), 2);
+			incoming_param_value = (*incoming_param_value_arguments_citer)->get<std::shared_ptr<fUML::Semantics::Values::Value> >();
 			this->addStructuralFeatureValue(incoming_param_context,incoming_param_feature,incoming_param_value);
-			break;
 		}
-		
-		// 144834873
+		// PSCS::Semantics::Actions::CS_DefaultConstructStrategy::canInstantiate(uml::Property) : bool: 144834873
 		case ActionsPackage::CS_DEFAULTCONSTRUCTSTRATEGY_OPERATION_CANINSTANTIATE_PROPERTY:
 		{
 			//Retrieve input parameter 'p'
 			//parameter 0
 			std::shared_ptr<uml::Property> incoming_param_p;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_p_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_p = (*incoming_param_p_arguments_citer)->get()->get<std::shared_ptr<uml::Property> >();
-			result = eAny(this->canInstantiate(incoming_param_p));
+			std::list<Any>::const_iterator incoming_param_p_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_p = (*incoming_param_p_arguments_citer)->get<std::shared_ptr<uml::Property> >();
+			result = eAny(this->canInstantiate(incoming_param_p),0,false);
 			break;
 		}
-		
-		// 819868466
+		// PSCS::Semantics::Actions::CS_DefaultConstructStrategy::construct(uml::Operation, PSCS::Semantics::StructuredClassifiers::CS_Object) : fUML::Semantics::StructuredClassifiers::Object: 819868466
 		case ActionsPackage::CS_DEFAULTCONSTRUCTSTRATEGY_OPERATION_CONSTRUCT_OPERATION_CS_OBJECT:
 		{
 			//Retrieve input parameter 'constructor'
 			//parameter 0
 			std::shared_ptr<uml::Operation> incoming_param_constructor;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_constructor_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_constructor = (*incoming_param_constructor_arguments_citer)->get()->get<std::shared_ptr<uml::Operation> >();
+			std::list<Any>::const_iterator incoming_param_constructor_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_constructor = (*incoming_param_constructor_arguments_citer)->get<std::shared_ptr<uml::Operation> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Object> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Object> >();
-			result = eAny(this->construct(incoming_param_constructor,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Object> >();
+			result = eAny(this->construct(incoming_param_constructor,incoming_param_context), fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::OBJECT_CLASS,false);
 			break;
 		}
-		
-		// 517187992
+		// PSCS::Semantics::Actions::CS_DefaultConstructStrategy::constructObject(PSCS::Semantics::StructuredClassifiers::CS_Object, uml::Class) : fUML::Semantics::StructuredClassifiers::Object: 517187992
 		case ActionsPackage::CS_DEFAULTCONSTRUCTSTRATEGY_OPERATION_CONSTRUCTOBJECT_CS_OBJECT_CLASS:
 		{
 			//Retrieve input parameter 'context'
 			//parameter 0
 			std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Object> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Object> >();
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Object> >();
 			//Retrieve input parameter 'type'
 			//parameter 1
 			std::shared_ptr<uml::Class> incoming_param_type;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_type_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_type = (*incoming_param_type_arguments_citer)->get()->get<std::shared_ptr<uml::Class> >();
-			result = eAny(this->constructObject(incoming_param_context,incoming_param_type));
+			std::list<Any>::const_iterator incoming_param_type_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_type = (*incoming_param_type_arguments_citer)->get<std::shared_ptr<uml::Class> >();
+			result = eAny(this->constructObject(incoming_param_context,incoming_param_type), fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::OBJECT_CLASS,false);
 			break;
 		}
-		
-		// 928453684
+		// PSCS::Semantics::Actions::CS_DefaultConstructStrategy::generateArrayPattern(PSCS::Semantics::StructuredClassifiers::CS_Reference, uml::Connector): 928453684
 		case ActionsPackage::CS_DEFAULTCONSTRUCTSTRATEGY_OPERATION_GENERATEARRAYPATTERN_CS_REFERENCE_CONNECTOR:
 		{
 			//Retrieve input parameter 'context'
 			//parameter 0
 			std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> >();
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> >();
 			//Retrieve input parameter 'connector'
 			//parameter 1
 			std::shared_ptr<uml::Connector> incoming_param_connector;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_connector_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_connector = (*incoming_param_connector_arguments_citer)->get()->get<std::shared_ptr<uml::Connector> >();
+			std::list<Any>::const_iterator incoming_param_connector_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_connector = (*incoming_param_connector_arguments_citer)->get<std::shared_ptr<uml::Connector> >();
 			this->generateArrayPattern(incoming_param_context,incoming_param_connector);
-			break;
 		}
-		
-		// 567067280
+		// PSCS::Semantics::Actions::CS_DefaultConstructStrategy::generateRealizingClass(uml::Interface, std::string) : uml::Class: 567067280
 		case ActionsPackage::CS_DEFAULTCONSTRUCTSTRATEGY_OPERATION_GENERATEREALIZINGCLASS_INTERFACE_ESTRING:
 		{
 			//Retrieve input parameter 'interface_'
 			//parameter 0
 			std::shared_ptr<uml::Interface> incoming_param_interface_;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_interface__arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_interface_ = (*incoming_param_interface__arguments_citer)->get()->get<std::shared_ptr<uml::Interface> >();
+			std::list<Any>::const_iterator incoming_param_interface__arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_interface_ = (*incoming_param_interface__arguments_citer)->get<std::shared_ptr<uml::Interface> >();
 			//Retrieve input parameter 'className'
 			//parameter 1
 			std::string incoming_param_className;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_className_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_className = (*incoming_param_className_arguments_citer)->get()->get<std::string >();
-			result = eAny(this->generateRealizingClass(incoming_param_interface_,incoming_param_className));
+			std::list<Any>::const_iterator incoming_param_className_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_className = (*incoming_param_className_arguments_citer)->get<std::string >();
+			result = eAny(this->generateRealizingClass(incoming_param_interface_,incoming_param_className), uml::umlPackage::CLASS_CLASS,false);
 			break;
 		}
-		
-		// 1413719551
+		// PSCS::Semantics::Actions::CS_DefaultConstructStrategy::generateStarPattern(PSCS::Semantics::StructuredClassifiers::CS_Reference, uml::Connector): 1413719551
 		case ActionsPackage::CS_DEFAULTCONSTRUCTSTRATEGY_OPERATION_GENERATESTARPATTERN_CS_REFERENCE_CONNECTOR:
 		{
 			//Retrieve input parameter 'context'
 			//parameter 0
 			std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> >();
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> >();
 			//Retrieve input parameter 'connector'
 			//parameter 1
 			std::shared_ptr<uml::Connector> incoming_param_connector;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_connector_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_connector = (*incoming_param_connector_arguments_citer)->get()->get<std::shared_ptr<uml::Connector> >();
+			std::list<Any>::const_iterator incoming_param_connector_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_connector = (*incoming_param_connector_arguments_citer)->get<std::shared_ptr<uml::Connector> >();
 			this->generateStarPattern(incoming_param_context,incoming_param_connector);
-			break;
 		}
-		
-		// 1031700126
+		// PSCS::Semantics::Actions::CS_DefaultConstructStrategy::getCardinality(uml::ConnectorEnd) : int: 1031700126
 		case ActionsPackage::CS_DEFAULTCONSTRUCTSTRATEGY_OPERATION_GETCARDINALITY_CONNECTOREND:
 		{
 			//Retrieve input parameter 'end'
 			//parameter 0
 			std::shared_ptr<uml::ConnectorEnd> incoming_param_end;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_end_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_end = (*incoming_param_end_arguments_citer)->get()->get<std::shared_ptr<uml::ConnectorEnd> >();
-			result = eAny(this->getCardinality(incoming_param_end));
+			std::list<Any>::const_iterator incoming_param_end_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_end = (*incoming_param_end_arguments_citer)->get<std::shared_ptr<uml::ConnectorEnd> >();
+			result = eAny(this->getCardinality(incoming_param_end),0,false);
 			break;
 		}
-		
-		// 1689856359
+		// PSCS::Semantics::Actions::CS_DefaultConstructStrategy::getDefaultAssociation() : uml::Association: 1689856359
 		case ActionsPackage::CS_DEFAULTCONSTRUCTSTRATEGY_OPERATION_GETDEFAULTASSOCIATION:
 		{
-			result = eAny(this->getDefaultAssociation());
+			result = eAny(this->getDefaultAssociation(), uml::umlPackage::ASSOCIATION_CLASS,false);
 			break;
 		}
-		
-		// 637221846
+		// PSCS::Semantics::Actions::CS_DefaultConstructStrategy::getRealizingClass(uml::Interface) : uml::Class: 637221846
 		case ActionsPackage::CS_DEFAULTCONSTRUCTSTRATEGY_OPERATION_GETREALIZINGCLASS_INTERFACE:
 		{
 			//Retrieve input parameter 'interface_'
 			//parameter 0
 			std::shared_ptr<uml::Interface> incoming_param_interface_;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_interface__arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_interface_ = (*incoming_param_interface__arguments_citer)->get()->get<std::shared_ptr<uml::Interface> >();
-			result = eAny(this->getRealizingClass(incoming_param_interface_));
+			std::list<Any>::const_iterator incoming_param_interface__arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_interface_ = (*incoming_param_interface__arguments_citer)->get<std::shared_ptr<uml::Interface> >();
+			result = eAny(this->getRealizingClass(incoming_param_interface_), uml::umlPackage::CLASS_CLASS,false);
 			break;
 		}
-		
-		// 1894002496
+		// PSCS::Semantics::Actions::CS_DefaultConstructStrategy::getValuesFromConnectorEnd(PSCS::Semantics::StructuredClassifiers::CS_Reference, uml::ConnectorEnd) : fUML::Semantics::Values::Value[*]: 1894002496
 		case ActionsPackage::CS_DEFAULTCONSTRUCTSTRATEGY_OPERATION_GETVALUESFROMCONNECTOREND_CS_REFERENCE_CONNECTOREND:
 		{
 			//Retrieve input parameter 'context'
 			//parameter 0
 			std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> >();
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> >();
 			//Retrieve input parameter 'end'
 			//parameter 1
 			std::shared_ptr<uml::ConnectorEnd> incoming_param_end;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_end_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_end = (*incoming_param_end_arguments_citer)->get()->get<std::shared_ptr<uml::ConnectorEnd> >();
-			result = eAny(this->getValuesFromConnectorEnd(incoming_param_context,incoming_param_end));
+			std::list<Any>::const_iterator incoming_param_end_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_end = (*incoming_param_end_arguments_citer)->get<std::shared_ptr<uml::ConnectorEnd> >();
+			std::shared_ptr<Bag<fUML::Semantics::Values::Value> > resultList = this->getValuesFromConnectorEnd(incoming_param_context,incoming_param_end);
+			return eAny(resultList,fUML::Semantics::Values::ValuesPackage::VALUE_CLASS,true);
 			break;
 		}
-		
-		// 1839205058
+		// PSCS::Semantics::Actions::CS_DefaultConstructStrategy::instantiateInterface(uml::Interface, fUML::Semantics::Loci::Locus) : fUML::Semantics::StructuredClassifiers::Object: 1839205058
 		case ActionsPackage::CS_DEFAULTCONSTRUCTSTRATEGY_OPERATION_INSTANTIATEINTERFACE_INTERFACE_LOCUS:
 		{
 			//Retrieve input parameter 'interface'
 			//parameter 0
 			std::shared_ptr<uml::Interface> incoming_param_interface;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_interface_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_interface = (*incoming_param_interface_arguments_citer)->get()->get<std::shared_ptr<uml::Interface> >();
+			std::list<Any>::const_iterator incoming_param_interface_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_interface = (*incoming_param_interface_arguments_citer)->get<std::shared_ptr<uml::Interface> >();
 			//Retrieve input parameter 'locus'
 			//parameter 1
 			std::shared_ptr<fUML::Semantics::Loci::Locus> incoming_param_locus;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_locus_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_locus = (*incoming_param_locus_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::Loci::Locus> >();
-			result = eAny(this->instantiateInterface(incoming_param_interface,incoming_param_locus));
+			std::list<Any>::const_iterator incoming_param_locus_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_locus = (*incoming_param_locus_arguments_citer)->get<std::shared_ptr<fUML::Semantics::Loci::Locus> >();
+			result = eAny(this->instantiateInterface(incoming_param_interface,incoming_param_locus), fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::OBJECT_CLASS,false);
 			break;
 		}
-		
-		// 1940370942
+		// PSCS::Semantics::Actions::CS_DefaultConstructStrategy::isArrayPattern(uml::Connector) : bool: 1940370942
 		case ActionsPackage::CS_DEFAULTCONSTRUCTSTRATEGY_OPERATION_ISARRAYPATTERN_CONNECTOR:
 		{
 			//Retrieve input parameter 'c'
 			//parameter 0
 			std::shared_ptr<uml::Connector> incoming_param_c;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_c_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_c = (*incoming_param_c_arguments_citer)->get()->get<std::shared_ptr<uml::Connector> >();
-			result = eAny(this->isArrayPattern(incoming_param_c));
+			std::list<Any>::const_iterator incoming_param_c_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_c = (*incoming_param_c_arguments_citer)->get<std::shared_ptr<uml::Connector> >();
+			result = eAny(this->isArrayPattern(incoming_param_c),0,false);
 			break;
 		}
-		
-		// 1094385999
+		// PSCS::Semantics::Actions::CS_DefaultConstructStrategy::isStarPattern(uml::Connector) : bool: 1094385999
 		case ActionsPackage::CS_DEFAULTCONSTRUCTSTRATEGY_OPERATION_ISSTARPATTERN_CONNECTOR:
 		{
 			//Retrieve input parameter 'c'
 			//parameter 0
 			std::shared_ptr<uml::Connector> incoming_param_c;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_c_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_c = (*incoming_param_c_arguments_citer)->get()->get<std::shared_ptr<uml::Connector> >();
-			result = eAny(this->isStarPattern(incoming_param_c));
+			std::list<Any>::const_iterator incoming_param_c_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_c = (*incoming_param_c_arguments_citer)->get<std::shared_ptr<uml::Connector> >();
+			result = eAny(this->isStarPattern(incoming_param_c),0,false);
 			break;
 		}
 
@@ -1185,7 +1153,6 @@ Any CS_DefaultConstructStrategyImpl::eInvoke(int operationID, std::shared_ptr<st
 	return result;
 }
 
-
 std::shared_ptr<PSCS::Semantics::Actions::CS_DefaultConstructStrategy> CS_DefaultConstructStrategyImpl::getThisCS_DefaultConstructStrategyPtr() const
 {
 	return m_thisCS_DefaultConstructStrategyPtr.lock();
@@ -1195,3 +1162,5 @@ void CS_DefaultConstructStrategyImpl::setThisCS_DefaultConstructStrategyPtr(std:
 	m_thisCS_DefaultConstructStrategyPtr = thisCS_DefaultConstructStrategyPtr;
 	setThisCS_ConstructStrategyPtr(thisCS_DefaultConstructStrategyPtr);
 }
+
+

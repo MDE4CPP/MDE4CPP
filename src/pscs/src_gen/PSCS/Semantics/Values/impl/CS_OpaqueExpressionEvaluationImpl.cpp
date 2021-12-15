@@ -24,6 +24,9 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
+#include "ecore/ecorePackage.hpp"
 
 //Includes from codegen annotation
 #include "abstractDataTypes/Subset.hpp"
@@ -39,25 +42,19 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
-
+#include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Values/Evaluation.hpp"
 #include "fUML/Semantics/Loci/Locus.hpp"
 #include "fUML/Semantics/Values/Value.hpp"
 #include "uml/ValueSpecification.hpp"
-
-//Factories an Package includes
-#include "PSCS/PSCSPackage.hpp"
+//Factories and Package includes
 #include "PSCS/Semantics/SemanticsPackage.hpp"
+#include "PSCS/PSCSPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
 #include "fUML/Semantics/Values/ValuesPackage.hpp"
 #include "PSCS/Semantics/Values/ValuesPackage.hpp"
 #include "uml/umlPackage.hpp"
-
-
-#include "ecore/EAttribute.hpp"
-#include "ecore/EStructuralFeature.hpp"
 
 using namespace PSCS::Semantics::Values;
 
@@ -256,12 +253,10 @@ void CS_OpaqueExpressionEvaluationImpl::saveContent(std::shared_ptr<persistence:
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> CS_OpaqueExpressionEvaluationImpl::eStaticClass() const
 {
 	return PSCS::Semantics::Values::ValuesPackage::eInstance()->getCS_OpaqueExpressionEvaluation_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -294,24 +289,23 @@ bool CS_OpaqueExpressionEvaluationImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any CS_OpaqueExpressionEvaluationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any CS_OpaqueExpressionEvaluationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
   	switch(operationID)
 	{
-		
-		// 1951868314
+		// PSCS::Semantics::Values::CS_OpaqueExpressionEvaluation::evaluate() : fUML::Semantics::Values::Value: 1951868314
 		case ValuesPackage::CS_OPAQUEEXPRESSIONEVALUATION_OPERATION_EVALUATE:
 		{
-			result = eAny(this->evaluate());
+			result = eAny(this->evaluate(), fUML::Semantics::Values::ValuesPackage::VALUE_CLASS,false);
 			break;
 		}
-		
-		// 1129867171
+		// PSCS::Semantics::Values::CS_OpaqueExpressionEvaluation::executeExpressionBehavior() : fUML::Semantics::Values::Value[*]: 1129867171
 		case ValuesPackage::CS_OPAQUEEXPRESSIONEVALUATION_OPERATION_EXECUTEEXPRESSIONBEHAVIOR:
 		{
-			result = eAny(this->executeExpressionBehavior());
+			std::shared_ptr<Bag<fUML::Semantics::Values::Value> > resultList = this->executeExpressionBehavior();
+			return eAny(resultList,fUML::Semantics::Values::ValuesPackage::VALUE_CLASS,true);
 			break;
 		}
 
@@ -328,7 +322,6 @@ Any CS_OpaqueExpressionEvaluationImpl::eInvoke(int operationID, std::shared_ptr<
 	return result;
 }
 
-
 std::shared_ptr<PSCS::Semantics::Values::CS_OpaqueExpressionEvaluation> CS_OpaqueExpressionEvaluationImpl::getThisCS_OpaqueExpressionEvaluationPtr() const
 {
 	return m_thisCS_OpaqueExpressionEvaluationPtr.lock();
@@ -338,3 +331,5 @@ void CS_OpaqueExpressionEvaluationImpl::setThisCS_OpaqueExpressionEvaluationPtr(
 	m_thisCS_OpaqueExpressionEvaluationPtr = thisCS_OpaqueExpressionEvaluationPtr;
 	setThisEvaluationPtr(thisCS_OpaqueExpressionEvaluationPtr);
 }
+
+

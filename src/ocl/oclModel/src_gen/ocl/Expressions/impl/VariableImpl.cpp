@@ -25,6 +25,9 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
+#include "ecore/ecorePackage.hpp"
 
 
 //Forward declaration includes
@@ -32,10 +35,9 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "ecore/ecoreFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
+#include "ecore/ecoreFactory.hpp"
 #include "fUML/Semantics/Values/ValuesFactory.hpp"
-
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClassifier.hpp"
 #include "ecore/EGenericType.hpp"
@@ -47,16 +49,11 @@
 #include "ocl/Expressions/OclExpression.hpp"
 #include "fUML/Semantics/Values/Value.hpp"
 #include "ocl/Expressions/VariableExp.hpp"
-
-//Factories an Package includes
+//Factories and Package includes
 #include "ocl/oclPackage.hpp"
 #include "ocl/Expressions/ExpressionsPackage.hpp"
 #include "fUML/Semantics/Values/ValuesPackage.hpp"
 #include "ecore/ecorePackage.hpp"
-
-
-#include "ecore/EAttribute.hpp"
-#include "ecore/EStructuralFeature.hpp"
 
 using namespace ocl::Expressions;
 
@@ -555,47 +552,47 @@ Any VariableImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case ocl::Expressions::ExpressionsPackage::VARIABLE_ATTRIBUTE_BASEEXP:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getBaseExp().lock();
-			return eAny(returnValue,returnValue->getMetaElementID(),false); //9713
+			return eAny(returnValue,ocl::Expressions::ExpressionsPackage::ITERATEEXP_CLASS,false); //9713
 		}
 		case ocl::Expressions::ExpressionsPackage::VARIABLE_ATTRIBUTE_INITEXPRESSION:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getInitExpression();
-			return eAny(returnValue,returnValue->getMetaElementID(),false); //9710
+			return eAny(returnValue,ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_CLASS,false); //9710
 		}
 		case ocl::Expressions::ExpressionsPackage::VARIABLE_ATTRIBUTE_LOOPEXP:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getLoopExp().lock();
-			return eAny(returnValue,returnValue->getMetaElementID(),false); //9712
+			return eAny(returnValue,ocl::Expressions::ExpressionsPackage::LOOPEXP_CLASS,false); //9712
 		}
 		case ocl::Expressions::ExpressionsPackage::VARIABLE_ATTRIBUTE_REFERRINGEXP:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getReferringExp();
-			return eAny(returnValue,returnValue->getMetaElementID(),false); //9714
+			return eAny(returnValue,ocl::Expressions::ExpressionsPackage::VARIABLEEXP_CLASS,false); //9714
 		}
 		case ocl::Expressions::ExpressionsPackage::VARIABLE_ATTRIBUTE_REPRESENTEDPARAMETER:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getRepresentedParameter();
-			return eAny(returnValue,returnValue->getMetaElementID(),false); //9711
+			return eAny(returnValue,ecore::ecorePackage::EPARAMETER_CLASS,false); //9711
 		}
 		case ocl::Expressions::ExpressionsPackage::VARIABLE_ATTRIBUTE_RESULTOWNER:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getResultOwner().lock();
-			return eAny(returnValue,returnValue->getMetaElementID(),false); //9716
+			return eAny(returnValue,ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_CLASS,false); //9716
 		}
 		case ocl::Expressions::ExpressionsPackage::VARIABLE_ATTRIBUTE_SELFOWNER:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getSelfOwner().lock();
-			return eAny(returnValue,returnValue->getMetaElementID(),false); //9715
+			return eAny(returnValue,ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_CLASS,false); //9715
 		}
 		case ocl::Expressions::ExpressionsPackage::VARIABLE_ATTRIBUTE_VALUE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getValue();
-			return eAny(returnValue,returnValue->getMetaElementID(),false); //9718
+			return eAny(returnValue,fUML::Semantics::Values::ValuesPackage::VALUE_CLASS,false); //9718
 		}
 		case ocl::Expressions::ExpressionsPackage::VARIABLE_ATTRIBUTE_VAROWNER:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getVarOwner().lock();
-			return eAny(returnValue,returnValue->getMetaElementID(),false); //9717
+			return eAny(returnValue,ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_CLASS,false); //9717
 		}
 	}
 	return ecore::ETypedElementImpl::eGet(featureID, resolve, coreType);

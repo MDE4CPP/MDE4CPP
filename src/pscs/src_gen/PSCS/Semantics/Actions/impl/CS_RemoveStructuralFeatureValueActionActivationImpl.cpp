@@ -25,6 +25,9 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
+#include "ecore/ecorePackage.hpp"
 
 //Includes from codegen annotation
 #include "fUML/Semantics/Activities/ActivityNodeActivationGroup.hpp"
@@ -51,10 +54,9 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "uml/umlFactory.hpp"
-
+#include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "uml/Action.hpp"
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
 #include "uml/ActivityNode.hpp"
@@ -70,21 +72,16 @@
 #include "fUML/Semantics/SimpleClassifiers/StructuredValue.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
 #include "fUML/Semantics/Values/Value.hpp"
-
-//Factories an Package includes
-#include "PSCS/PSCSPackage.hpp"
+//Factories and Package includes
 #include "PSCS/Semantics/SemanticsPackage.hpp"
-#include "PSCS/Semantics/Actions/ActionsPackage.hpp"
+#include "PSCS/PSCSPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
+#include "PSCS/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersPackage.hpp"
 #include "PSCS/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
 #include "fUML/Semantics/Values/ValuesPackage.hpp"
 #include "uml/umlPackage.hpp"
-
-
-#include "ecore/EAttribute.hpp"
-#include "ecore/EStructuralFeature.hpp"
 
 using namespace PSCS::Semantics::Actions;
 
@@ -515,12 +512,10 @@ void CS_RemoveStructuralFeatureValueActionActivationImpl::saveContent(std::share
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> CS_RemoveStructuralFeatureValueActionActivationImpl::eStaticClass() const
 {
 	return PSCS::Semantics::Actions::ActionsPackage::eInstance()->getCS_RemoveStructuralFeatureValueActionActivation_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -553,56 +548,54 @@ bool CS_RemoveStructuralFeatureValueActionActivationImpl::eSet(int featureID, An
 //*********************************
 // EOperation Invoke
 //*********************************
-Any CS_RemoveStructuralFeatureValueActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any CS_RemoveStructuralFeatureValueActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
   	switch(operationID)
 	{
-		
-		// 2088584924
+		// PSCS::Semantics::Actions::CS_RemoveStructuralFeatureValueActionActivation::doAction(): 2088584924
 		case ActionsPackage::CS_REMOVESTRUCTURALFEATUREVALUEACTIONACTIVATION_OPERATION_DOACTION:
 		{
 			this->doAction();
-			break;
 		}
-		
-		// 1499748761
+		// PSCS::Semantics::Actions::CS_RemoveStructuralFeatureValueActionActivation::getLinksToDestroy(fUML::Semantics::SimpleClassifiers::StructuredValue, uml::StructuralFeature, fUML::Semantics::Values::Value) : PSCS::Semantics::StructuredClassifiers::CS_Link[*]: 1499748761
 		case ActionsPackage::CS_REMOVESTRUCTURALFEATUREVALUEACTIONACTIVATION_OPERATION_GETLINKSTODESTROY_STRUCTUREDVALUE_VALUE:
 		{
 			//Retrieve input parameter 'value'
 			//parameter 0
 			std::shared_ptr<fUML::Semantics::SimpleClassifiers::StructuredValue> incoming_param_value;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_value_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_value = (*incoming_param_value_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::SimpleClassifiers::StructuredValue> >();
+			std::list<Any>::const_iterator incoming_param_value_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_value = (*incoming_param_value_arguments_citer)->get<std::shared_ptr<fUML::Semantics::SimpleClassifiers::StructuredValue> >();
 			//Retrieve input parameter 'feature'
 			//parameter 1
 			std::shared_ptr<uml::StructuralFeature> incoming_param_feature;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_feature_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_feature = (*incoming_param_feature_arguments_citer)->get()->get<std::shared_ptr<uml::StructuralFeature> >();
+			std::list<Any>::const_iterator incoming_param_feature_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_feature = (*incoming_param_feature_arguments_citer)->get<std::shared_ptr<uml::StructuralFeature> >();
 			//Retrieve input parameter 'removedValue'
 			//parameter 2
 			std::shared_ptr<fUML::Semantics::Values::Value> incoming_param_removedValue;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_removedValue_arguments_citer = std::next(arguments->begin(), 2);
-			incoming_param_removedValue = (*incoming_param_removedValue_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::Values::Value> >();
-			result = eAny(this->getLinksToDestroy(incoming_param_value,incoming_param_feature,incoming_param_removedValue));
+			std::list<Any>::const_iterator incoming_param_removedValue_arguments_citer = std::next(arguments->begin(), 2);
+			incoming_param_removedValue = (*incoming_param_removedValue_arguments_citer)->get<std::shared_ptr<fUML::Semantics::Values::Value> >();
+			std::shared_ptr<Bag<PSCS::Semantics::StructuredClassifiers::CS_Link> > resultList = this->getLinksToDestroy(incoming_param_value,incoming_param_feature,incoming_param_removedValue);
+			return eAny(resultList,PSCS::Semantics::StructuredClassifiers::StructuredClassifiersPackage::CS_LINK_CLASS,true);
 			break;
 		}
-		
-		// 502293310
+		// PSCS::Semantics::Actions::CS_RemoveStructuralFeatureValueActionActivation::getPotentialLinkEnds(PSCS::Semantics::StructuredClassifiers::CS_Reference, uml::StructuralFeature) : fUML::Semantics::Values::Value[*]: 502293310
 		case ActionsPackage::CS_REMOVESTRUCTURALFEATUREVALUEACTIONACTIVATION_OPERATION_GETPOTENTIALLINKENDS_CS_REFERENCE_STRUCTURALFEATURE:
 		{
 			//Retrieve input parameter 'context'
 			//parameter 0
 			std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> >();
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> >();
 			//Retrieve input parameter 'feature'
 			//parameter 1
 			std::shared_ptr<uml::StructuralFeature> incoming_param_feature;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_feature_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_feature = (*incoming_param_feature_arguments_citer)->get()->get<std::shared_ptr<uml::StructuralFeature> >();
-			result = eAny(this->getPotentialLinkEnds(incoming_param_context,incoming_param_feature));
+			std::list<Any>::const_iterator incoming_param_feature_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_feature = (*incoming_param_feature_arguments_citer)->get<std::shared_ptr<uml::StructuralFeature> >();
+			std::shared_ptr<Bag<fUML::Semantics::Values::Value> > resultList = this->getPotentialLinkEnds(incoming_param_context,incoming_param_feature);
+			return eAny(resultList,fUML::Semantics::Values::ValuesPackage::VALUE_CLASS,true);
 			break;
 		}
 
@@ -619,7 +612,6 @@ Any CS_RemoveStructuralFeatureValueActionActivationImpl::eInvoke(int operationID
 	return result;
 }
 
-
 std::shared_ptr<PSCS::Semantics::Actions::CS_RemoveStructuralFeatureValueActionActivation> CS_RemoveStructuralFeatureValueActionActivationImpl::getThisCS_RemoveStructuralFeatureValueActionActivationPtr() const
 {
 	return m_thisCS_RemoveStructuralFeatureValueActionActivationPtr.lock();
@@ -629,3 +621,5 @@ void CS_RemoveStructuralFeatureValueActionActivationImpl::setThisCS_RemoveStruct
 	m_thisCS_RemoveStructuralFeatureValueActionActivationPtr = thisCS_RemoveStructuralFeatureValueActionActivationPtr;
 	setThisRemoveStructuralFeatureValueActivationPtr(thisCS_RemoveStructuralFeatureValueActionActivationPtr);
 }
+
+

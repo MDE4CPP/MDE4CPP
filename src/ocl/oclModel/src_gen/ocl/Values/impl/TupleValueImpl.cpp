@@ -25,6 +25,9 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
+#include "ecore/ecorePackage.hpp"
 
 
 //Forward declaration includes
@@ -34,21 +37,15 @@
 #include <exception> // used in Persistence
 #include "ocl/Values/ValuesFactory.hpp"
 #include "ocl/Types/TypesFactory.hpp"
-
 #include "ocl/Values/NameValueBinding.hpp"
 #include "ocl/Values/StaticValue.hpp"
 #include "ocl/Types/TupleType.hpp"
 #include "fUML/Semantics/Values/Value.hpp"
-
-//Factories an Package includes
+//Factories and Package includes
 #include "ocl/oclPackage.hpp"
 #include "ocl/Types/TypesPackage.hpp"
 #include "ocl/Values/ValuesPackage.hpp"
 #include "fUML/Semantics/Values/ValuesPackage.hpp"
-
-
-#include "ecore/EAttribute.hpp"
-#include "ecore/EStructuralFeature.hpp"
 
 using namespace ocl::Values;
 
@@ -334,12 +331,12 @@ Any TupleValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 	{
 		case ocl::Values::ValuesPackage::TUPLEVALUE_ATTRIBUTE_ELEMENTS:
 		{
-			return eAnyBag(getElements(),510142670); //900
+			return eAnyBag(getElements(),ocl::Values::ValuesPackage::NAMEVALUEBINDING_CLASS); //900
 		}
 		case ocl::Values::ValuesPackage::TUPLEVALUE_ATTRIBUTE_MODEL:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getModel();
-			return eAny(returnValue,returnValue->getMetaElementID(),false); //901
+			return eAny(returnValue,ocl::Types::TypesPackage::TUPLETYPE_CLASS,false); //901
 		}
 	}
 	return StaticValueImpl::eGet(featureID, resolve, coreType);

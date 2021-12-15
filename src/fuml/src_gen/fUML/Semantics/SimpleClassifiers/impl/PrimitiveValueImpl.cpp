@@ -24,6 +24,9 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
+#include "ecore/ecorePackage.hpp"
 
 //Includes from codegen annotation
 #include "fUML/fUMLFactory.hpp"
@@ -37,21 +40,15 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-
 #include "uml/Classifier.hpp"
 #include "uml/PrimitiveType.hpp"
 #include "fUML/Semantics/Values/Value.hpp"
-
-//Factories an Package includes
+//Factories and Package includes
 #include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersPackage.hpp"
 #include "fUML/Semantics/Values/ValuesPackage.hpp"
 #include "uml/umlPackage.hpp"
-
-
-#include "ecore/EAttribute.hpp"
-#include "ecore/EStructuralFeature.hpp"
 
 using namespace fUML::Semantics::SimpleClassifiers;
 
@@ -275,7 +272,7 @@ Any PrimitiveValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::PRIMITIVEVALUE_ATTRIBUTE_TYPE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getType();
-			return eAny(returnValue,returnValue->getMetaElementID(),false); //890
+			return eAny(returnValue,uml::umlPackage::PRIMITIVETYPE_CLASS,false); //890
 		}
 	}
 	return fUML::Semantics::Values::ValueImpl::eGet(featureID, resolve, coreType);

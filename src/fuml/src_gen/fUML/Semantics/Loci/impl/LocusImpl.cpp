@@ -25,6 +25,9 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
+#include "ecore/ecorePackage.hpp"
 
 //Includes from codegen annotation
 #include <algorithm>
@@ -45,26 +48,20 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
-
+#include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
 #include "uml/Class.hpp"
 #include "uml/Classifier.hpp"
 #include "fUML/Semantics/Loci/ExecutionFactory.hpp"
 #include "fUML/Semantics/Loci/Executor.hpp"
 #include "fUML/Semantics/StructuredClassifiers/ExtensionalValue.hpp"
 #include "fUML/Semantics/StructuredClassifiers/Object.hpp"
-
-//Factories an Package includes
+//Factories and Package includes
 #include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
 #include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
 #include "uml/umlPackage.hpp"
-
-
-#include "ecore/EAttribute.hpp"
-#include "ecore/EStructuralFeature.hpp"
 
 using namespace fUML::Semantics::Loci;
 
@@ -456,16 +453,16 @@ Any LocusImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case fUML::Semantics::Loci::LociPackage::LOCUS_ATTRIBUTE_EXECUTOR:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getExecutor();
-			return eAny(returnValue,returnValue->getMetaElementID(),false); //770
+			return eAny(returnValue,fUML::Semantics::Loci::LociPackage::EXECUTOR_CLASS,false); //770
 		}
 		case fUML::Semantics::Loci::LociPackage::LOCUS_ATTRIBUTE_EXTENSIONALVALUES:
 		{
-			return eAnyBag(getExtensionalValues(),1972653315); //772
+			return eAnyBag(getExtensionalValues(),fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::EXTENSIONALVALUE_CLASS); //772
 		}
 		case fUML::Semantics::Loci::LociPackage::LOCUS_ATTRIBUTE_FACTORY:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getFactory();
-			return eAny(returnValue,returnValue->getMetaElementID(),false); //771
+			return eAny(returnValue,fUML::Semantics::Loci::LociPackage::EXECUTIONFACTORY_CLASS,false); //771
 		}
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);

@@ -24,6 +24,9 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
+#include "ecore/ecorePackage.hpp"
 
 //Includes from codegen annotation
 #include "fUML/fUMLFactory.hpp"
@@ -38,20 +41,14 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-
 #include "uml/Operation.hpp"
 #include "fUML/Semantics/StructuredClassifiers/RedefinitionBasedDispatchStrategy.hpp"
-
-//Factories an Package includes
-#include "PSCS/PSCSPackage.hpp"
+//Factories and Package includes
 #include "PSCS/Semantics/SemanticsPackage.hpp"
-#include "PSCS/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
+#include "PSCS/PSCSPackage.hpp"
 #include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
+#include "PSCS/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
 #include "uml/umlPackage.hpp"
-
-
-#include "ecore/EAttribute.hpp"
-#include "ecore/EStructuralFeature.hpp"
 
 using namespace PSCS::Semantics::StructuredClassifiers;
 
@@ -228,12 +225,10 @@ void CS_DispatchOperationOfInterfaceStrategyImpl::saveContent(std::shared_ptr<pe
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> CS_DispatchOperationOfInterfaceStrategyImpl::eStaticClass() const
 {
 	return PSCS::Semantics::StructuredClassifiers::StructuredClassifiersPackage::eInstance()->getCS_DispatchOperationOfInterfaceStrategy_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -266,27 +261,26 @@ bool CS_DispatchOperationOfInterfaceStrategyImpl::eSet(int featureID, Any newVal
 //*********************************
 // EOperation Invoke
 //*********************************
-Any CS_DispatchOperationOfInterfaceStrategyImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any CS_DispatchOperationOfInterfaceStrategyImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
   	switch(operationID)
 	{
-		
-		// 153818444
+		// PSCS::Semantics::StructuredClassifiers::CS_DispatchOperationOfInterfaceStrategy::operationsMatch(uml::Operation, uml::Operation) : bool: 153818444
 		case StructuredClassifiersPackage::CS_DISPATCHOPERATIONOFINTERFACESTRATEGY_OPERATION_OPERATIONSMATCH_OPERATION_OPERATION:
 		{
 			//Retrieve input parameter 'ownedOperation'
 			//parameter 0
 			std::shared_ptr<uml::Operation> incoming_param_ownedOperation;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_ownedOperation_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_ownedOperation = (*incoming_param_ownedOperation_arguments_citer)->get()->get<std::shared_ptr<uml::Operation> >();
+			std::list<Any>::const_iterator incoming_param_ownedOperation_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_ownedOperation = (*incoming_param_ownedOperation_arguments_citer)->get<std::shared_ptr<uml::Operation> >();
 			//Retrieve input parameter 'baseOperation'
 			//parameter 1
 			std::shared_ptr<uml::Operation> incoming_param_baseOperation;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_baseOperation_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_baseOperation = (*incoming_param_baseOperation_arguments_citer)->get()->get<std::shared_ptr<uml::Operation> >();
-			result = eAny(this->operationsMatch(incoming_param_ownedOperation,incoming_param_baseOperation));
+			std::list<Any>::const_iterator incoming_param_baseOperation_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_baseOperation = (*incoming_param_baseOperation_arguments_citer)->get<std::shared_ptr<uml::Operation> >();
+			result = eAny(this->operationsMatch(incoming_param_ownedOperation,incoming_param_baseOperation),0,false);
 			break;
 		}
 
@@ -303,7 +297,6 @@ Any CS_DispatchOperationOfInterfaceStrategyImpl::eInvoke(int operationID, std::s
 	return result;
 }
 
-
 std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_DispatchOperationOfInterfaceStrategy> CS_DispatchOperationOfInterfaceStrategyImpl::getThisCS_DispatchOperationOfInterfaceStrategyPtr() const
 {
 	return m_thisCS_DispatchOperationOfInterfaceStrategyPtr.lock();
@@ -313,3 +306,5 @@ void CS_DispatchOperationOfInterfaceStrategyImpl::setThisCS_DispatchOperationOfI
 	m_thisCS_DispatchOperationOfInterfaceStrategyPtr = thisCS_DispatchOperationOfInterfaceStrategyPtr;
 	setThisRedefinitionBasedDispatchStrategyPtr(thisCS_DispatchOperationOfInterfaceStrategyPtr);
 }
+
+

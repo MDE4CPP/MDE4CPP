@@ -24,6 +24,9 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
+#include "ecore/ecorePackage.hpp"
 
 
 //Forward declaration includes
@@ -32,17 +35,11 @@
 
 #include <exception> // used in Persistence
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
-
 #include "ocl/Evaluations/EvalEnvironment.hpp"
 #include "ocl/Evaluations/OclExpEval.hpp"
-
-//Factories an Package includes
+//Factories and Package includes
 #include "ocl/oclPackage.hpp"
 #include "ocl/Evaluations/EvaluationsPackage.hpp"
-
-
-#include "ecore/EAttribute.hpp"
-#include "ecore/EStructuralFeature.hpp"
 
 using namespace ocl::Evaluations;
 
@@ -275,12 +272,12 @@ Any ExpressionInOclEvalImpl::eGet(int featureID, bool resolve, bool coreType) co
 		case ocl::Evaluations::EvaluationsPackage::EXPRESSIONINOCLEVAL_ATTRIBUTE_CONTEXT:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getContext();
-			return eAny(returnValue,returnValue->getMetaElementID(),false); //290
+			return eAny(returnValue,ocl::Evaluations::EvaluationsPackage::OCLEXPEVAL_CLASS,false); //290
 		}
 		case ocl::Evaluations::EvaluationsPackage::EXPRESSIONINOCLEVAL_ATTRIBUTE_ENVIRONMENT:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getEnvironment();
-			return eAny(returnValue,returnValue->getMetaElementID(),false); //291
+			return eAny(returnValue,ocl::Evaluations::EvaluationsPackage::EVALENVIRONMENT_CLASS,false); //291
 		}
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);

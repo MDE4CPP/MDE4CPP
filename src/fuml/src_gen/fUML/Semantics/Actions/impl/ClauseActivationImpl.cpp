@@ -24,6 +24,9 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
+#include "ecore/ecorePackage.hpp"
 
 
 //Forward declaration includes
@@ -31,24 +34,18 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Actions/ActionsFactory.hpp"
-
+#include "uml/umlFactory.hpp"
 #include "fUML/Semantics/SimpleClassifiers/BooleanValue.hpp"
 #include "uml/Clause.hpp"
 #include "fUML/Semantics/Actions/ClauseActivation.hpp"
 #include "fUML/Semantics/Actions/ConditionalNodeActivation.hpp"
-
-//Factories an Package includes
+//Factories and Package includes
 #include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersPackage.hpp"
 #include "uml/umlPackage.hpp"
-
-
-#include "ecore/EAttribute.hpp"
-#include "ecore/EStructuralFeature.hpp"
 
 using namespace fUML::Semantics::Actions;
 
@@ -322,12 +319,12 @@ Any ClauseActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case fUML::Semantics::Actions::ActionsPackage::CLAUSEACTIVATION_ATTRIBUTE_CLAUSE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getClause();
-			return eAny(returnValue,returnValue->getMetaElementID(),false); //260
+			return eAny(returnValue,uml::umlPackage::CLAUSE_CLASS,false); //260
 		}
 		case fUML::Semantics::Actions::ActionsPackage::CLAUSEACTIVATION_ATTRIBUTE_CONDITIONALNODEACTIVATION:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getConditionalNodeActivation();
-			return eAny(returnValue,returnValue->getMetaElementID(),false); //261
+			return eAny(returnValue,fUML::Semantics::Actions::ActionsPackage::CONDITIONALNODEACTIVATION_CLASS,false); //261
 		}
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);

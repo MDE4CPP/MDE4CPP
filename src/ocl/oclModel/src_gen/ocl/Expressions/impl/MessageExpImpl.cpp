@@ -25,6 +25,9 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
+#include "ecore/ecorePackage.hpp"
 
 
 //Forward declaration includes
@@ -32,11 +35,10 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
+#include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "uml/umlFactory.hpp"
 #include "ecore/ecoreFactory.hpp"
-#include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
-
 #include "ocl/Expressions/CallExp.hpp"
 #include "uml/CallOperationAction.hpp"
 #include "ocl/Expressions/CollectionRange.hpp"
@@ -52,17 +54,12 @@
 #include "ocl/Expressions/OperationCallExp.hpp"
 #include "uml/SendSignalAction.hpp"
 #include "ocl/Expressions/Variable.hpp"
-
-//Factories an Package includes
+//Factories and Package includes
 #include "ocl/oclPackage.hpp"
 #include "ocl/Evaluations/EvaluationsPackage.hpp"
 #include "ocl/Expressions/ExpressionsPackage.hpp"
 #include "ecore/ecorePackage.hpp"
 #include "uml/umlPackage.hpp"
-
-
-#include "ecore/EAttribute.hpp"
-#include "ecore/EStructuralFeature.hpp"
 
 using namespace ocl::Expressions;
 
@@ -507,22 +504,22 @@ Any MessageExpImpl::eGet(int featureID, bool resolve, bool coreType) const
 	{
 		case ocl::Expressions::ExpressionsPackage::MESSAGEEXP_ATTRIBUTE_ARGUMENT:
 		{
-			return eAnyBag(getArgument(),925307628); //4923
+			return eAnyBag(getArgument(),ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_CLASS); //4923
 		}
 		case ocl::Expressions::ExpressionsPackage::MESSAGEEXP_ATTRIBUTE_CALLEDOPERATION:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getCalledOperation();
-			return eAny(returnValue,returnValue->getMetaElementID(),false); //4924
+			return eAny(returnValue,uml::umlPackage::CALLOPERATIONACTION_CLASS,false); //4924
 		}
 		case ocl::Expressions::ExpressionsPackage::MESSAGEEXP_ATTRIBUTE_SENTSIGNAL:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getSentSignal();
-			return eAny(returnValue,returnValue->getMetaElementID(),false); //4925
+			return eAny(returnValue,uml::umlPackage::SENDSIGNALACTION_CLASS,false); //4925
 		}
 		case ocl::Expressions::ExpressionsPackage::MESSAGEEXP_ATTRIBUTE_TARGET:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getTarget();
-			return eAny(returnValue,returnValue->getMetaElementID(),false); //4922
+			return eAny(returnValue,ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_CLASS,false); //4922
 		}
 	}
 	return OclExpressionImpl::eGet(featureID, resolve, coreType);

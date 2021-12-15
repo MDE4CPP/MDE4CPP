@@ -24,6 +24,9 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
+#include "ecore/ecorePackage.hpp"
 
 
 //Forward declaration includes
@@ -32,17 +35,11 @@
 
 #include <exception> // used in Persistence
 #include "fUML/Semantics/Values/ValuesFactory.hpp"
-
 #include "fUML/Semantics/Values/Value.hpp"
-
-//Factories an Package includes
+//Factories and Package includes
 #include "ocl/oclPackage.hpp"
-#include "fUML/Semantics/Values/ValuesPackage.hpp"
 #include "ocl/Values/ValuesPackage.hpp"
-
-
-#include "ecore/EAttribute.hpp"
-#include "ecore/EStructuralFeature.hpp"
+#include "fUML/Semantics/Values/ValuesPackage.hpp"
 
 using namespace ocl::Values;
 
@@ -266,11 +263,11 @@ Any NameValueBindingImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case ocl::Values::ValuesPackage::NAMEVALUEBINDING_ATTRIBUTE_NAME:
-			return eAny(getName(),0,true); //530
+			return eAny(getName(),ecore::ecorePackage::ESTRING_CLASS,false); //530
 		case ocl::Values::ValuesPackage::NAMEVALUEBINDING_ATTRIBUTE_VALUE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getValue();
-			return eAny(returnValue,returnValue->getMetaElementID(),false); //531
+			return eAny(returnValue,fUML::Semantics::Values::ValuesPackage::VALUE_CLASS,false); //531
 		}
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);

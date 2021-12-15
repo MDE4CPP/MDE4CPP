@@ -46,25 +46,25 @@ task compilePSCS(type: tui.sse.mde4cpp.MDE4CPPCompile) {
 	dependsOn getRootProject().getTasksByName('deliverBasicInterfaces', true)
 
 
+	// dependency to model 'ecore'
+	def ecore = getRootProject().getTasksByName('compileEcore', true)
+	dependsOn ecore
+	inputs.files(ecore.outputs)
+
 	// dependency to model 'fUML'
 	def fUML = getRootProject().getTasksByName('compileFUML', true)
 	dependsOn fUML
 	inputs.files(fUML.outputs)
-
-	// dependency to model 'types'
-	def types = getRootProject().getTasksByName('compileTypes', true)
-	dependsOn types
-	inputs.files(types.outputs)
 
 	// dependency to model 'uml'
 	def uml = getRootProject().getTasksByName('compileUml', true)
 	dependsOn uml
 	inputs.files(uml.outputs)
 
-	// dependency to model 'ecore'
-	def ecore = getRootProject().getTasksByName('compileEcore', true)
-	dependsOn ecore
-	inputs.files(ecore.outputs)
+	// dependency to model 'types'
+	def types = getRootProject().getTasksByName('compileTypes', true)
+	dependsOn types
+	inputs.files(types.outputs)
 }
 
 task clean {

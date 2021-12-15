@@ -25,6 +25,9 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
+#include "ecore/ecorePackage.hpp"
 
 
 //Forward declaration includes
@@ -34,23 +37,17 @@
 #include <exception> // used in Persistence
 #include "ecore/ecoreFactory.hpp"
 #include "uml/umlFactory.hpp"
-
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClassifier.hpp"
 #include "ecore/EOperation.hpp"
 #include "ecore/EPackage.hpp"
 #include "ecore/ETypeParameter.hpp"
 #include "uml/Signal.hpp"
-
-//Factories an Package includes
+//Factories and Package includes
 #include "ocl/oclPackage.hpp"
 #include "ocl/Types/TypesPackage.hpp"
 #include "ecore/ecorePackage.hpp"
 #include "uml/umlPackage.hpp"
-
-
-#include "ecore/EAttribute.hpp"
-#include "ecore/EStructuralFeature.hpp"
 
 using namespace ocl::Types;
 
@@ -300,12 +297,12 @@ Any MessageTypeImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case ocl::Types::TypesPackage::MESSAGETYPE_ATTRIBUTE_REFERREDOPERATION:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getReferredOperation();
-			return eAny(returnValue,returnValue->getMetaElementID(),false); //508
+			return eAny(returnValue,ecore::ecorePackage::EOPERATION_CLASS,false); //508
 		}
 		case ocl::Types::TypesPackage::MESSAGETYPE_ATTRIBUTE_REFERREDSIGNAL:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getReferredSignal();
-			return eAny(returnValue,returnValue->getMetaElementID(),false); //509
+			return eAny(returnValue,uml::umlPackage::SIGNAL_CLASS,false); //509
 		}
 	}
 	return ecore::EClassifierImpl::eGet(featureID, resolve, coreType);

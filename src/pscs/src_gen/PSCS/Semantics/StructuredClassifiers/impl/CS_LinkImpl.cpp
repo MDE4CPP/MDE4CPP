@@ -25,6 +25,9 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
+#include "ecore/ecorePackage.hpp"
 
 //Includes from codegen annotation
 #include "fUML/fUMLFactory.hpp"
@@ -34,30 +37,24 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
 #include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
-
+#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
 #include "uml/Association.hpp"
 #include "fUML/Semantics/SimpleClassifiers/FeatureValue.hpp"
 #include "fUML/Semantics/StructuredClassifiers/Link.hpp"
 #include "fUML/Semantics/Loci/Locus.hpp"
 #include "uml/StructuralFeature.hpp"
 #include "fUML/Semantics/Values/Value.hpp"
-
-//Factories an Package includes
-#include "PSCS/PSCSPackage.hpp"
+//Factories and Package includes
 #include "PSCS/Semantics/SemanticsPackage.hpp"
+#include "PSCS/PSCSPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
 #include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersPackage.hpp"
-#include "PSCS/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
 #include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
+#include "PSCS/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
 #include "fUML/Semantics/Values/ValuesPackage.hpp"
 #include "uml/umlPackage.hpp"
-
-
-#include "ecore/EAttribute.hpp"
-#include "ecore/EStructuralFeature.hpp"
 
 using namespace PSCS::Semantics::StructuredClassifiers;
 
@@ -244,12 +241,10 @@ void CS_LinkImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHand
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> CS_LinkImpl::eStaticClass() const
 {
 	return PSCS::Semantics::StructuredClassifiers::StructuredClassifiersPackage::eInstance()->getCS_Link_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -282,34 +277,32 @@ bool CS_LinkImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any CS_LinkImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any CS_LinkImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
   	switch(operationID)
 	{
-		
-		// 422522157
+		// PSCS::Semantics::StructuredClassifiers::CS_Link::getFeature(fUML::Semantics::Values::Value) : uml::StructuralFeature: 422522157
 		case StructuredClassifiersPackage::CS_LINK_OPERATION_GETFEATURE_VALUE:
 		{
 			//Retrieve input parameter 'value'
 			//parameter 0
 			std::shared_ptr<fUML::Semantics::Values::Value> incoming_param_value;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_value_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_value = (*incoming_param_value_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::Values::Value> >();
-			result = eAny(this->getFeature(incoming_param_value));
+			std::list<Any>::const_iterator incoming_param_value_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_value = (*incoming_param_value_arguments_citer)->get<std::shared_ptr<fUML::Semantics::Values::Value> >();
+			result = eAny(this->getFeature(incoming_param_value), uml::umlPackage::STRUCTURALFEATURE_CLASS,false);
 			break;
 		}
-		
-		// 778539952
+		// PSCS::Semantics::StructuredClassifiers::CS_Link::hasValueForAFeature(fUML::Semantics::Values::Value) : bool: 778539952
 		case StructuredClassifiersPackage::CS_LINK_OPERATION_HASVALUEFORAFEATURE_VALUE:
 		{
 			//Retrieve input parameter 'value'
 			//parameter 0
 			std::shared_ptr<fUML::Semantics::Values::Value> incoming_param_value;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_value_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_value = (*incoming_param_value_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::Values::Value> >();
-			result = eAny(this->hasValueForAFeature(incoming_param_value));
+			std::list<Any>::const_iterator incoming_param_value_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_value = (*incoming_param_value_arguments_citer)->get<std::shared_ptr<fUML::Semantics::Values::Value> >();
+			result = eAny(this->hasValueForAFeature(incoming_param_value),0,false);
 			break;
 		}
 
@@ -326,7 +319,6 @@ Any CS_LinkImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::share
 	return result;
 }
 
-
 std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Link> CS_LinkImpl::getThisCS_LinkPtr() const
 {
 	return m_thisCS_LinkPtr.lock();
@@ -336,3 +328,5 @@ void CS_LinkImpl::setThisCS_LinkPtr(std::weak_ptr<PSCS::Semantics::StructuredCla
 	m_thisCS_LinkPtr = thisCS_LinkPtr;
 	setThisLinkPtr(thisCS_LinkPtr);
 }
+
+

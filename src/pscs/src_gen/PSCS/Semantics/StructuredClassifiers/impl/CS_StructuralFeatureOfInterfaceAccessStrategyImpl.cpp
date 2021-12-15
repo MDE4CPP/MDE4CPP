@@ -25,6 +25,9 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
+#include "ecore/ecorePackage.hpp"
 
 //Includes from codegen annotation
 #include "fUML/fUMLFactory.hpp"
@@ -34,25 +37,19 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-
 #include "PSCS/Semantics/StructuredClassifiers/CS_Object.hpp"
 #include "fUML/Semantics/SimpleClassifiers/FeatureValue.hpp"
 #include "fUML/Semantics/Loci/SemanticStrategy.hpp"
 #include "uml/StructuralFeature.hpp"
 #include "fUML/Semantics/Values/Value.hpp"
-
-//Factories an Package includes
-#include "PSCS/PSCSPackage.hpp"
+//Factories and Package includes
 #include "PSCS/Semantics/SemanticsPackage.hpp"
+#include "PSCS/PSCSPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
 #include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersPackage.hpp"
 #include "PSCS/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
 #include "fUML/Semantics/Values/ValuesPackage.hpp"
 #include "uml/umlPackage.hpp"
-
-
-#include "ecore/EAttribute.hpp"
-#include "ecore/EStructuralFeature.hpp"
 
 using namespace PSCS::Semantics::StructuredClassifiers;
 
@@ -207,12 +204,10 @@ void CS_StructuralFeatureOfInterfaceAccessStrategyImpl::saveContent(std::shared_
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> CS_StructuralFeatureOfInterfaceAccessStrategyImpl::eStaticClass() const
 {
 	return PSCS::Semantics::StructuredClassifiers::StructuredClassifiersPackage::eInstance()->getCS_StructuralFeatureOfInterfaceAccessStrategy_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -245,62 +240,58 @@ bool CS_StructuralFeatureOfInterfaceAccessStrategyImpl::eSet(int featureID, Any 
 //*********************************
 // EOperation Invoke
 //*********************************
-Any CS_StructuralFeatureOfInterfaceAccessStrategyImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any CS_StructuralFeatureOfInterfaceAccessStrategyImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
   	switch(operationID)
 	{
-		
-		// 1736966120
+		// PSCS::Semantics::StructuredClassifiers::CS_StructuralFeatureOfInterfaceAccessStrategy::getName() : std::string: 1736966120
 		case StructuredClassifiersPackage::CS_STRUCTURALFEATUREOFINTERFACEACCESSSTRATEGY_OPERATION_GETNAME:
 		{
-			result = eAny(this->getName());
+			result = eAny(this->getName(),0,false);
 			break;
 		}
-		
-		// 1000626778
+		// PSCS::Semantics::StructuredClassifiers::CS_StructuralFeatureOfInterfaceAccessStrategy::read(PSCS::Semantics::StructuredClassifiers::CS_Object, uml::StructuralFeature) : fUML::Semantics::SimpleClassifiers::FeatureValue: 1000626778
 		case StructuredClassifiersPackage::CS_STRUCTURALFEATUREOFINTERFACEACCESSSTRATEGY_OPERATION_READ_CS_OBJECT_STRUCTURALFEATURE:
 		{
 			//Retrieve input parameter 'cs_Object'
 			//parameter 0
 			std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Object> incoming_param_cs_Object;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_cs_Object_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_cs_Object = (*incoming_param_cs_Object_arguments_citer)->get()->get<std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Object> >();
+			std::list<Any>::const_iterator incoming_param_cs_Object_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_cs_Object = (*incoming_param_cs_Object_arguments_citer)->get<std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Object> >();
 			//Retrieve input parameter 'feature'
 			//parameter 1
 			std::shared_ptr<uml::StructuralFeature> incoming_param_feature;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_feature_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_feature = (*incoming_param_feature_arguments_citer)->get()->get<std::shared_ptr<uml::StructuralFeature> >();
-			result = eAny(this->read(incoming_param_cs_Object,incoming_param_feature));
+			std::list<Any>::const_iterator incoming_param_feature_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_feature = (*incoming_param_feature_arguments_citer)->get<std::shared_ptr<uml::StructuralFeature> >();
+			result = eAny(this->read(incoming_param_cs_Object,incoming_param_feature), fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::FEATUREVALUE_CLASS,false);
 			break;
 		}
-		
-		// 118949078
+		// PSCS::Semantics::StructuredClassifiers::CS_StructuralFeatureOfInterfaceAccessStrategy::write(PSCS::Semantics::StructuredClassifiers::CS_Object, uml::StructuralFeature, fUML::Semantics::Values::Value[*], int): 118949078
 		case StructuredClassifiersPackage::CS_STRUCTURALFEATUREOFINTERFACEACCESSSTRATEGY_OPERATION_WRITE_CS_OBJECT_INTEGER:
 		{
 			//Retrieve input parameter 'cs_Object'
 			//parameter 0
 			std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Object> incoming_param_cs_Object;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_cs_Object_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_cs_Object = (*incoming_param_cs_Object_arguments_citer)->get()->get<std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Object> >();
+			std::list<Any>::const_iterator incoming_param_cs_Object_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_cs_Object = (*incoming_param_cs_Object_arguments_citer)->get<std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Object> >();
 			//Retrieve input parameter 'feature'
 			//parameter 1
 			std::shared_ptr<uml::StructuralFeature> incoming_param_feature;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_feature_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_feature = (*incoming_param_feature_arguments_citer)->get()->get<std::shared_ptr<uml::StructuralFeature> >();
+			std::list<Any>::const_iterator incoming_param_feature_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_feature = (*incoming_param_feature_arguments_citer)->get<std::shared_ptr<uml::StructuralFeature> >();
 			//Retrieve input parameter 'values'
 			//parameter 2
 			std::shared_ptr<Bag<fUML::Semantics::Values::Value>> incoming_param_values;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_values_arguments_citer = std::next(arguments->begin(), 2);
-			incoming_param_values = (*incoming_param_values_arguments_citer)->get()->get<std::shared_ptr<Bag<fUML::Semantics::Values::Value>> >();
+			std::list<Any>::const_iterator incoming_param_values_arguments_citer = std::next(arguments->begin(), 2);
+			incoming_param_values = (*incoming_param_values_arguments_citer)->get<std::shared_ptr<Bag<fUML::Semantics::Values::Value>> >();
 			//Retrieve input parameter 'position'
 			//parameter 3
 			int incoming_param_position;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_position_arguments_citer = std::next(arguments->begin(), 3);
-			incoming_param_position = (*incoming_param_position_arguments_citer)->get()->get<int >();
+			std::list<Any>::const_iterator incoming_param_position_arguments_citer = std::next(arguments->begin(), 3);
+			incoming_param_position = (*incoming_param_position_arguments_citer)->get<int >();
 			this->write(incoming_param_cs_Object,incoming_param_feature,incoming_param_values,incoming_param_position);
-			break;
 		}
 
 		default:
@@ -316,7 +307,6 @@ Any CS_StructuralFeatureOfInterfaceAccessStrategyImpl::eInvoke(int operationID, 
 	return result;
 }
 
-
 std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_StructuralFeatureOfInterfaceAccessStrategy> CS_StructuralFeatureOfInterfaceAccessStrategyImpl::getThisCS_StructuralFeatureOfInterfaceAccessStrategyPtr() const
 {
 	return m_thisCS_StructuralFeatureOfInterfaceAccessStrategyPtr.lock();
@@ -326,3 +316,5 @@ void CS_StructuralFeatureOfInterfaceAccessStrategyImpl::setThisCS_StructuralFeat
 	m_thisCS_StructuralFeatureOfInterfaceAccessStrategyPtr = thisCS_StructuralFeatureOfInterfaceAccessStrategyPtr;
 	setThisSemanticStrategyPtr(thisCS_StructuralFeatureOfInterfaceAccessStrategyPtr);
 }
+
+

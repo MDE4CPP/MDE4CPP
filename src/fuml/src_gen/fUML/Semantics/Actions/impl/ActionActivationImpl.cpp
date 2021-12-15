@@ -25,6 +25,9 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
+#include "ecore/ecorePackage.hpp"
 
 //Includes from codegen annotation
 #include <algorithm>
@@ -57,10 +60,9 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "uml/umlFactory.hpp"
-
+#include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "uml/Action.hpp"
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
 #include "uml/ActivityNode.hpp"
@@ -76,8 +78,7 @@
 #include "fUML/Semantics/Actions/PinActivation.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
 #include "fUML/Semantics/Values/Value.hpp"
-
-//Factories an Package includes
+//Factories and Package includes
 #include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
@@ -86,10 +87,6 @@
 #include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
 #include "fUML/Semantics/Values/ValuesPackage.hpp"
 #include "uml/umlPackage.hpp"
-
-
-#include "ecore/EAttribute.hpp"
-#include "ecore/EStructuralFeature.hpp"
 
 using namespace fUML::Semantics::Actions;
 
@@ -1017,21 +1014,21 @@ Any ActionActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case fUML::Semantics::Actions::ActionsPackage::ACTIONACTIVATION_ATTRIBUTE_ACTION:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getAction();
-			return eAny(returnValue,returnValue->getMetaElementID(),false); //510
+			return eAny(returnValue,uml::umlPackage::ACTION_CLASS,false); //510
 		}
 		case fUML::Semantics::Actions::ActionsPackage::ACTIONACTIVATION_ATTRIBUTE_FIRING:
-			return eAny(isFiring(),0,true); //57
+			return eAny(isFiring(),ecore::ecorePackage::EBOOLEAN_CLASS,false); //57
 		case fUML::Semantics::Actions::ActionsPackage::ACTIONACTIVATION_ATTRIBUTE_INPUTPINACTIVATION:
 		{
-			return eAnyBag(getInputPinActivation(),241768265); //58
+			return eAnyBag(getInputPinActivation(),fUML::Semantics::Actions::ActionsPackage::INPUTPINACTIVATION_CLASS); //58
 		}
 		case fUML::Semantics::Actions::ActionsPackage::ACTIONACTIVATION_ATTRIBUTE_OUTPUTPINACTIVATION:
 		{
-			return eAnyBag(getOutputPinActivation(),1393072800); //59
+			return eAnyBag(getOutputPinActivation(),fUML::Semantics::Actions::ActionsPackage::OUTPUTPINACTIVATION_CLASS); //59
 		}
 		case fUML::Semantics::Actions::ActionsPackage::ACTIONACTIVATION_ATTRIBUTE_PINACTIVATION:
 		{
-			return eAnyBag(getPinActivation(),1234693025); //56
+			return eAnyBag(getPinActivation(),fUML::Semantics::Actions::ActionsPackage::PINACTIVATION_CLASS); //56
 		}
 	}
 	return fUML::Semantics::Activities::ActivityNodeActivationImpl::eGet(featureID, resolve, coreType);

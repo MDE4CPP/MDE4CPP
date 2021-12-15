@@ -24,6 +24,9 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
+#include "ecore/ecorePackage.hpp"
 
 //Includes from codegen annotation
 #include "fUML/fUMLFactory.hpp"
@@ -33,24 +36,18 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-
 #include "PSCS/Semantics/StructuredClassifiers/CS_Object.hpp"
 #include "fUML/Semantics/StructuredClassifiers/Object.hpp"
 #include "uml/Operation.hpp"
 #include "fUML/Semantics/Loci/SemanticStrategy.hpp"
-
-//Factories an Package includes
-#include "PSCS/PSCSPackage.hpp"
+//Factories and Package includes
 #include "PSCS/Semantics/SemanticsPackage.hpp"
+#include "PSCS/PSCSPackage.hpp"
 #include "PSCS/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
-#include "PSCS/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
 #include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
+#include "PSCS/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
 #include "uml/umlPackage.hpp"
-
-
-#include "ecore/EAttribute.hpp"
-#include "ecore/EStructuralFeature.hpp"
 
 using namespace PSCS::Semantics::Actions;
 
@@ -199,12 +196,10 @@ void CS_ConstructStrategyImpl::saveContent(std::shared_ptr<persistence::interfac
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> CS_ConstructStrategyImpl::eStaticClass() const
 {
 	return PSCS::Semantics::Actions::ActionsPackage::eInstance()->getCS_ConstructStrategy_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -237,34 +232,32 @@ bool CS_ConstructStrategyImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any CS_ConstructStrategyImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any CS_ConstructStrategyImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
   	switch(operationID)
 	{
-		
-		// 597739318
+		// PSCS::Semantics::Actions::CS_ConstructStrategy::construct(uml::Operation, PSCS::Semantics::StructuredClassifiers::CS_Object) : fUML::Semantics::StructuredClassifiers::Object: 597739318
 		case ActionsPackage::CS_CONSTRUCTSTRATEGY_OPERATION_CONSTRUCT_OPERATION_CS_OBJECT:
 		{
 			//Retrieve input parameter 'constructor'
 			//parameter 0
 			std::shared_ptr<uml::Operation> incoming_param_constructor;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_constructor_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_constructor = (*incoming_param_constructor_arguments_citer)->get()->get<std::shared_ptr<uml::Operation> >();
+			std::list<Any>::const_iterator incoming_param_constructor_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_constructor = (*incoming_param_constructor_arguments_citer)->get<std::shared_ptr<uml::Operation> >();
 			//Retrieve input parameter 'context'
 			//parameter 1
 			std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Object> incoming_param_context;
-			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Object> >();
-			result = eAny(this->construct(incoming_param_constructor,incoming_param_context));
+			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Object> >();
+			result = eAny(this->construct(incoming_param_constructor,incoming_param_context), fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::OBJECT_CLASS,false);
 			break;
 		}
-		
-		// 1128538055
+		// PSCS::Semantics::Actions::CS_ConstructStrategy::getName() : std::string: 1128538055
 		case ActionsPackage::CS_CONSTRUCTSTRATEGY_OPERATION_GETNAME:
 		{
-			result = eAny(this->getName());
+			result = eAny(this->getName(),0,false);
 			break;
 		}
 
@@ -281,7 +274,6 @@ Any CS_ConstructStrategyImpl::eInvoke(int operationID, std::shared_ptr<std::list
 	return result;
 }
 
-
 std::shared_ptr<PSCS::Semantics::Actions::CS_ConstructStrategy> CS_ConstructStrategyImpl::getThisCS_ConstructStrategyPtr() const
 {
 	return m_thisCS_ConstructStrategyPtr.lock();
@@ -291,3 +283,5 @@ void CS_ConstructStrategyImpl::setThisCS_ConstructStrategyPtr(std::weak_ptr<PSCS
 	m_thisCS_ConstructStrategyPtr = thisCS_ConstructStrategyPtr;
 	setThisSemanticStrategyPtr(thisCS_ConstructStrategyPtr);
 }
+
+

@@ -25,6 +25,9 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
+#include "ecore/ecorePackage.hpp"
 
 
 //Forward declaration includes
@@ -33,18 +36,12 @@
 
 #include <exception> // used in Persistence
 #include "ocl/Values/ValuesFactory.hpp"
-
 #include "ocl/Values/LocalSnapshot.hpp"
 #include "ocl/Values/NameValueBinding.hpp"
 #include "ocl/Values/OclMessageValue.hpp"
-
-//Factories an Package includes
+//Factories and Package includes
 #include "ocl/oclPackage.hpp"
 #include "ocl/Values/ValuesPackage.hpp"
-
-
-#include "ecore/EAttribute.hpp"
-#include "ecore/EStructuralFeature.hpp"
 
 using namespace ocl::Values;
 
@@ -432,29 +429,29 @@ Any LocalSnapshotImpl::eGet(int featureID, bool resolve, bool coreType) const
 	{
 		case ocl::Values::ValuesPackage::LOCALSNAPSHOT_ATTRIBUTE_BINDINGS:
 		{
-			return eAnyBag(getBindings(),510142670); //462
+			return eAnyBag(getBindings(),ocl::Values::ValuesPackage::NAMEVALUEBINDING_CLASS); //462
 		}
 		case ocl::Values::ValuesPackage::LOCALSNAPSHOT_ATTRIBUTE_INPUTQ:
 		{
-			return eAnyBag(getInputQ(),1848978034); //465
+			return eAnyBag(getInputQ(),ocl::Values::ValuesPackage::OCLMESSAGEVALUE_CLASS); //465
 		}
 		case ocl::Values::ValuesPackage::LOCALSNAPSHOT_ATTRIBUTE_ISPOST:
-			return eAny(getIsPost(),0,true); //463
+			return eAny(getIsPost(),ecore::ecorePackage::EBOOLEAN_CLASS,false); //463
 		case ocl::Values::ValuesPackage::LOCALSNAPSHOT_ATTRIBUTE_ISPRE:
-			return eAny(getIsPre(),0,true); //464
+			return eAny(getIsPre(),ecore::ecorePackage::EBOOLEAN_CLASS,false); //464
 		case ocl::Values::ValuesPackage::LOCALSNAPSHOT_ATTRIBUTE_OUTPUTQ:
 		{
-			return eAnyBag(getOutputQ(),1848978034); //466
+			return eAnyBag(getOutputQ(),ocl::Values::ValuesPackage::OCLMESSAGEVALUE_CLASS); //466
 		}
 		case ocl::Values::ValuesPackage::LOCALSNAPSHOT_ATTRIBUTE_PRED:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getPred();
-			return eAny(returnValue,returnValue->getMetaElementID(),false); //461
+			return eAny(returnValue,ocl::Values::ValuesPackage::LOCALSNAPSHOT_CLASS,false); //461
 		}
 		case ocl::Values::ValuesPackage::LOCALSNAPSHOT_ATTRIBUTE_SUCC:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getSucc();
-			return eAny(returnValue,returnValue->getMetaElementID(),false); //460
+			return eAny(returnValue,ocl::Values::ValuesPackage::LOCALSNAPSHOT_CLASS,false); //460
 		}
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);

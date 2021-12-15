@@ -24,6 +24,9 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
+#include "ecore/ecorePackage.hpp"
 
 
 //Forward declaration includes
@@ -32,17 +35,11 @@
 
 #include <exception> // used in Persistence
 #include "ecore/ecoreFactory.hpp"
-
 #include "ecore/EClassifier.hpp"
-
-//Factories an Package includes
+//Factories and Package includes
 #include "ocl/oclPackage.hpp"
 #include "ocl/Types/TypesPackage.hpp"
 #include "ecore/ecorePackage.hpp"
-
-
-#include "ecore/EAttribute.hpp"
-#include "ecore/EStructuralFeature.hpp"
 
 using namespace ocl::Types;
 
@@ -266,11 +263,11 @@ Any NameTypeBindingImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case ocl::Types::TypesPackage::NAMETYPEBINDING_ATTRIBUTE_NAME:
-			return eAny(getName(),0,true); //520
+			return eAny(getName(),ecore::ecorePackage::ESTRING_CLASS,false); //520
 		case ocl::Types::TypesPackage::NAMETYPEBINDING_ATTRIBUTE_TYPE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getType();
-			return eAny(returnValue,returnValue->getMetaElementID(),false); //521
+			return eAny(returnValue,ecore::ecorePackage::ECLASSIFIER_CLASS,false); //521
 		}
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);

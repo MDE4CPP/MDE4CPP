@@ -25,6 +25,9 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
+#include "ecore/ecorePackage.hpp"
 
 //Includes from codegen annotation
 #include "fUML/Semantics/Activities/ActivityNodeActivationGroup.hpp"
@@ -39,10 +42,9 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "uml/umlFactory.hpp"
-
+#include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "uml/Action.hpp"
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
 #include "uml/ActivityNode.hpp"
@@ -53,18 +55,13 @@
 #include "uml/ReadSelfAction.hpp"
 #include "fUML/Semantics/Actions/ReadSelfActionActivation.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
-
-//Factories an Package includes
-#include "PSCS/PSCSPackage.hpp"
+//Factories and Package includes
 #include "PSCS/Semantics/SemanticsPackage.hpp"
-#include "PSCS/Semantics/Actions/ActionsPackage.hpp"
+#include "PSCS/PSCSPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
+#include "PSCS/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "uml/umlPackage.hpp"
-
-
-#include "ecore/EAttribute.hpp"
-#include "ecore/EStructuralFeature.hpp"
 
 using namespace PSCS::Semantics::Actions;
 
@@ -262,12 +259,10 @@ void CS_ReadSelfActionActivationImpl::saveContent(std::shared_ptr<persistence::i
 	}
 }
 
-
 std::shared_ptr<ecore::EClass> CS_ReadSelfActionActivationImpl::eStaticClass() const
 {
 	return PSCS::Semantics::Actions::ActionsPackage::eInstance()->getCS_ReadSelfActionActivation_Class();
 }
-
 
 //*********************************
 // EStructuralFeature Get/Set/IsSet
@@ -300,18 +295,16 @@ bool CS_ReadSelfActionActivationImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any CS_ReadSelfActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any CS_ReadSelfActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
 
   	switch(operationID)
 	{
-		
-		// 1482151985
+		// PSCS::Semantics::Actions::CS_ReadSelfActionActivation::doAction(): 1482151985
 		case ActionsPackage::CS_READSELFACTIONACTIVATION_OPERATION_DOACTION:
 		{
 			this->doAction();
-			break;
 		}
 
 		default:
@@ -327,7 +320,6 @@ Any CS_ReadSelfActionActivationImpl::eInvoke(int operationID, std::shared_ptr<st
 	return result;
 }
 
-
 std::shared_ptr<PSCS::Semantics::Actions::CS_ReadSelfActionActivation> CS_ReadSelfActionActivationImpl::getThisCS_ReadSelfActionActivationPtr() const
 {
 	return m_thisCS_ReadSelfActionActivationPtr.lock();
@@ -337,3 +329,5 @@ void CS_ReadSelfActionActivationImpl::setThisCS_ReadSelfActionActivationPtr(std:
 	m_thisCS_ReadSelfActionActivationPtr = thisCS_ReadSelfActionActivationPtr;
 	setThisReadSelfActionActivationPtr(thisCS_ReadSelfActionActivationPtr);
 }
+
+

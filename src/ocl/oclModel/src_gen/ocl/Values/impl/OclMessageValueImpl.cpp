@@ -25,6 +25,9 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EStructuralFeature.hpp"
+#include "ecore/ecorePackage.hpp"
 
 //Includes from codegen annotation
 #include "fUML/fUMLFactory.hpp"
@@ -35,20 +38,14 @@
 
 #include <exception> // used in Persistence
 #include "ocl/Values/ValuesFactory.hpp"
-
 #include "ocl/Values/NameValueBinding.hpp"
 #include "ocl/Values/ObjectValue.hpp"
 #include "ocl/Values/OclMessageValue.hpp"
 #include "fUML/Semantics/Values/Value.hpp"
-
-//Factories an Package includes
+//Factories and Package includes
 #include "ocl/oclPackage.hpp"
 #include "ocl/Values/ValuesPackage.hpp"
 #include "fUML/Semantics/Values/ValuesPackage.hpp"
-
-
-#include "ecore/EAttribute.hpp"
-#include "ecore/EStructuralFeature.hpp"
 
 using namespace ocl::Values;
 
@@ -462,30 +459,30 @@ Any OclMessageValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 	{
 		case ocl::Values::ValuesPackage::OCLMESSAGEVALUE_ATTRIBUTE_ARGUMENTS:
 		{
-			return eAnyBag(getArguments(),510142670); //647
+			return eAnyBag(getArguments(),ocl::Values::ValuesPackage::NAMEVALUEBINDING_CLASS); //647
 		}
 		case ocl::Values::ValuesPackage::OCLMESSAGEVALUE_ATTRIBUTE_ISASYNCOPERATION:
-			return eAny(getIsAsyncOperation(),0,true); //642
+			return eAny(getIsAsyncOperation(),ecore::ecorePackage::EBOOLEAN_CLASS,false); //642
 		case ocl::Values::ValuesPackage::OCLMESSAGEVALUE_ATTRIBUTE_ISSIGNAL:
-			return eAny(getIsSignal(),0,true); //643
+			return eAny(getIsSignal(),ecore::ecorePackage::EBOOLEAN_CLASS,false); //643
 		case ocl::Values::ValuesPackage::OCLMESSAGEVALUE_ATTRIBUTE_ISSYNCOPERATION:
-			return eAny(getIsSyncOperation(),0,true); //641
+			return eAny(getIsSyncOperation(),ecore::ecorePackage::EBOOLEAN_CLASS,false); //641
 		case ocl::Values::ValuesPackage::OCLMESSAGEVALUE_ATTRIBUTE_NAME:
-			return eAny(getName(),0,true); //640
+			return eAny(getName(),ecore::ecorePackage::ESTRING_CLASS,false); //640
 		case ocl::Values::ValuesPackage::OCLMESSAGEVALUE_ATTRIBUTE_RETURNMESSAGE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getReturnMessage();
-			return eAny(returnValue,returnValue->getMetaElementID(),false); //644
+			return eAny(returnValue,ocl::Values::ValuesPackage::OCLMESSAGEVALUE_CLASS,false); //644
 		}
 		case ocl::Values::ValuesPackage::OCLMESSAGEVALUE_ATTRIBUTE_SOURCE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getSource();
-			return eAny(returnValue,returnValue->getMetaElementID(),false); //646
+			return eAny(returnValue,ocl::Values::ValuesPackage::OBJECTVALUE_CLASS,false); //646
 		}
 		case ocl::Values::ValuesPackage::OCLMESSAGEVALUE_ATTRIBUTE_TARGET:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getTarget();
-			return eAny(returnValue,returnValue->getMetaElementID(),false); //645
+			return eAny(returnValue,ocl::Values::ValuesPackage::OBJECTVALUE_CLASS,false); //645
 		}
 	}
 	return fUML::Semantics::Values::ValueImpl::eGet(featureID, resolve, coreType);
