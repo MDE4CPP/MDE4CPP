@@ -140,7 +140,7 @@ std::map<long long,std::function<Any(std::shared_ptr<Bag<Any>>)>> m_invocationMa
 	[/let]
 	[else]
 		this->[anOperation.name/]([for (inputParameter : Parameter | anOperation.ownedParameter->select(direction = ParameterDirectionKind::_in or direction = ParameterDirectionKind::inout)) separator (', ')][inputParameter.name/][/for]);
-		return eAny(nullptr);
+		return eAny(nullptr, -1, false);
 	[/if]
 	[/let]
 	}));
