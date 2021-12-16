@@ -20,6 +20,7 @@
 #include "uml/Stereotype.hpp"
 
 //Types included from attributes, operation parameters, imports and composite owner classes
+#include "uml/umlPackage.hpp"
 #include "uml/Artifact.hpp"
 
 //Packges and Factories included from types of attributes, operation parameters, imports and composite owner classes
@@ -50,7 +51,7 @@ DocumentImpl::DocumentImpl()
 	// init Get Set
 	//getter init
 		//Property base_Artifact
-		m_getterMap.insert(std::pair<long long,std::function<Any()>>(1856461285,[this](){ return eAny(this->getBase_Artifact());}));
+		m_getterMap.insert(std::pair<long long,std::function<Any()>>(1856461285,[this](){ return eAny(this->getBase_Artifact(), uml::umlPackage::ARTIFACT_CLASS, false);}));
 	
 	
 	//setter init

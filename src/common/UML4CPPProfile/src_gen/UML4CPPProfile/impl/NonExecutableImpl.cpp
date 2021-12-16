@@ -20,6 +20,7 @@
 #include "uml/Stereotype.hpp"
 
 //Types included from attributes, operation parameters, imports and composite owner classes
+#include "uml/umlPackage.hpp"
 #include "uml/NamedElement.hpp"
 
 //Packges and Factories included from types of attributes, operation parameters, imports and composite owner classes
@@ -50,7 +51,7 @@ NonExecutableImpl::NonExecutableImpl()
 	// init Get Set
 	//getter init
 		//Property base_NamedElement
-		m_getterMap.insert(std::pair<long long,std::function<Any()>>(488558520,[this](){ return eAny(this->getBase_NamedElement());}));
+		m_getterMap.insert(std::pair<long long,std::function<Any()>>(488558520,[this](){ return eAny(this->getBase_NamedElement(), uml::umlPackage::NAMEDELEMENT_CLASS, false);}));
 	
 	
 	//setter init
@@ -173,7 +174,7 @@ Any NonExecutableImpl::get(long long _uID) const
         return iter->second();
     }
 
-	return eAny(nullptr);
+	return eAny(nullptr, -1, false);
 }
 
 //Set
@@ -254,7 +255,7 @@ Any NonExecutableImpl::invoke(long long _uID, std::shared_ptr<Bag<Any>> _argumen
         return iter->second(_arguments);
     }
 	
-	return eAny(nullptr);
+	return eAny(nullptr, -1, false);
 }
 
 std::shared_ptr<NonExecutable> NonExecutableImpl::getThisNonExecutablePtr()

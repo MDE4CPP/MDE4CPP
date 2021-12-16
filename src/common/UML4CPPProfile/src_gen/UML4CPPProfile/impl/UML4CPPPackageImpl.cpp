@@ -20,6 +20,8 @@
 #include "uml/Stereotype.hpp"
 
 //Types included from attributes, operation parameters, imports and composite owner classes
+#include "types/typesPackage.hpp"
+#include "uml/umlPackage.hpp"
 #include "uml/Package.hpp"
 
 //Packges and Factories included from types of attributes, operation parameters, imports and composite owner classes
@@ -50,13 +52,13 @@ UML4CPPPackageImpl::UML4CPPPackageImpl()
 	// init Get Set
 	//getter init
 		//Property base_Package
-		m_getterMap.insert(std::pair<long long,std::function<Any()>>(364749133,[this](){ return eAny(this->getBase_Package());}));
+		m_getterMap.insert(std::pair<long long,std::function<Any()>>(364749133,[this](){ return eAny(this->getBase_Package(), uml::umlPackage::PACKAGE_CLASS, false);}));
 		//Property eclipseURI
-		m_getterMap.insert(std::pair<long long,std::function<Any()>>(1162675821,[this](){ return eAny(this->getEclipseURI());}));
+		m_getterMap.insert(std::pair<long long,std::function<Any()>>(1162675821,[this](){ return eAny(this->getEclipseURI(), types::typesPackage::STRING_CLASS, false);}));
 		//Property ignoreNamespace
-		m_getterMap.insert(std::pair<long long,std::function<Any()>>(1716152545,[this](){ return eAny(this->isIgnoreNamespace());}));
+		m_getterMap.insert(std::pair<long long,std::function<Any()>>(1716152545,[this](){ return eAny(this->isIgnoreNamespace(), types::typesPackage::BOOLEAN_CLASS, false);}));
 		//Property packageOnly
-		m_getterMap.insert(std::pair<long long,std::function<Any()>>(262131715,[this](){ return eAny(this->isPackageOnly());}));
+		m_getterMap.insert(std::pair<long long,std::function<Any()>>(262131715,[this](){ return eAny(this->isPackageOnly(), types::typesPackage::BOOLEAN_CLASS, false);}));
 	
 	
 	//setter init
@@ -225,7 +227,7 @@ Any UML4CPPPackageImpl::get(long long _uID) const
         return iter->second();
     }
 
-	return eAny(nullptr);
+	return eAny(nullptr, -1, false);
 }
 
 //Set
@@ -306,7 +308,7 @@ Any UML4CPPPackageImpl::invoke(long long _uID, std::shared_ptr<Bag<Any>> _argume
         return iter->second(_arguments);
     }
 	
-	return eAny(nullptr);
+	return eAny(nullptr, -1, false);
 }
 
 std::shared_ptr<UML4CPPPackage> UML4CPPPackageImpl::getThisUML4CPPPackagePtr()

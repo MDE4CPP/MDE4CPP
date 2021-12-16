@@ -20,6 +20,8 @@
 #include "uml/Stereotype.hpp"
 
 //Types included from attributes, operation parameters, imports and composite owner classes
+#include "types/typesPackage.hpp"
+#include "uml/umlPackage.hpp"
 #include "uml/Package.hpp"
 
 //Packges and Factories included from types of attributes, operation parameters, imports and composite owner classes
@@ -50,13 +52,13 @@ ExternalLibraryImpl::ExternalLibraryImpl()
 	// init Get Set
 	//getter init
 		//Property base_Package
-		m_getterMap.insert(std::pair<long long,std::function<Any()>>(441090789,[this](){ return eAny(this->getBase_Package());}));
+		m_getterMap.insert(std::pair<long long,std::function<Any()>>(441090789,[this](){ return eAny(this->getBase_Package(), uml::umlPackage::PACKAGE_CLASS, false);}));
 		//Property includePath
-		m_getterMap.insert(std::pair<long long,std::function<Any()>>(83544771,[this](){ return eAny(this->getIncludePath());}));
+		m_getterMap.insert(std::pair<long long,std::function<Any()>>(83544771,[this](){ return eAny(this->getIncludePath(), types::typesPackage::STRING_CLASS, false);}));
 		//Property libraryName
-		m_getterMap.insert(std::pair<long long,std::function<Any()>>(596096889,[this](){ return eAny(this->getLibraryName());}));
+		m_getterMap.insert(std::pair<long long,std::function<Any()>>(596096889,[this](){ return eAny(this->getLibraryName(), types::typesPackage::STRING_CLASS, false);}));
 		//Property libraryPath
-		m_getterMap.insert(std::pair<long long,std::function<Any()>>(1321918160,[this](){ return eAny(this->getLibraryPath());}));
+		m_getterMap.insert(std::pair<long long,std::function<Any()>>(1321918160,[this](){ return eAny(this->getLibraryPath(), types::typesPackage::STRING_CLASS, false);}));
 	
 	
 	//setter init
@@ -227,7 +229,7 @@ Any ExternalLibraryImpl::get(long long _uID) const
         return iter->second();
     }
 
-	return eAny(nullptr);
+	return eAny(nullptr, -1, false);
 }
 
 //Set
@@ -308,7 +310,7 @@ Any ExternalLibraryImpl::invoke(long long _uID, std::shared_ptr<Bag<Any>> _argum
         return iter->second(_arguments);
     }
 	
-	return eAny(nullptr);
+	return eAny(nullptr, -1, false);
 }
 
 std::shared_ptr<ExternalLibrary> ExternalLibraryImpl::getThisExternalLibraryPtr()

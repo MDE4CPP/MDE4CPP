@@ -20,6 +20,7 @@
 #include "uml/Stereotype.hpp"
 
 //Types included from attributes, operation parameters, imports and composite owner classes
+#include "uml/umlPackage.hpp"
 #include "uml/Class.hpp"
 
 //Packges and Factories included from types of attributes, operation parameters, imports and composite owner classes
@@ -50,7 +51,7 @@ UtilityImpl::UtilityImpl()
 	// init Get Set
 	//getter init
 		//Property base_Class
-		m_getterMap.insert(std::pair<long long,std::function<Any()>>(605150396,[this](){ return eAny(this->getBase_Class());}));
+		m_getterMap.insert(std::pair<long long,std::function<Any()>>(605150396,[this](){ return eAny(this->getBase_Class(), uml::umlPackage::CLASS_CLASS, false);}));
 	
 	
 	//setter init
@@ -173,7 +174,7 @@ Any UtilityImpl::get(long long _uID) const
         return iter->second();
     }
 
-	return eAny(nullptr);
+	return eAny(nullptr, -1, false);
 }
 
 //Set
@@ -254,7 +255,7 @@ Any UtilityImpl::invoke(long long _uID, std::shared_ptr<Bag<Any>> _arguments)
         return iter->second(_arguments);
     }
 	
-	return eAny(nullptr);
+	return eAny(nullptr, -1, false);
 }
 
 std::shared_ptr<Utility> UtilityImpl::getThisUtilityPtr()

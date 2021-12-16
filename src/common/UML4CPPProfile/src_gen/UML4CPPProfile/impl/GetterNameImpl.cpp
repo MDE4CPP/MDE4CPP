@@ -20,6 +20,8 @@
 #include "uml/Stereotype.hpp"
 
 //Types included from attributes, operation parameters, imports and composite owner classes
+#include "types/typesPackage.hpp"
+#include "uml/umlPackage.hpp"
 #include "uml/Property.hpp"
 
 //Packges and Factories included from types of attributes, operation parameters, imports and composite owner classes
@@ -50,9 +52,9 @@ GetterNameImpl::GetterNameImpl()
 	// init Get Set
 	//getter init
 		//Property base_Property
-		m_getterMap.insert(std::pair<long long,std::function<Any()>>(14802423,[this](){ return eAny(this->getBase_Property());}));
+		m_getterMap.insert(std::pair<long long,std::function<Any()>>(14802423,[this](){ return eAny(this->getBase_Property(), uml::umlPackage::PROPERTY_CLASS, false);}));
 		//Property getterName
-		m_getterMap.insert(std::pair<long long,std::function<Any()>>(1932053206,[this](){ return eAny(this->getGetterName());}));
+		m_getterMap.insert(std::pair<long long,std::function<Any()>>(1932053206,[this](){ return eAny(this->getGetterName(), types::typesPackage::STRING_CLASS, false);}));
 	
 	
 	//setter init
@@ -191,7 +193,7 @@ Any GetterNameImpl::get(long long _uID) const
         return iter->second();
     }
 
-	return eAny(nullptr);
+	return eAny(nullptr, -1, false);
 }
 
 //Set
@@ -272,7 +274,7 @@ Any GetterNameImpl::invoke(long long _uID, std::shared_ptr<Bag<Any>> _arguments)
         return iter->second(_arguments);
     }
 	
-	return eAny(nullptr);
+	return eAny(nullptr, -1, false);
 }
 
 std::shared_ptr<GetterName> GetterNameImpl::getThisGetterNamePtr()

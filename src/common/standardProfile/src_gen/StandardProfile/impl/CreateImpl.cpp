@@ -20,6 +20,8 @@
 #include "uml/Stereotype.hpp"
 
 //Types included from attributes, operation parameters, imports and composite owner classes
+#include "uml/umlPackage.hpp"
+#include "uml/umlPackage.hpp"
 #include "uml/BehavioralFeature.hpp"
 #include "uml/Usage.hpp"
 
@@ -51,9 +53,9 @@ CreateImpl::CreateImpl()
 	// init Get Set
 	//getter init
 		//Property base_BehavioralFeature
-		m_getterMap.insert(std::pair<long long,std::function<Any()>>(2108279685,[this](){ return eAny(this->getBase_BehavioralFeature());}));
+		m_getterMap.insert(std::pair<long long,std::function<Any()>>(2108279685,[this](){ return eAny(this->getBase_BehavioralFeature(), uml::umlPackage::BEHAVIORALFEATURE_CLASS, false);}));
 		//Property base_Usage
-		m_getterMap.insert(std::pair<long long,std::function<Any()>>(2008362745,[this](){ return eAny(this->getBase_Usage());}));
+		m_getterMap.insert(std::pair<long long,std::function<Any()>>(2008362745,[this](){ return eAny(this->getBase_Usage(), uml::umlPackage::USAGE_CLASS, false);}));
 	
 	
 	//setter init
@@ -196,7 +198,7 @@ Any CreateImpl::get(long long _uID) const
         return iter->second();
     }
 
-	return eAny(nullptr);
+	return eAny(nullptr, -1, false);
 }
 
 //Set
@@ -277,7 +279,7 @@ Any CreateImpl::invoke(long long _uID, std::shared_ptr<Bag<Any>> _arguments)
         return iter->second(_arguments);
     }
 	
-	return eAny(nullptr);
+	return eAny(nullptr, -1, false);
 }
 
 std::shared_ptr<Create> CreateImpl::getThisCreatePtr()

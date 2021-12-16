@@ -20,6 +20,7 @@
 #include "uml/Stereotype.hpp"
 
 //Types included from attributes, operation parameters, imports and composite owner classes
+#include "uml/umlPackage.hpp"
 #include "uml/Behavior.hpp"
 
 //Packges and Factories included from types of attributes, operation parameters, imports and composite owner classes
@@ -50,7 +51,7 @@ MainBehaviorImpl::MainBehaviorImpl()
 	// init Get Set
 	//getter init
 		//Property base_Behavior
-		m_getterMap.insert(std::pair<long long,std::function<Any()>>(1956712138,[this](){ return eAny(this->getBase_Behavior());}));
+		m_getterMap.insert(std::pair<long long,std::function<Any()>>(1956712138,[this](){ return eAny(this->getBase_Behavior(), uml::umlPackage::BEHAVIOR_CLASS, false);}));
 	
 	
 	//setter init
@@ -173,7 +174,7 @@ Any MainBehaviorImpl::get(long long _uID) const
         return iter->second();
     }
 
-	return eAny(nullptr);
+	return eAny(nullptr, -1, false);
 }
 
 //Set
@@ -254,7 +255,7 @@ Any MainBehaviorImpl::invoke(long long _uID, std::shared_ptr<Bag<Any>> _argument
         return iter->second(_arguments);
     }
 	
-	return eAny(nullptr);
+	return eAny(nullptr, -1, false);
 }
 
 std::shared_ptr<MainBehavior> MainBehaviorImpl::getThisMainBehaviorPtr()
