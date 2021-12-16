@@ -227,6 +227,10 @@ Any [packageName/]::executeActivity(std::shared_ptr<uml::Activity> activity, std
 [aPackage.allOwnedElements()->filter(Operation)->addAll(aPackage.getOperationExecutionsCOA())->reject(isDoNotGenerateElement())->reject(hasStereotypeApplied(QN_STEREOTYPE_NONEXECUTABLE())).generateInclude()/]
 
 //Includes from parameter types of executed Operations and Activities
+[if (aPackage.allOwnedElements()->filter(Operation)->addAll(aPackage.getOperationExecutionsCOA())->reject(isDoNotGenerateElement())->reject(hasStereotypeApplied(QN_STEREOTYPE_NONEXECUTABLE())).ownedParameter.type->asSet()
+	->addAll(aPackage.allOwnedElements()->filter(Activity).ownedParameter.type->asSet())->reject(isDoNotGenerateElement())->filter(PrimitiveType)->size() > 0)]
+#include "types/typesPackage.hpp"
+[/if]
 [for ( type : Type | aPackage.allOwnedElements()->filter(Operation)->addAll(aPackage.getOperationExecutionsCOA())->reject(isDoNotGenerateElement())->reject(hasStereotypeApplied(QN_STEREOTYPE_NONEXECUTABLE())).ownedParameter.type->asSet()
 	->addAll(aPackage.allOwnedElements()->filter(Activity).ownedParameter.type->asSet())->reject(isDoNotGenerateElement())->sortedBy(qualifiedName))]
 [type.generateTypeInclude(type.getNearestPackage(), aPackage)/]
@@ -405,12 +409,12 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> resultPLis
 [if (anActivity.ownedParameter->select(p :Parameter | p.direction = ParameterDirectionKind::return)->notEmpty())]
 //The activity has a return parameter
 [let par : Parameter = anActivity.ownedParameter->select(p :Parameter | p.direction = ParameterDirectionKind::return)->sortedBy(name)->first()]
-[if(par.type.supportedTypes())]
-[if (par.upper =1)]
+[if(par.type.supportedTypes())] [comment Means: Primitive/]
+[if (par.upper = 1)]
 assert(resultPList->front());
 std::shared_ptr<fUML::Semantics::SimpleClassifiers::[par.type.name/]Value> ret = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::[par.type.name/]Value>(resultPList->front()->getValues()->front());
 assert(ret != nullptr);
-return eAny(ret->getValue());
+return eAny(ret->getValue(), [par.type.oclAsType(Classifier).generateStaticClassifierIDAccess()/], false);
 [else]
 std::shared_ptr<Bag<[par.type.generateCppType(true)/]>> [par.name/](new Bag<[par.type.generateCppType(true)/]>());
 std::shared_ptr<Bag<fUML::Semantics::Values::Value>> returnValues = resultPList->front()->getValues();
@@ -423,7 +427,7 @@ while (returnValuesIter != returnValuesEnd)
 	[par.name/]->push_back(value);
 	returnValuesIter++;
 }
-return eAny([par.name/]);
+return eAny([par.name/], [par.type.oclAsType(Classifier).generateStaticClassifierIDAccess()/], true);
 [/if]
 [elseif (par.type.oclIsKindOf(Enumeration))]
 assert(resultPList->front());
@@ -433,17 +437,17 @@ std::shared_ptr<uml::EnumerationLiteral> literal[par.name.toUpperFirst()/] = ret
 [for (literal : EnumerationLiteral | par.type.oclAsType(Enumeration).ownedLiteral)]
 if (literal[par.name.toUpperFirst()/] == [literal.generatePackageGetterCall()/])
 {
-	return eAny([literal.enumeration.getNearestPackage().generateNamespace(false)/]::[literal.enumeration.name/]::[literal.name.toUpperCase()/]);
+	return eAny([literal.enumeration.getNearestPackage().generateNamespace(false)/]::[literal.enumeration.name/]::[literal.name.toUpperCase()/], [par.type.oclAsType(Classifier).generateStaticClassifierIDAccess()/], false);
 }
 [/for]
 std::cerr << "unknown literal of [par.type.name/]" << std::endl;
 throw "error";
 [else]
-[if (par.upper =1)]
+[if (par.upper = 1)]
 assert(resultPList->front());
 std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> [par.name/]Value = std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Reference>(resultPList->front()->getValues()->front());
 std::shared_ptr<[par.type.getNearestPackage().generateNamespace(false)/]::[par.type.name.toUpperFirst()/]Object> [par.name/]UmlLinker = std::dynamic_pointer_cast<[par.type.getNearestPackage().generateNamespace(false)/]::[par.type.name.toUpperFirst()/]Object>([par.name/]Value->getReferent());
-return eAny([par.name/]UmlLinker->[par.type.oclAsType(Classifier).UMLValueGetterName()/][if(not (par.upper = 1))]s[/if]());
+return eAny([par.name/]UmlLinker->[par.type.oclAsType(Classifier).UMLValueGetterName()/][if(not (par.upper = 1))]s[/if](), [par.type.oclAsType(Classifier).generateStaticClassifierIDAccess()/], false);
 [else]
 std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> returnParameter = resultPList->front();
 std::shared_ptr<Bag<fUML::Semantics::Values::Value>> returnValues = returnParameter->getValues();
@@ -457,7 +461,7 @@ while (valueIter != valueEnd)
 	returnList->push_back(returnObject->[par.type.oclAsType(Classifier).UMLValueGetterName()/]());
 	valueIter++;
 }
-return eAny(returnList);
+return eAnyBag(returnList, [par.type.oclAsType(Classifier).generateStaticClassifierIDAccess()/]);
 [/if]
 [/if]
 [/let]
