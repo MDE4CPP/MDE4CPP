@@ -64,6 +64,12 @@
 [/if]
 
 //Types included from attributes, operation parameters, imports and composite owner classes
+[if (aClass.includes()->filter(PrimitiveType)->size() > 0)]
+#include "types/typesPackage.hpp"
+[/if]
+[for (aPackage : Package | aClass.includes()->select(t : Type | t.oclIsKindOf(Class) or t.oclIsKindOf(Interface) or t.oclIsKindOf(Enumeration))._package->sortedBy(myQualifiedName()))]
+#include "[aPackage.generateNamespacePath(true)/]/[aPackage.myNamespaceName()/]Package.hpp"
+[/for]
 [for (cl : Type | aClass.includes()->sortedBy(myQualifiedName())) ? ( oclIsKindOf(Class) or oclIsKindOf(Interface) or oclIsKindOf(Enumeration))]
 [if (cl.oclIsUndefined() or cl.name.oclIsUndefined())]
 // undefined  [cl.eClass().name/] ([cl.toString()/]) ['class '.concat(aClass.name).concat(': header include failed for undefined ').concat(cl.eClass().name).concat(' ').concat(cl.toString()).registerError()/]

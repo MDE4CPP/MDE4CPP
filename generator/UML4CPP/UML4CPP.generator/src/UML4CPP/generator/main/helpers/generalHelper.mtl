@@ -170,3 +170,12 @@ nullptr['cannot terminate package of element '.concat(failureElement.toString())
 [query private hasTypeConflictToRedefinedProperty(aProperty : Property) : Boolean = if(aProperty.redefinedProperty->size() = 0) then false else aProperty.hasTypeConflict(aProperty.redefinedProperty->asOrderedSet()->first()) endif  /]
 [query public castRequired(aProperty : Property) : Boolean = if(aProperty.hasTypeConflictToRedefinedProperty()) then not (aProperty.type = aProperty.redefinedProperty->asOrderedSet()->first().type) else false endif /]
 [query public getRedefinedProperty(aProperty : Property) : Property = if (aProperty.hasTypeConflictToRedefinedProperty()) then aProperty.redefinedProperty->asOrderedSet()->first() else aProperty endif /]
+
+[template public generateStaticClassifierIDAccess(aClassifier : Classifier) post(trim())]
+[comment Map Primitive Types Package from Eclipse to types.ecore of MDE4CPP /]
+[if (aClassifier._package.name = 'PrimitiveTypes')]
+types::typesPackage::[aClassifier.name.toUpperCase()/]_CLASS
+[else]
+[aClassifier.generateNamespace(true)/]::[aClassifier._package.myNamespaceName()/]Package::[aClassifier.name.toUpperCase()/]_CLASS
+[/if]
+[/template]

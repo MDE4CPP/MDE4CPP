@@ -83,12 +83,14 @@ std::map<long long,std::function<Any(std::shared_ptr<Bag<Any>>)>> m_invocationMa
 [template public generateGetSetInvokeInit(aClass : Class)]
 [let propList : OrderedSet(Property) = aClass.getSetGetProperties()]
 [for (prop : Property | propList) before('//getter init\n') after('\n')]
+[let anyBagRequired : Boolean = ((prop.upper <> 1) and not(prop.type.oclIsKindOf(PrimitiveType) or prop.type.oclIsKindOf(Enumeration)))]
 	//Property [prop.name/]
-	m_getterMap.insert(std::pair<long long,std::function<Any()>>([prop.generateNamespaceName(true).generatePolynomialRollingHash()/],[ '[' /]this[ ']' /](){ return eAny(this->[prop.getterName()/]());}));
+	m_getterMap.insert(std::pair<long long,std::function<Any()>>([prop.generateNamespaceName(true).generatePolynomialRollingHash()/],[ '[' /]this[ ']' /](){ return [if(anyBagRequired)]eAnyBag[else]eAny[/if](this->[prop.getterName()/](), [prop.type.oclAsType(Classifier).generateStaticClassifierIDAccess()/][if(not anyBagRequired)], [if(prop.upper = 1)]false[else]true[/if][/if]);}));
+[/let]
 [/for]
 [for (compositeOwnerClass : Class | aClass.getImplicitCompositeOwners())]
 	//Property [compositeOwnerClass.name.toLowerFirst()/]
-	m_getterMap.insert(std::pair<long long,std::function<Any()>>([aClass.generateNamespaceName(true).concat('::').concat(compositeOwnerClass.name.toLowerFirst()).generatePolynomialRollingHash()/],[ '[' /]this[ ']' /](){ return eAny(this->get[compositeOwnerClass.name.toUpperFirst()/]());}));
+	m_getterMap.insert(std::pair<long long,std::function<Any()>>([aClass.generateNamespaceName(true).concat('::').concat(compositeOwnerClass.name.toLowerFirst()).generatePolynomialRollingHash()/],[ '[' /]this[ ']' /](){ return eAny(this->get[compositeOwnerClass.name.toUpperFirst()/](), [compositeOwnerClass.generateStaticClassifierIDAccess()/], false);}));
 [/for]
 
 [for (prop : Property | propList->select(hasSetter())) before('//setter init\n') after('\n')]
@@ -131,8 +133,10 @@ std::map<long long,std::function<Any(std::shared_ptr<Bag<Any>>)>> m_invocationMa
 	[let returnParameterList : OrderedSet(Parameter) = anOperation.ownedParameter->select(p :Parameter | (p.direction = ParameterDirectionKind::return))]
 	[if(not returnParameterList->isEmpty() and not returnParameterList->first().oclIsInvalid())]
 	[let returnParameter : Parameter = returnParameterList->first()]
+	[let anyBagRequired : Boolean = ((returnParameter.upper <> 1) and not(returnParameter.type.oclIsKindOf(PrimitiveType) or returnParameter.type.oclIsKindOf(Enumeration)))]
 		[returnParameter.generateCppType(false)/] [returnParameter.name/] = this->[anOperation.name/]([for (inputParameter : Parameter | anOperation.ownedParameter->select(direction = ParameterDirectionKind::_in or direction = ParameterDirectionKind::inout)) separator (', ')][inputParameter.name/][/for]);
-		return eAny([returnParameter.name/]);
+		return [if(anyBagRequired)]eAnyBag[else]eAny[/if]([returnParameter.name/], [returnParameter.type.oclAsType(Classifier).generateStaticClassifierIDAccess()/][if(not anyBagRequired)], [if(returnParameter.upper = 1)]false[else]true[/if][/if]);
+	[/let]
 	[/let]
 	[else]
 		this->[anOperation.name/]([for (inputParameter : Parameter | anOperation.ownedParameter->select(direction = ParameterDirectionKind::_in or direction = ParameterDirectionKind::inout)) separator (', ')][inputParameter.name/][/for]);
@@ -214,7 +218,7 @@ Any [aClass.name.toUpperFirst().concat('Impl')/]::get(long long _uID) const
 	[/for]
 	return result;
 	[else]
-	return eAny(nullptr);
+	return eAny(nullptr, -1, false);
 	[/if]
 	[/let]
 }
@@ -322,7 +326,7 @@ Any [aClass.name.toUpperFirst().concat('Impl')/]::invoke(long long _uID, std::sh
 	[/for]
 	return result;
 	[else]
-	return eAny(nullptr);
+	return eAny(nullptr, -1, false);
 	[/if]
 	[/let]
 }

@@ -158,7 +158,9 @@ int main()
 
 			std::shared_ptr<std::vector<Any>> parameterList(new std::vector<Any>());
 			[for (par : Parameter | mainActivity.ownedParameter->select((direction = ParameterDirectionKind::inout) or (direction = ParameterDirectionKind::_in)))]
-			parameterList->push_back(eAny([par.name/]));
+			[let anyBagRequired : Boolean = ((par.upper <> 1) and not(par.type.oclIsKindOf(PrimitiveType) or par.type.oclIsKindOf(Enumeration)))]
+			parameterList->push_back([if(anyBagRequired)]eAnyBag[else]eAny[/if]([par.name/], [par.type.oclAsType(Classifier).generateStaticClassifierIDAccess()/][if(not anyBagRequired)], [if(par.upper = 1)]false[else]true[/if][/if]));
+			[/let]
 			[/for]
 			Any activityResult = executionPlugin->executeActivity([mainActivity.generatePackageGetterCall()/], parameterList, element);
 
