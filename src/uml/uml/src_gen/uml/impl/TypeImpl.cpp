@@ -18,6 +18,8 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
+#include <stdexcept>
+
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 
@@ -149,20 +151,17 @@ TypeImpl& TypeImpl::operator=(const TypeImpl & obj)
 //*********************************
 bool TypeImpl::conformsTo(std::shared_ptr<uml::Type> other)
 {
-	std::cout << __PRETTY_FUNCTION__  << std::endl;
-	throw "UnsupportedOperationException";
+	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
 std::shared_ptr<uml::Association> TypeImpl::createAssociation(bool end1IsNavigable,uml::AggregationKind end1Aggregation,std::string end1Name,int end1Lower,int end1Upper,std::shared_ptr<uml::Type> end1Type,bool end2IsNavigable,uml::AggregationKind end2Aggregation,std::string end2Name,int end2Lower,int end2Upper)
 {
-	std::cout << __PRETTY_FUNCTION__  << std::endl;
-	throw "UnsupportedOperationException";
+	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
 std::shared_ptr<Bag<uml::Association> > TypeImpl::getAssociations()
 {
-	std::cout << __PRETTY_FUNCTION__  << std::endl;
-	throw "UnsupportedOperationException";
+	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
 //*********************************

@@ -18,6 +18,8 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
+#include <stdexcept>
+
 
 #include "abstractDataTypes/Subset.hpp"
 
@@ -371,14 +373,12 @@ std::string EFactoryImpl::convertToString(std::shared_ptr<ecore::EDataType> eDat
 
 std::shared_ptr<ecore::EObject> EFactoryImpl::create(std::shared_ptr<ecore::EClass> eClass) const
 {
-	std::cout << __PRETTY_FUNCTION__  << std::endl;
-	throw "UnsupportedOperationException";
+	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
 Any EFactoryImpl::createFromString(std::shared_ptr<ecore::EDataType> eDataType,std::string literalValue) const
 {
-	std::cout << __PRETTY_FUNCTION__  << std::endl;
-	throw "UnsupportedOperationException";
+	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
 //*********************************

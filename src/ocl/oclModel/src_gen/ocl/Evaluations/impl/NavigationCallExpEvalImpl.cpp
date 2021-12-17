@@ -19,6 +19,7 @@
 #include <iostream>
 #include <sstream>
 
+
 #include "abstractDataTypes/Bag.hpp"
 
 
@@ -36,11 +37,11 @@
 
 #include <exception> // used in Persistence
 #include "ocl/Expressions/ExpressionsFactory.hpp"
-#include "fUML/Semantics/Values/ValuesFactory.hpp"
 #include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
+#include "fUML/Semantics/Values/ValuesFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
-#include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
+#include "uml/umlFactory.hpp"
 #include "ocl/Evaluations/EvalEnvironment.hpp"
 #include "fUML/Semantics/Loci/Locus.hpp"
 #include "ocl/Evaluations/ModelPropertyCallExpEval.hpp"

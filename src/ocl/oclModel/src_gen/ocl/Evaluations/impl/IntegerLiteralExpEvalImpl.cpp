@@ -21,6 +21,7 @@
 
 
 
+
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -39,8 +40,8 @@
 #include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "fUML/Semantics/Values/ValuesFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
-#include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
+#include "uml/umlFactory.hpp"
 #include "ocl/Evaluations/EvalEnvironment.hpp"
 #include "fUML/Semantics/Values/LiteralIntegerEvaluation.hpp"
 #include "fUML/Semantics/Loci/Locus.hpp"

@@ -19,6 +19,7 @@
 #include <iostream>
 #include <sstream>
 
+
 #include "abstractDataTypes/Bag.hpp"
 
 
@@ -38,8 +39,8 @@
 #include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "fUML/Semantics/Values/ValuesFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
-#include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
+#include "uml/umlFactory.hpp"
 #include "ocl/Evaluations/EvalEnvironment.hpp"
 #include "ocl/Evaluations/LiteralExpEval.hpp"
 #include "fUML/Semantics/Loci/Locus.hpp"

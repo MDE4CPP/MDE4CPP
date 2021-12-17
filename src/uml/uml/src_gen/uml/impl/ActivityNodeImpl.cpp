@@ -18,6 +18,8 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
+#include <stdexcept>
+
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 
@@ -224,8 +226,7 @@ ActivityNodeImpl& ActivityNodeImpl::operator=(const ActivityNodeImpl & obj)
 //*********************************
 std::shared_ptr<uml::Activity> ActivityNodeImpl::containingActivity()
 {
-	std::cout << __PRETTY_FUNCTION__  << std::endl;
-	throw "UnsupportedOperationException";
+	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
 //*********************************

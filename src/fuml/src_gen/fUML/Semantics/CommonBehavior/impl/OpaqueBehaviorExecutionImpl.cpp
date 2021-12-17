@@ -18,6 +18,8 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
+#include <stdexcept>
+
 
 #include "abstractDataTypes/Bag.hpp"
 
@@ -120,8 +122,7 @@ OpaqueBehaviorExecutionImpl& OpaqueBehaviorExecutionImpl::operator=(const Opaque
 //*********************************
 void OpaqueBehaviorExecutionImpl::doBody(std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> inputParameters,std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> outputParameters)
 {
-	std::cout << __PRETTY_FUNCTION__  << std::endl;
-	throw "UnsupportedOperationException";
+	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
 void OpaqueBehaviorExecutionImpl::execute()

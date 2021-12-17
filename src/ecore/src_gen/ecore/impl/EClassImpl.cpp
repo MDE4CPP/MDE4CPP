@@ -18,6 +18,8 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
+#include <stdexcept>
+
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 
@@ -321,8 +323,7 @@ int EClassImpl::getFeatureID(std::shared_ptr<ecore::EStructuralFeature> feature)
 
 std::shared_ptr<ecore::EGenericType> EClassImpl::getFeatureType(std::shared_ptr<ecore::EStructuralFeature> feature) const
 {
-	std::cout << __PRETTY_FUNCTION__  << std::endl;
-	throw "UnsupportedOperationException";
+	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
 int EClassImpl::getOperationCount() const
@@ -358,8 +359,7 @@ int EClassImpl::getOperationID(std::shared_ptr<ecore::EOperation> operation) con
 
 std::shared_ptr<ecore::EOperation> EClassImpl::getOverride(std::shared_ptr<ecore::EOperation> operation) const
 {
-	std::cout << __PRETTY_FUNCTION__  << std::endl;
-	throw "UnsupportedOperationException";
+	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
 bool EClassImpl::isSuperTypeOf(std::shared_ptr<ecore::EClass> someClass) const

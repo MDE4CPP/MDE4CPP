@@ -18,6 +18,8 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
+#include <stdexcept>
+
 
 #include "abstractDataTypes/Bag.hpp"
 
@@ -217,8 +219,7 @@ std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> ExecutionImpl::
 
 std::shared_ptr<fUML::Semantics::Values::Value> ExecutionImpl::new_()
 {
-	std::cout << __PRETTY_FUNCTION__  << std::endl;
-	throw "UnsupportedOperationException";
+	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
 void ExecutionImpl::setParameterValue(std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> parameterValue)

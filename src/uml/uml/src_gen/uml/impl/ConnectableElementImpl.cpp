@@ -18,6 +18,8 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
+#include <stdexcept>
+
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 
@@ -129,8 +131,7 @@ ConnectableElementImpl& ConnectableElementImpl::operator=(const ConnectableEleme
 //*********************************
 std::shared_ptr<Bag<uml::ConnectorEnd> > ConnectableElementImpl::getEnds()
 {
-	std::cout << __PRETTY_FUNCTION__  << std::endl;
-	throw "UnsupportedOperationException";
+	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
 //*********************************

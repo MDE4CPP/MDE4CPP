@@ -18,6 +18,8 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
+#include <stdexcept>
+
 
 
 
@@ -95,8 +97,7 @@ SemanticStrategyImpl& SemanticStrategyImpl::operator=(const SemanticStrategyImpl
 //*********************************
 std::string SemanticStrategyImpl::getName()
 {
-	std::cout << __PRETTY_FUNCTION__  << std::endl;
-	throw "UnsupportedOperationException";
+	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
 //*********************************

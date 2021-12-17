@@ -18,6 +18,8 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
+#include <stdexcept>
+
 
 #include "abstractDataTypes/Union.hpp"
 
@@ -157,14 +159,12 @@ std::shared_ptr<ecore::EObject> EObjectImpl::eContainer()
 
 std::shared_ptr<ecore::EStructuralFeature> EObjectImpl::eContainingFeature() const
 {
-	std::cout << __PRETTY_FUNCTION__  << std::endl;
-	throw "UnsupportedOperationException";
+	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
 std::shared_ptr<ecore::EReference> EObjectImpl::eContainmentFeature() const
 {
-	std::cout << __PRETTY_FUNCTION__  << std::endl;
-	throw "UnsupportedOperationException";
+	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
 std::shared_ptr<Bag<ecore::EObject> > EObjectImpl::eContents() const
@@ -213,8 +213,7 @@ std::shared_ptr<Bag<ecore::EObject> > EObjectImpl::eContents() const
 
 std::shared_ptr<std::list < ecore::EObject>> EObjectImpl::eCrossReferences() const
 {
-	std::cout << __PRETTY_FUNCTION__  << std::endl;
-	throw "UnsupportedOperationException";
+	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
 Any EObjectImpl::eGet(std::shared_ptr<ecore::EStructuralFeature> feature) const
@@ -248,8 +247,7 @@ Any EObjectImpl::eInvoke(std::shared_ptr<ecore::EOperation> operation,std::share
 
 bool EObjectImpl::eIsProxy() const
 {
-	std::cout << __PRETTY_FUNCTION__  << std::endl;
-	throw "UnsupportedOperationException";
+	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
 bool EObjectImpl::eIsSet(std::shared_ptr<ecore::EStructuralFeature> feature) const
@@ -262,8 +260,7 @@ bool EObjectImpl::eIsSet(std::shared_ptr<ecore::EStructuralFeature> feature) con
 
 int EObjectImpl::eResource() const
 {
-	std::cout << __PRETTY_FUNCTION__  << std::endl;
-	throw "UnsupportedOperationException";
+	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
 void EObjectImpl::eSet(std::shared_ptr<ecore::EStructuralFeature> feature,Any newValue)
@@ -276,8 +273,7 @@ void EObjectImpl::eSet(std::shared_ptr<ecore::EStructuralFeature> feature,Any ne
 
 void EObjectImpl::eUnset(std::shared_ptr<ecore::EStructuralFeature> feature) const
 {
-	std::cout << __PRETTY_FUNCTION__  << std::endl;
-	throw "UnsupportedOperationException";
+	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
 //*********************************

@@ -18,6 +18,8 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
+#include <stdexcept>
+
 
 
 
@@ -122,8 +124,7 @@ std::shared_ptr<fUML::Semantics::Activities::Token> TokenImpl::_copy()
 
 bool TokenImpl::equals(std::shared_ptr<fUML::Semantics::Activities::Token> other)
 {
-	std::cout << __PRETTY_FUNCTION__  << std::endl;
-	throw "UnsupportedOperationException";
+	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
 std::shared_ptr<fUML::Semantics::Values::Value> TokenImpl::getValue() const

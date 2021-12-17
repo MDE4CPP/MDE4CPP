@@ -18,6 +18,8 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
+#include <stdexcept>
+
 
 #include "abstractDataTypes/Bag.hpp"
 
@@ -109,8 +111,7 @@ std::shared_ptr<ecore::EObject> CollectionValueImpl::copy() const
 //*********************************
 bool CollectionValueImpl::addValue(std::shared_ptr<fUML::Semantics::Values::Value> value)
 {
-	std::cout << __PRETTY_FUNCTION__  << std::endl;
-	throw "UnsupportedOperationException";
+	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
 bool CollectionValueImpl::equals(std::shared_ptr<fUML::Semantics::Values::Value> otherValue)

@@ -18,6 +18,8 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
+#include <stdexcept>
+
 
 
 
@@ -116,8 +118,7 @@ return this->new_();
 
 bool ValueImpl::checkAllParents(std::shared_ptr<uml::Classifier> type,std::shared_ptr<uml::Classifier> classifier)
 {
-	std::cout << __PRETTY_FUNCTION__  << std::endl;
-	throw "UnsupportedOperationException";
+	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
 bool ValueImpl::equals(std::shared_ptr<fUML::Semantics::Values::Value> otherValue)
@@ -158,8 +159,7 @@ bool ValueImpl::equals(std::shared_ptr<fUML::Semantics::Values::Value> otherValu
 
 std::shared_ptr<Bag<uml::Classifier> > ValueImpl::getTypes() const
 {
-	std::cout << __PRETTY_FUNCTION__  << std::endl;
-	throw "UnsupportedOperationException";
+	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
 bool ValueImpl::hasTypes(std::shared_ptr<uml::Classifier> type)
@@ -182,8 +182,7 @@ bool ValueImpl::hasTypes(std::shared_ptr<uml::Classifier> type)
 
 std::shared_ptr<fUML::Semantics::Values::Value> ValueImpl::new_()
 {
-	std::cout << __PRETTY_FUNCTION__  << std::endl;
-	throw "UnsupportedOperationException";
+	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
 std::string ValueImpl::objectId()
@@ -197,14 +196,12 @@ std::string ValueImpl::objectId()
 
 std::shared_ptr<uml::ValueSpecification> ValueImpl::specify()
 {
-	std::cout << __PRETTY_FUNCTION__  << std::endl;
-	throw "UnsupportedOperationException";
+	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
 std::string ValueImpl::toString()
 {
-	std::cout << __PRETTY_FUNCTION__  << std::endl;
-	throw "UnsupportedOperationException";
+	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
 //*********************************
