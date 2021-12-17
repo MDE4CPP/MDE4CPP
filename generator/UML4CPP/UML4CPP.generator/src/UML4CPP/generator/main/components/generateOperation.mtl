@@ -109,8 +109,7 @@ virtual [aOperation.generateCppType()/] [aOperation.name/]([for (sParameter : Pa
 	//Unknown type of Behavior: Currently only Activity and OpaqueBehavior are supported
 	[/if]
 [else]
-	std::cout << __PRETTY_FUNCTION__ << std::endl;
-	throw "UnsupportedOperationException";
+	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 [/if]
 
 [if (aOperation.ownedParameter->select(p :Parameter | p.direction = ParameterDirectionKind::return)->notEmpty())]

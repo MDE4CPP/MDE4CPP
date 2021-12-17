@@ -48,6 +48,9 @@
 [defineDebugMacro()/]
 
 #include <iostream>
+[if (aClass.ownedOperation->select(method->isEmpty())->notEmpty())]
+#include <stdexcept>
+[/if]
 
 [generateAbstractDataTypesIncludes()/]
 #include "abstractDataTypes/Any.hpp"
