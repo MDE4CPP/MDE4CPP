@@ -95,6 +95,16 @@
 	DEBUG_MESSAGE(std::cout<<"[aClass.name.toUpperFirst()/] is destroyed..."<<std::endl;)
 }
 
+std::shared_ptr<ecore::EObject> [aClass.name/]::copy() const
+{
+	/*
+	 * Has to be implemented by this class due to inheritance 
+	 * But actually not required here
+	 * Might be implemented properly in the future
+	 */
+	return nullptr;
+}
+
 //*********************************
 // Attribute Setter Getter
 //*********************************
