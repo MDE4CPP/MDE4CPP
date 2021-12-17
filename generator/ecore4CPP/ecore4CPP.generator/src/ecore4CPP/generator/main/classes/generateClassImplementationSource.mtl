@@ -42,6 +42,10 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
+[if (anEClass.eOperations->select(not hasKey(keyBody()))->notEmpty())]
+#include <stdexcept>
+[/if]
+
 
 [generateAbstractDataTypesIncludes()/]
 [if (anEClass.eAttributes.eType->select(requiresAny())->size() = 0 and anEClass.eOperations.eParameters.eType->select(requiresAny())->size() > 0)]
@@ -87,6 +91,7 @@ using namespace [anEClass.generateNamespaceDefinition()/];
 	*/
 }
 
+[comment NOTE: For abstract classes - pure virtual destructors have to be implemented in C++/]
 [className/]::~[className/]()
 {
 #ifdef SHOW_DELETION
@@ -383,7 +388,7 @@ using namespace [anEClass.generateNamespaceDefinition()/];
 	[/for]
 	return *this;
 }
-[if(anEClass.abstract = false)]
+[if (not anEClass.abstract)]
 
 std::shared_ptr<ecore::EObject> [className/]::copy() const
 {
