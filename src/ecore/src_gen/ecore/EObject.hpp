@@ -132,15 +132,16 @@ namespace ecore
 			mutable std::shared_ptr<Union<ecore::EObject>> m_eContentUnion;
 	};
 }
+#include <stdexcept>
 #include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/Bag.hpp"
 
 Any eAny(std::shared_ptr<ecore::EObject> value);
 
-class AnyEObjectBag: virtual public AnyObject
+class AnyEObjectBag: public AnyObject
 {
 public:
-	template <typename T> AnyEObjectBag(T value,long long typeID, bool isContainer=true):AnyObject(value, typeID,isContainer)
+	template <typename T> AnyEObjectBag(T value,long long typeID, bool isContainer=true) : AnyObject(value, typeID, isContainer)
 	{
 	}
 
@@ -158,10 +159,10 @@ public:
 	}
 };
 
-template <class T> class AnyGenericBag: virtual public AnyEObjectBag
+template <class T> class AnyGenericBag: public AnyEObjectBag
 {
 public:
-	template <class N> AnyGenericBag(N value,long long typeID=0, bool isContainer=true):AnyEObjectBag(value, typeID, isContainer)
+	AnyGenericBag(T value,long long typeID=0, bool isContainer=true) : AnyEObjectBag(value, typeID, isContainer)
 	{
 	}
 
@@ -172,7 +173,7 @@ public:
 		{
 			return obj->set(value);
 		}
-		throw "Any::get - cast failed";
+		throw std::runtime_error("Any::get() : Bad cast");
 	}
 
 	virtual std::shared_ptr<Bag<ecore::EObject>> getBag()
