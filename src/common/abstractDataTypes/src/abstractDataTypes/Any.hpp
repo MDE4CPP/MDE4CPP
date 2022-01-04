@@ -2,6 +2,7 @@
 #define OBJECT_HPP
 
 #include <memory>
+#include <stdexcept>
 
 class AnyObject
 {
@@ -20,7 +21,7 @@ class AnyObject
 			{
 				return obj->get();
 			}
-			throw "Any::get - cast failed";
+			throw std::runtime_error("Any::get() : Bad cast");
 		}
 
 		virtual ~AnyObject()
