@@ -38,17 +38,17 @@ int main()
         start = std::chrono::high_resolution_clock::now();
         {
         	std::shared_ptr<EPackage> p = factory->createEPackage();
-			std::shared_ptr<EEnum> e = factory->createEEnum_in_EPackage(p);
-			std::shared_ptr<EClass> t = factory->createEClass_in_EPackage(p);
+			std::shared_ptr<EEnum> e = factory->createEEnum_as_eClassifiers_in_EPackage(p);
+			std::shared_ptr<EClass> t = factory->createEClass_as_eClassifiers_in_EPackage(p);
 			t->setName("AClass");
 
 			for (int var = 0; var<=NUMBER_OF_OBJECTS; ++var)
 			{
-				std::shared_ptr<EClass> c = factory->createEClass_in_EPackage(p);
-				std::shared_ptr<EAttribute> a = factory->createEAttribute_in_EContainingClass(c);
-				std::shared_ptr<EReference> r = factory->createEReference_in_EContainingClass(c);
-				std::shared_ptr<EOperation> o = factory->createEOperation_in_EContainingClass(c);
-				std::shared_ptr<EParameter> p = factory->createEParameter_in_EOperation(o);
+				std::shared_ptr<EClass> c = factory->createEClass_as_eClassifiers_in_EPackage(p);
+				std::shared_ptr<EAttribute> a = factory->createEAttribute_as_eAttributes_in_EClass(c);
+				std::shared_ptr<EReference> r = factory->createEReference_as_eReferences_in_EClass(c);
+				std::shared_ptr<EOperation> o = factory->createEOperation_as_eOperations_in_EClass(c);
+				std::shared_ptr<EParameter> p = factory->createEParameter_as_eParameters_in_EOperation(o);
 
 				c->setName("Class");
 				e->setName("Enumeration");
