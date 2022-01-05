@@ -42,36 +42,30 @@ IF(UNIX AND NOT APPLE)
 		FIND_LIBRARY(ECORE_DEBUG ecored.so ${MDE4CPP_HOME}/application/bin)
 		FIND_LIBRARY(TYPES_DEBUG typesd.so ${MDE4CPP_HOME}/application/bin)
 		FIND_LIBRARY(UML_DEBUG umld.so ${MDE4CPP_HOME}/application/bin)
-		FIND_LIBRARY(UMLREFLECTION_DEBUG umlReflectiond.so ${MDE4CPP_HOME}/application/bin)
 	ELSE()
 		FIND_LIBRARY(ECORE_RELEASE ecore.so ${MDE4CPP_HOME}/application/bin)
 		FIND_LIBRARY(TYPES_RELEASE types.so ${MDE4CPP_HOME}/application/bin)
 		FIND_LIBRARY(UML_RELEASE uml.so ${MDE4CPP_HOME}/application/bin)
-		FIND_LIBRARY(UMLREFLECTION_RELEASE umlReflection.so ${MDE4CPP_HOME}/application/bin)
 	ENDIF()
 ELSEIF(APPLE)
 	IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
 		FIND_LIBRARY(ECORE_DEBUG ecored.dylib ${MDE4CPP_HOME}/application/bin)
 		FIND_LIBRARY(TYPES_DEBUG typesd.dylib ${MDE4CPP_HOME}/application/bin)
 		FIND_LIBRARY(UML_DEBUG umld.dylib ${MDE4CPP_HOME}/application/lib)
-		FIND_LIBRARY(UMLREFLECTION_DEBUG umlReflectiond.dylib ${MDE4CPP_HOME}/application/bin)
 	ELSE()
 		FIND_LIBRARY(ECORE_RELEASE ecore.dylib ${MDE4CPP_HOME}/application/bin)
 		FIND_LIBRARY(TYPES_RELEASE types.dylib ${MDE4CPP_HOME}/application/bin)
 		FIND_LIBRARY(UML_RELEASE uml.dylib ${MDE4CPP_HOME}/application/bin)
-		FIND_LIBRARY(UMLREFLECTION_RELEASE umlReflection.dylib ${MDE4CPP_HOME}/application/bin)
 	ENDIF()
 ELSE()
 	IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
 		FIND_LIBRARY(ECORE_DEBUG ecored ${MDE4CPP_HOME}/application/lib)
 		FIND_LIBRARY(TYPES_DEBUG typesd ${MDE4CPP_HOME}/application/lib)
 		FIND_LIBRARY(UML_DEBUG umld ${MDE4CPP_HOME}/application/lib)
-		FIND_LIBRARY(UMLREFLECTION_DEBUG umlReflectiond ${MDE4CPP_HOME}/application/lib)
 	ELSE()
 		FIND_LIBRARY(ECORE_RELEASE ecore ${MDE4CPP_HOME}/application/lib)
 		FIND_LIBRARY(TYPES_RELEASE types ${MDE4CPP_HOME}/application/lib)
 		FIND_LIBRARY(UML_RELEASE uml ${MDE4CPP_HOME}/application/lib)
-		FIND_LIBRARY(UMLREFLECTION_RELEASE umlReflection ${MDE4CPP_HOME}/application/lib)
 	ENDIF()
 ENDIF()
 
@@ -83,14 +77,12 @@ IF(CMAKE_BUILD_TYPE STREQUAL "Debug")
 		debug ${ECORE_DEBUG}
 		debug ${TYPES_DEBUG}
 		debug ${UML_DEBUG}
-		debug ${UMLREFLECTION_DEBUG}
 	)
 ELSE()
 	TARGET_LINK_LIBRARIES(${PROJECT_NAME}
 		optimized ${ECORE_RELEASE}
 		optimized ${TYPES_RELEASE}
 		optimized ${UML_RELEASE}
-		optimized ${UMLREFLECTION_RELEASE}
 	)
 ENDIF()
 

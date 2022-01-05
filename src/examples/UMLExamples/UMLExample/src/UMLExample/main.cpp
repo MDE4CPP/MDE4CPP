@@ -59,28 +59,25 @@ int main()
     o->setName("do");
 
     //use a string to create a class in a Package
-    std::shared_ptr<ecore::EObject> a = factory->create("Class", p, package->TYPE_ATTRIBUTE_PACKAGE);
+    std::shared_ptr<ecore::EObject> a = factory->create("Class", p, package->PACKAGE_ATTRIBUTE_OWNEDTYPE);
     c = std::dynamic_pointer_cast<uml::Class>(a);
     c->setName("Class2");
 
     //use a Package::MetaElement-ID to create a class
-    a = factory->create(uml::umlPackage::CLASS_CLASS, p, package->TYPE_ATTRIBUTE_PACKAGE);
+    a = factory->create(uml::umlPackage::CLASS_CLASS, p, package->PACKAGE_ATTRIBUTE_OWNEDTYPE);
     c = std::dynamic_pointer_cast<uml::Class>(a);
     c->setName("Class3");
 
     //use a MetaClass to create a class
-    a = factory->create(c->eClass(), p, package->TYPE_ATTRIBUTE_PACKAGE);
+    a = factory->create(c->eClass(), p, package->PACKAGE_ATTRIBUTE_OWNEDTYPE);
     c = std::dynamic_pointer_cast<uml::Class>(a);
     c->setName("Class4");
     c->setPackage(p);
 
     //use a umlPackage MetaClass to create a class
-    a = factory->create(package->getClass_Class(), p, package->TYPE_ATTRIBUTE_PACKAGE);
+    a = factory->create(package->getClass_Class(), p, package->PACKAGE_ATTRIBUTE_OWNEDTYPE);
     c = std::dynamic_pointer_cast<uml::Class>(a);
     c->setName("Class5");
-    //
-
-
 
     //create an UML-Objekt (InstanceSpecification) of Class1
     std::shared_ptr<uml::InstanceSpecification> i = factory->createInstanceSpecification_as_ownedElement_in_Element(p);
