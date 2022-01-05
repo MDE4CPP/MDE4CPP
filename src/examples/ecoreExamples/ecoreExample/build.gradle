@@ -55,14 +55,9 @@ task compileEcoreExample(type: tui.sse.mde4cpp.MDE4CPPCompile) {
 
 	
 	// dependency to model 'ecore'
-	def ecore = getRootProject().getTasksByName('buildEcore', true)
+	def ecore = getRootProject().getTasksByName('compileEcore', true)
 	dependsOn ecore
 	inputs.files(ecore.outputs)
-
-	// dependency to model 'types'
-	def types = getRootProject().getTasksByName('buildTypes', true)
-	dependsOn types
-	inputs.files(types.outputs)
 }
 
 task clean {
