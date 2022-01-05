@@ -37,9 +37,9 @@ int main()
 			start = std::chrono::high_resolution_clock::now();
 			for (int var = 0; var < NUM_ELEMENT; ++var)
 			{
-				std::shared_ptr<EClass> c = factory->createEClass_in_EPackage(package);
+				std::shared_ptr<EClass> c = factory->createEClass_as_eClassifiers_in_EPackage(package);
 				c->setName(std::string("Class")+std::to_string(var));
-				std::shared_ptr<EAttribute> a = factory->createEAttribute_in_EContainingClass(c);
+				std::shared_ptr<EAttribute> a = factory->createEAttribute_as_eAttributes_in_EClass(c);
 				a->setName(std::string("a") + std::to_string(var));
             }
 
