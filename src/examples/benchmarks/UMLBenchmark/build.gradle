@@ -43,22 +43,17 @@ task compileUMLBenchmark(type: tui.sse.mde4cpp.MDE4CPPCompile) {
 	outputs.file file(System.getenv('MDE4CPP_HOME') + File.separator + 'application' + File.separator + 'bin' + File.separator + 'UMLBenchmarkd.exe')
 	
 	// dependency to model 'ecore'
-	def ecore = getRootProject().getTasksByName('buildEcore', true)
+	def ecore = getRootProject().getTasksByName('compileEcore', true)
 	dependsOn ecore
 	inputs.files(ecore.outputs)
-
-	// dependency to model 'types'
-	def types = getRootProject().getTasksByName('buildTypes', true)
-	dependsOn types
-	inputs.files(types.outputs)
 	
 	// dependency to model 'uml'
-	def uml = getRootProject().getTasksByName('buildUml', true)
+	def uml = getRootProject().getTasksByName('compileUml', true)
 	dependsOn uml
 	inputs.files(uml.outputs)
 
 	// dependency to model 'umlReflection'
-	def umlReflection = getRootProject().getTasksByName('buildUmlReflection', true)
+	def umlReflection = getRootProject().getTasksByName('compileUmlReflection', true)
 	dependsOn umlReflection
 	inputs.files(umlReflection.outputs)
 }

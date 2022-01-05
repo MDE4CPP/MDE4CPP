@@ -30,7 +30,7 @@ int main(int argc, char *argv[])
     cout << "package created " << umlPackage << endl;
     std::chrono::time_point<std::chrono::high_resolution_clock> start, end;
 	{
-		shared_ptr<uml::Package> package = umlFactory->createPackage_in_OwningPackage(umlPackage);
+		shared_ptr<uml::Package> package = umlFactory->createPackage_as_packagedElement_in_Package(umlPackage);
 		cout << "package created" << endl;
 		package->setName(std::string("Benchmark UML"));
 		cout << package->getName() << endl;
@@ -40,9 +40,9 @@ int main(int argc, char *argv[])
 		start = std::chrono::high_resolution_clock::now();
 		for (int i=0; i<10000; i++)
 		{
-			shared_ptr<uml::Class> classObject = umlFactory->createClass_in_Package(package);
+			shared_ptr<uml::Class> classObject = umlFactory->createClass_as_packagedElement_in_Package(package);
 			classObject->setName("Class " + sprintf (buffer, "%i", i));
-			shared_ptr<uml::Property> property = umlFactory->createProperty_in_Class(classObject);
+			shared_ptr<uml::Property> property = umlFactory->createProperty_as_ownedAttribute_in_Class(classObject);
 			property->setName("A" + sprintf (buffer, "%i", i));
 			classObject->getOwnedAttribute()->push_back(property);
 		}
