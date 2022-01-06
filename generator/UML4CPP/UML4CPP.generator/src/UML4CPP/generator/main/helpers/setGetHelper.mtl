@@ -123,7 +123,7 @@ std::map<long long,std::function<Any(std::shared_ptr<Bag<Any>>)>> m_invocationMa
 [for (anOperation : Operation | aClass.ownedOperation) before('//invocation init\n')]
 	//Operation [anOperation.name/]
 	m_invocationMap.insert(std::pair<long long, std::function<Any(std::shared_ptr<Bag<Any>>)>>([anOperation.generateQualifiedNameWithSignature().generatePolynomialRollingHash()/], [ '[' /]this[ ']' /](std::shared_ptr<Bag<Any>> arguments) {
-	[let inputParameterList : OrderedSet(Parameter) = anOperation.ownedParameter->select(direction = ParameterDirectionKind::_in or direction = ParameterDirectionKind::inout)]
+	[let inputParameterList : OrderedSet(Parameter) = anOperation.ownedParameter->select(not (direction = ParameterDirectionKind::return))]
 	[for (anInputParameter : Parameter | inputParameterList) after('\n')]
 		//Retrieve input parameter '[anInputParameter.name/]'
 		Any any[anInputParameter.name.toUpperFirst()/] = *(arguments->at([inputParameterList->indexOf(anInputParameter)-1/]).get());
@@ -139,7 +139,7 @@ std::map<long long,std::function<Any(std::shared_ptr<Bag<Any>>)>> m_invocationMa
 	[/let]
 	[/let]
 	[else]
-		this->[anOperation.name/]([for (inputParameter : Parameter | anOperation.ownedParameter->select(direction = ParameterDirectionKind::_in or direction = ParameterDirectionKind::inout)) separator (', ')][inputParameter.name/][/for]);
+		this->[anOperation.name/]([for (inputParameter : Parameter | anOperation.ownedParameter->select(not (direction = ParameterDirectionKind::return))) separator (', ')][inputParameter.name/][/for]);
 		return eAny(nullptr, -1, false);
 	[/if]
 	[/let]
