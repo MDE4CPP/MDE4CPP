@@ -43,27 +43,27 @@ task compileOclExample(type: tui.sse.mde4cpp.MDE4CPPCompile) {
 	outputs.file file(System.getenv('MDE4CPP_HOME') + File.separator + 'application' + File.separator + 'bin' + File.separator + 'oclExampled.exe')
 	
 	// dependency to model 'ecore'
-	def ecore = getRootProject().getTasksByName('buildEcore', true)
+	def ecore = getRootProject().getTasksByName('compileEcore', true)
 	dependsOn ecore
 	inputs.files(ecore.outputs)
 	
 	// dependency to model 'uml'
-	def uml = getRootProject().getTasksByName('buildUml', true)
+	def uml = getRootProject().getTasksByName('compileUml', true)
 	dependsOn uml
 	inputs.files(uml.outputs)
 
 	// dependency to model 'types'
-	def types = getRootProject().getTasksByName('buildTypes', true)
+	def types = getRootProject().getTasksByName('compileTypes', true)
 	dependsOn types
 	inputs.files(types.outputs)
 	
 	// dependency to model 'primitivetypesReflection'
-	def primitives = getRootProject().getTasksByName('buildPrimitivetypesReflection', true)
+	def primitives = getRootProject().getTasksByName('compilePrimitivetypesReflection', true)
 	dependsOn primitives
 	inputs.files(primitives.outputs)
 	
 	// dependency to model 'oclParser'
-	def oclParser = getRootProject().getTasksByName('buildOclParser', true)
+	def oclParser = getRootProject().getTasksByName('compileOclParser', true)
 	dependsOn oclParser
 	inputs.files(oclParser.outputs)
 }
