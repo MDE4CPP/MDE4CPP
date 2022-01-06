@@ -27,6 +27,10 @@ description 'Example collection'
 
 import org.gradle.internal.os.OperatingSystem;
 
+// global variables
+project.ext.gradle_mde4cpp_compile_plugin_version  = '0.6.0-rc1'
+project.ext.gradle_mde4cpp_generate_plugin_version = '0.6.0-rc1'
+
 task generateAllExamples() {
 	group 'Examples'
 	description 'generate all examples'	

@@ -15,6 +15,7 @@
 **/.cmake/
 **/bin/
 **/build/
+**/.gradle/
 
 # 3rd-Party Libraries ---------------------------------------------------------
 /src/common/parser/antlr4/
