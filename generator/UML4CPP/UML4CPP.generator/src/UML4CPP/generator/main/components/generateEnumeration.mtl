@@ -21,6 +21,8 @@
 
 [import UML4CPP::generator::main::helpers::generalHelper /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
+[import UML4CPP::generator::main::components::generateType /]
+[import UML4CPP::generator::main::helpers::IDHelper /]
 
 [**
  * generate creation and initialization of meta model instance for an Enumeration element and its Literal elements
@@ -34,4 +36,10 @@
 [lit.memberName()/]->setName("[lit.name/]");
 [lit.memberName()/]->getClassifier()->push_back([anEnum.memberName()/]);
 [/for]
+[/template]
+
+[template public generateStaticEnumerationID(anEnumeration : Enumeration)]
+//Enumeration [anEnumeration.generateNamespaceName(true)/]
+static const long long [anEnumeration.getMemberName().toUpperCase()/] = [anEnumeration.transformType().generatePolynomialRollingHash()/];
+
 [/template]

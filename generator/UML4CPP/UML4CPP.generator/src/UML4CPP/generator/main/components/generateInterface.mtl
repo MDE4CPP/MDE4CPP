@@ -58,8 +58,8 @@
 [/template]
 
 [template public generateStaticInterfaceID(aInterface : Interface)]
-//Class [aInterface.generateNamespaceName(true)/]
-static const unsigned int [aInterface.getMemberName().toUpperCase()/] = [aInterface.transformType().generatePolynomialRollingHash()/];
+//Interface [aInterface.generateNamespaceName(true)/]
+static const long long [aInterface.getMemberName().toUpperCase()/] = [aInterface.transformType().generatePolynomialRollingHash()/];
 static const unsigned int [aInterface.getMemberName().toUpperCase()/]_FEATURE_COUNT = [aInterface.allFeatures()->size()/];
 static const unsigned int [aInterface.getMemberName().toUpperCase()/]_OPERATION_COUNT = [aInterface.ownedOperation->size()/];
 
