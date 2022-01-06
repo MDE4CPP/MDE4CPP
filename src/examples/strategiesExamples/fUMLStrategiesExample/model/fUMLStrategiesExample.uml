@@ -142,17 +142,6 @@ for (int i=0; i&lt;size; i++)&#xD;
     </packagedElement>
     <packagedElement xmi:type="uml:Class" xmi:id="_PhWqIAS9EeymYPa0ZS8sUg" name="TestChoiceStrategy">
       <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_UccrIAS9EeymYPa0ZS8sUg" name="obChoose" specification="_oLr14AS9EeymYPa0ZS8sUg">
-        <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_3J-p0AVwEeyhaZlTpg_vvA" name="obChoose">
-          <ownedParameter xmi:id="_3J-p0QVwEeyhaZlTpg_vvA" name="size">
-            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
-          </ownedParameter>
-          <ownedParameter xmi:id="_3J-p0gVwEeyhaZlTpg_vvA" name="choice" direction="return">
-            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
-          </ownedParameter>
-          <language>CPP</language>
-          <body>std::cout&lt;&lt;&quot;Printing from TestChoiceStrategy::choose\n&quot;;&#xD;
-choice = size;</body>
-        </ownedBehavior>
         <ownedParameter xmi:id="_Y94O8AS9EeymYPa0ZS8sUg" name="size">
           <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
         </ownedParameter>
