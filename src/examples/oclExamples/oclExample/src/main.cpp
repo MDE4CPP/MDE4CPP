@@ -490,8 +490,8 @@ void ecore_validate1() { /* NOT WORKING */
 
     c1->setName("C1");
     a1->setName("a1");
-    a1->setEType(types::typesPackage::eInstance()->getInteger_Class());
-    context->eSet(a1, eAny(5));
+    a1->setEType(ecore::ecorePackage::eInstance()->getEInt_Class());
+    context->eSet(a1, eAny(5, ecore::ecorePackage::EINT_CLASS, false));
 
     std::cout << "START Validate_1(context = EObject (a1=5)): " << qry << std::endl;
     query(context, qry);
@@ -508,8 +508,8 @@ void ecore_validate2() { /* NOT WORKING */
 
     c1->setName("C1");
     a1->setName("a1");
-    a1->setEType(types::typesPackage::eInstance()->getInteger_Class());
-    context->eSet(a1, eAny(5));
+    a1->setEType(ecore::ecorePackage::eInstance()->getEInt_Class());
+    context->eSet(a1, eAny(5, ecore::ecorePackage::EINT_CLASS, false));
 
     std::cout << "START Validate_2(context = EObject (a1=5)): " << qry << std::endl;
     query(context, qry);
