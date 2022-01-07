@@ -29,17 +29,17 @@
 //deleting property [aProperty.name/]
 [if (aProperty.isComposite)] [comment If property is a part or port (isComposite = true), property has to be destroyed recursively also/]
 //property is part or port and is destroyed recursively
-for(unsigned int i = 0; i < m_[aProperty.name/]->size(); i++)
+for(unsigned int i = 0; i < this->[aProperty.getterName()/]()->size(); i++)
 { 
-	if(m_[aProperty.name/]->at(i)) m_[aProperty.name/]->at(i)->destroy();  
+	if(this->[aProperty.getterName()/]()->at(i)) this->[aProperty.getterName()/]()->at(i)->destroy();  
 }
 [/if][comment If not, the variable of the property only has to be cleared/]
-m_[aProperty.name/]->clear();
+this->[aProperty.getterName()/]()->clear();
 [elseif (aProperty.isSingleValue() and not aProperty.type.isPrimitive() and not aProperty.type.oclIsKindOf(Enumeration))]
 //deleting property [aProperty.name/]
 [if (aProperty.isComposite)] [comment If property is a part or port (isComposite = true), property has to be destroyed recursively also/]
 //property is part or port and is destroyed recursively
-if(m_[aProperty.name/]) m_[aProperty.name/]->destroy();
+if(this->[aProperty.getterName()/]()) this->[aProperty.getterName()/]()->destroy();
 [/if][comment If not, the variable of the property only has to be cleared/]
 m_[aProperty.name/].reset();
 [/if]
