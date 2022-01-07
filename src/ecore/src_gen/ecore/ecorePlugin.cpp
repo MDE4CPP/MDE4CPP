@@ -17,7 +17,7 @@ std::shared_ptr<MDE4CPPPlugin> ecorePlugin::eInstance()
 	return instance;
 }
 
-std::shared_ptr<MDE4CPPPlugin> start()
+ECORE_API std::shared_ptr<MDE4CPPPlugin> start()
 {
 	return ecorePlugin::eInstance();
 }
