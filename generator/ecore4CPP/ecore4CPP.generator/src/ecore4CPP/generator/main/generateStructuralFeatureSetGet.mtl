@@ -43,21 +43,25 @@ Any [aClass.name.toUpperFirst().concat('Impl')/]::eGet(int featureID, bool resol
 	{
 	[for (struct : EStructuralFeature | aClass.eStructuralFeatures->reject(doNotGenerateEStructuralFeature())->asOrderedSet()->sortedBy(name))]
 		case [struct.metamodelPackageNameForEstructuralFeture(aClass)/]::[struct.getStaticAttributeIDName()/]:
-		[if (struct.eType.oclIsKindOf(EDataType))]
+		[if (struct.eType.oclIsKindOf(EDataType))] [comment no primitive type but can be TemplateType EMap /]
 			[if struct.upperBound = 1]
 			return eAny([struct.GetterName()/](),[struct.eType.getMetaElementIDName()/],false); //[aClass.getMyClassifierID()/][struct.getFeatureID()/]
 			[else]
 			return eAny([struct.GetterName()/](),[struct.eType.getMetaElementIDName()/],true); //[aClass.getMyClassifierID()/][struct.getFeatureID()/]
 			[/if]
-		[elseif (struct.upperBound = 1)]
+		[else] [comment no primitive Type/]
+			[if (struct.upperBound = 1)]
+				[if (( (struct.oclAsType(EReference).isBackReference()) and (not struct.hasGetterName()) ))]
 		{
-			std::shared_ptr<ecore::EObject> returnValue=[struct.GetterName()/]()[if (( (struct.oclAsType(EReference).isBackReference()) and (not struct.hasGetterName()) ))].lock()[/if];
+			std::shared_ptr<ecore::EObject> returnValue=[struct.GetterName()/]().lock();
 			return eAny(returnValue,[struct.eType.getMetaElementIDName()/],false); //[aClass.getMyClassifierID()/][struct.getFeatureID()/]
 		}
-		[else]
-		{
+				[else]
+			return eAny([struct.GetterName()/](),[struct.eType.getMetaElementIDName()/],false); //[aClass.getMyClassifierID()/][struct.getFeatureID()/]
+				[/if]
+			[else]
 			return eAnyBag([struct.GetterName()/](),[struct.eType.getMetaElementIDName()/]); //[aClass.getMyClassifierID()/][struct.getFeatureID()/]
-		}
+			[/if]
 		[/if]
 	[/for]
 	}

@@ -272,7 +272,7 @@
 endif/]
 
 [comment fur uml::types which are UML primitive types use ecore types instead/]
-[query public getMetaElementIDName(anEClassifier: EClassifier): String = if ((anEClassifier.ePackage.name='types')) then anEClassifier.getEcoreTypeIDName() else anEClassifier.ePackage.generateNamespaceDefinition().concat('::').concat(anEClassifier.ePackage.name).concat('Package::').concat(anEClassifier.getStaticAttributeIDName()) endif/]
+[query public getMetaElementIDName(anEClassifier: EClassifier): String = if anEClassifier.doNotGenerateEModelElement() then '-1' else if ((anEClassifier.ePackage.name='types')) then anEClassifier.getEcoreTypeIDName() else anEClassifier.ePackage.generateNamespaceDefinition().concat('::').concat(anEClassifier.ePackage.name).concat('Package::').concat(anEClassifier.getStaticAttributeIDName()) endif endif/]
 
 
 [query public getMemberName(anENamedElement : ENamedElement) : String = if (anENamedElement. oclIsUndefined()) then '' else if (anENamedElement.oclIsKindOf(EClassifier)) then anENamedElement.oclAsType(EClassifier).getMemberName() else anENamedElement.getMemberNameStructFeat() endif endif/]

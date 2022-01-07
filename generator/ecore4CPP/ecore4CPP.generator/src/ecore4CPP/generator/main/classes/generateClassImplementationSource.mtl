@@ -237,7 +237,7 @@ using namespace [anEClass.generateNamespaceDefinition()/];
 	[att.generateStructuralFeatureType(true)/] [att.name/]Container = [att.GetterName()/]();
 	if(nullptr != [att.name/]Container )
 	{
-		for(const std::shared_ptr<[att.eType.generateType(false)/]> it:*[att.name/]Container )
+		for(const std::shared_ptr<[att.eGenericType.eTypeArguments->first().eClassifier.transformType()/]> it:*[att.name/]Container )
 		{
 			if(nullptr != it)
 			{
@@ -316,7 +316,7 @@ using namespace [anEClass.generateNamespaceDefinition()/];
 	[ref.generateReferenceType()/] [ref.name/]Container = [ref.GetterName()/]();
 	if(nullptr != [ref.name/]Container )
 	{
-		for(const std::shared_ptr<[ref.eType.generateType(false)/]> it : *[ref.name/]Container)
+		for(const std::shared_ptr<[ref.eType.oclAsType(ecore::EClass).eGenericSuperTypes->first().eTypeArguments->first().generateCppType(false)/]> it : *[ref.name/]Container)
 		{
 			if(nullptr != it)
 			{
@@ -361,7 +361,7 @@ using namespace [anEClass.generateNamespaceDefinition()/];
 	[ref.generateReferenceType()/] [ref.name/]Container = [ref.GetterName()/]();
 	if(nullptr != [ref.name/]Container )
 	{
-		for(const std::shared_ptr<[ref.eType.generateType(false)/]> it: *[ref.name/]Container)
+		for(const std::shared_ptr<[ref.eGenericType.eTypeArguments->first().eClassifier.transformType()/]> it: *[ref.name/]Container)
 		{
 			if(nullptr != it)
 			{
