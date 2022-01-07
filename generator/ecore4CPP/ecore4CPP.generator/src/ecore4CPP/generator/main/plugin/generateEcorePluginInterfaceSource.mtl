@@ -42,7 +42,7 @@ std::shared_ptr<MDE4CPPPlugin> [packageName/]::eInstance()
 	return instance;
 }
 
-std::shared_ptr<MDE4CPPPlugin> start()
+[anPackage.getRootPackage().name.toUpper()/]_API std::shared_ptr<MDE4CPPPlugin> start()
 {
 	return [packageName/]::eInstance();
 }
