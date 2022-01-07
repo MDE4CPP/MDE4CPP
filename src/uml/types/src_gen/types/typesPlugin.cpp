@@ -17,7 +17,7 @@ std::shared_ptr<MDE4CPPPlugin> typesPlugin::eInstance()
 	return instance;
 }
 
-std::shared_ptr<MDE4CPPPlugin> start()
+TYPES_API std::shared_ptr<MDE4CPPPlugin> start()
 {
 	return typesPlugin::eInstance();
 }

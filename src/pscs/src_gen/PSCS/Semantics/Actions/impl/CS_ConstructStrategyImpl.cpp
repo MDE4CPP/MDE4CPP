@@ -47,8 +47,8 @@
 #include "PSCS/PSCSPackage.hpp"
 #include "PSCS/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
-#include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
 #include "PSCS/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
+#include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
 #include "uml/umlPackage.hpp"
 
 using namespace PSCS::Semantics::Actions;

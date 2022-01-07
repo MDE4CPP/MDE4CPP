@@ -47,14 +47,14 @@ namespace fUML::Semantics::SimpleClassifiers
 {
 	class FeatureValue;
 }
-namespace fUML::Semantics::StructuredClassifiers 
-{
-	class Reference;
-}
 namespace PSCS::Semantics::StructuredClassifiers 
 {
 	class CS_InteractionPoint;
 	class CS_Link;
+}
+namespace fUML::Semantics::StructuredClassifiers 
+{
+	class Reference;
 }
 namespace uml 
 {

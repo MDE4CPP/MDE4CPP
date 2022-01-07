@@ -32,13 +32,13 @@ namespace PSCS
 }
 
 //Forward Declaration for used types 
-namespace fUML::Semantics::StructuredClassifiers 
-{
-	class Object;
-}
 namespace PSCS::Semantics::StructuredClassifiers 
 {
 	class CS_Object;
+}
+namespace fUML::Semantics::StructuredClassifiers 
+{
+	class Object;
 }
 namespace uml 
 {

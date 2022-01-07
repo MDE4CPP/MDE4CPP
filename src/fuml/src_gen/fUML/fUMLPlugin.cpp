@@ -17,7 +17,7 @@ std::shared_ptr<MDE4CPPPlugin> fUMLPlugin::eInstance()
 	return instance;
 }
 
-std::shared_ptr<MDE4CPPPlugin> start()
+FUML_API std::shared_ptr<MDE4CPPPlugin> start()
 {
 	return fUMLPlugin::eInstance();
 }

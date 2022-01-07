@@ -14,16 +14,16 @@
 
 namespace ecore 
 {
-	class EReference;
-	class EDataType;
-	class EGenericType;
-	class EStringToStringMapEntry;
-	class EOperation;
 	class EEnumLiteral;
-	class EEnum;
 	class EParameter;
-	class EClass;
+	class EDataType;
+	class EStringToStringMapEntry;
+	class EGenericType;
+	class EReference;
+	class EOperation;
+	class EEnum;
 	class EAnnotation;
+	class EClass;
 }
 
 namespace PSCS::Semantics::StructuredClassifiers 

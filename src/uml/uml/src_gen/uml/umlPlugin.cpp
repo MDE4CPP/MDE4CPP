@@ -17,7 +17,7 @@ std::shared_ptr<MDE4CPPPlugin> umlPlugin::eInstance()
 	return instance;
 }
 
-std::shared_ptr<MDE4CPPPlugin> start()
+UML_API std::shared_ptr<MDE4CPPPlugin> start()
 {
 	return umlPlugin::eInstance();
 }

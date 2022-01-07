@@ -36,9 +36,9 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "ecore/ecoreFactory.hpp"
 #include "ocl/Types/TypesFactory.hpp"
 #include "ocl/Values/ValuesFactory.hpp"
+#include "ecore/ecoreFactory.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EDataType.hpp"
 #include "ecore/EPackage.hpp"

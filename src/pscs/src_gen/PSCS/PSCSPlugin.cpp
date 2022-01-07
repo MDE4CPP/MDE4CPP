@@ -17,7 +17,7 @@ std::shared_ptr<MDE4CPPPlugin> PSCSPlugin::eInstance()
 	return instance;
 }
 
-std::shared_ptr<MDE4CPPPlugin> start()
+PSCS_API std::shared_ptr<MDE4CPPPlugin> start()
 {
 	return PSCSPlugin::eInstance();
 }

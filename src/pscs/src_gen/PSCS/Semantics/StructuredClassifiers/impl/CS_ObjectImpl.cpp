@@ -52,9 +52,9 @@
 
 #include <exception> // used in Persistence
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
-#include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
+#include "uml/umlFactory.hpp"
 #include "PSCS/Semantics/StructuredClassifiers/CS_InteractionPoint.hpp"
 #include "PSCS/Semantics/StructuredClassifiers/CS_Link.hpp"
 #include "PSCS/Semantics/StructuredClassifiers/CS_Object.hpp"
@@ -78,8 +78,8 @@
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
 #include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersPackage.hpp"
-#include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
 #include "PSCS/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
+#include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
 #include "fUML/Semantics/Values/ValuesPackage.hpp"
 #include "uml/umlPackage.hpp"
 
