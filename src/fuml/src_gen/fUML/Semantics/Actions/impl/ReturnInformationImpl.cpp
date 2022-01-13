@@ -353,10 +353,7 @@ Any ReturnInformationImpl::eGet(int featureID, bool resolve, bool coreType) cons
 	switch(featureID)
 	{
 		case fUML::Semantics::Actions::ActionsPackage::RETURNINFORMATION_ATTRIBUTE_CALLEVENTOCCURRENCE:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getCallEventOccurrence();
-			return eAny(returnValue,fUML::Semantics::CommonBehavior::CommonBehaviorPackage::CALLEVENTOCCURRENCE_CLASS,false); //1020
-		}
+			return eAny(getCallEventOccurrence(),fUML::Semantics::CommonBehavior::CommonBehaviorPackage::CALLEVENTOCCURRENCE_CLASS,false); //1020
 	}
 	return fUML::Semantics::Values::ValueImpl::eGet(featureID, resolve, coreType);
 }

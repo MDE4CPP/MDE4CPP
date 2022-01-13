@@ -375,10 +375,7 @@ Any ProtocolConformanceImpl::eGet(int featureID, bool resolve, bool coreType) co
 	switch(featureID)
 	{
 		case uml::umlPackage::PROTOCOLCONFORMANCE_ATTRIBUTE_GENERALMACHINE:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getGeneralMachine();
-			return eAny(returnValue,uml::umlPackage::PROTOCOLSTATEMACHINE_CLASS,false); //1866
-		}
+			return eAny(getGeneralMachine(),uml::umlPackage::PROTOCOLSTATEMACHINE_CLASS,false); //1866
 		case uml::umlPackage::PROTOCOLCONFORMANCE_ATTRIBUTE_SPECIFICMACHINE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getSpecificMachine().lock();

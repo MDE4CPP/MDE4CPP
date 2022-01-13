@@ -500,10 +500,7 @@ Any ActionInputPinImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::ACTIONINPUTPIN_ATTRIBUTE_FROMACTION:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getFromAction();
-			return eAny(returnValue,uml::umlPackage::ACTION_CLASS,false); //641
-		}
+			return eAny(getFromAction(),uml::umlPackage::ACTION_CLASS,false); //641
 	}
 	return InputPinImpl::eGet(featureID, resolve, coreType);
 }

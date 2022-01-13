@@ -340,13 +340,9 @@ Any RedefinableElementImpl::eGet(int featureID, bool resolve, bool coreType) con
 		case uml::umlPackage::REDEFINABLEELEMENT_ATTRIBUTE_ISLEAF:
 			return eAny(getIsLeaf(),ecore::ecorePackage::EBOOLEAN_CLASS,false); //2049
 		case uml::umlPackage::REDEFINABLEELEMENT_ATTRIBUTE_REDEFINEDELEMENT:
-		{
 			return eAnyBag(getRedefinedElement(),uml::umlPackage::REDEFINABLEELEMENT_CLASS); //20410
-		}
 		case uml::umlPackage::REDEFINABLEELEMENT_ATTRIBUTE_REDEFINITIONCONTEXT:
-		{
 			return eAnyBag(getRedefinitionContext(),uml::umlPackage::CLASSIFIER_CLASS); //20411
-		}
 	}
 	return NamedElementImpl::eGet(featureID, resolve, coreType);
 }

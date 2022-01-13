@@ -577,13 +577,9 @@ Any DataTypeImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::DATATYPE_ATTRIBUTE_OWNEDATTRIBUTE:
-		{
 			return eAnyBag(getOwnedAttribute(),uml::umlPackage::PROPERTY_CLASS); //6538
-		}
 		case uml::umlPackage::DATATYPE_ATTRIBUTE_OWNEDOPERATION:
-		{
 			return eAnyBag(getOwnedOperation(),uml::umlPackage::OPERATION_CLASS); //6539
-		}
 	}
 	return ClassifierImpl::eGet(featureID, resolve, coreType);
 }

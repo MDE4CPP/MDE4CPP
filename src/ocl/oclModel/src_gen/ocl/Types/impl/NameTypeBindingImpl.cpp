@@ -266,10 +266,7 @@ Any NameTypeBindingImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case ocl::Types::TypesPackage::NAMETYPEBINDING_ATTRIBUTE_NAME:
 			return eAny(getName(),ecore::ecorePackage::ESTRING_CLASS,false); //520
 		case ocl::Types::TypesPackage::NAMETYPEBINDING_ATTRIBUTE_TYPE:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getType();
-			return eAny(returnValue,ecore::ecorePackage::ECLASSIFIER_CLASS,false); //521
-		}
+			return eAny(getType(),ecore::ecorePackage::ECLASSIFIER_CLASS,false); //521
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
 }

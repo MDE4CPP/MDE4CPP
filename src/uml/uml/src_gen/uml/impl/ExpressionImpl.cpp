@@ -433,9 +433,7 @@ Any ExpressionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::EXPRESSION_ATTRIBUTE_OPERAND:
-		{
 			return eAnyBag(getOperand(),uml::umlPackage::VALUESPECIFICATION_CLASS); //9515
-		}
 		case uml::umlPackage::EXPRESSION_ATTRIBUTE_SYMBOL:
 			return eAny(getSymbol(),ecore::ecorePackage::ESTRING_CLASS,false); //9516
 	}

@@ -872,22 +872,13 @@ Any ActivityNodeActivationImpl::eGet(int featureID, bool resolve, bool coreType)
 			return eAny(returnValue,fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYNODEACTIVATIONGROUP_CLASS,false); //93
 		}
 		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYNODEACTIVATION_ATTRIBUTE_HELDTOKENS:
-		{
 			return eAnyBag(getHeldTokens(),fUML::Semantics::Activities::ActivitiesPackage::TOKEN_CLASS); //92
-		}
 		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYNODEACTIVATION_ATTRIBUTE_INCOMINGEDGES:
-		{
 			return eAnyBag(getIncomingEdges(),fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYEDGEINSTANCE_CLASS); //91
-		}
 		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYNODEACTIVATION_ATTRIBUTE_NODE:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getNode();
-			return eAny(returnValue,uml::umlPackage::ACTIVITYNODE_CLASS,false); //94
-		}
+			return eAny(getNode(),uml::umlPackage::ACTIVITYNODE_CLASS,false); //94
 		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYNODEACTIVATION_ATTRIBUTE_OUTGOINGEDGES:
-		{
 			return eAnyBag(getOutgoingEdges(),fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYEDGEINSTANCE_CLASS); //90
-		}
 		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYNODEACTIVATION_ATTRIBUTE_RUNNING:
 			return eAny(isRunning(),ecore::ecorePackage::EBOOLEAN_CLASS,false); //95
 	}

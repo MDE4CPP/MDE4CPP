@@ -37,11 +37,11 @@
 
 #include <exception> // used in Persistence
 #include "fUML/Semantics/Loci/LociFactory.hpp"
-#include "fUML/Semantics/Values/ValuesFactory.hpp"
-#include "ocl/Evaluations/EvaluationsFactory.hpp"
-#include "uml/umlFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
+#include "ocl/Evaluations/EvaluationsFactory.hpp"
+#include "fUML/Semantics/Values/ValuesFactory.hpp"
 #include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
+#include "uml/umlFactory.hpp"
 #include "ocl/Evaluations/EvalEnvironment.hpp"
 #include "fUML/Semantics/Loci/Locus.hpp"
 #include "ocl/Evaluations/LoopExpEval.hpp"
@@ -268,10 +268,7 @@ Any IterateExpEvalImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case ocl::Evaluations::EvaluationsPackage::ITERATEEXPEVAL_ATTRIBUTE_RESULT:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getResult();
-			return eAny(returnValue,ocl::Evaluations::EvaluationsPackage::VARIABLEDECLEVAL_CLASS,false); //399
-		}
+			return eAny(getResult(),ocl::Evaluations::EvaluationsPackage::VARIABLEDECLEVAL_CLASS,false); //399
 	}
 	return LoopExpEvalImpl::eGet(featureID, resolve, coreType);
 }

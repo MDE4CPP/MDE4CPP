@@ -368,10 +368,7 @@ Any VariableActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::VARIABLEACTION_ATTRIBUTE_VARIABLE:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getVariable();
-			return eAny(returnValue,uml::umlPackage::VARIABLE_CLASS,false); //25327
-		}
+			return eAny(getVariable(),uml::umlPackage::VARIABLE_CLASS,false); //25327
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
 }

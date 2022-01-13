@@ -437,10 +437,7 @@ Any RemoveVariableValueActionImpl::eGet(int featureID, bool resolve, bool coreTy
 		case uml::umlPackage::REMOVEVARIABLEVALUEACTION_ATTRIBUTE_ISREMOVEDUPLICATES:
 			return eAny(getIsRemoveDuplicates(),ecore::ecorePackage::EBOOLEAN_CLASS,false); //21029
 		case uml::umlPackage::REMOVEVARIABLEVALUEACTION_ATTRIBUTE_REMOVEAT:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getRemoveAt();
-			return eAny(returnValue,uml::umlPackage::INPUTPIN_CLASS,false); //21030
-		}
+			return eAny(getRemoveAt(),uml::umlPackage::INPUTPIN_CLASS,false); //21030
 	}
 	return WriteVariableActionImpl::eGet(featureID, resolve, coreType);
 }

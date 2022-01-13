@@ -36,8 +36,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "ecore/ecoreFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
+#include "ecore/ecoreFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
 #include "ocl/Expressions/CallExp.hpp"
 #include "ocl/Expressions/CollectionRange.hpp"
@@ -409,10 +409,7 @@ Any AssociationClassCallExpImpl::eGet(int featureID, bool resolve, bool coreType
 	switch(featureID)
 	{
 		case ocl::Expressions::ExpressionsPackage::ASSOCIATIONCLASSCALLEXP_ATTRIBUTE_REFERREDASSOCIATIONCLASS:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getReferredAssociationClass();
-			return eAny(returnValue,ecore::ecorePackage::EREFERENCE_CLASS,false); //326
-		}
+			return eAny(getReferredAssociationClass(),ecore::ecorePackage::EREFERENCE_CLASS,false); //326
 	}
 	return NavigationCallExpImpl::eGet(featureID, resolve, coreType);
 }

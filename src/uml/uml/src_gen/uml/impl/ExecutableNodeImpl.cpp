@@ -386,9 +386,7 @@ Any ExecutableNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::EXECUTABLENODE_ATTRIBUTE_HANDLER:
-		{
 			return eAnyBag(getHandler(),uml::umlPackage::EXCEPTIONHANDLER_CLASS); //8820
-		}
 	}
 	return ActivityNodeImpl::eGet(featureID, resolve, coreType);
 }

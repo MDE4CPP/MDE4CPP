@@ -416,13 +416,9 @@ Any InterruptibleActivityRegionImpl::eGet(int featureID, bool resolve, bool core
 	switch(featureID)
 	{
 		case uml::umlPackage::INTERRUPTIBLEACTIVITYREGION_ATTRIBUTE_INTERRUPTINGEDGE:
-		{
 			return eAnyBag(getInterruptingEdge(),uml::umlPackage::ACTIVITYEDGE_CLASS); //12714
-		}
 		case uml::umlPackage::INTERRUPTIBLEACTIVITYREGION_ATTRIBUTE_NODE:
-		{
 			return eAnyBag(getNode(),uml::umlPackage::ACTIVITYNODE_CLASS); //12715
-		}
 	}
 	return ActivityGroupImpl::eGet(featureID, resolve, coreType);
 }

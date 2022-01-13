@@ -255,10 +255,7 @@ Any CollectionItemEvalImpl::eGet(int featureID, bool resolve, bool coreType) con
 	switch(featureID)
 	{
 		case ocl::Evaluations::EvaluationsPackage::COLLECTIONITEMEVAL_ATTRIBUTE_ITEM:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getItem();
-			return eAny(returnValue,ocl::Evaluations::EvaluationsPackage::OCLEXPEVAL_CLASS,false); //133
-		}
+			return eAny(getItem(),ocl::Evaluations::EvaluationsPackage::OCLEXPEVAL_CLASS,false); //133
 	}
 	return CollectionLiteralPartEvalImpl::eGet(featureID, resolve, coreType);
 }

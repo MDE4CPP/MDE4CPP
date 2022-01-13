@@ -305,9 +305,7 @@ Any EModelElementImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case ecore::ecorePackage::EMODELELEMENT_ATTRIBUTE_EANNOTATIONS:
-		{
 			return eAnyBag(getEAnnotations(),ecore::ecorePackage::EANNOTATION_CLASS); //383
-		}
 	}
 	return EObjectImpl::eGet(featureID, resolve, coreType);
 }

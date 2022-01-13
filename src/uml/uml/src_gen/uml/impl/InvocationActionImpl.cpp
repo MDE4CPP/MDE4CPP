@@ -464,14 +464,9 @@ Any InvocationActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::INVOCATIONACTION_ATTRIBUTE_ARGUMENT:
-		{
 			return eAnyBag(getArgument(),uml::umlPackage::INPUTPIN_CLASS); //13027
-		}
 		case uml::umlPackage::INVOCATIONACTION_ATTRIBUTE_ONPORT:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getOnPort();
-			return eAny(returnValue,uml::umlPackage::PORT_CLASS,false); //13028
-		}
+			return eAny(getOnPort(),uml::umlPackage::PORT_CLASS,false); //13028
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
 }

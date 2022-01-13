@@ -466,15 +466,9 @@ Any CallOperationActionImpl::eGet(int featureID, bool resolve, bool coreType) co
 	switch(featureID)
 	{
 		case uml::umlPackage::CALLOPERATIONACTION_ATTRIBUTE_OPERATION:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getOperation();
-			return eAny(returnValue,uml::umlPackage::OPERATION_CLASS,false); //3231
-		}
+			return eAny(getOperation(),uml::umlPackage::OPERATION_CLASS,false); //3231
 		case uml::umlPackage::CALLOPERATIONACTION_ATTRIBUTE_TARGET:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getTarget();
-			return eAny(returnValue,uml::umlPackage::INPUTPIN_CLASS,false); //3232
-		}
+			return eAny(getTarget(),uml::umlPackage::INPUTPIN_CLASS,false); //3232
 	}
 	return CallActionImpl::eGet(featureID, resolve, coreType);
 }

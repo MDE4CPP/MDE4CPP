@@ -33,13 +33,13 @@ namespace ocl
 }
 
 //Forward Declaration for used types 
-namespace fUML::Semantics::Values 
-{
-	class Value;
-}
 namespace ocl::Values 
 {
 	class NameValueBinding;
+}
+namespace fUML::Semantics::Values 
+{
+	class Value;
 }
 
 // namespace macro header include

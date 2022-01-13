@@ -36,8 +36,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "ecore/ecoreFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
+#include "ecore/ecoreFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
 #include "ocl/Expressions/CallExp.hpp"
 #include "ocl/Expressions/CollectionRange.hpp"
@@ -435,15 +435,9 @@ Any LetExpImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case ocl::Expressions::ExpressionsPackage::LETEXP_ATTRIBUTE_IN:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getIn();
-			return eAny(returnValue,ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_CLASS,false); //4222
-		}
+			return eAny(getIn(),ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_CLASS,false); //4222
 		case ocl::Expressions::ExpressionsPackage::LETEXP_ATTRIBUTE_VARIABLE:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getVariable();
-			return eAny(returnValue,ocl::Expressions::ExpressionsPackage::VARIABLE_CLASS,false); //4223
-		}
+			return eAny(getVariable(),ocl::Expressions::ExpressionsPackage::VARIABLE_CLASS,false); //4223
 	}
 	return OclExpressionImpl::eGet(featureID, resolve, coreType);
 }

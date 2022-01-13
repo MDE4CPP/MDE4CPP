@@ -341,13 +341,9 @@ Any VertexImpl::eGet(int featureID, bool resolve, bool coreType) const
 			return eAny(returnValue,uml::umlPackage::REGION_CLASS,false); //2549
 		}
 		case uml::umlPackage::VERTEX_ATTRIBUTE_INCOMING:
-		{
 			return eAnyBag(getIncoming(),uml::umlPackage::TRANSITION_CLASS); //25410
-		}
 		case uml::umlPackage::VERTEX_ATTRIBUTE_OUTGOING:
-		{
 			return eAnyBag(getOutgoing(),uml::umlPackage::TRANSITION_CLASS); //25411
-		}
 	}
 	return NamedElementImpl::eGet(featureID, resolve, coreType);
 }

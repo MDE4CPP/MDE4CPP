@@ -36,8 +36,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "ecore/ecoreFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
+#include "ecore/ecoreFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
 #include "ocl/Expressions/CallExp.hpp"
 #include "ocl/Expressions/CollectionRange.hpp"
@@ -442,14 +442,9 @@ Any LoopExpImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case ocl::Expressions::ExpressionsPackage::LOOPEXP_ATTRIBUTE_BODY:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getBody();
-			return eAny(returnValue,ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_CLASS,false); //4723
-		}
+			return eAny(getBody(),ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_CLASS,false); //4723
 		case ocl::Expressions::ExpressionsPackage::LOOPEXP_ATTRIBUTE_ITERATOR:
-		{
 			return eAnyBag(getIterator(),ocl::Expressions::ExpressionsPackage::VARIABLE_CLASS); //4724
-		}
 	}
 	return CallExpImpl::eGet(featureID, resolve, coreType);
 }

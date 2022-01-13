@@ -293,10 +293,7 @@ Any TypedElementImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::TYPEDELEMENT_ATTRIBUTE_TYPE:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getType();
-			return eAny(returnValue,uml::umlPackage::TYPE_CLASS,false); //2459
-		}
+			return eAny(getType(),uml::umlPackage::TYPE_CLASS,false); //2459
 	}
 	return NamedElementImpl::eGet(featureID, resolve, coreType);
 }

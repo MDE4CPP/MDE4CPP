@@ -438,15 +438,9 @@ Any DecisionNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::DECISIONNODE_ATTRIBUTE_DECISIONINPUT:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getDecisionInput();
-			return eAny(returnValue,uml::umlPackage::BEHAVIOR_CLASS,false); //6620
-		}
+			return eAny(getDecisionInput(),uml::umlPackage::BEHAVIOR_CLASS,false); //6620
 		case uml::umlPackage::DECISIONNODE_ATTRIBUTE_DECISIONINPUTFLOW:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getDecisionInputFlow();
-			return eAny(returnValue,uml::umlPackage::OBJECTFLOW_CLASS,false); //6621
-		}
+			return eAny(getDecisionInputFlow(),uml::umlPackage::OBJECTFLOW_CLASS,false); //6621
 	}
 	return ControlNodeImpl::eGet(featureID, resolve, coreType);
 }

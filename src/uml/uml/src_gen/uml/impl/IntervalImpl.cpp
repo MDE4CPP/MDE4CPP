@@ -394,15 +394,9 @@ Any IntervalImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::INTERVAL_ATTRIBUTE_MAX:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getMax();
-			return eAny(returnValue,uml::umlPackage::VALUESPECIFICATION_CLASS,false); //12815
-		}
+			return eAny(getMax(),uml::umlPackage::VALUESPECIFICATION_CLASS,false); //12815
 		case uml::umlPackage::INTERVAL_ATTRIBUTE_MIN:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getMin();
-			return eAny(returnValue,uml::umlPackage::VALUESPECIFICATION_CLASS,false); //12816
-		}
+			return eAny(getMin(),uml::umlPackage::VALUESPECIFICATION_CLASS,false); //12816
 	}
 	return ValueSpecificationImpl::eGet(featureID, resolve, coreType);
 }

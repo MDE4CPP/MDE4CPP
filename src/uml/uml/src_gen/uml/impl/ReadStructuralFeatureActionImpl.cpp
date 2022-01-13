@@ -416,10 +416,7 @@ Any ReadStructuralFeatureActionImpl::eGet(int featureID, bool resolve, bool core
 	switch(featureID)
 	{
 		case uml::umlPackage::READSTRUCTURALFEATUREACTION_ATTRIBUTE_RESULT:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getResult();
-			return eAny(returnValue,uml::umlPackage::OUTPUTPIN_CLASS,false); //19929
-		}
+			return eAny(getResult(),uml::umlPackage::OUTPUTPIN_CLASS,false); //19929
 	}
 	return StructuralFeatureActionImpl::eGet(featureID, resolve, coreType);
 }

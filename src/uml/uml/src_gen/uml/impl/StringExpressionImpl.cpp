@@ -461,9 +461,7 @@ Any StringExpressionImpl::eGet(int featureID, bool resolve, bool coreType) const
 			return eAny(returnValue,uml::umlPackage::STRINGEXPRESSION_CLASS,false); //22419
 		}
 		case uml::umlPackage::STRINGEXPRESSION_ATTRIBUTE_SUBEXPRESSION:
-		{
 			return eAnyBag(getSubExpression(),uml::umlPackage::STRINGEXPRESSION_CLASS); //22420
-		}
 	}
 	Any result;
 	result = ExpressionImpl::eGet(featureID, resolve, coreType);

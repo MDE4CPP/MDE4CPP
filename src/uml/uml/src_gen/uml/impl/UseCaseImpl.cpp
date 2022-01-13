@@ -701,21 +701,13 @@ Any UseCaseImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::USECASE_ATTRIBUTE_EXTEND:
-		{
 			return eAnyBag(getExtend(),uml::umlPackage::EXTEND_CLASS); //24841
-		}
 		case uml::umlPackage::USECASE_ATTRIBUTE_EXTENSIONPOINT:
-		{
 			return eAnyBag(getExtensionPoint(),uml::umlPackage::EXTENSIONPOINT_CLASS); //24842
-		}
 		case uml::umlPackage::USECASE_ATTRIBUTE_INCLUDE:
-		{
 			return eAnyBag(getInclude(),uml::umlPackage::INCLUDE_CLASS); //24843
-		}
 		case uml::umlPackage::USECASE_ATTRIBUTE_SUBJECT:
-		{
 			return eAnyBag(getSubject(),uml::umlPackage::CLASSIFIER_CLASS); //24844
-		}
 	}
 	return BehavioredClassifierImpl::eGet(featureID, resolve, coreType);
 }

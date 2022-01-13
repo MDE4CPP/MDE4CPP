@@ -36,8 +36,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
 #include "uml/umlFactory.hpp"
+#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
 #include "fUML/Semantics/SimpleClassifiers/CompoundValue.hpp"
 #include "fUML/Semantics/SimpleClassifiers/FeatureValue.hpp"
 #include "uml/Signal.hpp"
@@ -275,10 +275,7 @@ Any SignalInstanceImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::SIGNALINSTANCE_ATTRIBUTE_TYPE:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getType();
-			return eAny(returnValue,uml::umlPackage::SIGNAL_CLASS,false); //1071
-		}
+			return eAny(getType(),uml::umlPackage::SIGNAL_CLASS,false); //1071
 	}
 	return CompoundValueImpl::eGet(featureID, resolve, coreType);
 }

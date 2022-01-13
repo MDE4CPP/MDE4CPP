@@ -394,19 +394,14 @@ Any SlotImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::SLOT_ATTRIBUTE_DEFININGFEATURE:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getDefiningFeature();
-			return eAny(returnValue,uml::umlPackage::STRUCTURALFEATURE_CLASS,false); //2173
-		}
+			return eAny(getDefiningFeature(),uml::umlPackage::STRUCTURALFEATURE_CLASS,false); //2173
 		case uml::umlPackage::SLOT_ATTRIBUTE_OWNINGINSTANCE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getOwningInstance().lock();
 			return eAny(returnValue,uml::umlPackage::INSTANCESPECIFICATION_CLASS,false); //2175
 		}
 		case uml::umlPackage::SLOT_ATTRIBUTE_VALUE:
-		{
 			return eAnyBag(getValue(),uml::umlPackage::VALUESPECIFICATION_CLASS); //2174
-		}
 	}
 	return ElementImpl::eGet(featureID, resolve, coreType);
 }

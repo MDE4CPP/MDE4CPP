@@ -459,9 +459,7 @@ Any InformationItemImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::INFORMATIONITEM_ATTRIBUTE_REPRESENTED:
-		{
 			return eAnyBag(getRepresented(),uml::umlPackage::CLASSIFIER_CLASS); //11438
-		}
 	}
 	return ClassifierImpl::eGet(featureID, resolve, coreType);
 }

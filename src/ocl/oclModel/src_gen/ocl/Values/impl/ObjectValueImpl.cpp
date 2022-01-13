@@ -404,14 +404,9 @@ Any ObjectValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case ocl::Values::ValuesPackage::OBJECTVALUE_ATTRIBUTE_HISTORY:
-		{
 			return eAnyBag(getHistory(),ocl::Values::ValuesPackage::LOCALSNAPSHOT_CLASS); //590
-		}
 		case ocl::Values::ValuesPackage::OBJECTVALUE_ATTRIBUTE_VALUE:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getValue();
-			return eAny(returnValue,ecore::ecorePackage::EOBJECT_CLASS,false); //591
-		}
+			return eAny(getValue(),ecore::ecorePackage::EOBJECT_CLASS,false); //591
 	}
 	return fUML::Semantics::Values::ValueImpl::eGet(featureID, resolve, coreType);
 }

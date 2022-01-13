@@ -351,10 +351,7 @@ Any AcceptEventActionActivationImpl::eGet(int featureID, bool resolve, bool core
 	switch(featureID)
 	{
 		case fUML::Semantics::Actions::ActionsPackage::ACCEPTEVENTACTIONACTIVATION_ATTRIBUTE_EVENTACCEPTER:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getEventAccepter();
-			return eAny(returnValue,fUML::Semantics::Actions::ActionsPackage::ACCEPTEVENTACTIONEVENTACCEPTER_CLASS,false); //311
-		}
+			return eAny(getEventAccepter(),fUML::Semantics::Actions::ActionsPackage::ACCEPTEVENTACTIONEVENTACCEPTER_CLASS,false); //311
 		case fUML::Semantics::Actions::ActionsPackage::ACCEPTEVENTACTIONACTIVATION_ATTRIBUTE_WAITING:
 			return eAny(isWaiting(),ecore::ecorePackage::EBOOLEAN_CLASS,false); //312
 	}

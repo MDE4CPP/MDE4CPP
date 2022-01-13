@@ -416,9 +416,7 @@ Any CompoundValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::COMPOUNDVALUE_ATTRIBUTE_FEATUREVALUES:
-		{
 			return eAnyBag(getFeatureValues(),fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::FEATUREVALUE_CLASS); //290
-		}
 	}
 	return StructuredValueImpl::eGet(featureID, resolve, coreType);
 }

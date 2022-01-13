@@ -415,10 +415,7 @@ Any ProfileApplicationImpl::eGet(int featureID, bool resolve, bool coreType) con
 	switch(featureID)
 	{
 		case uml::umlPackage::PROFILEAPPLICATION_ATTRIBUTE_APPLIEDPROFILE:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getAppliedProfile();
-			return eAny(returnValue,uml::umlPackage::PROFILE_CLASS,false); //1846
-		}
+			return eAny(getAppliedProfile(),uml::umlPackage::PROFILE_CLASS,false); //1846
 		case uml::umlPackage::PROFILEAPPLICATION_ATTRIBUTE_APPLYINGPACKAGE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getApplyingPackage().lock();

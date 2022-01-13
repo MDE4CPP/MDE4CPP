@@ -712,21 +712,13 @@ Any ComponentImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::COMPONENT_ATTRIBUTE_ISINDIRECTLYINSTANTIATED:
 			return eAny(getIsIndirectlyInstantiated(),ecore::ecorePackage::EBOOLEAN_CLASS,false); //4753
 		case uml::umlPackage::COMPONENT_ATTRIBUTE_PACKAGEDELEMENT:
-		{
 			return eAnyBag(getPackagedElement(),uml::umlPackage::PACKAGEABLEELEMENT_CLASS); //4754
-		}
 		case uml::umlPackage::COMPONENT_ATTRIBUTE_PROVIDED:
-		{
 			return eAnyBag(getProvided(),uml::umlPackage::INTERFACE_CLASS); //4755
-		}
 		case uml::umlPackage::COMPONENT_ATTRIBUTE_REALIZATION:
-		{
 			return eAnyBag(getRealization(),uml::umlPackage::COMPONENTREALIZATION_CLASS); //4756
-		}
 		case uml::umlPackage::COMPONENT_ATTRIBUTE_REQUIRED:
-		{
 			return eAnyBag(getRequired(),uml::umlPackage::INTERFACE_CLASS); //4757
-		}
 	}
 	return ClassImpl::eGet(featureID, resolve, coreType);
 }

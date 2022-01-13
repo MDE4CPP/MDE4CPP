@@ -695,10 +695,7 @@ Any ParameterImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::PARAMETER_ATTRIBUTE_DEFAULT:
 			return eAny(getDefault(),ecore::ecorePackage::ESTRING_CLASS,false); //17419
 		case uml::umlPackage::PARAMETER_ATTRIBUTE_DEFAULTVALUE:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getDefaultValue();
-			return eAny(returnValue,uml::umlPackage::VALUESPECIFICATION_CLASS,false); //17420
-		}
+			return eAny(getDefaultValue(),uml::umlPackage::VALUESPECIFICATION_CLASS,false); //17420
 		case uml::umlPackage::PARAMETER_ATTRIBUTE_DIRECTION:
 			return eAny(getDirection(),uml::umlPackage::PARAMETERDIRECTIONKIND_CLASS,false); //17421
 		case uml::umlPackage::PARAMETER_ATTRIBUTE_EFFECT:
@@ -713,9 +710,7 @@ Any ParameterImpl::eGet(int featureID, bool resolve, bool coreType) const
 			return eAny(returnValue,uml::umlPackage::OPERATION_CLASS,false); //17425
 		}
 		case uml::umlPackage::PARAMETER_ATTRIBUTE_PARAMETERSET:
-		{
 			return eAnyBag(getParameterSet(),uml::umlPackage::PARAMETERSET_CLASS); //17426
-		}
 	}
 	Any result;
 	result = ConnectableElementImpl::eGet(featureID, resolve, coreType);

@@ -421,10 +421,7 @@ Any CallBehaviorActionImpl::eGet(int featureID, bool resolve, bool coreType) con
 	switch(featureID)
 	{
 		case uml::umlPackage::CALLBEHAVIORACTION_ATTRIBUTE_BEHAVIOR:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getBehavior();
-			return eAny(returnValue,uml::umlPackage::BEHAVIOR_CLASS,false); //2931
-		}
+			return eAny(getBehavior(),uml::umlPackage::BEHAVIOR_CLASS,false); //2931
 	}
 	return CallActionImpl::eGet(featureID, resolve, coreType);
 }

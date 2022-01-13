@@ -697,22 +697,13 @@ Any PortImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::PORT_ATTRIBUTE_ISSERVICE:
 			return eAny(getIsService(),ecore::ecorePackage::EBOOLEAN_CLASS,false); //18146
 		case uml::umlPackage::PORT_ATTRIBUTE_PROTOCOL:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getProtocol();
-			return eAny(returnValue,uml::umlPackage::PROTOCOLSTATEMACHINE_CLASS,false); //18147
-		}
+			return eAny(getProtocol(),uml::umlPackage::PROTOCOLSTATEMACHINE_CLASS,false); //18147
 		case uml::umlPackage::PORT_ATTRIBUTE_PROVIDED:
-		{
 			return eAnyBag(getProvided(),uml::umlPackage::INTERFACE_CLASS); //18148
-		}
 		case uml::umlPackage::PORT_ATTRIBUTE_REDEFINEDPORT:
-		{
 			return eAnyBag(getRedefinedPort(),uml::umlPackage::PORT_CLASS); //18149
-		}
 		case uml::umlPackage::PORT_ATTRIBUTE_REQUIRED:
-		{
 			return eAnyBag(getRequired(),uml::umlPackage::INTERFACE_CLASS); //18150
-		}
 	}
 	return PropertyImpl::eGet(featureID, resolve, coreType);
 }

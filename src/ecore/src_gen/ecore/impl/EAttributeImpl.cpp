@@ -288,10 +288,7 @@ Any EAttributeImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case ecore::ecorePackage::EATTRIBUTE_ATTRIBUTE_EATTRIBUTETYPE:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getEAttributeType();
-			return eAny(returnValue,ecore::ecorePackage::EDATATYPE_CLASS,false); //323
-		}
+			return eAny(getEAttributeType(),ecore::ecorePackage::EDATATYPE_CLASS,false); //323
 		case ecore::ecorePackage::EATTRIBUTE_ATTRIBUTE_ID:
 			return eAny(isID(),ecore::ecorePackage::EBOOLEAN_CLASS,false); //322
 	}

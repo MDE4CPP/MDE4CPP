@@ -457,14 +457,9 @@ Any InteractionOperandImpl::eGet(int featureID, bool resolve, bool coreType) con
 	switch(featureID)
 	{
 		case uml::umlPackage::INTERACTIONOPERAND_ATTRIBUTE_FRAGMENT:
-		{
 			return eAnyBag(getFragment(),uml::umlPackage::INTERACTIONFRAGMENT_CLASS); //12219
-		}
 		case uml::umlPackage::INTERACTIONOPERAND_ATTRIBUTE_GUARD:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getGuard();
-			return eAny(returnValue,uml::umlPackage::INTERACTIONCONSTRAINT_CLASS,false); //12220
-		}
+			return eAny(getGuard(),uml::umlPackage::INTERACTIONCONSTRAINT_CLASS,false); //12220
 	}
 	Any result;
 	result = InteractionFragmentImpl::eGet(featureID, resolve, coreType);

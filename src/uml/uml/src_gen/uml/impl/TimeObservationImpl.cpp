@@ -358,10 +358,7 @@ Any TimeObservationImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::TIMEOBSERVATION_ATTRIBUTE_EVENT:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getEvent();
-			return eAny(returnValue,uml::umlPackage::NAMEDELEMENT_CLASS,false); //24012
-		}
+			return eAny(getEvent(),uml::umlPackage::NAMEDELEMENT_CLASS,false); //24012
 		case uml::umlPackage::TIMEOBSERVATION_ATTRIBUTE_FIRSTEVENT:
 			return eAny(getFirstEvent(),ecore::ecorePackage::EBOOLEAN_CLASS,false); //24013
 	}

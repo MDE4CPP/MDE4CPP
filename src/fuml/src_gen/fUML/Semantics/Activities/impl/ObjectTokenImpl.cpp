@@ -287,10 +287,7 @@ Any ObjectTokenImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case fUML::Semantics::Activities::ActivitiesPackage::OBJECTTOKEN_ATTRIBUTE_VALUE:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getValue();
-			return eAny(returnValue,fUML::Semantics::Values::ValuesPackage::VALUE_CLASS,false); //832
-		}
+			return eAny(getValue(),fUML::Semantics::Values::ValuesPackage::VALUE_CLASS,false); //832
 	}
 	return TokenImpl::eGet(featureID, resolve, coreType);
 }

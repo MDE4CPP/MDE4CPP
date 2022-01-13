@@ -36,10 +36,10 @@
 
 #include <exception> // used in Persistence
 #include "fUML/Semantics/Loci/LociFactory.hpp"
-#include "fUML/Semantics/Values/ValuesFactory.hpp"
-#include "uml/umlFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
+#include "fUML/Semantics/Values/ValuesFactory.hpp"
 #include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
+#include "uml/umlFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
 #include "ocl/Evaluations/EvalEnvironment.hpp"
 #include "fUML/Semantics/Loci/Locus.hpp"
@@ -325,20 +325,11 @@ Any LetExpEvalImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case ocl::Evaluations::EvaluationsPackage::LETEXPEVAL_ATTRIBUTE_IN:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getIn();
-			return eAny(returnValue,ocl::Evaluations::EvaluationsPackage::OCLEXPEVAL_CLASS,false); //436
-		}
+			return eAny(getIn(),ocl::Evaluations::EvaluationsPackage::OCLEXPEVAL_CLASS,false); //436
 		case ocl::Evaluations::EvaluationsPackage::LETEXPEVAL_ATTRIBUTE_INITEXPRESSION:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getInitExpression();
-			return eAny(returnValue,ocl::Evaluations::EvaluationsPackage::OCLEXPEVAL_CLASS,false); //437
-		}
+			return eAny(getInitExpression(),ocl::Evaluations::EvaluationsPackage::OCLEXPEVAL_CLASS,false); //437
 		case ocl::Evaluations::EvaluationsPackage::LETEXPEVAL_ATTRIBUTE_VARIABLE:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getVariable();
-			return eAny(returnValue,fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::STRINGVALUE_CLASS,false); //438
-		}
+			return eAny(getVariable(),fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::STRINGVALUE_CLASS,false); //438
 	}
 	return OclExpEvalImpl::eGet(featureID, resolve, coreType);
 }

@@ -269,10 +269,7 @@ Any EventOccurrenceImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::EVENTOCCURRENCE_ATTRIBUTE_TARGET:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getTarget();
-			return eAny(returnValue,fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::REFERENCE_CLASS,false); //450
-		}
+			return eAny(getTarget(),fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::REFERENCE_CLASS,false); //450
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
 }

@@ -898,25 +898,15 @@ Any InteractionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::INTERACTION_ATTRIBUTE_ACTION:
-		{
 			return eAnyBag(getAction(),uml::umlPackage::ACTION_CLASS); //11968
-		}
 		case uml::umlPackage::INTERACTION_ATTRIBUTE_FORMALGATE:
-		{
 			return eAnyBag(getFormalGate(),uml::umlPackage::GATE_CLASS); //11969
-		}
 		case uml::umlPackage::INTERACTION_ATTRIBUTE_FRAGMENT:
-		{
 			return eAnyBag(getFragment(),uml::umlPackage::INTERACTIONFRAGMENT_CLASS); //11967
-		}
 		case uml::umlPackage::INTERACTION_ATTRIBUTE_LIFELINE:
-		{
 			return eAnyBag(getLifeline(),uml::umlPackage::LIFELINE_CLASS); //11966
-		}
 		case uml::umlPackage::INTERACTION_ATTRIBUTE_MESSAGE:
-		{
 			return eAnyBag(getMessage(),uml::umlPackage::MESSAGE_CLASS); //11970
-		}
 	}
 	Any result;
 	result = BehaviorImpl::eGet(featureID, resolve, coreType);

@@ -1006,37 +1006,21 @@ Any BehaviorImpl::eGet(int featureID, bool resolve, bool coreType) const
 			return eAny(returnValue,uml::umlPackage::BEHAVIOREDCLASSIFIER_CLASS,false); //2361
 		}
 		case uml::umlPackage::BEHAVIOR_ATTRIBUTE_CONTEXT:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getContext();
-			return eAny(returnValue,uml::umlPackage::BEHAVIOREDCLASSIFIER_CLASS,false); //2354
-		}
+			return eAny(getContext(),uml::umlPackage::BEHAVIOREDCLASSIFIER_CLASS,false); //2354
 		case uml::umlPackage::BEHAVIOR_ATTRIBUTE_ISREENTRANT:
 			return eAny(getIsReentrant(),ecore::ecorePackage::EBOOLEAN_CLASS,false); //2355
 		case uml::umlPackage::BEHAVIOR_ATTRIBUTE_OWNEDPARAMETER:
-		{
 			return eAnyBag(getOwnedParameter(),uml::umlPackage::PARAMETER_CLASS); //2356
-		}
 		case uml::umlPackage::BEHAVIOR_ATTRIBUTE_OWNEDPARAMETERSET:
-		{
 			return eAnyBag(getOwnedParameterSet(),uml::umlPackage::PARAMETERSET_CLASS); //2357
-		}
 		case uml::umlPackage::BEHAVIOR_ATTRIBUTE_POSTCONDITION:
-		{
 			return eAnyBag(getPostcondition(),uml::umlPackage::CONSTRAINT_CLASS); //2358
-		}
 		case uml::umlPackage::BEHAVIOR_ATTRIBUTE_PRECONDITION:
-		{
 			return eAnyBag(getPrecondition(),uml::umlPackage::CONSTRAINT_CLASS); //2359
-		}
 		case uml::umlPackage::BEHAVIOR_ATTRIBUTE_REDEFINEDBEHAVIOR:
-		{
 			return eAnyBag(getRedefinedBehavior(),uml::umlPackage::BEHAVIOR_CLASS); //2360
-		}
 		case uml::umlPackage::BEHAVIOR_ATTRIBUTE_SPECIFICATION:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getSpecification();
-			return eAny(returnValue,uml::umlPackage::BEHAVIORALFEATURE_CLASS,false); //2353
-		}
+			return eAny(getSpecification(),uml::umlPackage::BEHAVIORALFEATURE_CLASS,false); //2353
 	}
 	return ClassImpl::eGet(featureID, resolve, coreType);
 }

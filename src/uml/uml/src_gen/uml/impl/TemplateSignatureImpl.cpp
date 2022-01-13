@@ -411,13 +411,9 @@ Any TemplateSignatureImpl::eGet(int featureID, bool resolve, bool coreType) cons
 	switch(featureID)
 	{
 		case uml::umlPackage::TEMPLATESIGNATURE_ATTRIBUTE_OWNEDPARAMETER:
-		{
 			return eAnyBag(getOwnedParameter(),uml::umlPackage::TEMPLATEPARAMETER_CLASS); //2335
-		}
 		case uml::umlPackage::TEMPLATESIGNATURE_ATTRIBUTE_PARAMETER:
-		{
 			return eAnyBag(getParameter(),uml::umlPackage::TEMPLATEPARAMETER_CLASS); //2333
-		}
 		case uml::umlPackage::TEMPLATESIGNATURE_ATTRIBUTE_TEMPLATE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getTemplate().lock();

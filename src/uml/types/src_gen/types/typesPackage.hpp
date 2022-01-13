@@ -15,8 +15,8 @@
 namespace ecore 
 {
 	class EDataType;
-	class EStringToStringMapEntry;
 	class EAnnotation;
+	class EStringToStringMapEntry;
 }
 
 namespace types 

@@ -445,15 +445,9 @@ Any ReadExtentActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::READEXTENTACTION_ATTRIBUTE_CLASSIFIER:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getClassifier();
-			return eAny(returnValue,uml::umlPackage::CLASSIFIER_CLASS,false); //19327
-		}
+			return eAny(getClassifier(),uml::umlPackage::CLASSIFIER_CLASS,false); //19327
 		case uml::umlPackage::READEXTENTACTION_ATTRIBUTE_RESULT:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getResult();
-			return eAny(returnValue,uml::umlPackage::OUTPUTPIN_CLASS,false); //19328
-		}
+			return eAny(getResult(),uml::umlPackage::OUTPUTPIN_CLASS,false); //19328
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
 }

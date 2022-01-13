@@ -623,14 +623,9 @@ Any StereotypeImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::STEREOTYPE_ATTRIBUTE_ICON:
-		{
 			return eAnyBag(getIcon(),uml::umlPackage::IMAGE_CLASS); //22353
-		}
 		case uml::umlPackage::STEREOTYPE_ATTRIBUTE_PROFILE:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getProfile();
-			return eAny(returnValue,uml::umlPackage::PROFILE_CLASS,false); //22354
-		}
+			return eAny(getProfile(),uml::umlPackage::PROFILE_CLASS,false); //22354
 	}
 	return ClassImpl::eGet(featureID, resolve, coreType);
 }

@@ -530,9 +530,7 @@ Any CollaborationImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::COLLABORATION_ATTRIBUTE_COLLABORATIONROLE:
-		{
 			return eAnyBag(getCollaborationRole(),uml::umlPackage::CONNECTABLEELEMENT_CLASS); //4245
-		}
 	}
 	Any result;
 	result = BehavioredClassifierImpl::eGet(featureID, resolve, coreType);

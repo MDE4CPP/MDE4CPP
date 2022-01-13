@@ -39,8 +39,8 @@
 #include "fUML/Semantics/Values/Value.hpp"
 //Factories and Package includes
 #include "ocl/oclPackage.hpp"
-#include "fUML/Semantics/Values/ValuesPackage.hpp"
 #include "ocl/Values/ValuesPackage.hpp"
+#include "fUML/Semantics/Values/ValuesPackage.hpp"
 
 using namespace ocl::Values;
 
@@ -266,10 +266,7 @@ Any NameValueBindingImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case ocl::Values::ValuesPackage::NAMEVALUEBINDING_ATTRIBUTE_NAME:
 			return eAny(getName(),ecore::ecorePackage::ESTRING_CLASS,false); //530
 		case ocl::Values::ValuesPackage::NAMEVALUEBINDING_ATTRIBUTE_VALUE:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getValue();
-			return eAny(returnValue,fUML::Semantics::Values::ValuesPackage::VALUE_CLASS,false); //531
-		}
+			return eAny(getValue(),fUML::Semantics::Values::ValuesPackage::VALUE_CLASS,false); //531
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
 }

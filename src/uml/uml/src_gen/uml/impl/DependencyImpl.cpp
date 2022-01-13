@@ -500,13 +500,9 @@ Any DependencyImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::DEPENDENCY_ATTRIBUTE_CLIENT:
-		{
 			return eAnyBag(getClient(),uml::umlPackage::NAMEDELEMENT_CLASS); //6715
-		}
 		case uml::umlPackage::DEPENDENCY_ATTRIBUTE_SUPPLIER:
-		{
 			return eAnyBag(getSupplier(),uml::umlPackage::NAMEDELEMENT_CLASS); //6716
-		}
 	}
 	Any result;
 	result = DirectedRelationshipImpl::eGet(featureID, resolve, coreType);

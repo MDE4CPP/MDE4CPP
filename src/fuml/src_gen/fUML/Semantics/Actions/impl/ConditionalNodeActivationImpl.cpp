@@ -37,9 +37,9 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "fUML/Semantics/Actions/ActionsFactory.hpp"
+#include "uml/umlFactory.hpp"
 #include "uml/Action.hpp"
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
 #include "uml/ActivityNode.hpp"
@@ -364,13 +364,9 @@ Any ConditionalNodeActivationImpl::eGet(int featureID, bool resolve, bool coreTy
 	switch(featureID)
 	{
 		case fUML::Semantics::Actions::ActionsPackage::CONDITIONALNODEACTIVATION_ATTRIBUTE_CLAUSEACTIVATIONS:
-		{
 			return eAnyBag(getClauseActivations(),fUML::Semantics::Actions::ActionsPackage::CLAUSEACTIVATION_CLASS); //3012
-		}
 		case fUML::Semantics::Actions::ActionsPackage::CONDITIONALNODEACTIVATION_ATTRIBUTE_SELECTEDCLAUSES:
-		{
 			return eAnyBag(getSelectedClauses(),uml::umlPackage::CLAUSE_CLASS); //3013
-		}
 	}
 	return StructuredActivityNodeActivationImpl::eGet(featureID, resolve, coreType);
 }

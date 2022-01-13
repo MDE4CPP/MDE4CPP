@@ -543,23 +543,15 @@ Any ObjectNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::OBJECTNODE_ATTRIBUTE_INSTATE:
-		{
 			return eAnyBag(getInState(),uml::umlPackage::STATE_CLASS); //16021
-		}
 		case uml::umlPackage::OBJECTNODE_ATTRIBUTE_ISCONTROLTYPE:
 			return eAny(getIsControlType(),ecore::ecorePackage::EBOOLEAN_CLASS,false); //16022
 		case uml::umlPackage::OBJECTNODE_ATTRIBUTE_ORDERING:
 			return eAny(getOrdering(),uml::umlPackage::OBJECTNODEORDERINGKIND_CLASS,false); //16023
 		case uml::umlPackage::OBJECTNODE_ATTRIBUTE_SELECTION:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getSelection();
-			return eAny(returnValue,uml::umlPackage::BEHAVIOR_CLASS,false); //16024
-		}
+			return eAny(getSelection(),uml::umlPackage::BEHAVIOR_CLASS,false); //16024
 		case uml::umlPackage::OBJECTNODE_ATTRIBUTE_UPPERBOUND:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getUpperBound();
-			return eAny(returnValue,uml::umlPackage::VALUESPECIFICATION_CLASS,false); //16025
-		}
+			return eAny(getUpperBound(),uml::umlPackage::VALUESPECIFICATION_CLASS,false); //16025
 	}
 	Any result;
 	result = ActivityNodeImpl::eGet(featureID, resolve, coreType);

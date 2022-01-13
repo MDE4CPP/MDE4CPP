@@ -39,8 +39,8 @@
 #include "fUML/Semantics/Values/Value.hpp"
 //Factories and Package includes
 #include "ocl/oclPackage.hpp"
-#include "fUML/Semantics/Values/ValuesPackage.hpp"
 #include "ocl/Values/ValuesPackage.hpp"
+#include "fUML/Semantics/Values/ValuesPackage.hpp"
 
 using namespace ocl::Values;
 
@@ -266,10 +266,7 @@ Any ElementImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case ocl::Values::ValuesPackage::ELEMENT_ATTRIBUTE_INDEXNR:
 			return eAny(getIndexNr(),ecore::ecorePackage::EINT_CLASS,false); //230
 		case ocl::Values::ValuesPackage::ELEMENT_ATTRIBUTE_VALUE:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getValue();
-			return eAny(returnValue,fUML::Semantics::Values::ValuesPackage::VALUE_CLASS,false); //231
-		}
+			return eAny(getValue(),fUML::Semantics::Values::ValuesPackage::VALUE_CLASS,false); //231
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
 }

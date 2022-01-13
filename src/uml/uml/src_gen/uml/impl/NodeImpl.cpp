@@ -554,9 +554,7 @@ Any NodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::NODE_ATTRIBUTE_NESTEDNODE:
-		{
 			return eAnyBag(getNestedNode(),uml::umlPackage::NODE_CLASS); //15755
-		}
 	}
 	Any result;
 	result = ClassImpl::eGet(featureID, resolve, coreType);

@@ -332,10 +332,7 @@ Any ChangeEventImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::CHANGEEVENT_ATTRIBUTE_CHANGEEXPRESSION:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getChangeExpression();
-			return eAny(returnValue,uml::umlPackage::VALUESPECIFICATION_CLASS,false); //3412
-		}
+			return eAny(getChangeExpression(),uml::umlPackage::VALUESPECIFICATION_CLASS,false); //3412
 	}
 	return EventImpl::eGet(featureID, resolve, coreType);
 }

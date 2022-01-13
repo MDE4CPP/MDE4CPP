@@ -152,8 +152,8 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
+#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "uml/Behavior.hpp"
 #include "uml/Element.hpp"
 #include "fUML/Semantics/Values/Evaluation.hpp"
@@ -941,22 +941,16 @@ Any ExecutionFactoryImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case fUML::Semantics::Loci::LociPackage::EXECUTIONFACTORY_ATTRIBUTE_BUILTINTYPES:
-		{
 			return eAnyBag(getBuiltInTypes(),uml::umlPackage::PRIMITIVETYPE_CLASS); //473
-		}
 		case fUML::Semantics::Loci::LociPackage::EXECUTIONFACTORY_ATTRIBUTE_LOCUS:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getLocus().lock();
 			return eAny(returnValue,fUML::Semantics::Loci::LociPackage::LOCUS_CLASS,false); //470
 		}
 		case fUML::Semantics::Loci::LociPackage::EXECUTIONFACTORY_ATTRIBUTE_PRIMITIVEBEHAVIORPROTOTYPES:
-		{
 			return eAnyBag(getPrimitiveBehaviorPrototypes(),fUML::Semantics::CommonBehavior::CommonBehaviorPackage::OPAQUEBEHAVIOREXECUTION_CLASS); //472
-		}
 		case fUML::Semantics::Loci::LociPackage::EXECUTIONFACTORY_ATTRIBUTE_STRATEGIES:
-		{
 			return eAnyBag(getStrategies(),fUML::Semantics::Loci::LociPackage::SEMANTICSTRATEGY_CLASS); //471
-		}
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
 }

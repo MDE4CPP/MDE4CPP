@@ -36,8 +36,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "ecore/ecoreFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
+#include "ecore/ecoreFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
 #include "ocl/Expressions/CallExp.hpp"
 #include "ocl/Expressions/CollectionRange.hpp"
@@ -467,14 +467,9 @@ Any OperationCallExpImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case ocl::Expressions::ExpressionsPackage::OPERATIONCALLEXP_ATTRIBUTE_ARGUMENT:
-		{
 			return eAnyBag(getArgument(),ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_CLASS); //6624
-		}
 		case ocl::Expressions::ExpressionsPackage::OPERATIONCALLEXP_ATTRIBUTE_REFERREDOPERATION:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getReferredOperation();
-			return eAny(returnValue,ecore::ecorePackage::EOPERATION_CLASS,false); //6625
-		}
+			return eAny(getReferredOperation(),ecore::ecorePackage::EOPERATION_CLASS,false); //6625
 	}
 	return FeatureCallExpImpl::eGet(featureID, resolve, coreType);
 }

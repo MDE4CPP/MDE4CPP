@@ -586,28 +586,15 @@ Any InteractionUseImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::INTERACTIONUSE_ATTRIBUTE_ACTUALGATE:
-		{
 			return eAnyBag(getActualGate(),uml::umlPackage::GATE_CLASS); //12413
-		}
 		case uml::umlPackage::INTERACTIONUSE_ATTRIBUTE_ARGUMENT:
-		{
 			return eAnyBag(getArgument(),uml::umlPackage::VALUESPECIFICATION_CLASS); //12414
-		}
 		case uml::umlPackage::INTERACTIONUSE_ATTRIBUTE_REFERSTO:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getRefersTo();
-			return eAny(returnValue,uml::umlPackage::INTERACTION_CLASS,false); //12415
-		}
+			return eAny(getRefersTo(),uml::umlPackage::INTERACTION_CLASS,false); //12415
 		case uml::umlPackage::INTERACTIONUSE_ATTRIBUTE_RETURNVALUE:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getReturnValue();
-			return eAny(returnValue,uml::umlPackage::VALUESPECIFICATION_CLASS,false); //12416
-		}
+			return eAny(getReturnValue(),uml::umlPackage::VALUESPECIFICATION_CLASS,false); //12416
 		case uml::umlPackage::INTERACTIONUSE_ATTRIBUTE_RETURNVALUERECIPIENT:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getReturnValueRecipient();
-			return eAny(returnValue,uml::umlPackage::PROPERTY_CLASS,false); //12417
-		}
+			return eAny(getReturnValueRecipient(),uml::umlPackage::PROPERTY_CLASS,false); //12417
 	}
 	return InteractionFragmentImpl::eGet(featureID, resolve, coreType);
 }

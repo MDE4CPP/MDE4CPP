@@ -846,19 +846,11 @@ Any CS_DefaultConstructStrategyImpl::eGet(int featureID, bool resolve, bool core
 	switch(featureID)
 	{
 		case PSCS::Semantics::Actions::ActionsPackage::CS_DEFAULTCONSTRUCTSTRATEGY_ATTRIBUTE_DEFAULTASSOCIATION:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getDefaultAssociation();
-			return eAny(returnValue,uml::umlPackage::ASSOCIATION_CLASS,false); //101
-		}
+			return eAny(getDefaultAssociation(),uml::umlPackage::ASSOCIATION_CLASS,false); //101
 		case PSCS::Semantics::Actions::ActionsPackage::CS_DEFAULTCONSTRUCTSTRATEGY_ATTRIBUTE_GENERATEDREALIZINGCLASSES:
-		{
 			return eAnyBag(getGeneratedRealizingClasses(),uml::umlPackage::CLASS_CLASS); //102
-		}
 		case PSCS::Semantics::Actions::ActionsPackage::CS_DEFAULTCONSTRUCTSTRATEGY_ATTRIBUTE_LOCUS:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getLocus();
-			return eAny(returnValue,fUML::Semantics::Loci::LociPackage::LOCUS_CLASS,false); //100
-		}
+			return eAny(getLocus(),fUML::Semantics::Loci::LociPackage::LOCUS_CLASS,false); //100
 	}
 	return CS_ConstructStrategyImpl::eGet(featureID, resolve, coreType);
 }

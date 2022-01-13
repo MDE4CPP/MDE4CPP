@@ -271,10 +271,7 @@ Any PrimitiveValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::PRIMITIVEVALUE_ATTRIBUTE_TYPE:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getType();
-			return eAny(returnValue,uml::umlPackage::PRIMITIVETYPE_CLASS,false); //890
-		}
+			return eAny(getType(),uml::umlPackage::PRIMITIVETYPE_CLASS,false); //890
 	}
 	return fUML::Semantics::Values::ValueImpl::eGet(featureID, resolve, coreType);
 }

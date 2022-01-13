@@ -45,8 +45,8 @@
 
 #include <exception> // used in Persistence
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
-#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
+#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "uml/umlFactory.hpp"
 #include "uml/Class.hpp"
 #include "uml/Classifier.hpp"
@@ -437,14 +437,9 @@ Any ObjectImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::OBJECT_ATTRIBUTE_OBJECTACTIVATION:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getObjectActivation();
-			return eAny(returnValue,fUML::Semantics::CommonBehavior::CommonBehaviorPackage::OBJECTACTIVATION_CLASS,false); //803
-		}
+			return eAny(getObjectActivation(),fUML::Semantics::CommonBehavior::CommonBehaviorPackage::OBJECTACTIVATION_CLASS,false); //803
 		case fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::OBJECT_ATTRIBUTE_TYPES:
-		{
 			return eAnyBag(getTypes(),uml::umlPackage::CLASSIFIER_CLASS); //802
-		}
 	}
 	return ExtensionalValueImpl::eGet(featureID, resolve, coreType);
 }

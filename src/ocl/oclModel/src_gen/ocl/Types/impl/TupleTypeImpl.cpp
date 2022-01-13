@@ -36,9 +36,9 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
+#include "ecore/ecoreFactory.hpp"
 #include "ocl/Types/TypesFactory.hpp"
 #include "ocl/Values/ValuesFactory.hpp"
-#include "ecore/ecoreFactory.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EDataType.hpp"
 #include "ecore/EPackage.hpp"
@@ -302,14 +302,9 @@ Any TupleTypeImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case ocl::Types::TypesPackage::TUPLETYPE_ATTRIBUTE_INSTANCE:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getInstance();
-			return eAny(returnValue,ocl::Values::ValuesPackage::TUPLEVALUE_CLASS,false); //899
-		}
+			return eAny(getInstance(),ocl::Values::ValuesPackage::TUPLEVALUE_CLASS,false); //899
 		case ocl::Types::TypesPackage::TUPLETYPE_ATTRIBUTE_PARTS:
-		{
 			return eAnyBag(getParts(),ocl::Types::TypesPackage::NAMETYPEBINDING_CLASS); //8910
-		}
 	}
 	return ecore::EDataTypeImpl::eGet(featureID, resolve, coreType);
 }

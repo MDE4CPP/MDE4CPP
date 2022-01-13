@@ -360,15 +360,9 @@ Any ExecutionSpecificationImpl::eGet(int featureID, bool resolve, bool coreType)
 	switch(featureID)
 	{
 		case uml::umlPackage::EXECUTIONSPECIFICATION_ATTRIBUTE_FINISH:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getFinish();
-			return eAny(returnValue,uml::umlPackage::OCCURRENCESPECIFICATION_CLASS,false); //9113
-		}
+			return eAny(getFinish(),uml::umlPackage::OCCURRENCESPECIFICATION_CLASS,false); //9113
 		case uml::umlPackage::EXECUTIONSPECIFICATION_ATTRIBUTE_START:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getStart();
-			return eAny(returnValue,uml::umlPackage::OCCURRENCESPECIFICATION_CLASS,false); //9114
-		}
+			return eAny(getStart(),uml::umlPackage::OCCURRENCESPECIFICATION_CLASS,false); //9114
 	}
 	return InteractionFragmentImpl::eGet(featureID, resolve, coreType);
 }

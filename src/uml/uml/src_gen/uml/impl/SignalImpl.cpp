@@ -499,9 +499,7 @@ Any SignalImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::SIGNAL_ATTRIBUTE_OWNEDATTRIBUTE:
-		{
 			return eAnyBag(getOwnedAttribute(),uml::umlPackage::PROPERTY_CLASS); //21538
-		}
 	}
 	return ClassifierImpl::eGet(featureID, resolve, coreType);
 }

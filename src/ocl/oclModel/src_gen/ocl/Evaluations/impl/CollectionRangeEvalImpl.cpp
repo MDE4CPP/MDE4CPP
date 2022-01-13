@@ -287,15 +287,9 @@ Any CollectionRangeEvalImpl::eGet(int featureID, bool resolve, bool coreType) co
 	switch(featureID)
 	{
 		case ocl::Evaluations::EvaluationsPackage::COLLECTIONRANGEEVAL_ATTRIBUTE_FIRST:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getFirst();
-			return eAny(returnValue,ocl::Evaluations::EvaluationsPackage::OCLEXPEVAL_CLASS,false); //203
-		}
+			return eAny(getFirst(),ocl::Evaluations::EvaluationsPackage::OCLEXPEVAL_CLASS,false); //203
 		case ocl::Evaluations::EvaluationsPackage::COLLECTIONRANGEEVAL_ATTRIBUTE_LAST:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getLast();
-			return eAny(returnValue,ocl::Evaluations::EvaluationsPackage::OCLEXPEVAL_CLASS,false); //204
-		}
+			return eAny(getLast(),ocl::Evaluations::EvaluationsPackage::OCLEXPEVAL_CLASS,false); //204
 	}
 	return CollectionLiteralPartEvalImpl::eGet(featureID, resolve, coreType);
 }

@@ -36,8 +36,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "ecore/ecoreFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
+#include "ecore/ecoreFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
 #include "ocl/Expressions/CallExp.hpp"
 #include "ocl/Expressions/CollectionRange.hpp"
@@ -401,10 +401,7 @@ Any VariableExpImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case ocl::Expressions::ExpressionsPackage::VARIABLEEXP_ATTRIBUTE_REFERREDVARIABLE:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getReferredVariable();
-			return eAny(returnValue,ocl::Expressions::ExpressionsPackage::VARIABLE_CLASS,false); //9922
-		}
+			return eAny(getReferredVariable(),ocl::Expressions::ExpressionsPackage::VARIABLE_CLASS,false); //9922
 	}
 	return OclExpressionImpl::eGet(featureID, resolve, coreType);
 }

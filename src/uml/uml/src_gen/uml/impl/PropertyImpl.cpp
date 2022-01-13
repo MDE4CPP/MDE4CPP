@@ -1120,10 +1120,7 @@ Any PropertyImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::PROPERTY_ATTRIBUTE_AGGREGATION:
 			return eAny(getAggregation(),uml::umlPackage::AGGREGATIONKIND_CLASS,false); //18530
 		case uml::umlPackage::PROPERTY_ATTRIBUTE_ASSOCIATION:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getAssociation();
-			return eAny(returnValue,uml::umlPackage::ASSOCIATION_CLASS,false); //18543
-		}
+			return eAny(getAssociation(),uml::umlPackage::ASSOCIATION_CLASS,false); //18543
 		case uml::umlPackage::PROPERTY_ATTRIBUTE_ASSOCIATIONEND:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getAssociationEnd().lock();
@@ -1142,10 +1139,7 @@ Any PropertyImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::PROPERTY_ATTRIBUTE_DEFAULT:
 			return eAny(getDefault(),ecore::ecorePackage::ESTRING_CLASS,false); //18529
 		case uml::umlPackage::PROPERTY_ATTRIBUTE_DEFAULTVALUE:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getDefaultValue();
-			return eAny(returnValue,uml::umlPackage::VALUESPECIFICATION_CLASS,false); //18534
-		}
+			return eAny(getDefaultValue(),uml::umlPackage::VALUESPECIFICATION_CLASS,false); //18534
 		case uml::umlPackage::PROPERTY_ATTRIBUTE_INTERFACE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getInterface().lock();
@@ -1160,27 +1154,18 @@ Any PropertyImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::PROPERTY_ATTRIBUTE_ISID:
 			return eAny(getIsID(),ecore::ecorePackage::EBOOLEAN_CLASS,false); //18538
 		case uml::umlPackage::PROPERTY_ATTRIBUTE_OPPOSITE:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getOpposite();
-			return eAny(returnValue,uml::umlPackage::PROPERTY_CLASS,false); //18539
-		}
+			return eAny(getOpposite(),uml::umlPackage::PROPERTY_CLASS,false); //18539
 		case uml::umlPackage::PROPERTY_ATTRIBUTE_OWNINGASSOCIATION:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getOwningAssociation().lock();
 			return eAny(returnValue,uml::umlPackage::ASSOCIATION_CLASS,false); //18540
 		}
 		case uml::umlPackage::PROPERTY_ATTRIBUTE_QUALIFIER:
-		{
 			return eAnyBag(getQualifier(),uml::umlPackage::PROPERTY_CLASS); //18532
-		}
 		case uml::umlPackage::PROPERTY_ATTRIBUTE_REDEFINEDPROPERTY:
-		{
 			return eAnyBag(getRedefinedProperty(),uml::umlPackage::PROPERTY_CLASS); //18541
-		}
 		case uml::umlPackage::PROPERTY_ATTRIBUTE_SUBSETTEDPROPERTY:
-		{
 			return eAnyBag(getSubsettedProperty(),uml::umlPackage::PROPERTY_CLASS); //18542
-		}
 	}
 	Any result;
 	result = ConnectableElementImpl::eGet(featureID, resolve, coreType);

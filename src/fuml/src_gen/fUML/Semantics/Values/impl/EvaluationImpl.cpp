@@ -36,8 +36,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "uml/umlFactory.hpp"
+#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "fUML/Semantics/Loci/Locus.hpp"
 #include "fUML/Semantics/Loci/SemanticVisitor.hpp"
 #include "fUML/Semantics/Values/Value.hpp"
@@ -277,15 +277,9 @@ Any EvaluationImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case fUML::Semantics::Values::ValuesPackage::EVALUATION_ATTRIBUTE_LOCUS:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getLocus();
-			return eAny(returnValue,fUML::Semantics::Loci::LociPackage::LOCUS_CLASS,false); //421
-		}
+			return eAny(getLocus(),fUML::Semantics::Loci::LociPackage::LOCUS_CLASS,false); //421
 		case fUML::Semantics::Values::ValuesPackage::EVALUATION_ATTRIBUTE_SPECIFICATION:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getSpecification();
-			return eAny(returnValue,uml::umlPackage::VALUESPECIFICATION_CLASS,false); //420
-		}
+			return eAny(getSpecification(),uml::umlPackage::VALUESPECIFICATION_CLASS,false); //420
 	}
 	return fUML::Semantics::Loci::SemanticVisitorImpl::eGet(featureID, resolve, coreType);
 }

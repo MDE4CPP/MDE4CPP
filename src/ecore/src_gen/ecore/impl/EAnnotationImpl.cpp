@@ -429,9 +429,7 @@ Any EAnnotationImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case ecore::ecorePackage::EANNOTATION_ATTRIBUTE_CONTENTS:
-		{
 			return eAnyBag(getContents(),ecore::ecorePackage::EOBJECT_CLASS); //26
-		}
 		case ecore::ecorePackage::EANNOTATION_ATTRIBUTE_DETAILS:
 			return eAny(getDetails(),ecore::ecorePackage::EMAP_CLASS,false); //28
 		case ecore::ecorePackage::EANNOTATION_ATTRIBUTE_EMODELELEMENT:
@@ -440,9 +438,7 @@ Any EAnnotationImpl::eGet(int featureID, bool resolve, bool coreType) const
 			return eAny(returnValue,ecore::ecorePackage::EMODELELEMENT_CLASS,false); //25
 		}
 		case ecore::ecorePackage::EANNOTATION_ATTRIBUTE_REFERENCES:
-		{
 			return eAnyBag(getReferences(),ecore::ecorePackage::EOBJECT_CLASS); //27
-		}
 		case ecore::ecorePackage::EANNOTATION_ATTRIBUTE_SOURCE:
 			return eAny(getSource(),ecore::ecorePackage::ESTRING_CLASS,false); //24
 	}

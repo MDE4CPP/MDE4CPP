@@ -36,8 +36,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "ecore/ecoreFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
+#include "ecore/ecoreFactory.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClassifier.hpp"
 #include "ecore/EGenericType.hpp"
@@ -368,24 +368,13 @@ Any ExpressionInOclImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_BODYEXPRESSION:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getBodyExpression();
-			return eAny(returnValue,ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_CLASS,false); //2810
-		}
+			return eAny(getBodyExpression(),ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_CLASS,false); //2810
 		case ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_CONTEXTVARIABLE:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getContextVariable();
-			return eAny(returnValue,ocl::Expressions::ExpressionsPackage::VARIABLE_CLASS,false); //2811
-		}
+			return eAny(getContextVariable(),ocl::Expressions::ExpressionsPackage::VARIABLE_CLASS,false); //2811
 		case ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_PARAMETERVARIABLE:
-		{
 			return eAnyBag(getParameterVariable(),ocl::Expressions::ExpressionsPackage::VARIABLE_CLASS); //2813
-		}
 		case ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_RESULTVARIABLE:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getResultVariable();
-			return eAny(returnValue,ocl::Expressions::ExpressionsPackage::VARIABLE_CLASS,false); //2812
-		}
+			return eAny(getResultVariable(),ocl::Expressions::ExpressionsPackage::VARIABLE_CLASS,false); //2812
 	}
 	return ecore::ETypedElementImpl::eGet(featureID, resolve, coreType);
 }

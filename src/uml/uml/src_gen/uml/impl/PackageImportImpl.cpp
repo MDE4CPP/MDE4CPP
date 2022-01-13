@@ -440,10 +440,7 @@ Any PackageImportImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::PACKAGEIMPORT_ATTRIBUTE_IMPORTEDPACKAGE:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getImportedPackage();
-			return eAny(returnValue,uml::umlPackage::PACKAGE_CLASS,false); //1716
-		}
+			return eAny(getImportedPackage(),uml::umlPackage::PACKAGE_CLASS,false); //1716
 		case uml::umlPackage::PACKAGEIMPORT_ATTRIBUTE_IMPORTINGNAMESPACE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getImportingNamespace().lock();

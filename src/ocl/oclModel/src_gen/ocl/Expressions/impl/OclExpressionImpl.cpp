@@ -36,8 +36,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "ecore/ecoreFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
+#include "ecore/ecoreFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
 #include "ocl/Expressions/CallExp.hpp"
 #include "ocl/Expressions/CollectionRange.hpp"
@@ -680,10 +680,7 @@ Any OclExpressionImpl::eGet(int featureID, bool resolve, bool coreType) const
 			return eAny(returnValue,ocl::Expressions::ExpressionsPackage::VARIABLE_CLASS,false); //6112
 		}
 		case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_INSTANCE:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getInstance();
-			return eAny(returnValue,ocl::Evaluations::EvaluationsPackage::OCLEXPEVAL_CLASS,false); //6121
-		}
+			return eAny(getInstance(),ocl::Evaluations::EvaluationsPackage::OCLEXPEVAL_CLASS,false); //6121
 		case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_LASTOWNER:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getLastOwner().lock();

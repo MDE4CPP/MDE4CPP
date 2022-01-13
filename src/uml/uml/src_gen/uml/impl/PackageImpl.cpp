@@ -993,34 +993,22 @@ Any PackageImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::PACKAGE_ATTRIBUTE_URI:
 			return eAny(getURI(),ecore::ecorePackage::ESTRING_CLASS,false); //17020
 		case uml::umlPackage::PACKAGE_ATTRIBUTE_NESTEDPACKAGE:
-		{
 			return eAnyBag(getNestedPackage(),uml::umlPackage::PACKAGE_CLASS); //17021
-		}
 		case uml::umlPackage::PACKAGE_ATTRIBUTE_NESTINGPACKAGE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getNestingPackage().lock();
 			return eAny(returnValue,uml::umlPackage::PACKAGE_CLASS,false); //17022
 		}
 		case uml::umlPackage::PACKAGE_ATTRIBUTE_OWNEDSTEREOTYPE:
-		{
 			return eAnyBag(getOwnedStereotype(),uml::umlPackage::STEREOTYPE_CLASS); //17023
-		}
 		case uml::umlPackage::PACKAGE_ATTRIBUTE_OWNEDTYPE:
-		{
 			return eAnyBag(getOwnedType(),uml::umlPackage::TYPE_CLASS); //17024
-		}
 		case uml::umlPackage::PACKAGE_ATTRIBUTE_PACKAGEMERGE:
-		{
 			return eAnyBag(getPackageMerge(),uml::umlPackage::PACKAGEMERGE_CLASS); //17025
-		}
 		case uml::umlPackage::PACKAGE_ATTRIBUTE_PACKAGEDELEMENT:
-		{
 			return eAnyBag(getPackagedElement(),uml::umlPackage::PACKAGEABLEELEMENT_CLASS); //17026
-		}
 		case uml::umlPackage::PACKAGE_ATTRIBUTE_PROFILEAPPLICATION:
-		{
 			return eAnyBag(getProfileApplication(),uml::umlPackage::PROFILEAPPLICATION_CLASS); //17027
-		}
 	}
 	Any result;
 	result = NamespaceImpl::eGet(featureID, resolve, coreType);

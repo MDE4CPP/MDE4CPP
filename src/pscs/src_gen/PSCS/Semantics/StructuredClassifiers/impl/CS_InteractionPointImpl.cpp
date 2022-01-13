@@ -39,9 +39,9 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "uml/umlFactory.hpp"
-#include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
 #include "PSCS/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
+#include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
+#include "uml/umlFactory.hpp"
 #include "PSCS/Semantics/StructuredClassifiers/CS_Reference.hpp"
 #include "uml/Class.hpp"
 #include "uml/Classifier.hpp"
@@ -344,15 +344,9 @@ Any CS_InteractionPointImpl::eGet(int featureID, bool resolve, bool coreType) co
 	switch(featureID)
 	{
 		case PSCS::Semantics::StructuredClassifiers::StructuredClassifiersPackage::CS_INTERACTIONPOINT_ATTRIBUTE_DEFININGPORT:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getDefiningPort();
-			return eAny(returnValue,uml::umlPackage::PORT_CLASS,false); //172
-		}
+			return eAny(getDefiningPort(),uml::umlPackage::PORT_CLASS,false); //172
 		case PSCS::Semantics::StructuredClassifiers::StructuredClassifiersPackage::CS_INTERACTIONPOINT_ATTRIBUTE_OWNER:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getOwner();
-			return eAny(returnValue,PSCS::Semantics::StructuredClassifiers::StructuredClassifiersPackage::CS_REFERENCE_CLASS,false); //171
-		}
+			return eAny(getOwner(),PSCS::Semantics::StructuredClassifiers::StructuredClassifiersPackage::CS_REFERENCE_CLASS,false); //171
 	}
 	return fUML::Semantics::StructuredClassifiers::ReferenceImpl::eGet(featureID, resolve, coreType);
 }

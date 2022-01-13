@@ -305,10 +305,7 @@ Any LinkEndCreationDataImpl::eGet(int featureID, bool resolve, bool coreType) co
 	switch(featureID)
 	{
 		case uml::umlPackage::LINKENDCREATIONDATA_ATTRIBUTE_INSERTAT:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getInsertAt();
-			return eAny(returnValue,uml::umlPackage::INPUTPIN_CLASS,false); //1346
-		}
+			return eAny(getInsertAt(),uml::umlPackage::INPUTPIN_CLASS,false); //1346
 		case uml::umlPackage::LINKENDCREATIONDATA_ATTRIBUTE_ISREPLACEALL:
 			return eAny(getIsReplaceAll(),ecore::ecorePackage::EBOOLEAN_CLASS,false); //1347
 	}

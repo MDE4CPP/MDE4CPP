@@ -38,9 +38,9 @@
 #include <exception> // used in Persistence
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
+#include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "fUML/Semantics/Values/ValuesFactory.hpp"
 #include "uml/umlFactory.hpp"
-#include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "ocl/Evaluations/CollectionLiteralPartEval.hpp"
 #include "ocl/Evaluations/EvalEnvironment.hpp"
 #include "ocl/Evaluations/LiteralExpEval.hpp"
@@ -265,9 +265,7 @@ Any CollectionLiteralExpEvalImpl::eGet(int featureID, bool resolve, bool coreTyp
 	switch(featureID)
 	{
 		case ocl::Evaluations::EvaluationsPackage::COLLECTIONLITERALEXPEVAL_ATTRIBUTE_PARTS:
-		{
 			return eAnyBag(getParts(),ocl::Evaluations::EvaluationsPackage::COLLECTIONLITERALPARTEVAL_CLASS); //166
-		}
 	}
 	return LiteralExpEvalImpl::eGet(featureID, resolve, coreType);
 }

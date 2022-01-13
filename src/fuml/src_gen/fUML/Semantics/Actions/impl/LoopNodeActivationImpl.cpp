@@ -318,9 +318,7 @@ Any LoopNodeActivationImpl::eGet(int featureID, bool resolve, bool coreType) con
 	switch(featureID)
 	{
 		case fUML::Semantics::Actions::ActionsPackage::LOOPNODEACTIVATION_ATTRIBUTE_BODYOUTPUTLISTS:
-		{
 			return eAnyBag(getBodyOutputLists(),fUML::Semantics::Actions::ActionsPackage::VALUES_CLASS); //7812
-		}
 	}
 	return StructuredActivityNodeActivationImpl::eGet(featureID, resolve, coreType);
 }

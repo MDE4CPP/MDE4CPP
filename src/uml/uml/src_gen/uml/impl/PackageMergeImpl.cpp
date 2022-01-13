@@ -375,10 +375,7 @@ Any PackageMergeImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::PACKAGEMERGE_ATTRIBUTE_MERGEDPACKAGE:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getMergedPackage();
-			return eAny(returnValue,uml::umlPackage::PACKAGE_CLASS,false); //1726
-		}
+			return eAny(getMergedPackage(),uml::umlPackage::PACKAGE_CLASS,false); //1726
 		case uml::umlPackage::PACKAGEMERGE_ATTRIBUTE_RECEIVINGPACKAGE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getReceivingPackage().lock();

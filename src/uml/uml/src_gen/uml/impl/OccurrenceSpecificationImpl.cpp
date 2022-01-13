@@ -374,13 +374,9 @@ Any OccurrenceSpecificationImpl::eGet(int featureID, bool resolve, bool coreType
 	switch(featureID)
 	{
 		case uml::umlPackage::OCCURRENCESPECIFICATION_ATTRIBUTE_TOAFTER:
-		{
 			return eAnyBag(getToAfter(),uml::umlPackage::GENERALORDERING_CLASS); //16313
-		}
 		case uml::umlPackage::OCCURRENCESPECIFICATION_ATTRIBUTE_TOBEFORE:
-		{
 			return eAnyBag(getToBefore(),uml::umlPackage::GENERALORDERING_CLASS); //16314
-		}
 	}
 	return InteractionFragmentImpl::eGet(featureID, resolve, coreType);
 }

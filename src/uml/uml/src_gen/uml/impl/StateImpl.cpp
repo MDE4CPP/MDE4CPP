@@ -949,32 +949,17 @@ Any StateImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::STATE_ATTRIBUTE_CONNECTION:
-		{
 			return eAnyBag(getConnection(),uml::umlPackage::CONNECTIONPOINTREFERENCE_CLASS); //22021
-		}
 		case uml::umlPackage::STATE_ATTRIBUTE_CONNECTIONPOINT:
-		{
 			return eAnyBag(getConnectionPoint(),uml::umlPackage::PSEUDOSTATE_CLASS); //22022
-		}
 		case uml::umlPackage::STATE_ATTRIBUTE_DEFERRABLETRIGGER:
-		{
 			return eAnyBag(getDeferrableTrigger(),uml::umlPackage::TRIGGER_CLASS); //22023
-		}
 		case uml::umlPackage::STATE_ATTRIBUTE_DOACTIVITY:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getDoActivity();
-			return eAny(returnValue,uml::umlPackage::BEHAVIOR_CLASS,false); //22024
-		}
+			return eAny(getDoActivity(),uml::umlPackage::BEHAVIOR_CLASS,false); //22024
 		case uml::umlPackage::STATE_ATTRIBUTE_ENTRY:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getEntry();
-			return eAny(returnValue,uml::umlPackage::BEHAVIOR_CLASS,false); //22025
-		}
+			return eAny(getEntry(),uml::umlPackage::BEHAVIOR_CLASS,false); //22025
 		case uml::umlPackage::STATE_ATTRIBUTE_EXIT:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getExit();
-			return eAny(returnValue,uml::umlPackage::BEHAVIOR_CLASS,false); //22026
-		}
+			return eAny(getExit(),uml::umlPackage::BEHAVIOR_CLASS,false); //22026
 		case uml::umlPackage::STATE_ATTRIBUTE_ISCOMPOSITE:
 			return eAny(getIsComposite(),ecore::ecorePackage::EBOOLEAN_CLASS,false); //22027
 		case uml::umlPackage::STATE_ATTRIBUTE_ISORTHOGONAL:
@@ -984,24 +969,13 @@ Any StateImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::STATE_ATTRIBUTE_ISSUBMACHINESTATE:
 			return eAny(getIsSubmachineState(),ecore::ecorePackage::EBOOLEAN_CLASS,false); //22030
 		case uml::umlPackage::STATE_ATTRIBUTE_REDEFINEDSTATE:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getRedefinedState();
-			return eAny(returnValue,uml::umlPackage::STATE_CLASS,false); //22031
-		}
+			return eAny(getRedefinedState(),uml::umlPackage::STATE_CLASS,false); //22031
 		case uml::umlPackage::STATE_ATTRIBUTE_REGION:
-		{
 			return eAnyBag(getRegion(),uml::umlPackage::REGION_CLASS); //22034
-		}
 		case uml::umlPackage::STATE_ATTRIBUTE_STATEINVARIANT:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getStateInvariant();
-			return eAny(returnValue,uml::umlPackage::CONSTRAINT_CLASS,false); //22032
-		}
+			return eAny(getStateInvariant(),uml::umlPackage::CONSTRAINT_CLASS,false); //22032
 		case uml::umlPackage::STATE_ATTRIBUTE_SUBMACHINE:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getSubmachine();
-			return eAny(returnValue,uml::umlPackage::STATEMACHINE_CLASS,false); //22033
-		}
+			return eAny(getSubmachine(),uml::umlPackage::STATEMACHINE_CLASS,false); //22033
 	}
 	Any result;
 	result = NamespaceImpl::eGet(featureID, resolve, coreType);

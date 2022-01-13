@@ -947,62 +947,33 @@ Any EClassImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case ecore::ecorePackage::ECLASS_ATTRIBUTE_ABSTRACT:
 			return eAny(isAbstract(),ecore::ecorePackage::EBOOLEAN_CLASS,false); //1311
 		case ecore::ecorePackage::ECLASS_ATTRIBUTE_EALLATTRIBUTES:
-		{
 			return eAnyBag(getEAllAttributes(),ecore::ecorePackage::EATTRIBUTE_CLASS); //1315
-		}
 		case ecore::ecorePackage::ECLASS_ATTRIBUTE_EALLCONTAINMENTS:
-		{
 			return eAnyBag(getEAllContainments(),ecore::ecorePackage::EREFERENCE_CLASS); //1319
-		}
 		case ecore::ecorePackage::ECLASS_ATTRIBUTE_EALLGENERICSUPERTYPES:
-		{
 			return eAnyBag(getEAllGenericSuperTypes(),ecore::ecorePackage::EGENERICTYPE_CLASS); //1326
-		}
 		case ecore::ecorePackage::ECLASS_ATTRIBUTE_EALLOPERATIONS:
-		{
 			return eAnyBag(getEAllOperations(),ecore::ecorePackage::EOPERATION_CLASS); //1320
-		}
 		case ecore::ecorePackage::ECLASS_ATTRIBUTE_EALLREFERENCES:
-		{
 			return eAnyBag(getEAllReferences(),ecore::ecorePackage::EREFERENCE_CLASS); //1316
-		}
 		case ecore::ecorePackage::ECLASS_ATTRIBUTE_EALLSTRUCTURALFEATURES:
-		{
 			return eAnyBag(getEAllStructuralFeatures(),ecore::ecorePackage::ESTRUCTURALFEATURE_CLASS); //1321
-		}
 		case ecore::ecorePackage::ECLASS_ATTRIBUTE_EALLSUPERTYPES:
-		{
 			return eAnyBag(getEAllSuperTypes(),ecore::ecorePackage::ECLASS_CLASS); //1322
-		}
 		case ecore::ecorePackage::ECLASS_ATTRIBUTE_EATTRIBUTES:
-		{
 			return eAnyBag(getEAttributes(),ecore::ecorePackage::EATTRIBUTE_CLASS); //1318
-		}
 		case ecore::ecorePackage::ECLASS_ATTRIBUTE_EGENERICSUPERTYPES:
-		{
 			return eAnyBag(getEGenericSuperTypes(),ecore::ecorePackage::EGENERICTYPE_CLASS); //1325
-		}
 		case ecore::ecorePackage::ECLASS_ATTRIBUTE_EIDATTRIBUTE:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getEIDAttribute();
-			return eAny(returnValue,ecore::ecorePackage::EATTRIBUTE_CLASS,false); //1323
-		}
+			return eAny(getEIDAttribute(),ecore::ecorePackage::EATTRIBUTE_CLASS,false); //1323
 		case ecore::ecorePackage::ECLASS_ATTRIBUTE_EOPERATIONS:
-		{
 			return eAnyBag(getEOperations(),ecore::ecorePackage::EOPERATION_CLASS); //1314
-		}
 		case ecore::ecorePackage::ECLASS_ATTRIBUTE_EREFERENCES:
-		{
 			return eAnyBag(getEReferences(),ecore::ecorePackage::EREFERENCE_CLASS); //1317
-		}
 		case ecore::ecorePackage::ECLASS_ATTRIBUTE_ESTRUCTURALFEATURES:
-		{
 			return eAnyBag(getEStructuralFeatures(),ecore::ecorePackage::ESTRUCTURALFEATURE_CLASS); //1324
-		}
 		case ecore::ecorePackage::ECLASS_ATTRIBUTE_ESUPERTYPES:
-		{
 			return eAnyBag(getESuperTypes(),ecore::ecorePackage::ECLASS_CLASS); //1313
-		}
 		case ecore::ecorePackage::ECLASS_ATTRIBUTE_INTERFACE:
 			return eAny(isInterface(),ecore::ecorePackage::EBOOLEAN_CLASS,false); //1312
 	}

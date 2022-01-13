@@ -478,9 +478,7 @@ Any ComponentRealizationImpl::eGet(int featureID, bool resolve, bool coreType) c
 			return eAny(returnValue,uml::umlPackage::COMPONENT_CLASS,false); //4819
 		}
 		case uml::umlPackage::COMPONENTREALIZATION_ATTRIBUTE_REALIZINGCLASSIFIER:
-		{
 			return eAnyBag(getRealizingClassifier(),uml::umlPackage::CLASSIFIER_CLASS); //4818
-		}
 	}
 	return RealizationImpl::eGet(featureID, resolve, coreType);
 }

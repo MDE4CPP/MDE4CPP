@@ -1013,24 +1013,15 @@ Any ActionActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case fUML::Semantics::Actions::ActionsPackage::ACTIONACTIVATION_ATTRIBUTE_ACTION:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getAction();
-			return eAny(returnValue,uml::umlPackage::ACTION_CLASS,false); //510
-		}
+			return eAny(getAction(),uml::umlPackage::ACTION_CLASS,false); //510
 		case fUML::Semantics::Actions::ActionsPackage::ACTIONACTIVATION_ATTRIBUTE_FIRING:
 			return eAny(isFiring(),ecore::ecorePackage::EBOOLEAN_CLASS,false); //57
 		case fUML::Semantics::Actions::ActionsPackage::ACTIONACTIVATION_ATTRIBUTE_INPUTPINACTIVATION:
-		{
 			return eAnyBag(getInputPinActivation(),fUML::Semantics::Actions::ActionsPackage::INPUTPINACTIVATION_CLASS); //58
-		}
 		case fUML::Semantics::Actions::ActionsPackage::ACTIONACTIVATION_ATTRIBUTE_OUTPUTPINACTIVATION:
-		{
 			return eAnyBag(getOutputPinActivation(),fUML::Semantics::Actions::ActionsPackage::OUTPUTPINACTIVATION_CLASS); //59
-		}
 		case fUML::Semantics::Actions::ActionsPackage::ACTIONACTIVATION_ATTRIBUTE_PINACTIVATION:
-		{
 			return eAnyBag(getPinActivation(),fUML::Semantics::Actions::ActionsPackage::PINACTIVATION_CLASS); //56
-		}
 	}
 	return fUML::Semantics::Activities::ActivityNodeActivationImpl::eGet(featureID, resolve, coreType);
 }

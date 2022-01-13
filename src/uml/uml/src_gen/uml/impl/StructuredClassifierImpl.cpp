@@ -626,21 +626,13 @@ Any StructuredClassifierImpl::eGet(int featureID, bool resolve, bool coreType) c
 	switch(featureID)
 	{
 		case uml::umlPackage::STRUCTUREDCLASSIFIER_ATTRIBUTE_OWNEDATTRIBUTE:
-		{
 			return eAnyBag(getOwnedAttribute(),uml::umlPackage::PROPERTY_CLASS); //22838
-		}
 		case uml::umlPackage::STRUCTUREDCLASSIFIER_ATTRIBUTE_OWNEDCONNECTOR:
-		{
 			return eAnyBag(getOwnedConnector(),uml::umlPackage::CONNECTOR_CLASS); //22839
-		}
 		case uml::umlPackage::STRUCTUREDCLASSIFIER_ATTRIBUTE_PART:
-		{
 			return eAnyBag(getPart(),uml::umlPackage::PROPERTY_CLASS); //22840
-		}
 		case uml::umlPackage::STRUCTUREDCLASSIFIER_ATTRIBUTE_ROLE:
-		{
 			return eAnyBag(getRole(),uml::umlPackage::CONNECTABLEELEMENT_CLASS); //22841
-		}
 	}
 	return ClassifierImpl::eGet(featureID, resolve, coreType);
 }

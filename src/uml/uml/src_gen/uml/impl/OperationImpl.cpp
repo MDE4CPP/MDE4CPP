@@ -978,10 +978,7 @@ Any OperationImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::OPERATION_ATTRIBUTE_BODYCONDITION:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getBodyCondition();
-			return eAny(returnValue,uml::umlPackage::CONSTRAINT_CLASS,false); //16730
-		}
+			return eAny(getBodyCondition(),uml::umlPackage::CONSTRAINT_CLASS,false); //16730
 		case uml::umlPackage::OPERATION_ATTRIBUTE_CLASS:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getClass().lock();
@@ -1006,26 +1003,15 @@ Any OperationImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::OPERATION_ATTRIBUTE_LOWER:
 			return eAny(getLower(),ecore::ecorePackage::EINT_CLASS,false); //16737
 		case uml::umlPackage::OPERATION_ATTRIBUTE_OWNEDPARAMETER:
-		{
 			return eAnyBag(getProperty_OwnedParameter(),uml::umlPackage::PARAMETER_CLASS); //16743
-		}
 		case uml::umlPackage::OPERATION_ATTRIBUTE_POSTCONDITION:
-		{
 			return eAnyBag(getPostcondition(),uml::umlPackage::CONSTRAINT_CLASS); //16738
-		}
 		case uml::umlPackage::OPERATION_ATTRIBUTE_PRECONDITION:
-		{
 			return eAnyBag(getPrecondition(),uml::umlPackage::CONSTRAINT_CLASS); //16739
-		}
 		case uml::umlPackage::OPERATION_ATTRIBUTE_REDEFINEDOPERATION:
-		{
 			return eAnyBag(getRedefinedOperation(),uml::umlPackage::OPERATION_CLASS); //16740
-		}
 		case uml::umlPackage::OPERATION_ATTRIBUTE_TYPE:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getType();
-			return eAny(returnValue,uml::umlPackage::TYPE_CLASS,false); //16741
-		}
+			return eAny(getType(),uml::umlPackage::TYPE_CLASS,false); //16741
 		case uml::umlPackage::OPERATION_ATTRIBUTE_UPPER:
 			return eAny(getUpper(),0,false); //16742
 	}

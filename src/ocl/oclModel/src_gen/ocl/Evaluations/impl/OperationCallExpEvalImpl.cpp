@@ -37,10 +37,10 @@
 
 #include <exception> // used in Persistence
 #include "fUML/Semantics/Loci/LociFactory.hpp"
-#include "fUML/Semantics/Values/ValuesFactory.hpp"
-#include "uml/umlFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
+#include "fUML/Semantics/Values/ValuesFactory.hpp"
 #include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
+#include "uml/umlFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
 #include "ocl/Evaluations/EvalEnvironment.hpp"
 #include "fUML/Semantics/Loci/Locus.hpp"
@@ -302,14 +302,9 @@ Any OperationCallExpEvalImpl::eGet(int featureID, bool resolve, bool coreType) c
 	switch(featureID)
 	{
 		case ocl::Evaluations::EvaluationsPackage::OPERATIONCALLEXPEVAL_ATTRIBUTE_ARGUMENTS:
-		{
 			return eAnyBag(getArguments(),ocl::Evaluations::EvaluationsPackage::OCLEXPEVAL_CLASS); //678
-		}
 		case ocl::Evaluations::EvaluationsPackage::OPERATIONCALLEXPEVAL_ATTRIBUTE_REFERREDOPERATION:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getReferredOperation();
-			return eAny(returnValue,fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::STRINGVALUE_CLASS,false); //677
-		}
+			return eAny(getReferredOperation(),fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::STRINGVALUE_CLASS,false); //677
 	}
 	return ModelPropertyCallExpEvalImpl::eGet(featureID, resolve, coreType);
 }

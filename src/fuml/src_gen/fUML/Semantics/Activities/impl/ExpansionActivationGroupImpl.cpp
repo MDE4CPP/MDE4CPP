@@ -480,24 +480,15 @@ Any ExpansionActivationGroupImpl::eGet(int featureID, bool resolve, bool coreTyp
 	switch(featureID)
 	{
 		case fUML::Semantics::Activities::ActivitiesPackage::EXPANSIONACTIVATIONGROUP_ATTRIBUTE_GROUPINPUTS:
-		{
 			return eAnyBag(getGroupInputs(),fUML::Semantics::Activities::ActivitiesPackage::EXPANSIONNODEACTIVATION_CLASS); //495
-		}
 		case fUML::Semantics::Activities::ActivitiesPackage::EXPANSIONACTIVATIONGROUP_ATTRIBUTE_GROUPOUTPUTS:
-		{
 			return eAnyBag(getGroupOutputs(),fUML::Semantics::Activities::ActivitiesPackage::EXPANSIONNODEACTIVATION_CLASS); //496
-		}
 		case fUML::Semantics::Activities::ActivitiesPackage::EXPANSIONACTIVATIONGROUP_ATTRIBUTE_INDEX:
 			return eAny(getIndex(),ecore::ecorePackage::EINT_CLASS,false); //497
 		case fUML::Semantics::Activities::ActivitiesPackage::EXPANSIONACTIVATIONGROUP_ATTRIBUTE_REGIONACTIVATION:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getRegionActivation();
-			return eAny(returnValue,fUML::Semantics::Activities::ActivitiesPackage::EXPANSIONREGIONACTIVATION_CLASS,false); //498
-		}
+			return eAny(getRegionActivation(),fUML::Semantics::Activities::ActivitiesPackage::EXPANSIONREGIONACTIVATION_CLASS,false); //498
 		case fUML::Semantics::Activities::ActivitiesPackage::EXPANSIONACTIVATIONGROUP_ATTRIBUTE_REGIONINPUTS:
-		{
 			return eAnyBag(getRegionInputs(),fUML::Semantics::Actions::ActionsPackage::OUTPUTPINACTIVATION_CLASS); //499
-		}
 	}
 	return ActivityNodeActivationGroupImpl::eGet(featureID, resolve, coreType);
 }

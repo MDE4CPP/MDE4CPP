@@ -402,13 +402,9 @@ Any ConnectionPointReferenceImpl::eGet(int featureID, bool resolve, bool coreTyp
 	switch(featureID)
 	{
 		case uml::umlPackage::CONNECTIONPOINTREFERENCE_ATTRIBUTE_ENTRY:
-		{
 			return eAnyBag(getEntry(),uml::umlPackage::PSEUDOSTATE_CLASS); //5212
-		}
 		case uml::umlPackage::CONNECTIONPOINTREFERENCE_ATTRIBUTE_EXIT:
-		{
 			return eAnyBag(getExit(),uml::umlPackage::PSEUDOSTATE_CLASS); //5213
-		}
 		case uml::umlPackage::CONNECTIONPOINTREFERENCE_ATTRIBUTE_STATE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getState().lock();

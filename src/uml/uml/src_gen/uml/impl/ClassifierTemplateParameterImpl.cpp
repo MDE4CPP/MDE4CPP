@@ -357,9 +357,7 @@ Any ClassifierTemplateParameterImpl::eGet(int featureID, bool resolve, bool core
 		case uml::umlPackage::CLASSIFIERTEMPLATEPARAMETER_ATTRIBUTE_ALLOWSUBSTITUTABLE:
 			return eAny(getAllowSubstitutable(),ecore::ecorePackage::EBOOLEAN_CLASS,false); //378
 		case uml::umlPackage::CLASSIFIERTEMPLATEPARAMETER_ATTRIBUTE_CONSTRAININGCLASSIFIER:
-		{
 			return eAnyBag(getConstrainingClassifier(),uml::umlPackage::CLASSIFIER_CLASS); //379
-		}
 	}
 	return TemplateParameterImpl::eGet(featureID, resolve, coreType);
 }

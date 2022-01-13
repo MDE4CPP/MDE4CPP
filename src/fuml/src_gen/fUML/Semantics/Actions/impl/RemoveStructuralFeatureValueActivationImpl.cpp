@@ -368,10 +368,7 @@ Any RemoveStructuralFeatureValueActivationImpl::eGet(int featureID, bool resolve
 	switch(featureID)
 	{
 		case fUML::Semantics::Actions::ActionsPackage::REMOVESTRUCTURALFEATUREVALUEACTIVATION_ATTRIBUTE_REMOVESTRUCTURALFEATUREVALUEACTION:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getRemoveStructuralFeatureValueAction();
-			return eAny(returnValue,uml::umlPackage::REMOVESTRUCTURALFEATUREVALUEACTION_CLASS,false); //10011
-		}
+			return eAny(getRemoveStructuralFeatureValueAction(),uml::umlPackage::REMOVESTRUCTURALFEATUREVALUEACTION_CLASS,false); //10011
 	}
 	return WriteStructuralFeatureActionActivationImpl::eGet(featureID, resolve, coreType);
 }

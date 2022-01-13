@@ -36,8 +36,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "ecore/ecoreFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
+#include "ecore/ecoreFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
 #include "ocl/Expressions/CallExp.hpp"
 #include "ocl/Expressions/CollectionLiteralPart.hpp"
@@ -497,9 +497,7 @@ Any CollectionLiteralExpImpl::eGet(int featureID, bool resolve, bool coreType) c
 		case ocl::Expressions::ExpressionsPackage::COLLECTIONLITERALEXP_ATTRIBUTE_KIND:
 			return eAny(getKind(),ocl::Expressions::ExpressionsPackage::COLLECTIONKIND_CLASS,false); //1522
 		case ocl::Expressions::ExpressionsPackage::COLLECTIONLITERALEXP_ATTRIBUTE_PART:
-		{
 			return eAnyBag(getPart(),ocl::Expressions::ExpressionsPackage::COLLECTIONLITERALPART_CLASS); //1523
-		}
 	}
 	return LiteralExpImpl::eGet(featureID, resolve, coreType);
 }

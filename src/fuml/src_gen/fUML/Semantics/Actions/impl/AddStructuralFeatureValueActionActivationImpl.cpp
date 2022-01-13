@@ -51,8 +51,8 @@
 
 #include <exception> // used in Persistence
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
-#include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "uml/umlFactory.hpp"
+#include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "uml/Action.hpp"
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
 #include "uml/ActivityNode.hpp"
@@ -478,10 +478,7 @@ Any AddStructuralFeatureValueActionActivationImpl::eGet(int featureID, bool reso
 	switch(featureID)
 	{
 		case fUML::Semantics::Actions::ActionsPackage::ADDSTRUCTURALFEATUREVALUEACTIONACTIVATION_ATTRIBUTE_ADDSTRUCTURALFEATUREVALUEACTION:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getAddStructuralFeatureValueAction();
-			return eAny(returnValue,uml::umlPackage::ADDSTRUCTURALFEATUREVALUEACTION_CLASS,false); //1211
-		}
+			return eAny(getAddStructuralFeatureValueAction(),uml::umlPackage::ADDSTRUCTURALFEATUREVALUEACTION_CLASS,false); //1211
 	}
 	return WriteStructuralFeatureActionActivationImpl::eGet(featureID, resolve, coreType);
 }

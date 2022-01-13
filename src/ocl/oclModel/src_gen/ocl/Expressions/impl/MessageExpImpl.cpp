@@ -36,9 +36,9 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "uml/umlFactory.hpp"
-#include "ecore/ecoreFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
+#include "ecore/ecoreFactory.hpp"
+#include "uml/umlFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
 #include "ocl/Expressions/CallExp.hpp"
 #include "uml/CallOperationAction.hpp"
@@ -504,24 +504,13 @@ Any MessageExpImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case ocl::Expressions::ExpressionsPackage::MESSAGEEXP_ATTRIBUTE_ARGUMENT:
-		{
 			return eAnyBag(getArgument(),ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_CLASS); //4923
-		}
 		case ocl::Expressions::ExpressionsPackage::MESSAGEEXP_ATTRIBUTE_CALLEDOPERATION:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getCalledOperation();
-			return eAny(returnValue,uml::umlPackage::CALLOPERATIONACTION_CLASS,false); //4924
-		}
+			return eAny(getCalledOperation(),uml::umlPackage::CALLOPERATIONACTION_CLASS,false); //4924
 		case ocl::Expressions::ExpressionsPackage::MESSAGEEXP_ATTRIBUTE_SENTSIGNAL:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getSentSignal();
-			return eAny(returnValue,uml::umlPackage::SENDSIGNALACTION_CLASS,false); //4925
-		}
+			return eAny(getSentSignal(),uml::umlPackage::SENDSIGNALACTION_CLASS,false); //4925
 		case ocl::Expressions::ExpressionsPackage::MESSAGEEXP_ATTRIBUTE_TARGET:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getTarget();
-			return eAny(returnValue,ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_CLASS,false); //4922
-		}
+			return eAny(getTarget(),ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_CLASS,false); //4922
 	}
 	return OclExpressionImpl::eGet(featureID, resolve, coreType);
 }

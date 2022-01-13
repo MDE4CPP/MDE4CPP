@@ -439,10 +439,7 @@ Any SubstitutionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::SUBSTITUTION_ATTRIBUTE_CONTRACT:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getContract();
-			return eAny(returnValue,uml::umlPackage::CLASSIFIER_CLASS,false); //22918
-		}
+			return eAny(getContract(),uml::umlPackage::CLASSIFIER_CLASS,false); //22918
 		case uml::umlPackage::SUBSTITUTION_ATTRIBUTE_SUBSTITUTINGCLASSIFIER:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getSubstitutingClassifier().lock();

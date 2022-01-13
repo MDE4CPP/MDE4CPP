@@ -38,9 +38,9 @@
 #include <exception> // used in Persistence
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
+#include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "fUML/Semantics/Values/ValuesFactory.hpp"
 #include "uml/umlFactory.hpp"
-#include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "ocl/Evaluations/EvalEnvironment.hpp"
 #include "fUML/Semantics/Loci/Locus.hpp"
 #include "ocl/Evaluations/OclExpEval.hpp"
@@ -320,16 +320,11 @@ Any OclMessageExpEvalImpl::eGet(int featureID, bool resolve, bool coreType) cons
 	switch(featureID)
 	{
 		case ocl::Evaluations::EvaluationsPackage::OCLMESSAGEEXPEVAL_ATTRIBUTE_ARGUMENTS:
-		{
 			return eAnyBag(getArguments(),ocl::Evaluations::EvaluationsPackage::OCLMESSAGEARGEVAL_CLASS); //637
-		}
 		case ocl::Evaluations::EvaluationsPackage::OCLMESSAGEEXPEVAL_ATTRIBUTE_NAME:
 			return eAny(getName(),ecore::ecorePackage::ESTRING_CLASS,false); //638
 		case ocl::Evaluations::EvaluationsPackage::OCLMESSAGEEXPEVAL_ATTRIBUTE_TARGET:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getTarget();
-			return eAny(returnValue,ocl::Evaluations::EvaluationsPackage::OCLEXPEVAL_CLASS,false); //636
-		}
+			return eAny(getTarget(),ocl::Evaluations::EvaluationsPackage::OCLEXPEVAL_CLASS,false); //636
 	}
 	return OclExpEvalImpl::eGet(featureID, resolve, coreType);
 }

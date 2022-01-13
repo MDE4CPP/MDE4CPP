@@ -462,30 +462,17 @@ Any ClauseImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::CLAUSE_ATTRIBUTE_BODY:
-		{
 			return eAnyBag(getBody(),uml::umlPackage::EXECUTABLENODE_CLASS); //383
-		}
 		case uml::umlPackage::CLAUSE_ATTRIBUTE_BODYOUTPUT:
-		{
 			return eAnyBag(getBodyOutput(),uml::umlPackage::OUTPUTPIN_CLASS); //384
-		}
 		case uml::umlPackage::CLAUSE_ATTRIBUTE_DECIDER:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getDecider();
-			return eAny(returnValue,uml::umlPackage::OUTPUTPIN_CLASS,false); //385
-		}
+			return eAny(getDecider(),uml::umlPackage::OUTPUTPIN_CLASS,false); //385
 		case uml::umlPackage::CLAUSE_ATTRIBUTE_PREDECESSORCLAUSE:
-		{
 			return eAnyBag(getPredecessorClause(),uml::umlPackage::CLAUSE_CLASS); //386
-		}
 		case uml::umlPackage::CLAUSE_ATTRIBUTE_SUCCESSORCLAUSE:
-		{
 			return eAnyBag(getSuccessorClause(),uml::umlPackage::CLAUSE_CLASS); //387
-		}
 		case uml::umlPackage::CLAUSE_ATTRIBUTE_TEST:
-		{
 			return eAnyBag(getTest(),uml::umlPackage::EXECUTABLENODE_CLASS); //388
-		}
 	}
 	return ElementImpl::eGet(featureID, resolve, coreType);
 }

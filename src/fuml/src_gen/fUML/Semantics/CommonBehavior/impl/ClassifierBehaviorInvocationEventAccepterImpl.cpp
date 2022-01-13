@@ -369,20 +369,11 @@ Any ClassifierBehaviorInvocationEventAccepterImpl::eGet(int featureID, bool reso
 	switch(featureID)
 	{
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::CLASSIFIERBEHAVIORINVOCATIONEVENTACCEPTER_ATTRIBUTE_CLASSIFIER:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getClassifier();
-			return eAny(returnValue,uml::umlPackage::CLASS_CLASS,false); //250
-		}
+			return eAny(getClassifier(),uml::umlPackage::CLASS_CLASS,false); //250
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::CLASSIFIERBEHAVIORINVOCATIONEVENTACCEPTER_ATTRIBUTE_EXECUTION:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getExecution();
-			return eAny(returnValue,fUML::Semantics::CommonBehavior::CommonBehaviorPackage::EXECUTION_CLASS,false); //251
-		}
+			return eAny(getExecution(),fUML::Semantics::CommonBehavior::CommonBehaviorPackage::EXECUTION_CLASS,false); //251
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::CLASSIFIERBEHAVIORINVOCATIONEVENTACCEPTER_ATTRIBUTE_OBJECTACTIVATION:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getObjectActivation();
-			return eAny(returnValue,fUML::Semantics::CommonBehavior::CommonBehaviorPackage::OBJECTACTIVATION_CLASS,false); //252
-		}
+			return eAny(getObjectActivation(),fUML::Semantics::CommonBehavior::CommonBehaviorPackage::OBJECTACTIVATION_CLASS,false); //252
 	}
 	return EventAccepterImpl::eGet(featureID, resolve, coreType);
 }

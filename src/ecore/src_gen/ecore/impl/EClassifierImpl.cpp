@@ -398,9 +398,7 @@ Any EClassifierImpl::eGet(int featureID, bool resolve, bool coreType) const
 			return eAny(returnValue,ecore::ecorePackage::EPACKAGE_CLASS,false); //149
 		}
 		case ecore::ecorePackage::ECLASSIFIER_ATTRIBUTE_ETYPEPARAMETERS:
-		{
 			return eAnyBag(getETypeParameters(),ecore::ecorePackage::ETYPEPARAMETER_CLASS); //1410
-		}
 		case ecore::ecorePackage::ECLASSIFIER_ATTRIBUTE_INSTANCECLASS:
 			return eAny(getInstanceClass(),ecore::ecorePackage::EJAVACLASS_CLASS,false); //146
 		case ecore::ecorePackage::ECLASSIFIER_ATTRIBUTE_INSTANCECLASSNAME:

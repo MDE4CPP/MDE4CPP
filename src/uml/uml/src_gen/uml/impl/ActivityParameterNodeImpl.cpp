@@ -395,10 +395,7 @@ Any ActivityParameterNodeImpl::eGet(int featureID, bool resolve, bool coreType) 
 	switch(featureID)
 	{
 		case uml::umlPackage::ACTIVITYPARAMETERNODE_ATTRIBUTE_PARAMETER:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getParameter();
-			return eAny(returnValue,uml::umlPackage::PARAMETER_CLASS,false); //1226
-		}
+			return eAny(getParameter(),uml::umlPackage::PARAMETER_CLASS,false); //1226
 	}
 	return ObjectNodeImpl::eGet(featureID, resolve, coreType);
 }

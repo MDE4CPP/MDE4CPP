@@ -39,8 +39,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
 #include "PSCS/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
+#include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
 #include "PSCS/Semantics/StructuredClassifiers/CS_InteractionPoint.hpp"
 #include "PSCS/Semantics/StructuredClassifiers/CS_Object.hpp"
 #include "fUML/Semantics/CommonBehavior/EventOccurrence.hpp"
@@ -355,10 +355,7 @@ Any CS_ReferenceImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case PSCS::Semantics::StructuredClassifiers::StructuredClassifiersPackage::CS_REFERENCE_ATTRIBUTE_COMPOSITEREFERENT:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getCompositeReferent();
-			return eAny(returnValue,PSCS::Semantics::StructuredClassifiers::StructuredClassifiersPackage::CS_OBJECT_CLASS,false); //261
-		}
+			return eAny(getCompositeReferent(),PSCS::Semantics::StructuredClassifiers::StructuredClassifiersPackage::CS_OBJECT_CLASS,false); //261
 	}
 	return fUML::Semantics::StructuredClassifiers::ReferenceImpl::eGet(featureID, resolve, coreType);
 }

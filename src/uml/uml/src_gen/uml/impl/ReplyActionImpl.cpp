@@ -518,19 +518,11 @@ Any ReplyActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::REPLYACTION_ATTRIBUTE_REPLYTOCALL:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getReplyToCall();
-			return eAny(returnValue,uml::umlPackage::TRIGGER_CLASS,false); //21127
-		}
+			return eAny(getReplyToCall(),uml::umlPackage::TRIGGER_CLASS,false); //21127
 		case uml::umlPackage::REPLYACTION_ATTRIBUTE_REPLYVALUE:
-		{
 			return eAnyBag(getReplyValue(),uml::umlPackage::INPUTPIN_CLASS); //21128
-		}
 		case uml::umlPackage::REPLYACTION_ATTRIBUTE_RETURNINFORMATION:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getReturnInformation();
-			return eAny(returnValue,uml::umlPackage::INPUTPIN_CLASS,false); //21129
-		}
+			return eAny(getReturnInformation(),uml::umlPackage::INPUTPIN_CLASS,false); //21129
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
 }

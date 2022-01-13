@@ -421,19 +421,11 @@ Any EReferenceImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case ecore::ecorePackage::EREFERENCE_ATTRIBUTE_CONTAINMENT:
 			return eAny(isContainment(),ecore::ecorePackage::EBOOLEAN_CLASS,false); //4522
 		case ecore::ecorePackage::EREFERENCE_ATTRIBUTE_EKEYS:
-		{
 			return eAnyBag(getEKeys(),ecore::ecorePackage::EATTRIBUTE_CLASS); //4527
-		}
 		case ecore::ecorePackage::EREFERENCE_ATTRIBUTE_EOPPOSITE:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getEOpposite();
-			return eAny(returnValue,ecore::ecorePackage::EREFERENCE_CLASS,false); //4525
-		}
+			return eAny(getEOpposite(),ecore::ecorePackage::EREFERENCE_CLASS,false); //4525
 		case ecore::ecorePackage::EREFERENCE_ATTRIBUTE_EREFERENCETYPE:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getEReferenceType();
-			return eAny(returnValue,ecore::ecorePackage::ECLASS_CLASS,false); //4526
-		}
+			return eAny(getEReferenceType(),ecore::ecorePackage::ECLASS_CLASS,false); //4526
 		case ecore::ecorePackage::EREFERENCE_ATTRIBUTE_RESOLVEPROXIES:
 			return eAny(isResolveProxies(),ecore::ecorePackage::EBOOLEAN_CLASS,false); //4524
 	}

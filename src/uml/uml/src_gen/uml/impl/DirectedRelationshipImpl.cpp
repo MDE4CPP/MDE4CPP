@@ -275,13 +275,9 @@ Any DirectedRelationshipImpl::eGet(int featureID, bool resolve, bool coreType) c
 	switch(featureID)
 	{
 		case uml::umlPackage::DIRECTEDRELATIONSHIP_ATTRIBUTE_SOURCE:
-		{
 			return eAnyBag(getSource(),uml::umlPackage::ELEMENT_CLASS); //764
-		}
 		case uml::umlPackage::DIRECTEDRELATIONSHIP_ATTRIBUTE_TARGET:
-		{
 			return eAnyBag(getTarget(),uml::umlPackage::ELEMENT_CLASS); //765
-		}
 	}
 	return RelationshipImpl::eGet(featureID, resolve, coreType);
 }

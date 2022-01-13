@@ -455,15 +455,9 @@ Any CreateObjectActionImpl::eGet(int featureID, bool resolve, bool coreType) con
 	switch(featureID)
 	{
 		case uml::umlPackage::CREATEOBJECTACTION_ATTRIBUTE_CLASSIFIER:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getClassifier();
-			return eAny(returnValue,uml::umlPackage::CLASSIFIER_CLASS,false); //6327
-		}
+			return eAny(getClassifier(),uml::umlPackage::CLASSIFIER_CLASS,false); //6327
 		case uml::umlPackage::CREATEOBJECTACTION_ATTRIBUTE_RESULT:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getResult();
-			return eAny(returnValue,uml::umlPackage::OUTPUTPIN_CLASS,false); //6328
-		}
+			return eAny(getResult(),uml::umlPackage::OUTPUTPIN_CLASS,false); //6328
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
 }

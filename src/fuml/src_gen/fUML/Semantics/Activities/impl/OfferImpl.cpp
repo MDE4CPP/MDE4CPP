@@ -335,9 +335,7 @@ Any OfferImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case fUML::Semantics::Activities::ActivitiesPackage::OFFER_ATTRIBUTE_OFFEREDTOKENS:
-		{
 			return eAnyBag(getOfferedTokens(),fUML::Semantics::Activities::ActivitiesPackage::TOKEN_CLASS); //840
-		}
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
 }

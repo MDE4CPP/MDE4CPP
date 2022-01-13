@@ -568,13 +568,9 @@ Any ProfileImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::PROFILE_ATTRIBUTE_METACLASSREFERENCE:
-		{
 			return eAnyBag(getMetaclassReference(),uml::umlPackage::ELEMENTIMPORT_CLASS); //18328
-		}
 		case uml::umlPackage::PROFILE_ATTRIBUTE_METAMODELREFERENCE:
-		{
 			return eAnyBag(getMetamodelReference(),uml::umlPackage::PACKAGEIMPORT_CLASS); //18329
-		}
 	}
 	return PackageImpl::eGet(featureID, resolve, coreType);
 }

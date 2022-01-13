@@ -452,19 +452,11 @@ Any ProtocolTransitionImpl::eGet(int featureID, bool resolve, bool coreType) con
 	switch(featureID)
 	{
 		case uml::umlPackage::PROTOCOLTRANSITION_ATTRIBUTE_POSTCONDITION:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getPostCondition();
-			return eAny(returnValue,uml::umlPackage::CONSTRAINT_CLASS,false); //18826
-		}
+			return eAny(getPostCondition(),uml::umlPackage::CONSTRAINT_CLASS,false); //18826
 		case uml::umlPackage::PROTOCOLTRANSITION_ATTRIBUTE_PRECONDITION:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getPreCondition();
-			return eAny(returnValue,uml::umlPackage::CONSTRAINT_CLASS,false); //18827
-		}
+			return eAny(getPreCondition(),uml::umlPackage::CONSTRAINT_CLASS,false); //18827
 		case uml::umlPackage::PROTOCOLTRANSITION_ATTRIBUTE_REFERRED:
-		{
 			return eAnyBag(getReferred(),uml::umlPackage::OPERATION_CLASS); //18828
-		}
 	}
 	return TransitionImpl::eGet(featureID, resolve, coreType);
 }

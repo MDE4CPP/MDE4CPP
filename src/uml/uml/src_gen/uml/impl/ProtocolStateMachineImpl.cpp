@@ -586,9 +586,7 @@ Any ProtocolStateMachineImpl::eGet(int featureID, bool resolve, bool coreType) c
 	switch(featureID)
 	{
 		case uml::umlPackage::PROTOCOLSTATEMACHINE_ATTRIBUTE_CONFORMANCE:
-		{
 			return eAnyBag(getConformance(),uml::umlPackage::PROTOCOLCONFORMANCE_CLASS); //18766
-		}
 	}
 	return StateMachineImpl::eGet(featureID, resolve, coreType);
 }

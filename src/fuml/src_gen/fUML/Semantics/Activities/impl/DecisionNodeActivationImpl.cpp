@@ -649,15 +649,9 @@ Any DecisionNodeActivationImpl::eGet(int featureID, bool resolve, bool coreType)
 	switch(featureID)
 	{
 		case fUML::Semantics::Activities::ActivitiesPackage::DECISIONNODEACTIVATION_ATTRIBUTE_DECISIONINPUTEXECUTION:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getDecisionInputExecution();
-			return eAny(returnValue,fUML::Semantics::CommonBehavior::CommonBehaviorPackage::EXECUTION_CLASS,false); //376
-		}
+			return eAny(getDecisionInputExecution(),fUML::Semantics::CommonBehavior::CommonBehaviorPackage::EXECUTION_CLASS,false); //376
 		case fUML::Semantics::Activities::ActivitiesPackage::DECISIONNODEACTIVATION_ATTRIBUTE_DECISIONNODE:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getDecisionNode();
-			return eAny(returnValue,uml::umlPackage::DECISIONNODE_CLASS,false); //377
-		}
+			return eAny(getDecisionNode(),uml::umlPackage::DECISIONNODE_CLASS,false); //377
 	}
 	return ControlNodeActivationImpl::eGet(featureID, resolve, coreType);
 }

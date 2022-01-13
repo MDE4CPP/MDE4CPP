@@ -609,15 +609,11 @@ Any OpaqueActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::OPAQUEACTION_ATTRIBUTE_BODY:
 			return eAny(getBody(),ecore::ecorePackage::ESTRING_CLASS,true); //16427
 		case uml::umlPackage::OPAQUEACTION_ATTRIBUTE_INPUTVALUE:
-		{
 			return eAnyBag(getInputValue(),uml::umlPackage::INPUTPIN_CLASS); //16428
-		}
 		case uml::umlPackage::OPAQUEACTION_ATTRIBUTE_LANGUAGE:
 			return eAny(getLanguage(),ecore::ecorePackage::ESTRING_CLASS,true); //16429
 		case uml::umlPackage::OPAQUEACTION_ATTRIBUTE_OUTPUTVALUE:
-		{
 			return eAnyBag(getOutputValue(),uml::umlPackage::OUTPUTPIN_CLASS); //16430
-		}
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
 }

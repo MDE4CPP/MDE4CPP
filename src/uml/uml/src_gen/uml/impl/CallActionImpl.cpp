@@ -503,9 +503,7 @@ Any CallActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::CALLACTION_ATTRIBUTE_ISSYNCHRONOUS:
 			return eAny(getIsSynchronous(),ecore::ecorePackage::EBOOLEAN_CLASS,false); //2829
 		case uml::umlPackage::CALLACTION_ATTRIBUTE_RESULT:
-		{
 			return eAnyBag(getResult(),uml::umlPackage::OUTPUTPIN_CLASS); //2830
-		}
 	}
 	return InvocationActionImpl::eGet(featureID, resolve, coreType);
 }

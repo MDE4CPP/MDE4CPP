@@ -452,19 +452,11 @@ Any LocusImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case fUML::Semantics::Loci::LociPackage::LOCUS_ATTRIBUTE_EXECUTOR:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getExecutor();
-			return eAny(returnValue,fUML::Semantics::Loci::LociPackage::EXECUTOR_CLASS,false); //770
-		}
+			return eAny(getExecutor(),fUML::Semantics::Loci::LociPackage::EXECUTOR_CLASS,false); //770
 		case fUML::Semantics::Loci::LociPackage::LOCUS_ATTRIBUTE_EXTENSIONALVALUES:
-		{
 			return eAnyBag(getExtensionalValues(),fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::EXTENSIONALVALUE_CLASS); //772
-		}
 		case fUML::Semantics::Loci::LociPackage::LOCUS_ATTRIBUTE_FACTORY:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getFactory();
-			return eAny(returnValue,fUML::Semantics::Loci::LociPackage::EXECUTIONFACTORY_CLASS,false); //771
-		}
+			return eAny(getFactory(),fUML::Semantics::Loci::LociPackage::EXECUTIONFACTORY_CLASS,false); //771
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
 }

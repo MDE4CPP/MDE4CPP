@@ -504,9 +504,7 @@ Any EnumerationImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::ENUMERATION_ATTRIBUTE_OWNEDLITERAL:
-		{
 			return eAnyBag(getOwnedLiteral(),uml::umlPackage::ENUMERATIONLITERAL_CLASS); //8440
-		}
 	}
 	return DataTypeImpl::eGet(featureID, resolve, coreType);
 }

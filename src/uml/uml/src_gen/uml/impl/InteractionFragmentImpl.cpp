@@ -450,9 +450,7 @@ Any InteractionFragmentImpl::eGet(int featureID, bool resolve, bool coreType) co
 	switch(featureID)
 	{
 		case uml::umlPackage::INTERACTIONFRAGMENT_ATTRIBUTE_COVERED:
-		{
 			return eAnyBag(getCovered(),uml::umlPackage::LIFELINE_CLASS); //1219
-		}
 		case uml::umlPackage::INTERACTIONFRAGMENT_ATTRIBUTE_ENCLOSINGINTERACTION:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getEnclosingInteraction().lock();
@@ -464,9 +462,7 @@ Any InteractionFragmentImpl::eGet(int featureID, bool resolve, bool coreType) co
 			return eAny(returnValue,uml::umlPackage::INTERACTIONOPERAND_CLASS,false); //12110
 		}
 		case uml::umlPackage::INTERACTIONFRAGMENT_ATTRIBUTE_GENERALORDERING:
-		{
 			return eAnyBag(getGeneralOrdering(),uml::umlPackage::GENERALORDERING_CLASS); //12112
-		}
 	}
 	return NamedElementImpl::eGet(featureID, resolve, coreType);
 }

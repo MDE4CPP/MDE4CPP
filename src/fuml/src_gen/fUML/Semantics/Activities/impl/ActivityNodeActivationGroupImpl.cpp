@@ -866,17 +866,11 @@ Any ActivityNodeActivationGroupImpl::eGet(int featureID, bool resolve, bool core
 			return eAny(returnValue,fUML::Semantics::Actions::ActionsPackage::STRUCTUREDACTIVITYNODEACTIVATION_CLASS,false); //103
 		}
 		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYNODEACTIVATIONGROUP_ATTRIBUTE_EDGEINSTANCES:
-		{
 			return eAnyBag(getEdgeInstances(),fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYEDGEINSTANCE_CLASS); //100
-		}
 		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYNODEACTIVATIONGROUP_ATTRIBUTE_NODEACTIVATIONS:
-		{
 			return eAnyBag(getNodeActivations(),fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYNODEACTIVATION_CLASS); //101
-		}
 		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYNODEACTIVATIONGROUP_ATTRIBUTE_SUSPENDEDACTIVATIONS:
-		{
 			return eAnyBag(getSuspendedActivations(),fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYNODEACTIVATION_CLASS); //104
-		}
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
 }

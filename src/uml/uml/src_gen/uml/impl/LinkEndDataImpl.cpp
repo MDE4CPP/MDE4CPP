@@ -414,19 +414,11 @@ Any LinkEndDataImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::LINKENDDATA_ATTRIBUTE_END:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getEnd();
-			return eAny(returnValue,uml::umlPackage::PROPERTY_CLASS,false); //1353
-		}
+			return eAny(getEnd(),uml::umlPackage::PROPERTY_CLASS,false); //1353
 		case uml::umlPackage::LINKENDDATA_ATTRIBUTE_QUALIFIER:
-		{
 			return eAnyBag(getQualifier(),uml::umlPackage::QUALIFIERVALUE_CLASS); //1354
-		}
 		case uml::umlPackage::LINKENDDATA_ATTRIBUTE_VALUE:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getValue();
-			return eAny(returnValue,uml::umlPackage::INPUTPIN_CLASS,false); //1355
-		}
+			return eAny(getValue(),uml::umlPackage::INPUTPIN_CLASS,false); //1355
 	}
 	return ElementImpl::eGet(featureID, resolve, coreType);
 }

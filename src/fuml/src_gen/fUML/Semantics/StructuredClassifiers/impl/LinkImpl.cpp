@@ -40,9 +40,9 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
 #include "uml/umlFactory.hpp"
+#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "uml/Association.hpp"
 #include "uml/Classifier.hpp"
 #include "fUML/Semantics/StructuredClassifiers/ExtensionalValue.hpp"
@@ -395,10 +395,7 @@ Any LinkImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::LINK_ATTRIBUTE_TYPE:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getType();
-			return eAny(returnValue,uml::umlPackage::ASSOCIATION_CLASS,false); //682
-		}
+			return eAny(getType(),uml::umlPackage::ASSOCIATION_CLASS,false); //682
 	}
 	return ExtensionalValueImpl::eGet(featureID, resolve, coreType);
 }

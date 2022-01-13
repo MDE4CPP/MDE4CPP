@@ -606,28 +606,17 @@ Any ActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::ACTION_ATTRIBUTE_CONTEXT:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getContext();
-			return eAny(returnValue,uml::umlPackage::CLASSIFIER_CLASS,false); //421
-		}
+			return eAny(getContext(),uml::umlPackage::CLASSIFIER_CLASS,false); //421
 		case uml::umlPackage::ACTION_ATTRIBUTE_INPUT:
-		{
 			return eAnyBag(getInput(),uml::umlPackage::INPUTPIN_CLASS); //422
-		}
 		case uml::umlPackage::ACTION_ATTRIBUTE_ISLOCALLYREENTRANT:
 			return eAny(getIsLocallyReentrant(),ecore::ecorePackage::EBOOLEAN_CLASS,false); //423
 		case uml::umlPackage::ACTION_ATTRIBUTE_LOCALPOSTCONDITION:
-		{
 			return eAnyBag(getLocalPostcondition(),uml::umlPackage::CONSTRAINT_CLASS); //424
-		}
 		case uml::umlPackage::ACTION_ATTRIBUTE_LOCALPRECONDITION:
-		{
 			return eAnyBag(getLocalPrecondition(),uml::umlPackage::CONSTRAINT_CLASS); //425
-		}
 		case uml::umlPackage::ACTION_ATTRIBUTE_OUTPUT:
-		{
 			return eAnyBag(getOutput(),uml::umlPackage::OUTPUTPIN_CLASS); //426
-		}
 	}
 	return ExecutableNodeImpl::eGet(featureID, resolve, coreType);
 }

@@ -393,13 +393,9 @@ Any ParameterSetImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::PARAMETERSET_ATTRIBUTE_CONDITION:
-		{
 			return eAnyBag(getCondition(),uml::umlPackage::CONSTRAINT_CLASS); //1779
-		}
 		case uml::umlPackage::PARAMETERSET_ATTRIBUTE_PARAMETER:
-		{
 			return eAnyBag(getParameter(),uml::umlPackage::PARAMETER_CLASS); //17710
-		}
 	}
 	return NamedElementImpl::eGet(featureID, resolve, coreType);
 }

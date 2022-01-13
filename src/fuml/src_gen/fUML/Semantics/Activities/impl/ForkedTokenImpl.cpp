@@ -368,10 +368,7 @@ Any ForkedTokenImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case fUML::Semantics::Activities::ActivitiesPackage::FORKEDTOKEN_ATTRIBUTE_BASETOKEN:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getBaseToken();
-			return eAny(returnValue,fUML::Semantics::Activities::ActivitiesPackage::TOKEN_CLASS,false); //592
-		}
+			return eAny(getBaseToken(),fUML::Semantics::Activities::ActivitiesPackage::TOKEN_CLASS,false); //592
 		case fUML::Semantics::Activities::ActivitiesPackage::FORKEDTOKEN_ATTRIBUTE_BASETOKENISWITHDRAWN:
 			return eAny(isBaseTokenIsWithdrawn(),ecore::ecorePackage::EBOOLEAN_CLASS,false); //594
 		case fUML::Semantics::Activities::ActivitiesPackage::FORKEDTOKEN_ATTRIBUTE_REMAININGOFFERSCOUNT:

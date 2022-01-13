@@ -560,13 +560,9 @@ Any AcceptEventActionImpl::eGet(int featureID, bool resolve, bool coreType) cons
 		case uml::umlPackage::ACCEPTEVENTACTION_ATTRIBUTE_ISUNMARSHALL:
 			return eAny(getIsUnmarshall(),ecore::ecorePackage::EBOOLEAN_CLASS,false); //327
 		case uml::umlPackage::ACCEPTEVENTACTION_ATTRIBUTE_RESULT:
-		{
 			return eAnyBag(getResult(),uml::umlPackage::OUTPUTPIN_CLASS); //328
-		}
 		case uml::umlPackage::ACCEPTEVENTACTION_ATTRIBUTE_TRIGGER:
-		{
 			return eAnyBag(getTrigger(),uml::umlPackage::TRIGGER_CLASS); //329
-		}
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
 }

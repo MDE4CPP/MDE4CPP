@@ -411,19 +411,11 @@ Any ExceptionHandlerImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::EXCEPTIONHANDLER_ATTRIBUTE_EXCEPTIONINPUT:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getExceptionInput();
-			return eAny(returnValue,uml::umlPackage::OBJECTNODE_CLASS,false); //873
-		}
+			return eAny(getExceptionInput(),uml::umlPackage::OBJECTNODE_CLASS,false); //873
 		case uml::umlPackage::EXCEPTIONHANDLER_ATTRIBUTE_EXCEPTIONTYPE:
-		{
 			return eAnyBag(getExceptionType(),uml::umlPackage::CLASSIFIER_CLASS); //874
-		}
 		case uml::umlPackage::EXCEPTIONHANDLER_ATTRIBUTE_HANDLERBODY:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getHandlerBody();
-			return eAny(returnValue,uml::umlPackage::EXECUTABLENODE_CLASS,false); //875
-		}
+			return eAny(getHandlerBody(),uml::umlPackage::EXECUTABLENODE_CLASS,false); //875
 		case uml::umlPackage::EXCEPTIONHANDLER_ATTRIBUTE_PROTECTEDNODE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getProtectedNode().lock();

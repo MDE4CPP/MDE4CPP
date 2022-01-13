@@ -738,36 +738,19 @@ Any TransitionImpl::eGet(int featureID, bool resolve, bool coreType) const
 			return eAny(returnValue,uml::umlPackage::REGION_CLASS,false); //24125
 		}
 		case uml::umlPackage::TRANSITION_ATTRIBUTE_EFFECT:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getEffect();
-			return eAny(returnValue,uml::umlPackage::BEHAVIOR_CLASS,false); //24118
-		}
+			return eAny(getEffect(),uml::umlPackage::BEHAVIOR_CLASS,false); //24118
 		case uml::umlPackage::TRANSITION_ATTRIBUTE_GUARD:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getGuard();
-			return eAny(returnValue,uml::umlPackage::CONSTRAINT_CLASS,false); //24119
-		}
+			return eAny(getGuard(),uml::umlPackage::CONSTRAINT_CLASS,false); //24119
 		case uml::umlPackage::TRANSITION_ATTRIBUTE_KIND:
 			return eAny(getKind(),uml::umlPackage::TRANSITIONKIND_CLASS,false); //24120
 		case uml::umlPackage::TRANSITION_ATTRIBUTE_REDEFINEDTRANSITION:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getRedefinedTransition();
-			return eAny(returnValue,uml::umlPackage::TRANSITION_CLASS,false); //24121
-		}
+			return eAny(getRedefinedTransition(),uml::umlPackage::TRANSITION_CLASS,false); //24121
 		case uml::umlPackage::TRANSITION_ATTRIBUTE_SOURCE:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getSource();
-			return eAny(returnValue,uml::umlPackage::VERTEX_CLASS,false); //24122
-		}
+			return eAny(getSource(),uml::umlPackage::VERTEX_CLASS,false); //24122
 		case uml::umlPackage::TRANSITION_ATTRIBUTE_TARGET:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getTarget();
-			return eAny(returnValue,uml::umlPackage::VERTEX_CLASS,false); //24123
-		}
+			return eAny(getTarget(),uml::umlPackage::VERTEX_CLASS,false); //24123
 		case uml::umlPackage::TRANSITION_ATTRIBUTE_TRIGGER:
-		{
 			return eAnyBag(getTrigger(),uml::umlPackage::TRIGGER_CLASS); //24124
-		}
 	}
 	Any result;
 	result = NamespaceImpl::eGet(featureID, resolve, coreType);

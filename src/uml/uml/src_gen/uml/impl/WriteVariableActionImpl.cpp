@@ -393,10 +393,7 @@ Any WriteVariableActionImpl::eGet(int featureID, bool resolve, bool coreType) co
 	switch(featureID)
 	{
 		case uml::umlPackage::WRITEVARIABLEACTION_ATTRIBUTE_VALUE:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getValue();
-			return eAny(returnValue,uml::umlPackage::INPUTPIN_CLASS,false); //25828
-		}
+			return eAny(getValue(),uml::umlPackage::INPUTPIN_CLASS,false); //25828
 	}
 	return VariableActionImpl::eGet(featureID, resolve, coreType);
 }

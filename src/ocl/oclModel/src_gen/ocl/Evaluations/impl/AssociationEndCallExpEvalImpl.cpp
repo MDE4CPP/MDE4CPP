@@ -37,10 +37,10 @@
 
 #include <exception> // used in Persistence
 #include "fUML/Semantics/Loci/LociFactory.hpp"
-#include "fUML/Semantics/Values/ValuesFactory.hpp"
-#include "uml/umlFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
+#include "fUML/Semantics/Values/ValuesFactory.hpp"
 #include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
+#include "uml/umlFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
 #include "ocl/Evaluations/EvalEnvironment.hpp"
 #include "fUML/Semantics/Loci/Locus.hpp"
@@ -269,10 +269,7 @@ Any AssociationEndCallExpEvalImpl::eGet(int featureID, bool resolve, bool coreTy
 	switch(featureID)
 	{
 		case ocl::Evaluations::EvaluationsPackage::ASSOCIATIONENDCALLEXPEVAL_ATTRIBUTE_REFERREDASSOCIATIONEND:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getReferredAssociationEnd();
-			return eAny(returnValue,fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::STRINGVALUE_CLASS,false); //59
-		}
+			return eAny(getReferredAssociationEnd(),fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::STRINGVALUE_CLASS,false); //59
 	}
 	return NavigationCallExpEvalImpl::eGet(featureID, resolve, coreType);
 }

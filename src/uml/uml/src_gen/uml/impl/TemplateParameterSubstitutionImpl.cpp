@@ -399,20 +399,11 @@ Any TemplateParameterSubstitutionImpl::eGet(int featureID, bool resolve, bool co
 	switch(featureID)
 	{
 		case uml::umlPackage::TEMPLATEPARAMETERSUBSTITUTION_ATTRIBUTE_ACTUAL:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getActual();
-			return eAny(returnValue,uml::umlPackage::PARAMETERABLEELEMENT_CLASS,false); //2323
-		}
+			return eAny(getActual(),uml::umlPackage::PARAMETERABLEELEMENT_CLASS,false); //2323
 		case uml::umlPackage::TEMPLATEPARAMETERSUBSTITUTION_ATTRIBUTE_FORMAL:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getFormal();
-			return eAny(returnValue,uml::umlPackage::TEMPLATEPARAMETER_CLASS,false); //2324
-		}
+			return eAny(getFormal(),uml::umlPackage::TEMPLATEPARAMETER_CLASS,false); //2324
 		case uml::umlPackage::TEMPLATEPARAMETERSUBSTITUTION_ATTRIBUTE_OWNEDACTUAL:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getOwnedActual();
-			return eAny(returnValue,uml::umlPackage::PARAMETERABLEELEMENT_CLASS,false); //2325
-		}
+			return eAny(getOwnedActual(),uml::umlPackage::PARAMETERABLEELEMENT_CLASS,false); //2325
 		case uml::umlPackage::TEMPLATEPARAMETERSUBSTITUTION_ATTRIBUTE_TEMPLATEBINDING:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getTemplateBinding().lock();

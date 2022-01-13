@@ -696,33 +696,19 @@ Any InformationFlowImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::INFORMATIONFLOW_ATTRIBUTE_CONVEYED:
-		{
 			return eAnyBag(getConveyed(),uml::umlPackage::CLASSIFIER_CLASS); //11315
-		}
 		case uml::umlPackage::INFORMATIONFLOW_ATTRIBUTE_INFORMATIONSOURCE:
-		{
 			return eAnyBag(getInformationSource(),uml::umlPackage::NAMEDELEMENT_CLASS); //11316
-		}
 		case uml::umlPackage::INFORMATIONFLOW_ATTRIBUTE_INFORMATIONTARGET:
-		{
 			return eAnyBag(getInformationTarget(),uml::umlPackage::NAMEDELEMENT_CLASS); //11317
-		}
 		case uml::umlPackage::INFORMATIONFLOW_ATTRIBUTE_REALIZATION:
-		{
 			return eAnyBag(getRealization(),uml::umlPackage::RELATIONSHIP_CLASS); //11318
-		}
 		case uml::umlPackage::INFORMATIONFLOW_ATTRIBUTE_REALIZINGACTIVITYEDGE:
-		{
 			return eAnyBag(getRealizingActivityEdge(),uml::umlPackage::ACTIVITYEDGE_CLASS); //11319
-		}
 		case uml::umlPackage::INFORMATIONFLOW_ATTRIBUTE_REALIZINGCONNECTOR:
-		{
 			return eAnyBag(getRealizingConnector(),uml::umlPackage::CONNECTOR_CLASS); //11320
-		}
 		case uml::umlPackage::INFORMATIONFLOW_ATTRIBUTE_REALIZINGMESSAGE:
-		{
 			return eAnyBag(getRealizingMessage(),uml::umlPackage::MESSAGE_CLASS); //11321
-		}
 	}
 	Any result;
 	result = DirectedRelationshipImpl::eGet(featureID, resolve, coreType);

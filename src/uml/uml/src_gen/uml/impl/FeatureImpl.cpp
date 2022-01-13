@@ -295,9 +295,7 @@ Any FeatureImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::FEATURE_ATTRIBUTE_FEATURINGCLASSIFIER:
-		{
 			return eAnyBag(getFeaturingClassifier(),uml::umlPackage::CLASSIFIER_CLASS); //10112
-		}
 		case uml::umlPackage::FEATURE_ATTRIBUTE_ISSTATIC:
 			return eAny(getIsStatic(),ecore::ecorePackage::EBOOLEAN_CLASS,false); //10113
 	}

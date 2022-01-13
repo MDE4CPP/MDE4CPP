@@ -366,10 +366,7 @@ Any ReadStructuralFeatureActionActivationImpl::eGet(int featureID, bool resolve,
 	switch(featureID)
 	{
 		case fUML::Semantics::Actions::ActionsPackage::READSTRUCTURALFEATUREACTIONACTIVATION_ATTRIBUTE_READSTRUCTURALFEATUREACTION:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getReadStructuralFeatureAction();
-			return eAny(returnValue,uml::umlPackage::READSTRUCTURALFEATUREACTION_CLASS,false); //9411
-		}
+			return eAny(getReadStructuralFeatureAction(),uml::umlPackage::READSTRUCTURALFEATUREACTION_CLASS,false); //9411
 	}
 	return StructuralFeatureActionActivationImpl::eGet(featureID, resolve, coreType);
 }

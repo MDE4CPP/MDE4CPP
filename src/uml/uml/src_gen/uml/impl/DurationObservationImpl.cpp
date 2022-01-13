@@ -388,9 +388,7 @@ Any DurationObservationImpl::eGet(int featureID, bool resolve, bool coreType) co
 	switch(featureID)
 	{
 		case uml::umlPackage::DURATIONOBSERVATION_ATTRIBUTE_EVENT:
-		{
 			return eAnyBag(getEvent(),uml::umlPackage::NAMEDELEMENT_CLASS); //8012
-		}
 		case uml::umlPackage::DURATIONOBSERVATION_ATTRIBUTE_FIRSTEVENT:
 			return eAny(isFirstEvent(),ecore::ecorePackage::EBOOLEAN_CLASS,true); //8013
 	}

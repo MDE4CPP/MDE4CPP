@@ -509,13 +509,9 @@ Any LinkActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::LINKACTION_ATTRIBUTE_ENDDATA:
-		{
 			return eAnyBag(getEndData(),uml::umlPackage::LINKENDDATA_CLASS); //13327
-		}
 		case uml::umlPackage::LINKACTION_ATTRIBUTE_INPUTVALUE:
-		{
 			return eAnyBag(getInputValue(),uml::umlPackage::INPUTPIN_CLASS); //13328
-		}
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
 }

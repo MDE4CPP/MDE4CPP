@@ -602,15 +602,11 @@ Any ExpansionRegionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::EXPANSIONREGION_ATTRIBUTE_INPUTELEMENT:
-		{
 			return eAnyBag(getInputElement(),uml::umlPackage::EXPANSIONNODE_CLASS); //9446
-		}
 		case uml::umlPackage::EXPANSIONREGION_ATTRIBUTE_MODE:
 			return eAny(getMode(),uml::umlPackage::EXPANSIONKIND_CLASS,false); //9444
 		case uml::umlPackage::EXPANSIONREGION_ATTRIBUTE_OUTPUTELEMENT:
-		{
 			return eAnyBag(getOutputElement(),uml::umlPackage::EXPANSIONNODE_CLASS); //9445
-		}
 	}
 	return StructuredActivityNodeImpl::eGet(featureID, resolve, coreType);
 }

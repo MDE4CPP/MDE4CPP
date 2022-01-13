@@ -442,10 +442,7 @@ Any ReadLinkActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::READLINKACTION_ATTRIBUTE_RESULT:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getResult();
-			return eAny(returnValue,uml::umlPackage::OUTPUTPIN_CLASS,false); //19529
-		}
+			return eAny(getResult(),uml::umlPackage::OUTPUTPIN_CLASS,false); //19529
 	}
 	return LinkActionImpl::eGet(featureID, resolve, coreType);
 }

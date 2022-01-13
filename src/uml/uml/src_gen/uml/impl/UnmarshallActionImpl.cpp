@@ -552,19 +552,11 @@ Any UnmarshallActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::UNMARSHALLACTION_ATTRIBUTE_OBJECT:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getObject();
-			return eAny(returnValue,uml::umlPackage::INPUTPIN_CLASS,false); //24627
-		}
+			return eAny(getObject(),uml::umlPackage::INPUTPIN_CLASS,false); //24627
 		case uml::umlPackage::UNMARSHALLACTION_ATTRIBUTE_RESULT:
-		{
 			return eAnyBag(getResult(),uml::umlPackage::OUTPUTPIN_CLASS); //24628
-		}
 		case uml::umlPackage::UNMARSHALLACTION_ATTRIBUTE_UNMARSHALLTYPE:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getUnmarshallType();
-			return eAny(returnValue,uml::umlPackage::CLASSIFIER_CLASS,false); //24629
-		}
+			return eAny(getUnmarshallType(),uml::umlPackage::CLASSIFIER_CLASS,false); //24629
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
 }

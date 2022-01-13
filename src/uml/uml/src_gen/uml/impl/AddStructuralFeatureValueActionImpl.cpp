@@ -460,10 +460,7 @@ Any AddStructuralFeatureValueActionImpl::eGet(int featureID, bool resolve, bool 
 	switch(featureID)
 	{
 		case uml::umlPackage::ADDSTRUCTURALFEATUREVALUEACTION_ATTRIBUTE_INSERTAT:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getInsertAt();
-			return eAny(returnValue,uml::umlPackage::INPUTPIN_CLASS,false); //1531
-		}
+			return eAny(getInsertAt(),uml::umlPackage::INPUTPIN_CLASS,false); //1531
 		case uml::umlPackage::ADDSTRUCTURALFEATUREVALUEACTION_ATTRIBUTE_ISREPLACEALL:
 			return eAny(getIsReplaceAll(),ecore::ecorePackage::EBOOLEAN_CLASS,false); //1532
 	}

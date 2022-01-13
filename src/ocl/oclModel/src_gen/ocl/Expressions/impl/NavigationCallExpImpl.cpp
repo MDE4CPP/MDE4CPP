@@ -36,8 +36,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "ecore/ecoreFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
+#include "ecore/ecoreFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
 #include "ocl/Expressions/CallExp.hpp"
 #include "ocl/Expressions/CollectionRange.hpp"
@@ -459,14 +459,9 @@ Any NavigationCallExpImpl::eGet(int featureID, bool resolve, bool coreType) cons
 	switch(featureID)
 	{
 		case ocl::Expressions::ExpressionsPackage::NAVIGATIONCALLEXP_ATTRIBUTE_NAVIGATIONSOURCE:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getNavigationSource();
-			return eAny(returnValue,ecore::ecorePackage::EATTRIBUTE_CLASS,false); //5425
-		}
+			return eAny(getNavigationSource(),ecore::ecorePackage::EATTRIBUTE_CLASS,false); //5425
 		case ocl::Expressions::ExpressionsPackage::NAVIGATIONCALLEXP_ATTRIBUTE_QUALIFIER:
-		{
 			return eAnyBag(getQualifier(),ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_CLASS); //5424
-		}
 	}
 	return FeatureCallExpImpl::eGet(featureID, resolve, coreType);
 }

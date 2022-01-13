@@ -513,16 +513,11 @@ Any NamedElementImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::NAMEDELEMENT_ATTRIBUTE_CLIENTDEPENDENCY:
-		{
 			return eAnyBag(getClientDependency(),uml::umlPackage::DEPENDENCY_CLASS); //1553
-		}
 		case uml::umlPackage::NAMEDELEMENT_ATTRIBUTE_NAME:
 			return eAny(getName(),ecore::ecorePackage::ESTRING_CLASS,false); //1554
 		case uml::umlPackage::NAMEDELEMENT_ATTRIBUTE_NAMEEXPRESSION:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getNameExpression();
-			return eAny(returnValue,uml::umlPackage::STRINGEXPRESSION_CLASS,false); //1555
-		}
+			return eAny(getNameExpression(),uml::umlPackage::STRINGEXPRESSION_CLASS,false); //1555
 		case uml::umlPackage::NAMEDELEMENT_ATTRIBUTE_NAMESPACE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getNamespace().lock();

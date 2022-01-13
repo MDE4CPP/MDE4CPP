@@ -807,17 +807,11 @@ Any ExpansionRegionActivationImpl::eGet(int featureID, bool resolve, bool coreTy
 	switch(featureID)
 	{
 		case fUML::Semantics::Activities::ActivitiesPackage::EXPANSIONREGIONACTIVATION_ATTRIBUTE_ACTIVATIONGROUPS:
-		{
 			return eAnyBag(getActivationGroups(),fUML::Semantics::Activities::ActivitiesPackage::EXPANSIONACTIVATIONGROUP_CLASS); //5113
-		}
 		case fUML::Semantics::Activities::ActivitiesPackage::EXPANSIONREGIONACTIVATION_ATTRIBUTE_INPUTEXPANSIONTOKENS:
-		{
 			return eAnyBag(getInputExpansionTokens(),fUML::Semantics::Activities::ActivitiesPackage::TOKENSET_CLASS); //5112
-		}
 		case fUML::Semantics::Activities::ActivitiesPackage::EXPANSIONREGIONACTIVATION_ATTRIBUTE_INPUTTOKENS:
-		{
 			return eAnyBag(getInputTokens(),fUML::Semantics::Activities::ActivitiesPackage::TOKENSET_CLASS); //5111
-		}
 		case fUML::Semantics::Activities::ActivitiesPackage::EXPANSIONREGIONACTIVATION_ATTRIBUTE_NEXT:
 			return eAny(getNext(),ecore::ecorePackage::EINT_CLASS,false); //5114
 	}

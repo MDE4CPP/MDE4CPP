@@ -368,9 +368,7 @@ Any EEnumImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case ecore::ecorePackage::EENUM_ATTRIBUTE_ELITERALS:
-		{
 			return eAnyBag(getELiterals(),ecore::ecorePackage::EENUMLITERAL_CLASS); //2112
-		}
 	}
 	return EDataTypeImpl::eGet(featureID, resolve, coreType);
 }

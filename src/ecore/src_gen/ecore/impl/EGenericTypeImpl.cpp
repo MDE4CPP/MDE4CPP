@@ -437,34 +437,17 @@ Any EGenericTypeImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case ecore::ecorePackage::EGENERICTYPE_ATTRIBUTE_ECLASSIFIER:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getEClassifier();
-			return eAny(returnValue,ecore::ecorePackage::ECLASSIFIER_CLASS,false); //295
-		}
+			return eAny(getEClassifier(),ecore::ecorePackage::ECLASSIFIER_CLASS,false); //295
 		case ecore::ecorePackage::EGENERICTYPE_ATTRIBUTE_ELOWERBOUND:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getELowerBound();
-			return eAny(returnValue,ecore::ecorePackage::EGENERICTYPE_CLASS,false); //293
-		}
+			return eAny(getELowerBound(),ecore::ecorePackage::EGENERICTYPE_CLASS,false); //293
 		case ecore::ecorePackage::EGENERICTYPE_ATTRIBUTE_ERAWTYPE:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getERawType();
-			return eAny(returnValue,ecore::ecorePackage::ECLASSIFIER_CLASS,false); //292
-		}
+			return eAny(getERawType(),ecore::ecorePackage::ECLASSIFIER_CLASS,false); //292
 		case ecore::ecorePackage::EGENERICTYPE_ATTRIBUTE_ETYPEARGUMENTS:
-		{
 			return eAnyBag(getETypeArguments(),ecore::ecorePackage::EGENERICTYPE_CLASS); //291
-		}
 		case ecore::ecorePackage::EGENERICTYPE_ATTRIBUTE_ETYPEPARAMETER:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getETypeParameter();
-			return eAny(returnValue,ecore::ecorePackage::ETYPEPARAMETER_CLASS,false); //294
-		}
+			return eAny(getETypeParameter(),ecore::ecorePackage::ETYPEPARAMETER_CLASS,false); //294
 		case ecore::ecorePackage::EGENERICTYPE_ATTRIBUTE_EUPPERBOUND:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getEUpperBound();
-			return eAny(returnValue,ecore::ecorePackage::EGENERICTYPE_CLASS,false); //290
-		}
+			return eAny(getEUpperBound(),ecore::ecorePackage::EGENERICTYPE_CLASS,false); //290
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
 }

@@ -36,8 +36,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "ecore/ecoreFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
+#include "ecore/ecoreFactory.hpp"
 #include "ocl/Expressions/CollectionLiteralPart.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClassifier.hpp"
@@ -289,15 +289,9 @@ Any CollectionRangeImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case ocl::Expressions::ExpressionsPackage::COLLECTIONRANGE_ATTRIBUTE_FIRST:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getFirst();
-			return eAny(returnValue,ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_CLASS,false); //1910
-		}
+			return eAny(getFirst(),ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_CLASS,false); //1910
 		case ocl::Expressions::ExpressionsPackage::COLLECTIONRANGE_ATTRIBUTE_LAST:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getLast();
-			return eAny(returnValue,ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_CLASS,false); //1911
-		}
+			return eAny(getLast(),ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_CLASS,false); //1911
 	}
 	return CollectionLiteralPartImpl::eGet(featureID, resolve, coreType);
 }

@@ -630,21 +630,13 @@ Any BehavioralFeatureImpl::eGet(int featureID, bool resolve, bool coreType) cons
 		case uml::umlPackage::BEHAVIORALFEATURE_ATTRIBUTE_ISABSTRACT:
 			return eAny(getIsAbstract(),ecore::ecorePackage::EBOOLEAN_CLASS,false); //2521
 		case uml::umlPackage::BEHAVIORALFEATURE_ATTRIBUTE_METHOD:
-		{
 			return eAnyBag(getMethod(),uml::umlPackage::BEHAVIOR_CLASS); //2522
-		}
 		case uml::umlPackage::BEHAVIORALFEATURE_ATTRIBUTE_OWNEDPARAMETER:
-		{
 			return eAnyBag(getOwnedParameter(),uml::umlPackage::PARAMETER_CLASS); //2523
-		}
 		case uml::umlPackage::BEHAVIORALFEATURE_ATTRIBUTE_OWNEDPARAMETERSET:
-		{
 			return eAnyBag(getOwnedParameterSet(),uml::umlPackage::PARAMETERSET_CLASS); //2524
-		}
 		case uml::umlPackage::BEHAVIORALFEATURE_ATTRIBUTE_RAISEDEXCEPTION:
-		{
 			return eAnyBag(getRaisedException(),uml::umlPackage::TYPE_CLASS); //2525
-		}
 	}
 	Any result;
 	result = FeatureImpl::eGet(featureID, resolve, coreType);

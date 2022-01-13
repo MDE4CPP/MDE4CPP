@@ -453,15 +453,9 @@ Any StructuralFeatureActionImpl::eGet(int featureID, bool resolve, bool coreType
 	switch(featureID)
 	{
 		case uml::umlPackage::STRUCTURALFEATUREACTION_ATTRIBUTE_OBJECT:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getObject();
-			return eAny(returnValue,uml::umlPackage::INPUTPIN_CLASS,false); //22627
-		}
+			return eAny(getObject(),uml::umlPackage::INPUTPIN_CLASS,false); //22627
 		case uml::umlPackage::STRUCTURALFEATUREACTION_ATTRIBUTE_STRUCTURALFEATURE:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getStructuralFeature();
-			return eAny(returnValue,uml::umlPackage::STRUCTURALFEATURE_CLASS,false); //22628
-		}
+			return eAny(getStructuralFeature(),uml::umlPackage::STRUCTURALFEATURE_CLASS,false); //22628
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
 }

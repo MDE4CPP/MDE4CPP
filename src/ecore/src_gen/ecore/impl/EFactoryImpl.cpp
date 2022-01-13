@@ -537,10 +537,7 @@ Any EFactoryImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case ecore::ecorePackage::EFACTORY_ATTRIBUTE_EPACKAGE:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getEPackage();
-			return eAny(returnValue,ecore::ecorePackage::EPACKAGE_CLASS,false); //244
-		}
+			return eAny(getEPackage(),ecore::ecorePackage::EPACKAGE_CLASS,false); //244
 	}
 	return EModelElementImpl::eGet(featureID, resolve, coreType);
 }

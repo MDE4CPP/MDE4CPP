@@ -533,22 +533,13 @@ Any ReduceActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::REDUCEACTION_ATTRIBUTE_COLLECTION:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getCollection();
-			return eAny(returnValue,uml::umlPackage::INPUTPIN_CLASS,false); //20627
-		}
+			return eAny(getCollection(),uml::umlPackage::INPUTPIN_CLASS,false); //20627
 		case uml::umlPackage::REDUCEACTION_ATTRIBUTE_ISORDERED:
 			return eAny(getIsOrdered(),ecore::ecorePackage::EBOOLEAN_CLASS,false); //20628
 		case uml::umlPackage::REDUCEACTION_ATTRIBUTE_REDUCER:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getReducer();
-			return eAny(returnValue,uml::umlPackage::BEHAVIOR_CLASS,false); //20629
-		}
+			return eAny(getReducer(),uml::umlPackage::BEHAVIOR_CLASS,false); //20629
 		case uml::umlPackage::REDUCEACTION_ATTRIBUTE_RESULT:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getResult();
-			return eAny(returnValue,uml::umlPackage::OUTPUTPIN_CLASS,false); //20630
-		}
+			return eAny(getResult(),uml::umlPackage::OUTPUTPIN_CLASS,false); //20630
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
 }

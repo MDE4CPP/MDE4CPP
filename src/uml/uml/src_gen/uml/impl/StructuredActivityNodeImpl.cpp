@@ -906,27 +906,17 @@ Any StructuredActivityNodeImpl::eGet(int featureID, bool resolve, bool coreType)
 	switch(featureID)
 	{
 		case uml::umlPackage::STRUCTUREDACTIVITYNODE_ATTRIBUTE_EDGE:
-		{
 			return eAnyBag(getEdge(),uml::umlPackage::ACTIVITYEDGE_CLASS); //22738
-		}
 		case uml::umlPackage::STRUCTUREDACTIVITYNODE_ATTRIBUTE_MUSTISOLATE:
 			return eAny(getMustIsolate(),ecore::ecorePackage::EBOOLEAN_CLASS,false); //22739
 		case uml::umlPackage::STRUCTUREDACTIVITYNODE_ATTRIBUTE_NODE:
-		{
 			return eAnyBag(getNode(),uml::umlPackage::ACTIVITYNODE_CLASS); //22743
-		}
 		case uml::umlPackage::STRUCTUREDACTIVITYNODE_ATTRIBUTE_STRUCTUREDNODEINPUT:
-		{
 			return eAnyBag(getStructuredNodeInput(),uml::umlPackage::INPUTPIN_CLASS); //22740
-		}
 		case uml::umlPackage::STRUCTUREDACTIVITYNODE_ATTRIBUTE_STRUCTUREDNODEOUTPUT:
-		{
 			return eAnyBag(getStructuredNodeOutput(),uml::umlPackage::OUTPUTPIN_CLASS); //22741
-		}
 		case uml::umlPackage::STRUCTUREDACTIVITYNODE_ATTRIBUTE_VARIABLE:
-		{
 			return eAnyBag(getVariable(),uml::umlPackage::VARIABLE_CLASS); //22742
-		}
 	}
 	Any result;
 	result = ActionImpl::eGet(featureID, resolve, coreType);

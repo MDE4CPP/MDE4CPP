@@ -40,8 +40,8 @@
 
 #include <exception> // used in Persistence
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
-#include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Actions/ActionsFactory.hpp"
+#include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Actions/ActionActivation.hpp"
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
 #include "uml/ActivityNode.hpp"
@@ -369,10 +369,7 @@ Any PinActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
 			return eAny(returnValue,fUML::Semantics::Actions::ActionsPackage::ACTIONACTIVATION_CLASS,false); //887
 		}
 		case fUML::Semantics::Actions::ActionsPackage::PINACTIVATION_ATTRIBUTE_PIN:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getPin();
-			return eAny(returnValue,uml::umlPackage::PIN_CLASS,false); //888
-		}
+			return eAny(getPin(),uml::umlPackage::PIN_CLASS,false); //888
 	}
 	return fUML::Semantics::Activities::ObjectNodeActivationImpl::eGet(featureID, resolve, coreType);
 }

@@ -335,14 +335,9 @@ Any TriggerImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::TRIGGER_ATTRIBUTE_EVENT:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getEvent();
-			return eAny(returnValue,uml::umlPackage::EVENT_CLASS,false); //2439
-		}
+			return eAny(getEvent(),uml::umlPackage::EVENT_CLASS,false); //2439
 		case uml::umlPackage::TRIGGER_ATTRIBUTE_PORT:
-		{
 			return eAnyBag(getPort(),uml::umlPackage::PORT_CLASS); //24310
-		}
 	}
 	return NamedElementImpl::eGet(featureID, resolve, coreType);
 }

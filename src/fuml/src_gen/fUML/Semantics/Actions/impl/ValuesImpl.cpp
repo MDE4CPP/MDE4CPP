@@ -244,9 +244,7 @@ Any ValuesImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case fUML::Semantics::Actions::ActionsPackage::VALUES_ATTRIBUTE_VALUES:
-		{
 			return eAnyBag(getValues(),fUML::Semantics::Values::ValuesPackage::VALUE_CLASS); //1200
-		}
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
 }

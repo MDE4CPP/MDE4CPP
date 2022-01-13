@@ -430,10 +430,7 @@ Any CreateLinkObjectActionImpl::eGet(int featureID, bool resolve, bool coreType)
 	switch(featureID)
 	{
 		case uml::umlPackage::CREATELINKOBJECTACTION_ATTRIBUTE_RESULT:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getResult();
-			return eAny(returnValue,uml::umlPackage::OUTPUTPIN_CLASS,false); //6229
-		}
+			return eAny(getResult(),uml::umlPackage::OUTPUTPIN_CLASS,false); //6229
 	}
 	return CreateLinkActionImpl::eGet(featureID, resolve, coreType);
 }

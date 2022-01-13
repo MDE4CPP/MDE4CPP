@@ -459,9 +459,7 @@ Any OclMessageValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case ocl::Values::ValuesPackage::OCLMESSAGEVALUE_ATTRIBUTE_ARGUMENTS:
-		{
 			return eAnyBag(getArguments(),ocl::Values::ValuesPackage::NAMEVALUEBINDING_CLASS); //647
-		}
 		case ocl::Values::ValuesPackage::OCLMESSAGEVALUE_ATTRIBUTE_ISASYNCOPERATION:
 			return eAny(getIsAsyncOperation(),ecore::ecorePackage::EBOOLEAN_CLASS,false); //642
 		case ocl::Values::ValuesPackage::OCLMESSAGEVALUE_ATTRIBUTE_ISSIGNAL:
@@ -471,20 +469,11 @@ Any OclMessageValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case ocl::Values::ValuesPackage::OCLMESSAGEVALUE_ATTRIBUTE_NAME:
 			return eAny(getName(),ecore::ecorePackage::ESTRING_CLASS,false); //640
 		case ocl::Values::ValuesPackage::OCLMESSAGEVALUE_ATTRIBUTE_RETURNMESSAGE:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getReturnMessage();
-			return eAny(returnValue,ocl::Values::ValuesPackage::OCLMESSAGEVALUE_CLASS,false); //644
-		}
+			return eAny(getReturnMessage(),ocl::Values::ValuesPackage::OCLMESSAGEVALUE_CLASS,false); //644
 		case ocl::Values::ValuesPackage::OCLMESSAGEVALUE_ATTRIBUTE_SOURCE:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getSource();
-			return eAny(returnValue,ocl::Values::ValuesPackage::OBJECTVALUE_CLASS,false); //646
-		}
+			return eAny(getSource(),ocl::Values::ValuesPackage::OBJECTVALUE_CLASS,false); //646
 		case ocl::Values::ValuesPackage::OCLMESSAGEVALUE_ATTRIBUTE_TARGET:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getTarget();
-			return eAny(returnValue,ocl::Values::ValuesPackage::OBJECTVALUE_CLASS,false); //645
-		}
+			return eAny(getTarget(),ocl::Values::ValuesPackage::OBJECTVALUE_CLASS,false); //645
 	}
 	return fUML::Semantics::Values::ValueImpl::eGet(featureID, resolve, coreType);
 }

@@ -36,8 +36,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Actions/ActionsFactory.hpp"
+#include "uml/umlFactory.hpp"
 #include "fUML/Semantics/SimpleClassifiers/BooleanValue.hpp"
 #include "uml/Clause.hpp"
 #include "fUML/Semantics/Actions/ClauseActivation.hpp"
@@ -312,15 +312,9 @@ Any ClauseActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case fUML::Semantics::Actions::ActionsPackage::CLAUSEACTIVATION_ATTRIBUTE_CLAUSE:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getClause();
-			return eAny(returnValue,uml::umlPackage::CLAUSE_CLASS,false); //260
-		}
+			return eAny(getClause(),uml::umlPackage::CLAUSE_CLASS,false); //260
 		case fUML::Semantics::Actions::ActionsPackage::CLAUSEACTIVATION_ATTRIBUTE_CONDITIONALNODEACTIVATION:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getConditionalNodeActivation();
-			return eAny(returnValue,fUML::Semantics::Actions::ActionsPackage::CONDITIONALNODEACTIVATION_CLASS,false); //261
-		}
+			return eAny(getConditionalNodeActivation(),fUML::Semantics::Actions::ActionsPackage::CONDITIONALNODEACTIVATION_CLASS,false); //261
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
 }

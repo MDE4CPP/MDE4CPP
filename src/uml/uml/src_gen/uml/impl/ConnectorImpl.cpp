@@ -597,29 +597,20 @@ Any ConnectorImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::CONNECTOR_ATTRIBUTE_CONTRACT:
-		{
 			return eAnyBag(getContract(),uml::umlPackage::BEHAVIOR_CLASS); //5314
-		}
 		case uml::umlPackage::CONNECTOR_ATTRIBUTE_END:
-		{
 			return eAnyBag(getEnd(),uml::umlPackage::CONNECTOREND_CLASS); //5315
-		}
 		case uml::umlPackage::CONNECTOR_ATTRIBUTE_KIND:
 			return eAny(getKind(),uml::umlPackage::CONNECTORKIND_CLASS,false); //5316
 		case uml::umlPackage::CONNECTOR_ATTRIBUTE_REDEFINEDCONNECTOR:
-		{
 			return eAnyBag(getRedefinedConnector(),uml::umlPackage::CONNECTOR_CLASS); //5317
-		}
 		case uml::umlPackage::CONNECTOR_ATTRIBUTE_STRUCTUREDCLASSIFIER:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getStructuredClassifier().lock();
 			return eAny(returnValue,uml::umlPackage::STRUCTUREDCLASSIFIER_CLASS,false); //5319
 		}
 		case uml::umlPackage::CONNECTOR_ATTRIBUTE_TYPE:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getType();
-			return eAny(returnValue,uml::umlPackage::ASSOCIATION_CLASS,false); //5318
-		}
+			return eAny(getType(),uml::umlPackage::ASSOCIATION_CLASS,false); //5318
 	}
 	return FeatureImpl::eGet(featureID, resolve, coreType);
 }

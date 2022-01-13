@@ -633,10 +633,7 @@ Any RegionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::REGION_ATTRIBUTE_EXTENDEDREGION:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getExtendedRegion();
-			return eAny(returnValue,uml::umlPackage::REGION_CLASS,false); //20718
-		}
+			return eAny(getExtendedRegion(),uml::umlPackage::REGION_CLASS,false); //20718
 		case uml::umlPackage::REGION_ATTRIBUTE_STATE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getState().lock();
@@ -648,13 +645,9 @@ Any RegionImpl::eGet(int featureID, bool resolve, bool coreType) const
 			return eAny(returnValue,uml::umlPackage::STATEMACHINE_CLASS,false); //20720
 		}
 		case uml::umlPackage::REGION_ATTRIBUTE_SUBVERTEX:
-		{
 			return eAnyBag(getSubvertex(),uml::umlPackage::VERTEX_CLASS); //20722
-		}
 		case uml::umlPackage::REGION_ATTRIBUTE_TRANSITION:
-		{
 			return eAnyBag(getTransition(),uml::umlPackage::TRANSITION_CLASS); //20721
-		}
 	}
 	Any result;
 	result = NamespaceImpl::eGet(featureID, resolve, coreType);

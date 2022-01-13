@@ -231,9 +231,7 @@ Any RelationshipImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::RELATIONSHIP_ATTRIBUTE_RELATEDELEMENT:
-		{
 			return eAnyBag(getRelatedElement(),uml::umlPackage::ELEMENT_CLASS); //2083
-		}
 	}
 	return ElementImpl::eGet(featureID, resolve, coreType);
 }

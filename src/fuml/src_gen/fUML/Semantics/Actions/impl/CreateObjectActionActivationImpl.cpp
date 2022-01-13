@@ -359,10 +359,7 @@ Any CreateObjectActionActivationImpl::eGet(int featureID, bool resolve, bool cor
 	switch(featureID)
 	{
 		case fUML::Semantics::Actions::ActionsPackage::CREATEOBJECTACTIONACTIVATION_ATTRIBUTE_CREATEOBJECTACTION:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getCreateObjectAction();
-			return eAny(returnValue,uml::umlPackage::CREATEOBJECTACTION_CLASS,false); //3411
-		}
+			return eAny(getCreateObjectAction(),uml::umlPackage::CREATEOBJECTACTION_CLASS,false); //3411
 	}
 	return ActionActivationImpl::eGet(featureID, resolve, coreType);
 }

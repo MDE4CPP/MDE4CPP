@@ -416,9 +416,7 @@ Any TupleLiteralExpImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case ocl::Expressions::ExpressionsPackage::TUPLELITERALEXP_ATTRIBUTE_PART:
-		{
 			return eAnyBag(getPart(),ocl::Expressions::ExpressionsPackage::TUPLELITERALPART_CLASS); //8522
-		}
 	}
 	return LiteralExpImpl::eGet(featureID, resolve, coreType);
 }

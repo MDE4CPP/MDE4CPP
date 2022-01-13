@@ -520,9 +520,7 @@ Any SequenceNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::SEQUENCENODE_ATTRIBUTE_EXECUTABLENODE:
-		{
 			return eAnyBag(getExecutableNode(),uml::umlPackage::EXECUTABLENODE_CLASS); //21444
-		}
 	}
 	return StructuredActivityNodeImpl::eGet(featureID, resolve, coreType);
 }

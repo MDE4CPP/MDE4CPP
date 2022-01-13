@@ -573,13 +573,9 @@ Any ElementImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::ELEMENT_ATTRIBUTE_OWNEDCOMMENT:
-		{
 			return eAnyBag(getOwnedComment(),uml::umlPackage::COMMENT_CLASS); //810
-		}
 		case uml::umlPackage::ELEMENT_ATTRIBUTE_OWNEDELEMENT:
-		{
 			return eAnyBag(getOwnedElement(),uml::umlPackage::ELEMENT_CLASS); //811
-		}
 		case uml::umlPackage::ELEMENT_ATTRIBUTE_OWNER:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getOwner().lock();

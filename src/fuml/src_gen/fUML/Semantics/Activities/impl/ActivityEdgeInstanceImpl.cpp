@@ -499,19 +499,14 @@ Any ActivityEdgeInstanceImpl::eGet(int featureID, bool resolve, bool coreType) c
 	switch(featureID)
 	{
 		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYEDGEINSTANCE_ATTRIBUTE_EDGE:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getEdge();
-			return eAny(returnValue,uml::umlPackage::ACTIVITYEDGE_CLASS,false); //60
-		}
+			return eAny(getEdge(),uml::umlPackage::ACTIVITYEDGE_CLASS,false); //60
 		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYEDGEINSTANCE_ATTRIBUTE_GROUP:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getGroup().lock();
 			return eAny(returnValue,fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYNODEACTIVATIONGROUP_CLASS,false); //64
 		}
 		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYEDGEINSTANCE_ATTRIBUTE_OFFERS:
-		{
 			return eAnyBag(getOffers(),fUML::Semantics::Activities::ActivitiesPackage::OFFER_CLASS); //63
-		}
 		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYEDGEINSTANCE_ATTRIBUTE_SOURCE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getSource().lock();

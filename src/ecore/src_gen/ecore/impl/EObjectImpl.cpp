@@ -468,14 +468,9 @@ Any EObjectImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case ecore::ecorePackage::EOBJECT_ATTRIBUTE_ECONTAINER:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=eContainer();
-			return eAny(returnValue,ecore::ecorePackage::EOBJECT_CLASS,false); //401
-		}
+			return eAny(eContainer(),ecore::ecorePackage::EOBJECT_CLASS,false); //401
 		case ecore::ecorePackage::EOBJECT_ATTRIBUTE_ECONTENTUNION:
-		{
 			return eAnyBag(getEContentUnion(),ecore::ecorePackage::EOBJECT_CLASS); //400
-		}
 		case ecore::ecorePackage::EOBJECT_ATTRIBUTE_METAELEMENTID:
 			return eAny(getMetaElementID(),ecore::ecorePackage::EINT_CLASS,false); //402
 	}

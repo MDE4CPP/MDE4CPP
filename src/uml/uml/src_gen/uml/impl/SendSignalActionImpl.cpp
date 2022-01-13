@@ -454,15 +454,9 @@ Any SendSignalActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::SENDSIGNALACTION_ATTRIBUTE_SIGNAL:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getSignal();
-			return eAny(returnValue,uml::umlPackage::SIGNAL_CLASS,false); //21329
-		}
+			return eAny(getSignal(),uml::umlPackage::SIGNAL_CLASS,false); //21329
 		case uml::umlPackage::SENDSIGNALACTION_ATTRIBUTE_TARGET:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getTarget();
-			return eAny(returnValue,uml::umlPackage::INPUTPIN_CLASS,false); //21330
-		}
+			return eAny(getTarget(),uml::umlPackage::INPUTPIN_CLASS,false); //21330
 	}
 	return InvocationActionImpl::eGet(featureID, resolve, coreType);
 }

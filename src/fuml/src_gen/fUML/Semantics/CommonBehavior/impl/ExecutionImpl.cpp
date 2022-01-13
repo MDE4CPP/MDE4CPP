@@ -48,10 +48,10 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
-#include "fUML/Semantics/Loci/LociFactory.hpp"
+#include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
 #include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
+#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "uml/umlFactory.hpp"
 #include "uml/Behavior.hpp"
 #include "uml/Classifier.hpp"
@@ -474,19 +474,11 @@ Any ExecutionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::EXECUTION_ATTRIBUTE_BEHAVIOR:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getBehavior();
-			return eAny(returnValue,uml::umlPackage::BEHAVIOR_CLASS,false); //466
-		}
+			return eAny(getBehavior(),uml::umlPackage::BEHAVIOR_CLASS,false); //466
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::EXECUTION_ATTRIBUTE_CONTEXT:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getContext();
-			return eAny(returnValue,fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::OBJECT_CLASS,false); //464
-		}
+			return eAny(getContext(),fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::OBJECT_CLASS,false); //464
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::EXECUTION_ATTRIBUTE_PARAMETERVALUES:
-		{
 			return eAnyBag(getParameterValues(),fUML::Semantics::CommonBehavior::CommonBehaviorPackage::PARAMETERVALUE_CLASS); //465
-		}
 	}
 	return fUML::Semantics::StructuredClassifiers::ObjectImpl::eGet(featureID, resolve, coreType);
 }

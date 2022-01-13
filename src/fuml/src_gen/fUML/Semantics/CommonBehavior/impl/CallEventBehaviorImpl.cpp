@@ -244,10 +244,7 @@ Any CallEventBehaviorImpl::eGet(int featureID, bool resolve, bool coreType) cons
 	switch(featureID)
 	{
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::CALLEVENTBEHAVIOR_ATTRIBUTE_OPERATION:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getOperation();
-			return eAny(returnValue,uml::umlPackage::OPERATION_CLASS,false); //160
-		}
+			return eAny(getOperation(),uml::umlPackage::OPERATION_CLASS,false); //160
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
 }

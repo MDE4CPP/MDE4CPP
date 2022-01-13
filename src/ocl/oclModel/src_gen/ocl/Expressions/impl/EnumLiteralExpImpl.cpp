@@ -36,10 +36,10 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "ecore/ecoreFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
-#include "ocl/Evaluations/EvaluationsFactory.hpp"
+#include "ecore/ecoreFactory.hpp"
 #include "uml/umlFactory.hpp"
+#include "ocl/Evaluations/EvaluationsFactory.hpp"
 #include "ocl/Expressions/CallExp.hpp"
 #include "ocl/Expressions/CollectionRange.hpp"
 #include "ecore/EAnnotation.hpp"
@@ -406,10 +406,7 @@ Any EnumLiteralExpImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case ocl::Expressions::ExpressionsPackage::ENUMLITERALEXP_ATTRIBUTE_REFERREDENUMLITERAL:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getReferredEnumLiteral();
-			return eAny(returnValue,uml::umlPackage::ENUMERATIONLITERAL_CLASS,false); //2422
-		}
+			return eAny(getReferredEnumLiteral(),uml::umlPackage::ENUMERATIONLITERAL_CLASS,false); //2422
 	}
 	return LiteralExpImpl::eGet(featureID, resolve, coreType);
 }

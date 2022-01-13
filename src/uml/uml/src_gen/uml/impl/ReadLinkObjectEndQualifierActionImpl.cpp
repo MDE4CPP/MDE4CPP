@@ -533,20 +533,11 @@ Any ReadLinkObjectEndQualifierActionImpl::eGet(int featureID, bool resolve, bool
 	switch(featureID)
 	{
 		case uml::umlPackage::READLINKOBJECTENDQUALIFIERACTION_ATTRIBUTE_OBJECT:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getObject();
-			return eAny(returnValue,uml::umlPackage::INPUTPIN_CLASS,false); //19727
-		}
+			return eAny(getObject(),uml::umlPackage::INPUTPIN_CLASS,false); //19727
 		case uml::umlPackage::READLINKOBJECTENDQUALIFIERACTION_ATTRIBUTE_QUALIFIER:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getQualifier();
-			return eAny(returnValue,uml::umlPackage::PROPERTY_CLASS,false); //19728
-		}
+			return eAny(getQualifier(),uml::umlPackage::PROPERTY_CLASS,false); //19728
 		case uml::umlPackage::READLINKOBJECTENDQUALIFIERACTION_ATTRIBUTE_RESULT:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getResult();
-			return eAny(returnValue,uml::umlPackage::OUTPUTPIN_CLASS,false); //19729
-		}
+			return eAny(getResult(),uml::umlPackage::OUTPUTPIN_CLASS,false); //19729
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
 }

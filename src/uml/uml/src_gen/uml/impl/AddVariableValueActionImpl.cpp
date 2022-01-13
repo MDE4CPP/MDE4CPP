@@ -440,10 +440,7 @@ Any AddVariableValueActionImpl::eGet(int featureID, bool resolve, bool coreType)
 	switch(featureID)
 	{
 		case uml::umlPackage::ADDVARIABLEVALUEACTION_ATTRIBUTE_INSERTAT:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getInsertAt();
-			return eAny(returnValue,uml::umlPackage::INPUTPIN_CLASS,false); //1629
-		}
+			return eAny(getInsertAt(),uml::umlPackage::INPUTPIN_CLASS,false); //1629
 		case uml::umlPackage::ADDVARIABLEVALUEACTION_ATTRIBUTE_ISREPLACEALL:
 			return eAny(getIsReplaceAll(),ecore::ecorePackage::EBOOLEAN_CLASS,false); //1630
 	}

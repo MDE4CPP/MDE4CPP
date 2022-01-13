@@ -419,15 +419,9 @@ Any InteractionConstraintImpl::eGet(int featureID, bool resolve, bool coreType) 
 	switch(featureID)
 	{
 		case uml::umlPackage::INTERACTIONCONSTRAINT_ATTRIBUTE_MAXINT:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getMaxint();
-			return eAny(returnValue,uml::umlPackage::VALUESPECIFICATION_CLASS,false); //12015
-		}
+			return eAny(getMaxint(),uml::umlPackage::VALUESPECIFICATION_CLASS,false); //12015
 		case uml::umlPackage::INTERACTIONCONSTRAINT_ATTRIBUTE_MININT:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getMinint();
-			return eAny(returnValue,uml::umlPackage::VALUESPECIFICATION_CLASS,false); //12016
-		}
+			return eAny(getMinint(),uml::umlPackage::VALUESPECIFICATION_CLASS,false); //12016
 	}
 	return ConstraintImpl::eGet(featureID, resolve, coreType);
 }

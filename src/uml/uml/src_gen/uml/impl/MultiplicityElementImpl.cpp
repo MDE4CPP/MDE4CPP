@@ -453,17 +453,11 @@ Any MultiplicityElementImpl::eGet(int featureID, bool resolve, bool coreType) co
 		case uml::umlPackage::MULTIPLICITYELEMENT_ATTRIBUTE_LOWER:
 			return eAny(getLower(),ecore::ecorePackage::EINT_CLASS,false); //1545
 		case uml::umlPackage::MULTIPLICITYELEMENT_ATTRIBUTE_LOWERVALUE:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getLowerValue();
-			return eAny(returnValue,uml::umlPackage::VALUESPECIFICATION_CLASS,false); //1546
-		}
+			return eAny(getLowerValue(),uml::umlPackage::VALUESPECIFICATION_CLASS,false); //1546
 		case uml::umlPackage::MULTIPLICITYELEMENT_ATTRIBUTE_UPPER:
 			return eAny(getUpper(),0,false); //1547
 		case uml::umlPackage::MULTIPLICITYELEMENT_ATTRIBUTE_UPPERVALUE:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getUpperValue();
-			return eAny(returnValue,uml::umlPackage::VALUESPECIFICATION_CLASS,false); //1548
-		}
+			return eAny(getUpperValue(),uml::umlPackage::VALUESPECIFICATION_CLASS,false); //1548
 	}
 	return ElementImpl::eGet(featureID, resolve, coreType);
 }

@@ -369,10 +369,7 @@ Any CallBehaviorActionActivationImpl::eGet(int featureID, bool resolve, bool cor
 	switch(featureID)
 	{
 		case fUML::Semantics::Actions::ActionsPackage::CALLBEHAVIORACTIONACTIVATION_ATTRIBUTE_CALLBEHAVIORACTION:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getCallBehaviorAction();
-			return eAny(returnValue,uml::umlPackage::CALLBEHAVIORACTION_CLASS,false); //1513
-		}
+			return eAny(getCallBehaviorAction(),uml::umlPackage::CALLBEHAVIORACTION_CLASS,false); //1513
 	}
 	return CallActionActivationImpl::eGet(featureID, resolve, coreType);
 }

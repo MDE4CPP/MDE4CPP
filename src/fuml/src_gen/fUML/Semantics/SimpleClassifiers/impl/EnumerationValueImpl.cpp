@@ -358,15 +358,9 @@ Any EnumerationValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::ENUMERATIONVALUE_ATTRIBUTE_LITERAL:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getLiteral();
-			return eAny(returnValue,uml::umlPackage::ENUMERATIONLITERAL_CLASS,false); //410
-		}
+			return eAny(getLiteral(),uml::umlPackage::ENUMERATIONLITERAL_CLASS,false); //410
 		case fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::ENUMERATIONVALUE_ATTRIBUTE_TYPE:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getType();
-			return eAny(returnValue,uml::umlPackage::ENUMERATION_CLASS,false); //411
-		}
+			return eAny(getType(),uml::umlPackage::ENUMERATION_CLASS,false); //411
 	}
 	return fUML::Semantics::Values::ValueImpl::eGet(featureID, resolve, coreType);
 }

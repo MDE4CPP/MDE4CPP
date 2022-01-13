@@ -36,8 +36,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
+#include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
 #include "fUML/Semantics/CommonBehavior/EventOccurrence.hpp"
 #include "fUML/Semantics/CommonBehavior/Execution.hpp"
 #include "fUML/Semantics/CommonBehavior/ParameterValue.hpp"
@@ -271,10 +271,7 @@ Any InvocationEventOccurrenceImpl::eGet(int featureID, bool resolve, bool coreTy
 	switch(featureID)
 	{
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::INVOCATIONEVENTOCCURRENCE_ATTRIBUTE_EXECUTION:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getExecution();
-			return eAny(returnValue,fUML::Semantics::CommonBehavior::CommonBehaviorPackage::EXECUTION_CLASS,false); //661
-		}
+			return eAny(getExecution(),fUML::Semantics::CommonBehavior::CommonBehaviorPackage::EXECUTION_CLASS,false); //661
 	}
 	return EventOccurrenceImpl::eGet(featureID, resolve, coreType);
 }

@@ -331,15 +331,9 @@ Any GeneralOrderingImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::GENERALORDERING_ATTRIBUTE_AFTER:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getAfter();
-			return eAny(returnValue,uml::umlPackage::OCCURRENCESPECIFICATION_CLASS,false); //1089
-		}
+			return eAny(getAfter(),uml::umlPackage::OCCURRENCESPECIFICATION_CLASS,false); //1089
 		case uml::umlPackage::GENERALORDERING_ATTRIBUTE_BEFORE:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getBefore();
-			return eAny(returnValue,uml::umlPackage::OCCURRENCESPECIFICATION_CLASS,false); //10810
-		}
+			return eAny(getBefore(),uml::umlPackage::OCCURRENCESPECIFICATION_CLASS,false); //10810
 	}
 	return NamedElementImpl::eGet(featureID, resolve, coreType);
 }

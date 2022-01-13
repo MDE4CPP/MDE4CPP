@@ -437,15 +437,9 @@ Any ValueSpecificationActionImpl::eGet(int featureID, bool resolve, bool coreTyp
 	switch(featureID)
 	{
 		case uml::umlPackage::VALUESPECIFICATIONACTION_ATTRIBUTE_RESULT:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getResult();
-			return eAny(returnValue,uml::umlPackage::OUTPUTPIN_CLASS,false); //25127
-		}
+			return eAny(getResult(),uml::umlPackage::OUTPUTPIN_CLASS,false); //25127
 		case uml::umlPackage::VALUESPECIFICATIONACTION_ATTRIBUTE_VALUE:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getValue();
-			return eAny(returnValue,uml::umlPackage::VALUESPECIFICATION_CLASS,false); //25128
-		}
+			return eAny(getValue(),uml::umlPackage::VALUESPECIFICATION_CLASS,false); //25128
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
 }

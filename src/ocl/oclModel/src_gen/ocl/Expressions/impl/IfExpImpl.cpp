@@ -36,8 +36,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "ecore/ecoreFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
+#include "ecore/ecoreFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
 #include "ocl/Expressions/CallExp.hpp"
 #include "ocl/Expressions/CollectionRange.hpp"
@@ -471,20 +471,11 @@ Any IfExpImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case ocl::Expressions::ExpressionsPackage::IFEXP_ATTRIBUTE_CONDITION:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getCondition();
-			return eAny(returnValue,ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_CLASS,false); //3122
-		}
+			return eAny(getCondition(),ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_CLASS,false); //3122
 		case ocl::Expressions::ExpressionsPackage::IFEXP_ATTRIBUTE_ELSEEXPRESSION:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getElseExpression();
-			return eAny(returnValue,ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_CLASS,false); //3124
-		}
+			return eAny(getElseExpression(),ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_CLASS,false); //3124
 		case ocl::Expressions::ExpressionsPackage::IFEXP_ATTRIBUTE_THENEXPRESSION:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getThenExpression();
-			return eAny(returnValue,ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_CLASS,false); //3123
-		}
+			return eAny(getThenExpression(),ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_CLASS,false); //3123
 	}
 	return OclExpressionImpl::eGet(featureID, resolve, coreType);
 }

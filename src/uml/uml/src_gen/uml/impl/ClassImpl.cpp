@@ -868,31 +868,19 @@ Any ClassImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::CLASS_ATTRIBUTE_EXTENSION:
-		{
 			return eAnyBag(getExtension(),uml::umlPackage::EXTENSION_CLASS); //3547
-		}
 		case uml::umlPackage::CLASS_ATTRIBUTE_ISACTIVE:
 			return eAny(getIsActive(),ecore::ecorePackage::EBOOLEAN_CLASS,false); //3548
 		case uml::umlPackage::CLASS_ATTRIBUTE_NESTEDCLASSIFIER:
-		{
 			return eAnyBag(getNestedClassifier(),uml::umlPackage::CLASSIFIER_CLASS); //3549
-		}
 		case uml::umlPackage::CLASS_ATTRIBUTE_OWNEDATTRIBUTE:
-		{
 			return eAnyBag(getClass_OwnedAttribute(),uml::umlPackage::PROPERTY_CLASS); //3552
-		}
 		case uml::umlPackage::CLASS_ATTRIBUTE_OWNEDOPERATION:
-		{
 			return eAnyBag(getOwnedOperation(),uml::umlPackage::OPERATION_CLASS); //3546
-		}
 		case uml::umlPackage::CLASS_ATTRIBUTE_OWNEDRECEPTION:
-		{
 			return eAnyBag(getOwnedReception(),uml::umlPackage::RECEPTION_CLASS); //3550
-		}
 		case uml::umlPackage::CLASS_ATTRIBUTE_SUPERCLASS:
-		{
 			return eAnyBag(getSuperClass(),uml::umlPackage::CLASS_CLASS); //3551
-		}
 	}
 	Any result;
 	result = BehavioredClassifierImpl::eGet(featureID, resolve, coreType);

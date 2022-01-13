@@ -36,9 +36,9 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "uml/umlFactory.hpp"
-#include "ecore/ecoreFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
+#include "ecore/ecoreFactory.hpp"
+#include "uml/umlFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
 #include "ocl/Expressions/CallExp.hpp"
 #include "ocl/Expressions/CollectionRange.hpp"
@@ -404,10 +404,7 @@ Any StateExpImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case ocl::Expressions::ExpressionsPackage::STATEEXP_ATTRIBUTE_REFERREDSTATE:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getReferredState();
-			return eAny(returnValue,uml::umlPackage::STATE_CLASS,false); //8022
-		}
+			return eAny(getReferredState(),uml::umlPackage::STATE_CLASS,false); //8022
 	}
 	return OclExpressionImpl::eGet(featureID, resolve, coreType);
 }

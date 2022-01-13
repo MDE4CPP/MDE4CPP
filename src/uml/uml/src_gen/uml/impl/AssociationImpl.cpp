@@ -763,23 +763,15 @@ Any AssociationImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::ASSOCIATION_ATTRIBUTE_ENDTYPE:
-		{
 			return eAnyBag(getEndType(),uml::umlPackage::TYPE_CLASS); //2139
-		}
 		case uml::umlPackage::ASSOCIATION_ATTRIBUTE_ISDERIVED:
 			return eAny(getIsDerived(),ecore::ecorePackage::EBOOLEAN_CLASS,false); //2140
 		case uml::umlPackage::ASSOCIATION_ATTRIBUTE_MEMBEREND:
-		{
 			return eAnyBag(getMemberEnd(),uml::umlPackage::PROPERTY_CLASS); //2141
-		}
 		case uml::umlPackage::ASSOCIATION_ATTRIBUTE_NAVIGABLEOWNEDEND:
-		{
 			return eAnyBag(getNavigableOwnedEnd(),uml::umlPackage::PROPERTY_CLASS); //2143
-		}
 		case uml::umlPackage::ASSOCIATION_ATTRIBUTE_OWNEDEND:
-		{
 			return eAnyBag(getOwnedEnd(),uml::umlPackage::PROPERTY_CLASS); //2142
-		}
 	}
 	Any result;
 	result = ClassifierImpl::eGet(featureID, resolve, coreType);

@@ -442,10 +442,7 @@ Any DestroyObjectActionActivationImpl::eGet(int featureID, bool resolve, bool co
 	switch(featureID)
 	{
 		case fUML::Semantics::Actions::ActionsPackage::DESTROYOBJECTACTIONACTIVATION_ATTRIBUTE_DESTROYOBJECTACTION:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getDestroyObjectAction();
-			return eAny(returnValue,uml::umlPackage::DESTROYOBJECTACTION_CLASS,false); //3911
-		}
+			return eAny(getDestroyObjectAction(),uml::umlPackage::DESTROYOBJECTACTION_CLASS,false); //3911
 	}
 	return ActionActivationImpl::eGet(featureID, resolve, coreType);
 }

@@ -488,18 +488,11 @@ Any InstanceSpecificationImpl::eGet(int featureID, bool resolve, bool coreType) 
 	switch(featureID)
 	{
 		case uml::umlPackage::INSTANCESPECIFICATION_ATTRIBUTE_CLASSIFIER:
-		{
 			return eAnyBag(getClassifier(),uml::umlPackage::CLASSIFIER_CLASS); //11714
-		}
 		case uml::umlPackage::INSTANCESPECIFICATION_ATTRIBUTE_SLOT:
-		{
 			return eAnyBag(getSlot(),uml::umlPackage::SLOT_CLASS); //11715
-		}
 		case uml::umlPackage::INSTANCESPECIFICATION_ATTRIBUTE_SPECIFICATION:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getSpecification();
-			return eAny(returnValue,uml::umlPackage::VALUESPECIFICATION_CLASS,false); //11716
-		}
+			return eAny(getSpecification(),uml::umlPackage::VALUESPECIFICATION_CLASS,false); //11716
 	}
 	Any result;
 	result = DeployedArtifactImpl::eGet(featureID, resolve, coreType);

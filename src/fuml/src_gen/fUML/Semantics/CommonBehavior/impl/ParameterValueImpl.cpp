@@ -329,14 +329,9 @@ Any ParameterValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::PARAMETERVALUE_ATTRIBUTE_PARAMETER:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getParameter();
-			return eAny(returnValue,uml::umlPackage::PARAMETER_CLASS,false); //870
-		}
+			return eAny(getParameter(),uml::umlPackage::PARAMETER_CLASS,false); //870
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::PARAMETERVALUE_ATTRIBUTE_VALUES:
-		{
 			return eAnyBag(getValues(),fUML::Semantics::Values::ValuesPackage::VALUE_CLASS); //871
-		}
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
 }

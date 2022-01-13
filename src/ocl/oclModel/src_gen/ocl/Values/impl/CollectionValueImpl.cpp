@@ -315,9 +315,7 @@ Any CollectionValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case ocl::Values::ValuesPackage::COLLECTIONVALUE_ATTRIBUTE_ELEMENTS:
-		{
 			return eAnyBag(getElements(),ocl::Values::ValuesPackage::ELEMENT_CLASS); //220
-		}
 	}
 	return StaticValueImpl::eGet(featureID, resolve, coreType);
 }

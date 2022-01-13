@@ -433,15 +433,9 @@ Any SendObjectActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::SENDOBJECTACTION_ATTRIBUTE_REQUEST:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getRequest();
-			return eAny(returnValue,uml::umlPackage::INPUTPIN_CLASS,false); //21229
-		}
+			return eAny(getRequest(),uml::umlPackage::INPUTPIN_CLASS,false); //21229
 		case uml::umlPackage::SENDOBJECTACTION_ATTRIBUTE_TARGET:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getTarget();
-			return eAny(returnValue,uml::umlPackage::INPUTPIN_CLASS,false); //21230
-		}
+			return eAny(getTarget(),uml::umlPackage::INPUTPIN_CLASS,false); //21230
 	}
 	return InvocationActionImpl::eGet(featureID, resolve, coreType);
 }

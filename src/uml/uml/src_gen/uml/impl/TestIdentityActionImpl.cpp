@@ -497,20 +497,11 @@ Any TestIdentityActionImpl::eGet(int featureID, bool resolve, bool coreType) con
 	switch(featureID)
 	{
 		case uml::umlPackage::TESTIDENTITYACTION_ATTRIBUTE_FIRST:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getFirst();
-			return eAny(returnValue,uml::umlPackage::INPUTPIN_CLASS,false); //23527
-		}
+			return eAny(getFirst(),uml::umlPackage::INPUTPIN_CLASS,false); //23527
 		case uml::umlPackage::TESTIDENTITYACTION_ATTRIBUTE_RESULT:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getResult();
-			return eAny(returnValue,uml::umlPackage::OUTPUTPIN_CLASS,false); //23528
-		}
+			return eAny(getResult(),uml::umlPackage::OUTPUTPIN_CLASS,false); //23528
 		case uml::umlPackage::TESTIDENTITYACTION_ATTRIBUTE_SECOND:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getSecond();
-			return eAny(returnValue,uml::umlPackage::INPUTPIN_CLASS,false); //23529
-		}
+			return eAny(getSecond(),uml::umlPackage::INPUTPIN_CLASS,false); //23529
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
 }

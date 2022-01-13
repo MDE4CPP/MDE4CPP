@@ -504,13 +504,9 @@ Any RedefinableTemplateSignatureImpl::eGet(int featureID, bool resolve, bool cor
 			return eAny(returnValue,uml::umlPackage::CLASSIFIER_CLASS,false); //20517
 		}
 		case uml::umlPackage::REDEFINABLETEMPLATESIGNATURE_ATTRIBUTE_EXTENDEDSIGNATURE:
-		{
 			return eAnyBag(getExtendedSignature(),uml::umlPackage::REDEFINABLETEMPLATESIGNATURE_CLASS); //20515
-		}
 		case uml::umlPackage::REDEFINABLETEMPLATESIGNATURE_ATTRIBUTE_INHERITEDPARAMETER:
-		{
 			return eAnyBag(getInheritedParameter(),uml::umlPackage::TEMPLATEPARAMETER_CLASS); //20516
-		}
 	}
 	Any result;
 	result = RedefinableElementImpl::eGet(featureID, resolve, coreType);

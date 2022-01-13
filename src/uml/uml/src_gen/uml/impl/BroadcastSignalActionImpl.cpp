@@ -409,10 +409,7 @@ Any BroadcastSignalActionImpl::eGet(int featureID, bool resolve, bool coreType) 
 	switch(featureID)
 	{
 		case uml::umlPackage::BROADCASTSIGNALACTION_ATTRIBUTE_SIGNAL:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getSignal();
-			return eAny(returnValue,uml::umlPackage::SIGNAL_CLASS,false); //2729
-		}
+			return eAny(getSignal(),uml::umlPackage::SIGNAL_CLASS,false); //2729
 	}
 	return InvocationActionImpl::eGet(featureID, resolve, coreType);
 }

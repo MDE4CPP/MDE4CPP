@@ -496,19 +496,13 @@ Any OpaqueExpressionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::OPAQUEEXPRESSION_ATTRIBUTE_BEHAVIOR:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getBehavior();
-			return eAny(returnValue,uml::umlPackage::BEHAVIOR_CLASS,false); //16615
-		}
+			return eAny(getBehavior(),uml::umlPackage::BEHAVIOR_CLASS,false); //16615
 		case uml::umlPackage::OPAQUEEXPRESSION_ATTRIBUTE_BODY:
 			return eAny(getBody(),ecore::ecorePackage::ESTRING_CLASS,true); //16616
 		case uml::umlPackage::OPAQUEEXPRESSION_ATTRIBUTE_LANGUAGE:
 			return eAny(getLanguage(),ecore::ecorePackage::ESTRING_CLASS,true); //16617
 		case uml::umlPackage::OPAQUEEXPRESSION_ATTRIBUTE_RESULT:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getResult();
-			return eAny(returnValue,uml::umlPackage::PARAMETER_CLASS,false); //16618
-		}
+			return eAny(getResult(),uml::umlPackage::PARAMETER_CLASS,false); //16618
 	}
 	return ValueSpecificationImpl::eGet(featureID, resolve, coreType);
 }

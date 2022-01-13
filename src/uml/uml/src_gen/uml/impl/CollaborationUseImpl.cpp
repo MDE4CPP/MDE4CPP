@@ -389,14 +389,9 @@ Any CollaborationUseImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::COLLABORATIONUSE_ATTRIBUTE_ROLEBINDING:
-		{
 			return eAnyBag(getRoleBinding(),uml::umlPackage::DEPENDENCY_CLASS); //439
-		}
 		case uml::umlPackage::COLLABORATIONUSE_ATTRIBUTE_TYPE:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getType();
-			return eAny(returnValue,uml::umlPackage::COLLABORATION_CLASS,false); //4310
-		}
+			return eAny(getType(),uml::umlPackage::COLLABORATION_CLASS,false); //4310
 	}
 	return NamedElementImpl::eGet(featureID, resolve, coreType);
 }

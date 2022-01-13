@@ -401,10 +401,7 @@ Any ReadVariableActionImpl::eGet(int featureID, bool resolve, bool coreType) con
 	switch(featureID)
 	{
 		case uml::umlPackage::READVARIABLEACTION_ATTRIBUTE_RESULT:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getResult();
-			return eAny(returnValue,uml::umlPackage::OUTPUTPIN_CLASS,false); //20028
-		}
+			return eAny(getResult(),uml::umlPackage::OUTPUTPIN_CLASS,false); //20028
 	}
 	return VariableActionImpl::eGet(featureID, resolve, coreType);
 }

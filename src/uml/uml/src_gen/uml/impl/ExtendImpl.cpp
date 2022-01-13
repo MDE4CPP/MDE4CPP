@@ -491,24 +491,16 @@ Any ExtendImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::EXTEND_ATTRIBUTE_CONDITION:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getCondition();
-			return eAny(returnValue,uml::umlPackage::CONSTRAINT_CLASS,false); //9612
-		}
+			return eAny(getCondition(),uml::umlPackage::CONSTRAINT_CLASS,false); //9612
 		case uml::umlPackage::EXTEND_ATTRIBUTE_EXTENDEDCASE:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getExtendedCase();
-			return eAny(returnValue,uml::umlPackage::USECASE_CLASS,false); //9613
-		}
+			return eAny(getExtendedCase(),uml::umlPackage::USECASE_CLASS,false); //9613
 		case uml::umlPackage::EXTEND_ATTRIBUTE_EXTENSION:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getExtension().lock();
 			return eAny(returnValue,uml::umlPackage::USECASE_CLASS,false); //9615
 		}
 		case uml::umlPackage::EXTEND_ATTRIBUTE_EXTENSIONLOCATION:
-		{
 			return eAnyBag(getExtensionLocation(),uml::umlPackage::EXTENSIONPOINT_CLASS); //9614
-		}
 	}
 	Any result;
 	result = DirectedRelationshipImpl::eGet(featureID, resolve, coreType);

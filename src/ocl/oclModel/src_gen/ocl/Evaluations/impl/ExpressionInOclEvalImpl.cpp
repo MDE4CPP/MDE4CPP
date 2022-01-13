@@ -271,15 +271,9 @@ Any ExpressionInOclEvalImpl::eGet(int featureID, bool resolve, bool coreType) co
 	switch(featureID)
 	{
 		case ocl::Evaluations::EvaluationsPackage::EXPRESSIONINOCLEVAL_ATTRIBUTE_CONTEXT:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getContext();
-			return eAny(returnValue,ocl::Evaluations::EvaluationsPackage::OCLEXPEVAL_CLASS,false); //290
-		}
+			return eAny(getContext(),ocl::Evaluations::EvaluationsPackage::OCLEXPEVAL_CLASS,false); //290
 		case ocl::Evaluations::EvaluationsPackage::EXPRESSIONINOCLEVAL_ATTRIBUTE_ENVIRONMENT:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getEnvironment();
-			return eAny(returnValue,ocl::Evaluations::EvaluationsPackage::EVALENVIRONMENT_CLASS,false); //291
-		}
+			return eAny(getEnvironment(),ocl::Evaluations::EvaluationsPackage::EVALENVIRONMENT_CLASS,false); //291
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
 }

@@ -550,21 +550,13 @@ Any EOperationImpl::eGet(int featureID, bool resolve, bool coreType) const
 			return eAny(returnValue,ecore::ecorePackage::ECLASS_CLASS,false); //4214
 		}
 		case ecore::ecorePackage::EOPERATION_ATTRIBUTE_EEXCEPTIONS:
-		{
 			return eAnyBag(getEExceptions(),ecore::ecorePackage::ECLASSIFIER_CLASS); //4217
-		}
 		case ecore::ecorePackage::EOPERATION_ATTRIBUTE_EGENERICEXCEPTIONS:
-		{
 			return eAnyBag(getEGenericExceptions(),ecore::ecorePackage::EGENERICTYPE_CLASS); //4218
-		}
 		case ecore::ecorePackage::EOPERATION_ATTRIBUTE_EPARAMETERS:
-		{
 			return eAnyBag(getEParameters(),ecore::ecorePackage::EPARAMETER_CLASS); //4216
-		}
 		case ecore::ecorePackage::EOPERATION_ATTRIBUTE_ETYPEPARAMETERS:
-		{
 			return eAnyBag(getETypeParameters(),ecore::ecorePackage::ETYPEPARAMETER_CLASS); //4215
-		}
 		case ecore::ecorePackage::EOPERATION_ATTRIBUTE_OPERATIONID:
 			return eAny(getOperationID(),ecore::ecorePackage::EINT_CLASS,false); //4213
 	}

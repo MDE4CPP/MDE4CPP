@@ -658,34 +658,22 @@ Any ActivityNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 			return eAny(returnValue,uml::umlPackage::ACTIVITY_CLASS,false); //1112
 		}
 		case uml::umlPackage::ACTIVITYNODE_ATTRIBUTE_INGROUP:
-		{
 			return eAnyBag(getInGroup(),uml::umlPackage::ACTIVITYGROUP_CLASS); //1113
-		}
 		case uml::umlPackage::ACTIVITYNODE_ATTRIBUTE_ININTERRUPTIBLEREGION:
-		{
 			return eAnyBag(getInInterruptibleRegion(),uml::umlPackage::INTERRUPTIBLEACTIVITYREGION_CLASS); //1114
-		}
 		case uml::umlPackage::ACTIVITYNODE_ATTRIBUTE_INPARTITION:
-		{
 			return eAnyBag(getInPartition(),uml::umlPackage::ACTIVITYPARTITION_CLASS); //1119
-		}
 		case uml::umlPackage::ACTIVITYNODE_ATTRIBUTE_INSTRUCTUREDNODE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getInStructuredNode().lock();
 			return eAny(returnValue,uml::umlPackage::STRUCTUREDACTIVITYNODE_CLASS,false); //1115
 		}
 		case uml::umlPackage::ACTIVITYNODE_ATTRIBUTE_INCOMING:
-		{
 			return eAnyBag(getIncoming(),uml::umlPackage::ACTIVITYEDGE_CLASS); //1116
-		}
 		case uml::umlPackage::ACTIVITYNODE_ATTRIBUTE_OUTGOING:
-		{
 			return eAnyBag(getOutgoing(),uml::umlPackage::ACTIVITYEDGE_CLASS); //1117
-		}
 		case uml::umlPackage::ACTIVITYNODE_ATTRIBUTE_REDEFINEDNODE:
-		{
 			return eAnyBag(getRedefinedNode(),uml::umlPackage::ACTIVITYNODE_CLASS); //1118
-		}
 	}
 	return RedefinableElementImpl::eGet(featureID, resolve, coreType);
 }

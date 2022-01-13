@@ -490,18 +490,11 @@ Any EPackageImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case ecore::ecorePackage::EPACKAGE_ATTRIBUTE_ECLASSIFIERS:
-		{
 			return eAnyBag(getEClassifiers(),ecore::ecorePackage::ECLASSIFIER_CLASS); //438
-		}
 		case ecore::ecorePackage::EPACKAGE_ATTRIBUTE_EFACTORYINSTANCE:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getEFactoryInstance();
-			return eAny(returnValue,ecore::ecorePackage::EFACTORY_CLASS,false); //437
-		}
+			return eAny(getEFactoryInstance(),ecore::ecorePackage::EFACTORY_CLASS,false); //437
 		case ecore::ecorePackage::EPACKAGE_ATTRIBUTE_ESUBPACKAGES:
-		{
 			return eAnyBag(getESubpackages(),ecore::ecorePackage::EPACKAGE_CLASS); //439
-		}
 		case ecore::ecorePackage::EPACKAGE_ATTRIBUTE_ESUPERPACKAGE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getESuperPackage().lock();

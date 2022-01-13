@@ -36,8 +36,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "ocl/Values/ValuesFactory.hpp"
 #include "ocl/Types/TypesFactory.hpp"
+#include "ocl/Values/ValuesFactory.hpp"
 #include "ocl/Values/NameValueBinding.hpp"
 #include "ocl/Values/StaticValue.hpp"
 #include "ocl/Types/TupleType.hpp"
@@ -331,14 +331,9 @@ Any TupleValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case ocl::Values::ValuesPackage::TUPLEVALUE_ATTRIBUTE_ELEMENTS:
-		{
 			return eAnyBag(getElements(),ocl::Values::ValuesPackage::NAMEVALUEBINDING_CLASS); //900
-		}
 		case ocl::Values::ValuesPackage::TUPLEVALUE_ATTRIBUTE_MODEL:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getModel();
-			return eAny(returnValue,ocl::Types::TypesPackage::TUPLETYPE_CLASS,false); //901
-		}
+			return eAny(getModel(),ocl::Types::TypesPackage::TUPLETYPE_CLASS,false); //901
 	}
 	return StaticValueImpl::eGet(featureID, resolve, coreType);
 }

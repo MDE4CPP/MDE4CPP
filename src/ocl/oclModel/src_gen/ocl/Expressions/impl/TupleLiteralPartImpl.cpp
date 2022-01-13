@@ -250,10 +250,7 @@ Any TupleLiteralPartImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case ocl::Expressions::ExpressionsPackage::TUPLELITERALPART_ATTRIBUTE_ATTRIBUTE:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getAttribute();
-			return eAny(returnValue,ecore::ecorePackage::EATTRIBUTE_CLASS,false); //8810
-		}
+			return eAny(getAttribute(),ecore::ecorePackage::EATTRIBUTE_CLASS,false); //8810
 	}
 	return ecore::ETypedElementImpl::eGet(featureID, resolve, coreType);
 }

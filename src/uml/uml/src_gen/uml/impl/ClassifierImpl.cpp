@@ -1331,58 +1331,33 @@ Any ClassifierImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::CLASSIFIER_ATTRIBUTE_ATTRIBUTE:
-		{
 			return eAnyBag(getAttribute(),uml::umlPackage::PROPERTY_CLASS); //3625
-		}
 		case uml::umlPackage::CLASSIFIER_ATTRIBUTE_COLLABORATIONUSE:
-		{
 			return eAnyBag(getCollaborationUse(),uml::umlPackage::COLLABORATIONUSE_CLASS); //3626
-		}
 		case uml::umlPackage::CLASSIFIER_ATTRIBUTE_FEATURE:
-		{
 			return eAnyBag(getFeature(),uml::umlPackage::FEATURE_CLASS); //3624
-		}
 		case uml::umlPackage::CLASSIFIER_ATTRIBUTE_GENERAL:
-		{
 			return eAnyBag(getGeneral(),uml::umlPackage::CLASSIFIER_CLASS); //3627
-		}
 		case uml::umlPackage::CLASSIFIER_ATTRIBUTE_GENERALIZATION:
-		{
 			return eAnyBag(getGeneralization(),uml::umlPackage::GENERALIZATION_CLASS); //3628
-		}
 		case uml::umlPackage::CLASSIFIER_ATTRIBUTE_INHERITEDMEMBER:
-		{
 			return eAnyBag(getInheritedMember(),uml::umlPackage::NAMEDELEMENT_CLASS); //3630
-		}
 		case uml::umlPackage::CLASSIFIER_ATTRIBUTE_ISABSTRACT:
 			return eAny(getIsAbstract(),ecore::ecorePackage::EBOOLEAN_CLASS,false); //3631
 		case uml::umlPackage::CLASSIFIER_ATTRIBUTE_ISFINALSPECIALIZATION:
 			return eAny(getIsFinalSpecialization(),ecore::ecorePackage::EBOOLEAN_CLASS,false); //3632
 		case uml::umlPackage::CLASSIFIER_ATTRIBUTE_OWNEDUSECASE:
-		{
 			return eAnyBag(getOwnedUseCase(),uml::umlPackage::USECASE_CLASS); //3633
-		}
 		case uml::umlPackage::CLASSIFIER_ATTRIBUTE_POWERTYPEEXTENT:
-		{
 			return eAnyBag(getPowertypeExtent(),uml::umlPackage::GENERALIZATIONSET_CLASS); //3629
-		}
 		case uml::umlPackage::CLASSIFIER_ATTRIBUTE_REDEFINEDCLASSIFIER:
-		{
 			return eAnyBag(getRedefinedClassifier(),uml::umlPackage::CLASSIFIER_CLASS); //3635
-		}
 		case uml::umlPackage::CLASSIFIER_ATTRIBUTE_REPRESENTATION:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getRepresentation();
-			return eAny(returnValue,uml::umlPackage::COLLABORATIONUSE_CLASS,false); //3636
-		}
+			return eAny(getRepresentation(),uml::umlPackage::COLLABORATIONUSE_CLASS,false); //3636
 		case uml::umlPackage::CLASSIFIER_ATTRIBUTE_SUBSTITUTION:
-		{
 			return eAnyBag(getSubstitution(),uml::umlPackage::SUBSTITUTION_CLASS); //3637
-		}
 		case uml::umlPackage::CLASSIFIER_ATTRIBUTE_USECASE:
-		{
 			return eAnyBag(getUseCase(),uml::umlPackage::USECASE_CLASS); //3634
-		}
 	}
 	Any result;
 	result = NamespaceImpl::eGet(featureID, resolve, coreType);

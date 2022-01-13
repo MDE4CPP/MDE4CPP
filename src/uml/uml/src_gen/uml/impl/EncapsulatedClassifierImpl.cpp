@@ -524,9 +524,7 @@ Any EncapsulatedClassifierImpl::eGet(int featureID, bool resolve, bool coreType)
 	switch(featureID)
 	{
 		case uml::umlPackage::ENCAPSULATEDCLASSIFIER_ATTRIBUTE_OWNEDPORT:
-		{
 			return eAnyBag(getOwnedPort(),uml::umlPackage::PORT_CLASS); //8342
-		}
 	}
 	return StructuredClassifierImpl::eGet(featureID, resolve, coreType);
 }

@@ -36,8 +36,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "ocl/Values/ValuesFactory.hpp"
 #include "ecore/ecoreFactory.hpp"
+#include "ocl/Values/ValuesFactory.hpp"
 #include "ocl/Types/CollectionType.hpp"
 #include "ocl/Values/CollectionValue.hpp"
 #include "ecore/EAnnotation.hpp"
@@ -328,15 +328,9 @@ Any CollectionTypeImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case ocl::Types::TypesPackage::COLLECTIONTYPE_ATTRIBUTE_ELEMENTTYPE:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getElementType();
-			return eAny(returnValue,ecore::ecorePackage::ECLASSIFIER_CLASS,false); //219
-		}
+			return eAny(getElementType(),ecore::ecorePackage::ECLASSIFIER_CLASS,false); //219
 		case ocl::Types::TypesPackage::COLLECTIONTYPE_ATTRIBUTE_INSTANCE:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getInstance();
-			return eAny(returnValue,ocl::Values::ValuesPackage::COLLECTIONVALUE_CLASS,false); //2110
-		}
+			return eAny(getInstance(),ocl::Values::ValuesPackage::COLLECTIONVALUE_CLASS,false); //2110
 	}
 	return ecore::EDataTypeImpl::eGet(featureID, resolve, coreType);
 }

@@ -378,20 +378,11 @@ Any ConnectorEndImpl::eGet(int featureID, bool resolve, bool coreType) const
 			return eAny(returnValue,uml::umlPackage::CONNECTOR_CLASS,false); //5412
 		}
 		case uml::umlPackage::CONNECTOREND_ATTRIBUTE_DEFININGEND:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getDefiningEnd();
-			return eAny(returnValue,uml::umlPackage::PROPERTY_CLASS,false); //549
-		}
+			return eAny(getDefiningEnd(),uml::umlPackage::PROPERTY_CLASS,false); //549
 		case uml::umlPackage::CONNECTOREND_ATTRIBUTE_PARTWITHPORT:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getPartWithPort();
-			return eAny(returnValue,uml::umlPackage::PROPERTY_CLASS,false); //5410
-		}
+			return eAny(getPartWithPort(),uml::umlPackage::PROPERTY_CLASS,false); //5410
 		case uml::umlPackage::CONNECTOREND_ATTRIBUTE_ROLE:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getRole();
-			return eAny(returnValue,uml::umlPackage::CONNECTABLEELEMENT_CLASS,false); //5411
-		}
+			return eAny(getRole(),uml::umlPackage::CONNECTABLEELEMENT_CLASS,false); //5411
 	}
 	return MultiplicityElementImpl::eGet(featureID, resolve, coreType);
 }

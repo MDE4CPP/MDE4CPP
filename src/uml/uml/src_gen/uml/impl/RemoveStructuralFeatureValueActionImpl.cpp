@@ -457,10 +457,7 @@ Any RemoveStructuralFeatureValueActionImpl::eGet(int featureID, bool resolve, bo
 		case uml::umlPackage::REMOVESTRUCTURALFEATUREVALUEACTION_ATTRIBUTE_ISREMOVEDUPLICATES:
 			return eAny(getIsRemoveDuplicates(),ecore::ecorePackage::EBOOLEAN_CLASS,false); //20931
 		case uml::umlPackage::REMOVESTRUCTURALFEATUREVALUEACTION_ATTRIBUTE_REMOVEAT:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getRemoveAt();
-			return eAny(returnValue,uml::umlPackage::INPUTPIN_CLASS,false); //20932
-		}
+			return eAny(getRemoveAt(),uml::umlPackage::INPUTPIN_CLASS,false); //20932
 	}
 	return WriteStructuralFeatureActionImpl::eGet(featureID, resolve, coreType);
 }

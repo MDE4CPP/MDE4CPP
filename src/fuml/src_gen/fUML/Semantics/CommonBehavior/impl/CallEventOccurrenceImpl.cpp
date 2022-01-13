@@ -300,10 +300,7 @@ Any CallEventOccurrenceImpl::eGet(int featureID, bool resolve, bool coreType) co
 	switch(featureID)
 	{
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::CALLEVENTOCCURRENCE_ATTRIBUTE_EXECUTION:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getExecution();
-			return eAny(returnValue,fUML::Semantics::CommonBehavior::CommonBehaviorPackage::CALLEVENTEXECUTION_CLASS,false); //181
-		}
+			return eAny(getExecution(),fUML::Semantics::CommonBehavior::CommonBehaviorPackage::CALLEVENTEXECUTION_CLASS,false); //181
 	}
 	return EventOccurrenceImpl::eGet(featureID, resolve, coreType);
 }

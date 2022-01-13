@@ -575,14 +575,9 @@ Any CallActionActivationImpl::eGet(int featureID, bool resolve, bool coreType) c
 	switch(featureID)
 	{
 		case fUML::Semantics::Actions::ActionsPackage::CALLACTIONACTIVATION_ATTRIBUTE_CALLACTION:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getCallAction();
-			return eAny(returnValue,uml::umlPackage::CALLACTION_CLASS,false); //1412
-		}
+			return eAny(getCallAction(),uml::umlPackage::CALLACTION_CLASS,false); //1412
 		case fUML::Semantics::Actions::ActionsPackage::CALLACTIONACTIVATION_ATTRIBUTE_CALLEXECUTIONS:
-		{
 			return eAnyBag(getCallExecutions(),fUML::Semantics::CommonBehavior::CommonBehaviorPackage::EXECUTION_CLASS); //1411
-		}
 	}
 	return InvocationActionActivationImpl::eGet(featureID, resolve, coreType);
 }

@@ -418,14 +418,9 @@ Any TimeExpressionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::TIMEEXPRESSION_ATTRIBUTE_EXPR:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getExpr();
-			return eAny(returnValue,uml::umlPackage::VALUESPECIFICATION_CLASS,false); //23815
-		}
+			return eAny(getExpr(),uml::umlPackage::VALUESPECIFICATION_CLASS,false); //23815
 		case uml::umlPackage::TIMEEXPRESSION_ATTRIBUTE_OBSERVATION:
-		{
 			return eAnyBag(getObservation(),uml::umlPackage::OBSERVATION_CLASS); //23816
-		}
 	}
 	return ValueSpecificationImpl::eGet(featureID, resolve, coreType);
 }

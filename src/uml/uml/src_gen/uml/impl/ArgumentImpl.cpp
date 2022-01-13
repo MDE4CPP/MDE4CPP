@@ -264,10 +264,7 @@ Any ArgumentImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::ARGUMENT_ATTRIBUTE_NAME:
 			return eAny(getName(),ecore::ecorePackage::ESTRING_CLASS,false); //190
 		case uml::umlPackage::ARGUMENT_ATTRIBUTE_VALUE:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getValue();
-			return eAny(returnValue,uml::umlPackage::OBJECT_CLASS,false); //191
-		}
+			return eAny(getValue(),uml::umlPackage::OBJECT_CLASS,false); //191
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
 }

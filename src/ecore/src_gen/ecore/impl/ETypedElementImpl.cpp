@@ -433,15 +433,9 @@ Any ETypedElementImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case ecore::ecorePackage::ETYPEDELEMENT_ATTRIBUTE_EGENERICTYPE:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getEGenericType();
-			return eAny(returnValue,ecore::ecorePackage::EGENERICTYPE_CLASS,false); //5512
-		}
+			return eAny(getEGenericType(),ecore::ecorePackage::EGENERICTYPE_CLASS,false); //5512
 		case ecore::ecorePackage::ETYPEDELEMENT_ATTRIBUTE_ETYPE:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getEType();
-			return eAny(returnValue,ecore::ecorePackage::ECLASSIFIER_CLASS,false); //5511
-		}
+			return eAny(getEType(),ecore::ecorePackage::ECLASSIFIER_CLASS,false); //5511
 		case ecore::ecorePackage::ETYPEDELEMENT_ATTRIBUTE_LOWERBOUND:
 			return eAny(getLowerBound(),ecore::ecorePackage::EINT_CLASS,false); //557
 		case ecore::ecorePackage::ETYPEDELEMENT_ATTRIBUTE_MANY:

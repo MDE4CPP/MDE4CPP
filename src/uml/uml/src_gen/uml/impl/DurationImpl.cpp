@@ -418,14 +418,9 @@ Any DurationImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::DURATION_ATTRIBUTE_EXPR:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getExpr();
-			return eAny(returnValue,uml::umlPackage::VALUESPECIFICATION_CLASS,false); //7715
-		}
+			return eAny(getExpr(),uml::umlPackage::VALUESPECIFICATION_CLASS,false); //7715
 		case uml::umlPackage::DURATION_ATTRIBUTE_OBSERVATION:
-		{
 			return eAnyBag(getObservation(),uml::umlPackage::OBSERVATION_CLASS); //7716
-		}
 	}
 	return ValueSpecificationImpl::eGet(featureID, resolve, coreType);
 }

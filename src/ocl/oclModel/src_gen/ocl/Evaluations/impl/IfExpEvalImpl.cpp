@@ -36,9 +36,9 @@
 
 #include <exception> // used in Persistence
 #include "fUML/Semantics/Loci/LociFactory.hpp"
+#include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "fUML/Semantics/Values/ValuesFactory.hpp"
 #include "uml/umlFactory.hpp"
-#include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
 #include "ocl/Evaluations/EvalEnvironment.hpp"
 #include "fUML/Semantics/Loci/Locus.hpp"
@@ -322,20 +322,11 @@ Any IfExpEvalImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case ocl::Evaluations::EvaluationsPackage::IFEXPEVAL_ATTRIBUTE_CONDITION:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getCondition();
-			return eAny(returnValue,ocl::Evaluations::EvaluationsPackage::OCLEXPEVAL_CLASS,false); //326
-		}
+			return eAny(getCondition(),ocl::Evaluations::EvaluationsPackage::OCLEXPEVAL_CLASS,false); //326
 		case ocl::Evaluations::EvaluationsPackage::IFEXPEVAL_ATTRIBUTE_ELSEEXPRESSION:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getElseExpression();
-			return eAny(returnValue,ocl::Evaluations::EvaluationsPackage::OCLEXPEVAL_CLASS,false); //328
-		}
+			return eAny(getElseExpression(),ocl::Evaluations::EvaluationsPackage::OCLEXPEVAL_CLASS,false); //328
 		case ocl::Evaluations::EvaluationsPackage::IFEXPEVAL_ATTRIBUTE_THENEXPRESSION:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getThenExpression();
-			return eAny(returnValue,ocl::Evaluations::EvaluationsPackage::OCLEXPEVAL_CLASS,false); //327
-		}
+			return eAny(getThenExpression(),ocl::Evaluations::EvaluationsPackage::OCLEXPEVAL_CLASS,false); //327
 	}
 	return OclExpEvalImpl::eGet(featureID, resolve, coreType);
 }

@@ -347,9 +347,7 @@ Any ConsiderIgnoreFragmentImpl::eGet(int featureID, bool resolve, bool coreType)
 	switch(featureID)
 	{
 		case uml::umlPackage::CONSIDERIGNOREFRAGMENT_ATTRIBUTE_MESSAGE:
-		{
 			return eAnyBag(getMessage(),uml::umlPackage::NAMEDELEMENT_CLASS); //5616
-		}
 	}
 	return CombinedFragmentImpl::eGet(featureID, resolve, coreType);
 }

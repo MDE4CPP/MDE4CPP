@@ -243,9 +243,7 @@ Any TokenSetImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case fUML::Semantics::Activities::ActivitiesPackage::TOKENSET_ATTRIBUTE_TOKENS:
-		{
 			return eAnyBag(getTokens(),fUML::Semantics::Activities::ActivitiesPackage::TOKEN_CLASS); //1160
-		}
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
 }

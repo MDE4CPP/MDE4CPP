@@ -388,10 +388,7 @@ Any AbstractionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::ABSTRACTION_ATTRIBUTE_MAPPING:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getMapping();
-			return eAny(returnValue,uml::umlPackage::OPAQUEEXPRESSION_CLASS,false); //117
-		}
+			return eAny(getMapping(),uml::umlPackage::OPAQUEEXPRESSION_CLASS,false); //117
 	}
 	return DependencyImpl::eGet(featureID, resolve, coreType);
 }

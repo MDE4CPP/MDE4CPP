@@ -768,21 +768,13 @@ Any ArtifactImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::ARTIFACT_ATTRIBUTE_FILENAME:
 			return eAny(getFileName(),ecore::ecorePackage::ESTRING_CLASS,false); //2038
 		case uml::umlPackage::ARTIFACT_ATTRIBUTE_MANIFESTATION:
-		{
 			return eAnyBag(getManifestation(),uml::umlPackage::MANIFESTATION_CLASS); //2039
-		}
 		case uml::umlPackage::ARTIFACT_ATTRIBUTE_NESTEDARTIFACT:
-		{
 			return eAnyBag(getNestedArtifact(),uml::umlPackage::ARTIFACT_CLASS); //2040
-		}
 		case uml::umlPackage::ARTIFACT_ATTRIBUTE_OWNEDATTRIBUTE:
-		{
 			return eAnyBag(getOwnedAttribute(),uml::umlPackage::PROPERTY_CLASS); //2041
-		}
 		case uml::umlPackage::ARTIFACT_ATTRIBUTE_OWNEDOPERATION:
-		{
 			return eAnyBag(getOwnedOperation(),uml::umlPackage::OPERATION_CLASS); //2042
-		}
 	}
 	Any result;
 	result = ClassifierImpl::eGet(featureID, resolve, coreType);

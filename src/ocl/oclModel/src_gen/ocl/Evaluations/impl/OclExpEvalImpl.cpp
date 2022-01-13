@@ -38,9 +38,9 @@
 
 #include <exception> // used in Persistence
 #include "fUML/Semantics/Loci/LociFactory.hpp"
+#include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "fUML/Semantics/Values/ValuesFactory.hpp"
 #include "uml/umlFactory.hpp"
-#include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
 #include "ocl/Evaluations/EvalEnvironment.hpp"
 #include "fUML/Semantics/Values/Evaluation.hpp"
@@ -354,25 +354,13 @@ Any OclExpEvalImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case ocl::Evaluations::EvaluationsPackage::OCLEXPEVAL_ATTRIBUTE_BEFOREENVIRONMENT:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getBeforeEnvironment();
-			return eAny(returnValue,ocl::Evaluations::EvaluationsPackage::EVALENVIRONMENT_CLASS,false); //603
-		}
+			return eAny(getBeforeEnvironment(),ocl::Evaluations::EvaluationsPackage::EVALENVIRONMENT_CLASS,false); //603
 		case ocl::Evaluations::EvaluationsPackage::OCLEXPEVAL_ATTRIBUTE_ENVIRONMENT:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getEnvironment();
-			return eAny(returnValue,ocl::Evaluations::EvaluationsPackage::EVALENVIRONMENT_CLASS,false); //602
-		}
+			return eAny(getEnvironment(),ocl::Evaluations::EvaluationsPackage::EVALENVIRONMENT_CLASS,false); //602
 		case ocl::Evaluations::EvaluationsPackage::OCLEXPEVAL_ATTRIBUTE_MODEL:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getModel();
-			return eAny(returnValue,ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_CLASS,false); //605
-		}
+			return eAny(getModel(),ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_CLASS,false); //605
 		case ocl::Evaluations::EvaluationsPackage::OCLEXPEVAL_ATTRIBUTE_RESULTVALUE:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getResultValue();
-			return eAny(returnValue,fUML::Semantics::Values::ValuesPackage::VALUE_CLASS,false); //604
-		}
+			return eAny(getResultValue(),fUML::Semantics::Values::ValuesPackage::VALUE_CLASS,false); //604
 	}
 	return fUML::Semantics::Values::EvaluationImpl::eGet(featureID, resolve, coreType);
 }

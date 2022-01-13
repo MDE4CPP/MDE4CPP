@@ -321,10 +321,7 @@ Any ParameterableElementImpl::eGet(int featureID, bool resolve, bool coreType) c
 			return eAny(returnValue,uml::umlPackage::TEMPLATEPARAMETER_CLASS,false); //1783
 		}
 		case uml::umlPackage::PARAMETERABLEELEMENT_ATTRIBUTE_TEMPLATEPARAMETER:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getTemplateParameter();
-			return eAny(returnValue,uml::umlPackage::TEMPLATEPARAMETER_CLASS,false); //1784
-		}
+			return eAny(getTemplateParameter(),uml::umlPackage::TEMPLATEPARAMETER_CLASS,false); //1784
 	}
 	return ElementImpl::eGet(featureID, resolve, coreType);
 }

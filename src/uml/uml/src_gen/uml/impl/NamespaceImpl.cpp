@@ -635,29 +635,17 @@ Any NamespaceImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::NAMESPACE_ATTRIBUTE_ELEMENTIMPORT:
-		{
 			return eAnyBag(getElementImport(),uml::umlPackage::ELEMENTIMPORT_CLASS); //15610
-		}
 		case uml::umlPackage::NAMESPACE_ATTRIBUTE_IMPORTEDMEMBER:
-		{
 			return eAnyBag(getImportedMember(),uml::umlPackage::PACKAGEABLEELEMENT_CLASS); //15613
-		}
 		case uml::umlPackage::NAMESPACE_ATTRIBUTE_MEMBER:
-		{
 			return eAnyBag(getMember(),uml::umlPackage::NAMEDELEMENT_CLASS); //15614
-		}
 		case uml::umlPackage::NAMESPACE_ATTRIBUTE_OWNEDMEMBER:
-		{
 			return eAnyBag(getOwnedMember(),uml::umlPackage::NAMEDELEMENT_CLASS); //15612
-		}
 		case uml::umlPackage::NAMESPACE_ATTRIBUTE_OWNEDRULE:
-		{
 			return eAnyBag(getOwnedRule(),uml::umlPackage::CONSTRAINT_CLASS); //1569
-		}
 		case uml::umlPackage::NAMESPACE_ATTRIBUTE_PACKAGEIMPORT:
-		{
 			return eAnyBag(getPackageImport(),uml::umlPackage::PACKAGEIMPORT_CLASS); //15611
-		}
 	}
 	return NamedElementImpl::eGet(featureID, resolve, coreType);
 }

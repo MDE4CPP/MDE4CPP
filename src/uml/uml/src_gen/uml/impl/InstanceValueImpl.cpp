@@ -363,10 +363,7 @@ Any InstanceValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::INSTANCEVALUE_ATTRIBUTE_INSTANCE:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getInstance();
-			return eAny(returnValue,uml::umlPackage::INSTANCESPECIFICATION_CLASS,false); //11815
-		}
+			return eAny(getInstance(),uml::umlPackage::INSTANCESPECIFICATION_CLASS,false); //11815
 	}
 	return ValueSpecificationImpl::eGet(featureID, resolve, coreType);
 }

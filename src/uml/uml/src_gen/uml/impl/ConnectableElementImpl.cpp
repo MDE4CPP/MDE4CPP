@@ -281,9 +281,7 @@ Any ConnectableElementImpl::eGet(int featureID, bool resolve, bool coreType) con
 	switch(featureID)
 	{
 		case uml::umlPackage::CONNECTABLEELEMENT_ATTRIBUTE_END:
-		{
 			return eAnyBag(getEnd(),uml::umlPackage::CONNECTOREND_CLASS); //5012
-		}
 	}
 	Any result;
 	result = ParameterableElementImpl::eGet(featureID, resolve, coreType);

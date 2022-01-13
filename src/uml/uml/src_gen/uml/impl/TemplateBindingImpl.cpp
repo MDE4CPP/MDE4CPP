@@ -474,14 +474,9 @@ Any TemplateBindingImpl::eGet(int featureID, bool resolve, bool coreType) const
 			return eAny(returnValue,uml::umlPackage::TEMPLATEABLEELEMENT_CLASS,false); //2308
 		}
 		case uml::umlPackage::TEMPLATEBINDING_ATTRIBUTE_PARAMETERSUBSTITUTION:
-		{
 			return eAnyBag(getParameterSubstitution(),uml::umlPackage::TEMPLATEPARAMETERSUBSTITUTION_CLASS); //2306
-		}
 		case uml::umlPackage::TEMPLATEBINDING_ATTRIBUTE_SIGNATURE:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getSignature();
-			return eAny(returnValue,uml::umlPackage::TEMPLATESIGNATURE_CLASS,false); //2307
-		}
+			return eAny(getSignature(),uml::umlPackage::TEMPLATESIGNATURE_CLASS,false); //2307
 	}
 	return DirectedRelationshipImpl::eGet(featureID, resolve, coreType);
 }

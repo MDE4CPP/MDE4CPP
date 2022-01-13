@@ -337,13 +337,9 @@ Any DeploymentTargetImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::DEPLOYMENTTARGET_ATTRIBUTE_DEPLOYEDELEMENT:
-		{
 			return eAnyBag(getDeployedElement(),uml::umlPackage::PACKAGEABLEELEMENT_CLASS); //719
-		}
 		case uml::umlPackage::DEPLOYMENTTARGET_ATTRIBUTE_DEPLOYMENT:
-		{
 			return eAnyBag(getDeployment(),uml::umlPackage::DEPLOYMENT_CLASS); //7110
-		}
 	}
 	return NamedElementImpl::eGet(featureID, resolve, coreType);
 }

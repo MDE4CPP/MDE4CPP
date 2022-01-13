@@ -549,13 +549,9 @@ Any DeploymentImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::DEPLOYMENT_ATTRIBUTE_CONFIGURATION:
-		{
 			return eAnyBag(getConfiguration(),uml::umlPackage::DEPLOYMENTSPECIFICATION_CLASS); //6917
-		}
 		case uml::umlPackage::DEPLOYMENT_ATTRIBUTE_DEPLOYEDARTIFACT:
-		{
 			return eAnyBag(getDeployedArtifact(),uml::umlPackage::DEPLOYEDARTIFACT_CLASS); //6918
-		}
 		case uml::umlPackage::DEPLOYMENT_ATTRIBUTE_LOCATION:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getLocation().lock();

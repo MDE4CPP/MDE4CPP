@@ -343,14 +343,9 @@ Any TemplateableElementImpl::eGet(int featureID, bool resolve, bool coreType) co
 	switch(featureID)
 	{
 		case uml::umlPackage::TEMPLATEABLEELEMENT_ATTRIBUTE_OWNEDTEMPLATESIGNATURE:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getOwnedTemplateSignature();
-			return eAny(returnValue,uml::umlPackage::TEMPLATESIGNATURE_CLASS,false); //2344
-		}
+			return eAny(getOwnedTemplateSignature(),uml::umlPackage::TEMPLATESIGNATURE_CLASS,false); //2344
 		case uml::umlPackage::TEMPLATEABLEELEMENT_ATTRIBUTE_TEMPLATEBINDING:
-		{
 			return eAnyBag(getTemplateBinding(),uml::umlPackage::TEMPLATEBINDING_CLASS); //2343
-		}
 	}
 	return ElementImpl::eGet(featureID, resolve, coreType);
 }

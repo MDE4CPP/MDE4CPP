@@ -37,9 +37,9 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "ocl/Evaluations/EvaluationsFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "uml/umlFactory.hpp"
+#include "ocl/Evaluations/EvaluationsFactory.hpp"
 #include "fUML/Semantics/Values/Evaluation.hpp"
 #include "fUML/Semantics/Loci/Locus.hpp"
 #include "ocl/Evaluations/OclExpEval.hpp"
@@ -318,20 +318,11 @@ Any OclMessageArgEvalImpl::eGet(int featureID, bool resolve, bool coreType) cons
 	switch(featureID)
 	{
 		case ocl::Evaluations::EvaluationsPackage::OCLMESSAGEARGEVAL_ATTRIBUTE_EXPRESSION:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getExpression();
-			return eAny(returnValue,ocl::Evaluations::EvaluationsPackage::OCLEXPEVAL_CLASS,false); //623
-		}
+			return eAny(getExpression(),ocl::Evaluations::EvaluationsPackage::OCLEXPEVAL_CLASS,false); //623
 		case ocl::Evaluations::EvaluationsPackage::OCLMESSAGEARGEVAL_ATTRIBUTE_UNSPECIFIED:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getUnspecified();
-			return eAny(returnValue,ocl::Evaluations::EvaluationsPackage::UNSPECIFIEDVALUEEXPEVAL_CLASS,false); //622
-		}
+			return eAny(getUnspecified(),ocl::Evaluations::EvaluationsPackage::UNSPECIFIEDVALUEEXPEVAL_CLASS,false); //622
 		case ocl::Evaluations::EvaluationsPackage::OCLMESSAGEARGEVAL_ATTRIBUTE_VARIABLE:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getVariable();
-			return eAny(returnValue,ocl::Evaluations::EvaluationsPackage::OCLEXPEVAL_CLASS,false); //624
-		}
+			return eAny(getVariable(),ocl::Evaluations::EvaluationsPackage::OCLEXPEVAL_CLASS,false); //624
 	}
 	return fUML::Semantics::Values::EvaluationImpl::eGet(featureID, resolve, coreType);
 }

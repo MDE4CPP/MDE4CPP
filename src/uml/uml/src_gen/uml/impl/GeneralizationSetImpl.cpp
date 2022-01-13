@@ -429,18 +429,13 @@ Any GeneralizationSetImpl::eGet(int featureID, bool resolve, bool coreType) cons
 	switch(featureID)
 	{
 		case uml::umlPackage::GENERALIZATIONSET_ATTRIBUTE_GENERALIZATION:
-		{
 			return eAnyBag(getGeneralization(),uml::umlPackage::GENERALIZATION_CLASS); //11015
-		}
 		case uml::umlPackage::GENERALIZATIONSET_ATTRIBUTE_ISCOVERING:
 			return eAny(getIsCovering(),ecore::ecorePackage::EBOOLEAN_CLASS,false); //11012
 		case uml::umlPackage::GENERALIZATIONSET_ATTRIBUTE_ISDISJOINT:
 			return eAny(getIsDisjoint(),ecore::ecorePackage::EBOOLEAN_CLASS,false); //11013
 		case uml::umlPackage::GENERALIZATIONSET_ATTRIBUTE_POWERTYPE:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getPowertype();
-			return eAny(returnValue,uml::umlPackage::CLASSIFIER_CLASS,false); //11014
-		}
+			return eAny(getPowertype(),uml::umlPackage::CLASSIFIER_CLASS,false); //11014
 	}
 	return PackageableElementImpl::eGet(featureID, resolve, coreType);
 }

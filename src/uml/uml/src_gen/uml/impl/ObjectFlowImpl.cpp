@@ -490,15 +490,9 @@ Any ObjectFlowImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::OBJECTFLOW_ATTRIBUTE_ISMULTIRECEIVE:
 			return eAny(getIsMultireceive(),ecore::ecorePackage::EBOOLEAN_CLASS,false); //15923
 		case uml::umlPackage::OBJECTFLOW_ATTRIBUTE_SELECTION:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getSelection();
-			return eAny(returnValue,uml::umlPackage::BEHAVIOR_CLASS,false); //15924
-		}
+			return eAny(getSelection(),uml::umlPackage::BEHAVIOR_CLASS,false); //15924
 		case uml::umlPackage::OBJECTFLOW_ATTRIBUTE_TRANSFORMATION:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getTransformation();
-			return eAny(returnValue,uml::umlPackage::BEHAVIOR_CLASS,false); //15925
-		}
+			return eAny(getTransformation(),uml::umlPackage::BEHAVIOR_CLASS,false); //15925
 	}
 	return ActivityEdgeImpl::eGet(featureID, resolve, coreType);
 }

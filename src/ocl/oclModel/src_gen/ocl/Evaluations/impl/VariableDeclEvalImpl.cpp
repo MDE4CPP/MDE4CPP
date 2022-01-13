@@ -273,15 +273,9 @@ Any VariableDeclEvalImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case ocl::Evaluations::EvaluationsPackage::VARIABLEDECLEVAL_ATTRIBUTE_INITEXP:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getInitExp();
-			return eAny(returnValue,ocl::Evaluations::EvaluationsPackage::OCLEXPEVAL_CLASS,false); //980
-		}
+			return eAny(getInitExp(),ocl::Evaluations::EvaluationsPackage::OCLEXPEVAL_CLASS,false); //980
 		case ocl::Evaluations::EvaluationsPackage::VARIABLEDECLEVAL_ATTRIBUTE_NAME:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getName();
-			return eAny(returnValue,fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::STRINGVALUE_CLASS,false); //981
-		}
+			return eAny(getName(),fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::STRINGVALUE_CLASS,false); //981
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
 }

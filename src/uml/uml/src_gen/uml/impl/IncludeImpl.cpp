@@ -402,10 +402,7 @@ Any IncludeImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::INCLUDE_ATTRIBUTE_ADDITION:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getAddition();
-			return eAny(returnValue,uml::umlPackage::USECASE_CLASS,false); //11212
-		}
+			return eAny(getAddition(),uml::umlPackage::USECASE_CLASS,false); //11212
 		case uml::umlPackage::INCLUDE_ATTRIBUTE_INCLUDINGCASE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getIncludingCase().lock();

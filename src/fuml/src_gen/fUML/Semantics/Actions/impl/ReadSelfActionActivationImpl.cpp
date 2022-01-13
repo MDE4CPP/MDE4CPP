@@ -41,8 +41,8 @@
 
 #include <exception> // used in Persistence
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
-#include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Actions/ActionsFactory.hpp"
+#include "uml/umlFactory.hpp"
 #include "uml/Action.hpp"
 #include "fUML/Semantics/Actions/ActionActivation.hpp"
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
@@ -358,10 +358,7 @@ Any ReadSelfActionActivationImpl::eGet(int featureID, bool resolve, bool coreTyp
 	switch(featureID)
 	{
 		case fUML::Semantics::Actions::ActionsPackage::READSELFACTIONACTIVATION_ATTRIBUTE_READSELFACTION:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getReadSelfAction();
-			return eAny(returnValue,uml::umlPackage::READSELFACTION_CLASS,false); //9311
-		}
+			return eAny(getReadSelfAction(),uml::umlPackage::READSELFACTION_CLASS,false); //9311
 	}
 	return ActionActivationImpl::eGet(featureID, resolve, coreType);
 }

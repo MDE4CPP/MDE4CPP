@@ -414,16 +414,11 @@ Any FeatureValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::FEATUREVALUE_ATTRIBUTE_FEATURE:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getFeature();
-			return eAny(returnValue,uml::umlPackage::STRUCTURALFEATURE_CLASS,false); //552
-		}
+			return eAny(getFeature(),uml::umlPackage::STRUCTURALFEATURE_CLASS,false); //552
 		case fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::FEATUREVALUE_ATTRIBUTE_POSITION:
 			return eAny(getPosition(),ecore::ecorePackage::EINT_CLASS,false); //551
 		case fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::FEATUREVALUE_ATTRIBUTE_VALUES:
-		{
 			return eAnyBag(getValues(),fUML::Semantics::Values::ValuesPackage::VALUE_CLASS); //550
-		}
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
 }

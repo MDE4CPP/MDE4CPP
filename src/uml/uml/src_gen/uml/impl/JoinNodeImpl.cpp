@@ -413,10 +413,7 @@ Any JoinNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::JOINNODE_ATTRIBUTE_ISCOMBINEDUPLICATE:
 			return eAny(getIsCombineDuplicate(),ecore::ecorePackage::EBOOLEAN_CLASS,false); //13120
 		case uml::umlPackage::JOINNODE_ATTRIBUTE_JOINSPEC:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getJoinSpec();
-			return eAny(returnValue,uml::umlPackage::VALUESPECIFICATION_CLASS,false); //13121
-		}
+			return eAny(getJoinSpec(),uml::umlPackage::VALUESPECIFICATION_CLASS,false); //13121
 	}
 	return ControlNodeImpl::eGet(featureID, resolve, coreType);
 }

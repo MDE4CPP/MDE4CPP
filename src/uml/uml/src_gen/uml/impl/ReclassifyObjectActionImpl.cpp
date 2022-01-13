@@ -515,18 +515,11 @@ Any ReclassifyObjectActionImpl::eGet(int featureID, bool resolve, bool coreType)
 		case uml::umlPackage::RECLASSIFYOBJECTACTION_ATTRIBUTE_ISREPLACEALL:
 			return eAny(getIsReplaceAll(),ecore::ecorePackage::EBOOLEAN_CLASS,false); //20327
 		case uml::umlPackage::RECLASSIFYOBJECTACTION_ATTRIBUTE_NEWCLASSIFIER:
-		{
 			return eAnyBag(getNewClassifier(),uml::umlPackage::CLASSIFIER_CLASS); //20328
-		}
 		case uml::umlPackage::RECLASSIFYOBJECTACTION_ATTRIBUTE_OBJECT:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getObject();
-			return eAny(returnValue,uml::umlPackage::INPUTPIN_CLASS,false); //20329
-		}
+			return eAny(getObject(),uml::umlPackage::INPUTPIN_CLASS,false); //20329
 		case uml::umlPackage::RECLASSIFYOBJECTACTION_ATTRIBUTE_OLDCLASSIFIER:
-		{
 			return eAnyBag(getOldClassifier(),uml::umlPackage::CLASSIFIER_CLASS); //20330
-		}
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
 }

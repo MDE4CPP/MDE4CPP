@@ -478,10 +478,7 @@ Any ElementImportImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::ELEMENTIMPORT_ATTRIBUTE_ALIAS:
 			return eAny(getAlias(),ecore::ecorePackage::ESTRING_CLASS,false); //826
 		case uml::umlPackage::ELEMENTIMPORT_ATTRIBUTE_IMPORTEDELEMENT:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getImportedElement();
-			return eAny(returnValue,uml::umlPackage::PACKAGEABLEELEMENT_CLASS,false); //827
-		}
+			return eAny(getImportedElement(),uml::umlPackage::PACKAGEABLEELEMENT_CLASS,false); //827
 		case uml::umlPackage::ELEMENTIMPORT_ATTRIBUTE_IMPORTINGNAMESPACE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getImportingNamespace().lock();

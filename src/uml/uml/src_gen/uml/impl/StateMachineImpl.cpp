@@ -770,21 +770,13 @@ Any StateMachineImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::STATEMACHINE_ATTRIBUTE_CONNECTIONPOINT:
-		{
 			return eAnyBag(getConnectionPoint(),uml::umlPackage::PSEUDOSTATE_CLASS); //22262
-		}
 		case uml::umlPackage::STATEMACHINE_ATTRIBUTE_EXTENDEDSTATEMACHINE:
-		{
 			return eAnyBag(getExtendedStateMachine(),uml::umlPackage::STATEMACHINE_CLASS); //22265
-		}
 		case uml::umlPackage::STATEMACHINE_ATTRIBUTE_REGION:
-		{
 			return eAnyBag(getRegion(),uml::umlPackage::REGION_CLASS); //22264
-		}
 		case uml::umlPackage::STATEMACHINE_ATTRIBUTE_SUBMACHINESTATE:
-		{
 			return eAnyBag(getSubmachineState(),uml::umlPackage::STATE_CLASS); //22263
-		}
 	}
 	return BehaviorImpl::eGet(featureID, resolve, coreType);
 }

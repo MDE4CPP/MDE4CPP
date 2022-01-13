@@ -261,9 +261,7 @@ Any EObjectContainerImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case ecore::ecorePackage::EOBJECTCONTAINER_ATTRIBUTE_CONTAINER:
-		{
 			return eAnyBag(getContainer(),ecore::ecorePackage::EOBJECT_CLASS); //413
-		}
 	}
 	return EObjectImpl::eGet(featureID, resolve, coreType);
 }

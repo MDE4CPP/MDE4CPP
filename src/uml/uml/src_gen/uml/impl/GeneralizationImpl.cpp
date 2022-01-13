@@ -436,14 +436,9 @@ Any GeneralizationImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::GENERALIZATION_ATTRIBUTE_GENERAL:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getGeneral();
-			return eAny(returnValue,uml::umlPackage::CLASSIFIER_CLASS,false); //1096
-		}
+			return eAny(getGeneral(),uml::umlPackage::CLASSIFIER_CLASS,false); //1096
 		case uml::umlPackage::GENERALIZATION_ATTRIBUTE_GENERALIZATIONSET:
-		{
 			return eAnyBag(getGeneralizationSet(),uml::umlPackage::GENERALIZATIONSET_CLASS); //1097
-		}
 		case uml::umlPackage::GENERALIZATION_ATTRIBUTE_ISSUBSTITUTABLE:
 			return eAny(getIsSubstitutable(),ecore::ecorePackage::EBOOLEAN_CLASS,false); //1098
 		case uml::umlPackage::GENERALIZATION_ATTRIBUTE_SPECIFIC:

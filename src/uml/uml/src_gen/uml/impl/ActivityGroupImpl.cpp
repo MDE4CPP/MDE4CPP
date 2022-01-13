@@ -405,22 +405,16 @@ Any ActivityGroupImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::ACTIVITYGROUP_ATTRIBUTE_CONTAINEDEDGE:
-		{
 			return eAnyBag(getContainedEdge(),uml::umlPackage::ACTIVITYEDGE_CLASS); //109
-		}
 		case uml::umlPackage::ACTIVITYGROUP_ATTRIBUTE_CONTAINEDNODE:
-		{
 			return eAnyBag(getContainedNode(),uml::umlPackage::ACTIVITYNODE_CLASS); //1010
-		}
 		case uml::umlPackage::ACTIVITYGROUP_ATTRIBUTE_INACTIVITY:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getInActivity().lock();
 			return eAny(returnValue,uml::umlPackage::ACTIVITY_CLASS,false); //1011
 		}
 		case uml::umlPackage::ACTIVITYGROUP_ATTRIBUTE_SUBGROUP:
-		{
 			return eAnyBag(getSubgroup(),uml::umlPackage::ACTIVITYGROUP_CLASS); //1012
-		}
 		case uml::umlPackage::ACTIVITYGROUP_ATTRIBUTE_SUPERGROUP:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getSuperGroup().lock();

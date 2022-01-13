@@ -36,8 +36,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "ecore/ecoreFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
+#include "ecore/ecoreFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
 #include "ocl/Expressions/CallExp.hpp"
 #include "ocl/Expressions/CollectionRange.hpp"
@@ -401,10 +401,7 @@ Any TypeExpImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case ocl::Expressions::ExpressionsPackage::TYPEEXP_ATTRIBUTE_REFERREDTYPE:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getReferredType();
-			return eAny(returnValue,ecore::ecorePackage::ECLASSIFIER_CLASS,false); //9122
-		}
+			return eAny(getReferredType(),ecore::ecorePackage::ECLASSIFIER_CLASS,false); //9122
 	}
 	return OclExpressionImpl::eGet(featureID, resolve, coreType);
 }

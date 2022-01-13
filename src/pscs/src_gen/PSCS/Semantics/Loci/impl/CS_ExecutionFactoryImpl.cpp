@@ -430,9 +430,7 @@ Any CS_ExecutionFactoryImpl::eGet(int featureID, bool resolve, bool coreType) co
 	switch(featureID)
 	{
 		case PSCS::Semantics::Loci::LociPackage::CS_EXECUTIONFACTORY_ATTRIBUTE_APPLIEDPROFILES:
-		{
 			return eAnyBag(getAppliedProfiles(),uml::umlPackage::PACKAGE_CLASS); //144
-		}
 	}
 	return fUML::Semantics::Loci::ExecutionFactoryImpl::eGet(featureID, resolve, coreType);
 }

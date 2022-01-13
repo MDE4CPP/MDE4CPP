@@ -701,47 +701,26 @@ Any ActivityEdgeImpl::eGet(int featureID, bool resolve, bool coreType) const
 			return eAny(returnValue,uml::umlPackage::ACTIVITY_CLASS,false); //812
 		}
 		case uml::umlPackage::ACTIVITYEDGE_ATTRIBUTE_GUARD:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getGuard();
-			return eAny(returnValue,uml::umlPackage::VALUESPECIFICATION_CLASS,false); //813
-		}
+			return eAny(getGuard(),uml::umlPackage::VALUESPECIFICATION_CLASS,false); //813
 		case uml::umlPackage::ACTIVITYEDGE_ATTRIBUTE_INGROUP:
-		{
 			return eAnyBag(getInGroup(),uml::umlPackage::ACTIVITYGROUP_CLASS); //821
-		}
 		case uml::umlPackage::ACTIVITYEDGE_ATTRIBUTE_INPARTITION:
-		{
 			return eAnyBag(getInPartition(),uml::umlPackage::ACTIVITYPARTITION_CLASS); //814
-		}
 		case uml::umlPackage::ACTIVITYEDGE_ATTRIBUTE_INSTRUCTUREDNODE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getInStructuredNode().lock();
 			return eAny(returnValue,uml::umlPackage::STRUCTUREDACTIVITYNODE_CLASS,false); //816
 		}
 		case uml::umlPackage::ACTIVITYEDGE_ATTRIBUTE_INTERRUPTS:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getInterrupts();
-			return eAny(returnValue,uml::umlPackage::INTERRUPTIBLEACTIVITYREGION_CLASS,false); //815
-		}
+			return eAny(getInterrupts(),uml::umlPackage::INTERRUPTIBLEACTIVITYREGION_CLASS,false); //815
 		case uml::umlPackage::ACTIVITYEDGE_ATTRIBUTE_REDEFINEDEDGE:
-		{
 			return eAnyBag(getRedefinedEdge(),uml::umlPackage::ACTIVITYEDGE_CLASS); //819
-		}
 		case uml::umlPackage::ACTIVITYEDGE_ATTRIBUTE_SOURCE:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getSource();
-			return eAny(returnValue,uml::umlPackage::ACTIVITYNODE_CLASS,false); //818
-		}
+			return eAny(getSource(),uml::umlPackage::ACTIVITYNODE_CLASS,false); //818
 		case uml::umlPackage::ACTIVITYEDGE_ATTRIBUTE_TARGET:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getTarget();
-			return eAny(returnValue,uml::umlPackage::ACTIVITYNODE_CLASS,false); //817
-		}
+			return eAny(getTarget(),uml::umlPackage::ACTIVITYNODE_CLASS,false); //817
 		case uml::umlPackage::ACTIVITYEDGE_ATTRIBUTE_WEIGHT:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getWeight();
-			return eAny(returnValue,uml::umlPackage::VALUESPECIFICATION_CLASS,false); //820
-		}
+			return eAny(getWeight(),uml::umlPackage::VALUESPECIFICATION_CLASS,false); //820
 	}
 	return RedefinableElementImpl::eGet(featureID, resolve, coreType);
 }

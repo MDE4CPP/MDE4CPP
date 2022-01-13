@@ -37,10 +37,10 @@
 
 #include <exception> // used in Persistence
 #include "fUML/Semantics/Loci/LociFactory.hpp"
-#include "fUML/Semantics/Values/ValuesFactory.hpp"
-#include "ocl/Evaluations/EvaluationsFactory.hpp"
-#include "uml/umlFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
+#include "ocl/Evaluations/EvaluationsFactory.hpp"
+#include "fUML/Semantics/Values/ValuesFactory.hpp"
+#include "uml/umlFactory.hpp"
 #include "ocl/Evaluations/EvalEnvironment.hpp"
 #include "ocl/Evaluations/LiteralExpEval.hpp"
 #include "fUML/Semantics/Loci/Locus.hpp"
@@ -265,9 +265,7 @@ Any TupleLiteralExpEvalImpl::eGet(int featureID, bool resolve, bool coreType) co
 	switch(featureID)
 	{
 		case ocl::Evaluations::EvaluationsPackage::TUPLELITERALEXPEVAL_ATTRIBUTE_TUPLEPART:
-		{
 			return eAnyBag(getTuplePart(),ocl::Evaluations::EvaluationsPackage::VARIABLEDECLEVAL_CLASS); //866
-		}
 	}
 	return LiteralExpEvalImpl::eGet(featureID, resolve, coreType);
 }

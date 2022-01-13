@@ -473,29 +473,18 @@ Any LifelineImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::LIFELINE_ATTRIBUTE_COVEREDBY:
-		{
 			return eAnyBag(getCoveredBy(),uml::umlPackage::INTERACTIONFRAGMENT_CLASS); //13213
-		}
 		case uml::umlPackage::LIFELINE_ATTRIBUTE_DECOMPOSEDAS:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getDecomposedAs();
-			return eAny(returnValue,uml::umlPackage::PARTDECOMPOSITION_CLASS,false); //1329
-		}
+			return eAny(getDecomposedAs(),uml::umlPackage::PARTDECOMPOSITION_CLASS,false); //1329
 		case uml::umlPackage::LIFELINE_ATTRIBUTE_INTERACTION:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getInteraction().lock();
 			return eAny(returnValue,uml::umlPackage::INTERACTION_CLASS,false); //13210
 		}
 		case uml::umlPackage::LIFELINE_ATTRIBUTE_REPRESENTS:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getRepresents();
-			return eAny(returnValue,uml::umlPackage::CONNECTABLEELEMENT_CLASS,false); //13211
-		}
+			return eAny(getRepresents(),uml::umlPackage::CONNECTABLEELEMENT_CLASS,false); //13211
 		case uml::umlPackage::LIFELINE_ATTRIBUTE_SELECTOR:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getSelector();
-			return eAny(returnValue,uml::umlPackage::VALUESPECIFICATION_CLASS,false); //13212
-		}
+			return eAny(getSelector(),uml::umlPackage::VALUESPECIFICATION_CLASS,false); //13212
 	}
 	return NamedElementImpl::eGet(featureID, resolve, coreType);
 }

@@ -253,10 +253,7 @@ Any CollectionLiteralPartEvalImpl::eGet(int featureID, bool resolve, bool coreTy
 	switch(featureID)
 	{
 		case ocl::Evaluations::EvaluationsPackage::COLLECTIONLITERALPARTEVAL_ATTRIBUTE_ELEMENT:
-		{
-			std::shared_ptr<ecore::EObject> returnValue=getElement();
-			return eAny(returnValue,fUML::Semantics::Values::ValuesPackage::VALUE_CLASS,false); //182
-		}
+			return eAny(getElement(),fUML::Semantics::Values::ValuesPackage::VALUE_CLASS,false); //182
 	}
 	return fUML::Semantics::Values::EvaluationImpl::eGet(featureID, resolve, coreType);
 }

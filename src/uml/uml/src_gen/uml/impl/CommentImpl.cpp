@@ -296,9 +296,7 @@ Any CommentImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::COMMENT_ATTRIBUTE_ANNOTATEDELEMENT:
-		{
 			return eAnyBag(getAnnotatedElement(),uml::umlPackage::ELEMENT_CLASS); //453
-		}
 		case uml::umlPackage::COMMENT_ATTRIBUTE_BODY:
 			return eAny(getBody(),ecore::ecorePackage::ESTRING_CLASS,false); //454
 	}
