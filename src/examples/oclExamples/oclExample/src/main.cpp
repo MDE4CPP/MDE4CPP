@@ -1,6 +1,7 @@
 #include <string>
 #include <oclParser/Utilities/Ocl.h>
 #include <iostream>
+#include <sstream>
 
 #include <ecore/EFactory.hpp>
 #include <ecore/EPackage.hpp>
@@ -36,55 +37,55 @@
 #include <primitivetypesReflection/PrimitiveTypesPackage.hpp>
 
 
-void query_syntax1();
-void query_syntax2();
-void query_syntax3();
+bool query_syntax1();
+bool query_syntax2();
+bool query_syntax3();
 
-void constraint_syntax1();
-void constraint_syntax2();
+bool constraint_syntax1();
+bool constraint_syntax2();
 
-void ecore_query1();
-void ecore_query2();
-void ecore_query3();
-void ecore_query4();
+bool ecore_query1();
+bool ecore_query2();
+bool ecore_query3();
+bool ecore_query4();
 
-void ecore_any_query1();
-void ecore_any_query2();
-void ecore_any_query3();
-void ecore_any_query4();
-void ecore_any_query5();
+bool ecore_any_query1();
+bool ecore_any_query2();
+bool ecore_any_query3();
+bool ecore_any_query4();
+bool ecore_any_query5();
 
-void uml_query1();
-void uml_query2();
-void uml_query3();
-void uml_query4();
+bool uml_query1();
+bool uml_query2();
+bool uml_query3();
+bool uml_query4();
 
-void uml_any_query1();
-void uml_any_query2();
+bool uml_any_query1();
+bool uml_any_query2();
 
-void ecore_validate1();
-void ecore_validate2();
+bool ecore_validate1();
+bool ecore_validate2();
 
 void validate( std::shared_ptr<ecore::EObject> context, const std::string& query);
-void query(std::shared_ptr<ecore::EObject> context, const std::string& query);
-Any queryValue(std::shared_ptr<ecore::EObject> context, const std::string& query);
-void checkSyntaxQuery(const std::string& query);
-void checkSyntaxConstraint(const std::string& query);
+bool query(const std::string& query, std::shared_ptr<ecore::EObject> context, const std::string& testStr);
+Any queryValue(const std::string& query, std::shared_ptr<ecore::EObject> context);
+bool checkSyntaxQuery(const std::string& query);
+bool checkSyntaxConstraint(const std::string& query);
 
-void printEAttribute(std::shared_ptr<ecore::EAttribute> eattr);
-void printEReference(std::shared_ptr<ecore::EReference> eref);
-void printETypedElement(std::shared_ptr<ecore::ETypedElement> etyped);
-void printENamedElement(std::shared_ptr<ecore::ENamedElement> ename);
-void printEOperation(std::shared_ptr<ecore::EOperation> eope);
-void printEcore(Any value);
-void printEcoreMany(Any value);
+std::string printEAttribute(std::shared_ptr<ecore::EAttribute> eattr);
+std::string printEReference(std::shared_ptr<ecore::EReference> eref);
+std::string printETypedElement(std::shared_ptr<ecore::ETypedElement> etyped);
+std::string printENamedElement(std::shared_ptr<ecore::ENamedElement> ename);
+std::string printEOperation(std::shared_ptr<ecore::EOperation> eope);
+std::string printEcore(Any value);
+std::string printEcoreMany(Any value);
 
-void printProperty(std::shared_ptr<uml::Property> prop);
-void printTypedElement(std::shared_ptr<uml::TypedElement> utyped);
-void printNamedElement(std::shared_ptr<uml::NamedElement> uname);
-void printOperation(std::shared_ptr<uml::Operation> uope);
-void printUml(Any value);
-void printUmlMany(Any value);
+std::string printProperty(std::shared_ptr<uml::Property> prop);
+std::string printTypedElement(std::shared_ptr<uml::TypedElement> utyped);
+std::string printNamedElement(std::shared_ptr<uml::NamedElement> uname);
+std::string printOperation(std::shared_ptr<uml::Operation> uope);
+std::string printUml(Any value);
+std::string printUmlMany(Any value);
 
 void pause();
 
@@ -95,83 +96,98 @@ std::shared_ptr<uml::umlPackage> upackage = uml::umlPackage::eInstance();
 
 int main()
 {
-    query_syntax1();
-    query_syntax2();
-    query_syntax3();
+	int sucCount=0;
+	int failCount=0;
+	// Simple OCL Syntax checks
+    query_syntax1() == true ? sucCount++:failCount++;
+    query_syntax2() == true ? sucCount++:failCount++;
+    query_syntax3() == true ? sucCount++:failCount++;
 
-    constraint_syntax1();
-    constraint_syntax2();
+    constraint_syntax1() == true ? sucCount++:failCount++;
+    constraint_syntax2() == true ? sucCount++:failCount++;
 
-    ecore_query1();
-    ecore_query2();
-    ecore_query3();
-    ecore_query4();
+    // simple ecore querys
+    ecore_query1() == true ? sucCount++:failCount++;
+    ecore_query2() == true ? sucCount++:failCount++;
+    ecore_query3() == true ? sucCount++:failCount++;
+    ecore_query4() == true ? sucCount++:failCount++;
 
-    ecore_any_query1();
-    ecore_any_query2();
-    ecore_any_query3();
-    ecore_any_query4();
-    ecore_any_query5();
+    ecore_any_query1()== true ? sucCount++:failCount++;
+    ecore_any_query2()== true ? sucCount++:failCount++;
+    ecore_any_query3()== true ? sucCount++:failCount++;
+    ecore_any_query4()== true ? sucCount++:failCount++;
+    ecore_any_query5()== true ? sucCount++:failCount++;
 
-    uml_query1();
-    uml_query2();
-    uml_query3();
-    uml_query4();
+//    ecore_validate1()== true ? sucCount++:failCount++; //ToDo
+//    ecore_validate2()== true ? sucCount++:failCount++; //ToDo
 
-    uml_any_query1();
-    uml_any_query2();
+    uml_query1()== true ? sucCount++:failCount++;
+    uml_query2()== true ? sucCount++:failCount++;
+    uml_query3()== true ? sucCount++:failCount++;
+    uml_query4()== true ? sucCount++:failCount++;
 
+    uml_any_query1()== true ? sucCount++:failCount++;
+    uml_any_query2()== true ? sucCount++:failCount++;
+
+    std::cout << sucCount << "/"<< sucCount+failCount << " correct: ";
+    (failCount==0) ? std::cout << "success" << std::endl: std::cout << "fail" << std::endl;
     pause();
 
     return 1;
 }
 
-void query_syntax1() {
+bool query_syntax1() {
     std::string query = "self.name";
     std::cout << "START Syntax_1 (correct): " << query << std::endl;
-    checkSyntaxQuery(query);
+    bool returnValue = checkSyntaxQuery(query);
     std::cout << "END Syntax_1 -------------------------------------------\n" << std::endl;
+    return returnValue;
 }
 
-void query_syntax2() {
+bool query_syntax2() {
     std::string query = "if self.b then self.a = 1 else self.a = 2 endif";
     std::cout << "START Syntax_2 (correct): " << query << std::endl;
-    checkSyntaxQuery(query);
+    bool returnValue = checkSyntaxQuery(query);
     std::cout << "END Syntax_2 -------------------------------------------\n" << std::endl;
+    return returnValue;
 }
 
-void query_syntax3() {
+bool query_syntax3() {
     std::string query = "if self.b then self.a = 1 else self.a = 2";
-    std::cout << "START Syntax_2 (error): " << query << std::endl;
-    checkSyntaxQuery(query);
+    std::cout << "START Syntax_2 (sholud be an error): " << query << std::endl;
+    bool returnValue = not(checkSyntaxQuery(query));
     std::cout << "END Syntax_2 -------------------------------------------\n" << std::endl;
+    return returnValue;
 }
 
-void constraint_syntax1() {
+bool constraint_syntax1() {
     std::string query = "context Library::nbBooks : Integer init: 5";
     std::cout << "START Syntax_4 (correct): " << query << std::endl;
-    checkSyntaxConstraint(query);
+    bool returnValue = checkSyntaxConstraint(query);
     std::cout << "END Syntax_4 -------------------------------------------\n" << std::endl;
+    return returnValue;
 }
 
-void constraint_syntax2() {
+bool constraint_syntax2() {
     std::string query = "context Library:nbBooks : Integer init: 5";
     std::cout << "START Syntax_5 (error): " << query << std::endl;
-    checkSyntaxConstraint(query);
+    bool returnValue = not(checkSyntaxConstraint(query));
     std::cout << "END Syntax_5 -------------------------------------------\n" << std::endl;
+    return returnValue ;
 }
 
-void ecore_query1() {
+bool ecore_query1() {
     std::string qry = "self.name";
     std::shared_ptr<ecore::EPackage> context = efactory->createEPackage();
-    context->setName("ecore_query1");
+    context->setName("my_query1_Package");
 
     std::cout << "START Query_1 (context = EPackage): " << qry << std::endl;
-    query(context, qry);
+    bool returnValue = query(qry, context, "my_query1_Package");
     std::cout << "END Query_1 -------------------------------------------\n" << std::endl;
+    return returnValue;
 }
 
-void ecore_query2() {
+bool ecore_query2() {
     std::string qry = "self.eAttributes";
     std::shared_ptr<ecore::EPackage> ep = efactory->createEPackage();
     std::shared_ptr<ecore::EClass> context = efactory->createEClass_as_eClassifiers_in_EPackage(ep);
@@ -187,11 +203,12 @@ void ecore_query2() {
     a2->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 
     std::cout << "START Query_2(context = EClass): " << qry << std::endl;
-    query(context, qry);
+    bool returnValue = query(qry, context, "<EAttribute> a1 : Integer [0..*]\n<EAttribute> a2 : Boolean [0..1]");
     std::cout << "END Query_2 -------------------------------------------\n" << std::endl;
+    return returnValue;
 }
 
-void ecore_query3() {
+bool ecore_query3() {
     std::string qry = "self.eType";
     std::shared_ptr<ecore::EPackage> ep = efactory->createEPackage();
     std::shared_ptr<ecore::EClass> c1 = efactory->createEClass_as_eClassifiers_in_EPackage(ep);
@@ -203,11 +220,12 @@ void ecore_query3() {
     context->setEType(types::typesPackage::eInstance()->getInteger_Class());
 
     std::cout << "START Query_3(context = EAttribute): " << qry << std::endl;
-    query(context, qry);
+    bool returnValue=query(qry, context, "EClassifier");
     std::cout << "END Query_3 -------------------------------------------\n" << std::endl;
+    return returnValue;
 }
 
-void ecore_query4() {
+bool ecore_query4() {
     std::string qry = "self";
     std::shared_ptr<ecore::EPackage> ep = efactory->createEPackage();
     std::shared_ptr<ecore::EClass> c1 = efactory->createEClass_as_eClassifiers_in_EPackage(ep);
@@ -225,106 +243,31 @@ void ecore_query4() {
     p2->setEType(types::typesPackage::eInstance()->getReal_Class());
 
     std::cout << "START Query_4(context = EOperation): " << qry << std::endl;
-    query(context, qry);
+    bool returnValue=query(qry, context, "o1(p1 : String, p2 : Real)");
     std::cout << "END Query_4 -------------------------------------------\n" << std::endl;
+    return returnValue;
 }
 
-void uml_query1() {
-    std::string qry = "self.name";
-    std::shared_ptr<uml::Model> context = ufactory->createModel();
-    context->setName("uml_query1");
-
-    std::cout << "START Query_6 (context = Model): " << qry << std::endl;
-    query(context, qry);
-    std::cout << "END Query_6 -------------------------------------------\n" << std::endl;
-}
-
-void uml_query2() {
-    std::string qry = "self.ownedElement";
-    std::shared_ptr<uml::Model> p = ufactory->createModel();
-    std::shared_ptr<uml::Class> context = ufactory->createClass_as_ownedType_in_Package(p);
-    std::shared_ptr<uml::Property> a1 = ufactory->createProperty_as_ownedAttribute_in_Class(context);
-    std::shared_ptr<uml::Property> a2 = ufactory->createProperty_as_ownedAttribute_in_Class(context);
-    std::shared_ptr<uml::Operation> o1 = ufactory->createOperation_as_ownedOperation_in_Class(context);
-    std::shared_ptr<uml::Parameter> p1 = ufactory->createParameter_as_ownedParameter_in_Operation(o1);
-    std::shared_ptr<uml::Parameter> p2 = ufactory->createParameter_as_ownedParameter_in_Operation(o1);
-
-    context->setName("theContext");
-    a1->setName("a1");
-    a1->setLower(0);
-    a1->setUpper(-1);
-    a1->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Integer());
-    a2->setName("a2");
-    a2->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
-    o1->setName("o1");
-    // throw an instance of char exception
-    //o1->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
-    p1->setName("p1");
-    p1->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_String());
-    p2->setName("p2");
-    p2->setLower(0);
-    p2->setUpper(-1);
-    p2->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_String());
-
-    std::cout << "START Query_7(context = Class): " << qry << std::endl;
-    query(context, qry);
-    std::cout << "END Query_7 -------------------------------------------\n" << std::endl;
-}
-
-void uml_query3() {
-    std::string qry = "self.name";
-    std::shared_ptr<uml::Model> p = ufactory->createModel();
-    std::shared_ptr<uml::Class> c1 = ufactory->createClass_as_ownedType_in_Package(p);
-    std::shared_ptr<uml::Property> context = ufactory->createProperty_as_ownedAttribute_in_Class(c1);
-    c1->setName("c1");
-    context->setName("a1");
-    context->setLower(0);
-    context->setUpper(-1);
-    context->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Integer());
-
-    std::cout << "START Query_8(context = Property): " << qry << std::endl;
-    query(context, qry);
-    std::cout << "END Query_8 -------------------------------------------\n" << std::endl;
-}
-
-void uml_query4() {
-    std::string qry = "self";
-    std::shared_ptr<uml::Model> p = ufactory->createModel();
-    std::shared_ptr<uml::Class> c1 = ufactory->createClass_as_ownedType_in_Package(p);
-    std::shared_ptr<uml::Operation> context = ufactory->createOperation_as_ownedOperation_in_Class(c1);
-    std::shared_ptr<uml::Parameter> p1 = ufactory->createParameter_as_ownedParameter_in_Operation(context);
-    std::shared_ptr<uml::Parameter> p2 = ufactory->createParameter_as_ownedParameter_in_Operation(context);
-
-    c1->setName("theContext");
-    context->setName("o1");
-    // throw an instance of char exception
-    //context->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
-    p1->setName("p1");
-    p1->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_String());
-    p2->setName("p2");
-    p2->setLower(0);
-    p2->setUpper(-1);
-    p2->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_String());
-
-    std::cout << "START Query_9(context = Operation): " << qry << std::endl;
-    query(context, qry);
-    std::cout << "END Query_9 -------------------------------------------\n" << std::endl;
-}
-
-void ecore_any_query1() {
+bool ecore_any_query1() {
+	bool returnValue =false;
     std::string qry = "self.name";
     std::shared_ptr<ecore::EPackage> context = efactory->createEPackage();
     context->setName("ecore_query1");
-    Any value = queryValue(context, qry);
+    Any value = queryValue(qry,context);
 
     std::cout << "START Query_Any_1 (context = EPackage): " << qry << std::endl;
     if(value != nullptr) {
-        std::cout << value->get<std::string>() << std::endl;
+    	std::string resultStr=value->get<std::string>() ;
+        std::cout << resultStr << std::endl;
+        (resultStr.compare("ecore_query1") == 0) ? returnValue =  true : returnValue =  false;
     }
+    returnValue ? std::cout << "success" << std::endl : std::cout << "fail" << std::endl;
     std::cout << "END Query_Any_1 -------------------------------------------\n" << std::endl;
+    return returnValue ;
 }
 
-void ecore_any_query2() {
+bool ecore_any_query2() {
+	bool returnValue =false;
     std::string qry = "self.eAttributes";
     std::shared_ptr<ecore::EPackage> ep = efactory->createEPackage();
     std::shared_ptr<ecore::EClass> context = efactory->createEClass_as_eClassifiers_in_EPackage(ep);
@@ -339,25 +282,33 @@ void ecore_any_query2() {
     a2->setName("a2");
     a2->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 
-    Any value = queryValue(context, qry);
+    Any value = queryValue(qry, context);
 
     std::cout << "START Query_Any_2(context = EClass): " << qry << std::endl;
+    std::string resultStr="";
     if(value != nullptr) {
         try {
             std::shared_ptr<Bag<AnyObject>> valueItems = value->get<std::shared_ptr<Bag<AnyObject>>>();
             for(size_t i = 0; i < valueItems->size(); i++) {
                 std::shared_ptr<ecore::EObject> eobj = valueItems->at(i)->get<std::shared_ptr<ecore::EObject>>();
                 std::shared_ptr<ecore::EAttribute> eattr = std::dynamic_pointer_cast<ecore::EAttribute>(eobj);
-                printEAttribute(eattr);
+                std::string attrStr = printEAttribute(eattr);
+                std::cout << attrStr;
+                resultStr +=attrStr;
             }
         } catch(...) {
             std::cout << "Error : get failed" << std::endl;
         }
     }
+    (resultStr.compare("<EAttribute> a1 : Integer [0..*]\n<EAttribute> a2 : Boolean [0..1]\n") == 0) ? returnValue =  true : returnValue =  false;
+    returnValue ? std::cout << "success" << std::endl : std::cout << "fail" << std::endl;
     std::cout << "END Query_Any_2 -------------------------------------------\n" << std::endl;
+    return returnValue ;
+
 }
 
-void ecore_any_query3() {
+bool ecore_any_query3() {
+	bool returnValue =false;
     std::string qry = "self.eType";
     std::shared_ptr<ecore::EPackage> ep = efactory->createEPackage();
     std::shared_ptr<ecore::EClass> c1 = efactory->createEClass_as_eClassifiers_in_EPackage(ep);
@@ -368,14 +319,19 @@ void ecore_any_query3() {
     context->setUpperBound(-1);
     context->setEType(types::typesPackage::eInstance()->getInteger_Class());
 
-    Any value = queryValue(context, qry);
+    Any value = queryValue(qry, context);
 
     std::cout << "START Query_Any_3(context = EAttribute): " << qry << std::endl;
-    printEcore(value);
+    std::string resultStr = printEcore(value);
+    std::cout << resultStr;
+    (resultStr.compare("EClassifier\n") == 0) ? returnValue = true : returnValue =  false;
+    returnValue ? std::cout << "success" << std::endl : std::cout << "fail" << std::endl;
     std::cout << "END Query_Any_3 -------------------------------------------\n" << std::endl;
+    return returnValue;
 }
 
-void ecore_any_query4() {
+bool ecore_any_query4() {
+	bool returnValue =false;
     std::string qry = "self";
     std::shared_ptr<ecore::EPackage> ep = efactory->createEPackage();
     std::shared_ptr<ecore::EClass> c1 = efactory->createEClass_as_eClassifiers_in_EPackage(ep);
@@ -392,14 +348,19 @@ void ecore_any_query4() {
     p2->setUpperBound(-1);
     p2->setEType(types::typesPackage::eInstance()->getReal_Class());
 
-    Any value = queryValue(context, qry);
+    Any value = queryValue(qry, context);
 
     std::cout << "START Query_Any_4(context = EOperation): " << qry << std::endl;
-    printEcore(value);
+    std::string resultStr = printEcore(value);
+    std::cout << resultStr  << std::endl;
+    (resultStr.compare("<Operation> o1(p1 : String, p2 : Real)") == 0) ? returnValue = true : returnValue =  false;
+    returnValue ? std::cout << "success" << std::endl : std::cout << "fail" << std::endl;
     std::cout << "END Query_Any_4 -------------------------------------------\n" << std::endl;
+    return returnValue;
 }
 
-void ecore_any_query5() {
+bool ecore_any_query5() {
+	bool returnValue =false;
     std::string qry = "self.eStructuralFeatures";
     std::shared_ptr<ecore::EPackage> ep = efactory->createEPackage();
     std::shared_ptr<ecore::EClass> context = efactory->createEClass_as_eClassifiers_in_EPackage(ep);
@@ -426,27 +387,71 @@ void ecore_any_query5() {
     p2->setUpperBound(-1);
     p2->setEType(types::typesPackage::eInstance()->getReal_Class());
 
-    Any value = queryValue(context, qry);
+    Any value = queryValue(qry, context);
 
     std::cout << "START Query_Any_5(context = EClass): " << qry << std::endl;
-    printEcoreMany(value);
+
+    std::string resultStr = printEcoreMany(value);
+    std::cout << resultStr;
+    (resultStr.compare("<EAttribute> a1 : Integer [0..*]\n<EReference> r1 : Boolean [0..1]\n") == 0) ? returnValue = true : returnValue =  false;
+    returnValue ? std::cout << "success" << std::endl : std::cout << "fail" << std::endl;
     std::cout << "END Query_Any_5 -------------------------------------------\n" << std::endl;
+    return returnValue;
 }
 
-void uml_any_query1() {
+
+bool ecore_validate1() { /* NOT WORKING */
+    std::string qry = "context C1 inv: self.a1 > 0 ";
+
+    std::shared_ptr<ecore::EPackage> ep = efactory->createEPackage();
+    std::shared_ptr<ecore::EClass> c1 = efactory->createEClass_as_eClassifiers_in_EPackage(ep);
+    std::shared_ptr<ecore::EAttribute> a1 = efactory->createEAttribute_as_eAttributes_in_EClass(c1);
+    std::shared_ptr<ecore::EObject> context = efactory->create(c1->getClassifierID());
+
+    c1->setName("C1");
+    a1->setName("a1");
+    a1->setEType(ecore::ecorePackage::eInstance()->getEInt_Class());
+    context->eSet(a1, eAny(5, ecore::ecorePackage::EINT_CLASS, false));
+
+    std::cout << "START Validate_1(context = EObject (a1=5)): " << qry << std::endl;
+    bool returnValue=query(qry, context, "");
+    std:: cout << returnValue << std::endl;
+    returnValue ? std::cout << "success" << std::endl : std::cout << "fail" << std::endl;
+    std::cout << "END Validate_1 -------------------------------------------\n" << std::endl;
+    return returnValue;
+}
+
+bool ecore_validate2() { /* NOT WORKING */
+    std::string qry = "context C1 inv: self.a1 > 10 ";
+
+    std::shared_ptr<ecore::EPackage> ep = efactory->createEPackage();
+    std::shared_ptr<ecore::EClass> c1 = efactory->createEClass_as_eClassifiers_in_EPackage(ep);
+    std::shared_ptr<ecore::EAttribute> a1 = efactory->createEAttribute_as_eAttributes_in_EClass(c1);
+    std::shared_ptr<ecore::EObject> context = efactory->create(c1->getClassifierID());
+
+    c1->setName("C1");
+    a1->setName("a1");
+    a1->setEType(ecore::ecorePackage::eInstance()->getEInt_Class());
+    context->eSet(a1, eAny(5, ecore::ecorePackage::EINT_CLASS, false));
+
+    std::cout << "START Validate_2(context = EObject (a1=5)): " << qry << std::endl;
+    bool returnValue=query(qry, context, "");
+    std::cout << "END Validate_2 -------------------------------------------\n" << std::endl;
+    return returnValue;
+}
+
+bool uml_query1() {
     std::string qry = "self.name";
     std::shared_ptr<uml::Model> context = ufactory->createModel();
     context->setName("uml_query1");
-    Any value = queryValue(context, qry);
 
-    std::cout << "START Query_UML_Any_1 (context = Model): " << qry << std::endl;
-    if(value != nullptr) {
-        std::cout << value->get<std::string>() << std::endl;
-    }
-    std::cout << "END Query_UML_Any_1 -------------------------------------------\n" << std::endl;
+    std::cout << "START UML Query_1 (context = Model): " << qry << std::endl;
+    bool returnValue=query(qry,context, "uml_query1");
+    std::cout << "END UML Query_1 -------------------------------------------\n" << std::endl;
+    return returnValue;
 }
 
-void uml_any_query2() {
+bool uml_query2() {
     std::string qry = "self.ownedElement";
     std::shared_ptr<uml::Model> p = ufactory->createModel();
     std::shared_ptr<uml::Class> context = ufactory->createClass_as_ownedType_in_Package(p);
@@ -473,47 +478,111 @@ void uml_any_query2() {
     p2->setUpper(-1);
     p2->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_String());
 
-    Any value = queryValue(context, qry);
+    std::cout << "START UML Query_2(context = Class): " << qry << std::endl;
+    bool returnValue=query(qry,context, "<Property> a1 : Integer [0..*]\n<Property> a2 : Boolean [1..1]\n<Operation> o1(p1 : String [1..1], p2 : String [0..*])");
+    std::cout << "END UML Query_2 -------------------------------------------\n" << std::endl;
+    return returnValue;
+}
+
+bool uml_query3() {
+    std::string qry = "self.name";
+    std::shared_ptr<uml::Model> p = ufactory->createModel();
+    std::shared_ptr<uml::Class> c1 = ufactory->createClass_as_ownedType_in_Package(p);
+    std::shared_ptr<uml::Property> context = ufactory->createProperty_as_ownedAttribute_in_Class(c1);
+    c1->setName("c1");
+    context->setName("a1");
+    context->setLower(0);
+    context->setUpper(-1);
+    context->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Integer());
+
+    std::cout << "START UML Query_3(context = Property): " << qry << std::endl;
+    bool returnValue=query(qry,context,"a1");
+    std::cout << "END UML Query_3 -------------------------------------------\n" << std::endl;
+    return returnValue;
+}
+
+bool  uml_query4() {
+    std::string qry = "self";
+    std::shared_ptr<uml::Model> p = ufactory->createModel();
+    std::shared_ptr<uml::Class> c1 = ufactory->createClass_as_ownedType_in_Package(p);
+    std::shared_ptr<uml::Operation> context = ufactory->createOperation_as_ownedOperation_in_Class(c1);
+    std::shared_ptr<uml::Parameter> p1 = ufactory->createParameter_as_ownedParameter_in_Operation(context);
+    std::shared_ptr<uml::Parameter> p2 = ufactory->createParameter_as_ownedParameter_in_Operation(context);
+
+    c1->setName("theContext");
+    context->setName("o1");
+    // throw an instance of char exception
+    //context->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
+    p1->setName("p1");
+    p1->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_String());
+    p2->setName("p2");
+    p2->setLower(0);
+    p2->setUpper(-1);
+    p2->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_String());
+
+    std::cout << "START UML Query_4(context = Operation): " << qry << std::endl;
+    bool returnValue=query(qry, context, "<Operation> o1(p1 : String [1..1], p2 : String [0..*])");
+    std::cout << "END UML Query_4 -------------------------------------------\n" << std::endl;
+    return returnValue;
+}
+
+bool uml_any_query1() {
+	bool returnValue=false;
+    std::string qry = "self.name";
+    std::shared_ptr<uml::Model> context = ufactory->createModel();
+    context->setName("uml_query1");
+    Any value = queryValue(qry, context);
+
+    std::cout << "START Query_UML_Any_1 (context = Model): " << qry << std::endl;
+    std::string resultStr ="";
+    if(value != nullptr) {
+    	resultStr= value->get<std::string>();
+        std::cout << resultStr << std::endl;
+    }
+    (resultStr.compare("uml_query1") == 0) ? returnValue = true : returnValue =  false;
+    returnValue ? std::cout << "success" << std::endl : std::cout << "fail" << std::endl;
+    std::cout << "END Query_UML_Any_1 -------------------------------------------\n" << std::endl;
+    return returnValue ;
+}
+
+bool uml_any_query2() {
+	bool returnValue=false;
+
+    std::string qry = "self.ownedElement";
+    std::shared_ptr<uml::Model> p = ufactory->createModel();
+    std::shared_ptr<uml::Class> context = ufactory->createClass_as_ownedType_in_Package(p);
+    std::shared_ptr<uml::Property> a1 = ufactory->createProperty_as_ownedAttribute_in_Class(context);
+    std::shared_ptr<uml::Property> a2 = ufactory->createProperty_as_ownedAttribute_in_Class(context);
+    std::shared_ptr<uml::Operation> o1 = ufactory->createOperation_as_ownedOperation_in_Class(context);
+    std::shared_ptr<uml::Parameter> p1 = ufactory->createParameter_as_ownedParameter_in_Operation(o1);
+    std::shared_ptr<uml::Parameter> p2 = ufactory->createParameter_as_ownedParameter_in_Operation(o1);
+
+    context->setName("theContext");
+    a1->setName("a1");
+    a1->setLower(0);
+    a1->setUpper(-1);
+    a1->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Integer());
+    a2->setName("a2");
+    a2->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
+    o1->setName("o1");
+    // throw an instance of char exception
+    //o1->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
+    p1->setName("p1");
+    p1->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_String());
+    p2->setName("p2");
+    p2->setLower(0);
+    p2->setUpper(-1);
+    p2->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_String());
 
     std::cout << "START Query_UML_Any_2(context = Class): " << qry << std::endl;
-    printUmlMany(value);
+    Any value = queryValue(qry, context);
+
+    std::string resultStr = printUmlMany(value);
+    std::cout << resultStr << std::endl;
+    (resultStr.compare("<Property> a1 : Integer [0..*]\n<Property> a2 : Boolean [1..1]\n<Operation> o1(p1 : String [1..1], p2 : String [0..*])") == 0) ? returnValue = true : returnValue =  false;
+    returnValue ? std::cout << "success" << std::endl : std::cout << "fail" << std::endl;
     std::cout << "END Query_UML_Any_2 -------------------------------------------\n" << std::endl;
-}
-
-void ecore_validate1() { /* NOT WORKING */
-    std::string qry = "context C1 inv: self.a1 > 0 ";
-
-    std::shared_ptr<ecore::EPackage> ep = efactory->createEPackage();
-    std::shared_ptr<ecore::EClass> c1 = efactory->createEClass_as_eClassifiers_in_EPackage(ep);
-    std::shared_ptr<ecore::EAttribute> a1 = efactory->createEAttribute_as_eAttributes_in_EClass(c1);
-    std::shared_ptr<ecore::EObject> context = efactory->create(c1->getClassifierID());
-
-    c1->setName("C1");
-    a1->setName("a1");
-    a1->setEType(ecore::ecorePackage::eInstance()->getEInt_Class());
-    context->eSet(a1, eAny(5, ecore::ecorePackage::EINT_CLASS, false));
-
-    std::cout << "START Validate_1(context = EObject (a1=5)): " << qry << std::endl;
-    query(context, qry);
-    std::cout << "END Validate_1 -------------------------------------------\n" << std::endl;
-}
-
-void ecore_validate2() { /* NOT WORKING */
-    std::string qry = "context C1 inv: self.a1 > 10 ";
-
-    std::shared_ptr<ecore::EPackage> ep = efactory->createEPackage();
-    std::shared_ptr<ecore::EClass> c1 = efactory->createEClass_as_eClassifiers_in_EPackage(ep);
-    std::shared_ptr<ecore::EAttribute> a1 = efactory->createEAttribute_as_eAttributes_in_EClass(c1);
-    std::shared_ptr<ecore::EObject> context = efactory->create(c1->getClassifierID());
-
-    c1->setName("C1");
-    a1->setName("a1");
-    a1->setEType(ecore::ecorePackage::eInstance()->getEInt_Class());
-    context->eSet(a1, eAny(5, ecore::ecorePackage::EINT_CLASS, false));
-
-    std::cout << "START Validate_2(context = EObject (a1=5)): " << qry << std::endl;
-    query(context, qry);
-    std::cout << "END Validate_2 -------------------------------------------\n" << std::endl;
+    return returnValue;
 }
 
 void validate(std::shared_ptr<ecore::EObject> context,const std::string& query) {
@@ -530,20 +599,25 @@ void validate(std::shared_ptr<ecore::EObject> context,const std::string& query) 
     }
 }
 
-void query( std::shared_ptr<ecore::EObject> context, const std::string& query) {
+bool query(const std::string& query, std::shared_ptr<ecore::EObject> context, const std::string& testStr) {
+	bool returnValue = false;
     try {
         Utilities::Ocl ocl;
         if(ocl.query(query, context)) {
-            std::cout << ocl.getResult() << std::endl;
+        	std::string resultStr=ocl.getResult();
+            std::cout << resultStr << std::endl;
+            (resultStr.compare(testStr) == 0) ? returnValue =  true : returnValue =  false;
         } else {
             std::cout << ocl.getError() << std::endl;
         }
     } catch (std::exception &e) {
         std::cout << "exception : " << e.what() << std::endl;
     }
+    returnValue ? std::cout << "success" << std::endl : std::cout << "fail" << std::endl;
+    return returnValue;
 }
 
-Any queryValue(std::shared_ptr<ecore::EObject> context, const std::string& query) {
+Any queryValue(const std::string& query, std::shared_ptr<ecore::EObject> context) {
     try {
         Utilities::Ocl ocl;
         if(ocl.query(query, context)) {
@@ -557,51 +631,63 @@ Any queryValue(std::shared_ptr<ecore::EObject> context, const std::string& query
     return nullptr;
 }
 
-void checkSyntaxQuery(const std::string& query) {
+bool checkSyntaxQuery(const std::string& query) {
+	bool returnValue=false;
     try {
         Utilities::Ocl ocl;
         if(ocl.checkSyntaxQuery(query)) {
             std::cout << "Syntax OK" << std::endl;
+            returnValue = true;
         } else {
             std::cout << ocl.getError() << std::endl;
         }
     } catch (std::exception &e) {
         std::cout << "exception : " << e.what() << std::endl;
     }
+    return returnValue;
 }
 
-void checkSyntaxConstraint(const std::string& query) {
+bool checkSyntaxConstraint(const std::string& query) {
+	bool returnValue=false;
     try {
         Utilities::Ocl ocl;
         if(ocl.checkSyntaxConstraint(query)) {
             std::cout << "Syntax OK" << std::endl;
+            returnValue = true;
         } else {
             std::cout << ocl.getError() << std::endl;
         }
     } catch (std::exception &e) {
         std::cout << "exception : " << e.what() << std::endl;
     }
+    return returnValue;
 }
 
-void printEcoreMany(Any value) {
+std::string printEcoreMany(Any value) {
+	std::ostringstream returnStringStream;
+	if(value != nullptr && !value->isEmpty()) {
+        std::shared_ptr<Bag<AnyObject>> valueItems = value->get<std::shared_ptr<Bag<AnyObject>>>();
+        for(size_t i = 0; i < valueItems->size(); i++) {
+        	returnStringStream << printEcore(valueItems->at(i));
+        }
+    }
+	return returnStringStream.str();
+}
+
+std::string printUmlMany(Any value) {
+	std::ostringstream returnStringStream;
     if(value != nullptr && !value->isEmpty()) {
         std::shared_ptr<Bag<AnyObject>> valueItems = value->get<std::shared_ptr<Bag<AnyObject>>>();
         for(size_t i = 0; i < valueItems->size(); i++) {
-            printEcore(valueItems->at(i));
+        	std::string result= printUml(valueItems->at(i));
+        	returnStringStream << printUml(valueItems->at(i));
         }
     }
+	return returnStringStream.str();
 }
 
-void printUmlMany(Any value) {
-    if(value != nullptr && !value->isEmpty()) {
-        std::shared_ptr<Bag<AnyObject>> valueItems = value->get<std::shared_ptr<Bag<AnyObject>>>();
-        for(size_t i = 0; i < valueItems->size(); i++) {
-            printUml(valueItems->at(i));
-        }
-    }
-}
-
-void printEcore(Any value) {
+std::string printEcore(Any value) {
+	std::ostringstream returnStringStream;
     try {
         std::shared_ptr<ecore::EObject> eobj = value->get<std::shared_ptr<ecore::EObject>>();
         std::shared_ptr<ecore::EOperation> eope = std::dynamic_pointer_cast<ecore::EOperation>(eobj);
@@ -627,34 +713,36 @@ void printEcore(Any value) {
     } catch (...) { }
     try {
         std::shared_ptr<ecore::EEnumLiteral> liter = value->get<std::shared_ptr<ecore::EEnumLiteral>>();
-        std::cout << liter->getName() << std::endl;
-        return;
+        returnStringStream << liter->getName() << std::endl;
+    	return returnStringStream.str();
     } catch (...) { }
     try {
         bool result = value->get<bool>();
-        std::cout << result << std::endl;
-        return;
+        returnStringStream << (result ? "true" : "false") << std::endl;
+    	return returnStringStream.str();
     } catch (...) { }
     try {
         std::string result = value->get<std::string>();
-        std::cout << result << std::endl;
-        return;
+        returnStringStream << result << std::endl;
+    	return returnStringStream.str();
     } catch (...) { }
     try {
         int result = value->get<int>();
-        std::cout << result << std::endl;
-        return;
+        returnStringStream << result << std::endl;
+    	return returnStringStream.str();
     } catch (...) { }
     try {
         double result = value->get<double>();
-        std::cout << result << std::endl;
-        return;
+        returnStringStream << result << std::endl;
+    	return returnStringStream.str();
     } catch (...) { }
+	return returnStringStream.str();
 }
 
-void printUml(Any value) {
+std::string printUml(Any value) {
+	std::ostringstream returnStringStream;
     try {
-        std::shared_ptr<uml::Object> uobj = value->get<std::shared_ptr<uml::Object>>();
+        std::shared_ptr<ecore::EObject> uobj = value->get<std::shared_ptr<ecore::EObject>>();
         std::shared_ptr<uml::Operation> uope = std::dynamic_pointer_cast<uml::Operation>(uobj);
         if(uope != nullptr) {
             return printOperation(uope);
@@ -674,90 +762,110 @@ void printUml(Any value) {
     } catch (...) { }
     try {
         std::shared_ptr<uml::EnumerationLiteral> liter = value->get<std::shared_ptr<uml::EnumerationLiteral>>();
-        std::cout << liter->getName() << std::endl;
-        return;
+        returnStringStream << liter->getName() << std::endl;
+    	return returnStringStream.str();
     } catch (...) { }
     try {
         bool result = value->get<bool>();
-        std::cout << result << std::endl;
-        return;
+        returnStringStream << (result ? "true" : "false") << std::endl;
+    	return returnStringStream.str();
     } catch (...) { }
     try {
         std::string result = value->get<std::string>();
-        std::cout << result << std::endl;
-        return;
+        returnStringStream << result << std::endl;
+        std::cout<< "s" << std::endl;
+    	return returnStringStream.str();
     } catch (...) { }
     try {
         int result = value->get<int>();
-        std::cout << result << std::endl;
-        return;
+        returnStringStream << result << std::endl;
+        std::cout<< "i" << std::endl;
+    	return returnStringStream.str();
     } catch (...) { }
     try {
         double result = value->get<double>();
-        std::cout << result << std::endl;
-        return;
+        returnStringStream << result << std::endl;
+    	return returnStringStream.str();
     } catch (...) { }
+    std::cout<< "1" << std::endl;
+	return returnStringStream.str();
 }
 
-void printProperty(std::shared_ptr<uml::Property> uprop) {
-    if(uprop != nullptr) {
+std::string printProperty(std::shared_ptr<uml::Property> uprop) {
+	std::ostringstream returnStringStream;
+	if(uprop != nullptr) {
         if(uprop->getUpper() > 1 || uprop->getUpper() < 0)
-            std::cout << "<Property> " + uprop->getName() + " : " + uprop->getType()->getName() + " ["
+        	returnStringStream << "<Property> " + uprop->getName() + " : " + uprop->getType()->getName() + " ["
                 +  std::to_string(uprop->getLower()) + "..*]" << std::endl;
         else
-            std::cout << "<Property> " + uprop->getName() + " : " + uprop->getType()->getName() + " ["
+        	returnStringStream << "<Property> " + uprop->getName() + " : " + uprop->getType()->getName() + " ["
                 +  std::to_string(uprop->getLower()) + ".." + std::to_string(uprop->getUpper()) + "]" << std::endl;
     }
+	return returnStringStream.str();
 }
 
-void printEAttribute(std::shared_ptr<ecore::EAttribute> eattr) {
+std::string printEAttribute(std::shared_ptr<ecore::EAttribute> eattr) {
+	std::ostringstream returnStringStream;
+
     if(eattr != nullptr) {
         if(eattr->getUpperBound() > 1 || eattr->getUpperBound() < 0)
-            std::cout << "<EAttribute> " + eattr->getName() + " : " + eattr->getEType()->getName()+ " [" +  std::to_string(eattr->getLowerBound()) + "..*]" << std::endl;
+        	returnStringStream << "<EAttribute> " + eattr->getName() + " : " + eattr->getEType()->getName()+ " [" +  std::to_string(eattr->getLowerBound()) + "..*]" << std::endl;
         else
-            std::cout << "<EAttribute> " + eattr->getName() + " : " + eattr->getEType()->getName()+ " [" +  std::to_string(eattr->getLowerBound()) + ".." + std::to_string(eattr->getUpperBound()) + "]" << std::endl;
+        	returnStringStream << "<EAttribute> " + eattr->getName() + " : " + eattr->getEType()->getName()+ " [" +  std::to_string(eattr->getLowerBound()) + ".." + std::to_string(eattr->getUpperBound()) + "]" << std::endl;
     }
+	return returnStringStream.str();
 }
 
-void printEReference(std::shared_ptr<ecore::EReference> eref) {
-    if(eref != nullptr) {
+std::string printEReference(std::shared_ptr<ecore::EReference> eref) {
+	std::ostringstream returnStringStream;
+	if(eref != nullptr) {
         if(eref->getUpperBound() > 1 || eref->getUpperBound() < 0)
-            std::cout << "<EReference> " + eref->getName() + " : " + eref->getEType()->getName()+ " [" +  std::to_string(eref->getLowerBound()) + "..*]" << std::endl;
+        	returnStringStream << "<EReference> " + eref->getName() + " : " + eref->getEType()->getName()+ " [" +  std::to_string(eref->getLowerBound()) + "..*]" << std::endl;
         else
-            std::cout << "<EReference> " + eref->getName() + " : " + eref->getEType()->getName()+ " [" +  std::to_string(eref->getLowerBound()) + ".." + std::to_string(eref->getUpperBound()) + "]" << std::endl;
+        	returnStringStream << "<EReference> " + eref->getName() + " : " + eref->getEType()->getName()+ " [" +  std::to_string(eref->getLowerBound()) + ".." + std::to_string(eref->getUpperBound()) + "]" << std::endl;
     }
+	return returnStringStream.str();
 }
 
-void printETypedElement(std::shared_ptr<ecore::ETypedElement> etyped) {
+std::string printETypedElement(std::shared_ptr<ecore::ETypedElement> etyped) {
+	std::ostringstream returnStringStream;
     if(etyped != nullptr) {
         if(etyped->isMany())
-            std::cout << etyped->getName() + " : " + etyped->getEType()->getName()+ " [0..*]" << std::endl;
+        	returnStringStream << etyped->getName() + " : " + etyped->getEType()->getName()+ " [0..*]" << std::endl;
         else
-            std::cout << etyped->getName() + " : " + etyped->getEType()->getName()+ " [0..1]" << std::endl;
+        	returnStringStream << etyped->getName() + " : " + etyped->getEType()->getName()+ " [0..1]" << std::endl;
     }
+	return returnStringStream.str();
 }
 
-void printTypedElement(std::shared_ptr<uml::TypedElement> utyped) {
-    if(utyped != nullptr) {
-        std::cout << utyped->getName() + " : " + utyped->getType()->getName() << std::endl;
+std::string printTypedElement(std::shared_ptr<uml::TypedElement> utyped) {
+	std::ostringstream returnStringStream;
+	if(utyped != nullptr) {
+		returnStringStream << utyped->getName() + " : " + utyped->getType()->getName() << std::endl;
     }
+	return returnStringStream.str();
 }
 
-void printENamedElement(std::shared_ptr<ecore::ENamedElement> ename) {
-    if(ename != nullptr) {
-        std::cout << ename->getName() << std::endl;
+std::string printENamedElement(std::shared_ptr<ecore::ENamedElement> ename) {
+	std::ostringstream returnStringStream;
+	if(ename != nullptr) {
+		returnStringStream << ename->getName() << std::endl;
     }
+	return returnStringStream.str();
 }
 
-void printNamedElement(std::shared_ptr<uml::NamedElement> uname) {
-    if(uname != nullptr) {
-        std::cout << uname->getName() << std::endl;
+std::string printNamedElement(std::shared_ptr<uml::NamedElement> uname) {
+	std::ostringstream returnStringStream;
+	if(uname != nullptr) {
+		returnStringStream << uname->getName() << std::endl;
     }
+	return returnStringStream.str();
 }
 
-void printEOperation(std::shared_ptr<ecore::EOperation> eope) {
-    if(eope != nullptr) {
-        std::string result = "<Operation> " + eope->getName() + "(";
+std::string printEOperation(std::shared_ptr<ecore::EOperation> eope) {
+	std::string result ="";
+	if(eope != nullptr) {
+		result = "<Operation> " + eope->getName() + "(";
         std::shared_ptr<Bag<ecore::EParameter>> ebag = std::dynamic_pointer_cast<Bag<ecore::EParameter>>(eope->getEParameters());
         for(unsigned int i = 0; i < ebag->size(); i++) {
             if(i > 0) result += ", ";
@@ -768,13 +876,14 @@ void printEOperation(std::shared_ptr<ecore::EOperation> eope) {
                 result += "[Not set in Model]";
         }
         result += ")";
-        std::cout << result << std::endl;
     }
+	return result;
 }
 
-void printOperation(std::shared_ptr<uml::Operation> uope) {
-    if(uope != nullptr) {
-        std::string result = "<Operation> " + uope->getName() + "(";
+std::string printOperation(std::shared_ptr<uml::Operation> uope) {
+	std::string result = "";
+	if(uope != nullptr) {
+        result = "<Operation> " + uope->getName() + "(";
         std::shared_ptr<Bag<uml::Parameter>> ebag = std::dynamic_pointer_cast<Bag<uml::Parameter>>(uope->getOwnedParameter());
         for(unsigned int i = 0; i < ebag->size(); i++) {
             if(i > 0) result += ", ";
@@ -791,8 +900,8 @@ void printOperation(std::shared_ptr<uml::Operation> uope) {
                 result += "[Not set in Model]";
         }
         result += ")";
-        std::cout << result << std::endl;
     }
+	return result;
 }
 
 void pause() {

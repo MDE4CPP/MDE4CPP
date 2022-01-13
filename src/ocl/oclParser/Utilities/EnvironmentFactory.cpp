@@ -62,8 +62,8 @@ std::shared_ptr<Environment> EnvironmentFactory::createRootEnvironment(std::shar
         std::shared_ptr<ecore::EClassifier> classifier = nullptr;
 
         if(element != nullptr) {
-            epackage = OclReflection::umlPackage2Ecore(element->getMetaClass()->getPackage().lock());
-            classifier = epackage->getEClassifier(element->getMetaClass()->getName());
+            epackage = uml::umlPackage::eInstance(); //OclReflection::umlPackage2Ecore(element->getMetaClass()->getPackage().lock());
+            classifier = element->eClass(); //epackage->getEClassifier(element->getMetaClass()->getName());
         }
         else {
             classifier = context->eClass();

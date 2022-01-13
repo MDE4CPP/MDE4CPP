@@ -47,6 +47,8 @@
 #include <ecore/EParameter.hpp>
 #include <ecore/EEnumLiteral.hpp>
 #include <ecore/ETypeParameter.hpp>
+#include "ecore/EObjectContainer.hpp"
+
 #include <primitivetypesReflection/PrimitiveTypesPackage.hpp>
 #include <pluginFramework/PluginFramework.hpp>
 #include <pluginFramework/MDE4CPPPlugin.hpp>
@@ -270,84 +272,276 @@ std::shared_ptr<fUML::Semantics::Values::Value> OclReflection::createValue(std::
 }
 
 
-std::shared_ptr<fUML::Semantics::Values::Value> OclReflection::createValue(std::shared_ptr<ecore::ETypedElement> type, Any value)
+std::shared_ptr<fUML::Semantics::Values::Value> OclReflection::createValue(std::shared_ptr<ecore::ETypedElement> typedElement, Any value)
 {
-    if(value != nullptr && !value->isEmpty())
-    {
-        if((type != nullptr)&&isMany(type))
-        {
-			try {
-				std::shared_ptr<Bag<ecore::EObject>> valueItems = value->get<std::shared_ptr<Bag<ecore::EObject>>>();
-				std::shared_ptr<BagTypeValue> bagValue = ocl::Values::ValuesFactory::eInstance()->createBagTypeValue();
-//				std::shared_ptr<BagType> bagType = ocl::Types::TypesFactory::eInstance()->createBagType();
-//				bagType->setElementType(type->getEType());
-//				bagValue->setModel(bagType);
 
-				for(size_t i = 0; i < valueItems->size(); i++) {
-					std::shared_ptr<fUML::Semantics::Values::Value> val = createValue(valueItems->at(i));
-					bagValue->addValue(val);
+	if(!value->isEmpty())
+	{
+		if(value->isContainer())
+		{
+			try
+			{
+				std::shared_ptr<BagTypeValue> bagValue = ocl::Values::ValuesFactory::eInstance()->createBagTypeValue();
+				switch (value->getTypeId())
+				{
+					case ecore::ecorePackage::EOBJECT_CLASS:
+					{
+						std::shared_ptr<Bag<ecore::EObject>> eObjectBag;
+						std::shared_ptr<AnyEObjectBag> anyObjectBag = std::dynamic_pointer_cast<AnyEObjectBag>(value);
+						if(nullptr!=anyObjectBag)// AnyEobjectBag?
+						{
+							eObjectBag=anyObjectBag->getBag();
+
+						}
+						else
+						{
+							eObjectBag= value->get<std::shared_ptr<Bag<ecore::EObject>>>(); //throws exception
+
+						}
+						for(const std::shared_ptr<ecore::EObject> object: *eObjectBag)
+						{	// recursive Call of convertToString via new Any EObject Value
+							std::shared_ptr<fUML::Semantics::Values::Value> val = createValue(object);
+							bagValue->addValue(val);
+						}
+						break;
+					}
+					case ecore::ecorePackage::EOBJECTCONTAINER_CLASS:
+					{
+						std::shared_ptr<ecore::EObjectContainer> eObjectContainer = value->get<std::shared_ptr<ecore::EObjectContainer>>();
+						std::shared_ptr<Bag<ecore::EObject>> eObjectBag =  eObjectContainer->getContainer();
+						for(const std::shared_ptr<ecore::EObject> object: *eObjectBag)
+						{	// recursive Call of convertToString via new Any EObject Value
+							std::shared_ptr<fUML::Semantics::Values::Value> val = createValue(object);
+							bagValue->addValue(val);
+						}
+						break;
+					}
+					default:
+					{
+						std::shared_ptr<AnyEObjectBag> anyObjectBag = std::dynamic_pointer_cast<AnyEObjectBag>(value);
+						if(nullptr!=anyObjectBag)// AnyEObjectBag?
+						{
+							std::shared_ptr<Bag<ecore::EObject>> eObjectBag=anyObjectBag->getBag();
+							for(const std::shared_ptr<ecore::EObject> object: *eObjectBag)
+							{	// recursive Call of convertToString via new Any EObject Value
+								std::shared_ptr<fUML::Semantics::Values::Value> val = createValue(object);
+								bagValue->addValue(val);
+							}
+							break;
+						}
+						else // last supported type bag<Any>
+						{
+							std::shared_ptr<Bag<AnyObject>> anyBag = value->get<std::shared_ptr<Bag<AnyObject>>>();
+
+							for(std::shared_ptr<AnyObject> object: *anyBag)
+							{
+
+								std::shared_ptr<ocl::Values::AnyValue> anyValue = ocl::Values::ValuesFactory::eInstance()->createAnyValue();
+								anyValue->setValue(object); // A Bag in AnyValue, can be AnyValue...
+							}
+							break;
+						}
+					}
 				}
 				return bagValue;
-			} catch (...) { }
-        }
+			}
+			catch(...)
+			{
+				DEBUG_MESSAGE(std::cerr << " OclReflection: unknown type for:" << typedElement->getName() std::endl;)
+			}
+		}
 		else
 		{
-			try {
-				std::shared_ptr<ecore::EObject> obj = value->get<std::shared_ptr<ecore::EObject>>();
-				return createValue(obj);
-			} catch (...) { }
-			try {
-				std::shared_ptr<Bag<AnyObject>> anyObjectBag = value->get<std::shared_ptr<Bag<AnyObject>>>();
-				std::shared_ptr<ocl::Values::AnyValue> anyValue = ocl::Values::ValuesFactory::eInstance()->createAnyValue();
-				anyValue->setValue(value); // A Bag in AnyValue, can be AnyValue...
-				return anyValue;
-			} catch (...) { }
-			try {
-				bool result = value->get<bool>();
-				std::shared_ptr<fUML::Semantics::SimpleClassifiers::BooleanValue> boolValue = fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createBooleanValue();
-				boolValue->setValue(result);
-				return boolValue;
-			} catch (...) { }
-			try {
-				std::string result = value->get<std::string>();
-				std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> stringValue = fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createStringValue();
-				stringValue->setValue(result);
-				return stringValue;
-			} catch (...) { }
-			try {
-				int result = value->get<int>();
-				std::shared_ptr<fUML::Semantics::SimpleClassifiers::IntegerValue> intValue = fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createIntegerValue();
-				intValue->setValue(result);
-				return intValue;
-			} catch (...) { }
-			try {
-				double result = value->get<double>();
-				std::shared_ptr<fUML::Semantics::SimpleClassifiers::RealValue> realValue = fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createRealValue();
-				realValue->setValue(result);
-				return realValue;
-			} catch (...) { }
-			try {
-				std::shared_ptr<AnyObject> anyObject = value->get<std::shared_ptr<AnyObject>>();
-				std::shared_ptr<ocl::Values::AnyValue> anyValue = ocl::Values::ValuesFactory::eInstance()->createAnyValue();
-				anyValue->setValue(value); // A Bag in AnyValue, can be AnyValue...
-		        return anyValue;
-			} catch (...) { }
+			try
+			{
+				switch(value->getTypeId())
+				{
+					case ecore::ecorePackage::EOBJECT_CLASS: // unknown or primitive type
+					{
+						std::shared_ptr<ecore::EObject> obj = value->get<std::shared_ptr<ecore::EObject>>();
+						return createValue(obj);
+						break;
+					}
+					case ecore::ecorePackage::EATTRIBUTE_CLASS:
+					{
+						std::shared_ptr<ecore::EAttribute> aValue = value->get<std::shared_ptr<ecore::EAttribute>>();
+						return createValue(aValue);
+						break;
+					}
+					case ecore::ecorePackage::EREFERENCE_CLASS:
+					{
+						std::shared_ptr<ecore::EReference> aValue = value->get<std::shared_ptr<ecore::EReference>>();
+						return createValue(aValue);
+						break;
+					}
+					case ecore::ecorePackage::EOPERATION_CLASS:
+					{
+						std::shared_ptr<ecore::EOperation> aValue = value->get<std::shared_ptr<ecore::EOperation>>();
+						return createValue(aValue);
+						break;
+					}
+					case ecore::ecorePackage::EOBJECTCONTAINER_CLASS:
+					{
+						std::shared_ptr<ecore::EObjectContainer> eObjectContainer = value->get<std::shared_ptr<ecore::EObjectContainer>>();
+						std::shared_ptr<BagTypeValue> bagValue = ocl::Values::ValuesFactory::eInstance()->createBagTypeValue();
+						for(const std::shared_ptr<ecore::EObject> object: *(eObjectContainer->getContainer()))
+						{	// recursive Call of createValue
+							std::shared_ptr<fUML::Semantics::Values::Value> val = createValue(object);
+							bagValue->addValue(val);
+						}
+						return bagValue;
+						break;
+					}
+					//bool
+					case ecore::ecorePackage::EBOOLEANOBJECT_CLASS:
+					case ecore::ecorePackage::EBOOLEAN_CLASS:
+					{
+						bool result = value->get<bool>();
+						std::shared_ptr<fUML::Semantics::SimpleClassifiers::BooleanValue> boolValue = fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createBooleanValue();
+						boolValue->setValue(result);
+						return boolValue;
+						break;
+					}
+					//char
+					case ecore::ecorePackage::EBYTE_CLASS:
+					case ecore::ecorePackage::EBYTEARRAY_CLASS:
+					case ecore::ecorePackage::EBYTEOBJECT_CLASS:
+					case ecore::ecorePackage::ECHARACTEROBJECT_CLASS:
+					case ecore::ecorePackage::ECHAR_CLASS:
+					{
+						int result = value->get<char>();
+						// interprete char as int value
+						std::shared_ptr<fUML::Semantics::SimpleClassifiers::IntegerValue> intValue = fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createIntegerValue();
+						intValue->setValue(result);
+						return intValue;
+						break;
+					}
+					//int
+					case ecore::ecorePackage::EDATE_CLASS:
+					case ecore::ecorePackage::ERESOURCE_CLASS:
+					case ecore::ecorePackage::EINTEGEROBJECT_CLASS:
+					case ecore::ecorePackage::EBIGINTEGER_CLASS:
+					case ecore::ecorePackage::EINT_CLASS:
+					{
+						int result = value->get<int>();
+						std::shared_ptr<fUML::Semantics::SimpleClassifiers::IntegerValue> intValue = fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createIntegerValue();
+						intValue->setValue(result);
+						return intValue;
+						break;
+					}
+					//long
+					case ecore::ecorePackage::ELONGOBJECT_CLASS:
+					case ecore::ecorePackage::ELONG_CLASS:
+					{
+						int result = value->get<long>();
+						// only in Values right now --> interprete long as int value
+						std::shared_ptr<fUML::Semantics::SimpleClassifiers::IntegerValue> intValue = fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createIntegerValue();
+						intValue->setValue(result);
+						return intValue;
+						break;
+					}
+					//float
+					case ecore::ecorePackage::EFLOATOBJECT_CLASS:
+					case ecore::ecorePackage::EFLOAT_CLASS:
+					{
+						int result = value->get<float>();
+						std::shared_ptr<fUML::Semantics::SimpleClassifiers::RealValue> realValue = fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createRealValue();
+						realValue->setValue(result);
+						break;
+					}
+					//double
+					case ecore::ecorePackage::EBIGDECIMAL_CLASS:
+					case ecore::ecorePackage::EDOUBLE_CLASS:
+					{
+						int result = value->get<double>();
+						std::shared_ptr<fUML::Semantics::SimpleClassifiers::RealValue> realValue = fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createRealValue();
+						realValue->setValue(result);
+						break;
+					}
+					//std::string
+					case ecore::ecorePackage::ESTRING_CLASS:
+					{
+						std::string result = value->get<std::string>();
+						std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> stringValue = fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createStringValue();
+						stringValue->setValue(result);
+						return stringValue;
+						break;
+					}
+					/*
+					//Any
+					case ecore::ecorePackage::EJAVAOBJECT_CLASS:
+					case ecore::ecorePackage::EENUMERATOR_CLASS:
+					case ecore::ecorePackage::EDIAGNOSTICCHAIN_CLASS:
+					case ecore::ecorePackage::ANY_CLASS:
+					{
+						std::shared_ptr<AnyObject> any = value->get<std::shared_ptr<AnyObject>>();
+						returnStringStream << "<AnyObject>:" << std::endl;
+						returnStringStream << convertToString(eDataType, any) << std::endl;
+						break;
+					}
+					*/
+					default: // unknown or primitive type / or 0--> Try & Error
+					{
+						try {
+							bool result = value->get<bool>();
+							std::shared_ptr<fUML::Semantics::SimpleClassifiers::BooleanValue> boolValue = fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createBooleanValue();
+							boolValue->setValue(result);
+							return boolValue;
+							break;
+						} catch (...) { }
+						try {
+							int result = value->get<int>();
+							std::shared_ptr<fUML::Semantics::SimpleClassifiers::IntegerValue> intValue = fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createIntegerValue();
+							intValue->setValue(result);
+							return intValue;
+							break;
+						} catch (...) { }
+						try {
+							std::string result = value->get<std::string>();
+							std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> stringValue = fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createStringValue();
+							stringValue->setValue(result);
+							return stringValue;
+							break;
+						} catch (...) { }
+						try {
+							double result = value->get<double>();
+							std::shared_ptr<fUML::Semantics::SimpleClassifiers::RealValue> realValue = fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createRealValue();
+							realValue->setValue(result);
+							break;
+						} catch (...){}
+						try {
+							std::shared_ptr<AnyObject> any = value->get<std::shared_ptr<AnyObject>>();
+
+							std::shared_ptr<ocl::Values::AnyValue> anyValue = ocl::Values::ValuesFactory::eInstance()->createAnyValue();
+							anyValue->setValue(value); // A Bag in AnyValue, can be AnyValue...
+					        return anyValue;
+							break;
+						} catch (...) { }
+						{
+							DEBUG_MESSAGE(std::cerr << " OclReflection: Unknowm value for:" << typedElement->getName() std::endl;)
+						}
+					}
+				}
+			}
+			catch (...) { }
+			{
+				DEBUG_MESSAGE(std::cerr << " OclReflection: Invalid value for:" << typedElement->getName() std::endl;)
+			}
 		}
     }
     // else create emptyValue with given type
-    return createValue(type);
+    return createValue(typedElement->getEType());
 }
 
 std::shared_ptr<fUML::Semantics::Values::Value> OclReflection::createValue(std::shared_ptr<ecore::EStructuralFeature> type, std::shared_ptr<fUML::Semantics::Values::Value> fromValue, Level level)
 {
-    if(instanceOf<CollectionValue>(fromValue))
+    std::shared_ptr<CollectionValue> colValue = std::dynamic_pointer_cast<CollectionValue>(fromValue);
+	if(nullptr!= colValue )
     {
-        std::shared_ptr<CollectionValue> colValue = std::dynamic_pointer_cast<CollectionValue>(fromValue);
         std::shared_ptr<BagTypeValue> bagValue = ocl::Values::ValuesFactory::eInstance()->createBagTypeValue();
 //        std::shared_ptr<BagType> bagType = ocl::Types::TypesFactory::eInstance()->createBagType();
 //        bagType->setElementType(type->getEType());
 //        bagValue->setModel(bagType);
-
         for(size_t i = 0; i < colValue->getElements()->size(); i++) {
             std::shared_ptr<fUML::Semantics::Values::Value> src = colValue->getElements()->at(i)->getValue();
             std::shared_ptr<fUML::Semantics::Values::Value> dst = createValue(type, src, level);
@@ -355,36 +549,43 @@ std::shared_ptr<fUML::Semantics::Values::Value> OclReflection::createValue(std::
         }
         return bagValue;
     }
-    else if(instanceOf<ObjectValue>(fromValue))
-    {
-        std::shared_ptr<ObjectValue> objValue = std::dynamic_pointer_cast<ObjectValue>(fromValue);
-        std::shared_ptr<ecore::EObject> obj = objValue->getValue();
-        std::shared_ptr<uml::Element> uobj = std::dynamic_pointer_cast<uml::Element>(obj);
-        std::shared_ptr<AnyObject> value = nullptr;
-
-        if(level == Level::M2 && uobj != nullptr && uobj->getMetaClass() != nullptr)
-        {
-            std::shared_ptr<uml::Property> prop = lookupProperty(uobj->getMetaClass(), type->getName());
-            if(prop != nullptr)
-            {
-                value = uobj->get(prop);
-            }
-        }
-        else
-        {
-            value = obj->eGet(type);
-        }
-        return OclReflection::createValue(type, value);
-    }
     else
-    {// primary value not managed yet
-        if(instanceOf<fUML::Semantics::SimpleClassifiers::StringValue>(fromValue))
-        {
-            std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> stringValue = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::StringValue>(fromValue);
-            std::string value = stringValue->getValue();
-            return stringValue;
-        }
-        return ocl::Values::ValuesFactory::eInstance()->createUndefinedValue();
+    {
+		std::shared_ptr<ObjectValue> objValue = std::dynamic_pointer_cast<ObjectValue>(fromValue);
+
+    	if(nullptr!=objValue)
+		{
+			std::shared_ptr<ecore::EObject> obj = objValue->getValue();
+			std::shared_ptr<uml::Element> uobj = std::dynamic_pointer_cast<uml::Element>(obj); // check UML or ecore Model Element
+			std::shared_ptr<AnyObject> value = nullptr;
+
+			if(uobj != nullptr && uobj->eClass() != nullptr)
+			{
+//				std::shared_ptr<uml::Property> prop = lookupProperty(uobj->getMetaClass(), type->getName());
+//				std::shared_ptr<uml::Property> prop = lookupProperty(uobj->eClass(), type->getName());
+//				if(prop != nullptr)
+				{
+//					value = uobj->get(prop);
+					value = uobj->eGet(type);
+
+				}
+			}
+			else
+			{
+				value = obj->eGet(type);
+			}
+			return OclReflection::createValue(type, value);
+		}
+		else
+		{// primary value not managed yet
+			std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> stringValue = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::StringValue>(fromValue);
+			if(nullptr != stringValue)
+			{
+				std::string value = stringValue->getValue();
+				return stringValue;
+			}
+			return ocl::Values::ValuesFactory::eInstance()->createUndefinedValue();
+		}
     }
     return ocl::Values::ValuesFactory::eInstance()->createUndefinedValue();
 }
@@ -480,7 +681,7 @@ bool OclReflection::getResult(std::shared_ptr<OclExpression> source)
     }
     return true;
 }
-
+/*
 std::shared_ptr<ecore::EPackage> OclReflection::umlPackage2Ecore(std::shared_ptr<uml::Package> upackage)
 {
     std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
@@ -582,7 +783,7 @@ std::shared_ptr<ecore::EPackage> OclReflection::umlPackage2Ecore(std::shared_ptr
     }
     return epackage;
 }
-
+*/
 Any OclReflection::getDefaultValue(std::shared_ptr<uml::Property> prop)
 {
     if(prop == nullptr) return nullptr;
