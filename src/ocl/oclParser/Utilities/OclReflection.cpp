@@ -275,7 +275,7 @@ std::shared_ptr<fUML::Semantics::Values::Value> OclReflection::createValue(std::
 std::shared_ptr<fUML::Semantics::Values::Value> OclReflection::createValue(std::shared_ptr<ecore::ETypedElement> typedElement, Any value)
 {
 
-	if(!value->isEmpty())
+	if((value)&&(!value->isEmpty()))
 	{
 		if(value->isContainer())
 		{
@@ -291,7 +291,6 @@ std::shared_ptr<fUML::Semantics::Values::Value> OclReflection::createValue(std::
 						if(nullptr!=anyObjectBag)// AnyEobjectBag?
 						{
 							eObjectBag=anyObjectBag->getBag();
-
 						}
 						else
 						{
@@ -313,6 +312,41 @@ std::shared_ptr<fUML::Semantics::Values::Value> OclReflection::createValue(std::
 						{	// recursive Call of convertToString via new Any EObject Value
 							std::shared_ptr<fUML::Semantics::Values::Value> val = createValue(object);
 							bagValue->addValue(val);
+						}
+						break;
+					}
+					case ecore::ecorePackage::ANY_CLASS:
+					{
+						try
+						{
+							std::shared_ptr<Bag<AnyObject>> anyBag= value->get<std::shared_ptr<Bag<AnyObject>>>(); //throws exception
+							for(const std::shared_ptr<AnyObject> anyObject: *anyBag)
+							{
+								std::shared_ptr<fUML::Semantics::Values::Value> val = createValue(typedElement, anyObject);
+								bagValue->addValue(val);
+							}
+						}
+						catch(...) // it is possible too, but getBag() cant cast from Any to EObject
+						{
+							/*
+							std::shared_ptr<AnyEObjectBag> anyObjectBag = std::dynamic_pointer_cast<AnyEObjectBag>(value);
+							if(nullptr!=anyObjectBag)// AnyEObjectBag?
+							{
+								std::shared_ptr<Bag<ecore::EObject>> eObjectBag=anyObjectBag->getBag();
+								for(const std::shared_ptr<ecore::EObject> object: *eObjectBag)
+								{	// recursive Call of convertToString via new Any EObject Value
+									std::shared_ptr<fUML::Semantics::Values::Value> val = createValue(object);
+									bagValue->addValue(val);
+								}
+							}
+							else
+							{
+								try // last try
+								{
+//									eObjectBag= value->get<std::shared_ptr<Bag<ecore::EObject>>>(); //throws exception
+								}
+								catch(...){}
+							}*/
 						}
 						break;
 					}
@@ -390,6 +424,24 @@ std::shared_ptr<fUML::Semantics::Values::Value> OclReflection::createValue(std::
 							bagValue->addValue(val);
 						}
 						return bagValue;
+						break;
+					}
+					case ecore::ecorePackage::EDATATYPE_CLASS:
+					{
+						std::shared_ptr<ecore::EDataType> obj = value->get<std::shared_ptr<ecore::EDataType>>();
+						return createValue(obj);
+						break;
+					}
+					case ecore::ecorePackage::ECLASS_CLASS:
+					{
+						std::shared_ptr<ecore::EClass> obj = value->get<std::shared_ptr<ecore::EClass>>();
+						return createValue(obj);
+						break;
+					}
+					case ecore::ecorePackage::ESTRUCTURALFEATURE_CLASS:
+					{
+						std::shared_ptr<ecore::EStructuralFeature> obj = value->get<std::shared_ptr<ecore::EStructuralFeature>>();
+						return createValue(obj);
 						break;
 					}
 					//bool
@@ -511,14 +563,16 @@ std::shared_ptr<fUML::Semantics::Values::Value> OclReflection::createValue(std::
 						} catch (...){}
 						try {
 							std::shared_ptr<AnyObject> any = value->get<std::shared_ptr<AnyObject>>();
-
 							std::shared_ptr<ocl::Values::AnyValue> anyValue = ocl::Values::ValuesFactory::eInstance()->createAnyValue();
 							anyValue->setValue(value); // A Bag in AnyValue, can be AnyValue...
 					        return anyValue;
 							break;
 						} catch (...) { }
 						{
-							DEBUG_MESSAGE(std::cerr << " OclReflection: Unknowm value for:" << typedElement->getName() std::endl;)
+							DEBUG_MESSAGE(std::cerr << " OclReflection: Unknown value for:" << typedElement->getName() std::endl;)
+							std::shared_ptr<ocl::Values::AnyValue> anyValue = ocl::Values::ValuesFactory::eInstance()->createAnyValue();
+							anyValue->setValue(value); // A Bag in AnyValue, can be AnyValue...
+							return anyValue;
 						}
 					}
 				}

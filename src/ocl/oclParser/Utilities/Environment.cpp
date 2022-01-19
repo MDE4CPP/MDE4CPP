@@ -185,7 +185,6 @@ std::shared_ptr<Variable> Environment::lookupPathName(const std::string& name)
     }
     else {
         std::shared_ptr<PluginFramework> pluginframework=PluginFramework::eInstance();
-        std::shared_ptr<Bag<MDE4CPPPlugin>> allpluginlist=pluginframework->getAllPlugins();
         std::shared_ptr<MDE4CPPPlugin> meta_model = pluginframework->findPluginByName(name);
 
         if(meta_model != nullptr) {

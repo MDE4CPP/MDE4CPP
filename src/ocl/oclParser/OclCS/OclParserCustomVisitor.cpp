@@ -2015,8 +2015,20 @@ antlrcpp::Any OclParserCustomVisitor::visitPropertyContextDeclCS(OclParser::Prop
                         std::shared_ptr<fUML::Semantics::Values::Value> resultValue = oclExp->getInstance()->getResultValue();
 
                         if(initDerCS->INIT() != nullptr) {
-                            std::shared_ptr<AnyObject> any = feature->getDefaultValue();
-                            value = OclReflection::createValue(feature, any);
+                        	Any any = feature->getDefaultValue();
+                        	if(any)
+                        	{
+                        		value = OclReflection::createValue(feature, any);
+                        	}
+                        	else
+                        	{
+                            	std::string stringLiteral = feature->getDefaultValueLiteral();
+
+                        		std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> stringValue = fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createStringValue();
+        						stringValue->setValue(stringLiteral );
+
+                        		value = stringValue;
+                        	}
                             std::shared_ptr<BooleanLiteralExp> boolExp = createBooleanLiteralExp(resultValue->equals(value));
                             ctx->setAST(boolExp);
                             return true;
