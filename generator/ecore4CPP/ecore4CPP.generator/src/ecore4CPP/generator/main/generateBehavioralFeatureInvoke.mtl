@@ -80,6 +80,7 @@ Any [aClass.name.toUpperFirst().concat('Impl')/]::eInvoke(int operationID, std::
 			[comment Operation w/o return value /]
 		[if (aOperation.eType.oclIsUndefined())]
 			this->[aOperation.name.toString()/]([for (inPar : EParameter | aOperation.eParameters) separator (',')]incoming_param_[inPar.name/][/for]);
+			break;
  		[else]
 			[comment Operation w/ return value /]
 			[if (aOperation.eType.oclIsKindOf(EDataType))] [comment Primitive Returntype/]
@@ -89,12 +90,14 @@ Any [aClass.name.toUpperFirst().concat('Impl')/]::eInvoke(int operationID, std::
 			result = eAny(this->[aOperation.name.toString()/]([for (inPar : EParameter | aOperation.eParameters) separator (',')]incoming_param_[inPar.name/][/for]),0,true);
 				[/if]
 			[elseif (aOperation.eType.oclIsKindOf(EClass))] [comment Returntype Class/]
-				[if ((aOperation.upperBound = 1))]
+				[if ((aOperation.upperBound = 1))] 
 			result = eAny(this->[aOperation.name.toString()/]([for (inPar : EParameter | aOperation.eParameters) separator (',')]incoming_param_[inPar.name/][/for]), [aOperation.eType.ePackage.generateNamespaceDefinition()/]::[aOperation.eType.ePackage.name/]Package::[aOperation.eType.oclAsType(EClass).getStaticAttributeIDName()/],false);
 				[else] [comment Returntype Bag<EObject>/]
 			[aOperation.generateOperationType()/] resultList = this->[aOperation.name.toString()/]([for (inPar : EParameter | aOperation.eParameters) separator (',')]incoming_param_[inPar.name/][/for]);
 			return eAny(resultList,[aOperation.eType.ePackage.generateNamespaceDefinition()/]::[aOperation.eType.ePackage.name/]Package::[aOperation.eType.oclAsType(EClass).getStaticAttributeIDName()/],true);
 				[/if]
+			[elseif (aOperation.isAnyNoPtr())]
+			result = this->[aOperation.name.toString()/]([for (inPar : EParameter | aOperation.eParameters) separator (',')]incoming_param_[inPar.name/][/for]);
 			[else] [comment Unknown should be an EClass or EDataType /]
 			result = eAny(this->[aOperation.name.toString()/]([for (inPar : EParameter | aOperation.eParameters) separator (',')]incoming_param_[inPar.name/][/for]), 0,false);
 			[/if]
@@ -108,13 +111,13 @@ Any [aClass.name.toUpperFirst().concat('Impl')/]::eInvoke(int operationID, std::
 			// call superTypes
 	[if (aClass.eSuperTypes->reject(doNotGenerateEClassifier())->isEmpty() and not (aClass.name ='EObject'))]
 			result = ecore::EModelElementImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 	[else]
 	[let superTypeList : OrderedSet(EClass) = aClass.eSuperTypes->reject(doNotGenerateEClassifier())]
 		[for (i : EClass | superTypeList->reverse())]
 			result = [ClassWithNamespace(aClass, i)/]Impl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 		[/for]
 	[/let]

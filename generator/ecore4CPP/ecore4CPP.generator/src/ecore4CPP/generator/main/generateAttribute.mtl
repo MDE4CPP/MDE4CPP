@@ -45,7 +45,7 @@
 /*Additional Setter for '[redefinedEAttribute.eContainingClass.name/]::[redefinedEAttribute.name/]' redefined by attribute '[anEAttribute.name/]'*/
 [redefinedEAttribute._generateAttributeSetterDecleration(impl)/]
 [/if][/let][/if][/for]
-[/template]
+[/template] 
 
 [template private _generateAttributeGetterDecleration(anEAttribute : EAttribute, impl : Boolean) ? (hasGetter()) post(trim())]
 [printInfo(anEAttribute.eStructuralFeatureGetterGenerationMessage(), 4)/]
