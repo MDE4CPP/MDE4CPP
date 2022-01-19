@@ -974,16 +974,19 @@ Any ExpansionRegionActivationImpl::eInvoke(int operationID, std::shared_ptr<std:
 		case ActivitiesPackage::EXPANSIONREGIONACTIVATION_OPERATION_DOACTION:
 		{
 			this->doAction();
+			break;
 		}
 		// fUML::Semantics::Activities::ExpansionRegionActivation::doOutput(): 1921844053
 		case ActivitiesPackage::EXPANSIONREGIONACTIVATION_OPERATION_DOOUTPUT:
 		{
 			this->doOutput();
+			break;
 		}
 		// fUML::Semantics::Activities::ExpansionRegionActivation::doStructuredActivity(): 1554321336
 		case ActivitiesPackage::EXPANSIONREGIONACTIVATION_OPERATION_DOSTRUCTUREDACTIVITY:
 		{
 			this->doStructuredActivity();
+			break;
 		}
 		// fUML::Semantics::Activities::ExpansionRegionActivation::getExpansionNodeActivation(uml::ExpansionNode) : fUML::Semantics::Activities::ExpansionNodeActivation: 148113187
 		case ActivitiesPackage::EXPANSIONREGIONACTIVATION_OPERATION_GETEXPANSIONNODEACTIVATION_EXPANSIONNODE:
@@ -1017,6 +1020,7 @@ Any ExpansionRegionActivationImpl::eInvoke(int operationID, std::shared_ptr<std:
 			std::list<Any>::const_iterator incoming_param_activationGroup_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_activationGroup = (*incoming_param_activationGroup_arguments_citer)->get<std::shared_ptr<fUML::Semantics::Activities::ExpansionActivationGroup> >();
 			this->resume(incoming_param_activationGroup);
+			break;
 		}
 		// fUML::Semantics::Activities::ExpansionRegionActivation::runGroup(fUML::Semantics::Activities::ExpansionActivationGroup): 1225445794
 		case ActivitiesPackage::EXPANSIONREGIONACTIVATION_OPERATION_RUNGROUP_EXPANSIONACTIVATIONGROUP:
@@ -1027,21 +1031,25 @@ Any ExpansionRegionActivationImpl::eInvoke(int operationID, std::shared_ptr<std:
 			std::list<Any>::const_iterator incoming_param_activationGroup_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_activationGroup = (*incoming_param_activationGroup_arguments_citer)->get<std::shared_ptr<fUML::Semantics::Activities::ExpansionActivationGroup> >();
 			this->runGroup(incoming_param_activationGroup);
+			break;
 		}
 		// fUML::Semantics::Activities::ExpansionRegionActivation::runIterative(): 892067958
 		case ActivitiesPackage::EXPANSIONREGIONACTIVATION_OPERATION_RUNITERATIVE:
 		{
 			this->runIterative();
+			break;
 		}
 		// fUML::Semantics::Activities::ExpansionRegionActivation::runParallel(): 1378819259
 		case ActivitiesPackage::EXPANSIONREGIONACTIVATION_OPERATION_RUNPARALLEL:
 		{
 			this->runParallel();
+			break;
 		}
 		// fUML::Semantics::Activities::ExpansionRegionActivation::sendOffers(): 896679763
 		case ActivitiesPackage::EXPANSIONREGIONACTIVATION_OPERATION_SENDOFFERS:
 		{
 			this->sendOffers();
+			break;
 		}
 		// fUML::Semantics::Activities::ExpansionRegionActivation::takeOfferedTokens() : fUML::Semantics::Activities::Token[*]: 1467051328
 		case ActivitiesPackage::EXPANSIONREGIONACTIVATION_OPERATION_TAKEOFFEREDTOKENS:
@@ -1054,6 +1062,7 @@ Any ExpansionRegionActivationImpl::eInvoke(int operationID, std::shared_ptr<std:
 		case ActivitiesPackage::EXPANSIONREGIONACTIVATION_OPERATION_TERMINATE:
 		{
 			this->terminate();
+			break;
 		}
 		// fUML::Semantics::Activities::ExpansionRegionActivation::terminateGroup(fUML::Semantics::Activities::ExpansionActivationGroup): 1648185759
 		case ActivitiesPackage::EXPANSIONREGIONACTIVATION_OPERATION_TERMINATEGROUP_EXPANSIONACTIVATIONGROUP:
@@ -1064,13 +1073,14 @@ Any ExpansionRegionActivationImpl::eInvoke(int operationID, std::shared_ptr<std:
 			std::list<Any>::const_iterator incoming_param_activationGroup_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_activationGroup = (*incoming_param_activationGroup_arguments_citer)->get<std::shared_ptr<fUML::Semantics::Activities::ExpansionActivationGroup> >();
 			this->terminateGroup(incoming_param_activationGroup);
+			break;
 		}
 
 		default:
 		{
 			// call superTypes
 			result = fUML::Semantics::Actions::ActionActivationImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			break;
 		}

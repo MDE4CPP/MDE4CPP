@@ -324,13 +324,14 @@ Any CS_NameBased_StructuralFeatureOfInterfaceAccessStrategyImpl::eInvoke(int ope
 			std::list<Any>::const_iterator incoming_param_position_arguments_citer = std::next(arguments->begin(), 3);
 			incoming_param_position = (*incoming_param_position_arguments_citer)->get<int >();
 			this->write(incoming_param_cs_Object,incoming_param_feature,incoming_param_values,incoming_param_position);
+			break;
 		}
 
 		default:
 		{
 			// call superTypes
 			result = CS_StructuralFeatureOfInterfaceAccessStrategyImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			break;
 		}

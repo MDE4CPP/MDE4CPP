@@ -271,7 +271,7 @@ Any ClearAssociationActionActivationImpl::eInvoke(int operationID, std::shared_p
 		{
 			// call superTypes
 			result = ActionActivationImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			break;
 		}

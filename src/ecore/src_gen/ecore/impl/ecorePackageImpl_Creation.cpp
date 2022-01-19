@@ -45,6 +45,7 @@ void ecorePackageImpl::createPackageContents(std::shared_ptr<ecore::EPackage> pa
 	createEModelElementContent(package, factory);
 	createENamedElementContent(package, factory);
 	createEObjectContent(package, factory);
+	createEObjectAnyContent(package, factory);
 	createEObjectContainerContent(package, factory);
 	createEOperationContent(package, factory);
 	createEPackageContent(package, factory);
@@ -234,6 +235,15 @@ void ecorePackageImpl::createEObjectContent(std::shared_ptr<ecore::EPackage> pac
 	m_eObject_Operation_eResource = factory->createEOperation_as_eOperations_in_EClass(m_eObject_Class, EOBJECT_OPERATION_ERESOURCE);
 	m_eObject_Operation_eSet_EStructuralFeature_EJavaObject = factory->createEOperation_as_eOperations_in_EClass(m_eObject_Class, EOBJECT_OPERATION_ESET_ESTRUCTURALFEATURE_EJAVAOBJECT);
 	m_eObject_Operation_eUnset_EStructuralFeature = factory->createEOperation_as_eOperations_in_EClass(m_eObject_Class, EOBJECT_OPERATION_EUNSET_ESTRUCTURALFEATURE);
+	
+}
+
+void ecorePackageImpl::createEObjectAnyContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
+{
+	m_eObjectAny_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, EOBJECTANY_CLASS);
+	
+	m_eObjectAny_Attribute_any = factory->createEReference_as_eReferences_in_EClass(m_eObjectAny_Class, EOBJECTANY_ATTRIBUTE_ANY);
+	
 	
 }
 

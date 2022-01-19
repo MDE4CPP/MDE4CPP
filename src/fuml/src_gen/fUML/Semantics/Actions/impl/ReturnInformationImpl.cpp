@@ -439,6 +439,7 @@ Any ReturnInformationImpl::eInvoke(int operationID, std::shared_ptr<std::list<An
 			std::list<Any>::const_iterator incoming_param_outputParameterValues_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_outputParameterValues = (*incoming_param_outputParameterValues_arguments_citer)->get<std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> >();
 			this->reply(incoming_param_outputParameterValues);
+			break;
 		}
 		// fUML::Semantics::Actions::ReturnInformation::specify() : uml::ValueSpecification: 364086231
 		case ActionsPackage::RETURNINFORMATION_OPERATION_SPECIFY:
@@ -457,7 +458,7 @@ Any ReturnInformationImpl::eInvoke(int operationID, std::shared_ptr<std::list<An
 		{
 			// call superTypes
 			result = fUML::Semantics::Values::ValueImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			break;
 		}

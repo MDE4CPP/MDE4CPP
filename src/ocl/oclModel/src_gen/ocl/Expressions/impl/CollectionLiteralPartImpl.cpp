@@ -230,7 +230,7 @@ Any CollectionLiteralPartImpl::eInvoke(int operationID, std::shared_ptr<std::lis
 		{
 			// call superTypes
 			result = ecore::ETypedElementImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			break;
 		}

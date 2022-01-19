@@ -716,13 +716,13 @@ Any InstanceSpecificationImpl::eInvoke(int operationID, std::shared_ptr<std::lis
 		{
 			// call superTypes
 			result = DeployedArtifactImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			result = PackageableElementImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			result = DeploymentTargetImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			break;
 		}

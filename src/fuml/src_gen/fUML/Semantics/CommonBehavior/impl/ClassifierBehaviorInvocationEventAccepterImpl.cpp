@@ -443,6 +443,7 @@ Any ClassifierBehaviorInvocationEventAccepterImpl::eInvoke(int operationID, std:
 			std::list<Any>::const_iterator incoming_param_eventOccurrence_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_eventOccurrence = (*incoming_param_eventOccurrence_arguments_citer)->get<std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> >();
 			this->accept(incoming_param_eventOccurrence);
+			break;
 		}
 		// fUML::Semantics::CommonBehavior::ClassifierBehaviorInvocationEventAccepter::match(fUML::Semantics::CommonBehavior::EventOccurrence) : bool: 621566743
 		case CommonBehaviorPackage::CLASSIFIERBEHAVIORINVOCATIONEVENTACCEPTER_OPERATION_MATCH_EVENTOCCURRENCE:
@@ -459,13 +460,14 @@ Any ClassifierBehaviorInvocationEventAccepterImpl::eInvoke(int operationID, std:
 		case CommonBehaviorPackage::CLASSIFIERBEHAVIORINVOCATIONEVENTACCEPTER_OPERATION_TERMINATE:
 		{
 			this->terminate();
+			break;
 		}
 
 		default:
 		{
 			// call superTypes
 			result = EventAccepterImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			break;
 		}

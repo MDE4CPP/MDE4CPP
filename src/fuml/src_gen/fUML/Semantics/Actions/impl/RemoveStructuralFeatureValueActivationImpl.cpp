@@ -413,13 +413,14 @@ Any RemoveStructuralFeatureValueActivationImpl::eInvoke(int operationID, std::sh
 		case ActionsPackage::REMOVESTRUCTURALFEATUREVALUEACTIVATION_OPERATION_DOACTION:
 		{
 			this->doAction();
+			break;
 		}
 
 		default:
 		{
 			// call superTypes
 			result = WriteStructuralFeatureActionActivationImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			break;
 		}

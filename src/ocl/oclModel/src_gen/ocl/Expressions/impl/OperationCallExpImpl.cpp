@@ -554,7 +554,7 @@ Any OperationCallExpImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any
 		{
 			// call superTypes
 			result = FeatureCallExpImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			break;
 		}

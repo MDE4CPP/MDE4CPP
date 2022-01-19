@@ -731,7 +731,7 @@ Any ReadLinkObjectEndQualifierActionImpl::eInvoke(int operationID, std::shared_p
 		{
 			// call superTypes
 			result = ActionImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			break;
 		}

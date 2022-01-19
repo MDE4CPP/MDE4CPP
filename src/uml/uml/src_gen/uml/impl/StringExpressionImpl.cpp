@@ -599,10 +599,10 @@ Any StringExpressionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any
 		{
 			// call superTypes
 			result = TemplateableElementImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			result = ExpressionImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			break;
 		}

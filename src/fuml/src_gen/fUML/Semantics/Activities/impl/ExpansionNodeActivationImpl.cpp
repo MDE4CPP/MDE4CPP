@@ -304,6 +304,7 @@ Any ExpansionNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::l
 			std::list<Any>::const_iterator incoming_param_incomingTokens_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_incomingTokens = (*incoming_param_incomingTokens_arguments_citer)->get<std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> >();
 			this->fire(incoming_param_incomingTokens);
+			break;
 		}
 		// fUML::Semantics::Activities::ExpansionNodeActivation::getExpansionRegionActivation() : fUML::Semantics::Activities::ExpansionRegionActivation: 1117119621
 		case ActivitiesPackage::EXPANSIONNODEACTIVATION_OPERATION_GETEXPANSIONREGIONACTIVATION:
@@ -321,13 +322,14 @@ Any ExpansionNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::l
 		case ActivitiesPackage::EXPANSIONNODEACTIVATION_OPERATION_RECEIVEOFFER:
 		{
 			this->receiveOffer();
+			break;
 		}
 
 		default:
 		{
 			// call superTypes
 			result = ObjectNodeActivationImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			break;
 		}

@@ -306,13 +306,14 @@ Any CS_ReadSelfActionActivationImpl::eInvoke(int operationID, std::shared_ptr<st
 		case ActionsPackage::CS_READSELFACTIONACTIVATION_OPERATION_DOACTION:
 		{
 			this->doAction();
+			break;
 		}
 
 		default:
 		{
 			// call superTypes
 			result = fUML::Semantics::Actions::ReadSelfActionActivationImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			break;
 		}

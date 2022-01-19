@@ -1389,6 +1389,7 @@ Any OperationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argu
 			std::list<Any>::const_iterator incoming_param_newIsOrdered_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_newIsOrdered = (*incoming_param_newIsOrdered_arguments_citer)->get<bool >();
 			this->setIsOrdered(incoming_param_newIsOrdered);
+			break;
 		}
 		// uml::Operation::setIsUnique(bool): 1673854407
 		case umlPackage::OPERATION_OPERATION_SETISUNIQUE_BOOLEAN:
@@ -1399,6 +1400,7 @@ Any OperationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argu
 			std::list<Any>::const_iterator incoming_param_newIsUnique_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_newIsUnique = (*incoming_param_newIsUnique_arguments_citer)->get<bool >();
 			this->setIsUnique(incoming_param_newIsUnique);
+			break;
 		}
 		// uml::Operation::setLower(int): 1123488961
 		case umlPackage::OPERATION_OPERATION_SETLOWER_INTEGER:
@@ -1409,6 +1411,7 @@ Any OperationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argu
 			std::list<Any>::const_iterator incoming_param_newLower_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_newLower = (*incoming_param_newLower_arguments_citer)->get<int >();
 			this->setLower(incoming_param_newLower);
+			break;
 		}
 		// uml::Operation::setType(uml::Type): 1580697963
 		case umlPackage::OPERATION_OPERATION_SETTYPE_TYPE:
@@ -1419,6 +1422,7 @@ Any OperationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argu
 			std::list<Any>::const_iterator incoming_param_newType_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_newType = (*incoming_param_newType_arguments_citer)->get<std::shared_ptr<uml::Type> >();
 			this->setType(incoming_param_newType);
+			break;
 		}
 		// uml::Operation::setUpper(int): 1517342073
 		case umlPackage::OPERATION_OPERATION_SETUPPER_UNLIMITEDNATURAL:
@@ -1429,19 +1433,20 @@ Any OperationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argu
 			std::list<Any>::const_iterator incoming_param_newUpper_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_newUpper = (*incoming_param_newUpper_arguments_citer)->get<int >();
 			this->setUpper(incoming_param_newUpper);
+			break;
 		}
 
 		default:
 		{
 			// call superTypes
 			result = TemplateableElementImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			result = ParameterableElementImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			result = BehavioralFeatureImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			break;
 		}

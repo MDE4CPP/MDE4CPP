@@ -528,7 +528,7 @@ Any RemoveStructuralFeatureValueActionImpl::eInvoke(int operationID, std::shared
 		{
 			// call superTypes
 			result = WriteStructuralFeatureActionImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			break;
 		}

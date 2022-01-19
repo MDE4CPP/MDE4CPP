@@ -464,13 +464,14 @@ Any ForkedTokenImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> ar
 		case ActivitiesPackage::FORKEDTOKEN_OPERATION_WITHDRAW:
 		{
 			this->withdraw();
+			break;
 		}
 
 		default:
 		{
 			// call superTypes
 			result = TokenImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			break;
 		}

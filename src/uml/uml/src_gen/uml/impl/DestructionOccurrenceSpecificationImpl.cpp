@@ -345,7 +345,7 @@ Any DestructionOccurrenceSpecificationImpl::eInvoke(int operationID, std::shared
 		{
 			// call superTypes
 			result = MessageOccurrenceSpecificationImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			break;
 		}

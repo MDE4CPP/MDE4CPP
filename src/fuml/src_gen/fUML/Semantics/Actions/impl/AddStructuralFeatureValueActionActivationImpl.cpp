@@ -523,13 +523,14 @@ Any AddStructuralFeatureValueActionActivationImpl::eInvoke(int operationID, std:
 		case ActionsPackage::ADDSTRUCTURALFEATUREVALUEACTIONACTIVATION_OPERATION_DOACTION:
 		{
 			this->doAction();
+			break;
 		}
 
 		default:
 		{
 			// call superTypes
 			result = WriteStructuralFeatureActionActivationImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			break;
 		}

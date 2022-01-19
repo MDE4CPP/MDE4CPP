@@ -286,6 +286,7 @@ Any ObjectImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argumen
 			std::list<Any>::const_iterator incoming_param_value_arguments_citer = std::next(arguments->begin(), 1);
 			incoming_param_value = (*incoming_param_value_arguments_citer)->get<Any >();
 			this->set(incoming_param_property,incoming_param_value);
+			break;
 		}
 		// uml::Object::unset(uml::Property): 1465531791
 		case umlPackage::OBJECT_OPERATION_UNSET_PROPERTY:
@@ -296,13 +297,14 @@ Any ObjectImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argumen
 			std::list<Any>::const_iterator incoming_param_property_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_property = (*incoming_param_property_arguments_citer)->get<std::shared_ptr<uml::Property> >();
 			this->unset(incoming_param_property);
+			break;
 		}
 
 		default:
 		{
 			// call superTypes
 			result = ecore::EModelElementImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			break;
 		}

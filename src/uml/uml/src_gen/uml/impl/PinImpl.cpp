@@ -466,10 +466,10 @@ Any PinImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 		{
 			// call superTypes
 			result = MultiplicityElementImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			result = ObjectNodeImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			break;
 		}

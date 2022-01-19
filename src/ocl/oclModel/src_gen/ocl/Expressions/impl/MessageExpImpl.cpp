@@ -615,7 +615,7 @@ Any MessageExpImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arg
 		{
 			// call superTypes
 			result = OclExpressionImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			break;
 		}

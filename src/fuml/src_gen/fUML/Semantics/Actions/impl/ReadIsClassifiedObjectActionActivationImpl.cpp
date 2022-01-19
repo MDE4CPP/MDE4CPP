@@ -293,7 +293,7 @@ Any ReadIsClassifiedObjectActionActivationImpl::eInvoke(int operationID, std::sh
 		{
 			// call superTypes
 			result = ActionActivationImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			break;
 		}

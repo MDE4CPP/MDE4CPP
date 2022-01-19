@@ -523,6 +523,7 @@ Any ActivityExecutionImpl::eInvoke(int operationID, std::shared_ptr<std::list<An
 		case ActivitiesPackage::ACTIVITYEXECUTION_OPERATION_EXECUTE:
 		{
 			this->execute();
+			break;
 		}
 		// fUML::Semantics::Activities::ActivityExecution::new_() : fUML::Semantics::Values::Value: 929802882
 		case ActivitiesPackage::ACTIVITYEXECUTION_OPERATION_NEW_:
@@ -534,13 +535,14 @@ Any ActivityExecutionImpl::eInvoke(int operationID, std::shared_ptr<std::list<An
 		case ActivitiesPackage::ACTIVITYEXECUTION_OPERATION_TERMINATE:
 		{
 			this->terminate();
+			break;
 		}
 
 		default:
 		{
 			// call superTypes
 			result = fUML::Semantics::CommonBehavior::ExecutionImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			break;
 		}

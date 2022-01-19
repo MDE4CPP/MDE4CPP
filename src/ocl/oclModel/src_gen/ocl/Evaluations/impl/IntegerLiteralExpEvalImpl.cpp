@@ -282,10 +282,10 @@ Any IntegerLiteralExpEvalImpl::eInvoke(int operationID, std::shared_ptr<std::lis
 		{
 			// call superTypes
 			result = fUML::Semantics::Values::LiteralIntegerEvaluationImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			result = NumericLiteralExpEvalImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			break;
 		}

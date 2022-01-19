@@ -555,6 +555,7 @@ Any LocusImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argument
 			std::list<Any>::const_iterator incoming_param_value_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_value = (*incoming_param_value_arguments_citer)->get<std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue> >();
 			this->add(incoming_param_value);
+			break;
 		}
 		// fUML::Semantics::Loci::Locus::assignExecutor(fUML::Semantics::Loci::Executor): 1235487051
 		case LociPackage::LOCUS_OPERATION_ASSIGNEXECUTOR_EXECUTOR:
@@ -565,6 +566,7 @@ Any LocusImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argument
 			std::list<Any>::const_iterator incoming_param_executor_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_executor = (*incoming_param_executor_arguments_citer)->get<std::shared_ptr<fUML::Semantics::Loci::Executor> >();
 			this->assignExecutor(incoming_param_executor);
+			break;
 		}
 		// fUML::Semantics::Loci::Locus::assignFactory(fUML::Semantics::Loci::ExecutionFactory): 361443955
 		case LociPackage::LOCUS_OPERATION_ASSIGNFACTORY_EXECUTIONFACTORY:
@@ -575,6 +577,7 @@ Any LocusImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argument
 			std::list<Any>::const_iterator incoming_param_factory_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_factory = (*incoming_param_factory_arguments_citer)->get<std::shared_ptr<fUML::Semantics::Loci::ExecutionFactory> >();
 			this->assignFactory(incoming_param_factory);
+			break;
 		}
 		// fUML::Semantics::Loci::Locus::conforms(uml::Classifier, uml::Classifier) : bool: 1626464999
 		case LociPackage::LOCUS_OPERATION_CONFORMS_CLASSIFIER_CLASSIFIER:
@@ -612,6 +615,7 @@ Any LocusImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argument
 			std::list<Any>::const_iterator incoming_param_value_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_value = (*incoming_param_value_arguments_citer)->get<std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue> >();
 			this->remove(incoming_param_value);
+			break;
 		}
 		// fUML::Semantics::Loci::Locus::retrieveExtent(uml::Classifier) : fUML::Semantics::StructuredClassifiers::ExtensionalValue[*]: 673387949
 		case LociPackage::LOCUS_OPERATION_RETRIEVEEXTENT_CLASSIFIER:
@@ -630,7 +634,7 @@ Any LocusImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argument
 		{
 			// call superTypes
 			result = ecore::EModelElementImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			break;
 		}

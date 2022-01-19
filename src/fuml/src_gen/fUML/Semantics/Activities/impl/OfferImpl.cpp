@@ -426,11 +426,13 @@ Any OfferImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argument
 			std::list<Any>::const_iterator incoming_param_count_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_count = (*incoming_param_count_arguments_citer)->get<int >();
 			this->removeOfferedValues(incoming_param_count);
+			break;
 		}
 		// fUML::Semantics::Activities::Offer::removeWithdrawnTokens(): 363104288
 		case ActivitiesPackage::OFFER_OPERATION_REMOVEWITHDRAWNTOKENS:
 		{
 			this->removeWithdrawnTokens();
+			break;
 		}
 		// fUML::Semantics::Activities::Offer::retrieveOfferedTokens() : fUML::Semantics::Activities::Token[*]: 1975591629
 		case ActivitiesPackage::OFFER_OPERATION_RETRIEVEOFFEREDTOKENS:
@@ -444,7 +446,7 @@ Any OfferImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argument
 		{
 			// call superTypes
 			result = ecore::EModelElementImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			break;
 		}

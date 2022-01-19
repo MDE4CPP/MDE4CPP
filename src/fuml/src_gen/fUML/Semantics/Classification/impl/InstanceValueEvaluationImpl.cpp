@@ -349,7 +349,7 @@ Any InstanceValueEvaluationImpl::eInvoke(int operationID, std::shared_ptr<std::l
 		{
 			// call superTypes
 			result = fUML::Semantics::Values::EvaluationImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			break;
 		}

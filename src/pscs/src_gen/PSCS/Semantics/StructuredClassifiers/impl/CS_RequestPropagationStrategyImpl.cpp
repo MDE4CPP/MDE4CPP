@@ -265,7 +265,7 @@ Any CS_RequestPropagationStrategyImpl::eInvoke(int operationID, std::shared_ptr<
 		{
 			// call superTypes
 			result = fUML::Semantics::Loci::SemanticStrategyImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			break;
 		}

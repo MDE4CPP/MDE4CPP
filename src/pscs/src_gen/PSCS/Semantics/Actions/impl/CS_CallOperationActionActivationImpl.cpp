@@ -525,6 +525,7 @@ Any CS_CallOperationActionActivationImpl::eInvoke(int operationID, std::shared_p
 		case ActionsPackage::CS_CALLOPERATIONACTIONACTIVATION_OPERATION_DOACTION:
 		{
 			this->doAction();
+			break;
 		}
 		// PSCS::Semantics::Actions::CS_CallOperationActionActivation::getCallExecution() : fUML::Semantics::CommonBehavior::Execution: 1367520836
 		case ActionsPackage::CS_CALLOPERATIONACTIONACTIVATION_OPERATION_GETCALLEXECUTION:
@@ -580,7 +581,7 @@ Any CS_CallOperationActionActivationImpl::eInvoke(int operationID, std::shared_p
 		{
 			// call superTypes
 			result = fUML::Semantics::Actions::CallOperationActionActivationImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			break;
 		}

@@ -318,13 +318,14 @@ Any CS_CreateObjectActionActivationImpl::eInvoke(int operationID, std::shared_pt
 		case ActionsPackage::CS_CREATEOBJECTACTIONACTIVATION_OPERATION_DOACTION:
 		{
 			this->doAction();
+			break;
 		}
 
 		default:
 		{
 			// call superTypes
 			result = fUML::Semantics::Actions::CreateObjectActionActivationImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			break;
 		}

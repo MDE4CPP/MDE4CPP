@@ -569,7 +569,7 @@ Any ProtocolTransitionImpl::eInvoke(int operationID, std::shared_ptr<std::list<A
 		{
 			// call superTypes
 			result = TransitionImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			break;
 		}

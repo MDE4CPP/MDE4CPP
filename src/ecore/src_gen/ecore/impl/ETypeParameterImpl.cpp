@@ -284,7 +284,7 @@ Any ETypeParameterImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case ecore::ecorePackage::ETYPEPARAMETER_ATTRIBUTE_EBOUNDS:
-			return eAnyBag(getEBounds(),ecore::ecorePackage::EGENERICTYPE_CLASS); //545
+			return eAnyBag(getEBounds(),ecore::ecorePackage::EGENERICTYPE_CLASS); //555
 	}
 	return ENamedElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -294,7 +294,7 @@ bool ETypeParameterImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case ecore::ecorePackage::ETYPEPARAMETER_ATTRIBUTE_EBOUNDS:
-			return getEBounds() != nullptr; //545
+			return getEBounds() != nullptr; //555
 	}
 	return ENamedElementImpl::internalEIsSet(featureID);
 }
@@ -359,7 +359,7 @@ Any ETypeParameterImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>>
 		{
 			// call superTypes
 			result = ENamedElementImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			break;
 		}

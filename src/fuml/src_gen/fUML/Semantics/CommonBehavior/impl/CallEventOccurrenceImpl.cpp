@@ -369,6 +369,7 @@ Any CallEventOccurrenceImpl::eInvoke(int operationID, std::shared_ptr<std::list<
 		case CommonBehaviorPackage::CALLEVENTOCCURRENCE_OPERATION_RELEASECALLER:
 		{
 			this->releaseCaller();
+			break;
 		}
 		// fUML::Semantics::CommonBehavior::CallEventOccurrence::setOutputParameterValues(fUML::Semantics::CommonBehavior::ParameterValue[*]): 1021816772
 		case CommonBehaviorPackage::CALLEVENTOCCURRENCE_OPERATION_SETOUTPUTPARAMETERVALUES_PARAMETERVALUE:
@@ -379,13 +380,14 @@ Any CallEventOccurrenceImpl::eInvoke(int operationID, std::shared_ptr<std::list<
 			std::list<Any>::const_iterator incoming_param_parameterValues_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_parameterValues = (*incoming_param_parameterValues_arguments_citer)->get<std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> >();
 			this->setOutputParameterValues(incoming_param_parameterValues);
+			break;
 		}
 
 		default:
 		{
 			// call superTypes
 			result = EventOccurrenceImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			break;
 		}

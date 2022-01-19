@@ -1048,10 +1048,10 @@ Any ArtifactImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argum
 		{
 			// call superTypes
 			result = DeployedArtifactImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			result = ClassifierImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			break;
 		}

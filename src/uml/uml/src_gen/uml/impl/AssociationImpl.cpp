@@ -1049,10 +1049,10 @@ Any AssociationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> ar
 		{
 			// call superTypes
 			result = RelationshipImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			result = ClassifierImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			break;
 		}

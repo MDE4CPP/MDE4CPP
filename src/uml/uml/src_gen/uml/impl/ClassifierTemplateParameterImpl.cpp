@@ -537,7 +537,7 @@ Any ClassifierTemplateParameterImpl::eInvoke(int operationID, std::shared_ptr<st
 		{
 			// call superTypes
 			result = TemplateParameterImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			break;
 		}

@@ -1545,13 +1545,13 @@ Any PackageImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argume
 		{
 			// call superTypes
 			result = TemplateableElementImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			result = PackageableElementImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			result = NamespaceImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			break;
 		}

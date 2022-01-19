@@ -552,18 +552,20 @@ Any CS_AddStructuralFeatureValueActionActivationImpl::eInvoke(int operationID, s
 		case ActionsPackage::CS_ADDSTRUCTURALFEATUREVALUEACTIONACTIVATION_OPERATION_DOACTION:
 		{
 			this->doAction();
+			break;
 		}
 		// PSCS::Semantics::Actions::CS_AddStructuralFeatureValueActionActivation::doActionDefault(): 494359846
 		case ActionsPackage::CS_ADDSTRUCTURALFEATUREVALUEACTIONACTIVATION_OPERATION_DOACTIONDEFAULT:
 		{
 			this->doActionDefault();
+			break;
 		}
 
 		default:
 		{
 			// call superTypes
 			result = fUML::Semantics::Actions::AddStructuralFeatureValueActionActivationImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			break;
 		}

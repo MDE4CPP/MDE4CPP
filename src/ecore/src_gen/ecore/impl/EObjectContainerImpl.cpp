@@ -261,7 +261,7 @@ Any EObjectContainerImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case ecore::ecorePackage::EOBJECTCONTAINER_ATTRIBUTE_CONTAINER:
-			return eAnyBag(getContainer(),ecore::ecorePackage::EOBJECT_CLASS); //413
+			return eAnyBag(getContainer(),ecore::ecorePackage::EOBJECT_CLASS); //423
 	}
 	return EObjectImpl::eGet(featureID, resolve, coreType);
 }
@@ -271,7 +271,7 @@ bool EObjectContainerImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case ecore::ecorePackage::EOBJECTCONTAINER_ATTRIBUTE_CONTAINER:
-			return getContainer() != nullptr; //413
+			return getContainer() != nullptr; //423
 	}
 	return EObjectImpl::internalEIsSet(featureID);
 }
@@ -340,13 +340,14 @@ Any EObjectContainerImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any
 			std::list<Any>::const_iterator incoming_param_container_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_container = (*incoming_param_container_arguments_citer)->get<std::shared_ptr<Bag<ecore::EObject>> >();
 			this->setContainer(incoming_param_container);
+			break;
 		}
 
 		default:
 		{
 			// call superTypes
 			result = EObjectImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			break;
 		}

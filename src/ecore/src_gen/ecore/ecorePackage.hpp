@@ -40,6 +40,7 @@ namespace ecore
 	class EModelElement;
 	class ENamedElement;
 	class EObject;
+	class EObjectAny;
 	class EObjectContainer;
 	class EOperation;
 	class EPackage;
@@ -441,6 +442,25 @@ namespace ecore
 			// End Class EObject
 
 
+			// Begin Class EObjectAny
+			//Class and Feature IDs 
+			static const long long EOBJECTANY_CLASS = 1375380197;
+			static const unsigned int EOBJECTANY_CLASS_FEATURE_COUNT = 4;
+			static const unsigned int EOBJECTANY_CLASS_OPERATION_COUNT = 15;
+			
+			static const long long EOBJECTANY_ATTRIBUTE_ANY = 2010029336;
+			
+			
+			//Class and Feature Getter
+			virtual std::shared_ptr<ecore::EClass> getEObjectAny_Class() const = 0;
+			
+			
+			virtual std::shared_ptr<ecore::EReference> getEObjectAny_Attribute_any() const = 0;
+			
+			
+			// End Class EObjectAny
+
+
 			// Begin Class EObjectContainer
 			//Class and Feature IDs 
 			static const long long EOBJECTCONTAINER_CLASS = 2040922192;
@@ -709,12 +729,12 @@ namespace ecore
 			static const int ELONG_CLASS = 35;
 			static const int ELONGOBJECT_CLASS = 36;
 			static const int EMAP_CLASS = 37;
-			static const int ERESOURCE_CLASS = 46;
-			static const int ERESOURCESET_CLASS = 47;
-			static const int ESHORT_CLASS = 48;
-			static const int ESHORTOBJECT_CLASS = 49;
-			static const int ESTRING_CLASS = 50;
-			static const int ETREEITERATOR_CLASS = 53;
+			static const int ERESOURCE_CLASS = 47;
+			static const int ERESOURCESET_CLASS = 48;
+			static const int ESHORT_CLASS = 49;
+			static const int ESHORTOBJECT_CLASS = 50;
+			static const int ESTRING_CLASS = 51;
+			static const int ETREEITERATOR_CLASS = 54;
 			
 			virtual std::shared_ptr<ecore::EDataType> getAny_Class() const = 0;
 			virtual std::shared_ptr<ecore::EDataType> getEBigDecimal_Class() const = 0;

@@ -248,7 +248,7 @@ Any PrimitiveLiteralExpEvalImpl::eInvoke(int operationID, std::shared_ptr<std::l
 		{
 			// call superTypes
 			result = LiteralExpEvalImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			break;
 		}

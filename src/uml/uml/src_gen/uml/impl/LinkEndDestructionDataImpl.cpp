@@ -378,7 +378,7 @@ Any LinkEndDestructionDataImpl::eInvoke(int operationID, std::shared_ptr<std::li
 		{
 			// call superTypes
 			result = LinkEndDataImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			break;
 		}

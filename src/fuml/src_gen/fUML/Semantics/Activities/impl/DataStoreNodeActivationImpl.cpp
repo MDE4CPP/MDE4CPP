@@ -295,6 +295,7 @@ Any DataStoreNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::l
 			std::list<Any>::const_iterator incoming_param_token_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_token = (*incoming_param_token_arguments_citer)->get<std::shared_ptr<fUML::Semantics::Activities::Token> >();
 			this->addToken(incoming_param_token);
+			break;
 		}
 		// fUML::Semantics::Activities::DataStoreNodeActivation::removeToken(fUML::Semantics::Activities::Token) : int: 1985388858
 		case ActivitiesPackage::DATASTORENODEACTIVATION_OPERATION_REMOVETOKEN_TOKEN:
@@ -312,7 +313,7 @@ Any DataStoreNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::l
 		{
 			// call superTypes
 			result = CentralBufferNodeActivationImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			break;
 		}

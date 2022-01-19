@@ -314,18 +314,20 @@ Any ForkNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<A
 			std::list<Any>::const_iterator incoming_param_incomingTokens_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_incomingTokens = (*incoming_param_incomingTokens_arguments_citer)->get<std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> >();
 			this->fire(incoming_param_incomingTokens);
+			break;
 		}
 		// fUML::Semantics::Activities::ForkNodeActivation::terminate(): 1661037681
 		case ActivitiesPackage::FORKNODEACTIVATION_OPERATION_TERMINATE:
 		{
 			this->terminate();
+			break;
 		}
 
 		default:
 		{
 			// call superTypes
 			result = ControlNodeActivationImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			break;
 		}

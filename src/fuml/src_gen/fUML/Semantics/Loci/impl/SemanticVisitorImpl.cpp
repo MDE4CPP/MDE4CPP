@@ -231,18 +231,20 @@ Any SemanticVisitorImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>
 		case LociPackage::SEMANTICVISITOR_OPERATION__BEGINISOLATION:
 		{
 			this->_beginIsolation();
+			break;
 		}
 		// fUML::Semantics::Loci::SemanticVisitor::_endIsolation(): 1758854823
 		case LociPackage::SEMANTICVISITOR_OPERATION__ENDISOLATION:
 		{
 			this->_endIsolation();
+			break;
 		}
 
 		default:
 		{
 			// call superTypes
 			result = ecore::EModelElementImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			break;
 		}

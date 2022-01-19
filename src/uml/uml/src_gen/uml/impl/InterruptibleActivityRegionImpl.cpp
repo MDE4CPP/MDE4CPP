@@ -548,7 +548,7 @@ Any InterruptibleActivityRegionImpl::eInvoke(int operationID, std::shared_ptr<st
 		{
 			// call superTypes
 			result = ActivityGroupImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			break;
 		}

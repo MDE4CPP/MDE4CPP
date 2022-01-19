@@ -20,7 +20,6 @@
 
 //depending model packages
 
-#include "ecore/ecorePackage.hpp"
 
 
 using namespace ecore;
@@ -49,6 +48,7 @@ void ecorePackageImpl::initializePackageContents()
 	m_eFactory_Class->getESuperTypes()->push_back(getEModelElement_Class());
 	m_eModelElement_Class->getESuperTypes()->push_back(getEObject_Class());
 	m_eNamedElement_Class->getESuperTypes()->push_back(getEModelElement_Class());
+	m_eObjectAny_Class->getESuperTypes()->push_back(getEObject_Class());
 	m_eObjectContainer_Class->getESuperTypes()->push_back(getEObject_Class());
 	m_eOperation_Class->getESuperTypes()->push_back(getETypedElement_Class());
 	m_ePackage_Class->getESuperTypes()->push_back(getENamedElement_Class());
@@ -72,6 +72,7 @@ void ecorePackageImpl::initializePackageContents()
 	initializeEModelElementContent();
 	initializeENamedElementContent();
 	initializeEObjectContent();
+	initializeEObjectAnyContent();
 	initializeEObjectContainerContent();
 	initializeEOperationContent();
 	initializeEPackageContent();
@@ -1761,6 +1762,39 @@ void ecorePackageImpl::initializeEObjectContent()
 		parameter->setUpperBound(1);
 		parameter->setUnique(true);
 		parameter->setOrdered(true);
+	}
+	
+	
+}
+
+void ecorePackageImpl::initializeEObjectAnyContent()
+{
+	m_eObjectAny_Class->setName("EObjectAny");
+	m_eObjectAny_Class->setAbstract(false);
+	m_eObjectAny_Class->setInterface(false);
+	
+	
+	m_eObjectAny_Attribute_any->setName("any");
+	m_eObjectAny_Attribute_any->setEType(getEJavaObject_Class());
+	m_eObjectAny_Attribute_any->setLowerBound(1);
+	m_eObjectAny_Attribute_any->setUpperBound(1);
+	m_eObjectAny_Attribute_any->setTransient(false);
+	m_eObjectAny_Attribute_any->setVolatile(false);
+	m_eObjectAny_Attribute_any->setChangeable(true);
+	m_eObjectAny_Attribute_any->setUnsettable(false);
+	m_eObjectAny_Attribute_any->setUnique(true);
+	m_eObjectAny_Attribute_any->setDerived(false);
+	m_eObjectAny_Attribute_any->setOrdered(true);
+	m_eObjectAny_Attribute_any->setContainment(false);
+	m_eObjectAny_Attribute_any->setResolveProxies(true);
+	{
+		std::string defaultValue = "";
+		if (!defaultValue.empty())
+		{
+			m_eObjectAny_Attribute_any->setDefaultValueLiteral(defaultValue);
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
 	

@@ -661,6 +661,7 @@ Any CallActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list
 		case ActionsPackage::CALLACTIONACTIVATION_OPERATION_DOACTION:
 		{
 			this->doAction();
+			break;
 		}
 		// fUML::Semantics::Actions::CallActionActivation::getCallExecution() : fUML::Semantics::CommonBehavior::Execution: 1108060274
 		case ActionsPackage::CALLACTIONACTIVATION_OPERATION_GETCALLEXECUTION:
@@ -677,18 +678,20 @@ Any CallActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list
 			std::list<Any>::const_iterator incoming_param_execution_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_execution = (*incoming_param_execution_arguments_citer)->get<std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> >();
 			this->removeCallExecution(incoming_param_execution);
+			break;
 		}
 		// fUML::Semantics::Actions::CallActionActivation::terminate(): 58283131
 		case ActionsPackage::CALLACTIONACTIVATION_OPERATION_TERMINATE:
 		{
 			this->terminate();
+			break;
 		}
 
 		default:
 		{
 			// call superTypes
 			result = InvocationActionActivationImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			break;
 		}

@@ -429,6 +429,7 @@ Any PinActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> 
 			std::list<Any>::const_iterator incoming_param_incomingTokens_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_incomingTokens = (*incoming_param_incomingTokens_arguments_citer)->get<std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> >();
 			this->fire(incoming_param_incomingTokens);
+			break;
 		}
 		// fUML::Semantics::Actions::PinActivation::takeOfferedTokens() : fUML::Semantics::Activities::Token[*]: 2035745770
 		case ActionsPackage::PINACTIVATION_OPERATION_TAKEOFFEREDTOKENS:
@@ -442,7 +443,7 @@ Any PinActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> 
 		{
 			// call superTypes
 			result = fUML::Semantics::Activities::ObjectNodeActivationImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			break;
 		}

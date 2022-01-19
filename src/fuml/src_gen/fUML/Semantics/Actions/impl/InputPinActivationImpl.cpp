@@ -291,13 +291,14 @@ Any InputPinActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<A
 		case ActionsPackage::INPUTPINACTIVATION_OPERATION_RECEIVEOFFER:
 		{
 			this->receiveOffer();
+			break;
 		}
 
 		default:
 		{
 			// call superTypes
 			result = PinActivationImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			break;
 		}

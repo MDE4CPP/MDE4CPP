@@ -291,6 +291,7 @@ Any ExtensionalValueListImpl::eInvoke(int operationID, std::shared_ptr<std::list
 			std::list<Any>::const_iterator incoming_param_i_arguments_citer = std::next(arguments->begin(), 1);
 			incoming_param_i = (*incoming_param_i_arguments_citer)->get<int >();
 			this->addValue(incoming_param_value,incoming_param_i);
+			break;
 		}
 		// fUML::Semantics::StructuredClassifiers::ExtensionalValueList::getValue() : fUML::Semantics::StructuredClassifiers::ExtensionalValue: 1588146499
 		case StructuredClassifiersPackage::EXTENSIONALVALUELIST_OPERATION_GETVALUE:
@@ -330,7 +331,7 @@ Any ExtensionalValueListImpl::eInvoke(int operationID, std::shared_ptr<std::list
 		{
 			// call superTypes
 			result = ExtensionalValueImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			break;
 		}

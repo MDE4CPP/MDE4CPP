@@ -1387,7 +1387,7 @@ Any EClassImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argumen
 		{
 			// call superTypes
 			result = EClassifierImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			break;
 		}

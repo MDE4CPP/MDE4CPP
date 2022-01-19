@@ -476,7 +476,7 @@ Any ActorImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argument
 		{
 			// call superTypes
 			result = BehavioredClassifierImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			break;
 		}

@@ -476,6 +476,7 @@ Any CS_ClearStructuralFeatureActionActivationImpl::eInvoke(int operationID, std:
 		case ActionsPackage::CS_CLEARSTRUCTURALFEATUREACTIONACTIVATION_OPERATION_DOACTION:
 		{
 			this->doAction();
+			break;
 		}
 		// PSCS::Semantics::Actions::CS_ClearStructuralFeatureActionActivation::getLinksToDestroy(fUML::Semantics::SimpleClassifiers::StructuredValue, uml::StructuralFeature) : PSCS::Semantics::StructuredClassifiers::CS_Link[*]: 1339765966
 		case ActionsPackage::CS_CLEARSTRUCTURALFEATUREACTIONACTIVATION_OPERATION_GETLINKSTODESTROY_STRUCTUREDVALUE_STRUCTURALFEATURE:
@@ -516,7 +517,7 @@ Any CS_ClearStructuralFeatureActionActivationImpl::eInvoke(int operationID, std:
 		{
 			// call superTypes
 			result = fUML::Semantics::Actions::ClearStructuralFeatureActionActivationImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			break;
 		}

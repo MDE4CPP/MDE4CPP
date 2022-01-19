@@ -451,6 +451,7 @@ Any LinkImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments
 			std::list<Any>::const_iterator incoming_param_locus_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_locus = (*incoming_param_locus_arguments_citer)->get<std::shared_ptr<fUML::Semantics::Loci::Locus> >();
 			this->addTo(incoming_param_locus);
+			break;
 		}
 		// fUML::Semantics::StructuredClassifiers::Link::getOtherFeatureValues(fUML::Semantics::StructuredClassifiers::ExtensionalValue[*], uml::Property) : fUML::Semantics::SimpleClassifiers::FeatureValue[*]: 704042565
 		case StructuredClassifiersPackage::LINK_OPERATION_GETOTHERFEATUREVALUES_EXTENSIONALVALUE_PROPERTY:
@@ -503,7 +504,7 @@ Any LinkImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments
 		{
 			// call superTypes
 			result = ExtensionalValueImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			break;
 		}

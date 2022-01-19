@@ -443,7 +443,7 @@ Any IntegerLiteralExpImpl::eInvoke(int operationID, std::shared_ptr<std::list<An
 		{
 			// call superTypes
 			result = NumericLiteralExpImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			break;
 		}

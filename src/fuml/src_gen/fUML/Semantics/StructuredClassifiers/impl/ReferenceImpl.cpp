@@ -475,11 +475,13 @@ Any ReferenceImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argu
 			std::list<Any>::const_iterator incoming_param_position_arguments_citer = std::next(arguments->begin(), 2);
 			incoming_param_position = (*incoming_param_position_arguments_citer)->get<int >();
 			this->assignFeatureValue(incoming_param_feature,incoming_param_values,incoming_param_position);
+			break;
 		}
 		// fUML::Semantics::StructuredClassifiers::Reference::destroy(): 2091249574
 		case StructuredClassifiersPackage::REFERENCE_OPERATION_DESTROY:
 		{
 			this->destroy();
+			break;
 		}
 		// fUML::Semantics::StructuredClassifiers::Reference::dispatch(uml::Operation) : fUML::Semantics::CommonBehavior::Execution: 391208876
 		case StructuredClassifiersPackage::REFERENCE_OPERATION_DISPATCH_OPERATION:
@@ -547,6 +549,7 @@ Any ReferenceImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argu
 			std::list<Any>::const_iterator incoming_param_value_arguments_citer = std::next(arguments->begin(), 1);
 			incoming_param_value = (*incoming_param_value_arguments_citer)->get<std::shared_ptr<fUML::Semantics::Values::Value> >();
 			this->removeValue(incoming_param_feature,incoming_param_value);
+			break;
 		}
 		// fUML::Semantics::StructuredClassifiers::Reference::retrieveFeatureValue(uml::StructuralFeature) : fUML::Semantics::SimpleClassifiers::FeatureValue: 252923786
 		case StructuredClassifiersPackage::REFERENCE_OPERATION_RETRIEVEFEATUREVALUE_STRUCTURALFEATURE:
@@ -575,6 +578,7 @@ Any ReferenceImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argu
 			std::list<Any>::const_iterator incoming_param_signalInstance_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_signalInstance = (*incoming_param_signalInstance_arguments_citer)->get<std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance> >();
 			this->send(incoming_param_signalInstance);
+			break;
 		}
 		// fUML::Semantics::StructuredClassifiers::Reference::send(fUML::Semantics::CommonBehavior::EventOccurrence): 2041193923
 		case StructuredClassifiersPackage::REFERENCE_OPERATION_SEND_EVENTOCCURRENCE:
@@ -585,6 +589,7 @@ Any ReferenceImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argu
 			std::list<Any>::const_iterator incoming_param_eventOccurrence_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_eventOccurrence = (*incoming_param_eventOccurrence_arguments_citer)->get<std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> >();
 			this->send(incoming_param_eventOccurrence);
+			break;
 		}
 		// fUML::Semantics::StructuredClassifiers::Reference::setFeatureValue(uml::StructuralFeature, fUML::Semantics::Values::Value[*], int): 1476170621
 		case StructuredClassifiersPackage::REFERENCE_OPERATION_SETFEATUREVALUE_STRUCTURALFEATURE_EINT:
@@ -605,6 +610,7 @@ Any ReferenceImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argu
 			std::list<Any>::const_iterator incoming_param_position_arguments_citer = std::next(arguments->begin(), 2);
 			incoming_param_position = (*incoming_param_position_arguments_citer)->get<int >();
 			this->setFeatureValue(incoming_param_feature,incoming_param_values,incoming_param_position);
+			break;
 		}
 		// fUML::Semantics::StructuredClassifiers::Reference::startBehavior(uml::Class, fUML::Semantics::CommonBehavior::ParameterValue[*]): 1959081471
 		case StructuredClassifiersPackage::REFERENCE_OPERATION_STARTBEHAVIOR_CLASS_PARAMETERVALUE:
@@ -620,6 +626,7 @@ Any ReferenceImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argu
 			std::list<Any>::const_iterator incoming_param_inputs_arguments_citer = std::next(arguments->begin(), 1);
 			incoming_param_inputs = (*incoming_param_inputs_arguments_citer)->get<std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> >();
 			this->startBehavior(incoming_param_classifier,incoming_param_inputs);
+			break;
 		}
 		// fUML::Semantics::StructuredClassifiers::Reference::toString() : std::string: 1690791699
 		case StructuredClassifiersPackage::REFERENCE_OPERATION_TOSTRING:
@@ -632,7 +639,7 @@ Any ReferenceImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argu
 		{
 			// call superTypes
 			result = fUML::Semantics::SimpleClassifiers::StructuredValueImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			break;
 		}

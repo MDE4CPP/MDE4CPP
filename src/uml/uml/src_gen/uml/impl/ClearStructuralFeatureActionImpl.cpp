@@ -499,7 +499,7 @@ Any ClearStructuralFeatureActionImpl::eInvoke(int operationID, std::shared_ptr<s
 		{
 			// call superTypes
 			result = StructuralFeatureActionImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			break;
 		}

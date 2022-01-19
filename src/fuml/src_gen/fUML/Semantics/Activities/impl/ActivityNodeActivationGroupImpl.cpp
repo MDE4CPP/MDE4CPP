@@ -1052,6 +1052,7 @@ Any ActivityNodeActivationGroupImpl::eInvoke(int operationID, std::shared_ptr<st
 			std::list<Any>::const_iterator incoming_param_edges_arguments_citer = std::next(arguments->begin(), 1);
 			incoming_param_edges = (*incoming_param_edges_arguments_citer)->get<std::shared_ptr<Bag<uml::ActivityEdge>> >();
 			this->activate(incoming_param_nodes,incoming_param_edges);
+			break;
 		}
 		// fUML::Semantics::Activities::ActivityNodeActivationGroup::addEdgeInstance(fUML::Semantics::Activities::ActivityEdgeInstance): 1652430233
 		case ActivitiesPackage::ACTIVITYNODEACTIVATIONGROUP_OPERATION_ADDEDGEINSTANCE_ACTIVITYEDGEINSTANCE:
@@ -1062,6 +1063,7 @@ Any ActivityNodeActivationGroupImpl::eInvoke(int operationID, std::shared_ptr<st
 			std::list<Any>::const_iterator incoming_param_instance_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_instance = (*incoming_param_instance_arguments_citer)->get<std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance> >();
 			this->addEdgeInstance(incoming_param_instance);
+			break;
 		}
 		// fUML::Semantics::Activities::ActivityNodeActivationGroup::addNodeActivation(fUML::Semantics::Activities::ActivityNodeActivation): 771980353
 		case ActivitiesPackage::ACTIVITYNODEACTIVATIONGROUP_OPERATION_ADDNODEACTIVATION_ACTIVITYNODEACTIVATION:
@@ -1072,6 +1074,7 @@ Any ActivityNodeActivationGroupImpl::eInvoke(int operationID, std::shared_ptr<st
 			std::list<Any>::const_iterator incoming_param_activation_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_activation = (*incoming_param_activation_arguments_citer)->get<std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> >();
 			this->addNodeActivation(incoming_param_activation);
+			break;
 		}
 		// fUML::Semantics::Activities::ActivityNodeActivationGroup::checkIncomingEdges(fUML::Semantics::Activities::ActivityEdgeInstance[*], fUML::Semantics::Activities::ActivityNodeActivation[*]) : bool: 165124996
 		case ActivitiesPackage::ACTIVITYNODEACTIVATIONGROUP_OPERATION_CHECKINCOMINGEDGES_ACTIVITYEDGEINSTANCE_ACTIVITYNODEACTIVATION:
@@ -1098,6 +1101,7 @@ Any ActivityNodeActivationGroupImpl::eInvoke(int operationID, std::shared_ptr<st
 			std::list<Any>::const_iterator incoming_param_edges_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_edges = (*incoming_param_edges_arguments_citer)->get<std::shared_ptr<Bag<uml::ActivityEdge>> >();
 			this->createEdgeInstance(incoming_param_edges);
+			break;
 		}
 		// fUML::Semantics::Activities::ActivityNodeActivationGroup::createNodeActivation(uml::ActivityNode) : fUML::Semantics::Activities::ActivityNodeActivation: 1286625228
 		case ActivitiesPackage::ACTIVITYNODEACTIVATIONGROUP_OPERATION_CREATENODEACTIVATION_ACTIVITYNODE:
@@ -1119,6 +1123,7 @@ Any ActivityNodeActivationGroupImpl::eInvoke(int operationID, std::shared_ptr<st
 			std::list<Any>::const_iterator incoming_param_nodes_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_nodes = (*incoming_param_nodes_arguments_citer)->get<std::shared_ptr<Bag<uml::ActivityNode>> >();
 			this->createNodeActivations(incoming_param_nodes);
+			break;
 		}
 		// fUML::Semantics::Activities::ActivityNodeActivationGroup::getNodeActivation(uml::ActivityNode) : fUML::Semantics::Activities::ActivityNodeActivation: 798486402
 		case ActivitiesPackage::ACTIVITYNODEACTIVATIONGROUP_OPERATION_GETNODEACTIVATION_ACTIVITYNODE:
@@ -1164,6 +1169,7 @@ Any ActivityNodeActivationGroupImpl::eInvoke(int operationID, std::shared_ptr<st
 			std::list<Any>::const_iterator incoming_param_activation_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_activation = (*incoming_param_activation_arguments_citer)->get<std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> >();
 			this->resume(incoming_param_activation);
+			break;
 		}
 		// fUML::Semantics::Activities::ActivityNodeActivationGroup::retrieveActivityExecution() : fUML::Semantics::Activities::ActivityExecution: 894742694
 		case ActivitiesPackage::ACTIVITYNODEACTIVATIONGROUP_OPERATION_RETRIEVEACTIVITYEXECUTION:
@@ -1180,6 +1186,7 @@ Any ActivityNodeActivationGroupImpl::eInvoke(int operationID, std::shared_ptr<st
 			std::list<Any>::const_iterator incoming_param_activations_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_activations = (*incoming_param_activations_arguments_citer)->get<std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityNodeActivation>> >();
 			this->run(incoming_param_activations);
+			break;
 		}
 		// fUML::Semantics::Activities::ActivityNodeActivationGroup::runNodes(uml::ActivityNode[*]): 1752071273
 		case ActivitiesPackage::ACTIVITYNODEACTIVATIONGROUP_OPERATION_RUNNODES_ACTIVITYNODE:
@@ -1190,6 +1197,7 @@ Any ActivityNodeActivationGroupImpl::eInvoke(int operationID, std::shared_ptr<st
 			std::list<Any>::const_iterator incoming_param_nodes_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_nodes = (*incoming_param_nodes_arguments_citer)->get<std::shared_ptr<Bag<uml::ActivityNode>> >();
 			this->runNodes(incoming_param_nodes);
+			break;
 		}
 		// fUML::Semantics::Activities::ActivityNodeActivationGroup::suspend(fUML::Semantics::Activities::ActivityNodeActivation): 259131720
 		case ActivitiesPackage::ACTIVITYNODEACTIVATIONGROUP_OPERATION_SUSPEND_ACTIVITYNODEACTIVATION:
@@ -1200,18 +1208,20 @@ Any ActivityNodeActivationGroupImpl::eInvoke(int operationID, std::shared_ptr<st
 			std::list<Any>::const_iterator incoming_param_activation_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_activation = (*incoming_param_activation_arguments_citer)->get<std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> >();
 			this->suspend(incoming_param_activation);
+			break;
 		}
 		// fUML::Semantics::Activities::ActivityNodeActivationGroup::terminateAll(): 2028038520
 		case ActivitiesPackage::ACTIVITYNODEACTIVATIONGROUP_OPERATION_TERMINATEALL:
 		{
 			this->terminateAll();
+			break;
 		}
 
 		default:
 		{
 			// call superTypes
 			result = ecore::EModelElementImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			break;
 		}

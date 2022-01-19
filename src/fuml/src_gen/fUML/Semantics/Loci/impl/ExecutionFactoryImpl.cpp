@@ -1117,6 +1117,7 @@ Any ExecutionFactoryImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any
 			std::list<Any>::const_iterator incoming_param_type_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_type = (*incoming_param_type_arguments_citer)->get<std::shared_ptr<uml::PrimitiveType> >();
 			this->addBuiltInType(incoming_param_type);
+			break;
 		}
 		// fUML::Semantics::Loci::ExecutionFactory::addPrimitiveBehaviorPrototype(fUML::Semantics::CommonBehavior::OpaqueBehaviorExecution): 1007202968
 		case LociPackage::EXECUTIONFACTORY_OPERATION_ADDPRIMITIVEBEHAVIORPROTOTYPE_OPAQUEBEHAVIOREXECUTION:
@@ -1127,6 +1128,7 @@ Any ExecutionFactoryImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any
 			std::list<Any>::const_iterator incoming_param_execution_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_execution = (*incoming_param_execution_arguments_citer)->get<std::shared_ptr<fUML::Semantics::CommonBehavior::OpaqueBehaviorExecution> >();
 			this->addPrimitiveBehaviorPrototype(incoming_param_execution);
+			break;
 		}
 		// fUML::Semantics::Loci::ExecutionFactory::assignStrategy(fUML::Semantics::Loci::SemanticStrategy): 1797723207
 		case LociPackage::EXECUTIONFACTORY_OPERATION_ASSIGNSTRATEGY_SEMANTICSTRATEGY:
@@ -1137,6 +1139,7 @@ Any ExecutionFactoryImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any
 			std::list<Any>::const_iterator incoming_param_strategy_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_strategy = (*incoming_param_strategy_arguments_citer)->get<std::shared_ptr<fUML::Semantics::Loci::SemanticStrategy> >();
 			this->assignStrategy(incoming_param_strategy);
+			break;
 		}
 		// fUML::Semantics::Loci::ExecutionFactory::createEvaluation(uml::ValueSpecification) : fUML::Semantics::Values::Evaluation: 823281622
 		case LociPackage::EXECUTIONFACTORY_OPERATION_CREATEEVALUATION_VALUESPECIFICATION:
@@ -1225,7 +1228,7 @@ Any ExecutionFactoryImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any
 		{
 			// call superTypes
 			result = ecore::EModelElementImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			break;
 		}

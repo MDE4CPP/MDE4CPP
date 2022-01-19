@@ -516,6 +516,21 @@ std::shared_ptr<ecore::EOperation> ecore::ecorePackageImpl::getEObject_Operation
 
 // End Class EObject
 
+// Begin Class EObjectAny
+std::shared_ptr<ecore::EClass> ecore::ecorePackageImpl::getEObjectAny_Class() const
+{
+	return m_eObjectAny_Class;
+}
+
+
+std::shared_ptr<ecore::EReference> ecore::ecorePackageImpl::getEObjectAny_Attribute_any() const
+{
+	return m_eObjectAny_Attribute_any;
+}
+
+
+// End Class EObjectAny
+
 // Begin Class EObjectContainer
 std::shared_ptr<ecore::EClass> ecore::ecorePackageImpl::getEObjectContainer_Class() const
 {

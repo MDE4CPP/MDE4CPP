@@ -681,6 +681,7 @@ Any ExpansionActivationGroupImpl::eInvoke(int operationID, std::shared_ptr<std::
 			std::list<Any>::const_iterator incoming_param_activation_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_activation = (*incoming_param_activation_arguments_citer)->get<std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> >();
 			this->resume(incoming_param_activation);
+			break;
 		}
 		// fUML::Semantics::Activities::ExpansionActivationGroup::suspend(fUML::Semantics::Activities::ActivityNodeActivation): 908663768
 		case ActivitiesPackage::EXPANSIONACTIVATIONGROUP_OPERATION_SUSPEND_ACTIVITYNODEACTIVATION:
@@ -691,13 +692,14 @@ Any ExpansionActivationGroupImpl::eInvoke(int operationID, std::shared_ptr<std::
 			std::list<Any>::const_iterator incoming_param_activation_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_activation = (*incoming_param_activation_arguments_citer)->get<std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> >();
 			this->suspend(incoming_param_activation);
+			break;
 		}
 
 		default:
 		{
 			// call superTypes
 			result = ActivityNodeActivationGroupImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			break;
 		}

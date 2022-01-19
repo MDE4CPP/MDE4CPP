@@ -308,6 +308,7 @@ Any ActivityParameterNodeActivationImpl::eInvoke(int operationID, std::shared_pt
 		case ActivitiesPackage::ACTIVITYPARAMETERNODEACTIVATION_OPERATION_CLEARTOKENS:
 		{
 			this->clearTokens();
+			break;
 		}
 		// fUML::Semantics::Activities::ActivityParameterNodeActivation::fire(fUML::Semantics::Activities::Token[*]): 1889603308
 		case ActivitiesPackage::ACTIVITYPARAMETERNODEACTIVATION_OPERATION_FIRE_TOKEN:
@@ -318,13 +319,14 @@ Any ActivityParameterNodeActivationImpl::eInvoke(int operationID, std::shared_pt
 			std::list<Any>::const_iterator incoming_param_incomingTokens_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_incomingTokens = (*incoming_param_incomingTokens_arguments_citer)->get<std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> >();
 			this->fire(incoming_param_incomingTokens);
+			break;
 		}
 
 		default:
 		{
 			// call superTypes
 			result = ObjectNodeActivationImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			break;
 		}

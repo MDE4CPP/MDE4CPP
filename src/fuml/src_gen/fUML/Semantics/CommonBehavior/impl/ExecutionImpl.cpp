@@ -578,6 +578,7 @@ Any ExecutionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argu
 		case CommonBehaviorPackage::EXECUTION_OPERATION_EXECUTE:
 		{
 			this->execute();
+			break;
 		}
 		// fUML::Semantics::CommonBehavior::Execution::getOutputParameterValues() : fUML::Semantics::CommonBehavior::ParameterValue[*]: 990554645
 		case CommonBehaviorPackage::EXECUTION_OPERATION_GETOUTPUTPARAMETERVALUES:
@@ -612,18 +613,20 @@ Any ExecutionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argu
 			std::list<Any>::const_iterator incoming_param_parameterValue_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_parameterValue = (*incoming_param_parameterValue_arguments_citer)->get<std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> >();
 			this->setParameterValue(incoming_param_parameterValue);
+			break;
 		}
 		// fUML::Semantics::CommonBehavior::Execution::terminate(): 938662950
 		case CommonBehaviorPackage::EXECUTION_OPERATION_TERMINATE:
 		{
 			this->terminate();
+			break;
 		}
 
 		default:
 		{
 			// call superTypes
 			result = fUML::Semantics::StructuredClassifiers::ObjectImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			break;
 		}

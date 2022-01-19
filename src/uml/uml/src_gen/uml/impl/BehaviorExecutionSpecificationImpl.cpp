@@ -379,7 +379,7 @@ Any BehaviorExecutionSpecificationImpl::eInvoke(int operationID, std::shared_ptr
 		{
 			// call superTypes
 			result = ExecutionSpecificationImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			break;
 		}

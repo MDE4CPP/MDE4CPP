@@ -561,7 +561,7 @@ Any DestroyObjectActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<
 		{
 			// call superTypes
 			result = ActionImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			break;
 		}

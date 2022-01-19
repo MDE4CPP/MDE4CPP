@@ -265,7 +265,7 @@ Any WriteLinkActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std:
 		{
 			// call superTypes
 			result = LinkActionActivationImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			break;
 		}

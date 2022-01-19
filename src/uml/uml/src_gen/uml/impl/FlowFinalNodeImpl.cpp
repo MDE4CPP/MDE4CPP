@@ -353,7 +353,7 @@ Any FlowFinalNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> 
 		{
 			// call superTypes
 			result = FinalNodeImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			break;
 		}

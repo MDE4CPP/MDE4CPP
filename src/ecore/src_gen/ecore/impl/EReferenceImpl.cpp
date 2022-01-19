@@ -417,17 +417,17 @@ Any EReferenceImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case ecore::ecorePackage::EREFERENCE_ATTRIBUTE_CONTAINER:
-			return eAny(isContainer(),ecore::ecorePackage::EBOOLEAN_CLASS,false); //4523
+			return eAny(isContainer(),ecore::ecorePackage::EBOOLEAN_CLASS,false); //4623
 		case ecore::ecorePackage::EREFERENCE_ATTRIBUTE_CONTAINMENT:
-			return eAny(isContainment(),ecore::ecorePackage::EBOOLEAN_CLASS,false); //4522
+			return eAny(isContainment(),ecore::ecorePackage::EBOOLEAN_CLASS,false); //4622
 		case ecore::ecorePackage::EREFERENCE_ATTRIBUTE_EKEYS:
-			return eAnyBag(getEKeys(),ecore::ecorePackage::EATTRIBUTE_CLASS); //4527
+			return eAnyBag(getEKeys(),ecore::ecorePackage::EATTRIBUTE_CLASS); //4627
 		case ecore::ecorePackage::EREFERENCE_ATTRIBUTE_EOPPOSITE:
-			return eAny(getEOpposite(),ecore::ecorePackage::EREFERENCE_CLASS,false); //4525
+			return eAny(getEOpposite(),ecore::ecorePackage::EREFERENCE_CLASS,false); //4625
 		case ecore::ecorePackage::EREFERENCE_ATTRIBUTE_EREFERENCETYPE:
-			return eAny(getEReferenceType(),ecore::ecorePackage::ECLASS_CLASS,false); //4526
+			return eAny(getEReferenceType(),ecore::ecorePackage::ECLASS_CLASS,false); //4626
 		case ecore::ecorePackage::EREFERENCE_ATTRIBUTE_RESOLVEPROXIES:
-			return eAny(isResolveProxies(),ecore::ecorePackage::EBOOLEAN_CLASS,false); //4524
+			return eAny(isResolveProxies(),ecore::ecorePackage::EBOOLEAN_CLASS,false); //4624
 	}
 	return EStructuralFeatureImpl::eGet(featureID, resolve, coreType);
 }
@@ -437,17 +437,17 @@ bool EReferenceImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case ecore::ecorePackage::EREFERENCE_ATTRIBUTE_CONTAINER:
-			return isContainer() != false; //4523
+			return isContainer() != false; //4623
 		case ecore::ecorePackage::EREFERENCE_ATTRIBUTE_CONTAINMENT:
-			return isContainment() != false; //4522
+			return isContainment() != false; //4622
 		case ecore::ecorePackage::EREFERENCE_ATTRIBUTE_EKEYS:
-			return getEKeys() != nullptr; //4527
+			return getEKeys() != nullptr; //4627
 		case ecore::ecorePackage::EREFERENCE_ATTRIBUTE_EOPPOSITE:
-			return getEOpposite() != nullptr; //4525
+			return getEOpposite() != nullptr; //4625
 		case ecore::ecorePackage::EREFERENCE_ATTRIBUTE_EREFERENCETYPE:
-			return getEReferenceType() != nullptr; //4526
+			return getEReferenceType() != nullptr; //4626
 		case ecore::ecorePackage::EREFERENCE_ATTRIBUTE_RESOLVEPROXIES:
-			return isResolveProxies() != true; //4524
+			return isResolveProxies() != true; //4624
 	}
 	return EStructuralFeatureImpl::internalEIsSet(featureID);
 }
@@ -460,7 +460,7 @@ bool EReferenceImpl::eSet(int featureID, Any newValue)
 		{
 			// CAST Any to bool
 			bool _containment = newValue->get<bool>();
-			setContainment(_containment); //4522
+			setContainment(_containment); //4622
 			return true;
 		}
 		case ecore::ecorePackage::EREFERENCE_ATTRIBUTE_EKEYS:
@@ -505,7 +505,7 @@ bool EReferenceImpl::eSet(int featureID, Any newValue)
 			// CAST Any to ecore::EReference
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<ecore::EReference> _eOpposite = std::dynamic_pointer_cast<ecore::EReference>(_temp);
-			setEOpposite(_eOpposite); //4525
+			setEOpposite(_eOpposite); //4625
 			return true;
 		}
 		case ecore::ecorePackage::EREFERENCE_ATTRIBUTE_EREFERENCETYPE:
@@ -513,14 +513,14 @@ bool EReferenceImpl::eSet(int featureID, Any newValue)
 			// CAST Any to ecore::EClass
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<ecore::EClass> _eReferenceType = std::dynamic_pointer_cast<ecore::EClass>(_temp);
-			setEReferenceType(_eReferenceType); //4526
+			setEReferenceType(_eReferenceType); //4626
 			return true;
 		}
 		case ecore::ecorePackage::EREFERENCE_ATTRIBUTE_RESOLVEPROXIES:
 		{
 			// CAST Any to bool
 			bool _resolveProxies = newValue->get<bool>();
-			setResolveProxies(_resolveProxies); //4524
+			setResolveProxies(_resolveProxies); //4624
 			return true;
 		}
 	}
@@ -542,7 +542,7 @@ Any EReferenceImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arg
 		{
 			// call superTypes
 			result = EStructuralFeatureImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			break;
 		}

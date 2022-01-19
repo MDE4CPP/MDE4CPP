@@ -271,7 +271,7 @@ Any TestIdentityActionActivationImpl::eInvoke(int operationID, std::shared_ptr<s
 		{
 			// call superTypes
 			result = ActionActivationImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			break;
 		}

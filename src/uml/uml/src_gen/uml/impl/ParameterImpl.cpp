@@ -963,6 +963,7 @@ Any ParameterImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argu
 			std::list<Any>::const_iterator incoming_param_value_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_value = (*incoming_param_value_arguments_citer)->get<bool >();
 			this->setBooleanDefaultValue(incoming_param_value);
+			break;
 		}
 		// uml::Parameter::setIntegerDefaultValue(int): 1728800880
 		case umlPackage::PARAMETER_OPERATION_SETINTEGERDEFAULTVALUE_INTEGER:
@@ -973,11 +974,13 @@ Any ParameterImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argu
 			std::list<Any>::const_iterator incoming_param_value_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_value = (*incoming_param_value_arguments_citer)->get<int >();
 			this->setIntegerDefaultValue(incoming_param_value);
+			break;
 		}
 		// uml::Parameter::setNullDefaultValue(): 687577499
 		case umlPackage::PARAMETER_OPERATION_SETNULLDEFAULTVALUE:
 		{
 			this->setNullDefaultValue();
+			break;
 		}
 		// uml::Parameter::setRealDefaultValue(double): 488751702
 		case umlPackage::PARAMETER_OPERATION_SETREALDEFAULTVALUE_REAL:
@@ -988,6 +991,7 @@ Any ParameterImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argu
 			std::list<Any>::const_iterator incoming_param_value_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_value = (*incoming_param_value_arguments_citer)->get<double >();
 			this->setRealDefaultValue(incoming_param_value);
+			break;
 		}
 		// uml::Parameter::setStringDefaultValue(std::string): 1288613666
 		case umlPackage::PARAMETER_OPERATION_SETSTRINGDEFAULTVALUE_STRING:
@@ -998,6 +1002,7 @@ Any ParameterImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argu
 			std::list<Any>::const_iterator incoming_param_value_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_value = (*incoming_param_value_arguments_citer)->get<std::string >();
 			this->setStringDefaultValue(incoming_param_value);
+			break;
 		}
 		// uml::Parameter::setUnlimitedNaturalDefaultValue(int): 287411615
 		case umlPackage::PARAMETER_OPERATION_SETUNLIMITEDNATURALDEFAULTVALUE_UNLIMITEDNATURAL:
@@ -1008,6 +1013,7 @@ Any ParameterImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argu
 			std::list<Any>::const_iterator incoming_param_value_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_value = (*incoming_param_value_arguments_citer)->get<int >();
 			this->setUnlimitedNaturalDefaultValue(incoming_param_value);
+			break;
 		}
 		// uml::Parameter::stream_and_exception(Any, std::map) : bool: 1728894546
 		case umlPackage::PARAMETER_OPERATION_STREAM_AND_EXCEPTION_EDIAGNOSTICCHAIN_EMAP:
@@ -1029,16 +1035,17 @@ Any ParameterImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argu
 		case umlPackage::PARAMETER_OPERATION_UNSETDEFAULT:
 		{
 			this->unsetDefault();
+			break;
 		}
 
 		default:
 		{
 			// call superTypes
 			result = MultiplicityElementImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			result = ConnectableElementImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			break;
 		}

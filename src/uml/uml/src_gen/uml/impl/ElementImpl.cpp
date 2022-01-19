@@ -704,6 +704,7 @@ Any ElementImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argume
 		case umlPackage::ELEMENT_OPERATION_DESTROY:
 		{
 			this->destroy();
+			break;
 		}
 		// uml::Element::getApplicableStereotype(std::string) : uml::Stereotype: 651793437
 		case umlPackage::ELEMENT_OPERATION_GETAPPLICABLESTEREOTYPE_STRING:
@@ -1030,6 +1031,7 @@ Any ElementImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argume
 			std::list<Any>::const_iterator incoming_param_newValue_arguments_citer = std::next(arguments->begin(), 2);
 			incoming_param_newValue = (*incoming_param_newValue_arguments_citer)->get<Any >();
 			this->setValue(incoming_param_stereotype,incoming_param_propertyName,incoming_param_newValue);
+			break;
 		}
 		// uml::Element::unapplyStereotype(uml::Stereotype) : ecore::EObject: 206371192
 		case umlPackage::ELEMENT_OPERATION_UNAPPLYSTEREOTYPE_STEREOTYPE:
@@ -1047,7 +1049,7 @@ Any ElementImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argume
 		{
 			// call superTypes
 			result = ObjectImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			break;
 		}

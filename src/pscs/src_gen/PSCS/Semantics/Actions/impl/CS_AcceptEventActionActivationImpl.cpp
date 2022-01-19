@@ -300,13 +300,14 @@ Any CS_AcceptEventActionActivationImpl::eInvoke(int operationID, std::shared_ptr
 			std::list<Any>::const_iterator incoming_param_eventOccurrence_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_eventOccurrence = (*incoming_param_eventOccurrence_arguments_citer)->get<std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> >();
 			this->accept(incoming_param_eventOccurrence);
+			break;
 		}
 
 		default:
 		{
 			// call superTypes
 			result = fUML::Semantics::Actions::AcceptEventActionActivationImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			break;
 		}

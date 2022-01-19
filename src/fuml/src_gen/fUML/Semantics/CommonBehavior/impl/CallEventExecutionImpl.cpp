@@ -487,6 +487,7 @@ Any CallEventExecutionImpl::eInvoke(int operationID, std::shared_ptr<std::list<A
 		case CommonBehaviorPackage::CALLEVENTEXECUTION_OPERATION_EXECUTE:
 		{
 			this->execute();
+			break;
 		}
 		// fUML::Semantics::CommonBehavior::CallEventExecution::getInputParameterValues() : fUML::Semantics::CommonBehavior::ParameterValue[*]: 1341556238
 		case CommonBehaviorPackage::CALLEVENTEXECUTION_OPERATION_GETINPUTPARAMETERVALUES:
@@ -511,6 +512,7 @@ Any CallEventExecutionImpl::eInvoke(int operationID, std::shared_ptr<std::list<A
 		case CommonBehaviorPackage::CALLEVENTEXECUTION_OPERATION_MAKECALL:
 		{
 			this->makeCall();
+			break;
 		}
 		// fUML::Semantics::CommonBehavior::CallEventExecution::new_() : fUML::Semantics::Values::Value: 166651669
 		case CommonBehaviorPackage::CALLEVENTEXECUTION_OPERATION_NEW_:
@@ -522,6 +524,7 @@ Any CallEventExecutionImpl::eInvoke(int operationID, std::shared_ptr<std::list<A
 		case CommonBehaviorPackage::CALLEVENTEXECUTION_OPERATION_RELEASECALLER:
 		{
 			this->releaseCaller();
+			break;
 		}
 		// fUML::Semantics::CommonBehavior::CallEventExecution::setOutputParameterValues(fUML::Semantics::CommonBehavior::ParameterValue[*]): 1277368691
 		case CommonBehaviorPackage::CALLEVENTEXECUTION_OPERATION_SETOUTPUTPARAMETERVALUES_PARAMETERVALUE:
@@ -532,23 +535,26 @@ Any CallEventExecutionImpl::eInvoke(int operationID, std::shared_ptr<std::list<A
 			std::list<Any>::const_iterator incoming_param_parameterValues_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_parameterValues = (*incoming_param_parameterValues_arguments_citer)->get<std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> >();
 			this->setOutputParameterValues(incoming_param_parameterValues);
+			break;
 		}
 		// fUML::Semantics::CommonBehavior::CallEventExecution::suspendCaller(): 766550033
 		case CommonBehaviorPackage::CALLEVENTEXECUTION_OPERATION_SUSPENDCALLER:
 		{
 			this->suspendCaller();
+			break;
 		}
 		// fUML::Semantics::CommonBehavior::CallEventExecution::wait_(): 1917959097
 		case CommonBehaviorPackage::CALLEVENTEXECUTION_OPERATION_WAIT_:
 		{
 			this->wait_();
+			break;
 		}
 
 		default:
 		{
 			// call superTypes
 			result = ExecutionImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			break;
 		}

@@ -411,13 +411,14 @@ Any ReadStructuralFeatureActionActivationImpl::eInvoke(int operationID, std::sha
 		case ActionsPackage::READSTRUCTURALFEATUREACTIONACTIVATION_OPERATION_DOACTION:
 		{
 			this->doAction();
+			break;
 		}
 
 		default:
 		{
 			// call superTypes
 			result = StructuralFeatureActionActivationImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			break;
 		}

@@ -480,6 +480,7 @@ Any CS_ReferenceImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> a
 			std::list<Any>::const_iterator incoming_param_interactionPoint_arguments_citer = std::next(arguments->begin(), 1);
 			incoming_param_interactionPoint = (*incoming_param_interactionPoint_arguments_citer)->get<std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint> >();
 			this->sendIn(incoming_param_eventOccurrence,incoming_param_interactionPoint);
+			break;
 		}
 		// PSCS::Semantics::StructuredClassifiers::CS_Reference::sendIn(fUML::Semantics::CommonBehavior::EventOccurrence, uml::Port): 1629518783
 		case StructuredClassifiersPackage::CS_REFERENCE_OPERATION_SENDIN_EVENTOCCURRENCE_PORT:
@@ -495,6 +496,7 @@ Any CS_ReferenceImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> a
 			std::list<Any>::const_iterator incoming_param_onPort_arguments_citer = std::next(arguments->begin(), 1);
 			incoming_param_onPort = (*incoming_param_onPort_arguments_citer)->get<std::shared_ptr<uml::Port> >();
 			this->sendIn(incoming_param_eventOccurrence,incoming_param_onPort);
+			break;
 		}
 		// PSCS::Semantics::StructuredClassifiers::CS_Reference::sendOut(fUML::Semantics::CommonBehavior::EventOccurrence, uml::Port): 319584576
 		case StructuredClassifiersPackage::CS_REFERENCE_OPERATION_SENDOUT_EVENTOCCURRENCE_PORT:
@@ -510,6 +512,7 @@ Any CS_ReferenceImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> a
 			std::list<Any>::const_iterator incoming_param_onPort_arguments_citer = std::next(arguments->begin(), 1);
 			incoming_param_onPort = (*incoming_param_onPort_arguments_citer)->get<std::shared_ptr<uml::Port> >();
 			this->sendOut(incoming_param_eventOccurrence,incoming_param_onPort);
+			break;
 		}
 		// PSCS::Semantics::StructuredClassifiers::CS_Reference::sendOut(fUML::Semantics::CommonBehavior::EventOccurrence, PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint): 1685887729
 		case StructuredClassifiersPackage::CS_REFERENCE_OPERATION_SENDOUT_EVENTOCCURRENCE_CS_INTERACTIONPOINT:
@@ -525,13 +528,14 @@ Any CS_ReferenceImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> a
 			std::list<Any>::const_iterator incoming_param_interactionPoint_arguments_citer = std::next(arguments->begin(), 1);
 			incoming_param_interactionPoint = (*incoming_param_interactionPoint_arguments_citer)->get<std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint> >();
 			this->sendOut(incoming_param_eventOccurrence,incoming_param_interactionPoint);
+			break;
 		}
 
 		default:
 		{
 			// call superTypes
 			result = fUML::Semantics::StructuredClassifiers::ReferenceImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			break;
 		}

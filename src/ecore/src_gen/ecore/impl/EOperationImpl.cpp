@@ -547,18 +547,18 @@ Any EOperationImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case ecore::ecorePackage::EOPERATION_ATTRIBUTE_ECONTAININGCLASS:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getEContainingClass().lock();
-			return eAny(returnValue,ecore::ecorePackage::ECLASS_CLASS,false); //4214
+			return eAny(returnValue,ecore::ecorePackage::ECLASS_CLASS,false); //4314
 		}
 		case ecore::ecorePackage::EOPERATION_ATTRIBUTE_EEXCEPTIONS:
-			return eAnyBag(getEExceptions(),ecore::ecorePackage::ECLASSIFIER_CLASS); //4217
+			return eAnyBag(getEExceptions(),ecore::ecorePackage::ECLASSIFIER_CLASS); //4317
 		case ecore::ecorePackage::EOPERATION_ATTRIBUTE_EGENERICEXCEPTIONS:
-			return eAnyBag(getEGenericExceptions(),ecore::ecorePackage::EGENERICTYPE_CLASS); //4218
+			return eAnyBag(getEGenericExceptions(),ecore::ecorePackage::EGENERICTYPE_CLASS); //4318
 		case ecore::ecorePackage::EOPERATION_ATTRIBUTE_EPARAMETERS:
-			return eAnyBag(getEParameters(),ecore::ecorePackage::EPARAMETER_CLASS); //4216
+			return eAnyBag(getEParameters(),ecore::ecorePackage::EPARAMETER_CLASS); //4316
 		case ecore::ecorePackage::EOPERATION_ATTRIBUTE_ETYPEPARAMETERS:
-			return eAnyBag(getETypeParameters(),ecore::ecorePackage::ETYPEPARAMETER_CLASS); //4215
+			return eAnyBag(getETypeParameters(),ecore::ecorePackage::ETYPEPARAMETER_CLASS); //4315
 		case ecore::ecorePackage::EOPERATION_ATTRIBUTE_OPERATIONID:
-			return eAny(getOperationID(),ecore::ecorePackage::EINT_CLASS,false); //4213
+			return eAny(getOperationID(),ecore::ecorePackage::EINT_CLASS,false); //4313
 	}
 	return ETypedElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -568,17 +568,17 @@ bool EOperationImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case ecore::ecorePackage::EOPERATION_ATTRIBUTE_ECONTAININGCLASS:
-			return getEContainingClass().lock() != nullptr; //4214
+			return getEContainingClass().lock() != nullptr; //4314
 		case ecore::ecorePackage::EOPERATION_ATTRIBUTE_EEXCEPTIONS:
-			return getEExceptions() != nullptr; //4217
+			return getEExceptions() != nullptr; //4317
 		case ecore::ecorePackage::EOPERATION_ATTRIBUTE_EGENERICEXCEPTIONS:
-			return getEGenericExceptions() != nullptr; //4218
+			return getEGenericExceptions() != nullptr; //4318
 		case ecore::ecorePackage::EOPERATION_ATTRIBUTE_EPARAMETERS:
-			return getEParameters() != nullptr; //4216
+			return getEParameters() != nullptr; //4316
 		case ecore::ecorePackage::EOPERATION_ATTRIBUTE_ETYPEPARAMETERS:
-			return getETypeParameters() != nullptr; //4215
+			return getETypeParameters() != nullptr; //4315
 		case ecore::ecorePackage::EOPERATION_ATTRIBUTE_OPERATIONID:
-			return getOperationID() != -1; //4213
+			return getOperationID() != -1; //4313
 	}
 	return ETypedElementImpl::internalEIsSet(featureID);
 }
@@ -765,7 +765,7 @@ Any EOperationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arg
 		{
 			// call superTypes
 			result = ETypedElementImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			break;
 		}

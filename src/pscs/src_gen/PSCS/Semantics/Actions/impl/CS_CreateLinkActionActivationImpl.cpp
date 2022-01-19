@@ -356,13 +356,14 @@ Any CS_CreateLinkActionActivationImpl::eInvoke(int operationID, std::shared_ptr<
 		case ActionsPackage::CS_CREATELINKACTIONACTIVATION_OPERATION_DOACTION:
 		{
 			this->doAction();
+			break;
 		}
 
 		default:
 		{
 			// call superTypes
 			result = fUML::Semantics::Actions::CreateLinkActionActivationImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			break;
 		}

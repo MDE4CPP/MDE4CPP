@@ -385,7 +385,7 @@ Any StringValueImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> ar
 		{
 			// call superTypes
 			result = PrimitiveValueImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			break;
 		}

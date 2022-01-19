@@ -260,7 +260,7 @@ Any ModelPropertyCallExpEvalImpl::eInvoke(int operationID, std::shared_ptr<std::
 		{
 			// call superTypes
 			result = PropertyCallExpEvalImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			break;
 		}

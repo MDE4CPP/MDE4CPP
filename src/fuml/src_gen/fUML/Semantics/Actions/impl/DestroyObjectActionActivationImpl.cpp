@@ -502,11 +502,13 @@ Any DestroyObjectActionActivationImpl::eInvoke(int operationID, std::shared_ptr<
 			std::list<Any>::const_iterator incoming_param_isDestroyOwnedObjects_arguments_citer = std::next(arguments->begin(), 2);
 			incoming_param_isDestroyOwnedObjects = (*incoming_param_isDestroyOwnedObjects_arguments_citer)->get<bool >();
 			this->destroyObject(incoming_param_value,incoming_param_isDestroyLinks,incoming_param_isDestroyOwnedObjects);
+			break;
 		}
 		// fUML::Semantics::Actions::DestroyObjectActionActivation::doAction(): 1060442259
 		case ActionsPackage::DESTROYOBJECTACTIONACTIVATION_OPERATION_DOACTION:
 		{
 			this->doAction();
+			break;
 		}
 		// fUML::Semantics::Actions::DestroyObjectActionActivation::objectIsComposite(fUML::Semantics::StructuredClassifiers::Reference, fUML::Semantics::StructuredClassifiers::Link) : bool: 1102528616
 		case ActionsPackage::DESTROYOBJECTACTIONACTIVATION_OPERATION_OBJECTISCOMPOSITE_REFERENCE_LINK:
@@ -529,7 +531,7 @@ Any DestroyObjectActionActivationImpl::eInvoke(int operationID, std::shared_ptr<
 		{
 			// call superTypes
 			result = ActionActivationImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			break;
 		}

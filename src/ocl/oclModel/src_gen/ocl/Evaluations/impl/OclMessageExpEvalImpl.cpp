@@ -418,7 +418,7 @@ Any OclMessageExpEvalImpl::eInvoke(int operationID, std::shared_ptr<std::list<An
 		{
 			// call superTypes
 			result = OclExpEvalImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			break;
 		}

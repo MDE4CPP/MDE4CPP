@@ -511,6 +511,7 @@ Any CS_EventOccurrenceImpl::eInvoke(int operationID, std::shared_ptr<std::list<A
 		case CommonBehaviorPackage::CS_EVENTOCCURRENCE_OPERATION_DOSEND:
 		{
 			this->doSend();
+			break;
 		}
 		// PSCS::Semantics::CommonBehavior::CS_EventOccurrence::getParameterValues() : fUML::Semantics::CommonBehavior::ParameterValue[*]: 2147256668
 		case CommonBehaviorPackage::CS_EVENTOCCURRENCE_OPERATION_GETPARAMETERVALUES:
@@ -544,6 +545,7 @@ Any CS_EventOccurrenceImpl::eInvoke(int operationID, std::shared_ptr<std::list<A
 			std::list<Any>::const_iterator incoming_param_port_arguments_citer = std::next(arguments->begin(), 1);
 			incoming_param_port = (*incoming_param_port_arguments_citer)->get<std::shared_ptr<uml::Port> >();
 			this->sendInTo(incoming_param_target,incoming_param_port);
+			break;
 		}
 		// PSCS::Semantics::CommonBehavior::CS_EventOccurrence::sendOutTo(PSCS::Semantics::StructuredClassifiers::CS_Reference, uml::Port): 1422750174
 		case CommonBehaviorPackage::CS_EVENTOCCURRENCE_OPERATION_SENDOUTTO_CS_REFERENCE_PORT:
@@ -559,13 +561,14 @@ Any CS_EventOccurrenceImpl::eInvoke(int operationID, std::shared_ptr<std::list<A
 			std::list<Any>::const_iterator incoming_param_port_arguments_citer = std::next(arguments->begin(), 1);
 			incoming_param_port = (*incoming_param_port_arguments_citer)->get<std::shared_ptr<uml::Port> >();
 			this->sendOutTo(incoming_param_target,incoming_param_port);
+			break;
 		}
 
 		default:
 		{
 			// call superTypes
 			result = fUML::Semantics::CommonBehavior::EventOccurrenceImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			break;
 		}

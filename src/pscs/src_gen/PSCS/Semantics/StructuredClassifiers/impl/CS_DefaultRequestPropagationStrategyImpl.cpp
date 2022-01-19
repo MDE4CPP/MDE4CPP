@@ -275,7 +275,7 @@ Any CS_DefaultRequestPropagationStrategyImpl::eInvoke(int operationID, std::shar
 		{
 			// call superTypes
 			result = CS_RequestPropagationStrategyImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			break;
 		}

@@ -389,6 +389,7 @@ Any EvalEnvironmentImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>
 			std::list<Any>::const_iterator incoming_param_n_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_n = (*incoming_param_n_arguments_citer)->get<std::shared_ptr<ocl::Values::NameValueBinding> >();
 			this->add(incoming_param_n);
+			break;
 		}
 		// ocl::Evaluations::EvalEnvironment::addAll(ocl::Values::NameValueBinding[*]): 1063443542
 		case EvaluationsPackage::EVALENVIRONMENT_OPERATION_ADDALL_NAMEVALUEBINDING:
@@ -399,6 +400,7 @@ Any EvalEnvironmentImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>
 			std::list<Any>::const_iterator incoming_param_nvbs_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_nvbs = (*incoming_param_nvbs_arguments_citer)->get<std::shared_ptr<Bag<ocl::Values::NameValueBinding>> >();
 			this->addAll(incoming_param_nvbs);
+			break;
 		}
 		// ocl::Evaluations::EvalEnvironment::find(std::string) : ocl::Values::NameValueBinding: 946058698
 		case EvaluationsPackage::EVALENVIRONMENT_OPERATION_FIND_STRING:
@@ -431,13 +433,14 @@ Any EvalEnvironmentImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>
 			std::list<Any>::const_iterator incoming_param_n_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_n = (*incoming_param_n_arguments_citer)->get<std::shared_ptr<ocl::Values::NameValueBinding> >();
 			this->replace(incoming_param_n);
+			break;
 		}
 
 		default:
 		{
 			// call superTypes
 			result = ecore::EModelElementImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			break;
 		}

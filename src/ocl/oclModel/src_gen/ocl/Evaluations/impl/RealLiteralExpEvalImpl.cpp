@@ -282,10 +282,10 @@ Any RealLiteralExpEvalImpl::eInvoke(int operationID, std::shared_ptr<std::list<A
 		{
 			// call superTypes
 			result = fUML::Semantics::Values::LiteralRealEvaluationImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			result = NumericLiteralExpEvalImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			break;
 		}

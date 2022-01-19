@@ -500,13 +500,14 @@ Any OccurrenceSpecificationImpl::eInvoke(int operationID, std::shared_ptr<std::l
 			std::list<Any>::const_iterator incoming_param_value_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_value = (*incoming_param_value_arguments_citer)->get<std::shared_ptr<uml::Lifeline> >();
 			this->setCovered(incoming_param_value);
+			break;
 		}
 
 		default:
 		{
 			// call superTypes
 			result = InteractionFragmentImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			break;
 		}

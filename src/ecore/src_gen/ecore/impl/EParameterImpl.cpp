@@ -250,7 +250,7 @@ Any EParameterImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case ecore::ecorePackage::EPARAMETER_ATTRIBUTE_EOPERATION:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getEOperation().lock();
-			return eAny(returnValue,ecore::ecorePackage::EOPERATION_CLASS,false); //4413
+			return eAny(returnValue,ecore::ecorePackage::EOPERATION_CLASS,false); //4513
 		}
 	}
 	return ETypedElementImpl::eGet(featureID, resolve, coreType);
@@ -261,7 +261,7 @@ bool EParameterImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case ecore::ecorePackage::EPARAMETER_ATTRIBUTE_EOPERATION:
-			return getEOperation().lock() != nullptr; //4413
+			return getEOperation().lock() != nullptr; //4513
 	}
 	return ETypedElementImpl::internalEIsSet(featureID);
 }
@@ -289,7 +289,7 @@ Any EParameterImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arg
 		{
 			// call superTypes
 			result = ETypedElementImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			break;
 		}

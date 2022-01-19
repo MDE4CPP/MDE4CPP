@@ -318,6 +318,7 @@ Any JoinNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<A
 			std::list<Any>::const_iterator incoming_param_incomingTokens_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_incomingTokens = (*incoming_param_incomingTokens_arguments_citer)->get<std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> >();
 			this->fire(incoming_param_incomingTokens);
+			break;
 		}
 		// fUML::Semantics::Activities::JoinNodeActivation::isReady() : bool: 1317433736
 		case ActivitiesPackage::JOINNODEACTIVATION_OPERATION_ISREADY:
@@ -330,7 +331,7 @@ Any JoinNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<A
 		{
 			// call superTypes
 			result = ControlNodeActivationImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			break;
 		}

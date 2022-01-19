@@ -412,11 +412,13 @@ Any AcceptEventActionActivationImpl::eInvoke(int operationID, std::shared_ptr<st
 			std::list<Any>::const_iterator incoming_param_eventOccurrence_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_eventOccurrence = (*incoming_param_eventOccurrence_arguments_citer)->get<std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> >();
 			this->accept(incoming_param_eventOccurrence);
+			break;
 		}
 		// fUML::Semantics::Actions::AcceptEventActionActivation::doAction(): 2139307330
 		case ActionsPackage::ACCEPTEVENTACTIONACTIVATION_OPERATION_DOACTION:
 		{
 			this->doAction();
+			break;
 		}
 		// fUML::Semantics::Actions::AcceptEventActionActivation::fire(fUML::Semantics::Activities::Token[*]): 1477585117
 		case ActionsPackage::ACCEPTEVENTACTIONACTIVATION_OPERATION_FIRE_TOKEN:
@@ -427,6 +429,7 @@ Any AcceptEventActionActivationImpl::eInvoke(int operationID, std::shared_ptr<st
 			std::list<Any>::const_iterator incoming_param_incomingTokens_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_incomingTokens = (*incoming_param_incomingTokens_arguments_citer)->get<std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> >();
 			this->fire(incoming_param_incomingTokens);
+			break;
 		}
 		// fUML::Semantics::Actions::AcceptEventActionActivation::initialize(uml::ActivityNode, fUML::Semantics::Activities::ActivityNodeActivationGroup): 640030514
 		case ActionsPackage::ACCEPTEVENTACTIONACTIVATION_OPERATION_INITIALIZE_ACTIVITYNODE_ACTIVITYNODEACTIVATIONGROUP:
@@ -442,6 +445,7 @@ Any AcceptEventActionActivationImpl::eInvoke(int operationID, std::shared_ptr<st
 			std::list<Any>::const_iterator incoming_param_group_arguments_citer = std::next(arguments->begin(), 1);
 			incoming_param_group = (*incoming_param_group_arguments_citer)->get<std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> >();
 			this->initialize(incoming_param_node,incoming_param_group);
+			break;
 		}
 		// fUML::Semantics::Actions::AcceptEventActionActivation::isReady() : bool: 1247902812
 		case ActionsPackage::ACCEPTEVENTACTIONACTIVATION_OPERATION_ISREADY:
@@ -464,18 +468,20 @@ Any AcceptEventActionActivationImpl::eInvoke(int operationID, std::shared_ptr<st
 		case ActionsPackage::ACCEPTEVENTACTIONACTIVATION_OPERATION_RUN:
 		{
 			this->run();
+			break;
 		}
 		// fUML::Semantics::Actions::AcceptEventActionActivation::terminate(): 1685607188
 		case ActionsPackage::ACCEPTEVENTACTIONACTIVATION_OPERATION_TERMINATE:
 		{
 			this->terminate();
+			break;
 		}
 
 		default:
 		{
 			// call superTypes
 			result = ActionActivationImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			break;
 		}

@@ -282,10 +282,10 @@ Any UnlimitedNaturalLiteralExpEvalImpl::eInvoke(int operationID, std::shared_ptr
 		{
 			// call superTypes
 			result = fUML::Semantics::Values::LiteralUnlimitedNaturalEvaluationImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			result = NumericLiteralExpEvalImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			break;
 		}

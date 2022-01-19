@@ -393,6 +393,7 @@ Any ClassifierBehaviorExecutionImpl::eInvoke(int operationID, std::shared_ptr<st
 		case CommonBehaviorPackage::CLASSIFIERBEHAVIOREXECUTION_OPERATION__STARTOBJECTBEHAVIOR:
 		{
 			this->_startObjectBehavior();
+			break;
 		}
 		// fUML::Semantics::CommonBehavior::ClassifierBehaviorExecution::execute(uml::Class[*], fUML::Semantics::CommonBehavior::ParameterValue[*]): 787236707
 		case CommonBehaviorPackage::CLASSIFIERBEHAVIOREXECUTION_OPERATION_EXECUTE_CLASS_PARAMETERVALUE:
@@ -408,18 +409,20 @@ Any ClassifierBehaviorExecutionImpl::eInvoke(int operationID, std::shared_ptr<st
 			std::list<Any>::const_iterator incoming_param_inputs_arguments_citer = std::next(arguments->begin(), 1);
 			incoming_param_inputs = (*incoming_param_inputs_arguments_citer)->get<std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> >();
 			this->execute(incoming_param_classifier,incoming_param_inputs);
+			break;
 		}
 		// fUML::Semantics::CommonBehavior::ClassifierBehaviorExecution::terminate(): 506895083
 		case CommonBehaviorPackage::CLASSIFIERBEHAVIOREXECUTION_OPERATION_TERMINATE:
 		{
 			this->terminate();
+			break;
 		}
 
 		default:
 		{
 			// call superTypes
 			result = ecore::EModelElementImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			break;
 		}

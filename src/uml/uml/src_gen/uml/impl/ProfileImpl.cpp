@@ -803,7 +803,7 @@ Any ProfileImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argume
 		{
 			// call superTypes
 			result = PackageImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			break;
 		}

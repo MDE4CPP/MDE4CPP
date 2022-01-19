@@ -328,13 +328,14 @@ Any ExtensionalValueImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any
 		case StructuredClassifiersPackage::EXTENSIONALVALUE_OPERATION_DESTROY:
 		{
 			this->destroy();
+			break;
 		}
 
 		default:
 		{
 			// call superTypes
 			result = fUML::Semantics::SimpleClassifiers::CompoundValueImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			break;
 		}

@@ -388,7 +388,7 @@ Any OclMessageArgEvalImpl::eInvoke(int operationID, std::shared_ptr<std::list<An
 		{
 			// call superTypes
 			result = fUML::Semantics::Values::EvaluationImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			break;
 		}

@@ -283,7 +283,7 @@ Any ConnectableElementTemplateParameterImpl::eInvoke(int operationID, std::share
 		{
 			// call superTypes
 			result = TemplateParameterImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			break;
 		}

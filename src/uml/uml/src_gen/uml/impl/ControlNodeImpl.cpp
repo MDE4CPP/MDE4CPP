@@ -340,7 +340,7 @@ Any ControlNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> ar
 		{
 			// call superTypes
 			result = ActivityNodeImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			break;
 		}

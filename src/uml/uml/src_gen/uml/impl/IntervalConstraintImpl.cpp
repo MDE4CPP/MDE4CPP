@@ -339,7 +339,7 @@ Any IntervalConstraintImpl::eInvoke(int operationID, std::shared_ptr<std::list<A
 		{
 			// call superTypes
 			result = ConstraintImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			break;
 		}

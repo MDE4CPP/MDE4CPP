@@ -376,13 +376,13 @@ Any StructuralFeatureImpl::eInvoke(int operationID, std::shared_ptr<std::list<An
 		{
 			// call superTypes
 			result = MultiplicityElementImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			result = TypedElementImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			result = FeatureImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			break;
 		}

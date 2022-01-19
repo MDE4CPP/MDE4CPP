@@ -346,13 +346,14 @@ Any StartObjectBehaviorActionActivationImpl::eInvoke(int operationID, std::share
 		case ActionsPackage::STARTOBJECTBEHAVIORACTIONACTIVATION_OPERATION_DOACTION:
 		{
 			this->doAction();
+			break;
 		}
 
 		default:
 		{
 			// call superTypes
 			result = InvocationActionActivationImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			break;
 		}

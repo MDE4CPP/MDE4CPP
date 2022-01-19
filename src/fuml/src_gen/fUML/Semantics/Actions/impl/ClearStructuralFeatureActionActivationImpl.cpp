@@ -318,13 +318,14 @@ Any ClearStructuralFeatureActionActivationImpl::eInvoke(int operationID, std::sh
 		case ActionsPackage::CLEARSTRUCTURALFEATUREACTIONACTIVATION_OPERATION_DOACTION:
 		{
 			this->doAction();
+			break;
 		}
 
 		default:
 		{
 			// call superTypes
 			result = StructuralFeatureActionActivationImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			break;
 		}

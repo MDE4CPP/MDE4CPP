@@ -398,11 +398,13 @@ Any LoopNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<A
 		case ActionsPackage::LOOPNODEACTIVATION_OPERATION_RUNBODY:
 		{
 			this->runBody();
+			break;
 		}
 		// fUML::Semantics::Actions::LoopNodeActivation::runLoopVariables(): 1175069894
 		case ActionsPackage::LOOPNODEACTIVATION_OPERATION_RUNLOOPVARIABLES:
 		{
 			this->runLoopVariables();
+			break;
 		}
 		// fUML::Semantics::Actions::LoopNodeActivation::runTest() : bool: 1241885508
 		case ActionsPackage::LOOPNODEACTIVATION_OPERATION_RUNTEST:
@@ -415,7 +417,7 @@ Any LoopNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<A
 		{
 			// call superTypes
 			result = StructuredActivityNodeActivationImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			break;
 		}

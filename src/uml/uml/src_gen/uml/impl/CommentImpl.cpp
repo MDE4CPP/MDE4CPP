@@ -382,7 +382,7 @@ Any CommentImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argume
 		{
 			// call superTypes
 			result = ElementImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			break;
 		}

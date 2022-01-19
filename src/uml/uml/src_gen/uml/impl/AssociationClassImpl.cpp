@@ -573,10 +573,10 @@ Any AssociationClassImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any
 		{
 			// call superTypes
 			result = AssociationImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			result = ClassImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			break;
 		}

@@ -378,7 +378,7 @@ Any ExecutionOccurrenceSpecificationImpl::eInvoke(int operationID, std::shared_p
 		{
 			// call superTypes
 			result = OccurrenceSpecificationImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			break;
 		}

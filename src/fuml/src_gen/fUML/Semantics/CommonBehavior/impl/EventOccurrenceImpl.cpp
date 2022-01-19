@@ -314,6 +314,7 @@ Any EventOccurrenceImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>
 		case CommonBehaviorPackage::EVENTOCCURRENCE_OPERATION_DOSEND:
 		{
 			this->doSend();
+			break;
 		}
 		// fUML::Semantics::CommonBehavior::EventOccurrence::getParameterValues() : fUML::Semantics::CommonBehavior::ParameterValue[*]: 1434655027
 		case CommonBehaviorPackage::EVENTOCCURRENCE_OPERATION_GETPARAMETERVALUES:
@@ -353,13 +354,14 @@ Any EventOccurrenceImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>
 			std::list<Any>::const_iterator incoming_param_target_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_target = (*incoming_param_target_arguments_citer)->get<std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> >();
 			this->sendTo(incoming_param_target);
+			break;
 		}
 
 		default:
 		{
 			// call superTypes
 			result = ecore::EModelElementImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			break;
 		}

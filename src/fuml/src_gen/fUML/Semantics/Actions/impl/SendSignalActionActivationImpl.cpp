@@ -277,13 +277,14 @@ Any SendSignalActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std
 		case ActionsPackage::SENDSIGNALACTIONACTIVATION_OPERATION_DOACTION:
 		{
 			this->doAction();
+			break;
 		}
 
 		default:
 		{
 			// call superTypes
 			result = InvocationActionActivationImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			break;
 		}

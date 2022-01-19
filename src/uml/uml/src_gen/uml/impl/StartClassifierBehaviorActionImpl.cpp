@@ -476,7 +476,7 @@ Any StartClassifierBehaviorActionImpl::eInvoke(int operationID, std::shared_ptr<
 		{
 			// call superTypes
 			result = ActionImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			break;
 		}

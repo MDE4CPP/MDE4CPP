@@ -500,7 +500,7 @@ Any TemplateParameterSubstitutionImpl::eInvoke(int operationID, std::shared_ptr<
 		{
 			// call superTypes
 			result = ElementImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			break;
 		}

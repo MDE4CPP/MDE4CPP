@@ -727,6 +727,7 @@ Any DecisionNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::li
 			std::list<Any>::const_iterator incoming_param_incomingTokens_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_incomingTokens = (*incoming_param_incomingTokens_arguments_citer)->get<std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> >();
 			this->fire(incoming_param_incomingTokens);
+			break;
 		}
 		// fUML::Semantics::Activities::DecisionNodeActivation::getDecisionInputFlowInstance() : fUML::Semantics::Activities::ActivityEdgeInstance: 1439501389
 		case ActivitiesPackage::DECISIONNODEACTIVATION_OPERATION_GETDECISIONINPUTFLOWINSTANCE:
@@ -787,6 +788,7 @@ Any DecisionNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::li
 		case ActivitiesPackage::DECISIONNODEACTIVATION_OPERATION_TERMINATE:
 		{
 			this->terminate();
+			break;
 		}
 		// fUML::Semantics::Activities::DecisionNodeActivation::test(uml::ValueSpecification, fUML::Semantics::Values::Value) : bool: 1272277240
 		case ActivitiesPackage::DECISIONNODEACTIVATION_OPERATION_TEST_VALUESPECIFICATION_VALUE:
@@ -809,7 +811,7 @@ Any DecisionNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::li
 		{
 			// call superTypes
 			result = ControlNodeActivationImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			break;
 		}

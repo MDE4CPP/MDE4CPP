@@ -359,11 +359,13 @@ Any StructuredValueImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>
 			std::list<Any>::const_iterator incoming_param_position_arguments_citer = std::next(arguments->begin(), 2);
 			incoming_param_position = (*incoming_param_position_arguments_citer)->get<int >();
 			this->assignFeatureValue(incoming_param_feature,incoming_param_values,incoming_param_position);
+			break;
 		}
 		// fUML::Semantics::SimpleClassifiers::StructuredValue::createFeatureValues(): 54615103
 		case SimpleClassifiersPackage::STRUCTUREDVALUE_OPERATION_CREATEFEATUREVALUES:
 		{
 			this->createFeatureValues();
+			break;
 		}
 		// fUML::Semantics::SimpleClassifiers::StructuredValue::getValues(uml::StructuralFeature, fUML::Semantics::SimpleClassifiers::FeatureValue[*]) : fUML::Semantics::Values::Value[*]: 1413512920
 		case SimpleClassifiersPackage::STRUCTUREDVALUE_OPERATION_GETVALUES_STRUCTURALFEATURE_FEATUREVALUE:
@@ -396,6 +398,7 @@ Any StructuredValueImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>
 			std::list<Any>::const_iterator incoming_param_value_arguments_citer = std::next(arguments->begin(), 1);
 			incoming_param_value = (*incoming_param_value_arguments_citer)->get<std::shared_ptr<fUML::Semantics::Values::Value> >();
 			this->removeValue(incoming_param_feature,incoming_param_value);
+			break;
 		}
 		// fUML::Semantics::SimpleClassifiers::StructuredValue::retrieveFeatureValue(uml::StructuralFeature) : fUML::Semantics::SimpleClassifiers::FeatureValue: 825675364
 		case SimpleClassifiersPackage::STRUCTUREDVALUE_OPERATION_RETRIEVEFEATUREVALUE_STRUCTURALFEATURE:
@@ -434,6 +437,7 @@ Any StructuredValueImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>
 			std::list<Any>::const_iterator incoming_param_position_arguments_citer = std::next(arguments->begin(), 2);
 			incoming_param_position = (*incoming_param_position_arguments_citer)->get<int >();
 			this->setFeatureValue(incoming_param_feature,incoming_param_values,incoming_param_position);
+			break;
 		}
 		// fUML::Semantics::SimpleClassifiers::StructuredValue::specify() : uml::ValueSpecification: 270389401
 		case SimpleClassifiersPackage::STRUCTUREDVALUE_OPERATION_SPECIFY:
@@ -446,7 +450,7 @@ Any StructuredValueImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>
 		{
 			// call superTypes
 			result = fUML::Semantics::Values::ValueImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			break;
 		}

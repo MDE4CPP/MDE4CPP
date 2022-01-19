@@ -395,23 +395,26 @@ Any ClauseActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any
 		case ActionsPackage::CLAUSEACTIVATION_OPERATION_RECIEVECONTROL:
 		{
 			this->recieveControl();
+			break;
 		}
 		// fUML::Semantics::Actions::ClauseActivation::runTest(): 507684446
 		case ActionsPackage::CLAUSEACTIVATION_OPERATION_RUNTEST:
 		{
 			this->runTest();
+			break;
 		}
 		// fUML::Semantics::Actions::ClauseActivation::selectBody(): 693250888
 		case ActionsPackage::CLAUSEACTIVATION_OPERATION_SELECTBODY:
 		{
 			this->selectBody();
+			break;
 		}
 
 		default:
 		{
 			// call superTypes
 			result = ecore::EModelElementImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			break;
 		}

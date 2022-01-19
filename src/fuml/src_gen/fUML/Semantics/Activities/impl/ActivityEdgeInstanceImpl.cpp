@@ -654,6 +654,7 @@ Any ActivityEdgeInstanceImpl::eInvoke(int operationID, std::shared_ptr<std::list
 			std::list<Any>::const_iterator incoming_param_tokens_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_tokens = (*incoming_param_tokens_arguments_citer)->get<std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> >();
 			this->sendOffer(incoming_param_tokens);
+			break;
 		}
 		// fUML::Semantics::Activities::ActivityEdgeInstance::takeOfferedTokens() : fUML::Semantics::Activities::Token[*]: 1733798230
 		case ActivitiesPackage::ACTIVITYEDGEINSTANCE_OPERATION_TAKEOFFEREDTOKENS:
@@ -679,7 +680,7 @@ Any ActivityEdgeInstanceImpl::eInvoke(int operationID, std::shared_ptr<std::list
 		{
 			// call superTypes
 			result = ecore::EModelElementImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			break;
 		}

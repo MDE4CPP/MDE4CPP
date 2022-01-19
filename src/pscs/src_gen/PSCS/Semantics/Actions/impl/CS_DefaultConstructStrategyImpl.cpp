@@ -959,6 +959,7 @@ Any CS_DefaultConstructStrategyImpl::eInvoke(int operationID, std::shared_ptr<st
 			std::list<Any>::const_iterator incoming_param_value_arguments_citer = std::next(arguments->begin(), 2);
 			incoming_param_value = (*incoming_param_value_arguments_citer)->get<std::shared_ptr<fUML::Semantics::Values::Value> >();
 			this->addStructuralFeatureValue(incoming_param_context,incoming_param_feature,incoming_param_value);
+			break;
 		}
 		// PSCS::Semantics::Actions::CS_DefaultConstructStrategy::canInstantiate(uml::Property) : bool: 144834873
 		case ActionsPackage::CS_DEFAULTCONSTRUCTSTRATEGY_OPERATION_CANINSTANTIATE_PROPERTY:
@@ -1017,6 +1018,7 @@ Any CS_DefaultConstructStrategyImpl::eInvoke(int operationID, std::shared_ptr<st
 			std::list<Any>::const_iterator incoming_param_connector_arguments_citer = std::next(arguments->begin(), 1);
 			incoming_param_connector = (*incoming_param_connector_arguments_citer)->get<std::shared_ptr<uml::Connector> >();
 			this->generateArrayPattern(incoming_param_context,incoming_param_connector);
+			break;
 		}
 		// PSCS::Semantics::Actions::CS_DefaultConstructStrategy::generateRealizingClass(uml::Interface, std::string) : uml::Class: 567067280
 		case ActionsPackage::CS_DEFAULTCONSTRUCTSTRATEGY_OPERATION_GENERATEREALIZINGCLASS_INTERFACE_ESTRING:
@@ -1048,6 +1050,7 @@ Any CS_DefaultConstructStrategyImpl::eInvoke(int operationID, std::shared_ptr<st
 			std::list<Any>::const_iterator incoming_param_connector_arguments_citer = std::next(arguments->begin(), 1);
 			incoming_param_connector = (*incoming_param_connector_arguments_citer)->get<std::shared_ptr<uml::Connector> >();
 			this->generateStarPattern(incoming_param_context,incoming_param_connector);
+			break;
 		}
 		// PSCS::Semantics::Actions::CS_DefaultConstructStrategy::getCardinality(uml::ConnectorEnd) : int: 1031700126
 		case ActionsPackage::CS_DEFAULTCONSTRUCTSTRATEGY_OPERATION_GETCARDINALITY_CONNECTOREND:
@@ -1137,7 +1140,7 @@ Any CS_DefaultConstructStrategyImpl::eInvoke(int operationID, std::shared_ptr<st
 		{
 			// call superTypes
 			result = CS_ConstructStrategyImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			break;
 		}

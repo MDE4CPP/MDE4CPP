@@ -527,7 +527,7 @@ Any ValueSpecificationActionImpl::eInvoke(int operationID, std::shared_ptr<std::
 		{
 			// call superTypes
 			result = ActionImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			break;
 		}

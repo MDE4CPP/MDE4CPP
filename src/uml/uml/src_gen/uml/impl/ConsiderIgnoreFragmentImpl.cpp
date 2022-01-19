@@ -454,7 +454,7 @@ Any ConsiderIgnoreFragmentImpl::eInvoke(int operationID, std::shared_ptr<std::li
 		{
 			// call superTypes
 			result = CombinedFragmentImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			break;
 		}

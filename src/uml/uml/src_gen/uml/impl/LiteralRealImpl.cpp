@@ -427,7 +427,7 @@ Any LiteralRealImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> ar
 		{
 			// call superTypes
 			result = LiteralSpecificationImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			break;
 		}

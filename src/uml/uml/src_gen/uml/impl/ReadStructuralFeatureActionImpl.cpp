@@ -478,7 +478,7 @@ Any ReadStructuralFeatureActionImpl::eInvoke(int operationID, std::shared_ptr<st
 		{
 			// call superTypes
 			result = StructuralFeatureActionImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			break;
 		}

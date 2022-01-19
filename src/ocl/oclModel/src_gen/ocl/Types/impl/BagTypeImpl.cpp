@@ -256,7 +256,7 @@ Any BagTypeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argume
 		{
 			// call superTypes
 			result = CollectionTypeImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			break;
 		}

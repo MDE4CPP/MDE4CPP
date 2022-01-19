@@ -636,7 +636,7 @@ Any DeploymentSpecificationImpl::eInvoke(int operationID, std::shared_ptr<std::l
 		{
 			// call superTypes
 			result = ArtifactImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			break;
 		}

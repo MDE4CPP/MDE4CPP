@@ -280,10 +280,10 @@ Any BooleanLiteralExpEvalImpl::eInvoke(int operationID, std::shared_ptr<std::lis
 		{
 			// call superTypes
 			result = fUML::Semantics::Values::LiteralBooleanEvaluationImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			result = PrimitiveLiteralExpEvalImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			break;
 		}

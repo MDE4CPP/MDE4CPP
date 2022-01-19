@@ -549,7 +549,7 @@ Any AddStructuralFeatureValueActionImpl::eInvoke(int operationID, std::shared_pt
 		{
 			// call superTypes
 			result = WriteStructuralFeatureActionImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			break;
 		}

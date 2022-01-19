@@ -261,7 +261,7 @@ Any LiteralUnlimitedNaturalEvaluationImpl::eInvoke(int operationID, std::shared_
 		{
 			// call superTypes
 			result = LiteralEvaluationImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			break;
 		}

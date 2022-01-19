@@ -256,7 +256,7 @@ Any GetNextEventStrategyImpl::eInvoke(int operationID, std::shared_ptr<std::list
 		{
 			// call superTypes
 			result = fUML::Semantics::Loci::SemanticStrategyImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			break;
 		}

@@ -289,7 +289,7 @@ Any CS_DispatchOperationOfInterfaceStrategyImpl::eInvoke(int operationID, std::s
 		{
 			// call superTypes
 			result = fUML::Semantics::StructuredClassifiers::RedefinitionBasedDispatchStrategyImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			break;
 		}

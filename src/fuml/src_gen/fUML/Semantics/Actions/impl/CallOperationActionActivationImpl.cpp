@@ -527,7 +527,7 @@ Any CallOperationActionActivationImpl::eInvoke(int operationID, std::shared_ptr<
 		{
 			// call superTypes
 			result = CallActionActivationImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			break;
 		}

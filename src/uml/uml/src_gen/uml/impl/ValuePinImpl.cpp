@@ -573,7 +573,7 @@ Any ValuePinImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argum
 		{
 			// call superTypes
 			result = InputPinImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			break;
 		}

@@ -1174,10 +1174,10 @@ Any InteractionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> ar
 		{
 			// call superTypes
 			result = InteractionFragmentImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			result = BehaviorImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			break;
 		}

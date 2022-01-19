@@ -252,9 +252,9 @@ Any EStringToStringMapEntryImpl::eGet(int featureID, bool resolve, bool coreType
 	switch(featureID)
 	{
 		case ecore::ecorePackage::ESTRINGTOSTRINGMAPENTRY_ATTRIBUTE_KEY:
-			return eAny(getKey(),ecore::ecorePackage::ESTRING_CLASS,false); //510
+			return eAny(getKey(),ecore::ecorePackage::ESTRING_CLASS,false); //520
 		case ecore::ecorePackage::ESTRINGTOSTRINGMAPENTRY_ATTRIBUTE_VALUE:
-			return eAny(getValue(),ecore::ecorePackage::ESTRING_CLASS,false); //511
+			return eAny(getValue(),ecore::ecorePackage::ESTRING_CLASS,false); //521
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
 }
@@ -264,9 +264,9 @@ bool EStringToStringMapEntryImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case ecore::ecorePackage::ESTRINGTOSTRINGMAPENTRY_ATTRIBUTE_KEY:
-			return getKey() != ""; //510
+			return getKey() != ""; //520
 		case ecore::ecorePackage::ESTRINGTOSTRINGMAPENTRY_ATTRIBUTE_VALUE:
-			return getValue() != ""; //511
+			return getValue() != ""; //521
 	}
 	return ecore::EObjectImpl::internalEIsSet(featureID);
 }
@@ -279,14 +279,14 @@ bool EStringToStringMapEntryImpl::eSet(int featureID, Any newValue)
 		{
 			// CAST Any to std::string
 			std::string _key = newValue->get<std::string>();
-			setKey(_key); //510
+			setKey(_key); //520
 			return true;
 		}
 		case ecore::ecorePackage::ESTRINGTOSTRINGMAPENTRY_ATTRIBUTE_VALUE:
 		{
 			// CAST Any to std::string
 			std::string _value = newValue->get<std::string>();
-			setValue(_value); //511
+			setValue(_value); //521
 			return true;
 		}
 	}
@@ -308,7 +308,7 @@ Any EStringToStringMapEntryImpl::eInvoke(int operationID, std::shared_ptr<std::l
 		{
 			// call superTypes
 			result = ecore::EModelElementImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			break;
 		}

@@ -233,6 +233,7 @@ Any EventAccepterImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> 
 			std::list<Any>::const_iterator incoming_param_signalInstance_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_signalInstance = (*incoming_param_signalInstance_arguments_citer)->get<std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance> >();
 			this->accept(incoming_param_signalInstance);
+			break;
 		}
 		// fUML::Semantics::CommonBehavior::EventAccepter::match(fUML::Semantics::SimpleClassifiers::SignalInstance) : bool: 1803064884
 		case CommonBehaviorPackage::EVENTACCEPTER_OPERATION_MATCH_SIGNALINSTANCE:
@@ -250,7 +251,7 @@ Any EventAccepterImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> 
 		{
 			// call superTypes
 			result = ecore::EModelElementImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			break;
 		}

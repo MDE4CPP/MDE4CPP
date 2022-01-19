@@ -433,6 +433,7 @@ Any CS_InteractionPointImpl::eInvoke(int operationID, std::shared_ptr<std::list<
 			std::list<Any>::const_iterator incoming_param_eventOccurrence_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_eventOccurrence = (*incoming_param_eventOccurrence_arguments_citer)->get<std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> >();
 			this->send(incoming_param_eventOccurrence);
+			break;
 		}
 		// PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint::startBehavior(uml::Class, fUML::Semantics::CommonBehavior::ParameterValue[*]): 986944862
 		case StructuredClassifiersPackage::CS_INTERACTIONPOINT_OPERATION_STARTBEHAVIOR_CLASS_PARAMETERVALUE:
@@ -448,13 +449,14 @@ Any CS_InteractionPointImpl::eInvoke(int operationID, std::shared_ptr<std::list<
 			std::list<Any>::const_iterator incoming_param_inputs_arguments_citer = std::next(arguments->begin(), 1);
 			incoming_param_inputs = (*incoming_param_inputs_arguments_citer)->get<std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> >();
 			this->startBehavior(incoming_param_classifier,incoming_param_inputs);
+			break;
 		}
 
 		default:
 		{
 			// call superTypes
 			result = fUML::Semantics::StructuredClassifiers::ReferenceImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			break;
 		}

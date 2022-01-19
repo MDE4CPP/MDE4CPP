@@ -894,10 +894,10 @@ Any RegionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argumen
 		{
 			// call superTypes
 			result = RedefinableElementImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			result = NamespaceImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			break;
 		}

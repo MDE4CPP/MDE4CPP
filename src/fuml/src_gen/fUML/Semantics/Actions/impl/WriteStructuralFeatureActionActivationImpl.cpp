@@ -310,7 +310,7 @@ Any WriteStructuralFeatureActionActivationImpl::eInvoke(int operationID, std::sh
 		{
 			// call superTypes
 			result = StructuralFeatureActionActivationImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			break;
 		}

@@ -432,13 +432,14 @@ Any TokenImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argument
 		case ActivitiesPackage::TOKEN_OPERATION_WITHDRAW:
 		{
 			this->withdraw();
+			break;
 		}
 
 		default:
 		{
 			// call superTypes
 			result = ecore::EModelElementImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			break;
 		}

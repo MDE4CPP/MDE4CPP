@@ -1640,6 +1640,7 @@ Any PropertyImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argum
 			std::list<Any>::const_iterator incoming_param_value_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_value = (*incoming_param_value_arguments_citer)->get<bool >();
 			this->setBooleanDefaultValue(incoming_param_value);
+			break;
 		}
 		// uml::Property::setIntegerDefaultValue(int): 635550506
 		case umlPackage::PROPERTY_OPERATION_SETINTEGERDEFAULTVALUE_INTEGER:
@@ -1650,6 +1651,7 @@ Any PropertyImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argum
 			std::list<Any>::const_iterator incoming_param_value_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_value = (*incoming_param_value_arguments_citer)->get<int >();
 			this->setIntegerDefaultValue(incoming_param_value);
+			break;
 		}
 		// uml::Property::setIsNavigable(bool): 1084890443
 		case umlPackage::PROPERTY_OPERATION_SETISNAVIGABLE_BOOLEAN:
@@ -1660,11 +1662,13 @@ Any PropertyImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argum
 			std::list<Any>::const_iterator incoming_param_isNavigable_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_isNavigable = (*incoming_param_isNavigable_arguments_citer)->get<bool >();
 			this->setIsNavigable(incoming_param_isNavigable);
+			break;
 		}
 		// uml::Property::setNullDefaultValue(): 1385757410
 		case umlPackage::PROPERTY_OPERATION_SETNULLDEFAULTVALUE:
 		{
 			this->setNullDefaultValue();
+			break;
 		}
 		// uml::Property::setRealDefaultValue(double): 1503561658
 		case umlPackage::PROPERTY_OPERATION_SETREALDEFAULTVALUE_REAL:
@@ -1675,6 +1679,7 @@ Any PropertyImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argum
 			std::list<Any>::const_iterator incoming_param_value_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_value = (*incoming_param_value_arguments_citer)->get<double >();
 			this->setRealDefaultValue(incoming_param_value);
+			break;
 		}
 		// uml::Property::setStringDefaultValue(std::string): 748800765
 		case umlPackage::PROPERTY_OPERATION_SETSTRINGDEFAULTVALUE_STRING:
@@ -1685,6 +1690,7 @@ Any PropertyImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argum
 			std::list<Any>::const_iterator incoming_param_value_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_value = (*incoming_param_value_arguments_citer)->get<std::string >();
 			this->setStringDefaultValue(incoming_param_value);
+			break;
 		}
 		// uml::Property::setUnlimitedNaturalDefaultValue(int): 486798804
 		case umlPackage::PROPERTY_OPERATION_SETUNLIMITEDNATURALDEFAULTVALUE_UNLIMITEDNATURAL:
@@ -1695,6 +1701,7 @@ Any PropertyImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argum
 			std::list<Any>::const_iterator incoming_param_value_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_value = (*incoming_param_value_arguments_citer)->get<int >();
 			this->setUnlimitedNaturalDefaultValue(incoming_param_value);
+			break;
 		}
 		// uml::Property::subsetted_property_names(Any, std::map) : bool: 1501045410
 		case umlPackage::PROPERTY_OPERATION_SUBSETTED_PROPERTY_NAMES_EDIAGNOSTICCHAIN_EMAP:
@@ -1771,19 +1778,20 @@ Any PropertyImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argum
 		case umlPackage::PROPERTY_OPERATION_UNSETDEFAULT:
 		{
 			this->unsetDefault();
+			break;
 		}
 
 		default:
 		{
 			// call superTypes
 			result = DeploymentTargetImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			result = ConnectableElementImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			result = StructuralFeatureImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			break;
 		}

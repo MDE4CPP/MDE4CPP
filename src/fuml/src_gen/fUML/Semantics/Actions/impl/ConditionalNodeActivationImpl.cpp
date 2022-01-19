@@ -495,6 +495,7 @@ Any ConditionalNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std:
 			std::list<Any>::const_iterator incoming_param_clause_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_clause = (*incoming_param_clause_arguments_citer)->get<std::shared_ptr<uml::Clause> >();
 			this->runTest(incoming_param_clause);
+			break;
 		}
 		// fUML::Semantics::Actions::ConditionalNodeActivation::selectBody(uml::Clause): 1236206203
 		case ActionsPackage::CONDITIONALNODEACTIVATION_OPERATION_SELECTBODY_CLAUSE:
@@ -505,13 +506,14 @@ Any ConditionalNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std:
 			std::list<Any>::const_iterator incoming_param_clause_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_clause = (*incoming_param_clause_arguments_citer)->get<std::shared_ptr<uml::Clause> >();
 			this->selectBody(incoming_param_clause);
+			break;
 		}
 
 		default:
 		{
 			// call superTypes
 			result = StructuredActivityNodeActivationImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			break;
 		}

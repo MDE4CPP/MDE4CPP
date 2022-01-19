@@ -519,7 +519,7 @@ Any ExpressionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arg
 		{
 			// call superTypes
 			result = ValueSpecificationImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			break;
 		}

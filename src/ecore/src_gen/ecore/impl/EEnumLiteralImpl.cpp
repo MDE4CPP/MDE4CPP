@@ -393,7 +393,7 @@ Any EEnumLiteralImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> a
 		{
 			// call superTypes
 			result = ENamedElementImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			break;
 		}

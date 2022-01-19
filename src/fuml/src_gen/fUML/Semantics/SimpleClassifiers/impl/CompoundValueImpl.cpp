@@ -511,6 +511,7 @@ Any CompoundValueImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> 
 			std::list<Any>::const_iterator incoming_param_position_arguments_citer = std::next(arguments->begin(), 2);
 			incoming_param_position = (*incoming_param_position_arguments_citer)->get<int >();
 			this->assignFeatureValue(incoming_param_feature,incoming_param_values,incoming_param_position);
+			break;
 		}
 		// fUML::Semantics::SimpleClassifiers::CompoundValue::equals(fUML::Semantics::Values::Value) : bool: 447967880
 		case SimpleClassifiersPackage::COMPOUNDVALUE_OPERATION_EQUALS_VALUE:
@@ -532,6 +533,7 @@ Any CompoundValueImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> 
 			std::list<Any>::const_iterator incoming_param_classifier_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_classifier = (*incoming_param_classifier_arguments_citer)->get<std::shared_ptr<uml::Classifier> >();
 			this->removeFeatureValues(incoming_param_classifier);
+			break;
 		}
 		// fUML::Semantics::SimpleClassifiers::CompoundValue::retrieveFeatureValue(uml::StructuralFeature) : fUML::Semantics::SimpleClassifiers::FeatureValue: 805116871
 		case SimpleClassifiersPackage::COMPOUNDVALUE_OPERATION_RETRIEVEFEATUREVALUE_STRUCTURALFEATURE:
@@ -562,7 +564,7 @@ Any CompoundValueImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> 
 		{
 			// call superTypes
 			result = StructuredValueImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			break;
 		}

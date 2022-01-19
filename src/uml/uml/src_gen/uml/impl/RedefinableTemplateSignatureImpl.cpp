@@ -637,10 +637,10 @@ Any RedefinableTemplateSignatureImpl::eInvoke(int operationID, std::shared_ptr<s
 		{
 			// call superTypes
 			result = TemplateSignatureImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			result = RedefinableElementImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			break;
 		}

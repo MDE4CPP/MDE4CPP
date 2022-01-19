@@ -347,10 +347,10 @@ Any MessageOccurrenceSpecificationImpl::eInvoke(int operationID, std::shared_ptr
 		{
 			// call superTypes
 			result = MessageEndImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			result = OccurrenceSpecificationImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			break;
 		}

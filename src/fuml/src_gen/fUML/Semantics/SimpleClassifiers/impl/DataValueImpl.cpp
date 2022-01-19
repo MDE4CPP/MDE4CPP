@@ -358,7 +358,7 @@ Any DataValueImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argu
 		{
 			// call superTypes
 			result = CompoundValueImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			break;
 		}

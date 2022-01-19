@@ -1440,6 +1440,7 @@ Any CS_ObjectImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argu
 			std::list<Any>::const_iterator incoming_param_interactionPoint_arguments_citer = std::next(arguments->begin(), 1);
 			incoming_param_interactionPoint = (*incoming_param_interactionPoint_arguments_citer)->get<std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint> >();
 			this->sendIn(incoming_param_eventOccurrence,incoming_param_interactionPoint);
+			break;
 		}
 		// PSCS::Semantics::StructuredClassifiers::CS_Object::sendIn(fUML::Semantics::CommonBehavior::EventOccurrence, uml::Port): 1098259212
 		case StructuredClassifiersPackage::CS_OBJECT_OPERATION_SENDIN_EVENTOCCURRENCE_PORT:
@@ -1455,6 +1456,7 @@ Any CS_ObjectImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argu
 			std::list<Any>::const_iterator incoming_param_onPort_arguments_citer = std::next(arguments->begin(), 1);
 			incoming_param_onPort = (*incoming_param_onPort_arguments_citer)->get<std::shared_ptr<uml::Port> >();
 			this->sendIn(incoming_param_eventOccurrence,incoming_param_onPort);
+			break;
 		}
 		// PSCS::Semantics::StructuredClassifiers::CS_Object::sendOut(fUML::Semantics::CommonBehavior::EventOccurrence, PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint): 1770140679
 		case StructuredClassifiersPackage::CS_OBJECT_OPERATION_SENDOUT_EVENTOCCURRENCE_CS_INTERACTIONPOINT:
@@ -1470,6 +1472,7 @@ Any CS_ObjectImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argu
 			std::list<Any>::const_iterator incoming_param_interactionPoint_arguments_citer = std::next(arguments->begin(), 1);
 			incoming_param_interactionPoint = (*incoming_param_interactionPoint_arguments_citer)->get<std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint> >();
 			this->sendOut(incoming_param_eventOccurrence,incoming_param_interactionPoint);
+			break;
 		}
 		// PSCS::Semantics::StructuredClassifiers::CS_Object::sendOut(fUML::Semantics::CommonBehavior::EventOccurrence, uml::Port): 886512452
 		case StructuredClassifiersPackage::CS_OBJECT_OPERATION_SENDOUT_EVENTOCCURRENCE_PORT:
@@ -1485,6 +1488,7 @@ Any CS_ObjectImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argu
 			std::list<Any>::const_iterator incoming_param_onPort_arguments_citer = std::next(arguments->begin(), 1);
 			incoming_param_onPort = (*incoming_param_onPort_arguments_citer)->get<std::shared_ptr<uml::Port> >();
 			this->sendOut(incoming_param_eventOccurrence,incoming_param_onPort);
+			break;
 		}
 		// PSCS::Semantics::StructuredClassifiers::CS_Object::setFeatureValue(uml::StructuralFeature, fUML::Semantics::Values::Value[*], int): 225294564
 		case StructuredClassifiersPackage::CS_OBJECT_OPERATION_SETFEATUREVALUE_STRUCTURALFEATURE_EINT:
@@ -1505,13 +1509,14 @@ Any CS_ObjectImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argu
 			std::list<Any>::const_iterator incoming_param_position_arguments_citer = std::next(arguments->begin(), 2);
 			incoming_param_position = (*incoming_param_position_arguments_citer)->get<int >();
 			this->setFeatureValue(incoming_param_feature,incoming_param_values,incoming_param_position);
+			break;
 		}
 
 		default:
 		{
 			// call superTypes
 			result = fUML::Semantics::StructuredClassifiers::ObjectImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			break;
 		}

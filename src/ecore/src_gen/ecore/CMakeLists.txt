@@ -57,6 +57,7 @@ SET(SOURCE_FILES
 	impl/EModelElementImpl.cpp
 	impl/ENamedElementImpl.cpp
 	impl/EObjectImpl.cpp
+	impl/EObjectAnyImpl.cpp
 	impl/EObjectContainerImpl.cpp
 	impl/EOperationImpl.cpp
 	impl/EPackageImpl.cpp

@@ -569,21 +569,25 @@ Any StructuredActivityNodeActivationImpl::eInvoke(int operationID, std::shared_p
 		case ActionsPackage::STRUCTUREDACTIVITYNODEACTIVATION_OPERATION_CREATEEDGEINSTANCES:
 		{
 			this->createEdgeInstances();
+			break;
 		}
 		// fUML::Semantics::Actions::StructuredActivityNodeActivation::createNodeActivations(): 926749067
 		case ActionsPackage::STRUCTUREDACTIVITYNODEACTIVATION_OPERATION_CREATENODEACTIVATIONS:
 		{
 			this->createNodeActivations();
+			break;
 		}
 		// fUML::Semantics::Actions::StructuredActivityNodeActivation::doAction(): 1390767454
 		case ActionsPackage::STRUCTUREDACTIVITYNODEACTIVATION_OPERATION_DOACTION:
 		{
 			this->doAction();
+			break;
 		}
 		// fUML::Semantics::Actions::StructuredActivityNodeActivation::doStructuredActivity(): 1423246036
 		case ActionsPackage::STRUCTUREDACTIVITYNODEACTIVATION_OPERATION_DOSTRUCTUREDACTIVITY:
 		{
 			this->doStructuredActivity();
+			break;
 		}
 		// fUML::Semantics::Actions::StructuredActivityNodeActivation::getNodeActivation(uml::ActivityNode) : fUML::Semantics::Activities::ActivityNodeActivation: 1844151899
 		case ActionsPackage::STRUCTUREDACTIVITYNODEACTIVATION_OPERATION_GETNODEACTIVATION_ACTIVITYNODE:
@@ -651,28 +655,32 @@ Any StructuredActivityNodeActivationImpl::eInvoke(int operationID, std::shared_p
 			std::list<Any>::const_iterator incoming_param_values_arguments_citer = std::next(arguments->begin(), 1);
 			incoming_param_values = (*incoming_param_values_arguments_citer)->get<std::shared_ptr<Bag<fUML::Semantics::Values::Value>> >();
 			this->putPinValues(incoming_param_pin,incoming_param_values);
+			break;
 		}
 		// fUML::Semantics::Actions::StructuredActivityNodeActivation::resume(): 86337545
 		case ActionsPackage::STRUCTUREDACTIVITYNODEACTIVATION_OPERATION_RESUME:
 		{
 			this->resume();
+			break;
 		}
 		// fUML::Semantics::Actions::StructuredActivityNodeActivation::terminate(): 333463071
 		case ActionsPackage::STRUCTUREDACTIVITYNODEACTIVATION_OPERATION_TERMINATE:
 		{
 			this->terminate();
+			break;
 		}
 		// fUML::Semantics::Actions::StructuredActivityNodeActivation::terminateAll(): 354863338
 		case ActionsPackage::STRUCTUREDACTIVITYNODEACTIVATION_OPERATION_TERMINATEALL:
 		{
 			this->terminateAll();
+			break;
 		}
 
 		default:
 		{
 			// call superTypes
 			result = ActionActivationImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			break;
 		}

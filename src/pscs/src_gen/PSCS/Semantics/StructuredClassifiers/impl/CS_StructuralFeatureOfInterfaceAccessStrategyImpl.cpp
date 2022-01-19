@@ -292,13 +292,14 @@ Any CS_StructuralFeatureOfInterfaceAccessStrategyImpl::eInvoke(int operationID, 
 			std::list<Any>::const_iterator incoming_param_position_arguments_citer = std::next(arguments->begin(), 3);
 			incoming_param_position = (*incoming_param_position_arguments_citer)->get<int >();
 			this->write(incoming_param_cs_Object,incoming_param_feature,incoming_param_values,incoming_param_position);
+			break;
 		}
 
 		default:
 		{
 			// call superTypes
 			result = fUML::Semantics::Loci::SemanticStrategyImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			break;
 		}

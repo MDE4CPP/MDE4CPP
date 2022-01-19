@@ -471,7 +471,7 @@ Any WriteVariableActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<
 		{
 			// call superTypes
 			result = VariableActionImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			break;
 		}

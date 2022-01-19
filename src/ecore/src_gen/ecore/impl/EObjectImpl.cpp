@@ -34,6 +34,7 @@
 
 //Includes from codegen annotation
 #include "ecore/EObjectContainer.hpp"
+#include "ecore/EObjectAny.hpp"
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -133,7 +134,7 @@ Any EObjectImpl::eAllContents() const
 			returnList->push_back(anyValue);
 		}
 	}
-	return eAny(returnList,0,true);
+	return eAnyBag(returnList,ecore::ecorePackage::ANY_CLASS);
 	//end of body
 }
 
@@ -201,11 +202,15 @@ std::shared_ptr<Bag<ecore::EObject> > EObjectImpl::eContents() const
 				if(value)
 				{
 					returnList->push_back(value);
+					continue;
 				}
 			}
 			catch(...){}
+			//Add as ObjectAny
+			std::shared_ptr<EObjectAny> anyObject= ecore::ecoreFactory::eInstance()->createEObjectAny();
+			anyObject->setAny(anyValue);
+			returnList->push_back(anyObject);;
 		}
-
 	}
 	return returnList;
 	//end of body
@@ -236,9 +241,7 @@ Any EObjectImpl::eInvoke(std::shared_ptr<ecore::EOperation> operation,std::share
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	  std::cout << __PRETTY_FUNCTION__  << std::endl;
-
-  Any result;
+	  Any result;
   result = this->eInvoke(operation->getOperationID(), arguments);
 
   return result;
@@ -567,7 +570,7 @@ Any EObjectImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argume
 		// ecore::EObject::eAllContents() : Any {const}: 345308248
 		case ecorePackage::EOBJECT_OPERATION_EALLCONTENTS:
 		{
-			result = eAny(this->eAllContents(),0,false);
+			result = this->eAllContents();
 			break;
 		}
 		// ecore::EObject::eClass() : ecore::EClass {const}: 1897829605
@@ -687,6 +690,7 @@ Any EObjectImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argume
 			std::list<Any>::const_iterator incoming_param_newValue_arguments_citer = std::next(arguments->begin(), 1);
 			incoming_param_newValue = (*incoming_param_newValue_arguments_citer)->get<Any >();
 			this->eSet(incoming_param_feature,incoming_param_newValue);
+			break;
 		}
 		// ecore::EObject::eUnset(ecore::EStructuralFeature) {const}: 640572767
 		case ecorePackage::EOBJECT_OPERATION_EUNSET_ESTRUCTURALFEATURE:
@@ -697,6 +701,7 @@ Any EObjectImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argume
 			std::list<Any>::const_iterator incoming_param_feature_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_feature = (*incoming_param_feature_arguments_citer)->get<std::shared_ptr<ecore::EStructuralFeature> >();
 			this->eUnset(incoming_param_feature);
+			break;
 		}
 
 		default:

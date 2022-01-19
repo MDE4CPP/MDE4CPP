@@ -305,7 +305,7 @@ Any OperationTemplateParameterImpl::eInvoke(int operationID, std::shared_ptr<std
 		{
 			// call superTypes
 			result = TemplateParameterImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			break;
 		}

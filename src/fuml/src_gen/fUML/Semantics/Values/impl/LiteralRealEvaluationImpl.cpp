@@ -261,7 +261,7 @@ Any LiteralRealEvaluationImpl::eInvoke(int operationID, std::shared_ptr<std::lis
 		{
 			// call superTypes
 			result = LiteralEvaluationImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			break;
 		}

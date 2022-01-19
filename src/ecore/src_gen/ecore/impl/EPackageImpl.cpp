@@ -490,20 +490,20 @@ Any EPackageImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case ecore::ecorePackage::EPACKAGE_ATTRIBUTE_ECLASSIFIERS:
-			return eAnyBag(getEClassifiers(),ecore::ecorePackage::ECLASSIFIER_CLASS); //438
+			return eAnyBag(getEClassifiers(),ecore::ecorePackage::ECLASSIFIER_CLASS); //448
 		case ecore::ecorePackage::EPACKAGE_ATTRIBUTE_EFACTORYINSTANCE:
-			return eAny(getEFactoryInstance(),ecore::ecorePackage::EFACTORY_CLASS,false); //437
+			return eAny(getEFactoryInstance(),ecore::ecorePackage::EFACTORY_CLASS,false); //447
 		case ecore::ecorePackage::EPACKAGE_ATTRIBUTE_ESUBPACKAGES:
-			return eAnyBag(getESubpackages(),ecore::ecorePackage::EPACKAGE_CLASS); //439
+			return eAnyBag(getESubpackages(),ecore::ecorePackage::EPACKAGE_CLASS); //449
 		case ecore::ecorePackage::EPACKAGE_ATTRIBUTE_ESUPERPACKAGE:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getESuperPackage().lock();
-			return eAny(returnValue,ecore::ecorePackage::EPACKAGE_CLASS,false); //4310
+			return eAny(returnValue,ecore::ecorePackage::EPACKAGE_CLASS,false); //4410
 		}
 		case ecore::ecorePackage::EPACKAGE_ATTRIBUTE_NSPREFIX:
-			return eAny(getNsPrefix(),ecore::ecorePackage::ESTRING_CLASS,false); //436
+			return eAny(getNsPrefix(),ecore::ecorePackage::ESTRING_CLASS,false); //446
 		case ecore::ecorePackage::EPACKAGE_ATTRIBUTE_NSURI:
-			return eAny(getNsURI(),ecore::ecorePackage::ESTRING_CLASS,false); //435
+			return eAny(getNsURI(),ecore::ecorePackage::ESTRING_CLASS,false); //445
 	}
 	return ENamedElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -513,17 +513,17 @@ bool EPackageImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case ecore::ecorePackage::EPACKAGE_ATTRIBUTE_ECLASSIFIERS:
-			return getEClassifiers() != nullptr; //438
+			return getEClassifiers() != nullptr; //448
 		case ecore::ecorePackage::EPACKAGE_ATTRIBUTE_EFACTORYINSTANCE:
-			return getEFactoryInstance() != nullptr; //437
+			return getEFactoryInstance() != nullptr; //447
 		case ecore::ecorePackage::EPACKAGE_ATTRIBUTE_ESUBPACKAGES:
-			return getESubpackages() != nullptr; //439
+			return getESubpackages() != nullptr; //449
 		case ecore::ecorePackage::EPACKAGE_ATTRIBUTE_ESUPERPACKAGE:
-			return getESuperPackage().lock() != nullptr; //4310
+			return getESuperPackage().lock() != nullptr; //4410
 		case ecore::ecorePackage::EPACKAGE_ATTRIBUTE_NSPREFIX:
-			return getNsPrefix() != ""; //436
+			return getNsPrefix() != ""; //446
 		case ecore::ecorePackage::EPACKAGE_ATTRIBUTE_NSURI:
-			return getNsURI() != ""; //435
+			return getNsURI() != ""; //445
 	}
 	return ENamedElementImpl::internalEIsSet(featureID);
 }
@@ -574,7 +574,7 @@ bool EPackageImpl::eSet(int featureID, Any newValue)
 			// CAST Any to ecore::EFactory
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<ecore::EFactory> _eFactoryInstance = std::dynamic_pointer_cast<ecore::EFactory>(_temp);
-			setEFactoryInstance(_eFactoryInstance); //437
+			setEFactoryInstance(_eFactoryInstance); //447
 			return true;
 		}
 		case ecore::ecorePackage::EPACKAGE_ATTRIBUTE_ESUBPACKAGES:
@@ -618,14 +618,14 @@ bool EPackageImpl::eSet(int featureID, Any newValue)
 		{
 			// CAST Any to std::string
 			std::string _nsPrefix = newValue->get<std::string>();
-			setNsPrefix(_nsPrefix); //436
+			setNsPrefix(_nsPrefix); //446
 			return true;
 		}
 		case ecore::ecorePackage::EPACKAGE_ATTRIBUTE_NSURI:
 		{
 			// CAST Any to std::string
 			std::string _nsURI = newValue->get<std::string>();
-			setNsURI(_nsURI); //435
+			setNsURI(_nsURI); //445
 			return true;
 		}
 	}
@@ -658,7 +658,7 @@ Any EPackageImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argum
 		{
 			// call superTypes
 			result = ENamedElementImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			break;
 		}

@@ -322,18 +322,20 @@ Any OpaqueBehaviorExecutionImpl::eInvoke(int operationID, std::shared_ptr<std::l
 			std::list<Any>::const_iterator incoming_param_outputParameters_arguments_citer = std::next(arguments->begin(), 1);
 			incoming_param_outputParameters = (*incoming_param_outputParameters_arguments_citer)->get<std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> >();
 			this->doBody(incoming_param_inputParameters,incoming_param_outputParameters);
+			break;
 		}
 		// fUML::Semantics::CommonBehavior::OpaqueBehaviorExecution::execute(): 249216936
 		case CommonBehaviorPackage::OPAQUEBEHAVIOREXECUTION_OPERATION_EXECUTE:
 		{
 			this->execute();
+			break;
 		}
 
 		default:
 		{
 			// call superTypes
 			result = ExecutionImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			break;
 		}

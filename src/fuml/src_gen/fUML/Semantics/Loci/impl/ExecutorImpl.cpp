@@ -412,7 +412,7 @@ Any ExecutorImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argum
 		{
 			// call superTypes
 			result = ecore::EModelElementImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			break;
 		}

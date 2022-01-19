@@ -446,11 +446,13 @@ Any ObjectNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list
 			std::list<Any>::const_iterator incoming_param_token_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_token = (*incoming_param_token_arguments_citer)->get<std::shared_ptr<fUML::Semantics::Activities::Token> >();
 			this->addToken(incoming_param_token);
+			break;
 		}
 		// fUML::Semantics::Activities::ObjectNodeActivation::clearTokens(): 1055175964
 		case ActivitiesPackage::OBJECTNODEACTIVATION_OPERATION_CLEARTOKENS:
 		{
 			this->clearTokens();
+			break;
 		}
 		// fUML::Semantics::Activities::ObjectNodeActivation::countOfferedValues() : int: 1194886204
 		case ActivitiesPackage::OBJECTNODEACTIVATION_OPERATION_COUNTOFFEREDVALUES:
@@ -486,6 +488,7 @@ Any ObjectNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list
 		case ActivitiesPackage::OBJECTNODEACTIVATION_OPERATION_RUN:
 		{
 			this->run();
+			break;
 		}
 		// fUML::Semantics::Activities::ObjectNodeActivation::sendOffers(fUML::Semantics::Activities::Token[*]): 913937355
 		case ActivitiesPackage::OBJECTNODEACTIVATION_OPERATION_SENDOFFERS_TOKEN:
@@ -496,11 +499,13 @@ Any ObjectNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list
 			std::list<Any>::const_iterator incoming_param_tokens_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_tokens = (*incoming_param_tokens_arguments_citer)->get<std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> >();
 			this->sendOffers(incoming_param_tokens);
+			break;
 		}
 		// fUML::Semantics::Activities::ObjectNodeActivation::sendUnofferedTokens(): 1509347969
 		case ActivitiesPackage::OBJECTNODEACTIVATION_OPERATION_SENDUNOFFEREDTOKENS:
 		{
 			this->sendUnofferedTokens();
+			break;
 		}
 		// fUML::Semantics::Activities::ObjectNodeActivation::takeUnofferedTokens() : fUML::Semantics::Activities::Token[*]: 622563877
 		case ActivitiesPackage::OBJECTNODEACTIVATION_OPERATION_TAKEUNOFFEREDTOKENS:
@@ -513,13 +518,14 @@ Any ObjectNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list
 		case ActivitiesPackage::OBJECTNODEACTIVATION_OPERATION_TERMINATE:
 		{
 			this->terminate();
+			break;
 		}
 
 		default:
 		{
 			// call superTypes
 			result = ActivityNodeActivationImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result && !result->isEmpty())
 				break;
 			break;
 		}
