@@ -1565,7 +1565,7 @@ void ecorePackageImpl::initializeEObjectContent()
 	
 	m_eObject_Operation_eAllContents->setName("eAllContents");
 	m_eObject_Operation_eAllContents->setEType(getEJavaObject_Class());
-	m_eObject_Operation_eAllContents->setLowerBound(0);
+	m_eObject_Operation_eAllContents->setLowerBound(1);
 	m_eObject_Operation_eAllContents->setUpperBound(1);
 	m_eObject_Operation_eAllContents->setUnique(true);
 	m_eObject_Operation_eAllContents->setOrdered(true);

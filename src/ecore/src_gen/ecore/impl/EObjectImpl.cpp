@@ -618,7 +618,7 @@ Any EObjectImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argume
 			std::shared_ptr<ecore::EStructuralFeature> incoming_param_feature;
 			std::list<Any>::const_iterator incoming_param_feature_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_feature = (*incoming_param_feature_arguments_citer)->get<std::shared_ptr<ecore::EStructuralFeature> >();
-			result = eAny(this->eGet(incoming_param_feature),0,false);
+			result = this->eGet(incoming_param_feature);
 			break;
 		}
 		// ecore::EObject::eGet(ecore::EStructuralFeature, bool) : Any {const}: 728807147
@@ -634,7 +634,7 @@ Any EObjectImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argume
 			bool incoming_param_resolve;
 			std::list<Any>::const_iterator incoming_param_resolve_arguments_citer = std::next(arguments->begin(), 1);
 			incoming_param_resolve = (*incoming_param_resolve_arguments_citer)->get<bool >();
-			result = eAny(this->eGet(incoming_param_feature,incoming_param_resolve),0,false);
+			result = this->eGet(incoming_param_feature,incoming_param_resolve);
 			break;
 		}
 		// ecore::EObject::eInvoke(ecore::EOperation, std::list) : Any: 447398534
@@ -650,7 +650,7 @@ Any EObjectImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argume
 			std::shared_ptr<std::list < Any>> incoming_param_arguments;
 			std::list<Any>::const_iterator incoming_param_arguments_arguments_citer = std::next(arguments->begin(), 1);
 			incoming_param_arguments = (*incoming_param_arguments_arguments_citer)->get<std::shared_ptr<std::list < Any>> >();
-			result = eAny(this->eInvoke(incoming_param_operation,incoming_param_arguments),0,false);
+			result = this->eInvoke(incoming_param_operation,incoming_param_arguments);
 			break;
 		}
 		// ecore::EObject::eIsProxy() : bool {const}: 780766387

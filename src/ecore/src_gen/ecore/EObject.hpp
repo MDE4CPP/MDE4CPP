@@ -155,11 +155,11 @@ public:
 	{
 		if(2051543432==this->getTypeId())  /*ecore::ecorePackage::EOBJECT_CLASS*/
 		{
-			try // can be: Bag, Subset, SubsetUnioon or Union // for Subset complete template signature are needed
+			try // can be: Bag, Subset, SubsetUnion or Union // for Subset complete template signature are needed
 			{
 				return this->get<std::shared_ptr<Bag<ecore::EObject>>>();
 			} catch(...){}
-			try // can be: Bag, Subset, SubsetUnioon or Union
+			try // can be: Bag, Subset, SubsetUnion or Union
 			{
 				return this->get<std::shared_ptr<Union<ecore::EObject>>>();
 			} catch(...){}

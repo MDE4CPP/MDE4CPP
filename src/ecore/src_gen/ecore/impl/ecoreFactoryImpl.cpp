@@ -717,6 +717,7 @@ std::shared_ptr<EAnnotation> ecoreFactoryImpl::createEAnnotation_as_eContentUnio
 std::shared_ptr<EAttribute> ecoreFactoryImpl::createEAttribute(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<EAttributeImpl> element(new EAttributeImpl());
+	element->setMetaElementID(ecore::ecorePackage::EATTRIBUTE_CLASS);
 	element->setFeatureID(metaElementID);
 	element->setThisEAttributePtr(element);
 	return element;
@@ -724,6 +725,7 @@ std::shared_ptr<EAttribute> ecoreFactoryImpl::createEAttribute(const int metaEle
 std::shared_ptr<EAttribute> ecoreFactoryImpl::createEAttribute_as_contents_in_EAnnotation(std::shared_ptr<EAnnotation> par_EAnnotation, const int metaElementID) const
 {
 	std::shared_ptr<EAttributeImpl> element(new EAttributeImpl());
+	element->setMetaElementID(ecore::ecorePackage::EATTRIBUTE_CLASS);
 	element->setFeatureID(metaElementID);
 	if(nullptr != par_EAnnotation)
 	{
@@ -737,6 +739,7 @@ std::shared_ptr<EAttribute> ecoreFactoryImpl::createEAttribute_as_contents_in_EA
 std::shared_ptr<EAttribute> ecoreFactoryImpl::createEAttribute_as_eAttributes_in_EClass(std::shared_ptr<EClass> par_EClass, const int metaElementID) const
 {
 	std::shared_ptr<EAttributeImpl> element(new EAttributeImpl());
+	element->setMetaElementID(ecore::ecorePackage::EATTRIBUTE_CLASS);
 	element->setFeatureID(metaElementID);
 	if(nullptr != par_EClass)
 	{
@@ -750,6 +753,7 @@ std::shared_ptr<EAttribute> ecoreFactoryImpl::createEAttribute_as_eAttributes_in
 std::shared_ptr<EAttribute> ecoreFactoryImpl::createEAttribute_as_eContentUnion_in_EObject(std::weak_ptr<ecore::EObject> par_EObject, const int metaElementID) const
 {
 	std::shared_ptr<EAttributeImpl> element(new EAttributeImpl(par_EObject));
+	element->setMetaElementID(ecore::ecorePackage::EATTRIBUTE_CLASS);
 	element->setFeatureID(metaElementID);
 	if(auto wp = par_EObject.lock())
 	{
@@ -763,6 +767,7 @@ std::shared_ptr<EAttribute> ecoreFactoryImpl::createEAttribute_as_eContentUnion_
 std::shared_ptr<EAttribute> ecoreFactoryImpl::createEAttribute_as_eStructuralFeatures_in_EClass(std::weak_ptr<ecore::EClass> par_EClass, const int metaElementID) const
 {
 	std::shared_ptr<EAttributeImpl> element(new EAttributeImpl(par_EClass));
+	element->setMetaElementID(ecore::ecorePackage::EATTRIBUTE_CLASS);
 	element->setFeatureID(metaElementID);
 	if(auto wp = par_EClass.lock())
 	{
@@ -1190,6 +1195,7 @@ std::shared_ptr<EObjectContainer> ecoreFactoryImpl::createEObjectContainer_as_eC
 std::shared_ptr<EOperation> ecoreFactoryImpl::createEOperation(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<EOperationImpl> element(new EOperationImpl());
+	element->setMetaElementID(ecore::ecorePackage::EOPERATION_CLASS);
 	element->setOperationID(metaElementID);
 	element->setThisEOperationPtr(element);
 	return element;
@@ -1197,6 +1203,7 @@ std::shared_ptr<EOperation> ecoreFactoryImpl::createEOperation(const int metaEle
 std::shared_ptr<EOperation> ecoreFactoryImpl::createEOperation_as_contents_in_EAnnotation(std::shared_ptr<EAnnotation> par_EAnnotation, const int metaElementID) const
 {
 	std::shared_ptr<EOperationImpl> element(new EOperationImpl());
+	element->setMetaElementID(ecore::ecorePackage::EOPERATION_CLASS);
 	element->setOperationID(metaElementID);
 	if(nullptr != par_EAnnotation)
 	{
@@ -1210,6 +1217,7 @@ std::shared_ptr<EOperation> ecoreFactoryImpl::createEOperation_as_contents_in_EA
 std::shared_ptr<EOperation> ecoreFactoryImpl::createEOperation_as_eContentUnion_in_EObject(std::weak_ptr<ecore::EObject> par_EObject, const int metaElementID) const
 {
 	std::shared_ptr<EOperationImpl> element(new EOperationImpl(par_EObject));
+	element->setMetaElementID(ecore::ecorePackage::EOPERATION_CLASS);
 	element->setOperationID(metaElementID);
 	if(auto wp = par_EObject.lock())
 	{
@@ -1223,6 +1231,7 @@ std::shared_ptr<EOperation> ecoreFactoryImpl::createEOperation_as_eContentUnion_
 std::shared_ptr<EOperation> ecoreFactoryImpl::createEOperation_as_eOperations_in_EClass(std::weak_ptr<ecore::EClass> par_EClass, const int metaElementID) const
 {
 	std::shared_ptr<EOperationImpl> element(new EOperationImpl(par_EClass));
+	element->setMetaElementID(ecore::ecorePackage::EOPERATION_CLASS);
 	element->setOperationID(metaElementID);
 	if(auto wp = par_EClass.lock())
 	{
@@ -1328,6 +1337,7 @@ std::shared_ptr<EParameter> ecoreFactoryImpl::createEParameter_as_eParameters_in
 std::shared_ptr<EReference> ecoreFactoryImpl::createEReference(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<EReferenceImpl> element(new EReferenceImpl());
+	element->setMetaElementID(ecore::ecorePackage::EREFERENCE_CLASS);
 	element->setFeatureID(metaElementID);
 	element->setThisEReferencePtr(element);
 	return element;
@@ -1335,6 +1345,7 @@ std::shared_ptr<EReference> ecoreFactoryImpl::createEReference(const int metaEle
 std::shared_ptr<EReference> ecoreFactoryImpl::createEReference_as_contents_in_EAnnotation(std::shared_ptr<EAnnotation> par_EAnnotation, const int metaElementID) const
 {
 	std::shared_ptr<EReferenceImpl> element(new EReferenceImpl());
+	element->setMetaElementID(ecore::ecorePackage::EREFERENCE_CLASS);
 	element->setFeatureID(metaElementID);
 	if(nullptr != par_EAnnotation)
 	{
@@ -1348,6 +1359,7 @@ std::shared_ptr<EReference> ecoreFactoryImpl::createEReference_as_contents_in_EA
 std::shared_ptr<EReference> ecoreFactoryImpl::createEReference_as_eContentUnion_in_EObject(std::weak_ptr<ecore::EObject> par_EObject, const int metaElementID) const
 {
 	std::shared_ptr<EReferenceImpl> element(new EReferenceImpl(par_EObject));
+	element->setMetaElementID(ecore::ecorePackage::EREFERENCE_CLASS);
 	element->setFeatureID(metaElementID);
 	if(auto wp = par_EObject.lock())
 	{
@@ -1361,6 +1373,7 @@ std::shared_ptr<EReference> ecoreFactoryImpl::createEReference_as_eContentUnion_
 std::shared_ptr<EReference> ecoreFactoryImpl::createEReference_as_eReferences_in_EClass(std::shared_ptr<EClass> par_EClass, const int metaElementID) const
 {
 	std::shared_ptr<EReferenceImpl> element(new EReferenceImpl());
+	element->setMetaElementID(ecore::ecorePackage::EREFERENCE_CLASS);
 	element->setFeatureID(metaElementID);
 	if(nullptr != par_EClass)
 	{
@@ -1374,6 +1387,7 @@ std::shared_ptr<EReference> ecoreFactoryImpl::createEReference_as_eReferences_in
 std::shared_ptr<EReference> ecoreFactoryImpl::createEReference_as_eStructuralFeatures_in_EClass(std::weak_ptr<ecore::EClass> par_EClass, const int metaElementID) const
 {
 	std::shared_ptr<EReferenceImpl> element(new EReferenceImpl(par_EClass));
+	element->setMetaElementID(ecore::ecorePackage::EREFERENCE_CLASS);
 	element->setFeatureID(metaElementID);
 	if(auto wp = par_EClass.lock())
 	{
