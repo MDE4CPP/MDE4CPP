@@ -127,7 +127,7 @@ std::string EFactoryImpl::convertToString(std::shared_ptr<ecore::EDataType> eDat
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-			std::ostringstream returnStringStream;
+	std::ostringstream returnStringStream;
 	bool handled=false;
 	if(!instanceValue->isEmpty())
 	{

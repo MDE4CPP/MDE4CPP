@@ -143,7 +143,7 @@ std::string ObjectValueImpl::toString()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	if(m_value != nullptr) {
+		if(m_value != nullptr) {
         uml::NamedElement* uname = dynamic_cast<uml::NamedElement*>(m_value.get());
         if(uname != nullptr) {
             uml::Operation* uope = dynamic_cast<uml::Operation*>(m_value.get());
@@ -229,6 +229,7 @@ std::string ObjectValueImpl::toString()
         }
     }
     return "";
+
 	//end of body
 }
 

@@ -203,7 +203,7 @@ bool ecore_query2() {
     a2->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 
     std::cout << "START Query_2(context = EClass): " << qry << std::endl;
-    bool returnValue = query(qry, context, "<EAttribute> a1 : Integer [0..*]\n<EAttribute> a2 : Boolean [0..1]");
+    bool returnValue = query(qry, context, "<EAttribute>:a1:Integer[0..*]\n<EAttribute>:a2:Boolean[0..1]");
     std::cout << "END Query_2 -------------------------------------------\n" << std::endl;
     return returnValue;
 }
@@ -220,7 +220,7 @@ bool ecore_query3() {
     context->setEType(types::typesPackage::eInstance()->getInteger_Class());
 
     std::cout << "START Query_3(context = EAttribute): " << qry << std::endl;
-    bool returnValue=query(qry, context, "EClassifier");
+    bool returnValue=query(qry, context, "Integer");
     std::cout << "END Query_3 -------------------------------------------\n" << std::endl;
     return returnValue;
 }
@@ -243,7 +243,7 @@ bool ecore_query4() {
     p2->setEType(types::typesPackage::eInstance()->getReal_Class());
 
     std::cout << "START Query_4(context = EOperation): " << qry << std::endl;
-    bool returnValue=query(qry, context, "o1(p1 : String, p2 : Real)");
+    bool returnValue=query(qry, context, "o1(p1:String, p2:Real)");
     std::cout << "END Query_4 -------------------------------------------\n" << std::endl;
     return returnValue;
 }
@@ -319,12 +319,11 @@ bool ecore_any_query3() {
     context->setUpperBound(-1);
     context->setEType(types::typesPackage::eInstance()->getInteger_Class());
 
-    Any value = queryValue(qry, context);
-
     std::cout << "START Query_Any_3(context = EAttribute): " << qry << std::endl;
+    Any value = queryValue(qry, context);
     std::string resultStr = printEcore(value);
     std::cout << resultStr;
-    (resultStr.compare("EClassifier\n") == 0) ? returnValue = true : returnValue =  false;
+    (resultStr.compare("Integer\n") == 0) ? returnValue = true : returnValue =  false;
     returnValue ? std::cout << "success" << std::endl : std::cout << "fail" << std::endl;
     std::cout << "END Query_Any_3 -------------------------------------------\n" << std::endl;
     return returnValue;
@@ -479,7 +478,7 @@ bool uml_query2() {
     p2->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_String());
 
     std::cout << "START UML Query_2(context = Class): " << qry << std::endl;
-    bool returnValue=query(qry,context, "<Property> a1 : Integer [0..*]\n<Property> a2 : Boolean [1..1]\n<Operation> o1(p1 : String [1..1], p2 : String [0..*])");
+    bool returnValue=query(qry,context, "<Property>:a1:Integer[0..*]\n<Property>:a2:Boolean[1..1]\n<Operation>:o1(p1:String[1..1], p2:String[0..*])");
     std::cout << "END UML Query_2 -------------------------------------------\n" << std::endl;
     return returnValue;
 }
@@ -521,7 +520,7 @@ bool  uml_query4() {
     p2->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_String());
 
     std::cout << "START UML Query_4(context = Operation): " << qry << std::endl;
-    bool returnValue=query(qry, context, "<Operation> o1(p1 : String [1..1], p2 : String [0..*])");
+    bool returnValue=query(qry, context, "<Operation>:o1(p1:String[1..1], p2:String[0..*])");
     std::cout << "END UML Query_4 -------------------------------------------\n" << std::endl;
     return returnValue;
 }

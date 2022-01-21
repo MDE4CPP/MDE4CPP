@@ -438,6 +438,12 @@ std::shared_ptr<fUML::Semantics::Values::Value> OclReflection::createValue(std::
 						return createValue(obj);
 						break;
 					}
+					case ecore::ecorePackage::ECLASSIFIER_CLASS:
+					{
+						std::shared_ptr<ecore::EClassifier> obj = value->get<std::shared_ptr<ecore::EClassifier>>();
+						return createValue(obj);
+						break;
+					}
 					case ecore::ecorePackage::ECLASS_CLASS:
 					{
 						std::shared_ptr<ecore::EClass> obj = value->get<std::shared_ptr<ecore::EClass>>();
