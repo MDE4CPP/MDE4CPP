@@ -148,17 +148,17 @@ std::string ObjectValueImpl::toString()
         if(uname != nullptr) {
             uml::Operation* uope = dynamic_cast<uml::Operation*>(m_value.get());
             if(uope != nullptr) {
-                std::string result = "<Operation> " + uope->getName() + "(";
+                std::string result = "<Operation>:" + uope->getName() + "(";
                 Bag<uml::Parameter>* ebag = dynamic_cast<Bag<uml::Parameter>*>(uope->getOwnedParameter().get());
                 for(unsigned int i = 0; i < ebag->size(); i++) {
                     if(i > 0) result += ", ";
-                    result += ebag->at(i)->getName() + " : ";
+                    result += ebag->at(i)->getName() + ":";
                     if(ebag->at(i)->getType() != nullptr) {
                         if(ebag->at(i)->getUpper() > 1 || ebag->at(i)->getUpper() < 0)
-                            result += ebag->at(i)->getType()->getName()+ " ["
+                            result += ebag->at(i)->getType()->getName()+ "["
                                 +  std::to_string(ebag->at(i)->getLower()) + "..*]";
                         else
-                            result += ebag->at(i)->getType()->getName()+ " ["
+                            result += ebag->at(i)->getType()->getName()+ "["
                                 +  std::to_string(ebag->at(i)->getLower()) + ".." + std::to_string(ebag->at(i)->getUpper()) + "]";
                     }
                     else
@@ -170,15 +170,15 @@ std::string ObjectValueImpl::toString()
             uml::Property* uprop = dynamic_cast<uml::Property*>(m_value.get());
             if(uprop != nullptr) {
                 if(uprop->getUpper() > 1 || uprop->getUpper() < 0)
-                    return "<Property> " + uprop->getName() + " : " + uprop->getType()->getName() + " ["
+                    return "<Property>:" + uprop->getName() + ":" + uprop->getType()->getName() + "["
                         +  std::to_string(uprop->getLower()) + "..*]";
                 else
-                    return "<Property> " + uprop->getName() + " : " + uprop->getType()->getName() + " ["
+                    return "<Property>:" + uprop->getName() + ":" + uprop->getType()->getName() + "["
                         +  std::to_string(uprop->getLower()) + ".." + std::to_string(uprop->getUpper()) + "]";
             }
             uml::TypedElement* utyped = dynamic_cast<uml::TypedElement*>(m_value.get());
             if(utyped != nullptr) {
-                return utyped->getName() + " : " + utyped->getType()->getName();
+                return utyped->getName() + ":" + utyped->getType()->getName();
             }
             return uname->getName();
         }
@@ -189,7 +189,7 @@ std::string ObjectValueImpl::toString()
             Bag<ecore::EParameter>* ebag = dynamic_cast<Bag<ecore::EParameter>*>(eope->getEParameters().get());
             for(unsigned int i = 0; i < ebag->size(); i++) {
                 if(i > 0) result += ", ";
-                result += ebag->at(i)->getName() + " : ";
+                result += ebag->at(i)->getName() + ":";
                 if(ebag->at(i)->getEType() != nullptr)
                     result += ebag->at(i)->getEType()->getName();
                 else
@@ -201,27 +201,27 @@ std::string ObjectValueImpl::toString()
         ecore::EAttribute* eattr = dynamic_cast<ecore::EAttribute*>(m_value.get());
         if(eattr != nullptr) {
             if(eattr->getUpperBound() > 1 || eattr->getUpperBound() < 0)
-                return "<EAttribute> " + eattr->getName() + " : " + eattr->getEType()->getName()+ " ["
+                return "<EAttribute>:" + eattr->getName() + ":" + eattr->getEType()->getName()+ "["
                     +  std::to_string(eattr->getLowerBound()) + "..*]";
             else
-                return "<EAttribute> " + eattr->getName() + " : " + eattr->getEType()->getName()+ " ["
+                return "<EAttribute>:" + eattr->getName() + ":" + eattr->getEType()->getName()+ "["
                         +  std::to_string(eattr->getLowerBound()) + ".." + std::to_string(eattr->getUpperBound()) + "]";
         }
         ecore::EReference* eref = dynamic_cast<ecore::EReference*>(m_value.get());
         if(eref != nullptr) {
             if(eref->getUpperBound() > 1 || eref->getUpperBound() < 0)
-                return "<EReference> " + eref->getName() + " : " + eref->getEType()->getName()+ " ["
+                return "<EReference>:" + eref->getName() + ":" + eref->getEType()->getName()+ "["
                     +  std::to_string(eref->getLowerBound()) + "..*]";
             else
-                return "<EReference> " + eref->getName() + " : " + eref->getEType()->getName()+ " ["
+                return "<EReference>:" + eref->getName() + ":" + eref->getEType()->getName()+ "["
                     +  std::to_string(eref->getLowerBound()) + ".." + std::to_string(eref->getUpperBound()) + "]";
         }
         ecore::ETypedElement* etyped = dynamic_cast<ecore::ETypedElement*>(m_value.get());
         if(etyped != nullptr) {
             if(etyped->isMany())
-                return etyped->getName() + " : " + etyped->getEType()->getName()+ " [0..*]";
+                return etyped->getName() + ":" + etyped->getEType()->getName()+ "[0..*]";
             else
-                return etyped->getName() + " : " + etyped->getEType()->getName()+ " [0..1]";
+                return etyped->getName() + ":" + etyped->getEType()->getName()+ "[0..1]";
         }
         ecore::ENamedElement* ename = dynamic_cast<ecore::ENamedElement*>(m_value.get());
         if(ename != nullptr) {

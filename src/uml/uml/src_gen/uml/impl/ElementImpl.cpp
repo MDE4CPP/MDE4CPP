@@ -900,7 +900,7 @@ Any ElementImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argume
 			std::string incoming_param_propertyName;
 			std::list<Any>::const_iterator incoming_param_propertyName_arguments_citer = std::next(arguments->begin(), 1);
 			incoming_param_propertyName = (*incoming_param_propertyName_arguments_citer)->get<std::string >();
-			result = eAny(this->getValue(incoming_param_stereotype,incoming_param_propertyName),0,false);
+			result = this->getValue(incoming_param_stereotype,incoming_param_propertyName);
 			break;
 		}
 		// uml::Element::hasKeyword(std::string) : bool: 1540083846

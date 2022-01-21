@@ -20,6 +20,7 @@
 #include <ecore/EPackage.hpp>
 #include <ecore/ecorePackage.hpp>
 #include <ecore/EClassifier.hpp>
+#include <ecore/EObjectContainer.hpp>
 #include <ecore/EEnum.hpp>
 #include <ecore/EClass.hpp>
 #include <ecore/EReference.hpp>
@@ -96,9 +97,9 @@ std::string printEAttribute(std::shared_ptr<ecore::EAttribute> eattr) {
 	std::ostringstream returnStringStream;
     if(eattr != nullptr) {
         if(eattr->getUpperBound() > 1 || eattr->getUpperBound() < 0)
-        	returnStringStream << "<EAttribute> " + eattr->getName() + " : " + eattr->getEType()->getName()+ " [" +  std::to_string(eattr->getLowerBound()) + "..*]" << std::endl;
+        	returnStringStream << "<EAttribute>:" + eattr->getName() + ":" + eattr->getEType()->getName()+ "[" +  std::to_string(eattr->getLowerBound()) + "..*]" << std::endl;
         else
-        	returnStringStream << "<EAttribute> " + eattr->getName() + " : " + eattr->getEType()->getName()+ " [" +  std::to_string(eattr->getLowerBound()) + ".." + std::to_string(eattr->getUpperBound()) + "]" << std::endl;
+        	returnStringStream << "<EAttribute>:" + eattr->getName() + ":" + eattr->getEType()->getName()+ "[" +  std::to_string(eattr->getLowerBound()) + ".." + std::to_string(eattr->getUpperBound()) + "]" << std::endl;
     }
 	return returnStringStream.str();
 }
@@ -107,9 +108,9 @@ std::string printEReference(std::shared_ptr<ecore::EReference> eref) {
 	std::ostringstream returnStringStream;
     if(eref != nullptr) {
         if(eref->getUpperBound() > 1 || eref->getUpperBound() < 0)
-        	returnStringStream << "<EReference> " + eref->getName() + " : " + eref->getEType()->getName()+ " [" +  std::to_string(eref->getLowerBound()) + "..*]" << std::endl;
+        	returnStringStream << "<EReference>:" + eref->getName() + ":" + eref->getEType()->getName()+ "[" +  std::to_string(eref->getLowerBound()) + "..*]" << std::endl;
         else
-        	returnStringStream << "<EReference> " + eref->getName() + " : " + eref->getEType()->getName()+ " [" +  std::to_string(eref->getLowerBound()) + ".." + std::to_string(eref->getUpperBound()) + "]" << std::endl;
+        	returnStringStream << "<EReference>:" + eref->getName() + ":" + eref->getEType()->getName()+ "[" +  std::to_string(eref->getLowerBound()) + ".." + std::to_string(eref->getUpperBound()) + "]" << std::endl;
     }
 	return returnStringStream.str();
 }
@@ -118,9 +119,9 @@ std::string  printETypedElement(std::shared_ptr<ecore::ETypedElement> etyped) {
 	std::ostringstream returnStringStream;
     if(etyped != nullptr) {
         if(etyped->isMany())
-        	returnStringStream << etyped->getName() + " : " + etyped->getEType()->getName()+ " [0..*]" << std::endl;
+        	returnStringStream << etyped->getName() + ":" + etyped->getEType()->getName()+ "[0..*]" << std::endl;
         else
-        	returnStringStream << etyped->getName() + " : " + etyped->getEType()->getName()+ " [0..1]" << std::endl;
+        	returnStringStream << etyped->getName() + ":" + etyped->getEType()->getName()+ "[0..1]" << std::endl;
     }
 	return returnStringStream.str();
 }
@@ -136,11 +137,11 @@ std::string printENamedElement(std::shared_ptr<ecore::ENamedElement> ename) {
 std::string printEOperation(std::shared_ptr<ecore::EOperation> eope) {
 	std::string result="";
     if(eope != nullptr) {
-        result = "<Operation> " + eope->getName() + "(";
+        result = "<Operation>:" + eope->getName() + "(";
         std::shared_ptr<Bag<ecore::EParameter>> ebag = std::dynamic_pointer_cast<Bag<ecore::EParameter>>(eope->getEParameters());
         for(unsigned int i = 0; i < ebag->size(); i++) {
             if(i > 0) result += ", ";
-            result += ebag->at(i)->getName() + " : ";
+            result += ebag->at(i)->getName() + ":";
             if(ebag->at(i)->getEType() != nullptr)
                 result += ebag->at(i)->getEType()->getName();
             else
@@ -148,7 +149,7 @@ std::string printEOperation(std::shared_ptr<ecore::EOperation> eope) {
         }
         result += ")";
         if(eope->getEType() != nullptr && eope->getEType()->getName() != "invalid")
-            result += " : " + eope->getEType()->getName();
+            result += ":" + eope->getEType()->getName();
     }
 	return result;
 }
@@ -182,16 +183,27 @@ std::string print(Any value) {
 				if(ename != nullptr) {
 					return printENamedElement(ename);
 				}
+				handled=true;
 				break;
 			}
-			//current supported type of EFactory
+			case ecore::ecorePackage::EOBJECTCONTAINER_CLASS:
+			{
+				std::shared_ptr<ecore::EObjectContainer> eObjectContainer = value->get<std::shared_ptr<ecore::EObjectContainer>>();
+				std::shared_ptr<Bag<ecore::EObject>> eObjectBag =  eObjectContainer->getContainer();
+				returnStringStream << "<EObjectContainer> size: " << eObjectBag->size() <<std::endl;
+				for(const std::shared_ptr<ecore::EObject> object: *eObjectBag)
+				{	// recursive Call of convertToString via new Any EObject Value
+					returnStringStream << "\t"<<print(eAny(object,ecore::ecorePackage::EOBJECT_CLASS,false))<<std::endl;
+				}
+				handled=true;
+				break;
+			}
 			case ecore::ecorePackage::ECLASS_CLASS:
 			case ecore::ecorePackage::EOBJECTANY_CLASS:
 			case ecore::ecorePackage::EATTRIBUTE_CLASS:
 			case ecore::ecorePackage::EREFERENCE_CLASS:
 			case ecore::ecorePackage::ESTRUCTURALFEATURE_CLASS:
 			case ecore::ecorePackage::EOPERATION_CLASS:
-			case ecore::ecorePackage::EOBJECTCONTAINER_CLASS:
 			case ecore::ecorePackage::EBOOLEANOBJECT_CLASS:
 			case ecore::ecorePackage::EBOOLEAN_CLASS:
 			case ecore::ecorePackage::EBYTE_CLASS:
@@ -353,7 +365,7 @@ bool query2() {
     std::string qry = "self.eAttributes";
     std::shared_ptr<ecore::EClass> context = BookStore_ecore::BookStore_ecorePackage::eInstance()->getLibrary_Class();
     std::cout << "START Query_2 (context[EClass] = Library): " << qry << std::endl;
-    bool returnValue=query(qry, context, "<EAttribute> name : String [0..1]\n<EAttribute> nbBooks : Integer [0..1]\n<EAttribute> opened : EBoolean [0..1]");
+    bool returnValue=query(qry, context, "<EAttribute>:name:String[0..1]\n<EAttribute>:nbBooks:Integer[0..1]\n<EAttribute>:opened:EBoolean[0..1]");
     std::cout << "END Query_2 -------------------------------------------\n" << std::endl;
     return returnValue;
 }
@@ -369,7 +381,7 @@ bool query4() {
     std::string qry = "self";
     std::shared_ptr<ecore::EReference> context = BookStore_ecore::BookStore_ecorePackage::eInstance()->getLibrary_Attribute_books();
     std::cout << "START Query_4 (context[EReference] = Book::books): " << qry << std::endl;
-    bool returnValue=query(qry,context, "<EReference> books : Book [0..*]");
+    bool returnValue=query(qry,context, "<EReference>:books:Book[0..*]");
     std::cout << "END Query_4 -------------------------------------------\n" << std::endl;
     return returnValue;
 }
@@ -377,7 +389,7 @@ bool query5() {
     std::string qry = "self";
     std::shared_ptr<ecore::EOperation> context = BookStore_ecore::BookStore_ecorePackage::eInstance()->getLibrary_Operation_addBook_Book();
     std::cout << "START Query_5 (context[EOperation] = Book::addBook): " << qry << std::endl;
-    bool returnValue=query(qry,context, "addBook(b : Book)");
+    bool returnValue=query(qry,context, "addBook(b:Book)");
     std::cout << "END Query_5 -------------------------------------------\n" << std::endl;
     return returnValue;
 }
@@ -419,7 +431,7 @@ bool ecore_any_query2() {
             std::cout << "Error : get failed" << std::endl;
         }
     }
-    (resultStr.compare("<EAttribute> name : String [0..1]\n<EAttribute> nbBooks : Integer [0..1]\n<EAttribute> opened : EBoolean [0..1]\n") == 0) ? returnValue =  true : returnValue =  false;
+    (resultStr.compare("<EAttribute>:name:String[0..1]\n<EAttribute>:nbBooks:Integer[0..1]\n<EAttribute>:opened:EBoolean[0..1]\n") == 0) ? returnValue =  true : returnValue =  false;
     returnValue ? std::cout << "success" << std::endl : std::cout << "fail" << std::endl;
 
     std::cout << "END Query_Any_2 -------------------------------------------\n" << std::endl;
@@ -456,9 +468,9 @@ bool ecore_any_query4() {
         std::cout << attrStr;
         resultStr +=attrStr;
     }
-	(resultStr.compare("<EReference> books : Book [0..*]\n") == 0) ? returnValue =  true : returnValue =  false;
+	(resultStr.compare("<EReference>:books:Book[0..*]\n") == 0) ? returnValue =  true : returnValue =  false;
 	returnValue ? std::cout << "success" << std::endl : std::cout << "fail" << std::endl;
-	std::cout << "END Query_4 -------------------------------------------\n" << std::endl;
+	std::cout << "END Query_Any__4 -------------------------------------------\n" << std::endl;
     return returnValue;
 }
 bool ecore_any_query5() {
@@ -478,9 +490,9 @@ bool ecore_any_query5() {
         resultStr +=attrStr;
 
     }
-	(resultStr.compare("<Operation> addBook(b : Book) : Boolean") == 0) ? returnValue =  true : returnValue =  false;
+	(resultStr.compare("<Operation>:addBook(b:Book):Boolean") == 0) ? returnValue =  true : returnValue =  false;
 	returnValue ? std::cout << std::endl<<"success" << std::endl : std::cout << std::endl << "fail" << std::endl;
-    std::cout << "END Query_5 -------------------------------------------\n" << std::endl;
+    std::cout << "END Query_Any_5 -------------------------------------------\n" << std::endl;
     return returnValue;
 }
 bool ecore_any_query6() {
@@ -493,7 +505,7 @@ bool ecore_any_query6() {
     std::cout << "START Query_Any_6 (context[EClass] = Library): " << qry << std::endl;
     std::string resultStr=print(value, true);
     std::cout << resultStr;
-	(resultStr.compare("<EAttribute> name : String [0..1]\n<EAttribute> nbBooks : Integer [0..1]\n<EAttribute> opened : EBoolean [0..1]\n<EReference> books : Book [0..*]\n<EReference> loans : Loan [0..*]\n<EReference> members : Member [0..*]\n<EReference> writers : Writer [0..*]\n") == 0) ? returnValue =  true : returnValue =  false;
+	(resultStr.compare("<EAttribute>:name:String[0..1]\n<EAttribute>:nbBooks:Integer[0..1]\n<EAttribute>:opened:EBoolean[0..1]\n<EReference>:books:Book[0..*]\n<EReference>:loans:Loan[0..*]\n<EReference>:members:Member[0..*]\n<EReference>:writers:Writer[0..*]\n") == 0) ? returnValue =  true : returnValue =  false;
 	returnValue ? std::cout << "success" << std::endl : std::cout << "fail" << std::endl;
     std::cout << "END Query_Any_6 -------------------------------------------\n" << std::endl;
     return returnValue;
@@ -750,11 +762,11 @@ bool model_any_query2() {
 		qry ="self->eAllContents()";
 		std::cout << "START query: " << qry << std::endl;
 
-		(resultStr.compare("<Bag<Any>> size: 3\n\tAny: TU Ilmenau - University Library\n\tAny: 3\n\tAny: 1\n") == 0) ? returnValue =  true : returnValue =  false;
+		(resultStr.compare("<Bag<Any>> size: 7\n\tAny: TU Ilmenau - University Library\n\tAny: 3\n\tAny: 1\n\t<EObjectContainer> size: 1\n\tType:Book\n\t<EObjectContainer> size: 1\n\tType:Loan\n\t<EObjectContainer> size: 1\n\tType:Member\n\t<EObjectContainer> size: 1\n\tType:Writer\n\n") == 0) ? returnValue =  true : returnValue =  false;
 		value = queryValue(qry,store);
 		resultStr=BookStore_ecore::BookStore_ecoreFactory::eInstance()->convertToString(nullptr, value);
 		std::cout << resultStr << std::endl;
-		(resultStr.compare("<Bag<Any>> size: 3\n\tTU Ilmenau - University Library\n\tAny (typeId: 3)3\n\tAny (typeId: 2)1\n") == 0) ? returnValue =  returnValue && true : returnValue =  false;
+		(resultStr.compare("<Bag<Any>> size: 7\n\tTU Ilmenau - University Library\n\t3\n\t1\n\t<Bag<Any>> size: 1\n\tAny (typeId: 1504718206)\n\t<Bag<Any>> size: 1\n\tAny (typeId: 922403017)\n\t<Bag<Any>> size: 1\n\tAny (typeId: 378535500)\n\t<Bag<Any>> size: 1\n\tAny (typeId: 427146359)\n\n") == 0) ? returnValue =  returnValue && true : returnValue =  false;
 	}
 	catch(...)
 	{

@@ -1938,7 +1938,7 @@ Any ClassifierImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arg
 			std::string incoming_param_propertyName;
 			std::list<Any>::const_iterator incoming_param_propertyName_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_propertyName = (*incoming_param_propertyName_arguments_citer)->get<std::string >();
-			result = eAny(this->getPropertyValue(incoming_param_propertyName),0,false);
+			result = this->getPropertyValue(incoming_param_propertyName);
 			break;
 		}
 		// uml::Classifier::getUsedInterfaces() : uml::Interface[*]: 2075757327

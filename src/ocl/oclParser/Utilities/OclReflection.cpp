@@ -352,28 +352,34 @@ std::shared_ptr<fUML::Semantics::Values::Value> OclReflection::createValue(std::
 					}
 					default:
 					{
-						std::shared_ptr<AnyEObjectBag> anyObjectBag = std::dynamic_pointer_cast<AnyEObjectBag>(value);
-						if(nullptr!=anyObjectBag)// AnyEObjectBag?
+						try
 						{
-							std::shared_ptr<Bag<ecore::EObject>> eObjectBag=anyObjectBag->getBag();
-							for(const std::shared_ptr<ecore::EObject> object: *eObjectBag)
-							{	// recursive Call of convertToString via new Any EObject Value
-								std::shared_ptr<fUML::Semantics::Values::Value> val = createValue(object);
-								bagValue->addValue(val);
+							std::shared_ptr<Bag<AnyObject>> anyBag = value->get<std::shared_ptr<Bag<AnyObject>>>();
+							for(std::shared_ptr<AnyObject> object: *anyBag)
+							{
+								std::shared_ptr<ocl::Values::AnyValue> anyValue = ocl::Values::ValuesFactory::eInstance()->createAnyValue();
+								anyValue->setValue(object); // A Bag in AnyValue, can be AnyValue...
+								bagValue->addValue(anyValue);
 							}
 							break;
 						}
-						else // last supported type bag<Any>
+						catch(...)
 						{
-							std::shared_ptr<Bag<AnyObject>> anyBag = value->get<std::shared_ptr<Bag<AnyObject>>>();
-
-							for(std::shared_ptr<AnyObject> object: *anyBag)
+							std::shared_ptr<AnyEObjectBag> anyObjectBag = std::dynamic_pointer_cast<AnyEObjectBag>(value);
+							if(nullptr!=anyObjectBag)// AnyEObjectBag?
 							{
-
-								std::shared_ptr<ocl::Values::AnyValue> anyValue = ocl::Values::ValuesFactory::eInstance()->createAnyValue();
-								anyValue->setValue(object); // A Bag in AnyValue, can be AnyValue...
+								std::shared_ptr<Bag<ecore::EObject>> eObjectBag=anyObjectBag->getBag();
+								for(const std::shared_ptr<ecore::EObject> object: *eObjectBag)
+								{	// recursive Call of convertToString via new Any EObject Value
+									std::shared_ptr<fUML::Semantics::Values::Value> val = createValue(object);
+									bagValue->addValue(val);
+								}
+								break;
 							}
-							break;
+							else // last supported type bag<Any>
+							{
+								DEBUG_MESSAGE(std::cerr << " OclReflection: Bag unknown type for:" << typedElement->getName() << std::endl;)
+							}
 						}
 					}
 				}
@@ -381,7 +387,7 @@ std::shared_ptr<fUML::Semantics::Values::Value> OclReflection::createValue(std::
 			}
 			catch(...)
 			{
-				DEBUG_MESSAGE(std::cerr << " OclReflection: unknown type for:" << typedElement->getName() std::endl;)
+				DEBUG_MESSAGE(std::cerr << " OclReflection: unknown type for:" << typedElement->getName() << std::endl;)
 			}
 		}
 		else
