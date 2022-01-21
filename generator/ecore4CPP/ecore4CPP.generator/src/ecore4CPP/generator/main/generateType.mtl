@@ -18,7 +18,7 @@
 [import ecore4CPP::generator::main::helpers::keywords /]
 [import ecore4CPP::generator::main::validation::validation /]
 
-[query public isAnyNoPtr(aTypedElement : ETypedElement) : EBoolean = if( (aTypedElement.lowerBound = 1) and (aTypedElement.upperBound = 1) and (aTypedElement.eType.name.replace('java.lang.', '').replace('java.util.','').transformTypeName() = 'Any') ) then true else false endif/]
+[query public isAnyNoPtr(aTypedElement : ETypedElement) : EBoolean = if( ((aTypedElement.lowerBound = 0) or (aTypedElement.lowerBound = 1)) and (aTypedElement.upperBound = 1) and (aTypedElement.eType.name.replace('java.lang.', '').replace('java.util.','').transformTypeName() = 'Any') ) then true else false endif/]
 
 [template public generateParameterList(aOperation:EOperation) post(trim())]
 [for (sParameter : EParameter | aOperation.eParameters->select(p:EParameter | not p.doNotGenerateEModelElement())) separator (',')][sParameter.generateParameterType()/] [sParameter.name/][/for]
