@@ -164,7 +164,7 @@ namespace uml
 			<span style="background-color:#FF8000">This Element was merged from mof::Reflection package.</span>
 			*/
 			 
-			virtual std::shared_ptr<uml::Class> getMetaClass() = 0;
+			virtual std::shared_ptr<uml::Class> getMetaClass() const = 0;
 			/*!
 			Retrieves the model that owns (either directly or indirectly) this element.
 			*/
