@@ -625,15 +625,27 @@ std::shared_ptr<fUML::Semantics::Values::Value> OclReflection::createValue(std::
 			std::shared_ptr<uml::Element> uobj = std::dynamic_pointer_cast<uml::Element>(obj); // check UML or ecore Model Element
 			std::shared_ptr<AnyObject> value = nullptr;
 
-			if(uobj != nullptr && uobj->eClass() != nullptr)
+			if(nullptr!=uobj && nullptr!=uobj->eClass())
 			{
-//				std::shared_ptr<uml::Property> prop = lookupProperty(uobj->getMetaClass(), type->getName());
-//				std::shared_ptr<uml::Property> prop = lookupProperty(uobj->eClass(), type->getName());
-//				if(prop != nullptr)
+				std::shared_ptr<uml::Class> umlMetaClass=uobj->getMetaClass();
+				if(nullptr!=umlMetaClass)
 				{
-//					value = uobj->get(prop);
-					value = uobj->eGet(type);
+					std::shared_ptr<uml::Property> prop = lookupProperty(umlMetaClass, type->getName());
+					if(prop != nullptr)
+					{
+						value = uobj->get(prop);
+					}
+				}
+				else // 2. try is an uml generated uml-model
+				{
+					/* replaced by eGet
+					std::shared_ptr<ecore::EAttribute> prop = lookupProperty(uobj->eClass(), type->getName());
+					std::shared_ptr<ecore::EReference>  ref = lookupAssociationClass(uobj->eClass(), type->getName());
 
+					if(prop != nullptr)
+					{...
+					}*/
+					value = obj->eGet(type);
 				}
 			}
 			else
@@ -747,109 +759,120 @@ bool OclReflection::getResult(std::shared_ptr<OclExpression> source)
     }
     return true;
 }
-/*
+
 std::shared_ptr<ecore::EPackage> OclReflection::umlPackage2Ecore(std::shared_ptr<uml::Package> upackage)
 {
-    std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
-    std::shared_ptr<ecore::EPackage> epackage = factory->createEPackage(upackage->getMetaElementID());
-    epackage->setName(upackage->getName());
+	static std::shared_ptr<uml::Package> lastPackage=nullptr;
+	static std::shared_ptr<ecore::EPackage> epackage=nullptr;
 
-    for(size_t i = 0; i < upackage->getOwnedElement()->size(); i++) {
-        std::shared_ptr<uml::Element> type = upackage->getOwnedElement()->at(i);
-        std::shared_ptr<uml::Class> uclass = std::dynamic_pointer_cast<uml::Class>(type);
-        if(uclass != nullptr) {
-            std::shared_ptr<ecore::EClass> c = factory->createEClass_as_eClassifiers_in_EPackage(epackage, uclass->getMetaElementID());
-            c->setName(uclass->getName());
-            //std::cout << "class : " << c->getName() << std::endl;
-        }
-        else {
-            std::shared_ptr<uml::Enumeration> uenum = std::dynamic_pointer_cast<uml::Enumeration>(type);
-            if(uenum != nullptr) {
-                std::shared_ptr<ecore::EEnum> eenum =factory->createEEnum_as_eClassifiers_in_EPackage(epackage, uenum->getMetaElementID());
-                eenum->setName(uenum->getName());
-                //std::cout << "enum : " << uenum->getName() << std::endl;
-            }
-        }
-    }
-    for(size_t i = 0; i < upackage->getOwnedElement()->size(); i++) {
-        std::shared_ptr<uml::Element> type = upackage->getOwnedElement()->at(i);
-        std::shared_ptr<uml::Classifier> utype = std::dynamic_pointer_cast<uml::Classifier>(type);
-        if(utype == nullptr) {
-            continue;
-        }
-        std::shared_ptr<uml::Class> uclass = std::dynamic_pointer_cast<uml::Class>(utype);
-        std::shared_ptr<ecore::EClassifier> eclassifier = epackage->getEClassifier(utype->getName());
-        std::shared_ptr<ecore::EClass> eclass = std::dynamic_pointer_cast<ecore::EClass>(eclassifier);
+	if(nullptr!=lastPackage && nullptr!= epackage && lastPackage==upackage)
+	{
+		return epackage;
+	}
+	else
+	{
+		lastPackage=upackage;
+		std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
+		epackage = factory->createEPackage(upackage->getMetaElementID());
+		epackage->setName(upackage->getName());
 
-        if(uclass != nullptr) {
-            std::shared_ptr<Bag<uml::Property>> uml_attribute = uclass->getAllAttributes();
-            Bag<uml::Property>::const_iterator endIt_attribute = uml_attribute->end();
-            for (Bag<uml::Property>::const_iterator it_attribute = uml_attribute->begin();
-                 it_attribute != endIt_attribute; ++it_attribute)
-            {
-                std::shared_ptr<ecore::EStructuralFeature> prop = nullptr;
-                if((*it_attribute)->getAssociation() == nullptr) {
-                    prop = ecore::ecoreFactory::eInstance()->createEAttribute_as_eStructuralFeatures_in_EClass(eclass, (*it_attribute)->getMetaElementID());
-                }
-                else {
-                    prop = ecore::ecoreFactory::eInstance()->createEReference_as_eStructuralFeatures_in_EClass(eclass, (*it_attribute)->getMetaElementID());
-                }
-                std::string name = (*it_attribute)->getName();
-                std::shared_ptr<ecore::EClassifier> propType = createClassifier(epackage, (*it_attribute)->getType());
+		for(size_t i = 0; i < upackage->getOwnedElement()->size(); i++) {
+			std::shared_ptr<uml::Element> type = upackage->getOwnedElement()->at(i);
+			std::shared_ptr<uml::Class> uclass = std::dynamic_pointer_cast<uml::Class>(type);
+			if(uclass != nullptr) {
+				std::shared_ptr<ecore::EClass> c = factory->createEClass_as_eClassifiers_in_EPackage(epackage, uclass->getMetaElementID());
+				c->setName(uclass->getName());
+				//std::cout << "class : " << c->getName() << std::endl;
+			}
+			else {
+				std::shared_ptr<uml::Enumeration> uenum = std::dynamic_pointer_cast<uml::Enumeration>(type);
+				if(uenum != nullptr) {
+					std::shared_ptr<ecore::EEnum> eenum =factory->createEEnum_as_eClassifiers_in_EPackage(epackage, uenum->getMetaElementID());
+					eenum->setName(uenum->getName());
+					//std::cout << "enum : " << uenum->getName() << std::endl;
+				}
+			}
+		}
+		for(size_t i = 0; i < upackage->getOwnedElement()->size(); i++) {
+			std::shared_ptr<uml::Element> type = upackage->getOwnedElement()->at(i);
+			std::shared_ptr<uml::Classifier> utype = std::dynamic_pointer_cast<uml::Classifier>(type);
+			if(utype == nullptr) {
+				continue;
+			}
+			std::shared_ptr<uml::Class> uclass = std::dynamic_pointer_cast<uml::Class>(utype);
+			std::shared_ptr<ecore::EClassifier> eclassifier = epackage->getEClassifier(utype->getName());
+			std::shared_ptr<ecore::EClass> eclass = std::dynamic_pointer_cast<ecore::EClass>(eclassifier);
 
-                prop->setEType(propType);
-                prop->setName(name);
-                prop->setDefaultValue(getDefaultValue((*it_attribute)));
-                prop->setUpperBound((*it_attribute)->getUpper());
-                prop->setLowerBound((*it_attribute)->getLower());
-            }
-            std::shared_ptr<Bag<uml::Operation>> uml_operations = uclass->getOwnedOperation();
-            Bag<uml::Operation>::const_iterator endIt_operation = uml_operations->end();
-            for (Bag<uml::Operation>::const_iterator it_operation = uml_operations->begin();
-                 it_operation != endIt_operation; ++it_operation)
-            {
-                std::shared_ptr<uml::Operation> currentOp = *it_operation;
-                std::shared_ptr<ecore::EOperation> op = ecore::ecoreFactory::eInstance()->createEOperation_as_eOperations_in_EClass(eclass, currentOp->getMetaElementID());
-                std::string name = currentOp->getName();
-                std::shared_ptr<ecore::EClassifier> propType = createClassifier(epackage, currentOp->getType());
-                op->setName(name);
-                if(propType != nullptr) {
-                    op->setEType(propType);
-                }
-                //std::cout << name << std::endl;
-                std::shared_ptr<Bag<uml::Parameter>> currentParams = std::dynamic_pointer_cast<Bag<uml::Parameter>>(currentOp->getOwnedParameter());
-                for(size_t j = 0; j < currentParams->size(); j++) {
-                    std::shared_ptr<uml::Parameter> p = currentParams->at(j);
-                    if(p->getDirection() != uml::ParameterDirectionKind::RETURN) {
-                        std::shared_ptr<ecore::EParameter> param = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(op, p->getMetaElementID());
-                        std::shared_ptr<ecore::EClassifier> currentPropType = createClassifier(epackage, p->getType());
-                        param->setEType(currentPropType);
-                        param->setName(p->getName());
-                        param->setUpperBound(p->getUpper());
-                        param->setLowerBound(p->getLower());
-                    }
-                }
-            }
-        }
-        else {
-            std::shared_ptr<ecore::EEnum> eenum = std::dynamic_pointer_cast<ecore::EEnum>(eclassifier);
-            std::shared_ptr<uml::Enumeration> uenum = std::dynamic_pointer_cast<uml::Enumeration>(utype);
-            if(eenum != nullptr && uenum != nullptr) {
-                std::shared_ptr<Bag<uml::EnumerationLiteral>> uliteral = uenum->getOwnedLiteral();
-                Bag<uml::EnumerationLiteral>::const_iterator endIt_literal = uliteral->end();
-                for (Bag<uml::EnumerationLiteral>::const_iterator it_literal = uliteral->begin();
-                     it_literal != endIt_literal; ++it_literal)
-                {
-                    std::shared_ptr<ecore::EEnumLiteral> literal = ecore::ecoreFactory::eInstance()->createEEnumLiteral_as_eLiterals_in_EEnum(eenum, (*it_literal)->getMetaElementID());
-                    literal->setName((*it_literal)->getName());
-                    //std::cout << (*it_literal)->getName() << std::endl;
-                }
-            }
-        }
-    }
+			if(uclass != nullptr) {
+				std::shared_ptr<Bag<uml::Property>> uml_attribute = uclass->getAllAttributes();
+				Bag<uml::Property>::const_iterator endIt_attribute = uml_attribute->end();
+				for (Bag<uml::Property>::const_iterator it_attribute = uml_attribute->begin();
+					 it_attribute != endIt_attribute; ++it_attribute)
+				{
+					std::shared_ptr<ecore::EStructuralFeature> prop = nullptr;
+					if((*it_attribute)->getAssociation() == nullptr) {
+						prop = ecore::ecoreFactory::eInstance()->createEAttribute_as_eAttributes_in_EClass(eclass, (*it_attribute)->getMetaElementID());
+					}
+					else {
+						prop = ecore::ecoreFactory::eInstance()->createEReference_as_eReferences_in_EClass(eclass, (*it_attribute)->getMetaElementID());
+					}
+					std::string name = (*it_attribute)->getName();
+					std::shared_ptr<ecore::EClassifier> propType = createClassifier(epackage, (*it_attribute)->getType());
+
+					prop->setEType(propType);
+					prop->setName(name);
+					prop->setDefaultValue(getDefaultValue((*it_attribute)));
+					prop->setUpperBound((*it_attribute)->getUpper());
+					prop->setLowerBound((*it_attribute)->getLower());
+				}
+				std::shared_ptr<Bag<uml::Operation>> uml_operations = uclass->getOwnedOperation();
+				Bag<uml::Operation>::const_iterator endIt_operation = uml_operations->end();
+				for (Bag<uml::Operation>::const_iterator it_operation = uml_operations->begin();
+					 it_operation != endIt_operation; ++it_operation)
+				{
+					std::shared_ptr<uml::Operation> currentOp = *it_operation;
+					std::shared_ptr<ecore::EOperation> op = ecore::ecoreFactory::eInstance()->createEOperation_as_eOperations_in_EClass(eclass, currentOp->getMetaElementID());
+					std::string name = currentOp->getName();
+					std::shared_ptr<ecore::EClassifier> propType = createClassifier(epackage, currentOp->getType());
+					op->setName(name);
+					if(propType != nullptr) {
+						op->setEType(propType);
+					}
+					//std::cout << name << std::endl;
+					std::shared_ptr<Bag<uml::Parameter>> currentParams = std::dynamic_pointer_cast<Bag<uml::Parameter>>(currentOp->getOwnedParameter());
+					for(size_t j = 0; j < currentParams->size(); j++) {
+						std::shared_ptr<uml::Parameter> p = currentParams->at(j);
+						if(p->getDirection() != uml::ParameterDirectionKind::RETURN) {
+							std::shared_ptr<ecore::EParameter> param = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(op, p->getMetaElementID());
+							std::shared_ptr<ecore::EClassifier> currentPropType = createClassifier(epackage, p->getType());
+							param->setEType(currentPropType);
+							param->setName(p->getName());
+							param->setUpperBound(p->getUpper());
+							param->setLowerBound(p->getLower());
+						}
+					}
+				}
+			}
+			else {
+				std::shared_ptr<ecore::EEnum> eenum = std::dynamic_pointer_cast<ecore::EEnum>(eclassifier);
+				std::shared_ptr<uml::Enumeration> uenum = std::dynamic_pointer_cast<uml::Enumeration>(utype);
+				if(eenum != nullptr && uenum != nullptr) {
+					std::shared_ptr<Bag<uml::EnumerationLiteral>> uliteral = uenum->getOwnedLiteral();
+					Bag<uml::EnumerationLiteral>::const_iterator endIt_literal = uliteral->end();
+					for (Bag<uml::EnumerationLiteral>::const_iterator it_literal = uliteral->begin();
+						 it_literal != endIt_literal; ++it_literal)
+					{
+						std::shared_ptr<ecore::EEnumLiteral> literal = ecore::ecoreFactory::eInstance()->createEEnumLiteral_as_eLiterals_in_EEnum(eenum, (*it_literal)->getMetaElementID());
+						literal->setName((*it_literal)->getName());
+						//std::cout << (*it_literal)->getName() << std::endl;
+					}
+				}
+			}
+		}
+	}
     return epackage;
 }
-*/
+
 Any OclReflection::getDefaultValue(std::shared_ptr<uml::Property> prop)
 {
     if(prop == nullptr) return nullptr;

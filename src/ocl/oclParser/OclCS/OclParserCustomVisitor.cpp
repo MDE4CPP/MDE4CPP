@@ -451,8 +451,8 @@ bool OclParserCustomVisitor::visitPropertyCallExpCS(CSTNode* ctx, std::shared_pt
         }
     }
     else {
-        eClass = std::dynamic_pointer_cast<ecore::EClass>(exp->getSource()->getEType());
         srcValue = exp->getSource()->getInstance()->getResultValue();
+    	eClass = std::dynamic_pointer_cast<ecore::EClass>(exp->getSource()->getEType());
     }
 
     if(isPre) {
@@ -474,35 +474,37 @@ bool OclParserCustomVisitor::visitPropertyCallExpCS(CSTNode* ctx, std::shared_pt
             }
         }
     }
+    if(nullptr!=eClass)
+    {
+		std::shared_ptr<ecore::EAttribute> eatt = OclReflection::lookupProperty(eClass, simpleName);
+		if(eatt != nullptr) {
+			createPropertyCallExpEval(eatt, srcValue, exp, simpleName, isPre, ctx);
+			return true;
+		}
+		else { // Association
+			std::shared_ptr<ecore::EReference> eref = OclReflection::lookupAssociationClass(eClass, simpleName);
+			if(eref != nullptr) {
+				createAssociationClassCallExpEval(eref, srcValue, simpleName, exp,isPre, ctx);
+				return true;
+			}
+			else
+			{
+				//Additional BaseMetamodelElements EModelElement
+				eatt = OclReflection::lookupProperty(ecore::ecorePackage::eInstance()->getENamedElement_Class(), simpleName);
+				if(eatt != nullptr) {
+					createPropertyCallExpEval(eatt, srcValue, exp, simpleName, isPre, ctx);
+					return true;
+				}
+				else { // Association
+					eref = OclReflection::lookupAssociationClass(ecore::ecorePackage::eInstance()->getENamedElement_Class(), simpleName);
+					if(eref != nullptr) {
+						createAssociationClassCallExpEval(eref, srcValue, simpleName, exp,isPre, ctx);
+						return true;
+					}
+				}
 
-    std::shared_ptr<ecore::EAttribute> eatt = OclReflection::lookupProperty(eClass, simpleName);
-    if(eatt != nullptr) {
-		createPropertyCallExpEval(eatt, srcValue, exp, simpleName, isPre, ctx);
-        return true;
-    }
-    else { // Association
-        std::shared_ptr<ecore::EReference> eref = OclReflection::lookupAssociationClass(eClass, simpleName);
-        if(eref != nullptr) {
-			createAssociationClassCallExpEval(eref, srcValue, simpleName, exp,isPre, ctx);
-            return true;
-        }
-        else
-        {
-            //Additional BaseMetamodelElements EModelElement
-            eatt = OclReflection::lookupProperty(ecore::ecorePackage::eInstance()->getENamedElement_Class(), simpleName);
-            if(eatt != nullptr) {
-        		createPropertyCallExpEval(eatt, srcValue, exp, simpleName, isPre, ctx);
-                return true;
-            }
-            else { // Association
-                eref = OclReflection::lookupAssociationClass(ecore::ecorePackage::eInstance()->getENamedElement_Class(), simpleName);
-                if(eref != nullptr) {
-        			createAssociationClassCallExpEval(eref, srcValue, simpleName, exp,isPre, ctx);
-                    return true;
-                }
-            }
-
-        }
+			}
+		}
     }
     ctx->getErrorListener()->syntaxError("Unrecognized variable: ("+ simpleName +")");
     return false;

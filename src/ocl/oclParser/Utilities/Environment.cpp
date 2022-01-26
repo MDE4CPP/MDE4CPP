@@ -116,7 +116,7 @@ std::shared_ptr<Variable> Environment::lookupPathName(std::vector<std::string>& 
 {
     if(names.size() > 0) {
         std::shared_ptr<Variable> var = lookupPathName(names[0]);
-        if(var != nullptr && var->getEType()->getClassifierID() == ecore::ecorePackage::EPACKAGE_CLASS && names.size() > 1) {
+        if(nullptr!=var && nullptr!=var->getEType() && var->getEType()->getClassifierID() == ecore::ecorePackage::EPACKAGE_CLASS && names.size() > 1) {
             std::shared_ptr<ocl::Values::ObjectValue> value = std::dynamic_pointer_cast<ocl::Values::ObjectValue>(var->getValue());
             std::shared_ptr<ecore::EPackage> package = std::dynamic_pointer_cast<ecore::EPackage>(value->getValue());
             names.erase(names.begin());
@@ -200,6 +200,7 @@ std::shared_ptr<Variable> Environment::lookupPathName(const std::string& name)
 
     return nullptr;
 }
+
 std::shared_ptr<Variable> Environment::lookupImplicit(const std::string& name)
 {
     for(auto&e : m_namedElements) {

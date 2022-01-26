@@ -194,7 +194,7 @@ public:
      * @param upackage : source uml package
      * @return an ecore package corresponding (attributes, operations) to the uml package
      */
-    //static std::shared_ptr<ecore::EPackage> umlPackage2Ecore(std::shared_ptr<uml::Package> upackage);
+    static std::shared_ptr<ecore::EPackage> umlPackage2Ecore(std::shared_ptr<uml::Package> upackage);
     /**
      * @brief Retrieve the default value of the given property
      * @param prop
