@@ -158,10 +158,9 @@ public:
      * @brief Find the given structural feature  within the given fUML value and create a new fUML value with the found value.
      * @param type : structural feature of the searched value
      * @param fromValue : source fUML value
-     * @param level : the level of the current environment
      * @return return the created fUML value
      */
-    static std::shared_ptr<fUML::Semantics::Values::Value> createValue(std::shared_ptr<ecore::EStructuralFeature> type, std::shared_ptr<fUML::Semantics::Values::Value> fromValue, Level level);
+    static std::shared_ptr<fUML::Semantics::Values::Value> createValue(std::shared_ptr<ecore::EStructuralFeature> type, std::shared_ptr<fUML::Semantics::Values::Value> fromValue);
     /**
      * @brief Find the given operation within the given fUML value and create a new fUML value with the result of the execution of the operation.
      * @param operation : searched operation

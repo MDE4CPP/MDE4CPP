@@ -599,7 +599,7 @@ std::shared_ptr<fUML::Semantics::Values::Value> OclReflection::createValue(std::
     return createValue(typedElement->getEType());
 }
 
-std::shared_ptr<fUML::Semantics::Values::Value> OclReflection::createValue(std::shared_ptr<ecore::EStructuralFeature> type, std::shared_ptr<fUML::Semantics::Values::Value> fromValue, Level level)
+std::shared_ptr<fUML::Semantics::Values::Value> OclReflection::createValue(std::shared_ptr<ecore::EStructuralFeature> type, std::shared_ptr<fUML::Semantics::Values::Value> fromValue)
 {
     std::shared_ptr<CollectionValue> colValue = std::dynamic_pointer_cast<CollectionValue>(fromValue);
 	if(nullptr!= colValue )
@@ -610,7 +610,7 @@ std::shared_ptr<fUML::Semantics::Values::Value> OclReflection::createValue(std::
 //        bagValue->setModel(bagType);
         for(size_t i = 0; i < colValue->getElements()->size(); i++) {
             std::shared_ptr<fUML::Semantics::Values::Value> src = colValue->getElements()->at(i)->getValue();
-            std::shared_ptr<fUML::Semantics::Values::Value> dst = createValue(type, src, level);
+            std::shared_ptr<fUML::Semantics::Values::Value> dst = createValue(type, src);
             bagValue->addValue(dst);
         }
         return bagValue;

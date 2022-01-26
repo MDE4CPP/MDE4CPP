@@ -403,7 +403,7 @@ antlrcpp::Any OclParserCustomVisitor::visitOperationCallExpCS_B(OclParser::Opera
 
 void OclParserCustomVisitor::createPropertyCallExpEval(std::shared_ptr<ecore::EAttribute> eatt,	std::shared_ptr<fUML::Semantics::Values::Value> srcValue, std::shared_ptr<PropertyCallExp> exp, std::string simpleName,	bool isPre, CSTNode *ctx) {
 	std::shared_ptr<PropertyCallExpEval> expEval =	ocl::Evaluations::EvaluationsFactory::eInstance()->createPropertyCallExpEval();
-	std::shared_ptr<fUML::Semantics::Values::Value> objValue =	OclReflection::createValue(eatt, srcValue, 	ctx->getEnv()->getLevel());
+	std::shared_ptr<fUML::Semantics::Values::Value> objValue =	OclReflection::createValue(eatt, srcValue);
 	expEval->setModel(exp);
 	expEval->setResultValue(objValue);
 	exp->setName(simpleName);
@@ -418,7 +418,7 @@ void OclParserCustomVisitor::createAssociationClassCallExpEval(std::shared_ptr<e
 {
 	std::shared_ptr<AssociationClassCallExpEval> expEval =	ocl::Evaluations::EvaluationsFactory::eInstance()->createAssociationClassCallExpEval();
 	std::shared_ptr<AssociationClassCallExp> assExpr =	ocl::Expressions::ExpressionsFactory::eInstance()->createAssociationClassCallExp();
-	std::shared_ptr<fUML::Semantics::Values::Value> objValue = 	OclReflection::createValue(eref, srcValue, ctx->getEnv()->getLevel());
+	std::shared_ptr<fUML::Semantics::Values::Value> objValue = 	OclReflection::createValue(eref, srcValue);
 	expEval->setModel(assExpr);
 	expEval->setResultValue(objValue);
 	assExpr->setName(simpleName);
@@ -556,7 +556,7 @@ bool OclParserCustomVisitor::visitAssociationCallExpCS(CSTNode *ctx, OclParser::
     std::shared_ptr<ecore::EReference> eref = OclReflection::lookupAssociationClass(eClass, simpleName);
     if(eref != nullptr) {
         std::shared_ptr<AssociationClassCallExpEval> expEval = ocl::Evaluations::EvaluationsFactory::eInstance()->createAssociationClassCallExpEval();
-        std::shared_ptr<fUML::Semantics::Values::Value> objValue = OclReflection::createValue(eref, srcValue, ctx->getEnv()->getLevel());
+        std::shared_ptr<fUML::Semantics::Values::Value> objValue = OclReflection::createValue(eref, srcValue);
 
         expEval->setModel(exp);
         expEval->setResultValue(objValue);
@@ -2040,7 +2040,7 @@ antlrcpp::Any OclParserCustomVisitor::visitPropertyContextDeclCS(OclParser::Prop
                             std::shared_ptr<ecore::EObject> new_object  = new_value->getValue();
 
                             if(new_object != nullptr) {
-                                value = OclReflection::createValue(feature, new_value, initDerCS->getEnv()->getLevel());
+                                value = OclReflection::createValue(feature, new_value);
                                 std::shared_ptr<BooleanLiteralExp> boolExp = createBooleanLiteralExp(resultValue->equals(value));
                                 ctx->setAST(boolExp);
                                 return true;

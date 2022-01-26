@@ -51,7 +51,6 @@ const std::string Environment::SELF_VARIABLE_NAME = "self";
 Environment::Environment(std::shared_ptr<Environment> parent) : m_parent(parent)
 {
     if(m_parent != nullptr) {
-        m_level = m_parent->m_level;
         m_self = m_parent->m_self;
         for(auto&e : m_parent->m_namedElements) {
             m_namedElements[e.first] = e.second;

@@ -41,11 +41,6 @@ using namespace ocl::Expressions;
 
 namespace Utilities {
 
-enum class Level {
-    M1, // meta model level
-    M2  // model level
-};
-
 /*!
  * \brief The Environment type used in the rules for the concrete syntax is
  * defined according to the following invariants and additional operations.
@@ -116,10 +111,8 @@ public:
                                                                 std::shared_ptr<ecore::EClass> e_class);
 
     /* SETTERS */
-    void setLevel(Level level) { m_level = level; }
     void setSelfVariable(std::shared_ptr<Variable> self) { m_self = self; }
     /* GETTERS */
-    Level getLevel() { return m_level; }
     std::shared_ptr<Environment> getRootEnv();
     std::shared_ptr<EvalEnvironment> getEvalEnv() { return m_evalEnv; }
     std::shared_ptr<Variable> getSelfVariable() { return m_self; }
@@ -148,10 +141,6 @@ private:
      * \brief Used to generate implicit iterator variables
      */
     int m_generatorInt = 0;
-    /*!
-     * \brief current data level
-     */
-    Level m_level;
 };
 }
 #endif // ENVIRONMENT_H

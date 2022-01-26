@@ -188,7 +188,7 @@ std::shared_ptr<ecore::EClassifier> EPackageImpl::getEClassifier(std::string nam
             return c;
         }
     }
-    return std::shared_ptr<ecore::EClassifier>();
+    return nullptr;
 	//end of body
 }
 
