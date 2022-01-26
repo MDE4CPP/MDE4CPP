@@ -72,6 +72,7 @@
       <ownedAttribute xmi:id="_zos0gCRdEeuGRKch_h_VTg" name="available">
         <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
       </ownedAttribute>
+      <ownedAttribute xmi:id="_ce1qsH7DEeyQpKiQRT68eg" name="category" type="__595MCRaEeuGRKch_h_VTg"/>
       <ownedBehavior xmi:type="uml:FunctionBehavior" xmi:id="_Meg3UM8fEeul1pIblBCjIA" name="fbIncrCopies" specification="_Myu-EMkwEeuSte8oTwAAqA">
         <language>CPP</language>
         <body>    this->setCopies(this->getCopies() + 1);</body>
@@ -126,7 +127,6 @@
 These functions are currently stored in the &quot;protected&quot; section of the generated main. 
 This is a backup in case the original main.cpp should be deleted.
 */
-
 /*
 Helper functions
 */
@@ -171,32 +171,39 @@ Any queryValue(std::shared_ptr&lt;ecore::EObject> context, const std::string&amp
     return nullptr;
 }
 
-void printProperty(std::shared_ptr&lt;uml::Property> uprop) {
+std::string printProperty(std::shared_ptr&lt;uml::Property> uprop) {
+	std::ostringstream returnStringStream;
     if(uprop != nullptr) {
         if(uprop->getUpper() > 1 || uprop->getUpper() &lt; 0)
-            std::cout &lt;&lt; &quot;&lt;Property> &quot; + uprop->getName() + &quot; : &quot; + uprop->getType()->getName() + &quot; [&quot;
+        	returnStringStream  &lt;&lt; &quot;&lt;Property> &quot; + uprop->getName() + &quot; : &quot; + uprop->getType()->getName() + &quot; [&quot;
                 +  std::to_string(uprop->getLower()) + &quot;..*]&quot; &lt;&lt; std::endl;
         else
-            std::cout &lt;&lt; &quot;&lt;Property> &quot; + uprop->getName() + &quot; : &quot; + uprop->getType()->getName() + &quot; [&quot;
+        	returnStringStream  &lt;&lt; &quot;&lt;Property> &quot; + uprop->getName() + &quot; : &quot; + uprop->getType()->getName() + &quot; [&quot;
                 +  std::to_string(uprop->getLower()) + &quot;..&quot; + std::to_string(uprop->getUpper()) + &quot;]&quot; &lt;&lt; std::endl;
     }
+	return returnStringStream.str();
 }
 
-void printTypedElement(std::shared_ptr&lt;uml::TypedElement> utyped) {
+std::string printTypedElement(std::shared_ptr&lt;uml::TypedElement> utyped) {
+	std::ostringstream returnStringStream;
     if(utyped != nullptr) {
-        std::cout &lt;&lt; utyped->getName() + &quot; : &quot; + utyped->getType()->getName() &lt;&lt; std::endl;
+    	returnStringStream &lt;&lt; utyped->getName() + &quot; : &quot; + utyped->getType()->getName() &lt;&lt; std::endl;
     }
+	return returnStringStream.str();
 }
 
-void printNamedElement(std::shared_ptr&lt;uml::NamedElement> uname) {
+std::string printNamedElement(std::shared_ptr&lt;uml::NamedElement> uname) {
+	std::ostringstream returnStringStream;
     if(uname != nullptr) {
-        std::cout &lt;&lt; uname->getName() &lt;&lt; std::endl;
+    	returnStringStream &lt;&lt; uname->getName() &lt;&lt; std::endl;
     }
+	return returnStringStream.str();
 }
 
-void printOperation(std::shared_ptr&lt;uml::Operation> uope) {
+std::string printOperation(std::shared_ptr&lt;uml::Operation> uope) {
+	std::string result = &quot;&lt;Operation> &quot;;
     if(uope != nullptr) {
-        std::string result = &quot;&lt;Operation> &quot; + uope->getName() + &quot;(&quot;;
+        result += uope->getName() + &quot;(&quot;;
         std::shared_ptr&lt;Bag&lt;uml::Parameter>> ebag = std::dynamic_pointer_cast&lt;Bag&lt;uml::Parameter>>(uope->getOwnedParameter());
         for(unsigned int i = 0; i &lt; ebag->size(); i++) {
             if(i > 0) result += &quot;, &quot;;
@@ -213,76 +220,307 @@ void printOperation(std::shared_ptr&lt;uml::Operation> uope) {
                 result += &quot;[Not set in Model]&quot;;
         }
         result += &quot;)&quot;;
-        std::cout &lt;&lt; result &lt;&lt; std::endl;
+     }
+	return result;
+}
+
+std::string printEAttribute(std::shared_ptr&lt;ecore::EAttribute> eattr) {
+	std::ostringstream returnStringStream;
+    if(eattr != nullptr) {
+        if(eattr->getUpperBound() > 1 || eattr->getUpperBound() &lt; 0)
+        	returnStringStream &lt;&lt; &quot;&lt;EAttribute>:&quot; + eattr->getName() + &quot;:&quot; + eattr->getEType()->getName()+ &quot;[&quot; +  std::to_string(eattr->getLowerBound()) + &quot;..*]&quot; &lt;&lt; std::endl;
+        else
+        	returnStringStream &lt;&lt; &quot;&lt;EAttribute>:&quot; + eattr->getName() + &quot;:&quot; + eattr->getEType()->getName()+ &quot;[&quot; +  std::to_string(eattr->getLowerBound()) + &quot;..&quot; + std::to_string(eattr->getUpperBound()) + &quot;]&quot; &lt;&lt; std::endl;
     }
+	return returnStringStream.str();
 }
 
-void print(Any value) {
-    try {
-        std::shared_ptr&lt;ecore::EObject> uobj = value->get&lt;std::shared_ptr&lt;ecore::EObject>>();
-        std::shared_ptr&lt;uml::Operation> uope = std::dynamic_pointer_cast&lt;uml::Operation>(uobj);
-        if(uope != nullptr) {
-            return printOperation(uope);
-        }
-        std::shared_ptr&lt;uml::Property> prop = std::dynamic_pointer_cast&lt;uml::Property>(uobj);
-        if(prop != nullptr) {
-            return printProperty(prop);
-        }
-        std::shared_ptr&lt;uml::TypedElement> utyped = std::dynamic_pointer_cast&lt;uml::TypedElement>(uobj);
-        if(utyped != nullptr) {
-            return printTypedElement(utyped);
-        }
-        std::shared_ptr&lt;uml::NamedElement> uname = std::dynamic_pointer_cast&lt;uml::NamedElement>(uobj);
-        if(uname != nullptr) {
-            return printNamedElement(uname);
-        }
-    } catch (...) { }
-    try {
-        std::shared_ptr&lt;uml::EnumerationLiteral> liter = value->get&lt;std::shared_ptr&lt;uml::EnumerationLiteral>>();
-        std::cout &lt;&lt; liter->getName() &lt;&lt; std::endl;
-        return;
-    } catch (...) { }
-    try {
-        bool result = value->get&lt;bool>();
-        std::cout &lt;&lt; result &lt;&lt; std::endl;
-        return;
-    } catch (...) { }
-    try {
-        std::string result = value->get&lt;std::string>();
-        std::cout &lt;&lt; result &lt;&lt; std::endl;
-        return;
-    } catch (...) { }
-    try {
-        int result = value->get&lt;int>();
-        std::cout &lt;&lt; result &lt;&lt; std::endl;
-        return;
-    } catch (...) { }
-    try {
-        double result = value->get&lt;double>();
-        std::cout &lt;&lt; result &lt;&lt; std::endl;
-        return;
-    } catch (...) { }
+std::string printEReference(std::shared_ptr&lt;ecore::EReference> eref) {
+	std::ostringstream returnStringStream;
+    if(eref != nullptr) {
+        if(eref->getUpperBound() > 1 || eref->getUpperBound() &lt; 0)
+        	returnStringStream &lt;&lt; &quot;&lt;EReference>:&quot; + eref->getName() + &quot;:&quot; + eref->getEType()->getName()+ &quot;[&quot; +  std::to_string(eref->getLowerBound()) + &quot;..*]&quot; &lt;&lt; std::endl;
+        else
+        	returnStringStream &lt;&lt; &quot;&lt;EReference>:&quot; + eref->getName() + &quot;:&quot; + eref->getEType()->getName()+ &quot;[&quot; +  std::to_string(eref->getLowerBound()) + &quot;..&quot; + std::to_string(eref->getUpperBound()) + &quot;]&quot; &lt;&lt; std::endl;
+    }
+	return returnStringStream.str();
 }
 
-void print(Any value, bool isMany) {
+std::string  printETypedElement(std::shared_ptr&lt;ecore::ETypedElement> etyped) {
+	std::ostringstream returnStringStream;
+    if(etyped != nullptr) {
+        if(etyped->isMany())
+        	returnStringStream &lt;&lt; etyped->getName() + &quot;:&quot; + etyped->getEType()->getName()+ &quot;[0..*]&quot; &lt;&lt; std::endl;
+        else
+        	returnStringStream &lt;&lt; etyped->getName() + &quot;:&quot; + etyped->getEType()->getName()+ &quot;[0..1]&quot; &lt;&lt; std::endl;
+    }
+	return returnStringStream.str();
+}
+
+std::string printENamedElement(std::shared_ptr&lt;ecore::ENamedElement> ename) {
+	std::ostringstream returnStringStream;
+    if(ename != nullptr) {
+    	returnStringStream &lt;&lt; ename->getName() &lt;&lt; std::endl;
+    }
+	return returnStringStream.str();
+}
+
+std::string printEOperation(std::shared_ptr&lt;ecore::EOperation> eope) {
+	std::string result=&quot;&quot;;
+    if(eope != nullptr) {
+        result = &quot;&lt;Operation>:&quot; + eope->getName() + &quot;(&quot;;
+        std::shared_ptr&lt;Bag&lt;ecore::EParameter>> ebag = std::dynamic_pointer_cast&lt;Bag&lt;ecore::EParameter>>(eope->getEParameters());
+        for(unsigned int i = 0; i &lt; ebag->size(); i++) {
+            if(i > 0) result += &quot;, &quot;;
+            result += ebag->at(i)->getName() + &quot;:&quot;;
+            if(ebag->at(i)->getEType() != nullptr)
+                result += ebag->at(i)->getEType()->getName();
+            else
+                result += &quot;[Not set in Model]&quot;;
+        }
+        result += &quot;)&quot;;
+        if(eope->getEType() != nullptr &amp;&amp; eope->getEType()->getName() != &quot;invalid&quot;)
+            result += &quot;:&quot; + eope->getEType()->getName();
+    }
+	return result;
+}
+
+std::string print(Any value) {
+	std::ostringstream returnStringStream;
+
+	bool handled=false;
+    try{
+    	switch(value->getTypeId())
+    	{
+			case ecore::ecorePackage::EOBJECT_CLASS: // unknown or primitive type
+			{
+				std::shared_ptr&lt;ecore::EObject> eobj = value->get&lt;std::shared_ptr&lt;ecore::EObject>>();
+			    std::shared_ptr&lt;uml::Operation> uope = std::dynamic_pointer_cast&lt;uml::Operation>(eobj);
+				if(uope != nullptr) {
+					return printOperation(uope);
+				}
+				std::shared_ptr&lt;uml::Property> prop = std::dynamic_pointer_cast&lt;uml::Property>(eobj);
+				if(prop != nullptr) {
+					return printProperty(prop);
+				}
+				std::shared_ptr&lt;uml::TypedElement> utyped = std::dynamic_pointer_cast&lt;uml::TypedElement>(eobj);
+				if(utyped != nullptr) {
+					return printTypedElement(utyped);
+				}
+				std::shared_ptr&lt;uml::NamedElement> uname = std::dynamic_pointer_cast&lt;uml::NamedElement>(eobj);
+				if(uname != nullptr) {
+					return printNamedElement(uname);
+				}
+				std::shared_ptr&lt;ecore::EOperation> eope = std::dynamic_pointer_cast&lt;ecore::EOperation>(eobj);
+				if(eope != nullptr) {
+					return printEOperation(eope);
+				}
+				std::shared_ptr&lt;ecore::EAttribute> eattr = std::dynamic_pointer_cast&lt;ecore::EAttribute>(eobj);
+				if(eattr != nullptr) {
+					return printEAttribute(eattr);
+				}
+				std::shared_ptr&lt;ecore::EReference> eref = std::dynamic_pointer_cast&lt;ecore::EReference>(eobj);
+				if(eref != nullptr) {
+					return printEReference(eref);
+				}
+				std::shared_ptr&lt;ecore::ETypedElement> etyped = std::dynamic_pointer_cast&lt;ecore::ETypedElement>(eobj);
+				if(etyped != nullptr) {
+					return printETypedElement(etyped);
+				}
+				std::shared_ptr&lt;ecore::ENamedElement> ename = std::dynamic_pointer_cast&lt;ecore::ENamedElement>(eobj);
+				if(ename != nullptr) {
+					return printENamedElement(ename);
+				}
+				handled=true;
+				break;
+			}
+			case ecore::ecorePackage::EOBJECTCONTAINER_CLASS:
+			{
+				std::shared_ptr&lt;ecore::EObjectContainer> eObjectContainer = value->get&lt;std::shared_ptr&lt;ecore::EObjectContainer>>();
+				std::shared_ptr&lt;Bag&lt;ecore::EObject>> eObjectBag =  eObjectContainer->getContainer();
+				returnStringStream &lt;&lt; &quot;&lt;EObjectContainer> size: &quot; &lt;&lt; eObjectBag->size() &lt;&lt;std::endl;
+				for(const std::shared_ptr&lt;ecore::EObject> object: *eObjectBag)
+				{	// recursive Call of convertToString via new Any EObject Value
+					returnStringStream &lt;&lt; &quot;\t&quot;&lt;&lt;print(eAny(object,ecore::ecorePackage::EOBJECT_CLASS,false))&lt;&lt;std::endl;
+				}
+				handled=true;
+				break;
+			}
+			case ecore::ecorePackage::ECLASS_CLASS:
+			case ecore::ecorePackage::EOBJECTANY_CLASS:
+			case ecore::ecorePackage::EATTRIBUTE_CLASS:
+			case ecore::ecorePackage::EREFERENCE_CLASS:
+			case ecore::ecorePackage::ESTRUCTURALFEATURE_CLASS:
+			case ecore::ecorePackage::EOPERATION_CLASS:
+			case ecore::ecorePackage::EBOOLEANOBJECT_CLASS:
+			case ecore::ecorePackage::EBOOLEAN_CLASS:
+			case ecore::ecorePackage::EBYTE_CLASS:
+			case ecore::ecorePackage::EBYTEARRAY_CLASS:
+			case ecore::ecorePackage::EBYTEOBJECT_CLASS:
+			case ecore::ecorePackage::ECHARACTEROBJECT_CLASS:
+			case ecore::ecorePackage::ECHAR_CLASS:
+			case ecore::ecorePackage::EDATE_CLASS:
+			case ecore::ecorePackage::ERESOURCE_CLASS:
+			case ecore::ecorePackage::EINTEGEROBJECT_CLASS:
+			case ecore::ecorePackage::EBIGINTEGER_CLASS:
+			case ecore::ecorePackage::ESHORT_CLASS:
+			case ecore::ecorePackage::ESHORTOBJECT_CLASS:
+			case ecore::ecorePackage::EINT_CLASS:
+			case ecore::ecorePackage::ELONGOBJECT_CLASS:
+			case ecore::ecorePackage::ELONG_CLASS:
+			case ecore::ecorePackage::EFLOATOBJECT_CLASS:
+			case ecore::ecorePackage::EFLOAT_CLASS:
+			case ecore::ecorePackage::EBIGDECIMAL_CLASS:
+			case ecore::ecorePackage::EDOUBLE_CLASS:
+			case ecore::ecorePackage::ESTRING_CLASS:
+			case ecore::ecorePackage::EJAVAOBJECT_CLASS:
+			case ecore::ecorePackage::EENUMERATOR_CLASS:
+			case ecore::ecorePackage::EDIAGNOSTICCHAIN_CLASS:
+			case ecore::ecorePackage::ANY_CLASS:
+			{
+				returnStringStream &lt;&lt; ecore::ecoreFactory::eInstance()->convertToString(nullptr, value);
+				handled=true;
+				break;
+			}
+			// Model types are not supported right now --> manual handling
+			case BookStore_uml::BookStore_umlPackage::BOOK_CLASS:
+			{
+				std::shared_ptr&lt;BookStore_uml::Book> book= nullptr;
+				try
+				{
+					book= value->get&lt;std::shared_ptr&lt;BookStore_uml::Book>>();
+				}
+				catch(...)
+				{
+					std::shared_ptr&lt;ecore::EObject> object= value->get&lt;std::shared_ptr&lt;ecore::EObject>>();
+					book= std::dynamic_pointer_cast&lt;BookStore_uml::Book>(object);
+				}
+				if(nullptr !=book)
+				{
+					returnStringStream &lt;&lt; book->getTitle() &lt;&lt; &quot;: &quot;  &lt;&lt; (book->isAvailable() ? &quot;available&quot; : &quot;not available&quot; ) &lt;&lt; &quot;: Num copies: &quot; &lt;&lt; book->getCopies() &lt;&lt; &quot;: category: &quot; &lt;&lt; (int)(book->getCategory()) &lt;&lt; std::endl;
+					handled=true;
+				}
+		        break;
+			}
+			case BookStore_uml::BookStore_umlPackage::MEMBER_CLASS:
+			{
+		        std::shared_ptr&lt;BookStore_uml::Member> member=nullptr;
+		        try
+		        {
+		        	member = value->get&lt;std::shared_ptr&lt;BookStore_uml::Member>>();
+		        }
+				catch(...)
+				{
+					std::shared_ptr&lt;ecore::EObject> object= value->get&lt;std::shared_ptr&lt;ecore::EObject>>();
+					member= std::dynamic_pointer_cast&lt;BookStore_uml::Member>(object);
+				}
+				if(nullptr !=member)
+				{
+					returnStringStream &lt;&lt;&quot;Member: &quot;&lt;&lt; member->getName() &lt;&lt; std::endl;
+					handled=true;
+				}
+		        break;
+			}
+			case BookStore_uml::BookStore_umlPackage::LOAN_CLASS:
+			{
+		        std::shared_ptr&lt;BookStore_uml::Loan> loan = nullptr;
+		        try
+		        {
+		        	loan = value->get&lt;std::shared_ptr&lt;BookStore_uml::Loan>>();
+		        }
+				catch(...)
+				{
+					std::shared_ptr&lt;ecore::EObject> object= value->get&lt;std::shared_ptr&lt;ecore::EObject>>();
+					loan= std::dynamic_pointer_cast&lt;BookStore_uml::Loan>(object);
+				}
+				if(nullptr !=loan)
+				{
+					returnStringStream &lt;&lt;&quot;a Loan&quot;&lt;&lt; std::endl;
+					handled=true;
+				}
+		        break;
+			}
+		}
+
+    } catch (...) { }
+    if(!handled)
+    {
+		try {
+		    std::shared_ptr&lt;ecore::EObject> eobj = value->get&lt;std::shared_ptr&lt;ecore::EObject>>();
+
+			std::shared_ptr&lt;uml::Operation> uope = std::dynamic_pointer_cast&lt;uml::Operation>(eobj);
+			if(uope != nullptr) {
+				return printOperation(uope);
+			}
+			std::shared_ptr&lt;uml::Property> prop = std::dynamic_pointer_cast&lt;uml::Property>(eobj);
+			if(prop != nullptr) {
+				return printProperty(prop);
+			}
+			std::shared_ptr&lt;uml::TypedElement> utyped = std::dynamic_pointer_cast&lt;uml::TypedElement>(eobj);
+			if(utyped != nullptr) {
+				return printTypedElement(utyped);
+			}
+			std::shared_ptr&lt;uml::NamedElement> uname = std::dynamic_pointer_cast&lt;uml::NamedElement>(eobj);
+			if(uname != nullptr) {
+				return printNamedElement(uname);
+			}
+		} catch (...) { }
+		try {
+			std::shared_ptr&lt;uml::EnumerationLiteral> liter = value->get&lt;std::shared_ptr&lt;uml::EnumerationLiteral>>();
+			std::cout &lt;&lt; liter->getName() &lt;&lt; std::endl;
+			return returnStringStream.str();
+		} catch (...) { }
+		try {
+			std::shared_ptr&lt;ecore::EEnumLiteral> liter = value->get&lt;std::shared_ptr&lt;ecore::EEnumLiteral>>();
+			returnStringStream &lt;&lt; liter->getName() &lt;&lt; std::endl;
+			return returnStringStream.str();
+		} catch (...) { }
+
+		try {
+			bool result = value->get&lt;bool>();
+			returnStringStream &lt;&lt; result &lt;&lt; std::endl;
+			return returnStringStream.str();
+		} catch (...) { }
+		try {
+			std::string result = value->get&lt;std::string>();
+			returnStringStream &lt;&lt; result &lt;&lt; std::endl;
+			return returnStringStream.str();
+		} catch (...) { }
+		try {
+			int result = value->get&lt;int>();
+			returnStringStream &lt;&lt; result &lt;&lt; std::endl;
+			return returnStringStream.str();
+		} catch (...) { }
+		try {
+			double result = value->get&lt;double>();
+			returnStringStream &lt;&lt; result &lt;&lt; std::endl;
+			return returnStringStream.str();
+		} catch (...) { }
+		returnStringStream &lt;&lt; &quot;Any (typeId: &quot; &lt;&lt; value->getTypeId() &lt;&lt;&quot;)&quot;;
+    }
+	return returnStringStream.str();
+}
+
+std::string print(Any value, bool isMany) {
+	std::ostringstream returnStringStream;
     if(value != nullptr &amp;&amp; !value->isEmpty()) {
         if(isMany) {
             std::shared_ptr&lt;Bag&lt;AnyObject>> valueItems = value->get&lt;std::shared_ptr&lt;Bag&lt;AnyObject>>>();
             for(size_t i = 0; i &lt; valueItems->size(); i++) {
-                print(valueItems->at(i));
+            	returnStringStream &lt;&lt; print(valueItems->at(i));
             }
         }
         else {
-            print(value);
+        	returnStringStream &lt;&lt; print(value);
         }
     }
+	return returnStringStream.str();
 }
 
 void pause() {
 	std::cout &lt;&lt; &quot;Enter to continue...&quot;;
 	std::cin.get();
 }
-
 
 /*
 Actual OCL functions
@@ -337,7 +575,7 @@ void uml_any_query1() {
     Any value = queryValue(context, qry);
 
     std::cout &lt;&lt; &quot;START Query_Any_1 (context[Package] = BookStore_umlPackage): &quot; &lt;&lt; qry &lt;&lt; std::endl;
-    print(value, true);
+    std::cout &lt;&lt; print(value, true) &lt;&lt; std::endl;
     std::cout &lt;&lt; &quot;END Query_Any_1 -------------------------------------------\n&quot; &lt;&lt; std::endl;
 }
 void uml_any_query2() {
@@ -346,7 +584,7 @@ void uml_any_query2() {
     Any value = queryValue(context, qry);
 
     std::cout &lt;&lt; &quot;START Query_Any_2 (context[Class] = Library): &quot; &lt;&lt; qry &lt;&lt; std::endl;
-    print(value, true);
+    std::cout &lt;&lt; print(value, true) &lt;&lt; std::endl;
     std::cout &lt;&lt; &quot;END Query_Any_2 -------------------------------------------\n&quot; &lt;&lt; std::endl;
 }
 void uml_any_query3() {
@@ -366,7 +604,7 @@ void uml_any_query4() {
     Any value = queryValue(context, qry);
 
     std::cout &lt;&lt; &quot;START Query_Any_4 (context[Property] = Book::books): &quot; &lt;&lt; qry &lt;&lt; std::endl;
-    print(value);
+    std::cout&lt;&lt; print(value) &lt;&lt; std::endl;
     std::cout &lt;&lt; &quot;END Query_Any_4 -------------------------------------------\n&quot; &lt;&lt; std::endl;
 }
 void uml_any_query5() {
@@ -375,7 +613,7 @@ void uml_any_query5() {
     Any value = queryValue(context, qry);
 
     std::cout &lt;&lt; &quot;START Query_Any_5 (context[EOperation] = Book::addBook): &quot; &lt;&lt; qry &lt;&lt; std::endl;
-    print(value);
+    std::cout&lt;&lt; print(value) &lt;&lt; std::endl;
     std::cout &lt;&lt; &quot;END Query_Any_5 -------------------------------------------\n&quot; &lt;&lt; std::endl;
 }
 void uml_any_query6() {
@@ -384,7 +622,7 @@ void uml_any_query6() {
     Any value = queryValue(context, qry);
 
     std::cout &lt;&lt; &quot;START Query_Any_6 (context[Enumeration] = BookCategory): &quot; &lt;&lt; qry &lt;&lt; std::endl;
-     print(value, true);
+    std::cout&lt;&lt; print(value, true) &lt;&lt; std::endl;
     std::cout &lt;&lt; &quot;END Query_Any_6 -------------------------------------------\n&quot; &lt;&lt; std::endl;
 }
 
@@ -394,7 +632,7 @@ void uml_any_query7() {
     Any value = queryValue(context, qry);
 
     std::cout &lt;&lt; &quot;START Query_Any_7 : &quot; &lt;&lt; qry &lt;&lt; std::endl;
-     print(value, true);
+    std::cout&lt;&lt; print(value, true) &lt;&lt; std::endl;
     std::cout &lt;&lt; &quot;END Query_Any_7 -------------------------------------------\n&quot; &lt;&lt; std::endl;
 }
 
@@ -404,7 +642,7 @@ void uml_any_query8() {
     Any value = queryValue(context, qry);
 
     std::cout &lt;&lt; &quot;START Query_Any_8 : &quot; &lt;&lt; qry &lt;&lt; std::endl;
-    print(value);
+    std::cout&lt;&lt; print(value) &lt;&lt; std::endl;
     std::cout &lt;&lt; &quot;END Query_Any_8 -------------------------------------------\n&quot; &lt;&lt; std::endl;
 }
 
@@ -510,7 +748,7 @@ void validate10() {
 }
 
 void validate11() {
-    std::string qry = &quot;\npackage BookStore_ecore \n&quot;
+    std::string qry = &quot;\npackage BookStore_uml \n&quot;
                       &quot;context Book::addCopies(nbCopies:Integer=2): \n&quot;
                       &quot;post: copies = copies@pre + nbCopies \n&quot;
                       &quot;endpackage \n&quot;;
@@ -524,9 +762,12 @@ void validate11() {
       <language>CPP</language>
       <language>LIBRARY</language>
       <body>#include &lt;string>&#xD;
+#include &lt;sstream>&#xD;
 #include &lt;oclParser/Utilities/Ocl.h>&#xD;
 &#xD;
 #include &quot;abstractDataTypes/Any.hpp&quot;&#xD;
+#include &quot;abstractDataTypes/Bag.hpp&quot;&#xD;
+#include &quot;abstractDataTypes/SubsetUnion.hpp&quot;&#xD;
 &#xD;
 #include &lt;uml/Model.hpp>&#xD;
 #include &lt;uml/Package.hpp>&#xD;
@@ -538,36 +779,50 @@ void validate11() {
 #include &lt;uml/Operation.hpp>&#xD;
 #include &lt;uml/Parameter.hpp>&#xD;
 #include &lt;uml/EnumerationLiteral.hpp>&#xD;
-#include &lt;uml/PrimitiveType.hpp></body>
-      <body>query1();&#xD;
-query2();&#xD;
-query3();&#xD;
-query4();&#xD;
-query5();&#xD;
-query6();&#xD;
+#include &lt;uml/PrimitiveType.hpp>&#xD;
+#include &lt;ecore/ecorePackage.hpp>&#xD;
+#include &lt;ecore/ecoreFactory.hpp>&#xD;
+#include &lt;ecore/EClassifier.hpp>&#xD;
+#include &lt;ecore/EObjectContainer.hpp>&#xD;
+#include &lt;ecore/EEnum.hpp>&#xD;
+#include &lt;ecore/EClass.hpp>&#xD;
+#include &lt;ecore/EReference.hpp>&#xD;
+#include &lt;ecore/EOperation.hpp>&#xD;
+#include &lt;ecore/EAttribute.hpp>&#xD;
+#include &lt;ecore/EParameter.hpp>&#xD;
+#include &lt;ecore/EEnumLiteral.hpp>&#xD;
+#include &lt;ecore/ETypeParameter.hpp></body>
+      <body>&#xD;
+	query1();&#xD;
+	query2();&#xD;
+	query3();&#xD;
+	query4();&#xD;
+	query5();&#xD;
+	query6();&#xD;
 &#xD;
-uml_any_query1();&#xD;
-uml_any_query2();&#xD;
-uml_any_query3();&#xD;
-uml_any_query4();&#xD;
-uml_any_query5();&#xD;
-uml_any_query6();&#xD;
-uml_any_query7();&#xD;
-uml_any_query8();&#xD;
+	uml_any_query1();&#xD;
+	uml_any_query2();&#xD;
+	uml_any_query3();&#xD;
+	uml_any_query4();&#xD;
+	uml_any_query5();&#xD;
+	uml_any_query6();&#xD;
+	uml_any_query7();&#xD;
+	uml_any_query8();&#xD;
 &#xD;
-validate1();&#xD;
-validate2();&#xD;
-validate3();&#xD;
-validate4();&#xD;
-validate5();&#xD;
-validate6();&#xD;
-validate7();&#xD;
-validate8();&#xD;
-validate9();&#xD;
-validate10();&#xD;
-validate11();&#xD;
+	validate1();&#xD;
+	validate2();&#xD;
+	validate3();&#xD;
+	validate4();&#xD;
+	validate5();&#xD;
+	validate6();&#xD;
+	validate7();&#xD;
+	validate8();&#xD;
+	validate9();&#xD;
+	validate10();&#xD;
+	validate11();&#xD;
 &#xD;
-pause();</body>
+	pause();&#xD;
+</body>
       <body>OclParser</body>
     </packagedElement>
     <profileApplication xmi:id="_N_vJoEXoEeyqXr3419pM_g">
