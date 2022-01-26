@@ -14,17 +14,17 @@
 
 namespace ecore 
 {
-	class EParameter;
 	class EEnumLiteral;
-	class EEnum;
-	class EOperation;
+	class EParameter;
 	class EDataType;
+	class EStringToStringMapEntry;
+	class EGenericType;
+	class EReference;
+	class EOperation;
+	class EAttribute;
+	class EEnum;
 	class EAnnotation;
 	class EClass;
-	class EReference;
-	class EStringToStringMapEntry;
-	class EAttribute;
-	class EGenericType;
 }
 
 namespace uml 
@@ -2394,7 +2394,7 @@ namespace uml
 			static const int ELEMENT_OPERATION_GETAPPLIEDSUBSTEREOTYPE_STEREOTYPE_STRING = 149940175;
 			static const int ELEMENT_OPERATION_GETAPPLIEDSUBSTEREOTYPES_STEREOTYPE = 1130738889;
 			static const int ELEMENT_OPERATION_GETKEYWORDS = 2138570251;
-			static const int ELEMENT_OPERATION_GETMETACLASS = 1945395495;
+			static const int ELEMENT_OPERATION_GETMETACLASS = 66108907;
 			static const int ELEMENT_OPERATION_GETMODEL = 2009272758;
 			static const int ELEMENT_OPERATION_GETNEARESTPACKAGE = 1502131220;
 			static const int ELEMENT_OPERATION_GETRELATIONSHIPS = 963130115;

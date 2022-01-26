@@ -242,10 +242,13 @@ std::shared_ptr<Bag<std::string> > ElementImpl::getKeywords()
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<uml::Class> ElementImpl::getMetaClass()
+std::shared_ptr<uml::Class> ElementImpl::getMetaClass() const
 {
-	//Todo return generate MetaClass for all UML-Classes in core generator (already done in UML generator) (temporarily used to detect ecore generated uml-Model see OCL())
-	return nullptr;
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+		//Todo return generate MetaClass for all UML-Classes in core generator (already done in UML generator) (temporarily used to detect ecore generated uml-Model see OCL())
+	return nullptr; 
+	//end of body
 }
 
 std::shared_ptr<uml::Model> ElementImpl::getModel()
@@ -777,7 +780,7 @@ Any ElementImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argume
 			result = eAny(this->getKeywords(),0,true);
 			break;
 		}
-		// uml::Element::getMetaClass() : uml::Class: 1945395495
+		// uml::Element::getMetaClass() : uml::Class {const}: 66108907
 		case umlPackage::ELEMENT_OPERATION_GETMETACLASS:
 		{
 			result = eAny(this->getMetaClass(), uml::umlPackage::CLASS_CLASS,false);
