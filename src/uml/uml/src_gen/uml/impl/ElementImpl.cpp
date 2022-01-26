@@ -244,7 +244,8 @@ std::shared_ptr<Bag<std::string> > ElementImpl::getKeywords()
 
 std::shared_ptr<uml::Class> ElementImpl::getMetaClass()
 {
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
+	//Todo return generate MetaClass for all UML-Classes in core generator (already done in UML generator) (temporarily used to detect ecore generated uml-Model see OCL())
+	return nullptr;
 }
 
 std::shared_ptr<uml::Model> ElementImpl::getModel()

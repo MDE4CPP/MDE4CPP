@@ -1684,6 +1684,10 @@
         <details key="documentation" value="Returns the Class that describes this element.&#xD;&#xA;&#xD;&#xA;&lt;span style=&quot;background-color:#FF8000&quot;>This Element was merged from mof::Reflection package.&lt;/span>"/>
       </eAnnotations>
       <eAnnotations source="merge" references="#//Extension/getMetaclass"/>
+      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+        <details key="body" value="&#x9;//Todo return generate MetaClass for all UML-Classes in core generator (already done in UML generator) (temporarily used to detect ecore generated uml-Model see OCL())&#xA;&#x9;return nullptr; "/>
+        <details key="const"/>
+      </eAnnotations>
     </eOperations>
     <eOperations name="container" eType="#//Element">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
