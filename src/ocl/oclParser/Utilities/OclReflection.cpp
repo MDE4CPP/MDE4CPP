@@ -274,7 +274,6 @@ std::shared_ptr<fUML::Semantics::Values::Value> OclReflection::createValue(std::
 
 std::shared_ptr<fUML::Semantics::Values::Value> OclReflection::createValue(std::shared_ptr<ecore::ETypedElement> typedElement, Any value)
 {
-
 	if((value)&&(!value->isEmpty()))
 	{
 		if(value->isContainer())
@@ -595,8 +594,51 @@ std::shared_ptr<fUML::Semantics::Values::Value> OclReflection::createValue(std::
 			}
 		}
     }
+	//else create an anyValue
+	std::shared_ptr<ocl::Values::AnyValue> anyValue = ocl::Values::ValuesFactory::eInstance()->createAnyValue();
+	anyValue->setValue(value);
+	return anyValue;
     // else create emptyValue with given type
-    return createValue(typedElement->getEType());
+//    return createValue(typedElement->getEType());
+}
+
+std::shared_ptr<fUML::Semantics::Values::Value> OclReflection::createValueOfStructuralFeatureFromEObject(std::shared_ptr<ecore::EStructuralFeature> type, const std::shared_ptr<ecore::EObject> obj)
+{
+	if(nullptr!=obj)
+	{
+		std::shared_ptr<uml::Element> uobj = std::dynamic_pointer_cast<uml::Element>(obj); // check UML or ecore Model Element
+		std::shared_ptr<AnyObject> value = nullptr;
+
+		if(nullptr!=uobj && nullptr!=uobj->eClass())
+		{
+			std::shared_ptr<uml::Class> umlMetaClass=uobj->getMetaClass();
+			if(nullptr!=umlMetaClass)
+			{
+				std::shared_ptr<uml::Property> prop = lookupProperty(umlMetaClass, type->getName());
+				if(prop != nullptr)
+				{
+					value = uobj->get(prop);
+				}
+			}
+			else // 2. try is an uml generated uml-model
+			{
+				/* replaced by eGet
+				std::shared_ptr<ecore::EAttribute> prop = lookupProperty(uobj->eClass(), type->getName());
+				std::shared_ptr<ecore::EReference>  ref = lookupAssociationClass(uobj->eClass(), type->getName());
+
+				if(prop != nullptr)
+				{...
+				}*/
+				value = obj->eGet(type);
+			}
+		}
+		else
+		{
+			value = obj->eGet(type);
+		}
+		return OclReflection::createValue(type, value);
+	}
+    return ocl::Values::ValuesFactory::eInstance()->createUndefinedValue();
 }
 
 std::shared_ptr<fUML::Semantics::Values::Value> OclReflection::createValue(std::shared_ptr<ecore::EStructuralFeature> type, std::shared_ptr<fUML::Semantics::Values::Value> fromValue)
@@ -622,45 +664,66 @@ std::shared_ptr<fUML::Semantics::Values::Value> OclReflection::createValue(std::
     	if(nullptr!=objValue)
 		{
 			std::shared_ptr<ecore::EObject> obj = objValue->getValue();
-			std::shared_ptr<uml::Element> uobj = std::dynamic_pointer_cast<uml::Element>(obj); // check UML or ecore Model Element
-			std::shared_ptr<AnyObject> value = nullptr;
-
-			if(nullptr!=uobj && nullptr!=uobj->eClass())
-			{
-				std::shared_ptr<uml::Class> umlMetaClass=uobj->getMetaClass();
-				if(nullptr!=umlMetaClass)
-				{
-					std::shared_ptr<uml::Property> prop = lookupProperty(umlMetaClass, type->getName());
-					if(prop != nullptr)
-					{
-						value = uobj->get(prop);
-					}
-				}
-				else // 2. try is an uml generated uml-model
-				{
-					/* replaced by eGet
-					std::shared_ptr<ecore::EAttribute> prop = lookupProperty(uobj->eClass(), type->getName());
-					std::shared_ptr<ecore::EReference>  ref = lookupAssociationClass(uobj->eClass(), type->getName());
-
-					if(prop != nullptr)
-					{...
-					}*/
-					value = obj->eGet(type);
-				}
-			}
-			else
-			{
-				value = obj->eGet(type);
-			}
-			return OclReflection::createValue(type, value);
+			return createValueOfStructuralFeatureFromEObject(type, obj);
 		}
 		else
-		{// primary value not managed yet
+		{// primitive value not managed yet
 			std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> stringValue = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::StringValue>(fromValue);
 			if(nullptr != stringValue)
 			{
 				std::string value = stringValue->getValue();
 				return stringValue;
+			}
+			else
+			{
+				std::shared_ptr<AnyValue> anyValue = std::dynamic_pointer_cast<AnyValue>(fromValue);
+				if(nullptr!=anyValue)
+				{
+					Any anAny= anyValue->getValue();
+					try
+					{
+						std::shared_ptr<AnyEObjectBag> eObjectAnyBag = std::dynamic_pointer_cast<AnyEObjectBag>(anAny);
+						if(nullptr!=eObjectAnyBag)
+						{
+					        std::shared_ptr<BagTypeValue> bagValue = ocl::Values::ValuesFactory::eInstance()->createBagTypeValue();
+
+							std::shared_ptr<Bag<ecore::EObject>> eObjectBag=eObjectAnyBag->getBag();
+							for(const std::shared_ptr<ecore::EObject> object: *eObjectBag)
+							{	// recursive Call of convertToString via new Any EObject Value
+								std::shared_ptr<fUML::Semantics::Values::Value> value= createValueOfStructuralFeatureFromEObject(type,object);
+								if(nullptr!=value)
+								{
+									bagValue->addValue(value);
+								}
+							}
+							return bagValue;
+						}
+						else
+						{
+							std::shared_ptr<ecore::EObject> obj =nullptr;
+
+							std::shared_ptr<AnyEObject> eObjectAny = std::dynamic_pointer_cast<AnyEObject>(anAny);
+							if(nullptr!=eObjectAny)
+							{
+								obj=eObjectAny->getObject();
+							}
+							else
+							{
+								obj = anAny->get<std::shared_ptr<ecore::EObject>>();
+							}
+							return createValueOfStructuralFeatureFromEObject(type,obj);
+						}
+					}
+					catch(...){
+/*						try
+						{
+							std::shared_ptr<ecore::EObject> obj = anAny->get<std::shared_ptr<ecore::EObject>>();
+						}
+						catch(...){
+
+						}*/
+					}
+				}
 			}
 			return ocl::Values::ValuesFactory::eInstance()->createUndefinedValue();
 		}
@@ -671,8 +734,9 @@ std::shared_ptr<fUML::Semantics::Values::Value> OclReflection::createValue(std::
 std::shared_ptr<fUML::Semantics::Values::Value> OclReflection::createValue(std::shared_ptr<ecore::EOperation> operation,
                                                                            std::shared_ptr<Bag<OclExpression>> arguments, std::shared_ptr<fUML::Semantics::Values::Value> fromValue)
 {
-    if(instanceOf<CollectionValue>(fromValue)) {
-        std::shared_ptr<CollectionValue> colValue = std::dynamic_pointer_cast<CollectionValue>(fromValue);
+    std::shared_ptr<CollectionValue> colValue = std::dynamic_pointer_cast<CollectionValue>(fromValue);
+    if(nullptr != colValue) {
+
         std::shared_ptr<BagTypeValue> bagValue = ocl::Values::ValuesFactory::eInstance()->createBagTypeValue();
 //        std::shared_ptr<BagType> bagType = ocl::Types::TypesFactory::eInstance()->createBagType();
 //        bagType->setElementType(operation->getEType());
@@ -685,58 +749,64 @@ std::shared_ptr<fUML::Semantics::Values::Value> OclReflection::createValue(std::
         }
         return bagValue;
     }
-    else if(instanceOf<ObjectValue>(fromValue)) {
-        std::shared_ptr<ObjectValue> objValue = std::dynamic_pointer_cast<ObjectValue>(fromValue);
-        std::shared_ptr<ecore::EObject> obj = objValue->getValue();
-        std::shared_ptr<std::list<Any>> convertArgs = std::make_shared<std::list<Any>>();
-
-        // create the pre value snapshot
-        // copy object to avoid modifying the given context
-        std::shared_ptr<ecore::EObject> preObj = obj->copy();
-        std::shared_ptr<ObjectValue> preValue = std::dynamic_pointer_cast<ObjectValue>(createValue(preObj));
-        std::shared_ptr<NameValueBinding> nvbPre = ocl::Values::ValuesFactory::eInstance()->createNameValueBinding();
-        std::shared_ptr<LocalSnapshot> localSnapshotPre = ocl::Values::ValuesFactory::eInstance()->createLocalSnapshot();
-        nvbPre->setName("pre");
-        nvbPre->setValue(preValue);
-        localSnapshotPre->setIsPre(true);
-        localSnapshotPre->getBindings()->add(nvbPre);
-
-        // create the post value snapshot
-        std::shared_ptr<ecore::EObject> postObj = obj->copy();
-        std::shared_ptr<ObjectValue> postValue = std::dynamic_pointer_cast<ObjectValue>(createValue(postObj));
-        std::shared_ptr<NameValueBinding> nvbPost = ocl::Values::ValuesFactory::eInstance()->createNameValueBinding();
-        std::shared_ptr<LocalSnapshot> localSnapshotPost = ocl::Values::ValuesFactory::eInstance()->createLocalSnapshot();
-        nvbPost->setName("post");
-        nvbPost->setValue(postValue);
-        localSnapshotPost->setIsPost(true);
-        localSnapshotPost->getBindings()->add(nvbPost);
-
-        localSnapshotPre->setSucc(localSnapshotPost);
-        localSnapshotPost->setPred(localSnapshotPre);
-        objValue->getHistory()->add(localSnapshotPre);
-        objValue->getHistory()->add(localSnapshotPost);
-        postValue->getHistory()->add(localSnapshotPre);
-        postValue->getHistory()->add(localSnapshotPost);
-        preValue->getHistory()->add(localSnapshotPre);
-        preValue->getHistory()->add(localSnapshotPost);
-
-        for(size_t i = 0; i < arguments->size(); i++) {
-            Any item = retrieveRawValue(arguments->at(i)->getInstance()->getResultValue());
-            convertArgs->push_back(item );
-        }
-        std::shared_ptr<AnyObject> value = postObj->eInvoke(operation, convertArgs);
-
-        return OclReflection::createValue(operation, value);
-    }
     else
-    { // primary value not managed yet
-        if(instanceOf<fUML::Semantics::SimpleClassifiers::StringValue>(fromValue))
-        {
-            std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> stringValue = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::StringValue>(fromValue);
-            std::string value = stringValue->getValue();
-            return stringValue;
-        }
-        return ocl::Values::ValuesFactory::eInstance()->createUndefinedValue();
+    {
+        std::shared_ptr<ObjectValue> objValue = std::dynamic_pointer_cast<ObjectValue>(fromValue);
+    	if(nullptr!= objValue )
+    	{
+			std::shared_ptr<ecore::EObject> obj = objValue->getValue();
+			std::shared_ptr<std::list<Any>> convertArgs = std::make_shared<std::list<Any>>();
+
+			// create the pre value snapshot
+			// copy object to avoid modifying the given context
+			//ToDo Don't Copy! use const
+			std::shared_ptr<ecore::EObject> preObj = obj;//->copy(); // ToDo: avoid set Values not using a copy!!
+			std::shared_ptr<ObjectValue> preValue = std::dynamic_pointer_cast<ObjectValue>(createValue(preObj));
+			std::shared_ptr<NameValueBinding> nvbPre = ocl::Values::ValuesFactory::eInstance()->createNameValueBinding();
+			std::shared_ptr<LocalSnapshot> localSnapshotPre = ocl::Values::ValuesFactory::eInstance()->createLocalSnapshot();
+			nvbPre->setName("pre");
+			nvbPre->setValue(preValue);
+			localSnapshotPre->setIsPre(true);
+			localSnapshotPre->getBindings()->add(nvbPre);
+
+			// create the post value snapshot
+			//ToDo Don't Copy! use const
+			std::shared_ptr<ecore::EObject> postObj = obj;//->copy();// ToDo: avoid set Values not using a copy!!
+			std::shared_ptr<ObjectValue> postValue = std::dynamic_pointer_cast<ObjectValue>(createValue(postObj));
+			std::shared_ptr<NameValueBinding> nvbPost = ocl::Values::ValuesFactory::eInstance()->createNameValueBinding();
+			std::shared_ptr<LocalSnapshot> localSnapshotPost = ocl::Values::ValuesFactory::eInstance()->createLocalSnapshot();
+			nvbPost->setName("post");
+			nvbPost->setValue(postValue);
+			localSnapshotPost->setIsPost(true);
+			localSnapshotPost->getBindings()->add(nvbPost);
+
+			localSnapshotPre->setSucc(localSnapshotPost);
+			localSnapshotPost->setPred(localSnapshotPre);
+			objValue->getHistory()->add(localSnapshotPre);
+			objValue->getHistory()->add(localSnapshotPost);
+			postValue->getHistory()->add(localSnapshotPre);
+			postValue->getHistory()->add(localSnapshotPost);
+			preValue->getHistory()->add(localSnapshotPre);
+			preValue->getHistory()->add(localSnapshotPost);
+
+			for(size_t i = 0; i < arguments->size(); i++) {
+				Any item = retrieveRawValue(arguments->at(i)->getInstance()->getResultValue());
+				convertArgs->push_back(item );
+			}
+			std::shared_ptr<AnyObject> value = postObj->eInvoke(operation, convertArgs);
+
+			return OclReflection::createValue(operation, value);
+		}
+		else
+		{ // primary value not managed yet
+			if(instanceOf<fUML::Semantics::SimpleClassifiers::StringValue>(fromValue))
+			{
+				std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> stringValue = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::StringValue>(fromValue);
+				std::string value = stringValue->getValue();
+				return stringValue;
+			}
+			return ocl::Values::ValuesFactory::eInstance()->createUndefinedValue();
+		}
     }
 }
 

@@ -161,6 +161,14 @@ public:
      * @return return the created fUML value
      */
     static std::shared_ptr<fUML::Semantics::Values::Value> createValue(std::shared_ptr<ecore::EStructuralFeature> type, std::shared_ptr<fUML::Semantics::Values::Value> fromValue);
+
+    /**
+     * @brief Find the given structural feature  within the given object and create a new fUML value with the value of the given object feature.
+     * @param type : structural feature of the searched value
+     * @param fromValue : source EObject object
+     * @return return the created fUML value
+     */
+    static std::shared_ptr<fUML::Semantics::Values::Value> createValueOfStructuralFeatureFromEObject(std::shared_ptr<ecore::EStructuralFeature> type, const std::shared_ptr<ecore::EObject> obj);
     /**
      * @brief Find the given operation within the given fUML value and create a new fUML value with the result of the execution of the operation.
      * @param operation : searched operation
