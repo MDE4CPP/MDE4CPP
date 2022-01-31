@@ -22,10 +22,7 @@
  * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
  * DEALINGS IN THE SOFTWARE.
  */
-
-plugins {
-  	id "tui.sse.mde4cpp.mde4cpp-compile-plugin" version "$gradle_mde4cpp_compile_plugin_version"
-}
+import tui.sse.mde4cpp.MDE4CPPCompile
 
 task compileUMLBenchmark(type: tui.sse.mde4cpp.MDE4CPPCompile) {
 	group 'Benchmarks'
