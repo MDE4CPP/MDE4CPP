@@ -28,6 +28,7 @@
 [import ecore4CPP::generator::main::generateType /]
 [import ecore4CPP::generator::main::helper /]
 [import ecore4CPP::generator::main::helpers::IDHelper /]
+[import ecore4CPP::generator::main::helpers::keywords /]
 
 [comment]
 [template public generateInputParameter(par:EParameter, index:Integer)]
@@ -63,10 +64,10 @@ virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) 
 Any [aClass.name.toUpperFirst().concat('Impl')/]::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
 {
 	Any result;
-
+ 
   	switch(operationID)
 	{
-	[for (aOperation : EOperation | aClass.eOperations->reject(doNotGenerateEOperation())->asOrderedSet()->sortedBy(name))]
+	[for (aOperation : EOperation | aClass.eOperations->reject((doNotGenerateEOperation() or ignore()))->asOrderedSet()->sortedBy(name))]
 		[comment @see ecore4CPP::generator::main::generateOperation for ID calculation /]
 		// [aOperation.generateQualifiedNameWithSignature()/]: [aOperation.generateQualifiedNameWithSignature().generatePolynomialRollingHash()/]
 		case [aClass.ePackage.name/]Package::[aOperation.getStaticAttributeIDName()/]:
@@ -92,11 +93,15 @@ Any [aClass.name.toUpperFirst().concat('Impl')/]::eInvoke(int operationID, std::
 			result = eAny(this->[aOperation.name.toString()/]([for (inPar : EParameter | aOperation.eParameters) separator (',')]incoming_param_[inPar.name/][/for]),0,true);
 				[/if]
 			[elseif (aOperation.eType.oclIsKindOf(EClass))] [comment Returntype Class/]
-				[if ((aOperation.upperBound = 1))] 
-			result = eAny(this->[aOperation.name.toString()/]([for (inPar : EParameter | aOperation.eParameters) separator (',')]incoming_param_[inPar.name/][/for]), [aOperation.eType.ePackage.generateNamespaceDefinition()/]::[aOperation.eType.ePackage.name/]Package::[aOperation.eType.oclAsType(EClass).getStaticAttributeIDName()/],false);
+				[if ((aOperation.upperBound = 1))]
+					[if (aOperation.hasKey(aOperation.keyWeakptr()))]
+			result = eAnyObject(this->[aOperation.name.toString()/]([for (inPar : EParameter | aOperation.eParameters) separator (',')]incoming_param_[inPar.name/][/for]).lock(), [aOperation.eType.ePackage.generateNamespaceDefinition()/]::[aOperation.eType.ePackage.name/]Package::[aOperation.eType.oclAsType(EClass).getStaticAttributeIDName()/]);
+					[else]
+			result = eAnyObject(this->[aOperation.name.toString()/]([for (inPar : EParameter | aOperation.eParameters) separator (',')]incoming_param_[inPar.name/][/for]), [aOperation.eType.ePackage.generateNamespaceDefinition()/]::[aOperation.eType.ePackage.name/]Package::[aOperation.eType.oclAsType(EClass).getStaticAttributeIDName()/]);
+					[/if]
 				[else] [comment Returntype Bag<EObject>/]
 			[aOperation.generateOperationType()/] resultList = this->[aOperation.name.toString()/]([for (inPar : EParameter | aOperation.eParameters) separator (',')]incoming_param_[inPar.name/][/for]);
-			return eAny(resultList,[aOperation.eType.ePackage.generateNamespaceDefinition()/]::[aOperation.eType.ePackage.name/]Package::[aOperation.eType.oclAsType(EClass).getStaticAttributeIDName()/],true);
+			return eAnyBag(resultList,[aOperation.eType.ePackage.generateNamespaceDefinition()/]::[aOperation.eType.ePackage.name/]Package::[aOperation.eType.oclAsType(EClass).getStaticAttributeIDName()/]);
 				[/if]
 			[elseif (aOperation.isAnyNoPtr())]
 			result = this->[aOperation.name.toString()/]([for (inPar : EParameter | aOperation.eParameters) separator (',')]incoming_param_[inPar.name/][/for]);
@@ -104,7 +109,7 @@ Any [aClass.name.toUpperFirst().concat('Impl')/]::eInvoke(int operationID, std::
 			result = eAny(this->[aOperation.name.toString()/]([for (inPar : EParameter | aOperation.eParameters) separator (',')]incoming_param_[inPar.name/][/for]), 0,false);
 			[/if]
 			break;
-		[/if]
+	[/if]
 		}
 	[/for]
 
